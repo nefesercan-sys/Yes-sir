@@ -1,11 +1,11 @@
-// app/api/auth/[...nextauth]/route.ts
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getDb } from '@/lib/mongodb';
 import { createHash } from 'crypto';
 
-export const authOptions: NextAuthOptions = {
+// 🚨 SİBER DÜZELTME: Buradaki "export" kelimesi silindi! Sadece "const" kaldı.
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -101,4 +101,6 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
+
+// 🚨 VERCEL'İN İSTEDİĞİ TEK ŞEY BURASI: Sadece GET ve POST dışarı aktarılır.
 export { handler as GET, handler as POST };
