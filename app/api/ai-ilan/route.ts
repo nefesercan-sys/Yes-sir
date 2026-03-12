@@ -55,7 +55,6 @@ Her ilan için şu JSON formatını kullan:
 SADECE JSON array döndür:
 [{...}, {...}]`;
 
-    // 2. Claude'a İstek Atma
     const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -64,7 +63,7 @@ SADECE JSON array döndür:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022', // 🚨 KESİN ÇALIŞAN AMİRAL GEMİSİ MODELİ!
+        model: 'claude-sonnet-4-20250514', // 🚨 SENİN İLK YAZDIĞIN, EN GÜNCEL VE DOĞRU MOTOR!
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
       }),
