@@ -17,7 +17,8 @@ const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  const { data: session } = useSession();
+  // 🚨 SİBER ZIRH 1: 'status' değişkenini ekledik (loading, authenticated, unauthenticated)
+  const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [aktifTab, setAktifTab] = useState<Tab>((searchParams.get('tab') as Tab) || 'ozet');
@@ -40,9 +41,18 @@ function PanelIcerik() {
   const [aiSonuc, setAiSonuc] = useState('');
 
   useEffect(() => {
-    if (!session) { router.push('/giris?redirect=/panel'); return; }
-    yukle();
-  }, [session]);
+    // 🚨 SİBER ZIRH 2: Sayfa yenilendiğinde kimlik okunuyorsa bekle, işlem yapma!
+    if (status === 'loading') return;
+    
+    // Okuma bitti ve kimlik yoksa (çıkış yapılmışsa) o zaman giriş sayfasına at
+    if (status === 'unauthenticated') { 
+      router.push('/giris?redirect=/panel'); 
+      return; 
+    }
+    
+    // Kimlik onaylandıysa verileri yükle
+    if (session) yukle();
+  }, [session, status, router]);
 
   const yukle = async () => {
     setLoading(true);
@@ -116,6 +126,11 @@ function PanelIcerik() {
     setAiYukleniyor(false);
   };
 
+  // 🚨 SİBER ZIRH 3: Kimlik kontrolü bitene kadar bekletme ekranı göster
+  if (status === 'loading') {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b', fontSize: '14px', fontWeight: '600' }}>Siber Kimlik Doğrulanıyor... ⏳</div>;
+  }
+  
   if (!session) return null;
 
   const tabs: { key: Tab; label: string; icon: string; badge?: number }[] = [
@@ -487,7 +502,6 @@ function PanelIcerik() {
 export default function PanelPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif' }}>
-      {/* 🚨 SİBER DÜZELTME: SİLİNEN DEVASA CSS TASARIM KODLARI GERİ GELDİ! */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -507,7 +521,6 @@ export default function PanelPage() {
         .sttl { font-size: 18px; font-weight: 700; color: #0f172a; font-family: 'Playfair Display', serif; margin-bottom: 16px; }
         .empty { text-align: center; padding: 48px; background: white; border-radius: 20px; border: 1.5px dashed #e2e8f0; }
         
-        /* 📱 MOBİL TASARIM (SEKMELERİ YAN YANA DİZER) */
         @media(max-width: 768px) {
           .panel-layout { display: flex; flex-direction: column; }
           .sidebar { position: static; height: auto; display: block; overflow-x: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
