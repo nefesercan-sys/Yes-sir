@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { SEKTORLER, FormAlan, Sektor } from '@/lib/sektorler';
 // 🚨 SİBER SİLAHIMIZI İÇERİ ALIYORUZ!
-import MedyaYukleyici from '@/components/MedyaYukleyici'; 
+import MedyaYukleyici from '../components/MedyaYukleyici'; 
 
 export default function IlanVerPage() {
   const { data: session } = useSession();
