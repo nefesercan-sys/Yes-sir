@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
   try {
     const { sektorId, sehir, adet = 5, adminKey } = await req.json();
 
-    // 1. Admin Anahtarı Kontrolü
     if (adminKey !== process.env.NEXT_PUBLIC_ADMIN_KEY) {
       return NextResponse.json({ success: false, error: 'Siber Anahtar (Admin Key) yanlış veya eksik!' }, { status: 401 });
     }
@@ -65,7 +64,7 @@ SADECE JSON array döndür:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-3-5-sonnet-20241022', // 🚨 KESİN ÇALIŞAN AMİRAL GEMİSİ MODELİ!
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
       }),
@@ -73,7 +72,6 @@ SADECE JSON array döndür:
 
     const claudeData = await claudeRes.json();
 
-    // 🚨 SİBER ZIRH: Eğer Claude bizi kapıdan kovarsa çökmeden hatayı yakala
     if (!claudeRes.ok) {
       const hataMesaji = claudeData.error?.message || 'Bilinmeyen Anthropic Hatası';
       return NextResponse.json({ 
@@ -82,7 +80,6 @@ SADECE JSON array döndür:
       }, { status: 400 });
     }
 
-    // 3. Gelen Veriyi Ayrıştırma
     const metin = claudeData.content?.[0]?.text || '[]';
     const temizMetin = metin.replace(/```json|```/g, '').trim();
     let uretilen;
@@ -99,12 +96,9 @@ SADECE JSON array döndür:
 
     const db = await getDb();
     
-    // 📸 SİBER RESİM: Her ilana o sektöre uygun farklı ve dinamik bir resim ekle!
+    // 📸 SİBER RESİM MOTORU DEVREDE!
     const kayitlar = uretilen.map((ilan: any, index: number) => {
-      // Her resmin farklı olması için random bir kilit numarası üretiyoruz
       const randomId = Math.floor(Math.random() * 10000) + index;
-      
-      // Dinamik Fotoğraf Servisi URL'si (Sektöre göre otomatik resim getirir)
       const dinamikResimUrl = `https://loremflickr.com/800/600/${sektor.resimKelimeleri}?lock=${randomId}`;
 
       return {
@@ -116,7 +110,7 @@ SADECE JSON array döndür:
           ilce: ilan.ilce,
           sure: ilan.sure,
         },
-        medyalar: [dinamikResimUrl], // 🚨 RESİM DİZİYE EKLENDİ!
+        medyalar: [dinamikResimUrl], // 🚨 DİNAMİK RESİM EKLENDİ!
         butceMin: ilan.butceMin,
         butceMax: ilan.butceMax,
         butceBirimi: '₺',
