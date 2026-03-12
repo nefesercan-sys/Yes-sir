@@ -44,7 +44,7 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
         .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: all 0.15s; cursor: pointer; background: none; border: none; font-family: inherit; }
         .nav-link:hover { color: white; background: rgba(255,255,255,0.1); }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1.5px solid #e2e8f0; display: flex; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
-        .bnav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; border: none; background: none; cursor: pointer; font-family: inherit; color: #94a3b8; font-size: 9px; font-weight: 600; transition: color 0.15s; }
+        .bnav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 2px; border: none; background: none; cursor: pointer; font-family: inherit; color: #94a3b8; font-size: 8px; font-weight: 600; transition: color 0.15s; min-width: 0; overflow: hidden; }
         .bnav-btn:hover { color: #2563eb; }
         .dropdown { position: absolute; top: 48px; right: 0; background: white; border-radius: 14px; border: 1.5px solid #e2e8f0; box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 180px; overflow: hidden; z-index: 300; }
         .dropdown-item { display: block; width: 100%; padding: 11px 16px; border: none; background: none; text-align: left; font-family: inherit; font-size: 13px; color: #0f172a; cursor: pointer; transition: background 0.1s; }
