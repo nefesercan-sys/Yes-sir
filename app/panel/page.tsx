@@ -32,6 +32,7 @@ function PanelIcerik() {
     aktifRezv: 0, okunmamisBildirim: 0,
     toplamTeklif: 0, kabul: 0,
   });
+  
   const [aiSektor, setAiSektor] = useState('turizm');
   const [aiSehir, setAiSehir] = useState('İstanbul');
   const [aiAdet, setAiAdet] = useState(5);
@@ -146,19 +147,23 @@ function PanelIcerik() {
 
       <div className="panel-layout">
         <div className="sidebar">
-          <div style={{ marginBottom: '18px', padding: '12px', background: '#f8fafc', borderRadius: '12px' }}>
+          <div className="mobile-hide" style={{ marginBottom: '18px', padding: '12px', background: '#f8fafc', borderRadius: '12px' }}>
             <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || 'U')}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: '42px', height: '42px', borderRadius: '50%', marginBottom: '7px', display: 'block' }} />
             <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{session.user?.name}</p>
             <p style={{ fontSize: '10px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{session.user?.email}</p>
             {profil && <div style={{ marginTop: '6px', padding: '3px 8px', borderRadius: '6px', background: '#ede9fe', color: '#7c3aed', fontSize: '10px', fontWeight: '700', display: 'inline-block' }}>🏨 {profil.otelAdi}</div>}
           </div>
-          {tabs.map(t => (
-            <button key={t.key} className={`tab-btn ${aktifTab === t.key ? 'a' : ''}`} onClick={() => setAktifTab(t.key)}>
-              <span>{t.icon}</span><span>{t.label}</span>
-              {t.badge ? <span className="bdg">{t.badge}</span> : null}
-            </button>
-          ))}
-          <div style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px solid #e2e8f0' }}>
+          
+          <div className="tab-container">
+            {tabs.map(t => (
+              <button key={t.key} className={`tab-btn ${aktifTab === t.key ? 'a' : ''}`} onClick={() => setAktifTab(t.key)}>
+                <span>{t.icon}</span><span>{t.label}</span>
+                {t.badge ? <span className="bdg">{t.badge}</span> : null}
+              </button>
+            ))}
+          </div>
+
+          <div className="mobile-hide" style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px solid #e2e8f0' }}>
             <button onClick={() => router.push('/ilan-ver')} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer', marginBottom: '8px' }}>⚡ Yeni İlan Ver</button>
             {!profil && (
               <button onClick={() => router.push('/otel-profil')} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: '#7c3aed', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>🏨 Tesis Profili Oluştur</button>
@@ -167,7 +172,6 @@ function PanelIcerik() {
         </div>
 
         <div className="main">
-
           {aktifTab === 'ozet' && (
             <div>
               <p className="sttl">Hoş geldiniz, {session.user?.name?.split(' ')[0]} 👋</p>
@@ -483,8 +487,36 @@ function PanelIcerik() {
 export default function PanelPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif' }}>
+      {/* 🚨 SİBER DÜZELTME: SİLİNEN DEVASA CSS TASARIM KODLARI GERİ GELDİ! */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .panel-layout { display: grid; grid-template-columns: 230px 1fr; min-height: calc(100vh - 56px); }
+        .sidebar { background: white; border-right: 1px solid #e2e8f0; padding: 18px 12px; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+        .main { padding: 24px 20px; max-width: 960px; }
+        .card { background: white; border-radius: 18px; border: 1.5px solid #e2e8f0; padding: 18px; }
+        .stat-card { background: white; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 16px; }
+        .row { background: white; border-radius: 14px; border: 1.5px solid #e2e8f0; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; transition: box-shadow 0.15s; }
+        .row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+        .tab-btn { width: 100%; display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 10px; border: none; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; margin-bottom: 2px; transition: all 0.12s; }
+        .tab-btn.a { background: #0f172a; color: white; font-weight: 700; }
+        .tab-btn:not(.a) { background: transparent; color: #475569; }
+        .tab-btn:not(.a):hover { background: #f1f5f9; }
+        .bdg { background: #f59e0b; color: #0f172a; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 999px; margin-left: auto; }
+        .dur { padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 700; display: inline-block; white-space: nowrap; }
+        .sttl { font-size: 18px; font-weight: 700; color: #0f172a; font-family: 'Playfair Display', serif; margin-bottom: 16px; }
+        .empty { text-align: center; padding: 48px; background: white; border-radius: 20px; border: 1.5px dashed #e2e8f0; }
+        
+        /* 📱 MOBİL TASARIM (SEKMELERİ YAN YANA DİZER) */
+        @media(max-width: 768px) {
+          .panel-layout { display: flex; flex-direction: column; }
+          .sidebar { position: static; height: auto; display: block; overflow-x: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
+          .mobile-hide { display: none !important; }
+          .tab-container { display: flex; overflow-x: auto; padding: 12px 16px; gap: 8px; background: white; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+          .tab-container::-webkit-scrollbar { display: none; }
+          .tab-btn { width: auto; margin-bottom: 0; flex-shrink: 0; padding: 8px 14px; }
+          .main { padding: 16px; }
+        }
       `}</style>
       <Suspense fallback={
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>
