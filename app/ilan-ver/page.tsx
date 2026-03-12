@@ -1,8 +1,10 @@
 'use client';
-import { useState, useRef, useCallback } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { SEKTORLER, FormAlan, Sektor } from '@/lib/sektorler';
+// 🚨 SİBER SİLAHIMIZI İÇERİ ALIYORUZ!
+import MedyaYukleyici from '@/components/MedyaYukleyici'; 
 
 export default function IlanVerPage() {
   const { data: session } = useSession();
@@ -10,13 +12,9 @@ export default function IlanVerPage() {
   const [adim, setAdim] = useState(1);
   const [seciliSektor, setSeciliSektor] = useState<Sektor | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
-  const [medyalar, setMedyalar] = useState<{ url: string; tip: 'resim' | 'video'; yukleniyor?: boolean }[]>([]);
+  const [medyalar, setMedyalar] = useState<{ url: string; tip: 'resim' | 'video' }[]>([]);
   const [yukleniyor, setYukleniyor] = useState(false);
-  const [uploadYukleniyor, setUploadYukleniyor] = useState(0);
   const [hata, setHata] = useState('');
-  const kameraRef = useRef<HTMLInputElement>(null);
-  const galeriRef = useRef<HTMLInputElement>(null);
-  const videoRef = useRef<HTMLInputElement>(null);
 
   const setField = (key: string, val: any) => setFormData(p => ({ ...p, [key]: val }));
 
@@ -25,39 +23,11 @@ export default function IlanVerPage() {
     setField(key, mevcut.includes(val) ? mevcut.filter(v => v !== val) : [...mevcut, val]);
   };
 
-  const uploadDosya = useCallback(async (file: File) => {
-    const isVideo = file.type.startsWith('video/');
-    const MAX = isVideo ? 200 * 1024 * 1024 : 20 * 1024 * 1024;
-    if (file.size > MAX) { alert(`Maks: ${isVideo ? '200MB' : '20MB'}`); return; }
-
-    setMedyalar(p => [...p, { url: '', tip: isVideo ? 'video' : 'resim', yukleniyor: true }]);
-    setUploadYukleniyor(p => p + 1);
-
-    const fd = new FormData();
-    fd.append('file', file);
-    try {
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (data.url) {
-        setMedyalar(p => {
-          const idx = p.findLastIndex(m => m.yukleniyor);
-          if (idx === -1) return p;
-          const n = [...p];
-          n[idx] = { url: data.url, tip: isVideo ? 'video' : 'resim', yukleniyor: false };
-          return n;
-        });
-      } else {
-        setMedyalar(p => p.filter((_, i) => i !== p.findLastIndex(m => m.yukleniyor)));
-      }
-    } catch {
-      setMedyalar(p => p.filter((_, i) => i !== p.findLastIndex(m => m.yukleniyor)));
-    }
-    setUploadYukleniyor(p => p - 1);
-  }, []);
-
-  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    for (const f of Array.from(e.target.files || [])) await uploadDosya(f);
-    e.target.value = '';
+  // 🚨 Buluttan gelen linki yakalayıp ilana ekleyen siber fonksiyon
+  const handleMedyaYuklendi = (url: string) => {
+    // URL'nin sonuna bakarak video mu resim mi olduğunu anlıyoruz
+    const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/i);
+    setMedyalar(p => [...p, { url, tip: isVideo ? 'video' : 'resim' }]);
   };
 
   const handleYayinla = async () => {
@@ -78,7 +48,7 @@ export default function IlanVerPage() {
         sektorId: seciliSektor.id,
         baslik,
         formData,
-        medyalar: medyalar.filter(m => !m.yukleniyor && m.url).map(m => m.url),
+        medyalar: medyalar.map(m => m.url), // Sadece URL'leri veritabanına gönderiyoruz
         butceMin: Number(formData.butceMin) || 0,
         butceMax: Number(formData.butceMax) || 0,
         butceBirimi: seciliSektor.butceBirimi,
@@ -177,7 +147,6 @@ export default function IlanVerPage() {
     }
   };
 
-  // Grupla formları
   const gruplar = seciliSektor ? seciliSektor.hizmetAlanFormu.reduce((acc, alan) => {
     const g = alan.grup || 'Genel';
     if (!acc[g]) acc[g] = [];
@@ -192,7 +161,6 @@ export default function IlanVerPage() {
         * { box-sizing: border-box; }
         input, select, textarea { font-family: Inter, sans-serif; }
         input:focus, select:focus, textarea:focus { border-color: #2563eb !important; }
-        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
 
       {/* Header */}
@@ -229,9 +197,7 @@ export default function IlanVerPage() {
               {SEKTORLER.map(s => (
                 <div key={s.id}
                   onClick={() => { setSeciliSektor(s); setFormData({}); setAdim(2); }}
-                  style={{ background: 'white', borderRadius: '16px', border: `2px solid ${seciliSektor?.id === s.id ? s.renk : '#e2e8f0'}`, padding: '18px 14px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = s.renk; (e.currentTarget as HTMLElement).style.background = s.renk + '08'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; (e.currentTarget as HTMLElement).style.background = 'white'; }}>
+                  style={{ background: 'white', borderRadius: '16px', border: `2px solid ${seciliSektor?.id === s.id ? s.renk : '#e2e8f0'}`, padding: '18px 14px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s' }}>
                   <p style={{ fontSize: '32px', marginBottom: '8px' }}>{s.icon}</p>
                   <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>{s.ad}</p>
                   <p style={{ fontSize: '10px', color: '#94a3b8' }}>{s.altKategoriler?.length || 0} alt kategori</p>
@@ -254,7 +220,6 @@ export default function IlanVerPage() {
               </div>
             </div>
 
-            {/* İlan Başlığı */}
             <div style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
               <label style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '6px' }}>İlan Başlığı</label>
               <input value={formData.baslik || ''} onChange={e => setField('baslik', e.target.value)}
@@ -262,7 +227,6 @@ export default function IlanVerPage() {
                 style={inp} />
             </div>
 
-            {/* Sektöre Özel Alanlar - Gruplara Göre */}
             {Object.entries(gruplar).map(([grupAdi, alanlar]) => (
               <div key={grupAdi} style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
                 <h3 style={{ fontSize: '12px', fontWeight: '700', color: seciliSektor.renk, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '14px', paddingBottom: '8px', borderBottom: `2px solid ${seciliSektor.renk}20` }}>
@@ -294,58 +258,29 @@ export default function IlanVerPage() {
         {adim === 3 && seciliSektor && (
           <div>
             <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '4px' }}>📸 Fotoğraf & Video</h2>
-            <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '16px' }}>Görsel eklemek ilanınızın teklif alma oranını 3x artırır</p>
+            <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '16px' }}>Görsel eklemek ilanınızın teklif alma oranını 3x artırır. 100MB'a kadar video yükleyebilirsiniz!</p>
 
+            {/* Yüklenen Medyaların Izgarası */}
             {medyalar.length > 0 && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '16px' }}>
                 {medyalar.map((m, i) => (
                   <div key={i} style={{ position: 'relative', aspectRatio: '1', borderRadius: '12px', overflow: 'hidden', background: '#f1f5f9', border: `2px solid ${i === 0 ? '#f59e0b' : '#e2e8f0'}` }}>
-                    {m.yukleniyor ? (
-                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div style={{ width: '22px', height: '22px', border: '3px solid #e2e8f0', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
-                      </div>
-                    ) : m.tip === 'video' ? (
+                    {m.tip === 'video' ? (
                       <video src={m.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     ) : (
                       <img src={m.url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     )}
-                    {!m.yukleniyor && (
-                      <button onClick={() => setMedyalar(p => p.filter((_, j) => j !== i))}
-                        style={{ position: 'absolute', top: '4px', right: '4px', width: '20px', height: '20px', borderRadius: '50%', background: '#dc2626', border: 'none', color: 'white', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
-                    )}
+                    <button onClick={() => setMedyalar(p => p.filter((_, j) => j !== i))}
+                      style={{ position: 'absolute', top: '4px', right: '4px', width: '20px', height: '20px', borderRadius: '50%', background: '#dc2626', border: 'none', color: 'white', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Upload Butonları */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
-              <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '18px', borderRadius: '14px', border: '2px solid #2563eb', background: '#eff6ff', cursor: 'pointer' }}>
-                <span style={{ fontSize: '26px' }}>📷</span>
-                <span style={{ fontSize: '12px', fontWeight: '700', color: '#2563eb' }}>Canlı Kamera</span>
-                <input type="file" accept="image/*" capture="environment" onChange={handleFile} style={{ display: 'none' }} />
-              </label>
-              <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '18px', borderRadius: '14px', border: '2px dashed #e2e8f0', background: 'white', cursor: 'pointer' }}>
-                <span style={{ fontSize: '26px' }}>🖼️</span>
-                <span style={{ fontSize: '12px', fontWeight: '700', color: '#475569' }}>Galeriden Seç</span>
-                <input type="file" accept="image/*" multiple onChange={handleFile} style={{ display: 'none' }} />
-              </label>
+            {/* 🚨 SİBER SİLAHIMIZ BURADA ÇALIŞIYOR */}
+            <div style={{ marginBottom: '24px' }}>
+              <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
             </div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 18px', borderRadius: '14px', border: '2px dashed #e2e8f0', background: 'white', cursor: 'pointer', marginBottom: '16px' }}>
-              <span style={{ fontSize: '26px' }}>🎬</span>
-              <div>
-                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>Video Yükle</p>
-                <p style={{ fontSize: '11px', color: '#94a3b8' }}>Maksimum 200MB</p>
-              </div>
-              <input type="file" accept="video/*" onChange={handleFile} style={{ display: 'none' }} />
-            </label>
-
-            {uploadYukleniyor > 0 && (
-              <div style={{ padding: '11px 14px', borderRadius: '12px', background: '#eff6ff', border: '1px solid #bfdbfe', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                <div style={{ width: '16px', height: '16px', border: '2px solid #bfdbfe', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
-                <span style={{ fontSize: '12px', color: '#2563eb' }}>{uploadYukleniyor} dosya yükleniyor...</span>
-              </div>
-            )}
 
             {/* Üye değilse bilgi kutusu */}
             {!session && (
@@ -355,7 +290,7 @@ export default function IlanVerPage() {
               </div>
             )}
 
-            <button onClick={handleYayinla} disabled={yukleniyor || uploadYukleniyor > 0}
+            <button onClick={handleYayinla} disabled={yukleniyor}
               style={{ width: '100%', padding: '15px', borderRadius: '14px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '15px', fontWeight: '800', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.35)' }}>
               {yukleniyor ? '⏳ İlan Yayınlanıyor...' : '⚡ İlanı Yayınla — Teklifler Gelsin'}
             </button>
