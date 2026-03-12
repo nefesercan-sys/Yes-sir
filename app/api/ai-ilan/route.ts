@@ -1,22 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-const SEKTOR_BILGI: Record<string, { ad: string; ornekler: string[] }> = {
-  turizm: { ad: 'Turizm & Konaklama', ornekler: ['otel', 'pansiyon', 'villa', 'apart', 'butik otel'] },
-  seyahat: { ad: 'Seyahat & Transfer', ornekler: ['airport transfer', 'şehirlerarası', 'tur', 'araç kiralama'] },
-  kiralama: { ad: 'Kiralama', ornekler: ['araç', 'ekipman', 'ofis', 'depo', 'iş makinası'] },
-  tamir: { ad: 'Tamir & Bakım', ornekler: ['beyaz eşya', 'elektronik', 'mobilya', 'klima', 'kombi'] },
-  usta: { ad: 'Usta & İşçi', ornekler: ['elektrik', 'su tesisatı', 'boya badana', 'fayans', 'alçıpan'] },
-  temizlik: { ad: 'Temizlik Hizmetleri', ornekler: ['ev temizliği', 'ofis temizliği', 'derin temizlik', 'cam silme'] },
-  uretim: { ad: 'Üretim & Özel Sipariş', ornekler: ['mobilya', 'tekstil', 'metal', 'ahşap', 'plastik'] },
-  giyim: { ad: 'Giyim & Tekstil', ornekler: ['terzi', 'nakış', 'baskı', 'toptan giyim', 'üniforma'] },
-  saglik: { ad: 'Sağlık & Güzellik', ornekler: ['masaj', 'güzellik salonu', 'diyet', 'fizyoterapi', 'psikoloji'] },
-  egitim: { ad: 'Eğitim & Danışmanlık', ornekler: ['dil kursu', 'özel ders', 'danışmanlık', 'koçluk', 'sertifika'] },
-  etkinlik: { ad: 'Etkinlik & Düğün', ornekler: ['düğün organizasyon', 'fotoğrafçı', 'catering', 'ses sistemi', 'dekor'] },
-  mobilya: { ad: 'Mobilya & Dekorasyon', ornekler: ['iç mimarlık', 'mobilya tasarım', 'dekorasyon', 'peyzaj'] },
+const SEKTOR_BILGI: Record<string, { ad: string; ornekler: string[]; unsplashQuery: string }> = {
+  turizm: { ad: 'Turizm & Konaklama', ornekler: ['otel', 'pansiyon', 'villa', 'apart', 'butik otel'], unsplashQuery: 'hotel room luxury' },
+  seyahat: { ad: 'Seyahat & Transfer', ornekler: ['airport transfer', 'şehirlerarası', 'tur', 'araç kiralama'], unsplashQuery: 'travel car transfer' },
+  kiralama: { ad: 'Kiralama', ornekler: ['araç', 'ekipman', 'ofis', 'depo', 'iş makinası'], unsplashQuery: 'rental equipment car' },
+  tamir: { ad: 'Tamir & Bakım', ornekler: ['beyaz eşya', 'elektronik', 'mobilya', 'klima', 'kombi'], unsplashQuery: 'repair technician tools' },
+  usta: { ad: 'Usta & İşçi', ornekler: ['elektrik', 'su tesisatı', 'boya badana', 'fayans', 'alçıpan'], unsplashQuery: 'construction worker tools' },
+  temizlik: { ad: 'Temizlik Hizmetleri', ornekler: ['ev temizliği', 'ofis temizliği', 'derin temizlik', 'cam silme'], unsplashQuery: 'cleaning service house' },
+  uretim: { ad: 'Üretim & Özel Sipariş', ornekler: ['mobilya', 'tekstil', 'metal', 'ahşap', 'plastik'], unsplashQuery: 'manufacturing production factory' },
+  giyim: { ad: 'Giyim & Tekstil', ornekler: ['terzi', 'nakış', 'baskı', 'toptan giyim', 'üniforma'], unsplashQuery: 'fashion clothing textile' },
+  saglik: { ad: 'Sağlık & Güzellik', ornekler: ['masaj', 'güzellik salonu', 'diyet', 'fizyoterapi', 'psikoloji'], unsplashQuery: 'beauty salon spa wellness' },
+  egitim: { ad: 'Eğitim & Danışmanlık', ornekler: ['dil kursu', 'özel ders', 'danışmanlık', 'koçluk', 'sertifika'], unsplashQuery: 'education learning study' },
+  etkinlik: { ad: 'Etkinlik & Düğün', ornekler: ['düğün organizasyon', 'fotoğrafçı', 'catering', 'ses sistemi', 'dekor'], unsplashQuery: 'wedding event decoration' },
+  mobilya: { ad: 'Mobilya & Dekorasyon', ornekler: ['iç mimarlık', 'mobilya tasarım', 'dekorasyon', 'peyzaj'], unsplashQuery: 'interior design furniture modern' },
 };
 
 const SEHIRLER = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Kayseri'];
+
+function getUnsplashResimler(query: string, adet: number): string[] {
+  const resimler: string[] = [];
+  for (let i = 0; i < adet; i++) {
+    const seed = Math.floor(Math.random() * 1000) + i * 100;
+    resimler.push(`https://source.unsplash.com/800x600/?${encodeURIComponent(query)}&sig=${seed}`);
+  }
+  return resimler;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -73,26 +82,21 @@ SADECE JSON array döndür:
     if (!claudeRes.ok) {
       const hataMesaji = claudeData.error?.message || 'Bilinmeyen Anthropic Hatası';
       let turkceHata = hataMesaji;
-      
       if (hataMesaji.includes('credit balance is too low')) {
         turkceHata = 'Yapay Zeka kredisiz kalmış! (Anthropic hesabına bakiye yüklemeniz gerekiyor)';
       } else if (hataMesaji.includes('invalid x-api-key')) {
         turkceHata = 'Yapay Zeka şifresi yanlış! (ANTHROPIC_API_KEY hatalı)';
       }
-
-      return NextResponse.json({ 
-        success: false, 
-        error: `Claude Reddedildi: ${turkceHata}` 
-      }, { status: 400 });
+      return NextResponse.json({ success: false, error: `Claude Reddedildi: ${turkceHata}` }, { status: 400 });
     }
 
     const metin = claudeData.content?.[0]?.text || '[]';
     const temizMetin = metin.replace(/```json|```/g, '').trim();
     let uretilen;
-    
+
     try {
       uretilen = JSON.parse(temizMetin);
-    } catch (parseError) {
+    } catch {
       return NextResponse.json({ success: false, error: 'Yapay Zeka JSON formatını bozdu. Tekrar deneyin.' }, { status: 500 });
     }
 
@@ -100,8 +104,10 @@ SADECE JSON array döndür:
       return NextResponse.json({ success: false, error: 'Yapay Zeka dizi formatında cevap vermedi.' }, { status: 500 });
     }
 
+    const resimListesi = getUnsplashResimler(sektor.unsplashQuery, uretilen.length);
+
     const db = await getDb();
-    const kayitlar = uretilen.map((ilan: any) => ({
+    const kayitlar = uretilen.map((ilan: any, index: number) => ({
       sektorId,
       baslik: ilan.baslik,
       formData: {
@@ -110,7 +116,10 @@ SADECE JSON array döndür:
         ilce: ilan.ilce,
         sure: ilan.sure,
       },
-      medyalar: [],
+      medyalar: [
+        resimListesi[index],
+        `https://source.unsplash.com/800x600/?${encodeURIComponent(sektor.unsplashQuery)}&sig=${Math.floor(Math.random() * 9999)}`,
+      ],
       butceMin: ilan.butceMin,
       butceMax: ilan.butceMax,
       butceBirimi: '₺',
