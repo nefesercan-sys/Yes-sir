@@ -1,36 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { v2 as cloudinary } from 'cloudinary';
 
-const SEKTOR_BILGI: Record<string, { ad: string; ornekler: string[]; unsplashQuery: string }> = {
-  turizm: { ad: 'Turizm & Konaklama', ornekler: ['otel', 'pansiyon', 'villa', 'apart', 'butik otel'], unsplashQuery: 'hotel room luxury' },
-  seyahat: { ad: 'Seyahat & Transfer', ornekler: ['airport transfer', 'şehirlerarası', 'tur', 'araç kiralama'], unsplashQuery: 'travel car transfer' },
-  kiralama: { ad: 'Kiralama', ornekler: ['araç', 'ekipman', 'ofis', 'depo', 'iş makinası'], unsplashQuery: 'rental equipment car' },
-  tamir: { ad: 'Tamir & Bakım', ornekler: ['beyaz eşya', 'elektronik', 'mobilya', 'klima', 'kombi'], unsplashQuery: 'repair technician tools' },
-  usta: { ad: 'Usta & İşçi', ornekler: ['elektrik', 'su tesisatı', 'boya badana', 'fayans', 'alçıpan'], unsplashQuery: 'construction worker tools' },
-  temizlik: { ad: 'Temizlik Hizmetleri', ornekler: ['ev temizliği', 'ofis temizliği', 'derin temizlik', 'cam silme'], unsplashQuery: 'cleaning service house' },
-  uretim: { ad: 'Üretim & Özel Sipariş', ornekler: ['mobilya', 'tekstil', 'metal', 'ahşap', 'plastik'], unsplashQuery: 'manufacturing production factory' },
-  giyim: { ad: 'Giyim & Tekstil', ornekler: ['terzi', 'nakış', 'baskı', 'toptan giyim', 'üniforma'], unsplashQuery: 'fashion clothing textile' },
-  saglik: { ad: 'Sağlık & Güzellik', ornekler: ['masaj', 'güzellik salonu', 'diyet', 'fizyoterapi', 'psikoloji'], unsplashQuery: 'beauty salon spa wellness' },
-  egitim: { ad: 'Eğitim & Danışmanlık', ornekler: ['dil kursu', 'özel ders', 'danışmanlık', 'koçluk', 'sertifika'], unsplashQuery: 'education learning study' },
-  etkinlik: { ad: 'Etkinlik & Düğün', ornekler: ['düğün organizasyon', 'fotoğrafçı', 'catering', 'ses sistemi', 'dekor'], unsplashQuery: 'wedding event decoration' },
-  mobilya: { ad: 'Mobilya & Dekorasyon', ornekler: ['iç mimarlık', 'mobilya tasarım', 'dekorasyon', 'peyzaj'], unsplashQuery: 'interior design furniture modern' },
+// 🚨 Cloudinary Siber Yapılandırması
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
+
+const SEKTOR_BILGI: Record<string, { ad: string; ornekler: string[]; resimArama: string }> = {
+  turizm: { ad: 'Turizm & Konaklama', ornekler: ['otel', 'pansiyon', 'villa', 'apart', 'butik otel'], resimArama: 'hotel room interior' },
+  seyahat: { ad: 'Seyahat & Transfer', ornekler: ['airport transfer', 'şehirlerarası', 'tur', 'araç kiralama'], resimArama: 'airport transfer minivan' },
+  kiralama: { ad: 'Kiralama', ornekler: ['araç', 'ekipman', 'ofis', 'depo', 'iş makinası'], resimArama: 'car rental key' },
+  tamir: { ad: 'Tamir & Bakım', ornekler: ['beyaz eşya', 'elektronik', 'mobilya', 'klima', 'kombi'], resimArama: 'appliance repairman working' },
+  usta: { ad: 'Usta & İşçi', ornekler: ['elektrik', 'su tesisatı', 'boya badana', 'fayans', 'alçıpan'], resimArama: 'electrician working' },
+  temizlik: { ad: 'Temizlik Hizmetleri', ornekler: ['ev temizliği', 'ofis temizliği', 'derin temizlik', 'cam silme'], resimArama: 'cleaning service worker' },
+  uretim: { ad: 'Üretim & Özel Sipariş', ornekler: ['mobilya', 'tekstil', 'metal', 'ahşap', 'plastik'], resimArama: 'furniture workshop' },
+  giyim: { ad: 'Giyim & Tekstil', ornekler: ['terzi', 'nakış', 'baskı', 'toptan giyim', 'üniforma'], resimArama: 'tailor working' },
+  saglik: { ad: 'Sağlık & Güzellik', ornekler: ['masaj', 'güzellik salonu', 'diyet', 'fizyoterapi', 'psikoloji'], resimArama: 'massage therapy room' },
+  egitim: { ad: 'Eğitim & Danışmanlık', ornekler: ['dil kursu', 'özel ders', 'danışmanlık', 'koçluk', 'sertifika'], resimArama: 'online tutor teaching' },
+  etkinlik: { ad: 'Etkinlik & Düğün', ornekler: ['düğün organizasyon', 'fotoğrafçı', 'catering', 'ses sistemi', 'dekor'], resimArama: 'wedding ceremony decoration' },
+  mobilya: { ad: 'Mobilya & Dekorasyon', ornekler: ['iç mimarlık', 'mobilya tasarım', 'dekorasyon', 'peyzaj'], resimArama: 'modern living room interior design' },
 };
 
 const SEHIRLER = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Kayseri'];
 
-function getUnsplashResimler(query: string, adet: number): string[] {
-  const resimler: string[] = [];
-  for (let i = 0; i < adet; i++) {
-    const seed = Math.floor(Math.random() * 1000) + i * 100;
-    resimler.push(`https://source.unsplash.com/800x600/?${encodeURIComponent(query)}&sig=${seed}`);
+// 🚨 Siber Resim Bulma ve Yükleme Fonksiyonu
+async function resimBulVeYukle(aramaTerimi: string) {
+  try {
+    // Unsplash API'sinden (veya benzeri ücretsiz servis) resim çekebilirsin.
+    // Şimdilik test için Cloudinary'deki örnek resimlerden birini kullanacağız.
+    // Gerçek uygulamada buraya bir resim arama API'si entegre etmelisin.
+    
+    // Cloudinary SDK ile örnek bir resmi "upload" edip URL'sini alıyoruz
+    // Bu sayede sistem gerçek bir Cloudinary URL'si ile çalışmış oluyor
+    const result = await cloudinary.uploader.upload('https://cloudinary-devs.github.io/res/placeholder.png', {
+      public_id: `yapay_ilan_${Date.now()}`,
+      tags: ['yapay', 'ilan'],
+    });
+    return result.secure_url;
+  } catch (error) {
+    console.error('Resim yükleme hatası:', error);
+    return null; // Resim yüklenemezse null dön, ilan yine de oluşturulsun
   }
-  return resimler;
 }
 
 export async function POST(req: NextRequest) {
   try {
     const { sektorId, sehir, adet = 5, adminKey } = await req.json();
 
+    // 1. Admin Anahtarı Kontrolü
     if (adminKey !== process.env.NEXT_PUBLIC_ADMIN_KEY) {
       return NextResponse.json({ success: false, error: 'Siber Anahtar (Admin Key) yanlış veya eksik!' }, { status: 401 });
     }
@@ -39,8 +60,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Geçersiz sektör seçimi.' }, { status: 400 });
     }
 
-    if (!process.env.ANTHROPIC_API_KEY) {
-      return NextResponse.json({ success: false, error: 'Vercel ortam değişkenlerinde ANTHROPIC_API_KEY eksik!' }, { status: 500 });
+    if (!process.env.ANTHROPIC_API_KEY || !process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+      return NextResponse.json({ success: false, error: 'Vercel ortam değişkenlerinde ANTHROPIC veya CLOUDINARY bilgileri eksik!' }, { status: 500 });
     }
 
     const sektor = SEKTOR_BILGI[sektorId];
@@ -63,6 +84,7 @@ Her ilan için şu JSON formatını kullan:
 SADECE JSON array döndür:
 [{...}, {...}]`;
 
+    // 2. Claude'a İstek Atma
     const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -71,7 +93,7 @@ SADECE JSON array döndür:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-3-5-haiku-20241022', // En hızlı ve sorunsuz model eklendi!
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
       }),
@@ -79,24 +101,23 @@ SADECE JSON array döndür:
 
     const claudeData = await claudeRes.json();
 
+    // 🚨 SİBER ZIRH: Eğer Claude bizi kapıdan kovarsa çökmeden hatayı yakala
     if (!claudeRes.ok) {
       const hataMesaji = claudeData.error?.message || 'Bilinmeyen Anthropic Hatası';
-      let turkceHata = hataMesaji;
-      if (hataMesaji.includes('credit balance is too low')) {
-        turkceHata = 'Yapay Zeka kredisiz kalmış! (Anthropic hesabına bakiye yüklemeniz gerekiyor)';
-      } else if (hataMesaji.includes('invalid x-api-key')) {
-        turkceHata = 'Yapay Zeka şifresi yanlış! (ANTHROPIC_API_KEY hatalı)';
-      }
-      return NextResponse.json({ success: false, error: `Claude Reddedildi: ${turkceHata}` }, { status: 400 });
+      return NextResponse.json({ 
+        success: false, 
+        error: `Claude Reddedildi: ${hataMesaji}` 
+      }, { status: 400 });
     }
 
+    // 3. Gelen Veriyi Ayrıştırma
     const metin = claudeData.content?.[0]?.text || '[]';
     const temizMetin = metin.replace(/```json|```/g, '').trim();
     let uretilen;
-
+    
     try {
       uretilen = JSON.parse(temizMetin);
-    } catch {
+    } catch (parseError) {
       return NextResponse.json({ success: false, error: 'Yapay Zeka JSON formatını bozdu. Tekrar deneyin.' }, { status: 500 });
     }
 
@@ -104,10 +125,15 @@ SADECE JSON array döndür:
       return NextResponse.json({ success: false, error: 'Yapay Zeka dizi formatında cevap vermedi.' }, { status: 500 });
     }
 
-    const resimListesi = getUnsplashResimler(sektor.unsplashQuery, uretilen.length);
+    // 🚨 SİBER RESİM YÜKLEME: Her ilan için resim bulup Cloudinary'ye yükle
+    const ilanlarResimli = await Promise.all(uretilen.map(async (ilan) => {
+      const resimUrl = await resimBulVeYukle(sektor.resimArama);
+      return { ...ilan, medyalar: resimUrl ? [resimUrl] : [] }; // Resim varsa medyalar dizisine ekle
+    }));
 
+    // 4. Veritabanına Kaydetme
     const db = await getDb();
-    const kayitlar = uretilen.map((ilan: any, index: number) => ({
+    const kayitlar = ilanlarResimli.map((ilan: any) => ({
       sektorId,
       baslik: ilan.baslik,
       formData: {
@@ -116,10 +142,7 @@ SADECE JSON array döndür:
         ilce: ilan.ilce,
         sure: ilan.sure,
       },
-      medyalar: [
-        resimListesi[index],
-        `https://source.unsplash.com/800x600/?${encodeURIComponent(sektor.unsplashQuery)}&sig=${Math.floor(Math.random() * 9999)}`,
-      ],
+      medyalar: ilan.medyalar, // Resimli medyalar dizisi
       butceMin: ilan.butceMin,
       butceMax: ilan.butceMax,
       butceBirimi: '₺',
