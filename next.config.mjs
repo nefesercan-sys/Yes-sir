@@ -5,13 +5,15 @@ const nextConfig = {
       'res.cloudinary.com',
       'lh3.googleusercontent.com',
       'ui-avatars.com',
-      'placehold.co',
+      'placeholdit.co',
+      'source.unsplash.com',
+      'images.unsplash.com',
     ],
   },
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: '/(.+)',
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
