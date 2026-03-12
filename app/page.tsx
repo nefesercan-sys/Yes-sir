@@ -9,19 +9,27 @@ export default async function AnaSayfa() {
 
   try {
     const db = await getDb();
+    
+    // 🚨 SİBER DÜZELTME: Veritabanı sorgusu Vercel'in istediği gibi süslü paranteze alındı!
     const [ilanRaw, istatRaw] = await Promise.all([
       db.collection('ilanlar').find({ durum: 'aktif' }).sort({ createdAt: -1 }).limit(24).toArray(),
-      db.collection('istatistik').findOne({ _id: 'genel' }),
+      db.collection('istatistikler').findOne({ _id: 'genel' })
     ]);
+    
     ilanlar = JSON.parse(JSON.stringify(ilanRaw));
 
+    // Canlı istatistikleri çekiyoruz
     const [toplamIlan, toplamUye, toplamTeklif] = await Promise.all([
       db.collection('ilanlar').countDocuments({ durum: 'aktif' }),
       db.collection('users').countDocuments(),
       db.collection('teklifler').countDocuments(),
     ]);
+    
     istatistik = { toplamIlan, toplamUye, toplamTeklif };
-  } catch {}
+    
+  } catch (error) {
+    console.error("Siber Veritabanı Hatası:", error);
+  }
 
   return <AnaSayfaClient ilanlar={ilanlar} istatistik={istatistik} />;
 }
