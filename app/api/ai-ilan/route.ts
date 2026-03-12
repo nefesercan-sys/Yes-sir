@@ -22,12 +22,17 @@ export async function POST(req: NextRequest) {
   try {
     const { sektorId, sehir, adet = 5, adminKey } = await req.json();
 
-    if (adminKey !== process.env.ADMIN_SECRET_KEY) {
-      return NextResponse.json({ error: 'Yetkisiz erişim' }, { status: 401 });
+    // 1. Admin Anahtarı Kontrolü
+    if (adminKey !== process.env.NEXT_PUBLIC_ADMIN_KEY) {
+      return NextResponse.json({ success: false, error: 'Siber Anahtar (Admin Key) yanlış veya eksik!' }, { status: 401 });
     }
 
     if (!sektorId || !SEKTOR_BILGI[sektorId]) {
-      return NextResponse.json({ error: 'Geçersiz sektör' }, { status: 400 });
+      return NextResponse.json({ success: false, error: 'Geçersiz sektör seçimi.' }, { status: 400 });
+    }
+
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return NextResponse.json({ success: false, error: 'Vercel ortam değişkenlerinde ANTHROPIC_API_KEY eksik!' }, { status: 500 });
     }
 
     const sektor = SEKTOR_BILGI[sektorId];
@@ -50,25 +55,56 @@ Her ilan için şu JSON formatını kullan:
 SADECE JSON array döndür:
 [{...}, {...}]`;
 
+    // 2. Claude'a İstek Atma
     const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY!,
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-3-5-sonnet-20240620', // Doğru model adı güncellendi!
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
       }),
     });
 
     const claudeData = await claudeRes.json();
+
+    // 🚨 SİBER ZIRH: Eğer Claude bizi kapıdan kovarsa çökmeden hatayı yakala
+    if (!claudeRes.ok) {
+      const hataMesaji = claudeData.error?.message || 'Bilinmeyen Anthropic Hatası';
+      let turkceHata = hataMesaji;
+      
+      if (hataMesaji.includes('credit balance is too low')) {
+        turkceHata = 'Yapay Zeka kredisiz kalmış! (Anthropic hesabına bakiye yüklemeniz gerekiyor)';
+      } else if (hataMesaji.includes('invalid x-api-key')) {
+        turkceHata = 'Yapay Zeka şifresi yanlış! (ANTHROPIC_API_KEY hatalı)';
+      }
+
+      return NextResponse.json({ 
+        success: false, 
+        error: `Claude Reddedildi: ${turkceHata}` 
+      }, { status: 400 });
+    }
+
+    // 3. Gelen Veriyi Ayrıştırma
     const metin = claudeData.content?.[0]?.text || '[]';
     const temizMetin = metin.replace(/```json|```/g, '').trim();
-    const uretilen = JSON.parse(temizMetin);
+    let uretilen;
+    
+    try {
+      uretilen = JSON.parse(temizMetin);
+    } catch (parseError) {
+      return NextResponse.json({ success: false, error: 'Yapay Zeka JSON formatını bozdu. Tekrar deneyin.' }, { status: 500 });
+    }
 
+    if (!Array.isArray(uretilen)) {
+      return NextResponse.json({ success: false, error: 'Yapay Zeka dizi formatında cevap vermedi.' }, { status: 500 });
+    }
+
+    // 4. Veritabanına Kaydetme
     const db = await getDb();
     const kayitlar = uretilen.map((ilan: any) => ({
       sektorId,
@@ -107,8 +143,8 @@ SADECE JSON array döndür:
       ids: Object.values(result.insertedIds).map(id => id.toString()),
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('AI ilan üretim hatası:', error);
-    return NextResponse.json({ error: 'AI motoru hata verdi' }, { status: 500 });
+    return NextResponse.json({ success: false, error: `Sistem Hatası: ${error.message}` }, { status: 500 });
   }
 }
