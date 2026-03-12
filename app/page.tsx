@@ -10,10 +10,10 @@ export default async function AnaSayfa() {
   try {
     const db = await getDb();
     
-    // 🚨 SİBER DÜZELTME: Veritabanı sorgusu Vercel'in istediği gibi süslü paranteze alındı!
+    // 🚨 SİBER DÜZELTME: collection<any> ekleyerek TypeScript'in "_id kuralı" takıntısını ezip geçiyoruz!
     const [ilanRaw, istatRaw] = await Promise.all([
       db.collection('ilanlar').find({ durum: 'aktif' }).sort({ createdAt: -1 }).limit(24).toArray(),
-      db.collection('istatistikler').findOne({ _id: 'genel' })
+      db.collection<any>('istatistikler').findOne({ _id: 'genel' })
     ]);
     
     ilanlar = JSON.parse(JSON.stringify(ilanRaw));
