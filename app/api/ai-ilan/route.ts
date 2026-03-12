@@ -1,0 +1,114 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getDb } from '@/lib/mongodb';
+
+const SEKTOR_BILGI: Record<string, { ad: string; ornekler: string[] }> = {
+  turizm: { ad: 'Turizm & Konaklama', ornekler: ['otel', 'pansiyon', 'villa', 'apart', 'butik otel'] },
+  seyahat: { ad: 'Seyahat & Transfer', ornekler: ['airport transfer', 'şehirlerarası', 'tur', 'araç kiralama'] },
+  kiralama: { ad: 'Kiralama', ornekler: ['araç', 'ekipman', 'ofis', 'depo', 'iş makinası'] },
+  tamir: { ad: 'Tamir & Bakım', ornekler: ['beyaz eşya', 'elektronik', 'mobilya', 'klima', 'kombi'] },
+  usta: { ad: 'Usta & İşçi', ornekler: ['elektrik', 'su tesisatı', 'boya badana', 'fayans', 'alçıpan'] },
+  temizlik: { ad: 'Temizlik Hizmetleri', ornekler: ['ev temizliği', 'ofis temizliği', 'derin temizlik', 'cam silme'] },
+  uretim: { ad: 'Üretim & Özel Sipariş', ornekler: ['mobilya', 'tekstil', 'metal', 'ahşap', 'plastik'] },
+  giyim: { ad: 'Giyim & Tekstil', ornekler: ['terzi', 'nakış', 'baskı', 'toptan giyim', 'üniforma'] },
+  saglik: { ad: 'Sağlık & Güzellik', ornekler: ['masaj', 'güzellik salonu', 'diyet', 'fizyoterapi', 'psikoloji'] },
+  egitim: { ad: 'Eğitim & Danışmanlık', ornekler: ['dil kursu', 'özel ders', 'danışmanlık', 'koçluk', 'sertifika'] },
+  etkinlik: { ad: 'Etkinlik & Düğün', ornekler: ['düğün organizasyon', 'fotoğrafçı', 'catering', 'ses sistemi', 'dekor'] },
+  mobilya: { ad: 'Mobilya & Dekorasyon', ornekler: ['iç mimarlık', 'mobilya tasarım', 'dekorasyon', 'peyzaj'] },
+};
+
+const SEHIRLER = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Kayseri'];
+
+export async function POST(req: NextRequest) {
+  try {
+    const { sektorId, sehir, adet = 5, adminKey } = await req.json();
+
+    if (adminKey !== process.env.ADMIN_SECRET_KEY) {
+      return NextResponse.json({ error: 'Yetkisiz erişim' }, { status: 401 });
+    }
+
+    if (!sektorId || !SEKTOR_BILGI[sektorId]) {
+      return NextResponse.json({ error: 'Geçersiz sektör' }, { status: 400 });
+    }
+
+    const sektor = SEKTOR_BILGI[sektorId];
+    const hedefSehir = sehir || SEHIRLER[Math.floor(Math.random() * SEHIRLER.length)];
+
+    const prompt = `Sen bir ${sektor.ad} sektöründe hizmet arayan Türk müşterisinin ilan metnini yazıyorsun.
+${hedefSehir} şehrinde ${sektor.ornekler.join(', ')} gibi hizmetler için ${adet} adet FARKLI ilan oluştur.
+
+Her ilan için şu JSON formatını kullan:
+{
+  "baslik": "kısa ve net başlık (max 60 karakter)",
+  "aciklama": "detaylı ihtiyaç açıklaması (100-200 kelime, gerçekçi ve samimi)",
+  "butceMin": sayı,
+  "butceMax": sayı,
+  "sure": "ne zaman lazım (örn: Bu hafta, 2 hafta içinde, Acil)",
+  "sehir": "${hedefSehir}",
+  "ilce": "rastgele gerçek ilçe adı"
+}
+
+SADECE JSON array döndür:
+[{...}, {...}]`;
+
+    const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY!,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+
+    const claudeData = await claudeRes.json();
+    const metin = claudeData.content?.[0]?.text || '[]';
+    const temizMetin = metin.replace(/```json|```/g, '').trim();
+    const uretilen = JSON.parse(temizMetin);
+
+    const db = await getDb();
+    const kayitlar = uretilen.map((ilan: any) => ({
+      sektorId,
+      baslik: ilan.baslik,
+      formData: {
+        aciklama: ilan.aciklama,
+        sehir: ilan.sehir,
+        ilce: ilan.ilce,
+        sure: ilan.sure,
+      },
+      medyalar: [],
+      butceMin: ilan.butceMin,
+      butceMax: ilan.butceMax,
+      butceBirimi: '₺',
+      durum: 'aktif',
+      teklifSayisi: 0,
+      goruntulenme: Math.floor(Math.random() * 200) + 20,
+      teklifeAcik: true,
+      gizliAd: true,
+      yapay: true,
+      ucretsizTeklif: true,
+      sahibi: {
+        email: 'sistem@yes-sir.com',
+        ad: 'Sistem',
+        resim: null,
+      },
+      createdAt: new Date(),
+      guncellendi: new Date(),
+    }));
+
+    const result = await db.collection('ilanlar').insertMany(kayitlar);
+
+    return NextResponse.json({
+      success: true,
+      uretilen: kayitlar.length,
+      ids: Object.values(result.insertedIds).map(id => id.toString()),
+    });
+
+  } catch (error) {
+    console.error('AI ilan üretim hatası:', error);
+    return NextResponse.json({ error: 'AI motoru hata verdi' }, { status: 500 });
+  }
+}
