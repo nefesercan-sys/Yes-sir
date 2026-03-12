@@ -21,6 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <AuthProvider>{children}</AuthProvider>
+        {/* 🚨 SİBER RADAR FİŞE TAKILDI VE AKTİF! */}
+        <Analytics />
       </body>
     </html>
   );
