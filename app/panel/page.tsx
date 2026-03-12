@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -16,7 +16,8 @@ const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
   gonullu_kapali:    { bg: '#f1f5f9', c: '#64748b' },
 };
 
-export default function PanelPage() {
+// 🚨 SİBER DÜZELTME: Tüm panel içeriği bu bileşenin içine alındı
+function PanelIcerik() {
   const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -104,28 +105,7 @@ export default function PanelPage() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif' }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        .panel-layout { display: grid; grid-template-columns: 230px 1fr; min-height: calc(100vh - 56px); }
-        @media(max-width:768px) { .panel-layout { grid-template-columns: 1fr; } .sidebar { display: none !important; } }
-        .sidebar { background: white; border-right: 1px solid #e2e8f0; padding: 18px 12px; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
-        .main { padding: 24px 20px; max-width: 960px; }
-        .card { background: white; border-radius: 18px; border: 1.5px solid #e2e8f0; padding: 18px; }
-        .stat-card { background: white; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 16px; }
-        .row { background: white; border-radius: 14px; border: 1.5px solid #e2e8f0; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; transition: box-shadow 0.15s; }
-        .row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-        .tab-btn { width: 100%; display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 10px; border: none; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; margin-bottom: 2px; transition: all 0.12s; }
-        .tab-btn.a { background: #0f172a; color: white; font-weight: 700; }
-        .tab-btn:not(.a) { background: transparent; color: #475569; }
-        .tab-btn:not(.a):hover { background: #f1f5f9; }
-        .bdg { background: #f59e0b; color: #0f172a; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 999px; margin-left: auto; }
-        .dur { padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 700; display: inline-block; white-space: nowrap; }
-        .sttl { font-size: 18px; font-weight: 700; color: #0f172a; font-family: 'Playfair Display', serif; margin-bottom: 16px; }
-        .empty { text-align: center; padding: 48px; background: white; border-radius: 20px; border: 1.5px dashed #e2e8f0; }
-      `}</style>
-
+    <>
       {/* Top Bar */}
       <div style={{ background: '#0f172a', padding: '11px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -498,6 +478,24 @@ export default function PanelPage() {
           )}
         </div>
       </div>
+    </>
+  );
+}
+
+// 🚨 VERCEL'İN İSTEDİĞİ SUSPENSE KALKANI BURASI
+export default function PanelPage() {
+  return (
+    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif' }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+      `}</style>
+      <Suspense fallback={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>
+          Siber Panel Yükleniyor...
+        </div>
+      }>
+        <PanelIcerik />
+      </Suspense>
     </div>
   );
 }
