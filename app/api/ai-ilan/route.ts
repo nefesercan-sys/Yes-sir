@@ -64,7 +64,7 @@ SADECE JSON array döndür:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-3-haiku-20240307', // 🚀 En hızlı ve sorunsuz model eklendi!
+        model: 'claude-3-5-haiku-20241022', // 🚨 DOĞRU VE GÜNCEL MODEL BURADA!
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }],
       }),
