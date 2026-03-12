@@ -21,7 +21,6 @@ export interface Sektor {
 }
 
 export const SEKTORLER: Sektor[] = [
-
   // ═══════════════════════════════════════════
   // 1. TURİZM & KONAKLAMA
   // ═══════════════════════════════════════════
