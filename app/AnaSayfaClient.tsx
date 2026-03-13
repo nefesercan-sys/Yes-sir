@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { SEKTORLER } from '@/lib/sektorler';
@@ -16,9 +16,16 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
   const [aramaQuery, setAramaQuery] = useState('');
   const [sehirFiltre, setSehirFiltre] = useState('');
   const [menuAcik, setMenuAcik] = useState(false);
+  const [karmaIlanlar, setKarmaIlanlar] = useState<any[]>([]);
+
+  // KARMA AKIŞ (SHUFFLE) MANTIĞI: Sayfa her yüklendiğinde ilanları karıştır
+  useEffect(() => {
+    const karistir = [...ilanlar].sort(() => 0.5 - Math.random());
+    setKarmaIlanlar(karistir);
+  }, [ilanlar]);
 
   const filtrelenmisIlanlar = useMemo(() => {
-    let liste = [...ilanlar];
+    let liste = [...karmaIlanlar];
     if (aktifSektor) liste = liste.filter(i => i.sektorId === aktifSektor);
     if (aramaQuery) liste = liste.filter(i =>
       (i.baslik || '').toLowerCase().includes(aramaQuery.toLowerCase()) ||
@@ -28,14 +35,17 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
       (i.formData?.sehir || '').toLowerCase().includes(sehirFiltre.toLowerCase())
     );
     return liste;
-  }, [ilanlar, aktifSektor, aramaQuery, sehirFiltre]);
+  }, [karmaIlanlar, aktifSektor, aramaQuery, sehirFiltre]);
+
+  // Admin Kontrolü
+  const isAdmin = session?.user?.email === 'nefesercan@gmail.com';
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '72px' }}>
+    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '72px', position: 'relative' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        .ilan-card { background: white; border-radius: 16px; border: 1.5px solid #e2e8f0; overflow: hidden; transition: all 0.2s; cursor: pointer; }
+        .ilan-card { background: white; border-radius: 16px; border: 1.5px solid #e2e8f0; overflow: hidden; transition: all 0.2s; cursor: pointer; display: flex; flex-direction: column;}
         .ilan-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: rgba(37,99,235,0.3); }
         .sektor-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 16px; border-radius: 14px; border: 1.5px solid #e2e8f0; background: white; cursor: pointer; transition: all 0.15s; min-width: 90px; }
         .sektor-btn:hover, .sektor-btn.aktif { border-color: #2563eb; background: #eff6ff; }
@@ -49,14 +59,17 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
         .dropdown { position: absolute; top: 48px; right: 0; background: white; border-radius: 14px; border: 1.5px solid #e2e8f0; box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 180px; overflow: hidden; z-index: 300; }
         .dropdown-item { display: block; width: 100%; padding: 11px 16px; border: none; background: none; text-align: left; font-family: inherit; font-size: 13px; color: #0f172a; cursor: pointer; transition: background 0.1s; }
         .dropdown-item:hover { background: #f8fafc; }
+        .canli-destek { position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 8px 24px rgba(37,99,235,0.4); cursor: pointer; z-index: 500; transition: transform 0.2s; border: none; }
+        .canli-destek:hover { transform: scale(1.05); }
         @media (min-width: 768px) { .bottom-nav { display: none; } }
+        @media (max-width: 768px) { .canli-destek { bottom: 90px; right: 16px; width: 50px; height: 50px; font-size: 24px; } }
       `}</style>
 
       {/* ── ÜST NAVBAR ── */}
       <nav style={{ background: '#0f172a', padding: '0 20px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 16px rgba(0,0,0,0.2)' }}>
         <div onClick={() => router.push('/')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '22px' }}>🌐</span>
-          <span style={{ color: 'white', fontSize: '17px', fontWeight: '800', fontFamily: 'Playfair Display, serif' }}>HizmetAra</span>
+          <span style={{ color: 'white', fontSize: '18px', fontWeight: '800', fontFamily: 'Playfair Display, serif', letterSpacing: '-0.5px' }}>SwapHubs</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -85,6 +98,12 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
                       <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{session.user?.name}</p>
                       <p style={{ fontSize: '11px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{session.user?.email}</p>
                     </div>
+                    {/* SADECE ADMİNE ÖZEL LİNK */}
+                    {isAdmin && (
+                      <button className="dropdown-item" onClick={() => { router.push('/admin-ai'); setMenuAcik(false); }} style={{ color: '#8b5cf6', fontWeight: '700', background: '#f5f3ff' }}>
+                        🤖 AI Admin Paneli
+                      </button>
+                    )}
                     <button className="dropdown-item" onClick={() => { router.push('/panel'); setMenuAcik(false); }}>📊 Panelim</button>
                     <button className="dropdown-item" onClick={() => { router.push('/panel?tab=ilanlarim'); setMenuAcik(false); }}>📋 İlanlarım</button>
                     <button className="dropdown-item" onClick={() => { router.push('/panel?tab=tekliflerim'); setMenuAcik(false); }}>💼 Tekliflerim</button>
@@ -125,11 +144,11 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
             <span style={{ color: '#f59e0b' }}>Doğrudan Buluşun.</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', marginBottom: '32px', maxWidth: '560px', margin: '0 auto 32px' }}>
-            Turizm'den tamire, temizlikten üretime — 12 sektörde binlerce ilan. İlan ver, teklif al, en iyi fiyatı seç.
+            Turizm'den tamire, temizlikten üretime — tüm sektörlerde binlerce ilan. İlan ver, teklif al, en iyi fiyatı seç.
           </p>
           <div style={{ background: 'white', borderRadius: '16px', padding: '8px', display: 'flex', gap: '8px', maxWidth: '640px', margin: '0 auto', boxShadow: '0 8px 32px rgba(0,0,0,0.2)' }}>
             <input value={aramaQuery} onChange={e => setAramaQuery(e.target.value)}
-              placeholder="Ne arıyorsunuz? Otel, tamir, temizlik..."
+              placeholder="Ne arıyorsunuz? Otel, tamir, tekstil..."
               style={{ flex: 1, padding: '10px 16px', border: 'none', outline: 'none', fontSize: '14px', fontFamily: 'inherit', borderRadius: '10px' }} />
             <input value={sehirFiltre} onChange={e => setSehirFiltre(e.target.value)}
               placeholder="Şehir"
@@ -137,18 +156,6 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
             <button style={{ padding: '10px 20px', borderRadius: '10px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontWeight: '700', fontSize: '14px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
               🔍 Ara
             </button>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', marginTop: '32px' }}>
-            {[
-              { v: istatistik.toplamIlan.toLocaleString() + '+', l: 'Aktif İlan' },
-              { v: istatistik.toplamUye.toLocaleString() + '+', l: 'Üye' },
-              { v: istatistik.toplamTeklif.toLocaleString() + '+', l: 'Teklif' },
-            ].map(s => (
-              <div key={s.l} style={{ textAlign: 'center' }}>
-                <p style={{ color: '#f59e0b', fontSize: '22px', fontWeight: '800' }}>{s.v}</p>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px' }}>{s.l}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -174,9 +181,9 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
             <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>
-              {aktifSektor ? SEKTORLER.find(s => s.id === aktifSektor)?.icon + ' ' + SEKTORLER.find(s => s.id === aktifSektor)?.ad : '🔥 Son İlanlar'}
+              {aktifSektor ? SEKTORLER.find(s => s.id === aktifSektor)?.icon + ' ' + SEKTORLER.find(s => s.id === aktifSektor)?.ad : '🔥 Vitrin İlanları'}
             </h2>
-            <p style={{ color: '#94a3b8', fontSize: '13px' }}>{filtrelenmisIlanlar.length} ilan</p>
+            <p style={{ color: '#94a3b8', fontSize: '13px' }}>En güncel fırsatları keşfedin</p>
           </div>
           <button onClick={() => router.push('/ilan-ver')}
             style={{ padding: '11px 22px', borderRadius: '12px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 14px rgba(37,99,235,0.3)' }}>
@@ -187,11 +194,11 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
         {filtrelenmisIlanlar.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '64px', background: 'white', borderRadius: '20px', border: '1.5px dashed #e2e8f0' }}>
             <p style={{ fontSize: '40px', marginBottom: '12px' }}>📭</p>
-            <p style={{ fontSize: '16px', fontWeight: '600', color: '#1e293b' }}>Bu kategoride ilan yok</p>
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '16px' }}>İlk ilanı siz verin!</p>
+            <p style={{ fontSize: '16px', fontWeight: '600', color: '#1e293b' }}>Bu kriterlere uygun ilan yok</p>
+            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '16px' }}>Platformdaki ilk ilanı siz oluşturun, teklifleri toplayın!</p>
             <button onClick={() => router.push('/ilan-ver')}
               style={{ padding: '11px 28px', borderRadius: '12px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontWeight: '700', fontSize: '13px', cursor: 'pointer' }}>
-              İlan Ver
+              Hemen İlan Ver
             </button>
           </div>
         ) : (
@@ -215,11 +222,11 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
                       <span className="badge" style={{ background: 'rgba(0,0,0,0.7)', color: 'white' }}>{ilan.teklifSayisi || 0} teklif</span>
                     </div>
                   </div>
-                  <div style={{ padding: '14px 16px 16px' }}>
+                  <div style={{ padding: '14px 16px 16px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <h3 style={{ fontSize: '15px', fontWeight: '700', color: '#0f172a', marginBottom: '6px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: '1.4' }}>
                       {ilan.baslik}
                     </h3>
-                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px', flex: 1 }}>
                       {ilan.formData?.sehir && (
                         <span style={{ fontSize: '11px', color: '#64748b', background: '#f1f5f9', padding: '3px 8px', borderRadius: '6px' }}>📍 {ilan.formData.sehir}</span>
                       )}
@@ -227,7 +234,7 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
                         <span style={{ fontSize: '11px', color: '#64748b', background: '#f1f5f9', padding: '3px 8px', borderRadius: '6px' }}>{ilan.formData.altKategori}</span>
                       )}
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
                       <div>
                         <p style={{ fontSize: '11px', color: '#94a3b8' }}>Tahmini Bütçe</p>
                         <p style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a' }}>
@@ -240,9 +247,6 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
                         Teklif Ver →
                       </button>
                     </div>
-                    <p style={{ fontSize: '10px', color: '#cbd5e1', marginTop: '8px' }}>
-                      {new Date(ilan.createdAt).toLocaleDateString('tr-TR')} · Teklif süresi: {ilan.teklifeBitis ? new Date(ilan.teklifeBitis).toLocaleDateString('tr-TR') : 'Açık'}
-                    </p>
                   </div>
                 </div>
               );
@@ -268,6 +272,11 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Yüzen Canlı Destek Butonu */}
+      <button className="canli-destek" onClick={() => router.push('/panel?tab=mesajlar')} title="Canlı Destek / Mesajlar">
+        💬
+      </button>
 
       {/* Footer CTA */}
       <div style={{ background: '#0f172a', padding: '48px 24px', textAlign: 'center', marginTop: '32px' }}>
