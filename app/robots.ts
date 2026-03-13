@@ -6,9 +6,15 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/panel', '/api/', '/otel-profil', '/giris', '/uye-ol'],
+        disallow: ['/admin', '/panel', '/api/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin', '/panel'],
       },
     ],
-    sitemap: 'https://hizmetara.com/sitemap.xml',
+    sitemap: 'https://swaphubs.com/sitemap.xml',
+    host:    'https://swaphubs.com',
   };
 }
