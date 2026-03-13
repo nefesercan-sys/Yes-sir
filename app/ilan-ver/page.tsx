@@ -7,7 +7,11 @@ import { SEKTORLER, FormAlan, Sektor } from '@/lib/sektorler';
 import MedyaYukleyici from '../components/MedyaYukleyici'; 
 
 export default function IlanVerPage() {
-  const { data: session } = useSession();
+  // 🚨 SİBER ZIRH: Vercel build esnasında useSession hata vermesin diye güvenli şekilde çekiyoruz.
+  const sessionData = useSession() || {};
+  const session = sessionData.data;
+  const status = sessionData.status || "loading";
+
   const router = useRouter();
   const [adim, setAdim] = useState(1);
   const [seciliSektor, setSeciliSektor] = useState<Sektor | null>(null);
@@ -153,6 +157,11 @@ export default function IlanVerPage() {
     acc[g].push(alan);
     return acc;
   }, {} as Record<string, FormAlan[]>) : {};
+
+  // 🚨 ZIRH: Eğer status 'loading' ise ve Vercel testi yapılıyorsa boş div dönerek çökmesini engelleriz
+  if (status === "loading") {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>Yükleniyor... ⏳</div>;
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
