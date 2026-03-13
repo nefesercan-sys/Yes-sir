@@ -311,18 +311,19 @@ export const SEKTORLER: Sektor[] = [
 ];
 
 // ═══════════════════════════════════════════
-// LOGLARDAKİ HATALARI ÇÖZEN EKSİK EXPORTLAR
+// DÜZELTME: KATEGORILER_ANA ARTIK BİR NESNE (INDEXLENEBİLİR)
 // ═══════════════════════════════════════════
 
-export const KATEGORILER_ANA = SEKTORLER;
+export const BIREYSEL_SEKTORLER = SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'her_ikisi');
+export const TICARI_SEKTORLER = SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'her_ikisi');
+export const TIGARI_SEKTORLER = TICARI_SEKTORLER; // Olası yazım hataları için alias
 
-export const BIREYSEL_SEKTORLER = SEKTORLER.filter(s => 
-  s.tip === 'bireysel' || s.tip === 'her_ikisi'
-);
-
-export const TICARI_SEKTORLER = SEKTORLER.filter(s => 
-  s.tip === 'ticari' || s.tip === 'her_ikisi'
-);
+// page.tsx dosyasındaki [aktifTip] kullanımını desteklemek için:
+export const KATEGORILER_ANA: Record<string, Sektor[]> = {
+  'bireysel': BIREYSEL_SEKTORLER,
+  'ticari': TICARI_SEKTORLER,
+  'Tümü': SEKTORLER
+};
 
 export const SEKTOR_MAP = Object.fromEntries(SEKTORLER.map(s => [s.id, s]));
 
