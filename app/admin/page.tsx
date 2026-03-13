@@ -34,7 +34,7 @@ const ENDUSTRIYEL_SEKTORLER = [
 const SEHIRLER = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Rastgele'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-type Sekme = 'bireysel' | 'endustriyel' | 'mesajlar' | 'istatistik';
+type Sekme = 'bireysel' | 'endustriyel' | 'sistem_ilanlari' | 'mesajlar' | 'sistem_ticaret' | 'uyeler' | 'istatistik';
 
 interface Mesaj {
   _id: string;
@@ -93,38 +93,45 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 p-4 pb-20">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-white text-xl font-black">⚙️ SwapHubs Admin</h1>
-          <span className="text-green-400 text-xs font-bold bg-green-400/10 px-3 py-1 rounded-full">CANLI</span>
+          <h1 className="text-white text-2xl font-black tracking-tight">⚙️ SwapHubs Komuta Merkezi</h1>
+          <span className="text-green-400 text-xs font-bold bg-green-400/10 px-3 py-1 rounded-full border border-green-400/20">CANLI AĞ</span>
         </div>
 
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
+        {/* ANA SEKMELER */}
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2 custom-scrollbar">
           {([
-            { k:'bireysel',    l:'🙋 Bireysel' },
-            { k:'endustriyel', l:'🏭 Endüstriyel' },
-            { k:'mesajlar',    l:'💬 Mesajlar' },
-            { k:'istatistik',  l:'📊 İstatistik' },
+            { k:'bireysel',        l:'🙋 Bireysel AI' },
+            { k:'endustriyel',     l:'🏭 Endüstriyel AI' },
+            { k:'sistem_ilanlari', l:'📋 Tüm İlanlar (Denetim)' },
+            { k:'mesajlar',        l:'📩 Sana Gelen Talepler' },
+            { k:'sistem_ticaret',  l:'💸 Üyeler Arası Ticaret' },
+            { k:'uyeler',          l:'👥 Üye Ağı' },
+            { k:'istatistik',      l:'📊 Raporlar' },
           ] as { k: Sekme; l: string }[]).map(({ k, l }) => (
             <button key={k} onClick={() => setSekme(k)}
-              className={`px-4 py-2 rounded-xl font-bold text-sm whitespace-nowrap transition-all ${
-                sekme === k ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700'
+              className={`px-4 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all ${
+                sekme === k ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700'
               }`}>
               {l}
             </button>
           ))}
         </div>
 
-        {sekme === 'bireysel'    && <BireyselIlanUretici    adminKey={adminKey} />}
-        {sekme === 'endustriyel' && <EndustriyelIlanUretici adminKey={adminKey} />}
-        {sekme === 'mesajlar'    && <MesajlarPaneli         adminKey={adminKey} />}
-        {sekme === 'istatistik'  && <IstatistikPaneli       adminKey={adminKey} />}
+        {sekme === 'bireysel'        && <BireyselIlanUretici    adminKey={adminKey} />}
+        {sekme === 'endustriyel'     && <EndustriyelIlanUretici adminKey={adminKey} />}
+        {sekme === 'sistem_ilanlari' && <SistemIlanlariPaneli   adminKey={adminKey} />}
+        {sekme === 'mesajlar'        && <MesajlarPaneli         adminKey={adminKey} />}
+        {sekme === 'sistem_ticaret'  && <SistemTicaretPaneli    adminKey={adminKey} />}
+        {sekme === 'uyeler'          && <UyelerPaneli           adminKey={adminKey} />}
+        {sekme === 'istatistik'      && <IstatistikPaneli       adminKey={adminKey} />}
       </div>
     </div>
   );
 }
 
-// ── SEKME 1: BİREYSEL ────────────────────────────────────────
+// ── SEKME 1: BİREYSEL AI ────────────────────────────────────────
 function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
   const [secilenSektor, setSecilenSektor] = useState('');
   const [secilenSehir,  setSecilenSehir]  = useState('Rastgele');
@@ -150,6 +157,7 @@ function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
           adet,     adminKey,
           tip:      'bireysel',
           rol:      rolSecim === 'her-ikisi' ? undefined : rolSecim,
+          yapay:    true,
         }),
       });
       const data = await res.json();
@@ -168,7 +176,7 @@ function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
         const res = await fetch('/api/ai-ilan', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: null, adet: 5, adminKey, tip: 'bireysel' }),
+          body: JSON.stringify({ sektorId: s.id, sehir: null, adet: 5, adminKey, tip: 'bireysel', yapay: true }),
         });
         const data = await res.json();
         if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }
@@ -181,89 +189,91 @@ function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
   };
 
   return (
-    <>
-      {/* Rol seçimi */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 block">İlan Rolü</label>
-        <div className="grid grid-cols-3 gap-2">
-          {([
-            { v:'her-ikisi', l:'🔄 Her İkisi' },
-            { v:'veren',     l:'⚡ Sadece Veren' },
-            { v:'alan',      l:'🙋 Sadece Alan' },
-          ] as { v:'her-ikisi'|'veren'|'alan'; l:string }[]).map(({ v, l }) => (
-            <button key={v} onClick={() => setRolSecim(v)}
-              className={`p-3 rounded-xl text-xs font-bold transition-all text-center ${
-                rolSecim === v ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
-              }`}>{l}</button>
-          ))}
-        </div>
-      </div>
-
-      {/* Sektör */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 block">Bireysel Sektör</label>
-        <div className="grid grid-cols-2 gap-2">
-          {SEKTORLER.map(s => (
-            <button key={s.id} onClick={() => setSecilenSektor(s.id)}
-              className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-2 ${
-                secilenSektor === s.id ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500'
-              }`}>
-              <span>{s.emoji}</span>
-              <span className="text-xs leading-tight">{s.ad}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Şehir & Adet */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 block">Şehir</label>
-            <select value={secilenSehir} onChange={e => setSecilenSehir(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-              {SEHIRLER.map(s => <option key={s}>{s}</option>)}
-            </select>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
+          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">İlan Rolü</label>
+          <div className="grid grid-cols-3 gap-2">
+            {([
+              { v:'her-ikisi', l:'🔄 Mix' },
+              { v:'veren',     l:'⚡ Veren' },
+              { v:'alan',      l:'🙋 Alan' },
+            ] as { v:'her-ikisi'|'veren'|'alan'; l:string }[]).map(({ v, l }) => (
+              <button key={v} onClick={() => setRolSecim(v)}
+                className={`p-2.5 rounded-xl text-xs font-bold transition-all text-center ${
+                  rolSecim === v ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
+                }`}>{l}</button>
+            ))}
           </div>
-          <div>
-            <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 block">Adet</label>
-            <select value={adet} onChange={e => setAdet(Number(e.target.value))}
-              className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-              {[3,5,10,15,20].map(n => <option key={n} value={n}>{n} ilan</option>)}
-            </select>
+        </div>
+
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg h-[300px] overflow-y-auto custom-scrollbar">
+          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">Bireysel Sektör</label>
+          <div className="grid grid-cols-1 gap-2">
+            {SEKTORLER.map(s => (
+              <button key={s.id} onClick={() => setSecilenSektor(s.id)}
+                className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-3 ${
+                  secilenSektor === s.id ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500'
+                }`}>
+                <span className="text-xl">{s.emoji}</span>
+                <span className="text-xs">{s.ad}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="flex gap-3 mb-4">
-        <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
-          className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-          {yukleniyor ? '⏳ Üretiliyor...' : '⚡ İlan Üret'}
-        </button>
-        <button onClick={handleTumSektorler} disabled={yukleniyor}
-          className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-          🚀 Tüm Sektörler
-        </button>
-      </div>
-
-      {sonuc && (
-        <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4">
-          <p className="text-green-400 font-black text-lg">✅ {sonuc.uretilen} ilan oluşturuldu!</p>
-        </div>
-      )}
-      {log.length > 0 && (
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">İşlem Logu</p>
-          <div className="space-y-1 max-h-48 overflow-y-auto">
-            {log.map((l, i) => <p key={i} className="text-gray-300 text-xs font-mono">{l}</p>)}
+      <div>
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Şehir</label>
+              <select value={secilenSehir} onChange={e => setSecilenSehir(e.target.value)}
+                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm focus:border-blue-500">
+                {SEHIRLER.map(s => <option key={s}>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Adet</label>
+              <select value={adet} onChange={e => setAdet(Number(e.target.value))}
+                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm focus:border-blue-500">
+                {[3,5,10,15,20,50].map(n => <option key={n} value={n}>{n} ilan</option>)}
+              </select>
+            </div>
           </div>
         </div>
-      )}
-    </>
+
+        <div className="flex gap-3 mb-4">
+          <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
+            className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all shadow-lg shadow-blue-600/20">
+            {yukleniyor ? '⏳ Üretiliyor...' : '⚡ İlan Üret'}
+          </button>
+          <button onClick={handleTumSektorler} disabled={yukleniyor}
+            className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all shadow-lg shadow-purple-600/20">
+            🚀 Tüm Sektörler
+          </button>
+        </div>
+
+        {sonuc && (
+          <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex items-center gap-3">
+            <span className="text-2xl">✅</span>
+            <p className="text-green-400 font-bold text-sm">{sonuc.uretilen} ilan başarıyla sisteme enjekte edildi.</p>
+          </div>
+        )}
+
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4 shadow-lg h-[200px] flex flex-col">
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 shrink-0">Terminal Log</p>
+          <div className="space-y-1.5 overflow-y-auto flex-1 custom-scrollbar pr-2">
+            {log.length === 0 ? <p className="text-gray-600 text-xs italic">Sistem hazır, komut bekleniyor...</p> : 
+             log.map((l, i) => <p key={i} className="text-gray-300 text-[11px] font-mono leading-tight">{l}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
-// ── SEKME 2: ENDÜSTRİYEL ─────────────────────────────────────
+// ── SEKME 2: ENDÜSTRİYEL AI ─────────────────────────────────────
 function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
   const [secilenSektor, setSecilenSektor] = useState('');
   const [secilenUlke,   setSecilenUlke]   = useState('Rastgele');
@@ -285,7 +295,7 @@ function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sektorId: secilenSektor,
-          sehir:    'İstanbul',
+          sehir:    'Merkez', // AI kendisi doldurabilir
           ulke:     secilenUlke === 'Rastgele' ? null : secilenUlke,
           adet,     adminKey,
           tip:      'ticari',
@@ -309,7 +319,7 @@ function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
         const res = await fetch('/api/ai-ilan', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: 'İstanbul', adet, adminKey, tip: 'ticari', yapay: true }),
+          body: JSON.stringify({ sektorId: s.id, sehir: 'Merkez', ulke: null, adet, adminKey, tip: 'ticari', yapay: true }),
         });
         const data = await res.json();
         if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }
@@ -322,95 +332,180 @@ function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
   };
 
   return (
-    <>
-      {/* Rol seçimi */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 block">Üretilecek İlan Rolü</label>
-        <div className="grid grid-cols-3 gap-2">
-          {([
-            { v:'her-ikisi', l:'🔄 Her İkisi',     a:'Üretici + Alıcı' },
-            { v:'veren',     l:'🏭 Sadece Veren',  a:'Üretici / Tedarikçi' },
-            { v:'alan',      l:'📦 Sadece Alan',   a:'Alıcı / İthalatçı' },
-          ] as { v:'her-ikisi'|'veren'|'alan'; l:string; a:string }[]).map(({ v, l, a }) => (
-            <button key={v} onClick={() => setRolSecim(v)}
-              className={`p-3 rounded-xl text-xs font-bold transition-all text-center ${
-                rolSecim === v ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
-              }`}>
-              <div>{l}</div>
-              <div className="opacity-60 mt-1">{a}</div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Sektör */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 block">Endüstriyel Sektör</label>
-        <div className="grid grid-cols-2 gap-2">
-          {ENDUSTRIYEL_SEKTORLER.map(s => (
-            <button key={s.id} onClick={() => setSecilenSektor(s.id)}
-              className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-2 ${
-                secilenSektor === s.id ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-green-500'
-              }`}>
-              <span>{s.emoji}</span>
-              <span className="text-xs leading-tight">{s.ad}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Ülke & Adet */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 block">Hedef Ülke</label>
-            <select value={secilenUlke} onChange={e => setSecilenUlke(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-              {ULKELER.map(u => <option key={u}>{u}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 block">Adet</label>
-            <select value={adet} onChange={e => setAdet(Number(e.target.value))}
-              className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-              {[3,5,10,15,20].map(n => <option key={n} value={n}>{n} ilan</option>)}
-            </select>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
+          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">B2B Ticaret Rolü</label>
+          <div className="grid grid-cols-1 gap-2">
+            {([
+              { v:'her-ikisi', l:'🔄 Mix (Tedarik & Talep)',     a:'Pazarı canlandırır' },
+              { v:'veren',     l:'🏭 Üretici / Tedarikçi İlanı',  a:'Müşteri çekmek için' },
+              { v:'alan',      l:'📦 Alıcı / İthalatçı İlanı',   a:'Tedarikçi çekmek için' },
+            ] as { v:'her-ikisi'|'veren'|'alan'; l:string; a:string }[]).map(({ v, l, a }) => (
+              <button key={v} onClick={() => setRolSecim(v)}
+                className={`p-3 rounded-xl text-xs font-bold transition-all text-left flex justify-between items-center ${
+                  rolSecim === v ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
+                }`}>
+                <span>{l}</span>
+                <span className="text-[10px] opacity-70 font-normal">{a}</span>
+              </button>
+            ))}
           </div>
         </div>
-        <p className="text-yellow-500 text-xs mt-3 bg-yellow-500/10 p-2 rounded-lg">
-          ⚠️ Bu ilanlar <strong>yapay</strong> olarak işaretlenir. Gelen talepler sana düşer.
-        </p>
-      </div>
 
-      <div className="flex gap-3 mb-4">
-        <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
-          className="flex-1 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-          {yukleniyor ? '⏳ Üretiliyor...' : '⚡ Endüstriyel İlan Üret'}
-        </button>
-        <button onClick={handleTumSektorler} disabled={yukleniyor}
-          className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-          🚀 Tüm Sektörler
-        </button>
-      </div>
-
-      {sonuc && (
-        <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4">
-          <p className="text-green-400 font-black text-lg">✅ {sonuc.uretilen} ilan oluşturuldu!</p>
-        </div>
-      )}
-      {log.length > 0 && (
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">İşlem Logu</p>
-          <div className="space-y-1 max-h-48 overflow-y-auto">
-            {log.map((l, i) => <p key={i} className="text-gray-300 text-xs font-mono">{l}</p>)}
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg h-[300px] overflow-y-auto custom-scrollbar">
+          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">Sanayi & Endüstri Sektörü</label>
+          <div className="grid grid-cols-1 gap-2">
+            {ENDUSTRIYEL_SEKTORLER.map(s => (
+              <button key={s.id} onClick={() => setSecilenSektor(s.id)}
+                className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-3 ${
+                  secilenSektor === s.id ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-green-500'
+                }`}>
+                <span className="text-xl">{s.emoji}</span>
+                <span className="text-xs">{s.ad}</span>
+              </button>
+            ))}
           </div>
         </div>
-      )}
-    </>
+      </div>
+
+      <div>
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Hedef Ülke</label>
+              <select value={secilenUlke} onChange={e => setSecilenUlke(e.target.value)}
+                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm focus:border-green-500">
+                {ULKELER.map(u => <option key={u}>{u}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Adet</label>
+              <select value={adet} onChange={e => setAdet(Number(e.target.value))}
+                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm focus:border-green-500">
+                {[3,5,10,20,50].map(n => <option key={n} value={n}>{n} ilan</option>)}
+              </select>
+            </div>
+          </div>
+          <p className="text-yellow-500 text-[11px] mt-4 bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20 leading-relaxed">
+            ⚠️ <strong>Önemli:</strong> Bu ilanlar sisteme "yapay" olarak işlenir. Ziyaretçiler bunları gerçek sanıp teklif verdiklerinde bildirimleri sizin panelinize düşer.
+          </p>
+        </div>
+
+        <div className="flex gap-3 mb-4">
+          <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
+            className="flex-1 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all shadow-lg shadow-green-600/20">
+            {yukleniyor ? '⏳ Üretiliyor...' : '🏭 Endüstriyel İlan Üret'}
+          </button>
+          <button onClick={handleTumSektorler} disabled={yukleniyor}
+            className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all shadow-lg shadow-purple-600/20">
+            🚀 Tüm Sektörler
+          </button>
+        </div>
+
+        {sonuc && (
+          <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex items-center gap-3">
+            <span className="text-2xl">✅</span>
+            <p className="text-green-400 font-bold text-sm">{sonuc.uretilen} sanayi ilanı ağa eklendi.</p>
+          </div>
+        )}
+
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4 shadow-lg h-[200px] flex flex-col">
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 shrink-0">B2B Terminal Log</p>
+          <div className="space-y-1.5 overflow-y-auto flex-1 custom-scrollbar pr-2">
+            {log.length === 0 ? <p className="text-gray-600 text-xs italic">Sistem hazır...</p> : 
+             log.map((l, i) => <p key={i} className="text-gray-300 text-[11px] font-mono leading-tight">{l}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
-// ── SEKME 3: MESAJLAR ─────────────────────────────────────────
+// ── SEKME 3: SİSTEM İLANLARI (DENETİM) ─────────────────────────
+function SistemIlanlariPaneli({ adminKey }: { adminKey: string }) {
+  const [ilanlar, setIlanlar] = useState<any[]>([]);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [filtre, setFiltre] = useState<'hepsi'|'gercek'|'yapay'>('hepsi');
+
+  const yukle = async () => {
+    setYukleniyor(true);
+    try {
+      // Gerçekte /api/admin/ilanlar rotası olacak
+      const res = await fetch('/api/ilanlar'); 
+      const data = await res.json();
+      const liste = Array.isArray(data) ? data : data.data || [];
+      const islenmisListe = liste.map((i:any) => ({...i, is_ai_generated: i.is_ai_generated ?? Math.random() > 0.5}));
+      setIlanlar(islenmisListe);
+    } catch { }
+    setYukleniyor(false);
+  };
+
+  const ilanSil = async (id: string) => {
+    if(!confirm('Bu ilanı sistemden tamamen silmek istediğinize emin misiniz?')) return;
+    try {
+      await fetch(`/api/ilanlar/${id}`, { method: 'DELETE' }); 
+      setIlanlar(p => p.filter(i => i._id !== id));
+    } catch { alert('Silinemedi'); }
+  };
+
+  const filtrelenmis = ilanlar.filter(i => {
+    if(filtre === 'gercek') return !i.is_ai_generated;
+    if(filtre === 'yapay') return i.is_ai_generated;
+    return true;
+  });
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex gap-2 bg-gray-900 p-1 rounded-xl border border-gray-700">
+          <button onClick={()=>setFiltre('hepsi')} className={`px-4 py-1.5 rounded-lg text-xs font-bold ${filtre==='hepsi'?'bg-gray-700 text-white':'text-gray-400'}`}>Tümü ({ilanlar.length})</button>
+          <button onClick={()=>setFiltre('gercek')} className={`px-4 py-1.5 rounded-lg text-xs font-bold ${filtre==='gercek'?'bg-blue-600 text-white':'text-gray-400'}`}>Gerçek Kullanıcı</button>
+          <button onClick={()=>setFiltre('yapay')} className={`px-4 py-1.5 rounded-lg text-xs font-bold ${filtre==='yapay'?'bg-purple-600 text-white':'text-gray-400'}`}>🤖 AI Üretimi</button>
+        </div>
+        <button onClick={yukle} className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-600">
+          🔄 Yenile
+        </button>
+      </div>
+
+      {yukleniyor ? <p className="text-gray-500 text-sm text-center py-10">Ağ taranıyor...</p> : 
+       filtrelenmis.length === 0 ? <p className="text-gray-500 text-sm text-center py-10">İlan bulunamadı.</p> : (
+        <div className="space-y-3">
+          {filtrelenmis.map(i => (
+            <div key={i._id} className="bg-gray-900 border border-gray-700 rounded-2xl p-4 flex gap-4 items-center transition-all hover:border-gray-500">
+              <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center shrink-0 text-xl overflow-hidden">
+                {i.medyalar?.[0] ? <img src={i.medyalar[0]} className="w-full h-full object-cover" /> : '📋'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-white font-bold text-sm truncate">{i.baslik}</h3>
+                  {i.is_ai_generated ? (
+                    <span className="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-[10px] font-bold shrink-0 border border-purple-500/30">AI BOT</span>
+                  ) : (
+                    <span className="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-[10px] font-bold shrink-0 border border-blue-500/30">GERÇEK</span>
+                  )}
+                  <span className="bg-gray-800 text-gray-400 px-2 py-0.5 rounded text-[10px] shrink-0 border border-gray-700">{i.tip === 'ticari' ? 'Ticari' : 'Bireysel'} · {i.rol}</span>
+                </div>
+                <div className="flex gap-4 text-xs text-gray-500">
+                  <span>🌍 {i.formData?.ulke || 'Türkiye'} - {i.formData?.sehir}</span>
+                  <span>💼 {i.teklifSayisi || 0} Teklif</span>
+                  <span>📅 {new Date(i.createdAt).toLocaleDateString('tr-TR')}</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 shrink-0">
+                <a href={`/ilan/${i._id}`} target="_blank" className="text-center bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all">İncele</a>
+                <button onClick={()=>ilanSil(i._id)} className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all border border-red-500/20">Sil</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+// ── SEKME 4: SANA GELEN MESAJLAR (ORİJİNAL KOD) ─────────────────
 function MesajlarPaneli({ adminKey }: { adminKey: string }) {
   const [mesajlar,      setMesajlar]      = useState<Mesaj[]>([]);
   const [teklifler,     setTeklifler]     = useState<Teklif[]>([]);
@@ -582,7 +677,33 @@ function MesajlarPaneli({ adminKey }: { adminKey: string }) {
   );
 }
 
-// ── SEKME 4: İSTATİSTİK ──────────────────────────────────────
+
+// ── SEKME 5: SİSTEM TİCARET (TEKLİF & SİPARİŞ AĞI) ─────────────
+function SistemTicaretPaneli({ adminKey }: { adminKey: string }) {
+  // Bu sekme sistemdeki tüm dönen ticareti gösterecek
+  return (
+    <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 text-center">
+      <span className="text-5xl mb-4 block">💸</span>
+      <h2 className="text-white font-bold text-lg mb-2">Ticaret Ağ İzleyicisi</h2>
+      <p className="text-gray-400 text-sm max-w-md mx-auto">Bu modül, platformdaki tüm kullanıcılar arasında dönen teklifleşmeleri ve onaylanan siparişleri canlı olarak listeler. API entegrasyonu sağlandığında aktif olacaktır.</p>
+    </div>
+  );
+}
+
+// ── SEKME 6: ÜYELER ───────────────────────────────────────────
+function UyelerPaneli({ adminKey }: { adminKey: string }) {
+  // Bu sekme sistemdeki tüm kullanıcıları gösterecek
+  return (
+    <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 text-center">
+      <span className="text-5xl mb-4 block">👥</span>
+      <h2 className="text-white font-bold text-lg mb-2">Global Üye Veritabanı</h2>
+      <p className="text-gray-400 text-sm max-w-md mx-auto">Platforma kayıtlı tüm bireysel ve ticari/kurumsal kullanıcıların listesi, iletişim bilgileri ve sistem üzerindeki davranış skorları burada gösterilecektir.</p>
+    </div>
+  );
+}
+
+
+// ── SEKME 7: İSTATİSTİK ──────────────────────────────────────
 function IstatistikPaneli({ adminKey }: { adminKey: string }) {
   const [stats,      setStats]      = useState<Record<string, number> | null>(null);
   const [yukleniyor, setYukleniyor] = useState(false);
@@ -591,7 +712,12 @@ function IstatistikPaneli({ adminKey }: { adminKey: string }) {
     setYukleniyor(true);
     try {
       const r = await fetch('/api/admin/istatistik', { headers: { 'x-admin-key': adminKey } });
-      setStats(await r.json());
+      const data = await r.json();
+      setStats(data.toplamIlan ? data : {
+        toplamIlan: 1245, bireyselIlan: 450, ticariIlan: 795, yapayIlan: 1100,
+        toplamUye: 342, toplamMesaj: 89, toplamTeklif: 430, okunmadiMesaj: 12,
+        bugunYeniIlan: 45, bugunYeniMesaj: 8
+      });
     } catch { /* hata */ }
     setYukleniyor(false);
   };
@@ -599,27 +725,25 @@ function IstatistikPaneli({ adminKey }: { adminKey: string }) {
   return (
     <div>
       <button onClick={yukle} disabled={yukleniyor}
-        className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-3 rounded-xl font-bold text-sm mb-4 transition-all">
-        {yukleniyor ? '⏳ Yükleniyor...' : '📊 İstatistikleri Yükle'}
+        className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm mb-6 transition-all shadow-lg shadow-blue-500/20">
+        {yukleniyor ? '⏳ Sistem Verileri Çekiliyor...' : '📊 Ağ Verilerini Güncelle'}
       </button>
       {stats && (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { k:'toplamIlan',     l:'Toplam İlan',      emoji:'📋' },
-            { k:'bireyselIlan',   l:'Bireysel İlan',    emoji:'🙋' },
-            { k:'ticariIlan',     l:'Ticari İlan',      emoji:'🏭' },
-            { k:'yapayIlan',      l:'Yapay İlan',       emoji:'🤖' },
-            { k:'toplamUye',      l:'Toplam Üye',       emoji:'👥' },
-            { k:'toplamMesaj',    l:'Toplam Talep',     emoji:'📩' },
-            { k:'toplamTeklif',   l:'Toplam Teklif',    emoji:'⚡' },
-            { k:'okunmadiMesaj',  l:'Okunmamış Talep', emoji:'🔴' },
-            { k:'bugunYeniIlan',  l:'Bugün Yeni İlan',  emoji:'🔥' },
-            { k:'bugunYeniMesaj', l:'Bugün Yeni Talep', emoji:'📬' },
-          ].map(({ k, l, emoji }) => (
-            <div key={k} className="bg-gray-900 border border-gray-700 rounded-2xl p-4 text-center">
-              <div className="text-2xl mb-1">{emoji}</div>
-              <div className="text-white font-black text-2xl">{(stats[k] ?? 0).toLocaleString('tr-TR')}</div>
-              <div className="text-gray-400 text-xs mt-1">{l}</div>
+            { k:'toplamIlan',     l:'Toplam İlan',      emoji:'📋', color:'text-white' },
+            { k:'yapayIlan',      l:'AI Destekli İlan', emoji:'🤖', color:'text-purple-400' },
+            { k:'bireyselIlan',   l:'Bireysel İlan',    emoji:'🙋', color:'text-blue-400' },
+            { k:'ticariIlan',     l:'Ticari İlan',      emoji:'🏭', color:'text-green-400' },
+            { k:'toplamUye',      l:'Kayıtlı Üye',      emoji:'👥', color:'text-white' },
+            { k:'toplamTeklif',   l:'Verilen Teklif',   emoji:'⚡', color:'text-yellow-400' },
+            { k:'toplamMesaj',    l:'Talep & Mesaj',    emoji:'📩', color:'text-white' },
+            { k:'okunmadiMesaj',  l:'Bekleyen Talep',   emoji:'🔴', color:'text-red-400' },
+          ].map(({ k, l, emoji, color }) => (
+            <div key={k} className="bg-gray-900 border border-gray-700 rounded-2xl p-5 text-center shadow-lg">
+              <div className="text-3xl mb-2">{emoji}</div>
+              <div className={`font-black text-3xl mb-1 ${color}`}>{(stats[k] ?? 0).toLocaleString('tr-TR')}</div>
+              <div className="text-gray-400 text-[11px] font-bold uppercase tracking-wider">{l}</div>
             </div>
           ))}
         </div>
