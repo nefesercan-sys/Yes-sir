@@ -1,4 +1,3 @@
-
 export interface Country {
   code: string;
   name: string;
@@ -48,4 +47,11 @@ export const COUNTRIES: Country[] = [
   {
     code: 'ES', name: 'İspanya', flag: '🇪🇸', phone: '+34',
     cities: ['Madrid','Barselona','Valencia','Sevilla','Zaragoza','Malaga','Murcia','Palma','Las Palmas','Bilbao','Alicante','Córdoba','Valladolid','Vigo','Gijón']
-  },
+  }
+];
+
+// Ülke koduna göre şehirleri döndüren fonksiyon
+export function getCitiesForCountry(code: string): string[] {
+  const country = COUNTRIES.find((c) => c.code === code);
+  return country?.cities || [];
+}
