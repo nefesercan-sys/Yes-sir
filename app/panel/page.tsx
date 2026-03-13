@@ -2,9 +2,8 @@
 import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 
-type Tab = 'ozet' | 'ilanlarim' | 'tekliflerim' | 'rezervasyonlar' | 'bildirimler' | 'profil' | 'ayarlar' | 'ai_ilan';
+type Tab = 'ozet' | 'ilanlarim' | 'tekliflerim' | 'rezervasyonlar' | 'mesajlar' | 'bildirimler' | 'profil' | 'ayarlar' | 'ai_ilan';
 type Rol = 'alan' | 'veren';
 type Tip = 'bireysel' | 'ticari';
 
@@ -23,6 +22,7 @@ function PanelIcerik() {
   const sessionData = useSession() || {};
   const session = sessionData.data;
   const status = sessionData.status || "loading";
+  const isAdmin = session?.user?.email === 'nefesercan@gmail.com';
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -36,12 +36,18 @@ function PanelIcerik() {
   const [teklifler, setTeklifler] = useState<any[]>([]);
   const [rezervasyonlar, setRezervasyonlar] = useState<any[]>([]);
   const [bildirimler, setBildirimler] = useState<any[]>([]);
+  
+  // 💬 MESAJLAŞMA STATE'LERİ
+  const [sohbetler, setSohbetler] = useState<any[]>([]);
+  const [aktifSohbet, setAktifSohbet] = useState<string | null>(null);
+  const [mesajMetni, setMesajMetni] = useState('');
+
   const [profil, setProfil] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     aktifIlan: 0, bekleyenTeklif: 0,
     aktifRezv: 0, okunmamisBildirim: 0,
-    toplamTeklif: 0, kabul: 0,
+    toplamTeklif: 0, kabul: 0, okunmamisMesaj: 0
   });
   
   const [aiSektor, setAiSektor] = useState('turizm');
@@ -64,7 +70,6 @@ function PanelIcerik() {
       ]);
       
       const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.data || [];
-      // 🧠 Aktif Şaltere göre ilanları filtreliyoruz
       const filtrelenmisIlanlar = tumIlanlar.filter((i: any) => i.rol === rol && i.tip === tip);
       
       const tL = Array.isArray(teklifD) ? teklifD : [];
@@ -76,6 +81,12 @@ function PanelIcerik() {
       setRezervasyonlar(rL); 
       setBildirimler(bL);
       
+      // MOCK SOHBET VERİSİ (Arayüzü görmek için, /api/mesajlar yapılana kadar)
+      setSohbetler([
+        { id: '1', karsiTaraf: 'Ahmet Yılmaz', ilanBaslik: 'Fason Tekstil Üretimi', sonMesaj: 'Teklifinizi detaylandırabilir misiniz?', okunduMu: false, tarih: new Date().toISOString() },
+        { id: '2', karsiTaraf: 'Vip Turizm A.Ş.', ilanBaslik: 'Antalya Otel Rezervasyonu', sonMesaj: 'Rezervasyon onaylanmıştır, teşekkürler.', okunduMu: true, tarih: new Date(Date.now() - 86400000).toISOString() }
+      ]);
+
       setStats({
         aktifIlan: filtrelenmisIlanlar.filter((i: any) => i.durum === 'aktif').length,
         bekleyenTeklif: tL.filter((t: any) => t.durum === 'bekliyor').length,
@@ -83,6 +94,7 @@ function PanelIcerik() {
         okunmamisBildirim: bL.filter((b: any) => !b.okundu).length,
         toplamTeklif: tL.length,
         kabul: tL.filter((t: any) => t.durum === 'kabul_edildi').length,
+        okunmamisMesaj: 1
       });
       const u = await fetch('/api/otel-profil');
       if (u.ok) { const d = await u.json(); if (d.otelAdi) setProfil(d); }
@@ -113,6 +125,14 @@ function PanelIcerik() {
     setStats(p => ({ ...p, okunmamisBildirim: 0 }));
   };
 
+  const mesajGonder = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(!mesajMetni.trim()) return;
+    // API bağlantısı yapılana kadar mock alert
+    alert('Mesaj gönderildi: ' + mesajMetni);
+    setMesajMetni('');
+  };
+
   const aiIlanOlustur = async () => {
     setAiYukleniyor(true);
     setAiSonuc('');
@@ -124,7 +144,6 @@ function PanelIcerik() {
           sektorId: aiSektor,
           sehir: aiSehir,
           adet: aiAdet,
-          // AI'a şu anki modumuzu da gönderiyoruz (bireysel/ticari, alan/veren)
           tip: tip,
           rol: rol,
           adminKey: process.env.NEXT_PUBLIC_ADMIN_KEY,
@@ -149,17 +168,20 @@ function PanelIcerik() {
   
   if (!session) return null;
 
-  // 🚨 AI SEKME KISITLAMASI KALDIRILDI! Artık her modda görünecek.
   const tabs: { key: Tab; label: string; icon: string; badge?: number }[] = [
     { key: 'ozet', label: 'Özet', icon: '📊' },
     { key: 'ilanlarim', label: rol === 'alan' ? 'Taleplerim' : 'İlanlarım', icon: '📋', badge: stats.aktifIlan },
     { key: 'tekliflerim', label: 'Tekliflerim', icon: '💼', badge: stats.bekleyenTeklif },
     { key: 'rezervasyonlar', label: 'Siparişler', icon: '📅', badge: stats.aktifRezv },
+    { key: 'mesajlar', label: 'Mesajlarım', icon: '💬', badge: stats.okunmamisMesaj },
     { key: 'bildirimler', label: 'Bildirimler', icon: '🔔', badge: stats.okunmamisBildirim },
     { key: 'profil', label: 'Profil', icon: '🏨' },
     { key: 'ayarlar', label: 'Ayarlar', icon: '⚙️' },
-    { key: 'ai_ilan', label: 'AI İlan', icon: '🤖' }, // <--- ARTIK HER ZAMAN BURADA!
   ];
+
+  if (isAdmin) {
+    tabs.push({ key: 'ai_ilan', label: 'AI İlan Paneli', icon: '🤖' });
+  }
 
   return (
     <>
@@ -169,8 +191,10 @@ function PanelIcerik() {
           <span style={{ color: 'white', fontSize: '16px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }}>🌐 SwapHubs Panel</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {stats.okunmamisBildirim > 0 && (
-            <div style={{ background: '#dc2626', color: 'white', borderRadius: '999px', padding: '2px 7px', fontSize: '11px', fontWeight: '700' }}>🔔 {stats.okunmamisBildirim}</div>
+          {(stats.okunmamisBildirim > 0 || stats.okunmamisMesaj > 0) && (
+            <div style={{ background: '#dc2626', color: 'white', borderRadius: '999px', padding: '2px 7px', fontSize: '11px', fontWeight: '700' }}>
+              🔔 {stats.okunmamisBildirim + stats.okunmamisMesaj}
+            </div>
           )}
           <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || 'U')}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: '30px', height: '30px', borderRadius: '50%', border: '2px solid rgba(245,158,11,0.4)' }} />
           <button onClick={() => signOut()} style={{ background: 'rgba(255,255,255,0.08)', border: 'none', color: 'rgba(255,255,255,0.6)', padding: '5px 10px', borderRadius: '8px', cursor: 'pointer', fontSize: '11px', fontFamily: 'inherit' }}>Çıkış</button>
@@ -230,7 +254,7 @@ function PanelIcerik() {
                   { l: 'Aktif İlan', v: stats.aktifIlan, i: '📋', c: '#2563eb' },
                   { l: 'Bekleyen Teklif', v: stats.bekleyenTeklif, i: '💼', c: '#d97706' },
                   { l: 'Aktif Sipariş.', v: stats.aktifRezv, i: '📅', c: '#7c3aed' },
-                  { l: 'Toplam Teklif', v: stats.toplamTeklif, i: '📊', c: '#059669' },
+                  { l: 'Okunmamış Mesaj', v: stats.okunmamisMesaj, i: '💬', c: '#059669' },
                 ].map(s => (
                   <div key={s.l} className="stat-card">
                     <p style={{ fontSize: '22px', marginBottom: '6px' }}>{s.i}</p>
@@ -344,7 +368,10 @@ function PanelIcerik() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
                       <span className="dur" style={{ background: DURUM_STILLER[t.durum]?.bg || '#f1f5f9', color: DURUM_STILLER[t.durum]?.c || '#64748b' }}>{t.durum}</span>
-                      <button onClick={() => router.push(`/ilan/${t.ilanId}`)} style={{ padding: '5px 10px', borderRadius: '7px', background: '#eff6ff', border: 'none', color: '#2563eb', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>İlana Git</button>
+                      <div style={{ display: 'flex', gap: '6px' }}>
+                        <button onClick={() => { setAktifTab('mesajlar'); setAktifSohbet(t.ilanId); }} style={{ padding: '5px 10px', borderRadius: '7px', background: '#f0fdf4', border: 'none', color: '#16a34a', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>💬 Mesaj</button>
+                        <button onClick={() => router.push(`/ilan/${t.ilanId}`)} style={{ padding: '5px 10px', borderRadius: '7px', background: '#eff6ff', border: 'none', color: '#2563eb', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>İlana Git</button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -372,9 +399,81 @@ function PanelIcerik() {
                         {r.formData?.tatilTarihi_bas && <span>🗓 {r.formData.tatilTarihi_bas}</span>}
                       </div>
                     </div>
-                    <span className="dur" style={{ background: DURUM_STILLER[r.durum]?.bg || '#f1f5f9', color: DURUM_STILLER[r.durum]?.c || '#64748b' }}>{r.durum}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                      <span className="dur" style={{ background: DURUM_STILLER[r.durum]?.bg || '#f1f5f9', color: DURUM_STILLER[r.durum]?.c || '#64748b' }}>{r.durum}</span>
+                      <button onClick={() => { setAktifTab('mesajlar'); setAktifSohbet(r._id); }} style={{ padding: '5px 10px', borderRadius: '7px', background: '#f0fdf4', border: 'none', color: '#16a34a', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>💬 Mesaja Git</button>
+                    </div>
                   </div>
                 ))}
+            </div>
+          )}
+
+          {aktifTab === 'mesajlar' && (
+            <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 200px)' }}>
+              <p className="sttl">İletişim & Mesajlarım</p>
+              <div style={{ display: 'flex', flex: 1, background: 'white', borderRadius: '18px', border: '1.5px solid #e2e8f0', overflow: 'hidden' }}>
+                
+                {/* SOL: SOHBET LİSTESİ */}
+                <div style={{ width: '320px', borderRight: '1.5px solid #e2e8f0', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ padding: '16px', borderBottom: '1px solid #f1f5f9' }}>
+                    <input type="text" placeholder="Kişi veya ilan ara..." style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: 'none', background: '#f8fafc', fontSize: '13px', outline: 'none' }} />
+                  </div>
+                  <div style={{ flex: 1, overflowY: 'auto' }}>
+                    {sohbetler.map(s => (
+                      <div key={s.id} onClick={() => setAktifSohbet(s.id)} style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', cursor: 'pointer', background: aktifSohbet === s.id ? '#eff6ff' : 'white', transition: '0.15s' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{s.karsiTaraf}</span>
+                          <span style={{ fontSize: '10px', color: '#94a3b8' }}>{new Date(s.tarih).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                        <p style={{ fontSize: '11px', color: '#2563eb', fontWeight: '600', marginBottom: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>📌 {s.ilanBaslik}</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <p style={{ fontSize: '12px', color: s.okunduMu ? '#64748b' : '#0f172a', fontWeight: s.okunduMu ? '400' : '600', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '85%' }}>{s.sonMesaj}</p>
+                          {!s.okunduMu && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#dc2626' }} />}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* SAĞ: AKTİF SOHBET PENCERESİ */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+                  {aktifSohbet ? (
+                    <>
+                      {/* Sohbet Üst Bar */}
+                      <div style={{ padding: '16px', background: 'white', borderBottom: '1.5px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                          <p style={{ fontSize: '15px', fontWeight: '700', color: '#0f172a' }}>{sohbetler.find(s=>s.id === aktifSohbet)?.karsiTaraf}</p>
+                          <p style={{ fontSize: '12px', color: '#64748b' }}>İlgili İlan: {sohbetler.find(s=>s.id === aktifSohbet)?.ilanBaslik}</p>
+                        </div>
+                        <button onClick={() => router.push(`/ilan/${aktifSohbet}`)} style={{ padding: '6px 12px', borderRadius: '8px', background: '#eff6ff', border: '1px solid #bfdbfe', color: '#2563eb', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>İlanı Gör</button>
+                      </div>
+
+                      {/* Mesaj Akışı (Şimdilik Demo) */}
+                      <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <div style={{ alignSelf: 'flex-start', maxWidth: '70%', background: 'white', padding: '12px 16px', borderRadius: '16px', borderTopLeftRadius: '4px', border: '1px solid #e2e8f0' }}>
+                          <p style={{ fontSize: '13px', color: '#0f172a', lineHeight: '1.5' }}>Merhaba, ilanınızla ilgileniyorum. Detayları görüşebilir miyiz?</p>
+                          <span style={{ fontSize: '10px', color: '#94a3b8', display: 'block', marginTop: '6px', textAlign: 'right' }}>14:30</span>
+                        </div>
+                        <div style={{ alignSelf: 'flex-end', maxWidth: '70%', background: '#2563eb', padding: '12px 16px', borderRadius: '16px', borderTopRightRadius: '4px', color: 'white' }}>
+                          <p style={{ fontSize: '13px', lineHeight: '1.5' }}>Tabii ki, bütçe beklentiniz nedir?</p>
+                          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.7)', display: 'block', marginTop: '6px', textAlign: 'right' }}>14:32</span>
+                        </div>
+                      </div>
+
+                      {/* Mesaj Gönderme Çubuğu */}
+                      <form onSubmit={mesajGonder} style={{ padding: '16px', background: 'white', borderTop: '1.5px solid #e2e8f0', display: 'flex', gap: '10px' }}>
+                        <input type="text" value={mesajMetni} onChange={(e) => setMesajMetni(e.target.value)} placeholder="Mesajınızı yazın..." style={{ flex: 1, padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #e2e8f0', fontSize: '14px', outline: 'none', background: '#f8fafc' }} />
+                        <button type="submit" style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#2563eb', border: 'none', color: 'white', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>➤</button>
+                      </form>
+                    </>
+                  ) : (
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
+                      <span style={{ fontSize: '48px', marginBottom: '16px' }}>💬</span>
+                      <p style={{ fontSize: '15px', fontWeight: '600' }}>Sohbete Başlamak İçin Kişi Seçin</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           )}
 
