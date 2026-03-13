@@ -1,79 +1,141 @@
 'use client';
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
-function GirisForm() {
-  const router = useRouter();
+function GirisIcerik() {
+  const router       = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/panel';
-  const [form, setForm] = useState({ email: '', sifre: '' });
+  const [form, setForm]           = useState({ email: '', sifre: '' });
   const [yukleniyor, setYukleniyor] = useState(false);
-  const [hata, setHata] = useState('');
+  const [hata, setHata]           = useState('');
+  const [basari, setBasari]       = useState('');
 
-  const handleGiris = async () => {
-    if (!form.email || !form.sifre) { setHata('E-posta ve şifre zorunludur.'); return; }
-    setYukleniyor(true); setHata('');
-    const r = await signIn('credentials', { email: form.email, password: form.sifre, redirect: false });
-    if (r?.ok) router.push(redirect);
-    else { setHata('E-posta veya şifre hatalı.'); setYukleniyor(false); }
+  useEffect(() => {
+    if (searchParams.get('kayit') === 'ok') {
+      setBasari('Kayıt başarılı! Şimdi giriş yapabilirsiniz.');
+    }
+    if (searchParams.get('sifre') === 'ok') {
+      setBasari('Şifreniz güncellendi. Giriş yapabilirsiniz.');
+    }
+  }, [searchParams]);
+
+  const setF = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
+
+  const girisYap = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setHata(''); setYukleniyor(true);
+    const sonuc = await signIn('credentials', {
+      email:    form.email,
+      password: form.sifre,
+      redirect: false,
+    });
+    setYukleniyor(false);
+    if (sonuc?.ok) {
+      const callbackUrl = searchParams.get('callbackUrl') ?? '/panel';
+      router.push(callbackUrl);
+    } else {
+      setHata('E-posta veya şifre hatalı.');
+    }
   };
 
-  const inp = { width: '100%', padding: '12px 14px', borderRadius: '11px', border: '1.5px solid #e2e8f0', fontSize: '14px', fontFamily: 'inherit', outline: 'none', color: '#0f172a' };
-
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');`}</style>
-      <div style={{ background: 'white', borderRadius: '24px', padding: '36px 32px', width: '100%', maxWidth: '400px', boxShadow: '0 24px 64px rgba(0,0,0,0.3)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <div onClick={() => router.push('/')} style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <span style={{ fontSize: '28px' }}>🌐</span>
-            <span style={{ fontSize: '20px', fontWeight: '800', fontFamily: 'Playfair Display, serif', color: '#0f172a' }}>HizmetAra</span>
+    <div style={wrap}>
+      <div style={kart}>
+        <div style={logo}>
+          <span style={logoBadge}>S</span>
+          <span>Swap<span style={{ color: '#e8361a' }}>Hubs</span></span>
+        </div>
+        <h1 style={baslik}>Giriş Yap</h1>
+        <p style={altyazi}>Hesabınıza giriş yapın</p>
+
+        {basari && (
+          <div style={{ background: '#edfaf3', border: '1px solid #a8eaca',
+            color: '#0d6e3f', borderRadius: 10, padding: '10px 14px',
+            fontSize: '.83rem', marginBottom: 14 }}>
+            ✅ {basari}
           </div>
-          <h1 style={{ fontSize: '22px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>Giriş Yap</h1>
-          <p style={{ fontSize: '13px', color: '#94a3b8' }}>Hesabınıza giriş yapın</p>
-        </div>
+        )}
+        {hata && <div style={hataKutu}>❌ {hata}</div>}
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '8px' }}>
-          <input type="email" placeholder="E-posta" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} style={inp} />
-          <input type="password" placeholder="Şifre" value={form.sifre} onChange={e => setForm(p => ({ ...p, sifre: e.target.value }))}
-            onKeyDown={e => e.key === 'Enter' && handleGiris()} style={inp} />
-        </div>
+        <form onSubmit={girisYap} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div>
+            <label style={lbl}>E-posta</label>
+            <input style={inp} type="email" required placeholder="email@domain.com"
+              value={form.email} onChange={e => setF('email', e.target.value)} />
+          </div>
+          <div>
+            <label style={lbl}>Şifre</label>
+            <input style={inp} type="password" required placeholder="Şifreniz"
+              value={form.sifre} onChange={e => setF('sifre', e.target.value)} />
+            <div style={{ textAlign: 'right', marginTop: 6 }}>
+              <Link href="/sifre-sifirla"
+                style={{ fontSize: '.75rem', color: '#e8361a', fontWeight: 600 }}>
+                Şifremi Unuttum
+              </Link>
+            </div>
+          </div>
 
-        <div style={{ textAlign: 'right', marginBottom: '16px' }}>
-          <span onClick={() => router.push('/sifremi-unuttum')} style={{ fontSize: '12px', color: '#2563eb', cursor: 'pointer', fontWeight: '600' }}>
-            Şifremi Unuttum
-          </span>
-        </div>
+          <button type="submit" disabled={yukleniyor} style={btnPrimary}>
+            {yukleniyor ? '⏳ Giriş yapılıyor...' : '🔐 Giriş Yap'}
+          </button>
+        </form>
 
-        {hata && <div style={{ padding: '10px 14px', borderRadius: '10px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '13px', marginBottom: '14px' }}>{hata}</div>}
-
-        <button onClick={handleGiris} disabled={yukleniyor}
-          style={{ width: '100%', padding: '13px', borderRadius: '12px', background: yukleniyor ? '#94a3b8' : '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '14px', fontWeight: '700', cursor: yukleniyor ? 'not-allowed' : 'pointer', marginBottom: '16px' }}>
-          {yukleniyor ? 'Giriş yapılıyor...' : '🚀 Giriş Yap'}
-        </button>
-
-        <button onClick={() => signIn('google', { callbackUrl: redirect })}
-          style={{ width: '100%', padding: '12px', borderRadius: '12px', background: 'white', border: '1.5px solid #e2e8f0', color: '#0f172a', fontFamily: 'inherit', fontSize: '13px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '20px' }}>
-          <img src="https://www.google.com/favicon.ico" alt="" style={{ width: '16px', height: '16px' }} />
-          Google ile Giriş Yap
-        </button>
-
-        <div style={{ textAlign: 'center', fontSize: '13px', color: '#64748b' }}>
+        <p style={altLink}>
           Hesabın yok mu?{' '}
-          <span onClick={() => router.push('/kayit')} style={{ color: '#2563eb', fontWeight: '700', cursor: 'pointer' }}>Kayıt Ol</span>
-        </div>
+          <Link href="/kayt" style={{ color: '#e8361a', fontWeight: 700 }}>Üye Ol</Link>
+        </p>
       </div>
     </div>
   );
 }
 
-export default function GirisPage() {
-  return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%)', fontFamily: 'Inter, sans-serif' }}>
-      <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'white' }}>Yükleniyor...</div>}>
-        <GirisForm />
-      </Suspense>
-    </div>
-  );
+export default function GirisSayfasi() {
+  return <Suspense><GirisIcerik /></Suspense>;
 }
+
+const wrap: React.CSSProperties = {
+  minHeight: '100vh', background: 'linear-gradient(135deg,#0d1b3e 0%,#1a2d5a 60%,#0a1628 100%)',
+  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
+};
+const kart: React.CSSProperties = {
+  background: '#fff', borderRadius: 24, padding: '40px 36px',
+  width: '100%', maxWidth: 420, boxShadow: '0 24px 64px rgba(0,0,0,.25)',
+};
+const logo: React.CSSProperties = {
+  display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24,
+  fontFamily: "'Unbounded',sans-serif", fontWeight: 900, fontSize: '1.1rem',
+};
+const logoBadge: React.CSSProperties = {
+  background: '#e8361a', color: '#fff', width: 32, height: 32,
+  borderRadius: 8, display: 'flex', alignItems: 'center',
+  justifyContent: 'center', fontSize: '.9rem', fontWeight: 900, flexShrink: 0,
+};
+const baslik: React.CSSProperties = {
+  fontFamily: "'Unbounded',sans-serif", fontWeight: 900,
+  fontSize: '1.5rem', marginBottom: 6, letterSpacing: '-.02em',
+};
+const altyazi: React.CSSProperties = {
+  color: '#6b6984', fontSize: '.85rem', marginBottom: 24, lineHeight: 1.5,
+};
+const hataKutu: React.CSSProperties = {
+  background: '#fff3f0', border: '1px solid #f5c4bc', color: '#c0200a',
+  borderRadius: 10, padding: '10px 14px', fontSize: '.83rem', marginBottom: 14,
+};
+const lbl: React.CSSProperties = {
+  display: 'block', fontSize: '.73rem', fontWeight: 700, color: '#6b6984', marginBottom: 5,
+};
+const inp: React.CSSProperties = {
+  width: '100%', border: '1.5px solid #e4e1db', borderRadius: 10,
+  padding: '11px 14px', fontSize: '.9rem', fontFamily: 'inherit',
+  outline: 'none', color: '#080811', background: '#faf9f7', boxSizing: 'border-box',
+};
+const btnPrimary: React.CSSProperties = {
+  width: '100%', background: '#e8361a', color: '#fff', border: 'none',
+  padding: '14px', borderRadius: 40, fontWeight: 700, fontSize: '.95rem',
+  cursor: 'pointer', fontFamily: 'inherit', marginTop: 4,
+};
+const altLink: React.CSSProperties = {
+  textAlign: 'center', fontSize: '.83rem', color: '#6b6984', marginTop: 20,
+};
