@@ -114,19 +114,26 @@ function IlanDetayIcerik({ id }: { id: string }) {
   const sektorAd = ilan.kategoriAd ?? SEKTOR_ADLARI[ilan.sektorId] ?? ilan.sektorId;
   const birim    = ilan.butceBirimi ?? '₺';
 
+  // SİSTEM İÇİ MESAJLAŞMA FONKSİYONU
+  const handleSohbetBaslat = () => {
+    // Kullanıcıyı SwapHubs paneline (Mesajlar sekmesine) ilgili ilan ID'si ile yönlendir
+    router.push(`/panel?tab=mesajlar&yeniSohbet=${ilan._id}`);
+  };
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Unbounded:wght@700;900&display=swap');
         :root{--ink:#080811;--cream:#f7f5f0;--red:#e8361a;--gold:#f5a623;
-          --navy:#0d1b3e;--mid:#4a4860;--border:#e4e1db;--green:#18a558}
+          --navy:#0d1b3e;--mid:#4a4860;--border:#e4e1db;--green:#18a558; --blue:#2563eb}
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;background:var(--cream);color:var(--ink)}
-        .topbar{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-        .topbar-logo{font-family:'Unbounded',sans-serif;font-weight:900;color:#fff;font-size:1rem;display:flex;align-items:center;gap:8px}
+        .topbar{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px; position: sticky; top: 0; z-index: 100;}
+        .topbar-logo{font-family:'Unbounded',sans-serif;font-weight:900;color:#fff;font-size:1rem;display:flex;align-items:center;gap:8px; cursor: pointer;}
         .logo-icon{background:var(--red);width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;font-weight:900;flex-shrink:0}
         .topbar-logo span{color:var(--red)}
-        .topbar-geri{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 16px;border-radius:40px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit}
+        .topbar-geri{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 16px;border-radius:40px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit; transition: 0.2s;}
+        .topbar-geri:hover{background:rgba(255,255,255,.2)}
         .hero-bar{background:linear-gradient(135deg,var(--navy),#1a2d5a);padding:32px 24px 28px}
         .breadcrumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
         .bc{font-size:.7rem;color:rgba(255,255,255,.45);font-weight:600;cursor:pointer}
@@ -156,28 +163,26 @@ function IlanDetayIcerik({ id }: { id: string }) {
         .teslimat-baslik{font-weight:700;font-size:.82rem;color:var(--navy);margin-bottom:8px}
         .teslimat-item{font-size:.82rem;color:var(--mid);padding:3px 0}
         .seo-keywords{display:none}
-        .sidebar{background:#fff;border-radius:20px;border:1.5px solid var(--border);padding:24px;position:sticky;top:24px;overflow:hidden}
-        .sidebar-header{background:linear-gradient(135deg,var(--navy),#1a2d5a);margin:-24px -24px 20px;padding:20px 24px;border-radius:18px 18px 0 0}
+        .sidebar{background:#fff;border-radius:20px;border:1.5px solid var(--border);padding:24px;position:sticky;top:90px;overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.03)}
+        .sidebar-header{background:linear-gradient(135deg,var(--navy),#1a2d5a);margin:-24px -24px 20px;padding:24px;border-radius:18px 18px 0 0}
         .sidebar-fiyat{font-family:'Unbounded',sans-serif;font-weight:900;font-size:1.7rem;color:#fff;line-height:1}
         .sidebar-fiyat-lbl{font-size:.68rem;color:rgba(255,255,255,.6);margin-top:5px;font-weight:600}
-        .sidebar-btn{width:100%;border:none;padding:13px;border-radius:40px;font-weight:700;font-size:.88rem;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-        .btn-teklif{background:var(--red);color:#fff}
-        .btn-teklif:hover{background:#c42d14}
+        .sidebar-btn{width:100%;border:none;padding:14px;border-radius:14px;font-weight:800;font-size:.9rem;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1)}
+        .sidebar-btn:hover{transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15)}
+        .btn-teklif{background:var(--gold);color:var(--navy)}
         .btn-talep{background:var(--navy);color:#fff}
-        .btn-talep:hover{background:#1a2d5a}
-        .btn-whatsapp{background:#25d366;color:#fff}
-        .btn-whatsapp:hover{background:#1da851}
-        .teklif-sayisi-chip{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(24,165,88,.1);color:var(--green);font-size:.75rem;font-weight:700;padding:7px 14px;border-radius:40px;margin-bottom:14px}
-        .sidebar-bilgi{font-size:.72rem;color:var(--mid);text-align:center;line-height:1.7;padding-top:14px;border-top:1px solid var(--border);margin-top:4px}
-        .sidebar-detay{font-size:.75rem;color:var(--mid);margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
-        .sidebar-detay-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid #f5f3ef}
+        .btn-mesaj{background:var(--blue);color:#fff}
+        .teklif-sayisi-chip{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(24,165,88,.1);color:var(--green);font-size:.75rem;font-weight:700;padding:7px 14px;border-radius:10px;margin-bottom:16px; border: 1px solid rgba(24,165,88,.2)}
+        .sidebar-bilgi{font-size:.72rem;color:var(--mid);text-align:center;line-height:1.7;padding-top:16px;border-top:1px solid var(--border);margin-top:8px}
+        .sidebar-detay{font-size:.75rem;color:var(--mid);margin-bottom:18px;display:flex;flex-direction:column;gap:6px}
+        .sidebar-detay-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f5f3ef}
         .sidebar-detay-item:last-child{border-bottom:none}
-        .sidebar-detay-deger{font-weight:600;color:var(--ink);font-size:.78rem}
+        .sidebar-detay-deger{font-weight:700;color:var(--ink);font-size:.78rem}
         @media(max-width:800px){.detay-grid{grid-template-columns:1fr}.sidebar{position:static}.detay-resim{height:220px}}
       `}</style>
 
       <div className="topbar">
-        <div className="topbar-logo">
+        <div className="topbar-logo" onClick={() => router.push('/')}>
           <div className="logo-icon">S</div>
           Swap<span>Hubs</span>
         </div>
@@ -200,9 +205,9 @@ function IlanDetayIcerik({ id }: { id: string }) {
         <div className="hero-meta">
           <span>📍 {ilan.ulke && ilan.ulke !== 'Türkiye' ? `${ilan.ulke} / ` : ''}{sehir}</span>
           <span>📅 {new Date(ilan.createdAt).toLocaleDateString('tr-TR', { day:'2-digit', month:'long', year:'numeric' })}</span>
-          {ilan.teklifSayisi > 0 && <span>💬 {ilan.teklifSayisi} teklif</span>}
-          {ilan.rol === 'alan'  && <span>🙋 Hizmet Talep Ediliyor</span>}
-          {ilan.rol === 'veren' && <span>⚡ Hizmet Veriliyor</span>}
+          {ilan.teklifSayisi > 0 && <span>💼 {ilan.teklifSayisi} Teklif & Sipariş</span>}
+          {ilan.rol === 'alan'  && <span>🙋 Hizmet / Ürün Talep Ediliyor</span>}
+          {ilan.rol === 'veren' && <span>⚡ Hizmet / Ürün Satışta</span>}
         </div>
       </div>
 
@@ -216,9 +221,9 @@ function IlanDetayIcerik({ id }: { id: string }) {
               }
               <div className="resim-badges">
                 <span className={`badge ${ilan.rol === 'alan' ? 'badge-alan' : 'badge-veren'}`}>
-                  {ilan.rol === 'alan' ? '🙋 Talep' : '⚡ Hizmet'}
+                  {ilan.rol === 'alan' ? '🙋 Talep İlanı' : '⚡ Satış / Hizmet İlanı'}
                 </span>
-                {ilan.tip === 'ticari' && <span className="badge badge-ticari">🏭 Ticari</span>}
+                {ilan.tip === 'ticari' && <span className="badge badge-ticari">🏭 Ticari (B2B)</span>}
                 {ilan.tip === 'ticari' && <span className="badge badge-tr">🇹🇷 TR Üretimi</span>}
                 {ilan.yapay && <span className="badge badge-yapay">Örnek İlan</span>}
               </div>
@@ -257,44 +262,48 @@ function IlanDetayIcerik({ id }: { id: string }) {
             )}
           </div>
 
+          {/* SİDEBAR - AKSİYON PANELI */}
           <div className="sidebar">
             <div className="sidebar-header">
               <div className="sidebar-fiyat">
-                {birim}{fmt(ilan.butceMin)} – {birim}{fmt(ilan.butceMax)}
+                {birim}{fmt(ilan.butceMin)} {ilan.butceMax > ilan.butceMin ? `– ${birim}${fmt(ilan.butceMax)}` : ''}
               </div>
               <div className="sidebar-fiyat-lbl">
-                {ilan.tip === 'ticari' ? 'Tahmini fiyat aralığı (toptan)' : 'Bütçe aralığı'}
+                {ilan.rol === 'alan' ? 'Tahmini ayrılan bütçe' : 'Talep edilen satış fiyatı'}
               </div>
             </div>
 
             {ilan.teklifSayisi > 0 && (
               <div className="teklif-sayisi-chip">
-                ✅ {ilan.teklifSayisi} kişi teklif verdi
+                🔥 Bu ilana {ilan.teklifSayisi} teklif/sipariş geldi
               </div>
             )}
 
+            {/* MANTIK: Eğer ilan "alan" rolündeyse (yani müşteri bir şey arıyorsa), ziyaretçi ona "Teklif Verir" */}
             {ilan.rol === 'alan' && (
               <button className="sidebar-btn btn-teklif" onClick={() => setTeklifModal(true)}>
-                ⚡ Teklif Ver
+                ⚡ Kendi Teklifini Sun
               </button>
             )}
+            
+            {/* MANTIK: Eğer ilan "veren" rolündeyse (yani satıcı hizmet/ürün satıyorsa), ziyaretçi "Sipariş Geçer" veya ondan özel teklif ister */}
             {ilan.rol === 'veren' && (
               <button className="sidebar-btn btn-talep" onClick={() => setTalepModal(true)}>
-                📩 {ilan.tip === 'ticari' ? 'Teklif Almak İstiyorum' : 'Teklif İste'}
+                🛍️ {ilan.tip === 'ticari' ? 'Toptan Fiyat / Teklif İste' : 'Hemen Sipariş Ver'}
               </button>
             )}
 
-            <button className="sidebar-btn btn-whatsapp"
-              onClick={() => window.open('https://wa.me/90XXXXXXXXXX', '_blank')}>
-              💬 WhatsApp ile Sor
+            {/* MESAJLAŞMA: Ziyaretçi ilan sahibiyle site üzerinden anında mesajlaşabilir */}
+            <button className="sidebar-btn btn-mesaj" onClick={handleSohbetBaslat}>
+              💬 İlan Sahibiyle Mesajlaş
             </button>
 
             <div className="sidebar-detay">
               {[
                 { ikon:'📍', lbl:'Lokasyon', deger:`${ilan.ulke && ilan.ulke !== 'Türkiye' ? ilan.ulke + ' / ' : ''}${sehir || 'Türkiye'}` },
-                { ikon:'🏷️', lbl:'Kategori', deger:sektorAd },
-                { ikon:'📋', lbl:'İlan Türü', deger:`${ilan.tip === 'ticari' ? 'Ticari / Endüstriyel' : 'Bireysel'} · ${ilan.rol === 'alan' ? 'Talep' : 'Teklif'}` },
-                { ikon:'📅', lbl:'Yayın Tarihi', deger:new Date(ilan.createdAt).toLocaleDateString('tr-TR') },
+                { ikon:'🏷️', lbl:'Sektör', deger:sektorAd },
+                { ikon:'📋', lbl:'İlan Modeli', deger:`${ilan.tip === 'ticari' ? 'Ticari / B2B' : 'Bireysel'} · ${ilan.rol === 'alan' ? 'Talep (Alıcı)' : 'Satış (Tedarikçi)'}` },
+                { ikon:'📅', lbl:'Yayınlanma', deger:new Date(ilan.createdAt).toLocaleDateString('tr-TR') },
                 ...(ilan.teslimat?.[0] ? [{ ikon:'🚢', lbl:'Teslimat', deger:ilan.teslimat[0] }] : []),
               ].map(({ ikon, lbl, deger }) => (
                 <div key={lbl} className="sidebar-detay-item">
@@ -308,10 +317,10 @@ function IlanDetayIcerik({ id }: { id: string }) {
             </div>
 
             <div className="sidebar-bilgi">
-              🔒 Bilgileriniz gizlidir. Spam göndermeyiz.<br />
+              🔒 Tüm mesajlaşmalar uçtan uca şifrelidir.<br />
               {ilan.rol === 'veren' && ilan.tip === 'ticari'
-                ? 'Talebiniz doğrudan tedarikçiye iletilir.'
-                : 'En uygun teklifi seçme hakkı sizdedir.'}
+                ? 'Talebiniz tedarikçiye anında iletilir ve panelinize düşer.'
+                : 'En iyi teklifi seçme hakkı ilan sahibindedir.'}
             </div>
           </div>
         </div>
