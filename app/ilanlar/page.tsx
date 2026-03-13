@@ -3,45 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-// app/ilanlar/page.tsx — DOSYANIN EN BAŞINA EKLE (export default'un üstüne)
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: { tip?: string; kategori?: string; rol?: string; q?: string };
-}): Promise<import('next').Metadata> {
-  const tip      = searchParams.tip ?? 'bireysel';
-  const kategori = searchParams.kategori ?? '';
-  const q        = searchParams.q ?? '';
 
-  const KATEGORI_ADLARI: Record<string, string> = {
-    'otel-tatil':   'Otel & Tatil',    'arac-kiralama': 'Araç Kiralama',
-    'tamir-bakim':  'Tamir & Bakım',   temizlik:        'Temizlik Hizmeti',
-    usta:           'Usta & Zanaatkar',nakliyat:        'Nakliyat',
-    tekstil:        'Tekstil & Giyim', 'mermer-tas':    'Mermer & Doğal Taş',
-    'metal-celik':  'Metal & Çelik',   'gida-tarim':    'Gıda & Tarım Ürünleri',
-  };
-
-  const katAd   = KATEGORI_ADLARI[kategori] ?? kategori;
-  const tipAd   = tip === 'ticari' ? 'Ticari & Endüstriyel' : 'Bireysel';
-  const title   = q
-    ? `"${q}" Arama Sonuçları — SwapHubs`
-    : katAd
-      ? `${katAd} İlanları — ${tipAd} | SwapHubs`
-      : `${tipAd} Hizmet İlanları | SwapHubs`;
-
-  const description = tip === 'ticari'
-    ? `Türkiye'den ${katAd || 'endüstriyel'} ürün ve hizmet ilanları. ` +
-      `Toptan alım, ihracat, OEM üretim teklifleri. SwapHubs'da hemen teklif alın.`
-    : `${katAd || 'Tüm kategorilerde'} bireysel hizmet ilanları. ` +
-      `En iyi fiyatı bul, teklif al, hizmet ver. SwapHubs Türkiye.`;
-
-  return {
-    title,
-    description,
-    openGraph: { title, description, url: `https://swaphubs.com/ilanlar` },
-    alternates: { canonical: `https://swaphubs.com/ilanlar?tip=${tip}&kategori=${kategori}` },
-  };
-}
 interface Ilan {
   _id: string;
   baslik: string;
