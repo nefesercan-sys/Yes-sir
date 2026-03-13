@@ -1,3 +1,4 @@
+
 export interface FormAlan {
   key: string;
   label: string;
@@ -9,187 +10,24 @@ export interface FormAlan {
   grup?: string;
 }
 
+export interface AltKategori {
+  id: string;
+  ad: string;
+  icon: string;
+}
+
 export interface Sektor {
   id: string;
   ad: string;
   icon: string;
   renk: string;
-  altKategoriler?: { id: string; ad: string; icon: string }[];
+  aciklama?: string;
+  altKategoriler?: AltKategori[];
   hizmetAlanFormu: FormAlan[];
   hizmetVerenFormu: FormAlan[];
   butceBirimi: string;
+  tip: 'bireysel' | 'ticari' | 'her_ikisi';
 }
-
-export const SEKTORLER: Sektor[] = [
-  // ═══════════════════════════════════════════
-  // 1. TURİZM & KONAKLAMA
-  // ═══════════════════════════════════════════
-  {
-    id: 'turizm',
-    ad: 'Turizm & Konaklama',
-    icon: '🏨',
-    renk: '#0f6fbd',
-    altKategoriler: [
-      { id: 'otel', ad: 'Otel', icon: '🏨' },
-      { id: 'pansiyon', ad: 'Pansiyon / B&B', icon: '🏡' },
-      { id: 'villa', ad: 'Villa / Apart', icon: '🏠' },
-      { id: 'kamp', ad: 'Kamp / Glamping', icon: '⛺' },
-      { id: 'tur', ad: 'Tur Paketi', icon: '🗺️' },
-      { id: 'kruvaziyer', ad: 'Kruvaziyer', icon: '🚢' },
-    ],
-    hizmetAlanFormu: [
-      { key: 'altKategori', label: 'Konaklama Tipi', tip: 'select', secenekler: ['Otel', 'Pansiyon / B&B', 'Villa / Apart', 'Kamp / Glamping', 'Tur Paketi', 'Kruvaziyer'], zorunlu: true, grup: 'Temel Bilgiler' },
-      { key: 'ulke', label: 'Ülke', tip: 'select', secenekler: ['Türkiye', 'İspanya', 'İtalya', 'Yunanistan', 'Mısır', 'Tayland', 'Maldivler', 'Bali/Endonezya', 'Dubai/BAE', 'Portekiz', 'Fransa', 'Hırvatistan', 'Karadağ', 'Arnavutluk', 'Diğer'], zorunlu: true, grup: 'Konum' },
-      { key: 'sehir', label: 'Şehir / Bölge', tip: 'text', placeholder: 'Antalya, Bodrum, Marmaris...', zorunlu: true, grup: 'Konum' },
-      { key: 'tatilTarihi', label: 'Tatil Tarihi', tip: 'daterange', zorunlu: true, grup: 'Tarih & Süre' },
-      { key: 'gun', label: 'Kaç Gün', tip: 'number', placeholder: '7', birim: 'gün', zorunlu: true, grup: 'Tarih & Süre' },
-      { key: 'kisiSayisi', label: 'Kişi Sayısı', tip: 'number', placeholder: '2', birim: 'kişi', zorunlu: true, grup: 'Tarih & Süre' },
-      { key: 'yetiskin', label: 'Yetişkin', tip: 'number', placeholder: '2', grup: 'Tarih & Süre' },
-      { key: 'cocuk', label: 'Çocuk', tip: 'number', placeholder: '0', grup: 'Tarih & Süre' },
-      { key: 'cocukYas', label: 'Çocuk Yaşları', tip: 'text', placeholder: 'Örn: 3, 7', grup: 'Tarih & Süre' },
-      { key: 'otelYildiz', label: 'Otel Yıldızı', tip: 'select', secenekler: ['1 Yıldız', '2 Yıldız', '3 Yıldız', '4 Yıldız', '5 Yıldız', 'Butik Otel', 'Fark Etmez'], zorunlu: true, grup: 'Otel & Oda' },
-      { key: 'odaTipi', label: 'Oda Tipi', tip: 'select', secenekler: ['Standart Oda', 'Deniz Manzaralı', 'Suit', 'Aile Odası', 'Kral Dairesi', 'Villa', 'Bungalov', 'Fark Etmez'], grup: 'Otel & Oda' },
-      { key: 'odaKisisi', label: 'Oda Kişi Sayısı', tip: 'select', secenekler: ['1 Kişilik', '2 Kişilik', '3 Kişilik', '4 Kişilik', 'Aile (5+)'], grup: 'Otel & Oda' },
-      { key: 'paket', label: 'Paket Tipi', tip: 'select', secenekler: ['Oda Kahvaltı (BB)', 'Yarım Pansiyon (HB)', 'Tam Pansiyon (FB)', 'Her Şey Dahil (AI)', 'Ultra Her Şey Dahil', 'Sadece Oda (RO)', 'Ekonomik Paket', 'Standart Paket', 'Full Paket'], zorunlu: true, grup: 'Paket & Yemek' },
-      { key: 'yemekTercihi', label: 'Yemek Tercihi', tip: 'multiselect', secenekler: ['Et Ağırlıklı', 'Vejetaryen', 'Vegan', 'Karışık', 'Helal', 'Glütensiz', 'Deniz Ürünleri', 'Fark Etmez'], grup: 'Paket & Yemek' },
-      { key: 'yemekListesi', label: 'İstenen Yemekler', tip: 'multiselect', secenekler: ['Türk Mutfağı', 'Akdeniz', 'İtalyan', 'Uzak Doğu', 'Kebap / Izgara', 'Meze & Balık', 'Fast Food', 'Kahvaltı Büfesi', 'Canlı Pişirme', 'A la Carte'], grup: 'Paket & Yemek' },
-      { key: 'icecekTercihi', label: 'İçecek Tercihi', tip: 'select', secenekler: ['Alkolsüz', 'Alkollü (Bira & Şarap)', 'Tam Açık Büfe Alkol', 'Premium Alkol', 'Fark Etmez'], grup: 'İçecek & Eğlence' },
-      { key: 'eglencel', label: 'İstenen Eğlenceler', tip: 'multiselect', secenekler: ['Animasyon', 'Disko / Gece Kulübü', 'Canlı Müzik', 'Su Sporları', 'Dalış', 'Tenis', 'Golf', 'Spa & Masaj', 'Yoga', 'Çocuk Kulübü', 'Aquapark', 'Plaj Aktiviteleri', 'Bisiklet', 'Safari', 'Rafting', 'Parasailing', 'Fark Etmez'], grup: 'İçecek & Eğlence' },
-      { key: 'ozelIstekler', label: 'Havuz & Plaj Tercihi', tip: 'multiselect', secenekler: ['Kapalı Havuz', 'Açık Havuz', 'Isıtmalı Havuz', 'Özel Havuz', 'Sahile Sıfır', 'Sahile Yakın (500m)', 'Özel Plaj', 'Halka Açık Plaj', 'Fark Etmez'], grup: 'Ek Tercihler' },
-      { key: 'ulasim', label: 'Ulaşım Dahil mi?', tip: 'select', secenekler: ['Evet, Uçuş Dahil', 'Evet, Transfer Dahil', 'Evet, Uçuş + Transfer', 'Hayır, Sadece Konaklama'], grup: 'Ek Tercihler' },
-      { key: 'butce', label: 'Tahmini Bütçe (Kişi Başı)', tip: 'range', birim: '$', zorunlu: true, grup: 'Bütçe' },
-      { key: 'aciklama', label: 'Ek Açıklama & Özel İstekler', tip: 'textarea', placeholder: 'Balayı odası, engelli erişimi, evcil hayvan vb.', grup: 'Bütçe' },
-    ],
-    hizmetVerenFormu: [
-      { key: 'otelAdi', label: 'Tesis Adı', tip: 'text', zorunlu: true, grup: 'Tesis Bilgileri' },
-      { key: 'yildiz', label: 'Yıldız Sayısı', tip: 'select', secenekler: ['1', '2', '3', '4', '5', 'Butik'], zorunlu: true, grup: 'Tesis Bilgileri' },
-      { key: 'ulke', label: 'Ülke', tip: 'text', zorunlu: true, grup: 'Tesis Bilgileri' },
-      { key: 'sehir', label: 'Şehir', tip: 'text', zorunlu: true, grup: 'Tesis Bilgileri' },
-      { key: 'adres', label: 'Adres', tip: 'adres', zorunlu: true, grup: 'Tesis Bilgileri' },
-      { key: 'odaTipleri', label: 'Oda Tipleri', tip: 'multiselect', secenekler: ['Standart', 'Deniz Manzaralı', 'Suit', 'Aile', 'Kral Dairesi', 'Villa', 'Bungalov'], grup: 'Oda & Kapasite' },
-      { key: 'maxKapasite', label: 'Toplam Oda Sayısı', tip: 'number', grup: 'Oda & Kapasite' },
-      { key: 'paketler', label: 'Sunulan Paketler', tip: 'multiselect', secenekler: ['RO', 'BB', 'HB', 'FB', 'AI', 'Ultra AI'], grup: 'Paket & Hizmet' },
-      { key: 'yemekSecenekleri', label: 'Yemek Seçenekleri', tip: 'multiselect', secenekler: ['Et Ağırlıklı', 'Vejetaryen', 'Vegan', 'Helal', 'Glütensiz', 'A la Carte', 'Büfe'], grup: 'Paket & Hizmet' },
-      { key: 'icecekSecenekleri', label: 'İçecek Seçenekleri', tip: 'multiselect', secenekler: ['Alkolsüz', 'Bira & Şarap', 'Tam Açık Büfe', 'Premium Alkol'], grup: 'Paket & Hizmet' },
-      { key: 'eglencel', label: 'Eğlence & Aktiviteler', tip: 'multiselect', secenekler: ['Animasyon', 'Disko', 'Canlı Müzik', 'Su Sporları', 'Dalış', 'Tenis', 'Golf', 'Spa', 'Aquapark', 'Çocuk Kulübü'], grup: 'Paket & Hizmet' },
-      { key: 'havuzSecenekleri', label: 'Havuz & Plaj', tip: 'multiselect', secenekler: ['Kapalı Havuz', 'Açık Havuz', 'Isıtmalı', 'Özel Havuz', 'Özel Plaj', 'Sahile Sıfır'], grup: 'Paket & Hizmet' },
-    ],
-    butceBirimi: '$',
-  },
-
-  // ═══════════════════════════════════════════
-  // 2. SEYAHAT & TRANSFER
-  // ═══════════════════════════════════════════
-  {
-    id: 'seyahat',
-    ad: 'Seyahat & Transfer',
-    icon: '✈️',
-    renk: '#7c3aed',
-    altKategoriler: [
-      { id: 'ucus', ad: 'Uçuş Bileti', icon: '✈️' },
-      { id: 'otobus', ad: 'Otobüs Bileti', icon: '🚌' },
-      { id: 'tren', ad: 'Tren Bileti', icon: '🚆' },
-      { id: 'feribot', ad: 'Feribot', icon: '⛴️' },
-      { id: 'transfer', ad: 'VIP Transfer', icon: '🚐' },
-      { id: 'rent_car', ad: 'Araç Kiralama', icon: '🚗' },
-    ],
-    hizmetAlanFormu: [
-      { key: 'altKategori', label: 'Seyahat Tipi', tip: 'select', secenekler: ['Uçuş Bileti', 'Otobüs Bileti', 'Tren', 'Feribot', 'VIP Transfer', 'Araç Kiralama'], zorunlu: true, grup: 'Temel' },
-      { key: 'nereden', label: 'Nereden', tip: 'text', placeholder: 'İstanbul, Havalimanı adı...', zorunlu: true, grup: 'Güzergah' },
-      { key: 'nereye', label: 'Nereye', tip: 'text', placeholder: 'Antalya, Havalimanı adı...', zorunlu: true, grup: 'Güzergah' },
-      { key: 'tarih', label: 'Gidiş Tarihi', tip: 'date', zorunlu: true, grup: 'Güzergah' },
-      { key: 'donus', label: 'Dönüş Tarihi', tip: 'date', grup: 'Güzergah' },
-      { key: 'yolcuSayisi', label: 'Yolcu Sayısı', tip: 'number', birim: 'kişi', zorunlu: true, grup: 'Yolcular' },
-      { key: 'sinif', label: 'Sınıf', tip: 'select', secenekler: ['Ekonomi', 'Business', 'First Class', 'Fark Etmez'], grup: 'Yolcular' },
-      { key: 'bagaj', label: 'Bagaj', tip: 'select', secenekler: ['Sadece El Bagajı', '15 kg', '20 kg', '23 kg', '30 kg+'], grup: 'Yolcular' },
-      { key: 'butce', label: 'Tahmini Bütçe', tip: 'range', birim: '₺', zorunlu: true, grup: 'Bütçe' },
-      { key: 'aciklama', label: 'Açıklama', tip: 'textarea', grup: 'Bütçe' },
-    ],
-    hizmetVerenFormu: [
-      { key: 'sirketAdi', label: 'Şirket / Acenta Adı', tip: 'text', zorunlu: true, grup: 'Firma' },
-      { key: 'hizmetTipi', label: 'Hizmet Tipleri', tip: 'multiselect', secenekler: ['Uçuş', 'Otobüs', 'Tren', 'Feribot', 'Transfer', 'Araç Kiralama'], grup: 'Firma' },
-      { key: 'operasyonBolgeleri', label: 'Operasyon Bölgeleri', tip: 'textarea', placeholder: 'Hizmet verdiğiniz rotalar', grup: 'Firma' },
-    ],
-    butceBirimi: '₺',
-  },
-
-  // ═══════════════════════════════════════════
-  // 3. KİRALAMA
-  // ═══════════════════════════════════════════
-  {
-    id: 'kiralama',
-    ad: 'Kiralama',
-    icon: '🔑',
-    renk: '#059669',
-    altKategoriler: [
-      { id: 'arac_kira', ad: 'Araç Kiralama', icon: '🚗' },
-      { id: 'yat', ad: 'Yat / Tekne', icon: '⛵' },
-      { id: 'is_makinesi', ad: 'İş Makinesi', icon: '🚜' },
-      { id: 'ev_esyasi', ad: 'Ev Eşyası', icon: '🛋️' },
-      { id: 'elektronik', ad: 'Elektronik', icon: '📱' },
-      { id: 'giyim', ad: 'Kıyafet / Kostüm', icon: '👗' },
-      { id: 'etkinlik', ad: 'Etkinlik Ekipmanı', icon: '🎪' },
-      { id: 'tasimacilik', ad: 'Nakliye / Kamyon', icon: '🚛' },
-    ],
-    hizmetAlanFormu: [
-      { key: 'altKategori', label: 'Kiralama Kategorisi', tip: 'select', secenekler: ['Araç', 'Yat / Tekne', 'İş Makinesi', 'Ev Eşyası', 'Elektronik', 'Kıyafet / Kostüm', 'Etkinlik Ekipmanı', 'Nakliye'], zorunlu: true, grup: 'Temel' },
-      { key: 'urunAdi', label: 'Ürün / Araç Adı', tip: 'text', placeholder: 'Örn: 5+1 Yat, Caterpillar Ekskavatör', zorunlu: true, grup: 'Ürün' },
-      { key: 'adet', label: 'Adet', tip: 'number', birim: 'adet', grup: 'Ürün' },
-      { key: 'baslangicTarihi', label: 'Başlangıç', tip: 'date', zorunlu: true, grup: 'Süre' },
-      { key: 'bitisTarihi', label: 'Bitiş', tip: 'date', zorunlu: true, grup: 'Süre' },
-      { key: 'sehir', label: 'Şehir', tip: 'text', zorunlu: true, grup: 'Konum' },
-      { key: 'teslimatSekli', label: 'Teslimat', tip: 'select', secenekler: ['Yerinde Teslim', 'Adresime Teslim', 'Fark Etmez'], grup: 'Konum' },
-      { key: 'butce', label: 'Tahmini Bütçe', tip: 'range', birim: '₺', zorunlu: true, grup: 'Bütçe' },
-      { key: 'aciklama', label: 'Açıklama', tip: 'textarea', grup: 'Bütçe' },
-    ],
-    hizmetVerenFormu: [
-      { key: 'firmaAdi', label: 'Firma / Şahıs Adı', tip: 'text', zorunlu: true, grup: 'Firma' },
-      { key: 'kategoriler', label: 'Kiralama Kategorileri', tip: 'multiselect', secenekler: ['Araç', 'Yat', 'İş Makinesi', 'Ev Eşyası', 'Elektronik', 'Kıyafet', 'Etkinlik', 'Nakliye'], grup: 'Firma' },
-      { key: 'sehirler', label: 'Hizmet Şehirleri', tip: 'text', grup: 'Firma' },
-    ],
-    butceBirimi: '₺',
-  },
-
-  // ═══════════════════════════════════════════
-  // 4. TAMİR & BAKIM
-  // ═══════════════════════════════════════════
-  {
-    id: 'tamir',
-    ad: 'Tamir & Bakım',
-    icon: '🔧',
-    renk: '#d97706',
-    altKategoriler: [
-      { id: 'beyaz_esya', ad: 'Beyaz Eşya', icon: '🫙' },
-      { id: 'elektronik_tamir', ad: 'Elektronik', icon: '📱' },
-      { id: 'arac_tamir', ad: 'Araç Tamiri', icon: '🚗' },
-      { id: 'mobilya_tamir', ad: 'Mobilya', icon: '🪑' },
-      { id: 'bina_tamir', ad: 'Bina / İnşaat', icon: '🏗️' },
-      { id: 'kombi_klima', ad: 'Kombi / Klima', icon: '❄️' },
-      { id: 'boru_tesisat', ad: 'Tesisat / Su', icon: '🪠' },
-      { id: 'elektrik', ad: 'Elektrik', icon: '⚡' },
-    ],
-    hizmetAlanFormu: [
-      { key: 'altKategori', label: 'Tamir Kategorisi', tip: 'select', secenekler: ['Beyaz Eşya', 'Elektronik', 'Araç', 'Mobilya', 'Bina / İnşaat', 'Kombi / Klima', 'Tesisat', 'Elektrik', 'Diğer'], zorunlu: true, grup: 'Arıza' },
-      { key: 'urunAdi', label: 'Ürün / Cihaz Adı', tip: 'text', placeholder: 'Örn: Bosch Çamaşır Makinesi, Samsung TV', zorunlu: true, grup: 'Arıza' },
-      { key: 'marka', label: 'Marka', tip: 'text', grup: 'Arıza' },
-      { key: 'model', label: 'Model', tip: 'text', grup: 'Arıza' },
-      { key: 'arizaAciklama', label: 'Arıza Açıklaması', tip: 'textarea', placeholder: 'Cihaz ne yapıyor/yapmıyor?', zorunlu: true, grup: 'Arıza' },
-      { key: 'aciliyet', label: 'Aciliyet', tip: 'select', secenekler: ['Bugün / Yarın', '2-3 Gün İçinde', 'Bu Hafta', 'Bu Ay', 'Acil Değil'], grup: 'Zamanlama' },
-      { key: 'sehir', label: 'Şehir', tip: 'text', zorunlu: true, grup: 'Konum' },
-      { key: 'ilce', label: 'İlçe', tip: 'text', grup: 'Konum' },
-      { key: 'butce', label: 'Tahmini Bütçe', tip: 'range', birim: '₺', zorunlu: true, grup: 'Bütçe' },
-    ],
-    hizmetVerenFormu: [
-      { key: 'adSoyad', label: 'Ad Soyad / Firma', tip: 'text', zorunlu: true, grup: 'Usta' },
-      { key: 'uzmanlik', label: 'Uzmanlık Alanları', tip: 'multiselect', secenekler: ['Beyaz Eşya', 'Elektronik', 'Araç', 'Mobilya', 'Bina', 'Kombi / Klima', 'Tesisat', 'Elektrik'], grup: 'Usta' },
-      { key: 'sehirler', label: 'Hizmet Şehirleri', tip: 'text', grup: 'Usta' },
-      { key: 'tecrube', label: 'Deneyim Yılı', tip: 'number', birim: 'yıl', grup: 'Usta' },
-    ],
-    butceBirimi: '₺',
-  },
-
-  // ═══════════════════════════════════════════
-  // 5. USTA & İŞÇİ
   // ═══════════════════════════════════════════
   {
     id: 'usta',
