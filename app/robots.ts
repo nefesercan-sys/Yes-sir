@@ -5,13 +5,13 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/admin', '/panel', '/api/'],
+        allow:     '/',
+        disallow:  ['/admin', '/panel', '/api/'],
       },
       {
         userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/admin', '/panel'],
+        allow:     '/',
+        disallow:  ['/admin', '/panel'],
       },
     ],
     sitemap: 'https://swaphubs.com/sitemap.xml',
