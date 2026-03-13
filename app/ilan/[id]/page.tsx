@@ -1,37 +1,20 @@
-// ─────────────────────────────────────────────────────────────
 // app/ilan/[id]/page.tsx
-// Server Component wrapper → generateMetadata + Client bileşen
-// ─────────────────────────────────────────────────────────────
 import type { Metadata } from 'next';
 import { getDb }         from '@/lib/mongodb';
 import { ObjectId }      from 'mongodb';
 import IlanDetaySayfaClient from './IlanDetayClient';
 
 const SEKTOR_ADLARI: Record<string, string> = {
-  turizm:        'Turizm & Konaklama',
-  seyahat:       'Seyahat & Transfer',
-  kiralama:      'Kiralama',
-  tamir:         'Tamir & Bakım',
-  usta:          'Usta & İşçi',
-  temizlik:      'Temizlik Hizmetleri',
-  uretim:        'Üretim & Özel Sipariş',
-  giyim:         'Giyim & Tekstil',
-  saglik:        'Sağlık & Güzellik',
-  egitim:        'Eğitim & Danışmanlık',
-  etkinlik:      'Etkinlik & Düğün',
-  mobilya:       'Mobilya & Dekorasyon',
-  tekstil:       'Tekstil & Hazır Giyim',
-  'mermer-tas':  'Mermer & Doğal Taş',
-  'metal-celik': 'Metal & Çelik',
-  'plastik-pvc': 'Plastik & PVC',
-  'ahsap-mob':   'Ahşap & Mobilya',
-  'gida-tarim':  'Gıda & Tarım Ürünleri',
-  'insaat-malz': 'İnşaat Malzemeleri',
-  elektrik:      'Elektrik & Enerji',
-  makine:        'Makine & Ekipman',
-  lojistik:      'Lojistik & Nakliyat',
-  'kimya-boya':  'Kimya & Boya',
-  'saglik-med':  'Sağlık & Medikal',
+  turizm:'Turizm & Konaklama', seyahat:'Seyahat & Transfer', kiralama:'Kiralama',
+  tamir:'Tamir & Bakım', usta:'Usta & İşçi', temizlik:'Temizlik Hizmetleri',
+  uretim:'Üretim & Özel Sipariş', giyim:'Giyim & Tekstil', saglik:'Sağlık & Güzellik',
+  egitim:'Eğitim & Danışmanlık', etkinlik:'Etkinlik & Düğün', mobilya:'Mobilya & Dekorasyon',
+  tekstil:'Tekstil & Hazır Giyim', 'mermer-tas':'Mermer & Doğal Taş',
+  'metal-celik':'Metal & Çelik', 'plastik-pvc':'Plastik & PVC',
+  'ahsap-mob':'Ahşap & Mobilya', 'gida-tarim':'Gıda & Tarım Ürünleri',
+  'insaat-malz':'İnşaat Malzemeleri', elektrik:'Elektrik & Enerji',
+  makine:'Makine & Ekipman', lojistik:'Lojistik & Nakliyat',
+  'kimya-boya':'Kimya & Boya', 'saglik-med':'Sağlık & Medikal',
 };
 
 export async function generateMetadata(
@@ -86,11 +69,11 @@ export async function generateMetadata(
           url:        `https://swaphubs.com/ilan/${params.id}`,
           image:       ilan.resimUrl ?? 'https://swaphubs.com/og-image.jpg',
           offers: {
-            '@type':       'Offer',
-            priceCurrency: birim === '₺' ? 'TRY' : birim === 'USD' ? 'USD' : 'EUR',
-            price:          ilan.butceMin ?? 0,
-            priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-            availability:  'https://schema.org/InStock',
+            '@type':         'Offer',
+            priceCurrency:    birim === '₺' ? 'TRY' : birim === 'USD' ? 'USD' : 'EUR',
+            price:            ilan.butceMin ?? 0,
+            priceValidUntil:  new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+            availability:     'https://schema.org/InStock',
             seller: { '@type': 'Organization', name: 'SwapHubs', url: 'https://swaphubs.com' },
           },
           additionalProperty: (ilan.ozellikler ?? []).map((o: string) => ({
@@ -105,17 +88,15 @@ export async function generateMetadata(
           url:        `https://swaphubs.com/ilan/${params.id}`,
           image:       ilan.resimUrl ?? 'https://swaphubs.com/og-image.jpg',
           areaServed:  { '@type': 'Place', name: sehir },
-          offers: {
-            '@type': 'Offer', price: ilan.butceMin ?? 0, priceCurrency: 'TRY',
-          },
-          provider: { '@type': 'Organization', name: 'SwapHubs', url: 'https://swaphubs.com' },
+          offers:      { '@type': 'Offer', price: ilan.butceMin ?? 0, priceCurrency: 'TRY' },
+          provider:    { '@type': 'Organization', name: 'SwapHubs', url: 'https://swaphubs.com' },
         };
 
     return {
       title,
-      description: metaAciklama.slice(0, 160),
-      keywords:    seoKelimeler,
-      authors:     [{ name: 'SwapHubs', url: 'https://swaphubs.com' }],
+      description:  metaAciklama.slice(0, 160),
+      keywords:     seoKelimeler,
+      authors:      [{ name: 'SwapHubs', url: 'https://swaphubs.com' }],
       robots: {
         index: true, follow: true,
         googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
