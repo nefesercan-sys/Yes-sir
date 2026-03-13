@@ -1,500 +1,311 @@
 'use client';
-import { useSession, signOut } from 'next-auth/react';
-import { useRouter }           from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { SEKTORLER, FormAlan, Sektor } from '@/lib/sektorler';
+// 🚨 SİBER SİLAHIMIZI İÇERİ ALIYORUZ!
+import MedyaYukleyici from '../components/MedyaYukleyici'; 
 
-interface Ilan {
-  _id: string;
-  baslik: string;
-  kategoriAd?: string;
-  sektorId: string;
-  tip?: string;
-  rol?: string;
-  butceMin: number;
-  butceMax: number;
-  teklifSayisi: number;
-  durum: string;
-  createdAt: string;
-}
-interface Teklif {
-  _id: string;
-  ilanBaslik: string;
-  fiyat: string;
-  durum: string;
-  createdAt: string;
-}
-interface Mesaj {
-  _id: string;
-  ilanBaslik: string;
-  gonderen: { ad: string; email: string };
-  mesaj: string;
-  durum: string;
-  cevaplar: { metin: string; tarih: string }[];
-  createdAt: string;
-}
-
-type Sekme = 'ilanlar' | 'teklifler' | 'mesajlar' | 'profil';
-const fmt = (n: number) => new Intl.NumberFormat('tr-TR').format(n);
-const tarih = (d: string) => new Date(d).toLocaleDateString('tr-TR',
-  { day: '2-digit', month: 'short', year: 'numeric' });
-
-export default function PanelSayfasi() {
-  // 🚨 SİBER ZIRH BURADA: Vercel build esnasında çökmemesi için veriyi güvenli çekiyoruz!
+export default function IlanVerPage() {
+  // 🚨 SİBER ZIRH: Vercel build esnasında useSession hata vermesin diye güvenli şekilde çekiyoruz.
   const sessionData = useSession() || {};
   const session = sessionData.data;
   const status = sessionData.status || "loading";
-  
+
   const router = useRouter();
-  const [sekme, setSekme]         = useState<Sekme>('ilanlar');
-  const [ilanlar,  setIlanlar]    = useState<Ilan[]>([]);
-  const [teklifler,setTeklifler]  = useState<Teklif[]>([]);
-  const [mesajlar, setMesajlar]   = useState<Mesaj[]>([]);
+  const [adim, setAdim] = useState(1);
+  const [seciliSektor, setSeciliSektor] = useState<Sektor | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [medyalar, setMedyalar] = useState<{ url: string; tip: 'resim' | 'video' }[]>([]);
   const [yukleniyor, setYukleniyor] = useState(false);
+  const [hata, setHata] = useState('');
 
-  useEffect(() => {
-    if (status === 'unauthenticated') router.push('/giris?callbackUrl=/');
-  }, [status, router]);
+  const setField = (key: string, val: any) => setFormData(p => ({ ...p, [key]: val }));
 
-  const yukleIlanlar = useCallback(async () => {
-    setYukleniyor(true);
-    const r = await fetch('/api/ilanlar?kendi=true');
-    const d = await r.json();
-    setIlanlar(Array.isArray(d) ? d : []);
-    setYukleniyor(false);
-  }, []);
-
-  const yukleTeklifler = useCallback(async () => {
-    setYukleniyor(true);
-    const r = await fetch('/api/teklif/benim');
-    const d = await r.json();
-    setTeklifler(d.teklifler ?? []);
-    setYukleniyor(false);
-  }, []);
-
-  const yukleMesajlar = useCallback(async () => {
-    setYukleniyor(true);
-    const r = await fetch('/api/mesaj/benim');
-    const d = await r.json();
-    setMesajlar(d.mesajlar ?? []);
-    setYukleniyor(false);
-  }, []);
-
-  useEffect(() => {
-    if (status !== 'authenticated') return;
-    if (sekme === 'ilanlar')   yukleIlanlar();
-    if (sekme === 'teklifler') yukleTeklifler();
-    if (sekme === 'mesajlar')  yukleMesajlar();
-  }, [sekme, status, yukleIlanlar, yukleTeklifler, yukleMesajlar]);
-
-  const ilanSil = async (id: string) => {
-    if (!confirm('Bu ilanı silmek istediğinizden emin misiniz?')) return;
-    await fetch(`/api/ilanlar/${id}`, { method: 'DELETE' });
-    yukleIlanlar();
+  const toggleMulti = (key: string, val: string) => {
+    const mevcut: string[] = formData[key] || [];
+    setField(key, mevcut.includes(val) ? mevcut.filter(v => v !== val) : [...mevcut, val]);
   };
 
-  // 🚨 ZIRH DEVAMI: Veri gelene kadar veya Vercel test ederken patlamaması için güvenli bekleme
-  if (status === 'loading' || !session) return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center',
-      justifyContent: 'center', fontFamily: 'inherit', color: '#aaa' }}>
-      ⏳ Yükleniyor...
-    </div>
-  );
+  // 🚨 Buluttan gelen linki yakalayıp ilana ekleyen siber fonksiyon
+  const handleMedyaYuklendi = (url: string) => {
+    // URL'nin sonuna bakarak video mu resim mi olduğunu anlıyoruz
+    const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/i);
+    setMedyalar(p => [...p, { url, tip: isVideo ? 'video' : 'resim' }]);
+  };
 
-  const user = session.user!;
-  const okunmadiMesaj = mesajlar.filter(m => m.durum === 'okunmadi').length;
+  const handleYayinla = async () => {
+    if (!seciliSektor) return;
+    const zorunlular = seciliSektor.hizmetAlanFormu.filter(f => f.zorunlu);
+    for (const f of zorunlular) {
+      if (!formData[f.key]) { setHata(`${f.label} zorunludur`); return; }
+    }
+    setYukleniyor(true);
+    setHata('');
+
+    const baslik = formData.baslik || `${seciliSektor.ad} - ${formData.altKategori || ''} - ${formData.sehir || ''}`;
+
+    const res = await fetch('/api/ilanlar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sektorId: seciliSektor.id,
+        baslik,
+        formData,
+        medyalar: medyalar.map(m => m.url), // Sadece URL'leri veritabanına gönderiyoruz
+        butceMin: Number(formData.butceMin) || 0,
+        butceMax: Number(formData.butceMax) || 0,
+        butceBirimi: seciliSektor.butceBirimi,
+        gizliAd: !session,
+      }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      if (!session) {
+        router.push(`/ilan/${data.id}?yeni=1&gizli=1`);
+      } else {
+        router.push(`/ilan/${data.id}?yeni=1`);
+      }
+    } else {
+      setHata(data.error || 'Hata oluştu');
+    }
+    setYukleniyor(false);
+  };
+
+  const inp = {
+    width: '100%', padding: '11px 14px', borderRadius: '11px',
+    border: '1.5px solid #e2e8f0', fontSize: '14px',
+    fontFamily: 'Inter, sans-serif', outline: 'none', background: 'white',
+  };
+
+  const renderAlan = (alan: FormAlan) => {
+    switch (alan.tip) {
+      case 'text':
+      case 'number':
+        return (
+          <input type={alan.tip} value={formData[alan.key] || ''}
+            onChange={e => setField(alan.key, e.target.value)}
+            placeholder={alan.placeholder} style={inp} />
+        );
+      case 'date':
+        return <input type="date" value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)} style={inp} />;
+      case 'daterange':
+        return (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <input type="date" placeholder="Başlangıç" value={formData[alan.key + '_bas'] || ''} onChange={e => setField(alan.key + '_bas', e.target.value)} style={inp} />
+            <input type="date" placeholder="Bitiş" value={formData[alan.key + '_bit'] || ''} onChange={e => setField(alan.key + '_bit', e.target.value)} style={inp} />
+          </div>
+        );
+      case 'textarea':
+        return (
+          <textarea value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)}
+            placeholder={alan.placeholder} rows={4}
+            style={{ ...inp, height: '100px', resize: 'vertical' }} />
+        );
+      case 'select':
+        return (
+          <select value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)} style={inp}>
+            <option value="">Seçin</option>
+            {alan.secenekler?.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        );
+      case 'multiselect':
+        return (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {alan.secenekler?.map(s => {
+              const secili = (formData[alan.key] || []).includes(s);
+              return (
+                <button key={s} type="button" onClick={() => toggleMulti(alan.key, s)}
+                  style={{ padding: '7px 12px', borderRadius: '8px', border: `1.5px solid ${secili ? '#2563eb' : '#e2e8f0'}`, background: secili ? '#2563eb' : 'white', color: secili ? 'white' : '#475569', fontFamily: 'inherit', fontSize: '12px', fontWeight: '500', cursor: 'pointer', transition: 'all 0.12s' }}>
+                  {secili ? '✓ ' : ''}{s}
+                </button>
+              );
+            })}
+          </div>
+        );
+      case 'range':
+        return (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', alignItems: 'center' }}>
+            <div style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '13px' }}>{alan.birim}</span>
+              <input type="number" placeholder="Min" value={formData[alan.key + 'Min'] || ''} onChange={e => setField(alan.key + 'Min', e.target.value)}
+                style={{ ...inp, paddingLeft: alan.birim === '$' ? '28px' : '14px' }} />
+            </div>
+            <div style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '13px' }}>{alan.birim}</span>
+              <input type="number" placeholder="Maks" value={formData[alan.key + 'Max'] || ''} onChange={e => setField(alan.key + 'Max', e.target.value)}
+                style={{ ...inp, paddingLeft: alan.birim === '$' ? '28px' : '14px' }} />
+            </div>
+          </div>
+        );
+      case 'toggle':
+        return (
+          <div onClick={() => setField(alan.key, !formData[alan.key])}
+            style={{ width: '48px', height: '26px', borderRadius: '13px', background: formData[alan.key] ? '#2563eb' : '#e2e8f0', cursor: 'pointer', position: 'relative', transition: 'background 0.2s' }}>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'white', position: 'absolute', top: '2px', left: formData[alan.key] ? '24px' : '2px', transition: 'left 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.2)' }} />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const gruplar = seciliSektor ? seciliSektor.hizmetAlanFormu.reduce((acc, alan) => {
+    const g = alan.grup || 'Genel';
+    if (!acc[g]) acc[g] = [];
+    acc[g].push(alan);
+    return acc;
+  }, {} as Record<string, FormAlan[]>) : {};
+
+  // 🚨 ZIRH: Eğer status 'loading' ise ve Vercel testi yapılıyorsa boş div dönerek çökmesini engelleriz
+  if (status === "loading") {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>Yükleniyor... ⏳</div>;
+  }
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Unbounded:wght@700;900&display=swap');
-        :root{--ink:#080811;--cream:#f7f5f0;--red:#e8361a;--gold:#f5a623;
-          --navy:#0d1b3e;--mid:#4a4860;--border:#e4e1db;--green:#18a558}
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;
-          background:var(--cream);color:var(--ink)}
-        a{text-decoration:none;color:inherit}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+        * { box-sizing: border-box; }
+        input, select, textarea { font-family: Inter, sans-serif; }
+        input:focus, select:focus, textarea:focus { border-color: #2563eb !important; }
       `}</style>
 
-      {/* TOPBAR */}
-      <div style={{ background: '#0d1b3e', padding: '14px 24px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-        <Link href="/" style={{ fontFamily: "'Unbounded',sans-serif", fontWeight: 900,
-          color: '#fff', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ background: '#e8361a', width: 26, height: 26, borderRadius: 6,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '.75rem', color: '#fff', fontWeight: 900 }}>S</span>
-          Swap<span style={{ color: '#e8361a' }}>Hubs</span>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {user.image
-            ? <img src={user.image} alt="" style={{ width: 32, height: 32,
-                borderRadius: '50%', objectFit: 'cover' }} />
-            : <div style={{ width: 32, height: 32, borderRadius: '50%',
-                background: '#e8361a', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', color: '#fff', fontWeight: 700,
-                fontSize: '.9rem' }}>
-                {user.name?.[0]?.toUpperCase() ?? 'U'}
-              </div>
-          }
-          <button onClick={() => signOut({ callbackUrl: '/' })}
-            style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.2)',
-              color: '#fff', padding: '6px 14px', borderRadius: 40,
-              fontSize: '.75rem', fontWeight: 600, cursor: 'pointer' }}>
-            Çıkış
-          </button>
+      {/* Header */}
+      <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '12px', position: 'sticky', top: 0, zIndex: 100 }}>
+        <button onClick={() => adim > 1 ? setAdim(p => p - 1) : router.push('/')}
+          style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white', width: '36px', height: '36px', borderRadius: '10px', cursor: 'pointer', fontSize: '16px' }}>←</button>
+        <div style={{ flex: 1 }}>
+          <h1 style={{ color: 'white', fontSize: '16px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }}>İlan Ver</h1>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '11px' }}>
+            Adım {adim} / {seciliSektor ? 3 : 1} {seciliSektor ? `· ${seciliSektor.icon} ${seciliSektor.ad}` : ''}
+          </p>
         </div>
-      </div>
-
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '32px 24px' }}>
-
-        {/* Kullanıcı karşılama */}
-        <div style={{ background: '#fff', borderRadius: 20, padding: '24px 28px',
-          marginBottom: 24, border: '1.5px solid #e4e1db',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          flexWrap: 'wrap', gap: 16 }}>
-          <div>
-            <h1 style={{ fontFamily: "'Unbounded',sans-serif", fontWeight: 900,
-              fontSize: '1.2rem', marginBottom: 4 }}>
-              👋 Merhaba, {user.name?.split(' ')[0]}!
-            </h1>
-            <p style={{ fontSize: '.82rem', color: '#6b6984' }}>{user.email}</p>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Link href="/ilan-ver"
-              style={{ background: '#e8361a', color: '#fff', padding: '10px 22px',
-                borderRadius: 40, fontWeight: 700, fontSize: '.85rem',
-                display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              ➕ İlan Ver
-            </Link>
-            <Link href="/ilanlar"
-              style={{ background: '#f2f1ef', color: '#080811', padding: '10px 18px',
-                borderRadius: 40, fontWeight: 600, fontSize: '.82rem',
-                display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              🔍 İlanları Gör
-            </Link>
-          </div>
-        </div>
-
-        {/* Sekme menüsü */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
-          {([
-            { k: 'ilanlar',   l: '📋 İlanlarım',   badge: ilanlar.length },
-            { k: 'teklifler', l: '⚡ Tekliflerim',  badge: teklifler.length },
-            { k: 'mesajlar',  l: '💬 Mesajlarım',   badge: okunmadiMesaj, badgeRenk: '#e8361a' },
-            { k: 'profil',    l: '👤 Profil' },
-          ] as { k: Sekme; l: string; badge?: number; badgeRenk?: string }[]).map(({ k, l, badge, badgeRenk }) => (
-            <button key={k} onClick={() => setSekme(k)}
-              style={{
-                padding: '10px 20px', 
-                borderRadius: 40, 
-                fontSize: '.85rem',
-                fontWeight: 700, 
-                cursor: 'pointer', 
-                fontFamily: 'inherit',
-                background: sekme === k ? '#0d1b3e' : '#fff',
-                color: sekme === k ? '#fff' : '#4a4860',
-                boxShadow: sekme === k ? '0 4px 14px rgba(13,27,62,.2)' : 'none',
-                border: sekme === k ? 'none' : '1.5px solid #e4e1db',
-                position: 'relative', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 6
-              }}>
-              {l}
-              {badge !== undefined && badge > 0 && (
-                <span style={{ background: badgeRenk ?? '#f5a623', color: '#fff',
-                  fontSize: '.62rem', fontWeight: 700, padding: '1px 6px',
-                  borderRadius: 20, minWidth: 18, textAlign: 'center' }}>
-                  {badge}
-                </span>
-              )}
-            </button>
+        <div style={{ display: 'flex', gap: '4px' }}>
+          {[1, 2, 3].map(a => (
+            <div key={a} style={{ width: '28px', height: '4px', borderRadius: '2px', background: a <= adim ? '#f59e0b' : 'rgba(255,255,255,0.15)', transition: 'background 0.2s' }} />
           ))}
         </div>
+      </div>
 
-        {/* ── İLANLARIM ── */}
-        {sekme === 'ilanlar' && (
-          <div>
-            {yukleniyor ? (
-              <BosSekme ikon="⏳" mesaj="Yükleniyor..." />
-            ) : ilanlar.length === 0 ? (
-              <BosSekme ikon="📭" mesaj="Henüz ilanınız yok."
-                buton={{ href: '/ilan-ver', etiket: '➕ İlk İlanını Ver' }} />
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {ilanlar.map(ilan => (
-                  <div key={ilan._id} style={{ background: '#fff', borderRadius: 16,
-                    border: '1.5px solid #e4e1db', padding: '18px 20px',
-                    display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                        <span style={{ background: ilan.tip === 'ticari' ? '#edf7ff' : '#fff5f3',
-                          color: ilan.tip === 'ticari' ? '#0369a1' : '#e8361a',
-                          fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 20 }}>
-                          {ilan.tip === 'ticari' ? '🏭 Ticari' : '🙋 Bireysel'}
-                        </span>
-                        <span style={{ background: ilan.durum === 'aktif' ? '#edfaf3' : '#f2f1ef',
-                          color: ilan.durum === 'aktif' ? '#18a558' : '#aaa',
-                          fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 20 }}>
-                          {ilan.durum === 'aktif' ? '● Yayında' : '● Pasif'}
-                        </span>
-                      </div>
-                      <div style={{ fontWeight: 700, fontSize: '.92rem',
-                        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {ilan.baslik}
-                      </div>
-                      <div style={{ fontSize: '.75rem', color: '#6b6984', marginTop: 4,
-                        display: 'flex', gap: 12 }}>
-                        <span>💬 {ilan.teklifSayisi} teklif</span>
-                        <span>📅 {tarih(ilan.createdAt)}</span>
-                        <span>₺{fmt(ilan.butceMin)}–{fmt(ilan.butceMax)}</span>
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-                      <Link href={`/ilan/${ilan._id}`}
-                        style={{ background: '#f2f1ef', color: '#080811', padding: '8px 16px',
-                          borderRadius: 40, fontSize: '.75rem', fontWeight: 700 }}>
-                        Görüntüle
-                      </Link>
-                      <button onClick={() => ilanSil(ilan._id)}
-                        style={{ background: '#fff3f0', color: '#e8361a', border: 'none',
-                          padding: '8px 14px', borderRadius: 40, fontSize: '.75rem',
-                          fontWeight: 700, cursor: 'pointer' }}>
-                        Sil
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '20px 16px' }}>
+        {hata && (
+          <div style={{ padding: '12px 16px', borderRadius: '12px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '13px', marginBottom: '14px' }}>
+            ⚠️ {hata}
           </div>
         )}
 
-        {/* ── TEKLİFLERİM ── */}
-        {sekme === 'teklifler' && (
+        {/* ── ADIM 1: SEKTÖR SEÇ ── */}
+        {adim === 1 && (
           <div>
-            {yukleniyor ? (
-              <BosSekme ikon="⏳" mesaj="Yükleniyor..." />
-            ) : teklifler.length === 0 ? (
-              <BosSekme ikon="⚡" mesaj="Henüz teklif vermediniz."
-                buton={{ href: '/ilanlar', etiket: '🔍 İlanları İncele' }} />
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {teklifler.map(t => (
-                  <div key={t._id} style={{ background: '#fff', borderRadius: 16,
-                    border: '1.5px solid #e4e1db', padding: '18px 20px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between',
-                      alignItems: 'flex-start', gap: 12, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: '.9rem' }}>{t.ilanBaslik}</div>
-                      <span style={{ fontFamily: "'Unbounded',sans-serif", fontWeight: 800,
-                        fontSize: '.9rem', color: '#18a558', flexShrink: 0 }}>
-                        {t.fiyat}
-                      </span>
-                    </div>
-                    <div style={{ fontSize: '.75rem', color: '#6b6984', display: 'flex', gap: 12 }}>
-                      <span style={{ background: t.durum === 'kabul' ? '#edfaf3' :
-                        t.durum === 'red' ? '#fff3f0' : '#f2f1ef',
-                        color: t.durum === 'kabul' ? '#18a558' :
-                          t.durum === 'red' ? '#e8361a' : '#6b6984',
-                        padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>
-                        {t.durum === 'kabul' ? '✅ Kabul Edildi'
-                          : t.durum === 'red' ? '❌ Reddedildi'
-                          : '⏳ Bekliyor'}
-                      </span>
-                      <span>📅 {tarih(t.createdAt)}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+            <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '6px' }}>Hangi Sektörde?</h2>
+            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>İlanınız hangi sektörde olduğunu seçin. Forma o sektöre özel alanlar gelir.</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
+              {SEKTORLER.map(s => (
+                <div key={s.id}
+                  onClick={() => { setSeciliSektor(s); setFormData({}); setAdim(2); }}
+                  style={{ background: 'white', borderRadius: '16px', border: `2px solid ${seciliSektor?.id === s.id ? s.renk : '#e2e8f0'}`, padding: '18px 14px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s' }}>
+                  <p style={{ fontSize: '32px', marginBottom: '8px' }}>{s.icon}</p>
+                  <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>{s.ad}</p>
+                  <p style={{ fontSize: '10px', color: '#94a3b8' }}>{s.altKategoriler?.length || 0} alt kategori</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* ── MESAJLARIM ── */}
-        {sekme === 'mesajlar' && (
+        {/* ── ADIM 2: FORM ── */}
+        {adim === 2 && seciliSektor && (
           <div>
-            {yukleniyor ? (
-              <BosSekme ikon="⏳" mesaj="Yükleniyor..." />
-            ) : mesajlar.length === 0 ? (
-              <BosSekme ikon="💬" mesaj="Henüz mesajınız yok." />
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {mesajlar.map(m => (
-                  <div key={m._id} style={{ background: '#fff', borderRadius: 16,
-                    border: `1.5px solid ${m.durum === 'okunmadi' ? '#f5c4bc' : '#e4e1db'}`,
-                    padding: '18px 20px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between',
-                      alignItems: 'flex-start', gap: 12, marginBottom: 8 }}>
-                      <div>
-                        <div style={{ fontWeight: 700, fontSize: '.88rem', marginBottom: 3 }}>
-                          {m.ilanBaslik}
-                        </div>
-                        <div style={{ fontSize: '.75rem', color: '#6b6984' }}>
-                          {m.gonderen.ad} · {tarih(m.createdAt)}
-                        </div>
-                      </div>
-                      {m.durum === 'okunmadi' && (
-                        <span style={{ background: '#e8361a', color: '#fff',
-                          fontSize: '.62rem', fontWeight: 700, padding: '2px 8px',
-                          borderRadius: 20, flexShrink: 0 }}>Yeni</span>
-                      )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: seciliSektor.renk + '20', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px' }}>
+                {seciliSektor.icon}
+              </div>
+              <div>
+                <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>{seciliSektor.ad}</h2>
+                <p style={{ color: '#94a3b8', fontSize: '12px' }}>Talebinizi detaylı doldurun</p>
+              </div>
+            </div>
+
+            <div style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
+              <label style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '6px' }}>İlan Başlığı</label>
+              <input value={formData.baslik || ''} onChange={e => setField('baslik', e.target.value)}
+                placeholder="Kısa ve açıklayıcı bir başlık yazın"
+                style={inp} />
+            </div>
+
+            {Object.entries(gruplar).map(([grupAdi, alanlar]) => (
+              <div key={grupAdi} style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
+                <h3 style={{ fontSize: '12px', fontWeight: '700', color: seciliSektor.renk, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '14px', paddingBottom: '8px', borderBottom: `2px solid ${seciliSektor.renk}20` }}>
+                  {grupAdi}
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  {alanlar.map(alan => (
+                    <div key={alan.key}>
+                      <label style={{ fontSize: '12px', fontWeight: '600', color: '#374151', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
+                        {alan.label}
+                        {alan.zorunlu && <span style={{ color: '#dc2626', fontSize: '13px' }}>*</span>}
+                        {alan.birim && alan.tip !== 'range' && <span style={{ color: '#94a3b8', fontWeight: '400' }}>({alan.birim})</span>}
+                      </label>
+                      {renderAlan(alan)}
                     </div>
-                    <p style={{ fontSize: '.83rem', color: '#4a4860', lineHeight: 1.6 }}>
-                      {m.mesaj}
-                    </p>
-                    {m.cevaplar.length > 0 && (
-                      <div style={{ marginTop: 10, background: '#f7f5f0', borderRadius: 10,
-                        padding: '10px 14px', fontSize: '.8rem', color: '#0d1b3e' }}>
-                        <strong>Cevap:</strong> {m.cevaplar[m.cevaplar.length - 1].metin}
-                      </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <button onClick={() => setAdim(3)}
+              style={{ width: '100%', padding: '14px', borderRadius: '14px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }}>
+              Devam Et → Medya Ekle
+            </button>
+          </div>
+        )}
+
+        {/* ── ADIM 3: MEDYA + YAYINLA ── */}
+        {adim === 3 && seciliSektor && (
+          <div>
+            <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '4px' }}>📸 Fotoğraf & Video</h2>
+            <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '16px' }}>Görsel eklemek ilanınızın teklif alma oranını 3x artırır. 100MB'a kadar video yükleyebilirsiniz!</p>
+
+            {/* Yüklenen Medyaların Izgarası */}
+            {medyalar.length > 0 && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '16px' }}>
+                {medyalar.map((m, i) => (
+                  <div key={i} style={{ position: 'relative', aspectRatio: '1', borderRadius: '12px', overflow: 'hidden', background: '#f1f5f9', border: `2px solid ${i === 0 ? '#f59e0b' : '#e2e8f0'}` }}>
+                    {m.tip === 'video' ? (
+                      <video src={m.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      <img src={m.url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     )}
+                    <button onClick={() => setMedyalar(p => p.filter((_, j) => j !== i))}
+                      style={{ position: 'absolute', top: '4px', right: '4px', width: '20px', height: '20px', borderRadius: '50%', background: '#dc2626', border: 'none', color: 'white', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
                   </div>
                 ))}
               </div>
             )}
+
+            {/* 🚨 SİBER SİLAHIMIZ BURADA ÇALIŞIYOR */}
+            <div style={{ marginBottom: '24px' }}>
+              <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
+            </div>
+
+            {/* Üye değilse bilgi kutusu */}
+            {!session && (
+              <div style={{ padding: '14px', borderRadius: '12px', background: '#fffbeb', border: '1px solid #fde68a', marginBottom: '14px' }}>
+                <p style={{ fontSize: '12px', fontWeight: '700', color: '#92400e', marginBottom: '4px' }}>ℹ️ Üye Olmadan İlan Veriyorsunuz</p>
+                <p style={{ fontSize: '11px', color: '#78350f', lineHeight: '1.5' }}>İlanınız yayınlanacak. Teklif kabul etmek istediğinizde üye olmanız istenecek. Ad, soyad ve mesaj bilgileriniz teklif verenler için gizli tutulacak.</p>
+              </div>
+            )}
+
+            <button onClick={handleYayinla} disabled={yukleniyor}
+              style={{ width: '100%', padding: '15px', borderRadius: '14px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '15px', fontWeight: '800', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.35)' }}>
+              {yukleniyor ? '⏳ İlan Yayınlanıyor...' : '⚡ İlanı Yayınla — Teklifler Gelsin'}
+            </button>
           </div>
         )}
-
-        {/* ── PROFİL ── */}
-        {sekme === 'profil' && (
-          <ProfilSekme user={user} />
-        )}
       </div>
-    </>
-  );
-}
-
-// ── Profil Sekmesi ────────────────────────────────────────────
-function ProfilSekme({ user }: { user: { name?: string | null; email?: string | null; image?: string | null } }) {
-  const [form, setForm]           = useState({ ad: user.name ?? '', email: user.email ?? '' });
-  const [sifre, setSifre]         = useState({ eski: '', yeni: '', tekrar: '' });
-  const [kaydediliyor, setKaydediliyor] = useState(false);
-  const [mesaj, setMesaj]         = useState('');
-
-  const profilGuncelle = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setKaydediliyor(true);
-    const r = await fetch('/api/kullanici/profil-guncelle', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ad: form.ad }),
-    });
-    setMesaj(r.ok ? '✅ Profil güncellendi.' : '❌ Hata oluştu.');
-    setKaydediliyor(false);
-  };
-
-  const sifreGuncelleProfil = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (sifre.yeni !== sifre.tekrar) { setMesaj('❌ Yeni şifreler eşleşmiyor.'); return; }
-    if (sifre.yeni.length < 6)       { setMesaj('❌ Şifre en az 6 karakter olmalı.'); return; }
-    setKaydediliyor(true);
-    const r = await fetch('/api/kullanici/sifre-degistir', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ eskiSifre: sifre.eski, yeniSifre: sifre.yeni }),
-    });
-    const d = await r.json();
-    setMesaj(r.ok ? '✅ Şifre güncellendi.' : `❌ ${d.error ?? 'Hata'}`);
-    if (r.ok) setSifre({ eski: '', yeni: '', tekrar: '' });
-    setKaydediliyor(false);
-  };
-
-  const inp: React.CSSProperties = {
-    width: '100%', border: '1.5px solid #e4e1db', borderRadius: 10,
-    padding: '11px 14px', fontSize: '.9rem', fontFamily: 'inherit',
-    outline: 'none', color: '#080811', background: '#faf9f7', boxSizing: 'border-box',
-  };
-  const lbl: React.CSSProperties = {
-    display: 'block', fontSize: '.73rem', fontWeight: 700, color: '#6b6984', marginBottom: 5,
-  };
-  const kart: React.CSSProperties = {
-    background: '#fff', borderRadius: 16, border: '1.5px solid #e4e1db', padding: '24px 24px',
-    marginBottom: 16,
-  };
-
-  return (
-    <div>
-      {mesaj && (
-        <div style={{ background: mesaj.startsWith('✅') ? '#edfaf3' : '#fff3f0',
-          border: `1px solid ${mesaj.startsWith('✅') ? '#a8eaca' : '#f5c4bc'}`,
-          color: mesaj.startsWith('✅') ? '#0d6e3f' : '#c0200a',
-          borderRadius: 10, padding: '10px 14px', fontSize: '.83rem', marginBottom: 16 }}>
-          {mesaj}
-        </div>
-      )}
-
-      {/* Profil Bilgileri */}
-      <div style={kart}>
-        <h3 style={{ fontFamily: "'Unbounded',sans-serif", fontWeight: 800,
-          fontSize: '.95rem', marginBottom: 18 }}>👤 Profil Bilgileri</h3>
-        <form onSubmit={profilGuncelle} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div>
-            <label style={lbl}>Ad Soyad</label>
-            <input style={inp} value={form.ad}
-              onChange={e => setForm(p => ({ ...p, ad: e.target.value }))} />
-          </div>
-          <div>
-            <label style={lbl}>E-posta (değiştirilemez)</label>
-            <input style={{ ...inp, opacity: .6 }} value={form.email} disabled />
-          </div>
-          <button type="submit" disabled={kaydediliyor}
-            style={{ background: '#0d1b3e', color: '#fff', border: 'none', padding: '12px',
-              borderRadius: 40, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
-            {kaydediliyor ? '⏳...' : '💾 Kaydet'}
-          </button>
-        </form>
-      </div>
-
-      {/* Şifre Değiştir */}
-      <div style={kart}>
-        <h3 style={{ fontFamily: "'Unbounded',sans-serif", fontWeight: 800,
-          fontSize: '.95rem', marginBottom: 18 }}>🔐 Şifre Değiştir</h3>
-        <form onSubmit={sifreGuncelleProfil}
-          style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div>
-            <label style={lbl}>Mevcut Şifre</label>
-            <input style={inp} type="password" value={sifre.eski} placeholder="Mevcut şifreniz"
-              onChange={e => setSifre(p => ({ ...p, eski: e.target.value }))} />
-          </div>
-          <div>
-            <label style={lbl}>Yeni Şifre</label>
-            <input style={inp} type="password" value={sifre.yeni} placeholder="En az 6 karakter"
-              onChange={e => setSifre(p => ({ ...p, yeni: e.target.value }))} />
-          </div>
-          <div>
-            <label style={lbl}>Yeni Şifre Tekrar</label>
-            <input style={inp} type="password" value={sifre.tekrar} placeholder="Tekrar girin"
-              onChange={e => setSifre(p => ({ ...p, tekrar: e.target.value }))} />
-          </div>
-          <button type="submit" disabled={kaydediliyor}
-            style={{ background: '#e8361a', color: '#fff', border: 'none', padding: '12px',
-              borderRadius: 40, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
-            {kaydediliyor ? '⏳...' : '🔐 Şifreyi Güncelle'}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// ── Yardımcı bileşen ──────────────────────────────────────────
-function BosSekme({ ikon, mesaj, buton }: {
-  ikon: string; mesaj: string; buton?: { href: string; etiket: string };
-}) {
-  return (
-    <div style={{ background: '#fff', borderRadius: 16, border: '1.5px solid #e4e1db',
-      padding: '48px 24px', textAlign: 'center' }}>
-      <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>{ikon}</div>
-      <p style={{ color: '#6b6984', fontSize: '.9rem', marginBottom: buton ? 20 : 0 }}>{mesaj}</p>
-      {buton && (
-        <Link href={buton.href}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 6,
-            background: '#e8361a', color: '#fff', padding: '10px 24px',
-            borderRadius: 40, fontWeight: 700, fontSize: '.85rem' }}>
-          {buton.etiket}
-        </Link>
-      )}
     </div>
   );
 }
