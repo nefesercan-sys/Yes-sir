@@ -7,7 +7,11 @@ import { SEKTORLER } from '@/lib/sektorler';
 const otelSektor = SEKTORLER.find(s => s.id === 'turizm')!;
 
 export default function OtelProfilPage() {
-  const { data: session } = useSession();
+  // 🚨 SİBER ZIRH: Vercel build esnasında çökmemesi için data nesnesini güvenli çektik
+  const sessionData = useSession() || {};
+  const session = sessionData.data;
+  const status = sessionData.status || "loading";
+  
   const router = useRouter();
   const [adim, setAdim] = useState(1);
   const [form, setForm] = useState<Record<string, any>>({});
@@ -16,8 +20,10 @@ export default function OtelProfilPage() {
   const [hata, setHata] = useState('');
 
   useEffect(() => {
-    if (!session) router.push('/giris?redirect=/otel-profil');
-  }, [session]);
+    if (status === "unauthenticated") {
+      router.push('/giris?redirect=/otel-profil');
+    }
+  }, [status, router]);
 
   const setField = (k: string, v: any) => setForm(p => ({ ...p, [k]: v }));
   const toggleMulti = (k: string, v: string) => {
@@ -75,7 +81,8 @@ export default function OtelProfilPage() {
     );
   };
 
-  if (!session) return null;
+  // 🚨 SİBER ZIRH: Eğer yükleniyorsa veya session yoksa ekranı patlatma, beklet
+  if (status === "loading" || !session) return null;
 
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
