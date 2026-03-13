@@ -1,6 +1,6 @@
 // ============================================================
 // SwapHubs — app/api/ilanlar/route.ts
-// Gelişmiş İlan API — Full-text search, pagination, filtering
+// Gelişmiş İlan API — Karma Algoritma, Search, Pagination
 // ============================================================
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -24,15 +24,16 @@ export async function GET(req: NextRequest) {
     const kategori = searchParams.get("kategori");
     const durum    = searchParams.get("durum");
     const yapay    = searchParams.get("yapay");
-    const sort     = searchParams.get("sort") || "yeni"; // yeni | populer | bütce_asc | butce_desc
+    const sort     = searchParams.get("sort") || "yeni"; // yeni | populer | random | bütce_asc | butce_desc
 
-    // Kendi ilanları
+    const db = await getDb();
+
+    // 1. Kendi İlanlarım (Kullanıcı Paneli İçin)
     if (kendi === "true") {
       const session = await getServerSession();
       if (!session?.user?.email) {
         return NextResponse.json([], { status: 401 });
       }
-      const db = await getDb();
       const ilanlar = await db
         .collection("ilanlar")
         .find({ "sahibi.email": session.user.email })
@@ -41,11 +42,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(serialize(ilanlar));
     }
 
-    const db = await getDb();
+    // 2. Filtreleri Hazırla
     const filter: Record<string, unknown> = {};
 
-    // Sadece aktif ilanları göster (admin değilse)
-    if (!durum) filter.durum = "aktif";
+    if (!durum) filter.durum = "aktif"; // Sadece aktif ilanları göster
     else filter.durum = durum;
 
     if (sektor)   filter.sektorId = sektor;
@@ -57,9 +57,11 @@ export async function GET(req: NextRequest) {
       { "formData.sehir": { $regex: sehir, $options: "i" } },
       { sehir: { $regex: sehir, $options: "i" } },
     ];
-    if (yapay !== null && yapay !== undefined) filter.yapay = yapay === "true";
+    if (yapay !== null && yapay !== undefined) {
+      filter.$or = [{ yapay: yapay === "true" }, { is_ai_generated: yapay === "true" }];
+    }
 
-    // Full-text search
+    // Full-text search (Arama Çubuğu)
     if (q) {
       filter.$or = [
         { baslik: { $regex: q, $options: "i" } },
@@ -70,7 +72,27 @@ export async function GET(req: NextRequest) {
       ];
     }
 
-    // Sıralama
+    // 3. KARMA (SHUFFLE/RANDOM) ALGORİTMASI 
+    if (sort === "random") {
+      const aggregatePipeline = [
+        { $match: filter },
+        { $sample: { size: limit } } // Rastgele 'limit' kadar belge çek
+      ];
+      
+      const [ilanlar, toplam] = await Promise.all([
+        db.collection("ilanlar").aggregate(aggregatePipeline).toArray(),
+        db.collection("ilanlar").countDocuments(filter), // Toplam sayıyı yine de verelim
+      ]);
+
+      return NextResponse.json({
+        ilanlar: serialize(ilanlar),
+        toplam,
+        sayfa: 1, // Karma akışta sayfalama mantıksızdır, hep 1 kalır
+        toplamSayfa: 1,
+      });
+    }
+
+    // 4. Standart Sıralama ve Sayfalama (Pagination)
     const sortMap: Record<string, Record<string, 1 | -1>> = {
       yeni: { createdAt: -1 },
       populer: { goruntulenme: -1, teklifSayisi: -1 },
@@ -90,6 +112,7 @@ export async function GET(req: NextRequest) {
       sayfa: Math.floor(skip / limit) + 1,
       toplamSayfa: Math.ceil(toplam / limit),
     });
+
   } catch (err) {
     console.error("GET /api/ilanlar error:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
@@ -108,6 +131,7 @@ export async function POST(req: NextRequest) {
       tip, rol, ulke, sehir,
       kategori, kategoriSlug,
       yapay = false,
+      is_ai_generated = false // Admin paneli ile tutarlılık için eklendi
     } = body;
 
     if (!sektorId || !baslik?.trim()) {
@@ -115,6 +139,9 @@ export async function POST(req: NextRequest) {
     }
 
     const db = await getDb();
+
+    // Hem 'yapay' hem 'is_ai_generated' parametrelerinden birinin true olması yeterli
+    const isBotGenerated = Boolean(yapay) || Boolean(is_ai_generated);
 
     const ilan = {
       sektorId,
@@ -135,11 +162,12 @@ export async function POST(req: NextRequest) {
       teklifSayisi: 0,
       goruntulenme: 0,
       teklifeAcik: true,
-      yapay:       Boolean(yapay),
+      yapay:       isBotGenerated, // Geriye dönük uyumluluk için
+      is_ai_generated: isBotGenerated, // Yeni mimari uyumluluğu için
       sahibi: session
         ? { email: session.user?.email, ad: session.user?.name, resim: session.user?.image }
         : null,
-      misafirToken: session ? null : crypto.randomUUID(),
+      misafirToken: session ? null : crypto.randomUUID(), // Üye olmayanlar için geçici token
       createdAt:   new Date(),
       guncellendi: new Date(),
     };
@@ -154,6 +182,6 @@ export async function POST(req: NextRequest) {
 }
 
 // ─── YARDIMCI ──────────────────────────────────────────────
-function serialize(data: any[]): any[] {
+function serialize(data: any) {
   return JSON.parse(JSON.stringify(data));
 }
