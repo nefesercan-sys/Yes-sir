@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 type Tab = 'ozet' | 'ilanlarim' | 'tekliflerim' | 'rezervasyonlar' | 'bildirimler' | 'profil' | 'ayarlar' | 'ai_ilan';
 type Rol = 'alan' | 'veren';
@@ -123,6 +124,9 @@ function PanelIcerik() {
           sektorId: aiSektor,
           sehir: aiSehir,
           adet: aiAdet,
+          // AI'a şu anki modumuzu da gönderiyoruz (bireysel/ticari, alan/veren)
+          tip: tip,
+          rol: rol,
           adminKey: process.env.NEXT_PUBLIC_ADMIN_KEY,
         }),
       });
@@ -145,6 +149,7 @@ function PanelIcerik() {
   
   if (!session) return null;
 
+  // 🚨 AI SEKME KISITLAMASI KALDIRILDI! Artık her modda görünecek.
   const tabs: { key: Tab; label: string; icon: string; badge?: number }[] = [
     { key: 'ozet', label: 'Özet', icon: '📊' },
     { key: 'ilanlarim', label: rol === 'alan' ? 'Taleplerim' : 'İlanlarım', icon: '📋', badge: stats.aktifIlan },
@@ -153,7 +158,7 @@ function PanelIcerik() {
     { key: 'bildirimler', label: 'Bildirimler', icon: '🔔', badge: stats.okunmamisBildirim },
     { key: 'profil', label: 'Profil', icon: '🏨' },
     { key: 'ayarlar', label: 'Ayarlar', icon: '⚙️' },
-    ...(tip === 'ticari' ? [{ key: 'ai_ilan' as Tab, label: 'AI İlan', icon: '🤖' }] : []),
+    { key: 'ai_ilan', label: 'AI İlan', icon: '🤖' }, // <--- ARTIK HER ZAMAN BURADA!
   ];
 
   return (
@@ -451,7 +456,7 @@ function PanelIcerik() {
             <div>
               <p className="sttl">Hesap Ayarları</p>
               <div className="card" style={{ marginBottom: '14px' }}>
-                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>Temel Bilgiler</p>
+                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>Profil Bilgileri</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {[
                     { l: 'Ad Soyad', k: 'name', v: session.user?.name || '', t: 'text' },
@@ -476,24 +481,27 @@ function PanelIcerik() {
             <div>
               <p className="sttl">🤖 AI İlan Oluşturucu</p>
               <p style={{ fontSize: '12px', color: '#64748b', marginBottom: '20px', lineHeight: '1.6' }}>
-                Claude AI ile otomatik yapay ilanlar oluştur. Bu ilanlar sitede gerçek ilan gibi görünür, teklif alabilir ama iletişim başlamaz.
+                Claude AI ile otomatik yapay ilanlar oluştur. Bu ilanlar <strong>{tip === 'ticari' ? 'TİCARİ' : 'BİREYSEL'}</strong> ve <strong>{rol === 'alan' ? 'TALEP EDEN' : 'HİZMET VEREN'}</strong> kimliği ile yayınlanacak.
               </p>
               <div className="card" style={{ marginBottom: '16px' }}>
                 <div style={{ marginBottom: '16px' }}>
                   <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>Sektör</label>
                   <select value={aiSektor} onChange={e => setAiSektor(e.target.value)} style={{ width: '100%', padding: '11px 14px', borderRadius: '11px', border: '1.5px solid #e2e8f0', fontSize: '14px', fontFamily: 'inherit', background: 'white', color: '#0f172a' }}>
-                    <option value="turizm">🏨 Turizm & Konaklama</option>
-                    <option value="seyahat">✈️ Seyahat & Transfer</option>
-                    <option value="kiralama">🔑 Kiralama</option>
-                    <option value="tamir">🔧 Tamir & Bakım</option>
-                    <option value="usta">👷 Usta & İşçi</option>
-                    <option value="temizlik">🧹 Temizlik Hizmetleri</option>
-                    <option value="uretim">🏭 Üretim & Özel Sipariş</option>
-                    <option value="giyim">👗 Giyim & Tekstil</option>
-                    <option value="saglik">💊 Sağlık & Güzellik</option>
-                    <option value="egitim">📚 Eğitim & Danışmanlık</option>
-                    <option value="etkinlik">🎊 Etkinlik & Düğün</option>
-                    <option value="mobilya">🪑 Mobilya & Dekorasyon</option>
+                    {tip === 'ticari' ? (
+                      <>
+                        <option value="turizm">🏨 Turizm & Konaklama</option>
+                        <option value="uretim">🏭 Fason Üretim</option>
+                        <option value="lojistik">🚢 Lojistik</option>
+                        <option value="tekstil">👗 Tekstil & Konfeksiyon</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="usta">👷 Tadilat & Usta</option>
+                        <option value="temizlik">🧹 Temizlik</option>
+                        <option value="nakliyat">📦 Evden Eve Nakliyat</option>
+                        <option value="egitim">📚 Özel Ders</option>
+                      </>
+                    )}
                   </select>
                 </div>
                 <div style={{ marginBottom: '16px' }}>
@@ -522,15 +530,6 @@ function PanelIcerik() {
                   {aiSonuc}
                 </div>
               )}
-              <div style={{ marginTop: '16px', padding: '14px 16px', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                <p style={{ fontSize: '12px', fontWeight: '700', color: '#475569', marginBottom: '6px' }}>ℹ️ Nasıl çalışır?</p>
-                <p style={{ fontSize: '11px', color: '#94a3b8', lineHeight: '1.7' }}>
-                  • Yapay ilanlar gerçek ilan gibi sitede görünür<br />
-                  • Hizmet verenler ücretsiz teklif verebilir<br />
-                  • Teklif "beklemede" kalır, iletişim başlamaz<br />
-                  • Platform dolgunluğu ve SEO için idealdir
-                </p>
-              </div>
             </div>
           )}
 
