@@ -1,6 +1,6 @@
 // ============================================================
 // SwapHubs — app/api/mesajlar/route.ts
-// Kullanıcılar arası mesajlaşma sistemi
+// Kullanıcılar arası mesajlaşma sistemi - GÜNCELLENDİ (Hatasız)
 // ============================================================
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -22,8 +22,12 @@ function conversationId(email1: string, email2: string, ilanId?: string): string
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession();
-    if (!session?.user?.email) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    // GÜVENLİK: Session veya email yoksa işlemi durdur
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    }
 
+    const userEmail = session.user.email; // Email'i değişkene alarak TS'yi rahatlatıyoruz
     const { searchParams } = new URL(req.url);
     const withEmail = searchParams.get("with");
     const ilanId    = searchParams.get("ilanId");
@@ -32,7 +36,7 @@ export async function GET(req: NextRequest) {
 
     if (withEmail) {
       // Belirli kullanıcıyla olan detaylı mesajlaşma akışı
-      const convId = conversationId(session.user.email, withEmail, ilanId || undefined);
+      const convId = conversationId(userEmail, withEmail, ilanId || undefined);
       const mesajlar = await db
         .collection("mesajlar")
         .find({ conversationId: convId })
@@ -41,7 +45,7 @@ export async function GET(req: NextRequest) {
 
       // Karşı tarafın gönderdiği okunmamış mesajları "okundu" olarak işaretle
       await db.collection("mesajlar").updateMany(
-        { conversationId: convId, alici: session.user.email, okundu: false },
+        { conversationId: convId, alici: userEmail, okundu: false },
         { $set: { okundu: true } }
       );
 
@@ -52,8 +56,8 @@ export async function GET(req: NextRequest) {
         {
           $match: {
             $or: [
-              { gonderen: session.user.email },
-              { alici: session.user.email },
+              { gonderen: userEmail },
+              { alici: userEmail },
             ],
           },
         },
@@ -70,7 +74,7 @@ export async function GET(req: NextRequest) {
             okunmamis: {
               $sum: {
                 $cond: [
-                  { $and: [{ $eq: ["$alici", session.user.email] }, { $eq: ["$okundu", false] }] },
+                  { $and: [{ $eq: ["$alici", userEmail] }, { $eq: ["$okundu", false] }] },
                   1, 0
                 ]
               }
@@ -83,10 +87,10 @@ export async function GET(req: NextRequest) {
 
       const konusmalar = await db.collection("mesajlar").aggregate(pipeline).toArray();
 
-      // Karşı taraf bilgilerini ekle (Gelen kutusunda kiminle konuştuğunu bilmek için)
+      // DÜZELTME: karsiTaraf belirlenirken session?.user?.email kullanıldı
       const sonuc = konusmalar.map(k => ({
         ...k,
-        karsiTaraf: k.gonderen === session.user.email ? k.alici : k.gonderen,
+        karsiTaraf: k.gonderen === userEmail ? k.alici : k.gonderen,
       }));
 
       return NextResponse.json(serialize(sonuc));
@@ -101,8 +105,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession();
-    if (!session?.user?.email) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    }
 
+    const userEmail = session.user.email;
     const body = await req.json();
     const { alici, mesaj, ilanId, ilanBaslik } = body;
 
@@ -111,11 +118,11 @@ export async function POST(req: NextRequest) {
     }
 
     const db = await getDb();
-    const convId = conversationId(session.user.email, alici, ilanId);
+    const convId = conversationId(userEmail, alici, ilanId);
 
     const yeniMesaj = {
       conversationId: convId,
-      gonderen: session.user.email,
+      gonderen: userEmail,
       alici: alici,
       mesaj: mesaj.trim(),
       ilanId: ilanId || null,
@@ -127,11 +134,13 @@ export async function POST(req: NextRequest) {
     // Mesajı veritabanına kaydet
     const result = await db.collection("mesajlar").insertOne(yeniMesaj);
 
-    // Karşı tarafa panel üzerinden bildirim düşmesi için bildirimler tablosuna da yazıyoruz
+    // DÜZELTME: session?.user?.name || userEmail kullanılarak undefined hatası engellendi
+    const gonderenAd = session.user.name || userEmail;
+
     await db.collection("bildirimler").insertOne({
       kullaniciEposta: alici,
       tip: "yeni_mesaj",
-      mesaj: `${session.user.name || session.user.email} size bir mesaj gönderdi.`,
+      mesaj: `${gonderenAd} size bir mesaj gönderdi.`,
       ilanId: ilanId || null,
       okundu: false,
       tarih: new Date(),
