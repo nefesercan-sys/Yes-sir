@@ -18,7 +18,11 @@ const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  const { data: session, status } = useSession();
+  // 🚨 SİBER ZIRH BURADA: Vercel prerendering yaparken useSession boş dönerse çökmesin diye güvenli çekiyoruz!
+  const sessionData = useSession() || {};
+  const session = sessionData.data;
+  const status = sessionData.status || "loading";
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const [aktifTab, setAktifTab] = useState<Tab>((searchParams.get('tab') as Tab) || 'ozet');
@@ -538,7 +542,7 @@ export default function PanelPage() {
       `}</style>
       <Suspense fallback={
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>
-          Yükleniyor...
+          Siber Panel Yükleniyor...
         </div>
       }>
         <PanelIcerik />
