@@ -40,7 +40,11 @@ const tarih = (d: string) => new Date(d).toLocaleDateString('tr-TR',
   { day: '2-digit', month: 'short', year: 'numeric' });
 
 export default function PanelSayfasi() {
-  const { data: session, status } = useSession();
+  // 🚨 SİBER ZIRH BURADA: Vercel build esnasında çökmemesi için veriyi güvenli çekiyoruz!
+  const sessionData = useSession() || {};
+  const session = sessionData.data;
+  const status = sessionData.status || "loading";
+  
   const router = useRouter();
   const [sekme, setSekme]         = useState<Sekme>('ilanlar');
   const [ilanlar,  setIlanlar]    = useState<Ilan[]>([]);
@@ -89,14 +93,13 @@ export default function PanelSayfasi() {
     yukleIlanlar();
   };
 
-  if (status === 'loading') return (
+  // 🚨 ZIRH DEVAMI: Veri gelene kadar veya Vercel test ederken patlamaması için güvenli bekleme
+  if (status === 'loading' || !session) return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center',
       justifyContent: 'center', fontFamily: 'inherit', color: '#aaa' }}>
       ⏳ Yükleniyor...
     </div>
   );
-
-  if (!session) return null;
 
   const user = session.user!;
   const okunmadiMesaj = mesajlar.filter(m => m.durum === 'okunmadi').length;
@@ -173,7 +176,7 @@ export default function PanelSayfasi() {
           </div>
         </div>
 
-        {/* Sekme menüsü (ÇAKIŞAN CSS TEMİZLENDİ) */}
+        {/* Sekme menüsü */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
           {([
             { k: 'ilanlar',   l: '📋 İlanlarım',   badge: ilanlar.length },
