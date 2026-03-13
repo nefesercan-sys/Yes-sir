@@ -9,6 +9,8 @@ export default async function AnaSayfa() {
 
   try {
     const db = await getDb();
+    
+    // 🚨 SİBER DÜZELTME: collection<any> ekleyerek TypeScript'in "_id kuralı" takıntısını ezip geçiyoruz!
     const [ilanRaw, istatRaw] = await Promise.all([
       db.collection('ilanlar').find({ durum: 'aktif' }).sort({ createdAt: -1 }).limit(24).toArray(),
       db.collection<any>('istatistikler').findOne({ _id: 'genel' })
@@ -16,6 +18,15 @@ export default async function AnaSayfa() {
     
     ilanlar = JSON.parse(JSON.stringify(ilanRaw));
 
+    // Canlı istatistikleri çekiyoruz
+    const [toplamIlan, toplamUye, toplamTeklif] = await Promise.all([
+      db.collection('ilanlar').countDocuments({ durum: 'aktif' }),
+      db.collection('users').countDocuments(),
+      db.collection('teklifler').countDocuments(),
+    ]);
+    
+    istatistik = { toplamIlan, toplamUye, toplamTeklif };
+    
   } catch (error) {
     console.error("Siber Veritabanı Hatası:", error);
   }
