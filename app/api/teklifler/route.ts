@@ -1,11 +1,14 @@
 // ============================================================
 // SwapHubs — app/api/teklifler/route.ts
-// Teklif sistemi — ver, al, kabul et, reddet
+// Teklif sistemi — ver, al, kabul et, reddet & Admin Denetimi
 // ============================================================
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+
+// Admin e-posta tanımlaması
+const ADMIN_EMAIL = 'nefesercan@gmail.com';
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,20 +18,32 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const kendi  = searchParams.get("kendi");   // kendi verdiğim teklifler
     const ilanId = searchParams.get("ilanId");  // belirli bir ilana teklifler
-    const admin  = searchParams.get("admin");
+    
+    // Panel veya Komuta Merkezinden özel bir "x-admin-key" gönderilmişse Admin kabul et
+    const isAdmin = session.user.email === ADMIN_EMAIL || req.headers.get("x-admin-key") === process.env.NEXT_PUBLIC_ADMIN_KEY;
 
     const db = await getDb();
     let filter: Record<string, any> = {};
 
-    if (admin === "true") {
-      // Admin tüm teklifleri görebilir — middleware koruması gerekli
+    if (isAdmin && searchParams.get("admin") === "true") {
+      // Eğer admin "Tüm Teklifleri" görmek isterse, filtreyi boş bırakıyoruz (Tüm db çekilir)
+      filter = {};
     } else if (ilanId) {
       filter.ilanId = ilanId;
     } else if (kendi === "true") {
       filter["teklifVeren.email"] = session.user.email;
     } else {
-      // İlan sahibinin ilanlarına gelen teklifler
-      filter["ilanSahibi.email"] = session.user.email;
+      // İlan sahibinin ilanlarına gelen teklifler (Veya yapay ilanlara gelen ve admine yönlenen teklifler)
+      if (isAdmin) {
+         // Admin isek kendi paneline hem kendi ilanlarına gelenleri hem de AI (yapay) ilanlara gelenleri çek
+         filter["$or"] = [
+            { "ilanSahibi.email": session.user.email },
+            { "ilanSahibi.email": { $exists: false } }, // AI ilanlarında sahip e-postası olmayabilir
+            { is_ai_generated: true }
+         ];
+      } else {
+         filter["ilanSahibi.email"] = session.user.email;
+      }
     }
 
     const teklifler = await db
@@ -61,7 +76,9 @@ export async function POST(req: NextRequest) {
     const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(ilanId) });
     if (!ilan) return NextResponse.json({ error: "İlan bulunamadı" }, { status: 404 });
     if (!ilan.teklifeAcik) return NextResponse.json({ error: "Bu ilan teklife kapalı" }, { status: 400 });
-    if (ilan.sahibi?.email === session.user.email) {
+    
+    // Kendi ilanıma teklif vermemi engelle (Ancak admin kendi ürettiği AI ilanı test etmek için teklif verebilir)
+    if (ilan.sahibi?.email === session.user.email && session.user.email !== ADMIN_EMAIL) {
       return NextResponse.json({ error: "Kendi ilanınıza teklif veremezsiniz" }, { status: 400 });
     }
 
@@ -89,7 +106,8 @@ export async function POST(req: NextRequest) {
         ad: session.user.name,
         resim: session.user.image,
       },
-      ilanSahibi: ilan.sahibi,
+      ilanSahibi: ilan.sahibi || { email: ADMIN_EMAIL, ad: "SwapHubs Sistem" }, // Eğer ilan AI ise sahibi Admin olsun
+      is_ai_generated: ilan.is_ai_generated || false, // Teklifin AI ilana yapılıp yapılmadığını işaretle
       olusturuldu: new Date(),
       guncellendi: new Date(),
     };
@@ -102,12 +120,14 @@ export async function POST(req: NextRequest) {
       { $inc: { teklifSayisi: 1 } }
     );
 
-    // İlan sahibine bildirim
-    if (ilan.sahibi?.email) {
+    // İlan sahibine bildirim (Eğer ilan AI tarafından oluşturulmuşsa bildirim Admine gider)
+    const bildirimAlicisi = ilan.is_ai_generated ? ADMIN_EMAIL : ilan.sahibi?.email;
+    
+    if (bildirimAlicisi) {
       await db.collection("bildirimler").insertOne({
-        kullanici: ilan.sahibi.email,
+        kullaniciEposta: bildirimAlicisi, // Panel arayüzünde "kullaniciEposta" olarak beklemiştik
         tip: "yeni_teklif",
-        mesaj: `"${ilan.baslik}" ilanınıza ${session.user.name} tarafından ${Number(fiyat).toLocaleString("tr-TR")} ${doviz || "₺"} teklif verildi.`,
+        mesaj: `"${ilan.baslik}" ${ilan.is_ai_generated ? '(AI)' : ''} ilanınıza ${session.user.name} tarafından ${Number(fiyat).toLocaleString("tr-TR")} ${doviz || "₺"} teklif verildi.`,
         ilanId,
         teklifId: result.insertedId.toString(),
         okundu: false,
@@ -139,12 +159,17 @@ export async function PATCH(req: NextRequest) {
     const teklif = await db.collection("teklifler").findOne({ _id: new ObjectId(teklifId) });
     if (!teklif) return NextResponse.json({ error: "Teklif bulunamadı" }, { status: 404 });
 
-    // Sadece ilan sahibi kabul/red edebilir, teklif veren geri alabilir
-    if (durum === "geri_alindi" && teklif.teklifVeren?.email !== session.user.email) {
-      return NextResponse.json({ error: "Yetkiniz yok" }, { status: 403 });
-    }
-    if (["kabul_edildi", "reddedildi"].includes(durum) && teklif.ilanSahibi?.email !== session.user.email) {
-      return NextResponse.json({ error: "Yetkiniz yok" }, { status: 403 });
+    const isAdmin = session.user.email === ADMIN_EMAIL;
+
+    // YETKİ KONTROLÜ (Admin her şeyi yapabilir)
+    if (!isAdmin) {
+      // Sadece ilan sahibi kabul/red edebilir, teklif veren geri alabilir
+      if (durum === "geri_alindi" && teklif.teklifVeren?.email !== session.user.email) {
+        return NextResponse.json({ error: "Yetkiniz yok" }, { status: 403 });
+      }
+      if (["kabul_edildi", "reddedildi"].includes(durum) && teklif.ilanSahibi?.email !== session.user.email) {
+        return NextResponse.json({ error: "Yetkiniz yok" }, { status: 403 });
+      }
     }
 
     await db.collection("teklifler").updateOne(
@@ -152,17 +177,17 @@ export async function PATCH(req: NextRequest) {
       { $set: { durum, guncellendi: new Date() } }
     );
 
-    // Bildirim
+    // Bildirim (Admin kabul/red ettiyse de bildirim orijinal teklif verene gider)
     const bildirimAlici = durum === "geri_alindi" ? teklif.ilanSahibi?.email : teklif.teklifVeren?.email;
     const bildirimMesaj = durum === "kabul_edildi"
-      ? `Teklifiniz kabul edildi! "${teklif.ilanBaslik}" ilanına verdiğiniz ${teklif.teklifFiyat.toLocaleString()} ${teklif.doviz} teklif onaylandı.`
+      ? `🎉 Teklifiniz kabul edildi! "${teklif.ilanBaslik}" ilanına verdiğiniz ${teklif.teklifFiyat.toLocaleString()} ${teklif.doviz} teklif onaylandı.`
       : durum === "reddedildi"
-      ? `"${teklif.ilanBaslik}" ilanına verdiğiniz teklif reddedildi.`
+      ? `❌ "${teklif.ilanBaslik}" ilanına verdiğiniz teklif maalesef reddedildi.`
       : `Teklif geri alındı.`;
 
-    if (bildirimAlici) {
+    if (bildirimAlici && bildirimAlici !== ADMIN_EMAIL) { // Kendimize geri bildirim atmayalım
       await db.collection("bildirimler").insertOne({
-        kullanici: bildirimAlici,
+        kullaniciEposta: bildirimAlici,
         tip: durum === "kabul_edildi" ? "teklif_kabul" : "teklif_guncelle",
         mesaj: bildirimMesaj,
         ilanId: teklif.ilanId,
