@@ -1,4 +1,3 @@
-
 export interface FormAlan {
   key: string;
   label: string;
@@ -28,12 +27,17 @@ export interface Sektor {
   butceBirimi: string;
   tip: 'bireysel' | 'ticari' | 'her_ikisi';
 }
+
+export const SEKTORLER: Sektor[] = [
+  // ═══════════════════════════════════════════
+  // 5. USTA & İŞÇİ
   // ═══════════════════════════════════════════
   {
     id: 'usta',
     ad: 'Usta & İşçi',
     icon: '👷',
     renk: '#dc2626',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'inşaat_usta', ad: 'İnşaat Ustası', icon: '🏗️' },
       { id: 'boyaci', ad: 'Boyacı', icon: '🎨' },
@@ -77,6 +81,7 @@ export interface Sektor {
     ad: 'Temizlik Hizmetleri',
     icon: '🧹',
     renk: '#0891b2',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'ev_temizlik', ad: 'Ev Temizliği', icon: '🏠' },
       { id: 'ofis_temizlik', ad: 'Ofis Temizliği', icon: '🏢' },
@@ -116,6 +121,7 @@ export interface Sektor {
     ad: 'Üretim & Özel Sipariş',
     icon: '🏭',
     renk: '#7c3aed',
+    tip: 'ticari',
     altKategoriler: [
       { id: 'metal', ad: 'Metal & Demir', icon: '⚙️' },
       { id: 'mobilya_uretim', ad: 'Mobilya', icon: '🪑' },
@@ -158,6 +164,7 @@ export interface Sektor {
     ad: 'Giyim & Tekstil',
     icon: '👗',
     renk: '#db2777',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'bayan_giyim', ad: 'Bayan Giyim', icon: '👗' },
       { id: 'erkek_giyim', ad: 'Erkek Giyim', icon: '👔' },
@@ -196,6 +203,7 @@ export interface Sektor {
     ad: 'Mobilya & Dekorasyon',
     icon: '🪑',
     renk: '#92400e',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'mutfak_mobilya', ad: 'Mutfak Mobilyası', icon: '🍳' },
       { id: 'yatak_odası', ad: 'Yatak Odası', icon: '🛏️' },
@@ -234,6 +242,7 @@ export interface Sektor {
     ad: 'Sağlık & Güzellik',
     icon: '💊',
     renk: '#16a34a',
+    tip: 'bireysel',
     altKategoriler: [
       { id: 'doktor', ad: 'Doktor / Klinik', icon: '🏥' },
       { id: 'dis', ad: 'Diş Hekimi', icon: '🦷' },
@@ -266,6 +275,7 @@ export interface Sektor {
     ad: 'Eğitim & Danışmanlık',
     icon: '📚',
     renk: '#2563eb',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'ozel_ders', ad: 'Özel Ders', icon: '👨‍🏫' },
       { id: 'dil_kursu', ad: 'Dil Kursu', icon: '🌍' },
@@ -302,6 +312,7 @@ export interface Sektor {
     ad: 'Etkinlik & Düğün',
     icon: '🎉',
     renk: '#9333ea',
+    tip: 'her_ikisi',
     altKategoriler: [
       { id: 'dugun', ad: 'Düğün', icon: '💒' },
       { id: 'organizasyon', ad: 'Organizasyon', icon: '🎪' },
