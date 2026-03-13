@@ -1,311 +1,225 @@
-'use client';
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { SEKTORLER, FormAlan, Sektor } from '@/lib/sektorler';
-// 🚨 SİBER SİLAHIMIZI İÇERİ ALIYORUZ!
-import MedyaYukleyici from '../components/MedyaYukleyici'; 
+"use client";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
-export default function IlanVerPage() {
-  // 🚨 SİBER ZIRH: Vercel build esnasında useSession hata vermesin diye güvenli şekilde çekiyoruz.
+interface Ilan {
+  _id: string;
+  baslik: string;
+  kategori: string;
+  tip: "bireysel" | "ticari";
+  rol: "alan" | "veren";
+  sehir: string;
+  butceMin: number;
+  butceMax: number;
+  resimUrl?: string;
+  createdAt: string;
+}
+
+export default function AnaSayfa() {
+  // 🚨 SİBER ZIRH: Vercel çökmesin diye güvenli bağlantı
   const sessionData = useSession() || {};
   const session = sessionData.data;
   const status = sessionData.status || "loading";
-
+  
   const router = useRouter();
-  const [adim, setAdim] = useState(1);
-  const [seciliSektor, setSeciliSektor] = useState<Sektor | null>(null);
-  const [formData, setFormData] = useState<Record<string, any>>({});
-  const [medyalar, setMedyalar] = useState<{ url: string; tip: 'resim' | 'video' }[]>([]);
-  const [yukleniyor, setYukleniyor] = useState(false);
-  const [hata, setHata] = useState('');
+  const [ilanlar, setIlanlar] = useState<Ilan[]>([]);
+  const [aramaQ, setAramaQ] = useState("");
+  const [yukleniyor, setYukleniyor] = useState(true);
 
-  const setField = (key: string, val: any) => setFormData(p => ({ ...p, [key]: val }));
+  useEffect(() => {
+    // Son ilanları çekiyoruz
+    fetch("/api/ilanlar?limit=8")
+      .then(res => res.json())
+      .then(data => {
+        setIlanlar(data.ilanlar || []);
+        setYukleniyor(false);
+      })
+      .catch(() => setYukleniyor(false));
+  }, []);
 
-  const toggleMulti = (key: string, val: string) => {
-    const mevcut: string[] = formData[key] || [];
-    setField(key, mevcut.includes(val) ? mevcut.filter(v => v !== val) : [...mevcut, val]);
+  const handleArama = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(aramaQ) router.push(`/ilanlar?q=${encodeURIComponent(aramaQ)}`);
   };
 
-  // 🚨 Buluttan gelen linki yakalayıp ilana ekleyen siber fonksiyon
-  const handleMedyaYuklendi = (url: string) => {
-    // URL'nin sonuna bakarak video mu resim mi olduğunu anlıyoruz
-    const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/i);
-    setMedyalar(p => [...p, { url, tip: isVideo ? 'video' : 'resim' }]);
-  };
-
-  const handleYayinla = async () => {
-    if (!seciliSektor) return;
-    const zorunlular = seciliSektor.hizmetAlanFormu.filter(f => f.zorunlu);
-    for (const f of zorunlular) {
-      if (!formData[f.key]) { setHata(`${f.label} zorunludur`); return; }
-    }
-    setYukleniyor(true);
-    setHata('');
-
-    const baslik = formData.baslik || `${seciliSektor.ad} - ${formData.altKategori || ''} - ${formData.sehir || ''}`;
-
-    const res = await fetch('/api/ilanlar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sektorId: seciliSektor.id,
-        baslik,
-        formData,
-        medyalar: medyalar.map(m => m.url), // Sadece URL'leri veritabanına gönderiyoruz
-        butceMin: Number(formData.butceMin) || 0,
-        butceMax: Number(formData.butceMax) || 0,
-        butceBirimi: seciliSektor.butceBirimi,
-        gizliAd: !session,
-      }),
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      if (!session) {
-        router.push(`/ilan/${data.id}?yeni=1&gizli=1`);
-      } else {
-        router.push(`/ilan/${data.id}?yeni=1`);
-      }
-    } else {
-      setHata(data.error || 'Hata oluştu');
-    }
-    setYukleniyor(false);
-  };
-
-  const inp = {
-    width: '100%', padding: '11px 14px', borderRadius: '11px',
-    border: '1.5px solid #e2e8f0', fontSize: '14px',
-    fontFamily: 'Inter, sans-serif', outline: 'none', background: 'white',
-  };
-
-  const renderAlan = (alan: FormAlan) => {
-    switch (alan.tip) {
-      case 'text':
-      case 'number':
-        return (
-          <input type={alan.tip} value={formData[alan.key] || ''}
-            onChange={e => setField(alan.key, e.target.value)}
-            placeholder={alan.placeholder} style={inp} />
-        );
-      case 'date':
-        return <input type="date" value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)} style={inp} />;
-      case 'daterange':
-        return (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-            <input type="date" placeholder="Başlangıç" value={formData[alan.key + '_bas'] || ''} onChange={e => setField(alan.key + '_bas', e.target.value)} style={inp} />
-            <input type="date" placeholder="Bitiş" value={formData[alan.key + '_bit'] || ''} onChange={e => setField(alan.key + '_bit', e.target.value)} style={inp} />
-          </div>
-        );
-      case 'textarea':
-        return (
-          <textarea value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)}
-            placeholder={alan.placeholder} rows={4}
-            style={{ ...inp, height: '100px', resize: 'vertical' }} />
-        );
-      case 'select':
-        return (
-          <select value={formData[alan.key] || ''} onChange={e => setField(alan.key, e.target.value)} style={inp}>
-            <option value="">Seçin</option>
-            {alan.secenekler?.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        );
-      case 'multiselect':
-        return (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-            {alan.secenekler?.map(s => {
-              const secili = (formData[alan.key] || []).includes(s);
-              return (
-                <button key={s} type="button" onClick={() => toggleMulti(alan.key, s)}
-                  style={{ padding: '7px 12px', borderRadius: '8px', border: `1.5px solid ${secili ? '#2563eb' : '#e2e8f0'}`, background: secili ? '#2563eb' : 'white', color: secili ? 'white' : '#475569', fontFamily: 'inherit', fontSize: '12px', fontWeight: '500', cursor: 'pointer', transition: 'all 0.12s' }}>
-                  {secili ? '✓ ' : ''}{s}
-                </button>
-              );
-            })}
-          </div>
-        );
-      case 'range':
-        return (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', alignItems: 'center' }}>
-            <div style={{ position: 'relative' }}>
-              <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '13px' }}>{alan.birim}</span>
-              <input type="number" placeholder="Min" value={formData[alan.key + 'Min'] || ''} onChange={e => setField(alan.key + 'Min', e.target.value)}
-                style={{ ...inp, paddingLeft: alan.birim === '$' ? '28px' : '14px' }} />
-            </div>
-            <div style={{ position: 'relative' }}>
-              <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '13px' }}>{alan.birim}</span>
-              <input type="number" placeholder="Maks" value={formData[alan.key + 'Max'] || ''} onChange={e => setField(alan.key + 'Max', e.target.value)}
-                style={{ ...inp, paddingLeft: alan.birim === '$' ? '28px' : '14px' }} />
-            </div>
-          </div>
-        );
-      case 'toggle':
-        return (
-          <div onClick={() => setField(alan.key, !formData[alan.key])}
-            style={{ width: '48px', height: '26px', borderRadius: '13px', background: formData[alan.key] ? '#2563eb' : '#e2e8f0', cursor: 'pointer', position: 'relative', transition: 'background 0.2s' }}>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'white', position: 'absolute', top: '2px', left: formData[alan.key] ? '24px' : '2px', transition: 'left 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.2)' }} />
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  const gruplar = seciliSektor ? seciliSektor.hizmetAlanFormu.reduce((acc, alan) => {
-    const g = alan.grup || 'Genel';
-    if (!acc[g]) acc[g] = [];
-    acc[g].push(alan);
-    return acc;
-  }, {} as Record<string, FormAlan[]>) : {};
-
-  // 🚨 ZIRH: Eğer status 'loading' ise ve Vercel testi yapılıyorsa boş div dönerek çökmesini engelleriz
-  if (status === "loading") {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>Yükleniyor... ⏳</div>;
-  }
+  const fmt = (n: number) => new Intl.NumberFormat('tr-TR').format(n);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
+    <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
-        * { box-sizing: border-box; }
-        input, select, textarea { font-family: Inter, sans-serif; }
-        input:focus, select:focus, textarea:focus { border-color: #2563eb !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;900&display=swap');
+        :root{--ink:#080811;--cream:#f7f5f0;--red:#e8361a;--gold:#f5a623;
+          --navy:#0d1b3e;--mid:#4a4860;--border:#e4e1db;--green:#18a558}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;background:var(--cream);color:var(--ink)}
+        a{text-decoration:none;color:inherit}
+
+        /* NAVBAR */
+        .topbar { background: var(--navy); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .logo-box { font-family: 'Unbounded', sans-serif; font-weight: 900; color: #fff; font-size: 1.3rem; display: flex; align-items: center; gap: 8px; cursor:pointer;}
+        .logo-box .icon { background: var(--red); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #fff; font-weight: 900; }
+        .nav-links { display: flex; gap: 12px; align-items: center; }
+        .btn-outline { background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.2); color: #fff; padding: 10px 20px; border-radius: 40px; font-size: .85rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .btn-outline:hover { background: rgba(255,255,255,.2); }
+        .btn-primary { background: var(--red); color: #fff; padding: 10px 24px; border-radius: 40px; font-size: .85rem; font-weight: 800; cursor: pointer; border: none; transition: background 0.2s; box-shadow: 0 4px 12px rgba(232, 54, 26, 0.3); }
+        .btn-primary:hover { background: #c42d14; transform: translateY(-1px); }
+
+        /* HERO BÖLÜMÜ */
+        .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a2d5a 100%); padding: 90px 24px 110px; text-align: center; color: white; position: relative; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: var(--cream); border-top-left-radius: 40px; border-top-right-radius: 40px; }
+        .hero h1 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 1.15rem; color: rgba(255,255,255,0.75); max-width: 650px; margin: 0 auto 36px; font-weight: 500; }
+        .search-box { max-width: 650px; margin: 0 auto; display: flex; background: white; padding: 8px; border-radius: 50px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+        .search-box input { flex: 1; border: none; outline: none; padding: 14px 24px; font-size: 1rem; font-family: inherit; border-radius: 50px; color: var(--ink); font-weight: 600; }
+        .search-box button { background: var(--red); color: white; border: none; padding: 0 32px; border-radius: 40px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+        .search-box button:hover { background: #c42d14; }
+
+        /* KATEGORİLER */
+        .cats { max-width: 1100px; margin: -30px auto 40px; padding: 0 24px; display: flex; gap: 14px; overflow-x: auto; position: relative; z-index: 10; scrollbar-width: none; }
+        .cats::-webkit-scrollbar { display: none; }
+        .cat-card { background: white; border: 1.5px solid var(--border); border-radius: 18px; padding: 18px 24px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .cat-card:hover { border-color: var(--navy); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .cat-icon { font-size: 1.8rem; }
+        .cat-name { font-weight: 800; font-size: .95rem; color: var(--ink); }
+
+        /* VİTRİN */
+        .vitrin { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
+        .section-title { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 1.8rem; margin-bottom: 28px; color: var(--ink); display: flex; justify-content: space-between; align-items: flex-end; }
+        .section-link { font-size: .9rem; color: var(--red); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; }
+        .section-link:hover { text-decoration: underline; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+        /* İLAN KARTI */
+        .ilan-kart{background:#fff;border-radius:20px;border:1.5px solid var(--border); overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column; cursor: pointer;}
+        .ilan-kart:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.08); border-color: var(--navy);}
+        .ilan-resim{width:100%;height:200px;object-fit:cover;background:#e8e6e0; display:flex;align-items:center;justify-content:center;font-size:3.5rem; position:relative;flex-shrink:0}
+        .ilan-resim img{width:100%;height:100%;object-fit:cover}
+        .ilan-tip-badge{position:absolute;top:12px;left:12px;font-size:.7rem; font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:.04em; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+        .badge-alan{background:rgba(13,27,62,.9);color:#fff}
+        .badge-veren{background:rgba(232,54,26,.95);color:#fff}
+        .badge-tr{position:absolute;bottom:12px;left:12px;background:rgba(245,166,35,.95); color:#080811;font-size:.7rem;font-weight:800;padding:4px 12px;border-radius:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+        .ilan-body{padding:20px;flex:1;display:flex;flex-direction:column}
+        .ilan-kat{display:inline-flex;align-items:center;gap:5px;font-size:.7rem; font-weight:800;letter-spacing:.06em;text-transform:uppercase; color:var(--red);background:rgba(232,54,26,.08); padding:4px 12px;border-radius:20px;margin-bottom:10px;width:fit-content}
+        .ilan-baslik{font-weight:800;font-size:1.05rem;line-height:1.4;margin-bottom:10px;flex:1; color: var(--ink);}
+        .ilan-meta{display:flex;gap:12px;font-size:.8rem;color:var(--mid); margin-bottom:16px;flex-wrap:wrap; font-weight: 600;}
+        .ilan-footer{display:flex;align-items:center;justify-content:space-between; padding-top:16px;border-top:1.5px solid var(--border)}
+        .ilan-butce{font-family:'Unbounded',sans-serif;font-weight:900;font-size:1rem; color: var(--navy);}
+        .ilan-btn-incele { background: var(--navy); color: #fff; border: none; padding: 10px 20px; border-radius: 40px; font-size: .8rem; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(13,27,62,.2); }
+        .ilan-btn-incele:hover { background: #1a2d5a; transform: translateY(-2px); }
+
+        @media(max-width: 768px) {
+          .nav-links span { display: none; }
+          .hero { padding: 60px 20px 80px; }
+          .search-box { flex-direction: column; background: transparent; box-shadow: none; gap: 10px; }
+          .search-box input { border-radius: 12px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+          .search-box button { border-radius: 12px; padding: 16px; }
+          .section-title { font-size: 1.4rem; flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
       `}</style>
 
-      {/* Header */}
-      <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '12px', position: 'sticky', top: 0, zIndex: 100 }}>
-        <button onClick={() => adim > 1 ? setAdim(p => p - 1) : router.push('/')}
-          style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white', width: '36px', height: '36px', borderRadius: '10px', cursor: 'pointer', fontSize: '16px' }}>←</button>
-        <div style={{ flex: 1 }}>
-          <h1 style={{ color: 'white', fontSize: '16px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }}>İlan Ver</h1>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '11px' }}>
-            Adım {adim} / {seciliSektor ? 3 : 1} {seciliSektor ? `· ${seciliSektor.icon} ${seciliSektor.ad}` : ''}
-          </p>
+      {/* NAVBAR */}
+      <nav className="topbar">
+        <div className="logo-box" onClick={() => router.push('/')}>
+          <div className="icon">S</div>
+          Swap<span style={{color: 'var(--red)'}}>Hubs</span>
         </div>
-        <div style={{ display: 'flex', gap: '4px' }}>
-          {[1, 2, 3].map(a => (
-            <div key={a} style={{ width: '28px', height: '4px', borderRadius: '2px', background: a <= adim ? '#f59e0b' : 'rgba(255,255,255,0.15)', transition: 'background 0.2s' }} />
-          ))}
+        <div className="nav-links">
+          <button className="btn-outline" onClick={() => router.push('/ilanlar')}>🔍 <span>Keşfet</span></button>
+          {status === 'authenticated' ? (
+            <button className="btn-outline" onClick={() => router.push('/panel')}>👤 <span>Panelim</span></button>
+          ) : (
+            <button className="btn-outline" onClick={() => router.push('/giris')}>Giriş Yap</button>
+          )}
+          <button className="btn-primary" onClick={() => router.push('/ilan-ver')}>➕ İlan Ver</button>
         </div>
+      </nav>
+
+      {/* HERO BÖLÜMÜ */}
+      <header className="hero">
+        <h1>Hizmet Al. Hizmet Ver.<br/><span>Güvenle Takasla.</span></h1>
+        <p>Türkiye'nin yeni nesil bireysel ve ticari hizmet platformu. Aradığın ustayı bul, tesisini tanıt veya emeğini takasla.</p>
+        <form className="search-box" onSubmit={handleArama}>
+          <input 
+            type="text" 
+            placeholder="Ne aramıştınız? (Örn: Web Tasarım, Usta, Temizlik...)" 
+            value={aramaQ}
+            onChange={(e) => setAramaQ(e.target.value)}
+          />
+          <button type="submit">Hemen Bul</button>
+        </form>
+      </header>
+
+      {/* KATEGORİ ŞERİDİ */}
+      <div className="cats">
+        {[
+          { id: "Emlak", icon: "🏠" }, { id: "Vasıta", icon: "🚗" }, 
+          { id: "Temizlik", icon: "🧹" }, { id: "Turizm", icon: "🏨" },
+          { id: "Tamir & Bakım", icon: "🔧" }, { id: "Teknoloji", icon: "💻" },
+          { id: "Moda", icon: "👕" }, { id: "2. El Eşya", icon: "♻️" }
+        ].map(k => (
+          <div key={k.id} className="cat-card" onClick={() => router.push(`/ilanlar?kategori=${encodeURIComponent(k.id)}`)}>
+            <div className="cat-icon">{k.icon}</div>
+            <div className="cat-name">{k.id}</div>
+          </div>
+        ))}
       </div>
 
-      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '20px 16px' }}>
-        {hata && (
-          <div style={{ padding: '12px 16px', borderRadius: '12px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '13px', marginBottom: '14px' }}>
-            ⚠️ {hata}
+      {/* VİTRİN */}
+      <main className="vitrin">
+        <div className="section-title">
+          <span>🔥 Vitrin İlanları</span>
+          <span className="section-link" onClick={() => router.push('/ilanlar')}>Tüm İlanları Gör →</span>
+        </div>
+        
+        {yukleniyor ? (
+          <div style={{ textAlign: 'center', padding: '80px', color: 'var(--mid)' }}>
+            <h2 style={{ fontSize: '3rem', marginBottom: '16px' }}>⏳</h2>
+            <p style={{ fontWeight: 600, fontSize: '1.1rem' }}>Vitrin hazırlanıyor...</p>
           </div>
-        )}
-
-        {/* ── ADIM 1: SEKTÖR SEÇ ── */}
-        {adim === 1 && (
-          <div>
-            <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '6px' }}>Hangi Sektörde?</h2>
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>İlanınız hangi sektörde olduğunu seçin. Forma o sektöre özel alanlar gelir.</p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
-              {SEKTORLER.map(s => (
-                <div key={s.id}
-                  onClick={() => { setSeciliSektor(s); setFormData({}); setAdim(2); }}
-                  style={{ background: 'white', borderRadius: '16px', border: `2px solid ${seciliSektor?.id === s.id ? s.renk : '#e2e8f0'}`, padding: '18px 14px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s' }}>
-                  <p style={{ fontSize: '32px', marginBottom: '8px' }}>{s.icon}</p>
-                  <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>{s.ad}</p>
-                  <p style={{ fontSize: '10px', color: '#94a3b8' }}>{s.altKategoriler?.length || 0} alt kategori</p>
+        ) : ilanlar.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '80px', background: 'white', borderRadius: '24px', border: '2px dashed var(--border)' }}>
+            <h2 style={{ fontSize: '4rem', marginBottom: '16px' }}>📭</h2>
+            <p style={{ fontWeight: 800, color: 'var(--ink)', fontSize: '1.2rem', marginBottom: '8px' }}>Henüz vitrinde ilan yok.</p>
+            <p style={{ color: 'var(--mid)', marginBottom: '24px', fontWeight: 500 }}>Vitrindeki yerini almak için ilk ilanı sen ver!</p>
+            <button className="btn-primary" style={{ padding: '14px 32px', fontSize: '1rem' }} onClick={() => router.push('/ilan-ver')}>Hemen İlan Ver</button>
+          </div>
+        ) : (
+          <div className="grid">
+            {ilanlar.map((ilan) => (
+              <div key={ilan._id} className="ilan-kart" onClick={() => router.push(`/ilan/${ilan._id}`)}>
+                <div className="ilan-resim">
+                  {ilan.resimUrl ? (
+                    <img src={ilan.resimUrl} alt={ilan.baslik} />
+                  ) : (
+                    <span>{ilan.tip === "ticari" ? "🏭" : "📋"}</span>
+                  )}
+                  <span className={`ilan-tip-badge ${ilan.rol === "alan" ? "badge-alan" : "badge-veren"}`}>
+                    {ilan.rol === "alan" ? "🙋 Hizmet Al" : "⚡ Hizmet Ver"}
+                  </span>
+                  {ilan.tip === "ticari" && <span className="badge-tr">🇹🇷 TR Üretimi</span>}
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
 
-        {/* ── ADIM 2: FORM ── */}
-        {adim === 2 && seciliSektor && (
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: seciliSektor.renk + '20', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px' }}>
-                {seciliSektor.icon}
-              </div>
-              <div>
-                <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>{seciliSektor.ad}</h2>
-                <p style={{ color: '#94a3b8', fontSize: '12px' }}>Talebinizi detaylı doldurun</p>
-              </div>
-            </div>
-
-            <div style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
-              <label style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '6px' }}>İlan Başlığı</label>
-              <input value={formData.baslik || ''} onChange={e => setField('baslik', e.target.value)}
-                placeholder="Kısa ve açıklayıcı bir başlık yazın"
-                style={inp} />
-            </div>
-
-            {Object.entries(gruplar).map(([grupAdi, alanlar]) => (
-              <div key={grupAdi} style={{ background: 'white', borderRadius: '16px', border: '1.5px solid #e2e8f0', padding: '18px', marginBottom: '14px' }}>
-                <h3 style={{ fontSize: '12px', fontWeight: '700', color: seciliSektor.renk, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '14px', paddingBottom: '8px', borderBottom: `2px solid ${seciliSektor.renk}20` }}>
-                  {grupAdi}
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  {alanlar.map(alan => (
-                    <div key={alan.key}>
-                      <label style={{ fontSize: '12px', fontWeight: '600', color: '#374151', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
-                        {alan.label}
-                        {alan.zorunlu && <span style={{ color: '#dc2626', fontSize: '13px' }}>*</span>}
-                        {alan.birim && alan.tip !== 'range' && <span style={{ color: '#94a3b8', fontWeight: '400' }}>({alan.birim})</span>}
-                      </label>
-                      {renderAlan(alan)}
+                <div className="ilan-body">
+                  <div className="ilan-kat">{ilan.kategori || "Genel"}</div>
+                  <div className="ilan-baslik">{ilan.baslik}</div>
+                  <div className="ilan-meta">
+                    <span>📍 {ilan.sehir || "Türkiye Geneli"}</span>
+                    <span>📅 {new Date(ilan.createdAt).toLocaleDateString("tr-TR")}</span>
+                  </div>
+                  <div className="ilan-footer">
+                    <div className="ilan-butce">
+                      {ilan.butceMin > 0 ? `₺${fmt(ilan.butceMin)}–${fmt(ilan.butceMax)}` : 'Bütçe Açık'}
                     </div>
-                  ))}
+                    <button className="ilan-btn-incele">İncele →</button>
+                  </div>
                 </div>
               </div>
             ))}
-
-            <button onClick={() => setAdim(3)}
-              style={{ width: '100%', padding: '14px', borderRadius: '14px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }}>
-              Devam Et → Medya Ekle
-            </button>
           </div>
         )}
-
-        {/* ── ADIM 3: MEDYA + YAYINLA ── */}
-        {adim === 3 && seciliSektor && (
-          <div>
-            <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '4px' }}>📸 Fotoğraf & Video</h2>
-            <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '16px' }}>Görsel eklemek ilanınızın teklif alma oranını 3x artırır. 100MB'a kadar video yükleyebilirsiniz!</p>
-
-            {/* Yüklenen Medyaların Izgarası */}
-            {medyalar.length > 0 && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '16px' }}>
-                {medyalar.map((m, i) => (
-                  <div key={i} style={{ position: 'relative', aspectRatio: '1', borderRadius: '12px', overflow: 'hidden', background: '#f1f5f9', border: `2px solid ${i === 0 ? '#f59e0b' : '#e2e8f0'}` }}>
-                    {m.tip === 'video' ? (
-                      <video src={m.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      <img src={m.url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    )}
-                    <button onClick={() => setMedyalar(p => p.filter((_, j) => j !== i))}
-                      style={{ position: 'absolute', top: '4px', right: '4px', width: '20px', height: '20px', borderRadius: '50%', background: '#dc2626', border: 'none', color: 'white', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* 🚨 SİBER SİLAHIMIZ BURADA ÇALIŞIYOR */}
-            <div style={{ marginBottom: '24px' }}>
-              <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
-            </div>
-
-            {/* Üye değilse bilgi kutusu */}
-            {!session && (
-              <div style={{ padding: '14px', borderRadius: '12px', background: '#fffbeb', border: '1px solid #fde68a', marginBottom: '14px' }}>
-                <p style={{ fontSize: '12px', fontWeight: '700', color: '#92400e', marginBottom: '4px' }}>ℹ️ Üye Olmadan İlan Veriyorsunuz</p>
-                <p style={{ fontSize: '11px', color: '#78350f', lineHeight: '1.5' }}>İlanınız yayınlanacak. Teklif kabul etmek istediğinizde üye olmanız istenecek. Ad, soyad ve mesaj bilgileriniz teklif verenler için gizli tutulacak.</p>
-              </div>
-            )}
-
-            <button onClick={handleYayinla} disabled={yukleniyor}
-              style={{ width: '100%', padding: '15px', borderRadius: '14px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '15px', fontWeight: '800', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.35)' }}>
-              {yukleniyor ? '⏳ İlan Yayınlanıyor...' : '⚡ İlanı Yayınla — Teklifler Gelsin'}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
