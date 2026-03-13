@@ -29,9 +29,6 @@ export interface Sektor {
 }
 
 export const SEKTORLER: Sektor[] = [
-  // ═══════════════════════════════════════════
-  // 5. USTA & İŞÇİ
-  // ═══════════════════════════════════════════
   {
     id: 'usta',
     ad: 'Usta & İşçi',
@@ -72,10 +69,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 6. TEMİZLİK HİZMETLERİ
-  // ═══════════════════════════════════════════
   {
     id: 'temizlik',
     ad: 'Temizlik Hizmetleri',
@@ -112,10 +105,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 7. ÜRETİM & ÖZEL SİPARİŞ
-  // ═══════════════════════════════════════════
   {
     id: 'uretim',
     ad: 'Üretim & Özel Sipariş',
@@ -155,10 +144,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 8. GİYİM & TEKSTİL
-  // ═══════════════════════════════════════════
   {
     id: 'giyim',
     ad: 'Giyim & Tekstil',
@@ -194,10 +179,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 9. MOBİLYA & DEKORASYON
-  // ═══════════════════════════════════════════
   {
     id: 'mobilya',
     ad: 'Mobilya & Dekorasyon',
@@ -233,10 +214,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 10. SAĞLIK & GÜZELLİK
-  // ═══════════════════════════════════════════
   {
     id: 'saglik',
     ad: 'Sağlık & Güzellik',
@@ -266,10 +243,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 11. EĞİTİM & DANIŞMANLIK
-  // ═══════════════════════════════════════════
   {
     id: 'egitim',
     ad: 'Eğitim & Danışmanlık',
@@ -303,10 +276,6 @@ export const SEKTORLER: Sektor[] = [
     ],
     butceBirimi: '₺',
   },
-
-  // ═══════════════════════════════════════════
-  // 12. ETKİNLİK & DÜĞÜN
-  // ═══════════════════════════════════════════
   {
     id: 'etkinlik',
     ad: 'Etkinlik & Düğün',
@@ -340,6 +309,20 @@ export const SEKTORLER: Sektor[] = [
     butceBirimi: '₺',
   },
 ];
+
+// ═══════════════════════════════════════════
+// LOGLARDAKİ HATALARI ÇÖZEN EKSİK EXPORTLAR
+// ═══════════════════════════════════════════
+
+export const KATEGORILER_ANA = SEKTORLER;
+
+export const BIREYSEL_SEKTORLER = SEKTORLER.filter(s => 
+  s.tip === 'bireysel' || s.tip === 'her_ikisi'
+);
+
+export const TICARI_SEKTORLER = SEKTORLER.filter(s => 
+  s.tip === 'ticari' || s.tip === 'her_ikisi'
+);
 
 export const SEKTOR_MAP = Object.fromEntries(SEKTORLER.map(s => [s.id, s]));
 
