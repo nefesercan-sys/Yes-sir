@@ -231,7 +231,56 @@ function IlanDetayIcerik() {
     </>
   );
 }
+// app/ilan/[id]/page.tsx — ÜSTÜNE EKLE
+import type { Metadata } from 'next';
+import { getDb } from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
 
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
+  try {
+    const db   = await getDb();
+    const ilan = await db.collection('ilanlar').findOne({
+      _id: new ObjectId(params.id),
+    });
+    if (!ilan) return { title: 'İlan Bulunamadı' };
+
+    const tip     = ilan.tip === 'ticari' ? 'Ticari' : 'Bireysel';
+    const lokasyon = ilan.ulke && ilan.ulke !== 'Türkiye'
+      ? `${ilan.ulke} / ${ilan.formData?.sehir ?? ''}`
+      : (ilan.formData?.sehir ?? 'Türkiye');
+
+    const title       = `${ilan.baslik} — ${lokasyon} | SwapHubs`;
+    const description =
+      `${ilan.baslik} ${tip} ilanı. ${lokasyon} bölgesinde ` +
+      `₺${ilan.butceMin}–₺${ilan.butceMax} bütçe aralığında. ` +
+      `${ilan.teklifSayisi ?? 0} teklif. SwapHubs'da hemen teklif verin.`;
+
+    return {
+      title,
+      description,
+      keywords: [
+        ilan.baslik,
+        ilan.formData?.sehir,
+        ilan.kategoriAd ?? ilan.sektorId,
+        tip === 'Ticari' ? 'toptan' : 'hizmet',
+        'SwapHubs', 'ilan', 'teklif',
+      ].filter(Boolean) as string[],
+      openGraph: {
+        title,
+        description,
+        url: `https://swaphubs.com/ilan/${params.id}`,
+        images: ilan.resimUrl
+          ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }]
+          : [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+      },
+      alternates: { canonical: `https://swaphubs.com/ilan/${params.id}` },
+    };
+  } catch {
+    return { title: 'SwapHubs İlan' };
+  }
+}
 export default function IlanDetaySayfa() {
   return <Suspense><IlanDetayIcerik /></Suspense>;
 }
