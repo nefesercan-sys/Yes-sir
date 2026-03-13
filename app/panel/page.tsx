@@ -1,7 +1,8 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 type Tab = 'ozet' | 'ilanlarim' | 'tekliflerim' | 'rezervasyonlar' | 'bildirimler' | 'profil' | 'ayarlar' | 'ai_ilan';
 
@@ -17,7 +18,6 @@ const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  // 🚨 SİBER ZIRH 1: 'status' değişkenini ekledik (loading, authenticated, unauthenticated)
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -40,21 +40,7 @@ function PanelIcerik() {
   const [aiYukleniyor, setAiYukleniyor] = useState(false);
   const [aiSonuc, setAiSonuc] = useState('');
 
-  useEffect(() => {
-    // 🚨 SİBER ZIRH 2: Sayfa yenilendiğinde kimlik okunuyorsa bekle, işlem yapma!
-    if (status === 'loading') return;
-    
-    // Okuma bitti ve kimlik yoksa (çıkış yapılmışsa) o zaman giriş sayfasına at
-    if (status === 'unauthenticated') { 
-      router.push('/giris?redirect=/panel'); 
-      return; 
-    }
-    
-    // Kimlik onaylandıysa verileri yükle
-    if (session) yukle();
-  }, [session, status, router]);
-
-  const yukle = async () => {
+  const yukle = useCallback(async () => {
     setLoading(true);
     try {
       const [ilanRes, teklifRes, rezvRes, bilRes] = await Promise.all([
@@ -83,7 +69,16 @@ function PanelIcerik() {
       if (u.ok) { const d = await u.json(); if (d.otelAdi) setProfil(d); }
     } catch (e) { console.error(e); }
     setLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (status === 'loading') return;
+    if (status === 'unauthenticated') { 
+      router.push('/giris?redirect=/panel'); 
+      return; 
+    }
+    if (session) yukle();
+  }, [session, status, router, yukle]);
 
   const bildirimOku = async (id: string) => {
     await fetch('/api/bildirimler', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
@@ -126,7 +121,6 @@ function PanelIcerik() {
     setAiYukleniyor(false);
   };
 
-  // 🚨 SİBER ZIRH 3: Kimlik kontrolü bitene kadar bekletme ekranı göster
   if (status === 'loading') {
     return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b', fontSize: '14px', fontWeight: '600' }}>Siber Kimlik Doğrulanıyor... ⏳</div>;
   }
@@ -149,7 +143,7 @@ function PanelIcerik() {
       <div style={{ background: '#0f172a', padding: '11px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button onClick={() => router.push('/')} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white', padding: '5px 10px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px' }}>← Ana Sayfa</button>
-          <span style={{ color: 'white', fontSize: '16px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }}>🌐 HizmetAra Panel</span>
+          <span style={{ color: 'white', fontSize: '16px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }}>🌐 SwapHubs Panel</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {stats.okunmamisBildirim > 0 && (
@@ -241,7 +235,18 @@ function PanelIcerik() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <p className="sttl" style={{ marginBottom: 0 }}>İlanlarım ({ilanlar.length})</p>
-                <button onClick={() => router.push('/ilan-ver')} style={{ padding: '8px 16px', borderRadius: '10px', background: '#0f172a', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>+ Yeni İlan</button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                   {ilanlar.length > 0 && (
+                     <button onClick={async () => {
+                       if(!confirm('TÜM İLANLAR SİLİNECEK! Onaylıyor musunuz?')) return;
+                       try {
+                         await Promise.all(ilanlar.map((ilan: any) => fetch(`/api/ilanlar/${ilan._id}`, { method: 'DELETE' })));
+                         yukle();
+                       } catch (e) { alert('Hata oluştu'); }
+                     }} style={{ padding: '8px 16px', borderRadius: '10px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>Tümünü Sil</button>
+                   )}
+                   <button onClick={() => router.push('/ilan-ver')} style={{ padding: '8px 16px', borderRadius: '10px', background: '#0f172a', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>+ Yeni İlan</button>
+                </div>
               </div>
               {loading ? <p style={{ color: '#94a3b8' }}>Yükleniyor...</p> :
                 ilanlar.length === 0 ? (
@@ -533,7 +538,7 @@ export default function PanelPage() {
       `}</style>
       <Suspense fallback={
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#64748b' }}>
-          Siber Panel Yükleniyor...
+          Yükleniyor...
         </div>
       }>
         <PanelIcerik />
