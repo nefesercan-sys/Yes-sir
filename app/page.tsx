@@ -48,9 +48,8 @@ export default function PanelSayfasi() {
   const [mesajlar, setMesajlar]   = useState<Mesaj[]>([]);
   const [yukleniyor, setYukleniyor] = useState(false);
 
-  // Giriş kontrolü
   useEffect(() => {
-    if (status === 'unauthenticated') router.push('/giris?callbackUrl=/panel');
+    if (status === 'unauthenticated') router.push('/giris?callbackUrl=/');
   }, [status, router]);
 
   const yukleIlanlar = useCallback(async () => {
@@ -174,7 +173,7 @@ export default function PanelSayfasi() {
           </div>
         </div>
 
-        {/* Sekme menüsü */}
+        {/* Sekme menüsü (ÇAKIŞAN CSS TEMİZLENDİ) */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
           {([
             { k: 'ilanlar',   l: '📋 İlanlarım',   badge: ilanlar.length },
@@ -183,13 +182,22 @@ export default function PanelSayfasi() {
             { k: 'profil',    l: '👤 Profil' },
           ] as { k: Sekme; l: string; badge?: number; badgeRenk?: string }[]).map(({ k, l, badge, badgeRenk }) => (
             <button key={k} onClick={() => setSekme(k)}
-              style={{ padding: '10px 20px', borderRadius: 40, fontSize: '.85rem',
-                fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+              style={{
+                padding: '10px 20px', 
+                borderRadius: 40, 
+                fontSize: '.85rem',
+                fontWeight: 700, 
+                cursor: 'pointer', 
+                fontFamily: 'inherit',
                 background: sekme === k ? '#0d1b3e' : '#fff',
-                color:      sekme === k ? '#fff'    : '#4a4860',
-                boxShadow:  sekme === k ? '0 4px 14px rgba(13,27,62,.2)' : 'none',
-                border:     sekme !== k ? '1.5px solid #e4e1db' : 'none',
-                position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } as React.CSSProperties}>
+                color: sekme === k ? '#fff' : '#4a4860',
+                boxShadow: sekme === k ? '0 4px 14px rgba(13,27,62,.2)' : 'none',
+                border: sekme === k ? 'none' : '1.5px solid #e4e1db',
+                position: 'relative', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 6
+              }}>
               {l}
               {badge !== undefined && badge > 0 && (
                 <span style={{ background: badgeRenk ?? '#f5a623', color: '#fff',
