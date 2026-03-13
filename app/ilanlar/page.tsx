@@ -49,7 +49,7 @@ function IlanlarIcerik() {
   const filtreliIlanlar = aramaQ
     ? ilanlar.filter(il =>
         il.baslik.toLowerCase().includes(aramaQ.toLowerCase()) ||
-        il.sehir?.toLowerCase().includes(aramaQ.toLowerCase()))
+        (il.sehir && il.sehir.toLowerCase().includes(aramaQ.toLowerCase())))
     : ilanlar;
 
   const ilanVer = () => {
