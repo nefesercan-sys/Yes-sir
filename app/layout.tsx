@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: {
-    default: 'SwapHubs — Türkiye\'nin Hizmet ve Ticaret İlan Merkezi',
+    default: "SwapHubs — Türkiye'nin Hizmet ve Ticaret İlan Merkezi",
     template: '%s | SwapHubs',
   },
   description:
-    'SwapHubs — Türkiye\'de bireysel hizmet ilanları ve endüstriyel ticaret platformu. ' +
+    "SwapHubs — Türkiye'de bireysel hizmet ilanları ve endüstriyel ticaret platformu. " +
     'Tamir, temizlik, turizm, tekstil, mermer, metal, gıda ve daha fazlası. ' +
     'İlan ver, teklif al, dünyayla ticaret yap.',
   keywords: [
@@ -18,29 +18,29 @@ export const metadata: Metadata = {
     'hizmet al','hizmet ver','türkiye ticaret','ihracat platformu',
     'SwapHubs','swaphubs.com',
   ],
-  authors: [{ name: 'SwapHubs', url: 'https://swaphubs.com' }],
-  creator: 'SwapHubs',
+  authors:   [{ name: 'SwapHubs', url: 'https://swaphubs.com' }],
+  creator:   'SwapHubs',
   publisher: 'SwapHubs',
   robots: {
     index: true, follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   openGraph: {
-    type: 'website',
-    locale: 'tr_TR',
+    type:            'website',
+    locale:          'tr_TR',
     alternateLocale: ['en_US'],
-    url: 'https://swaphubs.com',
-    siteName: 'SwapHubs',
-    title: 'SwapHubs — Türkiye Hizmet & Ticaret Platformu',
+    url:             'https://swaphubs.com',
+    siteName:        'SwapHubs',
+    title:           'SwapHubs — Türkiye Hizmet & Ticaret Platformu',
     description:
-      'Bireysel hizmetlerden endüstriyel üretime — Türkiye\'nin en kapsamlı ilan ve ticaret merkezi.',
+      "Bireysel hizmetlerden endüstriyel üretime — Türkiye'nin en kapsamlı ilan ve ticaret merkezi.",
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'SwapHubs' }],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'SwapHubs — Hizmet Al, Ver, Ticaret Yap',
-    description: 'Türkiye\'den dünyaya hizmet ve ticaret platformu.',
-    images: ['/og-image.jpg'],
+    card:        'summary_large_image',
+    title:       'SwapHubs — Hizmet Al, Ver, Ticaret Yap',
+    description: "Türkiye'den dünyaya hizmet ve ticaret platformu.",
+    images:      ['/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://swaphubs.com',
@@ -48,8 +48,6 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'GOOGLE_SEARCH_CONSOLE_TOKEN_BURAYA',
-    // yandex: 'YANDEX_TOKEN',
-    // bing: 'BING_TOKEN',
   },
 };
 
@@ -64,15 +62,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'SwapHubs',
-            url: 'https://swaphubs.com',
-            logo: 'https://swaphubs.com/logo.png',
+            '@type':    'Organization',
+            name:        'SwapHubs',
+            url:         'https://swaphubs.com',
+            logo:        'https://swaphubs.com/logo.png',
             description: 'Türkiye hizmet ve endüstriyel ticaret platformu',
             contactPoint: {
-              '@type': 'ContactPoint',
-              contactType: 'customer service',
-              availableLanguage: ['Turkish', 'English'],
+              '@type':            'ContactPoint',
+              contactType:        'customer service',
+              availableLanguage:  ['Turkish', 'English'],
             },
             sameAs: [
               'https://www.instagram.com/swaphubs',
@@ -85,12 +83,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'SwapHubs',
-            url: 'https://swaphubs.com',
+            '@type':    'WebSite',
+            name:        'SwapHubs',
+            url:         'https://swaphubs.com',
             potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://swaphubs.com/ilanlar?q={search_term_string}',
+              '@type':       'SearchAction',
+              target:        'https://swaphubs.com/ilanlar?q={search_term_string}',
               'query-input': 'required name=search_term_string',
             },
           })}}
