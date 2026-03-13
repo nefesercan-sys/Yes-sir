@@ -2,9 +2,10 @@
 import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 
 type Tab = 'ozet' | 'ilanlarim' | 'tekliflerim' | 'rezervasyonlar' | 'bildirimler' | 'profil' | 'ayarlar' | 'ai_ilan';
+type Rol = 'alan' | 'veren';
+type Tip = 'bireysel' | 'ticari';
 
 const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
   aktif:             { bg: '#ecfdf5', c: '#059669' },
@@ -18,7 +19,6 @@ const DURUM_STILLER: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  // 🚨 SİBER ZIRH BURADA: Vercel prerendering yaparken useSession boş dönerse çökmesin diye güvenli çekiyoruz!
   const sessionData = useSession() || {};
   const session = sessionData.data;
   const status = sessionData.status || "loading";
@@ -26,6 +26,11 @@ function PanelIcerik() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [aktifTab, setAktifTab] = useState<Tab>((searchParams.get('tab') as Tab) || 'ozet');
+  
+  // 🎛️ PANEL KİMLİK ŞALTERLERİ
+  const [rol, setRol] = useState<Rol>('alan');
+  const [tip, setTip] = useState<Tip>('bireysel');
+
   const [ilanlar, setIlanlar] = useState<any[]>([]);
   const [teklifler, setTeklifler] = useState<any[]>([]);
   const [rezervasyonlar, setRezervasyonlar] = useState<any[]>([]);
@@ -56,13 +61,22 @@ function PanelIcerik() {
       const [ilanD, teklifD, rezvD, bilD] = await Promise.all([
         ilanRes.json(), teklifRes.json(), rezvRes.json(), bilRes.json(),
       ]);
-      const iL = Array.isArray(ilanD) ? ilanD : ilanD.data || [];
+      
+      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.data || [];
+      // 🧠 Aktif Şaltere göre ilanları filtreliyoruz
+      const filtrelenmisIlanlar = tumIlanlar.filter((i: any) => i.rol === rol && i.tip === tip);
+      
       const tL = Array.isArray(teklifD) ? teklifD : [];
       const rL = Array.isArray(rezvD) ? rezvD : [];
       const bL = Array.isArray(bilD) ? bilD : [];
-      setIlanlar(iL); setTeklifler(tL); setRezervasyonlar(rL); setBildirimler(bL);
+      
+      setIlanlar(filtrelenmisIlanlar); 
+      setTeklifler(tL); 
+      setRezervasyonlar(rL); 
+      setBildirimler(bL);
+      
       setStats({
-        aktifIlan: iL.filter((i: any) => i.durum === 'aktif').length,
+        aktifIlan: filtrelenmisIlanlar.filter((i: any) => i.durum === 'aktif').length,
         bekleyenTeklif: tL.filter((t: any) => t.durum === 'bekliyor').length,
         aktifRezv: rL.filter((r: any) => r.durum === 'on_rezervasyon').length,
         okunmamisBildirim: bL.filter((b: any) => !b.okundu).length,
@@ -73,7 +87,7 @@ function PanelIcerik() {
       if (u.ok) { const d = await u.json(); if (d.otelAdi) setProfil(d); }
     } catch (e) { console.error(e); }
     setLoading(false);
-  }, []);
+  }, [rol, tip]);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -133,13 +147,13 @@ function PanelIcerik() {
 
   const tabs: { key: Tab; label: string; icon: string; badge?: number }[] = [
     { key: 'ozet', label: 'Özet', icon: '📊' },
-    { key: 'ilanlarim', label: 'İlanlarım', icon: '📋', badge: stats.aktifIlan },
+    { key: 'ilanlarim', label: rol === 'alan' ? 'Taleplerim' : 'İlanlarım', icon: '📋', badge: stats.aktifIlan },
     { key: 'tekliflerim', label: 'Tekliflerim', icon: '💼', badge: stats.bekleyenTeklif },
-    { key: 'rezervasyonlar', label: 'Rezervasyonlar', icon: '📅', badge: stats.aktifRezv },
+    { key: 'rezervasyonlar', label: 'Siparişler', icon: '📅', badge: stats.aktifRezv },
     { key: 'bildirimler', label: 'Bildirimler', icon: '🔔', badge: stats.okunmamisBildirim },
     { key: 'profil', label: 'Profil', icon: '🏨' },
     { key: 'ayarlar', label: 'Ayarlar', icon: '⚙️' },
-    { key: 'ai_ilan', label: 'AI İlan', icon: '🤖' },
+    ...(tip === 'ticari' ? [{ key: 'ai_ilan' as Tab, label: 'AI İlan', icon: '🤖' }] : []),
   ];
 
   return (
@@ -177,7 +191,7 @@ function PanelIcerik() {
           </div>
 
           <div className="mobile-hide" style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px solid #e2e8f0' }}>
-            <button onClick={() => router.push('/ilan-ver')} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer', marginBottom: '8px' }}>⚡ Yeni İlan Ver</button>
+            <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer', marginBottom: '8px' }}>⚡ Yeni İlan Ver</button>
             {!profil && (
               <button onClick={() => router.push('/otel-profil')} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: '#7c3aed', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>🏨 Tesis Profili Oluştur</button>
             )}
@@ -185,6 +199,24 @@ function PanelIcerik() {
         </div>
 
         <div className="main">
+          
+          {/* 🎛️ KİMLİK ŞALTERİ PANELİ */}
+          <div className="card" style={{ marginBottom: '24px', background: 'linear-gradient(135deg, #f8fafc, #f1f5f9)' }}>
+             <p style={{fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '12px', textTransform: 'uppercase'}}>Şu anki panel görünümünüz:</p>
+             
+             <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
+               <div style={{display: 'flex', background: 'white', padding: '4px', borderRadius: '10px', border: '1px solid #e2e8f0'}}>
+                 <button onClick={() => setTip('bireysel')} style={{padding: '8px 16px', border: 'none', borderRadius: '6px', background: tip === 'bireysel' ? '#2563eb' : 'transparent', color: tip === 'bireysel' ? 'white' : '#64748b', fontWeight: 600, fontSize: '12px', cursor: 'pointer', transition: '0.2s'}}>👤 Bireysel</button>
+                 <button onClick={() => setTip('ticari')} style={{padding: '8px 16px', border: 'none', borderRadius: '6px', background: tip === 'ticari' ? '#f59e0b' : 'transparent', color: tip === 'ticari' ? '#0f172a' : '#64748b', fontWeight: 600, fontSize: '12px', cursor: 'pointer', transition: '0.2s'}}>🏭 Ticari / Kurumsal</button>
+               </div>
+
+               <div style={{display: 'flex', background: 'white', padding: '4px', borderRadius: '10px', border: '1px solid #e2e8f0'}}>
+                 <button onClick={() => setRol('alan')} style={{padding: '8px 16px', border: 'none', borderRadius: '6px', background: rol === 'alan' ? '#0f172a' : 'transparent', color: rol === 'alan' ? 'white' : '#64748b', fontWeight: 600, fontSize: '12px', cursor: 'pointer', transition: '0.2s'}}>🛒 İş/Hizmet Alıyorum</button>
+                 <button onClick={() => setRol('veren')} style={{padding: '8px 16px', border: 'none', borderRadius: '6px', background: rol === 'veren' ? '#dc2626' : 'transparent', color: rol === 'veren' ? 'white' : '#64748b', fontWeight: 600, fontSize: '12px', cursor: 'pointer', transition: '0.2s'}}>💼 Hizmet Veriyorum</button>
+               </div>
+             </div>
+          </div>
+
           {aktifTab === 'ozet' && (
             <div>
               <p className="sttl">Hoş geldiniz, {session.user?.name?.split(' ')[0]} 👋</p>
@@ -192,7 +224,7 @@ function PanelIcerik() {
                 {[
                   { l: 'Aktif İlan', v: stats.aktifIlan, i: '📋', c: '#2563eb' },
                   { l: 'Bekleyen Teklif', v: stats.bekleyenTeklif, i: '💼', c: '#d97706' },
-                  { l: 'Aktif Rezerv.', v: stats.aktifRezv, i: '📅', c: '#7c3aed' },
+                  { l: 'Aktif Sipariş.', v: stats.aktifRezv, i: '📅', c: '#7c3aed' },
                   { l: 'Toplam Teklif', v: stats.toplamTeklif, i: '📊', c: '#059669' },
                 ].map(s => (
                   <div key={s.l} className="stat-card">
@@ -202,23 +234,23 @@ function PanelIcerik() {
                   </div>
                 ))}
               </div>
-              {!profil && (
+              {!profil && tip === 'ticari' && (
                 <div style={{ padding: '16px', borderRadius: '14px', background: '#fef9c3', border: '1px solid #fde68a', marginBottom: '16px', display: 'flex', gap: '12px', alignItems: 'center' }}>
                   <span style={{ fontSize: '24px' }}>⚠️</span>
                   <div>
-                    <p style={{ fontSize: '13px', fontWeight: '700', color: '#92400e', marginBottom: '3px' }}>Tesis Profili Eksik!</p>
-                    <p style={{ fontSize: '12px', color: '#78350f' }}>Turizm ilanlarına teklif verebilmek için tesis profilinizi tamamlayın.</p>
+                    <p style={{ fontSize: '13px', fontWeight: '700', color: '#92400e', marginBottom: '3px' }}>Kurumsal Profil Eksik!</p>
+                    <p style={{ fontSize: '12px', color: '#78350f' }}>Ticari ilanlarınıza daha çok teklif alabilmek için firma profilinizi tamamlayın.</p>
                   </div>
                   <button onClick={() => router.push('/otel-profil')} style={{ marginLeft: 'auto', padding: '8px 14px', borderRadius: '8px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }}>Tamamla →</button>
                 </div>
               )}
-              <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>Son İlanlarım</p>
+              <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>Son İlanlarım ({tip === 'ticari' ? 'Ticari' : 'Bireysel'})</p>
               {loading ? <p style={{ color: '#94a3b8', fontSize: '13px' }}>Yükleniyor...</p> :
                 ilanlar.slice(0, 3).length === 0 ? (
                   <div className="empty">
                     <p style={{ fontSize: '32px', marginBottom: '8px' }}>📋</p>
-                    <p style={{ fontSize: '14px', color: '#64748b' }}>Henüz ilanınız yok</p>
-                    <button onClick={() => router.push('/ilan-ver')} style={{ marginTop: '12px', padding: '9px 20px', borderRadius: '10px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer' }}>İlan Ver</button>
+                    <p style={{ fontSize: '14px', color: '#64748b' }}>Bu kimlikte henüz ilanınız yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ marginTop: '12px', padding: '9px 20px', borderRadius: '10px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', cursor: 'pointer' }}>Hemen İlan Ver</button>
                   </div>
                 ) : ilanlar.slice(0, 3).map(i => (
                   <div key={i._id} className="row" style={{ cursor: 'pointer' }} onClick={() => router.push(`/ilan/${i._id}`)}>
@@ -249,15 +281,15 @@ function PanelIcerik() {
                        } catch (e) { alert('Hata oluştu'); }
                      }} style={{ padding: '8px 16px', borderRadius: '10px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>Tümünü Sil</button>
                    )}
-                   <button onClick={() => router.push('/ilan-ver')} style={{ padding: '8px 16px', borderRadius: '10px', background: '#0f172a', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>+ Yeni İlan</button>
+                   <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: '8px 16px', borderRadius: '10px', background: '#0f172a', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>+ Yeni İlan</button>
                 </div>
               </div>
               {loading ? <p style={{ color: '#94a3b8' }}>Yükleniyor...</p> :
                 ilanlar.length === 0 ? (
                   <div className="empty">
                     <p style={{ fontSize: '32px', marginBottom: '8px' }}>📋</p>
-                    <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '12px' }}>İlan yok</p>
-                    <button onClick={() => router.push('/ilan-ver')} style={{ padding: '10px 24px', borderRadius: '10px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}>İlan Ver</button>
+                    <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '12px' }}>Bu görünümde ilanınız yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: '10px 24px', borderRadius: '10px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}>İlan Ver</button>
                   </div>
                 ) : ilanlar.map(i => (
                   <div key={i._id} className="row">
@@ -316,12 +348,12 @@ function PanelIcerik() {
 
           {aktifTab === 'rezervasyonlar' && (
             <div>
-              <p className="sttl">Rezervasyonlar ({rezervasyonlar.length})</p>
+              <p className="sttl">Siparişler ({rezervasyonlar.length})</p>
               {loading ? <p style={{ color: '#94a3b8' }}>Yükleniyor...</p> :
                 rezervasyonlar.length === 0 ? (
                   <div className="empty">
                     <p style={{ fontSize: '32px', marginBottom: '8px' }}>📅</p>
-                    <p style={{ fontSize: '14px', color: '#64748b' }}>Rezervasyon yok</p>
+                    <p style={{ fontSize: '14px', color: '#64748b' }}>Sipariş yok</p>
                   </div>
                 ) : rezervasyonlar.map(r => (
                   <div key={r._id} className="row">
@@ -375,7 +407,7 @@ function PanelIcerik() {
 
           {aktifTab === 'profil' && (
             <div>
-              <p className="sttl">Tesis Profili</p>
+              <p className="sttl">Kurumsal / Tesis Profili</p>
               {profil ? (
                 <div>
                   <div className="card" style={{ marginBottom: '14px' }}>
@@ -406,10 +438,10 @@ function PanelIcerik() {
                 </div>
               ) : (
                 <div className="empty">
-                  <p style={{ fontSize: '32px', marginBottom: '8px' }}>🏨</p>
-                  <p style={{ fontSize: '14px', fontWeight: '600', color: '#0f172a', marginBottom: '6px' }}>Tesis profiliniz yok</p>
-                  <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '16px' }}>Turizm ilanlarına teklif vermek için önce tesis profilinizi oluşturun.</p>
-                  <button onClick={() => router.push('/otel-profil')} style={{ padding: '11px 28px', borderRadius: '12px', background: '#7c3aed', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}>🏨 Tesis Profili Oluştur</button>
+                  <p style={{ fontSize: '32px', marginBottom: '8px' }}>🏢</p>
+                  <p style={{ fontSize: '14px', fontWeight: '600', color: '#0f172a', marginBottom: '6px' }}>Kurumsal Profiliniz Yok</p>
+                  <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '16px' }}>Özellikle ticari ilanlara teklif vermek için kurumsal profilinizi oluşturun.</p>
+                  <button onClick={() => router.push('/otel-profil')} style={{ padding: '11px 28px', borderRadius: '12px', background: '#7c3aed', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}>Profil Oluştur</button>
                 </div>
               )}
             </div>
@@ -419,7 +451,7 @@ function PanelIcerik() {
             <div>
               <p className="sttl">Hesap Ayarları</p>
               <div className="card" style={{ marginBottom: '14px' }}>
-                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>Profil Bilgileri</p>
+                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>Temel Bilgiler</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {[
                     { l: 'Ad Soyad', k: 'name', v: session.user?.name || '', t: 'text' },
