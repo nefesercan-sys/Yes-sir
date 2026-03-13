@@ -3,13 +3,12 @@
 // SwapHubs — app/ilan-ver/page.tsx
 // Gelişmiş İlan Formu — Ülke/şehir, sektöre özel form, medya
 // ============================================================
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SEKTORLER, BIREYSEL_SEKTORLER, TICARI_SEKTORLER, Sektor, FormAlan } from "@/lib/sektorler";
 import { COUNTRIES, getCitiesForCountry } from "@/lib/countries";
 import MedyaYukleyici from "@/app/components/MedyaYukleyici";
-import { Suspense } from "react";
 
 function IlanVerIcerik() {
   const { data: session, status } = useSession();
@@ -28,12 +27,14 @@ function IlanVerIcerik() {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [hata, setHata] = useState("");
 
-  // Ülke/şehir state
+  // Ülke/şehir state (Standart TR olarak başlar)
   const [seciliUlke, setSeciliUlke] = useState("TR");
   const [sehirler, setSehirler] = useState<string[]>([]);
 
   useEffect(() => {
     setSehirler(getCitiesForCountry(seciliUlke));
+    // Ülke değiştiğinde eski şehri temizle
+    setField("sehir", "");
   }, [seciliUlke]);
 
   const gosterilecekSektorler = tip === "bireysel" ? BIREYSEL_SEKTORLER : TICARI_SEKTORLER;
@@ -54,6 +55,18 @@ function IlanVerIcerik() {
 
   const handleYayinla = async () => {
     if (!seciliSektor) return;
+    
+    // Sabit Zorunlu Alan Kontrolleri
+    if (!formData.baslik?.trim()) {
+      setHata("İlan başlığı zorunludur");
+      return;
+    }
+    if (!formData.sehir?.trim()) {
+      setHata("Lütfen bir şehir/bölge seçin veya yazın");
+      return;
+    }
+
+    // Dinamik Zorunlu Alan Kontrolleri
     const zorunlular = aktifForm.filter(f => f.zorunlu);
     for (const f of zorunlular) {
       if (!formData[f.key]) {
@@ -61,10 +74,7 @@ function IlanVerIcerik() {
         return;
       }
     }
-    if (!formData.baslik?.trim()) {
-      setHata("İlan başlığı zorunludur");
-      return;
-    }
+
     setYukleniyor(true);
     setHata("");
     try {
@@ -76,10 +86,10 @@ function IlanVerIcerik() {
           sektorId: seciliSektor.id,
           baslik: formData.baslik,
           kategori: formData.altKategori || seciliSektor.ad,
-          formData: { ...formData, ulke: ulkeObj?.name || formData.ulke },
+          formData: { ...formData, ulke: ulkeObj?.name || "Türkiye" },
           medyalar: medyalar.map(m => m.url),
-          butceMin: Number(formData.butceMin) || Number(formData.butceMin) || 0,
-          butceMax: Number(formData.butceMax) || Number(formData.butceMax) || 0,
+          butceMin: Number(formData.butceMin) || 0,
+          butceMax: Number(formData.butceMax) || 0,
           butceBirimi: seciliSektor.butceBirimi,
           tip,
           rol,
@@ -107,44 +117,8 @@ function IlanVerIcerik() {
   };
 
   const renderAlan = (alan: FormAlan) => {
-    // Ülke ve şehir alanlarını override ediyoruz
-    if (alan.key === "ulke") {
-      return (
-        <select
-          value={seciliUlke}
-          onChange={e => { setSeciliUlke(e.target.value); setField("sehir", ""); }}
-          style={INP}
-        >
-          {COUNTRIES.map(c => (
-            <option key={c.code} value={c.code}>{c.flag} {c.name}</option>
-          ))}
-        </select>
-      );
-    }
-    if (alan.key === "sehir") {
-      const cities = sehirler;
-      if (cities.length > 0) {
-        return (
-          <select
-            value={formData.sehir || ""}
-            onChange={e => setField("sehir", e.target.value)}
-            style={INP}
-          >
-            <option value="">Şehir seçin</option>
-            {cities.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        );
-      }
-      return (
-        <input
-          type="text"
-          value={formData.sehir || ""}
-          onChange={e => setField("sehir", e.target.value)}
-          placeholder="Şehir / Bölge"
-          style={INP}
-        />
-      );
-    }
+    // Ülke ve şehir alanlarını renderAlan içinden çıkardığımız için burada atlıyoruz
+    if (alan.key === "ulke" || alan.key === "sehir") return null;
 
     switch (alan.tip) {
       case "text":
@@ -282,6 +256,9 @@ function IlanVerIcerik() {
   };
 
   const gruplar = aktifForm.reduce((acc, alan) => {
+    // Ülke ve şehri gruplamalardan da gizle (Yukarıda sabit verdik)
+    if (alan.key === "ulke" || alan.key === "sehir") return acc;
+    
     const g = alan.grup || "Genel";
     if (!acc[g]) acc[g] = [];
     acc[g].push(alan);
@@ -430,23 +407,67 @@ function IlanVerIcerik() {
               </button>
             </div>
 
-            {/* Başlık */}
+            {/* Başlık, Ülke ve Şehir (TÜM SEKTÖRLERDE STANDART VE ZORUNLU) */}
             <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
-              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
-                İlan Başlığı <span style={{ color: "#dc2626" }}>*</span>
-              </label>
-              <input
-                value={formData.baslik || ""}
-                onChange={e => setField("baslik", e.target.value)}
-                placeholder="Kısa, açıklayıcı bir başlık yazın..."
-                style={INP}
-              />
-              <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 6 }}>
-                Örn: {seciliSektor.id === "uretim" ? "100 Adet Bayan Mont Fason Üretim Arıyorum" : seciliSektor.id === "turizm" ? "Antalya 5 Yıldızlı Otel Paketi — 2 Kişi 7 Gece" : "Başlığı kısa ve net tutun"}
-              </p>
+              
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  İlan Başlığı <span style={{ color: "#dc2626" }}>*</span>
+                </label>
+                <input
+                  value={formData.baslik || ""}
+                  onChange={e => setField("baslik", e.target.value)}
+                  placeholder="Kısa, açıklayıcı bir başlık yazın..."
+                  style={INP}
+                />
+                <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 6 }}>
+                  Örn: {seciliSektor.id === "uretim" ? "100 Adet Bayan Mont Fason Üretim Arıyorum" : seciliSektor.id === "turizm" ? "Antalya 5 Yıldızlı Otel Paketi — 2 Kişi 7 Gece" : "Başlığı kısa ve net tutun"}
+                </p>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Ülke <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <select
+                    value={seciliUlke}
+                    onChange={e => setSeciliUlke(e.target.value)}
+                    style={INP}
+                  >
+                    {COUNTRIES.map(c => (
+                      <option key={c.code} value={c.code}>{c.flag} {c.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Şehir / Bölge <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  {sehirler.length > 0 ? (
+                    <select
+                      value={formData.sehir || ""}
+                      onChange={e => setField("sehir", e.target.value)}
+                      style={INP}
+                    >
+                      <option value="">Şehir seçin</option>
+                      {sehirler.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      value={formData.sehir || ""}
+                      onChange={e => setField("sehir", e.target.value)}
+                      placeholder="Şehir / Bölge yazın"
+                      style={INP}
+                    />
+                  )}
+                </div>
+              </div>
+
             </div>
 
-            {/* GRUP BAZLI FORM ALANLARI */}
+            {/* GRUP BAZLI DİNAMİK FORM ALANLARI */}
             {Object.entries(gruplar).map(([grupAdi, alanlar]) => (
               <div key={grupAdi} style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
                 <h3 style={{
