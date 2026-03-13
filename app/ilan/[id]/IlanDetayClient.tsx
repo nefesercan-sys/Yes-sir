@@ -1,386 +1,441 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { SEKTOR_MAP } from '@/lib/sektorler';
 
-interface Props { ilan: any; teklifler: any[]; }
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import TeklifModal from '@/components/TeklifModal';
+import TalepModal  from '@/components/TalepModal';
 
-export default function IlanDetayClient({ ilan, teklifler: baslangicTeklifler }: Props) {
-  const { data: session } = useSession();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [teklifler, setTeklifler] = useState(baslangicTeklifler);
-  const [teklifModal, setTeklifModal] = useState(false);
-  const [secimModal, setSecimModal] = useState<any>(null);
-  const [teklifForm, setTeklifForm] = useState({ fiyat: '', doviz: '₺', aciklama: '', hizmetDetay: '' });
-  const [gonderiyor, setGonderiyor] = useState(false);
-  const [yeniIlan, setYeniIlan] = useState(searchParams.get('yeni') === '1');
-  const [aktifResim, setAktifResim] = useState(0);
-
-  const sektor = SEKTOR_MAP[ilan.sektorId];
-  const ilanSahibiMi = session?.user?.email === ilan.sahibi?.email;
-
-  const handleTeklifVer = async () => {
-    if (!session) {
-      router.push(`/uye-ol?redirect=/ilan/${ilan._id}&tip=hizmet_veren`);
-      return;
-    }
-    if (!teklifForm.fiyat) { alert('Fiyat zorunlu'); return; }
-    setGonderiyor(true);
-
-    const res = await fetch('/api/teklifler', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ilanId: ilan._id,
-        teklifFiyat: Number(teklifForm.fiyat),
-        doviz: teklifForm.doviz,
-        aciklama: teklifForm.aciklama,
-        hizmetDetay: teklifForm.hizmetDetay,
-      }),
-    });
-    const data = await res.json();
-
-    if (data.success) {
-      alert(`✅ Teklif gönderildi!\nTeklif ücreti: ${data.teklifUcreti} ₺`);
-      setTeklifModal(false);
-      const guncel = await fetch(`/api/teklifler?ilanId=${ilan._id}`);
-      setTeklifler(await guncel.json());
-    } else {
-      alert(data.error);
-    }
-    setGonderiyor(false);
+interface IlanDetay {
+  _id:          string;
+  baslik:       string;
+  kategoriAd?:  string;
+  sektorId:     string;
+  tip:          'bireysel' | 'ticari';
+  rol:          'alan' | 'veren';
+  yapay?:       boolean;
+  sehir?:       string;
+  ulke?:        string;
+  butceMin:     number;
+  butceMax:     number;
+  butceBirimi?: string;
+  resimUrl?:    string;
+  teklifSayisi: number;
+  ozellikler?:  string[];
+  teslimat?:    string[];
+  formData?: {
+    sehir?:      string;
+    aciklama?:   string;
+    ozellikler?: string[];
   };
-
-  const handleTeklifKabul = async (teklifId: string) => {
-    if (!session) { router.push('/uye-ol'); return; }
-    if (!confirm('Bu teklifi kabul edip rezervasyon başlatmak istiyor musunuz?')) return;
-
-    const res = await fetch(`/api/teklifler/${teklifId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'kabul_et', ilanId: ilan._id }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      alert('✅ Teklif kabul edildi! Ön rezervasyon başladı.');
-      router.push(`/panel?tab=rezervasyonlar`);
-    } else {
-      alert(data.error);
-    }
+  seo?: {
+    metaBaslik?:       string;
+    metaAciklama?:     string;
+    anahtarKelimeler?: string[];
+    slug?:             string;
   };
+  createdAt: string;
+}
 
-  const formVeriGoster = () => {
-    if (!ilan.formData) return null;
-    const alanlar = sektor?.hizmetAlanFormu || [];
-    return alanlar.filter(a => ilan.formData[a.key]).map(a => {
-      let deger = ilan.formData[a.key];
-      if (Array.isArray(deger)) deger = deger.join(', ');
-      if (a.tip === 'daterange') {
-        deger = `${ilan.formData[a.key + '_bas'] || ''} — ${ilan.formData[a.key + '_bit'] || ''}`;
-      }
-      if (a.tip === 'range') {
-        deger = `${ilan.formData[a.key + 'Min'] || 0} — ${ilan.formData[a.key + 'Max'] || 0} ${a.birim}`;
-      }
-      return { label: a.label, deger };
-    }).filter(d => d.deger);
+const fmt = (n: number) => new Intl.NumberFormat('tr-TR').format(n);
+
+const SEKTOR_ADLARI: Record<string, string> = {
+  turizm:'Turizm & Konaklama', seyahat:'Seyahat & Transfer', kiralama:'Kiralama',
+  tamir:'Tamir & Bakım', usta:'Usta & İşçi', temizlik:'Temizlik Hizmetleri',
+  uretim:'Üretim & Özel Sipariş', giyim:'Giyim & Tekstil', saglik:'Sağlık & Güzellik',
+  egitim:'Eğitim & Danışmanlık', etkinlik:'Etkinlik & Düğün', mobilya:'Mobilya & Dekorasyon',
+  tekstil:'Tekstil & Hazır Giyim', 'mermer-tas':'Mermer & Doğal Taş', 'metal-celik':'Metal & Çelik',
+  'plastik-pvc':'Plastik & PVC', 'ahsap-mob':'Ahşap & Mobilya', 'gida-tarim':'Gıda & Tarım Ürünleri',
+  'insaat-malz':'İnşaat Malzemeleri', elektrik:'Elektrik & Enerji', makine:'Makine & Ekipman',
+  lojistik:'Lojistik & Nakliyat', 'kimya-boya':'Kimya & Boya', 'saglik-med':'Sağlık & Medikal',
+};
+
+function sektorEmoji(sektorId: string): string {
+  const map: Record<string, string> = {
+    turizm:'🏨', seyahat:'✈️', kiralama:'🔑', tamir:'🔧', usta:'👷', temizlik:'🧹',
+    uretim:'🏭', giyim:'👗', saglik:'💊', egitim:'📚', etkinlik:'🎊', mobilya:'🪑',
+    tekstil:'👕', 'mermer-tas':'🪨', 'metal-celik':'⚙️', 'plastik-pvc':'🧴',
+    'ahsap-mob':'🪵', 'gida-tarim':'🌾', 'insaat-malz':'🏗️', elektrik:'⚡',
+    makine:'🏭', lojistik:'🚢', 'kimya-boya':'🧪', 'saglik-med':'🏥',
   };
+  return map[sektorId] ?? '📋';
+}
+
+function IlanDetayIcerik({ id }: { id: string }) {
+  const searchParams  = useSearchParams();
+  const router        = useRouter();
+  const action        = searchParams.get('action');
+
+  const [ilan,        setIlan]        = useState<IlanDetay | null>(null);
+  const [yukleniyor,  setYukleniyor]  = useState(true);
+  const [teklifModal, setTeklifModal] = useState(action === 'teklif');
+  const [talepModal,  setTalepModal]  = useState(action === 'talep');
+
+  useEffect(() => {
+    fetch(`/api/ilanlar/${id}`)
+      .then(r => r.json())
+      .then(d => setIlan(d.ilan ?? null))
+      .catch(() => {})
+      .finally(() => setYukleniyor(false));
+  }, [id]);
+
+  if (yukleniyor) return (
+    <div style={{ display:'flex', alignItems:'center', justifyContent:'center',
+      height:'70vh', fontFamily:"'Plus Jakarta Sans',sans-serif", color:'#aaa', gap:10 }}>
+      <span style={{ fontSize:'1.4rem' }}>⏳</span> Yükleniyor...
+    </div>
+  );
+
+  if (!ilan) return (
+    <div style={{ display:'flex', flexDirection:'column', alignItems:'center',
+      justifyContent:'center', height:'70vh',
+      fontFamily:"'Plus Jakarta Sans',sans-serif", gap:14 }}>
+      <span style={{ fontSize:'3rem' }}>🔍</span>
+      <h2 style={{ fontFamily:"'Unbounded',sans-serif", fontWeight:900, fontSize:'1.2rem' }}>
+        İlan bulunamadı
+      </h2>
+      <p style={{ color:'#6b6984', fontSize:'.88rem' }}>Bu ilan kaldırılmış veya mevcut değil.</p>
+      <button onClick={() => router.push('/ilanlar')}
+        style={{ background:'#e8361a', color:'#fff', border:'none',
+          padding:'10px 24px', borderRadius:40, fontWeight:700,
+          cursor:'pointer', fontFamily:'inherit' }}>
+        İlanlara Dön
+      </button>
+    </div>
+  );
+
+  const sehir      = ilan.formData?.sehir ?? ilan.sehir ?? '';
+  const aciklama   = ilan.formData?.aciklama ?? '';
+  const ozellikler = [
+    ...(ilan.ozellikler ?? []),
+    ...(ilan.formData?.ozellikler ?? []),
+  ].filter((v, i, a) => a.indexOf(v) === i);
+  const sektorAd = ilan.kategoriAd ?? SEKTOR_ADLARI[ilan.sektorId] ?? ilan.sektorId;
+  const birim    = ilan.butceBirimi ?? '₺';
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
+    <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
-        * { box-sizing: border-box; }
-        .grid-detay { display: grid; grid-template-columns: 1fr 360px; gap: 24px; max-width: 1060px; margin: 0 auto; padding: 24px; }
-        @media(max-width:860px) { .grid-detay { grid-template-columns: 1fr; } }
-        .card { background: white; border-radius: 18px; border: 1.5px solid #e2e8f0; padding: 18px; margin-bottom: 14px; }
-        .teklif-satir { background: white; border-radius: 14px; border: 1.5px solid #e2e8f0; padding: 14px 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; transition: all 0.15s; }
-        .teklif-satir:hover { border-color: #2563eb; box-shadow: 0 4px 12px rgba(37,99,235,0.1); }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Unbounded:wght@700;900&display=swap');
+        :root {
+          --ink:#080811; --cream:#f7f5f0; --red:#e8361a; --gold:#f5a623;
+          --navy:#0d1b3e; --mid:#4a4860; --border:#e4e1db; --green:#18a558;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;background:var(--cream);color:var(--ink)}
+        a{text-decoration:none;color:inherit}
+
+        .topbar{background:var(--navy);padding:14px 24px;
+          display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .topbar-logo{font-family:'Unbounded',sans-serif;font-weight:900;
+          color:#fff;font-size:1rem;display:flex;align-items:center;gap:8px}
+        .logo-icon{background:var(--red);width:28px;height:28px;border-radius:7px;
+          display:flex;align-items:center;justify-content:center;
+          font-size:.8rem;color:#fff;font-weight:900;flex-shrink:0}
+        .topbar-logo span{color:var(--red)}
+        .topbar-geri{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+          color:#fff;padding:7px 16px;border-radius:40px;
+          font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit}
+        .topbar-geri:hover{background:rgba(255,255,255,.18)}
+
+        .hero-bar{background:linear-gradient(135deg,var(--navy),#1a2d5a);padding:32px 24px 28px}
+        .breadcrumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+        .bc{font-size:.7rem;color:rgba(255,255,255,.45);font-weight:600;cursor:pointer}
+        .bc:hover{color:rgba(255,255,255,.7)}
+        .bc-sep{font-size:.6rem;color:rgba(255,255,255,.2)}
+        .bc-aktif{color:var(--gold)!important;cursor:default!important}
+        .hero-baslik{font-family:'Unbounded',sans-serif;font-weight:900;
+          font-size:clamp(1.3rem,2.5vw,1.9rem);color:#fff;
+          letter-spacing:-.03em;line-height:1.2;margin-bottom:10px;max-width:800px}
+        .hero-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;color:rgba(255,255,255,.6)}
+        .hero-meta span{display:flex;align-items:center;gap:4px}
+
+        .badge{display:inline-flex;align-items:center;gap:5px;
+          font-size:.64rem;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em}
+        .badge-alan{background:rgba(13,27,62,.9);color:#fff}
+        .badge-veren{background:rgba(232,54,26,.9);color:#fff}
+        .badge-ticari{background:rgba(0,105,161,.85);color:#fff}
+        .badge-tr{background:rgba(232,54,26,.9);color:#fff}
+        .badge-yapay{background:rgba(124,58,237,.9);color:#fff}
+
+        .detay-wrap{max-width:1060px;margin:0 auto;padding:36px 24px 80px}
+        .detay-grid{display:grid;grid-template-columns:1fr 350px;gap:28px;align-items:start}
+
+        .detay-resim{width:100%;height:320px;border-radius:18px;overflow:hidden;
+          background:linear-gradient(135deg,#e8e6e0,#d4d1ca);
+          display:flex;align-items:center;justify-content:center;
+          font-size:5rem;margin-bottom:28px;position:relative}
+        .detay-resim img{width:100%;height:100%;object-fit:cover}
+        .resim-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
+
+        .detay-kat-satir{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+        .detay-kat{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+          color:var(--red);background:rgba(232,54,26,.08);padding:3px 12px;border-radius:20px}
+
+        .detay-aciklama{font-size:.92rem;line-height:1.85;color:#333;margin-bottom:28px}
+
+        .ozellikler-baslik{font-family:'Unbounded',sans-serif;font-weight:800;
+          font-size:.85rem;margin-bottom:12px;color:var(--navy)}
+        .ozellikler{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+        .ozellik{background:#fff;border:1.5px solid var(--border);border-radius:20px;
+          padding:5px 14px;font-size:.75rem;font-weight:600;color:var(--mid);
+          display:flex;align-items:center;gap:5px}
+
+        .teslimat-bolum{background:#fff;border:1.5px solid var(--border);border-radius:14px;
+          padding:18px 20px;margin-bottom:24px}
+        .teslimat-baslik{font-weight:700;font-size:.82rem;color:var(--navy);
+          margin-bottom:8px;display:flex;align-items:center;gap:6px}
+        .teslimat-item{font-size:.82rem;color:var(--mid);padding:3px 0}
+
+        .seo-keywords{display:none}
+
+        .sidebar{background:#fff;border-radius:20px;border:1.5px solid var(--border);
+          padding:24px;position:sticky;top:24px;overflow:hidden}
+        .sidebar-header{background:linear-gradient(135deg,var(--navy),#1a2d5a);
+          margin:-24px -24px 20px;padding:20px 24px;border-radius:18px 18px 0 0}
+        .sidebar-fiyat{font-family:'Unbounded',sans-serif;font-weight:900;
+          font-size:1.7rem;color:#fff;line-height:1}
+        .sidebar-fiyat-lbl{font-size:.68rem;color:rgba(255,255,255,.6);margin-top:5px;font-weight:600}
+
+        .sidebar-btn{width:100%;border:none;padding:13px;border-radius:40px;
+          font-weight:700;font-size:.88rem;cursor:pointer;font-family:inherit;
+          margin-bottom:10px;transition:all .2s;
+          display:flex;align-items:center;justify-content:center;gap:8px}
+        .btn-teklif{background:var(--red);color:#fff}
+        .btn-teklif:hover{background:#c42d14}
+        .btn-talep{background:var(--navy);color:#fff}
+        .btn-talep:hover{background:#1a2d5a}
+        .btn-whatsapp{background:#25d366;color:#fff}
+        .btn-whatsapp:hover{background:#1da851}
+
+        .teklif-sayisi-chip{display:flex;align-items:center;justify-content:center;gap:6px;
+          background:rgba(24,165,88,.1);color:var(--green);
+          font-size:.75rem;font-weight:700;padding:7px 14px;
+          border-radius:40px;margin-bottom:14px}
+
+        .sidebar-bilgi{font-size:.72rem;color:var(--mid);text-align:center;
+          line-height:1.7;padding-top:14px;border-top:1px solid var(--border);margin-top:4px}
+
+        .sidebar-detay{font-size:.75rem;color:var(--mid);margin-bottom:14px;
+          display:flex;flex-direction:column;gap:6px}
+        .sidebar-detay-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;
+          border-bottom:1px solid #f5f3ef}
+        .sidebar-detay-item:last-child{border-bottom:none}
+        .sidebar-detay-ikon{width:16px;flex-shrink:0}
+        .sidebar-detay-deger{font-weight:600;color:var(--ink);font-size:.78rem}
+
+        @media(max-width:800px){
+          .detay-grid{grid-template-columns:1fr}
+          .sidebar{position:static}
+          .detay-resim{height:220px}
+        }
       `}</style>
 
-      {/* Yeni İlan Bildirimi */}
-      {yeniIlan && (
-        <div style={{ position: 'fixed', top: '16px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, background: '#059669', color: 'white', padding: '13px 22px', borderRadius: '14px', boxShadow: '0 8px 32px rgba(0,0,0,0.2)', fontSize: '13px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          🎉 İlanınız yayınlandı! Teklifler gelmeye başlayacak.
-          <button onClick={() => setYeniIlan(false)} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: 'white', padding: '3px 8px', borderRadius: '6px', cursor: 'pointer' }}>✕</button>
+      {/* TOPBAR */}
+      <div className="topbar">
+        <div className="topbar-logo">
+          <div className="logo-icon">S</div>
+          Swap<span>Hubs</span>
         </div>
-      )}
-
-      {/* Nav */}
-      <div style={{ background: '#0f172a', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button onClick={() => router.push('/')} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px' }}>← Geri</button>
-        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '12px', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {sektor?.icon} {sektor?.ad} · {ilan.baslik}
-        </span>
-        {!ilanSahibiMi && (
-          <button onClick={() => setTeklifModal(true)}
-            style={{ background: '#f59e0b', border: 'none', color: '#0f172a', padding: '7px 14px', borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit', fontSize: '12px', fontWeight: '700', flexShrink: 0 }}>
-            💼 Teklif Ver
-          </button>
-        )}
+        <button className="topbar-geri" onClick={() => router.back()}>← Geri</button>
       </div>
 
-      <div className="grid-detay">
-        {/* SOL */}
-        <div>
-          {/* Medya */}
-          {ilan.medyalar?.length > 0 && (
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ borderRadius: '18px', overflow: 'hidden', aspectRatio: '16/9', background: '#f1f5f9', marginBottom: '8px' }}>
-                {ilan.medyalar[aktifResim]?.includes('.mp4') ? (
-                  <video src={ilan.medyalar[aktifResim]} controls style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                  <img src={ilan.medyalar[aktifResim]} alt={ilan.baslik} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                )}
+      {/* HERO BAR */}
+      <div className="hero-bar">
+        <div className="breadcrumb">
+          <span className="bc" onClick={() => router.push('/')}>Ana Sayfa</span>
+          <span className="bc-sep">›</span>
+          <span className="bc" onClick={() => router.push('/ilanlar')}>İlanlar</span>
+          <span className="bc-sep">›</span>
+          <span className="bc" onClick={() => router.push(`/ilanlar?tip=${ilan.tip}`)}>
+            {ilan.tip === 'ticari' ? 'Ticari' : 'Bireysel'}
+          </span>
+          <span className="bc-sep">›</span>
+          <span className="bc bc-aktif">{sektorAd}</span>
+        </div>
+        <h1 className="hero-baslik">{ilan.baslik}</h1>
+        <div className="hero-meta">
+          <span>📍 {ilan.ulke && ilan.ulke !== 'Türkiye' ? `${ilan.ulke} / ` : ''}{sehir}</span>
+          <span>📅 {new Date(ilan.createdAt).toLocaleDateString('tr-TR', { day:'2-digit', month:'long', year:'numeric' })}</span>
+          {ilan.teklifSayisi > 0 && <span>💬 {ilan.teklifSayisi} teklif</span>}
+          {ilan.rol === 'alan'  && <span>🙋 Hizmet Talep Ediliyor</span>}
+          {ilan.rol === 'veren' && <span>⚡ Hizmet Veriliyor</span>}
+        </div>
+      </div>
+
+      <div className="detay-wrap">
+        <div className="detay-grid">
+
+          {/* SOL KOLON */}
+          <div>
+            <div className="detay-resim">
+              {ilan.resimUrl
+                ? <img src={ilan.resimUrl} alt={ilan.baslik} />
+                : <span>{sektorEmoji(ilan.sektorId)}</span>
+              }
+              <div className="resim-badges">
+                <span className={`badge ${ilan.rol === 'alan' ? 'badge-alan' : 'badge-veren'}`}>
+                  {ilan.rol === 'alan' ? '🙋 Talep' : '⚡ Hizmet'}
+                </span>
+                {ilan.tip === 'ticari' && <span className="badge badge-ticari">🏭 Ticari</span>}
+                {ilan.tip === 'ticari' && <span className="badge badge-tr">🇹🇷 TR Üretimi</span>}
+                {ilan.yapay && <span className="badge badge-yapay">Örnek İlan</span>}
               </div>
-              {ilan.medyalar.length > 1 && (
-                <div style={{ display: 'flex', gap: '6px', overflowX: 'auto' }}>
-                  {ilan.medyalar.map((m: string, i: number) => (
-                    <div key={i} onClick={() => setAktifResim(i)}
-                      style={{ width: '56px', height: '56px', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer', border: `2px solid ${aktifResim === i ? '#2563eb' : '#e2e8f0'}`, flexShrink: 0 }}>
-                      <img src={m} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
+            </div>
+
+            <div className="detay-kat-satir">
+              <span className="detay-kat">{sektorEmoji(ilan.sektorId)} {sektorAd}</span>
+            </div>
+
+            {aciklama && <p className="detay-aciklama">{aciklama}</p>}
+
+            {ozellikler.length > 0 && (
+              <>
+                <div className="ozellikler-baslik">✅ Özellikler & Detaylar</div>
+                <div className="ozellikler">
+                  {ozellikler.map((o, i) => (
+                    <span key={i} className="ozellik">✓ {o}</span>
                   ))}
                 </div>
-              )}
-            </div>
-          )}
+              </>
+            )}
 
-          {/* İlan Bilgileri Tablosu */}
-          <div className="card">
-            <h2 style={{ fontSize: '13px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '14px' }}>İlan Detayları</h2>
-            <div>
-              {(formVeriGoster() || []).map((d, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '9px 0', borderBottom: '1px solid #f1f5f9', gap: '8px' }}>
-                  <span style={{ fontSize: '13px', color: '#64748b', flexShrink: 0 }}>{d.label}</span>
-                  <span style={{ fontSize: '13px', color: '#0f172a', fontWeight: '600', textAlign: 'right' }}>{d.deger}</span>
-                </div>
-              ))}
-              {ilan.formData?.aciklama && (
-                <div style={{ paddingTop: '12px' }}>
-                  <p style={{ fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '6px' }}>AÇIKLAMA</p>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.7', whiteSpace: 'pre-wrap' }}>{ilan.formData.aciklama}</p>
-                </div>
-              )}
-            </div>
+            {ilan.tip === 'ticari' && ilan.teslimat && ilan.teslimat.length > 0 && (
+              <div className="teslimat-bolum">
+                <div className="teslimat-baslik">🚢 Teslimat & Lojistik</div>
+                {ilan.teslimat.map((t, i) => (
+                  <div key={i} className="teslimat-item">• {t}</div>
+                ))}
+              </div>
+            )}
+
+            {ilan.seo?.anahtarKelimeler && ilan.seo.anahtarKelimeler.length > 0 && (
+              <div className="seo-keywords" aria-hidden="true">
+                {ilan.seo.anahtarKelimeler.join(', ')}
+              </div>
+            )}
           </div>
 
-          {/* Teklif Listesi (İlan sahibi için) */}
-          {ilanSahibiMi && (
-            <div className="card">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                <h2 style={{ fontSize: '16px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>
-                  💼 Gelen Teklifler ({teklifler.length})
-                </h2>
-                <button onClick={async () => {
-                  const res = await fetch(`/api/ilanlar/${ilan._id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ teklifeAcik: !ilan.teklifeAcik }),
-                  });
-                }}
-                  style={{ padding: '6px 12px', borderRadius: '8px', background: ilan.teklifeAcik ? '#fef9c3' : '#eaf5ee', border: 'none', color: ilan.teklifeAcik ? '#854d0e' : '#1a7a4a', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>
-                  {ilan.teklifeAcik ? '🟡 Teklif Açık' : '🟢 Teklif Kapalı'}
-                </button>
+          {/* SIDEBAR */}
+          <div className="sidebar">
+            <div className="sidebar-header">
+              <div className="sidebar-fiyat">
+                {birim}{fmt(ilan.butceMin)} – {birim}{fmt(ilan.butceMax)}
               </div>
-
-              {teklifler.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '32px', background: '#f8fafc', borderRadius: '12px' }}>
-                  <p style={{ fontSize: '28px', marginBottom: '8px' }}>⏳</p>
-                  <p style={{ color: '#94a3b8', fontSize: '13px' }}>Henüz teklif gelmedi</p>
-                </div>
-              ) : teklifler.map((t: any, i: number) => (
-                <div key={t._id} className="teklif-satir">
-                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: i === 0 ? '#f59e0b' : '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '700', color: i === 0 ? 'white' : '#94a3b8', flexShrink: 0 }}>
-                    {i + 1}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <p style={{ fontSize: '13px', fontWeight: '600', color: '#0f172a' }}>{t.teklifci?.ad}</p>
-                    <p style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{t.aciklama?.slice(0, 60)}{t.aciklama?.length > 60 ? '...' : ''}</p>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: '18px', fontWeight: '800', color: i === 0 ? '#059669' : '#0f172a' }}>
-                      {Number(t.teklifFiyat).toLocaleString()} {t.doviz}
-                    </p>
-                    <button onClick={() => setSecimModal(t)}
-                      style={{ padding: '6px 12px', borderRadius: '8px', background: '#2563eb', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '11px', fontWeight: '600', cursor: 'pointer', marginTop: '4px' }}>
-                      İncele & Kabul Et
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* SAĞ - Özet & CTA */}
-        <div>
-          <div className="card" style={{ position: 'sticky', top: '70px' }}>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-              <span style={{ padding: '4px 10px', borderRadius: '8px', background: sektor?.renk + '15' || '#eff6ff', fontSize: '11px', fontWeight: '700', color: sektor?.renk || '#2563eb' }}>
-                {sektor?.icon} {sektor?.ad}
-              </span>
-              <span style={{ padding: '4px 10px', borderRadius: '8px', background: '#f1f5f9', fontSize: '11px', color: '#64748b' }}>
-                {ilan.teklifSayisi || 0} teklif
-              </span>
+              <div className="sidebar-fiyat-lbl">
+                {ilan.tip === 'ticari' ? 'Tahmini fiyat aralığı (toptan)' : 'Bütçe aralığı'}
+              </div>
             </div>
 
-            <h1 style={{ fontSize: '20px', fontWeight: '700', color: '#0f172a', lineHeight: '1.3', marginBottom: '12px', fontFamily: 'Playfair Display, serif' }}>
-              {ilan.baslik}
-            </h1>
+            {ilan.teklifSayisi > 0 && (
+              <div className="teklif-sayisi-chip">
+                ✅ {ilan.teklifSayisi} kişi teklif verdi
+              </div>
+            )}
 
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '13px', color: '#94a3b8' }}>Bütçe:</span>
-              <span style={{ fontSize: '24px', fontWeight: '800', color: '#0f172a' }}>
-                {ilan.butceMin > 0 ? `${ilan.butceMin.toLocaleString()} ${ilan.butceBirimi}` : 'Müzakere'}
-              </span>
-              {ilan.butceMax > 0 && <span style={{ fontSize: '16px', color: '#94a3b8' }}>— {ilan.butceMax.toLocaleString()}</span>}
-            </div>
-
-            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
-              {ilan.formData?.sehir && <span style={{ padding: '4px 8px', borderRadius: '6px', background: '#f1f5f9', fontSize: '11px', color: '#64748b' }}>📍 {ilan.formData.sehir}</span>}
-              {ilan.formData?.altKategori && <span style={{ padding: '4px 8px', borderRadius: '6px', background: '#f1f5f9', fontSize: '11px', color: '#64748b' }}>{ilan.formData.altKategori}</span>}
-              <span style={{ padding: '4px 8px', borderRadius: '6px', background: ilan.teklifeAcik ? '#ecfdf5' : '#fef2f2', fontSize: '11px', color: ilan.teklifeAcik ? '#059669' : '#dc2626' }}>
-                {ilan.teklifeAcik ? '🟢 Teklif Açık' : '🔴 Teklif Kapalı'}
-              </span>
-            </div>
-
-            {!ilanSahibiMi && ilan.teklifeAcik && (
-              <button onClick={() => session ? setTeklifModal(true) : router.push(`/uye-ol?redirect=/ilan/${ilan._id}&tip=hizmet_veren`)}
-                style={{ width: '100%', padding: '14px', borderRadius: '14px', background: '#f59e0b', border: 'none', color: '#0f172a', fontFamily: 'inherit', fontSize: '14px', fontWeight: '800', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.3)', marginBottom: '10px' }}>
-                💼 Teklif Ver
+            {ilan.rol === 'alan' && (
+              <button className="sidebar-btn btn-teklif" onClick={() => setTeklifModal(true)}>
+                ⚡ Teklif Ver
               </button>
             )}
 
-            {!session && (
-              <p style={{ fontSize: '11px', color: '#94a3b8', textAlign: 'center' }}>
-                Teklif vermek için{' '}
-                <span onClick={() => router.push('/uye-ol?tip=hizmet_veren')} style={{ color: '#2563eb', cursor: 'pointer', fontWeight: '600' }}>üye olun</span>
-              </p>
+            {ilan.rol === 'veren' && (
+              <button className="sidebar-btn btn-talep" onClick={() => setTalepModal(true)}>
+                📩 {ilan.tip === 'ticari' ? 'Teklif Almak İstiyorum' : 'Teklif İste'}
+              </button>
             )}
 
-            {/* İlan gizlilik notu */}
-            {ilan.gizliAd && (
-              <div style={{ marginTop: '12px', padding: '10px 14px', background: '#fffbeb', borderRadius: '10px', border: '1px solid #fde68a' }}>
-                <p style={{ fontSize: '11px', color: '#92400e' }}>
-                  🔒 İlan sahibinin bilgileri gizli. Teklif verdikten sonra görüntülenecek.
-                </p>
+            <button className="sidebar-btn btn-whatsapp"
+              onClick={() => window.open('https://wa.me/90XXXXXXXXXX', '_blank')}>
+              💬 WhatsApp ile Sor
+            </button>
+
+            <div className="sidebar-detay">
+              <div className="sidebar-detay-item">
+                <span className="sidebar-detay-ikon">📍</span>
+                <div>
+                  <div style={{ fontSize:'.68rem', color:'#aaa', marginBottom:2 }}>Lokasyon</div>
+                  <div className="sidebar-detay-deger">
+                    {ilan.ulke && ilan.ulke !== 'Türkiye' ? `${ilan.ulke} / ` : ''}{sehir || 'Türkiye'}
+                  </div>
+                </div>
               </div>
-            )}
+              <div className="sidebar-detay-item">
+                <span className="sidebar-detay-ikon">🏷️</span>
+                <div>
+                  <div style={{ fontSize:'.68rem', color:'#aaa', marginBottom:2 }}>Kategori</div>
+                  <div className="sidebar-detay-deger">{sektorAd}</div>
+                </div>
+              </div>
+              <div className="sidebar-detay-item">
+                <span className="sidebar-detay-ikon">📋</span>
+                <div>
+                  <div style={{ fontSize:'.68rem', color:'#aaa', marginBottom:2 }}>İlan Türü</div>
+                  <div className="sidebar-detay-deger">
+                    {ilan.tip === 'ticari' ? 'Ticari / Endüstriyel' : 'Bireysel'}
+                    {' · '}
+                    {ilan.rol === 'alan' ? 'Talep' : 'Teklif'}
+                  </div>
+                </div>
+              </div>
+              <div className="sidebar-detay-item">
+                <span className="sidebar-detay-ikon">📅</span>
+                <div>
+                  <div style={{ fontSize:'.68rem', color:'#aaa', marginBottom:2 }}>Yayın Tarihi</div>
+                  <div className="sidebar-detay-deger">
+                    {new Date(ilan.createdAt).toLocaleDateString('tr-TR')}
+                  </div>
+                </div>
+              </div>
+              {ilan.teslimat?.[0] && (
+                <div className="sidebar-detay-item">
+                  <span className="sidebar-detay-ikon">🚢</span>
+                  <div>
+                    <div style={{ fontSize:'.68rem', color:'#aaa', marginBottom:2 }}>Teslimat</div>
+                    <div className="sidebar-detay-deger">{ilan.teslimat[0]}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="sidebar-bilgi">
+              🔒 Bilgileriniz gizlidir. Spam göndermeyiz.<br />
+              {ilan.rol === 'veren' && ilan.tip === 'ticari'
+                ? 'Talebiniz doğrudan tedarikçiye iletilir.'
+                : 'En uygun teklifi seçme hakkı sizdedir.'}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* TEKLİF VER MODALİ */}
       {teklifModal && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(15,23,42,0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
-          onClick={() => setTeklifModal(false)}>
-          <div style={{ background: 'white', borderRadius: '24px', padding: '28px', width: '100%', maxWidth: '480px', maxHeight: '90vh', overflowY: 'auto' }}
-            onClick={e => e.stopPropagation()}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>💼 Teklif Ver</h2>
-              <button onClick={() => setTeklifModal(false)} style={{ width: '30px', height: '30px', borderRadius: '50%', border: '1.5px solid #e2e8f0', background: 'white', cursor: 'pointer' }}>✕</button>
-            </div>
-
-            {/* İlan özeti */}
-            <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px', marginBottom: '20px' }}>
-              <p style={{ fontSize: '13px', fontWeight: '600', color: '#0f172a', marginBottom: '4px' }}>{ilan.baslik}</p>
-              <p style={{ fontSize: '12px', color: '#64748b' }}>
-                Bütçe: {ilan.butceMin > 0 ? `${ilan.butceMin.toLocaleString()} — ${ilan.butceMax.toLocaleString()} ${ilan.butceBirimi}` : 'Müzakere'}
-              </p>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <div>
-                <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>Teklif Fiyatı *</label>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <select value={teklifForm.doviz} onChange={e => setTeklifForm(p => ({ ...p, doviz: e.target.value }))}
-                    style={{ width: '80px', padding: '11px', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '14px', fontFamily: 'inherit' }}>
-                    <option>₺</option>
-                    <option>$</option>
-                    <option>€</option>
-                  </select>
-                  <input type="number" value={teklifForm.fiyat} onChange={e => setTeklifForm(p => ({ ...p, fiyat: e.target.value }))}
-                    placeholder="0" style={{ flex: 1, padding: '11px 14px', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '14px', fontFamily: 'inherit' }} />
-                </div>
-              </div>
-
-              <div>
-                <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>Hizmet Detayı</label>
-                <textarea value={teklifForm.hizmetDetay} onChange={e => setTeklifForm(p => ({ ...p, hizmetDetay: e.target.value }))}
-                  placeholder="Bu fiyata neler dahil? Detaylı açıklayın..."
-                  style={{ width: '100%', padding: '11px 14px', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '13px', fontFamily: 'inherit', height: '90px', resize: 'vertical' }} />
-              </div>
-
-              <div>
-                <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>Ek Açıklama</label>
-                <textarea value={teklifForm.aciklama} onChange={e => setTeklifForm(p => ({ ...p, aciklama: e.target.value }))}
-                  placeholder="Özel notlar, sorularınız..."
-                  style={{ width: '100%', padding: '11px 14px', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '13px', fontFamily: 'inherit', height: '70px', resize: 'vertical' }} />
-              </div>
-
-              {/* Teklif ücreti bilgi */}
-              <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '10px', padding: '12px' }}>
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#92400e', marginBottom: '4px' }}>💰 Teklif Ücreti</p>
-                <p style={{ fontSize: '11px', color: '#78350f', lineHeight: '1.5' }}>
-                  Bütçenin %1'i kadar teklif ücreti alınır (min 10₺). Bu ücret sisteminizden otomatik düşülür. Teklif kabul edilirse ücret hizmet bedelinden mahsup edilir.
-                </p>
-              </div>
-
-              <button onClick={handleTeklifVer} disabled={gonderiyor || !teklifForm.fiyat}
-                style={{ padding: '14px', borderRadius: '12px', background: !teklifForm.fiyat ? '#e2e8f0' : '#f59e0b', border: 'none', color: !teklifForm.fiyat ? '#94a3b8' : '#0f172a', fontFamily: 'inherit', fontSize: '14px', fontWeight: '800', cursor: !teklifForm.fiyat ? 'not-allowed' : 'pointer' }}>
-                {gonderiyor ? '⏳ Gönderiliyor...' : '💼 Teklifi Gönder'}
-              </button>
-            </div>
-          </div>
-        </div>
+        <TeklifModal
+          ilanId={ilan._id}
+          ilanBaslik={ilan.baslik}
+          ilanTip={ilan.tip}
+          onKapat={() => setTeklifModal(false)}
+        />
       )}
-
-      {/* TEKLİF İNCELE MODALİ */}
-      {secimModal && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(15,23,42,0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
-          onClick={() => setSecimModal(null)}>
-          <div style={{ background: 'white', borderRadius: '24px', padding: '28px', width: '100%', maxWidth: '440px' }}
-            onClick={e => e.stopPropagation()}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif' }}>Teklif Detayı</h2>
-              <button onClick={() => setSecimModal(null)} style={{ width: '30px', height: '30px', borderRadius: '50%', border: '1.5px solid #e2e8f0', background: 'white', cursor: 'pointer' }}>✕</button>
-            </div>
-
-            <div style={{ background: '#f8fafc', borderRadius: '14px', padding: '16px', marginBottom: '16px' }}>
-              <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '4px' }}>{secimModal.teklifci?.ad}</p>
-              <p style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '12px' }}>{secimModal.teklifci?.email}</p>
-              <p style={{ fontSize: '28px', fontWeight: '800', color: '#059669', marginBottom: '8px' }}>
-                {Number(secimModal.teklifFiyat).toLocaleString()} {secimModal.doviz}
-              </p>
-              {secimModal.hizmetDetay && (
-                <div style={{ marginBottom: '8px' }}>
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8', marginBottom: '4px' }}>HİZMET DETAYI</p>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.6' }}>{secimModal.hizmetDetay}</p>
-                </div>
-              )}
-              {secimModal.aciklama && (
-                <div>
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8', marginBottom: '4px' }}>AÇIKLAMA</p>
-                  <p style={{ fontSize: '13px', color: '#475569' }}>{secimModal.aciklama}</p>
-                </div>
-              )}
-            </div>
-
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button onClick={() => setSecimModal(null)}
-                style={{ flex: 1, padding: '12px', borderRadius: '12px', background: '#f1f5f9', border: 'none', color: '#475569', fontFamily: 'inherit', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
-                İptal
-              </button>
-              <button onClick={() => handleTeklifKabul(secimModal._id)}
-                style={{ flex: 2, padding: '12px', borderRadius: '12px', background: '#059669', border: 'none', color: 'white', fontFamily: 'inherit', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}>
-                ✅ Teklifi Kabul Et
-              </button>
-            </div>
-          </div>
-        </div>
+      {talepModal && (
+        <TalepModal
+          ilanId={ilan._id}
+          ilanBaslik={ilan.baslik}
+          ilanTip={ilan.tip}
+          onKapat={() => setTalepModal(false)}
+        />
       )}
-    </div>
+    </>
+  );
+}
+
+export default function IlanDetaySayfaClient({ id }: { id: string }) {
+  return (
+    <Suspense fallback={
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'center',
+        height:'70vh', fontFamily:"'Plus Jakarta Sans',sans-serif", color:'#aaa' }}>
+        ⏳ Yükleniyor...
+      </div>
+    }>
+      <IlanDetayIcerik id={id} />
+    </Suspense>
   );
 }
