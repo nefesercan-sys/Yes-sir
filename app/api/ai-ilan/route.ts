@@ -1,8 +1,73 @@
+// ============================================================
+// SwapHubs — app/api/ai-ilan/route.ts
+// AI İlan Üretim Motoru + Akıllı Görsel Atama
+// ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
+
+// 📸 KATEGORİLERE ÖZEL UNSPLASH GÖRSEL HAVUZU (Yüksek Çözünürlüklü)
+const IMAGE_POOL: Record<string, string[]> = {
+  turizm: [
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80', // Lüks Otel
+    'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80', // Resort
+    'https://images.unsplash.com/photo-1542314831-c6a4d14d8373?auto=format&fit=crop&w=800&q=80', // Otel Odası
+  ],
+  tekstil: [
+    'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80', // Kumaş Ruloları
+    'https://images.unsplash.com/photo-1558024920-b41e1887dc32?auto=format&fit=crop&w=800&q=80', // Tekstil Fabrikası
+    'https://images.unsplash.com/photo-1505022610485-0249ba5b3675?auto=format&fit=crop&w=800&q=80', // İplikler
+  ],
+  uretim: [
+    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', // Laboratuvar/Üretim
+    'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=80', // Fabrika İçi
+    'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=800&q=80', // CNC Makine
+  ],
+  lojistik: [
+    'https://images.unsplash.com/photo-1586528116311-ad8ed7c66364?auto=format&fit=crop&w=800&q=80', // Liman Konteyner
+    'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80', // Kargo Gemisi
+    'https://images.unsplash.com/photo-1587293852726-694b5544adab?auto=format&fit=crop&w=800&q=80', // Depo
+  ],
+  'metal-celik': [
+    'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80', // Çelik konstrüksiyon
+    'https://images.unsplash.com/photo-1612690669207-fed642192c40?auto=format&fit=crop&w=800&q=80', // Kaynak/Metal
+  ],
+  'gida-tarim': [
+    'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80', // Market/Gıda
+    'https://images.unsplash.com/photo-1595858640583-4ce4999cc562?auto=format&fit=crop&w=800&q=80', // Tarım arazisi
+    'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80', // Zeytinyağı/Şişe
+  ],
+  mobilya: [
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', // Koltuk
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80', // Modern Mobilya
+  ],
+  usta: [
+    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80', // Tadilat/Usta
+    'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80', // Plan/Çizim
+  ],
+  temizlik: [
+    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80', // Temizlik (Placeholder)
+    'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80', // Ev İçi
+  ],
+  giyim: [
+    'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80', // Giyim Mağazası
+    'https://images.unsplash.com/photo-1489987707023-afc232dce9f2?auto=format&fit=crop&w=800&q=80', // Askılar
+  ],
+  // Varsayılan genel resimler (Eğer sektör eşleşmezse)
+  default: [
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', // Plaza/İş
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80', // Ticaret
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=800&q=80', // Toplantı
+  ]
+};
+
+// İlgili sektöre rastgele görsel seçen yardımcı fonksiyon
+function getRandomImageForSector(sektorId: string): string {
+  const pool = IMAGE_POOL[sektorId] || IMAGE_POOL['default'];
+  return pool[Math.floor(Math.random() * pool.length)];
+}
 
 const SEO_KEYWORDS: Record<string, string[]> = {
   turizm:       ['otel','konaklama','tatil','tur','rezervasyon','turizm türkiye','holiday turkey'],
@@ -160,7 +225,7 @@ export async function POST(req: NextRequest) {
       });
 
       const response = await client.messages.create({
-        model:      'claude-opus-4-6',
+        model:      'claude-opus-4-6', // Model adını sistemin desteklediğine emin ol ('claude-3-opus-20240229' vb.)
         max_tokens: 4000,
         messages:   [{ role: 'user', content: prompt }],
       });
@@ -183,46 +248,53 @@ export async function POST(req: NextRequest) {
       }
 
       if (ilanlar.length > 0) {
-        const docs = ilanlar.map(ilan => ({
-          sektorId,
-          baslik: ilan.baslik,
-          formData: {
-            sehir:      ilan.sehir ?? sehir,
-            aciklama:   ilan.aciklama,
-            ozellikler: ilan.ozellikler ?? [],
-          },
-          medyalar:     [],
-          butceMin:     Number(ilan.butceMin) || 0,
-          butceMax:     Number(ilan.butceMax) || 0,
-          butceBirimi:  (ilan.butceBirimi as string) ?? '₺',
-          durum:        'aktif',
-          teklifSayisi: 0,
-          goruntulenme: 0,
-          teklifeAcik:  true,
-          gizliAd:      false,
-          sahibi:       null,
-          misafirToken: null,
-          createdAt:    new Date(),
-          guncellendi:  new Date(),
-          tip,
-          rol,
-          kategoriSlug: sektorId,
-          kategoriAd:   sektorAd,
-          ulke:         (ilan.ulke as string) ?? ulke ?? 'Türkiye',
-          ozellikler:   ilan.ozellikler ?? [],
-          teslimat:     [ilan.teslimat as string].filter(Boolean),
-          yapay,
-          seo: {
-            metaBaslik:       `${ilan.baslik} | SwapHubs`,
-            metaAciklama:     ilan.metaAciklama ?? '',
-            anahtarKelimeler: [
-              ...(ilan.anahtarKelimeler as string[] ?? []),
-              ...keywords.slice(0, 3),
-              'SwapHubs', sehir, sektorAd,
-            ],
-            slug: slugify(String(ilan.baslik)),
-          },
-        }));
+        const docs = ilanlar.map(ilan => {
+          // GÖRSEL ATAMA: AI'ın ürettiği ilana sektörden rastgele bir resim ata
+          const atanacakGorsel = getRandomImageForSector(sektorId);
+          
+          return {
+            sektorId,
+            baslik: ilan.baslik,
+            formData: {
+              sehir:      ilan.sehir ?? sehir,
+              aciklama:   ilan.aciklama,
+              ozellikler: ilan.ozellikler ?? [],
+            },
+            medyalar:     [atanacakGorsel], // Artık emojiden kurtulduk!
+            resimUrl:     atanacakGorsel,
+            butceMin:     Number(ilan.butceMin) || 0,
+            butceMax:     Number(ilan.butceMax) || 0,
+            butceBirimi:  (ilan.butceBirimi as string) ?? '₺',
+            durum:        'aktif',
+            teklifSayisi: 0,
+            goruntulenme: 0,
+            teklifeAcik:  true,
+            gizliAd:      false,
+            sahibi:       null,
+            misafirToken: null,
+            createdAt:    new Date(),
+            guncellendi:  new Date(),
+            tip,
+            rol,
+            kategoriSlug: sektorId,
+            kategoriAd:   sektorAd,
+            ulke:         (ilan.ulke as string) ?? ulke ?? 'Türkiye',
+            ozellikler:   ilan.ozellikler ?? [],
+            teslimat:     [ilan.teslimat as string].filter(Boolean),
+            yapay,
+            is_ai_generated: yapay, // Sistem denetimi için ek flag
+            seo: {
+              metaBaslik:       `${ilan.baslik} | SwapHubs`,
+              metaAciklama:     ilan.metaAciklama ?? '',
+              anahtarKelimeler: [
+                ...(ilan.anahtarKelimeler as string[] ?? []),
+                ...keywords.slice(0, 3),
+                'SwapHubs', sehir, sektorAd,
+              ],
+              slug: slugify(String(ilan.baslik)),
+            },
+          };
+        });
 
         const result = await db.collection('ilanlar').insertMany(docs);
         toplamEklenen += result.insertedCount;
