@@ -2,7 +2,33 @@
 // SwapHubs — Merkezi Sektör Haritası (lib/sektorler.ts)
 // ============================================================
 
-export const TUM_SEKTORLER = [
+// 1. TİP TANIMLAMALARI (İlan Ver sayfasının aradığı tipler)
+export type FormAlan = {
+  key: string;
+  label: string;
+  tip: "text" | "number" | "select" | "multiselect" | "range" | "textarea" | "date" | "daterange" | "toggle" | "adres";
+  zorunlu?: boolean;
+  placeholder?: string;
+  secenekler?: string[];
+  birim?: string;
+  grup?: string;
+};
+
+export type Sektor = {
+  id: string;
+  ad: string;
+  emoji: string;
+  tip: "bireysel" | "ticari" | "both";
+  renk: string;
+  icon: string;
+  altKategoriler: string[];
+  butceBirimi: string;
+  hizmetAlanFormu: FormAlan[];
+  hizmetVerenFormu: FormAlan[];
+};
+
+// 2. HAM VERİLER
+const HAM_SEKTORLER = [
   // GAYRİMENKUL & ARAÇ
   { id: 'emlak-satis', ad: 'Emlak Alım Satım', emoji: '🏢', tip: 'both', renk: '#3b82f6' },
   { id: 'emlak-kiralama', ad: 'Emlak Kiralama', emoji: '🏠', tip: 'both', renk: '#3b82f6' },
@@ -39,32 +65,32 @@ export const TUM_SEKTORLER = [
   { id: 'mobilya', ad: 'Mobilya & Dekorasyon', emoji: '🪑', tip: 'both', renk: '#8b5cf6' },
 ];
 
+// 3. TAM UYUMLU SEKTÖR LİSTESİ (Eksik veriler otomatik tamamlanıyor)
+export const TUM_SEKTORLER: Sektor[] = HAM_SEKTORLER.map(s => ({
+  ...s,
+  tip: s.tip as "bireysel" | "ticari" | "both",
+  icon: s.emoji,
+  altKategoriler: [],       // Ana sayfada çökmemesi için eklendi
+  butceBirimi: "TL",        // İlan Ver sayfasında çökmemesi için eklendi
+  hizmetAlanFormu: [],      // İlan Ver sayfasında form ararken çökmemesi için eklendi
+  hizmetVerenFormu: []      // İlan Ver sayfasında form ararken çökmemesi için eklendi
+}));
+
 // ============================================================
-// GERİYE DÖNÜK UYUMLULUK KÖPRÜLERİ (Site Çökmesin Diye)
+// GERİYE DÖNÜK UYUMLULUK KÖPRÜLERİ (Eski sayfalar çökmesin diye)
 // ============================================================
 
 // 1. Eski sayfaların aradığı genel liste
-export const SEKTORLER = TUM_SEKTORLER.map(s => ({
-  id: s.id,
-  ad: s.ad,
-  emoji: s.emoji,
-  renk: s.renk,
-  icon: s.emoji, // AnaSayfaClient "icon" kelimesini arıyor, onu "emoji" ile besliyoruz!
-  altKategoriler: [] as string[] // Vercel TS hatasını önlemek için eklendi
-}));
+export const SEKTORLER: Sektor[] = TUM_SEKTORLER;
 
 // 2. Eski sayfaların aradığı Ana Kategoriler
 export const KATEGORILER_ANA = [
-  { id: 'tum', ad: 'Tüm Sektörler', emoji: '🌐', renk: '#0f172a', icon: '🌐' },
+  { id: 'tum', ad: 'Tüm Sektörler', emoji: '🌐', tip: 'both', renk: '#0f172a', icon: '🌐', altKategoriler: [], butceBirimi: 'TL', hizmetAlanFormu: [], hizmetVerenFormu: [] } as Sektor,
   ...SEKTORLER
 ];
 
-// 3. İlan Ver sayfasının aradığı Bireysel liste
-export const BIREYSEL_SEKTORLER = TUM_SEKTORLER
-  .filter(s => s.tip === 'bireysel' || s.tip === 'both')
-  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji, icon: s.emoji }));
+// 3. İlan Ver sayfasının aradığı Bireysel liste (Renkler ve ikonlar korundu)
+export const BIREYSEL_SEKTORLER: Sektor[] = TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both');
 
-// 4. İlan Ver sayfasının aradığı Ticari liste
-export const TICARI_SEKTORLER = TUM_SEKTORLER
-  .filter(s => s.tip === 'ticari' || s.tip === 'both')
-  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji, icon: s.emoji }));
+// 4. İlan Ver sayfasının aradığı Ticari liste (Renkler ve ikonlar korundu)
+export const TICARI_SEKTORLER: Sektor[] = TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both');
