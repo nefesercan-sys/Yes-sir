@@ -1,7 +1,7 @@
 "use client";
 // ============================================================
 // SwapHubs — app/ilan-ver/page.tsx
-// Gelişmiş İlan Formu — Ülke/şehir, sektöre özel form, medya
+// Gelişmiş İlan Formu — Ülke/şehir, detaylı form, medya
 // ============================================================
 import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
@@ -56,13 +56,21 @@ function IlanVerIcerik() {
   const handleYayinla = async () => {
     if (!seciliSektor) return;
     
-    // Sabit Zorunlu Alan Kontrolleri
+    // Sabit Zorunlu Alan Kontrolleri (Açıklama ve İletişim Eklendi)
     if (!formData.baslik?.trim()) {
       setHata("İlan başlığı zorunludur");
       return;
     }
     if (!formData.sehir?.trim()) {
       setHata("Lütfen bir şehir/bölge seçin veya yazın");
+      return;
+    }
+    if (!formData.aciklama?.trim()) {
+      setHata("İlan açıklaması ve detayları zorunludur");
+      return;
+    }
+    if (!formData.iletisim?.trim()) {
+      setHata("İletişim bilgisi (Telefon veya E-posta) zorunludur");
       return;
     }
 
@@ -85,6 +93,9 @@ function IlanVerIcerik() {
         body: JSON.stringify({
           sektorId: seciliSektor.id,
           baslik: formData.baslik,
+          aciklama: formData.aciklama,
+          iletisim: formData.iletisim,
+          adres: formData.adres,
           kategori: formData.altKategori || seciliSektor.ad,
           formData: { ...formData, ulke: ulkeObj?.name || "Türkiye" },
           medyalar: medyalar.map(m => m.url),
@@ -256,10 +267,10 @@ function IlanVerIcerik() {
   };
 
   const gruplar = aktifForm.reduce((acc, alan) => {
-    // Ülke ve şehri gruplamalardan da gizle (Yukarıda sabit verdik)
+    // Ülke ve şehri gruplamalardan da gizle
     if (alan.key === "ulke" || alan.key === "sehir") return acc;
     
-    const g = alan.grup || "Genel";
+    const g = alan.grup || "Genel Detaylar";
     if (!acc[g]) acc[g] = [];
     acc[g].push(alan);
     return acc;
@@ -407,7 +418,7 @@ function IlanVerIcerik() {
               </button>
             </div>
 
-            {/* Başlık, Ülke ve Şehir (TÜM SEKTÖRLERDE STANDART VE ZORUNLU) */}
+            {/* Başlık, Ülke ve Şehir */}
             <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
               
               <div style={{ marginBottom: 16 }}>
@@ -464,7 +475,53 @@ function IlanVerIcerik() {
                   )}
                 </div>
               </div>
+            </div>
 
+            {/* YENİ EKLENEN SABİT ALANLAR (AÇIKLAMA, İLETİŞİM, ADRES) */}
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+              <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>Detaylar & İletişim</h3>
+              
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  İlan Açıklaması ve Detaylar <span style={{ color: "#dc2626" }}>*</span>
+                </label>
+                <textarea
+                  value={formData.aciklama || ""}
+                  onChange={e => setField("aciklama", e.target.value)}
+                  placeholder="Sunacağınız hizmeti, aradığınız ürünü veya özel şartlarınızı detaylıca anlatın..."
+                  rows={5}
+                  style={{ ...INP, resize: "vertical", minHeight: 120 }}
+                />
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    İletişim Bilgisi <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.iletisim || ""}
+                    onChange={e => setField("iletisim", e.target.value)}
+                    placeholder="05XX XXX XX XX veya E-posta"
+                    style={INP}
+                  />
+                  <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>Müşterilerin size ulaşacağı numara veya adres.</p>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Açık Adres (Opsiyonel)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.adres || ""}
+                    onChange={e => setField("adres", e.target.value)}
+                    placeholder="Mahalle, Sokak, İlçe vb."
+                    style={INP}
+                  />
+                  <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>Gerekliyse tam lokasyonunuzu belirtin.</p>
+                </div>
+              </div>
             </div>
 
             {/* GRUP BAZLI DİNAMİK FORM ALANLARI */}
@@ -538,6 +595,7 @@ function IlanVerIcerik() {
                 </div>
               )}
 
+              {/* MEDYA YÜKLEYİCİ BİLEŞENİ BURADA ÇAĞRILIYOR */}
               <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
             </div>
 
