@@ -36,7 +36,7 @@ const ENDUSTRIYEL_SEKTORLER = [
   { id:'lojistik', ad:'Lojistik', emoji:'🚢' },
 ];
 
-const SEHIRLER = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Rastgele'];
+const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
 type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari";
@@ -248,6 +248,7 @@ function PanelIcerik() {
         .dur { padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; white-space: nowrap; }
         .sttl { font-size: 18px; font-weight: 800; color: #0f172a; font-family: 'Unbounded', sans-serif; margin-bottom: 16px; }
         .empty-box { text-align: center; padding: 48px; background: #fff; border-radius: 18px; border: 1.5px dashed #e2e8f0; }
+        .adm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: none; }
         @media (max-width: 768px) {
           .panel-layout { display: flex; flex-direction: column; }
           .sidebar { position: static; height: auto; overflow-x: auto; overflow-y: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
@@ -727,8 +728,8 @@ const SEL: React.CSSProperties = {
 function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
   const [secilenSektor, setSecilenSektor] = useState("");
   const [rol, setRol] = useState("her-ikisi");
-  const [ulke, setUlke] = useState("Rastgele");
-  const [sehir, setSehir] = useState(tip === 'ticari' ? 'Merkez' : 'Rastgele');
+  const [ulke, setUlke] = useState("Türkiye"); // Varsayılan olarak Türkiye seçili gelsin
+  const [sehir, setSehir] = useState("Rastgele");
   const [adet, setAdet] = useState(5);
   const [yukleniyor, setYukleniyor] = useState(false);
   const [sonuc, setSonuc] = useState("");
@@ -759,7 +760,7 @@ function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, 
   return (
     <div className="card">
       <p className="sttl">{tip === 'ticari' ? '🏭 Endüstriyel B2B AI Motoru' : '🙋 Bireysel AI İlan Motoru'}</p>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
         <div>
           <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Rolü</label>
           <select value={rol} onChange={e => setRol(e.target.value)} style={SEL}>
@@ -776,18 +777,34 @@ function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, 
           </select>
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginBottom: 20 }}>
         <div>
           <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
-          <select value={ulke} onChange={e => setUlke(e.target.value)} style={SEL}>
-            {ULKELER.map(u => <option key={u}>{u}</option>)}
+          <select value={ulke} onChange={e => {
+              setUlke(e.target.value);
+              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); // Türkiye değilse şehri sıfırla
+          }} style={SEL}>
+            {ULKELER.map(u => <option key={u} value={u}>{u}</option>)}
           </select>
         </div>
+
+        {/* EĞER ÜLKE TÜRKİYE İSE ŞEHİR SEÇİMİ AÇILIR */}
+        {ulke === 'Türkiye' && (
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Şehir</label>
+            <select value={sehir} onChange={e => setSehir(e.target.value)} style={SEL}>
+              {SEHIRLER.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+        )}
+
         <div>
           <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Sayısı: {adet}</label>
           <input type="range" min={1} max={30} value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ width: '100%', marginTop: 8 }} />
         </div>
       </div>
+
       <button onClick={uret} disabled={yukleniyor || !secilenSektor} style={{ width: "100%", padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer" }}>
         {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
       </button>
