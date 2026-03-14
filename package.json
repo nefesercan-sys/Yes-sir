@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "@anthropic-ai/sdk": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "next-auth": "^4.2.3",
