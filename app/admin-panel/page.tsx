@@ -12,6 +12,10 @@ type AdminTab = "ozet" | "ilanlar" | "uyeler" | "mesajlar" | "destek" | "ai_ilan
 
 const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map(e => e.trim());
 
+const LOADING: React.CSSProperties = { display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b", fontSize: 14, fontFamily: "sans-serif" };
+const ADM_BTN = (bg: string, c: string): React.CSSProperties => ({ padding: "5px 10px", borderRadius: 7, background: bg, border: "none", color: c, fontFamily: "inherit", fontSize: 11, fontWeight: 700, cursor: "pointer" });
+const SEL: React.CSSProperties = { width: "100%", padding: "10px 12px", borderRadius: 10, border: "1.5px solid #e2e8f0", fontSize: 13, fontFamily: "inherit", background: "#fff", outline: "none" };
+
 export default function AdminPanel() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -28,6 +32,7 @@ export default function AdminPanel() {
     bekleyenDestek: 0, yapayIlan: 0, gercekIlan: 0,
   });
 
+  // AI İlan
   const [aiSektor, setAiSektor] = useState("uretim");
   const [aiTip, setAiTip] = useState("ticari");
   const [aiRol, setAiRol] = useState("alan");
@@ -37,6 +42,7 @@ export default function AdminPanel() {
   const [aiYukleniyor, setAiYukleniyor] = useState(false);
   const [aiSonuc, setAiSonuc] = useState("");
 
+  // Erişim kontrolü
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/giris"); return; }
     if (status === "authenticated" && session?.user?.email) {
@@ -57,20 +63,30 @@ export default function AdminPanel() {
         fetch("/api/destek"),
         fetch("/api/teklifler?admin=true"),
       ]);
+
       const [ilanD, uyeD, mesajD, destekD, teklifD] = await Promise.all([
         ilanRes.json(), uyeRes.json(), mesajRes.json(), destekRes.json(), teklifRes.json(),
       ]);
+
       const iL = ilanD.ilanlar || ilanD.data || ilanD || [];
       const uL = Array.isArray(uyeD) ? uyeD : [];
       const mL = Array.isArray(mesajD) ? mesajD : [];
       const dL = Array.isArray(destekD) ? destekD : [];
       const tL = Array.isArray(teklifD) ? teklifD : [];
-      setIlanlar(iL); setUyeler(uL); setMesajlar(mL); setDestek(dL); setTeklifler(tL);
+
+      setIlanlar(iL);
+      setUyeler(uL);
+      setMesajlar(mL);
+      setDestek(dL);
+      setTeklifler(tL);
+
       setStats({
-        toplamIlan: iL.length, toplamUye: uL.length, toplamTeklif: tL.length,
+        toplamIlan:     iL.length,
+        toplamUye:      uL.length,
+        toplamTeklif:   tL.length,
         bekleyenDestek: dL.filter((d: any) => !d.okundu).length,
-        yapayIlan: iL.filter((i: any) => i.yapay === true).length,
-        gercekIlan: iL.filter((i: any) => i.yapay === false).length,
+        yapayIlan:      iL.filter((i: any) => i.yapay === true).length,
+        gercekIlan:     iL.filter((i: any) => i.yapay === false).length,
       });
     } catch (e) { console.error(e); }
     setLoading(false);
@@ -79,7 +95,8 @@ export default function AdminPanel() {
   useEffect(() => { if (session) yukle(); }, [session, yukle]);
 
   const aiIlanOlustur = async () => {
-    setAiYukleniyor(true); setAiSonuc("");
+    setAiYukleniyor(true);
+    setAiSonuc("");
     try {
       const res = await fetch("/api/ai-ilan", {
         method: "POST",
@@ -91,9 +108,15 @@ export default function AdminPanel() {
         }),
       });
       const data = await res.json();
-      if (data.success) { setAiSonuc(`✅ ${data.uretilen} ilan başarıyla oluşturuldu!`); yukle(); }
-      else setAiSonuc("❌ Hata: " + (data.error || "Bilinmeyen hata"));
-    } catch (e: any) { setAiSonuc("❌ " + e.message); }
+      if (data.success) {
+        setAiSonuc(`✅ ${data.uretilen} ilan başarıyla oluşturuldu!`);
+        yukle();
+      } else {
+        setAiSonuc("❌ Hata: " + (data.error || "Bilinmeyen hata"));
+      }
+    } catch (e: any) {
+      setAiSonuc("❌ " + e.message);
+    }
     setAiYukleniyor(false);
   };
 
@@ -111,13 +134,13 @@ export default function AdminPanel() {
   if (!session) return null;
 
   const TABS: { key: AdminTab; label: string; icon: string; badge?: number }[] = [
-    { key: "ozet",      label: "Özet",          icon: "📊" },
-    { key: "ilanlar",   label: "Tüm İlanlar",   icon: "📋", badge: stats.toplamIlan },
-    { key: "uyeler",    label: "Üyeler",         icon: "👥", badge: stats.toplamUye },
-    { key: "teklifler", label: "Teklifler",      icon: "💼", badge: stats.toplamTeklif },
-    { key: "mesajlar",  label: "Mesajlar",       icon: "💬" },
-    { key: "destek",    label: "Destek",         icon: "🆘", badge: stats.bekleyenDestek },
-    { key: "ai_ilan",   label: "AI İlan",        icon: "🤖" },
+    { key: "ozet",    label: "Özet",         icon: "📊" },
+    { key: "ilanlar", label: "Tüm İlanlar",  icon: "📋", badge: stats.toplamIlan },
+    { key: "uyeler",  label: "Üyeler",       icon: "👥", badge: stats.toplamUye },
+    { key: "teklifler", label: "Teklifler",  icon: "💼", badge: stats.toplamTeklif },
+    { key: "mesajlar", label: "Mesajlar",    icon: "💬" },
+    { key: "destek",  label: "Destek",       icon: "🆘", badge: stats.bekleyenDestek },
+    { key: "ai_ilan", label: "AI İlan",      icon: "🤖" },
   ];
 
   return (
@@ -179,9 +202,9 @@ export default function AdminPanel() {
                 {[
                   { l: "Toplam İlan", v: stats.toplamIlan, i: "📋", c: "#2563eb" },
                   { l: "Gerçek İlan", v: stats.gercekIlan, i: "✅", c: "#059669" },
-                  { l: "Yapay İlan",  v: stats.yapayIlan,  i: "🤖", c: "#7c3aed" },
-                  { l: "Toplam Üye", v: stats.toplamUye,  i: "👥", c: "#0891b2" },
-                  { l: "Teklif",     v: stats.toplamTeklif, i: "💼", c: "#d97706" },
+                  { l: "Yapay İlan", v: stats.yapayIlan, i: "🤖", c: "#7c3aed" },
+                  { l: "Toplam Üye", v: stats.toplamUye, i: "👥", c: "#0891b2" },
+                  { l: "Teklif", v: stats.toplamTeklif, i: "💼", c: "#d97706" },
                   { l: "Bekleyen Destek", v: stats.bekleyenDestek, i: "🆘", c: "#dc2626" },
                 ].map(s => (
                   <div key={s.l} className="adm-card" style={{ textAlign: "center" }}>
@@ -191,12 +214,16 @@ export default function AdminPanel() {
                   </div>
                 ))}
               </div>
+
+              {/* Son ilanlar */}
               <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>Son Yayınlanan İlanlar</p>
               {ilanlar.slice(0, 5).map(i => (
                 <div key={i._id} className="adm-row">
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
-                    <p style={{ fontSize: 11, color: "#64748b" }}>{i.tip} · {i.rol} · {i.ulke || "TR"} · {i.sehir || "—"} · {i.yapay ? "🤖 Yapay" : "✅ Gerçek"}</p>
+                    <p style={{ fontSize: 11, color: "#64748b" }}>
+                      {i.tip} · {i.rol} · {i.ulke || "TR"} · {i.sehir || "—"} · {i.yapay ? "🤖 Yapay" : "✅ Gerçek"}
+                    </p>
                   </div>
                   <div style={{ display: "flex", gap: 6 }}>
                     <button onClick={() => router.push(`/ilan/${i._id}`)} style={ADM_BTN("#eff6ff", "#2563eb")}>Gör</button>
