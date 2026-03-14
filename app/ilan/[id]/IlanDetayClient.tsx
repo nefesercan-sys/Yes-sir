@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect, Suspense } from 'react';
+import { useSession } from "next-auth/react";
 import TeklifModal from '@/components/TeklifModal';
 import TalepModal  from '@/components/TalepModal';
 
@@ -24,10 +25,12 @@ interface IlanDetay {
   teklifSayisi: number;
   ozellikler?:  string[];
   teslimat?:    string[];
+  iletisim?:    string;
   formData?: {
     sehir?:      string;
     aciklama?:   string;
     ozellikler?: string[];
+    iletisim?:   string;
   };
   seo?: {
     metaBaslik?:       string;
@@ -69,6 +72,9 @@ function IlanDetayIcerik({ id }: { id: string }) {
   const searchParams  = useSearchParams();
   const router        = useRouter();
   const action        = searchParams.get('action');
+  
+  // 🚨 KULLANICI OTURUM KONTROLÜ
+  const { data: session } = useSession();
 
   const [ilan,           setIlan]           = useState<IlanDetay | null>(null);
   const [benzerIlanlar,  setBenzerIlanlar]  = useState<IlanDetay[]>([]);
@@ -77,18 +83,15 @@ function IlanDetayIcerik({ id }: { id: string }) {
   const [talepModal,     setTalepModal]     = useState(action === 'talep');
 
   useEffect(() => {
-    // 1. Ana İlanı Çek
     fetch(`/api/ilanlar/${id}`)
       .then(r => r.json())
       .then(d => {
         if (d.ilan) {
           setIlan(d.ilan);
-          // 2. İlan başarıyla yüklendiğinde, aynı sektöre ait benzer ilanları çek (SEO & UX için)
           fetch(`/api/ilanlar?sektor=${d.ilan.sektorId}&limit=10`)
             .then(res => res.json())
             .then(data => {
               const liste = data.ilanlar || data.data || data || [];
-              // Şu an içinde bulunduğumuz ilanı (kendisini) listeden çıkarıp ilk 8 tanesini al
               setBenzerIlanlar(liste.filter((i: IlanDetay) => i._id !== id).slice(0, 8));
             });
         }
@@ -129,9 +132,8 @@ function IlanDetayIcerik({ id }: { id: string }) {
   ].filter((v, i, a) => a.indexOf(v) === i);
   const sektorAd = ilan.kategoriAd ?? SEKTOR_ADLARI[ilan.sektorId] ?? ilan.sektorId;
   const birim    = ilan.butceBirimi ?? '₺';
-  
-  // AI ilanlarında bazen resimUrl, bazen medyalar dizisi kullanıldığı için ikisini de kontrol ediyoruz
   const ilanResmi = ilan.resimUrl || ilan.medyalar?.[0] || null;
+  const ilanIletisim = ilan.formData?.iletisim || ilan.iletisim;
 
   const handleSohbetBaslat = () => {
     router.push(`/panel?tab=mesajlar&yeniSohbet=${ilan._id}`);
@@ -189,6 +191,10 @@ function IlanDetayIcerik({ id }: { id: string }) {
         .btn-teklif{background:var(--gold);color:var(--navy)}
         .btn-talep{background:var(--navy);color:#fff}
         .btn-mesaj{background:var(--blue);color:#fff}
+        .btn-uyeol{background: linear-gradient(135deg, #e8361a, #dc2626); color:#fff}
+        .iletisim-kutusu { background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 14px; margin-bottom: 16px; text-align: center; }
+        .iletisim-lbl { font-size: 0.7rem; color: #166534; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+        .iletisim-deger { font-size: 1.1rem; font-weight: 800; color: #14532d; font-family: 'Unbounded', sans-serif; }
         .teklif-sayisi-chip{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(24,165,88,.1);color:var(--green);font-size:.75rem;font-weight:700;padding:7px 14px;border-radius:10px;margin-bottom:16px; border: 1px solid rgba(24,165,88,.2)}
         .sidebar-bilgi{font-size:.72rem;color:var(--mid);text-align:center;line-height:1.7;padding-top:16px;border-top:1px solid var(--border);margin-top:8px}
         .sidebar-detay{font-size:.75rem;color:var(--mid);margin-bottom:18px;display:flex;flex-direction:column;gap:6px}
@@ -196,7 +202,6 @@ function IlanDetayIcerik({ id }: { id: string }) {
         .sidebar-detay-item:last-child{border-bottom:none}
         .sidebar-detay-deger{font-weight:700;color:var(--ink);font-size:.78rem}
 
-        /* BENZER İLANLAR (YATAY KAYDIRMA / SLIDER CSS) */
         .benzer-ilanlar-section { margin-top: 40px; padding-top: 40px; border-top: 1.5px dashed var(--border); }
         .benzer-ilanlar-baslik { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
         .benzer-slider { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -313,25 +318,43 @@ function IlanDetayIcerik({ id }: { id: string }) {
               </div>
             )}
 
-            {/* MANTIK: Eğer ilan "alan" rolündeyse (yani müşteri bir şey arıyorsa), ziyaretçi ona "Teklif Verir" */}
-            {ilan.rol === 'alan' && (
-              <button className="sidebar-btn btn-teklif" onClick={() => setTeklifModal(true)}>
-                ⚡ Kendi Teklifini Sun
-              </button>
-            )}
-            
-            {/* MANTIK: Eğer ilan "veren" rolündeyse (yani satıcı hizmet/ürün satıyorsa), ziyaretçi "Sipariş Geçer" veya ondan özel teklif ister */}
-            {ilan.rol === 'veren' && (
-              <button className="sidebar-btn btn-talep" onClick={() => setTalepModal(true)}>
-                🛍️ {ilan.tip === 'ticari' ? 'Toptan Fiyat / Teklif İste' : 'Hemen Sipariş Ver'}
-              </button>
+            {/* 🚨 KİLİT MANTIĞI BURADA BAŞLIYOR */}
+            {session ? (
+              <>
+                {/* Ziyaretçi Giriş Yapmışsa -> Numarayı ve Butonları Göster */}
+                {ilanIletisim && (
+                  <div className="iletisim-kutusu">
+                    <div className="iletisim-lbl">📞 İletişim Bilgisi</div>
+                    <div className="iletisim-deger">{ilanIletisim}</div>
+                  </div>
+                )}
+
+                {ilan.rol === 'alan' && (
+                  <button className="sidebar-btn btn-teklif" onClick={() => setTeklifModal(true)}>
+                    ⚡ Kendi Teklifini Sun
+                  </button>
+                )}
+                
+                {ilan.rol === 'veren' && (
+                  <button className="sidebar-btn btn-talep" onClick={() => setTalepModal(true)}>
+                    🛍️ {ilan.tip === 'ticari' ? 'Toptan Fiyat / Teklif İste' : 'Hemen Sipariş Ver'}
+                  </button>
+                )}
+
+                <button className="sidebar-btn btn-mesaj" onClick={handleSohbetBaslat}>
+                  💬 İlan Sahibiyle Mesajlaş
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Ziyaretçi Misafirse -> Kayıt/Giriş Ekranına Yönlendir */}
+                <button className="sidebar-btn btn-uyeol" onClick={() => router.push('/kayit')}>
+                  🔒 Bilgileri Görmek İçin Üye Ol
+                </button>
+              </>
             )}
 
-            <button className="sidebar-btn btn-mesaj" onClick={handleSohbetBaslat}>
-              💬 İlan Sahibiyle Mesajlaş
-            </button>
-
-            <div className="sidebar-detay">
+            <div className="sidebar-detay" style={{ marginTop: '16px' }}>
               {[
                 { ikon:'📍', lbl:'Lokasyon', deger:`${ilan.ulke && ilan.ulke !== 'Türkiye' ? ilan.ulke + ' / ' : ''}${sehir || 'Türkiye'}` },
                 { ikon:'🏷️', lbl:'Sektör', deger:sektorAd },
@@ -358,9 +381,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
           </div>
         </div>
 
-        {/* ============================================================== */}
-        {/* BENZER İLANLAR (YATAY SLIDER / SEO INTERNAL LINKING)           */}
-        {/* ============================================================== */}
+        {/* BENZER İLANLAR */}
         {benzerIlanlar.length > 0 && (
           <div className="benzer-ilanlar-section">
             <h3 className="benzer-ilanlar-baslik">
