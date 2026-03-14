@@ -49,7 +49,8 @@ export const SEKTORLER = TUM_SEKTORLER.map(s => ({
   ad: s.ad,
   emoji: s.emoji,
   renk: s.renk,
-  icon: s.emoji // AnaSayfaClient "icon" kelimesini arıyor, onu "emoji" ile besliyoruz!
+  icon: s.emoji, // AnaSayfaClient "icon" kelimesini arıyor, onu "emoji" ile besliyoruz!
+  altKategoriler: [] as string[] // Vercel TS hatasını önlemek için eklendi
 }));
 
 // 2. Eski sayfaların aradığı Ana Kategoriler
