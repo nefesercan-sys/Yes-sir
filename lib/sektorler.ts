@@ -48,21 +48,22 @@ export const SEKTORLER = TUM_SEKTORLER.map(s => ({
   id: s.id,
   ad: s.ad,
   emoji: s.emoji,
-  renk: s.renk // AnaSayfaClient renk arıyor, ekledik.
+  renk: s.renk,
+  icon: s.emoji // AnaSayfaClient "icon" kelimesini arıyor, onu "emoji" ile besliyoruz!
 }));
 
 // 2. Eski sayfaların aradığı Ana Kategoriler
 export const KATEGORILER_ANA = [
-  { id: 'tum', ad: 'Tüm Sektörler', emoji: '🌐', renk: '#0f172a' },
+  { id: 'tum', ad: 'Tüm Sektörler', emoji: '🌐', renk: '#0f172a', icon: '🌐' },
   ...SEKTORLER
 ];
 
 // 3. İlan Ver sayfasının aradığı Bireysel liste
 export const BIREYSEL_SEKTORLER = TUM_SEKTORLER
   .filter(s => s.tip === 'bireysel' || s.tip === 'both')
-  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji }));
+  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji, icon: s.emoji }));
 
 // 4. İlan Ver sayfasının aradığı Ticari liste
 export const TICARI_SEKTORLER = TUM_SEKTORLER
   .filter(s => s.tip === 'ticari' || s.tip === 'both')
-  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji }));
+  .map(s => ({ id: s.id, ad: s.ad, emoji: s.emoji, icon: s.emoji }));
