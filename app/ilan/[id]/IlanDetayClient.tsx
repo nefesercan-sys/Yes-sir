@@ -13,12 +13,14 @@ interface IlanDetay {
   tip:          'bireysel' | 'ticari';
   rol:          'alan' | 'veren';
   yapay?:       boolean;
+  is_ai_generated?: boolean;
   sehir?:       string;
   ulke?:        string;
   butceMin:     number;
   butceMax:     number;
   butceBirimi?: string;
   resimUrl?:    string;
+  medyalar?:    string[];
   teklifSayisi: number;
   ozellikler?:  string[];
   teslimat?:    string[];
@@ -68,15 +70,29 @@ function IlanDetayIcerik({ id }: { id: string }) {
   const router        = useRouter();
   const action        = searchParams.get('action');
 
-  const [ilan,        setIlan]        = useState<IlanDetay | null>(null);
-  const [yukleniyor,  setYukleniyor]  = useState(true);
-  const [teklifModal, setTeklifModal] = useState(action === 'teklif');
-  const [talepModal,  setTalepModal]  = useState(action === 'talep');
+  const [ilan,           setIlan]           = useState<IlanDetay | null>(null);
+  const [benzerIlanlar,  setBenzerIlanlar]  = useState<IlanDetay[]>([]);
+  const [yukleniyor,     setYukleniyor]     = useState(true);
+  const [teklifModal,    setTeklifModal]    = useState(action === 'teklif');
+  const [talepModal,     setTalepModal]     = useState(action === 'talep');
 
   useEffect(() => {
+    // 1. Ana İlanı Çek
     fetch(`/api/ilanlar/${id}`)
       .then(r => r.json())
-      .then(d => setIlan(d.ilan ?? null))
+      .then(d => {
+        if (d.ilan) {
+          setIlan(d.ilan);
+          // 2. İlan başarıyla yüklendiğinde, aynı sektöre ait benzer ilanları çek (SEO & UX için)
+          fetch(`/api/ilanlar?sektor=${d.ilan.sektorId}&limit=10`)
+            .then(res => res.json())
+            .then(data => {
+              const liste = data.ilanlar || data.data || data || [];
+              // Şu an içinde bulunduğumuz ilanı (kendisini) listeden çıkarıp ilk 8 tanesini al
+              setBenzerIlanlar(liste.filter((i: IlanDetay) => i._id !== id).slice(0, 8));
+            });
+        }
+      })
       .catch(() => {})
       .finally(() => setYukleniyor(false));
   }, [id]);
@@ -113,10 +129,11 @@ function IlanDetayIcerik({ id }: { id: string }) {
   ].filter((v, i, a) => a.indexOf(v) === i);
   const sektorAd = ilan.kategoriAd ?? SEKTOR_ADLARI[ilan.sektorId] ?? ilan.sektorId;
   const birim    = ilan.butceBirimi ?? '₺';
+  
+  // AI ilanlarında bazen resimUrl, bazen medyalar dizisi kullanıldığı için ikisini de kontrol ediyoruz
+  const ilanResmi = ilan.resimUrl || ilan.medyalar?.[0] || null;
 
-  // SİSTEM İÇİ MESAJLAŞMA FONKSİYONU
   const handleSohbetBaslat = () => {
-    // Kullanıcıyı SwapHubs paneline (Mesajlar sekmesine) ilgili ilan ID'si ile yönlendir
     router.push(`/panel?tab=mesajlar&yeniSohbet=${ilan._id}`);
   };
 
@@ -178,6 +195,23 @@ function IlanDetayIcerik({ id }: { id: string }) {
         .sidebar-detay-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f5f3ef}
         .sidebar-detay-item:last-child{border-bottom:none}
         .sidebar-detay-deger{font-weight:700;color:var(--ink);font-size:.78rem}
+
+        /* BENZER İLANLAR (YATAY KAYDIRMA / SLIDER CSS) */
+        .benzer-ilanlar-section { margin-top: 40px; padding-top: 40px; border-top: 1.5px dashed var(--border); }
+        .benzer-ilanlar-baslik { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .benzer-slider { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .benzer-slider::-webkit-scrollbar { display: none; }
+        .benzer-kart { min-width: 260px; max-width: 260px; background: #fff; border: 1px solid var(--border); border-radius: 16px; flex-shrink: 0; scroll-snap-align: start; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;}
+        .benzer-kart:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); border-color: #cbd5e1; }
+        .benzer-kart-resim { height: 150px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden; position: relative;}
+        .benzer-kart-resim img { width: 100%; height: 100%; object-fit: cover; }
+        .benzer-kart-icerik { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+        .benzer-kart-tip { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--navy); background: #f1f5f9; padding: 4px 8px; border-radius: 6px; display: inline-block; margin-bottom: 8px; align-self: flex-start; }
+        .benzer-kart-baslik { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .benzer-kart-alt { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid #f1f5f9; padding-top: 12px;}
+        .benzer-kart-fiyat { font-weight: 800; color: var(--green); font-size: 0.95rem; }
+        .benzer-kart-lokasyon { font-size: 0.7rem; color: var(--mid); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
         @media(max-width:800px){.detay-grid{grid-template-columns:1fr}.sidebar{position:static}.detay-resim{height:220px}}
       `}</style>
 
@@ -215,8 +249,8 @@ function IlanDetayIcerik({ id }: { id: string }) {
         <div className="detay-grid">
           <div>
             <div className="detay-resim">
-              {ilan.resimUrl
-                ? <img src={ilan.resimUrl} alt={ilan.baslik} />
+              {ilanResmi
+                ? <img src={ilanResmi} alt={ilan.baslik} />
                 : <span>{sektorEmoji(ilan.sektorId)}</span>
               }
               <div className="resim-badges">
@@ -225,7 +259,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
                 </span>
                 {ilan.tip === 'ticari' && <span className="badge badge-ticari">🏭 Ticari (B2B)</span>}
                 {ilan.tip === 'ticari' && <span className="badge badge-tr">🇹🇷 TR Üretimi</span>}
-                {ilan.yapay && <span className="badge badge-yapay">Örnek İlan</span>}
+                {(ilan.yapay || ilan.is_ai_generated) && <span className="badge badge-yapay">Örnek İlan</span>}
               </div>
             </div>
 
@@ -293,7 +327,6 @@ function IlanDetayIcerik({ id }: { id: string }) {
               </button>
             )}
 
-            {/* MESAJLAŞMA: Ziyaretçi ilan sahibiyle site üzerinden anında mesajlaşabilir */}
             <button className="sidebar-btn btn-mesaj" onClick={handleSohbetBaslat}>
               💬 İlan Sahibiyle Mesajlaş
             </button>
@@ -324,6 +357,45 @@ function IlanDetayIcerik({ id }: { id: string }) {
             </div>
           </div>
         </div>
+
+        {/* ============================================================== */}
+        {/* BENZER İLANLAR (YATAY SLIDER / SEO INTERNAL LINKING)           */}
+        {/* ============================================================== */}
+        {benzerIlanlar.length > 0 && (
+          <div className="benzer-ilanlar-section">
+            <h3 className="benzer-ilanlar-baslik">
+              <span>{sektorEmoji(ilan.sektorId)}</span> Sektördeki Benzer İlanlar
+            </h3>
+            <div className="benzer-slider">
+              {benzerIlanlar.map((bIlan) => {
+                const bResim = bIlan.resimUrl || bIlan.medyalar?.[0] || null;
+                const bSehir = bIlan.formData?.sehir ?? bIlan.sehir ?? '';
+                const bBirim = bIlan.butceBirimi ?? '₺';
+                
+                return (
+                  <div key={bIlan._id} className="benzer-kart" onClick={() => router.push(`/ilan/${bIlan._id}`)}>
+                    <div className="benzer-kart-resim">
+                      {bResim ? <img src={bResim} alt={bIlan.baslik} loading="lazy" /> : sektorEmoji(bIlan.sektorId)}
+                    </div>
+                    <div className="benzer-kart-icerik">
+                      <span className="benzer-kart-tip">{bIlan.tip === 'ticari' ? '🏭 Ticari' : '👤 Bireysel'} · {bIlan.rol === 'alan' ? 'Talep' : 'Hizmet'}</span>
+                      <h4 className="benzer-kart-baslik">{bIlan.baslik}</h4>
+                      <div className="benzer-kart-alt">
+                        <span className="benzer-kart-fiyat">
+                          {bIlan.butceMin > 0 ? `${bBirim}${fmt(bIlan.butceMin)}` : 'Teklife Açık'}
+                        </span>
+                        <span className="benzer-kart-lokasyon">
+                          📍 {bIlan.ulke && bIlan.ulke !== 'Türkiye' ? bIlan.ulke : (bSehir || 'Türkiye')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
       </div>
 
       {teklifModal && (
