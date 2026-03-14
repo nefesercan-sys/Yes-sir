@@ -6,7 +6,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER, Sektor } from "@/lib/sektorler";
+import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
 interface Ilan {
   _id: string;
@@ -51,7 +51,6 @@ export default function AnaSayfa() {
   const [sayfa, setSayfa] = useState(1);
   const SAYFA_BOYUTU = 12;
 
-  // Dönen vitrin için
   const vitrinRef = useRef<HTMLDivElement>(null);
 
   const fetchIlanlar = useCallback(async () => {
@@ -73,10 +72,11 @@ export default function AnaSayfa() {
   // Kategori değişince sayfayı sıfırla
   useEffect(() => { setSayfa(1); }, [aktifTip, aktifRol, aktifKat, aramaQ]);
 
-  // --- DÜZELTİLEN KISIM: Kategori Listesini Doğru Diziden Al ---
+  // --- DÜZELTME 1: Tip zorlaması kaldırıldı, güvenli obje oluşturuldu ---
   const kategoriler = useMemo(() => {
-    const anaKategoriListesi: Sektor[] = aktifTip === "ticari" ? TICARI_SEKTORLER : BIREYSEL_SEKTORLER;
-    return [{ id: 'Tümü', ad: 'Tüm Sektörler', icon: '🌐' } as unknown as Sektor, ...anaKategoriListesi];
+    const anaKategoriListesi = aktifTip === "ticari" ? TICARI_SEKTORLER : BIREYSEL_SEKTORLER;
+    const tumKategori = { id: 'Tümü', ad: 'Tüm Sektörler', icon: '🌐', tip: 'both', renk: '#0f172a', altKategoriler: [], butceBirimi: 'TL', hizmetAlanFormu: [], hizmetVerenFormu: [] } as any;
+    return [tumKategori, ...anaKategoriListesi];
   }, [aktifTip]);
 
   const filtreliIlanlar = useMemo(() => {
@@ -84,7 +84,6 @@ export default function AnaSayfa() {
       if (i.tip !== aktifTip) return false;
       if (i.rol !== aktifRol) return false;
       
-      // --- DÜZELTİLEN KISIM: Obje yerine kategoriler dizisinden ara ---
       if (aktifKat !== "Tümü") {
         if (i.sektorId !== aktifKat) return false;
       }
@@ -127,7 +126,8 @@ export default function AnaSayfa() {
 
   return (
     <>
-      <style>{`
+      {/* --- DÜZELTME 2: CSS kodları SWC derleyicisini bozmaması için en güvenli yöntemle bağlandı --- */}
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Unbounded:wght@700;800;900&display=swap');
 
         :root {
@@ -154,7 +154,6 @@ export default function AnaSayfa() {
         html { scroll-behavior: smooth; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; }
 
-        /* ── NAVBAR ── */
         .nav {
           background: var(--navy);
           padding: 0 24px;
@@ -208,7 +207,6 @@ export default function AnaSayfa() {
         .nav-btn.primary:hover { background: var(--red2); }
         .nav-badge { background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 99px; font-size: .7rem; font-weight: 800; }
 
-        /* ── HERO ── */
         .hero {
           background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 60%, #1e40af 100%);
           padding: 70px 24px 110px;
@@ -263,7 +261,6 @@ export default function AnaSayfa() {
           z-index: 1;
         }
 
-        /* ── KONTROL PANELİ ── */
         .kontrol {
           max-width: 820px;
           margin: 0 auto;
@@ -335,7 +332,6 @@ export default function AnaSayfa() {
         }
         .arama-btn:hover { background: var(--navy2); }
 
-        /* ── STATS BAR ── */
         .stats-bar {
           max-width: 1200px; margin: 32px auto 0;
           padding: 0 24px;
@@ -354,7 +350,6 @@ export default function AnaSayfa() {
         .stat-v { font-family: 'Unbounded', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--navy); }
         .stat-l { font-size: .72rem; color: var(--muted); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: .05em; }
 
-        /* ── KATEGORİ ŞERİDİ ── */
         .kat-wrap {
           max-width: 1200px; margin: 28px auto 0;
           padding: 0 24px;
@@ -377,7 +372,6 @@ export default function AnaSayfa() {
         .kat-chip:hover { border-color: var(--blue); color: var(--navy); }
         .kat-chip.on { background: var(--navy); border-color: var(--navy); color: #fff; }
 
-        /* ── VİTRİN ── */
         .vitrin-wrap {
           max-width: 1200px; margin: 28px auto 0;
           padding: 0 24px 80px;
@@ -401,7 +395,6 @@ export default function AnaSayfa() {
           gap: 18px;
         }
 
-        /* ── KART ── */
         .kart {
           background: #fff;
           border-radius: var(--radius);
@@ -449,7 +442,6 @@ export default function AnaSayfa() {
         .kart-btn:hover { opacity: .88; transform: scale(1.04); }
         .kart-btn.red { background: var(--red); }
 
-        /* ── EMPTY STATE ── */
         .empty {
           text-align: center; padding: 60px 20px;
           background: #fff; border-radius: 20px;
@@ -460,7 +452,6 @@ export default function AnaSayfa() {
         .empty-title { font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
         .empty-sub { font-size: .9rem; color: var(--mid); font-weight: 600; margin-bottom: 20px; }
 
-        /* ── PAGİNASYON ── */
         .pagination {
           display: flex; justify-content: center; gap: 8px;
           margin-top: 32px; flex-wrap: wrap;
@@ -476,7 +467,6 @@ export default function AnaSayfa() {
         .page-btn:hover { border-color: var(--blue); color: var(--blue); }
         .page-btn.on { background: var(--navy); border-color: var(--navy); color: #fff; }
 
-        /* ── DESTEK BALONU ── */
         .destek-fab {
           position: fixed; bottom: 28px; right: 28px; z-index: 500;
           width: 56px; height: 56px; border-radius: 50%;
@@ -520,7 +510,6 @@ export default function AnaSayfa() {
         }
         .destek-send:hover { background: var(--navy2); }
 
-        /* ── LOADING ── */
         .skeleton {
           background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
           background-size: 200% 100%;
@@ -529,7 +518,6 @@ export default function AnaSayfa() {
         }
         @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
 
-        /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
           .stats-bar { grid-template-columns: repeat(2, 1fr); }
         }
@@ -544,7 +532,7 @@ export default function AnaSayfa() {
           .nav-btn span { display: none; }
           .destek-panel { width: calc(100vw - 40px); right: 20px; }
         }
-      `}</style>
+      `}} />
 
       {/* ── NAVBAR ── */}
       <nav className="nav">
@@ -812,3 +800,30 @@ export default function AnaSayfa() {
                 <p style={{ fontWeight: 700, color: "#059669" }}>Mesajınız alındı!</p>
                 <p style={{ fontSize: ".85rem", color: "#64748b", marginTop: 4 }}>En kısa sürede dönüş yapacağız.</p>
               </div>
+            ) : (
+              <>
+                <p style={{ fontSize: ".82rem", color: "#64748b", marginBottom: 10, lineHeight: 1.5 }}>
+                  Soru, öneri veya sorunlarınızı yazın — ekibimiz size özel yanıt verir.
+                </p>
+                <textarea
+                  className="destek-ta"
+                  placeholder="Mesajınızı yazın..."
+                  value={destekMesaj}
+                  onChange={e => setDestekMesaj(e.target.value)}
+                />
+                {session?.user?.email && (
+                  <p style={{ fontSize: ".75rem", color: "#94a3b8", marginTop: 4 }}>
+                    📧 {session.user.email} üzerinden yanıtlanacak
+                  </p>
+                )}
+                <button className="destek-send" onClick={handleDestekGonder}>
+                  Gönder →
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
