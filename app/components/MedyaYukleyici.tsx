@@ -9,9 +9,9 @@ export default function MedyaYukleyici({ onYuklendi }: MedyaYukleyiciProps) {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [hata, setHata] = useState('');
 
-  // 🚨 Şahin gözlerimle fotoğraftan bulduğum senin özel Cloudinary bilgilerin:
-  const CLOUD_NAME = "dluamcnsj"; 
-  const UPLOAD_PRESET = "hizmetara_medya"; 
+  // 🚨 DÜZELTİLEN KISIM: Bulut adı harf hatası ve çalışan Preset adı yazıldı
+  const CLOUD_NAME = "diuamcnej"; 
+  const UPLOAD_PRESET = "atakasa_hizli"; 
 
   const dosyaSecildi = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const dosya = e.target.files?.[0];
