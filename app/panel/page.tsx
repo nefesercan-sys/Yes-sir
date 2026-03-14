@@ -248,7 +248,6 @@ function PanelIcerik() {
         .dur { padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; white-space: nowrap; }
         .sttl { font-size: 18px; font-weight: 800; color: #0f172a; font-family: 'Unbounded', sans-serif; margin-bottom: 16px; }
         .empty-box { text-align: center; padding: 48px; background: #fff; border-radius: 18px; border: 1.5px dashed #e2e8f0; }
-        .adm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: none; }
         @media (max-width: 768px) {
           .panel-layout { display: flex; flex-direction: column; }
           .sidebar { position: static; height: auto; overflow-x: auto; overflow-y: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
@@ -716,6 +715,13 @@ const BTN_SM = (bg: string, c: string): React.CSSProperties => ({
   background: bg, border: "none", color: c,
   fontFamily: "inherit", fontSize: 11, fontWeight: 700, cursor: "pointer",
 });
+
+// Form elemanları için ortak stil
+const SEL: React.CSSProperties = { 
+  width: "100%", padding: "10px 12px", borderRadius: 10, 
+  border: "1.5px solid #e2e8f0", fontSize: 13, 
+  fontFamily: "inherit", background: "#fff", outline: "none" 
+};
 
 // AI İLAN BİLEŞENİ
 function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
