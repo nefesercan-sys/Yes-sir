@@ -6,7 +6,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { KATEGORILER_ANA } from "@/lib/sektorler";
+import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER, Sektor } from "@/lib/sektorler";
 
 interface Ilan {
   _id: string;
@@ -73,16 +73,22 @@ export default function AnaSayfa() {
   // Kategori değişince sayfayı sıfırla
   useEffect(() => { setSayfa(1); }, [aktifTip, aktifRol, aktifKat, aramaQ]);
 
+  // --- DÜZELTİLEN KISIM: Kategori Listesini Doğru Diziden Al ---
+  const kategoriler = useMemo(() => {
+    const anaKategoriListesi: Sektor[] = aktifTip === "ticari" ? TICARI_SEKTORLER : BIREYSEL_SEKTORLER;
+    return [{ id: 'Tümü', ad: 'Tüm Sektörler', icon: '🌐' } as unknown as Sektor, ...anaKategoriListesi];
+  }, [aktifTip]);
+
   const filtreliIlanlar = useMemo(() => {
     return ilanlar.filter(i => {
       if (i.tip !== aktifTip) return false;
       if (i.rol !== aktifRol) return false;
+      
+      // --- DÜZELTİLEN KISIM: Obje yerine kategoriler dizisinden ara ---
       if (aktifKat !== "Tümü") {
-        const katObj = KATEGORILER_ANA[aktifTip].find(k => k.id === aktifKat);
-        if (katObj && 'sektorId' in katObj && katObj.sektorId) {
-          if (i.sektorId !== katObj.sektorId) return false;
-        }
+        if (i.sektorId !== aktifKat) return false;
       }
+
       if (aramaQ) {
         const q = aramaQ.toLowerCase();
         return (
@@ -118,8 +124,6 @@ export default function AnaSayfa() {
     setDestekGonderildi(true);
     setTimeout(() => { setDestekAcik(false); setDestekGonderildi(false); setDestekMesaj(""); }, 3000);
   };
-
-  const kategoriler = KATEGORILER_ANA[aktifTip];
 
   return (
     <>
@@ -657,7 +661,7 @@ export default function AnaSayfa() {
             className={`kat-chip ${aktifKat === k.id ? "on" : ""}`}
             onClick={() => setAktifKat(k.id)}
           >
-            <span>{k.icon}</span> {k.id}
+            <span>{k.icon}</span> {k.id === "Tümü" ? "Tüm Sektörler" : k.ad}
           </div>
         ))}
       </div>
@@ -808,30 +812,3 @@ export default function AnaSayfa() {
                 <p style={{ fontWeight: 700, color: "#059669" }}>Mesajınız alındı!</p>
                 <p style={{ fontSize: ".85rem", color: "#64748b", marginTop: 4 }}>En kısa sürede dönüş yapacağız.</p>
               </div>
-            ) : (
-              <>
-                <p style={{ fontSize: ".82rem", color: "#64748b", marginBottom: 10, lineHeight: 1.5 }}>
-                  Soru, öneri veya sorunlarınızı yazın — ekibimiz size özel yanıt verir.
-                </p>
-                <textarea
-                  className="destek-ta"
-                  placeholder="Mesajınızı yazın..."
-                  value={destekMesaj}
-                  onChange={e => setDestekMesaj(e.target.value)}
-                />
-                {session?.user?.email && (
-                  <p style={{ fontSize: ".75rem", color: "#94a3b8", marginTop: 4 }}>
-                    📧 {session.user.email} üzerinden yanıtlanacak
-                  </p>
-                )}
-                <button className="destek-send" onClick={handleDestekGonder}>
-                  Gönder →
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
