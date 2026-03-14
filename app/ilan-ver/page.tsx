@@ -2,6 +2,7 @@
 // ============================================================
 // SwapHubs — app/ilan-ver/page.tsx
 // Gelişmiş İlan Formu — Ülke/şehir, detaylı form, medya
+// Kısıtlama: Maksimum 10 Resim ve 1 Video
 // ============================================================
 import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
@@ -50,7 +51,23 @@ function IlanVerIcerik() {
 
   const handleMedyaYuklendi = (url: string) => {
     const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(url);
-    setMedyalar(p => [...p, { url, tip: isVideo ? "video" : "resim" }]);
+    const yeniTip = isVideo ? "video" : "resim";
+    
+    // 🚨 KISITLAMA MANTIĞI: Maksimum 10 Resim ve 1 Video
+    setMedyalar(p => {
+        if (yeniTip === "video") {
+            // Yeni video yüklenirse, eskisini listeden çıkarıp yenisini ekle
+            return [...p.filter(m => m.tip !== "video"), { url, tip: "video" }];
+        } else {
+            // Resim ekleniyorsa, mevcut resim sayısını kontrol et
+            const resimSayisi = p.filter(m => m.tip === "resim").length;
+            if (resimSayisi < 10) {
+                return [...p, { url, tip: "resim" }];
+            }
+            // Zaten 10 resim varsa yenisini ekleme
+            return p;
+        }
+    });
   };
 
   const handleYayinla = async () => {
@@ -283,6 +300,11 @@ function IlanVerIcerik() {
       </div>
     );
   }
+
+  // 🚨 KISITLAMA İÇİN YARDIMCI DEĞİŞKENLER:
+  const resimSayisi = medyalar.filter(m => m.tip === 'resim').length;
+  const videoSayisi = medyalar.filter(m => m.tip === 'video').length;
+  const canUploadMore = resimSayisi < 10 || videoSayisi < 1;
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 80 }}>
@@ -569,7 +591,7 @@ function IlanVerIcerik() {
                 📸 Fotoğraf & Video
               </h2>
               <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 16, lineHeight: 1.6 }}>
-                Görsel eklemek teklif alma oranınızı <strong>3 kat</strong> artırır. Max 10 fotoğraf, 3 video.
+                Görsel eklemek teklif alma oranınızı <strong>3 kat</strong> artırır. Maksimum <strong>10 fotoğraf</strong> ve <strong>1 video</strong>.
               </p>
 
               {medyalar.length > 0 && (
@@ -595,8 +617,20 @@ function IlanVerIcerik() {
                 </div>
               )}
 
-              {/* MEDYA YÜKLEYİCİ BİLEŞENİ BURADA ÇAĞRILIYOR */}
-              <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
+              {/* 🚨 YENİ KISITLAMA GÖRÜNÜMÜ: Sınırlar dolmadıysa yükleme kutusunu göster */}
+              {canUploadMore ? (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    <p style={{ fontSize: 11, color: "#2563eb", fontWeight: 600, textAlign: "center" }}>
+                      {10 - resimSayisi > 0 ? `${10 - resimSayisi} fotoğraf hakkınız kaldı.` : "Maksimum fotoğraf sınırına ulaştınız."}
+                      {1 - videoSayisi > 0 ? " (1 video ekleyebilirsiniz)" : " (Video sınırına ulaştınız)"}
+                    </p>
+                    <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
+                  </div>
+              ) : (
+                  <div style={{ padding: 12, borderRadius: 10, background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#166534", fontSize: 12, textAlign: "center", fontWeight: 600 }}>
+                    ✅ Maksimum medya sayısına ulaşıldı (10 Fotoğraf + 1 Video).
+                  </div>
+              )}
             </div>
 
             {/* Özet Kutusu */}
