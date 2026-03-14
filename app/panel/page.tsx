@@ -8,6 +8,21 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
 
+// --- EKSİK OLAN STİL FONKSİYONU BURAYA EKLENDİ ---
+const BTN_SM = (bg: string, c: string) => ({
+  padding: "6px 12px",
+  borderRadius: "8px",
+  background: bg,
+  border: "none",
+  color: c,
+  fontFamily: "inherit",
+  fontSize: "11px",
+  fontWeight: 700,
+  cursor: "pointer",
+  transition: "all 0.15s",
+});
+// --------------------------------------------------
+
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
@@ -215,7 +230,7 @@ function PanelIcerik() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 58px); }
@@ -242,7 +257,7 @@ function PanelIcerik() {
           .tab-btn { width: auto; flex-shrink: 0; margin-bottom: 0; padding: 8px 12px; }
           .main-area { padding: 14px; }
         }
-      `}</style>
+      `}} />
 
       {/* TOPBAR */}
       <div style={{ background: "#0f172a", padding: "0 20px", height: 58, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
@@ -674,7 +689,8 @@ function PanelIcerik() {
               </div>
               <div className="card" style={{ background: "#fef2f2", borderColor: "#fecaca" }}>
                 <p style={{ fontSize: 14, fontWeight: 700, color: "#dc2626", marginBottom: 10 }}>Hesap İşlemleri</p>
-                <button onClick={() => signOut({ callbackUrl: "/" })} style={{ padding: "10px 20px", borderRadius: 10, background: "#dc2626", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Çıkış Yap</button>
+                {/* --- DÜZELTME EKLENDİ --- */}
+                <button onClick={() => { signOut({ callbackUrl: "/" }); }} style={{ padding: "10px 20px", borderRadius: 10, background: "#dc2626", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Çıkış Yap</button>
               </div>
             </div>
           )}
