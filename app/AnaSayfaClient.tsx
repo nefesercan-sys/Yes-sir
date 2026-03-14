@@ -266,7 +266,6 @@ export default function AnaSayfaClient({ ilanlar, istatistik }: Props) {
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; (e.currentTarget as HTMLElement).style.background = 'white'; }}>
                 <p style={{ fontSize: '32px', marginBottom: '8px' }}>{s.icon}</p>
                 <p style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{s.ad}</p>
-                <p style={{ fontSize: '11px', color: '#94a3b8', marginTop: '4px' }}>{s.altKategoriler?.length || 0} alt kategori</p>
               </div>
             ))}
           </div>
