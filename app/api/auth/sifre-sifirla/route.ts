@@ -27,20 +27,20 @@ export async function POST(req: NextRequest) {
       createdAt: new Date(),
     });
 
-    // E-POSTA GÖNDERİMİ (Nodemailer)
     const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://swaphubs.com';
     const resetLink = `${siteUrl}/sifre-sifirla?token=${token}`;
 
+    // 🚀 DİKKAT: Burayı senin Vercel'deki "SMTP_USER" ve "SMTP_PASS" isimlerine göre güncelledim!
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER, // Vercel'deki e-posta adresin
-        pass: process.env.EMAIL_PASS, // Vercel'deki 16 haneli uygulama şifren
+        user: process.env.SMTP_USER, 
+        pass: process.env.SMTP_PASS, 
       },
     });
 
     const mailOptions = {
-      from: `"SwapHubs" <${process.env.EMAIL_USER}>`,
+      from: `"SwapHubs" <${process.env.SMTP_USER}>`,
       to: emailKucuk,
       subject: 'SwapHubs - Şifre Sıfırlama Talebi',
       html: `
@@ -68,6 +68,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error: any) {
     console.error("Mail gönderme hatası:", error);
-    return NextResponse.json({ error: 'Mail gönderilemedi. Lütfen daha sonra tekrar deneyin.' }, { status: 500 });
+    return NextResponse.json({ error: `Gmail Hatası: ${error.message}` }, { status: 500 });
   }
 }
