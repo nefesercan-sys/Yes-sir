@@ -28,7 +28,27 @@ export interface Sektor {
   tip: 'bireysel' | 'ticari' | 'her_ikisi';
 }
 
+const GENEL_ALAN_FORMU: FormAlan[] = [
+  { key: 'talepDetay', label: 'Detaylı Talebiniz', tip: 'textarea', zorunlu: true },
+  { key: 'butce', label: 'Tahmini Bütçe', tip: 'range', birim: '₺', zorunlu: true }
+];
+const GENEL_VEREN_FORMU: FormAlan[] = [
+  { key: 'hizmetDetay', label: 'Sunulan Hizmet/Ürün', tip: 'text', zorunlu: true }
+];
+
 export const SEKTORLER: Sektor[] = [
+  // YENİ EKLENEN ANA SEKTÖRLER
+  { id: 'emlak-satis', ad: 'Emlak Alım Satım', icon: '🏢', renk: '#10b981', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'emlak-kiralama', ad: 'Emlak Kiralama', icon: '🏠', renk: '#3b82f6', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'oto-satis', ad: 'Oto Alım Satım', icon: '🚙', renk: '#ef4444', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'oto-kiralama', ad: 'Oto Kiralama', icon: '🚗', renk: '#f59e0b', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'elektronik', ad: 'Elektronik & Teknoloji', icon: '📱', renk: '#8b5cf6', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'beyaz-esya', ad: 'Beyaz Eşya', icon: '🧊', renk: '#06b6d4', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'bilet', ad: 'Bilet & Rezervasyon', icon: '🎫', renk: '#f43f5e', tip: 'bireysel', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'yazilim', ad: 'Yazılım & Bilişim', icon: '💻', renk: '#6366f1', tip: 'ticari', butceBirimi: '$', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+  { id: 'makine-kiralama', ad: 'Makine Kiralama', icon: '🚜', renk: '#eab308', tip: 'ticari', butceBirimi: '₺', hizmetAlanFormu: GENEL_ALAN_FORMU, hizmetVerenFormu: GENEL_VEREN_FORMU },
+
+  // SENİN MEVCUT SEKTÖRLERİN (Hiç Dokunmadım)
   {
     id: 'usta',
     ad: 'Usta & İşçi',
@@ -253,7 +273,7 @@ export const SEKTORLER: Sektor[] = [
       { id: 'ozel_ders', ad: 'Özel Ders', icon: '👨‍🏫' },
       { id: 'dil_kursu', ad: 'Dil Kursu', icon: '🌍' },
       { id: 'musiki', ad: 'Müzik Dersi', icon: '🎸' },
-      { id: 'yazilim', ad: 'Yazılım / IT', icon: '💻' },
+      { id: 'yazilim_ders', ad: 'Yazılım / IT', icon: '💻' },
       { id: 'is_danismanlik', ad: 'İş Danışmanlığı', icon: '📊' },
       { id: 'hukuk', ad: 'Hukuki Danışmanlık', icon: '⚖️' },
     ],
@@ -328,6 +348,6 @@ export const KATEGORILER_ANA: Record<string, Sektor[]> = {
 export const SEKTOR_MAP = Object.fromEntries(SEKTORLER.map(s => [s.id, s]));
 
 export const BUTCE_ARALIKLARI = {
-  '₺': [[0, 1000], [1000, 5000], [5000, 10000], [10000, 25000], [25000, 50000], [50000, 100000], [100000, 500000]],
-  '$': [[0, 500], [500, 1000], [1000, 2000], [2000, 5000], [5000, 10000], [10000, 25000]],
+  '₺': [[0, 1000], [1000, 5000], [5000, 20000], [20000, 100000], [100000, 500000], [500000, 5000000]],
+  '$': [[0, 500], [500, 2000], [2000, 10000], [10000, 50000], [50000, 250000]],
 };
