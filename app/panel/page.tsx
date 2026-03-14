@@ -1,13 +1,45 @@
 "use client";
 // ============================================================
 // SwapHubs — app/panel/page.tsx
-// Tam üye paneli — mesajlaşma, teklif, sipariş, bildirim
+// Tam üye paneli + Adminler için Gizli AI İlan Motoru
 // ============================================================
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar";
+// SEKTÖRLER (AI İlan Motoru İçin)
+const SEKTORLER = [
+  { id:'turizm', ad:'Turizm & Konaklama', emoji:'🏨' },
+  { id:'seyahat', ad:'Seyahat & Transfer', emoji:'✈️' },
+  { id:'kiralama', ad:'Kiralama', emoji:'🔑' },
+  { id:'tamir', ad:'Tamir & Bakım', emoji:'🔧' },
+  { id:'usta', ad:'Usta & İşçi', emoji:'👷' },
+  { id:'temizlik', ad:'Temizlik Hizmetleri', emoji:'🧹' },
+  { id:'uretim', ad:'Üretim & Özel Sipariş', emoji:'🏭' },
+  { id:'giyim', ad:'Giyim & Tekstil', emoji:'👗' },
+  { id:'saglik', ad:'Sağlık & Güzellik', emoji:'💊' },
+  { id:'egitim', ad:'Eğitim & Danışmanlık', emoji:'📚' },
+  { id:'etkinlik', ad:'Etkinlik & Düğün', emoji:'🎊' },
+  { id:'mobilya', ad:'Mobilya & Dekorasyon', emoji:'🪑' },
+];
+
+const ENDUSTRIYEL_SEKTORLER = [
+  { id:'tekstil', ad:'Tekstil & Hazır Giyim', emoji:'👕' },
+  { id:'mermer-tas', ad:'Mermer & Doğal Taş', emoji:'🪨' },
+  { id:'metal-celik', ad:'Metal & Çelik', emoji:'⚙️' },
+  { id:'plastik-pvc', ad:'Plastik & PVC', emoji:'🧴' },
+  { id:'ahsap-mob', ad:'Ahşap & Mobilya', emoji:'🪵' },
+  { id:'gida-tarim', ad:'Gıda & Tarım', emoji:'🌾' },
+  { id:'insaat-malz', ad:'İnşaat Malzemeleri', emoji:'🏗️' },
+  { id:'elektrik', ad:'Elektrik & Enerji', emoji:'⚡' },
+  { id:'makine', ad:'Makine & Ekipman', emoji:'🏭' },
+  { id:'lojistik', ad:'Lojistik', emoji:'🚢' },
+];
+
+const SEHIRLER = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Rastgele'];
+const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
+
+type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari";
 type Rol = "alan" | "veren";
 type Tip = "bireysel" | "ticari";
 
@@ -27,6 +59,9 @@ function PanelIcerik() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  // Admin Kontrolü
+  const isAdmin = session?.user?.email === 'nefesercan@gmail.com' || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
   const [aktifTab, setAktifTab] = useState<Tab>(
     (searchParams.get("tab") as Tab) || "ozet"
@@ -57,8 +92,11 @@ function PanelIcerik() {
     if (!session?.user?.email) return;
     setLoading(true);
     try {
+      // Admin isek kendi paneline hem kendi ilanlarını hem de AI ilanlarını (denetim için) getir
+      const ilanApiUrl = isAdmin ? "/api/ilanlar?limit=100" : "/api/ilanlar?kendi=true";
+
       const [ilanRes, teklifRes, gelenRes, sipRes, bilRes, konRes] = await Promise.all([
-        fetch("/api/ilanlar?kendi=true"),
+        fetch(ilanApiUrl),
         fetch("/api/teklifler?kendi=true"),
         fetch("/api/teklifler"),
         fetch("/api/rezervasyonlar"),
@@ -71,10 +109,12 @@ function PanelIcerik() {
         sipRes.json(), bilRes.json(), konRes.json(),
       ]);
 
-      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.data || [];
+      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.ilanlar || ilanD.data || [];
+      // Kullanıcı görünümü filtrelemesi
       const filtreIlanlar = tumIlanlar.filter(
-        (i: any) => i.rol === rol && i.tip === tip
+        (i: any) => isAdmin ? true : (i.rol === rol && i.tip === tip)
       );
+      
       const tL = Array.isArray(teklifD) ? teklifD : [];
       const gL = Array.isArray(gelenD) ? gelenD : [];
       const sL = Array.isArray(sipD) ? sipD : [];
@@ -97,7 +137,7 @@ function PanelIcerik() {
       });
     } catch (e) { console.error(e); }
     setLoading(false);
-  }, [session, rol, tip]);
+  }, [session, rol, tip, isAdmin]);
 
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/giris?redirect=/panel"); return; }
@@ -160,16 +200,22 @@ function PanelIcerik() {
     setStats(p => ({ ...p, okunmamisBildirim: Math.max(0, p.okunmamisBildirim - 1) }));
   };
 
+  const ilanSil = async (id: string) => {
+    if (!confirm("İlanı silmek istediğinize emin misiniz?")) return;
+    await fetch(`/api/ilanlar/${id}`, { method: "DELETE" });
+    yukle();
+  };
+
   if (status === "loading") return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b", fontSize: 14, fontWeight: 600 }}>
-      ⏳ Yükleniyor...
+      ⏳ Siber Kimlik Doğrulanıyor...
     </div>
   );
   if (!session) return null;
 
-  const TABS: { key: Tab; label: string; icon: string; badge?: number }[] = [
+  const TABS: { key: Tab; label: string; icon: string; badge?: number; adminOnly?: boolean }[] = [
     { key: "ozet", label: "Özet", icon: "📊" },
-    { key: "ilanlarim", label: rol === "alan" ? "Taleplerim" : "İlanlarım", icon: "📋", badge: stats.aktifIlan },
+    { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar (Denetim)" : (rol === "alan" ? "Taleplerim" : "İlanlarım"), icon: "📋", badge: stats.aktifIlan },
     { key: "gelenTeklifler", label: "Gelen Teklifler", icon: "📥", badge: stats.gelenTeklif },
     { key: "tekliflerim", label: "Verdiğim Teklifler", icon: "💼", badge: stats.bekleyenTeklif },
     { key: "siparisler", label: "Siparişler", icon: "📦", badge: stats.toplamSiparis },
@@ -177,6 +223,9 @@ function PanelIcerik() {
     { key: "bildirimler", label: "Bildirimler", icon: "🔔", badge: stats.okunmamisBildirim },
     { key: "profil", label: "Profilim", icon: "🏢" },
     { key: "ayarlar", label: "Ayarlar", icon: "⚙️" },
+    // ADMIN ÖZEL SEKMELER
+    { key: "ai_ilan_bireysel", label: "🤖 AI İlan (Bireysel)", icon: "⚡", adminOnly: true },
+    { key: "ai_ilan_ticari", label: "🤖 AI İlan (B2B)", icon: "🏭", adminOnly: true },
   ];
 
   return (
@@ -186,17 +235,20 @@ function PanelIcerik() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 58px); }
         .sidebar { background: #fff; border-right: 1px solid #e2e8f0; padding: 16px 10px; position: sticky; top: 58px; height: calc(100vh - 58px); overflow-y: auto; }
-        .main-area { padding: 22px 20px; max-width: 960px; }
+        .main-area { padding: 22px 20px; max-width: 1000px; }
         .card { background: #fff; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 18px; }
         .row-item { background: #fff; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 14px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; transition: .15s; }
         .row-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
         .tab-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 10px; border: none; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; margin-bottom: 2px; transition: .12s; background: transparent; color: #475569; }
         .tab-btn.on { background: #0f172a; color: #fff; font-weight: 700; }
         .tab-btn:not(.on):hover { background: #f1f5f9; }
+        .admin-tab { background: rgba(124, 58, 237, 0.05); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.2); }
+        .admin-tab.on { background: #7c3aed; color: #fff; }
         .badge-dot { background: #f59e0b; color: #0f172a; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 99px; margin-left: auto; }
         .dur { padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; white-space: nowrap; }
         .sttl { font-size: 18px; font-weight: 800; color: #0f172a; font-family: 'Unbounded', sans-serif; margin-bottom: 16px; }
         .empty-box { text-align: center; padding: 48px; background: #fff; border-radius: 18px; border: 1.5px dashed #e2e8f0; }
+        .adm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: none; }
         @media (max-width: 768px) {
           .panel-layout { display: flex; flex-direction: column; }
           .sidebar { position: static; height: auto; overflow-x: auto; overflow-y: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
@@ -212,6 +264,7 @@ function PanelIcerik() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={() => router.push("/")} style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", padding: "5px 12px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: "inherit" }}>← Ana Sayfa</button>
           <span style={{ color: "#fff", fontSize: 15, fontWeight: 800, fontFamily: "Unbounded, sans-serif" }}>🌐 SwapHubs Panel</span>
+          {isAdmin && <span style={{ background: "#dc2626", color: "#fff", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 4, marginLeft: 8 }}>ADMİN</span>}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {stats.okunmamisBildirim > 0 && (
@@ -238,7 +291,7 @@ function PanelIcerik() {
             <p style={{ fontSize: 10, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{session.user?.email}</p>
           </div>
 
-          {/* Kimlik şalteri */}
+          {/* Kimlik şalteri (Admin değilse veya admin bile olsa kişisel görünüm için) */}
           <div style={{ background: "#f8fafc", borderRadius: 12, padding: "10px", marginBottom: 12, border: "1px solid #e2e8f0" }}>
             <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", marginBottom: 8 }}>Panel Görünümü</p>
             <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, marginBottom: 8, border: "1px solid #e2e8f0" }}>
@@ -259,8 +312,12 @@ function PanelIcerik() {
 
           {/* Menü */}
           <div>
-            {TABS.map(t => (
-              <button key={t.key} className={`tab-btn ${aktifTab === t.key ? "on" : ""}`} onClick={() => setAktifTab(t.key)}>
+            {TABS.filter(t => !t.adminOnly || isAdmin).map(t => (
+              <button 
+                key={t.key} 
+                className={`tab-btn ${aktifTab === t.key ? "on" : ""} ${t.adminOnly ? 'admin-tab' : ''}`} 
+                onClick={() => setAktifTab(t.key)}
+              >
                 <span>{t.icon}</span>
                 <span style={{ flex: 1 }}>{t.label}</span>
                 {t.badge ? <span className="badge-dot">{t.badge}</span> : null}
@@ -285,7 +342,7 @@ function PanelIcerik() {
               <p className="sttl">Hoş geldiniz, {session.user?.name?.split(" ")[0]} 👋</p>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12, marginBottom: 24 }}>
                 {[
-                  { l: "Aktif İlan", v: stats.aktifIlan, i: "📋", c: "#2563eb" },
+                  { l: isAdmin ? "Sistemdeki İlanlar" : "Aktif İlan", v: stats.aktifIlan, i: "📋", c: "#2563eb" },
                   { l: "Gelen Teklif", v: stats.gelenTeklif, i: "📥", c: "#d97706" },
                   { l: "Verdiğim Teklif", v: stats.bekleyenTeklif, i: "💼", c: "#7c3aed" },
                   { l: "Sipariş", v: stats.toplamSiparis, i: "📦", c: "#059669" },
@@ -297,22 +354,25 @@ function PanelIcerik() {
                   </div>
                 ))}
               </div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>Son İlanlarım</p>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>{isAdmin ? 'Sistemdeki Son İlanlar' : 'Son İlanlarım'}</p>
               {loading ? <p style={{ color: "#94a3b8", fontSize: 13 }}>Yükleniyor...</p> :
-                ilanlar.slice(0, 3).length === 0 ? (
+                ilanlar.slice(0, 5).length === 0 ? (
                   <div className="empty-box">
                     <p style={{ fontSize: "2rem", marginBottom: 8 }}>📋</p>
                     <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Bu kimlikte henüz ilanınız yok</p>
                     <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "9px 20px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>İlan Ver</button>
                   </div>
-                ) : ilanlar.slice(0, 3).map(i => (
+                ) : ilanlar.slice(0, 5).map(i => (
                   <div key={i._id} className="row-item" style={{ cursor: "pointer" }} onClick={() => router.push(`/ilan/${i._id}`)}>
                     <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
-                      {i.medyalar?.[0] ? <img src={i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
-                      <p style={{ fontSize: 11, color: "#64748b" }}>{i.teklifSayisi || 0} teklif · {new Date(i.createdAt).toLocaleDateString("tr-TR")}</p>
+                      <p style={{ fontSize: 11, color: "#64748b" }}>
+                        {i.yapay || i.is_ai_generated ? <span style={{color: '#7c3aed', fontWeight: 700}}>🤖 AI İlanı · </span> : ''}
+                        {i.teklifSayisi || 0} teklif · {new Date(i.createdAt).toLocaleDateString("tr-TR")}
+                      </p>
                     </div>
                     <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
                   </div>
@@ -324,7 +384,7 @@ function PanelIcerik() {
           {aktifTab === "ilanlarim" && (
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <p className="sttl" style={{ marginBottom: 0 }}>İlanlarım ({ilanlar.length})</p>
+                <p className="sttl" style={{ marginBottom: 0 }}>{isAdmin ? 'Tüm Sistem İlanları' : 'İlanlarım'} ({ilanlar.length})</p>
                 <div style={{ display: "flex", gap: 8 }}>
                   {ilanlar.length > 0 && (
                     <button onClick={async () => {
@@ -346,28 +406,34 @@ function PanelIcerik() {
                 ) : ilanlar.map(i => (
                   <div key={i._id} className="row-item">
                     <div style={{ width: 60, height: 60, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
-                      {i.medyalar?.[0] ? <img src={i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginBottom: 3 }}>
-                        <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1 }}>{i.baslik}</p>
+                        <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
+                           <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
+                           {i.yapay || i.is_ai_generated ? <span style={{background: '#f5f3ff', color: '#7c3aed', fontSize: 9, fontWeight: 800, padding: '2px 6px', borderRadius: 4}}>AI</span> : null}
+                        </div>
                         <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
                       </div>
                       <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>
                         {i.butceMin > 0 ? `${i.butceMin.toLocaleString("tr-TR")} ${i.butceBirimi}` : "Bütçe açık"}
                       </p>
-                      <div style={{ display: "flex", gap: 10, fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
+                      <div style={{ display: "flex", gap: 10, fontSize: 11, color: "#94a3b8", marginBottom: 8, flexWrap: "wrap" }}>
+                        <span style={{background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, color: '#475569'}}>{i.tip} / {i.rol}</span>
                         <span>💼 {i.teklifSayisi || 0} teklif</span>
                         <span>👁 {i.goruntulenme || 0} görüntülenme</span>
                         <span>📅 {new Date(i.createdAt).toLocaleDateString("tr-TR")}</span>
                       </div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                        <button onClick={() => router.push(`/ilan/${i._id}`)} style={BTN_SM("#f1f5f9", "#475569")}>Teklifleri Gör</button>
+                        <button onClick={() => router.push(`/ilan/${i._id}`)} style={BTN_SM("#f1f5f9", "#475569")}>Detay / Teklifler</button>
                         <button onClick={() => { setAktifTab("mesajlar"); }} style={BTN_SM("#eff6ff", "#2563eb")}>💬 Mesajlar</button>
-                        <button onClick={async () => { await fetch(`/api/ilanlar/${i._id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ teklifeAcik: !i.teklifeAcik }) }); yukle(); }} style={BTN_SM(i.teklifeAcik ? "#fef9c3" : "#ecfdf5", i.teklifeAcik ? "#92400e" : "#059669")}>
-                          {i.teklifeAcik ? "🟡 Kapat" : "🟢 Aç"}
-                        </button>
-                        <button onClick={async () => { if (!confirm("Silinsin mi?")) return; await fetch(`/api/ilanlar/${i._id}`, { method: "DELETE" }); yukle(); }} style={BTN_SM("#fef2f2", "#dc2626")}>Sil</button>
+                        {!isAdmin && (
+                          <button onClick={async () => { await fetch(`/api/ilanlar/${i._id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ teklifeAcik: !i.teklifeAcik }) }); yukle(); }} style={BTN_SM(i.teklifeAcik ? "#fef9c3" : "#ecfdf5", i.teklifeAcik ? "#92400e" : "#059669")}>
+                            {i.teklifeAcik ? "🟡 Kapat" : "🟢 Aç"}
+                          </button>
+                        )}
+                        <button onClick={() => ilanSil(i._id)} style={BTN_SM("#fef2f2", "#dc2626")}>Sil</button>
                       </div>
                     </div>
                   </div>
@@ -628,6 +694,16 @@ function PanelIcerik() {
             </div>
           )}
 
+          {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_bireysel" && (
+            <AiIlanBileseni tip="bireysel" sektorler={SEKTORLER} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
+          {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_ticari" && (
+            <AiIlanBileseni tip="ticari" sektorler={ENDUSTRIYEL_SEKTORLER} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
         </div>
       </div>
     </div>
@@ -640,6 +716,79 @@ const BTN_SM = (bg: string, c: string): React.CSSProperties => ({
   background: bg, border: "none", color: c,
   fontFamily: "inherit", fontSize: 11, fontWeight: 700, cursor: "pointer",
 });
+
+// AI İLAN BİLEŞENİ
+function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
+  const [secilenSektor, setSecilenSektor] = useState("");
+  const [rol, setRol] = useState("her-ikisi");
+  const [ulke, setUlke] = useState("Rastgele");
+  const [sehir, setSehir] = useState(tip === 'ticari' ? 'Merkez' : 'Rastgele');
+  const [adet, setAdet] = useState(5);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [sonuc, setSonuc] = useState("");
+
+  const uret = async () => {
+    if (!secilenSektor) return alert("Sektör seçin");
+    setYukleniyor(true); setSonuc("");
+    try {
+      const res = await fetch("/api/ai-ilan", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sektorId: secilenSektor, adet, tip, adminKey,
+          rol: rol === "her-ikisi" ? undefined : rol,
+          ulke: ulke === "Rastgele" ? null : ulke,
+          sehir: sehir === "Rastgele" ? null : sehir,
+          yapay: true
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSonuc(`✅ ${data.uretilen} adet ${tip} ilan ağa eklendi.`);
+        onSuccess();
+      } else setSonuc(`❌ Hata: ${data.error}`);
+    } catch { setSonuc("❌ Bağlantı hatası"); }
+    setYukleniyor(false);
+  };
+
+  return (
+    <div className="card">
+      <p className="sttl">{tip === 'ticari' ? '🏭 Endüstriyel B2B AI Motoru' : '🙋 Bireysel AI İlan Motoru'}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Rolü</label>
+          <select value={rol} onChange={e => setRol(e.target.value)} style={SEL}>
+            <option value="her-ikisi">🔄 Mix (Hem Alan Hem Veren)</option>
+            <option value="veren">💼 Sadece Hizmet/Ürün Veren</option>
+            <option value="alan">🛒 Sadece Hizmet/Ürün Alan</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Sektör</label>
+          <select value={secilenSektor} onChange={e => setSecilenSektor(e.target.value)} style={SEL}>
+            <option value="">-- Sektör Seçin --</option>
+            {sektorler.map(s => <option key={s.id} value={s.id}>{s.emoji} {s.ad}</option>)}
+          </select>
+        </div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
+          <select value={ulke} onChange={e => setUlke(e.target.value)} style={SEL}>
+            {ULKELER.map(u => <option key={u}>{u}</option>)}
+          </select>
+        </div>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Sayısı: {adet}</label>
+          <input type="range" min={1} max={30} value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ width: '100%', marginTop: 8 }} />
+        </div>
+      </div>
+      <button onClick={uret} disabled={yukleniyor || !secilenSektor} style={{ width: "100%", padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer" }}>
+        {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
+      </button>
+      {sonuc && <div style={{ marginTop: 16, padding: 12, borderRadius: 8, background: sonuc.includes('❌') ? '#fef2f2' : '#ecfdf5', color: sonuc.includes('❌') ? '#dc2626' : '#059669', fontSize: 13, fontWeight: 700 }}>{sonuc}</div>}
+    </div>
+  );
+}
 
 export default function PanelPage() {
   return (
