@@ -7,33 +7,37 @@ import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-// SEKTÖRLER (AI İlan Motoru İçin)
+// ═══════════════════════════════════════════════════
+// AI İLAN MOTORU İÇİN GÜNCELLENMİŞ YENİ SEKTÖRLER
+// ═══════════════════════════════════════════════════
 const SEKTORLER = [
-  { id:'turizm', ad:'Turizm & Konaklama', emoji:'🏨' },
-  { id:'seyahat', ad:'Seyahat & Transfer', emoji:'✈️' },
-  { id:'kiralama', ad:'Kiralama', emoji:'🔑' },
-  { id:'tamir', ad:'Tamir & Bakım', emoji:'🔧' },
-  { id:'usta', ad:'Usta & İşçi', emoji:'👷' },
-  { id:'temizlik', ad:'Temizlik Hizmetleri', emoji:'🧹' },
-  { id:'uretim', ad:'Üretim & Özel Sipariş', emoji:'🏭' },
-  { id:'giyim', ad:'Giyim & Tekstil', emoji:'👗' },
-  { id:'saglik', ad:'Sağlık & Güzellik', emoji:'💊' },
-  { id:'egitim', ad:'Eğitim & Danışmanlık', emoji:'📚' },
-  { id:'etkinlik', ad:'Etkinlik & Düğün', emoji:'🎊' },
-  { id:'mobilya', ad:'Mobilya & Dekorasyon', emoji:'🪑' },
+  { id: 'emlak-satis', ad: 'Emlak Alım Satım', emoji: '🏢' },
+  { id: 'emlak-kiralama', ad: 'Emlak Kiralama', emoji: '🏠' },
+  { id: 'oto-satis', ad: 'Oto Alım Satım', emoji: '🚙' },
+  { id: 'oto-kiralama', ad: 'Oto Kiralama', emoji: '🚗' },
+  { id: 'elektronik', ad: 'Elektronik & Teknoloji', emoji: '📱' },
+  { id: 'beyaz-esya', ad: 'Beyaz Eşya', emoji: '🧊' },
+  { id: 'turizm', ad: 'Turizm & Tatil', emoji: '🏨' },
+  { id: 'bilet', ad: 'Bilet & Rezervasyon', emoji: '🎫' },
+  { id: 'usta', ad: 'Usta & İşçi', emoji: '👷' },
+  { id: 'temizlik', ad: 'Temizlik Hizmetleri', emoji: '🧹' },
+  { id: 'egitim', ad: 'Eğitim & Danışmanlık', emoji: '📚' },
+  { id: 'saglik', ad: 'Sağlık & Güzellik', emoji: '💊' },
 ];
 
 const ENDUSTRIYEL_SEKTORLER = [
-  { id:'tekstil', ad:'Tekstil & Hazır Giyim', emoji:'👕' },
-  { id:'mermer-tas', ad:'Mermer & Doğal Taş', emoji:'🪨' },
-  { id:'metal-celik', ad:'Metal & Çelik', emoji:'⚙️' },
-  { id:'plastik-pvc', ad:'Plastik & PVC', emoji:'🧴' },
-  { id:'ahsap-mob', ad:'Ahşap & Mobilya', emoji:'🪵' },
-  { id:'gida-tarim', ad:'Gıda & Tarım', emoji:'🌾' },
-  { id:'insaat-malz', ad:'İnşaat Malzemeleri', emoji:'🏗️' },
-  { id:'elektrik', ad:'Elektrik & Enerji', emoji:'⚡' },
-  { id:'makine', ad:'Makine & Ekipman', emoji:'🏭' },
-  { id:'lojistik', ad:'Lojistik', emoji:'🚢' },
+  { id: 'yazilim', ad: 'Yazılım & Bilişim', emoji: '💻' },
+  { id: 'makine-kiralama', ad: 'Makine Kiralama', emoji: '🚜' },
+  { id: 'uretim', ad: 'Üretim & Fason', emoji: '🏭' },
+  { id: 'tekstil', ad: 'Tekstil & Hazır Giyim', emoji: '👕' },
+  { id: 'mermer-tas', ad: 'Mermer & Doğal Taş', emoji: '🪨' },
+  { id: 'metal-celik', ad: 'Metal & Çelik', emoji: '⚙️' },
+  { id: 'plastik-pvc', ad: 'Plastik & PVC', emoji: '🧴' },
+  { id: 'ahsap-mob', ad: 'Ahşap & Mobilya', emoji: '🪵' },
+  { id: 'gida-tarim', ad: 'Gıda & Tarım', emoji: '🌾' },
+  { id: 'insaat-malz', ad: 'İnşaat Malzemeleri', emoji: '🏗️' },
+  { id: 'elektrik', ad: 'Elektrik & Enerji', emoji: '⚡' },
+  { id: 'lojistik', ad: 'Lojistik & Gümrük', emoji: '🚢' },
 ];
 
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
