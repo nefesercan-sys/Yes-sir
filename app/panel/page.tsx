@@ -6,39 +6,7 @@
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-
-// ═══════════════════════════════════════════════════
-// AI İLAN MOTORU İÇİN GÜNCELLENMİŞ YENİ SEKTÖRLER
-// ═══════════════════════════════════════════════════
-const SEKTORLER = [
-  { id: 'emlak-satis', ad: 'Emlak Alım Satım', emoji: '🏢' },
-  { id: 'emlak-kiralama', ad: 'Emlak Kiralama', emoji: '🏠' },
-  { id: 'oto-satis', ad: 'Oto Alım Satım', emoji: '🚙' },
-  { id: 'oto-kiralama', ad: 'Oto Kiralama', emoji: '🚗' },
-  { id: 'elektronik', ad: 'Elektronik & Teknoloji', emoji: '📱' },
-  { id: 'beyaz-esya', ad: 'Beyaz Eşya', emoji: '🧊' },
-  { id: 'turizm', ad: 'Turizm & Tatil', emoji: '🏨' },
-  { id: 'bilet', ad: 'Bilet & Rezervasyon', emoji: '🎫' },
-  { id: 'usta', ad: 'Usta & İşçi', emoji: '👷' },
-  { id: 'temizlik', ad: 'Temizlik Hizmetleri', emoji: '🧹' },
-  { id: 'egitim', ad: 'Eğitim & Danışmanlık', emoji: '📚' },
-  { id: 'saglik', ad: 'Sağlık & Güzellik', emoji: '💊' },
-];
-
-const ENDUSTRIYEL_SEKTORLER = [
-  { id: 'yazilim', ad: 'Yazılım & Bilişim', emoji: '💻' },
-  { id: 'makine-kiralama', ad: 'Makine Kiralama', emoji: '🚜' },
-  { id: 'uretim', ad: 'Üretim & Fason', emoji: '🏭' },
-  { id: 'tekstil', ad: 'Tekstil & Hazır Giyim', emoji: '👕' },
-  { id: 'mermer-tas', ad: 'Mermer & Doğal Taş', emoji: '🪨' },
-  { id: 'metal-celik', ad: 'Metal & Çelik', emoji: '⚙️' },
-  { id: 'plastik-pvc', ad: 'Plastik & PVC', emoji: '🧴' },
-  { id: 'ahsap-mob', ad: 'Ahşap & Mobilya', emoji: '🪵' },
-  { id: 'gida-tarim', ad: 'Gıda & Tarım', emoji: '🌾' },
-  { id: 'insaat-malz', ad: 'İnşaat Malzemeleri', emoji: '🏗️' },
-  { id: 'elektrik', ad: 'Elektrik & Enerji', emoji: '⚡' },
-  { id: 'lojistik', ad: 'Lojistik & Gümrük', emoji: '🚢' },
-];
+import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
 
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
@@ -210,6 +178,19 @@ function PanelIcerik() {
     yukle();
   };
 
+  // Güvenli Tarih Formatlayıcı
+  const formatTarih = (tarihStr: any) => {
+    if (!tarihStr) return "Tarih Yok";
+    const d = new Date(tarihStr);
+    return isNaN(d.getTime()) ? "Geçersiz Tarih" : d.toLocaleDateString("tr-TR");
+  };
+
+  // Güvenli Sayı Formatlayıcı
+  const formatSayi = (sayiStr: any) => {
+    const s = Number(sayiStr);
+    return isNaN(s) ? 0 : s.toLocaleString("tr-TR");
+  };
+
   if (status === "loading") return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b", fontSize: 14, fontWeight: 600 }}>
       ⏳ Siber Kimlik Doğrulanıyor...
@@ -295,7 +276,7 @@ function PanelIcerik() {
             <p style={{ fontSize: 10, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{session.user?.email}</p>
           </div>
 
-          {/* Kimlik şalteri (Admin değilse veya admin bile olsa kişisel görünüm için) */}
+          {/* Kimlik şalteri */}
           <div style={{ background: "#f8fafc", borderRadius: 12, padding: "10px", marginBottom: 12, border: "1px solid #e2e8f0" }}>
             <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", marginBottom: 8 }}>Panel Görünümü</p>
             <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, marginBottom: 8, border: "1px solid #e2e8f0" }}>
@@ -375,7 +356,7 @@ function PanelIcerik() {
                       <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
                       <p style={{ fontSize: 11, color: "#64748b" }}>
                         {i.yapay || i.is_ai_generated ? <span style={{color: '#7c3aed', fontWeight: 700}}>🤖 AI İlanı · </span> : ''}
-                        {i.teklifSayisi || 0} teklif · {new Date(i.createdAt).toLocaleDateString("tr-TR")}
+                        {i.teklifSayisi || 0} teklif · {formatTarih(i.createdAt)}
                       </p>
                     </div>
                     <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
@@ -421,13 +402,13 @@ function PanelIcerik() {
                         <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
                       </div>
                       <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>
-                        {i.butceMin > 0 ? `${i.butceMin.toLocaleString("tr-TR")} ${i.butceBirimi}` : "Bütçe açık"}
+                        {i.butceMin > 0 ? `${formatSayi(i.butceMin)} ${i.butceBirimi}` : "Bütçe açık"}
                       </p>
                       <div style={{ display: "flex", gap: 10, fontSize: 11, color: "#94a3b8", marginBottom: 8, flexWrap: "wrap" }}>
                         <span style={{background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, color: '#475569'}}>{i.tip} / {i.rol}</span>
                         <span>💼 {i.teklifSayisi || 0} teklif</span>
                         <span>👁 {i.goruntulenme || 0} görüntülenme</span>
-                        <span>📅 {new Date(i.createdAt).toLocaleDateString("tr-TR")}</span>
+                        <span>📅 {formatTarih(i.createdAt)}</span>
                       </div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                         <button onClick={() => router.push(`/ilan/${i._id}`)} style={BTN_SM("#f1f5f9", "#475569")}>Detay / Teklifler</button>
@@ -459,11 +440,11 @@ function PanelIcerik() {
                   <div key={t._id} className="row-item">
                     <div style={{ width: 44, height: 44, borderRadius: 10, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>📥</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>{t.ilanBaslik}</p>
-                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{Number(t.teklifFiyat).toLocaleString("tr-TR")} {t.doviz}</p>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
                       {t.aciklama && <p style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>{t.aciklama.slice(0, 80)}...</p>}
                       <p style={{ fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
-                        👤 {t.teklifVeren?.ad || t.teklifVeren?.email} · {new Date(t.olusturuldu).toLocaleDateString("tr-TR")}
+                        👤 {t.teklifVeren?.ad || t.teklifVeren?.email || 'Bilinmiyor'} · {formatTarih(t.olusturuldu || t.createdAt)}
                       </p>
                       {t.durum === "bekliyor" && (
                         <div style={{ display: "flex", gap: 6 }}>
@@ -473,7 +454,7 @@ function PanelIcerik() {
                         </div>
                       )}
                     </div>
-                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum}</span>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
                   </div>
                 ))}
             </div>
@@ -494,9 +475,9 @@ function PanelIcerik() {
                   <div key={t._id} className="row-item">
                     <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>💼</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.ilanBaslik}</p>
-                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{Number(t.teklifFiyat).toLocaleString("tr-TR")} {t.doviz}</p>
-                      <p style={{ fontSize: 10, color: "#94a3b8", marginBottom: 6 }}>{new Date(t.olusturuldu).toLocaleDateString("tr-TR")}</p>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginBottom: 6 }}>{formatTarih(t.olusturuldu || t.createdAt)}</p>
                       <div style={{ display: "flex", gap: 6 }}>
                         <button onClick={() => router.push(`/ilan/${t.ilanId}`)} style={BTN_SM("#eff6ff", "#2563eb")}>İlana Git</button>
                         {t.durum === "bekliyor" && (
@@ -504,7 +485,7 @@ function PanelIcerik() {
                         )}
                       </div>
                     </div>
-                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum}</span>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
                   </div>
                 ))}
             </div>
@@ -527,8 +508,8 @@ function PanelIcerik() {
                       <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>
                         {r.musteri?.email === session.user?.email ? `Hizmet: ${r.hizmetVeren?.ad || "—"}` : `Müşteri: ${r.musteri?.ad || "—"}`}
                       </p>
-                      <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{Number(r.fiyat).toLocaleString("tr-TR")} {r.doviz}</p>
-                      <p style={{ fontSize: 11, color: "#94a3b8" }}>{new Date(r.olusturuldu).toLocaleDateString("tr-TR")}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{formatSayi(r.fiyat)} {r.doviz || '₺'}</p>
+                      <p style={{ fontSize: 11, color: "#94a3b8" }}>{formatTarih(r.olusturuldu || r.createdAt)}</p>
                     </div>
                     <span className="dur" style={DURUM_STIL[r.durum] ? { background: DURUM_STIL[r.durum].bg, color: DURUM_STIL[r.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{r.durum}</span>
                   </div>
@@ -595,7 +576,7 @@ function PanelIcerik() {
                           <div key={m._id} style={{ display: "flex", justifyContent: benim ? "flex-end" : "flex-start" }}>
                             <div style={{ maxWidth: "70%", padding: "10px 14px", borderRadius: benim ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: benim ? "#0f172a" : "#f1f5f9", color: benim ? "#fff" : "#0f172a", fontSize: 13, lineHeight: 1.5 }}>
                               <p>{m.mesaj}</p>
-                              <p style={{ fontSize: 10, opacity: .6, marginTop: 4, textAlign: "right" }}>{new Date(m.createdAt).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" })}</p>
+                              <p style={{ fontSize: 10, opacity: .6, marginTop: 4, textAlign: "right" }}>{formatTarih(m.createdAt)}</p>
                             </div>
                           </div>
                         );
@@ -641,7 +622,7 @@ function PanelIcerik() {
                     <span style={{ fontSize: 20, flexShrink: 0 }}>{b.tip === "yeni_teklif" ? "💼" : b.tip === "teklif_kabul" ? "🎉" : "🔔"}</span>
                     <div style={{ flex: 1 }}>
                       <p style={{ fontSize: 13, color: "#0f172a", fontWeight: b.okundu ? 400 : 700, lineHeight: 1.5 }}>{b.mesaj}</p>
-                      <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>{new Date(b.tarih).toLocaleString("tr-TR")}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>{formatTarih(b.tarih || b.createdAt)}</p>
                       {b.ilanId && (
                         <button onClick={e => { e.stopPropagation(); router.push(`/ilan/${b.ilanId}`); }} style={{ marginTop: 6, padding: "4px 10px", borderRadius: 6, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 10, fontWeight: 600, cursor: "pointer" }}>
                           İlana Git →
@@ -700,12 +681,12 @@ function PanelIcerik() {
 
           {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
           {isAdmin && aktifTab === "ai_ilan_bireysel" && (
-            <AiIlanBileseni tip="bireysel" sektorler={SEKTORLER} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
           )}
 
           {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
           {isAdmin && aktifTab === "ai_ilan_ticari" && (
-            <AiIlanBileseni tip="ticari" sektorler={ENDUSTRIYEL_SEKTORLER} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
           )}
 
         </div>
@@ -713,13 +694,6 @@ function PanelIcerik() {
     </div>
   );
 }
-
-// Küçük buton yardımcısı
-const BTN_SM = (bg: string, c: string): React.CSSProperties => ({
-  padding: "5px 10px", borderRadius: 7,
-  background: bg, border: "none", color: c,
-  fontFamily: "inherit", fontSize: 11, fontWeight: 700, cursor: "pointer",
-});
 
 // Form elemanları için ortak stil
 const SEL: React.CSSProperties = { 
