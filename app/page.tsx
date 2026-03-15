@@ -128,6 +128,25 @@ export default function AnaSayfa() {
 
   return (
     <>
+      {/* 🤖 SİBER TURBO: Google Zengin Sonuçlar (Rich Snippets) Şeması EKLENDİ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "SwapHubs",
+            "url": "https://swaphubs.com",
+            "description": "Küresel Hizmet & Ürün Takas Merkezi",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://swaphubs.com/ilanlar?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }),
+        }}
+      />
+
       <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Unbounded:wght@700;800;900&display=swap');
 
@@ -351,7 +370,6 @@ export default function AnaSayfa() {
         .stat-v { font-family: 'Unbounded', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--navy); }
         .stat-l { font-size: .72rem; color: var(--muted); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: .05em; }
 
-        /* 🚨 DÜZELTİLEN YER: Flex-wrap eklendi, kaydırma çubuğu iptal edildi. Kategoriler sığmazsa alt satıra geçer ve ortalanır. */
         .kat-wrap {
           max-width: 1200px; margin: 28px auto 0;
           padding: 0 24px;
@@ -528,7 +546,6 @@ export default function AnaSayfa() {
           .kontrol { padding: 16px; border-radius: 18px; }
           .rol-row { flex-direction: column; }
           .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 0 16px; }
-          /* Mobilde hala kaydırılabilir kalması daha şık olabilir, ancak wrap istenirse buradaki padding de korunarak ortalanır */
           .kat-wrap { padding: 0 16px; }
           .vitrin-wrap { padding: 0 16px 60px; }
           .ilan-grid { grid-template-columns: 1fr; }
