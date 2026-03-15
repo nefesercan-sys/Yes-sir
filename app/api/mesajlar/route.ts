@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { getDb } from "@/lib/mongodb";
@@ -27,10 +28,10 @@ export async function GET(req: NextRequest) {
       };
       if (ilanId) query.ilanId = ilanId;
 
-      const mesajlar = await db.collection("sohbetler").find(query).sort({ createdAt: 1 }).toArray();
+      const mesajlar = await db.collection("mesajlar").find(query).sort({ createdAt: 1 }).toArray();
 
-      // Mesajı okundu işaretle
-      await db.collection("sohbetler").updateMany(
+      // Karşı tarafın gönderdiği mesajları "okundu" yap
+      await db.collection("mesajlar").updateMany(
         { gonderen: withUser, alici: email, okundu: false },
         { $set: { okundu: true } }
       );
@@ -39,7 +40,7 @@ export async function GET(req: NextRequest) {
     }
 
     // 2. Sol menüdeki genel konuşma listesini (Özet) çek
-    const tumMesajlar = await db.collection("sohbetler")
+    const tumMesajlar = await db.collection("mesajlar")
       .find({ $or: [{ gonderen: email }, { alici: email }] })
       .sort({ createdAt: -1 })
       .toArray();
@@ -63,14 +64,15 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // 🚨 SİHİRLİ DOKUNUŞ: Eğer ilandan "Yeni Sohbet Başlat" butonuna tıklandıysa, sohbet listesine boş bir başlangıç odası ekle
+    // 🚨 SİHİRLİ DOKUNUŞ: Eğer ilandan "Yeni Sohbet Başlat" diyerek gelinmişse, odayı hazırla!
     if (yeniSohbet) {
         const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(yeniSohbet) });
         if (ilan) {
-            const aliciEmail = ilan.sahibi?.email || "admin@swaphubs.com"; // AI ilanıysa admine gider
+            // Eğer ilan yapay zeka ilanıysa (sahibi yoksa), mesajları doğrudan Admine yönlendir!
+            const aliciEmail = ilan.sahibi?.email || "nefesercan@gmail.com"; 
             const key = `${aliciEmail}_${yeniSohbet}`;
             
-            if (!map.has(key) && aliciEmail !== email) {
+            if (!map.has(key)) {
                 map.set(key, {
                     _id: key,
                     karsiTaraf: aliciEmail,
@@ -88,6 +90,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(liste);
 
   } catch (err) {
+    console.error("Mesaj GET Hatası:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
 }
@@ -105,9 +108,11 @@ export async function POST(req: NextRequest) {
     const db = await getDb();
 
     let ilanBaslik = "İlan";
-    if (ilanId) {
+    if (ilanId && ilanId !== "destek") {
         const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(ilanId) });
         if (ilan) ilanBaslik = ilan.baslik;
+    } else if (ilanId === "destek") {
+        ilanBaslik = "💬 CANLI DESTEK";
     }
 
     const yeniMesaj = {
@@ -120,10 +125,11 @@ export async function POST(req: NextRequest) {
       createdAt: new Date()
     };
 
-    await db.collection("sohbetler").insertOne(yeniMesaj);
+    await db.collection("mesajlar").insertOne(yeniMesaj);
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    console.error("Mesaj POST Hatası:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
 }
