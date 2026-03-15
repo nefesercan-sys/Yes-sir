@@ -6,73 +6,92 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import Anthropic from '@anthropic-ai/sdk';
 
-const client = new Anthropic();
+const client = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY || ''
+});
 
 // 📸 KATEGORİLERE ÖZEL UNSPLASH GÖRSEL HAVUZU (Yüksek Çözünürlüklü)
 const IMAGE_POOL: Record<string, string[]> = {
   // YENİ SEKTÖRLER
   'emlak-satis': [
-    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', // Lüks Ev
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'  // Villa
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
   ],
   'emlak-kiralama': [
-    'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80', // Modern Daire
-    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80'  // Daire İçi
+    'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1502672260266-1c1de24220e8?auto=format&fit=crop&w=800&q=80'
   ],
   'oto-satis': [
-    'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80', // Otomobil
-    'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80'  // Galeri
+    'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?auto=format&fit=crop&w=800&q=80'
   ],
   'oto-kiralama': [
-    'https://images.unsplash.com/photo-1562426509-5044a121aa49?auto=format&fit=crop&w=800&q=80', // Kiralık Araçlar
+    'https://images.unsplash.com/photo-1562426509-5044a121aa49?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80'
   ],
   'elektronik': [
-    'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=800&q=80', // Cihazlar
-    'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=800&q=80'  // Mağaza
+    'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80'
   ],
   'beyaz-esya': [
-    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80', // Mutfak Eşyaları
+    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80'
   ],
   'bilet': [
-    'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80', // Uçak
-    'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'  // Otobüs/Seyahat
+    'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80'
   ],
   'yazilim': [
-    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80', // Kodlama
-    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'  // IT
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80', 
+    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80'
   ],
   'makine-kiralama': [
-    'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80', // İş Makinesi
+    'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1504307651254-35680f356f67?auto=format&fit=crop&w=800&q=80'
   ],
   
   // ESKİ SEKTÖRLER
   turizm: [
     'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1542314831-c6a4d14b836a?auto=format&fit=crop&w=800&q=80'
   ],
   tekstil: [
     'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80'
   ],
   uretim: [
     'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1565439385074-126a11701d67?auto=format&fit=crop&w=800&q=80'
   ],
   lojistik: [
     'https://images.unsplash.com/photo-1586528116311-ad8ed7c66364?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80'
   ],
   'metal-celik': [
     'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
   ],
   'gida-tarim': [
     'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80'
   ],
   mobilya: [
     'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80'
   ],
   usta: [
     'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80'
   ],
   temizlik: [
-    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1584820927498-cafe4c126956?auto=format&fit=crop&w=800&q=80',
   ],
   giyim: [
     'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80',
@@ -84,12 +103,12 @@ const IMAGE_POOL: Record<string, string[]> = {
 
 function getRandomImageForSector(sektorId: string): string {
   const pool = IMAGE_POOL[sektorId] || IMAGE_POOL['default'];
+  // Rastgeleliği garanti altına almak için Math.random kullanıyoruz
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
 // 🎯 SEO KELİMELERİ VE SEKTÖR TANIMLARI
 const SEO_KEYWORDS: Record<string, string[]> = {
-  // YENİ SEKTÖRLER
   'emlak-satis': ['satılık daire', 'satılık arsa', 'emlak', 'ev satın al', 'konut projeleri', 'yatırımlık ev'],
   'emlak-kiralama': ['kiralık daire', 'kiralık ofis', 'günlük kiralık', 'emlak kiralama', 'sahibinden kiralık'],
   'oto-satis': ['satılık araba', 'ikinci el oto', 'sahibinden araba', 'oto alım satım', 'ikinci el araç'],
@@ -99,8 +118,6 @@ const SEO_KEYWORDS: Record<string, string[]> = {
   'bilet': ['uçak bileti', 'otobüs bileti', 'erken rezervasyon', 'tatil paketi', 'ucuz bilet'],
   'yazilim': ['web tasarım', 'mobil uygulama geliştirme', 'yazılım ajansı', 'e-ticaret sitesi yaptırmak', 'özel yazılım'],
   'makine-kiralama': ['vinç kiralama', 'iş makinesi kiralama', 'forklift', 'inşaat makinesi', 'kiralık kepçe'],
-  
-  // ESKİ SEKTÖRLER
   turizm:       ['otel','konaklama','tatil','tur','rezervasyon','turizm türkiye','holiday turkey'],
   seyahat:      ['transfer','havalimanı transfer','vip transfer','şehir turu','seyahat hizmeti'],
   kiralama:     ['araç kiralama','rent a car','günlük kiralama','kiralık araç türkiye'],
@@ -164,20 +181,28 @@ function buildPrompt(p: {
 
 GÖREV: ${adet} adet "${ilanTipi}" oluştur.
 
-KURALLAR:
-1. İlanlar GERÇEKÇİ olsun, yapay zeka tarafından yazıldığı kesinlikle anlaşılmasın. İnsan gibi yaz.
+🚨 ÇOK ÖNEMLİ KURALLAR (BUNLARI ASLA DEĞİŞTİRME):
+Sana gönderdiğim "sektorId", "tip" ve "rol" değerlerini JSON içinde BİREBİR KULLANACAKSIN. Asla kendi uydurduğun kategorileri yazma!
+Zorunlu sektorId: "${sektorId}"
+Zorunlu tip: "${tip}"
+Zorunlu rol: "${rol}"
+
+DİĞER KURALLAR:
+1. İlanlar GERÇEKÇİ olsun, yapay zeka tarafından yazıldığı kesinlikle anlaşılmasın.
 2. Başlıklar ve açıklamalar şu anahtar kelimeleri içersin: ${keywords.slice(0, 5).join(', ')}
-3. Sektör spesifik olsun (Eğer yazılımsa kodlama dilleri, eğer emlaksa m2/oda sayısı, eğer araçsa marka/model detayları gibi özellikler uydur).
+3. Sektör spesifik olsun (Eğer yazılımsa kodlama dilleri, eğer emlaksa m2/oda sayısı, araçsa marka/model uydur).
 4. Bütçeler piyasa şartlarına uygun olsun${ticari ? ' (dolar/euro veya TL, toptan / B2B ticari fiyat mantığı)' : ' (TL, bireysel fiyat)'}
 5. Her ilana 4-6 adet "özellik" ekle (kısa bullet point formatında)
 6. Lokasyon: ${lokasyon}
-7. Rol: ${verenMi ? 'HIZMET_VEREN' : 'HIZMET_ALAN'}
-8. metaAciklama tam olarak 150-160 karakter SEO uyumlu özet olsun.
+7. metaAciklama tam olarak 150-160 karakter SEO uyumlu özet olsun.
 
-Sadece geçerli bir JSON döndür, kod bloğu dışında hiçbir açıklama yazma:
+Sadece geçerli bir JSON döndür, kod bloğu dışında hiçbir açıklama yazma. JSON formatı kesinlikle şu yapıda olmalıdır:
 {
   "ilanlar": [
     {
+      "sektorId": "${sektorId}",
+      "tip": "${tip}",
+      "rol": "${rol}",
       "baslik": "...",
       "aciklama": "...",
       "butceMin": 5000,
@@ -224,7 +249,7 @@ export async function POST(req: NextRequest) {
     const keywords = SEO_KEYWORDS[sektorId] ?? [sektorId];
     const sektorAd = SEKTOR_ADLARI[sektorId] ?? sektorId;
 
-    // Hem alan hem veren — body.rol yoksa ikisi de üretilir
+    // YENİ MANTIK: AI'ın rol dağılımını kesin olarak alıyoruz
     const roller: Array<'alan' | 'veren'> = body.rol && body.rol !== 'her-ikisi'
       ? [body.rol]
       : ['veren', 'alan'];
@@ -240,7 +265,7 @@ export async function POST(req: NextRequest) {
       });
 
       const response = await client.messages.create({
-        model:      'claude-opus-4-6', // Model adı: Sisteminiz neyi kullanıyorsa (örn: claude-3-opus-20240229)
+        model:      'claude-3-opus-20240229', // SwapHubs sistemi Claude-3 Opus kullanıyor olmalı
         max_tokens: 4000,
         messages:   [{ role: 'user', content: prompt }],
       });
@@ -250,7 +275,7 @@ export async function POST(req: NextRequest) {
         .map(b => (b as { type: 'text'; text: string }).text)
         .join('');
 
-      let ilanlar: Record<string, unknown>[] = [];
+      let ilanlar: any[] = [];
       try {
         const jsonMatch = rawText.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
@@ -264,12 +289,15 @@ export async function POST(req: NextRequest) {
 
       if (ilanlar.length > 0) {
         const docs = ilanlar.map(ilan => {
-          // GÖRSEL ATAMA: AI'ın ürettiği ilana sektörden rastgele bir resim ata
+          // GÖRSEL ATAMA: AI'ın ürettiği her ilana o an rastgele farklı bir resim çek
           const atanacakGorsel = getRandomImageForSector(sektorId);
           
           return {
-            sektorId,
-            baslik: ilan.baslik,
+            // AI'ın uydurma ihtimaline karşı sistemin kesin değerleriyle zorluyoruz:
+            sektorId:     sektorId,
+            tip:          tip,
+            rol:          rol,
+            baslik:       ilan.baslik,
             formData: {
               sehir:      ilan.sehir ?? sehir,
               aciklama:   ilan.aciklama,
@@ -289,15 +317,13 @@ export async function POST(req: NextRequest) {
             misafirToken: null,
             createdAt:    new Date(),
             guncellendi:  new Date(),
-            tip,
-            rol,
             kategoriSlug: sektorId,
             kategoriAd:   sektorAd,
             ulke:         (ilan.ulke as string) ?? ulke ?? 'Türkiye',
             ozellikler:   ilan.ozellikler ?? [],
             teslimat:     [ilan.teslimat as string].filter(Boolean),
             yapay,
-            is_ai_generated: yapay, // Sistem denetimi için ek flag
+            is_ai_generated: yapay,
             seo: {
               metaBaslik:       `${ilan.baslik} | SwapHubs`,
               metaAciklama:     ilan.metaAciklama ?? '',
