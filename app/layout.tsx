@@ -2,29 +2,34 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./Provider";
-// 📊 VERCEL ANALYTICS IMPORT
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+// 🏎️ HIZ OPTİMİZASYONU: display: 'swap' tarayıcıya font yüklenene kadar yedek fontu kullanmasını söyler.
+const inter = Inter({ 
+  subsets: ["latin"], 
+  display: 'swap',
+  variable: '--font-inter', // CSS değişkeni olarak kullanmak performansı artırır
+});
 
-// 📱 MOBİL VE TEMA GÖRÜNÜMÜ (Next.js 14+ Standartı)
 export const viewport: Viewport = {
-  themeColor: "#0f172a", // Buraya sitenin ana marka renginin HEX kodunu yazabilirsin
+  themeColor: "#0f172a",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5, // Erişilebilirlik (SEO puanı) için kullanıcıya yakınlaştırma izni verin
 };
 
-// 🚀 SİBER TURBO: %100 Kusursuz Global Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL("https://swaphubs.com"), // 🚨 KİLİT NOKTA: Linklerin kırılmasını önler
+  metadataBase: new URL("https://swaphubs.com"),
   title: {
-    template: "%s | SwapHubs",
-    default: "SwapHubs | Küresel Hizmet & Ürün Takas Merkezi",
+    template: "%s | SwapHubs - Güvenli Takas Borsası",
+    default: "SwapHubs | Türkiye'nin En Büyük Ürün & Hizmet Takas Borsası",
   },
-  description: "Üretici, tedarikçi ve hizmet sağlayıcıları tek platformda buluşturan yeni nesil takas ve ticaret ağı.",
-  keywords: ["takas", "B2B", "hizmet alımı", "ticaret", "ihracat", "ilan ver", "swap", "global pazar"],
+  description: "Nakit harcamadan ticaret yapın! SwapHubs, ürün ve hizmetlerinizi güvenle takas edebileceğiniz, B2B ve bireysel ticaretin yeni nesil merkezi.",
+  keywords: [
+    "takas borsası", "ürün takası", "hizmet takası", "ücretsiz ilan", 
+    "ikinci el takas", "barter sistemi", "eşya değiştirme", "güvenli ticaret"
+  ],
   
-  // 🌍 GLOBAL BİLDİRİM
   alternates: {
     canonical: "/",
     languages: {
@@ -34,33 +39,31 @@ export const metadata: Metadata = {
     },
   },
   
-  // 📱 VİRAL SOSYAL MEDYA (WhatsApp, LinkedIn, Facebook)
   openGraph: {
-    title: "SwapHubs | Küresel Hizmet & Ürün Takas Merkezi",
-    description: "Üretici, tedarikçi ve hizmet sağlayıcıları tek platformda buluşturan yeni nesil takas ve ticaret ağı.",
+    title: "SwapHubs | Ürün ve Hizmet Takas Borsası",
+    description: "Para yerine ürünlerini kullan! Türkiye'nin en aktif takas ağına sen de katıl.",
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     images: [
       {
-        url: "/og-image.jpg", // metadataBase eklendiği için artık sadece /og-image.jpg yazmamız yeterli
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "SwapHubs Global Pazar",
+        alt: "SwapHubs Takas ve Ticaret Platformu",
       },
     ],
     locale: "tr_TR",
     type: "website",
   },
 
-  // 🐦 TWITTER / X KARTI (Tweet atıldığında devasa afiş çıkmasını sağlar)
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs | Küresel Hizmet & Ürün Takas Merkezi",
-    description: "Üretici, tedarikçi ve hizmet sağlayıcıları tek platformda buluşturan yeni nesil takas ve ticaret ağı.",
+    title: "SwapHubs | Takas Yap, Kazan!",
+    description: "Nakit harcamadan ihtiyacın olan ürüne veya hizmete ulaşmanın en hızlı yolu.",
     images: ["/og-image.jpg"],
+    creator: "@swaphubs", // Varsa sosyal medya hesabınız
   },
   
-  // 🤖 GOOGLE BOT YÖNLENDİRMESİ
   robots: {
     index: true,
     follow: true,
@@ -80,12 +83,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr">
+    <html lang="tr" className={`${inter.variable}`}>
+      <head>
+        {/* 📈 GOOGLE İÇİN ZENGİN SONUÇLAR (JSON-LD) 
+            Bu kod, Google'ın sitenizi bir 'Arama Motoru' veya 'Pazar Yeri' gibi algılamasını sağlar. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "SwapHubs",
+              "url": "https://swaphubs.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://swaphubs.com/ara?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }),
+          }}
+        />
+      </head>
       <body className={inter.className}>
-        {/* 🚨 SİBER ZIRH: Tüm siteyi oturum kontrolüne bağladık */}
         <AuthProvider>
           {children}
-          {/* 📊 ANALYTICS AKTİF EDİLDİ */}
           <Analytics />
         </AuthProvider>
       </body>
