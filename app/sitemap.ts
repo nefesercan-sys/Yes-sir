@@ -1,8 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getDb } from '@/lib/mongodb';
 
-// 🛡️ SİBER ZIRH: Haritayı sunucu hafızasına alır ve 1 saatte bir (3600 sn) yorulmadan günceller.
-// Veritabanı çökmesini %100 engeller!
 export const revalidate = 3600; 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -14,18 +12,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/kesfet`,     lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${base}/ilan-ver`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/giris`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${base}/kayit`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 }, // 🚨 Yazım hatası düzeltildi
-    { url: `${base}/hakkimizda`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${base}/iletisim`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
-    ...['otel-tatil','arac-kiralama','tamir-bakim','temizlik','usta',
-        'nakliyat','egitim','etkinlik','saglik','teknoloji'].map(slug => ({
+    { url: `${base}/kayit`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    
+    // 🚨 & işareti içeren linkler XML standartlarına göre güvenli hale getirildi
+    ...['otel-tatil','arac-kiralama','tamir-bakim','temizlik','usta','nakliyat','egitim','saglik'].map(slug => ({
       url: `${base}/ilanlar?kategori=${slug}`,
-      lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8,
+      lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.7,
     })),
-    ...['tekstil','mermer-tas','metal-celik','plastik-pvc','ahsap-mobilya',
-        'gida-tarim','insaat-malz','elektrik-enerji','makine-ekipman','lojistik'].map(slug => ({
-      url: `${base}/ilanlar?tip=ticari&kategori=${slug}`,
-      lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8,
+    
+    ...['tekstil','mermer-tas','metal-celik','plastik-pvc','ahsap-mobilya','gida-tarim','lojistik'].map(slug => ({
+      url: `${base}/ilanlar?tip=ticari&amp;kategori=${slug}`, // & işareti &amp; yapıldı
+      lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.7,
     })),
   ];
 
@@ -40,11 +37,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       
     ilanSayfalar = ilanlar.map(i => ({
       url:             `${base}/ilan/${i._id}`,
-      lastModified:    i.guncellendi || i.createdAt || new Date(), // 🚨 Fallback eklendi
-      changeFrequency: 'weekly' as const,
-      priority:        0.7,
+      lastModified:    i.guncellendi || i.createdAt || new Date(),
+      changeFrequency: 'daily' as const,
+      priority:        0.8,
     }));
-  } catch { /* db bağlantısı yoksa atla */ }
+  } catch (error) {
+    console.error("Sitemap Hatası:", error);
+  }
 
   return [...statik, ...ilanSayfalar];
 }
