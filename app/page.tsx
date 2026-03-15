@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
-
+export const dynamic = 'force-dynamic';
 interface Ilan {
   _id: string;
   baslik: string;
