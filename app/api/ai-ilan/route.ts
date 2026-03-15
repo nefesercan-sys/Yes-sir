@@ -6,9 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import Anthropic from '@anthropic-ai/sdk';
 
-const client = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY || ''
-});
+const client = new Anthropic();
 
 // 📸 KATEGORİLERE ÖZEL UNSPLASH GÖRSEL HAVUZU (Yüksek Çözünürlüklü)
 const IMAGE_POOL: Record<string, string[]> = {
@@ -103,7 +101,6 @@ const IMAGE_POOL: Record<string, string[]> = {
 
 function getRandomImageForSector(sektorId: string): string {
   const pool = IMAGE_POOL[sektorId] || IMAGE_POOL['default'];
-  // Rastgeleliği garanti altına almak için Math.random kullanıyoruz
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
@@ -188,9 +185,9 @@ Zorunlu tip: "${tip}"
 Zorunlu rol: "${rol}"
 
 DİĞER KURALLAR:
-1. İlanlar GERÇEKÇİ olsun, yapay zeka tarafından yazıldığı kesinlikle anlaşılmasın.
+1. İlanlar GERÇEKÇİ olsun, yapay zeka tarafından yazıldığı kesinlikle anlaşılmasın. İnsan gibi yaz.
 2. Başlıklar ve açıklamalar şu anahtar kelimeleri içersin: ${keywords.slice(0, 5).join(', ')}
-3. Sektör spesifik olsun (Eğer yazılımsa kodlama dilleri, eğer emlaksa m2/oda sayısı, araçsa marka/model uydur).
+3. Sektör spesifik olsun (Eğer yazılımsa kodlama dilleri, eğer emlaksa m2/oda sayısı, eğer araçsa marka/model detayları gibi özellikler uydur).
 4. Bütçeler piyasa şartlarına uygun olsun${ticari ? ' (dolar/euro veya TL, toptan / B2B ticari fiyat mantığı)' : ' (TL, bireysel fiyat)'}
 5. Her ilana 4-6 adet "özellik" ekle (kısa bullet point formatında)
 6. Lokasyon: ${lokasyon}
@@ -265,7 +262,7 @@ export async function POST(req: NextRequest) {
       });
 
       const response = await client.messages.create({
-        model:      'claude-3-opus-20240229', // SwapHubs sistemi Claude-3 Opus kullanıyor olmalı
+        model:      'claude-opus-4-6', // Model adı: Sizin orijinal çalışan modeliniz
         max_tokens: 4000,
         messages:   [{ role: 'user', content: prompt }],
       });
