@@ -1,7 +1,7 @@
 // ============================================================
 // SwapHubs — app/api/ilanlar/route.ts
 // Gelişmiş İlan API — Karma Algoritma, Search, Pagination
-// ============================================================
+/export const dynamic = 'force-dynamic'; ============================================================
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { getDb } from "@/lib/mongodb";
