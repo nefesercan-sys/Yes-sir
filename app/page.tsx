@@ -663,7 +663,7 @@ export default function AnaSayfa() {
 
       {/* ── KATEGORİ ŞERİDİ ── */}
       <div className="kat-wrap">
-        {kategoriler.map(k => (
+        {kategoriler.map((k: any) => (
           <div
             key={k.id}
             className={`kat-chip ${aktifKat === k.id ? "on" : ""}`}
@@ -815,29 +815,31 @@ export default function AnaSayfa() {
           </div>
           <div className="destek-body">
             {destekGonderildi ? (
-              <div style={{ textAlign: "center", padding: "20px 0" }}>
-                <div style={{ fontSize: "2.5rem", marginBottom: 10 }}>✅</div>
-                <p style={{ fontWeight: 700, color: "#059669" }}>Mesajınız alındı!</p>
-                <p style={{ fontSize: ".85rem", color: "#64748b", marginTop: 4 }}>En kısa sürede dönüş yapacağız.</p>
+              <div style={{ textAlign: "center", padding: "20px 10px", color: "var(--navy)" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "10px" }}>✅</div>
+                <h5 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "5px" }}>Mesajınız Alındı!</h5>
+                <p style={{ fontSize: ".85rem", color: "var(--mid)", lineHeight: 1.4 }}>
+                  Müşteri temsilcilerimiz en kısa sürede sizinle iletişime geçecektir.
+                </p>
               </div>
             ) : (
               <>
-                <p style={{ fontSize: ".82rem", color: "#64748b", marginBottom: 10, lineHeight: 1.5 }}>
-                  Soru, öneri veya sorunlarınızı yazın — ekibimiz size özel yanıt verir.
+                <p style={{ fontSize: ".8rem", color: "var(--mid)", marginBottom: "12px", lineHeight: 1.4 }}>
+                  Merhaba! Size nasıl yardımcı olabiliriz? İlan verme, teklif alma veya teknik bir sorun hakkında bize yazabilirsiniz.
                 </p>
                 <textarea
                   className="destek-ta"
-                  placeholder="Mesajınızı yazın..."
+                  placeholder="Mesajınızı buraya yazın..."
                   value={destekMesaj}
-                  onChange={e => setDestekMesaj(e.target.value)}
+                  onChange={(e) => setDestekMesaj(e.target.value)}
                 />
-                {session?.user?.email && (
-                  <p style={{ fontSize: ".75rem", color: "#94a3b8", marginTop: 4 }}>
-                    📧 {session.user.email} üzerinden yanıtlanacak
-                  </p>
-                )}
-                <button className="destek-send" onClick={handleDestekGonder}>
-                  Gönder →
+                <button
+                  className="destek-send"
+                  onClick={handleDestekGonder}
+                  disabled={!destekMesaj.trim()}
+                  style={{ opacity: !destekMesaj.trim() ? 0.6 : 1, cursor: !destekMesaj.trim() ? "not-allowed" : "pointer" }}
+                >
+                  Gönder 🚀
                 </button>
               </>
             )}
