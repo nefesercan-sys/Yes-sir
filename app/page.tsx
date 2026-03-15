@@ -7,7 +7,9 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
+
 export const dynamic = 'force-dynamic';
+
 interface Ilan {
   _id: string;
   baslik: string;
@@ -126,7 +128,6 @@ export default function AnaSayfa() {
 
   return (
     <>
-      {/* --- DÜZELTME 2: CSS kodları SWC derleyicisini bozmaması için en güvenli yöntemle bağlandı --- */}
       <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Unbounded:wght@700;800;900&display=swap');
 
@@ -350,20 +351,21 @@ export default function AnaSayfa() {
         .stat-v { font-family: 'Unbounded', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--navy); }
         .stat-l { font-size: .72rem; color: var(--muted); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: .05em; }
 
+        /* 🚨 DÜZELTİLEN YER: Flex-wrap eklendi, kaydırma çubuğu iptal edildi. Kategoriler sığmazsa alt satıra geçer ve ortalanır. */
         .kat-wrap {
           max-width: 1200px; margin: 28px auto 0;
           padding: 0 24px;
-          display: flex; gap: 10px;
-          overflow-x: auto; scrollbar-width: none;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
         }
-        .kat-wrap::-webkit-scrollbar { display: none; }
         .kat-chip {
           background: #fff;
           border: 1.5px solid var(--border);
           border-radius: 12px;
           padding: 10px 18px;
           display: flex; align-items: center; gap: 8px;
-          flex-shrink: 0;
           cursor: pointer;
           transition: .18s;
           font-weight: 700; color: var(--mid); font-size: .82rem;
@@ -526,6 +528,7 @@ export default function AnaSayfa() {
           .kontrol { padding: 16px; border-radius: 18px; }
           .rol-row { flex-direction: column; }
           .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 0 16px; }
+          /* Mobilde hala kaydırılabilir kalması daha şık olabilir, ancak wrap istenirse buradaki padding de korunarak ortalanır */
           .kat-wrap { padding: 0 16px; }
           .vitrin-wrap { padding: 0 16px 60px; }
           .ilan-grid { grid-template-columns: 1fr; }
