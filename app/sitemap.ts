@@ -1,6 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getDb } from '@/lib/mongodb';
 
+// 🛡️ SİBER ZIRH: Haritayı sunucu hafızasına alır ve 1 saatte bir (3600 sn) yorulmadan günceller.
+// Veritabanı çökmesini %100 engeller!
+export const revalidate = 3600; 
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = 'https://swaphubs.com';
 
@@ -10,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/kesfet`,     lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${base}/ilan-ver`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/giris`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${base}/kayt`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${base}/kayit`,      lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 }, // 🚨 Yazım hatası düzeltildi
     { url: `${base}/hakkimizda`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${base}/iletisim`,   lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     ...['otel-tatil','arac-kiralama','tamir-bakim','temizlik','usta',
@@ -29,13 +33,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const db = await getDb();
     const ilanlar = await db.collection('ilanlar')
-      .find({ durum: 'aktif' }, { projection: { _id: 1, guncellendi: 1 } })
+      .find({ durum: 'aktif' }, { projection: { _id: 1, guncellendi: 1, createdAt: 1 } })
       .sort({ createdAt: -1 })
       .limit(1000)
       .toArray();
+      
     ilanSayfalar = ilanlar.map(i => ({
       url:             `${base}/ilan/${i._id}`,
-      lastModified:    i.guncellendi ?? new Date(),
+      lastModified:    i.guncellendi || i.createdAt || new Date(), // 🚨 Fallback eklendi
       changeFrequency: 'weekly' as const,
       priority:        0.7,
     }));
