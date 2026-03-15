@@ -7,10 +7,55 @@ import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// 🚀 SİBER TURBO: Mevcut metadatan global standartlara yükseltildi
 export const metadata: Metadata = {
-  title: "SwapHubs | Küresel Hizmet & Ürün Takas Merkezi",
+  title: {
+    template: '%s | SwapHubs',
+    default: "SwapHubs | Küresel Hizmet & Ürün Takas Merkezi",
+  },
   description: "Üretici, tedarikçi ve hizmet sağlayıcıları tek platformda buluşturan yeni nesil takas ve ticaret ağı.",
-  keywords: ["takas", "B2B", "hizmet alımı", "ticaret", "ihracat", "ilan ver"],
+  keywords: ["takas", "B2B", "hizmet alımı", "ticaret", "ihracat", "ilan ver", "swap", "global pazar"],
+  
+  // 🌍 GLOBAL BİLDİRİM: Dil etiketleri eklendi
+  alternates: {
+    canonical: 'https://swaphubs.com',
+    languages: {
+      'tr-TR': 'https://swaphubs.com',
+      'en-US': 'https://swaphubs.com/en',
+      'x-default': 'https://swaphubs.com',
+    },
+  },
+  
+  // 📱 VİRAL SOSYAL MEDYA: Link paylaşımlarında şık görünüm
+  openGraph: {
+    title: 'SwapHubs | Küresel Hizmet & Ürün Takas Merkezi',
+    description: 'Üretici, tedarikçi ve hizmet sağlayıcıları tek platformda buluşturan yeni nesil takas ve ticaret ağı.',
+    url: 'https://swaphubs.com',
+    siteName: 'SwapHubs',
+    images: [
+      {
+        url: 'https://swaphubs.com/og-image.jpg', // İpucu: public klasörüne og-image.jpg adında şık bir logo/görsel koymalısın
+        width: 1200,
+        height: 630,
+        alt: 'SwapHubs Global Pazar',
+      },
+    ],
+    locale: 'tr_TR',
+    type: 'website',
+  },
+  
+  // 🤖 GOOGLE BOT YÖNLENDİRMESİ
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
