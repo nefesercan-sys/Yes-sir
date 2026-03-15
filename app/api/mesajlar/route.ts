@@ -1,131 +1,129 @@
-// ============================================================
-// SwapHubs — app/api/mesajlar/route.ts
-// Kullanıcılar arası mesajlaşma
-// ============================================================
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
-
-function convId(e1: string, e2: string, ilanId?: string): string {
-  const sorted = [e1, e2].sort().join("__");
-  return ilanId ? `${sorted}____${ilanId}` : sorted;
-}
+import { ObjectId } from "mongodb";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    const email = session?.user?.email;
-    if (!email) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    const session = await getServerSession();
+    if (!session?.user?.email) return NextResponse.json([], { status: 401 });
 
+    const email = session.user.email;
     const { searchParams } = new URL(req.url);
-    const withEmail = searchParams.get("with");
-    const ilanId    = searchParams.get("ilanId");
+    const withUser = searchParams.get("with");
+    const ilanId = searchParams.get("ilanId");
+    const yeniSohbet = searchParams.get("yeniSohbet");
+
     const db = await getDb();
 
-    if (withEmail) {
-      const cId = convId(email, withEmail, ilanId ?? undefined);
-      const mesajlar = await db.collection("mesajlar")
-        .find({ conversationId: cId })
-        .sort({ createdAt: 1 })
-        .toArray();
+    // 1. İki kişi arasındaki mevcut mesajları çek
+    if (withUser) {
+      const query: any = {
+        $or: [
+          { gonderen: email, alici: withUser },
+          { gonderen: withUser, alici: email }
+        ]
+      };
+      if (ilanId) query.ilanId = ilanId;
 
-      // Okunmamışları okundu yap
-      await db.collection("mesajlar").updateMany(
-        { conversationId: cId, alici: email, okundu: false },
+      const mesajlar = await db.collection("sohbetler").find(query).sort({ createdAt: 1 }).toArray();
+
+      // Mesajı okundu işaretle
+      await db.collection("sohbetler").updateMany(
+        { gonderen: withUser, alici: email, okundu: false },
         { $set: { okundu: true } }
       );
 
-      return NextResponse.json(ser(mesajlar));
+      return NextResponse.json(mesajlar);
     }
 
-    // Tüm konuşmalar listesi
-    const pipeline: any[] = [
-      { $match: { $or: [{ gonderen: email }, { alici: email }] } },
-      { $sort: { createdAt: -1 } },
-      {
-        $group: {
-          _id: "$conversationId",
-          sonMesaj:   { $first: "$mesaj" },
-          sonTarih:   { $first: "$createdAt" },
-          gonderen:   { $first: "$gonderen" },
-          alici:      { $first: "$alici" },
-          ilanId:     { $first: "$ilanId" },
-          ilanBaslik: { $first: "$ilanBaslik" },
-          okunmamis: {
-            $sum: {
-              $cond: [
-                { $and: [{ $eq: ["$alici", email] }, { $eq: ["$okundu", false] }] },
-                1, 0,
-              ],
-            },
-          },
-        },
-      },
-      { $sort: { sonTarih: -1 } },
-      { $limit: 50 },
-    ];
+    // 2. Sol menüdeki genel konuşma listesini (Özet) çek
+    const tumMesajlar = await db.collection("sohbetler")
+      .find({ $or: [{ gonderen: email }, { alici: email }] })
+      .sort({ createdAt: -1 })
+      .toArray();
 
-    const konusmalar = await db.collection("mesajlar").aggregate(pipeline).toArray();
-    const sonuc = konusmalar.map(k => ({
-      ...k,
-      karsiTaraf: k.gonderen === email ? k.alici : k.gonderen,
-    }));
+    const map = new Map();
+    for (const m of tumMesajlar) {
+      const karsiTaraf = m.gonderen === email ? m.alici : m.gonderen;
+      const key = `${karsiTaraf}_${m.ilanId}`;
+      if (!map.has(key)) {
+        map.set(key, {
+          _id: key,
+          karsiTaraf,
+          ilanId: m.ilanId,
+          ilanBaslik: m.ilanBaslik || "İlan",
+          sonMesaj: m.mesaj,
+          okunmamis: m.alici === email && !m.okundu ? 1 : 0,
+          createdAt: m.createdAt
+        });
+      } else {
+        if (m.alici === email && !m.okundu) map.get(key).okunmamis++;
+      }
+    }
 
-    return NextResponse.json(ser(sonuc));
+    // 🚨 SİHİRLİ DOKUNUŞ: Eğer ilandan "Yeni Sohbet Başlat" butonuna tıklandıysa, sohbet listesine boş bir başlangıç odası ekle
+    if (yeniSohbet) {
+        const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(yeniSohbet) });
+        if (ilan) {
+            const aliciEmail = ilan.sahibi?.email || "admin@swaphubs.com"; // AI ilanıysa admine gider
+            const key = `${aliciEmail}_${yeniSohbet}`;
+            
+            if (!map.has(key) && aliciEmail !== email) {
+                map.set(key, {
+                    _id: key,
+                    karsiTaraf: aliciEmail,
+                    ilanId: yeniSohbet,
+                    ilanBaslik: ilan.baslik,
+                    sonMesaj: "Sohbeti başlatmak için yazın...",
+                    okunmamis: 0,
+                    createdAt: new Date()
+                });
+            }
+        }
+    }
+
+    const liste = Array.from(map.values()).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return NextResponse.json(liste);
+
   } catch (err) {
-    console.error("GET mesajlar:", err);
-    return NextResponse.json([], { status: 500 });
+    return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    const email = session?.user?.email;
-    const ad    = session?.user?.name ?? "";
-    if (!email) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+    const session = await getServerSession();
+    if (!session?.user?.email) return NextResponse.json({ error: "Giriş yapın" }, { status: 401 });
 
-    const { alici, mesaj, ilanId, ilanBaslik } = await req.json();
-    if (!alici || !mesaj?.trim()) {
-      return NextResponse.json({ error: "Alıcı ve mesaj zorunlu" }, { status: 400 });
-    }
-    if (alici === email) {
-      return NextResponse.json({ error: "Kendinize mesaj gönderemezsiniz" }, { status: 400 });
-    }
+    const body = await req.json();
+    const { alici, mesaj, ilanId } = body;
 
-    const db  = await getDb();
-    const cId = convId(email, alici, ilanId ?? undefined);
+    if (!alici || !mesaj) return NextResponse.json({ error: "Eksik bilgi" }, { status: 400 });
 
-    // İlan başlığını bul
-    let ilanBas: string | null = ilanBaslik ?? null;
-    if (ilanId && !ilanBas) {
-      const { ObjectId } = await import("mongodb");
-      try {
+    const db = await getDb();
+
+    let ilanBaslik = "İlan";
+    if (ilanId) {
         const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(ilanId) });
-        ilanBas = ilan?.baslik ?? null;
-      } catch {}
+        if (ilan) ilanBaslik = ilan.baslik;
     }
 
-    await db.collection("mesajlar").insertOne({
-      conversationId: cId,
-      gonderen:       email,
-      gonderenAd:     ad,
+    const yeniMesaj = {
+      gonderen: session.user.email,
       alici,
-      mesaj:          mesaj.trim(),
-      ilanId:         ilanId   ?? null,
-      ilanBaslik:     ilanBas  ?? null,
-      okundu:         false,
-      createdAt:      new Date(),
-    });
+      mesaj,
+      ilanId,
+      ilanBaslik,
+      okundu: false,
+      createdAt: new Date()
+    };
 
-    return NextResponse.json({ success: true }, { status: 201 });
+    await db.collection("sohbetler").insertOne(yeniMesaj);
+
+    return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("POST mesajlar:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
-}
-
-function ser(d: any[]): any[] {
-  return JSON.parse(JSON.stringify(d));
 }
