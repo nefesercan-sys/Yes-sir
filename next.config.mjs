@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // ⚡ PERFORMANS: Dosya sıkıştırmayı açarak veri transferini azaltır
+  // ⚡ PERFORMANS: Dosya sıkıştırma ve SWC minifier
   compress: true,
-  poweredByHeader: false, // Güvenlik için X-Powered-By başlığını kaldırır
+  swcMinify: true,
+  poweredByHeader: false,
 
   images: {
-    // ✅ MODERNİZASYON: 'domains' yerine 'remotePatterns' kullanımı (Daha güvenli)
+    // 🖼️ HIZ: Görselleri otomatik olarak en hafif formatlara çevirir
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920], 
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
@@ -13,12 +16,9 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'swaphubs.com' },
     ],
-    // 🖼️ HIZ: Görselleri otomatik olarak en hafif formatlara çevirir
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200], // Farklı cihazlar için optimize boyutlar
   },
 
-  // 🛡️ GÜVENLİK VE ÖNBELLEK: Tarayıcı performansını ve güvenliğini artırır
+  // 🛡️ GÜVENLİK VE ÖNBELLEK
   async headers() {
     return [
       {
@@ -28,21 +28,25 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
-          // 🚀 HIZ: Statik dosyalar için uzun süreli önbellekleme (Cache Control)
+        ],
+      },
+      {
+        // 🚀 STATİK DOSYALAR (Resim, Font vb.): 1 yıl önbellekle
+        source: '/static/(.*)|/images/(.*)|/_next/image(.*)',
+        headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, must-revalidate',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
     ];
   },
 
-  // 🔗 YÖNLENDİRMELER: Eski linkleri yeni yapıya bağlar
+  // 🔗 YÖNLENDİRMELER
   async redirects() {
     return [
       {
-        // Örn: www.swaphubs.com gelirse ana domaine yönlendir
         source: '/www', 
         destination: 'https://swaphubs.com',
         permanent: true,
@@ -50,9 +54,14 @@ const nextConfig = {
     ];
   },
 
-  // 🛠️ EKSTRA: Üretim hatalarını minimize eder
+  // 🛠️ DERLEME AYARLARI
+  compiler: {
+    // Üretim ortamında console.log'ları temizler (JS boyutunu düşürür)
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
   typescript: {
-    ignoreBuildErrors: false, // Hatalı kodun yayına çıkmasını engeller
+    ignoreBuildErrors: false,
   },
 };
 
