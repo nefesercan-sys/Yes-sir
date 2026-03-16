@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // ⚡ PERFORMANS: Dosya sıkıştırma ve SWC minifier
+  // ⚡ PERFORMANS: Dosya sıkıştırma ve hızlı derleme
   compress: true,
   swcMinify: true,
   poweredByHeader: false,
+  reactStrictMode: true,
 
   images: {
-    // 🖼️ HIZ: Görselleri otomatik olarak en hafif formatlara çevirir
+    // 🖼️ HIZ: Görselleri modern formatlara çevirerek LCP süresini iyileştirir
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920], 
     remotePatterns: [
@@ -18,7 +19,7 @@ const nextConfig = {
     ],
   },
 
-  // 🛡️ GÜVENLİK VE ÖNBELLEK
+  // 🛡️ GÜVENLİK VE ÖNBELLEK YÖNETİMİ
   async headers() {
     return [
       {
@@ -31,8 +32,8 @@ const nextConfig = {
         ],
       },
       {
-        // 🚀 STATİK DOSYALAR (Resim, Font vb.): 1 yıl önbellekle
-        source: '/static/(.*)|/images/(.*)|/_next/image(.*)',
+        // 🚀 STATİK DOSYALAR: 1 yıl tarayıcı önbelleğinde tutarak hızı artırır
+        source: '/(fonts|images|static)/([^/]*\\.)+(jpg|jpeg|png|gif|ico|svg|webp|avif|woff|woff2)',
         headers: [
           {
             key: 'Cache-Control',
@@ -54,14 +55,26 @@ const nextConfig = {
     ];
   },
 
-  // 🛠️ DERLEME AYARLARI
+  // 🛠️ DERLEME VE HATA YÖNETİMİ
   compiler: {
-    // Üretim ortamında console.log'ları temizler (JS boyutunu düşürür)
+    // Üretim ortamında logları temizleyerek JS boyutunu (TBT) düşürür
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
+  // Vercel build hatalarını önlemek için sıkı kontrol
   typescript: {
     ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+
+  // 🤖 AI/DİNAMİK ROTALAR İÇİN ÖZEL AYAR (Opsiyonel)
+  experimental: {
+    // Server Actions ve optimizasyonlar
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
   },
 };
 
