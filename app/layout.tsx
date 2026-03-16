@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/providers/auth-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
-import Analytics from "@/components/analytics/analytics";
+
+// Dosya ağacınızdaki gerçek yerlerine göre import yolları düzeltildi:
+import { AuthProvider } from "@/app/components/AuthProviders"; 
+import { ThemeProvider } from "@/components/providers/theme-provider";
+// import Analytics from "@/components/analytics/analytics"; // Analytics dosyası şu an depoda bulunamadı.
 
 const inter = Inter({
   subsets: ["latin"],
@@ -121,7 +123,7 @@ export default function RootLayout({
         >
           <AuthProvider>
             {children}
-            <Analytics />
+            {/* <Analytics /> */}
           </AuthProvider>
         </ThemeProvider>
       </body>
