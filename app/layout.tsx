@@ -6,6 +6,7 @@ import "./globals.css";
 // Import yollarını proje yapına göre güncelledik
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@/app/components/analytics/analytics";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 
 // Font optimizasyonu (display: 'swap')
