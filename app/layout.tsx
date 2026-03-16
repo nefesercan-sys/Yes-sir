@@ -1,92 +1,72 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "./Provider";
-import { Analytics } from "@vercel/analytics/react";
+import { AuthProvider } from "@/providers/auth-provider"; // Örn: İsimleri kontrol et
+import { ThemeProvider } from "@/providers/theme-provider";
+import Analytics from "@/components/analytics/analytics"; // Analytics bileşeni
+import { siteConfig } from "@/config/site"; // Eğer varsa config'den çekmek daha temizdir
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  preload: true,
   variable: "--font-inter",
 });
 
+// Viewport ayrı bir export olmalıdır
 export const viewport: Viewport = {
   themeColor: "#0f172a",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 5, // Erişilebilirlik için 1 yerine 5 önerilir
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
-
   title: {
-    template: "%s | SwapHubs - Güvenli Takas Borsası",
-    default:
-      "SwapHubs | Türkiye'nin En Büyük Ürün & Hizmet Takas Platformu",
+    template: "%s | SwapHubs - Güvenli Takas Platformu",
+    default: "SwapHubs | Türkiye'nin En Büyük Ürün & Hizmet Takas Platformu",
   },
-
-  description:
-    "Nakit harcamadan ticaret yapın. SwapHubs ile ürün ve hizmetlerinizi güvenle takas edebileceğiniz modern ticaret platformu.",
-
-  keywords: [
-    "takas",
-    "takas sitesi",
-    "ürün takası",
-    "hizmet takası",
-    "barter sistemi",
-    "eşya değiştirme",
-    "güvenli ticaret",
-  ],
-
-  alternates: {
-    canonical: "/",
-    languages: {
-      "tr-TR": "/",
-      "en-US": "/en",
-      "x-default": "/",
+  description: "Nakit harcamadan ticaret yapın. SwapHubs ile ürün ve hizmetlerinizi güvenle takas edebileceğiniz modern ticaret platformu.",
+  keywords: ["takas", "swap", "takas sitesi", "hizmet takası", "güvenli ticaret"],
+  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
+  creator: "SwapHubs Team",
+  publisher: "SwapHubs",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "SwapHubs | Ürün ve Hizmet Takas Platformu",
-    description:
-      "Para yerine ürünlerini kullanarak ticaret yapabileceğin yeni nesil platform.",
+    type: "website",
+    locale: "tr_TR",
     url: "https://swaphubs.com",
+    title: "SwapHubs | Ürün ve Hizmet Takas Platformu",
+    description: "Para yerine ürünlerinizi kullanarak ticaret yapabileceğiniz yeni nesil platform.",
     siteName: "SwapHubs",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg", // public klasöründe olduğundan emin ol
         width: 1200,
         height: 630,
         alt: "SwapHubs Takas Platformu",
       },
     ],
-    locale: "tr_TR",
-    type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs | Takas Yap Kazan",
-    description:
-      "Ürün ve hizmetlerini kullanarak ticaret yapabileceğin modern platform.",
+    title: "SwapHubs | Takasın Yeni Adresi",
+    description: "Ürün ve hizmetlerinizi kullanarak ticaret yapabileceğiniz modern platform.",
     images: ["/og-image.jpg"],
     creator: "@swaphubs",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
 };
 
@@ -95,64 +75,59 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
+  // JSON-LD Schema Verileri
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "SwapHubs",
-    url: "https://swaphubs.com",
-    potentialAction: {
+    "name": "SwapHubs",
+    "url": "https://swaphubs.com",
+    "potentialAction": {
       "@type": "SearchAction",
-      target: "https://swaphubs.com/ara?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
+      "target": "https://swaphubs.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   };
 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "SwapHubs",
-    url: "https://swaphubs.com",
-    logo: "https://swaphubs.com/logo.png",
-    sameAs: [
+    "name": "SwapHubs",
+    "url": "https://swaphubs.com",
+    "logo": "https://swaphubs.com/logo.png",
+    "sameAs": [
       "https://twitter.com/swaphubs",
       "https://instagram.com/swaphubs",
-      "https://linkedin.com/company/swaphubs",
-    ],
+      "https://linkedin.com/company/swaphubs"
+    ]
   };
 
   return (
-    <html lang="tr" className={inter.variable}>
+    <html lang="tr" suppressHydrationWarning>
       <head>
-
-        {/* Website Schema */}
+        {/* JSON-LD verilerini dangerouslySetInnerHTML ile eklemek en performanslı yoldur */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-
-        {/* Organization Schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-
       </head>
-
       <body
-        className={`${inter.className} bg-white text-gray-900 antialiased`}
+        className={`${inter.className} min-h-screen bg-background font-sans antialiased`}
       >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
-
-        {/* Analytics en sona */}
-        <Analytics />
-
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            {children}
+            <Analytics />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
