@@ -2,15 +2,19 @@ import Image from 'next/image';
 
 export default function HeroImage() {
   return (
-    <div className="relative w-full h-[400px] overflow-hidden">
+    <div className="relative w-full h-[500px] overflow-hidden">
       <Image
-        src="/ag_image.jpg" // public klasöründeki görselin
-        alt="SwapHubs Takas ve Ticaret Borsası"
+        src="/og-image.jpg" // Resmin public klasöründe olduğundan emin ol
+        alt="SwapHubs Takas ve Ticaret Merkezi"
         fill
-        priority // 🚀 LCP puanını düşüren "Sihirli" parametre
+        priority // LCP puanını düşürmek için tarayıcıya "öncelikli" olduğunu söyler
+        fetchPriority="high" // Yeni nesil tarayıcılar için ek bir hız sinyali
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover"
-        sizes="(max-width: 768px) 100vw, 1200px"
-        quality={75} // Hız için kaliteyi 75'e düşürdük (gözle görülmez, yüklenmeyi hızlandırır)
+        quality={85} // 75 biraz düşük kalabilir, 85 kalite-boyut dengesi için idealdir
+        // Opsiyonel: Yüklenirken bulanık bir görüntü göstermek için
+        // placeholder="blur" 
+        // blurDataURL="data:image/png;base64,..." 
       />
     </div>
   );
