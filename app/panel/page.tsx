@@ -7,7 +7,18 @@ import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
-
+const BTN_SM = (bg: string, c: string) => ({
+  padding: "6px 12px",
+  borderRadius: "8px",
+  background: bg,
+  border: "none",
+  color: c,
+  fontFamily: "inherit",
+  fontSize: "11px",
+  fontWeight: 700,
+  cursor: "pointer",
+  transition: "all 0.15s",
+});
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
