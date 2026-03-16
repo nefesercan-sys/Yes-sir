@@ -5,6 +5,7 @@
 // Kısıtlama: Maksimum 10 Resim ve 1 Video
 // ============================================================
 import { useState, useEffect, Suspense } from "react";
+export const dynamic = 'force-dynamic';
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SEKTORLER, BIREYSEL_SEKTORLER, TICARI_SEKTORLER, Sektor, FormAlan } from "@/lib/sektorler";
