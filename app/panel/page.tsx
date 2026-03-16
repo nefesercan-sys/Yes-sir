@@ -8,21 +8,6 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
 
-// --- EKSİK OLAN STİL FONKSİYONU BURAYA EKLENDİ ---
-const BTN_SM = (bg: string, c: string) => ({
-  padding: "6px 12px",
-  borderRadius: "8px",
-  background: bg,
-  border: "none",
-  color: c,
-  fontFamily: "inherit",
-  fontSize: "11px",
-  fontWeight: 700,
-  cursor: "pointer",
-  transition: "all 0.15s",
-});
-// --------------------------------------------------
-
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
@@ -230,7 +215,7 @@ function PanelIcerik() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 58px); }
@@ -257,7 +242,7 @@ function PanelIcerik() {
           .tab-btn { width: auto; flex-shrink: 0; margin-bottom: 0; padding: 8px 12px; }
           .main-area { padding: 14px; }
         }
-      `}} />
+      `}</style>
 
       {/* TOPBAR */}
       <div style={{ background: "#0f172a", padding: "0 20px", height: 58, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
@@ -517,4 +502,303 @@ function PanelIcerik() {
                     <p style={{ fontSize: 14, color: "#64748b" }}>Henüz sipariş yok</p>
                   </div>
                 ) : siparisler.map(r => (
-                  <div key={r._id} cla
+                  <div key={r._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>📦</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>
+                        {r.musteri?.email === session.user?.email ? `Hizmet: ${r.hizmetVeren?.ad || "—"}` : `Müşteri: ${r.musteri?.ad || "—"}`}
+                      </p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{formatSayi(r.fiyat)} {r.doviz || '₺'}</p>
+                      <p style={{ fontSize: 11, color: "#94a3b8" }}>{formatTarih(r.olusturuldu || r.createdAt)}</p>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[r.durum] ? { background: DURUM_STIL[r.durum].bg, color: DURUM_STIL[r.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{r.durum}</span>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* ── MESAJLAR ── */}
+          {aktifTab === "mesajlar" && (
+            <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 16, height: "calc(100vh - 160px)", minHeight: 400 }}>
+              {/* Konuşma listesi */}
+              <div style={{ background: "#fff", borderRadius: 14, border: "1.5px solid #e2e8f0", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ padding: "12px 14px", borderBottom: "1px solid #e2e8f0" }}>
+                  <p style={{ fontSize: 13, fontWeight: 800, color: "#0f172a" }}>💬 Mesajlarım</p>
+                </div>
+                <div style={{ flex: 1, overflowY: "auto" }}>
+                  {konusmalar.length === 0 ? (
+                    <div style={{ textAlign: "center", padding: "32px 16px", color: "#94a3b8", fontSize: 13 }}>
+                      Henüz mesajlaşma yok
+                    </div>
+                  ) : konusmalar.map(k => (
+                    <div
+                      key={k._id}
+                      onClick={() => setAktifKonusma(k._id)}
+                      style={{ padding: "12px 14px", borderBottom: "1px solid #f1f5f9", cursor: "pointer", background: aktifKonusma === k._id ? "#eff6ff" : "#fff", transition: ".15s" }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                        <p style={{ fontSize: 12, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                          {k.karsiTaraf?.split("@")[0] || "Kullanıcı"}
+                        </p>
+                        {k.okunmamis > 0 && (
+                          <span style={{ background: "#2563eb", color: "#fff", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 99 }}>{k.okunmamis}</span>
+                        )}
+                      </div>
+                      {k.ilanBaslik && <p style={{ fontSize: 10, color: "#64748b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📋 {k.ilanBaslik}</p>}
+                      <p style={{ fontSize: 11, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: 2 }}>{k.sonMesaj}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mesaj içeriği */}
+              <div style={{ background: "#fff", borderRadius: 14, border: "1.5px solid #e2e8f0", display: "flex", flexDirection: "column" }}>
+                {!aktifKonusma ? (
+                  <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12, color: "#94a3b8" }}>
+                    <p style={{ fontSize: "3rem" }}>💬</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>Bir konuşma seçin</p>
+                  </div>
+                ) : (
+                  <>
+                    <div style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>
+                        {konusmalar.find(k => k._id === aktifKonusma)?.karsiTaraf?.split("@")[0] || "Konuşma"}
+                      </p>
+                    </div>
+                    <div style={{ flex: 1, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10 }}>
+                      {mesajYukleniyor ? (
+                        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: 13 }}>Yükleniyor...</p>
+                      ) : mesajlar.length === 0 ? (
+                        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: 13 }}>Henüz mesaj yok</p>
+                      ) : mesajlar.map(m => {
+                        const benim = m.gonderen === session.user?.email;
+                        return (
+                          <div key={m._id} style={{ display: "flex", justifyContent: benim ? "flex-end" : "flex-start" }}>
+                            <div style={{ maxWidth: "70%", padding: "10px 14px", borderRadius: benim ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: benim ? "#0f172a" : "#f1f5f9", color: benim ? "#fff" : "#0f172a", fontSize: 13, lineHeight: 1.5 }}>
+                              <p>{m.mesaj}</p>
+                              <p style={{ fontSize: 10, opacity: .6, marginTop: 4, textAlign: "right" }}>{formatTarih(m.createdAt)}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div ref={mesajSonuRef} />
+                    </div>
+                    <div style={{ padding: "12px 16px", borderTop: "1px solid #e2e8f0", display: "flex", gap: 8 }}>
+                      <input
+                        type="text" value={yeniMesaj}
+                        onChange={e => setYeniMesaj(e.target.value)}
+                        onKeyDown={e => e.key === "Enter" && mesajGonder()}
+                        placeholder="Mesajınızı yazın..."
+                        style={{ flex: 1, padding: "10px 14px", borderRadius: 10, border: "1.5px solid #e2e8f0", fontSize: 13, fontFamily: "inherit", outline: "none" }}
+                      />
+                      <button onClick={mesajGonder} style={{ padding: "10px 20px", borderRadius: 10, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Gönder</button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── BİLDİRİMLER ── */}
+          {aktifTab === "bildirimler" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                <p className="sttl" style={{ marginBottom: 0 }}>Bildirimler</p>
+                {bildirimler.some(b => !b.okundu) && (
+                  <button onClick={async () => {
+                    await Promise.all(bildirimler.filter(b => !b.okundu).map(b => fetch("/api/bildirimler", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: b._id }) })));
+                    setBildirimler(p => p.map(b => ({ ...b, okundu: true })));
+                    setStats(p => ({ ...p, okunmamisBildirim: 0 }));
+                  }} style={{ padding: "7px 14px", borderRadius: 8, background: "#f1f5f9", border: "none", color: "#475569", fontFamily: "inherit", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                    Tümünü Okundu İşaretle
+                  </button>
+                )}
+              </div>
+              {bildirimler.length === 0 ? (
+                <div className="empty-box"><p style={{ fontSize: "2rem", marginBottom: 8 }}>🔔</p><p style={{ fontSize: 14, color: "#64748b" }}>Bildirim yok</p></div>
+              ) : bildirimler.map(b => (
+                <div key={b._id} onClick={() => !b.okundu && bildirimOku(b._id)} style={{ background: b.okundu ? "#fff" : "#eff6ff", border: `1.5px solid ${b.okundu ? "#e2e8f0" : "#bfdbfe"}`, borderRadius: 12, padding: "14px 16px", marginBottom: 8, cursor: b.okundu ? "default" : "pointer" }}>
+                  <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 20, flexShrink: 0 }}>{b.tip === "yeni_teklif" ? "💼" : b.tip === "teklif_kabul" ? "🎉" : "🔔"}</span>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: 13, color: "#0f172a", fontWeight: b.okundu ? 400 : 700, lineHeight: 1.5 }}>{b.mesaj}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>{formatTarih(b.tarih || b.createdAt)}</p>
+                      {b.ilanId && (
+                        <button onClick={e => { e.stopPropagation(); router.push(`/ilan/${b.ilanId}`); }} style={{ marginTop: 6, padding: "4px 10px", borderRadius: 6, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 10, fontWeight: 600, cursor: "pointer" }}>
+                          İlana Git →
+                        </button>
+                      )}
+                    </div>
+                    {!b.okundu && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#2563eb", flexShrink: 0, marginTop: 4 }} />}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── PROFİL ── */}
+          {aktifTab === "profil" && (
+            <div>
+              <p className="sttl">Profilim</p>
+              <div className="card">
+                <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 16 }}>
+                  <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: 64, height: 64, borderRadius: "50%", border: "3px solid #e2e8f0" }} />
+                  <div>
+                    <p style={{ fontSize: 18, fontWeight: 800, color: "#0f172a" }}>{session.user?.name}</p>
+                    <p style={{ fontSize: 13, color: "#64748b" }}>{session.user?.email}</p>
+                  </div>
+                </div>
+                <button onClick={() => router.push("/otel-profil")} style={{ padding: "11px 24px", borderRadius: 12, background: "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+                  🏢 Kurumsal Profil Oluştur / Güncelle
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── AYARLAR ── */}
+          {aktifTab === "ayarlar" && (
+            <div>
+              <p className="sttl">Hesap Ayarları</p>
+              <div className="card" style={{ marginBottom: 14 }}>
+                <p style={{ fontSize: 14, fontWeight: 700, marginBottom: 14, color: "#0f172a" }}>Profil Bilgileri</p>
+                {[
+                  { l: "Ad Soyad", v: session.user?.name || "", disabled: false },
+                  { l: "E-posta (değiştirilemez)", v: session.user?.email || "", disabled: true },
+                ].map(f => (
+                  <div key={f.l} style={{ marginBottom: 12 }}>
+                    <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>{f.l}</label>
+                    <input type="text" defaultValue={f.v} disabled={f.disabled} style={{ width: "100%", padding: "11px 14px", borderRadius: 11, border: "1.5px solid #e2e8f0", fontSize: 14, fontFamily: "inherit", background: f.disabled ? "#f8fafc" : "#fff", color: f.disabled ? "#94a3b8" : "#0f172a" }} />
+                  </div>
+                ))}
+                <button style={{ padding: "11px 24px", borderRadius: 11, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Kaydet</button>
+              </div>
+              <div className="card" style={{ background: "#fef2f2", borderColor: "#fecaca" }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: "#dc2626", marginBottom: 10 }}>Hesap İşlemleri</p>
+                <button onClick={() => signOut({ callbackUrl: "/" })} style={{ padding: "10px 20px", borderRadius: 10, background: "#dc2626", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Çıkış Yap</button>
+              </div>
+            </div>
+          )}
+
+          {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_bireysel" && (
+            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
+          {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_ticari" && (
+            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Form elemanları için ortak stil
+const SEL: React.CSSProperties = { 
+  width: "100%", padding: "10px 12px", borderRadius: 10, 
+  border: "1.5px solid #e2e8f0", fontSize: 13, 
+  fontFamily: "inherit", background: "#fff", outline: "none" 
+};
+
+// AI İLAN BİLEŞENİ
+function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
+  const [secilenSektor, setSecilenSektor] = useState("");
+  const [rol, setRol] = useState("her-ikisi");
+  const [ulke, setUlke] = useState("Türkiye"); // Varsayılan olarak Türkiye seçili gelsin
+  const [sehir, setSehir] = useState("Rastgele");
+  const [adet, setAdet] = useState(5);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [sonuc, setSonuc] = useState("");
+
+  const uret = async () => {
+    if (!secilenSektor) return alert("Sektör seçin");
+    setYukleniyor(true); setSonuc("");
+    try {
+      const res = await fetch("/api/ai-ilan", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sektorId: secilenSektor, adet, tip, adminKey,
+          rol: rol === "her-ikisi" ? undefined : rol,
+          ulke: ulke === "Rastgele" ? null : ulke,
+          sehir: sehir === "Rastgele" ? null : sehir,
+          yapay: true
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSonuc(`✅ ${data.uretilen} adet ${tip} ilan ağa eklendi.`);
+        onSuccess();
+      } else setSonuc(`❌ Hata: ${data.error}`);
+    } catch { setSonuc("❌ Bağlantı hatası"); }
+    setYukleniyor(false);
+  };
+
+  return (
+    <div className="card">
+      <p className="sttl">{tip === 'ticari' ? '🏭 Endüstriyel B2B AI Motoru' : '🙋 Bireysel AI İlan Motoru'}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Rolü</label>
+          <select value={rol} onChange={e => setRol(e.target.value)} style={SEL}>
+            <option value="her-ikisi">🔄 Mix (Hem Alan Hem Veren)</option>
+            <option value="veren">💼 Sadece Hizmet/Ürün Veren</option>
+            <option value="alan">🛒 Sadece Hizmet/Ürün Alan</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Sektör</label>
+          <select value={secilenSektor} onChange={e => setSecilenSektor(e.target.value)} style={SEL}>
+            <option value="">-- Sektör Seçin --</option>
+            {sektorler.map(s => <option key={s.id} value={s.id}>{s.emoji} {s.ad}</option>)}
+          </select>
+        </div>
+      </div>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginBottom: 20 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
+          <select value={ulke} onChange={e => {
+              setUlke(e.target.value);
+              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); // Türkiye değilse şehri sıfırla
+          }} style={SEL}>
+            {ULKELER.map(u => <option key={u} value={u}>{u}</option>)}
+          </select>
+        </div>
+
+        {/* EĞER ÜLKE TÜRKİYE İSE ŞEHİR SEÇİMİ AÇILIR */}
+        {ulke === 'Türkiye' && (
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Şehir</label>
+            <select value={sehir} onChange={e => setSehir(e.target.value)} style={SEL}>
+              {SEHIRLER.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+        )}
+
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Sayısı: {adet}</label>
+          <input type="range" min={1} max={30} value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ width: '100%', marginTop: 8 }} />
+        </div>
+      </div>
+
+      <button onClick={uret} disabled={yukleniyor || !secilenSektor} style={{ width: "100%", padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer" }}>
+        {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
+      </button>
+      {sonuc && <div style={{ marginTop: 16, padding: 12, borderRadius: 8, background: sonuc.includes('❌') ? '#fef2f2' : '#ecfdf5', color: sonuc.includes('❌') ? '#dc2626' : '#059669', fontSize: 13, fontWeight: 700 }}>{sonuc}</div>}
+    </div>
+  );
+}
+
+export default function PanelPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>
+        Panel Yükleniyor...
+      </div>
+    }>
+      <PanelIcerik />
+    </Suspense>
+  );
+}
