@@ -3,6 +3,7 @@
 // SwapHubs — app/panel/page.tsx
 // Tam üye paneli + Adminler için Gizli AI İlan Motoru
 // ============================================================
+export const dynamic = 'force-dynamic';
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
