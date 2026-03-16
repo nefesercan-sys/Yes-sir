@@ -36,7 +36,7 @@ const STATS = [
 ];
 
 export default function AnaSayfa() {
-  const { data: session } = useSession() || {};
+  const { data: session, status } = useSession() || {};
   const router = useRouter();
 
   const [ilanlar, setIlanlar] = useState<Ilan[]>([]);
