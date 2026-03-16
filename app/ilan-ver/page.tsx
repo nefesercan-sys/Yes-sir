@@ -4,6 +4,7 @@
 // Gelişmiş İlan Formu — Ülke/şehir, detaylı form, medya
 // Kısıtlama: Maksimum 10 Resim ve 1 Video
 // ============================================================
+export const dynamic = 'force-dynamic';
 import { useState, useEffect, Suspense } from "react";
 export const dynamic = 'force-dynamic';
 import { useSession } from "next-auth/react";
