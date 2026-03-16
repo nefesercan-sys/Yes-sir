@@ -4,32 +4,42 @@ import "./globals.css";
 import { AuthProvider } from "./Provider";
 import { Analytics } from "@vercel/analytics/react";
 
-// 🏎️ HIZ OPTİMİZASYONU: display: 'swap' tarayıcıya font yüklenene kadar yedek fontu kullanmasını söyler.
-const inter = Inter({ 
-  subsets: ["latin"], 
-  display: 'swap',
-  variable: '--font-inter', // CSS değişkeni olarak kullanmak performansı artırır
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  variable: "--font-inter",
 });
 
 export const viewport: Viewport = {
   themeColor: "#0f172a",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // Erişilebilirlik (SEO puanı) için kullanıcıya yakınlaştırma izni verin
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
+
   title: {
     template: "%s | SwapHubs - Güvenli Takas Borsası",
-    default: "SwapHubs | Türkiye'nin En Büyük Ürün & Hizmet Takas Borsası",
+    default:
+      "SwapHubs | Türkiye'nin En Büyük Ürün & Hizmet Takas Platformu",
   },
-  description: "Nakit harcamadan ticaret yapın! SwapHubs, ürün ve hizmetlerinizi güvenle takas edebileceğiniz, B2B ve bireysel ticaretin yeni nesil merkezi.",
+
+  description:
+    "Nakit harcamadan ticaret yapın. SwapHubs ile ürün ve hizmetlerinizi güvenle takas edebileceğiniz modern ticaret platformu.",
+
   keywords: [
-    "takas borsası", "ürün takası", "hizmet takası", "ücretsiz ilan", 
-    "ikinci el takas", "barter sistemi", "eşya değiştirme", "güvenli ticaret"
+    "takas",
+    "takas sitesi",
+    "ürün takası",
+    "hizmet takası",
+    "barter sistemi",
+    "eşya değiştirme",
+    "güvenli ticaret",
   ],
-  
+
   alternates: {
     canonical: "/",
     languages: {
@@ -38,10 +48,11 @@ export const metadata: Metadata = {
       "x-default": "/",
     },
   },
-  
+
   openGraph: {
-    title: "SwapHubs | Ürün ve Hizmet Takas Borsası",
-    description: "Para yerine ürünlerini kullan! Türkiye'nin en aktif takas ağına sen de katıl.",
+    title: "SwapHubs | Ürün ve Hizmet Takas Platformu",
+    description:
+      "Para yerine ürünlerini kullanarak ticaret yapabileceğin yeni nesil platform.",
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     images: [
@@ -49,7 +60,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "SwapHubs Takas ve Ticaret Platformu",
+        alt: "SwapHubs Takas Platformu",
       },
     ],
     locale: "tr_TR",
@@ -58,21 +69,23 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs | Takas Yap, Kazan!",
-    description: "Nakit harcamadan ihtiyacın olan ürüne veya hizmete ulaşmanın en hızlı yolu.",
+    title: "SwapHubs | Takas Yap Kazan",
+    description:
+      "Ürün ve hizmetlerini kullanarak ticaret yapabileceğin modern platform.",
     images: ["/og-image.jpg"],
-    creator: "@swaphubs", // Varsa sosyal medya hesabınız
+    creator: "@swaphubs",
   },
-  
+
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 };
@@ -82,33 +95,64 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "SwapHubs",
+    url: "https://swaphubs.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://swaphubs.com/ara?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SwapHubs",
+    url: "https://swaphubs.com",
+    logo: "https://swaphubs.com/logo.png",
+    sameAs: [
+      "https://twitter.com/swaphubs",
+      "https://instagram.com/swaphubs",
+      "https://linkedin.com/company/swaphubs",
+    ],
+  };
+
   return (
-    <html lang="tr" className={`${inter.variable}`}>
+    <html lang="tr" className={inter.variable}>
       <head>
-        {/* 📈 GOOGLE İÇİN ZENGİN SONUÇLAR (JSON-LD) 
-            Bu kod, Google'ın sitenizi bir 'Arama Motoru' veya 'Pazar Yeri' gibi algılamasını sağlar. */}
+
+        {/* Website Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "SwapHubs",
-              "url": "https://swaphubs.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://swaphubs.com/ara?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            }),
+            __html: JSON.stringify(websiteSchema),
           }}
         />
+
+        {/* Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
       </head>
-      <body className={inter.className}>
+
+      <body
+        className={`${inter.className} bg-white text-gray-900 antialiased`}
+      >
         <AuthProvider>
           {children}
-          <Analytics />
         </AuthProvider>
+
+        {/* Analytics en sona */}
+        <Analytics />
+
       </body>
     </html>
   );
