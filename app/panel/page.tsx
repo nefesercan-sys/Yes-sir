@@ -1,734 +1,804 @@
 "use client";
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useSession, signOut } from "next-auth/react"; 
+// ============================================================
+// SwapHubs — app/panel/page.tsx
+// Tam üye paneli + Adminler için Gizli AI İlan Motoru
+// ============================================================
+import { useState, useEffect, useCallback, Suspense, useRef } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import useSWR from "swr";
-import { LogOut, Edit, Trash2, Power, LayoutDashboard, Package, ArrowLeftRight, ShoppingCart, Truck, Sparkles, Image as ImageIcon, MessageCircle, Send } from "lucide-react";
+import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
 
-// 📡 SWR VERİ ÇEKME MOTORU
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
+const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-// 🌍 TÜRKİYE'NİN 81 İLİ
-const SEHIRLER = [
-  "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", "Aydın", 
-  "Balıkesir", "Bartın", "Batman", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", 
-  "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Düzce", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", 
-  "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Iğdır", "Isparta", "İstanbul", "İzmir", "Kahramanmaraş", 
-  "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli", "Kırşehir", "Kilis", "Kocaeli", 
-  "Konya", "Kütahya", "Malatya", "Manisa", "Mardin", "Mersin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Osmaniye", 
-  "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Şanlıurfa", "Şırnak", "Tekirdağ", "Tokat", "Trabzon", 
-  "Tunceli", "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak"
-];
+type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari";
+type Rol = "alan" | "veren";
+type Tip = "bireysel" | "ticari";
 
-// 📦 AI MOTORU İÇİN KATEGORİLER
-const AI_KATEGORILER = [
-  { id: "emlak", ad: "Emlak", icon: "🏠" }, 
-  { id: "vasita", ad: "Vasıta", icon: "🚗" }, 
-  { id: "elektronik", ad: "Elektronik", icon: "💻" },
-  { id: "ev_yasam", ad: "Ev & Yaşam", icon: "🛋️" }, 
-  { id: "moda", ad: "Moda & Giyim", icon: "👕" }, 
-  { id: "anne_bebek", ad: "Anne & Bebek", icon: "🧸" },
-  { id: "kozmetik", ad: "Kozmetik", icon: "💄" }, 
-  { id: "spor", ad: "Spor & Outdoor", icon: "⚽" }, 
-  { id: "hobi", ad: "Hobi & Oyuncak", icon: "🎨" },
-  { id: "kitap", ad: "Kitap & Kırtasiye", icon: "📚" }, 
-  { id: "antika", ad: "Antika & Sanat", icon: "🏺" }, 
-  { id: "petshop", ad: "Petshop", icon: "🐾" },
-  { id: "oyun", ad: "Oyun & Konsol", icon: "🎮" }, 
-  { id: "temizlik", ad: "Temizlik Hizmetleri", icon: "🧹" }, 
-  { id: "ikinci_el", ad: "2. El Eşya", icon: "♻️" },         
-  { id: "diger", ad: "Diğer", icon: "📦" }                
-];
+const DURUM_STIL: Record<string, { bg: string; c: string }> = {
+  aktif:          { bg: "#ecfdf5", c: "#059669" },
+  bekliyor:       { bg: "#fffbeb", c: "#d97706" },
+  kabul_edildi:   { bg: "#eff6ff", c: "#2563eb" },
+  reddedildi:     { bg: "#fef2f2", c: "#dc2626" },
+  tamamlandi:     { bg: "#f0fdf4", c: "#16a34a" },
+  iptal:          { bg: "#fef2f2", c: "#dc2626" },
+  gonullu_kapali: { bg: "#f1f5f9", c: "#64748b" },
+  geri_alindi:    { bg: "#f1f5f9", c: "#64748b" },
+  on_rezervasyon: { bg: "#eff6ff", c: "#2563eb" },
+};
 
-export default function ProfesyonelKullaniciPaneli() {
+function PanelIcerik() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const aktifEmail = session?.user?.email?.toLowerCase() || "";
 
-  const [aktifSekme, setAktifSekme] = useState("ai_ilan"); 
-  const [altFiltre, setAltFiltre] = useState("hepsi");
-  const [kargoKoduForm, setKargoKoduForm] = useState("");
-  const [duzenleModal, setDuzenleModal] = useState<any>(null);
-  const [islemLoading, setIslemLoading] = useState(false);
-  const [topluSilLoading, setTopluSilLoading] = useState(false);
+  // Admin Kontrolü
+  const isAdmin = session?.user?.email === 'nefesercan@gmail.com' || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
-  const [aiKategori, setAiKategori] = useState('vasita');
-  const [aiSehir, setAiSehir] = useState('İstanbul');
-  const [aiAdet, setAiAdet] = useState(5);
-  const [aiYukleniyor, setAiYukleniyor] = useState(false);
-  const [aiSonuc, setAiSonuc] = useState('');
+  const [aktifTab, setAktifTab] = useState<Tab>(
+    (searchParams.get("tab") as Tab) || "ozet"
+  );
+  const [tip, setTip] = useState<Tip>("ticari");
+  const [rol, setRol] = useState<Rol>("alan");
 
-  // 💬 MESAJLAŞMA KONTROLLERİ
+  // Data
+  const [ilanlar, setIlanlar] = useState<any[]>([]);
+  const [teklifler, setTeklifler] = useState<any[]>([]);
+  const [gelenTeklifler, setGelenTeklifler] = useState<any[]>([]);
+  const [siparisler, setSiparisler] = useState<any[]>([]);
+  const [bildirimler, setBildirimler] = useState<any[]>([]);
   const [konusmalar, setKonusmalar] = useState<any[]>([]);
-  const [aktifKonusma, setAktifKonusma] = useState<any>(null);
-  const [sohbetGecmisi, setSohbetGecmisi] = useState<any[]>([]);
+  const [aktifKonusma, setAktifKonusma] = useState<string | null>(null);
+  const [mesajlar, setMesajlar] = useState<any[]>([]);
   const [yeniMesaj, setYeniMesaj] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [mesajYukleniyor, setMesajYukleniyor] = useState(false);
   const mesajSonuRef = useRef<HTMLDivElement>(null);
 
-  const { data: walletData } = useSWR(aktifEmail ? `/api/wallet?email=${aktifEmail}` : null, fetcher, { refreshInterval: 3000 });
-  const { data: listingsData, mutate: mutateListings } = useSWR(aktifEmail ? `/api/listings?email=${aktifEmail}` : null, fetcher, { refreshInterval: 3000 });
-  const { data: takasData, mutate: mutateTakas } = useSWR(aktifEmail ? `/api/takas?email=${aktifEmail}` : null, fetcher, { refreshInterval: 3000 });
-  const { data: ordersData, mutate: mutateOrders } = useSWR(aktifEmail ? `/api/orders?email=${aktifEmail}` : null, fetcher, { refreshInterval: 3000 });
-  const { data: mesajlarListData, mutate: mutateMesajlarList } = useSWR(aktifEmail ? `/api/mesajlar` : null, fetcher, { refreshInterval: 5000 });
+  const [stats, setStats] = useState({
+    aktifIlan: 0, bekleyenTeklif: 0, gelenTeklif: 0,
+    okunmamisBildirim: 0, toplamSiparis: 0,
+  });
 
-  const safeOrders = Array.isArray(ordersData) ? ordersData : (ordersData?.orders || ordersData?.data || []);
-  const safeTakas = Array.isArray(takasData) ? takasData : (takasData?.takaslar || takasData?.data || []);
-  const safeListings = Array.isArray(listingsData) ? listingsData : (listingsData?.ilanlar || listingsData?.data || []);
-
-  const bakiye = walletData?.balance || 0;
-  const ilanlarim = safeListings.filter((i: any) => String(i?.sellerEmail || i?.userId || i?.satici || "").toLowerCase() === aktifEmail);
-  const gelenTakaslar = safeTakas.filter((t: any) => String(t?.aliciEmail || "").toLowerCase() === aktifEmail);
-  const gidenTakaslar = safeTakas.filter((t: any) => String(t?.gonderenEmail || "").toLowerCase() === aktifEmail);
-  const gelenSiparisler = safeOrders.filter((o: any) => String(o?.sellerEmail || o?.saticiEmail || "").toLowerCase() === aktifEmail);
-  const gidenSiparisler = safeOrders.filter((o: any) => String(o?.buyerEmail || o?.aliciEmail || "").toLowerCase() === aktifEmail);
-
-  const getImageUrl = (ilan: any) => {
+  const yukle = useCallback(async () => {
+    if (!session?.user?.email) return;
+    setLoading(true);
     try {
-      if (!ilan) return "https://placehold.co/400x300/f3f4f6/4f46e5?text=Görsel+Yok";
-      if (Array.isArray(ilan.resimler) && ilan.resimler.length > 0 && typeof ilan.resimler[0] === 'string') return ilan.resimler[0];
-      if (Array.isArray(ilan.medyalar) && ilan.medyalar.length > 0 && typeof ilan.medyalar[0] === 'string') return ilan.medyalar[0];
-      if (Array.isArray(ilan.images) && ilan.images.length > 0 && typeof ilan.images[0] === 'string') return ilan.images[0];
-      if (typeof ilan.image === 'string' && ilan.image.length > 5) return ilan.image;
-      if (typeof ilan.imageUrl === 'string' && ilan.imageUrl.length > 5) return ilan.imageUrl;
-      if (typeof ilan.resimler === 'string' && ilan.resimler.length > 5) return ilan.resimler;
-      return "https://placehold.co/400x300/f3f4f6/4f46e5?text=Görsel+Yok";
-    } catch (e) { return "https://placehold.co/400x300/f3f4f6/ef4444?text=Hata"; }
-  };
+      // Admin isek kendi paneline hem kendi ilanlarını hem de AI ilanlarını (denetim için) getir
+      const ilanApiUrl = isAdmin ? "/api/ilanlar?limit=100" : "/api/ilanlar?kendi=true";
 
-  // 🚨 SİBER ÇÖZÜM: YENİ SOHBET KİLİDİ AÇILIYOR
-  const yeniSohbetId = searchParams?.get("yeniSohbet");
+      const [ilanRes, teklifRes, gelenRes, sipRes, bilRes, konRes] = await Promise.all([
+        fetch(ilanApiUrl),
+        fetch("/api/teklifler?kendi=true"),
+        fetch("/api/teklifler"),
+        fetch("/api/rezervasyonlar"),
+        fetch("/api/bildirimler"),
+        fetch("/api/mesajlar"),
+      ]);
 
-  // API'den gelen mesaj odaları listesi ile anlık açılan gecici odaları birleştir
-  useEffect(() => {
-    if (mesajlarListData && Array.isArray(mesajlarListData)) {
-       setKonusmalar(eski => {
-          const gercekOdalar = [...mesajlarListData];
-          const geciciOdalar = eski.filter(k => String(k._id).startsWith("gecici_") && !gercekOdalar.find(g => g.ilanId === k.ilanId));
-          return [...geciciOdalar, ...gercekOdalar].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
-       });
-    }
-  }, [mesajlarListData]);
+      const [ilanD, teklifD, gelenD, sipD, bilD, konD] = await Promise.all([
+        ilanRes.json(), teklifRes.json(), gelenRes.json(),
+        sipRes.json(), bilRes.json(), konRes.json(),
+      ]);
 
-  // Yeni bir sohbete tıklandıysa anında sanal odayı kur
-  useEffect(() => {
-    if (yeniSohbetId) {
-      if (aktifSekme !== "mesajlar") setAktifSekme("mesajlar");
+      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.ilanlar || ilanD.data || [];
+      // Kullanıcı görünümü filtrelemesi
+      const filtreIlanlar = tumIlanlar.filter(
+        (i: any) => isAdmin ? true : (i.rol === rol && i.tip === tip)
+      );
       
-      setKonusmalar(prev => {
-         const mevcutOda = prev.find(k => k.ilanId === yeniSohbetId);
-         if (mevcutOda) {
-            if (aktifKonusma?._id !== mevcutOda._id) setAktifKonusma(mevcutOda);
-            return prev;
-         }
+      const tL = Array.isArray(teklifD) ? teklifD : [];
+      const gL = Array.isArray(gelenD) ? gelenD : [];
+      const sL = Array.isArray(sipD) ? sipD : [];
+      const bL = Array.isArray(bilD) ? bilD : [];
+      const kL = Array.isArray(konD) ? konD : [];
 
-         fetch(`/api/varliklar?id=${yeniSohbetId}`)
-           .then(res => res.json())
-           .then(data => {
-             const ilan = Array.isArray(data) ? data[0] : data;
-             if (ilan) {
-                const satici = ilan.satici?.email || ilan.sellerEmail || ilan.satici || "sistem@atakasa.com";
-                if (satici.toLowerCase() === aktifEmail) return; 
-                
-                const yeniOda = {
-                   _id: `gecici_${yeniSohbetId}`,
-                   karsiTaraf: satici,
-                   ilanId: yeniSohbetId,
-                   ilanBaslik: ilan.baslik || "İlan",
-                   sonMesaj: "Sohbeti başlatmak için yazın...",
-                   okunmamis: 0,
-                   createdAt: new Date().toISOString()
-                };
-                
-                setKonusmalar(eski => {
-                   if (eski.find(k => k.ilanId === yeniSohbetId)) return eski;
-                   setAktifKonusma(yeniOda);
-                   return [yeniOda, ...eski];
-                });
-             }
-           });
-         return prev;
+      setIlanlar(filtreIlanlar);
+      setTeklifler(tL);
+      setGelenTeklifler(gL);
+      setSiparisler(sL);
+      setBildirimler(bL);
+      setKonusmalar(kL);
+
+      setStats({
+        aktifIlan: filtreIlanlar.filter((i: any) => i.durum === "aktif").length,
+        bekleyenTeklif: tL.filter((t: any) => t.durum === "bekliyor").length,
+        gelenTeklif: gL.filter((t: any) => t.durum === "bekliyor").length,
+        okunmamisBildirim: bL.filter((b: any) => !b.okundu).length,
+        toplamSiparis: sL.length,
       });
-    }
-  }, [yeniSohbetId]);
-
-  const sohbetGetir = async (karsiTaraf: string, ilanId: string) => {
-    try {
-      const res = await fetch(`/api/mesajlar?with=${karsiTaraf}&ilanId=${ilanId}`);
-      if (res.ok) {
-        const data = await res.json();
-        setSohbetGecmisi(Array.isArray(data) ? data : []);
-        setTimeout(() => mesajSonuRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
-        mutateMesajlarList(); 
-      }
-    } catch (e) {}
-  };
+    } catch (e) { console.error(e); }
+    setLoading(false);
+  }, [session, rol, tip, isAdmin]);
 
   useEffect(() => {
-    if (aktifKonusma && !String(aktifKonusma._id).startsWith("gecici_")) {
-      sohbetGetir(aktifKonusma.karsiTaraf, aktifKonusma.ilanId);
-      const interval = setInterval(() => sohbetGetir(aktifKonusma.karsiTaraf, aktifKonusma.ilanId), 3000);
-      return () => clearInterval(interval);
-    } else if (String(aktifKonusma?._id).startsWith("gecici_")) {
-      setSohbetGecmisi([]); // Geçici odada geçmiş yotur
+    if (status === "unauthenticated") { router.push("/giris?redirect=/panel"); return; }
+    if (session) yukle();
+  }, [session, status, yukle]);
+
+  // Mesajları yükle
+  const mesajYukle = useCallback(async (karsiEmail: string, ilanId?: string) => {
+    setMesajYukleniyor(true);
+    try {
+      const params = new URLSearchParams({ with: karsiEmail });
+      if (ilanId) params.set("ilanId", ilanId);
+      const res = await fetch(`/api/mesajlar?${params}`);
+      const data = await res.json();
+      setMesajlar(Array.isArray(data) ? data : []);
+    } catch {}
+    setMesajYukleniyor(false);
+    setTimeout(() => mesajSonuRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+  }, []);
+
+  useEffect(() => {
+    if (aktifKonusma) {
+      const k = konusmalar.find(k => k._id === aktifKonusma);
+      if (k) mesajYukle(k.karsiTaraf, k.ilanId);
     }
   }, [aktifKonusma]);
 
-  const handleMesajGonder = async () => {
+  const mesajGonder = async () => {
     if (!yeniMesaj.trim() || !aktifKonusma) return;
-    const msg = yeniMesaj;
+    const k = konusmalar.find(k => k._id === aktifKonusma);
+    if (!k) return;
+    const tmp = yeniMesaj;
     setYeniMesaj("");
     try {
       await fetch("/api/mesajlar", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          alici: aktifKonusma.karsiTaraf, 
-          mesaj: msg, 
-          ilanId: aktifKonusma.ilanId,
-          ilanBaslik: aktifKonusma.ilanBaslik 
-        })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ alici: k.karsiTaraf, mesaj: tmp, ilanId: k.ilanId }),
       });
-      // Mesaj gidince geçici odayı gerçek odaya çevirmek için listeyi tazele
-      mutateMesajlarList();
-      sohbetGetir(aktifKonusma.karsiTaraf, aktifKonusma.ilanId);
-    } catch(e) {}
+      mesajYukle(k.karsiTaraf, k.ilanId);
+    } catch {}
   };
 
-  // DİĞER FONKSİYONLAR...
-  const handleDurumGuncelle = async (takasId: string, yeniDurum: string) => {
-    if (!confirm(`İşlem durumunu '${yeniDurum}' olarak güncelliyorsunuz. Emin misiniz?`)) return;
-    try {
-      const res = await fetch("/api/takas", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ takasId, yeniDurum }) });
-      if (res.ok) mutateTakas();
-    } catch (error) { alert("Bağlantı hatası."); }
+  const teklifDurumGuncelle = async (teklifId: string, durum: string) => {
+    await fetch("/api/teklifler", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ teklifId, durum }),
+    });
+    yukle();
   };
 
-  const handleSiparisGuncelle = async (orderId: string, yeniDurum: string, kargoVarMi: boolean = false) => {
-    if (kargoVarMi && !kargoKoduForm) return alert("Lütfen kargo takip kodunu giriniz!");
-    if (!confirm(`Sipariş durumunu '${yeniDurum}' yapıyorsunuz. Onaylıyor musunuz?`)) return;
-    try {
-      const res = await fetch("/api/orders", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId, yeniDurum, kargoKodu: kargoKoduForm }) });
-      if (res.ok) { alert("✅ SİPARİŞ DURUMU GÜNCELLENDİ!"); setKargoKoduForm(""); mutateOrders(); } 
-      else { alert("Güncelleme reddedildi."); }
-    } catch (error) { alert("Ağ arızası."); }
+  const bildirimOku = async (id: string) => {
+    await fetch("/api/bildirimler", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    setBildirimler(p => p.map(b => b._id === id ? { ...b, okundu: true } : b));
+    setStats(p => ({ ...p, okunmamisBildirim: Math.max(0, p.okunmamisBildirim - 1) }));
   };
 
-  const handleIlanSil = async (id: string) => {
-    if (!confirm("⚠️ Bu ilanı kalıcı olarak silmek istediğinize emin misiniz?")) return;
-    try {
-      const res = await fetch(`/api/varliklar/${id}`, { method: "DELETE" });
-      if (res.ok) { mutateListings(); } else { alert("Silme işlemi başarısız."); }
-    } catch (err) { alert("Bağlantı hatası."); }
+  const ilanSil = async (id: string) => {
+    if (!confirm("İlanı silmek istediğinize emin misiniz?")) return;
+    await fetch(`/api/ilanlar/${id}`, { method: "DELETE" });
+    yukle();
   };
 
-  const handleTopluSil = async () => {
-    if (ilanlarim.length === 0) return alert("Silinecek ilan bulunamadı.");
-    if (!confirm(`⚠️ DİKKAT: Yayındaki TÜM (${ilanlarim.length} adet) ilanınız kalıcı olarak silinecektir. Bu işlem geri alınamaz. Onaylıyor musunuz?`)) return;
-    setTopluSilLoading(true);
-    try {
-      await Promise.all(ilanlarim.map((ilan: any) => fetch(`/api/varliklar/${ilan._id}`, { method: "DELETE" })));
-      alert("✅ Bütün ilanlar başarıyla temizlendi!");
-      setAiSonuc("✅ Sistemdeki tüm ilanlar başarıyla silindi.");
-      mutateListings();
-    } catch (err) { alert("❌ Toplu silme sırasında bir sorun oluştu."); } 
-    finally { setTopluSilLoading(false); }
+  // Güvenli Tarih Formatlayıcı
+  const formatTarih = (tarihStr: any) => {
+    if (!tarihStr) return "Tarih Yok";
+    const d = new Date(tarihStr);
+    return isNaN(d.getTime()) ? "Geçersiz Tarih" : d.toLocaleDateString("tr-TR");
   };
 
-  const handleIlanDurumDegistir = async (ilan: any) => {
-    const yeniDurum = ilan.durum === "pasif" ? "aktif" : "pasif";
-    const mesaj = yeniDurum === "pasif" ? "İlan yayından kaldırılacak. Emin misiniz?" : "İlan tekrar vitrine çıkacak. Emin misiniz?";
-    if (!confirm(mesaj)) return;
-    try {
-      const res = await fetch(`/api/varliklar/${ilan._id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ durum: yeniDurum }) });
-      if (res.ok) mutateListings();
-    } catch (err) { alert("Bağlantı hatası."); }
+  // Güvenli Sayı Formatlayıcı
+  const formatSayi = (sayiStr: any) => {
+    const s = Number(sayiStr);
+    return isNaN(s) ? 0 : s.toLocaleString("tr-TR");
   };
 
-  const handleDuzenleKaydet = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIslemLoading(true);
-    try {
-      const res = await fetch(`/api/varliklar/${duzenleModal._id}`, {
-        method: "PUT", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ baslik: duzenleModal.baslik, fiyat: Number(duzenleModal.fiyat), aciklama: duzenleModal.aciklama, kategori: duzenleModal.kategori, sehir: duzenleModal.sehir, ilce: duzenleModal.ilce, mahalle: duzenleModal.mahalle })
-      });
-      if (res.ok) { alert("✅ Varlık başarıyla güncellendi!"); setDuzenleModal(null); mutateListings(); } 
-      else { const err = await res.json(); alert(`Güncelleme başarısız: ${err.message || err.error}`); }
-    } catch (err) { alert("Bağlantı hatası."); } 
-    finally { setIslemLoading(false); }
-  };
+  if (status === "loading") return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b", fontSize: 14, fontWeight: 600 }}>
+      ⏳ Siber Kimlik Doğrulanıyor...
+    </div>
+  );
+  if (!session) return null;
 
-  const aiIlanOlustur = async () => {
-    setAiYukleniyor(true); setAiSonuc('');
-    try {
-      const res = await fetch('/api/ai-ilan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kategoriId: aiKategori, sehir: aiSehir, adet: aiAdet, adminKey: process.env.NEXT_PUBLIC_ADMIN_KEY }) });
-      const data = await res.json();
-      if (data.success) { setAiSonuc(`✅ ${data.uretilen} adet "${aiKategori}" ilanı başarıyla oluşturuldu!`); mutateListings(); } 
-      else { setAiSonuc('❌ Hata: ' + data.error); }
-    } catch (e: any) { setAiSonuc('❌ Sistem Hatası: ' + e.message); }
-    setAiYukleniyor(false);
-  };
-
-  const getDurumRozeti = (durum: string) => {
-    const d = String(durum || "").toLowerCase();
-    if (d === "bekliyor" || d === "isleme_alindi") return <span className="bg-amber-100 text-amber-700 border border-amber-200 px-2 py-1 rounded-md text-[10px] uppercase font-bold">⏳ Onay Bekliyor</span>;
-    if (d === "onaylandi" || d === "kabul") return <span className="bg-blue-100 text-blue-700 border border-blue-200 px-2 py-1 rounded-md text-[10px] uppercase font-bold">📦 Hazırlanıyor</span>;
-    if (d === "kargoda" || d === "kargolandi") return <span className="bg-purple-100 text-purple-700 border border-purple-200 px-2 py-1 rounded-md text-[10px] uppercase font-bold">🚚 Yolda</span>;
-    if (d === "teslim_edildi" || d === "tamamlandi") return <span className="bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-1 rounded-md text-[10px] uppercase font-bold">✅ Tamamlandı</span>;
-    if (d === "iptal" || d === "iptal_edildi" || d === "red" || d === "reddedildi") return <span className="bg-red-100 text-red-700 border border-red-200 px-2 py-1 rounded-md text-[10px] uppercase font-bold">❌ İptal Edildi</span>;
-    return <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-[10px] uppercase font-bold">{d || "BİLİNMİYOR"}</span>;
-  };
-
-  const gosterilenVeri = () => {
-    let veri: any[] = [];
-    if (aktifSekme === "gelen_teklifler") veri = gelenTakaslar;
-    if (aktifSekme === "giden_teklifler") veri = gidenTakaslar;
-    if (aktifSekme === "gelen_siparisler") veri = gelenSiparisler;
-    if (aktifSekme === "giden_siparisler") veri = gidenSiparisler;
-    
-    if (altFiltre !== "hepsi") {
-      veri = veri.filter((t: any) => {
-        const d = String(t?.durum || t?.status || "").toLowerCase();
-        if (altFiltre === "bekliyor") return d === "bekliyor" || d === "isleme_alindi";
-        if (altFiltre === "onaylandi") return d === "onaylandi" || d === "kabul";
-        if (altFiltre === "kargoda") return d === "kargoda" || d === "kargolandi";
-        if (altFiltre === "teslim_edildi") return d === "teslim_edildi" || d === "tamamlandi";
-        if (altFiltre === "iptal") return d === "iptal" || d === "iptal_edildi" || d === "reddedildi";
-        return d === altFiltre;
-      });
-    }
-    return veri;
-  };
-
-  const bekleyenSatis = gelenSiparisler.filter((s: any) => { const d = String(s?.durum || s?.status || "").toLowerCase(); return d === 'bekliyor' || d === 'isleme_alindi'; }).length;
-  const bekleyenTakas = gelenTakaslar.filter((t: any) => String(t?.durum || "").toLowerCase() === 'bekliyor').length;
-  const aktifAldiklarim = gidenSiparisler.filter((s: any) => { const d = String(s?.durum || s?.status || "").toLowerCase(); return !["teslim_edildi", "tamamlandi", "iptal", "iptal_edildi"].includes(d); }).length;
-
-  if (status === "loading") return <div className="min-h-screen bg-gray-50 flex items-center justify-center text-indigo-600 font-bold animate-pulse">SİSTEME BAĞLANILIYOR... ⏳</div>;
-  if (status === "unauthenticated") { router.push("/giris"); return null; }
+  const TABS: { key: Tab; label: string; icon: string; badge?: number; adminOnly?: boolean }[] = [
+    { key: "ozet", label: "Özet", icon: "📊" },
+    { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar (Denetim)" : (rol === "alan" ? "Taleplerim" : "İlanlarım"), icon: "📋", badge: stats.aktifIlan },
+    { key: "gelenTeklifler", label: "Gelen Teklifler", icon: "📥", badge: stats.gelenTeklif },
+    { key: "tekliflerim", label: "Verdiğim Teklifler", icon: "💼", badge: stats.bekleyenTeklif },
+    { key: "siparisler", label: "Siparişler", icon: "📦", badge: stats.toplamSiparis },
+    { key: "mesajlar", label: "Mesajlarım", icon: "💬", badge: konusmalar.filter((k: any) => k.okunmamis > 0).length || undefined },
+    { key: "bildirimler", label: "Bildirimler", icon: "🔔", badge: stats.okunmamisBildirim },
+    { key: "profil", label: "Profilim", icon: "🏢" },
+    { key: "ayarlar", label: "Ayarlar", icon: "⚙️" },
+    // ADMIN ÖZEL SEKMELER
+    { key: "ai_ilan_bireysel", label: "🤖 AI İlan (Bireysel)", icon: "⚡", adminOnly: true },
+    { key: "ai_ilan_ticari", label: "🤖 AI İlan (B2B)", icon: "🏭", adminOnly: true },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col md:flex-row">
-      <div className="w-full md:w-72 bg-white border-r border-gray-200 flex flex-col pt-12 z-20 shadow-sm md:h-screen md:sticky md:top-0">
-        <div className="px-8 mb-10 text-center md:text-left shrink-0">
-          <h1 className="text-3xl font-extrabold tracking-tight text-indigo-600 cursor-pointer" onClick={() => router.push('/')}>ATAKASA<span className="text-gray-900">.</span></h1>
-          <p className="text-gray-500 text-[11px] font-semibold mt-1 truncate">{aktifEmail}</p>
+    <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 58px); }
+        .sidebar { background: #fff; border-right: 1px solid #e2e8f0; padding: 16px 10px; position: sticky; top: 58px; height: calc(100vh - 58px); overflow-y: auto; }
+        .main-area { padding: 22px 20px; max-width: 1000px; }
+        .card { background: #fff; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 18px; }
+        .row-item { background: #fff; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 14px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; transition: .15s; }
+        .row-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+        .tab-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 10px; border: none; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; margin-bottom: 2px; transition: .12s; background: transparent; color: #475569; }
+        .tab-btn.on { background: #0f172a; color: #fff; font-weight: 700; }
+        .tab-btn:not(.on):hover { background: #f1f5f9; }
+        .admin-tab { background: rgba(124, 58, 237, 0.05); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.2); }
+        .admin-tab.on { background: #7c3aed; color: #fff; }
+        .badge-dot { background: #f59e0b; color: #0f172a; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 99px; margin-left: auto; }
+        .dur { padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+        .sttl { font-size: 18px; font-weight: 800; color: #0f172a; font-family: 'Unbounded', sans-serif; margin-bottom: 16px; }
+        .empty-box { text-align: center; padding: 48px; background: #fff; border-radius: 18px; border: 1.5px dashed #e2e8f0; }
+        .adm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: none; }
+        @media (max-width: 768px) {
+          .panel-layout { display: flex; flex-direction: column; }
+          .sidebar { position: static; height: auto; overflow-x: auto; overflow-y: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
+          .sidebar > div { display: none !important; }
+          .sidebar > div:last-child { display: flex !important; overflow-x: auto; padding: 10px 12px; gap: 6px; white-space: nowrap; }
+          .tab-btn { width: auto; flex-shrink: 0; margin-bottom: 0; padding: 8px 12px; }
+          .main-area { padding: 14px; }
+        }
+      `}</style>
+
+      {/* TOPBAR */}
+      <div style={{ background: "#0f172a", padding: "0 20px", height: 58, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => router.push("/")} style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", padding: "5px 12px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: "inherit" }}>← Ana Sayfa</button>
+          <span style={{ color: "#fff", fontSize: 15, fontWeight: 800, fontFamily: "Unbounded, sans-serif" }}>🌐 SwapHubs Panel</span>
+          {isAdmin && <span style={{ background: "#dc2626", color: "#fff", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 4, marginLeft: 8 }}>ADMİN</span>}
         </div>
-
-        <nav className="flex flex-row md:flex-col gap-1 px-4 overflow-x-auto md:overflow-y-auto no-scrollbar flex-1 pb-6 md:pb-0">
-          {[
-            { id: "panelim", icon: <LayoutDashboard size={18}/>, ad: "Panelim" },
-            { id: "ilanlarim", icon: <ImageIcon size={18}/>, ad: "Varlıklarım", bildirim: ilanlarim.length },
-            { id: "gelen_siparisler", icon: <ShoppingCart size={18}/>, ad: "Satışlarım", bildirim: bekleyenSatis },
-            { id: "giden_siparisler", icon: <Truck size={18}/>, ad: "Aldıklarım", bildirim: aktifAldiklarim },
-            { id: "gelen_teklifler", icon: <ArrowLeftRight size={18}/>, ad: "Gelen Takaslar", bildirim: bekleyenTakas },
-            { id: "giden_teklifler", icon: <ArrowLeftRight size={18}/>, ad: "Yaptığım Takaslar" },
-            { id: "mesajlar", icon: <MessageCircle size={18}/>, ad: "Mesajlarım", bildirim: konusmalar.reduce((acc, k) => acc + (k.okunmamis || 0), 0) }, 
-            { id: "ai_ilan", icon: <Sparkles size={18} className="text-indigo-600"/>, ad: "Akıllı İlan Motoru" }, 
-          ].map((menu) => (
-            <button key={menu.id} onClick={() => {setAktifSekme(menu.id); setAltFiltre("hepsi");}} className={`flex items-center justify-between px-4 py-3.5 rounded-xl font-semibold text-[13px] transition-all whitespace-nowrap ${aktifSekme === menu.id ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}>
-              <div className="flex items-center gap-3">{menu.icon} {menu.ad}</div>
-              {menu.bildirim !== undefined && menu.bildirim > 0 ? <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${aktifSekme === menu.id ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-600'}`}>{menu.bildirim}</span> : null}
-            </button>
-          ))}
-        </nav>
-
-        <div className="px-6 py-6 border-t border-gray-100 shrink-0 mt-auto">
-          <button onClick={() => signOut({ callbackUrl: "/" })} className="w-full flex items-center justify-center gap-2 py-3.5 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold text-[13px] hover:bg-gray-50 transition-all shadow-sm">
-            <LogOut size={16} /> Çıkış Yap
-          </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {stats.okunmamisBildirim > 0 && (
+            <div style={{ background: "#dc2626", color: "#fff", borderRadius: 99, padding: "2px 8px", fontSize: 11, fontWeight: 800 }}>
+              🔔 {stats.okunmamisBildirim}
+            </div>
+          )}
+          <img
+            src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`}
+            alt="" style={{ width: 32, height: 32, borderRadius: "50%", border: "2px solid rgba(245,158,11,.4)" }}
+          />
+          <span style={{ color: "rgba(255,255,255,.7)", fontSize: 12 }}>{session.user?.name?.split(" ")[0]}</span>
+          <button onClick={() => signOut({ callbackUrl: "/" })} style={{ background: "rgba(255,255,255,.08)", border: "none", color: "rgba(255,255,255,.6)", padding: "5px 10px", borderRadius: 8, cursor: "pointer", fontSize: 11, fontFamily: "inherit" }}>Çıkış</button>
         </div>
       </div>
 
-      <div className="flex-1 p-6 md:p-10 relative overflow-x-hidden min-h-screen">
-        {aktifSekme === "panelim" && (
-          <div className="animate-in fade-in duration-300">
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Hoş Geldiniz 👋</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm relative overflow-hidden">
-                <p className="text-gray-500 text-[12px] font-bold uppercase tracking-wide mb-2">Kasa Bakiyeniz</p>
-                <p className="text-4xl font-extrabold text-gray-900">{bakiye.toLocaleString()} <span className="text-2xl text-gray-400">₺</span></p>
-              </div>
-              <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm relative overflow-hidden cursor-pointer hover:border-indigo-300 transition-colors" onClick={() => setAktifSekme("ilanlarim")}>
-                <p className="text-gray-500 text-[12px] font-bold uppercase tracking-wide mb-2">Yayındaki İlanlar</p>
-                <p className="text-4xl font-extrabold text-gray-900">{ilanlarim.length} <span className="text-xl text-gray-400">Adet</span></p>
-              </div>
-              <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm relative overflow-hidden">
-                <p className="text-gray-500 text-[12px] font-bold uppercase tracking-wide mb-2">Bekleyen Aksiyonlar</p>
-                <div className="flex items-center gap-4"><p className="text-4xl font-extrabold text-indigo-600">{bekleyenSatis + bekleyenTakas}</p></div>
-              </div>
-            </div>
+      <div className="panel-layout">
+        {/* SIDEBAR */}
+        <div className="sidebar">
+          {/* Kullanıcı */}
+          <div style={{ padding: "12px", background: "#f8fafc", borderRadius: 12, marginBottom: 14 }}>
+            <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: 40, height: 40, borderRadius: "50%", display: "block", marginBottom: 6 }} />
+            <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{session.user?.name}</p>
+            <p style={{ fontSize: 10, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{session.user?.email}</p>
           </div>
-        )}
 
-        {/* 💬 SİBER ÇÖZÜM: MESAJLARIM SEKME ARAYÜZÜ */}
-        {aktifSekme === "mesajlar" && (
-          <div className="animate-in fade-in duration-300 h-[calc(100vh-120px)] flex flex-col md:flex-row gap-6">
-            {/* Sol: Konuşma Listesi */}
-            <div className="w-full md:w-1/3 bg-white border border-gray-200 rounded-2xl flex flex-col overflow-hidden shadow-sm">
-               <div className="p-4 border-b border-gray-100 bg-gray-50"><h3 className="font-bold text-gray-900">Sohbetler</h3></div>
-               <div className="flex-1 overflow-y-auto">
-                 {konusmalar.length === 0 ? (
-                    <div className="p-6 text-center text-gray-500 text-xs">Henüz mesajınız yok.</div>
-                 ) : konusmalar.map(k => (
-                    <div key={k._id} onClick={() => setAktifKonusma(k)} className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${aktifKonusma?._id === k._id ? 'bg-indigo-50' : 'hover:bg-gray-50'}`}>
-                       <div className="flex justify-between items-center mb-1">
-                          <span className="font-bold text-sm text-gray-900 truncate">{k.karsiTaraf.split('@')[0]}</span>
-                          {k.okunmamis > 0 && <span className="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full">{k.okunmamis}</span>}
-                       </div>
-                       <p className="text-[11px] text-indigo-600 font-semibold truncate mb-1">📋 {k.ilanBaslik}</p>
-                       <p className="text-xs text-gray-500 truncate">{k.sonMesaj}</p>
-                    </div>
-                 ))}
-               </div>
-            </div>
-            
-            {/* Sağ: Mesaj Penceresi */}
-            <div className="w-full md:w-2/3 bg-white border border-gray-200 rounded-2xl flex flex-col overflow-hidden shadow-sm">
-              {!aktifKonusma ? (
-                 <div className="flex-1 flex flex-col items-center justify-center text-gray-400">
-                    <MessageCircle size={48} className="mb-4 opacity-20" />
-                    <p>Sohbeti görüntülemek için soldan bir kişi seçin.</p>
-                 </div>
-              ) : (
-                 <>
-                   <div className="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
-                     <div>
-                       <h3 className="font-bold text-gray-900">{aktifKonusma.karsiTaraf.split('@')[0]}</h3>
-                       <p className="text-[11px] text-gray-500">{aktifKonusma.ilanBaslik}</p>
-                     </div>
-                   </div>
-                   <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50">
-                      {sohbetGecmisi.length === 0 ? (
-                         <div className="text-center text-gray-400 text-xs mt-10">Sohbeti başlatmak için ilk mesajı gönderin.</div>
-                      ) : sohbetGecmisi.map(msg => {
-                         const benimMi = msg.gonderen.toLowerCase() === aktifEmail;
-                         return (
-                            <div key={msg._id} className={`flex ${benimMi ? 'justify-end' : 'justify-start'}`}>
-                               <div className={`max-w-[75%] p-3 rounded-2xl text-[13px] ${benimMi ? 'bg-indigo-600 text-white rounded-br-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm'}`}>
-                                  {msg.mesaj}
-                                  <div className={`text-[9px] mt-1 text-right ${benimMi ? 'text-indigo-200' : 'text-gray-400'}`}>{new Date(msg.createdAt).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'})}</div>
-                               </div>
-                            </div>
-                         )
-                      })}
-                      <div ref={mesajSonuRef} />
-                   </div>
-                   <div className="p-4 border-t border-gray-100 bg-white flex gap-2">
-                     <input type="text" value={yeniMesaj} onChange={e=>setYeniMesaj(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleMesajGonder()} placeholder="Mesajınızı yazın..." className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                     <button onClick={handleMesajGonder} disabled={!yeniMesaj.trim()} className="bg-indigo-600 text-white p-3 rounded-xl hover:bg-indigo-700 disabled:opacity-50 transition-colors"><Send size={20} /></button>
-                   </div>
-                 </>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* 💎 VARLIKLARIM EKRANI */}
-        {aktifSekme === "ilanlarim" && (
-          <div className="animate-in fade-in duration-300">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-              <h2 className="text-3xl font-extrabold text-gray-900">Varlıklarım</h2>
-              <div className="flex items-center gap-3">
-                {ilanlarim.length > 0 && (
-                  <button onClick={handleTopluSil} disabled={topluSilLoading} className={`px-5 py-3 rounded-xl text-[13px] font-bold transition-all shadow-sm border flex items-center justify-center gap-2 ${topluSilLoading ? 'bg-red-50 text-red-400 border-red-100 cursor-wait' : 'bg-red-50 text-red-600 border-red-200 hover:bg-red-600 hover:text-white'}`}>
-                    <Trash2 size={16} />
-                    {topluSilLoading ? "SİLİNİYOR..." : "TÜMÜNÜ SİL"}
-                  </button>
-                )}
-                <button onClick={() => router.push('/ilan-ver')} className="bg-indigo-600 text-white px-6 py-3 rounded-xl text-[13px] font-bold hover:bg-indigo-700 transition-all shadow-sm">
-                  + Yeni İlan
-                </button>
-              </div>
-            </div>
-
-            {ilanlarim.length === 0 ? (
-              <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-3xl bg-white">
-                <ImageIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-500 font-semibold text-sm">Sistemde henüz bir ilanınız bulunmuyor.</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {ilanlarim.map((ilan: any) => (
-                  <div key={ilan._id} className={`flex flex-col bg-white border rounded-2xl p-4 shadow-sm transition-all ${ilan.durum === 'pasif' ? 'border-red-200 opacity-80 grayscale-[20%]' : 'border-gray-200 hover:border-indigo-200 hover:shadow-md'}`}>
-                    <div className="w-full h-48 rounded-xl overflow-hidden mb-4 bg-gray-100 relative group">
-                      {ilan.resimler?.[0]?.includes(".mp4") ? (
-                        <video src={ilan.resimler[0]} className="w-full h-full object-cover" muted />
-                      ) : (
-                        <img 
-                          src={getImageUrl(ilan)} 
-                          alt={ilan.baslik} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          onError={(e) => { (e.target as HTMLImageElement).src = "https://placehold.co/400x300/f3f4f6/4f46e5?text=Görsel+Yok"; }} 
-                        />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0 mb-4">
-                      <h3 className="text-gray-900 font-bold text-base line-clamp-2 pr-2">{ilan.baslik}</h3>
-                      <p className="text-indigo-600 font-extrabold text-xl">{Number(ilan.fiyat).toLocaleString()} ₺</p>
-                      <p className="text-gray-500 text-[11px] font-semibold uppercase mt-1 truncate">{ilan.kategori}</p>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-gray-100">
-                      <button onClick={() => setDuzenleModal(ilan)} className="flex items-center justify-center gap-1 bg-gray-50 hover:bg-gray-100 text-gray-700 py-2.5 rounded-lg text-[11px] font-bold transition-colors"><Edit size={14} /> Düzenle</button>
-                      <button onClick={() => handleIlanDurumDegistir(ilan)} className={`flex items-center justify-center gap-1 py-2.5 rounded-lg text-[11px] font-bold transition-colors ${ilan.durum === 'pasif' ? 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'}`}><Power size={14} /> {ilan.durum === 'pasif' ? 'Yayınla' : 'Durdur'}</button>
-                      <button onClick={() => handleIlanSil(ilan._id)} className="flex items-center justify-center gap-1 bg-red-50 hover:bg-red-500 hover:text-white text-red-600 py-2.5 rounded-lg text-[11px] font-bold transition-colors"><Trash2 size={14} /> Sil</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* İŞLEM TAHTASI */}
-        {["gelen_teklifler", "giden_teklifler", "gelen_siparisler", "giden_siparisler"].includes(aktifSekme) && (
-          <div className="animate-in fade-in duration-300">
-            <div className="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2">
-              {["hepsi", "bekliyor", "kabul", "onaylandi", "kargoda", "teslim_edildi", "iptal"].map((durum: string) => (
-                <button key={durum} onClick={() => setAltFiltre(durum)} className={`px-5 py-2 rounded-full text-[11px] font-bold uppercase transition-all whitespace-nowrap ${altFiltre === durum ? 'bg-indigo-600 text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}>
-                  {durum.replace("_", " ")}
+          {/* Kimlik şalteri */}
+          <div style={{ background: "#f8fafc", borderRadius: 12, padding: "10px", marginBottom: 12, border: "1px solid #e2e8f0" }}>
+            <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", marginBottom: 8 }}>Panel Görünümü</p>
+            <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, marginBottom: 8, border: "1px solid #e2e8f0" }}>
+              {(["bireysel", "ticari"] as const).map(t => (
+                <button key={t} onClick={() => setTip(t)} style={{ flex: 1, padding: "6px 4px", border: "none", borderRadius: 6, background: tip === t ? (t === "ticari" ? "#f59e0b" : "#2563eb") : "transparent", color: tip === t ? (t === "ticari" ? "#0f172a" : "#fff") : "#64748b", fontFamily: "inherit", fontWeight: 600, fontSize: 11, cursor: "pointer" }}>
+                  {t === "bireysel" ? "👤 Bireysel" : "🏭 Ticari"}
                 </button>
               ))}
             </div>
-
-            <div className="space-y-4">
-              {gosterilenVeri().length === 0 ? (
-                <div className="bg-white border border-gray-200 rounded-3xl py-16 text-center shadow-sm">
-                  <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-900 font-bold text-sm mb-1">Bu filtrede işlem bulunamadı</p>
-                </div>
-              ) : (
-                gosterilenVeri().map((islem: any, index: number) => {
-                  if (!islem) return null;
-                  const isTakas = aktifSekme.includes("teklifler");
-                  const isSiparis = aktifSekme.includes("siparisler");
-                  const guvenliID = String(islem._id || index); 
-
-                  if (isTakas) {
-                    const benimRolum = String(islem.gonderenEmail || "").toLowerCase() === aktifEmail ? "gonderen" : "alici";
-                    return (
-                      <div key={`takas-${guvenliID}`} className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm flex flex-col relative overflow-hidden">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-100 pb-4 mb-6 gap-4">
-                          <div className="flex items-center gap-3">
-                            <span className="text-indigo-700 font-bold text-[10px] uppercase bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">🔄 TAKAS İŞLEMİ</span>
-                            {getDurumRozeti(islem.durum)}
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col md:flex-row items-center gap-6 bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6">
-                          <div className="flex-1 text-center md:text-left">
-                            <p className="text-gray-500 text-[11px] font-bold uppercase mb-1">Benim Varlığım</p>
-                            <p className="text-gray-900 font-bold text-sm">{benimRolum === "alici" ? (islem.heTargetIlanBaslik || islem.hedefIlanBaslik || "Ürün İncelemede") : (islem.teklifEdilenIlanBaslik || "Ürün İncelemede")}</p>
-                          </div>
-                          <div className="text-gray-400 text-2xl font-black rotate-90 md:rotate-0">⇄</div>
-                          <div className="flex-1 text-center md:text-right">
-                            <p className="text-gray-500 text-[11px] font-bold uppercase mb-1">Karşı Tarafın Varlığı</p>
-                            <p className="text-gray-900 font-bold text-sm">{benimRolum === "alici" ? (islem.teklifEdilenIlanBaslik || "Ürün İncelemede") : (islem.heTargetIlanBaslik || islem.hedefIlanBaslik || "Ürün İncelemede")}</p>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-3 mt-auto">
-                          {islem.durum === "bekliyor" && benimRolum === "alici" && (
-                            <>
-                              <button onClick={()=>handleDurumGuncelle(islem._id, "kabul")} className="flex-1 bg-emerald-600 text-white py-3 rounded-xl text-[12px] font-bold hover:bg-emerald-700 transition-all shadow-sm">Teklifi Kabul Et</button>
-                              <button onClick={()=>handleDurumGuncelle(islem._id, "red")} className="flex-1 bg-white border border-red-200 text-red-600 py-3 rounded-xl text-[12px] font-bold hover:bg-red-50 transition-all">Reddet</button>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  if (isSiparis) {
-                    const benimRolum = String(islem.sellerEmail || islem.saticiEmail || "").toLowerCase() === aktifEmail ? "satici" : "alici";
-                    const islemDurumu = String(islem.durum || islem.status || "").toLowerCase();
-
-                    return (
-                      <div key={`siparis-${guvenliID}`} className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm flex flex-col relative overflow-hidden">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-100 pb-4 mb-6 gap-4">
-                          <div className="flex items-center gap-3">
-                            <span className={`${benimRolum === 'satici' ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-purple-50 text-purple-700 border-purple-200'} font-bold text-[10px] uppercase border px-2.5 py-1 rounded-md`}>
-                              {benimRolum === 'satici' ? '📦 SATIŞ İŞLEMİ' : '🛒 SATIN ALMA İŞLEMİ'}
-                            </span>
-                            {getDurumRozeti(islemDurumu)}
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col md:flex-row gap-6 mb-6 bg-gray-50 p-5 rounded-xl border border-gray-100">
-                          <div className="flex-1">
-                            <p className="text-gray-500 text-[11px] font-bold uppercase mb-1">Teslimat Bilgileri</p>
-                            <p className="text-gray-900 font-bold text-sm mb-1">{islem.adSoyad || islem.buyerEmail || "Alıcı Bilgisi"}</p>
-                            <p className="text-gray-600 text-xs leading-relaxed">{islem.adres || islem.shippingAddress || "Adres detayları işleniyor..."}</p>
-                          </div>
-                          <div className="flex-1 md:border-l border-gray-200 md:pl-6">
-                            <p className="text-gray-500 text-[11px] font-bold uppercase mb-1">Ödeme Özeti</p>
-                            <p className="text-indigo-600 font-extrabold text-2xl mb-1">{Number(islem.fiyat || islem.price || islem.totalPrice || 0).toLocaleString()} ₺</p>
-                            <p className="text-gray-500 text-[11px] font-semibold">Yöntem: {String(islem.odemeYontemi || islem.paymentStatus || "Sistem").replace("_", " ")}</p>
-                            {(islem.kargoKodu || islem.trackingNumber) && <p className="text-purple-700 text-[11px] font-bold mt-3 bg-purple-50 inline-block px-3 py-1.5 rounded-lg border border-purple-100">🚚 Takip No: {islem.kargoKodu || islem.trackingNumber}</p>}
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-3 mt-auto">
-                          {benimRolum === "satici" && (islemDurumu === "bekliyor" || islemDurumu === "isleme_alindi") && (
-                            <button onClick={()=>handleSiparisGuncelle(islem._id, "onaylandi")} className="flex-1 bg-amber-500 text-white py-3 rounded-xl text-[12px] font-bold hover:bg-amber-600 transition-all shadow-sm">Siparişi Onayla (Hazırla)</button>
-                          )}
-                          {benimRolum === "satici" && (islemDurumu === "onaylandi") && (
-                            <div className="flex-1 flex flex-col md:flex-row gap-3">
-                              <input type="text" placeholder="Kargo Takip Kodu Girin" value={kargoKoduForm} onChange={(e)=>setKargoKoduForm(e.target.value)} className="flex-1 bg-white border border-gray-300 text-gray-900 text-sm px-4 py-3 rounded-xl outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" />
-                              <button onClick={()=>handleSiparisGuncelle(islem._id, "kargoda", true)} className="bg-purple-600 text-white px-6 py-3 rounded-xl text-[12px] font-bold hover:bg-purple-700 transition-all shadow-sm">Kargoya Ver</button>
-                            </div>
-                          )}
-
-                          {benimRolum === "alici" && (islemDurumu === "kargoda" || islemDurumu === "kargolandi") && (
-                            <button onClick={()=>handleSiparisGuncelle(islem._id, "teslim_edildi")} className="flex-1 bg-emerald-600 text-white py-3 rounded-xl text-[12px] font-bold hover:bg-emerald-700 transition-all shadow-sm">Ürünü Teslim Aldım</button>
-                          )}
-                          {benimRolum === "alici" && (islemDurumu === "bekliyor" || islemDurumu === "isleme_alindi") && (
-                            <button onClick={()=>handleSiparisGuncelle(islem._id, "iptal")} className="px-6 bg-white border border-red-200 text-red-600 py-3 rounded-xl text-[12px] font-bold hover:bg-red-50 transition-all">Siparişi İptal Et</button>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-                  return null;
-                })
-              )}
+            <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, border: "1px solid #e2e8f0" }}>
+              {(["alan", "veren"] as const).map(r => (
+                <button key={r} onClick={() => setRol(r)} style={{ flex: 1, padding: "6px 4px", border: "none", borderRadius: 6, background: rol === r ? (r === "alan" ? "#0f172a" : "#dc2626") : "transparent", color: rol === r ? "#fff" : "#64748b", fontFamily: "inherit", fontWeight: 600, fontSize: 10, cursor: "pointer" }}>
+                  {r === "alan" ? "🛒 Alıyorum" : "💼 Veriyorum"}
+                </button>
+              ))}
             </div>
           </div>
-        )}
 
-        {/* 🤖 AKILLI AI İLAN MOTORU EKRANI */}
-        {aktifSekme === "ai_ilan" && (
-          <div className="animate-in fade-in duration-300">
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Akıllı İlan Motoru</h2>
-            <p className="text-[13px] text-gray-500 mb-8 font-medium max-w-2xl">
-              Claude AI ile otomatik takas ilanları oluşturun. Tüm Türkiye şehirleri ve 16 farklı sektör emrinizde!
-            </p>
-            
-            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm max-w-2xl">
-              
-              <div className="mb-6">
-                <label className="text-[12px] font-bold text-gray-700 uppercase mb-2 block">Kategori / Sektör Seçimi</label>
-                <select value={aiKategori} onChange={e => setAiKategori(e.target.value)} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-medium outline-none focus:border-indigo-500 focus:bg-white transition-colors cursor-pointer">
-                  {AI_KATEGORILER.map(kat => (
-                    <option key={kat.id} value={kat.id}>{kat.icon} {kat.ad}</option>
-                  ))}
-                </select>
+          {/* Menü */}
+          <div>
+            {TABS.filter(t => !t.adminOnly || isAdmin).map(t => (
+              <button 
+                key={t.key} 
+                className={`tab-btn ${aktifTab === t.key ? "on" : ""} ${t.adminOnly ? 'admin-tab' : ''}`} 
+                onClick={() => setAktifTab(t.key)}
+              >
+                <span>{t.icon}</span>
+                <span style={{ flex: 1 }}>{t.label}</span>
+                {t.badge ? <span className="badge-dot">{t.badge}</span> : null}
+              </button>
+            ))}
+          </div>
+
+          {/* Yeni İlan butonu */}
+          <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #e2e8f0" }}>
+            <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ width: "100%", padding: "10px", borderRadius: 10, background: "#f59e0b", border: "none", color: "#0f172a", fontFamily: "inherit", fontSize: 12, fontWeight: 800, cursor: "pointer" }}>
+              ⚡ Yeni İlan Ver
+            </button>
+          </div>
+        </div>
+
+        {/* ANA ALAN */}
+        <div className="main-area">
+
+          {/* ── ÖZET ── */}
+          {aktifTab === "ozet" && (
+            <div>
+              <p className="sttl">Hoş geldiniz, {session.user?.name?.split(" ")[0]} 👋</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12, marginBottom: 24 }}>
+                {[
+                  { l: isAdmin ? "Sistemdeki İlanlar" : "Aktif İlan", v: stats.aktifIlan, i: "📋", c: "#2563eb" },
+                  { l: "Gelen Teklif", v: stats.gelenTeklif, i: "📥", c: "#d97706" },
+                  { l: "Verdiğim Teklif", v: stats.bekleyenTeklif, i: "💼", c: "#7c3aed" },
+                  { l: "Sipariş", v: stats.toplamSiparis, i: "📦", c: "#059669" },
+                ].map(s => (
+                  <div key={s.l} className="card" style={{ textAlign: "center" }}>
+                    <p style={{ fontSize: 22, marginBottom: 6 }}>{s.i}</p>
+                    <p style={{ fontSize: 26, fontWeight: 800, color: s.c, fontFamily: "Unbounded, sans-serif" }}>{s.v}</p>
+                    <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 3 }}>{s.l}</p>
+                  </div>
+                ))}
               </div>
-              
-              <div className="mb-6">
-                <label className="text-[12px] font-bold text-gray-700 uppercase mb-2 block">Hedef Şehir</label>
-                <select value={aiSehir} onChange={e => setAiSehir(e.target.value)} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-medium outline-none focus:border-indigo-500 focus:bg-white transition-colors cursor-pointer">
-                  <option value="Rastgele">🎲 Bütün Türkiye (Rastgele Dağıt)</option>
-                  {SEHIRLER.map(s => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="mb-10">
-                <label className="text-[12px] font-bold text-gray-700 uppercase mb-3 block flex justify-between items-center">
-                  <span>Üretilecek İlan Sayısı</span>
-                  <span className="text-indigo-700 font-bold bg-indigo-50 px-2 py-1 rounded-md">{aiAdet} Adet</span>
-                </label>
-                <input type="range" min={1} max={20} value={aiAdet} onChange={e => setAiAdet(Number(e.target.value))} className="w-full accent-indigo-600 cursor-pointer" />
-                <div className="flex justify-between text-[11px] text-gray-400 font-semibold mt-2">
-                  <span>1</span><span>20</span>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>{isAdmin ? 'Sistemdeki Son İlanlar' : 'Son İlanlarım'}</p>
+              {loading ? <p style={{ color: "#94a3b8", fontSize: 13 }}>Yükleniyor...</p> :
+                ilanlar.slice(0, 5).length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📋</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Bu kimlikte henüz ilanınız yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "9px 20px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>İlan Ver</button>
+                  </div>
+                ) : ilanlar.slice(0, 5).map(i => (
+                  <div key={i._id} className="row-item" style={{ cursor: "pointer" }} onClick={() => router.push(`/ilan/${i._id}`)}>
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
+                      <p style={{ fontSize: 11, color: "#64748b" }}>
+                        {i.yapay || i.is_ai_generated ? <span style={{color: '#7c3aed', fontWeight: 700}}>🤖 AI İlanı · </span> : ''}
+                        {i.teklifSayisi || 0} teklif · {formatTarih(i.createdAt)}
+                      </p>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* ── İLANLARIM ── */}
+          {aktifTab === "ilanlarim" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                <p className="sttl" style={{ marginBottom: 0 }}>{isAdmin ? 'Tüm Sistem İlanları' : 'İlanlarım'} ({ilanlar.length})</p>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {ilanlar.length > 0 && (
+                    <button onClick={async () => {
+                      if (!confirm("Tüm ilanlar silinecek!")) return;
+                      await Promise.all(ilanlar.map(i => fetch(`/api/ilanlar/${i._id}`, { method: "DELETE" })));
+                      yukle();
+                    }} style={{ padding: "8px 14px", borderRadius: 10, background: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626", fontFamily: "inherit", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>Tümünü Sil</button>
+                  )}
+                  <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "8px 14px", borderRadius: 10, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>+ Yeni İlan</button>
                 </div>
               </div>
-              
-              <div className="flex flex-col gap-4">
-                <button 
-                  onClick={aiIlanOlustur} 
-                  disabled={aiYukleniyor} 
-                  className={`w-full py-4 rounded-xl text-[14px] font-bold transition-all flex items-center justify-center gap-2 ${aiYukleniyor ? 'bg-indigo-100 text-indigo-400 cursor-wait' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-lg'}`}>
-                  {aiYukleniyor ? <><Sparkles size={18} className="animate-spin"/> AI İlanları Hazırlıyor...</> : <><Sparkles size={18}/> Yapay İlanları Yayına Al</>}
-                </button>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                ilanlar.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📋</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Henüz ilan yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "10px 24px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>İlan Ver</button>
+                  </div>
+                ) : ilanlar.map(i => (
+                  <div key={i._id} className="row-item">
+                    <div style={{ width: 60, height: 60, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginBottom: 3 }}>
+                        <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
+                           <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
+                           {i.yapay || i.is_ai_generated ? <span style={{background: '#f5f3ff', color: '#7c3aed', fontSize: 9, fontWeight: 800, padding: '2px 6px', borderRadius: 4}}>AI</span> : null}
+                        </div>
+                        <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
+                      </div>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>
+                        {i.butceMin > 0 ? `${formatSayi(i.butceMin)} ${i.butceBirimi}` : "Bütçe açık"}
+                      </p>
+                      <div style={{ display: "flex", gap: 10, fontSize: 11, color: "#94a3b8", marginBottom: 8, flexWrap: "wrap" }}>
+                        <span style={{background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, color: '#475569'}}>{i.tip} / {i.rol}</span>
+                        <span>💼 {i.teklifSayisi || 0} teklif</span>
+                        <span>👁 {i.goruntulenme || 0} görüntülenme</span>
+                        <span>📅 {formatTarih(i.createdAt)}</span>
+                      </div>
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                        <button onClick={() => router.push(`/ilan/${i._id}`)} style={BTN_SM("#f1f5f9", "#475569")}>Detay / Teklifler</button>
+                        <button onClick={() => { setAktifTab("mesajlar"); }} style={BTN_SM("#eff6ff", "#2563eb")}>💬 Mesajlar</button>
+                        {!isAdmin && (
+                          <button onClick={async () => { await fetch(`/api/ilanlar/${i._id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ teklifeAcik: !i.teklifeAcik }) }); yukle(); }} style={BTN_SM(i.teklifeAcik ? "#fef9c3" : "#ecfdf5", i.teklifeAcik ? "#92400e" : "#059669")}>
+                            {i.teklifeAcik ? "🟡 Kapat" : "🟢 Aç"}
+                          </button>
+                        )}
+                        <button onClick={() => ilanSil(i._id)} style={BTN_SM("#fef2f2", "#dc2626")}>Sil</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
 
-                {ilanlarim.length > 0 && (
-                  <button onClick={handleTopluSil} disabled={topluSilLoading} className={`w-full py-4 rounded-xl text-[13px] font-bold transition-all flex items-center justify-center gap-2 border ${topluSilLoading ? 'bg-red-50 text-red-400 border-red-200 cursor-wait' : 'bg-white text-red-600 border-red-200 hover:bg-red-600 hover:text-white shadow-sm'}`}>
-                    <Trash2 size={18} />
-                    {topluSilLoading ? "SİSTEM TEMİZLENİYOR..." : `🗑️ SİSTEMDEKİ TÜM İLANLARI SİL (${ilanlarim.length} İLAN)`}
-                  </button>
+          {/* ── GELEN TEKLİFLER ── */}
+          {aktifTab === "gelenTeklifler" && (
+            <div>
+              <p className="sttl">Gelen Teklifler ({gelenTeklifler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                gelenTeklifler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📥</p>
+                    <p style={{ fontSize: 14, color: "#64748b" }}>Henüz gelen teklif yok</p>
+                  </div>
+                ) : gelenTeklifler.map(t => (
+                  <div key={t._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>📥</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
+                      {t.aciklama && <p style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>{t.aciklama.slice(0, 80)}...</p>}
+                      <p style={{ fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
+                        👤 {t.teklifVeren?.ad || t.teklifVeren?.email || 'Bilinmiyor'} · {formatTarih(t.olusturuldu || t.createdAt)}
+                      </p>
+                      {t.durum === "bekliyor" && (
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button onClick={() => teklifDurumGuncelle(t._id, "kabul_edildi")} style={BTN_SM("#ecfdf5", "#059669")}>✅ Kabul Et</button>
+                          <button onClick={() => teklifDurumGuncelle(t._id, "reddedildi")} style={BTN_SM("#fef2f2", "#dc2626")}>❌ Reddet</button>
+                          <button onClick={() => { setAktifKonusma(t._id); setAktifTab("mesajlar"); }} style={BTN_SM("#eff6ff", "#2563eb")}>💬 Mesaj</button>
+                        </div>
+                      )}
+                    </div>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* ── VERDİĞİM TEKLİFLER ── */}
+          {aktifTab === "tekliflerim" && (
+            <div>
+              <p className="sttl">Verdiğim Teklifler ({teklifler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                teklifler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>💼</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Henüz teklif vermemişsiniz</p>
+                    <button onClick={() => router.push("/")} style={{ padding: "10px 24px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>İlanlara Bak</button>
+                  </div>
+                ) : teklifler.map(t => (
+                  <div key={t._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>💼</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginBottom: 6 }}>{formatTarih(t.olusturuldu || t.createdAt)}</p>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button onClick={() => router.push(`/ilan/${t.ilanId}`)} style={BTN_SM("#eff6ff", "#2563eb")}>İlana Git</button>
+                        {t.durum === "bekliyor" && (
+                          <button onClick={() => teklifDurumGuncelle(t._id, "geri_alindi")} style={BTN_SM("#fef2f2", "#dc2626")}>Geri Al</button>
+                        )}
+                      </div>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* ── SİPARİŞLER ── */}
+          {aktifTab === "siparisler" && (
+            <div>
+              <p className="sttl">Siparişler ({siparisler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                siparisler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📦</p>
+                    <p style={{ fontSize: 14, color: "#64748b" }}>Henüz sipariş yok</p>
+                  </div>
+                ) : siparisler.map(r => (
+                  <div key={r._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>📦</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>
+                        {r.musteri?.email === session.user?.email ? `Hizmet: ${r.hizmetVeren?.ad || "—"}` : `Müşteri: ${r.musteri?.ad || "—"}`}
+                      </p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{formatSayi(r.fiyat)} {r.doviz || '₺'}</p>
+                      <p style={{ fontSize: 11, color: "#94a3b8" }}>{formatTarih(r.olusturuldu || r.createdAt)}</p>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[r.durum] ? { background: DURUM_STIL[r.durum].bg, color: DURUM_STIL[r.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{r.durum}</span>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* ── MESAJLAR ── */}
+          {aktifTab === "mesajlar" && (
+            <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 16, height: "calc(100vh - 160px)", minHeight: 400 }}>
+              {/* Konuşma listesi */}
+              <div style={{ background: "#fff", borderRadius: 14, border: "1.5px solid #e2e8f0", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ padding: "12px 14px", borderBottom: "1px solid #e2e8f0" }}>
+                  <p style={{ fontSize: 13, fontWeight: 800, color: "#0f172a" }}>💬 Mesajlarım</p>
+                </div>
+                <div style={{ flex: 1, overflowY: "auto" }}>
+                  {konusmalar.length === 0 ? (
+                    <div style={{ textAlign: "center", padding: "32px 16px", color: "#94a3b8", fontSize: 13 }}>
+                      Henüz mesajlaşma yok
+                    </div>
+                  ) : konusmalar.map(k => (
+                    <div
+                      key={k._id}
+                      onClick={() => setAktifKonusma(k._id)}
+                      style={{ padding: "12px 14px", borderBottom: "1px solid #f1f5f9", cursor: "pointer", background: aktifKonusma === k._id ? "#eff6ff" : "#fff", transition: ".15s" }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                        <p style={{ fontSize: 12, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                          {k.karsiTaraf?.split("@")[0] || "Kullanıcı"}
+                        </p>
+                        {k.okunmamis > 0 && (
+                          <span style={{ background: "#2563eb", color: "#fff", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 99 }}>{k.okunmamis}</span>
+                        )}
+                      </div>
+                      {k.ilanBaslik && <p style={{ fontSize: 10, color: "#64748b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📋 {k.ilanBaslik}</p>}
+                      <p style={{ fontSize: 11, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: 2 }}>{k.sonMesaj}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mesaj içeriği */}
+              <div style={{ background: "#fff", borderRadius: 14, border: "1.5px solid #e2e8f0", display: "flex", flexDirection: "column" }}>
+                {!aktifKonusma ? (
+                  <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12, color: "#94a3b8" }}>
+                    <p style={{ fontSize: "3rem" }}>💬</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>Bir konuşma seçin</p>
+                  </div>
+                ) : (
+                  <>
+                    <div style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>
+                        {konusmalar.find(k => k._id === aktifKonusma)?.karsiTaraf?.split("@")[0] || "Konuşma"}
+                      </p>
+                    </div>
+                    <div style={{ flex: 1, overflowY: "auto", padding: "16px", display: "flex", flexDirection: "column", gap: 10 }}>
+                      {mesajYukleniyor ? (
+                        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: 13 }}>Yükleniyor...</p>
+                      ) : mesajlar.length === 0 ? (
+                        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: 13 }}>Henüz mesaj yok</p>
+                      ) : mesajlar.map(m => {
+                        const benim = m.gonderen === session.user?.email;
+                        return (
+                          <div key={m._id} style={{ display: "flex", justifyContent: benim ? "flex-end" : "flex-start" }}>
+                            <div style={{ maxWidth: "70%", padding: "10px 14px", borderRadius: benim ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: benim ? "#0f172a" : "#f1f5f9", color: benim ? "#fff" : "#0f172a", fontSize: 13, lineHeight: 1.5 }}>
+                              <p>{m.mesaj}</p>
+                              <p style={{ fontSize: 10, opacity: .6, marginTop: 4, textAlign: "right" }}>{formatTarih(m.createdAt)}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div ref={mesajSonuRef} />
+                    </div>
+                    <div style={{ padding: "12px 16px", borderTop: "1px solid #e2e8f0", display: "flex", gap: 8 }}>
+                      <input
+                        type="text" value={yeniMesaj}
+                        onChange={e => setYeniMesaj(e.target.value)}
+                        onKeyDown={e => e.key === "Enter" && mesajGonder()}
+                        placeholder="Mesajınızı yazın..."
+                        style={{ flex: 1, padding: "10px 14px", borderRadius: 10, border: "1.5px solid #e2e8f0", fontSize: 13, fontFamily: "inherit", outline: "none" }}
+                      />
+                      <button onClick={mesajGonder} style={{ padding: "10px 20px", borderRadius: 10, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Gönder</button>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
+          )}
 
-            {aiSonuc && (
-              <div className={`max-w-2xl mt-6 p-5 rounded-xl border text-[13px] font-bold flex items-center gap-2 ${aiSonuc.includes('❌') ? 'bg-red-50 border-red-200 text-red-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'}`}>
-                {aiSonuc}
+          {/* ── BİLDİRİMLER ── */}
+          {aktifTab === "bildirimler" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                <p className="sttl" style={{ marginBottom: 0 }}>Bildirimler</p>
+                {bildirimler.some(b => !b.okundu) && (
+                  <button onClick={async () => {
+                    await Promise.all(bildirimler.filter(b => !b.okundu).map(b => fetch("/api/bildirimler", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: b._id }) })));
+                    setBildirimler(p => p.map(b => ({ ...b, okundu: true })));
+                    setStats(p => ({ ...p, okunmamisBildirim: 0 }));
+                  }} style={{ padding: "7px 14px", borderRadius: 8, background: "#f1f5f9", border: "none", color: "#475569", fontFamily: "inherit", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                    Tümünü Okundu İşaretle
+                  </button>
+                )}
               </div>
-            )}
+              {bildirimler.length === 0 ? (
+                <div className="empty-box"><p style={{ fontSize: "2rem", marginBottom: 8 }}>🔔</p><p style={{ fontSize: 14, color: "#64748b" }}>Bildirim yok</p></div>
+              ) : bildirimler.map(b => (
+                <div key={b._id} onClick={() => !b.okundu && bildirimOku(b._id)} style={{ background: b.okundu ? "#fff" : "#eff6ff", border: `1.5px solid ${b.okundu ? "#e2e8f0" : "#bfdbfe"}`, borderRadius: 12, padding: "14px 16px", marginBottom: 8, cursor: b.okundu ? "default" : "pointer" }}>
+                  <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 20, flexShrink: 0 }}>{b.tip === "yeni_teklif" ? "💼" : b.tip === "teklif_kabul" ? "🎉" : "🔔"}</span>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: 13, color: "#0f172a", fontWeight: b.okundu ? 400 : 700, lineHeight: 1.5 }}>{b.mesaj}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>{formatTarih(b.tarih || b.createdAt)}</p>
+                      {b.ilanId && (
+                        <button onClick={e => { e.stopPropagation(); router.push(`/ilan/${b.ilanId}`); }} style={{ marginTop: 6, padding: "4px 10px", borderRadius: 6, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 10, fontWeight: 600, cursor: "pointer" }}>
+                          İlana Git →
+                        </button>
+                      )}
+                    </div>
+                    {!b.okundu && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#2563eb", flexShrink: 0, marginTop: 4 }} />}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── PROFİL ── */}
+          {aktifTab === "profil" && (
+            <div>
+              <p className="sttl">Profilim</p>
+              <div className="card">
+                <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 16 }}>
+                  <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: 64, height: 64, borderRadius: "50%", border: "3px solid #e2e8f0" }} />
+                  <div>
+                    <p style={{ fontSize: 18, fontWeight: 800, color: "#0f172a" }}>{session.user?.name}</p>
+                    <p style={{ fontSize: 13, color: "#64748b" }}>{session.user?.email}</p>
+                  </div>
+                </div>
+                <button onClick={() => router.push("/otel-profil")} style={{ padding: "11px 24px", borderRadius: 12, background: "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+                  🏢 Kurumsal Profil Oluştur / Güncelle
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── AYARLAR ── */}
+          {aktifTab === "ayarlar" && (
+            <div>
+              <p className="sttl">Hesap Ayarları</p>
+              <div className="card" style={{ marginBottom: 14 }}>
+                <p style={{ fontSize: 14, fontWeight: 700, marginBottom: 14, color: "#0f172a" }}>Profil Bilgileri</p>
+                {[
+                  { l: "Ad Soyad", v: session.user?.name || "", disabled: false },
+                  { l: "E-posta (değiştirilemez)", v: session.user?.email || "", disabled: true },
+                ].map(f => (
+                  <div key={f.l} style={{ marginBottom: 12 }}>
+                    <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>{f.l}</label>
+                    <input type="text" defaultValue={f.v} disabled={f.disabled} style={{ width: "100%", padding: "11px 14px", borderRadius: 11, border: "1.5px solid #e2e8f0", fontSize: 14, fontFamily: "inherit", background: f.disabled ? "#f8fafc" : "#fff", color: f.disabled ? "#94a3b8" : "#0f172a" }} />
+                  </div>
+                ))}
+                <button style={{ padding: "11px 24px", borderRadius: 11, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Kaydet</button>
+              </div>
+              <div className="card" style={{ background: "#fef2f2", borderColor: "#fecaca" }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: "#dc2626", marginBottom: 10 }}>Hesap İşlemleri</p>
+                <button onClick={() => signOut({ callbackUrl: "/" })} style={{ padding: "10px 20px", borderRadius: 10, background: "#dc2626", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Çıkış Yap</button>
+              </div>
+            </div>
+          )}
+
+          {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_bireysel" && (
+            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
+          {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
+          {isAdmin && aktifTab === "ai_ilan_ticari" && (
+            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Form elemanları için ortak stil
+const SEL: React.CSSProperties = { 
+  width: "100%", padding: "10px 12px", borderRadius: 10, 
+  border: "1.5px solid #e2e8f0", fontSize: 13, 
+  fontFamily: "inherit", background: "#fff", outline: "none" 
+};
+
+// AI İLAN BİLEŞENİ
+function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
+  const [secilenSektor, setSecilenSektor] = useState("");
+  const [rol, setRol] = useState("her-ikisi");
+  const [ulke, setUlke] = useState("Türkiye"); // Varsayılan olarak Türkiye seçili gelsin
+  const [sehir, setSehir] = useState("Rastgele");
+  const [adet, setAdet] = useState(5);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [sonuc, setSonuc] = useState("");
+
+  const uret = async () => {
+    if (!secilenSektor) return alert("Sektör seçin");
+    setYukleniyor(true); setSonuc("");
+    try {
+      const res = await fetch("/api/ai-ilan", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sektorId: secilenSektor, adet, tip, adminKey,
+          rol: rol === "her-ikisi" ? undefined : rol,
+          ulke: ulke === "Rastgele" ? null : ulke,
+          sehir: sehir === "Rastgele" ? null : sehir,
+          yapay: true
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSonuc(`✅ ${data.uretilen} adet ${tip} ilan ağa eklendi.`);
+        onSuccess();
+      } else setSonuc(`❌ Hata: ${data.error}`);
+    } catch { setSonuc("❌ Bağlantı hatası"); }
+    setYukleniyor(false);
+  };
+
+  return (
+    <div className="card">
+      <p className="sttl">{tip === 'ticari' ? '🏭 Endüstriyel B2B AI Motoru' : '🙋 Bireysel AI İlan Motoru'}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Rolü</label>
+          <select value={rol} onChange={e => setRol(e.target.value)} style={SEL}>
+            <option value="her-ikisi">🔄 Mix (Hem Alan Hem Veren)</option>
+            <option value="veren">💼 Sadece Hizmet/Ürün Veren</option>
+            <option value="alan">🛒 Sadece Hizmet/Ürün Alan</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Sektör</label>
+          <select value={secilenSektor} onChange={e => setSecilenSektor(e.target.value)} style={SEL}>
+            <option value="">-- Sektör Seçin --</option>
+            {sektorler.map(s => <option key={s.id} value={s.id}>{s.emoji} {s.ad}</option>)}
+          </select>
+        </div>
+      </div>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginBottom: 20 }}>
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
+          <select value={ulke} onChange={e => {
+              setUlke(e.target.value);
+              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); // Türkiye değilse şehri sıfırla
+          }} style={SEL}>
+            {ULKELER.map(u => <option key={u} value={u}>{u}</option>)}
+          </select>
+        </div>
+
+        {/* EĞER ÜLKE TÜRKİYE İSE ŞEHİR SEÇİMİ AÇILIR */}
+        {ulke === 'Türkiye' && (
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Şehir</label>
+            <select value={sehir} onChange={e => setSehir(e.target.value)} style={SEL}>
+              {SEHIRLER.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
           </div>
         )}
 
+        <div>
+          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Sayısı: {adet}</label>
+          <input type="range" min={1} max={30} value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ width: '100%', marginTop: 8 }} />
+        </div>
       </div>
 
-      {/* DÜZENLEME MODALI */}
-      {duzenleModal && (
-        <div className="fixed inset-0 z-[999] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-gray-200 rounded-3xl p-8 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
-              <h3 className="text-xl font-extrabold text-gray-900">Varlığı Düzenle</h3>
-              <button onClick={() => setDuzenleModal(null)} className="text-gray-400 hover:text-gray-700"><Trash2 size={20}/></button>
-            </div>
-            
-            <form onSubmit={handleDuzenleKaydet} className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Başlık</label>
-                  <input type="text" value={duzenleModal.baslik || ""} onChange={e => setDuzenleModal({...duzenleModal, baslik: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-semibold outline-none focus:border-indigo-500 focus:bg-white transition-colors" required />
-                </div>
-                <div>
-                  <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Fiyat (₺)</label>
-                  <input type="number" value={duzenleModal.fiyat || ""} onChange={e => setDuzenleModal({...duzenleModal, fiyat: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-indigo-700 font-black outline-none focus:border-indigo-500 focus:bg-white transition-colors" required />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Kategori</label>
-                <select className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-semibold outline-none focus:border-indigo-500 focus:bg-white transition-colors cursor-pointer" value={duzenleModal.kategori || ""} onChange={e => setDuzenleModal({...duzenleModal, kategori: e.target.value})} required>
-                  <option value="" disabled>SEKTÖR SEÇİNİZ...</option>
-                  {AI_KATEGORILER.map(kat => (
-                    <option key={kat.id} value={kat.id}>{kat.icon} {kat.ad}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div>
-                  <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Şehir</label>
-                  <select className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-semibold outline-none focus:border-indigo-500 focus:bg-white transition-colors cursor-pointer" value={duzenleModal.sehir || ""} onChange={e => setDuzenleModal({...duzenleModal, sehir: e.target.value})} required>
-                    <option value="" disabled>Seçiniz...</option>
-                    {SEHIRLER.map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">İlçe</label>
-                  <input type="text" value={duzenleModal.ilce || ""} onChange={e => setDuzenleModal({...duzenleModal, ilce: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-semibold outline-none focus:border-indigo-500 focus:bg-white transition-colors" required />
-                </div>
-                <div>
-                  <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Mahalle</label>
-                  <input type="text" value={duzenleModal.mahalle || ""} onChange={e => setDuzenleModal({...duzenleModal, mahalle: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 font-semibold outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[11px] font-bold text-gray-600 uppercase mb-1.5 block ml-1">Açıklama / Şartlar</label>
-                <textarea value={duzenleModal.aciklama || ""} onChange={e => setDuzenleModal({...duzenleModal, aciklama: e.target.value})} rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3.5 text-gray-900 text-sm font-medium outline-none focus:border-indigo-500 focus:bg-white transition-colors resize-none" required></textarea>
-              </div>
-
-              <div className="flex gap-3 mt-8 pt-6 border-t border-gray-100">
-                <button type="button" onClick={() => setDuzenleModal(null)} className="flex-1 py-4 bg-white border border-gray-200 text-gray-700 font-bold text-[12px] uppercase rounded-xl hover:bg-gray-50 transition-colors">İptal</button>
-                <button type="submit" disabled={islemLoading} className="flex-1 py-4 bg-indigo-600 text-white font-bold text-[12px] uppercase rounded-xl hover:bg-indigo-700 transition-colors shadow-md">
-                  {islemLoading ? "KAYDEDİLİYOR..." : "DEĞİŞİKLİKLERİ KAYDET"}
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
-      
+      <button onClick={uret} disabled={yukleniyor || !secilenSektor} style={{ width: "100%", padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer" }}>
+        {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
+      </button>
+      {sonuc && <div style={{ marginTop: 16, padding: 12, borderRadius: 8, background: sonuc.includes('❌') ? '#fef2f2' : '#ecfdf5', color: sonuc.includes('❌') ? '#dc2626' : '#059669', fontSize: 13, fontWeight: 700 }}>{sonuc}</div>}
     </div>
+  );
+}
+
+export default function PanelPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>
+        Panel Yükleniyor...
+      </div>
+    }>
+      <PanelIcerik />
+    </Suspense>
   );
 }
