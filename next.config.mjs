@@ -71,10 +71,11 @@ const nextConfig = {
 
   // 🤖 AI/DİNAMİK ROTALAR İÇİN ÖZEL AYAR (Opsiyonel)
   experimental: {
-    // Server Actions ve optimizasyonlar
     serverActions: {
       bodySizeLimit: '2mb',
     },
+    optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'], // Kullandığın kütüphaneleri buraya ekle
+  },
   },
 };
 
