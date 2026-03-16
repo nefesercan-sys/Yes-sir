@@ -12,7 +12,7 @@ import { COUNTRIES, getCitiesForCountry } from "@/lib/countries";
 import MedyaYukleyici from "@/app/components/MedyaYukleyici";
 
 function IlanVerIcerik() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
 
