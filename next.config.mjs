@@ -76,7 +76,6 @@ const nextConfig = {
     },
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'], // Kullandığın kütüphaneleri buraya ekle
   },
-  },
 };
 
 export default nextConfig;
