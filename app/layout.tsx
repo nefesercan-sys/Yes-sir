@@ -2,10 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Dosya ağacınızdaki gerçek yerlerine göre import yolları düzeltildi:
-import { AuthProvider } from "@/app/components/AuthProviders"; 
+// Import yolları GitHub yapına göre tam olarak düzeltildi:
+import AuthProvider from "@/app/components/AuthProvider"; 
 import { ThemeProvider } from "@/components/providers/theme-provider";
-// import Analytics from "@/components/analytics/analytics"; // Analytics dosyası şu an depoda bulunamadı.
 
 const inter = Inter({
   subsets: ["latin"],
@@ -123,7 +122,6 @@ export default function RootLayout({
         >
           <AuthProvider>
             {children}
-            {/* <Analytics /> */}
           </AuthProvider>
         </ThemeProvider>
       </body>
