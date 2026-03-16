@@ -40,7 +40,7 @@ const DURUM_STIL: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession() || {};
   const router = useRouter();
   const searchParams = useSearchParams();
 
