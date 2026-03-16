@@ -2,10 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Provider importları (app/components altındaki dosya yapına göre)
-import { AuthProvider } from "@/app/components/AuthProvider";
-// Analytics ve ThemeProvider için dosyaların olduğundan emin ol
-import { Analytics } from "@/app/components/analytics/analytics"; 
+// Import yollarını proje yapına göre güncelledik
+import AuthProvider from "@/app/components/AuthProvider";
+import { Analytics } from "@/app/components/analytics/analytics";
 import { ThemeProvider } from "@/app/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
