@@ -1,5 +1,4 @@
 "use client";
-
 // ============================================================
 // SwapHubs — app/panel/page.tsx
 // Tam üye paneli + Adminler için Gizli AI İlan Motoru
@@ -7,19 +6,9 @@
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
 
-// --- SABİTLER VE YARDIMCI FONKSİYONLAR ---
-const DURUM_STIL: Record<string, { bg: string; c: string }> = {
-  aktif:          { bg: "#ecfdf5", c: "#059669" },
-  bekliyor:       { bg: "#fffbeb", c: "#d97706" },
-  kabul_edildi:   { bg: "#eff6ff", c: "#2563eb" },
-  reddedildi:     { bg: "#fef2f2", c: "#dc2626" },
-  tamamlandi:     { bg: "#f0fdf4", c: "#16a34a" },
-  iptal:          { bg: "#fef2f2", c: "#dc2626" },
-  gonullu_kapali: { bg: "#f1f5f9", c: "#64748b" },
-  geri_alindi:    { bg: "#f1f5f9", c: "#64748b" },
-};
-
+// --- EKSİK OLAN STİL FONKSİYONU BURAYA EKLENDİ ---
 const BTN_SM = (bg: string, c: string) => ({
   padding: "6px 12px",
   borderRadius: "8px",
@@ -32,10 +21,26 @@ const BTN_SM = (bg: string, c: string) => ({
   cursor: "pointer",
   transition: "all 0.15s",
 });
+// --------------------------------------------------
+
+const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
+const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
 type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari";
 type Rol = "alan" | "veren";
 type Tip = "bireysel" | "ticari";
+
+const DURUM_STIL: Record<string, { bg: string; c: string }> = {
+  aktif:          { bg: "#ecfdf5", c: "#059669" },
+  bekliyor:       { bg: "#fffbeb", c: "#d97706" },
+  kabul_edildi:   { bg: "#eff6ff", c: "#2563eb" },
+  reddedildi:     { bg: "#fef2f2", c: "#dc2626" },
+  tamamlandi:     { bg: "#f0fdf4", c: "#16a34a" },
+  iptal:          { bg: "#fef2f2", c: "#dc2626" },
+  gonullu_kapali: { bg: "#f1f5f9", c: "#64748b" },
+  geri_alindi:    { bg: "#f1f5f9", c: "#64748b" },
+  on_rezervasyon: { bg: "#eff6ff", c: "#2563eb" },
+};
 
 function PanelIcerik() {
   const { data: session, status } = useSession();
@@ -43,13 +48,15 @@ function PanelIcerik() {
   const searchParams = useSearchParams();
 
   // Admin Kontrolü
-  const isAdmin = session?.user?.email === 'nefesercan@gmail.com';
+  const isAdmin = session?.user?.email === 'nefesercan@gmail.com' || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
-  const [aktifTab, setAktifTab] = useState<Tab>((searchParams.get("tab") as Tab) || "ozet");
+  const [aktifTab, setAktifTab] = useState<Tab>(
+    (searchParams.get("tab") as Tab) || "ozet"
+  );
   const [tip, setTip] = useState<Tip>("ticari");
   const [rol, setRol] = useState<Rol>("alan");
 
-  // State Yönetimi
+  // Data
   const [ilanlar, setIlanlar] = useState<any[]>([]);
   const [teklifler, setTeklifler] = useState<any[]>([]);
   const [gelenTeklifler, setGelenTeklifler] = useState<any[]>([]);
@@ -68,12 +75,13 @@ function PanelIcerik() {
     okunmamisBildirim: 0, toplamSiparis: 0,
   });
 
-  // Veri Çekme Fonksiyonu
   const yukle = useCallback(async () => {
     if (!session?.user?.email) return;
     setLoading(true);
     try {
+      // Admin isek kendi paneline hem kendi ilanlarını hem de AI ilanlarını (denetim için) getir
       const ilanApiUrl = isAdmin ? "/api/ilanlar?limit=100" : "/api/ilanlar?kendi=true";
+
       const [ilanRes, teklifRes, gelenRes, sipRes, bilRes, konRes] = await Promise.all([
         fetch(ilanApiUrl),
         fetch("/api/teklifler?kendi=true"),
@@ -88,37 +96,48 @@ function PanelIcerik() {
         sipRes.json(), bilRes.json(), konRes.json(),
       ]);
 
-      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.ilanlar || [];
-      const filtreIlanlar = tumIlanlar.filter((i: any) => isAdmin ? true : (i.rol === rol && i.tip === tip));
+      const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.ilanlar || ilanD.data || [];
+      // Kullanıcı görünümü filtrelemesi
+      const filtreIlanlar = tumIlanlar.filter(
+        (i: any) => isAdmin ? true : (i.rol === rol && i.tip === tip)
+      );
       
+      const tL = Array.isArray(teklifD) ? teklifD : [];
+      const gL = Array.isArray(gelenD) ? gelenD : [];
+      const sL = Array.isArray(sipD) ? sipD : [];
+      const bL = Array.isArray(bilD) ? bilD : [];
+      const kL = Array.isArray(konD) ? konD : [];
+
       setIlanlar(filtreIlanlar);
-      setTeklifler(Array.isArray(teklifD) ? teklifD : []);
-      setGelenTeklifler(Array.isArray(gelenD) ? gelenD : []);
-      setSiparisler(Array.isArray(sipD) ? sipD : []);
-      setBildirimler(Array.isArray(bilD) ? bilD : []);
-      setKonusmalar(Array.isArray(konD) ? konD : []);
+      setTeklifler(tL);
+      setGelenTeklifler(gL);
+      setSiparisler(sL);
+      setBildirimler(bL);
+      setKonusmalar(kL);
 
       setStats({
         aktifIlan: filtreIlanlar.filter((i: any) => i.durum === "aktif").length,
-        bekleyenTeklif: Array.isArray(teklifD) ? teklifD.filter((t: any) => t.durum === "bekliyor").length : 0,
-        gelenTeklif: Array.isArray(gelenD) ? gelenD.filter((t: any) => t.durum === "bekliyor").length : 0,
-        okunmamisBildirim: Array.isArray(bilD) ? bilD.filter((b: any) => !b.okundu).length : 0,
-        toplamSiparis: Array.isArray(sipD) ? sipD.length : 0,
+        bekleyenTeklif: tL.filter((t: any) => t.durum === "bekliyor").length,
+        gelenTeklif: gL.filter((t: any) => t.durum === "bekliyor").length,
+        okunmamisBildirim: bL.filter((b: any) => !b.okundu).length,
+        toplamSiparis: sL.length,
       });
     } catch (e) { console.error(e); }
     setLoading(false);
   }, [session, rol, tip, isAdmin]);
 
   useEffect(() => {
-    if (status === "unauthenticated") router.push("/giris?redirect=/panel");
+    if (status === "unauthenticated") { router.push("/giris?redirect=/panel"); return; }
     if (session) yukle();
   }, [session, status, yukle]);
 
-  // Mesajlaşma İşlemleri
+  // Mesajları yükle
   const mesajYukle = useCallback(async (karsiEmail: string, ilanId?: string) => {
     setMesajYukleniyor(true);
     try {
-      const res = await fetch(`/api/mesajlar?with=${karsiEmail}${ilanId ? `&ilanId=${ilanId}` : ''}`);
+      const params = new URLSearchParams({ with: karsiEmail });
+      if (ilanId) params.set("ilanId", ilanId);
+      const res = await fetch(`/api/mesajlar?${params}`);
       const data = await res.json();
       setMesajlar(Array.isArray(data) ? data : []);
     } catch {}
@@ -149,165 +168,353 @@ function PanelIcerik() {
     } catch {}
   };
 
-  const formatTarih = (t: any) => t ? new Date(t).toLocaleDateString("tr-TR") : "-";
-  const formatSayi = (s: any) => Number(s || 0).toLocaleString("tr-TR");
+  const teklifDurumGuncelle = async (teklifId: string, durum: string) => {
+    await fetch("/api/teklifler", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ teklifId, durum }),
+    });
+    yukle();
+  };
 
-  if (status === "loading") return <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>⏳ Siber Panel Yükleniyor...</div>;
+  const bildirimOku = async (id: string) => {
+    await fetch("/api/bildirimler", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    setBildirimler(p => p.map(b => b._id === id ? { ...b, okundu: true } : b));
+    setStats(p => ({ ...p, okunmamisBildirim: Math.max(0, p.okunmamisBildirim - 1) }));
+  };
+
+  const ilanSil = async (id: string) => {
+    if (!confirm("İlanı silmek istediğinize emin misiniz?")) return;
+    await fetch(`/api/ilanlar/${id}`, { method: "DELETE" });
+    yukle();
+  };
+
+  // Güvenli Tarih Formatlayıcı
+  const formatTarih = (tarihStr: any) => {
+    if (!tarihStr) return "Tarih Yok";
+    const d = new Date(tarihStr);
+    return isNaN(d.getTime()) ? "Geçersiz Tarih" : d.toLocaleDateString("tr-TR");
+  };
+
+  // Güvenli Sayı Formatlayıcı
+  const formatSayi = (sayiStr: any) => {
+    const s = Number(sayiStr);
+    return isNaN(s) ? 0 : s.toLocaleString("tr-TR");
+  };
+
+  if (status === "loading") return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b", fontSize: 14, fontWeight: 600 }}>
+      ⏳ Siber Kimlik Doğrulanıyor...
+    </div>
+  );
   if (!session) return null;
 
   const TABS: { key: Tab; label: string; icon: string; badge?: number; adminOnly?: boolean }[] = [
     { key: "ozet", label: "Özet", icon: "📊" },
-    { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar" : "İlanlarım", icon: "📋", badge: stats.aktifIlan },
+    { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar (Denetim)" : (rol === "alan" ? "Taleplerim" : "İlanlarım"), icon: "📋", badge: stats.aktifIlan },
     { key: "gelenTeklifler", label: "Gelen Teklifler", icon: "📥", badge: stats.gelenTeklif },
     { key: "tekliflerim", label: "Verdiğim Teklifler", icon: "💼", badge: stats.bekleyenTeklif },
     { key: "siparisler", label: "Siparişler", icon: "📦", badge: stats.toplamSiparis },
-    { key: "mesajlar", label: "Mesajlarım", icon: "💬" },
+    { key: "mesajlar", label: "Mesajlarım", icon: "💬", badge: konusmalar.filter((k: any) => k.okunmamis > 0).length || undefined },
     { key: "bildirimler", label: "Bildirimler", icon: "🔔", badge: stats.okunmamisBildirim },
-    { key: "ai_ilan_bireysel", label: "🤖 AI (Bireysel)", icon: "⚡", adminOnly: true },
-    { key: "ai_ilan_ticari", label: "🤖 AI (B2B)", icon: "🏭", adminOnly: true },
-    { key: "profil", label: "Profil", icon: "🏢" },
+    { key: "profil", label: "Profilim", icon: "🏢" },
+    { key: "ayarlar", label: "Ayarlar", icon: "⚙️" },
+    // ADMIN ÖZEL SEKMELER
+    { key: "ai_ilan_bireysel", label: "🤖 AI İlan (Bireysel)", icon: "⚡", adminOnly: true },
+    { key: "ai_ilan_ticari", label: "🤖 AI İlan (B2B)", icon: "🏭", adminOnly: true },
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc" }}>
+    <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       <style dangerouslySetInnerHTML={{ __html: `
-        .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
-        .sidebar { background: #fff; border-right: 1px solid #e2e8f0; padding: 20px 10px; position: sticky; top: 0; height: 100vh; }
-        .tab-btn { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; background: transparent; color: #475569; transition: .2s; margin-bottom: 2px; }
-        .tab-btn.on { background: #0f172a; color: #fff; }
-        .tab-btn:hover:not(.on) { background: #f1f5f9; }
-        .badge { background: #f59e0b; color: #000; font-size: 10px; padding: 2px 6px; border-radius: 99px; margin-left: auto; }
-        .card { background: #fff; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 20px; margin-bottom: 16px; }
-        .row-item { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
-        .sttl { font-size: 18px; font-weight: 800; margin-bottom: 20px; font-family: sans-serif; }
-        @media (max-width: 768px) { .panel-layout { display: flex; flex-direction: column; } .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid #e2e8f0; } }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 58px); }
+        .sidebar { background: #fff; border-right: 1px solid #e2e8f0; padding: 16px 10px; position: sticky; top: 58px; height: calc(100vh - 58px); overflow-y: auto; }
+        .main-area { padding: 22px 20px; max-width: 1000px; }
+        .card { background: #fff; border-radius: 16px; border: 1.5px solid #e2e8f0; padding: 18px; }
+        .row-item { background: #fff; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 14px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; transition: .15s; }
+        .row-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+        .tab-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 10px; border: none; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; text-align: left; margin-bottom: 2px; transition: .12s; background: transparent; color: #475569; }
+        .tab-btn.on { background: #0f172a; color: #fff; font-weight: 700; }
+        .tab-btn:not(.on):hover { background: #f1f5f9; }
+        .admin-tab { background: rgba(124, 58, 237, 0.05); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.2); }
+        .admin-tab.on { background: #7c3aed; color: #fff; }
+        .badge-dot { background: #f59e0b; color: #0f172a; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 99px; margin-left: auto; }
+        .dur { padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+        .sttl { font-size: 18px; font-weight: 800; color: #0f172a; font-family: 'Unbounded', sans-serif; margin-bottom: 16px; }
+        .empty-box { text-align: center; padding: 48px; background: #fff; border-radius: 18px; border: 1.5px dashed #e2e8f0; }
+        .adm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: none; }
+        @media (max-width: 768px) {
+          .panel-layout { display: flex; flex-direction: column; }
+          .sidebar { position: static; height: auto; overflow-x: auto; overflow-y: hidden; padding: 0; border-right: none; border-bottom: 1px solid #e2e8f0; }
+          .sidebar > div { display: none !important; }
+          .sidebar > div:last-child { display: flex !important; overflow-x: auto; padding: 10px 12px; gap: 6px; white-space: nowrap; }
+          .tab-btn { width: auto; flex-shrink: 0; margin-bottom: 0; padding: 8px 12px; }
+          .main-area { padding: 14px; }
+        }
       `}} />
+
+      {/* TOPBAR */}
+      <div style={{ background: "#0f172a", padding: "0 20px", height: 58, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => router.push("/")} style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", padding: "5px 12px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: "inherit" }}>← Ana Sayfa</button>
+          <span style={{ color: "#fff", fontSize: 15, fontWeight: 800, fontFamily: "Unbounded, sans-serif" }}>🌐 SwapHubs Panel</span>
+          {isAdmin && <span style={{ background: "#dc2626", color: "#fff", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 4, marginLeft: 8 }}>ADMİN</span>}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {stats.okunmamisBildirim > 0 && (
+            <div style={{ background: "#dc2626", color: "#fff", borderRadius: 99, padding: "2px 8px", fontSize: 11, fontWeight: 800 }}>
+              🔔 {stats.okunmamisBildirim}
+            </div>
+          )}
+          <img
+            src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`}
+            alt="" style={{ width: 32, height: 32, borderRadius: "50%", border: "2px solid rgba(245,158,11,.4)" }}
+          />
+          <span style={{ color: "rgba(255,255,255,.7)", fontSize: 12 }}>{session.user?.name?.split(" ")[0]}</span>
+          <button onClick={() => signOut({ callbackUrl: "/" })} style={{ background: "rgba(255,255,255,.08)", border: "none", color: "rgba(255,255,255,.6)", padding: "5px 10px", borderRadius: 8, cursor: "pointer", fontSize: 11, fontFamily: "inherit" }}>Çıkış</button>
+        </div>
+      </div>
 
       <div className="panel-layout">
         {/* SIDEBAR */}
-        <aside className="sidebar">
-          <div style={{ padding: "0 10px 20px" }}>
-            <h2 style={{ fontSize: 16, fontWeight: 800 }}>SwapHubs</h2>
-            <p style={{ fontSize: 11, color: "#94a3b8" }}>{session.user?.email}</p>
+        <div className="sidebar">
+          {/* Kullanıcı */}
+          <div style={{ padding: "12px", background: "#f8fafc", borderRadius: 12, marginBottom: 14 }}>
+            <img src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || "U")}&background=1e3a5f&color=f59e0b`} alt="" style={{ width: 40, height: 40, borderRadius: "50%", display: "block", marginBottom: 6 }} />
+            <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{session.user?.name}</p>
+            <p style={{ fontSize: 10, color: "#94a3b8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{session.user?.email}</p>
           </div>
 
-          <div style={{ display: "flex", gap: 5, background: "#f1f5f9", padding: 4, borderRadius: 10, marginBottom: 20 }}>
-            {["bireysel", "ticari"].map(t => (
-              <button key={t} onClick={() => setTip(t as Tip)} style={{ flex: 1, padding: "6px", border: "none", borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: "pointer", background: tip === t ? "#fff" : "transparent", boxShadow: tip === t ? "0 2px 4px rgba(0,0,0,0.05)" : "none" }}>{t.toUpperCase()}</button>
+          {/* Kimlik şalteri */}
+          <div style={{ background: "#f8fafc", borderRadius: 12, padding: "10px", marginBottom: 12, border: "1px solid #e2e8f0" }}>
+            <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", marginBottom: 8 }}>Panel Görünümü</p>
+            <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, marginBottom: 8, border: "1px solid #e2e8f0" }}>
+              {(["bireysel", "ticari"] as const).map(t => (
+                <button key={t} onClick={() => setTip(t)} style={{ flex: 1, padding: "6px 4px", border: "none", borderRadius: 6, background: tip === t ? (t === "ticari" ? "#f59e0b" : "#2563eb") : "transparent", color: tip === t ? (t === "ticari" ? "#0f172a" : "#fff") : "#64748b", fontFamily: "inherit", fontWeight: 600, fontSize: 11, cursor: "pointer" }}>
+                  {t === "bireysel" ? "👤 Bireysel" : "🏭 Ticari"}
+                </button>
+              ))}
+            </div>
+            <div style={{ display: "flex", background: "#fff", padding: 3, borderRadius: 8, border: "1px solid #e2e8f0" }}>
+              {(["alan", "veren"] as const).map(r => (
+                <button key={r} onClick={() => setRol(r)} style={{ flex: 1, padding: "6px 4px", border: "none", borderRadius: 6, background: rol === r ? (r === "alan" ? "#0f172a" : "#dc2626") : "transparent", color: rol === r ? "#fff" : "#64748b", fontFamily: "inherit", fontWeight: 600, fontSize: 10, cursor: "pointer" }}>
+                  {r === "alan" ? "🛒 Alıyorum" : "💼 Veriyorum"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Menü */}
+          <div>
+            {TABS.filter(t => !t.adminOnly || isAdmin).map(t => (
+              <button 
+                key={t.key} 
+                className={`tab-btn ${aktifTab === t.key ? "on" : ""} ${t.adminOnly ? 'admin-tab' : ''}`} 
+                onClick={() => setAktifTab(t.key)}
+              >
+                <span>{t.icon}</span>
+                <span style={{ flex: 1 }}>{t.label}</span>
+                {t.badge ? <span className="badge-dot">{t.badge}</span> : null}
+              </button>
             ))}
           </div>
 
-          {TABS.filter(t => !t.adminOnly || isAdmin).map(t => (
-            <button key={t.key} className={`tab-btn ${aktifTab === t.key ? "on" : ""}`} onClick={() => setAktifTab(t.key)}>
-              <span>{t.icon}</span> {t.label} {t.badge ? <span className="badge">{t.badge}</span> : null}
+          {/* Yeni İlan butonu */}
+          <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #e2e8f0" }}>
+            <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ width: "100%", padding: "10px", borderRadius: 10, background: "#f59e0b", border: "none", color: "#0f172a", fontFamily: "inherit", fontSize: 12, fontWeight: 800, cursor: "pointer" }}>
+              ⚡ Yeni İlan Ver
             </button>
-          ))}
+          </div>
+        </div>
 
-          <button onClick={() => signOut()} style={{ ...BTN_SM("transparent", "#dc2626"), width: "100%", marginTop: 20, textAlign: "left" }}>🚪 Çıkış Yap</button>
-        </aside>
+        {/* ANA ALAN */}
+        <div className="main-area">
 
-        {/* MAIN AREA */}
-        <main style={{ padding: 30 }}>
-          
+          {/* ── ÖZET ── */}
           {aktifTab === "ozet" && (
             <div>
-              <p className="sttl">Hoş geldin, {session.user?.name} 👋</p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 15, marginBottom: 30 }}>
-                <div className="card"><h3>{stats.aktifIlan}</h3><p>Aktif İlan</p></div>
-                <div className="card"><h3>{stats.gelenTeklif}</h3><p>Gelen Teklif</p></div>
-                <div className="card"><h3>{stats.toplamSiparis}</h3><p>Siparişler</p></div>
-              </div>
-            </div>
-          )}
-
-          {aktifTab === "ilanlarim" && (
-            <div>
-              <p className="sttl">İlanlarım ({ilanlar.length})</p>
-              {ilanlar.map(i => (
-                <div key={i._id} className="row-item">
-                  <div style={{ flex: 1 }}>
-                    <p style={{ fontWeight: 700 }}>{i.baslik}</p>
-                    <p style={{ fontSize: 12, color: "#64748b" }}>{i.tip} - {i.rol} | {formatTarih(i.createdAt)}</p>
-                  </div>
-                  <span style={{ ...DURUM_STIL[i.durum], padding: "4px 8px", borderRadius: 6, fontSize: 10, fontWeight: 800 }}>{i.durum?.toUpperCase()}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {aktifTab === "mesajlar" && (
-            <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, height: 500, background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", overflow: "hidden" }}>
-              <div style={{ borderRight: "1px solid #e2e8f0", overflowY: "auto", background: "#f8fafc" }}>
-                {konusmalar.map(k => (
-                  <div key={k._id} onClick={() => setAktifKonusma(k._id)} style={{ padding: 15, cursor: "pointer", borderBottom: "1px solid #eee", background: aktifKonusma === k._id ? "#fff" : "transparent" }}>
-                    <p style={{ fontSize: 13, fontWeight: 700 }}>{k.karsiTarafAd || k.karsiTaraf}</p>
-                    <p style={{ fontSize: 11, color: "#64748b" }}>{k.sonMesaj}</p>
+              <p className="sttl">Hoş geldiniz, {session.user?.name?.split(" ")[0]} 👋</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12, marginBottom: 24 }}>
+                {[
+                  { l: isAdmin ? "Sistemdeki İlanlar" : "Aktif İlan", v: stats.aktifIlan, i: "📋", c: "#2563eb" },
+                  { l: "Gelen Teklif", v: stats.gelenTeklif, i: "📥", c: "#d97706" },
+                  { l: "Verdiğim Teklif", v: stats.bekleyenTeklif, i: "💼", c: "#7c3aed" },
+                  { l: "Sipariş", v: stats.toplamSiparis, i: "📦", c: "#059669" },
+                ].map(s => (
+                  <div key={s.l} className="card" style={{ textAlign: "center" }}>
+                    <p style={{ fontSize: 22, marginBottom: 6 }}>{s.i}</p>
+                    <p style={{ fontSize: 26, fontWeight: 800, color: s.c, fontFamily: "Unbounded, sans-serif" }}>{s.v}</p>
+                    <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 3 }}>{s.l}</p>
                   </div>
                 ))}
               </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ flex: 1, padding: 20, overflowY: "auto" }}>
-                  {mesajlar.map((m, idx) => (
-                    <div key={idx} style={{ alignSelf: m.gonderen === session.user?.email ? "flex-end" : "flex-start", background: m.gonderen === session.user?.email ? "#0f172a" : "#f1f5f9", color: m.gonderen === session.user?.email ? "#fff" : "#000", padding: "8px 12px", borderRadius: 12, marginBottom: 8, maxWidth: "70%" }}>{m.mesaj}</div>
-                  ))}
-                  <div ref={mesajSonuRef} />
-                </div>
-                <div style={{ padding: 15, borderTop: "1px solid #eee", display: "flex", gap: 10 }}>
-                  <input value={yeniMesaj} onChange={(e) => setYeniMesaj(e.target.value)} placeholder="Yazın..." style={{ flex: 1, padding: 10, borderRadius: 8, border: "1px solid #ddd" }} />
-                  <button onClick={mesajGonder} style={{ padding: "10px 20px", background: "#0f172a", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700 }}>Gönder</button>
-                </div>
-              </div>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>{isAdmin ? 'Sistemdeki Son İlanlar' : 'Son İlanlarım'}</p>
+              {loading ? <p style={{ color: "#94a3b8", fontSize: 13 }}>Yükleniyor...</p> :
+                ilanlar.slice(0, 5).length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📋</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Bu kimlikte henüz ilanınız yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "9px 20px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>İlan Ver</button>
+                  </div>
+                ) : ilanlar.slice(0, 5).map(i => (
+                  <div key={i._id} className="row-item" style={{ cursor: "pointer" }} onClick={() => router.push(`/ilan/${i._id}`)}>
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
+                      <p style={{ fontSize: 11, color: "#64748b" }}>
+                        {i.yapay || i.is_ai_generated ? <span style={{color: '#7c3aed', fontWeight: 700}}>🤖 AI İlanı · </span> : ''}
+                        {i.teklifSayisi || 0} teklif · {formatTarih(i.createdAt)}
+                      </p>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
+                  </div>
+                ))}
             </div>
           )}
 
-          {(aktifTab === "ai_ilan_bireysel" || aktifTab === "ai_ilan_ticari") && isAdmin && (
-            <AIPanel tip={aktifTab === "ai_ilan_bireysel" ? "bireysel" : "ticari"} />
+          {/* ── İLANLARIM ── */}
+          {aktifTab === "ilanlarim" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                <p className="sttl" style={{ marginBottom: 0 }}>{isAdmin ? 'Tüm Sistem İlanları' : 'İlanlarım'} ({ilanlar.length})</p>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {ilanlar.length > 0 && (
+                    <button onClick={async () => {
+                      if (!confirm("Tüm ilanlar silinecek!")) return;
+                      await Promise.all(ilanlar.map(i => fetch(`/api/ilanlar/${i._id}`, { method: "DELETE" })));
+                      yukle();
+                    }} style={{ padding: "8px 14px", borderRadius: 10, background: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626", fontFamily: "inherit", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>Tümünü Sil</button>
+                  )}
+                  <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "8px 14px", borderRadius: 10, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>+ Yeni İlan</button>
+                </div>
+              </div>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                ilanlar.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📋</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Henüz ilan yok</p>
+                    <button onClick={() => router.push(`/ilan-ver?tip=${tip}&rol=${rol}`)} style={{ padding: "10px 24px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>İlan Ver</button>
+                  </div>
+                ) : ilanlar.map(i => (
+                  <div key={i._id} className="row-item">
+                    <div style={{ width: 60, height: 60, borderRadius: 10, background: "#f1f5f9", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
+                      {i.resimUrl || i.medyalar?.[0] ? <img src={i.resimUrl || i.medyalar[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : "📋"}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginBottom: 3 }}>
+                        <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
+                           <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{i.baslik}</p>
+                           {i.yapay || i.is_ai_generated ? <span style={{background: '#f5f3ff', color: '#7c3aed', fontSize: 9, fontWeight: 800, padding: '2px 6px', borderRadius: 4}}>AI</span> : null}
+                        </div>
+                        <span className="dur" style={DURUM_STIL[i.durum] ? { background: DURUM_STIL[i.durum].bg, color: DURUM_STIL[i.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{i.durum}</span>
+                      </div>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>
+                        {i.butceMin > 0 ? `${formatSayi(i.butceMin)} ${i.butceBirimi}` : "Bütçe açık"}
+                      </p>
+                      <div style={{ display: "flex", gap: 10, fontSize: 11, color: "#94a3b8", marginBottom: 8, flexWrap: "wrap" }}>
+                        <span style={{background: '#f1f5f9', padding: '2px 6px', borderRadius: 4, color: '#475569'}}>{i.tip} / {i.rol}</span>
+                        <span>💼 {i.teklifSayisi || 0} teklif</span>
+                        <span>👁 {i.goruntulenme || 0} görüntülenme</span>
+                        <span>📅 {formatTarih(i.createdAt)}</span>
+                      </div>
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                        <button onClick={() => router.push(`/ilan/${i._id}`)} style={BTN_SM("#f1f5f9", "#475569")}>Detay / Teklifler</button>
+                        <button onClick={() => { setAktifTab("mesajlar"); }} style={BTN_SM("#eff6ff", "#2563eb")}>💬 Mesajlar</button>
+                        {!isAdmin && (
+                          <button onClick={async () => { await fetch(`/api/ilanlar/${i._id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ teklifeAcik: !i.teklifeAcik }) }); yukle(); }} style={BTN_SM(i.teklifeAcik ? "#fef9c3" : "#ecfdf5", i.teklifeAcik ? "#92400e" : "#059669")}>
+                            {i.teklifeAcik ? "🟡 Kapat" : "🟢 Aç"}
+                          </button>
+                        )}
+                        <button onClick={() => ilanSil(i._id)} style={BTN_SM("#fef2f2", "#dc2626")}>Sil</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
           )}
 
-        </main>
-      </div>
-    </div>
-  );
-}
+          {/* ── GELEN TEKLİFLER ── */}
+          {aktifTab === "gelenTeklifler" && (
+            <div>
+              <p className="sttl">Gelen Teklifler ({gelenTeklifler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                gelenTeklifler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📥</p>
+                    <p style={{ fontSize: 14, color: "#64748b" }}>Henüz gelen teklif yok</p>
+                  </div>
+                ) : gelenTeklifler.map(t => (
+                  <div key={t._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>📥</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2 }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
+                      {t.aciklama && <p style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>{t.aciklama.slice(0, 80)}...</p>}
+                      <p style={{ fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
+                        👤 {t.teklifVeren?.ad || t.teklifVeren?.email || 'Bilinmiyor'} · {formatTarih(t.olusturuldu || t.createdAt)}
+                      </p>
+                      {t.durum === "bekliyor" && (
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button onClick={() => teklifDurumGuncelle(t._id, "kabul_edildi")} style={BTN_SM("#ecfdf5", "#059669")}>✅ Kabul Et</button>
+                          <button onClick={() => teklifDurumGuncelle(t._id, "reddedildi")} style={BTN_SM("#fef2f2", "#dc2626")}>❌ Reddet</button>
+                          <button onClick={() => { setAktifKonusma(t._id); setAktifTab("mesajlar"); }} style={BTN_SM("#eff6ff", "#2563eb")}>💬 Mesaj</button>
+                        </div>
+                      )}
+                    </div>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
+                  </div>
+                ))}
+            </div>
+          )}
 
-function AIPanel({ tip }: { tip: Tip }) {
-  const [loading, setLoading] = useState(false);
-  const [adet, setAdet] = useState(1);
-  const [log, setLog] = useState<string[]>([]);
+          {/* ── VERDİĞİM TEKLİFLER ── */}
+          {aktifTab === "tekliflerim" && (
+            <div>
+              <p className="sttl">Verdiğim Teklifler ({teklifler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                teklifler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>💼</p>
+                    <p style={{ fontSize: 14, color: "#64748b", marginBottom: 12 }}>Henüz teklif vermemişsiniz</p>
+                    <button onClick={() => router.push("/")} style={{ padding: "10px 24px", borderRadius: 10, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>İlanlara Bak</button>
+                  </div>
+                ) : teklifler.map(t => (
+                  <div key={t._id} className="row-item">
+                    <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>💼</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.ilanBaslik || 'İlan Silinmiş'}</p>
+                      <p style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{formatSayi(t.teklifFiyat)} {t.doviz || '₺'}</p>
+                      <p style={{ fontSize: 10, color: "#94a3b8", marginBottom: 6 }}>{formatTarih(t.olusturuldu || t.createdAt)}</p>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button onClick={() => router.push(`/ilan/${t.ilanId}`)} style={BTN_SM("#eff6ff", "#2563eb")}>İlana Git</button>
+                        {t.durum === "bekliyor" && (
+                          <button onClick={() => teklifDurumGuncelle(t._id, "geri_alindi")} style={BTN_SM("#fef2f2", "#dc2626")}>Geri Al</button>
+                        )}
+                      </div>
+                    </div>
+                    <span className="dur" style={DURUM_STIL[t.durum] ? { background: DURUM_STIL[t.durum].bg, color: DURUM_STIL[t.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{t.durum || 'bekliyor'}</span>
+                  </div>
+                ))}
+            </div>
+          )}
 
-  const aiUret = async () => {
-    setLoading(true);
-    setLog(p => [`🚀 ${tip} üretimi başladı...`, ...p]);
-    try {
-      const res = await fetch("/api/admin/ai-generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tip, adet })
-      });
-      const data = await res.json();
-      setLog(p => [`✅ ${data.count} ilan oluşturuldu.`, ...p]);
-    } catch { setLog(p => ["❌ Hata oluştu.", ...p]); }
-    setLoading(false);
-  };
-
-  return (
-    <div className="card" style={{ border: "2px solid #7c3aed" }}>
-      <h2 style={{ color: "#7c3aed" }}>🤖 Nexus AI Evolution Engine</h2>
-      <div style={{ display: "flex", gap: 10, margin: "20px 0" }}>
-        <input type="number" value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ padding: 10, width: 80 }} />
-        <button onClick={aiUret} disabled={loading} style={{ flex: 1, background: "#7c3aed", color: "#fff", border: "none", borderRadius: 8, fontWeight: 800 }}>{loading ? "Üretiliyor..." : "İlan Üret"}</button>
-      </div>
-      <div style={{ background: "#1e1e2e", color: "#a6accd", padding: 15, borderRadius: 10, height: 150, overflowY: "auto", fontSize: 11, fontFamily: "monospace" }}>
-        {log.map((l, i) => <div key={i}>{`> ${l}`}</div>)}
-      </div>
-    </div>
-  );
-}
-
-export default function PanelPage() {
-  return (
-    <Suspense fallback={<div>Yükleniyor...</div>}>
-      <PanelIcerik />
-    </Suspense>
-  );
-}
+          {/* ── SİPARİŞLER ── */}
+          {aktifTab === "siparisler" && (
+            <div>
+              <p className="sttl">Siparişler ({siparisler.length})</p>
+              {loading ? <p style={{ color: "#94a3b8" }}>Yükleniyor...</p> :
+                siparisler.length === 0 ? (
+                  <div className="empty-box">
+                    <p style={{ fontSize: "2rem", marginBottom: 8 }}>📦</p>
+                    <p style={{ fontSize: 14, color: "#64748b" }}>Henüz sipariş yok</p>
+                  </div>
+                ) : siparisler.map(r => (
+                  <div key={r._id} cla
