@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Import yolları GitHub yapına göre tam olarak düzeltildi:
 import AuthProvider from "@/app/components/AuthProvider"; 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
@@ -33,39 +32,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
   alternates: {
     canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "tr_TR",
-    url: "https://swaphubs.com",
-    title: "SwapHubs | Ürün ve Hizmet Takas Platformu",
-    description: "Para yerine ürünlerinizi kullanarak ticaret yapabileceğiniz yeni nesil platform.",
-    siteName: "SwapHubs",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "SwapHubs Takas Platformu",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "SwapHubs | Takasın Yeni Adresi",
-    description: "Ürün ve hizmetlerinizi kullanarak ticaret yapabileceğiniz modern platform.",
-    images: ["/og-image.jpg"],
-    creator: "@swaphubs",
   },
 };
 
@@ -74,52 +43,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "SwapHubs",
-    "url": "https://swaphubs.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://swaphubs.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  };
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SwapHubs",
-    "url": "https://swaphubs.com",
-    "logo": "https://swaphubs.com/logo.png",
-    "sameAs": [
-      "https://twitter.com/swaphubs",
-      "https://instagram.com/swaphubs",
-      "https://linkedin.com/company/swaphubs"
-    ]
-  };
-
   return (
     <html lang="tr" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-      </head>
-      <body
-        className={`${inter.variable} font-sans min-h-screen bg-background antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className={`${inter.variable} font-sans min-h-screen bg-background antialiased`}>
+        {/* Hata veren attribute, defaultTheme vb. kısımları temizledim */}
+        <ThemeProvider>
           <AuthProvider>
             {children}
           </AuthProvider>
