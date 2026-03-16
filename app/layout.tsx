@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/providers/auth-provider"; // Örn: İsimleri kontrol et
+import { AuthProvider } from "@/providers/auth-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
-import Analytics from "@/components/analytics/analytics"; // Analytics bileşeni
-import { siteConfig } from "@/config/site"; // Eğer varsa config'den çekmek daha temizdir
+import Analytics from "@/components/analytics/analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,12 +11,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-// Viewport ayrı bir export olmalıdır
 export const viewport: Viewport = {
   themeColor: "#0f172a",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // Erişilebilirlik için 1 yerine 5 önerilir
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
@@ -54,7 +52,7 @@ export const metadata: Metadata = {
     siteName: "SwapHubs",
     images: [
       {
-        url: "/og-image.jpg", // public klasöründe olduğundan emin ol
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "SwapHubs Takas Platformu",
@@ -75,7 +73,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // JSON-LD Schema Verileri
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -104,7 +101,6 @@ export default function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
-        {/* JSON-LD verilerini dangerouslySetInnerHTML ile eklemek en performanslı yoldur */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
@@ -115,7 +111,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} min-h-screen bg-background font-sans antialiased`}
+        className={`${inter.variable} font-sans min-h-screen bg-background antialiased`}
       >
         <ThemeProvider
           attribute="class"
