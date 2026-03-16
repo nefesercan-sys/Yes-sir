@@ -3,6 +3,7 @@
 // SwapHubs — app/page.tsx
 // Global Ana Sayfa — Dönen vitrin, kategori, arama, destek
 // ============================================================
+export const dynamic = 'force-dynamic';
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
