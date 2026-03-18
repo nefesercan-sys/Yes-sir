@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "Explorer",
+    "giris": "Se connecter",
+    "kayit": "S'inscrire",
+    "panel": "Tableau de bord"
+  },
+  "hero": {
+    "badge": "Centre Mondial de Services & Produits",
+    "title1": "De la Turquie",
+    "title2": "vers le Monde,",
+    "title3": "Du Monde",
+    "title4": "vers la Turquie",
+    "sub": "Nous connectons fabricants, fournisseurs, prestataires de services et acheteurs sur une seule plateforme. Publiez des annonces, recevez des offres — entièrement gratuit.",
+    "ara": "Rechercher et Lister"
+  },
+  "toggle": {
+    "bireysel": "INDIVIDUEL",
+    "ticari": "COMMERCIAL & INDUSTRIEL"
+  },
+  "rol": {
+    "alan_ticari": "Recherche Fournisseur / Fabricant",
+    "alan_bireysel": "Recherche un Service",
+    "alan_sub": "Publiez une annonce, recevez des offres",
+    "veren_ticari": "Offre Production / Capacité",
+    "veren_bireysel": "Offre un Service",
+    "veren_sub": "Présentez votre service, trouvez des clients"
+  },
+  "vitrin": {
+    "ticari": "Marché Commercial",
+    "bireysel": "Annonces Individuelles",
+    "bulunan": "{count} annonces trouvées",
+    "bos": "Pas encore d'annonces — soyez le premier !",
+    "talep": "Créer une Annonce de Demande",
+    "hizmet": "Créer une Annonce de Service",
+    "teklif_ver": "Faire une Offre →",
+    "incele": "Voir →",
+    "teklif_al": "Obtenir une Offre"
+  },
+  "destek": {
+    "baslik": "Support en Direct",
+    "placeholder": "Écrivez votre message...",
+    "gonder": "Envoyer →",
+    "alindi": "Message reçu !",
+    "donus": "Nous vous répondrons dans les plus brefs délais."
+  },
+  "bottom": {
+    "ana": "Accueil",
+    "kesfet": "Explorer",
+    "ilan": "Publier",
+    "teklifler": "Offres",
+    "profil": "Profil"
+  },
+  "empty": {
+    "baslik": "Aucune annonce ne correspond à vos critères",
+    "sub": "Publiez la première annonce — commencez à recevoir des offres !",
+    "btn": "Publier Maintenant"
+  }
+}
