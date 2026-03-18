@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "Explore",
+    "giris": "Sign In",
+    "kayit": "Sign Up",
+    "panel": "Dashboard"
+  },
+  "hero": {
+    "badge": "Global Service & Product Hub",
+    "title1": "From Turkey",
+    "title2": "to the World,",
+    "title3": "From the World",
+    "title4": "to Turkey",
+    "sub": "Connecting manufacturers, suppliers, service providers and buyers on one platform. Post listings, receive offers — completely free.",
+    "ara": "Search & List"
+  },
+  "toggle": {
+    "bireysel": "INDIVIDUAL",
+    "ticari": "COMMERCIAL & INDUSTRIAL"
+  },
+  "rol": {
+    "alan_ticari": "Looking for Supplier / Manufacturer",
+    "alan_bireysel": "Looking for a Service",
+    "alan_sub": "Post a listing, get offers",
+    "veren_ticari": "Offering Production / Capacity",
+    "veren_bireysel": "Offering a Service",
+    "veren_sub": "Showcase your service, find clients"
+  },
+  "vitrin": {
+    "ticari": "Commercial Marketplace",
+    "bireysel": "Individual Listings",
+    "bulunan": "{count} listings found",
+    "bos": "No listings yet — be the first!",
+    "talep": "Create Request Listing",
+    "hizmet": "Create Service Listing",
+    "teklif_ver": "Make Offer →",
+    "incele": "View →",
+    "teklif_al": "Get Offer"
+  },
+  "destek": {
+    "baslik": "Live Support",
+    "placeholder": "Type your message...",
+    "gonder": "Send →",
+    "alindi": "Message received!",
+    "donus": "We'll get back to you shortly."
+  },
+  "bottom": {
+    "ana": "Home",
+    "kesfet": "Explore",
+    "ilan": "Post",
+    "teklifler": "Offers",
+    "profil": "Profile"
+  },
+  "empty": {
+    "baslik": "No listings match your criteria",
+    "sub": "Post the first listing — start receiving offers!",
+    "btn": "Post Now"
+  }
+}
