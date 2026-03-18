@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "Entdecken",
+    "giris": "Anmelden",
+    "kayit": "Registrieren",
+    "panel": "Dashboard"
+  },
+  "hero": {
+    "badge": "Globales Service & Produkt-Zentrum",
+    "title1": "Von der Türkei",
+    "title2": "in die Welt,",
+    "title3": "Von der Welt",
+    "title4": "in die Türkei",
+    "sub": "Wir verbinden Hersteller, Lieferanten, Dienstleister und Käufer auf einer Plattform. Inserate aufgeben, Angebote erhalten — völlig kostenlos.",
+    "ara": "Suchen & Auflisten"
+  },
+  "toggle": {
+    "bireysel": "INDIVIDUELL",
+    "ticari": "GEWERBLICH & INDUSTRIELL"
+  },
+  "rol": {
+    "alan_ticari": "Suche Lieferant / Hersteller",
+    "alan_bireysel": "Suche eine Dienstleistung",
+    "alan_sub": "Inserat aufgeben, Angebote erhalten",
+    "veren_ticari": "Biete Produktion / Kapazität an",
+    "veren_bireysel": "Biete Dienstleistung an",
+    "veren_sub": "Präsentieren Sie Ihren Service, finden Sie Kunden"
+  },
+  "vitrin": {
+    "ticari": "Gewerblicher Marktplatz",
+    "bireysel": "Individuelle Inserate",
+    "bulunan": "{count} Inserate gefunden",
+    "bos": "Noch keine Inserate — seien Sie der Erste!",
+    "talep": "Anfrage-Inserat erstellen",
+    "hizmet": "Service-Inserat erstellen",
+    "teklif_ver": "Angebot machen →",
+    "incele": "Ansehen →",
+    "teklif_al": "Angebot einholen"
+  },
+  "destek": {
+    "baslik": "Live-Support",
+    "placeholder": "Nachricht eingeben...",
+    "gonder": "Senden →",
+    "alindi": "Nachricht erhalten!",
+    "donus": "Wir melden uns so schnell wie möglich."
+  },
+  "bottom": {
+    "ana": "Startseite",
+    "kesfet": "Entdecken",
+    "ilan": "Inserieren",
+    "teklifler": "Angebote",
+    "profil": "Profil"
+  },
+  "empty": {
+    "baslik": "Keine Inserate entsprechen Ihren Kriterien",
+    "sub": "Erstellen Sie das erste Inserat — beginnen Sie mit dem Empfang von Angeboten!",
+    "btn": "Jetzt inserieren"
+  }
+}
