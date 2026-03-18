@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "探索",
+    "giris": "登录",
+    "kayit": "注册",
+    "panel": "控制台"
+  },
+  "hero": {
+    "badge": "全球服务与产品中心",
+    "title1": "从土耳其",
+    "title2": "走向世界，",
+    "title3": "从世界",
+    "title4": "走进土耳其",
+    "sub": "在一个平台上连接制造商、供应商、服务提供商和买家。发布广告，获取报价——完全免费。",
+    "ara": "搜索和列表"
+  },
+  "toggle": {
+    "bireysel": "个人",
+    "ticari": "商业与工业"
+  },
+  "rol": {
+    "alan_ticari": "寻找供应商/制造商",
+    "alan_bireysel": "寻找服务",
+    "alan_sub": "发布广告，获取报价",
+    "veren_ticari": "提供生产/产能",
+    "veren_bireysel": "提供服务",
+    "veren_sub": "展示您的服务，找到客户"
+  },
+  "vitrin": {
+    "ticari": "商业市场",
+    "bireysel": "个人广告",
+    "bulunan": "找到 {count} 个广告",
+    "bos": "暂无广告——成为第一个！",
+    "talep": "创建需求广告",
+    "hizmet": "创建服务广告",
+    "teklif_ver": "提交报价 →",
+    "incele": "查看 →",
+    "teklif_al": "获取报价"
+  },
+  "destek": {
+    "baslik": "在线支持",
+    "placeholder": "输入您的消息...",
+    "gonder": "发送 →",
+    "alindi": "消息已收到！",
+    "donus": "我们将尽快回复您。"
+  },
+  "bottom": {
+    "ana": "首页",
+    "kesfet": "探索",
+    "ilan": "发布",
+    "teklifler": "报价",
+    "profil": "个人资料"
+  },
+  "empty": {
+    "baslik": "没有符合您条件的广告",
+    "sub": "发布第一个广告——开始接收报价！",
+    "btn": "立即发布"
+  }
+}
