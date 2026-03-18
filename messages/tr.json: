@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "Keşfet",
+    "giris": "Giriş Yap",
+    "kayit": "Üye Ol",
+    "panel": "Panelim"
+  },
+  "hero": {
+    "badge": "Global Hizmet & Ürün Merkezi",
+    "title1": "Türkiye'den",
+    "title2": "Dünyaya,",
+    "title3": "Dünyadan",
+    "title4": "Türkiye'ye",
+    "sub": "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. İlan verin, teklif alın — tamamen ücretsiz.",
+    "ara": "Ara & Listele"
+  },
+  "toggle": {
+    "bireysel": "BİREYSEL",
+    "ticari": "TİCARİ & ENDÜSTRİYEL"
+  },
+  "rol": {
+    "alan_ticari": "Tedarikçi / Üretici Arıyorum",
+    "alan_bireysel": "Hizmet Almak İstiyorum",
+    "alan_sub": "İlan verin, teklifler size gelsin",
+    "veren_ticari": "Üretim / Kapasite Sunuyorum",
+    "veren_bireysel": "Hizmet Vermek İstiyorum",
+    "veren_sub": "Hizmetinizi sergileyin, müşteri bulun"
+  },
+  "vitrin": {
+    "ticari": "Ticari Pazar Yeri",
+    "bireysel": "Bireysel İlanlar",
+    "bulunan": "{count} ilan bulundu",
+    "bos": "Henüz ilan yok — ilk ilanı siz verin!",
+    "talep": "Talep İlanı Oluştur",
+    "hizmet": "Hizmet İlanı Oluştur",
+    "teklif_ver": "Teklif Ver →",
+    "incele": "İncele →",
+    "teklif_al": "Teklif Al"
+  },
+  "destek": {
+    "baslik": "Canlı Destek Hattı",
+    "placeholder": "Mesajınızı yazın...",
+    "gonder": "Gönder →",
+    "alindi": "Mesajınız alındı!",
+    "donus": "En kısa sürede dönüş yapacağız."
+  },
+  "bottom": {
+    "ana": "Ana Sayfa",
+    "kesfet": "Keşfet",
+    "ilan": "İlan Ver",
+    "teklifler": "Teklifler",
+    "profil": "Profilim"
+  },
+  "empty": {
+    "baslik": "Bu kriterlere uygun ilan bulunamadı",
+    "sub": "İlk ilanı siz verin — teklif almaya hemen başlayın!",
+    "btn": "Hemen İlan Ver"
+  }
+}
