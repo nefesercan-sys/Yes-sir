@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "kesfet": "Terokai",
+    "giris": "Log Masuk",
+    "kayit": "Daftar",
+    "panel": "Papan Pemuka"
+  },
+  "hero": {
+    "badge": "Pusat Perkhidmatan & Produk Global",
+    "title1": "Dari Turki",
+    "title2": "ke Dunia,",
+    "title3": "Dari Dunia",
+    "title4": "ke Turki",
+    "sub": "Menghubungkan pengilang, pembekal, penyedia perkhidmatan dan pembeli dalam satu platform. Siarkan iklan, terima tawaran — percuma sepenuhnya.",
+    "ara": "Cari & Senarai"
+  },
+  "toggle": {
+    "bireysel": "INDIVIDU",
+    "ticari": "KOMERSIAL & INDUSTRI"
+  },
+  "rol": {
+    "alan_ticari": "Mencari Pembekal / Pengilang",
+    "alan_bireysel": "Mencari Perkhidmatan",
+    "alan_sub": "Siarkan iklan, terima tawaran",
+    "veren_ticari": "Menawarkan Pengeluaran / Kapasiti",
+    "veren_bireysel": "Menawarkan Perkhidmatan",
+    "veren_sub": "Pamerkan perkhidmatan anda, cari pelanggan"
+  },
+  "vitrin": {
+    "ticari": "Pasaran Komersial",
+    "bireysel": "Iklan Individu",
+    "bulunan": "{count} iklan dijumpai",
+    "bos": "Tiada iklan lagi — jadilah yang pertama!",
+    "talep": "Buat Iklan Permintaan",
+    "hizmet": "Buat Iklan Perkhidmatan",
+    "teklif_ver": "Buat Tawaran →",
+    "incele": "Lihat →",
+    "teklif_al": "Dapatkan Tawaran"
+  },
+  "destek": {
+    "baslik": "Sokongan Langsung",
+    "placeholder": "Taip mesej anda...",
+    "gonder": "Hantar →",
+    "alindi": "Mesej diterima!",
+    "donus": "Kami akan menghubungi anda secepat mungkin."
+  },
+  "bottom": {
+    "ana": "Utama",
+    "kesfet": "Terokai",
+    "ilan": "Siar",
+    "teklifler": "Tawaran",
+    "profil": "Profil"
+  },
+  "empty": {
+    "baslik": "Tiada iklan yang sepadan dengan kriteria anda",
+    "sub": "Siarkan iklan pertama — mula terima tawaran!",
+    "btn": "Siar Sekarang"
+  }
+}
