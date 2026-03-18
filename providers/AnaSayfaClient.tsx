@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
@@ -65,7 +65,11 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
 
   const kategoriler = useMemo(() => {
     const liste = aktifTip === "ticari" ? TICARI_SEKTORLER : BIREYSEL_SEKTORLER;
-    const tumKategori = { id: "Tümü", ad: "Tüm Sektörler", icon: "🌐", tip: "both", renk: "#0f172a", altKategoriler: [], butceBirimi: "TL", hizmetAlanFormu: [], hizmetVerenFormu: [] } as any;
+    const tumKategori = {
+      id: "Tümü", ad: "Tüm Sektörler", icon: "🌐",
+      tip: "both", renk: "#0f172a", altKategoriler: [],
+      butceBirimi: "TL", hizmetAlanFormu: [], hizmetVerenFormu: []
+    } as any;
     return [tumKategori, ...liste];
   }, [aktifTip]);
 
@@ -94,7 +98,19 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
 
   const toplamSayfa = Math.ceil(filtreliIlanlar.length / SAYFA_BOYUTU);
   const fmt = (n: number) => new Intl.NumberFormat("tr-TR").format(n || 0);
-  const gorsel = (i: Ilan) => i.resimUrl || i.medyalar?.[0] || null;
+
+  // ✅ Optimize edilmiş görsel fonksiyonu
+  const gorsel = (i: Ilan) => {
+    const url = i.resimUrl || i.medyalar?.[0] || null;
+    if (!url) return null;
+    if (url.includes("res.cloudinary.com")) {
+      return url.replace("/upload/", "/upload/f_auto,q_auto:eco,w_400,h_185,c_fill/");
+    }
+    if (url.includes("unsplash.com")) {
+      return `${url.split("?")[0]}?auto=format&fit=crop&w=400&q=60`;
+    }
+    return url;
+  };
 
   const handleDestekGonder = async () => {
     if (!destekMesaj.trim()) return;
@@ -106,7 +122,11 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
       });
     } catch {}
     setDestekGonderildi(true);
-    setTimeout(() => { setDestekAcik(false); setDestekGonderildi(false); setDestekMesaj(""); }, 3000);
+    setTimeout(() => {
+      setDestekAcik(false);
+      setDestekGonderildi(false);
+      setDestekMesaj("");
+    }, 3000);
   };
 
   return (
@@ -136,9 +156,13 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
           Swap<span>Hubs</span>
         </a>
         <div className="nav-right">
-          <button className="nav-btn" onClick={() => router.push("/ilanlar")}>🔍 <span>Keşfet</span></button>
+          <button className="nav-btn" onClick={() => router.push("/ilanlar")}>
+            🔍 <span>Keşfet</span>
+          </button>
           {status === "authenticated" ? (
-            <button className="nav-btn primary" onClick={() => router.push("/panel")}>👤 <span>Panelim</span></button>
+            <button className="nav-btn primary" onClick={() => router.push("/panel")}>
+              👤 <span>Panelim</span>
+            </button>
           ) : (
             <>
               <button className="nav-btn" onClick={() => router.push("/giris")}>Giriş Yap</button>
@@ -190,12 +214,19 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
           <div className="arama-box">
             <input
               type="text"
-              placeholder={aktifTip === "ticari" ? "Örn: İzmir Fason Tekstil, Ankara Makine..." : "Örn: Boya Ustası, İngilizce Dersi, Nakliye..."}
+              placeholder={
+                aktifTip === "ticari"
+                  ? "Örn: İzmir Fason Tekstil, Ankara Makine..."
+                  : "Örn: Boya Ustası, İngilizce Dersi, Nakliye..."
+              }
               value={aramaQ}
               onChange={e => setAramaQ(e.target.value)}
               onKeyDown={e => e.key === "Enter" && router.push(`/ilanlar?q=${aramaQ}&tip=${aktifTip}&rol=${aktifRol}`)}
             />
-            <button className="arama-btn" onClick={() => router.push(`/ilanlar?q=${aramaQ}&tip=${aktifTip}&rol=${aktifRol}`)}>
+            <button
+              className="arama-btn"
+              onClick={() => router.push(`/ilanlar?q=${aramaQ}&tip=${aktifTip}&rol=${aktifRol}`)}
+            >
               Ara & Listele
             </button>
           </div>
@@ -286,7 +317,7 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
                       alt={ilan.baslik}
                       loading={idx < 4 ? "eager" : "lazy"}
                       fetchPriority={idx === 0 ? "high" : "auto"}
-                      width={270}
+                      width={400}
                       height={185}
                     />
                   ) : (
@@ -319,7 +350,9 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
                   </div>
                   <div className="kart-foot">
                     <div className="kart-butce">
-                      {(ilan.butceMin || 0) > 0 ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}` : "Teklif Al"}
+                      {(ilan.butceMin || 0) > 0
+                        ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}`
+                        : "Teklif Al"}
                     </div>
                     <button
                       className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
@@ -354,7 +387,10 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
         <div className="destek-panel">
           <div className="destek-head">
             <h4>💬 Canlı Destek Hattı</h4>
-            <button onClick={() => setDestekAcik(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,.6)", cursor: "pointer", fontSize: "1.1rem" }}>✕</button>
+            <button
+              onClick={() => setDestekAcik(false)}
+              style={{ background: "none", border: "none", color: "rgba(255,255,255,.6)", cursor: "pointer", fontSize: "1.1rem" }}
+            >✕</button>
           </div>
           <div className="destek-body">
             {destekGonderildi ? (
