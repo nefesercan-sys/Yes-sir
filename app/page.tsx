@@ -1,6 +1,5 @@
-// ============================================================
-// SwapHubs — app/page.tsx (Server Component)
-// ============================================================
+export const dynamic = "force-dynamic";
+
 import AnaSayfaClient from "@/providers/AnaSayfaClient";
 import { getDb } from "@/lib/mongodb";
 
