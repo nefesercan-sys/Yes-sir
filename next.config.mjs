@@ -1,19 +1,15 @@
 import createNextIntlPlugin from 'next-intl/plugin';
 
-// Parametre vermiyoruz, sistem src/i18n/request.ts dosyasını kendisi bulacak
+// BURASI KRİTİK: İçindeki yolu sildik. 
+// Eklenti otomatik olarak src/i18n/request.ts dosyasını bulacaktır.
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    remotePatterns: [{ protocol: 'https', hostname: '**' }],
   },
-  // Derleme hızını artırmak ve ufak hataları görmezden gelmek için:
+  // Hataları görmezden gelerek build'i zorla tamamlatır
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
 };
