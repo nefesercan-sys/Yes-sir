@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
 interface Ilan {
@@ -32,7 +33,12 @@ const STATS = [
   { v: "₺0", l: "İlan Ücreti" },
 ];
 
-export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any[] }) {
+interface Props {
+  initialIlanlar: any[];
+  ilkGorsel?: string | null;
+}
+
+export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
   const { data: session, status } = useSession() || {};
   const router = useRouter();
   const t = useTranslations();
@@ -102,7 +108,7 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
   const toplamSayfa = Math.ceil(filtreliIlanlar.length / SAYFA_BOYUTU);
   const fmt = (n: number) => new Intl.NumberFormat(locale).format(n || 0);
 
-  const gorsel = (i: Ilan) => {
+  const gorsel = (i: Ilan): string | null => {
     const url = i.resimUrl || i.medyalar?.[0] || null;
     if (!url) return null;
     if (url.includes("res.cloudinary.com")) {
@@ -171,7 +177,6 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
               <button className="nav-btn primary" onClick={() => router.push("/kayit")}>{t("nav.kayit")}</button>
             </>
           )}
-          {/* Dil seçici */}
           <select
             value={locale}
             onChange={e => router.push(`/${e.target.value}`)}
@@ -323,66 +328,76 @@ export default function AnaSayfaClient({ initialIlanlar }: { initialIlanlar: any
               </button>
             </div>
           ) : (
-            sayfaIlanlar.map((ilan, idx) => (
-              <div
-                key={ilan._id}
-                className="kart"
-                onClick={() => router.push(`/ilan/${ilan._id}`)}
-              >
-                <div className="kart-img">
-                  {gorsel(ilan) ? (
-                    <img
-                      src={gorsel(ilan)!}
-                      alt={ilan.baslik}
-                      loading={idx < 4 ? "eager" : "lazy"}
-                      fetchPriority={idx === 0 ? "high" : "auto"}
-                      width={400}
-                      height={185}
-                    />
-                  ) : (
-                    <span>
-                      {ilan.sektorId === "turizm" ? "🏨"
-                        : ilan.sektorId === "uretim" ? "🏭"
-                        : ilan.sektorId === "giyim" ? "👗"
-                        : ilan.sektorId === "lojistik" ? "🚢"
-                        : ilan.sektorId === "gida" ? "🌾"
-                        : ilan.tip === "ticari" ? "🏭" : "📋"}
-                    </span>
-                  )}
-                  <div className="kart-badges">
-                    <span className={`badge ${ilan.tip === "ticari" ? "b-ticari" : "b-bireysel"}`}>
-                      {ilan.tip === "ticari" ? t("toggle.ticari") : t("toggle.bireysel")}
-                    </span>
-                    <span className={`badge ${ilan.rol === "alan" ? "b-talep" : "b-hizmet"}`}>
-                      {ilan.rol === "alan" ? "🙋 TALEP" : "💼 HİZMET"}
-                    </span>
-                    {ilan.yapay === false && <span className="badge b-yeni">✓ GERÇEK</span>}
-                  </div>
-                </div>
-                <div className="kart-body">
-                  <div className="kart-kat">{ilan.kategori || ilan.sektorId || "Genel"}</div>
-                  <div className="kart-baslik">{ilan.baslik}</div>
-                  <div className="kart-meta">
-                    <span>📍 {ilan.ulke && ilan.ulke !== "Türkiye" ? `${ilan.ulke} · ` : ""}{ilan.sehir || "Global"}</span>
-                    <span>📅 {new Date(ilan.createdAt).toLocaleDateString(locale)}</span>
-                    {(ilan.teklifSayisi || 0) > 0 && <span>💼 {ilan.teklifSayisi} teklif</span>}
-                  </div>
-                  <div className="kart-foot">
-                    <div className="kart-butce">
-                      {(ilan.butceMin || 0) > 0
-                        ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}`
-                        : t("vitrin.teklif_al")}
+            sayfaIlanlar.map((ilan, idx) => {
+              const gorselUrl = gorsel(ilan);
+              const oncelikli = idx < 4;
+              return (
+                <div
+                  key={ilan._id}
+                  className="kart"
+                  onClick={() => router.push(`/ilan/${ilan._id}`)}
+                >
+                  <div className="kart-img">
+                    {gorselUrl ? (
+                      <div style={{ position: "relative", width: "100%", height: 185 }}>
+                        <Image
+                          src={gorselUrl}
+                          alt={ilan.baslik}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 400px"
+                          priority={oncelikli}
+                          style={{ objectFit: "cover" }}
+                          onError={(e) => {
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) parent.style.display = "none";
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <span>
+                        {ilan.sektorId === "turizm" ? "🏨"
+                          : ilan.sektorId === "uretim" ? "🏭"
+                          : ilan.sektorId === "giyim" ? "👗"
+                          : ilan.sektorId === "lojistik" ? "🚢"
+                          : ilan.sektorId === "gida" ? "🌾"
+                          : ilan.tip === "ticari" ? "🏭" : "📋"}
+                      </span>
+                    )}
+                    <div className="kart-badges">
+                      <span className={`badge ${ilan.tip === "ticari" ? "b-ticari" : "b-bireysel"}`}>
+                        {ilan.tip === "ticari" ? t("toggle.ticari") : t("toggle.bireysel")}
+                      </span>
+                      <span className={`badge ${ilan.rol === "alan" ? "b-talep" : "b-hizmet"}`}>
+                        {ilan.rol === "alan" ? "🙋 TALEP" : "💼 HİZMET"}
+                      </span>
+                      {ilan.yapay === false && <span className="badge b-yeni">✓ GERÇEK</span>}
                     </div>
-                    <button
-                      className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
-                      onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id}`); }}
-                    >
-                      {ilan.rol === "alan" ? t("vitrin.teklif_ver") : t("vitrin.incele")}
-                    </button>
+                  </div>
+                  <div className="kart-body">
+                    <div className="kart-kat">{ilan.kategori || ilan.sektorId || "Genel"}</div>
+                    <div className="kart-baslik">{ilan.baslik}</div>
+                    <div className="kart-meta">
+                      <span>📍 {ilan.ulke && ilan.ulke !== "Türkiye" ? `${ilan.ulke} · ` : ""}{ilan.sehir || "Global"}</span>
+                      <span>📅 {new Date(ilan.createdAt).toLocaleDateString(locale)}</span>
+                      {(ilan.teklifSayisi || 0) > 0 && <span>💼 {ilan.teklifSayisi} teklif</span>}
+                    </div>
+                    <div className="kart-foot">
+                      <div className="kart-butce">
+                        {(ilan.butceMin || 0) > 0
+                          ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}`
+                          : t("vitrin.teklif_al")}
+                      </div>
+                      <button
+                        className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
+                        onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id}`); }}
+                      >
+                        {ilan.rol === "alan" ? t("vitrin.teklif_ver") : t("vitrin.incele")}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
 
