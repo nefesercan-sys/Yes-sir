@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 
-const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
+const locales = ["tr", "en", "de", "ru", "zh", "es", "fr", "hi", "ms"];
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
