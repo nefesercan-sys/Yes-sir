@@ -4,10 +4,11 @@ import { notFound } from 'next/navigation';
 const locales = ['tr', 'en'];
 
 export default getRequestConfig(async ({ locale }) => {
+  // Desteklenmeyen dil kontrolü
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    // Mesajlar ana dizindeki messages klasöründe ise yol budur:
+    // Mesajlar ana dizindeki messages klasöründe ise yol kesinlikle budur:
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });
