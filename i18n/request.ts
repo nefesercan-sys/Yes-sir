@@ -4,10 +4,10 @@ import { notFound } from 'next/navigation';
 const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as string)) notFound();
+  if (!locales.includes(locale as any)) notFound();
 
   return {
-    locale: locale as string,
+    // Mesajların tam konumu burasıysa hata vermeyecektir:
     messages: (await import(`../app/messages/${locale}.json`)).default
   };
 });
