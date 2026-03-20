@@ -1,13 +1,13 @@
-import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import {getRequestConfig} from 'next-intl/server';
+import {notFound} from 'next/navigation';
 
-const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
+const locales = ['en', 'tr', 'de'];
 
-export default getRequestConfig(async ({ locale }) => {
+export default getRequestConfig(async ({locale}) => {
+  // Eğer gelen locale listede yoksa 404 fırlat
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    // Mesajların tam konumu burasıysa hata vermeyecektir:
-    messages: (await import(`../app/messages/${locale}.json`)).default
+    messages: (await import(`../messages/${locale}.json`)).default
   };
 });
