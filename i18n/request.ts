@@ -1,15 +1,13 @@
 import { getRequestConfig } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-// Desteklediğin diller
 const locales = ['tr', 'en'];
 
-export default getRequestConfig(async ({locale}) => {
-  // Eğer desteklenmeyen bir dil URL'si girilirse 404'e at
+export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    // messages klasörü kök dizinde olduğu için iki üst klasöre (../../) çıkıyoruz
+    // messages klasörü projenin en üst (root) dizininde ise:
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });
