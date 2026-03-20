@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 const locales = ['tr', 'en'];
 
 export default getRequestConfig(async ({ locale }) => {
-  // Desteklenmeyen dil kontrolü
+  // Desteklenen dillerde değilse 404 döndür
   if (!locales.includes(locale as any)) notFound();
 
   return {
