@@ -1,9 +1,4 @@
-"use client";
-import dynamic from "next/dynamic";
-
-const AnaSayfaClient = dynamic(() => import("@/providers/AnaSayfaClient"), {
-  ssr: false,
-});
+import AnaSayfaClient from "@/providers/AnaSayfaClient";
 
 export default function AnaSayfa() {
   return <AnaSayfaClient initialIlanlar={[]} ilkGorsel={null} />;
