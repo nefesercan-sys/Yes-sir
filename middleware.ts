@@ -7,6 +7,6 @@ export default createMiddleware({
 });
 
 export const config = {
-  // Statik dosyalar hariç her şeyi tara
+  // Statik dosyaları (resim, favicon vb.) hariç tut, gerisini tara
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)']
 };
