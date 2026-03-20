@@ -2,28 +2,16 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import "../globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 
-// baseUrl "." olduğu için proje kökünden import
-import tr from "messages/tr.json";
-import en from "messages/en.json";
-import de from "messages/de.json";
-import ru from "messages/ru.json";
-import zh from "messages/zh.json";
-import es from "messages/es.json";
-import fr from "messages/fr.json";
-import hi from "messages/hi.json";
-import ms from "messages/ms.json";
-import ar from "messages/ar.json";
-
 export const dynamic = "force-dynamic";
 
 const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
-const messageMap: Record<string, any> = { tr, en, de, ru, zh, es, fr, hi, ms, ar };
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -70,7 +58,8 @@ export default async function LocaleLayout({
 }) {
   const locale = params?.locale || "tr";
   if (!locales.includes(locale)) notFound();
-  const messages = messageMap[locale] || tr;
+
+  const messages = await getMessages();
 
   return (
     <html
@@ -89,7 +78,7 @@ export default async function LocaleLayout({
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
       </head>
       <body className={jakarta.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <AuthProvider>
               <main>{children}</main>
