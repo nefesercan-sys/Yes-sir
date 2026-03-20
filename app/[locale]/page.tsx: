@@ -1,5 +1,11 @@
 import AnaSayfaClient from "@/providers/AnaSayfaClient";
 
+// Next.js 14/15'te params bir Promise olabilir, bu yapı en güvenlisidir.
 export default function AnaSayfa() {
-  return <AnaSayfaClient initialIlanlar={[]} ilkGorsel={null} />;
+  return (
+    <AnaSayfaClient 
+      initialIlanlar={[]} 
+      ilkGorsel={null} 
+    />
+  );
 }
