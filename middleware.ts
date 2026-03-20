@@ -1,11 +1,15 @@
-import createMiddleware from "next-intl/middleware";
+import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
-  locales: ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"],
-  defaultLocale: "tr",
-  localePrefix: "as-needed",
+  // Desteklenen diller
+  locales: ['tr', 'en'],
+  // Varsayılan dil
+  defaultLocale: 'tr',
+  // Eğer kullanıcı ana dizine gelirse başına /tr ekleme (SEO için daha iyi)
+  localePrefix: 'as-needed'
 });
 
 export const config = {
-  matcher: ["/((?!api|_next|vercel|.*\\..*).*)"],
+  // Statik dosyalar ve API hariç her şeyi tara
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)']
 };
