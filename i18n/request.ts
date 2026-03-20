@@ -7,7 +7,7 @@ export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    // messages klasörü projenin en üst (root) dizininde ise:
+    // Kök dizindeki messages klasörüne güvenli erişim
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });
