@@ -8,22 +8,21 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 
-// Tüm mesajları statik olarak import et
-import tr from "../../messages/tr.json";
-import en from "../../messages/en.json";
-import de from "../../messages/de.json";
-import ru from "../../messages/ru.json";
-import zh from "../../messages/zh.json";
-import es from "../../messages/es.json";
-import fr from "../../messages/fr.json";
-import hi from "../../messages/hi.json";
-import ms from "../../messages/ms.json";
-import ar from "../../messages/ar.json";
+// baseUrl "." olduğu için proje kökünden import
+import tr from "messages/tr.json";
+import en from "messages/en.json";
+import de from "messages/de.json";
+import ru from "messages/ru.json";
+import zh from "messages/zh.json";
+import es from "messages/es.json";
+import fr from "messages/fr.json";
+import hi from "messages/hi.json";
+import ms from "messages/ms.json";
+import ar from "messages/ar.json";
 
 export const dynamic = "force-dynamic";
 
 const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
-
 const messageMap: Record<string, any> = { tr, en, de, ru, zh, es, fr, hi, ms, ar };
 
 const jakarta = Plus_Jakarta_Sans({
@@ -70,9 +69,7 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   const locale = params?.locale || "tr";
-
   if (!locales.includes(locale)) notFound();
-
   const messages = messageMap[locale] || tr;
 
   return (
