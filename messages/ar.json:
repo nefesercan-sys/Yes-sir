@@ -1,59 +1,59 @@
 {
   "nav": {
-    "kesfet": "استكشف",
-    "giris": "تسجيل الدخول",
-    "kayit": "إنشاء حساب",
-    "panel": "لوحة التحكم"
+    "kesfet": "Keşfet",
+    "giris": "Giriş Yap",
+    "kayit": "Üye Ol",
+    "panel": "Panelim"
   },
   "hero": {
-    "badge": "مركز الخدمات والمنتجات العالمي",
-    "title1": "من تركيا",
-    "title2": "إلى العالم،",
-    "title3": "من العالم",
-    "title4": "إلى تركيا",
-    "sub": "نربط المصنعين والموردين ومقدمي الخدمات والمشترين في منصة واحدة. انشر إعلانات، احصل على عروض — مجانًا تمامًا.",
-    "ara": "بحث وقائمة"
+    "badge": "Global Hizmet & Ürün Merkezi",
+    "title1": "Türkiye'den",
+    "title2": "Dünyaya,",
+    "title3": "Dünyadan",
+    "title4": "Türkiye'ye",
+    "sub": "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. İlan verin, teklif alın — tamamen ücretsiz.",
+    "ara": "Ara & Listele"
   },
   "toggle": {
-    "bireysel": "فردي",
-    "ticari": "تجاري وصناعي"
+    "bireysel": "BİREYSEL",
+    "ticari": "TİCARİ & ENDÜSTRİYEL"
   },
   "rol": {
-    "alan_ticari": "أبحث عن مورد / مصنع",
-    "alan_bireysel": "أبحث عن خدمة",
-    "alan_sub": "انشر إعلانًا، احصل على عروض",
-    "veren_ticari": "أقدم إنتاجًا / طاقة",
-    "veren_bireysel": "أقدم خدمة",
-    "veren_sub": "اعرض خدمتك، اجد عملاء"
+    "alan_ticari": "Tedarikçi / Üretici Arıyorum",
+    "alan_bireysel": "Hizmet Almak İstiyorum",
+    "alan_sub": "İlan verin, teklifler size gelsin",
+    "veren_ticari": "Üretim / Kapasite Sunuyorum",
+    "veren_bireysel": "Hizmet Vermek İstiyorum",
+    "veren_sub": "Hizmetinizi sergileyin, müşteri bulun"
   },
   "vitrin": {
-    "ticari": "السوق التجاري",
-    "bireysel": "الإعلانات الفردية",
-    "bulunan": "تم العثور على {count} إعلان",
-    "bos": "لا توجد إعلانات بعد — كن الأول!",
-    "talep": "إنشاء إعلان طلب",
-    "hizmet": "إنشاء إعلان خدمة",
-    "teklif_ver": "تقديم عرض →",
-    "incele": "عرض →",
-    "teklif_al": "احصل على عرض"
+    "ticari": "Ticari Pazar Yeri",
+    "bireysel": "Bireysel İlanlar",
+    "bulunan": "{count} ilan bulundu",
+    "bos": "Henüz ilan yok — ilk ilanı siz verin!",
+    "talep": "Talep İlanı Oluştur",
+    "hizmet": "Hizmet İlanı Oluştur",
+    "teklif_ver": "Teklif Ver →",
+    "incele": "İncele →",
+    "teklif_al": "Teklif Al"
   },
   "destek": {
-    "baslik": "الدعم المباشر",
-    "placeholder": "اكتب رسالتك...",
-    "gonder": "إرسال →",
-    "alindi": "تم استلام رسالتك!",
-    "donus": "سنرد عليك في أقرب وقت."
+    "baslik": "Canlı Destek Hattı",
+    "placeholder": "Mesajınızı yazın...",
+    "gonder": "Gönder →",
+    "alindi": "Mesajınız alındı!",
+    "donus": "En kısa sürede dönüş yapacağız."
   },
   "bottom": {
-    "ana": "الرئيسية",
-    "kesfet": "استكشف",
-    "ilan": "نشر",
-    "teklifler": "العروض",
-    "profil": "الملف"
+    "ana": "Ana Sayfa",
+    "kesfet": "Keşfet",
+    "ilan": "İlan Ver",
+    "teklifler": "Teklifler",
+    "profil": "Profilim"
   },
   "empty": {
-    "baslik": "لا توجد إعلانات تطابق معاييرك",
-    "sub": "انشر أول إعلان — ابدأ في تلقي العروض!",
-    "btn": "انشر الآن"
+    "baslik": "Bu kriterlere uygun ilan bulunamadı",
+    "sub": "İlk ilanı siz verin — teklif almaya hemen başlayın!",
+    "btn": "Hemen İlan Ver"
   }
 }
