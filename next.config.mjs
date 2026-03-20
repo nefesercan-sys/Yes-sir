@@ -1,10 +1,13 @@
-import withNextIntl from 'next-intl/config';
+import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntlConfig = withNextIntl(); // Varsayılan olarak './src/i18n.ts' yolunu arar
+// Create the wrapper function (you can optionally pass a custom path to your i18n.ts here)
+const withNextIntl = createNextIntlPlugin(); 
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Mevcut diğer config ayarların (images, vs.)
+  // Your existing Next.js configuration options go here
+  reactStrictMode: true,
 };
 
-export default withNextIntlConfig(nextConfig);
+// Wrap and export your config
+export default withNextIntl(nextConfig);
