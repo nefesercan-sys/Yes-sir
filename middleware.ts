@@ -1,11 +1,12 @@
 import createMiddleware from 'next-intl/middleware';
-
+ 
 export default createMiddleware({
-  locales: ['ar', 'de', 'en', 'es', 'fr', 'hi', 'ms', 'ru', 'tr', 'zh'],
-  defaultLocale: 'tr'
+  locales: ['tr', 'en', 'ar', 'de', 'ru', 'zh', 'es', 'fr', 'hi', 'ms'],
+  defaultLocale: 'tr',
+  localePrefix: 'always' // URL'de her zaman /tr veya /en görünmesini sağlar
 });
-
+ 
 export const config = {
-  // Bu matcher, dilleri URL'den yakalar ve statik dosyaları hariç tutar
-  matcher: ['/', '/(tr|en|de|ar|es|fr|hi|ms|ru|zh)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
+  // Bu matcher tüm sayfaları yakalar, sadece api ve statik dosyaları bırakır
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };
