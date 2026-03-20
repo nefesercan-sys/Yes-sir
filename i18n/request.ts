@@ -7,7 +7,7 @@ export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    // Kök dizindeki messages klasörüne güvenli erişim
+    // Mesajlar ana dizindeki messages klasöründe ise yol budur:
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });
