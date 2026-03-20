@@ -1,32 +1,21 @@
-import HomeClient from "@/components/HomeClient";
-import { connectMongoDB } from "@/lib/mongodb";
-import Varlik from "@/models/Varlik";
+export const dynamic = "force-dynamic";
 
-export default async function Home() {
+import AnaSayfaClient from "@/providers/AnaSayfaClient";
+import { getDb } from "@/lib/mongodb";
+
+export default async function AnaSayfa() {
   try {
-    await connectMongoDB();
-
-    const ilanlar = await Varlik.find({})
+    const db = await getDb();
+    const data = await db
+      .collection("ilanlar")
+      .find({ durum: "aktif" })
       .sort({ createdAt: -1 })
-      .limit(20)
-      .select("baslik fiyat eskiFiyat kategori sehir resimler aciklama takasIstegi satici createdAt")
-      .lean();
+      .limit(100)
+      .toArray();
 
-    const borsaVeriliIlanlar = ilanlar.map((ilan: any) => {
-      let degisimYuzdesi = 0;
-      if (ilan.eskiFiyat > 0 && ilan.fiyat !== ilan.eskiFiyat) {
-        degisimYuzdesi = ((ilan.fiyat - ilan.eskiFiyat) / ilan.eskiFiyat) * 100;
-      }
-      return {
-        ...ilan,
-        _id: ilan._id.toString(),
-        degisimYuzdesi: Number(degisimYuzdesi.toFixed(1)),
-        borsaDurumu: degisimYuzdesi < 0 ? "DÜŞÜŞ" : degisimYuzdesi > 0 ? "YÜKSELİŞ" : "STABİL",
-      };
-    });
-
-    return <HomeClient initialIlanlar={borsaVeriliIlanlar} />;
+    const ilanlar = JSON.parse(JSON.stringify(data));
+    return <AnaSayfaClient initialIlanlar={ilanlar} />;
   } catch {
-    return <HomeClient initialIlanlar={[]} />;
+    return <AnaSayfaClient initialIlanlar={[]} />;
   }
 }
