@@ -1,14 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
+import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import "../globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 
-const locales = ["tr", "en", "de", "ru", "zh", "es", "fr", "hi", "ms"];
+export const dynamic = "force-dynamic";
+
+const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -46,8 +49,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function LocaleLayout({
   children,
   params,
@@ -55,12 +56,16 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const locale = params.locale || "tr";
+  const locale = params?.locale || "tr";
 
-  // Locale'i request context'ine set et
-  unstable_setRequestLocale(locale);
+  if (!locales.includes(locale)) notFound();
 
-  const messages = await getMessages();
+  let messages = {};
+  try {
+    messages = (await import(`@/messages/${locale}.json`)).default;
+  } catch {
+    messages = (await import(`@/messages/tr.json`)).default;
+  }
 
   return (
     <html
@@ -79,7 +84,7 @@ export default async function LocaleLayout({
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
       </head>
       <body className={jakarta.className}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <AuthProvider>
               <main>{children}</main>
