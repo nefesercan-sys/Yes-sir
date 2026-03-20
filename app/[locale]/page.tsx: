@@ -1,11 +1,10 @@
-// app/[locale]/page.tsx
-export const dynamic = "force-dynamic";
+"use client";
+import dynamic from "next/dynamic";
 
-export default function TestPage({ params }: { params: { locale: string } }) {
-  return (
-    <div>
-      <h1>Çalışıyor!</h1>
-      <p>Locale: {params.locale}</p>
-    </div>
-  );
+const AnaSayfaClient = dynamic(() => import("@/providers/AnaSayfaClient"), {
+  ssr: false,
+});
+
+export default function AnaSayfa() {
+  return <AnaSayfaClient initialIlanlar={[]} ilkGorsel={null} />;
 }
