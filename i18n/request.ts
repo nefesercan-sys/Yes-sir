@@ -1,23 +1,15 @@
 import { getRequestConfig } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-// Desteklenen diller
-const locales = ['en', 'tr', 'de'];
+// Ekran görüntündeki tüm dilleri ekledim
+const locales = ['ar', 'de', 'en', 'es', 'fr', 'hi', 'ms', 'ru', 'tr', 'zh'];
 
 export default getRequestConfig(async ({ locale }) => {
   // Gelen locale listede yoksa 404 fırlat
-  if (!locales.includes(locale as any)) {
-    notFound();
-  }
+  if (!locales.includes(locale as any)) notFound();
 
-  try {
-    return {
-      // Göreceli yol (../) yerine mutlak alias (@/) kullanımı hata payını düşürür
-      messages: (await import(`@/messages/${locale}.json`)).default
-    };
-  } catch (error) {
-    // Eğer dosya hala bulunamazsa build sırasında hata detayını görmek için:
-    console.error(`Mesaj dosyası yüklenemedi: ${locale}`, error);
-    notFound();
-  }
+  return {
+    // Yolu @/app/messages olarak güncelledik çünkü klasör app içinde
+    messages: (await import(`@/app/messages/${locale}.json`)).default
+  };
 });
