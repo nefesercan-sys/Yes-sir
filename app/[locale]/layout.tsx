@@ -49,11 +49,14 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // locale gelmezse varsayılan olarak "tr" kullan
+  const locale = params.locale || "tr";
+
   if (!locales.includes(locale)) notFound();
 
   const messages = await getMessages();
