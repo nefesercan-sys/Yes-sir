@@ -2,16 +2,29 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import "../globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 
+// Tüm mesajları statik olarak import et
+import tr from "../../messages/tr.json";
+import en from "../../messages/en.json";
+import de from "../../messages/de.json";
+import ru from "../../messages/ru.json";
+import zh from "../../messages/zh.json";
+import es from "../../messages/es.json";
+import fr from "../../messages/fr.json";
+import hi from "../../messages/hi.json";
+import ms from "../../messages/ms.json";
+import ar from "../../messages/ar.json";
+
 export const dynamic = "force-dynamic";
 
 const locales = ["tr", "en", "ar", "de", "ru", "zh", "es", "fr", "hi", "ms"];
+
+const messageMap: Record<string, any> = { tr, en, de, ru, zh, es, fr, hi, ms, ar };
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -60,12 +73,7 @@ export default async function LocaleLayout({
 
   if (!locales.includes(locale)) notFound();
 
-  let messages = {};
-  try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
-  } catch {
-    messages = (await import(`@/messages/tr.json`)).default;
-  }
+  const messages = messageMap[locale] || tr;
 
   return (
     <html
