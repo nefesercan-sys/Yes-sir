@@ -1,5 +1,32 @@
+// app/[locale]/page.tsx
+// SERVER COMPONENT — veri server'da çekilir
+
 import AnaSayfaClient from "@/providers/AnaSayfaClient";
 import { getDb } from "@/lib/mongodb";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const titles: Record<string, string> = {
+    tr: "SwapHubs – Küresel Hizmet & Ürün Takas Merkezi",
+    en: "SwapHubs – Global Service & Product Exchange",
+    de: "SwapHubs – Globale Dienst- & Produktbörse",
+    ru: "SwapHubs – Глобальная биржа услуг и товаров",
+    zh: "SwapHubs – 全球服务与产品交易中心",
+    es: "SwapHubs – Intercambio Global de Servicios y Productos",
+    fr: "SwapHubs – Échange Mondial de Services et Produits",
+    hi: "SwapHubs – वैश्विक सेवा और उत्पाद विनिमय",
+    ms: "SwapHubs – Pertukaran Perkhidmatan & Produk Global",
+  };
+
+  return {
+    title: titles[params.locale] || titles.en,
+    description: "Küresel Hizmet & Ürün Takas Platformu",
+    alternates: {
+      canonical: `https://swaphubs.com/${params.locale === "tr" ? "" : params.locale}`,
+    },
+  };
+}
 
 export default async function AnaSayfa() {
   try {
@@ -12,8 +39,30 @@ export default async function AnaSayfa() {
       .toArray();
 
     const ilanlar = JSON.parse(JSON.stringify(data));
-    return <AnaSayfaClient initialIlanlar={ilanlar} />;
+
+    // İlk görseli bul — LCP preload için
+    const ilkGorsel = (() => {
+      for (const ilan of ilanlar) {
+        const url = ilan.resimUrl || ilan.medyalar?.[0] || null;
+        if (url) {
+          if (url.includes("res.cloudinary.com")) {
+            return url.replace("/upload/", "/upload/f_auto,q_auto:eco,w_400,h_185,c_fill/");
+          }
+          return url;
+        }
+      }
+      return null;
+    })();
+
+    return (
+      <>
+        {ilkGorsel && (
+          <link rel="preload" as="image" href={ilkGorsel} />
+        )}
+        <AnaSayfaClient initialIlanlar={ilanlar} ilkGorsel={ilkGorsel} />
+      </>
+    );
   } catch {
-    return <AnaSayfaClient initialIlanlar={[]} />;
+    return <AnaSayfaClient initialIlanlar={[]} ilkGorsel={null} />;
   }
 }
