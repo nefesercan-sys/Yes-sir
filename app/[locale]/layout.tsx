@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
-import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -47,6 +46,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function LocaleLayout({
   children,
   params,
@@ -54,12 +57,12 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // locale gelmezse varsayılan olarak "tr" kullan
   const locale = params.locale || "tr";
 
-  if (!locales.includes(locale)) notFound();
+  // Locale'i request context'ine set et
+  unstable_setRequestLocale(locale);
 
-  const messages = await getMessages({ locale });
+  const messages = await getMessages();
 
   return (
     <html
