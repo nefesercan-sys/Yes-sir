@@ -1,16 +1,3 @@
-
-page.tsx
-1 file changed
-+0
--753
-lines changed
-Search within code
- 
-‎app/admin/page.tsx‎
--753
-Lines changed: 0 additions & 753 deletions
-Original file line number	Diff line number	Diff line change
-@@ -1,753 +0,0 @@
 'use client';
 import { useState } from 'react';
 const SEKTORLER = [
