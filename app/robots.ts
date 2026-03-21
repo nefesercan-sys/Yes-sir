@@ -5,11 +5,16 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/ilanlar", "/ilan/"],
-        disallow: ["/panel", "/teklifler", "/api/"],
+        allow: ["/", "/ilanlar", "/ilan/", "/kayit", "/giris", "/ilan-ver"],
+        disallow: ["/panel", "/api/", "/admin", "/mesajlar", "/_next/"],
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/panel", "/api/", "/admin"],
       },
     ],
-    sitemap: "https://swaphubs.com/sitemap.xml",
-    host: "https://swaphubs.com",
+    sitemap: "https://www.swaphubs.com/sitemap.xml",
+    host: "https://www.swaphubs.com",
   };
 }
