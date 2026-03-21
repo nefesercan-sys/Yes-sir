@@ -1,9 +1,3 @@
-// app/sitemap.ts — SwapHubs (Düzeltilmiş)
-// DÜZELTMELER:
-//   1. Query param URL'ler → Temiz URL'ler (/ilanlar/sektor/turizm)
-//   2. ilan._id (UUID) → ilan.slug
-//   3. API endpoint düzeltildi
-
 import { MetadataRoute } from "next";
 
 const BASE = "https://www.swaphubs.com";
@@ -32,33 +26,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/giris`,    lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
   ];
 
-  // ── 2. Sektör sayfaları — TEMİZ URL ─────────────────────────
-  // ❌ ESKİ: /ilanlar?sektor=turizm&tip=ticari  → Google indekslemez
-  // ✅ YENİ: /ilanlar/sektor/turizm             → SEO dostu
+  // ── 2. Sektör sayfaları — sehir=turkiye (tüm Türkiye) ───────
   const sektorPages: MetadataRoute.Sitemap = SEKTORLER.flatMap((s) => [
     {
-      url: `${BASE}/ilanlar/sektor/${s}`,
+      url: `${BASE}/ilanlar/turkiye/${s}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.85,
     },
     {
-      url: `${BASE}/ilanlar/sektor/${s}/ticari`,
+      url: `${BASE}/ilanlar/turkiye/${s}/ticari`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.8,
     },
     {
-      url: `${BASE}/ilanlar/sektor/${s}/bireysel`,
+      url: `${BASE}/ilanlar/turkiye/${s}/bireysel`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.75,
     },
   ]);
 
-  // ── 3. Şehir + Sektör sayfaları — TEMİZ URL ─────────────────
-  // ❌ ESKİ: /ilanlar?sehir=istanbul&sektor=turizm
-  // ✅ YENİ: /ilanlar/istanbul/turizm
+  // ── 3. Şehir + Sektör sayfaları ─────────────────────────────
   const sehirSektorPages: MetadataRoute.Sitemap = SEHIRLER.flatMap((sehir) =>
     SEKTORLER.slice(0, 8).map((sektor) => ({
       url: `${BASE}/ilanlar/${sehir}/${sektor}`,
@@ -68,9 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  // ── 4. İlan sayfaları — SLUG kullan, UUID değil ──────────────
-  // ❌ ESKİ: /ilan/${ilan._id}   → "69b309..." anlamsız UUID
-  // ✅ YENİ: /ilan/${ilan.slug}  → "iphone-15-istanbul" SEO dostu
+  // ── 4. İlan sayfaları — slug bazlı ──────────────────────────
   let ilanPages: MetadataRoute.Sitemap = [];
   try {
     const res = await fetch(`${BASE}/api/ilanlar/sitemap`, {
