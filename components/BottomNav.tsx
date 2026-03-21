@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { icon: "🏠", label: "Ana Sayfa", href: "/" },
   { icon: "🔍", label: "Keşfet", href: "/ilanlar" },
   { icon: "➕", label: "İlan Ver", href: "/ilan-ver", primary: true },
-  { icon: "💬", label: "Mesajlar", href: "/teklifler" },
+  { icon: "💬", label: "Mesajlar", href: "/mesajlar" },
   { icon: "👤", label: "Profilim", href: "/panel" },
 ];
 
