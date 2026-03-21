@@ -7,7 +7,7 @@ async function main() {
   await mongoose.connect(MONGODB_URI);
   console.log("✅ DB bağlandı\n");
 
-  const collection = mongoose.connection.db.collection("ilans");
+  const collection = mongoose.connection.db!.collection("ilans");
 
   const ilanlar = await collection
     .find({ slug: { $exists: false } })
