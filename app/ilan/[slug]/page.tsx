@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getDb } from "@/lib/mongodb"; // ← mongodb
+import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 const BASE = "https://www.swaphubs.com";
@@ -29,26 +29,22 @@ export async function generateMetadata({
   const ilan = await getBySlug(params.slug);
   if (!ilan) return { title: "İlan Bulunamadı | SwapHubs" };
 
-  const tip = ilan.tip === "ticari" ? "Ticari" : "Bireysel";
+  const tip   = ilan.tip === "ticari" ? "Ticari" : "Bireysel";
   const sehir = ilan.sehir || ilan.formData?.sehir || "";
   const title = `${ilan.baslik} – ${tip} | ${sehir} | SwapHubs`;
-  const description = `${sehir} ${ilan.sektorId} ilanı. ${(ilan.aciklama || ilan.baslik).slice(0, 130)}...`;
-  const url = `${BASE}/ilan/${ilan.slug}`;
+  const desc  = `${sehir} ${ilan.sektorId} ilanı. ${(ilan.aciklama || ilan.baslik).slice(0, 130)}...`;
+  const url   = `${BASE}/ilan/${ilan.slug}`;
 
   return {
     title,
-    description,
+    description: desc,
     alternates: { canonical: url },
     openGraph: {
-      title, description, url,
-      type: "website",
-      locale: "tr_TR",
-      siteName: "SwapHubs",
-      images: ilan.resimUrl
-        ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }]
-        : [],
+      title, description: desc, url,
+      type: "website", locale: "tr_TR", siteName: "SwapHubs",
+      images: ilan.resimUrl ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }] : [],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description: desc },
   };
 }
 
@@ -92,7 +88,6 @@ export default async function IlanSayfasi({
 }) {
   const { slug } = params;
 
-  // UUID ile gelen eski linkler → slug'a yönlendir
   const isObjectId = /^[0-9a-f]{24}$/i.test(slug);
   if (isObjectId) {
     const ilan = await getByUUID(slug);
