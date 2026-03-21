@@ -13,19 +13,16 @@ async function getBySlug(slug: string) {
 async function getByUUID(id: string) {
   try {
     const db = await getDb();
-    return db
-      .collection("ilanlar")
-      .findOne({ _id: new ObjectId(id) }, { projection: { slug: 1 } });
-  } catch {
-    return null;
-  }
+    return db.collection("ilanlar").findOne(
+      { _id: new ObjectId(id) },
+      { projection: { slug: 1 } }
+    );
+  } catch { return null; }
 }
 
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: { params: { slug: string } }): Promise<Metadata> {
   const ilan = await getBySlug(params.slug);
   if (!ilan) return { title: "İlan Bulunamadı | SwapHubs" };
 
@@ -42,7 +39,9 @@ export async function generateMetadata({
     openGraph: {
       title, description: desc, url,
       type: "website", locale: "tr_TR", siteName: "SwapHubs",
-      images: ilan.resimUrl ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }] : [],
+      images: ilan.resimUrl
+        ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }]
+        : [],
     },
     twitter: { card: "summary_large_image", title, description: desc },
   };
@@ -83,9 +82,7 @@ function IlanSchema({ ilan }: { ilan: any }) {
 
 export default async function IlanSayfasi({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: { params: { slug: string } }) {
   const { slug } = params;
 
   const isObjectId = /^[0-9a-f]{24}$/i.test(slug);
