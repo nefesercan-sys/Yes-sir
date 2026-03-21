@@ -53,7 +53,7 @@ export default function MesajlarPage() {
       const res = await fetch("/api/mesajlar");
       if (res.ok) {
         const data = await res.json();
-        const liste: Mesaj[] = data.mesajlar || [];
+        const liste: Mesaj[] = Array.isArray(data) ? data : data.mesajlar || [];
         // Konuşmalara grupla
         const map = new Map<string, Konusma>();
         liste.forEach(m => {
