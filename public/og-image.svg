@@ -1,0 +1,117 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#0f2347"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0%" cy="0%" r="50%">
+      <stop offset="0%" style="stop-color:#e8361a;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#e8361a;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="100%" cy="100%" r="50%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f5a623"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="bottomBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8361a"/>
+      <stop offset="33%" style="stop-color:#f5a623"/>
+      <stop offset="66%" style="stop-color:#2563eb"/>
+      <stop offset="100%" style="stop-color:#e8361a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="white" stroke-width="1">
+    <line x1="0" y1="60" x2="1200" y2="60"/><line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/><line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/><line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="60" y1="0" x2="60" y2="630"/><line x1="120" y1="0" x2="120" y2="630"/>
+    <line x1="180" y1="0" x2="180" y2="630"/><line x1="240" y1="0" x2="240" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/><line x1="360" y1="0" x2="360" y2="630"/>
+    <line x1="420" y1="0" x2="420" y2="630"/><line x1="480" y1="0" x2="480" y2="630"/>
+    <line x1="540" y1="0" x2="540" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="660" y1="0" x2="660" y2="630"/><line x1="720" y1="0" x2="720" y2="630"/>
+    <line x1="780" y1="0" x2="780" y2="630"/><line x1="840" y1="0" x2="840" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/><line x1="960" y1="0" x2="960" y2="630"/>
+    <line x1="1020" y1="0" x2="1020" y2="630"/><line x1="1080" y1="0" x2="1080" y2="630"/>
+    <line x1="1140" y1="0" x2="1140" y2="630"/>
+  </g>
+
+  <!-- Badge -->
+  <rect x="80" y="55" width="290" height="34" rx="17" fill="#f5a62320" stroke="#f5a62355" stroke-width="1.5"/>
+  <text x="225" y="77" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#f5a623" letter-spacing="1">🌍  GLOBAL B2B PLATFORM</text>
+
+  <!-- Logo -->
+  <rect x="80" y="108" width="52" height="52" rx="13" fill="#e8361a"/>
+  <text x="106" y="141" text-anchor="middle" font-family="system-ui" font-size="22">🔄</text>
+  <text x="146" y="143" font-family="system-ui,sans-serif" font-size="36" font-weight="900" fill="white">Swap</text>
+  <text x="240" y="143" font-family="system-ui,sans-serif" font-size="36" font-weight="900" fill="#f5a623">Hubs</text>
+
+  <!-- Başlık -->
+  <text x="80" y="222" font-family="system-ui,sans-serif" font-size="54" font-weight="900" fill="white">Türkiye&apos;den</text>
+  <text x="80" y="288" font-family="system-ui,sans-serif" font-size="54" font-weight="900" fill="url(#goldText)">Dünyaya,</text>
+  <text x="80" y="348" font-family="system-ui,sans-serif" font-size="40" font-weight="900" fill="white">Dünyadan <tspan fill="url(#goldText)">Türkiye&apos;ye</tspan></text>
+
+  <!-- Açıklama -->
+  <text x="80" y="398" font-family="system-ui,sans-serif" font-size="17" fill="white" opacity="0.55">Üretici, tedarikçi ve alıcıları tek platformda buluşturuyoruz.</text>
+  <text x="80" y="423" font-family="system-ui,sans-serif" font-size="17" fill="white" opacity="0.55">20+ sektörde ücretsiz ilan verin, teklif alın.</text>
+
+  <!-- Tags -->
+  <rect x="80" y="452" width="105" height="32" rx="8" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="132" y="472" text-anchor="middle" font-family="system-ui" font-size="13" fill="#ffffffbb">🏭 Tekstil</text>
+  <rect x="194" y="452" width="110" height="32" rx="8" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="249" y="472" text-anchor="middle" font-family="system-ui" font-size="13" fill="#ffffffbb">⚙️ Makine</text>
+  <rect x="313" y="452" width="105" height="32" rx="8" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="365" y="472" text-anchor="middle" font-family="system-ui" font-size="13" fill="#ffffffbb">🏨 Turizm</text>
+  <rect x="427" y="452" width="108" height="32" rx="8" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="481" y="472" text-anchor="middle" font-family="system-ui" font-size="13" fill="#ffffffbb">🚢 Lojistik</text>
+  <rect x="544" y="452" width="110" height="32" rx="8" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="599" y="472" text-anchor="middle" font-family="system-ui" font-size="13" fill="#ffffffbb">+15 Sektör</text>
+
+  <!-- URL -->
+  <text x="80" y="600" font-family="system-ui,sans-serif" font-size="14" fill="white" opacity="0.3" letter-spacing="1">www.swaphubs.com</text>
+
+  <!-- Sağ kartlar -->
+  <rect x="760" y="55" width="360" height="82" rx="14" fill="#e8361a18" stroke="#e8361a45" stroke-width="1.5"/>
+  <text x="790" y="104" font-family="system-ui" font-size="26">🏭</text>
+  <text x="830" y="90" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="white">Fason Tekstil Üreticisi</text>
+  <text x="830" y="112" font-family="system-ui,sans-serif" font-size="12" fill="white" opacity="0.45">İstanbul · B2B · Hizmet</text>
+  <text x="1105" y="90" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#10b981">₺45.000</text>
+
+  <rect x="760" y="150" width="360" height="82" rx="14" fill="#ffffff0d" stroke="#ffffff1e" stroke-width="1"/>
+  <text x="790" y="199" font-family="system-ui" font-size="26">🏨</text>
+  <text x="830" y="185" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="white">Otel Tedarikçisi Aranıyor</text>
+  <text x="830" y="207" font-family="system-ui,sans-serif" font-size="12" fill="white" opacity="0.45">Antalya · B2B · Talep</text>
+  <text x="1105" y="185" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#10b981">$75.000</text>
+
+  <rect x="760" y="245" width="360" height="82" rx="14" fill="#ffffff0d" stroke="#ffffff1e" stroke-width="1"/>
+  <text x="790" y="294" font-family="system-ui" font-size="26">🧹</text>
+  <text x="830" y="280" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="white">Ofis Temizlik Hizmeti</text>
+  <text x="830" y="302" font-family="system-ui,sans-serif" font-size="12" fill="white" opacity="0.45">Ankara · Bireysel · Hizmet</text>
+  <text x="1105" y="280" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#10b981">Teklif Al</text>
+
+  <rect x="760" y="340" width="360" height="82" rx="14" fill="#ffffff0d" stroke="#ffffff1e" stroke-width="1"/>
+  <text x="790" y="389" font-family="system-ui" font-size="26">⚙️</text>
+  <text x="830" y="375" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="white">CNC Makine İhracatı</text>
+  <text x="830" y="397" font-family="system-ui,sans-serif" font-size="12" fill="white" opacity="0.45">Bursa · B2B · Global</text>
+  <text x="1105" y="375" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#10b981">€120.000</text>
+
+  <rect x="760" y="435" width="360" height="82" rx="14" fill="#ffffff0d" stroke="#ffffff1e" stroke-width="1"/>
+  <text x="790" y="484" font-family="system-ui" font-size="26">🌾</text>
+  <text x="830" y="470" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="white">Gıda &amp; Tarım İhracatı</text>
+  <text x="830" y="492" font-family="system-ui,sans-serif" font-size="12" fill="white" opacity="0.45">İzmir · Ticari · Talep</text>
+  <text x="1105" y="470" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#10b981">$30.000</text>
+
+  <!-- Alt çizgi -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#bottomBar)"/>
+</svg>
