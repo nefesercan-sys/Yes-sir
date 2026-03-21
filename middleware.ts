@@ -1,33 +1,50 @@
-// middleware.ts — SwapHubs
-// Eski query param URL'leri → Yeni temiz URL'lere yönlendir
-
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+const IS_OBJECTID = /^[0-9a-f]{24}$/i;
+const BASE = "https://www.swaphubs.com";
+
+export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
+  // ── 1. /ilan/:uuid → /ilan/:slug ─────────────────────────
+  if (pathname.startsWith("/ilan/")) {
+    const segment = pathname.split("/")[2];
+
+    if (segment && IS_OBJECTID.test(segment)) {
+      try {
+        const res = await fetch(`${BASE}/api/ilanlar/uuid/${segment}`);
+        if (res.ok) {
+          const { slug } = await res.json();
+          if (slug) {
+            return NextResponse.redirect(
+              new URL(`/ilan/${slug}`, request.url),
+              { status: 301 }
+            );
+          }
+        }
+      } catch {}
+      return NextResponse.redirect(new URL("/404", request.url));
+    }
+  }
+
+  // ── 2. /ilanlar?sehir=X&sektor=Y → /ilanlar/X/Y ─────────
   if (pathname === "/ilanlar") {
     const sektor = searchParams.get("sektor");
     const tip    = searchParams.get("tip");
     const sehir  = searchParams.get("sehir");
 
-    // /ilanlar?sehir=istanbul&sektor=turizm → /ilanlar/istanbul/turizm
     if (sehir && sektor) {
       return NextResponse.redirect(
         new URL(`/ilanlar/${sehir}/${sektor}`, request.url),
         { status: 301 }
       );
     }
-
-    // /ilanlar?sektor=turizm&tip=ticari → /ilanlar/sektor/turizm/ticari
     if (sektor && tip) {
       return NextResponse.redirect(
         new URL(`/ilanlar/sektor/${sektor}/${tip}`, request.url),
         { status: 301 }
       );
     }
-
-    // /ilanlar?sektor=turizm → /ilanlar/sektor/turizm
     if (sektor) {
       return NextResponse.redirect(
         new URL(`/ilanlar/sektor/${sektor}`, request.url),
@@ -40,5 +57,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/ilanlar"],
+  matcher: ["/ilan/:path*", "/ilanlar"],
 };
