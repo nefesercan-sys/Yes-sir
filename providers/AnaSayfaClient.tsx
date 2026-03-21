@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
-import { useTranslations, useLocale } from "next-intl";
+
 import Image from "next/image";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
@@ -47,8 +47,8 @@ interface Props {
 export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
   const { data: session, status } = useSession() || {};
   const router = useRouter();
-  const t = useTranslations();
-  const locale = useLocale();
+  
+  const locale = "tr";
 
   const [ilanlar, setIlanlar] = useState<Ilan[]>(initialIlanlar);
   const [yukleniyor, setYukleniyor] = useState(false);
@@ -280,16 +280,16 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
         </a>
         <div className="nav-right">
           <button className="nav-btn" onClick={() => router.push("/ilanlar")}>
-            🔍 <span>{t("nav.kesfet")}</span>
+            🔍 <span>{Keşfet}</span>
           </button>
           {status === "authenticated" ? (
             <button className="nav-btn primary" onClick={() => router.push("/panel")}>
-              👤 <span>{t("nav.panel")}</span>
+              👤 <span>{Panelim}</span>
             </button>
           ) : (
             <>
-              <button className="nav-btn" onClick={() => router.push("/giris")}>{t("nav.giris")}</button>
-              <button className="nav-btn primary" onClick={() => router.push("/kayit")}>{t("nav.kayit")}</button>
+              <button className="nav-btn" onClick={() => router.push("/giris")}>{Giriş Yap}</button>
+              <button className="nav-btn primary" onClick={() => router.push("/kayit")}>{Üye Ol}</button>
             </>
           )}
           <select
@@ -317,25 +317,25 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
 
       {/* ── HERO ── */}
       <header className="hero">
-        <div className="hero-badge">🌍 {t("hero.badge")}</div>
+        <div className="hero-badge">🌍 {Global Hizmet & Ürün Merkezi}</div>
         <h1>
-          {t("hero.title1")} <em>{t("hero.title2")}</em><br />
-          {t("hero.title3")} <em>{t("hero.title4")}</em>
+          {Türkiye'den} <em>{Dünyaya,}</em><br />
+          {Dünyadan} <em>{Türkiye'ye}</em>
         </h1>
-        <p className="hero-sub">{t("hero.sub")}</p>
+        <p className="hero-sub">{Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. İlan verin, teklif alın — tamamen ücretsiz.}</p>
         <div className="kontrol">
           <div className="toggle-row">
             <button
               className={`toggle-btn ${aktifTip === "bireysel" ? "on-bireysel" : ""}`}
               onClick={() => { setAktifTip("bireysel"); setAktifKat("Tümü"); }}
             >
-              👤 {t("toggle.bireysel")}
+              👤 {BİREYSEL}
             </button>
             <button
               className={`toggle-btn ${aktifTip === "ticari" ? "on-ticari" : ""}`}
               onClick={() => { setAktifTip("ticari"); setAktifKat("Tümü"); }}
             >
-              🏭 {t("toggle.ticari")}
+              🏭 {TİCARİ & ENDÜSTRİYEL}
             </button>
           </div>
           <div className="rol-row">
@@ -343,15 +343,15 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
               className={`rol-btn ${aktifRol === "alan" ? "on-alan" : ""}`}
               onClick={() => setAktifRol("alan")}
             >
-              🛒 {aktifTip === "ticari" ? t("rol.alan_ticari") : t("rol.alan_bireysel")}
-              <small>{t("rol.alan_sub")}</small>
+              🛒 {aktifTip === "ticari" ? Tedarikçi / Üretici Arıyorum : Hizmet Almak İstiyorum}
+              <small>{İlan verin, teklifler size gelsin}</small>
             </button>
             <button
               className={`rol-btn ${aktifRol === "veren" ? "on-veren" : ""}`}
               onClick={() => setAktifRol("veren")}
             >
-              💼 {aktifTip === "ticari" ? t("rol.veren_ticari") : t("rol.veren_bireysel")}
-              <small>{t("rol.veren_sub")}</small>
+              💼 {aktifTip === "ticari" ? Üretim / Kapasite Sunuyorum : Hizmet Vermek İstiyorum}
+              <small>{Hizmetinizi sergileyin, müşteri bulun}</small>
             </button>
           </div>
           <div className="arama-box">
@@ -366,7 +366,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
               className="arama-btn"
               onClick={() => router.push(`/ilanlar?q=${aramaQ}&tip=${aktifTip}&rol=${aktifRol}`)}
             >
-              {t("hero.ara")}
+              {Ara & Listele}
             </button>
           </div>
         </div>
@@ -400,12 +400,12 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
         <div className="vitrin-head">
           <div>
             <h2 className="vitrin-title">
-              {aktifTip === "ticari" ? `🏭 ${t("vitrin.ticari")}` : `👤 ${t("vitrin.bireysel")}`}
+              {aktifTip === "ticari" ? `🏭 ${Ticari Pazar Yeri}` : `👤 ${Bireysel İlanlar}`}
             </h2>
             <p className="vitrin-sub">
               {filtreliIlanlar.length > 0
-                ? t("vitrin.bulunan", { count: filtreliIlanlar.length })
-                : t("vitrin.bos")}
+                ? `${filtreliIlanlar.length} ilan bulundu`
+                : Henüz ilan yok — ilk ilanı siz verin!}
             </p>
           </div>
           <button
@@ -413,7 +413,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
             style={{ borderRadius: "12px", padding: "10px 20px" }}
             onClick={() => router.push(`/ilan-ver?tip=${aktifTip}&rol=${aktifRol}`)}
           >
-            ➕ {aktifRol === "alan" ? t("vitrin.talep") : t("vitrin.hizmet")}
+            ➕ {aktifRol === "alan" ? Talep İlanı Oluştur : Hizmet İlanı Oluştur}
           </button>
         </div>
 
@@ -425,14 +425,14 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
           ) : sayfaIlanlar.length === 0 ? (
             <div className="empty">
               <div className="empty-icon">📭</div>
-              <p className="empty-title">{t("empty.baslik")}</p>
-              <p className="empty-sub">{t("empty.sub")}</p>
+              <p className="empty-title">{Bu kriterlere uygun ilan bulunamadı}</p>
+              <p className="empty-sub">{İlk ilanı siz verin — teklif almaya hemen başlayın!}</p>
               <button
                 className="nav-btn primary"
                 style={{ borderRadius: 12, padding: "11px 28px", fontSize: ".9rem" }}
                 onClick={() => router.push(`/ilan-ver?tip=${aktifTip}&rol=${aktifRol}`)}
               >
-                {t("empty.btn")}
+                {Hemen İlan Ver}
               </button>
             </div>
           ) : (
@@ -473,7 +473,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                     )}
                     <div className="kart-badges">
                       <span className={`badge ${ilan.tip === "ticari" ? "b-ticari" : "b-bireysel"}`}>
-                        {ilan.tip === "ticari" ? t("toggle.ticari") : t("toggle.bireysel")}
+                        {ilan.tip === "ticari" ? TİCARİ & ENDÜSTRİYEL : BİREYSEL}
                       </span>
                       <span className={`badge ${ilan.rol === "alan" ? "b-talep" : "b-hizmet"}`}>
                         {ilan.rol === "alan" ? "🙋 TALEP" : "💼 HİZMET"}
@@ -493,13 +493,13 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                       <div className="kart-butce">
                         {(ilan.butceMin || 0) > 0
                           ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}`
-                          : t("vitrin.teklif_al")}
+                          : Teklif Al}
                       </div>
                       <button
                         className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
                         onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id}`); }}
                       >
-                        {ilan.rol === "alan" ? t("vitrin.teklif_ver") : t("vitrin.incele")}
+                        {ilan.rol === "alan" ? Teklif Ver → : İncele →}
                       </button>
                     </div>
                   </div>
@@ -531,7 +531,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
       {destekAcik && (
         <div className="destek-panel">
           <div className="destek-head">
-            <h4>💬 {t("destek.baslik")}</h4>
+            <h4>💬 {Canlı Destek Hattı}</h4>
             <button
               onClick={() => setDestekAcik(false)}
               style={{ background: "none", border: "none", color: "rgba(255,255,255,.6)", cursor: "pointer", fontSize: "1.1rem" }}
@@ -541,8 +541,8 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
             {destekGonderildi ? (
               <div style={{ textAlign: "center", padding: "20px 0" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: 10 }}>✅</div>
-                <p style={{ fontWeight: 700, color: "#059669" }}>{t("destek.alindi")}</p>
-                <p style={{ fontSize: ".85rem", color: "#64748b", marginTop: 4 }}>{t("destek.donus")}</p>
+                <p style={{ fontWeight: 700, color: "#059669" }}>{Mesajınız alındı!}</p>
+                <p style={{ fontSize: ".85rem", color: "#64748b", marginTop: 4 }}>{En kısa sürede dönüş yapacağız.}</p>
               </div>
             ) : (
               <>
@@ -551,7 +551,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                 </p>
                 <textarea
                   className="destek-ta"
-                  placeholder={t("destek.placeholder")}
+                  placeholder={Mesajınızı yazın...}
                   value={destekMesaj}
                   onChange={e => setDestekMesaj(e.target.value)}
                 />
@@ -560,7 +560,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                     📧 {session.user.email}
                   </p>
                 )}
-                <button className="destek-send" onClick={handleDestekGonder}>{t("destek.gonder")}</button>
+                <button className="destek-send" onClick={handleDestekGonder}>{Gönder →}</button>
               </>
             )}
           </div>
