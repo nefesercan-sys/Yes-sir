@@ -1,18 +1,24 @@
-Metadata } from "next";
+import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { connectDB } from "@/lib/db";
-import Ilan, { IIlan } from "@/models/Ilan";
+import { getDb } from "@/lib/mongodb"; // ← mongodb
+import { ObjectId } from "mongodb";
 
 const BASE = "https://www.swaphubs.com";
 
-async function getBySlug(slug: string): Promise<IIlan | null> {
-  await connectDB();
-  return Ilan.findOne({ slug, aktif: true }).lean();
+async function getBySlug(slug: string) {
+  const db = await getDb();
+  return db.collection("ilanlar").findOne({ slug, durum: "aktif" });
 }
 
-async function getByUUID(id: string): Promise<IIlan | null> {
-  await connectDB();
-  return Ilan.findById(id).select("slug").lean();
+async function getByUUID(id: string) {
+  try {
+    const db = await getDb();
+    return db
+      .collection("ilanlar")
+      .findOne({ _id: new ObjectId(id) }, { projection: { slug: 1 } });
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({
@@ -24,8 +30,9 @@ export async function generateMetadata({
   if (!ilan) return { title: "İlan Bulunamadı | SwapHubs" };
 
   const tip = ilan.tip === "ticari" ? "Ticari" : "Bireysel";
-  const title = `${ilan.baslik} – ${tip} | ${ilan.sehir} | SwapHubs`;
-  const description = `${ilan.sehir} ${ilan.sektor} ilanı. ${ilan.aciklama.slice(0, 130)}...`;
+  const sehir = ilan.sehir || ilan.formData?.sehir || "";
+  const title = `${ilan.baslik} – ${tip} | ${sehir} | SwapHubs`;
+  const description = `${sehir} ${ilan.sektorId} ilanı. ${(ilan.aciklama || ilan.baslik).slice(0, 130)}...`;
   const url = `${BASE}/ilan/${ilan.slug}`;
 
   return {
@@ -37,36 +44,34 @@ export async function generateMetadata({
       type: "website",
       locale: "tr_TR",
       siteName: "SwapHubs",
-      images: ilan.gorseller?.[0]
-        ? [{ url: ilan.gorseller[0], width: 800, height: 600, alt: ilan.baslik }]
+      images: ilan.resimUrl
+        ? [{ url: ilan.resimUrl, width: 800, height: 600, alt: ilan.baslik }]
         : [],
     },
     twitter: { card: "summary_large_image", title, description },
   };
 }
 
-function IlanSchema({ ilan }: { ilan: IIlan }) {
+function IlanSchema({ ilan }: { ilan: any }) {
+  const sehir = ilan.sehir || ilan.formData?.sehir || "";
   const schema = {
     "@context": "https://schema.org",
     "@type": ilan.tip === "ticari" ? "Product" : "Service",
     name: ilan.baslik,
-    description: ilan.aciklama,
-    image: ilan.gorseller,
+    description: ilan.aciklama || ilan.baslik,
+    image: ilan.medyalar || [],
     offers: {
       "@type": "Offer",
-      price: ilan.fiyat,
-      priceCurrency: "TRY",
+      price: ilan.butceMin || 0,
+      priceCurrency: ilan.butceBirimi || "TRY",
       availability: "https://schema.org/InStock",
     },
-    areaServed: {
-      "@type": "City",
-      name: ilan.sehir,
-    },
+    areaServed: { "@type": "City", name: sehir },
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Anasayfa", item: BASE },
-        { "@type": "ListItem", position: 2, name: ilan.sektor, item: `${BASE}/ilanlar/sektor/${ilan.sektor}` },
+        { "@type": "ListItem", position: 2, name: ilan.sektorId, item: `${BASE}/ilanlar/turkiye/${ilan.sektorId}` },
         { "@type": "ListItem", position: 3, name: ilan.baslik },
       ],
     },
@@ -87,6 +92,7 @@ export default async function IlanSayfasi({
 }) {
   const { slug } = params;
 
+  // UUID ile gelen eski linkler → slug'a yönlendir
   const isObjectId = /^[0-9a-f]{24}$/i.test(slug);
   if (isObjectId) {
     const ilan = await getByUUID(slug);
@@ -97,15 +103,16 @@ export default async function IlanSayfasi({
   const ilan = await getBySlug(slug);
   if (!ilan) notFound();
 
+  const sehir = ilan.sehir || ilan.formData?.sehir || "";
+
   return (
     <>
       <IlanSchema ilan={ilan} />
       <main>
         <h1>{ilan.baslik}</h1>
-        <p>📍 {ilan.sehir}{ilan.ilce ? ` / ${ilan.ilce}` : ""}</p>
-        <p>🏷️ {ilan.sektor} — {ilan.tip}</p>
-        <p>💰 ₺{ilan.fiyat.toLocaleString("tr-TR")}</p>
-        <p>{ilan.aciklama}</p>
+        {sehir && <p>📍 {sehir}</p>}
+        <p>🏷️ {ilan.sektorId} — {ilan.tip}</p>
+        <p>💰 {ilan.butceMin?.toLocaleString("tr-TR")} {ilan.butceBirimi}</p>
       </main>
     </>
   );
