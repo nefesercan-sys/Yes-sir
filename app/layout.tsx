@@ -26,89 +26,88 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://swaphubs.com"),
+  metadataBase: new URL("https://www.swaphubs.com"),
   title: {
     template: "%s | SwapHubs",
-    default: "SwapHubs — Küresel Hizmet & Ürün Takas Platformu",
+    default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   },
   description:
-    "Türkiye'den Dünyaya, Dünyadan Türkiye'ye — üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. Ücretsiz ilan ver, teklif al.",
+    "SwapHubs: Türkiye'nin küresel B2B ve bireysel hizmet platformu. Tekstil, makine, turizm, temizlik, inşaat ve 20+ sektörde ücretsiz ilan verin, teklif alın. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
   keywords: [
-    "b2b takas", "hizmet takas", "ticari ilan", "tedarikçi bul",
-    "fason üretim", "swaphubs", "global takas", "bireysel ilan",
-    "hizmet al", "hizmet ver", "ilan platformu", "türkiye ihracat",
-    "uluslararası ticaret", "swap platform", "b2b marketplace",
+    "B2B platform Türkiye", "toptan alım satım", "tedarikçi bul Türkiye",
+    "üretici bul", "fason üretim Türkiye", "tekstil tedarikçi",
+    "ihracat ithalat platformu", "hizmet ilanı ver ücretsiz",
+    "bireysel hizmet ilanı", "temizlik hizmeti ilanı", "usta bul",
+    "makine ekipman satış", "inşaat malzeme tedarik", "lojistik nakliye ilanı",
+    "turizm hizmet ilanı", "SwapHubs", "ücretsiz ilan", "teklif al",
+    "b2b marketplace Türkiye", "global ticaret platformu", "uluslararası ticaret",
   ],
-  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
+  authors: [{ name: "SwapHubs", url: "https://www.swaphubs.com" }],
   creator: "SwapHubs",
   publisher: "SwapHubs",
   category: "business",
   openGraph: {
-    title: "SwapHubs — Küresel Hizmet & Ürün Takas Platformu",
-    description: "Türkiye'den Dünyaya, Dünyadan Türkiye'ye — ücretsiz ilan ver, teklif al.",
-    url: "https://swaphubs.com",
+    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    description: "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
+    url: "https://www.swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
-    alternateLocale: ["en_US", "ar_SA", "de_DE"],
     type: "website",
-    images: [
-      {
-        url: "https://swaphubs.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "SwapHubs — Küresel Hizmet & Ürün Takas Platformu",
-      },
-    ],
+    images: [{ url: "https://www.swaphubs.com/og-image.svg", width: 1200, height: 630, alt: "SwapHubs — Küresel Hizmet & Ürün Platformu" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs — Küresel B2B Takas Platformu",
-    description: "Üretici, tedarikçi ve alıcıları buluşturuyoruz. Ücretsiz.",
+    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    images: ["https://swaphubs.com/og-image.jpg"],
+    images: ["https://www.swaphubs.com/og-image.svg"],
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  alternates: {
-    canonical: "https://swaphubs.com",
-    languages: {
-      "tr": "https://swaphubs.com",
-      "en": "https://swaphubs.com/en",
-      "ar": "https://swaphubs.com/ar",
-      "de": "https://swaphubs.com/de",
-      "x-default": "https://swaphubs.com",
-    },
-  },
+  alternates: { canonical: "https://www.swaphubs.com" },
   verification: {
     google: "BURAYA_GOOGLE_SEARCH_CONSOLE_KODUNU_YAZ",
     yandex: "2422561e968edf9f",
-    other: {
-      "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3",
-    },
+    other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
   },
   manifest: "/manifest.json",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.swaphubs.com/#website",
+      url: "https://www.swaphubs.com",
+      name: "SwapHubs",
+      description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
+      inLanguage: "tr-TR",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: { "@type": "EntryPoint", urlTemplate: "https://www.swaphubs.com/ilanlar?q={search_term_string}" },
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.swaphubs.com/#organization",
+      name: "SwapHubs",
+      url: "https://www.swaphubs.com",
+      logo: { "@type": "ImageObject", url: "https://www.swaphubs.com/og-image.svg", width: 1200, height: 630 },
+      description: "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
+      areaServed: ["TR", "DE", "AE", "SA", "US", "GB"],
+      knowsAbout: ["B2B Ticaret", "Tekstil Tedarik", "Makine Ekipman", "Turizm", "İnşaat Malzemeleri", "Lojistik", "Temizlik", "Fason Üretim"],
+      sameAs: ["https://twitter.com/swaphubs", "https://www.linkedin.com/company/swaphubs"],
+    },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="tr"
-      suppressHydrationWarning
-      className={`${jakarta.variable} ${unbounded.variable}`}
-    >
+    <html lang="tr" suppressHydrationWarning className={`${jakarta.variable} ${unbounded.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -117,8 +116,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
-        {/* Bing doğrulama */}
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className={jakarta.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
