@@ -11,7 +11,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/panel", "/api/", "/admin"],
+        // ✅ EKLENDİ: Yeni temiz URL route'larına izin ver
+        // ✅ EKLENDİ: Eski UUID/query param URL'leri engelle
+        disallow: ["/panel", "/api/", "/admin", "/varlik/"],
       },
     ],
     sitemap: "https://www.swaphubs.com/sitemap.xml",
