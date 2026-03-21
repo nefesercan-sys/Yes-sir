@@ -27,27 +27,32 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // ── 2. /ilanlar?sehir=X&sektor=Y → /ilanlar/X/Y ─────────
+  // ── 2. Query param → Temiz URL ───────────────────────────
   if (pathname === "/ilanlar") {
     const sektor = searchParams.get("sektor");
     const tip    = searchParams.get("tip");
     const sehir  = searchParams.get("sehir");
 
+    // ?sehir=istanbul&sektor=turizm → /ilanlar/istanbul/turizm
     if (sehir && sektor) {
       return NextResponse.redirect(
         new URL(`/ilanlar/${sehir}/${sektor}`, request.url),
         { status: 301 }
       );
     }
+
+    // ?sektor=turizm&tip=ticari → /ilanlar/turkiye/turizm/ticari
     if (sektor && tip) {
       return NextResponse.redirect(
-        new URL(`/ilanlar/sektor/${sektor}/${tip}`, request.url),
+        new URL(`/ilanlar/turkiye/${sektor}/${tip}`, request.url),
         { status: 301 }
       );
     }
+
+    // ?sektor=turizm → /ilanlar/turkiye/turizm
     if (sektor) {
       return NextResponse.redirect(
-        new URL(`/ilanlar/sektor/${sektor}`, request.url),
+        new URL(`/ilanlar/turkiye/${sektor}`, request.url),
         { status: 301 }
       );
     }
