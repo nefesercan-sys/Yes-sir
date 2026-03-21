@@ -1,13 +1,10 @@
 export const dynamic = 'force-dynamic';
 
-// ============================================================
-// SwapHubs — app/api/ilanlar/route.ts
-// Gelişmiş İlan API — Karma Algoritma, Search, Pagination
-// ============================================================
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+import { generateUniqueSlug } from "@/lib/slugify"; // ← YENİ IMPORT
 
 // ─── GET ───────────────────────────────────────────────────
 export async function GET(req: NextRequest) {
@@ -26,11 +23,10 @@ export async function GET(req: NextRequest) {
     const kategori = searchParams.get("kategori");
     const durum    = searchParams.get("durum");
     const yapay    = searchParams.get("yapay");
-    const sort     = searchParams.get("sort") || "yeni"; // yeni | populer | random | bütce_asc | butce_desc
+    const sort     = searchParams.get("sort") || "yeni";
 
     const db = await getDb();
 
-    // 1. Kendi İlanlarım (Kullanıcı Paneli İçin)
     if (kendi === "true") {
       const session = await getServerSession();
       if (!session?.user?.email) {
@@ -44,10 +40,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(serialize(ilanlar));
     }
 
-    // 2. Filtreleri Hazırla
     const filter: Record<string, unknown> = {};
 
-    if (!durum) filter.durum = "aktif"; // Sadece aktif ilanları göster
+    if (!durum) filter.durum = "aktif";
     else filter.durum = durum;
 
     if (sektor)   filter.sektorId = sektor;
@@ -63,7 +58,6 @@ export async function GET(req: NextRequest) {
       filter.$or = [{ yapay: yapay === "true" }, { is_ai_generated: yapay === "true" }];
     }
 
-    // Full-text search (Arama Çubuğu)
     if (q) {
       filter.$or = [
         { baslik: { $regex: q, $options: "i" } },
@@ -74,31 +68,27 @@ export async function GET(req: NextRequest) {
       ];
     }
 
-    // 3. KARMA (SHUFFLE/RANDOM) ALGORİTMASI 
     if (sort === "random") {
       const aggregatePipeline = [
         { $match: filter },
-        { $sample: { size: limit } } // Rastgele 'limit' kadar belge çek
+        { $sample: { size: limit } }
       ];
-      
       const [ilanlar, toplam] = await Promise.all([
         db.collection("ilanlar").aggregate(aggregatePipeline).toArray(),
-        db.collection("ilanlar").countDocuments(filter), // Toplam sayıyı yine de verelim
+        db.collection("ilanlar").countDocuments(filter),
       ]);
-
       return NextResponse.json({
         ilanlar: serialize(ilanlar),
         toplam,
-        sayfa: 1, // Karma akışta sayfalama mantıksızdır, hep 1 kalır
+        sayfa: 1,
         toplamSayfa: 1,
       });
     }
 
-    // 4. Standart Sıralama ve Sayfalama (Pagination)
     const sortMap: Record<string, Record<string, 1 | -1>> = {
-      yeni: { createdAt: -1 },
-      populer: { goruntulenme: -1, teklifSayisi: -1 },
-      butce_asc: { butceMin: 1 },
+      yeni:       { createdAt: -1 },
+      populer:    { goruntulenme: -1, teklifSayisi: -1 },
+      butce_asc:  { butceMin: 1 },
       butce_desc: { butceMax: -1 },
     };
     const sortObj = sortMap[sort] || { createdAt: -1 };
@@ -133,7 +123,7 @@ export async function POST(req: NextRequest) {
       tip, rol, ulke, sehir,
       kategori, kategoriSlug,
       yapay = false,
-      is_ai_generated = false // Admin paneli ile tutarlılık için eklendi
+      is_ai_generated = false
     } = body;
 
     if (!sektorId || !baslik?.trim()) {
@@ -142,12 +132,28 @@ export async function POST(req: NextRequest) {
 
     const db = await getDb();
 
-    // Hem 'yapay' hem 'is_ai_generated' parametrelerinden birinin true olması yeterli
     const isBotGenerated = Boolean(yapay) || Boolean(is_ai_generated);
+
+    // ── YENİ: Otomatik SEO Slug Üret ───────────────────────
+    const ilanSehir  = sehir || formData?.sehir || "turkiye";
+    const ilanSektor = sektorId || kategori || "genel";
+
+    const slug = await generateUniqueSlug(
+      baslik.trim(),
+      ilanSehir,
+      ilanSektor,
+      async (s) => {
+        const existing = await db.collection("ilanlar").findOne({ slug: s });
+        return !!existing;
+      }
+    );
+    // Örnek: "İzmir Fason Tekstil" → "izmir-fason-tekstil-izmir-tekstil"
+    // ───────────────────────────────────────────────────────
 
     const ilan = {
       sektorId,
       baslik: baslik.trim(),
+      slug,                                              // ← YENİ ALAN
       kategori: kategori || formData?.altKategori || sektorId,
       kategoriSlug: kategoriSlug || sektorId,
       formData: formData || {},
@@ -159,24 +165,25 @@ export async function POST(req: NextRequest) {
       tip:         tip || "bireysel",
       rol:         rol || "alan",
       ulke:        ulke || formData?.ulke || "Türkiye",
-      sehir:       sehir || formData?.sehir || "",
+      sehir:       ilanSehir,
       durum:       "aktif",
       teklifSayisi: 0,
       goruntulenme: 0,
       teklifeAcik: true,
-      yapay:       isBotGenerated, // Geriye dönük uyumluluk için
-      is_ai_generated: isBotGenerated, // Yeni mimari uyumluluğu için
+      yapay:       isBotGenerated,
+      is_ai_generated: isBotGenerated,
       sahibi: session
         ? { email: session.user?.email, ad: session.user?.name, resim: session.user?.image }
         : null,
-      misafirToken: session ? null : crypto.randomUUID(), // Üye olmayanlar için geçici token
+      misafirToken: session ? null : crypto.randomUUID(),
       createdAt:   new Date(),
       guncellendi: new Date(),
     };
 
     const result = await db.collection("ilanlar").insertOne(ilan);
 
-    return NextResponse.json({ success: true, id: result.insertedId }, { status: 201 });
+    return NextResponse.json({ success: true, id: result.insertedId, slug }, { status: 201 });
+    //                                                              ^^^^^ response'a da eklendi
   } catch (err) {
     console.error("POST /api/ilanlar error:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
