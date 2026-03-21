@@ -16,6 +16,17 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "date-fns", "framer-motion"],
   },
+  async rewrites() {
+    return [
+      { source: "/sitemap-statik.xml",       destination: "/sitemap-statik" },
+      { source: "/sitemap-sektorler.xml",    destination: "/sitemap-sektorler" },
+      { source: "/sitemap-meslekler.xml",    destination: "/sitemap-meslekler" },
+      { source: "/sitemap-turkiye-sehir.xml",destination: "/sitemap-turkiye-sehir" },
+      { source: "/sitemap-turkiye-ilce.xml", destination: "/sitemap-turkiye-ilce" },
+      { source: "/sitemap-dunya.xml",        destination: "/sitemap-dunya" },
+      { source: "/sitemap-ilanlar.xml",      destination: "/sitemap-ilanlar" },
+    ];
+  },
 };
 
 export default nextConfig;
