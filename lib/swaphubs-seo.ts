@@ -79,3 +79,4 @@ export const SEHIR_ILCE: Record<string, string[]> = {
   adiyaman: ['merkez', 'besni', 'golbasi', 'kahta', 'celikhan', 'gerger', 'samsat', 'sincik', 'tut'],
   yalova: ['merkez', 'altinova', 'armutlu', 'cinarcik', 'termal', 'ciftlikkoy'],
 };
+
