@@ -1,4 +1,4 @@
-NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { ULKELER, ULKE_SEHIR } from "@/lib/ulkeler";
 import { TUM_SEKTORLER, ISLEM_TIPLERI, MESLEKLER } from "@/lib/sektorler";
 
