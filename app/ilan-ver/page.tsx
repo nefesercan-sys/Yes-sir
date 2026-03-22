@@ -583,6 +583,54 @@ function IlanVerIcerik() {
             </button>
           </div>
         )}
+        
+        {/* FİYAT ALANI */}
+    <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+  <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>
+    💰 Fiyat Bilgisi
+  </h3>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+    <div>
+      <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+        Minimum Fiyat
+      </label>
+      <div style={{ position: "relative" }}>
+        <input
+          type="number"
+          value={formData.butceMin || ""}
+          onChange={e => setField("butceMin", e.target.value)}
+          placeholder="0"
+          min="0"
+          style={{ ...INP, paddingRight: 40 }}
+        />
+        <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+          {seciliSektor?.butceBirimi || "₺"}
+        </span>
+      </div>
+    </div>
+    <div>
+      <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+        Maksimum Fiyat
+      </label>
+      <div style={{ position: "relative" }}>
+        <input
+          type="number"
+          value={formData.butceMax || ""}
+          onChange={e => setField("butceMax", e.target.value)}
+          placeholder="0"
+          min="0"
+          style={{ ...INP, paddingRight: 40 }}
+        />
+        <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+          {seciliSektor?.butceBirimi || "₺"}
+        </span>
+      </div>
+    </div>
+  </div>
+  <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>
+    💡 Fiyat aralığı belirtmek daha fazla teklif almanızı sağlar. Sabit fiyat için her iki alana aynı değeri girin.
+  </p>
+</div>
 
         {/* ── ADIM 3: MEDYA + YAYINLA ── */}
         {adim === 3 && seciliSektor && (
