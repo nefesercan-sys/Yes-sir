@@ -9,7 +9,7 @@ export async function GET() {
   let urls: string[] = [];
 
   try {
-    const res = await fetch(`${BASE}/api/ilanlar?limit=50000&fields=slug,updatedAt,createdAt`, {
+    const res = await fetch(`${BASE}/api/ilanlar`, {
       next: { revalidate: 3600 },
     });
 
@@ -18,9 +18,10 @@ export async function GET() {
       const liste = Array.isArray(data) ? data : (data.ilanlar || []);
 
       urls = liste
-        .filter((v: any) => v.slug)
+        .filter((v: any) => v._id)
         .flatMap((v: any) => {
-          const loc = `${BASE}/ilan/${v.slug}`;
+          const id = v.slug || v._id;
+          const loc = `${BASE}/ilan/${id}`;
           const mod = new Date(v.updatedAt || v.createdAt || now).toISOString();
           return [
             `  <url><loc>${loc}</loc><lastmod>${mod}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
