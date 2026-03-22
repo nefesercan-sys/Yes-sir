@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getDb } from "@/lib/mongodb";
-import bcrypt from "bcryptjs"; // sha256 yerine bcrypt geldi!
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,10 +19,8 @@ export const authOptions: NextAuthOptions = {
           email: credentials.email.toLowerCase().trim() 
         });
 
-        // Kullanıcı yoksa veya şifresi kayıtlı değilse reddet
         if (!user || !user.password) return null;
 
-        // 🚀 KRİTİK DÜZELTME: Bcrypt ile şifre kontrolü
         const isPasswordCorrect = await bcrypt.compare(
           credentials.password,
           user.password
@@ -43,11 +41,17 @@ export const authOptions: NextAuthOptions = {
   pages: { signIn: "/giris" },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.role = (user as any).role;
+      if (user) {
+        token.id = user.id;                  // ✅ id eklendi
+        token.role = (user as any).role;
+      }
       return token;
     },
     async session({ session, token }) {
-      if (session.user) (session.user as any).role = token.role;
+      if (session.user) {
+        (session.user as any).id = token.id;   // ✅ id session'a taşındı
+        (session.user as any).role = token.role;
+      }
       return session;
     }
   },
