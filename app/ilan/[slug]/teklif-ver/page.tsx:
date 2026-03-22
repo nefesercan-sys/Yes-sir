@@ -1,9 +1,0 @@
-import { redirect } from "next/navigation";
-
-export default function TeklifVerPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  redirect(`/ilan/${params.slug}?islem=teklif-ver`);
-}
