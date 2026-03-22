@@ -1,0 +1,8 @@
+redirect } from "next/navigation";
+
+export default function HizmetAlPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  redirect(`/ilan/${params.slug}?islem=hizmet-al`);
