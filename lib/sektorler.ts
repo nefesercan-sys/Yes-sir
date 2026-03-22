@@ -847,44 +847,4 @@ export const ISLEM_TIPLERI = [
 export const KULLANICI_TIPLERI = [
   { slug: "bireysel", ad: "Bireysel",       desc: "Kişisel kullanım" },
   { slug: "ticari",   ad: "Ticari / Firma", desc: "Kurumsal kullanım" },
-];  'emlak-satis': [
-    'emlak-danismani', 'emlak-degerleme', 'tapu-islemi',
-    'kira-yonetimi', 'site-yonetimi', 'kat-irtifaki',
-  ],
-  'turizm': [
-    'tur-rehberi', 'otel-yonetimi', 'seyahat-acentesi',
-    'airbnb-yonetimi', 'kongre-organizasyonu', 'transfer-hizmeti',
-  ],
-  'lojistik': [
-    'gumruk-musaviri', 'lojistik-koordinator', 'depo-yonetimi',
-    'tedarik-zinciri', 'ihracat-uzmani', 'ithalat-uzmani',
-  ],
-  'spor': [
-    'personal-trainer', 'fitness-kocu', 'futbol-antrenoru',
-    'yuzme-egitmeni', 'tenis-egitmeni', 'yoga-egitmeni',
-    'beslenme-kocu', 'pilates-egitmeni',
-  ],
-  'etkinlik': [
-    'dugun-organizasyonu', 'kurumsal-etkinlik', 'konser-organizasyonu',
-    'dj', 'mc', 'catering', 'dekorasyon', 'ses-isik-sistemi',
-  ],
-};
-
-// ============================================================
-// IŞLEM TİPLERİ
-// ============================================================
-export const ISLEM_TIPLERI = [
-  { slug: 'hizmet-ver',  ad: 'Hizmet Ver',  desc: 'Hizmetini sun ve kazan' },
-  { slug: 'hizmet-al',   ad: 'Hizmet Al',   desc: 'İhtiyacın olan hizmeti bul' },
-  { slug: 'teklif-al',   ad: 'Teklif Al',   desc: 'Fiyat teklifi al' },
-  { slug: 'teklif-ver',  ad: 'Teklif Ver',  desc: 'Fiyat teklifi ver' },
-  { slug: 'ilan-ver',    ad: 'İlan Ver',    desc: 'Ürün veya hizmet ilanı ver' },
-];
-
-// ============================================================
-// KULLANICI TİPLERİ
-// ============================================================
-export const KULLANICI_TIPLERI = [
-  { slug: 'bireysel', ad: 'Bireysel',       desc: 'Kişisel kullanım' },
-  { slug: 'ticari',   ad: 'Ticari / Firma', desc: 'Kurumsal kullanım' },
 ];
