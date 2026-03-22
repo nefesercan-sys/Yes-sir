@@ -9,25 +9,20 @@ export async function GET() {
   const now = new Date().toISOString();
   const urls: string[] = [];
 
-  const ekle = (loc: string, priority: string) =>
-    urls.push(`  <url><loc>${loc}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`);
+  // Sadece ilk 20 şehrin ilçeleri
+  const sehirler = Object.entries(SEHIR_ILCE).slice(0, 20);
 
-  for (const [sehir, ilceler] of Object.entries(SEHIR_ILCE)) {
+  for (const [sehir, ilceler] of sehirler) {
     for (const ilce of ilceler) {
-      ekle(`${BASE}/turkiye/${sehir}/${ilce}`, "0.65");
-
+      urls.push(`  <url><loc>${BASE}/turkiye/${sehir}/${ilce}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.65</priority></url>`);
       for (const s of TUM_SEKTORLER) {
-        ekle(`${BASE}/turkiye/${sehir}/${ilce}/${s.id}`, "0.6");
+        urls.push(`  <url><loc>${BASE}/turkiye/${sehir}/${ilce}/${s.id}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>`);
       }
     }
   }
 
-  return new NextResponse(xmlWrap(urls), xmlHeaders());
-}
-
-function xmlWrap(u: string[]) {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${u.join("\n")}\n</urlset>`;
-}
-function xmlHeaders() {
-  return { headers: { "Content-Type": "application/xml", "Cache-Control": "public, s-maxage=3600" } };
+  return new NextResponse(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`,
+    { headers: { "Content-Type": "application/xml", "Cache-Control": "public, s-maxage=3600" } }
+  );
 }
