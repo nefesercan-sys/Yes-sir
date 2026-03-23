@@ -20,7 +20,19 @@ export async function GET(
     const ilan = await db.collection("ilanlar").findOne({ _id: oid });
     if (!ilan) return NextResponse.json({ error: "İlan bulunamadı" }, { status: 404 });
 
-    return NextResponse.json({ ...ilan, id: ilan._id.toString() });
+    return NextResponse.json({
+      ...ilan,
+      id: ilan._id.toString(),
+      olusturmaTarihi: ilan.olusturmaTarihi || ilan.createdAt || new Date().toISOString(),
+      kullanici: ilan.kullanici || (ilan.sahibi ? {
+        id: ilan.sahibi.email || "",
+        name: ilan.sahibi.ad || "İsimsiz",
+        image: ilan.sahibi.resim || null,
+      } : null),
+      kullaniciId: ilan.kullaniciId || ilan.sahibi?.email || "",
+      aciklama: ilan.aciklama || ilan.formData?.aciklama || "",
+      iletisim: ilan.iletisim || ilan.formData?.iletisim || "",
+    });
   } catch {
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
@@ -35,6 +47,7 @@ export async function PUT(
     if (!session?.user) return NextResponse.json({ error: "Giriş yapmanız gerekiyor" }, { status: 401 });
 
     const sessionUserId = (session.user as any).id as string;
+    const sessionEmail = session.user.email as string;
     const db = await getDb();
     const oid = toObjectId(params.id);
     if (!oid) return NextResponse.json({ error: "Geçersiz ID" }, { status: 400 });
@@ -42,7 +55,9 @@ export async function PUT(
     const mevcutIlan = await db.collection("ilanlar").findOne({ _id: oid });
     if (!mevcutIlan) return NextResponse.json({ error: "İlan bulunamadı" }, { status: 404 });
 
-    if (mevcutIlan.kullaniciId !== sessionUserId) {
+    const ilanSahibiId = mevcutIlan.kullaniciId || mevcutIlan.sahibi?.email || "";
+    const yetkili = ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail;
+    if (!yetkili) {
       return NextResponse.json({ error: "Bu ilanı düzenleme yetkiniz yok" }, { status: 403 });
     }
 
@@ -71,7 +86,6 @@ export async function PUT(
     };
 
     await db.collection("ilanlar").updateOne({ _id: oid }, { $set: guncelleme });
-
     return NextResponse.json({ ...mevcutIlan, ...guncelleme, id: params.id });
   } catch {
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
@@ -87,6 +101,7 @@ export async function DELETE(
     if (!session?.user) return NextResponse.json({ error: "Giriş yapmanız gerekiyor" }, { status: 401 });
 
     const sessionUserId = (session.user as any).id as string;
+    const sessionEmail = session.user.email as string;
     const db = await getDb();
     const oid = toObjectId(params.id);
     if (!oid) return NextResponse.json({ error: "Geçersiz ID" }, { status: 400 });
@@ -94,7 +109,9 @@ export async function DELETE(
     const mevcutIlan = await db.collection("ilanlar").findOne({ _id: oid });
     if (!mevcutIlan) return NextResponse.json({ error: "İlan bulunamadı" }, { status: 404 });
 
-    if (mevcutIlan.kullaniciId !== sessionUserId) {
+    const ilanSahibiId = mevcutIlan.kullaniciId || mevcutIlan.sahibi?.email || "";
+    const yetkili = ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail;
+    if (!yetkili) {
       return NextResponse.json({ error: "Bu ilanı silme yetkiniz yok" }, { status: 403 });
     }
 
