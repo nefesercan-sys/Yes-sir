@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 
@@ -25,7 +25,7 @@ interface Ilan {
   kullaniciId?: string;
 }
 
-export default function IlanDetayPage() {
+function IlanDetayIcerik() {
   const { data: session } = useSession();
   const router = useRouter();
   const params = useParams();
@@ -106,11 +106,11 @@ export default function IlanDetayPage() {
     new Date(iso).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 
   const sessionUserId = (session?.user as any)?.id as string | undefined;
-const sessionEmail = session?.user?.email as string | undefined;
-const sahipMi = !!(
-  (sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId)) ||
-  (sessionEmail && ilan?.kullaniciId === sessionEmail)
-);
+  const sessionEmail = session?.user?.email as string | undefined;
+  const sahipMi = !!(
+    (sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId)) ||
+    (sessionEmail && ilan?.kullaniciId === sessionEmail)
+  );
 
   if (yukleniyor) return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", gap: 14 }}>
@@ -297,5 +297,17 @@ const sahipMi = !!(
         <button onClick={handlePaylasim} style={{ flex: 1, padding: 14, borderRadius: 14, background: "#f1f5f9", border: "1.5px solid #e2e8f0", color: "#475569", fontFamily: "inherit", fontSize: 14, fontWeight: 800, cursor: "pointer" }}>🔗 Paylaş</button>
       </div>
     </div>
+  );
+}
+
+export default function IlanDetayPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>
+        Yükleniyor... ⏳
+      </div>
+    }>
+      <IlanDetayIcerik />
+    </Suspense>
   );
 }
