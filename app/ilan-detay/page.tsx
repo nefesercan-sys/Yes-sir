@@ -1,12 +1,4 @@
 "use client";
-// ============================================================
-// SwapHubs — app/ilan/[id]/page.tsx
-// İlan Detay Sayfası
-// - Fotoğraf galerisi (thumbnail şeridi + ok butonları)
-// - Fiyat, açıklama, ek bilgiler, konum, ilan sahibi
-// - Teklif Ver / Paylaş alt butonları
-// - İlan sahibine özel: Düzenle & Sil butonları
-// ============================================================
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
@@ -30,6 +22,7 @@ interface Ilan {
   formData: Record<string, any>;
   olusturmaTarihi: string;
   kullanici?: { id: string; name: string; image?: string };
+  kullaniciId?: string; // ✅ EKLENDİ
 }
 
 export default function IlanDetayPage() {
@@ -96,7 +89,6 @@ export default function IlanDetayPage() {
   const sessionUserId = (session?.user as any)?.id as string | undefined;
   const sahipMi = !!(sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId));
 
-  // ─── LOADING ───
   if (yukleniyor) return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", gap: 14, fontFamily: "inherit" }}>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
@@ -127,7 +119,6 @@ export default function IlanDetayPage() {
         @keyframes spin{to{transform:rotate(360deg)}}
       `}</style>
 
-      {/* HEADER */}
       <div style={{ background: "#0f172a", padding: "14px 20px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
         <button onClick={() => router.back()} style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", width: 38, height: 38, borderRadius: 10, cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>←</button>
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -139,14 +130,12 @@ export default function IlanDetayPage() {
         <button onClick={handlePaylasim} style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", width: 38, height: 38, borderRadius: 10, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>🔗</button>
       </div>
 
-      {/* TOAST */}
       {(toast || hata) && (
         <div style={{ position: "fixed", top: 70, left: "50%", transform: "translateX(-50%)", zIndex: 200, background: hata && !toast ? "#dc2626" : "#166534", color: "#fff", padding: "10px 20px", borderRadius: 12, fontSize: 13, fontWeight: 700, boxShadow: "0 4px 20px rgba(0,0,0,.2)", animation: "fadeIn .2s ease", whiteSpace: "nowrap" }}>
           {toast || hata}
         </div>
       )}
 
-      {/* MEDYA */}
       {medyalar.length > 0 ? (
         <div>
           <div style={{ position: "relative", background: "#0f172a", maxHeight: 340, overflow: "hidden" }}>
@@ -183,8 +172,6 @@ export default function IlanDetayPage() {
       )}
 
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "16px 16px" }}>
-
-        {/* BAŞLIK + ETİKETLER */}
         <div style={{ marginBottom: 14 }}>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
             <span style={{ fontSize: 10, fontWeight: 700, background: ilan.tip === "ticari" ? "#fffbeb" : "#eff6ff", color: ilan.tip === "ticari" ? "#92400e" : "#1d4ed8", padding: "3px 9px", borderRadius: 6, border: `1px solid ${ilan.tip === "ticari" ? "#fde68a" : "#bfdbfe"}` }}>
@@ -205,7 +192,6 @@ export default function IlanDetayPage() {
           </div>
         </div>
 
-        {/* FİYAT */}
         {fiyat && (
           <div style={{ background: "linear-gradient(135deg, #0f172a, #1e3a5f)", borderRadius: 16, padding: "16px 20px", marginBottom: 14, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div>
@@ -216,13 +202,11 @@ export default function IlanDetayPage() {
           </div>
         )}
 
-        {/* AÇIKLAMA */}
         <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
           <h2 style={{ fontSize: 12, fontWeight: 800, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: 12 }}>📝 Açıklama</h2>
           <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.9, whiteSpace: "pre-wrap" }}>{ilan.aciklama}</p>
         </div>
 
-        {/* EK BİLGİLER */}
         {ilan.formData && Object.entries(ilan.formData).filter(([k, v]) => !SKIP_KEYS.includes(k) && v).length > 0 && (
           <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
             <h2 style={{ fontSize: 12, fontWeight: 800, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: 12 }}>📋 Ek Bilgiler</h2>
@@ -237,7 +221,6 @@ export default function IlanDetayPage() {
           </div>
         )}
 
-        {/* KONUM */}
         <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
           <h2 style={{ fontSize: 12, fontWeight: 800, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: 12 }}>📍 Konum</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
@@ -247,7 +230,6 @@ export default function IlanDetayPage() {
           </div>
         </div>
 
-        {/* İLAN SAHİBİ */}
         {ilan.kullanici && (
           <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14, display: "flex", alignItems: "center", gap: 14 }}>
             {ilan.kullanici.image
@@ -260,25 +242,17 @@ export default function IlanDetayPage() {
           </div>
         )}
 
-        {/* ─── SAHIP YÖNETİM BUTONLARI ─── */}
         {sahipMi && (
           <div style={{ background: "#fffbeb", borderRadius: 16, border: "1.5px solid #fde68a", padding: 16, marginBottom: 14 }}>
             <p style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 12 }}>⚙️ İlan Yönetimi</p>
             <div style={{ display: "flex", gap: 10 }}>
-              <button
-                onClick={() => router.push(`/ilan-duzenle/${ilanId}`)}
-                style={{ flex: 1, padding: 12, borderRadius: 12, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 800, cursor: "pointer" }}
-              >✏️ Düzenle</button>
-              <button
-                onClick={() => setSilOnay(true)}
-                style={{ flex: 1, padding: 12, borderRadius: 12, background: "#fef2f2", border: "1.5px solid #fecaca", color: "#dc2626", fontFamily: "inherit", fontSize: 13, fontWeight: 800, cursor: "pointer" }}
-              >🗑️ Sil</button>
+              <button onClick={() => router.push(`/ilan-duzenle/${ilanId}`)} style={{ flex: 1, padding: 12, borderRadius: 12, background: "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 13, fontWeight: 800, cursor: "pointer" }}>✏️ Düzenle</button>
+              <button onClick={() => setSilOnay(true)} style={{ flex: 1, padding: 12, borderRadius: 12, background: "#fef2f2", border: "1.5px solid #fecaca", color: "#dc2626", fontFamily: "inherit", fontSize: 13, fontWeight: 800, cursor: "pointer" }}>🗑️ Sil</button>
             </div>
           </div>
         )}
       </div>
 
-      {/* SİLME ONAY DİYALOĞU */}
       {silOnay && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
           <div style={{ background: "#fff", borderRadius: 20, padding: 24, width: "100%", maxWidth: 420, animation: "fadeIn .2s ease" }}>
@@ -295,7 +269,6 @@ export default function IlanDetayPage() {
         </div>
       )}
 
-      {/* ALT BUTON ÇUBUĞU */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#fff", borderTop: "1.5px solid #e2e8f0", padding: "12px 16px", display: "flex", gap: 10, zIndex: 100, boxShadow: "0 -4px 20px rgba(0,0,0,.08)" }}>
         <button
           onClick={() => {
@@ -307,13 +280,10 @@ export default function IlanDetayPage() {
         >
           💬 {ilan.rol === "alan" ? "Teklif Ver" : "Hizmet Al"}
         </button>
-        <button
-          onClick={handlePaylasim}
-          style={{ flex: 1, padding: 14, borderRadius: 14, background: "#f1f5f9", border: "1.5px solid #e2e8f0", color: "#475569", fontFamily: "inherit", fontSize: 14, fontWeight: 800, cursor: "pointer" }}
-        >
+        <button onClick={handlePaylasim} style={{ flex: 1, padding: 14, borderRadius: 14, background: "#f1f5f9", border: "1.5px solid #e2e8f0", color: "#475569", fontFamily: "inherit", fontSize: 14, fontWeight: 800, cursor: "pointer" }}>
           🔗 Paylaş
         </button>
       </div>
     </div>
   );
-} 
+}
