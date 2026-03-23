@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 
@@ -22,10 +22,10 @@ interface Ilan {
   formData: Record<string, any>;
   olusturmaTarihi: string;
   kullanici?: { id: string; name: string; image?: string };
-  kullaniciId?: string; // ✅ EKLENDİ
+  kullaniciId?: string;
 }
 
-export default function IlanDetayPage() {
+function IlanDetayIcerik() {
   const { data: session } = useSession();
   const router = useRouter();
   const params = useParams();
@@ -285,5 +285,17 @@ export default function IlanDetayPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function IlanDetayPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>
+        Yükleniyor... ⏳
+      </div>
+    }>
+      <IlanDetayIcerik />
+    </Suspense>
   );
 }
