@@ -85,13 +85,15 @@ function IlanDetayIcerik() {
     return `${mn.toLocaleString("tr-TR")} — ${mx.toLocaleString("tr-TR")} ${birim}`;
   };
 
+  // ✅ EKLENDİ
+  const tarihFmt = (iso: string) => new Date(iso).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
   const sessionUserId = (session?.user as any)?.id as string | undefined;
   const sessionEmail = session?.user?.email as string | undefined;
   const sahipMi = !!(
-  (sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId)) ||
-  (sessionEmail && ilan?.kullaniciId === sessionEmail)
-);
-  
+    (sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId)) ||
+    (sessionEmail && ilan?.kullaniciId === sessionEmail)
+  );
+
   if (yukleniyor) return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", gap: 14, fontFamily: "inherit" }}>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
