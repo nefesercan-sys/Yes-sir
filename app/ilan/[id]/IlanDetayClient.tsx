@@ -85,9 +85,10 @@ function IlanDetayIcerik({ id }: { id: string }) {
   useEffect(() => {
     fetch(`/api/ilanlar/${id}`)
       .then(r => r.json())
-      .then(d => {
-        if (d.ilan) {
-          setIlan(d.ilan);
+.then(d => {
+  const ilanData = d.ilan || d;
+  if (ilanData && ilanData._id) {
+    setIlan(ilanData);
           fetch(`/api/ilanlar?sektor=${d.ilan.sektorId}&limit=10`)
             .then(res => res.json())
             .then(data => {
