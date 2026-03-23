@@ -401,7 +401,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                 <div
                   key={ilan._id}
                   className="kart"
-                  onClick={() => router.push(`/ilan/${ilan._id}`)}
+                  onClick={() => router.push(`/ilan/${ilan._id || ilan.id}`)}
                 >
                   <div className="kart-img">
                     {gorselUrl ? (
@@ -455,7 +455,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                       </div>
                       <button
                         className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
-                        onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id}`); }}
+                        onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id || ilan.id}`); }}
                       >
                         {ilan.rol === "alan" ? "Teklif Ver →" : "İncele →"}
                       </button>
