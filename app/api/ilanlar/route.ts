@@ -249,6 +249,19 @@ export async function POST(req: NextRequest) {
 }
 
 // ─── YARDIMCI ──────────────────────────────────────────────
-function serialize(data: any) {
-  return JSON.parse(JSON.stringify(data));
+function serialize(data: any): any {
+  if (Array.isArray(data)) return data.map(serialize);
+  if (data && typeof data === "object") {
+    const result: any = {};
+    for (const [k, v] of Object.entries(data)) {
+      if (k === "_id") {
+        result["_id"] = v?.toString();
+        result["id"] = v?.toString();
+      } else {
+        result[k] = serialize(v);
+      }
+    }
+    return result;
+  }
+  return data;
 }
