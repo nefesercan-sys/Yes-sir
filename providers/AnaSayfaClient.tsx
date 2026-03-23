@@ -7,6 +7,7 @@ import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
 interface Ilan {
   _id: string;
+  id?: string;
   baslik: string;
   tip: "ticari" | "bireysel";
   rol: "alan" | "veren";
