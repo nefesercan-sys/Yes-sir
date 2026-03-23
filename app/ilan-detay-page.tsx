@@ -93,7 +93,8 @@ export default function IlanDetayPage() {
   };
 
   const tarihFmt = (iso: string) => new Date(iso).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
-  const sahipMi = !!((session?.user as any)?.id && ilan?.kullanici?.id === (session?.user as any)?.id);
+  const sessionUserId = (session?.user as any)?.id as string | undefined;
+  const sahipMi = !!(sessionUserId && (ilan?.kullanici?.id === sessionUserId || ilan?.kullaniciId === sessionUserId));
 
   // ─── LOADING ───
   if (yukleniyor) return (
