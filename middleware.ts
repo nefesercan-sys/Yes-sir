@@ -6,15 +6,15 @@ const BASE = "https://www.swaphubs.com";
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  // ── 1. /ilan/:uuid → /ilan/:slug ─────────────────────────
   if (pathname.startsWith("/ilan/")) {
     const segment = pathname.split("/")[2];
 
     if (segment && IS_OBJECTID.test(segment)) {
       try {
-        const res = await fetch(`${BASE}/api/ilanlar/uuid/${segment}`);
+        const res = await fetch(`${BASE}/api/ilanlar?id=${segment}`);
         if (res.ok) {
-          const { slug } = await res.json();
+          const data = await res.json();
+          const slug = data?.slug;
           if (slug) {
             return NextResponse.redirect(
               new URL(`/ilan/${slug}`, request.url),
@@ -23,33 +23,28 @@ export async function middleware(request: NextRequest) {
           }
         }
       } catch {}
-      return NextResponse.redirect(new URL("/404", request.url));
+      // slug bulunamazsa 404'e gitme, olduğu yerde kal
+      return NextResponse.next();
     }
   }
 
-  // ── 2. Query param → Temiz URL ───────────────────────────
   if (pathname === "/ilanlar") {
     const sektor = searchParams.get("sektor");
     const tip    = searchParams.get("tip");
     const sehir  = searchParams.get("sehir");
 
-    // ?sehir=istanbul&sektor=turizm → /ilanlar/istanbul/turizm
     if (sehir && sektor) {
       return NextResponse.redirect(
         new URL(`/ilanlar/${sehir}/${sektor}`, request.url),
         { status: 301 }
       );
     }
-
-    // ?sektor=turizm&tip=ticari → /ilanlar/turkiye/turizm/ticari
     if (sektor && tip) {
       return NextResponse.redirect(
         new URL(`/ilanlar/turkiye/${sektor}/${tip}`, request.url),
         { status: 301 }
       );
     }
-
-    // ?sektor=turizm → /ilanlar/turkiye/turizm
     if (sektor) {
       return NextResponse.redirect(
         new URL(`/ilanlar/turkiye/${sektor}`, request.url),
