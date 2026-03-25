@@ -1,0 +1,631 @@
+"use client";
+// ============================================================
+// SwapHubs — app/ilan-ver/page.tsx
+// Gelişmiş İlan Formu — Ülke/şehir, detaylı form, medya
+// Kısıtlama: Maksimum 10 Resim ve 1 Video
+// ============================================================
+import { useState, useEffect, Suspense } from "react";
+export const dynamic = 'force-dynamic';
+import { useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { SEKTORLER, BIREYSEL_SEKTORLER, TICARI_SEKTORLER, Sektor, FormAlan } from "@/lib/sektorler";
+import { COUNTRIES, getCitiesForCountry } from "@/lib/countries";
+import MedyaYukleyici from "@/app/components/MedyaYukleyici";
+
+const PARA_BIRIMLERI = [
+  { value: "₺", label: "₺ Türk Lirası" },
+  { value: "$", label: "$ Amerikan Doları" },
+  { value: "€", label: "€ Euro" },
+  { value: "£", label: "£ İngiliz Sterlini" },
+  { value: "AED", label: "AED Dirhem" },
+  { value: "SAR", label: "SAR Suudi Riyali" },
+  { value: "RUB", label: "RUB Rus Rublesi" },
+  { value: "CNY", label: "CNY Çin Yuanı" },
+  { value: "JPY", label: "JPY Japon Yeni" },
+];
+
+function IlanVerIcerik() {
+  const { data: session } = useSession() || {};
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const initTip = (searchParams.get("tip") as "bireysel" | "ticari") || "ticari";
+  const initRol = (searchParams.get("rol") as "alan" | "veren") || "alan";
+
+  const [adim, setAdim] = useState(1);
+  const [tip, setTip] = useState<"bireysel" | "ticari">(initTip);
+  const [rol, setRol] = useState<"alan" | "veren">(initRol);
+  const [seciliSektor, setSeciliSektor] = useState<Sektor | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [medyalar, setMedyalar] = useState<{ url: string; tip: "resim" | "video" }[]>([]);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [hata, setHata] = useState("");
+
+  const [seciliUlke, setSeciliUlke] = useState("TR");
+  const [sehirler, setSehirler] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSehirler(getCitiesForCountry(seciliUlke));
+    setField("sehir", "");
+  }, [seciliUlke]);
+
+  const gosterilecekSektorler = tip === "bireysel" ? BIREYSEL_SEKTORLER : TICARI_SEKTORLER;
+  const aktifForm = seciliSektor
+    ? (rol === "alan" ? seciliSektor.hizmetAlanFormu : seciliSektor.hizmetVerenFormu)
+    : [];
+
+  const setField = (key: string, val: any) => setFormData(p => ({ ...p, [key]: val }));
+  const toggleMulti = (key: string, val: string) => {
+    const mevcut: string[] = formData[key] || [];
+    setField(key, mevcut.includes(val) ? mevcut.filter(v => v !== val) : [...mevcut, val]);
+  };
+
+  const handleMedyaYuklendi = (url: string) => {
+    const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(url);
+    const yeniTip = isVideo ? "video" : "resim";
+    setMedyalar(p => {
+      if (yeniTip === "video") {
+        return [...p.filter(m => m.tip !== "video"), { url, tip: "video" }];
+      } else {
+        const resimSayisi = p.filter(m => m.tip === "resim").length;
+        if (resimSayisi < 10) return [...p, { url, tip: "resim" }];
+        return p;
+      }
+    });
+  };
+
+  const handleYayinla = async () => {
+    if (!seciliSektor) return;
+    if (!formData.baslik?.trim()) { setHata("İlan başlığı zorunludur"); return; }
+    if (!formData.sehir?.trim()) { setHata("Lütfen bir şehir/bölge seçin veya yazın"); return; }
+    if (!formData.aciklama?.trim()) { setHata("İlan açıklaması ve detayları zorunludur"); return; }
+    if (!formData.iletisim?.trim()) { setHata("İletişim bilgisi (Telefon veya E-posta) zorunludur"); return; }
+
+    const zorunlular = aktifForm.filter(f => f.zorunlu);
+    for (const f of zorunlular) {
+      if (!formData[f.key]) { setHata(`"${f.label}" alanı zorunludur`); return; }
+    }
+
+    setYukleniyor(true);
+    setHata("");
+    try {
+      const ulkeObj = COUNTRIES.find(c => c.code === seciliUlke);
+      const seciliParaBirimi = formData.butceBirimi || seciliSektor.butceBirimi || "₺";
+      const res = await fetch("/api/ilanlar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sektorId: seciliSektor.id,
+          baslik: formData.baslik,
+          aciklama: formData.aciklama,
+          iletisim: formData.iletisim,
+          adres: formData.adres,
+          kategori: formData.altKategori || seciliSektor.ad,
+          formData: { ...formData, ulke: ulkeObj?.name || "Türkiye" },
+          medyalar: medyalar.map(m => m.url),
+          butceMin: Number(formData.butceMin) || 0,
+          butceMax: Number(formData.butceMax) || 0,
+          butceBirimi: seciliParaBirimi,
+          tip,
+          rol,
+          ulke: ulkeObj?.name || "Türkiye",
+          sehir: formData.sehir || "",
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        router.push(`/ilan/${data.id}?yeni=1`);
+      } else {
+        setHata(data.error || "Bir hata oluştu");
+      }
+    } catch {
+      setHata("Bağlantı hatası. Lütfen tekrar deneyin.");
+    }
+    setYukleniyor(false);
+  };
+
+  const INP: React.CSSProperties = {
+    width: "100%", padding: "11px 14px", borderRadius: 11,
+    border: "1.5px solid #e2e8f0", fontSize: 14,
+    fontFamily: "inherit", outline: "none", background: "#fff",
+    color: "#0f172a", transition: "border-color .15s",
+  };
+
+  const renderAlan = (alan: FormAlan) => {
+    if (alan.key === "ulke" || alan.key === "sehir") return null;
+    switch (alan.tip) {
+      case "text":
+      case "number":
+        return (
+          <input
+            type={alan.tip}
+            value={formData[alan.key] || ""}
+            onChange={e => setField(alan.key, e.target.value)}
+            placeholder={alan.placeholder}
+            style={INP}
+          />
+        );
+      case "date":
+        return (
+          <input type="date" value={formData[alan.key] || ""} onChange={e => setField(alan.key, e.target.value)} style={INP} />
+        );
+      case "daterange":
+        return (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            <input type="date" placeholder="Başlangıç" value={formData[alan.key + "_bas"] || ""} onChange={e => setField(alan.key + "_bas", e.target.value)} style={INP} />
+            <input type="date" placeholder="Bitiş" value={formData[alan.key + "_bit"] || ""} onChange={e => setField(alan.key + "_bit", e.target.value)} style={INP} />
+          </div>
+        );
+      case "textarea":
+        return (
+          <textarea
+            value={formData[alan.key] || ""}
+            onChange={e => setField(alan.key, e.target.value)}
+            placeholder={alan.placeholder}
+            rows={4}
+            style={{ ...INP, resize: "vertical", minHeight: 100 }}
+          />
+        );
+      case "select":
+        return (
+          <select value={formData[alan.key] || ""} onChange={e => setField(alan.key, e.target.value)} style={INP}>
+            <option value="">Seçin...</option>
+            {alan.secenekler?.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        );
+      case "multiselect":
+        return (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+            {alan.secenekler?.map(s => {
+              const secili = (formData[alan.key] || []).includes(s);
+              return (
+                <button key={s} type="button" onClick={() => toggleMulti(alan.key, s)}
+                  style={{
+                    padding: "7px 12px", borderRadius: 8,
+                    border: `1.5px solid ${secili ? "#2563eb" : "#e2e8f0"}`,
+                    background: secili ? "#2563eb" : "#fff",
+                    color: secili ? "#fff" : "#475569",
+                    fontFamily: "inherit", fontSize: 12, fontWeight: 600,
+                    cursor: "pointer", transition: "all .12s",
+                  }}
+                >
+                  {secili ? "✓ " : ""}{s}
+                </button>
+              );
+            })}
+          </div>
+        );
+      case "range":
+        return (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            <div style={{ position: "relative" }}>
+              {alan.birim && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontSize: 13, pointerEvents: "none" }}>{alan.birim}</span>}
+              <input type="number" placeholder="Min" value={formData[alan.key + "Min"] || ""} onChange={e => setField(alan.key + "Min", e.target.value)} style={{ ...INP, paddingLeft: alan.birim ? 32 : 14 }} />
+            </div>
+            <div style={{ position: "relative" }}>
+              {alan.birim && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontSize: 13, pointerEvents: "none" }}>{alan.birim}</span>}
+              <input type="number" placeholder="Maks" value={formData[alan.key + "Max"] || ""} onChange={e => setField(alan.key + "Max", e.target.value)} style={{ ...INP, paddingLeft: alan.birim ? 32 : 14 }} />
+            </div>
+          </div>
+        );
+      case "toggle":
+        const togVal = formData[alan.key] || false;
+        return (
+          <div onClick={() => setField(alan.key, !togVal)}
+            style={{ width: 52, height: 28, borderRadius: 14, background: togVal ? "#2563eb" : "#e2e8f0", cursor: "pointer", position: "relative", transition: "background .2s" }}>
+            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff", position: "absolute", top: 2, left: togVal ? 26 : 2, transition: "left .2s", boxShadow: "0 1px 4px rgba(0,0,0,.2)" }} />
+          </div>
+        );
+      case "adres":
+        return (
+          <textarea value={formData[alan.key] || ""} onChange={e => setField(alan.key, e.target.value)} placeholder="Tam adres..." rows={3} style={{ ...INP, resize: "vertical" }} />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const gruplar = aktifForm.reduce((acc, alan) => {
+    if (alan.key === "ulke" || alan.key === "sehir") return acc;
+    const g = alan.grup || "Genel Detaylar";
+    if (!acc[g]) acc[g] = [];
+    acc[g].push(alan);
+    return acc;
+  }, {} as Record<string, FormAlan[]>);
+
+  const resimSayisi = medyalar.filter(m => m.tip === 'resim').length;
+  const videoSayisi = medyalar.filter(m => m.tip === 'video').length;
+  const canUploadMore = resimSayisi < 10 || videoSayisi < 1;
+  const aktifParaBirimi = formData.butceBirimi || seciliSektor?.butceBirimi || "₺";
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 80 }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
+        * { box-sizing: border-box; }
+        input:focus, select:focus, textarea:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+        input[type=number]::-webkit-inner-spin-button { opacity: 1; }
+      `}</style>
+
+      {/* HEADER */}
+      <div style={{ background: "#0f172a", padding: "14px 20px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,.3)" }}>
+        <button
+          onClick={() => adim > 1 ? setAdim(p => p - 1) : router.push("/")}
+          style={{ background: "rgba(255,255,255,.1)", border: "none", color: "#fff", width: 38, height: 38, borderRadius: 10, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+        >←</button>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h1 style={{ color: "#fff", fontSize: 16, fontWeight: 800, fontFamily: "Unbounded, sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            {adim === 1 ? "İlan Ver — Sektör Seç" : adim === 2 ? `${seciliSektor?.icon} ${seciliSektor?.ad}` : "📸 Medya & Yayınla"}
+          </h1>
+          <p style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginTop: 2 }}>
+            Adım {adim} / 3 {seciliSektor ? `· ${tip === "ticari" ? "TİCARİ" : "BİREYSEL"} · ${rol === "alan" ? "TALEP" : "HİZMET"}` : ""}
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
+          {[1, 2, 3].map(a => (
+            <div key={a} style={{ width: 32, height: 4, borderRadius: 2, background: a <= adim ? "#f59e0b" : "rgba(255,255,255,.15)", transition: ".2s" }} />
+          ))}
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "20px 16px" }}>
+        {hata && (
+          <div style={{ padding: "12px 16px", borderRadius: 12, background: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626", fontSize: 13, marginBottom: 14, fontWeight: 600 }}>
+            ⚠️ {hata}
+          </div>
+        )}
+
+        {/* ── ADIM 1 ── */}
+        {adim === 1 && (
+          <div>
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 16 }}>
+              <p style={{ fontSize: 13, fontWeight: 700, color: "#475569", marginBottom: 12, textTransform: "uppercase", letterSpacing: ".06em" }}>İlan Tipi</p>
+              <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
+                {(["bireysel", "ticari"] as const).map(t => (
+                  <button key={t} onClick={() => setTip(t)}
+                    style={{
+                      flex: 1, padding: "11px 8px", borderRadius: 10,
+                      border: `2px solid ${tip === t ? (t === "ticari" ? "#f59e0b" : "#2563eb") : "#e2e8f0"}`,
+                      background: tip === t ? (t === "ticari" ? "#fffbeb" : "#eff6ff") : "#fff",
+                      color: tip === t ? (t === "ticari" ? "#92400e" : "#1d4ed8") : "#64748b",
+                      fontFamily: "inherit", fontWeight: 700, fontSize: 13, cursor: "pointer",
+                    }}
+                  >
+                    {t === "bireysel" ? "👤 Bireysel" : "🏭 Ticari / Kurumsal"}
+                  </button>
+                ))}
+              </div>
+              <p style={{ fontSize: 13, fontWeight: 700, color: "#475569", marginBottom: 12, textTransform: "uppercase", letterSpacing: ".06em" }}>Rolünüz</p>
+              <div style={{ display: "flex", gap: 8 }}>
+                {(["alan", "veren"] as const).map(r => (
+                  <button key={r} onClick={() => setRol(r)}
+                    style={{
+                      flex: 1, padding: "11px 8px", borderRadius: 10,
+                      border: `2px solid ${rol === r ? (r === "alan" ? "#0f172a" : "#dc2626") : "#e2e8f0"}`,
+                      background: rol === r ? (r === "alan" ? "#0f172a" : "#dc2626") : "#fff",
+                      color: rol === r ? "#fff" : "#64748b",
+                      fontFamily: "inherit", fontWeight: 700, fontSize: 13, cursor: "pointer",
+                    }}
+                  >
+                    {r === "alan" ? "🛒 Hizmet / Ürün Alıyorum" : "💼 Hizmet / Ürün Veriyorum"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", fontFamily: "Unbounded, sans-serif", marginBottom: 6 }}>Sektör Seçin</h2>
+            <p style={{ color: "#94a3b8", fontSize: 13, marginBottom: 18 }}>Sektörünüze özel form alanları otomatik gelir.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(145px, 1fr))", gap: 10 }}>
+              {gosterilecekSektorler.map(s => (
+                <div key={s.id}
+                  onClick={() => { setSeciliSektor(s); setFormData({}); setAdim(2); }}
+                  style={{
+                    background: "#fff", borderRadius: 16,
+                    border: `2px solid ${seciliSektor?.id === s.id ? s.renk : "#e2e8f0"}`,
+                    padding: "18px 12px", cursor: "pointer", textAlign: "center", transition: "all .15s",
+                    boxShadow: seciliSektor?.id === s.id ? `0 4px 16px ${s.renk}30` : "none",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = s.renk)}
+                  onMouseLeave={e => { if (seciliSektor?.id !== s.id) e.currentTarget.style.borderColor = "#e2e8f0"; }}
+                >
+                  <p style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</p>
+                  <p style={{ fontSize: 12, fontWeight: 800, color: "#0f172a", marginBottom: 3 }}>{s.ad}</p>
+                  <p style={{ fontSize: 10, color: "#94a3b8" }}>{(s.altKategoriler?.length || 0)} alt kategori</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── ADIM 2 ── */}
+        {adim === 2 && seciliSektor && (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, padding: 16, background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0" }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: seciliSektor.renk + "20", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, flexShrink: 0 }}>
+                {seciliSektor.icon}
+              </div>
+              <div>
+                <h2 style={{ fontSize: 18, fontWeight: 800, color: "#0f172a", fontFamily: "Unbounded, sans-serif" }}>{seciliSektor.ad}</h2>
+                <p style={{ color: "#94a3b8", fontSize: 12, marginTop: 2 }}>
+                  {rol === "alan" ? "📋 Talep İlanı — Ne arıyorsunuz?" : "💼 Hizmet / Ürün İlanı — Ne sunuyorsunuz?"}
+                </p>
+              </div>
+              <button onClick={() => setAdim(1)} style={{ marginLeft: "auto", background: "#f1f5f9", border: "none", padding: "6px 12px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 600, color: "#475569", fontFamily: "inherit", flexShrink: 0 }}>
+                Değiştir
+              </button>
+            </div>
+
+            {/* Başlık, Ülke, Şehir */}
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  İlan Başlığı <span style={{ color: "#dc2626" }}>*</span>
+                </label>
+                <input
+                  value={formData.baslik || ""}
+                  onChange={e => setField("baslik", e.target.value)}
+                  placeholder="Kısa, açıklayıcı bir başlık yazın..."
+                  style={INP}
+                />
+                <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 6 }}>
+                  Örn: {seciliSektor.id === "uretim" ? "100 Adet Bayan Mont Fason Üretim Arıyorum" : seciliSektor.id === "turizm" ? "Antalya 5 Yıldızlı Otel Paketi — 2 Kişi 7 Gece" : "Başlığı kısa ve net tutun"}
+                </p>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Ülke <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <select value={seciliUlke} onChange={e => setSeciliUlke(e.target.value)} style={INP}>
+                    {COUNTRIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Şehir / Bölge <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  {sehirler.length > 0 ? (
+                    <select value={formData.sehir || ""} onChange={e => setField("sehir", e.target.value)} style={INP}>
+                      <option value="">Şehir seçin</option>
+                      {sehirler.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  ) : (
+                    <input type="text" value={formData.sehir || ""} onChange={e => setField("sehir", e.target.value)} placeholder="Şehir / Bölge yazın" style={INP} />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Açıklama & İletişim */}
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+              <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>Detaylar & İletişim</h3>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  İlan Açıklaması ve Detaylar <span style={{ color: "#dc2626" }}>*</span>
+                </label>
+                <textarea
+                  value={formData.aciklama || ""}
+                  onChange={e => setField("aciklama", e.target.value)}
+                  placeholder="Sunacağınız hizmeti, aradığınız ürünü veya özel şartlarınızı detaylıca anlatın..."
+                  rows={5}
+                  style={{ ...INP, resize: "vertical", minHeight: 120 }}
+                />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    İletişim Bilgisi <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input type="text" value={formData.iletisim || ""} onChange={e => setField("iletisim", e.target.value)} placeholder="05XX XXX XX XX veya E-posta" style={INP} />
+                  <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>Müşterilerin size ulaşacağı numara veya adres.</p>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Açık Adres (Opsiyonel)
+                  </label>
+                  <input type="text" value={formData.adres || ""} onChange={e => setField("adres", e.target.value)} placeholder="Mahalle, Sokak, İlçe vb." style={INP} />
+                  <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>Gerekliyse tam lokasyonunuzu belirtin.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* FİYAT ALANI */}
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+              <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>
+                💰 Fiyat Bilgisi
+              </h3>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Minimum Fiyat
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="number"
+                      value={formData.butceMin || ""}
+                      onChange={e => setField("butceMin", e.target.value)}
+                      placeholder="0"
+                      min="0"
+                      style={{ ...INP, paddingRight: 40 }}
+                    />
+                    <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+                      {aktifParaBirimi}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Maksimum Fiyat
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="number"
+                      value={formData.butceMax || ""}
+                      onChange={e => setField("butceMax", e.target.value)}
+                      placeholder="0"
+                      min="0"
+                      style={{ ...INP, paddingRight: 40 }}
+                    />
+                    <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+                      {aktifParaBirimi}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                    Para Birimi
+                  </label>
+                  <select
+                    value={aktifParaBirimi}
+                    onChange={e => setField("butceBirimi", e.target.value)}
+                    style={INP}
+                  >
+                    {PARA_BIRIMLERI.map(p => (
+                      <option key={p.value} value={p.value}>{p.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>
+                💡 Fiyat aralığı belirtmek daha fazla teklif almanızı sağlar. Sabit fiyat için her iki alana aynı değeri girin.
+              </p>
+            </div>
+
+            {/* DİNAMİK FORM ALANLARI */}
+            {Object.entries(gruplar).map(([grupAdi, alanlar]) => (
+              <div key={grupAdi} style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+                <h3 style={{
+                  fontSize: 11, fontWeight: 800, color: seciliSektor.renk,
+                  textTransform: "uppercase", letterSpacing: ".08em",
+                  marginBottom: 14, paddingBottom: 10,
+                  borderBottom: `2px solid ${seciliSektor.renk}20`,
+                }}>
+                  {grupAdi}
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {alanlar.map(alan => (
+                    <div key={alan.key}>
+                      <label style={{ fontSize: 12, fontWeight: 700, color: "#374151", display: "flex", alignItems: "center", gap: 5, marginBottom: 7, flexWrap: "wrap" }}>
+                        {alan.label}
+                        {alan.zorunlu && <span style={{ color: "#dc2626", fontSize: 14 }}>*</span>}
+                        {alan.birim && alan.tip !== "range" && <span style={{ color: "#94a3b8", fontWeight: 400, fontSize: 11 }}>({alan.birim})</span>}
+                      </label>
+                      {renderAlan(alan)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <button
+              onClick={() => { setHata(""); setAdim(3); }}
+              style={{ width: "100%", padding: 15, borderRadius: 14, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 800, cursor: "pointer", boxShadow: "0 4px 16px rgba(37,99,235,.3)" }}
+            >
+              Devam Et → Fotoğraf & Video
+            </button>
+          </div>
+        )}
+
+        {/* ── ADIM 3 ── */}
+        {adim === 3 && seciliSektor && (
+          <div>
+            <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 16 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: "#0f172a", fontFamily: "Unbounded, sans-serif", marginBottom: 4 }}>📸 Fotoğraf & Video</h2>
+              <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 16, lineHeight: 1.6 }}>
+                Görsel eklemek teklif alma oranınızı <strong>3 kat</strong> artırır. Maksimum <strong>10 fotoğraf</strong> ve <strong>1 video</strong>.
+              </p>
+              {medyalar.length > 0 && (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16 }}>
+                  {medyalar.map((m, i) => (
+                    <div key={i} style={{ position: "relative", aspectRatio: "1", borderRadius: 12, overflow: "hidden", background: "#f1f5f9", border: `2px solid ${i === 0 ? "#f59e0b" : "#e2e8f0"}` }}>
+                      {m.tip === "video"
+                        ? <video src={m.url} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        : <img src={m.url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      }
+                      {i === 0 && (
+                        <div style={{ position: "absolute", bottom: 4, left: "50%", transform: "translateX(-50%)", background: "#f59e0b", color: "#0f172a", fontSize: 9, fontWeight: 800, padding: "2px 6px", borderRadius: 4, whiteSpace: "nowrap" }}>KAPAK</div>
+                      )}
+                      <button onClick={() => setMedyalar(p => p.filter((_, j) => j !== i))}
+                        style={{ position: "absolute", top: 4, right: 4, width: 22, height: 22, borderRadius: "50%", background: "#dc2626", border: "none", color: "#fff", fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>×</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {canUploadMore ? (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ fontSize: 11, color: "#2563eb", fontWeight: 600, textAlign: "center" }}>
+                    {10 - resimSayisi > 0 ? `${10 - resimSayisi} fotoğraf hakkınız kaldı.` : "Maksimum fotoğraf sınırına ulaştınız."}
+                    {1 - videoSayisi > 0 ? " (1 video ekleyebilirsiniz)" : " (Video sınırına ulaştınız)"}
+                  </p>
+                  <MedyaYukleyici onYuklendi={handleMedyaYuklendi} />
+                </div>
+              ) : (
+                <div style={{ padding: 12, borderRadius: 10, background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#166534", fontSize: 12, textAlign: "center", fontWeight: 600 }}>
+                  ✅ Maksimum medya sayısına ulaşıldı (10 Fotoğraf + 1 Video).
+                </div>
+              )}
+            </div>
+
+            {/* Özet */}
+            <div style={{ background: "#f8fafc", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 16 }}>
+              <p style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>📋 İlan Özeti</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  { l: "Başlık", v: formData.baslik },
+                  { l: "Sektör", v: seciliSektor.ad },
+                  { l: "Tip", v: tip === "ticari" ? "Ticari" : "Bireysel" },
+                  { l: "Rol", v: rol === "alan" ? "Hizmet / Ürün Alıyorum" : "Hizmet / Ürün Veriyorum" },
+                  { l: "Ülke", v: COUNTRIES.find(c => c.code === seciliUlke)?.name },
+                  { l: "Şehir", v: formData.sehir },
+                  { l: "Fiyat", v: (formData.butceMin || formData.butceMax) ? `${formData.butceMin || 0} - ${formData.butceMax || 0} ${aktifParaBirimi}` : null },
+                  { l: "Para Birimi", v: aktifParaBirimi },
+                  { l: "Medya", v: medyalar.length > 0 ? `${medyalar.length} dosya` : "Yok" },
+                ].filter(r => r.v).map(r => (
+                  <div key={r.l} style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "6px 0", borderBottom: "1px solid #e2e8f0" }}>
+                    <span style={{ color: "#64748b", fontWeight: 600 }}>{r.l}</span>
+                    <span style={{ color: "#0f172a", fontWeight: 700, textAlign: "right", maxWidth: "60%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{r.v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {!session && (
+              <div style={{ padding: 14, borderRadius: 12, background: "#fffbeb", border: "1px solid #fde68a", marginBottom: 14 }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 4 }}>ℹ️ Üye Olmadan İlan Veriyorsunuz</p>
+                <p style={{ fontSize: 11, color: "#78350f", lineHeight: 1.6 }}>İlanınız yayınlanacak. Teklif kabul etmek için üye olmanız gerekecek.</p>
+              </div>
+            )}
+
+            <button
+              onClick={handleYayinla}
+              disabled={yukleniyor}
+              style={{
+                width: "100%", padding: 16, borderRadius: 14,
+                background: yukleniyor ? "#94a3b8" : "#f59e0b",
+                border: "none", color: yukleniyor ? "#fff" : "#0f172a",
+                fontFamily: "inherit", fontSize: 15, fontWeight: 800,
+                cursor: yukleniyor ? "not-allowed" : "pointer",
+                boxShadow: yukleniyor ? "none" : "0 4px 20px rgba(245,158,11,.4)",
+                transition: ".2s",
+              }}
+            >
+              {yukleniyor ? "⏳ İlan Yayınlanıyor..." : "⚡ İlanı Yayınla — Teklifler Gelsin"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function IlanVerPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#64748b" }}>
+        Yükleniyor... ⏳
+      </div>
+    }>
+      <IlanVerIcerik />
+    </Suspense>
+  );
+}
