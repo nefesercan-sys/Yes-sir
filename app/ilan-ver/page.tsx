@@ -12,6 +12,19 @@ import { SEKTORLER, BIREYSEL_SEKTORLER, TICARI_SEKTORLER, Sektor, FormAlan } fro
 import { COUNTRIES, getCitiesForCountry } from "@/lib/countries";
 import MedyaYukleyici from "@/app/components/MedyaYukleyici";
 
+// ── Para Birimi Listesi ──────────────────────────────────────
+const PARA_BIRIMLERI = [
+  { value: "₺", label: "₺ Türk Lirası" },
+  { value: "$", label: "$ Amerikan Doları" },
+  { value: "€", label: "€ Euro" },
+  { value: "£", label: "£ İngiliz Sterlini" },
+  { value: "AED", label: "AED Dirhem" },
+  { value: "SAR", label: "SAR Suudi Riyali" },
+  { value: "RUB", label: "RUB Rus Rublesi" },
+  { value: "CNY", label: "CNY Çin Yuanı" },
+  { value: "JPY", label: "JPY Japon Yeni" },
+];
+
 function IlanVerIcerik() {
   const { data: session } = useSession() || {};
   const router = useRouter();
@@ -105,6 +118,8 @@ function IlanVerIcerik() {
     setHata("");
     try {
       const ulkeObj = COUNTRIES.find(c => c.code === seciliUlke);
+      // ── Para birimi: kullanıcının seçtiği > sektör varsayılanı > ₺
+      const seciliParaBirimi = formData.butceBirimi || seciliSektor.butceBirimi || "₺";
       const res = await fetch("/api/ilanlar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -119,7 +134,7 @@ function IlanVerIcerik() {
           medyalar: medyalar.map(m => m.url),
           butceMin: Number(formData.butceMin) || 0,
           butceMax: Number(formData.butceMax) || 0,
-          butceBirimi: seciliSektor.butceBirimi,
+          butceBirimi: seciliParaBirimi,
           tip,
           rol,
           ulke: ulkeObj?.name || "Türkiye",
@@ -306,6 +321,8 @@ function IlanVerIcerik() {
   const resimSayisi = medyalar.filter(m => m.tip === 'resim').length;
   const videoSayisi = medyalar.filter(m => m.tip === 'video').length;
   const canUploadMore = resimSayisi < 10 || videoSayisi < 1;
+  // ── Aktif para birimi: kullanıcı seçtiyse onu, yoksa sektör varsayılanı
+  const aktifParaBirimi = formData.butceBirimi || seciliSektor?.butceBirimi || "₺";
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 80 }}>
@@ -584,53 +601,68 @@ function IlanVerIcerik() {
           </div>
         )}
         
-        {/* FİYAT ALANI */}
-    <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
-  <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>
-    💰 Fiyat Bilgisi
-  </h3>
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-    <div>
-      <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
-        Minimum Fiyat
-      </label>
-      <div style={{ position: "relative" }}>
-        <input
-          type="number"
-          value={formData.butceMin || ""}
-          onChange={e => setField("butceMin", e.target.value)}
-          placeholder="0"
-          min="0"
-          style={{ ...INP, paddingRight: 40 }}
-        />
-        <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
-          {seciliSektor?.butceBirimi || "₺"}
-        </span>
-      </div>
-    </div>
-    <div>
-      <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
-        Maksimum Fiyat
-      </label>
-      <div style={{ position: "relative" }}>
-        <input
-          type="number"
-          value={formData.butceMax || ""}
-          onChange={e => setField("butceMax", e.target.value)}
-          placeholder="0"
-          min="0"
-          style={{ ...INP, paddingRight: 40 }}
-        />
-        <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
-          {seciliSektor?.butceBirimi || "₺"}
-        </span>
-      </div>
-    </div>
-  </div>
-  <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>
-    💡 Fiyat aralığı belirtmek daha fazla teklif almanızı sağlar. Sabit fiyat için her iki alana aynı değeri girin.
-  </p>
-</div>
+        {/* ── FİYAT ALANI — PARA BİRİMİ EKLENDİ ── */}
+        <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
+          <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>
+            💰 Fiyat Bilgisi
+          </h3>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                Minimum Fiyat
+              </label>
+              <div style={{ position: "relative" }}>
+                <input
+                  type="number"
+                  value={formData.butceMin || ""}
+                  onChange={e => setField("butceMin", e.target.value)}
+                  placeholder="0"
+                  min="0"
+                  style={{ ...INP, paddingRight: 40 }}
+                />
+                <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+                  {aktifParaBirimi}
+                </span>
+              </div>
+            </div>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                Maksimum Fiyat
+              </label>
+              <div style={{ position: "relative" }}>
+                <input
+                  type="number"
+                  value={formData.butceMax || ""}
+                  onChange={e => setField("butceMax", e.target.value)}
+                  placeholder="0"
+                  min="0"
+                  style={{ ...INP, paddingRight: 40 }}
+                />
+                <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontWeight: 700, fontSize: 13 }}>
+                  {aktifParaBirimi}
+                </span>
+              </div>
+            </div>
+            {/* ── YENİ: Para Birimi Seçimi ── */}
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                Para Birimi
+              </label>
+              <select
+                value={aktifParaBirimi}
+                onChange={e => setField("butceBirimi", e.target.value)}
+                style={INP}
+              >
+                {PARA_BIRIMLERI.map(p => (
+                  <option key={p.value} value={p.value}>{p.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>
+            💡 Fiyat aralığı belirtmek daha fazla teklif almanızı sağlar. Sabit fiyat için her iki alana aynı değeri girin.
+          </p>
+        </div>
 
         {/* ── ADIM 3: MEDYA + YAYINLA ── */}
         {adim === 3 && seciliSektor && (
@@ -666,7 +698,7 @@ function IlanVerIcerik() {
                 </div>
               )}
 
-              {/* 🚨 YENİ KISITLAMA GÖRÜNÜMÜ: Sınırlar dolmadıysa yükleme kutusunu göster */}
+              {/* 🚨 YENİ KISITLAMA GÖRÜNÜMÜ */}
               {canUploadMore ? (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     <p style={{ fontSize: 11, color: "#2563eb", fontWeight: 600, textAlign: "center" }}>
@@ -693,6 +725,8 @@ function IlanVerIcerik() {
                   { l: "Rol", v: rol === "alan" ? "Hizmet / Ürün Alıyorum" : "Hizmet / Ürün Veriyorum" },
                   { l: "Ülke", v: COUNTRIES.find(c => c.code === seciliUlke)?.name },
                   { l: "Şehir", v: formData.sehir },
+                  { l: "Fiyat", v: (formData.butceMin || formData.butceMax) ? `${formData.butceMin || 0} - ${formData.butceMax || 0} ${aktifParaBirimi}` : null },
+                  { l: "Para Birimi", v: aktifParaBirimi },
                   { l: "Medya", v: medyalar.length > 0 ? `${medyalar.length} dosya` : "Yok" },
                 ].filter(r => r.v).map(r => (
                   <div key={r.l} style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "6px 0", borderBottom: "1px solid #e2e8f0" }}>
