@@ -25,7 +25,6 @@ const BTN_SM = (bg: string, c: string) => ({
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-// YENİ: "tekstil_yonetim" sekmesi eklendi
 type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari" | "tekstil_yonetim";
 type Rol = "alan" | "veren";
 type Tip = "bireysel" | "ticari";
@@ -47,7 +46,6 @@ function PanelIcerik() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Admin Kontrolü
   const isAdmin = session?.user?.email === 'nefesercan@gmail.com' || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
   const [aktifTab, setAktifTab] = useState<Tab>(
@@ -56,7 +54,6 @@ function PanelIcerik() {
   const [tip, setTip] = useState<Tip>("ticari");
   const [rol, setRol] = useState<Rol>("alan");
 
-  // Data
   const [ilanlar, setIlanlar] = useState<any[]>([]);
   const [teklifler, setTeklifler] = useState<any[]>([]);
   const [gelenTeklifler, setGelenTeklifler] = useState<any[]>([]);
@@ -208,7 +205,6 @@ function PanelIcerik() {
   );
   if (!session) return null;
 
-  // YENİ: "tekstil_yonetim" TABS listesine eklendi
   const TABS: { key: Tab; label: string; icon: string; badge?: number; adminOnly?: boolean }[] = [
     { key: "ozet", label: "Özet", icon: "📊" },
     { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar (Denetim)" : (rol === "alan" ? "Taleplerim" : "İlanlarım"), icon: "📋", badge: stats.aktifIlan },
@@ -521,7 +517,6 @@ function PanelIcerik() {
                       </p>
                       <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{formatSayi(r.fiyat)} {r.doviz || '₺'}</p>
                       <p style={{ fontSize: 11, color: "#94a3b8" }}>{formatTarih(r.olusturuldu || r.createdAt)}</p>
-                      {r.not && <p style={{ fontSize: 11, color: "#64748b", marginTop: 4 }}>📝 Not: {r.not}</p>}
                     </div>
                     <span className="dur" style={DURUM_STIL[r.durum] ? { background: DURUM_STIL[r.durum].bg, color: DURUM_STIL[r.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{r.durum}</span>
                   </div>
@@ -701,7 +696,7 @@ function PanelIcerik() {
             <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
           )}
 
-          {/* ── YENİ EKLENEN ADMIN: TEKSTİL VİTRİN YÖNETİMİ ── */}
+          {/* ── ADMIN: TEKSTİL VİTRİN YÖNETİMİ ── */}
           {isAdmin && aktifTab === "tekstil_yonetim" && (
             <TekstilYonetimBileseni onSuccess={yukle} />
           )}
@@ -712,18 +707,16 @@ function PanelIcerik() {
   );
 }
 
-// Form elemanları için ortak stil
 const SEL: React.CSSProperties = { 
   width: "100%", padding: "10px 12px", borderRadius: 10, 
   border: "1.5px solid #e2e8f0", fontSize: 13, 
   fontFamily: "inherit", background: "#fff", outline: "none" 
 };
 
-// AI İLAN BİLEŞENİ
 function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
   const [secilenSektor, setSecilenSektor] = useState("");
   const [rol, setRol] = useState("her-ikisi");
-  const [ulke, setUlke] = useState("Türkiye"); // Varsayılan olarak Türkiye seçili gelsin
+  const [ulke, setUlke] = useState("Türkiye"); 
   const [sehir, setSehir] = useState("Rastgele");
   const [adet, setAdet] = useState(5);
   const [yukleniyor, setYukleniyor] = useState(false);
@@ -778,13 +771,12 @@ function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, 
           <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
           <select value={ulke} onChange={e => {
               setUlke(e.target.value);
-              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); // Türkiye değilse şehri sıfırla
+              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); 
           }} style={SEL}>
             {ULKELER.map(u => <option key={u} value={u}>{u}</option>)}
           </select>
         </div>
 
-        {/* EĞER ÜLKE TÜRKİYE İSE ŞEHİR SEÇİMİ AÇILIR */}
         {ulke === 'Türkiye' && (
           <div>
             <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Şehir</label>
@@ -808,7 +800,7 @@ function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, 
   );
 }
 
-// ── YENİ: TEKSTİL YÖNETİM BİLEŞENİ ──────────────────────────────────────
+// ── TEKSTİL YÖNETİM BİLEŞENİ (ÇOKLU DOSYA DESTEKLİ) ──────────
 function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [sonuc, setSonuc] = useState("");
@@ -819,30 +811,23 @@ function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
     setSonuc("");
 
     const formData = new FormData(e.currentTarget);
-    const veri = {
-      baslik: formData.get("baslik"),
-      isimEn: formData.get("isimEn"),
-      fiyat: formData.get("fiyat"),
-      gorsel: formData.get("gorsel"),
-    };
 
     try {
       const res = await fetch("/api/tekstil-ekle", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(veri),
+        body: formData, 
       });
 
       const data = await res.json();
       if (data.success) {
-        setSonuc("✅ Ürün vitrine başarıyla eklendi!");
-        (e.target as HTMLFormElement).reset(); // Formu temizle
-        onSuccess(); // Sol taraftaki ilan sayılarını günceller
+        setSonuc("✅ Ürün başarıyla eklendi! Resimler ve videolar vitrine düştü.");
+        (e.target as HTMLFormElement).reset(); 
+        onSuccess(); 
       } else {
         setSonuc(`❌ Hata: ${data.message}`);
       }
     } catch {
-      setSonuc("❌ Sunucu bağlantı hatası!");
+      setSonuc("❌ Sunucu bağlantı hatası veya dosyalar çok büyük!");
     }
     setYukleniyor(false);
   };
@@ -851,7 +836,8 @@ function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
     <div className="card">
       <p className="sttl">🧵 Tekstil Vitrini Yönetimi</p>
       <p style={{ fontSize: 13, color: "#64748b", marginBottom: 20 }}>
-        Buradan eklediğiniz ürünler doğrudan swaphubs.com/tekstil-antalya sayfasındaki müşteri vitrinine düşer.
+        Buradan eklediğiniz ürünler doğrudan müşteri vitrinine düşer. 
+        <strong>"Dosya Seç"</strong> butonuna basarak telefonunuzdan aynı anda birden fazla fotoğraf ve video yükleyebilirsiniz.
       </p>
 
       <form onSubmit={urunKaydet} style={{ display: "grid", gap: "16px" }}>
@@ -866,19 +852,34 @@ function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "16px" }}>
           <div>
             <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Fiyat (₺) *</label>
             <input type="number" name="fiyat" required placeholder="Örn: 1250" className="adm-input" />
           </div>
+          
+          {/* YENİ: ÇOKLU RESİM VE VİDEO SEÇİMİ İÇİN ALAN */}
           <div>
-            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Resim URL</label>
-            <input type="text" name="gorsel" placeholder="https://..." className="adm-input" />
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#0f172a", textTransform: "uppercase", display: "block", marginBottom: 5 }}>
+              📷 Resim ve Video Seç (Çoklu Seçim) *
+            </label>
+            <input 
+              type="file" 
+              name="medya" 
+              accept="image/*,video/*" 
+              multiple 
+              required 
+              className="adm-input" 
+              style={{padding: '12px', background: '#f8fafc', border: '2px dashed #94a3b8'}} 
+            />
+            <small style={{ color: "#64748b", fontSize: "11px", marginTop: "6px", display: "block", fontWeight: 600 }}>
+              💡 İpucu: Telefonunuzun galerisi açıldığında birden fazla dosyayı basılı tutarak seçebilirsiniz. İlk seçtiğiniz dosya, ürünün kapak fotoğrafı (veya videosu) olur.
+            </small>
           </div>
         </div>
 
         <button type="submit" disabled={yukleniyor} style={{ padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer", marginTop: "10px" }}>
-          {yukleniyor ? "⏳ Kaydediliyor..." : "➕ Ürünü Vitrine Ekle"}
+          {yukleniyor ? "⏳ Dosyalar Yükleniyor... Lütfen bekleyin" : "➕ Ürünü Vitrine Ekle"}
         </button>
 
         {sonuc && (
