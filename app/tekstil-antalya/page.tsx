@@ -1,34 +1,32 @@
 import TekstilClient from "./TekstilClient";
-// Senin kendi oluşturduğun mongodb.ts dosyasından getDb fonksiyonunu çağırıyoruz
 import { getDb } from "@/lib/mongodb";
+
+// 🚨 İŞTE ÇÖZÜM BURADA: Sayfanın eski önbelleği göstermesini engeller, her girişte canlı veriyi çeker!
+export const dynamic = "force-dynamic";
 
 export default async function TekstilAntalyaPage() {
   try {
-    // 1. Doğrudan senin 'hizmetara' veritabanına bağlanıyoruz
     const db = await getDb();
-
-    // 2. Veritabanından tekstil ilanlarını çekiyoruz
-    // DİKKAT: Veritabanındaki tablonun (collection) adı "ilanlar" değilse burayı değiştir (örneğin "urunler" yap)
+    
+    // Sadece tekstil kategorisindeki ve aktif olan ilanları çek
     const dbUrunler = await db.collection("ilanlar").find({ 
-      kategori: "tekstil", // Eğer kategoriyi başka isimle kaydediyorsan bunu da düzelt
-      // durum: "aktif" // İstersen sadece aktif olanları göstermek için bunu açabilirsin
-    }).toArray();
+      kategori: "tekstil",
+      durum: "aktif"
+    }).sort({ eklenmeTarihi: -1 }).toArray(); // En son eklenen en üstte çıksın diye sıraladık
 
-    // 3. MongoDB'den gelen veriyi bizim sayfaya uygun hale getiriyoruz
     const gercekUrunler = dbUrunler.map((urun: any) => ({
-      _id: urun._id.toString(), // MongoDB ObjectId'sini yazıya çevirmek zorundayız
-      isimTr: urun.baslik || urun.isimTr || "", // Admin panelde isme ne diyorsan onu yaz
-      isimEn: urun.isimEn || urun.baslikEn || "",
+      _id: urun._id.toString(),
+      isimTr: urun.baslik || "", 
+      isimEn: urun.isimEn || "",
       fiyat: urun.fiyat || 0,
-      resimUrl: urun.gorsel || urun.resimUrl || "", // Resim linkini hangi kelimeyle kaydediyorsan onu yaz
+      // Yeni çoklu resim sistemine uyum sağladık (medyalar listesi varsa ilkini gösterir)
+      resimUrl: (urun.medyalar && urun.medyalar.length > 0) ? urun.medyalar[0] : (urun.gorsel || ""), 
     }));
 
-    // 4. Veriyi animasyonlu sayfaya gönder
     return <TekstilClient urunler={gercekUrunler} />;
 
   } catch (error) {
-    console.error("Veritabanından ilanlar çekilemedi:", error);
-    // Hata olursa sayfa çökmesin diye boş gönderiyoruz
+    console.error("Veri çekme hatası:", error);
     return <TekstilClient urunler={[]} />;
   }
 }
