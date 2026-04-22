@@ -1,13 +1,14 @@
 "use client";
 // ============================================================
 // SwapHubs — app/panel/page.tsx
-// Tam üye paneli + Adminler için Gizli AI İlan Motoru
+// Tam üye paneli + Adminler için Gizli AI İlan Motoru + Tekstil Vitrini
 // ============================================================
 export const dynamic = 'force-dynamic';
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TUM_SEKTORLER } from "@/lib/sektorler"; // 🌟 Merkezi sektör listemiz!
+import { TUM_SEKTORLER } from "@/lib/sektorler";
+
 const BTN_SM = (bg: string, c: string) => ({
   padding: "6px 12px",
   borderRadius: "8px",
@@ -20,10 +21,12 @@ const BTN_SM = (bg: string, c: string) => ({
   cursor: "pointer",
   transition: "all 0.15s",
 });
+
 const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
 const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari";
+// YENİ: "tekstil_yonetim" sekmesi eklendi
+type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari" | "tekstil_yonetim";
 type Rol = "alan" | "veren";
 type Tip = "bireysel" | "ticari";
 
@@ -40,7 +43,7 @@ const DURUM_STIL: Record<string, { bg: string; c: string }> = {
 };
 
 function PanelIcerik() {
-  const { data: session } = useSession() || {};
+  const { data: session, status } = useSession() || {};
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -76,7 +79,6 @@ function PanelIcerik() {
     if (!session?.user?.email) return;
     setLoading(true);
     try {
-      // Admin isek kendi paneline hem kendi ilanlarını hem de AI ilanlarını (denetim için) getir
       const ilanApiUrl = isAdmin ? "/api/ilanlar?limit=100" : "/api/ilanlar?kendi=true";
 
       const [ilanRes, teklifRes, gelenRes, sipRes, bilRes, konRes] = await Promise.all([
@@ -94,7 +96,6 @@ function PanelIcerik() {
       ]);
 
       const tumIlanlar = Array.isArray(ilanD) ? ilanD : ilanD.ilanlar || ilanD.data || [];
-      // Kullanıcı görünümü filtrelemesi
       const filtreIlanlar = tumIlanlar.filter(
         (i: any) => isAdmin ? true : (i.rol === rol && i.tip === tip)
       );
@@ -128,7 +129,6 @@ function PanelIcerik() {
     if (session) yukle();
   }, [session, status, yukle]);
 
-  // Mesajları yükle
   const mesajYukle = useCallback(async (karsiEmail: string, ilanId?: string) => {
     setMesajYukleniyor(true);
     try {
@@ -147,7 +147,7 @@ function PanelIcerik() {
       const k = konusmalar.find(k => k._id === aktifKonusma);
       if (k) mesajYukle(k.karsiTaraf, k.ilanId);
     }
-  }, [aktifKonusma]);
+  }, [aktifKonusma, konusmalar, mesajYukle]);
 
   const mesajGonder = async () => {
     if (!yeniMesaj.trim() || !aktifKonusma) return;
@@ -190,14 +190,12 @@ function PanelIcerik() {
     yukle();
   };
 
-  // Güvenli Tarih Formatlayıcı
   const formatTarih = (tarihStr: any) => {
     if (!tarihStr) return "Tarih Yok";
     const d = new Date(tarihStr);
     return isNaN(d.getTime()) ? "Geçersiz Tarih" : d.toLocaleDateString("tr-TR");
   };
 
-  // Güvenli Sayı Formatlayıcı
   const formatSayi = (sayiStr: any) => {
     const s = Number(sayiStr);
     return isNaN(s) ? 0 : s.toLocaleString("tr-TR");
@@ -210,6 +208,7 @@ function PanelIcerik() {
   );
   if (!session) return null;
 
+  // YENİ: "tekstil_yonetim" TABS listesine eklendi
   const TABS: { key: Tab; label: string; icon: string; badge?: number; adminOnly?: boolean }[] = [
     { key: "ozet", label: "Özet", icon: "📊" },
     { key: "ilanlarim", label: isAdmin ? "Tüm İlanlar (Denetim)" : (rol === "alan" ? "Taleplerim" : "İlanlarım"), icon: "📋", badge: stats.aktifIlan },
@@ -220,9 +219,9 @@ function PanelIcerik() {
     { key: "bildirimler", label: "Bildirimler", icon: "🔔", badge: stats.okunmamisBildirim },
     { key: "profil", label: "Profilim", icon: "🏢" },
     { key: "ayarlar", label: "Ayarlar", icon: "⚙️" },
-    // ADMIN ÖZEL SEKMELER
     { key: "ai_ilan_bireysel", label: "🤖 AI İlan (Bireysel)", icon: "⚡", adminOnly: true },
     { key: "ai_ilan_ticari", label: "🤖 AI İlan (B2B)", icon: "🏭", adminOnly: true },
+    { key: "tekstil_yonetim", label: "🧵 Tekstil Vitrini", icon: "👗", adminOnly: true },
   ];
 
   return (
@@ -522,6 +521,7 @@ function PanelIcerik() {
                       </p>
                       <p style={{ fontSize: 16, fontWeight: 800, color: "#059669", marginBottom: 3 }}>{formatSayi(r.fiyat)} {r.doviz || '₺'}</p>
                       <p style={{ fontSize: 11, color: "#94a3b8" }}>{formatTarih(r.olusturuldu || r.createdAt)}</p>
+                      {r.not && <p style={{ fontSize: 11, color: "#64748b", marginTop: 4 }}>📝 Not: {r.not}</p>}
                     </div>
                     <span className="dur" style={DURUM_STIL[r.durum] ? { background: DURUM_STIL[r.durum].bg, color: DURUM_STIL[r.durum].c } : { background: "#f1f5f9", color: "#64748b" }}>{r.durum}</span>
                   </div>
@@ -701,6 +701,11 @@ function PanelIcerik() {
             <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
           )}
 
+          {/* ── YENİ EKLENEN ADMIN: TEKSTİL VİTRİN YÖNETİMİ ── */}
+          {isAdmin && aktifTab === "tekstil_yonetim" && (
+            <TekstilYonetimBileseni onSuccess={yukle} />
+          )}
+
         </div>
       </div>
     </div>
@@ -799,6 +804,89 @@ function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, 
         {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
       </button>
       {sonuc && <div style={{ marginTop: 16, padding: 12, borderRadius: 8, background: sonuc.includes('❌') ? '#fef2f2' : '#ecfdf5', color: sonuc.includes('❌') ? '#dc2626' : '#059669', fontSize: 13, fontWeight: 700 }}>{sonuc}</div>}
+    </div>
+  );
+}
+
+// ── YENİ: TEKSTİL YÖNETİM BİLEŞENİ ──────────────────────────────────────
+function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [sonuc, setSonuc] = useState("");
+
+  const urunKaydet = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setYukleniyor(true);
+    setSonuc("");
+
+    const formData = new FormData(e.currentTarget);
+    const veri = {
+      baslik: formData.get("baslik"),
+      isimEn: formData.get("isimEn"),
+      fiyat: formData.get("fiyat"),
+      gorsel: formData.get("gorsel"),
+    };
+
+    try {
+      const res = await fetch("/api/tekstil-ekle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(veri),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setSonuc("✅ Ürün vitrine başarıyla eklendi!");
+        (e.target as HTMLFormElement).reset(); // Formu temizle
+        onSuccess(); // Sol taraftaki ilan sayılarını günceller
+      } else {
+        setSonuc(`❌ Hata: ${data.message}`);
+      }
+    } catch {
+      setSonuc("❌ Sunucu bağlantı hatası!");
+    }
+    setYukleniyor(false);
+  };
+
+  return (
+    <div className="card">
+      <p className="sttl">🧵 Tekstil Vitrini Yönetimi</p>
+      <p style={{ fontSize: 13, color: "#64748b", marginBottom: 20 }}>
+        Buradan eklediğiniz ürünler doğrudan swaphubs.com/tekstil-antalya sayfasındaki müşteri vitrinine düşer.
+      </p>
+
+      <form onSubmit={urunKaydet} style={{ display: "grid", gap: "16px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ürün Adı (TR) *</label>
+            <input type="text" name="baslik" required placeholder="Örn: Siyah Keten Elbise" className="adm-input" />
+          </div>
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ürün Adı (EN)</label>
+            <input type="text" name="isimEn" placeholder="Örn: Black Linen Dress" className="adm-input" />
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Fiyat (₺) *</label>
+            <input type="number" name="fiyat" required placeholder="Örn: 1250" className="adm-input" />
+          </div>
+          <div>
+            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Resim URL</label>
+            <input type="text" name="gorsel" placeholder="https://..." className="adm-input" />
+          </div>
+        </div>
+
+        <button type="submit" disabled={yukleniyor} style={{ padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#0f172a", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer", marginTop: "10px" }}>
+          {yukleniyor ? "⏳ Kaydediliyor..." : "➕ Ürünü Vitrine Ekle"}
+        </button>
+
+        {sonuc && (
+          <div style={{ padding: 12, borderRadius: 8, background: sonuc.includes("✅") ? "#ecfdf5" : "#fef2f2", color: sonuc.includes("✅") ? "#059669" : "#dc2626", fontSize: 13, fontWeight: 700, textAlign: "center" }}>
+            {sonuc}
+          </div>
+        )}
+      </form>
     </div>
   );
 }
