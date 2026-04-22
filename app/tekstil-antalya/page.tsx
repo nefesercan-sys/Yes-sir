@@ -1,39 +1,34 @@
 import TekstilClient from "./TekstilClient";
-
-// 1. KENDİ VAR OLAN BAĞLANTILARINI BURAYA YAZ
-// Projendeki veritabanı bağlantı dosyanın ve modelinin yolu (Örneğin: Ilan, Urun, Product vb.)
-import dbConnect from "@/lib/db"; // veya mongodb.ts, db.ts ne isim verdiysen
-import Ilan from "@/models/Ilan"; // İlanlarını/Ürünlerini tuttuğun model dosyasının adı
+// Senin kendi oluşturduğun mongodb.ts dosyasından getDb fonksiyonunu çağırıyoruz
+import { getDb } from "@/lib/mongodb";
 
 export default async function TekstilAntalyaPage() {
-  
   try {
-    // 2. Kendi var olan bağlantını çalıştır
-    await dbConnect();
+    // 1. Doğrudan senin 'hizmetara' veritabanına bağlanıyoruz
+    const db = await getDb();
 
-    // 3. Kendi "Ilan" veya "Urun" modelinden tekstil olanları çek
-    // (Eğer veritabanında 'kategori' veya 'durum' sütunlarının adları farklıysa burayı ona göre uyarla)
-    const dbUrunler = await Ilan.find({ 
-      kategori: "tekstil", 
-      durum: "aktif" // Eğer böyle bir filtren yoksa bu satırı silebilirsin
-    }).lean();
+    // 2. Veritabanından tekstil ilanlarını çekiyoruz
+    // DİKKAT: Veritabanındaki tablonun (collection) adı "ilanlar" değilse burayı değiştir (örneğin "urunler" yap)
+    const dbUrunler = await db.collection("ilanlar").find({ 
+      kategori: "tekstil", // Eğer kategoriyi başka isimle kaydediyorsan bunu da düzelt
+      // durum: "aktif" // İstersen sadece aktif olanları göstermek için bunu açabilirsin
+    }).toArray();
 
-    // 4. Gelen karmaşık veriyi bizim animasyonlu sayfamızın formatına çevir
+    // 3. MongoDB'den gelen veriyi bizim sayfaya uygun hale getiriyoruz
     const gercekUrunler = dbUrunler.map((urun: any) => ({
-      _id: urun._id.toString(),
-      isimTr: urun.isimTr || urun.baslik, // Senin db'de başlık nasıl kayıtlıysa
+      _id: urun._id.toString(), // MongoDB ObjectId'sini yazıya çevirmek zorundayız
+      isimTr: urun.baslik || urun.isimTr || "", // Admin panelde isme ne diyorsan onu yaz
       isimEn: urun.isimEn || urun.baslikEn || "",
       fiyat: urun.fiyat || 0,
-      resimUrl: urun.resimUrl || urun.gorsel || "", // Senin db'de resim sütununun adı neyse
+      resimUrl: urun.gorsel || urun.resimUrl || "", // Resim linkini hangi kelimeyle kaydediyorsan onu yaz
     }));
 
-    // 5. Veriyi animasyonlu client sayfana gönder!
+    // 4. Veriyi animasyonlu sayfaya gönder
     return <TekstilClient urunler={gercekUrunler} />;
 
   } catch (error) {
-    console.error("Veri çekilirken hata oluştu:", error);
-    
-    // Veritabanına bağlanılamazsa sayfa çökmesin diye boş liste gönderiyoruz
+    console.error("Veritabanından ilanlar çekilemedi:", error);
+    // Hata olursa sayfa çökmesin diye boş gönderiyoruz
     return <TekstilClient urunler={[]} />;
   }
 }
