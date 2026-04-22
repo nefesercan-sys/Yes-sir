@@ -100,55 +100,6 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
 
   return (
     <div className={styles.wrapper}>
-      {/* 🚨 ÇÖZÜM BURADA: Vercel'in çökmemesi için stili güvenli HTML formatına çevirdik */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        .urun-izgara {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          gap: 15px;
-          margin-top: 20px;
-          width: 100%;
-        }
-        @media (max-width: 600px) {
-          .urun-izgara {
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-          }
-        }
-        .urun-karti {
-          background: rgba(0, 0, 0, 0.15);
-          border-radius: 12px;
-          padding: 12px;
-          display: flex;
-          flex-direction: column;
-        }
-        .medya-kutu {
-          width: 100%;
-          aspect-ratio: 4/5;
-          border-radius: 8px;
-          overflow: hidden;
-          margin-bottom: 10px;
-          background: rgba(255,255,255,0.05);
-        }
-        .medya-kutu img, .medya-kutu video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .siparis-buton {
-          width: 100%;
-          margin-top: auto;
-          padding: 10px;
-          background: #a8e6cf;
-          color: #222;
-          border: none;
-          border-radius: 8px;
-          font-weight: 800;
-          font-size: 0.9rem;
-          cursor: pointer;
-        }
-      `}} />
-
       {/* ── HERO ──────────────────────────────────────── */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
@@ -185,22 +136,23 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
           <h2 className={`${styles.sectionTitle} ${styles.lightTitle}`}>Tekstil <em>Koleksiyonu</em></h2>
         </div>
 
-        <div className="urun-izgara">
+        {/* 🚨 ÇÖZÜM: Derleyiciyi çökertmemesi için Inline Flexbox kullandık. Boşlukları otomatik doldurur! */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", marginTop: "20px", width: "100%" }}>
           {urunler.map((p, i) => {
             const medyaUrl = p.resimUrl || (p.medyalar && p.medyalar[0]);
             const isVideo = medyaUrl?.match(/\.(mp4|webm|ogg)$/i);
 
             return (
-              <div key={p._id} className={`urun-karti ${styles.reveal}`} style={{ animationDelay: `${i * 0.05}s` }}>
-                <div className="medya-kutu">
+              <div key={p._id} className={styles.reveal} style={{ flex: "1 1 160px", background: "rgba(0, 0, 0, 0.15)", borderRadius: "12px", padding: "12px", display: "flex", flexDirection: "column", animationDelay: `${i * 0.05}s` }}>
+                <div style={{ width: "100%", aspectRatio: "4/5", borderRadius: "8px", overflow: "hidden", marginBottom: "10px", background: "rgba(255,255,255,0.05)" }}>
                   {medyaUrl ? (
                     isVideo ? (
-                      <video src={medyaUrl} autoPlay loop muted playsInline />
+                      <video src={medyaUrl} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     ) : (
-                      <img src={medyaUrl} alt={p.isimTr} />
+                      <img src={medyaUrl} alt={p.isimTr} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     )
                   ) : (
-                    <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888', fontSize: '2rem'}}>📷</div>
+                    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "#888", fontSize: "2rem" }}>📷</div>
                   )}
                 </div>
                 
@@ -210,7 +162,7 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
                   {p.fiyat > 0 ? `${p.fiyat} ₺` : "Fiyat Sorunuz"}
                 </span>
                 
-                <button className="siparis-buton" onClick={() => siparisBaslat(p)}>
+                <button onClick={() => siparisBaslat(p)} style={{ width: "100%", marginTop: "auto", padding: "10px", background: "#a8e6cf", color: "#222", border: "none", borderRadius: "8px", fontWeight: "800", fontSize: "0.9rem", cursor: "pointer" }}>
                   Sipariş Ver
                 </button>
               </div>
