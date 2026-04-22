@@ -4,8 +4,16 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-// ── Veri ────────────────────────────────────────────────────────────────────
+// ── Dinamik Veri Tipi (Admin Panelden Gelecekler) ────────
+export interface Urun {
+  _id: string;
+  isimTr: string;
+  isimEn: string;
+  fiyat: number;
+  resimUrl: string;
+}
 
+// ── Statik Veri (Kumaşlar aynı kalıyor) ──────────────────
 const FABRICS = [
   {
     icon: "🌿",
@@ -39,24 +47,9 @@ const FABRICS = [
   },
 ];
 
-const PRODUCTS = [
-  { num: "01", tr: "Yazlık Elbise", en: "Summer Dresses" },
-  { num: "02", tr: "Keten Gömlek", en: "Linen Shirts" },
-  { num: "03", tr: "Şort & Pantolon", en: "Shorts & Trousers" },
-  { num: "04", tr: "Bebek Giyim", en: "Baby Apparel" },
-  { num: "05", tr: "Kimono & Kaftan", en: "Kimono & Kaftan" },
-  { num: "06", tr: "Tulum & Salopet", en: "Jumpsuits & Overalls" },
-  { num: "07", tr: "Plaj Giyim", en: "Beachwear" },
-  { num: "08", tr: "Bluz & Tunik", en: "Blouses & Tunics" },
-  { num: "09", tr: "Masa Örtüsü", en: "Tablecloths" },
-  { num: "10", tr: "Nevresim Takımı", en: "Bed Linen Sets" },
-  { num: "11", tr: "Mutfak Tekstili", en: "Kitchen Textiles" },
-  { num: "12", tr: "Özel Sipariş", en: "Custom Orders" },
-];
-
 // ── Bileşen ──────────────────────────────────────────────────────────────────
 
-export default function TekstilAntalyaPage() {
+export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -155,7 +148,7 @@ export default function TekstilAntalyaPage() {
         </div>
       </section>
 
-      {/* ── ÜRÜNLER ───────────────────────────────────── */}
+      {/* ── DİNAMİK ÜRÜNLER (BURASI DEĞİŞTİ) ────────────── */}
       <section className={styles.sectionDark} id="urunler">
         <div className={styles.sectionHead}>
           <p className={`${styles.sectionLabel} ${styles.light}`}>Ürün Yelpazesi · Product Range</p>
@@ -164,11 +157,24 @@ export default function TekstilAntalyaPage() {
         </div>
 
         <div className={styles.productGrid}>
-          {PRODUCTS.map((p, i) => (
-            <div key={i} className={`${styles.productItem} ${styles.reveal}`} style={{ animationDelay: `${i * 0.04}s` }}>
-              <span className={styles.productNum}>{p.num}</span>
-              <span className={styles.productTr}>{p.tr}</span>
-              <span className={styles.productEn}>{p.en}</span>
+          {urunler.map((p, i) => (
+            <div key={p._id} className={`${styles.productItem} ${styles.reveal}`} style={{ animationDelay: `${i * 0.04}s` }}>
+              
+              {/* Resim Ekleme Alanı */}
+              {p.resimUrl && (
+                <div style={{ width: "100%", height: "200px", borderRadius: "8px", overflow: "hidden", marginBottom: "1rem", backgroundColor: "#1a1a2e" }}>
+                  <img src={p.resimUrl} alt={p.isimTr} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+              )}
+
+              <span className={styles.productTr}>{p.isimTr}</span>
+              <span className={styles.productEn}>{p.isimEn}</span>
+              
+              {/* Fiyat Ekleme Alanı (Neon Yeşil Temana Uygun) */}
+              <span style={{ display: "block", marginTop: "12px", color: "#a8e6cf", fontWeight: "bold", fontSize: "1.2rem" }}>
+                {p.fiyat > 0 ? `${p.fiyat} ₺` : "Fiyat Sorunuz"}
+              </span>
+
             </div>
           ))}
         </div>
