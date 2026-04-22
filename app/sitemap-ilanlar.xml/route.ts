@@ -8,9 +8,9 @@ export async function GET() {
   let urls: string[] = [];
 
   try {
-    const res = await fetch(`${BASE_URL}/api/ilanlar`, {
-      next: { revalidate: 3600 },
-    });
+    const res = await fetch(`${BASE_URL}/api/ilanlar?limit=5000`, {
+  next: { revalidate: 3600 },
+  });
 
     if (res.ok) {
       const data = await res.json();
