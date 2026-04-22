@@ -100,8 +100,8 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
 
   return (
     <div className={styles.wrapper}>
-      {/* BOŞLUKLARI SİLİP EKRANI DOLDURACAK ÖZEL STİL (Sadece bu sayfada çalışır) */}
-      <style>{`
+      {/* 🚨 ÇÖZÜM BURADA: Vercel'in çökmemesi için stili güvenli HTML formatına çevirdik */}
+      <style dangerouslySetInnerHTML={{ __html: `
         .urun-izgara {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -111,12 +111,12 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
         }
         @media (max-width: 600px) {
           .urun-izgara {
-            grid-template-columns: 1fr 1fr; /* Mobilde boşluk kalmasın diye 2'ye böldük */
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
           }
         }
         .urun-karti {
-          background: rgba(0, 0, 0, 0.15); /* Senin kahverengi temana uyar */
+          background: rgba(0, 0, 0, 0.15);
           border-radius: 12px;
           padding: 12px;
           display: flex;
@@ -124,7 +124,7 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
         }
         .medya-kutu {
           width: 100%;
-          aspect-ratio: 4/5; /* Resimleri Instagram tarzı dikey ve şık yapar */
+          aspect-ratio: 4/5;
           border-radius: 8px;
           overflow: hidden;
           margin-bottom: 10px;
@@ -139,7 +139,7 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
           width: 100%;
           margin-top: auto;
           padding: 10px;
-          background: #a8e6cf; /* Senin neon yeşilin */
+          background: #a8e6cf;
           color: #222;
           border: none;
           border-radius: 8px;
@@ -147,7 +147,7 @@ export default function TekstilClient({ urunler }: { urunler: Urun[] }) {
           font-size: 0.9rem;
           cursor: pointer;
         }
-      `}</style>
+      `}} />
 
       {/* ── HERO ──────────────────────────────────────── */}
       <section className={styles.hero}>
