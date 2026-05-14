@@ -4,7 +4,6 @@ import { MongoClient } from 'mongodb'
 const MONGODB_URI = process.env.MONGODB_URI!
 const BASE_URL = 'https://www.swaphubs.com'
 
-// UUID pattern - 24 karakterlik hex string (MongoDB ObjectId)
 const UUID_REGEX = /^[0-9a-f]{24}$/i
 
 let client: MongoClient
@@ -20,28 +19,20 @@ async function getMongoClient() {
 
 async function getIlanlar() {
   const mongoClient = await getMongoClient()
-  const db = mongoClient.db() // veya db('swaphubs') - DB adınızı yazın
+  const db = mongoClient.db()
 
-  const ilanlar = await db
-    .collection('ilanlar') // koleksiyon adınızı yazın
+  return db
+    .collection('ilanlar')
     .find(
       {
-        // Sadece aktif ve slug'ı olan ilanlar
-        durum: 'aktif', // veya status: 'active' - kendi field adınızı kullanın
-        slug: { $exists: true, $ne: null, $ne: '' },
+        durum: 'aktif',
+        slug: { $exists: true, $nin: [null, ''] },
       },
       {
-        projection: {
-          slug: 1,
-          updatedAt: 1,
-          createdAt: 1,
-          _id: 0,
-        },
+        projection: { slug: 1, updatedAt: 1, createdAt: 1, _id: 0 },
       }
     )
     .toArray()
-
-  return ilanlar
 }
 
 async function getSektorler() {
@@ -49,9 +40,9 @@ async function getSektorler() {
   const db = mongoClient.db()
 
   return db
-    .collection('sektorler') // koleksiyon adınızı yazın
+    .collection('sektorler')
     .find(
-      { slug: { $exists: true, $ne: null } },
+      { slug: { $exists: true, $nin: [null, ''] } },
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
@@ -62,18 +53,16 @@ async function getSehirler() {
   const db = mongoClient.db()
 
   return db
-    .collection('sehirler') // koleksiyon adınızı yazın
+    .collection('sehirler')
     .find(
-      { slug: { $exists: true, $ne: null } },
+      { slug: { $exists: true, $nin: [null, ''] } },
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // ============================================
   // 1. STATİK SAYFALAR
-  // ============================================
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
@@ -107,39 +96,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // ============================================
   // 2. İLAN SAYFALARI
-  // ============================================
   let ilanUrls: MetadataRoute.Sitemap = []
   try {
     const ilanlar = await getIlanlar()
 
     ilanUrls = ilanlar
-      // UUID'li slug'ları filtrele - sadece okunabilir slug'ları al
       .filter((ilan: any) => ilan.slug && !UUID_REGEX.test(ilan.slug))
       .map((ilan: any) => {
-        // Gerçek güncelleme tarihini kullan, yoksa oluşturma tarihi
         const lastMod = ilan.updatedAt
           ? new Date(ilan.updatedAt)
           : ilan.createdAt
           ? new Date(ilan.createdAt)
           : new Date('2026-01-01')
 
-        // Tarih geçerli değilse fallback
         const validDate = isNaN(lastMod.getTime())
           ? new Date('2026-01-01')
           : lastMod
 
-        // Son 30 günde güncellendiyse weekly, eskiyse monthly
         const isRecent =
           Date.now() - validDate.getTime() < 30 * 24 * 60 * 60 * 1000
 
         return {
           url: `${BASE_URL}/ilan/${ilan.slug}`,
           lastModified: validDate,
-          changeFrequency: (isRecent ? 'weekly' : 'monthly') as
-            | 'weekly'
-            | 'monthly',
+          changeFrequency: (isRecent ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
           priority: 0.8,
         }
       })
@@ -147,9 +128,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('İlan sitemap hatası:', error)
   }
 
-  // ============================================
   // 3. SEKTÖR SAYFALARI
-  // ============================================
   let sektorUrls: MetadataRoute.Sitemap = []
   try {
     const sektorler = await getSektorler()
@@ -166,9 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Sektör sitemap hatası:', error)
   }
 
-  // ============================================
   // 4. ŞEHİR SAYFALARI
-  // ============================================
   let sehirUrls: MetadataRoute.Sitemap = []
   try {
     const sehirler = await getSehirler()
@@ -176,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sehirUrls = sehirler
       .filter((s: any) => s.slug)
       .map((s: any) => ({
-        url: `${BASE_URL}/konum/${s.slug}`, // URL yapınıza göre değiştirin
+        url: `${BASE_URL}/konum/${s.slug}`,
         lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date('2026-01-01'),
         changeFrequency: 'weekly' as const,
         priority: 0.6,
