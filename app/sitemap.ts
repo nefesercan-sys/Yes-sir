@@ -3,7 +3,6 @@ import { MongoClient } from 'mongodb'
 
 const MONGODB_URI = process.env.MONGODB_URI!
 const BASE_URL = 'https://www.swaphubs.com'
-
 const UUID_REGEX = /^[0-9a-f]{24}$/i
 
 let client: MongoClient
@@ -17,11 +16,23 @@ async function getMongoClient() {
   return clientPromise
 }
 
+// URI'den DB adını otomatik çıkar
+// mongodb+srv://user:pass@cluster.net/DBADI  ← buraya DB adınızı ekleyin
+function getDbName(): string {
+  try {
+    const url = new URL(MONGODB_URI)
+    const dbName = url.pathname.replace('/', '').split('?')[0]
+    if (dbName) return dbName
+  } catch {}
+  return ''
+}
+
 async function getIlanlar() {
   const mongoClient = await getMongoClient()
-  const db = mongoClient.db()
+  const db = mongoClient.db('swaphubs_db')
+  console.log('[sitemap] DB:', db.databaseName, '- ilanlar sorgulanıyor')
 
-  return db
+  const result = await db
     .collection('ilanlar')
     .find(
       {
@@ -33,32 +44,41 @@ async function getIlanlar() {
       }
     )
     .toArray()
+
+  console.log('[sitemap] ilanlar:', result.length)
+  return result
 }
 
 async function getSektorler() {
   const mongoClient = await getMongoClient()
-  const db = mongoClient.db()
+  const db = mongoClient.db('swaphubs_db')
 
-  return db
+  const result = await db
     .collection('sektorler')
     .find(
       { slug: { $exists: true, $nin: [null, ''] } },
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
+
+  console.log('[sitemap] sektorler:', result.length)
+  return result
 }
 
 async function getSehirler() {
   const mongoClient = await getMongoClient()
-  const db = mongoClient.db()
+  const db = mongoClient.db('swaphubs_db')
 
-  return db
+  const result = await db
     .collection('sehirler')
     .find(
       { slug: { $exists: true, $nin: [null, ''] } },
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
+
+  console.log('[sitemap] sehirler:', result.length)
+  return result
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -125,7 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
       })
   } catch (error) {
-    console.error('İlan sitemap hatası:', error)
+    console.error('[sitemap] İlan hatası:', error)
   }
 
   // 3. SEKTÖR SAYFALARI
@@ -142,7 +162,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }))
   } catch (error) {
-    console.error('Sektör sitemap hatası:', error)
+    console.error('[sitemap] Sektör hatası:', error)
   }
 
   // 4. ŞEHİR SAYFALARI
@@ -159,8 +179,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       }))
   } catch (error) {
-    console.error('Şehir sitemap hatası:', error)
+    console.error('[sitemap] Şehir hatası:', error)
   }
 
+  console.log('[sitemap] Toplam URL:', staticPages.length + ilanUrls.length + sektorUrls.length + sehirUrls.length)
   return [...staticPages, ...ilanUrls, ...sektorUrls, ...sehirUrls]
 }
