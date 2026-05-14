@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import { MongoClient } from 'mongodb'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 86400
+
 const MONGODB_URI = process.env.MONGODB_URI!
 const BASE_URL = 'https://www.swaphubs.com'
 const UUID_REGEX = /^[0-9a-f]{24}$/i
@@ -14,17 +17,6 @@ async function getMongoClient() {
     clientPromise = client.connect()
   }
   return clientPromise
-}
-
-// URI'den DB adını otomatik çıkar
-// mongodb+srv://user:pass@cluster.net/DBADI  ← buraya DB adınızı ekleyin
-function getDbName(): string {
-  try {
-    const url = new URL(MONGODB_URI)
-    const dbName = url.pathname.replace('/', '').split('?')[0]
-    if (dbName) return dbName
-  } catch {}
-  return ''
 }
 
 async function getIlanlar() {
