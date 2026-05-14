@@ -10,16 +10,32 @@ export default function robots(): MetadataRoute.Robots {
           '/admin/',
           '/api/',
           '/uye-ol',
-          '/kayit',
           '/giris',
-          '/*?*sort=',   // Sıralama parametrelerini engelle
-          '/*?*page=',   // Sayfalama parametrelerini engelle (canonical kullan)
+          '/kayit',
+          '/profil/',
+          '/mesajlar/',
+          '/bildirimler/',
+          // URL parametrelerini engelle (crawl bütçesi koruması)
+          '/*?*sort=',
+          '/*?*order=',
+          '/*?*ref=',
+          '/*?*utm_',
+          '/*?*session=',
         ],
       },
       {
+        // Googlebot'a özel - daha geniş izin
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: [
+          '/admin/',
+          '/api/',
+          '/uye-ol',
+          '/giris',
+          '/kayit',
+          '/profil/',
+          '/mesajlar/',
+        ],
       },
     ],
     sitemap: [
@@ -32,5 +48,6 @@ export default function robots(): MetadataRoute.Robots {
       'https://www.swaphubs.com/sitemap-dunya.xml',
       'https://www.swaphubs.com/sitemap-statik.xml',
     ],
+    host: 'https://www.swaphubs.com',
   }
 }
