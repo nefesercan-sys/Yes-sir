@@ -1,49 +1,189 @@
 import { MetadataRoute } from 'next'
+import { MongoClient } from 'mongodb'
 
-// Bu fonksiyonu kendi DB/API'nize göre uyarlayın
+const MONGODB_URI = process.env.MONGODB_URI!
+const BASE_URL = 'https://www.swaphubs.com'
+
+// UUID pattern - 24 karakterlik hex string (MongoDB ObjectId)
+const UUID_REGEX = /^[0-9a-f]{24}$/i
+
+let client: MongoClient
+let clientPromise: Promise<MongoClient>
+
+async function getMongoClient() {
+  if (!client) {
+    client = new MongoClient(MONGODB_URI)
+    clientPromise = client.connect()
+  }
+  return clientPromise
+}
+
 async function getIlanlar() {
-  // Örnek: MongoDB, Prisma, veya API çağrısı
-  // return await db.ilan.findMany({ select: { slug: true, updatedAt: true } })
-  return []
+  const mongoClient = await getMongoClient()
+  const db = mongoClient.db() // veya db('swaphubs') - DB adınızı yazın
+
+  const ilanlar = await db
+    .collection('ilanlar') // koleksiyon adınızı yazın
+    .find(
+      {
+        // Sadece aktif ve slug'ı olan ilanlar
+        durum: 'aktif', // veya status: 'active' - kendi field adınızı kullanın
+        slug: { $exists: true, $ne: null, $ne: '' },
+      },
+      {
+        projection: {
+          slug: 1,
+          updatedAt: 1,
+          createdAt: 1,
+          _id: 0,
+        },
+      }
+    )
+    .toArray()
+
+  return ilanlar
+}
+
+async function getSektorler() {
+  const mongoClient = await getMongoClient()
+  const db = mongoClient.db()
+
+  return db
+    .collection('sektorler') // koleksiyon adınızı yazın
+    .find(
+      { slug: { $exists: true, $ne: null } },
+      { projection: { slug: 1, updatedAt: 1, _id: 0 } }
+    )
+    .toArray()
+}
+
+async function getSehirler() {
+  const mongoClient = await getMongoClient()
+  const db = mongoClient.db()
+
+  return db
+    .collection('sehirler') // koleksiyon adınızı yazın
+    .find(
+      { slug: { $exists: true, $ne: null } },
+      { projection: { slug: 1, updatedAt: 1, _id: 0 } }
+    )
+    .toArray()
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.swaphubs.com'
-  
-  const ilanlar = await getIlanlar()
-
-  // Sadece slug'ı olan ilanları dahil et (UUID'lileri hariç tut)
-  const uuidRegex = /^[0-9a-f]{24}$/i
-  
-  const ilanUrls: MetadataRoute.Sitemap = ilanlar
-    .filter((ilan: any) => ilan.slug && !uuidRegex.test(ilan.slug))
-    .map((ilan: any) => ({
-      url: `${baseUrl}/ilan/${ilan.slug}`,
-      lastModified: ilan.updatedAt ? new Date(ilan.updatedAt) : new Date('2026-01-01'),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    }))
-
+  // ============================================
+  // 1. STATİK SAYFALAR
+  // ============================================
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
-      lastModified: new Date('2026-05-01'),
+      url: BASE_URL,
+      lastModified: new Date('2026-05-14'),
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/kesfet`,
-      lastModified: new Date('2026-05-01'),
+      url: `${BASE_URL}/kesfet`,
+      lastModified: new Date('2026-05-14'),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/ilan`,
-      lastModified: new Date('2026-05-01'),
+      url: `${BASE_URL}/ilan`,
+      lastModified: new Date('2026-05-14'),
       changeFrequency: 'daily',
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/uye-ol`,
+      lastModified: new Date('2026-01-01'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/giris`,
+      lastModified: new Date('2026-01-01'),
+      changeFrequency: 'monthly',
+      priority: 0.4,
+    },
   ]
 
-  return [...staticPages, ...ilanUrls]
+  // ============================================
+  // 2. İLAN SAYFALARI
+  // ============================================
+  let ilanUrls: MetadataRoute.Sitemap = []
+  try {
+    const ilanlar = await getIlanlar()
+
+    ilanUrls = ilanlar
+      // UUID'li slug'ları filtrele - sadece okunabilir slug'ları al
+      .filter((ilan: any) => ilan.slug && !UUID_REGEX.test(ilan.slug))
+      .map((ilan: any) => {
+        // Gerçek güncelleme tarihini kullan, yoksa oluşturma tarihi
+        const lastMod = ilan.updatedAt
+          ? new Date(ilan.updatedAt)
+          : ilan.createdAt
+          ? new Date(ilan.createdAt)
+          : new Date('2026-01-01')
+
+        // Tarih geçerli değilse fallback
+        const validDate = isNaN(lastMod.getTime())
+          ? new Date('2026-01-01')
+          : lastMod
+
+        // Son 30 günde güncellendiyse weekly, eskiyse monthly
+        const isRecent =
+          Date.now() - validDate.getTime() < 30 * 24 * 60 * 60 * 1000
+
+        return {
+          url: `${BASE_URL}/ilan/${ilan.slug}`,
+          lastModified: validDate,
+          changeFrequency: (isRecent ? 'weekly' : 'monthly') as
+            | 'weekly'
+            | 'monthly',
+          priority: 0.8,
+        }
+      })
+  } catch (error) {
+    console.error('İlan sitemap hatası:', error)
+  }
+
+  // ============================================
+  // 3. SEKTÖR SAYFALARI
+  // ============================================
+  let sektorUrls: MetadataRoute.Sitemap = []
+  try {
+    const sektorler = await getSektorler()
+
+    sektorUrls = sektorler
+      .filter((s: any) => s.slug && !UUID_REGEX.test(s.slug))
+      .map((s: any) => ({
+        url: `${BASE_URL}/sektor/${s.slug}`,
+        lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date('2026-01-01'),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }))
+  } catch (error) {
+    console.error('Sektör sitemap hatası:', error)
+  }
+
+  // ============================================
+  // 4. ŞEHİR SAYFALARI
+  // ============================================
+  let sehirUrls: MetadataRoute.Sitemap = []
+  try {
+    const sehirler = await getSehirler()
+
+    sehirUrls = sehirler
+      .filter((s: any) => s.slug)
+      .map((s: any) => ({
+        url: `${BASE_URL}/konum/${s.slug}`, // URL yapınıza göre değiştirin
+        lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date('2026-01-01'),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      }))
+  } catch (error) {
+    console.error('Şehir sitemap hatası:', error)
+  }
+
+  return [...staticPages, ...ilanUrls, ...sektorUrls, ...sehirUrls]
 }
