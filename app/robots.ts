@@ -1,22 +1,36 @@
-import { MetadataRoute } from "next";
+import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: ["/", "/ilanlar", "/ilan/", "/kayit", "/giris", "/ilan-ver"],
-        disallow: ["/panel", "/api/", "/admin", "/mesajlar", "/_next/"],
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          '/admin/',
+          '/api/',
+          '/uye-ol',
+          '/kayit',
+          '/giris',
+          '/*?*sort=',   // Sıralama parametrelerini engelle
+          '/*?*page=',   // Sayfalama parametrelerini engelle (canonical kullan)
+        ],
       },
       {
-        userAgent: "Googlebot",
-        allow: "/",
-        // ✅ EKLENDİ: Yeni temiz URL route'larına izin ver
-        // ✅ EKLENDİ: Eski UUID/query param URL'leri engelle
-        disallow: ["/panel", "/api/", "/admin", "/varlik/"],
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: "https://www.swaphubs.com/sitemap.xml",
-    host: "https://www.swaphubs.com",
-  };
+    sitemap: [
+      'https://www.swaphubs.com/sitemap.xml',
+      'https://www.swaphubs.com/sitemap-ilanlar.xml',
+      'https://www.swaphubs.com/sitemap-sektorler.xml',
+      'https://www.swaphubs.com/sitemap-turkiye-sehir.xml',
+      'https://www.swaphubs.com/sitemap-turkiye-ilce.xml',
+      'https://www.swaphubs.com/sitemap-meslekler.xml',
+      'https://www.swaphubs.com/sitemap-dunya.xml',
+      'https://www.swaphubs.com/sitemap-statik.xml',
+    ],
+  }
 }
