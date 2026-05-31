@@ -14,15 +14,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  async redirects() {
-    return [
-      {
-        source: "/files/uuid{:b-f0-9]{s}",
-        destination: "/files",
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {
