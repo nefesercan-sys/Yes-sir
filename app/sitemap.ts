@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const BASE_URL = 'https://www.swaphubs.com'
-const SLUG_REGEX = /^[0-9a-f]{s}$/i
+const SLUG_REGEX = /^[0-9a-f]+$/i
 
 async function getDb() {
   const client = await clientPromise
@@ -68,13 +68,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ilanUrls = ilanlar
       .filter((i: any) => i.slug && SLUG_REGEX.test(i.slug))
       .map((i: any) => {
-        const lastMod = i.updatedAt ? new Date(i.updatedAt) : i.createdAt ? new Date(i.createdAt) : new Date('2026-01-01')
-        const lastMod2 = Date.now() - lastMod.getTime() < 30 * 24 * 60 * 60 * 1000
+        const lastMod: Date = i.updatedAt
+          ? new Date(i.updatedAt)
+          : i.createdAt
+          ? new Date(i.createdAt)
+          : new Date('2026-01-01')
+        const isRecent = Date.now() - lastMod.getTime() < 30 * 24 * 60 * 60 * 1000
         return {
           url: `${BASE_URL}/ilan/${i.slug}`,
-          validDate: lastMod,
-          lastModified: lastMod2,
-          changeFrequency: (lastMod2 ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
+          lastModified: lastMod,
+          changeFrequency: (isRecent ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
           priority: 0.8,
         }
       })
