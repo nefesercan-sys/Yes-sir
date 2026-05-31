@@ -126,7 +126,7 @@ const C = {
     faq: [
       { q: 'Antalya\'da terzi nerede bulunur?', a: 'Belek by Ercan olarak Antalya merkezi ve çevresinde hizmet veriyoruz. WhatsApp\'tan ulaşın, adresimizi paylaşalım.' },
       { q: 'Gelinlik dikimi ne kadar sürer?', a: 'Gelinlik dikimi 3-7 gün, tadilat ve düzenlemeler 24-48 saat içinde tamamlanır.' },
-      { q: 'Fiyatlar ne kadar?', a: 'Tadilat ₺80\'den, özel dikim ₺500\'den, gelinlik ₺2.000\'den başlar. Ücretsiz teklif için yazın.' },
+      { q: 'Fiyatlar ne kadar?', a: 'Fiyatlar işin kapsamına göre değişmektedir. Ücretsiz fiyat teklifi için WhatsApp\'tan ulaşın.' },
       { q: 'Otele teslimat yapıyor musunuz?', a: 'Evet! Lara, Konyaaltı, Belek ve Kemer bölgelerindeki otellere teslimat yapıyoruz.' },
       { q: 'Rusça ve İngilizce biliyor musunuz?', a: 'Evet, Türkçe, İngilizce ve Rusça hizmet veriyoruz. Dil engeli yok.' },
     ],
@@ -153,7 +153,7 @@ const C = {
     faq: [
       { q: 'Where can I find a tailor in Antalya?', a: 'Belek by Ercan serves central Antalya and surrounding areas. Contact us on WhatsApp and we\'ll share our address.' },
       { q: 'How long does a wedding dress take?', a: 'Wedding dresses take 3-7 days. Alterations and adjustments are completed in 24-48 hours.' },
-      { q: 'What are the prices?', a: 'Alterations from ₺80, custom clothing from ₺500, wedding dresses from ₺2,000. Contact for free quote.' },
+      { q: 'What are the prices?', a: 'Prices vary depending on the work. Contact us on WhatsApp for a free quote.' },
       { q: 'Do you deliver to hotels?', a: 'Yes! We deliver to hotels in Lara, Konyaaltı, Belek and Kemer.' },
       { q: 'Do you speak English?', a: 'Yes, we provide service in Turkish, English and Russian. No language barrier.' },
     ],
@@ -180,7 +180,7 @@ const C = {
     faq: [
       { q: 'Где найти портного в Анталье?', a: 'Belek by Ercan работает в центре Антальи и окрестностях. Напишите в WhatsApp, мы поделимся адресом.' },
       { q: 'Сколько времени занимает пошив свадебного платья?', a: 'Свадебное платье — 3-7 дней. Ремонт и подгонка — 24-48 часов.' },
-      { q: 'Какие цены?', a: 'Ремонт от ₺80, пошив на заказ от ₺500, свадебное платье от ₺2000. Пишите для бесплатной оценки.' },
+      { q: 'Какие цены?', a: 'Цены зависят от объёма работы. Напишите в WhatsApp для бесплатной оценки.' },
       { q: 'Есть ли доставка в отель?', a: 'Да! Доставляем в отели Лары, Коньяалты, Белека и Кемера.' },
       { q: 'Говорите ли вы по-русски?', a: 'Да, мы обслуживаем на турецком, английском и русском языках. Языкового барьера нет.' },
     ],
@@ -399,8 +399,7 @@ export default function TerziClient() {
               <div key={i} className="svc-card" style={{ background: s.color, border: '1px solid rgba(0,0,0,0.06)', borderRadius: 18, padding: '20px 14px', cursor: 'pointer' }}>
                 <div style={{ fontSize: 32, marginBottom: 10, textAlign: 'center' }}>{s.icon}</div>
                 <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 6, color: '#1c1814', lineHeight: 1.3 }}>{s.names[idx]}</h3>
-                <p style={{ fontSize: 11, color: '#6b5a4a', lineHeight: 1.5, marginBottom: 10 }}>{s.descs[idx]}</p>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#b8954a', background: 'rgba(255,255,255,0.6)', borderRadius: 8, padding: '3px 8px', display: 'inline-block' }}>{s.price}</div>
+                <p style={{ fontSize: 11, color: '#6b5a4a', lineHeight: 1.5 }}>{s.descs[idx]}</p>
               </div>
             ))}
           </div>
