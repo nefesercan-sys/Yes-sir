@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Head from 'next/head';
-
 const PHONE = '905318986418';
 
 const content = {
