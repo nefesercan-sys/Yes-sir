@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const BASE_URL = 'https://www.swaphubs.com'
-const UUID_REGEX = /^[0-9a-f]{24}$/i
+const SLUG_REGEX = /^[0-9a-f]{s}$/i
 
 async function getDb() {
   const client = await clientPromise
@@ -30,7 +30,7 @@ async function getSektorler() {
   const result = await db
     .collection('sektorler')
     .find(
-      { slug: { $exists: true, $nin: [null, ''] } },
+      {},
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
@@ -43,7 +43,7 @@ async function getSehirler() {
   const result = await db
     .collection('sehirler')
     .find(
-      { slug: { $exists: true, $nin: [null, ''] } },
+      {},
       { projection: { slug: 1, updatedAt: 1, _id: 0 } }
     )
     .toArray()
@@ -54,55 +54,57 @@ async function getSehirler() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date('2026-05-14'), changeFrequency: 'daily', priority: 1.0 },
-    { url: `${BASE_URL}/kesfet`, lastModified: new Date('2026-05-14'), changeFrequency: 'daily', priority: 0.9 },
-    { url: `${BASE_URL}/ilan`, lastModified: new Date('2026-05-14'), changeFrequency: 'daily', priority: 0.9 },
-    { url: `${BASE_URL}/uye-ol`, lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/giris`, lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE_URL}/ilanlar`, lastModified: new Date('2026-05-14'), changeFrequency: 'daily', priority: 0.9 },
+    { url: `${BASE_URL}/files`, lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/hakkimizda`, lastModified: new Date('2026-02-07'), changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${BASE_URL}/iletisim`, lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE_URL}/terzi`, lastModified: new Date('2026-05-31'), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE_URL}/tekstil-antalya`, lastModified: new Date('2026-05-31'), changeFrequency: 'weekly', priority: 0.8 },
   ]
 
   let ilanUrls: MetadataRoute.Sitemap = []
   try {
     const ilanlar = await getIlanlar()
     ilanUrls = ilanlar
-      .filter((i: any) => i.slug && !UUID_REGEX.test(i.slug))
+      .filter((i: any) => i.slug && SLUG_REGEX.test(i.slug))
       .map((i: any) => {
         const lastMod = i.updatedAt ? new Date(i.updatedAt) : i.createdAt ? new Date(i.createdAt) : new Date('2026-01-01')
-        const validDate = isNaN(lastMod.getTime()) ? new Date('2026-01-01') : lastMod
-        const isRecent = Date.now() - validDate.getTime() < 30 * 24 * 60 * 60 * 1000
+        const lastMod2 = Date.now() - lastMod.getTime() < 30 * 24 * 60 * 60 * 1000
         return {
           url: `${BASE_URL}/ilan/${i.slug}`,
-          lastModified: validDate,
-          changeFrequency: (isRecent ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
+          validDate: lastMod,
+          lastModified: lastMod2,
+          changeFrequency: (lastMod2 ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
           priority: 0.8,
         }
       })
-  } catch (e) { console.error('[sitemap] ilan hatası:', e) }
+  } catch (e) { console.error('[sitemap] ilan hatasi:', e) }
 
   let sektorUrls: MetadataRoute.Sitemap = []
   try {
     const sektorler = await getSektorler()
     sektorUrls = sektorler
-      .filter((s: any) => s.slug && !UUID_REGEX.test(s.slug))
+      .filter((s: any) => s.slug && SLUG_REGEX.test(s.slug))
       .map((s: any) => ({
         url: `${BASE_URL}/sektor/${s.slug}`,
         lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date('2026-01-01'),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
       }))
-  } catch (e) { console.error('[sitemap] sektor hatası:', e) }
+  } catch (e) { console.error('[sitemap] sektor hatasi:', e) }
 
   let sehirUrls: MetadataRoute.Sitemap = []
   try {
     const sehirler = await getSehirler()
     sehirUrls = sehirler
-      .filter((s: any) => s.slug)
+      .filter((s: any) => s.slug && SLUG_REGEX.test(s.slug))
       .map((s: any) => ({
-        url: `${BASE_URL}/konum/${s.slug}`,
+        url: `${BASE_URL}/sehir/${s.slug}`,
         lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date('2026-01-01'),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
+        changeFrequency: 'monthly' as const,
+        priority: 0.4,
       }))
-  } catch (e) { console.error('[sitemap] sehir hatası:', e) }
+  } catch (e) { console.error('[sitemap] sehir hatasi:', e) }
 
   console.log('[sitemap] toplam:', staticPages.length + ilanUrls.length + sektorUrls.length + sehirUrls.length)
   return [...staticPages, ...ilanUrls, ...sektorUrls, ...sehirUrls]
