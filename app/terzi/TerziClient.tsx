@@ -381,11 +381,43 @@ export default function TerziClient() {
           </div>
         </div>
 
-        {/* ── SEO METİN BLOĞU (Google için zengin içerik) ── */}
-        <div style={{ background: '#fff', padding: '24px 20px', borderBottom: '1px solid #e8dcc8' }}>
-          <p style={{ fontSize: 13, color: '#6b5a4a', lineHeight: 1.8, maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-            {c.seoText}
-          </p>
+        {/* ── SEO METİN BLOĞU — Google için zengin çok dilli içerik ── */}
+        <div style={{ background: '#fff', padding: '32px 20px', borderBottom: '1px solid #e8dcc8' }}>
+          <div style={{ maxWidth: 680, margin: '0 auto' }}>
+            <p style={{ fontSize: 13, color: '#6b5a4a', lineHeight: 1.9, marginBottom: 16 }}>
+              {c.seoText}
+            </p>
+            {/* Türkçe SEO paragrafı — daima görünür */}
+            <p style={{ fontSize: 12, color: '#8a7060', lineHeight: 1.8, marginBottom: 12 }}>
+              <strong style={{ color: '#3a2a1a' }}>Antalya terzi</strong> arıyorsanız doğru adrestesiniz. Belek by Ercan olarak
+              <strong style={{ color: '#3a2a1a' }}> Antalya özel dikim</strong>,
+              <strong style={{ color: '#3a2a1a' }}> Antalya tadilat</strong>,
+              <strong style={{ color: '#3a2a1a' }}> Antalya gelinlik</strong> ve
+              <strong style={{ color: '#3a2a1a' }}> Antalya damatlık</strong> hizmetleri sunuyoruz.
+              Lara terzi, Konyaaltı terzi, Belek terzi ve Kemer terzi olarak tüm Antalya genelinde hizmet veriyoruz.
+              30 yıllık deneyimimizle <strong style={{ color: '#3a2a1a' }}>Antalya en iyi terzi</strong> olma hedefiyle çalışıyoruz.
+            </p>
+            {/* İngilizce SEO paragrafı */}
+            <p style={{ fontSize: 12, color: '#8a7060', lineHeight: 1.8, marginBottom: 12 }}>
+              Looking for a <strong style={{ color: '#3a2a1a' }}>tailor in Antalya</strong>? Belek by Ercan offers professional
+              <strong style={{ color: '#3a2a1a' }}> Antalya tailoring</strong>,
+              <strong style={{ color: '#3a2a1a' }}> clothing alterations Antalya</strong> and
+              <strong style={{ color: '#3a2a1a' }}> custom made clothing Antalya</strong>.
+              Best <strong style={{ color: '#3a2a1a' }}>tailor for tourists in Antalya Turkey</strong>.
+              English speaking tailor Antalya. Hotel delivery to Lara, Belek and Konyaaltı.
+              <strong style={{ color: '#3a2a1a' }}> Wedding dress Antalya</strong>, suit alterations, express 24-hour service.
+            </p>
+            {/* Rusça SEO paragrafı */}
+            <p style={{ fontSize: 12, color: '#8a7060', lineHeight: 1.8 }}>
+              Ищете <strong style={{ color: '#3a2a1a' }}>портного в Анталье</strong>? Belek by Ercan —
+              <strong style={{ color: '#3a2a1a' }}> лучший портной Анталья</strong>.
+              <strong style={{ color: '#3a2a1a' }}> Пошив одежды Анталья</strong>,
+              <strong style={{ color: '#3a2a1a' }}> ремонт одежды Анталья</strong>,
+              <strong style={{ color: '#3a2a1a' }}> свадебное платье Анталья</strong>.
+              Портной говорит по-русски. Доставка в отели Лары, Белека, Коньяалты.
+              <strong style={{ color: '#3a2a1a' }}> Анталья портной для туристов</strong> — экспресс 24 часа.
+            </p>
+          </div>
         </div>
 
         {/* ── HİZMETLER ── */}
@@ -493,6 +525,26 @@ export default function TerziClient() {
             </div>
           </div>
         </section>
+
+        {/* ── SEO FOOTER — Google için anahtar kelime çapası ── */}
+        <div style={{ background: '#1c1814', padding: '32px 20px', borderTop: '1px solid rgba(184,149,74,0.2)' }}>
+          <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#d4af6e', marginBottom: 16 }}>Belek by Ercan — Antalya Terzi</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8, marginBottom: 16 }}>
+              {[
+                'Antalya Terzi','Terzi Antalya','Antalya Özel Dikim',
+                'Antalya Tadilat','Antalya Gelinlik','Lara Terzi',
+                'Konyaaltı Terzi','Belek Terzi','Tailor Antalya',
+                'Портной Анталья','Пошив Анталья',
+              ].map(kw => (
+                <span key={kw} style={{ fontSize: 10, padding: '3px 10px', borderRadius: 12, background: 'rgba(184,149,74,0.1)', border: '1px solid rgba(184,149,74,0.15)', color: 'rgba(212,175,110,0.7)' }}>{kw}</span>
+              ))}
+            </div>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: 1 }}>
+              📍 Antalya, Türkiye &nbsp;·&nbsp; ☎ +90 531 898 64 18 &nbsp;·&nbsp; 🕐 09:00–19:00
+            </p>
+          </div>
+        </div>
 
         {/* ── STICKY CTA ── */}
         <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '10px 20px 20px', background: 'linear-gradient(to top, #faf8f4 70%, transparent)', zIndex: 50 }}>
