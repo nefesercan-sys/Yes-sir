@@ -33,7 +33,6 @@ const nextConfig = {
             value: "public, max-age=86400, stale-while-revalidate=43200",
           },
         ],
-        permanent: true,
       },
     ];
   },
