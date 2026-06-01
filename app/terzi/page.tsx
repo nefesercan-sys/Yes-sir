@@ -71,7 +71,7 @@ const INGILIZCE_ILCE = [
 ].join(', ');
 
 export const metadata: Metadata = {
-  title: 'Antalya Terzi Can | Konyaaltı Terzi | Ütü · Dikim · Tamir · Tadilat — Belek by Ercan',
+  title: 'Terzi Can Antalya | Konyaaltı Terzi | Ütü · Dikim · Tamir · Tadilat | Tailor Can | Портной Кан | Schneider Can',
   description: 'Konyaaltı ve tüm Antalya ilçe ve mahallelerinde terzi Can hizmetinizde. Ütü, dikim, tamir, tadilat, paça kısaltma, kuru temizleme, çamaşır yıkama, seri imalat. 24-48 saat ekspres. TR · EN · DE · RU ☎ +90 531 898 64 18',
   keywords: [
     // ── TÜRKÇE TEMEL ──
@@ -126,7 +126,7 @@ export const metadata: Metadata = {
   ].join(', '),
 
   openGraph: {
-    title: 'Antalya & Konyaaltı Terzi Can | Ütü · Dikim · Tamir · Tadilat — Belek by Ercan',
+    title: 'Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya & Konyaaltı',
     description: 'Konyaaltı, Lara, Belek, Kemer, Alanya ve tüm Antalya ilçelerinde terzi Can. Ütü, dikim, tamir, tadilat, kuru temizleme, seri imalat. Tailor Can — alterations, ironing, dry cleaning. Schneider Can — Bügeln, Änderungen. Портной Кан — ремонт, глажка, химчистка. ☎ +90 531 898 64 18',
     url: 'https://swaphubs.com/terzi',
     siteName: 'SwapHubs',
