@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const PHONE = '905318986418';
-type Lang = 'tr' | 'en' | 'ru';
+type Lang = 'tr' | 'en' | 'ru' | 'de';
 
 // ═══════════════════════════════════════
 // ANTALYA İLÇELER VE MAHALLELER
@@ -37,8 +37,8 @@ const SCHEMA = {
     {
       "@type": "LocalBusiness",
       "@id": "https://swaphubs.com/terzi",
-      "name": "Antalya Terzi — Belek by Ercan",
-      "alternateName": ["Antalya Tailor","Портной Анталья","Antalya Terzisi","Antalya Kuru Temizleme","Antalya Özel Dikim"],
+      "name": "Antalya Terzi — Terzi Can",
+      "alternateName": ["Terzi Can","Tailor Can","Портной Кан","Schneider Can","Antalya Terzisi","Antalya Tailor","Antalya Kuru Temizleme"],
       "description": "Antalya'nın en iyi terzisi. Paça kısaltma, tadilat, tamir, daraltma, kuru temizleme, çamaşır yıkama, ütü, kalıp çıkarma, model dikimi, seri imalat. Turistlere 24 saat hızlı hizmet. Türkçe, İngilizce, Rusça.",
       "url": "https://swaphubs.com/terzi",
       "telephone": "+90 531 898 64 18",
@@ -65,11 +65,11 @@ const SCHEMA = {
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Antalya'da paça kısaltma nerede yaptırılır?", "acceptedAnswer": { "@type": "Answer", "text": "Belek by Ercan olarak Antalya'da paça kısaltma, pantolon tadilat ve tüm kıyafet tamiri hizmeti veriyoruz. WhatsApp +90 531 898 64 18 ile ulaşın." } },
-        { "@type": "Question", "name": "Antalya kuru temizleme hizmeti var mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Belek by Ercan olarak kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Otele alım ve teslimat yapıyoruz." } },
+        { "@type": "Question", "name": "Antalya'da paça kısaltma nerede yaptırılır?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can olarak Antalya'da paça kısaltma, pantolon tadilat ve tüm kıyafet tamiri hizmeti veriyoruz. WhatsApp +90 531 898 64 18 ile ulaşın." } },
+        { "@type": "Question", "name": "Antalya kuru temizleme hizmeti var mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Terzi Can olarak kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Otele alım ve teslimat yapıyoruz." } },
         { "@type": "Question", "name": "Antalya'da seri imalat ve model dikimi yapılır mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, kalıp çıkarma, model dikimi ve seri imalat hizmetleri sunuyoruz. Firmalar ve markalar için üretim yapıyoruz." } },
-        { "@type": "Question", "name": "Where can I find a tailor in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Belek by Ercan offers professional tailoring in Antalya. English spoken. WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Где найти портного в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Belek by Ercan — лучший портной в Анталье. Говорим по-русски. WhatsApp: +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Where can I find a tailor in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can offers professional tailoring in Antalya. English spoken. WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Где найти портного в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can — лучший портной в Анталье. Говорим по-русски. WhatsApp: +90 531 898 64 18." } },
       ]
     },
     {
@@ -87,7 +87,7 @@ const SCHEMA = {
 // ═══════════════════════════════════════
 const C = {
   tr: {
-    badge: '✂ Antalya · Belek by Ercan',
+    badge: '✂ Antalya · Terzi Can',
     h1: 'Antalya\'nın',
     h1em: 'Terzisi',
     sub: 'Paça Kısaltma · Tadilat · Tamir · Daraltma · Kuru Temizleme · Seri İmalat',
@@ -103,10 +103,10 @@ const C = {
     s6sub: 'WhatsApp\'tan mesaj atın, hemen yanıt verelim',
     waLabel: 'WhatsApp\'tan Yaz',
     mapLabel: 'Haritada Bul',
-    seoP1: 'Antalya\'nın en deneyimli terzisi Belek by Ercan. Paça kısaltma, elbise daraltma, kıyafet tamiri, kuru temizleme, çamaşır yıkama, ütü hizmeti, kalıp çıkarma, model dikimi ve seri imalat. Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer ve tüm Antalya ilçelerine hizmet. Turistlere 24-48 saat ekspres servis, otele alım-teslimat.',
+    seoP1: 'Antalya\'nın en deneyimli terzisi Terzi Can. Paça kısaltma, elbise daraltma, kıyafet tamiri, kuru temizleme, çamaşır yıkama, ütü hizmeti, kalıp çıkarma, model dikimi ve seri imalat. Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer ve tüm Antalya ilçelerine hizmet. Turistlere 24-48 saat ekspres servis, otele alım-teslimat.',
     seoP2: 'Antalya terzi arıyorsanız doğru adrestesiniz. Paça kısaltma Antalya, pantolon tadilat Antalya, kıyafet tamir Antalya, elbise daraltma Antalya, fermuar değişimi, yırtık onarımı. Antalya kuru temizleme, ütü hizmeti, seri imalat, kalıp çıkarma Antalya. Lara terzi, Konyaaltı terzi, Belek terzi, Kemer terzi, Alanya terzi, Manavgat terzi, Side terzi.',
     seoP3: 'Looking for a tailor in Antalya? Hem alterations, dress alteration, trouser hemming, zip repair, dry cleaning Antalya, laundry service, pattern making, custom clothing Antalya. English speaking tailor. Hotel pickup and delivery. Express 24h service.',
-    seoP4: 'Портной в Анталье Belek by Ercan. Подгонка брюк, ремонт одежды, химчистка Анталья, стирка, глажка, пошив по лекалам, серийное производство. Говорим по-русски. Доставка в отель.',
+    seoP4: 'Портной Кан в Анталье. Подгонка брюк, ремонт одежды, химчистка Анталья, стирка, глажка, пошив по лекалам, серийное производство. Говорим по-русски. Доставка в отель.',
     faq: [
       { q: 'Paça kısaltma ne kadar sürer?', a: 'Paça kısaltma 24 saat içinde tamamlanır. Acele işlerde aynı gün teslimat da mümkündür.' },
       { q: 'Kuru temizleme ve çamaşır yıkama hizmeti var mı?', a: 'Evet, kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Otelden alım ve teslimat yapıyoruz.' },
@@ -116,7 +116,7 @@ const C = {
     ],
   },
   en: {
-    badge: '✂ Antalya · Belek by Ercan',
+    badge: '✂ Antalya · Tailor Can',
     h1: 'Antalya\'s',
     h1em: 'Master Tailor',
     sub: 'Alterations · Repairs · Dry Cleaning · Laundry · Pattern Making · Mass Production',
@@ -132,7 +132,7 @@ const C = {
     s6sub: 'Send a WhatsApp message, we\'ll reply instantly',
     waLabel: 'Chat on WhatsApp',
     mapLabel: 'Find on Map',
-    seoP1: 'Belek by Ercan — Antalya\'s most experienced tailor. Trouser hemming, dress alterations, clothing repairs, dry cleaning, laundry, ironing, pattern making, custom design and mass production. Serving all Antalya districts. Express 24-48h service for tourists, hotel pickup & delivery.',
+    seoP1: 'Terzi Can — Antalya\'s most experienced tailor. Trouser hemming, dress alterations, clothing repairs, dry cleaning, laundry, ironing, pattern making, custom design and mass production. Serving all Antalya districts. Express 24-48h service for tourists, hotel pickup & delivery.',
     seoP2: 'Tailor in Antalya: trouser hemming Antalya, dress alteration Antalya, clothing repair Antalya, zip replacement, dry cleaning Antalya, laundry service Antalya, pattern making Antalya, custom clothing Antalya. English speaking. Lara, Konyaaltı, Belek, Kemer, Alanya, Manavgat, Side.',
     seoP3: '',
     seoP4: '',
@@ -145,7 +145,7 @@ const C = {
     ],
   },
   ru: {
-    badge: '✂ Анталья · Belek by Ercan',
+    badge: '✂ Анталья · Портной Кан',
     h1: 'Лучший',
     h1em: 'Портной Антальи',
     sub: 'Подгонка · Ремонт · Химчистка · Стирка · Лекала · Серийное производство',
@@ -161,7 +161,7 @@ const C = {
     s6sub: 'Напишите в WhatsApp, ответим сразу',
     waLabel: 'Написать в WhatsApp',
     mapLabel: 'Найти на карте',
-    seoP1: 'Belek by Ercan — опытный портной в Анталье. Подгонка брюк, ремонт одежды, химчистка, стирка, глажка, пошив по лекалам, модельный пошив и серийное производство. Обслуживаем все районы Антальи. Экспресс 24-48 часов, забор и доставка в отель.',
+    seoP1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк, ремонт одежды, химчистка, стирка, глажка, пошив по лекалам, модельный пошив и серийное производство. Обслуживаем все районы Антальи. Экспресс 24-48 часов, забор и доставка в отель.',
     seoP2: 'Портной Анталья: подгонка брюк Анталья, ремонт одежды Анталья, химчистка Анталья, стирка Анталья, пошив по лекалам Анталья. Говорим по-русски. Лара, Коньяалты, Белек, Кемер, Аланья, Манавгат, Сиде.',
     seoP3: '',
     seoP4: '',
@@ -173,6 +173,35 @@ const C = {
       { q: 'Какие цены?', a: 'Подгонка брюк от ₺80, ремонт от ₺100, химчистка от ₺120, пошив от ₺500. Напишите в WhatsApp для бесплатной оценки.' },
     ],
   },
+  de: {
+    badge: '✂ Antalya · Schneider Can',
+    h1: 'Antalyas',
+    h1em: 'Meisterschneider',
+    sub: 'Änderungen · Reparaturen · Reinigung · Wäsche · Bügeln · Maßanfertigung',
+    waBtn: 'WhatsApp schreiben',
+    downBtn: 'Leistungen ansehen ↓',
+    waMsg: 'Hallo, ich möchte Informationen über Ihren Schneiderservice erhalten.',
+    s1: 'Leistungen', s1t: 'Was wir anbieten',
+    s2: 'Warum wir?', s2t: 'Warum\nSchneider Can?',
+    s3: 'Häufige Fragen',
+    s4: 'Kundenbewertungen',
+    s5: 'Servicegebiete',
+    s6: 'Kontakt', s6t: 'Kontaktieren Sie uns',
+    s6sub: 'Schreiben Sie uns auf WhatsApp — wir antworten sofort',
+    waLabel: 'WhatsApp schreiben',
+    mapLabel: 'Auf Karte finden',
+    seoP1: 'Schneider Can — erfahrener Schneider in Antalya & Konyaaltı. Hosenänderungen, Kürzen, Kleideränderungen, Reparaturen, Reinigung, Wäsche, Bügeln, Schnittmuster, Maßanfertigung und Serienproduktion. Service in allen Antalya-Bezirken. Express 24-48h, Abholung und Lieferung ins Hotel.',
+    seoP2: 'Schneider Antalya: Hose kürzen Antalya, Kleidung ändern Antalya, Kleider reparieren Antalya, Reißverschluss wechseln Antalya, Reinigung Antalya, Wäsche Antalya, Bügeln Antalya. Deutschsprachiger Schneider. Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat.',
+    seoP3: '',
+    seoP4: '',
+    faq: [
+      { q: 'Wie lange dauert das Kürzen einer Hose?', a: 'Das Kürzen einer Hose wird innerhalb von 24 Stunden erledigt. Bei dringenden Aufträgen ist eine Lieferung am selben Tag möglich.' },
+      { q: 'Bieten Sie Reinigung und Wäscheservice an?', a: 'Ja, wir bieten Reinigung, Wäsche und Bügelservice an. Wir holen Ihre Kleidung im Hotel ab und liefern sie zurück.' },
+      { q: 'Machen Sie Schnittmuster und Serienproduktion?', a: 'Ja, wir bieten Schnittmustererstellung, Modellnähen und Serienproduktion für Marken und Unternehmen an.' },
+      { q: 'Bedienen Sie alle Bezirke von Antalya?', a: 'Ja, wir arbeiten in ganz Antalya: Konyaaltı, Muratpaşa, Kepez, Lara, Belek, Kemer, Alanya, Manavgat und weitere Bezirke.' },
+      { q: 'Was sind die Preise?', a: 'Hosenänderungen ab ₺80, Reparaturen ab ₺100, Reinigung ab ₺120, Maßanfertigung ab ₺500. Kontaktieren Sie uns auf WhatsApp für ein kostenloses Angebot.' },
+    ],
+  },
 };
 
 // ═══════════════════════════════════════
@@ -181,121 +210,132 @@ const C = {
 const SERVICES = [
   {
     icon: '✂️', color: '#fdecea',
-    names: ['Paça Kısaltma & Tadilat', 'Hemming & Alterations', 'Подгонка и ремонт'],
+    names: ['Paça Kısaltma & Tadilat', 'Hemming & Alterations', 'Подгонка и ремонт', 'Änderungen & Reparaturen'],
     descs: [
       'Paça kısaltma, pantolon daraltma/genişletme, bel alma, fermuar değişimi, yırtık onarımı.',
       'Trouser hemming, taking in/out, waist adjustments, zip replacement, tear repairs.',
-      'Подгонка брюк, заужение/расширение, замена молнии, ремонт.'
+      'Подгонка брюк, заужение/расширение, замена молнии, ремонт.',
+      'Hose kürzen, einengen/weiten, Bund ändern, Reißverschluss, Reparaturen.'
     ],
     price: '₺80+',
     keywords: 'paça kısaltma, tadilat, tamir, daraltma',
   },
   {
     icon: '👗', color: '#fef3e2',
-    names: ['Özel Dikim', 'Custom Clothing', 'Пошив на заказ'],
+    names: ['Özel Dikim', 'Custom Clothing', 'Пошив на заказ', 'Maßanfertigung'],
     descs: [
       'Ölçüye özel her türlü kıyafet dikimi. Elbise, bluz, etek, pantolon.',
       'Custom made clothing to your exact measurements. Any style, any fabric.',
-      'Пошив одежды по меркам. Любой стиль, любая ткань.'
+      'Пошив одежды по меркам. Любой стиль, любая ткань.',
+      'Maßgeschneiderte Kleidung nach Ihren Maßen. Jeder Stil, jeder Stoff.'
     ],
     price: '₺500+',
     keywords: 'özel dikim, ölçüye dikim',
   },
   {
     icon: '💍', color: '#fce4ec',
-    names: ['Gelinlik & Abiye', 'Wedding & Evening', 'Свадебное платье'],
+    names: ['Gelinlik & Abiye', 'Wedding & Evening', 'Свадебное платье', 'Brautkleid & Abend'],
     descs: [
       'Gelinlik, damatlık, abiye, nişan elbisesi dikimi ve tadilatı.',
       'Wedding dresses, suits, evening gowns — custom or alterations.',
-      'Свадебные платья, смокинги, вечерние наряды — пошив и подгонка.'
+      'Свадебные платья, смокинги, вечерние наряды — пошив и подгонка.',
+      'Brautkleider, Anzüge, Abendkleider — Maßanfertigung oder Änderungen.'
     ],
     price: '₺2.000+',
     keywords: 'gelinlik, damatlık, abiye',
   },
   {
     icon: '👔', color: '#e8f5e9',
-    names: ['Takım Elbise', 'Suits & Shirts', 'Костюмы и рубашки'],
+    names: ['Takım Elbise', 'Suits & Shirts', 'Костюмы и рубашки', 'Anzüge & Hemden'],
     descs: [
       'Erkek/kadın takım elbise, blazer, gömlek dikim ve tadilat.',
       'Men\'s/women\'s suits, blazers, shirts — custom or altered.',
-      'Мужские/женские костюмы, пиджаки, рубашки — пошив и подгонка.'
+      'Мужские/женские костюмы, пиджаки, рубашки — пошив и подгонка.',
+      'Herren/Damen Anzüge, Blazer, Hemden — Maßanfertigung oder Änderungen.'
     ],
     price: '₺1.500+',
     keywords: 'takım elbise, blazer',
   },
   {
     icon: '🧺', color: '#e3f2fd',
-    names: ['Kuru Temizleme', 'Dry Cleaning', 'Химчистка'],
+    names: ['Kuru Temizleme', 'Dry Cleaning', 'Химчистка', 'Chemische Reinigung'],
     descs: [
       'Profesyonel kuru temizleme hizmeti. Otelden alım ve teslimat.',
       'Professional dry cleaning. Hotel pickup and delivery available.',
-      'Профессиональная химчистка. Забор и доставка из отеля.'
+      'Профессиональная химчистка. Забор и доставка из отеля.',
+      'Professionelle chemische Reinigung. Abholung und Lieferung ins Hotel.'
     ],
     price: '₺120+',
     keywords: 'kuru temizleme, antalya kuru temizleme',
   },
   {
     icon: '👕', color: '#f3e5f5',
-    names: ['Çamaşır Yıkama & Ütü', 'Laundry & Ironing', 'Стирка и глажка'],
+    names: ['Çamaşır Yıkama & Ütü', 'Laundry & Ironing', 'Стирка и глажка', 'Wäsche & Bügeln'],
     descs: [
       'Çamaşır yıkama, kurutma ve ütü hizmeti. Otele teslimat.',
       'Laundry, drying and ironing service. Hotel delivery.',
-      'Стирка, сушка и глажка. Доставка в отель.'
+      'Стирка, сушка и глажка. Доставка в отель.',
+      'Wäsche, Trocknen und Bügeln. Lieferung ins Hotel.'
     ],
     price: '₺80+',
     keywords: 'çamaşır yıkama, ütü hizmeti',
   },
   {
     icon: '📐', color: '#fff8e1',
-    names: ['Kalıp Çıkarma', 'Pattern Making', 'Пошив по лекалам'],
+    names: ['Kalıp Çıkarma', 'Pattern Making', 'Пошив по лекалам', 'Schnittmuster'],
     descs: [
       'Profesyonel kalıp çıkarma hizmeti. Mevcut kıyafetten veya sıfırdan kalıp hazırlama.',
       'Professional pattern making from existing garments or from scratch.',
-      'Профессиональный пошив по лекалам. По образцу или с нуля.'
+      'Профессиональный пошив по лекалам. По образцу или с нуля.',
+      'Professionelle Schnittmustererstellung vom bestehenden Kleidungsstück oder von Grund auf.'
     ],
     price: '₺300+',
     keywords: 'kalıp çıkarma, antalya kalıp',
   },
   {
     icon: '🎨', color: '#e8eaf6',
-    names: ['Model & Tasarım Dikimi', 'Design & Prototype', 'Модельный пошив'],
+    names: ['Model & Tasarım Dikimi', 'Design & Prototype', 'Модельный пошив', 'Design & Prototyp'],
     descs: [
       'Özgün model tasarımı, prototip ve numune dikimi. Markalar için.',
       'Original model design, prototype and sample sewing for brands.',
-      'Оригинальный дизайн, прототип и образец изделия для брендов.'
+      'Оригинальный дизайн, прототип и образец изделия для брендов.',
+      'Originales Modelldesign, Prototyp und Musternähen für Marken.'
     ],
     price: '₺500+',
     keywords: 'model dikimi, tasarım, prototip',
   },
   {
     icon: '🏭', color: '#e0f7fa',
-    names: ['Seri İmalat', 'Mass Production', 'Серийное производство'],
+    names: ['Seri İmalat', 'Mass Production', 'Серийное производство', 'Serienproduktion'],
     descs: [
       'Firmalar ve markalar için seri kıyafet üretimi. Kaliteli, hızlı, uygun fiyatlı.',
       'Mass production for businesses and brands. Quality, fast, affordable.',
-      'Серийное производство одежды для компаний и брендов. Качество и скорость.'
+      'Серийное производство одежды для компаний и брендов. Качество и скорость.',
+      'Serienproduktion für Unternehmen und Marken. Qualität, schnell, günstig.'
     ],
     price: 'Teklif Al',
     keywords: 'seri imalat, toptan üretim, antalya konfeksiyon',
   },
   {
     icon: '🧥', color: '#fbe9e7',
-    names: ['Kışlık & Mont Tadilat', 'Winter Clothing', 'Зимняя одежда'],
+    names: ['Kışlık & Mont Tadilat', 'Winter Clothing', 'Зимняя одежда', 'Winterkleidung'],
     descs: [
       'Mont, kaban, palto tadilat ve astar değiştirme.',
       'Coat, jacket alterations and lining replacement.',
-      'Пальто, куртки, замена подкладки.'
+      'Пальто, куртки, замена подкладки.',
+      'Mantel, Jacke ändern und Futter ersetzen.'
     ],
     price: '₺300+',
     keywords: 'mont tadilat, kaban, palto',
   },
   {
     icon: '🎭', color: '#f9fbe7',
-    names: ['Kostüm & Özel', 'Costumes & Special', 'Особые костюмы'],
+    names: ['Kostüm & Özel', 'Costumes & Special', 'Особые костюмы', 'Kostüme & Spezial'],
     descs: [
       'Tiyatro, film, tema partisi kostüm tasarımı ve dikimi.',
       'Theater, film, theme party costume design and sewing.',
-      'Театральные, киношные, тематические костюмы.'
+      'Театральные, киношные, тематические костюмы.',
+      'Theater, Film, Mottoparty Kostüme.'
     ],
     price: '₺400+',
     keywords: 'kostüm, tiyatro kostümü',
@@ -303,12 +343,12 @@ const SERVICES = [
 ];
 
 const WHY = [
-  { icon: '⚡', tr: ['24–48 Saat Teslimat', 'Tatildesiniz, beklemenize gerek yok. Ekspres hizmet garantisi.'], en: ['24–48h Express', 'You\'re on holiday — no waiting. Express service guaranteed.'], ru: ['24–48 часов', 'Вы в отпуске — экспресс-сервис.'] },
-  { icon: '🌍', tr: ['3 Dilde Hizmet', 'Türkçe, İngilizce ve Rusça. Dil engeli yok.'], en: ['3 Languages', 'Turkish, English, Russian — no language barrier.'], ru: ['3 языка', 'Турецкий, английский, русский.'] },
-  { icon: '🏨', tr: ['Otele Alım & Teslimat', 'Tüm Antalya otellerine alım ve teslimat hizmeti.'], en: ['Hotel Pickup & Delivery', 'Pickup and delivery to all Antalya hotels.'], ru: ['Забор и доставка', 'Забираем и доставляем в любой отель Антальи.'] },
-  { icon: '💳', tr: ['Döviz Kabul', 'TL, Euro, Dolar, Ruble kabul ediyoruz.'], en: ['Multi-Currency', 'TL, Euro, Dollar and Ruble accepted.'], ru: ['Валюта', 'TL, евро, доллар, рубли.'] },
-  { icon: '🏭', tr: ['Seri İmalat Kapasitesi', 'Firmalar için kalıp çıkarma, model dikimi, seri üretim.'], en: ['Mass Production', 'Pattern making, prototypes, mass production for brands.'], ru: ['Серийное производство', 'Лекала, образцы, серийный пошив для брендов.'] },
-  { icon: '⭐', tr: ['94 Memnun Müşteri', 'Google\'da 4.9 yıldız. Antalya\'nın en tercih edilen terzisi.'], en: ['94 Happy Clients', '4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['94 клиента', '4.9 звезды на Google.'] },
+  { icon: '⚡', tr: ['24–48 Saat Teslimat', 'Tatildesiniz, beklemenize gerek yok. Ekspres hizmet garantisi.'], en: ['24–48h Express', 'You\'re on holiday — no waiting. Express service guaranteed.'], ru: ['24–48 часов', 'Вы в отпуске — экспресс-сервис.'], de: ['24–48h Express', 'Sie sind im Urlaub — kein Warten. Expressdienst garantiert.'] },
+  { icon: '🌍', tr: ['4 Dilde Hizmet', 'Türkçe, İngilizce, Rusça ve Almanca. Dil engeli yok.'], en: ['4 Languages', 'Turkish, English, Russian, German — no language barrier.'], ru: ['4 языка', 'Турецкий, английский, русский, немецкий.'], de: ['4 Sprachen', 'Türkisch, Englisch, Russisch, Deutsch — keine Sprachbarriere.'] },
+  { icon: '🏨', tr: ['Otele Alım & Teslimat', 'Tüm Antalya otellerine alım ve teslimat hizmeti.'], en: ['Hotel Pickup & Delivery', 'Pickup and delivery to all Antalya hotels.'], ru: ['Забор и доставка', 'Забираем и доставляем в любой отель Антальи.'], de: ['Hotel Abholung & Lieferung', 'Abholung und Lieferung in alle Antalya-Hotels.'] },
+  { icon: '💳', tr: ['Döviz Kabul', 'TL, Euro, Dolar, Ruble kabul ediyoruz.'], en: ['Multi-Currency', 'TL, Euro, Dollar and Ruble accepted.'], ru: ['Валюта', 'TL, евро, доллар, рубли.'], de: ['Währungen', 'TL, Euro, Dollar und Rubel akzeptiert.'] },
+  { icon: '🏭', tr: ['Seri İmalat Kapasitesi', 'Firmalar için kalıp çıkarma, model dikimi, seri üretim.'], en: ['Mass Production', 'Pattern making, prototypes, mass production for brands.'], ru: ['Серийное производство', 'Лекала, образцы, серийный пошив для брендов.'], de: ['Serienproduktion', 'Schnittmuster, Prototypen, Serienproduktion für Marken.'] },
+  { icon: '⭐', tr: ['94 Memnun Müşteri', 'Google\'da 4.9 yıldız. Antalya\'nın en tercih edilen terzisi.'], en: ['94 Happy Clients', '4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['94 клиента', '4.9 звезды на Google.'], de: ['94 zufriedene Kunden', '4,9 Sterne auf Google. Beliebtester Schneider in Antalya.'] },
 ];
 
 const REVIEWS = [
@@ -335,7 +375,7 @@ export default function TerziClient() {
   const [lang, setLang] = useState<Lang>('tr');
   const [activeIlce, setActiveIlce] = useState<string | null>(null);
   const c = C[lang];
-  const li: Record<Lang, number> = { tr: 0, en: 1, ru: 2 };
+  const li: Record<Lang, number> = { tr: 0, en: 1, ru: 2, de: 3 };
   const idx = li[lang];
 
   const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
@@ -371,7 +411,7 @@ export default function TerziClient() {
         {/* ── LANG BAR ── */}
         <div style={{ background: '#1c1814', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
           <div style={{ display: 'flex', gap: 6 }}>
-            {(['tr','en','ru'] as Lang[]).map(l => (
+            {(['tr','en','ru','de'] as Lang[]).map(l => (
               <button key={l} onClick={() => setLang(l)} style={{
                 padding: '5px 12px', borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: 'pointer',
                 border: `1px solid ${lang === l ? '#b8954a' : 'rgba(255,255,255,0.15)'}`,
@@ -379,7 +419,7 @@ export default function TerziClient() {
                 color: lang === l ? '#fff' : 'rgba(255,255,255,0.45)',
                 fontFamily: 'inherit', transition: 'all 0.2s',
               }}>
-                {l === 'tr' ? '🇹🇷 TR' : l === 'en' ? '🇬🇧 EN' : '🇷🇺 РУ'}
+                {l === 'tr' ? '🇹🇷 TR' : l === 'en' ? '🇬🇧 EN' : l === 'ru' ? '🇷🇺 РУ' : '🇩🇪 DE'}
               </button>
             ))}
           </div>
@@ -407,7 +447,7 @@ export default function TerziClient() {
           <p className="fu3" style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 14, letterSpacing: 0.3, lineHeight: 1.6 }}>{c.sub}</p>
 
           <div className="fu3" style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-            {['🇹🇷 Türkçe','🇬🇧 English','🇷🇺 Русский'].map(l => (
+            {['🇹🇷 Türkçe','🇬🇧 English','🇷🇺 Русский','🇩🇪 Deutsch'].map(l => (
               <span key={l} style={{ fontSize: 10, padding: '4px 10px', borderRadius: 20, border: '1px solid rgba(184,149,74,0.2)', background: 'rgba(184,149,74,0.05)', color: '#c9a86e' }}>{l}</span>
             ))}
           </div>
@@ -586,7 +626,7 @@ export default function TerziClient() {
         <div style={{ background: '#1c1814', padding: '32px 20px 40px', borderTop: '1px solid rgba(184,149,74,0.15)' }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#d4af6e', marginBottom: 16 }}>
-              Belek by Ercan — Antalya Terzi & Tadilat
+              Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya
             </p>
             <div style={{ marginBottom: 16 }}>
               {SEO_KEYWORDS.map(kw => (
