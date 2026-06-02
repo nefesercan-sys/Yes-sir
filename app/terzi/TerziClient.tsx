@@ -217,7 +217,7 @@ const SERVICES = [
       'Подгонка брюк, заужение/расширение, замена молнии, ремонт.',
       'Hose kürzen, einengen/weiten, Bund ändern, Reißverschluss, Reparaturen.'
     ],
-    price: '₺80+',
+    price: '₺150+',
     keywords: 'paça kısaltma, tadilat, tamir, daraltma',
   },
   {
@@ -229,7 +229,7 @@ const SERVICES = [
       'Пошив одежды по меркам. Любой стиль, любая ткань.',
       'Maßgeschneiderte Kleidung nach Ihren Maßen. Jeder Stil, jeder Stoff.'
     ],
-    price: '₺500+',
+    price: '₺1500+',
     keywords: 'özel dikim, ölçüye dikim',
   },
   {
@@ -241,7 +241,7 @@ const SERVICES = [
       'Свадебные платья, смокинги, вечерние наряды — пошив и подгонка.',
       'Brautkleider, Anzüge, Abendkleider — Maßanfertigung oder Änderungen.'
     ],
-    price: '₺2.000+',
+    price: '₺5.000+',
     keywords: 'gelinlik, damatlık, abiye',
   },
   {
@@ -253,7 +253,7 @@ const SERVICES = [
       'Мужские/женские костюмы, пиджаки, рубашки — пошив и подгонка.',
       'Herren/Damen Anzüge, Blazer, Hemden — Maßanfertigung oder Änderungen.'
     ],
-    price: '₺1.500+',
+    price: '₺5.000+',
     keywords: 'takım elbise, blazer',
   },
   {
@@ -265,7 +265,7 @@ const SERVICES = [
       'Профессиональная химчистка. Забор и доставка из отеля.',
       'Professionelle chemische Reinigung. Abholung und Lieferung ins Hotel.'
     ],
-    price: '₺120+',
+    price: '₺400+',
     keywords: 'kuru temizleme, antalya kuru temizleme',
   },
   {
@@ -277,7 +277,7 @@ const SERVICES = [
       'Стирка, сушка и глажка. Доставка в отель.',
       'Wäsche, Trocknen und Bügeln. Lieferung ins Hotel.'
     ],
-    price: '₺80+',
+    price: '₺300+',
     keywords: 'çamaşır yıkama, ütü hizmeti',
   },
   {
@@ -289,7 +289,7 @@ const SERVICES = [
       'Профессиональный пошив по лекалам. По образцу или с нуля.',
       'Professionelle Schnittmustererstellung vom bestehenden Kleidungsstück oder von Grund auf.'
     ],
-    price: '₺300+',
+    price: '₺1000+',
     keywords: 'kalıp çıkarma, antalya kalıp',
   },
   {
@@ -301,7 +301,7 @@ const SERVICES = [
       'Оригинальный дизайн, прототип и образец изделия для брендов.',
       'Originales Modelldesign, Prototyp und Musternähen für Marken.'
     ],
-    price: '₺500+',
+    price: '₺1500+',
     keywords: 'model dikimi, tasarım, prototip',
   },
   {
@@ -337,7 +337,7 @@ const SERVICES = [
       'Театральные, киношные, тематические костюмы.',
       'Theater, Film, Mottoparty Kostüme.'
     ],
-    price: '₺400+',
+    price: '₺2500+',
     keywords: 'kostüm, tiyatro kostümü',
   },
 ];
