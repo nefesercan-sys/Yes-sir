@@ -527,6 +527,12 @@ const SEO_KEYWORDS = [
   'Ölçüye Dikim Antalya', 'Özel Dikim Antalya', 'Hızlı Terzi Antalya',
   'Ekspres Terzi Antalya', '24 Saat Terzi Antalya', 'Ucuz Terzi Antalya',
   'Yakın Terzi Antalya', 'Antalya Terzi Nerede', 'Antalya Dikim',
+  
+  // ── TÜRKÇE: ADRESTEN ALIM / MOBİL / ONLİNE KONSEPT (EKLEME) ──────────
+  'Adresten Alım Terzi Antalya', 'Kapıdan Kapıya Terzi Servisi', 'Evden Alınan Terzi Hizmeti',
+  'Motorlu Terzi Kurye Antalya', 'Online Terzi Siparişi Antalya', 'Evde Ölçü Alan Terzi Antalya',
+  'İş Yerine Gelen Terzi Antalya', 'Kıyafetimi Evden Alan Terzi', 'Adrese Teslim Ütü ve Terzi',
+  'Kuryeli Terzi Hizmeti Antalya', 'Evden Terzi Çağırma Antalya', 'Mobil Terzi Uygulaması',
 
   // ── TÜRKÇE: PAÇA / PANTOLON ──────────────────────────────────────────
   'Paça Kısaltma Antalya', 'Paça Dikimi Antalya', 'Paça Fiyatı Antalya',
@@ -561,6 +567,12 @@ const SEO_KEYWORDS = [
   'Bluz Dikimi Antalya', 'Tulum Dikimi Antalya', 'Kadın Özel Dikim Antalya',
   'Kadın Kıyafet Dikimi Antalya', 'Abiye Dikimi Antalya', 'Gece Elbisesi Antalya',
   'Nişan Elbisesi Dikimi Antalya', 'Kına Kıyafeti Dikimi Antalya',
+  
+  // ── TÜRKÇE: KUMAŞ TÜRLERİ & ÖZEL DİKİM DETAY (KETEN, MÜSLİN, VİSKON) ──
+  'Keten Elbise Dikimi Antalya', 'Müslin Kıyafet Tasarımı Antalya', 'Viskon Elbise Tadilatı',
+  'Şile Bezi Kıyafet Dikimi', 'İpek Elbise Tamiri Antalya', 'Keten Pantolon Paçası Yapımı',
+  'Triko Dikiş Tamiri Antalya', 'Deri Mont Astar Değişimi', 'Kaşe Kaban Tadilatı Antalya',
+  'Penye Kıyafet Daraltma', 'Kot Ceket Tadilatı Antalya', 'Saten Elbise Dikim Atölyesi',
 
   // ── TÜRKÇE: GELİNLİK / DÜĞÜN ────────────────────────────────────────
   'Gelinlik Antalya', 'Gelinlik Dikimi Antalya', 'Gelinlik Tadilat Antalya',
@@ -601,6 +613,10 @@ const SEO_KEYWORDS = [
   'Üniforma Dikimi Antalya', 'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya',
   'Spor Kıyafet Dikimi Antalya', 'Kostüm Dikimi Antalya', 'Tiyatro Kostümü Antalya',
   'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi',
+  'Barista Önlüğü Tasarımı Antalya', 'Medikal Scrubs Dikimi Antalya', 'Aşçı Ceketi İsim Nakışı',
+  'Garson Yeleği Dikimi Antalya', 'Otel Temizlik Personeli Kıyafeti', 'Güvenlik Firması Üniforması',
+  'Spa Masöz Kıyafeti Dikimi', 'Otel Resepsiyon Takım Elbise', 'Restoran Personel Kıyafeti Toptan',
+  'Logolu İş Kıyafetleri Baskısı', 'Fason Üniforma İmalatı Antalya',
 
   // ── TÜRKÇE: İLÇELER ─────────────────────────────────────────────────
   'Lara Terzi', 'Konyaaltı Terzi', 'Belek Terzi', 'Kemer Terzi',
@@ -608,12 +624,19 @@ const SEO_KEYWORDS = [
   'Muratpaşa Terzi', 'Aksu Terzi', 'Döşemealtı Terzi', 'Serik Terzi',
   'Kaleiçi Terzi', 'Hurma Terzi', 'Uncalı Terzi', 'Varsak Terzi',
   'Lara Dikim', 'Konyaaltı Dikim', 'Belek Dikim', 'Kemer Dikim',
-
+  'Kundu Terzi', 'Kundu Terzi Servisi', 'Güzeloba Terzi', 'Altıntaş Terzi',
+  'Liman Mahallesi Terzi', 'Meltem Terzi', 'Fener Mahallesi Terzi', 'Şirinyalı Terzi',
+  'Çağlayan Mahallesi Terzi', 'Kundu Otel Üniforma Dikimi', 'Kemer Otel Kıyafetleri',
+  'Belek Otel Personel Kıyafetleri', 'Lara Adresten Alım Terzi', 'Konyaaltı Mobil Terzi',
+  
   // ── TÜRKÇE: FİYAT / SORU TİPİ ───────────────────────────────────────
   'Paça Kısaltma Kaç Lira', 'Terzi Fiyat Listesi', 'Elbise Dikimi Fiyatı',
   'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Dikim Fiyatları 2025',
   'Antalya Terzi Ücretleri', 'Ucuz Tadilat Antalya', 'Hızlı Paça Kısaltma',
-
+  'Terzi Fiyatları 2026 Antalya', 'Paça Kısaltma Ücreti 2026', 'Fermuar Değişimi Kaç Para',
+  'Abiye Daraltma Fiyatları 2026', 'En Ucuz Terzi Atölyesi Antalya', 'Gelinlik Tadilatı Kaç Lira',
+  'Komple Beden Küçültme Fiyatı', 'Toplu Üniforma Dikim Fiyatları', 'Fason Dikim Fiyatı Al',
+ 
   // ── ENGLISH KEYWORDS ────────────────────────────────────────────────
   'Tailor Antalya', 'Antalya Tailor', 'Best Tailor Antalya', 'Master Tailor Antalya',
   'Tailor Near Me Antalya', 'Same Day Tailor Antalya', 'Express Tailor Antalya',
