@@ -174,7 +174,7 @@ const C = {
       { q: 'Doktor, hemşire, işçi, okul ve spor üniforması yapıyor musunuz?', a: 'Evet, her sektöre özel üniforma: doktor · hemşire · eczacı · işçi · fabrika · okul forması · futbol forması · spor kulübü · güvenlik · banka personeli.' },
       { q: 'Büyük beden, nevresim, perde, bebek kıyafeti dikimi var mı?', a: 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi uygulanır.' },
     ],
-  },
+
   en: {
     badge: '✂ Antalya · Tailor Can',
     h1: 'Antalya\'s',
@@ -214,7 +214,7 @@ const C = {
       { q: 'Do you produce medical, school and sports uniforms?', a: 'Yes — doctors, nurses, factory workers, school uniforms, sports team kits, security, bank staff. Every sector covered.' },
       { q: 'Embroidery, plus-size, children\'s clothing, curtains?', a: 'Yes — logo embroidery, plus-size sewing, baby/children\'s clothing, curtains, bed linen. Group discounts available.' },
     ],
-  },
+  
   ru: {
     badge: '✂ Анталья · Портной Кан',
     h1: 'Лучший',
@@ -255,7 +255,7 @@ const C = {
       { q: 'Медицинская, школьная и спортивная форма?', a: 'Да — врачи, медсёстры, рабочие, школьная форма, спортивные команды. Для любой отрасли.' },
       { q: 'Большие размеры, детская одежда, шторы, постельное бельё?', a: 'Да — большие размеры, детская и детская одежда, шторы, постельное бельё. Скидки для групповых заказов.' },
     ],
-  },
+  
   de: {
     badge: '✂ Antalya · Schneider Can',
     h1: 'Antalyas',
