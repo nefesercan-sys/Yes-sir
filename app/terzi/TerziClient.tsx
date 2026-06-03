@@ -296,7 +296,6 @@ const C = {
       { q: 'Medizinische, Schul- und Sportuniformen?', a: 'Ja — Ärzte, Krankenschwestern, Arbeiter, Schuluniformen, Sportteam-Trikots. Jede Branche.' },
       { q: 'Übergrößen, Kinderkleidung, Vorhänge, Stickerei?', a: 'Ja — Übergrößen, Kinderkleidung, Babykleider, Vorhänge, Bettwäsche, Logo-Stickerei. Gruppenrabatte verfügbar.' },
     ],
-  },
 };
 
 // ═══════════════════════════════════════
