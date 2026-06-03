@@ -42,12 +42,9 @@ const SCHEMA = {
         "Terzi Can","Tailor Can","Портной Кан","Schneider Can",
         "Antalya Terzisi","Antalya Tailor","Antalya Kuru Temizleme",
         "Belek by Ercan","Antalya Erkek Terzi","Antalya Bayan Terzi",
-        "Antalya Çocuk Kıyafeti Dikimi","Antalya Terzi Servisi",
-        "Antalya Üniforma Üretimi","Antalya Otel Üniforma",
-        "Antalya Sweatshirt Dikimi","Antalya Nakış Hizmeti",
-        "Antalya Büyük Beden Terzi","Antalya Fason İmalat"
+        "Antalya Çocuk Kıyafeti Dikimi","Antalya Terzi Servisi"
       ],
-      "description": "Antalya'nın en iyi terzisi. Paça kısaltma, fermuar değişimi, tadilat, tamir, daraltma, elbise dikimi, erkek terzi, bayan terzi, çocuk kıyafeti, bebek elbisesi, büyük beden, nevresim, perde dikimi, sweatshirt dikimi, nakış, logo baskı, otel üniforma, aşçı üniforma, garson üniforma, doktor üniforma, okul üniforma üretimi. Araçlı terzi servisi — yerinde ölçü alıp adrese teslim. Turistlere 24 saat hızlı hizmet.",
+      "description": "Antalya'nın en iyi terzisi. Paça kısaltma, tadilat, tamir, daraltma, elbise dikimi, erkek terzi, bayan terzi, çocuk kıyafeti, bebek elbisesi, nevresim, perde dikimi, büyük beden, anne grubu, kuru temizleme, seri imalat, fason imalat. Yerinde ölçü alıp adrese teslim eden araçlı terzi servisi. Turistlere 24 saat hızlı hizmet.",
       "url": "https://swaphubs.com/terzi",
       "telephone": "+90 531 898 64 18",
       "priceRange": "₺₺",
@@ -64,59 +61,30 @@ const SCHEMA = {
       "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "94", "bestRating": "5" },
       "areaServed": ANTALYA_ILCELER.map(i => ({ "@type": "City", "name": i.ilce })),
       "serviceType": [
-        // TR — Tamir & Tadilat
-        "Paça Kısaltma","Pantolon Kısaltma","Paça Dikimi","Tadilat","Tamir","Daraltma",
-        "Fermuar Değişimi","Fermuar Tamiri","Kot Fermuarı","Mont Fermuarı","Etek Kısaltma",
-        "Abiye Tamiri","Abiye Tadilatı","Kol Kısaltma","Beden Küçültme","Beden Seti Çıkarma",
-        // TR — Dikim
-        "Özel Dikim","Erkek Terzi","Bayan Terzi","Çocuk Kıyafeti Dikimi","Bebek Elbisesi Dikimi",
-        "Büyük Beden Dikimi","Gelinlik","Damatlık","Abiye Dikimi","Anne Grubu Dikimi",
-        "Sweatshirt Dikimi","Eşofman Dikimi","Gömlek Dikimi","Ceket Dikimi","Pantolon Dikimi","Etek Dikimi",
-        "Nevresim Dikimi","Perde Dikimi","Ev Tekstili Dikimi",
-        // TR — Nakış & Baskı
-        "Nakış","Logo Nakışı","İsim Nakışı","Üniforma Nakışı","Dijital Baskı","Transfer Baskı","Serigrafi",
-        // TR — Üniforma
-        "Üniforma Dikimi","Üniforma Üretimi","Üniforma Tasarımı",
-        "Otel Üniforma","Resepsiyon Üniforma","Kat Görevlisi Üniforma","Meydancı Üniforma",
-        "Aşçı Üniforma","Şef Kıyafeti","Garson Üniforma","Barista Üniforma","Mutfak Üniforma",
-        "Doktor Üniforma","Hemşire Üniforma","Sağlık Personel Kıyafeti","İşçi Üniforma",
-        "Okul Üniforma","Okul Forması","Spor Takım Üniforma","Futbol Forması","Personel Üniforma",
-        // TR — Üretim & Hizmet
-        "Kalıp Çıkarma","Model Dikimi","Seri İmalat","Fason İmalat","Numune Dikimi",
-        "Kesim Dikim Ütü Paket","Terzi Servisi","Araçlı Terzi","Adrese Teslim Terzi",
-        "Kuru Temizleme","Çamaşır Yıkama","Ütü Hizmeti",
-        // EN
+        "Paça Kısaltma","Pantolon Kısaltma","Tadilat","Tamir","Daraltma","Beden Küçültme",
+        "Büyük Beden Dikimi","Beden Seti Çıkarma","Kuru Temizleme","Çamaşır Yıkama","Ütü Hizmeti",
+        "Kalıp Çıkarma","Model Dikimi","Seri İmalat","Fason İmalat","Özel Dikim",
+        "Erkek Terzi","Bayan Terzi","Çocuk Kıyafeti Dikimi","Bebek Elbisesi Dikimi",
+        "Nevresim Dikimi","Perde Dikimi","Gelinlik","Damatlık","Anne Grubu Dikimi",
+        "Terzi Servisi","Araçlı Terzi","Yerinde Ölçü Terzi","Adrese Teslim Terzi",
+        "Gömlek Dikimi","Ceket Dikimi","Pantolon Dikimi","Etek Dikimi",
         "Alterations","Custom Tailoring","Dry Cleaning","Pattern Making","Mass Production",
-        "Mobile Tailor Service","Hotel Pickup Delivery Tailor",
-        "Uniform Production","Hotel Uniform","Chef Uniform","Waiter Uniform","School Uniform",
-        "Embroidery","Logo Embroidery","Sweatshirt Sewing","Tracksuit Production",
-        "Zip Repair","Trouser Hemming","Dress Alteration","Evening Gown Repair",
-        // RU
+        "Mobile Tailor Service","Home Visit Tailor",
         "Пошив одежды","Ремонт одежды","Химчистка","Пошив по лекалам","Выездной портной",
-        "Форма для персонала","Гостиничная форма","Вышивка","Пошив толстовок",
-        // DE
-        "Maßanfertigung","Änderungsschneiderei","Uniformproduktion","Stickerei",
-        "Sweatshirt nähen","Reißverschluss Reparatur","Mobiler Schneider"
+        "Schneider mit Hausbesuch","Maßanfertigung","Änderungsschneiderei"
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Antalya'da paça kısaltma fiyatı ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Antalya'da paça kısaltma fiyatımız ₺150'den başlar. Pantolon cinsi ve kumaş türüne göre değişir. Ücretsiz fiyat teklifi için WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da paça kısaltma kaç lira 2025?", "acceptedAnswer": { "@type": "Answer", "text": "Antalya'da paça kısaltma fiyatı 2025 yılında ₺150'den başlar. Kumaş türü ve işçiliğe göre değişir. Ücretsiz fiyat teklifi için WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da fermuar değişimi kaç lira? Mont, kot, pantolon fermuarı fiyatı?", "acceptedAnswer": { "@type": "Answer", "text": "Pantolon ve kot fermuarı değişimi ₺120'den, mont fermuarı ₺300'den başlar. Aynı gün servis mümkündür. WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da yakınımda terzi var mı? Eve veya otele gelen terzi?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Terzi Can araçlı terzi servisiyle Antalya'nın tüm ilçelerine geliyor. Eve gelen terzi, otele gelen terzi hizmeti sunuyoruz. WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Mezuniyet abiyesi tamiri ve kısaltması Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, mezuniyet sezonu (Mayıs–Haziran) için abiye tamiri, abiye kısaltma ve abiye tadilatı yapıyoruz. Ekspres 24 saat teslim. WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Düğün sezonu gelinlik tadilatı Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, gelinlik kısaltma ve damatlık tadilatı yapıyoruz. Ekspres randevu için WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da terzi fiyatları 2025 — tadilat ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can 2025 fiyatları: paça kısaltma ₺150+, fermuar ₺120+, ceket daraltma ₺300+, elbise tadilatı ₺200+, kuru temizleme ₺400+. WhatsApp'tan ücretsiz teklif alın." } },
-        { "@type": "Question", "name": "Antalya'da fermuar değişimi yapılır mı? Kot, mont ve pantolon fermuarı değiştiriliyor mu?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, her türlü kıyafette fermuar değişimi yapıyoruz: pantolon fermuarı, kot fermuarı, mont fermuarı, ceket fermuarı, sweatshirt fermuarı, elbise fermuarı. Aynı gün servis mümkündür." } },
-        { "@type": "Question", "name": "Antalya'da sweatshirt ve eşofman dikimi yapılıyor mu?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, sweatshirt ve eşofman takımı dikimi, tadilat ve seri üretim yapıyoruz. Nakış ve baskı ile kişiselleştirme de mümkündür." } },
-        { "@type": "Question", "name": "Antalya'da otel ve restoran üniforma üretimi yapılıyor mu?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, otel personel üniforma, resepsiyon üniforma, aşçı üniforma, garson üniforma, meydancı üniforma, spa üniforma üretimi yapıyoruz. Tasarım, kalıp, seri imalat ve nakış hepsi tek elden." } },
-        { "@type": "Question", "name": "Antalya'da doktor, hemşire, işçi ve okul üniforması üretimi var mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, her sektöre özel üniforma üretimi yapıyoruz: doktor, hemşire, eczacı, işçi, fabrika, okul, spor takımı, güvenlik ve banka personel üniforması." } },
-        { "@type": "Question", "name": "Antalya'da nakış ve baskı hizmeti var mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, kıyafete logo nakışı, isim nakışı, üniforma nakışı, dijital baskı, transfer baskı ve serigrafi hizmeti sunuyoruz." } },
-        { "@type": "Question", "name": "Terzi servisi var mı? Eve gelip ölçü alıyor musunuz?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, araçlı terzi servisimizle tüm Antalya'ya geliyoruz. Adresinize gidip ölçü alıyor, dikip tekrar teslim ediyoruz. Otel, ev, işyeri fark etmez." } },
-        { "@type": "Question", "name": "Where can I find a tailor or uniform producer in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can offers professional tailoring and uniform production in Antalya — hotel uniforms, chef uniforms, school uniforms, sports uniforms, embroidery, sweatshirt sewing. WhatsApp +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Где найти портного и производителя формы в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can — пошив одежды, производство формы, вышивка, пошив толстовок в Анталье. Гостиничная форма, форма для ресторанов, медицинская форма. WhatsApp: +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Antalya'da paça kısaltma fiyatı ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Antalya'da paça kısaltma fiyatı ₺80'den başlar. Pantolon cinsi ve işin niteliğine göre değişir. Ücretsiz fiyat teklifi için WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Antalya'da terzi servisi var mı? Eve gelip ölçü alıyor musunuz?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, araçlı terzi servisimizle adresinize gelip ölçü alıyor, dikimi tamamlayıp tekrar teslim ediyoruz. Tüm Antalya ilçelerine servis mevcuttur." } },
+        { "@type": "Question", "name": "Büyük beden terzi Antalya — büyük beden kıyafet dikimi yapıyor musunuz?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, her bedene özel dikim yapıyoruz. Büyük beden elbise, büyük beden pantolon, beden seti çıkarma ve beden küçültme hizmeti sunuyoruz." } },
+        { "@type": "Question", "name": "Antalya'da nevresim ve perde dikimi yaptırılır mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, nevresim takımı dikimi, perde dikimi ve ev tekstili hizmetleri sunuyoruz. Ölçülerinize göre özel dikim yapıyoruz." } },
+        { "@type": "Question", "name": "Bebek ve çocuk kıyafeti dikimi yapıyor musunuz?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, bebek elbisesi, çocuk kıyafeti ve özel tasarım çocuk kostümleri dikiyoruz. Anne grubu toplu siparişler için de özel fiyat mevcuttur." } },
+        { "@type": "Question", "name": "Fason imalat ve seri üretim yapıyor musunuz?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, kalıp çıkarma, model dikimi, numune hazırlama ve seri imalat hizmeti sunuyoruz. Markalar ve firmalar için fason üretim kapasitemiz mevcuttur." } },
+        { "@type": "Question", "name": "Where can I find a tailor in Antalya with home/hotel delivery?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can offers a mobile tailor service in Antalya — we come to your address or hotel, take measurements, and deliver the finished garment. WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Где найти портного в Анталье с выездом на дом?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can предлагает выездной сервис портного в Анталье — приедем к вам домой или в отель, снимем мерки и доставим готовое изделие. WhatsApp: +90 531 898 64 18." } },
       ]
     },
     {
@@ -137,7 +105,7 @@ const C = {
     badge: '✂ Antalya · Terzi Can',
     h1: 'Antalya\'nın',
     h1em: 'Terzisi',
-    sub: 'Erkek · Bayan · Çocuk · Tadilat · Üniforma · Nakış · Fason · Seri İmalat',
+    sub: 'Erkek · Bayan · Çocuk · Bebek · Tadilat · Dikim · Fason · Seri İmalat',
     waBtn: 'WhatsApp\'tan Yazın',
     downBtn: 'Hizmetleri Gör ↓',
     waMsg: 'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',
@@ -151,30 +119,28 @@ const C = {
     waLabel: 'WhatsApp\'tan Yaz',
     mapLabel: 'Haritada Bul',
     mobileSvcTitle: 'Terzi Servisi',
-    mobileSvcBadge: '🚗 ARAÇLI TERZİ SERVİSİ',
+    mobileSvcBadge: '🚗 YENİ HİZMET',
     mobileSvcHeading: 'Kapınıza Geliyoruz',
     mobileSvcDesc: 'Araçlı terzi servisimizle tüm Antalya\'ya hizmet veriyoruz. Terzi Can ekibimiz adresinize geliyor, yerinde ölçü alıyor; dikimi tamamlayıp tekrar kapınıza teslim ediyor. Otel, ev, işyeri — fark etmez.',
     mobileSvcSteps: ['📍 Adresinizi Bildirin','📏 Yerinde Ölçü Alınır','✂️ Atölyede Dikilir','🚗 Kapıya Teslim'],
     mobileSvcStepLabels: ['WhatsApp\'tan konum paylaşın','Terzi adresinize gelir','Ölçüye göre dikim yapılır','Belirlenen vakitte teslim'],
     mobileSvcCta: '📲 Terzi Servisi Talep Et',
     mobileSvcWaMsg: 'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',
-    seoP1: 'Antalya\'nın en deneyimli terzisi Terzi Can. Paça kısaltma · pantolon kısaltma · elbise daraltma · beden küçültme · fermuar değişimi · etek kısaltma · abiye tamiri · kıyafet tamiri · kuru temizleme · ütü hizmeti · kalıp çıkarma · model dikimi · seri imalat · fason imalat · nakış · logo baskı. Otel üniforma · aşçı üniforma · garson üniforma · resepsiyon üniforma · doktor üniforma · okul üniforma · spor üniforma üretimi. Sweatshirt ve eşofman dikimi. Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer ve tüm Antalya ilçelerine hizmet. 24-48 saat ekspres servis, otele alım-teslimat.',
-    seoP2: 'Antalya erkek terzi, bayan terzi, çocuk kıyafeti dikimi, bebek elbisesi dikimi, anne grubu toplu dikimi, büyük beden dikimi, beden seti çıkarma, sweatshirt dikimi, eşofman dikimi, nakış, logo nakışı, üniforma nakışı. Nevresim dikimi, perde dikimi, gömlek dikimi, ceket dikimi, pantolon dikimi. Paça kısaltma fiyatı, paça kısaltma kaç lira, fermuar değişimi kaç lira, terzi fiyatları 2025, tadilat fiyatı, daraltma fiyatı, dikim fiyatları Antalya.',
-    seoP3: 'Yakınımda terzi Antalya — eve gelen terzi, otele gelen terzi, araçlı terzi servisi, adrese teslim terzi. Mezuniyet abiye tamiri, mezuniyet abiye kısaltma, düğün sezonu gelinlik tadilatı, kış sezonu mont fermuarı, yaz sezonu elbise daraltma. Otel üniforma, aşçı üniforma, garson üniforma, resepsiyon üniforma, doktor üniforma, okul üniforma üretimi Antalya. Lara terzi, Konyaaltı terzi, Belek terzi, Kemer terzi, Alanya terzi, Manavgat terzi.',
-    seoP4: 'Terzi fiyatları: paça kısaltma ₺150 · fermuar ₺120 · ceket daraltma ₺300 · elbise tadilatı ₺200 · kuru temizleme ₺400. Портной Кан в Анталье — подгонка брюк, ремонт одежды, химчистка, выездной портной, доставка в отель. Говорим по-русски.',
+    seoP1: 'Antalya\'nın en deneyimli terzisi Terzi Can. Paça kısaltma, pantolon kısaltma, elbise daraltma, beden küçültme, kıyafet tamiri, kuru temizleme, çamaşır yıkama, ütü hizmeti, kalıp çıkarma, model dikimi, seri imalat ve fason imalat. Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer ve tüm Antalya ilçelerine hizmet. Turistlere 24-48 saat ekspres servis, otele alım-teslimat.',
+    seoP2: 'Antalya erkek terzi, Antalya bayan terzi, Antalya çocuk kıyafeti dikimi, bebek elbisesi dikimi, anne grubu toplu dikimi, büyük beden elbise dikimi, büyük beden pantolon dikimi, beden seti çıkarma Antalya. Nevresim dikimi Antalya, perde dikimi Antalya, gömlek dikimi Antalya, ceket dikimi Antalya, pantolon dikimi Antalya. Paça kısaltma fiyatı, daraltma fiyatı, terzi fiyatları, dikim fiyatları Antalya.',
+    seoP3: 'Antalya terzi servisi — araçlı terzi, yerinde ölçü alan terzi, adrese teslim terzi. Lara terzi, Konyaaltı terzi, Belek terzi, Kemer terzi, Alanya terzi, Manavgat terzi, Side terzi, Kepez terzi, Muratpaşa terzi. Terzi Can ile Antalya\'nın her ilçe ve mahallesine hizmet.',
+    seoP4: 'Портной Кан в Анталье. Подгонка брюк, ремонт одежды, химчистка Анталья, стирка, глажка, пошив по лекалам, серийное производство. Говорим по-русски. Выездной портной — приедем к вам. Доставка в отель.',
     faq: [
-      { q: 'Paça kısaltma kaç lira? 2025 fiyatı ne kadar?', a: 'Paça kısaltma ₺150\'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarı. Pantolon fermuarı ₺120, mont fermuarı ₺300, ceket daraltma ₺300\'den. Kesin fiyat için WhatsApp\'tan yazın — ücretsiz teklif verelim.' },
-      { q: 'Fermuar değişimi kaç lira? Kot, mont, ceket, sweatshirt fermuarı?', a: 'Pantolon ve kot fermuarı ₺120\'den, ceket fermuarı ₺200\'den, mont fermuarı ₺300\'den başlar. Sweatshirt ve çanta fermuarı da yapılır. Aynı gün teslim mümkündür.' },
-      { q: 'Yakınımda terzi var mı? Eve veya otele gelen terzi Antalya?', a: 'Evet! Araçlı terzi servisimizle Antalya\'nın tüm ilçelerine geliyoruz. Ev, otel, işyeri fark etmez — WhatsApp\'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin ve teslim etsin.' },
-      { q: 'Mezuniyet abiye tamiri ve kısaltması yapıyor musunuz?', a: 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri, kısaltma ve tadilatı ekspres 24 saat yapıyoruz. Mezuniyet gecesi öncesi son dakika işlemleri kabul edilir.' },
-      { q: 'Düğün sezonu gelinlik tadilatı yapıyor musunuz?', a: 'Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, kısaltma ve damatlık tadilatı yapıyoruz. Özel günde kusursuz fit garantisi.' },
-      { q: 'Kış sezonunda mont fermuarı değişimi yapıyor musunuz?', a: 'Evet, mont fermuarı, deri mont fermuarı ve kaban fermuarı değişimi yapıyoruz. Kış sezonunda yoğun talep olduğu için önceden WhatsApp\'tan randevu almanızı öneririz.' },
-      { q: 'Etek kısaltma, abiye tamiri ve abiye tadilatı yapıyor musunuz?', a: 'Evet, etek kısaltma, abiye tamiri, abiye tadilatı ve gece elbisesi onarımı yapıyoruz. Özel gün kıyafetlerinizde mükemmel fit garantisi.' },
-      { q: 'Otel ve restoran üniforması üretimi yapıyor musunuz?', a: 'Evet, otel personel üniforması, resepsiyon, aşçı, garson, meydancı, spa, animatör üniforması üretiyoruz. Tasarım, kalıp, seri imalat ve nakış tek elden.' },
-      { q: 'Doktor, hemşire, işçi, okul ve spor üniforması yapıyor musunuz?', a: 'Evet, her sektöre özel üniforma: doktor · hemşire · eczacı · işçi · fabrika · okul forması · futbol forması · spor kulübü · güvenlik · banka personeli.' },
-      { q: 'Büyük beden, nevresim, perde, bebek kıyafeti dikimi var mı?', a: 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi uygulanır.' },
+      { q: 'Paça kısaltma fiyatı ne kadar?', a: 'Antalya\'da paça kısaltma fiyatımız ₺150\'den başlar. Kumaş türü ve işin niteliğine göre değişir. WhatsApp\'tan ücretsiz fiyat teklifi alabilirsiniz.' },
+      { q: 'Eve ya da otele gelip ölçü alıyor musunuz?', a: 'Evet! Araçlı terzi servisimizle Antalya\'nın tüm ilçelerine geliyoruz. Adresinize gidip ölçü alıyor, dikip tekrar teslim ediyoruz.' },
+      { q: 'Büyük beden ve özel beden dikimi yapıyor musunuz?', a: 'Evet, büyük beden elbise, pantolon, gömlek dikimi ve beden seti çıkarma hizmeti sunuyoruz. Her bedene özel kalıp hazırlıyoruz.' },
+      { q: 'Çocuk kıyafeti ve bebek elbisesi dikimi var mı?', a: 'Evet, çocuk kıyafeti, bebek elbisesi ve özel kostüm dikiyoruz. Anne grupları için toplu sipariş indirimi uygulanır.' },
+      { q: 'Nevresim ve perde dikimi yapıyor musunuz?', a: 'Evet, ölçüye özel nevresim takımı, perde, kırlent ve ev tekstili dikimi yapıyoruz.' },
+      { q: 'Seri imalat ve fason üretim yapıyor musunuz?', a: 'Evet, kalıp çıkarma, numune dikimi ve seri imalat hizmeti veriyoruz. Firmalar ve markalar için fason üretim yapıyoruz.' },
+      { q: 'Kuru temizleme ve çamaşır yıkama hizmeti var mı?', a: 'Evet, profesyonel kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Otelden alım ve teslimat yapıyoruz.' },
+      { q: 'Tüm Antalya ilçelerine hizmet veriyor musunuz?', a: 'Evet, Muratpaşa, Konyaaltı, Kepez, Aksu, Lara, Belek, Kemer, Alanya, Manavgat ve tüm Antalya ilçelerine hizmet veriyoruz.' },
     ],
-},
+  },
   en: {
     badge: '✂ Antalya · Tailor Can',
     h1: 'Antalya\'s',
@@ -193,29 +159,28 @@ const C = {
     waLabel: 'Chat on WhatsApp',
     mapLabel: 'Find on Map',
     mobileSvcTitle: 'Mobile Tailor Service',
-    mobileSvcBadge: '🚗 MOBILE TAILOR SERVICE',
+    mobileSvcBadge: '🚗 NEW SERVICE',
     mobileSvcHeading: 'We Come to You',
     mobileSvcDesc: 'Our mobile tailor service covers all of Antalya. We visit your address, take measurements on-site, complete the tailoring in our workshop, and deliver back to your door. Hotel, home, or office — no problem.',
     mobileSvcSteps: ['📍 Share Your Address','📏 On-Site Measurements','✂️ Tailored in Workshop','🚗 Delivered to Your Door'],
     mobileSvcStepLabels: ['Send location via WhatsApp','Tailor comes to you','Sewn to your measurements','Delivered at agreed time'],
     mobileSvcCta: '📲 Request Mobile Tailor',
     mobileSvcWaMsg: 'Hello, I would like to use your mobile tailor service. Can you come to my address?',
-    seoP1: 'Terzi Can — Antalya\'s most experienced tailor. Trouser hemming · dress alterations · zip repair · skirt shortening · evening gown repair · sweatshirt sewing · tracksuit production · embroidery · logo printing · dry cleaning · pattern making · mass production. Hotel, restaurant, medical and school uniform production. All Antalya districts. Express 24-48h, hotel pickup & delivery.',
-    seoP2: 'Tailor Antalya: men\'s tailor · women\'s tailor · children\'s clothing · plus-size alterations · sweatshirt sewing · tracksuit production · embroidery Antalya · logo embroidery · uniform production Antalya · hotel uniform · chef uniform · reception uniform · waiter uniform · doctor uniform · nurse uniform · school uniform · sports uniform. Zip replacement · dress repair · pattern making · mass production.',
+    seoP1: 'Terzi Can — Antalya\'s most experienced tailor. Trouser hemming, dress alterations, clothing repairs, size reduction, dry cleaning, laundry, ironing, pattern making, custom design, mass production and contract manufacturing. Serving all Antalya districts. Express 24-48h service for tourists, hotel pickup & delivery.',
+    seoP2: 'Men\'s tailor Antalya, women\'s tailor Antalya, children\'s clothing Antalya, baby clothes sewing, plus-size clothing alterations, pattern making Antalya, curtain sewing Antalya, bed linen sewing Antalya, shirt sewing, jacket alterations, trouser hemming Antalya. Tailor prices Antalya.',
     seoP3: 'Mobile tailor Antalya — we come to your home or hotel, take measurements, and deliver finished garments. English speaking tailor. Hotel pickup and delivery. Express 24h service. Lara tailor, Konyaaltı tailor, Belek tailor, Kemer tailor, Alanya tailor, Manavgat tailor, Side tailor.',
-    seoP4: 'Tailor price list Antalya 2025–2026: hemming from ₺150 · zip replacement ₺120 · jacket alteration ₺300 · dress alteration ₺200 · dry cleaning ₺400. Uniform production Antalya — hotel, restaurant, medical, school, sports. Embroidery, logo printing, sweatshirt sewing. Same-day service. WhatsApp +90 531 898 64 18.', a: 'Trouser hemming from ₺150. Jeans zip replacement from ₺120, coat zip from ₺300, jacket taking-in from ₺300. WhatsApp for a free instant quote.' },
+    seoP4: '',
     faq: [
-      { q: 'How much does zip replacement cost? Jeans, coat, sweatshirt?', a: 'Trouser/jeans zip from ₺120, jacket zip from ₺200, coat zip from ₺300. Sweatshirt and bag zips also done. Same-day service available.' },
-      { q: 'Is there a tailor near me in Antalya? Do you come to my hotel?', a: 'Yes! Our mobile tailor covers every district in Antalya. Share your location on WhatsApp — we come to your hotel, home or office, measure, tailor and deliver back.' },
-      { q: 'Can you alter a graduation or prom dress urgently?', a: 'Yes — graduation dress alterations and shortening done express in 24h during graduation season (May–June). Last-minute before the ceremony accepted.' },
-      { q: 'Wedding season dress alterations in Antalya?', a: 'Yes, wedding dress alterations, shortening and bridesmaid dress adjustments available April–October. Perfect fit guaranteed before your big day.' },
-      { q: 'Do you do zip replacement? Jeans, coat, sweatshirt?', a: 'Yes — trouser, jeans, coat, jacket, sweatshirt, dress, bag zips. Same-day service available.' },
-      { q: 'Do you repair evening gowns and skirts?', a: 'Yes, evening gown repairs, skirt shortening, wedding dress alterations. Perfect fit for any special occasion.' },
-      { q: 'Do you produce hotel, restaurant and staff uniforms?', a: 'Yes — hotel, reception, housekeeping, chef, waiter, valet, spa uniforms. Design, pattern, mass production and embroidery in one place.' },
-      { q: 'Do you produce medical, school and sports uniforms?', a: 'Yes — doctors, nurses, factory workers, school uniforms, sports team kits, security, bank staff. Every sector covered.' },
-      { q: 'Embroidery, plus-size, children\'s clothing, curtains?', a: 'Yes — logo embroidery, plus-size sewing, baby/children\'s clothing, curtains, bed linen. Group discounts available.' },
+      { q: 'How much does trouser hemming cost?', a: 'Trouser hemming starts from ₺150. Price depends on fabric type. WhatsApp us for a free quote.' },
+      { q: 'Do you come to my hotel or home?', a: 'Yes! Our mobile tailor service covers all Antalya districts. We visit your address, measure, tailor and deliver back to you.' },
+      { q: 'Do you sew plus-size clothing?', a: 'Yes, we sew plus-size dresses, trousers, shirts and make custom pattern sets for all body types.' },
+      { q: 'Do you sew children\'s and baby clothing?', a: 'Yes, we sew children\'s clothing, baby dresses and custom costumes. Group discounts for parent communities.' },
+      { q: 'Do you sew curtains and bed linen?', a: 'Yes, we sew custom-sized bed linen sets, curtains, cushion covers and home textiles.' },
+      { q: 'Do you do mass production and contract manufacturing?', a: 'Yes, we offer pattern making, sample sewing, and mass production for brands and businesses.' },
+      { q: 'Do you offer dry cleaning and laundry?', a: 'Yes, professional dry cleaning, laundry and ironing with hotel pickup and delivery.' },
+      { q: 'Do you serve all Antalya districts?', a: 'Yes — Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer, Alanya, Manavgat and all districts.' },
     ],
- }, 
+  },
   ru: {
     badge: '✂ Анталья · Портной Кан',
     h1: 'Лучший',
@@ -234,34 +199,33 @@ const C = {
     waLabel: 'Написать в WhatsApp',
     mapLabel: 'Найти на карте',
     mobileSvcTitle: 'Выездной портной',
-    mobileSvcBadge: '🚗 ВЫЕЗДНОЙ ПОРТНОЙ',
+    mobileSvcBadge: '🚗 НОВАЯ УСЛУГА',
     mobileSvcHeading: 'Приедем к вам',
     mobileSvcDesc: 'Наш выездной портной обслуживает всю Анталью. Приедем по вашему адресу, снимем мерки на месте, сошьём в ателье и доставим обратно. Отель, дом или офис — всё равно.',
     mobileSvcSteps: ['📍 Укажите адрес','📏 Снятие мерок','✂️ Пошив в ателье','🚗 Доставка к вам'],
     mobileSvcStepLabels: ['Отправьте локацию в WhatsApp','Портной приедет к вам','Изделие сошьётся по меркам','Доставим в назначенное время'],
     mobileSvcCta: '📲 Вызвать портного',
     mobileSvcWaMsg: 'Здравствуйте, хочу воспользоваться выездным сервисом. Можете приехать по моему адресу?',
-    seoP1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк · ремонт одежды · замена молнии · укорачивание юбки · ремонт вечернего платья · пошив толстовок · производство спортивных костюмов · вышивка · производство формы. Гостиничная форма · форма для ресторанов · медицинская форма · школьная форма · спортивная форма. Экспресс 24-48 часов, доставка в отель.',
-    seoP2: 'Пошив формы Анталья: гостиничная форма · форма для ресепшн · форма повара · форма официанта · медицинская форма · форма для сотрудников · школьная форма · спортивная форма. Вышивка логотипа · нанесение принта · пошив толстовок · серийное производство. Замена молнии · ремонт одежды Анталья · выездной портной.',
+    seoP1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк, ремонт одежды, уменьшение размера, химчистка, стирка, глажка, пошив по лекалам, модельный пошив и серийное производство. Обслуживаем все районы Антальи. Экспресс 24-48 часов, забор и доставка в отель.',
+    seoP2: 'Портной для мужчин Анталья, портной для женщин Анталья, пошив детской одежды, пошив одежды для малышей, пошив для мам-групп, одежда больших размеров, пошив штор Анталья, пошив постельного белья Анталья, пошив рубашек, пошив пиджаков Анталья.',
     seoP3: 'Выездной портной Анталья — приедем домой или в отель, снимем мерки и доставим готовое изделие. Говорим по-русски. Лара, Коньяалты, Белек, Кемер, Аланья, Манавгат, Сиде.',
     seoP4: '',
     faq: [
-      { q: 'Сколько стоит подгонка брюк и замена молнии в 2025?', a: 'Подгонка брюк от ₺150. Замена молнии джинсов от ₺120, пальто от ₺300, пиджака от ₺200. Напишите в WhatsApp — бесплатная оценка сразу.' },
-      { q: 'Сколько стоит замена молнии? Джинсы, пальто, толстовка?', a: 'Брюки/джинсы от ₺120, пиджак от ₺200, пальто от ₺300. Также толстовки и сумки. Срочный ремонт в тот же день.' },
-      { q: 'Есть ли портной рядом со мной? Выезд на дом или в отель?', a: 'Да! Выездной портной работает по всей Анталье. Пришлите локацию в WhatsApp — приедем к вам домой, в отель или офис, снимем мерки, сошьём и доставим.' },
-      { q: 'Срочная подгонка выпускного платья в Анталье?', a: 'Да — подгонка и укорачивание выпускных платьев экспресс 24 часа в сезон выпускных (май–июнь). Принимаем заказы в последний момент.' },
-      { q: 'Подгонка свадебного платья в свадебный сезон?', a: 'Да, подгонка свадебных платьев, укорачивание и ремонт в период апрель–октябрь. Идеальная посадка гарантирована.' },
-      { q: 'Вы меняете молнии? Джинсы, куртка, толстовка?', a: 'Да — брюки, джинсы, куртки, пальто, платья, толстовки, сумки. Срочный ремонт в тот же день.' },
-      { q: 'Производство формы для отелей и ресторанов?', a: 'Да — форма для гостиниц, ресепшн, горничных, поваров, официантов, охраны, спа. Дизайн, лекала, серийное производство, вышивка — всё в одном.' },
-      { q: 'Медицинская, школьная и спортивная форма?', a: 'Да — врачи, медсёстры, рабочие, школьная форма, спортивные команды. Для любой отрасли.' },
-      { q: 'Большие размеры, детская одежда, шторы, постельное бельё?', a: 'Да — большие размеры, детская и детская одежда, шторы, постельное бельё. Скидки для групповых заказов.' },
+      { q: 'Сколько стоит подгонка брюк?', a: 'Подгонка брюк от ₺150. Зависит от типа ткани. Напишите в WhatsApp для бесплатной оценки.' },
+      { q: 'Вы приезжаете домой или в отель?', a: 'Да! Наш выездной портной работает по всей Анталье. Приедем, снимем мерки и доставим готовое изделие.' },
+      { q: 'Шьёте одежду больших размеров?', a: 'Да, шьём платья, брюки, рубашки больших размеров и делаем лекала для любой фигуры.' },
+      { q: 'Шьёте детскую и одежду для малышей?', a: 'Да, шьём детскую одежду, платья для малышей и костюмы. Скидки для мам-групп.' },
+      { q: 'Шьёте шторы и постельное бельё?', a: 'Да, шьём постельное бельё, шторы, чехлы для подушек и домашний текстиль по меркам.' },
+      { q: 'Серийное производство и пошив по договору?', a: 'Да, предлагаем пошив по лекалам, образцы и серийное производство для брендов и компаний.' },
+      { q: 'Химчистка и стирка?', a: 'Да, профессиональная химчистка, стирка и глажка. Забор и доставка в отель.' },
+      { q: 'Обслуживаете все районы Антальи?', a: 'Да — Муратпаша, Коньяалты, Кепез, Лара, Белек, Кемер, Аланья, Манавгат и все районы.' },
     ],
-}, 
+  },
   de: {
     badge: '✂ Antalya · Schneider Can',
     h1: 'Antalyas',
     h1em: 'Meisterschneider',
-    sub: 'Herren · Damen · Kinder · Änderungen · Uniformen · Stickerei · Produktion',
+    sub: 'Herren · Damen · Kinder · Baby · Änderungen · Maßanfertigung · Produktion',
     waBtn: 'WhatsApp schreiben',
     downBtn: 'Leistungen ansehen ↓',
     waMsg: 'Hallo, ich möchte Informationen über Ihren Schneiderservice erhalten.',
@@ -275,239 +239,187 @@ const C = {
     waLabel: 'WhatsApp schreiben',
     mapLabel: 'Auf Karte finden',
     mobileSvcTitle: 'Mobiler Schneiderdienst',
-    mobileSvcBadge: '🚗 MOBILER SCHNEIDERDIENST',
+    mobileSvcBadge: '🚗 NEUER SERVICE',
     mobileSvcHeading: 'Wir kommen zu Ihnen',
     mobileSvcDesc: 'Unser mobiler Schneiderdienst ist in ganz Antalya verfügbar. Wir kommen zu Ihrer Adresse, nehmen Maße vor Ort, schneidern in unserem Atelier und liefern zurück zu Ihnen. Hotel, Zuhause oder Büro — kein Problem.',
     mobileSvcSteps: ['📍 Adresse mitteilen','📏 Maßnahme vor Ort','✂️ Arbeit im Atelier','🚗 Lieferung zu Ihnen'],
     mobileSvcStepLabels: ['Standort per WhatsApp senden','Schneider kommt zu Ihnen','Wird nach Maß gefertigt','Lieferung zur vereinbarten Zeit'],
     mobileSvcCta: '📲 Mobilen Schneider anfragen',
     mobileSvcWaMsg: 'Hallo, ich möchte den mobilen Schneiderdienst nutzen. Können Sie zu meiner Adresse kommen?',
-    seoP1: 'Schneider Can — erfahrener Schneider in Antalya. Hosenänderungen · Kleideränderungen · Reißverschluss-Reparatur · Rockkürzung · Abendkleid-Reparatur · Sweatshirt-Nähen · Trainingsanzug · Stickerei · Uniformproduktion. Hoteluniform · Kochuniform · Arztuniform · Schuluniform · Sportuniform. Express 24-48h, Abholung und Lieferung ins Hotel.',
-    seoP2: 'Uniformproduktion Antalya: Hoteluniform · Rezeption · Kochuniform · Kellneruniform · Arztuniform · Schuluniform · Sportuniform · Stickerei Antalya · Logo-Stickerei · Sweatshirt nähen · Trainingsanzug nähen · Reißverschluss wechseln · Kleid reparieren · Schneiderpreise Antalya.',
-    seoP3: 'Mobiler Schneider Antalya — wir kommen zu Ihnen nach Hause oder ins Hotel, nehmen Maße und liefern fertig zurück. Deutschsprachiger Schneider. Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat.',
+    seoP1: 'Schneider Can — erfahrener Schneider in Antalya & Konyaaltı. Hosenänderungen, Kleideränderungen, Reparaturen, Reinigung, Wäsche, Bügeln, Schnittmuster, Maßanfertigung und Serienproduktion. Service in allen Antalya-Bezirken. Express 24-48h, Abholung und Lieferung ins Hotel.',
+    seoP2: 'Herrenschneider Antalya, Damenschneider Antalya, Kinderkleidung nähen Antalya, Babykleidung nähen, Übergrössen nähen, Vorhangnähen Antalya, Bettwäsche nähen Antalya, Hemd nähen, Jacke ändern Antalya. Schneiderpreise Antalya.',
+    seoP3: 'Mobiler Schneider Antalya — wir kommen zu Ihnen nach Hause oder ins Hotel, nehmen Maße und liefern das fertige Kleidungsstück. Deutschsprachiger Schneider. Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat.',
     seoP4: '',
     faq: [
-      { q: 'Was kostet Hosenänderung und Reißverschluss 2025 in Antalya?', a: 'Hosenänderung ab ₺150. Jeans-Reißverschluss ab ₺120, Mantel-Reißverschluss ab ₺300, Jacke einengen ab ₺300. WhatsApp für ein kostenloses Sofortangebot.' },
-      { q: 'Was kostet ein Reißverschluss-Ersatz? Jeans, Mantel, Sweatshirt?', a: 'Hosen/Jeans ab ₺120, Jacke ab ₺200, Mantel ab ₺300. Sweatshirts und Taschen ebenfalls. Expressdienst am gleichen Tag möglich.' },
-      { q: 'Gibt es einen Schneider in meiner Nähe? Kommen Sie ins Hotel?', a: 'Ja! Unser mobiler Schneider fährt in alle Antalya-Bezirke. Standort per WhatsApp senden — wir kommen zu Ihnen, messen, schneidern und liefern zurück.' },
-      { q: 'Abendkleid kürzen für Abschlussfeier in Antalya?', a: 'Ja — Abschlusskleid kürzen und ändern express in 24h zur Abschlusszeit (Mai–Juni). Last-minute vor der Feier wird akzeptiert.' },
-      { q: 'Brautkleid-Änderungen in der Hochzeitssaison?', a: 'Ja, Brautkleid-Änderungen, Kürzen und Anpassungen April–Oktober. Perfekte Passform garantiert.' },
-      { q: 'Tauschen Sie Reißverschlüsse aus? Jeans, Mantel, Sweatshirt?', a: 'Ja — Hosen, Jeans, Jacken, Mäntel, Kleider, Sweatshirts, Taschen. Expressdienst möglich.' },
-      { q: 'Produzieren Sie Hotel- und Restaurantuniformen?', a: 'Ja — Hotel, Rezeption, Hausdamen, Köche, Kellner, Sicherheit, Spa. Design, Schnittmuster, Serienproduktion und Stickerei aus einer Hand.' },
-      { q: 'Medizinische, Schul- und Sportuniformen?', a: 'Ja — Ärzte, Krankenschwestern, Arbeiter, Schuluniformen, Sportteam-Trikots. Jede Branche.' },
-      { q: 'Übergrößen, Kinderkleidung, Vorhänge, Stickerei?', a: 'Ja — Übergrößen, Kinderkleidung, Babykleider, Vorhänge, Bettwäsche, Logo-Stickerei. Gruppenrabatte verfügbar.' },
+      { q: 'Was kostet das Kürzen einer Hose?', a: 'Das Kürzen einer Hose beginnt ab ₺150. Je nach Stoff und Aufwand. WhatsApp für ein kostenloses Angebot.' },
+      { q: 'Kommen Sie ins Hotel oder nach Hause?', a: 'Ja! Unser mobiler Schneiderdienst fährt in alle Antalya-Bezirke. Wir kommen, nehmen Maße und liefern fertig zurück.' },
+      { q: 'Nähen Sie Kleidung in Übergrößen?', a: 'Ja, wir nähen Kleider, Hosen und Hemden in Übergrößen und erstellen Schnittmuster für jede Figur.' },
+      { q: 'Nähen Sie Kinder- und Babykleidung?', a: 'Ja, wir nähen Kinderkleidung, Babykleider und Kostüme. Gruppenrabatte für Elterngruppen.' },
+      { q: 'Nähen Sie Vorhänge und Bettwäsche?', a: 'Ja, wir nähen Bettwäsche, Vorhänge und Heimtextilien nach Maß.' },
+      { q: 'Serienproduktion und Auftragsherstellung?', a: 'Ja, wir bieten Schnittmuster, Muster und Serienproduktion für Marken und Unternehmen an.' },
+      { q: 'Reinigung und Wäscheservice?', a: 'Ja, professionelle Reinigung, Wäsche und Bügeln mit Hotelabholung und -lieferung.' },
+      { q: 'Bedienen Sie alle Bezirke von Antalya?', a: 'Ja — Konyaaltı, Muratpaşa, Kepez, Lara, Belek, Kemer, Alanya, Manavgat und alle weiteren Bezirke.' },
     ],
+  },
 };
 
 // ═══════════════════════════════════════
-// HİZMETLER — TAM GENİŞLETİLMİŞ
+// HİZMETLER — TAM GENİŞLETİLMİŞ 15 KATEGORİ
 // ═══════════════════════════════════════
 const SERVICES = [
-  // ── TAMİR & TADİLAT ──────────────────────────────────────────────────
   {
     icon: '✂️', color: '#fdecea',
-    names: ['Tamir & Tadilat — Her Kıyafet', 'Repairs & Alterations', 'Ремонт и переделка', 'Reparaturen & Änderungen'],
+    names: ['Paça Kısaltma & Tadilat', 'Hemming & Alterations', 'Подгонка и ремонт', 'Änderungen & Reparaturen'],
     descs: [
-      'Paça kısaltma · pantolon daraltma · ceket daraltma · gömlek daraltma · elbise daraltma · etek kısaltma · kol kısaltma · bel alma · yırtık onarımı · dikiş tamiri · astar değişimi · cep tamiri · yaka değişimi · düğme dikimi.',
-      'Trouser hemming · taking in jacket/shirt/dress · skirt shortening · sleeve shortening · zip replacement · tear repair · lining replacement · button sewing · seam repair.',
-      'Подгонка брюк · заужение пиджака/рубашки/платья · укорачивание · замена молнии · ремонт разрывов · замена подкладки · пришивание пуговиц.',
-      'Hose kürzen · Jacke/Hemd/Kleid einengen · Rock kürzen · Ärmel kürzen · Reißverschluss · Riss reparieren · Futter ersetzen · Knöpfe annähen.',
+      'Paça kısaltma, pantolon kısaltma, daraltma, genişletme, bel alma, fermuar değişimi, yırtık onarımı, beden küçültme.',
+      'Trouser hemming, taking in/out, waist adjustments, zip replacement, tear repairs, size reduction.',
+      'Подгонка брюк, заужение/расширение, замена молнии, ремонт, уменьшение размера.',
+      'Hose kürzen, einengen/weiten, Bund ändern, Reißverschluss, Reparaturen, Größe anpassen.'
     ],
     price: '₺150+',
   },
   {
-    icon: '🔒', color: '#fff3e0',
-    names: ['Fermuar Değişimi & Onarımı', 'Zip Replacement & Repair', 'Замена и ремонт молнии', 'Reißverschluss Reparatur'],
+    icon: '👨', color: '#e8f5e9',
+    names: ['Erkek Terzi', 'Men\'s Tailoring', 'Мужская одежда', 'Herrenschneider'],
     descs: [
-      'Her türlü kıyafette fermuar değişimi ve onarımı: pantolon fermuarı · kot fermuarı · ceket fermuarı · mont fermuarı · elbise fermuarı · çanta fermuarı · sweatshirt fermuarı. Aynı gün servis mümkündür.',
-      'Zip replacement and repair for all garments: trousers · jeans · jacket · coat · dress · bag · sweatshirt. Same-day service available.',
-      'Замена молнии во всех видах одежды: брюки, джинсы, куртки, пальто, платья, сумки, толстовки. Срочный ремонт.',
-      'Reißverschluss-Ersatz für alle Kleidungsstücke: Hosen, Jeans, Jacken, Mäntel, Kleider, Taschen, Sweatshirts. Expressdienst.',
+      'Erkek takım elbise, ceket, gömlek, pantolon, blazer dikim ve tadilat. Ofis ve özel gün kıyafetleri.',
+      'Men\'s suits, jackets, shirts, trousers, blazers — custom or altered. Office and occasion wear.',
+      'Мужские костюмы, пиджаки, рубашки, брюки — пошив и подгонка.',
+      'Herren Anzüge, Jacken, Hemden, Hosen — Maßanfertigung oder Änderungen.'
     ],
-    price: '₺120+',
+    price: '₺800+',
   },
   {
-    icon: '📐', color: '#e8f5e9',
-    names: ['Daraltma · Kısaltma · Küçültme', 'Taking In · Shortening · Size Down', 'Заужение · Укорачивание', 'Einengen · Kürzen · Verkleinern'],
+    icon: '👩', color: '#fce4ec',
+    names: ['Bayan Terzi', 'Women\'s Tailoring', 'Женская одежда', 'Damenschneider'],
     descs: [
-      'Pantolon daraltma · ceket daraltma · gömlek daraltma · elbise daraltma · etek daraltma · bel daraltma · koltuk altı alma · beden küçültme · beden seti çıkarma. Erkek · Bayan · Çocuk.',
-      'Trouser/jacket/shirt/dress taking in · waist reduction · side seam alteration · size reduction · pattern adjustment. Men · Women · Children.',
-      'Заужение брюк/пиджака/рубашки/платья · уменьшение талии · уменьшение размера. Мужская · женская · детская одежда.',
-      'Hosen/Jacke/Hemd/Kleid einengen · Taille verkleinern · Größe anpassen. Herren · Damen · Kinder.',
-    ],
-    price: '₺150+',
-  },
-  {
-    icon: '📏', color: '#e8f5e9',
-    names: ['Büyük Beden & Beden Seti Çıkarma', 'Plus Size & Custom Pattern', 'Одежда больших размеров', 'Übergrößen & Schnittmuster'],
-    descs: [
-      'Büyük beden elbise · büyük beden pantolon · büyük beden gömlek dikimi. Beden seti çıkarma · özel kalıp hazırlama · her vücuda uygun dikim. 42–62 ve üzeri bedenler.',
-      'Plus-size dresses · trousers · shirts. Custom pattern sets for every body shape. Sizes 42–62 and above — custom made to your exact measurements.',
-      'Одежда больших размеров: платья, брюки, рубашки. Индивидуальные лекала для любой фигуры. 42–62 размер и выше.',
-      'Übergrößen: Kleider, Hosen, Hemden. Individuelle Schnittmuster für jede Figur. Größen 42–62 und darüber.',
+      'Bayan elbise, etek, bluz, pantolon, ceket dikimi. Günlük, iş ve özel gün kıyafetleri ölçüye özel.',
+      'Women\'s dresses, skirts, blouses, trousers — custom made to your exact measurements.',
+      'Женские платья, юбки, блузки, брюки — пошив по меркам.',
+      'Damenkleider, Röcke, Blusen, Hosen — nach Maß gefertigt.'
     ],
     price: '₺600+',
   },
-
-  // ── ERKEK TERZİ ───────────────────────────────────────────────────────
-  {
-    icon: '👔', color: '#e3f2fd',
-    names: ['Erkek Kıyafet Dikimi & Tamir', 'Men\'s Tailoring & Repair', 'Мужская одежда — пошив и ремонт', 'Herrenbekleidung — Nähen & Reparatur'],
-    descs: [
-      'Erkek takım elbise · blazer · ceket · gömlek · pantolon · yelek · smoking dikimi ve tadilatı. Ceket daraltma · gömlek daraltma · pantolon paça kısaltma · pantolon daraltma. Ofis kıyafeti · düğün takımı · özel gün.',
-      'Men\'s suits · blazers · jackets · shirts · trousers · vests · tuxedos — custom or altered. Jacket taking in · shirt alteration · trouser hemming. Office · wedding · occasion wear.',
-      'Мужские костюмы · пиджаки · рубашки · брюки · смокинги — пошив и подгонка. Заужение пиджака, рубашки, брюк.',
-      'Herrenanzüge · Blazer · Hemden · Hosen · Smoking — Maßanfertigung oder Änderungen. Einengen, kürzen, anpassen.',
-    ],
-    price: '₺300+',
-  },
-
-  // ── BAYAN TERZİ ───────────────────────────────────────────────────────
-  {
-    icon: '👗', color: '#fce4ec',
-    names: ['Bayan Kıyafet Dikimi & Tamir', 'Women\'s Tailoring & Repair', 'Женская одежда — пошив и ремонт', 'Damenbekleidung — Nähen & Reparatur'],
-    descs: [
-      'Bayan elbise · bluz · etek · pantolon · ceket · tulum · abiye · gelinlik dikimi ve tadilatı. Elbise daraltma · etek kısaltma · abiye tamiri · abiye tadilatı. Günlük · iş · gece · düğün kıyafetleri.',
-      'Women\'s dresses · blouses · skirts · trousers · jackets · evening gowns · wedding dresses — custom or altered. Dress taking in · skirt shortening · evening gown repair.',
-      'Женские платья · блузки · юбки · брюки · вечерние наряды — пошив и подгонка. Ушить платье, укоротить юбку.',
-      'Damenkleider · Blusen · Röcke · Hosen · Abendkleider — Maßanfertigung oder Änderungen.',
-    ],
-    price: '₺250+',
-  },
-
-  // ── ÇOCUK / BEBEK ─────────────────────────────────────────────────────
   {
     icon: '👶', color: '#fff8e1',
-    names: ['Çocuk & Bebek Kıyafeti', 'Children & Baby Clothing', 'Детская одежда', 'Kinder & Babykleidung'],
+    names: ['Çocuk & Bebek Kıyafeti', 'Children & Baby Clothing', 'Детская и детская одежда', 'Kinder & Babykleidung'],
     descs: [
-      'Bebek elbisesi · çocuk kıyafeti · çocuk kostümü · okul kıyafeti · çocuk sweatshirt ve eşofman dikimi. Anne grubu toplu sipariş indirimi. Erkek çocuk · kız çocuk · bebek. Tamir, tadilat ve özel dikim.',
-      'Baby dresses · children\'s clothing · school uniforms · costumes · children\'s sweatshirts. Group discounts for parent communities. Boys · girls · babies. Repairs and custom sewing.',
-      'Одежда для малышей · детская одежда · школьная форма · костюмы. Скидки для мам-групп.',
-      'Babykleider · Kinderkleidung · Schulkleidung · Kostüme. Gruppenrabatt für Elterngruppen.',
-    ],
-    price: '₺200+',
-  },
-
-  // ── SWEATSHIRT / EŞOFMAN ─────────────────────────────────────────────
-  {
-    icon: '🧥', color: '#f3e5f5',
-    names: ['Sweatshirt & Eşofman Dikimi', 'Sweatshirt & Tracksuit Sewing', 'Толстовки и спортивные костюмы', 'Sweatshirt & Trainingsanzug'],
-    descs: [
-      'Sweatshirt dikimi · eşofman dikimi · sweatshirt fermuarı · eşofman tadilatı · kapüşonlu sweatshirt · polo yaka · baskılı sweatshirt · nakışlı sweatshirt · seri üretim. Her türlü spor ve casual kıyafet.',
-      'Sweatshirt sewing · tracksuit sewing · hoodie · polo neck · printed/embroidered sweatshirts · mass production. All types of sportswear and casualwear.',
-      'Пошив толстовок · спортивных костюмов · худи · с принтом · с вышивкой · серийное производство.',
-      'Sweatshirt-Nähen · Trainingsanzug · Hoodie · Polo · bedruckt/gestickt · Serienproduktion.',
+      'Bebek elbisesi, çocuk kıyafeti, özel kostüm dikimi. Anne grubu toplu sipariş indirimi uygulanır.',
+      'Baby dresses, children\'s clothing, custom costumes. Group discounts for parent communities.',
+      'Платья для малышей, детская одежда, костюмы. Скидки для мам-групп.',
+      'Babykleider, Kinderkleidung, Kostüme. Gruppenrabatt für Elterngruppen.'
     ],
     price: '₺400+',
   },
-
-  // ── NAKİŞ & BASKI ─────────────────────────────────────────────────────
   {
-    icon: '🪡', color: '#e8eaf6',
-    names: ['Nakış & Baskı Hizmeti', 'Embroidery & Printing', 'Вышивка и печать', 'Stickerei & Druck'],
+    icon: '📏', color: '#f3e5f5',
+    names: ['Büyük Beden & Beden Seti', 'Plus Size & Pattern Set', 'Большие размеры', 'Übergrößen & Schnittmuster'],
     descs: [
-      'Kıyafete nakış işleme · logo nakışı · isim nakışı · eşofman nakışı · üniforma nakışı · sweatshirt nakışı. Dijital baskı · transfer baskı · serigrafi. Seri imalat için uygun fiyatlı.',
-      'Garment embroidery · logo embroidery · name embroidery · uniform embroidery. Digital print · transfer print · screen print. Affordable for mass production.',
-      'Вышивка на одежде · логотип · имя · форменная вышивка. Цифровая печать · трафаретная печать.',
-      'Stickerei auf Kleidung · Logo-Stickerei · Namens-Stickerei · Uniformstickerei. Digitaldruck · Siebdruck.',
+      'Büyük beden elbise, pantolon, gömlek dikimi. Beden seti çıkarma, özel kalıp hazırlama. Her vücuda uygun.',
+      'Plus-size dresses, trousers, shirts. Custom pattern sets made for every body shape.',
+      'Одежда больших размеров. Индивидуальные лекала для любой фигуры.',
+      'Übergrößen-Kleider, Hosen, Hemden. Individuelle Schnittmuster für jede Figur.'
     ],
-    price: '₺100+',
-  },
-
-  // ── GELİNLİK & ABİYE ──────────────────────────────────────────────────
-  {
-    icon: '💍', color: '#fce4ec',
-    names: ['Gelinlik · Abiye · Özel Gün', 'Wedding · Evening · Special', 'Свадьба · Вечер · Особый день', 'Hochzeit · Abend · Besonderer Anlass'],
-    descs: [
-      'Gelinlik dikimi · gelinlik tadilatı · damatlık dikimi · abiye dikimi · abiye tamiri · abiye tadilatı · nişan elbisesi · kına kıyafeti · gece elbisesi. Kusursuz fit garantisi.',
-      'Wedding dress sewing · wedding dress alterations · groom suit · evening gown sewing · evening gown repair · engagement dress. Perfect fit guaranteed.',
-      'Пошив свадебного платья · подгонка · смокинг · вечернее платье · ремонт вечернего платья.',
-      'Brautkleid nähen · Anpassung · Bräutigamanzug · Abendkleid · Abendkleid reparieren.',
-    ],
-    price: '₺2.500+',
-  },
-
-  // ── ÜNİFORMA — ANA KART ──────────────────────────────────────────────
-  {
-    icon: '🏨', color: '#e0f7fa',
-    names: ['Otel & Turizm Üniforma Üretimi', 'Hotel & Tourism Uniform Production', 'Гостиничная форма — производство', 'Hotel & Tourismus Uniformproduktion'],
-    descs: [
-      'Otel personel üniforma · resepsiyon üniforma · kat görevlisi üniforma · aşçı üniforma · servis üniforma · meydancı üniforma · kapıcı üniforma · güvenlik üniforma · spa üniforma · animatör üniforma. Tasarım · kalıp · seri imalat · nakış · logo baskı.',
-      'Hotel staff uniforms · reception · housekeeping · chef · service · valet · security · spa · animation. Design · pattern · mass production · embroidery · logo printing.',
-      'Форма для гостиниц · ресепшн · горничные · повара · официанты · охрана · спа. Дизайн · лекала · серийное производство · вышивка.',
-      'Hotelpersonal-Uniformen · Rezeption · Zimmermädchen · Köche · Service · Sicherheit · Spa. Design · Schnittmuster · Serienproduktion · Stickerei.',
-    ],
-    price: 'Teklif Al',
+    price: '₺700+',
   },
   {
-    icon: '👨‍⚕️', color: '#e8f5e9',
-    names: ['Sağlık & Endüstri Üniforma', 'Health & Industry Uniforms', 'Медицинская и рабочая форма', 'Gesundheit & Industrie Uniformen'],
+    icon: '💍', color: '#e8eaf6',
+    names: ['Gelinlik & Abiye', 'Wedding & Evening', 'Свадебное платье', 'Brautkleid & Abend'],
     descs: [
-      'Doktor üniforma · hemşire üniforma · eczacı üniforma · laborant üniforma · iş güvenliği üniforma · fabrika işçi üniforma · inşaat kıyafeti · çağrı merkezi üniforma · banka personel üniforma. Her sektöre özel tasarım ve seri üretim.',
-      'Doctor uniforms · nurse uniforms · pharmacist · lab worker · workplace safety clothing · factory worker · call center · bank staff. Custom design and mass production for any sector.',
-      'Форма для врачей · медсестёр · фармацевтов · лаборантов · рабочих. Производство для любой отрасли.',
-      'Arztuniform · Krankenschwester · Apotheker · Labor · Sicherheitskleidung · Fabrikarbeiter. Produktion für jede Branche.',
+      'Gelinlik, damatlık, abiye, nişan ve gece elbisesi dikimi ve tadilatı. Özel gün için kusursuz fit.',
+      'Wedding dresses, groom suits, evening gowns — custom or altered for a perfect fit.',
+      'Свадебные платья, смокинги, вечерние наряды — пошив и подгонка.',
+      'Brautkleider, Anzüge, Abendkleider — Maßanfertigung oder Änderungen.'
     ],
-    price: 'Teklif Al',
+    price: '₺5.000+',
   },
-  {
-    icon: '🍽️', color: '#fff8e1',
-    names: ['Restoran & Mutfak Üniforma', 'Restaurant & Kitchen Uniforms', 'Форма для ресторанов и кухни', 'Restaurant & Küchen-Uniformen'],
-    descs: [
-      'Aşçı üniforma · şef kıyafeti · aşçı önlüğü · komi üniforma · garson üniforma · barista üniforma · pastane personel kıyafeti · mutfak şapkası · mutfak önlüğü. Logo nakışı ile birlikte üretim.',
-      'Chef uniforms · cook aprons · waiter uniforms · barista uniforms · pastry staff clothing · kitchen hats. With logo embroidery.',
-      'Форма шеф-повара · фартуки · официант · бариста · кондитерская. С вышивкой логотипа.',
-      'Kochuniform · Schürzen · Kellneruniform · Barista · Konditorei. Mit Logo-Stickerei.',
-    ],
-    price: 'Teklif Al',
-  },
-  {
-    icon: '🏫', color: '#f9fbe7',
-    names: ['Okul & Spor Üniforma', 'School & Sports Uniforms', 'Школьная и спортивная форма', 'Schul- & Sportuniformen'],
-    descs: [
-      'Okul üniforma · okul forması · öğrenci kıyafeti · spor takım üniforma · futbol forması · voleybol forması · basketbol forması · spor kulübü kıyafeti. Toplu sipariş · özel renk · logo baskı · nakış.',
-      'School uniforms · student clothing · sports team uniforms · football · volleyball · basketball · club kits. Bulk orders · custom colors · logo · embroidery.',
-      'Школьная форма · спортивная форма · командная форма · футбол · баскетбол. Оптовые заказы.',
-      'Schuluniform · Sportuniform · Teamkleidung · Fußball · Basketball. Großbestellungen.',
-    ],
-    price: 'Teklif Al',
-  },
-
-  // ── SERİ İMALAT & KALIP ───────────────────────────────────────────────
-  {
-    icon: '🏭', color: '#e8f5e9',
-    names: ['Seri İmalat · Fason · Kalıp · Tasarım', 'Mass Production · Contract · Pattern · Design', 'Серийное · Фасон · Лекала · Дизайн', 'Serienproduktion · Fason · Schnittmuster · Design'],
-    descs: [
-      'Kalıp çıkarma · model tasarımı · kesim · dikim · ütü · paket. Numune dikimi · prototip · seri imalat · fason imalat. Markalar · butikler · e-ticaret firmaları için tam üretim paketi.',
-      'Pattern making · model design · cutting · sewing · ironing · packaging. Sample · prototype · mass production · contract manufacturing. Full production package for brands, boutiques, e-commerce.',
-      'Лекала · дизайн модели · раскрой · пошив · глажка · упаковка. Образцы · прототип · серийное производство для брендов.',
-      'Schnittmuster · Modelldesign · Zuschnitt · Nähen · Bügeln · Verpackung. Muster · Prototyp · Serienproduktion für Marken.',
-    ],
-    price: 'Teklif Al',
-  },
-
-  // ── EV TEKSTİLİ & DİĞER ───────────────────────────────────────────────
   {
     icon: '🏠', color: '#e0f7fa',
-    names: ['Nevresim · Perde · Ev Tekstili', 'Home Textiles', 'Шторы и домашний текстиль', 'Vorhänge & Heimtextilien'],
+    names: ['Nevresim & Perde Dikimi', 'Home Textiles', 'Шторы и постельное бельё', 'Vorhänge & Bettwäsche'],
     descs: [
-      'Nevresim takımı dikimi · perde dikimi · stor perde · tül · kırlent · yatak örtüsü · masa örtüsü. Ölçüye özel ev tekstili. Otel odaları için toplu üretim.',
-      'Bed linen · curtains · roller blinds · tulle · cushion covers · tablecloths. Custom home textiles. Bulk production for hotel rooms.',
-      'Постельное бельё · шторы · подушки · скатерти. По меркам. Оптовое производство для отелей.',
-      'Bettwäsche · Vorhänge · Kissen · Tischdecken. Maßgefertigt. Großproduktion für Hotels.',
+      'Nevresim takımı, perde, kırlent, stor perde, tül dikimi. Ölçüye ve kumaşa özel ev tekstili.',
+      'Bed linen sets, curtains, cushion covers, roller blinds. Custom home textiles to your measurements.',
+      'Постельное бельё, шторы, подушки. По вашим меркам и ткани.',
+      'Bettwäsche, Vorhänge, Kissenüberzüge. Maßgefertigte Heimtextilien.'
     ],
     price: '₺500+',
   },
   {
     icon: '🧺', color: '#e3f2fd',
-    names: ['Kuru Temizleme & Çamaşır', 'Dry Cleaning & Laundry', 'Химчистка и стирка', 'Reinigung & Wäsche'],
+    names: ['Kuru Temizleme', 'Dry Cleaning', 'Химчистка', 'Chemische Reinigung'],
     descs: [
-      'Kuru temizleme · çamaşır yıkama · ütü hizmeti. Otelden alım ve teslimat. Turistlere ekspres servis.',
-      'Dry cleaning · laundry · ironing. Hotel pickup and delivery. Express service for tourists.',
-      'Химчистка · стирка · глажка. Из отеля забираем и доставляем.',
-      'Reinigung · Wäsche · Bügeln. Hotelabholung und -lieferung.',
+      'Profesyonel kuru temizleme hizmeti. Otelden alım ve teslimat.',
+      'Professional dry cleaning. Hotel pickup and delivery available.',
+      'Профессиональная химчистка. Забор и доставка из отеля.',
+      'Professionelle chemische Reinigung. Abholung und Lieferung ins Hotel.'
+    ],
+    price: '₺400+',
+  },
+  {
+    icon: '👕', color: '#fef3e2',
+    names: ['Çamaşır Yıkama & Ütü', 'Laundry & Ironing', 'Стирка и глажка', 'Wäsche & Bügeln'],
+    descs: [
+      'Çamaşır yıkama, kurutma ve ütü hizmeti. Otele teslimat.',
+      'Laundry, drying and ironing. Hotel delivery.',
+      'Стирка, сушка и глажка. Доставка в отель.',
+      'Wäsche, Trocknen und Bügeln. Lieferung ins Hotel.'
     ],
     price: '₺300+',
+  },
+  {
+    icon: '📐', color: '#f9fbe7',
+    names: ['Kalıp Çıkarma', 'Pattern Making', 'Пошив по лекалам', 'Schnittmuster'],
+    descs: [
+      'Mevcut kıyafetten veya sıfırdan profesyonel kalıp çıkarma. Her beden ve model için.',
+      'Pattern making from existing garments or from scratch. For any size or style.',
+      'Лекала по образцу или с нуля. Для любого размера.',
+      'Schnittmustererstellung vom Kleidungsstück oder von Grund auf.'
+    ],
+    price: '₺1000+',
+  },
+  {
+    icon: '🎨', color: '#fbe9e7',
+    names: ['Model & Tasarım Dikimi', 'Design & Prototype', 'Модельный пошив', 'Design & Prototyp'],
+    descs: [
+      'Özgün model tasarımı, prototip ve numune dikimi. Markalar ve butikler için.',
+      'Original design, prototype and sample sewing for brands and boutiques.',
+      'Оригинальный дизайн, прототип и образец для брендов.',
+      'Originales Modelldesign, Prototyp und Muster für Marken.'
+    ],
+    price: '₺1500+',
+  },
+  {
+    icon: '🏭', color: '#e8f5e9',
+    names: ['Seri İmalat & Fason', 'Mass Production', 'Серийное производство', 'Serienproduktion'],
+    descs: [
+      'Firmalar ve markalar için seri kıyafet üretimi ve fason imalat. Kaliteli, hızlı, uygun fiyatlı.',
+      'Mass production and contract manufacturing for businesses and brands.',
+      'Серийное производство для компаний и брендов. Качество и скорость.',
+      'Serienproduktion für Unternehmen und Marken. Qualität, schnell, günstig.'
+    ],
+    price: 'Teklif Al',
+  },
+  {
+    icon: '🧥', color: '#fdecea',
+    names: ['Mont & Palto Tadilat', 'Winter Clothing', 'Зимняя одежда', 'Winterkleidung'],
+    descs: [
+      'Mont, kaban, palto tadilat, astar değiştirme ve onarım.',
+      'Coat, jacket, overcoat alterations and lining replacement.',
+      'Пальто, куртки, замена подкладки и ремонт.',
+      'Mantel, Jacke, Überzieher ändern und Futter ersetzen.'
+    ],
+    price: '₺300+',
+  },
+  {
+    icon: '🎭', color: '#f3e5f5',
+    names: ['Kostüm & Üniforma', 'Costumes & Uniforms', 'Костюмы и форма', 'Kostüme & Uniformen'],
+    descs: [
+      'Tiyatro, film kostümü; okul, iş ve spor üniforması dikimi ve tadilatı.',
+      'Theater/film costumes, school/work/sport uniforms — custom or altered.',
+      'Театральные костюмы, школьная и рабочая форма — пошив и подгонка.',
+      'Theaterkostüme, Schul- und Arbeitsuniform — Maßanfertigung oder Änderungen.'
+    ],
+    price: '₺1500+',
   },
 ];
 
@@ -516,289 +428,45 @@ const WHY = [
   { icon: '🚗', tr: ['Araçlı Terzi Servisi', 'Adresinize gelip ölçü alıyor, bitirince tekrar teslim ediyoruz.'], en: ['Mobile Tailor', 'We come to you, measure on-site and deliver when ready.'], ru: ['Выездной портной', 'Приедем к вам, снимем мерки и доставим готовое изделие.'], de: ['Mobiler Schneider', 'Wir kommen zu Ihnen, messen vor Ort und liefern fertig zurück.'] },
   { icon: '🌍', tr: ['4 Dilde Hizmet', 'Türkçe, İngilizce, Rusça ve Almanca. Dil engeli yok.'], en: ['4 Languages', 'Turkish, English, Russian, German — no language barrier.'], ru: ['4 языка', 'Турецкий, английский, русский, немецкий.'], de: ['4 Sprachen', 'Türkisch, Englisch, Russisch, Deutsch — keine Sprachbarriere.'] },
   { icon: '🏨', tr: ['Otele Alım & Teslimat', 'Tüm Antalya otellerine alım ve teslimat hizmeti.'], en: ['Hotel Pickup & Delivery', 'Pickup and delivery to all Antalya hotels.'], ru: ['Забор и доставка', 'Забираем и доставляем в любой отель Антальи.'], de: ['Hotel Abholung & Lieferung', 'Abholung und Lieferung in alle Antalya-Hotels.'] },
-  { icon: '🏭', tr: ['Üniforma Üretimi', 'Otel, restoran, sağlık, okul, spor — her sektöre özel üniforma tasarım ve seri imalat.'], en: ['Uniform Production', 'Hotel, restaurant, medical, school — custom design & mass production.'], ru: ['Производство формы', 'Отели, рестораны, медицина, школы — дизайн и серийное производство.'], de: ['Uniformproduktion', 'Hotel, Restaurant, Medizin, Schule — Design & Serienproduktion.'] },
-  { icon: '🪡', tr: ['Nakış & Baskı', 'Logo nakışı, isim nakışı, dijital baskı, serigrafi. Firmalar için toplu üretim.'], en: ['Embroidery & Print', 'Logo embroidery, digital print, screen print. Bulk production for businesses.'], ru: ['Вышивка и печать', 'Вышивка логотипа, цифровая печать. Оптовое производство.'], de: ['Stickerei & Druck', 'Logo-Stickerei, Digitaldruck, Siebdruck. Großproduktion für Unternehmen.'] },
   { icon: '💳', tr: ['Döviz Kabul', 'TL, Euro, Dolar, Ruble kabul ediyoruz.'], en: ['Multi-Currency', 'TL, Euro, Dollar and Ruble accepted.'], ru: ['Валюта', 'TL, евро, доллар, рубли.'], de: ['Währungen', 'TL, Euro, Dollar und Rubel akzeptiert.'] },
   { icon: '⭐', tr: ['94 Memnun Müşteri', 'Google\'da 4.9 yıldız. Antalya\'nın en tercih edilen terzisi.'], en: ['94 Happy Clients', '4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['94 клиента', '4.9 звезды на Google.'], de: ['94 zufriedene Kunden', '4,9 Sterne auf Google. Beliebtester Schneider in Antalya.'] },
 ];
 
 const REVIEWS = [
-  { stars: 5, text: '"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!"', author: 'Murat B.', flag: '🇹🇷', city: 'Antalya', date: 'Ocak 2025' },
-  { stars: 5, text: '"We ordered custom embroidered sweatshirts for our team — 30 pieces, logo embroidery, delivered on time. Excellent quality and price!"', author: 'David K.', flag: '🇩🇪', city: 'Berlin', date: 'Şubat 2025' },
   { stars: 5, text: '"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!"', author: 'Sarah M.', flag: '🇬🇧', city: 'London', date: 'Mayıs 2025' },
   { stars: 5, text: '"Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!"', author: 'Наталья К.', flag: '🇷🇺', city: 'Москва', date: 'Haziran 2025' },
   { stars: 5, text: '"Gelinliğimi mükemmel şekilde teslim ettiler. Hızlı, kaliteli hizmet. Paça kısaltmayı aynı gün yaptılar!"', author: 'Elif Y.', flag: '🇹🇷', city: 'Antalya', date: 'Nisan 2025' },
   { stars: 5, text: '"Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!"', author: 'James T.', flag: '🇦🇺', city: 'Sydney', date: 'Mart 2025' },
+  { stars: 5, text: '"Çocuğuma özel kostüm diktirdim, çok şıktı! Hızlı ve uygun fiyatlı. Teşekkürler Terzi Can!"', author: 'Ayşe K.', flag: '🇹🇷', city: 'Antalya', date: 'Mart 2025' },
   { stars: 5, text: '"Kuru temizleme ve ütü hizmetleri mükemmeldi. Otelden aldılar, otele teslim ettiler. Çok pratik!"', author: 'Mehmet A.', flag: '🇹🇷', city: 'İstanbul', date: 'Temmuz 2025' },
 ];
 
 // SEO anahtar kelimeleri — GENİŞLETİLMİŞ 4 DİL
 const SEO_KEYWORDS = [
-
-  // ── TÜRKÇE: GENEL TERZİ ──────────────────────────────────────────────
-  'Antalya Terzi', 'Terzi Antalya', 'En İyi Terzi Antalya', 'Usta Terzi Antalya',
-  'Terzi Fiyatları Antalya', 'Terzi Servisi Antalya', 'Araçlı Terzi Antalya',
-  'Terzi Atölyesi Antalya', 'Dikim Atölyesi Antalya', 'Online Terzi Antalya',
-  'Ölçüye Dikim Antalya', 'Özel Dikim Antalya', 'Hızlı Terzi Antalya',
-  'Ekspres Terzi Antalya', '24 Saat Terzi Antalya', 'Ucuz Terzi Antalya',
-  'Yakın Terzi Antalya', 'Antalya Terzi Nerede', 'Antalya Dikim',
-
-  // ── TÜRKÇE: PAÇA / PANTOLON ──────────────────────────────────────────
-  'Paça Kısaltma Antalya', 'Paça Dikimi Antalya', 'Paça Fiyatı Antalya',
-  'Pantolon Kısaltma Antalya', 'Pantolon Tadilat Antalya', 'Pantolon Daraltma Antalya',
-  'Pantolon Dikimi Antalya', 'Pantolon Bel Alma Antalya', 'Pantolon Genişletme Antalya',
-  'Kot Pantolon Tadilat Antalya', 'Palazzo Pantolon Dikimi', 'Palazzo Kısaltma',
-  'Paça Kısaltma Fiyatı', 'Paça Kısaltma Kaç Lira',
-
-  // ── TÜRKÇE: TADİLAT / TAMİR ─────────────────────────────────────────
-  'Kıyafet Tadilat Antalya', 'Elbise Tadilat Antalya', 'Kıyafet Tamir Antalya',
-  'Elbise Tamir Antalya', 'Kıyafet Onarım Antalya', 'Fermuar Değişimi Antalya',
-  'Fermuar Takma Antalya', 'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya',
-  'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Astar Değişimi Antalya',
-  'Cep Tamiri Antalya', 'Kol Kısaltma Antalya', 'Etek Kısaltma Antalya',
-
-  // ── TÜRKÇE: DARALTMA / KÜÇÜLTME ─────────────────────────────────────
-  'Elbise Daraltma Antalya', 'Kıyafet Daraltma Antalya', 'Beden Küçültme Antalya',
-  'Beden Seti Çıkarma Antalya', 'Daraltma Fiyatı Antalya', 'Daraltma Antalya',
-  'Kıyafet Beden Küçültme', 'Elbise Beden Düşürme Antalya',
-  'Gömlek Daraltma Antalya', 'Ceket Daraltma Antalya', 'Elbise Bel Alma Antalya',
-
-  // ── TÜRKÇE: ERKEK TERZİ ─────────────────────────────────────────────
-  'Erkek Terzi Antalya', 'Antalya Erkek Terzi', 'Erkek Takım Elbise Antalya',
-  'Takım Elbise Dikimi Antalya', 'Ceket Dikimi Antalya', 'Ceket Tadilat Antalya',
-  'Gömlek Dikimi Antalya', 'Gömlek Tadilat Antalya', 'Blazer Dikimi Antalya',
-  'Erkek Kıyafet Dikimi Antalya', 'Smoking Dikimi Antalya', 'Yelek Dikimi Antalya',
-  'İş Kıyafeti Dikimi Antalya', 'Erkek Özel Dikim Antalya',
-
-  // ── TÜRKÇE: BAYAN TERZİ ─────────────────────────────────────────────
-  'Bayan Terzi Antalya', 'Antalya Bayan Terzi', 'Kadın Terzi Antalya',
-  'Elbise Dikimi Antalya', 'Kadın Elbise Dikimi Antalya', 'Etek Dikimi Antalya',
-  'Bluz Dikimi Antalya', 'Tulum Dikimi Antalya', 'Kadın Özel Dikim Antalya',
-  'Kadın Kıyafet Dikimi Antalya', 'Abiye Dikimi Antalya', 'Gece Elbisesi Antalya',
-  'Nişan Elbisesi Dikimi Antalya', 'Kına Kıyafeti Dikimi Antalya',
-
-  // ── TÜRKÇE: GELİNLİK / DÜĞÜN ────────────────────────────────────────
-  'Gelinlik Antalya', 'Gelinlik Dikimi Antalya', 'Gelinlik Tadilat Antalya',
-  'Gelinlik Değişim Antalya', 'Damatlık Antalya', 'Damatlık Dikimi Antalya',
-  'Düğün Kıyafeti Antalya', 'Abiye Antalya', 'Abiye Dikimi', 'Gelinlik Fiyatı Antalya',
-
-  // ── TÜRKÇE: ÇOCUK / BEBEK ───────────────────────────────────────────
-  'Çocuk Kıyafeti Dikimi Antalya', 'Bebek Elbisesi Dikimi Antalya',
-  'Çocuk Elbise Dikimi', 'Bebek Kıyafeti Dikimi', 'Çocuk Kostüm Dikimi Antalya',
-  'Anne Grubu Dikimi Antalya', 'Toplu Çocuk Kıyafeti Dikimi',
-  'Okul Kıyafeti Dikimi Antalya', 'Çocuk Tadilat Antalya',
-
-  // ── TÜRKÇE: BÜYÜK BEDEN ──────────────────────────────────────────────
-  'Büyük Beden Terzi Antalya', 'Büyük Beden Dikim Antalya',
-  'Büyük Beden Elbise Dikimi Antalya', 'Büyük Beden Tadilat Antalya',
-  'Beden Seti Çıkarma', 'Özel Kalıp Antalya', 'Her Bedene Dikim Antalya',
-  'Kilolu Beden Kıyafet Dikimi', 'Büyük Beden Gömlek Dikimi',
-
-  // ── TÜRKÇE: EV TEKSTİLİ ─────────────────────────────────────────────
-  'Nevresim Dikimi Antalya', 'Nevresim Takımı Dikimi', 'Perde Dikimi Antalya',
-  'Stor Perde Dikimi Antalya', 'Tül Dikimi Antalya', 'Kırlent Dikimi Antalya',
-  'Masa Örtüsü Dikimi Antalya', 'Yatak Örtüsü Dikimi', 'Ev Tekstili Dikimi Antalya',
-  'Antalya Perde Atölyesi', 'Ölçüye Nevresim',
-
-  // ── TÜRKÇE: KURU TEMİZLEME / ÇAMAŞIR ───────────────────────────────
-  'Kuru Temizleme Antalya', 'Antalya Kuru Temizleme', 'Kuru Temizleme Fiyatı Antalya',
-  'Çamaşır Yıkama Antalya', 'Ütü Hizmeti Antalya', 'Çamaşır Servisi Antalya',
-  'Otele Çamaşır Servisi Antalya', 'Kıyafet Temizleme Antalya',
-  'Antalya Ütü Servisi', 'Kıyafet Yıkama Antalya',
-
-  // ── TÜRKÇE: KALIP / ÜRETİM ──────────────────────────────────────────
-  'Kalıp Çıkarma Antalya', 'Model Dikimi Antalya', 'Prototip Dikimi Antalya',
-  'Numune Dikimi Antalya', 'Seri İmalat Antalya', 'Fason İmalat Antalya',
-  'Fason Üretim Antalya', 'Konfeksiyon Üretimi Antalya', 'Toptan Dikim Antalya',
-  'Antalya Konfeksiyon', 'Tekstil Üretimi Antalya', 'Marka Üretimi Antalya',
-
-  // ── TÜRKÇE: ÜNİFORMA / KOSTÜM ───────────────────────────────────────
-  'Üniforma Dikimi Antalya', 'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya',
-  'Spor Kıyafet Dikimi Antalya', 'Kostüm Dikimi Antalya', 'Tiyatro Kostümü Antalya',
-  'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi',
-
-  // ── TÜRKÇE: İLÇELER ─────────────────────────────────────────────────
-  'Lara Terzi', 'Konyaaltı Terzi', 'Belek Terzi', 'Kemer Terzi',
-  'Alanya Terzi', 'Manavgat Terzi', 'Side Terzi', 'Kepez Terzi',
-  'Muratpaşa Terzi', 'Aksu Terzi', 'Döşemealtı Terzi', 'Serik Terzi',
-  'Kaleiçi Terzi', 'Hurma Terzi', 'Uncalı Terzi', 'Varsak Terzi',
-  'Lara Dikim', 'Konyaaltı Dikim', 'Belek Dikim', 'Kemer Dikim',
-
-  // ── TÜRKÇE: FİYAT / SORU TİPİ ───────────────────────────────────────
-  'Paça Kısaltma Kaç Lira', 'Terzi Fiyat Listesi', 'Elbise Dikimi Fiyatı',
-  'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Dikim Fiyatları 2025',
-  'Antalya Terzi Ücretleri', 'Ucuz Tadilat Antalya', 'Hızlı Paça Kısaltma',
-
-  // ── ENGLISH KEYWORDS ────────────────────────────────────────────────
-  'Tailor Antalya', 'Antalya Tailor', 'Best Tailor Antalya', 'Master Tailor Antalya',
-  'Tailor Near Me Antalya', 'Same Day Tailor Antalya', 'Express Tailor Antalya',
-  'English Speaking Tailor Antalya', 'Tailor Turkey', 'Sewing Antalya',
-  'Alterations Antalya', 'Clothing Alterations Antalya', 'Dress Alterations Antalya',
-  'Trouser Hemming Antalya', 'Hem Pants Antalya', 'Suit Alterations Antalya',
-  'Dress Repair Antalya', 'Clothing Repair Antalya', 'Zip Replacement Antalya',
-  'Sleeve Shortening Antalya', 'Taking In Dress Antalya', 'Garment Repair Antalya',
-  'Custom Tailoring Antalya', 'Custom Made Clothes Antalya', 'Bespoke Tailor Antalya',
-  'Made to Measure Antalya', 'Custom Suit Antalya', 'Custom Dress Antalya',
-  'Wedding Dress Alterations Antalya', 'Bridal Alterations Antalya',
-  'Evening Gown Alterations Antalya', 'Formal Wear Alterations Antalya',
-  'Dry Cleaning Antalya', 'Laundry Service Antalya', 'Ironing Service Antalya',
-  'Hotel Laundry Antalya', 'Hotel Dry Cleaning Antalya', 'Hotel Pickup Laundry Antalya',
-  'Pattern Making Antalya', 'Mass Production Antalya', 'Contract Manufacturing Antalya',
-  'Sample Sewing Antalya', 'Clothing Manufacturer Antalya',
-  'Mobile Tailor Antalya', 'Home Visit Tailor Antalya', 'Door to Door Tailor Antalya',
-  'Tailor Delivery Antalya', 'Tailor Hotel Delivery Antalya',
-  'Plus Size Tailor Antalya', 'Plus Size Alterations Antalya',
-  'Children Clothing Antalya', 'Baby Clothes Sewing Antalya',
-  'Curtain Sewing Antalya', 'Bed Linen Sewing Antalya',
-  'Tailor Lara', 'Tailor Konyaalti', 'Tailor Belek', 'Tailor Kemer',
-  'Tailor Alanya', 'Tailor Manavgat', 'Tailor Side',
-
-  // ── RUSSIAN KEYWORDS ─────────────────────────────────────────────────
-  'Портной Анталья', 'Портной в Анталье', 'Лучший портной Анталья',
-  'Пошив одежды Анталья', 'Ателье Анталья', 'Ателье в Анталье',
-  'Подгонка одежды Анталья', 'Подгонка брюк Анталья', 'Ушить брюки Анталья',
-  'Укоротить брюки Анталья', 'Ремонт одежды Анталья', 'Починить одежду Анталья',
-  'Замена молнии Анталья', 'Ушить платье Анталья', 'Подогнать костюм Анталья',
-  'Пошив на заказ Анталья', 'Индивидуальный пошив Анталья',
-  'Свадебное платье Анталья', 'Подгонка свадебного платья Анталья',
-  'Пошив детской одежды Анталья', 'Детская одежда на заказ Анталья',
-  'Одежда больших размеров Анталья', 'Пошив штор Анталья',
-  'Постельное бельё на заказ Анталья',
-  'Химчистка Анталья', 'Стирка Анталья', 'Глажка Анталья',
-  'Химчистка в отеле Анталья', 'Стирка с доставкой Анталья',
-  'Пошив по лекалам Анталья', 'Серийное производство Анталья',
-  'Выездной портной Анталья', 'Портной с выездом Анталья',
-  'Портной в отель Анталья', 'Доставка одежды Анталья',
-  'Портной Лара', 'Портной Белек', 'Портной Кемер', 'Портной Аланья',
-
-  // ── TÜRKÇE: FERMUAR & TAMİR DETAY ───────────────────────────────────
-  'Fermuar Değişimi Antalya', 'Fermuar Tamiri Antalya', 'Kot Fermuarı Değişimi',
-  'Pantolon Fermuarı Antalya', 'Mont Fermuarı Değişimi Antalya', 'Ceket Fermuarı Tamiri',
-  'Elbise Fermuarı Değişimi', 'Sweatshirt Fermuarı Değişimi', 'Çanta Fermuarı Tamiri',
-  'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya', 'Astar Değişimi Antalya',
-  'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Cep Tamiri Antalya',
-  'Kol Kısaltma Antalya', 'Etek Tamiri Antalya', 'Etek Kısaltma Antalya',
-  'Abiye Tamiri Antalya', 'Abiye Tadilatı Antalya', 'Her Türlü Kıyafet Tamiri',
-
-  // ── TÜRKÇE: SWEATSHIRT / EŞOFMAN ────────────────────────────────────
-  'Sweatshirt Dikimi Antalya', 'Eşofman Dikimi Antalya', 'Eşofman Takımı Dikimi',
-  'Kapüşonlu Sweatshirt Dikimi', 'Baskılı Sweatshirt Dikimi', 'Nakışlı Sweatshirt',
-  'Sweatshirt Tadilatı', 'Eşofman Tadilatı', 'Spor Kıyafet Dikimi Antalya',
-  'Toplu Sweatshirt Üretimi', 'Seri Sweatshirt Dikimi',
-
-  // ── TÜRKÇE: NAKİŞ & BASKI ───────────────────────────────────────────
-  'Nakış Antalya', 'Kıyafete Nakış', 'Logo Nakışı Antalya', 'İsim Nakışı',
-  'Üniforma Nakışı Antalya', 'Sweatshirt Nakışı', 'Eşofman Nakışı',
-  'Dijital Baskı Antalya', 'Transfer Baskı Antalya', 'Serigrafi Antalya',
-  'Tekstil Baskı Antalya', 'Tişört Baskı Antalya',
-
-  // ── TÜRKÇE: ÜNİFORMA GENEL ──────────────────────────────────────────
-  'Üniforma Dikimi Antalya', 'Üniforma Üretimi Antalya', 'Üniforma Tasarımı Antalya',
-  'Personel Üniforma Antalya', 'İş Üniforma Antalya', 'Seri Üniforma Üretimi',
-  'Toplu Üniforma Siparişi', 'Özel Tasarım Üniforma', 'Üniforma Tadilat Antalya',
-
-  // ── TÜRKÇE: OTEL / TURİZM ÜNİFORMASI ───────────────────────────────
-  'Otel Üniforma Antalya', 'Otel Personel Üniforma', 'Otel Üniforma Dikimi',
-  'Resepsiyon Üniforma Antalya', 'Kat Görevlisi Üniforma', 'Meydancı Üniforma Antalya',
-  'Kapıcı Üniforma', 'Güvenlik Üniforma Antalya', 'Spa Personel Üniforma',
-  'Animatör Üniforma', 'Otel Servis Üniforma', 'Turizm Sektörü Üniforma',
-  'Resort Üniforma Antalya', 'Tatil Köyü Üniforma',
-
-  // ── TÜRKÇE: RESTORAN / MUTFAK ───────────────────────────────────────
-  'Aşçı Üniforma Antalya', 'Şef Kıyafeti Antalya', 'Aşçı Önlüğü Dikimi',
-  'Garson Üniforma Antalya', 'Restoran Üniforma', 'Mutfak Üniforma Antalya',
-  'Barista Üniforma', 'Komi Üniforma', 'Pastane Üniforma', 'Mutfak Önlüğü',
-
-  // ── TÜRKÇE: SAĞLIK / ENDÜSTRİ ───────────────────────────────────────
-  'Doktor Üniforma Antalya', 'Hemşire Üniforma Antalya', 'Sağlık Personel Kıyafeti',
-  'Eczacı Üniforma', 'Laborant Üniforma', 'Hastane Kıyafeti Dikimi',
-  'İşçi Üniforma Antalya', 'Fabrika Üniforma Dikimi', 'İş Güvenliği Kıyafeti',
-  'Çağrı Merkezi Üniforma', 'Banka Personel Üniforma', 'Mağaza Personel Üniforma',
-
-  // ── TÜRKÇE: OKUL / SPOR ─────────────────────────────────────────────
-  'Okul Üniforma Dikimi Antalya', 'Okul Forması Antalya', 'Öğrenci Üniforma',
-  'Spor Takım Üniforma', 'Futbol Forması Dikimi', 'Voleybol Forması Dikimi',
-  'Basketbol Forması Dikimi', 'Spor Kulübü Kıyafeti',
-
-  // ── TÜRKÇE: KESİM / DİKİM / ÜTÜ / PAKET ────────────────────────────
-  'Kesim Dikim Antalya', 'Kesim Dikim Ütü Paket', 'Dikim Ütü Paket Hizmet',
-  'Kalıp Tasarım Dikim', 'Model Tasarımı Antalya', 'Kesim Antalya',
-
-  // ── ENGLISH: UNIFORM ────────────────────────────────────────────────
-  'Uniform Production Antalya', 'Uniform Design Antalya', 'Hotel Uniform Antalya',
-  'Reception Uniform Antalya', 'Chef Uniform Antalya', 'Waiter Uniform Antalya',
-  'Restaurant Uniform Antalya', 'Staff Uniform Antalya', 'Security Uniform Antalya',
-  'Medical Uniform Antalya', 'Doctor Uniform Antalya', 'Nurse Uniform Antalya',
-  'School Uniform Antalya', 'Sports Uniform Antalya', 'Custom Uniform Antalya',
-  'Bulk Uniform Order Antalya', 'Embroidery Antalya', 'Logo Embroidery Antalya',
-  'Sweatshirt Sewing Antalya', 'Tracksuit Production Antalya',
-  'Zip Repair Antalya', 'Trouser Repair Antalya', 'Dress Repair Antalya',
-  'Skirt Repair Antalya', 'Evening Gown Repair Antalya',
-
-  // ── RUSSIAN: UNIFORM & REPAIR ───────────────────────────────────────
-  'Пошив формы Анталья', 'Форма для персонала Анталья', 'Гостиничная форма Анталья',
-  'Форма для ресторана Анталья', 'Медицинская форма Анталья', 'Форма для повара Анталья',
-  'Вышивка на форме Анталья', 'Логотип на одежде Анталья',
-  'Пошив толстовок Анталья', 'Спортивная форма Анталья',
-  'Замена молнии Анталья', 'Ремонт платья Анталья', 'Ремонт юбки Анталья',
-
-  // ── GERMAN: UNIFORM & REPAIR ────────────────────────────────────────
-  'Uniformproduktion Antalya', 'Hoteluniform Antalya', 'Kochuniform Antalya',
-  'Restaurantuniform Antalya', 'Schuluniform Antalya', 'Sportuniform Antalya',
-  'Stickerei Antalya', 'Logo Stickerei Antalya', 'Sweatshirt nähen Antalya',
-  'Trainingsanzug nähen Antalya', 'Reißverschluss Reparatur Antalya',
-  'Kleider ändern Antalya', 'Hose kürzen Antalya', 'Kleidung reparieren Antalya',
-  'Reißverschluss wechseln Antalya', 'Maßanfertigung Antalya',
-  'Maßschneiderei Antalya', 'Anzug ändern Antalya', 'Kleid enger machen Antalya',
-  'Hochzeitskleid ändern Antalya', 'Brautkleid Anpassung Antalya',
-  'Kinderkleidung nähen Antalya', 'Babykleidung Antalya', 'Übergrössen Schneider Antalya',
-  'Vorhänge nähen Antalya', 'Bettwäsche nähen Antalya',
-  'Reinigung Antalya', 'Chemische Reinigung Antalya', 'Wäsche Antalya',
-  'Bügelservice Antalya', 'Hotel Reinigung Antalya', 'Hotel Wäscheservice Antalya',
-  'Mobiler Schneider Antalya', 'Schneider mit Hausbesuch Antalya',
-  'Schneider Lara', 'Schneider Belek', 'Schneider Kemer',
-
-  // ── TÜRKÇE: FİYAT & "KAÇ LİRA" SORU TİPİ ───────────────────────────
-  'Paça Kısaltma Kaç Lira', 'Paça Kısaltma Fiyatı 2025', 'Terzi Fiyatları 2025',
-  'Fermuar Değişimi Kaç Lira', 'Mont Fermuarı Kaç Lira', 'Kot Fermuarı Kaç Lira',
-  'Ceket Daraltma Fiyatı', 'Elbise Tadilat Fiyatı', 'Pantolon Daraltma Kaç Lira',
-  'Tadilat Fiyatı 2025', 'Dikim Fiyatları 2025', 'Terzi Ücret Tarifesi 2025',
-  'Kuru Temizleme Fiyatı Antalya', 'Etek Kısaltma Kaç Lira',
-  'Abiye Tamiri Fiyatı', 'Gelinlik Tadilatı Fiyatı',
-
-  // ── TÜRKÇE: KONUM & "YAKINIMDAK" TİPİ ──────────────────────────────
-  'Yakınımda Terzi', 'En Yakın Terzi Antalya', 'Terzi Nerede Antalya',
-  'Eve Gelen Terzi Antalya', 'Eve Gelen Terzi', 'Otele Gelen Terzi Antalya',
-  'Adrese Teslim Terzi', 'Antalya Terzi Servisi', 'Terzi Çağır Antalya',
-  'Terzi Adresi Antalya', 'Antalya Merkez Terzi', 'Lara Terzi Servisi',
-  'Konyaaltı Eve Gelen Terzi', 'Belek Terzi Servisi', 'Kemer Eve Gelen Terzi',
-
-  // ── TÜRKÇE: SEZONSAL ─────────────────────────────────────────────────
-  'Mezuniyet Abiye Tamiri', 'Mezuniyet Abiye Kısaltma', 'Mezuniyet Kıyafeti Tadilat',
-  'Düğün Sezonu Gelinlik Tadilat', 'Gelinlik Kısaltma', 'Gelinlik Tadilatı Antalya',
-  'Kış Sezonu Mont Fermuarı', 'Mont Fermuarı Değişimi', 'Deri Mont Fermuarı',
-  'Yaz Sezonu Elbise Daraltma', 'Ramazan Kıyafeti Dikimi', 'Bayramlık Dikim',
-  'Düğün Kıyafeti Tadilat', 'Nişan Elbisesi Tadilat',
-
-  // ── TÜRKÇE: SORU TİPİ ("NASIL" / "NEREDE") ──────────────────────────
-  'Paça Kısaltma Nasıl Yapılır', 'Fermuar Nasıl Değiştirilir',
-  'Antalya\'da Terzi Nasıl Bulunur', 'Elbise Nasıl Daraltılır',
-  'Terzi Randevusu Antalya', 'Aynı Gün Terzi Antalya',
-
-  // ── ENGLISH: PRICE & LOCATION ────────────────────────────────────────
-  'Tailor Near Me Antalya', 'Nearest Tailor Antalya', 'Tailor Close By Antalya',
-  'Home Visit Tailor Antalya', 'Hotel Tailor Service Antalya',
-  'Trouser Hemming Cost Antalya', 'Alteration Prices Antalya',
-  'Zip Replacement Cost Antalya', 'Tailor Price List Antalya',
-  'Same Day Alterations Antalya', 'Express Tailor Antalya',
-  'Graduation Dress Alteration Antalya', 'Wedding Season Alterations Antalya',
-  'Evening Gown Shortening Antalya', 'Prom Dress Alteration Antalya',
-
-  // ── RUSSIAN: PRICE & LOCATION ────────────────────────────────────────
-  'Портной рядом Анталья', 'Портной с доставкой Анталья', 'Вызвать портного Анталья',
-  'Цены на подгонку Анталья', 'Стоимость замены молнии Анталья',
-  'Срочный ремонт одежды Анталья', 'Ремонт в тот же день Анталья',
-  'Подгонка выпускного платья Анталья', 'Подгонка свадебного сезона',
+  // TR
+  'Antalya Terzi','Terzi Antalya','Paça Kısaltma Antalya','Pantolon Kısaltma Antalya',
+  'Tadilat Antalya','Tamir Antalya','Daraltma Antalya','Beden Küçültme Antalya',
+  'Kıyafet Tamir Antalya','Elbise Daraltma Antalya','Kuru Temizleme Antalya',
+  'Çamaşır Yıkama Antalya','Ütü Hizmeti Antalya','Kalıp Çıkarma Antalya',
+  'Model Dikimi Antalya','Seri İmalat Antalya','Fason İmalat Antalya',
+  'Özel Dikim Antalya','Gelinlik Antalya','Damatlık Antalya',
+  'Erkek Terzi Antalya','Bayan Terzi Antalya','Çocuk Kıyafeti Dikimi Antalya',
+  'Bebek Elbisesi Dikimi Antalya','Büyük Beden Dikim Antalya',
+  'Nevresim Dikimi Antalya','Perde Dikimi Antalya',
+  'Gömlek Dikimi Antalya','Ceket Tadilat Antalya','Pantolon Dikimi Antalya',
+  'Terzi Servisi Antalya','Araçlı Terzi Antalya','Beden Seti Çıkarma Antalya',
+  'Fermuar Değişimi Antalya','Anne Grubu Dikimi Antalya',
+  'Lara Terzi','Konyaaltı Terzi','Belek Terzi','Kemer Terzi',
+  'Alanya Terzi','Manavgat Terzi','Side Terzi','Kepez Terzi','Muratpaşa Terzi',
+  'Paça Fiyatı Antalya','Terzi Fiyatları Antalya','Dikim Fiyatları Antalya',
+  // EN
+  'Tailor Antalya','Antalya Tailor','Dry Cleaning Antalya','Pattern Making Antalya',
+  'Mobile Tailor Antalya','Home Visit Tailor Antalya','Plus Size Tailor Antalya',
+  'Children Clothing Antalya','Baby Dress Antalya',
+  // RU
+  'Портной Анталья','Химчистка Анталья','Пошив Анталья','Выездной портной Анталья',
+  // DE
+  'Schneider Antalya','Reinigung Antalya','Änderungsschneiderei Antalya',
 ];
 
 // ═══════════════════════════════════════
@@ -972,7 +640,7 @@ export default function TerziClient() {
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
             {[c.seoP1, c.seoP2, c.seoP3, c.seoP4].filter(Boolean).map((p, i) => (
               <p key={i} style={{ fontSize: 12, color: '#7a6858', lineHeight: 1.85, marginBottom: 8 }}
-                dangerouslySetInnerHTML={{ __html: p.replace(/(paça kısaltma|pantolon kısaltma|fermuar değişimi|fermuar|tadilat|kuru temizleme|çamaşır yıkama|ütü|kalıp çıkarma|model dikimi|seri imalat|fason|tailor|dry cleaning|портной|химчистка|пошив|terzi servisi|araçlı terzi|büyük beden|çocuk kıyafeti|bebek elbisesi|nevresim|perde dikimi|mobile tailor|выездной портной|üniforma|nakış|sweatshirt|eşofman|logo nakışı|otel üniforma|aşçı üniforma|garson üniforma|doktor üniforma|okul üniforma|spor üniforma|uniform|embroidery|гостиничная форма|форма повара)/gi, '<strong style="color:#3a2a1a;font-weight:700">$1</strong>') }}
+                dangerouslySetInnerHTML={{ __html: p.replace(/(paça kısaltma|pantolon kısaltma|tadilat|kuru temizleme|çamaşır yıkama|ütü|kalıp çıkarma|model dikimi|seri imalat|fason|tailor in antalya|dry cleaning|портной|химчистка|пошив|terzi servisi|araçlı terzi|büyük beden|çocuk kıyafeti|bebek elbisesi|nevresim|perde dikimi|mobile tailor|выездной портной)/gi, '<strong style="color:#3a2a1a">$1</strong>') }}
               />
             ))}
           </div>
@@ -1043,9 +711,6 @@ export default function TerziClient() {
             <a href={waLink(c.waMsg)} style={{ background: '#1c1814', color: '#d4af6e', borderRadius: 12, padding: '13px 28px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', border: '1px solid rgba(184,149,74,0.2)' }}>
               📲 {lang === 'tr' ? 'Fiyat Teklifi Al' : lang === 'en' ? 'Get a Quote' : lang === 'ru' ? 'Получить цену' : 'Angebot anfordern'}
             </a>
-            <a href={waLink(lang === 'tr' ? 'Merhaba, üniforma üretimi hakkında toplu sipariş fiyatı almak istiyorum.' : lang === 'en' ? 'Hello, I would like a bulk quote for uniform production.' : lang === 'ru' ? 'Здравствуйте, хочу получить оптовую цену на производство формы.' : 'Hallo, ich möchte ein Angebot für Uniformproduktion.')} style={{ background: '#b8954a', color: '#fff', borderRadius: 12, padding: '13px 28px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', marginLeft: 10 }}>
-              🏭 {lang === 'tr' ? 'Toplu Üniforma Teklifi' : lang === 'en' ? 'Bulk Uniform Quote' : lang === 'ru' ? 'Оптовый заказ формы' : 'Uniform Großauftrag'}
-            </a>
           </div>
         </section>
 
@@ -1089,46 +754,6 @@ export default function TerziClient() {
                 <div style={{ fontSize: 11, color: '#d4af6e', fontWeight: 600 }}>{r.flag} {r.author} — {r.city}</div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* ══════════════════════════════
-            FİYAT LİSTESİ — SEO için kritik
-        ══════════════════════════════ */}
-        <section id="fiyatlar" style={{ padding: '52px 20px', background: '#faf8f4' }}>
-          <div style={{ marginBottom: 24, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>
-              {lang === 'tr' ? 'Fiyat Listesi' : lang === 'en' ? 'Price List' : lang === 'ru' ? 'Прайс-лист' : 'Preisliste'}
-            </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814', marginBottom: 6 }}>
-              {lang === 'tr' ? 'Terzi Fiyatları 2025–2026' : lang === 'en' ? 'Tailor Prices 2025–2026' : lang === 'ru' ? 'Цены 2025–2026' : 'Preise 2025–2026'}
-            </h2>
-            <p style={{ fontSize: 12, color: '#8a7060' }}>
-              {lang === 'tr' ? 'Başlangıç fiyatları · Kesin teklif için WhatsApp\'tan yazın' : lang === 'en' ? 'Starting prices · WhatsApp for exact quote' : lang === 'ru' ? 'Начальные цены · WhatsApp для точной оценки' : 'Startpreise · WhatsApp für genaues Angebot'}
-            </p>
-          </div>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            {[
-              { service: { tr: 'Paça Kısaltma', en: 'Trouser Hemming', ru: 'Подгонка брюк', de: 'Hose kürzen' }, price: '₺150+', time: { tr: '24 saat', en: '24h', ru: '24 часа', de: '24h' } },
-              { service: { tr: 'Fermuar Değişimi (Pantolon/Kot)', en: 'Zip Replacement (Trousers/Jeans)', ru: 'Замена молнии (брюки/джинсы)', de: 'Reißverschluss (Hose/Jeans)' }, price: '₺120+', time: { tr: 'Aynı gün', en: 'Same day', ru: 'В тот же день', de: 'Gleicher Tag' } },
-              { service: { tr: 'Mont Fermuarı Değişimi', en: 'Coat Zip Replacement', ru: 'Замена молнии пальто', de: 'Mantel-Reißverschluss' }, price: '₺300+', time: { tr: '24 saat', en: '24h', ru: '24 часа', de: '24h' } },
-              { service: { tr: 'Elbise / Ceket Daraltma', en: 'Dress / Jacket Taking In', ru: 'Заужение платья/пиджака', de: 'Kleid/Jacke einengen' }, price: '₺200+', time: { tr: '48 saat', en: '48h', ru: '48 часов', de: '48h' } },
-              { service: { tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Chemische Reinigung' }, price: '₺400+', time: { tr: '48 saat', en: '48h', ru: '48 часов', de: '48h' } },
-              { service: { tr: 'Sweatshirt Dikimi', en: 'Sweatshirt Sewing', ru: 'Пошив толстовки', de: 'Sweatshirt nähen' }, price: '₺400+', time: { tr: '3-5 gün', en: '3-5 days', ru: '3-5 дней', de: '3-5 Tage' } },
-              { service: { tr: 'Gelinlik Tadilatı', en: 'Wedding Dress Alteration', ru: 'Подгонка свадебного платья', de: 'Brautkleid Änderung' }, price: '₺500+', time: { tr: '3-5 gün', en: '3-5 days', ru: '3-5 дней', de: '3-5 Tage' } },
-              { service: { tr: 'Üniforma (Fiyat başına kişi)', en: 'Uniform (price per person)', ru: 'Форма (цена за чел.)', de: 'Uniform (Preis/Person)' }, price: 'Teklif', time: { tr: 'Sipariş miktarına göre', en: 'Based on quantity', ru: 'По заказу', de: 'Je nach Menge' } },
-            ].map((row, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: i % 2 === 0 ? '#fff' : '#f8f4ee', borderRadius: 12, marginBottom: 6, border: '1px solid #e8dcc8' }}>
-                <div style={{ flex: 1, fontSize: 12, fontWeight: 600, color: '#1c1814' }}>{row.service[lang]}</div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#b8954a', minWidth: 60, textAlign: 'right' }}>{row.price}</div>
-                <div style={{ fontSize: 10, color: '#8a7060', minWidth: 55, textAlign: 'right' }}>{row.time[lang]}</div>
-              </div>
-            ))}
-            <div style={{ textAlign: 'center', marginTop: 16 }}>
-              <a href={waLink(c.waMsg)} style={{ background: '#1c1814', color: '#d4af6e', borderRadius: 12, padding: '12px 24px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', border: '1px solid rgba(184,149,74,0.2)' }}>
-                📲 {lang === 'tr' ? 'Ücretsiz Fiyat Teklifi Al' : lang === 'en' ? 'Get Free Quote' : lang === 'ru' ? 'Бесплатная оценка' : 'Kostenloses Angebot'}
-              </a>
-            </div>
           </div>
         </section>
 
@@ -1212,12 +837,12 @@ export default function TerziClient() {
               <a href={waLink(c.mobileSvcWaMsg)} style={{ background: '#b8954a', color: '#fff', borderRadius: 14, padding: '13px', fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                 🚗 {c.mobileSvcCta}
               </a>
-              <a href="https://maps.google.com/?q=Terzi+Can+Belek+by+Ercan+Antalya" target="_blank" rel="noreferrer" style={{ color: '#2c2418', border: '1px solid #e0d8c8', borderRadius: 14, padding: 13, fontSize: 13, textDecoration: 'none', display: 'block', textAlign: 'center' }}>
+              <a href="https://maps.google.com/?q=Antalya+Terzi+Belek+Ercan" target="_blank" rel="noreferrer" style={{ color: '#2c2418', border: '1px solid #e0d8c8', borderRadius: 14, padding: 13, fontSize: 13, textDecoration: 'none', display: 'block', textAlign: 'center' }}>
                 📍 {c.mapLabel}
               </a>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 14, marginTop: 18, flexWrap: 'wrap' }}>
-              {['🕐 09:00–19:00','📍 Antalya','⚡ 24–48h','🇹🇷🇬🇧🇷🇺🇩🇪 4 Dil'].map(t => (
+              {['🕐 09:00–19:00','📍 Antalya','⚡ 24–48h','🌍 TR/EN/RU/DE'].map(t => (
                 <div key={t} style={{ fontSize: 10, color: '#8a7060' }}>{t}</div>
               ))}
             </div>
@@ -1225,51 +850,24 @@ export default function TerziClient() {
         </section>
 
         {/* ══════════════════════════════
-            SEO FOOTER — KATEGORİLİ
+            SEO FOOTER — GENİŞLETİLMİŞ
         ══════════════════════════════ */}
-        <div style={{ background: '#1c1814', padding: '36px 20px 48px', borderTop: '1px solid rgba(184,149,74,0.12)' }}>
-          <div style={{ maxWidth: 700, margin: '0 auto' }}>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#d4af6e', marginBottom: 20, textAlign: 'center' }}>
+        <div style={{ background: '#1c1814', padding: '32px 20px 44px', borderTop: '1px solid rgba(184,149,74,0.12)' }}>
+          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 15, color: '#d4af6e', marginBottom: 6 }}>
               Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya
             </p>
-            {[
-              { label: '✂ Tadilat & Tamir', words: ['Paça Kısaltma','Pantolon Kısaltma','Paça Dikimi','Etek Kısaltma','Kol Kısaltma','Bel Alma','Daraltma','Beden Küçültme','Elbise Daraltma','Fermuar Değişimi','Yırtık Onarımı','Dikiş Tamiri','Düğme Dikimi','Astar Değişimi','Cep Tamiri','Yaka Değişimi'] },
-              { label: '👔 Erkek & Bayan Terzi', words: ['Erkek Terzi Antalya','Bayan Terzi Antalya','Takım Elbise Dikimi','Ceket Dikimi','Gömlek Dikimi','Blazer Dikimi','Smoking Dikimi','Elbise Dikimi','Bluz Dikimi','Etek Dikimi','Tulum Dikimi','Abiye Dikimi','Nişan Elbisesi','Kına Kıyafeti'] },
-              { label: '👶 Çocuk · Bebek · Büyük Beden', words: ['Çocuk Kıyafeti Dikimi','Bebek Elbisesi Dikimi','Çocuk Kostüm','Anne Grubu Dikimi','Okul Kıyafeti Dikimi','Büyük Beden Terzi','Büyük Beden Dikim','Beden Seti Çıkarma','Özel Kalıp Çıkarma','Her Bedene Dikim'] },
-              { label: '💍 Gelinlik & Özel Gün', words: ['Gelinlik Dikimi Antalya','Gelinlik Tadilat','Damatlık Dikimi','Abiye Antalya','Gece Elbisesi','Düğün Kıyafeti','Nişan Elbisesi Dikimi'] },
-              { label: '🏠 Ev Tekstili', words: ['Nevresim Dikimi','Nevresim Takımı Dikimi','Perde Dikimi','Stor Perde','Tül Dikimi','Kırlent Dikimi','Yatak Örtüsü','Masa Örtüsü','Ev Tekstili Dikimi'] },
-              { label: '🧺 Kuru Temizleme & Çamaşır', words: ['Kuru Temizleme Antalya','Çamaşır Yıkama Antalya','Ütü Hizmeti','Otele Çamaşır Servisi','Kıyafet Temizleme','Hotel Laundry Antalya','Dry Cleaning Antalya','Ironing Service Antalya'] },
-              { label: '🏭 Seri İmalat & Fason', words: ['Kalıp Çıkarma','Model Dikimi','Prototip Dikimi','Numune Dikimi','Seri İmalat Antalya','Fason İmalat Antalya','Konfeksiyon Üretimi','Toptan Dikim','Tekstil Üretimi','Mass Production Antalya'] },
-              { label: '📍 İlçe & Bölge', words: ['Lara Terzi','Konyaaltı Terzi','Belek Terzi','Kemer Terzi','Alanya Terzi','Manavgat Terzi','Side Terzi','Kepez Terzi','Muratpaşa Terzi','Aksu Terzi','Serik Terzi','Kaleiçi Terzi','Hurma Terzi','Uncalı Terzi','Varsak Terzi'] },
-              { label: '🏨 Üniforma — Otel & Turizm', words: ['Otel Üniforma Antalya','Resepsiyon Üniforma','Kat Görevlisi Üniforma','Meydancı Üniforma','Kapıcı Üniforma','Güvenlik Üniforma','Spa Üniforma','Animatör Üniforma','Otel Servis Üniforma','Resort Üniforma','Turizm Üniforma'] },
-              { label: '🍽️ Üniforma — Restoran & Mutfak', words: ['Aşçı Üniforma Antalya','Şef Kıyafeti','Aşçı Önlüğü','Garson Üniforma','Barista Üniforma','Komi Üniforma','Pastane Üniforma','Mutfak Önlüğü','Restoran Üniforma'] },
-              { label: '👨‍⚕️ Üniforma — Sağlık & Endüstri', words: ['Doktor Üniforma Antalya','Hemşire Üniforma','Sağlık Personel Kıyafeti','Eczacı Üniforma','Laborant Üniforma','İşçi Üniforma','Fabrika Üniforma','Çağrı Merkezi Üniforma','Banka Personel Üniforma'] },
-              { label: '🏫 Üniforma — Okul & Spor', words: ['Okul Üniforma Dikimi','Okul Forması','Futbol Forması Dikimi','Voleybol Forması','Basketbol Forması','Spor Takım Üniforma','Spor Kulübü Kıyafeti'] },
-              { label: '🪡 Nakış & Baskı', words: ['Nakış Antalya','Logo Nakışı','İsim Nakışı','Üniforma Nakışı','Sweatshirt Nakışı','Dijital Baskı','Transfer Baskı','Serigrafi','Tekstil Baskı'] },
-              { label: '🧥 Sweatshirt & Eşofman', words: ['Sweatshirt Dikimi Antalya','Eşofman Dikimi','Kapüşonlu Sweatshirt','Baskılı Sweatshirt','Nakışlı Sweatshirt','Seri Sweatshirt Üretimi','Spor Kıyafet Dikimi'] },
-              { label: '💰 Fiyat & "Kaç Lira" Aramaları', words: ['Paça Kısaltma Kaç Lira','Paça Kısaltma Fiyatı 2025','Fermuar Değişimi Kaç Lira','Mont Fermuarı Kaç Lira','Kot Fermuarı Kaç Lira','Ceket Daraltma Fiyatı','Elbise Tadilat Fiyatı','Terzi Fiyatları 2025','Tadilat Fiyatı 2025','Dikim Fiyatları 2025','Terzi Ücret Tarifesi 2025','Abiye Tamiri Fiyatı','Gelinlik Tadilatı Fiyatı'] },
-              { label: '📍 Konum & "Yakınımda" Aramaları', words: ['Yakınımda Terzi','En Yakın Terzi Antalya','Terzi Nerede Antalya','Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya','Adrese Teslim Terzi','Terzi Çağır Antalya','Aynı Gün Terzi Antalya','Konyaaltı Eve Gelen Terzi','Belek Terzi Servisi','Lara Terzi Servisi'] },
-              { label: '📅 Sezonsal Aramalar', words: ['Mezuniyet Abiye Tamiri','Mezuniyet Abiye Kısaltma','Düğün Sezonu Gelinlik Tadilat','Gelinlik Kısaltma','Kış Sezonu Mont Fermuarı','Deri Mont Fermuarı','Yaz Sezonu Elbise Daraltma','Bayramlık Dikim','Düğün Kıyafeti Tadilat','Nişan Elbisesi Tadilat'] },
-              { label: '⚙️ Kesim · Dikim · Ütü · Paket', words: ['Kesim Dikim Antalya','Kesim Dikim Ütü Paket','Model Tasarımı Antalya','Kalıp Tasarım Dikim','Numune Dikimi','Prototip Dikimi'] },
-              { label: '🇬🇧 English', words: ['Tailor Antalya','Alterations Antalya','Hemming Antalya','Zip Repair','Dress Repair','Skirt Shortening','Evening Gown Repair','Sweatshirt Sewing','Tracksuit Production','Embroidery Antalya','Logo Embroidery','Uniform Production Antalya','Hotel Uniform','Chef Uniform','Waiter Uniform','Reception Uniform','Doctor Uniform','School Uniform','Sports Uniform','Mobile Tailor','Plus Size Tailor','Bespoke Tailor Antalya'] },
-              { label: '🇷🇺 Русский', words: ['Портной Анталья','Ателье Анталья','Подгонка брюк','Замена молнии','Ремонт платья','Пошив толстовок','Гостиничная форма','Форма повара','Форма официанта','Медицинская форма','Школьная форма','Вышивка логотипа','Химчистка Анталья','Выездной портной'] },
-              { label: '🇩🇪 Deutsch', words: ['Schneider Antalya','Änderungsschneiderei','Hose kürzen','Reißverschluss Reparatur','Kleid reparieren','Sweatshirt nähen','Stickerei Antalya','Uniformproduktion','Hoteluniform','Kochuniform','Arztuniform','Schuluniform','Übergrößen Schneider','Mobiler Schneider'] },
-            ].map(group => (
-              <div key={group.label} style={{ marginBottom: 12 }}>
-                <div style={{ fontSize: 9, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(184,149,74,0.45)', marginBottom: 5, paddingLeft: 2 }}>{group.label}</div>
-                <div>{group.words.map(kw => <span key={kw} className="kw-pill">{kw}</span>)}</div>
-              </div>
-            ))}
-            {/* Gizli tam liste */}
-            <div style={{ fontSize: 0, height: 0, overflow: 'hidden', position: 'absolute' }} aria-hidden="true">{SEO_KEYWORDS.join(', ')}</div>
-            <div style={{ borderTop: '1px solid rgba(184,149,74,0.1)', paddingTop: 16, marginTop: 8, textAlign: 'center' }}>
-              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.15)', letterSpacing: 0.7, lineHeight: 1.8 }}>
-                📍 Antalya, Türkiye &nbsp;·&nbsp; ☎ +90 531 898 64 18 &nbsp;·&nbsp; 🕐 09:00–19:00 &nbsp;·&nbsp; swaphubs.com/terzi
-              </p>
-              <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.1)', marginTop: 6, lineHeight: 1.7 }}>
-                Antalya Terzi · Paça Kısaltma · Fermuar Değişimi · Tadilat · Tamir · Daraltma · Beden Küçültme · Büyük Beden · Erkek Terzi · Bayan Terzi · Çocuk Kıyafeti · Bebek Elbisesi · Nevresim · Perde · Gelinlik · Damatlık · Sweatshirt Dikimi · Eşofman Dikimi · Nakış · Logo Baskı · Üniforma Üretimi · Otel Üniforma · Aşçı Üniforma · Garson Üniforma · Doktor Üniforma · Okul Üniforma · Spor Üniforma · Kuru Temizleme · Seri İmalat · Fason Üretim · Terzi Servisi · Araçlı Terzi · Terzi Fiyatları 2025 · Terzi Fiyatları 2026 · Paça Kısaltma Kaç Lira · Fermuar Değişimi Kaç Lira · Yakınımda Terzi · Eve Gelen Terzi
-              </p>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', marginBottom: 16, lineHeight: 1.6 }}>
+              Erkek Terzi · Bayan Terzi · Çocuk Kıyafeti · Bebek Elbisesi · Büyük Beden · Nevresim Dikimi · Perde Dikimi · Araçlı Terzi Servisi · Fason İmalat · Seri Üretim · Kuru Temizleme
+            </p>
+            <div style={{ marginBottom: 16 }}>
+              {SEO_KEYWORDS.map(kw => (
+                <span key={kw} className="kw-pill">{kw}</span>
+              ))}
             </div>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.15)', letterSpacing: 0.7 }}>
+              📍 Antalya, Türkiye &nbsp;·&nbsp; ☎ +90 531 898 64 18 &nbsp;·&nbsp; 🕐 09:00–19:00 &nbsp;·&nbsp; swaphubs.com/terzi
+            </p>
           </div>
         </div>
 
