@@ -518,8 +518,8 @@ const REVIEWS = [
 ];
 
 // SEO anahtar kelimeleri — GENİŞLETİLMİŞ 4 DİL
-const SEO_KEYWORDS = [
-
+const SEO_KEYWORDS = [ 
+  // ── const tailorKeywords = [
   // ── TÜRKÇE: GENEL TERZİ ──────────────────────────────────────────────
   'Antalya Terzi', 'Terzi Antalya', 'En İyi Terzi Antalya', 'Usta Terzi Antalya',
   'Terzi Fiyatları Antalya', 'Terzi Servisi Antalya', 'Araçlı Terzi Antalya',
@@ -528,7 +528,7 @@ const SEO_KEYWORDS = [
   'Ekspres Terzi Antalya', '24 Saat Terzi Antalya', 'Ucuz Terzi Antalya',
   'Yakın Terzi Antalya', 'Antalya Terzi Nerede', 'Antalya Dikim',
   
-  // ── TÜRKÇE: ADRESTEN ALIM / MOBİL / ONLİNE KONSEPT (EKLEME) ──────────
+  // ── TÜRKÇE: ADRESTEN ALIM / MOBİL / ONLİNE KONSEPT ───────────────────
   'Adresten Alım Terzi Antalya', 'Kapıdan Kapıya Terzi Servisi', 'Evden Alınan Terzi Hizmeti',
   'Motorlu Terzi Kurye Antalya', 'Online Terzi Siparişi Antalya', 'Evde Ölçü Alan Terzi Antalya',
   'İş Yerine Gelen Terzi Antalya', 'Kıyafetimi Evden Alan Terzi', 'Adrese Teslim Ütü ve Terzi',
@@ -541,12 +541,16 @@ const SEO_KEYWORDS = [
   'Kot Pantolon Tadilat Antalya', 'Palazzo Pantolon Dikimi', 'Palazzo Kısaltma',
   'Paça Kısaltma Fiyatı', 'Paça Kısaltma Kaç Lira',
 
-  // ── TÜRKÇE: TADİLAT / TAMİR ─────────────────────────────────────────
+  // ── TÜRKÇE: TADİLAT / TAMİR & FERMUAR DETAY ─────────────────────────
   'Kıyafet Tadilat Antalya', 'Elbise Tadilat Antalya', 'Kıyafet Tamir Antalya',
   'Elbise Tamir Antalya', 'Kıyafet Onarım Antalya', 'Fermuar Değişimi Antalya',
   'Fermuar Takma Antalya', 'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya',
   'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Astar Değişimi Antalya',
   'Cep Tamiri Antalya', 'Kol Kısaltma Antalya', 'Etek Kısaltma Antalya',
+  'Fermuar Tamiri Antalya', 'Kot Fermuarı Değişimi', 'Pantolon Fermuarı Antalya',
+  'Mont Fermuarı Değişimi Antalya', 'Ceket Fermuarı Tamiri', 'Elbise Fermuarı Değişimi',
+  'Sweatshirt Fermuarı Değişimi', 'Çanta Fermuarı Tamiri', 'Etek Tamiri Antalya',
+  'Abiye Tamiri Antalya', 'Abiye Tadilatı Antalya', 'Her Türlü Kıyafet Tamiri',
 
   // ── TÜRKÇE: DARALTMA / KÜÇÜLTME ─────────────────────────────────────
   'Elbise Daraltma Antalya', 'Kıyafet Daraltma Antalya', 'Beden Küçültme Antalya',
@@ -568,7 +572,7 @@ const SEO_KEYWORDS = [
   'Kadın Kıyafet Dikimi Antalya', 'Abiye Dikimi Antalya', 'Gece Elbisesi Antalya',
   'Nişan Elbisesi Dikimi Antalya', 'Kına Kıyafeti Dikimi Antalya',
   
-  // ── TÜRKÇE: KUMAŞ TÜRLERİ & ÖZEL DİKİM DETAY (KETEN, MÜSLİN, VİSKON) ──
+  // ── TÜRKÇE: KUMAŞ TÜRLERİ & ÖZEL DİKİM DETAY ─────────────────────────
   'Keten Elbise Dikimi Antalya', 'Müslin Kıyafet Tasarımı Antalya', 'Viskon Elbise Tadilatı',
   'Şile Bezi Kıyafet Dikimi', 'İpek Elbise Tamiri Antalya', 'Keten Pantolon Paçası Yapımı',
   'Triko Dikiş Tamiri Antalya', 'Deri Mont Astar Değişimi', 'Kaşe Kaban Tadilatı Antalya',
@@ -609,90 +613,10 @@ const SEO_KEYWORDS = [
   'Fason Üretim Antalya', 'Konfeksiyon Üretimi Antalya', 'Toptan Dikim Antalya',
   'Antalya Konfeksiyon', 'Tekstil Üretimi Antalya', 'Marka Üretimi Antalya',
 
-  // ── TÜRKÇE: ÜNİFORMA / KOSTÜM ───────────────────────────────────────
-  'Üniforma Dikimi Antalya', 'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya',
-  'Spor Kıyafet Dikimi Antalya', 'Kostüm Dikimi Antalya', 'Tiyatro Kostümü Antalya',
-  'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi',
-  'Barista Önlüğü Tasarımı Antalya', 'Medikal Scrubs Dikimi Antalya', 'Aşçı Ceketi İsim Nakışı',
-  'Garson Yeleği Dikimi Antalya', 'Otel Temizlik Personeli Kıyafeti', 'Güvenlik Firması Üniforması',
-  'Spa Masöz Kıyafeti Dikimi', 'Otel Resepsiyon Takım Elbise', 'Restoran Personel Kıyafeti Toptan',
-  'Logolu İş Kıyafetleri Baskısı', 'Fason Üniforma İmalatı Antalya',
-
-  // ── TÜRKÇE: İLÇELER ─────────────────────────────────────────────────
-  'Lara Terzi', 'Konyaaltı Terzi', 'Belek Terzi', 'Kemer Terzi',
-  'Alanya Terzi', 'Manavgat Terzi', 'Side Terzi', 'Kepez Terzi',
-  'Muratpaşa Terzi', 'Aksu Terzi', 'Döşemealtı Terzi', 'Serik Terzi',
-  'Kaleiçi Terzi', 'Hurma Terzi', 'Uncalı Terzi', 'Varsak Terzi',
-  'Lara Dikim', 'Konyaaltı Dikim', 'Belek Dikim', 'Kemer Dikim',
-  'Kundu Terzi', 'Kundu Terzi Servisi', 'Güzeloba Terzi', 'Altıntaş Terzi',
-  'Liman Mahallesi Terzi', 'Meltem Terzi', 'Fener Mahallesi Terzi', 'Şirinyalı Terzi',
-  'Çağlayan Mahallesi Terzi', 'Kundu Otel Üniforma Dikimi', 'Kemer Otel Kıyafetleri',
-  'Belek Otel Personel Kıyafetleri', 'Lara Adresten Alım Terzi', 'Konyaaltı Mobil Terzi',
-  
-  // ── TÜRKÇE: FİYAT / SORU TİPİ ───────────────────────────────────────
-  'Paça Kısaltma Kaç Lira', 'Terzi Fiyat Listesi', 'Elbise Dikimi Fiyatı',
-  'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Dikim Fiyatları 2025',
-  'Antalya Terzi Ücretleri', 'Ucuz Tadilat Antalya', 'Hızlı Paça Kısaltma',
-  'Terzi Fiyatları 2026 Antalya', 'Paça Kısaltma Ücreti 2026', 'Fermuar Değişimi Kaç Para',
-  'Abiye Daraltma Fiyatları 2026', 'En Ucuz Terzi Atölyesi Antalya', 'Gelinlik Tadilatı Kaç Lira',
-  'Komple Beden Küçültme Fiyatı', 'Toplu Üniforma Dikim Fiyatları', 'Fason Dikim Fiyatı Al',
- 
-  // ── ENGLISH KEYWORDS ────────────────────────────────────────────────
-  'Tailor Antalya', 'Antalya Tailor', 'Best Tailor Antalya', 'Master Tailor Antalya',
-  'Tailor Near Me Antalya', 'Same Day Tailor Antalya', 'Express Tailor Antalya',
-  'English Speaking Tailor Antalya', 'Tailor Turkey', 'Sewing Antalya',
-  'Alterations Antalya', 'Clothing Alterations Antalya', 'Dress Alterations Antalya',
-  'Trouser Hemming Antalya', 'Hem Pants Antalya', 'Suit Alterations Antalya',
-  'Dress Repair Antalya', 'Clothing Repair Antalya', 'Zip Replacement Antalya',
-  'Sleeve Shortening Antalya', 'Taking In Dress Antalya', 'Garment Repair Antalya',
-  'Custom Tailoring Antalya', 'Custom Made Clothes Antalya', 'Bespoke Tailor Antalya',
-  'Made to Measure Antalya', 'Custom Suit Antalya', 'Custom Dress Antalya',
-  'Wedding Dress Alterations Antalya', 'Bridal Alterations Antalya',
-  'Evening Gown Alterations Antalya', 'Formal Wear Alterations Antalya',
-  'Dry Cleaning Antalya', 'Laundry Service Antalya', 'Ironing Service Antalya',
-  'Hotel Laundry Antalya', 'Hotel Dry Cleaning Antalya', 'Hotel Pickup Laundry Antalya',
-  'Pattern Making Antalya', 'Mass Production Antalya', 'Contract Manufacturing Antalya',
-  'Sample Sewing Antalya', 'Clothing Manufacturer Antalya',
-  'Mobile Tailor Antalya', 'Home Visit Tailor Antalya', 'Door to Door Tailor Antalya',
-  'Tailor Delivery Antalya', 'Tailor Hotel Delivery Antalya',
-  'Plus Size Tailor Antalya', 'Plus Size Alterations Antalya',
-  'Children Clothing Antalya', 'Baby Clothes Sewing Antalya',
-  'Curtain Sewing Antalya', 'Bed Linen Sewing Antalya',
-  'Tailor Lara', 'Tailor Konyaalti', 'Tailor Belek', 'Tailor Kemer',
-  'Tailor Alanya', 'Tailor Manavgat', 'Tailor Side',
-
-  // ── RUSSIAN KEYWORDS ─────────────────────────────────────────────────
-  'Портной Анталья', 'Портной в Анталье', 'Лучший портной Анталья',
-  'Пошив одежды Анталья', 'Ателье Анталья', 'Ателье в Анталье',
-  'Подгонка одежды Анталья', 'Подгонка брюк Анталья', 'Ушить брюки Анталья',
-  'Укоротить брюки Анталья', 'Ремонт одежды Анталья', 'Починить одежду Анталья',
-  'Замена молнии Анталья', 'Ушить платье Анталья', 'Подогнать костюм Анталья',
-  'Пошив на заказ Анталья', 'Индивидуальный пошив Анталья',
-  'Свадебное платье Анталья', 'Подгонка свадебного платья Анталья',
-  'Пошив детской одежды Анталья', 'Детская одежда на заказ Анталья',
-  'Одежда больших размеров Анталья', 'Пошив штор Анталья',
-  'Постельное бельё на заказ Анталья',
-  'Химчистка Анталья', 'Стирка Анталья', 'Глажка Анталья',
-  'Химчистка в отеле Анталья', 'Стирка с доставкой Анталья',
-  'Пошив по лекалам Анталья', 'Серийное производство Анталья',
-  'Выездной портной Анталья', 'Портной с выездом Анталья',
-  'Портной в отель Анталья', 'Доставка одежды Анталья',
-  'Портной Лара', 'Портной Белек', 'Портной Кемер', 'Портной Аланья',
-
-  // ── TÜRKÇE: FERMUAR & TAMİR DETAY ───────────────────────────────────
-  'Fermuar Değişimi Antalya', 'Fermuar Tamiri Antalya', 'Kot Fermuarı Değişimi',
-  'Pantolon Fermuarı Antalya', 'Mont Fermuarı Değişimi Antalya', 'Ceket Fermuarı Tamiri',
-  'Elbise Fermuarı Değişimi', 'Sweatshirt Fermuarı Değişimi', 'Çanta Fermuarı Tamiri',
-  'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya', 'Astar Değişimi Antalya',
-  'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Cep Tamiri Antalya',
-  'Kol Kısaltma Antalya', 'Etek Tamiri Antalya', 'Etek Kısaltma Antalya',
-  'Abiye Tamiri Antalya', 'Abiye Tadilatı Antalya', 'Her Türlü Kıyafet Tamiri',
-
   // ── TÜRKÇE: SWEATSHIRT / EŞOFMAN ────────────────────────────────────
   'Sweatshirt Dikimi Antalya', 'Eşofman Dikimi Antalya', 'Eşofman Takımı Dikimi',
   'Kapüşonlu Sweatshirt Dikimi', 'Baskılı Sweatshirt Dikimi', 'Nakışlı Sweatshirt',
-  'Sweatshirt Tadilatı', 'Eşofman Tadilatı', 'Spor Kıyafet Dikimi Antalya',
-  'Toplu Sweatshirt Üretimi', 'Seri Sweatshirt Dikimi',
+  'Sweatshirt Tadilatı', 'Eşofman Tadilatı', 'Toplu Sweatshirt Üretimi', 'Seri Sweatshirt Dikimi',
 
   // ── TÜRKÇE: NAKİŞ & BASKI ───────────────────────────────────────────
   'Nakış Antalya', 'Kıyafete Nakış', 'Logo Nakışı Antalya', 'İsim Nakışı',
@@ -700,10 +624,16 @@ const SEO_KEYWORDS = [
   'Dijital Baskı Antalya', 'Transfer Baskı Antalya', 'Serigrafi Antalya',
   'Tekstil Baskı Antalya', 'Tişört Baskı Antalya',
 
-  // ── TÜRKÇE: ÜNİFORMA GENEL ──────────────────────────────────────────
+  // ── TÜRKÇE: ÜNİFORMA GENEL VE DETAY ──────────────────────────────────
   'Üniforma Dikimi Antalya', 'Üniforma Üretimi Antalya', 'Üniforma Tasarımı Antalya',
   'Personel Üniforma Antalya', 'İş Üniforma Antalya', 'Seri Üniforma Üretimi',
   'Toplu Üniforma Siparişi', 'Özel Tasarım Üniforma', 'Üniforma Tadilat Antalya',
+  'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya', 'Kostüm Dikimi Antalya', 
+  'Tiyatro Kostümü Antalya', 'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi',
+  'Barista Önlüğü Tasarımı Antalya', 'Medikal Scrubs Dikimi Antalya', 'Aşçı Ceketi İsim Nakışı',
+  'Garson Yeleği Dikimi Antalya', 'Otel Temizlik Personeli Kıyafeti', 'Güvenlik Firması Üniforması',
+  'Spa Masöz Kıyafeti Dikimi', 'Otel Resepsiyon Takım Elbise', 'Restoran Personel Kıyafeti Toptan',
+  'Logolu İş Kıyafetleri Baskısı', 'Fason Üniforma İmalatı Antalya',
 
   // ── TÜRKÇE: OTEL / TURİZM ÜNİFORMASI ───────────────────────────────
   'Otel Üniforma Antalya', 'Otel Personel Üniforma', 'Otel Üniforma Dikimi',
@@ -732,6 +662,72 @@ const SEO_KEYWORDS = [
   'Kesim Dikim Antalya', 'Kesim Dikim Ütü Paket', 'Dikim Ütü Paket Hizmet',
   'Kalıp Tasarım Dikim', 'Model Tasarımı Antalya', 'Kesim Antalya',
 
+  // ── TÜRKÇE: İLÇELER / LOKASYONLAR ────────────────────────────────────
+  'Lara Terzi', 'Konyaaltı Terzi', 'Belek Terzi', 'Kemer Terzi',
+  'Alanya Terzi', 'Manavgat Terzi', 'Side Terzi', 'Kepez Terzi',
+  'Muratpaşa Terzi', 'Aksu Terzi', 'Döşemealtı Terzi', 'Serik Terzi',
+  'Kaleiçi Terzi', 'Hurma Terzi', 'Uncalı Terzi', 'Varsak Terzi',
+  'Lara Dikim', 'Konyaaltı Dikim', 'Belek Dikim', 'Kemer Dikim',
+  'Kundu Terzi', 'Kundu Terzi Servisi', 'Güzeloba Terzi', 'Altıntaş Terzi',
+  'Liman Mahallesi Terzi', 'Meltem Terzi', 'Fener Mahallesi Terzi', 'Şirinyalı Terzi',
+  'Çağlayan Mahallesi Terzi', 'Kundu Otel Üniforma Dikimi', 'Kemer Otel Kıяafetleri',
+  'Belek Otel Personel Kıyafetleri', 'Lara Adresten Alım Terzi', 'Konyaaltı Mobil Terzi',
+  'Yakınımda Terzi', 'En Yakın Terzi Antalya', 'Terzi Nerede Antalya',
+  'Eve Gelen Terzi Antalya', 'Eve Gelen Terzi', 'Otele Gelen Terzi Antalya',
+  'Adrese Teslim Terzi', 'Antalya Terzi Servisi', 'Terzi Çağır Antalya',
+  'Terzi Adresi Antalya', 'Antalya Merkez Terzi', 'Lara Terzi Servisi',
+  'Konyaaltı Eve Gelen Terzi', 'Belek Terzi Servisi', 'Kemer Eve Gelen Terzi',
+
+  // ── TÜRKÇE: FİYAT / 2026 GÜNCEL SORU TİPLERİ ──────────────────────────
+  'Paça Kısaltma Kaç Lira', 'Terzi Fiyat Listesi', 'Elbise Dikimi Fiyatı',
+  'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Terzi Ücretleri Antalya', 
+  'Ucuz Tadilat Antalya', 'Hızlı Paça Kısaltma', 'Fermuar Değişimi Kaç Para',
+  'En Ucuz Terzi Atölyesi Antalya', 'Gelinlik Tadilatı Kaç Lira',
+  'Komple Beden Küçültme Fiyatı', 'Toplu Üniforma Dikim Fiyatları', 'Fason Dikim Fiyatı Al',
+  'Paça Kısaltma Fiyatı 2026', 'Terzi Fiyatları 2026', 'Terzi Fiyatları 2026 Antalya', 
+  'Paça Kısaltma Ücreti 2026', 'Abiye Daraltma Fiyatları 2026', 'Mont Fermuarı Kaç Lira', 
+  'Kot Fermuarı Kaç Lira', 'Ceket Daraltma Fiyatı', 'Elbise Tadilat Fiyatı', 
+  'Pantolon Daraltma Kaç Lira', 'Tadilat Fiyatı 2026', 'Dikim Fiyatları 2026', 
+  'Terzi Ücret Tarifesi 2026', 'Kuru Temizleme Fiyatı Antalya', 'Etek Kısaltma Kaç Lira',
+  'Abiye Tamiri Fiyatı', 'Gelinlik Tadilatı Fiyatı', 'Paça Kısaltma Nasıl Yapılır', 
+  'Fermuar Nasıl Değiştirilir', 'Antalya\'da Terzi Nasıl Bulunur', 'Elbise Nasıl Daraltılır',
+  'Terzi Randevusu Antalya', 'Aynı Gün Terzi Antalya',
+
+  // ── TÜRKÇE: SEZONSAL ─────────────────────────────────────────────────
+  'Mezuniyet Abiye Tamiri', 'Mezuniyet Abiye Kısaltma', 'Mezuniyet Kıyafeti Tadilat',
+  'Düğün Sezonu Gelinlik Tadilat', 'Gelinlik Kısaltma', 'Gelinlik Tadilatı Antalya',
+  'Kış Sezonu Mont Fermuarı', 'Mont Fermuarı Değişimi', 'Deri Mont Fermuarı',
+  'Yaz Sezonu Elbise Daraltma', 'Ramazan Kıyafeti Dikimi', 'Bayramlık Dikim',
+  'Düğün Kıyafeti Tadilat', 'Nişan Elbisesi Tadilat',
+ 
+  // ── ENGLISH KEYWORDS ────────────────────────────────────────────────
+  'Tailor Antalya', 'Antalya Tailor', 'Best Tailor Antalya', 'Master Tailor Antalya',
+  'Tailor Near Me Antalya', 'Same Day Tailor Antalya', 'Express Tailor Antalya',
+  'English Speaking Tailor Antalya', 'Tailor Turkey', 'Sewing Antalya',
+  'Alterations Antalya', 'Clothing Alterations Antalya', 'Dress Alterations Antalya',
+  'Trouser Hemming Antalya', 'Hem Pants Antalya', 'Suit Alterations Antalya',
+  'Dress Repair Antalya', 'Clothing Repair Antalya', 'Zip Replacement Antalya',
+  'Sleeve Shortening Antalya', 'Taking In Dress Antalya', 'Garment Repair Antalya',
+  'Custom Tailoring Antalya', 'Custom Made Clothes Antalya', 'Bespoke Tailor Antalya',
+  'Made to Measure Antalya', 'Custom Suit Antalya', 'Custom Dress Antalya',
+  'Wedding Dress Alterations Antalya', 'Bridal Alterations Antalya',
+  'Evening Gown Alterations Antalya', 'Formal Wear Alterations Antalya',
+  'Dry Cleaning Antalya', 'Laundry Service Antalya', 'Ironing Service Antalya',
+  'Hotel Laundry Antalya', 'Hotel Dry Cleaning Antalya', 'Hotel Pickup Laundry Antalya',
+  'Pattern Making Antalya', 'Mass Production Antalya', 'Contract Manufacturing Antalya',
+  'Sample Sewing Antalya', 'Clothing Manufacturer Antalya',
+  'Mobile Tailor Antalya', 'Home Visit Tailor Antalya', 'Door to Door Tailor Antalya',
+  'Tailor Delivery Antalya', 'Tailor Hotel Delivery Antalya',
+  'Plus Size Tailor Antalya', 'Plus Size Alterations Antalya',
+  'Children Clothing Antalya', 'Baby Clothes Sewing Antalya',
+  'Curtain Sewing Antalya', 'Bed Linen Sewing Antalya',
+  'Tailor Lara', 'Tailor Konyaalti', 'Tailor Belek', 'Tailor Kemer',
+  'Tailor Alanya', 'Tailor Manavgat', 'Tailor Side', 'Nearest Tailor Antalya', 
+  'Tailor Close By Antalya', 'Hotel Tailor Service Antalya', 'Trouser Hemming Cost Antalya', 
+  'Alteration Prices Antalya', 'Zip Replacement Cost Antalya', 'Tailor Price List Antalya',
+  'Same Day Alterations Antalya', 'Graduation Dress Alteration Antalya', 
+  'Wedding Season Alterations Antalya', 'Evening Gown Shortening Antalya', 'Prom Dress Alteration Antalya',
+
   // ── ENGLISH: UNIFORM ────────────────────────────────────────────────
   'Uniform Production Antalya', 'Uniform Design Antalya', 'Hotel Uniform Antalya',
   'Reception Uniform Antalya', 'Chef Uniform Antalya', 'Waiter Uniform Antalya',
@@ -740,17 +736,37 @@ const SEO_KEYWORDS = [
   'School Uniform Antalya', 'Sports Uniform Antalya', 'Custom Uniform Antalya',
   'Bulk Uniform Order Antalya', 'Embroidery Antalya', 'Logo Embroidery Antalya',
   'Sweatshirt Sewing Antalya', 'Tracksuit Production Antalya',
-  'Zip Repair Antalya', 'Trouser Repair Antalya', 'Dress Repair Antalya',
-  'Skirt Repair Antalya', 'Evening Gown Repair Antalya',
+  'Zip Repair Antalya', 'Trouser Repair Antalya', 'Skirt Repair Antalya', 'Evening Gown Repair Antalya',
 
-  // ── RUSSIAN: UNIFORM & REPAIR ───────────────────────────────────────
+  // ── RUSSIAN KEYWORDS (CYRILLIC & LATIN) ──────────────────────────────
+  'Портной Анталья', 'Портной в Анталье', 'Лучший портной Анталья',
+  'Пошив одежды Анталья', 'Ателье Анталья', 'Ателье в Анталье',
+  'Подгонка одежды Анталья', 'Подгонка брюк Анталья', 'Ушить брюки Анталья',
+  'Укоротить брюки Анталья', 'Ремонт одежды Анталья', 'Починить одежду Анталья',
+  'Замена молнии Анталья', 'Ушить платье Анталья', 'Подогнать костюм Анталья',
+  'Пошив на заказ Анталья', 'Индивидуальный пошив Анталья',
+  'Свадебное платье Анталья', 'Подгонка свадебного платья Анталья',
+  'Пошив детской одежды Анталья', 'Детская одежда на заказ Анталья',
+  'Одежда больших размеров Анталья', 'Пошив штор Анталья',
+  'Постельное бельё на заказ Анталья',
+  'Химчистка Анталья', 'Стирка Анталья', 'Глажка Анталья',
+  'Химчистка в отеле Анталья', 'Стирка с доставкой Анталья',
+  'Пошив по лекалам Анталья', 'Серийное производство Анталья',
+  'Выездной портной Анталья', 'Портной с выездом Анталья',
+  'Портной в отель Анталья', 'Доставка одежды Анталья',
+  'Портной Лара', 'Портной Белек', 'Портной Кемер', 'Портной Аланья', 'Портной Коньяалты',
+  'Портной рядом Анталья', 'Портной с доставкой Анталья', 'Вызвать портного Анталья',
+  'Цены на подгонку Анталья', 'Стоимость замены молнии Анталья', 'Срочный ремонт одежды Анталья', 
+  'Ремонт в тот же день Анталья', 'Подгонка выпускного платья Анталья', 'Подгонка свадебного платья Анталья',
+  'Poshiv odezhdy Antalya', 'Atelie Antalya', 'Remont odezhdy lara', 'Remont odezhdy konyaalti',
+
+  // ── RUSSIAN: UNIFORM ─────────────────────────────────────────────────
   'Пошив формы Анталья', 'Форма для персонала Анталья', 'Гостиничная форма Анталья',
   'Форма для ресторана Анталья', 'Медицинская форма Анталья', 'Форма для повара Анталья',
   'Вышивка на форме Анталья', 'Логотип на одежде Анталья',
-  'Пошив толстовок Анталья', 'Спортивная форма Анталья',
-  'Замена молнии Анталья', 'Ремонт платья Анталья', 'Ремонт юбки Анталья',
+  'Пошив толстовок Анталья', 'Спортивная форма Анталья', 'Ремонт платья Анталья', 'Ремонт юбки Анталья',
 
-  // ── GERMAN: UNIFORM & REPAIR ────────────────────────────────────────
+  // ── GERMAN KEYWORDS ─────────────────────────────────────────────────
   'Uniformproduktion Antalya', 'Hoteluniform Antalya', 'Kochuniform Antalya',
   'Restaurantuniform Antalya', 'Schuluniform Antalya', 'Sportuniform Antalya',
   'Stickerei Antalya', 'Logo Stickerei Antalya', 'Sweatshirt nähen Antalya',
@@ -764,53 +780,10 @@ const SEO_KEYWORDS = [
   'Reinigung Antalya', 'Chemische Reinigung Antalya', 'Wäsche Antalya',
   'Bügelservice Antalya', 'Hotel Reinigung Antalya', 'Hotel Wäscheservice Antalya',
   'Mobiler Schneider Antalya', 'Schneider mit Hausbesuch Antalya',
-  'Schneider Lara', 'Schneider Belek', 'Schneider Kemer',
-
-  // ── TÜRKÇE: FİYAT & "KAÇ LİRA" SORU TİPİ ───────────────────────────
-  'Paça Kısaltma Kaç Lira', 'Paça Kısaltma Fiyatı 2025', 'Terzi Fiyatları 2025',
-  'Fermuar Değişimi Kaç Lira', 'Mont Fermuarı Kaç Lira', 'Kot Fermuarı Kaç Lira',
-  'Ceket Daraltma Fiyatı', 'Elbise Tadilat Fiyatı', 'Pantolon Daraltma Kaç Lira',
-  'Tadilat Fiyatı 2025', 'Dikim Fiyatları 2025', 'Terzi Ücret Tarifesi 2025',
-  'Kuru Temizleme Fiyatı Antalya', 'Etek Kısaltma Kaç Lira',
-  'Abiye Tamiri Fiyatı', 'Gelinlik Tadilatı Fiyatı',
-
-  // ── TÜRKÇE: KONUM & "YAKINIMDAK" TİPİ ──────────────────────────────
-  'Yakınımda Terzi', 'En Yakın Terzi Antalya', 'Terzi Nerede Antalya',
-  'Eve Gelen Terzi Antalya', 'Eve Gelen Terzi', 'Otele Gelen Terzi Antalya',
-  'Adrese Teslim Terzi', 'Antalya Terzi Servisi', 'Terzi Çağır Antalya',
-  'Terzi Adresi Antalya', 'Antalya Merkez Terzi', 'Lara Terzi Servisi',
-  'Konyaaltı Eve Gelen Terzi', 'Belek Terzi Servisi', 'Kemer Eve Gelen Terzi',
-
-  // ── TÜRKÇE: SEZONSAL ─────────────────────────────────────────────────
-  'Mezuniyet Abiye Tamiri', 'Mezuniyet Abiye Kısaltma', 'Mezuniyet Kıyafeti Tadilat',
-  'Düğün Sezonu Gelinlik Tadilat', 'Gelinlik Kısaltma', 'Gelinlik Tadilatı Antalya',
-  'Kış Sezonu Mont Fermuarı', 'Mont Fermuarı Değişimi', 'Deri Mont Fermuarı',
-  'Yaz Sezonu Elbise Daraltma', 'Ramazan Kıyafeti Dikimi', 'Bayramlık Dikim',
-  'Düğün Kıyafeti Tadilat', 'Nişan Elbisesi Tadilat',
-
-  // ── TÜRKÇE: SORU TİPİ ("NASIL" / "NEREDE") ──────────────────────────
-  'Paça Kısaltma Nasıl Yapılır', 'Fermuar Nasıl Değiştirilir',
-  'Antalya\'da Terzi Nasıl Bulunur', 'Elbise Nasıl Daraltılır',
-  'Terzi Randevusu Antalya', 'Aynı Gün Terzi Antalya',
-
-  // ── ENGLISH: PRICE & LOCATION ────────────────────────────────────────
-  'Tailor Near Me Antalya', 'Nearest Tailor Antalya', 'Tailor Close By Antalya',
-  'Home Visit Tailor Antalya', 'Hotel Tailor Service Antalya',
-  'Trouser Hemming Cost Antalya', 'Alteration Prices Antalya',
-  'Zip Replacement Cost Antalya', 'Tailor Price List Antalya',
-  'Same Day Alterations Antalya', 'Express Tailor Antalya',
-  'Graduation Dress Alteration Antalya', 'Wedding Season Alterations Antalya',
-  'Evening Gown Shortening Antalya', 'Prom Dress Alteration Antalya',
-
-  // ── RUSSIAN: PRICE & LOCATION ────────────────────────────────────────
-  'Портной рядом Анталья', 'Портной с доставкой Анталья', 'Вызвать портного Анталья',
-  'Цены на подгонку Анталья', 'Стоимость замены молнии Анталья',
-  'Срочный ремонт одежды Анталья', 'Ремонт в тот же день Анталья',
-  'Подгонка выпускного платья Анталья', 'Подгонка свадебного сезона',
+  'Schneider Lara', 'Schneider Belek', 'Schneider Kemer', 'Schneider Konyaalti',
+  'Schneider Preise Antalya', 'Hose kürzen Kosten Antalya', 'Schneider in der Nähe Antalya'
+]; сезона',
 ];
-
-// ═══════════════════════════════════════
-// COMPONENT
 // ═══════════════════════════════════════
 export default function TerziClient() {
   const [lang, setLang] = useState<Lang>('tr');
