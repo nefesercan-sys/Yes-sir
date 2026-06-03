@@ -69,7 +69,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.swaphubs.com" },
   verification: {
     google: "BURAYA_GOOGLE_SEARCH_CONSOLE_KODUNU_YAZ",
-    yandex: "2422561e968edf9f",
+    yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
   },
   manifest: "/manifest.json",
@@ -117,6 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
+        <meta name="yandex-verification" content="4c73ee1911a4b197" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className={jakarta.className}>
