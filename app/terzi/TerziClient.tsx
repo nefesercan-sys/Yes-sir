@@ -1234,7 +1234,7 @@ export default function TerziClient() {
             </p>
             {[
               { label: '✂ Tadilat & Tamir', words: ['Paça Kısaltma','Pantolon Kısaltma','Paça Dikimi','Etek Kısaltma','Kol Kısaltma','Bel Alma','Daraltma','Beden Küçültme','Elbise Daraltma','Fermuar Değişimi','Yırtık Onarımı','Dikiş Tamiri','Düğme Dikimi','Astar Değişimi','Cep Tamiri','Yaka Değişimi'] },
-              { label: '👔 Erkek & Bayan Terzi', words: ['Erkek Terzi Antalya','Bayan Terzi Antalya','Takım Elbise Dikimi',
+              { label: '👔 Erkek & Bayan Terzi', words: ['Erkek Terzi Antalya','Bayan Terzi Antalya','Takım Elbise Dikimi','Ceket Dikimi','Gömlek Dikimi','Blazer Dikimi','Smoking Dikimi','Elbise Dikimi','Bluz Dikimi','Etek Dikimi','Tulum Dikimi','Abiye Dikimi','Nişan Elbisesi','Kına Kıyafeti'] },
               { label: '👶 Çocuk · Bebek · Büyük Beden', words: ['Çocuk Kıyafeti Dikimi','Bebek Elbisesi Dikimi','Çocuk Kostüm','Anne Grubu Dikimi','Okul Kıyafeti Dikimi','Büyük Beden Terzi','Büyük Beden Dikim','Beden Seti Çıkarma','Özel Kalıp Çıkarma','Her Bedene Dikim'] },
               { label: '💍 Gelinlik & Özel Gün', words: ['Gelinlik Dikimi Antalya','Gelinlik Tadilat','Damatlık Dikimi','Abiye Antalya','Gece Elbisesi','Düğün Kıyafeti','Nişan Elbisesi Dikimi'] },
               { label: '🏠 Ev Tekstili', words: ['Nevresim Dikimi','Nevresim Takımı Dikimi','Perde Dikimi','Stor Perde','Tül Dikimi','Kırlent Dikimi','Yatak Örtüsü','Masa Örtüsü','Ev Tekstili Dikimi'] },
@@ -1284,4 +1284,4 @@ export default function TerziClient() {
       </div>
     </>
   );
-}                                          
+}
