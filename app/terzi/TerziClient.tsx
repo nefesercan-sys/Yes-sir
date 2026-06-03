@@ -782,7 +782,6 @@ const SEO_KEYWORDS = [
   'Mobiler Schneider Antalya', 'Schneider mit Hausbesuch Antalya',
   'Schneider Lara', 'Schneider Belek', 'Schneider Kemer', 'Schneider Konyaalti',
   'Schneider Preise Antalya', 'Hose kürzen Kosten Antalya', 'Schneider in der Nähe Antalya'
-]; сезона',
 ];
 // ═══════════════════════════════════════
 export default function TerziClient() {
