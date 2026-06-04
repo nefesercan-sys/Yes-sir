@@ -2,215 +2,165 @@
 
 import React, { useState } from 'react';
 
-const WhatsAppIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
-  <svg className={`fill-current ${className}`} viewBox="0 0 24 24" aria-hidden="true">
+const WA_NUMBER = "905000000000";
+const waLink = (msg: string): string =>
+  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+// SVG with explicit width/height — never relies on Tailwind
+const WaIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ display: 'block', flexShrink: 0 }}>
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 );
 
-const WA_NUMBER = "905000000000";
-const waLink = (msg: string): string => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+const S = {
+  // colors
+  emerald: '#059669',
+  emeraldDark: '#047857',
+  emeraldLight: '#d1fae5',
+  emeraldBg: '#ecfdf5',
+  wa: '#25D366',
+  waDark: '#1fae53',
+  slate900: '#0f172a',
+  slate800: '#1e293b',
+  slate600: '#475569',
+  slate500: '#64748b',
+  slate400: '#94a3b8',
+  slate200: '#e2e8f0',
+  slate100: '#f1f5f9',
+  slate50: '#f8fafc',
+  white: '#ffffff',
+  amber100: '#fef3c7',
+  amber800: '#92400e',
+};
 
 export default function OnlineTerziClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
-
   const faqs = [
-    {
-      q: "Siparişimi vermek için mağazaya gitmem gerekiyor mu?",
-      a: "Hayır! Tüm süreç online yürür. Ölçülerinizi alır, modelinizi seçer ve WhatsApp üzerinden iletirsiniz. Ürününüz kapınıza teslim edilir."
-    },
-    {
-      q: "Ölçülerim tam oturmadıysa ne yapabilirim?",
-      a: "Tam uyum garantimiz kapsamında ücretsiz revizyon imkanı sunuyoruz. Ürünü iade eder, revize edilmiş halini teslim alırsınız."
-    },
-    {
-      q: "Teslimat süresi ne kadar?",
-      a: "Sipariş onayından sonra ortalama 7-10 iş günü içinde ürününüz hazır olur. Kargo süresiyle birlikte toplam 10-14 iş günü içinde elinizde olur."
-    },
-    {
-      q: "Hangi kumaşlar kullanılıyor?",
-      a: "Yalnızca %100 organik müslin ve keten kumaş kullanıyoruz. Tüm boyalar OEKO-TEX sertifikalı, kimyasal içermiyor."
-    }
+    { q: "Siparişimi vermek için mağazaya gitmem gerekiyor mu?", a: "Hayır! Tüm süreç online yürür. Ölçülerinizi alır, modelinizi seçer ve WhatsApp üzerinden iletirsiniz. Ürününüz kapınıza teslim edilir." },
+    { q: "Ölçülerim tam oturmadıysa ne yapabilirim?", a: "Tam uyum garantimiz kapsamında ücretsiz revizyon imkânı sunuyoruz. Ürünü iade eder, revize edilmiş halini teslim alırsınız." },
+    { q: "Teslimat süresi ne kadar?", a: "Sipariş onayından sonra ortalama 7-10 iş günü içinde ürününüz hazır olur. Kargo süresiyle birlikte toplam 10-14 iş günü içinde elinizde olur." },
+    { q: "Hangi kumaşlar kullanılıyor?", a: "Yalnızca %100 organik müslin ve keten kumaş kullanıyoruz. Tüm boyalar OEKO-TEX sertifikalı, kimyasal içermiyor." },
+  ];
+
+  const collections = [
+    { title: "Kadın Modelleri", tag: "Özel Dikim", tagBg: S.emeraldLight, tagColor: S.emeraldDark, desc: "Rahat kesim müslin elbiseler, keten palazzo pantolonlar ve yazlık bluzlar.", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=600&auto=format&fit=crop", msg: "Kadın müslin/keten modelleri hakkında bilgi almak istiyorum." },
+    { title: "Erkek Modelleri", tag: null, tagBg: '', tagColor: '', desc: "Terletmeyen %100 keten gömlekler, rahat kesim şortlar ve tam bedeninize oturan ceketler.", img: "https://images.unsplash.com/photo-1596755094514-f87e32f85e23?q=80&w=600&auto=format&fit=crop", msg: "Erkek keten modelleri hakkında bilgi almak istiyorum." },
+    { title: "Bebek & Çocuk", tag: "Antialerjik", tagBg: S.amber100, tagColor: S.amber800, desc: "Hassas ciltler için kimyasal içermeyen, organik boyalı yumuşacık müslin tulum ve takımlar.", img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop", msg: "Bebek müslin kıyafetleri hakkında bilgi almak istiyorum." },
+    { title: "Anne – Bebek", tag: null, tagBg: '', tagColor: '', desc: "Özel günler ve dış çekimler için birebir aynı kumaştan uyumlu set tasarımları.", img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=600&auto=format&fit=crop", msg: "Anne-bebek kombinleri hakkında bilgi almak istiyorum." },
+  ];
+
+  const corporate = [
+    { icon: "🏨", title: "Otel & Restoran", desc: "Şef ceketleri, barista önlükleri, resepsiyon takımları. Kurumsal kimliğinize uyumlu toptan üretim.", msg: "Otel/Restoran kurumsal üniforma fason üretimi için fiyat almak istiyorum." },
+    { icon: "🩺", title: "Medikal Scrubs", desc: "Hastane ve klinikler için terletmeyen, konforlu doktor/hemşire formaları. Alpaka ve likralı seçenekler.", msg: "Medikal scrubs üretimi için toptan fiyat almak istiyorum." },
+    { icon: "✂️", title: "Markalara Fason", desc: "Kendi markanız için modelistlik, kesim, dikim, ütü ve etiketleme süreçleri butik kalitesinde.", msg: "Markam için fason üretim detayları görüşmek istiyorum." },
   ];
 
   return (
-    <div className="min-h-screen font-sans text-slate-800 bg-white antialiased">
+    <div style={{ minHeight: '100vh', fontFamily: 'Georgia, serif', color: S.slate800, backgroundColor: S.white, margin: 0, padding: 0 }}>
 
-      {/* ── TRUST BAR ── */}
-      <div className="bg-emerald-700 text-white text-xs font-semibold py-2.5 px-4 text-center tracking-wide">
+      {/* TRUST BAR */}
+      <div style={{ backgroundColor: S.emeraldDark, color: S.white, fontSize: 12, fontWeight: 600, padding: '10px 16px', textAlign: 'center', letterSpacing: '0.03em' }}>
         ✨ %100 Organik Kumaş Garantisi &nbsp;|&nbsp; Antalya'dan Tüm Türkiye'ye Hızlı Teslimat &nbsp;|&nbsp; Ücretsiz Revizyon
       </div>
 
-      {/* ── NAVBAR ── */}
-      <header className="sticky top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-20">
-          <a href="https://swaphubs.com/online-terzi-hizmeti" className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-slate-900 flex-shrink-0">
-            SwapHubs <span className="font-light text-emerald-600">Terzi</span>
+      {/* NAVBAR */}
+      <header style={{ position: 'sticky', top: 0, backgroundColor: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: `1px solid ${S.slate200}`, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 64 }}>
+          <a href="https://swaphubs.com/online-terzi-hizmeti" style={{ fontFamily: 'Georgia, serif', fontSize: 22, fontWeight: 700, color: S.slate900, textDecoration: 'none', flexShrink: 0 }}>
+            SwapHubs <span style={{ fontWeight: 300, color: S.emerald }}>Terzi</span>
           </a>
-
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-            <a href="#koleksiyonlar" className="hover:text-emerald-600 transition">Modellerimiz</a>
-            <a href="#olcu-rehberi" className="hover:text-emerald-600 transition">Ölçü Rehberi</a>
-            <a href="#kurumsal" className="hover:text-emerald-600 transition">Kurumsal</a>
-            <a href="#sss" className="hover:text-emerald-600 transition">SSS</a>
-            <a
-              href={waLink("Merhaba, e-terzi hizmetinizden yararlanmak istiyorum.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-full font-bold transition flex items-center gap-2 shadow-md"
-            >
-              <WhatsAppIcon className="w-4 h-4" />
-              Siparişe Başla
-            </a>
-          </nav>
-
-          {/* Mobile CTA */}
           <a
             href={waLink("Merhaba, sipariş vermek istiyorum.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="md:hidden bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-full font-bold text-sm transition flex items-center gap-1.5"
+            style={{ backgroundColor: S.emerald, color: S.white, padding: '10px 18px', borderRadius: 999, fontWeight: 700, fontSize: 14, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px rgba(5,150,105,0.3)' }}
           >
-            <WhatsAppIcon className="w-4 h-4" />
-            Sipariş
+            <WaIcon size={18} />
+            Siparişe Başla
           </a>
         </div>
       </header>
 
-      {/* ── HERO ── */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-emerald-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28 flex flex-col lg:flex-row items-center gap-12">
-
-          {/* Text */}
-          <div className="lg:w-1/2 text-center lg:text-left z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-xs mb-6 border border-emerald-200">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
+      {/* HERO */}
+      <section style={{ background: `linear-gradient(135deg, ${S.slate50} 0%, ${S.emeraldBg} 100%)`, padding: '64px 16px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 48 }}>
+          <div style={{ flex: '1 1 320px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 999, backgroundColor: S.emeraldLight, color: S.emeraldDark, fontWeight: 700, fontSize: 12, marginBottom: 20, border: `1px solid ${S.emerald}33` }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: S.emerald, display: 'inline-block' }}></span>
               Yeni Nesil Dijital Terzi
             </div>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 5vw, 52px)', fontWeight: 900, color: S.slate900, margin: '0 0 20px', lineHeight: 1.2 }}>
               Tam Ölçünüze Göre{' '}
-              <span className="text-emerald-600">Kusursuz Tasarımlar</span>
+              <span style={{ color: S.emerald }}>Kusursuz Tasarımlar</span>
             </h1>
-            <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <p style={{ fontSize: 16, color: S.slate600, marginBottom: 32, lineHeight: 1.7, maxWidth: 520 }}>
               Evinizin konforundan ayrılmadan, kendi ölçülerinize birebir uyan organik müslin ve keten kıyafetlere sahip olun. İnceleyin, ölçünüzü alın ve WhatsApp'tan siparişinizi tamamlayın.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <a href="#koleksiyonlar" className="bg-slate-900 hover:bg-slate-800 text-white px-7 py-3.5 rounded-full font-bold transition shadow-lg text-center">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 32 }}>
+              <a href="#koleksiyonlar" style={{ backgroundColor: S.slate900, color: S.white, padding: '14px 28px', borderRadius: 999, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'inline-block' }}>
                 Koleksiyonu Keşfet
               </a>
-              <a href="#olcu-rehberi" className="bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 px-7 py-3.5 rounded-full font-bold transition text-center">
+              <a href="#olcu-rehberi" style={{ backgroundColor: S.white, color: S.slate900, padding: '14px 28px', borderRadius: 999, fontWeight: 700, fontSize: 15, textDecoration: 'none', border: `2px solid ${S.slate200}`, display: 'inline-block' }}>
                 📏 Ölçü Rehberi
               </a>
             </div>
-
-            {/* Social proof */}
-            <div className="mt-10 flex flex-wrap gap-6 justify-center lg:justify-start text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-500 font-bold text-lg">✓</span>
-                <span>Tam Uyum Garantisi</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-500 font-bold text-lg">✓</span>
-                <span>%100 Organik Kumaş</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-500 font-bold text-lg">✓</span>
-                <span>Ücretsiz Revizyon</span>
-              </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, fontSize: 14, color: S.slate500 }}>
+              {['Tam Uyum Garantisi', '%100 Organik Kumaş', 'Ücretsiz Revizyon'].map(t => (
+                <span key={t} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ color: S.emerald, fontWeight: 700, fontSize: 16 }}>✓</span> {t}
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* Hero Image – gradient fallback if image fails */}
-          <div className="lg:w-1/2 w-full">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-80 md:h-[420px] lg:h-[500px] bg-gradient-to-br from-emerald-100 to-slate-200">
+          <div style={{ flex: '1 1 300px', position: 'relative' }}>
+            <div style={{ borderRadius: 24, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', height: 420, background: `linear-gradient(135deg, ${S.emeraldLight}, ${S.slate200})` }}>
               <img
                 src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1000&auto=format&fit=crop"
-                alt="Tekstil atölyesi ve kumaşlar"
-                className="w-full h-full object-cover"
+                alt="Tekstil atölyesi"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
-              {/* Overlay badge */}
-              <div className="absolute bottom-5 left-5 bg-white/95 backdrop-blur px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-base flex-shrink-0">✓</div>
-                <div>
-                  <p className="font-bold text-slate-900 text-sm">Tam Uyum Garantisi</p>
-                  <p className="text-xs text-slate-500">Ücretsiz revizyon imkânı</p>
-                </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: -16, left: -8, backgroundColor: S.white, padding: '12px 16px', borderRadius: 16, boxShadow: '0 8px 24px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'center', gap: 12, border: `1px solid ${S.slate100}` }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', backgroundColor: S.emeraldLight, display: 'flex', alignItems: 'center', justifyContent: 'center', color: S.emerald, fontWeight: 700, fontSize: 16, flexShrink: 0 }}>✓</div>
+              <div>
+                <div style={{ fontWeight: 700, color: S.slate900, fontSize: 13 }}>Tam Uyum Garantisi</div>
+                <div style={{ fontSize: 11, color: S.slate500 }}>Ücretsiz revizyon imkânı</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── KOLEKSİYONLAR ── */}
-      <section id="koleksiyonlar" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">Müslin & Keten Koleksiyonu</h2>
-            <p className="text-slate-500 max-w-xl mx-auto">Cildinize nefes aldıran, tamamen doğal kumaşlardan size özel dikilen tasarımlar.</p>
+      {/* KOLEKSİYONLAR */}
+      <section id="koleksiyonlar" style={{ padding: '80px 16px', backgroundColor: S.slate50 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 900, color: S.slate900, margin: '0 0 12px' }}>Müslin & Keten Koleksiyonu</h2>
+            <p style={{ color: S.slate500, maxWidth: 480, margin: '0 auto', fontSize: 15 }}>Cildinize nefes aldıran, tamamen doğal kumaşlardan size özel dikilen tasarımlar.</p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Kadın Modelleri",
-                tag: "Özel Dikim",
-                tagColor: "bg-emerald-100 text-emerald-700",
-                desc: "Rahat kesim müslin elbiseler, keten palazzo pantolonlar ve yazlık bluzlar.",
-                img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=600&auto=format&fit=crop",
-                msg: "Kadın müslin/keten modelleri hakkında bilgi almak istiyorum."
-              },
-              {
-                title: "Erkek Modelleri",
-                tag: null,
-                desc: "Terletmeyen %100 keten gömlekler, rahat kesim şortlar ve tam bedeninize oturan ceketler.",
-                img: "https://images.unsplash.com/photo-1596755094514-f87e32f85e23?q=80&w=600&auto=format&fit=crop",
-                msg: "Erkek keten modelleri hakkında bilgi almak istiyorum."
-              },
-              {
-                title: "Bebek & Çocuk",
-                tag: "Antialerjik",
-                tagColor: "bg-amber-100 text-amber-700",
-                desc: "Hassas ciltler için kimyasal içermeyen, organik boyalı yumuşacık müslin tulum ve takımlar.",
-                img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop",
-                msg: "Bebek müslin kıyafetleri hakkında bilgi almak istiyorum."
-              },
-              {
-                title: "Anne – Bebek",
-                tag: null,
-                desc: "Özel günler ve dış çekimler için birebir aynı kumaştan uyumlu set tasarımları.",
-                img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=600&auto=format&fit=crop",
-                msg: "Anne-bebek kombinleri hakkında bilgi almak istiyorum."
-              }
-            ].map((item, i) => (
-              <div key={i} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
-                <div className="relative h-64 overflow-hidden bg-slate-100">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 24 }}>
+            {collections.map((item, i) => (
+              <div key={i} style={{ backgroundColor: S.white, borderRadius: 20, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', border: `1px solid ${S.slate100}`, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ position: 'relative', height: 240, backgroundColor: S.slate100 }}>
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                    onError={(e) => { const t = e.currentTarget as HTMLImageElement; (t.parentNode as HTMLElement).style.background = 'linear-gradient(135deg,#d1fae5,#e2e8f0)'; t.style.display = 'none'; }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => { const t = e.currentTarget as HTMLImageElement; (t.parentNode as HTMLElement).style.background = `linear-gradient(135deg, ${S.emeraldLight}, ${S.slate200})`; t.style.display = 'none'; }}
                   />
                   {item.tag && (
-                    <div className={`absolute top-3 left-3 text-xs font-bold px-3 py-1 rounded-full shadow ${item.tagColor}`}>
+                    <div style={{ position: 'absolute', top: 10, left: 10, backgroundColor: item.tagBg, color: item.tagColor, fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 999 }}>
                       {item.tag}
                     </div>
                   )}
                 </div>
-                <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="font-serif text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-500 mb-5 flex-grow leading-relaxed">{item.desc}</p>
-                  <a
-                    href={waLink(item.msg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 text-center py-2.5 rounded-xl font-semibold transition text-sm"
-                  >
+                <div style={{ padding: 20, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: S.slate900, margin: '0 0 8px' }}>{item.title}</h3>
+                  <p style={{ fontSize: 13, color: S.slate500, lineHeight: 1.6, flexGrow: 1, margin: '0 0 16px' }}>{item.desc}</p>
+                  <a href={waLink(item.msg)} target="_blank" rel="noopener noreferrer" style={{ display: 'block', backgroundColor: S.slate100, color: S.slate800, textAlign: 'center', padding: '10px', borderRadius: 12, fontWeight: 600, fontSize: 13, textDecoration: 'none' }}>
                     İncele & Sipariş Ver
                   </a>
                 </div>
@@ -220,53 +170,46 @@ export default function OnlineTerziClient() {
         </div>
       </section>
 
-      {/* ── ÖLÇÜ REHBERİ ── */}
-      <section id="olcu-rehberi" className="py-20 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-emerald-50 rounded-3xl p-8 md:p-14 flex flex-col lg:flex-row items-center gap-12 border border-emerald-100">
-            <div className="lg:w-1/2 w-full">
-              <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">Ölçünü Al, Siparişini Ver</h2>
-              <p className="text-slate-600 mb-8 leading-relaxed">
+      {/* ÖLÇÜ REHBERİ */}
+      <section id="olcu-rehberi" style={{ padding: '80px 16px', backgroundColor: S.white, borderTop: `1px solid ${S.slate100}`, borderBottom: `1px solid ${S.slate100}` }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ backgroundColor: S.emeraldBg, borderRadius: 32, padding: 'clamp(24px, 5vw, 56px)', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 48, border: `1px solid ${S.emerald}22` }}>
+            <div style={{ flex: '1 1 300px' }}>
+              <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 900, color: S.slate900, margin: '0 0 16px' }}>Ölçünü Al, Siparişini Ver</h2>
+              <p style={{ color: S.slate600, marginBottom: 28, lineHeight: 1.7, fontSize: 15 }}>
                 Kusursuz bir kalıp için sadece 3 basit adım. Evdeki mezuranızla ölçülerinizi alın ve WhatsApp'tan bize iletin.
               </p>
-
-              <div className="space-y-4">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {[
-                  { n: "1", title: "Göğüs & Omuz", desc: "Mezurayı göğsünüzün en geniş yerinden ve omuz hizasından çok sıkmadan ölçün." },
-                  { n: "2", title: "Bel & Basen", desc: "Belinizin en ince noktasını ve baseninizin en geniş kısmını belirleyin." },
-                  { n: "3", title: "Boy & İletişim", desc: "İstediğiniz etek/pantolon boyunu seçin ve ölçüleri WhatsApp'tan gönderin." }
-                ].map((s) => (
-                  <div key={s.n} className="flex bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                    <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-base flex-shrink-0 mr-4">
-                      {s.n}
-                    </div>
+                  { n: '1', title: 'Göğüs & Omuz', desc: 'Mezurayı göğsünüzün en geniş yerinden ve omuz hizasından çok sıkmadan ölçün.' },
+                  { n: '2', title: 'Bel & Basen', desc: 'Belinizin en ince noktasını ve baseninizin en geniş kısmını belirleyin.' },
+                  { n: '3', title: 'Boy & İletişim', desc: 'İstediğiniz etek/pantolon boyunu seçin ve ölçüleri WhatsApp\'tan gönderin.' },
+                ].map(s => (
+                  <div key={s.n} style={{ display: 'flex', alignItems: 'flex-start', gap: 14, backgroundColor: S.white, padding: 16, borderRadius: 16, boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: `1px solid ${S.slate100}` }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', backgroundColor: S.emeraldLight, color: S.emeraldDark, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 15, flexShrink: 0 }}>{s.n}</div>
                     <div>
-                      <h4 className="text-slate-900 font-bold mb-0.5">{s.title}</h4>
-                      <p className="text-slate-500 text-sm">{s.desc}</p>
+                      <div style={{ fontWeight: 700, color: S.slate900, marginBottom: 4, fontSize: 15 }}>{s.title}</div>
+                      <div style={{ fontSize: 13, color: S.slate500, lineHeight: 1.5 }}>{s.desc}</div>
                     </div>
                   </div>
                 ))}
               </div>
-
-              <div className="mt-8">
-                <a
-                  href={waLink("Merhaba, ölçülerimi aldım. Özel dikim siparişi vermek istiyorum.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1fae53] text-white px-7 py-4 rounded-full font-bold transition shadow-xl text-base w-full sm:w-auto justify-center"
-                >
-                  <WhatsAppIcon className="w-5 h-5" />
-                  WhatsApp'tan Ölçüleri Gönder
-                </a>
-              </div>
+              <a
+                href={waLink("Merhaba, ölçülerimi aldım. Özel dikim siparişi vermek istiyorum.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ marginTop: 28, display: 'inline-flex', alignItems: 'center', gap: 10, backgroundColor: S.wa, color: S.white, padding: '14px 24px', borderRadius: 999, fontWeight: 700, fontSize: 15, textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,0.35)' }}
+              >
+                <WaIcon size={20} />
+                WhatsApp'tan Ölçüleri Gönder
+              </a>
             </div>
-
-            <div className="lg:w-1/2 w-full">
-              <div className="rounded-2xl overflow-hidden shadow-xl h-72 md:h-[420px] bg-gradient-to-br from-emerald-100 to-slate-200">
+            <div style={{ flex: '1 1 280px' }}>
+              <div style={{ borderRadius: 20, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.12)', height: 380, background: `linear-gradient(135deg, ${S.emeraldLight}, ${S.slate200})` }}>
                 <img
                   src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=800&auto=format&fit=crop"
                   alt="Ölçü alma rehberi"
-                  className="w-full h-full object-cover"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                 />
               </div>
@@ -275,27 +218,20 @@ export default function OnlineTerziClient() {
         </div>
       </section>
 
-      {/* ── KURUMSAL ── */}
-      <section id="kurumsal" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <span className="text-emerald-600 font-bold tracking-widest uppercase text-xs mb-2 block">B2B Atölye Çözümleri</span>
-          <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Kurumsal Tekstil & Fason İmalat</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto mb-14">
-            İşletmeniz için yüksek kaliteli, logo nakışlı ve dayanıklı üniforma üretim hizmeti.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: "🏨", title: "Otel & Restoran", desc: "Şef ceketleri, barista önlükleri, resepsiyon ve kat görevlisi takımları. Kurumsal kimliğinize tam uyumlu toptan üretim.", msg: "Otel/Restoran kurumsal üniforma fason üretimi için fiyat almak istiyorum." },
-              { icon: "🩺", title: "Medikal Scrubs", desc: "Hastaneler ve klinikler için terletmeyen, konforlu doktor/hemşire formaları. Alpaka ve likralı kumaş seçenekleri.", msg: "Medikal scrubs üretimi için toptan fiyat almak istiyorum." },
-              { icon: "✂️", title: "Markalara Fason", desc: "Kendi giyim markanız için modelistlik, kesim, dikim, ütü ve etiketleme süreçlerini butik kalitesinde yönetiyoruz.", msg: "Markam için fason üretim detayları görüşmek istiyorum." }
-            ].map((item, i) => (
-              <div key={i} className="bg-white p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition duration-300 text-left flex flex-col">
-                <div className="text-3xl mb-5">{item.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">{item.desc}</p>
-                <a href={waLink(item.msg)} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:text-emerald-800 flex items-center gap-1 text-sm">
-                  Teklif İste <span>→</span>
+      {/* KURUMSAL */}
+      <section id="kurumsal" style={{ padding: '80px 16px', backgroundColor: S.slate50 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
+          <span style={{ color: S.emerald, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 11, display: 'block', marginBottom: 8 }}>B2B Atölye Çözümleri</span>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 900, color: S.slate900, margin: '0 0 12px' }}>Kurumsal Tekstil & Fason İmalat</h2>
+          <p style={{ color: S.slate500, maxWidth: 520, margin: '0 auto 48px', fontSize: 15 }}>İşletmeniz için yüksek kaliteli, logo nakışlı ve dayanıklı üniforma üretim hizmeti.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20, textAlign: 'left' }}>
+            {corporate.map((item, i) => (
+              <div key={i} style={{ backgroundColor: S.white, padding: 32, borderRadius: 20, border: `1px solid ${S.slate200}`, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: 28, marginBottom: 16 }}>{item.icon}</div>
+                <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: S.slate900, margin: '0 0 10px' }}>{item.title}</h3>
+                <p style={{ fontSize: 13, color: S.slate500, lineHeight: 1.6, flexGrow: 1, margin: '0 0 20px' }}>{item.desc}</p>
+                <a href={waLink(item.msg)} target="_blank" rel="noopener noreferrer" style={{ color: S.emerald, fontWeight: 700, fontSize: 13, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  Teklif İste →
                 </a>
               </div>
             ))}
@@ -303,25 +239,25 @@ export default function OnlineTerziClient() {
         </div>
       </section>
 
-      {/* ── SSS ── */}
-      <section id="sss" className="py-20 bg-white border-t border-slate-100">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">Sık Sorulan Sorular</h2>
-            <p className="text-slate-500">Merak ettikleriniz için hızlı yanıtlar.</p>
+      {/* SSS */}
+      <section id="sss" style={{ padding: '80px 16px', backgroundColor: S.white, borderTop: `1px solid ${S.slate100}` }}>
+        <div style={{ maxWidth: 680, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 900, color: S.slate900, margin: '0 0 10px' }}>Sık Sorulan Sorular</h2>
+            <p style={{ color: S.slate500, fontSize: 15 }}>Merak ettikleriniz için hızlı yanıtlar.</p>
           </div>
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
+              <div key={i} style={{ border: `1px solid ${S.slate200}`, borderRadius: 16, overflow: 'hidden' }}>
                 <button
-                  onClick={() => toggleFaq(i)}
-                  className="w-full text-left px-6 py-4 flex justify-between items-center bg-white hover:bg-slate-50 transition font-semibold text-slate-900"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{ width: '100%', textAlign: 'left', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: S.white, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 15, color: S.slate900 }}
                 >
                   <span>{faq.q}</span>
-                  <span className={`text-emerald-600 font-bold text-xl transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
+                  <span style={{ color: S.emerald, fontWeight: 700, fontSize: 20, transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0, marginLeft: 12 }}>+</span>
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-5 text-slate-600 text-sm leading-relaxed bg-slate-50 border-t border-slate-100">
+                  <div style={{ padding: '0 20px 16px', fontSize: 14, color: S.slate600, lineHeight: 1.6, backgroundColor: S.slate50, borderTop: `1px solid ${S.slate100}` }}>
                     {faq.a}
                   </div>
                 )}
@@ -331,51 +267,52 @@ export default function OnlineTerziClient() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-slate-900 pt-14 pb-8 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          <div>
-            <h4 className="font-serif text-2xl text-white mb-3 font-bold">SwapHubs <span className="text-emerald-500 font-light italic">Terzi</span></h4>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Modern dijital altyapımızla geleneksel terzilik sanatını evinize getiriyoruz. Özel dikimden toptan fason üretime kadar tekstilde güvenilir çözüm ortağınız.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-5">Hızlı Bağlantılar</h4>
-            <ul className="space-y-2 text-slate-400 text-sm">
-              <li><a href="#koleksiyonlar" className="hover:text-emerald-400 transition">Müslin & Keten Koleksiyonu</a></li>
-              <li><a href="#olcu-rehberi" className="hover:text-emerald-400 transition">Ölçü Alma Rehberi</a></li>
-              <li><a href="#kurumsal" className="hover:text-emerald-400 transition">Kurumsal Tekstil Çözümleri</a></li>
-              <li><a href="#sss" className="hover:text-emerald-400 transition">Sık Sorulan Sorular</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-5">İletişim</h4>
-            <div className="space-y-3 text-slate-400 text-sm">
-              <p className="text-white font-semibold">📞 +90 500 000 00 00</p>
-              <p>✉️ tekstil@swaphubs.com</p>
-              <p>📍 Antalya, Türkiye</p>
-              <p className="text-xs text-slate-500">Tüm illere kargo mevcuttur.</p>
+      {/* FOOTER */}
+      <footer style={{ backgroundColor: S.slate900, padding: '56px 16px 28px', borderTop: `1px solid ${S.slate800}` }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 40, marginBottom: 40 }}>
+            <div>
+              <div style={{ fontFamily: 'Georgia, serif', fontSize: 22, color: S.white, fontWeight: 700, marginBottom: 12 }}>
+                SwapHubs <span style={{ color: '#34d399', fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
+              </div>
+              <p style={{ color: S.slate400, fontSize: 13, lineHeight: 1.7 }}>Dijital altyapımızla geleneksel terzilik sanatını evinize getiriyoruz.</p>
+            </div>
+            <div>
+              <div style={{ color: S.white, fontWeight: 700, marginBottom: 16, fontSize: 14 }}>Hızlı Bağlantılar</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {[['#koleksiyonlar', 'Müslin & Keten Koleksiyonu'], ['#olcu-rehberi', 'Ölçü Alma Rehberi'], ['#kurumsal', 'Kurumsal Tekstil'], ['#sss', 'Sık Sorulan Sorular']].map(([href, label]) => (
+                  <a key={href} href={href} style={{ color: S.slate400, fontSize: 13, textDecoration: 'none' }}>{label}</a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div style={{ color: S.white, fontWeight: 700, marginBottom: 16, fontSize: 14 }}>İletişim</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
+                <span style={{ color: S.white, fontWeight: 600 }}>📞 +90 500 000 00 00</span>
+                <span style={{ color: S.slate400 }}>✉️ tekstil@swaphubs.com</span>
+                <span style={{ color: S.slate400 }}>📍 Antalya, Türkiye</span>
+                <span style={{ color: S.slate500, fontSize: 11 }}>Tüm illere kargo mevcuttur.</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-2">
-          <p>© 2026 SwapHubs E-Terzi Platformu. Tüm Hakları Saklıdır.</p>
-          <p>Antalya'dan 🇹🇷 Türkiye'ye</p>
+          <div style={{ borderTop: `1px solid ${S.slate800}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, fontSize: 11, color: S.slate500 }}>
+            <span>© 2026 SwapHubs E-Terzi Platformu. Tüm Hakları Saklıdır.</span>
+            <span>Antalya'dan 🇹🇷 Türkiye'ye</span>
+          </div>
         </div>
       </footer>
 
-      {/* ── FLOATING WHATSAPP ── */}
+      {/* FLOATING WHATSAPP */}
       <a
         href={waLink("Merhaba, e-terzi hizmeti hakkında bilgi almak istiyorum.")}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp ile iletişim"
-        className="fixed bottom-5 right-5 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition z-50"
-        style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.45)' }}
+        style={{ position: 'fixed', bottom: 20, right: 20, backgroundColor: S.wa, color: S.white, width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 20px rgba(37,211,102,0.45)', zIndex: 999, textDecoration: 'none' }}
       >
-        <WhatsAppIcon className="w-7 h-7" />
+        <WaIcon size={28} />
       </a>
+
     </div>
   );
 }
