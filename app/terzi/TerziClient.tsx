@@ -536,32 +536,32 @@ const REVIEWS = [
 const SEO_KEYWORDS = [
 
   // ── TÜRKÇE: GENEL TERZİ ──────────────────────────────────────────────
-  'Antalya Terzi', 'Terzi Antalya', 'En İyi Terzi Antalya', 'Usta Terzi Antalya',
-  'Terzi Fiyatları Antalya', 'Terzi Servisi Antalya', 'Araçlı Terzi Antalya',
-  'Terzi Atölyesi Antalya', 'Dikim Atölyesi Antalya', 'Online Terzi Antalya',
-  'Ölçüye Dikim Antalya', 'Özel Dikim Antalya', 'Hızlı Terzi Antalya',
-  'Ekspres Terzi Antalya', '24 Saat Terzi Antalya', 'Ucuz Terzi Antalya',
-  'Yakın Terzi Antalya', 'Antalya Terzi Nerede', 'Antalya Dikim',
-
+  'Antalya Terzi',  'Terzi Antalya', 'En İyi Terzi Antalya', 'Usta Terzi Antalya', 'kaliteli terzi',
+  'Terzi Fiyatları Antalya', 'Terzi Servisi Antalya', 'Araçlı Terzi Antalya', 'ozel terzi Antalya',
+  'Terzi Atölyesi Antalya', 'Dikim Atölyesi Antalya', 'Online Terzi Antalya', 'en iyi terzi',
+  'Ölçüye Dikim Antalya', 'Özel Dikim Antalya', 'Hızlı Terzi Antalya', 'Dikiş', 'dikim', 'ismarlama terzi',
+  'Ekspres Terzi Antalya', '24 Saat Terzi Antalya', 'Ucuz Terzi Antalya', 'tamir tadilat',
+  'Yakın Terzi Antalya', 'Antalya Terzi Nerede', 'Antalya Dikim', 'terzi', 'tamir', 'bana en yakin terzi',
+  'En yakin terzi', 'usta terzi', 'tejjubeli terzi', 'guzel terzi', 'Professional terzi',
   // ── TÜRKÇE: PAÇA / PANTOLON ──────────────────────────────────────────
-  'Paça Kısaltma Antalya', 'Paça Dikimi Antalya', 'Paça Fiyatı Antalya',
-  'Pantolon Kısaltma Antalya', 'Pantolon Tadilat Antalya', 'Pantolon Daraltma Antalya',
-  'Pantolon Dikimi Antalya', 'Pantolon Bel Alma Antalya', 'Pantolon Genişletme Antalya',
-  'Kot Pantolon Tadilat Antalya', 'Palazzo Pantolon Dikimi', 'Palazzo Kısaltma',
-  'Paça Kısaltma Fiyatı', 'Paça Kısaltma Kaç Lira',
+  'Paça Kısaltma Antalya', 'Paça Dikimi Antalya', 'Paça Fiyatı Antalya', 'Paça boyu kisaltma', 'duble Paça yapımı',
+  'Pantolon Kısaltma Antalya', 'Pantolon Tadilat Antalya', 'Pantolon Daraltma Antalya', 'Paça ',
+  'Pantolon Dikimi Antalya', 'Pantolon Bel Alma Antalya', 'Pantolon Genişletme Antalya', 'terzi paça',
+  'Kot Pantolon Tadilat Antalya', 'Palazzo Pantolon Dikimi', 'Palazzo Kısaltma', 'orjinal paçası',
+  'Paça Kısaltma Fiyatı', 'Paça Kısaltma Kaç Lira', 'kot pantolin pacasi kisaltmak', 'kot beli daraltma',
 
   // ── TÜRKÇE: TADİLAT / TAMİR ─────────────────────────────────────────
-  'Kıyafet Tadilat Antalya', 'Elbise Tadilat Antalya', 'Kıyafet Tamir Antalya',
-  'Elbise Tamir Antalya', 'Kıyafet Onarım Antalya', 'Fermuar Değişimi Antalya',
-  'Fermuar Takma Antalya', 'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya',
-  'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Astar Değişimi Antalya',
-  'Cep Tamiri Antalya', 'Kol Kısaltma Antalya', 'Etek Kısaltma Antalya',
+  'Kıyafet Tadilat Antalya', 'Elbise Tadilat Antalya', 'Kıyafet Tamir Antalya', 'etek tadilati', 'elbise dikis tamiri', 'elbiselerin tamiri tadilati',
+  'Elbise Tamir Antalya', 'Kıyafet Onarım Antalya', 'Fermuar Değişimi Antalya', 'etek boyunu kisaltma', 'kiyafetin tadilati', 'antalya dikim tamiri tadilati',
+  'Fermuar Takma Antalya', 'Yırtık Onarımı Antalya', 'Dikiş Tamiri Antalya', 'Fermuar Değişimi konyaaltı', 'elbisenin dikis tamiri',
+  'Düğme Dikimi Antalya', 'Yaka Değişimi Antalya', 'Astar Değişimi Antalya', 'Fermuar Tamiri', 'pantalonun tadilati', 'terzi tamiri tadilatı',
+  'Cep Tamiri Antalya', 'Kol Kısaltma Antalya', 'Etek Kısaltma Antalya', 'Fermuar Değişimi', 'Fermuar tadilati', 'gomlegin tadilati',
 
   // ── TÜRKÇE: DARALTMA / KÜÇÜLTME ─────────────────────────────────────
   'Elbise Daraltma Antalya', 'Kıyafet Daraltma Antalya', 'Beden Küçültme Antalya',
   'Beden Seti Çıkarma Antalya', 'Daraltma Fiyatı Antalya', 'Daraltma Antalya',
-  'Kıyafet Beden Küçültme', 'Elbise Beden Düşürme Antalya',
-  'Gömlek Daraltma Antalya', 'Ceket Daraltma Antalya', 'Elbise Bel Alma Antalya',
+  'Kıyafet Beden Küçültme', 'Elbise Beden Düşürme Antalya', 'Konyaalti elbise daraltma',
+  'Gömlek Daraltma Antalya', 'Ceket Daraltma Antalya', 'Elbise Bel Alma Antalya', 'terzi daraltma',
 
   // ── TÜRKÇE: ERKEK TERZİ ─────────────────────────────────────────────
   'Erkek Terzi Antalya', 'Antalya Erkek Terzi', 'Erkek Takım Elbise Antalya',
@@ -601,11 +601,13 @@ const SEO_KEYWORDS = [
   'Antalya Perde Atölyesi', 'Ölçüye Nevresim',
 
   // ── TÜRKÇE: KURU TEMİZLEME / ÇAMAŞIR ───────────────────────────────
-  'Kuru Temizleme Antalya', 'Antalya Kuru Temizleme', 'Kuru Temizleme Fiyatı Antalya',
-  'Çamaşır Yıkama Antalya', 'Ütü Hizmeti Antalya', 'Çamaşır Servisi Antalya',
-  'Otele Çamaşır Servisi Antalya', 'Kıyafet Temizleme Antalya',
-  'Antalya Ütü Servisi', 'Kıyafet Yıkama Antalya',
-
+  'Kuru Temizleme Antalya', 'Kuru yeri Temizleme Antalya', 'Antalya Kuru Temizleme',
+  'Antalyada Kuru Temizleme', 'Konyaalti Kuru Temizleme', 'hurma Kuru Temizleme',
+  'Kuru Temizleme Fiyatı Antalya', 'Çamaşır Yıkama Antalya', 'Ütü Hizmeti Antalya',
+  'Çamaşır Servisi Antalya', 'Otele Çamaşır Servisi Antalya', 'Kıyafet Temizleme Antalya',
+  'Antalya Ütü Servisi', 'Kıyafet Yıkama Antalya', 'Gürsu Kuru Temizleme',
+  'Antalya liman Kuru Temizleme', 'Uncalı Kuru Temizleme', 'lara Kuru Temizleme', 
+  'Antalyada en iyi Kuru Temizleme', 'Konyaaltında Kuru Temizleme', 'hurma da Kuru Temizleme', 'Kuru Temizlemeci',
   // ── TÜRKÇE: KALIP / ÜRETİM ──────────────────────────────────────────
   'Kalıp Çıkarma Antalya', 'Model Dikimi Antalya', 'Prototip Dikimi Antalya',
   'Numune Dikimi Antalya', 'Seri İmalat Antalya', 'Fason İmalat Antalya',
@@ -613,22 +615,31 @@ const SEO_KEYWORDS = [
   'Antalya Konfeksiyon', 'Tekstil Üretimi Antalya', 'Marka Üretimi Antalya',
 
   // ── TÜRKÇE: ÜNİFORMA / KOSTÜM ───────────────────────────────────────
-  'Üniforma Dikimi Antalya', 'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya',
-  'Spor Kıyafet Dikimi Antalya', 'Kostüm Dikimi Antalya', 'Tiyatro Kostümü Antalya',
-  'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi',
+  'Üniforma Dikimi Antalya', 'İş Üniforma Dikimi', 'Okul Üniforması Dikimi Antalya', ' Uniform dikimi',
+  'Spor Kıyafet Dikimi Antalya', 'Kostüm Dikimi Antalya', 'Tiyatro Kostümü Antalya', 'is elbiseleri dikim',
+  'Özel Kostüm Dikimi', 'Karnaval Kostümü Antalya', 'Tema Kostüm Dikimi', 'Üniforma İmalatı', 'Üniforma Üretimi',
 
   // ── TÜRKÇE: İLÇELER ─────────────────────────────────────────────────
   'Lara Terzi', 'Konyaaltı Terzi', 'Belek Terzi', 'Kemer Terzi',
   'Alanya Terzi', 'Manavgat Terzi', 'Side Terzi', 'Kepez Terzi',
   'Muratpaşa Terzi', 'Aksu Terzi', 'Döşemealtı Terzi', 'Serik Terzi',
   'Kaleiçi Terzi', 'Hurma Terzi', 'Uncalı Terzi', 'Varsak Terzi',
-  'Lara Dikim', 'Konyaaltı Dikim', 'Belek Dikim', 'Kemer Dikim',
+  'Lara da Dikim', 'Konyaaltı da Dikim', 'Belek te Dikim', 'Kemer de Dikim',
+  'Lara da Terzi', 'Konyaalti Terzi', 'Belek de Terzi', 'Kemer de Terzi',
+  'Alanya da Terzi', 'Manavgat da Terzi', 'Side de Terzi', 'Kepez de Terzi',
+  'Muratpaşa da Terzi', 'Aksu da Terzi', 'Döşemealtında Terzi', 'Serik te Terzi',
+  'Kaleiçi Terzi', 'Hurmada Terzi', 'Uncalı da Terzi', 'Varsak ta Terzi',
+  'Larada Dikim',
 
   // ── TÜRKÇE: FİYAT / SORU TİPİ ───────────────────────────────────────
   'Paça Kısaltma Kaç Lira', 'Terzi Fiyat Listesi', 'Elbise Dikimi Fiyatı',
-  'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Dikim Fiyatları 2025',
+  'Daraltma Fiyatı', 'Tadilat Fiyatı Antalya', 'Dikim Fiyatları 2026',
   'Antalya Terzi Ücretleri', 'Ucuz Tadilat Antalya', 'Hızlı Paça Kısaltma',
-
+  'Paça Kısaltma fiyati', 'Terzi Fiyatlari', 'Elbise Dikimi Fiyatlari',
+  'Daraltma Fiyatı', 'Tadilat Fiyatlari Antalya', 'Dikim Fiyatlari 2026',
+  'Antalya da Terzi Ücretleri', 'en Ucuz Tadilat Antalya', 'en ucuz Paça Kısaltma', 
+  'En uygun Elbise Dikimi Fiyatı', 'En ucuz elbise Dikimi Fiyatı', 'kiyafet Dikimi Fiyatı', 
+  'kuru temkzleme Fiyatı', 'Elbise dikim ücretleri', 'Elbise tamir tadilat ücreti', 'Terzi ozel dikim fiyatı',
   // ── ENGLISH KEYWORDS ────────────────────────────────────────────────
   'Tailor Antalya', 'Antalya Tailor', 'Best Tailor Antalya', 'Master Tailor Antalya',
   'Tailor Near Me Antalya', 'Same Day Tailor Antalya', 'Express Tailor Antalya',
