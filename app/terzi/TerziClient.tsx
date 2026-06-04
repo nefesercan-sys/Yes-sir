@@ -203,20 +203,20 @@ const C = {
     seoP1: 'Terzi Can — Antalya\'s most experienced tailor. Trouser hemming · dress alterations · zip repair · skirt shortening · evening gown repair · sweatshirt sewing · tracksuit production · embroidery · logo printing · dry cleaning · pattern making · mass production. Hotel, restaurant, medical and school uniform production. All Antalya districts. Express 24-48h, hotel pickup & delivery.',
     seoP2: 'Tailor Antalya: men\'s tailor · women\'s tailor · children\'s clothing · plus-size alterations · sweatshirt sewing · tracksuit production · embroidery Antalya · logo embroidery · uniform production Antalya · hotel uniform · chef uniform · reception uniform · waiter uniform · doctor uniform · nurse uniform · school uniform · sports uniform. Zip replacement · dress repair · pattern making · mass production.',
     seoP3: 'Mobile tailor Antalya — we come to your home or hotel, take measurements, and deliver finished garments. English speaking tailor. Hotel pickup and delivery. Express 24h service. Lara tailor, Konyaaltı tailor, Belek tailor, Kemer tailor, Alanya tailor, Manavgat tailor, Side tailor.',
-    seoP4: 'Tailor price list Antalya 2025–2026: hemming from ₺150 · zip replacement ₺120 · jacket alteration ₺300 · dress alteration ₺200 · dry cleaning ₺400. Uniform production Antalya — hotel, restaurant, medical, school, sports. Embroidery, logo printing, sweatshirt sewing. Same-day service. WhatsApp +90 531 898 64 18.', a: 'Trouser hemming from ₺150. Jeans zip replacement from ₺120, coat zip from ₺300, jacket taking-in from ₺300. WhatsApp for a free instant quote.' },
+    seoP4: 'Tailor price list Antalya 2025-2026: hemming - zip replacement - size alteration. Clean dry cleaning done. Uniform production Antalya - hotel, restaurant. Mobile tailor prices.',
   faq: [
-      { q: 'How much does zip replacement cost? Jeans, coat, sweatshirt?', a: 'Trouser/jeans zip from ₺120, jacket zip from ₺200, coat zip from ₺300. Sweatshirt and bag zips also done. Same-day service available.' },
-      { q: 'Is there a tailor near me in Antalya? Do you come to my hotel?', a: 'Yes! Our mobile tailor covers every district in Antalya. Share your location on WhatsApp — we come to your hotel, home or office, measure, tailor and deliver back.' },
-      { q: 'Can you alter a graduation or prom dress urgently?', a: 'Yes — graduation dress alterations and shortening done express in 24h during graduation season (May–June). Last-minute before the ceremony accepted.' },
-      { q: 'Wedding season dress alterations in Antalya?', a: 'Yes, wedding dress alterations, shortening and bridesmaid dress adjustments available April–October. Perfect fit guaranteed before your big day.' },
-      { q: 'Do you do zip replacement? Jeans, coat, sweatshirt?', a: 'Yes — trouser, jeans, coat, jacket, sweatshirt, dress, bag zips. Same-day service available.' },
-      { q: 'Do you repair evening gowns and skirts?', a: 'Yes, evening gown repairs, skirt shortening, wedding dress alterations. Perfect fit for any special occasion.' },
-      { q: 'Do you produce hotel, restaurant and staff uniforms?', a: 'Yes — hotel, reception, housekeeping, chef, waiter, valet, spa uniforms. Design, pattern, mass production and embroidery in one place.' },
-      { q: 'Do you produce medical, school and sports uniforms?', a: 'Yes — doctors, nurses, factory workers, school uniforms, sports team kits, security, bank staff. Every sector covered.' },
-      { q: 'Embroidery, plus-size, children\'s clothing, curtains?', a: 'Yes — logo embroidery, plus-size sewing, baby/children\'s clothing, curtains, bed linen. Group discounts available.' },
-    ],
-  },
-  ru: {
+    { q: 'How much does zip replacement cost? Jeans, coat, sweatshirt?', a: 'Trouser/jeans zip from 150 TL, jacket zip from 400 TL, coat zip from 600 TL. Sweatshirt and bag zips also done. Same-day service available.' },
+    { q: 'Is there a tailor near me in Antalya? Do you come to my home?', a: 'Yes! Our mobile tailor covers every district in Antalya. Share your location on WhatsApp - we come to your hotel, home or office.' },
+    { q: 'Can you alter a graduation or prom dress urgently?', a: 'Yes - graduation dress alterations and shortening done express in 24h during graduation season (May-June). Last-minute before the ceremony ok.' },
+    { q: 'Wedding season dress alterations in Antalya?', a: 'Yes, wedding dress alterations, shortening and bridesmaid dress adjustments available April-October. Perfect fit guaranteed before your big day.' },
+    { q: 'Do you do zip replacement? Jeans, coat, sweatshirt?', a: 'Yes - trouser, jeans, coat, jacket, sweatshirt, dress, bag zips. Same-day service available.' },
+    { q: 'Do you repair evening gowns and skirts?', a: 'Yes, evening gown repairs, skirt shortening, wedding dress alterations. Perfect fit for any special occasion.' },
+    { q: 'Do you produce hotel, restaurant and staff uniforms?', a: 'Yes - hotel, reception, housekeeping, chef, waiter, valet, spa uniforms. Design, pattern, mass production and embroidery in one place.' },
+    { q: 'Do you produce medical, school and sports uniforms?', a: 'Yes - doctors, nurses, factory workers, school uniforms, sports team kits, security, bank staff. Every sector covered.' },
+    { q: 'Embroidery, plus-size, children\'s clothing, curtains?', a: 'Yes - logo embroidery, plus-size sewing, baby/children\'s clothing, curtains, bed linen. Group discounts available.' }
+  ]
+},
+ru: {
     badge: '✂ Анталья · Портной Кан',
     h1: 'Лучший',
     h1em: 'Портной Антальи',
