@@ -134,7 +134,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/online-terzi-hizmeti/takim-elbise-dikim`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/online-terzi-hizmeti/uniforma-dikim`,        lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/online-terzi-hizmeti/spor-giyim-dikim`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gece-davet-kiyafeti',   lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/gece-davet-kiyafeti`,   lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/online-terzi-hizmeti/muslin-keten-kiyafet`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/online-terzi-hizmeti/gunluk-kiyafet-dikim`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/online-terzi-hizmeti/olcu-rehberi`,          lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
