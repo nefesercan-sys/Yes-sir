@@ -1,3 +1,9 @@
+/* ── TAILWIND CSS ENTEGRASYONU ── */
+/* Canlıdaki sayfaların bozulmaması için @tailwind base direktifini bilerek eklemiyoruz */
+@tailwind components;
+@tailwind utilities;
+
+/* ── SWAPHUBS MEVCUT STİLLERİ (DOKUNULMADI) ── */
 /* @import satırı YOK — fontlar layout.tsx'te next/font ile yükleniyor */
 
 :root {
