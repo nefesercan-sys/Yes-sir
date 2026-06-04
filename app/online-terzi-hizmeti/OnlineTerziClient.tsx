@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const WA_NUMBER = "905000000000";
+const WA_NUMBER = "+905318986418";
 const waLink = (msg: string): string =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
