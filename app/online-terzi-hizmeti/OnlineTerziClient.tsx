@@ -303,7 +303,7 @@ export default function OnlineTerziClient() {
             </div>
 
             <p style={{ fontSize: 15, color: '#9CA3AF', marginBottom: 40, lineHeight: 1.8, maxWidth: 540, fontFamily: 'system-ui, sans-serif' }}>
-              Türkiye'nin neresinde olursanız olun — ölçülerinizi paylaşın, modelinizi seçin, hayalinizdeki kıyafet kapınıza gelsin. 4 dilde hizmet, 81 ile teslimat, sıfır ödün verilen kalite.
+              Türkiye'nin neresinde olursanız olun — ölçülerinizi paylaşın, elbise modelinizi seçin, hayalinizdeki kıyafet size özel dikim yapılarak kapınıza gelsin. 4 dilde hizmet, 81 ile teslimat, sıfır ödün verilen kalite.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 48 }}>
@@ -355,7 +355,7 @@ export default function OnlineTerziClient() {
               Her Kıyafet, <span style={{ color: C.gold, fontStyle: 'italic' }}>Sadece Sizin İçin</span>
             </h2>
             <p style={{ color: C.slate, maxWidth: 600, margin: '0 auto', fontSize: 15, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-              Abiyeden üniforma'ya, müslinden spor giyime — 8 farklı kategoride kişiye özel tasarım ve üretim hizmeti. Ölçülerinizi bir kez alın, yıllarca mükemmel giyin.
+              Her çeşit ve modelde kıyafetler size özel olarak tasarım dikimi yapılır, Abiyeden üniforma'ya, müslinden spor giyime — 8 farklı kategoride kişiye özel dikim tasarım ve üretim hizmeti. Ölçülerinizi bir kez alın, yıllarca mükemmel giyin.
             </p>
           </div>
 
@@ -588,7 +588,7 @@ export default function OnlineTerziClient() {
               <WaIcon size={22} />
               WhatsApp'tan Yazın
             </a>
-            <a href="tel:+905000000000"
+            <a href="tel:+905318986418"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, backgroundColor: 'rgba(255,255,255,0.08)', color: C.white, padding: '18px 32px', borderRadius: 999, fontWeight: 600, fontSize: 16, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.15)', fontFamily: 'system-ui, sans-serif' }}>
               📞 Ara
             </a>
@@ -605,7 +605,7 @@ export default function OnlineTerziClient() {
                 SwapHubs <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
               </div>
               <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-                Türkiye'nin yeni nesil dijital terzi ve tekstil platformu. Antalya'dan 81 ile, 4 dilde premium hizmet. Arayın yada WhatsApp üzerinden mesaj atın, elbise dikim için fiyat bilgisi alın ve beden ölçülerinizi yazın bize biz size hemen uretmeye başlayalım. Her çeşit baya bayan çocuk ve bebeğiniz için istediginiz kiyafeti dikelim, 3.günde elinizde olsun, Kapınıza ücretsiz kargo ile ulaştıralım.
+                Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'dan 81 ile, 4 dilde premium hizmet. Arayın yada WhatsApp üzerinden mesaj atın, elbise dikim için fiyat bilgisi alın ve beden ölçülerinizi yazın bize biz size hemen uretmeye başlayalım. Her çeşit baya bayan çocuk ve bebeğiniz için istediginiz kiyafeti dikelim, 3.günde elinizde olsun, Kapınıza ücretsiz kargo ile ulaştıralım.
               </p>
               <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
                 {LANGS.map(l => (
