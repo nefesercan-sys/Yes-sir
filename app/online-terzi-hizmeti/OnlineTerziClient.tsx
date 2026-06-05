@@ -605,7 +605,7 @@ export default function OnlineTerziClient() {
                 SwapHubs <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
               </div>
               <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-                Türkiye'nin yeni nesil dijital terzi ve tekstil platformu. Antalya'dan 81 ile, 4 dilde premium hizmet.
+                Türkiye'nin yeni nesil dijital terzi ve tekstil platformu. Antalya'dan 81 ile, 4 dilde premium hizmet. Arayın yada WhatsApp üzerinden mesaj atın, elbise dikim için fiyat bilgisi alın ve beden ölçülerinizi yazın bize biz size hemen uretmeye başlayalım. Her çeşit baya bayan çocuk ve bebeğiniz için istediginiz kiyafeti dikelim, 3.günde elinizde olsun, Kapınıza ücretsiz kargo ile ulaştıralım.
               </p>
               <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
                 {LANGS.map(l => (
@@ -635,7 +635,7 @@ export default function OnlineTerziClient() {
               <div style={{ color: C.white, fontWeight: 700, marginBottom: 16, fontSize: 13, fontFamily: 'system-ui, sans-serif' }}>İletişim</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 13, fontFamily: 'system-ui, sans-serif' }}>
                 <a href={waLink("Merhaba!")} target="_blank" rel="noopener noreferrer" style={{ color: C.wa, fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <WaIcon size={16} /> +90 500 000 00 00
+                  <WaIcon size={16} /> +90 531 898 64 18
                 </a>
                 <span style={{ color: '#6B7280' }}>✉️ tekstil@swaphubs.com</span>
                 <span style={{ color: '#6B7280' }}>📍 Antalya, Türkiye</span>
