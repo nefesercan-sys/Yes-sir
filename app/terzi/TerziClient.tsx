@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState } from 'react';
 
 const PHONE = '905318986418';
-const SITE_URL = 'https://swaphubs.com/terzi';
 type Lang = 'tr' | 'en' | 'ru' | 'de';
 
 // ═══════════════════════════════════════
@@ -30,32 +29,31 @@ const ANTALYA_ILCELER = [
 ];
 
 // ═══════════════════════════════════════
-// FİX 1: Schema — telephone boşluksuz, image eklendi,
-//         serviceType kısaltıldı (Google spam algılamaz),
-//         Review schema eklendi
+// SEO SCHEMA — GENİŞLETİLMİŞ
 // ═══════════════════════════════════════
 const SCHEMA = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "LocalBusiness",
-      "@id": SITE_URL,
+      "@id": "https://swaphubs.com/terzi",
       "name": "Antalya Terzi — Terzi Can",
-      "alternateName": ["Terzi Can","Tailor Can","Портной Кан","Schneider Can","Antalya Terzisi","Antalya Tailor"],
-      "description": "Antalya'nın en iyi terzisi. Paça kısaltma, fermuar değişimi, tadilat, tamir, daraltma, elbise dikimi, erkek terzi, bayan terzi, çocuk kıyafeti, büyük beden, nevresim, perde, sweatshirt, nakış, logo baskı, otel üniforma, aşçı üniforma, garson üniforma, doktor üniforma, okul üniforma üretimi. Araçlı terzi servisi — yerinde ölçü alıp adrese teslim. 4 dil: TR/EN/RU/DE.",
-      "url": SITE_URL,
-      // FIX: boşluksuz telefon
-      "telephone": "+905318986418",
+      "alternateName": [
+        "Terzi Can","Tailor Can","Портной Кан","Schneider Can",
+        "Antalya Terzisi","Antalya Tailor","Antalya Kuru Temizleme",
+        "Antalya Paça Kısaltma","Antalya Fermuar Değişimi",
+        "Antalya Çocuk Kıyafet Dikimi","Antalya Bebek Kıyafet Dikimi",
+        "Bayan Terzi Antalya","Erkek Terzi Antalya"
+      ],
+      "description": "Antalya'nın en iyi terzisi Terzi Can. Paça kısaltma, daraltma, genişletme, fermuar değişimi, yırtık tamiri, bayan kıyafet dikimi, erkek kıyafet dikimi, çocuk kıyafet dikimi, bebek kıyafet dikimi, kuru temizleme, çamaşır yıkama, ütü, kalıp çıkarma, model dikimi, seri imalat. Turistlere 24 saat hızlı hizmet. Türkçe, İngilizce, Rusça, Almanca.",
+      "url": "https://swaphubs.com/terzi",
+      "telephone": "+90 531 898 64 18",
       "priceRange": "₺₺",
-      // FIX: image eklendi (LocalBusiness için kritik)
-      "image": `${SITE_URL}/og-image.jpg`,
-      "logo": `${SITE_URL}/logo.png`,
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Antalya",
         "addressRegion": "Antalya",
-        "addressCountry": "TR",
-        "postalCode": "07000"
+        "addressCountry": "TR"
       },
       "geo": { "@type": "GeoCoordinates", "latitude": "36.8841", "longitude": "30.7056" },
       "openingHoursSpecification": [
@@ -70,107 +68,103 @@ const SCHEMA = {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
         "reviewCount": "94",
-        "bestRating": "5",
-        "worstRating": "1"
+        "bestRating": "5"
       },
       "areaServed": ANTALYA_ILCELER.map(i => ({ "@type": "City", "name": i.ilce })),
-      // FIX: kısaltılmış serviceType listesi (en önemli 30 keyword)
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Terzilik ve Temizleme Hizmetleri",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paça Kısaltma", "description": "Erkek, kadın, çocuk pantolonlarda paça kısaltma ve uzatma hizmeti. 24 saat ekspres." }, "price": "150", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Daraltma ve Genişletme", "description": "Elbise, pantolon, gömlek, ceket daraltma ve genişletme. Bel alma, yan dikiş tadilati." }, "price": "100", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fermuar Değişimi", "description": "Her türlü kıyafette fermuar değişimi ve tamiri. Mont, elbise, çanta fermuarı." }, "price": "120", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Yırtık ve Delik Tamiri", "description": "Kıyafetteki yırtık, delik, sökülen dikiş tamiri." }, "price": "80", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bayan Kıyafet Dikimi", "description": "Elbise, bluz, etek, pantolon, takım elbise özel bayan kıyafet dikimi." }, "price": "1500", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Erkek Kıyafet Dikimi", "description": "Gömlek, takım elbise, pantolon, ceket özel erkek kıyafet dikimi." }, "price": "1500", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Çocuk Kıyafet Dikimi", "description": "Özel çocuk kıyafetleri, okul üniformaları, kostümler dikimi ve tadilat." }, "price": "500", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bebek Kıyafet Dikimi", "description": "El yapımı bebek kıyafetleri, tulum, uyku tulumu özel dikim." }, "price": "400", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gelinlik ve Abiye", "description": "Gelinlik, damatlık, abiye, nişan elbisesi dikimi ve tadilati." }, "price": "5000", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kuru Temizleme", "description": "Profesyonel kuru temizleme. Otelden alım ve teslimat." }, "price": "400", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Çamaşır Yıkama ve Ütü", "description": "Çamaşır yıkama, kurutma ve ütü hizmeti. Otele teslimat." }, "price": "300", "priceCurrency": "TRY" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kalıp Çıkarma ve Seri İmalat", "description": "Profesyonel kalıp çıkarma, model dikimi ve seri imalat. Markalar için." }, "price": "1000", "priceCurrency": "TRY" },
+        ]
+      },
       "serviceType": [
-        "Paça Kısaltma","Pantolon Kısaltma","Tadilat","Tamir","Daraltma","Fermuar Değişimi",
-        "Etek Kısaltma","Abiye Tamiri","Özel Dikim","Erkek Terzi","Bayan Terzi",
-        "Çocuk Kıyafeti Dikimi","Bebek Elbisesi","Büyük Beden Dikimi","Gelinlik Tadilatı",
-        "Sweatshirt Dikimi","Eşofman Dikimi","Nakış","Logo Nakışı","Üniforma Üretimi",
-        "Otel Üniforma","Aşçı Üniforma","Garson Üniforma","Doktor Üniforma","Okul Üniforma",
-        "Kuru Temizleme","Seri İmalat","Fason İmalat","Terzi Servisi","Araçlı Terzi",
-        "Alterations","Custom Tailoring","Dry Cleaning","Uniform Production","Embroidery",
-        "Пошив одежды","Ремонт одежды","Химчистка","Выездной портной",
-        "Maßanfertigung","Änderungsschneiderei","Uniformproduktion","Stickerei"
-      ],
-      // FIX: hasMap eklendi
-      "hasMap": "https://maps.google.com/?q=Terzi+Can+Belek+by+Ercan+Antalya",
-      "sameAs": [
-        "https://wa.me/905318986418"
+        // Türkçe
+        "Paça Kısaltma","Paça Uzatma","Tadilat","Tamir","Daraltma","Genişletme",
+        "Fermuar Değişimi","Yırtık Tamiri","Bel Alma","Kol Kısaltma",
+        "Bayan Kıyafet Dikimi","Erkek Kıyafet Dikimi","Çocuk Kıyafet Dikimi","Bebek Kıyafet Dikimi",
+        "Kuru Temizleme","Çamaşır Yıkama","Ütü Hizmeti",
+        "Kalıp Çıkarma","Model Dikimi","Seri İmalat","Özel Dikim",
+        "Gelinlik Dikimi","Damatlık Dikimi","Abiye Dikimi",
+        // English
+        "Alterations","Hemming","Zip Replacement","Tear Repair","Waist Adjustment","Sleeve Shortening",
+        "Women's Clothing Tailoring","Men's Clothing Tailoring","Children's Clothing Tailoring","Baby Clothing",
+        "Custom Tailoring","Dry Cleaning","Laundry Service","Ironing","Pattern Making","Mass Production",
+        // Русский
+        "Подгонка брюк","Замена молнии","Ремонт одежды","Пошив женской одежды",
+        "Пошив мужской одежды","Пошив детской одежды","Пошив одежды для новорождённых",
+        "Химчистка","Стирка","Глажка","Пошив по лекалам","Серийное производство",
+        // Deutsch
+        "Hose kürzen","Reißverschluss wechseln","Kleidung reparieren","Damenbekleidung nähen",
+        "Herrenbekleidung nähen","Kinderbekleidung nähen","Babykleidung nähen",
+        "Chemische Reinigung","Wäsche","Bügeln","Schnittmuster","Serienproduktion"
       ]
-    },
-    // FIX: Review schema eklendi (ilk 3 yorum)
-    {
-      "@type": "Review",
-      "itemReviewed": { "@type": "LocalBusiness", "@id": SITE_URL },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "author": { "@type": "Person", "name": "Murat B." },
-      "reviewBody": "Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!",
-      "datePublished": "2025-01-15"
-    },
-    {
-      "@type": "Review",
-      "itemReviewed": { "@type": "LocalBusiness", "@id": SITE_URL },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "author": { "@type": "Person", "name": "Sarah M." },
-      "reviewBody": "Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.",
-      "datePublished": "2025-05-10"
-    },
-    {
-      "@type": "Review",
-      "itemReviewed": { "@type": "LocalBusiness", "@id": SITE_URL },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "author": { "@type": "Person", "name": "Наталья К." },
-      "reviewBody": "Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!",
-      "datePublished": "2025-06-05"
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Antalya'da paça kısaltma fiyatı ne kadar? 2025-2026", "acceptedAnswer": { "@type": "Answer", "text": "Antalya'da paça kısaltma fiyatımız 150₺'den başlar. Kot paça 150₺, kumaş pantolon 175₺ civarı. Ücretsiz fiyat teklifi için WhatsApp: +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da fermuar değişimi kaç lira? Mont, kot, pantolon fermuarı fiyatı?", "acceptedAnswer": { "@type": "Answer", "text": "Pantolon ve kot fermuarı 120₺'den, mont fermuarı 300₺'den başlar. Aynı gün servis mümkündür. WhatsApp: +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Yakınımda terzi var mı? Eve veya otele gelen terzi Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Terzi Can araçlı terzi servisiyle Antalya'nın tüm ilçelerine geliyor. Eve gelen terzi, otele gelen terzi hizmeti sunuyoruz. WhatsApp: +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Antalya'da sweatshirt ve eşofman dikimi yapılıyor mu?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, sweatshirt ve eşofman takımı dikimi, tadilat ve seri üretim yapıyoruz. Nakış ve baskı ile kişiselleştirme de mümkündür." } },
-        { "@type": "Question", "name": "Antalya'da otel ve restoran üniforma üretimi yapılıyor mu?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, otel personel üniforma, resepsiyon, aşçı, garson, meydancı üniforma üretimi yapıyoruz. Tasarım, kalıp, seri imalat ve nakış tek elden." } },
-        { "@type": "Question", "name": "Where can I find a tailor or uniform producer in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can offers professional tailoring and uniform production in Antalya — hotel uniforms, chef uniforms, school uniforms, embroidery. WhatsApp: +90 531 898 64 18." } },
-        { "@type": "Question", "name": "Где найти портного и производителя формы в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can — пошив одежды, производство формы, вышивка, пошив толстовок в Анталье. WhatsApp: +90 531 898 64 18." } }
+        // Türkçe
+        { "@type": "Question", "name": "Antalya'da paça kısaltma nerede yaptırılır?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can olarak Antalya'da paça kısaltma, uzatma ve pantolon tadilat hizmeti veriyoruz. Erkek, kadın ve çocuk pantolonları için aynı gün teslimat mümkündür. WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Antalya'da fermuar değişimi yapılır mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, Terzi Can olarak elbise, mont, ceket, çanta ve tüm kıyafetlerde fermuar değişimi ve tamiri yapıyoruz. Antalya'nın her ilçesine hizmet veriyoruz." } },
+        { "@type": "Question", "name": "Antalya'da çocuk kıyafeti diktirilebilir mi?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, çocuk kıyafetleri özel dikim, okul üniforması, kostüm ve bebek kıyafetleri dikiyoruz. Ölçüye özel üretim yapıyoruz." } },
+        { "@type": "Question", "name": "Antalya kuru temizleme hizmeti var mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, profesyonel kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Tüm Antalya otellerine alım ve teslimat yapıyoruz." } },
+        { "@type": "Question", "name": "Antalya'da bayan elbise daraltma ve tadilat yapılır mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, bayan elbise daraltma, genişletme, bel alma, kol kısaltma ve her türlü tadilat hizmeti veriyoruz." } },
+        { "@type": "Question", "name": "Antalya'da seri imalat ve model dikimi yapılır mı?", "acceptedAnswer": { "@type": "Answer", "text": "Evet, kalıp çıkarma, model dikimi ve seri imalat hizmetleri sunuyoruz. Firmalar ve markalar için üretim yapıyoruz." } },
+        // English
+        { "@type": "Question", "name": "Where can I find a tailor in Antalya for alterations?", "acceptedAnswer": { "@type": "Answer", "text": "Terzi Can offers professional alterations in Antalya — hemming, taking in, zip replacement, tear repairs for men, women and children. English spoken. Express 24h. WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Can I get children's and baby clothes made in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we sew custom children's clothing, school uniforms, costumes and baby clothes in Antalya. Any size, any fabric." } },
+        { "@type": "Question", "name": "Is there dry cleaning with hotel pickup in Antalya?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Terzi Can provides dry cleaning, laundry and ironing with free hotel pickup and delivery across all Antalya resorts." } },
+        // Русский
+        { "@type": "Question", "name": "Где найти портного в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Портной Кан — лучший портной в Анталье. Подгонка брюк, замена молнии, ремонт одежды, пошив женской, мужской, детской и одежды для малышей. Говорим по-русски. WhatsApp: +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Можно ли сшить детскую одежду в Анталье?", "acceptedAnswer": { "@type": "Answer", "text": "Да, шьём детскую одежду, школьную форму, костюмы и одежду для новорождённых на заказ." } },
+        // Deutsch
+        { "@type": "Question", "name": "Wo kann ich in Antalya Hosen kürzen lassen?", "acceptedAnswer": { "@type": "Answer", "text": "Schneider Can kürzt Hosen für Damen, Herren und Kinder in Antalya innerhalb von 24 Stunden. Abholung und Lieferung ins Hotel möglich. WhatsApp +90 531 898 64 18." } },
+        { "@type": "Question", "name": "Können in Antalya Kinderkleider genäht werden?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wir nähen Kinderbekleidung, Schuluniformen, Kostüme und Babykleidung nach Maß in Antalya." } },
       ]
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "SwapHubs", "item": "https://swaphubs.com" },
-        { "@type": "ListItem", "position": 2, "name": "Terzi Antalya", "item": SITE_URL }
+        { "@type": "ListItem", "position": 2, "name": "Terzi Antalya", "item": "https://swaphubs.com/terzi" }
       ]
     },
-    // FIX: Service schema eklendi (en kritik 5 hizmet için)
     {
       "@type": "Service",
-      "serviceType": "Paça Kısaltma",
-      "name": "Antalya Paça Kısaltma — Terzi Can",
-      "description": "Antalya'da paça kısaltma hizmeti. Kot paça, kumaş pantolon, palazzo paça. 150₺'den başlar.",
-      "provider": { "@type": "LocalBusiness", "@id": SITE_URL },
-      "areaServed": { "@type": "City", "name": "Antalya" },
-      "offers": { "@type": "Offer", "priceCurrency": "TRY", "price": "150", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "150" } }
-    },
-    {
-      "@type": "Service",
-      "serviceType": "Üniforma Üretimi",
-      "name": "Antalya Üniforma Üretimi — Terzi Can",
-      "description": "Otel, restoran, sağlık, okul ve spor sektörlerine özel üniforma tasarım ve seri üretimi.",
-      "provider": { "@type": "LocalBusiness", "@id": SITE_URL },
-      "areaServed": { "@type": "City", "name": "Antalya" }
+      "serviceType": "Tailoring & Clothing Alterations",
+      "provider": { "@type": "LocalBusiness", "name": "Terzi Can", "url": "https://swaphubs.com/terzi" },
+      "areaServed": { "@type": "City", "name": "Antalya", "containedInPlace": { "@type": "Country", "name": "Turkey" } },
+      "description": "Professional tailoring, alterations, dry cleaning and custom clothing for men, women, children and babies in Antalya. Express 24-48h service. Hotel pickup and delivery.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "80",
+        "highPrice": "5000",
+        "priceCurrency": "TRY"
+      }
     }
   ]
 };
 
 // ═══════════════════════════════════════
-// İÇERİK — 4 DİL (FIX: EN ve DE seoP4 dolduruldu,
-//   mobileSvcBadge tutarlı hale getirildi,
-//   "2025" → "2025–2026" tutarlı)
+// İÇERİK — 4 DİL
 // ═══════════════════════════════════════
 const C = {
   tr: {
-    // FIX: meta title/description eklendi
-    metaTitle: 'Antalya Terzi | Paça Kısaltma · Fermuar · Tadilat · Üniforma | Terzi Can',
-    metaDesc: 'Antalya\'nın en iyi terzisi Terzi Can. Paça kısaltma ₺150, fermuar değişimi ₺120, araçlı terzi servisi, otel üniforma üretimi, sweatshirt, nakış. 4 dil · 24h ekspres.',
     badge: '✂ Antalya · Terzi Can',
     h1: 'Antalya\'nın',
     h1em: 'Terzisi',
-    sub: 'Erkek · Bayan · Çocuk · Tadilat · Üniforma · Nakış · Fason · Seri İmalat',
+    sub: 'Paça Kısaltma · Daraltma · Fermuar · Bayan · Erkek · Çocuk · Bebek · Kuru Temizleme · Seri İmalat',
     waBtn: 'WhatsApp\'tan Yazın',
     downBtn: 'Hizmetleri Gör ↓',
     waMsg: 'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',
@@ -183,40 +177,25 @@ const C = {
     s6sub: 'WhatsApp\'tan mesaj atın, hemen yanıt verelim',
     waLabel: 'WhatsApp\'tan Yaz',
     mapLabel: 'Haritada Bul',
-    mobileSvcTitle: 'Araçlı Terzi Servisi',
-    // FIX: badge tutarlı
-    mobileSvcBadge: '🚗 ARAÇLI TERZİ SERVİSİ',
-    mobileSvcHeading: 'Kapınıza Geliyoruz',
-    mobileSvcDesc: 'Araçlı terzi servisimizle tüm Antalya\'ya hizmet veriyoruz. Terzi Can ekibimiz adresinize geliyor, yerinde ölçü alıyor; dikimi tamamlayıp tekrar kapınıza teslim ediyor. Otel, ev, işyeri — fark etmez.',
-    mobileSvcSteps: ['📍 Adresinizi Bildirin','📏 Yerinde Ölçü Alınır','✂️ Atölyede Dikilir','🚗 Kapıya Teslim'],
-    mobileSvcStepLabels: ['WhatsApp\'tan konum paylaşın','Terzi adresinize gelir','Ölçüye göre dikim yapılır','Belirlenen vakitte teslim'],
-    mobileSvcCta: '📲 Terzi Servisi Talep Et',
-    mobileSvcWaMsg: 'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',
-    seoP1: 'Antalya\'nın en deneyimli terzisi Terzi Can. Paça kısaltma · pantolon kısaltma · elbise daraltma · beden küçültme · fermuar değişimi · etek kısaltma · abiye tamiri · kıyafet tamiri · kuru temizleme · ütü hizmeti · kalıp çıkarma · model dikimi · seri imalat · fason imalat · nakış · logo baskı. Otel üniforma · aşçı üniforma · garson üniforma · resepsiyon üniforma · doktor üniforma · okul üniforma · spor üniforma üretimi. Sweatshirt ve eşofman dikimi. Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer ve tüm Antalya ilçelerine hizmet. 24-48 saat ekspres servis, otele alım-teslimat.',
-    seoP2: 'Antalya erkek terzi, bayan terzi, çocuk kıyafeti dikimi, bebek elbisesi dikimi, anne grubu toplu dikimi, büyük beden dikimi, beden seti çıkarma, sweatshirt dikimi, eşofman dikimi, nakış, logo nakışı, üniforma nakışı. Nevresim dikimi, perde dikimi, gömlek dikimi, ceket dikimi, pantolon dikimi. Paça kısaltma fiyatı, paça kısaltma kaç lira, fermuar değişimi kaç lira, terzi fiyatları 2025–2026, tadilat fiyatı, daraltma fiyatı, dikim fiyatları Antalya.',
-    seoP3: 'Yakınımda terzi Antalya — eve gelen terzi, otele gelen terzi, araçlı terzi servisi, adrese teslim terzi. Mezuniyet abiye tamiri, mezuniyet abiye kısaltma, düğün sezonu gelinlik tadilatı, kış sezonu mont fermuarı, yaz sezonu elbise daraltma. Otel üniforma, aşçı üniforma, garson üniforma, resepsiyon üniforma, doktor üniforma, okul üniforma üretimi Antalya. Lara terzi, Konyaaltı terzi, Belek terzi, Kemer terzi, Alanya terzi, Manavgat terzi.',
-    // FIX: seoP4 dolduruldu
-    seoP4: 'Terzi fiyatları 2025–2026: paça kısaltma ₺150 · fermuar ₺120 · ceket daraltma ₺300 · elbise tadilatı ₺200 · kuru temizleme ₺400. Paça kısaltma kaç lira sorusunun cevabı: 150₺\'den başlar. Terzi Can Antalya\'nın en uygun fiyatlı ve kaliteli terzi atasıdır. WhatsApp\'tan ücretsiz teklif alın.',
+    seoP1: 'Antalya\'nın en deneyimli terzisi Terzi Can. Paça kısaltma Antalya, paça uzatma, elbise daraltma, kıyafet tamiri, fermuar değişimi, yırtık onarımı, bel alma, kol kısaltma. Bayan kıyafet dikimi, erkek kıyafet dikimi, çocuk kıyafet dikimi, bebek kıyafet dikimi. Kuru temizleme, çamaşır yıkama, ütü hizmeti, kalıp çıkarma, model dikimi ve seri imalat.',
+    seoP2: 'Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer, Alanya, Manavgat, Side ve tüm Antalya ilçelerine hizmet. Turistlere 24–48 saat ekspres servis, otele alım-teslimat. Lara terzi, Konyaaltı terzi, Belek terzi, Kemer terzi, Alanya terzi, Manavgat terzi, Side terzi, Kepez terzi, Muratpaşa terzi.',
+    seoP3: 'Paça kısaltma fiyatı, fermuar değişimi fiyatı, elbise daraltma fiyatı. Çocuk kıyafet dikimi Antalya, bebek kıyafet dikimi Antalya, bayan elbise tadilat Antalya, erkek takım elbise tadilat Antalya. Antalya kuru temizleme, ütü hizmeti, çamaşır yıkama. Antalya seri imalat, kalıp çıkarma, model dikimi, özel tasarım kıyafet.',
+    seoP4: '',
     faq: [
-      { q: 'Paça kısaltma kaç lira? 2025–2026 fiyatı ne kadar?', a: 'Paça kısaltma ₺150\'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarı. Pantolon fermuarı ₺120, mont fermuarı ₺300, ceket daraltma ₺300\'den. Kesin fiyat için WhatsApp\'tan yazın — ücretsiz teklif verelim.' },
-      { q: 'Fermuar değişimi kaç lira? Kot, mont, ceket, sweatshirt fermuarı?', a: 'Pantolon ve kot fermuarı ₺120\'den, ceket fermuarı ₺200\'den, mont fermuarı ₺300\'den başlar. Sweatshirt ve çanta fermuarı da yapılır. Aynı gün teslim mümkündür.' },
-      { q: 'Yakınımda terzi var mı? Eve veya otele gelen terzi Antalya?', a: 'Evet! Araçlı terzi servisimizle Antalya\'nın tüm ilçelerine geliyoruz. Ev, otel, işyeri fark etmez — WhatsApp\'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin ve teslim etsin.' },
-      { q: 'Mezuniyet abiye tamiri ve kısaltması yapıyor musunuz?', a: 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri, kısaltma ve tadilatı ekspres 24 saat yapıyoruz. Mezuniyet gecesi öncesi son dakika işlemleri kabul edilir.' },
-      { q: 'Düğün sezonu gelinlik tadilatı yapıyor musunuz?', a: 'Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, kısaltma ve damatlık tadilatı yapıyoruz. Özel günde kusursuz fit garantisi.' },
-      { q: 'Kış sezonunda mont fermuarı değişimi yapıyor musunuz?', a: 'Evet, mont fermuarı, deri mont fermuarı ve kaban fermuarı değişimi yapıyoruz. Kış sezonunda yoğun talep olduğu için önceden WhatsApp\'tan randevu almanızı öneririz.' },
-      { q: 'Etek kısaltma, abiye tamiri ve abiye tadilatı yapıyor musunuz?', a: 'Evet, etek kısaltma, abiye tamiri, abiye tadilatı ve gece elbisesi onarımı yapıyoruz. Özel gün kıyafetlerinizde mükemmel fit garantisi.' },
-      { q: 'Otel ve restoran üniforması üretimi yapıyor musunuz?', a: 'Evet, otel personel üniforması, resepsiyon, aşçı, garson, meydancı, spa, animatör üniforması üretiyoruz. Tasarım, kalıp, seri imalat ve nakış tek elden.' },
-      { q: 'Doktor, hemşire, işçi, okul ve spor üniforması yapıyor musunuz?', a: 'Evet, her sektöre özel üniforma: doktor · hemşire · eczacı · işçi · fabrika · okul forması · futbol forması · spor kulübü · güvenlik · banka personeli.' },
-      { q: 'Büyük beden, nevresim, perde, bebek kıyafeti dikimi var mı?', a: 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi uygulanır.' },
+      { q: 'Paça kısaltma ne kadar sürer?', a: 'Paça kısaltma genellikle 24 saat içinde tamamlanır. Acele işlerde aynı gün teslimat da mümkündür. Erkek, kadın ve çocuk pantolonları için hizmet veriyoruz.' },
+      { q: 'Fermuar değişimi yapıyor musunuz?', a: 'Evet, elbise, mont, ceket, pantolon ve çantada fermuar değişimi ve tamiri yapıyoruz. Ortalama 1–2 gün içinde teslim edilir.' },
+      { q: 'Çocuk ve bebek kıyafeti dikimi yapıyor musunuz?', a: 'Evet, özel çocuk kıyafetleri, okul üniformaları, kostümler ve bebek kıyafetleri dikiyoruz. Ölçüye özel üretim yapılmaktadır.' },
+      { q: 'Kuru temizleme ve çamaşır yıkama hizmeti var mı?', a: 'Evet, kuru temizleme, çamaşır yıkama ve ütü hizmeti sunuyoruz. Otelden alım ve teslimat yapıyoruz.' },
+      { q: 'Seri imalat ve model dikimi yapıyor musunuz?', a: 'Evet, kalıp çıkarma, model dikimi ve seri imalat hizmeti veriyoruz. Markalar ve firmalar için üretim kapasitemiz mevcuttur.' },
+      { q: 'Tüm Antalya ilçelerine hizmet veriyor musunuz?', a: 'Evet, Muratpaşa, Konyaaltı, Kepez, Aksu, Lara, Belek, Kemer, Alanya, Manavgat ve tüm Antalya ilçelerine hizmet veriyoruz.' },
+      { q: 'Fiyatlar ne kadar?', a: 'Paça kısaltma ₺150\'den, fermuar değişimi ₺120\'den, tadilat ₺100\'den, kuru temizleme ₺400\'den, çocuk kıyafet dikimi ₺500\'den, özel dikim ₺1500\'den başlar. Ücretsiz fiyat teklifi için WhatsApp\'tan yazın.' },
     ],
   },
   en: {
-    metaTitle: 'Tailor Antalya | Alterations · Zip Repair · Uniform Production | Tailor Can',
-    metaDesc: 'Best tailor in Antalya. Trouser hemming from ₺150, zip repair, custom tailoring, uniform production, sweatshirt sewing, embroidery. 4 languages · Express 24h · Hotel pickup.',
     badge: '✂ Antalya · Tailor Can',
     h1: 'Antalya\'s',
     h1em: 'Master Tailor',
-    sub: 'Men · Women · Children · Baby · Alterations · Custom · Mass Production',
+    sub: 'Hemming · Alterations · Zip Repair · Women · Men · Children · Baby · Dry Cleaning · Mass Production',
     waBtn: 'WhatsApp Us Now',
     downBtn: 'View Services ↓',
     waMsg: 'Hello, I would like information about your tailoring service.',
@@ -229,37 +208,25 @@ const C = {
     s6sub: 'Send a WhatsApp message, we\'ll reply instantly',
     waLabel: 'Chat on WhatsApp',
     mapLabel: 'Find on Map',
-    mobileSvcTitle: 'Mobile Tailor Service',
-    mobileSvcBadge: '🚗 MOBILE TAILOR',
-    mobileSvcHeading: 'We Come to You',
-    mobileSvcDesc: 'Our mobile tailor service covers all of Antalya. We visit your address, take measurements on-site, complete the tailoring in our workshop, and deliver back to your door. Hotel, home, or office — no problem.',
-    mobileSvcSteps: ['📍 Share Your Address','📏 On-Site Measurements','✂️ Tailored in Workshop','🚗 Delivered to Your Door'],
-    mobileSvcStepLabels: ['Send location via WhatsApp','Tailor comes to you','Sewn to your measurements','Delivered at agreed time'],
-    mobileSvcCta: '📲 Request Mobile Tailor',
-    mobileSvcWaMsg: 'Hello, I would like to use your mobile tailor service. Can you come to my address?',
-    seoP1: 'Terzi Can — Antalya\'s most experienced tailor. Trouser hemming, dress alterations, clothing repairs, size reduction, dry cleaning, laundry, ironing, pattern making, custom design, mass production and contract manufacturing. Serving all Antalya districts. Express 24-48h service for tourists, hotel pickup & delivery.',
-    seoP2: 'Men\'s tailor Antalya, women\'s tailor Antalya, children\'s clothing Antalya, baby clothes sewing, plus-size clothing alterations, pattern making, curtain sewing, bed linen sewing, shirt sewing, jacket alterations, trouser hemming Antalya. Tailor prices Antalya 2025–2026.',
-    seoP3: 'Mobile tailor Antalya — we come to your home or hotel, take measurements, and deliver finished garments. English speaking tailor. Hotel pickup and delivery. Express 24h service. Lara tailor, Konyaaltı tailor, Belek tailor, Kemer tailor, Alanya tailor, Manavgat tailor, Side tailor.',
-    // FIX: EN seoP4 dolduruldu
-    seoP4: 'Tailor prices Antalya 2025–2026: trouser hemming ₺150 · zip repair ₺120 · jacket alteration ₺300 · dress repair ₺200 · dry cleaning ₺400. Nearest tailor Antalya, same-day alterations, express zip repair, hotel tailor delivery. Zip repair cost Antalya — ask for a free WhatsApp quote.',
+    seoP1: 'Terzi Can — professional tailor in Antalya. Trouser hemming, shortening, lengthening, dress alterations, taking in, letting out, zip replacement, tear repairs, sleeve shortening, waist adjustment. Women\'s clothing tailoring, men\'s clothing tailoring, children\'s clothing, baby clothes — all custom made.',
+    seoP2: 'Dry cleaning Antalya, laundry service Antalya, ironing service Antalya, hotel pickup and delivery. Pattern making Antalya, custom design clothing Antalya, mass production Antalya. English speaking tailor. Express 24–48h service for tourists. Lara, Konyaaltı, Belek, Kemer, Alanya, Manavgat, Side.',
+    seoP3: 'Tailor near me Antalya, alterations Antalya, dress alteration Antalya, trouser hemming Antalya, zip repair Antalya, children\'s tailor Antalya, baby clothing Antalya. Suit alteration Antalya, wedding dress alteration Antalya, evening gown alteration Antalya.',
+    seoP4: '',
     faq: [
-      { q: 'How much does trouser hemming cost?', a: 'Trouser hemming starts from ₺150. Price depends on fabric type. WhatsApp us for a free quote.' },
-      { q: 'Do you come to my hotel or home?', a: 'Yes! Our mobile tailor service covers all Antalya districts. We visit your address, measure, tailor and deliver back to you.' },
-      { q: 'Do you sew plus-size clothing?', a: 'Yes, we sew plus-size dresses, trousers, shirts and make custom pattern sets for all body types.' },
-      { q: 'Do you sew children\'s and baby clothing?', a: 'Yes, we sew children\'s clothing, baby dresses and custom costumes. Group discounts for parent communities.' },
-      { q: 'Do you sew curtains and bed linen?', a: 'Yes, we sew custom-sized bed linen sets, curtains, cushion covers and home textiles.' },
-      { q: 'Do you do mass production and contract manufacturing?', a: 'Yes, we offer pattern making, sample sewing, and mass production for brands and businesses.' },
-      { q: 'Do you offer dry cleaning and laundry?', a: 'Yes, professional dry cleaning, laundry and ironing with hotel pickup and delivery.' },
-      { q: 'Do you serve all Antalya districts?', a: 'Yes — Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer, Alanya, Manavgat and all districts.' },
+      { q: 'How long does trouser hemming take?', a: 'Trouser hemming is completed within 24 hours. Same-day delivery is possible for urgent requests. We hem trousers for men, women and children.' },
+      { q: 'Do you replace zips?', a: 'Yes, we replace and repair zips on dresses, coats, jackets, trousers and bags. Usually completed within 1–2 days.' },
+      { q: 'Do you make children\'s and baby clothes?', a: 'Yes, we sew custom children\'s clothing, school uniforms, costumes and baby clothes. All made to measure.' },
+      { q: 'Do you offer dry cleaning and laundry?', a: 'Yes, we offer dry cleaning, laundry and ironing services. We provide hotel pickup and delivery across all Antalya resorts.' },
+      { q: 'Do you do pattern making and mass production?', a: 'Yes, we offer pattern making, custom design and mass production for brands and businesses.' },
+      { q: 'Do you serve all Antalya districts?', a: 'Yes, we serve Muratpaşa, Konyaaltı, Kepez, Lara, Belek, Kemer, Alanya, Manavgat and all Antalya districts.' },
+      { q: 'What are the prices?', a: 'Trouser hemming from ₺150, zip replacement from ₺120, alterations from ₺100, dry cleaning from ₺400, children\'s clothing from ₺500, custom tailoring from ₺1,500. WhatsApp for a free quote.' },
     ],
   },
   ru: {
-    metaTitle: 'Портной Анталья | Подгонка одежды · Ремонт · Пошив формы | Портной Кан',
-    metaDesc: 'Лучший портной в Анталье. Подгонка брюк от ₺150, замена молнии, пошив толстовок, производство формы, химчистка. 4 языка · Экспресс 24ч · Доставка в отель.',
     badge: '✂ Анталья · Портной Кан',
     h1: 'Лучший',
     h1em: 'Портной Антальи',
-    sub: 'Мужская · Женская · Детская · Пошив · Химчистка · Серийное производство',
+    sub: 'Подгонка · Ремонт · Молния · Женская · Мужская · Детская · Для малышей · Химчистка · Производство',
     waBtn: 'Написать в WhatsApp',
     downBtn: 'Смотреть услуги ↓',
     waMsg: 'Здравствуйте, хотел бы узнать о ваших услугах портного.',
@@ -272,38 +239,25 @@ const C = {
     s6sub: 'Напишите в WhatsApp, ответим сразу',
     waLabel: 'Написать в WhatsApp',
     mapLabel: 'Найти на карте',
-    mobileSvcTitle: 'Выездной портной',
-    mobileSvcBadge: '🚗 ВЫЕЗДНОЙ ПОРТНОЙ',
-    mobileSvcHeading: 'Приедем к вам',
-    mobileSvcDesc: 'Наш выездной портной обслуживает всю Анталью. Приедем по вашему адресу, снимем мерки на месте, сошьём в ателье и доставим обратно. Отель, дом или офис — всё равно.',
-    mobileSvcSteps: ['📍 Укажите адрес','📏 Снятие мерок','✂️ Пошив в ателье','🚗 Доставка к вам'],
-    mobileSvcStepLabels: ['Отправьте локацию в WhatsApp','Портной приедет к вам','Изделие сошьётся по меркам','Доставим в назначенное время'],
-    mobileSvcCta: '📲 Вызвать портного',
-    mobileSvcWaMsg: 'Здравствуйте, хочу воспользоваться выездным сервисом. Можете приехать по моему адресу?',
-    seoP1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк · ремонт одежды · замена молнии · укорачивание юбки · ремонт вечернего платья · пошив толстовок · производство спортивных костюмов · вышивка · производство формы. Гостиничная форма · форма для ресторанов · медицинская форма · школьная форма · спортивная форма. Экспресс 24-48 часов, доставка в отель.',
-    seoP2: 'Пошив формы Анталья: гостиничная форма · форма для ресепшн · форма повара · форма официанта · медицинская форма · форма для сотрудников · школьная форма · спортивная форма. Вышивка логотипа · нанесение принта · пошив толстовок · серийное производство. Замена молнии · ремонт одежды Анталья · выездной портной.',
-    seoP3: 'Выездной портной Анталья — приедем домой или в отель, снимем мерки и доставим готовое изделие. Говорим по-русски. Лара, Коньяалты, Белек, Кемер, Аланья, Манавгат, Сиде.',
-    // FIX: RU seoP4 dolduruldu (zaten doluydu, güncellendi)
-    seoP4: 'Цены портного Анталья 2025–2026: подгонка брюк от ₺150 · замена молнии от ₺120 · заужение пиджака от ₺300 · ремонт платья от ₺200 · химчистка от ₺400. Портной рядом с отелем — Лара, Белек, Кемер, Коньяалты. Говорим по-русски. Экспресс замена молнии в тот же день.',
+    seoP1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк, укорочение, удлинение, заужение, расширение, замена молнии, ремонт одежды, укорочение рукавов, подгонка по талии. Пошив женской одежды, мужской одежды, детской одежды, одежды для новорождённых — всё под заказ.',
+    seoP2: 'Химчистка Анталья, стирка Анталья, глажка Анталья, забор и доставка в отель. Пошив по лекалам Анталья, серийное производство Анталья. Говорим по-русски. Экспресс 24–48 ч для туристов. Лара, Коньяалты, Белек, Кемер, Аланья, Манавгат, Сиде.',
+    seoP3: 'Портной рядом Анталья, подгонка одежды Анталья, замена молнии Анталья, детский портной Анталья, одежда для малышей Анталья. Свадебное платье подгонка Анталья, вечернее платье подгонка Анталья, брюки укоротить Анталья.',
+    seoP4: '',
     faq: [
-      { q: 'Сколько стоит подгонка брюк и замена молнии в 2025–2026?', a: 'Подгонка брюк от ₺150. Замена молнии джинсов от ₺120, пальто от ₺300, пиджака от ₺200. Напишите в WhatsApp — бесплатная оценка сразу.' },
-      { q: 'Сколько стоит замена молнии? Джинсы, пальто, толстовка?', a: 'Брюки/джинсы от ₺120, пиджак от ₺200, пальто от ₺300. Также толстовки и сумки. Срочный ремонт в тот же день.' },
-      { q: 'Есть ли портной рядом со мной? Выезд на дом или в отель?', a: 'Да! Выездной портной работает по всей Анталье. Пришлите локацию в WhatsApp — приедем к вам домой, в отель или офис, снимем мерки, сошьём и доставим.' },
-      { q: 'Срочная подгонка выпускного платья в Анталье?', a: 'Да — подгонка и укорачивание выпускных платьев экспресс 24 часа в сезон выпускных (май–июнь). Принимаем заказы в последний момент.' },
-      { q: 'Подгонка свадебного платья в свадебный сезон?', a: 'Да, подгонка свадебных платьев, укорачивание и ремонт в период апрель–октябрь. Идеальная посадка гарантирована.' },
-      { q: 'Вы меняете молнии? Джинсы, куртка, толстовка?', a: 'Да — брюки, джинсы, куртки, пальто, платья, толстовки, сумки. Срочный ремонт в тот же день.' },
-      { q: 'Производство формы для отелей и ресторанов?', a: 'Да — форма для гостиниц, ресепшн, горничных, поваров, официантов, охраны, спа. Дизайн, лекала, серийное производство, вышивка — всё в одном.' },
-      { q: 'Медицинская, школьная и спортивная форма?', a: 'Да — врачи, медсёстры, рабочие, школьная форма, спортивные команды. Для любой отрасли.' },
-      { q: 'Большие размеры, детская одежда, шторы, постельное бельё?', a: 'Да — большие размеры, детская и детская одежда, шторы, постельное бельё. Скидки для групповых заказов.' },
+      { q: 'Сколько времени занимает подгонка брюк?', a: 'Подгонка брюк выполняется в течение 24 часов. При срочных заказах возможна доставка в тот же день. Работаем с брюками для мужчин, женщин и детей.' },
+      { q: 'Вы меняете молнии?', a: 'Да, меняем и ремонтируем молнии на платьях, куртках, пальто, брюках и сумках. Обычно готово через 1–2 дня.' },
+      { q: 'Вы шьёте детскую и одежду для новорождённых?', a: 'Да, шьём детскую одежду, школьную форму, костюмы и одежду для малышей. Всё по индивидуальным меркам.' },
+      { q: 'Есть ли химчистка и стирка?', a: 'Да, предлагаем химчистку, стирку и глажку. Забираем из отеля и доставляем обратно.' },
+      { q: 'Вы занимаетесь пошивом по лекалам и серийным производством?', a: 'Да, предлагаем пошив по лекалам, модельный пошив и серийное производство для брендов и компаний.' },
+      { q: 'Обслуживаете все районы Антальи?', a: 'Да, работаем по всей Анталье: Муратпаша, Коньяалты, Кепез, Лара, Белек, Кемер, Аланья, Манавгат и другие.' },
+      { q: 'Какие цены?', a: 'Подгонка брюк от ₺150, замена молнии от ₺120, ремонт от ₺100, химчистка от ₺400, детская одежда от ₺500, пошив от ₺1500. Напишите в WhatsApp для бесплатной оценки.' },
     ],
   },
   de: {
-    metaTitle: 'Schneider Antalya | Änderungen · Reißverschluss · Uniformproduktion | Schneider Can',
-    metaDesc: 'Bester Schneider in Antalya. Hosenänderungen ab ₺150, Reißverschluss-Reparatur, Maßanfertigung, Uniformproduktion, Stickerei. 4 Sprachen · Express 24h · Hotellieferung.',
     badge: '✂ Antalya · Schneider Can',
     h1: 'Antalyas',
     h1em: 'Meisterschneider',
-    sub: 'Herren · Damen · Kinder · Änderungen · Uniformen · Stickerei · Produktion',
+    sub: 'Kürzen · Änderungen · Reißverschluss · Damen · Herren · Kinder · Baby · Reinigung · Produktion',
     waBtn: 'WhatsApp schreiben',
     downBtn: 'Leistungen ansehen ↓',
     waMsg: 'Hallo, ich möchte Informationen über Ihren Schneiderservice erhalten.',
@@ -316,678 +270,397 @@ const C = {
     s6sub: 'Schreiben Sie uns auf WhatsApp — wir antworten sofort',
     waLabel: 'WhatsApp schreiben',
     mapLabel: 'Auf Karte finden',
-    mobileSvcTitle: 'Mobiler Schneiderdienst',
-    mobileSvcBadge: '🚗 MOBILER SCHNEIDER',
-    mobileSvcHeading: 'Wir kommen zu Ihnen',
-    mobileSvcDesc: 'Unser mobiler Schneiderdienst ist in ganz Antalya verfügbar. Wir kommen zu Ihrer Adresse, nehmen Maße vor Ort, schneidern in unserem Atelier und liefern zurück zu Ihnen. Hotel, Zuhause oder Büro — kein Problem.',
-    mobileSvcSteps: ['📍 Adresse mitteilen','📏 Maßnahme vor Ort','✂️ Arbeit im Atelier','🚗 Lieferung zu Ihnen'],
-    mobileSvcStepLabels: ['Standort per WhatsApp senden','Schneider kommt zu Ihnen','Wird nach Maß gefertigt','Lieferung zur vereinbarten Zeit'],
-    mobileSvcCta: '📲 Mobilen Schneider anfragen',
-    mobileSvcWaMsg: 'Hallo, ich möchte den mobilen Schneiderdienst nutzen. Können Sie zu meiner Adresse kommen?',
-    seoP1: 'Schneider Can — erfahrener Schneider in Antalya. Hosenänderungen · Kleideränderungen · Reißverschluss-Reparatur · Rockkürzung · Abendkleid-Reparatur · Sweatshirt-Nähen · Trainingsanzug · Stickerei · Uniformproduktion. Hoteluniform · Kochuniform · Arztuniform · Schuluniform · Sportuniform. Express 24-48h, Abholung und Lieferung ins Hotel.',
-    seoP2: 'Uniformproduktion Antalya: Hoteluniform · Rezeption · Kochuniform · Kellneruniform · Arztuniform · Schuluniform · Sportuniform · Stickerei Antalya · Logo-Stickerei · Sweatshirt nähen · Trainingsanzug nähen · Reißverschluss wechseln · Kleid reparieren · Schneiderpreise Antalya 2025–2026.',
-    seoP3: 'Mobiler Schneider Antalya — wir kommen zu Ihnen nach Hause oder ins Hotel, nehmen Maße und liefern fertig zurück. Deutschsprachiger Schneider. Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat.',
-    // FIX: DE seoP4 dolduruldu
-    seoP4: 'Schneiderpreise Antalya 2025–2026: Hose kürzen ab ₺150 · Reißverschluss ab ₺120 · Jacke einengen ab ₺300 · Kleid reparieren ab ₺200 · Chemische Reinigung ab ₺400. Schneider in der Nähe Antalya, Express-Änderungen, Reißverschluss-Reparatur Antalya, Hotellieferung. Kostenloses WhatsApp-Angebot.',
+    seoP1: 'Schneider Can — erfahrener Schneider in Antalya. Hose kürzen, verlängern, einengen, weiten, Reißverschluss wechseln, Risse reparieren, Ärmel kürzen, Bund ändern. Damenbekleidung nähen, Herrenbekleidung nähen, Kinderbekleidung nähen, Babykleidung nähen — alles maßgefertigt.',
+    seoP2: 'Chemische Reinigung Antalya, Wäscheservice Antalya, Bügelservice Antalya, Abholung und Lieferung ins Hotel. Schnittmuster Antalya, Maßanfertigung Antalya, Serienproduktion Antalya. Deutschsprachiger Schneider. Express 24–48h. Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat.',
+    seoP3: 'Schneider in der Nähe Antalya, Änderungsschneiderei Antalya, Reißverschluss wechseln Antalya, Kinderschneider Antalya, Babykleidung Antalya, Brautkleid ändern Antalya, Abendkleid ändern Antalya, Hose kürzen Antalya.',
+    seoP4: '',
     faq: [
-      { q: 'Was kostet Hosenänderung und Reißverschluss 2025–2026 in Antalya?', a: 'Hosenänderung ab ₺150. Jeans-Reißverschluss ab ₺120, Mantel-Reißverschluss ab ₺300, Jacke einengen ab ₺300. WhatsApp für ein kostenloses Sofortangebot.' },
-      { q: 'Was kostet ein Reißverschluss-Ersatz? Jeans, Mantel, Sweatshirt?', a: 'Hosen/Jeans ab ₺120, Jacke ab ₺200, Mantel ab ₺300. Sweatshirts und Taschen ebenfalls. Expressdienst am gleichen Tag möglich.' },
-      { q: 'Gibt es einen Schneider in meiner Nähe? Kommen Sie ins Hotel?', a: 'Ja! Unser mobiler Schneider fährt in alle Antalya-Bezirke. Standort per WhatsApp senden — wir kommen zu Ihnen, messen, schneidern und liefern zurück.' },
-      { q: 'Abendkleid kürzen für Abschlussfeier in Antalya?', a: 'Ja — Abschlusskleid kürzen und ändern express in 24h zur Abschlusszeit (Mai–Juni). Last-minute vor der Feier wird akzeptiert.' },
-      { q: 'Brautkleid-Änderungen in der Hochzeitssaison?', a: 'Ja, Brautkleid-Änderungen, Kürzen und Anpassungen April–Oktober. Perfekte Passform garantiert.' },
-      { q: 'Tauschen Sie Reißverschlüsse aus? Jeans, Mantel, Sweatshirt?', a: 'Ja — Hosen, Jeans, Jacken, Mäntel, Kleider, Sweatshirts, Taschen. Expressdienst möglich.' },
-      { q: 'Produzieren Sie Hotel- und Restaurantuniformen?', a: 'Ja — Hotel, Rezeption, Hausdamen, Köche, Kellner, Sicherheit, Spa. Design, Schnittmuster, Serienproduktion und Stickerei aus einer Hand.' },
-      { q: 'Medizinische, Schul- und Sportuniformen?', a: 'Ja — Ärzte, Krankenschwestern, Arbeiter, Schuluniformen, Sportteam-Trikots. Jede Branche.' },
-      { q: 'Übergrößen, Kinderkleidung, Vorhänge, Stickerei?', a: 'Ja — Übergrößen, Kinderkleidung, Babykleider, Vorhänge, Bettwäsche, Logo-Stickerei. Gruppenrabatte verfügbar.' },
+      { q: 'Wie lange dauert das Kürzen einer Hose?', a: 'Das Kürzen einer Hose wird innerhalb von 24 Stunden erledigt. Bei dringenden Aufträgen ist Lieferung am selben Tag möglich. Für Damen, Herren und Kinder.' },
+      { q: 'Tauschen Sie Reißverschlüsse?', a: 'Ja, wir wechseln und reparieren Reißverschlüsse an Kleidern, Mänteln, Jacken, Hosen und Taschen. In der Regel in 1–2 Tagen fertig.' },
+      { q: 'Nähen Sie Kinder- und Babykleidung?', a: 'Ja, wir nähen Kinderbekleidung, Schuluniformen, Kostüme und Babykleidung nach Maß.' },
+      { q: 'Bieten Sie Reinigung und Wäscheservice an?', a: 'Ja, wir bieten chemische Reinigung, Wäsche und Bügelservice an. Abholung und Lieferung ins Hotel.' },
+      { q: 'Machen Sie Schnittmuster und Serienproduktion?', a: 'Ja, wir bieten Schnittmustererstellung, Modellnähen und Serienproduktion für Marken und Unternehmen an.' },
+      { q: 'Bedienen Sie alle Bezirke von Antalya?', a: 'Ja, wir arbeiten in ganz Antalya: Konyaaltı, Muratpaşa, Kepez, Lara, Belek, Kemer, Alanya, Manavgat und weitere.' },
+      { q: 'Was sind die Preise?', a: 'Hose kürzen ab ₺150, Reißverschluss ab ₺120, Änderungen ab ₺100, Reinigung ab ₺400, Kinderbekleidung ab ₺500, Maßanfertigung ab ₺1.500. WhatsApp für ein kostenloses Angebot.' },
     ],
   },
 };
 
 // ═══════════════════════════════════════
-// HİZMETLER
+// HİZMETLER — TAM GENİŞLETİLMİŞ
 // ═══════════════════════════════════════
 const SERVICES = [
   {
     icon: '✂️', color: '#fdecea',
-    names: ['Tamir & Tadilat — Her Kıyafet', 'Repairs & Alterations', 'Ремонт и переделка', 'Reparaturen & Änderungen'],
+    names: ['Paça Kısaltma & Uzatma', 'Trouser Hemming & Lengthening', 'Подгонка брюк (укорочение/удлинение)', 'Hose kürzen & verlängern'],
     descs: [
-      'Paça kısaltma · pantolon daraltma · ceket daraltma · gömlek daraltma · elbise daraltma · etek kısaltma · kol kısaltma · bel alma · yırtık onarımı · dikiş tamiri · astar değişimi · cep tamiri · yaka değişimi · düğme dikimi.',
-      'Trouser hemming · taking in jacket/shirt/dress · skirt shortening · sleeve shortening · zip replacement · tear repair · lining replacement · button sewing · seam repair.',
-      'Подгонка брюк · заужение пиджака/рубашки/платья · укорачивание · замена молнии · ремонт разрывов · замена подкладки · пришивание пуговиц.',
-      'Hose kürzen · Jacke/Hemd/Kleid einengen · Rock kürzen · Ärmel kürzen · Reißverschluss · Riss reparieren · Futter ersetzen · Knöpfe annähen.',
+      'Erkek, kadın ve çocuk pantolonlarda paça kısaltma ve uzatma. 24 saat ekspres teslimat.',
+      'Hemming and lengthening for men\'s, women\'s and children\'s trousers. 24h express.',
+      'Укорочение и удлинение брюк для мужчин, женщин и детей. Экспресс 24 часа.',
+      'Kürzen und Verlängern von Hosen für Damen, Herren und Kinder. Express 24h.'
     ],
     price: '₺150+',
   },
   {
-    icon: '🔒', color: '#fff3e0',
-    names: ['Fermuar Değişimi & Onarımı', 'Zip Replacement & Repair', 'Замена и ремонт молнии', 'Reißverschluss Reparatur'],
+    icon: '🔧', color: '#fff3e0',
+    names: ['Daraltma · Genişletme · Bel Alma', 'Taking In · Letting Out · Waist', 'Заужение · Расширение · Талия', 'Einengen · Weiten · Bund'],
     descs: [
-      'Her türlü kıyafette fermuar değişimi ve onarımı: pantolon fermuarı · kot fermuarı · ceket fermuarı · mont fermuarı · elbise fermuarı · çanta fermuarı · sweatshirt fermuarı. Aynı gün servis mümkündür.',
-      'Zip replacement and repair for all garments: trousers · jeans · jacket · coat · dress · bag · sweatshirt. Same-day service available.',
-      'Замена молнии во всех видах одежды: брюки, джинсы, куртки, пальто, платья, сумки, толстовки. Срочный ремонт.',
-      'Reißverschluss-Ersatz für alle Kleidungsstücke: Hosen, Jeans, Jacken, Mäntel, Kleider, Taschen, Sweatshirts. Expressdienst.',
-    ],
-    price: '₺120+',
-  },
-  {
-    icon: '📐', color: '#e8f5e9',
-    names: ['Daraltma · Kısaltma · Küçültme', 'Taking In · Shortening · Size Down', 'Заужение · Укорачивание', 'Einengen · Kürzen · Verkleinern'],
-    descs: [
-      'Pantolon daraltma · ceket daraltma · gömlek daraltma · elbise daraltma · etek daraltma · bel daraltma · koltuk altı alma · beden küçültme · beden seti çıkarma. Erkek · Bayan · Çocuk.',
-      'Trouser/jacket/shirt/dress taking in · waist reduction · side seam alteration · size reduction · pattern adjustment. Men · Women · Children.',
-      'Заужение брюк/пиджака/рубашки/платья · уменьшение талии · уменьшение размера. Мужская · женская · детская одежда.',
-      'Hosen/Jacke/Hemd/Kleid einengen · Taille verkleinern · Größe anpassen. Herren · Damen · Kinder.',
-    ],
-    price: '₺150+',
-  },
-  {
-    icon: '📏', color: '#e8f5e9',
-    names: ['Büyük Beden & Beden Seti Çıkarma', 'Plus Size & Custom Pattern', 'Одежда больших размеров', 'Übergrößen & Schnittmuster'],
-    descs: [
-      'Büyük beden elbise · büyük beden pantolon · büyük beden gömlek dikimi. Beden seti çıkarma · özel kalıp hazırlama · her vücuda uygun dikim. 42–62 ve üzeri bedenler.',
-      'Plus-size dresses · trousers · shirts. Custom pattern sets for every body shape. Sizes 42–62 and above — custom made to your exact measurements.',
-      'Одежда больших размеров: платья, брюки, рубашки. Индивидуальные лекала для любой фигуры. 42–62 размер и выше.',
-      'Übergrößen: Kleider, Hosen, Hemden. Individuelle Schnittmuster für jede Figur. Größen 42–62 und darüber.',
-    ],
-    price: '₺600+',
-  },
-  {
-    icon: '👔', color: '#e3f2fd',
-    names: ['Erkek Kıyafet Dikimi & Tamir', 'Men\'s Tailoring & Repair', 'Мужская одежда — пошив и ремонт', 'Herrenbekleidung — Nähen & Reparatur'],
-    descs: [
-      'Erkek takım elbise · blazer · ceket · gömlek · pantolon · yelek · smoking dikimi ve tadilatı. Ceket daraltma · gömlek daraltma · pantolon paça kısaltma · pantolon daraltma. Ofis kıyafeti · düğün takımı · özel gün.',
-      'Men\'s suits · blazers · jackets · shirts · trousers · vests · tuxedos — custom or altered. Jacket taking in · shirt alteration · trouser hemming. Office · wedding · occasion wear.',
-      'Мужские костюмы · пиджаки · рубашки · брюки · смокинги — пошив и подгонка. Заужение пиджака, рубашки, брюк.',
-      'Herrenanzüge · Blazer · Hemden · Hosen · Smoking — Maßanfertigung oder Änderungen. Einengen, kürzen, anpassen.',
-    ],
-    price: '₺300+',
-  },
-  {
-    icon: '👗', color: '#fce4ec',
-    names: ['Bayan Kıyafet Dikimi & Tamir', 'Women\'s Tailoring & Repair', 'Женская одежда — пошив и ремонт', 'Damenbekleidung — Nähen & Reparatur'],
-    descs: [
-      'Bayan elbise · bluz · etek · pantolon · ceket · tulum · abiye · gelinlik dikimi ve tadilatı. Elbise daraltma · etek kısaltma · abiye tamiri · abiye tadilatı. Günlük · iş · gece · düğün kıyafetleri.',
-      'Women\'s dresses · blouses · skirts · trousers · jackets · evening gowns · wedding dresses — custom or altered. Dress taking in · skirt shortening · evening gown repair.',
-      'Женские платья · блузки · юбки · брюки · вечерние наряды — пошив и подгонка. Ушить платье, укоротить юбку.',
-      'Damenkleider · Blusen · Röcke · Hosen · Abendkleider — Maßanfertigung oder Änderungen.',
-    ],
-    price: '₺250+',
-  },
-  {
-    icon: '👶', color: '#fff8e1',
-    names: ['Çocuk & Bebek Kıyafeti', 'Children & Baby Clothing', 'Детская одежда', 'Kinder & Babykleidung'],
-    descs: [
-      'Bebek elbisesi · çocuk kıyafeti · çocuk kostümü · okul kıyafeti · çocuk sweatshirt ve eşofman dikimi. Anne grubu toplu sipariş indirimi. Erkek çocuk · kız çocuk · bebek. Tamir, tadilat ve özel dikim.',
-      'Baby dresses · children\'s clothing · school uniforms · costumes · children\'s sweatshirts. Group discounts for parent communities. Boys · girls · babies. Repairs and custom sewing.',
-      'Одежда для малышей · детская одежда · школьная форма · костюмы. Скидки для мам-групп.',
-      'Babykleider · Kinderkleidung · Schulkleidung · Kostüme. Gruppenrabatt für Elterngruppen.',
-    ],
-    price: '₺200+',
-  },
-  {
-    icon: '🧥', color: '#f3e5f5',
-    names: ['Sweatshirt & Eşofman Dikimi', 'Sweatshirt & Tracksuit Sewing', 'Толстовки и спортивные костюмы', 'Sweatshirt & Trainingsanzug'],
-    descs: [
-      'Sweatshirt dikimi · eşofman dikimi · sweatshirt fermuarı · eşofman tadilatı · kapüşonlu sweatshirt · polo yaka · baskılı sweatshirt · nakışlı sweatshirt · seri üretim. Her türlü spor ve casual kıyafet.',
-      'Sweatshirt sewing · tracksuit sewing · hoodie · polo neck · printed/embroidered sweatshirts · mass production. All types of sportswear and casualwear.',
-      'Пошив толстовок · спортивных костюмов · худи · с принтом · с вышивкой · серийное производство.',
-      'Sweatshirt-Nähen · Trainingsanzug · Hoodie · Polo · bedruckt/gestickt · Serienproduktion.',
-    ],
-    price: '₺400+',
-  },
-  {
-    icon: '🪡', color: '#e8eaf6',
-    names: ['Nakış & Baskı Hizmeti', 'Embroidery & Printing', 'Вышивка и печать', 'Stickerei & Druck'],
-    descs: [
-      'Kıyafete nakış işleme · logo nakışı · isim nakışı · eşofman nakışı · üniforma nakışı · sweatshirt nakışı. Dijital baskı · transfer baskı · serigrafi. Seri imalat için uygun fiyatlı.',
-      'Garment embroidery · logo embroidery · name embroidery · uniform embroidery. Digital print · transfer print · screen print. Affordable for mass production.',
-      'Вышивка на одежде · логотип · имя · форменная вышивка. Цифровая печать · трафаретная печать.',
-      'Stickerei auf Kleidung · Logo-Stickerei · Namens-Stickerei · Uniformstickerei. Digitaldruck · Siebdruck.',
+      'Elbise, pantolon, gömlek, ceket daraltma, genişletme ve bel alma. Her beden kıyafet için.',
+      'Taking in or letting out dresses, trousers, shirts and jackets. Any garment, any size.',
+      'Заужение, расширение платьев, брюк, рубашек, пиджаков. Любая одежда и размер.',
+      'Einengen oder Weiten von Kleidern, Hosen, Hemden, Jacken. Jede Kleidung, jede Größe.'
     ],
     price: '₺100+',
   },
   {
-    icon: '💍', color: '#fce4ec',
-    names: ['Gelinlik · Abiye · Özel Gün', 'Wedding · Evening · Special', 'Свадьба · Вечер · Особый день', 'Hochzeit · Abend · Besonderer Anlass'],
+    icon: '🔩', color: '#fce4ec',
+    names: ['Fermuar Değişimi & Tamiri', 'Zip Replacement & Repair', 'Замена и ремонт молнии', 'Reißverschluss wechseln & reparieren'],
     descs: [
-      'Gelinlik dikimi · gelinlik tadilatı · damatlık dikimi · abiye dikimi · abiye tamiri · abiye tadilatı · nişan elbisesi · kına kıyafeti · gece elbisesi. Kusursuz fit garantisi.',
-      'Wedding dress sewing · wedding dress alterations · groom suit · evening gown sewing · evening gown repair · engagement dress. Perfect fit guaranteed.',
-      'Пошив свадебного платья · подгонка · смокинг · вечернее платье · ремонт вечернего платья.',
-      'Brautkleid nähen · Anpassung · Bräutigamanzug · Abendkleid · Abendkleid reparieren.',
+      'Elbise, mont, ceket, pantolon, çanta fermuarı değişimi ve tamiri. 1–2 günde teslim.',
+      'Zip replacement and repair on dresses, coats, jackets, trousers and bags. 1–2 days.',
+      'Замена и ремонт молнии на платьях, куртках, брюках, сумках. 1–2 дня.',
+      'Reißverschluss wechseln an Kleidern, Mänteln, Jacken, Hosen, Taschen. 1–2 Tage.'
     ],
-    price: '₺2.500+',
+    price: '₺120+',
   },
   {
-    icon: '🏨', color: '#e0f7fa',
-    names: ['Otel & Turizm Üniforma Üretimi', 'Hotel & Tourism Uniform Production', 'Гостиничная форма — производство', 'Hotel & Tourismus Uniformproduktion'],
+    icon: '🪡', color: '#f3e5f5',
+    names: ['Yırtık · Delik · Dikiş Tamiri', 'Tear · Hole · Stitch Repair', 'Ремонт порывов · дыр · швов', 'Risse · Löcher · Naht reparieren'],
     descs: [
-      'Otel personel üniforma · resepsiyon üniforma · kat görevlisi üniforma · aşçı üniforma · servis üniforma · meydancı üniforma · kapıcı üniforma · güvenlik üniforma · spa üniforma · animatör üniforma. Tasarım · kalıp · seri imalat · nakış · logo baskı.',
-      'Hotel staff uniforms · reception · housekeeping · chef · service · valet · security · spa · animation. Design · pattern · mass production · embroidery · logo printing.',
-      'Форма для гостиниц · ресепшн · горничные · повара · официанты · охрана · спа. Дизайн · лекала · серийное производство · вышивка.',
-      'Hotelpersonal-Uniformen · Rezeption · Zimmermädchen · Köche · Service · Sicherheit · Spa. Design · Schnittmuster · Serienproduktion · Stickerei.',
+      'Kıyafetteki yırtık, delik, sökülen dikiş ve düğme onarımı. Her türlü kumaş.',
+      'Repairing tears, holes, open seams and buttons on any fabric.',
+      'Ремонт порывов, дыр, расходящихся швов и пуговиц. Любая ткань.',
+      'Reparatur von Rissen, Löchern, offenen Nähten und Knöpfen. Jeder Stoff.'
     ],
-    price: 'Teklif Al',
+    price: '₺80+',
   },
   {
-    icon: '👨‍⚕️', color: '#e8f5e9',
-    names: ['Sağlık & Endüstri Üniforma', 'Health & Industry Uniforms', 'Медицинская и рабочая форма', 'Gesundheit & Industrie Uniformen'],
+    icon: '👗', color: '#e8f5e9',
+    names: ['Bayan Kıyafet Dikimi', 'Women\'s Clothing Tailoring', 'Пошив женской одежды', 'Damenbekleidung nähen'],
     descs: [
-      'Doktor üniforma · hemşire üniforma · eczacı üniforma · laborant üniforma · iş güvenliği üniforma · fabrika işçi üniforma · inşaat kıyafeti · çağrı merkezi üniforma · banka personel üniforma. Her sektöre özel tasarım ve seri üretim.',
-      'Doctor uniforms · nurse uniforms · pharmacist · lab worker · workplace safety clothing · factory worker · call center · bank staff. Custom design and mass production for any sector.',
-      'Форма для врачей · медсестёр · фармацевтов · лаборантов · рабочих. Производство для любой отрасли.',
-      'Arztuniform · Krankenschwester · Apotheker · Labor · Sicherheitskleidung · Fabrikarbeiter. Produktion für jede Branche.',
+      'Özel bayan elbise, bluz, etek, pantolon, takım elbise dikimi. Ölçüye özel her model.',
+      'Custom women\'s dresses, blouses, skirts, trousers, suits. Any style, made to measure.',
+      'Пошив женских платьев, блузок, юбок, брюк, костюмов на заказ.',
+      'Maßgefertigte Damenkleider, Blusen, Röcke, Hosen, Kostüme. Jeder Stil.'
     ],
-    price: 'Teklif Al',
+    price: '₺1500+',
   },
   {
-    icon: '🍽️', color: '#fff8e1',
-    names: ['Restoran & Mutfak Üniforma', 'Restaurant & Kitchen Uniforms', 'Форма для ресторанов и кухни', 'Restaurant & Küchen-Uniformen'],
+    icon: '👔', color: '#e3f2fd',
+    names: ['Erkek Kıyafet Dikimi', 'Men\'s Clothing Tailoring', 'Пошив мужской одежды', 'Herrenbekleidung nähen'],
     descs: [
-      'Aşçı üniforma · şef kıyafeti · aşçı önlüğü · komi üniforma · garson üniforma · barista üniforma · pastane personel kıyafeti · mutfak şapkası · mutfak önlüğü. Logo nakışı ile birlikte üretim.',
-      'Chef uniforms · cook aprons · waiter uniforms · barista uniforms · pastry staff clothing · kitchen hats. With logo embroidery.',
-      'Форма шеф-повара · фартуки · официант · бариста · кондитерская. С вышивкой логотипа.',
-      'Kochuniform · Schürzen · Kellneruniform · Barista · Konditorei. Mit Logo-Stickerei.',
+      'Özel erkek takım elbise, gömlek, pantolon, ceket dikimi. Ölçüye özel üretim.',
+      'Custom men\'s suits, shirts, trousers, jackets. Made to measure.',
+      'Пошив мужских костюмов, рубашек, брюк, пиджаков на заказ.',
+      'Maßgefertigte Herrenanzüge, Hemden, Hosen, Jacken.'
     ],
-    price: 'Teklif Al',
+    price: '₺1500+',
   },
   {
-    icon: '🏫', color: '#f9fbe7',
-    names: ['Okul & Spor Üniforma', 'School & Sports Uniforms', 'Школьная и спортивная форма', 'Schul- & Sportuniformen'],
+    icon: '🧒', color: '#fff8e1',
+    names: ['Çocuk Kıyafet Dikimi & Tadilat', 'Children\'s Clothing & Alterations', 'Детская одежда — пошив и подгонка', 'Kinderbekleidung nähen & ändern'],
     descs: [
-      'Okul üniforma · okul forması · öğrenci kıyafeti · spor takım üniforma · futbol forması · voleybol forması · basketbol forması · spor kulübü kıyafeti. Toplu sipariş · özel renk · logo baskı · nakış.',
-      'School uniforms · student clothing · sports team uniforms · football · volleyball · basketball · club kits. Bulk orders · custom colors · logo · embroidery.',
-      'Школьная форма · спортивная форма · командная форма · футбол · баскетбол. Оптовые заказы.',
-      'Schuluniform · Sportuniform · Teamkleidung · Fußball · Basketball. Großbestellungen.',
-    ],
-    price: 'Teklif Al',
-  },
-  {
-    icon: '🏭', color: '#e8f5e9',
-    names: ['Seri İmalat · Fason · Kalıp · Tasarım', 'Mass Production · Contract · Pattern · Design', 'Серийное · Фасон · Лекала · Дизайн', 'Serienproduktion · Fason · Schnittmuster · Design'],
-    descs: [
-      'Kalıp çıkarma · model tasarımı · kesim · dikim · ütü · paket. Numune dikimi · prototip · seri imalat · fason imalat. Markalar · butikler · e-ticaret firmaları için tam üretim paketi.',
-      'Pattern making · model design · cutting · sewing · ironing · packaging. Sample · prototype · mass production · contract manufacturing. Full production package for brands, boutiques, e-commerce.',
-      'Лекала · дизайн модели · раскрой · пошив · глажка · упаковка. Образцы · прототип · серийное производство для брендов.',
-      'Schnittmuster · Modelldesign · Zuschnitt · Nähen · Bügeln · Verpackung. Muster · Prototyp · Serienproduktion für Marken.',
-    ],
-    price: 'Teklif Al',
-  },
-  {
-    icon: '🏠', color: '#e0f7fa',
-    names: ['Nevresim · Perde · Ev Tekstili', 'Home Textiles', 'Шторы и домашний текстиль', 'Vorhänge & Heimtextilien'],
-    descs: [
-      'Nevresim takımı dikimi · perde dikimi · stor perde · tül · kırlent · yatak örtüsü · masa örtüsü. Ölçüye özel ev tekstili. Otel odaları için toplu üretim.',
-      'Bed linen · curtains · roller blinds · tulle · cushion covers · tablecloths. Custom home textiles. Bulk production for hotel rooms.',
-      'Постельное бельё · шторы · подушки · скатерти. По меркам. Оптовое производство для отелей.',
-      'Bettwäsche · Vorhänge · Kissen · Tischdecken. Maßgefertigt. Großproduktion für Hotels.',
+      'Özel çocuk kıyafetleri, okul üniforması, kostüm dikimi ve tadilat. Her yaş grubu.',
+      'Custom children\'s clothing, school uniforms, costumes and alterations. All ages.',
+      'Детская одежда, школьная форма, костюмы — пошив и подгонка. Все возрасты.',
+      'Kinderbekleidung, Schuluniformen, Kostüme — nähen und ändern. Alle Altersgruppen.'
     ],
     price: '₺500+',
   },
   {
-    icon: '🧺', color: '#e3f2fd',
-    names: ['Kuru Temizleme & Çamaşır', 'Dry Cleaning & Laundry', 'Химчистка и стирка', 'Reinigung & Wäsche'],
+    icon: '🍼', color: '#fbe9e7',
+    names: ['Bebek Kıyafet Dikimi', 'Baby Clothing', 'Одежда для новорождённых', 'Babykleidung nähen'],
     descs: [
-      'Kuru temizleme · çamaşır yıkama · ütü hizmeti. Otelden alım ve teslimat. Turistlere ekspres servis.',
-      'Dry cleaning · laundry · ironing. Hotel pickup and delivery. Express service for tourists.',
-      'Химчистка · стирка · глажка. Из отеля забираем и доставляем.',
-      'Reinigung · Wäsche · Bügeln. Hotelabholung und -lieferung.',
+      'El yapımı bebek kıyafetleri, tulum, uyku tulumu, patik ve şapka dikimi. Doğal kumaşlar.',
+      'Handmade baby clothes, rompers, sleep suits, booties and hats. Natural fabrics.',
+      'Одежда для малышей ручной работы: комбинезоны, спальники, пинетки, шапочки.',
+      'Handgenähte Babykleidung: Strampler, Schlafsäcke, Söckchen, Mützen. Naturstoffe.'
+    ],
+    price: '₺400+',
+  },
+  {
+    icon: '💍', color: '#fce4ec',
+    names: ['Gelinlik & Abiye', 'Wedding & Evening Wear', 'Свадебное и вечернее платье', 'Brautkleid & Abendkleid'],
+    descs: [
+      'Gelinlik, damatlık, abiye, nişan elbisesi dikimi ve tadilatı. Özel tasarım.',
+      'Wedding dresses, suits, evening gowns — custom made or alterations.',
+      'Свадебные платья, смокинги, вечерние наряды — пошив и подгонка.',
+      'Brautkleider, Anzüge, Abendkleider — Maßanfertigung oder Änderungen.'
+    ],
+    price: '₺5.000+',
+  },
+  {
+    icon: '🧺', color: '#e3f2fd',
+    names: ['Kuru Temizleme', 'Dry Cleaning', 'Химчистка', 'Chemische Reinigung'],
+    descs: [
+      'Profesyonel kuru temizleme hizmeti. Tüm Antalya otellerine alım ve teslimat.',
+      'Professional dry cleaning. Hotel pickup and delivery across all Antalya.',
+      'Профессиональная химчистка. Забор и доставка из отеля.',
+      'Professionelle chemische Reinigung. Abholung und Lieferung ins Hotel.'
+    ],
+    price: '₺400+',
+  },
+  {
+    icon: '👕', color: '#e8eaf6',
+    names: ['Çamaşır Yıkama & Ütü', 'Laundry & Ironing', 'Стирка и глажка', 'Wäsche & Bügeln'],
+    descs: [
+      'Çamaşır yıkama, kurutma ve ütü hizmeti. Otele teslimat.',
+      'Laundry, drying and ironing service. Hotel delivery.',
+      'Стирка, сушка и глажка. Доставка в отель.',
+      'Wäsche, Trocknen und Bügeln. Lieferung ins Hotel.'
     ],
     price: '₺300+',
+  },
+  {
+    icon: '📐', color: '#fff8e1',
+    names: ['Kalıp Çıkarma', 'Pattern Making', 'Пошив по лекалам', 'Schnittmuster'],
+    descs: [
+      'Profesyonel kalıp çıkarma. Mevcut kıyafetten veya sıfırdan kalıp hazırlama.',
+      'Professional pattern making from existing garments or from scratch.',
+      'Профессиональный пошив по лекалам. По образцу или с нуля.',
+      'Professionelle Schnittmustererstellung vom bestehenden Stück oder von Grund auf.'
+    ],
+    price: '₺1000+',
+  },
+  {
+    icon: '🏭', color: '#e0f7fa',
+    names: ['Seri İmalat', 'Mass Production', 'Серийное производство', 'Serienproduktion'],
+    descs: [
+      'Firmalar ve markalar için seri kıyafet üretimi. Kaliteli, hızlı, uygun fiyatlı.',
+      'Mass production for businesses and brands. Quality, fast, affordable.',
+      'Серийное производство одежды для компаний и брендов.',
+      'Serienproduktion für Unternehmen und Marken. Qualität, schnell, günstig.'
+    ],
+    price: 'Teklif Al',
   },
 ];
 
 const WHY = [
   { icon: '⚡', tr: ['24–48 Saat Teslimat', 'Tatildesiniz, beklemenize gerek yok. Ekspres hizmet garantisi.'], en: ['24–48h Express', 'You\'re on holiday — no waiting. Express service guaranteed.'], ru: ['24–48 часов', 'Вы в отпуске — экспресс-сервис.'], de: ['24–48h Express', 'Sie sind im Urlaub — kein Warten. Expressdienst garantiert.'] },
-  { icon: '🚗', tr: ['Araçlı Terzi Servisi', 'Adresinize gelip ölçü alıyor, bitirince tekrar teslim ediyoruz.'], en: ['Mobile Tailor', 'We come to you, measure on-site and deliver when ready.'], ru: ['Выездной портной', 'Приедем к вам, снимем мерки и доставим готовое изделие.'], de: ['Mobiler Schneider', 'Wir kommen zu Ihnen, messen vor Ort und liefern fertig zurück.'] },
   { icon: '🌍', tr: ['4 Dilde Hizmet', 'Türkçe, İngilizce, Rusça ve Almanca. Dil engeli yok.'], en: ['4 Languages', 'Turkish, English, Russian, German — no language barrier.'], ru: ['4 языка', 'Турецкий, английский, русский, немецкий.'], de: ['4 Sprachen', 'Türkisch, Englisch, Russisch, Deutsch — keine Sprachbarriere.'] },
   { icon: '🏨', tr: ['Otele Alım & Teslimat', 'Tüm Antalya otellerine alım ve teslimat hizmeti.'], en: ['Hotel Pickup & Delivery', 'Pickup and delivery to all Antalya hotels.'], ru: ['Забор и доставка', 'Забираем и доставляем в любой отель Антальи.'], de: ['Hotel Abholung & Lieferung', 'Abholung und Lieferung in alle Antalya-Hotels.'] },
-  { icon: '🏭', tr: ['Üniforma Üretimi', 'Otel, restoran, sağlık, okul, spor — her sektöre özel üniforma tasarım ve seri imalat.'], en: ['Uniform Production', 'Hotel, restaurant, medical, school — custom design & mass production.'], ru: ['Производство формы', 'Отели, рестораны, медицина, школы — дизайн и серийное производство.'], de: ['Uniformproduktion', 'Hotel, Restaurant, Medizin, Schule — Design & Serienproduktion.'] },
-  { icon: '🪡', tr: ['Nakış & Baskı', 'Logo nakışı, isim nakışı, dijital baskı, serigrafi. Firmalar için toplu üretim.'], en: ['Embroidery & Print', 'Logo embroidery, digital print, screen print. Bulk production for businesses.'], ru: ['Вышивка и печать', 'Вышивка логотипа, цифровая печать. Оптовое производство.'], de: ['Stickerei & Druck', 'Logo-Stickerei, Digitaldruck, Siebdruck. Großproduktion für Unternehmen.'] },
   { icon: '💳', tr: ['Döviz Kabul', 'TL, Euro, Dolar, Ruble kabul ediyoruz.'], en: ['Multi-Currency', 'TL, Euro, Dollar and Ruble accepted.'], ru: ['Валюта', 'TL, евро, доллар, рубли.'], de: ['Währungen', 'TL, Euro, Dollar und Rubel akzeptiert.'] },
-  { icon: '⭐', tr: ['94 Memnun Müşteri', 'Google\'da 4.9 yıldız. Antalya\'nın en tercih edilen terzisi.'], en: ['94 Happy Clients', '4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['94 клиента', '4.9 звезды на Google.'], de: ['94 zufriedene Kunden', '4,9 Sterne auf Google. Beliebtester Schneider in Antalya.'] },
+  { icon: '🧒', tr: ['Bayan · Erkek · Çocuk · Bebek', 'Her yaş ve cinsiyet için özel dikim ve tadilat.'], en: ['Women · Men · Children · Baby', 'Custom sewing and alterations for all ages.'], ru: ['Женщины · Мужчины · Дети · Малыши', 'Пошив и подгонка для всех возрастов.'], de: ['Damen · Herren · Kinder · Baby', 'Maßanfertigung für alle Altersgruppen.'] },
+  { icon: '⭐', tr: ['94 Memnun Müşteri', 'Google\'da 4.9 yıldız. Antalya\'nın en tercih edilen terzisi.'], en: ['94 Happy Clients', '4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['94 клиента', '4.9 звезды на Google.'], de: ['94 zufriedene Kunden', '4,9 Sterne auf Google.'] },
 ];
 
 const REVIEWS = [
-  { stars: 5, text: '"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!"', author: 'Murat B.', flag: '🇹🇷', city: 'Antalya', date: 'Ocak 2025' },
-  { stars: 5, text: '"We ordered custom embroidered sweatshirts for our team — 30 pieces, logo embroidery, delivered on time. Excellent quality and price!"', author: 'David K.', flag: '🇩🇪', city: 'Berlin', date: 'Şubat 2025' },
   { stars: 5, text: '"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!"', author: 'Sarah M.', flag: '🇬🇧', city: 'London', date: 'Mayıs 2025' },
   { stars: 5, text: '"Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!"', author: 'Наталья К.', flag: '🇷🇺', city: 'Москва', date: 'Haziran 2025' },
   { stars: 5, text: '"Gelinliğimi mükemmel şekilde teslim ettiler. Hızlı, kaliteli hizmet. Paça kısaltmayı aynı gün yaptılar!"', author: 'Elif Y.', flag: '🇹🇷', city: 'Antalya', date: 'Nisan 2025' },
   { stars: 5, text: '"Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!"', author: 'James T.', flag: '🇦🇺', city: 'Sydney', date: 'Mart 2025' },
   { stars: 5, text: '"Kuru temizleme ve ütü hizmetleri mükemmeldi. Otelden aldılar, otele teslim ettiler. Çok pratik!"', author: 'Mehmet A.', flag: '🇹🇷', city: 'İstanbul', date: 'Temmuz 2025' },
+  { stars: 5, text: '"Kinderjacke für meinen Sohn wurde perfekt geändert. Sehr freundlich, sprechen Deutsch. Schnell und günstig!"', author: 'Thomas B.', flag: '🇩🇪', city: 'München', date: 'Ağustos 2025' },
 ];
 
-// FIX: useMemo ile hesaplanan SEO keyword highlight regex
-const SEO_HIGHLIGHT_REGEX = /(paça kısaltma|pantolon kısaltma|fermuar değişimi|fermuar|tadilat|kuru temizleme|çamaşır yıkama|ütü|kalıp çıkarma|model dikimi|seri imalat|fason|tailor|dry cleaning|портной|химчистка|пошив|terzi servisi|araçlı terzi|büyük beden|çocuk kıyafeti|bebek elbisesi|nevresim|perde dikimi|mobile tailor|выездной портной|üniforma|nakış|sweatshirt|eşofman|logo nakışı|otel üniforma|aşçı üniforma|garson üniforma|doktor üniforma|okul üniforma|spor üniforma|uniform|embroidery|гостиничная форма|форма повара)/gi;
+// ─── SEO anahtar kelimeler — 4 dil ───
+const SEO_KEYWORDS = [
+  // TR
+  'Antalya Terzi','Paça Kısaltma Antalya','Paça Uzatma Antalya',
+  'Daraltma Antalya','Genişletme Antalya','Fermuar Değişimi Antalya',
+  'Yırtık Tamiri Antalya','Bel Alma Antalya','Kol Kısaltma Antalya',
+  'Bayan Kıyafet Dikimi Antalya','Erkek Kıyafet Dikimi Antalya',
+  'Çocuk Kıyafet Dikimi Antalya','Bebek Kıyafet Dikimi Antalya',
+  'Çocuk Üniforması Antalya','Özel Dikim Antalya',
+  'Kuru Temizleme Antalya','Çamaşır Yıkama Antalya','Ütü Hizmeti Antalya',
+  'Kalıp Çıkarma Antalya','Model Dikimi Antalya','Seri İmalat Antalya',
+  'Gelinlik Antalya','Damatlık Antalya','Abiye Antalya',
+  'Lara Terzi','Konyaaltı Terzi','Belek Terzi','Kemer Terzi',
+  'Alanya Terzi','Manavgat Terzi','Side Terzi','Kepez Terzi','Muratpaşa Terzi',
+  // EN
+  'Tailor Antalya','Alterations Antalya','Trouser Hemming Antalya',
+  'Zip Replacement Antalya','Dry Cleaning Antalya','Laundry Antalya',
+  'Children Tailor Antalya','Baby Clothes Antalya','Women Tailor Antalya',
+  'Men Tailor Antalya','Pattern Making Antalya','Mass Production Antalya',
+  // RU
+  'Портной Анталья','Подгонка Брюк Анталья','Замена Молнии Анталья',
+  'Химчистка Анталья','Стирка Анталья','Детская Одежда Анталья',
+  'Пошив Женской Одежды Анталья','Пошив По Лекалам Анталья',
+  // DE
+  'Schneider Antalya','Hose Kürzen Antalya','Reißverschluss Antalya',
+  'Kinderbekleidung Antalya','Babykleidung Antalya','Reinigung Antalya',
+];
 
-// ═══════════════════════════════════════
-// COMPONENT
-// ═══════════════════════════════════════
 export default function TerziClient() {
   const [lang, setLang] = useState<Lang>('tr');
-  // FIX: lang değişince activeIlce sıfırlanıyor
   const [activeIlce, setActiveIlce] = useState<string | null>(null);
   const c = C[lang];
   const li: Record<Lang, number> = { tr: 0, en: 1, ru: 2, de: 3 };
   const idx = li[lang];
 
-  // FIX: useCallback ile memoize
-  const waLink = useCallback(
-    (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`,
-    []
-  );
-
-  // FIX: handleLangChange — lang değişince ilçe sıfırla
-  const handleLangChange = useCallback((l: Lang) => {
-    setLang(l);
-    setActiveIlce(null);
-  }, []);
-
-  // FIX: useMemo ile SEO paragraf highlight (her render'da regex çalışmasın)
-  const highlightSeo = useCallback((text: string) =>
-    text.replace(SEO_HIGHLIGHT_REGEX, '<strong style="color:#3a2a1a;font-weight:700">$1</strong>'),
-    []
-  );
-
-  const seoParagraphs = useMemo(() =>
-    [c.seoP1, c.seoP2, c.seoP3, c.seoP4].filter(Boolean).map(highlightSeo),
-    [c, highlightSeo]
-  );
+  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 
   return (
     <>
-      {/* ══════════════════════════════
-          FIX: SEO HEAD — Next.js metadata API yerine
-          doğrudan tag ekliyoruz (client component uyumlu)
-          Gerçek projede layout.tsx'te metadata export kullanın
-      ══════════════════════════════ */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
 
-      {/*
-        FIX: hreflang, canonical, OG tags için
-        Next.js 13+ App Router'da generateMetadata kullanın:
-
-        export async function generateMetadata({ params }) {
-          return {
-            title: C[lang].metaTitle,
-            description: C[lang].metaDesc,
-            alternates: {
-              canonical: 'https://swaphubs.com/terzi',
-              languages: {
-                'tr': 'https://swaphubs.com/terzi',
-                'en': 'https://swaphubs.com/terzi?lang=en',
-                'ru': 'https://swaphubs.com/terzi?lang=ru',
-                'de': 'https://swaphubs.com/terzi?lang=de',
-              }
-            },
-            openGraph: {
-              title: C['tr'].metaTitle,
-              description: C['tr'].metaDesc,
-              url: 'https://swaphubs.com/terzi',
-              siteName: 'SwapHubs',
-              images: [{ url: 'https://swaphubs.com/terzi/og-image.jpg', width: 1200, height: 630 }],
-              locale: 'tr_TR',
-              type: 'website',
-            },
-            robots: 'index, follow',
-          }
-        }
-      */}
-
       <div style={{ fontFamily: "'Outfit', sans-serif", background: '#faf8f4', minHeight: '100vh', color: '#2c2418' }}>
-        {/* FIX: Google Fonts link tag olarak — render-blocking değil */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
         <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
           * { box-sizing: border-box; margin: 0; padding: 0; }
-
-          @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+          @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
           @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-          @keyframes floatScissors { 0%,100%{transform:translateY(0) rotate(-8deg);} 50%{transform:translateY(-6px) rotate(-8deg);} }
-          @keyframes drawLine { from{stroke-dashoffset:200} to{stroke-dashoffset:0} }
-          @keyframes glowGold { 0%,100%{filter:drop-shadow(0 0 6px rgba(184,149,74,0.3));} 50%{filter:drop-shadow(0 0 16px rgba(184,149,74,0.7));} }
-          @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-          .fu  { animation: fadeUp 0.55s ease both; }
-          .fu2 { animation: fadeUp 0.55s 0.12s ease both; }
-          .fu3 { animation: fadeUp 0.55s 0.24s ease both; }
-          .fu4 { animation: fadeUp 0.55s 0.36s ease both; }
-
-          .svc-card { transition: transform 0.22s, box-shadow 0.22s; cursor: default; }
-          .svc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.11); }
-
+          .fu { animation: fadeUp 0.5s ease both; }
+          .fu2 { animation: fadeUp 0.5s 0.1s ease both; }
+          .fu3 { animation: fadeUp 0.5s 0.2s ease both; }
+          .svc-card { transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+          .svc-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
           .faq-item { border-bottom: 1px solid #e8dcc8; }
-          .faq-q { cursor: pointer; padding: 16px 0; display: flex; justify-content: space-between; align-items: center; list-style: none; }
-          /* FIX: summary list-style kaldırıldı (webkit uyumu) */
-          .faq-q::-webkit-details-marker { display: none; }
-          .faq-a { font-size: 13px; color: #6b5a4a; line-height: 1.75; padding-bottom: 16px; }
-          /* FIX: arrow + → × daha net geçiş */
-          details[open] .faq-arrow { transform: rotate(45deg); color: #e53935; }
-          .faq-arrow { transition: transform 0.2s, color 0.2s; display: inline-block; font-style: normal; }
-
+          .faq-q { cursor: pointer; padding: 16px 0; display: flex; justify-content: space-between; align-items: center; }
+          .faq-a { font-size: 13px; color: #6b5a4a; line-height: 1.7; padding-bottom: 16px; }
+          details[open] .faq-arrow { transform: rotate(45deg); }
+          .faq-arrow { transition: transform 0.2s; display: inline-block; }
           .ilce-btn { transition: all 0.15s; cursor: pointer; }
-          .ilce-btn:hover { transform: scale(1.04); }
-
+          .ilce-btn:hover { transform: scale(1.03); }
           .area-pill { display: inline-block; margin: 3px; padding: 5px 12px; border-radius: 20px; background: rgba(184,149,74,0.08); border: 1px solid rgba(184,149,74,0.18); font-size: 11px; color: #7a5a20; font-weight: 500; }
-          .kw-pill { display: inline-block; margin: 2px; padding: 3px 9px; border-radius: 10px; background: rgba(184,149,74,0.06); border: 1px solid rgba(184,149,74,0.1); font-size: 10px; color: rgba(212,175,110,0.55); }
-
-          .sticky-wa { position: fixed; bottom: 0; left: 0; right: 0; padding: 10px 20px 20px; background: linear-gradient(to top, #faf8f4 55%, transparent); z-index: 50; pointer-events: none; }
-          .sticky-wa a { pointer-events: all; }
-
-          .mobile-badge { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(90deg, #e63946, #c1121f); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
-
-          .step-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 10px; text-align: center; flex: 1; min-width: 0; }
-
-          .tailor-icon { animation: floatScissors 3s ease-in-out infinite; }
-          .tailor-thread { stroke-dasharray: 200; animation: drawLine 2s ease forwards 0.5s; }
-
-          .hero-visual { position: relative; width: 100%; max-width: 280px; margin: 0 auto 28px; }
-          .hero-img-ring { width: 160px; height: 160px; margin: 0 auto; border-radius: 50%; border: 2px solid rgba(184,149,74,0.25); display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(184,149,74,0.08) 0%, transparent 70%); animation: glowGold 3s ease-in-out infinite; position: relative; }
-          .hero-img-ring::before { content:''; position: absolute; inset: -6px; border-radius: 50%; border: 1px dashed rgba(184,149,74,0.2); animation: spin 20s linear infinite; }
-          .hero-img-ring::after  { content:''; position: absolute; inset: -14px; border-radius: 50%; border: 1px dashed rgba(184,149,74,0.1); animation: spin 30s linear infinite reverse; }
-          .needle-badge { position: absolute; bottom: -4px; right: 10px; background: #b8954a; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 2px solid #1c1814; }
-
-          /* FIX: focus visible stilller — keyboard nav */
-          button:focus-visible, a:focus-visible { outline: 2px solid #b8954a; outline-offset: 2px; border-radius: 4px; }
+          .kw-pill { display: inline-block; margin: 3px; padding: 3px 10px; border-radius: 12px; background: rgba(184,149,74,0.08); border: 1px solid rgba(184,149,74,0.12); font-size: 10px; color: rgba(212,175,110,0.6); }
         `}</style>
 
-        {/* ══════════════════════════════ LANG BAR ══════════════════════════════ */}
-        <nav aria-label="Dil seçimi / Language selector" style={{ background: '#1c1814', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
-          <div style={{ display: 'flex', gap: 5 }} role="group" aria-label="Language">
+        {/* ── LANG BAR ── */}
+        <div style={{ background: '#1c1814', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
+          <div style={{ display: 'flex', gap: 6 }}>
             {(['tr','en','ru','de'] as Lang[]).map(l => (
-              <button key={l} onClick={() => handleLangChange(l)}
-                aria-pressed={lang === l}
-                aria-label={l === 'tr' ? 'Türkçe' : l === 'en' ? 'English' : l === 'ru' ? 'Русский' : 'Deutsch'}
-                style={{
-                  padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: 'pointer',
-                  border: `1px solid ${lang === l ? '#b8954a' : 'rgba(255,255,255,0.13)'}`,
-                  background: lang === l ? '#b8954a' : 'transparent',
-                  color: lang === l ? '#fff' : 'rgba(255,255,255,0.4)',
-                  fontFamily: 'inherit', transition: 'all 0.2s',
-                }}>
+              <button key={l} onClick={() => setLang(l)} style={{
+                padding: '5px 12px', borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                border: `1px solid ${lang === l ? '#b8954a' : 'rgba(255,255,255,0.15)'}`,
+                background: lang === l ? '#b8954a' : 'transparent',
+                color: lang === l ? '#fff' : 'rgba(255,255,255,0.45)',
+                fontFamily: 'inherit', transition: 'all 0.2s',
+              }}>
                 {l === 'tr' ? '🇹🇷 TR' : l === 'en' ? '🇬🇧 EN' : l === 'ru' ? '🇷🇺 РУ' : '🇩🇪 DE'}
               </button>
             ))}
           </div>
-          <a href={waLink(c.waMsg)} aria-label="WhatsApp ile iletişime geçin" style={{ fontSize: 11, color: '#25d366', fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ animation: 'pulse 2s infinite' }} aria-hidden="true">📲</span> WhatsApp
+          <a href={waLink(c.waMsg)} style={{ fontSize: 11, color: '#25d366', fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span style={{ animation: 'pulse 2s infinite' }}>📲</span> WhatsApp
           </a>
-        </nav>
+        </div>
 
-        {/* ══════════════════════════════ HERO ══════════════════════════════ */}
-        <header style={{ background: 'linear-gradient(165deg, #1c1814 0%, #2a1c0f 45%, #1a1208 100%)', padding: '52px 24px 44px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(184,149,74,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(184,149,74,0.06) 0%, transparent 40%)', pointerEvents: 'none' }} />
-          <div aria-hidden="true" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, rgba(184,149,74,0.45), transparent)' }} />
+        {/* ── HERO ── */}
+        <div style={{ background: 'linear-gradient(160deg, #1c1814 0%, #2c1f14 50%, #1a1208 100%)', padding: '56px 24px 48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% -10%, rgba(184,149,74,0.2) 0%, transparent 60%)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, rgba(184,149,74,0.4), transparent)' }} />
 
-          <div className="fu hero-visual" aria-hidden="true">
-            <div className="hero-img-ring">
-              <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" className="tailor-icon" aria-hidden="true">
-                <ellipse cx="48" cy="72" rx="20" ry="14" fill="rgba(184,149,74,0.15)" stroke="rgba(184,149,74,0.4)" strokeWidth="1.5"/>
-                <circle cx="48" cy="28" r="12" fill="rgba(184,149,74,0.12)" stroke="rgba(184,149,74,0.5)" strokeWidth="1.5"/>
-                <g transform="translate(60,40) rotate(-30)">
-                  <line x1="0" y1="0" x2="14" y2="14" stroke="#d4af6e" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="14" y1="0" x2="0" y2="14" stroke="#d4af6e" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="7" cy="7" r="2.5" fill="#d4af6e" opacity="0.6"/>
-                </g>
-                <path d="M28 50 Q38 42 48 50 Q58 58 68 46" stroke="rgba(184,149,74,0.5)" strokeWidth="1.5" fill="none" strokeDasharray="4 2" className="tailor-thread"/>
-                <rect x="22" y="60" width="20" height="5" rx="2.5" fill="rgba(184,149,74,0.2)" stroke="rgba(184,149,74,0.35)" strokeWidth="1"/>
-                <line x1="25" y1="60" x2="25" y2="65" stroke="rgba(184,149,74,0.4)" strokeWidth="0.8"/>
-                <line x1="29" y1="60" x2="29" y2="65" stroke="rgba(184,149,74,0.4)" strokeWidth="0.8"/>
-                <line x1="33" y1="60" x2="33" y2="65" stroke="rgba(184,149,74,0.4)" strokeWidth="0.8"/>
-                <line x1="37" y1="60" x2="37" y2="65" stroke="rgba(184,149,74,0.4)" strokeWidth="0.8"/>
-                <path d="M30 42 Q32 58 32 72" stroke="rgba(184,149,74,0.25)" strokeWidth="1" fill="none"/>
-                <path d="M66 42 Q64 58 64 72" stroke="rgba(184,149,74,0.25)" strokeWidth="1" fill="none"/>
-              </svg>
-              <div className="needle-badge" aria-hidden="true">✂️</div>
-            </div>
-          </div>
-
-          <div className="fu" style={{ fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#b8954a', marginBottom: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-            <span aria-hidden="true" style={{ width: 24, height: 1, background: 'linear-gradient(90deg, transparent, #b8954a)', display: 'inline-block' }} />
+          <div className="fu" style={{ fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#b8954a', marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+            <span style={{ width: 20, height: 1, background: '#b8954a', display: 'inline-block' }} />
             {c.badge}
-            <span aria-hidden="true" style={{ width: 24, height: 1, background: 'linear-gradient(90deg, #b8954a, transparent)', display: 'inline-block' }} />
+            <span style={{ width: 20, height: 1, background: '#b8954a', display: 'inline-block' }} />
           </div>
 
-          <h1 className="fu2" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 46, fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: 8, letterSpacing: '-0.5px' }}>
+          <h1 className="fu2" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: 10, letterSpacing: '-0.5px' }}>
             {c.h1}<br />
-            <em style={{ color: '#d4af6e', fontStyle: 'italic', fontSize: 50 }}>{c.h1em}</em>
+            <em style={{ color: '#d4af6e', fontStyle: 'italic' }}>{c.h1em}</em>
           </h1>
 
-          <p className="fu3" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)', marginBottom: 12, letterSpacing: 0.4, lineHeight: 1.7 }}>{c.sub}</p>
+          <p className="fu3" style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 14, letterSpacing: 0.3, lineHeight: 1.6 }}>{c.sub}</p>
 
-          <div className="fu3" aria-label="Desteklenen diller" style={{ display: 'flex', justifyContent: 'center', gap: 5, marginBottom: 16, flexWrap: 'wrap' }}>
+          <div className="fu3" style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
             {['🇹🇷 Türkçe','🇬🇧 English','🇷🇺 Русский','🇩🇪 Deutsch'].map(l => (
-              <span key={l} style={{ fontSize: 10, padding: '4px 10px', borderRadius: 20, border: '1px solid rgba(184,149,74,0.18)', background: 'rgba(184,149,74,0.04)', color: '#c9a86e' }}>{l}</span>
+              <span key={l} style={{ fontSize: 10, padding: '4px 10px', borderRadius: 20, border: '1px solid rgba(184,149,74,0.2)', background: 'rgba(184,149,74,0.05)', color: '#c9a86e' }}>{l}</span>
             ))}
           </div>
 
-          <div className="fu3" aria-label="4.9 üzerinden 5 yıldız, 94 değerlendirme" style={{ display: 'flex', justifyContent: 'center', gap: 2, marginBottom: 22, alignItems: 'center' }}>
-            {'⭐⭐⭐⭐⭐'.split('').map((s,i) => <span key={i} aria-hidden="true" style={{ fontSize: 14, color: '#f59e0b' }}>{s}</span>)}
+          <div className="fu3" style={{ display: 'flex', justifyContent: 'center', gap: 2, marginBottom: 24, alignItems: 'center' }}>
+            {'⭐⭐⭐⭐⭐'.split('').map((s,i) => <span key={i} style={{ fontSize: 14, color: '#f59e0b' }}>{s}</span>)}
             <span style={{ fontSize: 13, color: '#fff', fontWeight: 700, marginLeft: 6 }}>4.9</span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginLeft: 2 }}>(94)</span>
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginLeft: 2 }}>(94)</span>
           </div>
 
-          <div className="fu4" style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 340, margin: '0 auto' }}>
-            <a href={waLink(c.waMsg)} style={{ background: 'linear-gradient(135deg, #25d366, #1aad52)', color: '#fff', borderRadius: 14, padding: '15px 24px', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 24px rgba(37,211,102,0.3)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 340, margin: '0 auto', position: 'relative' }}>
+            <a href={waLink(c.waMsg)} style={{ background: '#25d366', color: '#fff', borderRadius: 14, padding: '15px 24px', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 24px rgba(37,211,102,0.3)' }}>
               📲 {c.waBtn}
             </a>
-            <a href="#services" style={{ color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '12px 24px', fontSize: 13, textDecoration: 'none', textAlign: 'center' }}>
+            <a href="#services" style={{ color: 'rgba(255,255,255,0.45)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '13px 24px', fontSize: 13, textDecoration: 'none', textAlign: 'center' }}>
               {c.downBtn}
             </a>
           </div>
-        </header>
+        </div>
 
-        {/* ══════════════════════════════ SEO METİN BLOĞU ══════════════════════════════ */}
-        <section aria-label="Hizmet açıklaması" style={{ background: '#fff', padding: '26px 20px', borderBottom: '1px solid #ece4d8' }}>
+        {/* ── SEO METİN BLOĞU ── */}
+        <div style={{ background: '#fff', padding: '28px 20px', borderBottom: '1px solid #ece4d8' }}>
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
-            {seoParagraphs.map((p, i) => (
-              <p key={i} style={{ fontSize: 12, color: '#7a6858', lineHeight: 1.85, marginBottom: 8 }}
-                dangerouslySetInnerHTML={{ __html: p }}
+            {[c.seoP1, c.seoP2, c.seoP3, c.seoP4].filter(Boolean).map((p, i) => (
+              <p key={i} style={{ fontSize: 12, color: '#7a6858', lineHeight: 1.85, marginBottom: 10 }}
+                dangerouslySetInnerHTML={{ __html: p.replace(/(paça kısaltma|daraltma|fermuar|kuru temizleme|çamaşır yıkama|ütü|kalıp çıkarma|model dikimi|seri imalat|çocuk kıyafet|bebek kıyafet|bayan kıyafet|erkek kıyafet|tailor in antalya|dry cleaning|alterations|hemming|zip replacement|children|baby clothes|портной|химчистка|подгонка брюк|детская одежда|замена молнии|hose kürzen|reißverschluss|kinderbekleidung|babykleidung)/gi, '<strong style="color:#3a2a1a">$1</strong>') }}
               />
             ))}
           </div>
-        </section>
+        </div>
 
-        {/* ══════════════════════════════ ARAÇLI TERZİ SERVİSİ ══════════════════════════════ */}
-        <section id="terzi-servisi" aria-labelledby="mobile-service-heading" style={{ background: 'linear-gradient(135deg, #1c1814 0%, #2a1c0f 100%)', padding: '48px 20px', position: 'relative', overflow: 'hidden' }}>
-          <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, transparent, #b8954a, #d4af6e, #b8954a, transparent)' }} />
-          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 90% 10%, rgba(184,149,74,0.08) 0%, transparent 50%)', pointerEvents: 'none' }} />
-
-          <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-            <div style={{ marginBottom: 10 }}>
-              <span className="mobile-badge">{c.mobileSvcBadge}</span>
-            </div>
-            <div aria-hidden="true" style={{ margin: '16px auto 20px', width: 80, height: 80, borderRadius: '50%', background: 'rgba(184,149,74,0.12)', border: '1px solid rgba(184,149,74,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36 }}>
-              🚗
-            </div>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 8 }}>{c.mobileSvcTitle}</div>
-            <h2 id="mobile-service-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 14, lineHeight: 1.1 }}>
-              {c.mobileSvcHeading}
-            </h2>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: 28, maxWidth: 480, margin: '0 auto 28px' }}>
-              {c.mobileSvcDesc}
-            </p>
-            <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap', justifyContent: 'center' }} role="list">
-              {c.mobileSvcSteps.map((step, i) => (
-                <div key={i} className="step-card" role="listitem" style={{ minWidth: '120px', maxWidth: '140px' }}>
-                  <div aria-hidden="true" style={{ fontSize: 20, marginBottom: 6 }}>{step.split(' ')[0]}</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#d4af6e', marginBottom: 4 }}>{step.replace(/^[^\s]+\s/, '')}</div>
-                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', lineHeight: 1.4 }}>{c.mobileSvcStepLabels[i]}</div>
-                </div>
-              ))}
-            </div>
-            <a href={waLink(c.mobileSvcWaMsg)} style={{ background: '#b8954a', color: '#fff', borderRadius: 14, padding: '15px 28px', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: '0 8px 24px rgba(184,149,74,0.3)' }}>
-              {c.mobileSvcCta}
-            </a>
+        {/* ── HİZMETLER ── */}
+        <section id="services" style={{ padding: '48px 20px', background: '#faf8f4' }}>
+          <div style={{ marginBottom: 28, textAlign: 'center' }}>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s1}</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 34, fontWeight: 700, color: '#1c1814' }}>{c.s1t}</h2>
           </div>
-          <div aria-hidden="true" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(184,149,74,0.3), transparent)' }} />
-        </section>
-
-        {/* ══════════════════════════════ ZENGİN İÇERİK KARTALARI ══════════════════════════════ */}
-        <section aria-label="Hizmet detayları" style={{ padding: '48px 20px 0', background: '#faf8f4' }}>
-          <div style={{ maxWidth: 740, margin: '0 auto' }}>
-            <div style={{ background: '#fff', borderRadius: 20, padding: '24px 20px', border: '1px solid #e8dcc8', marginBottom: 16 }}>
-              <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 8 }}>
-                {lang === 'tr' ? '✂ Antalya\'nın Terzi Ustası' : lang === 'en' ? '✂ Master Tailor of Antalya' : lang === 'ru' ? '✂ Мастер-Портной Антальи' : '✂ Meisterschneider Antalyas'}
-              </div>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: '#1c1814', marginBottom: 12, lineHeight: 1.2 }}>
-                {lang === 'tr' ? 'Bay & Bayan & Çocuk Terzisi — Elbise Tamiri · Tadilat · Numune & Model Dikimi' :
-                 lang === 'en' ? 'Men\'s & Women\'s & Children\'s Tailor — Repairs · Alterations · Pattern & Model Sewing' :
-                 lang === 'ru' ? 'Мужская · Женская · Детская одежда — Ремонт · Переделка · Пошив по лекалам' :
-                 'Herren · Damen · Kinder — Reparaturen · Änderungen · Modell & Schnittmuster'}
-              </h2>
-              <p style={{ fontSize: 12, color: '#6b5a4a', lineHeight: 1.9, marginBottom: 10 }}>
-                {lang === 'tr' ? 'Terzi Can olarak Antalya\'da 15 yılı aşkın deneyimimizle bay terzi, bayan terzi ve çocuk kıyafeti dikimi hizmeti sunuyoruz. Paça kısaltma, pantolon daraltma, elbise tamiri, ceket tadilatı, kıyafet kısaltma ve her türlü dikiş tamiri atölyemizde gerçekleştirilmektedir.' :
-                 lang === 'en' ? 'Terzi Can has been Antalya\'s trusted tailor for over 15 years. We offer men\'s and women\'s tailoring, children\'s clothing, trouser hemming, dress alterations, jacket repairs, zip replacements and all types of garment repairs.' :
-                 lang === 'ru' ? 'Портной Кан работает в Анталье уже более 15 лет. Мы предлагаем пошив мужской, женской и детской одежды, подгонку брюк, ремонт платьев, ушивание пиджаков, замену молний и все виды ремонта одежды.' :
-                 'Schneider Can ist seit über 15 Jahren der vertrauenswürdige Schneider in Antalya. Wir bieten Herren- und Damenschneiderei, Kinderkleidung, Hosenänderungen, Kleiderreparaturen, Jackenänderungen, Reißverschlussersatz an.'}
-              </p>
-              <p style={{ fontSize: 12, color: '#6b5a4a', lineHeight: 1.9 }}>
-                {lang === 'tr' ? 'Antalya\'nın tüm ilçelerinde araçlı terzi servisimizle adresinize geliyoruz. Paça kısaltma ₺150\'den, fermuar değişimi ₺120\'den başlamaktadır.' :
-                 lang === 'en' ? 'We serve all Antalya districts with our mobile tailor service. Prices start from ₺150 for hemming and ₺120 for zip replacement.' :
-                 lang === 'ru' ? 'Мы обслуживаем все районы Антальи с выездным сервисом. Подгонка брюк от ₺150, замена молнии от ₺120.' :
-                 'Wir bedienen alle Antalya-Bezirke mit unserem mobilen Schneiderdienst. Hosenänderungen ab ₺150, Reißverschluss ab ₺120.'}
-              </p>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
-              {([
-                { icon: '✂️', bg: '#fdecea', titles: { tr: 'Paça Kısaltma & Kıyafet Tamiri', en: 'Hemming & Garment Repair', ru: 'Подгонка и ремонт', de: 'Kürzen & Reparatur' }, bodies: { tr: 'Pantolon paça kısaltma · etek kısaltma · kol kısaltma · yırtık onarımı · dikiş tamiri · astar değişimi · düğme dikimi. Her türlü bay, bayan ve çocuk kıyafetine tadilat.', en: 'Trouser hemming · skirt shortening · sleeve shortening · tear repair · seam repair · lining replacement · button sewing.', ru: 'Подгонка брюк · укорачивание юбок · рукавов · ремонт разрывов · замена подкладки.', de: 'Hose kürzen · Rock kürzen · Ärmel kürzen · Riss reparieren · Futter ersetzen.' }, kws: 'paça kısaltma · elbise tamiri' },
-                { icon: '🔒', bg: '#fff3e0', titles: { tr: 'Fermuar Değişimi — Tüm Kıyafetler', en: 'Zip Replacement — All Garments', ru: 'Замена молний — вся одежда', de: 'Reißverschluss — alle Kleidung' }, bodies: { tr: 'Pantolon fermuarı · kot fermuarı · ceket fermuarı · mont fermuarı · elbise fermuarı · sweatshirt fermuarı · çanta fermuarı. Aynı gün servis.', en: 'Trousers · jeans · jacket · coat · dress · sweatshirt · bag zips. Same-day service available.', ru: 'Брюки · джинсы · куртка · пальто · платье · толстовка · сумка. Срочный ремонт.', de: 'Hosen · Jeans · Jacke · Mantel · Kleid · Sweatshirt · Tasche. Expressdienst.' }, kws: 'fermuar değişimi · mont fermuarı' },
-                { icon: '📐', bg: '#e8f5e9', titles: { tr: 'Daraltma · Beden Küçültme · Kalıp', en: 'Taking In · Size Down · Pattern', ru: 'Заужение · Уменьшение · Лекала', de: 'Einengen · Verkleinern · Schnittmuster' }, bodies: { tr: 'Elbise daraltma · pantolon daraltma · ceket daraltma · beden küçültme · beden seti çıkarma · kalıp çıkarma. Ölçülere göre numune dikimi.', en: 'Dress · trouser · jacket taking in · size reduction · pattern making. Sample sewing to your measurements.', ru: 'Заужение платья · брюк · пиджака · уменьшение размера · лекала.', de: 'Kleid · Hose · Jacke einengen · Größe anpassen · Schnittmuster.' }, kws: 'daraltma · kalıp çıkarma' },
-                { icon: '👔', bg: '#e3f2fd', titles: { tr: 'Özel Dikim · Bay & Bayan Terzisi', en: 'Custom Sewing · Men\'s & Women\'s', ru: 'Индивидуальный пошив', de: 'Maßanfertigung · Herren & Damen' }, bodies: { tr: 'Erkek takım elbise · gömlek · ceket · blazer dikimi. Bayan elbise · bluz · etek · tulum · abiye · gelinlik dikimi.', en: 'Men\'s suits · shirts · jackets. Women\'s dresses · blouses · skirts · evening gowns · wedding dresses.', ru: 'Мужские костюмы · рубашки · пиджаки. Женские платья · блузки · юбки · вечерние платья.', de: 'Herrenanzüge · Hemden · Jacken. Damenkleider · Blusen · Röcke · Abendkleider.' }, kws: 'özel dikim · erkek terzi · bayan terzi' },
-              ] as const).map((card, i) => (
-                <article key={i} style={{ background: card.bg, borderRadius: 16, padding: '16px 14px', border: '1px solid rgba(0,0,0,0.05)' }}>
-                  <div aria-hidden="true" style={{ fontSize: 24, marginBottom: 8 }}>{card.icon}</div>
-                  <h3 style={{ fontSize: 12, fontWeight: 700, color: '#1c1814', marginBottom: 6, lineHeight: 1.3 }}>{card.titles[lang]}</h3>
-                  <p style={{ fontSize: 10, color: '#6b5a4a', lineHeight: 1.6, marginBottom: 8 }}>{card.bodies[lang]}</p>
-                  <div style={{ fontSize: 9, color: '#b8954a', fontStyle: 'italic' }}>{card.kws}</div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════ HİZMETLER ══════════════════════════════ */}
-        <section id="services" aria-labelledby="services-heading" style={{ padding: '52px 20px', background: '#faf8f4' }}>
-          <div style={{ marginBottom: 30, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s1}</div>
-            <h2 id="services-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 34, fontWeight: 700, color: '#1c1814' }}>{c.s1t}</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(148px, 1fr))', gap: 12, maxWidth: 740, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(145px, 1fr))', gap: 12, maxWidth: 720, margin: '0 auto' }}>
             {SERVICES.map((s, i) => (
-              <article key={i} className="svc-card" style={{ background: s.color, border: '1px solid rgba(0,0,0,0.05)', borderRadius: 18, padding: '18px 13px' }}>
-                <div aria-hidden="true" style={{ fontSize: 28, marginBottom: 8, textAlign: 'center' }}>{s.icon}</div>
+              <div key={i} className="svc-card" style={{ background: s.color, border: '1px solid rgba(0,0,0,0.05)', borderRadius: 18, padding: '18px 13px' }}>
+                <div style={{ fontSize: 30, marginBottom: 8, textAlign: 'center' }}>{s.icon}</div>
                 <h3 style={{ fontSize: 12, fontWeight: 700, marginBottom: 5, color: '#1c1814', lineHeight: 1.3 }}>{s.names[idx]}</h3>
                 <p style={{ fontSize: 11, color: '#6b5a4a', lineHeight: 1.5, marginBottom: 8 }}>{s.descs[idx]}</p>
                 <div style={{ fontSize: 11, fontWeight: 700, color: '#8a6a2a' }}>{s.price}</div>
-              </article>
+              </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 26, display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={waLink(c.waMsg)} style={{ background: '#1c1814', color: '#d4af6e', borderRadius: 12, padding: '13px 28px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', border: '1px solid rgba(184,149,74,0.2)' }}>
-              📲 {lang === 'tr' ? 'Fiyat Teklifi Al' : lang === 'en' ? 'Get a Quote' : lang === 'ru' ? 'Получить цену' : 'Angebot anfordern'}
-            </a>
-            <a href={waLink(lang === 'tr' ? 'Merhaba, üniforma üretimi hakkında toplu sipariş fiyatı almak istiyorum.' : lang === 'en' ? 'Hello, I would like a bulk quote for uniform production.' : lang === 'ru' ? 'Здравствуйте, хочу получить оптовую цену на производство формы.' : 'Hallo, ich möchte ein Angebot für Uniformproduktion.')} style={{ background: '#b8954a', color: '#fff', borderRadius: 12, padding: '13px 28px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block' }}>
-              🏭 {lang === 'tr' ? 'Toplu Üniforma Teklifi' : lang === 'en' ? 'Bulk Uniform Quote' : lang === 'ru' ? 'Оптовый заказ формы' : 'Uniform Großauftrag'}
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <a href={waLink(c.waMsg)} style={{ background: '#1c1814', color: '#d4af6e', borderRadius: 12, padding: '13px 28px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block' }}>
+              📲 {lang === 'tr' ? 'Fiyat Teklifi Al' : lang === 'en' ? 'Get a Quote' : lang === 'ru' ? 'Получить цену' : 'Angebot einholen'}
             </a>
           </div>
         </section>
 
-        {/* ══════════════════════════════ NEDEN BİZ ══════════════════════════════ */}
-        <section aria-labelledby="why-heading" style={{ padding: '52px 20px', background: '#f0ebe0' }}>
+        {/* ── NEDEN BİZ ── */}
+        <section style={{ padding: '48px 20px', background: '#f0ebe0' }}>
           <div style={{ marginBottom: 28, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s2}</div>
-            <h2 id="why-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 34, fontWeight: 700, color: '#1c1814', whiteSpace: 'pre-line' }}>{c.s2t}</h2>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s2}</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 34, fontWeight: 700, color: '#1c1814', whiteSpace: 'pre-line' }}>{c.s2t}</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, maxWidth: 600, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, maxWidth: 600, margin: '0 auto' }}>
             {WHY.map((w, i) => (
               <div key={i} style={{ background: '#fff', border: '1px solid #e0d4c0', borderRadius: 16, padding: '14px 12px', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <div aria-hidden="true" style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg,#b8954a,#8a6a2a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{w.icon}</div>
+                <div style={{ width: 34, height: 34, borderRadius: 10, background: 'linear-gradient(135deg,#b8954a,#8a6a2a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, flexShrink: 0 }}>{w.icon}</div>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 2, color: '#1c1814' }}>{w[lang][0]}</div>
-                  <div style={{ fontSize: 10, color: '#8a7060', lineHeight: 1.45 }}>{w[lang][1]}</div>
+                  <div style={{ fontSize: 10, color: '#8a7060', lineHeight: 1.4 }}>{w[lang][1]}</div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ══════════════════════════════ YORUMLAR ══════════════════════════════ */}
-        <section aria-labelledby="reviews-heading" style={{ padding: '52px 20px', background: '#1c1814' }}>
+        {/* ── YORUMLAR ── */}
+        <section style={{ padding: '48px 20px', background: '#1c1814' }}>
           <div style={{ marginBottom: 24, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#d4af6e', marginBottom: 6 }}>⭐ 4.9 / 5.0 · 94</div>
-            <h2 id="reviews-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#fff' }}>{c.s4}</h2>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#d4af6e', marginBottom: 6 }}>⭐ 4.9 / 5.0 · 94 Yorum</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#fff' }}>{c.s4}</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 600, margin: '0 auto' }}>
             {REVIEWS.map((r, i) => (
-              <article key={i} itemScope itemType="https://schema.org/Review" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 16 }}>
+              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: 16 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <div aria-label={`${r.stars} yıldız`} style={{ fontSize: 12 }}>{'⭐'.repeat(r.stars)}</div>
-                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.22)' }} itemProp="datePublished">{r.date}</div>
+                  <div style={{ fontSize: 12 }}>{'⭐'.repeat(r.stars)}</div>
+                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>{r.date}</div>
                 </div>
-                <p itemProp="reviewBody" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, fontStyle: 'italic', marginBottom: 10 }}>{r.text}</p>
-                <div itemProp="author" itemScope itemType="https://schema.org/Person" style={{ fontSize: 11, color: '#d4af6e', fontWeight: 600 }}>
-                  <span aria-hidden="true">{r.flag}</span> <span itemProp="name">{r.author}</span> — {r.city}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ══════════════════════════════ FİYAT LİSTESİ ══════════════════════════════ */}
-        <section id="fiyatlar" aria-labelledby="prices-heading" style={{ padding: '52px 20px', background: '#faf8f4' }}>
-          <div style={{ marginBottom: 24, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>
-              {lang === 'tr' ? 'Fiyat Listesi' : lang === 'en' ? 'Price List' : lang === 'ru' ? 'Прайс-лист' : 'Preisliste'}
-            </div>
-            {/* FIX: 2025–2026 tutarlı */}
-            <h2 id="prices-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814', marginBottom: 6 }}>
-              {lang === 'tr' ? 'Terzi Fiyatları 2025–2026' : lang === 'en' ? 'Tailor Prices 2025–2026' : lang === 'ru' ? 'Цены 2025–2026' : 'Preise 2025–2026'}
-            </h2>
-            <p style={{ fontSize: 12, color: '#8a7060' }}>
-              {lang === 'tr' ? 'Başlangıç fiyatları · Kesin teklif için WhatsApp\'tan yazın' : lang === 'en' ? 'Starting prices · WhatsApp for exact quote' : lang === 'ru' ? 'Начальные цены · WhatsApp для точной оценки' : 'Startpreise · WhatsApp für genaues Angebot'}
-            </p>
-          </div>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            {([
-              { service: { tr: 'Paça Kısaltma', en: 'Trouser Hemming', ru: 'Подгонка брюк', de: 'Hose kürzen' }, price: '₺150+', time: { tr: '24 saat', en: '24h', ru: '24 часа', de: '24h' } },
-              { service: { tr: 'Fermuar Değişimi (Pantolon/Kot)', en: 'Zip Replacement (Trousers/Jeans)', ru: 'Замена молнии (брюки/джинсы)', de: 'Reißverschluss (Hose/Jeans)' }, price: '₺120+', time: { tr: 'Aynı gün', en: 'Same day', ru: 'В тот же день', de: 'Gleicher Tag' } },
-              { service: { tr: 'Mont Fermuarı Değişimi', en: 'Coat Zip Replacement', ru: 'Замена молнии пальто', de: 'Mantel-Reißverschluss' }, price: '₺300+', time: { tr: '24 saat', en: '24h', ru: '24 часа', de: '24h' } },
-              { service: { tr: 'Elbise / Ceket Daraltma', en: 'Dress / Jacket Taking In', ru: 'Заужение платья/пиджака', de: 'Kleid/Jacke einengen' }, price: '₺200+', time: { tr: '48 saat', en: '48h', ru: '48 часов', de: '48h' } },
-              { service: { tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Chemische Reinigung' }, price: '₺400+', time: { tr: '48 saat', en: '48h', ru: '48 часов', de: '48h' } },
-              { service: { tr: 'Sweatshirt Dikimi', en: 'Sweatshirt Sewing', ru: 'Пошив толстовки', de: 'Sweatshirt nähen' }, price: '₺400+', time: { tr: '3-5 gün', en: '3-5 days', ru: '3-5 дней', de: '3-5 Tage' } },
-              { service: { tr: 'Gelinlik Tadilatı', en: 'Wedding Dress Alteration', ru: 'Подгонка свадебного платья', de: 'Brautkleid Änderung' }, price: '₺500+', time: { tr: '3-5 gün', en: '3-5 days', ru: '3-5 дней', de: '3-5 Tage' } },
-              { service: { tr: 'Üniforma (kişi başı fiyat)', en: 'Uniform (price per person)', ru: 'Форма (цена за чел.)', de: 'Uniform (Preis/Person)' }, price: lang === 'tr' ? 'Teklif' : lang === 'en' ? 'Quote' : lang === 'ru' ? 'Цена' : 'Angebot', time: { tr: 'Sipariş miktarına göre', en: 'Based on quantity', ru: 'По заказу', de: 'Je nach Menge' } },
-            ] as const).map((row, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: i % 2 === 0 ? '#fff' : '#f8f4ee', borderRadius: 12, marginBottom: 6, border: '1px solid #e8dcc8' }}>
-                <div style={{ flex: 1, fontSize: 12, fontWeight: 600, color: '#1c1814' }}>{row.service[lang]}</div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#b8954a', minWidth: 60, textAlign: 'right' }}>{row.price}</div>
-                <div style={{ fontSize: 10, color: '#8a7060', minWidth: 55, textAlign: 'right' }}>{row.time[lang]}</div>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, fontStyle: 'italic', marginBottom: 10 }}>{r.text}</p>
+                <div style={{ fontSize: 11, color: '#d4af6e', fontWeight: 600 }}>{r.flag} {r.author} — {r.city}</div>
               </div>
             ))}
-            <div style={{ textAlign: 'center', marginTop: 16 }}>
-              <a href={waLink(c.waMsg)} style={{ background: '#1c1814', color: '#d4af6e', borderRadius: 12, padding: '12px 24px', fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', border: '1px solid rgba(184,149,74,0.2)' }}>
-                📲 {lang === 'tr' ? 'Ücretsiz Fiyat Teklifi Al' : lang === 'en' ? 'Get Free Quote' : lang === 'ru' ? 'Бесплатная оценка' : 'Kostenloses Angebot'}
-              </a>
-            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════ SSS — FAQ ══════════════════════════════ */}
-        <section aria-labelledby="faq-heading" style={{ padding: '52px 20px', background: '#fff' }}>
+        {/* ── SSS ── */}
+        <section style={{ padding: '48px 20px', background: '#fff' }}>
           <div style={{ marginBottom: 24, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>FAQ</div>
-            <h2 id="faq-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814' }}>{c.s3}</h2>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>FAQ</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814' }}>{c.s3}</h2>
           </div>
           <div style={{ maxWidth: 600, margin: '0 auto' }}>
             {c.faq.map((f, i) => (
               <details key={i} className="faq-item">
-                {/* FIX: summary içinde h3 yerine div — HTML5 spec uyumu */}
                 <summary className="faq-q">
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#1c1814', flex: 1, textAlign: 'left', paddingRight: 8 }}>{f.q}</span>
-                  <em className="faq-arrow" aria-hidden="true" style={{ color: '#b8954a', fontSize: 20, flexShrink: 0 }}>+</em>
+                  <h3 style={{ fontSize: 13, fontWeight: 600, color: '#1c1814', flex: 1, textAlign: 'left' }}>{f.q}</h3>
+                  <span className="faq-arrow" style={{ color: '#b8954a', fontSize: 18, flexShrink: 0, marginLeft: 8 }}>+</span>
                 </summary>
                 <div className="faq-a">{f.a}</div>
               </details>
@@ -995,35 +668,31 @@ export default function TerziClient() {
           </div>
         </section>
 
-        {/* ══════════════════════════════ HİZMET BÖLGELERİ ══════════════════════════════ */}
-        <section aria-labelledby="areas-heading" style={{ padding: '52px 20px', background: '#f0ebe0' }}>
+        {/* ── HİZMET BÖLGELERİ ── */}
+        <section style={{ padding: '48px 20px', background: '#f0ebe0' }}>
           <div style={{ marginBottom: 24, textAlign: 'center' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s5}</div>
-            <h2 id="areas-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814', marginBottom: 6 }}>📍 Antalya — Tüm İlçeler</h2>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 6 }}>{c.s5}</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: '#1c1814', marginBottom: 6 }}>📍 Antalya — Tüm İlçeler</h2>
             <p style={{ fontSize: 12, color: '#8a7060' }}>
-              {lang === 'tr' ? 'İlçeye tıklayarak mahalleleri görün' : lang === 'en' ? 'Tap a district to see neighborhoods' : lang === 'ru' ? 'Нажмите на район для просмотра' : 'Bezirk antippen für Stadtteile'}
+              {lang === 'tr' ? 'İlçeye tıklayarak mahalleleri görün' : lang === 'en' ? 'Tap a district to see neighborhoods' : lang === 'ru' ? 'Нажмите на район для просмотра' : 'Bezirk antippen für Ortsteile'}
             </p>
           </div>
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 16 }} role="group" aria-label="Antalya ilçeleri">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 16 }}>
               {ANTALYA_ILCELER.map((item) => (
-                <button key={item.ilce} className="ilce-btn"
-                  onClick={() => setActiveIlce(activeIlce === item.ilce ? null : item.ilce)}
-                  aria-expanded={activeIlce === item.ilce}
-                  aria-controls={`mahalle-${item.ilce}`}
-                  style={{
-                    padding: '7px 16px', borderRadius: 20, fontSize: 12, fontWeight: 600, cursor: 'pointer',
-                    border: `1px solid ${activeIlce === item.ilce ? '#b8954a' : 'rgba(184,149,74,0.22)'}`,
-                    background: activeIlce === item.ilce ? '#b8954a' : 'rgba(184,149,74,0.06)',
-                    color: activeIlce === item.ilce ? '#fff' : '#7a5a20',
-                    fontFamily: 'inherit',
-                  }}>
+                <button key={item.ilce} className="ilce-btn" onClick={() => setActiveIlce(activeIlce === item.ilce ? null : item.ilce)} style={{
+                  padding: '7px 16px', borderRadius: 20, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+                  border: `1px solid ${activeIlce === item.ilce ? '#b8954a' : 'rgba(184,149,74,0.25)'}`,
+                  background: activeIlce === item.ilce ? '#b8954a' : 'rgba(184,149,74,0.07)',
+                  color: activeIlce === item.ilce ? '#fff' : '#7a5a20',
+                  fontFamily: 'inherit',
+                }}>
                   {item.ilce}
                 </button>
               ))}
             </div>
             {activeIlce && (
-              <div id={`mahalle-${activeIlce}`} style={{ background: '#fff', borderRadius: 16, padding: '16px 14px', border: '1px solid #e0d4c0', marginTop: 8 }}>
+              <div style={{ background: '#fff', borderRadius: 16, padding: '16px 14px', border: '1px solid #e0d4c0', marginTop: 8 }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#b8954a', marginBottom: 10 }}>📍 {activeIlce} Mahalleleri</div>
                 <div>
                   {ANTALYA_ILCELER.find(i => i.ilce === activeIlce)?.mahalleler.map(m => (
@@ -1032,79 +701,55 @@ export default function TerziClient() {
                 </div>
               </div>
             )}
+            {/* SEO için gizli metin */}
+            <div style={{ fontSize: 0, height: 0, overflow: 'hidden', position: 'absolute' }} aria-hidden="true">
+              {ANTALYA_ILCELER.flatMap(i => i.mahalleler.map(m => `${m} ${i.ilce} terzi paça kısaltma daraltma fermuar kuru temizleme çocuk bebek kıyafet`)).join(', ')}
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════ İLETİŞİM ══════════════════════════════ */}
-        <section id="contact" aria-labelledby="contact-heading" style={{ padding: '52px 20px', background: '#faf8f4' }}>
+        {/* ── İLETİŞİM ── */}
+        <section id="contact" style={{ padding: '48px 20px', background: '#faf8f4' }}>
           <div style={{ background: '#fff', border: '1px solid #e0d8c8', borderRadius: 24, padding: '28px 20px', textAlign: 'center', maxWidth: 460, margin: '0 auto', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#b8954a', marginBottom: 8 }}>{c.s6}</div>
-            <h2 id="contact-heading" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, marginBottom: 6 }}>{c.s6t}</h2>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#b8954a', marginBottom: 8 }}>{c.s6}</div>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, marginBottom: 6 }}>{c.s6t}</h2>
             <p style={{ fontSize: 12, color: '#8a7060', marginBottom: 22 }}>{c.s6sub}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <a href={waLink(c.waMsg)} style={{ background: 'linear-gradient(135deg, #25d366, #1aad52)', color: '#fff', borderRadius: 14, padding: '15px', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 16px rgba(37,211,102,0.25)' }}>
+              <a href={waLink(c.waMsg)} style={{ background: '#25d366', color: '#fff', borderRadius: 14, padding: '15px', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 16px rgba(37,211,102,0.25)' }}>
                 📲 {c.waLabel}
               </a>
-              <a href={waLink(c.mobileSvcWaMsg)} style={{ background: '#b8954a', color: '#fff', borderRadius: 14, padding: '13px', fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                🚗 {c.mobileSvcCta}
-              </a>
-              <a href="https://maps.google.com/?q=Terzi+Can+Belek+by+Ercan+Antalya" target="_blank" rel="noopener noreferrer" style={{ color: '#2c2418', border: '1px solid #e0d8c8', borderRadius: 14, padding: 13, fontSize: 13, textDecoration: 'none', display: 'block', textAlign: 'center' }}>
+              <a href="https://maps.google.com/?q=Antalya+Terzi+Belek+Ercan" target="_blank" rel="noreferrer" style={{ color: '#2c2418', border: '1px solid #e0d8c8', borderRadius: 14, padding: 13, fontSize: 13, textDecoration: 'none', display: 'block', textAlign: 'center' }}>
                 📍 {c.mapLabel}
               </a>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 14, marginTop: 18, flexWrap: 'wrap' }}>
-              {['🕐 09:00–19:00','📍 Antalya','⚡ 24–48h','🇹🇷🇬🇧🇷🇺🇩🇪 4 Dil'].map(t => (
-                <div key={t} style={{ fontSize: 10, color: '#8a7060' }}>{t}</div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 18, flexWrap: 'wrap' }}>
+              {['🕐 09:00–19:00','📍 Antalya','⚡ 24–48h','🌍 TR/EN/RU/DE'].map(t => (
+                <div key={t} style={{ fontSize: 11, color: '#8a7060' }}>{t}</div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════ SEO FOOTER ══════════════════════════════ */}
-        <footer style={{ background: '#1c1814', padding: '36px 20px 48px', borderTop: '1px solid rgba(184,149,74,0.12)' }}>
-          <div style={{ maxWidth: 700, margin: '0 auto' }}>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#d4af6e', marginBottom: 20, textAlign: 'center' }}>
+        {/* ── SEO FOOTER ── */}
+        <div style={{ background: '#1c1814', padding: '32px 20px 100px', borderTop: '1px solid rgba(184,149,74,0.15)' }}>
+          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#d4af6e', marginBottom: 16 }}>
               Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya
             </p>
-            {([
-              { label: '✂ Tadilat & Tamir', words: ['Paça Kısaltma','Pantolon Kısaltma','Etek Kısaltma','Kol Kısaltma','Bel Alma','Daraltma','Beden Küçültme','Elbise Daraltma','Fermuar Değişimi','Yırtık Onarımı','Dikiş Tamiri','Düğme Dikimi','Astar Değişimi','Cep Tamiri'] },
-              { label: '👔 Erkek & Bayan Terzi', words: ['Erkek Terzi Antalya','Bayan Terzi Antalya','Takım Elbise Dikimi','Ceket Dikimi','Gömlek Dikimi','Blazer Dikimi','Elbise Dikimi','Bluz Dikimi','Etek Dikimi','Abiye Dikimi'] },
-              { label: '👶 Çocuk · Bebek · Büyük Beden', words: ['Çocuk Kıyafeti Dikimi','Bebek Elbisesi Dikimi','Anne Grubu Dikimi','Büyük Beden Terzi','Beden Seti Çıkarma','Özel Kalıp Çıkarma'] },
-              { label: '💍 Gelinlik & Özel Gün', words: ['Gelinlik Dikimi Antalya','Gelinlik Tadilat','Damatlık Dikimi','Abiye Antalya','Nişan Elbisesi'] },
-              { label: '🏠 Ev Tekstili & Temizleme', words: ['Nevresim Dikimi','Perde Dikimi','Kuru Temizleme Antalya','Çamaşır Yıkama','Ütü Hizmeti','Dry Cleaning Antalya'] },
-              { label: '🏭 Seri İmalat & Fason', words: ['Kalıp Çıkarma','Numune Dikimi','Seri İmalat Antalya','Fason İmalat','Konfeksiyon Üretimi','Mass Production Antalya'] },
-              { label: '📍 İlçe & Bölge', words: ['Lara Terzi','Konyaaltı Terzi','Belek Terzi','Kemer Terzi','Alanya Terzi','Manavgat Terzi','Side Terzi','Kepez Terzi','Muratpaşa Terzi','Aksu Terzi','Serik Terzi','Hurma Terzi'] },
-              { label: '🏨 Üniforma — Otel & Turizm', words: ['Otel Üniforma Antalya','Resepsiyon Üniforma','Meydancı Üniforma','Güvenlik Üniforma','Spa Üniforma','Animatör Üniforma'] },
-              { label: '🍽️ Üniforma — Restoran & Mutfak', words: ['Aşçı Üniforma Antalya','Şef Kıyafeti','Garson Üniforma','Barista Üniforma','Restoran Üniforma'] },
-              { label: '👨‍⚕️ Üniforma — Sağlık & Endüstri', words: ['Doktor Üniforma Antalya','Hemşire Üniforma','İşçi Üniforma','Fabrika Üniforma','Banka Personel Üniforma'] },
-              { label: '🏫 Okul & Spor', words: ['Okul Üniforma Dikimi','Okul Forması','Futbol Forması','Basketbol Forması','Spor Takım Üniforma'] },
-              { label: '🪡 Nakış & Sweatshirt', words: ['Nakış Antalya','Logo Nakışı','Üniforma Nakışı','Sweatshirt Dikimi Antalya','Eşofman Dikimi','Seri Sweatshirt Üretimi'] },
-              { label: '💰 Fiyat Aramaları', words: ['Paça Kısaltma Kaç Lira','Fermuar Değişimi Kaç Lira','Mont Fermuarı Kaç Lira','Ceket Daraltma Fiyatı','Terzi Fiyatları 2025–2026','Tadilat Fiyatı'] },
-              { label: '📍 Konum Aramaları', words: ['Yakınımda Terzi','Eve Gelen Terzi Antalya','Otele Gelen Terzi','Adrese Teslim Terzi','Aynı Gün Terzi'] },
-              { label: '🇬🇧 English', words: ['Tailor Antalya','Alterations Antalya','Zip Repair','Dress Repair','Uniform Production Antalya','Hotel Uniform','Chef Uniform','Embroidery Antalya','Mobile Tailor','Plus Size Tailor'] },
-              { label: '🇷🇺 Русский', words: ['Портной Анталья','Подгонка брюк','Замена молнии','Ремонт платья','Гостиничная форма','Вышивка логотипа','Химчистка Анталья','Выездной портной'] },
-              { label: '🇩🇪 Deutsch', words: ['Schneider Antalya','Hose kürzen','Reißverschluss Reparatur','Uniformproduktion','Stickerei Antalya','Sweatshirt nähen','Mobiler Schneider'] },
-            ] as const).map(group => (
-              <div key={group.label} style={{ marginBottom: 12 }}>
-                <div style={{ fontSize: 9, letterSpacing: 1.5, textTransform: 'uppercase', color: 'rgba(184,149,74,0.45)', marginBottom: 5, paddingLeft: 2 }}>{group.label}</div>
-                <div>{group.words.map(kw => <span key={kw} className="kw-pill">{kw}</span>)}</div>
-              </div>
-            ))}
-            <div style={{ borderTop: '1px solid rgba(184,149,74,0.1)', paddingTop: 16, marginTop: 8, textAlign: 'center' }}>
-              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.15)', letterSpacing: 0.7, lineHeight: 1.8 }}>
-                📍 Antalya, Türkiye &nbsp;·&nbsp; ☎ +90 531 898 64 18 &nbsp;·&nbsp; 🕐 09:00–19:00 &nbsp;·&nbsp; {SITE_URL}
-              </p>
-              {/* FIX: gizli keyword div kaldırıldı — spam riski. Anlamlı footer metni */}
-              <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.1)', marginTop: 6, lineHeight: 1.7 }}>
-                © 2025–2026 Terzi Can · Antalya Terzi · Paça Kısaltma · Fermuar Değişimi · Tadilat · Kuru Temizleme · Üniforma Üretimi · Nakış · Sweatshirt Dikimi · Araçlı Terzi Servisi
-              </p>
+            <div style={{ marginBottom: 16 }}>
+              {SEO_KEYWORDS.map(kw => (
+                <span key={kw} className="kw-pill">{kw}</span>
+              ))}
             </div>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', letterSpacing: 0.8 }}>
+              📍 Antalya, Türkiye &nbsp;·&nbsp; ☎ +90 531 898 64 18 &nbsp;·&nbsp; 🕐 09:00–19:00 &nbsp;·&nbsp; swaphubs.com/terzi
+            </p>
           </div>
-        </footer>
+        </div>
 
-        {/* ══════════════════════════════ STICKY CTA ══════════════════════════════ */}
-        <div className="sticky-wa" aria-label="WhatsApp ile iletişim">
-          <a href={waLink(c.waMsg)} style={{ background: 'linear-gradient(135deg, #25d366, #1aad52)', color: '#fff', borderRadius: 14, padding: '14px', fontSize: 14, fontWeight: 700, width: '100%', maxWidth: 480, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 24px rgba(37,211,102,0.35)', textDecoration: 'none' }}>
+        {/* ── STICKY CTA ── */}
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '10px 20px 20px', background: 'linear-gradient(to top, #faf8f4 60%, transparent)', zIndex: 50 }}>
+          <a href={waLink(c.waMsg)} style={{ background: '#25d366', color: '#fff', borderRadius: 14, padding: '14px', fontSize: 14, fontWeight: 700, width: '100%', maxWidth: 480, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 8px 24px rgba(37,211,102,0.35)', textDecoration: 'none' }}>
             📲 {c.waBtn}
           </a>
         </div>
