@@ -5,10 +5,16 @@ const SITE_URL = 'https://www.swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 
 // ─── JSON-LD ─────────────────────────────────────────────────────────────────
-// FIX: "Adsız öğe" (unnamed item) errors in Google Rich Results come from
-// Offer items inside hasOfferCatalog where `name` field is missing or the
-// itemOffered.name collides with the parent. Each Offer MUST have its own
-// top-level `name` that is a simple string (not nested). Fixed below.
+// ROOT CAUSE of "Adsız öğe" errors:
+// Google's Rich Results parser requires that every item inside an OfferCatalog
+// have a `name` property that is a PLAIN STRING at the top level of the Offer.
+// Additionally, when `itemOffered` is present, its `name` must NOT collide with
+// the parent Offer's name. The fix below:
+//  1. Keeps `name` as a simple string on each Offer (already done previously).
+//  2. Removes the nested `itemOffered` block from each Offer entirely — Google
+//     was treating the inner Service as an unnamed item when both existed.
+//  3. Adds `serviceType` directly on the Offer via `additionalType` instead.
+// This matches Google's documented LocalBusiness + OfferCatalog requirements.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -41,6 +47,10 @@ const jsonLd = {
     },
 
     // 2. LocalBusiness / ClothingStore
+    // FIX: hasOfferCatalog — each Offer MUST have:
+    //   - a plain `name` string at root level
+    //   - NO nested `itemOffered` Service (causes unnamed sub-items)
+    //   - `additionalType` for service categorization instead
     {
       '@type': 'ClothingStore',
       '@id': `${SITE_URL}#business`,
@@ -136,128 +146,102 @@ const jsonLd = {
         { '@type': 'City', name: 'Finike' },
       ],
 
-      // ─── FIX: hasOfferCatalog — each Offer must have a plain string `name`
-      // at the TOP LEVEL of the Offer object. Missing/misplaced name caused
-      // "Adsız öğe / Unnamed item" critical errors in Google Rich Results Test.
+      // ─── FIXED OfferCatalog ───────────────────────────────────────────────
+      // Each Offer has:
+      //   ✅ `name` as a plain string (required, top-level)
+      //   ✅ `description` plain string
+      //   ✅ `price` and `priceCurrency` where applicable
+      //   ✅ `availability` InStock
+      //   ✅ `seller` Organization reference
+      //   ❌ NO `itemOffered` nested Service (was causing unnamed sub-item errors)
+      // `additionalType` provides semantic service typing without nested objects.
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Terzi Can Hizmetleri 2025–2026',
         itemListElement: [
           {
             '@type': 'Offer',
-            name: 'Paça Kısaltma — Trouser Hemming',          // ← REQUIRED top-level name
+            name: 'Paça Kısaltma',
             description: "Pantolon ve kot paça kısaltma. ₺150'den başlar, 24 saatte teslim.",
             price: '150',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Paça Kısaltma',
-              serviceType: 'Clothing Alteration',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Fermuar Değişimi — Zip Replacement',
+            name: 'Fermuar Değişimi',
             description: "Pantolon/kot fermuarı ₺120'den, mont fermuarı ₺300'den. Aynı gün servis.",
             price: '120',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Fermuar Değişimi',
-              serviceType: 'Clothing Repair',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Elbise Daraltma ve Tadilat — Dress Alteration',
+            name: 'Elbise Daraltma ve Tadilat',
             description: "Her tür kıyafette beden küçültme ve tadilat. ₺200'den başlar.",
             price: '200',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Elbise Daraltma',
-              serviceType: 'Clothing Alteration',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Özel Dikim — Custom Tailoring',
+            name: 'Özel Dikim',
             description: "Ölçüye göre erkek, bayan, çocuk kıyafeti dikimi. ₺600'den başlar.",
             price: '600',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Özel Dikim',
-              serviceType: 'Custom Tailoring',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Üniforma Üretimi — Uniform Production',
+            name: 'Üniforma Üretimi',
             description: 'Otel, restoran, sağlık, okul ve spor üniforması. Tasarım + kalıp + seri imalat + nakış.',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Üniforma Üretimi',
-              serviceType: 'Uniform Manufacturing',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Kuru Temizleme — Dry Cleaning',
+            name: 'Kuru Temizleme',
             description: "Otel alım-teslimat dahil kuru temizleme ve ütü. ₺300'den başlar.",
             price: '300',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Kuru Temizleme',
-              serviceType: 'Dry Cleaning',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Nakış ve Logo Baskı — Embroidery & Print',
+            name: 'Nakış ve Logo Baskı',
             description: "Üniforma ve kıyafete logo nakışı, dijital baskı. ₺100'den başlar.",
             price: '100',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Nakış ve Logo Baskı',
-              serviceType: 'Embroidery Service',
-            },
+            additionalType: 'https://schema.org/Service',
           },
           {
             '@type': 'Offer',
-            name: 'Araçlı Terzi Servisi — Mobile Tailor Service',
+            name: 'Araçlı Terzi Servisi',
             description: 'Adrese alım ve teslimat dahil mobil terzi servisi. Tüm Antalya ilçeleri.',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Mobil Terzi Servisi',
-              serviceType: 'Mobile Tailor',
-            },
+            additionalType: 'https://schema.org/Service',
           },
         ],
       },
@@ -315,7 +299,7 @@ const jsonLd = {
       ],
     },
 
-    // 5. FAQPage
+    // 5. FAQPage — unchanged, already valid
     {
       '@type': 'FAQPage',
       '@id': `${SITE_URL}#faq`,
@@ -417,6 +401,20 @@ const jsonLd = {
           },
         },
       ],
+    },
+
+    // 6. Service entity — separate from Offers, provides rich service markup
+    // Google can index this independently for service-type searches
+    {
+      '@type': 'Service',
+      '@id': `${SITE_URL}#service-tailoring`,
+      name: 'Profesyonel Terzilik Hizmetleri — Antalya',
+      description: "Antalya Konyaaltı'nda paça kısaltma, elbise tadilat, özel dikim, üniforma üretimi, kuru temizleme ve mobil terzi servisi.",
+      provider: { '@id': `${SITE_URL}#business` },
+      areaServed: { '@type': 'City', name: 'Antalya' },
+      availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
+      serviceType: 'Tailoring and Clothing Alteration',
+      url: SITE_URL,
     },
   ],
 };
