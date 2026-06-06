@@ -6,7 +6,6 @@ type Lang = 'tr' | 'en' | 'ru' | 'de';
 const PHONE = '905318986418';
 const WA = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 
-
 const C = {
   tr: {
     badge: '✦ Antalya · Terzi Can', h1: "Antalya'nın", h1em: 'Terzisi',
@@ -20,21 +19,22 @@ const C = {
     mobileHeading: 'Kapınıza Geliyoruz',
     mobileDesc: "Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz. Adresinize geliyor, ölçü alıyor, dikip tekrar teslim ediyoruz. Otel, ev, işyeri — fark etmez.",
     mobileCta: '🚗 Terzi Servisi Talep Et',
-    steps: [['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']],
+    steps: [['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']] as [string,string,string][],
     areaLabel: 'İlçeye tıklayın — mahalleleri görün',
     quoteBtn: '📲 Ücretsiz Fiyat Teklifi Al', bulkBtn: '🏭 Toplu Üniforma Teklifi', mapBtn: '📍 Google Maps',
     hours: '09:00–19:00 · Pzt–Cmt',
     faq: [
       ['Paça kısaltma kaç lira? 2025–2026 fiyatı?', "Paça kısaltma ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp'tan kıyafetinizin fotoğrafını gönderin — 30 dakika içinde fiyat bildiririz."],
       ['Fermuar değişimi kaç lira? Kot, mont, ceket, sweatshirt?', "Pantolon/kot fermuarı ₺120'den, ceket fermuarı ₺200'den, mont fermuarı ₺300'den başlar. Sweatshirt ve çanta fermuarı da yapılır. Aynı gün teslim mümkündür."],
-      ["Eve veya otele gelen terzi Antalya?", "Evet! Araçlı terzi servisimizle Antalya'nın tüm ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin, teslim etsin."],
+      ['Eve veya otele gelen terzi Antalya?', "Evet! Araçlı terzi servisimizle Antalya'nın tüm ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin, teslim etsin."],
       ['Mezuniyet abiye tamiri ve kısaltması?', 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri, kısaltma ve tadilatı ekspres 24 saatte yapıyoruz.'],
       ['Düğün sezonu gelinlik tadilatı yapıyor musunuz?', 'Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, kısaltma ve damatlık tadilatı yapıyoruz.'],
       ['Otel ve restoran üniforması üretimi yapıyor musunuz?', 'Evet. Otel personel, resepsiyon, kat görevlisi, aşçı, garson, meydancı, spa, animatör üniforması üretiyoruz. Tasarım + kalıp + seri imalat + nakış hepsi tek elden.'],
       ['Sweatshirt ve eşofman dikimi yapılıyor mu?', 'Evet. Sweatshirt, eşofman, kapüşonlu, polo yaka dikimi. Nakış ve baskıyla kişiselleştirme, seri üretim de mümkün.'],
       ['Büyük beden, bebek kıyafeti, nevresim, perde?', 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi.'],
-    ],
-    seo1: "Antalya'nın en deneyimli terzisi Terzi Can. Paça kısaltma · pantolon kısaltma · elbise daraltma · beden küçültme · fermuar değişimi · etek kısaltma · abiye tamiri · kıyafet tamiri · kuru temizleme · ütü hizmeti · kalıp çıkarma · model dikimi · seri imalat · fason imalat · nakış · logo baskı. Otel üniforma · aşçı üniforma · garson üniforma · resepsiyon üniforma · doktor üniforma · okul üniforma · spor üniforma üretimi. Sweatshirt ve eşofman dikimi. Tüm Antalya ilçelerine hizmet. 24–48 saat ekspres servis, otele alım-teslimat.",
+    ] as [string,string][],
+    // SEO intro — visible, natural prose (NOT hidden)
+    seoIntro: "Antalya'nın köklü terzisi Terzi Can olarak Konyaaltı merkezimizden tüm Antalya ilçelerine hizmet veriyoruz. Paça kısaltma, pantolon kısaltma, elbise daraltma, fermuar değişimi, etek kısaltma, abiye tamiri, kıyafet tamiri, kuru temizleme ve ütü hizmetlerinin yanı sıra otel üniforma, aşçı üniforma, garson üniforma, resepsiyon üniforma, doktor üniforma, okul üniforma ve spor üniforma üretimi yapıyoruz. Sweatshirt ve eşofman dikimi, nakış ve logo baskı hizmetleri de sunulmaktadır. Eve gelen terzi, otele gelen terzi ve araçlı terzi servisimizle kapınıza kadar geliyoruz.",
   },
   en: {
     badge: '✦ Antalya · Tailor Can', h1: "Antalya's", h1em: 'Master Tailor',
@@ -48,7 +48,7 @@ const C = {
     mobileHeading: 'We Come to You',
     mobileDesc: 'Our mobile tailor service covers all of Antalya. We visit your address, take measurements on-site, complete the work and deliver back to your door. Hotel, home or office — no problem.',
     mobileCta: '🚗 Request Mobile Tailor',
-    steps: [['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']],
+    steps: [['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']] as [string,string,string][],
     areaLabel: 'Tap a district to see neighborhoods',
     quoteBtn: '📲 Get Free Quote', bulkBtn: '🏭 Bulk Uniform Quote', mapBtn: '📍 Google Maps',
     hours: '09:00–19:00 · Mon–Sat',
@@ -61,8 +61,8 @@ const C = {
       ['Do you produce hotel and restaurant uniforms?', 'Yes — hotel staff, reception, chef, waiter, valet, security, spa uniforms. Design + pattern + mass production + embroidery, all in one.'],
       ['Do you sew sweatshirts and tracksuits?', 'Yes — hoodies, polo necks, printed/embroidered sweatshirts, mass production.'],
       ['Plus-size, baby clothes, curtains?', 'Yes — plus-size clothing, baby dresses, curtains, bed linen. Group discounts for parent communities.'],
-    ],
-    seo1: "Terzi Can — Antalya's most experienced tailor. Trouser hemming, dress alterations, zip replacement, size reduction, dry cleaning, laundry, ironing, pattern making, custom design, mass production. Hotel, restaurant, medical, school uniform production. Sweatshirt sewing, embroidery, logo printing. Express 24–48h. Hotel pickup & delivery across all Antalya.",
+    ] as [string,string][],
+    seoIntro: "Tailor Can — Antalya's most experienced English-speaking tailor. Trouser hemming, dress alterations, zip replacement, size reduction, dry cleaning, ironing, pattern making, custom design and mass production. Hotel, restaurant, medical and school uniform production. Sweatshirt sewing, embroidery, logo printing. Express 24–48h service. Hotel pickup and delivery across all Antalya districts.",
   },
   ru: {
     badge: '✦ Анталья · Портной Кан', h1: 'Лучший', h1em: 'Портной Антальи',
@@ -76,7 +76,7 @@ const C = {
     mobileHeading: 'Приедем к вам',
     mobileDesc: 'Наш выездной портной обслуживает всю Анталью. Приедем по адресу, снимем мерки, сошьём в ателье и доставим. Отель, дом или офис — без проблем.',
     mobileCta: '🚗 Вызвать портного',
-    steps: [['📍','Укажите адрес','Отправьте локацию в WhatsApp'],['📏','Снятие мерок','Портной приедет к вам'],['✂️','Пошив в ателье','По вашим меркам'],['🚗','Доставим к вам','В назначенное время']],
+    steps: [['📍','Укажите адрес','Отправьте локацию в WhatsApp'],['📏','Снятие мерок','Портной приедет к вам'],['✂️','Пошив в ателье','По вашим меркам'],['🚗','Доставим к вам','В назначенное время']] as [string,string,string][],
     areaLabel: 'Нажмите на район для просмотра',
     quoteBtn: '📲 Бесплатная оценка', bulkBtn: '🏭 Оптовый заказ формы', mapBtn: '📍 Google Maps',
     hours: '09:00–19:00 · Пн–Сб',
@@ -89,8 +89,8 @@ const C = {
       ['Производство формы для отелей и ресторанов?', 'Да — гостиничная форма, ресепшн, повара, официанты, охрана, спа. Дизайн + лекала + серийное производство + вышивка.'],
       ['Пошив толстовок и спортивных костюмов?', 'Да — худи, поло, с принтом, с вышивкой, серийное производство.'],
       ['Большие размеры, детская одежда, шторы?', 'Да — большие размеры, детская одежда, шторы, постельное бельё. Скидки для групп.'],
-    ],
-    seo1: 'Портной Кан — опытный портной в Анталье. Подгонка брюк · замена молнии · укорачивание юбок · ремонт платьев · пошив на заказ · химчистка · глажка · выездной портной. Форма для гостиниц · ресторанов · медицины · школ. Пошив толстовок · вышивка. Экспресс 24–48ч. Забор и доставка в отель.',
+    ] as [string,string][],
+    seoIntro: 'Портной Кан — опытный портной в Анталье, говорим по-русски. Подгонка брюк, замена молнии, укорачивание юбок, ремонт платьев, пошив на заказ, химчистка, глажка, выездной портной. Форма для гостиниц, ресторанов, медицины и школ. Пошив толстовок, вышивка. Экспресс 24–48 часов. Забор и доставка в любой отель Антальи.',
   },
   de: {
     badge: '✦ Antalya · Schneider Can', h1: 'Antalyas', h1em: 'Meisterschneider',
@@ -104,7 +104,7 @@ const C = {
     mobileHeading: 'Wir kommen zu Ihnen',
     mobileDesc: 'Unser mobiler Schneiderdienst ist in ganz Antalya verfügbar. Wir kommen zu Ihrer Adresse, nehmen Maße, schneidern im Atelier und liefern zurück. Hotel, Zuhause oder Büro — kein Problem.',
     mobileCta: '🚗 Mobilen Schneider anfragen',
-    steps: [['📍','Adresse mitteilen','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt zu Ihnen'],['✂️','Atelier','Nach Ihrem Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']],
+    steps: [['📍','Adresse mitteilen','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt zu Ihnen'],['✂️','Atelier','Nach Ihrem Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']] as [string,string,string][],
     areaLabel: 'Bezirk antippen für Stadtteile',
     quoteBtn: '📲 Kostenloses Angebot', bulkBtn: '🏭 Uniform Großauftrag', mapBtn: '📍 Google Maps',
     hours: '09:00–19:00 · Mo–Sa',
@@ -117,8 +117,8 @@ const C = {
       ['Produzieren Sie Hotel- und Restaurantuniformen?', 'Ja — Hotelpersonal, Rezeption, Köche, Kellner, Sicherheit, Spa. Design + Schnittmuster + Serienproduktion + Stickerei.'],
       ['Sweatshirts und Trainingsanzüge nähen?', 'Ja — Hoodies, Polo, bedruckt/gestickt, Serienproduktion.'],
       ['Übergrößen, Kinderkleidung, Vorhänge?', 'Ja — Übergrößen, Kinderkleidung, Vorhänge, Bettwäsche. Gruppenrabatte verfügbar.'],
-    ],
-    seo1: 'Schneider Can — erfahrener Schneider in Antalya. Hosenänderungen · Reißverschluss · Kleiderreparatur · Maßanfertigung · chemische Reinigung · Bügeln · mobiler Schneider. Uniformproduktion für Hotels, Restaurants, Medizin, Schulen. Sweatshirt nähen · Stickerei. Express 24–48h. Abholung und Lieferung ins Hotel.',
+    ] as [string,string][],
+    seoIntro: 'Schneider Can — erfahrener Schneider in Antalya mit deutschsprachigem Service. Hosenänderungen, Reißverschluss-Ersatz, Kleiderreparatur, Maßanfertigung, chemische Reinigung, Bügeln, mobiler Schneider. Uniformproduktion für Hotels, Restaurants, Medizin und Schulen. Sweatshirt nähen, Stickerei. Express 24–48h. Abholung und Lieferung ins Hotel.',
   },
 };
 
@@ -241,6 +241,8 @@ export default function TerziClient() {
     return () => window.removeEventListener('scroll', h);
   }, []);
 
+  const faqId = (i: number) => `faq-answer-${i}`;
+
   return (
     <>
       <style>{`
@@ -295,9 +297,8 @@ export default function TerziClient() {
         .ss{color:var(--mt);margin-top:.7rem;font-size:.88rem;max-width:500px;margin-left:auto;margin-right:auto}
         .gl{display:block;width:38px;height:2px;background:var(--g);margin:1.1rem auto 0}
 
-        /* SEO BLOCK */
-        .seobl{background:var(--ink2);padding:1.6rem 2rem;border-left:2px solid var(--g3);font-size:.8rem;color:var(--mt);line-height:1.9}
-        .seobl strong{color:var(--cr);font-weight:500}
+        /* SEO INTRO BLOCK — visible, styled */
+        .seobl{background:var(--ink2);padding:1.6rem 2rem;border-left:2px solid var(--g3);font-size:.82rem;color:var(--cr2);line-height:1.9}
 
         /* MOBILE SERVICE */
         .msec{background:linear-gradient(135deg,var(--ink2) 0%,#231a0f 100%);position:relative;overflow:hidden}
@@ -384,11 +385,15 @@ export default function TerziClient() {
         /* FOOTER */
         footer{background:var(--ink);border-top:1px solid rgba(201,169,110,.07);padding:2.2rem 1.5rem}
         .fkws{display:flex;flex-wrap:wrap;gap:.28rem;justify-content:center;margin-top:1rem}
-        .kpill{font-size:.62rem;color:rgba(201,169,110,.2);border:1px solid rgba(201,169,110,.07);padding:.18rem .55rem;border-radius:2px}
+        .kpill{font-size:.62rem;color:rgba(201,169,110,.4);border:1px solid rgba(201,169,110,.1);padding:.18rem .55rem;border-radius:2px}
 
         /* WA FLOAT */
         .wafloat{position:fixed;bottom:1.6rem;right:1.6rem;z-index:150;width:3rem;height:3rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.3rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .3s}
         .wafloat:hover{transform:scale(1.1)}
+
+        /* SKIP LINK for accessibility */
+        .skip-link{position:absolute;top:-40px;left:0;background:var(--g);color:var(--ink);padding:.5rem 1rem;font-weight:700;z-index:999;transition:top .2s}
+        .skip-link:focus{top:0}
 
         /* MOBILE */
         @media(max-width:768px){
@@ -404,25 +409,46 @@ export default function TerziClient() {
           .cgrid{grid-template-columns:1fr;gap:2rem}
           section{padding:3.2rem 1.1rem}
           .lsw{flex-wrap:wrap}
+          .seobl{padding:1.2rem 1.1rem}
         }
         @media(max-width:480px){.whygrid{grid-template-columns:1fr}}
       `}</style>
 
+      {/* Skip to main content — accessibility */}
+      <a href="#main-content" className="skip-link">
+        {lang === 'tr' ? 'İçeriğe geç' : lang === 'en' ? 'Skip to content' : lang === 'ru' ? 'К содержанию' : 'Zum Inhalt'}
+      </a>
+
       {/* WA Float */}
-      <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp">💬</a>
+      <a
+        href={WA(c.waMsg)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="wafloat"
+        aria-label="WhatsApp ile iletişim"
+        title="WhatsApp"
+      >
+        💬
+      </a>
 
       {/* NAVBAR */}
-      <nav className={`nav${scrolled ? ' up' : ''}`}>
-        <a href="#" className="nav-logo">Terzi Can</a>
+      <nav className={`nav${scrolled ? ' up' : ''}`} role="navigation" aria-label="Ana navigasyon">
+        <a href="#" className="nav-logo" aria-label="Terzi Can - Ana Sayfa">Terzi Can</a>
         <ul className="nav-links">
           <li><a href="#services">{c.s_services}</a></li>
           <li><a href="#prices">{c.s_prices.split(' ')[0]}</a></li>
           <li><a href="#faq">{c.s_faq}</a></li>
           <li><a href="#contact">{c.s_contact}</a></li>
         </ul>
-        <div className="lsw">
+        <div className="lsw" role="group" aria-label="Dil seçimi">
           {(['tr','en','ru','de'] as Lang[]).map(l => (
-            <button key={l} className={`lb${lang === l ? ' on' : ''}`} onClick={() => setLang(l)}>
+            <button
+              key={l}
+              className={`lb${lang === l ? ' on' : ''}`}
+              onClick={() => setLang(l)}
+              aria-pressed={lang === l}
+              aria-label={`Dil: ${l.toUpperCase()}`}
+            >
               {l === 'tr' ? '🇹🇷' : l === 'en' ? '🇬🇧' : l === 'ru' ? '🇷🇺' : '🇩🇪'} {l.toUpperCase()}
             </button>
           ))}
@@ -430,15 +456,17 @@ export default function TerziClient() {
       </nav>
 
       {/* HERO */}
-      <section className="hero">
-        <div className="hbg"/><div className="hov"/><div className="hgrain"/>
+      <section className="hero" aria-label="Hero">
+        <div className="hbg" role="presentation" aria-hidden="true"/>
+        <div className="hov" role="presentation" aria-hidden="true"/>
+        <div className="hgrain" role="presentation" aria-hidden="true"/>
         <div className="ctr">
           <div className="hc">
             <span className="hbadge fu">{c.badge}</span>
             <h1 className="fu1">{c.h1}<br/><em>{c.h1em}</em></h1>
             <p className="hsub fu2">{c.sub}</p>
-            <div className="fu2" style={{marginTop:'1rem',display:'flex',gap:'.4rem',alignItems:'center',flexWrap:'wrap' as const}}>
-              {'⭐⭐⭐⭐⭐'.split('').map((s,i)=><span key={i} style={{color:'#f59e0b'}}>{s}</span>)}
+            <div className="fu2" style={{marginTop:'1rem',display:'flex',gap:'.4rem',alignItems:'center',flexWrap:'wrap'}}>
+              <span aria-label="5 yıldız" role="img">⭐⭐⭐⭐⭐</span>
               <span style={{fontSize:'.88rem',fontWeight:700,marginLeft:'.3rem'}}>4.9</span>
               <span style={{fontSize:'.8rem',color:'var(--mt)'}}>
                 (94 {lang==='tr'?'değerlendirme':lang==='en'?'reviews':lang==='ru'?'отзывов':'Bewertungen'})
@@ -449,13 +477,13 @@ export default function TerziClient() {
               <a href="#services" className="bo">{c.downBtn}</a>
             </div>
           </div>
-          <div className="hstats fu4">
-            {[
+          <div className="hstats fu4" aria-label="İstatistikler">
+            {([
               ['10+', lang==='tr'?'Yıllık Deneyim':lang==='en'?'Years Exp.':lang==='ru'?'Лет опыта':'Jahre Erfahrung'],
               ['5000+', lang==='tr'?'Mutlu Müşteri':lang==='en'?'Happy Clients':lang==='ru'?'Клиентов':'Kunden'],
               ['24–48h', lang==='tr'?'Ekspres Teslimat':lang==='en'?'Express Delivery':lang==='ru'?'Экспресс':'Express'],
               ['TR·EN·RU·DE', lang==='tr'?'4 Dil':'4 Languages'],
-            ].map(([n,l],i)=>(
+            ] as [string,string][]).map(([n,l],i)=>(
               <div key={i} className="stat">
                 <div className="stn">{n}</div>
                 <div className="stl">{l}</div>
@@ -465,92 +493,98 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* SEO TEXT */}
-      <div style={{background:'var(--ink2)',padding:'2rem 1.5rem'}}>
+      {/* SEO INTRO — visible, natural prose, crawlable */}
+      <div style={{background:'var(--ink2)',padding:'2rem 1.5rem'}} id="main-content">
         <div className="ctr">
-          <div className="seobl" dangerouslySetInnerHTML={{__html: c.seo1.replace(/(paça kısaltma|fermuar değişimi|tadilat|tamir|kuru temizleme|üniforma|nakış|seri imalat|fason|hemming|alterations|dry cleaning|uniform|портной|химчистка|пошив|schneider|reinigung|uniformproduktion)/gi,'<strong>$1</strong>')}}/>
+          <p className="seobl">{c.seoIntro}</p>
         </div>
       </div>
 
       {/* MOBILE SERVICE */}
-      <section className="msec">
+      <section className="msec" aria-labelledby="mobile-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">🚗 {c.s_mobile}</div>
-            <h2 className="st">{c.mobileHeading}</h2>
+            <h2 className="st" id="mobile-heading">{c.mobileHeading}</h2>
             <p className="ss">{c.mobileDesc}</p>
-            <span className="gl"/>
+            <span className="gl" aria-hidden="true"/>
           </div>
-          <div className="msteps">
+          <div className="msteps" role="list">
             {c.steps.map(([ic,t,d],i)=>(
-              <div key={i} className="ms">
-                <div className="ms-ic">{ic}</div>
+              <div key={i} className="ms" role="listitem">
+                <div className="ms-ic" aria-hidden="true">{ic}</div>
                 <div className="ms-t">{t}</div>
                 <div className="ms-d">{d}</div>
               </div>
             ))}
           </div>
-          <div style={{textAlign:'center',marginTop:'2.2rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap' as const}}>
+          <div style={{textAlign:'center',marginTop:'2.2rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
             <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="bg">{c.mobileCta}</a>
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={{background:'var(--ink2)',padding:'0'}}>
+      <section id="services" style={{background:'var(--ink2)',padding:'0'}} aria-labelledby="services-heading">
         <div className="ctr" style={{padding:'4.5rem 1.5rem 2rem'}}>
           <div className="sh">
             <div className="ey">✦ {c.s_services}</div>
-            <h2 className="st">{lang==='tr'?'Ne Yapıyoruz?':lang==='en'?'What We Offer':lang==='ru'?'Что мы предлагаем':'Was wir anbieten'}</h2>
-            <p className="ss">{lang==='tr'?'Her kıyafete, her bedene, her ihtiyaca özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment, size and need.':lang==='ru'?'Профессиональный пошив для любой одежды и размера.':'Professionelle Schneiderei für jedes Kleidungsstück.'}</p>
-            <span className="gl"/>
+            <h2 className="st" id="services-heading">
+              {lang==='tr'?'Ne Yapıyoruz?':lang==='en'?'What We Offer':lang==='ru'?'Что мы предлагаем':'Was wir anbieten'}
+            </h2>
+            <p className="ss">
+              {lang==='tr'?'Her kıyafete, her bedene, her ihtiyaca özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment, size and need.':lang==='ru'?'Профессиональный пошив для любой одежды и размера.':'Professionelle Schneiderei für jedes Kleidungsstück.'}
+            </p>
+            <span className="gl" aria-hidden="true"/>
           </div>
         </div>
         <div className="svcgrid">
           {SERVICES.map((s,i)=>(
-            <div key={i} className="scard">
-              <img src={s.img} alt={s[lang].n} className="simg" loading="lazy"/>
-              <div className="sov"/>
+            <article key={i} className="scard">
+              <img src={s.img} alt={`${s[lang].n} — Terzi Can Antalya`} className="simg" loading="lazy" width="700" height="500"/>
+              <div className="sov" aria-hidden="true"/>
               <div className="sbody">
-                <div className="sic">{s.icon}</div>
+                <div className="sic" aria-hidden="true">{s.icon}</div>
                 <h3 className="stitle">{s[lang].n}</h3>
                 <p className="sdesc">{s[lang].d}</p>
                 <span className="sprice">{s[lang].p}</span>
               </div>
-              <div className="sline"/>
-            </div>
+              <div className="sline" aria-hidden="true"/>
+            </article>
           ))}
         </div>
-        <div style={{textAlign:'center',padding:'2.2rem 1.5rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap' as const}}>
+        <div style={{textAlign:'center',padding:'2.2rem 1.5rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
           <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg">{c.quoteBtn}</a>
           <a href={WA(lang==='tr'?'Merhaba, toplu üniforma üretimi için fiyat teklifi almak istiyorum.':'Hello, I would like a bulk uniform production quote.')} target="_blank" rel="noopener noreferrer" className="bo">{c.bulkBtn}</a>
         </div>
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" style={{padding:'0',background:'var(--ink3)'}}>
+      <section id="gallery" style={{padding:'0',background:'var(--ink3)'}} aria-label="Galeri">
         <div className="galgrid">
           {GALLERY.map((g,i)=>(
             <div key={i} className="gitem">
-              <img src={g.img} alt={g[lang]} loading="lazy"/>
-              <div className="gcap">{g[lang]}</div>
+              <img src={g.img} alt={`${g[lang]} — Terzi Can Antalya`} loading="lazy" width="700" height="500"/>
+              <div className="gcap" aria-hidden="true">{g[lang]}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* WHY */}
-      <section style={{background:'var(--ink)'}}>
+      <section style={{background:'var(--ink)'}} aria-labelledby="why-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">✦ {c.s_why}</div>
-            <h2 className="st">{lang==='tr'?'Neden Terzi Can?':lang==='en'?'Why Choose Us?':lang==='ru'?'Почему выбирают нас?':'Warum Schneider Can?'}</h2>
-            <span className="gl"/>
+            <h2 className="st" id="why-heading">
+              {lang==='tr'?'Neden Terzi Can?':lang==='en'?'Why Choose Us?':lang==='ru'?'Почему выбирают нас?':'Warum Schneider Can?'}
+            </h2>
+            <span className="gl" aria-hidden="true"/>
           </div>
           <div className="whygrid">
             {WHY.map((w,i)=>(
               <div key={i} className="wcard">
-                <div className="wic">{w.icon}</div>
+                <div className="wic" aria-hidden="true">{w.icon}</div>
                 <div className="wt">{w[lang][0]}</div>
                 <div className="wd">{w[lang][1]}</div>
               </div>
@@ -560,40 +594,47 @@ export default function TerziClient() {
       </section>
 
       {/* REVIEWS */}
-      <section style={{background:'var(--ink2)'}}>
+      <section style={{background:'var(--ink2)'}} aria-labelledby="reviews-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">⭐ 4.9 / 5 · 94 {lang==='tr'?'Yorum':lang==='en'?'Reviews':lang==='ru'?'Отзывов':'Bewertungen'}</div>
-            <h2 className="st">{c.s_reviews}</h2>
-            <span className="gl"/>
+            <h2 className="st" id="reviews-heading">{c.s_reviews}</h2>
+            <span className="gl" aria-hidden="true"/>
           </div>
           <div className="revgrid">
             {REVIEWS.map((r,i)=>(
-              <div key={i} className="rcard">
-                <div className="rstars">{'⭐'.repeat(r.stars)}</div>
-                <p className="rtxt">{r.text}</p>
-                <div className="rauth">{r.flag} {r.author} — {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span></div>
-              </div>
+              <article key={i} className="rcard" itemScope itemType="https://schema.org/Review">
+                <div className="rstars" aria-label={`${r.stars} yıldız`}>{'⭐'.repeat(r.stars)}</div>
+                <p className="rtxt" itemProp="reviewBody">{r.text}</p>
+                <div className="rauth">
+                  <span itemProp="author" itemScope itemType="https://schema.org/Person">
+                    {r.flag} <span itemProp="name">{r.author}</span>
+                  </span>
+                  {' '}— {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* PRICES */}
-      <section id="prices" style={{background:'var(--ink3)'}}>
+      <section id="prices" style={{background:'var(--ink3)'}} aria-labelledby="prices-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">₺ {lang==='tr'?'Şeffaf Fiyatlar':lang==='en'?'Transparent Pricing':lang==='ru'?'Прозрачные цены':'Transparente Preise'}</div>
-            <h2 className="st">{c.s_prices}</h2>
-            <p className="ss">{lang==='tr'?"Başlangıç fiyatları · Kesin teklif için WhatsApp'tan fotoğraf gönderin":lang==='en'?'Starting prices · Send a photo on WhatsApp for exact quote':lang==='ru'?'Начальные цены · Фото в WhatsApp для точной оценки':'Startpreise · Foto per WhatsApp für genaues Angebot'}</p>
-            <span className="gl"/>
+            <h2 className="st" id="prices-heading">{c.s_prices}</h2>
+            <p className="ss">
+              {lang==='tr'?"Başlangıç fiyatları · Kesin teklif için WhatsApp'tan fotoğraf gönderin":lang==='en'?'Starting prices · Send a photo on WhatsApp for exact quote':lang==='ru'?'Начальные цены · Фото в WhatsApp для точной оценки':'Startpreise · Foto per WhatsApp für genaues Angebot'}
+            </p>
+            <span className="gl" aria-hidden="true"/>
           </div>
-          <table className="ptable">
+          <table className="ptable" aria-label={c.s_prices}>
             <thead>
               <tr>
-                <th>{lang==='tr'?'Hizmet':lang==='en'?'Service':lang==='ru'?'Услуга':'Leistung'}</th>
-                <th>{lang==='tr'?'Başlangıç Fiyatı':lang==='en'?'Starting Price':lang==='ru'?'Цена от':'Ab Preis'}</th>
-                <th>{lang==='tr'?'Süre':lang==='en'?'Time':lang==='ru'?'Время':'Zeit'}</th>
+                <th scope="col">{lang==='tr'?'Hizmet':lang==='en'?'Service':lang==='ru'?'Услуга':'Leistung'}</th>
+                <th scope="col">{lang==='tr'?'Başlangıç Fiyatı':lang==='en'?'Starting Price':lang==='ru'?'Цена от':'Ab Preis'}</th>
+                <th scope="col">{lang==='tr'?'Süre':lang==='en'?'Time':lang==='ru'?'Время':'Zeit'}</th>
               </tr>
             </thead>
             <tbody>
@@ -613,51 +654,71 @@ export default function TerziClient() {
       </section>
 
       {/* AREAS */}
-      <section id="areas" style={{background:'var(--ink2)'}}>
+      <section id="areas" style={{background:'var(--ink2)'}} aria-labelledby="areas-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">📍 {c.s_areas}</div>
-            <h2 className="st">Antalya — {lang==='tr'?'Tüm İlçeler':lang==='en'?'All Districts':lang==='ru'?'Все районы':'Alle Bezirke'}</h2>
+            <h2 className="st" id="areas-heading">
+              Antalya — {lang==='tr'?'Tüm İlçeler':lang==='en'?'All Districts':lang==='ru'?'Все районы':'Alle Bezirke'}
+            </h2>
             <p className="ss">{c.areaLabel}</p>
-            <span className="gl"/>
+            <span className="gl" aria-hidden="true"/>
           </div>
-          <div className="ilwrap">
+          <div className="ilwrap" role="group" aria-label="İlçe seçimi">
             {ILCELER.map(({ilce})=>(
-              <button key={ilce} className={`ilbtn${activeIlce===ilce?' on':''}`} onClick={()=>setActiveIlce(activeIlce===ilce?null:ilce)}>
+              <button
+                key={ilce}
+                className={`ilbtn${activeIlce===ilce?' on':''}`}
+                onClick={()=>setActiveIlce(activeIlce===ilce?null:ilce)}
+                aria-pressed={activeIlce===ilce}
+                aria-expanded={activeIlce===ilce}
+              >
                 {ilce}
               </button>
             ))}
           </div>
           {activeIlce && (
-            <div className="mahwrap">
+            <div className="mahwrap" role="list" aria-label={`${activeIlce} mahalleleri`}>
               {ILCELER.find(i=>i.ilce===activeIlce)?.m.map(m=>(
-                <span key={m} className="mchip">{m}</span>
+                <span key={m} className="mchip" role="listitem">{m}</span>
               ))}
             </div>
           )}
-          {/* Hidden SEO full list */}
-          <div style={{fontSize:0,height:0,overflow:'hidden',position:'absolute' as const}} aria-hidden="true">
-            {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} ${ilce} terzi tadilat dikim kuru temizleme paça kısaltma`)).join(', ')}
-          </div>
+          {/* SEO: Visible district/neighborhood text — NOT hidden, just small */}
+          <p style={{fontSize:'.72rem',color:'rgba(201,169,110,.25)',marginTop:'1.5rem',lineHeight:1.8,textAlign:'center'}}>
+            {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} (${ilce})`)).join(' · ')}
+          </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" style={{background:'var(--ink)'}}>
+      <section id="faq" style={{background:'var(--ink)'}} aria-labelledby="faq-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">FAQ</div>
-            <h2 className="st">{c.s_faq}</h2>
-            <span className="gl"/>
+            <h2 className="st" id="faq-heading">{c.s_faq}</h2>
+            <span className="gl" aria-hidden="true"/>
           </div>
           <div className="faqlist">
             {c.faq.map(([q,a],i)=>(
               <div key={i} className="faqitem">
-                <button className="faqq" onClick={()=>setOpenFaq(openFaq===i?null:i)} aria-expanded={openFaq===i}>
+                <button
+                  className="faqq"
+                  onClick={()=>setOpenFaq(openFaq===i?null:i)}
+                  aria-expanded={openFaq===i}
+                  aria-controls={faqId(i)}
+                >
                   <span style={{flex:1}}>{q}</span>
-                  <span className={`faqico${openFaq===i?' open':''}`}>+</span>
+                  <span className={`faqico${openFaq===i?' open':''}`} aria-hidden="true">+</span>
                 </button>
-                <div className={`faqa${openFaq===i?' open':''}`}>{a}</div>
+                <div
+                  id={faqId(i)}
+                  className={`faqa${openFaq===i?' open':''}`}
+                  role="region"
+                  aria-labelledby={`faq-q-${i}`}
+                >
+                  {a}
+                </div>
               </div>
             ))}
           </div>
@@ -665,46 +726,56 @@ export default function TerziClient() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{background:'var(--ink2)'}}>
+      <section id="contact" style={{background:'var(--ink2)'}} aria-labelledby="contact-heading">
         <div className="ctr">
           <div className="sh">
             <div className="ey">✦ {c.s_contact}</div>
-            <h2 className="st" style={{fontStyle:'italic'}}>
+            <h2 className="st" id="contact-heading" style={{fontStyle:'italic'}}>
               {lang==='tr'?'Hızlı İletişim':lang==='en'?'Quick Contact':lang==='ru'?'Быстрый Контакт':'Schneller Kontakt'}
             </h2>
-            <p className="ss">{lang==='tr'?'Hızlı yanıt için WhatsApp tercih edin.':lang==='en'?'For instant reply, prefer WhatsApp.':lang==='ru'?'Для быстрого ответа — WhatsApp.':'Für schnelle Antwort WhatsApp bevorzugen.'}</p>
-            <span className="gl"/>
+            <p className="ss">
+              {lang==='tr'?'Hızlı yanıt için WhatsApp tercih edin.':lang==='en'?'For instant reply, prefer WhatsApp.':lang==='ru'?'Для быстрого ответа — WhatsApp.':'Für schnelle Antwort WhatsApp bevorzugen.'}
+            </p>
+            <span className="gl" aria-hidden="true"/>
           </div>
           <div className="cgrid">
-            <div>
+            <address style={{fontStyle:'normal'}}>
               {[
                 {ic:'📞',lbl:lang==='tr'?'Telefon':'Phone',val:<a href="tel:+905318986418">+90 531 898 64 18</a>},
                 {ic:'💬',lbl:'WhatsApp',val:<a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer">+90 531 898 64 18</a>},
-                {ic:'🕐',lbl:lang==='tr'?'Çalışma Saatleri':lang==='en'?'Working Hours':lang==='ru'?'Часы работы':'Öffnungszeiten',val:c.hours},
-                {ic:'📍',lbl:lang==='tr'?'Hizmet Bölgesi':lang==='en'?'Service Area':lang==='ru'?'Зона обслуживания':'Servicebereich',val:lang==='tr'?'Tüm Antalya İlçeleri':lang==='en'?'All Antalya Districts':lang==='ru'?'Все районы Антальи':'Alle Antalya-Bezirke'},
-                {ic:'🌍',lbl:lang==='tr'?'Diller':'Languages',val:'🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE'},
+                {ic:'🕐',lbl:lang==='tr'?'Çalışma Saatleri':lang==='en'?'Working Hours':lang==='ru'?'Часы работы':'Öffnungszeiten',val:<span>{c.hours}</span>},
+                {ic:'📍',lbl:lang==='tr'?'Hizmet Bölgesi':lang==='en'?'Service Area':lang==='ru'?'Зона обслуживания':'Servicebereich',val:<span>{lang==='tr'?'Tüm Antalya İlçeleri':lang==='en'?'All Antalya Districts':lang==='ru'?'Все районы Антальи':'Alle Antalya-Bezirke'}</span>},
+                {ic:'🌍',lbl:lang==='tr'?'Diller':'Languages',val:<span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span>},
               ].map(({ic,lbl,val},i)=>(
                 <div key={i} className="crow">
-                  <span style={{fontSize:'1.1rem',paddingTop:'.1rem'}}>{ic}</span>
+                  <span style={{fontSize:'1.1rem',paddingTop:'.1rem'}} aria-hidden="true">{ic}</span>
                   <div>
                     <div className="clbl">{lbl}</div>
                     <div className="cval">{val}</div>
                   </div>
                 </div>
               ))}
-              <div style={{display:'flex',flexDirection:'column' as const,gap:'.7rem',marginTop:'1.8rem'}}>
+              <div style={{display:'flex',flexDirection:'column',gap:'.7rem',marginTop:'1.8rem'}}>
                 <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg" style={{justifyContent:'center'}}>💬 WhatsApp</a>
                 <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="bo" style={{justifyContent:'center'}}>{c.mobileCta}</a>
                 <a href="https://maps.google.com/?q=Antalya+Konyaaltı+Turkey" target="_blank" rel="noopener noreferrer" className="bo" style={{justifyContent:'center'}}>{c.mapBtn}</a>
               </div>
-            </div>
-            <div className="mapbox">
-              <div style={{fontSize:'2.8rem'}}>📍</div>
+            </address>
+            <div className="mapbox" aria-label="Konum: Konyaaltı, Antalya">
+              <div style={{fontSize:'2.8rem'}} aria-hidden="true">📍</div>
               <div style={{fontFamily:'var(--serif)',fontSize:'1.2rem',color:'var(--cr2)'}}>Konyaaltı, Antalya</div>
-              <p style={{fontSize:'.8rem',color:'var(--mt)',textAlign:'center' as const,maxWidth:'200px',lineHeight:'1.6'}}>
+              <p style={{fontSize:'.8rem',color:'var(--mt)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
                 {lang==='tr'?'Tüm Antalya ilçelerine kurye ile hizmet veriyoruz.':lang==='en'?'We serve all Antalya districts via courier.':lang==='ru'?'Курьер по всем районам Антальи.':'Kurierservice in alle Antalya-Bezirke.'}
               </p>
-              <a href="https://maps.google.com/?q=Antalya+Turkey" target="_blank" rel="noopener noreferrer" className="bo" style={{fontSize:'.76rem'}}>{c.mapBtn}</a>
+              <a
+                href="https://maps.google.com/?q=Antalya+Turkey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bo"
+                style={{fontSize:'.76rem'}}
+              >
+                {c.mapBtn}
+              </a>
             </div>
           </div>
         </div>
@@ -719,14 +790,21 @@ export default function TerziClient() {
           <p style={{fontSize:'.73rem',color:'var(--mt)'}}>
             © 2026 SwapHubs — Antalya Terzi Hizmetleri · +90 531 898 64 18 · swaphubs.com/terzi
           </p>
-          <div className="fkws">
-            {['Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat','Kuru Temizleme','Üniforma Üretimi','Nakış Antalya','Otel Üniforma','Aşçı Üniforma','Eve Gelen Terzi','Terzi Fiyatları 2026','Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya','Uniform Antalya','Embroidery Antalya','Mobile Tailor','Портной Анталья','Химчистка Анталья','Пошив на заказ','Гостиничная форма','Выездной портной','Schneider Antalya','Änderungen Antalya','Reinigung Antalya','Uniformproduktion'].map(k=>(
+          {/* Keyword pills — visible, low opacity. Google görebilir ama spam değil */}
+          <div className="fkws" aria-label="Anahtar kelimeler">
+            {[
+              'Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat',
+              'Kuru Temizleme','Üniforma Üretimi','Nakış Antalya','Otel Üniforma',
+              'Aşçı Üniforma','Eve Gelen Terzi','Terzi Fiyatları 2026',
+              'Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya',
+              'Uniform Antalya','Embroidery Antalya','Mobile Tailor',
+              'Портной Анталья','Химчистка Анталья','Пошив на заказ',
+              'Гостиничная форма','Выездной портной',
+              'Schneider Antalya','Änderungen Antalya','Reinigung Antalya',
+              'Uniformproduktion',
+            ].map(k=>(
               <span key={k} className="kpill">{k}</span>
             ))}
-          </div>
-          {/* Hidden full SEO text */}
-          <div style={{fontSize:0,height:0,overflow:'hidden',position:'absolute' as const}} aria-hidden="true">
-            Antalya Terzi Paça Kısaltma Pantolon Kısaltma Elbise Daraltma Beden Küçültme Fermuar Değişimi Etek Kısaltma Abiye Tamiri Kıyafet Tamiri Kuru Temizleme Ütü Hizmeti Kalıp Çıkarma Model Dikimi Seri İmalat Fason İmalat Nakış Logo Baskı Otel Üniforma Aşçı Üniforma Garson Üniforma Resepsiyon Üniforma Doktor Üniforma Okul Üniforma Spor Üniforma Sweatshirt Dikimi Eşofman Dikimi Eve Gelen Terzi Otele Gelen Terzi Araçlı Terzi Servisi Terzi Fiyatları 2026 Paça Kısaltma Kaç Lira Fermuar Değişimi Kaç Lira Yakınımda Terzi Lara Terzi Konyaaltı Terzi Belek Terzi Kemer Terzi Alanya Terzi Manavgat Terzi Side Terzi Tailor Antalya Alterations Antalya Dry Cleaning Antalya Uniform Production Antalya Embroidery Antalya Mobile Tailor Antalya Hotel Pickup Delivery Портной Анталья Химчистка Анталья Пошив на заказ Гостиничная форма Выездной портной Schneider Antalya Änderungsschneiderei Uniformproduktion Chemische Reinigung Mobiler Schneider
           </div>
         </div>
       </footer>
