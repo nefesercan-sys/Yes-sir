@@ -391,7 +391,7 @@ const jsonLd = {
     {
       '@type': 'Review',
       '@id': `${SITE_URL}#review-1`,
-      itemReviewed: { '@id': `${SITE_URL}#business` },
+      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
       author: { '@type': 'Person', name: 'Murat B.' },
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
       reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
@@ -400,7 +400,7 @@ const jsonLd = {
     {
       '@type': 'Review',
       '@id': `${SITE_URL}#review-2`,
-      itemReviewed: { '@id': `${SITE_URL}#business` },
+      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
       author: { '@type': 'Person', name: 'Sarah M.' },
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
       reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
@@ -409,7 +409,7 @@ const jsonLd = {
     {
       '@type': 'Review',
       '@id': `${SITE_URL}#review-3`,
-      itemReviewed: { '@id': `${SITE_URL}#business` },
+      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
       author: { '@type': 'Person', name: 'Наталья К.' },
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
       reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
@@ -418,7 +418,7 @@ const jsonLd = {
     {
       '@type': 'Review',
       '@id': `${SITE_URL}#review-4`,
-      itemReviewed: { '@id': `${SITE_URL}#business` },
+      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
       author: { '@type': 'Person', name: 'David K.' },
       reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
       reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
