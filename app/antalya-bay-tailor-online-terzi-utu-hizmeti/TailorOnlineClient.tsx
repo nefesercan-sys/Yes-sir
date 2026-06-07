@@ -634,7 +634,7 @@ export default function TailorOnlineClient() {
         </div>
         <div className="svc-grid">
           {SERVICES.map((s,i)=>(
-            <article key={s.id} id={s.id} className="scard"
+            <article key={s.id} id={s.id} className="scard"  data-ani={s.id}
               data-ani id2={s.id}
               style={visible.has(s.id)?{opacity:1,transform:'none'}:{}}>
               <img src={s.img} alt={`${s.title} — SwapHubs Antalya Bay Tailor`}
