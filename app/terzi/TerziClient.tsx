@@ -633,13 +633,11 @@ export default function TerziClient() {
           </div>
           <div className="revgrid">
             {REVIEWS.map((r,i)=>(
-              <article key={i} className="rcard" itemScope itemType="https://schema.org/Review">
+              <article key={i} className="rcard">
                 <div className="rstars" aria-label={`${r.stars} yıldız`}>{'⭐'.repeat(r.stars)}</div>
-                <p className="rtxt" itemProp="reviewBody">{r.text}</p>
+                <p className="rtxt">{r.text}</p>
                 <div className="rauth">
-                  <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                    {r.flag} <span itemProp="name">{r.author}</span>
-                  </span>
+                  {r.flag} <strong>{r.author}</strong>
                   {' '}— {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
                 </div>
               </article>
