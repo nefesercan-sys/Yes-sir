@@ -172,7 +172,9 @@ const jsonLd = {
             name: 'Paça Kısaltma',
             price: '150',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Paça Kısaltma',
@@ -185,7 +187,9 @@ const jsonLd = {
             name: 'Fermuar Değişimi',
             price: '120',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Fermuar Değişimi',
@@ -198,7 +202,9 @@ const jsonLd = {
             name: 'Elbise Daraltma & Tadilat',
             price: '200',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Elbise Daraltma ve Tadilat',
@@ -211,7 +217,9 @@ const jsonLd = {
             name: 'Özel Dikim',
             price: '600',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Özel Dikim',
@@ -223,6 +231,7 @@ const jsonLd = {
             '@type': 'Offer',
             name: 'Üniforma Üretimi',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Üniforma Üretimi',
@@ -235,7 +244,9 @@ const jsonLd = {
             name: 'Kuru Temizleme',
             price: '300',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Kuru Temizleme ve Çamaşır',
@@ -248,7 +259,9 @@ const jsonLd = {
             name: 'Nakış & Logo Baskı',
             price: '100',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Nakış ve Logo Baskı',
@@ -260,6 +273,7 @@ const jsonLd = {
             '@type': 'Offer',
             name: 'Araçlı Terzi Servisi',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'LocalBusiness', name: 'Terzi Can' },
             itemOffered: {
               '@type': 'Service',
               name: 'Mobil Terzi Servisi',
@@ -277,17 +291,11 @@ const jsonLd = {
           contactType: 'customer service',
           areaServed: 'TR',
           availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
-          hoursAvailable: {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            opens: '09:00',
-            closes: '19:00',
-          },
+          contactOption: 'https://schema.org/TollFree',
         },
       ],
       sameAs: [
         'https://wa.me/905318986418',
-        'https://www.swaphubs.com/terzi',
       ],
     },
 
