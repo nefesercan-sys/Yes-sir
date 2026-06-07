@@ -4,21 +4,11 @@ import TerziClient from './TerziClient';
 const SITE_URL = 'https://www.swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 
-// ─── JSON-LD ─────────────────────────────────────────────────────────────────
-// ROOT CAUSE of "Adsız öğe" errors:
-// Google's Rich Results parser requires that every item inside an OfferCatalog
-// have a `name` property that is a PLAIN STRING at the top level of the Offer.
-// Additionally, when `itemOffered` is present, its `name` must NOT collide with
-// the parent Offer's name. The fix below:
-//  1. Keeps `name` as a simple string on each Offer (already done previously).
-//  2. Removes the nested `itemOffered` block from each Offer entirely — Google
-//     was treating the inner Service as an unnamed item when both existed.
-//  3. Adds `serviceType` directly on the Offer via `additionalType` instead.
-// This matches Google's documented LocalBusiness + OfferCatalog requirements.
+// ─── JSON-LD ────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    // 1. WebSite
+    // 1. WebSite — sitelinks searchbox + site identity
     {
       '@type': 'WebSite',
       '@id': 'https://www.swaphubs.com#website',
@@ -46,11 +36,7 @@ const jsonLd = {
       },
     },
 
-    // 2. LocalBusiness / ClothingStore
-    // FIX: hasOfferCatalog — each Offer MUST have:
-    //   - a plain `name` string at root level
-    //   - NO nested `itemOffered` Service (causes unnamed sub-items)
-    //   - `additionalType` for service categorization instead
+    // 2. LocalBusiness + ClothingStore (separate @type values, not array)
     {
       '@type': 'ClothingStore',
       '@id': `${SITE_URL}#business`,
@@ -60,10 +46,11 @@ const jsonLd = {
         'Портной Кан',
         'Schneider Can',
         'Antalya Terzisi',
+        'Antalya Üniforma Üretimi',
         'Konyaaltı Terzi',
       ],
       description:
-        "Antalya'nın en deneyimli terzisi. Paça kısaltma, fermuar değişimi, tadilat, özel dikim, üniforma üretimi, nakış, kuru temizleme. Araçlı terzi servisi ile adrese alım ve teslimat.",
+        "Antalya'nın en deneyimli terzisi. Paça kısaltma, fermuar değişimi, tadilat, tamir, daraltma, özel dikim, üniforma üretimi, nakış, fason imalat, kuru temizleme. Araçlı terzi servisi ile adrese alım ve teslimat.",
       url: SITE_URL,
       telephone: '+905318986418',
       priceRange: '₺₺',
@@ -105,35 +92,43 @@ const jsonLd = {
       review: [
         {
           '@type': 'Review',
+          name: 'Üniforma üretimi — mükemmel hizmet',
           author: { '@type': 'Person', name: 'Murat B.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
           datePublished: '2025-01-15',
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' },
         },
         {
           '@type': 'Review',
+          name: 'Best tailor in Antalya — express dress alteration',
           author: { '@type': 'Person', name: 'Sarah M.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
           datePublished: '2025-05-10',
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' },
         },
         {
           '@type': 'Review',
+          name: 'Отличный портной — свадебное платье за 5 дней',
           author: { '@type': 'Person', name: 'Наталья К.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
           datePublished: '2025-06-20',
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' },
         },
         {
           '@type': 'Review',
+          name: 'Bestickte Sweatshirts — pünktlich und qualitativ',
           author: { '@type': 'Person', name: 'David K.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
           datePublished: '2025-02-08',
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' },
         },
       ],
       areaServed: [
@@ -145,107 +140,136 @@ const jsonLd = {
         { '@type': 'City', name: 'Kaş' },
         { '@type': 'City', name: 'Finike' },
       ],
-
-      // ─── FIXED OfferCatalog ───────────────────────────────────────────────
-      // Each Offer has:
-      //   ✅ `name` as a plain string (required, top-level)
-      //   ✅ `description` plain string
-      //   ✅ `price` and `priceCurrency` where applicable
-      //   ✅ `availability` InStock
-      //   ✅ `seller` Organization reference
-      //   ❌ NO `itemOffered` nested Service (was causing unnamed sub-item errors)
-      // `additionalType` provides semantic service typing without nested objects.
+      serviceArea: {
+        '@type': 'AdministrativeArea',
+        name: 'Antalya İli',
+        containsPlace: [
+          { '@type': 'City', name: 'Konyaaltı' },
+          { '@type': 'City', name: 'Muratpaşa' },
+          { '@type': 'City', name: 'Kepez' },
+          { '@type': 'City', name: 'Lara' },
+          { '@type': 'City', name: 'Aksu' },
+          { '@type': 'City', name: 'Döşemealtı' },
+          { '@type': 'City', name: 'Serik' },
+          { '@type': 'City', name: 'Belek' },
+          { '@type': 'City', name: 'Kemer' },
+          { '@type': 'City', name: 'Alanya' },
+          { '@type': 'City', name: 'Manavgat' },
+          { '@type': 'City', name: 'Side' },
+          { '@type': 'City', name: 'Kaş' },
+          { '@type': 'City', name: 'Finike' },
+          { '@type': 'City', name: 'Kumluca' },
+          { '@type': 'City', name: 'Elmalı' },
+          { '@type': 'City', name: 'Korkuteli' },
+        ],
+      },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Terzi Can Hizmetleri 2025–2026',
+        name: 'Terzi Can Hizmetleri',
         itemListElement: [
           {
             '@type': 'Offer',
             name: 'Paça Kısaltma',
-            description: "Pantolon ve kot paça kısaltma. ₺150'den başlar, 24 saatte teslim.",
             price: '150',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Paça Kısaltma',
+              description:
+                "Pantolon, kot, kumaş — tüm kıyafetlerde paça kısaltma. ₺150'den başlar. 24 saat içinde teslim.",
+            },
           },
           {
             '@type': 'Offer',
             name: 'Fermuar Değişimi',
-            description: "Pantolon/kot fermuarı ₺120'den, mont fermuarı ₺300'den. Aynı gün servis.",
             price: '120',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Fermuar Değişimi',
+              description:
+                "Pantolon, ceket, mont, elbise, sweatshirt fermuarı. ₺120'den başlar. Aynı gün teslim.",
+            },
           },
           {
             '@type': 'Offer',
-            name: 'Elbise Daraltma ve Tadilat',
-            description: "Her tür kıyafette beden küçültme ve tadilat. ₺200'den başlar.",
+            name: 'Elbise Daraltma & Tadilat',
             price: '200',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Elbise Daraltma ve Tadilat',
+              description:
+                "Her tür kıyafette beden küçültme ve tadilat. ₺200'den başlar.",
+            },
           },
           {
             '@type': 'Offer',
             name: 'Özel Dikim',
-            description: "Ölçüye göre erkek, bayan, çocuk kıyafeti dikimi. ₺600'den başlar.",
             price: '600',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Özel Dikim',
+              description:
+                "Ölçüye göre erkek, bayan, çocuk kıyafeti dikimi. ₺600'den başlar.",
+            },
           },
           {
             '@type': 'Offer',
             name: 'Üniforma Üretimi',
-            description: 'Otel, restoran, sağlık, okul ve spor üniforması. Tasarım + kalıp + seri imalat + nakış.',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Üniforma Üretimi',
+              description:
+                'Otel, restoran, sağlık, okul ve spor üniforması üretimi. Tasarım + kalıp + seri imalat + nakış.',
+            },
           },
           {
             '@type': 'Offer',
             name: 'Kuru Temizleme',
-            description: "Otel alım-teslimat dahil kuru temizleme ve ütü. ₺300'den başlar.",
             price: '300',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Kuru Temizleme ve Çamaşır',
+              description:
+                "Otel alım-teslimat dahil kuru temizleme ve çamaşır. ₺300'den başlar.",
+            },
           },
           {
             '@type': 'Offer',
-            name: 'Nakış ve Logo Baskı',
-            description: "Üniforma ve kıyafete logo nakışı, dijital baskı. ₺100'den başlar.",
+            name: 'Nakış & Logo Baskı',
             price: '100',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Nakış ve Logo Baskı',
+              description:
+                "Üniforma ve kıyafete logo nakışı, dijital baskı. ₺100'den başlar.",
+            },
           },
           {
             '@type': 'Offer',
             name: 'Araçlı Terzi Servisi',
-            description: 'Adrese alım ve teslimat dahil mobil terzi servisi. Tüm Antalya ilçeleri.',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'Terzi Can' },
-            additionalType: 'https://schema.org/Service',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Mobil Terzi Servisi',
+              description:
+                'Adrese alım ve teslimat dahil mobil terzi servisi — tüm Antalya ilçeleri.',
+            },
           },
         ],
       },
-
+      // ContactPoint for richer rich results
       contactPoint: [
         {
           '@type': 'ContactPoint',
@@ -271,7 +295,7 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Terzi Can Antalya | Konyaaltı Terzi | Paça Kısaltma · Tadilat · Üniforma · Kuru Temizleme',
+      name: 'Terzi Can Antalya | Konyaaltı Terzi | Ütü · Dikim · Tamir · Tadilat',
       url: SITE_URL,
       isPartOf: { '@id': 'https://www.swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
@@ -294,12 +318,22 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://www.swaphubs.com' },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Antalya', item: SITE_URL },
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'SwapHubs',
+          item: 'https://www.swaphubs.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terzi Antalya',
+          item: SITE_URL,
+        },
       ],
     },
 
-    // 5. FAQPage — unchanged, already valid
+    // 5. FAQPage
     {
       '@type': 'FAQPage',
       '@id': `${SITE_URL}#faq`,
@@ -325,7 +359,7 @@ const jsonLd = {
           name: 'Eve veya otele gelen terzi Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Evet, Terzi Can araçlı terzi servisiyle Antalya'nın tüm ilçelerine geliyor. WhatsApp'tan konum paylaşın. +90 531 898 64 18.",
+            text: "Evet, Terzi Can araçlı terzi servisiyle Antalya'nın tüm ilçelerine geliyor. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. +90 531 898 64 18.",
           },
         },
         {
@@ -333,7 +367,7 @@ const jsonLd = {
           name: 'Mezuniyet abiyesi tamiri ve kısaltması Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri ve kısaltma ekspres 24 saatte yapıyoruz.',
+            text: 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri, kısaltma ve tadilatı ekspres 24 saatte yapıyoruz.',
           },
         },
         {
@@ -349,7 +383,7 @@ const jsonLd = {
           name: "Antalya'da otel ve restoran üniforması üretimi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, otel personel, resepsiyon, aşçı, garson, spa üniforma üretiyoruz. Tasarım + kalıp + seri imalat + nakış tek elden.',
+            text: 'Evet, otel personel üniforma, resepsiyon, aşçı, garson, meydancı, spa üniforma üretiyoruz. Tasarım + kalıp + seri imalat + nakış hepsi tek elden.',
           },
         },
         {
@@ -357,7 +391,7 @@ const jsonLd = {
           name: "Antalya'da sweatshirt ve eşofman dikimi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, sweatshirt ve eşofman dikimi, nakış ve baskı ile kişiselleştirme, seri üretim yapıyoruz.',
+            text: 'Evet, sweatshirt ve eşofman takımı dikimi, tadilat ve seri üretim yapıyoruz. Nakış ve baskı ile kişiselleştirme de mümkündür.',
           },
         },
         {
@@ -365,7 +399,7 @@ const jsonLd = {
           name: 'Kuru temizleme hizmeti veriyor musunuz?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, kuru temizleme, çamaşır yıkama ve ütü hizmetleri sunmaktayız. Otel ve adreslerden kurye ile alım yapılmaktadır.',
+            text: 'Evet, kuru temizleme, çamaşır yıkama ve ütü hizmetleri de sunmaktayız. Otel ve adreslerden kurye ile alım yapılmaktadır.',
           },
         },
         {
@@ -402,25 +436,12 @@ const jsonLd = {
         },
       ],
     },
-
-    // 6. Service entity — separate from Offers, provides rich service markup
-    // Google can index this independently for service-type searches
-    {
-      '@type': 'Service',
-      '@id': `${SITE_URL}#service-tailoring`,
-      name: 'Profesyonel Terzilik Hizmetleri — Antalya',
-      description: "Antalya Konyaaltı'nda paça kısaltma, elbise tadilat, özel dikim, üniforma üretimi, kuru temizleme ve mobil terzi servisi.",
-      provider: { '@id': `${SITE_URL}#business` },
-      areaServed: { '@type': 'City', name: 'Antalya' },
-      availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
-      serviceType: 'Tailoring and Clothing Alteration',
-      url: SITE_URL,
-    },
   ],
 };
 
-// ─── METADATA ────────────────────────────────────────────────────────────────
+// ─── METADATA ───────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
+  // metadataBase zorunlu — tüm relative URL'leri çözümler
   metadataBase: new URL('https://www.swaphubs.com'),
 
   title: {
@@ -431,27 +452,63 @@ export const metadata: Metadata = {
 
   description: `Antalya Konyaaltı'nda Terzi Can. Paça kısaltma ₺150'den, fermuar değişimi ₺120'den. Özel dikim, üniforma üretimi, kuru temizleme, eve-otele gelen terzi servisi. 24–48 saat ekspres. TR · EN · DE · RU ☎ ${PHONE}`,
 
+  // keywords artık array olmalı (Next.js 14+ bunu string'e çevirir, virgülle)
   keywords: [
-    'Antalya Terzi', 'Terzi Antalya', 'Konyaaltı Terzi', 'Terzi Can', 'Tailor Can',
-    'Paça Kısaltma Antalya', 'Paça Kısaltma Kaç Lira', 'Paça Kısaltma Fiyatı 2026',
-    'Fermuar Değişimi Antalya', 'Fermuar Değişimi Kaç Lira', 'Mont Fermuarı Değişimi',
-    'Elbise Tadilat Antalya', 'Kıyafet Tamiri Antalya', 'Elbise Daraltma',
-    'Bel Alma Antalya', 'Gelinlik Tadilat Antalya', 'Abiye Dikimi Antalya',
-    'Üniforma Dikimi Antalya', 'Otel Üniforma Üretimi Antalya', 'Kuru Temizleme Antalya',
-    'Nakış Antalya', 'Sweatshirt Dikimi Antalya', 'Eve Gelen Terzi Antalya',
-    'Otele Gelen Terzi', 'Araçlı Terzi Servisi Antalya', 'Terzi Fiyatları 2026',
-    'Lara Terzi', 'Belek Terzi', 'Kemer Terzi', 'Alanya Terzi', 'Manavgat Terzi',
-    'Tailor Antalya', 'Clothing Alterations Antalya', 'Dry Cleaning Antalya',
-    'Mobile Tailor Antalya', 'Uniform Production Antalya', 'Hotel Uniform Antalya',
-    'Schneider Antalya', 'Uniformproduktion Antalya', 'Chemische Reinigung Antalya',
-    'Портной Анталья', 'Химчистка Анталья', 'Пошив на заказ Анталья',
-    'Выездной портной Анталья', 'Гостиничная форма Анталья',
+    'Antalya Terzi',
+    'Terzi Antalya',
+    'Konyaaltı Terzi',
+    'Terzi Can',
+    'Tailor Can',
+    'Paça Kısaltma Antalya',
+    'Paça Kısaltma Kaç Lira',
+    'Paça Kısaltma Fiyatı 2026',
+    'Fermuar Değişimi Antalya',
+    'Fermuar Değişimi Kaç Lira',
+    'Mont Fermuarı Değişimi',
+    'Elbise Tadilat Antalya',
+    'Kıyafet Tamiri Antalya',
+    'Elbise Daraltma',
+    'Bel Alma Antalya',
+    'Gelinlik Tadilat Antalya',
+    'Abiye Dikimi Antalya',
+    'Üniforma Dikimi Antalya',
+    'Otel Üniforma Üretimi Antalya',
+    'Kuru Temizleme Antalya',
+    'Nakış Antalya',
+    'Sweatshirt Dikimi Antalya',
+    'Eve Gelen Terzi Antalya',
+    'Otele Gelen Terzi',
+    'Araçlı Terzi Servisi Antalya',
+    'Terzi Fiyatları 2026',
+    'Yakınımda Terzi',
+    'Lara Terzi',
+    'Belek Terzi',
+    'Kemer Terzi',
+    'Alanya Terzi',
+    'Manavgat Terzi',
+    'Side Terzi',
+    'Tailor Antalya',
+    'Clothing Alterations Antalya',
+    'Dry Cleaning Antalya',
+    'Mobile Tailor Antalya',
+    'Uniform Production Antalya',
+    'Hotel Uniform Antalya',
+    'Schneider Antalya',
+    'Uniformproduktion Antalya',
+    'Chemische Reinigung Antalya',
+    'Änderungsschneiderei Antalya',
+    'Портной Анталья',
+    'Химчистка Анталья',
+    'Пошив на заказ Анталья',
+    'Выездной портной Анталья',
+    'Гостиничная форма Анталья',
   ],
 
   authors: [{ name: 'SwapHubs', url: 'https://www.swaphubs.com' }],
   creator: 'SwapHubs',
   publisher: 'SwapHubs',
 
+  // ─── ROBOTS ─────────────────────────────────────────────────────────────
   robots: {
     index: true,
     follow: true,
@@ -464,6 +521,9 @@ export const metadata: Metadata = {
     },
   },
 
+  // ─── CANONICAL + HREFLANG ────────────────────────────────────────────────
+  // Next.js App Router'da hreflang için alternates kullanılır.
+  // languages objesi hreflang <link> taglerini oluşturur.
   alternates: {
     canonical: 'https://www.swaphubs.com/terzi',
     languages: {
@@ -475,12 +535,14 @@ export const metadata: Metadata = {
     },
   },
 
+  // ─── OPEN GRAPH ─────────────────────────────────────────────────────────
   openGraph: {
     title: 'Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya',
     description: `Konyaaltı ve tüm Antalya'da Terzi Can. Paça kısaltma, tadilat, kuru temizleme, üniforma üretimi. 24–48 saat ekspres. ☎ ${PHONE}`,
     url: 'https://www.swaphubs.com/terzi',
     siteName: 'SwapHubs',
     locale: 'tr_TR',
+    // Next.js 14+ alternateLocale doğru şekilde
     alternateLocale: ['en_US', 'de_DE', 'ru_RU'],
     type: 'website',
     images: [
@@ -494,26 +556,40 @@ export const metadata: Metadata = {
     ],
   },
 
+  // ─── TWITTER CARD ────────────────────────────────────────────────────────
   twitter: {
     card: 'summary_large_image',
-    site: '@swaphubs',
+    site: '@swaphubs',       // Twitter handle — varsa ekleyin
     creator: '@swaphubs',
     title: 'Terzi Can Antalya | Konyaaltı · Tüm İlçeler',
     description: `Konyaaltı ve tüm Antalya ilçelerinde Terzi Can. TR · EN · DE · RU ☎ ${PHONE}`,
     images: ['/og/terzi-can.jpg'],
   },
 
+  // ─── VERIFICATION ────────────────────────────────────────────────────────
+  // Google Search Console, Bing Webmaster Tools doğrulama meta tagları
+  // Gerçek değerlerle değiştirin:
+  // verification: {
+  //   google: 'BURAYA_GOOGLE_VERIFICATION_CODE',
+  //   yandex: 'BURAYA_YANDEX_VERIFICATION_CODE',
+  //   other: { 'msvalidate.01': 'BURAYA_BING_VERIFICATION_CODE' },
+  // },
+
+  // ─── ADDITIONAL META ─────────────────────────────────────────────────────
   other: {
+    // Geo tags — yerel SEO için önemli
     'geo.region': 'TR-07',
     'geo.placename': 'Antalya',
     'geo.position': '36.8841;30.7056',
     'ICBM': '36.8841, 30.7056',
+    // Dil belirtme
     'content-language': 'tr, en, de, ru',
+    // WhatsApp/iletişim için
     'contact': PHONE,
   },
 };
 
-// ─── PAGE COMPONENT ──────────────────────────────────────────────────────────
+// ─── PAGE COMPONENT ─────────────────────────────────────────────────────────
 export default function TerziPage() {
   return (
     <>
