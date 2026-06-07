@@ -5,16 +5,6 @@ const SITE_URL = 'https://www.swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 
 // ─── JSON-LD ─────────────────────────────────────────────────────────────────
-// ROOT CAUSE of "Adsız öğe" errors:
-// Google's Rich Results parser requires that every item inside an OfferCatalog
-// have a `name` property that is a PLAIN STRING at the top level of the Offer.
-// Additionally, when `itemOffered` is present, its `name` must NOT collide with
-// the parent Offer's name. The fix below:
-//  1. Keeps `name` as a simple string on each Offer (already done previously).
-//  2. Removes the nested `itemOffered` block from each Offer entirely — Google
-//     was treating the inner Service as an unnamed item when both existed.
-//  3. Adds `serviceType` directly on the Offer via `additionalType` instead.
-// This matches Google's documented LocalBusiness + OfferCatalog requirements.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -47,10 +37,6 @@ const jsonLd = {
     },
 
     // 2. LocalBusiness / ClothingStore
-    // FIX: hasOfferCatalog — each Offer MUST have:
-    //   - a plain `name` string at root level
-    //   - NO nested `itemOffered` Service (causes unnamed sub-items)
-    //   - `additionalType` for service categorization instead
     {
       '@type': 'ClothingStore',
       '@id': `${SITE_URL}#business`,
@@ -102,9 +88,38 @@ const jsonLd = {
         bestRating: '5',
         worstRating: '1',
       },
-      // review bloğu ClothingStore'dan kaldırıldı.
-      // Ayrı top-level @graph entity'leri olarak tanımlandı (aşağıda).
-      // Google nested Review'ları "Adsız öğe" hatası ile işaret ediyordu.
+      // ÇÖZÜM: Yorumlar ana LocalBusiness şemasının içine taşındı.
+      // Google'ın eksik alan (itemReviewed) uyarısı vermemesi için en güvenli yöntem budur.
+      review: [
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Murat B.' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+          reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
+          datePublished: '2025-01-15',
+        },
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Sarah M.' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+          reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
+          datePublished: '2025-05-10',
+        },
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Наталья К.' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+          reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
+          datePublished: '2025-06-20',
+        },
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'David K.' },
+          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+          reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
+          datePublished: '2025-02-08',
+        },
+      ],
       areaServed: [
         { '@type': 'City', name: 'Antalya' },
         { '@type': 'City', name: 'Alanya' },
@@ -116,14 +131,6 @@ const jsonLd = {
       ],
 
       // ─── FIXED OfferCatalog ───────────────────────────────────────────────
-      // Each Offer has:
-      //   ✅ `name` as a plain string (required, top-level)
-      //   ✅ `description` plain string
-      //   ✅ `price` and `priceCurrency` where applicable
-      //   ✅ `availability` InStock
-      //   ✅ `seller` Organization reference
-      //   ❌ NO `itemOffered` nested Service (was causing unnamed sub-item errors)
-      // `additionalType` provides semantic service typing without nested objects.
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Terzi Can Hizmetleri 2025–2026',
@@ -268,7 +275,7 @@ const jsonLd = {
       ],
     },
 
-    // 5. FAQPage — unchanged, already valid
+    // 5. FAQPage
     {
       '@type': 'FAQPage',
       '@id': `${SITE_URL}#faq`,
@@ -372,7 +379,7 @@ const jsonLd = {
       ],
     },
 
-    // 6. Service entity — separate from Offers, provides rich service markup
+    // 6. Service entity
     {
       '@type': 'Service',
       '@id': `${SITE_URL}#service-tailoring`,
@@ -384,83 +391,18 @@ const jsonLd = {
       serviceType: 'Tailoring and Clothing Alteration',
       url: SITE_URL,
     },
-
-    // 7. Review entity'leri — top-level @graph olarak tanımlandı.
-    // ClothingStore içinde nested olduklarında Google "Adsız öğe" hatası veriyordu.
-    // Top-level tanımlandığında itemReviewed ile işletmeye referans verilmeli.
-    {
-      '@type': 'Review',
-      '@id': `${SITE_URL}#review-1`,
-      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
-      author: { '@type': 'Person', name: 'Murat B.' },
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
-      datePublished: '2025-01-15',
-    },
-    {
-      '@type': 'Review',
-      '@id': `${SITE_URL}#review-2`,
-      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
-      author: { '@type': 'Person', name: 'Sarah M.' },
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
-      datePublished: '2025-05-10',
-    },
-    {
-      '@type': 'Review',
-      '@id': `${SITE_URL}#review-3`,
-      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
-      author: { '@type': 'Person', name: 'Наталья К.' },
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
-      datePublished: '2025-06-20',
-    },
-    {
-      '@type': 'Review',
-      '@id': `${SITE_URL}#review-4`,
-      itemReviewed: { '@type': 'ClothingStore', '@id': `${SITE_URL}#business`, name: 'Terzi Can' },
-      author: { '@type': 'Person', name: 'David K.' },
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
-      datePublished: '2025-02-08',
-    },
   ],
 };
 
 // ─── METADATA ────────────────────────────────────────────────────────────────
-// SEO FIX LOG:
-// 1. Title: 83 → 57 karakter. Google 60'ta kesiyor, primary keyword öne alındı.
-// 2. Description: 220 → 148 karakter. Google 155'te kesiyor, CTR için fiyat+CTA öne.
-// 3. keywords: KALDIRILDI — Google 2009'dan beri dikkate almıyor, gürültü.
-// 4. title.default + title.template çakışması: template KALDIRILDI.
-//    Alt sayfalara ihtiyaç olursa layout.tsx'te tanımlanmalı.
-// 5. hreflang: query param (?lang=) yerine canonical TR URL kullanıldı.
-//    Google query-param hreflang'ı zayıf sinyal sayıyor. Path-based routing
-//    (app/[lang]/terzi) yapılana kadar tümü canonical'a işaret etmeli.
-// 6. OG title: 73 → 55 karakter, sosyal paylaşımda tam görünür.
-// 7. Twitter description güncellendi, fiyat bilgisi eklendi.
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.swaphubs.com'),
-
-  // ✅ 57 karakter — Google SERP'te tam görünür, kesilmez
-  // Primary keyword "Antalya Terzi" en başta → en yüksek arama hacmi
-  // Fiyat "₺150" snippet'te tıklamayı artırır (CTR sinyal)
   title: 'Antalya Terzi | Paça Kısaltma ₺150 · Eve Gelen Terzi Can',
-
-  // ✅ 148 karakter — Google snippet sınırı içinde (155 max)
-  // İlk 120 karakterde: kim, ne, nerede, fiyat → snippet kesilse bile mesaj tam
-  // Son kısım: sosyal kanıt (4.9★) + CTA (telefon)
   description: `Konyaaltı'nda profesyonel terzi. Paça kısaltma ₺150, fermuar ₺120, kuru temizleme, üniforma üretimi. Eve & otele geliyoruz. 4.9★ · ☎ ${PHONE}`,
-
-  // layout.tsx'teki "B2B platform Türkiye..." keywords layout'tan geliyor.
-  // Bu override ile terzi sayfasına özel keywords tanımlıyoruz.
-  // Next.js metadata birleştirme: alt sayfa tanımladığında layout'u ezer.
   keywords: 'Antalya Terzi, Paça Kısaltma Antalya, Terzi Can, Konyaaltı Terzi, Eve Gelen Terzi',
-
   authors: [{ name: 'SwapHubs', url: 'https://www.swaphubs.com' }],
   creator: 'SwapHubs',
   publisher: 'SwapHubs',
-
   robots: {
     index: true,
     follow: true,
@@ -472,11 +414,6 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-
-  // hreflang: query-param versiyonlar kaldırıldı.
-  // Google, ?lang= parametreli hreflang'ı düşük güven sinyali sayar.
-  // Çözüm: tüm diller şimdilik canonical TR URL'e işaret ediyor.
-  // Kalıcı çözüm: Next.js app/[lang]/terzi/ path-based routing kurulmalı.
   alternates: {
     canonical: 'https://www.swaphubs.com/terzi',
     languages: {
@@ -487,11 +424,8 @@ export const metadata: Metadata = {
       'x-default': 'https://www.swaphubs.com/terzi',
     },
   },
-
   openGraph: {
-    // ✅ 55 karakter — WhatsApp/Telegram/Facebook önizlemede tam görünür
     title: 'Terzi Can Antalya | Paça Kısaltma & Tadilat',
-    // OG description sosyal paylaşım için optimize: emoji + fiyat + dil çeşitliliği
     description: `Antalya'da profesyonel terzi. Paça ₺150, fermuar ₺120, üniforma, kuru temizleme. Eve & otele geliyoruz. TR · EN · RU · DE ☎ ${PHONE}`,
     url: 'https://www.swaphubs.com/terzi',
     siteName: 'SwapHubs — Antalya Terzi',
@@ -503,24 +437,19 @@ export const metadata: Metadata = {
         url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
-        // Alt text: keyword içermeli ama doğal okunmalı
         alt: 'Terzi Can Antalya — Paça Kısaltma, Tadilat, Üniforma, Kuru Temizleme',
         type: 'image/jpeg',
       },
     ],
   },
-
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
     creator: '@swaphubs',
-    // Twitter title: 70 karakter sınırı var
     title: 'Antalya Terzi Can | Paça ₺150 · Eve Geliyoruz',
-    // Twitter description: 200 karakter sınırı, fiyat + dil avantajı vurgulandı
     description: `Konyaaltı merkezli, tüm Antalya'ya gelen terzi. Paça ₺150, fermuar ₺120. Türkçe · English · Русский · Deutsch ☎ ${PHONE}`,
     images: ['/og/terzi-can.jpg'],
   },
-
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Antalya',
