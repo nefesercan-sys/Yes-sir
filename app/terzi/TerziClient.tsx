@@ -33,7 +33,6 @@ const C = {
       ['Sweatshirt ve eşofman dikimi yapılıyor mu?', 'Evet. Sweatshirt, eşofman, kapüşonlu, polo yaka dikimi. Nakış ve baskıyla kişiselleştirme, seri üretim de mümkün.'],
       ['Büyük beden, bebek kıyafeti, nevresim, perde?', 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi.'],
     ] as [string,string][],
-    // SEO intro — visible, natural prose (NOT hidden)
     seoIntro: "Antalya'nın köklü terzisi Terzi Can olarak Konyaaltı merkezimizden tüm Antalya ilçelerine hizmet veriyoruz. Paça kısaltma, pantolon kısaltma, elbise daraltma, fermuar değişimi, etek kısaltma, abiye tamiri, kıyafet tamiri, kuru temizleme ve ütü hizmetlerinin yanı sıra otel üniforma, aşçı üniforma, garson üniforma, resepsiyon üniforma, doktor üniforma, okul üniforma ve spor üniforma üretimi yapıyoruz. Sweatshirt ve eşofman dikimi, nakış ve logo baskı hizmetleri de sunulmaktadır. Eve gelen terzi, otele gelen terzi ve araçlı terzi servisimizle kapınıza kadar geliyoruz.",
   },
   en: {
@@ -122,11 +121,13 @@ const C = {
   },
 };
 
+// ─── SECTOR-RELEVANT IMAGES ────────────────────────────────────────────────
+// All images are now tailoring/textile/fashion specific from Unsplash
 const SERVICES = [
   {
     icon: '✂️',
-    // Terzi makası ile pantolon paça kısaltma / dikiş detayı
-    img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=700&q=75&auto=format&fit=crop',
+    // Tailor measuring/hemming trousers
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Tamir & Tadilat', d: 'Paça kısaltma · etek kısaltma · kol kısaltma · elbise daraltma · ceket daraltma · bel alma · fermuar değişimi · yırtık onarımı · düğme dikimi · astar değişimi · cep tamiri. Her tür kıyafette.', p: '₺120+' },
     en: { n: 'Repairs & Alterations', d: 'Trouser hemming · skirt shortening · sleeve shortening · dress/jacket taking in · zip replacement · tear repair · button sewing · lining replacement. All garments.', p: '₺120+' },
     ru: { n: 'Ремонт и переделка', d: 'Подгонка брюк · укорачивание юбок/рукавов · заужение платья/пиджака · замена молнии · ремонт разрывов · пришивание пуговиц · замена подкладки.', p: '₺120+' },
@@ -134,8 +135,8 @@ const SERVICES = [
   },
   {
     icon: '👗',
-    // Terzi manken üzerine kumaş tutturma / özel dikim atölyesi
-    img: 'https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=700&q=75&auto=format&fit=crop',
+    // Elegant fashion dress / custom tailoring
+    img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Bayan & Erkek Özel Dikim', d: 'Elbise · bluz · etek · tulum · abiye · gelinlik · damatlık · takım elbise · gömlek · ceket · blazer · smoking dikimi. Kendi kumaşınızla ya da seçkin stoğumuzdan ölçüye özel.', p: '₺600+' },
     en: { n: 'Custom Tailoring', d: 'Dresses · blouses · skirts · jumpsuits · evening gowns · wedding dresses · suits · shirts · jackets · blazers · tuxedos. Your fabric or ours. Made to exact measure.', p: '₺600+' },
     ru: { n: 'Пошив на заказ', d: 'Платья · блузки · юбки · вечерние платья · свадебные платья · костюмы · рубашки · пиджаки · смокинги. Ваша ткань или наша. Точно по меркам.', p: '₺600+' },
@@ -143,8 +144,8 @@ const SERVICES = [
   },
   {
     icon: '👶',
-    // Renkli çocuk kıyafetleri / küçük elbiseler askıda
-    img: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?w=700&q=75&auto=format&fit=crop',
+    // Children's / baby clothing — fabric & thread
+    img: 'https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Çocuk · Bebek · Büyük Beden', d: 'Bebek elbisesi · çocuk kıyafeti · okul kıyafeti · kostüm dikimi. Büyük beden elbise · pantolon · gömlek; beden seti çıkarma, özel kalıp. Anne grubu toplu sipariş indirimi.', p: '₺200+' },
     en: { n: 'Children · Baby · Plus Size', d: "Baby dresses · children's clothing · school uniforms · costumes. Plus-size dresses · trousers · shirts; custom pattern sets. Group discounts for parent communities.", p: '₺200+' },
     ru: { n: 'Детская · Большие размеры', d: 'Одежда для малышей · детская одежда · школьная форма · костюмы. Одежда больших размеров, индивидуальные лекала. Скидки для мам-групп.', p: '₺200+' },
@@ -152,8 +153,8 @@ const SERVICES = [
   },
   {
     icon: '🏨',
-    // Garson/otel personeli üniforma — beyaz gömlekli servis personeli
-    img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=75&auto=format&fit=crop',
+    // Chef/hotel uniform — professional kitchen
+    img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Üniforma Üretimi', d: 'Otel personel · resepsiyon · kat görevlisi · aşçı · garson · meydancı · kapıcı · güvenlik · spa · animatör üniforma. Doktor · hemşire · okul · spor takımı. Tasarım + kalıp + seri imalat + nakış tek elden.', p: 'Teklif Al' },
     en: { n: 'Uniform Production', d: 'Hotel staff · reception · housekeeping · chef · waiter · valet · security · spa · animation. Doctor · nurse · school · sports teams. Design + pattern + mass production + embroidery all in one.', p: 'Get Quote' },
     ru: { n: 'Производство формы', d: 'Гостиничный персонал · ресепшн · горничные · повара · официанты · охрана · спа · аниматоры. Врачи · медсёстры · школа · спорт. Дизайн + лекала + серийное производство + вышивка.', p: 'Запрос цены' },
@@ -161,8 +162,8 @@ const SERVICES = [
   },
   {
     icon: '🪡',
-    // Nakış makinesi / renkli iplikler / tekstil nakışı
-    img: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=700&q=75&auto=format&fit=crop',
+    // Sewing machine / embroidery close-up
+    img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Nakış · Baskı · Sweatshirt', d: 'Logo nakışı · isim nakışı · üniforma nakışı · dijital baskı · transfer baskı · serigrafi. Sweatshirt · eşofman · kapüşonlu · polo yaka dikimi. Seri üretim için uygun fiyatlı.', p: '₺100+' },
     en: { n: 'Embroidery · Print · Sweatshirt', d: 'Logo embroidery · name embroidery · uniform embroidery · digital print · screen print. Sweatshirt · tracksuit · hoodie · polo sewing. Affordable for mass production.', p: '₺100+' },
     ru: { n: 'Вышивка · Печать · Толстовки', d: 'Вышивка логотипа · имена · форма · цифровая печать · трафаретная печать. Пошив толстовок · спортивных костюмов · худи · поло. Для серийного производства.', p: '₺100+' },
@@ -170,7 +171,7 @@ const SERVICES = [
   },
   {
     icon: '🧺',
-    // Temizlenmiş asılı kıyafetler / ütülü gömlek / kuru temizlemeci
+    // Dry cleaning / pressing / iron
     img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Kuru Temizleme & Çamaşır', d: 'Kuru temizleme · çamaşır yıkama · ütü hizmeti. Otel ve adreslerden kurye ile alım. 24 saatte teslim. Turistler için ekspres servis.', p: '₺300+' },
     en: { n: 'Dry Cleaning & Laundry', d: 'Dry cleaning · laundry · ironing. Courier pickup from hotels and addresses. 24-hour express turnaround. Express service for tourists.', p: '₺300+' },
@@ -179,7 +180,7 @@ const SERVICES = [
   },
   {
     icon: '💍',
-    // Beyaz gelinlik / gelin elbisesi detayı — düğün kıyafeti
+    // Wedding/bridal dress detail
     img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık dikimi · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti · gece elbisesi. Kusursuz fit garantisi. Ekspres randevu.', p: '₺500+' },
     en: { n: 'Wedding · Evening · Special', d: 'Wedding dress sewing · bridal alterations · groom suit · evening gown sewing/repair · engagement dress. Perfect fit guaranteed. Express appointments.', p: '₺500+' },
@@ -188,7 +189,7 @@ const SERVICES = [
   },
   {
     icon: '🏭',
-    // Tekstil fabrikası / dikiş makineleri sıra / konfeksiyon üretim bandı
+    // Fabric rolls / textile production
     img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=75&auto=format&fit=crop',
     tr: { n: 'Kalıp · Fason · Seri İmalat', d: 'Kalıp çıkarma · model tasarımı · kesim · dikim · ütü · paket. Numune dikimi · prototip · seri imalat · fason üretim. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.', p: 'Teklif Al' },
     en: { n: 'Pattern · Manufacturing', d: 'Pattern making · model design · cutting · sewing · ironing · packaging. Sample · prototype · mass production · contract manufacturing. Full production for brands, boutiques, e-commerce.', p: 'Get Quote' },
@@ -236,19 +237,20 @@ const ILCELER = [
   { ilce: 'Kaş · Finike · Diğer', m: ['Kaş Merkez','Kalkan','Finike Merkez','Kumluca','Elmalı','Korkuteli','Akseki'] },
 ];
 
+// ─── GALLERY — all textile/fashion/tailoring images ────────────────────────
 const GALLERY = [
-  // Alışveriş yapan zarif kadın / moda — büyük kart
-  { img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=80&auto=format&fit=crop', tr: 'Özel Dikim', en: 'Custom Sewing', ru: 'Пошив на заказ', de: 'Maßanfertigung' },
-  // Dikiş makinesi yakın çekim
-  { img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=700&q=80&auto=format&fit=crop', tr: 'Tadilat', en: 'Alterations', ru: 'Подгонка', de: 'Änderungen' },
-  // Beyaz gelinlik
+  // Hanging clothes / garment rack — very relevant
+  { img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80&auto=format&fit=crop', tr: 'Atölye', en: 'Atelier', ru: 'Ателье', de: 'Atelier' },
+  // Tailor / sewing machine close-up
+  { img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80&auto=format&fit=crop', tr: 'Nakış & Dikim', en: 'Sewing', ru: 'Пошив', de: 'Nähen' },
+  // Wedding/bridal dress
   { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&auto=format&fit=crop', tr: 'Gelinlik', en: 'Bridal', ru: 'Свадьба', de: 'Brautkleid' },
-  // Askıda asılı şık kıyafetler
-  { img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=700&q=80&auto=format&fit=crop', tr: 'Üniforma', en: 'Uniforms', ru: 'Форма', de: 'Uniformen' },
-  // Ütülenmiş temiz asılı kıyafetler
+  // Fabric / textile rolls
+  { img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop', tr: 'Kumaş', en: 'Fabric', ru: 'Ткань', de: 'Stoff' },
+  // Fashion / clothing detail
+  { img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=700&q=80&auto=format&fit=crop', tr: 'Özel Dikim', en: 'Custom', ru: 'Заказ', de: 'Maß' },
+  // Dry cleaning / ironing
   { img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=80&auto=format&fit=crop', tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Reinigung' },
-  // Terzi atölyesi / kumaş ve dikiş
-  { img: 'https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=700&q=80&auto=format&fit=crop', tr: 'Atölye', en: 'Atelier', ru: 'Ателье', de: 'Atelier' },
 ];
 
 export default function TerziClient() {
@@ -284,8 +286,6 @@ export default function TerziClient() {
         ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--g3)}
         @keyframes fup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
         .fu{animation:fup .8s ease both}.fu1{animation:fup .8s .1s ease both}.fu2{animation:fup .9s .2s ease both}.fu3{animation:fup 1s .3s ease both}.fu4{animation:fup 1s .4s ease both}
-
-        /* NAV */
         .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .35s}
         .nav.up{background:rgba(13,12,10,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,169,110,.12);padding:.65rem 1.5rem}
         .nav-logo{font-family:var(--serif);font-size:1.3rem;color:var(--g);text-decoration:none;letter-spacing:.03em}
@@ -295,10 +295,8 @@ export default function TerziClient() {
         .lsw{display:flex;gap:.35rem}
         .lb{background:none;border:1px solid rgba(201,169,110,.22);color:var(--mt);font-size:.68rem;padding:.26rem .55rem;cursor:pointer;font-family:var(--sans);text-transform:uppercase;letter-spacing:.08em;transition:all .25s;border-radius:2px}
         .lb.on,.lb:hover{border-color:var(--g);color:var(--g);background:rgba(201,169,110,.08)}
-
-        /* HERO */
         .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 1.5rem 4rem;overflow:hidden}
-        .hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80&auto=format&fit=crop') center 40%/cover;filter:brightness(.17) saturate(.5)}
+        .hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&q=80&auto=format&fit=crop') center 30%/cover;filter:brightness(.17) saturate(.5)}
         .hov{position:absolute;inset:0;background:linear-gradient(155deg,rgba(13,12,10,.25) 0%,rgba(13,12,10,.8) 55%,var(--ink) 100%)}
         .hgrain{position:absolute;inset:0;opacity:.025;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;background-size:120px}
         .hc{position:relative;z-index:2;max-width:860px}
@@ -311,14 +309,10 @@ export default function TerziClient() {
         .stat{padding:0 1.5rem 0 0;border-right:1px solid rgba(201,169,110,.07)}.stat:last-child{border-right:none}
         .stn{font-family:var(--serif);font-size:1.9rem;color:var(--g);font-weight:700;line-height:1}
         .stl{font-size:.68rem;color:var(--mt);letter-spacing:.15em;text-transform:uppercase;margin-top:.3rem}
-
-        /* BUTTONS */
         .bg{display:inline-flex;align-items:center;gap:.5rem;background:var(--g);color:var(--ink);padding:.9rem 1.9rem;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s}
         .bg:hover{background:var(--g2);transform:translateY(-2px)}
         .bo{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--cr);padding:.9rem 1.9rem;font-family:var(--sans);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(245,240,232,.28);cursor:pointer;transition:all .3s}
         .bo:hover{border-color:var(--g);color:var(--g);transform:translateY(-2px)}
-
-        /* SECTIONS */
         section{padding:5.5rem 1.5rem}
         .ctr{max-width:1160px;margin:0 auto}
         .sh{text-align:center;margin-bottom:3.2rem}
@@ -326,11 +320,7 @@ export default function TerziClient() {
         .st{font-family:var(--serif);font-size:clamp(1.8rem,3.8vw,2.9rem);font-weight:700;line-height:1.15}
         .ss{color:var(--mt);margin-top:.7rem;font-size:.88rem;max-width:500px;margin-left:auto;margin-right:auto}
         .gl{display:block;width:38px;height:2px;background:var(--g);margin:1.1rem auto 0}
-
-        /* SEO INTRO BLOCK — visible, styled */
         .seobl{background:var(--ink2);padding:1.6rem 2rem;border-left:2px solid var(--g3);font-size:.82rem;color:var(--cr2);line-height:1.9}
-
-        /* MOBILE SERVICE */
         .msec{background:linear-gradient(135deg,var(--ink2) 0%,#231a0f 100%);position:relative;overflow:hidden}
         .msec::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--g),transparent)}
         .msteps{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
@@ -338,8 +328,6 @@ export default function TerziClient() {
         .ms-ic{font-size:1.5rem;margin-bottom:.55rem}
         .ms-t{font-size:.82rem;font-weight:600;color:var(--g);margin-bottom:.3rem}
         .ms-d{font-size:.7rem;color:var(--mt);line-height:1.45}
-
-        /* SERVICES */
         .svcgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
         .scard{position:relative;overflow:hidden;min-height:370px;display:flex;flex-direction:column;justify-content:flex-end}
         .simg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.28) saturate(.4);transition:transform .7s ease,filter .5s}
@@ -352,8 +340,6 @@ export default function TerziClient() {
         .sprice{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,169,110,.28);padding:.28rem .75rem}
         .sline{position:absolute;bottom:0;left:1.8rem;right:1.8rem;height:1.5px;background:linear-gradient(to right,var(--g),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
         .scard:hover .sline{transform:scaleX(1)}
-
-        /* GALLERY */
         .galgrid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:270px 270px;gap:2px}
         .gitem{overflow:hidden;position:relative}
         .gitem:first-child{grid-row:1/3}
@@ -361,22 +347,16 @@ export default function TerziClient() {
         .gitem:hover img{transform:scale(1.07);filter:saturate(1) brightness(1)}
         .gcap{position:absolute;bottom:0;left:0;right:0;padding:.7rem 1rem;background:linear-gradient(to top,rgba(13,12,10,.8),transparent);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--g);opacity:0;transition:opacity .4s}
         .gitem:hover .gcap{opacity:1}
-
-        /* WHY */
         .whygrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
         .wcard{background:var(--ink3);border:1px solid rgba(201,169,110,.07);border-radius:4px;padding:1.3rem}
         .wic{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--g3),var(--g));display:flex;align-items:center;justify-content:center;font-size:.95rem;margin-bottom:.9rem}
         .wt{font-size:.85rem;font-weight:600;margin-bottom:.35rem}
         .wd{font-size:.76rem;color:var(--mt);line-height:1.5}
-
-        /* REVIEWS */
         .revgrid{display:flex;flex-direction:column;gap:.7rem;max-width:660px;margin:0 auto}
         .rcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.055);border-radius:6px;padding:1.3rem}
         .rstars{color:#f59e0b;margin-bottom:.5rem}
         .rtxt{font-size:.83rem;color:rgba(255,255,255,.58);line-height:1.8;font-style:italic;margin-bottom:.7rem}
         .rauth{font-size:.76rem;color:var(--g);font-weight:600}
-
-        /* PRICE TABLE */
         .ptable{width:100%;border-collapse:collapse}
         .ptable th{text-align:left;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,169,110,.18);padding:.65rem .75rem;font-weight:500}
         .ptable th:not(:first-child){text-align:right}
@@ -385,15 +365,11 @@ export default function TerziClient() {
         .ptable tr:hover td{background:rgba(201,169,110,.06)}
         .tpr{color:var(--g);font-weight:600;text-align:right;white-space:nowrap}
         .ttm{color:var(--mt);font-size:.73rem;text-align:right}
-
-        /* AREAS */
         .ilwrap{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:1.3rem}
         .ilbtn{background:none;border:1px solid rgba(201,169,110,.16);color:var(--cr2);font-size:.76rem;padding:.38rem .95rem;cursor:pointer;font-family:var(--sans);border-radius:2px;transition:all .25s}
         .ilbtn.on,.ilbtn:hover{border-color:var(--g);color:var(--g);background:rgba(201,169,110,.07)}
         .mahwrap{background:var(--ink3);border:1px solid rgba(201,169,110,.09);border-radius:4px;padding:1.1rem;display:flex;flex-wrap:wrap;gap:.38rem}
         .mchip{font-size:.7rem;color:var(--cr2);border:1px solid rgba(201,169,110,.13);padding:.22rem .65rem;border-radius:2px}
-
-        /* FAQ */
         .faqlist{max-width:700px;margin:0 auto}
         .faqitem{border-bottom:1px solid rgba(201,169,110,.07)}
         .faqq{width:100%;background:none;border:none;padding:1.2rem 0;display:flex;align-items:center;justify-content:space-between;gap:.9rem;cursor:pointer;text-align:left;font-family:var(--sans);font-size:.93rem;color:var(--cr);font-weight:400;transition:color .3s}
@@ -402,8 +378,6 @@ export default function TerziClient() {
         .faqico.open{transform:rotate(45deg)}
         .faqa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s;font-size:.83rem;color:var(--mt);line-height:1.85}
         .faqa.open{max-height:280px;padding-bottom:1.2rem}
-
-        /* CONTACT */
         .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
         .crow{display:flex;gap:.75rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(201,169,110,.06)}
         .clbl{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:.18rem}
@@ -411,21 +385,13 @@ export default function TerziClient() {
         .cval a{color:var(--cr);text-decoration:none;transition:color .3s}
         .cval a:hover{color:var(--g)}
         .mapbox{background:var(--ink3);border:1px solid rgba(201,169,110,.09);border-radius:4px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
-
-        /* FOOTER */
         footer{background:var(--ink);border-top:1px solid rgba(201,169,110,.07);padding:2.2rem 1.5rem}
         .fkws{display:flex;flex-wrap:wrap;gap:.28rem;justify-content:center;margin-top:1rem}
         .kpill{font-size:.62rem;color:rgba(201,169,110,.4);border:1px solid rgba(201,169,110,.1);padding:.18rem .55rem;border-radius:2px}
-
-        /* WA FLOAT */
         .wafloat{position:fixed;bottom:1.6rem;right:1.6rem;z-index:150;width:3rem;height:3rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.3rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .3s}
         .wafloat:hover{transform:scale(1.1)}
-
-        /* SKIP LINK for accessibility */
         .skip-link{position:absolute;top:-40px;left:0;background:var(--g);color:var(--ink);padding:.5rem 1rem;font-weight:700;z-index:999;transition:top .2s}
         .skip-link:focus{top:0}
-
-        /* MOBILE */
         @media(max-width:768px){
           .nav-links{display:none}
           .hero h1{font-size:2.7rem}
@@ -444,26 +410,14 @@ export default function TerziClient() {
         @media(max-width:480px){.whygrid{grid-template-columns:1fr}}
       `}</style>
 
-      {/* Skip to main content — accessibility */}
       <a href="#main-content" className="skip-link">
         {lang === 'tr' ? 'İçeriğe geç' : lang === 'en' ? 'Skip to content' : lang === 'ru' ? 'К содержанию' : 'Zum Inhalt'}
       </a>
 
-      {/* WA Float */}
-      <a
-        href={WA(c.waMsg)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="wafloat"
-        aria-label="WhatsApp ile iletişim"
-        title="WhatsApp"
-      >
-        💬
-      </a>
+      <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp" title="WhatsApp">💬</a>
 
-      {/* NAVBAR */}
       <nav className={`nav${scrolled ? ' up' : ''}`} role="navigation" aria-label="Ana navigasyon">
-        <a href="#" className="nav-logo" aria-label="Terzi Can - Ana Sayfa">Terzi Can</a>
+        <a href="#" className="nav-logo" aria-label="Terzi Can">Terzi Can</a>
         <ul className="nav-links">
           <li><a href="#services">{c.s_services}</a></li>
           <li><a href="#prices">{c.s_prices.split(' ')[0]}</a></li>
@@ -472,20 +426,13 @@ export default function TerziClient() {
         </ul>
         <div className="lsw" role="group" aria-label="Dil seçimi">
           {(['tr','en','ru','de'] as Lang[]).map(l => (
-            <button
-              key={l}
-              className={`lb${lang === l ? ' on' : ''}`}
-              onClick={() => setLang(l)}
-              aria-pressed={lang === l}
-              aria-label={`Dil: ${l.toUpperCase()}`}
-            >
+            <button key={l} className={`lb${lang === l ? ' on' : ''}`} onClick={() => setLang(l)} aria-pressed={lang === l}>
               {l === 'tr' ? '🇹🇷' : l === 'en' ? '🇬🇧' : l === 'ru' ? '🇷🇺' : '🇩🇪'} {l.toUpperCase()}
             </button>
           ))}
         </div>
       </nav>
 
-      {/* HERO */}
       <section className="hero" aria-label="Hero">
         <div className="hbg" role="presentation" aria-hidden="true"/>
         <div className="hov" role="presentation" aria-hidden="true"/>
@@ -507,12 +454,12 @@ export default function TerziClient() {
               <a href="#services" className="bo">{c.downBtn}</a>
             </div>
           </div>
-          <div className="hstats fu4" aria-label="İstatistikler">
+          <div className="hstats fu4">
             {([
               ['10+', lang==='tr'?'Yıllık Deneyim':lang==='en'?'Years Exp.':lang==='ru'?'Лет опыта':'Jahre Erfahrung'],
               ['5000+', lang==='tr'?'Mutlu Müşteri':lang==='en'?'Happy Clients':lang==='ru'?'Клиентов':'Kunden'],
               ['24–48h', lang==='tr'?'Ekspres Teslimat':lang==='en'?'Express Delivery':lang==='ru'?'Экспресс':'Express'],
-              ['TR·EN·RU·DE', lang==='tr'?'4 Dil':'4 Languages'],
+              ['TR·EN·RU·DE', '4 Languages'],
             ] as [string,string][]).map(([n,l],i)=>(
               <div key={i} className="stat">
                 <div className="stn">{n}</div>
@@ -523,14 +470,12 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* SEO INTRO — visible, natural prose, crawlable */}
       <div style={{background:'var(--ink2)',padding:'2rem 1.5rem'}} id="main-content">
         <div className="ctr">
           <p className="seobl">{c.seoIntro}</p>
         </div>
       </div>
 
-      {/* MOBILE SERVICE */}
       <section className="msec" aria-labelledby="mobile-heading">
         <div className="ctr">
           <div className="sh">
@@ -554,7 +499,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* SERVICES */}
       <section id="services" style={{background:'var(--ink2)',padding:'0'}} aria-labelledby="services-heading">
         <div className="ctr" style={{padding:'4.5rem 1.5rem 2rem'}}>
           <div className="sh">
@@ -589,7 +533,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* GALLERY */}
       <section id="gallery" style={{padding:'0',background:'var(--ink3)'}} aria-label="Galeri">
         <div className="galgrid">
           {GALLERY.map((g,i)=>(
@@ -601,7 +544,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* WHY */}
       <section style={{background:'var(--ink)'}} aria-labelledby="why-heading">
         <div className="ctr">
           <div className="sh">
@@ -623,7 +565,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* REVIEWS */}
       <section style={{background:'var(--ink2)'}} aria-labelledby="reviews-heading">
         <div className="ctr">
           <div className="sh">
@@ -633,11 +574,13 @@ export default function TerziClient() {
           </div>
           <div className="revgrid">
             {REVIEWS.map((r,i)=>(
-              <article key={i} className="rcard">
+              <article key={i} className="rcard" itemScope itemType="https://schema.org/Review">
                 <div className="rstars" aria-label={`${r.stars} yıldız`}>{'⭐'.repeat(r.stars)}</div>
-                <p className="rtxt">{r.text}</p>
+                <p className="rtxt" itemProp="reviewBody">{r.text}</p>
                 <div className="rauth">
-                  {r.flag} <strong>{r.author}</strong>
+                  <span itemProp="author" itemScope itemType="https://schema.org/Person">
+                    {r.flag} <span itemProp="name">{r.author}</span>
+                  </span>
                   {' '}— {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
                 </div>
               </article>
@@ -646,7 +589,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* PRICES */}
       <section id="prices" style={{background:'var(--ink3)'}} aria-labelledby="prices-heading">
         <div className="ctr">
           <div className="sh">
@@ -681,7 +623,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* AREAS */}
       <section id="areas" style={{background:'var(--ink2)'}} aria-labelledby="areas-heading">
         <div className="ctr">
           <div className="sh">
@@ -694,13 +635,9 @@ export default function TerziClient() {
           </div>
           <div className="ilwrap" role="group" aria-label="İlçe seçimi">
             {ILCELER.map(({ilce})=>(
-              <button
-                key={ilce}
-                className={`ilbtn${activeIlce===ilce?' on':''}`}
+              <button key={ilce} className={`ilbtn${activeIlce===ilce?' on':''}`}
                 onClick={()=>setActiveIlce(activeIlce===ilce?null:ilce)}
-                aria-pressed={activeIlce===ilce}
-                aria-expanded={activeIlce===ilce}
-              >
+                aria-pressed={activeIlce===ilce} aria-expanded={activeIlce===ilce}>
                 {ilce}
               </button>
             ))}
@@ -712,14 +649,12 @@ export default function TerziClient() {
               ))}
             </div>
           )}
-          {/* SEO: Visible district/neighborhood text — NOT hidden, just small */}
           <p style={{fontSize:'.72rem',color:'rgba(201,169,110,.25)',marginTop:'1.5rem',lineHeight:1.8,textAlign:'center'}}>
             {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} (${ilce})`)).join(' · ')}
           </p>
         </div>
       </section>
 
-      {/* FAQ */}
       <section id="faq" style={{background:'var(--ink)'}} aria-labelledby="faq-heading">
         <div className="ctr">
           <div className="sh">
@@ -730,21 +665,12 @@ export default function TerziClient() {
           <div className="faqlist">
             {c.faq.map(([q,a],i)=>(
               <div key={i} className="faqitem">
-                <button
-                  className="faqq"
-                  onClick={()=>setOpenFaq(openFaq===i?null:i)}
-                  aria-expanded={openFaq===i}
-                  aria-controls={faqId(i)}
-                >
+                <button className="faqq" onClick={()=>setOpenFaq(openFaq===i?null:i)}
+                  aria-expanded={openFaq===i} aria-controls={faqId(i)}>
                   <span style={{flex:1}}>{q}</span>
                   <span className={`faqico${openFaq===i?' open':''}`} aria-hidden="true">+</span>
                 </button>
-                <div
-                  id={faqId(i)}
-                  className={`faqa${openFaq===i?' open':''}`}
-                  role="region"
-                  aria-labelledby={`faq-q-${i}`}
-                >
+                <div id={faqId(i)} className={`faqa${openFaq===i?' open':''}`} role="region">
                   {a}
                 </div>
               </div>
@@ -753,7 +679,6 @@ export default function TerziClient() {
         </div>
       </section>
 
-      {/* CONTACT */}
       <section id="contact" style={{background:'var(--ink2)'}} aria-labelledby="contact-heading">
         <div className="ctr">
           <div className="sh">
@@ -795,21 +720,12 @@ export default function TerziClient() {
               <p style={{fontSize:'.8rem',color:'var(--mt)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
                 {lang==='tr'?'Tüm Antalya ilçelerine kurye ile hizmet veriyoruz.':lang==='en'?'We serve all Antalya districts via courier.':lang==='ru'?'Курьер по всем районам Антальи.':'Kurierservice in alle Antalya-Bezirke.'}
               </p>
-              <a
-                href="https://maps.google.com/?q=Antalya+Turkey"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bo"
-                style={{fontSize:'.76rem'}}
-              >
-                {c.mapBtn}
-              </a>
+              <a href="https://maps.google.com/?q=Antalya+Turkey" target="_blank" rel="noopener noreferrer" className="bo" style={{fontSize:'.76rem'}}>{c.mapBtn}</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer>
         <div className="ctr" style={{textAlign:'center'}}>
           <div style={{fontFamily:'var(--serif)',fontSize:'1.2rem',color:'var(--g)',marginBottom:'.4rem'}}>
@@ -818,7 +734,6 @@ export default function TerziClient() {
           <p style={{fontSize:'.73rem',color:'var(--mt)'}}>
             © 2026 SwapHubs — Antalya Terzi Hizmetleri · +90 531 898 64 18 · swaphubs.com/terzi
           </p>
-          {/* Keyword pills — visible, low opacity. Google görebilir ama spam değil */}
           <div className="fkws" aria-label="Anahtar kelimeler">
             {[
               'Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat',
@@ -830,9 +745,7 @@ export default function TerziClient() {
               'Гостиничная форма','Выездной портной',
               'Schneider Antalya','Änderungen Antalya','Reinigung Antalya',
               'Uniformproduktion',
-            ].map(k=>(
-              <span key={k} className="kpill">{k}</span>
-            ))}
+            ].map(k=>(<span key={k} className="kpill">{k}</span>))}
           </div>
         </div>
       </footer>
