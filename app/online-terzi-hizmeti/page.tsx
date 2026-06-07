@@ -2,146 +2,277 @@ import type { Metadata } from 'next';
 import OnlineTerziClient from './OnlineTerziClient';
 
 export const metadata: Metadata = {
-  title: 'Online Terzi | Özel Kıyafet Dikimi | SwapHubs',
-  description: "Türkiye'nin 81 iline kapıya kargo ile özel kıyafet dikimi. Abiye, gelinlik, takım elbise, müslin ve üniforma — ölçünüzü WhatsApp'tan gönderin, kıyafetiniz kapınıza gelsin.",
-  keywords: 'online terzi, özel dikim, kişiye özel kıyafet, abiye dikim, gelinlik, takım elbise, üniforma, WhatsApp terzi',
+  metadataBase: new URL('https://www.swaphubs.com'),
+  title: {
+    default: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | SwapHubs",
+    template: '%s | SwapHubs Online Terzi',
+  },
+  description:
+    "Türkiye'nin 81 iline kapıya kargo ile özel kıyafet dikimi. Abiye, gelinlik, takım elbise, üniforma, müslin — ölçünüzü WhatsApp'tan gönderin, kıyafetiniz kapınıza gelsin. 4 dil, tam uyum garantisi.",
+  keywords: [
+    'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
+    'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',
+    'online gelinlik dikimi', 'online takım elbise dikimi',
+    'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
+    'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Türkiye',
+    'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
+    '81 ile terzi', 'online fason dikim', 'SwapHubs terzi',
+    'online tailor Turkey', 'custom dress online Turkey',
+  ],
   alternates: {
-    canonical: 'https://swaphubs.com/online-terzi-hizmeti',
+    canonical: 'https://www.swaphubs.com/online-terzi-hizmeti',
     languages: {
-      'tr-TR': 'https://swaphubs.com/online-terzi-hizmeti',
-      'en-US': 'https://swaphubs.com/en/online-tailor',
-      'de-DE': 'https://swaphubs.com/de/online-schneider',
-      'ar': 'https://swaphubs.com/ar/khayat-online',
+      'tr': 'https://www.swaphubs.com/online-terzi-hizmeti',
+      'en': 'https://www.swaphubs.com/online-terzi-hizmeti?lang=en',
+      'de': 'https://www.swaphubs.com/online-terzi-hizmeti?lang=de',
+      'ar': 'https://www.swaphubs.com/online-terzi-hizmeti?lang=ar',
+      'x-default': 'https://www.swaphubs.com/online-terzi-hizmeti',
     },
   },
   openGraph: {
-    title: 'Online Terzi Hizmeti | SwapHubs — Özel Kıyafet Dikimi',
-    description: "Türkiye'nin 81 iline kapıya kargo. Abiye, gelinlik, takım elbise, müslin — ölçünüzü verin, kıyafetiniz kapınıza gelsin.",
-    url: 'https://swaphubs.com/online-terzi-hizmeti',
-    siteName: 'SwapHubs Online Terzi',
+    title: "SwapHubs Online Terzi | Türkiye'nin 81 İline Özel Dikim",
+    description:
+      "WhatsApp üzerinden ölçü alımı, abiye, gelinlik, takım elbise, üniforma dikimi. 81 ile teslimat, tam uyum garantisi.",
+    url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+    siteName: 'SwapHubs',
     locale: 'tr_TR',
+    alternateLocale: ['en_US', 'de_DE', 'ar_SA'],
     type: 'website',
     images: [
       {
-        url: 'https://swaphubs.com/og-terzi.jpg',
+        url: '/og/online-terzi.jpg',
         width: 1200,
         height: 630,
-        alt: 'SwapHubs Online Terzi — Özel Kıyafet Dikimi Türkiye',
+        alt: "SwapHubs Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
+        type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Online Terzi | SwapHubs',
-    description: "Türkiye'nin 81 iline özel kıyafet dikimi. WhatsApp ile sipariş ver.",
-    images: ['https://swaphubs.com/og-terzi.jpg'],
+    site: '@swaphubs',
+    title: 'SwapHubs Online Terzi | 81 İle Teslimat | TR · EN · DE · AR',
+    description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
+    images: ['/og/online-terzi.jpg'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE',
+  other: {
+    'geo.region': 'TR-07',
+    'geo.placename': 'Antalya',
+    'geo.position': '36.8841;30.7056',
+    'ICBM': '36.8841, 30.7056',
   },
 };
 
+// ─── JSON-LD ──────────────────────────────────────────────────────────────────
+// KRİTİK: Her Offer'da üst seviyede `name` zorunlu — eksik olunca
+// Google Rich Results "Adsız öğe / Unnamed item" hatası verir.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    // 1. WebSite
     {
-      '@type': 'LocalBusiness',
-      '@id': 'https://swaphubs.com/#business',
+      '@type': 'WebSite',
+      '@id': 'https://www.swaphubs.com#website',
+      name: 'SwapHubs',
+      url: 'https://www.swaphubs.com',
+      publisher: {
+        '@type': 'Organization',
+        '@id': 'https://www.swaphubs.com#organization',
+        name: 'SwapHubs',
+        url: 'https://www.swaphubs.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.swaphubs.com/logo.png',
+          width: 512,
+          height: 512,
+        },
+      },
+    },
+
+    // 2. LocalBusiness
+    {
+      '@type': ['ClothingStore', 'LocalBusiness'],
+      '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#business',
       name: 'SwapHubs Online Terzi',
-      description: "Türkiye'nin 81 iline kapıya kargo ile özel kıyafet dikimi hizmeti.",
-      url: 'https://swaphubs.com/online-terzi-hizmeti',
+      alternateName: ['SwapHubs E-Terzi', 'Online Terzi Türkiye', 'SwapHubs Tailor'],
+      description:
+        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma, müslin dikimi. WhatsApp üzerinden ölçü alımı, 4 dilde hizmet.",
+      url: 'https://www.swaphubs.com/online-terzi-hizmeti',
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
-      image: 'https://swaphubs.com/og-terzi.jpg',
-      logo: 'https://swaphubs.com/logo.png',
+      priceRange: '₺₺',
+      image: ['https://www.swaphubs.com/og/online-terzi.jpg'],
+      logo: 'https://www.swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',
+        streetAddress: 'Konyaaltı',
         addressLocality: 'Antalya',
         addressRegion: 'Antalya',
+        postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: 36.8969,
-        longitude: 30.7133,
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Turkey',
-      },
-      priceRange: '$$',
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-        opens: '09:00',
-        closes: '21:00',
-      },
-      sameAs: [
-        'https://wa.me/905318986418',
-        'https://instagram.com/swaphubs',
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+          opens: '09:00',
+          closes: '21:00',
+        },
       ],
+      areaServed: { '@type': 'Country', name: 'Turkey' },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+905318986418',
+          contactType: 'customer service',
+          areaServed: 'TR',
+          availableLanguage: ['Turkish','English','German','Arabic'],
+        },
+      ],
+
+      // ── hasOfferCatalog: her Offer'da name ZORUNLU ──────────────────────────
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Kıyafet Dikim Hizmetleri',
+        name: 'SwapHubs Online Terzi Hizmetleri 2025–2026',
         itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Abiye Dikim' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Gelinlik Dikim' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Takım Elbise Dikim' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi' } },
+          {
+            '@type': 'Offer',
+            name: 'Özel Tasarım Abiye & Gece Elbisesi Dikimi',
+            description: 'El işlemeli dantel, İtalyan saten ve Fransız şifon kumaşlarla abiye dikimi. 3D taslak onayı, ücretsiz revizyon.',
+            availability: 'https://schema.org/InStock',
+            url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            itemOffered: { '@type': 'Service', name: 'Abiye Dikimi', serviceType: 'Custom Clothing' },
+          },
+          {
+            '@type': 'Offer',
+            name: 'Özel Gelinlik Tasarımı ve Dikimi',
+            description: 'Swarovski taşlar, el yapımı dantel aplikelerle özel gelinlik. Kişisel stil danışmanı, ücretsiz revizyon.',
+            availability: 'https://schema.org/InStock',
+            url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            itemOffered: { '@type': 'Service', name: 'Gelinlik Dikimi', serviceType: 'Bridal Couture' },
+          },
+          {
+            '@type': 'Offer',
+            name: 'Özel Takım Elbise ve Smokin Dikimi',
+            description: 'İtalyan yün ve superfine wool kumaşlarla ölçüye özel takım elbise ve smokin dikimi.',
+            availability: 'https://schema.org/InStock',
+            url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            itemOffered: { '@type': 'Service', name: 'Takım Elbise Dikimi', serviceType: 'Custom Tailoring' },
+          },
+          {
+            '@type': 'Offer',
+            name: 'Kurumsal Üniforma Üretimi',
+            description: 'Otel, restoran, sağlık, havacılık için logo nakışlı üniforma. Minimum 10 adet.',
+            availability: 'https://schema.org/InStock',
+            url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi', serviceType: 'Uniform Manufacturing' },
+          },
         ],
       },
+
+      sameAs: [
+        'https://wa.me/905318986418',
+        'https://www.swaphubs.com',
+        'https://www.swaphubs.com/terzi',
+      ],
     },
+
+    // 3. WebPage
     {
       '@type': 'WebPage',
-      '@id': 'https://swaphubs.com/online-terzi-hizmeti#webpage',
-      url: 'https://swaphubs.com/online-terzi-hizmeti',
-      name: 'Online Terzi Hizmeti | SwapHubs',
-      isPartOf: { '@id': 'https://swaphubs.com/#website' },
-      about: { '@id': 'https://swaphubs.com/#business' },
-      inLanguage: 'tr-TR',
-      dateModified: new Date().toISOString(),
+      '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#webpage',
+      name: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | SwapHubs",
+      url: 'https://www.swaphubs.com/online-terzi-hizmeti',
+      isPartOf: { '@id': 'https://www.swaphubs.com#website' },
+      about: { '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#business' },
+      description:
+        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet kapına gelsin.",
+      inLanguage: ['tr', 'en', 'de', 'ar'],
+      datePublished: '2024-01-01',
+      dateModified: new Date().toISOString().split('T')[0],
+      breadcrumb: { '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#breadcrumb' },
     },
+
+    // 4. BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#breadcrumb',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://www.swaphubs.com' },
+        { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://www.swaphubs.com/terzi' },
+        { '@type': 'ListItem', position: 3, name: 'Online Terzi Hizmeti', item: 'https://www.swaphubs.com/online-terzi-hizmeti' },
+      ],
+    },
+
+    // 5. FAQPage
     {
       '@type': 'FAQPage',
-      '@id': 'https://swaphubs.com/online-terzi-hizmeti#faq',
+      '@id': 'https://www.swaphubs.com/online-terzi-hizmeti#faq',
       mainEntity: [
         {
           '@type': 'Question',
-          name: "Türkiye'nin herhangi bir şehrinden sipariş verebilir miyim?",
-          acceptedAnswer: { '@type': 'Answer', text: "Evet, Türkiye'nin 81 iline kapıya kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor." },
+          name: "Türkiye'nin herhangi bir şehrinden online terzi siparişi verebilir miyim?",
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: "Evet! İstanbul'dan Hakkari'ye, İzmir'den Kars'a 81 ilin tamamına kapıya kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor, atölyeye gelmenize gerek yok.",
+          },
         },
         {
           '@type': 'Question',
-          name: 'Ölçülerimi nasıl alacağım?',
-          acceptedAnswer: { '@type': 'Answer', text: 'WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Sadece bir mezura ve akıllı telefonunuz yeterli.' },
+          name: 'Online terzi için ölçülerimi nasıl alacağım?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli.',
+          },
         },
         {
           '@type': 'Question',
-          name: 'Sipariş ne kadar sürede teslim edilir?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Temel modeller 7–10 iş gününde, abiye ve gelinlik gibi detaylı modeller 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde ulaşır.' },
+          name: 'Online terzi siparişim ne kadar sürede teslim edilir?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Temel modeller 7–10 iş gününde, abiye ve gelinlik 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti de mevcuttur.',
+          },
         },
         {
           '@type': 'Question',
-          name: 'Kıyafet tam oturmadıysa ne olacak?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Tam Uyum Garantimiz kapsamında ücretsiz revizyon hakkınız vardır. Memnun kalmazsanız koşulsuz iade politikamız devreye girer.' },
+          name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Tam Uyum Garantimiz kapsamında ücretsiz revizyon hakkınız var. Ürünü iade edersiniz, revize edilmiş haliyle kapınıza gönderilir. Koşulsuz iade politikamız da mevcuttur.',
+          },
         },
         {
           '@type': 'Question',
-          name: 'Kendi kumaşımı getirip diktirebilir miyim?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet, kendi kumaşınızla fason dikim hizmeti sunuyoruz. Kumaşınızı kargo ile atölyemize gönderebilirsiniz.' },
+          name: 'Kendi kumaşımla online terzi hizmetinden yararlanabilir miyim?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Evet! Kendi kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir.',
+          },
         },
-      ],
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: 'https://swaphubs.com' },
-        { '@type': 'ListItem', position: 2, name: 'Online Terzi Hizmeti', item: 'https://swaphubs.com/online-terzi-hizmeti' },
+        {
+          '@type': 'Question',
+          name: 'Online terzi hizmeti kaç dilde sunuluyor?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Türkçe, İngilizce, Almanca ve Arapça dillerinde hizmet sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşteriler de kolayca sipariş verebilir.',
+          },
+        },
       ],
     },
   ],
