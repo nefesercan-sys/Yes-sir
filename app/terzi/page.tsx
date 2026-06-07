@@ -444,10 +444,10 @@ export const metadata: Metadata = {
   // Son kısım: sosyal kanıt (4.9★) + CTA (telefon)
   description: `Konyaaltı'nda profesyonel terzi. Paça kısaltma ₺150, fermuar ₺120, kuru temizleme, üniforma üretimi. Eve & otele geliyoruz. 4.9★ · ☎ ${PHONE}`,
 
-  // keywords meta tag KASITLI OLARAK KALDIRILDI
-  // Google Search 2009'dan beri keywords etiketini sıralama sinyali olarak
-  // kullanmıyor. Varlığı rakiplere site yapısı hakkında bilgi verir, zarar.
-  // Keywords yerine: H1/H2/H3 başlıkları, sayfa içi metin, schema.org kullanılıyor.
+  // layout.tsx'teki "B2B platform Türkiye..." keywords layout'tan geliyor.
+  // Bu override ile terzi sayfasına özel keywords tanımlıyoruz.
+  // Next.js metadata birleştirme: alt sayfa tanımladığında layout'u ezer.
+  keywords: 'Antalya Terzi, Paça Kısaltma Antalya, Terzi Can, Konyaaltı Terzi, Eve Gelen Terzi',
 
   authors: [{ name: 'SwapHubs', url: 'https://www.swaphubs.com' }],
   creator: 'SwapHubs',
