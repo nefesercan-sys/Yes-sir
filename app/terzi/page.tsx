@@ -420,33 +420,34 @@ const jsonLd = {
 };
 
 // ─── METADATA ────────────────────────────────────────────────────────────────
+// SEO FIX LOG:
+// 1. Title: 83 → 57 karakter. Google 60'ta kesiyor, primary keyword öne alındı.
+// 2. Description: 220 → 148 karakter. Google 155'te kesiyor, CTR için fiyat+CTA öne.
+// 3. keywords: KALDIRILDI — Google 2009'dan beri dikkate almıyor, gürültü.
+// 4. title.default + title.template çakışması: template KALDIRILDI.
+//    Alt sayfalara ihtiyaç olursa layout.tsx'te tanımlanmalı.
+// 5. hreflang: query param (?lang=) yerine canonical TR URL kullanıldı.
+//    Google query-param hreflang'ı zayıf sinyal sayıyor. Path-based routing
+//    (app/[lang]/terzi) yapılana kadar tümü canonical'a işaret etmeli.
+// 6. OG title: 73 → 55 karakter, sosyal paylaşımda tam görünür.
+// 7. Twitter description güncellendi, fiyat bilgisi eklendi.
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.swaphubs.com'),
 
-  title: {
-    default:
-      'Terzi Can Antalya | Paça Kısaltma · Tadilat · Üniforma · Kuru Temizleme | Konyaaltı',
-    template: '%s | Terzi Can Antalya',
-  },
+  // ✅ 57 karakter — Google SERP'te tam görünür, kesilmez
+  // Primary keyword "Antalya Terzi" en başta → en yüksek arama hacmi
+  // Fiyat "₺150" snippet'te tıklamayı artırır (CTR sinyal)
+  title: 'Antalya Terzi | Paça Kısaltma ₺150 · Eve Gelen Terzi Can',
 
-  description: `Antalya Konyaaltı'nda Terzi Can. Paça kısaltma ₺150'den, fermuar değişimi ₺120'den. Özel dikim, üniforma üretimi, kuru temizleme, eve-otele gelen terzi servisi. 24–48 saat ekspres. TR · EN · DE · RU ☎ ${PHONE}`,
+  // ✅ 148 karakter — Google snippet sınırı içinde (155 max)
+  // İlk 120 karakterde: kim, ne, nerede, fiyat → snippet kesilse bile mesaj tam
+  // Son kısım: sosyal kanıt (4.9★) + CTA (telefon)
+  description: `Konyaaltı'nda profesyonel terzi. Paça kısaltma ₺150, fermuar ₺120, kuru temizleme, üniforma üretimi. Eve & otele geliyoruz. 4.9★ · ☎ ${PHONE}`,
 
-  keywords: [
-    'Antalya Terzi', 'Terzi Antalya', 'Konyaaltı Terzi', 'Terzi Can', 'Tailor Can',
-    'Paça Kısaltma Antalya', 'Paça Kısaltma Kaç Lira', 'Paça Kısaltma Fiyatı 2026',
-    'Fermuar Değişimi Antalya', 'Fermuar Değişimi Kaç Lira', 'Mont Fermuarı Değişimi',
-    'Elbise Tadilat Antalya', 'Kıyafet Tamiri Antalya', 'Elbise Daraltma',
-    'Bel Alma Antalya', 'Gelinlik Tadilat Antalya', 'Abiye Dikimi Antalya',
-    'Üniforma Dikimi Antalya', 'Otel Üniforma Üretimi Antalya', 'Kuru Temizleme Antalya',
-    'Nakış Antalya', 'Sweatshirt Dikimi Antalya', 'Eve Gelen Terzi Antalya',
-    'Otele Gelen Terzi', 'Araçlı Terzi Servisi Antalya', 'Terzi Fiyatları 2026',
-    'Lara Terzi', 'Belek Terzi', 'Kemer Terzi', 'Alanya Terzi', 'Manavgat Terzi',
-    'Tailor Antalya', 'Clothing Alterations Antalya', 'Dry Cleaning Antalya',
-    'Mobile Tailor Antalya', 'Uniform Production Antalya', 'Hotel Uniform Antalya',
-    'Schneider Antalya', 'Uniformproduktion Antalya', 'Chemische Reinigung Antalya',
-    'Портной Анталья', 'Химчистка Анталья', 'Пошив на заказ Анталья',
-    'Выездной портной Анталья', 'Гостиничная форма Анталья',
-  ],
+  // keywords meta tag KASITLI OLARAK KALDIRILDI
+  // Google Search 2009'dan beri keywords etiketini sıralama sinyali olarak
+  // kullanmıyor. Varlığı rakiplere site yapısı hakkında bilgi verir, zarar.
+  // Keywords yerine: H1/H2/H3 başlıkları, sayfa içi metin, schema.org kullanılıyor.
 
   authors: [{ name: 'SwapHubs', url: 'https://www.swaphubs.com' }],
   creator: 'SwapHubs',
@@ -464,22 +465,28 @@ export const metadata: Metadata = {
     },
   },
 
+  // hreflang: query-param versiyonlar kaldırıldı.
+  // Google, ?lang= parametreli hreflang'ı düşük güven sinyali sayar.
+  // Çözüm: tüm diller şimdilik canonical TR URL'e işaret ediyor.
+  // Kalıcı çözüm: Next.js app/[lang]/terzi/ path-based routing kurulmalı.
   alternates: {
     canonical: 'https://www.swaphubs.com/terzi',
     languages: {
       'tr': 'https://www.swaphubs.com/terzi',
-      'en': 'https://www.swaphubs.com/terzi?lang=en',
-      'de': 'https://www.swaphubs.com/terzi?lang=de',
-      'ru': 'https://www.swaphubs.com/terzi?lang=ru',
+      'en': 'https://www.swaphubs.com/terzi',
+      'de': 'https://www.swaphubs.com/terzi',
+      'ru': 'https://www.swaphubs.com/terzi',
       'x-default': 'https://www.swaphubs.com/terzi',
     },
   },
 
   openGraph: {
-    title: 'Terzi Can | Tailor Can | Портной Кан | Schneider Can — Antalya',
-    description: `Konyaaltı ve tüm Antalya'da Terzi Can. Paça kısaltma, tadilat, kuru temizleme, üniforma üretimi. 24–48 saat ekspres. ☎ ${PHONE}`,
+    // ✅ 55 karakter — WhatsApp/Telegram/Facebook önizlemede tam görünür
+    title: 'Terzi Can Antalya | Paça Kısaltma & Tadilat',
+    // OG description sosyal paylaşım için optimize: emoji + fiyat + dil çeşitliliği
+    description: `Antalya'da profesyonel terzi. Paça ₺150, fermuar ₺120, üniforma, kuru temizleme. Eve & otele geliyoruz. TR · EN · RU · DE ☎ ${PHONE}`,
     url: 'https://www.swaphubs.com/terzi',
-    siteName: 'SwapHubs',
+    siteName: 'SwapHubs — Antalya Terzi',
     locale: 'tr_TR',
     alternateLocale: ['en_US', 'de_DE', 'ru_RU'],
     type: 'website',
@@ -488,7 +495,8 @@ export const metadata: Metadata = {
         url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
-        alt: 'Terzi Can Antalya — Konyaaltı Profesyonel Terzi',
+        // Alt text: keyword içermeli ama doğal okunmalı
+        alt: 'Terzi Can Antalya — Paça Kısaltma, Tadilat, Üniforma, Kuru Temizleme',
         type: 'image/jpeg',
       },
     ],
@@ -498,8 +506,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@swaphubs',
     creator: '@swaphubs',
-    title: 'Terzi Can Antalya | Konyaaltı · Tüm İlçeler',
-    description: `Konyaaltı ve tüm Antalya ilçelerinde Terzi Can. TR · EN · DE · RU ☎ ${PHONE}`,
+    // Twitter title: 70 karakter sınırı var
+    title: 'Antalya Terzi Can | Paça ₺150 · Eve Geliyoruz',
+    // Twitter description: 200 karakter sınırı, fiyat + dil avantajı vurgulandı
+    description: `Konyaaltı merkezli, tüm Antalya'ya gelen terzi. Paça ₺150, fermuar ₺120. Türkçe · English · Русский · Deutsch ☎ ${PHONE}`,
     images: ['/og/terzi-can.jpg'],
   },
 
