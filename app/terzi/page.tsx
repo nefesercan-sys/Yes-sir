@@ -102,51 +102,9 @@ const jsonLd = {
         bestRating: '5',
         worstRating: '1',
       },
-      // FIX: Her Review'a itemReviewed eklendi — Google zorunlu tutuyor.
-      // itemReviewed, review'un hangi işletmeye ait olduğunu belirtir.
-      // Eksik olduğunda "itemReviewed alanı eksik" kritik hatası oluşur.
-      review: [
-        {
-          '@type': 'Review',
-          itemReviewed: { '@id': `${SITE_URL}#business` },
-          author: { '@type': 'Person', name: 'Murat B.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
-          datePublished: '2025-01-15',
-          publisher: { '@type': 'Organization', name: 'SwapHubs' },
-        },
-        {
-          '@type': 'Review',
-          itemReviewed: { '@id': `${SITE_URL}#business` },
-          author: { '@type': 'Person', name: 'Sarah M.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
-          datePublished: '2025-05-10',
-          publisher: { '@type': 'Organization', name: 'SwapHubs' },
-        },
-        {
-          '@type': 'Review',
-          itemReviewed: { '@id': `${SITE_URL}#business` },
-          author: { '@type': 'Person', name: 'Наталья К.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
-          datePublished: '2025-06-20',
-          publisher: { '@type': 'Organization', name: 'SwapHubs' },
-        },
-        {
-          '@type': 'Review',
-          itemReviewed: { '@id': `${SITE_URL}#business` },
-          author: { '@type': 'Person', name: 'David K.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          reviewBody:
-            'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
-          datePublished: '2025-02-08',
-          publisher: { '@type': 'Organization', name: 'SwapHubs' },
-        },
-      ],
+      // review bloğu ClothingStore'dan kaldırıldı.
+      // Ayrı top-level @graph entity'leri olarak tanımlandı (aşağıda).
+      // Google nested Review'ları "Adsız öğe" hatası ile işaret ediyordu.
       areaServed: [
         { '@type': 'City', name: 'Antalya' },
         { '@type': 'City', name: 'Alanya' },
@@ -415,7 +373,6 @@ const jsonLd = {
     },
 
     // 6. Service entity — separate from Offers, provides rich service markup
-    // Google can index this independently for service-type searches
     {
       '@type': 'Service',
       '@id': `${SITE_URL}#service-tailoring`,
@@ -426,6 +383,46 @@ const jsonLd = {
       availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
       serviceType: 'Tailoring and Clothing Alteration',
       url: SITE_URL,
+    },
+
+    // 7. Review entity'leri — top-level @graph olarak tanımlandı.
+    // ClothingStore içinde nested olduklarında Google "Adsız öğe" hatası veriyordu.
+    // Top-level tanımlandığında itemReviewed ile işletmeye referans verilmeli.
+    {
+      '@type': 'Review',
+      '@id': `${SITE_URL}#review-1`,
+      itemReviewed: { '@id': `${SITE_URL}#business` },
+      author: { '@type': 'Person', name: 'Murat B.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+      reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
+      datePublished: '2025-01-15',
+    },
+    {
+      '@type': 'Review',
+      '@id': `${SITE_URL}#review-2`,
+      itemReviewed: { '@id': `${SITE_URL}#business` },
+      author: { '@type': 'Person', name: 'Sarah M.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+      reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
+      datePublished: '2025-05-10',
+    },
+    {
+      '@type': 'Review',
+      '@id': `${SITE_URL}#review-3`,
+      itemReviewed: { '@id': `${SITE_URL}#business` },
+      author: { '@type': 'Person', name: 'Наталья К.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+      reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
+      datePublished: '2025-06-20',
+    },
+    {
+      '@type': 'Review',
+      '@id': `${SITE_URL}#review-4`,
+      itemReviewed: { '@id': `${SITE_URL}#business` },
+      author: { '@type': 'Person', name: 'David K.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+      reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
+      datePublished: '2025-02-08',
     },
   ],
 };
