@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Antalya Terzi · Ütü · Kuru Temizleme · Tekstil İmalat | SwapHubs Tailor Fashion',
     description:
-      'Antalya'da tüm ilçelere adrese servisli terzi dikim, ütü, kuru temizleme ve tekstil moda üretim atölyesi. Seri imalat · Özel tasarım · Türkiye geneli kargo.",
+      "Antalya'da tüm ilçelere adrese servisli terzi dikim, ütü, kuru temizleme ve tekstil moda üretim atölyesi. Seri imalat · Özel tasarım · Türkiye geneli kargo.",
     url: SITE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
