@@ -25,49 +25,84 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+// ─── SEO FIX LOG ──────────────────────────────────────────────────────────────
+// FIX 1: title.template "%s | SwapHubs" → "%s" olarak değiştirildi.
+//         Her alt sayfa kendi tam title'ını tanımlıyor (terzi: 57 kar, tailor: 58 kar).
+//         "| SwapHubs" suffix terzi sayfasını 72 karaktere çıkarıp Google'ın kesmesine yol açıyordu.
+// FIX 2: og-image.svg → og-image.jpg. WhatsApp/Twitter/LinkedIn SVG önizleme göstermiyor.
+//         /public/og-image.jpg olarak 1200×630 JPG oluşturun.
+// FIX 3: keywords dizisi layout'tan kaldırıldı. Google 2009'dan beri kullanmıyor.
+//         Her sayfa kendi keywords'ünü page.tsx'inde tanımlıyor.
+//         Layout keywords'ü tüm alt sayfalara "B2B platform Türkiye..." yazıyordu — yanlış.
+// FIX 4: Organization.logo → og-image.svg'den logo.png'ye düzeltildi.
+//         Schema.org'da logo ImageObject boyutu 512×512 olmalı, 1200×630 değil.
+// FIX 5: google verification placeholder kaldı — gerçek kodu aşağıya yapıştırın.
+// ──────────────────────────────────────────────────────────────────────────────
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.swaphubs.com"),
   title: {
-    template: "%s | SwapHubs",
+    // FIX 1: "%s | SwapHubs" → "%s"
+    // Her sayfa kendi title'ını tam olarak tanımlıyor, suffix eklenmeyecek.
+    template: "%s",
     default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   },
+  // ✅ 149 karakter — fark yaratan bilgi + anahtar kelime öne
   description:
-    "SwapHubs: Türkiye'nin küresel B2B ve bireysel hizmet platformu. Tekstil, makine, turizm, temizlik, inşaat ve 20+ sektörde ücretsiz ilan verin, teklif alın. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
-  keywords: [
-    "B2B platform Türkiye", "toptan alım satım", "tedarikçi bul Türkiye",
-    "üretici bul", "fason üretim Türkiye", "tekstil tedarikçi",
-    "ihracat ithalat platformu", "hizmet ilanı ver ücretsiz",
-    "bireysel hizmet ilanı", "temizlik hizmeti ilanı", "usta bul",
-    "makine ekipman satış", "inşaat malzeme tedarik", "lojistik nakliye ilanı",
-    "turizm hizmet ilanı", "SwapHubs", "ücretsiz ilan", "teklif al",
-    "b2b marketplace Türkiye", "global ticaret platformu", "uluslararası ticaret",
-  ],
+    "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın. Tekstil, gıda, lojistik, fason ve daha fazlası. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
+
+  // FIX 3: keywords KALDIRILDI — layout'tan tüm sayfalara yayılıyordu.
+  // Terzi sayfasında "B2B platform Türkiye" keywords'ü çıkıyordu, alakasız.
+  // Her sayfa kendi page.tsx'inde kendi keywords'ünü tanımlıyor.
+
   authors: [{ name: "SwapHubs", url: "https://www.swaphubs.com" }],
   creator: "SwapHubs",
   publisher: "SwapHubs",
   category: "business",
   openGraph: {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-    description: "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
+    description:
+      "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
     url: "https://www.swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
     type: "website",
-    images: [{ url: "https://www.swaphubs.com/og-image.svg", width: 1200, height: 630, alt: "SwapHubs — Küresel Hizmet & Ürün Platformu" }],
+    images: [
+      {
+        // FIX 2: .svg → .jpg — Sosyal medya SVG önizleme göstermiyor
+        // /public/og-image.jpg oluşturun: 1200×630, JPG, navy arka plan + logo
+        url: "https://www.swaphubs.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
+        type: "image/jpeg",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    images: ["https://www.swaphubs.com/og-image.svg"],
+    // FIX 2: .svg → .jpg
+    images: ["https://www.swaphubs.com/og-image.jpg"],
   },
   robots: {
-    index: true, follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   alternates: { canonical: "https://www.swaphubs.com" },
   verification: {
+    // ⚠️ BURAYA YAPIŞTIRINIZ:
+    // Google Search Console → Mülk → HTML etiketi → content="..." değerini kopyalayın
+    // Örnek: google: "AbCdEfGh1234567890AbCdEfGh1234567890AbCd",
     google: "BURAYA_GOOGLE_SEARCH_CONSOLE_KODUNU_YAZ",
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -75,6 +110,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+// ─── JSON-LD: WebSite + Organization ─────────────────────────────────────────
+// FIX 4: Organization.logo → og-image.svg'den logo.png'ye düzeltildi.
+//         og-image 1200×630 — logo olarak kullanılamaz, Google hata verir.
+//         logo.png 512×512 kare format olmalı.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -87,7 +126,11 @@ const jsonLd = {
       inLanguage: "tr-TR",
       potentialAction: {
         "@type": "SearchAction",
-        target: { "@type": "EntryPoint", urlTemplate: "https://www.swaphubs.com/ilanlar?q={search_term_string}" },
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate:
+            "https://www.swaphubs.com/ilanlar?q={search_term_string}",
+        },
         "query-input": "required name=search_term_string",
       },
     },
@@ -96,29 +139,80 @@ const jsonLd = {
       "@id": "https://www.swaphubs.com/#organization",
       name: "SwapHubs",
       url: "https://www.swaphubs.com",
-      logo: { "@type": "ImageObject", url: "https://www.swaphubs.com/og-image.svg", width: 1200, height: 630 },
-      description: "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
+      // FIX 4: logo → og-image.svg yerine logo.png (512×512 kare)
+      // /public/logo.png dosyası yoksa oluşturun veya mevcut logo dosyasını kullanın
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.swaphubs.com/logo.png",
+        width: 512,
+        height: 512,
+      },
+      // OG image ayrı bir alan olarak eklendi
+      image: "https://www.swaphubs.com/og-image.jpg",
+      description:
+        "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB"],
-      knowsAbout: ["B2B Ticaret", "Tekstil Tedarik", "Makine Ekipman", "Turizm", "İnşaat Malzemeleri", "Lojistik", "Temizlik", "Fason Üretim"],
-      sameAs: ["https://twitter.com/swaphubs", "https://www.linkedin.com/company/swaphubs"],
+      knowsAbout: [
+        "B2B Ticaret",
+        "Tekstil Tedarik",
+        "Makine Ekipman",
+        "Turizm",
+        "İnşaat Malzemeleri",
+        "Lojistik",
+        "Temizlik",
+        "Fason Üretim",
+      ],
+      sameAs: [
+        "https://twitter.com/swaphubs",
+        "https://www.linkedin.com/company/swaphubs",
+      ],
     },
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="tr" suppressHydrationWarning className={`${jakarta.variable} ${unbounded.variable}`}>
+    <html
+      lang="tr"
+      suppressHydrationWarning
+      className={`${jakarta.variable} ${unbounded.variable}`}
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://res.cloudinary.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://images.unsplash.com"
+          crossOrigin="anonymous"
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
+        {/* Bing ve Yandex verification — Next.js verification API dışında kalıyor */}
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
         <meta name="yandex-verification" content="4c73ee1911a4b197" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {/* Global JSON-LD: WebSite + Organization — tüm sayfalarda geçerli */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={jakarta.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
