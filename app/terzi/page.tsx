@@ -102,38 +102,49 @@ const jsonLd = {
         bestRating: '5',
         worstRating: '1',
       },
+      // FIX: Her Review'a itemReviewed eklendi — Google zorunlu tutuyor.
+      // itemReviewed, review'un hangi işletmeye ait olduğunu belirtir.
+      // Eksik olduğunda "itemReviewed alanı eksik" kritik hatası oluşur.
       review: [
         {
           '@type': 'Review',
+          itemReviewed: { '@id': `${SITE_URL}#business` },
           author: { '@type': 'Person', name: 'Murat B.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
           datePublished: '2025-01-15',
+          publisher: { '@type': 'Organization', name: 'SwapHubs' },
         },
         {
           '@type': 'Review',
+          itemReviewed: { '@id': `${SITE_URL}#business` },
           author: { '@type': 'Person', name: 'Sarah M.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional.',
           datePublished: '2025-05-10',
+          publisher: { '@type': 'Organization', name: 'SwapHubs' },
         },
         {
           '@type': 'Review',
+          itemReviewed: { '@id': `${SITE_URL}#business` },
           author: { '@type': 'Person', name: 'Наталья К.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
           datePublished: '2025-06-20',
+          publisher: { '@type': 'Organization', name: 'SwapHubs' },
         },
         {
           '@type': 'Review',
+          itemReviewed: { '@id': `${SITE_URL}#business` },
           author: { '@type': 'Person', name: 'David K.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
           reviewBody:
             'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!',
           datePublished: '2025-02-08',
+          publisher: { '@type': 'Organization', name: 'SwapHubs' },
         },
       ],
       areaServed: [
