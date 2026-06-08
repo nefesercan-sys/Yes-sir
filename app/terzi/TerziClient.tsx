@@ -121,14 +121,9 @@ const C = {
   },
 };
 
-// ─── SERVICES — 100% Textile / Fashion / Tailoring images ─────────────────
-// All images verified: tailoring scissors, needle&thread, fabric rolls,
-// sewing machine, uniform, bridal dress, dry cleaning iron — NO accessories,
-// sunglasses, jewellery, or unrelated images.
 const SERVICES = [
   {
     icon: '✂️',
-    // Tailor at work — scissors, fabric, measuring tape
     img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&auto=format&fit=crop',
     alt: 'Terzi paça kısaltma ve elbise tadilat — Terzi Can Antalya',
     tr: { n: 'Tamir & Tadilat', d: 'Paça kısaltma · etek kısaltma · kol kısaltma · elbise daraltma · ceket daraltma · bel alma · fermuar değişimi · yırtık onarımı · düğme dikimi · astar değişimi · cep tamiri. Her tür kıyafette.', p: '₺120+' },
@@ -138,7 +133,6 @@ const SERVICES = [
   },
   {
     icon: '👗',
-    // Custom dress — elegant fabric, dressmaking detail
     img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=700&q=75&auto=format&fit=crop',
     alt: 'Özel dikim elbise ve takım elbise — Terzi Can Antalya',
     tr: { n: 'Bayan & Erkek Özel Dikim', d: 'Elbise · bluz · etek · tulum · abiye · gelinlik · damatlık · takım elbise · gömlek · ceket · blazer · smoking dikimi. Kendi kumaşınızla ya da seçkin stoğumuzdan ölçüye özel.', p: '₺600+' },
@@ -148,7 +142,6 @@ const SERVICES = [
   },
   {
     icon: '👶',
-    // Children's clothing — kids fabric, soft textiles
     img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=700&q=75&auto=format&fit=crop',
     alt: 'Çocuk ve bebek kıyafeti dikimi büyük beden — Terzi Can Antalya',
     tr: { n: 'Çocuk · Bebek · Büyük Beden', d: 'Bebek elbisesi · çocuk kıyafeti · okul kıyafeti · kostüm dikimi. Büyük beden elbise · pantolon · gömlek; beden seti çıkarma, özel kalıp. Anne grubu toplu sipariş indirimi.', p: '₺200+' },
@@ -158,7 +151,6 @@ const SERVICES = [
   },
   {
     icon: '🏨',
-    // Hotel/restaurant uniform — chef whites, professional clothing
     img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=700&q=75&auto=format&fit=crop',
     alt: 'Otel üniforma aşçı garson personel dikimi — Terzi Can Antalya',
     tr: { n: 'Üniforma Üretimi', d: 'Otel personel · resepsiyon · kat görevlisi · aşçı · garson · meydancı · kapıcı · güvenlik · spa · animatör üniforma. Doktor · hemşire · okul · spor takımı. Tasarım + kalıp + seri imalat + nakış tek elden.', p: 'Teklif Al' },
@@ -168,7 +160,6 @@ const SERVICES = [
   },
   {
     icon: '🪡',
-    // Embroidery / sewing machine close-up — needle, thread, stitch
     img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=75&auto=format&fit=crop',
     alt: 'Nakış logo baskı sweatshirt dikimi — Terzi Can Antalya',
     tr: { n: 'Nakış · Baskı · Sweatshirt', d: 'Logo nakışı · isim nakışı · üniforma nakışı · dijital baskı · transfer baskı · serigrafi. Sweatshirt · eşofman · kapüşonlu · polo yaka dikimi. Seri üretim için uygun fiyatlı.', p: '₺100+' },
@@ -178,7 +169,6 @@ const SERVICES = [
   },
   {
     icon: '🧺',
-    // Dry cleaning / clothes pressing / steam iron
     img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=75&auto=format&fit=crop',
     alt: 'Kuru temizleme çamaşır ütü hizmeti Antalya — Terzi Can',
     tr: { n: 'Kuru Temizleme & Çamaşır', d: 'Kuru temizleme · çamaşır yıkama · ütü hizmeti. Otel ve adreslerden kurye ile alım. 24 saatte teslim. Turistler için ekspres servis.', p: '₺300+' },
@@ -188,7 +178,6 @@ const SERVICES = [
   },
   {
     icon: '💍',
-    // Bridal / wedding dress — white gown, fabric detail
     img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=75&auto=format&fit=crop',
     alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can',
     tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık dikimi · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti · gece elbisesi. Kusursuz fit garantisi. Ekspres randevu.', p: '₺500+' },
@@ -198,7 +187,6 @@ const SERVICES = [
   },
   {
     icon: '🏭',
-    // Fabric rolls / textile production — bolts of cloth, industrial
     img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=75&auto=format&fit=crop',
     alt: 'Kalıp fason seri imalat kumaş üretim — Terzi Can Antalya',
     tr: { n: 'Kalıp · Fason · Seri İmalat', d: 'Kalıp çıkarma · model tasarımı · kesim · dikim · ütü · paket. Numune dikimi · prototip · seri imalat · fason üretim. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.', p: 'Teklif Al' },
@@ -219,6 +207,10 @@ const WHY = [
   { icon: '⭐', tr: ['4.9 · 94 Müşteri',"Google'da 4.9 yıldız. Antalya'nın en çok tercih edilen terzisi."], en: ['4.9 · 94 Reviews','4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['4.9 · 94 клиента','4.9 звезды на Google.'], de: ['4,9 · 94 Bewertungen','4,9 Sterne auf Google.'] },
 ];
 
+// ── itemScope / itemType / itemProp KALDIRILDI ────────────────────────────
+// HTML microdata ile JSON-LD aynı anda kullanılınca Google çakışma
+// yaşatıyor ve "itemReviewed eksik" hatası veriyor.
+// Schema sadece page.tsx içindeki JSON-LD ile sağlanıyor.
 const REVIEWS = [
   { stars: 5, text: '"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!"', author: 'Murat B.', flag: '🇹🇷', city: 'Antalya', date: 'Ocak 2025' },
   { stars: 5, text: '"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!"', author: 'Sarah M.', flag: '🇬🇧', city: 'London', date: 'Mayıs 2025' },
@@ -247,41 +239,13 @@ const ILCELER = [
   { ilce: 'Kaş · Finike · Diğer', m: ['Kaş Merkez','Kalkan','Finike Merkez','Kumluca','Elmalı','Korkuteli','Akseki'] },
 ];
 
-// ─── GALLERY — 100% tailoring / textile / fashion images ──────────────────
-// Removed: sunglasses, jewellery, accessories — all unrelated to tailoring.
-// Replaced with: fabric rolls, sewing machine, measuring tape, needle&thread,
-// bridal dress, chef uniform, ironing — all directly relevant.
 const GALLERY = [
-  {
-    img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80&auto=format&fit=crop',
-    alt: 'Terzi Can atölyesi kumaş ve dikimhane Antalya',
-    tr: 'Atölye', en: 'Atelier', ru: 'Ателье', de: 'Atelier',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80&auto=format&fit=crop',
-    alt: 'Nakış ve dikiş makinesi terzilik Antalya',
-    tr: 'Nakış & Dikim', en: 'Sewing', ru: 'Пошив', de: 'Nähen',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&auto=format&fit=crop',
-    alt: 'Gelinlik ve abiye dikimi Antalya terzi',
-    tr: 'Gelinlik', en: 'Bridal', ru: 'Свадьба', de: 'Brautkleid',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop',
-    alt: 'Kumaş ve dikiş malzeme tekstil Antalya',
-    tr: 'Kumaş', en: 'Fabric', ru: 'Ткань', de: 'Stoff',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=700&q=80&auto=format&fit=crop',
-    alt: 'Özel dikim elbise moda kıyafet Antalya',
-    tr: 'Özel Dikim', en: 'Custom', ru: 'Заказ', de: 'Maß',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=80&auto=format&fit=crop',
-    alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya',
-    tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Reinigung',
-  },
+  { img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80&auto=format&fit=crop', alt: 'Terzi Can atölyesi kumaş ve dikimhane Antalya', tr: 'Atölye', en: 'Atelier', ru: 'Ателье', de: 'Atelier' },
+  { img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80&auto=format&fit=crop', alt: 'Nakış ve dikiş makinesi terzilik Antalya', tr: 'Nakış & Dikim', en: 'Sewing', ru: 'Пошив', de: 'Nähen' },
+  { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&auto=format&fit=crop', alt: 'Gelinlik ve abiye dikimi Antalya terzi', tr: 'Gelinlik', en: 'Bridal', ru: 'Свадьба', de: 'Brautkleid' },
+  { img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop', alt: 'Kumaş ve dikiş malzeme tekstil Antalya', tr: 'Kumaş', en: 'Fabric', ru: 'Ткань', de: 'Stoff' },
+  { img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=700&q=80&auto=format&fit=crop', alt: 'Özel dikim elbise moda kıyafet Antalya', tr: 'Özel Dikim', en: 'Custom', ru: 'Заказ', de: 'Maß' },
+  { img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=80&auto=format&fit=crop', alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya', tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Reinigung' },
 ];
 
 export default function TerziClient() {
@@ -442,12 +406,12 @@ export default function TerziClient() {
       `}</style>
 
       <a href="#main-content" className="skip-link">
-        {lang === 'tr' ? 'İçeriğe geç' : lang === 'en' ? 'Skip to content' : lang === 'ru' ? 'К содержанию' : 'Zum Inhalt'}
+        {lang==='tr'?'İçeriğe geç':lang==='en'?'Skip to content':lang==='ru'?'К содержанию':'Zum Inhalt'}
       </a>
 
       <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp" title="WhatsApp">💬</a>
 
-      <nav className={`nav${scrolled ? ' up' : ''}`} role="navigation" aria-label="Ana navigasyon">
+      <nav className={`nav${scrolled?' up':''}`} role="navigation" aria-label="Ana navigasyon">
         <a href="#" className="nav-logo" aria-label="Terzi Can">Terzi Can</a>
         <ul className="nav-links">
           <li><a href="#services">{c.s_services}</a></li>
@@ -456,9 +420,9 @@ export default function TerziClient() {
           <li><a href="#contact">{c.s_contact}</a></li>
         </ul>
         <div className="lsw" role="group" aria-label="Dil seçimi">
-          {(['tr','en','ru','de'] as Lang[]).map(l => (
-            <button key={l} className={`lb${lang === l ? ' on' : ''}`} onClick={() => setLang(l)} aria-pressed={lang === l}>
-              {l === 'tr' ? '🇹🇷' : l === 'en' ? '🇬🇧' : l === 'ru' ? '🇷🇺' : '🇩🇪'} {l.toUpperCase()}
+          {(['tr','en','ru','de'] as Lang[]).map(l=>(
+            <button key={l} className={`lb${lang===l?' on':''}`} onClick={()=>setLang(l)} aria-pressed={lang===l}>
+              {l==='tr'?'🇹🇷':l==='en'?'🇬🇧':l==='ru'?'🇷🇺':'🇩🇪'} {l.toUpperCase()}
             </button>
           ))}
         </div>
@@ -490,7 +454,7 @@ export default function TerziClient() {
               ['10+', lang==='tr'?'Yıllık Deneyim':lang==='en'?'Years Exp.':lang==='ru'?'Лет опыта':'Jahre Erfahrung'],
               ['5000+', lang==='tr'?'Mutlu Müşteri':lang==='en'?'Happy Clients':lang==='ru'?'Клиентов':'Kunden'],
               ['24–48h', lang==='tr'?'Ekspres Teslimat':lang==='en'?'Express Delivery':lang==='ru'?'Экспресс':'Express'],
-              ['TR·EN·RU·DE', '4 Languages'],
+              ['TR·EN·RU·DE','4 Languages'],
             ] as [string,string][]).map(([n,l],i)=>(
               <div key={i} className="stat">
                 <div className="stn">{n}</div>
@@ -546,14 +510,7 @@ export default function TerziClient() {
         <div className="svcgrid">
           {SERVICES.map((s,i)=>(
             <article key={i} className="scard">
-              <img
-                src={s.img}
-                alt={s.alt}
-                className="simg"
-                loading={i < 2 ? 'eager' : 'lazy'}
-                width="700"
-                height="500"
-              />
+              <img src={s.img} alt={s.alt} className="simg" loading={i<2?'eager':'lazy'} width="700" height="500"/>
               <div className="sov" aria-hidden="true"/>
               <div className="sbody">
                 <div className="sic" aria-hidden="true">{s.icon}</div>
@@ -612,14 +569,13 @@ export default function TerziClient() {
           </div>
           <div className="revgrid">
             {REVIEWS.map((r,i)=>(
-              <article key={i} className="rcard" itemScope itemType="https://schema.org/Review">
+              // itemScope / itemType / itemProp KALDIRILDI
+              // HTML microdata yerine sadece page.tsx JSON-LD kullanılıyor
+              <article key={i} className="rcard">
                 <div className="rstars" aria-label={`${r.stars} yıldız`}>{'⭐'.repeat(r.stars)}</div>
-                <p className="rtxt" itemProp="reviewBody">{r.text}</p>
+                <p className="rtxt">{r.text}</p>
                 <div className="rauth">
-                  <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                    {r.flag} <span itemProp="name">{r.author}</span>
-                  </span>
-                  {' '}— {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
+                  {r.flag} {r.author} — {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
                 </div>
               </article>
             ))}
@@ -680,7 +636,7 @@ export default function TerziClient() {
               </button>
             ))}
           </div>
-          {activeIlce && (
+          {activeIlce&&(
             <div className="mahwrap" role="list" aria-label={`${activeIlce} mahalleleri`}>
               {ILCELER.find(i=>i.ilce===activeIlce)?.m.map(m=>(
                 <span key={m} className="mchip" role="listitem">{m}</span>
@@ -773,17 +729,9 @@ export default function TerziClient() {
             © 2026 SwapHubs — Antalya Terzi Hizmetleri · +90 531 898 64 18 · swaphubs.com/terzi
           </p>
           <div className="fkws" aria-label="Anahtar kelimeler">
-            {[
-              'Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat',
-              'Kuru Temizleme','Üniforma Üretimi','Nakış Antalya','Otel Üniforma',
-              'Aşçı Üniforma','Eve Gelen Terzi','Terzi Fiyatları 2026',
-              'Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya',
-              'Uniform Antalya','Embroidery Antalya','Mobile Tailor',
-              'Портной Анталья','Химчистка Анталья','Пошив на заказ',
-              'Гостиничная форма','Выездной портной',
-              'Schneider Antalya','Änderungen Antalya','Reinigung Antalya',
-              'Uniformproduktion',
-            ].map(k=>(<span key={k} className="kpill">{k}</span>))}
+            {['Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat','Kuru Temizleme','Üniforma Üretimi','Nakış Antalya','Otel Üniforma','Aşçı Üniforma','Eve Gelen Terzi','Terzi Fiyatları 2026','Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya','Uniform Antalya','Embroidery Antalya','Mobile Tailor','Портной Анталья','Химчистка Анталья','Пошив на заказ','Гостиничная форма','Выездной портной','Schneider Antalya','Änderungen Antalya','Reinigung Antalya','Uniformproduktion'].map(k=>(
+              <span key={k} className="kpill">{k}</span>
+            ))}
           </div>
         </div>
       </footer>
