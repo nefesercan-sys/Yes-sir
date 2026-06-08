@@ -9,13 +9,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/',
-          '/uye-ol',
-          '/giris',
-          '/kayit',
+          '/panel/',
           '/profil/',
           '/mesajlar/',
           '/bildirimler/',
-          // URL parametrelerini engelle (crawl bütçesi koruması)
           '/*?*sort=',
           '/*?*order=',
           '/*?*ref=',
@@ -24,15 +21,12 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       {
-        // Googlebot'a özel - daha geniş izin
         userAgent: 'Googlebot',
         allow: '/',
         disallow: [
           '/admin/',
           '/api/',
-          '/uye-ol',
-          '/giris',
-          '/kayit',
+          '/panel/',
           '/profil/',
           '/mesajlar/',
         ],
