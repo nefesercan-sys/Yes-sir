@@ -43,16 +43,16 @@ const jsonLd = {
       name: 'Terzi Can',
       alternateName: [
         'Tailor Can',
-        'Портной Кан',
+        '\u041f\u043e\u0440\u0442\u043d\u043e\u0439 \u041a\u0430\u043d',
         'Schneider Can',
         'Antalya Terzisi',
-        'Konyaaltı Terzi',
+        'Konyaalti Terzi',
       ],
       description:
-        "Antalya'nın en deneyimli terzisi. Paça kısaltma, fermuar değişimi, tadilat, özel dikim, üniforma üretimi, nakış, kuru temizleme. Araçlı terzi servisi ile adrese alım ve teslimat.",
+        "Antalya'nin en deneyimli terzisi. Paca kisaltma, fermuar degisimi, tadilat, ozel dikim, uniforma uretimi, nakis, kuru temizleme. Aracli terzi servisi ile adrese alim ve teslimat.",
       url: SITE_URL,
       telephone: '+905318986418',
-      priceRange: '₺₺',
+      priceRange: '\u20ba\u20ba',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
       image: [
@@ -62,7 +62,7 @@ const jsonLd = {
       logo: 'https://www.swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Konyaaltı',
+        streetAddress: 'Konyaalti',
         addressLocality: 'Antalya',
         addressRegion: 'Antalya',
         postalCode: '07070',
@@ -88,14 +88,12 @@ const jsonLd = {
         bestRating: '5',
         worstRating: '1',
       },
-      // ÇÖZÜM: Yorumlar ana LocalBusiness şemasının içine taşındı.
-      // Google'ın eksik alan (itemReviewed) uyarısı vermemesi için en güvenli yöntem budur.
       review: [
         {
           '@type': 'Review',
           author: { '@type': 'Person', name: 'Murat B.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
+          reviewBody: 'Otelimiz icin 45 kisilik personel uniformasi diktirdik. Tasarim, kalip ve seri uretim mukemmeldi. Zamaninda teslim, nakis kalitesi harika!',
           datePublished: '2025-01-15',
         },
         {
@@ -107,9 +105,9 @@ const jsonLd = {
         },
         {
           '@type': 'Review',
-          author: { '@type': 'Person', name: 'Наталья К.' },
+          author: { '@type': 'Person', name: '\u041d\u0430\u0442\u0430\u043b\u044c\u044f \u041a.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
+          reviewBody: '\u041e\u0442\u043b\u0438\u0447\u043d\u044b\u0439 \u043f\u043e\u0440\u0442\u043d\u043e\u0439! \u041f\u043e\u0448\u0438\u043b \u0441\u0432\u0430\u0434\u0435\u0431\u043d\u043e\u0435 \u043f\u043b\u0430\u0442\u044c\u0435 \u0437\u0430 5 \u0434\u043d\u0435\u0439. \u0413\u043e\u0432\u043e\u0440\u044f\u0442 \u043f\u043e-\u0440\u0443\u0441\u0441\u043a\u0438, \u0434\u043e\u0441\u0442\u0430\u0432\u0438\u043b\u0438 \u043f\u0440\u044f\u043c\u043e \u0432 \u043e\u0442\u0435\u043b\u044c \u0432 \u0411\u0435\u043b\u0435\u043a\u0435!',
           datePublished: '2025-06-20',
         },
         {
@@ -126,19 +124,18 @@ const jsonLd = {
         { '@type': 'City', name: 'Manavgat' },
         { '@type': 'City', name: 'Kemer' },
         { '@type': 'City', name: 'Belek' },
-        { '@type': 'City', name: 'Kaş' },
+        { '@type': 'City', name: 'Kas' },
         { '@type': 'City', name: 'Finike' },
       ],
 
-      // ─── FIXED OfferCatalog ───────────────────────────────────────────────
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Terzi Can Hizmetleri 2025–2026',
+        name: 'Terzi Can Hizmetleri 2025-2026',
         itemListElement: [
           {
             '@type': 'Offer',
-            name: 'Paça Kısaltma',
-            description: "Pantolon ve kot paça kısaltma. ₺150'den başlar, 24 saatte teslim.",
+            name: 'Paca Kisaltma',
+            description: "Pantolon ve kot paca kisaltma. 150 TRY'den baslar, 24 saatte teslim.",
             price: '150',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -148,8 +145,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Fermuar Değişimi',
-            description: "Pantolon/kot fermuarı ₺120'den, mont fermuarı ₺300'den. Aynı gün servis.",
+            name: 'Fermuar Degisimi',
+            description: "Pantolon/kot fermuari 120 TRY'den, mont fermuari 300 TRY'den. Ayni gun servis.",
             price: '120',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -160,7 +157,7 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Elbise Daraltma ve Tadilat',
-            description: "Her tür kıyafette beden küçültme ve tadilat. ₺200'den başlar.",
+            description: "Her tur kiyafette beden kucultme ve tadilat. 200 TRY'den baslar.",
             price: '200',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -170,8 +167,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Özel Dikim',
-            description: "Ölçüye göre erkek, bayan, çocuk kıyafeti dikimi. ₺600'den başlar.",
+            name: 'Ozel Dikim',
+            description: "Olcuye gore erkek, bayan, cocuk kiyafeti dikimi. 600 TRY'den baslar.",
             price: '600',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -181,8 +178,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Üniforma Üretimi',
-            description: 'Otel, restoran, sağlık, okul ve spor üniforması. Tasarım + kalıp + seri imalat + nakış.',
+            name: 'Uniforma Uretimi',
+            description: 'Otel, restoran, saglik, okul ve spor unif. Tasarim + kalip + seri imalat + nakis.',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
@@ -191,7 +188,7 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Kuru Temizleme',
-            description: "Otel alım-teslimat dahil kuru temizleme ve ütü. ₺300'den başlar.",
+            description: "Otel alim-teslimat dahil kuru temizleme ve utu. 300 TRY'den baslar.",
             price: '300',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -201,8 +198,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Nakış ve Logo Baskı',
-            description: "Üniforma ve kıyafete logo nakışı, dijital baskı. ₺100'den başlar.",
+            name: 'Nakis ve Logo Baski',
+            description: "Uniforma ve kiyafete logo nakisi, dijital baski. 100 TRY'den baslar.",
             price: '100',
             priceCurrency: 'TRY',
             availability: 'https://schema.org/InStock',
@@ -212,8 +209,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Araçlı Terzi Servisi',
-            description: 'Adrese alım ve teslimat dahil mobil terzi servisi. Tüm Antalya ilçeleri.',
+            name: 'Aracli Terzi Servisi',
+            description: 'Adrese alim ve teslimat dahil mobil terzi servisi. Tum Antalya ilceleri.',
             availability: 'https://schema.org/InStock',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can' },
@@ -247,12 +244,12 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Terzi Antalya | Konyaaltı Terzi | Elbise Dikimi · Kıyafet Tamiri Tadilatı · Ütü Kuru Temizleme',
+      name: 'Terzi Can Antalya | Konyaalti Terzi | Paca Kisaltma - Tadilat - Uniforma - Kuru Temizleme',
       url: SITE_URL,
       isPartOf: { '@id': 'https://www.swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
       description:
-        "Antalya Konyaaltı'nda terzi. Bay Bayan özel terzi, Paça kısaltma, elbise tamiri ve tadilatı, dikim atölyesi, ütü ve kuru temizleme, üniforma üretimi, kaliteli ve hızlı hizmet.",
+        "Antalya Konyaalti'nda profesyonel terzi Can. Paca kisaltma, elbise tadilat, ozel dikim, kuru temizleme, uniforma uretimi. 24-48 saat ekspres teslimat.",
       inLanguage: ['tr', 'en', 'de', 'ru'],
       datePublished: '2024-01-01',
       dateModified: new Date().toISOString().split('T')[0],
@@ -282,18 +279,18 @@ const jsonLd = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: "Antalya'da paça kısaltma fiyatı ne kadar? 2025–2026",
+          name: "Antalya'da paca kisaltma fiyati ne kadar? 2025-2026",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Antalya'da paça kısaltma fiyatımız ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarı. Kesin fiyat için WhatsApp +90 531 898 64 18.",
+            text: "Antalya'da paca kisaltma fiyatimiz 150 TRY'den baslar. Kot paca 150 TRY, kumas pantolon 175 TRY civari. Kesin fiyat icin WhatsApp +90 531 898 64 18.",
           },
         },
         {
           '@type': 'Question',
-          name: 'Fermuar değişimi kaç lira? Mont, kot, pantolon fermuarı fiyatı?',
+          name: 'Fermuar degisimi kac lira? Mont, kot, pantolon fermuari fiyati?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Pantolon ve kot fermuarı değişimi ₺120'den, mont fermuarı ₺300'den başlar. Aynı gün servis mümkündür. WhatsApp +90 531 898 64 18.",
+            text: "Pantolon ve kot fermuari degisimi 120 TRY'den, mont fermuari 300 TRY'den baslar. Ayni gun servis mumkundur. WhatsApp +90 531 898 64 18.",
           },
         },
         {
@@ -301,39 +298,39 @@ const jsonLd = {
           name: 'Eve veya otele gelen terzi Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Evet, Terzi Can araçlı terzi servisiyle Antalya'nın tüm ilçelerine geliyor. WhatsApp'tan konum paylaşın. +90 531 898 64 18.",
+            text: "Evet, Terzi Can aracli terzi servisiyle Antalya'nin tum ilcelerine geliyor. WhatsApp'tan konum paylasin. +90 531 898 64 18.",
           },
         },
         {
           '@type': 'Question',
-          name: 'Mezuniyet abiyesi tamiri ve kısaltması Antalya?',
+          name: 'Mezuniyet abiyesi tamiri ve kisaltmasi Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri ve kısaltma ekspres 24 saatte yapıyoruz.',
+            text: 'Evet, mezuniyet sezonunda (Mayis-Haziran) abiye tamiri ve kisaltma ekspres 24 saatte yapiyoruz.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Düğün sezonu gelinlik tadilatı Antalya?',
+          name: 'Dugun sezonu gelinlik tadilati Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, kısaltma ve damatlık tadilatı yapıyoruz.',
+            text: 'Evet, Nisan-Ekim dugun sezonunda gelinlik tadilati, kisaltma ve damatlik tadilati yapiyoruz.',
           },
         },
         {
           '@type': 'Question',
-          name: "Antalya'da otel ve restoran üniforması üretimi?",
+          name: "Antalya'da otel ve restoran uniformasi uretimi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, otel personel, resepsiyon, aşçı, garson, spa üniforma üretiyoruz. Tasarım + kalıp + seri imalat + nakış tek elden.',
+            text: 'Evet, otel personel, resepsiyon, asci, garson, spa uniforma uretiyoruz. Tasarim + kalip + seri imalat + nakis tek elden.',
           },
         },
         {
           '@type': 'Question',
-          name: "Antalya'da sweatshirt ve eşofman dikimi?",
+          name: "Antalya'da sweatshirt ve esofman dikimi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, sweatshirt ve eşofman dikimi, nakış ve baskı ile kişiselleştirme, seri üretim yapıyoruz.',
+            text: 'Evet, sweatshirt ve esofman dikimi, nakis ve baski ile kisisellestime, seri uretim yapiyoruz.',
           },
         },
         {
@@ -341,7 +338,7 @@ const jsonLd = {
           name: 'Kuru temizleme hizmeti veriyor musunuz?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, kuru temizleme, çamaşır yıkama ve ütü hizmetleri sunmaktayız. Otel ve adreslerden kurye ile alım yapılmaktadır.',
+            text: 'Evet, kuru temizleme, camasir yikama ve utu hizmetleri sunmaktayiz. Otel ve adreslerden kurye ile alim yapilmaktadir.',
           },
         },
         {
@@ -357,15 +354,15 @@ const jsonLd = {
           name: 'Do you offer hotel pickup and delivery for dry cleaning in Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes! We offer express dry cleaning with courier pickup and delivery to all hotels in Antalya. Ready in 24–48 hours.',
+            text: 'Yes! We offer express dry cleaning with courier pickup and delivery to all hotels in Antalya. Ready in 24-48 hours.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Где найти портного и производителя формы в Анталье?',
+          name: '\u0413\u0434\u0435 \u043d\u0430\u0439\u0442\u0438 \u043f\u043e\u0440\u0442\u043d\u043e\u0433\u043e \u0438 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044f \u0444\u043e\u0440\u043c\u044b \u0432 \u0410\u043d\u0442\u0430\u043b\u044c\u0435?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Портной Кан — пошив одежды, производство формы, вышивка в Анталье. Говорим по-русски. WhatsApp: +90 531 898 64 18.',
+            text: '\u041f\u043e\u0440\u0442\u043d\u043e\u0439 \u041a\u0430\u043d \u2014 \u043f\u043e\u0448\u0438\u0432 \u043e\u0434\u0435\u0436\u0434\u044b, \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u043e \u0444\u043e\u0440\u043c\u044b, \u0432\u044b\u0448\u0438\u0432\u043a\u0430 \u0432 \u0410\u043d\u0442\u0430\u043b\u044c\u0435. \u0413\u043e\u0432\u043e\u0440\u0438\u043c \u043f\u043e-\u0440\u0443\u0441\u0441\u043a\u0438. WhatsApp: +90 531 898 64 18.',
           },
         },
         {
@@ -384,7 +381,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service-tailoring`,
       name: 'Profesyonel Terzilik Hizmetleri — Antalya',
-      description: "Antalya Konyaaltı'nda paça kısaltma, elbise tadilat, özel dikim, üniforma üretimi, kuru temizleme ve mobil terzi servisi.",
+      description: "Antalya Konyaalti'nda paca kisaltma, elbise tadilat, ozel dikim, uniforma uretimi, kuru temizleme ve mobil terzi servisi.",
       provider: { '@id': `${SITE_URL}#business` },
       areaServed: { '@type': 'City', name: 'Antalya' },
       availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
@@ -397,12 +394,38 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.swaphubs.com'),
-  title: 'Antalya Terzi | Paça Kısaltma ₺150 · Eve Gelen Terzi Can',
-  description: `Konyaaltı'nda profesyonel terzi. Paça kısaltma ₺150, fermuar ₺120, kuru temizleme, üniforma üretimi. Eve & otele geliyoruz. 4.9★ · ☎ ${PHONE}`,
-  keywords: 'Antalya Terzi, Paça Kısaltma Antalya, En Yakın Terzi, Konyaaltı Terzi, Terzi Tamir Tadilat, Elbise Dikimi, Kıyafet Tamiri, Bel Daraltma,",
-  'Elbise Kalıp Çıkarma, Ütü Kuru Temizleme, Elbise Fermuarı Takiri, Fermuar Değişimi, Abiye Dikimi, Abiye tadilatı, Elbise Benden Küçültme, Özel DikimKıyafet,",
-  'Dikim Fiyatları, Dikim Atölyesi, Bayan Terzi, Bay Terzi, Çocuk Elbisesi Dikimi, Tekstil İmalatı, Model Çıkarma, Pantalon Boyu Ayarlama, Pantolon Paça Dikimi,",
-  'Paça Kısaltma, Gece Kıyafeti Dikimi, Terzi Dikim Fiyatları Güncel,',
+  title: 'Terzi Antalya | Konyaaltı | Elbise Dikimi & Kuru Temizleme',
+  description: "Konyaaltı'nda bay bayan özel terzi. Paça kısaltma, elbise tamiri, dikim atölyesi, kuru temizleme, üniforma üretimi. Kaliteli ve hızlı hizmet.",
+  keywords: [
+    'Antalya Terzi',
+    'Paça Kısaltma Antalya',
+    'En Yakın Terzi',
+    'Konyaaltı Terzi',
+    'Terzi Tamir Tadilat',
+    'Elbise Dikimi',
+    'Kıyafet Tamiri',
+    'Bel Daraltma',
+    'Elbise Kalıp Çıkarma',
+    'Ütü Kuru Temizleme',
+    'Elbise Fermuarı Tamiri',
+    'Fermuar Değişimi',
+    'Abiye Dikimi',
+    'Abiye Tadilatı',
+    'Elbise Bedenden Küçültme',
+    'Özel Dikim Kıyafet',
+    'Dikim Fiyatları',
+    'Dikim Atölyesi',
+    'Bayan Terzi',
+    'Bay Terzi',
+    'Çocuk Elbisesi Dikimi',
+    'Tekstil İmalatı',
+    'Model Çıkarma',
+    'Pantolon Boyu Ayarlama',
+    'Pantolon Paça Dikimi',
+    'Paça Kısaltma',
+    'Gece Kıyafeti Dikimi',
+    'Terzi Dikim Fiyatları Güncel',
+  ],
   authors: [{ name: 'SwapHubs', url: 'https://www.swaphubs.com' }],
   creator: 'SwapHubs',
   publisher: 'SwapHubs',
@@ -428,8 +451,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Terzi Can Antalya | Paça Kısaltma & Tadilat',
-    description: `Antalya'da profesyonel terzi. Paça ₺150, fermuar ₺120, üniforma, kuru temizleme. Eve & otele geliyoruz. TR · EN · RU · DE ☎ ${PHONE}`,
+    title: `Terzi Can Antalya | Paca Kisaltma & Tadilat`,
+    description: `Antalya'da profesyonel terzi. Paca 150 TRY, fermuar 120 TRY, uniforma, kuru temizleme. Eve & otele geliyoruz. TR - EN - RU - DE Tel: ${PHONE}`,
     url: 'https://www.swaphubs.com/terzi',
     siteName: 'SwapHubs — Antalya Terzi',
     locale: 'tr_TR',
@@ -440,7 +463,7 @@ export const metadata: Metadata = {
         url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
-        alt: 'Terzi Can Antalya — Paça Kısaltma, Tadilat, Üniforma, Kuru Temizleme',
+        alt: 'Terzi Can Antalya — Paca Kisaltma, Tadilat, Uniforma, Kuru Temizleme',
         type: 'image/jpeg',
       },
     ],
@@ -449,8 +472,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@swaphubs',
     creator: '@swaphubs',
-    title: 'Antalya Terzi Can | Paça ₺150 · Eve Geliyoruz',
-    description: `Konyaaltı merkezli, tüm Antalya'ya gelen terzi. Paça ₺150, fermuar ₺120. Türkçe · English · Русский · Deutsch ☎ ${PHONE}`,
+    title: `Antalya Terzi Can | Paca 150 TRY - Eve Geliyoruz`,
+    description: `Konyaalti merkezli, tum Antalya'ya gelen terzi. Paca 150 TRY, fermuar 120 TRY. Turkce - English - Rusca - Deutsch Tel: ${PHONE}`,
     images: ['/og/terzi-can.jpg'],
   },
   other: {
