@@ -142,7 +142,7 @@ const FAQS: [string,string][] = [
   ["Kumaş seçimi konusunda yardımcı oluyor musunuz?","Evet. Yerli ve ithal kumaş stoğumuzdan seçim yapabilir ya da kendi kumaşınızı getirebilirsiniz."],
 ];
 
-export default function TailorOnlineClient() {
+export default function OnlineTailorClient() {
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number|null>(null);
   const [priceTab, setPriceTab] = useState(0);
@@ -540,7 +540,7 @@ export default function TailorOnlineClient() {
       {/* ── NAV ── */}
       <nav className={`nav${scrolled?' up':''}`} aria-label="Ana navigasyon">
         <a href="https://www.swaphubs.com" className="nav-logo">
-          SwapHubs <em>/ Bay Tailor</em>
+          SwapHubs <em>/ Online Tailor</em>
         </a>
         <ul className="nav-links">
           {[['#services','Hizmetler'],['#prices','Fiyatlar'],['#reviews','Yorumlar'],['#faq','SSS'],['#contact','İletişim']].map(([h,l])=>(
@@ -555,7 +555,7 @@ export default function TailorOnlineClient() {
       {/* ── HERO ── */}
       <section className="hero" aria-labelledby="hero-h" id="main">
         <div className="hero-left">
-          <span className="hero-tag">Antalya Bay Tailor — Online Terzi & Ütü Hizmeti</span>
+          <span className="hero-tag">Online Tailor Service</span>
           <h1 id="hero-h">
             Kıyafet Dikimi,<br/>
             <em>Online Terzi</em><br/>
@@ -579,7 +579,7 @@ export default function TailorOnlineClient() {
           </div>
         </div>
         <div className="hero-right" aria-hidden="true">
-          <img src={IMGS.hero} alt="Antalya Bay Tailor erkek kıyafet dikimi online terzi" className="hero-img" width={900} height={1200} loading="eager"/>
+          <img src={IMGS.hero} alt="Online Tailor Service — SwapHubs Antalya" className="hero-img" width={900} height={1200} loading="eager"/>
           <div className="hero-card">
             <span className="hero-card-dot"/>
             <div>
@@ -596,13 +596,13 @@ export default function TailorOnlineClient() {
         <span>›</span>
         <a href="/terzi">Terzi Can</a>
         <span>›</span>
-        <strong>Antalya Bay Tailor — Online Terzi & Ütü</strong>
+        <strong>Online Tailor Service</strong>
       </nav>
 
       {/* ── SEO INTRO ── */}
       <div className="seo-strip">
         <p>
-          <strong style={{color:'var(--bone2)'}}>Antalya Bay Tailor</strong> olarak Konyaaltı merkezimizden tüm Antalya ilçelerine ve Türkiye geneline
+          <strong style={{color:'var(--bone2)'}}>Online Tailor Service</strong> olarak Konyaaltı merkezimizden tüm Antalya ilçelerine ve Türkiye geneline
           online terzi hizmeti sunuyoruz. Erkek takım elbise dikimi, bayan elbise dikimi, kişiye özel model tasarım,
           kalıp çıkarma, prototip, seri imalat ve fason üretim. Ütü hizmeti, buharlı presleme, otellerden kurye ile alım.
           Paça kısaltma, fermuar değişimi, kıyafet tamir ve tadilat. Spor kıyafet, eşofman, sweatshirt dikimi ve nakış baskı.
@@ -637,7 +637,7 @@ export default function TailorOnlineClient() {
             <article key={s.id} id={s.id} className="scard"
   data-ani=""
               style={visible.has(s.id)?{opacity:1,transform:'none'}:{}}>
-              <img src={s.img} alt={`${s.title} — SwapHubs Antalya Bay Tailor`}
+              <img src={s.img} alt={`${s.title} — SwapHubs Online Tailor Service`}
                 className="scard-img" loading="lazy" width={800} height={420}/>
               <div className="scard-ov" aria-hidden="true"/>
               <div className="scard-top">
@@ -888,7 +888,7 @@ export default function TailorOnlineClient() {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12742.017!2d30.6946!3d36.8769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c3914a3f49b36b%3A0xe9e87c5c9a6b2700!2sKonyaalti%2C%20Antalya!5e0!3m2!1str!2str!4v1720000000000"
                 allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 title="SwapHubs Antalya — Konyaaltı konumu"
-                aria-label="SwapHubs Bay Tailor konumu haritası"
+                aria-label="SwapHubs Online Tailor konumu haritası"
               />
             </div>
           </div>
@@ -944,7 +944,7 @@ export default function TailorOnlineClient() {
 
       {/* ── FOOTER ── */}
       <footer>
-        <div className="foot-brand">SwapHubs — Antalya Bay Tailor | Online Terzi & Ütü Hizmeti</div>
+        <div className="foot-brand">SwapHubs — Online Tailor Service | Online Terzi & Ütü Hizmeti</div>
         <nav className="foot-links" aria-label="Footer bağlantılar">
           {[
             ['https://www.swaphubs.com','Ana Sayfa'],
