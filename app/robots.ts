@@ -34,6 +34,7 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       'https://www.swaphubs.com/sitemap.xml',
+      'https://www.swaphubs.com/sitemap-terzi.xml',
       'https://www.swaphubs.com/sitemap-ilanlar.xml',
       'https://www.swaphubs.com/sitemap-sektorler.xml',
       'https://www.swaphubs.com/sitemap-turkiye-sehir.xml',
