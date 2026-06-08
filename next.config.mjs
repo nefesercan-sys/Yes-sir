@@ -29,9 +29,13 @@ const nextConfig = {
   },
 
   // ─── REDIRECTS ────────────────────────────────────────────────────────────
+  // KRİTİK: Redirect zinciri (A→B→C) oluşturmayın.
+  // Sorunlu eski zincir:
+  //   /antalya-bay-tailor-... → /online-tailor-service → /online-terzi-hizmeti
+  // Çözüm: tüm eski URL'ler direkt son hedefe (tek adım).
   async redirects() {
     return [
-      // www olmayan → www (301)
+      // ── www olmayan → www (301) ──────────────────────────────────────────
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'swaphubs.com' }],
@@ -39,19 +43,30 @@ const nextConfig = {
         permanent: true,
       },
 
-      // Eski sayfa → Yeni sayfa (301)
+      // ── Eski URL'ler → doğrudan son hedef (zincir yok) ──────────────────
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
-        destination: '/online-tailor-service',
+        destination: '/online-terzi-hizmeti',
         permanent: true,
       },
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti/:path*',
-        destination: '/online-tailor-service/:path*',
+        destination: '/online-terzi-hizmeti',
+        permanent: true,
+      },
+      // Eğer /online-tailor-service ayrı bir Next.js sayfanız VARSA bu iki satırı SİLİN
+      {
+        source: '/online-tailor-service',
+        destination: '/online-terzi-hizmeti',
+        permanent: true,
+      },
+      {
+        source: '/online-tailor-service/:path*',
+        destination: '/online-terzi-hizmeti',
         permanent: true,
       },
 
-      // Büyük harf URL normalize → küçük harf (301)
+      // ── Büyük harf → küçük harf normalize ───────────────────────────────
       {
         source: '/Terzi',
         destination: '/terzi',
@@ -84,12 +99,12 @@ const nextConfig = {
       },
       {
         source: '/Online-Tailor-Service',
-        destination: '/online-tailor-service',
+        destination: '/online-terzi-hizmeti',
         permanent: true,
       },
       {
         source: '/Online-Tailor-Service/:path*',
-        destination: '/online-tailor-service/:path*',
+        destination: '/online-terzi-hizmeti',
         permanent: true,
       },
     ];
@@ -98,7 +113,6 @@ const nextConfig = {
   // ─── HEADERS ──────────────────────────────────────────────────────────────
   async headers() {
     return [
-
       // Tüm sayfalar — güvenlik + SEO
       {
         source: '/(.*)',
@@ -158,7 +172,7 @@ const nextConfig = {
         ],
       },
 
-      // OG görselleri — 1 hafta cache
+      // OG görselleri
       {
         source: '/og/(.*)',
         headers: [
@@ -212,23 +226,8 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
-      {
-        source: '/online-tailor-service',
-        headers: [
-          { key: 'Content-Language', value: 'tr, en' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
-        headers: [
-          { key: 'Content-Language', value: 'tr' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
     ];
   },
 };
 
 export default nextConfig;
-
