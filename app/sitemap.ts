@@ -146,14 +146,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/online-terzi-hizmeti/sss`,                 lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.7 },
 
     // Terzi & Tekstil sayfaları
-    { url: `${BASE_URL}/terzi`,             lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/tekstil-antalya`,   lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/terzi/istanbul`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/ankara`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/izmir`,       lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/antalya`,     lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/bursa`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
-    { url: `${BASE_URL}/terzi/adana`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${BASE_URL}/terzi`,                                                  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE_URL}/tekstil-antalya`,                                        lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/online-tailor-service`,                                  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/terzi/istanbul`,                                         lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/terzi/ankara`,                                           lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/terzi/izmir`,                                            lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/terzi/antalya`,                                          lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/terzi/bursa`,                                            lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${BASE_URL}/terzi/adana`,                                            lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
 
     // Genel
     { url: `${BASE_URL}/files`,             lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
