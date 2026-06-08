@@ -35,13 +35,6 @@ const nextConfig = {
         destination: 'https://www.swaphubs.com/:path*',
         permanent: true,
       },
-      // HTTP → HTTPS (301)
-      {
-        source: '/:path*',
-        has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
-        destination: 'https://www.swaphubs.com/:path*',
-        permanent: true,
-      },
       // Eski sayfa → Yeni sayfa (301)
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
