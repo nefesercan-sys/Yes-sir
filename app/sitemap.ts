@@ -10,7 +10,7 @@ const SLUG_REGEX = /^[0-9a-f]+$/i
 // ─── DB ───────────────────────────────────────────────────────────────────────
 async function getDb() {
   const client = await clientPromise
-  return client.db('hizmetara')
+  return client.db('swaphubs_db')
 }
 
 // ─── VERİ ÇEKME FONKSİYONLARI ────────────────────────────────────────────────
@@ -123,40 +123,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Ana
     { url: BASE_URL,                        lastModified: new Date('2026-06-05'), changeFrequency: 'daily',   priority: 1.0 },
     { url: `${BASE_URL}/ilanlar`,           lastModified: new Date('2026-06-05'), changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${BASE_URL}/kesfet`,            lastModified: new Date('2026-06-05'), changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${BASE_URL}/ilan`,              lastModified: new Date('2026-06-05'), changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${BASE_URL}/uye-ol`,            lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/giris`,             lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
 
     // Online Terzi — ana sayfa
     { url: `${BASE_URL}/online-terzi-hizmeti`,             lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 1.0 },
     { url: `${BASE_URL}/online-terzi-hizmeti/client`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.95 },
 
     // Online Terzi — kategori alt sayfaları
-    { url: `${BASE_URL}/online-terzi-hizmeti/abiye-dikim`,          lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gelinlik-dikim`,        lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/takim-elbise-dikim`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/uniforma-dikim`,        lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/spor-giyim-dikim`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gece-davet-kiyafeti`,   lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/muslin-keten-kiyafet`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gunluk-kiyafet-dikim`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/olcu-rehberi`,          lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/kurumsal`,              lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/sss`,                   lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/abiye-dikim`,         lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/gelinlik-dikim`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/takim-elbise-dikim`,  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/uniforma-dikim`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/spor-giyim-dikim`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/gece-davet-kiyafeti`, lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/muslin-keten-kiyafet`,lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/gunluk-kiyafet-dikim`,lastModified: new Date('2026-06-05'), changeFrequency: 'weekly',  priority: 0.85 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/olcu-rehberi`,        lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/kurumsal`,            lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/online-terzi-hizmeti/sss`,                 lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.7 },
 
-    // Tekstil / Terzi şehir sayfaları
-    { url: `${BASE_URL}/terzi`,                   lastModified: new Date('2026-05-31'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/tekstil-antalya`,         lastModified: new Date('2026-05-31'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/terzi/istanbul`,          lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/ankara`,            lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/izmir`,             lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/antalya`,           lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/bursa`,             lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
-    { url: `${BASE_URL}/terzi/adana`,             lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+    // Terzi & Tekstil sayfaları
+    { url: `${BASE_URL}/terzi`,             lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/tekstil-antalya`,   lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/istanbul`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/terzi/ankara`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/terzi/izmir`,       lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/terzi/antalya`,     lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${BASE_URL}/terzi/bursa`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${BASE_URL}/terzi/adana`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
 
     // Genel
-    { url: `${BASE_URL}/files`,       lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/hakkimizda`,  lastModified: new Date('2026-02-07'), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE_URL}/iletisim`,    lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE_URL}/gizlilik`,    lastModified: new Date('2026-01-01'), changeFrequency: 'yearly',  priority: 0.2 },
-    { url: `${BASE_URL}/kullanim-kosullari`, lastModified: new Date('2026-01-01'), changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${BASE_URL}/files`,             lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/hakkimizda`,        lastModified: new Date('2026-02-07'), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE_URL}/iletisim`,          lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE_URL}/gizlilik`,          lastModified: new Date('2026-01-01'), changeFrequency: 'yearly',  priority: 0.2 },
+    { url: `${BASE_URL}/kullanim-kosullari`,lastModified: new Date('2026-01-01'), changeFrequency: 'yearly',  priority: 0.2 },
   ]
 
   // ── 2. STATİK BLOG YAZILARI (DB yoksa yedek) ────────────────────────────────
@@ -228,7 +232,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     })
 
-  // DB'den gelen blog varsa statik yedekleri geçersiz kıl
   const blogUrls = dynamicBlogUrls.length > 0 ? dynamicBlogUrls : staticBlogPages
 
   // ── 7. DİNAMİK: ÜRÜNLER ─────────────────────────────────────────────────────
