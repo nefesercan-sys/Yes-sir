@@ -3,10 +3,8 @@
 const nextConfig = {
 
   // ─── TEMEL ────────────────────────────────────────────────────────────────
-  // "X-Powered-By: Next.js" header'ını kaldır — güvenlik + temizlik
   poweredByHeader: false,
 
-  // Üretim build'de console.log'ları temizle
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
       ? { exclude: ['error', 'warn'] }
@@ -15,8 +13,6 @@ const nextConfig = {
 
   // ─── IMAGES ───────────────────────────────────────────────────────────────
   images: {
-    // unoptimized: true KALDIRILDI — next/image optimizasyonu aktif
-    // Bu LCP'yi ~30–50% iyileştirir, Vercel'de otomatik WebP/AVIF dönüşümü yapar
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'images.pexels.com' },
@@ -35,16 +31,70 @@ const nextConfig = {
   // ─── REDIRECTS ────────────────────────────────────────────────────────────
   async redirects() {
     return [
+      // www olmayan → www (301)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'swaphubs.com' }],
         destination: 'https://www.swaphubs.com/:path*',
         permanent: true,
       },
+      // HTTP → HTTPS (301)
       {
         source: '/:path*',
         has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
         destination: 'https://www.swaphubs.com/:path*',
+        permanent: true,
+      },
+      // Eski sayfa → Yeni sayfa (301)
+      {
+        source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
+        destination: '/online-tailor-service',
+        permanent: true,
+      },
+      {
+        source: '/antalya-bay-tailor-online-terzi-utu-hizmeti/:path*',
+        destination: '/online-tailor-service/:path*',
+        permanent: true,
+      },
+      // Büyük harf URL normalize → küçük harf (301)
+      {
+        source: '/Terzi',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/Terzi/:path*',
+        destination: '/terzi/:path*',
+        permanent: true,
+      },
+      {
+        source: '/Online-terzi-hizmeti',
+        destination: '/online-terzi-hizmeti',
+        permanent: true,
+      },
+      {
+        source: '/Online-terzi-hizmeti/:path*',
+        destination: '/online-terzi-hizmeti/:path*',
+        permanent: true,
+      },
+      {
+        source: '/Online-Terzi-Hizmeti',
+        destination: '/online-terzi-hizmeti',
+        permanent: true,
+      },
+      {
+        source: '/Online-Terzi-Hizmeti/:path*',
+        destination: '/online-terzi-hizmeti/:path*',
+        permanent: true,
+      },
+      {
+        source: '/Online-Tailor-Service',
+        destination: '/online-tailor-service',
+        permanent: true,
+      },
+      {
+        source: '/Online-Tailor-Service/:path*',
+        destination: '/online-tailor-service/:path*',
         permanent: true,
       },
     ];
@@ -147,6 +197,13 @@ const nextConfig = {
         ],
       },
       {
+        source: '/terzi/:path*',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
         source: '/online-terzi-hizmeti',
         headers: [
           { key: 'Content-Language', value: 'tr, en, de, ru, ar' },
@@ -154,7 +211,14 @@ const nextConfig = {
         ],
       },
       {
-        source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
+        source: '/online-terzi-hizmeti/:path*',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, de, ru, ar' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-tailor-service',
         headers: [
           { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
