@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import TailorOnlineClient from './TailorOnlineClient';
+import OnlineTailorClient from './OnlineTailorClient';
 
-const SITE_URL = 'https://www.swaphubs.com/antalya-bay-tailor-online-terzi-utu-hizmeti';
+const SITE_URL = 'https://www.swaphubs.com/online-tailor-service';
 const PHONE = '+90 531 898 64 18';
 
 // ─── STRUCTURED DATA ──────────────────────────────────────────────────────────
@@ -31,7 +31,7 @@ const jsonLd = {
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
       '@id': `${SITE_URL}#business`,
-      name: 'SwapHubs Antalya — Bay Tailor | Online Terzi & Ütü Hizmeti',
+      name: 'SwapHubs — Online Tailor Service',
       alternateName: [
         'Antalya Bay Terzi',
         'Online Terzi Antalya',
@@ -110,7 +110,7 @@ const jsonLd = {
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Antalya Bay Tailor — Tüm Terzilik Hizmetleri',
+        name: 'Online Tailor Service — Tüm Terzilik Hizmetleri',
         itemListElement: [
           {
             '@type': 'Offer',
@@ -202,7 +202,7 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Antalya Bay Tailor — Online Terzi & Ütü Hizmeti | Erkek & Bayan Kıyafet Dikimi | SwapHubs',
+      name: 'Online Tailor Service Hizmeti | Erkek & Bayan Kıyafet Dikimi | SwapHubs',
       url: SITE_URL,
       isPartOf: { '@id': 'https://www.swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
@@ -227,7 +227,7 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://www.swaphubs.com' },
         { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: 'https://www.swaphubs.com/terzi' },
-        { '@type': 'ListItem', position: 3, name: 'Antalya Bay Tailor — Online Terzi & Ütü', item: SITE_URL },
+        { '@type': 'ListItem', position: 3, name: 'Online Tailor Service', item: SITE_URL },
       ],
     },
 
@@ -317,7 +317,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      'Antalya Bay Tailor | Online Terzi & Ütü Hizmeti | Erkek & Bayan Kıyafet Dikimi | Seri İmalat',
+      'Online Tailor Service | Erkek & Bayan Kıyafet Dikimi | Seri İmalat',
     template: '%s | SwapHubs Antalya Terzi',
   },
 
@@ -332,7 +332,7 @@ export const metadata: Metadata = {
     'Bayan İş Kıyafeti Dikimi', 'Özel Elbise Dikimi Antalya',
     // TR — Online
     'Online Terzi Antalya', 'Online Kıyafet Dikimi', 'Online Terzi Hizmeti',
-    'Antalya Online Tailor', 'Antalya Bay Tailor Online',
+    'Antalya Online Tailor', 'Online Tailor Service',
     // TR — Ütü
     'Ütü Hizmeti Antalya', 'Profesyonel Ütü Antalya', 'Ütü Servisi Antalya',
     'Otel Ütü Hizmeti Antalya', 'Eve Gelen Ütü Hizmeti',
@@ -376,7 +376,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Antalya Bay Tailor | Online Terzi & Ütü | Erkek & Bayan Kıyafet Dikimi | SwapHubs',
+    title: 'Online Tailor Service | Erkek & Bayan Kıyafet Dikimi | SwapHubs',
     description: `Antalya'da erkek & bayan kıyafet dikimi, online terzi, ütü, tamir, tadilat, model tasarım, seri imalat. ☎ ${PHONE}`,
     url: SITE_URL,
     siteName: 'SwapHubs',
@@ -387,7 +387,7 @@ export const metadata: Metadata = {
         url: '/og/antalya-tailor-online.jpg',
         width: 1200,
         height: 630,
-        alt: 'SwapHubs Antalya — Bay Tailor Online Terzi & Ütü Hizmeti',
+        alt: 'SwapHubs — Online Tailor Service',
         type: 'image/jpeg',
       },
     ],
@@ -396,7 +396,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'Antalya Bay Tailor | Online Terzi & Ütü | SwapHubs',
+    title: 'Online Tailor Service | SwapHubs',
     description: `Erkek & bayan kıyafet dikimi, online terzi, ütü, tamir, seri imalat. ☎ ${PHONE}`,
     images: ['/og/antalya-tailor-online.jpg'],
   },
@@ -411,14 +411,14 @@ export const metadata: Metadata = {
 };
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
-export default function AntalyaTailorPage() {
+export default function OnlineTailorPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <TailorOnlineClient />
+      <OnlineTailorClient />
     </>
   );
 }
