@@ -32,19 +32,15 @@ const nextConfig = {
   async redirects() {
     return [
       // www olmayan → www (301)
+      // NOT: HTTP→HTTPS redirect kaldırıldı. Vercel bunu otomatik halleder.
+      // O kural x-forwarded-proto döngüsüne yol açıyordu → Google redirect hatası.
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'swaphubs.com' }],
         destination: 'https://www.swaphubs.com/:path*',
         permanent: true,
       },
-      // HTTP → HTTPS (301)
-      {
-        source: '/:path*',
-        has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
-        destination: 'https://www.swaphubs.com/:path*',
-        permanent: true,
-      },
+
       // Eski sayfa → Yeni sayfa (301)
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
@@ -56,6 +52,7 @@ const nextConfig = {
         destination: '/online-tailor-service/:path*',
         permanent: true,
       },
+
       // Büyük harf URL normalize → küçük harf (301)
       {
         source: '/Terzi',
