@@ -29,18 +29,11 @@ const nextConfig = {
   },
 
   // ─── REDIRECTS ────────────────────────────────────────────────────────────
+  // NOT: www ve HTTP→HTTPS redirect'leri kaldırıldı.
+  // Vercel Dashboard zaten swaphubs.com → www.swaphubs.com redirect yapıyor.
+  // Bu kuralların ikisi birden olunca Google redirect döngüsüne giriyordu.
   async redirects() {
     return [
-      // www olmayan → www (301)
-      // NOT: HTTP→HTTPS redirect kaldırıldı. Vercel bunu otomatik halleder.
-      // O kural x-forwarded-proto döngüsüne yol açıyordu → Google redirect hatası.
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'swaphubs.com' }],
-        destination: 'https://www.swaphubs.com/:path*',
-        permanent: true,
-      },
-
       // Eski sayfa → Yeni sayfa (301)
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
