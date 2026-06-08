@@ -29,21 +29,12 @@ const nextConfig = {
   },
 
   // ─── REDIRECTS ────────────────────────────────────────────────────────────
-  // KRİTİK: Redirect zinciri (A→B→C) oluşturmayın.
-  // Sorunlu eski zincir:
-  //   /antalya-bay-tailor-... → /online-tailor-service → /online-terzi-hizmeti
-  // Çözüm: tüm eski URL'ler direkt son hedefe (tek adım).
+  // www redirect KALDIRILDI — Vercel Dashboard'da zaten var, ikisi çakışınca
+  // ERR_TOO_MANY_REDIRECTS hatası oluşuyordu.
   async redirects() {
     return [
-      // ── www olmayan → www (301) ──────────────────────────────────────────
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'swaphubs.com' }],
-        destination: 'https://www.swaphubs.com/:path*',
-        permanent: true,
-      },
 
-      // ── Eski URL'ler → doğrudan son hedef (zincir yok) ──────────────────
+      // Eski URL → doğrudan son hedef (tek adım)
       {
         source: '/antalya-bay-tailor-online-terzi-utu-hizmeti',
         destination: '/online-terzi-hizmeti',
@@ -54,7 +45,6 @@ const nextConfig = {
         destination: '/online-terzi-hizmeti',
         permanent: true,
       },
-      // Eğer /online-tailor-service ayrı bir Next.js sayfanız VARSA bu iki satırı SİLİN
       {
         source: '/online-tailor-service',
         destination: '/online-terzi-hizmeti',
@@ -66,7 +56,7 @@ const nextConfig = {
         permanent: true,
       },
 
-      // ── Büyük harf → küçük harf normalize ───────────────────────────────
+      // Büyük harf → küçük harf
       {
         source: '/Terzi',
         destination: '/terzi',
@@ -113,7 +103,8 @@ const nextConfig = {
   // ─── HEADERS ──────────────────────────────────────────────────────────────
   async headers() {
     return [
-      // Tüm sayfalar — güvenlik + SEO
+
+      // Tüm sayfalar — güvenlik
       {
         source: '/(.*)',
         headers: [
@@ -146,7 +137,7 @@ const nextConfig = {
         ],
       },
 
-      // Sitemap cache
+      // Sitemap
       {
         source: '/(sitemap.*).xml',
         headers: [
@@ -164,7 +155,7 @@ const nextConfig = {
         ],
       },
 
-      // Statik dosyalar — 1 yıl cache
+      // Statik dosyalar
       {
         source: '/_next/static/(.*)',
         headers: [
@@ -180,7 +171,7 @@ const nextConfig = {
         ],
       },
 
-      // Favicon + ikonlar
+      // Favicon
       {
         source: '/(favicon.ico|icon.*|apple-icon.*|manifest.json)',
         headers: [
@@ -188,7 +179,7 @@ const nextConfig = {
         ],
       },
 
-      // API routes — no cache, noindex
+      // API — noindex
       {
         source: '/api/(.*)',
         headers: [
@@ -197,7 +188,7 @@ const nextConfig = {
         ],
       },
 
-      // Terzilik sayfaları — SEO header
+      // /terzi SEO headers
       {
         source: '/terzi',
         headers: [
@@ -212,6 +203,8 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
+
+      // /online-terzi-hizmeti SEO headers
       {
         source: '/online-terzi-hizmeti',
         headers: [
