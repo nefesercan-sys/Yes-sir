@@ -5,36 +5,19 @@ export const dynamic = "force-dynamic";
 
 const terziSayfalar = [
   // ─── Ana terzi sayfası ───────────────────────────────────────────────────
-  { url: `${BASE}/terzi`,                                                    priority: "1.0",  freq: "weekly" },
+  { url: `${BASE}/terzi`,                                                   priority: "1.0", freq: "weekly" },
 
   // ─── Terzi şehir sayfaları ───────────────────────────────────────────────
-  { url: `${BASE}/terzi/antalya`,                                            priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/istanbul`,                                           priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/ankara`,                                             priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/izmir`,                                              priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/bursa`,                                              priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/terzi/adana`,                                              priority: "0.85", freq: "weekly" },
+  { url: `${BASE}/terzi/antalya`,                                           priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/istanbul`,                                          priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/ankara`,                                            priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/izmir`,                                             priority: "0.9",  freq: "weekly" },
+  { url: `${BASE}/terzi/bursa`,                                             priority: "0.85", freq: "weekly" },
+  { url: `${BASE}/terzi/adana`,                                             priority: "0.85", freq: "weekly" },
 
   // ─── Tekstil Antalya ─────────────────────────────────────────────────────
-  { url: `${BASE}/tekstil-antalya`,                                          priority: "0.9",  freq: "weekly" },
-
-  // ─── Online Terzi Hizmeti — ana + alt sayfalar ───────────────────────────
-  { url: `${BASE}/online-terzi-hizmeti`,                                     priority: "1.0",  freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/abiye-dikim`,                         priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/gelinlik-dikim`,                      priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/takim-elbise-dikim`,                  priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/uniforma-dikim`,                      priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/spor-giyim-dikim`,                    priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/gece-davet-kiyafeti`,                 priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/muslin-keten-kiyafet`,                priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/gunluk-kiyafet-dikim`,                priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/online-terzi-hizmeti/olcu-rehberi`,                        priority: "0.8",  freq: "monthly" },
-  { url: `${BASE}/online-terzi-hizmeti/kurumsal`,                            priority: "0.8",  freq: "monthly" },
-  { url: `${BASE}/online-terzi-hizmeti/sss`,                                 priority: "0.7",  freq: "monthly" },
-
   { url: `${BASE}/tekstil-antalya`,                                         priority: "0.9",  freq: "weekly" },
-  
-  { url: `${BASE}/terzi`,
+
   // ─── Online Terzi Hizmeti ────────────────────────────────────────────────
   { url: `${BASE}/online-terzi-hizmeti`,                                    priority: "1.0",  freq: "weekly" },
 
