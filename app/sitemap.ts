@@ -4,7 +4,7 @@ import clientPromise from '@/lib/mongodb'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const BASE_URL = 'https://www.swaphubs.com'
+const BASE_URL = 'https://swaphubs.com'
 const SLUG_REGEX = /^[0-9a-f]+$/i
 
 // ─── DB ───────────────────────────────────────────────────────────────────────
