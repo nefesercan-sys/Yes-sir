@@ -85,7 +85,7 @@ const urunler = [
     aciklama:
       'Arıların kovana gelen yabancı maddelere karşı ürettiği doğal kalkan. İşlenmemiş, katkısız ham haliyle. Güçlü antibakteriyel özellikleriyle bilinir.',
     icerik: ['Ham Reçine', 'Bal Mumu', 'Uçucu Yağlar', 'Flavonoidler', 'Fenol Bileşikleri'],
-    gorsel: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&q=80',
+    gorsel: 'https://images.unsplash.com/photo-1595981234058-a9302fb97229?w=600&q=80',
     aktif: true,
     createdAt: new Date(),
   },
@@ -99,7 +99,7 @@ const urunler = [
     aciklama:
       "Arım Balım Çiçeğim'in en sevilen üçlüsü bir arada: 500g yayla balı, 250g çiçek poleni ve 50g ham propolis. Kendinize ya da sevdiklerinize en doğal hediye.",
     icerik: ['500g Yayla Balı', '250g Çiçek Poleni', '50g Ham Propolis', 'Hediye Paketi'],
-    gorsel: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80',
+    gorsel: 'https://images.unsplash.com/photo-1612540139013-a22a8f3d9706?w=600&q=80',
     aktif: true,
     createdAt: new Date(),
   },
@@ -113,7 +113,7 @@ const urunler = [
     aciklama:
       'Sivas dağlarından elle toplanan yabani kuşburnu. C vitamini deposu. Çay olarak demlenir, bal ile karıştırılır ya da direkt tüketilebilir.',
     icerik: ['C Vitamini', 'Antioksidan', 'Doğal Kurutma', 'Elle Toplama'],
-    gorsel: 'https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=600&q=80',
+    gorsel: 'https://images.unsplash.com/photo-1567648547591-9a1e5e5a5a1b?w=600&q=80',
     aktif: true,
     createdAt: new Date(),
   },
@@ -155,7 +155,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      mesaj: `${urunler.length} ürün başarıyla eklendi`,
+      mesaj: `${urunler.length} ürün başarıyla güncellendi`,
       urunler: urunler.map(u => ({ ad: u.ad, fiyat: u.fiyat })),
     });
   } catch (err: any) {
