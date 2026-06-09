@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { TUM_SEKTORLER, ISLEM_TIPLERI, KULLANICI_TIPLERI } from "@/lib/sektorler";
 
-const BASE = "https://www.swaphubs.com";
+const BASE = "https://swaphubs.com";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
