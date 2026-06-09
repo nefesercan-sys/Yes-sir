@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const IS_OBJECTID = /^[0-9a-f]{24}$/i;
-const BASE = "https://www.swaphubs.com";
+const BASE = "https://swaphubs.com"; // ← DÜZELTME BURADA
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
           }
         }
       } catch {}
-      // slug bulunamazsa 404'e gitme, olduğu yerde kal
       return NextResponse.next();
     }
   }
