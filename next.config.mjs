@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 
@@ -27,7 +26,14 @@ const nextConfig = {
   },
 
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.swaphubs.com' }],
+        destination: 'https://swaphubs.com/:path*',
+        permanent: true,
+      },
+    ]
   },
 
   async headers() {
@@ -39,14 +45,8 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(self), payment=()',
-          },
+          { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },
         ],
       },
       {
@@ -62,6 +62,13 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
+      { source: '/giris',             headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/uye-ol',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin(.*)',          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin-ai(.*)',       headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/ilan-ver(.*)',       headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
+      { source: '/ilan-duzenle(.*)',   headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       {
         source: '/terzi',
         headers: [
@@ -76,9 +83,43 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
-    ];
+      {
+        source: '/online-terzi-hizmeti/(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/tekstil-antalya',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-tailor-service',
+        headers: [
+          { key: 'Content-Language', value: 'en, tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/arimbalim',
+        headers: [
+          { key: 'Content-Language', value: 'tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/pamuknest(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+    ]
   },
-};
+}
 
-export default nextConfig;
-
+export default nextConfig
