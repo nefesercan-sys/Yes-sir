@@ -43,6 +43,6 @@ export default function robots(): MetadataRoute.Robots {
       'https://www.swaphubs.com/sitemap-dunya.xml',
       'https://www.swaphubs.com/sitemap-statik.xml',
     ],
-    host: 'https://www.swaphubs.com',
+    host: 'https://swaphubs.com',
   }
 }
