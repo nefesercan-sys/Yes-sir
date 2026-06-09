@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-const BASE = 'https://www.swaphubs.com';
+const BASE = 'https://swaphubs.com';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
