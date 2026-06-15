@@ -1,740 +1,734 @@
 'use client';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
 const PHONE = '905318986418';
 const WA = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 
-const C = {
-  tr: {
-    badge: '✦ Antalya · Terzi Can', h1: "Antalya'nın", h1em: 'Terzisi',
-    sub: 'Erkek · Bayan · Çocuk · Tadilat · Üniforma · Nakış · Fason · Kuru Temizleme',
-    waBtn: "WhatsApp'tan Yazın", downBtn: 'Hizmetleri Gör ↓',
-    waMsg: 'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',
-    mobileMsg: 'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',
-    s_services: 'Hizmetlerimiz', s_why: 'Neden Biz?', s_faq: 'Sık Sorulan Sorular',
-    s_reviews: 'Müşteri Yorumları', s_areas: 'Hizmet Bölgeleri', s_contact: 'Bize Ulaşın',
-    s_prices: 'Terzi Fiyatları 2025–2026', s_mobile: 'Terzi Servisi',
-    mobileHeading: 'Kapınıza Geliyoruz',
-    mobileDesc: "Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz. Adresinize geliyor, ölçü alıyor, dikip tekrar teslim ediyoruz. Otel, ev, işyeri — fark etmez.",
-    mobileCta: '🚗 Terzi Servisi Talep Et',
-    steps: [['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']] as [string,string,string][],
-    areaLabel: 'İlçeye tıklayın — mahalleleri görün',
-    quoteBtn: '📲 Ücretsiz Fiyat Teklifi Al', bulkBtn: '🏭 Toplu Üniforma Teklifi', mapBtn: '📍 Google Maps',
-    hours: '09:00–19:00 · Pzt–Cmt',
-    faq: [
-      ['Paça kısaltma kaç lira? 2025–2026 fiyatı?', "Paça kısaltma ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp'tan kıyafetinizin fotoğrafını gönderin — 30 dakika içinde fiyat bildiririz."],
-      ['Fermuar değişimi kaç lira? Kot, mont, ceket, sweatshirt?', "Pantolon/kot fermuarı ₺120'den, ceket fermuarı ₺200'den, mont fermuarı ₺300'den başlar. Sweatshirt ve çanta fermuarı da yapılır. Aynı gün teslim mümkündür."],
-      ['Eve veya otele gelen terzi Antalya?', "Evet! Araçlı terzi servisimizle Antalya'nın tüm ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin, teslim etsin."],
-      ['Mezuniyet abiye tamiri ve kısaltması?', 'Evet, mezuniyet sezonunda (Mayıs–Haziran) abiye tamiri, kısaltma ve tadilatı ekspres 24 saatte yapıyoruz.'],
-      ['Düğün sezonu gelinlik tadilatı yapıyor musunuz?', 'Evet, Nisan–Ekim düğün sezonunda gelinlik tadilatı, kısaltma ve damatlık tadilatı yapıyoruz.'],
-      ['Otel ve restoran üniforması üretimi yapıyor musunuz?', 'Evet. Otel personel, resepsiyon, kat görevlisi, aşçı, garson, meydancı, kapıcı, güvenlik, spa, animatör üniforması üretiyoruz. Tasarım + kalıp + seri imalat + nakış hepsi tek elden.'],
-      ['Sweatshirt ve eşofman dikimi yapılıyor mu?', 'Evet. Sweatshirt, eşofman, kapüşonlu, polo yaka dikimi. Nakış ve baskıyla kişiselleştirme, seri üretim de mümkün.'],
-      ['Büyük beden, bebek kıyafeti, nevresim, perde?', 'Evet; büyük beden dikim, nevresim takımı, perde, bebek elbisesi ve çocuk kıyafeti dikiyoruz. Anne grupları için toplu sipariş indirimi.'],
-    ] as [string,string][],
-    seoIntro: "Antalya'nın köklü terzisi Terzi Can olarak Konyaaltı merkezimizden tüm Antalya ilçelerine hizmet veriyoruz. Paça kısaltma, pantolon kısaltma, elbise daraltma, fermuar değişimi, etek kısaltma, abiye tamiri, kıyafet tamiri, kuru temizleme ve ütü hizmetlerinin yanı sıra otel üniforma, aşçı üniforma, garson üniforma, resepsiyon üniforma, doktor üniforma, okul üniforma ve spor üniforma üretimi yapıyoruz. Sweatshirt ve eşofman dikimi, nakış ve logo baskı hizmetleri de sunulmaktadır. Eve gelen terzi, otele gelen terzi ve araçlı terzi servisimizle kapınıza kadar geliyoruz.",
-  },
-  en: {
-    badge: '✦ Antalya · Tailor Can', h1: "Antalya's", h1em: 'Master Tailor',
-    sub: 'Men · Women · Children · Alterations · Uniforms · Embroidery · Dry Cleaning',
-    waBtn: 'WhatsApp Us Now', downBtn: 'View Services ↓',
-    waMsg: 'Hello, I would like information about your tailoring service.',
-    mobileMsg: 'Hello, I would like to use your mobile tailor service. Can you come to my address?',
-    s_services: 'Services', s_why: 'Why Us?', s_faq: 'FAQ',
-    s_reviews: 'Reviews', s_areas: 'Service Areas', s_contact: 'Contact Us',
-    s_prices: 'Price List 2025–2026', s_mobile: 'Mobile Tailor',
-    mobileHeading: 'We Come to You',
-    mobileDesc: 'Our mobile tailor service covers all of Antalya. We visit your address, take measurements on-site, complete the work and deliver back to your door. Hotel, home or office — no problem.',
-    mobileCta: '🚗 Request Mobile Tailor',
-    steps: [['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']] as [string,string,string][],
-    areaLabel: 'Tap a district to see neighborhoods',
-    quoteBtn: '📲 Get Free Quote', bulkBtn: '🏭 Bulk Uniform Quote', mapBtn: '📍 Google Maps',
-    hours: '09:00–19:00 · Mon–Sat',
-    faq: [
-      ['How much does trouser hemming cost?', 'Trouser hemming starts from ₺150. WhatsApp us a photo for a free quote in 30 minutes.'],
-      ['How much does zip replacement cost?', 'Trousers/jeans from ₺120, jacket from ₺200, coat from ₺300. Same-day service available.'],
-      ['Do you come to my hotel or home?', 'Yes! Our mobile tailor covers all Antalya districts. Share your location on WhatsApp — we come to you, measure, tailor and deliver.'],
-      ['Do you alter graduation dresses?', 'Yes — express 24h alterations and shortening for graduation dresses in season (May–June).'],
-      ['Do you do wedding dress alterations?', 'Yes — hemming, taking in, shoulder adjustments for all bridal wear. April–October season.'],
-      ['Do you produce hotel and restaurant uniforms?', 'Yes — hotel staff, reception, chef, waiter, valet, security, spa uniforms. Design + pattern + mass production + embroidery, all in one.'],
-      ['Do you sew sweatshirts and tracksuits?', 'Yes — hoodies, polo necks, printed/embroidered sweatshirts, mass production.'],
-      ['Plus-size, baby clothes, curtains?', 'Yes — plus-size clothing, baby dresses, curtains, bed linen. Group discounts for parent communities.'],
-    ] as [string,string][],
-    seoIntro: "Tailor Can — Antalya's most experienced English-speaking tailor. Trouser hemming, dress alterations, zip replacement, size reduction, dry cleaning, ironing, pattern making, custom design and mass production. Hotel, restaurant, medical and school uniform production. Sweatshirt sewing, embroidery, logo printing. Express 24–48h service. Hotel pickup and delivery across all Antalya districts.",
-  },
-  ru: {
-    badge: '✦ Анталья · Портной Кан', h1: 'Лучший', h1em: 'Портной Антальи',
-    sub: 'Мужская · Женская · Детская · Пошив · Химчистка · Форма · Вышивка',
-    waBtn: 'Написать в WhatsApp', downBtn: 'Смотреть услуги ↓',
-    waMsg: 'Здравствуйте, хотел бы узнать о ваших услугах портного.',
-    mobileMsg: 'Здравствуйте, хочу воспользоваться выездным сервисом. Можете приехать по адресу?',
-    s_services: 'Услуги', s_why: 'Почему мы?', s_faq: 'Вопросы и ответы',
-    s_reviews: 'Отзывы', s_areas: 'Районы обслуживания', s_contact: 'Связаться',
-    s_prices: 'Цены 2025–2026', s_mobile: 'Выездной портной',
-    mobileHeading: 'Приедем к вам',
-    mobileDesc: 'Наш выездной портной обслуживает всю Анталью. Приедем по адресу, снимем мерки, сошьём в ателье и доставим. Отель, дом или офис — без проблем.',
-    mobileCta: '🚗 Вызвать портного',
-    steps: [['📍','Укажите адрес','Отправьте локацию в WhatsApp'],['📏','Снятие мерок','Портной приедет к вам'],['✂️','Пошив в ателье','По вашим меркам'],['🚗','Доставим к вам','В назначенное время']] as [string,string,string][],
-    areaLabel: 'Нажмите на район для просмотра',
-    quoteBtn: '📲 Бесплатная оценка', bulkBtn: '🏭 Оптовый заказ формы', mapBtn: '📍 Google Maps',
-    hours: '09:00–19:00 · Пн–Сб',
-    faq: [
-      ['Сколько стоит подгонка брюк в 2025–2026?', 'Подгонка брюк от ₺150. Отправьте фото в WhatsApp — ответим за 30 минут.'],
-      ['Сколько стоит замена молнии?', 'Брюки/джинсы от ₺120, пиджак от ₺200, пальто от ₺300. Срочный ремонт в тот же день.'],
-      ['Есть ли выезд на дом или в отель?', 'Да! Выездной портной работает по всей Анталье. Пришлите локацию в WhatsApp — приедем к вам.'],
-      ['Подгонка выпускного платья срочно?', 'Да — экспресс 24 часа в сезон выпускных (май–июнь).'],
-      ['Подгонка свадебного платья?', 'Да — укорачивание, ушивание, плечи. Апрель–октябрь.'],
-      ['Производство формы для отелей и ресторанов?', 'Да — гостиничная форма, ресепшн, повара, официанты, охрана, спа. Дизайн + лекала + серийное производство + вышивка.'],
-      ['Пошив толстовок и спортивных костюмов?', 'Да — худи, поло, с принтом, с вышивкой, серийное производство.'],
-      ['Большие размеры, детская одежда, шторы?', 'Да — большие размеры, детская одежда, шторы, постельное бельё. Скидки для групп.'],
-    ] as [string,string][],
-    seoIntro: 'Портной Кан — опытный портной в Анталье, говорим по-русски. Подгонка брюк, замена молнии, укорачивание юбок, ремонт платьев, пошив на заказ, химчистка, глажка, выездной портной. Форма для гостиниц, ресторанов, медицины и школ. Пошив толстовок, вышивка. Экспресс 24–48 часов. Забор и доставка в любой отель Антальи.',
-  },
-  de: {
-    badge: '✦ Antalya · Schneider Can', h1: 'Antalyas', h1em: 'Meisterschneider',
-    sub: 'Herren · Damen · Kinder · Änderungen · Uniformen · Stickerei · Reinigung',
-    waBtn: 'WhatsApp schreiben', downBtn: 'Leistungen ansehen ↓',
-    waMsg: 'Hallo, ich möchte Informationen über Ihren Schneiderservice erhalten.',
-    mobileMsg: 'Hallo, ich möchte den mobilen Schneiderdienst nutzen. Können Sie kommen?',
-    s_services: 'Leistungen', s_why: 'Warum wir?', s_faq: 'Häufige Fragen',
-    s_reviews: 'Kundenbewertungen', s_areas: 'Servicegebiete', s_contact: 'Kontakt',
-    s_prices: 'Preisliste 2025–2026', s_mobile: 'Mobiler Schneiderdienst',
-    mobileHeading: 'Wir kommen zu Ihnen',
-    mobileDesc: 'Unser mobiler Schneiderdienst ist in ganz Antalya verfügbar. Wir kommen zu Ihrer Adresse, nehmen Maße, schneidern im Atelier und liefern zurück. Hotel, Zuhause oder Büro — kein Problem.',
-    mobileCta: '🚗 Mobilen Schneider anfragen',
-    steps: [['📍','Adresse mitteilen','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt zu Ihnen'],['✂️','Atelier','Nach Ihrem Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']] as [string,string,string][],
-    areaLabel: 'Bezirk antippen für Stadtteile',
-    quoteBtn: '📲 Kostenloses Angebot', bulkBtn: '🏭 Uniform Großauftrag', mapBtn: '📍 Google Maps',
-    hours: '09:00–19:00 · Mo–Sa',
-    faq: [
-      ['Was kostet Hosenänderung 2025–2026?', 'Hosenänderung ab ₺150. Foto per WhatsApp senden — Antwort in 30 Minuten.'],
-      ['Was kostet ein Reißverschluss-Ersatz?', 'Hosen/Jeans ab ₺120, Jacke ab ₺200, Mantel ab ₺300. Expressdienst möglich.'],
-      ['Kommen Sie ins Hotel oder nach Hause?', 'Ja! Mobiler Schneiderdienst in ganz Antalya. Standort per WhatsApp — wir kommen zu Ihnen.'],
-      ['Abendkleid kürzen für Abschlussfeier?', 'Ja — Express 24h in der Abschlusszeit (Mai–Juni).'],
-      ['Brautkleid-Änderungen in der Hochzeitssaison?', 'Ja — kürzen, einengen, Schulteranpassung. April–Oktober.'],
-      ['Produzieren Sie Hotel- und Restaurantuniformen?', 'Ja — Hotelpersonal, Rezeption, Köche, Kellner, Sicherheit, Spa. Design + Schnittmuster + Serienproduktion + Stickerei.'],
-      ['Sweatshirts und Trainingsanzüge nähen?', 'Ja — Hoodies, Polo, bedruckt/gestickt, Serienproduktion.'],
-      ['Übergrößen, Kinderkleidung, Vorhänge?', 'Ja — Übergrößen, Kinderkleidung, Vorhänge, Bettwäsche. Gruppenrabatte verfügbar.'],
-    ] as [string,string][],
-    seoIntro: 'Schneider Can — erfahrener Schneider in Antalya mit deutschsprachigem Service. Hosenänderungen, Reißverschluss-Ersatz, Kleiderreparatur, Maßanfertigung, chemische Reinigung, Bügeln, mobiler Schneider. Uniformproduktion für Hotels, Restaurants, Medizin und Schulen. Sweatshirt nähen, Stickerei. Express 24–48h. Abholung und Lieferung ins Hotel.',
-  },
-};
+/* ─── IMAGES ─────────────────────────────────────────────────────────────── */
+// High-fashion, couture, atelier — warm-lit, editorial quality
+const HERO_IMAGES = [
+  { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=90&auto=format&fit=crop', alt: 'Haute couture kumaş — Terzi Can Antalya' },
+  { src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&q=90&auto=format&fit=crop', alt: 'Moda elbise dikimi — Terzi Can Antalya' },
+  { src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1800&q=90&auto=format&fit=crop', alt: 'Lüks moda kıyafet — Terzi Can Antalya' },
+  { src: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1800&q=90&auto=format&fit=crop', alt: 'Haute couture moda modeli — Terzi Can Antalya' },
+];
+
+const FILM_STRIP = [
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=600&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80&auto=format&fit=crop',
+];
 
 const SERVICES = [
   {
-    icon: '✂️',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&auto=format&fit=crop',
-    alt: 'Terzi paça kısaltma ve elbise tadilat — Terzi Can Antalya',
-    tr: { n: 'Tamir & Tadilat', d: 'Paça kısaltma · etek kısaltma · kol kısaltma · elbise daraltma · ceket daraltma · bel alma · fermuar değişimi · yırtık onarımı · düğme dikimi · astar değişimi · cep tamiri. Her tür kıyafette.', p: '₺120+' },
-    en: { n: 'Repairs & Alterations', d: 'Trouser hemming · skirt shortening · sleeve shortening · dress/jacket taking in · zip replacement · tear repair · button sewing · lining replacement. All garments.', p: '₺120+' },
-    ru: { n: 'Ремонт и переделка', d: 'Подгонка брюк · укорачивание юбок/рукавов · заужение платья/пиджака · замена молнии · ремонт разрывов · пришивание пуговиц · замена подкладки.', p: '₺120+' },
-    de: { n: 'Reparaturen & Änderungen', d: 'Hose kürzen · Rock kürzen · Ärmel kürzen · Kleid/Jacke einengen · Reißverschluss · Riss reparieren · Knöpfe annähen · Futter ersetzen.', p: '₺120+' },
+    icon: '✂️', id: 'tadilat',
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop',
+    alt: 'Paça kısaltma pantolon kısaltma tadilat Antalya — Terzi Can',
+    tr: { n: 'Tamir & Tadilat', d: 'Paça kısaltma · pantolon kısaltma · etek kısaltma · kol kısaltma · elbise daraltma · fermuar değişimi · yırtık onarımı · düğme dikimi', p: '₺120+' },
+    en: { n: 'Repairs & Alterations', d: 'Trouser hemming · skirt shortening · sleeve shortening · dress taking in · zip replacement · tear repair · button sewing', p: '₺120+' },
+    ru: { n: 'Ремонт и переделка', d: 'Подгонка брюк · укорачивание юбок · заужение платья · замена молнии · ремонт разрывов', p: '₺120+' },
+    de: { n: 'Reparaturen & Änderungen', d: 'Hose kürzen · Rock kürzen · Kleid einengen · Reißverschluss · Riss reparieren', p: '₺120+' },
   },
   {
-    icon: '👗',
-    img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=700&q=75&auto=format&fit=crop',
-    alt: 'Özel dikim elbise ve takım elbise — Terzi Can Antalya',
-    tr: { n: 'Bayan & Erkek Özel Dikim', d: 'Elbise · bluz · etek · tulum · abiye · gelinlik · damatlık · takım elbise · gömlek · ceket · blazer · smoking dikimi. Kendi kumaşınızla ya da seçkin stoğumuzdan ölçüye özel.', p: '₺600+' },
-    en: { n: 'Custom Tailoring', d: 'Dresses · blouses · skirts · jumpsuits · evening gowns · wedding dresses · suits · shirts · jackets · blazers · tuxedos. Your fabric or ours. Made to exact measure.', p: '₺600+' },
-    ru: { n: 'Пошив на заказ', d: 'Платья · блузки · юбки · вечерние платья · свадебные платья · костюмы · рубашки · пиджаки · смокинги. Ваша ткань или наша. Точно по меркам.', p: '₺600+' },
-    de: { n: 'Maßanfertigung', d: 'Kleider · Blusen · Röcke · Abendkleider · Brautkleider · Anzüge · Hemden · Jacken · Blazer · Smoking. Ihr Stoff oder unserer. Genau nach Maß.', p: '₺600+' },
+    icon: '👔', id: 'bay-terzi',
+    img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=85&auto=format&fit=crop',
+    alt: 'Bay terzi erkek takım elbise dikimi Antalya — Terzi Can',
+    tr: { n: 'Bay Terzi', d: 'Erkek takım elbise dikimi · pantolon kısaltma · gömlek dikimi · ceket tadilatı · blazer · smoking · damatlık', p: '₺150+' },
+    en: { n: "Men's Tailor", d: "Bespoke suits · trouser hemming · shirt making · jacket alterations · blazer · tuxedo · groom suit", p: '₺150+' },
+    ru: { n: 'Мужской портной', d: 'Пошив костюмов · подгонка брюк · рубашки · пиджаки · смокинг · костюм жениха', p: '₺150+' },
+    de: { n: 'Herrenschneider', d: 'Maßanzüge · Hosenänderungen · Hemden · Jacken · Blazer · Smoking · Bräutigamanzug', p: '₺150+' },
   },
   {
-    icon: '👶',
-    img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=700&q=75&auto=format&fit=crop',
-    alt: 'Çocuk ve bebek kıyafeti dikimi büyük beden — Terzi Can Antalya',
-    tr: { n: 'Çocuk · Bebek · Büyük Beden', d: 'Bebek elbisesi · çocuk kıyafeti · okul kıyafeti · kostüm dikimi. Büyük beden elbise · pantolon · gömlek; beden seti çıkarma, özel kalıp. Anne grubu toplu sipariş indirimi.', p: '₺200+' },
-    en: { n: 'Children · Baby · Plus Size', d: "Baby dresses · children's clothing · school uniforms · costumes. Plus-size dresses · trousers · shirts; custom pattern sets. Group discounts for parent communities.", p: '₺200+' },
-    ru: { n: 'Детская · Большие размеры', d: 'Одежда для малышей · детская одежда · школьная форма · костюмы. Одежда больших размеров, индивидуальные лекала. Скидки для мам-групп.', p: '₺200+' },
-    de: { n: 'Kinder · Baby · Übergrößen', d: 'Babykleider · Kinderkleidung · Schulkleidung · Kostüme. Übergrößen: Kleider, Hosen, Hemden; individuelle Schnittmuster. Gruppenrabatt.', p: '₺200+' },
+    icon: '👗', id: 'bayan-terzi',
+    img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=85&auto=format&fit=crop',
+    alt: 'Bayan terzi kadın elbise dikimi abiye Antalya — Terzi Can',
+    tr: { n: 'Bayan Terzi', d: 'Kadın elbise dikimi · bluz · etek kısaltma · elbise daraltma · abiye tamiri · gelinlik tadilatı · büyük beden', p: '₺200+' },
+    en: { n: "Women's Tailor", d: "Dress making · blouse · skirt shortening · dress alterations · evening gown repair · wedding dress · plus size", p: '₺200+' },
+    ru: { n: 'Женский портной', d: 'Платья · блузки · юбки · подгонка · вечерние платья · свадебные платья · большие размеры', p: '₺200+' },
+    de: { n: 'Damenschneiderin', d: 'Kleider · Blusen · Röcke kürzen · Kleider ändern · Abendkleider · Brautkleid · Übergrößen', p: '₺200+' },
   },
   {
-    icon: '🏨',
-    img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=700&q=75&auto=format&fit=crop',
-    alt: 'Otel üniforma aşçı garson personel dikimi — Terzi Can Antalya',
-    tr: { n: 'Üniforma Üretimi', d: 'Otel personel · resepsiyon · kat görevlisi · aşçı · garson · meydancı · kapıcı · güvenlik · spa · animatör üniforma. Doktor · hemşire · okul · spor takımı. Tasarım + kalıp + seri imalat + nakış tek elden.', p: 'Teklif Al' },
-    en: { n: 'Uniform Production', d: 'Hotel staff · reception · housekeeping · chef · waiter · valet · security · spa · animation. Doctor · nurse · school · sports teams. Design + pattern + mass production + embroidery all in one.', p: 'Get Quote' },
-    ru: { n: 'Производство формы', d: 'Гостиничный персонал · ресепшн · горничные · повара · официанты · охрана · спа · аниматоры. Врачи · медсёстры · школа · спорт. Дизайн + лекала + серийное производство + вышивка.', p: 'Запрос цены' },
-    de: { n: 'Uniformproduktion', d: 'Hotelpersonal · Rezeption · Zimmermädchen · Köche · Kellner · Sicherheit · Spa · Animation. Ärzte · Krankenschwestern · Schule · Sport. Design + Schnittmuster + Serienproduktion + Stickerei.', p: 'Angebot' },
-  },
-  {
-    icon: '🪡',
-    img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=75&auto=format&fit=crop',
-    alt: 'Nakış logo baskı sweatshirt dikimi — Terzi Can Antalya',
-    tr: { n: 'Nakış · Baskı · Sweatshirt', d: 'Logo nakışı · isim nakışı · üniforma nakışı · dijital baskı · transfer baskı · serigrafi. Sweatshirt · eşofman · kapüşonlu · polo yaka dikimi. Seri üretim için uygun fiyatlı.', p: '₺100+' },
-    en: { n: 'Embroidery · Print · Sweatshirt', d: 'Logo embroidery · name embroidery · uniform embroidery · digital print · screen print. Sweatshirt · tracksuit · hoodie · polo sewing. Affordable for mass production.', p: '₺100+' },
-    ru: { n: 'Вышивка · Печать · Толстовки', d: 'Вышивка логотипа · имена · форма · цифровая печать · трафаретная печать. Пошив толстовок · спортивных костюмов · худи · поло. Для серийного производства.', p: '₺100+' },
-    de: { n: 'Stickerei · Druck · Sweatshirt', d: 'Logo-Stickerei · Namens-Stickerei · Uniformstickerei · Digitaldruck · Siebdruck. Sweatshirt · Trainingsanzug · Hoodie · Polo nähen. Für Serienproduktion.', p: '₺100+' },
-  },
-  {
-    icon: '🧺',
-    img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=75&auto=format&fit=crop',
-    alt: 'Kuru temizleme çamaşır ütü hizmeti Antalya — Terzi Can',
-    tr: { n: 'Kuru Temizleme & Çamaşır', d: 'Kuru temizleme · çamaşır yıkama · ütü hizmeti. Otel ve adreslerden kurye ile alım. 24 saatte teslim. Turistler için ekspres servis.', p: '₺300+' },
-    en: { n: 'Dry Cleaning & Laundry', d: 'Dry cleaning · laundry · ironing. Courier pickup from hotels and addresses. 24-hour express turnaround. Express service for tourists.', p: '₺300+' },
-    ru: { n: 'Химчистка и стирка', d: 'Химчистка · стирка · глажка. Курьер заберёт из отеля или по адресу. Экспресс за 24 часа. Для туристов.', p: '₺300+' },
-    de: { n: 'Reinigung & Wäsche', d: 'Chemische Reinigung · Wäsche · Bügeln. Kurierabholung im Hotel oder an der Adresse. 24-Stunden-Express. Für Touristen.', p: '₺300+' },
-  },
-  {
-    icon: '💍',
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=75&auto=format&fit=crop',
+    icon: '💍', id: 'gelinlik',
+    img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=85&auto=format&fit=crop',
     alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can',
-    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık dikimi · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti · gece elbisesi. Kusursuz fit garantisi. Ekspres randevu.', p: '₺500+' },
-    en: { n: 'Wedding · Evening · Special', d: 'Wedding dress sewing · bridal alterations · groom suit · evening gown sewing/repair · engagement dress. Perfect fit guaranteed. Express appointments.', p: '₺500+' },
-    ru: { n: 'Свадьба · Вечер · Особый день', d: 'Пошив свадебного платья · подгонка · смокинг · вечернее платье · ремонт вечернего платья. Идеальная посадка гарантирована.', p: '₺500+' },
-    de: { n: 'Hochzeit · Abend · Besonderer Anlass', d: 'Brautkleid nähen · Anpassung · Bräutigamanzug · Abendkleid nähen/reparieren. Perfekte Passform garantiert.', p: '₺500+' },
+    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti', p: '₺500+' },
+    en: { n: 'Wedding · Evening · Special', d: 'Wedding dress · bridal alterations · groom suit · evening gown · engagement dress. Perfect fit guaranteed.', p: '₺500+' },
+    ru: { n: 'Свадьба · Вечер · Торжество', d: 'Свадебное платье · подгонка · смокинг · вечернее платье · платье на помолвку.', p: '₺500+' },
+    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid · Anpassung · Smoking · Abendkleid · Verlobungskleid. Perfekte Passform.', p: '₺500+' },
   },
   {
-    icon: '🏭',
-    img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=75&auto=format&fit=crop',
-    alt: 'Kalıp fason seri imalat kumaş üretim — Terzi Can Antalya',
-    tr: { n: 'Kalıp · Fason · Seri İmalat', d: 'Kalıp çıkarma · model tasarımı · kesim · dikim · ütü · paket. Numune dikimi · prototip · seri imalat · fason üretim. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.', p: 'Teklif Al' },
-    en: { n: 'Pattern · Manufacturing', d: 'Pattern making · model design · cutting · sewing · ironing · packaging. Sample · prototype · mass production · contract manufacturing. Full production for brands, boutiques, e-commerce.', p: 'Get Quote' },
-    ru: { n: 'Лекала · Серийное производство', d: 'Лекала · дизайн · раскрой · пошив · глажка · упаковка. Образцы · прототип · серийное производство. Полный пакет для брендов и интернет-магазинов.', p: 'Запрос цены' },
-    de: { n: 'Schnittmuster · Serienproduktion', d: 'Schnittmuster · Modelldesign · Zuschnitt · Nähen · Bügeln · Verpackung. Muster · Prototyp · Serienproduktion. Für Marken, Boutiquen, E-Commerce.', p: 'Angebot' },
+    icon: '🏨', id: 'uniforma',
+    img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=800&q=85&auto=format&fit=crop',
+    alt: 'Otel üniforma aşçı garson personel dikimi Antalya — Terzi Can',
+    tr: { n: 'Üniforma Üretimi', d: 'Otel personel · resepsiyon · aşçı · garson · güvenlik · spa · animatör · okul · spor takımı. Tasarım + seri imalat + nakış.', p: 'Teklif Al' },
+    en: { n: 'Uniform Production', d: 'Hotel staff · reception · chef · waiter · security · spa · school · sports. Design + mass production + embroidery.', p: 'Get Quote' },
+    ru: { n: 'Производство формы', d: 'Гостиничный персонал · повара · официанты · охрана · спа · школа. Дизайн + серийное производство + вышивка.', p: 'Запрос цены' },
+    de: { n: 'Uniformproduktion', d: 'Hotelpersonal · Köche · Kellner · Sicherheit · Spa · Schule. Design + Serienproduktion + Stickerei.', p: 'Angebot' },
+  },
+  {
+    icon: '🏭', id: 'atolye',
+    img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=85&auto=format&fit=crop',
+    alt: 'Dikiş atölyesi fason seri imalat Antalya — Terzi Can',
+    tr: { n: 'Dikiş Atölyesi · Fason', d: 'Kalıp çıkarma · model tasarımı · numune · prototip · seri imalat · fason üretim. Markalar ve e-ticaret için tam paket.', p: 'Teklif Al' },
+    en: { n: 'Sewing Workshop', d: 'Pattern making · sample · prototype · mass production. Full package for brands, boutiques, e-commerce.', p: 'Get Quote' },
+    ru: { n: 'Швейное ателье', d: 'Лекала · образцы · прототип · серийное производство. Полный пакет для брендов.', p: 'Запрос цены' },
+    de: { n: 'Nähwerkstatt', d: 'Schnittmuster · Muster · Prototyp · Serienproduktion. Für Marken und E-Commerce.', p: 'Angebot' },
+  },
+  {
+    icon: '🪡', id: 'nakis',
+    img: 'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=800&q=85&auto=format&fit=crop',
+    alt: 'Nakış logo baskı sweatshirt dikimi Antalya — Terzi Can',
+    tr: { n: 'Nakış · Baskı · Sweatshirt', d: 'Logo nakışı · isim nakışı · dijital baskı · serigrafi. Sweatshirt · eşofman · kapüşonlu · polo seri dikimi.', p: '₺100+' },
+    en: { n: 'Embroidery · Print', d: 'Logo embroidery · digital print · screen print. Sweatshirt · tracksuit · hoodie · polo mass production.', p: '₺100+' },
+    ru: { n: 'Вышивка · Печать', d: 'Вышивка логотипа · цифровая печать. Толстовки · спортивные костюмы · поло.', p: '₺100+' },
+    de: { n: 'Stickerei · Druck', d: 'Logo-Stickerei · Digitaldruck · Siebdruck. Sweatshirts · Trainingsanzüge · Polo-Produktion.', p: '₺100+' },
+  },
+  {
+    icon: '🧺', id: 'kuru-temizleme',
+    img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=85&auto=format&fit=crop',
+    alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya — Terzi Can',
+    tr: { n: 'Kuru Temizleme & Ütü', d: 'Kuru temizleme · çamaşır yıkama · ütü. Otel ve adreslerden kurye alım. 24 saat ekspres. Turistler için.', p: '₺80+/kg' },
+    en: { n: 'Dry Cleaning & Laundry', d: 'Dry cleaning · laundry · ironing. Hotel courier pickup. 24h express. For tourists.', p: '₺80+/kg' },
+    ru: { n: 'Химчистка · Стирка', d: 'Химчистка · стирка · глажка. Курьер из отеля. Экспресс 24ч.', p: '₺80+/кг' },
+    de: { n: 'Reinigung · Wäsche', d: 'Chemische Reinigung · Wäsche · Bügeln. Kurierabholung im Hotel. 24h Express.', p: '₺80+/kg' },
   },
 ];
 
 const WHY = [
-  { icon: '⚡', tr: ['24–48 Saat Teslimat','Tatildesiniz, beklemenize gerek yok. Ekspres servis garantisi.'], en: ['24–48h Express',"You're on holiday — express service guaranteed."], ru: ['24–48 часов','Вы в отпуске — экспресс-сервис.'], de: ['24–48h Express','Sie sind im Urlaub — kein Warten.'] },
-  { icon: '🚗', tr: ['Araçlı Terzi Servisi','Adresinize gelip ölçü alıyor, bitirince teslim ediyoruz.'], en: ['Mobile Tailor','We come to you, measure on-site and deliver.'], ru: ['Выездной портной','Приедем к вам, снимем мерки и доставим.'], de: ['Mobiler Schneider','Wir kommen zu Ihnen, messen und liefern.'] },
-  { icon: '🌍', tr: ['4 Dilde Hizmet','Türkçe, İngilizce, Rusça, Almanca. Dil engeli yok.'], en: ['4 Languages','Turkish, English, Russian, German — no barrier.'], ru: ['4 языка','Турецкий, английский, русский, немецкий.'], de: ['4 Sprachen','Türkisch, Englisch, Russisch, Deutsch.'] },
-  { icon: '🏨', tr: ['Otele Alım & Teslimat','Tüm Antalya otellerine alım ve teslimat.'], en: ['Hotel Pickup & Delivery','Pickup & delivery to all Antalya hotels.'], ru: ['Забор и доставка в отель','Любой отель Антальи.'], de: ['Hotel Abholung & Lieferung','Alle Antalya-Hotels.'] },
-  { icon: '🏭', tr: ['Üniforma Üretimi','Otel, restoran, sağlık, okul — tasarım + seri imalat.'], en: ['Uniform Production','Hotel, restaurant, medical, school — design & mass production.'], ru: ['Производство формы','Отели, рестораны, медицина, школы.'], de: ['Uniformproduktion','Hotel, Restaurant, Medizin, Schule.'] },
-  { icon: '🪡', tr: ['Nakış & Logo Baskı','Logo nakışı, dijital baskı, serigrafi. Toplu üretim.'], en: ['Embroidery & Print','Logo embroidery, digital print. Bulk production.'], ru: ['Вышивка и печать','Логотип, цифровая печать. Оптом.'], de: ['Stickerei & Druck','Logo-Stickerei, Digitaldruck, Siebdruck.'] },
-  { icon: '💳', tr: ['Döviz Kabul','TL, Euro, Dolar, Ruble kabul ediyoruz.'], en: ['Multi-Currency','TL, Euro, Dollar and Ruble accepted.'], ru: ['Валюта','TL, евро, доллар, рубли.'], de: ['Währungen','TL, Euro, Dollar und Rubel.'] },
-  { icon: '⭐', tr: ['4.9 · 94 Müşteri',"Google'da 4.9 yıldız. Antalya'nın en çok tercih edilen terzisi."], en: ['4.9 · 94 Reviews','4.9 stars on Google. Most recommended tailor in Antalya.'], ru: ['4.9 · 94 клиента','4.9 звезды на Google.'], de: ['4,9 · 94 Bewertungen','4,9 Sterne auf Google.'] },
+  { icon: '⚡', tr:['24–48 Saat','Ekspres teslimat garantisi'], en:['24–48h Express','Guaranteed express delivery'], ru:['24–48 часов','Гарантированная экспресс-доставка'], de:['24–48h Express','Garantierte Expresslieferung'] },
+  { icon: '👔', tr:['Bay & Bayan','Erkek ve kadın kıyafeti uzman ekip'], en:['Men & Women','Specialist team for both'], ru:['Мужской & Женский','Специалисты для мужчин и женщин'], de:['Herren & Damen','Spezialisiert für beide'] },
+  { icon: '🚗', tr:['Araçlı Servis','Eve ve otele gelen terzi'], en:['Mobile Tailor','We come to you'], ru:['Выездной портной','Приедем к вам'], de:['Mobiler Schneider','Kommen zu Ihnen'] },
+  { icon: '🌍', tr:['4 Dil','TR · EN · RU · DE'], en:['4 Languages','TR · EN · RU · DE'], ru:['4 языка','TR · EN · RU · DE'], de:['4 Sprachen','TR · EN · RU · DE'] },
+  { icon: '🏨', tr:['Otele Teslimat','Tüm Antalya otellerine'], en:['Hotel Delivery','All Antalya hotels'], ru:['Доставка в отель','Все отели Антальи'], de:['Hotel Lieferung','Alle Antalya-Hotels'] },
+  { icon: '💳', tr:['Döviz Kabul','TL · EUR · USD · RUB'], en:['Multi-Currency','TL · EUR · USD · RUB'], ru:['Валюта','TL · EUR · USD · RUB'], de:['Währungen','TL · EUR · USD · RUB'] },
+  { icon: '🏭', tr:['Dikiş Atölyesi','Fason + seri imalat'], en:['Sewing Workshop','Manufacturing & mass production'], ru:['Ателье','Серийное производство'], de:['Nähwerkstatt','Serienproduktion'] },
+  { icon: '⭐', tr:['4.9 · 94 Yorum',"Google'da en yüksek puanlı"], en:['4.9 · 94 Reviews','Highest rated in Antalya'], ru:['4.9 · 94 клиента','Лучший рейтинг в Анталье'], de:['4,9 · 94 Bewertungen','Beste Bewertung in Antalya'] },
 ];
 
-// ── itemScope / itemType / itemProp KALDIRILDI ────────────────────────────
-// HTML microdata ile JSON-LD aynı anda kullanılınca Google çakışma
-// yaşatıyor ve "itemReviewed eksik" hatası veriyor.
-// Schema sadece page.tsx içindeki JSON-LD ile sağlanıyor.
 const REVIEWS = [
-  { stars: 5, text: '"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!"', author: 'Murat B.', flag: '🇹🇷', city: 'Antalya', date: 'Ocak 2025' },
-  { stars: 5, text: '"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!"', author: 'Sarah M.', flag: '🇬🇧', city: 'London', date: 'Mayıs 2025' },
-  { stars: 5, text: '"Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!"', author: 'Наталья К.', flag: '🇷🇺', city: 'Москва', date: 'Haziran 2025' },
-  { stars: 5, text: '"Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, Logo-Stickerei, pünktlich geliefert. Ausgezeichnete Qualität!"', author: 'David K.', flag: '🇩🇪', city: 'Berlin', date: 'Şubat 2025' },
-  { stars: 5, text: '"Gelinliğimi mükemmel şekilde teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Hızlı ve kaliteli hizmet!"', author: 'Elif Y.', flag: '🇹🇷', city: 'Antalya', date: 'Nisan 2025' },
-  { stars: 5, text: '"Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!"', author: 'James T.', flag: '🇦🇺', city: 'Sydney', date: 'Mart 2025' },
+  { stars:5, text:'"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım ve seri üretim mükemmeldi!"', author:'Murat B.', flag:'🇹🇷', city:'Antalya', date:'Ocak 2025' },
+  { stars:5, text:'"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit!"', author:'Sarah M.', flag:'🇬🇧', city:'London', date:'Mayıs 2025' },
+  { stars:5, text:'"Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили в отель!"', author:'Наталья К.', flag:'🇷🇺', city:'Москва', date:'Haziran 2025' },
+  { stars:5, text:'"Bestickte Sweatshirts — 30 Stück, pünktlich geliefert. Ausgezeichnete Qualität!"', author:'David K.', flag:'🇩🇪', city:'Berlin', date:'Şubat 2025' },
+  { stars:5, text:'"Gelinliğimi mükemmel teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Harika hizmet!"', author:'Elif Y.', flag:'🇹🇷', city:'Antalya', date:'Nisan 2025' },
+  { stars:5, text:'"Suit altered for a business meeting in 24h. Perfect fit. Best tailor in Antalya!"', author:'James T.', flag:'🇦🇺', city:'Sydney', date:'Mart 2025' },
 ];
 
-const PRICES: Record<Lang, string[][]> = {
-  tr: [['Paça / Etek Kısaltma','₺150+','24 saat'],['Fermuar — Pantolon / Kot','₺120+','Aynı gün'],['Fermuar — Mont / Kaban','₺300+','24 saat'],['Elbise / Ceket Daraltma','₺200+','48 saat'],['Kol Kısaltma (Ceket)','₺200+','48 saat'],['Yırtık Onarımı','₺100+','Aynı gün'],['Gelinlik Tadilatı','₺500+','3–5 gün'],['Abiye Tamiri','₺350+','48 saat'],['Takım Elbise Dikimi','₺2.500+','5–7 gün'],['Sweatshirt Dikimi','₺400+','3–5 gün'],['Kuru Temizleme (Elbise)','₺300+','48 saat'],['Kuru Temizleme (Mont)','₺500+','48 saat'],['Çamaşır & Ütü (kg)','₺80+/kg','24 saat'],['Üniforma (kişi başı)','Teklif','Sipariş miktarına göre']],
-  en: [['Trouser / Skirt Hemming','₺150+','24h'],['Zip — Trousers / Jeans','₺120+','Same day'],['Zip — Coat / Jacket','₺300+','24h'],['Dress / Jacket Taking In','₺200+','48h'],['Sleeve Shortening','₺200+','48h'],['Tear Repair','₺100+','Same day'],['Wedding Dress Alteration','₺500+','3–5 days'],['Evening Gown Repair','₺350+','48h'],['Bespoke Suit','₺2,500+','5–7 days'],['Sweatshirt Sewing','₺400+','3–5 days'],['Dry Cleaning (Dress)','₺300+','48h'],['Dry Cleaning (Coat)','₺500+','48h'],['Laundry & Ironing (kg)','₺80+/kg','24h'],['Uniform (per person)','Quote','Based on qty']],
-  ru: [['Подгонка брюк / юбки','₺150+','24 ч'],['Молния — брюки / джинсы','₺120+','В тот же день'],['Молния — пальто / куртка','₺300+','24 ч'],['Заужение платья / пиджака','₺200+','48 ч'],['Укорочение рукавов','₺200+','48 ч'],['Ремонт разрыва','₺100+','В тот же день'],['Свадебное платье','₺500+','3–5 дней'],['Вечернее платье','₺350+','48 ч'],['Костюм на заказ','₺2.500+','5–7 дней'],['Пошив толстовки','₺400+','3–5 дней'],['Химчистка (платье)','₺300+','48 ч'],['Химчистка (пальто)','₺500+','48 ч'],['Стирка и глажка (кг)','₺80+/кг','24 ч'],['Форма (за чел.)','Запрос','По заказу']],
-  de: [['Hose / Rock kürzen','₺150+','24h'],['Reißverschluss — Hose/Jeans','₺120+','Gleicher Tag'],['Reißverschluss — Mantel','₺300+','24h'],['Kleid / Jacke einengen','₺200+','48h'],['Ärmel kürzen','₺200+','48h'],['Riss reparieren','₺100+','Gleicher Tag'],['Brautkleid Änderung','₺500+','3–5 Tage'],['Abendkleid Reparatur','₺350+','48h'],['Maßanzug','₺2.500+','5–7 Tage'],['Sweatshirt nähen','₺400+','3–5 Tage'],['Reinigung (Kleid)','₺300+','48h'],['Reinigung (Mantel)','₺500+','48h'],['Wäsche & Bügeln (kg)','₺80+/kg','24h'],['Uniform (pro Person)','Angebot','Je nach Menge']],
+const PRICES: Record<Lang,string[][]> = {
+  tr:[['Paça / Pantolon / Etek Kısaltma','₺150+','24 saat'],['Fermuar — Pantolon / Kot','₺120+','Aynı gün'],['Fermuar — Mont / Kaban','₺300+','24 saat'],['Elbise / Ceket Daraltma','₺200+','48 saat'],['Kol Kısaltma','₺200+','48 saat'],['Yırtık Onarımı','₺100+','Aynı gün'],['Erkek Takım Elbise Dikimi','₺2.500+','5–7 gün'],['Erkek Gömlek Dikimi','₺400+','3–5 gün'],['Kadın Elbise Dikimi','₺600+','3–7 gün'],['Gelinlik Tadilatı','₺500+','3–5 gün'],['Abiye Tamiri','₺350+','48 saat'],['Sweatshirt Dikimi','₺400+','3–5 gün'],['Kuru Temizleme (Elbise)','₺300+','48 saat'],['Kuru Temizleme (Mont)','₺500+','48 saat'],['Çamaşır & Ütü (kg)','₺80+/kg','24 saat'],['Üniforma (kişi başı)','Teklif','Sipariş miktarına göre']],
+  en:[['Trouser / Skirt Hemming','₺150+','24h'],['Zip — Trousers / Jeans','₺120+','Same day'],['Zip — Coat','₺300+','24h'],['Dress / Jacket Taking In','₺200+','48h'],['Sleeve Shortening','₺200+','48h'],['Tear Repair','₺100+','Same day'],["Men's Bespoke Suit","₺2,500+",'5–7 days'],["Men's Shirt","₺400+",'3–5 days'],["Women's Dress","₺600+",'3–7 days'],['Wedding Dress Alteration','₺500+','3–5 days'],['Evening Gown Repair','₺350+','48h'],['Sweatshirt','₺400+','3–5 days'],['Dry Cleaning (Dress)','₺300+','48h'],['Dry Cleaning (Coat)','₺500+','48h'],['Laundry & Ironing','₺80+/kg','24h'],['Uniform (per person)','Quote','On quantity']],
+  ru:[['Подгонка брюк / юбки','₺150+','24 ч'],['Молния — брюки','₺120+','В тот же день'],['Молния — пальто','₺300+','24 ч'],['Заужение платья','₺200+','48 ч'],['Укорочение рукавов','₺200+','48 ч'],['Ремонт разрыва','₺100+','В тот же день'],['Мужской костюм','₺2.500+','5–7 дней'],['Мужская рубашка','₺400+','3–5 дней'],['Женское платье','₺600+','3–7 дней'],['Свадебное платье','₺500+','3–5 дней'],['Вечернее платье','₺350+','48 ч'],['Толстовка','₺400+','3–5 дней'],['Химчистка (платье)','₺300+','48 ч'],['Химчистка (пальто)','₺500+','48 ч'],['Стирка и глажка','₺80+/кг','24 ч'],['Форма','Запрос','По заказу']],
+  de:[['Hose / Rock kürzen','₺150+','24h'],['Reißverschluss — Hose','₺120+','Gleicher Tag'],['Reißverschluss — Mantel','₺300+','24h'],['Kleid / Jacke einengen','₺200+','48h'],['Ärmel kürzen','₺200+','48h'],['Riss reparieren','₺100+','Gleicher Tag'],['Herrenmaßanzug','₺2.500+','5–7 Tage'],['Herrenhemd','₺400+','3–5 Tage'],['Damenkleid','₺600+','3–7 Tage'],['Brautkleid','₺500+','3–5 Tage'],['Abendkleid','₺350+','48h'],['Sweatshirt','₺400+','3–5 Tage'],['Reinigung (Kleid)','₺300+','48h'],['Reinigung (Mantel)','₺500+','48h'],['Wäsche & Bügeln','₺80+/kg','24h'],['Uniform','Angebot','Je nach Menge']],
 };
 
 const ILCELER = [
-  { ilce: 'Muratpaşa', m: ['Fener','Kışla','Güzeloba','Balbey','Kaleiçi','Haşimişcan','Yenigün','Meltem','Çağlayan','Bahçelievler','Şirinyalı','Aspendos'] },
-  { ilce: 'Konyaaltı', m: ['Hurma','Sarısu','Liman','Uncalı','Arapsuyu','Gürsu','Kızıltoprak','Çakırlar','Altınkum','Camikebir'] },
-  { ilce: 'Kepez', m: ['Varsak','Santral','Yavuz Selim','Pınarbaşı','Altındağ','Göksu','Şafak','Göçerler','Atatürk','Yeşilbayır','Emek','Teomanpaşa'] },
-  { ilce: 'Lara / Aksu', m: ['Belek','Kadriye','Boğazkent','Çandır','Güneykent','Gebiz','Kundu','Güzeloba','Altıntaş'] },
-  { ilce: 'Kemer', m: ['Kemer Merkez','Beldibi','Göynük','Çamyuva','Tekirova','Arslanbucak','Kiriş'] },
-  { ilce: 'Alanya', m: ['Alanya Merkez','Mahmutlar','Oba','Tosmur','Avsallar','Kestel','Türkler','Konaklı','Cikcilli','Kargıcak'] },
-  { ilce: 'Manavgat / Side', m: ['Manavgat Merkez','Side','Sorgun','Kumköy','Evrenseki','Gündoğdu','Çolaklı','Titreyengöl'] },
-  { ilce: 'Serik / Döşemealtı', m: ['Serik Merkez','Habibler','Yağca','Taşağıl','Döşemealtı Merkez'] },
-  { ilce: 'Kaş · Finike · Diğer', m: ['Kaş Merkez','Kalkan','Finike Merkez','Kumluca','Elmalı','Korkuteli','Akseki'] },
+  {ilce:'Muratpaşa',m:['Fener','Kışla','Güzeloba','Balbey','Kaleiçi','Meltem','Çağlayan','Bahçelievler','Şirinyalı']},
+  {ilce:'Konyaaltı',m:['Hurma','Sarısu','Liman','Uncalı','Arapsuyu','Gürsu','Kızıltoprak','Çakırlar']},
+  {ilce:'Kepez',m:['Varsak','Santral','Pınarbaşı','Altındağ','Göksu','Göçerler','Atatürk','Yeşilbayır']},
+  {ilce:'Lara / Aksu',m:['Belek','Kadriye','Boğazkent','Kundu','Güzeloba','Altıntaş']},
+  {ilce:'Kemer',m:['Kemer Merkez','Beldibi','Göynük','Çamyuva','Tekirova','Kiriş']},
+  {ilce:'Alanya',m:['Alanya Merkez','Mahmutlar','Oba','Tosmur','Avsallar','Kestel','Konaklı']},
+  {ilce:'Manavgat / Side',m:['Manavgat Merkez','Side','Sorgun','Kumköy','Evrenseki']},
+  {ilce:'Serik / Döşemealtı',m:['Serik Merkez','Habibler','Döşemealtı Merkez']},
+  {ilce:'Kaş · Finike · Diğer',m:['Kaş Merkez','Kalkan','Finike','Kumluca','Elmalı']},
 ];
 
-const GALLERY = [
-  { img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80&auto=format&fit=crop', alt: 'Terzi Can atölyesi kumaş ve dikimhane Antalya', tr: 'Atölye', en: 'Atelier', ru: 'Ателье', de: 'Atelier' },
-  { img: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=700&q=80&auto=format&fit=crop', alt: 'Nakış ve dikiş makinesi terzilik Antalya', tr: 'Nakış & Dikim', en: 'Sewing', ru: 'Пошив', de: 'Nähen' },
-  { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&auto=format&fit=crop', alt: 'Gelinlik ve abiye dikimi Antalya terzi', tr: 'Gelinlik', en: 'Bridal', ru: 'Свадьба', de: 'Brautkleid' },
-  { img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop', alt: 'Kumaş ve dikiş malzeme tekstil Antalya', tr: 'Kumaş', en: 'Fabric', ru: 'Ткань', de: 'Stoff' },
-  { img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=700&q=80&auto=format&fit=crop', alt: 'Özel dikim elbise moda kıyafet Antalya', tr: 'Özel Dikim', en: 'Custom', ru: 'Заказ', de: 'Maß' },
-  { img: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&q=80&auto=format&fit=crop', alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya', tr: 'Kuru Temizleme', en: 'Dry Cleaning', ru: 'Химчистка', de: 'Reinigung' },
-];
+const C = {
+  tr:{badge:'✦ Antalya · Terzi Can',h1:"Antalya'nın",h1em:'Terzisi',sub:'Bay Terzi · Bayan Terzi · Dikiş Atölyesi · Tadilat · Üniforma · Nakış · Kuru Temizleme',waBtn:"WhatsApp'tan Yazın",downBtn:'Hizmetleri Gör ↓',waMsg:'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',mobileMsg:'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',s_services:'Hizmetlerimiz',s_why:'Neden Biz?',s_faq:'Sık Sorulan Sorular',s_reviews:'Müşteri Yorumları',s_areas:'Hizmet Bölgeleri',s_contact:'Bize Ulaşın',s_prices:'Terzi Fiyatları 2025–2026',s_mobile:'Terzi Servisi',mobileHeading:'Kapınıza Geliyoruz',mobileDesc:"Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz. Adresinize geliyor, ölçü alıyor, dikip teslim ediyoruz.",mobileCta:'🚗 Terzi Servisi Talep Et',steps:[['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']] as [string,string,string][],areaLabel:'İlçeye tıklayın — mahalleleri görün',quoteBtn:'📲 Ücretsiz Fiyat Teklifi Al',bulkBtn:'🏭 Toplu Üniforma Teklifi',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Pzt–Cmt',bayBayanHeading:'Bay & Bayan Terzi',bayHeading:'Bay Terzi',bayDesc:'Erkek takım elbise dikimi, pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma, blazer, smoking, damatlık dikimi.',bayanHeading:'Bayan Terzi',bayanDesc:'Kadın elbise dikimi, bluz, etek kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi.',atolyeHeading:'Dikiş Atölyesi',atolyeDesc:'Kalıp çıkarma, fason üretim, seri imalat, numune dikimi. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.',faq:[['Paça ve pantolon kısaltma fiyatı? 2025–2026',"₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp'tan fotoğraf gönderin — 30 dk içinde fiyat."],['Bay terzi Antalya — erkek kıyafet dikimi?',"Evet! Erkek takım elbise, pantolon kısaltma, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: +90 531 898 64 18"],['Bayan terzi Antalya — kadın elbise dikimi?',"Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi. WhatsApp: +90 531 898 64 18"],['Dikiş atölyesi Antalya — fason ve seri imalat?',"Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: +90 531 898 64 18"],['Fermuar değişimi kaç lira?',"Pantolon/kot ₺120, ceket ₺200, mont ₺300. Aynı gün teslim."],['Eve veya otele gelen terzi Antalya?',"Evet! Tüm Antalya ilçelerine araçlı servis. WhatsApp'tan konum paylaşın."],['Kuru temizleme ve ütü Antalya?',"Kuru temizleme ₺300, mont ₺500, çamaşır ₺80/kg. Otelden kurye alım. 24 saat."],['Gelinlik ve abiye tadilatı?','Evet. Gelinlik tadilatı ₺500, abiye tamiri ₺350. Nisan–Ekim düğün sezonu.'],['Üniforma üretimi Antalya?','Evet. Otel, aşçı, garson, güvenlik, okul, spor. Tasarım + seri imalat + nakış.'],['Sweatshirt ve eşofman dikimi?','Evet. Seri üretim. Nakış ve baskıyla kişiselleştirme.'],] as [string,string][],seoIntro:"Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Dikiş atölyesi: kalıp, fason, seri imalat. Kuru temizleme ve ütü. Üniforma üretimi. Eve ve otele gelen terzi."},
+  en:{badge:'✦ Antalya · Tailor Can',h1:"Antalya's",h1em:'Master Tailor',sub:"Men's · Women's · Sewing Workshop · Alterations · Uniforms · Embroidery · Dry Cleaning",waBtn:'WhatsApp Us Now',downBtn:'View Services ↓',waMsg:'Hello, I would like information about your tailoring service.',mobileMsg:'Hello, I would like to use your mobile tailor service. Can you come to my address?',s_services:'Services',s_why:'Why Us?',s_faq:'FAQ',s_reviews:'Reviews',s_areas:'Service Areas',s_contact:'Contact',s_prices:'Price List 2025–2026',s_mobile:'Mobile Tailor',mobileHeading:'We Come to You',mobileDesc:'Our mobile tailor service covers all of Antalya. We visit your address, take measurements and deliver back to your door.',mobileCta:'🚗 Request Mobile Tailor',steps:[['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']] as [string,string,string][],areaLabel:'Tap a district to see neighborhoods',quoteBtn:'📲 Get Free Quote',bulkBtn:'🏭 Bulk Uniform Quote',mapBtn:'📍 Google Maps',hours:"09:00–19:00 · Mon–Sat",bayBayanHeading:"Men's & Women's Tailor",bayHeading:"Men's Tailor",bayDesc:"Bespoke suits, trouser hemming, shirt making, jacket alterations, sleeve shortening, blazer, tuxedo, groom suit.",bayanHeading:"Women's Tailor",bayanDesc:"Dress making, blouse, skirt shortening, dress alterations, evening gown repair, wedding dress alterations, plus size, baby clothes.",atolyeHeading:'Sewing Workshop',atolyeDesc:'Pattern making, contract manufacturing, mass production, sample sewing. Full production package for brands, boutiques and e-commerce.',faq:[['How much is trouser hemming in Antalya?','From ₺150. WhatsApp a photo for a free quote in 30 minutes.'],["Do you offer men's tailoring?","Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, groom suits. WhatsApp: +90 531 898 64 18"],["Do you offer women's tailoring?","Yes! Dress making, skirts, evening gown repair, wedding dress alterations, plus size, baby clothes. WhatsApp: +90 531 898 64 18"],['Sewing workshop for mass production?','Yes! Pattern making, prototypes, mass production. Full package for brands. WhatsApp: +90 531 898 64 18'],['Zip replacement cost?','Trousers/jeans ₺120, jacket ₺200, coat ₺300. Same-day available.'],['Do you come to my hotel or home?','Yes! All Antalya districts. Share location on WhatsApp.'],['Dry cleaning and ironing prices?','Dry cleaning ₺300, coat ₺500, laundry ₺80/kg. Hotel courier pickup. 24h express.'],['Wedding and evening gown alterations?','Yes. Wedding dress ₺500, evening gown ₺350. April–October season.'],['Uniform production Antalya?','Yes. Hotel, chef, waiter, security, school, sports. Design + mass production + embroidery.'],['Sweatshirt mass production?','Yes. With embroidery and print. All quantities.'],] as [string,string][],seoIntro:"Tailor Can — Antalya's best English-speaking tailor. Men's: bespoke suits, trouser hemming, shirts. Women's: dress making, alterations, wedding dresses. Sewing workshop: pattern making, mass production. Dry cleaning. Uniform production. Mobile tailor service all Antalya."},
+  ru:{badge:'✦ Анталья · Портной Кан',h1:'Лучший',h1em:'Портной Антальи',sub:'Мужской · Женский · Ателье · Подгонка · Химчистка · Форма · Вышивка',waBtn:'Написать в WhatsApp',downBtn:'Смотреть услуги ↓',waMsg:'Здравствуйте, хотел бы узнать о ваших услугах.',mobileMsg:'Здравствуйте, хочу выездной сервис. Приедете по адресу?',s_services:'Услуги',s_why:'Почему мы?',s_faq:'Вопросы',s_reviews:'Отзывы',s_areas:'Районы',s_contact:'Контакт',s_prices:'Цены 2025–2026',s_mobile:'Выездной портной',mobileHeading:'Приедем к вам',mobileDesc:'Выездной портной по всей Анталье. Приедем, снимем мерки, сошьём и доставим.',mobileCta:'🚗 Вызвать портного',steps:[['📍','Укажите адрес','Локация в WhatsApp'],['📏','Мерки','Портной приедет'],['✂️','Пошив','По меркам'],['🚗','Доставка','В назначенное время']] as [string,string,string][],areaLabel:'Нажмите на район',quoteBtn:'📲 Бесплатная оценка',bulkBtn:'🏭 Оптовый заказ',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Пн–Сб',bayBayanHeading:'Мужской и женский портной',bayHeading:'Мужской портной',bayDesc:'Пошив костюмов, подгонка брюк, рубашки, пиджаки, блейзер, смокинг, костюм жениха.',bayanHeading:'Женский портной',bayanDesc:'Пошив платьев, блузок, укорачивание юбок, подгонка, вечерние платья, свадебные платья, большие размеры.',atolyeHeading:'Швейное ателье',atolyeDesc:'Лекала, серийное производство, образцы. Полный пакет для брендов и интернет-магазинов.',faq:[['Стоимость подгонки брюк в Анталье?','От ₺150. Отправьте фото в WhatsApp — ответим за 30 минут.'],['Есть мужской портной?','Да! Костюмы, брюки, рубашки, пиджаки, смокинг. WhatsApp: +90 531 898 64 18'],['Есть женский портной?','Да! Платья, юбки, вечерние платья, свадебные платья, большие размеры. WhatsApp: +90 531 898 64 18'],['Ателье для серийного производства?','Да! Лекала, образцы, серийное производство. WhatsApp: +90 531 898 64 18'],['Стоимость замены молнии?','Брюки ₺120, пиджак ₺200, пальто ₺300. В тот же день.'],['Выезд в отель или на дом?','Да! По всей Анталье. Локацию в WhatsApp.'],['Химчистка и глажка?','Химчистка ₺300, пальто ₺500, стирка ₺80/кг. Курьер из отеля. 24ч.'],['Подгонка свадебного платья?','Да. Свадебное ₺500, вечернее ₺350. Апрель–октябрь.'],['Производство формы?','Да. Гостиницы, повара, официанты, охрана, школа. Дизайн + производство.'],['Пошив толстовок?','Да. Серийное производство. С вышивкой и печатью.'],] as [string,string][],seoIntro:'Портной Кан — опытный портной в Анталье. Мужской портной: костюмы, брюки, рубашки. Женский: платья, подгонка, свадебные платья. Ателье: лекала, серийное производство. Химчистка. Форма для отелей. Выездной сервис.'},
+  de:{badge:'✦ Antalya · Schneider Can',h1:'Antalyas',h1em:'Meisterschneider',sub:'Herren · Damen · Nähwerkstatt · Änderungen · Uniformen · Stickerei · Reinigung',waBtn:'WhatsApp schreiben',downBtn:'Leistungen ↓',waMsg:'Hallo, ich möchte Informationen über Ihren Schneiderservice.',mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst nutzen.',s_services:'Leistungen',s_why:'Warum wir?',s_faq:'Fragen',s_reviews:'Bewertungen',s_areas:'Servicegebiete',s_contact:'Kontakt',s_prices:'Preise 2025–2026',s_mobile:'Mobiler Schneider',mobileHeading:'Wir kommen zu Ihnen',mobileDesc:'Unser mobiler Schneiderdienst in ganz Antalya. Wir kommen, nehmen Maße, schneidern und liefern.',mobileCta:'🚗 Mobilen Schneider anfragen',steps:[['📍','Adresse','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt'],['✂️','Atelier','Nach Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']] as [string,string,string][],areaLabel:'Bezirk antippen',quoteBtn:'📲 Kostenloses Angebot',bulkBtn:'🏭 Uniform Großauftrag',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Mo–Sa',bayBayanHeading:'Herren- & Damenschneider',bayHeading:'Herrenschneider',bayDesc:'Maßanzüge, Hosenänderungen, Hemden, Jacken, Blazer, Smoking, Bräutigamanzug.',bayanHeading:'Damenschneiderin',bayanDesc:'Kleider nähen, Blusen, Röcke kürzen, Kleider ändern, Abendkleider, Brautkleid, Übergrößen.',atolyeHeading:'Nähwerkstatt',atolyeDesc:'Schnittmuster, Lohnfertigung, Serienproduktion. Vollständiges Paket für Marken und E-Commerce.',faq:[['Hosenänderung Preis in Antalya?','Ab ₺150. Foto per WhatsApp — Angebot in 30 Minuten.'],['Herrenschneider in Antalya?','Ja! Anzüge, Hosen, Hemden, Jacken, Blazer, Smoking. WhatsApp: +90 531 898 64 18'],['Damenschneiderin in Antalya?','Ja! Kleider, Röcke, Abendkleider, Brautkleid, Übergrößen. WhatsApp: +90 531 898 64 18'],['Nähwerkstatt Serienproduktion?','Ja! Schnittmuster, Prototypen, Serienproduktion. WhatsApp: +90 531 898 64 18'],['Reißverschluss-Kosten?','Hosen ₺120, Jacke ₺200, Mantel ₺300. Expressdienst.'],['Kommen Sie ins Hotel?','Ja! Ganz Antalya. Standort per WhatsApp.'],['Reinigung und Bügeln?','Reinigung ₺300, Mantel ₺500, Wäsche ₺80/kg. Kurierabholung. 24h.'],['Brautkleid-Änderungen?','Ja. Brautkleid ₺500, Abendkleid ₺350. April–Oktober.'],['Uniformproduktion?','Ja. Hotel, Köche, Kellner, Sicherheit, Schule. Design + Produktion.'],['Sweatshirts?','Ja. Serienproduktion. Mit Stickerei und Druck.'],] as [string,string][],seoIntro:'Schneider Can — Antalya mit deutschsprachigem Service. Herrenschneider: Anzüge, Hosen, Hemden. Damenschneiderin: Kleider, Abendkleider, Brautkleid. Nähwerkstatt: Schnittmuster, Serienproduktion. Reinigung. Uniformproduktion. Mobiler Schneider.'},
+};
 
 export default function TerziClient() {
   const [lang, setLang] = useState<Lang>('tr');
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [activeIlce, setActiveIlce] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number|null>(null);
+  const [activeIlce, setActiveIlce] = useState<string|null>(null);
+  const [heroIdx, setHeroIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const stripRef = useRef<HTMLDivElement>(null);
   const c = C[lang];
 
-  useEffect(() => {
-    const bl = (navigator.language || '').toLowerCase();
-    if (bl.startsWith('de')) setLang('de');
-    else if (bl.startsWith('ru')) setLang('ru');
-    else if (bl.startsWith('en')) setLang('en');
-  }, []);
+  useEffect(()=>{
+    const bl=(navigator.language||'').toLowerCase();
+    if(bl.startsWith('de'))setLang('de');
+    else if(bl.startsWith('ru'))setLang('ru');
+    else if(bl.startsWith('en'))setLang('en');
+  },[]);
 
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
-  }, []);
+  useEffect(()=>{
+    const t=setInterval(()=>setHeroIdx(i=>(i+1)%HERO_IMAGES.length),5000);
+    return()=>clearInterval(t);
+  },[]);
 
-  const faqId = (i: number) => `faq-answer-${i}`;
+  useEffect(()=>{
+    const h=()=>setScrolled(window.scrollY>50);
+    window.addEventListener('scroll',h,{passive:true});
+    return()=>window.removeEventListener('scroll',h);
+  },[]);
 
-  return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600;700&display=swap');
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{--g:#c9a96e;--g2:#e8d5a3;--g3:#8b6f47;--ink:#0d0c0a;--ink2:#1a1814;--ink3:#252320;--cr:#f5f0e8;--cr2:#ede7d9;--mt:#7a7268;--serif:'Playfair Display',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
-        html{scroll-behavior:smooth}
-        body{background:var(--ink);color:var(--cr);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
-        ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--g3)}
-        @keyframes fup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-        .fu{animation:fup .8s ease both}.fu1{animation:fup .8s .1s ease both}.fu2{animation:fup .9s .2s ease both}.fu3{animation:fup 1s .3s ease both}.fu4{animation:fup 1s .4s ease both}
-        .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .35s}
-        .nav.up{background:rgba(13,12,10,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,169,110,.12);padding:.65rem 1.5rem}
-        .nav-logo{font-family:var(--serif);font-size:1.3rem;color:var(--g);text-decoration:none;letter-spacing:.03em}
-        .nav-links{display:flex;gap:1.5rem;list-style:none}
-        .nav-links a{color:var(--cr2);text-decoration:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;transition:color .3s}
-        .nav-links a:hover{color:var(--g)}
-        .lsw{display:flex;gap:.35rem}
-        .lb{background:none;border:1px solid rgba(201,169,110,.22);color:var(--mt);font-size:.68rem;padding:.26rem .55rem;cursor:pointer;font-family:var(--sans);text-transform:uppercase;letter-spacing:.08em;transition:all .25s;border-radius:2px}
-        .lb.on,.lb:hover{border-color:var(--g);color:var(--g);background:rgba(201,169,110,.08)}
-        .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 1.5rem 4rem;overflow:hidden}
-        .hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&q=80&auto=format&fit=crop') center 30%/cover;filter:brightness(.17) saturate(.5)}
-        .hov{position:absolute;inset:0;background:linear-gradient(155deg,rgba(13,12,10,.25) 0%,rgba(13,12,10,.8) 55%,var(--ink) 100%)}
-        .hgrain{position:absolute;inset:0;opacity:.025;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;background-size:120px}
-        .hc{position:relative;z-index:2;max-width:860px}
-        .hbadge{display:inline-flex;align-items:center;gap:.8rem;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,169,110,.28);padding:.38rem 1.1rem;margin-bottom:2rem}
-        .hero h1{font-family:var(--serif);font-size:clamp(3rem,8vw,7.5rem);line-height:.95;font-weight:900}
-        .hero h1 em{color:var(--g);font-style:italic}
-        .hsub{margin-top:1.6rem;font-size:.92rem;color:var(--cr2);max-width:480px;letter-spacing:.04em;line-height:1.9}
-        .hacts{margin-top:2.5rem;display:flex;gap:.9rem;flex-wrap:wrap}
-        .hstats{position:relative;z-index:2;margin-top:4.5rem;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(201,169,110,.1);padding-top:1.8rem}
-        .stat{padding:0 1.5rem 0 0;border-right:1px solid rgba(201,169,110,.07)}.stat:last-child{border-right:none}
-        .stn{font-family:var(--serif);font-size:1.9rem;color:var(--g);font-weight:700;line-height:1}
-        .stl{font-size:.68rem;color:var(--mt);letter-spacing:.15em;text-transform:uppercase;margin-top:.3rem}
-        .bg{display:inline-flex;align-items:center;gap:.5rem;background:var(--g);color:var(--ink);padding:.9rem 1.9rem;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s}
-        .bg:hover{background:var(--g2);transform:translateY(-2px)}
-        .bo{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--cr);padding:.9rem 1.9rem;font-family:var(--sans);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(245,240,232,.28);cursor:pointer;transition:all .3s}
-        .bo:hover{border-color:var(--g);color:var(--g);transform:translateY(-2px)}
-        section{padding:5.5rem 1.5rem}
-        .ctr{max-width:1160px;margin:0 auto}
-        .sh{text-align:center;margin-bottom:3.2rem}
-        .ey{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--g);font-weight:500;margin-bottom:.7rem}
-        .st{font-family:var(--serif);font-size:clamp(1.8rem,3.8vw,2.9rem);font-weight:700;line-height:1.15}
-        .ss{color:var(--mt);margin-top:.7rem;font-size:.88rem;max-width:500px;margin-left:auto;margin-right:auto}
-        .gl{display:block;width:38px;height:2px;background:var(--g);margin:1.1rem auto 0}
-        .seobl{background:var(--ink2);padding:1.6rem 2rem;border-left:2px solid var(--g3);font-size:.82rem;color:var(--cr2);line-height:1.9}
-        .msec{background:linear-gradient(135deg,var(--ink2) 0%,#231a0f 100%);position:relative;overflow:hidden}
-        .msec::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--g),transparent)}
-        .msteps{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
-        .ms{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:1.1rem .7rem;text-align:center}
-        .ms-ic{font-size:1.5rem;margin-bottom:.55rem}
-        .ms-t{font-size:.82rem;font-weight:600;color:var(--g);margin-bottom:.3rem}
-        .ms-d{font-size:.7rem;color:var(--mt);line-height:1.45}
-        .svcgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
-        .scard{position:relative;overflow:hidden;min-height:370px;display:flex;flex-direction:column;justify-content:flex-end}
-        .simg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.28) saturate(.4);transition:transform .7s ease,filter .5s}
-        .scard:hover .simg{transform:scale(1.06);filter:brightness(.2) saturate(.3)}
-        .sov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,10,.97) 0%,rgba(13,12,10,.3) 55%,transparent 100%)}
-        .sbody{position:relative;z-index:2;padding:1.8rem}
-        .sic{font-size:1.7rem;margin-bottom:.7rem}
-        .stitle{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:.5rem}
-        .sdesc{font-size:.8rem;color:var(--cr2);line-height:1.7;margin-bottom:.9rem}
-        .sprice{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g);border:1px solid rgba(201,169,110,.28);padding:.28rem .75rem}
-        .sline{position:absolute;bottom:0;left:1.8rem;right:1.8rem;height:1.5px;background:linear-gradient(to right,var(--g),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
-        .scard:hover .sline{transform:scaleX(1)}
-        .galgrid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:270px 270px;gap:2px}
-        .gitem{overflow:hidden;position:relative}
-        .gitem:first-child{grid-row:1/3}
-        .gitem img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(.78);transition:transform .6s ease,filter .4s}
-        .gitem:hover img{transform:scale(1.07);filter:saturate(1) brightness(1)}
-        .gcap{position:absolute;bottom:0;left:0;right:0;padding:.7rem 1rem;background:linear-gradient(to top,rgba(13,12,10,.8),transparent);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--g);opacity:0;transition:opacity .4s}
-        .gitem:hover .gcap{opacity:1}
-        .whygrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
-        .wcard{background:var(--ink3);border:1px solid rgba(201,169,110,.07);border-radius:4px;padding:1.3rem}
-        .wic{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--g3),var(--g));display:flex;align-items:center;justify-content:center;font-size:.95rem;margin-bottom:.9rem}
-        .wt{font-size:.85rem;font-weight:600;margin-bottom:.35rem}
-        .wd{font-size:.76rem;color:var(--mt);line-height:1.5}
-        .revgrid{display:flex;flex-direction:column;gap:.7rem;max-width:660px;margin:0 auto}
-        .rcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.055);border-radius:6px;padding:1.3rem}
-        .rstars{color:#f59e0b;margin-bottom:.5rem}
-        .rtxt{font-size:.83rem;color:rgba(255,255,255,.58);line-height:1.8;font-style:italic;margin-bottom:.7rem}
-        .rauth{font-size:.76rem;color:var(--g);font-weight:600}
-        .ptable{width:100%;border-collapse:collapse}
-        .ptable th{text-align:left;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);border-bottom:1px solid rgba(201,169,110,.18);padding:.65rem .75rem;font-weight:500}
-        .ptable th:not(:first-child){text-align:right}
-        .ptable td{padding:.85rem .75rem;font-size:.84rem;border-bottom:1px solid rgba(255,255,255,.03);color:var(--cr2)}
-        .ptable tr:nth-child(even) td{background:rgba(201,169,110,.025)}
-        .ptable tr:hover td{background:rgba(201,169,110,.06)}
-        .tpr{color:var(--g);font-weight:600;text-align:right;white-space:nowrap}
-        .ttm{color:var(--mt);font-size:.73rem;text-align:right}
-        .ilwrap{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:1.3rem}
-        .ilbtn{background:none;border:1px solid rgba(201,169,110,.16);color:var(--cr2);font-size:.76rem;padding:.38rem .95rem;cursor:pointer;font-family:var(--sans);border-radius:2px;transition:all .25s}
-        .ilbtn.on,.ilbtn:hover{border-color:var(--g);color:var(--g);background:rgba(201,169,110,.07)}
-        .mahwrap{background:var(--ink3);border:1px solid rgba(201,169,110,.09);border-radius:4px;padding:1.1rem;display:flex;flex-wrap:wrap;gap:.38rem}
-        .mchip{font-size:.7rem;color:var(--cr2);border:1px solid rgba(201,169,110,.13);padding:.22rem .65rem;border-radius:2px}
-        .faqlist{max-width:700px;margin:0 auto}
-        .faqitem{border-bottom:1px solid rgba(201,169,110,.07)}
-        .faqq{width:100%;background:none;border:none;padding:1.2rem 0;display:flex;align-items:center;justify-content:space-between;gap:.9rem;cursor:pointer;text-align:left;font-family:var(--sans);font-size:.93rem;color:var(--cr);font-weight:400;transition:color .3s}
-        .faqq:hover{color:var(--g)}
-        .faqico{flex-shrink:0;width:21px;height:21px;border:1px solid rgba(201,169,110,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--g);transition:transform .35s}
-        .faqico.open{transform:rotate(45deg)}
-        .faqa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s;font-size:.83rem;color:var(--mt);line-height:1.85}
-        .faqa.open{max-height:280px;padding-bottom:1.2rem}
-        .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-        .crow{display:flex;gap:.75rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(201,169,110,.06)}
-        .clbl{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:.18rem}
-        .cval{font-size:.92rem}
-        .cval a{color:var(--cr);text-decoration:none;transition:color .3s}
-        .cval a:hover{color:var(--g)}
-        .mapbox{background:var(--ink3);border:1px solid rgba(201,169,110,.09);border-radius:4px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
-        footer{background:var(--ink);border-top:1px solid rgba(201,169,110,.07);padding:2.2rem 1.5rem}
-        .fkws{display:flex;flex-wrap:wrap;gap:.28rem;justify-content:center;margin-top:1rem}
-        .kpill{font-size:.62rem;color:rgba(201,169,110,.4);border:1px solid rgba(201,169,110,.1);padding:.18rem .55rem;border-radius:2px}
-        .wafloat{position:fixed;bottom:1.6rem;right:1.6rem;z-index:150;width:3rem;height:3rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.3rem;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .3s}
-        .wafloat:hover{transform:scale(1.1)}
-        .skip-link{position:absolute;top:-40px;left:0;background:var(--g);color:var(--ink);padding:.5rem 1rem;font-weight:700;z-index:999;transition:top .2s}
-        .skip-link:focus{top:0}
-        @media(max-width:768px){
-          .nav-links{display:none}
-          .hero h1{font-size:2.7rem}
-          .hstats{grid-template-columns:repeat(2,1fr);gap:1.3rem}
-          .svcgrid{grid-template-columns:1fr}
-          .msteps{grid-template-columns:repeat(2,1fr)}
-          .galgrid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
-          .gitem:first-child{grid-row:auto;grid-column:1/-1;height:210px}
-          .gitem{height:155px}
-          .whygrid{grid-template-columns:1fr 1fr}
-          .cgrid{grid-template-columns:1fr;gap:2rem}
-          section{padding:3.2rem 1.1rem}
-          .lsw{flex-wrap:wrap}
-          .seobl{padding:1.2rem 1.1rem}
-        }
-        @media(max-width:480px){.whygrid{grid-template-columns:1fr}}
-      `}</style>
+  // Auto-scroll film strip
+  useEffect(()=>{
+    const el=stripRef.current;
+    if(!el)return;
+    let x=0;
+    const run=()=>{ x+=0.5; if(x>=el.scrollWidth/2)x=0; el.scrollLeft=x; };
+    const id=setInterval(run,16);
+    return()=>clearInterval(id);
+  },[]);
 
-      <a href="#main-content" className="skip-link">
-        {lang==='tr'?'İçeriğe geç':lang==='en'?'Skip to content':lang==='ru'?'К содержанию':'Zum Inhalt'}
-      </a>
+  return(
+  <>
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;
+      --cream:#FAF7F2;--cream2:#F2EDE4;--cream3:#E8E0D2;
+      --ink:#1C1814;--ink2:#2E2820;--ink3:#3D3228;
+      --text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      --shadow:0 4px 32px rgba(60,40,20,.1);
+      --shadow-lg:0 16px 64px rgba(60,40,20,.16);
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--cream);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--cream2)}::-webkit-scrollbar-thumb{background:var(--gold3)}
 
-      <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp" title="WhatsApp">💬</a>
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+    .nav.up{background:rgba(250,247,242,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,151,90,.15);padding:.8rem 2rem;box-shadow:0 2px 20px rgba(60,40,20,.07)}
+    .nav-logo{font-family:var(--serif);font-size:1.5rem;color:var(--ink);text-decoration:none;letter-spacing:.04em;font-weight:600}
+    .nav-logo span{color:var(--gold)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{color:var(--text);text-decoration:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;transition:color .3s}
+    .nav-links a:hover{color:var(--gold)}
+    .lsw{display:flex;gap:.3rem}
+    .lb{background:none;border:1px solid rgba(184,151,90,.25);color:var(--muted);font-size:.67rem;padding:.25rem .5rem;cursor:pointer;font-family:var(--sans);text-transform:uppercase;letter-spacing:.08em;transition:all .25s;border-radius:2px}
+    .lb.on,.lb:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,151,90,.08)}
 
-      <nav className={`nav${scrolled?' up':''}`} role="navigation" aria-label="Ana navigasyon">
-        <a href="#" className="nav-logo" aria-label="Terzi Can">Terzi Can</a>
-        <ul className="nav-links">
-          <li><a href="#services">{c.s_services}</a></li>
-          <li><a href="#prices">{c.s_prices.split(' ')[0]}</a></li>
-          <li><a href="#faq">{c.s_faq}</a></li>
-          <li><a href="#contact">{c.s_contact}</a></li>
-        </ul>
-        <div className="lsw" role="group" aria-label="Dil seçimi">
-          {(['tr','en','ru','de'] as Lang[]).map(l=>(
-            <button key={l} className={`lb${lang===l?' on':''}`} onClick={()=>setLang(l)} aria-pressed={lang===l}>
-              {l==='tr'?'🇹🇷':l==='en'?'🇬🇧':l==='ru'?'🇷🇺':'🇩🇪'} {l.toUpperCase()}
-            </button>
-          ))}
-        </div>
-      </nav>
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:700px;overflow:hidden;display:flex;align-items:flex-end}
+    .hslide{position:absolute;inset:0;transition:opacity 1.2s ease}
+    .hslide img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+    .hslide.active{opacity:1}.hslide.inactive{opacity:0}
+    .hov{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,.75) 0%,rgba(28,24,20,.2) 50%,rgba(28,24,20,.1) 100%)}
+    .hc{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 2rem 5rem;width:100%}
+    .hbadge{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.35);padding:.35rem 1rem;margin-bottom:1.8rem;backdrop-filter:blur(4px);background:rgba(255,255,255,.08)}
+    .hero h1{font-family:var(--serif);font-size:clamp(3.5rem,9vw,8rem);line-height:.9;font-weight:600;color:#fff;letter-spacing:-.01em}
+    .hero h1 em{font-style:italic;color:var(--gold2)}
+    .hsub{margin-top:1.4rem;font-size:.92rem;color:rgba(255,255,255,.82);max-width:500px;letter-spacing:.05em;line-height:1.9}
+    .hacts{margin-top:2.2rem;display:flex;gap:.8rem;flex-wrap:wrap}
+    .hdots{position:absolute;right:2rem;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:.5rem}
+    .hdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;border:none}
+    .hdot.on{background:#fff;transform:scale(1.4)}
+    .hscroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.6);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
+    .hscroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrollpulse 2s ease-in-out infinite}
+    @keyframes scrollpulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
 
-      <section className="hero" aria-label="Hero">
-        <div className="hbg" role="presentation" aria-hidden="true"/>
-        <div className="hov" role="presentation" aria-hidden="true"/>
-        <div className="hgrain" role="presentation" aria-hidden="true"/>
-        <div className="ctr">
-          <div className="hc">
-            <span className="hbadge fu">{c.badge}</span>
-            <h1 className="fu1">{c.h1}<br/><em>{c.h1em}</em></h1>
-            <p className="hsub fu2">{c.sub}</p>
-            <div className="fu2" style={{marginTop:'1rem',display:'flex',gap:'.4rem',alignItems:'center',flexWrap:'wrap'}}>
-              <span aria-label="5 yıldız" role="img">⭐⭐⭐⭐⭐</span>
-              <span style={{fontSize:'.88rem',fontWeight:700,marginLeft:'.3rem'}}>4.9</span>
-              <span style={{fontSize:'.8rem',color:'var(--mt)'}}>
-                (94 {lang==='tr'?'değerlendirme':lang==='en'?'reviews':lang==='ru'?'отзывов':'Bewertungen'})
-              </span>
-            </div>
-            <div className="hacts fu3">
-              <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg">💬 {c.waBtn}</a>
-              <a href="#services" className="bo">{c.downBtn}</a>
-            </div>
-          </div>
-          <div className="hstats fu4">
-            {([
-              ['10+', lang==='tr'?'Yıllık Deneyim':lang==='en'?'Years Exp.':lang==='ru'?'Лет опыта':'Jahre Erfahrung'],
-              ['5000+', lang==='tr'?'Mutlu Müşteri':lang==='en'?'Happy Clients':lang==='ru'?'Клиентов':'Kunden'],
-              ['24–48h', lang==='tr'?'Ekspres Teslimat':lang==='en'?'Express Delivery':lang==='ru'?'Экспресс':'Express'],
-              ['TR·EN·RU·DE','4 Languages'],
-            ] as [string,string][]).map(([n,l],i)=>(
-              <div key={i} className="stat">
-                <div className="stn">{n}</div>
-                <div className="stl">{l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    /* FILM STRIP */
+    .strip-wrap{background:var(--ink);padding:1.2rem 0;overflow:hidden}
+    .strip{display:flex;gap:4px;width:max-content}
+    .strip-img{width:220px;height:150px;object-fit:cover;flex-shrink:0;filter:brightness(.75) saturate(.8);transition:filter .4s}
+    .strip-img:hover{filter:brightness(1) saturate(1.1)}
 
-      <div style={{background:'var(--ink2)',padding:'2rem 1.5rem'}} id="main-content">
-        <div className="ctr">
-          <p className="seobl">{c.seoIntro}</p>
-        </div>
+    /* SEO INTRO */
+    .seoblk{background:var(--cream2);padding:2.5rem 2rem;border-left:3px solid var(--gold3)}
+    .seoblk p{font-size:.84rem;color:var(--muted);line-height:1.95;max-width:1100px;margin:0 auto}
+
+    /* BAY BAYAN */
+    .bba{background:var(--light);padding:5rem 2rem}
+    .bba-inner{max-width:1200px;margin:0 auto}
+    .bba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .bba-card{background:#fff;border-radius:2px;overflow:hidden;box-shadow:var(--shadow);transition:transform .4s,box-shadow .4s}
+    .bba-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .bba-img{width:100%;height:280px;object-fit:cover;display:block}
+    .bba-body{padding:1.8rem}
+    .bba-eyebrow{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.6rem}
+    .bba-h{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:.7rem;line-height:1.2}
+    .bba-d{font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+    .bba-cta-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,151,90,.3);padding-bottom:.1rem;transition:all .3s}
+    .bba-cta-link:hover{color:var(--gold3);border-color:var(--gold3)}
+
+    /* MOBILE STEPS */
+    .mob{background:var(--ink);padding:5rem 2rem;position:relative;overflow:hidden}
+    .mob::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border:60px solid rgba(184,151,90,.06);border-radius:50%}
+    .mob-inner{max-width:1200px;margin:0 auto}
+    .mob-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem;background:rgba(255,255,255,.06)}
+    .mob-step{background:var(--ink);padding:2rem 1.5rem;text-align:center}
+    .mob-ic{font-size:2rem;margin-bottom:.8rem}
+    .mob-t{font-family:var(--serif);font-size:1.05rem;color:var(--gold2);margin-bottom:.4rem}
+    .mob-d{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.6}
+
+    /* SERVICES */
+    .svc{background:var(--cream);padding:0}
+    .svc-head{padding:5rem 2rem 3rem;max-width:1200px;margin:0 auto}
+    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr)}
+    .sc{position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;cursor:default}
+    .sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease,filter .5s}
+    .sc:hover img{transform:scale(1.05)}
+    .sc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,.92) 0%,rgba(28,24,20,.25) 60%,transparent 100%)}
+    .sc-body{position:relative;z-index:2;padding:2rem}
+    .sc-ic{font-size:1.6rem;margin-bottom:.6rem}
+    .sc-h{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:.4rem}
+    .sc-d{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:.8rem}
+    .sc-p{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(212,176,122,.3);padding:.25rem .7rem;display:inline-block}
+    .sc-line{position:absolute;bottom:0;left:2rem;right:2rem;height:1.5px;background:linear-gradient(to right,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+    .sc:hover .sc-line{transform:scaleX(1)}
+
+    /* WHY */
+    .why{background:var(--cream2);padding:5rem 2rem}
+    .why-inner{max-width:1200px;margin:0 auto}
+    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+    .wc{background:#fff;border-radius:2px;padding:1.6rem;border-top:2px solid transparent;transition:border-color .3s,box-shadow .3s}
+    .wc:hover{border-color:var(--gold);box-shadow:var(--shadow)}
+    .wc-ic{font-size:1.5rem;margin-bottom:.8rem}
+    .wc-t{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+    .wc-d{font-size:.76rem;color:var(--muted);line-height:1.5}
+
+    /* REVIEWS */
+    .rev{background:var(--ink2);padding:5rem 2rem}
+    .rev-inner{max-width:900px;margin:0 auto}
+    .rev-grid{display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:3rem}
+    .rc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:1.5rem}
+    .rc-stars{color:#f59e0b;margin-bottom:.5rem;font-size:.9rem}
+    .rc-txt{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.85;font-style:italic;margin-bottom:.8rem}
+    .rc-auth{font-size:.75rem;color:var(--gold2);font-weight:500}
+
+    /* PRICES */
+    .prices{background:var(--light);padding:5rem 2rem}
+    .prices-inner{max-width:860px;margin:0 auto}
+    .ptbl{width:100%;border-collapse:collapse;margin-top:2rem}
+    .ptbl th{text-align:left;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:2px solid rgba(184,151,90,.2);padding:.7rem .8rem;font-weight:500}
+    .ptbl th:not(:first-child){text-align:right}
+    .ptbl td{padding:.9rem .8rem;font-size:.86rem;border-bottom:1px solid rgba(60,40,20,.06);color:var(--text)}
+    .ptbl tr:nth-child(even) td{background:rgba(184,151,90,.03)}
+    .ptbl tr:hover td{background:rgba(184,151,90,.08)}
+    .tpr{color:var(--gold3);font-weight:600;text-align:right;white-space:nowrap}
+    .ttm{color:var(--muted);font-size:.74rem;text-align:right}
+
+    /* AREAS */
+    .areas{background:var(--cream2);padding:5rem 2rem}
+    .areas-inner{max-width:1100px;margin:0 auto}
+    .ilwrap{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:2.5rem 0 1.2rem}
+    .ilbtn{background:none;border:1px solid rgba(184,151,90,.2);color:var(--text);font-size:.76rem;padding:.4rem 1rem;cursor:pointer;font-family:var(--sans);border-radius:2px;transition:all .25s}
+    .ilbtn.on,.ilbtn:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
+    .mahwrap{background:#fff;border:1px solid rgba(184,151,90,.15);border-radius:2px;padding:1.2rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;box-shadow:var(--shadow)}
+    .mchip{font-size:.72rem;color:var(--muted);border:1px solid rgba(184,151,90,.15);padding:.22rem .65rem;border-radius:2px}
+
+    /* FAQ */
+    .faq{background:var(--light);padding:5rem 2rem}
+    .faq-inner{max-width:760px;margin:0 auto}
+    .faqitem{border-bottom:1px solid rgba(184,151,90,.12)}
+    .faqq{width:100%;background:none;border:none;padding:1.2rem 0;display:flex;align-items:center;justify-content:space-between;gap:.8rem;cursor:pointer;text-align:left;font-family:var(--sans);font-size:.92rem;color:var(--text);font-weight:400;transition:color .3s}
+    .faqq:hover{color:var(--gold3)}
+    .faqico{flex-shrink:0;width:22px;height:22px;border:1px solid rgba(184,151,90,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--gold);transition:transform .35s}
+    .faqico.open{transform:rotate(45deg)}
+    .faqa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s;font-size:.83rem;color:var(--muted);line-height:1.9}
+    .faqa.open{max-height:300px;padding-bottom:1.2rem}
+
+    /* CONTACT */
+    .contact{background:var(--ink);padding:5rem 2rem}
+    .contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+    .crow{display:flex;gap:.8rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .clbl{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.2rem;font-weight:500}
+    .cval{font-size:.92rem;color:rgba(255,255,255,.85)}
+    .cval a{color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+    .cval a:hover{color:var(--gold2)}
+    .mapbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem}
+
+    /* FOOTER */
+    footer{background:var(--ink2);border-top:1px solid rgba(184,151,90,.1);padding:2.5rem 2rem;text-align:center}
+    .fkws{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center;margin-top:1rem}
+    .kpill{font-size:.6rem;color:rgba(184,151,90,.45);border:1px solid rgba(184,151,90,.12);padding:.18rem .52rem;border-radius:2px}
+
+    /* BUTTONS */
+    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s;border-radius:1px}
+    .btn-gold:hover{background:var(--gold3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,90,.35)}
+    .btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.9);padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
+    .btn-outline:hover{border-color:var(--gold2);color:var(--gold2);transform:translateY(-2px)}
+    .btn-outline-dark{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold3);padding:.85rem 1.8rem;font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(184,151,90,.35);cursor:pointer;transition:all .3s}
+    .btn-outline-dark:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,151,90,.06)}
+
+    /* SECTION HEADS */
+    .sh{margin-bottom:0}
+    .ey{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.6rem}
+    .ey-light{color:var(--gold2)}
+    .st{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:600;line-height:1.1;color:var(--ink)}
+    .st-light{color:#fff}
+    .ss{color:var(--muted);margin-top:.6rem;font-size:.88rem;max-width:480px}
+    .ss-light{color:rgba(255,255,255,.5)}
+    .gl{display:block;width:40px;height:1.5px;background:var(--gold);margin-top:1rem}
+    .gl-center{margin-left:auto;margin-right:auto}
+
+    /* WA FLOAT */
+    .wafloat{position:fixed;bottom:1.8rem;right:1.8rem;z-index:150;width:3.2rem;height:3.2rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .3s}
+    .wafloat:hover{transform:scale(1.1)}
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .hero h1{font-size:3rem}
+      .bba-grid{grid-template-columns:1fr}
+      .svc-grid{grid-template-columns:1fr}
+      .mob-steps{grid-template-columns:repeat(2,1fr)}
+      .why-grid{grid-template-columns:repeat(2,1fr)}
+      .contact-inner{grid-template-columns:1fr;gap:2rem}
+      .lsw{flex-wrap:wrap}
+    }
+    @media(max-width:480px){
+      .why-grid{grid-template-columns:1fr}
+      .hacts{flex-direction:column}
+    }
+  `}</style>
+
+  <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp">💬</a>
+
+  {/* NAV */}
+  <nav className={`nav${scrolled?' up':''}`}>
+    <a href="#" className="nav-logo">Terzi <span>Can</span></a>
+    <ul className="nav-links">
+      <li><a href="#bay-bayan">{c.bayBayanHeading}</a></li>
+      <li><a href="#services">{c.s_services}</a></li>
+      <li><a href="#prices">{lang==='tr'?'Fiyatlar':'Prices'}</a></li>
+      <li><a href="#faq">{c.s_faq}</a></li>
+      <li><a href="#contact">{c.s_contact}</a></li>
+    </ul>
+    <div className="lsw">
+      {(['tr','en','ru','de'] as Lang[]).map(l=>(
+        <button key={l} className={`lb${lang===l?' on':''}`} onClick={()=>setLang(l)}>
+          {l==='tr'?'🇹🇷':l==='en'?'🇬🇧':l==='ru'?'🇷🇺':'🇩🇪'} {l.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  </nav>
+
+  {/* HERO — fullscreen slider */}
+  <section className="hero">
+    {HERO_IMAGES.map((img,i)=>(
+      <div key={i} className={`hslide${i===heroIdx?' active':' inactive'}`}>
+        <img src={img.src} alt={img.alt} loading={i===0?'eager':'lazy'}/>
       </div>
+    ))}
+    <div className="hov"/>
+    <div className="hdots">
+      {HERO_IMAGES.map((_,i)=>(
+        <button key={i} className={`hdot${i===heroIdx?' on':''}`} onClick={()=>setHeroIdx(i)} aria-label={`Slayt ${i+1}`}/>
+      ))}
+    </div>
+    <div className="hc">
+      <span className="hbadge">{c.badge}</span>
+      <h1>{c.h1}<br/><em>{c.h1em}</em></h1>
+      <p className="hsub">{c.sub}</p>
+      <div style={{display:'flex',gap:'.4rem',alignItems:'center',flexWrap:'wrap',marginTop:'1rem'}}>
+        <span style={{color:'#f59e0b',fontSize:'1rem'}}>⭐⭐⭐⭐⭐</span>
+        <span style={{fontSize:'.88rem',fontWeight:600,color:'#fff',marginLeft:'.3rem'}}>4.9</span>
+        <span style={{fontSize:'.78rem',color:'rgba(255,255,255,.6)'}}>(94 {lang==='tr'?'değerlendirme':lang==='en'?'reviews':lang==='ru'?'отзывов':'Bewertungen'})</span>
+      </div>
+      <div className="hacts">
+        <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">💬 {c.waBtn}</a>
+        <a href="#bay-bayan" className="btn-outline">{c.downBtn}</a>
+      </div>
+    </div>
+    <div className="hscroll">
+      <div className="hscroll-line"/>
+      <span>scroll</span>
+    </div>
+  </section>
 
-      <section className="msec" aria-labelledby="mobile-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">🚗 {c.s_mobile}</div>
-            <h2 className="st" id="mobile-heading">{c.mobileHeading}</h2>
-            <p className="ss">{c.mobileDesc}</p>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="msteps" role="list">
-            {c.steps.map(([ic,t,d],i)=>(
-              <div key={i} className="ms" role="listitem">
-                <div className="ms-ic" aria-hidden="true">{ic}</div>
-                <div className="ms-t">{t}</div>
-                <div className="ms-d">{d}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{textAlign:'center',marginTop:'2.2rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
-            <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="bg">{c.mobileCta}</a>
-          </div>
-        </div>
-      </section>
+  {/* FILM STRIP */}
+  <div className="strip-wrap">
+    <div className="strip" ref={stripRef} style={{overflowX:'hidden',userSelect:'none'}}>
+      {[...FILM_STRIP,...FILM_STRIP].map((src,i)=>(
+        <img key={i} src={src} alt="Terzi Can Antalya moda" className="strip-img" loading="lazy"/>
+      ))}
+    </div>
+  </div>
 
-      <section id="services" style={{background:'var(--ink2)',padding:'0'}} aria-labelledby="services-heading">
-        <div className="ctr" style={{padding:'4.5rem 1.5rem 2rem'}}>
-          <div className="sh">
-            <div className="ey">✦ {c.s_services}</div>
-            <h2 className="st" id="services-heading">
-              {lang==='tr'?'Ne Yapıyoruz?':lang==='en'?'What We Offer':lang==='ru'?'Что мы предлагаем':'Was wir anbieten'}
-            </h2>
-            <p className="ss">
-              {lang==='tr'?'Her kıyafete, her bedene, her ihtiyaca özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment, size and need.':lang==='ru'?'Профессиональный пошив для любой одежды и размера.':'Professionelle Schneiderei für jedes Kleidungsstück.'}
-            </p>
-            <span className="gl" aria-hidden="true"/>
+  {/* SEO INTRO */}
+  <div className="seoblk" id="main-content">
+    <p id="terzi-can-ozet">{c.seoIntro}</p>
+  </div>
+
+  {/* BAY & BAYAN & ATOLYE */}
+  <section className="bba" id="bay-bayan">
+    <div className="bba-inner">
+      <div className="sh">
+        <div className="ey">✦ {c.bayBayanHeading}</div>
+        <h2 className="st">{lang==='tr'?'Erkek ve Kadın Kıyafetinde Uzman':lang==='en'?'Specialist in Menswear & Womenswear':lang==='ru'?'Специалист по мужской и женской одежде':'Experte für Herren- und Damenmode'}</h2>
+        <span className="gl"/>
+      </div>
+      <div className="bba-grid">
+        {/* BAY */}
+        <article className="bba-card" id="bay-terzi">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&q=85&auto=format&fit=crop" alt="Bay terzi erkek takım elbise Antalya" className="bba-img" loading="lazy"/>
+          <div className="bba-body">
+            <div className="bba-eyebrow">👔 {lang==='tr'?'Bay Terzi':lang==='en'?"Men's Tailor":lang==='ru'?'Мужской портной':'Herrenschneider'}</div>
+            <h3 className="bba-h">{c.bayHeading}</h3>
+            <p className="bba-d">{c.bayDesc}</p>
+            <a href={WA(lang==='tr'?'Merhaba, erkek kıyafeti için fiyat almak istiyorum.':'Hello, I need men\'s tailoring.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+              💬 {lang==='tr'?'Fiyat Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
+            </a>
           </div>
-        </div>
-        <div className="svcgrid">
-          {SERVICES.map((s,i)=>(
-            <article key={i} className="scard">
-              <img src={s.img} alt={s.alt} className="simg" loading={i<2?'eager':'lazy'} width="700" height="500"/>
-              <div className="sov" aria-hidden="true"/>
-              <div className="sbody">
-                <div className="sic" aria-hidden="true">{s.icon}</div>
-                <h3 className="stitle">{s[lang].n}</h3>
-                <p className="sdesc">{s[lang].d}</p>
-                <span className="sprice">{s[lang].p}</span>
-              </div>
-              <div className="sline" aria-hidden="true"/>
-            </article>
+        </article>
+        {/* BAYAN */}
+        <article className="bba-card" id="bayan-terzi">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=85&auto=format&fit=crop" alt="Bayan terzi kadın elbise dikimi Antalya" className="bba-img" loading="lazy"/>
+          <div className="bba-body">
+            <div className="bba-eyebrow">👗 {lang==='tr'?'Bayan Terzi':lang==='en'?"Women's Tailor":lang==='ru'?'Женский портной':'Damenschneiderin'}</div>
+            <h3 className="bba-h">{c.bayanHeading}</h3>
+            <p className="bba-d">{c.bayanDesc}</p>
+            <a href={WA(lang==='tr'?'Merhaba, kadın kıyafeti için fiyat almak istiyorum.':'Hello, I need women\'s tailoring.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+              💬 {lang==='tr'?'Fiyat Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
+            </a>
+          </div>
+        </article>
+        {/* ATOLYE */}
+        <article className="bba-card" id="dikis-atolyesi">
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&q=85&auto=format&fit=crop" alt="Dikiş atölyesi fason seri üretim Antalya" className="bba-img" loading="lazy"/>
+          <div className="bba-body">
+            <div className="bba-eyebrow">🏭 {lang==='tr'?'Dikiş Atölyesi':lang==='en'?'Sewing Workshop':lang==='ru'?'Ателье':'Nähwerkstatt'}</div>
+            <h3 className="bba-h">{c.atolyeHeading}</h3>
+            <p className="bba-d">{c.atolyeDesc}</p>
+            <a href={WA(lang==='tr'?'Merhaba, dikiş atölyesi ve fason üretim için teklif almak istiyorum.':'Hello, I need a workshop quote.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+              💬 {lang==='tr'?'Teklif Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {/* MOBILE TAILOR */}
+  <section className="mob">
+    <div className="mob-inner">
+      <div className="sh">
+        <div className="ey ey-light">🚗 {c.s_mobile}</div>
+        <h2 className="st st-light">{c.mobileHeading}</h2>
+        <p className="ss ss-light">{c.mobileDesc}</p>
+        <span className="gl"/>
+      </div>
+      <div className="mob-steps">
+        {c.steps.map(([ic,t,d],i)=>(
+          <div key={i} className="mob-step">
+            <div className="mob-ic">{ic}</div>
+            <div className="mob-t">{t}</div>
+            <div className="mob-d">{d}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{textAlign:'center',marginTop:'2.5rem'}}>
+        <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{c.mobileCta}</a>
+      </div>
+    </div>
+  </section>
+
+  {/* SERVICES */}
+  <section className="svc" id="services">
+    <div className="svc-head">
+      <div className="ey">✦ {c.s_services}</div>
+      <h2 className="st">{lang==='tr'?'Antalya Terzi Hizmetleri':lang==='en'?'Antalya Tailor Services':lang==='ru'?'Услуги портного Анталья':'Schneiderleistungen Antalya'}</h2>
+      <p className="ss">{lang==='tr'?'Bay ve bayan için her kıyafete özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment, for men and women.':lang==='ru'?'Профессиональный пошив для мужчин и женщин.':'Professionelle Schneiderei für Herren und Damen.'}</p>
+      <span className="gl"/>
+    </div>
+    <div className="svc-grid">
+      {SERVICES.map((s,i)=>(
+        <article key={i} className="sc" id={s.id}>
+          <img src={s.img} alt={s.alt} loading={i<2?'eager':'lazy'} width="800" height="420"/>
+          <div className="sc-ov"/>
+          <div className="sc-body">
+            <div className="sc-ic">{s.icon}</div>
+            <h3 className="sc-h">{s[lang].n}</h3>
+            <p className="sc-d">{s[lang].d}</p>
+            <span className="sc-p">{s[lang].p}</span>
+          </div>
+          <div className="sc-line"/>
+        </article>
+      ))}
+    </div>
+    <div style={{textAlign:'center',padding:'2.5rem 2rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap',background:' var(--cream)'}}>
+      <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{c.quoteBtn}</a>
+      <a href={WA(lang==='tr'?'Merhaba, toplu üniforma üretimi için teklif almak istiyorum.':'Hello, bulk uniform quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{c.bulkBtn}</a>
+    </div>
+  </section>
+
+  {/* WHY */}
+  <section className="why">
+    <div className="why-inner">
+      <div className="sh">
+        <div className="ey">✦ {c.s_why}</div>
+        <h2 className="st">{lang==='tr'?'Neden Terzi Can?':lang==='en'?'Why Choose Us?':lang==='ru'?'Почему мы?':'Warum Schneider Can?'}</h2>
+        <span className="gl"/>
+      </div>
+      <div className="why-grid">
+        {WHY.map((w,i)=>(
+          <div key={i} className="wc">
+            <div className="wc-ic">{w.icon}</div>
+            <div className="wc-t">{w[lang][0]}</div>
+            <div className="wc-d">{w[lang][1]}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* REVIEWS */}
+  <section className="rev">
+    <div className="rev-inner">
+      <div className="sh" style={{textAlign:'center'}}>
+        <div className="ey ey-light">⭐ 4.9 / 5 · 94 {lang==='tr'?'Yorum':lang==='en'?'Reviews':lang==='ru'?'Отзывов':'Bewertungen'}</div>
+        <h2 className="st st-light">{c.s_reviews}</h2>
+        <span className="gl gl-center"/>
+      </div>
+      <div className="rev-grid">
+        {REVIEWS.map((r,i)=>(
+          <article key={i} className="rc">
+            <div className="rc-stars">{'⭐'.repeat(r.stars)}</div>
+            <p className="rc-txt">{r.text}</p>
+            <div className="rc-auth">{r.flag} {r.author} — {r.city} · <span style={{color:'rgba(255,255,255,.35)',fontWeight:300}}>{r.date}</span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* PRICES */}
+  <section className="prices" id="prices">
+    <div className="prices-inner">
+      <div className="sh">
+        <div className="ey">₺ {lang==='tr'?'Şeffaf Fiyatlar':lang==='en'?'Transparent Pricing':lang==='ru'?'Прозрачные цены':'Transparente Preise'}</div>
+        <h2 className="st" id="hizmet-fiyatlari">{c.s_prices}</h2>
+        <p className="ss">{lang==='tr'?"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin":lang==='en'?'Starting prices — send a photo on WhatsApp for an exact quote':lang==='ru'?'Начальные цены — фото в WhatsApp для точной оценки':'Startpreise — Foto per WhatsApp für genaues Angebot'}</p>
+        <span className="gl"/>
+      </div>
+      <table className="ptbl">
+        <thead>
+          <tr>
+            <th>{lang==='tr'?'Hizmet':lang==='en'?'Service':lang==='ru'?'Услуга':'Leistung'}</th>
+            <th>{lang==='tr'?'Fiyat':lang==='en'?'Price':lang==='ru'?'Цена':'Preis'}</th>
+            <th>{lang==='tr'?'Süre':lang==='en'?'Time':lang==='ru'?'Время':'Zeit'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PRICES[lang].map(([s,p,t],i)=>(
+            <tr key={i}><td>{s}</td><td className="tpr">{p}</td><td className="ttm">{t}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <div style={{marginTop:'2rem',textAlign:'center'}}>
+        <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{c.quoteBtn}</a>
+      </div>
+    </div>
+  </section>
+
+  {/* AREAS */}
+  <section className="areas" id="areas">
+    <div className="areas-inner">
+      <div className="sh" style={{textAlign:'center'}}>
+        <div className="ey">📍 {c.s_areas}</div>
+        <h2 className="st">Antalya — {lang==='tr'?'Tüm İlçeler':lang==='en'?'All Districts':lang==='ru'?'Все районы':'Alle Bezirke'}</h2>
+        <p className="ss" style={{margin:'0.6rem auto 0'}}>{c.areaLabel}</p>
+        <span className="gl gl-center"/>
+      </div>
+      <div className="ilwrap">
+        {ILCELER.map(({ilce})=>(
+          <button key={ilce} className={`ilbtn${activeIlce===ilce?' on':''}`} onClick={()=>setActiveIlce(activeIlce===ilce?null:ilce)}>
+            {ilce}
+          </button>
+        ))}
+      </div>
+      {activeIlce&&(
+        <div className="mahwrap">
+          {ILCELER.find(i=>i.ilce===activeIlce)?.m.map(m=>(
+            <span key={m} className="mchip">{m}</span>
           ))}
         </div>
-        <div style={{textAlign:'center',padding:'2.2rem 1.5rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
-          <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg">{c.quoteBtn}</a>
-          <a href={WA(lang==='tr'?'Merhaba, toplu üniforma üretimi için fiyat teklifi almak istiyorum.':'Hello, I would like a bulk uniform production quote.')} target="_blank" rel="noopener noreferrer" className="bo">{c.bulkBtn}</a>
-        </div>
-      </section>
+      )}
+      <p style={{fontSize:'.7rem',color:'rgba(184,151,90,.35)',marginTop:'1.5rem',lineHeight:1.9,textAlign:'center'}}>
+        {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} (${ilce})`)).join(' · ')}
+      </p>
+    </div>
+  </section>
 
-      <section id="gallery" style={{padding:'0',background:'var(--ink3)'}} aria-label="Galeri">
-        <div className="galgrid">
-          {GALLERY.map((g,i)=>(
-            <div key={i} className="gitem">
-              <img src={g.img} alt={g.alt} loading="lazy" width="700" height="500"/>
-              <div className="gcap" aria-hidden="true">{g[lang]}</div>
+  {/* FAQ */}
+  <section className="faq" id="faq">
+    <div className="faq-inner">
+      <div className="sh" style={{textAlign:'center',marginBottom:'2.5rem'}}>
+        <div className="ey">FAQ</div>
+        <h2 className="st" id="sik-sorulan-sorular">{c.s_faq}</h2>
+        <span className="gl gl-center"/>
+      </div>
+      {c.faq.map(([q,a],i)=>(
+        <div key={i} className="faqitem">
+          <button className="faqq" onClick={()=>setOpenFaq(openFaq===i?null:i)} aria-expanded={openFaq===i}>
+            <span style={{flex:1}}>{q}</span>
+            <span className={`faqico${openFaq===i?' open':''}`}>+</span>
+          </button>
+          <div className={`faqa${openFaq===i?' open':''}`}>{a}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* CONTACT */}
+  <section className="contact" id="contact">
+    <div className="contact-inner">
+      <div>
+        <div className="ey ey-light">✦ {c.s_contact}</div>
+        <h2 className="st st-light" style={{fontStyle:'italic'}}>{lang==='tr'?'Hızlı İletişim':lang==='en'?'Quick Contact':lang==='ru'?'Быстрый контакт':'Schneller Kontakt'}</h2>
+        <p className="ss ss-light" style={{marginBottom:'1.5rem'}}>{lang==='tr'?'Hızlı yanıt için WhatsApp tercih edin.':lang==='en'?'For instant reply, prefer WhatsApp.':lang==='ru'?'Для быстрого ответа — WhatsApp.':'WhatsApp für schnelle Antwort.'}</p>
+        <address style={{fontStyle:'normal'}}>
+          {[
+            {ic:'📞',lbl:lang==='tr'?'Telefon':'Phone',val:<a href="tel:+905318986418">+90 531 898 64 18</a>},
+            {ic:'💬',lbl:'WhatsApp',val:<a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer">+90 531 898 64 18</a>},
+            {ic:'🕐',lbl:lang==='tr'?'Çalışma Saatleri':'Hours',val:<span>{c.hours}</span>},
+            {ic:'📍',lbl:lang==='tr'?'Bölge':'Area',val:<span>{lang==='tr'?'Tüm Antalya — Bay & Bayan Terzi':lang==='en'?'All Antalya Districts':'Alle Antalya-Bezirke'}</span>},
+            {ic:'🌍',lbl:lang==='tr'?'Diller':'Languages',val:<span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span>},
+          ].map(({ic,lbl,val},i)=>(
+            <div key={i} className="crow">
+              <span style={{fontSize:'1rem',paddingTop:'.1rem'}}>{ic}</span>
+              <div><div className="clbl">{lbl}</div><div className="cval">{val}</div></div>
             </div>
           ))}
-        </div>
-      </section>
+          <div style={{display:'flex',flexDirection:'column',gap:'.7rem',marginTop:'2rem'}}>
+            <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{justifyContent:'center'}}>💬 WhatsApp</a>
+            <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{justifyContent:'center'}}>{c.mobileCta}</a>
+            <a href="https://maps.google.com/?q=Antalya+Konyaaltı" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{justifyContent:'center'}}>{c.mapBtn}</a>
+          </div>
+        </address>
+      </div>
+      <div className="mapbox">
+        <div style={{fontSize:'3rem'}}>📍</div>
+        <div style={{fontFamily:'var(--serif)',fontSize:'1.3rem',color:'rgba(255,255,255,.8)'}}>Konyaaltı, Antalya</div>
+        <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.35)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
+          {lang==='tr'?'Tüm Antalya ilçelerine bay & bayan terzi servisi.':lang==='en'?'Men & women tailor service all Antalya.':'Alle Antalya-Bezirke.'}
+        </p>
+        <a href="https://maps.google.com/?q=Antalya+Turkey" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{fontSize:'.75rem'}}>{c.mapBtn}</a>
+      </div>
+    </div>
+  </section>
 
-      <section style={{background:'var(--ink)'}} aria-labelledby="why-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">✦ {c.s_why}</div>
-            <h2 className="st" id="why-heading">
-              {lang==='tr'?'Neden Terzi Can?':lang==='en'?'Why Choose Us?':lang==='ru'?'Почему выбирают нас?':'Warum Schneider Can?'}
-            </h2>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="whygrid">
-            {WHY.map((w,i)=>(
-              <div key={i} className="wcard">
-                <div className="wic" aria-hidden="true">{w.icon}</div>
-                <div className="wt">{w[lang][0]}</div>
-                <div className="wd">{w[lang][1]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{background:'var(--ink2)'}} aria-labelledby="reviews-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">⭐ 4.9 / 5 · 94 {lang==='tr'?'Yorum':lang==='en'?'Reviews':lang==='ru'?'Отзывов':'Bewertungen'}</div>
-            <h2 className="st" id="reviews-heading">{c.s_reviews}</h2>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="revgrid">
-            {REVIEWS.map((r,i)=>(
-              // itemScope / itemType / itemProp KALDIRILDI
-              // HTML microdata yerine sadece page.tsx JSON-LD kullanılıyor
-              <article key={i} className="rcard">
-                <div className="rstars" aria-label={`${r.stars} yıldız`}>{'⭐'.repeat(r.stars)}</div>
-                <p className="rtxt">{r.text}</p>
-                <div className="rauth">
-                  {r.flag} {r.author} — {r.city} · <span style={{color:'var(--mt)',fontWeight:400}}>{r.date}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="prices" style={{background:'var(--ink3)'}} aria-labelledby="prices-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">₺ {lang==='tr'?'Şeffaf Fiyatlar':lang==='en'?'Transparent Pricing':lang==='ru'?'Прозрачные цены':'Transparente Preise'}</div>
-            <h2 className="st" id="prices-heading">{c.s_prices}</h2>
-            <p className="ss">
-              {lang==='tr'?"Başlangıç fiyatları · Kesin teklif için WhatsApp'tan fotoğraf gönderin":lang==='en'?'Starting prices · Send a photo on WhatsApp for exact quote':lang==='ru'?'Начальные цены · Фото в WhatsApp для точной оценки':'Startpreise · Foto per WhatsApp für genaues Angebot'}
-            </p>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <table className="ptable" aria-label={c.s_prices}>
-            <thead>
-              <tr>
-                <th scope="col">{lang==='tr'?'Hizmet':lang==='en'?'Service':lang==='ru'?'Услуга':'Leistung'}</th>
-                <th scope="col">{lang==='tr'?'Başlangıç Fiyatı':lang==='en'?'Starting Price':lang==='ru'?'Цена от':'Ab Preis'}</th>
-                <th scope="col">{lang==='tr'?'Süre':lang==='en'?'Time':lang==='ru'?'Время':'Zeit'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {PRICES[lang].map(([svc,price,time],i)=>(
-                <tr key={i}>
-                  <td>{svc}</td>
-                  <td className="tpr">{price}</td>
-                  <td className="ttm">{time}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div style={{textAlign:'center',marginTop:'2rem'}}>
-            <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg">{c.quoteBtn}</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="areas" style={{background:'var(--ink2)'}} aria-labelledby="areas-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">📍 {c.s_areas}</div>
-            <h2 className="st" id="areas-heading">
-              Antalya — {lang==='tr'?'Tüm İlçeler':lang==='en'?'All Districts':lang==='ru'?'Все районы':'Alle Bezirke'}
-            </h2>
-            <p className="ss">{c.areaLabel}</p>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="ilwrap" role="group" aria-label="İlçe seçimi">
-            {ILCELER.map(({ilce})=>(
-              <button key={ilce} className={`ilbtn${activeIlce===ilce?' on':''}`}
-                onClick={()=>setActiveIlce(activeIlce===ilce?null:ilce)}
-                aria-pressed={activeIlce===ilce} aria-expanded={activeIlce===ilce}>
-                {ilce}
-              </button>
-            ))}
-          </div>
-          {activeIlce&&(
-            <div className="mahwrap" role="list" aria-label={`${activeIlce} mahalleleri`}>
-              {ILCELER.find(i=>i.ilce===activeIlce)?.m.map(m=>(
-                <span key={m} className="mchip" role="listitem">{m}</span>
-              ))}
-            </div>
-          )}
-          <p style={{fontSize:'.72rem',color:'rgba(201,169,110,.25)',marginTop:'1.5rem',lineHeight:1.8,textAlign:'center'}}>
-            {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} (${ilce})`)).join(' · ')}
-          </p>
-        </div>
-      </section>
-
-      <section id="faq" style={{background:'var(--ink)'}} aria-labelledby="faq-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">FAQ</div>
-            <h2 className="st" id="faq-heading">{c.s_faq}</h2>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="faqlist">
-            {c.faq.map(([q,a],i)=>(
-              <div key={i} className="faqitem">
-                <button className="faqq" onClick={()=>setOpenFaq(openFaq===i?null:i)}
-                  aria-expanded={openFaq===i} aria-controls={faqId(i)}>
-                  <span style={{flex:1}}>{q}</span>
-                  <span className={`faqico${openFaq===i?' open':''}`} aria-hidden="true">+</span>
-                </button>
-                <div id={faqId(i)} className={`faqa${openFaq===i?' open':''}`} role="region">
-                  {a}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" style={{background:'var(--ink2)'}} aria-labelledby="contact-heading">
-        <div className="ctr">
-          <div className="sh">
-            <div className="ey">✦ {c.s_contact}</div>
-            <h2 className="st" id="contact-heading" style={{fontStyle:'italic'}}>
-              {lang==='tr'?'Hızlı İletişim':lang==='en'?'Quick Contact':lang==='ru'?'Быстрый Контакт':'Schneller Kontakt'}
-            </h2>
-            <p className="ss">
-              {lang==='tr'?'Hızlı yanıt için WhatsApp tercih edin.':lang==='en'?'For instant reply, prefer WhatsApp.':lang==='ru'?'Для быстрого ответа — WhatsApp.':'Für schnelle Antwort WhatsApp bevorzugen.'}
-            </p>
-            <span className="gl" aria-hidden="true"/>
-          </div>
-          <div className="cgrid">
-            <address style={{fontStyle:'normal'}}>
-              {[
-                {ic:'📞',lbl:lang==='tr'?'Telefon':'Phone',val:<a href="tel:+905318986418">+90 531 898 64 18</a>},
-                {ic:'💬',lbl:'WhatsApp',val:<a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer">+90 531 898 64 18</a>},
-                {ic:'🕐',lbl:lang==='tr'?'Çalışma Saatleri':lang==='en'?'Working Hours':lang==='ru'?'Часы работы':'Öffnungszeiten',val:<span>{c.hours}</span>},
-                {ic:'📍',lbl:lang==='tr'?'Hizmet Bölgesi':lang==='en'?'Service Area':lang==='ru'?'Зона обслуживания':'Servicebereich',val:<span>{lang==='tr'?'Tüm Antalya İlçeleri':lang==='en'?'All Antalya Districts':lang==='ru'?'Все районы Антальи':'Alle Antalya-Bezirke'}</span>},
-                {ic:'🌍',lbl:lang==='tr'?'Diller':'Languages',val:<span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span>},
-              ].map(({ic,lbl,val},i)=>(
-                <div key={i} className="crow">
-                  <span style={{fontSize:'1.1rem',paddingTop:'.1rem'}} aria-hidden="true">{ic}</span>
-                  <div>
-                    <div className="clbl">{lbl}</div>
-                    <div className="cval">{val}</div>
-                  </div>
-                </div>
-              ))}
-              <div style={{display:'flex',flexDirection:'column',gap:'.7rem',marginTop:'1.8rem'}}>
-                <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="bg" style={{justifyContent:'center'}}>💬 WhatsApp</a>
-                <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="bo" style={{justifyContent:'center'}}>{c.mobileCta}</a>
-                <a href="https://maps.google.com/?q=Antalya+Konyaaltı+Turkey" target="_blank" rel="noopener noreferrer" className="bo" style={{justifyContent:'center'}}>{c.mapBtn}</a>
-              </div>
-            </address>
-            <div className="mapbox" aria-label="Konum: Konyaaltı, Antalya">
-              <div style={{fontSize:'2.8rem'}} aria-hidden="true">📍</div>
-              <div style={{fontFamily:'var(--serif)',fontSize:'1.2rem',color:'var(--cr2)'}}>Konyaaltı, Antalya</div>
-              <p style={{fontSize:'.8rem',color:'var(--mt)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
-                {lang==='tr'?'Tüm Antalya ilçelerine kurye ile hizmet veriyoruz.':lang==='en'?'We serve all Antalya districts via courier.':lang==='ru'?'Курьер по всем районам Антальи.':'Kurierservice in alle Antalya-Bezirke.'}
-              </p>
-              <a href="https://maps.google.com/?q=Antalya+Turkey" target="_blank" rel="noopener noreferrer" className="bo" style={{fontSize:'.76rem'}}>{c.mapBtn}</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <div className="ctr" style={{textAlign:'center'}}>
-          <div style={{fontFamily:'var(--serif)',fontSize:'1.2rem',color:'var(--g)',marginBottom:'.4rem'}}>
-            Terzi Can · Tailor Can · Портной Кан · Schneider Can
-          </div>
-          <p style={{fontSize:'.73rem',color:'var(--mt)'}}>
-            © 2026 SwapHubs — Antalya Terzi Hizmetleri · +90 531 898 64 18 · swaphubs.com/terzi
-          </p>
-          <div className="fkws" aria-label="Anahtar kelimeler">
-            {['Antalya Terzi','Paça Kısaltma','Fermuar Değişimi','Elbise Tadilat','Kuru Temizleme','Üniforma Üretimi','Nakış Antalya','Otel Üniforma','Aşçı Üniforma','Eve Gelen Terzi','Terzi Fiyatları 2026','Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya','Uniform Antalya','Embroidery Antalya','Mobile Tailor','Портной Анталья','Химчистка Анталья','Пошив на заказ','Гостиничная форма','Выездной портной','Schneider Antalya','Änderungen Antalya','Reinigung Antalya','Uniformproduktion'].map(k=>(
-              <span key={k} className="kpill">{k}</span>
-            ))}
-          </div>
-        </div>
-      </footer>
-    </>
+  <footer>
+    <div style={{fontFamily:'var(--serif)',fontSize:'1.2rem',color:'var(--gold2)',marginBottom:'.4rem'}}>
+      Terzi Can · Tailor Can · Портной Кан · Schneider Can
+    </div>
+    <p style={{fontSize:'.72rem',color:'rgba(255,255,255,.3)'}}>
+      © 2026 SwapHubs — Antalya Bay & Bayan Terzi · Dikiş Atölyesi · +90 531 898 64 18
+    </p>
+    <div className="fkws">
+      {['Bay Terzi Antalya','Bayan Terzi Antalya','Dikiş Atölyesi Antalya','Paça Kısaltma','Pantolon Kısaltma','Fermuar Değişimi','Elbise Dikimi','Kuru Temizleme','Ütü Hizmeti','Üniforma Üretimi','Nakış Antalya','Gelinlik Tadilatı','Eve Gelen Terzi','Otele Gelen Terzi','Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya','Uniform Antalya','Mobile Tailor','Портной Анталья','Химчистка','Пошив платья','Schneider Antalya','Änderungen Antalya'].map(k=>(
+        <span key={k} className="kpill">{k}</span>
+      ))}
+    </div>
+  </footer>
+  </>
   );
 }
