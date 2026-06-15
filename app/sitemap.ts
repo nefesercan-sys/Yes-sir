@@ -111,6 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/uye-ol`,            lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE_URL}/giris`,             lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
 
+    // ── Online Terzi Hizmeti ──────────────────────────────────────────────
     { url: `${BASE_URL}/online-terzi-hizmeti`,                      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 1.0 },
     { url: `${BASE_URL}/online-terzi-hizmeti/client`,               lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/online-terzi-hizmeti/abiye-dikim`,          lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
@@ -125,18 +126,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/online-terzi-hizmeti/kurumsal`,             lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/online-terzi-hizmeti/sss`,                  lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.7 },
 
-    { url: `${BASE_URL}/terzi`,                                                 lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 1.0 },
+    // ── /terzi Ana + Şehir Sayfaları ─────────────────────────────────────
+    { url: `${BASE_URL}/terzi`,             lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE_URL}/terzi/istanbul`,    lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/ankara`,      lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/izmir`,       lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/antalya`,     lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/bursa`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${BASE_URL}/terzi/adana`,       lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
+
+    // ── /terzi Alt Hizmet Sayfaları (YENİ) ───────────────────────────────
+    // Her biri ayrı anahtar kelime grubunu hedefler
+    { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,     lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/bay-terzi-antalya`,         lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,       lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`,    lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,  lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,    lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,   lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.95 },
+
+    // ── Diğer Sayfalar ───────────────────────────────────────────────────
     { url: `${BASE_URL}/tekstil-antalya`,                                       lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/online-tailor-service`,                                 lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/online-terzi-servisi`,                                  lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                               lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`, lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE_URL}/terzi/istanbul`,                                        lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/ankara`,                                          lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/izmir`,                                           lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/antalya`,                                         lastModified: new Date('2026-06-05'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/terzi/bursa`,                                           lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
-    { url: `${BASE_URL}/terzi/adana`,                                           lastModified: new Date('2026-06-05'), changeFrequency: 'monthly', priority: 0.75 },
 
     { url: `${BASE_URL}/files`,              lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE_URL}/hakkimizda`,         lastModified: new Date('2026-02-07'), changeFrequency: 'monthly', priority: 0.4 },
@@ -154,11 +168,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'online-terzi-vs-hazir-giyim',
     'keten-kiyafet-bakimi-nasil-yapilir',
     'kurumsal-uniforma-tasarim-rehberi',
+    // YENİ — yüksek hacimli arama sorguları
+    'paca-kisaltma-fiyatlari-2026',
+    'fermuar-degisimi-antalya-fiyat',
+    'gelinlik-tadilati-antalya-rehberi',
+    'antalya-otelleri-icin-terzi-rehberi',
+    'bay-terzi-antalya-erkek-kiyafet-rehberi',
+    'bayan-terzi-antalya-kadin-elbise-rehberi',
   ]
 
   const staticBlogPages: MetadataRoute.Sitemap = staticBlogSlugs.map((slug) => ({
     url: `${BASE_URL}/blog/${slug}`,
-    lastModified: new Date('2026-06-05'),
+    lastModified: new Date('2026-06-15'),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
