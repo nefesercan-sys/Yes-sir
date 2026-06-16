@@ -3,22 +3,34 @@ import { NextResponse } from "next/server";
 const BASE = "https://swaphubs.com";
 export const dynamic = "force-dynamic";
 
+// Tüm terzi sayfaları — mevcut + YENİ alt hizmet sayfaları
 const terziSayfalar = [
-  // ─── Ana terzi sayfası ───────────────────────────────────────────────────
+
+  // ── Ana terzi sayfası ────────────────────────────────────────────────────
   { url: `${BASE}/terzi`,                                                    priority: "1.0",  freq: "weekly" },
 
-  // ─── Terzi şehir sayfaları ───────────────────────────────────────────────
+  // ── Terzi şehir sayfaları ────────────────────────────────────────────────
   { url: `${BASE}/terzi/antalya`,                                            priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/istanbul`,                                           priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/ankara`,                                             priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/izmir`,                                              priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/bursa`,                                              priority: "0.85", freq: "weekly" },
-  { url: `${BASE}/terzi/adana`,                                              priority: "0.85", freq: "weekly" },
+  { url: `${BASE}/terzi/bursa`,                                              priority: "0.85", freq: "monthly" },
+  { url: `${BASE}/terzi/adana`,                                              priority: "0.85", freq: "monthly" },
 
-  // ─── Tekstil Antalya ─────────────────────────────────────────────────────
+  // ── Antalya Alt Hizmet Sayfaları (YENİ) ─────────────────────────────────
+  // Rakiplerde hiçbiri yok — her biri ayrı keyword cluster
+  { url: `${BASE}/terzi/paca-kisaltma-antalya`,                              priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/bay-terzi-antalya`,                                  priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/bayan-terzi-antalya`,                                priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/dikis-atolyesi-antalya`,                             priority: "0.9",  freq: "weekly" },
+  { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                           priority: "0.9",  freq: "weekly" },
+  { url: `${BASE}/terzi/kuru-temizleme-antalya`,                             priority: "0.9",  freq: "weekly" },
+  { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                            priority: "0.95", freq: "weekly" },
+
+  // ── Tekstil Antalya ──────────────────────────────────────────────────────
   { url: `${BASE}/tekstil-antalya`,                                          priority: "0.9",  freq: "weekly" },
 
-  // ─── Online Terzi Hizmeti — ana + alt sayfalar ───────────────────────────
+  // ── Online Terzi Hizmeti — ana + alt sayfalar ───────────────────────────
   { url: `${BASE}/online-terzi-hizmeti`,                                     priority: "1.0",  freq: "weekly" },
   { url: `${BASE}/online-terzi-hizmeti/abiye-dikim`,                         priority: "0.9",  freq: "weekly" },
   { url: `${BASE}/online-terzi-hizmeti/gelinlik-dikim`,                      priority: "0.9",  freq: "weekly" },
@@ -32,13 +44,13 @@ const terziSayfalar = [
   { url: `${BASE}/online-terzi-hizmeti/kurumsal`,                            priority: "0.8",  freq: "monthly" },
   { url: `${BASE}/online-terzi-hizmeti/sss`,                                 priority: "0.7",  freq: "monthly" },
 
-  // ─── Online Tailor Service ───────────────────────────────────────────────
+  // ── Online Tailor Service (EN) ───────────────────────────────────────────
   { url: `${BASE}/online-tailor-service`,                                    priority: "0.9",  freq: "weekly" },
 
-  // ─── Antalya Terzi Dikim ─────────────────────────────────────────────────
+  // ── Antalya Terzi Dikim ──────────────────────────────────────────────────
   { url: `${BASE}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,   priority: "0.9",  freq: "weekly" },
 
-  // ─── Doğal Keten Pamuk Giyim ─────────────────────────────────────────────
+  // ── Doğal Keten Pamuk Giyim ─────────────────────────────────────────────
   { url: `${BASE}/dogal-keten-pamuk-giyim`,                                  priority: "0.9",  freq: "weekly" },
 ];
 
