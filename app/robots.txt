@@ -1,0 +1,38 @@
+User-agent: *
+
+Allow: /
+Allow: /ilanlar
+Allow: /kesfet
+Allow: /ilan/
+Allow: /terzi
+Allow: /tekstil-antalya
+Allow: /online-terzi-hizmeti
+Allow: /online-terzi-hizmeti/abiye-dikim
+Allow: /online-terzi-hizmeti/gelinlik-dikim
+Allow: /online-terzi-hizmeti/takim-elbise-dikim
+Allow: /online-terzi-hizmeti/uniforma-dikim
+Allow: /online-terzi-hizmeti/spor-giyim-dikim
+Allow: /online-terzi-hizmeti/gece-davet-kiyafeti
+Allow: /online-terzi-hizmeti/muslin-keten-kiyafet
+Allow: /online-terzi-hizmeti/gunluk-kiyafet-dikim
+Allow: /online-terzi-hizmeti/olcu-rehberi
+Allow: /online-terzi-hizmeti/kurumsal
+Allow: /online-terzi-hizmeti/sss
+Allow: /online-tailor-service
+Allow: /arimbalim
+Allow: /pamuknest
+
+Disallow: /giris
+Disallow: /uye-ol
+Disallow: /admin
+Disallow: /admin-ai
+Disallow: /api/
+Disallow: /ilan-ver
+Disallow: /ilan-duzenle
+Disallow: /online-terzi-hizmeti/client
+
+Disallow: /_next/
+Allow: /_next/static/
+Allow: /_next/image/
+
+Sitemap: https://swaphubs.com/sitemap.xml
