@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
 const PHONE = '905318986418';
@@ -652,9 +653,35 @@ export default function TerziClient() {
           ))}
         </div>
       )}
-      <p style={{fontSize:'.7rem',color:'rgba(184,151,90,.35)',marginTop:'1.5rem',lineHeight:1.9,textAlign:'center'}}>
-        {ILCELER.flatMap(({ilce,m})=>m.map(mh=>`${mh} (${ilce})`)).join(' · ')}
-      </p>
+    </div>
+  </section>
+
+  {/* TÜM HİZMET SAYFALARIMIZ — gerçek internal link, SEO kritik */}
+  <section style={{background:'var(--ink)',padding:'4rem 2rem'}}>
+    <div style={{maxWidth:'1100px',margin:'0 auto'}}>
+      <div className="sh" style={{textAlign:'center'}}>
+        <div className="ey ey-light">✦ {lang==='tr'?'Tüm Hizmet Sayfalarımız':lang==='en'?'All Service Pages':lang==='ru'?'Все страницы услуг':'Alle Serviceseiten'}</div>
+        <h2 className="st st-light">{lang==='tr'?'Detaylı Bilgi İçin Tıklayın':lang==='en'?'Click for Details':lang==='ru'?'Подробнее':'Für Details klicken'}</h2>
+        <span className="gl gl-center"/>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'.8rem',marginTop:'2.5rem'}}>
+        {[
+          ['✂️','Paça Kısaltma Antalya','/terzi/paca-kisaltma-antalya'],
+          ['👔','Bay Terzi Antalya','/terzi/bay-terzi-antalya'],
+          ['👗','Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],
+          ['🏭','Dikiş Atölyesi Antalya','/terzi/dikis-atolyesi-antalya'],
+          ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
+          ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
+          ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
+        ].map(([ic,label,href])=>(
+          <Link key={href} href={href}
+            style={{display:'flex',alignItems:'center',gap:'.7rem',background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:'2px',padding:'1rem 1.2rem',textDecoration:'none',color:'rgba(255,255,255,.85)',fontSize:'.85rem',transition:'all .25s'}}>
+            <span style={{fontSize:'1.2rem'}}>{ic}</span>
+            <span>{label}</span>
+            <span style={{marginLeft:'auto',color:'var(--gold2)',fontSize:'.8rem'}}>→</span>
+          </Link>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -723,11 +750,21 @@ export default function TerziClient() {
     <p style={{fontSize:'.72rem',color:'rgba(255,255,255,.3)'}}>
       © 2026 SwapHubs — Antalya Bay & Bayan Terzi · Dikiş Atölyesi · +90 531 898 64 18
     </p>
-    <div className="fkws">
-      {['Bay Terzi Antalya','Bayan Terzi Antalya','Dikiş Atölyesi Antalya','Paça Kısaltma','Pantolon Kısaltma','Fermuar Değişimi','Elbise Dikimi','Kuru Temizleme','Ütü Hizmeti','Üniforma Üretimi','Nakış Antalya','Gelinlik Tadilatı','Eve Gelen Terzi','Otele Gelen Terzi','Tailor Antalya','Alterations Antalya','Dry Cleaning Antalya','Uniform Antalya','Mobile Tailor','Портной Анталья','Химчистка','Пошив платья','Schneider Antalya','Änderungen Antalya'].map(k=>(
-        <span key={k} className="kpill">{k}</span>
+    <nav aria-label="Footer hizmet linkleri" style={{display:'flex',flexWrap:'wrap',gap:'.5rem',justifyContent:'center',marginTop:'1.2rem'}}>
+      {[
+        ['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],
+        ['Bay Terzi','/terzi/bay-terzi-antalya'],
+        ['Bayan Terzi','/terzi/bayan-terzi-antalya'],
+        ['Dikiş Atölyesi','/terzi/dikis-atolyesi-antalya'],
+        ['Üniforma Üretimi','/terzi/uniforma-uretimi-antalya'],
+        ['Kuru Temizleme','/terzi/kuru-temizleme-antalya'],
+        ['Eve Gelen Terzi','/terzi/eve-gelen-terzi-antalya'],
+      ].map(([label,href])=>(
+        <Link key={href} href={href} style={{fontSize:'.72rem',color:'rgba(212,176,122,.75)',textDecoration:'none',border:'1px solid rgba(184,151,90,.18)',padding:'.25rem .65rem',borderRadius:'2px'}}>
+          {label}
+        </Link>
       ))}
-    </div>
+    </nav>
   </footer>
   </>
   );
