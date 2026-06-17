@@ -505,16 +505,13 @@ const jsonLd = {
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi', url: `${SITE_URL}#bay-terzi` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi', url: `${SITE_URL}#bayan-terzi` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma', url: `${SITE_URL}#paca-kisaltma` },
-        { '@type': 'ListItem', position: 4, name: 'Fermuar Değişimi', url: `${SITE_URL}#fermuar-degisimi` },
-        { '@type': 'ListItem', position: 5, name: 'Dikiş Atölyesi — Fason Üretim', url: `${SITE_URL}#dikis-atolyesi` },
-        { '@type': 'ListItem', position: 6, name: 'Gelinlik Tadilatı', url: `${SITE_URL}#gelinlik-tadilati` },
-        { '@type': 'ListItem', position: 7, name: 'Üniforma Üretimi', url: `${SITE_URL}#uniforma-uretimi` },
-        { '@type': 'ListItem', position: 8, name: 'Kuru Temizleme ve Ütü', url: `${SITE_URL}#kuru-temizleme` },
-        { '@type': 'ListItem', position: 9, name: 'Eve / Otele Gelen Terzi', url: `${SITE_URL}#eve-gelen-terzi` },
-        { '@type': 'ListItem', position: 10, name: 'Nakış ve Logo Baskı', url: `${SITE_URL}#nakis-baski` },
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi', url: `${HOME_URL}/terzi/bay-terzi-antalya` },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi', url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma', url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
+        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason Üretim', url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
       ],
     },
   ],
@@ -591,11 +588,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    // NOT: Dil değişimi client-side state ile yapılıyor, sunucu farklı
+    // HTML üretmiyor. Bu yüzden ?lang= query param'larıyla hreflang
+    // vermek Google'a yanlış sinyal verir (duplicate content gibi
+    // görünür). Gerçek dil URL'leri (örn. /en/terzi) oluşturulana kadar
+    // sadece canonical + x-default bırakılıyor.
     languages: {
-      tr: SITE_URL,
-      en: `${SITE_URL}?lang=en`,
-      ru: `${SITE_URL}?lang=ru`,
-      de: `${SITE_URL}?lang=de`,
       'x-default': SITE_URL,
     },
   },
