@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-const SITE_URL = 'https://www.swaphubs.com/terzi/paca-kisaltma-antalya';
-const PARENT = 'https://www.swaphubs.com/terzi';
+const SITE_URL = 'https://swaphubs.com/terzi/paca-kisaltma-antalya';
+const PARENT = 'https://swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
