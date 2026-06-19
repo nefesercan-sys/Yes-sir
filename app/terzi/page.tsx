@@ -39,7 +39,12 @@ const jsonLd = {
     },
 
     {
-      '@type': 'ClothingStore',
+      // ✅ DÜZELTİLDİ: Google Harita + Yerel Arama için LocalBusiness eklendi
+      '@type': ['LocalBusiness', 'ClothingStore'],
+      additionalType: [
+        'https://schema.org/SewingService',
+        'https://schema.org/DryCleaningService',
+      ],
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can',
       alternateName: [
@@ -512,6 +517,9 @@ const jsonLd = {
         { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
         { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
         { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        // ✅ YENİ: Eksik sayfalar eklendi
+        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: `${HOME_URL}/terzi/gelinlik-tadilati` },
+        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: `${HOME_URL}/terzi/fermuar-degisimi` },
       ],
     },
   ],
@@ -588,11 +596,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
-    // NOT: Dil değişimi client-side state ile yapılıyor, sunucu farklı
-    // HTML üretmiyor. Bu yüzden ?lang= query param'larıyla hreflang
-    // vermek Google'a yanlış sinyal verir (duplicate content gibi
-    // görünür). Gerçek dil URL'leri (örn. /en/terzi) oluşturulana kadar
-    // sadece canonical + x-default bırakılıyor.
     languages: {
       'x-default': SITE_URL,
     },
