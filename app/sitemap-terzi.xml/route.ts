@@ -3,29 +3,32 @@ import { NextResponse } from "next/server";
 const BASE = "https://swaphubs.com";
 export const dynamic = "force-dynamic";
 
-// Tüm terzi sayfaları — mevcut + YENİ alt hizmet sayfaları
+// ✅ DÜZELTİLDİ:
+// - Var olmayan phantom şehir sayfaları kaldırıldı (/terzi/antalya, /istanbul, /ankara vb.)
+// - Eksik sayfalar eklendi: gelinlik-tadilati, fermuar-degisimi
+// - Öncelikler mantıksal olarak düzenlendi
+
 const terziSayfalar = [
 
   // ── Ana terzi sayfası ────────────────────────────────────────────────────
   { url: `${BASE}/terzi`,                                                    priority: "1.0",  freq: "weekly" },
 
-  // ── Terzi şehir sayfaları ────────────────────────────────────────────────
-  { url: `${BASE}/terzi/antalya`,                                            priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/istanbul`,                                           priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/ankara`,                                             priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/izmir`,                                              priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/bursa`,                                              priority: "0.85", freq: "monthly" },
-  { url: `${BASE}/terzi/adana`,                                              priority: "0.85", freq: "monthly" },
-
-  // ── Antalya Alt Hizmet Sayfaları (YENİ) ─────────────────────────────────
-  // Rakiplerde hiçbiri yok — her biri ayrı keyword cluster
+  // ── Antalya Alt Hizmet Sayfaları ─────────────────────────────────────────
   { url: `${BASE}/terzi/paca-kisaltma-antalya`,                              priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/bay-terzi-antalya`,                                  priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/bayan-terzi-antalya`,                                priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                            priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/fermuar-degisimi-antalya`,                           priority: "0.9",  freq: "weekly" },
+
+  // ✅ YENİ: fermuar-degisimi (genel sayfa — Antalya dışını da kapsıyor)
+  { url: `${BASE}/terzi/fermuar-degisimi`,                                   priority: "0.88", freq: "weekly" },
+
+  // ✅ YENİ: gelinlik-tadilati (URL düzeltildi: gekinlik → gelinlik)
+  { url: `${BASE}/terzi/gelinlik-tadilati`,                                  priority: "0.9",  freq: "weekly" },
+
   { url: `${BASE}/terzi/dikis-atolyesi-antalya`,                             priority: "0.9",  freq: "weekly" },
   { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                           priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/kuru-temizleme-antalya`,                             priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                            priority: "0.95", freq: "weekly" },
+  { url: `${BASE}/terzi/kuru-temizleme-antalya`,                             priority: "0.88", freq: "weekly" },
 
   // ── Tekstil Antalya ──────────────────────────────────────────────────────
   { url: `${BASE}/tekstil-antalya`,                                          priority: "0.9",  freq: "weekly" },
