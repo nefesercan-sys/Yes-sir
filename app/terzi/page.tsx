@@ -39,7 +39,6 @@ const jsonLd = {
     },
 
     {
-      // ✅ DÜZELTİLDİ: Google Harita + Yerel Arama için LocalBusiness eklendi
       '@type': ['LocalBusiness', 'ClothingStore'],
       additionalType: [
         'https://schema.org/SewingService',
@@ -216,6 +215,7 @@ const jsonLd = {
             priceSpecification: {
               '@type': 'PriceSpecification',
               minPrice: '300',
+              maxPrice: '500',
               priceCurrency: 'TRY',
             },
             availability: 'https://schema.org/InStock',
@@ -356,6 +356,7 @@ const jsonLd = {
         },
       ],
       sameAs: [
+        'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5', // ✅ İşletme profil linkiniz başarıyla entegre edildi
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
         SITE_URL,
         `${HOME_URL}/online-terzi-hizmeti`,
@@ -450,7 +451,7 @@ const jsonLd = {
           name: 'Kuru temizleme ve ütü hizmeti Antalya fiyatları?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel ve adreslerden kurye ile alım yapıyoruz. 24 saat ekspres teslimat. WhatsApp ${PHONE}.`,
+            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel and adreslerden kurye ile alım yapıyoruz. 24 saat ekspres teslimat. WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -517,7 +518,6 @@ const jsonLd = {
         { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
         { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
         { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        // ✅ YENİ: Eksik sayfalar eklendi
         { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: `${HOME_URL}/terzi/gelinlik-tadilati` },
         { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: `${HOME_URL}/terzi/fermuar-degisimi` },
       ],
