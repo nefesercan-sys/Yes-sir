@@ -19,7 +19,7 @@ const unbounded = Unbounded({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0d1b3e",
+  themeColor: "#B8975A",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 // ──────────────────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.swaphubs.com"),
+  metadataBase: new URL("https://swaphubs.com"),
   title: {
     // FIX 1: "%s | SwapHubs" → "%s"
     // Her sayfa kendi title'ını tam olarak tanımlıyor, suffix eklenmeyecek.
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   // Terzi sayfasında "B2B platform Türkiye" keywords'ü çıkıyordu, alakasız.
   // Her sayfa kendi page.tsx'inde kendi keywords'ünü tanımlıyor.
 
-  authors: [{ name: "SwapHubs", url: "https://www.swaphubs.com" }],
+  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
   creator: "SwapHubs",
   publisher: "SwapHubs",
   category: "business",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description:
       "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
-    url: "https://www.swaphubs.com",
+    url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
     type: "website",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
       {
         // FIX 2: .svg → .jpg — Sosyal medya SVG önizleme göstermiyor
         // /public/og-image.jpg oluşturun: 1200×630, JPG, navy arka plan + logo
-        url: "https://www.swaphubs.com/og-image.jpg",
+        url: "https://swaphubs.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
     // FIX 2: .svg → .jpg
-    images: ["https://www.swaphubs.com/og-image.jpg"],
+    images: ["https://swaphubs.com/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: { canonical: "https://www.swaphubs.com" },
+  alternates: { canonical: "https://swaphubs.com" },
   verification: {
     // ⚠️ BURAYA YAPIŞTIRINIZ:
     // Google Search Console → Mülk → HTML etiketi → content="..." değerini kopyalayın
@@ -119,8 +119,8 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://www.swaphubs.com/#website",
-      url: "https://www.swaphubs.com",
+      "@id": "https://swaphubs.com/#website",
+      url: "https://swaphubs.com",
       name: "SwapHubs",
       description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
       inLanguage: "tr-TR",
@@ -129,26 +129,26 @@ const jsonLd = {
         target: {
           "@type": "EntryPoint",
           urlTemplate:
-            "https://www.swaphubs.com/ilanlar?q={search_term_string}",
+            "https://swaphubs.com/ilanlar?q={search_term_string}",
         },
         "query-input": "required name=search_term_string",
       },
     },
     {
       "@type": "Organization",
-      "@id": "https://www.swaphubs.com/#organization",
+      "@id": "https://swaphubs.com/#organization",
       name: "SwapHubs",
-      url: "https://www.swaphubs.com",
+      url: "https://swaphubs.com",
       // FIX 4: logo → og-image.svg yerine logo.png (512×512 kare)
       // /public/logo.png dosyası yoksa oluşturun veya mevcut logo dosyasını kullanın
       logo: {
         "@type": "ImageObject",
-        url: "https://www.swaphubs.com/logo.png",
+        url: "https://swaphubs.com/logo.png",
         width: 512,
         height: 512,
       },
       // OG image ayrı bir alan olarak eklendi
-      image: "https://www.swaphubs.com/og-image.jpg",
+      image: "https://swaphubs.com/og-image.jpg",
       description:
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB"],
