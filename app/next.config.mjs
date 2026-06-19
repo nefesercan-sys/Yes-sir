@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   poweredByHeader: false,
 
   compiler: {
@@ -16,7 +17,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'www.swaphubs.com' },
       { protocol: 'https', hostname: 'swaphubs.com' },
       { protocol: 'https', hostname: 'maps.googleapis.com' },
-      // DİKKAT: '**' (Wildcard) kuralı güvenlik ve Vercel maliyetleri nedeniyle kaldırıldı.
+      { protocol: 'https', hostname: '**' },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -26,11 +27,15 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // www → non-www 301 
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
         destination: 'https://swaphubs.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/terzi/gekinlik-tadilati',
+        destination: '/terzi/gelinlik-tadilati',
         permanent: true,
       },
     ]
@@ -38,7 +43,6 @@ const nextConfig = {
 
   async headers() {
     return [
-      // Global güvenlik header'ları
       {
         source: '/(.*)',
         headers: [
@@ -50,14 +54,12 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },
         ],
       },
-      // Static cache (Performans)
       {
         source: '/_next/static/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
-      // API Endpoints: Asla cachelenmesin ve indexlenmesin
       {
         source: '/api/(.*)',
         headers: [
@@ -65,22 +67,76 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
-      // Admin, Auth ve Yönetim sayfaları için toplu noindex kuralları
-      // Not: regex (.*) kullanarak alt yolları da yakaladık
+      { source: '/giris',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/uye-ol',          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
+      { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       {
-        source: '/:path(giris|uye-ol|admin|admin-ai|ilan-ver|ilan-duzenle)(.*)',
+        source: '/terzi',
         headers: [
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow' }
+          { key: 'Content-Language', value: 'tr, en, de, ru' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
       {
-        source: '/online-terzi-hizmeti/client',
+        source: '/terzi/(.*)',
         headers: [
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow' }
+          { key: 'Content-Language', value: 'tr, en, ru, de' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
-      }
-      // DİKKAT: /terzi ve türevi sayfaların "index, follow" header'ları silindi. 
-      // Bunlar doğrudan kendi page.tsx dosyalarındaki 'metadata' API'si ile yönetilmelidir.
+      },
+      {
+        source: '/online-terzi-hizmeti',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, de, ru, ar' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-terzi-hizmeti/(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/tekstil-antalya',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-tailor-service',
+        headers: [
+          { key: 'Content-Language', value: 'en, tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, ru' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/arimbalim',
+        headers: [
+          { key: 'Content-Language', value: 'tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/pamuknest(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
     ]
   },
 }
