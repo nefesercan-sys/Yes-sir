@@ -129,13 +129,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ── /terzi Ana Sayfa ──────────────────────────────────────────────────
     { url: `${BASE_URL}/terzi`, lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 1.0 },
 
-    // ── /terzi Şehir Sayfaları ────────────────────────────────────────────
-    { url: `${BASE_URL}/terzi/istanbul`, lastModified: new Date('2026-06-15'), changeFrequency: 'weekly',  priority: 0.95 },
-    { url: `${BASE_URL}/terzi/ankara`,   lastModified: new Date('2026-06-15'), changeFrequency: 'weekly',  priority: 0.95 },
-    { url: `${BASE_URL}/terzi/izmir`,    lastModified: new Date('2026-06-15'), changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE_URL}/terzi/antalya`,  lastModified: new Date('2026-06-15'), changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE_URL}/terzi/bursa`,    lastModified: new Date('2026-06-15'), changeFrequency: 'monthly', priority: 0.75 },
-    { url: `${BASE_URL}/terzi/adana`,    lastModified: new Date('2026-06-15'), changeFrequency: 'monthly', priority: 0.75 },
+    // ── NOT: /terzi/istanbul, ankara, izmir, antalya, bursa, adana sayfaları
+    // KALDIRILDI — bu sayfalar gerçekte app/terzi/ altında YOKTU, sitemap'te
+    // listelenince Google Search Console'da 404 hatası veriyorlardı.
+    // /terzi sayfasının kendisi zaten Antalya'yı hedeflediği için ayrı bir
+    // /terzi/antalya sayfasına da gerek yok (kendi ana sayfanızla yarışırdı).
 
     // ── /terzi Antalya Alt Hizmet Sayfaları (YENİ) ───────────────────────
     // Her sayfa ayrı keyword cluster hedefler — rakiplerde hiçbiri yok
@@ -146,6 +144,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`, lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,   lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,  lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/terzi/fermuar-degisimi-antalya`,  lastModified: new Date('2026-06-20'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi/gelinlik-tadilati-antalya`, lastModified: new Date('2026-06-20'), changeFrequency: 'weekly', priority: 0.9 },
 
     // ── Diğer ────────────────────────────────────────────────────────────
     { url: `${BASE_URL}/tekstil-antalya`,                                       lastModified: new Date('2026-06-15'), changeFrequency: 'weekly', priority: 0.9 },
