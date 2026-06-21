@@ -7,7 +7,6 @@ const PHONE = '905318986418';
 const WA = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 
 /* ─── IMAGES ─────────────────────────────────────────────────────────────── */
-// High-fashion, couture, atelier — warm-lit, editorial quality
 const HERO_IMAGES = [
   { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=90&auto=format&fit=crop', alt: 'Haute couture kumaş — Terzi Can Antalya' },
   { src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&q=90&auto=format&fit=crop', alt: 'Moda elbise dikimi — Terzi Can Antalya' },
@@ -29,78 +28,46 @@ const FILM_STRIP = [
 ];
 
 const SERVICES = [
-  {
-    icon: '✂️', id: 'tadilat',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop',
-    alt: 'Paça kısaltma pantolon kısaltma tadilat Antalya — Terzi Can',
+  { icon: '✂️', id: 'tadilat', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop', alt: 'Paça kısaltma pantolon kısaltma tadilat Antalya — Terzi Can',
     tr: { n: 'Tamir & Tadilat', d: 'Paça kısaltma · pantolon kısaltma · etek kısaltma · kol kısaltma · elbise daraltma · fermuar değişimi · yırtık onarımı · düğme dikimi', p: '₺120+' },
     en: { n: 'Repairs & Alterations', d: 'Trouser hemming · skirt shortening · sleeve shortening · dress taking in · zip replacement · tear repair · button sewing', p: '₺120+' },
     ru: { n: 'Ремонт и переделка', d: 'Подгонка брюк · укорачивание юбок · заужение платья · замена молнии · ремонт разрывов', p: '₺120+' },
-    de: { n: 'Reparaturen & Änderungen', d: 'Hose kürzen · Rock kürzen · Kleid einengen · Reißverschluss · Riss reparieren', p: '₺120+' },
-  },
-  {
-    icon: '👔', id: 'bay-terzi',
-    img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=85&auto=format&fit=crop',
-    alt: 'Bay terzi erkek takım elbise dikimi Antalya — Terzi Can',
+    de: { n: 'Reparaturen & Änderungen', d: 'Hose kürzen · Rock kürzen · Kleid einengen · Reißverschluss · Riss reparieren', p: '₺120+' } },
+  { icon: '👔', id: 'bay-terzi', img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=85&auto=format&fit=crop', alt: 'Bay terzi erkek takım elbise dikimi Antalya — Terzi Can',
     tr: { n: 'Bay Terzi', d: 'Erkek takım elbise dikimi · pantolon kısaltma · gömlek dikimi · ceket tadilatı · blazer · smoking · damatlık', p: '₺150+' },
-    en: { n: "Men's Tailor", d: "Bespoke suits · trouser hemming · shirt making · jacket alterations · blazer · tuxedo · groom suit", p: '₺150+' },
+    en: { n: "Men's Tailor", d: 'Bespoke suits · trouser hemming · shirt making · jacket alterations · blazer · tuxedo · groom suit', p: '₺150+' },
     ru: { n: 'Мужской портной', d: 'Пошив костюмов · подгонка брюк · рубашки · пиджаки · смокинг · костюм жениха', p: '₺150+' },
-    de: { n: 'Herrenschneider', d: 'Maßanzüge · Hosenänderungen · Hemden · Jacken · Blazer · Smoking · Bräutigamanzug', p: '₺150+' },
-  },
-  {
-    icon: '👗', id: 'bayan-terzi',
-    img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=85&auto=format&fit=crop',
-    alt: 'Bayan terzi kadın elbise dikimi abiye Antalya — Terzi Can',
+    de: { n: 'Herrenschneider', d: 'Maßanzüge · Hosenänderungen · Hemden · Jacken · Blazer · Smoking · Bräutigamanzug', p: '₺150+' } },
+  { icon: '👗', id: 'bayan-terzi', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=85&auto=format&fit=crop', alt: 'Bayan terzi kadın elbise dikimi abiye Antalya — Terzi Can',
     tr: { n: 'Bayan Terzi', d: 'Kadın elbise dikimi · bluz · etek kısaltma · elbise daraltma · abiye tamiri · gelinlik tadilatı · büyük beden', p: '₺200+' },
-    en: { n: "Women's Tailor", d: "Dress making · blouse · skirt shortening · dress alterations · evening gown repair · wedding dress · plus size", p: '₺200+' },
+    en: { n: "Women's Tailor", d: 'Dress making · blouse · skirt shortening · dress alterations · evening gown repair · wedding dress · plus size', p: '₺200+' },
     ru: { n: 'Женский портной', d: 'Платья · блузки · юбки · подгонка · вечерние платья · свадебные платья · большие размеры', p: '₺200+' },
-    de: { n: 'Damenschneiderin', d: 'Kleider · Blusen · Röcke kürzen · Kleider ändern · Abendkleider · Brautkleid · Übergrößen', p: '₺200+' },
-  },
-  {
-    icon: '💍', id: 'gelinlik',
-    img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=85&auto=format&fit=crop',
-    alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can',
+    de: { n: 'Damenschneiderin', d: 'Kleider · Blusen · Röcke kürzen · Kleider ändern · Abendkleider · Brautkleid · Übergrößen', p: '₺200+' } },
+  { icon: '💍', id: 'gelinlik', img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=85&auto=format&fit=crop', alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can',
     tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti', p: '₺500+' },
     en: { n: 'Wedding · Evening · Special', d: 'Wedding dress · bridal alterations · groom suit · evening gown · engagement dress. Perfect fit guaranteed.', p: '₺500+' },
     ru: { n: 'Свадьба · Вечер · Торжество', d: 'Свадебное платье · подгонка · смокинг · вечернее платье · платье на помолвку.', p: '₺500+' },
-    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid · Anpassung · Smoking · Abendkleid · Verlobungskleid. Perfekte Passform.', p: '₺500+' },
-  },
-  {
-    icon: '🏨', id: 'uniforma',
-    img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=800&q=85&auto=format&fit=crop',
-    alt: 'Otel üniforma aşçı garson personel dikimi Antalya — Terzi Can',
+    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid · Anpassung · Smoking · Abendkleid · Verlobungskleid. Perfekte Passform.', p: '₺500+' } },
+  { icon: '🏨', id: 'uniforma', img: 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=800&q=85&auto=format&fit=crop', alt: 'Otel üniforma aşçı garson personel dikimi Antalya — Terzi Can',
     tr: { n: 'Üniforma Üretimi', d: 'Otel personel · resepsiyon · aşçı · garson · güvenlik · spa · animatör · okul · spor takımı. Tasarım + seri imalat + nakış.', p: 'Teklif Al' },
     en: { n: 'Uniform Production', d: 'Hotel staff · reception · chef · waiter · security · spa · school · sports. Design + mass production + embroidery.', p: 'Get Quote' },
     ru: { n: 'Производство формы', d: 'Гостиничный персонал · повара · официанты · охрана · спа · школа. Дизайн + серийное производство + вышивка.', p: 'Запрос цены' },
-    de: { n: 'Uniformproduktion', d: 'Hotelpersonal · Köche · Kellner · Sicherheit · Spa · Schule. Design + Serienproduktion + Stickerei.', p: 'Angebot' },
-  },
-  {
-    icon: '🏭', id: 'atolye',
-    img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=85&auto=format&fit=crop',
-    alt: 'Dikiş atölyesi fason seri imalat Antalya — Terzi Can',
+    de: { n: 'Uniformproduktion', d: 'Hotelpersonal · Köche · Kellner · Sicherheit · Spa · Schule. Design + Serienproduktion + Stickerei.', p: 'Angebot' } },
+  { icon: '🏭', id: 'atolye', img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=85&auto=format&fit=crop', alt: 'Dikiş atölyesi fason seri imalat Antalya — Terzi Can',
     tr: { n: 'Dikiş Atölyesi · Fason', d: 'Kalıp çıkarma · model tasarımı · numune · prototip · seri imalat · fason üretim. Markalar ve e-ticaret için tam paket.', p: 'Teklif Al' },
     en: { n: 'Sewing Workshop', d: 'Pattern making · sample · prototype · mass production. Full package for brands, boutiques, e-commerce.', p: 'Get Quote' },
     ru: { n: 'Швейное ателье', d: 'Лекала · образцы · прототип · серийное производство. Полный пакет для брендов.', p: 'Запрос цены' },
-    de: { n: 'Nähwerkstatt', d: 'Schnittmuster · Muster · Prototyp · Serienproduktion. Für Marken und E-Commerce.', p: 'Angebot' },
-  },
-  {
-    icon: '🪡', id: 'nakis',
-    img: 'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=800&q=85&auto=format&fit=crop',
-    alt: 'Nakış logo baskı sweatshirt dikimi Antalya — Terzi Can',
+    de: { n: 'Nähwerkstatt', d: 'Schnittmuster · Muster · Prototyp · Serienproduktion. Für Marken und E-Commerce.', p: 'Angebot' } },
+  { icon: '🪡', id: 'nakis', img: 'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=800&q=85&auto=format&fit=crop', alt: 'Nakış logo baskı sweatshirt dikimi Antalya — Terzi Can',
     tr: { n: 'Nakış · Baskı · Sweatshirt', d: 'Logo nakışı · isim nakışı · dijital baskı · serigrafi. Sweatshirt · eşofman · kapüşonlu · polo seri dikimi.', p: '₺100+' },
     en: { n: 'Embroidery · Print', d: 'Logo embroidery · digital print · screen print. Sweatshirt · tracksuit · hoodie · polo mass production.', p: '₺100+' },
     ru: { n: 'Вышивка · Печать', d: 'Вышивка логотипа · цифровая печать. Толстовки · спортивные костюмы · поло.', p: '₺100+' },
-    de: { n: 'Stickerei · Druck', d: 'Logo-Stickerei · Digitaldruck · Siebdruck. Sweatshirts · Trainingsanzüge · Polo-Produktion.', p: '₺100+' },
-  },
-  {
-    icon: '🧺', id: 'kuru-temizleme',
-    img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=85&auto=format&fit=crop',
-    alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya — Terzi Can',
+    de: { n: 'Stickerei · Druck', d: 'Logo-Stickerei · Digitaldruck · Siebdruck. Sweatshirts · Trainingsanzüge · Polo-Produktion.', p: '₺100+' } },
+  { icon: '🧺', id: 'kuru-temizleme', img: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=85&auto=format&fit=crop', alt: 'Kuru temizleme ütü çamaşır hizmeti Antalya — Terzi Can',
     tr: { n: 'Kuru Temizleme & Ütü', d: 'Kuru temizleme · çamaşır yıkama · ütü. Otel ve adreslerden kurye alım. 24 saat ekspres. Turistler için.', p: '₺80+/kg' },
     en: { n: 'Dry Cleaning & Laundry', d: 'Dry cleaning · laundry · ironing. Hotel courier pickup. 24h express. For tourists.', p: '₺80+/kg' },
     ru: { n: 'Химчистка · Стирка', d: 'Химчистка · стирка · глажка. Курьер из отеля. Экспресс 24ч.', p: '₺80+/кг' },
-    de: { n: 'Reinigung · Wäsche', d: 'Chemische Reinigung · Wäsche · Bügeln. Kurierabholung im Hotel. 24h Express.', p: '₺80+/kg' },
-  },
+    de: { n: 'Reinigung · Wäsche', d: 'Chemische Reinigung · Wäsche · Bügeln. Kurierabholung im Hotel. 24h Express.', p: '₺80+/kg' } },
 ];
 
 const WHY = [
@@ -142,21 +109,34 @@ const ILCELER = [
   {ilce:'Kaş · Finike · Diğer',m:['Kaş Merkez','Kalkan','Finike','Kumluca','Elmalı']},
 ];
 
+// DÜZELTİLDİ — Gelinlik Tadilatı ve Fermuar Değişimi eklendi (-antalya soneki ile)
+const ALT_SAYFALAR = [
+  ['✂️','Paça Kısaltma Antalya','/terzi/paca-kisaltma-antalya'],
+  ['👔','Bay Terzi Antalya','/terzi/bay-terzi-antalya'],
+  ['👗','Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],
+  ['🏭','Dikiş Atölyesi Antalya','/terzi/dikis-atolyesi-antalya'],
+  ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
+  ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
+  ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
+  ['💍','Gelinlik Tadilatı Antalya','/terzi/gelinlik-tadilati-antalya'],
+  ['🔧','Fermuar Değişimi Antalya','/terzi/fermuar-degisimi-antalya'],
+] as const;
+
 const C = {
-  tr:{badge:'✦ Antalya · Terzi Can',h1:"Antalya'nın",h1em:'Terzisi',sub:'Bay Terzi · Bayan Terzi · Dikiş Atölyesi · Tadilat · Üniforma · Nakış · Kuru Temizleme',waBtn:"WhatsApp'tan Yazın",downBtn:'Hizmetleri Gör ↓',waMsg:'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',mobileMsg:'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',s_services:'Hizmetlerimiz',s_why:'Neden Biz?',s_faq:'Sık Sorulan Sorular',s_reviews:'Müşteri Yorumları',s_areas:'Hizmet Bölgeleri',s_contact:'Bize Ulaşın',s_prices:'Terzi Fiyatları 2025–2026',s_mobile:'Terzi Servisi',mobileHeading:'Kapınıza Geliyoruz',mobileDesc:"Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz. Adresinize geliyor, ölçü alıyor, dikip teslim ediyoruz.",mobileCta:'🚗 Terzi Servisi Talep Et',steps:[['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']] as [string,string,string][],areaLabel:'İlçeye tıklayın — mahalleleri görün',quoteBtn:'📲 Ücretsiz Fiyat Teklifi Al',bulkBtn:'🏭 Toplu Üniforma Teklifi',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Pzt–Cmt',bayBayanHeading:'Bay & Bayan Terzi',bayHeading:'Bay Terzi',bayDesc:'Erkek takım elbise dikimi, pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma, blazer, smoking, damatlık dikimi.',bayanHeading:'Bayan Terzi',bayanDesc:'Kadın elbise dikimi, bluz, etek kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi.',atolyeHeading:'Dikiş Atölyesi',atolyeDesc:'Kalıp çıkarma, fason üretim, seri imalat, numune dikimi. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.',faq:[['Paça ve pantolon kısaltma fiyatı? 2025–2026',"₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp'tan fotoğraf gönderin — 30 dk içinde fiyat."],['Bay terzi Antalya — erkek kıyafet dikimi?',"Evet! Erkek takım elbise, pantolon kısaltma, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: +90 531 898 64 18"],['Bayan terzi Antalya — kadın elbise dikimi?',"Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi. WhatsApp: +90 531 898 64 18"],['Dikiş atölyesi Antalya — fason ve seri imalat?',"Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: +90 531 898 64 18"],['Fermuar değişimi kaç lira?',"Pantolon/kot ₺120, ceket ₺200, mont ₺300. Aynı gün teslim."],['Eve veya otele gelen terzi Antalya?',"Evet! Tüm Antalya ilçelerine araçlı servis. WhatsApp'tan konum paylaşın."],['Kuru temizleme ve ütü Antalya?',"Kuru temizleme ₺300, mont ₺500, çamaşır ₺80/kg. Otelden kurye alım. 24 saat."],['Gelinlik ve abiye tadilatı?','Evet. Gelinlik tadilatı ₺500, abiye tamiri ₺350. Nisan–Ekim düğün sezonu.'],['Üniforma üretimi Antalya?','Evet. Otel, aşçı, garson, güvenlik, okul, spor. Tasarım + seri imalat + nakış.'],['Sweatshirt ve eşofman dikimi?','Evet. Seri üretim. Nakış ve baskıyla kişiselleştirme.'],] as [string,string][],seoIntro:"Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Dikiş atölyesi: kalıp, fason, seri imalat. Kuru temizleme ve ütü. Üniforma üretimi. Eve ve otele gelen terzi."},
-  en:{badge:'✦ Antalya · Tailor Can',h1:"Antalya's",h1em:'Master Tailor',sub:"Men's · Women's · Sewing Workshop · Alterations · Uniforms · Embroidery · Dry Cleaning",waBtn:'WhatsApp Us Now',downBtn:'View Services ↓',waMsg:'Hello, I would like information about your tailoring service.',mobileMsg:'Hello, I would like to use your mobile tailor service. Can you come to my address?',s_services:'Services',s_why:'Why Us?',s_faq:'FAQ',s_reviews:'Reviews',s_areas:'Service Areas',s_contact:'Contact',s_prices:'Price List 2025–2026',s_mobile:'Mobile Tailor',mobileHeading:'We Come to You',mobileDesc:'Our mobile tailor service covers all of Antalya. We visit your address, take measurements and deliver back to your door.',mobileCta:'🚗 Request Mobile Tailor',steps:[['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']] as [string,string,string][],areaLabel:'Tap a district to see neighborhoods',quoteBtn:'📲 Get Free Quote',bulkBtn:'🏭 Bulk Uniform Quote',mapBtn:'📍 Google Maps',hours:"09:00–19:00 · Mon–Sat",bayBayanHeading:"Men's & Women's Tailor",bayHeading:"Men's Tailor",bayDesc:"Bespoke suits, trouser hemming, shirt making, jacket alterations, sleeve shortening, blazer, tuxedo, groom suit.",bayanHeading:"Women's Tailor",bayanDesc:"Dress making, blouse, skirt shortening, dress alterations, evening gown repair, wedding dress alterations, plus size, baby clothes.",atolyeHeading:'Sewing Workshop',atolyeDesc:'Pattern making, contract manufacturing, mass production, sample sewing. Full production package for brands, boutiques and e-commerce.',faq:[['How much is trouser hemming in Antalya?','From ₺150. WhatsApp a photo for a free quote in 30 minutes.'],["Do you offer men's tailoring?","Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, groom suits. WhatsApp: +90 531 898 64 18"],["Do you offer women's tailoring?","Yes! Dress making, skirts, evening gown repair, wedding dress alterations, plus size, baby clothes. WhatsApp: +90 531 898 64 18"],['Sewing workshop for mass production?','Yes! Pattern making, prototypes, mass production. Full package for brands. WhatsApp: +90 531 898 64 18'],['Zip replacement cost?','Trousers/jeans ₺120, jacket ₺200, coat ₺300. Same-day available.'],['Do you come to my hotel or home?','Yes! All Antalya districts. Share location on WhatsApp.'],['Dry cleaning and ironing prices?','Dry cleaning ₺300, coat ₺500, laundry ₺80/kg. Hotel courier pickup. 24h express.'],['Wedding and evening gown alterations?','Yes. Wedding dress ₺500, evening gown ₺350. April–October season.'],['Uniform production Antalya?','Yes. Hotel, chef, waiter, security, school, sports. Design + mass production + embroidery.'],['Sweatshirt mass production?','Yes. With embroidery and print. All quantities.'],] as [string,string][],seoIntro:"Tailor Can — Antalya's best English-speaking tailor. Men's: bespoke suits, trouser hemming, shirts. Women's: dress making, alterations, wedding dresses. Sewing workshop: pattern making, mass production. Dry cleaning. Uniform production. Mobile tailor service all Antalya."},
-  ru:{badge:'✦ Анталья · Портной Кан',h1:'Лучший',h1em:'Портной Антальи',sub:'Мужской · Женский · Ателье · Подгонка · Химчистка · Форма · Вышивка',waBtn:'Написать в WhatsApp',downBtn:'Смотреть услуги ↓',waMsg:'Здравствуйте, хотел бы узнать о ваших услугах.',mobileMsg:'Здравствуйте, хочу выездной сервис. Приедете по адресу?',s_services:'Услуги',s_why:'Почему мы?',s_faq:'Вопросы',s_reviews:'Отзывы',s_areas:'Районы',s_contact:'Контакт',s_prices:'Цены 2025–2026',s_mobile:'Выездной портной',mobileHeading:'Приедем к вам',mobileDesc:'Выездной портной по всей Анталье. Приедем, снимем мерки, сошьём и доставим.',mobileCta:'🚗 Вызвать портного',steps:[['📍','Укажите адрес','Локация в WhatsApp'],['📏','Мерки','Портной приедет'],['✂️','Пошив','По меркам'],['🚗','Доставка','В назначенное время']] as [string,string,string][],areaLabel:'Нажмите на район',quoteBtn:'📲 Бесплатная оценка',bulkBtn:'🏭 Оптовый заказ',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Пн–Сб',bayBayanHeading:'Мужской и женский портной',bayHeading:'Мужской портной',bayDesc:'Пошив костюмов, подгонка брюк, рубашки, пиджаки, блейзер, смокинг, костюм жениха.',bayanHeading:'Женский портной',bayanDesc:'Пошив платьев, блузок, укорачивание юбок, подгонка, вечерние платья, свадебные платья, большие размеры.',atolyeHeading:'Швейное ателье',atolyeDesc:'Лекала, серийное производство, образцы. Полный пакет для брендов и интернет-магазинов.',faq:[['Стоимость подгонки брюк в Анталье?','От ₺150. Отправьте фото в WhatsApp — ответим за 30 минут.'],['Есть мужской портной?','Да! Костюмы, брюки, рубашки, пиджаки, смокинг. WhatsApp: +90 531 898 64 18'],['Есть женский портной?','Да! Платья, юбки, вечерние платья, свадебные платья, большие размеры. WhatsApp: +90 531 898 64 18'],['Ателье для серийного производства?','Да! Лекала, образцы, серийное производство. WhatsApp: +90 531 898 64 18'],['Стоимость замены молнии?','Брюки ₺120, пиджак ₺200, пальто ₺300. В тот же день.'],['Выезд в отель или на дом?','Да! По всей Анталье. Локацию в WhatsApp.'],['Химчистка и глажка?','Химчистка ₺300, пальто ₺500, стирка ₺80/кг. Курьер из отеля. 24ч.'],['Подгонка свадебного платья?','Да. Свадебное ₺500, вечернее ₺350. Апрель–октябрь.'],['Производство формы?','Да. Гостиницы, повара, официанты, охрана, школа. Дизайн + производство.'],['Пошив толстовок?','Да. Серийное производство. С вышивкой и печатью.'],] as [string,string][],seoIntro:'Портной Кан — опытный портной в Анталье. Мужской портной: костюмы, брюки, рубашки. Женский: платья, подгонка, свадебные платья. Ателье: лекала, серийное производство. Химчистка. Форма для отелей. Выездной сервис.'},
-  de:{badge:'✦ Antalya · Schneider Can',h1:'Antalyas',h1em:'Meisterschneider',sub:'Herren · Damen · Nähwerkstatt · Änderungen · Uniformen · Stickerei · Reinigung',waBtn:'WhatsApp schreiben',downBtn:'Leistungen ↓',waMsg:'Hallo, ich möchte Informationen über Ihren Schneiderservice.',mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst nutzen.',s_services:'Leistungen',s_why:'Warum wir?',s_faq:'Fragen',s_reviews:'Bewertungen',s_areas:'Servicegebiete',s_contact:'Kontakt',s_prices:'Preise 2025–2026',s_mobile:'Mobiler Schneider',mobileHeading:'Wir kommen zu Ihnen',mobileDesc:'Unser mobiler Schneiderdienst in ganz Antalya. Wir kommen, nehmen Maße, schneidern und liefern.',mobileCta:'🚗 Mobilen Schneider anfragen',steps:[['📍','Adresse','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt'],['✂️','Atelier','Nach Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']] as [string,string,string][],areaLabel:'Bezirk antippen',quoteBtn:'📲 Kostenloses Angebot',bulkBtn:'🏭 Uniform Großauftrag',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Mo–Sa',bayBayanHeading:'Herren- & Damenschneider',bayHeading:'Herrenschneider',bayDesc:'Maßanzüge, Hosenänderungen, Hemden, Jacken, Blazer, Smoking, Bräutigamanzug.',bayanHeading:'Damenschneiderin',bayanDesc:'Kleider nähen, Blusen, Röcke kürzen, Kleider ändern, Abendkleider, Brautkleid, Übergrößen.',atolyeHeading:'Nähwerkstatt',atolyeDesc:'Schnittmuster, Lohnfertigung, Serienproduktion. Vollständiges Paket für Marken und E-Commerce.',faq:[['Hosenänderung Preis in Antalya?','Ab ₺150. Foto per WhatsApp — Angebot in 30 Minuten.'],['Herrenschneider in Antalya?','Ja! Anzüge, Hosen, Hemden, Jacken, Blazer, Smoking. WhatsApp: +90 531 898 64 18'],['Damenschneiderin in Antalya?','Ja! Kleider, Röcke, Abendkleider, Brautkleid, Übergrößen. WhatsApp: +90 531 898 64 18'],['Nähwerkstatt Serienproduktion?','Ja! Schnittmuster, Prototypen, Serienproduktion. WhatsApp: +90 531 898 64 18'],['Reißverschluss-Kosten?','Hosen ₺120, Jacke ₺200, Mantel ₺300. Expressdienst.'],['Kommen Sie ins Hotel?','Ja! Ganz Antalya. Standort per WhatsApp.'],['Reinigung und Bügeln?','Reinigung ₺300, Mantel ₺500, Wäsche ₺80/kg. Kurierabholung. 24h.'],['Brautkleid-Änderungen?','Ja. Brautkleid ₺500, Abendkleid ₺350. April–Oktober.'],['Uniformproduktion?','Ja. Hotel, Köche, Kellner, Sicherheit, Schule. Design + Produktion.'],['Sweatshirts?','Ja. Serienproduktion. Mit Stickerei und Druck.'],] as [string,string][],seoIntro:'Schneider Can — Antalya mit deutschsprachigem Service. Herrenschneider: Anzüge, Hosen, Hemden. Damenschneiderin: Kleider, Abendkleider, Brautkleid. Nähwerkstatt: Schnittmuster, Serienproduktion. Reinigung. Uniformproduktion. Mobiler Schneider.'},
+  tr:{badge:'✦ Antalya · Terzi Can',h1:"Antalya'nın",h1em:'Terzisi',sub:'Bay Terzi · Bayan Terzi · Dikiş Atölyesi · Tadilat · Üniforma · Nakış · Kuru Temizleme',waBtn:"WhatsApp'tan Yazın",downBtn:'Hizmetleri Gör ↓',waMsg:'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.',mobileMsg:'Merhaba, terzi servisinizden yararlanmak istiyorum. Adresime gelebilir misiniz?',s_services:'Hizmetlerimiz',s_why:'Neden Biz?',s_faq:'Sık Sorulan Sorular',s_reviews:'Müşteri Yorumları',s_areas:'Hizmet Bölgeleri',s_contact:'Bize Ulaşın',s_prices:'Terzi Fiyatları 2025–2026',s_mobile:'Terzi Servisi',s_allsvc:'Tüm Hizmet Sayfalarımız',s_allsvc_sub:'Detaylı bilgi için tıklayın',mobileHeading:'Kapınıza Geliyoruz',mobileDesc:"Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz. Adresinize geliyor, ölçü alıyor, dikip teslim ediyoruz.",mobileCta:'🚗 Terzi Servisi Talep Et',steps:[['📍','Adresinizi Bildirin',"WhatsApp'tan konum paylaşın"],['📏','Yerinde Ölçü','Terzi adresinize gelir'],['✂️','Atölyede Dikilir','Ölçüye göre tamamlanır'],['🚗','Kapıya Teslim','Belirlenen vakitte']] as [string,string,string][],areaLabel:'İlçeye tıklayın — mahalleleri görün',quoteBtn:'📲 Ücretsiz Fiyat Teklifi Al',bulkBtn:'🏭 Toplu Üniforma Teklifi',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Pzt–Cmt',bayBayanHeading:'Bay & Bayan Terzi',bayHeading:'Bay Terzi',bayDesc:'Erkek takım elbise dikimi, pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma, blazer, smoking, damatlık dikimi.',bayanHeading:'Bayan Terzi',bayanDesc:'Kadın elbise dikimi, bluz, etek kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi.',atolyeHeading:'Dikiş Atölyesi',atolyeDesc:'Kalıp çıkarma, fason üretim, seri imalat, numune dikimi. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi.',faq:[['Paça ve pantolon kısaltma fiyatı? 2025–2026',"₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp'tan fotoğraf gönderin — 30 dk içinde fiyat."],['Bay terzi Antalya — erkek kıyafet dikimi?',"Evet! Erkek takım elbise, pantolon kısaltma, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: +90 531 898 64 18"],['Bayan terzi Antalya — kadın elbise dikimi?',"Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden, bebek elbisesi. WhatsApp: +90 531 898 64 18"],['Dikiş atölyesi Antalya — fason ve seri imalat?',"Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: +90 531 898 64 18"],['Fermuar değişimi kaç lira?',"Pantolon/kot ₺120, ceket ₺200, mont ₺300. Aynı gün teslim."],['Eve veya otele gelen terzi Antalya?',"Evet! Tüm Antalya ilçelerine araçlı servis. WhatsApp'tan konum paylaşın."],['Kuru temizleme ve ütü Antalya?',"Kuru temizleme ₺300, mont ₺500, çamaşır ₺80/kg. Otelden kurye alım. 24 saat."],['Gelinlik ve abiye tadilatı?','Evet. Gelinlik tadilatı ₺500, abiye tamiri ₺350. Nisan–Ekim düğün sezonu.'],['Üniforma üretimi Antalya?','Evet. Otel, aşçı, garson, güvenlik, okul, spor. Tasarım + seri imalat + nakış.'],['Sweatshirt ve eşofman dikimi?','Evet. Seri üretim. Nakış ve baskıyla kişiselleştirme.'],] as [string,string][],seoIntro:"Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Dikiş atölyesi: kalıp, fason, seri imalat. Kuru temizleme ve ütü. Üniforma üretimi. Eve ve otele gelen terzi."},
+  en:{badge:'✦ Antalya · Tailor Can',h1:"Antalya's",h1em:'Master Tailor',sub:"Men's · Women's · Sewing Workshop · Alterations · Uniforms · Embroidery · Dry Cleaning",waBtn:'WhatsApp Us Now',downBtn:'View Services ↓',waMsg:'Hello, I would like information about your tailoring service.',mobileMsg:'Hello, I would like to use your mobile tailor service. Can you come to my address?',s_services:'Services',s_why:'Why Us?',s_faq:'FAQ',s_reviews:'Reviews',s_areas:'Service Areas',s_contact:'Contact',s_prices:'Price List 2025–2026',s_mobile:'Mobile Tailor',s_allsvc:'All Service Pages',s_allsvc_sub:'Click for details',mobileHeading:'We Come to You',mobileDesc:'Our mobile tailor service covers all of Antalya. We visit your address, take measurements and deliver back to your door.',mobileCta:'🚗 Request Mobile Tailor',steps:[['📍','Share Address','Send location via WhatsApp'],['📏','On-Site Measure','Tailor comes to you'],['✂️','Tailored in Workshop','Sewn to your measurements'],['🚗','Delivered to Door','At agreed time']] as [string,string,string][],areaLabel:'Tap a district to see neighborhoods',quoteBtn:'📲 Get Free Quote',bulkBtn:'🏭 Bulk Uniform Quote',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Mon–Sat',bayBayanHeading:"Men's & Women's Tailor",bayHeading:"Men's Tailor",bayDesc:'Bespoke suits, trouser hemming, shirt making, jacket alterations, sleeve shortening, blazer, tuxedo, groom suit.',bayanHeading:"Women's Tailor",bayanDesc:'Dress making, blouse, skirt shortening, dress alterations, evening gown repair, wedding dress alterations, plus size, baby clothes.',atolyeHeading:'Sewing Workshop',atolyeDesc:'Pattern making, contract manufacturing, mass production, sample sewing. Full production package for brands, boutiques and e-commerce.',faq:[['How much is trouser hemming in Antalya?','From ₺150. WhatsApp a photo for a free quote in 30 minutes.'],["Do you offer men's tailoring?","Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, groom suits. WhatsApp: +90 531 898 64 18"],["Do you offer women's tailoring?","Yes! Dress making, skirts, evening gown repair, wedding dress alterations, plus size, baby clothes. WhatsApp: +90 531 898 64 18"],['Sewing workshop for mass production?','Yes! Pattern making, prototypes, mass production. Full package for brands. WhatsApp: +90 531 898 64 18'],['Zip replacement cost?','Trousers/jeans ₺120, jacket ₺200, coat ₺300. Same-day available.'],['Do you come to my hotel or home?','Yes! All Antalya districts. Share location on WhatsApp.'],['Dry cleaning and ironing prices?','Dry cleaning ₺300, coat ₺500, laundry ₺80/kg. Hotel courier pickup. 24h express.'],['Wedding and evening gown alterations?','Yes. Wedding dress ₺500, evening gown ₺350. April–October season.'],['Uniform production Antalya?','Yes. Hotel, chef, waiter, security, school, sports. Design + mass production + embroidery.'],['Sweatshirt mass production?','Yes. With embroidery and print. All quantities.'],] as [string,string][],seoIntro:"Tailor Can — Antalya's best English-speaking tailor. Men's: bespoke suits, trouser hemming, shirts. Women's: dress making, alterations, wedding dresses. Sewing workshop: pattern making, mass production. Dry cleaning. Uniform production. Mobile tailor service all Antalya."},
+  ru:{badge:'✦ Анталья · Портной Кан',h1:'Лучший',h1em:'Портной Антальи',sub:'Мужской · Женский · Ателье · Подгонка · Химчистка · Форма · Вышивка',waBtn:'Написать в WhatsApp',downBtn:'Смотреть услуги ↓',waMsg:'Здравствуйте, хотел бы узнать о ваших услугах.',mobileMsg:'Здравствуйте, хочу выездной сервис. Приедете по адресу?',s_services:'Услуги',s_why:'Почему мы?',s_faq:'Вопросы',s_reviews:'Отзывы',s_areas:'Районы',s_contact:'Контакт',s_prices:'Цены 2025–2026',s_mobile:'Выездной портной',s_allsvc:'Все страницы услуг',s_allsvc_sub:'Нажмите для подробностей',mobileHeading:'Приедем к вам',mobileDesc:'Выездной портной по всей Анталье. Приедем, снимем мерки, сошьём и доставим.',mobileCta:'🚗 Вызвать портного',steps:[['📍','Укажите адрес','Локация в WhatsApp'],['📏','Мерки','Портной приедет'],['✂️','Пошив','По меркам'],['🚗','Доставка','В назначенное время']] as [string,string,string][],areaLabel:'Нажмите на район',quoteBtn:'📲 Бесплатная оценка',bulkBtn:'🏭 Оптовый заказ',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Пн–Сб',bayBayanHeading:'Мужской и женский портной',bayHeading:'Мужской портной',bayDesc:'Пошив костюмов, подгонка брюк, рубашки, пиджаки, блейзер, смокинг, костюм жениха.',bayanHeading:'Женский портной',bayanDesc:'Пошив платьев, блузок, укорачивание юбок, подгонка, вечерние платья, свадебные платья, большие размеры.',atolyeHeading:'Швейное ателье',atolyeDesc:'Лекала, серийное производство, образцы. Полный пакет для брендов и интернет-магазинов.',faq:[['Стоимость подгонки брюк в Анталье?','От ₺150. Отправьте фото в WhatsApp — ответим за 30 минут.'],['Есть мужской портной?','Да! Костюмы, брюки, рубашки, пиджаки, смокинг. WhatsApp: +90 531 898 64 18'],['Есть женский портной?','Да! Платья, юбки, вечерние платья, свадебные платья, большие размеры. WhatsApp: +90 531 898 64 18'],['Ателье для серийного производства?','Да! Лекала, образцы, серийное производство. WhatsApp: +90 531 898 64 18'],['Стоимость замены молнии?','Брюки ₺120, пиджак ₺200, пальто ₺300. В тот же день.'],['Выезд в отель или на дом?','Да! По всей Анталье. Локацию в WhatsApp.'],['Химчистка и глажка?','Химчистка ₺300, пальто ₺500, стирка ₺80/кг. Курьер из отеля. 24ч.'],['Подгонка свадебного платья?','Да. Свадебное ₺500, вечернее ₺350. Апрель–октябрь.'],['Производство формы?','Да. Гостиницы, повара, официанты, охрана, школа. Дизайн + производство.'],['Пошив толстовок?','Да. Серийное производство. С вышивкой и печатью.'],] as [string,string][],seoIntro:'Портной Кан — опытный портной в Анталье. Мужской портной: костюмы, брюки, рубашки. Женский: платья, подгонка, свадебные платья. Ателье: лекала, серийное производство. Химчистка. Форма для отелей. Выездной сервис.'},
+  de:{badge:'✦ Antalya · Schneider Can',h1:'Antalyas',h1em:'Meisterschneider',sub:'Herren · Damen · Nähwerkstatt · Änderungen · Uniformen · Stickerei · Reinigung',waBtn:'WhatsApp schreiben',downBtn:'Leistungen ↓',waMsg:'Hallo, ich möchte Informationen über Ihren Schneiderservice.',mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst nutzen.',s_services:'Leistungen',s_why:'Warum wir?',s_faq:'Fragen',s_reviews:'Bewertungen',s_areas:'Servicegebiete',s_contact:'Kontakt',s_prices:'Preise 2025–2026',s_mobile:'Mobiler Schneider',s_allsvc:'Alle Serviceseiten',s_allsvc_sub:'Für Details klicken',mobileHeading:'Wir kommen zu Ihnen',mobileDesc:'Unser mobiler Schneiderdienst in ganz Antalya. Wir kommen, nehmen Maße, schneidern und liefern.',mobileCta:'🚗 Mobilen Schneider anfragen',steps:[['📍','Adresse','Standort per WhatsApp'],['📏','Maße vor Ort','Schneider kommt'],['✂️','Atelier','Nach Maß genäht'],['🚗','Lieferung','Zur vereinbarten Zeit']] as [string,string,string][],areaLabel:'Bezirk antippen',quoteBtn:'📲 Kostenloses Angebot',bulkBtn:'🏭 Uniform Großauftrag',mapBtn:'📍 Google Maps',hours:'09:00–19:00 · Mo–Sa',bayBayanHeading:'Herren- & Damenschneider',bayHeading:'Herrenschneider',bayDesc:'Maßanzüge, Hosenänderungen, Hemden, Jacken, Blazer, Smoking, Bräutigamanzug.',bayanHeading:'Damenschneiderin',bayanDesc:'Kleider nähen, Blusen, Röcke kürzen, Kleider ändern, Abendkleider, Brautkleid, Übergrößen.',atolyeHeading:'Nähwerkstatt',atolyeDesc:'Schnittmuster, Lohnfertigung, Serienproduktion. Vollständiges Paket für Marken und E-Commerce.',faq:[['Hosenänderung Preis in Antalya?','Ab ₺150. Foto per WhatsApp — Angebot in 30 Minuten.'],['Herrenschneider in Antalya?','Ja! Anzüge, Hosen, Hemden, Jacken, Blazer, Smoking. WhatsApp: +90 531 898 64 18'],['Damenschneiderin in Antalya?','Ja! Kleider, Röcke, Abendkleider, Brautkleid, Übergrößen. WhatsApp: +90 531 898 64 18'],['Nähwerkstatt Serienproduktion?','Ja! Schnittmuster, Prototypen, Serienproduktion. WhatsApp: +90 531 898 64 18'],['Reißverschluss-Kosten?','Hosen ₺120, Jacke ₺200, Mantel ₺300. Expressdienst.'],['Kommen Sie ins Hotel?','Ja! Ganz Antalya. Standort per WhatsApp.'],['Reinigung und Bügeln?','Reinigung ₺300, Mantel ₺500, Wäsche ₺80/kg. Kurierabholung. 24h.'],['Brautkleid-Änderungen?','Ja. Brautkleid ₺500, Abendkleid ₺350. April–Oktober.'],['Uniformproduktion?','Ja. Hotel, Köche, Kellner, Sicherheit, Schule. Design + Produktion.'],['Sweatshirts?','Ja. Serienproduktion. Mit Stickerei und Druck.'],] as [string,string][],seoIntro:'Schneider Can — Antalya mit deutschsprachigem Service. Herrenschneider: Anzüge, Hosen, Hemden. Damenschneiderin: Kleider, Abendkleider, Brautkleid. Nähwerkstatt: Schnittmuster, Serienproduktion. Reinigung. Uniformproduktion. Mobiler Schneider.'},
 };
 
 export default function TerziClient() {
-  const [lang, setLang] = useState<Lang>('tr');
-  const [openFaq, setOpenFaq] = useState<number|null>(null);
-  const [activeIlce, setActiveIlce] = useState<string|null>(null);
-  const [heroIdx, setHeroIdx] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
-  const stripRef = useRef<HTMLDivElement>(null);
-  const c = C[lang];
+  const [lang,setLang]=useState<Lang>('tr');
+  const [openFaq,setOpenFaq]=useState<number|null>(null);
+  const [activeIlce,setActiveIlce]=useState<string|null>(null);
+  const [heroIdx,setHeroIdx]=useState(0);
+  const [scrolled,setScrolled]=useState(false);
+  const stripRef=useRef<HTMLDivElement>(null);
+  const c=C[lang];
 
   useEffect(()=>{
     const bl=(navigator.language||'').toLowerCase();
@@ -176,12 +156,11 @@ export default function TerziClient() {
     return()=>window.removeEventListener('scroll',h);
   },[]);
 
-  // Auto-scroll film strip
   useEffect(()=>{
     const el=stripRef.current;
     if(!el)return;
     let x=0;
-    const run=()=>{ x+=0.5; if(x>=el.scrollWidth/2)x=0; el.scrollLeft=x; };
+    const run=()=>{x+=0.5;if(x>=el.scrollWidth/2)x=0;el.scrollLeft=x;};
     const id=setInterval(run,16);
     return()=>clearInterval(id);
   },[]);
@@ -191,21 +170,10 @@ export default function TerziClient() {
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;
-      --cream:#FAF7F2;--cream2:#F2EDE4;--cream3:#E8E0D2;
-      --ink:#1C1814;--ink2:#2E2820;--ink3:#3D3228;
-      --text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;
-      --serif:'Cormorant Garamond',Georgia,serif;
-      --sans:'DM Sans',system-ui,sans-serif;
-      --shadow:0 4px 32px rgba(60,40,20,.1);
-      --shadow-lg:0 16px 64px rgba(60,40,20,.16);
-    }
+    :root{--gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;--cream:#FAF7F2;--cream2:#F2EDE4;--cream3:#E8E0D2;--ink:#1C1814;--ink2:#2E2820;--ink3:#3D3228;--text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--shadow:0 4px 32px rgba(60,40,20,.1);--shadow-lg:0 16px 64px rgba(60,40,20,.16)}
     html{scroll-behavior:smooth}
     body{background:var(--cream);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--cream2)}::-webkit-scrollbar-thumb{background:var(--gold3)}
-
-    /* NAV */
     .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
     .nav.up{background:rgba(250,247,242,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,151,90,.15);padding:.8rem 2rem;box-shadow:0 2px 20px rgba(60,40,20,.07)}
     .nav-logo{font-family:var(--serif);font-size:1.5rem;color:var(--ink);text-decoration:none;letter-spacing:.04em;font-weight:600}
@@ -216,8 +184,6 @@ export default function TerziClient() {
     .lsw{display:flex;gap:.3rem}
     .lb{background:none;border:1px solid rgba(184,151,90,.25);color:var(--muted);font-size:.67rem;padding:.25rem .5rem;cursor:pointer;font-family:var(--sans);text-transform:uppercase;letter-spacing:.08em;transition:all .25s;border-radius:2px}
     .lb.on,.lb:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,151,90,.08)}
-
-    /* HERO */
     .hero{position:relative;height:100vh;min-height:700px;overflow:hidden;display:flex;align-items:flex-end}
     .hslide{position:absolute;inset:0;transition:opacity 1.2s ease}
     .hslide img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
@@ -234,19 +200,13 @@ export default function TerziClient() {
     .hdot.on{background:#fff;transform:scale(1.4)}
     .hscroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.6);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
     .hscroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrollpulse 2s ease-in-out infinite}
-    @keyframes scrollpulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
-
-    /* FILM STRIP */
+    @keyframes scrollpulse{0%,100%{opacity:.4}50%{opacity:1}}
     .strip-wrap{background:var(--ink);padding:1.2rem 0;overflow:hidden}
     .strip{display:flex;gap:4px;width:max-content}
     .strip-img{width:220px;height:150px;object-fit:cover;flex-shrink:0;filter:brightness(.75) saturate(.8);transition:filter .4s}
     .strip-img:hover{filter:brightness(1) saturate(1.1)}
-
-    /* SEO INTRO */
     .seoblk{background:var(--cream2);padding:2.5rem 2rem;border-left:3px solid var(--gold3)}
     .seoblk p{font-size:.84rem;color:var(--muted);line-height:1.95;max-width:1100px;margin:0 auto}
-
-    /* BAY BAYAN */
     .bba{background:var(--light);padding:5rem 2rem}
     .bba-inner{max-width:1200px;margin:0 auto}
     .bba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
@@ -258,9 +218,7 @@ export default function TerziClient() {
     .bba-h{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:.7rem;line-height:1.2}
     .bba-d{font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
     .bba-cta-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,151,90,.3);padding-bottom:.1rem;transition:all .3s}
-    .bba-cta-link:hover{color:var(--gold3);border-color:var(--gold3)}
-
-    /* MOBILE STEPS */
+    .bba-cta-link:hover{color:var(--gold3)}
     .mob{background:var(--ink);padding:5rem 2rem;position:relative;overflow:hidden}
     .mob::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border:60px solid rgba(184,151,90,.06);border-radius:50%}
     .mob-inner{max-width:1200px;margin:0 auto}
@@ -269,13 +227,11 @@ export default function TerziClient() {
     .mob-ic{font-size:2rem;margin-bottom:.8rem}
     .mob-t{font-family:var(--serif);font-size:1.05rem;color:var(--gold2);margin-bottom:.4rem}
     .mob-d{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.6}
-
-    /* SERVICES */
     .svc{background:var(--cream);padding:0}
     .svc-head{padding:5rem 2rem 3rem;max-width:1200px;margin:0 auto}
     .svc-grid{display:grid;grid-template-columns:repeat(2,1fr)}
-    .sc{position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;cursor:default}
-    .sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease,filter .5s}
+    .sc{position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end}
+    .sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
     .sc:hover img{transform:scale(1.05)}
     .sc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,.92) 0%,rgba(28,24,20,.25) 60%,transparent 100%)}
     .sc-body{position:relative;z-index:2;padding:2rem}
@@ -285,8 +241,6 @@ export default function TerziClient() {
     .sc-p{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(212,176,122,.3);padding:.25rem .7rem;display:inline-block}
     .sc-line{position:absolute;bottom:0;left:2rem;right:2rem;height:1.5px;background:linear-gradient(to right,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s}
     .sc:hover .sc-line{transform:scaleX(1)}
-
-    /* WHY */
     .why{background:var(--cream2);padding:5rem 2rem}
     .why-inner{max-width:1200px;margin:0 auto}
     .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
@@ -295,8 +249,6 @@ export default function TerziClient() {
     .wc-ic{font-size:1.5rem;margin-bottom:.8rem}
     .wc-t{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
     .wc-d{font-size:.76rem;color:var(--muted);line-height:1.5}
-
-    /* REVIEWS */
     .rev{background:var(--ink2);padding:5rem 2rem}
     .rev-inner{max-width:900px;margin:0 auto}
     .rev-grid{display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:3rem}
@@ -304,8 +256,6 @@ export default function TerziClient() {
     .rc-stars{color:#f59e0b;margin-bottom:.5rem;font-size:.9rem}
     .rc-txt{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.85;font-style:italic;margin-bottom:.8rem}
     .rc-auth{font-size:.75rem;color:var(--gold2);font-weight:500}
-
-    /* PRICES */
     .prices{background:var(--light);padding:5rem 2rem}
     .prices-inner{max-width:860px;margin:0 auto}
     .ptbl{width:100%;border-collapse:collapse;margin-top:2rem}
@@ -316,8 +266,6 @@ export default function TerziClient() {
     .ptbl tr:hover td{background:rgba(184,151,90,.08)}
     .tpr{color:var(--gold3);font-weight:600;text-align:right;white-space:nowrap}
     .ttm{color:var(--muted);font-size:.74rem;text-align:right}
-
-    /* AREAS */
     .areas{background:var(--cream2);padding:5rem 2rem}
     .areas-inner{max-width:1100px;margin:0 auto}
     .ilwrap{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:2.5rem 0 1.2rem}
@@ -325,8 +273,11 @@ export default function TerziClient() {
     .ilbtn.on,.ilbtn:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
     .mahwrap{background:#fff;border:1px solid rgba(184,151,90,.15);border-radius:2px;padding:1.2rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;box-shadow:var(--shadow)}
     .mchip{font-size:.72rem;color:var(--muted);border:1px solid rgba(184,151,90,.15);padding:.22rem .65rem;border-radius:2px}
-
-    /* FAQ */
+    .allsvc{background:var(--ink);padding:5rem 2rem}
+    .allsvc-inner{max-width:1100px;margin:0 auto}
+    .allsvc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-top:2.5rem}
+    .allsvc-link{display:flex;align-items:center;gap:.7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:1rem 1.2rem;text-decoration:none;color:rgba(255,255,255,.85);font-size:.85rem;transition:all .25s}
+    .allsvc-link:hover{background:rgba(184,151,90,.1);border-color:rgba(184,151,90,.3);transform:translateY(-2px)}
     .faq{background:var(--light);padding:5rem 2rem}
     .faq-inner{max-width:760px;margin:0 auto}
     .faqitem{border-bottom:1px solid rgba(184,151,90,.12)}
@@ -336,8 +287,6 @@ export default function TerziClient() {
     .faqico.open{transform:rotate(45deg)}
     .faqa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s;font-size:.83rem;color:var(--muted);line-height:1.9}
     .faqa.open{max-height:300px;padding-bottom:1.2rem}
-
-    /* CONTACT */
     .contact{background:var(--ink);padding:5rem 2rem}
     .contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
     .crow{display:flex;gap:.8rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -346,21 +295,16 @@ export default function TerziClient() {
     .cval a{color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
     .cval a:hover{color:var(--gold2)}
     .mapbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem}
-
-    /* FOOTER */
     footer{background:var(--ink2);border-top:1px solid rgba(184,151,90,.1);padding:2.5rem 2rem;text-align:center}
-    .fkws{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:center;margin-top:1rem}
-    .kpill{font-size:.6rem;color:rgba(184,151,90,.45);border:1px solid rgba(184,151,90,.12);padding:.18rem .52rem;border-radius:2px}
-
-    /* BUTTONS */
+    .footnav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.2rem}
+    .footnav a{font-size:.72rem;color:rgba(212,176,122,.75);text-decoration:none;border:1px solid rgba(184,151,90,.18);padding:.25rem .65rem;border-radius:2px;transition:all .25s}
+    .footnav a:hover{color:var(--gold2);border-color:rgba(184,151,90,.4)}
     .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s;border-radius:1px}
     .btn-gold:hover{background:var(--gold3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,90,.35)}
     .btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.9);padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
     .btn-outline:hover{border-color:var(--gold2);color:var(--gold2);transform:translateY(-2px)}
     .btn-outline-dark{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold3);padding:.85rem 1.8rem;font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(184,151,90,.35);cursor:pointer;transition:all .3s}
     .btn-outline-dark:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,151,90,.06)}
-
-    /* SECTION HEADS */
     .sh{margin-bottom:0}
     .ey{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.6rem}
     .ey-light{color:var(--gold2)}
@@ -370,30 +314,14 @@ export default function TerziClient() {
     .ss-light{color:rgba(255,255,255,.5)}
     .gl{display:block;width:40px;height:1.5px;background:var(--gold);margin-top:1rem}
     .gl-center{margin-left:auto;margin-right:auto}
-
-    /* WA FLOAT */
     .wafloat{position:fixed;bottom:1.8rem;right:1.8rem;z-index:150;width:3.2rem;height:3.2rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .3s}
     .wafloat:hover{transform:scale(1.1)}
-
-    @media(max-width:900px){
-      .nav-links{display:none}
-      .hero h1{font-size:3rem}
-      .bba-grid{grid-template-columns:1fr}
-      .svc-grid{grid-template-columns:1fr}
-      .mob-steps{grid-template-columns:repeat(2,1fr)}
-      .why-grid{grid-template-columns:repeat(2,1fr)}
-      .contact-inner{grid-template-columns:1fr;gap:2rem}
-      .lsw{flex-wrap:wrap}
-    }
-    @media(max-width:480px){
-      .why-grid{grid-template-columns:1fr}
-      .hacts{flex-direction:column}
-    }
+    @media(max-width:900px){.nav-links{display:none}.hero h1{font-size:3rem}.bba-grid{grid-template-columns:1fr}.svc-grid{grid-template-columns:1fr}.mob-steps{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:repeat(2,1fr)}.contact-inner{grid-template-columns:1fr;gap:2rem}.lsw{flex-wrap:wrap}}
+    @media(max-width:480px){.why-grid{grid-template-columns:1fr}.hacts{flex-direction:column}}
   `}</style>
 
   <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="wafloat" aria-label="WhatsApp">💬</a>
 
-  {/* NAV */}
   <nav className={`nav${scrolled?' up':''}`}>
     <a href="#" className="nav-logo">Terzi <span>Can</span></a>
     <ul className="nav-links">
@@ -412,7 +340,6 @@ export default function TerziClient() {
     </div>
   </nav>
 
-  {/* HERO — fullscreen slider */}
   <section className="hero">
     {HERO_IMAGES.map((img,i)=>(
       <div key={i} className={`hslide${i===heroIdx?' active':' inactive'}`}>
@@ -439,13 +366,9 @@ export default function TerziClient() {
         <a href="#bay-bayan" className="btn-outline">{c.downBtn}</a>
       </div>
     </div>
-    <div className="hscroll">
-      <div className="hscroll-line"/>
-      <span>scroll</span>
-    </div>
+    <div className="hscroll"><div className="hscroll-line"/><span>scroll</span></div>
   </section>
 
-  {/* FILM STRIP */}
   <div className="strip-wrap">
     <div className="strip" ref={stripRef} style={{overflowX:'hidden',userSelect:'none'}}>
       {[...FILM_STRIP,...FILM_STRIP].map((src,i)=>(
@@ -454,12 +377,10 @@ export default function TerziClient() {
     </div>
   </div>
 
-  {/* SEO INTRO */}
   <div className="seoblk" id="main-content">
     <p id="terzi-can-ozet">{c.seoIntro}</p>
   </div>
 
-  {/* BAY & BAYAN & ATOLYE */}
   <section className="bba" id="bay-bayan">
     <div className="bba-inner">
       <div className="sh">
@@ -468,38 +389,35 @@ export default function TerziClient() {
         <span className="gl"/>
       </div>
       <div className="bba-grid">
-        {/* BAY */}
         <article className="bba-card" id="bay-terzi">
           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&q=85&auto=format&fit=crop" alt="Bay terzi erkek takım elbise Antalya" className="bba-img" loading="lazy"/>
           <div className="bba-body">
             <div className="bba-eyebrow">👔 {lang==='tr'?'Bay Terzi':lang==='en'?"Men's Tailor":lang==='ru'?'Мужской портной':'Herrenschneider'}</div>
             <h3 className="bba-h">{c.bayHeading}</h3>
             <p className="bba-d">{c.bayDesc}</p>
-            <a href={WA(lang==='tr'?'Merhaba, erkek kıyafeti için fiyat almak istiyorum.':'Hello, I need men\'s tailoring.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+            <a href={WA(lang==='tr'?'Merhaba, erkek kıyafeti için fiyat almak istiyorum.':"Hello, I need men's tailoring.")} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
               💬 {lang==='tr'?'Fiyat Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
             </a>
           </div>
         </article>
-        {/* BAYAN */}
         <article className="bba-card" id="bayan-terzi">
           <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=85&auto=format&fit=crop" alt="Bayan terzi kadın elbise dikimi Antalya" className="bba-img" loading="lazy"/>
           <div className="bba-body">
             <div className="bba-eyebrow">👗 {lang==='tr'?'Bayan Terzi':lang==='en'?"Women's Tailor":lang==='ru'?'Женский портной':'Damenschneiderin'}</div>
             <h3 className="bba-h">{c.bayanHeading}</h3>
             <p className="bba-d">{c.bayanDesc}</p>
-            <a href={WA(lang==='tr'?'Merhaba, kadın kıyafeti için fiyat almak istiyorum.':'Hello, I need women\'s tailoring.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+            <a href={WA(lang==='tr'?'Merhaba, kadın kıyafeti için fiyat almak istiyorum.':"Hello, I need women's tailoring.")} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
               💬 {lang==='tr'?'Fiyat Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
             </a>
           </div>
         </article>
-        {/* ATOLYE */}
         <article className="bba-card" id="dikis-atolyesi">
           <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&q=85&auto=format&fit=crop" alt="Dikiş atölyesi fason seri üretim Antalya" className="bba-img" loading="lazy"/>
           <div className="bba-body">
             <div className="bba-eyebrow">🏭 {lang==='tr'?'Dikiş Atölyesi':lang==='en'?'Sewing Workshop':lang==='ru'?'Ателье':'Nähwerkstatt'}</div>
             <h3 className="bba-h">{c.atolyeHeading}</h3>
             <p className="bba-d">{c.atolyeDesc}</p>
-            <a href={WA(lang==='tr'?'Merhaba, dikiş atölyesi ve fason üretim için teklif almak istiyorum.':'Hello, I need a workshop quote.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
+            <a href={WA(lang==='tr'?'Merhaba, dikiş atölyesi için teklif almak istiyorum.':'Hello, I need a workshop quote.')} target="_blank" rel="noopener noreferrer" className="bba-cta-link">
               💬 {lang==='tr'?'Teklif Al →':lang==='en'?'Get Quote →':lang==='ru'?'Запрос →':'Angebot →'}
             </a>
           </div>
@@ -508,7 +426,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* MOBILE TAILOR */}
   <section className="mob">
     <div className="mob-inner">
       <div className="sh">
@@ -532,12 +449,11 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* SERVICES */}
   <section className="svc" id="services">
     <div className="svc-head">
       <div className="ey">✦ {c.s_services}</div>
       <h2 className="st">{lang==='tr'?'Antalya Terzi Hizmetleri':lang==='en'?'Antalya Tailor Services':lang==='ru'?'Услуги портного Анталья':'Schneiderleistungen Antalya'}</h2>
-      <p className="ss">{lang==='tr'?'Bay ve bayan için her kıyafete özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment, for men and women.':lang==='ru'?'Профессиональный пошив для мужчин и женщин.':'Professionelle Schneiderei für Herren und Damen.'}</p>
+      <p className="ss">{lang==='tr'?'Bay ve bayan için her kıyafete özel profesyonel terzilik.':lang==='en'?'Professional tailoring for every garment.':lang==='ru'?'Профессиональный пошив для мужчин и женщин.':'Professionelle Schneiderei für Herren und Damen.'}</p>
       <span className="gl"/>
     </div>
     <div className="svc-grid">
@@ -555,13 +471,12 @@ export default function TerziClient() {
         </article>
       ))}
     </div>
-    <div style={{textAlign:'center',padding:'2.5rem 2rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap',background:' var(--cream)'}}>
+    <div style={{textAlign:'center',padding:'2.5rem 2rem 4rem',display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap',background:'var(--cream)'}}>
       <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{c.quoteBtn}</a>
       <a href={WA(lang==='tr'?'Merhaba, toplu üniforma üretimi için teklif almak istiyorum.':'Hello, bulk uniform quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{c.bulkBtn}</a>
     </div>
   </section>
 
-  {/* WHY */}
   <section className="why">
     <div className="why-inner">
       <div className="sh">
@@ -581,7 +496,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* REVIEWS */}
   <section className="rev">
     <div className="rev-inner">
       <div className="sh" style={{textAlign:'center'}}>
@@ -601,7 +515,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* PRICES */}
   <section className="prices" id="prices">
     <div className="prices-inner">
       <div className="sh">
@@ -630,7 +543,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* AREAS */}
   <section className="areas" id="areas">
     <div className="areas-inner">
       <div className="sh" style={{textAlign:'center'}}>
@@ -656,26 +568,17 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* TÜM HİZMET SAYFALARIMIZ — gerçek internal link, SEO kritik */}
-  <section style={{background:'var(--ink)',padding:'4rem 2rem'}}>
-    <div style={{maxWidth:'1100px',margin:'0 auto'}}>
+  {/* TÜM HİZMET SAYFALARIMIZ — gerçek internal link, SEO kritik. 9 sayfa (gelinlik+fermuar eklendi) */}
+  <section className="allsvc">
+    <div className="allsvc-inner">
       <div className="sh" style={{textAlign:'center'}}>
-        <div className="ey ey-light">✦ {lang==='tr'?'Tüm Hizmet Sayfalarımız':lang==='en'?'All Service Pages':lang==='ru'?'Все страницы услуг':'Alle Serviceseiten'}</div>
-        <h2 className="st st-light">{lang==='tr'?'Detaylı Bilgi İçin Tıklayın':lang==='en'?'Click for Details':lang==='ru'?'Подробнее':'Für Details klicken'}</h2>
+        <div className="ey ey-light">✦ {c.s_allsvc}</div>
+        <h2 className="st st-light">{c.s_allsvc_sub}</h2>
         <span className="gl gl-center"/>
       </div>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'.8rem',marginTop:'2.5rem'}}>
-        {[
-          ['✂️','Paça Kısaltma Antalya','/terzi/paca-kisaltma-antalya'],
-          ['👔','Bay Terzi Antalya','/terzi/bay-terzi-antalya'],
-          ['👗','Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],
-          ['🏭','Dikiş Atölyesi Antalya','/terzi/dikis-atolyesi-antalya'],
-          ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
-          ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
-          ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
-        ].map(([ic,label,href])=>(
-          <Link key={href} href={href}
-            style={{display:'flex',alignItems:'center',gap:'.7rem',background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:'2px',padding:'1rem 1.2rem',textDecoration:'none',color:'rgba(255,255,255,.85)',fontSize:'.85rem',transition:'all .25s'}}>
+      <div className="allsvc-grid">
+        {ALT_SAYFALAR.map(([ic,label,href])=>(
+          <Link key={href} href={href} className="allsvc-link">
             <span style={{fontSize:'1.2rem'}}>{ic}</span>
             <span>{label}</span>
             <span style={{marginLeft:'auto',color:'var(--gold2)',fontSize:'.8rem'}}>→</span>
@@ -685,7 +588,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* FAQ */}
   <section className="faq" id="faq">
     <div className="faq-inner">
       <div className="sh" style={{textAlign:'center',marginBottom:'2.5rem'}}>
@@ -705,7 +607,6 @@ export default function TerziClient() {
     </div>
   </section>
 
-  {/* CONTACT */}
   <section className="contact" id="contact">
     <div className="contact-inner">
       <div>
@@ -728,7 +629,7 @@ export default function TerziClient() {
           <div style={{display:'flex',flexDirection:'column',gap:'.7rem',marginTop:'2rem'}}>
             <a href={WA(c.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{justifyContent:'center'}}>💬 WhatsApp</a>
             <a href={WA(c.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{justifyContent:'center'}}>{c.mobileCta}</a>
-            <a href="https://maps.google.com/?q=Antalya+Konyaaltı" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{justifyContent:'center'}}>{c.mapBtn}</a>
+            <a href="https://maps.app.goo.gl/rpgwjJgWZHfgafTy5" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{justifyContent:'center'}}>{c.mapBtn}</a>
           </div>
         </address>
       </div>
@@ -738,7 +639,7 @@ export default function TerziClient() {
         <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.35)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
           {lang==='tr'?'Tüm Antalya ilçelerine bay & bayan terzi servisi.':lang==='en'?'Men & women tailor service all Antalya.':'Alle Antalya-Bezirke.'}
         </p>
-        <a href="https://maps.google.com/?q=Antalya+Turkey" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{fontSize:'.75rem'}}>{c.mapBtn}</a>
+        <a href="https://maps.app.goo.gl/rpgwjJgWZHfgafTy5" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{fontSize:'.75rem'}}>{c.mapBtn}</a>
       </div>
     </div>
   </section>
@@ -750,19 +651,9 @@ export default function TerziClient() {
     <p style={{fontSize:'.72rem',color:'rgba(255,255,255,.3)'}}>
       © 2026 SwapHubs — Antalya Bay & Bayan Terzi · Dikiş Atölyesi · +90 531 898 64 18
     </p>
-    <nav aria-label="Footer hizmet linkleri" style={{display:'flex',flexWrap:'wrap',gap:'.5rem',justifyContent:'center',marginTop:'1.2rem'}}>
-      {[
-        ['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],
-        ['Bay Terzi','/terzi/bay-terzi-antalya'],
-        ['Bayan Terzi','/terzi/bayan-terzi-antalya'],
-        ['Dikiş Atölyesi','/terzi/dikis-atolyesi-antalya'],
-        ['Üniforma Üretimi','/terzi/uniforma-uretimi-antalya'],
-        ['Kuru Temizleme','/terzi/kuru-temizleme-antalya'],
-        ['Eve Gelen Terzi','/terzi/eve-gelen-terzi-antalya'],
-      ].map(([label,href])=>(
-        <Link key={href} href={href} style={{fontSize:'.72rem',color:'rgba(212,176,122,.75)',textDecoration:'none',border:'1px solid rgba(184,151,90,.18)',padding:'.25rem .65rem',borderRadius:'2px'}}>
-          {label}
-        </Link>
+    <nav aria-label="Footer hizmet linkleri" className="footnav">
+      {ALT_SAYFALAR.map(([,label,href])=>(
+        <Link key={href} href={href}>{label}</Link>
       ))}
     </nav>
   </footer>
