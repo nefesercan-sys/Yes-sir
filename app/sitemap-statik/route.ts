@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const BASE = "https://www.swaphubs.com";
+const BASE = "https://swaphubs.com";
 
 const sayfalar = [
   { url: BASE,                            priority: "1.0", freq: "daily" },
