@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import OnlineTerziClient from './OnlineTerziClient';
 
-const SITE_URL = 'https://www.swaphubs.com/online-terzi-hizmeti';
+const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
 // ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
