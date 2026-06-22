@@ -1,87 +1,34 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
-// ─── CONSTANTS ────────────────────────────────────────────────────────────────
-// ✅ Şöyle olmalı (www. kaldırılacak):
-canonical: "https://swaphubs.com/antalya-terzi..."
-og:url: "https://swaphubs.com/antalya-terzi..."
-const PHONE_DISPLAY = '+90 531 898 64 18';
-const PHONE_RAW = '+905318986418';
-const WA_BASE = `https://wa.me/${PHONE_RAW}`;
-const WA = (msg: string) => `${WA_BASE}?text=${encodeURIComponent(msg)}`;
-const WA_DEFAULT = WA('Merhaba, terzi ve tekstil hizmetleriniz hakkında bilgi almak istiyorum.');
-
-// ─── UNSPLASH — telif hakkı serbest (CC0/Unsplash lisansı) ───────────────────
-const IMGS = {
-  hero:    'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1600&q=85&auto=format&fit=crop',
-  dikim:   'https://images.unsplash.com/photo-1594938298603-c8148c4b4f0e?w=900&q=80&auto=format&fit=crop',
-  utu:     'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=900&q=80&auto=format&fit=crop',
-  kumaş:   'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80&auto=format&fit=crop',
-  imalat:  'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&q=80&auto=format&fit=crop',
-  tasarim: 'https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=900&q=80&auto=format&fit=crop',
-  tamir:   'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&auto=format&fit=crop',
-  moda:    'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=900&q=80&auto=format&fit=crop',
-  kurye:   'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80&auto=format&fit=crop',
-};
-
-// ─── METADATA ─────────────────────────────────────────────────────────────────
-export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
-  title: 'Antalya Terzi Dikim · Ütü · Kuru Temizleme · Tekstil İmalat Atölyesi | SwapHubs',
-  description:
-    'Antalya genelinde adrese servis imkânıyla bay-bayan kıyafet dikimi, ütü & buharlı presleme, kuru temizleme, tekstil & moda tasarım üretim atölyesi ve seri imalat. Tailor Fashion Antalya · Konyaaltı merkez · Türkiye geneli kargo.',
-  keywords: [
-    'antalya terzi dikim', 'antalya kuru temizleme', 'antalya ütü hizmeti',
-    'antalya tekstil imalat atölyesi', 'antalya moda tasarım', 'antalya tailor fashion',
-    'antalya fason üretim', 'antalya seri imalat', 'antalya özel kıyafet dikimi',
-    'antalya adrese terzi servisi', 'konyaaltı terzi', 'antalya giyim üretim',
-    'antalya bay bayan kıyafet dikimi', 'antalya abiye dikimi', 'antalya üniforma üretimi',
-    'antalya takım elbise dikimi', 'antalya tamir tadilat', 'online terzi antalya',
-    'antalya buharlı presleme', 'antalya tekstil atölyesi', 'antalya dress design',
-    'tailor antalya turkey', 'fashion atelier antalya', 'antalya clothing production',
-    'портной анталья', 'химчистка анталья', 'schneiderei antalya',
-    'kepez terzi', 'muratpaşa terzi', 'lara terzi', 'alanya terzi',
-  ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': SITE_URL, 'x-default': SITE_URL },
-  },
-  openGraph: {
-    title: 'Antalya Terzi · Ütü · Kuru Temizleme · Tekstil İmalat | SwapHubs Tailor Fashion',
-    description:
-      "Antalya'da tüm ilçelere adrese servisli terzi dikim, ütü, kuru temizleme ve tekstil moda üretim atölyesi. Seri imalat · Özel tasarım · Türkiye geneli kargo.",
-    url: SITE_URL,
-    siteName: 'SwapHubs',
-    locale: 'tr_TR',
-    type: 'website',
-    images: [
-      { url: '/og/antalya-terzi-tekstil.jpg', width: 1200, height: 630,
-        alt: 'Antalya Terzi Dikim Ütü Kuru Temizleme Tekstil İmalat Atölyesi' },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Antalya Terzi & Tekstil İmalat Atölyesi | Tailor Fashion',
-    description: 'Dikim · Ütü · Kuru Temizleme · Seri İmalat · Adrese Servis',
-    images: ['/og/antalya-terzi-tekstil.jpg'],
-  },
-  robots: { index: true, follow: true },
-};
+// ─── Sabitler ────────────────────────────────────────────────────────────────
+const SITE_URL  = 'https://swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat';
+const HOME      = 'https://swaphubs.com';
+const TERZI_URL = 'https://swaphubs.com/terzi';
+const PHONE     = '+90 531 898 64 18';
+const PHONE_E   = '+905318986418';
+const WA = (t: string) =>
+  `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`;
+const TODAY = new Date().toISOString().split('T')[0];
 
 // ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    // ── İşletme ─────────────────────────────────────────────────────────────
     {
-      '@type': 'ClothingStore',
-      '@id': `${SITE_URL}#business`,
-      name: 'SwapHubs — Antalya Terzi Dikim & Tekstil İmalat Atölyesi',
-      alternateName: ['Antalya Tailor Fashion', 'Terzi Can Antalya', 'SwapHubs Tekstil'],
+      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@id': `${TERZI_URL}#business`,
+      name: 'Terzi Can',
+      alternateName: ['Tailor Can Antalya', 'Портной Кан Анталья', 'Schneider Can Antalya'],
       description:
-        'Antalya genelinde adrese servis imkânıyla bay-bayan kıyafet dikimi, ütü & buharlı presleme, kuru temizleme, moda tasarım, tekstil seri imalat ve fason üretim.',
-      url: SITE_URL,
-      telephone: PHONE_RAW,
+        "Antalya Konyaaltı'nda profesyonel terzi, dikiş atölyesi ve kuru temizleme. Kıyafet dikimi, paça kısaltma, fermuar değişimi, bel daraltma, üniforma, nakış, ütü ve seri imalat. Tüm Antalya'ya adrese servis.",
+      url: TERZI_URL,
+      telephone: PHONE_E,
       priceRange: '₺₺',
-      image: IMGS.hero,
+      currenciesAccepted: 'TRY, EUR, USD',
+      paymentAccepted: 'Cash, Credit Card, Bank Transfer',
+      image: [`${HOME}/og/terzi-can.jpg`],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Konyaaltı',
@@ -91,904 +38,572 @@ const jsonLd = {
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      hasMap: 'https://www.google.com/maps?q=36.8841,30.7056',
+      openingHoursSpecification: [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      }],
+      contactPoint: [{
+        '@type': 'ContactPoint',
+        telephone: PHONE_E,
+        contactType: 'customer service',
+        availableLanguage: ['Turkish','English','Russian','German'],
+      }],
       areaServed: [
-        'Antalya', 'Konyaaltı', 'Muratpaşa', 'Kepez', 'Lara', 'Alanya',
-        'Kemer', 'Belek', 'Side', 'Manavgat', 'Serik', 'Döşemealtı',
-      ],
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-          opens: '09:00', closes: '19:00',
-        },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Terzi Dikim & Tekstil Hizmetleri',
-        itemListElement: [
-          { '@type': 'Offer', name: 'Bay & Bayan Kıyafet Dikimi', price: '500', priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Ütü & Buharlı Presleme', price: '80', priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Kuru Temizleme', price: '150', priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Tekstil Seri İmalat & Fason Üretim',
-            availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Moda & Giyim Tasarım Atölyesi',
-            availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Kıyafet Tamir & Tadilat', price: '100', priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock' },
-        ],
+        'Antalya','Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side',
+      ].map(name => ({ '@type': 'City', name })),
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9', reviewCount: '94', bestRating: '5',
       },
     },
+    // ── Sayfa ────────────────────────────────────────────────────────────────
     {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Antalya\'nın tüm ilçelerine adrese servis yapıyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet. Konyaaltı, Muratpaşa, Kepez, Lara, Alanya, Kemer, Belek, Side ve diğer tüm Antalya ilçelerine araçlı kurye ile alım-teslimat hizmeti veriyoruz.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Kuru temizleme ile ütü hizmeti aynı anda alınabilir mi?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet, kombine paketler mevcuttur. Kuru temizleme sonrası buharlı presleme dahildir.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Seri imalat için minimum kaç adet sipariş gerekiyor?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Tekstil seri imalat ve fason üretimde minimum 50 adet üretim kabul edilmektedir. Numune için tek adet üretim yapılabilir.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Antalya dışına kargo yapıyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet. Türkiye\'nin 81 iline kargo ile teslim ediyoruz. Online sipariş için WhatsApp\'tan ölçü ve model gönderin.' },
-        },
-      ],
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}#webpage`,
+      url: SITE_URL,
+      name: 'Antalya Terzi · Dikim · Paça Kısaltma · Fermuar · Bel Daraltma · Ütü · Kuru Temizleme 2026',
+      description:
+        "Antalya'da terzi, kıyafet dikimi, paça kısaltma ₺150, fermuar ₺120, bel daraltma, ütü, kuru temizleme. Tüm Antalya'ya adrese servis. ☎ " + PHONE,
+      inLanguage: ['tr','en','ru'],
+      dateModified: TODAY,
+      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
     },
+    // ── Breadcrumb ───────────────────────────────────────────────────────────
     {
       '@type': 'BreadcrumbList',
+      '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs Ana Sayfa', item: 'https://www.swaphubs.com' },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Hizmetleri', item: 'https://www.swaphubs.com/terzi' },
-        { '@type': 'ListItem', position: 3, name: 'Antalya Terzi · Ütü · Kuru Temizleme · Tekstil İmalat', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: HOME },
+        { '@type': 'ListItem', position: 2, name: 'Terzi Can Antalya', item: TERZI_URL },
+        { '@type': 'ListItem', position: 3, name: 'Antalya Terzi · Dikim · Ütü · Kuru Temizleme', item: SITE_URL },
+      ],
+    },
+    // ── Hizmet ──────────────────────────────────────────────────────────────
+    {
+      '@type': 'Service',
+      '@id': `${SITE_URL}#service`,
+      name: 'Antalya Terzi Dikim Tadilat Kuru Temizleme Ütü Hizmeti 2026',
+      provider: { '@type': 'LocalBusiness', '@id': `${TERZI_URL}#business` },
+      areaServed: { '@type': 'City', name: 'Antalya' },
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: '80',
+        highPrice: '5000',
+        priceCurrency: 'TRY',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+    // ── FAQ ──────────────────────────────────────────────────────────────────
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon fermuarı ₺120, mont fermuarı ₺300'den başlar. Aynı gün teslim. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Bel daraltma ve elbise tadilat Antalya fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺200, elbise daraltma ₺350'den başlar. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Kuru temizleme Antalya otele alım var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine alım + teslimat. 24 saat ekspres. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Tailor in Antalya — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Портной в Анталье — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Портной Кан говорит по-русски. Подгонка, пошив, химчистка, доставка в отель. WhatsApp: ${PHONE}` } },
       ],
     },
   ],
 };
 
-// ─── SERVICES DATA ────────────────────────────────────────────────────────────
-const SERVICES = [
-  {
-    slug: 'dikim', icon: '✂️', img: IMGS.dikim,
-    badge: 'EN POPÜLER', badgeColor: '#C9A84C',
-    title: 'Bay & Bayan Kıyafet Dikimi',
-    sub: 'Tailor Fashion · Özel Dikim · Abiye · Takım Elbise',
-    desc: 'Ölçüye özel erkek & kadın giyim. Takım elbise, abiye, gelinlik, iş kıyafeti, günlük elbise. Yerli ve ithal kumaş.',
-    tags: ['Takım Elbise', 'Abiye', 'Gelinlik', 'Gömlek', 'Pantolon', 'Tulum'],
-    price: '₺500+', time: '3–7 gün',
-    waMsg: 'Merhaba, kıyafet dikimi hakkında bilgi almak istiyorum.',
+// ─── Metadata ─────────────────────────────────────────────────────────────────
+export const metadata: Metadata = {
+  metadataBase: new URL(HOME),
+  title: 'Antalya Terzi · Dikim · Paça Kısaltma · Fermuar · Bel Daraltma · Ütü · Kuru Temizleme 2026',
+  description:
+    "Antalya'da terzi hizmetleri: paça kısaltma ₺150, fermuar ₺120, bel daraltma, elbise dikimi, kuru temizleme, ütü. Belek, Lara, Kemer'e adrese servis. ☎ " + PHONE,
+  keywords: [
+    'Antalya terzi','Antalya terzi fiyatları 2026','paça kısaltma Antalya',
+    'fermuar değişimi Antalya','bel daraltma Antalya','elbise dikimi Antalya',
+    'kuru temizleme Antalya','ütü hizmeti Antalya','Konyaaltı terzi',
+    'eve gelen terzi Antalya','otele gelen terzi Antalya','Belek terzi',
+    'Lara terzi','Kemer terzi','Alanya terzi','tailor Antalya','dry cleaning Antalya',
+    'портной Анталья','химчистка Анталья','Schneider Antalya',
+    'gelinlik tadilatı Antalya','üniforma üretimi Antalya','dikiş atölyesi Antalya',
+  ],
+  alternates: {
+    canonical: SITE_URL,
+    languages: { 'x-default': SITE_URL },
   },
-  {
-    slug: 'utu', icon: '💨', img: IMGS.utu,
-    badge: 'EKSPRES', badgeColor: '#E11D48',
-    title: 'Ütü & Buharlı Presleme',
-    sub: 'Endüstriyel Ütü · Otel Alım-Teslimat · Aynı Gün',
-    desc: 'Sanayi tipi buharlı press ile hassas kumaşlar mükemmel şekilde ütülenir. Otellerden kurye ile alım, aynı gün teslim.',
-    tags: ['Gömlek Ütü', 'Takım Elbise Pres', 'Abiye Buharlama', 'Otel Servisi'],
-    price: '₺80/adet', time: '2–6 saat',
-    waMsg: 'Merhaba, ütü hizmeti hakkında bilgi almak istiyorum.',
+  openGraph: {
+    title: 'Antalya Terzi · Dikim · Paça · Fermuar · Bel Daraltma · Kuru Temizleme 2026',
+    description: "Paça ₺150, fermuar ₺120, elbise dikimi, kuru temizleme. Belek, Lara, Kemer'e adrese servis. ☎ " + PHONE,
+    url: SITE_URL,
+    type: 'website',
+    locale: 'tr_TR',
+    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },
-  {
-    slug: 'kuru', icon: '🧺', img: IMGS.kumaş,
-    badge: 'YENİ', badgeColor: '#059669',
-    title: 'Kuru Temizleme',
-    sub: 'Hassas Kumaş · Takım Elbise · Abiye · Deri',
-    desc: 'Profesyonel kuru temizleme. İpek, yün, kadife, deri, kürk ve özel kumaşlara uygun işlem. Adrese alım-teslimat.',
-    tags: ['Takım Elbise', 'İpek & Saten', 'Kadife', 'Deri & Süet', 'Kürk'],
-    price: '₺150+', time: '24–48 saat',
-    waMsg: 'Merhaba, kuru temizleme hizmeti hakkında bilgi almak istiyorum.',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
-  {
-    slug: 'imalat', icon: '🏭', img: IMGS.imalat,
-    badge: 'B2B', badgeColor: '#1E40AF',
-    title: 'Tekstil Seri İmalat & Fason',
-    sub: 'Üniforma · Toplu Üretim · Marka Üretimi · Min. 50 Adet',
-    desc: 'Oteller, restoranlar, markalar için üniforma ve seri tekstil üretimi. Kalıp çıkarma, numune, toplu kesim & dikiş.',
-    tags: ['Üniforma', 'Fason Üretim', 'Kalıp Çıkarma', 'Nakış & Baskı', 'Min. 50 Adet'],
-    price: 'Teklif Al', time: 'Miktara göre',
-    waMsg: 'Merhaba, seri imalat / fason üretim hakkında teklif almak istiyorum.',
+  other: {
+    'geo.region': 'TR-07',
+    'geo.placename': 'Konyaaltı, Antalya',
+    'geo.position': '36.8841;30.7056',
+    ICBM: '36.8841, 30.7056',
   },
-  {
-    slug: 'tasarim', icon: '✏️', img: IMGS.tasarim,
-    badge: 'ÖZEL', badgeColor: '#7C3AED',
-    title: 'Moda & Giyim Tasarım Atölyesi',
-    sub: 'Fashion Design · Kalıp · Prototip · Koleksiyon',
-    desc: 'Hayalinizdeki koleksiyonu hayata geçiriyoruz. Kişiye özel fashion tasarım, kalıp çıkarma, prototip ve üretime hazırlık.',
-    tags: ['Fashion Tasarım', 'Kalıp Çıkarma', 'Prototip', 'Koleksiyon', 'Teknik Çizim'],
-    price: 'Teklif Al', time: '7–14 gün',
-    waMsg: 'Merhaba, moda tasarım atölyesi hakkında bilgi almak istiyorum.',
-  },
-  {
-    slug: 'tamir', icon: '🪡', img: IMGS.tamir,
-    badge: '',  badgeColor: '',
-    title: 'Tamir · Tadilat · Revizyonu',
-    sub: 'Paça · Fermuar · Bel Alma · Astar · Yırtık',
-    desc: 'Sevdiğiniz kıyafeti değiştirmenize gerek yok. Paça kısaltma, bel daraltma, fermuar, astar ve yırtık onarımı — aynı gün.',
-    tags: ['Paça Kısaltma', 'Fermuar', 'Bel Alma', 'Kol Kısaltma', 'Astar'],
-    price: '₺100+', time: 'Aynı gün',
-    waMsg: 'Merhaba, kıyafet tamir ve tadilat hakkında bilgi almak istiyorum.',
-  },
-  {
-    slug: 'adres', icon: '🚗', img: IMGS.kurye,
-    badge: 'ÜCRETSİZ', badgeColor: '#059669',
-    title: 'Tüm Antalya\'ya Adrese Servis',
-    sub: 'Konyaaltı · Lara · Kepez · Kemer · Alanya · Belek',
-    desc: 'Tüm Antalya ilçelerine araçlı kurye ile alım-teslimat. Otellerden, evlerden, işyerlerinden alıyoruz, kapına teslim ediyoruz.',
-    tags: ['Otel Servisi', 'Eve Teslimat', 'İşyeri Alım', 'Kargo TR Geneli'],
-    price: 'Ücretsiz*', time: 'Aynı gün',
-    waMsg: 'Merhaba, adrese servis hakkında bilgi almak istiyorum.',
-  },
-  {
-    slug: 'moda', icon: '👑', img: IMGS.moda,
-    badge: 'VIP', badgeColor: '#92400E',
-    title: 'VIP Fashion & Luxury Dikim',
-    sub: 'Lüks Kıyafet · Haute Couture · Özel Davet & Gece',
-    desc: 'Özel davete, galaya veya düğüne? Lüks kumaşlarla el işçiliği haute couture dikim. Randevulu özel atölye görüşmesi.',
-    tags: ['Haute Couture', 'El İşçiliği', 'Özel Davet', 'Lüks Kumaş', 'Randevulu'],
-    price: '₺3.000+', time: '10–21 gün',
-    waMsg: 'Merhaba, VIP lüks kıyafet dikimi hakkında randevu almak istiyorum.',
-  },
+};
+
+// ─── Veri ────────────────────────────────────────────────────────────────────
+const TADILATLAR = [
+  { hizmet: 'Paça Kısaltma — Kot',            fiyat: '₺150',   sure: 'Aynı gün' },
+  { hizmet: 'Paça Kısaltma — Kumaş Pantolon', fiyat: '₺175',   sure: 'Aynı gün' },
+  { hizmet: 'Paça Kısaltma — Kadın / Etek',   fiyat: '₺150+',  sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Değişimi — Pantolon/Kot', fiyat: '₺120',   sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Değişimi — Ceket',        fiyat: '₺200',   sure: '24 saat'  },
+  { hizmet: 'Fermuar Değişimi — Mont',         fiyat: '₺300',   sure: '24 saat'  },
+  { hizmet: 'Fermuar Değişimi — Sweatshirt',   fiyat: '₺150',   sure: 'Aynı gün' },
+  { hizmet: 'Gizli Fermuar — Elbise/Abiye',    fiyat: '₺180',   sure: 'Aynı gün' },
+  { hizmet: 'Bel Daraltma — Pantolon',         fiyat: '₺200',   sure: '24–48 sa' },
+  { hizmet: 'Bel Daraltma — Elbise/Abiye',     fiyat: '₺350',   sure: '48 saat'  },
+  { hizmet: 'Kol Kısaltma — Ceket/Mont',       fiyat: '₺250',   sure: '24–48 sa' },
+  { hizmet: 'Yırtık / Sökük Onarımı',          fiyat: '₺100',   sure: 'Aynı gün' },
+  { hizmet: 'Astar Değişimi — Ceket',          fiyat: '₺400',   sure: '48 saat'  },
 ];
 
-const FAQS: [string, string][] = [
-  ["Antalya'nın tüm ilçelerine servis yapıyor musunuz?", "Evet. Konyaaltı, Muratpaşa, Kepez, Lara, Alanya, Kemer, Belek, Side, Manavgat ve tüm Antalya'ya araçlı kurye servisi mevcuttur."],
-  ["Kuru temizleme ile ütü hizmetini birlikte alabilir miyim?", "Evet. Kombine paket mevcuttur. Kuru temizleme sonrası buharlı presleme dahil ücretlendirilir."],
-  ["Tekstil seri imalat için minimum sipariş adedi nedir?", "Minimum 50 adet üretim kabul edilmektedir. Numune ve prototip için tek adet üretim yapılabilir."],
-  ["Antalya dışına kargo gönderimi yapıyor musunuz?", "Evet, Türkiye'nin 81 iline kargo. Online sipariş için WhatsApp'tan ölçü ve model fotoğrafı gönderin."],
-  ["Hassas kumaşlar (ipek, kadife, deri) için risk var mı?", "Hayır. Kuru temizleme ve buharlı pres ekipmanlarımız hassas kumaşlar için özel ayarlarda çalışır."],
-  ["Otelimden kıyafetlerimi alıp getirebilir misiniz?", "Kesinlikle. Antalya'daki tüm otellere kurye ile alım ve teslimat hizmeti sunuyoruz."],
-  ["Fashion tasarım atölyesinde kendi kumaşımı kullanabilir miyim?", "Evet. Kendi kumaşınızı getirerek ya da kargoyla göndererek özel dikim yaptırabilirsiniz."],
-  ["Üniforma ve toplu üretimde teslim süresi ne kadar?", "Miktara göre değişir. 50–200 adet için genellikle 7–14 iş günü. Büyük siparişlerde proje bazlı planlama yapılır."],
+const DIKIMLER = [
+  { hizmet: 'Erkek Takım Elbise',     fiyat: '₺2.500+', sure: '5–7 gün'   },
+  { hizmet: 'Kadın Elbise / Tunik',   fiyat: '₺600+',   sure: '3–5 gün'   },
+  { hizmet: 'Abiye / Gece Elbisesi',  fiyat: '₺1.200+', sure: '5–7 gün'   },
+  { hizmet: 'Gelinlik Dikimi',        fiyat: '₺5.000+', sure: '14–21 gün' },
+  { hizmet: 'Gömlek / Bluz',          fiyat: '₺400+',   sure: '3–5 gün'   },
+  { hizmet: 'Pantolon / Etek',        fiyat: '₺350+',   sure: '3–5 gün'   },
+  { hizmet: 'Üniforma (adet başına)', fiyat: 'Teklif',  sure: '7–14 gün'  },
 ];
 
-// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+const UTU_TEMIZLEME = [
+  { hizmet: 'Gömlek Ütü',                    fiyat: '₺80',    sure: '2–6 saat'   },
+  { hizmet: 'Takım Elbise Buharlı Pres',     fiyat: '₺150',   sure: '2–6 saat'   },
+  { hizmet: 'Abiye Buharlama',               fiyat: '₺120',   sure: '2–6 saat'   },
+  { hizmet: 'Çamaşır Yıkama + Kurutma',      fiyat: '₺80/kg', sure: '24 saat'    },
+  { hizmet: 'Elbise Kuru Temizleme',         fiyat: '₺300',   sure: '24–48 saat' },
+  { hizmet: 'Takım Elbise Kuru Temizleme',   fiyat: '₺450',   sure: '48 saat'    },
+  { hizmet: 'Mont Kuru Temizleme',           fiyat: '₺500',   sure: '48 saat'    },
+  { hizmet: 'Abiye / Gelinlik Kuru Temizleme', fiyat: '₺600+', sure: '48–72 sa' },
+  { hizmet: 'Otel Alım + Teslimat',          fiyat: 'ÜCRETSİZ', sure: '—'        },
+];
+
+// ─── Stil sabitleri ──────────────────────────────────────────────────────────
+const ALTIN   = '#B8975A';
+const ALTIN2  = '#D4B07A';
+const KOYU    = '#1C1814';
+const KOYU2   = '#2E2820';
+const BG      = '#FAF7F2';
+const BG2     = '#F2EDE4';
+const METIN   = '#3A3028';
+const GRI     = '#7A6E62';
+const SERIF   = 'Georgia,serif';
+const SANS    = 'system-ui,sans-serif';
+
+// ─── Bileşen ────────────────────────────────────────────────────────────────
 export default function AntalyaTerziPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <main style={{ fontFamily: SANS, background: BG, color: METIN, minHeight: '100vh' }}>
 
-      {/* Inline styles — Client component gerektirmeden pure CSS */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap');
+        {/* ── BREADCRUMB ─────────────────────────────────────────────────── */}
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.72rem', color: GRI, background: BG2, borderBottom: `1px solid rgba(184,151,90,.12)` }}>
+          <Link href="/" style={{ color: ALTIN, textDecoration: 'none' }}>SwapHubs</Link>
+          {' › '}
+          <Link href="/terzi" style={{ color: ALTIN, textDecoration: 'none' }}>Terzi Can Antalya</Link>
+          {' › '}
+          <span>Antalya Terzi · Dikim · Ütü · Kuru Temizleme</span>
+        </nav>
 
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
+        {/* ── HERO ────────────────────────────────────────────────────────── */}
+        <section style={{
+          background: `linear-gradient(135deg, ${KOYU} 0%, ${KOYU2} 60%, #3A2E20 100%)`,
+          padding: '5rem 1.5rem 4.5rem',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          {/* Dekoratif altın çizgiler */}
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, transparent, ${ALTIN}, transparent)` }} />
+          <div style={{ position: 'absolute', top: '3px', left: 0, right: 0, height: '1px', background: `rgba(184,151,90,.2)` }} />
 
-        :root{
-          --ink:#0A0908; --ink2:#131210; --ink3:#1A1916; --ink4:#222018;
-          --bone:#F2EDE2; --bone2:#DDD5C3; --muted:#7A7060;
-          --gold:#C9A84C; --gold2:#E8C97A; --gold3:#7A5C1E;
-          --red:#C0392B; --green:#1A7A3C; --blue:#1E3A8A; --purple:#5B21B6; --teal:#0D7377;
-          --wa:#25D366;
-          --serif:'Playfair Display',Georgia,serif;
-          --sans:'Outfit',system-ui,sans-serif;
-        }
+          {/* Arkaplan doku */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: "url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1600&q=60&auto=format&fit=crop') center/cover",
+            opacity: .07,
+          }} />
 
-        body{font-family:var(--sans);background:var(--ink);color:var(--bone);overflow-x:hidden}
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:2px}
+          <div style={{ maxWidth: '960px', margin: '0 auto', position: 'relative' }}>
+            {/* Etiket */}
+            <div style={{ fontSize: '.65rem', letterSpacing: '.35em', textTransform: 'uppercase', color: ALTIN2, marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '.8rem' }}>
+              <span style={{ display: 'inline-block', width: '32px', height: '1px', background: ALTIN }} />
+              Konyaaltı · Antalya · Terzi & Tekstil Atölyesi
+              <span style={{ display: 'inline-block', width: '32px', height: '1px', background: ALTIN }} />
+            </div>
 
-        /* ── ANNOUNCE ── */
-        .ann{background:var(--gold);color:var(--ink);text-align:center;padding:.6rem 1rem;
-             font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.03em}
-        .ann a{color:var(--ink);font-weight:700;text-decoration:underline}
+            <h1 style={{ fontFamily: SERIF, fontSize: 'clamp(2rem,5.5vw,3.8rem)', fontWeight: 700, color: '#fff', lineHeight: 1.08, marginBottom: '1.4rem', letterSpacing: '-.01em' }}>
+              Antalya Terzi
+              <br />
+              <span style={{ color: ALTIN2, fontStyle: 'italic', fontWeight: 400 }}>
+                Dikim · Tamir · Tadilat · Ütü · Kuru Temizleme
+              </span>
+            </h1>
 
-        /* ── NAV ── */
-        .nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:1rem 4rem;
-             display:flex;align-items:center;justify-content:space-between;
-             background:rgba(10,9,8,0);backdrop-filter:blur(0);
-             border-bottom:1px solid transparent;transition:all .4s}
-        .nav.scrolled{background:rgba(10,9,8,.95);backdrop-filter:blur(24px);
-                      border-color:rgba(201,168,76,.12);padding:.65rem 4rem}
-        .nav-logo{font-family:var(--serif);font-size:1.25rem;font-weight:900;
-                  color:var(--gold);text-decoration:none;letter-spacing:.01em;line-height:1.1}
-        .nav-logo span{display:block;font-size:.65rem;font-family:var(--sans);font-weight:400;
-                       color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.1rem}
-        .nav-links{display:flex;gap:2rem;list-style:none}
-        .nav-links a{color:var(--bone2);text-decoration:none;font-size:.73rem;
-                     letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans);
-                     font-weight:500;transition:color .2s}
-        .nav-links a:hover{color:var(--gold)}
-        .nav-cta{background:var(--wa);color:#fff;padding:.55rem 1.4rem;font-family:var(--sans);
-                 font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-                 text-decoration:none;border-radius:2px;transition:all .25s;white-space:nowrap}
-        .nav-cta:hover{background:#1eba56;transform:translateY(-1px)}
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.78)', lineHeight: 1.9, maxWidth: '600px', marginBottom: '2rem' }}>
+              <strong style={{ color: '#fff' }}>Terzi Can</strong> — Konyaaltı merkezli dikiş atölyesi.
+              Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, kuru temizleme ve ütü.
+              <strong style={{ color: ALTIN2 }}> Belek, Lara, Kemer, Alanya dahil tüm Antalya'ya adrese servis.</strong>
+            </p>
 
-        /* ── HERO ── */
-        .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;
-              overflow:hidden;padding-top:80px}
-        .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-                 object-position:center;filter:brightness(.28) saturate(.5)}
-        .hero-grad{position:absolute;inset:0;
-          background:linear-gradient(to top,var(--ink) 0%,rgba(10,9,8,.7) 40%,rgba(10,9,8,.2) 100%)}
-        .hero-content{position:relative;z-index:2;width:100%;max-width:1200px;
-                      margin:0 auto;padding:0 4rem 5rem}
-        .hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;
-                      font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;
-                      text-transform:uppercase;color:var(--gold);
-                      border-bottom:1px solid rgba(201,168,76,.3);
-                      padding-bottom:.45rem;margin-bottom:1.8rem}
-        .hero h1{font-family:var(--serif);font-size:clamp(2.8rem,5.5vw,5.8rem);
-                 font-weight:900;line-height:1.0;letter-spacing:-.01em;margin-bottom:1.4rem}
-        .hero h1 .gold{color:var(--gold)}
-        .hero h1 .italic{font-style:italic;font-weight:400}
-        .hero-desc{font-family:var(--sans);font-size:.92rem;color:rgba(242,237,226,.65);
-                   line-height:1.9;max-width:580px;margin-bottom:2.2rem}
-        .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem}
-        .hero-kw{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:3rem}
-        .kpill{font-family:var(--sans);font-size:.6rem;color:rgba(201,168,76,.5);
-               border:1px solid rgba(201,168,76,.12);padding:.2rem .6rem;border-radius:1px;
-               letter-spacing:.06em;text-transform:uppercase}
-        .hero-stats{display:grid;grid-template-columns:repeat(5,1fr);
-                    gap:0;border-top:1px solid rgba(201,168,76,.1);padding-top:2rem}
-        .hstat{border-right:1px solid rgba(201,168,76,.08);padding-right:2rem}
-        .hstat:last-child{border-right:none}
-        .hstat-n{font-family:var(--serif);font-size:2rem;color:var(--gold);
-                 font-weight:900;line-height:1;display:block}
-        .hstat-l{font-family:var(--sans);font-size:.6rem;color:var(--muted);
-                 letter-spacing:.14em;text-transform:uppercase;margin-top:.25rem;display:block}
+            {/* Dil rozeti */}
+            <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              {[['🇹🇷','Türkçe'],['🇬🇧','English'],['🇷🇺','Русский'],['🇩🇪','Deutsch']].map(([f,l]) => (
+                <span key={l} style={{ fontSize: '.72rem', color: 'rgba(255,255,255,.55)', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.1)', padding: '.28rem .8rem', borderRadius: '2px' }}>
+                  {f} {l}
+                </span>
+              ))}
+            </div>
 
-        /* ── BUTTONS ── */
-        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.82rem 1.8rem;
-             font-family:var(--sans);font-size:.73rem;font-weight:600;
-             letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
-             border:none;cursor:pointer;border-radius:2px;transition:all .25s}
-        .btn-gold{background:var(--gold);color:var(--ink)}
-        .btn-gold:hover{background:var(--gold2);transform:translateY(-2px);
-                        box-shadow:0 6px 20px rgba(201,168,76,.3)}
-        .btn-ghost{background:transparent;color:var(--bone);border:1px solid rgba(242,237,226,.2)}
-        .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-        .btn-wa{background:var(--wa);color:#fff}
-        .btn-wa:hover{background:#1eba56;box-shadow:0 4px 16px rgba(37,211,102,.35)}
+            {/* CTA */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href={WA('Merhaba, terzi hizmeti için bilgi almak istiyorum.')}
+                target="_blank" rel="noopener noreferrer"
+                style={{ background: ALTIN, color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.1em', textTransform: 'uppercase', border: `1px solid ${ALTIN}` }}>
+                💬 WhatsApp — Randevu Al
+              </a>
+              <a href={`tel:${PHONE_E}`}
+                style={{ border: '1px solid rgba(255,255,255,.25)', color: '#fff', padding: '1rem 1.8rem', textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.05em' }}>
+                📞 {PHONE}
+              </a>
+            </div>
 
-        /* ── BREADCRUMB ── */
-        .bc{background:var(--ink2);padding:.75rem 4rem;display:flex;gap:.5rem;
-            flex-wrap:wrap;align-items:center;border-bottom:1px solid rgba(201,168,76,.06)}
-        .bc a{font-family:var(--sans);font-size:.7rem;color:var(--muted);text-decoration:none}
-        .bc a:hover{color:var(--gold)}
-        .bc sep{font-family:var(--sans);font-size:.7rem;color:rgba(122,112,96,.3)}
-        .bc strong{font-family:var(--sans);font-size:.7rem;color:var(--bone2)}
-
-        /* ── SEO INTRO ── */
-        .seo-intro{background:var(--ink3);border-left:3px solid var(--gold3);
-                   padding:1.6rem 4rem}
-        .seo-intro p{font-family:var(--sans);font-size:.8rem;color:var(--muted);
-                     line-height:2;max-width:1100px;margin:0 auto}
-        .seo-intro strong{color:var(--bone2)}
-
-        /* ── SECTION ── */
-        .sec{padding:6rem 4rem}
-        .ctr{max-width:1200px;margin:0 auto}
-        .sh{margin-bottom:3.5rem}
-        .sh.c{text-align:center}
-        .sh.c .divider,.sh.c .sh-sub{margin-left:auto;margin-right:auto}
-        .eyebrow{font-family:var(--sans);font-size:.62rem;letter-spacing:.3em;
-                 text-transform:uppercase;color:var(--gold);font-weight:500;
-                 display:block;margin-bottom:.9rem}
-        .h2{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,3rem);
-            font-weight:900;line-height:1.1;color:var(--bone)}
-        .h2 em{color:var(--gold);font-style:italic}
-        .sh-sub{font-family:var(--sans);font-size:.88rem;color:var(--muted);
-                max-width:520px;line-height:1.85;margin-top:.8rem}
-        .divider{width:36px;height:1.5px;background:var(--gold);margin-top:1.1rem}
-
-        /* ── SERVICE GRID ── */
-        .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-                  background:rgba(201,168,76,.06)}
-        .scard{position:relative;overflow:hidden;min-height:360px;
-               display:flex;flex-direction:column;justify-content:flex-end;
-               background:var(--ink2);cursor:default}
-        .scard-img{position:absolute;inset:0;width:100%;height:100%;
-                   object-fit:cover;filter:brightness(.2) saturate(.25);
-                   transition:transform .8s ease,filter .6s}
-        .scard:hover .scard-img{transform:scale(1.07);filter:brightness(.16) saturate(.2)}
-        .scard-ov{position:absolute;inset:0;
-          background:linear-gradient(to top,rgba(10,9,8,.99) 0%,rgba(10,9,8,.3) 55%,transparent)}
-        .scard-top{position:absolute;top:1rem;left:1.2rem;right:1.2rem;z-index:2;
-                   display:flex;justify-content:space-between;align-items:flex-start}
-        .scard-badge{font-family:var(--sans);font-size:.55rem;letter-spacing:.15em;
-                     text-transform:uppercase;font-weight:700;padding:.2rem .6rem;color:#fff}
-        .scard-icon{font-size:1.3rem;line-height:1}
-        .scard-body{position:relative;z-index:2;padding:1.5rem 1.5rem 1.8rem}
-        .scard-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;
-                     color:var(--bone);margin-bottom:.25rem;line-height:1.2}
-        .scard-sub{font-family:var(--sans);font-size:.6rem;color:var(--gold);
-                   letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem}
-        .scard-desc{font-family:var(--sans);font-size:.75rem;color:rgba(242,237,226,.5);
-                    line-height:1.7;margin-bottom:.8rem}
-        .scard-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:1rem}
-        .scard-tag{font-family:var(--sans);font-size:.58rem;color:var(--muted);
-                   border:1px solid rgba(201,168,76,.1);padding:.15rem .45rem}
-        .scard-foot{display:flex;align-items:flex-end;justify-content:space-between}
-        .scard-price{font-family:var(--serif);font-size:1.2rem;color:var(--gold);
-                     font-weight:700;line-height:1;display:block}
-        .scard-time{font-family:var(--sans);font-size:.6rem;color:#27ae60;margin-top:.15rem}
-        .scard-line{position:absolute;bottom:0;left:1.5rem;right:1.5rem;height:1px;
-                    background:linear-gradient(to right,var(--gold),transparent);
-                    transform:scaleX(0);transform-origin:left;transition:transform .5s}
-        .scard:hover .scard-line{transform:scaleX(1)}
-
-        /* ── ILCE STRIP ── */
-        .ilce-strip{background:var(--ink3);padding:2.5rem 4rem;overflow:hidden}
-        .ilce-label{font-family:var(--sans);font-size:.6rem;letter-spacing:.25em;
-                    text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:1.2rem}
-        .ilce-scroll{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
-        .ilce-pill{font-family:var(--sans);font-size:.72rem;color:var(--bone2);
-                   background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.12);
-                   padding:.35rem .9rem;border-radius:1px;transition:all .2s}
-        .ilce-pill:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);color:var(--gold)}
-
-        /* ── HOW ── */
-        .how-grid{display:grid;grid-template-columns:repeat(4,1fr);
-                  gap:1px;background:rgba(201,168,76,.06);margin-top:3rem}
-        .how-card{background:var(--ink3);padding:2.2rem 1.8rem;position:relative}
-        .how-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-                         background:transparent;transition:background .3s}
-        .how-card:hover::after{background:linear-gradient(90deg,var(--gold),transparent)}
-        .how-n{font-family:var(--serif);font-size:3.2rem;font-weight:900;
-               color:rgba(201,168,76,.07);line-height:1;margin-bottom:.4rem}
-        .how-icon{font-size:1.6rem;margin-bottom:.8rem}
-        .how-t{font-family:var(--serif);font-size:1rem;font-weight:700;
-               color:var(--bone);margin-bottom:.4rem}
-        .how-d{font-family:var(--sans);font-size:.75rem;color:var(--muted);line-height:1.65}
-
-        /* ── PRICE TABLE ── */
-        .ptable-wrap{border:1px solid rgba(201,168,76,.1);border-radius:2px;overflow:hidden}
-        .ptable{width:100%;border-collapse:collapse}
-        .ptable thead{background:var(--ink4)}
-        .ptable th{text-align:left;font-family:var(--sans);font-size:.6rem;
-                   letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
-                   padding:.85rem 1.2rem;font-weight:500}
-        .ptable th:not(:first-child){text-align:right}
-        .ptable td{padding:.85rem 1.2rem;font-family:var(--sans);font-size:.82rem;
-                   border-bottom:1px solid rgba(255,255,255,.03);color:var(--bone2)}
-        .ptable tr:last-child td{border-bottom:none}
-        .ptable tr:nth-child(even) td{background:rgba(201,168,76,.02)}
-        .ptable tr:hover td{background:rgba(201,168,76,.05)}
-        .ptable td:nth-child(2){text-align:right;color:var(--gold);font-weight:600}
-        .ptable td:nth-child(3){text-align:right;color:var(--muted);font-size:.72rem}
-
-        /* ── FAQ ── */
-        .faq-list{max-width:780px;margin:3rem auto 0}
-        .faq-item{border-bottom:1px solid rgba(201,168,76,.07)}
-        .faq-q{width:100%;background:none;border:none;padding:1.2rem 0;
-               display:flex;align-items:center;justify-content:space-between;gap:1rem;
-               cursor:pointer;text-align:left;font-family:var(--serif);
-               font-size:.98rem;color:var(--bone);transition:color .2s}
-        .faq-q:hover{color:var(--gold)}
-        .faq-ico{flex-shrink:0;width:22px;height:22px;border:1px solid rgba(201,168,76,.2);
-                 border-radius:50%;display:flex;align-items:center;justify-content:center;
-                 font-size:.85rem;color:var(--gold)}
-        .faq-a{max-height:0;overflow:hidden;font-family:var(--sans);
-               font-size:.82rem;color:var(--muted);line-height:1.85;
-               transition:max-height .4s ease,padding .3s}
-        .faq-item.open .faq-a{max-height:180px;padding-bottom:1.2rem}
-        .faq-item.open .faq-ico{transform:rotate(45deg)}
-
-        /* ── CTA ── */
-        .cta-sec{padding:6rem 4rem;background:var(--ink2);text-align:center;position:relative;overflow:hidden}
-        .cta-sec::before{content:'';position:absolute;inset:0;
-          background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(201,168,76,.05),transparent);
-          pointer-events:none}
-        .cta-h{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,3.2rem);
-               font-weight:900;color:var(--bone);margin-bottom:1rem;position:relative}
-        .cta-h em{color:var(--gold);font-style:italic}
-        .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
-
-        /* ── CONTACT ── */
-        .cont-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem}
-        .crow{display:flex;gap:.8rem;padding:.8rem 0;border-bottom:1px solid rgba(201,168,76,.06)}
-        .clbl{font-family:var(--sans);font-size:.58rem;letter-spacing:.2em;
-              text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
-        .cval{font-family:var(--sans);font-size:.85rem;color:var(--bone)}
-        .cval a{color:var(--bone);text-decoration:none;transition:color .2s}
-        .cval a:hover{color:var(--gold)}
-        .map-box{border-radius:2px;overflow:hidden;height:280px;
-                 border:1px solid rgba(201,168,76,.1)}
-        .map-box iframe{display:block;width:100%;height:100%;border:0}
-
-        /* ── FOOTER ── */
-        footer{background:#060504;border-top:1px solid rgba(201,168,76,.06);padding:2.5rem 4rem}
-        .foot-brand{font-family:var(--serif);font-size:1.05rem;color:var(--gold);
-                    text-align:center;margin-bottom:.4rem}
-        .foot-links{display:flex;flex-wrap:wrap;justify-content:center;
-                    gap:.4rem 1.5rem;margin-bottom:.7rem}
-        .foot-links a{font-family:var(--sans);color:var(--muted);font-size:.72rem;
-                      text-decoration:none;transition:color .2s}
-        .foot-links a:hover{color:var(--gold)}
-        .foot-copy{font-family:var(--sans);font-size:.67rem;
-                   color:rgba(122,112,96,.35);text-align:center}
-        .foot-kws{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-top:.9rem}
-        .foot-pill{font-family:var(--sans);font-size:.56rem;
-                   color:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.06);padding:.15rem .5rem}
-
-        /* ── WA FLOAT ── */
-        .wa-float{position:fixed;bottom:1.8rem;right:1.8rem;z-index:200;
-                  width:3.2rem;height:3.2rem;border-radius:50%;background:var(--wa);
-                  display:flex;align-items:center;justify-content:center;
-                  font-size:1.4rem;text-decoration:none;
-                  box-shadow:0 4px 20px rgba(37,211,102,.45);
-                  animation:wapulse 2.5s ease infinite}
-        .wa-float:hover{transform:scale(1.12);animation:none}
-        @keyframes wapulse{
-          0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}
-          50%{box-shadow:0 4px 30px rgba(37,211,102,.6),0 0 0 8px rgba(37,211,102,.08)}
-        }
-
-        /* ── SKIP ── */
-        .skip{position:absolute;top:-40px;left:0;background:var(--gold);color:var(--ink);
-              padding:.5rem 1rem;font-weight:700;z-index:999;font-family:var(--sans)}
-        .skip:focus{top:0}
-
-        /* ── RESPONSIVE ── */
-        @media(max-width:1100px){
-          .svc-grid{grid-template-columns:repeat(2,1fr)}
-          .how-grid{grid-template-columns:repeat(2,1fr)}
-          .cont-grid{grid-template-columns:1fr}
-          .hero-stats{grid-template-columns:repeat(3,1fr);gap:1.5rem}
-          .nav-links{display:none}
-        }
-        @media(max-width:700px){
-          .svc-grid{grid-template-columns:1fr}
-          .how-grid{grid-template-columns:1fr}
-          .hero-stats{grid-template-columns:repeat(2,1fr)}
-          .sec,.seo-intro,.bc,.ilce-strip,.cta-sec,footer{padding-left:1.5rem;padding-right:1.5rem}
-          .nav{padding:1rem 1.5rem}
-          .nav.scrolled{padding:.65rem 1.5rem}
-          .hero-content{padding:0 1.5rem 4rem}
-        }
-        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-                 overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-      `}</style>
-
-      {/* ── NAV scroll effect — inline script ── */}
-      <script dangerouslySetInnerHTML={{ __html: `
-        (function(){
-          window.addEventListener('scroll',function(){
-            var nav=document.getElementById('main-nav');
-            if(!nav)return;
-            if(window.scrollY>60)nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-          },{passive:true});
-          document.querySelectorAll('.faq-q').forEach(function(btn){
-            btn.addEventListener('click',function(){
-              var item=btn.closest('.faq-item');
-              var isOpen=item.classList.contains('open');
-              document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});
-              if(!isOpen)item.classList.add('open');
-            });
-          });
-        })();
-      `}} />
-
-      <a href="#main" className="skip">İçeriğe geç</a>
-      <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="wa-float" aria-label="WhatsApp ile iletişim">💬</a>
-
-      {/* ── ANNOUNCE ── */}
-      <div className="ann" role="banner">
-        🧵 Haziran 2026 — Seri imalat siparişlerinde %15 indirim ·{' '}
-        <a href={WA('Merhaba, Haziran kampanyası hakkında bilgi almak istiyorum.')}>Detay için yazın →</a>
-      </div>
-
-      {/* ── NAV ── */}
-      <nav id="main-nav" className="nav" aria-label="Ana menü">
-        <a href="https://www.swaphubs.com" className="nav-logo">
-          SwapHubs
-          <span>Tailor · Fashion · Tekstil Antalya</span>
-        </a>
-        <ul className="nav-links">
-          {[
-            ['#services','Hizmetler'],['#how','Nasıl Çalışır'],
-            ['#prices','Fiyatlar'],['#faq','SSS'],['#contact','İletişim'],
-          ].map(([href,label]) => (
-            <li key={href}><a href={href}>{label}</a></li>
-          ))}
-        </ul>
-        <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="nav-cta">
-          💬 Hemen Sipariş
-        </a>
-      </nav>
-
-      {/* ── HERO ── */}
-      <section className="hero" id="main" aria-labelledby="hero-h">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={IMGS.hero}
-          alt="Antalya terzi dikim ütü kuru temizleme tekstil imalat atölyesi"
-          className="hero-bg"
-          width={1600} height={900}
-          loading="eager"
-          fetchPriority="high"
-        />
-        <div className="hero-grad" aria-hidden="true" />
-        <div className="hero-content">
-          <div className="hero-eyebrow">
-            <span>📍 Konyaaltı · Antalya</span>
-            <span>·</span>
-            <span>Türkiye Geneli Kargo</span>
-          </div>
-          <h1 id="hero-h">
-            Antalya <span className="gold">Terzi · Dikim</span><br/>
-            <span className="italic">Ütü · Kuru Temizleme</span><br/>
-            <span className="gold">Tekstil & Moda</span><br/>
-            <span className="italic" style={{fontSize:'75%',color:'var(--bone2)'}}>İmalat Atölyesi</span>
-          </h1>
-          <p className="hero-desc">
-            Tüm Antalya ilçelerine <strong style={{color:'var(--bone)'}}>adrese servis</strong> imkânıyla
-            bay-bayan kıyafet dikimi, ütü & buharlı presleme, kuru temizleme, moda tasarım,
-            tekstil seri imalat ve fason üretim. <strong style={{color:'var(--bone)'}}>Tailor Fashion Atölyesi</strong> — Konyaaltı merkez.
-          </p>
-          <div className="hero-btns">
-            <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn btn-wa">
-              💬 WhatsApp Sipariş
-            </a>
-            <a href="#services" className="btn btn-ghost">Hizmetleri Keşfet ↓</a>
-          </div>
-          <div className="hero-kw" aria-hidden="true">
-            {[
-              'Terzi Dikim','Ütü Servisi','Kuru Temizleme','Tekstil İmalat',
-              'Moda Tasarım','Adrese Servis','Seri İmalat','Tailor Fashion',
-              'Fason Üretim','Online Terzi',
-            ].map(k => <span key={k} className="kpill">{k}</span>)}
-          </div>
-          <div className="hero-stats" aria-label="Atölye istatistikleri">
-            {([
-              ['10+','Yıl Deneyim'],
-              ['8','Hizmet Kategorisi'],
-              ['5.000+','Teslim Edilen Kıyafet'],
-              ['4.9★','Google Puanı'],
-              ['Tüm Antalya','Adrese Servis'],
-            ] as [string,string][]).map(([n,l]) => (
-              <div key={l} className="hstat">
-                <span className="hstat-n">{n}</span>
-                <span className="hstat-l">{l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BREADCRUMB ── */}
-      <nav className="bc" aria-label="Sayfa yolu">
-        <a href="https://www.swaphubs.com">SwapHubs</a>
-        <span>›</span>
-        <a href="/terzi">Terzi Can Antalya</a>
-        <span>›</span>
-        <strong>Terzi · Dikim · Ütü · Kuru Temizleme · Tekstil İmalat</strong>
-      </nav>
-
-      {/* ── SEO INTRO ── */}
-      <div className="seo-intro" role="complementary" aria-label="Hizmet özeti">
-        <p>
-          <strong>SwapHubs Tailor Fashion Antalya</strong> olarak Konyaaltı merkezli atölyemizden
-          tüm Antalya ilçelerine — <strong>Muratpaşa, Kepez, Lara, Alanya, Kemer, Belek, Side, Manavgat, Serik, Döşemealtı</strong> ve daha fazlasına —
-          araçlı kurye ile <strong>adrese servis</strong> sunuyoruz.
-          Bay & bayan <strong>kıyafet dikimi</strong>, takım elbise, abiye ve gelinlik dikimi;
-          endüstriyel <strong>ütü & buharlı presleme</strong>; hassas kumaşlara özel <strong>kuru temizleme</strong>;
-          markalar ve kurumlar için <strong>tekstil seri imalat & fason üretim</strong>;
-          <strong>moda & giyim tasarım</strong> atölyesi; paça, fermuar, bel alma gibi her nevi
-          <strong>kıyafet tamir & tadilat</strong>. Türkiye geneline kargo ile online sipariş.
-        </p>
-      </div>
-
-      {/* ── SERVİSLER ── */}
-      <section id="services" aria-labelledby="svc-h" style={{background:'var(--ink2)',padding:'5rem 0 0'}}>
-        <div className="ctr" style={{padding:'0 4rem 3rem'}}>
-          <span className="eyebrow">✦ 8 Hizmet Kategorisi</span>
-          <h2 className="h2" id="svc-h">
-            <em>Terzi · Ütü · Kuru Temizleme</em><br/>
-            Tekstil & Moda İmalat
-          </h2>
-          <p className="sh-sub">
-            Tek adres, tüm tekstil çözümleri. Bireysel dikimden kurumsal seri imalata.
-          </p>
-          <div className="divider" />
-        </div>
-        <div className="svc-grid">
-          {SERVICES.map(s => (
-            <article key={s.slug} id={`svc-${s.slug}`} className="scard">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={s.img}
-                alt={`${s.title} — Antalya SwapHubs Tailor Fashion`}
-                className="scard-img"
-                loading="lazy"
-                width={900} height={500}
-              />
-              <div className="scard-ov" aria-hidden="true" />
-              <div className="scard-top">
-                {s.badge && (
-                  <span className="scard-badge" style={{background: s.badgeColor}}>
-                    {s.badge}
-                  </span>
-                )}
-                <span aria-hidden="true">{s.icon}</span>
-              </div>
-              <div className="scard-body">
-                <h3 className="scard-title">{s.title}</h3>
-                <div className="scard-sub">{s.sub}</div>
-                <p className="scard-desc">{s.desc}</p>
-                <div className="scard-tags">
-                  {s.tags.map(t => <span key={t} className="scard-tag">{t}</span>)}
+            {/* Küçük istatistikler */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(110px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', marginTop: '3rem', maxWidth: '700px' }}>
+              {[['⭐ 4.9','94 Google Yorum'],['10+ Yıl','Deneyim'],['Aynı Gün','Paça & Fermuar'],['Tüm Antalya','Adrese Servis']].map(([t,d]) => (
+                <div key={t} style={{ background: 'rgba(255,255,255,.03)', padding: '1.2rem 1rem', textAlign: 'center' }}>
+                  <div style={{ fontFamily: SERIF, fontSize: '1.05rem', color: ALTIN2, marginBottom: '.3rem', fontWeight: 700 }}>{t}</div>
+                  <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.45)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{d}</div>
                 </div>
-                <div className="scard-foot">
-                  <div>
-                    <span className="scard-price">{s.price}</span>
-                    <span className="scard-time">⏱ {s.time}</span>
-                  </div>
-                  <a
-                    href={WA(s.waMsg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-wa"
-                    style={{fontSize:'.68rem',padding:'.55rem .9rem'}}
-                  >
-                    Sipariş Ver
-                  </a>
-                </div>
-              </div>
-              <div className="scard-line" aria-hidden="true" />
-            </article>
-          ))}
-        </div>
-      </section>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* ── İLÇE STRIP ── */}
-      <div className="ilce-strip" aria-label="Hizmet verilen Antalya ilçeleri">
-        <div className="ilce-label">📍 Tüm Antalya'ya Adrese Servis İmkânı</div>
-        <div className="ilce-scroll">
-          {[
-            'Konyaaltı','Muratpaşa','Kepez','Lara','Alanya','Kemer',
-            'Belek','Side','Manavgat','Serik','Döşemealtı','Aksu',
-            'Gazipaşa','Kumluca','Finike','Kaş','Kalkan','Demre',
-            'Elmalı','Korkuteli','İbradı','Akseki','Gündoğmuş',
-          ].map(i => <span key={i} className="ilce-pill">{i}</span>)}
-        </div>
-      </div>
+        {/* ── TADİLAT & ONARIM FİYATLARI ─────────────────────────────────── */}
+        <section id="tadilatlar" style={{ background: '#fff', padding: '4.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '2px', background: ALTIN }} />
+              <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Fiyat Listesi · 2025–2026</span>
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '.4rem' }}>
+              Tadilat & Onarım Fiyatları
+            </h2>
+            <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
+              Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma ve diğer tadilat işleri.
+            </p>
 
-      {/* ── NASIL ÇALIŞIR ── */}
-      <section id="how" className="sec" style={{background:'var(--ink3)'}} aria-labelledby="how-h">
-        <div className="ctr">
-          <div className="sh c">
-            <span className="eyebrow">📱 Kolay Sipariş</span>
-            <h2 className="h2" id="how-h">Nasıl <em>Çalışır?</em></h2>
-            <p className="sh-sub">WhatsApp'tan sipariş verin — adresinize gelelim ya da kapınıza teslim edelim.</p>
-            <div className="divider" />
-          </div>
-          <div className="how-grid">
-            {([
-              ['01','📸','WhatsApp ile İletişim',"Model fotoğrafı, ölçü veya kıyafetinizin durumunu WhatsApp'a gönderin. Ücretsiz danışma."],
-              ['02','💬','Fiyat & Onay','Terzimiz detayları değerlendirir, net fiyat verir. Onaylarsanız işleme başlanır.'],
-              ['03','🚗','Adrese Geliyoruz','Antalya içi: araçlı kurye kıyafetinizi evden, otelden, işyerinden alır.'],
-              ['04','✅','Kapınıza Teslim','Dikim, ütü, kuru temizleme veya tadilat tamamlanınca askıda, temiz teslim.'],
-            ] as [string,string,string,string][]).map(([n,ic,t,d]) => (
-              <div key={n} className="how-card">
-                <div className="how-n">{n}</div>
-                <div className="how-icon" aria-hidden="true">{ic}</div>
-                <h3 className="how-t">{t}</h3>
-                <p className="how-d">{d}</p>
-              </div>
-            ))}
-          </div>
-          <div style={{textAlign:'center',marginTop:'2.5rem'}}>
-            <a
-              href={WA('Merhaba, sipariş vermek istiyorum. Nereden başlayabilirim?')}
-              target="_blank" rel="noopener noreferrer"
-              className="btn btn-wa"
-            >
-              💬 Hemen Başla
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FİYATLAR ── */}
-      <section id="prices" className="sec" style={{background:'var(--ink)'}} aria-labelledby="prices-h">
-        <div className="ctr">
-          <div className="sh">
-            <span className="eyebrow">₺ Şeffaf Fiyatlar · 2025–2026</span>
-            <h2 className="h2" id="prices-h">Antalya Terzi <em>Fiyat Listesi</em></h2>
-            <p className="sh-sub">Başlangıç fiyatları. Kesin fiyat için WhatsApp'tan fotoğraf ve ölçü gönderin.</p>
-            <div className="divider" />
-          </div>
-          <div className="ptable-wrap">
-            <table className="ptable" aria-label="Terzi ve tekstil hizmetleri fiyat listesi">
-              <caption className="sr-only">Antalya Terzi Dikim Ütü Kuru Temizleme Fiyatları 2025–2026</caption>
+            <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', boxShadow: '0 2px 20px rgba(28,24,20,.06)' }}>
               <thead>
-                <tr>
-                  <th scope="col">Hizmet</th>
-                  <th scope="col">Başlangıç Fiyatı</th>
-                  <th scope="col">Süre</th>
+                <tr style={{ background: KOYU, borderBottom: `2px solid ${ALTIN}` }}>
+                  {['Hizmet', 'Başlangıç Fiyatı', 'Süre'].map((h, i) => (
+                    <th key={h} style={{ padding: '.85rem 1.1rem', textAlign: i === 0 ? 'left' : 'right', fontSize: '.68rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN2, fontWeight: 500 }}>{h}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ['Erkek Takım Elbise Dikimi','₺2.500+','5–7 gün'],
-                  ['Bayan Abiye / Gece Elbisesi','₺1.200+','5–7 gün'],
-                  ['Gelinlik Dikimi','₺5.000+','14–21 gün'],
-                  ['Günlük Elbise / Bluz','₺500+','3–5 gün'],
-                  ['Kıyafet Tamir (Paça vb.)','₺100+','Aynı gün'],
-                  ['Fermuar Değişimi','₺120+','Aynı gün'],
-                  ['Bel / Kol Tadilat','₺200+','24–48 saat'],
-                  ['Gömlek Ütü','₺80+','2–6 saat'],
-                  ['Takım Elbise Buharlı Pres','₺150+','2–6 saat'],
-                  ['Abiye Buharlama','₺120+','2–6 saat'],
-                  ['Kuru Temizleme (Takım Elbise)','₺250+','24–48 saat'],
-                  ['Kuru Temizleme (Abiye)','₺350+','24–48 saat'],
-                  ['Üniforma Seri İmalat (50+ adet)','Teklif Al','Proje bazlı'],
-                  ['Moda Tasarım & Kalıp Çıkarma','Teklif Al','7–14 gün'],
-                ].map(([s,p,t]) => (
-                  <tr key={s}><td>{s}</td><td>{p}</td><td>{t}</td></tr>
+                {TADILATLAR.map(({ hizmet, fiyat, sure }, i) => (
+                  <tr key={i} style={{ borderBottom: `1px solid rgba(60,40,20,.06)`, background: i % 2 ? `rgba(184,151,90,.025)` : '#fff', transition: 'background .15s' }}>
+                    <td style={{ padding: '.88rem 1.1rem', fontSize: '.88rem', fontWeight: 500, color: METIN }}>{hizmet}</td>
+                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '.95rem', color: ALTIN, fontWeight: 700 }}>{fiyat}</td>
+                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '.75rem', color: sure === 'Aynı gün' ? '#22c55e' : GRI, fontWeight: sure === 'Aynı gün' ? 600 : 400 }}>{sure}</td>
+                  </tr>
                 ))}
               </tbody>
             </table>
+
+            <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <p style={{ fontSize: '.78rem', color: GRI, fontStyle: 'italic', margin: 0 }}>* Fotoğraflı WhatsApp ile kesin fiyat alın.</p>
+              <a href={WA('Merhaba, tadilat fiyatı öğrenmek istiyorum.')} target="_blank" rel="noopener noreferrer"
+                style={{ background: '#25d366', color: '#fff', padding: '.7rem 1.6rem', fontWeight: 700, textDecoration: 'none', fontSize: '.8rem', borderRadius: '3px', whiteSpace: 'nowrap' }}>
+                💬 WhatsApp Fiyat Al
+              </a>
+            </div>
           </div>
-          <div style={{textAlign:'center',marginTop:'2rem'}}>
-            <a
-              href={WA('Merhaba, fiyat teklifi almak istiyorum.')}
-              target="_blank" rel="noopener noreferrer"
-              className="btn btn-gold"
-            >
-              📲 Ücretsiz Teklif Al
+        </section>
+
+        {/* ── DİKİM FİYATLARI ─────────────────────────────────────────────── */}
+        <section id="dikimler" style={{ background: BG2, padding: '4.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '2px', background: ALTIN }} />
+              <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Özel Dikim · 2025–2026</span>
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '.4rem' }}>
+              Kıyafet Dikimi Fiyatları
+            </h2>
+            <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
+              Takım elbise, elbise, abiye, gelinlik, gömlek, pantolon — ölçüye özel dikim.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
+              {DIKIMLER.map(({ hizmet, fiyat, sure }) => (
+                <div key={hizmet} style={{ background: '#fff', padding: '1.6rem 1.4rem', borderBottom: `3px solid transparent`, transition: 'border-color .2s', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, ${ALTIN}, transparent)` }} />
+                  <div style={{ fontFamily: SERIF, fontSize: '1.05rem', color: KOYU, fontWeight: 600, marginBottom: '.5rem' }}>{hizmet}</div>
+                  <div style={{ fontSize: '1.3rem', color: ALTIN, fontWeight: 700, fontFamily: SERIF, marginBottom: '.3rem' }}>{fiyat}</div>
+                  <div style={{ fontSize: '.72rem', color: GRI, letterSpacing: '.08em' }}>⏱ {sure}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: '1.5rem' }}>
+              <a href={WA('Merhaba, kıyafet dikimi için bilgi almak istiyorum.')} target="_blank" rel="noopener noreferrer"
+                style={{ background: ALTIN, color: '#fff', padding: '.85rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', display: 'inline-block' }}>
+                ✂️ Dikim Randevusu Al
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── ÜTÜ & KURU TEMİZLEME ───────────────────────────────────────── */}
+        <section id="kuru-temizleme" style={{ background: '#fff', padding: '4.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '2px', background: ALTIN }} />
+              <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Ütü & Temizleme · 2025–2026</span>
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '.4rem' }}>
+              Ütü & Kuru Temizleme Fiyatları
+            </h2>
+            <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
+              Belek, Lara, Kemer dahil tüm Antalya otellerine alım + teslimat. 24 saat ekspres.
+            </p>
+
+            <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', boxShadow: '0 2px 20px rgba(28,24,20,.06)' }}>
+              <thead>
+                <tr style={{ background: KOYU, borderBottom: `2px solid ${ALTIN}` }}>
+                  {['Hizmet', 'Fiyat', 'Süre'].map((h, i) => (
+                    <th key={h} style={{ padding: '.85rem 1.1rem', textAlign: i === 0 ? 'left' : 'right', fontSize: '.68rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN2, fontWeight: 500 }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {UTU_TEMIZLEME.map(({ hizmet, fiyat, sure }, i) => (
+                  <tr key={i} style={{ borderBottom: `1px solid rgba(60,40,20,.06)`, background: i % 2 ? `rgba(184,151,90,.025)` : '#fff' }}>
+                    <td style={{ padding: '.88rem 1.1rem', fontSize: '.88rem', fontWeight: 500 }}>{hizmet}</td>
+                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', color: fiyat === 'ÜCRETSİZ' ? '#22c55e' : ALTIN, fontWeight: 700 }}>{fiyat}</td>
+                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '.75rem', color: GRI }}>{sure}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <a href={WA('Merhaba, kuru temizleme için otelimden alım servisi istiyorum. Adres: ')} target="_blank" rel="noopener noreferrer"
+              style={{ marginTop: '1.5rem', display: 'inline-block', background: '#25d366', color: '#fff', padding: '.85rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '3px' }}>
+              🚐 Otel Alım Servisi İste
             </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── CTA ── */}
-      <section className="cta-sec" aria-label="Sipariş ver">
-        <h2 className="cta-h">
-          Antalya'nın Her Köşesine<br/>
-          <em>Adrese Terzi Servisi</em>
-        </h2>
-        <p style={{fontFamily:'var(--sans)',fontSize:'.88rem',color:'var(--muted)',marginBottom:'2rem',position:'relative'}}>
-          Dikim · Ütü · Kuru Temizleme · Tekstil İmalat · Moda Tasarım · Adrese Servis
-        </p>
-        <div className="cta-btns">
-          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn btn-wa">
-            💬 WhatsApp Sipariş
-          </a>
-          <a
-            href={WA('Merhaba, seri imalat / toplu sipariş için teklif almak istiyorum.')}
-            target="_blank" rel="noopener noreferrer"
-            className="btn btn-ghost"
-          >
-            🏭 Seri İmalat Teklifi
-          </a>
-        </div>
-        <p style={{fontFamily:'var(--sans)',fontSize:'.78rem',color:'var(--muted)',marginTop:'1.5rem',position:'relative'}}>
-          Telefon:{' '}
-          <a href={`tel:${PHONE_RAW}`} style={{color:'var(--gold)',textDecoration:'none'}}>
-            {PHONE_DISPLAY}
-          </a>
-        </p>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section id="faq" className="sec" style={{background:'var(--ink2)'}} aria-labelledby="faq-h">
-        <div className="ctr">
-          <div className="sh c">
-            <span className="eyebrow">SSS</span>
-            <h2 className="h2" id="faq-h">Sık Sorulan <em>Sorular</em></h2>
-            <div className="divider" />
-          </div>
-          <div className="faq-list">
-            {FAQS.map(([q, a], i) => (
-              <div key={i} className="faq-item">
-                <button
-                  className="faq-q"
-                  aria-expanded="false"
-                  aria-controls={`faq-ans-${i}`}
-                >
-                  <span>{q}</span>
-                  <span className="faq-ico" aria-hidden="true">+</span>
-                </button>
-                <div id={`faq-ans-${i}`} className="faq-a" role="region">
-                  {a}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── İLETİŞİM ── */}
-      <section id="contact" className="sec" style={{background:'var(--ink3)'}} aria-labelledby="cont-h">
-        <div className="ctr">
-          <div className="sh">
-            <span className="eyebrow">✦ İletişim</span>
-            <h2 className="h2" id="cont-h">Bize <em>Ulaşın</em></h2>
-            <div className="divider" />
-          </div>
-          <div className="cont-grid">
-            <address style={{fontStyle:'normal'}}>
-              {([
-                ['📞','Telefon',<a href={`tel:${PHONE_RAW}`} key="tel">{PHONE_DISPLAY}</a>],
-                ['💬','WhatsApp',<a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" key="wa">{PHONE_DISPLAY}</a>],
-                ['🕐','Çalışma Saatleri',<span key="s">09:00 – 19:00 · Pzt–Cmt</span>],
-                ['📍','Adres',<span key="a">Konyaaltı, Antalya</span>],
-                ['🚗','Servis Alanı',<span key="sa">Tüm Antalya ilçeleri · Türkiye geneli kargo</span>],
-                ['🌍','Diller',<span key="d">Türkçe · English · Русский</span>],
-              ] as [string,string,React.ReactNode][]).map(([ic,lbl,val],i) => (
-                <div key={i} className="crow">
-                  <span style={{fontSize:'1rem',paddingTop:'.1rem'}} aria-hidden="true">{ic}</span>
-                  <div>
-                    <div className="clbl">{lbl}</div>
-                    <div className="cval">{val}</div>
+        {/* ── HİZMET KARTLARI ─────────────────────────────────────────────── */}
+        <section style={{ background: BG2, padding: '4.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '2px', background: ALTIN }} />
+              <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Tüm Hizmetler</span>
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '2rem' }}>
+              Terzi Can Hizmet Alanları
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
+              {[
+                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı, astar değişimi. Aynı gün teslim.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺100\'den' },
+                { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise, kadın elbise, abiye, gelinlik, gömlek, pantolon, üniforma — ölçüye özel dikim.', href:'/terzi/bayan-terzi-antalya', fiyat:'₺350\'den' },
+                { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Otelden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺80\'den' },
+                { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Otel servisi.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺300\'den' },
+                { ic:'🏭', baslik:'Üniforma & Seri İmalat', text:'Otel, restoran, okul, sağlık sektörü üniforması. Kalıp + nakış + seri üretim. Min 10 adet.', href:'/terzi/uniforma-uretimi-antalya', fiyat:'Teklif' },
+                { ic:'🚗', baslik:'Adrese Servis', text:'Konyaaltı, Belek, Lara, Kemer, Alanya, Manavgat dahil tüm Antalya\'ya ücretsiz alım + teslimat.', href:'/terzi/eve-gelen-terzi-antalya', fiyat:'Ücretsiz' },
+              ].map(({ ic, baslik, text, href, fiyat }) => (
+                <div key={baslik} style={{ background: '#fff', padding: '2rem 1.6rem', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: ALTIN }} />
+                  <div style={{ fontSize: '1.8rem', marginBottom: '.8rem' }}>{ic}</div>
+                  <h3 style={{ fontFamily: SERIF, fontSize: '1.1rem', color: KOYU, marginBottom: '.5rem', fontWeight: 600 }}>{baslik}</h3>
+                  <p style={{ fontSize: '.8rem', color: GRI, lineHeight: 1.75, marginBottom: '1rem' }}>{text}</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '.78rem', color: ALTIN, fontWeight: 700 }}>{fiyat} başlar</span>
+                    <Link href={href} style={{ fontSize: '.72rem', color: ALTIN, textDecoration: 'none', borderBottom: `1px solid ${ALTIN}`, paddingBottom: '1px' }}>Detay →</Link>
                   </div>
                 </div>
               ))}
-              <div style={{display:'flex',flexDirection:'column',gap:'.6rem',marginTop:'1.5rem'}}>
-                <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
-                  className="btn btn-wa" style={{justifyContent:'center'}}>
-                  💬 WhatsApp'tan Yaz
-                </a>
-                <a href="https://maps.google.com/?q=Konyaaltı+Antalya" target="_blank" rel="noopener noreferrer"
-                  className="btn btn-ghost" style={{justifyContent:'center'}}>
-                  📍 Google Maps'te Gör
-                </a>
-              </div>
-            </address>
-            <div className="map-box">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25484.034!2d30.6946!3d36.8769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c3914a3f49b36b%3A0xe9e87c5c9a6b2700!2sKonyaalti%2C%20Antalya!5e0!3m2!1str!2str!4v1720000000000"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="SwapHubs Antalya Konyaaltı — Terzi & Tekstil İmalat Atölyesi"
-                aria-label="Atölye konumu haritası"
-              />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── FOOTER ── */}
-      <footer>
-        <div className="foot-brand">
-          SwapHubs — Antalya Terzi · Dikim · Ütü · Kuru Temizleme · Tekstil & Moda İmalat Atölyesi
-        </div>
-        <nav className="foot-links" aria-label="Footer bağlantılar">
-          {[
-            ['https://www.swaphubs.com','Ana Sayfa'],
-            ['/terzi','Terzi Can Antalya'],
-            ['/antalya-bay-tailor-online-terzi-utu-hizmeti','Online Terzi'],
-            ['#services','Hizmetler'],
-            ['#prices','Fiyatlar'],
-            ['#faq','SSS'],
-            ['#contact','İletişim'],
-          ].map(([href,label]) => <a key={href} href={href}>{label}</a>)}
-        </nav>
-        <p className="foot-copy">
-          © {new Date().getFullYear()} SwapHubs · Antalya Terzi & Tekstil Hizmetleri ·{' '}
-          <a href={`tel:${PHONE_RAW}`} style={{color:'rgba(201,168,76,.3)',textDecoration:'none'}}>
-            {PHONE_DISPLAY}
-          </a>
-        </p>
-        <div className="foot-kws" aria-label="Anahtar kelimeler">
-          {[
-            'Antalya Terzi','Kıyafet Dikimi','Ütü Hizmeti','Kuru Temizleme',
-            'Tekstil İmalat','Moda Tasarım','Fason Üretim','Adrese Servis',
-            'Tailor Antalya','Fashion Atelier','Seri İmalat','Online Terzi',
-            'Portnoj Antalya','Schneider Antalya','Tailor Turkey',
-          ].map(k => <span key={k} className="foot-pill">{k}</span>)}
-        </div>
-      </footer>
+        {/* ── BÖLGELER ────────────────────────────────────────────────────── */}
+        <section style={{ background: KOYU, padding: '4rem 1.5rem' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.8rem', color: '#fff', marginBottom: '.5rem' }}>
+              Antalya'nın Her İlçesine <span style={{ color: ALTIN2, fontStyle: 'italic' }}>Adrese Servis</span>
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,.55)', fontSize: '.85rem', marginBottom: '2rem' }}>
+              Konyaaltı atölyemizden araçlı servis ile tüm Antalya ilçelerine alım + teslimat
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(140px,1fr))', gap: '1px', background: 'rgba(255,255,255,.05)' }}>
+              {['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Serik','Aksu','Döşemealtı','Gazipaşa','Kumluca','Finike'].map(b => (
+                <div key={b} style={{ background: 'rgba(255,255,255,.03)', padding: '.8rem 1rem', fontSize: '.8rem', color: 'rgba(255,255,255,.6)', textAlign: 'center' }}>
+                  📍 {b}
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href={WA('Merhaba, adrese terzi servisi almak istiyorum.')} target="_blank" rel="noopener noreferrer"
+                style={{ background: ALTIN, color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem' }}>
+                🚗 Adrese Servis Talep Et
+              </a>
+              <a href="https://maps.google.com/?q=Konyaaltı+Antalya+Terzi" target="_blank" rel="noopener noreferrer"
+                style={{ border: '1px solid rgba(255,255,255,.2)', color: 'rgba(255,255,255,.8)', padding: '.9rem 1.8rem', textDecoration: 'none', fontSize: '.85rem' }}>
+                📍 Google Maps'te Gör
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── ÇOK DİLLİ BÖLÜM ────────────────────────────────────────────── */}
+        <section style={{ background: BG2, padding: '4rem 1.5rem' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.8rem', color: KOYU, marginBottom: '1.5rem' }}>
+              Tailor in Antalya <span style={{ color: ALTIN, fontStyle: 'italic' }}>· English · Русский · Deutsch</span>
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1rem' }}>
+              <div style={{ background: '#fff', padding: '1.6rem', borderLeft: `3px solid ${ALTIN}` }}>
+                <div style={{ fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN, marginBottom: '.6rem' }}>🇬🇧 English</div>
+                <p style={{ fontSize: '.85rem', color: GRI, lineHeight: 1.8 }}>
+                  <strong style={{ color: METIN }}>Tailor Can</strong> is Antalya's professional tailor offering
+                  alterations, dress making, dry cleaning and hotel pickup across all districts including
+                  Belek, Kemer and Lara. English-speaking service. WhatsApp: <strong>{PHONE}</strong>
+                </p>
+              </div>
+              <div style={{ background: '#fff', padding: '1.6rem', borderLeft: `3px solid ${ALTIN}` }}>
+                <div style={{ fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN, marginBottom: '.6rem' }}>🇷🇺 Русский</div>
+                <p style={{ fontSize: '.85rem', color: GRI, lineHeight: 1.8 }}>
+                  <strong style={{ color: METIN }}>Портной Кан</strong> — профессиональный портной в Анталье.
+                  Подгонка одежды, пошив, химчистка, доставка из отеля. Работаем по-русски.
+                  WhatsApp: <strong>{PHONE}</strong>
+                </p>
+              </div>
+              <div style={{ background: '#fff', padding: '1.6rem', borderLeft: `3px solid ${ALTIN}` }}>
+                <div style={{ fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN, marginBottom: '.6rem' }}>🇩🇪 Deutsch</div>
+                <p style={{ fontSize: '.85rem', color: GRI, lineHeight: 1.8 }}>
+                  <strong style={{ color: METIN }}>Schneider Can</strong> in Antalya bietet Änderungsschneiderei,
+                  Maßkleidung, Reinigung und Abholung vom Hotel. Deutschsprachiger Service.
+                  WhatsApp: <strong>{PHONE}</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SSS ─────────────────────────────────────────────────────────── */}
+        <section id="sss" style={{ background: '#fff', padding: '4.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '2px', background: ALTIN }} />
+              <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>SSS</span>
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '2rem' }}>
+              Sık Sorulan Sorular
+            </h2>
+            {[
+              ['Antalya paça kısaltma fiyatı 2026?', `Kot paça ₺150, kumaş pantolon ₺175'den başlar. Aynı gün teslim. WhatsApp: ${PHONE}`],
+              ['Fermuar değişimi aynı gün mümkün mü?', 'Evet! Pantolon, kot, sweatshirt fermuarı aynı gün teslim. Mont fermuarı 24 saat.'],
+              ['Bel daraltma ve elbise tadilat fiyatı?', `Bel daraltma ₺200, elbise daraltma ₺350'den başlar. WhatsApp fotoğraf gönderin: ${PHONE}`],
+              ['Otele kuru temizleme servisi var mı?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine ücretsiz alım + teslimat. 24 saat ekspres. WhatsApp: ${PHONE}`],
+              ['Gelinlik tadilatı yapıyor musunuz?', `Evet! Gelinlik daraltma, boy kısaltma, dantel onarımı. Detay: swaphubs.com/terzi/gelinlik-tadilati`],
+              ['Is there an English-speaking tailor in Antalya?', `Yes! Tailor Can in Konyaaltı offers English service. Alterations, dry cleaning, hotel pickup. WhatsApp: ${PHONE}`],
+              ['Есть ли химчистка с доставкой из отеля Анталья?', `Да! Забираем из отеля по всей Анталье. Говорим по-русски. WhatsApp: ${PHONE}`],
+              ['Üniforma üretimi yapıyor musunuz?', `Evet! Otel, restoran, okul üniforması. Minimum 10 adet. Nakış dahil. Detay: swaphubs.com/terzi/uniforma-uretimi-antalya`],
+            ].map(([q, a], i) => (
+              <details key={i} style={{ borderBottom: `1px solid rgba(184,151,90,.12)`, padding: '1rem 0' }}>
+                <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: KOYU, listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                  <span>{q}</span>
+                  <span style={{ color: ALTIN, fontSize: '1.3rem', fontWeight: 300, flexShrink: 0 }}>+</span>
+                </summary>
+                <p style={{ marginTop: '.75rem', fontSize: '.84rem', color: GRI, lineHeight: 1.85 }}>{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* ── CTA ─────────────────────────────────────────────────────────── */}
+        <section style={{ background: `linear-gradient(135deg, ${ALTIN} 0%, #9A7A3E 100%)`, padding: '4.5rem 1.5rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'rgba(255,255,255,.3)' }} />
+          <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative' }}>
+            <div style={{ fontSize: '.65rem', letterSpacing: '.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,.7)', marginBottom: '1rem' }}>
+              Terzi Can · Konyaaltı, Antalya
+            </div>
+            <h2 style={{ fontFamily: SERIF, fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: '#fff', marginBottom: '.8rem', fontWeight: 700 }}>
+              Randevunuzu Hemen Alın
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.95rem', lineHeight: 1.7 }}>
+              Fotoğraf gönderin → 30 dakikada fiyat alın → Aynı gün randevu
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href={WA('Merhaba, terzi hizmeti için randevu almak istiyorum.')} target="_blank" rel="noopener noreferrer"
+                style={{ background: '#fff', color: KOYU, padding: '1.1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem' }}>
+                💬 WhatsApp — Randevu Al
+              </a>
+              <a href={`tel:${PHONE_E}`}
+                style={{ border: '1px solid rgba(255,255,255,.5)', color: '#fff', padding: '1.1rem 2rem', textDecoration: 'none', fontSize: '.92rem' }}>
+                📞 {PHONE}
+              </a>
+            </div>
+            <p style={{ marginTop: '1.5rem', fontSize: '.75rem', color: 'rgba(255,255,255,.65)' }}>
+              ⭐ 4.9 / 5 · 94 Google Değerlendirmesi · Pazartesi–Cumartesi 09:00–19:00
+            </p>
+          </div>
+        </section>
+
+        {/* ── NAP FOOTER ──────────────────────────────────────────────────── */}
+        <section style={{ background: KOYU, padding: '2.5rem 1.5rem', borderTop: `1px solid rgba(184,151,90,.15)` }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+              {[
+                ['📍 Adres', 'Konyaaltı, Antalya, Türkiye'],
+                ['📞 Telefon', PHONE],
+                ['🕐 Çalışma', 'Pzt–Cmt · 09:00–19:00'],
+                ['🌍 Diller', 'TR · EN · RU · DE'],
+              ].map(([l, v]) => (
+                <div key={l}>
+                  <div style={{ fontSize: '.68rem', color: ALTIN, letterSpacing: '.15em', textTransform: 'uppercase', marginBottom: '.3rem' }}>{l}</div>
+                  <div style={{ fontSize: '.88rem', color: 'rgba(255,255,255,.65)' }}>{v}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ borderTop: `1px solid rgba(255,255,255,.06)`, paddingTop: '1.5rem', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
+              {[
+                ['Terzi Can Ana Sayfa', '/terzi'],
+                ['Paça Kısaltma', '/terzi/paca-kisaltma-antalya'],
+                ['Gelinlik Tadilatı', '/terzi/gelinlik-tadilati'],
+                ['Fermuar Değişimi', '/terzi/fermuar-degisimi-antalya'],
+                ['Kuru Temizleme', '/terzi/kuru-temizleme-antalya'],
+                ['Üniforma Üretimi', '/terzi/uniforma-uretimi-antalya'],
+                ['Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
+                ['Dikiş Atölyesi', '/terzi/dikis-atolyesi-antalya'],
+              ].map(([l, h]) => (
+                <Link key={l} href={h}
+                  style={{ fontSize: '.72rem', color: 'rgba(255,255,255,.4)', textDecoration: 'none', border: '1px solid rgba(255,255,255,.08)', padding: '.3rem .8rem', borderRadius: '2px' }}>
+                  {l}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+      </main>
     </>
   );
 }
