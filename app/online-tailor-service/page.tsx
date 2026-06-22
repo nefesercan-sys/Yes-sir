@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import OnlineTailorClient from './OnlineTailorClient';
 
-const SITE_URL = 'https://www.swaphubs.com/online-tailor-service';
+const SITE_URL = 'https://swaphubs.com/online-tailor-service';
 const PHONE = '+90 531 898 64 18';
 
 // ─── STRUCTURED DATA ──────────────────────────────────────────────────────────
