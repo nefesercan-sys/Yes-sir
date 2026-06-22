@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
-const SITE_URL = 'https://www.swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat';
+// ✅ Şöyle olmalı (www. kaldırılacak):
+canonical: "https://swaphubs.com/antalya-terzi..."
+og:url: "https://swaphubs.com/antalya-terzi..."
 const PHONE_DISPLAY = '+90 531 898 64 18';
 const PHONE_RAW = '+905318986418';
 const WA_BASE = `https://wa.me/${PHONE_RAW}`;
