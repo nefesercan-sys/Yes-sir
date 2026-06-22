@@ -5,7 +5,7 @@ const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
 // ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
+  metadataBase: new URL('https://swaphubs.com'),
   title: "Online Terzi Hizmeti | 81 İle Özel Dikim & Kargo | SwapHubs",
   description:
     "Türkiye'nin 81 iline kargo teslimatlı online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz kapınıza gelsin.",
