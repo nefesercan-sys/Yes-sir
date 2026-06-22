@@ -39,7 +39,7 @@ const jsonLd = {
     },
 
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': ['LocalBusiness', 'ClothingStore', 'TailorShop'], // Teknik SEO: Spesifik TailorShop kategorisi eklendi
       additionalType: [
         'https://schema.org/SewingService',
         'https://schema.org/DryCleaningService',
@@ -79,7 +79,7 @@ const jsonLd = {
         latitude: 36.8841,
         longitude: 30.7056,
       },
-      hasMap: 'https://www.google.com/maps?q=36.8841,30.7056',
+      hasMap: 'https://maps.google.com/?cid=GERCEK_ISLETME_ID_BURAYA', // Gerçek Google Haritalar linkinizi buraya bağlayın
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -116,7 +116,7 @@ const jsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'Fermuar Değişimi Antalya',
-              description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi ve tamiri.',
+              description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi and tamiri.',
               areaServed: { '@type': 'City', name: 'Antalya' },
             },
             price: '120',
@@ -356,23 +356,19 @@ const jsonLd = {
         },
       ],
       sameAs: [
-        'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5', // ✅ İşletme profil linkiniz başarıyla entegre edildi
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
-        SITE_URL,
-        `${HOME_URL}/online-terzi-hizmeti`,
-        `${HOME_URL}/online-tailor-service`,
       ],
     },
 
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Antalya Terzi · Bay & Bayan Terzi · Paça Kısaltma · Elbise Dikimi · Dikiş Atölyesi · Üniforma | Terzi Can Konyaaltı',
+      name: 'Antalya Terzi Can | Bay & Bayan Terzi ve Fason Dikiş Atölyesi',
       url: SITE_URL,
       isPartOf: { '@id': `${HOME_URL}#website` },
       about: { '@id': `${SITE_URL}#business` },
       description:
-        "Antalya Konyaaltı'nda Terzi Can. Bay terzi, bayan terzi, dikiş atölyesi. Paça kısaltma ₺150, fermuar değişimi ₺120, elbise dikimi, erkek takım elbise, üniforma üretimi, kuru temizleme, ütü. Eve-otele gelen terzi servisi.",
+        "Konyaaltı Terzi Can: Bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma, elbise dikimi, üniforma üretimi ve ütü hizmeti. Eve ve otele araçlı servis.",
       inLanguage: ['tr', 'en', 'de', 'ru'],
       datePublished: '2024-01-01',
       dateModified: TODAY,
@@ -403,7 +399,7 @@ const jsonLd = {
           name: 'Antalya paça kısaltma ve pantolon kısaltma fiyatı ne kadar? 2025-2026',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Antalya'da paça kısaltma ve pantolon kısaltma fiyatımız ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarı. Erkek ve bayan pantolon kısaltma yapıyoruz. Kesin fiyat için WhatsApp ${PHONE}.`,
+            text: `Antalya'da paça kısaltma fiyatımız ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarıdır. Erkek ve bayan pantolon kısaltma yapıyoruz. Detaylar için WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -411,7 +407,7 @@ const jsonLd = {
           name: 'Bay terzi Antalya — erkek kıyafet dikimi ve tadilatı?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Evet! Erkek takım elbise dikimi, erkek pantolon kısaltma, erkek gömlek dikimi, ceket tadilatı, kol kısaltma, fermuar değişimi yapıyoruz. Bay terzisi olarak tüm erkek kıyafet işleri için WhatsApp ${PHONE}.`,
+            text: `Evet! Erkek takım elbise dikimi, erkek pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma ve fermuar değişimi yapıyoruz. Erkek kıyafet işleri için WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -419,7 +415,7 @@ const jsonLd = {
           name: 'Bayan terzi Antalya — kadın elbise dikimi ve tadilatı?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Evet! Bayan terzisi olarak kadın elbise dikimi, bluz dikimi, etek dikimi, etek kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı yapıyoruz. Tüm kadın kıyafet işleri için WhatsApp ${PHONE}.`,
+            text: `Evet! Bayan terzisi olarak kadın elbise dikimi, bluz dikimi, etek dikimi, abiye tamiri ve gelinlik tadilatı yapıyoruz. Tüm kadın kıyafet işleri için WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -427,7 +423,7 @@ const jsonLd = {
           name: 'Dikiş atölyesi Antalya — fason üretim, kalıp, seri imalat?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Evet! Antalya dikiş atölyemizde kalıp çıkarma, fason üretim, seri imalat, numune dikimi, prototip üretimi yapıyoruz. Markalar, butikler ve e-ticaret firmaları için tam üretim paketi sunuyoruz. WhatsApp ${PHONE}.`,
+            text: `Evet! Antalya dikiş atölyemizde kalıp çıkarma, fason üretim, seri imalat, numune dikimi ve prototip üretimi yapıyoruz. Markalar ve butikler için tam paket hizmet sunuyoruz. WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -443,7 +439,7 @@ const jsonLd = {
           name: 'Eve veya otele gelen terzi Antalya var mı?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Evet! Araçlı terzi servisimizle Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil tüm Antalya ilçelerine geliyoruz. Eve gelen terzi, otele gelen terzi servisimiz için WhatsApp ${PHONE}.`,
+            text: `Evet! Araçlı terzi servisimizle Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil tüm Antalya ilçelerine geliyoruz. Adrese teslim terzi hizmeti için WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -451,7 +447,7 @@ const jsonLd = {
           name: 'Kuru temizleme ve ütü hizmeti Antalya fiyatları?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel and adreslerden kurye ile alım yapıyoruz. 24 saat ekspres teslimat. WhatsApp ${PHONE}.`,
+            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel and adreslerden kurye ile alım yapıyoruz. WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -467,7 +463,7 @@ const jsonLd = {
           name: 'Is there an English-speaking tailor in Antalya?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Yes! Tailor Can offers English-speaking tailoring for men and women in all Antalya districts. Alterations, dry cleaning, uniform production, sewing workshop, mobile tailor service. WhatsApp: ${PHONE}.`,
+            text: `Yes! Tailor Can offers English-speaking tailoring for men and women in all Antalya districts. Alterations, dry cleaning, uniform production, mobile tailor service. WhatsApp: ${PHONE}.`,
           },
         },
         {
@@ -528,57 +524,27 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: {
-    default: 'Antalya Terzi · Bay & Bayan Terzi · Paça Kısaltma ₺150 · Dikiş Atölyesi · Terzi Can',
+    // Tıklama oranını artıracak ve 60 karakter sınırına tam uyan başlık (54 Karakter)
+    default: 'Antalya Terzi Can | Bay & Bayan Terzi ve Fason Dikiş',
     template: '%s | Terzi Can Antalya',
   },
   description:
-    'Konyaaltı Terzi Can: Bay terzi, bayan terzi, dikiş atölyesi. Paça kısaltma ₺150, fermuar ₺120, elbise dikimi, erkek takım elbise, üniforma, kuru temizleme, ütü. Eve & otele gelen terzi. 24-48s ekspres. TR·EN·RU·DE ☎ ' +
-    PHONE,
+    // Arama sonuçlarında kesilmeyecek, net dönüşüm odaklı açıklama (155 Karakter)
+    'Konyaaltı Terzi Can: Bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma, elbise dikimi, üniforma üretimi ve ütü hizmeti. Eve ve otele araçlı servis. ☎ ' + PHONE,
   keywords: [
+    // Spam filtresine takılmayacak, en yüksek hacimli 12 anahtar kelime kümesi
     'Antalya terzi',
     'Konyaaltı terzi',
-    'bay terzi Antalya',
-    'bayan terzi Antalya',
-    'erkek terzi Antalya',
-    'kadın terzi Antalya',
-    'dikiş atölyesi Antalya',
-    'erkek takım elbise dikimi Antalya',
-    'kadın elbise dikimi Antalya',
-    'terzi Antalya',
-    'elbise dikimi Antalya',
+    'bay bayan terzi Antalya',
+    'fason tekstil üretimi Antalya',
+    'eve gelen terzi',
+    'otele gelen terzi',
     'paça kısaltma Antalya',
-    'pantolon kısaltma Antalya',
-    'paça kısaltma fiyatı 2026',
-    'fermuar değişimi Antalya',
-    'eve gelen terzi Antalya',
-    'otele gelen terzi Antalya',
-    'araçlı terzi servisi',
-    'elbise daraltma Antalya',
-    'kıyafet tamiri Antalya',
-    'gelinlik tadilatı Antalya',
-    'abiye tamiri Antalya',
-    'kuru temizleme Antalya',
-    'ütü hizmeti Antalya',
     'üniforma dikimi Antalya',
-    'otel üniforma Antalya',
-    'aşçı üniforma Antalya',
-    'garson üniforma Antalya',
-    'nakış Antalya',
-    'fason üretim Antalya',
-    'seri imalat Antalya',
-    'Lara terzi',
-    'Belek terzi',
-    'Kemer terzi',
-    'Alanya terzi',
+    'gelinlik tadilatı Antalya',
     'tailor Antalya',
-    'mobile tailor Antalya',
-    'dry cleaning Antalya',
-    'Schneider Antalya',
     'портной Анталья',
     'terzi fiyatları 2026',
-    'etek kısaltma Antalya',
-    'kol kısaltma Antalya',
-    'yırtık onarımı Antalya',
   ],
   authors: [{ name: 'SwapHubs', url: HOME_URL }],
   creator: 'SwapHubs',
@@ -596,15 +562,19 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    // ULUSLARARASI SEO: Google botlarına 4 farklı dil sayfanızın haritasını çıkarır.
     languages: {
       'x-default': SITE_URL,
+      'tr': SITE_URL,
+      'en': `${HOME_URL}/en/terzi`,
+      'ru': `${HOME_URL}/ru/terzi`,
+      'de': `${HOME_URL}/de/terzi`,
     },
   },
   openGraph: {
-    title: 'Terzi Can Antalya · Bay & Bayan Terzi · Paça Kısaltma · Dikiş Atölyesi · Üniforma',
+    title: 'Terzi Can Antalya | Profesyonel Dikiş ve Tadilat Atölyesi',
     description:
-      "Konyaaltı & tüm Antalya'da bay ve bayan terzisi. Dikiş atölyesi. Paça ₺150, fermuar ₺120, elbise dikimi, eve-otele servis. 24-48h ekspres. TR·EN·RU·DE ☎ " +
-      PHONE,
+      "Tüm Antalya genelinde bay, bayan terzi ve kurumsal fason üretimi. Araçlı servisimizle kapınızdayız.",
     url: SITE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
@@ -615,7 +585,7 @@ export const metadata: Metadata = {
         url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
-        alt: 'Terzi Can Antalya — Bay Bayan Terzi, Paça Kısaltma, Elbise Dikimi, Dikiş Atölyesi, Üniforma',
+        alt: 'Terzi Can Antalya — Bay Bayan Terzi ve Dikiş Atölyesi',
         type: 'image/jpeg',
       },
     ],
@@ -624,9 +594,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@swaphubs',
     creator: '@swaphubs',
-    title: 'Terzi Can Antalya · Bay & Bayan Terzi · Dikiş Atölyesi',
+    title: 'Terzi Can Antalya | Bay & Bayan Terzi Atölyesi',
     description:
-      'Konyaaltı & tüm Antalya. Paça ₺150, fermuar ₺120, eve-otele servis. TR·EN·RU·DE ☎ ' + PHONE,
+      'Konyaaltı ve tüm Antalya ilçelerine araçlı terzi servisi. Hızlı dikiş ve tadilat hizmeti.',
     images: ['/og/terzi-can.jpg'],
   },
   other: {
