@@ -2,12 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bayan-terzi-antalya';
-const PARENT_URL = 'https://swaphubs.com/terzi';
-const HOME_URL = 'https://swaphubs.com';
+const PARENT = 'https://swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
-const PHONE_E164 = '+905318986418';
-const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Merhaba, kadın kıyafeti için terzi hizmeti almak istiyorum.')}`;
-const TODAY = new Date().toISOString().split('T')[0];
+const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,159 +12,133 @@ const jsonLd = {
     {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
-      name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi ve Tadilatı',
-      alternateName: ['Kadın Terzi Antalya', 'Kadın Elbise Dikimi Antalya', "Women's Tailor Antalya", 'Elbise Dikimi Antalya'],
-      description: "Antalya bayan terzisi. Kadın elbise dikimi, bluz dikimi, etek kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı, büyük beden bayan kıyafeti. Özel ölçü.",
-      provider: {
-        '@type': 'ClothingStore',
-        '@id': `${PARENT_URL}#business`,
-        name: 'Terzi Can',
-        telephone: PHONE_E164,
-      },
-      areaServed: { '@type': 'City', name: 'Antalya' },
-      offers: {
-        '@type': 'Offer',
-        price: '150',
-        priceCurrency: 'TRY',
-        availability: 'https://schema.org/InStock',
-      },
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${SITE_URL}#webpage`,
-      name: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Abiye Tamiri · Gelinlik Tadilatı · Terzi Can',
-      url: SITE_URL,
-      description: "Antalya bayan terzisi. Kadın elbise dikimi ₺600, etek kısaltma ₺150, abiye tamiri ₺350, gelinlik tadilatı ₺500. Büyük beden, bebek elbisesi. Eve-otele servis. ☎ " + PHONE,
-      inLanguage: 'tr',
-      dateModified: TODAY,
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
+      name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi Fiyatları 2026',
+      description: "Antalya'da bayan terzi. Kadın elbise dikimi ₺600, etek kısaltma ₺175, abiye tamiri ₺350, gelinlik tadilatı ₺500. Eve ve otele gelen terzi servisi.",
+      provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
+      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya'].map(name=>({'@type':'City',name})),
+      offers: { '@type': 'AggregateOffer', lowPrice: '150', highPrice: '3000', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: HOME_URL },
-        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi', item: PARENT_URL },
-        { '@type': 'ListItem', position: 3, name: 'Bayan Terzi Antalya', item: SITE_URL },
+        { '@type':'ListItem', position:1, name:'SwapHubs', item:'https://swaphubs.com' },
+        { '@type':'ListItem', position:2, name:'Antalya Terzi', item:PARENT },
+        { '@type':'ListItem', position:3, name:'Bayan Terzi Antalya', item:SITE_URL },
       ],
     },
     {
       '@type': 'FAQPage',
       mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Bayan terzi Antalya — kadın elbise dikimi fiyatı?',
-          acceptedAnswer: { '@type': 'Answer', text: `Kadın elbise dikimi ₺600'den, bluz dikimi ₺400'den, etek dikimi ₺350'den başlar. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Abiye tamiri ve kısaltma Antalya fiyatı?',
-          acceptedAnswer: { '@type': 'Answer', text: `Abiye tamiri ₺350'den, abiye kısaltma ₺200'den başlar. Mezuniyet ve düğün sezonunda ekspres 24 saatte yapılır. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Gelinlik tadilatı Antalya fiyatı?',
-          acceptedAnswer: { '@type': 'Answer', text: `Gelinlik tadilatı ₺500'den başlar. Daraltma, kısaltma, omuz düzeltme. Nisan–Ekim düğün sezonunda ekspres randevu. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Büyük beden bayan kıyafeti dikimi yapıyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet. Büyük beden elbise, pantolon, gömlek dikimi yapıyoruz. Beden seti çıkarma ve özel kalıp hizmeti mevcuttur.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Etek kısaltma Antalya fiyatı?',
-          acceptedAnswer: { '@type': 'Answer', text: `Etek kısaltma ₺150'den başlar. Düz etek, A-line, midi, maxi etek kısaltma yapılır. Aynı gün teslim mümkündür. WhatsApp: ${PHONE}` },
-        },
+        { '@type':'Question', name:'Bayan terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Etek kısaltma ₺175, elbise daraltma ₺200, kadın elbise dikimi ₺600, abiye tamiri ₺350, gelinlik tadilatı ₺500. WhatsApp: ${PHONE}`}},
+        { '@type':'Question', name:'Gelinlik tadilatı Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Gelinlik tadilatı ₺500'den başlar. Kısaltma, daraltma, omuz ayarı yapılmaktadır. Nisan–Ekim düğün sezonunda. WhatsApp: ${PHONE}`}},
+        { '@type':'Question', name:'Abiye tamiri Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Abiye tamiri ₺350'den, abiye kısaltma ₺250'den başlar. 48 saatte teslim. WhatsApp: ${PHONE}`}},
+        { '@type':'Question', name:'Kadın elbise dikimi Antalya?', acceptedAnswer:{'@type':'Answer', text:`Evet! Ölçüye özel kadın elbise dikimi ₺600'den başlar. Bluz, etek, tulum, abiye. WhatsApp: ${PHONE}`}},
       ],
     },
   ],
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(HOME_URL),
-  title: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Abiye Tamiri · Gelinlik Tadilatı · Terzi Can',
-  description: "Antalya bayan terzisi. Kadın elbise dikimi ₺600, etek kısaltma ₺150, abiye tamiri ₺350, gelinlik tadilatı ₺500. Büyük beden, bebek elbisesi. Eve-otele gelen terzi. ☎ " + PHONE,
-  keywords: ['bayan terzi Antalya','kadın terzi Antalya','kadın elbise dikimi Antalya','etek kısaltma Antalya','abiye tamiri Antalya','gelinlik tadilatı Antalya','elbise daraltma Antalya','büyük beden bayan dikimi','bluz dikimi Antalya'],
+  metadataBase: new URL('https://swaphubs.com'),
+  title: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Gelinlik Tadilatı 2026 | Terzi Can',
+  description: "Antalya bayan terzi: elbise dikimi ₺600, gelinlik tadilatı ₺500, abiye tamiri ₺350, etek kısaltma ₺175. Eve gelen terzi servisi. ☎ +90 531 898 64 18",
+  keywords: [
+    'bayan terzi Antalya', 'kadın terzi Antalya', 'kadın elbise dikimi Antalya',
+    'gelinlik tadilatı Antalya', 'abiye tamiri Antalya', 'etek kısaltma Antalya',
+    'bayan terzi fiyatları 2026', 'elbise daraltma Antalya', 'abiye dikimi Antalya',
+    'büyük beden bayan terzi Antalya', 'women tailor Antalya', 'dress alteration Antalya',
+  ],
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Bayan Terzi Antalya · Elbise Dikimi · Abiye · Gelinlik · Terzi Can',
-    description: "Antalya bayan terzisi. Elbise ₺600, abiye tamiri ₺350, gelinlik tadilatı ₺500. ☎ " + PHONE,
-    url: SITE_URL,
-    type: 'website',
+    title: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Gelinlik Tadilatı',
+    description: "Elbise ₺600, gelinlik ₺500, abiye ₺350. Eve gelen terzi. ☎ +90 531 898 64 18",
+    url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true },
 };
+
+const FIYATLAR = [
+  ['Etek / Pantolon Kısaltma', '₺150–175', '24 saat'],
+  ['Elbise Daraltma / Beden Küçültme', '₺200', '48 saat'],
+  ['Kol Kısaltma (Elbise/Bluz)', '₺175', '48 saat'],
+  ['Invisible Fermuar Değişimi', '₺180', '24 saat'],
+  ['Bluz Dikimi', '₺350', '3–5 gün'],
+  ['Kadın Elbise Dikimi', '₺600', '5–7 gün'],
+  ['Tulum Dikimi', '₺700', '5–7 gün'],
+  ['Abiye Tamiri / Kısaltma', '₺350', '48 saat'],
+  ['Abiye Dikimi', '₺1.200', '7–10 gün'],
+  ['Gelinlik Tadilatı', '₺500', '3–5 gün'],
+  ['Gelinlik Dikimi', '₺3.000+', '15–20 gün'],
+  ['Büyük Beden Elbise Dikimi', '₺700+', '5–7 gün'],
+  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
+];
 
 export default function BayanTerziPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <main style={{ fontFamily: 'system-ui,sans-serif', background: '#0d0c0a', color: '#f5f0e8', minHeight: '100vh' }}>
+      <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
-        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7a7268' }}>
-          <Link href="/" style={{ color: '#c9a96e', textDecoration: 'none' }}>SwapHubs</Link>
-          {' › '}
-          <Link href="/terzi" style={{ color: '#c9a96e', textDecoration: 'none' }}>Antalya Terzi</Link>
-          {' › '}
-          <span>Bayan Terzi Antalya</span>
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
+          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
+          {' › '}<Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
+          {' › '}<span>Bayan Terzi Antalya</span>
         </nav>
 
-        <section style={{ padding: '3rem 1.5rem 2.5rem', maxWidth: '860px', margin: '0 auto' }}>
-          <div style={{ fontSize: '.7rem', letterSpacing: '.25em', textTransform: 'uppercase', color: '#c9a96e', marginBottom: '1rem' }}>
-            👗 Bayan Terzi · Kadın Kıyafet Uzmanı
-          </div>
-          <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.2rem' }}>
-            Bayan Terzi Antalya<br />
-            <span style={{ color: '#c9a96e', fontStyle: 'italic' }}>Kadın Elbise Dikimi & Tadilatı</span>
-          </h1>
-          <p style={{ fontSize: '1.05rem', color: '#ede7d9', lineHeight: 1.8, maxWidth: '640px', marginBottom: '2rem' }}>
-            Antalya'nın deneyimli <strong>bayan terzisi</strong> Terzi Can. Kadın elbise dikimi, bluz dikimi, etek dikimi ve kısaltma, elbise daraltma, abiye tamiri, gelinlik tadilatı, nişan elbisesi, büyük beden bayan kıyafeti, bebek ve çocuk kıyafeti dikimi.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#c9a96e', color: '#0d0c0a', padding: '.9rem 1.8rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
-              💬 Fiyat Al
-            </a>
-            <a href={`tel:${PHONE_E164}`}
-              style={{ border: '1px solid rgba(201,169,110,.3)', color: '#f5f0e8', padding: '.9rem 1.8rem', textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
-              📞 {PHONE}
-            </a>
+        <section style={{ background: 'linear-gradient(135deg,#1C1814,#2E2820)', padding: '4rem 1.5rem 3.5rem', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=70') center/cover", opacity: .1 }} />
+          <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
+            <div style={{ fontSize: '.68rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
+              👗 Terzi Can · Antalya · Bayan Terzi Uzmanı
+            </div>
+            <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '1rem' }}>
+              Bayan Terzi Antalya<br />
+              <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Elbise Dikimi · Gelinlik Tadilatı · Abiye 2026</span>
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
+              Etek kısaltma <strong style={{ color: '#D4B07A' }}>₺175</strong> ·
+              Elbise dikimi <strong style={{ color: '#D4B07A' }}>₺600</strong> ·
+              Gelinlik tadilatı <strong style={{ color: '#D4B07A' }}>₺500</strong> ·
+              <strong style={{ color: '#fff' }}> Eve ve otele gelen terzi servisi</strong>
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '1.5rem' }}>
+              {[['Etek Kısaltma','₺175'],['Elbise Dikimi','₺600'],['Abiye Tamiri','₺350'],['Gelinlik Tadilat','₺500'],['Abiye Dikimi','₺1.200']].map(([n,p])=>(
+                <div key={n} style={{ background: 'rgba(255,255,255,.04)', padding: '.9rem', textAlign: 'center' }}>
+                  <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)', marginBottom: '.2rem' }}>{n}</div>
+                  <div style={{ fontFamily: 'Georgia,serif', fontSize: '1.2rem', color: '#D4B07A', fontWeight: 700 }}>{p}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href={WA('Merhaba, kadın kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
+                style={{ background: '#B8975A', color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+                💬 Fotoğraf Gönder → Fiyat Al
+              </a>
+              <a href="tel:+905318986418" style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
+                📞 {PHONE}
+              </a>
+            </div>
           </div>
         </section>
 
-        <section style={{ background: '#1a1814', padding: '3rem 1.5rem' }}>
+        <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#c9a96e', marginBottom: '1.5rem' }}>
-              Bayan Terzi Fiyatları 2025–2026
-            </h2>
+            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Bayan Terzi Fiyat Listesi 2026</h2>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '1.8rem' }}>Başlangıç fiyatları — kesin fiyat için WhatsApp'tan fotoğraf gönderin</p>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(201,169,110,.2)' }}>
-                  <th style={{ textAlign: 'left', padding: '.7rem', fontSize: '.75rem', letterSpacing: '.15em', textTransform: 'uppercase', color: '#c9a96e' }}>Hizmet</th>
-                  <th style={{ textAlign: 'right', padding: '.7rem', fontSize: '.75rem', letterSpacing: '.15em', textTransform: 'uppercase', color: '#c9a96e' }}>Fiyat</th>
-                  <th style={{ textAlign: 'right', padding: '.7rem', fontSize: '.75rem', letterSpacing: '.15em', textTransform: 'uppercase', color: '#c9a96e' }}>Süre</th>
+                <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
+                  {['Hizmet', 'Fiyat', 'Süre'].map(h=>(
+                    <th key={h} style={{ padding: '.7rem .8rem', textAlign: h==='Hizmet'?'left':'center', fontSize: '.68rem', letterSpacing: '.18em', textTransform: 'uppercase', color: '#B8975A', fontWeight: 500 }}>{h}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ['Etek / Paça Kısaltma', '₺150+', 'Aynı gün'],
-                  ['Elbise Daraltma', '₺200+', '48 saat'],
-                  ['Abiye Tamiri ve Kısaltma', '₺350+', '48 saat'],
-                  ['Gelinlik Tadilatı', '₺500+', '3–5 gün'],
-                  ['Nişan Elbisesi Tadilatı', '₺300+', '48 saat'],
-                  ['Kadın Elbise Dikimi', '₺600+', '3–7 gün'],
-                  ['Bluz Dikimi', '₺400+', '3–5 gün'],
-                  ['Etek Dikimi', '₺350+', '3–5 gün'],
-                  ['Büyük Beden Elbise Dikimi', '₺700+', '5–7 gün'],
-                  ['Bebek / Çocuk Elbisesi Dikimi', '₺200+', '3–5 gün'],
-                  ['Fermuar Değişimi', '₺120+', 'Aynı gün'],
-                  ['Yırtık Onarımı', '₺100+', 'Aynı gün'],
-                ].map(([hizmet, fiyat, sure], i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,.04)', background: i % 2 ? 'rgba(201,169,110,.02)' : 'transparent' }}>
-                    <td style={{ padding: '.85rem .7rem', fontSize: '.9rem', color: '#ede7d9' }}>{hizmet}</td>
-                    <td style={{ padding: '.85rem .7rem', fontSize: '.9rem', color: '#c9a96e', fontWeight: 600, textAlign: 'right' }}>{fiyat}</td>
-                    <td style={{ padding: '.85rem .7rem', fontSize: '.8rem', color: '#7a7268', textAlign: 'right' }}>{sure}</td>
+                {FIYATLAR.map(([tip,fiyat,sure],i)=>(
+                  <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i%2?'rgba(184,151,90,.025)':'#fff' }}>
+                    <td style={{ padding: '.9rem .8rem', fontSize: '.88rem' }}>{tip}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#7A6E62', fontSize: '.8rem' }}>{sure}</td>
                   </tr>
                 ))}
               </tbody>
@@ -175,98 +146,69 @@ export default function BayanTerziPage() {
           </div>
         </section>
 
-        <section style={{ padding: '3.5rem 1.5rem', maxWidth: '860px', margin: '0 auto' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', marginBottom: '1.2rem' }}>
-            Antalya Bayan Terzisi — Kadın Kıyafet Hizmetleri
-          </h2>
-          <div style={{ fontSize: '.92rem', color: '#ede7d9', lineHeight: 1.9 }}>
-            <p style={{ marginBottom: '1rem' }}>
-              <strong>Terzi Can</strong>, Antalya'nın deneyimli <strong>bayan terzisi</strong> olarak kadın kıyafetinin her alanında hizmet vermektedir. <strong>Kadın elbise dikimi</strong>, <strong>abiye tamiri</strong>, <strong>gelinlik tadilatı</strong>, etek kısaltma ve büyük beden bayan kıyafeti dikimi yapılmaktadır.
-            </p>
-            <p style={{ marginBottom: '1rem' }}>
-              <strong>Gelinlik tadilatı</strong> için Nisan–Ekim düğün sezonunda ekspres randevu mevcuttur. <strong>Abiye tamiri</strong> ve kısaltma, mezuniyet sezonunda (Mayıs–Haziran) 24 saat içinde teslim edilebilmektedir.
-            </p>
-            <p>
-              <strong>Eve gelen bayan terzi</strong> servisimizle Konyaaltı, Lara, Belek, Kemer ve tüm Antalya'ya geliyoruz. Otel odanıza kadar ölçü alıp kıyafetinizi teslim ediyoruz.
-            </p>
+        <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '1rem' }}>Bayan Terzi Hizmetleri Hakkında</h2>
+            <div style={{ fontSize: '.9rem', color: '#5A4E42', lineHeight: 1.95 }}>
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>Kadın elbise dikimi</strong> en kişisel terzilik hizmetlerinden biridir. Terzi Can olarak
+                Antalya'da bluzdan tuluma, günlük elbiseden abiyeye kadar her tür kadın kıyafetini ölçüye göre dikiyoruz.
+                <strong> Kadın elbise dikimi ₺600'den</strong> başlamakta, model ve kumaş seçimine göre değişmektedir.
+              </p>
+              <p style={{ marginBottom: '1rem' }}>
+                <strong>Gelinlik tadilatı</strong> özel dikkat gerektiren bir işlemdir. Ölçü almadan kısaltma, daraltma,
+                omuz ayarı ve süsleme ekleme yapılmaktadır. Nisan–Ekim düğün sezonunda önceden randevu almanızı öneririz.
+                Gelinlik tadilatı <strong>₺500'den</strong> başlamaktadır.
+              </p>
+              <p>
+                <strong>Abiye tamiri ve kısaltmada</strong> taş ve süslemeler korunarak işlem yapılmaktadır.
+                Ekspres 24–48 saatte teslim mümkündür. Turistler için otel teslimatı ücretsizdir.
+              </p>
+            </div>
           </div>
-
-          <h3 style={{ fontFamily: 'Georgia,serif', fontSize: '1.3rem', margin: '2.5rem 0 1rem', color: '#c9a96e' }}>
-            Tüm Bayan Terzi Hizmetleri
-          </h3>
-          <ul style={{ fontSize: '.9rem', color: '#ede7d9', lineHeight: 2.1, paddingLeft: '1.2rem' }}>
-            {[
-              'Kadın elbise dikimi (özel ölçü, her model)',
-              'Bluz ve üst giyim dikimi',
-              'Etek dikimi (düz, A-line, midi, maxi, mini)',
-              'Etek kısaltma ve paça kısaltma',
-              'Elbise daraltma ve genişletme',
-              'Abiye tamiri, kısaltma ve tadilatı',
-              'Gelinlik dikimi ve gelinlik tadilatı',
-              'Nişan elbisesi dikimi ve tadilatı',
-              'Kına kıyafeti dikimi',
-              'Büyük beden bayan kıyafeti dikimi',
-              'Bebek elbisesi ve çocuk kıyafeti dikimi',
-              'Fermuar değişimi ve yırtık onarımı',
-            ].map((item, i) => (
-              <li key={i}>✓ {item}</li>
-            ))}
-          </ul>
         </section>
 
-        <section style={{ background: '#1a1814', padding: '3rem 1.5rem' }}>
-          <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', marginBottom: '2rem' }}>
-              Bayan Terzi — Sık Sorulan Sorular
-            </h2>
+        <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Bayan Terzi SSS</h2>
             {[
-              ['Kadın elbise dikimi Antalya fiyatı?', "Kadın elbise dikimi ₺600'den, bluz dikimi ₺400'den, etek dikimi ₺350'den başlar. Kendi kumaşınızla veya stoğumuzdan dikilir. WhatsApp: " + PHONE],
-              ['Abiye tamiri ve kısaltma Antalya?', "Abiye tamiri ₺350'den, kısaltma ₺200'den başlar. Mezuniyet ve düğün sezonunda 24 saat ekspres. WhatsApp: " + PHONE],
-              ['Gelinlik tadilatı kaç lira?', "Gelinlik tadilatı ₺500'den başlar. Daraltma, kısaltma, omuz düzeltme dahil. Nisan–Ekim düğün sezonunda ekspres randevu. WhatsApp: " + PHONE],
-              ['Büyük beden elbise dikimi yapıyor musunuz?', 'Evet. Büyük beden elbise, etek, bluz dikimi yapıyoruz. Özel kalıp ve beden seti çıkarma hizmeti mevcuttur.'],
-              ['Bebek ve çocuk kıyafeti dikimi yapılıyor mu?', 'Evet. Bebek elbisesi, çocuk kıyafeti, okul kostümü dikiyoruz. Anne grupları için toplu sipariş indirimi.'],
-            ].map(([q, a], i) => (
-              <details key={i} style={{ borderBottom: '1px solid rgba(201,169,110,.08)', padding: '1rem 0' }}>
-                <summary style={{ cursor: 'pointer', fontSize: '.95rem', fontWeight: 500, color: '#f5f0e8', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
-                  {q} <span style={{ color: '#c9a96e' }}>+</span>
+              ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺175, elbise daraltma ₺200, elbise dikimi ₺600, abiye tamiri ₺350, gelinlik tadilatı ₺500. WhatsApp: ${PHONE}`],
+              ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺500'den başlar. Kısaltma, daraltma, omuz düzeltme. Nisan–Ekim sezonu. WhatsApp: ${PHONE}`],
+              ['Abiye tamiri 24 saatte olur mu?', 'Evet! Ekspres abiye tamiri 24–48 saatte yapılmaktadır. Tatildesiniz, gala yemeğiniz var — aynı gün servis mümkün.'],
+              ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi ₺700'den başlar. WhatsApp: ${PHONE}`],
+              ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
+              ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılmaktadır. WhatsApp: ${PHONE}`],
+            ].map(([q,a],i)=>(
+              <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>
+                <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
+                  {q} <span style={{ color: '#B8975A' }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.8rem', fontSize: '.85rem', color: '#7a7268', lineHeight: 1.8 }}>{a}</p>
+                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
         </section>
 
-        <section style={{ padding: '3.5rem 1.5rem', textAlign: 'center', background: '#252320' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', marginBottom: '1rem' }}>Bayan Terzi Randevusu Al</h2>
-          <p style={{ color: '#7a7268', marginBottom: '2rem', fontSize: '.9rem' }}>Fotoğraf gönderin — 30 dk içinde fiyat ve randevu</p>
+        <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Bayan Kıyafet Fiyatı Öğrenin</h2>
+          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — 30 dk fiyat · Araçlı servis ücretsiz</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.9rem', borderRadius: '4px' }}>
-              💬 WhatsApp ile Yaz
+            <a href={WA('Merhaba, kadın kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
+              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              💬 WhatsApp
             </a>
-            <a href={`tel:${PHONE_E164}`}
-              style={{ border: '1px solid rgba(201,169,110,.3)', color: '#f5f0e8', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.9rem', borderRadius: '4px' }}>
-              📞 Hemen Ara
+            <a href="tel:+905318986418" style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              📞 {PHONE}
             </a>
           </div>
-          <p style={{ marginTop: '1.5rem', fontSize: '.8rem', color: '#7a7268' }}>⭐ 4.9 / 5 · 94 Google Değerlendirmesi · 09:00–19:00 Pzt–Cmt</p>
         </section>
 
-        <section style={{ padding: '2.5rem 1.5rem', background: '#0d0c0a' }}>
-          <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-            <p style={{ fontSize: '.75rem', letterSpacing: '.15em', textTransform: 'uppercase', color: '#c9a96e', marginBottom: '1.2rem' }}>İlgili Hizmetler</p>
-            <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap' }}>
-              {[
-                ['Paça Kısaltma', '/terzi/paca-kisaltma-antalya'],
-                ['Bay Terzi Antalya', '/terzi/bay-terzi-antalya'],
-                ['Dikiş Atölyesi', '/terzi/dikis-atolyesi-antalya'],
-                ['Üniforma Üretimi', '/terzi/uniforma-uretimi-antalya'],
-                ['Kuru Temizleme', '/terzi/kuru-temizleme-antalya'],
-                ['← Tüm Hizmetler', '/terzi'],
-              ].map(([label, href], i) => (
-                <Link key={i} href={href} style={{ border: '1px solid rgba(201,169,110,.15)', color: '#c9a96e', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: '2px' }}>
-                  {label}
-                </Link>
+        <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <p style={{ fontSize: '.7rem', letterSpacing: '.18em', textTransform: 'uppercase', color: '#B8975A', marginBottom: '1rem' }}>Diğer Hizmetler</p>
+            <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
+              {[['Bay Terzi Antalya','/terzi/bay-terzi-antalya'],['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],['Kuru Temizleme','/terzi/kuru-temizleme-antalya'],['← Tüm Hizmetler','/terzi']].map(([l,h])=>(
+                <Link key={l} href={h} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: '2px', background: '#fff' }}>{l}</Link>
               ))}
             </div>
           </div>
