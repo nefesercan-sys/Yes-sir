@@ -45,7 +45,7 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type':'ListItem', position:1, name:'SwapHubs', item:'https://www.swaphubs.com' },
+        { '@type':'ListItem', position:1, name:'SwapHubs', item:'https://swaphubs.com' },
         { '@type':'ListItem', position:2, name:'Antalya Terzi', item:PARENT },
         { '@type':'ListItem', position:3, name:'Paça Kısaltma Antalya', item:SITE_URL },
       ],
@@ -75,7 +75,7 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
+  metadataBase: new URL('https://swaphubs.com'),
   title: 'Paça Kısaltma Antalya · Kot Paça ₺150 · Pantolon Kısaltma Fiyatları 2026 | Terzi Can',
   description: "Antalya paça kısaltma fiyatları 2026: kot paça ₺150, kumaş pantolon ₺175. 24 saatte teslim. Eve ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya. ☎ +90 531 898 64 18",
   keywords: [
