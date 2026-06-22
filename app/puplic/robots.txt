@@ -1,0 +1,38 @@
+# robots.txt — swaphubs.com
+User-agent: *
+Allow: /
+
+# İndexlenmesin
+Disallow: /admin
+Disallow: /admin-ai
+Disallow: /giris
+Disallow: /uye-ol
+Disallow: /api/
+Disallow: /ilan-ver
+Disallow: /ilan-duzenle
+Disallow: /online-terzi-hizmeti/client
+Disallow: /bal/gorsel-yukle
+
+# Sitemap'ler
+Sitemap: https://swaphubs.com/sitemap.xml
+Sitemap: https://swaphubs.com/sitemap-terzi.xml
+Sitemap: https://swaphubs.com/sitemap-bal.xml
+Sitemap: https://swaphubs.com/sitemap-ilanlar.xml
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
