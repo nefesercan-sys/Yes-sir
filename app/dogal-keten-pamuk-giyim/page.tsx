@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import DoğalGiyimClient from './DogalGiyimClient';
 
-const SITE_URL = 'https://www.swaphubs.com/dogal-keten-pamuk-giyim';
+const SITE_URL = 'https://swaphubs.com/dogal-keten-pamuk-giyim';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
+  metadataBase: new URL('https://swaphubs.com'),
   title: '%100 Keten & Pamuk Doğal Giyim | Kadın Erkek Çocuk Bebek | SwapHubs',
   description: '%100 doğal keten ve pamuk kumaştan üretilmiş kadın, erkek, çocuk ve bebek giyim koleksiyonu. Nefes alan, çevre dostu, organik tekstil. Türkiye\'den üretim, kapıda ödeme. SwapHubs.',
   keywords: [
