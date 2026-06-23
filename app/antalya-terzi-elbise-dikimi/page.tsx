@@ -7,7 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { Metadata } from 'next'
-import ElbiseDikimiClient from './client'
+import ElbiseDikimiClient from './Client'
 
 const SITE_URL = 'https://swaphubs.com'
 const PAGE_URL = `${SITE_URL}/antalya-terzi-elbise-dikimi`
