@@ -7,21 +7,12 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const TODAY = new Date().toISOString().split('T')[0];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// DÜZELTME #1: <title> ile og:title/twitter:title artık BİREBİR AYNI.
-// Önceki versiyonda 3 farklı başlık vardı. Tek başlık değişkeni (PAGE_TITLE)
-// tanımlayıp her yerde onu kullanıyoruz.
-// ─────────────────────────────────────────────────────────────────────────────
 const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Dikiş Atölyesi';
 const PAGE_DESCRIPTION =
   'Konyaaltı Terzi Can: bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma ₺150, fermuar değişimi ₺120, elbise dikimi, üniforma üretimi, kuru temizleme ve ütü. Eve & otele araçlı servis. ☎ ' +
   PHONE;
 
-// DÜZELTME #2: og-image artık var olan bir dosyaya işaret edecek şekilde
-// tanımlı. Gerçek dosya /public/og/terzi-can.jpg olarak deploy edilmeli.
 const OG_IMAGE_URL = `${HOME_URL}/og/terzi-can.jpg`;
-
-// DÜZELTME #3: Gerçek Google Business Profile linki.
 const GOOGLE_BUSINESS_PROFILE_URL = 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5';
 
 const jsonLd = {
@@ -56,7 +47,8 @@ const jsonLd = {
     },
 
     {
-      '@type': ['LocalBusiness', 'ClothingStore', 'TailorShop'],
+      // ✅ DÜZELTİLDİ: 'TailorShop' kaldırıldı — schema.org'da geçersiz tip
+      '@type': ['LocalBusiness', 'ClothingStore'],
       additionalType: [
         'https://schema.org/SewingService',
         'https://schema.org/DryCleaningService',
@@ -81,7 +73,6 @@ const jsonLd = {
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      // DÜZELTME #4: image artık gerçek (deploy edilecek) dosyaya işaret ediyor.
       image: [OG_IMAGE_URL],
       logo: `${HOME_URL}/logo.png`,
       address: {
@@ -97,7 +88,6 @@ const jsonLd = {
         latitude: 36.8841,
         longitude: 30.7056,
       },
-      // DÜZELTME #5: Placeholder yerine GERÇEK Google Business Profile linki.
       hasMap: GOOGLE_BUSINESS_PROFILE_URL,
       openingHoursSpecification: [
         {
@@ -278,16 +268,13 @@ const jsonLd = {
         ],
       },
 
+      // ✅ DÜZELTİLDİ: aggregateRating içinden 'itemReviewed' kaldırıldı
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',
         reviewCount: '94',
         bestRating: '5',
         worstRating: '1',
-        itemReviewed: {
-          '@type': 'ClothingStore',
-          name: 'Terzi Can',
-        },
       },
       review: [
         {
@@ -297,7 +284,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
           datePublished: '2025-01-15',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
         {
           '@type': 'Review',
@@ -306,7 +293,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!',
           datePublished: '2025-05-10',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
         {
           '@type': 'Review',
@@ -315,7 +302,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
           datePublished: '2025-06-20',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
         {
           '@type': 'Review',
@@ -324,7 +311,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, pünktlich geliefert. Ausgezeichnete Qualität!',
           datePublished: '2025-02-08',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
         {
           '@type': 'Review',
@@ -333,7 +320,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Gelinliğimi mükemmel şekilde teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Hızlı ve kaliteli hizmet!',
           datePublished: '2025-04-10',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
         {
           '@type': 'Review',
@@ -342,7 +329,7 @@ const jsonLd = {
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!',
           datePublished: '2025-03-15',
-          itemReviewed: { '@type': 'ClothingStore', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
+          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
         },
       ],
 
@@ -374,7 +361,6 @@ const jsonLd = {
           },
         },
       ],
-      // DÜZELTME #6: sameAs içine Google Business Profile linki eklendi.
       sameAs: [
         GOOGLE_BUSINESS_PROFILE_URL,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
@@ -522,22 +508,21 @@ const jsonLd = {
       ],
     },
 
-    // DÜZELTME #7: ItemList'teki tüm URL'ler artık TerziClient.tsx'teki
-    // ALT_SAYFALAR ile birebir aynı (-antalya soneki dahil).
     {
       '@type': 'ItemList',
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi', url: `${HOME_URL}/terzi/bay-terzi-antalya` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi', url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma', url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
-        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason Üretim', url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
-        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',   url: `${HOME_URL}/terzi/bay-terzi-antalya` },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',   url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma',   url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
+        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason Üretim',       url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                     url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',              url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        // ✅ DÜZELTİLDİ: gelinlik-tadilati-antalya → gelinlik-tadilati (doğru URL)
+        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı',                    url: `${HOME_URL}/terzi/gelinlik-tadilati` },
+        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi',                     url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
       ],
     },
   ],
@@ -545,14 +530,11 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-
-  // DÜZELTME #1 (devamı): tek başlık kaynağı.
   title: {
     default: PAGE_TITLE,
     template: '%s | Terzi Can Antalya',
   },
   description: PAGE_DESCRIPTION,
-
   keywords: [
     'Antalya terzi',
     'Konyaaltı terzi',
@@ -581,9 +563,6 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-
-  // DÜZELTME #8: hreflang artık var olmayan /en/terzi, /ru/terzi, /de/terzi
-  // sayfalarına işaret etmiyor — sadece x-default ve tr bırakıldı.
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -591,7 +570,6 @@ export const metadata: Metadata = {
       'tr': SITE_URL,
     },
   },
-
   openGraph: {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
@@ -626,10 +604,8 @@ export const metadata: Metadata = {
     'content-language': 'tr, en, ru, de',
     contact: PHONE,
   },
-
-  // DÜZELTME #9: GSC kodu artık ortam değişkeninden okunuyor (placeholder
-  // DEĞİL). .env dosyasına NEXT_PUBLIC_GSC_VERIFICATION=gerçek_kod
-  // eklenmesi GEREKİYOR.
+  // ✅ DÜZELTİLDİ: GSC kodu ortam değişkeninden — .env.local'e ekleyin:
+  // NEXT_PUBLIC_GSC_VERIFICATION=buraya_search_console_kodunuzu_yazin
   verification: {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
     yandex: '4c73ee1911a4b197',
