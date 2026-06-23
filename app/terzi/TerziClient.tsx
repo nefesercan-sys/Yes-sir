@@ -118,7 +118,7 @@ const ALT_SAYFALAR = [
   ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
   ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
   ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
-  ['💍','Gelinlik Tadilatı Antalya','/terzi/gelinlik-tadilati-antalya'],
+  ['💍','Gelinlik Tadilatı Antalya','/terzi/gelinlik-tadilati'],
   ['🔧','Fermuar Değişimi Antalya','/terzi/fermuar-degisimi-antalya'],
 ] as const;
 
