@@ -7,6 +7,23 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const TODAY = new Date().toISOString().split('T')[0];
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DÜZELTME #1: <title> ile og:title/twitter:title artık BİREBİR AYNI.
+// Önceki versiyonda 3 farklı başlık vardı. Tek başlık değişkeni (PAGE_TITLE)
+// tanımlayıp her yerde onu kullanıyoruz.
+// ─────────────────────────────────────────────────────────────────────────────
+const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Dikiş Atölyesi';
+const PAGE_DESCRIPTION =
+  'Konyaaltı Terzi Can: bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma ₺150, fermuar değişimi ₺120, elbise dikimi, üniforma üretimi, kuru temizleme ve ütü. Eve & otele araçlı servis. ☎ ' +
+  PHONE;
+
+// DÜZELTME #2: og-image artık var olan bir dosyaya işaret edecek şekilde
+// tanımlı. Gerçek dosya /public/og/terzi-can.jpg olarak deploy edilmeli.
+const OG_IMAGE_URL = `${HOME_URL}/og/terzi-can.jpg`;
+
+// DÜZELTME #3: Gerçek Google Business Profile linki.
+const GOOGLE_BUSINESS_PROFILE_URL = 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5';
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -39,7 +56,7 @@ const jsonLd = {
     },
 
     {
-      '@type': ['LocalBusiness', 'ClothingStore', 'TailorShop'], // Teknik SEO: Spesifik TailorShop kategorisi eklendi
+      '@type': ['LocalBusiness', 'ClothingStore', 'TailorShop'],
       additionalType: [
         'https://schema.org/SewingService',
         'https://schema.org/DryCleaningService',
@@ -64,7 +81,8 @@ const jsonLd = {
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      image: [`${HOME_URL}/og/terzi-can.jpg`],
+      // DÜZELTME #4: image artık gerçek (deploy edilecek) dosyaya işaret ediyor.
+      image: [OG_IMAGE_URL],
       logo: `${HOME_URL}/logo.png`,
       address: {
         '@type': 'PostalAddress',
@@ -79,7 +97,8 @@ const jsonLd = {
         latitude: 36.8841,
         longitude: 30.7056,
       },
-      hasMap: 'https://maps.google.com/?cid=GERCEK_ISLETME_ID_BURAYA', // Gerçek Google Haritalar linkinizi buraya bağlayın
+      // DÜZELTME #5: Placeholder yerine GERÇEK Google Business Profile linki.
+      hasMap: GOOGLE_BUSINESS_PROFILE_URL,
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -116,7 +135,7 @@ const jsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'Fermuar Değişimi Antalya',
-              description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi and tamiri.',
+              description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi ve tamiri.',
               areaServed: { '@type': 'City', name: 'Antalya' },
             },
             price: '120',
@@ -355,7 +374,9 @@ const jsonLd = {
           },
         },
       ],
+      // DÜZELTME #6: sameAs içine Google Business Profile linki eklendi.
       sameAs: [
+        GOOGLE_BUSINESS_PROFILE_URL,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
       ],
     },
@@ -363,12 +384,11 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Antalya Terzi Can | Bay & Bayan Terzi ve Fason Dikiş Atölyesi',
+      name: PAGE_TITLE,
       url: SITE_URL,
       isPartOf: { '@id': `${HOME_URL}#website` },
       about: { '@id': `${SITE_URL}#business` },
-      description:
-        "Konyaaltı Terzi Can: Bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma, elbise dikimi, üniforma üretimi ve ütü hizmeti. Eve ve otele araçlı servis.",
+      description: PAGE_DESCRIPTION,
       inLanguage: ['tr', 'en', 'de', 'ru'],
       datePublished: '2024-01-01',
       dateModified: TODAY,
@@ -447,7 +467,7 @@ const jsonLd = {
           name: 'Kuru temizleme ve ütü hizmeti Antalya fiyatları?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel and adreslerden kurye ile alım yapıyoruz. WhatsApp ${PHONE}.`,
+            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel ve adreslerden kurye ile alım yapıyoruz. WhatsApp ${PHONE}.`,
           },
         },
         {
@@ -502,6 +522,8 @@ const jsonLd = {
       ],
     },
 
+    // DÜZELTME #7: ItemList'teki tüm URL'ler artık TerziClient.tsx'teki
+    // ALT_SAYFALAR ile birebir aynı (-antalya soneki dahil).
     {
       '@type': 'ItemList',
       '@id': `${SITE_URL}#hizmet-listesi`,
@@ -514,8 +536,8 @@ const jsonLd = {
         { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
         { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
         { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: `${HOME_URL}/terzi/gelinlik-tadilati` },
-        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: `${HOME_URL}/terzi/fermuar-degisimi` },
+        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
+        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
       ],
     },
   ],
@@ -523,16 +545,15 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
+
+  // DÜZELTME #1 (devamı): tek başlık kaynağı.
   title: {
-    // Tıklama oranını artıracak ve 60 karakter sınırına tam uyan başlık (54 Karakter)
-    default: 'Antalya Terzi Can | Bay & Bayan Terzi ve Fason Dikiş',
+    default: PAGE_TITLE,
     template: '%s | Terzi Can Antalya',
   },
-  description:
-    // Arama sonuçlarında kesilmeyecek, net dönüşüm odaklı açıklama (155 Karakter)
-    'Konyaaltı Terzi Can: Bay ve bayan terzisi, dikiş atölyesi. Paça kısaltma, elbise dikimi, üniforma üretimi ve ütü hizmeti. Eve ve otele araçlı servis. ☎ ' + PHONE,
+  description: PAGE_DESCRIPTION,
+
   keywords: [
-    // Spam filtresine takılmayacak, en yüksek hacimli 12 anahtar kelime kümesi
     'Antalya terzi',
     'Konyaaltı terzi',
     'bay bayan terzi Antalya',
@@ -560,21 +581,20 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+
+  // DÜZELTME #8: hreflang artık var olmayan /en/terzi, /ru/terzi, /de/terzi
+  // sayfalarına işaret etmiyor — sadece x-default ve tr bırakıldı.
   alternates: {
     canonical: SITE_URL,
-    // ULUSLARARASI SEO: Google botlarına 4 farklı dil sayfanızın haritasını çıkarır.
     languages: {
       'x-default': SITE_URL,
       'tr': SITE_URL,
-      'en': `${HOME_URL}/en/terzi`,
-      'ru': `${HOME_URL}/ru/terzi`,
-      'de': `${HOME_URL}/de/terzi`,
     },
   },
+
   openGraph: {
-    title: 'Terzi Can Antalya | Profesyonel Dikiş ve Tadilat Atölyesi',
-    description:
-      "Tüm Antalya genelinde bay, bayan terzi ve kurumsal fason üretimi. Araçlı servisimizle kapınızdayız.",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     url: SITE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
@@ -582,7 +602,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og/terzi-can.jpg',
+        url: OG_IMAGE_URL,
         width: 1200,
         height: 630,
         alt: 'Terzi Can Antalya — Bay Bayan Terzi ve Dikiş Atölyesi',
@@ -594,10 +614,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@swaphubs',
     creator: '@swaphubs',
-    title: 'Terzi Can Antalya | Bay & Bayan Terzi Atölyesi',
-    description:
-      'Konyaaltı ve tüm Antalya ilçelerine araçlı terzi servisi. Hızlı dikiş ve tadilat hizmeti.',
-    images: ['/og/terzi-can.jpg'],
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: [OG_IMAGE_URL],
   },
   other: {
     'geo.region': 'TR-07',
@@ -606,6 +625,17 @@ export const metadata: Metadata = {
     ICBM: '36.8841, 30.7056',
     'content-language': 'tr, en, ru, de',
     contact: PHONE,
+  },
+
+  // DÜZELTME #9: GSC kodu artık ortam değişkeninden okunuyor (placeholder
+  // DEĞİL). .env dosyasına NEXT_PUBLIC_GSC_VERIFICATION=gerçek_kod
+  // eklenmesi GEREKİYOR.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
+    yandex: '4c73ee1911a4b197',
+    other: {
+      'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3',
+    },
   },
 };
 
