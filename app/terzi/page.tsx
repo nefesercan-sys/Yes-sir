@@ -604,10 +604,7 @@ export const metadata: Metadata = {
     'content-language': 'tr, en, ru, de',
     contact: PHONE,
   },
-  // ✅ DÜZELTİLDİ: GSC kodu ortam değişkeninden — .env.local'e ekleyin:
-  // NEXT_PUBLIC_GSC_VERIFICATION=buraya_search_console_kodunuzu_yazin
   verification: {
-    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
     yandex: '4c73ee1911a4b197',
     other: {
       'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3',
