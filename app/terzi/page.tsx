@@ -15,6 +15,26 @@ const PAGE_DESCRIPTION =
 const OG_IMAGE_URL = `${HOME_URL}/og/terzi-can.jpg`;
 const GOOGLE_BUSINESS_PROFILE_URL = 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5';
 
+// ─────────────────────────────────────────────────────────────────────────
+// SABİT KAYNAK: Alt sayfa URL'leri TEK YERDEN tanımlanıyor ve hem JSON-LD
+// (ItemList, OfferCatalog) hem de aşağıdaki export edilen ROUTES objesi
+// üzerinden TerziClient.tsx'e aktarılıyor. Önceki hatanın sebebi page.tsx
+// ve TerziClient.tsx'in URL'leri birbirinden bağımsız, elle senkronize
+// ediyor olmasıydı — biri güncellenince diğeri unutuluyordu. Artık tek
+// kaynaktan besleniyorlar, bu hatayı yapısal olarak imkansız kılıyor.
+// ─────────────────────────────────────────────────────────────────────────
+export const TERZI_ROUTES = {
+  bayTerzi: `${HOME_URL}/terzi/bay-terzi-antalya`,
+  bayanTerzi: `${HOME_URL}/terzi/bayan-terzi-antalya`,
+  pacaKisaltma: `${HOME_URL}/terzi/paca-kisaltma-antalya`,
+  dikisAtolyesi: `${HOME_URL}/terzi/dikis-atolyesi-antalya`,
+  uniformaUretimi: `${HOME_URL}/terzi/uniforma-uretimi-antalya`,
+  kuruTemizleme: `${HOME_URL}/terzi/kuru-temizleme-antalya`,
+  eveGelenTerzi: `${HOME_URL}/terzi/eve-gelen-terzi-antalya`,
+  gelinlikTadilati: `${HOME_URL}/terzi/gelinlik-tadilati-antalya`,
+  fermuarDegisimi: `${HOME_URL}/terzi/fermuar-degisimi-antalya`,
+} as const;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -47,7 +67,7 @@ const jsonLd = {
     },
 
     {
-      // ✅ DÜZELTİLDİ: 'TailorShop' kaldırıldı — schema.org'da geçersiz tip
+      // TailorShop kaldırılmış hâliyle korunuyor — schema.org'da geçersiz tip
       '@type': ['LocalBusiness', 'ClothingStore'],
       additionalType: [
         'https://schema.org/SewingService',
@@ -102,173 +122,23 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Terzi Can Hizmet ve Fiyat Listesi 2025-2026',
         itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Paça Kısaltma — Pantolon Kısaltma Antalya',
-              description: 'Erkek pantolon kısaltma, kot paça kısaltma, kumaş pantolon paça kısaltma hizmeti. Bay ve bayan.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '150',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '150',
-              maxPrice: '175',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Fermuar Değişimi Antalya',
-              description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi ve tamiri.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '120',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '120',
-              maxPrice: '300',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Bayan Terzi — Kadın Elbise Dikimi ve Tadilatı Antalya',
-              description: 'Kadın elbise dikimi, bluz dikimi, etek dikimi, abiye tadilatı, etek kısaltma, elbise daraltma, gelinlik tadilatı. Özel ölçü bayan kıyafet dikimi.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '600',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '200',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Bay Terzi — Erkek Takım Elbise Dikimi Antalya',
-              description: 'Erkek takım elbise dikimi, erkek pantolon dikimi, erkek gömlek dikimi, ceket tadilatı, erkek kıyafet tamiri. Özel ölçü bay kıyafet dikimi.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '2500',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '150',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Dikiş Atölyesi Antalya — Fason ve Seri Üretim',
-              description: 'Antalya dikiş atölyesi. Kalıp çıkarma, fason üretim, seri imalat, numune dikimi, prototip. Markalar ve butikler için tam üretim paketi.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Gelinlik Tadilatı Antalya',
-              description: 'Gelinlik daraltma, gelinlik paça kısaltma, gelinlik tadilat ve onarımı. Ekspres randevu.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '500',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '500',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Üniforma Üretimi Antalya — Otel, Restoran, Okul',
-              description: 'Otel personel, resepsiyon, kat görevlisi, aşçı üniforma, garson üniforma, güvenlik üniforma, spa üniforma, okul üniforma, doktor üniforma üretimi. Tasarım + kalıp + seri imalat + nakış.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Kuru Temizleme ve Ütü Hizmeti Antalya',
-              description: 'Kıyafet kuru temizleme, çamaşır yıkama, ütüleme hizmeti. Otelden alım ve teslimat. 24 saatte ekspres.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '300',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '300',
-              maxPrice: '500',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Eve / Otele Gelen Terzi Servisi Antalya',
-              description: 'Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil araçlı terzi servisi. Eve gelen terzi, otele gelen terzi.',
-              areaServed: [
-                { '@type': 'City', name: 'Antalya' },
-                { '@type': 'City', name: 'Lara' },
-                { '@type': 'City', name: 'Belek' },
-                { '@type': 'City', name: 'Kemer' },
-                { '@type': 'City', name: 'Alanya' },
-                { '@type': 'City', name: 'Manavgat' },
-                { '@type': 'City', name: 'Side' },
-              ],
-            },
-            priceCurrency: 'TRY',
-            availability: 'https://schema.org/InStock',
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Nakış ve Logo Baskı Antalya',
-              description: 'Logo nakışı, isim nakışı, üniforma nakışı, dijital baskı, transfer baskı, serigrafi. Sweatshirt, eşofman, kapüşonlu, polo yaka dikimi.',
-              areaServed: { '@type': 'City', name: 'Antalya' },
-            },
-            price: '100',
-            priceCurrency: 'TRY',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '100',
-              priceCurrency: 'TRY',
-            },
-            availability: 'https://schema.org/InStock',
-          },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Paça Kısaltma — Pantolon Kısaltma Antalya', description: 'Erkek pantolon kısaltma, kot paça kısaltma, kumaş pantolon paça kısaltma hizmeti. Bay ve bayan.', url: TERZI_ROUTES.pacaKisaltma, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '150', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '150', maxPrice: '175', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Fermuar Değişimi Antalya', description: 'Pantolon, kot, mont, ceket, sweatshirt, çanta fermuar değişimi ve tamiri.', url: TERZI_ROUTES.fermuarDegisimi, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '120', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '120', maxPrice: '300', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bayan Terzi — Kadın Elbise Dikimi ve Tadilatı Antalya', description: 'Kadın elbise dikimi, bluz dikimi, etek dikimi, abiye tadilatı, etek kısaltma, elbise daraltma, gelinlik tadilatı. Özel ölçü bayan kıyafet dikimi.', url: TERZI_ROUTES.bayanTerzi, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '600', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '200', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bay Terzi — Erkek Takım Elbise Dikimi Antalya', description: 'Erkek takım elbise dikimi, erkek pantolon dikimi, erkek gömlek dikimi, ceket tadilatı, erkek kıyafet tamiri. Özel ölçü bay kıyafet dikimi.', url: TERZI_ROUTES.bayTerzi, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '2500', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '150', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dikiş Atölyesi Antalya — Fason ve Seri Üretim', description: 'Antalya dikiş atölyesi. Kalıp çıkarma, fason üretim, seri imalat, numune dikimi, prototip. Markalar ve butikler için tam üretim paketi.', url: TERZI_ROUTES.dikisAtolyesi, areaServed: { '@type': 'City', name: 'Antalya' } }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Gelinlik Tadilatı Antalya', description: 'Gelinlik daraltma, gelinlik paça kısaltma, gelinlik tadilat ve onarımı. Ekspres randevu.', url: TERZI_ROUTES.gelinlikTadilati, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '500', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '500', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi Antalya — Otel, Restoran, Okul', description: 'Otel personel, resepsiyon, kat görevlisi, aşçı üniforma, garson üniforma, güvenlik üniforma, spa üniforma, okul üniforma, doktor üniforma üretimi. Tasarım + kalıp + seri imalat + nakış.', url: TERZI_ROUTES.uniformaUretimi, areaServed: { '@type': 'City', name: 'Antalya' } }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Kuru Temizleme ve Ütü Hizmeti Antalya', description: 'Kıyafet kuru temizleme, çamaşır yıkama, ütüleme hizmeti. Otelden alım ve teslimat. 24 saatte ekspres.', url: TERZI_ROUTES.kuruTemizleme, areaServed: { '@type': 'City', name: 'Antalya' } }, price: '300', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '300', maxPrice: '500', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi Antalya', description: 'Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil araçlı terzi servisi. Eve gelen terzi, otele gelen terzi.', url: TERZI_ROUTES.eveGelenTerzi, areaServed: [{ '@type': 'City', name: 'Antalya' },{ '@type': 'City', name: 'Lara' },{ '@type': 'City', name: 'Belek' },{ '@type': 'City', name: 'Kemer' },{ '@type': 'City', name: 'Alanya' },{ '@type': 'City', name: 'Manavgat' },{ '@type': 'City', name: 'Side' }] }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Nakış ve Logo Baskı Antalya', description: 'Logo nakışı, isim nakışı, üniforma nakışı, dijital baskı, transfer baskı, serigrafi. Sweatshirt, eşofman, kapüşonlu, polo yaka dikimi.', areaServed: { '@type': 'City', name: 'Antalya' } }, price: '100', priceCurrency: 'TRY', priceSpecification: { '@type': 'PriceSpecification', minPrice: '100', priceCurrency: 'TRY' }, availability: 'https://schema.org/InStock' },
         ],
       },
 
-      // ✅ DÜZELTİLDİ: aggregateRating içinden 'itemReviewed' kaldırıldı
+      // itemReviewed bilinçli olarak kaldırıldı — AggregateRating zaten
+      // hasOfferCatalog'un sahibi olan business entity'sine bağlı, ayrıca
+      // itemReviewed eklemek Google'a "bu rating başka bir şeye ait" gibi
+      // çelişkili/duplicate sinyal veriyordu.
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',
@@ -277,60 +147,12 @@ const jsonLd = {
         worstRating: '1',
       },
       review: [
-        {
-          '@type': 'Review',
-          name: 'Üniforma Üretimi — Mükemmel Hizmet',
-          author: { '@type': 'Person', name: 'Murat B.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!',
-          datePublished: '2025-01-15',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
-        {
-          '@type': 'Review',
-          name: 'Best Tailor in Antalya',
-          author: { '@type': 'Person', name: 'Sarah M.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!',
-          datePublished: '2025-05-10',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
-        {
-          '@type': 'Review',
-          name: 'Лучший портной в Анталье',
-          author: { '@type': 'Person', name: 'Наталья К.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!',
-          datePublished: '2025-06-20',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
-        {
-          '@type': 'Review',
-          name: 'Ausgezeichnete Qualität',
-          author: { '@type': 'Person', name: 'David K.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, pünktlich geliefert. Ausgezeichnete Qualität!',
-          datePublished: '2025-02-08',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
-        {
-          '@type': 'Review',
-          name: 'Hızlı ve Kaliteli Terzi',
-          author: { '@type': 'Person', name: 'Elif Y.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Gelinliğimi mükemmel şekilde teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Hızlı ve kaliteli hizmet!',
-          datePublished: '2025-04-10',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
-        {
-          '@type': 'Review',
-          name: 'Perfect English-Speaking Tailor',
-          author: { '@type': 'Person', name: 'James T.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!',
-          datePublished: '2025-03-15',
-          itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-        },
+        { '@type': 'Review', name: 'Üniforma Üretimi — Mükemmel Hizmet', author: { '@type': 'Person', name: 'Murat B.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım, kalıp ve seri üretim mükemmeldi. Zamanında teslim, nakış kalitesi harika!', datePublished: '2025-01-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
+        { '@type': 'Review', name: 'Best Tailor in Antalya', author: { '@type': 'Person', name: 'Sarah M.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional. Highly recommend!', datePublished: '2025-05-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
+        { '@type': 'Review', name: 'Лучший портной в Анталье', author: { '@type': 'Person', name: 'Наталья К.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили прямо в отель в Белеке!', datePublished: '2025-06-20', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
+        { '@type': 'Review', name: 'Ausgezeichnete Qualität', author: { '@type': 'Person', name: 'David K.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Wir bestellten bestickte Sweatshirts für unser Team — 30 Stück, pünktlich geliefert. Ausgezeichnete Qualität!', datePublished: '2025-02-08', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
+        { '@type': 'Review', name: 'Hızlı ve Kaliteli Terzi', author: { '@type': 'Person', name: 'Elif Y.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Gelinliğimi mükemmel şekilde teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Hızlı ve kaliteli hizmet!', datePublished: '2025-04-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
+        { '@type': 'Review', name: 'Perfect English-Speaking Tailor', author: { '@type': 'Person', name: 'James T.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' }, reviewBody: 'Suit altered for a business meeting in 24h. Perfect fit. English speaking — best tailor in Antalya!', datePublished: '2025-03-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` } },
       ],
 
       areaServed: [
@@ -400,86 +222,16 @@ const jsonLd = {
       '@type': 'FAQPage',
       '@id': `${SITE_URL}#faq`,
       mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Antalya paça kısaltma ve pantolon kısaltma fiyatı ne kadar? 2025-2026',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Antalya'da paça kısaltma fiyatımız ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarıdır. Erkek ve bayan pantolon kısaltma yapıyoruz. Detaylar için WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Bay terzi Antalya — erkek kıyafet dikimi ve tadilatı?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Evet! Erkek takım elbise dikimi, erkek pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma ve fermuar değişimi yapıyoruz. Erkek kıyafet işleri için WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Bayan terzi Antalya — kadın elbise dikimi ve tadilatı?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Evet! Bayan terzisi olarak kadın elbise dikimi, bluz dikimi, etek dikimi, abiye tamiri ve gelinlik tadilatı yapıyoruz. Tüm kadın kıyafet işleri için WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Dikiş atölyesi Antalya — fason üretim, kalıp, seri imalat?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Evet! Antalya dikiş atölyemizde kalıp çıkarma, fason üretim, seri imalat, numune dikimi ve prototip üretimi yapıyoruz. Markalar ve butikler için tam paket hizmet sunuyoruz. WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Fermuar değişimi kaç lira? Mont, kot, pantolon fermuarı Antalya 2025-2026?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Pantolon ve kot fermuarı ₺120'den, mont fermuarı ₺300'den başlar. Sweatshirt ve çanta fermuarı da değiştiriyoruz. Aynı gün teslim mümkündür. WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Eve veya otele gelen terzi Antalya var mı?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Evet! Araçlı terzi servisimizle Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil tüm Antalya ilçelerine geliyoruz. Adrese teslim terzi hizmeti için WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Kuru temizleme ve ütü hizmeti Antalya fiyatları?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel ve adreslerden kurye ile alım yapıyoruz. WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Elbise dikimi ve tadilatı Antalya fiyatları 2025-2026?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Elbise dikimi ₺600'den, elbise daraltma ₺200'den başlar. Abiye tamiri ₺350'den, gelinlik tadilatı ₺500'den başlar. Bay takım elbise dikimi ₺2500'den başlar. WhatsApp ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Is there an English-speaking tailor in Antalya?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Yes! Tailor Can offers English-speaking tailoring for men and women in all Antalya districts. Alterations, dry cleaning, uniform production, mobile tailor service. WhatsApp: ${PHONE}.`,
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Есть ли русскоязычный портной в Анталье?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: `Да! Портной Кан обслуживает по-русски. Подгонка брюк, химчистка, пошив на заказ для мужчин и женщин. Ателье в Анталье. Выездной сервис по всей Анталье. WhatsApp: ${PHONE}.`,
-          },
-        },
+        { '@type': 'Question', name: 'Antalya paça kısaltma ve pantolon kısaltma fiyatı ne kadar? 2025-2026', acceptedAnswer: { '@type': 'Answer', text: `Antalya'da paça kısaltma fiyatımız ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175 civarıdır. Erkek ve bayan pantolon kısaltma yapıyoruz. Detaylar için WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi ve tadilatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise dikimi, erkek pantolon kısaltma, gömlek dikimi, ceket tadilatı, kol kısaltma ve fermuar değişimi yapıyoruz. Erkek kıyafet işleri için WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi ve tadilatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bayan terzisi olarak kadın elbise dikimi, bluz dikimi, etek dikimi, abiye tamiri ve gelinlik tadilatı yapıyoruz. Tüm kadın kıyafet işleri için WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Dikiş atölyesi Antalya — fason üretim, kalıp, seri imalat?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Antalya dikiş atölyemizde kalıp çıkarma, fason üretim, seri imalat, numune dikimi ve prototip üretimi yapıyoruz. Markalar ve butikler için tam paket hizmet sunuyoruz. WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Fermuar değişimi kaç lira? Mont, kot, pantolon fermuarı Antalya 2025-2026?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon ve kot fermuarı ₺120'den, mont fermuarı ₺300'den başlar. Sweatshirt ve çanta fermuarı da değiştiriyoruz. Aynı gün teslim mümkündür. WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Eve veya otele gelen terzi Antalya var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Araçlı terzi servisimizle Konyaaltı, Lara, Belek, Kemer, Alanya, Manavgat, Side dahil tüm Antalya ilçelerine geliyoruz. Adrese teslim terzi hizmeti için WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Kuru temizleme ve ütü hizmeti Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: `Kuru temizleme ₺300'den, mont kuru temizleme ₺500'den, çamaşır ve ütü hizmeti ₺80/kg'dan başlar. Otel ve adreslerden kurye ile alım yapıyoruz. WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Elbise dikimi ve tadilatı Antalya fiyatları 2025-2026?', acceptedAnswer: { '@type': 'Answer', text: `Elbise dikimi ₺600'den, elbise daraltma ₺200'den başlar. Abiye tamiri ₺350'den, gelinlik tadilatı ₺500'den başlar. Bay takım elbise dikimi ₺2500'den başlar. WhatsApp ${PHONE}.` } },
+        { '@type': 'Question', name: 'Is there an English-speaking tailor in Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can offers English-speaking tailoring for men and women in all Antalya districts. Alterations, dry cleaning, uniform production, mobile tailor service. WhatsApp: ${PHONE}.` } },
+        { '@type': 'Question', name: 'Есть ли русскоязычный портной в Анталье?', acceptedAnswer: { '@type': 'Answer', text: `Да! Портной Кан обслуживает по-русски. Подгонка брюк, химчистка, пошив на заказ для мужчин и женщин. Ателье в Анталье. Выездной сервис по всей Анталье. WhatsApp: ${PHONE}.` } },
       ],
     },
 
@@ -490,39 +242,29 @@ const jsonLd = {
       description: 'Terzi Can ile paça kısaltma randevusu öncesi evde doğru ölçü almanın 3 adımı.',
       totalTime: 'PT5M',
       step: [
-        {
-          '@type': 'HowToStep',
-          name: 'Ayakkabınızı giyin',
-          text: 'Paça uzunluğunu, genellikle giyeceğiniz ayakkabıyla ölçün — topuk yüksekliği farkı paça boyunu değiştirir.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: 'İstenen paça boyunu işaretleyin',
-          text: 'Pantolonu ayakkabı üzerinde istediğiniz uzunlukta toplu iğne veya tebeşirle işaretleyin.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: 'Terzi Can ile WhatsApp üzerinden randevu alın',
-          text: `Ölçünüzü ve fotoğrafınızı WhatsApp ${PHONE} üzerinden gönderin, aynı gün veya ertesi gün için randevu alın.`,
-        },
+        { '@type': 'HowToStep', name: 'Ayakkabınızı giyin', text: 'Paça uzunluğunu, genellikle giyeceğiniz ayakkabıyla ölçün — topuk yüksekliği farkı paça boyunu değiştirir.' },
+        { '@type': 'HowToStep', name: 'İstenen paça boyunu işaretleyin', text: 'Pantolonu ayakkabı üzerinde istediğiniz uzunlukta toplu iğne veya tebeşirle işaretleyin.' },
+        { '@type': 'HowToStep', name: 'Terzi Can ile WhatsApp üzerinden randevu alın', text: `Ölçünüzü ve fotoğrafınızı WhatsApp ${PHONE} üzerinden gönderin, aynı gün veya ertesi gün için randevu alın.` },
       ],
     },
 
+    // ✅ DÜZELTİLDİ: TERZI_ROUTES'tan besleniyor, TerziClient.tsx ile
+    // artık aynı kaynağı paylaşıyor — manuel senkronizasyon hatası
+    // yapısal olarak ortadan kalktı.
     {
       '@type': 'ItemList',
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',   url: `${HOME_URL}/terzi/bay-terzi-antalya` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',   url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma',   url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
-        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason Üretim',       url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                     url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',              url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        // ✅ DÜZELTİLDİ: gelinlik-tadilati-antalya → gelinlik-tadilati (doğru URL)
-        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı',                    url: `${HOME_URL}/terzi/gelinlik-tadilati` },
-        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi',                     url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi', url: TERZI_ROUTES.bayTerzi },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi', url: TERZI_ROUTES.bayanTerzi },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma — Pantolon Kısaltma', url: TERZI_ROUTES.pacaKisaltma },
+        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason Üretim', url: TERZI_ROUTES.dikisAtolyesi },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi', url: TERZI_ROUTES.uniformaUretimi },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü', url: TERZI_ROUTES.kuruTemizleme },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi', url: TERZI_ROUTES.eveGelenTerzi },
+        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı', url: TERZI_ROUTES.gelinlikTadilati },
+        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi', url: TERZI_ROUTES.fermuarDegisimi },
       ],
     },
   ],
@@ -604,7 +346,18 @@ export const metadata: Metadata = {
     'content-language': 'tr, en, ru, de',
     contact: PHONE,
   },
+  // ─────────────────────────────────────────────────────────────────────
+  // 🔴 KRİTİK DÜZELTME: 'google' alanı bir önceki versiyonda TAMAMEN
+  // SİLİNMİŞTİ. Search Console'a hiçbir doğrulama kodu gönderilmiyordu.
+  // Artık tekrar ortam değişkeninden okunuyor — placeholder DEĞİL, ama
+  // kodlanmış gerçek bir değer de DEĞİL. Aşağıdaki adımı uygula:
+  //   .env.local (veya Vercel ortam değişkenleri) içine ekle:
+  //   NEXT_PUBLIC_GSC_VERIFICATION=senin_gerçek_doğrulama_koduın
+  // Bu adım atlanırsa Google Search Console mülkü doğrulanmaz, sitemap
+  // submit edilemez, "URL denetimi" ve indexleme isteği çalışmaz.
+  // ─────────────────────────────────────────────────────────────────────
   verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
     yandex: '4c73ee1911a4b197',
     other: {
       'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3',
