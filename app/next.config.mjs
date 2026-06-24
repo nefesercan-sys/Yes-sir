@@ -44,7 +44,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: '/:path*',
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -55,13 +55,13 @@ const nextConfig = {
         ],
       },
       {
-        source: '/_next/static/(.*)',
+        source: '/_next/static/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
       {
-        source: '/api/(.*)',
+        source: '/api/:path*',
         headers: [
           { key: 'Cache-Control', value: 'no-store, max-age=0' },
           { key: 'X-Robots-Tag', value: 'noindex' },
@@ -69,10 +69,10 @@ const nextConfig = {
       },
       { source: '/giris',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/uye-ol',          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
-      { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin/:path*',    headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin-ai/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/ilan-ver/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
+      { source: '/ilan-duzenle/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       {
         source: '/terzi',
@@ -82,7 +82,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/terzi/(.*)',
+        source: '/terzi/:path*',
         headers: [
           { key: 'Content-Language', value: 'tr, en, ru, de' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
@@ -96,7 +96,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/online-terzi-hizmeti/(.*)',
+        source: '/online-terzi-hizmeti/:path*',
         headers: [
           { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
@@ -131,7 +131,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/pamuknest(.*)',
+        source: '/pamuknest/:path*',
         headers: [
           { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
