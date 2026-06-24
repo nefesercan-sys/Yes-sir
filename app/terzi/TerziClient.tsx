@@ -633,13 +633,24 @@ export default function TerziClient() {
           </div>
         </address>
       </div>
-      <div className="mapbox">
-        <div style={{fontSize:'3rem'}}>📍</div>
-        <div style={{fontFamily:'var(--serif)',fontSize:'1.3rem',color:'rgba(255,255,255,.8)'}}>Konyaaltı, Antalya</div>
-        <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.35)',textAlign:'center',maxWidth:'200px',lineHeight:'1.6'}}>
-          {lang==='tr'?'Tüm Antalya ilçelerine bay & bayan terzi servisi.':lang==='en'?'Men & women tailor service all Antalya.':'Alle Antalya-Bezirke.'}
-        </p>
-        <a href="https://maps.app.goo.gl/rpgwjJgWZHfgafTy5" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{fontSize:'.75rem'}}>{c.mapBtn}</a>
+      <div className="mapbox" style={{padding:0,overflow:'hidden',position:'relative'}}>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12742.017!2d30.6946!3d36.8769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c3914a3f49b36b%3A0xe9e87c5c9a6b2700!2sKonyaalti%2C%20Antalya!5e0!3m2!1str!2str!4v1720000000000"
+          width="100%" height="260"
+          style={{border:0,display:'block'}}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Terzi Can Konyaaltı Antalya konumu"
+          aria-label="Terzi Can atölyesi konumu"
+        />
+        <div style={{padding:'1rem 1.2rem',display:'flex',alignItems:'center',justifyContent:'space-between',background:'rgba(28,24,20,.96)',borderTop:'1px solid rgba(184,151,90,.15)'}}>
+          <div>
+            <div style={{fontFamily:'var(--serif)',fontSize:'1rem',color:'rgba(255,255,255,.85)'}}>Konyaaltı, Antalya</div>
+            <div style={{fontSize:'.72rem',color:'var(--muted)',marginTop:'.2rem'}}>09:00–19:00 · Pzt–Cmt</div>
+          </div>
+          <a href="https://maps.app.goo.gl/rpgwjJgWZHfgafTy5" target="_blank" rel="noopener noreferrer" className="btn-outline" style={{fontSize:'.72rem',padding:'.6rem 1rem'}}>{c.mapBtn}</a>
+        </div>
       </div>
     </div>
   </section>
