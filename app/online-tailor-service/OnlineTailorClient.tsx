@@ -594,7 +594,7 @@ export default function OnlineTailorClient() {
       <nav className="breadcrumb" aria-label="Sayfa yolu">
         <a href="https://swaphubs.com">SwapHubs</a>
         <span>›</span>
-        <a href="/terzi">Terzi Can</a>
+        <a href="/online-tailor-service">Terzi Can</a>
         <span>›</span>
         <strong>Online Tailor Service</strong>
       </nav>
