@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+⁸import type { Metadata } from 'next';
 import OnlineTailorClient from './OnlineTailorClient';
 
 const SITE_URL = 'https://swaphubs.com/online-tailor-service';
@@ -192,7 +192,7 @@ const jsonLd = {
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       sameAs: [
         'https://wa.me/905318986418',
-        'https://swaphubs.com/terzi',        // ✅ www kaldırıldı
+        'https://swaphubs.com/online-tailor-service,        // ✅ www kaldırıldı
         'https://swaphubs.com',              // ✅ www kaldırıldı
         'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',  // ✅ YENİ — Maps
       ],
