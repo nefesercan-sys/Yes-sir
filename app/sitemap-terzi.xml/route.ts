@@ -22,8 +22,7 @@ const terziSayfalar = [
   { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                           priority: "0.9",  freq: "weekly" },
   { url: `${BASE}/terzi/kuru-temizleme-antalya`,                             priority: "0.9",  freq: "weekly" },
   { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                            priority: "0.95", freq: "weekly" },
-  { url: `${BASE}/terzi/fermuar-degisimi-antalya`,                           priority: "0.9",  freq: "weekly" },
-  { url: `${BASE}/terzi/gelinlik-tadilati-antalya`,                          priority: "0.9",  freq: "weekly" },
+  
 
   // ── Tekstil Antalya ──────────────────────────────────────────────────────
   { url: `${BASE}/tekstil-antalya`,                                          priority: "0.9",  freq: "weekly" },
@@ -42,14 +41,6 @@ const terziSayfalar = [
   { url: `${BASE}/online-terzi-hizmeti/kurumsal`,                            priority: "0.8",  freq: "monthly" },
   { url: `${BASE}/online-terzi-hizmeti/sss`,                                 priority: "0.7",  freq: "monthly" },
 
-  // ── Online Tailor Service (EN) ───────────────────────────────────────────
-  { url: `${BASE}/online-tailor-service`,                                    priority: "0.9",  freq: "weekly" },
-
-  // ── Antalya Terzi Dikim ──────────────────────────────────────────────────
-  { url: `${BASE}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,   priority: "0.9",  freq: "weekly" },
-
-  // ── Doğal Keten Pamuk Giyim ─────────────────────────────────────────────
-  { url: `${BASE}/dogal-keten-pamuk-giyim`,                                  priority: "0.9",  freq: "weekly" },
 ];
 
 export async function GET() {
