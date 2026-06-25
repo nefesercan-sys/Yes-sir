@@ -1,11 +1,4 @@
 // app/antalya-terzi-elbise-dikimi/page.tsx
-// ─────────────────────────────────────────────────────────────────────────────
-// Antalya'da elbise dikimi, tamirat, tadilat ve ütü hizmeti sayfası.
-// Mevcut Terzi Can işletme kimliğiyle (aynı telefon/NAP) tutarlı tutuldu —
-// Google Maps/Business Profile sinyalleri için isim-adres-telefon
-// tekrarında tutarlılık kritik.
-// ─────────────────────────────────────────────────────────────────────────────
-
 import type { Metadata } from 'next'
 import ElbiseDikimiClient from './Client'
 
@@ -16,45 +9,43 @@ const PHONE_E164 = '+905318986418'
 const TODAY = '2026-06-23'
 const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/wrap-dress-stone.jpg`
 
+// Arama motorları için öncelikli hedef Konyaaltı mahalleleri
+const KONYAALTI_MAHALLELERI = [
+  'Hurma', 'Liman', 'Uncalı', 'Gürsu', 'Altınkum', 
+  'Arapsuyu', 'Öğretmenevleri', 'Sarısu', 'Pınarbaşı', 'Toros', 'Siteler', 'Molla Yusuf'
+]
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-
-  title: 'Antalya Elbise Dikimi & Tadilat · Terzi Can Atölyesi',
-
+  title: 'Konyaaltı Elbise Dikimi & Tadilat · Antalya Terzi Can Atölyesi',
   description:
-    'Antalya Konyaaltı\'da elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma, tamirat ve ütü hizmeti. Şeffaf fiyatlar, randevulu profesyonel atölye. ☎ ' +
-    PHONE,
-
+    "Antalya Konyaaltı'nda profesyonel elbise dikimi, abiye/gelinlik tadilatı, paça kısaltma ve fermuar değişimi. Hurma, Liman, Uncalı ve Gürsu mahallelerine özel adrese teslim hızlı servis. ☎ " + PHONE,
   keywords: [
-    'Antalya elbise dikimi', 'Antalya terzi', 'elbise tamiratı Antalya',
-    'paça kısaltma Antalya', 'fermuar değişimi Antalya', 'bel daraltma Antalya',
-    'elbise tadilatı Antalya', 'ütü atölyesi Antalya', 'Konyaaltı terzi',
-    'kıyafet tamiri Antalya', 'dikiş atölyesi Antalya', 'gelinlik tadilatı Antalya',
-    'kumaş tadilat Antalya', 'terzi fiyatları Antalya',
+    'Antalya elbise dikimi', 'Antalya terzi', 'Konyaaltı terzi', 'Hurma mahallesi terzi',
+    'Liman terzi', 'Uncalı terzi', 'Gürsu terzi', 'Sarısu terzi', 'Arapsuyu terzi',
+    'elbise tamiratı Antalya', 'paça kısaltma Konyaaltı', 'fermuar değişimi Antalya',
+    'bel daraltma Konyaaltı', 'elbise tadilatı Antalya', 'ütü atölyesi Konyaaltı',
+    'gelinlik tadilatı Antalya', 'abiye daraltma Antalya', 'tailor Antalya Konyaalti'
   ],
-
   alternates: {
     canonical: PAGE_URL,
   },
-
   openGraph: {
     type: 'website',
     url: PAGE_URL,
     siteName: 'SwapHubs',
-    title: 'Antalya Elbise Dikimi & Tadilat · Terzi Can Atölyesi',
+    title: 'Konyaaltı Elbise Dikimi & Tadilat · Antalya Terzi Can Atölyesi',
     description:
-      'Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma ve ütü hizmeti. Şeffaf fiyatlar, randevulu profesyonel atölye.',
+      'Hurma, Liman, Uncalı ve Gürsu öncelikli tüm Konyaaltı mahallelerinde elbise dikimi, abiye tadilatı, paça ve fermuar onarımı. Adrese teslim terzi servisi.',
     images: [{ url: OG_IMAGE, width: 1200, height: 1500, alt: 'Terzi Can Atölyesi — Antalya Elbise Dikimi ve Tadilat' }],
     locale: 'tr_TR',
   },
-
   twitter: {
     card: 'summary_large_image',
-    title: 'Antalya Elbise Dikimi & Tadilat · Terzi Can Atölyesi',
-    description: 'Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma ve ütü hizmeti. Şeffaf fiyatlar.',
+    title: 'Konyaaltı Elbise Dikimi & Tadilat · Terzi Can Atölyesi',
+    description: 'Elbise dikimi, abiye tadilatı, paça kısaltma ve fermuar değişimi. Konyaaltı içi adrese motorlu kurye servis.',
     images: [OG_IMAGE],
   },
-
   robots: {
     index: true,
     follow: true,
@@ -68,16 +59,16 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'ClothingStore'],
       '@id': `${PAGE_URL}#business`,
-      name: 'Terzi Can',
+      name: 'Terzi Can Konyaaltı',
       description:
-        'Antalya Konyaaltı\'da profesyonel elbise dikimi, tamirat, tadilat ve ütü atölyesi. Paça kısaltma, fermuar değişimi, bel daraltma ve özel dikim hizmetleri.',
+        "Antalya Konyaaltı'nda profesyonel elbise dikimi, abiye ve gelinlik tadilatı, paça kısaltma, fermuar değişimi. Hurma, Liman, Uncalı, Gürsu başta olmak üzere tüm Konyaaltı mahallelerine adrese hızlı kurye servis.",
       url: PAGE_URL,
       telephone: PHONE_E164,
       priceRange: '₺₺',
       image: OG_IMAGE,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Konyaaltı',
+        streetAddress: 'Konyaaltı Merkez',
         addressLocality: 'Antalya',
         addressRegion: 'Antalya',
         postalCode: '07070',
@@ -92,10 +83,13 @@ const jsonLd = {
           closes: '19:00',
         },
       ],
-      areaServed: ['Antalya', 'Konyaaltı', 'Muratpaşa', 'Lara', 'Kepez'].map((name) => ({
-        '@type': 'City',
-        name,
-      })),
+      areaServed: [
+        { '@type': 'City', name: 'Konyaaltı' },
+        ...KONYAALTI_MAHALLELERI.map(name => ({ '@type': 'Place', name: `${name} Mahallesi, Konyaaltı` })),
+        { '@type': 'City', name: 'Antalya' },
+        { '@type': 'City', name: 'Muratpaşa' },
+        { '@type': 'City', name: 'Kepez' }
+      ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Elbise Dikimi & Tadilat Hizmetleri',
@@ -123,7 +117,7 @@ const jsonLd = {
       name: 'Antalya Elbise Dikimi & Tadilat · Terzi Can Atölyesi',
       url: PAGE_URL,
       description:
-        'Antalya Konyaaltı\'da elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma, tamirat ve ütü hizmeti.',
+        "Antalya Konyaaltı'nda Hurma, Liman, Uncalı ve Gürsu mahallelerine adrese teslim elbise dikimi, abiye tamiratı, paça ve fermuar hizmeti.",
       inLanguage: 'tr',
       dateModified: TODAY,
       about: { '@id': `${PAGE_URL}#business` },
@@ -143,23 +137,23 @@ const jsonLd = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Antalya\'da elbise dikimi ne kadar sürer?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Standart elbise dikimi 3-5 iş günü içinde tamamlanır. Acil siparişlerde aynı gün veya ertesi gün teslim mümkündür, lütfen randevu sırasında belirtin.' },
+          name: 'Konyaaltı Hurma ve Liman mahallelerine adrese terzi servisiniz var mı?',
+          acceptedAnswer: { '@type': 'Answer', text: `Evet, Hurma, Liman, Uncalı, Gürsu ve Sarısu mahallelerinden gelen dikiş, tadilat ve elbise dikimi siparişlerinizi kapınızdan motorlu kuryemizle teslim alıp, işlem sonrası kapınıza teslim ediyoruz. WhatsApp: ${PHONE}` },
         },
         {
           '@type': 'Question',
-          name: 'Paça kısaltma fiyatı ne kadar?',
-          acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma 150 TL'den başlar. Kumaş tipine ve dikim şekline (orijinal dikiş veya overlok) göre fiyat değişebilir. Kesin fiyat için WhatsApp ${PHONE} üzerinden fotoğraf gönderebilirsiniz.` },
+          name: 'Antalya\'da abiye ve elbise dikimi ne kadar sürer?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Özel ölçü elbise ve kişiye özel abiye dikimleri modelin yapısına göre ortalama 3-5 iş günü sürmektedir. Paça ve fermuar gibi acil tadilatlar aynı gün tamamlanır.' },
         },
         {
           '@type': 'Question',
-          name: 'Gelinlik tadilatı yapıyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet, gelinlik ve abiye tadilatında uzmanız. Bel daraltma, etek kısaltma, askı ayarı ve fermuar değişimi dahil tüm özel gün kıyafetlerine hizmet veriyoruz.' },
+          name: 'Konyaaltı paça kısaltma ve fermuar değişimi fiyatı ne kadar?',
+          acceptedAnswer: { '@type': 'Answer', text: `2026 yılı güncel fiyat tarifemize göre paça kısaltma 150 TL'den, pantolon fermuar değişimi 120 TL'den, mont/ceket fermuar değişimi ise 300 TL'den başlamaktadır.` },
         },
         {
           '@type': 'Question',
-          name: 'Randevu almadan gelebilir miyim?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Atölyemize randevusuz da uğrayabilirsiniz, ancak yoğun saatlerde bekleme süresini azaltmak için WhatsApp\'tan önceden randevu almanızı öneririz.' },
+          name: 'Uncalı ve Gürsu bölgelerinde gelinlik ve abiye tadilatı yapıyor musunuz?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Evet, tüm Konyaaltı bölgelerine gelinlik, nişanlık ve abiye kıyafetlerin hassas tadilatlarını, bel daraltma ve boy ayarlarını profesyonel atölyemizde garantili olarak gerçekleştiriyoruz.' },
         },
       ],
     },
