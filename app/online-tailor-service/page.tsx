@@ -1,4 +1,4 @@
-⁸import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import OnlineTailorClient from './OnlineTailorClient';
 
 const SITE_URL = 'https://swaphubs.com/online-tailor-service';
