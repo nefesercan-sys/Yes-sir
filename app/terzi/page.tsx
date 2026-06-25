@@ -468,8 +468,7 @@ const jsonLd = {
         { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                     url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
         { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                   url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
         // ✅ DÜZELTİLDİ: gelinlik-tadilati-antalya (canonical URL)
-        { '@type': 'ListItem', position: 8, name: 'Gelinlik Tadilatı',                         url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
-        { '@type': 'ListItem', position: 9, name: 'Fermuar Değişimi',                          url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+      
       ],
     },
   ],
