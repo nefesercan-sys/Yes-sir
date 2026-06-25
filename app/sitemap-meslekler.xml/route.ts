@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { MESLEKLER, ISLEM_TIPLERI } from "@/lib/sektorler";
 import { ULKELER } from "@/lib/ulkeler";
 
-const BASE = "https://www.swaphubs.com";
+const BASE = "https://swaphubs.com";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
