@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   poweredByHeader: false,
 
   compiler: {
@@ -34,20 +33,30 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
-      // Eski/yanlış slug düzeltmeleri
+      // SİLİNEN SAYFALAR İÇİN YÖNLENDİRMELER (404 hatasını önlemek ve SEO puanını korumak için)
       {
         source: '/terzi/gelinlik-tadilati',
-        destination: '/terzi/gelinlik-tadilati-antalya',
-        permanent: true,
-      },
-      {
-        source: '/terzi/fermuar-degisimi',
-        destination: '/terzi/fermuar-degisimi-antalya',
+        destination: '/terzi',
         permanent: true,
       },
       {
         source: '/terzi/gekinlik-tadilati',
-        destination: '/terzi/gelinlik-tadilati-antalya',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/gelinlik-tadilati-antalya',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/fermuar-degisimi',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/fermuar-degisimi-antalya',
+        destination: '/terzi',
         permanent: true,
       },
     ]
@@ -85,9 +94,9 @@ const nextConfig = {
       // Giriş gerektiren sayfalar — noindex
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin(.*)',         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin-ai(.*)',      headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/ilan-ver(.*)',      headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
+      { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
       { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
 
