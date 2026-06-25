@@ -9,7 +9,7 @@ const TODAY = new Date().toISOString().split('T')[0];
 
 const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
 const PAGE_DESCRIPTION =
-  'Konyaaltı Terzi Can: paça kısaltma ₺150, fermuar değişimi ₺150, bel daraltma, elbise dikimi, özel dikim, tisört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve & otele araçlı terzi servisi. Tüm Antalya ilçeleri. ☎ ' + PHONE;
+  'Konyaaltı Terzi Can: paça kısaltma ₺150, fermuar değişimi ₺120, bel daraltma, elbise dikimi, özel dikim, tisört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve & otele araçlı terzi servisi. Tüm Antalya ilçeleri. ☎ ' + PHONE;
 
 const OG_IMAGE_URL = `${HOME_URL}/og/terzi-can.jpg`;
 const MAPS_URL = 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5';
