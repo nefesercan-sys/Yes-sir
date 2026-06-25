@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from 'next/link';
 
-const SITE_URL = 'https://swaphubs.com/terzi/konyaalti;
+const SITE_URL = 'https://swaphubs.com/terzi/konyaalti';
 const PARENT_URL = 'https://swaphubs.com/terzi';
 export const metadata: Metadata = {
   title: "Konyaaltı Terzi Elbise Dikimi Tamiri Ütü Hizmeti | Terzi Can Antalya",
