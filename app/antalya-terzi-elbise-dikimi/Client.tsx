@@ -129,13 +129,14 @@ export default function ElbiseDikimiClient() {
 
         /* Navigasyon */
         .nav {
-          padding: 0.8rem 1.5rem;
+          padding: 1rem 1.5rem;
           font-size: 0.85rem;
           background: var(--champagne);
           color: var(--stone);
           border-bottom: 1px solid var(--champagne-dark);
           display: flex;
           gap: 0.5rem;
+          align-items: center;
         }
         .nav-link {
           color: var(--bronze-deep);
@@ -211,6 +212,7 @@ export default function ElbiseDikimiClient() {
           border: none;
           cursor: pointer;
           transition: background 0.2s;
+          text-align: center;
         }
         .btn-primary:hover {
           background: var(--bronze-deep);
@@ -224,6 +226,7 @@ export default function ElbiseDikimiClient() {
           font-size: 0.85rem;
           border-radius: 4px;
           transition: border-color 0.2s;
+          text-align: center;
         }
         .btn-secondary:hover {
           border-color: #fff;
@@ -265,24 +268,29 @@ export default function ElbiseDikimiClient() {
         }
         .service-group {
           max-width: 960px;
-          margin: 0 auto 6rem;
+          margin: 0 auto 5rem;
           display: grid;
           grid-template-columns: 1fr 1.2fr;
           gap: 3rem;
           align-items: center;
         }
-        .service-group:nth-child(even) {
-          direction: rtl;
+        .service-group.reverse {
+          grid-template-columns: 1.2fr 1fr;
         }
-        .service-group:nth-child(even) > * {
-          direction: ltr;
+        .service-group.reverse .service-image-wrapper {
+          order: 2;
+        }
+        .service-group.reverse .service-content {
+          order: 1;
         }
         .service-image-wrapper {
           position: relative;
           border-radius: 6px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-          aspect-ratio: 4/5;
+          width: 100%;
+          min-height: 420px;
+          height: 100%;
         }
         .service-img {
           position: absolute;
@@ -292,7 +300,7 @@ export default function ElbiseDikimiClient() {
           height: 100%;
           object-fit: cover;
         }
-        .service-content-, .service-content {
+        .service-content {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -489,12 +497,18 @@ export default function ElbiseDikimiClient() {
 
         /* Mobil Optimizasyon */
         @media (max-width: 768px) {
-          .service-group {
+          .service-group,
+          .service-group.reverse {
             grid-template-columns: 1fr;
             gap: 2rem;
           }
-          .service-group:nth-child(even) {
-            direction: ltr;
+          .service-group .service-image-wrapper,
+          .service-group.reverse .service-image-wrapper {
+            order: 1;
+          }
+          .service-group .service-content,
+          .service-group.reverse .service-content {
+            order: 2;
           }
           .hero-title {
             font-size: 2.3rem;
@@ -555,32 +569,36 @@ export default function ElbiseDikimiClient() {
 
       {/* Hizmet Grupları ve Fiyat Listeleri */}
       <section className="services-section">
-        {SERVICES.map((srv) => (
-          <article className="service-group" key={srv.id}>
-            <div className="service-image-wrapper">
-              <img src={srv.image} alt={srv.imageAlt} className="service-img" />
-            </div>
-            <div className="service-content">
-              <div className="service-eyebrow">{srv.eyebrow}</div>
-              <h2 className="service-title">{srv.title}</h2>
-              <p className="service-desc">{srv.description}</p>
-              
-              {srv.priceList && srv.priceList.length > 0 && (
-                <div className="price-list">
-                  {srv.priceList.map((item, idx) => (
-                    <div className="price-item" key={idx}>
-                      <span className="price-name">
-                        {item.name}
-                        {item.note && <span className="price-note">{item.note}</span>}
-                      </span>
-                      <span className="price-val">{item.price}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </article>
-        ))}
+        {SERVICES.map((srv, index) => {
+          // Çift sıralarda (index 1 ve 3) görseli sağa almak için reverse sınıfı ekliyoruz
+          const isReverse = index % 2 === 1;
+          return (
+            <article className={`service-group ${isReverse ? 'reverse' : ''}`} key={srv.id}>
+              <div className="service-image-wrapper">
+                <img src={srv.image} alt={srv.imageAlt} className="service-img" />
+              </div>
+              <div className="service-content">
+                <div className="service-eyebrow">{srv.eyebrow}</div>
+                <h2 className="service-title">{srv.title}</h2>
+                <p className="service-desc">{srv.description}</p>
+                
+                {srv.priceList && srv.priceList.length > 0 && (
+                  <div className="price-list">
+                    {srv.priceList.map((item, idx) => (
+                      <div className="price-item" key={idx}>
+                        <span className="price-name">
+                          {item.name}
+                          {item.note && <span className="price-note">{item.note}</span>}
+                        </span>
+                        <span className="price-val">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          )
+        })}
       </section>
 
       {/* Süreç / Adım Alanı */}
