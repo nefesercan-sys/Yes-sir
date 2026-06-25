@@ -1,14 +1,14 @@
-// app/antalya-terzi-elbise-dikimi/client.tsx
+// app/antalya-terzi-elbise-dikimi/Client.tsx
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+// Link importu kullanılmadığı için kaldırıldı.
 
-const PHONE_DISPLAY = '+90 531 898 64 18'
-const PHONE_WA = '905318986418'
-const waLink = (msg: string) =>
-  `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(msg)}`
+const PHONE_DISPLAY = "+90 531 898 64 18"
+const PHONE_E164 = "+905318986418"
+const WA = (msg: string) => `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(msg)}`
 
-type ServiceRow = { name: string; price: string; note?: string }
+type ServiceItem = { name: string, price: string, note?: string }
 type ServiceGroup = {
   id: string
   eyebrow: string
@@ -16,119 +16,109 @@ type ServiceGroup = {
   description: string
   image: string
   imageAlt: string
-  rows: ServiceRow[]
+  priceList?: ServiceItem[]
 }
 
-const GROUPS: ServiceGroup[] = [
+const SERVICES: ServiceGroup[] = [
   {
-    id: 'dikim',
+    id: 'diger',
     eyebrow: 'Özel Ölçü',
     title: 'Elbise Dikimi',
-    description:
-      'Kumaşınızı getirin veya atölye kataloğumuzdan seçin — ölçünüze özel, prova destekli dikim. Günlük, davetiye ve özel gün kıyafetleri için.',
-    image: '/images/elbise-dikimi/sea-dress.jpg',
-    imageAlt: 'Özel dikim beyaz keten elbise, deniz manzarası önünde',
-    rows: [
-      { name: 'Günlük elbise (özel ölçü)', price: '800 TL\u2019den', note: '3-5 iş günü' },
-      { name: 'Davetiye / abiye dikimi', price: '1.400 TL\u2019den', note: 'Prova dahil' },
-      { name: 'Tulum / takım dikimi', price: '1.100 TL\u2019den', note: '4-6 iş günü' },
-      { name: 'Gelinlik dikimi', price: 'Fiyat teklifi', note: 'Atölyede görüşme' },
-    ],
+    description: 'Kumaşınızı getirin veya atölye kataloğumuzdan seçin - size tam oturan, prova destekli dikim. Günlük, davetiye ve özel gün kıyafetleri için.',
+    image: '/images/elbise-dikimi/red-dress.jpg',
+    imageAlt: 'Özel dikim hayal telası elbise, deniz manzarası önünde',
+    priceList: [
+      { name: 'Günlük Elbise (Özel Ölçü)', price: '800 TL\'den başlar', note: '3-5 iş günü' },
+      { name: 'Davetiye / Abiye Elbise', price: '1.500 TL\'den başlar', note: 'Model detay' },
+      { name: 'Tulum / Takım Elbise', price: '1.200 TL\'den başlar', note: '4-6 iş günü' },
+      { name: 'Gelinlik Dikimi', price: 'Fiyat Teklifi', note: 'Atölyede görüşme' },
+    ]
   },
   {
     id: 'tadilat',
-    eyebrow: 'Tam Oturum',
+    eyebrow: 'Tam Oturan',
     title: 'Tadilat & Daraltma',
-    description:
-      'Mevcut kıyafetiniz vücudunuza tam otursun. Bel, göğüs ve sırt daraltma; askı ve kol ayarı — her tadilat el işçiliğiyle tamamlanır.',
+    description: 'Mevcut kıyafetinizi vücudunuza tam oturtun. Bel, göğüs ve sırt daraltma; askı ve kol ayarı - her tadilat el işçiliğiyle tamamlanır.',
     image: '/images/elbise-dikimi/atelier-dress.jpg',
     imageAlt: 'Atölyede prova edilen bağcıklı beyaz keten elbise',
-    rows: [
-      { name: 'Bel daraltma', price: '180 TL\u2019den' },
-      { name: 'Göğüs / sırt daraltma', price: '220 TL\u2019den' },
-      { name: 'Askı kısaltma / ayarı', price: '90 TL\u2019den' },
-      { name: 'Genel elbise tadilatı', price: '200 TL\u2019den', note: 'İnceleme sonrası netleşir' },
-    ],
+    priceList: [
+      { name: 'Bel daraltma', price: '180 TL\'den başlar' },
+      { name: 'Göğüs / sırt daraltma', price: '220 TL\'den başlar' },
+      { name: 'Askı kısaltma / ayar', price: '90 TL\'den başlar' },
+      { name: 'Genel elbise tadilatı', price: '200 TL\'den başlar', note: 'İnceleme sonrası netleşir' }
+    ]
   },
   {
-    id: 'tamirat',
+    id: 'onarim',
     eyebrow: 'Hızlı Çözüm',
-    title: 'Paça, Fermuar & Tamirat',
-    description:
-      'Günlük giyimin en sık ihtiyaç duyduğu işler. Randevulu çalışırız; çoğu işlem aynı gün veya ertesi gün teslim edilir.',
-    image: '/images/elbise-dikimi/jumpsuit-harbor.jpg',
-    imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
-    rows: [
-      { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\u2019den', note: 'Aynı gün' },
-      { name: 'Fermuar değişimi', price: '120 TL\u2019den' },
-      { name: 'Yırtık / söküğü onarımı', price: '90 TL\u2019den' },
-      { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\u2019den' },
-    ],
+    title: 'Paça, Fermuar & Onarım',
+    description: 'Günlük giyimde en sık ihtiyaç duyduğunuz işlemler. Randevulu çalışarak çoğu işlem aynı gün veya ertesi gün teslim edilir.',
+    image: '/images/elbise-dikimi/jumpsuit-tailor.jpg',
+    imageAlt: 'Siyah keten tulum giyen kadın, liman manzarası önünde',
+    priceList: [
+      { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\'den başlar', note: 'Aynı gün' },
+      { name: 'Fermuar değişimi', price: '120 TL\'den başlar' },
+      { name: 'Yırtmaç / dikiş onarımı', price: '80 TL\'den başlar' },
+      { name: 'Düğme, kopça, ilik tamiri', price: '40 TL/adet\'ten başlar' },
+    ]
   },
   {
     id: 'utu',
-    eyebrow: 'Bitirme Hizmeti',
+    eyebrow: 'Kusursuz Görünüm',
     title: 'Ütü & Son Bakım',
-    description:
-      'Özel günler ve iş kıyafetleri için profesyonel ütü ve buharlama. Kıyafetiniz teslim aldığınız gün giyime hazır olur.',
+    description: 'Özel günler ve iş kıyafetleri için profesyonel ütü ve buharlama. Kıyafetiniz teslim aldığınız gün giyime hazır olur.',
     image: '/images/elbise-dikimi/wrap-dress-stone.jpg',
-    imageAlt: 'Taş duvar önünde sarma model beyaz elbise',
-    rows: [
-      { name: 'Elbise / gömlek ütüsü', price: '60 TL\u2019den' },
-      { name: 'Takım elbise ütüsü', price: '120 TL\u2019den' },
-      { name: 'Gelinlik / abiye buharlama', price: '250 TL\u2019den' },
+    imageAlt: 'Taş duvar önünde keten model bej/taş elbise',
+    priceList: [
+      { name: 'Elbise / Günlük Ceket', price: '60 TL/adet\'ten başlar' },
+      { name: 'Takım Elbise (Alt/Üst)', price: '120 TL/adet\'ten başlar' },
+      { name: 'Gelinlik / Abiye buharlama', price: '300 TL\'den başlar' },
       { name: 'Toplu ütü (5+ parça)', price: 'Adet bazlı indirim' },
-    ],
-  },
+    ]
+  }
 ]
 
-const TRUST_POINTS = [
-  { label: 'Randevulu Çalışma', detail: 'Bekleme yok, zamanınız planlı' },
+const FAST_FACTS = [
+  { label: 'Randevulu Çalışma', detail: 'Bekleme yok, zamanınız size ait' },
   { label: 'Şeffaf Fiyatlandırma', detail: 'Sürpriz ücret yok, önceden onay' },
-  { label: 'Antalya Konyaaltı', detail: 'Kolay ulaşım, merkezi konum' },
-  { label: '94 Değerlendirme · 4.9', detail: 'Doğrulanmış müşteri yorumları' },
+  { label: 'Kalite Garantisi', detail: 'Atölye işçiliği, dikiş garantisi' },
+  { label: 'Ön Değerlendirme (WP)', detail: 'Uygulamadan fotoğraf gönderin' },
 ]
 
-function StitchDivider() {
-  return (
-    <div className="stitch-divider" aria-hidden="true">
-      <svg width="100%" height="14" viewBox="0 0 600 14" preserveAspectRatio="none">
-        <line x1="0" y1="7" x2="600" y2="7" stroke="currentColor" strokeWidth="1.5" strokeDasharray="10 8" />
-      </svg>
-    </div>
-  )
-}
+// Kullanılmayan TrustGrid fonksiyonu kaldırıldı.
 
 export default function ElbiseDikimiClient() {
-  const [scrolled, setScrolled] = useState(false)
-  const heroRef = useRef<HTMLDivElement>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <main className="page">
-      <style>{`
+    <>
+      <style jsx>{`
+        /* DİKKAT: @import satırı her şeyden (özellikle :root'tan) önce gelmek ZORUNDADIR! */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
         :root {
-          --linen: #FAF6F0;
-          --linen-deep: #F0E9DD;
-          --ink: #1C2B29;
-          --ink-soft: #3A4744;
-          --bronze: #B08968;
-          --bronze-deep: #8C6B4F;
-          --sage: #7A8B7F;
-          --champagne: #D4C4A8;
-          --near-black: #0F1B1A;
-          --font-display: 'Fraunces', Georgia, serif;
-          --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+          --champagne: #F4E8D9;
+          --champagne-dark: #E6D2B5;
+          --bronze: #C89F70;
+          --bronze-deep: #A67C52;
+          --ink: #1C1A1A;
+          --ink-light: #2A2828;
+          --stone: #8C8A88;
+          --stone-light: #B5B3B0;
+          --bg-light: #FDFCFB;
+          --font-display: 'Playfair Display', Georgia, serif;
+          --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap');
-
         * { box-sizing: border-box; }
+        
+        /* ... Geri kalan tüm CSS kodlarınızı mevcut halinden aynen bırakabilirsiniz ... */
 
         .page {
           background: var(--linen);
