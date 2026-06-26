@@ -91,7 +91,7 @@ export const metadata = {
   title: 'Terzi Can Hurma — Paça Kısaltma, Fermuar, Elbise Dikimi Konyaaltı Antalya 2026',
   description: 'Hurma mahallesi terzi: paça kısaltma ₺150, fermuar değişimi ₺120, bel daraltma, elbise dikimi. Araçlı servis, eve gelen terzi. ☎ +90 531 898 64 18',
   keywords: [
-    'Hurma terzi'6'Hurma mahallesi terzi'6'Hurma paça kısaltma'6'Hurma elbise dikimi'6'Hurma fermuar değişimi'6'Hurma bel daraltma'6'Konyaaltı Hurma terzi'6'Antalya Hurma terzi'6'Hurma mahallesi terzi'6'Hurma paça kısaltma'6'Hurma elbise dikimi'
+    'Hurma terzi, Hurma mahallesi terzi, Hurma paça kısaltma, Hurma elbise dikimi, Hurma fermuar değişimi, Hurma bel daraltma, Konyaaltı Hurma terzi, Antalya Hurma terzi, Hurma mahallesi terzi, Hurma paça kısaltma, Hurma elbise dikimi'
   ],
   alternates: { canonical: SITE_URL },
   openGraph: {
