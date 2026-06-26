@@ -1,3 +1,16 @@
+Harika, `<script>` etiketindeki parantez hatasını (118. satır civarı) ve `keywords` dizisindeki hatalı `6` rakamını (94. satır) bu dosyada başarıyla çözmüşsünüz.
+
+Ancak paylaştığınız kodda **React/JSX mantığına uymayan yeni bir sözdizimi (syntax) hatası** mevcut. Bu da Vercel'in derleme yaparken yine hata vermesine sebep olacaktır.
+
+### Sorun Nedir?
+
+React JSX yapısında satır içi stil (inline style) verirken objeleri **çift süslü parantez** `{{ ... }}` içine almalısınız. Sizin kodunuzun alt kısımlarındaki (Yakın mahalleler, Tablo ve SSS bölümü) tüm `style` etiketlerinde dıştaki süslü parantezler unutulmuş.
+
+Örneğin; `style={background:"#fff"}` şeklindeki kullanım yanlıştır. Doğrusu `style={{background:"#fff"}}` olmalıdır.
+
+Tüm bu `style` hatalarının düzeltildiği, Vercel'de **sorunsuz derlenecek (build alacak) tam dosya kodunu** aşağıda paylaşıyorum. Sayfanızın tamamını silip bu kodu yapıştırabilirsiniz:
+
+```tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -77,10 +90,10 @@ const jsonLd = {
       '@id': `${SITE_URL}#faq`,
       mainEntity: [
         { '@type':'Question', name:'Hurma paça kısaltma fiyatı 2026?', acceptedAnswer:{ '@type':'Answer', text:'Paça kısaltma Hurma mahallesinde ₺150\'den başlar. Kot paça ₺150, kumaş pantolon ₺175. Hurma adresinize araçlı servis. WhatsApp: +90 531 898 64 18' } },
-{ '@type':'Question', name:'Hurma fermuar değişimi fiyatı?', acceptedAnswer:{ '@type':'Answer', text:'Pantolon/kot fermuarı ₺120, ceket ₺200, mont ₺300. Aynı gün teslim. Hurma bölgesine geliyoruz. WhatsApp: +90 531 898 64 18' } },
-{ '@type':'Question', name:'Hurma eve gelen terzi var mı?', acceptedAnswer:{ '@type':'Answer', text:'Evet! Araçlı terzi servisimizle Hurma adresinize geliyor, yerinde ölçü alıyor, dikip teslim ediyoruz. WhatsApp: +90 531 898 64 18' } },
-{ '@type':'Question', name:'Hurma elbise dikimi ve bel daraltma fiyatı?', acceptedAnswer:{ '@type':'Answer', text:'Kadın elbise dikimi ₺600, bel daraltma ₺200\'den başlar. Hurma ve çevre mahallelerine servis. WhatsApp: +90 531 898 64 18' } },
-{ '@type':'Question', name:'Hurma kuru temizleme ve ütü hizmeti?', acceptedAnswer:{ '@type':'Answer', text:'Kuru temizleme ₺300, çamaşır ₺80/kg. Hurma adresinden kurye alım. 24 saat ekspres. WhatsApp: +90 531 898 64 18' } },
+        { '@type':'Question', name:'Hurma fermuar değişimi fiyatı?', acceptedAnswer:{ '@type':'Answer', text:'Pantolon/kot fermuarı ₺120, ceket ₺200, mont ₺300. Aynı gün teslim. Hurma bölgesine geliyoruz. WhatsApp: +90 531 898 64 18' } },
+        { '@type':'Question', name:'Hurma eve gelen terzi var mı?', acceptedAnswer:{ '@type':'Answer', text:'Evet! Araçlı terzi servisimizle Hurma adresinize geliyor, yerinde ölçü alıyor, dikip teslim ediyoruz. WhatsApp: +90 531 898 64 18' } },
+        { '@type':'Question', name:'Hurma elbise dikimi ve bel daraltma fiyatı?', acceptedAnswer:{ '@type':'Answer', text:'Kadın elbise dikimi ₺600, bel daraltma ₺200\'den başlar. Hurma ve çevre mahallelerine servis. WhatsApp: +90 531 898 64 18' } },
+        { '@type':'Question', name:'Hurma kuru temizleme ve ütü hizmeti?', acceptedAnswer:{ '@type':'Answer', text:'Kuru temizleme ₺300, çamaşır ₺80/kg. Hurma adresinden kurye alım. 24 saat ekspres. WhatsApp: +90 531 898 64 18' } },
       ],
     },
   ],
@@ -178,10 +191,10 @@ export default function HurmaTerziPage() {
               Hizmet Verilen Mahalle ve Bölgeler
             </p>
             <div style={{ display:'flex', flexWrap:'wrap', gap:'.4rem' }}>
-              <span key="Hurma" style={fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}>Hurma</span>
-              <span key="Liman" style={fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}>Liman</span>
-              <span key="Sarısu" style={fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}>Sarısu</span>
-              <span key="Uncalı" style={fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}>Uncalı</span>
+              <span key="Hurma" style={{fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}}>Hurma</span>
+              <span key="Liman" style={{fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}}>Liman</span>
+              <span key="Sarısu" style={{fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}}>Sarısu</span>
+              <span key="Uncalı" style={{fontSize:".75rem",color:"#7A6E62",border:"1px solid rgba(184,151,90,.15)",padding:".2rem .65rem",borderRadius:"2px"}}>Uncalı</span>
             </div>
           </div>
         </section>
@@ -205,16 +218,16 @@ export default function HurmaTerziPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr key="0" style={background:"#fff"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Paça / Pantolon / Etek Kısaltma</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺150+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>24 saat</td></tr>
-                <tr key="1" style={background:"rgba(184,151,90,.03)"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Fermuar — Pantolon / Kot</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺120+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>Aynı gün</td></tr>
-                <tr key="2" style={background:"#fff"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Fermuar — Mont / Kaban</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺300+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>24 saat</td></tr>
-                <tr key="3" style={background:"rgba(184,151,90,.03)"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Bel Daraltma / Elbise Daraltma</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺200+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>48 saat</td></tr>
-                <tr key="4" style={background:"#fff"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Kol Kısaltma</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺200+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>48 saat</td></tr>
-                <tr key="5" style={background:"rgba(184,151,90,.03)"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Yırtık Onarımı</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺100+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>Aynı gün</td></tr>
-                <tr key="6" style={background:"#fff"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Erkek Takım Elbise Dikimi</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺2.500+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>5-7 gün</td></tr>
-                <tr key="7" style={background:"rgba(184,151,90,.03)"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Kadın Elbise Dikimi</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺600+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>3-7 gün</td></tr>
-                <tr key="8" style={background:"#fff"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Gelinlik Tadilatı</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺500+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>3-5 gün</td></tr>
-                <tr key="9" style={background:"rgba(184,151,90,.03)"}><td style={padding:".75rem .8rem",fontSize:".86rem"}>Kuru Temizleme (Elbise)</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}>₺300+</td><td style={padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}>48 saat</td></tr>
+                  <tr key="0" style={{background:"#fff"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Paça / Pantolon / Etek Kısaltma</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺150+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>24 saat</td></tr>
+                  <tr key="1" style={{background:"rgba(184,151,90,.03)"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Fermuar — Pantolon / Kot</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺120+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>Aynı gün</td></tr>
+                  <tr key="2" style={{background:"#fff"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Fermuar — Mont / Kaban</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺300+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>24 saat</td></tr>
+                  <tr key="3" style={{background:"rgba(184,151,90,.03)"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Bel Daraltma / Elbise Daraltma</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺200+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>48 saat</td></tr>
+                  <tr key="4" style={{background:"#fff"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Kol Kısaltma</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺200+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>48 saat</td></tr>
+                  <tr key="5" style={{background:"rgba(184,151,90,.03)"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Yırtık Onarımı</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺100+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>Aynı gün</td></tr>
+                  <tr key="6" style={{background:"#fff"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Erkek Takım Elbise Dikimi</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺2.500+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>5-7 gün</td></tr>
+                  <tr key="7" style={{background:"rgba(184,151,90,.03)"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Kadın Elbise Dikimi</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺600+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>3-7 gün</td></tr>
+                  <tr key="8" style={{background:"#fff"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Gelinlik Tadilatı</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺500+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>3-5 gün</td></tr>
+                  <tr key="9" style={{background:"rgba(184,151,90,.03)"}}><td style={{padding:".75rem .8rem",fontSize:".86rem"}}>Kuru Temizleme (Elbise)</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#8A6E3E",fontWeight:700}}>₺300+</td><td style={{padding:".75rem .8rem",textAlign:"right",color:"#7A6E62",fontSize:".78rem"}}>48 saat</td></tr>
                 </tbody>
               </table>
             </div>
@@ -263,36 +276,36 @@ export default function HurmaTerziPage() {
             <h2 style={{ fontFamily:'Georgia,serif', fontSize:'1.7rem', color:'#1C1814', marginBottom:'1.5rem' }}>
               Hurma Terzi — Sık Sorulan Sorular
             </h2>
-            <details style={borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}>
-          <summary style={cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}>
-            Hurma paça kısaltma fiyatı 2026? <span style={color:"#B8975A"}>+</span>
-          </summary>
-          <p style={marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}>Paça kısaltma Hurma mahallesinde ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. Hurma adresinize araçlı servis. WhatsApp: +90 531 898 64 18</p>
-        </details>
-        <details style={borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}>
-          <summary style={cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}>
-            Hurma fermuar değişimi fiyatı? <span style={color:"#B8975A"}>+</span>
-          </summary>
-          <p style={marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}>Pantolon/kot fermuarı ₺120, ceket ₺200, mont ₺300. Aynı gün teslim. Hurma bölgesine geliyoruz. WhatsApp: +90 531 898 64 18</p>
-        </details>
-        <details style={borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}>
-          <summary style={cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}>
-            Hurma eve gelen terzi var mı? <span style={color:"#B8975A"}>+</span>
-          </summary>
-          <p style={marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}>Evet! Araçlı terzi servisimizle Hurma adresinize geliyor, yerinde ölçü alıyor, dikip teslim ediyoruz. WhatsApp: +90 531 898 64 18</p>
-        </details>
-        <details style={borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}>
-          <summary style={cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}>
-            Hurma elbise dikimi ve bel daraltma fiyatı? <span style={color:"#B8975A"}>+</span>
-          </summary>
-          <p style={marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}>Kadın elbise dikimi ₺600, bel daraltma ₺200'den başlar. Hurma ve çevre mahallelerine servis. WhatsApp: +90 531 898 64 18</p>
-        </details>
-        <details style={borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}>
-          <summary style={cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}>
-            Hurma kuru temizleme ve ütü hizmeti? <span style={color:"#B8975A"}>+</span>
-          </summary>
-          <p style={marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}>Kuru temizleme ₺300, çamaşır ₺80/kg. Hurma adresinden kurye alım. 24 saat ekspres. WhatsApp: +90 531 898 64 18</p>
-        </details>
+            <details style={{borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}}>
+              <summary style={{cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}}>
+                Hurma paça kısaltma fiyatı 2026? <span style={{color:"#B8975A"}}>+</span>
+              </summary>
+              <p style={{marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}}>Paça kısaltma Hurma mahallesinde ₺150'den başlar. Kot paça ₺150, kumaş pantolon ₺175. Hurma adresinize araçlı servis. WhatsApp: +90 531 898 64 18</p>
+            </details>
+            <details style={{borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}}>
+              <summary style={{cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}}>
+                Hurma fermuar değişimi fiyatı? <span style={{color:"#B8975A"}}>+</span>
+              </summary>
+              <p style={{marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}}>Pantolon/kot fermuarı ₺120, ceket ₺200, mont ₺300. Aynı gün teslim. Hurma bölgesine geliyoruz. WhatsApp: +90 531 898 64 18</p>
+            </details>
+            <details style={{borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}}>
+              <summary style={{cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}}>
+                Hurma eve gelen terzi var mı? <span style={{color:"#B8975A"}}>+</span>
+              </summary>
+              <p style={{marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}}>Evet! Araçlı terzi servisimizle Hurma adresinize geliyor, yerinde ölçü alıyor, dikip teslim ediyoruz. WhatsApp: +90 531 898 64 18</p>
+            </details>
+            <details style={{borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}}>
+              <summary style={{cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}}>
+                Hurma elbise dikimi ve bel daraltma fiyatı? <span style={{color:"#B8975A"}}>+</span>
+              </summary>
+              <p style={{marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}}>Kadın elbise dikimi ₺600, bel daraltma ₺200'den başlar. Hurma ve çevre mahallelerine servis. WhatsApp: +90 531 898 64 18</p>
+            </details>
+            <details style={{borderBottom:"1px solid rgba(184,151,90,.1)",padding:".8rem 0"}}>
+              <summary style={{cursor:"pointer",fontSize:".9rem",fontWeight:500,color:"#1C1814",listStyle:"none",display:"flex",justifyContent:"space-between"}}>
+                Hurma kuru temizleme ve ütü hizmeti? <span style={{color:"#B8975A"}}>+</span>
+              </summary>
+              <p style={{marginTop:".6rem",fontSize:".83rem",color:"#7A6E62",lineHeight:1.85}}>Kuru temizleme ₺300, çamaşır ₺80/kg. Hurma adresinden kurye alım. 24 saat ekspres. WhatsApp: +90 531 898 64 18</p>
+            </details>
           </div>
         </section>
 
@@ -368,3 +381,5 @@ export default function HurmaTerziPage() {
     </>
   );
 }
+
+```
