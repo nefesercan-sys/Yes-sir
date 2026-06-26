@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
-const SITE_URL  = 'https://swaphubs.com/antalya-terzi-elbise-dikiki-tamiri-tadilati-utu-hizmeti';
+const SITE_URL  = 'https://swaphubs.com/antalya-bay-tailor-online-terzi-utu-hizmeti';
 const HOME      = 'https://swaphubs.com';
 const TERZI_URL = 'https://swaphubs.com/terzi';
 const PHONE     = '+90 531 898 64 18';
