@@ -94,7 +94,7 @@ export const metadata = {
   title: 'Terzi Can Konyaaltı — Paça Kısaltma, Fermuar, Elbise Dikimi Konyaaltı Antalya 2026',
   description: 'Konyaaltı mahallesi terzi: paça kısaltma ₺150, fermuar değişimi ₺120, bel daraltma, elbise dikimi. Araçlı servis, eve gelen terzi. ☎ +90 531 898 64 18',
   keywords: [
-    'Konyaaltı terzi'6'Konyaaltı mahallesi terzi'6'Konyaaltı paça kısaltma'6'Konyaaltı elbise dikimi'6'Konyaaltı fermuar değişimi'6'Konyaaltı bel daraltma'6'Konyaaltı Konyaaltı terzi'6'Antalya Konyaaltı terzi'6'Konyaaltı merkez terzi'6'Konyaaltı elbise dikimi'6'Konyaaltı bayan terzi'
+    'Konyaaltı terzi','Konyaaltı mahallesi terzi','Konyaaltı paça kısaltma','Konyaaltı elbise dikimi','Konyaaltı fermuar değişimi','Konyaaltı bel daraltma','Konyaaltı Konyaaltı terzi','Antalya Konyaaltı terzi','Konyaaltı merkez terzi','Konyaaltı elbise dikimi','Konyaaltı bayan terzi'
   ],
   alternates: { canonical: SITE_URL },
   openGraph: {
