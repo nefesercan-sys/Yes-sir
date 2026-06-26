@@ -117,8 +117,7 @@ export const metadata = {
 
 export default function KonyaaltiTerziPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily:"'DM Sans',system-ui,sans-serif", background:'#FAF7F2', color:'#3A3028', minHeight:'100vh' }}>
 
         {/* Breadcrumb */}
