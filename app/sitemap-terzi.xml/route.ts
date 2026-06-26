@@ -24,10 +24,8 @@ const terziSayfalar = [
   { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                            priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/konyaalti-terzi`,                                    priority: "0.95", freq: "weekly" },
   { url: `${BASE}/terzi/hurma-terzi`,                                        priority: "0.9",  freq: "weekly" },
-  { 
   // ── Tekstil Antalya ──────────────────────────────────────────────────────
   { url: `${BASE}/tekstil-antalya`,                                          priority: "0.9",  freq: "weekly" },
-
   // ── Online Terzi Hizmeti — ana + alt sayfalar ───────────────────────────
   { url: `${BASE}/online-terzi-hizmeti`,                                     priority: "1.0",  freq: "weekly" },
   { url: `${BASE}/online-terzi-hizmeti/abiye-dikim`,                         priority: "0.9",  freq: "weekly" },
