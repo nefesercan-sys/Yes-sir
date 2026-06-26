@@ -1,25 +1,28 @@
 import type { Metadata } from 'next';
 import OnlineTailorClient from './OnlineTailorClient';
 
-const SITE_URL = 'https://swaphubs.com/online-tailor-service';
-const PHONE = '+90 531 898 64 18';
+// ─── CONSTANTS ────────────────────────────────────────────────────────────────
+const BASE_URL  = 'https://swaphubs.com';           // domain
+const PAGE_URL  = `${BASE_URL}/online-tailor-service`; // bu sayfa
+const PHONE     = '+90 531 898 64 18';
 
+// ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://swaphubs.com#website',           // ✅ www kaldırıldı
+      '@id': `${BASE_URL}#website`,
       name: 'SwapHubs',
-      url: 'https://swaphubs.com',                      // ✅ www kaldırıldı
+      url: BASE_URL,
       publisher: {
         '@type': 'Organization',
-        '@id': 'https://swaphubs.com#organization',     // ✅ www kaldırıldı
+        '@id': `${BASE_URL}#organization`,
         name: 'SwapHubs',
-        url: 'https://swaphubs.com',                    // ✅ www kaldırıldı
+        url: BASE_URL,
         logo: {
           '@type': 'ImageObject',
-          url: 'https://swaphubs.com/logo.png',         // ✅ www kaldırıldı
+          url: `${BASE_URL}/logo.png`,
           width: 512,
           height: 512,
         },
@@ -28,7 +31,7 @@ const jsonLd = {
 
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
-      '@id': `${SITE_URL}#business`,
+      '@id': `${PAGE_URL}#business`,
       name: 'SwapHubs — Online Tailor Service',
       alternateName: [
         'Antalya Bay Terzi',
@@ -37,13 +40,14 @@ const jsonLd = {
         'Tekstil Dikişatölyesi Antalya',
         'Antalya Seri İmalat Terzi',
       ],
-      description: "Antalya'da bay ve bayan kıyafet dikimi, online terzi hizmeti, ütü, tamir, tadilat, kişiye özel model tasarım, seri imalat ve tekstil dikişatölyesi.",
-      url: SITE_URL,
+      description:
+        "Antalya'da bay ve bayan kıyafet dikimi, online terzi hizmeti, ütü, tamir, tadilat, kişiye özel model tasarım, seri imalat ve tekstil dikişatölyesi.",
+      url: PAGE_URL,
       telephone: '+905318986418',
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      image: 'https://swaphubs.com/og/antalya-tailor-online.jpg',  // ✅ www kaldırıldı
+      image: `${BASE_URL}/og/antalya-tailor-online.jpg`,
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Konyaaltı',
@@ -57,7 +61,7 @@ const jsonLd = {
         latitude: 36.8841,
         longitude: 30.7056,
       },
-      hasMap: 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',        // ✅ YENİ — Maps bağlantısı
+      hasMap: 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -72,7 +76,7 @@ const jsonLd = {
         reviewCount: '112',
         bestRating: '5',
         worstRating: '1',
-        itemReviewed: {                                              // ✅ YENİ — zorunlu alan
+        itemReviewed: {
           '@type': 'ClothingStore',
           name: 'SwapHubs — Online Tailor Service',
         },
@@ -80,12 +84,13 @@ const jsonLd = {
       review: [
         {
           '@type': 'Review',
-          name: 'Mükemmel Takım Elbise Dikimi',                    // ✅ YENİ — name zorunlu
+          name: 'Mükemmel Takım Elbise Dikimi',
           author: { '@type': 'Person', name: 'Kemal A.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Erkek takım elbise dikimi için geldim. Ölçüler mükemmel alındı, kumaş kalitesi ve işçilik çok iyiydi.',
+          reviewBody:
+            'Erkek takım elbise dikimi için geldim. Ölçüler mükemmel alındı, kumaş kalitesi ve işçilik çok iyiydi.',
           datePublished: '2025-04-10',
-          itemReviewed: {                                            // ✅ YENİ — zorunlu alan
+          itemReviewed: {
             '@type': 'ClothingStore',
             name: 'SwapHubs — Online Tailor Service',
           },
@@ -95,7 +100,8 @@ const jsonLd = {
           name: 'Bayan İş Kıyafeti Dikimi — Harika Sonuç',
           author: { '@type': 'Person', name: 'Ayşe T.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Bayan iş kıyafeti dikimi için başvurdum. Kişiye özel tasarım ve mükemmel dikiş kalitesi.',
+          reviewBody:
+            'Bayan iş kıyafeti dikimi için başvurdum. Kişiye özel tasarım ve mükemmel dikiş kalitesi.',
           datePublished: '2025-05-03',
           itemReviewed: {
             '@type': 'ClothingStore',
@@ -107,7 +113,8 @@ const jsonLd = {
           name: '200 Adet Seri İmalat — Zamanında Teslim',
           author: { '@type': 'Person', name: 'Mehmet S.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Tekstil atölyesinde seri imalat yaptırdık. 200 adet iş gömleği zamanında ve eksiksiz teslim edildi.',
+          reviewBody:
+            'Tekstil atölyesinde seri imalat yaptırdık. 200 adet iş gömleği zamanında ve eksiksiz teslim edildi.',
           datePublished: '2025-03-22',
           itemReviewed: {
             '@type': 'ClothingStore',
@@ -135,8 +142,9 @@ const jsonLd = {
             description: 'Ölçüye özel erkek takım elbise, smokin, blazer dikimi.',
             price: '2500',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
           {
@@ -145,8 +153,9 @@ const jsonLd = {
             description: 'Elbise, bluz, etek, tulum, iş kıyafeti özel dikim.',
             price: '600',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
           {
@@ -155,8 +164,9 @@ const jsonLd = {
             description: 'Paça kısaltma, fermuar değişimi, yırtık tamiri, bel alma.',
             price: '120',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
           {
@@ -165,8 +175,9 @@ const jsonLd = {
             description: 'Profesyonel ütü, buharlı ütü. Otel alım-teslimat.',
             price: '80',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
           {
@@ -174,7 +185,7 @@ const jsonLd = {
             name: 'Tekstil Dikişatölyesi — Seri İmalat',
             description: 'Marka ve butikler için toplu üretim, fason imalat, kalıp çıkarma.',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
           {
@@ -183,8 +194,9 @@ const jsonLd = {
             description: 'Spor kıyafet, eşofman, sweatshirt özel dikim.',
             price: '400',
             priceCurrency: 'TRY',
+            priceValidUntil: '2026-12-31',
             availability: 'https://schema.org/InStock',
-            url: SITE_URL,
+            url: PAGE_URL,
             seller: { '@type': 'Organization', name: 'SwapHubs Antalya' },
           },
         ],
@@ -192,27 +204,27 @@ const jsonLd = {
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       sameAs: [
         'https://wa.me/905318986418',
-        'https://swaphubs.com/online-tailor-service',        // ✅ www kaldırıldı
-        'https://swaphubs.com',              // ✅ www kaldırıldı
-        'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',  // ✅ YENİ — Maps
+        BASE_URL,
+        'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',
       ],
     },
 
     {
       '@type': 'WebPage',
-      '@id': `${SITE_URL}#webpage`,
+      '@id': `${PAGE_URL}#webpage`,
       name: 'Online Tailor Service | Erkek ve Bayan Kıyafet Dikimi | SwapHubs',
-      url: SITE_URL,
-      isPartOf: { '@id': 'https://swaphubs.com#website' },   // ✅ www kaldırıldı
-      about: { '@id': `${SITE_URL}#business` },
-      description: "Antalya'da erkek ve bayan kıyafet dikimi, online terzi, ütü hizmeti, tamir, tadilat, model tasarım, tekstil atölyesi ve seri imalat.",
-      inLanguage: 'tr',
+      url: PAGE_URL,
+      isPartOf: { '@id': `${BASE_URL}#website` },
+      about: { '@id': `${PAGE_URL}#business` },
+      description:
+        "Antalya'da erkek ve bayan kıyafet dikimi, online terzi, ütü hizmeti, tamir, tadilat, model tasarım, tekstil atölyesi ve seri imalat.",
+      inLanguage: ['tr', 'en'],
       datePublished: '2025-01-01',
       dateModified: new Date().toISOString().split('T')[0],
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
+      breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
       primaryImageOfPage: {
         '@type': 'ImageObject',
-        url: 'https://swaphubs.com/og/antalya-tailor-online.jpg',  // ✅ www kaldırıldı
+        url: `${BASE_URL}/og/antalya-tailor-online.jpg`,
         width: 1200,
         height: 630,
       },
@@ -220,17 +232,17 @@ const jsonLd = {
 
     {
       '@type': 'BreadcrumbList',
-      '@id': `${SITE_URL}#breadcrumb`,
+      '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://swaphubs.com' },         // ✅ www kaldırıldı
-        { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: 'https://swaphubs.com/terzi' },  // ✅ www kaldırıldı
-        { '@type': 'ListItem', position: 3, name: 'Online Tailor Service', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs',      item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Terzi Can',     item: `${BASE_URL}/terzi` },
+        { '@type': 'ListItem', position: 3, name: 'Online Tailor', item: PAGE_URL },
       ],
     },
 
     {
       '@type': 'FAQPage',
-      '@id': `${SITE_URL}#faq`,
+      '@id': `${PAGE_URL}#faq`,
       mainEntity: [
         {
           '@type': 'Question',
@@ -242,10 +254,10 @@ const jsonLd = {
         },
         {
           '@type': 'Question',
-          name: 'Online terzi hizmeti nasıl çalışır?',
+          name: 'Online tailor service how does it work?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "WhatsApp'tan kıyafet fotoğrafı ve ölçülerinizi gönderin. Tasarımı onaylayın, kıyafetiniz dikilip adresinize kargo ile teslim edilir.",
+            text: "Send your garment photo and measurements via WhatsApp. Approve the design, and your garment will be tailored and shipped to your address. For Antalya residents, free courier delivery is available.",
           },
         },
         {
@@ -258,10 +270,10 @@ const jsonLd = {
         },
         {
           '@type': 'Question',
-          name: 'Seri imalat yapıyor musunuz?',
+          name: 'Do you offer bulk/mass production tailoring?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet. Markalar ve butikler için fason üretim, kalıp çıkarma ve numune dikimi yapıyoruz.',
+            text: 'Yes. We offer contract manufacturing, pattern making and sample sewing for brands, boutiques and e-commerce businesses. Minimum order varies by product.',
           },
         },
         {
@@ -269,7 +281,7 @@ const jsonLd = {
           name: 'Kıyafet tamir ve tadilat kaç sürede teslim?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Paça kısaltma, fermuar gibi basit işlemler aynı gün teslim. Tadilat 24–48 saat.',
+            text: 'Paça kısaltma, fermuar gibi basit işlemler aynı gün teslim. Tadilat 24–48 saat. Ekspres hizmet mevcuttur.',
           },
         },
       ],
@@ -277,41 +289,60 @@ const jsonLd = {
 
     {
       '@type': 'Service',
-      '@id': `${SITE_URL}#service`,
+      '@id': `${PAGE_URL}#service`,
       name: 'Antalya Online Terzi ve Tekstil Atölyesi',
-      description: 'Erkek ve bayan kıyafet dikimi, online terzi, ütü, tamir, tadilat, seri imalat. Antalya geneli.',
-      provider: { '@id': `${SITE_URL}#business` },
+      description:
+        'Erkek ve bayan kıyafet dikimi, online terzi, ütü, tamir, tadilat, seri imalat. Antalya geneli.',
+      provider: { '@id': `${PAGE_URL}#business` },
       areaServed: { '@type': 'City', name: 'Antalya' },
       availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
       serviceType: 'Tailoring, Clothing Alteration, Textile Manufacturing',
-      url: SITE_URL,
+      url: PAGE_URL,
     },
   ],
 };
 
+// ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL('https://swaphubs.com'),   // ✅ www kaldırıldı
+  metadataBase: new URL(BASE_URL),
 
   title: {
-    default: 'Online Tailor Service | Erkek ve Bayan Kıyafet Dikimi | Seri İmalat',
+    default: 'Online Tailor Service Antalya | Erkek ve Bayan Kıyafet Dikimi | Seri İmalat',
     template: '%s | SwapHubs Antalya Terzi',
   },
 
-  description: `Antalya'da bay ve bayan kıyafet dikimi, online terzi hizmeti, profesyonel ütü, tamir ve tadilat, model tasarım, tekstil atölyesi, seri imalat. Konyaaltı merkezli, tüm Antalya'ya kurye. ☎ ${PHONE}`,
+  description: `Antalya'da bay ve bayan kıyafet dikimi, online tailor service, profesyonel ütü, tamir ve tadilat, model tasarım, tekstil atölyesi, seri imalat. Konyaaltı merkezli, tüm Antalya'ya kurye. ☎ ${PHONE}`,
 
   keywords: [
-    'Antalya Bay Terzi', 'Erkek Kıyafet Dikimi Antalya', 'Erkek Takım Elbise Dikimi Antalya',
-    'Bayan Kıyafet Dikimi Antalya', 'Elbise Dikimi Antalya',
-    'Online Terzi Antalya', 'Online Kıyafet Dikimi', 'Online Tailor Service',
-    'Ütü Hizmeti Antalya', 'Otel Ütü Hizmeti Antalya',
-    'Kıyafet Tamir Antalya', 'Paça Kısaltma', 'Fermuar Değişimi Antalya',
-    'Tekstil Atölyesi Antalya', 'Fason Üretim Antalya', 'Seri İmalat Tekstil Antalya',
-    'Terzi Antalya', 'Antalya Terzi Fiyatları 2026', 'Konyaaltı Terzi',
-    'Tailor Antalya', 'Online Tailor Antalya', 'Ironing Service Antalya',
-    'Портной Анталья', 'Schneider Antalya',
+    'Online Tailor Service Antalya',
+    'Online Tailor Turkey',
+    'Tailor Antalya',
+    'Antalya Bay Terzi',
+    'Erkek Kıyafet Dikimi Antalya',
+    'Erkek Takım Elbise Dikimi Antalya',
+    'Bayan Kıyafet Dikimi Antalya',
+    'Elbise Dikimi Antalya',
+    'Online Terzi Antalya',
+    'Online Kıyafet Dikimi',
+    'Ütü Hizmeti Antalya',
+    'Otel Ütü Hizmeti Antalya',
+    'Kıyafet Tamir Antalya',
+    'Paça Kısaltma',
+    'Fermuar Değişimi Antalya',
+    'Tekstil Atölyesi Antalya',
+    'Fason Üretim Antalya',
+    'Seri İmalat Tekstil Antalya',
+    'Terzi Antalya',
+    'Konyaaltı Terzi',
+    'Ironing Service Antalya',
+    'Clothing Alterations Antalya',
+    'Suit Tailoring Antalya',
+    'Custom Clothing Antalya',
+    'Портной Анталья',
+    'Schneider Antalya',
   ],
 
-  authors: [{ name: 'SwapHubs', url: 'https://swaphubs.com' }],  // ✅ www kaldırıldı
+  authors: [{ name: 'SwapHubs', url: BASE_URL }],
   creator: 'SwapHubs',
   publisher: 'SwapHubs',
 
@@ -328,15 +359,21 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: SITE_URL,
+    canonical: PAGE_URL,
+    languages: {
+      'tr': PAGE_URL,
+      'en': PAGE_URL,
+      'x-default': PAGE_URL,
+    },
   },
 
   openGraph: {
-    title: 'Online Tailor Service | Erkek ve Bayan Kıyafet Dikimi | SwapHubs',
-    description: `Antalya'da erkek ve bayan kıyafet dikimi, online terzi, ütü, tamir, model tasarım, seri imalat. ☎ ${PHONE}`,
-    url: SITE_URL,
+    title: 'Online Tailor Service Antalya | Erkek ve Bayan Kıyafet Dikimi | SwapHubs',
+    description: `Antalya'da erkek ve bayan kıyafet dikimi, online tailor service, ütü, tamir, model tasarım, seri imalat. ☎ ${PHONE}`,
+    url: PAGE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
+    alternateLocale: ['en_US'],
     type: 'website',
     images: [
       {
@@ -352,20 +389,22 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'Online Tailor Service | SwapHubs Antalya',
+    creator: '@swaphubs',
+    title: 'Online Tailor Service Antalya | SwapHubs',
     description: `Erkek ve bayan kıyafet dikimi, online terzi, ütü, tamir, seri imalat. ☎ ${PHONE}`,
     images: ['/og/antalya-tailor-online.jpg'],
   },
 
   other: {
-    'geo.region': 'TR-07',
+    'geo.region':    'TR-07',
     'geo.placename': 'Antalya',
-    'geo.position': '36.8841;30.7056',
-    'ICBM': '36.8841, 30.7056',
-    'contact': PHONE,
+    'geo.position':  '36.8841;30.7056',
+    'ICBM':          '36.8841, 30.7056',
+    'contact':       PHONE,
   },
 };
 
+// ─── PAGE ─────────────────────────────────────────────────────────────────────
 export default function OnlineTailorPage() {
   return (
     <>
