@@ -1,16 +1,4 @@
-Harika, `<script>` etiketindeki parantez hatasını (118. satır civarı) ve `keywords` dizisindeki hatalı `6` rakamını (94. satır) bu dosyada başarıyla çözmüşsünüz.
 
-Ancak paylaştığınız kodda **React/JSX mantığına uymayan yeni bir sözdizimi (syntax) hatası** mevcut. Bu da Vercel'in derleme yaparken yine hata vermesine sebep olacaktır.
-
-### Sorun Nedir?
-
-React JSX yapısında satır içi stil (inline style) verirken objeleri **çift süslü parantez** `{{ ... }}` içine almalısınız. Sizin kodunuzun alt kısımlarındaki (Yakın mahalleler, Tablo ve SSS bölümü) tüm `style` etiketlerinde dıştaki süslü parantezler unutulmuş.
-
-Örneğin; `style={background:"#fff"}` şeklindeki kullanım yanlıştır. Doğrusu `style={{background:"#fff"}}` olmalıdır.
-
-Tüm bu `style` hatalarının düzeltildiği, Vercel'de **sorunsuz derlenecek (build alacak) tam dosya kodunu** aşağıda paylaşıyorum. Sayfanızın tamamını silip bu kodu yapıştırabilirsiniz:
-
-```tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
