@@ -29,9 +29,9 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/sea-dress.jpg',
     imageAlt: 'Özel dikim beyaz keten elbise, deniz manzarası önünde',
     rows: [
-      { name: 'Günlük elbise (özel ölçü)', price: '800 TL\u2019den', note: '3-5 iş günü' },
-      { name: 'Davetiye / abiye dikimi', price: '1.400 TL\u2019den', note: 'Prova dahil' },
-      { name: 'Tulum / takım dikimi', price: '1.100 TL\u2019den', note: '4-6 iş günü' },
+      { name: 'Günlük elbise (özel ölçü)', price: '800 TL\'den', note: '3-5 iş günü' },
+      { name: 'Davetiye / abiye dikimi', price: '1.400 TL\'den', note: 'Prova dahil' },
+      { name: 'Tulum / takım dikimi', price: '1.100 TL\'den', note: '4-6 iş günü' },
       { name: 'Gelinlik dikimi', price: 'Fiyat teklifi', note: 'Atölyede görüşme' },
     ],
   },
@@ -44,10 +44,10 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/atelier-dress.jpg',
     imageAlt: 'Atölyede prova edilen bağcıklı beyaz keten elbise',
     rows: [
-      { name: 'Bel daraltma', price: '180 TL\u2019den' },
-      { name: 'Göğüs / sırt daraltma', price: '220 TL\u2019den' },
-      { name: 'Askı kısaltma / ayarı', price: '90 TL\u2019den' },
-      { name: 'Genel elbise tadilatı', price: '200 TL\u2019den', note: 'İnceleme sonrası netleşir' },
+      { name: 'Bel daraltma', price: '180 TL\'den' },
+      { name: 'Göğüs / sırt daraltma', price: '220 TL\'den' },
+      { name: 'Askı kısaltma / ayarı', price: '90 TL\'den' },
+      { name: 'Genel elbise tadilatı', price: '200 TL\'den', note: 'İnceleme sonrası netleşir' },
     ],
   },
   {
@@ -59,10 +59,10 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/jumpsuit-harbor.jpg',
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
-      { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\u2019den', note: 'Aynı gün' },
-      { name: 'Fermuar değişimi', price: '120 TL\u2019den' },
-      { name: 'Yırtık / söküğü onarımı', price: '90 TL\u2019den' },
-      { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\u2019den' },
+      { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\'den', note: 'Aynı gün' },
+      { name: 'Fermuar değişimi', price: '120 TL\'den' },
+      { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
+      { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
     ],
   },
   {
@@ -74,9 +74,9 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/wrap-dress-stone.jpg',
     imageAlt: 'Taş duvar önünde sarma model beyaz elbise',
     rows: [
-      { name: 'Elbise / gömlek ütüsü', price: '60 TL\u2019den' },
-      { name: 'Takım elbise ütüsü', price: '120 TL\u2019den' },
-      { name: 'Gelinlik / abiye buharlama', price: '250 TL\u2019den' },
+      { name: 'Elbise / gömlek ütüsü', price: '60 TL\'den' },
+      { name: 'Takım elbise ütüsü', price: '120 TL\'den' },
+      { name: 'Gelinlik / abiye buharlama', price: '250 TL\'den' },
       { name: 'Toplu ütü (5+ parça)', price: 'Adet bazlı indirim' },
     ],
   },
@@ -472,6 +472,137 @@ export default function ElbiseDikimiClient() {
         }
         .faq-a { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
 
+        /* ---------- LOCATION / MAP ---------- */
+        .location {
+          background: var(--ink);
+          color: var(--linen);
+          padding: 88px 28px;
+        }
+        .location-inner {
+          max-width: 1180px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 64px;
+          align-items: start;
+        }
+        .location-info {}
+        .location-eyebrow {
+          font-size: 0.74rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--bronze);
+          font-weight: 600;
+          margin-bottom: 18px;
+          display: block;
+        }
+        .location-title {
+          font-family: var(--font-display);
+          font-size: clamp(1.7rem, 3vw, 2.3rem);
+          font-weight: 500;
+          margin: 0 0 28px;
+          line-height: 1.15;
+        }
+        .location-rows { display: flex; flex-direction: column; gap: 0; }
+        .location-row {
+          display: flex;
+          gap: 16px;
+          align-items: flex-start;
+          padding: 16px 0;
+          border-bottom: 1px solid rgba(250,246,240,0.08);
+        }
+        .location-row:last-child { border-bottom: none; }
+        .location-row-icon {
+          font-size: 1.1rem;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+        .location-row-label {
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--bronze);
+          font-weight: 600;
+          display: block;
+          margin-bottom: 4px;
+        }
+        .location-row-val {
+          font-size: 0.92rem;
+          color: rgba(250,246,240,0.88);
+          line-height: 1.5;
+        }
+        .location-row-val a {
+          color: rgba(250,246,240,0.88);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .location-row-val a:hover { color: var(--bronze); }
+        .location-btns {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 28px;
+        }
+        .btn-map {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: var(--bronze);
+          color: var(--near-black);
+          font-weight: 600;
+          font-size: 0.88rem;
+          padding: 13px 22px;
+          border-radius: 2px;
+          text-decoration: none;
+          transition: background 0.25s, transform 0.2s;
+          width: fit-content;
+        }
+        .btn-map:hover { background: var(--champagne); transform: translateY(-1px); }
+        .btn-wa-loc {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: #25D366;
+          color: #fff;
+          font-weight: 600;
+          font-size: 0.88rem;
+          padding: 13px 22px;
+          border-radius: 2px;
+          text-decoration: none;
+          transition: background 0.25s, transform 0.2s;
+          width: fit-content;
+        }
+        .btn-wa-loc:hover { background: #1eba56; transform: translateY(-1px); }
+
+        /* MAP EMBED */
+        .map-wrap {
+          border-radius: 2px;
+          overflow: hidden;
+          box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+          border: 1px solid rgba(250,246,240,0.08);
+          height: 420px;
+        }
+        .map-wrap iframe {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+        /* Map placeholder shown before iframe loads */
+        .map-placeholder {
+          width: 100%;
+          height: 100%;
+          background: rgba(250,246,240,0.04);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          color: rgba(250,246,240,0.4);
+          font-size: 0.85rem;
+          font-family: var(--font-body);
+        }
+
         /* ---------- CTA ---------- */
         .cta {
           background: var(--near-black);
@@ -498,6 +629,20 @@ export default function ElbiseDikimiClient() {
           background: var(--near-black);
           border-top: 1px solid rgba(250,246,240,0.08);
         }
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          flex-wrap: wrap;
+          margin-top: 8px;
+        }
+        .footer-links a {
+          color: rgba(250,246,240,0.3);
+          text-decoration: none;
+          font-size: 0.72rem;
+          transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--bronze); }
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 860px) {
@@ -507,6 +652,8 @@ export default function ElbiseDikimiClient() {
           .group-media { min-height: 320px; }
           .group-body { padding: 36px 28px; }
           .process-steps { grid-template-columns: repeat(2, 1fr); }
+          .location-inner { grid-template-columns: 1fr; gap: 40px; }
+          .map-wrap { height: 300px; }
         }
         @media (max-width: 540px) {
           .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); }
@@ -524,8 +671,8 @@ export default function ElbiseDikimiClient() {
       `}</style>
 
       {/* NAV */}
-      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-        <span className="nav-mark">Terzi Can</span>
+      <nav className={`nav ${scrolled ? 'scrolled' : ''}`} aria-label="Ana navigasyon">
+        <a className="nav-mark" href="/terzi">Terzi Can</a>
         <a className="nav-cta" href={waLink('Merhaba, elbise dikimi/tadilat için bilgi almak istiyorum.')}>
           WhatsApp&apos;tan Yazın
         </a>
@@ -537,8 +684,10 @@ export default function ElbiseDikimiClient() {
           className="hero-img"
           src="/images/elbise-dikimi/hero-couple.jpg"
           alt="Antalya'da özel dikim beyaz keten kıyafetler giyen çift"
+          width={1600}
+          height={1067}
         />
-        <div className="hero-scrim" />
+        <div className="hero-scrim" aria-hidden="true" />
         <div className="hero-content">
           <div className="hero-inner">
             <p className="hero-eyebrow">Antalya · Konyaaltı Atölyesi</p>
@@ -550,7 +699,10 @@ export default function ElbiseDikimiClient() {
               fiyatlı, profesyonel atölye hizmeti.
             </p>
             <div className="hero-actions">
-              <a className="btn-primary" href={waLink('Merhaba, elbise dikimi/tadilat için randevu almak istiyorum.')}>
+              <a
+                className="btn-primary"
+                href={waLink('Merhaba, elbise dikimi/tadilat için randevu almak istiyorum.')}
+              >
                 Randevu Al
               </a>
               <a className="btn-secondary" href="#fiyatlar">
@@ -562,7 +714,7 @@ export default function ElbiseDikimiClient() {
       </div>
 
       {/* TRUST STRIP */}
-      <section className="trust">
+      <section className="trust" aria-label="Güven noktaları">
         <div className="trust-grid">
           {TRUST_POINTS.map((t) => (
             <div className="trust-item" key={t.label}>
@@ -588,11 +740,14 @@ export default function ElbiseDikimiClient() {
       <StitchDivider />
 
       {/* SERVICE GROUPS */}
-      <section className="groups" id="fiyatlar">
+      <section className="groups" id="fiyatlar" aria-labelledby="fiyatlar-h">
+        <h2 id="fiyatlar-h" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>
+          Hizmetler ve Fiyatlar
+        </h2>
         {GROUPS.map((group) => (
           <article className="group" key={group.id} id={group.id}>
             <div className="group-media">
-              <img src={group.image} alt={group.imageAlt} loading="lazy" />
+              <img src={group.image} alt={group.imageAlt} loading="lazy" width={600} height={480} />
             </div>
             <div className="group-body">
               <p className="group-eyebrow">{group.eyebrow}</p>
@@ -615,11 +770,11 @@ export default function ElbiseDikimiClient() {
       </section>
 
       {/* PROCESS */}
-      <section className="process">
+      <section className="process" aria-labelledby="process-h">
         <div className="process-inner">
           <div className="process-head">
             <p className="intro-eyebrow">Nasıl Çalışır</p>
-            <h2>Randevudan teslime dört adım</h2>
+            <h2 id="process-h">Randevudan teslime dört adım</h2>
           </div>
           <div className="process-steps">
             <div className="process-step">
@@ -647,9 +802,9 @@ export default function ElbiseDikimiClient() {
       </section>
 
       {/* FAQ */}
-      <section className="faq">
+      <section className="faq" aria-labelledby="faq-h">
         <div className="faq-head">
-          <h2>Sıkça Sorulan Sorular</h2>
+          <h2 id="faq-h">Sıkça Sorulan Sorular</h2>
         </div>
         <div className="faq-item">
           <h3 className="faq-q">Antalya&apos;da elbise dikimi ne kadar sürer?</h3>
@@ -685,20 +840,141 @@ export default function ElbiseDikimiClient() {
         </div>
       </section>
 
+      {/* ── KONUM & HARİTA ─────────────────────────────────────────────────── */}
+      <section
+        className="location"
+        id="konum"
+        aria-labelledby="location-h"
+      >
+        <div className="location-inner">
+
+          {/* Sol — iletişim bilgileri */}
+          <div className="location-info">
+            <span className="location-eyebrow">Atölye Konumu</span>
+            <h2 className="location-title" id="location-h">
+              Konyaaltı, Antalya&apos;da<br />bizi bulun
+            </h2>
+
+            <div className="location-rows">
+              <div className="location-row">
+                <span className="location-row-icon" aria-hidden="true">📍</span>
+                <div>
+                  <span className="location-row-label">Adres</span>
+                  <span className="location-row-val">
+                    Hurma Mahallesi, Konyaaltı<br />Antalya, 07130
+                  </span>
+                </div>
+              </div>
+
+              <div className="location-row">
+                <span className="location-row-icon" aria-hidden="true">📞</span>
+                <div>
+                  <span className="location-row-label">Telefon & WhatsApp</span>
+                  <span className="location-row-val">
+                    <a href={`tel:+${PHONE_WA}`}>{PHONE_DISPLAY}</a>
+                  </span>
+                </div>
+              </div>
+
+              <div className="location-row">
+                <span className="location-row-icon" aria-hidden="true">🕐</span>
+                <div>
+                  <span className="location-row-label">Çalışma Saatleri</span>
+                  <span className="location-row-val">
+                    Pazartesi – Cumartesi<br />09:00 – 19:00
+                  </span>
+                </div>
+              </div>
+
+              <div className="location-row">
+                <span className="location-row-icon" aria-hidden="true">🏘️</span>
+                <div>
+                  <span className="location-row-label">Hizmet Bölgeleri</span>
+                  <span className="location-row-val">
+                    Hurma · Liman · Uncalı · Gürsu<br />
+                    Sarısu · Arapsuyu · Altınkum<br />
+                    ve tüm Konyaaltı mahalleleri
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="location-btns">
+              <a
+                href="https://maps.app.goo.gl/CNZghczJNRQX3mLM9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-map"
+                aria-label="Google Maps'te Terzi Can konumunu aç"
+              >
+                📍 Google Maps&apos;te Aç
+              </a>
+              <a
+                href={waLink('Merhaba, atölyenize gelmek istiyorum. Adres tarifi alabilir miyim?')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-wa-loc"
+                aria-label="WhatsApp'tan yol tarifi iste"
+              >
+                💬 Yol Tarifi İste
+              </a>
+            </div>
+          </div>
+
+          {/* Sağ — Google Maps embed */}
+          <div
+            className="map-wrap"
+            role="region"
+            aria-label="Terzi Can Konyaaltı konum haritası"
+          >
+            {/*
+              Terzi Can — Hurma Mahallesi, Konyaaltı, Antalya
+              Place ID: ChIJZ0ySzpExwxQRoLgdJSJyVFk
+              Google Maps Share: https://maps.app.goo.gl/CNZghczJNRQX3mLM9
+            */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.8!2d30.6930!3d36.8851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39311e6924c67%3A0x59547225251db8a0!2sTERZ%C4%B0%20Can!5e0!3m2!1str!2str!4v1720000000000!5m2!1str!2str"
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: 'block' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Terzi Can Konyaaltı Antalya — Google Haritalar"
+              aria-label="Terzi Can atölye konumu — Hurma Mahallesi, Konyaaltı, Antalya"
+            />
+          </div>
+
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="cta">
+      <section className="cta" aria-label="İletişime geç">
         <div className="cta-inner">
           <h2>Kıyafetiniz hazır, randevunuz bir mesaj uzağınızda</h2>
           <p>WhatsApp&apos;tan yazın, fotoğraf gönderin, ön fiyatı hemen öğrenin.</p>
-          <a className="btn-primary" href={waLink('Merhaba, elbise dikimi/tadilat için randevu almak istiyorum.')}>
+          <a
+            className="btn-primary"
+            href={waLink('Merhaba, elbise dikimi/tadilat için randevu almak istiyorum.')}
+          >
             {PHONE_DISPLAY} — WhatsApp&apos;tan Yazın
           </a>
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="footer">
-        Terzi Can Atölyesi · Konyaaltı, Antalya · {PHONE_DISPLAY}
+        <div>Terzi Can Atölyesi · Konyaaltı, Antalya · {PHONE_DISPLAY}</div>
+        <nav className="footer-links" aria-label="Footer bağlantılar">
+          <a href="/terzi">Terzi Can Ana Sayfa</a>
+          <a href="/online-terzi-hizmeti">Online Terzi Hizmeti</a>
+          <a href="/antalya-bay-tailor-online-terzi-utu-hizmeti">Bay Tailor</a>
+          <a href="https://maps.app.goo.gl/CNZghczJNRQX3mLM9" target="_blank" rel="noopener noreferrer">
+            Google Haritalar
+          </a>
+        </nav>
       </footer>
+
     </main>
   )
 }
