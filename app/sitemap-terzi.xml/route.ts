@@ -38,7 +38,6 @@ const terziSayfalar = [
   { url: `${BASE}/online-terzi-hizmeti/olcu-rehberi`,                        priority: "0.8",  freq: "monthly" },
   { url: `${BASE}/online-terzi-hizmeti/kurumsal`,                            priority: "0.8",  freq: "monthly" },
   { url: `${BASE}/online-terzi-hizmeti/sss`,                                 priority: "0.7",  freq: "monthly" },
-
 ];
 
 export async function GET() {
