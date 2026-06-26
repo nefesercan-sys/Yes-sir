@@ -539,7 +539,7 @@ export default function OnlineTailorClient() {
 
       {/* ── NAV ── */}
       <nav className={`nav${scrolled?' up':''}`} aria-label="Ana navigasyon">
-        <a href="https://swaphubs.com" className="nav-logo">
+        <a href="https://www.swaphubs.com" className="nav-logo">
           SwapHubs <em>/ Online Tailor</em>
         </a>
         <ul className="nav-links">
@@ -592,9 +592,9 @@ export default function OnlineTailorClient() {
 
       {/* ── BREADCRUMB ── */}
       <nav className="breadcrumb" aria-label="Sayfa yolu">
-        <a href="https://swaphubs.com">SwapHubs</a>
+        <a href="https://www.swaphubs.com">SwapHubs</a>
         <span>›</span>
-        <a href="/online-tailor-service">Terzi Can</a>
+        <a href="/terzi">Terzi Can</a>
         <span>›</span>
         <strong>Online Tailor Service</strong>
       </nav>
@@ -947,7 +947,7 @@ export default function OnlineTailorClient() {
         <div className="foot-brand">SwapHubs — Online Tailor Service | Online Terzi & Ütü Hizmeti</div>
         <nav className="foot-links" aria-label="Footer bağlantılar">
           {[
-            ['https://swaphubs.com','Ana Sayfa'],
+            ['https://www.swaphubs.com','Ana Sayfa'],
             ['/terzi','Terzi Can Antalya'],
             ['#services','Hizmetler'],
             ['#prices','Fiyatlar'],
