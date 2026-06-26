@@ -12,7 +12,7 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': 'https://swaphubs.com#website',
       name: 'SwapHubs',
-      url: 'https://www.swaphubs.com',
+      url: 'https://swaphubs.com',
       publisher: {
         '@type': 'Organization',
         '@id': 'https://www.swaphubs.com#organization',
