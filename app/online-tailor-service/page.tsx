@@ -15,12 +15,12 @@ const jsonLd = {
       url: 'https://swaphubs.com',
       publisher: {
         '@type': 'Organization',
-        '@id': 'https://www.swaphubs.com#organization',
+        '@id': 'https://swaphubs.com#organization',
         name: 'SwapHubs',
-        url: 'https://www.swaphubs.com',
+        url: 'https://swaphubs.com',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.swaphubs.com/logo.png',
+          url: 'https://swaphubs.com/logo.png',
           width: 512,
           height: 512,
         },
@@ -46,7 +46,7 @@ const jsonLd = {
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      image: 'https://www.swaphubs.com/og/antalya-tailor-online.jpg',
+      image: 'https://swaphubs.com/og/antalya-tailor-online.jpg',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Konyaaltı',
@@ -193,7 +193,7 @@ const jsonLd = {
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       sameAs: [
         'https://wa.me/905318986418',
-        'https://www.swaphubs.com/terzi',
+        'https://swaphubs.com/terzi',
         'https://www.swaphubs.com',
       ],
     },
@@ -204,7 +204,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Online Tailor Service Hizmeti | Erkek & Bayan Kıyafet Dikimi | SwapHubs',
       url: SITE_URL,
-      isPartOf: { '@id': 'https://www.swaphubs.com#website' },
+      isPartOf: { '@id': 'https://swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
       description:
         'Antalya\'da erkek ve bayan kıyafet dikimi, online terzi, ütü hizmeti, tamir, tadilat, kişiye özel tasarım, tekstil atölyesi ve seri imalat. Konyaaltı merkezli, tüm Antalya\'ya hizmet.',
@@ -214,7 +214,7 @@ const jsonLd = {
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
       primaryImageOfPage: {
         '@type': 'ImageObject',
-        url: 'https://www.swaphubs.com/og/antalya-tailor-online.jpg',
+        url: 'https://swaphubs.com/og/antalya-tailor-online.jpg',
         width: 1200,
         height: 630,
       },
@@ -313,7 +313,7 @@ const jsonLd = {
 
 // ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
+  metadataBase: new URL('https://swaphubs.com'),
 
   title: {
     default:
