@@ -16,8 +16,10 @@ const PHONE_E164  = '+905318986418';
 const TODAY       = new Date().toISOString().split('T')[0];
 
 // ── Google Business — İKİ PROFİL ──────────────────────────────────────────────
+// export KALDIRILDI — Next.js page.tsx'ten sadece metadata/generateMetadata/default export edilebilir
+// GBP verileri TerziClient'a prop olarak geçiliyor
 // Profil 1 → Liman Mah. "Konyaaltı Terzi - Terzi Dikim Tamir Tadilat"
-export const GBP_1 = {
+const GBP_1 = {
   cid:   '1496201377277644027',
   short: 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA',
   maps:  'https://www.google.com/maps?cid=1496201377277644027',
@@ -27,7 +29,7 @@ export const GBP_1 = {
   addr:  'Liman Mahallesi, Konyaaltı / Antalya',
 };
 // Profil 2 → Hurma "ANTALYA TERZİ CAN - TAILOR"
-export const GBP_2 = {
+const GBP_2 = {
   cid:   '1496201834409914715',
   short: 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',
   maps:  'https://www.google.com/maps?cid=1496201834409914715',
