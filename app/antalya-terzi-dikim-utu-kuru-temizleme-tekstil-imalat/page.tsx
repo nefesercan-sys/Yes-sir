@@ -123,11 +123,11 @@ const jsonLd = {
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: 'Konyaaltı Terzi · Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi Terzi Servisi 2026',
-  description: "Antalya Konyaaltı'nda profesyonel terzi. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri mahallelerine adrese gelen terzi servisi. Paça, fermuar, dikim, kuru temizleme. Terziniz kapınıza gelsin! ☎ " + PHONE,
+  title: 'Konyaaltı Terzi · Elbise dikimi, tadilatı, Tamiri, Ütü yapımı, Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Özel Terzi Servisi 2026',
+  description: "Antalya Konyaaltı'nda profesyonel terzi. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Ozel Terzi, adrese gelen terzi servisi. Paça, fermuar, dikim, elbise tadilatı, ütü, kuru temizleme. Terziniz kapınıza gelsin! ☎ " + PHONE,
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
-    'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Göbi terzi',
+    'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Özel terzi',
     'Öğretmenevleri terzi', 'Arapsuyu terzi', 'Konyaaltı kuru temizleme',
     'adrese gelen terzi Konyaaltı', 'eve gelen terzi Antalya', 'terzi çağır terzi gelsin',
     'paça kısaltma Antalya', 'fermuar değişimi Antalya', 'bel daraltma Antalya',
@@ -138,7 +138,7 @@ export const metadata: Metadata = {
     languages: { 'x-default': SITE_URL },
   },
   openGraph: {
-    title: 'Konyaaltı Terzi · Adrese Gelen Terzi Servisi · Hurma, Liman, Uncalı, Sarısu, Çakırlar',
+    title: 'Konyaaltı Terzi · Adrese Gelen Terzi Servisi · Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar',
     description: "Terziniz kapınıza gelsin! Konyaaltı'nın tüm mahallelerine adrese gelen terzi ve kuru temizleme hizmeti. ☎ " + PHONE,
     url: SITE_URL,
     type: 'website',
