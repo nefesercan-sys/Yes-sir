@@ -8,29 +8,27 @@ const PHONE_TEL = '+905318986418';
 const TODAY = new Date().toISOString().split('T')[0];
 const OG_IMAGE = `${BASE_URL}/og/atelie-antalya-ru.jpg`;
 
-// ── DÜZELTİLDİ: GBP açıklamanızdaki gerçek işletme adı ve CID ile birebir ──────
-// Ekran görüntüsündeki GBP: "Konyaaltı Terzi - Terzi Dikim Tamir Tadilat"
-// CID: 1496201377277644027 — Liman Mah.
+// ✅ DOĞRULANMIŞ GBP — "Konyaaltı Terzi - Terzi Dikim Tamir Tadilat"
+//   Doğrulandı ✓ · Liman, 07070 Konyaaltı/Antalya
+//   CID: 16306058881247995687 (ekran görüntüsündeki gerçek işletme)
 const GBP_NAME    = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
-const GBP_CID     = '1496201377277644027';
+const GBP_CID     = '16306058881247995687';
 const MAPS_URL    = `https://www.google.com/maps?cid=${GBP_CID}`;
-const MAPS_SHORT  = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
-const MAPS_EMBED  = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
-const MAPS_REVIEW = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
-const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
+// Embed — ekran görüntüsündeki gibi Liman'da doğru pin gösteren çalışan sorgu
+const MAPS_EMBED  = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d30.6980!3d36.8820!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
+const MAPS_REVIEW = MAPS_URL;
+const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(GBP_NAME + ', Liman, Konyaaltı, Antalya')}`;
 
 const WA_NUMBER = '905318986418';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Я хотел бы получить информацию об услугах ателье (ремонт/пошив).');
 
-// ─── METADATA — Google Maps-snippet tarzı description ─────────────────────────
-// DÜZELTİLDİ: description artık GBP kartındaki gibi "İsim · Kategori · Adres · Saat" formatında
-// Bu format Google'ın arama sonucunda "harita kartı" hissi veren snippet üretme ihtimalini artırır
+// ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье в Анталии Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
   description:
-    `Konyaaltı Terzi - Terzi Dikim Tamir Tadilat · Терзи · Liman Mah., Konyaaltı, Antalya · Пн–Сб 09:00–19:00 · ⭐ 4.9 (94) · Ремонт, подгонка, пошив на русском. ☎ ${PHONE_DISPLAY}`,
+    `${GBP_NAME} · Терзи · Liman, Konyaaltı, Antalya · Пн–Сб 09:00–19:00 · ⭐ 4.9 (94) · Ремонт, подгонка, пошив на русском. ☎ ${PHONE_DISPLAY}`,
   keywords: [
     'ателье анталия', 'ателье коньяалты', 'ремонт одежды анталия', 'ремонт одежды коньяалты',
     'швея анталия', 'портной анталия', 'онлайн ателье анталия', 'пошив одежды коньяалты',
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `${GBP_NAME} — Ателье в Коньяалты`,
-    description: `Терзи · Liman Mah., Konyaaltı, Antalya · ⭐ 4.9 (94 отзыва) · Говорим по-русски. ☎ ${PHONE_DISPLAY}`,
+    description: `Терзи · Liman, Konyaaltı, Antalya · ⭐ 4.9 (94 отзыва) · Говорим по-русски. ☎ ${PHONE_DISPLAY}`,
     url: PAGE_URL,
     siteName: 'SwapHubs',
     locale: 'ru_RU',
@@ -72,14 +70,14 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07',
-    'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8841;30.7056',
-    'ICBM': '36.8841, 30.7056',
+    'geo.placename': 'Liman, Konyaaltı, Antalya',
+    'geo.position': '36.8820;30.6980',
+    'ICBM': '36.8820, 30.6980',
     'content-language': 'ru',
   },
 };
 
-// ─── JSON-LD — Place + LocalBusiness ikilisi (harita-snippet için en güçlü sinyal) ─
+// ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -90,104 +88,89 @@ const jsonLd = {
       url: BASE_URL,
       inLanguage: ['tr', 'en', 'ru'],
     },
-
-    // ── Place — Google'ın "yer kartı" formatına en yakın schema türü ─────────
     {
       '@type': 'Place',
       '@id': `${PAGE_URL}#place`,
       name: GBP_NAME,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Liman Mahallesi',
+        streetAddress: 'Liman',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
       hasMap: MAPS_URL,
     },
-
     {
-      '@type': ['Tailor', 'ClothingStore', 'LocalBusiness'],
+      '@type': ['ClothingStore', 'LocalBusiness'],
+      additionalType: 'https://schema.org/SewingService',
       '@id': `${PAGE_URL}#business`,
-      // DÜZELTİLDİ: GBP'deki tam işletme adı ile birebir
       name: GBP_NAME,
       alternateName: [
         'Terzi Can — Ателье в Анталии (Коньяалты)',
         'SwapHubs Онлайн Ателье Анталия', 'Ателье Коньяалты', 'Портной Анталья',
-        'Terzi Can Konyaaltı', 'Ремонт одежды Анталия',
+        'Terzi Can Konyaaltı', 'Ремонт одежды Анталия', 'Konyaaltı Terzi',
       ],
-      // DÜZELTİLDİ: GBP açıklamanızla birebir eşleşen, düzeltilmiş metin
       description:
-        'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri dikimi, tamiri, tadilatı, ütüsü yapılır. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine terzi hizmeti. Русскоязычный сервис — ремонт, подгонка и пошив одежды.',
+        'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, ' +
+        'elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri dikimi, tamiri, tadilatı, ütüsü yapılır. ' +
+        'Konyaaltı Liman, Hurma, Sarısu, Gürsu, Uncalı bölgesine terzi hizmeti. ' +
+        'Русскоязычный сервис — ремонт, подгонка и пошив одежды.',
       url: PAGE_URL,
       telephone: PHONE_TEL,
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card',
       image: OG_IMAGE,
+      logo: `${BASE_URL}/logo.png`,
       hasMap: MAPS_URL,
-      // DÜZELTİLDİ: sameAs'a gerçek GBP CID linkleri eklendi
-      sameAs: [MAPS_SHORT, MAPS_URL, WA_DEFAULT, `${BASE_URL}/terzi`],
+      sameAs: [MAPS_URL, `https://wa.me/${WA_NUMBER}`, `${BASE_URL}/terzi`],
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Liman Mahallesi',
+        streetAddress: 'Liman',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      // DÜZELTİLDİ: GBP'de "09:00-19:00 Pzt-Cmt" olmalı (ekran görüntüsünde "24 saat açık" görünüyor — GBP panelinden kontrol edin)
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          opens: '09:00',
-          closes: '19:00',
-        },
-      ],
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
+      serviceArea: {
+        '@type': 'GeoCircle',
+        geoMidpoint: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
+        geoRadius: '75000',
+      },
+      openingHoursSpecification: [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      }],
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '94',
-        bestRating: '5',
-        worstRating: '1',
-        itemReviewed: { '@type': 'ClothingStore', name: GBP_NAME },
+        ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1',
       },
       review: [
-        {
-          '@type': 'Review',
-          name: 'Отличный портной — говорит по-русски',
+        { '@type': 'Review', name: 'Отличный портной — говорит по-русски',
           author: { '@type': 'Person', name: 'Наталья К.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Отличное ателье! Пошили свадебное платье за 5 дней. Говорят по-русски, очень довольна результатом.',
-          datePublished: '2025-06-20',
-          itemReviewed: { '@type': 'ClothingStore', name: GBP_NAME },
-        },
-        {
-          '@type': 'Review',
-          name: 'Быстрая подгонка джинсов',
+          datePublished: '2025-06-20', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
+        { '@type': 'Review', name: 'Быстрая подгонка джинсов',
           author: { '@type': 'Person', name: 'Алексей М.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Укоротили джинсы за пару часов прямо во время отпуска. Качество отличное, цены разумные.',
-          datePublished: '2025-05-14',
-          itemReviewed: { '@type': 'ClothingStore', name: GBP_NAME },
-        },
-        {
-          '@type': 'Review',
-          name: 'Работа с кожаной курткой',
+          datePublished: '2025-05-14', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
+        { '@type': 'Review', name: 'Работа с кожаной курткой',
           author: { '@type': 'Person', name: 'Дмитрий С.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
           reviewBody: 'Заменили молнию на кожаной куртке. Не каждое ателье берётся за кожу, а здесь сделали идеально.',
-          datePublished: '2025-04-29',
-          itemReviewed: { '@type': 'ClothingStore', name: GBP_NAME },
-        },
+          datePublished: '2025-04-29', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
       ],
       areaServed: [
-        { '@type': 'Place', name: 'Hurma, Konyaaltı' },
         { '@type': 'Place', name: 'Liman, Konyaaltı' },
+        { '@type': 'Place', name: 'Hurma, Konyaaltı' },
         { '@type': 'Place', name: 'Sarısu, Konyaaltı' },
         { '@type': 'Place', name: 'Gürsu, Konyaaltı' },
         { '@type': 'Place', name: 'Uncalı, Konyaaltı' },
@@ -201,16 +184,20 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Услуги ателье — Terzi Can',
         itemListElement: [
-          { '@type': 'Offer', name: 'Укорачивание брюк / джинсов', description: 'Укорачивание и подгибка брюк, джинсов, юбок и платьев.', price: '150', priceCurrency: 'TRY', priceValidUntil: '2026-12-31', availability: 'https://schema.org/InStock', url: PAGE_URL, seller: { '@type': 'Organization', name: GBP_NAME } },
-          { '@type': 'Offer', name: 'Замена молнии', description: 'Замена сломанных молний на куртках, джинсах, сумках.', price: '200', priceCurrency: 'TRY', priceValidUntil: '2026-12-31', availability: 'https://schema.org/InStock', url: PAGE_URL, seller: { '@type': 'Organization', name: GBP_NAME } },
-          { '@type': 'Offer', name: 'Индивидуальный пошив одежды', description: 'Пошив эксклюзивной одежды по меркам и эскизам.', price: '600', priceCurrency: 'TRY', priceValidUntil: '2026-12-31', availability: 'https://schema.org/InStock', url: PAGE_URL, seller: { '@type': 'Organization', name: GBP_NAME } },
-          { '@type': 'Offer', name: 'Заужение талии и платья', description: 'Бел даралтма, elbise daraltma — подгонка по фигуре.', price: '150', priceCurrency: 'TRY', priceValidUntil: '2026-12-31', availability: 'https://schema.org/InStock', url: PAGE_URL, seller: { '@type': 'Organization', name: GBP_NAME } },
-          { '@type': 'Offer', name: 'Глажка и химчистка', description: 'Профессиональная глажка, химчистка, стирка.', price: '80', priceCurrency: 'TRY', priceValidUntil: '2026-12-31', availability: 'https://schema.org/InStock', url: PAGE_URL, seller: { '@type': 'Organization', name: GBP_NAME } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '150', priceValidUntil: '2026-12-31',
+            itemOffered: { '@type': 'Service', name: 'Укорачивание брюк / джинсов', description: 'Укорачивание и подгибка брюк, джинсов, юбок и платьев.' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '200', priceValidUntil: '2026-12-31',
+            itemOffered: { '@type': 'Service', name: 'Замена молнии', description: 'Замена сломанных молний на куртках, джинсах, сумках.' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '600', priceValidUntil: '2026-12-31',
+            itemOffered: { '@type': 'Service', name: 'Индивидуальный пошив одежды', description: 'Пошив эксклюзивной одежды по меркам и эскизам.' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '150', priceValidUntil: '2026-12-31',
+            itemOffered: { '@type': 'Service', name: 'Заужение талии и платья', description: 'Бел даралтма, elbise daraltma — подгонка по фигуре.' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '80', priceValidUntil: '2026-12-31',
+            itemOffered: { '@type': 'Service', name: 'Глажка и химчистка', description: 'Профессиональная глажка, химчистка, стирка.' } },
         ],
       },
       knowsLanguage: ['tr', 'ru', 'en'],
     },
-
     {
       '@type': 'WebPage',
       '@id': `${PAGE_URL}#webpage`,
@@ -224,7 +211,6 @@ const jsonLd = {
       breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
       speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#map-title', '#map-address'] },
     },
-
     {
       '@type': 'BreadcrumbList',
       '@id': `${PAGE_URL}#breadcrumb`,
@@ -234,16 +220,20 @@ const jsonLd = {
         { '@type': 'ListItem', position: 3, name: 'Ателье на русском', item: PAGE_URL },
       ],
     },
-
     {
       '@type': 'FAQPage',
       '@id': `${PAGE_URL}#faq`,
       mainEntity: [
-        { '@type': 'Question', name: 'Где находится ателье?', acceptedAnswer: { '@type': 'Answer', text: `Ателье «${GBP_NAME}» находится в Liman Mahallesi, район Коньяалты, Анталия. Нажмите «Открыть в Google Картах» для точного маршрута.` } },
-        { '@type': 'Question', name: 'Как быстро выполняется ремонт одежды?', acceptedAnswer: { '@type': 'Answer', text: 'Простой ремонт (укорачивание брюк, замена молнии) обычно занимает от нескольких часов до 1 дня.' } },
-        { '@type': 'Question', name: 'Говорите ли вы по-русски?', acceptedAnswer: { '@type': 'Answer', text: 'Да! Мы активно работаем с русскоязычными клиентами в Анталии. Пишите в WhatsApp на родном языке.' } },
-        { '@type': 'Question', name: 'Работаете ли вы с кожей и плотными тканями?', acceptedAnswer: { '@type': 'Answer', text: 'Да, профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.' } },
-        { '@type': 'Question', name: 'Сколько стоит укоротить джинсы или брюки?', acceptedAnswer: { '@type': 'Answer', text: 'Укорачивание брюк и джинсов от ₺150. Точную цену скажем по фото в WhatsApp.' } },
+        { '@type': 'Question', name: 'Где находится ателье?',
+          acceptedAnswer: { '@type': 'Answer', text: `Ателье «${GBP_NAME}» находится в Liman, район Коньяалты, Анталия. Нажмите «На карте» для точного маршрута.` } },
+        { '@type': 'Question', name: 'Как быстро выполняется ремонт одежды?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Простой ремонт (укорачивание брюк, замена молнии) обычно занимает от нескольких часов до 1 дня.' } },
+        { '@type': 'Question', name: 'Говорите ли вы по-русски?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Да! Мы активно работаем с русскоязычными клиентами в Анталии. Пишите в WhatsApp на родном языке.' } },
+        { '@type': 'Question', name: 'Работаете ли вы с кожей и плотными тканями?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Да, профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.' } },
+        { '@type': 'Question', name: 'Сколько стоит укоротить джинсы или брюки?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Укорачивание брюк и джинсов от ₺150. Точную цену скажем по фото в WhatsApp.' } },
       ],
     },
   ],
@@ -257,7 +247,7 @@ export default function RussianTailorPremiumPage() {
 
       <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
 
-        {/* ── FLOATING BUTTONS — Позвонить + WhatsApp + Карта ─────────────── */}
+        {/* ── FLOATING BUTTONS ─────────────────────────────────────────────── */}
         <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
           <a href={`tel:${PHONE_TEL}`} aria-label="Позвонить мастеру"
             className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl shadow-lg shadow-slate-900/30 active:scale-95 transition-transform">
@@ -280,7 +270,7 @@ export default function RussianTailorPremiumPage() {
               Качественный Ремонт и Пошив Одежды в Анталии
             </h1>
             <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
-              Мастерская <span className="text-amber-400 font-bold">Terzi Can</span> (партнёр SwapHubs) предлагает быструю подгонку по фигуре, замену фурнитуры и индивидуальный пошив. Напишите нам прямо сейчас!
+              Мастерская <span className="text-amber-400 font-bold">{GBP_NAME}</span> (партнёр SwapHubs) предлагает быструю подгонку по фигуре, замену фурнитуры и индивидуальный пошив. Напишите нам прямо сейчас!
             </p>
             <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-300">
               <span className="text-amber-400 text-lg">★★★★★</span>
@@ -290,19 +280,20 @@ export default function RussianTailorPremiumPage() {
           </div>
         </header>
 
-        {/* ── GOOGLE MAPS LISTING CARD — GBP kartı birebir görünümü ─────────
-            Bu kart, Google Maps'teki işletme kartınızın (ekran görüntüsü 2) 
-            web sitesi versiyonu. Aynı isim, aynı kategori, aynı saat bilgisi. ── */}
+        {/* ── GOOGLE MAPS LISTING CARD — ekran görüntüsündeki kart tasarımı ──── */}
         <section className="max-w-2xl mx-auto -mt-10 px-4 relative z-20" aria-label="Карточка на Google Картах">
           <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-            {/* Üst kısım — Maps kartı başlığı */}
+
+            {/* Üst — Maps info window stili: başlık + ikon butonlar */}
             <div className="p-5 sm:p-6">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h2 id="map-title" className="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
                     {GBP_NAME}
                   </h2>
-                  <p className="text-sm text-slate-500 mt-1">Терзи · 🚗 6 мин</p>
+                  <p id="map-address" className="text-sm text-slate-500 mt-1">
+                    Liman, 07070 Konyaaltı/Antalya, Türkiye
+                  </p>
                 </div>
                 <span className="flex-shrink-0 inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">
                   ● Открыто
@@ -311,12 +302,12 @@ export default function RussianTailorPremiumPage() {
 
               <div className="flex items-center gap-2 mt-3 text-sm">
                 <span className="text-amber-500 font-bold">★ 4.9</span>
-                <span className="text-slate-400">(94)</span>
+                <span className="text-slate-400">(94 отзыва)</span>
                 <span className="text-slate-300">·</span>
-                <span id="map-address" className="text-slate-500">Liman Mah., Konyaaltı, Antalya</span>
+                <span className="text-slate-500">Швейное ателье</span>
               </div>
 
-              {/* Maps butonları — GBP'deki "Yol tarifi / Başla / Kaydet" satırının birebir karşılığı */}
+              {/* Maps butonları — GBP info window'daki "açma/yol tarifi" ikonlarının web karşılığı */}
               <div className="grid grid-cols-3 gap-2 mt-5">
                 <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer"
                   className="flex flex-col items-center justify-center gap-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors text-center">
@@ -336,11 +327,11 @@ export default function RussianTailorPremiumPage() {
               </div>
             </div>
 
-            {/* Gömülü harita — işletme pin'i işaretli */}
+            {/* Gömülü harita — Liman'da doğru pin (ekran görüntüsüyle aynı) */}
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block relative group">
               <iframe
                 src={MAPS_EMBED}
-                width="100%" height="220"
+                width="100%" height="240"
                 style={{ border: 0, display: 'block', pointerEvents: 'none' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -381,7 +372,7 @@ export default function RussianTailorPremiumPage() {
         {/* ── SEO TEXT BLOCK ───────────────────────────────────────────────── */}
         <section className="max-w-3xl mx-auto px-4 pt-16 pb-4">
           <p className="text-sm text-slate-500 leading-relaxed text-center">
-            <strong className="text-slate-700">{GBP_NAME}</strong> — швейное ателье в Liman Mahallesi, Коньяалты, Анталия,
+            <strong className="text-slate-700">{GBP_NAME}</strong> — швейное ателье в Liman, Коньяалты, Анталия,
             обслуживающее русскоязычных клиентов. Ремонт одежды, подгонка по фигуре, замена молнии,
             индивидуальный пошив, работа с кожей и плотными тканями. Также обслуживаем районы Hurma, Sarısu, Gürsu, Uncalı.
             Говорим по-русски — пишите в WhatsApp.
@@ -448,7 +439,7 @@ export default function RussianTailorPremiumPage() {
           </div>
           <div className="space-y-4">
             {[
-              ['📍 Где именно вы находитесь?', `Наша мастерская «${GBP_NAME}» находится в Liman Mahallesi, район Коньяалты. Нажмите «На карте» выше, чтобы построить точный маршрут.`],
+              ['📍 Где именно вы находитесь?', `Наша мастерская «${GBP_NAME}» находится в Liman, район Коньяалты. Нажмите «На карте» выше, чтобы построить точный маршрут.`],
               ['⏱️ Как быстро выполняется ремонт одежды?', 'Простые операции — укорачивание джинсов, мелкий ремонт — обычно занимают от нескольких часов до 1 дня. Сложная подгонка или пошив обсуждаются индивидуально.'],
               ['💬 Говорите ли вы по-русски или по-английски?', 'Да! Мы активно работаем с иностранными клиентами в Анталии. Пишите в WhatsApp на родном языке.'],
               ['🧥 Работаете ли вы с кожей и плотными тканями?', 'Да, у нас профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.'],
@@ -472,7 +463,7 @@ export default function RussianTailorPremiumPage() {
                   <p className="text-xs text-slate-400 mt-1">Официальный партнёр платформы SwapHubs</p>
                 </div>
                 <address className="space-y-3 text-sm text-slate-300 not-italic">
-                  <p><strong>📍 Адрес:</strong> Liman Mahallesi, Konyaaltı / Antalya</p>
+                  <p><strong>📍 Адрес:</strong> Liman, 07070 Konyaaltı/Antalya</p>
                   <p><strong>⏰ Режим работы:</strong> Пн–Сб 09:00–19:00</p>
                   <p><strong>📞 Телефон:</strong> <a href={`tel:${PHONE_TEL}`} className="text-amber-400 hover:text-amber-300">{PHONE_DISPLAY}</a></p>
                   <p><strong>⭐ Рейтинг:</strong> 4.9 / 5 · 94 отзыва</p>
