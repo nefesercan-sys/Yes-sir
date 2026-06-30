@@ -26,39 +26,33 @@ export const viewport: Viewport = {
 };
 
 // ─── SEO FIX LOG ──────────────────────────────────────────────────────────────
-// FIX 1: title.template "%s | SwapHubs" → "%s" olarak değiştirildi.
-//         Her alt sayfa kendi tam title'ını tanımlıyor (terzi: 57 kar, tailor: 58 kar).
-//         "| SwapHubs" suffix terzi sayfasını 72 karaktere çıkarıp Google'ın kesmesine yol açıyordu.
-// FIX 2: og-image.svg → og-image.jpg. WhatsApp/Twitter/LinkedIn SVG önizleme göstermiyor.
-//         /public/og-image.jpg olarak 1200×630 JPG oluşturun.
-// FIX 3: keywords dizisi layout'tan kaldırıldı. Google 2009'dan beri kullanmıyor.
-//         Her sayfa kendi keywords'ünü page.tsx'inde tanımlıyor.
-//         Layout keywords'ü tüm alt sayfalara "B2B platform Türkiye..." yazıyordu — yanlış.
-// FIX 4: Organization.logo → og-image.svg'den logo.png'ye düzeltildi.
-//         Schema.org'da logo ImageObject boyutu 512×512 olmalı, 1200×630 değil.
-// FIX 5: google verification placeholder kaldı — gerçek kodu aşağıya yapıştırın.
+// FIX 1: title.template "%s | SwapHubs" → "%s" — her alt sayfa kendi tam title'ını tanımlıyor.
+// FIX 2: og-image.svg → og-image.jpg — sosyal medya SVG önizleme göstermiyor.
+// FIX 3: keywords dizisi layout'tan kaldırıldı — her sayfa kendi keywords'ünü tanımlıyor.
+// FIX 4: Organization.logo → logo.png (512×512), og-image ayrı "image" alanında.
+// FIX 5: google verification placeholder — gerçek kodu aşağıya yapıştırın.
+// FIX 6 (YENİ): hreflang dil alternantları eklendi — tr/en/ru sayfaları birbirine
+//         işaret ediyor artık. Daha önce sadece canonical vardı, hreflang yoktu.
+//         Bu, Google'a "bu sayfaların aynı içeriğin farklı dil versiyonları olduğunu"
+//         söyler ve doğru dildeki kullanıcıya doğru sayfayı gösterir.
+// FIX 7 (YENİ): locale "tr_TR" idi, alternateLocale eklendi (en_US, ru_RU) — OG dil sinyali.
+// FIX 8 (YENİ): areaServed/knowsAbout içine Rusça hizmet anahtar kelimeleri eklendi.
 // ──────────────────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
   title: {
-    // FIX 1: "%s | SwapHubs" → "%s"
-    // Her sayfa kendi title'ını tam olarak tanımlıyor, suffix eklenmeyecek.
     template: "%s",
     default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   },
-  // ✅ 149 karakter — fark yaratan bilgi + anahtar kelime öne
   description:
     "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın. Tekstil, gıda, lojistik, fason ve daha fazlası. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
-
-  // FIX 3: keywords KALDIRILDI — layout'tan tüm sayfalara yayılıyordu.
-  // Terzi sayfasında "B2B platform Türkiye" keywords'ü çıkıyordu, alakasız.
-  // Her sayfa kendi page.tsx'inde kendi keywords'ünü tanımlıyor.
 
   authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
   creator: "SwapHubs",
   publisher: "SwapHubs",
   category: "business",
+
   openGraph: {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description:
@@ -66,11 +60,11 @@ export const metadata: Metadata = {
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
+    // FIX 7: alternateLocale eklendi — İngilizce ve Rusça sayfalar artık global OG sinyali veriyor
+    alternateLocale: ["en_US", "ru_RU"],
     type: "website",
     images: [
       {
-        // FIX 2: .svg → .jpg — Sosyal medya SVG önizleme göstermiyor
-        // /public/og-image.jpg oluşturun: 1200×630, JPG, navy arka plan + logo
         url: "https://swaphubs.com/og-image.jpg",
         width: 1200,
         height: 630,
@@ -79,14 +73,15 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    // FIX 2: .svg → .jpg
     images: ["https://swaphubs.com/og-image.jpg"],
   },
+
   robots: {
     index: true,
     follow: true,
@@ -98,11 +93,21 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: { canonical: "https://swaphubs.com" },
+
+  // FIX 6: hreflang dil alternantları — ana site seviyesinde tr/en/ru sinyali
+  alternates: {
+    canonical: "https://swaphubs.com",
+    languages: {
+      "tr": "https://swaphubs.com",
+      "en": "https://swaphubs.com/online-tailor-service",
+      "ru": "https://swaphubs.com/ru/atelie-antalya-online",
+      "x-default": "https://swaphubs.com",
+    },
+  },
+
   verification: {
     // ⚠️ BURAYA YAPIŞTIRINIZ:
     // Google Search Console → Mülk → HTML etiketi → content="..." değerini kopyalayın
-    // Örnek: google: "AbCdEfGh1234567890AbCdEfGh1234567890AbCd",
     google: "BURAYA_GOOGLE_SEARCH_CONSOLE_KODUNU_YAZ",
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -111,9 +116,6 @@ export const metadata: Metadata = {
 };
 
 // ─── JSON-LD: WebSite + Organization ─────────────────────────────────────────
-// FIX 4: Organization.logo → og-image.svg'den logo.png'ye düzeltildi.
-//         og-image 1200×630 — logo olarak kullanılamaz, Google hata verir.
-//         logo.png 512×512 kare format olmalı.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -123,7 +125,8 @@ const jsonLd = {
       url: "https://swaphubs.com",
       name: "SwapHubs",
       description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
-      inLanguage: "tr-TR",
+      // FIX 6: tek dil yerine site genelinde desteklenen diller belirtildi
+      inLanguage: ["tr-TR", "en-US", "ru-RU"],
       potentialAction: {
         "@type": "SearchAction",
         target: {
@@ -139,19 +142,16 @@ const jsonLd = {
       "@id": "https://swaphubs.com/#organization",
       name: "SwapHubs",
       url: "https://swaphubs.com",
-      // FIX 4: logo → og-image.svg yerine logo.png (512×512 kare)
-      // /public/logo.png dosyası yoksa oluşturun veya mevcut logo dosyasını kullanın
       logo: {
         "@type": "ImageObject",
         url: "https://swaphubs.com/logo.png",
         width: 512,
         height: 512,
       },
-      // OG image ayrı bir alan olarak eklendi
       image: "https://swaphubs.com/og-image.jpg",
       description:
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
-      areaServed: ["TR", "DE", "AE", "SA", "US", "GB"],
+      areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
       knowsAbout: [
         "B2B Ticaret",
         "Tekstil Tedarik",
@@ -161,6 +161,9 @@ const jsonLd = {
         "Lojistik",
         "Temizlik",
         "Fason Üretim",
+        "Terzilik ve Tadilat",
+        // FIX 8: Rusça hizmet alanları eklendi
+        "Ремонт и пошив одежды",
       ],
       sameAs: [
         "https://twitter.com/swaphubs",
@@ -205,9 +208,19 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
+
         {/* Bing ve Yandex verification — Next.js verification API dışında kalıyor */}
         <meta name="msvalidate.01" content="EE22134B7D1B55A44BA700154371D5C3" />
         <meta name="yandex-verification" content="4c73ee1911a4b197" />
+
+        {/* FIX 6: hreflang link tagleri — bazı tarayıcılar/crawler'lar
+            alternates.languages metadata'sını değil, doğrudan <link> tagini okur.
+            İkisi birlikte en sağlam sinyali verir. */}
+        <link rel="alternate" hrefLang="tr" href="https://swaphubs.com" />
+        <link rel="alternate" hrefLang="en" href="https://swaphubs.com/online-tailor-service" />
+        <link rel="alternate" hrefLang="ru" href="https://swaphubs.com/ru/atelie-antalya-online" />
+        <link rel="alternate" hrefLang="x-default" href="https://swaphubs.com" />
+
         {/* Global JSON-LD: WebSite + Organization — tüm sayfalarda geçerli */}
         <script
           type="application/ld+json"
