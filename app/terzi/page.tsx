@@ -22,7 +22,7 @@ const TODAY       = new Date().toISOString().split('T')[0];
 const GBP_1 = {
   cid:   '1496201377277644027',
   short: 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA',
-  maps:  'https://www.google.com/maps?cid=14310476408054735480,
+  maps:  'https://www.google.com/maps?cid=1496201377277644027',
   embed: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1str!2str!4v1',
   review:'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA',
   name:  'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat',
