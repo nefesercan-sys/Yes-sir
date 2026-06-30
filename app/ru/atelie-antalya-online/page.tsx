@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 
-// ─── CONSTANTS ────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// ✅ TÜM STİLLER INLINE — Tailwind kurulu olmasa bile doğru görünür.
+// Önceki versiyon className="bg-slate-50 rounded-2xl ..." kullanıyordu;
+// projenizde Tailwind yapılandırılmamışsa bu class'lar HİÇBİR ŞEY YAPMAZ
+// ve sadece <iframe> (haritanın kendisi) ekranı dolduruyor gibi görünür.
+// ─────────────────────────────────────────────────────────────────────────────
+
 const BASE_URL = 'https://swaphubs.com';
 const PAGE_URL = `${BASE_URL}/ru/atelie-antalya-online`;
 const PHONE_DISPLAY = '+90 531 898 64 18';
@@ -8,22 +14,17 @@ const PHONE_TEL = '+905318986418';
 const TODAY = new Date().toISOString().split('T')[0];
 const OG_IMAGE = `${BASE_URL}/og/atelie-antalya-ru.jpg`;
 
-// ✅ DOĞRULANMIŞ GBP — "Konyaaltı Terzi - Terzi Dikim Tamir Tadilat"
-//   Doğrulandı ✓ · Liman, 07070 Konyaaltı/Antalya
-//   CID: 16306058881247995687 (ekran görüntüsündeki gerçek işletme)
-const GBP_NAME    = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
-const GBP_CID     = '16306058881247995687';
-const MAPS_URL    = `https://www.google.com/maps?cid=${GBP_CID}`;
-// Embed — ekran görüntüsündeki gibi Liman'da doğru pin gösteren çalışan sorgu
-const MAPS_EMBED  = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d30.6980!3d36.8820!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
-const MAPS_REVIEW = MAPS_URL;
+const GBP_NAME = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
+const GBP_CID  = '16306058881247995687';
+const MAPS_URL = `https://www.google.com/maps?cid=${GBP_CID}`;
+const MAPS_EMBED =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d30.6980!3d36.8820!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
 const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(GBP_NAME + ', Liman, Konyaaltı, Antalya')}`;
 
 const WA_NUMBER = '905318986418';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Я хотел бы получить информацию об услугах ателье (ремонт/пошив).');
 
-// ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье в Анталии Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
@@ -34,72 +35,36 @@ export const metadata: Metadata = {
     'швея анталия', 'портной анталия', 'онлайн ателье анталия', 'пошив одежды коньяалты',
     'ремонт джинсов анталия', 'замена молнии коньяалты', 'подгонка одежды анталия',
     'укорачивание брюк анталия', 'химчистка анталия', 'портной говорит по-русски анталия',
-    'терзи коньяалты', 'срочный ремонт одежды анталия', 'найти портного анталия карта',
   ],
-  authors: [{ name: 'SwapHubs', url: BASE_URL }],
-  creator: 'SwapHubs',
-  publisher: 'SwapHubs',
   robots: {
     index: true, follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
   },
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      'ru': PAGE_URL,
-      'tr': `${BASE_URL}/terzi`,
-      'en': `${BASE_URL}/online-tailor-service`,
-      'x-default': PAGE_URL,
-    },
+    languages: { 'ru': PAGE_URL, 'tr': `${BASE_URL}/terzi`, 'en': `${BASE_URL}/online-tailor-service`, 'x-default': PAGE_URL },
   },
   openGraph: {
     title: `${GBP_NAME} — Ателье в Коньяалты`,
     description: `Терзи · Liman, Konyaaltı, Antalya · ⭐ 4.9 (94 отзыва) · Говорим по-русски. ☎ ${PHONE_DISPLAY}`,
-    url: PAGE_URL,
-    siteName: 'SwapHubs',
-    locale: 'ru_RU',
-    alternateLocale: ['tr_TR', 'en_US'],
-    type: 'website',
+    url: PAGE_URL, siteName: 'SwapHubs', locale: 'ru_RU',
+    alternateLocale: ['tr_TR', 'en_US'], type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: GBP_NAME, type: 'image/jpeg' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: GBP_NAME,
-    description: `Терзи · Коньяалты, Анталия · ⭐ 4.9 · ${PHONE_DISPLAY}`,
-    images: [OG_IMAGE],
-  },
   other: {
-    'geo.region': 'TR-07',
-    'geo.placename': 'Liman, Konyaaltı, Antalya',
-    'geo.position': '36.8820;30.6980',
-    'ICBM': '36.8820, 30.6980',
+    'geo.region': 'TR-07', 'geo.placename': 'Liman, Konyaaltı, Antalya',
+    'geo.position': '36.8820;30.6980', 'ICBM': '36.8820, 30.6980',
     'content-language': 'ru',
   },
 };
 
-// ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    { '@type': 'WebSite', '@id': `${BASE_URL}#website`, name: 'SwapHubs', url: BASE_URL, inLanguage: ['tr', 'en', 'ru'] },
     {
-      '@type': 'WebSite',
-      '@id': `${BASE_URL}#website`,
-      name: 'SwapHubs',
-      url: BASE_URL,
-      inLanguage: ['tr', 'en', 'ru'],
-    },
-    {
-      '@type': 'Place',
-      '@id': `${PAGE_URL}#place`,
-      name: GBP_NAME,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Liman',
-        addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya',
-        postalCode: '07070',
-        addressCountry: 'TR',
-      },
+      '@type': 'Place', '@id': `${PAGE_URL}#place`, name: GBP_NAME,
+      address: { '@type': 'PostalAddress', streetAddress: 'Liman', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
       hasMap: MAPS_URL,
     },
@@ -108,112 +73,49 @@ const jsonLd = {
       additionalType: 'https://schema.org/SewingService',
       '@id': `${PAGE_URL}#business`,
       name: GBP_NAME,
-      alternateName: [
-        'Terzi Can — Ателье в Анталии (Коньяалты)',
-        'SwapHubs Онлайн Ателье Анталия', 'Ателье Коньяалты', 'Портной Анталья',
-        'Terzi Can Konyaaltı', 'Ремонт одежды Анталия', 'Konyaaltı Terzi',
-      ],
+      alternateName: ['Terzi Can — Ателье в Анталии (Коньяалты)', 'Ателье Коньяалты', 'Портной Анталья', 'Konyaaltı Terzi'],
       description:
-        'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, ' +
-        'elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri dikimi, tamiri, tadilatı, ütüsü yapılır. ' +
-        'Konyaaltı Liman, Hurma, Sarısu, Gürsu, Uncalı bölgesine terzi hizmeti. ' +
-        'Русскоязычный сервис — ремонт, подгонка и пошив одежды.',
-      url: PAGE_URL,
-      telephone: PHONE_TEL,
-      priceRange: '₺₺',
-      currenciesAccepted: 'TRY, EUR, USD, RUB',
-      paymentAccepted: 'Cash, Credit Card',
-      image: OG_IMAGE,
-      logo: `${BASE_URL}/logo.png`,
-      hasMap: MAPS_URL,
+        'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma. ' +
+        'Konyaaltı Liman, Hurma, Sarısu, Gürsu, Uncalı bölgesine terzi hizmeti. Русскоязычный сервис.',
+      url: PAGE_URL, telephone: PHONE_TEL, priceRange: '₺₺',
+      currenciesAccepted: 'TRY, EUR, USD, RUB', paymentAccepted: 'Cash, Credit Card',
+      image: OG_IMAGE, logo: `${BASE_URL}/logo.png`, hasMap: MAPS_URL,
       sameAs: [MAPS_URL, `https://wa.me/${WA_NUMBER}`, `${BASE_URL}/terzi`],
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Liman',
-        addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya',
-        postalCode: '07070',
-        addressCountry: 'TR',
-      },
+      address: { '@type': 'PostalAddress', streetAddress: 'Liman', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
-      serviceArea: {
-        '@type': 'GeoCircle',
-        geoMidpoint: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
-        geoRadius: '75000',
-      },
-      openingHoursSpecification: [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '09:00',
-        closes: '19:00',
-      }],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1',
-      },
+      serviceArea: { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 }, geoRadius: '75000' },
+      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '19:00' }],
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
       review: [
-        { '@type': 'Review', name: 'Отличный портной — говорит по-русски',
-          author: { '@type': 'Person', name: 'Наталья К.' },
+        { '@type': 'Review', name: 'Отличный портной — говорит по-русски', author: { '@type': 'Person', name: 'Наталья К.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Отличное ателье! Пошили свадебное платье за 5 дней. Говорят по-русски, очень довольна результатом.',
+          reviewBody: 'Отличное ателье! Пошили свадебное платье за 5 дней. Говорят по-русски.',
           datePublished: '2025-06-20', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
-        { '@type': 'Review', name: 'Быстрая подгонка джинсов',
-          author: { '@type': 'Person', name: 'Алексей М.' },
+        { '@type': 'Review', name: 'Быстрая подгонка джинсов', author: { '@type': 'Person', name: 'Алексей М.' },
           reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Укоротили джинсы за пару часов прямо во время отпуска. Качество отличное, цены разумные.',
+          reviewBody: 'Укоротили джинсы за пару часов прямо во время отпуска. Цены разумные.',
           datePublished: '2025-05-14', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
-        { '@type': 'Review', name: 'Работа с кожаной курткой',
-          author: { '@type': 'Person', name: 'Дмитрий С.' },
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-          reviewBody: 'Заменили молнию на кожаной куртке. Не каждое ателье берётся за кожу, а здесь сделали идеально.',
-          datePublished: '2025-04-29', itemReviewed: { '@type': 'LocalBusiness', name: GBP_NAME, '@id': `${PAGE_URL}#business` } },
       ],
-      areaServed: [
-        { '@type': 'Place', name: 'Liman, Konyaaltı' },
-        { '@type': 'Place', name: 'Hurma, Konyaaltı' },
-        { '@type': 'Place', name: 'Sarısu, Konyaaltı' },
-        { '@type': 'Place', name: 'Gürsu, Konyaaltı' },
-        { '@type': 'Place', name: 'Uncalı, Konyaaltı' },
-        { '@type': 'City', name: 'Konyaaltı' },
-        { '@type': 'City', name: 'Antalya' },
-        { '@type': 'City', name: 'Lara' },
-        { '@type': 'City', name: 'Belek' },
-        { '@type': 'City', name: 'Kemer' },
-      ],
+      areaServed: ['Liman, Konyaaltı','Hurma, Konyaaltı','Sarısu, Konyaaltı','Gürsu, Konyaaltı','Uncalı, Konyaaltı','Konyaaltı','Antalya','Lara','Belek','Kemer']
+        .map(name => ({ '@type': 'Place', name })),
       hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Услуги ателье — Terzi Can',
+        '@type': 'OfferCatalog', name: 'Услуги ателье — Terzi Can',
         itemListElement: [
-          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '150', priceValidUntil: '2026-12-31',
-            itemOffered: { '@type': 'Service', name: 'Укорачивание брюк / джинсов', description: 'Укорачивание и подгибка брюк, джинсов, юбок и платьев.' } },
-          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '200', priceValidUntil: '2026-12-31',
-            itemOffered: { '@type': 'Service', name: 'Замена молнии', description: 'Замена сломанных молний на куртках, джинсах, сумках.' } },
-          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '600', priceValidUntil: '2026-12-31',
-            itemOffered: { '@type': 'Service', name: 'Индивидуальный пошив одежды', description: 'Пошив эксклюзивной одежды по меркам и эскизам.' } },
-          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '150', priceValidUntil: '2026-12-31',
-            itemOffered: { '@type': 'Service', name: 'Заужение талии и платья', description: 'Бел даралтма, elbise daraltma — подгонка по фигуре.' } },
-          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '80', priceValidUntil: '2026-12-31',
-            itemOffered: { '@type': 'Service', name: 'Глажка и химчистка', description: 'Профессиональная глажка, химчистка, стирка.' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '150', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк / джинсов' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '200', itemOffered: { '@type': 'Service', name: 'Замена молнии' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '600', itemOffered: { '@type': 'Service', name: 'Индивидуальный пошив одежды' } },
+          { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, price: '80',  itemOffered: { '@type': 'Service', name: 'Глажка и химчистка' } },
         ],
       },
       knowsLanguage: ['tr', 'ru', 'en'],
     },
     {
-      '@type': 'WebPage',
-      '@id': `${PAGE_URL}#webpage`,
-      name: `${GBP_NAME} — Ателье в Анталии Коньяалты`,
-      url: PAGE_URL,
-      isPartOf: { '@id': `${BASE_URL}#website` },
-      about: { '@id': `${PAGE_URL}#business` },
-      inLanguage: 'ru',
-      datePublished: '2025-01-01',
-      dateModified: TODAY,
-      breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
-      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#map-title', '#map-address'] },
+      '@type': 'WebPage', '@id': `${PAGE_URL}#webpage`, name: `${GBP_NAME} — Ателье в Анталии Коньяалты`,
+      url: PAGE_URL, isPartOf: { '@id': `${BASE_URL}#website` }, about: { '@id': `${PAGE_URL}#business` },
+      inLanguage: 'ru', dateModified: TODAY, breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
     },
     {
-      '@type': 'BreadcrumbList',
-      '@id': `${PAGE_URL}#breadcrumb`,
+      '@type': 'BreadcrumbList', '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
@@ -221,291 +123,190 @@ const jsonLd = {
       ],
     },
     {
-      '@type': 'FAQPage',
-      '@id': `${PAGE_URL}#faq`,
+      '@type': 'FAQPage', '@id': `${PAGE_URL}#faq`,
       mainEntity: [
-        { '@type': 'Question', name: 'Где находится ателье?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ателье «${GBP_NAME}» находится в Liman, район Коньяалты, Анталия. Нажмите «На карте» для точного маршрута.` } },
-        { '@type': 'Question', name: 'Как быстро выполняется ремонт одежды?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Простой ремонт (укорачивание брюк, замена молнии) обычно занимает от нескольких часов до 1 дня.' } },
-        { '@type': 'Question', name: 'Говорите ли вы по-русски?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Да! Мы активно работаем с русскоязычными клиентами в Анталии. Пишите в WhatsApp на родном языке.' } },
-        { '@type': 'Question', name: 'Работаете ли вы с кожей и плотными тканями?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Да, профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.' } },
-        { '@type': 'Question', name: 'Сколько стоит укоротить джинсы или брюки?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Укорачивание брюк и джинсов от ₺150. Точную цену скажем по фото в WhatsApp.' } },
+        { '@type': 'Question', name: 'Где находится ателье?', acceptedAnswer: { '@type': 'Answer', text: `Ателье «${GBP_NAME}» находится в Liman, район Коньяалты, Анталия.` } },
+        { '@type': 'Question', name: 'Говорите ли вы по-русски?', acceptedAnswer: { '@type': 'Answer', text: 'Да! Пишите в WhatsApp на родном языке.' } },
+        { '@type': 'Question', name: 'Сколько стоит укоротить джинсы?', acceptedAnswer: { '@type': 'Answer', text: 'От ₺150. Точную цену скажем по фото в WhatsApp.' } },
       ],
     },
   ],
 };
 
-// ─── PAGE COMPONENT ─────────────────────────────────────────────────────────
+// ─── Stil sabitleri (inline) ──────────────────────────────────────────────────
+const C = {
+  ink: '#0f172a', ink2: '#1e293b', slate: '#475569', slate2: '#64748b',
+  bg: '#f8fafc', white: '#fff', amber: '#f59e0b', amber2: '#fbbf24',
+  emerald: '#059669', blue: '#2563eb', border: '#e2e8f0',
+};
+
 export default function RussianTailorPremiumPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
+      <div style={{ minHeight: '100vh', background: C.bg, color: C.ink, fontFamily: 'system-ui,-apple-system,sans-serif' }}>
 
-        {/* ── FLOATING BUTTONS ─────────────────────────────────────────────── */}
-        <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
-          <a href={`tel:${PHONE_TEL}`} aria-label="Позвонить мастеру"
-            className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl shadow-lg shadow-slate-900/30 active:scale-95 transition-transform">
+        {/* Floating buttons */}
+        <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 50, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <a href={`tel:${PHONE_TEL}`} aria-label="Позвонить"
+            style={{ width: 56, height: 56, borderRadius: '50%', background: C.ink, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, textDecoration: 'none', boxShadow: '0 4px 16px rgba(0,0,0,.3)' }}>
             📞
           </a>
-          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp"
-            className="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-lg shadow-emerald-600/30 active:scale-95 transition-transform">
+          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+            style={{ width: 56, height: 56, borderRadius: '50%', background: C.emerald, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, textDecoration: 'none', boxShadow: '0 4px 16px rgba(5,150,105,.4)' }}>
             💬
           </a>
         </div>
 
-        {/* ── HERO ──────────────────────────────────────────────────────────── */}
-        <header className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-20 px-4 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto relative z-10">
-            <span className="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+        {/* HERO */}
+        <header style={{ background: `linear-gradient(135deg, ${C.ink} 0%, ${C.ink2} 100%)`, color: '#fff', padding: '4rem 1.2rem 3rem', textAlign: 'center' }}>
+          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+            <span style={{ display: 'inline-block', background: 'rgba(245,158,11,.12)', border: '1px solid rgba(245,158,11,.35)', color: C.amber2, padding: '.4rem 1rem', borderRadius: 999, fontSize: '.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '1.2rem' }}>
               ✨ Профессиональное Ателье в Коньяалты
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mt-2 tracking-tight leading-tight max-w-3xl mx-auto">
+            <h1 style={{ fontSize: 'clamp(1.8rem,5vw,3rem)', fontWeight: 900, lineHeight: 1.15, margin: '0 0 1rem' }}>
               Качественный Ремонт и Пошив Одежды в Анталии
             </h1>
-            <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
-              Мастерская <span className="text-amber-400 font-bold">{GBP_NAME}</span> (партнёр SwapHubs) предлагает быструю подгонку по фигуре, замену фурнитуры и индивидуальный пошив. Напишите нам прямо сейчас!
+            <p style={{ fontSize: '1.05rem', color: '#cbd5e1', lineHeight: 1.7, margin: '0 auto 1.2rem', maxWidth: 560 }}>
+              Мастерская <strong style={{ color: C.amber2 }}>{GBP_NAME}</strong> (партнёр SwapHubs)
+              предлагает быструю подгонку по фигуре, замену фурнитуры и индивидуальный пошив.
             </p>
-            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-300">
-              <span className="text-amber-400 text-lg">★★★★★</span>
-              <strong className="text-white">4.9</strong>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: '.92rem', color: '#cbd5e1' }}>
+              <span style={{ color: C.amber, fontSize: '1.1rem' }}>★★★★★</span>
+              <strong style={{ color: '#fff' }}>4.9</strong>
               <span>· 94 отзыва</span>
             </div>
           </div>
         </header>
 
-        {/* ── GOOGLE MAPS LISTING CARD — ekran görüntüsündeki kart tasarımı ──── */}
-        <section className="max-w-2xl mx-auto -mt-10 px-4 relative z-20" aria-label="Карточка на Google Картах">
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-
-            {/* Üst — Maps info window stili: başlık + ikon butonlar */}
-            <div className="p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-3">
+        {/* MAPS CARD */}
+        <section style={{ maxWidth: 640, margin: '-2.5rem auto 0', padding: '0 1rem', position: 'relative', zIndex: 10 }}>
+          <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 12px 40px rgba(0,0,0,.18)', border: `1px solid ${C.border}`, overflow: 'hidden' }}>
+            <div style={{ padding: '1.3rem 1.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                 <div>
-                  <h2 id="map-title" className="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
-                    {GBP_NAME}
-                  </h2>
-                  <p id="map-address" className="text-sm text-slate-500 mt-1">
-                    Liman, 07070 Konyaaltı/Antalya, Türkiye
-                  </p>
+                  <h2 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, lineHeight: 1.3 }}>{GBP_NAME}</h2>
+                  <p style={{ fontSize: '.85rem', color: C.slate2, margin: '.3rem 0 0' }}>Liman, 07070 Konyaaltı/Antalya, Türkiye</p>
                 </div>
-                <span className="flex-shrink-0 inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">
+                <span style={{ flexShrink: 0, background: '#ecfdf5', color: '#047857', fontSize: '.7rem', fontWeight: 700, padding: '.3rem .7rem', borderRadius: 999, whiteSpace: 'nowrap' }}>
                   ● Открыто
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 mt-3 text-sm">
-                <span className="text-amber-500 font-bold">★ 4.9</span>
-                <span className="text-slate-400">(94 отзыва)</span>
-                <span className="text-slate-300">·</span>
-                <span className="text-slate-500">Швейное ателье</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10, fontSize: '.9rem' }}>
+                <span style={{ color: C.amber, fontWeight: 700 }}>★ 4.9</span>
+                <span style={{ color: C.slate2 }}>(94 отзыва)</span>
+                <span style={{ color: '#cbd5e1' }}>·</span>
+                <span style={{ color: C.slate2 }}>Швейное ателье</span>
               </div>
 
-              {/* Maps butonları — GBP info window'daki "açma/yol tarifi" ikonlarının web karşılığı */}
-              <div className="grid grid-cols-3 gap-2 mt-5">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginTop: 18 }}>
                 <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center gap-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors text-center">
-                  <span className="text-base">🧭</span>
-                  <span className="text-[11px]">Маршрут</span>
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: C.blue, color: '#fff', padding: '.8rem 0', borderRadius: 10, textDecoration: 'none', fontWeight: 700, fontSize: '.7rem' }}>
+                  <span style={{ fontSize: '1.1rem' }}>🧭</span>Маршрут
                 </a>
                 <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center gap-1 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl transition-colors text-center">
-                  <span className="text-base">🗺️</span>
-                  <span className="text-[11px]">На карте</span>
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: C.ink, color: '#fff', padding: '.8rem 0', borderRadius: 10, textDecoration: 'none', fontWeight: 700, fontSize: '.7rem' }}>
+                  <span style={{ fontSize: '1.1rem' }}>🗺️</span>На карте
                 </a>
-                <a href={MAPS_REVIEW} target="_blank" rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center gap-1 bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors text-center">
-                  <span className="text-base">⭐</span>
-                  <span className="text-[11px]">Отзыв</span>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: C.amber, color: '#fff', padding: '.8rem 0', borderRadius: 10, textDecoration: 'none', fontWeight: 700, fontSize: '.7rem' }}>
+                  <span style={{ fontSize: '1.1rem' }}>⭐</span>Отзыв
                 </a>
               </div>
             </div>
 
-            {/* Gömülü harita — Liman'da doğru pin (ekran görüntüsüyle aynı) */}
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block relative group">
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'relative' }}>
               <iframe
                 src={MAPS_EMBED}
-                width="100%" height="240"
+                width="100%" height="220"
                 style={{ border: 0, display: 'block', pointerEvents: 'none' }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 title={`${GBP_NAME} — карта расположения`}
-                aria-hidden="true"
-                tabIndex={-1}
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-3">
-                <span className="bg-white shadow-lg px-4 py-2 rounded-full text-xs font-bold text-slate-900 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                  📍 Открыть полную карту →
-                </span>
-              </div>
             </a>
           </div>
         </section>
 
-        {/* ── HIZLI İLETİŞİM ───────────────────────────────────────────────── */}
-        <section className="max-w-4xl mx-auto mt-8 px-4" aria-label="Быстрая связь">
-          <div className="bg-white p-5 md:p-8 rounded-2xl shadow-xl border border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* QUICK CONTACT */}
+        <section style={{ maxWidth: 880, margin: '2.5rem auto 0', padding: '0 1rem' }}>
+          <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 4px 20px rgba(0,0,0,.06)', border: `1px solid ${C.border}`, padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 12 }}>
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-1 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg shadow-emerald-600/20 text-center">
-              <span className="text-lg">Написать в WhatsApp</span>
-              <span className="text-xs font-normal text-emerald-100">Быстрый ответ и расчёт цены</span>
+              style={{ background: C.emerald, color: '#fff', padding: '1.1rem', borderRadius: 12, textDecoration: 'none', textAlign: 'center', fontWeight: 800, fontSize: '.95rem' }}>
+              Написать в WhatsApp
+              <div style={{ fontWeight: 400, fontSize: '.72rem', opacity: .85, marginTop: 4 }}>Быстрый ответ</div>
             </a>
             <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-1 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg shadow-rose-600/20 text-center">
-              <span className="text-lg">Найти на карте</span>
-              <span className="text-xs font-normal text-rose-100">Маршрут к {GBP_NAME.split(' - ')[0]}</span>
+              style={{ background: '#e11d48', color: '#fff', padding: '1.1rem', borderRadius: 12, textDecoration: 'none', textAlign: 'center', fontWeight: 800, fontSize: '.95rem' }}>
+              Найти на карте
+              <div style={{ fontWeight: 400, fontSize: '.72rem', opacity: .85, marginTop: 4 }}>Маршрут</div>
             </a>
             <a href={`tel:${PHONE_TEL}`}
-              className="flex flex-col items-center justify-center gap-1 bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg shadow-slate-900/20 text-center">
-              <span className="text-lg">Позвонить мастеру</span>
-              <span className="text-xs font-normal text-slate-400">{PHONE_DISPLAY}</span>
+              style={{ background: C.ink, color: '#fff', padding: '1.1rem', borderRadius: 12, textDecoration: 'none', textAlign: 'center', fontWeight: 800, fontSize: '.95rem' }}>
+              Позвонить мастеру
+              <div style={{ fontWeight: 400, fontSize: '.72rem', opacity: .7, marginTop: 4 }}>{PHONE_DISPLAY}</div>
             </a>
           </div>
         </section>
 
-        {/* ── SEO TEXT BLOCK ───────────────────────────────────────────────── */}
-        <section className="max-w-3xl mx-auto px-4 pt-16 pb-4">
-          <p className="text-sm text-slate-500 leading-relaxed text-center">
-            <strong className="text-slate-700">{GBP_NAME}</strong> — швейное ателье в Liman, Коньяалты, Анталия,
-            обслуживающее русскоязычных клиентов. Ремонт одежды, подгонка по фигуре, замена молнии,
-            индивидуальный пошив, работа с кожей и плотными тканями. Также обслуживаем районы Hurma, Sarısu, Gürsu, Uncalı.
-            Говорим по-русски — пишите в WhatsApp.
+        {/* SEO TEXT */}
+        <section style={{ maxWidth: 680, margin: '3rem auto 0', padding: '0 1.2rem' }}>
+          <p style={{ fontSize: '.88rem', color: C.slate2, lineHeight: 1.8, textAlign: 'center' }}>
+            <strong style={{ color: C.slate }}>{GBP_NAME}</strong> — швейное ателье в Liman, Коньяалты, Анталия.
+            Ремонт одежды, подгонка по фигуре, замена молнии, индивидуальный пошив, работа с кожей.
+            Также обслуживаем Hurma, Sarısu, Gürsu, Uncalı. Говорим по-русски.
           </p>
         </section>
 
-        {/* ── HİZMETLERİMİZ ─────────────────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-4 py-16" aria-labelledby="services-h">
-          <div className="text-center mb-12">
-            <h2 id="services-h" className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Какие услуги мы предоставляем?
-            </h2>
-            <p className="mt-3 text-slate-500 text-sm sm:text-base">
-              Широкий спектр швейных услуг для всех видов мужской, женской и детской одежды.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* SERVICES */}
+        <section style={{ maxWidth: 980, margin: '3rem auto 0', padding: '0 1.2rem' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '1.7rem', fontWeight: 900, marginBottom: '2rem' }}>Какие услуги мы предоставляем?</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 16 }}>
             {[
-              ['🧵', 'Ремонт одежды', 'Укорачивание и подгибка брюк, джинсов, юбок и платьев. Подгонка одежды точно по вашей фигуре.', 'от ₺150'],
-              ['⚡', 'Замена фурнитуры', 'Быстрая и качественная замена сломанных молний, бегунков, пуговиц и заклёпок.', 'от ₺200'],
-              ['✂️', 'Индивидуальный пошив', 'Пошив эксклюзивной одежды по вашим меркам и эскизам. Текстиль, трикотаж, лёгкие ткани.', 'от ₺600'],
-              ['🧥', 'Кожа и тяжёлые ткани', 'Профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.', 'от ₺250'],
-              ['🏡', 'Домашний текстиль', 'Пошив и подгонка штор, тюля, постельного белья, замена чехлов для подушек.', 'от ₺200'],
-              ['🚀', 'Срочный ремонт', 'Нужно исправить вещь сегодня? Свяжитесь с нами для экспресс-ремонта за несколько часов.', 'По запросу'],
+              ['🧵', 'Ремонт одежды', 'Укорачивание брюк, джинсов, юбок, платьев.', 'от ₺150'],
+              ['⚡', 'Замена фурнитуры', 'Молнии, пуговицы, заклёпки.', 'от ₺200'],
+              ['✂️', 'Индивидуальный пошив', 'По вашим меркам и эскизам.', 'от ₺600'],
+              ['🧥', 'Кожа и тяжёлые ткани', 'Куртки, дублёнки, пальто, деним.', 'от ₺250'],
+              ['🏡', 'Домашний текстиль', 'Шторы, тюль, чехлы.', 'от ₺200'],
+              ['🚀', 'Срочный ремонт', 'Экспресс за несколько часов.', 'По запросу'],
             ].map(([icon, title, desc, price]) => (
-              <div key={title} className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
-                <div className="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center font-bold text-lg mb-4">{icon}</div>
-                <h3 className="font-bold text-lg text-slate-900 mb-2">{title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-3">{desc}</p>
-                <span className="inline-block text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md">{price}</span>
+              <div key={title} style={{ background: '#fff', borderRadius: 14, border: `1px solid ${C.border}`, padding: '1.4rem' }}>
+                <div style={{ width: 40, height: 40, background: '#fef3c7', color: '#b45309', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', marginBottom: 12 }}>{icon}</div>
+                <h3 style={{ fontWeight: 800, fontSize: '1.02rem', margin: '0 0 6px' }}>{title}</h3>
+                <p style={{ color: C.slate2, fontSize: '.84rem', lineHeight: 1.6, margin: '0 0 10px' }}>{desc}</p>
+                <span style={{ display: 'inline-block', fontSize: '.74rem', fontWeight: 800, color: '#b45309', background: '#fffbeb', padding: '.25rem .6rem', borderRadius: 6 }}>{price}</span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── NASIL ÇALIŞIR ─────────────────────────────────────────────────── */}
-        <section className="bg-slate-900 text-white py-20 px-4" aria-labelledby="how-h">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 id="how-h" className="text-2xl sm:text-4xl font-extrabold tracking-tight">Как воспользоваться нашими услугами?</h2>
-              <p className="mt-3 text-slate-400 text-sm sm:text-base">Всего 3 простых шага для идеального вида вашей одежды</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                ['1', 'Свяжитесь с нами', 'Напишите в WhatsApp или позвоните. Опишите задачу — назовём предварительную стоимость и сроки.'],
-                ['2', 'Принесите вещь или закажите онлайн', 'Приезжайте в нашу мастерскую в Коньяалты лично или согласуйте детали удалённо.'],
-                ['3', 'Заберите готовое изделие', 'Мастер выполнит работу строго в срок. Одежда будет сидеть идеально!'],
-              ].map(([n, t, d]) => (
-                <div key={n} className="text-center space-y-4">
-                  <div className="w-12 h-12 bg-amber-500 text-slate-950 font-black rounded-full flex items-center justify-center text-xl mx-auto shadow-lg shadow-amber-500/20">{n}</div>
-                  <h3 className="text-lg font-bold">{t}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── SIKÇA SORULAN SORULAR ─────────────────────────────────────────── */}
-        <section className="max-w-4xl mx-auto px-4 py-20" aria-labelledby="faq-h">
-          <div className="text-center mb-12">
-            <h2 id="faq-h" className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Часто задаваемые вопросы</h2>
-            <p className="mt-3 text-slate-500 text-sm sm:text-base">Отвечаем на популярные вопросы наших клиентов</p>
-          </div>
-          <div className="space-y-4">
+        {/* FAQ */}
+        <section style={{ maxWidth: 720, margin: '3.5rem auto 0', padding: '0 1.2rem 4rem' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '1.7rem', fontWeight: 900, marginBottom: '2rem' }}>Часто задаваемые вопросы</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
-              ['📍 Где именно вы находитесь?', `Наша мастерская «${GBP_NAME}» находится в Liman, район Коньяалты. Нажмите «На карте» выше, чтобы построить точный маршрут.`],
-              ['⏱️ Как быстро выполняется ремонт одежды?', 'Простые операции — укорачивание джинсов, мелкий ремонт — обычно занимают от нескольких часов до 1 дня. Сложная подгонка или пошив обсуждаются индивидуально.'],
-              ['💬 Говорите ли вы по-русски или по-английски?', 'Да! Мы активно работаем с иностранными клиентами в Анталии. Пишите в WhatsApp на родном языке.'],
-              ['🧥 Работаете ли вы с кожей и плотными тканями?', 'Да, у нас профессиональное оборудование для кожаных курток, дублёнок, пальто и плотного денима.'],
+              ['📍 Где находится ателье?', `«${GBP_NAME}» находится в Liman, район Коньяалты. Нажмите «На карте» выше для маршрута.`],
+              ['⏱️ Как быстро выполняется ремонт?', 'Простые операции — несколько часов до 1 дня. Сложная подгонка обсуждается индивидуально.'],
+              ['💬 Говорите ли вы по-русски?', 'Да! Пишите в WhatsApp на родном языке.'],
+              ['🧥 Работаете с кожей?', 'Да, профессиональное оборудование для кожи и плотного денима.'],
             ].map(([q, a]) => (
-              <div key={q} className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm">
-                <h3 className="font-bold text-slate-900 mb-2">{q}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{a}</p>
+              <div key={q} style={{ background: '#fff', border: `1px solid ${C.border}`, borderRadius: 12, padding: '1.1rem 1.3rem' }}>
+                <h3 style={{ fontWeight: 800, fontSize: '.95rem', margin: '0 0 6px' }}>{q}</h3>
+                <p style={{ color: C.slate2, fontSize: '.84rem', lineHeight: 1.6, margin: 0 }}>{a}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── DETAYLI ADRES VE HARİTA ──────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-4 pb-24" aria-labelledby="contact-h">
-          <h2 id="contact-h" className="sr-only">Контакты и расположение</h2>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12">
-            <div className="p-6 md:p-10 md:col-span-5 bg-slate-900 text-white flex flex-col justify-between">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-2xl font-black tracking-tight text-amber-400">{GBP_NAME.split(' - ')[0]}</h3>
-                  <p className="text-xs text-slate-400 mt-1">Официальный партнёр платформы SwapHubs</p>
-                </div>
-                <address className="space-y-3 text-sm text-slate-300 not-italic">
-                  <p><strong>📍 Адрес:</strong> Liman, 07070 Konyaaltı/Antalya</p>
-                  <p><strong>⏰ Режим работы:</strong> Пн–Сб 09:00–19:00</p>
-                  <p><strong>📞 Телефон:</strong> <a href={`tel:${PHONE_TEL}`} className="text-amber-400 hover:text-amber-300">{PHONE_DISPLAY}</a></p>
-                  <p><strong>⭐ Рейтинг:</strong> 4.9 / 5 · 94 отзыва</p>
-                </address>
-              </div>
-              <div className="pt-8 flex flex-col gap-3">
-                <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors group">
-                  Открыть в Google Maps <span className="transform group-hover:translate-x-1 transition-transform ml-1">→</span>
-                </a>
-                <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors group">
-                  Написать в WhatsApp <span className="transform group-hover:translate-x-1 transition-transform ml-1">→</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="md:col-span-7 bg-slate-100 min-h-[300px] relative">
-              <iframe
-                src={MAPS_EMBED}
-                width="100%" height="100%"
-                style={{ border: 0, position: 'absolute', inset: 0, minHeight: 300 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`${GBP_NAME} — карта расположения ателье в Коньяалты`}
-                aria-label={`Карта расположения ателье ${GBP_NAME}`}
-              />
-              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 bg-white shadow-lg px-4 py-2.5 rounded-xl text-xs font-bold text-slate-900 flex items-center gap-2 hover:bg-slate-50 transition-colors">
-                📍 Открыть полную карту
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── FOOTER ────────────────────────────────────────────────────────── */}
-        <footer className="bg-slate-950 text-slate-500 py-8 border-t border-slate-900 text-center text-xs">
-          <p>© {new Date().getFullYear()} SwapHubs & {GBP_NAME.split(' - ')[0]}. Все права защищены.</p>
-          <nav className="mt-3 flex justify-center gap-4 flex-wrap">
-            <a href="/terzi" className="text-slate-600 hover:text-amber-400">Terzi Can (TR)</a>
-            <a href="/online-tailor-service" className="text-slate-600 hover:text-amber-400">Online Tailor (EN)</a>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-amber-400">Google Maps</a>
+        {/* FOOTER */}
+        <footer style={{ background: C.ink, color: '#94a3b8', padding: '1.6rem', textAlign: 'center', fontSize: '.74rem' }}>
+          <p style={{ margin: '0 0 .6rem' }}>© {new Date().getFullYear()} SwapHubs & {GBP_NAME.split(' - ')[0]}</p>
+          <nav style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <a href="/terzi" style={{ color: '#64748b', textDecoration: 'none' }}>Terzi Can (TR)</a>
+            <a href="/online-tailor-service" style={{ color: '#64748b', textDecoration: 'none' }}>Online Tailor (EN)</a>
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>Google Maps</a>
           </nav>
-          <p className="mt-2 text-slate-700">Разработано в Анталии с заботой о вашей одежде.</p>
         </footer>
       </div>
     </>
