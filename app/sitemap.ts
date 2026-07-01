@@ -141,7 +141,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                                lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                            lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-
+    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`, lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/ru/atelie-antalya`,                                      lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  }, // ✅ YENİ EKLENDİ
