@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────
 const BASE_URL        = 'https://swaphubs.com';
@@ -17,6 +17,14 @@ const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
 const TODAY           = new Date().toISOString().split('T')[0];
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Хочу узнать об услугах ателье (ремонт/пошив).');
+
+// ─── VIEWPORT (Next.js 14+ Best Practice) ────────────────────────
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0F2417',
+};
 
 // ─── METADATA ────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -63,6 +71,7 @@ export const metadata: Metadata = {
 
 // ─── JSON-LD ─────────────────────────────────────────────────────
 const jsonLd = {
+  // ... (JSON-LD içeriğiniz aynı kalıyor, buraya dokunmadım çünkü kusursuz)
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -147,7 +156,7 @@ export default function RuAtelieAntalyaPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
+      <main style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
         <style>{`
           *{box-sizing:border-box;margin:0;padding:0}
           @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -163,13 +172,20 @@ export default function RuAtelieAntalyaPage() {
           .maps-hover:hover .maps-overlay{opacity:1!important}
         `}</style>
 
+        {/* ── TOP NAV (SEO Crawlability & UX) ── */}
+        <nav style={{ background: '#0F2417', color: '#fff', padding: '12px 16px', display: 'flex', justifyContent: 'center', gap: '16px', fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <a href="/" style={{ opacity: 0.8 }} className="btn">← Главная (SwapHubs)</a>
+          <span style={{ opacity: 0.3 }}>|</span>
+          <a href="/terzi" style={{ opacity: 0.8 }} className="btn">🇹🇷 Türkçe Site</a>
+        </nav>
+
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; ⭐ 4.9 (94 отзыва) &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Пн–Сб 09:00–19:00 &nbsp;·&nbsp; ☎ {PHONE_DISPLAY}
+          🌍 Говорим по-русски &nbsp;·&nbsp; ⭐ 4.9 (94 отзыва) &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Пн–Сб 09:00–19:00
         </div>
 
         {/* ── HERO ── */}
-        <header style={{ background: 'linear-gradient(150deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)', padding: '56px 20px 52px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <header style={{ background: 'linear-gradient(150deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)', padding: '56px 20px 72px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position:'absolute',inset:0,backgroundImage:'radial-gradient(circle at 75% 25%,rgba(74,222,128,.06) 0%,transparent 50%)',pointerEvents:'none' }} />
           <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
             <span className="fu" style={{ display:'inline-block',background:'rgba(74,222,128,.12)',border:'1px solid rgba(74,222,128,.3)',color:'#4ADE80',fontSize:11,fontWeight:700,padding:'5px 16px',borderRadius:20,letterSpacing:1,marginBottom:20,textTransform:'uppercase' }}>
@@ -178,12 +194,12 @@ export default function RuAtelieAntalyaPage() {
 
             <h1 className="fu2" style={{ fontSize:'clamp(28px,5vw,48px)',fontWeight:900,color:'#fff',lineHeight:1.15,marginBottom:14 }}>
               Ателье в Анталии<br />
-              <span style={{ color:'#4ADE80' }}>Говорим по-русски</span>
+              <span style={{ color:'#4ADE80' }}>Ремонт и Пошив Одежды</span>
             </h1>
 
             <p className="fu3" style={{ fontSize:15,color:'rgba(255,255,255,.7)',lineHeight:1.8,marginBottom:32,maxWidth:520,margin:'0 auto 32px' }}>
               Ремонт одежды · Подгонка по фигуре · Замена молнии<br />
-              Пошив на заказ · Химчистка · Выездной портной
+              Пошив на заказ · Химчистка · Выездной портной в Коньяалты
             </p>
 
             {/* 3 главных кнопки */}
@@ -207,17 +223,13 @@ export default function RuAtelieAntalyaPage() {
               <span style={{ color:'#FACC15',fontSize:17 }}>★★★★★</span>
               <strong style={{ color:'#fff' }}>4.9</strong>
               <span>· 94 отзыва</span>
-              <span>·</span>
-              <span>Коньяалты, Анталия</span>
             </div>
           </div>
         </header>
 
-        {/* ── GOOGLE MAPS LISTING CARD — işaretli konum ── */}
-        <section style={{ padding:'0 16px', maxWidth:680, margin:'-24px auto 0', position:'relative', zIndex:10 }}>
+        {/* ── GOOGLE MAPS LISTING CARD ── */}
+        <section style={{ padding:'0 16px', maxWidth:680, margin:'-32px auto 0', position:'relative', zIndex:10 }}>
           <div style={{ background:'#fff',borderRadius:20,boxShadow:'0 8px 40px rgba(0,0,0,.15)',border:'1px solid #E5E7EB',overflow:'hidden' }}>
-
-            {/* Başlık */}
             <div style={{ padding:'18px 20px 14px', borderBottom:'1px solid #F3F4F6' }}>
               <div style={{ display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:8,marginBottom:6 }}>
                 <div>
@@ -234,7 +246,6 @@ export default function RuAtelieAntalyaPage() {
               </div>
             </div>
 
-            {/* Кнопки Maps-стиля */}
             <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8,padding:'12px 16px',borderBottom:'1px solid #F3F4F6' }}>
               {[
                 { href:MAPS_DIRECTIONS,bg:'#1A73E8',icon:'🧭',label:'Маршрут' },
@@ -249,7 +260,6 @@ export default function RuAtelieAntalyaPage() {
               ))}
             </div>
 
-            {/* Карта с пином — клик открывает Google Maps */}
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="maps-hover" style={{ display:'block',position:'relative',height:220 }}>
               <iframe
                 src={MAPS_EMBED}
@@ -265,29 +275,24 @@ export default function RuAtelieAntalyaPage() {
                 </span>
               </div>
             </a>
+          </div>
+        </section>
 
-            {/* Адрес + телефон */}
-            <div style={{ padding:'14px 20px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:10 }}>
-              <div>
-                <div style={{ fontSize:12,fontWeight:600,color:'#374151',marginBottom:2 }}>📍 Liman Mah., Konyaaltı, Antalya 07070</div>
-                <div style={{ fontSize:12,color:'#6B7280' }}>⏰ Пн–Сб 09:00–19:00</div>
-              </div>
-              <div style={{ display:'flex',gap:8 }}>
-                <a href={`tel:${PHONE_TEL}`} className="btn"
-                  style={{ background:'#1A73E8',color:'#fff',padding:'8px 16px',borderRadius:10,fontSize:12,fontWeight:700,display:'flex',alignItems:'center',gap:5 }}>
-                  📞 Позвонить
-                </a>
-                <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn"
-                  style={{ background:'#25D366',color:'#fff',padding:'8px 16px',borderRadius:10,fontSize:12,fontWeight:700,display:'flex',alignItems:'center',gap:5 }}>
-                  💬 WhatsApp
-                </a>
-              </div>
-            </div>
+        {/* ── SEO & ABOUT CONTENT (YENİ EKLENDİ - GOOGLE İÇİN ÇOK ÖNEMLİ) ── */}
+        <section style={{ padding: '52px 16px 20px', maxWidth: 800, margin: '0 auto' }}>
+          <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', border: '1px solid #E8E4DC', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Русскоговорящий портной в Коньяалты (Анталия)</h2>
+            <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, marginBottom: 16 }}>
+              Ищете профессиональное <strong>ателье в Анталии</strong>, где вас поймут с полуслова? <b>Terzi Can</b> — это надежное ателье по ремонту и пошиву одежды, расположенное в самом сердце района Коньяалты (Лиман, Хурма, Сарысу). Мы гордимся тем, что предоставляем высококачественный сервис для местных жителей и экспатов. Вам больше не нужно переживать о языковом барьере: мы свободно общаемся с нашими клиентами на русском языке через WhatsApp.
+            </p>
+            <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7 }}>
+              Наша команда мастеров выполняет любые задачи: от срочного укорачивания джинсов и замены сломанной молнии до сложной подгонки вечерних платьев и мужских костюмов по фигуре. Мы работаем с деликатными тканями, кожей и плотным денимом. Кроме того, мы предлагаем уникальную услугу — <em>выездной портной в Анталии</em>. Мы сами приедем к вам домой или в отель, заберем вещи на ремонт или в химчистку, и вернем их в идеальном состоянии уже на следующий день.
+            </p>
           </div>
         </section>
 
         {/* ── УСЛУГИ ── */}
-        <section style={{ padding:'52px 16px',maxWidth:800,margin:'0 auto' }}>
+        <section style={{ padding:'32px 16px',maxWidth:800,margin:'0 auto' }}>
           <div style={{ textAlign:'center',marginBottom:32 }}>
             <h2 style={{ fontSize:26,fontWeight:800,color:'#111',marginBottom:8 }}>Наши услуги</h2>
             <p style={{ fontSize:13,color:'#6B7280' }}>Профессиональный ремонт и пошив одежды для русскоязычных клиентов</p>
@@ -311,7 +316,7 @@ export default function RuAtelieAntalyaPage() {
         <section style={{ padding:'48px 16px',background:'#111827',color:'#fff' }}>
           <div style={{ maxWidth:700,margin:'0 auto',textAlign:'center' }}>
             <h2 style={{ fontSize:24,fontWeight:800,marginBottom:8 }}>Как это работает?</h2>
-            <p style={{ fontSize:13,color:'rgba(255,255,255,.6)',marginBottom:32 }}>3 простых шага</p>
+            <p style={{ fontSize:13,color:'rgba(255,255,255,.6)',marginBottom:32 }}>3 простых шага к идеальной одежде</p>
             <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:16 }}>
               {[
                 { n:'1',t:'Напишите нам',d:'WhatsApp или звонок — опишите задачу, получите цену за несколько минут.' },
@@ -378,7 +383,7 @@ export default function RuAtelieAntalyaPage() {
           <a href={`tel:${PHONE_TEL}`} className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#1C1C1E',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(0,0,0,.3)' }}>📞</a>
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#25D366',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
         </div>
-      </div>
+      </main>
     </>
   );
 }
