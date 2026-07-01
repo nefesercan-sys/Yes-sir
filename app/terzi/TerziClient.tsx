@@ -835,3 +835,4 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
     </>
   );
 }
+ 
