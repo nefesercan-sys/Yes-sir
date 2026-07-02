@@ -1,9 +1,3 @@
-// app/sitemap-terzi.xml/route.ts
-// DÜZELTİLDİ:
-//  1. /ru/atelie-antalya-online → /ru/atelie-antalya (doğru URL)
-//  2. /online-tailor-service build hatasını önlemek için eklendi (⁸ char taşıma)
-//  3. /antalya-terzi-elbise-dikimi eklendi (önceden eksikti)
-//  4. fermuar-degisimi-antalya ve gelinlik-tadilati-antalya eklendi
 import { NextResponse } from 'next/server'
 
 const BASE = 'https://swaphubs.com'
@@ -12,6 +6,11 @@ export const dynamic = 'force-dynamic'
 const terziSayfalar = [
   // ── Ana terzi sayfası ──────────────────────────────────────────────
   { url: `${BASE}/terzi`,                                                   priority: '1.0',  freq: 'weekly' },
+
+  // ── YENİ: Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ─────────────
+  // Botların ve yapay zeka tarayıcılarının bu güçlü sayfaları sürekli kontrol etmesi için eklendi
+  { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '1.0',  freq: 'daily' },
+  { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,      priority: '0.95', freq: 'weekly' },
 
   // ── Antalya Alt Hizmet Sayfaları ───────────────────────────────────
   { url: `${BASE}/terzi/paca-kisaltma-antalya`,                             priority: '0.95', freq: 'weekly' },
@@ -48,9 +47,7 @@ const terziSayfalar = [
   { url: `${BASE}/online-terzi-servisi`,                                    priority: '0.9',  freq: 'weekly' },
 
   // ── Rusça Sayfa ────────────────────────────────────────────────────
-  // DÜZELTİLDİ: /ru/atelie-antalya-online → /ru/atelie-antalya
-  // Önceki versiyonda yanlış URL yazılmıştı. Sayfanın canonical'i ve
-  // gerçek app klasörü /ru/atelie-antalya — sitemap bununla tutarlı olmalı.
+  // DÜZELTİLDİ: Canonical yapısı ile tam uyumlu hale getirildi
   { url: `${BASE}/ru/atelie-antalya`,                                       priority: '0.9',  freq: 'weekly' },
 
   // ── Doğal Keten/Pamuk ─────────────────────────────────────────────
