@@ -4,6 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        // 1. GENEL ARAMA MOTORLARI VE STANDART BOTLAR
         userAgent: '*',
         allow: '/',
         disallow: [
@@ -28,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       {
+        // 2. GOOGLE'IN KLASİK ARAMA BOTU
         userAgent: 'Googlebot',
         allow: '/',
         disallow: [
@@ -44,6 +46,23 @@ export default function robots(): MetadataRoute.Robots {
           '/online-terzi-hizmeti/client',
         ],
       },
+      {
+        // 3. GEMINI VE GOOGLE YAPAY ZEKÂ MODELLERİ (AEO İÇİN KRİTİK)
+        userAgent: 'Google-Extended',
+        allow: '/',
+      },
+      {
+        // 4. CHATGPT VE OPENAI BOTLARI
+        // ChatGPT'nin web araması yaparken siteni okuyabilmesi için
+        userAgent: ['GPTBot', 'ChatGPT-User'],
+        allow: '/',
+      },
+      {
+        // 5. PERPLEXITY AI BOTU
+        // Dünyanın en popüler AI arama motorunun siteni referans göstermesi için
+        userAgent: 'PerplexityBot',
+        allow: '/',
+      },
     ],
     sitemap: [
       'https://swaphubs.com/sitemap.xml',
@@ -51,7 +70,7 @@ export default function robots(): MetadataRoute.Robots {
       'https://swaphubs.com/sitemap-ilanlar.xml',
       'https://swaphubs.com/sitemap-sektorler.xml',
       'https://swaphubs.com/sitemap-meslekler.xml',
-      'https://swaphubs.com/sitemap-bal.xml',
+      'https://swaphubs.com/sitemap-balKontrol.xml',
     ],
     host: 'https://swaphubs.com',
   }
