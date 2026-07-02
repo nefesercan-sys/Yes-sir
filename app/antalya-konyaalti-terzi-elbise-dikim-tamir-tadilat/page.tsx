@@ -3,7 +3,7 @@ import Script from 'next/script';
 
 // ── SEO METADATA (Google Arama Sonuçlarında Görünecek Kısım) ──
 export const metadata: Metadata = {
-  title: 'Antalya Konyaaltı Terzi | Konyaaltı Terzi 0531 898 64 18 | Dikim Tamir Tadilat Ütü Hizmeti',
+  title: 'Antalya Konyaaltı Terzi | Dikim, Tamir ve Tadilat | 0531 898 64 18',
   description: 'Antalya Konyaaltı profesyonel terzi servisi. Özel elbise dikimi, tamir, tadilat ve ütü hizmeti. Hızlı servis için hemen arayın: 0531 898 64 18',
   keywords: 'antalya konyaaltı terzi, elbise dikim antalya, terzi tamir tadilat, konyaaltı ütü servisi, liman mahallesi terzi, hurma terzi, Konyaaltında terzi, fermuar tamiri, paca kisaltma terzi, bel daraltma, uncalı terzi, terzi fiyatlari',
   openGraph: {
