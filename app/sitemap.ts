@@ -123,6 +123,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ── Terzi Ana Sayfa ──
     { url: `${BASE_URL}/terzi`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 1.0 },
 
+    // ── YENİ: AEO VE YEREL SEO MASTER SAYFASI (YAPAY ZEKA İÇİN KRİTİK) ──
+    { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`, lastModified: new Date('2026-07-02'), changeFrequency: 'daily', priority: 1.0 },
+
     // ── Terzi Alt Hizmet Sayfaları ──
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,     lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,         lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
@@ -141,11 +144,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                                lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                            lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,     lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${BASE_URL}antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`, lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
+    
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/ru/atelie-antalya`,                                      lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  }, // ✅ YENİ EKLENDİ
+    { url: `${BASE_URL}/ru/atelie-antalya`,                                      lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
 
     // ── Bal & Arım Balım Sayfaları ──
     { url: `${BASE_URL}/bal`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
