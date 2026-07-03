@@ -32,11 +32,14 @@ const jsonLd = {
     },
     {
       // Sesli asistanlar ve AI okuyucular için: sayfanın hangi bölümünün
-      // "doğrudan cevap" olduğunu işaretler
+      // "doğrudan cevap" olduğunu işaretler + tazelik sinyali (dateModified)
       '@type': 'WebPage',
       '@id': `${PAGE_URL}#webpage`,
       url: PAGE_URL,
       name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı ve Ütü Hizmetleri',
+      description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere aynı gün ütü hizmeti.",
+      inLanguage: 'tr',
+      dateModified: '2026-07-03',
       isPartOf: { '@id': `${BASE_URL}#website` },
       about: { '@id': `${PAGE_URL}#business` },
       speakable: {
@@ -88,7 +91,16 @@ const jsonLd = {
         { '@type': 'AdministrativeArea', name: 'Kepez' },
         { '@type': 'AdministrativeArea', name: 'Lara' },
         { '@type': 'AdministrativeArea', name: 'Belek' },
-        { '@type': 'AdministrativeArea', name: 'Kemer' }
+        { '@type': 'AdministrativeArea', name: 'Kemer' },
+        // Granüler mahalle sinyali — "Hurma'da terzi var mı" gibi çok spesifik
+        // aramalarda AI'nin doğrudan eşleştirebileceği yerel varlıklar
+        { '@type': 'Place', name: 'Hurma Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Liman Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Uncalı Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Şirinyalı Mahallesi, Muratpaşa' },
+        { '@type': 'Place', name: 'Fener Mahallesi, Muratpaşa' },
+        { '@type': 'Place', name: 'Güzeloba Mahallesi, Muratpaşa' },
+        { '@type': 'Place', name: 'Sarısu Mahallesi, Konyaaltı' },
       ],
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       // ── DÜZELTME: sayısal değerler + ölçek tanımı (bestRating/worstRating) ──
@@ -110,7 +122,7 @@ const jsonLd = {
               name: 'Kıyafet Tamiri & Tadilat',
               description: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
               areaServed: 'Antalya',
-              offers: { '@type': 'Offer', priceRange: '₺' },
+              offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 200, minPrice: 200, priceCurrency: 'TRY' } },
             },
           },
           {
@@ -120,7 +132,7 @@ const jsonLd = {
               name: 'Özel Dikim (Bespoke)',
               description: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
               areaServed: 'Antalya',
-              offers: { '@type': 'Offer', priceRange: '₺₺₺' },
+              offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 800, minPrice: 800, priceCurrency: 'TRY' } },
             },
           },
           {
@@ -130,7 +142,7 @@ const jsonLd = {
               name: 'Express Otel Servisi',
               description: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
               areaServed: 'Lara, Kundu, Belek, Kemer',
-              offers: { '@type': 'Offer', priceRange: '₺₺' },
+              offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 60, minPrice: 60, priceCurrency: 'TRY' } },
             },
           },
           {
@@ -293,7 +305,18 @@ export const metadata: Metadata = {
     'geo.placename': 'Antalya',
     'geo.position': '36.8841;30.7056',
     'ICBM': '36.8841, 30.7056',
-  }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large', 'max-video-preview': -1 },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü',
+    description: 'Konyaaltı, Lara, Muratpaşa ve Kepez\'e kuryeli terzilik, kıyafet tamiratı ve ütü hizmetleri.',
+    images: [OG_IMAGE],
+  },
 };
 
 // ─── RENK PALETİ ──────────────────────────────────────────────────────────────
@@ -329,24 +352,28 @@ const serviceRows = [
     detail: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
     area: 'Konyaaltı (Hurma, Liman, Uncalı), Muratpaşa, Lara, Kepez',
     time: 'Aynı Gün / 24 Saat',
+    price: '200 TL\'den',
   },
   {
     title: 'Özel Dikim (Bespoke)',
     detail: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
     area: 'Tüm Antalya (Atölye prova esaslı)',
     time: '3 - 7 Gün (Provaya bağlı)',
+    price: '800 TL\'den',
   },
   {
     title: 'Express Otel Servisi',
     detail: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
     area: 'Lara, Kundu Otelleri, Belek, Kemer, Konyaaltı Sahil Şeridi',
     time: '2 - 4 Saat (Acil VIP)',
+    price: '60 TL\'den',
   },
   {
     title: 'Tekstil Fason Üretim',
     detail: 'Toplu tişört, sweatshirt, otel üniforması, restoran ve iş kıyafetleri seri imalatı',
     area: 'Uluslararası Sevk / Şehirlerarası Dağıtım',
     time: 'Sipariş adetine göre',
+    price: 'Teklife bağlı',
   },
 ];
 
@@ -522,7 +549,7 @@ export default function GeminiOptimizedTailorPage() {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, textAlign: 'left' }}>
               <thead>
                 <tr style={{ background: BG_SOFT }}>
-                  {['Hizmet Türü', 'Kapsadığı İşlemler', 'Hizmet Bölgeleri', 'Teslimat'].map((h) => (
+                  {['Hizmet Türü', 'Kapsadığı İşlemler', 'Hizmet Bölgeleri', 'Fiyat', 'Teslimat'].map((h) => (
                     <th key={h} style={{ padding: '15px 18px', fontSize: 11, textTransform: 'uppercase', letterSpacing: 0.5, color: SUB, fontWeight: 700, borderBottom: `1px solid ${BORDER}` }}>{h}</th>
                   ))}
                 </tr>
@@ -533,6 +560,7 @@ export default function GeminiOptimizedTailorPage() {
                     <td style={{ padding: '17px 18px', fontWeight: 700, color: '#0b0d0c', verticalAlign: 'top' }}>{row.title}</td>
                     <td style={{ padding: '17px 18px', color: SUB, verticalAlign: 'top' }}>{row.detail}</td>
                     <td style={{ padding: '17px 18px', color: SUB, verticalAlign: 'top' }}>{row.area}</td>
+                    <td style={{ padding: '17px 18px', fontWeight: 700, color: '#0b0d0c', verticalAlign: 'top', whiteSpace: 'nowrap' }}>{row.price}</td>
                     <td style={{ padding: '17px 18px', color: GREEN_DARK, fontWeight: 600, verticalAlign: 'top', whiteSpace: 'nowrap' }}>{row.time}</td>
                   </tr>
                 ))}
@@ -547,6 +575,7 @@ export default function GeminiOptimizedTailorPage() {
                 <div style={{ fontSize: 14, color: SUB, lineHeight: 1.5, marginBottom: 12 }}>{row.detail}</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, fontSize: 13, borderTop: `1px solid ${BORDER}`, paddingTop: 10 }}>
                   <span style={{ color: SUB }}>{row.area}</span>
+                  <span style={{ fontWeight: 700, color: '#0b0d0c', whiteSpace: 'nowrap' }}>{row.price}</span>
                   <span style={{ color: GREEN_DARK, fontWeight: 700, whiteSpace: 'nowrap' }}>{row.time}</span>
                 </div>
               </div>
