@@ -1,5 +1,6 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -24,6 +25,25 @@ const jsonLd = {
       name: 'SwapHubs',
       url: BASE_URL,
       inLanguage: ['tr', 'en', 'ru', 'de'],
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${BASE_URL}/search?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      // Sesli asistanlar ve AI okuyucular için: sayfanın hangi bölümünün
+      // "doğrudan cevap" olduğunu işaretler
+      '@type': 'WebPage',
+      '@id': `${PAGE_URL}#webpage`,
+      url: PAGE_URL,
+      name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı ve Ütü Hizmetleri',
+      isPartOf: { '@id': `${BASE_URL}#website` },
+      about: { '@id': `${PAGE_URL}#business` },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.sh-speakable'],
+      },
     },
     {
       '@type': 'BreadcrumbList',
@@ -91,6 +111,7 @@ const jsonLd = {
               name: 'Kıyafet Tamiri & Tadilat',
               description: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
               areaServed: 'Antalya',
+              offers: { '@type': 'Offer', priceRange: '₺' },
             },
           },
           {
@@ -100,6 +121,7 @@ const jsonLd = {
               name: 'Özel Dikim (Bespoke)',
               description: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
               areaServed: 'Antalya',
+              offers: { '@type': 'Offer', priceRange: '₺₺₺' },
             },
           },
           {
@@ -109,6 +131,7 @@ const jsonLd = {
               name: 'Express Otel Servisi',
               description: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
               areaServed: 'Lara, Kundu, Belek, Kemer',
+              offers: { '@type': 'Offer', priceRange: '₺₺' },
             },
           },
           {
@@ -122,6 +145,41 @@ const jsonLd = {
           },
         ],
       },
+    },
+    {
+      // Gemini/AI Overviews "nasıl sipariş verilir" tarzı süreç sorularında HowTo'yu direkt kullanır
+      '@type': 'HowTo',
+      '@id': `${PAGE_URL}#howto`,
+      name: 'Antalya\'da Kuryeli Terzi Hizmetinden Nasıl Yararlanılır',
+      description: 'SwapHubs kuryeli terzi hizmetinden adım adım nasıl faydalanacağınızı gösterir.',
+      totalTime: 'PT15M',
+      step: [
+        {
+          '@type': 'HowToStep',
+          name: 'WhatsApp üzerinden iletişime geçin',
+          text: 'Kıyafetinizin fotoğrafını ve talebinizi WhatsApp hattına gönderin, 15 dakika içinde fiyat teklifi alın.',
+        },
+        {
+          '@type': 'HowToStep',
+          name: 'Adres ve zaman belirleyin',
+          text: 'Konyaaltı, Muratpaşa, Lara veya Kepez bölgesinde adresinizi paylaşın, kurye size uygun saati ayarlasın.',
+        },
+        {
+          '@type': 'HowToStep',
+          name: 'Kuryeli alım',
+          text: 'Kıyafetiniz evinizden veya otelinizden kuryeli araçla alınır, atölyeye güvenli şekilde ulaştırılır.',
+        },
+        {
+          '@type': 'HowToStep',
+          name: 'İşlem ve kalite kontrolü',
+          text: 'Tamirat, dikim veya ütü işlemi atölyede tamamlanır, teslim öncesi kalite kontrolünden geçirilir.',
+        },
+        {
+          '@type': 'HowToStep',
+          name: 'Adrese teslimat',
+          text: 'İşlem tamamlanan kıyafet aynı gün içinde askılı olarak adresinize veya otelinize teslim edilir.',
+        },
+      ],
     },
     {
       '@type': 'FAQPage',
@@ -174,6 +232,30 @@ const jsonLd = {
             '@type': 'Answer',
             text: 'Konyaaltı (Hurma, Liman, Uncalı, Şirinyalı), Muratpaşa, Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz.'
           }
+        },
+        {
+          '@type': 'Question',
+          name: 'Takım elbise paçasını ne kadar sürede kısaltıyorsunuz?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Standart paça kısaltma işlemleri aynı gün içinde, genellikle 2-4 saat içinde tamamlanır. Kuryeli alım ile birlikte toplam süreç otel misafirleri için ideraldir.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Kumaşıma göre farklı bakım öneriyor musunuz?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Evet, yün, keten, ipek ve sentetik karışım kumaşlar farklı ütü sıcaklığı ve dikim tekniği gerektirir. Atölyemizde her kumaş türüne uygun ekipman ve teknik kullanılır.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Ödeme nasıl yapılıyor?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Teslimat sırasında nakit veya kart ile ödeme yapılabilir; kurumsal ve otel siparişlerinde fatura karşılığı ödeme seçenekleri de sunulmaktadır.'
+          }
         }
       ]
     }
@@ -193,7 +275,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: PAGE_URL,
-    languages: { 'tr': PAGE_URL, 'en': PAGE_URL, 'ru': PAGE_URL, 'x-default': PAGE_URL },
+    // DÜZELTME: bu sayfa yalnızca Türkçe. 'en'/'ru' aynı URL'i işaret ederse
+    // Google'a yanlış dil sinyali gider. Gerçek Rusça sürüm ayrı bir sayfadaysa
+    // (örn. /ru/atelie-antalya-online) onu buraya ekleyin; yoksa sadece x-default bırakın.
+    languages: { 'tr-TR': PAGE_URL, 'x-default': PAGE_URL },
   },
   openGraph: {
     title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | SwapHubs',
@@ -300,6 +385,32 @@ const faqs = [
   },
 ];
 
+const processSteps = [
+  { n: '01', title: 'WhatsApp\'tan Yazın', text: 'Kıyafet fotoğrafınızı gönderin, 15 dakika içinde teklif alın.' },
+  { n: '02', title: 'Adres Paylaşın', text: 'Konyaaltı, Lara, Muratpaşa veya Kepez\'de adresinizi belirtin.' },
+  { n: '03', title: 'Kuryeli Alım', text: 'Kıyafetiniz evinizden veya otelinizden güvenle alınır.' },
+  { n: '04', title: 'Atölyede İşlem', text: 'Tamirat, dikim veya ütü işlemi kalite kontrolüyle tamamlanır.' },
+  { n: '05', title: 'Aynı Gün Teslimat', text: 'İşlem biten kıyafet askılı olarak kapınıza teslim edilir.' },
+];
+
+// TODO: Buradaki src yollarını GBP'deki gerçek fotoğraflarınızla değiştirin.
+// Gerçek görsel + doğru alt metin, Google Görseller ve AI grounding için önemli bir sinyaldir.
+const galleryImages = [
+  { src: '/images/terzi/atolye-terzi-can-tabela.jpg', alt: 'Terzi Can atölye tabelası, Konyaaltı Antalya dikim ve tadilat atölyesi' },
+  { src: '/images/terzi/dikim-masasi-ekipman.jpg', alt: 'Antalya terzi atölyesinde dikim masası ve profesyonel dikiş makinesi' },
+  { src: '/images/terzi/ozel-dikim-ornek.jpg', alt: 'SwapHubs özel dikim takım elbise ve yazlık kıyafet örnekleri' },
+  { src: '/images/terzi/abiye-tadilat-detay.jpg', alt: 'Abiye ve gece elbisesi tadilat detay çalışması Antalya terzi' },
+];
+
+const districtBlurbs = [
+  { name: 'Hurma', text: 'Sahil şeridine yakın site ve villalara aynı gün kuryeli alım.' },
+  { name: 'Liman', text: 'Liman mahallesindeki iş yerlerine ve konutlara hızlı teslimat.' },
+  { name: 'Uncalı', text: 'Uncalı\'daki yoğun apartman bölgelerinde randevulu kurye servisi.' },
+  { name: 'Şirinyalı', text: 'Otel yoğun bölgede VIP acil ütü ve tadilat hizmeti önceliklidir.' },
+  { name: 'Fener', text: 'Fener sahil bölgesine özel akşam saatlerinde teslimat imkanı.' },
+  { name: 'Güzeloba', text: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
+];
+
 export default function GeminiOptimizedTailorPage() {
   return (
     <>
@@ -314,6 +425,9 @@ export default function GeminiOptimizedTailorPage() {
           .sh-table { display:none; }
           .sh-cards { display:flex !important; }
           .sh-trust { grid-template-columns: 1fr 1fr !important; }
+          .sh-steps { grid-template-columns: 1fr 1fr !important; }
+          .sh-gallery { grid-template-columns: 1fr 1fr !important; }
+          .sh-districts { grid-template-columns: 1fr !important; }
         }
         @media (min-width: 721px) {
           .sh-cards { display:none; }
@@ -345,7 +459,7 @@ export default function GeminiOptimizedTailorPage() {
             Antalya Terzi, Özel Dikim, Kıyafet Tamiratı ve Ütü Hizmetleri
           </h1>
 
-          <p style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
+          <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
             <strong>Kısa cevap:</strong> TERZİ Tailor Atelie (SwapHubs), Antalya Konyaaltı'da (Sarısu, Hurma,
             Liman) 5.0 puanla hizmet veren, kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere
             aynı gün ütü/tamirat hizmeti sunan yerel bir terzi atölyesidir; her gün 09:00–23:30 açıktır.
@@ -441,6 +555,39 @@ export default function GeminiOptimizedTailorPage() {
           </div>
         </section>
 
+        {/* SÜREÇ / NASIL ÇALIŞIR (HowTo şemasıyla eşleşir) */}
+        <section style={{ marginBottom: 48 }}>
+          <h2 style={{ fontSize: 23, fontWeight: 800, marginBottom: 6, color: '#0b0d0c' }}>
+            Nasıl Çalışır
+          </h2>
+          <p style={{ fontSize: 14.5, color: SUB, marginBottom: 20 }}>
+            Kıyafetinizi elinize almadan, 5 adımda kapınızdan alıp kapınıza teslim ediyoruz.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 14 }} className="sh-steps">
+            {processSteps.map((s) => (
+              <div key={s.n} style={{ border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 14px', background: '#fff' }}>
+                <div style={{ fontSize: 12, fontWeight: 800, color: GREEN, marginBottom: 8 }}>{s.n}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#0b0d0c', marginBottom: 6 }}>{s.title}</div>
+                <div style={{ fontSize: 12.5, color: SUB, lineHeight: 1.5 }}>{s.text}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* GÖRSEL GALERİ */}
+        <section style={{ marginBottom: 48 }}>
+          <h2 style={{ fontSize: 23, fontWeight: 800, marginBottom: 18, color: '#0b0d0c' }}>
+            Atölyeden Kareler
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }} className="sh-gallery">
+            {galleryImages.map((img) => (
+              <div key={img.src} style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 14, overflow: 'hidden', border: `1px solid ${BORDER}`, background: BG_SOFT }}>
+                <Image src={img.src} alt={img.alt} fill loading="lazy" style={{ objectFit: 'cover' }} sizes="(max-width: 720px) 50vw, 25vw" />
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* DETAY İÇERİK */}
         <article style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
           <section>
@@ -467,7 +614,53 @@ export default function GeminiOptimizedTailorPage() {
               hatası ve maksimum konfor ile çalışıyoruz.
             </p>
           </section>
+          <section>
+            <h2 style={{ fontSize: 21, fontWeight: 800, marginBottom: 10, color: '#0b0d0c' }}>
+              Kumaş Türüne Göre Bakım ve Dikim Yaklaşımı
+            </h2>
+            <p style={{ fontSize: 15.5, lineHeight: 1.7, color: SUB, margin: 0 }}>
+              Her kumaş farklı davranır: <strong style={{ color: INK }}>yün ve tüvit</strong> takım elbiseler
+              düşük sıcaklıkta buharlı ütü ister, aksi halde parlama yapar. <strong style={{ color: INK }}>İpek ve
+              saten</strong> abiyeler elde dikiş ve nazik pres gerektirir. <strong style={{ color: INK }}>Keten ve
+              pamuklu</strong> yazlık kıyafetler yüksek ısıya dayanıklıdır ama hızlı kırışır, bu yüzden teslimattan
+              hemen önce ütülenir. <strong style={{ color: INK }}>Deri ve süet</strong> parçalarda ise ısı hiç
+              kullanılmaz; onun yerine özel yağlar ve dikiş teknikleriyle şekillendirme yapılır. Atölyemizde her
+              parça bu farklara göre değerlendirilip uygun yöntemle işlenir.
+            </p>
+          </section>
+
+          <section>
+            <h2 style={{ fontSize: 21, fontWeight: 800, marginBottom: 10, color: '#0b0d0c' }}>
+              Atölye Hakkında
+            </h2>
+            <p style={{ fontSize: 15.5, lineHeight: 1.7, color: SUB, margin: 0 }}>
+              TERZİ Tailor Atelie, Konyaaltı Sarısu'da faaliyet gösteren, geleneksel terzilik ustalığını
+              modern lojistik altyapıyla birleştiren bir atölyedir. Amacımız, Antalya'da yaşayanların ve
+              bölgeyi ziyaret eden turistlerin kıyafet ihtiyaçlarını en kısa sürede, atölyeye gitmeden
+              çözebilmelerini sağlamak. Otel misafirlerinden yerel esnafa, gelinlik tadilatından günlük
+              paça kısaltmaya kadar geniş bir yelpazede hizmet veriyoruz.
+            </p>
+          </section>
         </article>
+
+        {/* MAHALLE BAZLI HİZMET BLOKLARI (iç linkleme + yerel sinyal) */}
+        <section style={{ marginTop: 48 }}>
+          <h2 style={{ fontSize: 21, fontWeight: 800, marginBottom: 6, color: '#0b0d0c' }}>
+            Konyaaltı Mahallelerinde Hizmet Detayları
+          </h2>
+          <p style={{ fontSize: 14.5, color: SUB, marginBottom: 18 }}>
+            Her mahallenin kendine özgü teslimat koşulları vardır — bölgenize özel sayfayı inceleyin.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }} className="sh-districts">
+            {districtBlurbs.map((d) => (
+              // TODO: href'i gerçek mahalle sayfası slug'ınızla değiştirin (örn. /terzi/konyaalti/hurma)
+              <a key={d.name} href={`/terzi/konyaalti/${d.name.toLocaleLowerCase('tr-TR')}`} style={{ display: 'block', border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 16px', textDecoration: 'none', background: '#fff', transition: 'border-color .15s' }}>
+                <div style={{ fontSize: 14.5, fontWeight: 700, color: '#0b0d0c', marginBottom: 6 }}>{d.name} Terzi</div>
+                <div style={{ fontSize: 13, color: SUB, lineHeight: 1.5 }}>{d.text}</div>
+              </a>
+            ))}
+          </div>
+        </section>
 
         {/* FAQ */}
         <section style={{ marginTop: 52, paddingTop: 36, borderTop: `1px solid ${BORDER}` }}>
