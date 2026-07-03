@@ -1,6 +1,5 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -581,9 +580,24 @@ export default function GeminiOptimizedTailorPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }} className="sh-gallery">
             {galleryImages.map((img) => (
-              <div key={img.src} style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 14, overflow: 'hidden', border: `1px solid ${BORDER}`, background: BG_SOFT }}>
-                <Image src={img.src} alt={img.alt} fill loading="lazy" style={{ objectFit: 'cover' }} sizes="(max-width: 720px) 50vw, 25vw" />
-              </div>
+              <div
+                key={img.src}
+                style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 14, overflow: 'hidden', border: `1px solid ${BORDER}`, background: BG_SOFT }}
+                // Server Component içinde JS olmadan çalışan güvenli görsel yedeği:
+                // resim yüklenemezse tarayıcı native "onerror" ile kendini gizler,
+                // altındaki placeholder görünür hale gelir. Ayrı client component gerekmez.
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    <img src="${img.src}" alt="${img.alt}" loading="lazy"
+                      style="width:100%;height:100%;object-fit:cover;display:block"
+                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                    <div style="display:none;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:${BG_SOFT};padding:12px;text-align:center;position:absolute;inset:0;">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${GREEN_DARK}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l4.5-6 3.5 4.5 2.5-3L20 16M4 6h16v12H4V6z" /></svg>
+                      <span style="font-size:11.5px;color:${SUB};line-height:1.4;">Fotoğraf yakında eklenecek</span>
+                    </div>
+                  `,
+                }}
+              />
             ))}
           </div>
         </section>
