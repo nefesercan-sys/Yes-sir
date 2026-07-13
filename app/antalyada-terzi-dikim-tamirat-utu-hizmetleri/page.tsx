@@ -6,7 +6,9 @@ const BASE_URL  = 'https://swaphubs.com';
 const PAGE_URL  = `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`;
 const PHONE     = '+90 531 898 64 18';
 const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terzi%20ve%20ütü%20hizmetiniz%20hakkında%20bilgi%20almak%20istiyorum.`;
-const OG_IMAGE  = `${BASE_URL}/og/antalya-tailor-online.jpg`;
+// DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
+// önizlemesi). Gerçekten var olan dosyaya bağlandı.
+const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
 const GBP_CID   = '16306058881247995687'; // doğrulanmış Google Business Profile
 const GBP_URL   = `https://www.google.com/maps?cid=${GBP_CID}`;
 
@@ -419,13 +421,14 @@ const processSteps = [
   { n: '05', title: 'Aynı Gün Teslimat', text: 'İşlem biten kıyafet askılı olarak kapınıza teslim edilir.' },
 ];
 
-// TODO: Buradaki src yollarını GBP'deki gerçek fotoğraflarınızla değiştirin.
-// Gerçek görsel + doğru alt metin, Google Görseller ve AI grounding için önemli bir sinyaldir.
+// DÜZELTME: Önceki sürümdeki dosya adları (atolye-terzi-can-tabela.jpg vb.)
+// public/images/terzi/ altında hiç yoktu, galeri kırık gösteriyordu.
+// public/ içinde zaten gerçek atölye fotoğrafları mevcuttu — onlara bağlandı.
 const galleryImages = [
-  { src: '/images/terzi/atolye-terzi-can-tabela.jpg', alt: 'Terzi Can atölye tabelası, Konyaaltı Antalya dikim ve tadilat atölyesi' },
-  { src: '/images/terzi/dikim-masasi-ekipman.jpg', alt: 'Antalya terzi atölyesinde dikim masası ve profesyonel dikiş makinesi' },
-  { src: '/images/terzi/ozel-dikim-ornek.jpg', alt: 'SwapHubs özel dikim takım elbise ve yazlık kıyafet örnekleri' },
-  { src: '/images/terzi/abiye-tadilat-detay.jpg', alt: 'Abiye ve gece elbisesi tadilat detay çalışması Antalya terzi' },
+  { src: '/images/terzi/card-atolye.jpg', alt: 'TERZİ Tailor Atelie, Konyaaltı Antalya dikim ve tadilat atölyesi' },
+  { src: '/images/terzi/card-tadilat.jpg', alt: 'Antalya terzi atölyesinde kıyafet tamiri ve tadilat çalışması' },
+  { src: '/images/terzi/card-bay-terzi.jpg', alt: 'SwapHubs erkek terzi hizmeti, takım elbise dikim ve tadilat' },
+  { src: '/images/terzi/card-gelinlik.jpg', alt: 'Gelinlik ve abiye tadilat detay çalışması Antalya terzi' },
 ];
 
 const districtBlurbs = [
