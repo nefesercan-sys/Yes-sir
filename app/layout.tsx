@@ -30,7 +30,8 @@ export const viewport: Viewport = {
 // FIX 2: og-image.svg → og-image.jpg — sosyal medya SVG önizleme göstermiyor.
 // FIX 3: keywords dizisi layout'tan kaldırıldı — her sayfa kendi keywords'ünü tanımlıyor.
 // FIX 4: Organization.logo → logo.png (512×512), og-image ayrı "image" alanında.
-// FIX 5: google verification placeholder — gerçek kodu aşağıya yapıştırın.
+// FIX 5: google verification placeholder kaldırıldı — site DNS üzerinden zaten doğrulanmış,
+//        placeholder hiç kullanılmıyordu ve sayfa kaynağında görünüyordu (2026-07-13 çözüldü).
 // FIX 6 (YENİ): hreflang dil alternantları eklendi — tr/en/ru sayfaları birbirine
 //         işaret ediyor artık. Daha önce sadece canonical vardı, hreflang yoktu.
 //         Bu, Google'a "bu sayfaların aynı içeriğin farklı dil versiyonları olduğunu"
@@ -60,12 +61,16 @@ export const metadata: Metadata = {
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
-    // FIX 7: alternateLocale eklendi — İngilizce ve Rusça sayfalar artık global OG sinyali veriyor
     alternateLocale: ["en_US", "ru_RU"],
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og-image.jpg",
+        // DÜZELTME: "/og-image.jpg" public/ içinde yoktu (sadece .svg vardı,
+        // SVG çoğu sosyal medya kartında render edilmez — WhatsApp/Facebook/Twitter
+        // önizlemesi kırık çıkıyordu). Gerçekten var olan bir görsele bağlandı.
+        // TODO: SwapHubs geneli için 1200×630 boyutunda özel bir og-image.jpg
+        // tasarlanıp public/ köküne eklenmeli — bu, geçici/en iyi mevcut çözüm.
+        url: "https://swaphubs.com/og/terzi-can.jpg",
         width: 1200,
         height: 630,
         alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
@@ -79,7 +84,7 @@ export const metadata: Metadata = {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    images: ["https://swaphubs.com/og-image.jpg"],
+    images: ["https://swaphubs.com/og/terzi-can.jpg"],
   },
 
   robots: {
@@ -106,9 +111,12 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    // ⚠️ BURAYA YAPIŞTIRINIZ:
-    // Google Search Console → Mülk → HTML etiketi → content="..." değerini kopyalayın
-    google: "BURAYA_GOOGLE_SEARCH_CONSOLE_KODUNU_YAZ",
+    // Google alanı kaldırıldı: site zaten DNS üzerinden alan adı seviyesinde
+    // doğrulanmış (sitemap'lerin GSC'de "Başarılı" görünmesi bunu kanıtlıyor).
+    // HTML etiketi yöntemi kullanılmadığı için burada gerçek bir kod yok —
+    // sahte bir placeholder bırakmak yerine alan tamamen kaldırıldı.
+    // İleride HTML etiketiyle ek bir doğrulama eklemek isterseniz:
+    // Search Console → Mülk ayarları → Doğrulama yöntemleri → HTML etiketi
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
   },
@@ -144,11 +152,14 @@ const jsonLd = {
       url: "https://swaphubs.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://swaphubs.com/logo.png",
+        // DÜZELTME: "/logo.png" public/ kökünde yoktu, gerçek dosya "/og/logo.png"
+        // konumundaydı — bu haliyle Google'ın Knowledge Panel logo gereksinimini
+        // karşılamıyordu (kırık URL).
+        url: "https://swaphubs.com/og/logo.png",
         width: 512,
         height: 512,
       },
-      image: "https://swaphubs.com/og-image.jpg",
+      image: "https://swaphubs.com/og/terzi-can.jpg",
       description:
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
