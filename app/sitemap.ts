@@ -123,8 +123,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ── Terzi Ana Sayfa ──
     { url: `${BASE_URL}/terzi`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 1.0 },
 
-    // ── YENİ: AEO VE YEREL SEO MASTER SAYFASI (YAPAY ZEKA İÇİN KRİTİK) ──
-    { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`, lastModified: new Date('2026-07-02'), changeFrequency: 'daily', priority: 1.0 },
+    // ── AEO VE YEREL SEO MASTER SAYFASI (YAPAY ZEKA İÇİN KRİTİK) ──
+    { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`, lastModified: new Date('2026-07-13'), changeFrequency: 'daily', priority: 1.0 },
 
     // ── Terzi Alt Hizmet Sayfaları ──
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,     lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
@@ -138,14 +138,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/gelinlik-tadilati-antalya`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
 
     // ── Terzi & Tekstil Diğer Sayfalar ──
+    // DÜZELTME (2026-07-13): "/antalya-terzi-elbise-dikimi" kaldırıldı.
+    // Bu URL artık next.config.mjs üzerinden 301 ile master sayfaya
+    // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) yönlendiriliyor.
+    // Yönlendirilen bir URL'yi sitemap'te tutmak Search Console'da
+    // "Sayfa yönlendirme içeriyor" uyarısına ve gereksiz tarama israfına yol açar.
     { url: `${BASE_URL}/tekstil-antalya`,                                        lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/online-tailor-service`,                                  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/online-terzi-servisi`,                                   lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                                lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                            lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
+    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-07-13'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`, lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
-    
+
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/ru/atelie-antalya`,                                      lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
