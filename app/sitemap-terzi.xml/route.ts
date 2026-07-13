@@ -7,7 +7,7 @@ const terziSayfalar = [
   // ── Ana terzi sayfası ──────────────────────────────────────────────
   { url: `${BASE}/terzi`,                                                   priority: '1.0',  freq: 'weekly' },
 
-  // ── YENİ: Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ─────────────
+  // ── Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ───────────────────
   // Botların ve yapay zeka tarayıcılarının bu güçlü sayfaları sürekli kontrol etmesi için eklendi
   { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '1.0',  freq: 'daily' },
   { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,      priority: '0.95', freq: 'weekly' },
@@ -24,8 +24,11 @@ const terziSayfalar = [
   { url: `${BASE}/terzi/gelinlik-tadilati-antalya`,                         priority: '0.9',  freq: 'weekly' },
 
   // ── Tekstil & Terzi Diğer Sayfalar ────────────────────────────────
+  // DÜZELTME (2026-07-13): "/antalya-terzi-elbise-dikimi" satırı kaldırıldı.
+  // Bu URL artık next.config.mjs üzerinden 301 ile master sayfaya
+  // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) yönlendiriliyor — yönlendiren
+  // bir URL'yi sitemap'te tutmak GSC'de "sayfa yönlendirme içeriyor" uyarısı verir.
   { url: `${BASE}/tekstil-antalya`,                                         priority: '0.9',  freq: 'weekly' },
-  { url: `${BASE}/antalya-terzi-elbise-dikimi`,                             priority: '0.9',  freq: 'weekly' },
   { url: `${BASE}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  priority: '0.9',  freq: 'weekly' },
 
   // ── Online Terzi Hizmeti ───────────────────────────────────────────
@@ -47,7 +50,6 @@ const terziSayfalar = [
   { url: `${BASE}/online-terzi-servisi`,                                    priority: '0.9',  freq: 'weekly' },
 
   // ── Rusça Sayfa ────────────────────────────────────────────────────
-  // DÜZELTİLDİ: Canonical yapısı ile tam uyumlu hale getirildi
   { url: `${BASE}/ru/atelie-antalya`,                                       priority: '0.9',  freq: 'weekly' },
 
   // ── Doğal Keten/Pamuk ─────────────────────────────────────────────
