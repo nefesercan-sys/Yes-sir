@@ -59,6 +59,15 @@ const nextConfig = {
         destination: '/terzi',
         permanent: true,
       },
+      // DÜZELTME (2026-07): /antalya-terzi-elbise-dikimi, master AEO sayfasının
+      // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) neredeyse birebir kopyasıydı
+      // ve kendi canonical'ı da o sayfaya işaret ediyordu — Google iki sayfayı
+      // aynı içerik olarak görüp otoriteyi bölüyordu. Tek, güçlü sayfada birleştirildi.
+      {
+        source: '/antalya-terzi-elbise-dikimi',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+        permanent: true,
+      },
     ]
   },
 
@@ -151,13 +160,6 @@ const nextConfig = {
         source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
         headers: [
           { key: 'Content-Language', value: 'tr, en, ru' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/antalya-terzi-elbise-dikimi',
-        headers: [
-          { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
