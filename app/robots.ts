@@ -70,7 +70,9 @@ export default function robots(): MetadataRoute.Robots {
       'https://swaphubs.com/sitemap-ilanlar.xml',
       'https://swaphubs.com/sitemap-sektorler.xml',
       'https://swaphubs.com/sitemap-meslekler.xml',
-      'https://swaphubs.com/sitemap-balKontrol.xml',
+      // DÜZELTME: dosya adı "sitemap-balKontrol.xml" yanlıştı (gerçek dosya
+      // sitemap-bal.xml) — bot bu adresi çekmeye çalışınca 404 alıyordu.
+      'https://swaphubs.com/sitemap-bal.xml',
     ],
     host: 'https://swaphubs.com',
   }
