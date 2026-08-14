@@ -107,18 +107,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/ilan`,        lastModified: new Date('2026-06-22'), changeFrequency: 'daily',   priority: 0.9 },
 
     // ── Online Terzi Hizmeti ──
-    { url: `${BASE_URL}/online-terzi-hizmeti`,                      lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 1.0  },
-    { url: `${BASE_URL}/online-terzi-hizmeti/abiye-dikim`,          lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gelinlik-dikim`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/online-terzi-hizmeti/takim-elbise-dikim`,   lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/online-terzi-hizmeti/uniforma-dikim`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/spor-giyim-dikim`,     lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gece-davet-kiyafeti`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/muslin-keten-kiyafet`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/gunluk-kiyafet-dikim`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/olcu-rehberi`,         lastModified: new Date('2026-06-22'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/kurumsal`,             lastModified: new Date('2026-06-22'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/online-terzi-hizmeti/sss`,                  lastModified: new Date('2026-06-22'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/online-terzi-hizmeti`,                      lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 1.0  },
+    // DÜZELTME (2026-08-13): Bu sayfanın altında abiye-dikim, gelinlik-dikim,
+    // takim-elbise-dikim, uniforma-dikim, spor-giyim-dikim, gece-davet-kiyafeti,
+    // muslin-keten-kiyafet, gunluk-kiyafet-dikim, olcu-rehberi, kurumsal, sss
+    // adında 11 alt sayfa Google'a bildiriliyordu ama app/online-terzi-hizmeti/
+    // altında bu klasörlerin HİÇBİRİ fiziksel olarak yoktu (sadece ana sayfa var).
+    // Bu, Search Console'da "Taranmadı: 404" hatası olarak birikiyordu ve
+    // Google'ın siteye olan "URL beyanı doğruluğu" güvenini zedeliyordu.
+    // Bu sayfalar gerçekten yazılırsa buraya geri eklenmeli.
 
     // ── Terzi Ana Sayfa ──
     { url: `${BASE_URL}/terzi`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 1.0 },
@@ -134,8 +131,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,    lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,   lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${BASE_URL}/terzi/fermuar-degisimi-antalya`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/terzi/gelinlik-tadilati-antalya`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
+    // DÜZELTME (2026-08-13): /terzi/fermuar-degisimi-antalya ve
+    // /terzi/gelinlik-tadilati-antalya sitemap'te vardı ama bu URL'lerin
+    // ikisi de next.config.mjs'te 301 ile /terzi'ye yönlendiriliyor —
+    // fiziksel page.tsx dosyaları yok. Sitemap'te redirect eden bir URL'yi
+    // tutmak Search Console'da "Sayfa yönlendirme içeriyor" uyarısı
+    // üretir ve gereksiz tarama bütçesi harcar. Kaldırıldı.
 
     // ── Terzi & Tekstil Diğer Sayfalar ──
     // DÜZELTME (2026-07-13): "/antalya-terzi-elbise-dikimi" kaldırıldı.
@@ -145,10 +146,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // "Sayfa yönlendirme içeriyor" uyarısına ve gereksiz tarama israfına yol açar.
     { url: `${BASE_URL}/tekstil-antalya`,                                        lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/online-tailor-service`,                                  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/online-terzi-servisi`,                                   lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
+    // DÜZELTME (2026-08-13): /online-terzi-servisi sitemap'te vardı ama
+    // app/ altında bu isimde bir page.tsx hiç yoktu — kaldırıldı.
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                                lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,  lastModified: new Date('2026-07-13'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`, lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.95 },
+    // DÜZELTME (2026-08-13): antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat
+    // ve antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat, master sayfayla
+    // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) birleştirilip 301 redirect
+    // yapıldı — sitemap'ten kaldırıldı (bkz. next.config.mjs).
+    // ✅ YENİ: Fiziksel olarak var olup sitemap'te hiç bulunmayan 2 sayfa eklendi
+    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/terzi-cagir`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.95 },
 
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
