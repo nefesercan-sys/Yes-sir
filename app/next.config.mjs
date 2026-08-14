@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   poweredByHeader: false,
 
   compiler: {
@@ -27,15 +26,68 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // www → www'siz yönlendirme
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+      // SİLİNEN SAYFALAR İÇİN YÖNLENDİRMELER (404 hatasını önlemek ve SEO puanını korumak için)
+      {
+        source: '/terzi/gelinlik-tadilati',
+        destination: '/terzi',
+        permanent: true,
+      },
       {
         source: '/terzi/gekinlik-tadilati',
-        destination: '/terzi/gelinlik-tadilati',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/gelinlik-tadilati-antalya',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/fermuar-degisimi',
+        destination: '/terzi',
+        permanent: true,
+      },
+      {
+        source: '/terzi/fermuar-degisimi-antalya',
+        destination: '/terzi',
+        permanent: true,
+      },
+      // DÜZELTME (2026-07): /antalya-terzi-elbise-dikimi, master AEO sayfasının
+      // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) neredeyse birebir kopyasıydı
+      // ve kendi canonical'ı da o sayfaya işaret ediyordu — Google iki sayfayı
+      // aynı içerik olarak görüp otoriteyi bölüyordu. Tek, güçlü sayfada birleştirildi.
+      {
+        source: '/antalya-terzi-elbise-dikimi',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+        permanent: true,
+      },
+      // DÜZELTME (2026-08): 3 sayfa daha aynı "Antalya terzi dikim/tadilat"
+      // temasını hemen hemen birebir tekrar ediyordu ve hiçbiri diğerine
+      // canonical vermiyordu — Google 4 ayrı sayfayı birbirinin near-duplicate'i
+      // sayıp otoriteyi 4'e bölüyordu. Sitemap zaten antalyada-terzi-dikim-
+      // tamirat-utu-hizmetleri'ni "MASTER" (priority 1.0, daily) işaretlemişti;
+      // bu karar şimdi uygulandı. Eksik mahalleler (Gürsu, Çakırlar, Meltem)
+      // master sayfaya taşındı, diğer 3 sayfa 301 ile birleştirildi.
+      {
+        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+        permanent: true,
+      },
+      {
+        source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+        permanent: true,
+      },
+      {
+        source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
         permanent: true,
       },
     ]
@@ -43,8 +95,9 @@ const nextConfig = {
 
   async headers() {
     return [
+      // Global güvenlik başlıkları
       {
-        source: '/:path*',
+        source: '/(.*)',
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -55,25 +108,26 @@ const nextConfig = {
         ],
       },
       {
-        source: '/_next/static/:path*',
+        source: '/_next/static/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
       {
-        source: '/api/:path*',
+        source: '/api/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'no-store, max-age=0' },
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
-      { source: '/giris',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/uye-ol',          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin/:path*',    headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/admin-ai/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/ilan-ver/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
-      { source: '/ilan-duzenle/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
+      { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+
       {
         source: '/terzi',
         headers: [
@@ -82,12 +136,13 @@ const nextConfig = {
         ],
       },
       {
-        source: '/terzi/:path*',
+        source: '/terzi/(.*)',
         headers: [
           { key: 'Content-Language', value: 'tr, en, ru, de' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
+
       {
         source: '/online-terzi-hizmeti',
         headers: [
@@ -96,12 +151,13 @@ const nextConfig = {
         ],
       },
       {
-        source: '/online-terzi-hizmeti/:path*',
+        source: '/online-terzi-hizmeti/(.*)',
         headers: [
           { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
+
       {
         source: '/tekstil-antalya',
         headers: [
@@ -131,7 +187,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/pamuknest/:path*',
+        source: '/pamuknest(.*)',
         headers: [
           { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
