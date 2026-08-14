@@ -103,6 +103,9 @@ const jsonLd = {
         { '@type': 'Place', name: 'Fener Mahallesi, Muratpaşa' },
         { '@type': 'Place', name: 'Güzeloba Mahallesi, Muratpaşa' },
         { '@type': 'Place', name: 'Sarısu Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Gürsu Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Çakırlar Mahallesi, Konyaaltı' },
+        { '@type': 'Place', name: 'Meltem Mahallesi, Muratpaşa' },
       ],
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       // ── DÜZELTME: sayısal değerler + ölçek tanımı (bestRating/worstRating) ──
@@ -282,7 +285,8 @@ export const metadata: Metadata = {
   description: `Antalya en yakın terzi ve ütü servisi. Konyaaltı, Muratpaşa, Lara, Kepez geneli kuryeli araçlarla adresten alım. Özel dikim, abiye tadilatı ve fason üretim. ☎ ${PHONE}`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
-    'Hurma terzi', 'Liman mahallesi terzi', 'Uncalı terzi', 'Şirinyalı terzi',
+    'Hurma terzi', 'Liman mahallesi terzi', 'Uncalı terzi', 'Şirinyalı terzi', 'Sarısu terzi',
+    'Gürsu terzi', 'Çakırlar terzi', 'Meltem terzi',
     'Antalya acil ütü', 'kuryeli terzi Antalya', 'özel dikim takım elbise Antalya', 'abiye tamiri Antalya',
     'gelinlik tadilatı Antalya', 'fermuar değişimi mont', 'deri ceket tamiri Antalya', 'fason üretim tekstil atölyesi'
   ],
@@ -435,6 +439,10 @@ const districtBlurbs = [
   { name: 'Hurma', text: 'Sahil şeridine yakın site ve villalara aynı gün kuryeli alım.' },
   { name: 'Liman', text: 'Liman mahallesindeki iş yerlerine ve konutlara hızlı teslimat.' },
   { name: 'Uncalı', text: 'Uncalı\'daki yoğun apartman bölgelerinde randevulu kurye servisi.' },
+  { name: 'Sarısu', text: 'Sarısu sahil hattındaki site ve rezidanslara aynı gün kurye.' },
+  { name: 'Gürsu', text: 'Gürsu mahallesindeki konut ve iş yerlerine randevulu adresten alım.' },
+  { name: 'Çakırlar', text: 'Çakırlar bölgesine araçlı terzi servisi ve hızlı teslimat.' },
+  { name: 'Meltem', text: 'Meltem mahallesine aynı gün veya 24 saat içinde teslimat garantisi.' },
   { name: 'Şirinyalı', text: 'Otel yoğun bölgede VIP acil ütü ve tadilat hizmeti önceliklidir.' },
   { name: 'Fener', text: 'Fener sahil bölgesine özel akşam saatlerinde teslimat imkanı.' },
   { name: 'Güzeloba', text: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
