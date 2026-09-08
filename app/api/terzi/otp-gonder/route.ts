@@ -1,10 +1,12 @@
 // ============================================================
 // SwapHubs — app/api/terzi/otp-gonder/route.ts
-// Telefon numarasına 6 haneli doğrulama kodu gönderir
+// Telefon numarasına 6 haneli doğrulama kodu üretir.
+// Teslimat: yalnızca WhatsApp — kod, personelin /terzi-admin
+// panelinde anında görünür ve tek dokunuşla WhatsApp'tan
+// müşteriye iletilir. Başka hiçbir kanal kullanılmaz.
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
-import { smsGonder } from '@/lib/sms';
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,8 +27,8 @@ export async function POST(req: NextRequest) {
       { upsert: true }
     );
 
-    await smsGonder(telefon, `SwapHubs Terzi doğrulama kodunuz: ${kod}`);
-
+    // Kod burada gönderilmiyor — /terzi-admin panelinde beliriyor,
+    // personel WhatsApp'tan tek dokunuşla iletiyor.
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('OTP gönder hatası:', err);
