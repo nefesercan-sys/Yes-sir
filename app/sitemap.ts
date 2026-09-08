@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import clientPromise from '@/lib/mongodb'
+import { getDb } from '@/lib/mongodb'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -8,10 +8,13 @@ const BASE_URL = 'https://swaphubs.com'
 // HATA DÜZELTİLDİ: Sadece hex karakterleri değil, tüm SEO dostu (harf, rakam ve tire) slug'ları kabul eder
 const SLUG_REGEX = /^[a-z0-9-]+$/i
 
-async function getDb() {
-  const client = await clientPromise
-  return client.db('swaphubs_db')
-}
+// DÜZELTME (2026-09-08): Bu dosya daha önce clientPromise'ı doğrudan
+// client.db('swaphubs_db') ile açıyordu. Ama tüm gerçek API route'ları
+// (ilanlar, teklifler, blog, urunler vb.) lib/mongodb.ts'deki getDb()
+// üzerinden 'hizmetara' veritabanını kullanıyor. Yani sitemap yanlış/boş
+// bir veritabanını okuyordu ve gerçek ilan/blog/ürün URL'leri sitemap'e
+// hiç girmiyordu. Artık merkezi getDb() kullanılıyor — doğru veritabanına
+// bağlanıyor ve tüm route'larla tutarlı.
 
 async function getIlanlar() {
   try {
@@ -156,6 +159,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ✅ YENİ: Fiziksel olarak var olup sitemap'te hiç bulunmayan 2 sayfa eklendi
     { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/terzi-cagir`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.95 },
+
+    // ── Terzi Talep / Panel — Telefon+OTP Teklif Sistemi (Yandex Go tarzı) ──
+    { url: `${BASE_URL}/terzi-talep`, lastModified: new Date('2026-09-08'), changeFrequency: 'daily', priority: 0.95 },
+    { url: `${BASE_URL}/terzi-panel`, lastModified: new Date('2026-09-08'), changeFrequency: 'daily', priority: 0.9 },
 
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
