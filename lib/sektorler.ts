@@ -738,6 +738,31 @@ const SEKTORLER_HAM: Omit<Sektor, "icon">[] = [
     ],
   },
 
+  // ── TERZİ & KURU TEMİZLEME ──
+  {
+    id: "terzi-kuru-temizleme", ad: "Terzi & Kuru Temizleme", emoji: "🧵",
+    tip: "bireysel", renk: "#2d8c6e",
+    altKategoriler: ["Dikim/Tadilat", "Ütü", "Kuru Temizleme"],
+    butceBirimi: "₺",
+    hizmetAlanFormu: [
+      { key: "hizmetler", label: "İstenen Hizmet(ler)", tip: "multiselect", zorunlu: true, grup: "Hizmet",
+        secenekler: [
+          "Paça Kısaltma", "Bel Daraltma", "Etek Kısaltma", "Fermuar Değişimi",
+          "Fermuar Tamiri", "Ceket Tamiri", "Mont Tamiri", "Gömlek Tamiri",
+          "T-Shirt Tamiri", "Elbise Tamiri", "Abiye Tamiri", "Özel Dikim",
+          "Ütü Hizmeti", "Kuru Temizleme",
+        ] },
+      { key: "adet", label: "Adet / Parça Sayısı", tip: "number", zorunlu: true, placeholder: "Örn: 1", birim: "adet", grup: "Hizmet" },
+      { key: "aciklama", label: "Detay / Not", tip: "textarea", placeholder: "Örn: Kot pantolon 5cm kısaltılacak", grup: "Hizmet" },
+    ],
+    hizmetVerenFormu: [
+      { key: "sunulanHizmetler", label: "Verilen Hizmetler", tip: "multiselect", zorunlu: true, grup: "Hizmet",
+        secenekler: ["Dikim/Tadilat", "Ütü", "Kuru Temizleme", "Özel Dikim"] },
+      { key: "hizmetYariCapi", label: "Hizmet Yarıçapı (km)", tip: "number", placeholder: "Örn: 10", grup: "Kapasite" },
+      ...ORTAK_ALAN_VEREN,
+    ],
+  },
+
   // ── GENEL SEKTÖRLER (Temel Form) ──
   ...["oto-kiralama", "makine-kiralama", "elektronik", "beyaz-esya", "bilet", "seyahat",
       "mermer-tas", "plastik-pvc", "elektrik", "kimya-boya", "saglik-med",
