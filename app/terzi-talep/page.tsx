@@ -219,7 +219,7 @@ export default function TerziTalepPage() {
             {giris === 'telefon' && (
               <div>
                 <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>
-                  Terzi veya kuru temizleme talebi oluşturmak için telefon numaranı gir, sana bir doğrulama kodu gönderelim.
+                  Terzi veya kuru temizleme talebi oluşturmak için telefon numaranı gir, sana WhatsApp'tan bir doğrulama kodu gönderelim.
                 </p>
                 <input value={telefon} onChange={e => setTelefon(e.target.value)} placeholder="+905XXXXXXXXX"
                   style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16 }} />
@@ -232,7 +232,7 @@ export default function TerziTalepPage() {
             )}
             {giris === 'otp' && (
               <div>
-                <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>{telefon} numarasına gönderilen 6 haneli kodu gir.</p>
+                <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>{telefon} numarasına WhatsApp'tan gönderilen 6 haneli kodu gir.</p>
                 <input value={kod} onChange={e => setKod(e.target.value)} placeholder="123456" maxLength={6}
                   style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 20, letterSpacing: 6, textAlign: 'center' }} />
                 {hata && <p style={{ color: '#dc2626', fontSize: 13, marginTop: 8 }}>{hata}</p>}
