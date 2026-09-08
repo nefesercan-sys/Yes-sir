@@ -490,6 +490,10 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">💬 {L.waBtn}</a>
             <a href="#services" className="btn-outline">{L.downBtn}</a>
           </div>
+          <div className="thacts" style={{ marginTop: '.6rem' }}>
+            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Online Teklif İste</a>
+            <a href="/terzi-panel" className="btn-outline">🔧 Terzi misin? İş Bul</a>
+          </div>
         </div>
       </section>
 
