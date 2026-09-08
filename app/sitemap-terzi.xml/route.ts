@@ -7,6 +7,10 @@ const terziSayfalar = [
   // ── Ana terzi sayfası ──────────────────────────────────────────────
   { url: `${BASE}/terzi`,                                                   priority: '1.0',  freq: 'weekly' },
 
+  // ── Terzi Talep / Panel — Telefon+OTP Teklif Sistemi (Yandex Go tarzı) ──
+  { url: `${BASE}/terzi-talep`,                                             priority: '0.95', freq: 'daily' },
+  { url: `${BASE}/terzi-panel`,                                             priority: '0.9',  freq: 'daily' },
+
   // ── Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ───────────────────
   // Botların ve yapay zeka tarayıcılarının bu güçlü sayfaları sürekli kontrol etmesi için eklendi
   { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '1.0',  freq: 'daily' },
