@@ -34,10 +34,15 @@ export async function POST(req: NextRequest) {
     // Site sahibine anlık Telegram uyarısı — kod ve numara direkt mesajda,
     // panele bakmadan da WhatsApp'tan gönderebilsin diye.
     if (process.env.ADMIN_TELEGRAM_CHAT_ID) {
-      telegramMesajGonder(
+      const telegramSonuc = await telegramMesajGonder(
         process.env.ADMIN_TELEGRAM_CHAT_ID,
         `🔔 <b>Yeni kod talebi</b>\n📱 ${telefon}\n🔑 Kod: <b>${kod}</b>\n\nswaphubs.com/terzi-admin üzerinden WhatsApp'tan gönder.`
-      ).catch(() => {}); // bildirim başarısız olsa bile ana akış etkilenmesin
+      );
+      if (!telegramSonuc.success) {
+        console.error('Telegram admin uyarısı gönderilemedi:', telegramSonuc.error);
+      }
+    } else {
+      console.log('ADMIN_TELEGRAM_CHAT_ID tanımlı değil, Telegram uyarısı atlandı.');
     }
 
     return NextResponse.json({ success: true });
