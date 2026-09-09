@@ -369,16 +369,41 @@ export default function TerziTalepPage() {
               <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 14 }}>{seciliTalep.baslik}</h3>
               {teklifler.length === 0 && <p style={{ color: '#94a3b8', fontSize: 14 }}>Henüz teklif yok.</p>}
               {teklifler.map((t: any) => (
-                <div key={t._id} style={{ padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10 }}>
+                <div key={t._id} style={{ padding: 14, borderRadius: 12, border: t.durum === 'kabul_edildi' ? `1.5px solid ${YESIL}` : '1px solid #eef2f0', marginBottom: 10 }}>
                   <div style={{ fontWeight: 800, fontSize: 18, color: YESIL }}>{t.teklifFiyat?.toLocaleString('tr-TR')} ₺</div>
                   {t.mesaj && <div style={{ fontSize: 13, color: '#475569', marginTop: 4 }}>{t.mesaj}</div>}
-                  <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>Durum: {t.durum}</div>
+                  <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>
+                    {t.durum === 'bekliyor' ? '🟡 Bekliyor' : t.durum === 'kabul_edildi' ? '🟢 Kabul edildi' : '⚪ Reddedildi'}
+                  </div>
                   {t.durum === 'bekliyor' && (
                     <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
                       <button onClick={() => teklifAksiyon(t._id, 'kabul_et')}
                         style={{ flex: 1, padding: 10, borderRadius: 8, border: 'none', background: YESIL, color: '#fff', fontWeight: 700, fontSize: 13 }}>Kabul Et</button>
                       <button onClick={() => teklifAksiyon(t._id, 'reddet')}
                         style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid #dbe5e0', background: '#fff', color: '#475569', fontWeight: 700, fontSize: 13 }}>Reddet</button>
+                    </div>
+                  )}
+                  {t.durum === 'kabul_edildi' && t.teklifVeren?.telefon && (
+                    <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid #eef2f0' }}>
+                      <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>Terziyle iletişime geç:</div>
+                      <div style={{ display: 'flex', gap: 8, marginBottom: t.location ? 10 : 0 }}>
+                        <a href={`https://wa.me/${t.teklifVeren.telefon.replace('+', '')}`} target="_blank" rel="noopener noreferrer"
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          💬 WhatsApp
+                        </a>
+                        <a href={`tel:${t.teklifVeren.telefon}`}
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, border: `1px solid ${YESIL}`, color: YESIL, fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          📞 Ara
+                        </a>
+                      </div>
+                      {t.location?.coordinates && (
+                        <iframe
+                          title="Terzi konumu"
+                          src={`https://www.google.com/maps?q=${t.location.coordinates[1]},${t.location.coordinates[0]}&z=15&output=embed`}
+                          style={{ width: '100%', height: 160, border: 'none', borderRadius: 10 }}
+                          loading="lazy"
+                        />
+                      )}
                     </div>
                   )}
                 </div>
@@ -391,10 +416,14 @@ export default function TerziTalepPage() {
             <div>
               {bildirimler.length === 0 && <p style={{ color: '#94a3b8', fontSize: 14, textAlign: 'center', padding: '40px 0' }}>Henüz mesajınız yok.</p>}
               {bildirimler.map((b: any) => (
-                <div key={b._id} style={{ padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10, background: b.okundu ? '#fff' : '#eaf6f1' }}>
+                <button key={b._id} onClick={() => {
+                    const talep = taleplerim.find((t: any) => t._id === b.ilanId);
+                    if (talep) { setSekme('ilanlar'); teklifleriGetir(talep); }
+                  }}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10, background: b.okundu ? '#fff' : '#eaf6f1' }}>
                   <div style={{ fontSize: 14, color: '#0f172a' }}>{b.mesaj}</div>
                   <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>{new Date(b.tarih).toLocaleString('tr-TR')}</div>
-                </div>
+                </button>
               ))}
             </div>
           )}
