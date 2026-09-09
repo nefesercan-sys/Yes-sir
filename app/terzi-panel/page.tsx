@@ -282,6 +282,15 @@ export default function TerziPanelPage() {
                 </div>
               )}
 
+              {seciliTalep.location?.coordinates && (
+                <iframe
+                  title="Talep konumu"
+                  src={`https://www.google.com/maps?q=${seciliTalep.location.coordinates[1]},${seciliTalep.location.coordinates[0]}&z=14&output=embed`}
+                  style={{ width: '100%', height: 160, border: 'none', borderRadius: 10, marginBottom: 16 }}
+                  loading="lazy"
+                />
+              )}
+
               {gonderildi ? (
                 <div style={{ textAlign: 'center', padding: '30px 0' }}>
                   <div style={{ fontSize: 40, marginBottom: 10 }}>✅</div>
@@ -311,12 +320,35 @@ export default function TerziPanelPage() {
             <div>
               {tekliflerim.length === 0 && <p style={{ color: '#94a3b8', fontSize: 14, textAlign: 'center', padding: '40px 0' }}>Henüz teklif vermediniz.</p>}
               {tekliflerim.map((t: any) => (
-                <div key={t._id} style={{ padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10 }}>
+                <div key={t._id} style={{ padding: 14, borderRadius: 12, border: t.durum === 'kabul_edildi' ? `1.5px solid ${YESIL}` : '1px solid #eef2f0', marginBottom: 10 }}>
                   <div style={{ fontWeight: 700, fontSize: 14, color: '#0f172a' }}>{t.ilanBaslik}</div>
                   <div style={{ fontWeight: 800, fontSize: 16, color: YESIL, marginTop: 4 }}>{t.teklifFiyat?.toLocaleString('tr-TR')} ₺</div>
                   <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>
                     {t.durum === 'bekliyor' ? '🟡 Bekliyor' : t.durum === 'kabul_edildi' ? '🟢 Kabul Edildi' : '⚪ Reddedildi'}
                   </div>
+                  {t.durum === 'kabul_edildi' && t.ilanSahibi?.telefon && (
+                    <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid #eef2f0' }}>
+                      <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>Müşteriyle iletişime geç:</div>
+                      <div style={{ display: 'flex', gap: 8, marginBottom: t.ilanKonum ? 10 : 0 }}>
+                        <a href={`https://wa.me/${t.ilanSahibi.telefon.replace('+', '')}`} target="_blank" rel="noopener noreferrer"
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          💬 WhatsApp
+                        </a>
+                        <a href={`tel:${t.ilanSahibi.telefon}`}
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, border: `1px solid ${YESIL}`, color: YESIL, fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          📞 Ara
+                        </a>
+                      </div>
+                      {t.ilanKonum?.coordinates && (
+                        <iframe
+                          title="Müşteri konumu"
+                          src={`https://www.google.com/maps?q=${t.ilanKonum.coordinates[1]},${t.ilanKonum.coordinates[0]}&z=15&output=embed`}
+                          style={{ width: '100%', height: 160, border: 'none', borderRadius: 10 }}
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -327,10 +359,11 @@ export default function TerziPanelPage() {
             <div>
               {bildirimler.length === 0 && <p style={{ color: '#94a3b8', fontSize: 14, textAlign: 'center', padding: '40px 0' }}>Henüz mesajınız yok.</p>}
               {bildirimler.map((b: any) => (
-                <div key={b._id} style={{ padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10, background: b.okundu ? '#fff' : '#eaf6f1' }}>
+                <button key={b._id} onClick={() => setSekme('ilanlar')}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', padding: 14, borderRadius: 12, border: '1px solid #eef2f0', marginBottom: 10, background: b.okundu ? '#fff' : '#eaf6f1' }}>
                   <div style={{ fontSize: 14, color: '#0f172a' }}>{b.mesaj}</div>
                   <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>{new Date(b.tarih).toLocaleString('tr-TR')}</div>
-                </div>
+                </button>
               ))}
             </div>
           )}
