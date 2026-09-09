@@ -3,10 +3,14 @@
 // Telefon numarasına 6 haneli doğrulama kodu üretir.
 // Teslimat: yalnızca WhatsApp — kod, personelin /terzi-admin
 // panelinde anında görünür ve tek dokunuşla WhatsApp'tan
-// müşteriye iletilir. Başka hiçbir kanal kullanılmaz.
+// müşteriye iletilir.
+// Ayrıca: her kod isteğinde site sahibine Telegram'dan anlık
+// uyarı gider (ADMIN_TELEGRAM_CHAT_ID tanımlıysa) — panele
+// sürekli bakmaya gerek kalmaz.
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { telegramMesajGonder } from '@/lib/telegram';
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,8 +31,15 @@ export async function POST(req: NextRequest) {
       { upsert: true }
     );
 
-    // Kod burada gönderilmiyor — /terzi-admin panelinde beliriyor,
-    // personel WhatsApp'tan tek dokunuşla iletiyor.
+    // Site sahibine anlık Telegram uyarısı — kod ve numara direkt mesajda,
+    // panele bakmadan da WhatsApp'tan gönderebilsin diye.
+    if (process.env.ADMIN_TELEGRAM_CHAT_ID) {
+      telegramMesajGonder(
+        process.env.ADMIN_TELEGRAM_CHAT_ID,
+        `🔔 <b>Yeni kod talebi</b>\n📱 ${telefon}\n🔑 Kod: <b>${kod}</b>\n\nswaphubs.com/terzi-admin üzerinden WhatsApp'tan gönder.`
+      ).catch(() => {}); // bildirim başarısız olsa bile ana akış etkilenmesin
+    }
+
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('OTP gönder hatası:', err);
