@@ -17,6 +17,7 @@ type Medya = { url: string; tip: 'resim' | 'video' };
 
 export default function TerziTalepPage() {
   // ── Giriş ──
+  const [oturumHazir, setOturumHazir] = useState(false);
   const [giris, setGiris] = useState<Giris | null>('telefon');
   const [telefon, setTelefon] = useState('+90');
   const [kod, setKod] = useState('');
@@ -98,6 +99,16 @@ export default function TerziTalepPage() {
   useEffect(() => {
     if (giris === null) yenile();
   }, [giris]);
+
+  // Sayfa yüklenince mevcut oturumu (cookie'yi) sessizce kontrol et —
+  // geçerliyse tekrar telefon/kod istemeden doğrudan uygulamaya al.
+  useEffect(() => {
+    (async () => {
+      const res = await fetch('/api/terzi/profil');
+      setGiris(res.ok ? null : 'telefon');
+      setOturumHazir(true);
+    })();
+  }, []);
 
   const hizmetSec = (h: string) => {
     setSecilenler(prev => prev.includes(h) ? prev.filter(x => x !== h) : [...prev, h]);
@@ -210,6 +221,15 @@ export default function TerziTalepPage() {
   };
 
   // ── GİRİŞ EKRANLARI ──
+  // ── OTURUM KONTROL EDİLİYOR (sayfa ilk açıldığında kısa an) ──
+  if (!oturumHazir) {
+    return (
+      <div style={{ fontFamily: 'Inter, system-ui, sans-serif', background: '#f7faf9', minHeight: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: '#94a3b8', fontSize: 14 }}>Yükleniyor...</div>
+      </div>
+    );
+  }
+
   if (giris === 'telefon' || giris === 'otp') {
     return (
       <div style={{ fontFamily: 'Inter, system-ui, sans-serif', background: '#f7faf9', minHeight: '100dvh' }}>
