@@ -51,7 +51,10 @@ export default function TerziAdminPage() {
   return (
     <div style={{ fontFamily: 'Inter, system-ui, sans-serif', background: '#f7faf9', minHeight: '100dvh', padding: 20 }}>
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
-        <h1 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>🔐 Bekleyen Doğrulama Kodları</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+          <h1 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>🔐 Bekleyen Doğrulama Kodları</h1>
+          <a href="/terzi-admin/uyeler" style={{ fontSize: 12, fontWeight: 700, color: YESIL, textDecoration: 'none' }}>👥 Üyeler →</a>
+        </div>
         <p style={{ fontSize: 13, color: '#94a3b8', marginBottom: 20 }}>Kod'a dokunup WhatsApp'tan kendi hattınızdan iletin. 8 saniyede bir otomatik yenilenir.</p>
 
         {kayitlar.length === 0 && <p style={{ color: '#94a3b8', fontSize: 14, textAlign: 'center', padding: '40px 0' }}>Bekleyen kod yok.</p>}
