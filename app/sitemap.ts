@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getDb } from '@/lib/mongodb'
+import { ANTALYA_ILCELERI, TURKIYE_ILLERI } from '@/lib/turkiye-lokasyonlar'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -163,6 +164,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ── Terzi Talep / Panel — Telefon+OTP Teklif Sistemi (Yandex Go tarzı) ──
     { url: `${BASE_URL}/terzi-talep`, lastModified: new Date('2026-09-08'), changeFrequency: 'daily', priority: 0.95 },
     { url: `${BASE_URL}/terzi-panel`, lastModified: new Date('2026-09-08'), changeFrequency: 'daily', priority: 0.9 },
+
+    // ── Antalya ilçeleri (öncelikli, fiziksel hizmet alanı) ──
+    ...ANTALYA_ILCELERI.map(i => ({
+      url: `${BASE_URL}/terzi/antalya/${i.slug}`,
+      lastModified: new Date('2026-09-10'), changeFrequency: 'weekly' as const, priority: 0.85,
+    })),
+
+    // ── Türkiye'nin diğer illeri (ulusal pazaryeri trafiği) ──
+    ...TURKIYE_ILLERI.map(i => ({
+      url: `${BASE_URL}/terzi/${i.slug}`,
+      lastModified: new Date('2026-09-10'), changeFrequency: 'weekly' as const, priority: 0.6,
+    })),
 
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
