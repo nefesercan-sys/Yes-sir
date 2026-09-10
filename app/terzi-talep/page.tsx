@@ -12,15 +12,17 @@ const HIZMETLER = [
   'Ütü Hizmeti', 'Kuru Temizleme',
 ];
 
-type Giris = 'telefon' | 'otp';
+type Giris = 'giris' | 'kayit-telefon' | 'kayit-otp' | 'sifre-belirle';
 type Medya = { url: string; tip: 'resim' | 'video' };
 
 export default function TerziTalepPage() {
   // ── Giriş ──
   const [oturumHazir, setOturumHazir] = useState(false);
-  const [giris, setGiris] = useState<Giris | null>('telefon');
+  const [giris, setGiris] = useState<Giris | null>('giris');
   const [telefon, setTelefon] = useState('+90');
   const [kod, setKod] = useState('');
+  const [sifre, setSifre] = useState('');
+  const [sifreTekrar, setSifreTekrar] = useState('');
   const [hata, setHata] = useState('');
   const [yukleniyor, setYukleniyor] = useState(false);
 
@@ -52,7 +54,33 @@ export default function TerziTalepPage() {
   const [profil, setProfil] = useState<any>(null);
   const [profilAdInput, setProfilAdInput] = useState('');
 
-  // ── OTP gönder ──
+  // ── Şifre ile giriş ──
+  const sifreIleGiris = async () => {
+    setHata('');
+    if (!/^\+90\d{10}$/.test(telefon)) { setHata('Telefon numarasını +90XXXXXXXXXX formatında girin'); return; }
+    if (!sifre) { setHata('Şifrenizi girin'); return; }
+    setYukleniyor(true);
+    const res = await fetch('/api/terzi/giris', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ telefon, sifre }),
+    });
+    const data = await res.json();
+    setYukleniyor(false);
+    if (!res.ok) {
+      if (data.sifreYok) {
+        setHata('Bu numara için önce telefon doğrulaması yapıp şifre oluşturmanız gerekiyor.');
+        setGiris('kayit-telefon');
+        return;
+      }
+      setHata(data.error || 'Hata oluştu');
+      return;
+    }
+    setSifre('');
+    setGiris(null);
+    yenile();
+  };
+
+  // ── OTP gönder (kayıt / şifremi unuttum) ──
   const otpGonder = async () => {
     setHata('');
     if (!/^\+90\d{10}$/.test(telefon)) { setHata('Telefon numarasını +90XXXXXXXXXX formatında girin'); return; }
@@ -64,10 +92,10 @@ export default function TerziTalepPage() {
     const data = await res.json();
     setYukleniyor(false);
     if (!res.ok) { setHata(data.error || 'Hata oluştu'); return; }
-    setGiris('otp');
+    setGiris('kayit-otp');
   };
 
-  // ── OTP doğrula ──
+  // ── OTP doğrula → şifre belirleme adımına geç ──
   const otpDogrula = async () => {
     setHata('');
     setYukleniyor(true);
@@ -78,14 +106,32 @@ export default function TerziTalepPage() {
     const data = await res.json();
     setYukleniyor(false);
     if (!res.ok) { setHata(data.error || 'Kod hatalı'); return; }
+    setKod('');
+    setGiris('sifre-belirle');
+  };
+
+  // ── Yeni şifre belirle (kayıt veya şifremi unuttum sonrası) ──
+  const sifreBelirle = async () => {
+    setHata('');
+    if (sifre.length < 6) { setHata('Şifre en az 6 karakter olmalı'); return; }
+    if (sifre !== sifreTekrar) { setHata('Şifreler eşleşmiyor'); return; }
+    setYukleniyor(true);
+    const res = await fetch('/api/terzi/sifre-belirle', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sifre }),
+    });
+    const data = await res.json();
+    setYukleniyor(false);
+    if (!res.ok) { setHata(data.error || 'Hata oluştu'); return; }
+    setSifre(''); setSifreTekrar('');
     setGiris(null);
     yenile();
   };
 
   const cikisYap = async () => {
     await fetch('/api/terzi/cikis', { method: 'POST' });
-    setGiris('telefon');
-    setTelefon('+90'); setKod('');
+    setGiris('giris');
+    setTelefon('+90'); setKod(''); setSifre(''); setSifreTekrar('');
     setSekme('ana');
   };
 
@@ -105,7 +151,7 @@ export default function TerziTalepPage() {
   useEffect(() => {
     (async () => {
       const res = await fetch('/api/terzi/profil');
-      setGiris(res.ok ? null : 'telefon');
+      setGiris(res.ok ? null : 'giris');
       setOturumHazir(true);
     })();
   }, []);
@@ -230,16 +276,37 @@ export default function TerziTalepPage() {
     );
   }
 
-  if (giris === 'telefon' || giris === 'otp') {
+  if (giris === 'giris' || giris === 'kayit-telefon' || giris === 'kayit-otp' || giris === 'sifre-belirle') {
     return (
       <div style={{ fontFamily: 'Inter, system-ui, sans-serif', background: '#f7faf9', minHeight: '100dvh' }}>
         <div style={{ maxWidth: 480, margin: '0 auto', minHeight: '100dvh', background: '#fff', boxShadow: '0 0 24px rgba(0,0,0,.05)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ padding: '16px 20px', borderBottom: '1px solid #eef2f0', fontWeight: 800, fontSize: 18, color: '#0f172a' }}>🧵 Terzi Talebi</div>
           <div style={{ padding: 20, flex: 1 }}>
-            {giris === 'telefon' && (
+
+            {giris === 'giris' && (
               <div>
+                <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>Telefon numaran ve şifrenle giriş yap.</p>
+                <input value={telefon} onChange={e => setTelefon(e.target.value)} placeholder="+905XXXXXXXXX"
+                  style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16, marginBottom: 10 }} />
+                <input value={sifre} onChange={e => setSifre(e.target.value)} type="password" placeholder="Şifre"
+                  style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16 }} />
+                {hata && <p style={{ color: '#dc2626', fontSize: 13, marginTop: 8 }}>{hata}</p>}
+                <button onClick={sifreIleGiris} disabled={yukleniyor}
+                  style={{ width: '100%', marginTop: 16, padding: 15, background: YESIL, color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 15 }}>
+                  {yukleniyor ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+                </button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 16 }}>
+                  <button onClick={() => { setHata(''); setGiris('kayit-telefon'); }} style={{ border: 'none', background: 'none', color: YESIL, fontWeight: 700, fontSize: 13, padding: 0 }}>Hesabın yok mu? Kayıt Ol</button>
+                  <button onClick={() => { setHata(''); setGiris('kayit-telefon'); }} style={{ border: 'none', background: 'none', color: '#94a3b8', fontWeight: 700, fontSize: 13, padding: 0 }}>Şifremi Unuttum</button>
+                </div>
+              </div>
+            )}
+
+            {giris === 'kayit-telefon' && (
+              <div>
+                <button onClick={() => { setHata(''); setGiris('giris'); }} style={{ border: 'none', background: 'none', color: YESIL, fontWeight: 700, fontSize: 13, marginBottom: 14, padding: 0 }}>← Giriş ekranına dön</button>
                 <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>
-                  Terzi veya kuru temizleme talebi oluşturmak için telefon numaranı gir, sana WhatsApp'tan bir doğrulama kodu gönderelim.
+                  Telefon numaranı gir, sana WhatsApp'tan bir doğrulama kodu gönderelim.
                 </p>
                 <input value={telefon} onChange={e => setTelefon(e.target.value)} placeholder="+905XXXXXXXXX"
                   style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16 }} />
@@ -250,7 +317,8 @@ export default function TerziTalepPage() {
                 </button>
               </div>
             )}
-            {giris === 'otp' && (
+
+            {giris === 'kayit-otp' && (
               <div>
                 <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>{telefon} numarasına WhatsApp'tan gönderilen 6 haneli kodu gir.</p>
                 <input value={kod} onChange={e => setKod(e.target.value)} placeholder="123456" maxLength={6}
@@ -262,6 +330,22 @@ export default function TerziTalepPage() {
                 </button>
               </div>
             )}
+
+            {giris === 'sifre-belirle' && (
+              <div>
+                <p style={{ color: '#475569', fontSize: 14, marginBottom: 20 }}>Numaranı doğruladık. Şimdi hesabın için bir şifre belirle.</p>
+                <input value={sifre} onChange={e => setSifre(e.target.value)} type="password" placeholder="Yeni şifre (en az 6 karakter)"
+                  style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16, marginBottom: 10 }} />
+                <input value={sifreTekrar} onChange={e => setSifreTekrar(e.target.value)} type="password" placeholder="Şifre (tekrar)"
+                  style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16 }} />
+                {hata && <p style={{ color: '#dc2626', fontSize: 13, marginTop: 8 }}>{hata}</p>}
+                <button onClick={sifreBelirle} disabled={yukleniyor}
+                  style={{ width: '100%', marginTop: 16, padding: 15, background: YESIL, color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 15 }}>
+                  {yukleniyor ? 'Kaydediliyor...' : 'Şifreyi Kaydet ve Devam Et'}
+                </button>
+              </div>
+            )}
+
           </div>
         </div>
       </div>
