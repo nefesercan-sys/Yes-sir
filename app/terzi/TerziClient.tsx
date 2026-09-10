@@ -10,6 +10,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { ANTALYA_ILCELERI, TURKIYE_ILLERI } from '@/lib/turkiye-lokasyonlar';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
 
@@ -487,12 +488,36 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
             <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.55)' }}>(94 {L.reviewLabel})</span>
           </div>
           <div className="thacts">
-            <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">💬 {L.waBtn}</a>
-            <a href="#services" className="btn-outline">{L.downBtn}</a>
+            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
+            <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
           </div>
-          <div className="thacts" style={{ marginTop: '.6rem' }}>
-            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Online Teklif İste</a>
-            <a href="/terzi-panel" className="btn-outline">🔧 Terzi misin? İş Bul</a>
+          <a href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+            🔧 Terzi veya kuru temizlemecisin? İş bulmak için buraya
+          </a>
+        </div>
+      </section>
+
+      {/* NASIL ÇALIŞIR */}
+      <section style={{ background: '#f7faf9', padding: '3.5rem 1.5rem' }}>
+        <div style={{ maxWidth: 980, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>Nasıl Çalışır?</h2>
+          <p style={{ textAlign: 'center', color: '#64748b', fontSize: '.9rem', marginBottom: '2.5rem' }}>Üç adımda hizmet talep et, en iyi teklifi seç.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+            {[
+              { n: '1', ic: '🧵', h: 'Hizmeti Seç', d: 'Paça kısaltma, gelinlik tadilatı, üniforma vb. — ne istediğini işaretle, adet ve konumunu gir.' },
+              { n: '2', ic: '📸', h: 'Fotoğraf Ekle (opsiyonel)', d: 'İstersen kıyafetin fotoğrafını ekle, terziler daha net fiyat versin.' },
+              { n: '3', ic: '💰', h: 'Teklifleri Karşılaştır', d: 'Çevrendeki terziler fiyat teklifi versin, en uygununu seç, direkt WhatsApp/telefonla iletişime geç.' },
+            ].map(s => (
+              <div key={s.n} style={{ background: '#fff', borderRadius: 16, padding: '1.8rem 1.5rem', boxShadow: '0 2px 12px rgba(0,0,0,.04)', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', marginBottom: '.6rem' }}>{s.ic}</div>
+                <div style={{ fontSize: '.7rem', fontWeight: 800, color: '#2d8c6e', letterSpacing: '.08em', marginBottom: '.4rem' }}>ADIM {s.n}</div>
+                <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>{s.h}</h3>
+                <p style={{ fontSize: '.82rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>{s.d}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</a>
           </div>
         </div>
       </section>
@@ -516,7 +541,7 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
         <div className="tsvc-head">
           <span className="ey">✦ Hizmetler</span>
           <h2 className="tst">Antalya Terzi Hizmetleri</h2>
-          <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, tekstil imalatı ve daha fazlası.</p>
+          <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
           <span className="tgl" />
         </div>
         <div className="tsvc-grid">
@@ -535,7 +560,8 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
           ))}
         </div>
         <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
-          <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{L.quoteBtn}</a>
+          <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
+          <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
           <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
         </div>
       </section>
@@ -806,6 +832,32 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
               <iframe src={gbp2.embed} width="100%" height="200" style={{ border: 0, display: 'block' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={gbp2.name} />
               <div style={{ padding: '.8rem 1rem', background: 'rgba(28,24,20,.97)', fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{gbp2.name} · {gbp2.addr}</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ANTALYA İLÇELERİ — iç linkleme */}
+      <section style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine Hizmet Veriyoruz</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center', marginBottom: '2rem' }}>
+            {ANTALYA_ILCELERI.map(i => (
+              <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
+                {i.ad} Terzi
+              </a>
+            ))}
+          </div>
+          <h3 style={{ fontSize: '.9rem', fontWeight: 700, color: '#0f172a', marginBottom: '.8rem' }}>Türkiye Genelinde Online Teklif Sistemi</h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
+            {['istanbul', 'ankara', 'izmir', 'bursa', 'mersin', 'mugla', 'kocaeli', 'gaziantep'].map(slug => {
+              const il = TURKIYE_ILLERI.find(x => x.slug === slug);
+              if (!il) return null;
+              return (
+                <a key={slug} href={`/terzi/${slug}`} style={{ fontSize: '.78rem', color: '#94a3b8', textDecoration: 'none', border: '1px solid #e2e8f0', padding: '.45rem .9rem', borderRadius: 18 }}>
+                  {il.ad} Terzi
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
