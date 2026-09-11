@@ -266,6 +266,10 @@ export const metadata: Metadata = {
     'eve gelen terzi Antalya','otele gelen terzi Antalya','üniforma üretimi Antalya',
     'kuru temizleme Antalya','tailor Antalya','English speaking tailor Antalya',
     'портной Анталья','Schneider Antalya','Belek terzi','Kemer terzi','Lara terzi',
+    'yakınımda terzi','en yakın terzi','en yakın terzi ve kuru temizleme','terzi bul',
+    'online terzi teklifi','terzi telefon numarası Antalya','acil terzi Antalya',
+    'aynı gün teslim terzi Antalya','terzi ve dikim atölyesi','Türkiye terzi bul',
+    'yakınımda kuru temizleme','yakınımda dikim atölyesi','terzi fiyatları 2026',
   ],
   authors: [{ name: 'SwapHubs', url: HOME_URL }],
   robots: {
