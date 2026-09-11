@@ -27,6 +27,13 @@ export async function generateMetadata({ params }: { params: { ilce: string } })
 
   return {
     title, description: desc,
+    keywords: [
+      `${ilce.ad} terzi`, `${ilce.ad} terzi Antalya`, `${ilce.ad} paça kısaltma`, `${ilce.ad} kuru temizleme`,
+      `${ilce.ad} dikim atölyesi`, `${ilce.ad} tadilat`, `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`,
+      `${ilce.ad} bel daraltma`, `${ilce.ad} elbise dikimi`, `${ilce.ad} yakınımda terzi`, `${ilce.ad} en yakın terzi`,
+      `${ilce.ad} eve gelen terzi`, `${ilce.ad} terzi telefon numarası`, `${ilce.ad} aynı gün terzi`,
+      'Antalya terzi', 'Antalya kuru temizleme', 'Antalya dikim atölyesi',
+    ],
     alternates: { canonical: url },
     openGraph: { title, description: desc, url, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website' },
   };
@@ -36,13 +43,15 @@ export default function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: st
   const ilce = bul(params.ilce);
   if (!ilce) notFound();
 
+  const url = `${HOME_URL}/terzi/antalya/${ilce.slug}`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType: 'Terzilik ve Kuru Temizleme Hizmeti',
     provider: { '@type': 'LocalBusiness', name: 'Terzi Can', url: `${HOME_URL}/terzi`, telephone: '+905318986418' },
     areaServed: { '@type': 'City', name: ilce.ad },
-    url: `${HOME_URL}/terzi/antalya/${ilce.slug}`,
+    url,
   };
 
   const komsular = ANTALYA_ILCELERI.filter(i => i.slug !== ilce.slug).slice(0, 10);
@@ -53,6 +62,7 @@ export default function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: st
       <BolgeSayfasi
         tip="antalya-ilce"
         lokasyonAdi={ilce.ad}
+        url={url}
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => `/terzi/antalya/${slug}`}
       />
