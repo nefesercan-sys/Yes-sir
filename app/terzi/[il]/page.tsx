@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: { params: { il: string } }): 
 
   return {
     title, description: desc,
+    keywords: [
+      `${il.ad} terzi`, `${il.ad} terzi bul`, `${il.ad} kuru temizleme`, `${il.ad} dikim atölyesi`,
+      `${il.ad} tadilat`, `${il.ad} özel dikim`, `${il.ad} paça kısaltma`, `${il.ad} yakınımda terzi`,
+      `${il.ad} en yakın terzi`, `${il.ad} terzi telefon numarası`, `${il.ad} terzi fiyatları`,
+      'terzi bul', 'online terzi teklifi', 'yakınımda terzi', 'en yakın terzi ve kuru temizleme',
+    ],
     alternates: { canonical: url },
     openGraph: { title, description: desc, url, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website' },
   };
@@ -37,13 +43,15 @@ export default function IlTerziSayfasi({ params }: { params: { il: string } }) {
   const il = bul(params.il);
   if (!il) notFound();
 
+  const url = `${HOME_URL}/terzi/${il.slug}`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType: 'Terzi ve Kuru Temizleme Pazaryeri',
     provider: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
     areaServed: { '@type': 'AdministrativeArea', name: il.ad },
-    url: `${HOME_URL}/terzi/${il.slug}`,
+    url,
     description: `${il.ad} genelinde terzi ve kuru temizlemecilerden online fiyat teklifi alma platformu.`,
   };
 
@@ -56,6 +64,7 @@ export default function IlTerziSayfasi({ params }: { params: { il: string } }) {
       <BolgeSayfasi
         tip="il"
         lokasyonAdi={il.ad}
+        url={url}
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => `/terzi/${slug}`}
       />
