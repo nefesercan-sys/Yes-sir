@@ -15,11 +15,10 @@ export default function BottomNav() {
   const pathname = usePathname();
   const { status } = useSession();
 
-  // Terzi uygulama kabuğu (talep/panel/admin) kendi alt menüsünü kullanıyor —
-  // sitenin genel menüsüyle çakışmaması için burada gizleniyor.
-  const terziKabugu = pathname?.startsWith('/terzi-talep')
-    || pathname?.startsWith('/terzi-panel')
-    || pathname?.startsWith('/terzi-admin');
+  // Terzi bölümünün tüm sayfaları (uygulama kabuğu + tanıtım sayfası + il/ilçe
+  // sayfaları) kendi menüsünü kullanıyor — sitenin genel menüsüyle çakışmaması
+  // için burada gizleniyor.
+  const terziKabugu = pathname?.startsWith('/terzi');
   if (terziKabugu) return null;
 
   return (
