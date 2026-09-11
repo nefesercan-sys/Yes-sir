@@ -158,7 +158,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) birleştirilip 301 redirect
     // yapıldı — sitemap'ten kaldırıldı (bkz. next.config.mjs).
     // ✅ YENİ: Fiziksel olarak var olup sitemap'te hiç bulunmayan 2 sayfa eklendi
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.9 },
+    // DÜZELTME (2026-09): antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti
+    // /terzi/antalya/konyaalti'ye 301 ile birleştirildi (next.config.mjs), kaldırıldı.
     { url: `${BASE_URL}/terzi-cagir`, lastModified: new Date('2026-08-13'), changeFrequency: 'weekly', priority: 0.95 },
 
     // ── Terzi Talep / Panel — Telefon+OTP Teklif Sistemi (Yandex Go tarzı) ──
