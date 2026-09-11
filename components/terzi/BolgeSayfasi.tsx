@@ -4,6 +4,8 @@
 // şablon. Sunucu bileşeni — hızlı, taranabilir, JS'siz de çalışır.
 // ============================================================
 
+import TerziMarketingBottomNav from './MarketingBottomNav';
+
 const YESIL = '#2d8c6e';
 const PHONE = '+90 531 898 64 18';
 
@@ -14,15 +16,55 @@ function WA(msg: string) {
 type Props = {
   tip: 'antalya-ilce' | 'il';
   lokasyonAdi: string;
+  url: string;
   komsuLokasyonlar: { slug: string; ad: string }[];
   komsuHref: (slug: string) => string;
 };
 
-export default function BolgeSayfasi({ tip, lokasyonAdi, komsuLokasyonlar, komsuHref }: Props) {
+export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, komsuHref }: Props) {
   const antalyaIlcesi = tip === 'antalya-ilce';
+
+  // ── SSS — gerçek arama terimleriyle, yapay zeka motorlarının (ChatGPT,
+  // Perplexity, Google AI Overview) referans alması için FAQPage şeması ──
+  const sorular = antalyaIlcesi ? [
+    { s: `${lokasyonAdi}'de terzi nasıl bulunur?`, c: `${lokasyonAdi} bölgesinde terzi bulmak için swaphubs.com/terzi-talep sayfasından ücretsiz talep oluşturabilir veya Terzi Can'a doğrudan WhatsApp'tan (${PHONE}) ulaşabilirsiniz.` },
+    { s: `${lokasyonAdi} paça kısaltma fiyatı ne kadar 2026?`, c: `${lokasyonAdi} dahil tüm Antalya'da paça kısaltma ₺150'den başlıyor. Kesin fiyat kumaş ve modele göre değişebilir, WhatsApp'tan anında fiyat teklifi alabilirsiniz.` },
+    { s: `${lokasyonAdi}'de aynı gün teslim terzi var mı?`, c: `Evet, Terzi Can birçok tadilat işini (paça kısaltma, fermuar değişimi, bel daraltma) aynı gün içinde tamamlayıp ${lokasyonAdi}'ye teslim edebiliyor.` },
+    { s: `${lokasyonAdi}'ye eve veya otele gelen terzi hizmeti var mı?`, c: `Evet, araçlı terzi servisiyle ${lokasyonAdi} dahil tüm Antalya ilçelerine gidip yerinde ölçü alıyoruz.` },
+    { s: `${lokasyonAdi}'de kuru temizleme fiyatları nedir?`, c: `${lokasyonAdi} bölgesinde kuru temizleme ₺300'den başlıyor, mont ve kaban için fiyat değişebilir. Otelden kurye alım seçeneği de mevcut.` },
+  ] : [
+    { s: `${lokasyonAdi}'de terzi nasıl bulunur?`, c: `${lokasyonAdi}'de terzi bulmak için swaphubs.com/terzi-talep sayfasından ihtiyacınızı ve konumunuzu girip ücretsiz talep oluşturun — ${lokasyonAdi}'deki terziler ve kuru temizlemeciler size fiyat teklifi versin.` },
+    { s: `${lokasyonAdi}'de yakınımda terzi nasıl ararım?`, c: `SwapHubs Terzi uygulaması konumunuzu kullanarak ${lokasyonAdi} içinde size en yakın terzi ve kuru temizlemecileri bulup teklif almanızı sağlar.` },
+    { s: `${lokasyonAdi} terzi telefon numarası nasıl bulunur?`, c: `Talep oluşturduğunuzda size teklif veren terzinin telefon numarası ve WhatsApp'ı doğrudan uygulama üzerinden paylaşılır, ekstra arama yapmanıza gerek kalmaz.` },
+    { s: `${lokasyonAdi}'de online terzi teklifi almak ücretsiz mi?`, c: `Evet, SwapHubs Terzi'de talep oluşturmak ve teklif almak tamamen ücretsizdir.` },
+    { s: `${lokasyonAdi}'de acil terzi veya aynı gün dikim mümkün mü?`, c: `Talep oluştururken "acil" veya "aynı gün" notunu ekleyebilirsiniz, ${lokasyonAdi}'deki terziler uygunluklarına göre teklif verir.` },
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://swaphubs.com' },
+          { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://swaphubs.com/terzi' },
+          ...(antalyaIlcesi ? [{ '@type': 'ListItem', position: 3, name: `${lokasyonAdi} Terzi`, item: url }]
+            : [{ '@type': 'ListItem', position: 3, name: `${lokasyonAdi} Terzi`, item: url }]),
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: sorular.map(q => ({
+          '@type': 'Question', name: q.s,
+          acceptedAnswer: { '@type': 'Answer', text: q.c },
+        })),
+      },
+    ],
+  };
 
   return (
     <div style={{ fontFamily: 'Inter, system-ui, sans-serif', color: '#0f172a' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* HERO */}
       <section style={{ background: 'linear-gradient(135deg, #0f2f24, #14392b)', padding: '4rem 1.5rem 3rem', textAlign: 'center' }}>
@@ -37,8 +79,8 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, komsuLokasyonlar, komsu
           </h1>
           <p style={{ color: 'rgba(255,255,255,.75)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '2rem' }}>
             {antalyaIlcesi
-              ? `${lokasyonAdi} ve çevresine hizmet veren Terzi Can ile paça kısaltma, fermuar değişimi, bel daraltma, özel dikim ve kuru temizleme ihtiyaçların için hemen teklif al.`
-              : `${lokasyonAdi}'de terzi mi arıyorsun? Hizmetini ve konumunu gir, ${lokasyonAdi}'deki terziler ve kuru temizlemeciler sana fiyat teklifi versin, en uygununu seç.`}
+              ? `${lokasyonAdi} ve çevresine hizmet veren Terzi Can ile paça kısaltma, fermuar değişimi, bel daraltma, özel dikim ve kuru temizleme ihtiyaçların için hemen teklif al. Yakınımda terzi arayanlar için aynı gün teslim, eve gelen terzi servisi mevcut.`
+              : `${lokasyonAdi}'de terzi mi arıyorsun? "Yakınımda terzi" ya da "en yakın terzi ve kuru temizleme" aramak yerine, hizmetini ve konumunu gir — ${lokasyonAdi}'deki terziler ve dikim atölyeleri sana fiyat teklifi versin, en uygununu seç.`}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="/terzi-talep" style={{ background: YESIL, color: '#fff', padding: '.9rem 1.8rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.95rem' }}>
@@ -104,6 +146,17 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, komsuLokasyonlar, komsu
         </section>
       )}
 
+      {/* SSS — görünür + FAQPage şeması yukarıda tanımlı */}
+      <section style={{ padding: '3rem 1.5rem', maxWidth: 800, margin: '0 auto' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.2rem', textAlign: 'center' }}>Sıkça Sorulan Sorular</h2>
+        {sorular.map((q, i) => (
+          <details key={i} style={{ background: '#fff', borderRadius: 12, padding: '1rem 1.2rem', marginBottom: 10, border: '1px solid #eef2f0' }}>
+            <summary style={{ fontWeight: 700, fontSize: '.9rem', cursor: 'pointer', color: '#0f172a' }}>{q.s}</summary>
+            <p style={{ fontSize: '.85rem', color: '#64748b', marginTop: '.6rem', lineHeight: 1.6 }}>{q.c}</p>
+          </details>
+        ))}
+      </section>
+
       {/* KOMŞU BÖLGELER — iç linkleme */}
       <section style={{ padding: '3rem 1.5rem', maxWidth: 900, margin: '0 auto' }}>
         <h2 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', textAlign: 'center' }}>
@@ -127,6 +180,7 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, komsuLokasyonlar, komsu
           📝 Ücretsiz Teklif Al
         </a>
       </section>
+      <TerziMarketingBottomNav />
     </div>
   );
 }
