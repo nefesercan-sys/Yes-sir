@@ -68,6 +68,25 @@ const nextConfig = {
         destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
         permanent: true,
       },
+      // DÜZELTME (2026-09): /antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti
+      // ile yeni /terzi/antalya/konyaalti (dinamik ilçe sayfası) aynı konuyu
+      // hedefliyordu — "Konyaaltı terzi" aramalarında iki sayfa birbiriyle
+      // yarışıp otoriteyi bölüyordu. Tek, güçlü sayfada (yeni dinamik sayfa)
+      // birleştirildi.
+      {
+        source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti',
+        destination: '/terzi/antalya/konyaalti',
+        permanent: true,
+      },
+      // DÜZELTME (2026-09): antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat
+      // için yorumlar "zaten yönlendirildi" diyordu ama gerçek bir redirect
+      // kuralı hiç eklenmemişti — sayfa hâlâ canlıydı ve aynı "Konyaaltı terzi"
+      // konusunu üçüncü kez hedefliyordu. Eksik olan yönlendirme eklendi.
+      {
+        source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
+        destination: '/terzi/antalya/konyaalti',
+        permanent: true,
+      },
     ]
   },
 
