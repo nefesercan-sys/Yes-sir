@@ -11,6 +11,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ANTALYA_ILCELERI, TURKIYE_ILLERI } from '@/lib/turkiye-lokasyonlar';
+import TerziMarketingBottomNav from '@/components/terzi/MarketingBottomNav';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
 
@@ -488,7 +489,10 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
             <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.55)' }}>(94 {L.reviewLabel})</span>
           </div>
           <div className="thacts">
-            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
+            <a href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
+            <a href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</a>
+          </div>
+          <div className="thacts" style={{ marginTop: '.6rem' }}>
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
           </div>
           <a href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
@@ -888,6 +892,7 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
           ))}
         </nav>
       </footer>
+      <TerziMarketingBottomNav />
     </>
   );
 }
