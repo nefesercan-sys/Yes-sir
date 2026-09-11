@@ -60,26 +60,54 @@ export async function POST(req: NextRequest) {
     if (!userId) return NextResponse.json({ error: 'Önce telefon ile giriş yapın' }, { status: 401 });
 
     const body = await req.json();
-    const { hizmetler, adet, lat, lng, aciklama, medyalar } = body;
+    const { kategori, hizmetler, adet, hizmetTuru, urunler, lat, lng, aciklama, medyalar } = body;
 
-    if (!Array.isArray(hizmetler) || hizmetler.length === 0) {
-      return NextResponse.json({ error: 'En az bir hizmet seçin' }, { status: 400 });
-    }
     if (typeof lat !== 'number' || typeof lng !== 'number') {
       return NextResponse.json({ error: 'Konum zorunlu' }, { status: 400 });
+    }
+
+    const kuruTemizleme = kategori === 'kuru-temizleme';
+
+    let baslik: string;
+    let hizmetlerAlani: string[] = [];
+    let adetAlani = 1;
+    let urunlerAlani: { ad: string; adet: number }[] | undefined;
+
+    if (kuruTemizleme) {
+      if (!Array.isArray(urunler) || urunler.filter((u: any) => Number(u.adet) > 0).length === 0) {
+        return NextResponse.json({ error: 'En az bir ürün ve adet girin' }, { status: 400 });
+      }
+      if (!hizmetTuru) {
+        return NextResponse.json({ error: 'Hizmet türünü seçin (Yıkama, Ütü vb.)' }, { status: 400 });
+      }
+      const temizUrunler = urunler
+        .filter((u: any) => Number(u.adet) > 0)
+        .map((u: any) => ({ ad: String(u.ad), adet: Number(u.adet) }));
+      const ozet = temizUrunler.map((u: any) => `${u.adet} ${u.ad}`).join(', ');
+      baslik = `Kuru Temizleme: ${ozet} (${hizmetTuru})`;
+      adetAlani = temizUrunler.reduce((t: number, u: any) => t + u.adet, 0);
+      hizmetlerAlani = [hizmetTuru];
+      urunlerAlani = temizUrunler;
+    } else {
+      if (!Array.isArray(hizmetler) || hizmetler.length === 0) {
+        return NextResponse.json({ error: 'En az bir hizmet seçin' }, { status: 400 });
+      }
+      baslik = `Terzi Talebi: ${hizmetler.join(', ')}`;
+      hizmetlerAlani = hizmetler;
+      adetAlani = Number(adet) || 1;
     }
 
     const db = await getDb();
     const kullanici = await db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) });
     if (!kullanici) return NextResponse.json({ error: 'Kullanıcı bulunamadı' }, { status: 404 });
 
-    const baslik = `Terzi Talebi: ${hizmetler.join(', ')}`;
-
-    const ilan = {
+    const ilan: Record<string, any> = {
       sektorId: SEKTOR_ID,
+      kategori: kuruTemizleme ? 'kuru-temizleme' : 'terzi',
       baslik,
-      hizmetler,
-      adet: Number(adet) || 1,
+      hizmetler: hizmetlerAlani,
+      ...(urunlerAlani ? { urunler: urunlerAlani, hizmetTuru } : {}),
+      adet: adetAlani,
       aciklama: aciklama || '',
       medyalar: Array.isArray(medyalar) ? medyalar : [],
       resimUrl: medyalar?.[0] || null,
