@@ -19,7 +19,8 @@ const terziSayfalar = [
   // ve hiçbiri diğerine canonical vermiyordu — Google iki sayfayı near-duplicate
   // görüp otoriteyi bölüyordu. 301 ile master sayfaya birleştirildi, kaldırıldı.
   // ✅ YENİ: fiziksel var olup hiçbir sitemap'te olmayan 2 sayfa eklendi
-  { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.9',  freq: 'weekly' },
+  // DÜZELTME (2026-09): antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti
+  // /terzi/antalya/konyaalti'ye 301 ile birleştirildi (next.config.mjs), kaldırıldı.
   { url: `${BASE}/terzi-cagir`,                                             priority: '0.95', freq: 'weekly' },
 
   // ── Antalya Alt Hizmet Sayfaları ───────────────────────────────────
