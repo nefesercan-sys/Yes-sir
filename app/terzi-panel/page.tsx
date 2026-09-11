@@ -375,7 +375,16 @@ export default function TerziPanelPage() {
             <div>
               <button onClick={() => setSeciliTalep(null)} style={{ border: 'none', background: 'none', color: YESIL, fontWeight: 700, fontSize: 13, marginBottom: 14, padding: 0 }}>← Geri</button>
               <h3 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>{seciliTalep.baslik}</h3>
-              <div style={{ fontSize: 13, color: '#475569', marginBottom: 4 }}>Adet: {seciliTalep.adet}</div>
+              {seciliTalep.kategori === 'kuru-temizleme' && Array.isArray(seciliTalep.urunler) ? (
+                <div style={{ marginBottom: 8 }}>
+                  <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>Hizmet: {seciliTalep.hizmetTuru}</div>
+                  {seciliTalep.urunler.map((u: any, i: number) => (
+                    <div key={i} style={{ fontSize: 13, color: '#475569' }}>• {u.adet} adet {u.ad}</div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ fontSize: 13, color: '#475569', marginBottom: 4 }}>Adet: {seciliTalep.adet}</div>
+              )}
               {seciliTalep.aciklama && <div style={{ fontSize: 13, color: '#475569', marginBottom: 12 }}>Not: {seciliTalep.aciklama}</div>}
 
               {Array.isArray(seciliTalep.medyalar) && seciliTalep.medyalar.length > 0 && (
