@@ -131,7 +131,16 @@ export const metadata: Metadata = {
     'Alanya terzi','Belek hotel tailor','tailor service Antalya hotel',
     'выездной портной Анталья','портной в отель Анталья',
   ],
-  alternates: { canonical: SITE_URL },
+  alternates: {
+    canonical: SITE_URL,
+    languages: {
+      'tr': SITE_URL,
+      'en': 'https://swaphubs.com/en/hotel-tailor-antalya',
+      'ru': 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
+      'de': 'https://swaphubs.com/de/schneider-service-hotel-antalya',
+      'x-default': SITE_URL,
+    },
+  },
   openGraph: {
     title: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis',
     description: "Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerine terzi servisi. 24 saat. ☎ " + PHONE,
@@ -427,6 +436,9 @@ export default function EveGelenTerziPage() {
                 ['Dikiş Atölyesi', '/terzi/dikis-atolyesi-antalya'],
                 ['Üniforma Üretimi', '/terzi/uniforma-uretimi-antalya'],
                 ['Kuru Temizleme', '/terzi/kuru-temizleme-antalya'],
+                ['English', '/en/hotel-tailor-antalya'],
+                ['Русский', '/ru/vyezdnoy-portnoy-antalya'],
+                ['Deutsch', '/de/schneider-service-hotel-antalya'],
                 ['← Tüm Hizmetler', '/terzi'],
               ].map(([label, href]) => (
                 <Link key={label} href={href}
