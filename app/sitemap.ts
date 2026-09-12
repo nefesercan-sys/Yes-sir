@@ -182,6 +182,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/ru/atelie-antalya`,                                      lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
 
+    // ── Eve/Otele Gelen Terzi — Çok Dilli Sayfalar (2026-09) ──
+    { url: `${BASE_URL}/en/hotel-tailor-antalya`,                                lastModified: new Date('2026-09-12'), changeFrequency: 'weekly', priority: 0.9  },
+    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,                            lastModified: new Date('2026-09-12'), changeFrequency: 'weekly', priority: 0.9  },
+    { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,                     lastModified: new Date('2026-09-12'), changeFrequency: 'weekly', priority: 0.9  },
+
     // ── Bal & Arım Balım Sayfaları ──
     { url: `${BASE_URL}/bal`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/arimbalim`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
