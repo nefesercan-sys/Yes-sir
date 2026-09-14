@@ -339,6 +339,10 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 ['English — Mobile Tailor', '/en/hotel-tailor-antalya'],
                 ['Русский — Выездной портной', '/ru/vyezdnoy-portnoy-antalya'],
                 ['Türkçe — Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
+                ['Schneider in Belek', '/de/schneider-service-hotel-antalya/belek'],
+                ['Schneider in Lara', '/de/schneider-service-hotel-antalya/lara'],
+                ['Schneider in Güzeloba', '/de/schneider-service-hotel-antalya/guzeloba'],
+                ['Schneider in Side', '/de/schneider-service-hotel-antalya/side'],
                 ['← Alle Leistungen', '/terzi'],
               ].map(([label, href]) => (
                 <Link key={label} href={href}
