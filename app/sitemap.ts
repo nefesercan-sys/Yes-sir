@@ -187,6 +187,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,                            lastModified: new Date('2026-09-12'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,                     lastModified: new Date('2026-09-12'), changeFrequency: 'weekly', priority: 0.9  },
 
+    // ── Otel Bölgesi Sayfaları — Belek/Lara/Güzeloba/Side × EN/RU/DE (2026-09) ──
+    ...['belek', 'lara', 'guzeloba', 'side'].flatMap((slug) => [
+      { url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, lastModified: new Date('2026-09-13'), changeFrequency: 'weekly' as const, priority: 0.88 },
+      { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, lastModified: new Date('2026-09-13'), changeFrequency: 'weekly' as const, priority: 0.88 },
+      { url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, lastModified: new Date('2026-09-13'), changeFrequency: 'weekly' as const, priority: 0.88 },
+    ]),
+
     // ── Bal & Arım Balım Sayfaları ──
     { url: `${BASE_URL}/bal`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/arimbalim`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
