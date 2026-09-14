@@ -339,6 +339,10 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 ['English — Mobile Tailor', '/en/hotel-tailor-antalya'],
                 ['Deutsch — Schneider Service', '/de/schneider-service-hotel-antalya'],
                 ['Türkçe — Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
+                ['Портной в Белеке', '/ru/vyezdnoy-portnoy-antalya/belek'],
+                ['Портной в Ларе', '/ru/vyezdnoy-portnoy-antalya/lara'],
+                ['Портной в Гюзельобе', '/ru/vyezdnoy-portnoy-antalya/guzeloba'],
+                ['Портной в Сиде', '/ru/vyezdnoy-portnoy-antalya/side'],
                 ['← Все услуги', '/terzi'],
               ].map(([label, href]) => (
                 <Link key={label} href={href}
