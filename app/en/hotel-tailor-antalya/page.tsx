@@ -339,6 +339,10 @@ export default function HotelTailorAntalyaPage() {
                 ['Русский — Выездной портной', '/ru/vyezdnoy-portnoy-antalya'],
                 ['Deutsch — Schneider Service', '/de/schneider-service-hotel-antalya'],
                 ['Türkçe — Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
+                ['Belek Hotel Tailor', '/en/hotel-tailor-antalya/belek'],
+                ['Lara Hotel Tailor', '/en/hotel-tailor-antalya/lara'],
+                ['Güzeloba Hotel Tailor', '/en/hotel-tailor-antalya/guzeloba'],
+                ['Side Hotel Tailor', '/en/hotel-tailor-antalya/side'],
                 ['← All Services', '/terzi'],
               ].map(([label, href]) => (
                 <Link key={label} href={href}
