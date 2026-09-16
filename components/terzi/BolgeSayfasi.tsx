@@ -19,9 +19,11 @@ type Props = {
   url: string;
   komsuLokasyonlar: { slug: string; ad: string }[];
   komsuHref: (slug: string) => string;
+  /** MongoDB'den o bölgenin ~60km çevresinde sayılan GERÇEK aktif talep sayısı. */
+  aktifTalepSayisi: number;
 };
 
-export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, komsuHref }: Props) {
+export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, komsuHref, aktifTalepSayisi }: Props) {
   const antalyaIlcesi = tip === 'antalya-ilce';
 
   // ── SSS — gerçek arama terimleriyle, yapay zeka motorlarının (ChatGPT,
@@ -93,6 +95,13 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
               </a>
             )}
           </div>
+          {/* GERÇEK, CANLI VERİ — uydurma istatistik değil, MongoDB'den o an
+              sayılan gerçek aktif talep sayısı (bkz. page.tsx) */}
+          <p style={{ color: 'rgba(255,255,255,.6)', fontSize: '.8rem', marginTop: '1.2rem' }}>
+            {aktifTalepSayisi > 0
+              ? `📍 Şu anda ${lokasyonAdi} çevresinde ${aktifTalepSayisi} aktif terzi talebi var.`
+              : `📍 ${lokasyonAdi} çevresinde henüz aktif talep yok — ilk talebi siz oluşturun.`}
+          </p>
         </div>
       </section>
 
