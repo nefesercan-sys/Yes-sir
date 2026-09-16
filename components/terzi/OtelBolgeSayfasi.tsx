@@ -13,7 +13,7 @@ const T: Record<Lang, any> = {
     waShare: 'Share Hotel Name →', callBtn: PHONE,
     flags: [['🇬🇧', 'We come to your hotel'], ['🇷🇺', 'Приедем в ваш отель'], ['🇩🇪', 'Wir kommen zu Ihnen'], ['🇹🇷', 'Otele geliyoruz']],
     aboutH: (r: string) => `About the ${r} Hotel District`, travelLabel: 'Travel time:',
-    hotelsH: (r: string) => `Hotels We Serve in ${r}`, hotelsSub: 'We come to every hotel in this district — just tell us your hotel name.',
+    hotelsH: (r: string) => `Hotels in the ${r} Area`, hotelsSub: 'We can reach you at any hotel in this district — just share your hotel name and we\'ll confirm.',
     otherHotels: '+ every other hotel in this district. Just message your hotel name on WhatsApp.',
     howH: 'How It Works', howSub: 'Tailor service delivered to your hotel room in 4 steps',
     steps: [
@@ -48,7 +48,7 @@ const T: Record<Lang, any> = {
     waShare: 'Отправить название отеля →', callBtn: PHONE,
     flags: [['🇷🇺', 'Приедем в ваш отель'], ['🇬🇧', 'We come to your hotel'], ['🇩🇪', 'Wir kommen zu Ihnen'], ['🇹🇷', 'Otele geliyoruz']],
     aboutH: (r: string) => `Об отельном районе ${r}`, travelLabel: 'Время в пути:',
-    hotelsH: (r: string) => `Отели, которые мы обслуживаем в ${r}`, hotelsSub: 'Мы приезжаем в каждый отель этого района — просто сообщите название отеля.',
+    hotelsH: (r: string) => `Отели в районе ${r}`, hotelsSub: 'Мы можем приехать в любой отель этого района — просто напишите название отеля, и мы подтвердим.',
     otherHotels: '+ все остальные отели этого района. Просто напишите название отеля в WhatsApp.',
     howH: 'Как это работает', howSub: 'Сервис портного прямо в ваш номер за 4 шага',
     steps: [
@@ -83,7 +83,7 @@ const T: Record<Lang, any> = {
     waShare: 'Hotelnamen senden →', callBtn: PHONE,
     flags: [['🇩🇪', 'Wir kommen zu Ihnen'], ['🇬🇧', 'We come to your hotel'], ['🇷🇺', 'Приедем в ваш отель'], ['🇹🇷', 'Otele geliyoruz']],
     aboutH: (r: string) => `Über den Hotelbezirk ${r}`, travelLabel: 'Anfahrtszeit:',
-    hotelsH: (r: string) => `Hotels, die wir in ${r} bedienen`, hotelsSub: 'Wir kommen zu jedem Hotel in diesem Bezirk — teilen Sie einfach Ihren Hotelnamen mit.',
+    hotelsH: (r: string) => `Hotels im Gebiet ${r}`, hotelsSub: 'Wir erreichen Sie in jedem Hotel dieses Bezirks — teilen Sie einfach Ihren Hotelnamen mit, wir bestätigen den Termin.',
     otherHotels: '+ alle anderen Hotels in diesem Bezirk. Teilen Sie einfach Ihren Hotelnamen per WhatsApp mit.',
     howH: 'So funktioniert es', howSub: 'Schneiderservice direkt auf Ihr Hotelzimmer in 4 Schritten',
     steps: [
