@@ -1,6 +1,6 @@
 // ============================================================
 // SwapHubs — lib/otel-bolgeleri.ts
-// Belek / Lara / Güzeloba / Side otel bölgeleri — EN/RU/DE
+// Belek / Lara / Güzeloba / Kemer / Side otel bölgeleri — EN/RU/DE
 // otele gelen terzi sayfaları için ortak veri.
 // ============================================================
 
@@ -70,6 +70,21 @@ export const OTEL_BOLGELERI: OtelBolgesi[] = [
       en: 'Side is a historic resort town with ancient ruins alongside a large concentration of beach hotels, near Manavgat.',
       ru: 'Сиде — исторический курортный город с античными руинами и большой концентрацией пляжных отелей, рядом с Манавгатом.',
       de: 'Side ist eine historische Kurstadt mit antiken Ruinen und einer großen Konzentration an Strandhotels, nahe Manavgat.',
+    },
+  },
+  {
+    slug: 'kemer',
+    name: 'Kemer',
+    hotels: [
+      'Rixos Sungate', 'Club Med Kemer', 'Alva Donna Beach Resort', 'Amara Dolce Vita Luxury',
+      'Kilikya Palace Göynük', 'Sherwood Dreams Resort', 'Sentido Zeynep Resort', 'Fantasia Hotel De Luxe Kemer',
+      'Club Turan Prince World', 'Simena Holiday Village',
+    ],
+    travelTime: { en: '~40–50 min from our workshop', ru: '~40–50 мин от мастерской', de: '~40–50 Min von unserer Werkstatt' },
+    blurb: {
+      en: 'Kemer is a coastal Antalya town where the Taurus Mountains meet the sea, known for its marina and resort hotels.',
+      ru: 'Кемер — прибрежный город Антальи, где горы Тавр встречаются с морем, известный своей мариной и курортными отелями.',
+      de: 'Kemer ist eine Küstenstadt bei Antalya, wo das Taurus-Gebirge auf das Meer trifft, bekannt für seine Marina und Resort-Hotels.',
     },
   },
 ];
