@@ -141,19 +141,12 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1',
-        itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-      },
-      review: [
-        { '@type': 'Review', name: 'Üniforma Üretimi — Mükemmel', author: { '@type': 'Person', name: 'Murat B.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Zamanında teslim, mükemmel kalite!', datePublished: '2025-01-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Best Tailor in Antalya', author: { '@type': 'Person', name: 'Sarah M.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Amazing tailor! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional!', datePublished: '2025-05-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Лучший портной в Анталье', author: { '@type': 'Person', name: 'Наталья К.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили в отель!', datePublished: '2025-06-20', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Ausgezeichnete Qualität', author: { '@type': 'Person', name: 'David K.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: '30 Stück Sweatshirts mit Stickerei — pünktlich geliefert. Ausgezeichnete Qualität!', datePublished: '2025-02-08', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Hızlı ve Kaliteli', author: { '@type': 'Person', name: 'Elif Y.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Gelinliğimi mükemmel teslim ettiler. Paça kısaltmayı aynı gün yaptılar!', datePublished: '2025-04-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Perfect English-Speaking Tailor', author: { '@type': 'Person', name: 'James T.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Suit altered for a business meeting in 24h. Best English-speaking tailor in Antalya!', datePublished: '2025-03-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-      ],
+      // KALDIRILDI (2026-09): Bu blokta doğrulanamayan, uydurma isim/tarih/metinli
+      // 6 sahte "Review" ve buna dayalı bir "aggregateRating" (4.9 / 94 yorum) vardı.
+      // Google, sahte review schema'sı tespit ettiğinde tüm domaine manuel aksiyon
+      // uygulayabilir; ayrıca bu, terzihizmeti.com.tr'de bilinçli olarak benimsenen
+      // "gerçek yorum yoksa sahte puan gösterme" ilkesiyle çelişiyordu. Gerçek Google
+      // Business Profile yorumları biriktikçe, gerçek verilerle geri eklenmeli.
       areaServed: ANTALYA_ILCELER,
       contactPoint: [{
         '@type': 'ContactPoint',
