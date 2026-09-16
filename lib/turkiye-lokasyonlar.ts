@@ -11,6 +11,30 @@
 // ============================================================
 
 export type Lokasyon = { slug: string; ad: string; lat: number; lng: number };
+export type Mahalle = Lokasyon & { blurb: string };
+
+// Konyaaltı'nın 10 mahallesi — TERZİ Tailor Atelie'nin en yoğun hizmet verdiği
+// alt bölgeler (master sayfada zaten metinle tanıtılıyordu, ama linkleri
+// /terzi/konyaalti/{mahalle} hiç var olmayan bir sayfaya gidiyordu — bkz.
+// app/terzi/konyaalti/[mahalle]/page.tsx). Koordinatlar, canlı talep sayısı
+// sorgusu için gerekli.
+//
+// ÖNEMLİ: slug'lar bilinçli olarak Türkçe karakterli (ör. 'uncalı', 'çakırlar')
+// — çünkü yıldız sayfa (antalyada-terzi-dikim-tamirat-utu-hizmetleri) zaten
+// `d.name.toLocaleLowerCase('tr-TR')` ile bu tam hâliyle href üretiyor. ASCII
+// slug (ör. 'uncali') kullansaydık, o sayfadaki linkler yine 404 verirdi.
+export const KONYAALTI_MAHALLELERI: Mahalle[] = [
+  { slug: 'hurma', ad: 'Hurma', lat: 36.8481, lng: 30.6206, blurb: 'Sahil şeridine yakın site ve villalara aynı gün kuryeli alım.' },
+  { slug: 'liman', ad: 'Liman', lat: 36.8656, lng: 30.6350, blurb: 'Liman mahallesindeki iş yerlerine ve konutlara hızlı teslimat.' },
+  { slug: 'uncalı', ad: 'Uncalı', lat: 36.8944, lng: 30.6486, blurb: 'Uncalı\'daki yoğun apartman bölgelerinde randevulu kurye servisi.' },
+  { slug: 'sarısu', ad: 'Sarısu', lat: 36.8386, lng: 30.6142, blurb: 'Sarısu sahil hattındaki site ve rezidanslara aynı gün kurye.' },
+  { slug: 'gürsu', ad: 'Gürsu', lat: 36.8797, lng: 30.6394, blurb: 'Gürsu mahallesindeki konut ve iş yerlerine randevulu adresten alım.' },
+  { slug: 'çakırlar', ad: 'Çakırlar', lat: 36.9308, lng: 30.6469, blurb: 'Çakırlar bölgesine araçlı terzi servisi ve hızlı teslimat.' },
+  { slug: 'meltem', ad: 'Meltem', lat: 36.8975, lng: 30.6706, blurb: 'Meltem mahallesine aynı gün veya 24 saat içinde teslimat garantisi.' },
+  { slug: 'şirinyalı', ad: 'Şirinyalı', lat: 36.8747, lng: 30.6997, blurb: 'Otel yoğun bölgede VIP acil ütü ve tadilat hizmeti önceliklidir.' },
+  { slug: 'fener', ad: 'Fener', lat: 36.8697, lng: 30.6875, blurb: 'Fener sahil bölgesine özel akşam saatlerinde teslimat imkanı.' },
+  { slug: 'güzeloba', ad: 'Güzeloba', lat: 36.8558, lng: 30.7889, blurb: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
+];
 
 // Antalya'nın 19 ilçesi — Terzi Can'ın fiziksel hizmet verdiği bölge
 export const ANTALYA_ILCELERI: Lokasyon[] = [
