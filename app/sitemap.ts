@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getDb } from '@/lib/mongodb'
-import { ANTALYA_ILCELERI, TURKIYE_ILLERI } from '@/lib/turkiye-lokasyonlar'
+import { ANTALYA_ILCELERI, TURKIYE_ILLERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -170,6 +170,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...ANTALYA_ILCELERI.map(i => ({
       url: `${BASE_URL}/terzi/antalya/${i.slug}`,
       lastModified: new Date('2026-09-10'), changeFrequency: 'weekly' as const, priority: 0.85,
+    })),
+
+    // ── Konyaaltı mahalleleri (2026-09 EKLENDİ) — en çok trafik alan
+    // /antalyada-terzi-dikim-tamirat-utu-hizmetleri sayfası bu 10 mahalleye
+    // zaten link veriyordu, ama sayfalar hiç var olmamıştı. Artık gerçekler. ──
+    ...KONYAALTI_MAHALLELERI.map(m => ({
+      url: `${BASE_URL}/terzi/konyaalti/${m.slug}`,
+      lastModified: new Date('2026-09-16'), changeFrequency: 'weekly' as const, priority: 0.88,
     })),
 
     // ── Türkiye'nin diğer illeri (ulusal pazaryeri trafiği) ──
