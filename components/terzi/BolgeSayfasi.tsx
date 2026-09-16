@@ -14,7 +14,7 @@ function WA(msg: string) {
 }
 
 type Props = {
-  tip: 'antalya-ilce' | 'il';
+  tip: 'antalya-ilce' | 'il' | 'konyaalti-mahalle';
   lokasyonAdi: string;
   url: string;
   komsuLokasyonlar: { slug: string; ad: string }[];
@@ -24,7 +24,10 @@ type Props = {
 };
 
 export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, komsuHref, aktifTalepSayisi }: Props) {
-  const antalyaIlcesi = tip === 'antalya-ilce';
+  // Antalya ilçeleri VE Konyaaltı mahalleleri — Terzi Can'ın gerçekten fiziksel
+  // olarak hizmet verdiği bölgeler; 'il' (Türkiye geneli) ise saf pazaryeri
+  // (teklif toplama) modeliyle çalışıyor, bu yüzden içerik çerçevesi farklı.
+  const antalyaIlcesi = tip === 'antalya-ilce' || tip === 'konyaalti-mahalle';
 
   // ── SSS — gerçek arama terimleriyle, yapay zeka motorlarının (ChatGPT,
   // Perplexity, Google AI Overview) referans alması için FAQPage şeması ──
@@ -169,7 +172,7 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
       {/* KOMŞU BÖLGELER — iç linkleme */}
       <section style={{ padding: '3rem 1.5rem', maxWidth: 900, margin: '0 auto' }}>
         <h2 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', textAlign: 'center' }}>
-          {antalyaIlcesi ? 'Diğer Antalya İlçeleri' : 'Diğer Şehirler'}
+          {tip === 'konyaalti-mahalle' ? 'Diğer Konyaaltı Mahalleleri' : antalyaIlcesi ? 'Diğer Antalya İlçeleri' : 'Diğer Şehirler'}
         </h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
           {komsuLokasyonlar.map(k => (
