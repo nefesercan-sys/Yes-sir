@@ -1,13 +1,18 @@
 // ============================================================
 // SwapHubs — app/terzi/antalya/[ilce]/page.tsx
-// Antalya'nın 19 ilçesi için otomatik üretilen terzi sayfaları.
+// Antalya'nın 19 ilçesi için terzi sayfaları.
 // ============================================================
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
+import { getDb } from '@/lib/mongodb';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 
 const HOME_URL = 'https://swaphubs.com';
+const SEKTOR_ID = 'terzi-kuru-temizleme';
+const YARICAP_KM = 20;
+
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return ANTALYA_ILCELERI.map(i => ({ ilce: i.slug }));
@@ -15,6 +20,22 @@ export async function generateStaticParams() {
 
 function bul(slug: string) {
   return ANTALYA_ILCELERI.find(i => i.slug === slug);
+}
+
+async function aktifTalepSayisiGetir(lat: number, lng: number): Promise<number> {
+  try {
+    const db = await getDb();
+    const yaricapRadyan = YARICAP_KM / 6378.1;
+    return await db.collection('ilanlar').countDocuments({
+      sektorId: SEKTOR_ID,
+      durum: 'aktif',
+      teklifeAcik: true,
+      location: { $geoWithin: { $centerSphere: [[lng, lat], yaricapRadyan] } },
+    });
+  } catch (e) {
+    console.error('[ilçe talep sayısı]', e);
+    return 0;
+  }
 }
 
 export async function generateMetadata({ params }: { params: { ilce: string } }): Promise<Metadata> {
@@ -39,11 +60,12 @@ export async function generateMetadata({ params }: { params: { ilce: string } })
   };
 }
 
-export default function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: string } }) {
+export default async function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: string } }) {
   const ilce = bul(params.ilce);
   if (!ilce) notFound();
 
   const url = `${HOME_URL}/terzi/antalya/${ilce.slug}`;
+  const aktifTalepSayisi = await aktifTalepSayisiGetir(ilce.lat, ilce.lng);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -65,6 +87,7 @@ export default function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: st
         url={url}
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => `/terzi/antalya/${slug}`}
+        aktifTalepSayisi={aktifTalepSayisi}
       />
     </>
   );
