@@ -707,7 +707,9 @@ export default function GeminiOptimizedTailorPage() {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }} className="sh-districts">
             {districtBlurbs.map((d) => (
-              // TODO: href'i gerçek mahalle sayfası slug'ınızla değiştirin (örn. /terzi/konyaalti/hurma)
+              // DÜZELTME (2026-09): Bu link artık gerçek bir sayfaya gidiyor —
+              // bkz. app/terzi/konyaalti/[mahalle]/page.tsx (önceden bu 10 link
+              // hiç var olmayan bir sayfaya gidip 404 veriyordu).
               <a key={d.name} href={`/terzi/konyaalti/${d.name.toLocaleLowerCase('tr-TR')}`} style={{ display: 'block', border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 16px', textDecoration: 'none', background: '#fff', transition: 'border-color .15s' }}>
                 <div style={{ fontSize: 14.5, fontWeight: 700, color: '#0b0d0c', marginBottom: 6 }}>{d.name} Terzi</div>
                 <div style={{ fontSize: 13, color: SUB, lineHeight: 1.5 }}>{d.text}</div>
