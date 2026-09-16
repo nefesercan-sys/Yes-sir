@@ -237,17 +237,13 @@ const WHY = [
   { icon:'🏨', tr:['Otele Teslimat','Tüm Antalya otellerine'], en:['Hotel Delivery','All Antalya hotels'], ru:['Доставка в отель','Все отели Антальи'], de:['Hotel Lieferung','Alle Antalya-Hotels'] },
   { icon:'👔', tr:['Bay & Bayan','Erkek ve kadın kıyafeti uzman ekip'], en:['Men & Women','Specialist team for both'], ru:['Мужской & Женский','Специалисты для обоих'], de:['Herren & Damen','Spezialisiert für beide'] },
   { icon:'🏭', tr:['Tekstil İmalatı','Tişört, sweatshirt, pantolon seri üretim'], en:['Textile Mfg','T-shirt, sweatshirt, trousers production'], ru:['Производство','Серийное производство'], de:['Textilproduktion','Serienproduktion'] },
-  { icon:'⭐', tr:['4.9 · 94 Yorum',"Google'da en yüksek puan"], en:['4.9 · 94 Reviews','Highest rated in Antalya'], ru:['4.9 · 94 клиента','Лучший рейтинг'], de:['4,9 · 94 Bewertungen','Beste Bewertung'] },
 ];
 
-const REVIEWS = [
-  { stars:5, text:'"Otelimiz için 45 kişilik personel üniforması diktirdik. Tasarım ve seri üretim mükemmeldi!"', author:'Murat B.', flag:'🇹🇷', city:'Antalya', date:'Ocak 2025' },
-  { stars:5, text:'"Amazing tailor in Antalya! Dress altered in 24 hours before my gala dinner. Perfect fit!"', author:'Sarah M.', flag:'🇬🇧', city:'London', date:'Mayıs 2025' },
-  { stars:5, text:'"Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили в отель!"', author:'Наталья К.', flag:'🇷🇺', city:'Москва', date:'Haziran 2025' },
-  { stars:5, text:'"Bestickte Sweatshirts — 30 Stück, pünktlich geliefert. Ausgezeichnete Qualität!"', author:'David K.', flag:'🇩🇪', city:'Berlin', date:'Şubat 2025' },
-  { stars:5, text:'"Gelinliğimi mükemmel teslim ettiler. Paça kısaltmayı aynı gün yaptılar. Harika hizmet!"', author:'Elif Y.', flag:'🇹🇷', city:'Antalya', date:'Nisan 2025' },
-  { stars:5, text:'"Suit altered for a business meeting in 24h. Perfect fit. Best tailor in Antalya!"', author:'James T.', flag:'🇦🇺', city:'Sydney', date:'Mart 2025' },
-];
+// KALDIRILDI (2026-09): Burada uydurma isim/şehir/tarihli 6 sahte müşteri
+// yorumu vardı. Google Business Profile'daki gerçek yorumlar biriktikçe,
+// gerçek verilerle (ör. Google Places API üzerinden) geri eklenmeli —
+// sahte içerik hem Google'ın sahte-yorum politikasını ihlal ediyor hem de
+// terzihizmeti.com.tr'de benimsenen dürüstlük ilkesiyle çelişiyordu.
 
 const SEO_INTRO: Record<Lang, string> = {
   tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort, gobi seri üretimi. Dikiş atölyesi. Kuru temizleme. Üniforma üretimi. Tüm Antalya ilçelerine araçlı terzi servisi.",
@@ -483,11 +479,6 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
           <span className="thbadge">{L.badge}</span>
           <h1>{L.h1}<br /><em>{L.h1em}</em></h1>
           <p className="thsub">{L.sub}</p>
-          <div style={{ display: 'flex', gap: '.4rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
-            <span style={{ color: '#f59e0b', fontSize: '1rem' }}>⭐⭐⭐⭐⭐</span>
-            <span style={{ fontSize: '.88rem', fontWeight: 700, color: '#fff', marginLeft: '.3rem' }}>4.9</span>
-            <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.55)' }}>(94 {L.reviewLabel})</span>
-          </div>
           <div className="thacts">
             <a href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
             <a href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</a>
@@ -588,30 +579,24 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
         </div>
       </section>
 
-      {/* MÜŞTERİ YORUMLARI */}
+      {/* GOOGLE YORUMLARI — gerçek profillere yönlendirme */}
       <section className="trev">
         <div className="trev-inner">
           <div style={{ textAlign: 'center' }}>
-            <span className="ey ey-light">⭐ 4.9 / 5 · 94 {L.reviewLabel}</span>
-            <h2 className="tst tst-light">Müşteri Yorumları</h2>
+            <span className="ey ey-light">⭐ Google Business Profile</span>
+            <h2 className="tst tst-light">Müşteri Yorumlarımız Google'da</h2>
             <span className="tgl tgl-center" />
+            <p className="tss" style={{ color: 'rgba(255,255,255,.55)', maxWidth: 480, margin: '.8rem auto 0' }}>
+              Güncel puan ve yorumlarımızı doğrudan Google Haritalar'daki profillerimizden görebilirsiniz.
+            </p>
           </div>
-          <div className="trev-grid">
-            {REVIEWS.map((r, i) => (
-              <article key={i} className="trc">
-                <div className="trc-stars">{'⭐'.repeat(r.stars)}</div>
-                <p className="trc-txt">{r.text}</p>
-                <div className="trc-auth">{r.flag} {r.author} — {r.city} · <span style={{ color: 'rgba(255,255,255,.3)', fontWeight: 300 }}>{r.date}</span></div>
-              </article>
-            ))}
-          </div>
-          {/* Yorum butonları — her iki profil */}
+          {/* Yorum görüntüleme/yazma butonları — her iki profil */}
           <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
-              ⭐ {L.reviewTitle} — {gbp1.name.split(' — ')[0]}
+              ⭐ Google'da Görüntüle — {gbp1.name.split(' — ')[0]}
             </a>
             <a href={gbp2.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
-              ⭐ {L.reviewTitle} — {gbp2.name.split(' — ')[0]}
+              ⭐ Google'da Görüntüle — {gbp2.name.split(' — ')[0]}
             </a>
           </div>
         </div>
