@@ -1,0 +1,17 @@
+{
+  "name": "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+  "short_name": "SwapHubs",
+  "description": "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#B8975A",
+  "icons": [
+    {
+      "src": "/og/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
