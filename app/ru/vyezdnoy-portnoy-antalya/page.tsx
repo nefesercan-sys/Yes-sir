@@ -114,13 +114,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Белек', time:'~35 мин', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
-  {name:'Лара', time:'~10 мин', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
-  {name:'Кемер', time:'~45 мин', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
+  {name:'Белек', time:'~35 мин', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Лара', time:'~10 мин', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Гюзельоба', time:'~15 мин', desc:'Sherwood, Delphin Imperial, Adalya Elite и другие пляжные отели Гюзельобы', slug:'guzeloba'},
+  {name:'Кемер', time:'~45 мин', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
   {name:'Аланья', time:'~1.5 ч', desc:'Центр Аланьи и окрестности — Махмутлар, Оба, Конаклы, Авсаллар'},
   {name:'Муратпаша / Лиман', time:'~5 мин', desc:'Центр города, Калеичи, Ширинъялы, Фенер'},
   {name:'Коньяалты', time:'Рядом', desc:'Мастерская Terzi Can — Хурма, Унджалы, Арапсую, Сарысу'},
-  {name:'Манавгат / Сиде', time:'~1 ч', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки'},
+  {name:'Сиде', time:'~1 ч', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки', slug:'side'},
   {name:'Серик / Дёшемеалты', time:'~40 мин', desc:'Центр Серика и окрестные деревни'},
 ];
 
@@ -208,15 +209,20 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — во все районы Антальи</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
-              {DISTRICTS.map(({name, time, desc}) => (
-                <div key={name} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
-                    <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
-                    <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
-                  </div>
-                  <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
-                </div>
-              ))}
+              {DISTRICTS.map(({name, time, desc, slug}) => {
+                const CardTag: any = slug ? Link : 'div';
+                const cardProps = slug ? { href: `/ru/vyezdnoy-portnoy-antalya/${slug}` } : {};
+                return (
+                  <CardTag key={name} {...cardProps} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A', textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
+                      <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
+                      <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
+                    </div>
+                    <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
+                    {slug && <p style={{ fontSize: '.72rem', color: '#B8975A', fontWeight: 600, marginTop: '.5rem' }}>Список отелей {name} →</p>}
+                  </CardTag>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -327,7 +333,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            ⭐ 4.9 / 5 · 94 отзыва в Google · 09:00–19:00 Пн–Сб
+            Открыто ежедневно · 09:00–19:00
           </p>
         </section>
 
