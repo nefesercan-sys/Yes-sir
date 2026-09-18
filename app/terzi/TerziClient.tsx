@@ -227,6 +227,9 @@ const ALT_SAYFALAR = [
   ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
   ['🔗','Fermuar Değişimi Antalya','/terzi/fermuar-degisimi-antalya'],
   ['💍','Gelinlik Tadilatı Antalya','/terzi/gelinlik-tadilati-antalya'],
+  ['🏨','Hotel Tailor Antalya (EN)','/en/hotel-tailor-antalya'],
+  ['🏨','Schneider im Hotel (DE)','/de/schneider-service-hotel-antalya'],
+  ['🏨','Портной в отеле (RU)','/ru/vyezdnoy-portnoy-antalya'],
 ] as const;
 
 const WHY = [
