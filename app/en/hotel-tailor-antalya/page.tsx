@@ -114,13 +114,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'~35 min', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
-  {name:'Lara', time:'~10 min', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
-  {name:'Kemer', time:'~45 min', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
+  {name:'Belek', time:'~35 min', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'~10 min', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'~15 min', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
+  {name:'Kemer', time:'~45 min', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
   {name:'Alanya', time:'~1.5 hr', desc:'Alanya center and surroundings — Mahmutlar, Oba, Konaklı, Avsallar'},
   {name:'Muratpaşa / Liman', time:'~5 min', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Local', desc:'Terzi Can workshop — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Manavgat / Side', time:'~1 hr', desc:'Side, Sorgun, Kumköy, Evrenseki hotels'},
+  {name:'Side', time:'~1 hr', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
   {name:'Serik / Döşemealtı', time:'~40 min', desc:'Serik center and surrounding villages'},
 ];
 
@@ -208,15 +209,20 @@ export default function HotelTailorAntalyaPage() {
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>From our Konyaaltı workshop to every district of Antalya</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
-              {DISTRICTS.map(({name, time, desc}) => (
-                <div key={name} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
-                    <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
-                    <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
-                  </div>
-                  <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
-                </div>
-              ))}
+              {DISTRICTS.map(({name, time, desc, slug}) => {
+                const CardTag: any = slug ? Link : 'div';
+                const cardProps = slug ? { href: `/en/hotel-tailor-antalya/${slug}` } : {};
+                return (
+                  <CardTag key={name} {...cardProps} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A', textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
+                      <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
+                      <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
+                    </div>
+                    <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
+                    {slug && <p style={{ fontSize: '.72rem', color: '#B8975A', fontWeight: 600, marginTop: '.5rem' }}>View {name} hotel list →</p>}
+                  </CardTag>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -327,7 +333,7 @@ export default function HotelTailorAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            ⭐ 4.9 / 5 · 94 Google Reviews · 09:00–19:00 Mon–Sat
+            Open daily · 09:00–19:00
           </p>
         </section>
 
