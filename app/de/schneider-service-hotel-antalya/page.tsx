@@ -114,13 +114,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'~35 Min', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
-  {name:'Lara', time:'~10 Min', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
-  {name:'Kemer', time:'~45 Min', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
+  {name:'Belek', time:'~35 Min', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'~10 Min', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'~15 Min', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
+  {name:'Kemer', time:'~45 Min', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
   {name:'Alanya', time:'~1,5 Std', desc:'Alanya Zentrum und Umgebung — Mahmutlar, Oba, Konaklı, Avsallar'},
   {name:'Muratpaşa / Liman', time:'~5 Min', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Vor Ort', desc:'Werkstatt von Terzi Can — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Manavgat / Side', time:'~1 Std', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki'},
+  {name:'Side', time:'~1 Std', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
   {name:'Serik / Döşemealtı', time:'~40 Min', desc:'Serik Zentrum und umliegende Dörfer'},
 ];
 
@@ -208,15 +209,20 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Von unserer Werkstatt in Konyaaltı in jeden Bezirk von Antalya</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
-              {DISTRICTS.map(({name, time, desc}) => (
-                <div key={name} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
-                    <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
-                    <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
-                  </div>
-                  <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
-                </div>
-              ))}
+              {DISTRICTS.map(({name, time, desc, slug}) => {
+                const CardTag: any = slug ? Link : 'div';
+                const cardProps = slug ? { href: `/de/schneider-service-hotel-antalya/${slug}` } : {};
+                return (
+                  <CardTag key={name} {...cardProps} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A', textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
+                      <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
+                      <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
+                    </div>
+                    <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
+                    {slug && <p style={{ fontSize: '.72rem', color: '#B8975A', fontWeight: 600, marginTop: '.5rem' }}>Hotelliste {name} ansehen →</p>}
+                  </CardTag>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -327,7 +333,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            ⭐ 4,9 / 5 · 94 Google-Bewertungen · 09:00–19:00 Mo–Sa
+            Täglich geöffnet · 09:00–19:00
           </p>
         </section>
 
