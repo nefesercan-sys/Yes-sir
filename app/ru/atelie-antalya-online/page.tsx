@@ -7,7 +7,10 @@ const PHONE_DISPLAY   = '+90 531 898 64 18';
 const PHONE_TEL       = '+905318986418';
 const WA_NUMBER       = '905318986418';
 const GBP_NAME        = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
-const GBP_CID         = '1496201377277644027';
+// DÜZELTME (2026-09): Bu dosyada eski/doğrulanmamış bir CID kullanılıyordu.
+// Diğer sayfalarda (ör. antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat)
+// yapılan doğrulamaya göre gerçek/doğrulanmış CID 16306058881247995687'dir.
+const GBP_CID         = '16306058881247995687';
 const MAPS_URL        = `https://www.google.com/maps?cid=${GBP_CID}`;
 const MAPS_SHORT      = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
 const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
@@ -30,7 +33,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье Анталия Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто Пн–Сб 09:00–19:00. ⭐4.9 (94 отзыва) ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто Пн–Сб 09:00–19:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -88,7 +91,7 @@ const jsonLd = {
       address: { '@type': 'PostalAddress', streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '19:00' }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
+      // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
       areaServed: ['Konyaaltı','Hurma','Liman','Sarısu','Lara','Belek','Kemer','Antalya'].map(n => ({ '@type': 'Place', name: n })),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -181,7 +184,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; ⭐ 4.9 (94 отзыва) &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Пн–Сб 09:00–19:00
+          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Пн–Сб 09:00–19:00
         </div>
 
         {/* ── HERO ── */}
@@ -218,12 +221,11 @@ export default function RuAtelieAntalyaPage() {
               </a>
             </div>
 
-            {/* Рейтинг */}
-            <div style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:8,fontSize:13,color:'rgba(255,255,255,.6)' }}>
-              <span style={{ color:'#FACC15',fontSize:17 }}>★★★★★</span>
-              <strong style={{ color:'#fff' }}>4.9</strong>
-              <span>· 94 отзыва</span>
-            </div>
+            {/* Ссылка на реальный профиль Google */}
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:8,fontSize:13,color:'rgba(255,255,255,.6)',textDecoration:'none' }}>
+              <span style={{ color:'#FACC15',fontSize:17 }}>★</span>
+              <span>Смотреть отзывы в Google</span>
+            </a>
           </div>
         </header>
 
@@ -239,9 +241,6 @@ export default function RuAtelieAntalyaPage() {
                 <span style={{ flexShrink:0,background:'#DCFCE7',color:'#166534',fontSize:11,fontWeight:700,padding:'4px 10px',borderRadius:20 }}>● Открыто</span>
               </div>
               <div style={{ display:'flex',alignItems:'center',gap:6,fontSize:13,color:'#6B7280' }}>
-                <span style={{ color:'#FACC15',fontWeight:700 }}>★ 4.9</span>
-                <span>(94 отзыва)</span>
-                <span>·</span>
                 <span>Liman Mah., Коньяалты</span>
               </div>
             </div>
