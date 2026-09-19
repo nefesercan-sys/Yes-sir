@@ -180,10 +180,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date('2026-09-16'), changeFrequency: 'weekly' as const, priority: 0.88,
     })),
 
-    // DÜZELTME (2026-09): Türkiye'nin 80 ili için oluşturulan /terzi/{il} sayfaları
-    // kaldırıldı — çok düşük arama hacimli birçok il, sitenin otoritesini inceltip
-    // ana Antalya sayfalarının sıralamasını geriletti. Antalya ilçe sayfaları
-    // (gerçek hizmet bölgesi) korunuyor, sadece ulusal il sayfaları kaldırıldı.
+    // DÜZELTME (2026-09-19): "Türkiye'nin diğer illeri" bloğu (80 sayfa)
+    // sitemap'ten kaldırıldı — bu sayfalar noindex edildi (bkz. app/terzi/[il]/
+    // page.tsx), Antalya'nın yerel arama otoritesini zayıflattıkları
+    // değerlendirildi. Sayfalar hâlâ var (silinmedi), sadece artık aranmıyor/
+    // indekslenmiyor.
 
     // ── Rusça Sayfalar ──
     { url: `${BASE_URL}/ru/atelie-antalya-online`,                               lastModified: new Date('2026-07-01'), changeFrequency: 'weekly', priority: 0.9  },
@@ -201,41 +202,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, lastModified: new Date('2026-09-13'), changeFrequency: 'weekly' as const, priority: 0.88 },
     ]),
 
-    // ── Bal & Arım Balım Sayfaları ──
+    // ── Bal Sayfaları ──
     { url: `${BASE_URL}/bal`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
-    { url: `${BASE_URL}/arimbalim`, lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.85 },
+    // DÜZELTME (2026-09-18): "/arimbalim" kaldırıldı — app/ altında bu
+    // isimde bir page.tsx hiç yoktu, sitemap'te olması Search Console'da
+    // 404 olarak birikiyordu. Sayfa gerçekten yazılırsa geri eklenmeli.
 
-    // ── Statik sayfalar ──
-    { url: `${BASE_URL}/files`,              lastModified: new Date('2026-05-16'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/hakkimizda`,         lastModified: new Date('2026-02-07'), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE_URL}/iletisim`,           lastModified: new Date('2026-01-01'), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE_URL}/gizlilik`,           lastModified: new Date('2026-01-01'), changeFrequency: 'yearly',  priority: 0.2 },
-    { url: `${BASE_URL}/kullanim-kosullari`, lastModified: new Date('2026-01-01'), changeFrequency: 'yearly',  priority: 0.2 },
+    // DÜZELTME (2026-09-18): "Statik sayfalar" bloğu (/files, /hakkimizda,
+    // /iletisim, /gizlilik, /kullanim-kosullari) tamamen kaldırıldı — hiçbirinin
+    // app/ altında karşılığı yok, altısı da Googlebot'a 404 dönüyordu.
+    // Bu sayfalar gerçekten yazılırsa buraya geri eklenmeli.
   ]
 
-  const staticBlogSlugs = [
-    'evde-olcu-nasil-alinir',
-    'abiye-modelleri-2026',
-    'ozel-gelinlik-nasil-yaptirılir',
-    'takim-elbise-olculeri-erkek-rehberi',
-    'organik-muslin-kumas-nedir',
-    'online-terzi-vs-hazir-giyim',
-    'keten-kiyafet-bakimi-nasil-yapilir',
-    'kurumsal-uniforma-tasarim-rehberi',
-    'paca-kisaltma-fiyatlari-2026',
-    'fermuar-degisimi-antalya-fiyat',
-    'gelinlik-tadilati-antalya-rehberi',
-    'antalya-otelleri-icin-terzi-rehberi',
-    'bay-terzi-antalya-erkek-kiyafet-rehberi',
-    'bayan-terzi-antalya-kadin-elbise-rehberi',
-  ]
-
-  const staticBlogPages: MetadataRoute.Sitemap = staticBlogSlugs.map((slug) => ({
-    url: `${BASE_URL}/blog/${slug}`,
-    lastModified: new Date('2026-06-22'),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  // DÜZELTME (2026-09-18): 14 statik blog slug'ı ve buna bağlı dynamicBlogUrls/
+  // blogUrls fallback mantığı tamamen kaldırıldı. app/ altında "blog" adında
+  // hiçbir klasör yok — ne app/blog/[slug]/page.tsx ne de başka bir route bu
+  // URL'leri karşılıyordu. Yani sitemap'teki tüm /blog/* girdileri (14 statik +
+  // veritabanından gelen dinamik yazılar) Googlebot'a 404 dönüyordu.
+  // Blog özelliği gerçekten kodlanınca getBlogYazilari() burada tekrar
+  // kullanılmalı; fonksiyon aşağıda duruyor, sadece return'e dahil edilmiyor.
 
   const ilanlar = await getIlanlar()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -251,64 +236,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     })
 
-  const sektorler = await getSektorler()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sektorUrls: MetadataRoute.Sitemap = sektorler
-    .filter((s: any) => s.slug && SLUG_REGEX.test(s.slug))
-    .map((s: any) => ({
-      url: `${BASE_URL}/sektor/${s.slug}`,
-      lastModified: toDate(s.updatedAt),
-      changeFrequency: 'weekly' as const,
-      priority: 0.75,
-    }))
-
-  const sehirler = await getSehirler()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sehirUrls: MetadataRoute.Sitemap = sehirler
-    .filter((s: any) => s.slug && SLUG_REGEX.test(s.slug))
-    .map((s: any) => ({
-      url: `${BASE_URL}/sehir/${s.slug}`,
-      lastModified: toDate(s.updatedAt),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    }))
-
-  const blogYazilari = await getBlogYazilari()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dynamicBlogUrls: MetadataRoute.Sitemap = blogYazilari
-    .filter((b: any) => b.slug && SLUG_REGEX.test(b.slug))
-    .map((b: any) => {
-      const lastMod = toDate(b.updatedAt ?? b.createdAt)
-      return {
-        url: `${BASE_URL}/blog/${b.slug}`,
-        lastModified: lastMod,
-        changeFrequency: (isRecent(lastMod) ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
-        priority: 0.7,
-      }
-    })
-
-  const blogUrls = dynamicBlogUrls.length > 0 ? dynamicBlogUrls : staticBlogPages
-
-  const urunler = await getUrunler()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const urunUrls: MetadataRoute.Sitemap = urunler
-    .filter((u: any) => u.slug && SLUG_REGEX.test(u.slug))
-    .map((u: any) => {
-      const lastMod = toDate(u.updatedAt ?? u.createdAt)
-      return {
-        url: `${BASE_URL}/urun/${u.slug}`,
-        lastModified: lastMod,
-        changeFrequency: (isRecent(lastMod) ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
-        priority: 0.75,
-      }
-    })
+  // DÜZELTME (2026-09-18): sektorUrls (/sektor/*), sehirUrls (/sehir/*) ve
+  // urunUrls (/urun/*) üretimi durduruldu — üçü için de app/ altında route
+  // hiç yok (app/bal/[slug] ayrı bir şey, /urun/* değil). Veritabanında kaç
+  // kayıt olursa olsun bu üç kategori toplamda tek bir gerçek sayfaya
+  // karşılık gelmiyordu; sitemap'e girdikleri her satır 404 demekti.
+  // getSektorler(), getSehirler(), getBlogYazilari() fonksiyonları yukarıda
+  // duruyor — ilgili route'lar yazılınca burada tekrar kullanılabilirler.
 
   return [
     ...staticPages,
-    ...blogUrls,
     ...ilanUrls,
-    ...sektorUrls,
-    ...sehirUrls,
-    ...urunUrls,
   ]
 }
