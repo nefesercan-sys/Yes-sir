@@ -10,7 +10,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ANTALYA_ILCELERI, TURKIYE_ILLERI } from '@/lib/turkiye-lokasyonlar';
+import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import TerziMarketingBottomNav from '@/components/terzi/MarketingBottomNav';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
@@ -27,7 +27,6 @@ interface GBP {
 
 interface Props {
   gbp1: GBP;
-  gbp2: GBP;
 }
 
 const PHONE_RAW = '905318986418';
@@ -313,7 +312,7 @@ const FAQ: Record<Lang, [string, string][]> = {
   ],
 };
 
-export default function TerziClient({ gbp1, gbp2 }: Props) {
+export default function TerziClient({ gbp1 }: Props) {
   const [lang, setLang] = useState<Lang>('tr');
   const [activeIlce, setActiveIlce] = useState<string | null>(null);
   const [heroIdx, setHeroIdx] = useState(0);
@@ -593,13 +592,10 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
               Güncel puan ve yorumlarımızı doğrudan Google Haritalar'daki profillerimizden görebilirsiniz.
             </p>
           </div>
-          {/* Yorum görüntüleme/yazma butonları — her iki profil */}
+          {/* Yorum görüntüleme/yazma butonu */}
           <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
               ⭐ Google'da Görüntüle — {gbp1.name.split(' — ')[0]}
-            </a>
-            <a href={gbp2.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
-              ⭐ Google'da Görüntüle — {gbp2.name.split(' — ')[0]}
             </a>
           </div>
         </div>
@@ -668,7 +664,6 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
           <span className="tgl" />
 
           <div className="tmap-grid">
-            {/* Profil 1 */}
             <div className="tmap-card">
               <iframe
                 src={gbp1.embed}
@@ -691,35 +686,11 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
                 </div>
               </div>
             </div>
-
-            {/* Profil 2 */}
-            <div className="tmap-card">
-              <iframe
-                src={gbp2.embed}
-                width="100%" height="260"
-                style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={gbp2.name}
-              />
-              <div className="tmap-info">
-                <div className="tmap-name">{gbp2.name}</div>
-                <div className="tmap-addr">📍 {gbp2.addr}</div>
-                <div className="tmap-btns">
-                  <a href={gbp2.maps} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-maps">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
-                    Maps
-                  </a>
-                  <a href={gbp2.short} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-route">🗺️ Yol Tarifi</a>
-                  <a href={gbp2.review} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-review">⭐ {L.reviewTitle}</a>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="tgbp-note">
             <strong>💡 {L.gbpLabel}:</strong> {L.gbpNote}<br />
-            <span style={{ fontSize: '.72rem', opacity: .7 }}>CID 1: {gbp1.cid} · CID 2: {gbp2.cid}</span>
+            <span style={{ fontSize: '.72rem', opacity: .7 }}>CID: {gbp1.cid}</span>
           </div>
         </div>
       </section>
@@ -809,20 +780,15 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '.7rem', marginTop: '2rem' }}>
                 <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ justifyContent: 'center' }}>💬 WhatsApp</a>
                 <a href={WA(L.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mobileCta}</a>
-                <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mapBtn} — {lang === 'tr' ? 'Liman' : 'Liman Mah.'}</a>
-                <a href={gbp2.maps} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mapBtn} — {lang === 'tr' ? 'Hurma' : 'Hurma Mah.'}</a>
+                <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mapBtn}</a>
               </div>
             </address>
           </div>
-          {/* Haritalar — küçük boyut, iletişim bölümü için */}
+          {/* Harita — iletişim bölümü için */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ borderRadius: '2px', overflow: 'hidden', border: '1px solid rgba(255,255,255,.08)' }}>
               <iframe src={gbp1.embed} width="100%" height="200" style={{ border: 0, display: 'block' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={gbp1.name} />
               <div style={{ padding: '.8rem 1rem', background: 'rgba(28,24,20,.97)', fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{gbp1.name} · {gbp1.addr}</div>
-            </div>
-            <div style={{ borderRadius: '2px', overflow: 'hidden', border: '1px solid rgba(255,255,255,.08)' }}>
-              <iframe src={gbp2.embed} width="100%" height="200" style={{ border: 0, display: 'block' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={gbp2.name} />
-              <div style={{ padding: '.8rem 1rem', background: 'rgba(28,24,20,.97)', fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{gbp2.name} · {gbp2.addr}</div>
             </div>
           </div>
         </div>
@@ -832,27 +798,21 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
       <section style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine Hizmet Veriyoruz</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
             {ANTALYA_ILCELERI.map(i => (
               <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
                 {i.ad} Terzi
               </a>
             ))}
           </div>
-          <h3 style={{ fontSize: '.9rem', fontWeight: 700, color: '#0f172a', marginBottom: '.8rem' }}>Türkiye Genelinde Online Teklif Sistemi</h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
-            {['istanbul', 'ankara', 'izmir', 'bursa', 'mersin', 'mugla', 'kocaeli', 'gaziantep'].map(slug => {
-              const il = TURKIYE_ILLERI.find(x => x.slug === slug);
-              if (!il) return null;
-              return (
-                <a key={slug} href={`/terzi/${slug}`} style={{ fontSize: '.78rem', color: '#94a3b8', textDecoration: 'none', border: '1px solid #e2e8f0', padding: '.45rem .9rem', borderRadius: 18 }}>
-                  {il.ad} Terzi
-                </a>
-              );
-            })}
-          </div>
         </div>
       </section>
+
+      {/* DÜZELTME (2026-09-19): "Türkiye Genelinde Online Teklif Sistemi" bölümü
+          kaldırıldı — sitenin en değerli yerel sayfasında (bu sayfa) 8 alakasız
+          şehre link vererek "Antalya'nın yerel terzisi" konumlandırmasını
+          zayıflatıyordu. Google'ın yerel sıralama güvenini ve iç link gücünü
+          gerçek Antalya sayfalarından uzaklaştırma riski taşıyordu. */}
 
       {/* FOOTER */}
       <footer className="tfooter">
@@ -868,10 +828,6 @@ export default function TerziClient({ gbp1, gbp2 }: Props) {
         <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '.8rem' }}>
           <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.62rem', color: 'rgba(255,255,255,.2)', textDecoration: 'none' }}>
             Google Business · {gbp1.name}
-          </a>
-          <span style={{ color: 'rgba(255,255,255,.1)' }}>·</span>
-          <a href={gbp2.maps} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.62rem', color: 'rgba(255,255,255,.2)', textDecoration: 'none' }}>
-            Google Business · {gbp2.name}
           </a>
         </div>
         <nav aria-label="Footer hizmet linkleri" className="tfootnav">
