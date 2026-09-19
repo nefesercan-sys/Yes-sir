@@ -348,6 +348,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 ['Schneider in Belek', '/de/schneider-service-hotel-antalya/belek'],
                 ['Schneider in Lara', '/de/schneider-service-hotel-antalya/lara'],
                 ['Schneider in Güzeloba', '/de/schneider-service-hotel-antalya/guzeloba'],
+                ['Schneider in Kemer', '/de/schneider-service-hotel-antalya/kemer'],
                 ['Schneider in Side', '/de/schneider-service-hotel-antalya/side'],
                 ['← Alle Leistungen', '/terzi'],
               ].map(([label, href]) => (
