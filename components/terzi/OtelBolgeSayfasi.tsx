@@ -5,6 +5,17 @@ const PHONE_E164 = '+905318986418';
 
 type Lang = 'en' | 'ru' | 'de';
 
+// DÜZELTME (2026-09): "Tüm Bölgeler" ve "diğer bölgeler" linkleri
+// `/${lang}/hotel-tailor-antalya` şeklinde tek bir kalıpla üretiliyordu —
+// bu sadece İngilizce için doğru. Gerçek klasörler dile göre farklı
+// (app/de/schneider-service-hotel-antalya, app/ru/vyezdnoy-portnoy-antalya),
+// yani Almanca ve Rusça sayfalardaki bu linklerin TAMAMI 404 veriyordu.
+const BASE_PATH: Record<Lang, string> = {
+  en: '/en/hotel-tailor-antalya',
+  de: '/de/schneider-service-hotel-antalya',
+  ru: '/ru/vyezdnoy-portnoy-antalya',
+};
+
 const T: Record<Lang, any> = {
   en: {
     tag: (r: string) => `🚗 Mobile Tailor · ${r} Hotel Zone`,
@@ -231,9 +242,9 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
 
       <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
-          <a href={`/${lang}/hotel-tailor-antalya`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{t.allDistricts}</a>
+          <a href={BASE_PATH[lang]} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{t.allDistricts}</a>
           {allRegions.filter(r => r.slug !== region.slug).map(r => (
-            <a key={r.slug} href={`/${lang}/hotel-tailor-antalya/${r.slug}`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{r.name}</a>
+            <a key={r.slug} href={`${BASE_PATH[lang]}/${r.slug}`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{r.name}</a>
           ))}
         </div>
       </section>
