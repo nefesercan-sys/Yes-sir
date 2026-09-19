@@ -348,6 +348,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 ['Портной в Белеке', '/ru/vyezdnoy-portnoy-antalya/belek'],
                 ['Портной в Ларе', '/ru/vyezdnoy-portnoy-antalya/lara'],
                 ['Портной в Гюзельобе', '/ru/vyezdnoy-portnoy-antalya/guzeloba'],
+                ['Портной в Кемере', '/ru/vyezdnoy-portnoy-antalya/kemer'],
                 ['Портной в Сиде', '/ru/vyezdnoy-portnoy-antalya/side'],
                 ['← Все услуги', '/terzi'],
               ].map(([label, href]) => (
