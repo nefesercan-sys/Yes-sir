@@ -42,12 +42,8 @@ const jsonLd = {
         'Konyaaltı','Hurma','Liman','Sarısu','Uncalı','Gürsu',
         'Öğretmenevi','Meltem','Çakırlar','Antalya',
       ].map(n => ({ '@type': 'City', name: n })),
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9', reviewCount: '94',
-        bestRating: '5', worstRating: '1',
-        itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' },
-      },
+      // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94) burada da
+      // vardı — Google'ın sahte-yorum politikasına aykırı, kaldırıldı.
       sameAs: [MAPS_URL, `https://wa.me/${PHONE_E164.replace('+','')}`],
       contactPoint: {
         '@type': 'ContactPoint',
@@ -440,7 +436,7 @@ export default function TerziCagirPage() {
         {/* GÜVEN PUANLARI */}
         <div className="trust">
           {[
-            ['⭐ 4.9','94 Google Yorumu'],
+            ['🌟 Google', 'Yorumlarımızı Görün'],
             ['⚡ 24 Saat','Hızlı Teslim'],
             ['🚗 Adrese','Araçlı Servis'],
             ['✂️ 15 Yıl','Tecrübe'],
