@@ -13,20 +13,15 @@ const PHONE_E   = '+905318986418';
 const TODAY     = new Date().toISOString().split('T')[0];
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
-// ── GBP 1 — ✅ DOĞRULANMIŞ · Liman Mah. · CID: 16306058881247995687 ──────────
+// DÜZELTME (2026-09-19): İki ayrı profil (Liman CID 16306058881247995687 ve
+// "ANTALYA TERZİ CAN - TAILOR" Hurma CID 14310476408054735480) tek, doğrulanmış
+// profile birleştirildi — TERZİ Can - Konyaaltı (5.0★, 11 yorum, Hurma
+// Mahallesi, 07130). Bkz. app/terzi/page.tsx ve app/ru/atelie-antalya
+// içindeki aynı doğrulama.
 const GBP1 = {
-  maps:  'https://www.google.com/maps?cid=16306058881247995687',
+  maps:  'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
   short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
-  embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d30.6980!3d36.8820!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1str!2str!4v1',
-};
-
-// ── GBP 2 — ⏳ Hurma · Doğrulama bekliyor ─────────────────────────────────────
-// Henüz doğrulanmadı. Doğrulanana kadar GBP1 ile aynı embed gösterilir.
-// Doğrulandığında CID: 14310476408054735480 ile güncelleyin.
-const GBP2 = {
-  maps:  'https://www.google.com/maps?cid=14310476408054735480',
-  short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
-  embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d30.6900!3d36.8900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonyaalt%C4%B1+Hurma+Terzi!5e0!3m2!1str!2str!4v1',
+  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
 };
 
 export const metadata: Metadata = {
@@ -96,7 +91,7 @@ const jsonLd = {
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         opens: '09:00', closes: '19:00',
       }],
-      // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
       sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
       knowsLanguage: ['tr', 'en', 'ru'],
     },
@@ -139,11 +134,11 @@ export default function OnlineTailorServicePage() {
       {/* ✅ 6 zorunlu prop doğru şekilde geçiriliyor */}
       <OnlineTailorClient
         gbpEmbed1={GBP1.embed}
-        gbpEmbed2={GBP2.embed}
+        gbpEmbed2={GBP1.embed}
         gbpMaps1={GBP1.maps}
-        gbpMaps2={GBP2.maps}
+        gbpMaps2={GBP1.maps}
         gbpShort1={GBP1.short}
-        gbpShort2={GBP2.short}
+        gbpShort2={GBP1.short}
       />
     </>
   );
