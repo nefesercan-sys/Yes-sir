@@ -348,6 +348,7 @@ export default function HotelTailorAntalyaPage() {
                 ['Belek Hotel Tailor', '/en/hotel-tailor-antalya/belek'],
                 ['Lara Hotel Tailor', '/en/hotel-tailor-antalya/lara'],
                 ['Güzeloba Hotel Tailor', '/en/hotel-tailor-antalya/guzeloba'],
+                ['Kemer Hotel Tailor', '/en/hotel-tailor-antalya/kemer'],
                 ['Side Hotel Tailor', '/en/hotel-tailor-antalya/side'],
                 ['← All Services', '/terzi'],
               ].map(([label, href]) => (
