@@ -26,6 +26,17 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // DÜZELTME (2026-09): app/dikis-atolyesi-antalya (328 satır, tam
+      // LocalBusiness şeması) ile app/terzi/dikis-atolyesi-antalya
+      // (190 satır, daha ince) aynı konuyu hedefleyen iki ayrı sayfaydı —
+      // ikisi de kendi canonical'ını gösteriyordu, gerçek bir duplicate
+      // content çakışması. Daha eksiksiz olan kök sayfa canonical kabul
+      // edildi, ince olan ona yönlendirildi.
+      {
+        source: '/terzi/dikis-atolyesi-antalya',
+        destination: '/dikis-atolyesi-antalya',
+        permanent: true,
+      },
       // www → www'siz yönlendirme
       {
         source: '/:path*',
@@ -73,6 +84,17 @@ const nextConfig = {
       // hedefliyordu — "Konyaaltı terzi" aramalarında iki sayfa birbiriyle
       // yarışıp otoriteyi bölüyordu. Tek, güçlü sayfada (yeni dinamik sayfa)
       // birleştirildi.
+      // DÜZELTME (2026-09): Bu sayfa için daha önce (bu konuşmanın en başında)
+      // eklenmiş bir 301 redirect vardı, ama bir noktada kaldırılıp yerine
+      // yanlışlıkla "X-Robots-Tag: index, follow" başlığı eklenmiş — yani sayfa
+      // hem canlıydı hem de Google'a "beni indeksle" diyordu. Yıldız sayfa
+      // (antalyada-terzi-dikim-tamirat-utu-hizmetleri) ile aynı konuyu
+      // hedefleyen bu duplicate, redirect'e geri döndürüldü.
+      {
+        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
+        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+        permanent: true,
+      },
       {
         source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti',
         destination: '/terzi/antalya/konyaalti',
@@ -172,13 +194,6 @@ const nextConfig = {
         source: '/online-tailor-service',
         headers: [
           { key: 'Content-Language', value: 'en, tr' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
-        headers: [
-          { key: 'Content-Language', value: 'tr, en, ru' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
