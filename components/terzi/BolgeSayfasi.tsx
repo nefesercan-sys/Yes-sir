@@ -5,6 +5,17 @@ const PHONE_E164 = '+905318986418';
 
 type Lang = 'en' | 'ru' | 'de';
 
+// DÜZELTME (2026-09): "Tüm Bölgeler" ve "diğer bölgeler" linkleri
+// `/${lang}/hotel-tailor-antalya` şeklinde tek bir kalıpla üretiliyordu —
+// bu sadece İngilizce için doğru. Gerçek klasörler dile göre farklı
+// (app/de/schneider-service-hotel-antalya, app/ru/vyezdnoy-portnoy-antalya),
+// yani Almanca ve Rusça sayfalardaki bu linklerin TAMAMI 404 veriyordu.
+const BASE_PATH: Record<Lang, string> = {
+  en: '/en/hotel-tailor-antalya',
+  de: '/de/schneider-service-hotel-antalya',
+  ru: '/ru/vyezdnoy-portnoy-antalya',
+};
+
 const T: Record<Lang, any> = {
   en: {
     tag: (r: string) => `🚗 Mobile Tailor · ${r} Hotel Zone`,
@@ -120,29 +131,8 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
     : 'Hello, I am at a hotel in ' + region.name + '. My hotel: ';
   const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMsg)}`;
 
-  // EKLEME (2026-09-19): FAQPage JSON-LD şeması — daha önce hiçbir dilde yoktu.
-  // FAQ içeriği ekranda <details> olarak görünüyordu ama makine tarafından
-  // okunabilir bir işaretleme taşımıyordu. AI cevap motorları (ChatGPT,
-  // Perplexity, Google AI Overview) soru-cevap içeriğini en güvenilir şekilde
-  // FAQPage schema üzerinden alıntılıyor — bu olmadan sayfa "önerilmeye" aday
-  // bile olamıyordu. t.faq() zaten her dil için var olan veriden üretiliyor,
-  // yani bu tek değişiklik en/de/ru üçünü de otomatik kapsıyor.
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: t.faq(region.name).map(([q, a]: string[]) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
-    })),
-  };
-
   return (
     <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
       <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>{t.tag(region.name)}</div>
@@ -252,9 +242,9 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
 
       <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
-          <a href={`/${lang}/hotel-tailor-antalya`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{t.allDistricts}</a>
+          <a href={BASE_PATH[lang]} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{t.allDistricts}</a>
           {allRegions.filter(r => r.slug !== region.slug).map(r => (
-            <a key={r.slug} href={`/${lang}/hotel-tailor-antalya/${r.slug}`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{r.name}</a>
+            <a key={r.slug} href={`${BASE_PATH[lang]}/${r.slug}`} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{r.name}</a>
           ))}
         </div>
       </section>
