@@ -138,13 +138,7 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Глажка / отпаривание' }, priceSpecification: { '@type': 'PriceSpecification', price: 60, priceCurrency: 'TRY', minPrice: 60 } },
         ],
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '94',
-        bestRating: '5',
-        worstRating: '1',
-      },
+      // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
       sameAs: [
         GMAPS_SHORT_LINK,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
