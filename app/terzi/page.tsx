@@ -28,16 +28,10 @@ const GBP_1 = {
   name:  'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat',
   addr:  'Liman Mahallesi, Konyaaltı / Antalya',
 };
-// Profil 2 → Hurma "ANTALYA TERZİ CAN - TAILOR"
-const GBP_2 = {
-  cid:   '1496201834409914715',
-  short: 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5',
-  maps:  'https://www.google.com/maps?cid=1496201834409914715',
-  embed: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.6982!3d36.8923!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c393a4244a715b%3A0x66ac5fa54fba4507!2sANTALYA+TERZ%C4%B0+CAN+-+TAILOR!5e0!3m2!1str!2str!4v1',
-  review:'https://search.google.com/local/writereview?placeid=ChIJW3FKJKSTwxQRB0W6T6X1rGY',
-  name:  'ANTALYA TERZİ CAN - TAILOR',
-  addr:  'Hurma, 37. Cd No:50, Bahtılı Köyü, Konyaaltı / Antalya',
-};
+// Profil 2 KALDIRILDI (2026-09-19): "ANTALYA TERZİ CAN - TAILOR" / Bahtılı Köyü
+// adresi kullanıcı tarafından geçersiz/tanınmayan bir profil olarak doğrulandı.
+// GBP_1, terzihizmeti.com.tr'nin site genelinde kullandığı tek Google Maps
+// linkiyle (cid 1496201377277644027) eşleşen tek doğrulanmış profil.
 
 const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
 const PAGE_DESC  =
@@ -96,7 +90,6 @@ const jsonLd = {
         'Antalya Özel Dikim Atölyesi',
         'Antalya Tekstil İmalatı',
         GBP_1.name,
-        GBP_2.name,
       ],
       description:
         "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Tüm Antalya ilçelerine araçlı terzi servisi.",
@@ -109,18 +102,16 @@ const jsonLd = {
       logo: `${HOME_URL}/logo.png`,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mah. / Liman Mah., Konyaaltı',
-        addressLocality: 'Antalya',
+        streetAddress: 'Liman Mahallesi',
+        addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07070',
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      // ── İKİ PROFİL — hasMap + sameAs ──────────────────────────────────────
       hasMap: GBP_1.maps,
       sameAs: [
-        GBP_1.short, GBP_1.maps,   // Profil 1 — Liman
-        GBP_2.short, GBP_2.maps,   // Profil 2 — Hurma
+        GBP_1.short, GBP_1.maps,
         `https://wa.me/${PHONE_E164.replace('+','')}`,
       ],
       openingHoursSpecification: [{
@@ -141,19 +132,12 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1',
-        itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can', '@id': `${SITE_URL}#business` },
-      },
-      review: [
-        { '@type': 'Review', name: 'Üniforma Üretimi — Mükemmel', author: { '@type': 'Person', name: 'Murat B.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Otelimiz için 45 kişilik personel üniforması diktirdik. Zamanında teslim, mükemmel kalite!', datePublished: '2025-01-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Best Tailor in Antalya', author: { '@type': 'Person', name: 'Sarah M.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Amazing tailor! Dress altered in 24 hours before my gala dinner. Perfect fit, very professional!', datePublished: '2025-05-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Лучший портной в Анталье', author: { '@type': 'Person', name: 'Наталья К.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Отличный портной! Пошил свадебное платье за 5 дней. Говорят по-русски, доставили в отель!', datePublished: '2025-06-20', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Ausgezeichnete Qualität', author: { '@type': 'Person', name: 'David K.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: '30 Stück Sweatshirts mit Stickerei — pünktlich geliefert. Ausgezeichnete Qualität!', datePublished: '2025-02-08', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Hızlı ve Kaliteli', author: { '@type': 'Person', name: 'Elif Y.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Gelinliğimi mükemmel teslim ettiler. Paça kısaltmayı aynı gün yaptılar!', datePublished: '2025-04-10', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-        { '@type': 'Review', name: 'Perfect English-Speaking Tailor', author: { '@type': 'Person', name: 'James T.' }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Suit altered for a business meeting in 24h. Best English-speaking tailor in Antalya!', datePublished: '2025-03-15', itemReviewed: { '@type': 'LocalBusiness', name: 'Terzi Can' } },
-      ],
+      // KALDIRILDI (2026-09): Bu blokta doğrulanamayan, uydurma isim/tarih/metinli
+      // 6 sahte "Review" ve buna dayalı bir "aggregateRating" (4.9 / 94 yorum) vardı.
+      // Google, sahte review schema'sı tespit ettiğinde tüm domaine manuel aksiyon
+      // uygulayabilir; ayrıca bu, terzihizmeti.com.tr'de bilinçli olarak benimsenen
+      // "gerçek yorum yoksa sahte puan gösterme" ilkesiyle çelişiyordu. Gerçek Google
+      // Business Profile yorumları biriktikçe, gerçek verilerle geri eklenmeli.
       areaServed: ANTALYA_ILCELER,
       contactPoint: [{
         '@type': 'ContactPoint',
@@ -321,7 +305,7 @@ export default function TerziPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <TerziClient gbp1={GBP_1} gbp2={GBP_2} />
+      <TerziClient gbp1={GBP_1} />
     </>
   );
 }
