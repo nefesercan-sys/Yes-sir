@@ -96,7 +96,7 @@ const jsonLd = {
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         opens: '09:00', closes: '19:00',
       }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
+      // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
       sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
       knowsLanguage: ['tr', 'en', 'ru'],
     },
