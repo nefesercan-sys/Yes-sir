@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 
 const BASE = 'https://swaphubs.com'
 export const dynamic = 'force-dynamic'
@@ -12,15 +13,7 @@ const terziSayfalar = [
   { url: `${BASE}/terzi-panel`,                                             priority: '0.9',  freq: 'daily' },
 
   // ── Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ───────────────────
-  // Botların ve yapay zeka tarayıcılarının bu güçlü sayfaları sürekli kontrol etmesi için eklendi
   { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '1.0',  freq: 'daily' },
-  // DÜZELTME (2026-08-13): antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat
-  // master sayfayla (yukarıdaki) neredeyse birebir aynı içeriği tekrar ediyordu
-  // ve hiçbiri diğerine canonical vermiyordu — Google iki sayfayı near-duplicate
-  // görüp otoriteyi bölüyordu. 301 ile master sayfaya birleştirildi, kaldırıldı.
-  // ✅ YENİ: fiziksel var olup hiçbir sitemap'te olmayan 2 sayfa eklendi
-  // DÜZELTME (2026-09): antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti
-  // /terzi/antalya/konyaalti'ye 301 ile birleştirildi (next.config.mjs), kaldırıldı.
   { url: `${BASE}/terzi-cagir`,                                             priority: '0.95', freq: 'weekly' },
 
   // ── Antalya Alt Hizmet Sayfaları ───────────────────────────────────
@@ -31,34 +24,51 @@ const terziSayfalar = [
   { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                          priority: '0.9',  freq: 'weekly' },
   { url: `${BASE}/terzi/kuru-temizleme-antalya`,                            priority: '0.9',  freq: 'weekly' },
   { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                           priority: '0.95', freq: 'weekly' },
-  // DÜZELTME (2026-08-13): fermuar-degisimi-antalya ve gelinlik-tadilati-antalya
-  // fiziksel sayfa değil — next.config.mjs'te /terzi'ye 301 redirect ediyorlar.
-  // Redirect eden URL'yi sitemap'te tutmak GSC uyarısı üretir. Kaldırıldı.
+
+  // ── YENİ (2026-09-20): Antalya ilçe + Konyaaltı mahalle dinamik sayfaları ──
+  // Bu iki blok, ana sitemap.ts (app/sitemap.ts) ile senkron tutulmalı —
+  // orada ANTALYA_ILCELERI / KONYAALTI_MAHALLELERI değişirse burası da
+  // otomatik güncellenir çünkü aynı veri kaynağından besleniyor.
+  ...ANTALYA_ILCELERI.map(i => ({
+    url: `${BASE}/terzi/antalya/${i.slug}`, priority: '0.88', freq: 'weekly',
+  })),
+  ...KONYAALTI_MAHALLELERI.map(m => ({
+    url: `${BASE}/terzi/konyaalti/${m.slug}`, priority: '0.88', freq: 'weekly',
+  })),
 
   // ── Tekstil & Terzi Diğer Sayfalar ────────────────────────────────
-  // DÜZELTME (2026-07-13): "/antalya-terzi-elbise-dikimi" satırı kaldırıldı.
-  // DÜZELTME (2026-08-13): "/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat"
-  // da master sayfaya 301 ile birleştirildi, aynı sebeple kaldırıldı.
   { url: `${BASE}/tekstil-antalya`,                                         priority: '0.9',  freq: 'weekly' },
 
   // ── Online Terzi Hizmeti ───────────────────────────────────────────
-  // DÜZELTME (2026-08-13): abiye-dikim, gelinlik-dikim, takim-elbise-dikim,
-  // uniforma-dikim, spor-giyim-dikim, gece-davet-kiyafeti, muslin-keten-kiyafet,
-  // gunluk-kiyafet-dikim, olcu-rehberi, kurumsal, sss — bu 11 alt sayfanın
-  // hiçbiri app/online-terzi-hizmeti/ altında fiziksel olarak yoktu.
-  // Gerçekten yazılınca buraya geri eklenmeli.
   { url: `${BASE}/online-terzi-hizmeti`,                                    priority: '1.0',  freq: 'weekly' },
 
   // ── Online Tailor Service (EN) ─────────────────────────────────────
   { url: `${BASE}/online-tailor-service`,                                   priority: '0.9',  freq: 'weekly' },
-  // DÜZELTME (2026-08-13): /online-terzi-servisi hiçbir zaman fiziksel
-  // olarak var olmadı — kaldırıldı.
 
-  // ── Rusça Sayfa ────────────────────────────────────────────────────
+  // ── Rusça Sayfalar ───────────────────────────────────────────────────
+  // YENİ (2026-09-20): /ru/atelie-antalya-online eksikti, eklendi.
+  { url: `${BASE}/ru/atelie-antalya-online`,                                priority: '0.9',  freq: 'weekly' },
   { url: `${BASE}/ru/atelie-antalya`,                                       priority: '0.9',  freq: 'weekly' },
+
+  // ── YENİ (2026-09-20): Eve/Otele Gelen Terzi — Çok Dilli Sayfalar ─────
+  // Bu bölümün tamamı ana sitemap.ts'te aylardır vardı ama bu ikincil
+  // dosyaya hiç eklenmemişti — EN/RU/DE ziyaretçileri ve arama motorları
+  // için otel sayfaları bu sitemap üzerinden hiç keşfedilemiyordu.
+  { url: `${BASE}/en/hotel-tailor-antalya`,                                 priority: '0.9',  freq: 'weekly' },
+  { url: `${BASE}/ru/vyezdnoy-portnoy-antalya`,                             priority: '0.9',  freq: 'weekly' },
+  { url: `${BASE}/de/schneider-service-hotel-antalya`,                      priority: '0.9',  freq: 'weekly' },
+  ...['belek', 'lara', 'guzeloba', 'side'].flatMap((slug) => [
+    { url: `${BASE}/en/hotel-tailor-antalya/${slug}`,           priority: '0.88', freq: 'weekly' },
+    { url: `${BASE}/ru/vyezdnoy-portnoy-antalya/${slug}`,       priority: '0.88', freq: 'weekly' },
+    { url: `${BASE}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.88', freq: 'weekly' },
+  ]),
 
   // ── Doğal Keten/Pamuk ─────────────────────────────────────────────
   { url: `${BASE}/dogal-keten-pamuk-giyim`,                                 priority: '0.85', freq: 'weekly' },
+
+  // ── Bal Sayfası ────────────────────────────────────────────────────
+  // YENİ (2026-09-20): ana sitemap.ts'te vardı, burada hiç yoktu.
+  { url: `${BASE}/bal`,                                                     priority: '0.9',  freq: 'weekly' },
 ]
 
 export async function GET() {
