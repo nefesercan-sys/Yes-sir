@@ -229,8 +229,8 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
             <div className="trust-item-detail">Без языкового барьера</div>
           </div>
           <div>
-            <div className="trust-item-label">4.9 · 94 отзыва</div>
-            <div className="trust-item-detail">Подтверждённые отзывы</div>
+            <div className="trust-item-label">Google Отзывы</div>
+            <div className="trust-item-detail">Смотрите на Google Картах</div>
           </div>
           <div>
             <div className="trust-item-label">Срочный ремонт</div>
