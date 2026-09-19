@@ -69,6 +69,11 @@ export async function generateMetadata({ params }: { params: { il: string } }): 
       'terzi bul', 'online terzi teklifi', 'yakınımda terzi', 'en yakın terzi ve kuru temizleme',
     ],
     alternates: { canonical: url },
+    // DÜZELTME (2026-09-19): noindex eklendi. Bu 80 sayfa Antalya'nın yerel
+    // arama otoritesini zayıflattığı değerlendirilerek Google'ın dizininden
+    // çıkarılıyor — sayfalar silinmedi, sadece artık aranmıyor. İleride
+    // gerçek bir ulusal pazaryeri stratejisi devreye girerse kaldırılabilir.
+    robots: { index: false, follow: false },
     openGraph: { title, description: desc, url, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website' },
   };
 }
