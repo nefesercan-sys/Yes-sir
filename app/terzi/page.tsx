@@ -18,15 +18,21 @@ const TODAY       = new Date().toISOString().split('T')[0];
 // ── Google Business — İKİ PROFİL ──────────────────────────────────────────────
 // export KALDIRILDI — Next.js page.tsx'ten sadece metadata/generateMetadata/default export edilebilir
 // GBP verileri TerziClient'a prop olarak geçiliyor
-// Profil 1 → Liman Mah. "Konyaaltı Terzi - Terzi Dikim Tamir Tadilat"
+// DÜZELTME (2026-09-19, ikinci kez düzeltildi): Önceki "Konyaaltı Terzi -
+// Terzi Dikim Tamir Tadilat" (Liman, CID 1496201377277644027) YANLIŞ profildi
+// — sadece terzihizmeti.com.tr'deki bir isim string'iyle eşleştiği için
+// seçilmişti. Kullanıcının canlı Google İşletme Profili ekran görüntüsü,
+// gerçek profilin "TERZİ Can - Konyaaltı" (5.0★, 11 yorum, Hurma, 07130)
+// olduğunu doğruladı — bu da zaten /ru/atelie-antalya dosyasında önceden
+// doğru şekilde çözümlenmiş olan place_id ile birebir eşleşiyor.
 const GBP_1 = {
-  cid:   '1496201377277644027',
-  short: 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA',
-  maps:  'https://www.google.com/maps?cid=1496201377277644027',
-  embed: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1str!2str!4v1',
-  review:'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA',
-  name:  'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat',
-  addr:  'Liman Mahallesi, Konyaaltı / Antalya',
+  cid:   '0x14c39311e6924c67:0x59547225251db8a0',
+  short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
+  maps:  'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
+  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
+  review:'https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0',
+  name:  'TERZİ Can - Konyaaltı',
+  addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
 };
 // Profil 2 KALDIRILDI (2026-09-19): "ANTALYA TERZİ CAN - TAILOR" / Bahtılı Köyü
 // adresi kullanıcı tarafından geçersiz/tanınmayan bir profil olarak doğrulandı.
@@ -102,13 +108,15 @@ const jsonLd = {
       logo: `${HOME_URL}/logo.png`,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Liman Mahallesi',
+        // DÜZELTME (2026-09-19, ikinci kez): Liman Mahallesi yanlıştı — gerçek
+        // profil Hurma Mahallesi'nde (bkz. GBP_1 yorumu yukarıda).
+        streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
-        postalCode: '07070',
+        postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
       hasMap: GBP_1.maps,
       sameAs: [
         GBP_1.short, GBP_1.maps,
