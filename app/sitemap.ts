@@ -131,7 +131,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,     lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,         lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,       lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`,    lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
+    { url: `${BASE_URL}/dikis-atolyesi-antalya`,          lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,  lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,    lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.9  },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,   lastModified: new Date('2026-06-22'), changeFrequency: 'weekly', priority: 0.95 },
