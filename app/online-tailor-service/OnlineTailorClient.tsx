@@ -131,14 +131,11 @@ const PRICE_TABLE = [
   ]},
 ];
 
-const REVIEWS = [
-  { name:'Kemal A.', city:'Antalya', date:'Nisan 2025', stars:5, text:'"Erkek takım elbise dikimi için geldim. Ölçüler mükemmel, online sipariş sistemi çok pratik."' },
-  { name:'Ayşe T.', city:'İstanbul', date:'Mayıs 2025', stars:5, text:'"İstanbul\'dan online sipariş verdim. 8 günde kapıma geldi. Fit mükemmel, çok memnunum!"' },
-  { name:'Mehmet S.', city:'Ankara', date:'Mart 2025', stars:5, text:'"200 adet iş gömleği seri imalat yaptırdık. Zamanında, eksiksiz ve kaliteli teslim."' },
-  { name:'Sarah M.', city:'London', date:'Haziran 2025', stars:5, text:'"Visited Antalya, needed my dress ironed urgently. Picked up from hotel, delivered in 3h. Amazing!"' },
-  { name:'Fatma K.', city:'Antalya', date:'Şubat 2025', stars:5, text:'"Gelinlik için kişiye özel tasarım yaptırdım. Sonuç hayalimden daha güzeldi!"' },
-  { name:'Ali R.', city:'Kemer', date:'Mayıs 2025', stars:5, text:'"Kemer\'deki otelimden kurye ile ütü hizmeti aldım. Aynı gün teslim, çok profesyonel."' },
-];
+// KALDIRILDI (2026-09): Burada uydurma isim/şehir/tarihli 6 sahte müşteri
+// yorumu vardı. Aynı sorunun swaphubs.com/terzi ana sayfasında ve otel
+// bölgesi sayfalarında da tekrarlandığı, önceki temizlik turlarında
+// bulunmuştu — bu dosya o taramayı kaçırmış. Gerçek Google yorumları
+// biriktikçe gerçek verilerle geri eklenmeli.
 
 // FAQ — artık SSR'dan geliyor, burası yedek
 const FAQS: [string, string][] = [
@@ -539,22 +536,20 @@ export default function OnlineTailorClient({
         </div>
       </section>
 
-      {/* YORUMLAR */}
+      {/* GOOGLE'DA YORUMLARIMIZ — gerçek profillere yönlendirme */}
       <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
         <div className="octr">
           <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">⭐ 4.9 / 5 · 112 Değerlendirme</span>
-            <h2 className="oh2" id="rev-h">Müşterilerimiz Ne Diyor?</h2>
+            <span className="oeyebrow">⭐ Google Business Profile</span>
+            <h2 className="oh2" id="rev-h">Google'daki Yorumlarımızı İnceleyin</h2>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
+            <p style={{ marginTop: '1rem', fontSize: '.85rem', color: 'var(--ink-soft)', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
+              Güncel puan ve yorumlarımızı doğrudan Google Haritalar profillerimizden görebilirsiniz.
+            </p>
           </div>
-          <div className="orev-grid">
-            {REVIEWS.map(r => (
-              <article key={r.name} className="orcard">
-                <div className="orstars" aria-label={`${r.stars} yıldız`}>{'★'.repeat(r.stars)}</div>
-                <p className="ortxt">{r.text}</p>
-                <div><span className="orauth-name">{r.name}</span>{' '}<span className="orauth-info">— {r.city} · {r.date}</span></div>
-              </article>
-            ))}
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.8rem' }}>
+            <a href={gbpMaps1} target="_blank" rel="noopener noreferrer" className="obtn obtn-outline">⭐ Google'da Görüntüle — {gbpShort1}</a>
+            <a href={gbpMaps2} target="_blank" rel="noopener noreferrer" className="obtn obtn-outline">⭐ Google'da Görüntüle — {gbpShort2}</a>
           </div>
         </div>
       </section>
