@@ -420,7 +420,7 @@ export default function EveGelenTerziPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            ⭐ 4.9 / 5 · 94 Google Değerlendirmesi · 09:00–19:00 Pzt–Cmt
+            09:00–19:00 Pzt–Cmt açığız — güncel yorumlarımızı Google'da görebilirsiniz
           </p>
         </section>
 
