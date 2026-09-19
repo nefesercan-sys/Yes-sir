@@ -84,7 +84,7 @@ function GirisIcerik() {
 
         <p style={altLink}>
           Hesabın yok mu?{' '}
-          <Link href="/kayt" style={{ color: '#e8361a', fontWeight: 700 }}>Üye Ol</Link>
+          <Link href="/kayit" style={{ color: '#e8361a', fontWeight: 700 }}>Üye Ol</Link>
         </p>
       </div>
     </div>
