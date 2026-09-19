@@ -100,14 +100,11 @@ export default async function IlTerziSayfasi({ params }: { params: { il: string 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <BolgeSayfasi
-        tip="il"
-        lokasyonAdi={il.ad}
-        url={url}
-        komsuLokasyonlar={komsular}
-        komsuHref={(slug) => `/terzi/${slug}`}
-        aktifTalepSayisi={aktifTalepSayisi}
-      />
+      <BolgeSayfasi 
+  lokasyonAdi={il.ad} 
+  url={url} 
+  komsuLokasyonlar={komsular} 
+/>
     </>
   );
 }
