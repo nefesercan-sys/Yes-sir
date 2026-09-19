@@ -9,12 +9,18 @@ const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terz
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
 const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
-const GBP_CID   = '16306058881247995687'; // doğrulanmış Google Business Profile
-const GBP_URL   = `https://www.google.com/maps?cid=${GBP_CID}`;
+// DÜZELTME (2026-09-19): Bu sayfa ayrı bir CID (16306058881247995687)
+// kullanıyordu — kullanıcı bunun da kendi profillerinden biri olduğunu
+// doğruladı, ancak site genelinde tek, en güçlü profile (TERZİ Can -
+// Konyaaltı, 11 yorum, Hurma) sabitlenmesi kararlaştırıldı; aksi halde
+// farklı sayfalar farklı profillere işaret edip Google'ın hangisini
+// "asıl" sayacağını belirsizleştiriyor.
+const GBP_CID   = '0x14c39311e6924c67:0x59547225251db8a0';
+const GBP_URL   = `https://www.google.com/maps/place/?q=place_id:${GBP_CID}`;
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
 const RATING_VALUE = 5.0;
-const REVIEW_COUNT  = 4;
+const REVIEW_COUNT  = 11;
 
 // ─── ULTIMATE LOCAL SEO & AI GROUNDING GRAPH STRUCTURE ──────────────────────
 const jsonLd = {
@@ -60,8 +66,12 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'ServiceAreaBusiness'],
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Tailor Atelie',
-      alternateName: 'SwapHubs Antalya Terzi Atölyesi',
+      name: 'Terzi Can',
+      // DÜZELTME (2026-09-19): İsim önceden "TERZİ Tailor Atelie" idi — Google
+      // Business Profile'lardaki gerçek işletme adıyla (Terzi Can) eşleşmiyordu,
+      // bu NAP (isim-adres-telefon) tutarsızlığı yaratıyordu. terzihizmeti.com.tr
+      // ile hizalandı; eski isim alternateName'de korunuyor.
+      alternateName: 'TERZİ Tailor Atelie',
       description: "Antalya genelinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi ve otel ekspres ütü hizmeti sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
       sameAs: [GBP_URL],
@@ -70,13 +80,20 @@ const jsonLd = {
       image: OG_IMAGE,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Sarısu, Hurma, Liman',
+        // DÜZELTME (2026-09-19, üçüncü ve son kez): Önce "Sarısu, Hurma, Liman"
+        // (geçersiz format), sonra "Liman Mahallesi" (yanlış mahalle) denendi.
+        // Kullanıcının canlı GBP ekran görüntüsü gerçek adresi doğruladı:
+        // Hurma Mahallesi, 07130.
+        streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
-        postalCode: '07070',
+        postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      // DÜZELTME (2026-09-19, üçüncü ve son kez): Koordinat, doğrulanmış Hurma
+      // profiliyle (bkz. app/terzi/page.tsx GBP_1 ve app/ru/atelie-antalya)
+      // aynı değere sabitlendi.
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
       hasMap: GBP_URL,
       openingHoursSpecification: [
         {
@@ -429,7 +446,7 @@ const processSteps = [
 // public/images/terzi/ altında hiç yoktu, galeri kırık gösteriyordu.
 // public/ içinde zaten gerçek atölye fotoğrafları mevcuttu — onlara bağlandı.
 const galleryImages = [
-  { src: '/images/terzi/card-atolye.jpg', alt: 'TERZİ Tailor Atelie, Konyaaltı Antalya dikim ve tadilat atölyesi' },
+  { src: '/images/terzi/card-atolye.jpg', alt: 'Terzi Can, Konyaaltı Antalya dikim ve tadilat atölyesi' },
   { src: '/images/terzi/card-tadilat.jpg', alt: 'Antalya terzi atölyesinde kıyafet tamiri ve tadilat çalışması' },
   { src: '/images/terzi/card-bay-terzi.jpg', alt: 'SwapHubs erkek terzi hizmeti, takım elbise dikim ve tadilat' },
   { src: '/images/terzi/card-gelinlik.jpg', alt: 'Gelinlik ve abiye tadilat detay çalışması Antalya terzi' },
@@ -497,8 +514,8 @@ export default function GeminiOptimizedTailorPage() {
           </h1>
 
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
-            <strong>Kısa cevap:</strong> TERZİ Tailor Atelie (SwapHubs), Antalya Konyaaltı'da (Sarısu, Hurma,
-            Liman) 5.0 puanla hizmet veren, kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere
+            <strong>Kısa cevap:</strong> Terzi Can (SwapHubs), Antalya Konyaaltı'da (Hurma Mahallesi)
+            5.0 puanla hizmet veren, kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere
             aynı gün ütü/tamirat hizmeti sunan yerel bir terzi atölyesidir; her gün 09:00–23:30 açıktır.
           </p>
 
@@ -688,7 +705,7 @@ export default function GeminiOptimizedTailorPage() {
               Atölye Hakkında
             </h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.7, color: SUB, margin: 0 }}>
-              TERZİ Tailor Atelie, Konyaaltı Sarısu'da faaliyet gösteren, geleneksel terzilik ustalığını
+              Terzi Can, Konyaaltı Hurma Mahallesi'nde faaliyet gösteren, geleneksel terzilik ustalığını
               modern lojistik altyapıyla birleştiren bir atölyedir. Amacımız, Antalya'da yaşayanların ve
               bölgeyi ziyaret eden turistlerin kıyafet ihtiyaçlarını en kısa sürede, atölyeye gitmeden
               çözebilmelerini sağlamak. Otel misafirlerinden yerel esnafa, gelinlik tadilatından günlük
@@ -736,13 +753,13 @@ export default function GeminiOptimizedTailorPage() {
         {/* FOOTER NAP */}
         <footer style={{ marginTop: 52, padding: '36px 28px', borderRadius: 20, textAlign: 'center', background: '#111413', color: '#9aa39e' }}>
           <p style={{ fontWeight: 800, fontSize: 18, color: '#fff', margin: 0 }}>
-            TERZİ Tailor Atelie
+            Terzi Can
           </p>
           <p style={{ fontSize: 13, margin: '4px 0 0', color: '#7d8781' }}>
             SwapHubs Professional Tailoring & Textile Solutions
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '6px 18px', fontSize: 13.5, margin: '18px 0 0' }}>
-            <span>Sarısu, Hurma, Liman, 07070 Konyaaltı/Antalya</span>
+            <span>Hurma Mahallesi, 07130 Konyaaltı/Antalya</span>
             <span>WhatsApp: {PHONE}</span>
           </div>
           <p style={{ fontSize: 13, margin: '10px 0 0', color: GOLD }}>
