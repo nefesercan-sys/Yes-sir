@@ -4,7 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
-import BottomNav from "@/app/components/BottomNav";
+import BottomNav from "@/components/BottomNav";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
