@@ -4,16 +4,16 @@ import "./globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
-import BottomNav from "@/components/BottomNav";
+import BottomNav from "@/app/components/BottomNav";
 
 const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-jakarta",
 });
 
 const unbounded = Unbounded({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-unbounded",
 });
@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
   title: {
-    template: "%s",
+    template: "%s | SwapHubs",
     default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   },
   description:
@@ -39,6 +39,14 @@ export const metadata: Metadata = {
   publisher: "SwapHubs",
   category: "business",
 
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  },
+
   openGraph: {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description:
@@ -46,11 +54,11 @@ export const metadata: Metadata = {
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
-    alternateLocale: ["en_US", "ru_RU"],
+    alternateLocale: ["en_US", "ru_RU", "de_DE"],
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og/terzi-can.jpg",
+        url: "https://swaphubs.com/og/swaphubs-og.jpg",
         width: 1200,
         height: 630,
         alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
@@ -64,7 +72,7 @@ export const metadata: Metadata = {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    images: ["https://swaphubs.com/og/terzi-can.jpg"],
+    images: ["https://swaphubs.com/og/swaphubs-og.jpg"],
   },
 
   robots: {
@@ -79,18 +87,17 @@ export const metadata: Metadata = {
     },
   },
 
-  // Alternates nesnesi otomatik olarak <link rel="alternate" ... /> etiketlerini oluşturur.
   alternates: {
     canonical: "https://swaphubs.com",
     languages: {
-      "tr": "https://swaphubs.com",
-      "en": "https://swaphubs.com/online-tailor-service",
-      "ru": "https://swaphubs.com/ru/atelie-antalya-online",
+      tr: "https://swaphubs.com",
+      en: "https://swaphubs.com/en",
+      ru: "https://swaphubs.com/ru",
+      de: "https://swaphubs.com/de",
       "x-default": "https://swaphubs.com",
     },
   },
 
-  // Verification nesnesi meta etiketlerini otomatik oluşturur.
   verification: {
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -108,13 +115,12 @@ const jsonLd = {
       url: "https://swaphubs.com",
       name: "SwapHubs",
       description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
-      inLanguage: ["tr", "en", "ru"],
+      inLanguage: ["tr", "en", "ru", "de"],
       potentialAction: {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate:
-            "https://swaphubs.com/ilanlar?q={search_term_string}",
+          urlTemplate: "https://swaphubs.com/ilanlar?q={search_term_string}",
         },
         "query-input": "required name=search_term_string",
       },
@@ -130,7 +136,7 @@ const jsonLd = {
         width: 512,
         height: 512,
       },
-      image: "https://swaphubs.com/og/terzi-can.jpg",
+      image: "https://swaphubs.com/og/swaphubs-og.jpg",
       description:
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
@@ -143,8 +149,7 @@ const jsonLd = {
         "Lojistik",
         "Temizlik",
         "Fason Üretim",
-        "Terzilik ve Tadilat",
-        "Ремонт и пошив одежды",
+        "Hizmet ve Ürün Tedariği",
       ],
       sameAs: [
         "https://twitter.com/swaphubs",
@@ -166,7 +171,6 @@ export default function RootLayout({
       className={`${jakarta.variable} ${unbounded.variable}`}
     >
       <head>
-        {/* Sadece Cloudinary ve Unsplash için dış ortam preconnect sinyalleri bırakıldı */}
         <link
           rel="preconnect"
           href="https://res.cloudinary.com"
@@ -177,17 +181,12 @@ export default function RootLayout({
           href="https://images.unsplash.com"
           crossOrigin="anonymous"
         />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
-
-        {/* Global JSON-LD: WebSite + Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={jakarta.className}>
+      <body className={`${jakarta.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <main>{children}</main>
