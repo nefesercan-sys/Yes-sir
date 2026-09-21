@@ -182,15 +182,15 @@ const jsonLd = {
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi 2026',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',      url: `${HOME_URL}/terzi/bay-terzi-antalya` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',     url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                         url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       url: `${HOME_URL}/terzi/bay-terzi-antalya` },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
         { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                      url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                 url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',               url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                      url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
-        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                     url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                       url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                      url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
       ],
     },
 
@@ -240,6 +240,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      'tr': `${HOME_URL}/terzi`,
+      'en': `${HOME_URL}/online-tailor-service`,
+      'ru': `${HOME_URL}/ru/atelie-antalya`,
+      'de': `${HOME_URL}/de/schneider-service-hotel-antalya`,
+    },
   },
   openGraph: {
     title: PAGE_TITLE,
