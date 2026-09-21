@@ -64,16 +64,9 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: [
-      'https://swaphubs.com/sitemap.xml',
-      'https://swaphubs.com/sitemap-terzi.xml',
-      'https://swaphubs.com/sitemap-ilanlar.xml',
-      'https://swaphubs.com/sitemap-sektorler.xml',
-      'https://swaphubs.com/sitemap-meslekler.xml',
-      // DÜZELTME: dosya adı "sitemap-balKontrol.xml" yanlıştı (gerçek dosya
-      // sitemap-bal.xml) — bot bu adresi çekmeye çalışınca 404 alıyordu.
-      'https://swaphubs.com/sitemap-bal.xml',
-    ],
+    // DÜZELTME: Tüm parçalı sitemap'ler silindi. 
+    // Sadece Next.js'in ana sitemap.ts'sinden üretilen tek ve merkezi dosya bırakıldı.
+    sitemap: 'https://swaphubs.com/sitemap.xml',
     host: 'https://swaphubs.com',
   }
 }
