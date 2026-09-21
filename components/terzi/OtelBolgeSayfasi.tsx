@@ -5,11 +5,7 @@ const PHONE_E164 = '+905318986418';
 
 type Lang = 'en' | 'ru' | 'de';
 
-// DÜZELTME (2026-09): "Tüm Bölgeler" ve "diğer bölgeler" linkleri
-// `/${lang}/hotel-tailor-antalya` şeklinde tek bir kalıpla üretiliyordu —
-// bu sadece İngilizce için doğru. Gerçek klasörler dile göre farklı
-// (app/de/schneider-service-hotel-antalya, app/ru/vyezdnoy-portnoy-antalya),
-// yani Almanca ve Rusça sayfalardaki bu linklerin TAMAMI 404 veriyordu.
+// DÜZELTME (2026-09): URL 404 hatasını önleyen dil bazlı rotalama
 const BASE_PATH: Record<Lang, string> = {
   en: '/en/hotel-tailor-antalya',
   de: '/de/schneider-service-hotel-antalya',
@@ -124,7 +120,24 @@ const T: Record<Lang, any> = {
   },
 };
 
-export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: Lang; region: OtelBolgesi; allRegions: OtelBolgesi[] }) {
+// Sayfalardan gelen SEO metinlerini karşılayan tip tanımı
+type SeoContent = {
+  h1: string;
+  h2: string;
+  body1: string;
+  body2: string;
+};
+
+type Props = {
+  lang: Lang;
+  region: OtelBolgesi;
+  allRegions: OtelBolgesi[];
+  seoContent?: SeoContent;
+  maps?: string;
+  basePath?: string; // Sayfa wrapper'larından gelirse (opsiyonel)
+};
+
+export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent, maps }: Props) {
   const t = T[lang];
   const waMsg = lang === 'ru' ? 'Здравствуйте, я в отеле в районе ' + region.name + '. Мой отель: '
     : lang === 'de' ? 'Hallo, ich bin in einem Hotel in ' + region.name + '. Mein Hotel: '
@@ -133,15 +146,23 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
 
   return (
     <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+      {/* Hero Section */}
       <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
-          <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>{t.tag(region.name)}</div>
+          <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
+            {t.tag(region.name)}
+          </div>
+          
           <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2.2rem,5vw,4rem)', fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: '1.2rem' }}>
-            {t.h1a}<br /><span style={{ color: '#D4B07A', fontStyle: 'italic' }}>{t.h1b(region.name)}</span>
+            {seoContent ? seoContent.h1 : (
+              <>{t.h1a}<br /><span style={{ color: '#D4B07A', fontStyle: 'italic' }}>{t.h1b(region.name)}</span></>
+            )}
           </h1>
+          
           <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: 620, marginBottom: '1.5rem' }}>
-            {t.heroDesc(region.name, region.blurb[lang])}
+            {seoContent ? seoContent.h2 : t.heroDesc(region.name, region.blurb[lang])}
           </p>
+          
           <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
             {t.flags.map(([f, txt]: string[]) => (
               <span key={f} style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.65)', background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.12)', padding: '.3rem .8rem', borderRadius: 2 }}>{f} {txt}</span>
@@ -154,14 +175,27 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* About Section */}
       <section style={{ background: '#fff', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.6rem', color: '#1C1814', marginBottom: '.7rem' }}>{t.aboutH(region.name)}</h2>
-          <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{region.blurb[lang]}</p>
-          <p style={{ fontSize: '.85rem', color: '#B8975A', fontWeight: 700 }}>🚗 {t.travelLabel} {region.travelTime[lang]}</p>
+          
+          {seoContent ? (
+            <>
+              <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body1}</p>
+              <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body2}</p>
+            </>
+          ) : (
+            <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{region.blurb[lang]}</p>
+          )}
+
+          <p style={{ fontSize: '.85rem', color: '#B8975A', fontWeight: 700 }}>
+            🚗 {t.travelLabel} {maps ? <a href={maps} target="_blank" rel="noopener noreferrer" style={{ color: '#B8975A', textDecoration: 'underline' }}>{region.travelTime[lang]}</a> : region.travelTime[lang]}
+          </p>
         </div>
       </section>
 
+      {/* Hotels Section */}
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.4rem' }}>{t.hotelsH(region.name)}</h2>
@@ -173,6 +207,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* How it Works Section */}
       <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.howH}</h2>
@@ -189,6 +224,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* Services Section */}
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.servicesH}</h2>
@@ -205,6 +241,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* Price Section */}
       <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.priceH}</h2>
@@ -222,6 +259,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* FAQ Section */}
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '1.5rem' }}>{t.faqH}</h2>
@@ -234,12 +272,14 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions }: { lang: L
         </div>
       </section>
 
+      {/* CTA Section */}
       <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#fff', marginBottom: '.7rem' }}>{t.ctaH(region.name)}</h2>
         <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '1.6rem', fontSize: '.9rem' }}>{t.ctaSub}</p>
         <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#25d366', color: '#fff', padding: '1rem 2.3rem', fontWeight: 700, textDecoration: 'none', fontSize: '.9rem', borderRadius: 4, display: 'inline-block' }}>💬 {t.waBtn}</a>
       </section>
 
+      {/* Footer / Rotalama */}
       <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
           <a href={BASE_PATH[lang]} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: 2, background: '#fff' }}>{t.allDistricts}</a>
