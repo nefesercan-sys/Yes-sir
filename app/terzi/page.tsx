@@ -1,11 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// ROUTE: app/terzi/page.tsx
-// DÜZELTİLDİ:
-//  1. title.template KALDIRILDI — layout.tsx "%s" şablonunu eziyor, title çakışıyordu
-//  2. Her iki Google Business profili sameAs'a eklendi (duplicate listing sinyali birleşti)
-//  3. MAPS_URL standardize edildi — her iki CID'i de içeriyor
-//  4. TerziClient SSR-compatible olacak şekilde import edildi
-// ─────────────────────────────────────────────────────────────────────────────
 import type { Metadata } from 'next';
 import TerziClient from './TerziClient';
 
@@ -15,16 +7,9 @@ const PHONE       = '+90 531 898 64 18';
 const PHONE_E164  = '+905318986418';
 const TODAY       = new Date().toISOString().split('T')[0];
 
-// ── Google Business — İKİ PROFİL ──────────────────────────────────────────────
-// export KALDIRILDI — Next.js page.tsx'ten sadece metadata/generateMetadata/default export edilebilir
+// ── Google Business Profil ────────────────────────────────────────────────────
 // GBP verileri TerziClient'a prop olarak geçiliyor
-// DÜZELTME (2026-09-19, ikinci kez düzeltildi): Önceki "Konyaaltı Terzi -
-// Terzi Dikim Tamir Tadilat" (Liman, CID 1496201377277644027) YANLIŞ profildi
-// — sadece terzihizmeti.com.tr'deki bir isim string'iyle eşleştiği için
-// seçilmişti. Kullanıcının canlı Google İşletme Profili ekran görüntüsü,
-// gerçek profilin "TERZİ Can - Konyaaltı" (5.0★, 11 yorum, Hurma, 07130)
-// olduğunu doğruladı — bu da zaten /ru/atelie-antalya dosyasında önceden
-// doğru şekilde çözümlenmiş olan place_id ile birebir eşleşiyor.
+// Gerçek profil: "TERZİ Can - Konyaaltı" (Hurma, 07130)
 const GBP_1 = {
   cid:   '0x14c39311e6924c67:0x59547225251db8a0',
   short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
@@ -34,10 +19,6 @@ const GBP_1 = {
   name:  'TERZİ Can - Konyaaltı',
   addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
 };
-// Profil 2 KALDIRILDI (2026-09-19): "ANTALYA TERZİ CAN - TAILOR" / Bahtılı Köyü
-// adresi kullanıcı tarafından geçersiz/tanınmayan bir profil olarak doğrulandı.
-// GBP_1, terzihizmeti.com.tr'nin site genelinde kullandığı tek Google Maps
-// linkiyle (cid 1496201377277644027) eşleşen tek doğrulanmış profil.
 
 const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
 const PAGE_DESC  =
@@ -101,15 +82,13 @@ const jsonLd = {
         "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Tüm Antalya ilçelerine araçlı terzi servisi.",
       url: SITE_URL,
       telephone: PHONE_E164,
-      priceRange: '₺₺',
+      priceRange: '$$',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
       image: [OG_IMAGE],
       logo: `${HOME_URL}/logo.png`,
       address: {
         '@type': 'PostalAddress',
-        // DÜZELTME (2026-09-19, ikinci kez): Liman Mahallesi yanlıştı — gerçek
-        // profil Hurma Mahallesi'nde (bkz. GBP_1 yorumu yukarıda).
         streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
@@ -140,12 +119,6 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
-      // KALDIRILDI (2026-09): Bu blokta doğrulanamayan, uydurma isim/tarih/metinli
-      // 6 sahte "Review" ve buna dayalı bir "aggregateRating" (4.9 / 94 yorum) vardı.
-      // Google, sahte review schema'sı tespit ettiğinde tüm domaine manuel aksiyon
-      // uygulayabilir; ayrıca bu, terzihizmeti.com.tr'de bilinçli olarak benimsenen
-      // "gerçek yorum yoksa sahte puan gösterme" ilkesiyle çelişiyordu. Gerçek Google
-      // Business Profile yorumları biriktikçe, gerçek verilerle geri eklenmeli.
       areaServed: ANTALYA_ILCELER,
       contactPoint: [{
         '@type': 'ContactPoint',
@@ -169,7 +142,7 @@ const jsonLd = {
       isPartOf: { '@id': `${HOME_URL}#website` },
       about: { '@id': `${SITE_URL}#business` },
       description: PAGE_DESC,
-      inLanguage: ['tr','en','de','ru'],
+      inLanguage: 'tr',
       datePublished: '2024-01-01',
       dateModified: TODAY,
       lastReviewed: TODAY,
@@ -211,13 +184,13 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',      url: `${HOME_URL}/terzi/bay-terzi-antalya` },
         { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',     url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                         url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
         { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                       url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
-        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                      url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                      url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                 url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',               url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                      url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                     url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
       ],
     },
 
@@ -242,12 +215,9 @@ const jsonLd = {
 };
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
-// DÜZELTİLDİ: title.template KALDIRILDI
-// layout.tsx zaten template:"%s" tanımlıyor — burada tekrar tanımlamak onu eziyor
-// ve "/terzi/paca-kisaltma-antalya" gibi alt sayfalarda yanlış title üretiyor
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: PAGE_TITLE,   // ← sadece string, template yok
+  title: PAGE_TITLE,
   description: PAGE_DESC,
   keywords: [
     'Antalya terzi','Konyaaltı terzi','terzi Antalya 2026','bay terzi Antalya','bayan terzi Antalya',
@@ -270,7 +240,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
-    languages: { 'x-default': SITE_URL, 'tr': SITE_URL, 'en': SITE_URL, 'ru': SITE_URL, 'de': SITE_URL },
   },
   openGraph: {
     title: PAGE_TITLE,
@@ -278,7 +247,6 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
-    alternateLocale: ['en_US','de_DE','ru_RU'],
     type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can Antalya', type: 'image/jpeg' }],
   },
@@ -292,13 +260,12 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8841;30.7056',
-    ICBM: '36.8841, 30.7056',
-    'content-language': 'tr, en, ru, de',
-    // İKİ PROFİL — meta tag olarak da tanımla
+    'geo.position': '36.8851;30.6930',
+    ICBM: '36.8851, 30.6930',
+    'content-language': 'tr',
     'business:contact_data:locality': 'Konyaaltı, Antalya',
-    'place:location:latitude': '36.8841',
-    'place:location:longitude': '30.7056',
+    'place:location:latitude': '36.8851',
+    'place:location:longitude': '30.6930',
   },
   verification: {
     yandex: '4c73ee1911a4b197',
