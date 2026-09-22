@@ -144,8 +144,22 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
     : 'Hello, I am at a hotel in ' + region.name + '. My hotel: ';
   const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMsg)}`;
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: t.faq(region.name).map(([q, a]: string[]) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   return (
     <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Hero Section */}
       <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
