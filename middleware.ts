@@ -39,10 +39,9 @@ export async function middleware(request: NextRequest) {
       );
     }
     if (sektor && tip) {
-      return NextResponse.redirect(
-        new URL(`/ilanlar/turkiye/${sektor}/${tip}`, request.url),
-        { status: 301 }
-      );
+      const url = new URL(`/ilanlar/turkiye/${sektor}`, request.url);
+      url.searchParams.set("tip", tip);
+      return NextResponse.redirect(url, { status: 301 });
     }
     if (sektor) {
       return NextResponse.redirect(
