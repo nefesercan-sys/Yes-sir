@@ -601,7 +601,7 @@ export default function TerziCagirPage() {
               ['Eve Gelen Terzi','/terzi/eve-gelen-terzi-antalya'],
               ['Hurma Terzi','/terzi/hurma-terzi'],
               ['Liman Terzi','/terzi/liman-terzi'],
-              ['Elbise Dikimi','/antalya-terzi-elbise-dikimi'],
+              ['Elbise Dikimi','/antalyada-terzi-dikim-tamirat-utu-hizmetleri'],
             ].map(([l,h]) => (
               <a key={h} href={h} className="footer-link">{l}</a>
             ))}
