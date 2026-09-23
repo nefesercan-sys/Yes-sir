@@ -1,14 +1,5 @@
 // ============================================================
 // SwapHubs — app/terzi/konyaalti/[mahalle]/page.tsx
-//
-// DÜZELTME (2026-09): En çok trafik alan sayfa
-// (app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx),
-// "Konyaaltı Mahallelerinde Hizmet Detayları" bölümünde 10 mahalleye
-// (Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Şirinyalı,
-// Fener, Güzeloba) /terzi/konyaalti/{mahalle} linki veriyordu, ama bu
-// sayfa hiç var olmamıştı (kodda "TODO: href'i gerçek mahalle sayfası
-// slug'ınızla değiştirin" notu unutulmuştu) — yani sitenin en değerli
-// sayfasındaki 10 iç link kullanıcıyı ve Google'ı 404'e gönderiyordu.
 // ============================================================
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -21,6 +12,10 @@ const SEKTOR_ID = 'terzi-kuru-temizleme';
 const YARICAP_KM = 8; // mahalle ölçeğinde dar bir yarıçap
 
 export const revalidate = 3600;
+
+interface PageProps {
+  params: Promise<{ mahalle: string }>;
+}
 
 export async function generateStaticParams() {
   return KONYAALTI_MAHALLELERI.map(m => ({ mahalle: m.slug }));
@@ -38,16 +33,17 @@ async function aktifTalepSayisiGetir(lat: number, lng: number): Promise<number> 
       sektorId: SEKTOR_ID,
       durum: 'aktif',
       teklifeAcik: true,
-      location: { $geoWithin: { $centerSphere: [[lng, lat], yaricapRadyan] } },
+      location: { $geoWithin: {$centerSphere: [[lng, lat], yaricapRadyan] } },
     });
   } catch (e) {
-    console.error('[mahalle talep sayısı]', e);
+    console.error('[mahalle talep sayısı hatası]', e);
     return 0;
   }
 }
 
-export async function generateMetadata({ params }: { params: { mahalle: string } }): Promise<Metadata> {
-  const m = bul(params.mahalle);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const m = bul(resolvedParams.mahalle);
   if (!m) return {};
 
   const title = `${m.ad} Terzi — Adrese Gelen Terzi Servisi, Konyaaltı | Terzi Can`;
@@ -55,20 +51,34 @@ export async function generateMetadata({ params }: { params: { mahalle: string }
   const url = `${HOME_URL}/terzi/konyaalti/${m.slug}`;
 
   return {
-    title, description: desc,
+    title, 
+    description: desc,
     keywords: [
       `${m.ad} terzi`, `${m.ad} mahallesi terzi`, `${m.ad} Konyaaltı terzi`, `${m.ad} kuru temizleme`,
       `${m.ad} paça kısaltma`, `${m.ad} fermuar değişimi`, `${m.ad} eve gelen terzi`,
       `${m.ad} yakınımda terzi`, `${m.ad} en yakın terzi`, `${m.ad} terzi telefon numarası`,
-      'Konyaaltı terzi', 'Antalya terzi',
+      'Konyaaltı terzi', 'Antalya terzi', 'Adrese gelen terzi Konyaaltı',
     ],
     alternates: { canonical: url },
-    openGraph: { title, description: desc, url, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website' },
+    openGraph: { 
+      title, 
+      description: desc, 
+      url, 
+      siteName: 'SwapHubs', 
+      locale: 'tr_TR', 
+      type: 'website' 
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: desc,
+    },
   };
 }
 
-export default async function KonyaaltiMahalleTerziSayfasi({ params }: { params: { mahalle: string } }) {
-  const m = bul(params.mahalle);
+export default async function KonyaaltiMahalleTerziSayfasi({ params }: PageProps) {
+  const resolvedParams = await params;
+  const m = bul(resolvedParams.mahalle);
   if (!m) notFound();
 
   const url = `${HOME_URL}/terzi/konyaalti/${m.slug}`;
@@ -76,15 +86,35 @@ export default async function KonyaaltiMahalleTerziSayfasi({ params }: { params:
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'Terzilik ve Kuru Temizleme Hizmeti',
-    provider: { '@type': 'LocalBusiness', name: 'Terzi Can', url: `${HOME_URL}/terzi`, telephone: '+905318986418' },
-    areaServed: { '@type': 'Place', name: `${m.ad}, Konyaaltı, Antalya` },
-    description: m.blurb,
+    '@type': 'LocalBusiness',
+    name: 'Terzi Can - ' + m.ad + ' Şubesi / Servis Noktası',
+    image: `${HOME_URL}/images/terzi-can-logo.jpg`,
+    telephone: '+905318986418',
     url,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: m.ad,
+      addressLocality: 'Konyaaltı',
+      addressRegion: 'Antalya',
+      addressCountry: 'TR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: m.lat,
+      longitude: m.lng,
+    },
+    areaServed: { '@type': 'Place', name: `${m.ad}, Konyaaltı, Antalya` },
+    priceRange: '₺₺',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '08:30',
+      closes: '20:00',
+    },
   };
 
-  const komsular = KONYAALTI_MAHALLELERI.filter(x => x.slug !== m.slug);
+  // Komşu mahalleleri performans ve UI kalabalığı için sınırlayalım veya coğrafi yakınlığa göre alalım
+  const komsular = KONYAALTI_MAHALLELERI.filter(x => x.slug !== m.slug).slice(0, 12);
 
   return (
     <>
