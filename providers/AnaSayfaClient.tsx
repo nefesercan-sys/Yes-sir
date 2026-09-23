@@ -72,7 +72,9 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
             const liste = data.ilanlar || data || [];
             if (liste.length > 0) setIlanlar(liste);
           }
-        } catch {}
+        } catch (error) {
+          console.error("Client tarafı API hatası:", error);
+        }
       };
       veriCek();
     }
