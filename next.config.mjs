@@ -27,42 +27,29 @@ const nextConfig = {
 
   async redirects() {
     return [
-      {
-        source: '/terzi/dikis-atolyesi-antalya',
-        destination: '/dikis-atolyesi-antalya',
-        permanent: true,
-      },
+      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+
+      // 2. Cannibalization (İçerik Çakışması) Engelleme — Tüm Eski Terzi URL'lerini /terzi'ye Bağlama
+      { source: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', destination: '/terzi', permanent: true },
+      { source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', destination: '/terzi', permanent: true },
+      { source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', destination: '/terzi', permanent: true },
+      { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/terzi', permanent: true },
+      { source: '/antalya-terzi-elbise-dikimi', destination: '/terzi', permanent: true },
+      { source: '/terzi/antalya/konyaalti', destination: '/terzi', permanent: true },
+
+      // 3. Geçim/Tipografi Hataları ve Yan Sayfa Konsolidasyonları
       { source: '/terzi/gelinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
       { source: '/terzi/fermuar-degisimi', destination: '/terzi', permanent: true },
       { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi', permanent: true },
-      {
-        source: '/antalya-terzi-elbise-dikimi',
-        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
-        permanent: true,
-      },
-      {
-        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
-        destination: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
-        permanent: true,
-      },
-      {
-        source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti',
-        destination: '/terzi/antalya/konyaalti',
-        permanent: true,
-      },
-      {
-        source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
-        destination: '/terzi/antalya/konyaalti',
-        permanent: true,
-      },
+      { source: '/terzi/dikis-atolyesi-antalya', destination: '/terzi', permanent: true },
     ];
   },
 
@@ -92,7 +79,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
-      // Sadece arama sonuçlarından tamamen gizlenmesi gereken sayfalar tutuldu
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
