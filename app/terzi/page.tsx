@@ -8,8 +8,6 @@ const PHONE_E164  = '+905318986418';
 const TODAY       = new Date().toISOString().split('T')[0];
 
 // ── Google Business Profil ────────────────────────────────────────────────────
-// GBP verileri TerziClient'a prop olarak geçiliyor
-// Gerçek profil: "TERZİ Can - Konyaaltı" (Hurma, 07130)
 const GBP_1 = {
   cid:   '0x14c39311e6924c67:0x59547225251db8a0',
   short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
@@ -37,31 +35,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'WebSite',
-      '@id': `${HOME_URL}#website`,
-      name: 'SwapHubs',
-      url: HOME_URL,
-      inLanguage: ['tr','en','ru','de'],
-      publisher: {
-        '@type': 'Organization',
-        '@id': `${HOME_URL}#organization`,
-        name: 'SwapHubs',
-        url: HOME_URL,
-        logo: { '@type': 'ImageObject', url: `${HOME_URL}/logo.png`, width: 512, height: 512 },
-      },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: { '@type': 'EntryPoint', urlTemplate: `${HOME_URL}/ilanlar?q={search_term_string}` },
-        'query-input': 'required name=search_term_string',
-      },
-    },
-
-    {
-      '@type': ['LocalBusiness', 'ClothingStore'],
-      additionalType: [
-        'https://schema.org/SewingService',
-        'https://schema.org/DryCleaningService',
-      ],
+      '@type': ['LocalBusiness', 'ClothingStore', 'Tailor', 'DryCleaningOrLaundry'],
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can',
       alternateName: [
@@ -115,8 +89,10 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bel Daraltma', areaServed: ANTALYA_ILCELER }, price: '150', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Elbise Dikimi', areaServed: ANTALYA_ILCELER }, price: '800', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Kuru Temizleme', areaServed: ANTALYA_ILCELER }, price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi', areaServed: ANTALYA_ILCELER }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          // HATA DÜZELTME: Üniforma Üretimi için temsili fiyat eklendi.
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi', areaServed: ANTALYA_ILCELER }, price: '1000', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          // HATA DÜZELTME: Eve Gelen Terzi için temsili servis ücreti eklendi.
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, price: '500', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
       areaServed: ANTALYA_ILCELER,
@@ -182,15 +158,16 @@ const jsonLd = {
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi 2026',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       url: `${HOME_URL}/terzi/bay-terzi-antalya` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      url: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          url: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
-        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', url: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       url: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  url: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                url: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
-        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                       url: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
-        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                      url: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
+        // HATA DÜZELTME: url -> item olarak güncellendi.
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       item: `${HOME_URL}/terzi/bay-terzi-antalya` },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      item: `${HOME_URL}/terzi/bayan-terzi-antalya` },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
+        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', item: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       item: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  item: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                item: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        { '@type': 'ListItem', position: 8, name: 'Fermuar Değişimi',                       item: `${HOME_URL}/terzi/fermuar-degisimi-antalya` },
+        { '@type': 'ListItem', position: 9, name: 'Gelinlik Tadilatı',                      item: `${HOME_URL}/terzi/gelinlik-tadilati-antalya` },
       ],
     },
 
