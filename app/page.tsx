@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-
-const AnaSayfaClient = dynamic(() => import("@/providers/AnaSayfaClient"), {
-  ssr: false,
-});
+import AnaSayfaClient from "@/providers/AnaSayfaClient";
 
 const BASE = "https://www.swaphubs.com";
 
@@ -25,6 +21,7 @@ export const metadata = {
 
 export default async function AnaSayfa() {
   let ilanlar: any[] = [];
+  
   try {
     const res = await fetch(`${BASE}/api/ilanlar?limit=24&sort=yeni`, {
       next: { revalidate: 60 }
@@ -33,7 +30,10 @@ export default async function AnaSayfa() {
       const data = await res.json();
       ilanlar = data.ilanlar || [];
     }
-  } catch {}
+  } catch (error) {
+    console.error("Ana sayfa ilanları çekilirken hata oluştu:", error);
+  }
 
+  // Standart import sayesinde SSR tam kapasite çalışacak ve Googlebot içi dolu sayfa görecek
   return <AnaSayfaClient initialIlanlar={ilanlar} ilkGorsel={null} />;
 }
