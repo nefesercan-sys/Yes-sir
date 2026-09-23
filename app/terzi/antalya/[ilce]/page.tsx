@@ -14,6 +14,10 @@ const YARICAP_KM = 20;
 
 export const revalidate = 3600;
 
+interface PageProps {
+  params: Promise<{ ilce: string }>;
+}
+
 export async function generateStaticParams() {
   return ANTALYA_ILCELERI.map(i => ({ ilce: i.slug }));
 }
@@ -30,16 +34,17 @@ async function aktifTalepSayisiGetir(lat: number, lng: number): Promise<number> 
       sektorId: SEKTOR_ID,
       durum: 'aktif',
       teklifeAcik: true,
-      location: { $geoWithin: { $centerSphere: [[lng, lat], yaricapRadyan] } },
+      location: { $geoWithin: {$centerSphere: [[lng, lat], yaricapRadyan] } },
     });
   } catch (e) {
-    console.error('[ilçe talep sayısı]', e);
+    console.error('[ilçe talep sayısı hatası]', e);
     return 0;
   }
 }
 
-export async function generateMetadata({ params }: { params: { ilce: string } }): Promise<Metadata> {
-  const ilce = bul(params.ilce);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const ilce = bul(resolvedParams.ilce);
   if (!ilce) return {};
 
   const title = `${ilce.ad} Terzi — Paça Kısaltma, Tadilat, Özel Dikim 2026 | Terzi Can`;
@@ -47,7 +52,8 @@ export async function generateMetadata({ params }: { params: { ilce: string } })
   const url = `${HOME_URL}/terzi/antalya/${ilce.slug}`;
 
   return {
-    title, description: desc,
+    title, 
+    description: desc,
     keywords: [
       `${ilce.ad} terzi`, `${ilce.ad} terzi Antalya`, `${ilce.ad} paça kısaltma`, `${ilce.ad} kuru temizleme`,
       `${ilce.ad} dikim atölyesi`, `${ilce.ad} tadilat`, `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`,
@@ -56,12 +62,25 @@ export async function generateMetadata({ params }: { params: { ilce: string } })
       'Antalya terzi', 'Antalya kuru temizleme', 'Antalya dikim atölyesi',
     ],
     alternates: { canonical: url },
-    openGraph: { title, description: desc, url, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website' },
+    openGraph: { 
+      title, 
+      description: desc, 
+      url, 
+      siteName: 'SwapHubs', 
+      locale: 'tr_TR', 
+      type: 'website' 
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: desc,
+    },
   };
 }
 
-export default async function AntalyaIlceTerziSayfasi({ params }: { params: { ilce: string } }) {
-  const ilce = bul(params.ilce);
+export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
+  const resolvedParams = await params;
+  const ilce = bul(resolvedParams.ilce);
   if (!ilce) notFound();
 
   const url = `${HOME_URL}/terzi/antalya/${ilce.slug}`;
@@ -69,11 +88,23 @@ export default async function AntalyaIlceTerziSayfasi({ params }: { params: { il
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'Terzilik ve Kuru Temizleme Hizmeti',
-    provider: { '@type': 'LocalBusiness', name: 'Terzi Can', url: `${HOME_URL}/terzi`, telephone: '+905318986418' },
-    areaServed: { '@type': 'City', name: ilce.ad },
+    '@type': 'LocalBusiness',
+    name: `Terzi Can - ${ilce.ad} Bölge Servisi`,
+    telephone: '+905318986418',
     url,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: ilce.ad,
+      addressRegion: 'Antalya',
+      addressCountry: 'TR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: ilce.lat,
+      longitude: ilce.lng,
+    },
+    areaServed: { '@type': 'AdministrativeArea', name: ilce.ad },
+    priceRange: '₺₺',
   };
 
   const komsular = ANTALYA_ILCELERI.filter(i => i.slug !== ilce.slug).slice(0, 10);
