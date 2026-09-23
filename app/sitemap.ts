@@ -38,8 +38,7 @@ function isRecent(date: Date, days = 30): boolean {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     // ── TERZİ MASTER & ANA SAYFALARI (ZİRVE ÖNCELİK: 1.0) ──
-    { url: `${BASE_URL}/terzi`,                                     lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
-    { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,   lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
+    { url: `${BASE_URL}/terzi`,                                           lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
     { url: `${BASE_URL}/online-terzi-hizmeti`,                            lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
     { url: `${BASE_URL}/terzi-cagir`,                                     lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
     { url: `${BASE_URL}/terzi-talep`,                                     lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
@@ -50,7 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,                       lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,                   lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.95 },
-    // DÜZELTME: next.config.mjs içindeki 301 yönlendirmesine uygun olarak /terzi/dikis-atolyesi-antalya yerine doğrudan kök canonical URL eklendi.
     { url: `${BASE_URL}/dikis-atolyesi-antalya`,                          lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,                  lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,                    lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
@@ -108,7 +106,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/ilan/${i.slug}`,
         lastModified: lastMod,
         changeFrequency: 'monthly',
-        priority: 0.20, // Genel ilan sayfalarının arama botlarını meşgul etmesi engellendi
+        priority: 0.20,
       }
     })
 
