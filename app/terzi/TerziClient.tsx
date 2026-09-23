@@ -1,12 +1,13 @@
 'use client';
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/terzi/TerziClient.tsx
-// DÜZELTİLDİ:
+// DÜZELTİLDİ VE OPTİMİZE EDİLDİ:
 //  1. FAQ <details>/<summary> ile server-side render edilebilir hale getirildi
-//     → Google SSS rich snippet'larını artık görebilir
 //  2. Her iki Google Business profili harita bölümünde gösteriliyor
 //  3. Google Maps embed'leri her iki CID ile ayrı ayrı yerleştirildi
 //  4. Unsplash → Pexels CDN'e geçildi (hotlink güvenilirliği)
+//  5. [SEO & AI] JSON-LD Schema.org (TailorShop & FAQPage) entegre edildi
+//  6. [A11y] Semantik HTML (<main>, <section aria-labelledby>) ve ARIA eklendi
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -241,12 +242,6 @@ const WHY = [
   { icon:'🏭', tr:['Tekstil İmalatı','Tişört, sweatshirt, pantolon seri üretim'], en:['Textile Mfg','T-shirt, sweatshirt, trousers production'], ru:['Производство','Серийное производство'], de:['Textilproduktion','Serienproduktion'] },
 ];
 
-// KALDIRILDI (2026-09): Burada uydurma isim/şehir/tarihli 6 sahte müşteri
-// yorumu vardı. Google Business Profile'daki gerçek yorumlar biriktikçe,
-// gerçek verilerle (ör. Google Places API üzerinden) geri eklenmeli —
-// sahte içerik hem Google'ın sahte-yorum politikasını ihlal ediyor hem de
-// terzihizmeti.com.tr'de benimsenen dürüstlük ilkesiyle çelişiyordu.
-
 const SEO_INTRO: Record<Lang, string> = {
   tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort, gobi seri üretimi. Dikiş atölyesi. Kuru temizleme. Üniforma üretimi. Tüm Antalya ilçelerine araçlı terzi servisi.",
   en: "Tailor Can — Antalya's best English-speaking tailor. Men's: bespoke suits, trouser hemming, shirts, waist alterations. Women's: dress making, alterations, wedding dresses. Custom tailoring: on-site measurements. Textile manufacturing: t-shirts, sweatshirts, trousers, shorts mass production. Sewing workshop. Dry cleaning. Uniform production. Mobile tailor all Antalya.",
@@ -346,8 +341,57 @@ export default function TerziClient({ gbp1 }: Props) {
     return () => clearInterval(id);
   }, []);
 
+  // Yapay zeka ve Google SEO için Schema.org JSON-LD Entegrasyonu
+  const schemaOrgJSONLD = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TailorShop",
+        "name": "Terzi Can",
+        "image": HERO_IMAGES.map(img => img.src),
+        "telephone": PHONE_DISPLAY,
+        "url": "https://terzihizmeti.com.tr",
+        "priceRange": "₺₺",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Antalya",
+          "addressRegion": "Antalya",
+          "addressCountry": "TR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 36.8407,
+          "longitude": 30.6133
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        "description": SEO_INTRO[lang]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": FAQ[lang].map(([q, a]) => ({
+          "@type": "Question",
+          "name": q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": a
+          }
+        }))
+      }
+    ]
+  };
+
   return (
     <>
+      {/* JSON-LD Yapısal Veri Gösterimi */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgJSONLD) }}
+      />
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         :root{--gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;--cream:#FAF7F2;--cream2:#F2EDE4;--ink:#1C1814;--ink2:#2E2820;--text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;--serif:'Georgia',serif;--sans:var(--font-jakarta,system-ui,sans-serif);--unbounded:var(--font-unbounded,'Georgia',serif);--shadow:0 4px 32px rgba(60,40,20,.1);--shadow-lg:0 16px 64px rgba(60,40,20,.16)}
@@ -443,11 +487,11 @@ export default function TerziClient({ gbp1 }: Props) {
       `}</style>
 
       {/* WhatsApp float */}
-      <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="twafloat" aria-label="WhatsApp">💬</a>
+      <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="twafloat" aria-label="WhatsApp İletişim Hattı">💬</a>
 
       {/* NAV */}
-      <nav className={`tnav${scrolled ? ' up' : ''}`}>
-        <a href="#" className="tnav-logo">Terzi <span>Can</span></a>
+      <nav className={`tnav${scrolled ? ' up' : ''}`} aria-label="Ana Menü">
+        <a href="#" className="tnav-logo" aria-label="Anasayfa">Terzi <span>Can</span></a>
         <ul className="tnav-links">
           <li><a href="#services">Hizmetler</a></li>
           <li><a href="#prices">Fiyatlar</a></li>
@@ -455,367 +499,386 @@ export default function TerziClient({ gbp1 }: Props) {
           <li><a href="#faq">SSS</a></li>
           <li><a href="#contact">İletişim</a></li>
         </ul>
-        <div className="lsw">
+        <div className="lsw" role="group" aria-label="Dil Seçimi">
           {(['tr','en','ru','de'] as Lang[]).map(l => (
-            <button key={l} className={`lb${lang === l ? ' on' : ''}`} onClick={() => setLang(l)}>
+            <button 
+              key={l} 
+              type="button"
+              className={`lb${lang === l ? ' on' : ''}`} 
+              aria-pressed={lang === l}
+              onClick={() => setLang(l)}
+            >
               {l === 'tr' ? '🇹🇷' : l === 'en' ? '🇬🇧' : l === 'ru' ? '🇷🇺' : '🇩🇪'} {l.toUpperCase()}
             </button>
           ))}
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="thero">
-        {HERO_IMAGES.map((img, i) => (
-          <div key={i} className={`thslide${i === heroIdx ? ' active' : ' inactive'}`}>
-            <img src={img.src} alt={img.alt} loading={i === 0 ? 'eager' : 'lazy'} />
-          </div>
-        ))}
-        <div className="thov" />
-        <div className="thdots">
-          {HERO_IMAGES.map((_, i) => (
-            <button key={i} className={`thdot${i === heroIdx ? ' on' : ''}`} onClick={() => setHeroIdx(i)} aria-label={`Slayt ${i + 1}`} />
+      {/* ANA İÇERİK - SEO Hiyerarşisi İçin */}
+      <main id="main-content">
+        
+        {/* HERO */}
+        <header className="thero" aria-label="Karşılama Alanı">
+          {HERO_IMAGES.map((img, i) => (
+            <div key={i} className={`thslide${i === heroIdx ? ' active' : ' inactive'}`} aria-hidden={i !== heroIdx}>
+              <img src={img.src} alt={img.alt || 'Terzi Can Karşılama Görseli'} loading={i === 0 ? 'eager' : 'lazy'} />
+            </div>
           ))}
-        </div>
-        <div className="thc">
-          <span className="thbadge">{L.badge}</span>
-          <h1>{L.h1}<br /><em>{L.h1em}</em></h1>
-          <p className="thsub">{L.sub}</p>
-          <div className="thacts">
-            <a href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
-            <a href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</a>
-          </div>
-          <div className="thacts" style={{ marginTop: '.6rem' }}>
-            <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
-          </div>
-          <a href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
-            🔧 Terzi veya kuru temizlemecisin? İş bulmak için buraya
-          </a>
-        </div>
-      </section>
-
-      {/* NASIL ÇALIŞIR */}
-      <section style={{ background: '#f7faf9', padding: '3.5rem 1.5rem' }}>
-        <div style={{ maxWidth: 980, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>Nasıl Çalışır?</h2>
-          <p style={{ textAlign: 'center', color: '#64748b', fontSize: '.9rem', marginBottom: '2.5rem' }}>Üç adımda hizmet talep et, en iyi teklifi seç.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
-            {[
-              { n: '1', ic: '🧵', h: 'Hizmeti Seç', d: 'Paça kısaltma, gelinlik tadilatı, üniforma vb. — ne istediğini işaretle, adet ve konumunu gir.' },
-              { n: '2', ic: '📸', h: 'Fotoğraf Ekle (opsiyonel)', d: 'İstersen kıyafetin fotoğrafını ekle, terziler daha net fiyat versin.' },
-              { n: '3', ic: '💰', h: 'Teklifleri Karşılaştır', d: 'Çevrendeki terziler fiyat teklifi versin, en uygununu seç, direkt WhatsApp/telefonla iletişime geç.' },
-            ].map(s => (
-              <div key={s.n} style={{ background: '#fff', borderRadius: 16, padding: '1.8rem 1.5rem', boxShadow: '0 2px 12px rgba(0,0,0,.04)', textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', marginBottom: '.6rem' }}>{s.ic}</div>
-                <div style={{ fontSize: '.7rem', fontWeight: 800, color: '#2d8c6e', letterSpacing: '.08em', marginBottom: '.4rem' }}>ADIM {s.n}</div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>{s.h}</h3>
-                <p style={{ fontSize: '.82rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>{s.d}</p>
-              </div>
+          <div className="thov" />
+          <div className="thdots" role="tablist">
+            {HERO_IMAGES.map((_, i) => (
+              <button 
+                key={i} 
+                type="button"
+                role="tab"
+                aria-selected={i === heroIdx}
+                className={`thdot${i === heroIdx ? ' on' : ''}`} 
+                onClick={() => setHeroIdx(i)} 
+                aria-label={`Slayt ${i + 1} göster`} 
+              />
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</a>
-          </div>
-        </div>
-      </section>
-
-      {/* FILM STRIP */}
-      <div className="tstrip-wrap">
-        <div className="tstrip" ref={stripRef}>
-          {[...FILM_STRIP, ...FILM_STRIP].map((src, i) => (
-            <img key={i} src={src} alt="Terzi Can Antalya" className="tstrip-img" loading="lazy" />
-          ))}
-        </div>
-      </div>
-
-      {/* SEO INTRO — Server-rendered, Google bunu okur */}
-      <div className="tseoblk" id="terzi-can-ozet">
-        <p>{SEO_INTRO[lang]}</p>
-      </div>
-
-      {/* SERVİSLER */}
-      <section className="tsvc" id="services">
-        <div className="tsvc-head">
-          <span className="ey">✦ Hizmetler</span>
-          <h2 className="tst">Antalya Terzi Hizmetleri</h2>
-          <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
-          <span className="tgl" />
-        </div>
-        <div className="tsvc-grid">
-          {SERVICES.map((s, i) => (
-            <article key={i} className="tsc" id={s.id}>
-              <img src={s.img} alt={s.alt} loading={i < 2 ? 'eager' : 'lazy'} width="800" height="400" />
-              <div className="tsc-ov" />
-              <div className="tsc-body">
-                <div className="tsc-ic">{s.icon}</div>
-                <h3 className="tsc-h">{s[lang].n}</h3>
-                <p className="tsc-d">{s[lang].d}</p>
-                <span className="tsc-p">{s[lang].p}</span>
-              </div>
-              <div className="tsc-line" />
-            </article>
-          ))}
-        </div>
-        <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
-          <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
-          <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
-          <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
-        </div>
-      </section>
-
-      {/* NEDEN BİZ */}
-      <section className="twhy">
-        <div className="twhy-inner">
-          <span className="ey">✦ Neden Terzi Can?</span>
-          <h2 className="tst">10+ Yıllık Deneyim · 4 Dil · Tüm Antalya</h2>
-          <span className="tgl" />
-          <div className="twhy-grid">
-            {WHY.map((w, i) => (
-              <div key={i} className="twc">
-                <div className="twc-ic">{w.icon}</div>
-                <div className="twc-t">{w[lang][0]}</div>
-                <div className="twc-d">{w[lang][1]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* GOOGLE YORUMLARI — gerçek profillere yönlendirme */}
-      <section className="trev">
-        <div className="trev-inner">
-          <div style={{ textAlign: 'center' }}>
-            <span className="ey ey-light">⭐ Google Business Profile</span>
-            <h2 className="tst tst-light">Müşteri Yorumlarımız Google'da</h2>
-            <span className="tgl tgl-center" />
-            <p className="tss" style={{ color: 'rgba(255,255,255,.55)', maxWidth: 480, margin: '.8rem auto 0' }}>
-              Güncel puan ve yorumlarımızı doğrudan Google Haritalar'daki profillerimizden görebilirsiniz.
-            </p>
-          </div>
-          {/* Yorum görüntüleme/yazma butonu */}
-          <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
-              ⭐ Google'da Görüntüle — {gbp1.name.split(' — ')[0]}
+          <div className="thc">
+            <span className="thbadge">{L.badge}</span>
+            <h1>{L.h1}<br /><em>{L.h1em}</em></h1>
+            <p className="thsub">{L.sub}</p>
+            <div className="thacts">
+              <a href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
+              <a href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</a>
+            </div>
+            <div className="thacts" style={{ marginTop: '.6rem' }}>
+              <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
+            </div>
+            <a href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+              🔧 Terzi veya kuru temizlemecisin? İş bulmak için buraya
             </a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* FİYAT TABLOSU */}
-      <section className="tprices" id="prices">
-        <div className="tprices-inner">
-          <span className="ey">₺ Fiyatlar</span>
-          <h2 className="tst" id="hizmet-fiyatlari">{L.priceTitle}</h2>
-          <p className="tss">{L.priceNote}</p>
-          <span className="tgl" />
-          <table className="tptbl">
-            <thead>
-              <tr>
-                <th>{lang === 'tr' ? 'Hizmet' : lang === 'en' ? 'Service' : lang === 'ru' ? 'Услуга' : 'Leistung'}</th>
-                <th>{lang === 'tr' ? 'Fiyat' : lang === 'en' ? 'Price' : lang === 'ru' ? 'Цена' : 'Preis'}</th>
-                <th>{lang === 'tr' ? 'Süre' : lang === 'en' ? 'Time' : lang === 'ru' ? 'Время' : 'Zeit'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {PRICES[lang].map(([s, p, t], i) => (
-                <tr key={i}><td>{s}</td><td className="tpr">{p}</td><td className="ttm">{t}</td></tr>
-              ))}
-            </tbody>
-          </table>
-          <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-            <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{L.quoteBtn}</a>
-          </div>
-        </div>
-      </section>
-
-      {/* ADRESE GELEN TERZİ */}
-      <section className="tmob">
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <span className="ey ey-light">🚗 Adrese Gelen Terzi Servisi</span>
-          <h2 className="tst tst-light">Kapınıza Geliyoruz</h2>
-          <p className="tss tss-light">Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz.</p>
-          <span className="tgl" />
-          <div className="tmob-steps">
-            {[
-              ['📍', 'WhatsApp ile Yazın', 'Adresinizi ve hizmet talebinizi bildirin.'],
-              ['📏', 'Terzi Gelir', 'Adresinize gelip yerinde ölçü alır.'],
-              ['✂️', 'Atölyede Tamamlanır', 'Ölçüye göre 24 saatte hazır.'],
-              ['🚗', 'Kapıya Teslim', 'Anlaşılan vakitte adresinize getirilir.'],
-            ].map(([ic, t, d], i) => (
-              <div key={i} className="tmob-step">
-                <div className="tmob-ic">{ic}</div>
-                <div className="tmob-t">{t}</div>
-                <div className="tmob-d">{d}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-            <a href={WA(L.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{L.mobileCta}</a>
-          </div>
-        </div>
-      </section>
-
-      {/* GOOGLE HARİTA — İKİ PROFİL */}
-      <section className="tmap-sec" id="konum">
-        <div className="tmap-inner">
-          <span className="ey">📍 {L.konum}</span>
-          <h2 className="tst">Terzi Can — Google Business</h2>
-          <p className="tss">{L.konumNote}</p>
-          <span className="tgl" />
-
-          <div className="tmap-grid">
-            <div className="tmap-card">
-              <iframe
-                src={gbp1.embed}
-                width="100%" height="260"
-                style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={gbp1.name}
-              />
-              <div className="tmap-info">
-                <div className="tmap-name">{gbp1.name}</div>
-                <div className="tmap-addr">📍 {gbp1.addr}</div>
-                <div className="tmap-btns">
-                  <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-maps">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
-                    Maps
-                  </a>
-                  <a href={gbp1.short} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-route">🗺️ Yol Tarifi</a>
-                  <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-review">⭐ {L.reviewTitle}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tgbp-note">
-            <strong>💡 {L.gbpLabel}:</strong> {L.gbpNote}<br />
-            <span style={{ fontSize: '.72rem', opacity: .7 }}>CID: {gbp1.cid}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* HİZMET BÖLGELERİ */}
-      <section className="tareas" id="areas">
-        <div className="tareas-inner">
-          <div style={{ textAlign: 'center' }}>
-            <span className="ey">📍 Hizmet Bölgeleri</span>
-            <h2 className="tst">Antalya — Tüm İlçeler</h2>
-            <p className="tss" style={{ margin: '.6rem auto 0' }}>{L.areaLabel}</p>
-            <span className="tgl tgl-center" />
-          </div>
-          <div className="tilwrap">
-            {ILCELER.map(({ ilce }) => (
-              <button key={ilce} className={`tilbtn${activeIlce === ilce ? ' on' : ''}`} onClick={() => setActiveIlce(activeIlce === ilce ? null : ilce)}>
-                {ilce}
-              </button>
-            ))}
-          </div>
-          {activeIlce && (
-            <div className="tmahwrap">
-              {ILCELER.find(i => i.ilce === activeIlce)?.m.map(m => (
-                <span key={m} className="tmchip">{m}</span>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* TÜM HİZMET SAYFALARI */}
-      <section className="tallsvc">
-        <div className="tallsvc-inner">
-          <div style={{ textAlign: 'center' }}>
-            <span className="ey ey-light">✦ {L.allSvcTitle}</span>
-            <span className="tgl tgl-center" />
-          </div>
-          <div className="tallsvc-grid">
-            {ALT_SAYFALAR.map(([ic, label, href]) => (
-              <Link key={href} href={href} className="tallsvc-link">
-                <span style={{ fontSize: '1.2rem' }}>{ic}</span>
-                <span>{label}</span>
-                <span style={{ marginLeft: 'auto', color: 'var(--gold2)', fontSize: '.8rem' }}>→</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ — <details>/<summary> — Google SSS snippet için SSR-friendly */}
-      <section className="tfaq" id="faq">
-        <div className="tfaq-inner">
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span className="ey">FAQ</span>
-            <h2 className="tst" id="sik-sorulan-sorular">{L.faqTitle}</h2>
-            <span className="tgl tgl-center" />
-          </div>
-          {FAQ[lang].map(([q, a], i) => (
-            <details key={i} className="tfaqitem" open={i < 3}>
-              <summary>{q}</summary>
-              <div className="tfaq-ans">{a}</div>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* İLETİŞİM */}
-      <section className="tcontact" id="contact">
-        <div className="tcontact-inner">
-          <div>
-            <span className="ey ey-light">✦ {L.contactTitle}</span>
-            <h2 className="tst tst-light" style={{ fontStyle: 'italic' }}>{L.contactTitle}</h2>
-            <p className="tss tss-light" style={{ marginBottom: '1.5rem' }}>{L.contactNote}</p>
-            <address style={{ fontStyle: 'normal' }}>
+        {/* NASIL ÇALIŞIR */}
+        <section aria-labelledby="nasil-calisir-title" style={{ background: '#f7faf9', padding: '3.5rem 1.5rem' }}>
+          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+            <h2 id="nasil-calisir-title" style={{ textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>Nasıl Çalışır?</h2>
+            <p style={{ textAlign: 'center', color: '#64748b', fontSize: '.9rem', marginBottom: '2.5rem' }}>Üç adımda hizmet talep et, en iyi teklifi seç.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
               {[
-                { ic: '📞', lbl: 'Telefon', val: <a href={`tel:+${PHONE_RAW}`}>{PHONE_DISPLAY}</a> },
-                { ic: '💬', lbl: 'WhatsApp', val: <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer">{PHONE_DISPLAY}</a> },
-                { ic: '🕐', lbl: 'Çalışma Saatleri', val: <span>{L.hours}</span> },
-                { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Tüm Antalya İlçeleri — Araçlı Terzi Servisi' : lang === 'en' ? 'All Antalya Districts — Mobile Tailor' : lang === 'ru' ? 'Все районы Антальи' : 'Alle Antalya-Bezirke'}</span> },
-                { ic: '🌍', lbl: lang === 'tr' ? 'Diller' : 'Languages', val: <span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span> },
-              ].map(({ ic, lbl, val }, i) => (
-                <div key={i} className="tcrow">
-                  <span style={{ fontSize: '1rem', paddingTop: '.1rem' }}>{ic}</span>
-                  <div><div className="tclbl">{lbl}</div><div className="tcval">{val}</div></div>
+                { n: '1', ic: '🧵', h: 'Hizmeti Seç', d: 'Paça kısaltma, gelinlik tadilatı, üniforma vb. — ne istediğini işaretle, adet ve konumunu gir.' },
+                { n: '2', ic: '📸', h: 'Fotoğraf Ekle (opsiyonel)', d: 'İstersen kıyafetin fotoğrafını ekle, terziler daha net fiyat versin.' },
+                { n: '3', ic: '💰', h: 'Teklifleri Karşılaştır', d: 'Çevrendeki terziler fiyat teklifi versin, en uygununu seç, direkt WhatsApp/telefonla iletişime geç.' },
+              ].map(s => (
+                <div key={s.n} style={{ background: '#fff', borderRadius: 16, padding: '1.8rem 1.5rem', boxShadow: '0 2px 12px rgba(0,0,0,.04)', textAlign: 'center' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '.6rem' }} aria-hidden="true">{s.ic}</div>
+                  <div style={{ fontSize: '.7rem', fontWeight: 800, color: '#2d8c6e', letterSpacing: '.08em', marginBottom: '.4rem' }}>ADIM {s.n}</div>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', marginBottom: '.5rem' }}>{s.h}</h3>
+                  <p style={{ fontSize: '.82rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>{s.d}</p>
                 </div>
               ))}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '.7rem', marginTop: '2rem' }}>
-                <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ justifyContent: 'center' }}>💬 WhatsApp</a>
-                <a href={WA(L.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mobileCta}</a>
-                <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mapBtn}</a>
-              </div>
-            </address>
-          </div>
-          {/* Harita — iletişim bölümü için */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ borderRadius: '2px', overflow: 'hidden', border: '1px solid rgba(255,255,255,.08)' }}>
-              <iframe src={gbp1.embed} width="100%" height="200" style={{ border: 0, display: 'block' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={gbp1.name} />
-              <div style={{ padding: '.8rem 1rem', background: 'rgba(28,24,20,.97)', fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{gbp1.name} · {gbp1.addr}</div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</a>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ANTALYA İLÇELERİ — iç linkleme */}
-      <section style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine Hizmet Veriyoruz</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
-            {ANTALYA_ILCELERI.map(i => (
-              <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
-                {i.ad} Terzi
-              </a>
+        {/* FILM STRIP */}
+        <section className="tstrip-wrap" aria-label="Terzi Can Fotoğraf Kesitleri">
+          <div className="tstrip" ref={stripRef}>
+            {[...FILM_STRIP, ...FILM_STRIP].map((src, i) => (
+              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${i + 1}`} className="tstrip-img" loading="lazy" />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* DÜZELTME (2026-09-19): "Türkiye Genelinde Online Teklif Sistemi" bölümü
-          kaldırıldı — sitenin en değerli yerel sayfasında (bu sayfa) 8 alakasız
-          şehre link vererek "Antalya'nın yerel terzisi" konumlandırmasını
-          zayıflatıyordu. Google'ın yerel sıralama güvenini ve iç link gücünü
-          gerçek Antalya sayfalarından uzaklaştırma riski taşıyordu. */}
+        {/* SEO INTRO — Server-rendered, Google bunu okur */}
+        <section className="tseoblk" id="terzi-can-ozet" aria-label="Firma SEO Özeti">
+          <p>{SEO_INTRO[lang]}</p>
+        </section>
+
+        {/* SERVİSLER */}
+        <section className="tsvc" id="services" aria-labelledby="services-title">
+          <div className="tsvc-head">
+            <span className="ey">✦ Hizmetler</span>
+            <h2 id="services-title" className="tst">Antalya Terzi Hizmetleri</h2>
+            <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
+            <span className="tgl" />
+          </div>
+          <div className="tsvc-grid">
+            {SERVICES.map((s, i) => (
+              <article key={i} className="tsc" id={s.id} aria-labelledby={`svc-${s.id}`}>
+                <img src={s.img} alt={s.alt} loading={i < 2 ? 'eager' : 'lazy'} width="800" height="400" />
+                <div className="tsc-ov" />
+                <div className="tsc-body">
+                  <div className="tsc-ic" aria-hidden="true">{s.icon}</div>
+                  <h3 id={`svc-${s.id}`} className="tsc-h">{s[lang].n}</h3>
+                  <p className="tsc-d">{s[lang].d}</p>
+                  <span className="tsc-p">{s[lang].p}</span>
+                </div>
+                <div className="tsc-line" />
+              </article>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
+            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
+            <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
+            <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
+          </div>
+        </section>
+
+        {/* NEDEN BİZ */}
+        <section className="twhy" aria-labelledby="why-title">
+          <div className="twhy-inner">
+            <span className="ey">✦ Neden Terzi Can?</span>
+            <h2 id="why-title" className="tst">10+ Yıllık Deneyim · 4 Dil · Tüm Antalya</h2>
+            <span className="tgl" />
+            <div className="twhy-grid">
+              {WHY.map((w, i) => (
+                <div key={i} className="twc">
+                  <div className="twc-ic" aria-hidden="true">{w.icon}</div>
+                  <h3 className="twc-t">{w[lang][0]}</h3>
+                  <div className="twc-d">{w[lang][1]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* GOOGLE YORUMLARI — gerçek profillere yönlendirme */}
+        <section className="trev" aria-labelledby="reviews-title">
+          <div className="trev-inner">
+            <div style={{ textAlign: 'center' }}>
+              <span className="ey ey-light">⭐ Google Business Profile</span>
+              <h2 id="reviews-title" className="tst tst-light">Müşteri Yorumlarımız Google'da</h2>
+              <span className="tgl tgl-center" />
+              <p className="tss" style={{ color: 'rgba(255,255,255,.55)', maxWidth: 480, margin: '.8rem auto 0' }}>
+                Güncel puan ve yorumlarımızı doğrudan Google Haritalar'daki profillerimizden görebilirsiniz.
+              </p>
+            </div>
+            {/* Yorum görüntüleme/yazma butonu */}
+            <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
+                ⭐ Google'da Görüntüle — {gbp1.name.split(' — ')[0]}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* FİYAT TABLOSU */}
+        <section className="tprices" id="prices" aria-labelledby="hizmet-fiyatlari">
+          <div className="tprices-inner">
+            <span className="ey">₺ Fiyatlar</span>
+            <h2 className="tst" id="hizmet-fiyatlari">{L.priceTitle}</h2>
+            <p className="tss">{L.priceNote}</p>
+            <span className="tgl" />
+            <table className="tptbl">
+              <caption>2026 Yılı Terzi Can Hizmet Fiyat Listesi</caption>
+              <thead>
+                <tr>
+                  <th scope="col">{lang === 'tr' ? 'Hizmet' : lang === 'en' ? 'Service' : lang === 'ru' ? 'Услуга' : 'Leistung'}</th>
+                  <th scope="col">{lang === 'tr' ? 'Fiyat' : lang === 'en' ? 'Price' : lang === 'ru' ? 'Цена' : 'Preis'}</th>
+                  <th scope="col">{lang === 'tr' ? 'Süre' : lang === 'en' ? 'Time' : lang === 'ru' ? 'Время' : 'Zeit'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PRICES[lang].map(([s, p, t], i) => (
+                  <tr key={i}><td>{s}</td><td className="tpr">{p}</td><td className="ttm">{t}</td></tr>
+                ))}
+              </tbody>
+            </table>
+            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+              <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{L.quoteBtn}</a>
+            </div>
+          </div>
+        </section>
+
+        {/* ADRESE GELEN TERZİ */}
+        <section className="tmob" aria-labelledby="mob-title">
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <span className="ey ey-light">🚗 Adrese Gelen Terzi Servisi</span>
+            <h2 id="mob-title" className="tst tst-light">Kapınıza Geliyoruz</h2>
+            <p className="tss tss-light">Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz.</p>
+            <span className="tgl" />
+            <div className="tmob-steps">
+              {[
+                ['📍', 'WhatsApp ile Yazın', 'Adresinizi ve hizmet talebinizi bildirin.'],
+                ['📏', 'Terzi Gelir', 'Adresinize gelip yerinde ölçü alır.'],
+                ['✂️', 'Atölyede Tamamlanır', 'Ölçüye göre 24 saatte hazır.'],
+                ['🚗', 'Kapıya Teslim', 'Anlaşılan vakitte adresinize getirilir.'],
+              ].map(([ic, t, d], i) => (
+                <article key={i} className="tmob-step">
+                  <div className="tmob-ic" aria-hidden="true">{ic}</div>
+                  <h3 className="tmob-t">{t}</h3>
+                  <div className="tmob-d">{d}</div>
+                </article>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+              <a href={WA(L.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold">{L.mobileCta}</a>
+            </div>
+          </div>
+        </section>
+
+        {/* GOOGLE HARİTA — İKİ PROFİL */}
+        <section className="tmap-sec" id="konum" aria-labelledby="konum-title">
+          <div className="tmap-inner">
+            <span className="ey">📍 {L.konum}</span>
+            <h2 id="konum-title" className="tst">Terzi Can — Google Business</h2>
+            <p className="tss">{L.konumNote}</p>
+            <span className="tgl" />
+
+            <div className="tmap-grid">
+              <article className="tmap-card">
+                <iframe
+                  src={gbp1.embed}
+                  width="100%" height="260"
+                  style={{ border: 0, display: 'block' }}
+                  allowFullScreen loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`${gbp1.name} Harita Görünümü`}
+                />
+                <div className="tmap-info">
+                  <h3 className="tmap-name">{gbp1.name}</h3>
+                  <div className="tmap-addr">📍 {gbp1.addr}</div>
+                  <div className="tmap-btns">
+                    <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-maps">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
+                      Maps
+                    </a>
+                    <a href={gbp1.short} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-route">🗺️ Yol Tarifi</a>
+                    <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="tmap-btn tmap-btn-review">⭐ {L.reviewTitle}</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div className="tgbp-note">
+              <strong>💡 {L.gbpLabel}:</strong> {L.gbpNote}<br />
+              <span style={{ fontSize: '.72rem', opacity: .7 }}>CID: {gbp1.cid}</span>
+            </div>
+          </div>
+        </section>
+
+        {/* HİZMET BÖLGELERİ */}
+        <section className="tareas" id="areas" aria-labelledby="areas-title">
+          <div className="tareas-inner">
+            <div style={{ textAlign: 'center' }}>
+              <span className="ey">📍 Hizmet Bölgeleri</span>
+              <h2 id="areas-title" className="tst">Antalya — Tüm İlçeler</h2>
+              <p className="tss" style={{ margin: '.6rem auto 0' }}>{L.areaLabel}</p>
+              <span className="tgl tgl-center" />
+            </div>
+            <div className="tilwrap" role="group" aria-label="İlçe Seçimi">
+              {ILCELER.map(({ ilce }) => (
+                <button 
+                  key={ilce} 
+                  type="button"
+                  aria-pressed={activeIlce === ilce}
+                  className={`tilbtn${activeIlce === ilce ? ' on' : ''}`} 
+                  onClick={() => setActiveIlce(activeIlce === ilce ? null : ilce)}
+                >
+                  {ilce}
+                </button>
+              ))}
+            </div>
+            {activeIlce && (
+              <div className="tmahwrap" aria-live="polite">
+                {ILCELER.find(i => i.ilce === activeIlce)?.m.map(m => (
+                  <span key={m} className="tmchip">{m}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* TÜM HİZMET SAYFALARI */}
+        <section className="tallsvc" aria-labelledby="allsvc-title">
+          <div className="tallsvc-inner">
+            <div style={{ textAlign: 'center' }}>
+              <h2 id="allsvc-title" className="ey ey-light" style={{ margin: 0, paddingBottom: '.6rem' }}>✦ {L.allSvcTitle}</h2>
+              <span className="tgl tgl-center" />
+            </div>
+            <div className="tallsvc-grid">
+              {ALT_SAYFALAR.map(([ic, label, href]) => (
+                <Link key={href} href={href} className="tallsvc-link" aria-label={`${label} sayfasına git`}>
+                  <span style={{ fontSize: '1.2rem' }} aria-hidden="true">{ic}</span>
+                  <span>{label}</span>
+                  <span style={{ marginLeft: 'auto', color: 'var(--gold2)', fontSize: '.8rem' }} aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ — <details>/<summary> — Google SSS snippet için SSR-friendly */}
+        <section className="tfaq" id="faq" aria-labelledby="sik-sorulan-sorular">
+          <div className="tfaq-inner">
+            <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <span className="ey">FAQ</span>
+              <h2 className="tst" id="sik-sorulan-sorular">{L.faqTitle}</h2>
+              <span className="tgl tgl-center" />
+            </div>
+            {FAQ[lang].map(([q, a], i) => (
+              <details key={i} className="tfaqitem" open={i < 3}>
+                <summary>{q}</summary>
+                <div className="tfaq-ans">{a}</div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* İLETİŞİM */}
+        <section className="tcontact" id="contact" aria-labelledby="contact-title">
+          <div className="tcontact-inner">
+            <div>
+              <span className="ey ey-light">✦ {L.contactTitle}</span>
+              <h2 id="contact-title" className="tst tst-light" style={{ fontStyle: 'italic' }}>{L.contactTitle}</h2>
+              <p className="tss tss-light" style={{ marginBottom: '1.5rem' }}>{L.contactNote}</p>
+              <address style={{ fontStyle: 'normal' }}>
+                {[
+                  { ic: '📞', lbl: 'Telefon', val: <a href={`tel:+${PHONE_RAW}`}>{PHONE_DISPLAY}</a> },
+                  { ic: '💬', lbl: 'WhatsApp', val: <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer">{PHONE_DISPLAY}</a> },
+                  { ic: '🕐', lbl: 'Çalışma Saatleri', val: <span>{L.hours}</span> },
+                  { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Tüm Antalya İlçeleri — Araçlı Terzi Servisi' : lang === 'en' ? 'All Antalya Districts — Mobile Tailor' : lang === 'ru' ? 'Все районы Антальи' : 'Alle Antalya-Bezirke'}</span> },
+                  { ic: '🌍', lbl: lang === 'tr' ? 'Diller' : 'Languages', val: <span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span> },
+                ].map(({ ic, lbl, val }, i) => (
+                  <div key={i} className="tcrow">
+                    <span style={{ fontSize: '1rem', paddingTop: '.1rem' }} aria-hidden="true">{ic}</span>
+                    <div><div className="tclbl">{lbl}</div><div className="tcval">{val}</div></div>
+                  </div>
+                ))}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.7rem', marginTop: '2rem' }}>
+                  <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ justifyContent: 'center' }}>💬 WhatsApp</a>
+                  <a href={WA(L.mobileMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mobileCta}</a>
+                  <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ justifyContent: 'center' }}>{L.mapBtn}</a>
+                </div>
+              </address>
+            </div>
+            {/* Harita — iletişim bölümü için */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ borderRadius: '2px', overflow: 'hidden', border: '1px solid rgba(255,255,255,.08)' }}>
+                <iframe src={gbp1.embed} width="100%" height="200" style={{ border: 0, display: 'block' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={`${gbp1.name} İletişim Haritası`} />
+                <div style={{ padding: '.8rem 1rem', background: 'rgba(28,24,20,.97)', fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{gbp1.name} · {gbp1.addr}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ANTALYA İLÇELERİ — iç linkleme */}
+        <section aria-labelledby="antalya-ilceleri-title" style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+            <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine Hizmet Veriyoruz</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
+              {ANTALYA_ILCELERI.map(i => (
+                <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
+                  {i.ad} Terzi
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
 
       {/* FOOTER */}
-      <footer className="tfooter">
+      <footer className="tfooter" role="contentinfo">
         <div style={{ fontFamily: 'var(--unbounded)', fontSize: '1.1rem', color: 'var(--gold2)', marginBottom: '.4rem' }}>
           Terzi Can · Tailor Can · Портной Кан · Schneider Can
         </div>
@@ -840,4 +903,3 @@ export default function TerziClient({ gbp1 }: Props) {
     </>
   );
 }
- 
