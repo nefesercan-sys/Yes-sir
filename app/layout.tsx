@@ -141,6 +141,9 @@ const jsonLd = {
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
       knowsAbout: [
+        "Terzilik Hizmetleri",
+        "Özel Dikim ve Tekstil",
+        "Kuru Temizleme",
         "B2B Ticaret",
         "Tekstil Tedarik",
         "Makine Ekipman",
@@ -151,6 +154,13 @@ const jsonLd = {
         "Fason Üretim",
         "Hizmet ve Ürün Tedariği",
       ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+905318986418",
+        contactType: "customer service",
+        areaServed: ["TR", "DE", "RU", "EN"],
+        availableLanguage: ["Turkish", "English", "Russian", "German"]
+      },
       sameAs: [
         "https://twitter.com/swaphubs",
         "https://www.linkedin.com/company/swaphubs",
