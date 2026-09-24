@@ -1,13 +1,12 @@
 'use client';
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/terzi/TerziClient.tsx
-// DÜZELTİLDİ VE OPTİMİZE EDİLDİ:
-//  1. FAQ <details>/<summary> ile server-side render edilebilir hale getirildi
-//  2. Her iki Google Business profili harita bölümünde gösteriliyor
-//  3. Google Maps embed'leri her iki CID ile ayrı ayrı yerleştirildi
-//  4. Unsplash → Pexels CDN'e geçildi (hotlink güvenilirliği)
-//  5. [SEO & AI] JSON-LD Schema.org (TailorShop & FAQPage) entegre edildi
-//  6. [A11y] Semantik HTML (<main>, <section aria-labelledby>) ve ARIA eklendi
+// TAM OPTİMİZE VE FULL SÜRÜM:
+//  1. [SEO & AI / GEO] Gelişmiş Schema.org JSON-LD (TailorShop, OfferCatalog, FAQPage)
+//  2. [Turist & Otel SEO] Döviz (EUR/USD/RUB/TRY), ödeme tipleri, otelden alım-teslimat kurgusu
+//  3. [Fix] Mahalle çiplerine (tmahwrap) dinamik SEO uyumlu <Link> yönlendirmeleri eklendi
+//  4. [Multi-Lang SSR] Google & Yapay Zeka botları için SSS (FAQ) details/summary SSR yapısı
+//  5. [A11y & Semantik] ARIA rolleri, semantik HTML5 etiketleri ve duyarlı CSS
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -33,6 +32,19 @@ interface Props {
 const PHONE_RAW = '905318986418';
 const PHONE_DISPLAY = '+90 531 898 64 18';
 const WA = (msg: string) => `https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(msg)}`;
+
+const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/ /g, '-')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ü/g, 'u')
+    .replace(/ş/g, 's')
+    .replace(/ğ/g, 'g')
+    .replace(/ç/g, 'c')
+    .replace(/[^a-z0-9-]/g, '');
 
 // Pexels CDN — hotlink stabil
 const HERO_IMAGES = [
@@ -114,91 +126,91 @@ const SERVICES = [
 
 const PRICES: Record<Lang, string[][]> = {
   tr:[
-    ['Paça / Pantolon / Etek Kısaltma','₺150+','Aynı gün'],
-    ['Bel Daraltma','₺150+','24 saat'],
-    ['Elbise Tamiri','₺150+','Aynı gün'],
-    ['Gömlek Tamiri','₺150+','Aynı gün'],
-    ['T-Shirt Tamiri','₺100+','Aynı gün'],
-    ['Fermuar Değişimi — Pantolon/Kot','₺200+','Aynı gün'],
-    ['Fermuar Değişimi — Mont/Ceket','₺200+','24 saat'],
-    ['Kol Kısaltma','₺200+','48 saat'],
-    ['Yırtık Onarımı','₺100+','Aynı gün'],
-    ['Erkek Takım Elbise Dikimi','₺2.500+','5–7 gün'],
-    ['Erkek Gömlek Dikimi','₺400+','3–5 gün'],
-    ['Kadın Elbise Dikimi','₺800+','3–7 gün'],
-    ['Gelinlik Tadilatı','₺400+','3–5 gün'],
-    ['Abiye Tamiri','₺350+','48 saat'],
-    ['Tişört / Sweatshirt Dikimi','₺150+','3–5 gün'],
-    ['Pantolon / Şort / Gobi Dikimi','₺200+','3–5 gün'],
-    ['Kuru Temizleme (Elbise)','₺300+','48 saat'],
-    ['Kuru Temizleme (Mont)','₺500+','48 saat'],
-    ['Çamaşır & Ütü (kg)','₺80+/kg','24 saat'],
-    ['Üniforma (kişi başı)','Teklif','Sipariş miktarına göre'],
+    ['Paça / Pantolon / Etek Kısaltma','₺150+ / €5+','Aynı gün'],
+    ['Bel Daraltma','₺150+ / €5+','24 saat'],
+    ['Elbise Tamiri','₺150+ / €5+','Aynı gün'],
+    ['Gömlek Tamiri','₺150+ / €5+','Aynı gün'],
+    ['T-Shirt Tamiri','₺100+ / €3+','Aynı gün'],
+    ['Fermuar Değişimi — Pantolon/Kot','₺200+ / €6+','Aynı gün'],
+    ['Fermuar Değişimi — Mont/Ceket','₺200+ / €6+','24 saat'],
+    ['Kol Kısaltma','₺200+ / €6+','48 saat'],
+    ['Yırtık Onarımı','₺100+ / €3+','Aynı gün'],
+    ['Erkek Takım Elbise Dikimi','₺2.500+ / €75+','5–7 gün'],
+    ['Erkek Gömlek Dikimi','₺400+ / €12+','3–5 gün'],
+    ['Kadın Elbise Dikimi','₺800+ / €25+','3–7 gün'],
+    ['Gelinlik Tadilatı','₺400+ / €12+','3–5 gün'],
+    ['Abiye Tamiri','₺350+ / €10+','48 saat'],
+    ['Tişört / Sweatshirt Dikimi','₺150+ / €5+','3–5 gün'],
+    ['Pantolon / Şort / Gobi Dikimi','₺200+ / €6+','3–5 gün'],
+    ['Kuru Temizleme (Elbise)','₺300+ / €9+','48 saat'],
+    ['Kuru Temizleme (Mont)','₺500+ / €15+','48 saat'],
+    ['Çamaşır & Ütü (kg)','₺80+/kg / €2.5/kg','24 saat'],
+    ['Üniforma (kişi başı)','Teklif / Quote','Sipariş miktarına göre'],
   ],
   en:[
-    ['Trouser / Skirt Hemming','₺150+','Same day'],
-    ['Waist Taking In','₺150+','24h'],
-    ['Dress Repair','₺150+','Same day'],
-    ['Shirt Repair','₺150+','Same day'],
-    ['T-Shirt Repair','₺100+','Same day'],
-    ['Zip — Trousers / Jeans','₺200+','Same day'],
-    ['Zip — Coat / Jacket','₺200+','24h'],
-    ['Sleeve Shortening','₺200+','48h'],
-    ['Tear Repair','₺100+','Same day'],
-    ["Men's Bespoke Suit",'₺2,500+','5–7 days'],
-    ["Men's Shirt",'₺400+','3–5 days'],
-    ["Women's Dress",'₺800+','3–7 days'],
-    ['Wedding Dress Alteration','₺400+','3–5 days'],
-    ['Evening Gown Repair','₺350+','48h'],
-    ['T-Shirt / Sweatshirt','₺150+','3–5 days'],
-    ['Trouser / Short / Gobi','₺200+','3–5 days'],
-    ['Dry Cleaning (Dress)','₺300+','48h'],
-    ['Dry Cleaning (Coat)','₺500+','48h'],
-    ['Laundry & Ironing','₺80+/kg','24h'],
+    ['Trouser / Skirt Hemming','₺150+ / €5+','Same day'],
+    ['Waist Taking In','₺150+ / €5+','24h'],
+    ['Dress Repair','₺150+ / €5+','Same day'],
+    ['Shirt Repair','₺150+ / €5+','Same day'],
+    ['T-Shirt Repair','₺100+ / €3+','Same day'],
+    ['Zip — Trousers / Jeans','₺200+ / €6+','Same day'],
+    ['Zip — Coat / Jacket','₺200+ / €6+','24h'],
+    ['Sleeve Shortening','₺200+ / €6+','48h'],
+    ['Tear Repair','₺100+ / €3+','Same day'],
+    ["Men's Bespoke Suit",'₺2,500+ / €75+','5–7 days'],
+    ["Men's Shirt",'₺400+ / €12+','3–5 days'],
+    ["Women's Dress",'₺800+ / €25+','3–7 days'],
+    ['Wedding Dress Alteration','₺400+ / €12+','3–5 days'],
+    ['Evening Gown Repair','₺350+ / €10+','48h'],
+    ['T-Shirt / Sweatshirt','₺150+ / €5+','3–5 days'],
+    ['Trouser / Short / Gobi','₺200+ / €6+','3–5 days'],
+    ['Dry Cleaning (Dress)','₺300+ / €9+','48h'],
+    ['Dry Cleaning (Coat)','₺500+ / €15+','48h'],
+    ['Laundry & Ironing','₺80+/kg / €2.5/kg','24h'],
     ['Uniform (per person)','Quote','On quantity'],
   ],
   ru:[
-    ['Подгонка брюк / юбки','₺150+','В тот же день'],
-    ['Заужение талии','₺150+','24 ч'],
-    ['Ремонт платья','₺150+','В тот же день'],
-    ['Ремонт рубашки','₺150+','В тот же день'],
-    ['Ремонт футболки','₺100+','В тот же день'],
-    ['Молния — брюки/джинсы','₺200+','В тот же день'],
-    ['Молния — пальто/пиджак','₺200+','24 ч'],
-    ['Укорочение рукавов','₺200+','48 ч'],
-    ['Ремонт разрыва','₺100+','В тот же день'],
-    ['Мужской костюм','₺2.500+','5–7 дней'],
-    ['Мужская рубашка','₺400+','3–5 дней'],
-    ['Женское платье','₺800+','3–7 дней'],
-    ['Свадебное платье','₺400+','3–5 дней'],
-    ['Вечернее платье','₺350+','48 ч'],
-    ['Футболка / Толстовка','₺150+','3–5 дней'],
-    ['Брюки / Шорты','₺200+','3–5 дней'],
-    ['Химчистка (платье)','₺300+','48 ч'],
-    ['Химчистка (пальто)','₺500+','48 ч'],
-    ['Стирка и глажка','₺80+/кг','24 ч'],
+    ['Подгонка брюк / юбки','₺150+ / €5+','В тот же день'],
+    ['Заужение талии','₺150+ / €5+','24 ч'],
+    ['Ремонт платья','₺150+ / €5+','В тот же день'],
+    ['Ремонт рубашки','₺150+ / €5+','В тот же день'],
+    ['Ремонт футболки','₺100+ / €3+','В тот же день'],
+    ['Молния — брюки/джинсы','₺200+ / €6+','В тот же день'],
+    ['Молния — пальто/пиджак','₺200+ / €6+','24 ч'],
+    ['Укорочение рукавов','₺200+ / €6+','48 ч'],
+    ['Ремонт разрыва','₺100+ / €3+','В тот же день'],
+    ['Мужской костюм','₺2.500+ / €75+','5–7 дней'],
+    ['Мужская рубашка','₺400+ / €12+','3–5 дней'],
+    ['Женское платье','₺800+ / €25+','3–7 дней'],
+    ['Свадебное платье','₺400+ / €12+','3–5 дней'],
+    ['Вечернее платье','₺350+ / €10+','48 ч'],
+    ['Футболка / Толстовка','₺150+ / €5+','3–5 дней'],
+    ['Брюки / Шорты','₺200+ / €6+','3–5 дней'],
+    ['Химчистка (платье)','₺300+ / €9+','48 ч'],
+    ['Химчистка (пальто)','₺500+ / €15+','48 ч'],
+    ['Стирка и глажка','₺80+/кг / €2.5/кг','24 ч'],
     ['Форма','Запрос','По заказу'],
   ],
   de:[
-    ['Hose / Rock kürzen','₺150+','Gleicher Tag'],
-    ['Bund einengen','₺150+','24h'],
-    ['Kleid reparieren','₺150+','Gleicher Tag'],
-    ['Hemd reparieren','₺150+','Gleicher Tag'],
-    ['T-Shirt reparieren','₺100+','Gleicher Tag'],
-    ['Reißverschluss — Hose/Jeans','₺200+','Gleicher Tag'],
-    ['Reißverschluss — Mantel/Jacke','₺200+','24h'],
-    ['Ärmel kürzen','₺200+','48h'],
-    ['Riss reparieren','₺100+','Gleicher Tag'],
-    ['Herrenmaßanzug','₺2.500+','5–7 Tage'],
-    ['Herrenhemd','₺400+','3–5 Tage'],
-    ['Damenkleid','₺800+','3–7 Tage'],
-    ['Brautkleid','₺400+','3–5 Tage'],
-    ['Abendkleid','₺350+','48h'],
-    ['T-Shirt / Sweatshirt','₺150+','3–5 Tage'],
-    ['Hose / Shorts','₺200+','3–5 Tage'],
-    ['Reinigung (Kleid)','₺300+','48h'],
-    ['Reinigung (Mantel)','₺500+','48h'],
-    ['Wäsche & Bügeln','₺80+/kg','24h'],
+    ['Hose / Rock kürzen','₺150+ / €5+','Gleicher Tag'],
+    ['Bund einengen','₺150+ / €5+','24h'],
+    ['Kleid reparieren','₺150+ / €5+','Gleicher Tag'],
+    ['Hemd reparieren','₺150+ / €5+','Gleicher Tag'],
+    ['T-Shirt reparieren','₺100+ / €3+','Gleicher Tag'],
+    ['Reißverschluss — Hose/Jeans','₺200+ / €6+','Gleicher Tag'],
+    ['Reißverschluss — Mantel/Jacke','₺200+ / €6+','24h'],
+    ['Ärmel kürzen','₺200+ / €6+','48h'],
+    ['Riss reparieren','₺100+ / €3+','Gleicher Tag'],
+    ['Herrenmaßanzug','₺2.500+ / €75+','5–7 Tage'],
+    ['Herrenhemd','₺400+ / €12+','3–5 Tage'],
+    ['Damenkleid','₺800+ / €25+','3–7 Tage'],
+    ['Brautkleid','₺400+ / €12+','3–5 Tage'],
+    ['Abendkleid','₺350+ / €10+','48h'],
+    ['T-Shirt / Sweatshirt','₺150+ / €5+','3–5 Tage'],
+    ['Hose / Shorts','₺200+ / €6+','3–5 Tage'],
+    ['Reinigung (Kleid)','₺300+ / €9+','48h'],
+    ['Reinigung (Mantel)','₺500+ / €15+','48h'],
+    ['Wäsche & Bügeln','₺80+/kg / €2.5/kg','24h'],
     ['Uniform','Angebot','Je nach Menge'],
   ],
 };
@@ -243,67 +255,75 @@ const WHY = [
 ];
 
 const SEO_INTRO: Record<Lang, string> = {
-  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort, gobi seri üretimi. Dikiş atölyesi. Kuru temizleme. Üniforma üretimi. Tüm Antalya ilçelerine araçlı terzi servisi.",
-  en: "Tailor Can — Antalya's best English-speaking tailor. Men's: bespoke suits, trouser hemming, shirts, waist alterations. Women's: dress making, alterations, wedding dresses. Custom tailoring: on-site measurements. Textile manufacturing: t-shirts, sweatshirts, trousers, shorts mass production. Sewing workshop. Dry cleaning. Uniform production. Mobile tailor all Antalya.",
-  ru: "Портной Кан — опытный портной в Анталье. Мужской: костюмы, брюки, рубашки, заужение. Женский: платья, подгонка, свадебные платья. Пошив на заказ по меркам. Текстильное производство: футболки, худи, брюки, шорты. Ателье. Химчистка. Форма. Выездной сервис.",
-  de: "Schneider Can — Antalya mit deutschsprachigem Service. Herrenschneider: Anzüge, Hosen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider, Brautkleid. Maßanfertigung. Textilproduktion: T-Shirts, Sweatshirts, Hosen, Shorts. Nähwerkstatt. Reinigung. Uniformproduktion. Mobiler Schneider.",
+  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Otellerden kurye ile elbise alımı ve otele teslimat. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort seri üretimi. Dikiş atölyesi. Kuru temizleme. Üniforma üretimi. EUR, USD, RUB, TRY ve kredi kartı kabul edilir.",
+  en: "Tailor Can — Antalya's premier English-speaking tailor. Men's bespoke suits, trouser hemming, shirts, waist alterations. Women's dressmaking, evening gown repairs, wedding dress alterations. Hotel pickup & express delivery service across Lara, Kundu, Konyaaltı, Belek & Kemer. Textile manufacturing & sewing workshop. Dry cleaning & laundry. We accept EUR, USD, RUB, TRY and Credit Cards.",
+  ru: "Портной Кан — профессиональное ателье в Анталье. Мужской и женский портной: пошив костюмов, платьев, подгонка по фигуре, замена молний. Выездной сервис в отели Лара, Кунду, Коньяалты, Белек, Кемер (забор и доставка одежды). Химчистка и стирка. Принимаем EUR, USD, RUB, TRY и карты.",
+  de: "Schneider Can — Antalyas deutscher Schneiderservice. Herrenmaßanzüge, Hosen kürzen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider, Brautkleider. Hotel-Abhol- und Lieferservice in Lara, Kundu, Konyaaltı, Belek & Kemer. Nähwerkstatt & Textilproduktion. Chemische Reinigung. Wir akzeptieren EUR, USD, RUB, TRY & Kreditkarten.",
 };
 
 const LABELS = {
-  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Tekstil İmalatı · Üniforma · Kuru Temizleme', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'09:00–19:00 · Pzt–Cmt', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletişim', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profillerimiz', gbpNote:'Her iki profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular', konum:'Konumumuz', konumNote:'Konyaaltı Liman Mah. ve Hurma Mah. olmak üzere iki atölyemiz var.', reviewTitle:'Yorum Yaz' },
-  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Alterations · Textile Manufacturing · Uniforms · Dry Cleaning", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring service.', mobileMsg:'Hello, I would like your mobile tailor service. Can you come to my address?', hours:'09:00–19:00 · Mon–Sat', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Mobile Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profiles', gbpNote:'You can leave a review on either profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ', konum:'Our Location', konumNote:'Two ateliers: Liman Mah. and Hurma Mah., Konyaaltı.', reviewTitle:'Write a Review' },
-  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Переделка · Текстиль · Химчистка · Форма', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать о ваших услугах портного.', mobileMsg:'Здравствуйте, хочу выездной сервис. Приедете для снятия мерок?', hours:'09:00–19:00 · Пн–Сб', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наши профили Google Business', gbpNote:'Вы можете оставить отзыв в любом профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы', konum:'Наше местоположение', konumNote:'Два ателье: Liman Mah. и Hurma Mah., Коньяалты.', reviewTitle:'Написать отзыв' },
-  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Änderungen · Textilproduktion · Uniformen · Reinigung', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneiderservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst für Maßabnahme.', hours:'09:00–19:00 · Mo–Sa', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unsere Google Business Profile', gbpNote:'Sie können in beiden Profilen eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen', konum:'Unser Standort', konumNote:'Zwei Ateliers: Liman Mah. und Hurma Mah., Konyaaltı.', reviewTitle:'Bewertung schreiben' },
+  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Otel Servisi · Tekstil İmalatı · Kuru Temizleme', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi ve otel servisiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, otelime/adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'09:00–19:00 · Pzt–Cmt', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletİŞİm', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profillerimiz', gbpNote:'Her iki profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular & Otel Servisi', konum:'Konumumuz', konumNote:'Konyaaltı Liman Mah. ve Hurma Mah. olmak üzere iki atölyemiz var.', reviewTitle:'Yorum Yaz' },
+  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Hotel Delivery · Alterations · Textile Manufacturing · Dry Cleaning", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring & hotel delivery service.', mobileMsg:'Hello, I need mobile tailor service at my hotel/address. Can you come for measurement?', hours:'09:00–19:00 · Mon–Sat', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Hotel Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profiles', gbpNote:'You can leave a review on either profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ & Hotel Service', konum:'Our Location', konumNote:'Two ateliers: Liman Mah. and Hurma Mah., Konyaaltı.', reviewTitle:'Write a Review' },
+  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Сервис в отелях · Переделка · Текстиль · Химчистка', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать об услугах портного и доставке в отель.', mobileMsg:'Здравствуйте, хочу выездной сервис в отель. Приедете для снятия мерок?', hours:'09:00–19:00 · Пн–Сб', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного в отель', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наши профили Google Business', gbpNote:'Вы можете оставить отзыв в любом профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы и Сервис в Отелях', konum:'Наше местоположение', konumNote:'Два ателье: Liman Mah. и Hurma Mah., Коньяалты.', reviewTitle:'Написать отзыв' },
+  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion · Reinigung', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'09:00–19:00 · Mo–Sa', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unsere Google Business Profile', gbpNote:'Sie können in beiden Profilen eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Zwei Ateliers: Liman Mah. und Hurma Mah., Konyaaltı.', reviewTitle:'Bewertung schreiben' },
 };
 
 const FAQ: Record<Lang, [string, string][]> = {
   tr:[
-    ['Paça kısaltma fiyatı 2026?', `₺150'den başlar, aynı gün teslim. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺200. Aynı gün teslim mümkün. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺150'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Paça kısaltma fiyatı 2026?', `₺150 / €5'den başlar, aynı gün teslim. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp 24 saat içinde otele teslim ediyoruz. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Hangi ödeme yöntemleri ve para birimleri geçerli?', 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.'],
+    ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Aynı gün teslim mümkün. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺150 / €5'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
     ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Tüm Antalya. WhatsApp: ${PHONE_DISPLAY}`],
     ['Tişört, sweatshirt, pantolon, gobi imalatı?', `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bay terzi Antalya — erkek kıyafet dikimi?', `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bayan terzi Antalya — kadın elbise dikimi?', `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE_DISPLAY}`],
     ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya ilçelerine geliyoruz.'],
-    ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300, mont ₺500, çamaşır ₺80/kg. Otelden kurye alım. 24 saat ekspres.'],
+    ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.'],
+    ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. 24 saat ekspres.'],
   ],
   en:[
-    ['How much is trouser hemming in Antalya?', 'From ₺150. Same day. WhatsApp a photo for a free quote.'],
-    ['Zip replacement cost?', 'Trousers/jeans/coat/jacket zip ₺200. Same-day available.'],
-    ['Waist alteration and dress taking in?', 'From ₺150. WhatsApp for an exact quote.'],
-    ['Do you offer on-site measurements and home delivery?', 'Yes! We come to your address, take measurements on-site, sew, and deliver back. All Antalya.'],
-    ['Do you produce t-shirts, sweatshirts, trousers, shorts, gobi?', 'Yes! Custom and mass production of all textile items. With embroidery and print.'],
-    ["Do you offer men's tailoring?", 'Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, groom suits.'],
-    ["Do you offer women's tailoring?", 'Yes! Dress making, skirts, evening gown repair, wedding dress alterations, plus size.'],
-    ['Sewing workshop for mass production?', 'Yes! Pattern making, prototypes, mass production. Full package for brands.'],
-    ['Which Antalya districts do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik and all Antalya districts.'],
-    ['Dry cleaning and ironing prices?', 'Dry cleaning ₺300, coat ₺500, laundry ₺80/kg. Hotel courier pickup. 24h express.'],
+    ['How much is trouser hemming in Antalya?', 'From ₺150 / €5. Same day service available. Send a photo on WhatsApp for instant quote.'],
+    ['Do you offer hotel pickup and delivery service?', 'Yes! We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back within 24 hours.'],
+    ['Which currencies and payment methods do you accept?', 'We accept EUR, USD, RUB, TRY cash, as well as all major international credit cards and contactless payments.'],
+    ['Zip replacement cost?', 'Trousers/jeans/coat/jacket zip from ₺200 / €6. Express same-day service available.'],
+    ['Waist alteration and dress taking in?', 'From ₺150 / €5. WhatsApp us for an exact quote.'],
+    ['Do you offer on-site fitting and home delivery?', 'Yes! We visit your hotel or residence, take measurements on-site, perform alterations, and deliver back.'],
+    ['Do you produce t-shirts, sweatshirts, trousers, shorts, gobi?', 'Yes! Custom and mass production of all textile items with custom embroidery and digital printing.'],
+    ["Do you offer men's bespoke tailoring?", 'Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, and groom suits.'],
+    ["Do you offer women's dressmaking and alterations?", 'Yes! Evening gowns, wedding dresses, skirts, blouses, plus size fitting, and emergency repairs.'],
+    ['Sewing workshop for mass production?', 'Yes! Pattern making, prototypes, and full-package mass production for brands.'],
+    ['Which Antalya districts and hotel zones do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu Hotel Zone, Belek, Kemer, Alanya, Manavgat, Side, and Serik.'],
+    ['Dry cleaning and laundry prices for tourists?', 'Dry cleaning ₺300 / €9, coat ₺500 / €15, laundry ₺80/kg / €2.5/kg. Hotel pickup & express 24h delivery.'],
   ],
   ru:[
-    ['Стоимость подгонки брюк в Анталье?', 'От ₺150. В тот же день. Отправьте фото в WhatsApp.'],
-    ['Стоимость замены молнии?', 'Брюки/джинсы/пальто/пиджак ₺200. В тот же день.'],
-    ['Заужение талии и платья?', 'От ₺150. WhatsApp для точной оценки.'],
-    ['Замеры на месте и доставка на дом?', 'Да! Приедем по адресу, снимем мерки, сошьём и доставим. Вся Анталья.'],
-    ['Производство футболок, худи, брюк, шорт?', 'Да! Серийное производство любого текстиля. С вышивкой и печатью.'],
-    ['Есть мужской портной?', 'Да! Костюмы, брюки, рубашки, пиджаки, смокинг.'],
-    ['Есть женский портной?', 'Да! Платья, юбки, вечерние платья, свадебные платья, большие размеры.'],
-    ['Ателье для серийного производства?', 'Да! Лекала, образцы, серийное производство для брендов.'],
-    ['В какие районы Антальи выезжаете?', 'Конъяалты, Муратпаша, Кепез, Лара, Белек, Кемер, Алания, Манавгат, Сиде, Серик и все районы Антальи.'],
-    ['Химчистка и глажка?', 'Химчистка ₺300, пальто ₺500, стирка ₺80/кг. Курьер из отеля. 24ч.'],
+    ['Стоимость подгонки брюк в Анталье?', 'От ₺150 / €5. В тот же день. Отправьте фото в WhatsApp.'],
+    ['Есть ли выездной сервис и доставка в отели?', 'Да! Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно за 24 часа.'],
+    ['Какую валюту и способы оплаты вы принимаете?', 'Мы принимаем наличные EUR, USD, RUB, TRY, а также любые международные кредитные карты.'],
+    ['Стоимость замены молнии?', 'Брюки/джинсы/пальто/куртка от ₺200 / €6. Возможен экспресс-ремонт в тот же день.'],
+    ['Заужение талии и подгонка платьев?', 'От ₺150 / €5. WhatsApp для точной оценки.'],
+    ['Снятие мерок на месте и доставка?', 'Да! Приедем в отель или по адресу, снимем мерки, сошьём/подогоним и доставим обратно.'],
+    ['Производство футболок, худи, брюк, шорт?', 'Да! Серийное производство любого текстиля с вышивкой и печатью.'],
+    ['Есть мужской портной?', 'Да! Костюмы, брюки, рубашки, пиджаки, смокинги.'],
+    ['Есть женский портной?', 'Да! Вечерние и свадебные платья, юбки, подгонка больших размеров.'],
+    ['Ателье для серийного производства?', 'Да! Лекала, образцы и серийное производство для брендов.'],
+    ['В какие районы и отельные зоны выезжаете?', 'Коньяалты, Муратпаша, Кепез, Лара, Кунду, Белек, Кемер, Алания, Манавгат, Сиде, Серик.'],
+    ['Химчистка и стирка для туристов?', 'Химчистка ₺300 / €9, пальто ₺500 / €15, стирка ₺80/кг / €2.5/кг. Забор из отеля и экспресс 24ч.'],
   ],
   de:[
-    ['Hosenänderung Preis in Antalya?', 'Ab ₺150. Gleicher Tag. Foto per WhatsApp.'],
-    ['Reißverschluss-Kosten?', 'Hosen/Jeans/Mantel/Jacke ₺200. Expressdienst möglich.'],
-    ['Bund einengen und Kleid einengen?', 'Ab ₺150. WhatsApp für genaues Angebot.'],
-    ['Maßabnahme vor Ort und Lieferung?', 'Ja! Wir kommen zu Ihnen, nehmen Maße, schneidern und liefern zurück. Ganz Antalya.'],
-    ['T-Shirts, Sweatshirts, Hosen, Shorts Produktion?', 'Ja! Serienproduktion aller Textilien. Mit Stickerei und Druck.'],
-    ['Herrenschneider in Antalya?', 'Ja! Anzüge, Hosen, Hemden, Jacken, Blazer, Smoking.'],
-    ['Damenschneiderin in Antalya?', 'Ja! Kleider, Röcke, Abendkleider, Brautkleid, Übergrößen.'],
+    ['Hosenänderung Preis in Antalya?', 'Ab ₺150 / €5. Gleicher Tag möglich. Foto per WhatsApp senden.'],
+    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern innerhalb von 24 Stunden zurück.'],
+    ['Welche Währungen und Zahlungsmethoden akzeptieren Sie?', 'Wir akzeptieren EUR, USD, RUB, TRY Bargeld sowie alle internationalen Kreditkarten und kontaktlose Zahlung.'],
+    ['Reißverschluss-Kosten?', 'Hosen/Jeans/Mantel/Jacke ab ₺200 / €6. Expressdienst am selben Tag möglich.'],
+    ['Bund einengen und Kleid einengen?', 'Ab ₺150 / €5. WhatsApp für genaues Angebot.'],
+    ['Maßabnahme vor Ort im Hotel?', 'Ja! Wir kommen zu Ihrem Hotel oder Ihrer Adresse, nehmen Maß und liefern fertig zurück.'],
+    ['T-Shirts, Sweatshirts, Hosen, Shorts Produktion?', 'Ja! Serienproduktion aller Textilien mit Stickerei und Digitaldruck.'],
+    ['Herrenschneider in Antalya?', 'Ja! Maßanzüge, Hosen, Hemden, Jacken, Blazer, Smoking.'],
+    ['Damenschneiderin in Antalya?', 'Ja! Kleider, Abendkleider, Brautkleider, Übergrößen.'],
     ['Nähwerkstatt Serienproduktion?', 'Ja! Schnittmuster, Prototypen, Serienproduktion für Marken.'],
-    ['Welche Bezirke in Antalya?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik und alle Bezirke.'],
-    ['Reinigung und Bügeln?', 'Reinigung ₺300, Mantel ₺500, Wäsche ₺80/kg. Kurierabholung. 24h.'],
+    ['Welche Hotelzonen und Bezirke bedienen Sie?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu, Belek, Kemer, Alanya, Manavgat, Side, Serik.'],
+    ['Reinigung und Bügeln für Touristen?', 'Reinigung ₺300 / €9, Mantel ₺500 / €15, Wäsche ₺80/kg / €2.5/kg. Kurierabholung im Hotel 24h Express.'],
   ],
 };
 
@@ -341,17 +361,20 @@ export default function TerziClient({ gbp1 }: Props) {
     return () => clearInterval(id);
   }, []);
 
-  // Yapay zeka ve Google SEO için Schema.org JSON-LD Entegrasyonu
+  // Yapay zeka (GEO) ve Google SEO için Gelişmiş Schema.org JSON-LD Entegrasyonu
   const schemaOrgJSONLD = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "TailorShop",
-        "name": "Terzi Can",
+        "name": "Terzi Can - Antalya",
         "image": HERO_IMAGES.map(img => img.src),
         "telephone": PHONE_DISPLAY,
         "url": "https://terzihizmeti.com.tr",
-        "priceRange": "₺₺",
+        "priceRange": "₺₺ / €€",
+        "currenciesAccepted": "TRY, EUR, USD, RUB",
+        "paymentAccepted": "Cash, Credit Card, Contactless",
+        "knowsLanguage": ["Turkish", "English", "Russian", "German"],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Antalya",
@@ -362,6 +385,42 @@ export default function TerziClient({ gbp1 }: Props) {
           "@type": "GeoCoordinates",
           "latitude": 36.8407,
           "longitude": 30.6133
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Konyaaltı" },
+          { "@type": "AdministrativeArea", "name": "Lara" },
+          { "@type": "AdministrativeArea", "name": "Kundu Oteller Bölgesi" },
+          { "@type": "AdministrativeArea", "name": "Belek" },
+          { "@type": "AdministrativeArea", "name": "Kemer" },
+          { "@type": "AdministrativeArea", "name": "Muratpaşa" },
+          { "@type": "AdministrativeArea", "name": "Kepez" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Tourist & Express Hotel Tailoring Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mobile Tailor & Express Hotel Delivery Service"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Same-Day Trouser Hemming & Dress Alteration"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Dry Cleaning & Hotel Express Laundry"
+              }
+            }
+          ]
         },
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
@@ -448,7 +507,9 @@ export default function TerziClient({ gbp1 }: Props) {
         .tareas{background:var(--cream2);padding:5rem 2rem}.tareas-inner{max-width:1100px;margin:0 auto}
         .tilwrap{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:2.5rem 0 1.2rem}
         .tilbtn{background:none;border:1px solid rgba(184,151,90,.2);color:var(--text);font-size:.76rem;padding:.4rem 1rem;cursor:pointer;font-family:var(--sans);border-radius:2px;transition:all .25s}.tilbtn.on,.tilbtn:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
-        .tmahwrap{background:#fff;border:1px solid rgba(184,151,90,.15);border-radius:2px;padding:1.2rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;box-shadow:var(--shadow)}.tmchip{font-size:.72rem;color:var(--muted);border:1px solid rgba(184,151,90,.15);padding:.22rem .65rem;border-radius:2px}
+        .tmahwrap{background:#fff;border:1px solid rgba(184,151,90,.15);border-radius:2px;padding:1.2rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;box-shadow:var(--shadow)}
+        .tmchip{font-size:.72rem;color:var(--muted);border:1px solid rgba(184,151,90,.15);padding:.22rem .65rem;border-radius:2px;text-decoration:none;transition:all .2s}
+        .tmchip:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
         /* ── ALL SVC ── */
         .tallsvc{background:var(--ink);padding:5rem 2rem}.tallsvc-inner{max-width:1100px;margin:0 auto}
         .tallsvc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-top:2.5rem}
@@ -562,7 +623,7 @@ export default function TerziClient({ gbp1 }: Props) {
             <p style={{ textAlign: 'center', color: '#64748b', fontSize: '.9rem', marginBottom: '2.5rem' }}>Üç adımda hizmet talep et, en iyi teklifi seç.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
               {[
-                { n: '1', ic: '🧵', h: 'Hizmeti Seç', d: 'Paça kısaltma, gelinlik tadilatı, üniforma vb. — ne istediğini işaretle, adet ve konumunu gir.' },
+                { n: '1', ic: '🧵', h: 'Hizmeti Seç', d: 'Paça kısaltma, gelinlik tadilatı, otel servisi vb. — ne istediğini işaretle, adet ve konumunu gir.' },
                 { n: '2', ic: '📸', h: 'Fotoğraf Ekle (opsiyonel)', d: 'İstersen kıyafetin fotoğrafını ekle, terziler daha net fiyat versin.' },
                 { n: '3', ic: '💰', h: 'Teklifleri Karşılaştır', d: 'Çevrendeki terziler fiyat teklifi versin, en uygununu seç, direkt WhatsApp/telefonla iletişime geç.' },
               ].map(s => (
@@ -599,7 +660,7 @@ export default function TerziClient({ gbp1 }: Props) {
           <div className="tsvc-head">
             <span className="ey">✦ Hizmetler</span>
             <h2 id="services-title" className="tst">Antalya Terzi Hizmetleri</h2>
-            <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
+            <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, otel servisi, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
             <span className="tgl" />
           </div>
           <div className="tsvc-grid">
@@ -693,16 +754,16 @@ export default function TerziClient({ gbp1 }: Props) {
         {/* ADRESE GELEN TERZİ */}
         <section className="tmob" aria-labelledby="mob-title">
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <span className="ey ey-light">🚗 Adrese Gelen Terzi Servisi</span>
+            <span className="ey ey-light">🚗 Adrese Ve Otele Gelen Terzi Servisi</span>
             <h2 id="mob-title" className="tst tst-light">Kapınıza Geliyoruz</h2>
-            <p className="tss tss-light">Araçlı terzi servisimizle tüm Antalya'ya hizmet veriyoruz.</p>
+            <p className="tss tss-light">Araçlı terzi servisimizle tüm Antalya otellerine ve adreslere hizmet veriyoruz.</p>
             <span className="tgl" />
             <div className="tmob-steps">
               {[
                 ['📍', 'WhatsApp ile Yazın', 'Adresinizi ve hizmet talebinizi bildirin.'],
-                ['📏', 'Terzi Gelir', 'Adresinize gelip yerinde ölçü alır.'],
+                ['📏', 'Terzi Gelir', 'Otele/adresinize gelip yerinde ölçü alır.'],
                 ['✂️', 'Atölyede Tamamlanır', 'Ölçüye göre 24 saatte hazır.'],
-                ['🚗', 'Kapıya Teslim', 'Anlaşılan vakitte adresinize getirilir.'],
+                ['🚗', 'Kapıya Teslim', 'Anlaşılan vakitte resepsiyona/kapınıza getirilir.'],
               ].map(([ic, t, d], i) => (
                 <article key={i} className="tmob-step">
                   <div className="tmob-ic" aria-hidden="true">{ic}</div>
@@ -717,7 +778,7 @@ export default function TerziClient({ gbp1 }: Props) {
           </div>
         </section>
 
-        {/* GOOGLE HARİTA — İKİ PROFİL */}
+        {/* GOOGLE HARİTA */}
         <section className="tmap-sec" id="konum" aria-labelledby="konum-title">
           <div className="tmap-inner">
             <span className="ey">📍 {L.konum}</span>
@@ -782,7 +843,13 @@ export default function TerziClient({ gbp1 }: Props) {
             {activeIlce && (
               <div className="tmahwrap" aria-live="polite">
                 {ILCELER.find(i => i.ilce === activeIlce)?.m.map(m => (
-                  <span key={m} className="tmchip">{m}</span>
+                  <Link 
+                    key={m} 
+                    href={`/terzi/${slugify(activeIlce)}/${slugify(m)}`} 
+                    className="tmchip"
+                  >
+                    {m}
+                  </Link>
                 ))}
               </div>
             )}
@@ -837,7 +904,8 @@ export default function TerziClient({ gbp1 }: Props) {
                   { ic: '📞', lbl: 'Telefon', val: <a href={`tel:+${PHONE_RAW}`}>{PHONE_DISPLAY}</a> },
                   { ic: '💬', lbl: 'WhatsApp', val: <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer">{PHONE_DISPLAY}</a> },
                   { ic: '🕐', lbl: 'Çalışma Saatleri', val: <span>{L.hours}</span> },
-                  { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Tüm Antalya İlçeleri — Araçlı Terzi Servisi' : lang === 'en' ? 'All Antalya Districts — Mobile Tailor' : lang === 'ru' ? 'Все районы Антальи' : 'Alle Antalya-Bezirke'}</span> },
+                  { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Tüm Antalya İlçeleri & Otelleri — Araçlı Terzi Servisi' : lang === 'en' ? 'All Antalya Districts & Hotels — Mobile Tailor' : lang === 'ru' ? 'Все районы и отели Антальи' : 'Alle Antalya-Bezirke & Hotels'}</span> },
+                  { ic: '💳', lbl: lang === 'tr' ? 'Ödeme & Para Birimleri' : 'Payment & Currencies', val: <span>EUR · USD · RUB · TRY · Credit Card</span> },
                   { ic: '🌍', lbl: lang === 'tr' ? 'Diller' : 'Languages', val: <span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span> },
                 ].map(({ ic, lbl, val }, i) => (
                   <div key={i} className="tcrow">
@@ -865,7 +933,7 @@ export default function TerziClient({ gbp1 }: Props) {
         {/* ANTALYA İLÇELERİ — iç linkleme */}
         <section aria-labelledby="antalya-ilceleri-title" style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine Hizmet Veriyoruz</h2>
+            <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine ve Otellerine Hizmet Veriyoruz</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
               {ANTALYA_ILCELERI.map(i => (
                 <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
@@ -883,29 +951,29 @@ export default function TerziClient({ gbp1 }: Props) {
           Terzi Can · Tailor Can · Портной Кан · Schneider Can
         </div>
         <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.3)', marginBottom: '.5rem' }}>
-          © 2026 SwapHubs — Antalya Terzi · Bay & Bayan · Özel Dikim · Tekstil İmalatı · {PHONE_DISPLAY}
+          © 2026 SwapHubs — Antalya Terzi · Bay & Bayan · Özel Dikim · Otel Servisi · Tekstil İmalatı · {PHONE_DISPLAY}
         </p>
         <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
-  <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
-  {[
-    { n: 'Hurma', p: '/terzi/hurma-terzi' },
-    { n: 'Liman', p: '/terzi/liman-terzi' },
-    { n: 'Uncalı', p: '/terzi/uncali-terzi' },
-    { n: 'Sarısu', p: '/terzi/sarisu-terzi' },
-    { n: 'Çakırlar', p: '/terzi/cakirlar-terzi' },
-    { n: 'Meltem', p: '/terzi/meltem-terzi' }
-  ].map((mah) => (
-    <Link 
-      key={mah.p} 
-      href={mah.p} 
-      style={{ color: 'rgba(255,255,255,.3)', textDecoration: 'none', transition: 'color 0.2s' }}
-      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--gold2)'}
-      onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
-    >
-      {mah.n} Terzi
-    </Link>
-  ))}
-</div>
+          <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
+          {[
+            { n: 'Hurma', p: '/terzi/hurma-terzi' },
+            { n: 'Liman', p: '/terzi/liman-terzi' },
+            { n: 'Uncalı', p: '/terzi/uncali-terzi' },
+            { n: 'Sarısu', p: '/terzi/sarisu-terzi' },
+            { n: 'Çakırlar', p: '/terzi/cakirlar-terzi' },
+            { n: 'Meltem', p: '/terzi/meltem-terzi' }
+          ].map((mah) => (
+            <Link 
+              key={mah.p} 
+              href={mah.p} 
+              style={{ color: 'rgba(255,255,255,.3)', textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--gold2)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
+            >
+              {mah.n} Terzi
+            </Link>
+          ))}
+        </div>
         <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '.8rem' }}>
           <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.62rem', color: 'rgba(255,255,255,.2)', textDecoration: 'none' }}>
             Google Business · {gbp1.name}
