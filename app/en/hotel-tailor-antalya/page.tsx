@@ -164,7 +164,7 @@ export default function HotelTailorAntalyaPage() {
 
         {/* HERO SECTION WITH IMAGE SEO & TRUST BADGES */}
         <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateCoordinates: '1fr', lgGridTemplateColumns: '1.2fr 0.8fr', gap: '2rem', alignItems: 'center' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'center' }}>
             <div>
               <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
                 ⭐ 4.9/5 Rated Hotel Tailor Service · All Antalya
@@ -212,7 +212,7 @@ export default function HotelTailorAntalyaPage() {
                 alt="Professional tailor measuring suit for hotel guest in Antalya Belek and Lara" 
                 style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
               />
-              <div style={{ position: 'absolute', bottom: 0, insetX: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', padding: '1.5rem 1rem 1rem', color: '#fff', fontSize: '.8rem' }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', padding: '1.5rem 1rem 1rem', color: '#fff', fontSize: '.8rem' }}>
                 📍 Serving Luxury Hotels across Belek, Lara, Kemer & Kundu
               </div>
             </div>
