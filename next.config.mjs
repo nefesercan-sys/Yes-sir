@@ -27,7 +27,7 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi
+      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi (SEO Otoritesini Tek Çatıda Toplama)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
@@ -35,15 +35,16 @@ const nextConfig = {
         permanent: true,
       },
 
-      // 2. Cannibalization (İçerik Çakışması) Engelleme — Tüm Eski Terzi URL'lerini /terzi'ye Bağlama
+      // 2. Cannibalization (İçerik Çakışması) Engelleme
+      // HEDEF: Tüm eski ve çakışan URL'lerin otoritesi, sitenin EN GÜÇLÜ sayfası olan /terzi ana merkezine akıtılıyor.
       { source: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', destination: '/terzi', permanent: true },
       { source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', destination: '/terzi', permanent: true },
       { source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', destination: '/terzi', permanent: true },
       { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/terzi', permanent: true },
       { source: '/antalya-terzi-elbise-dikimi', destination: '/terzi', permanent: true },
+      
+      // 3. Bölgesel/Tipografi Hataları ve Yan Sayfa Konsolidasyonları
       { source: '/terzi/antalya/konyaalti', destination: '/terzi', permanent: true },
-
-      // 3. Geçim/Tipografi Hataları ve Yan Sayfa Konsolidasyonları
       { source: '/terzi/gelinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
