@@ -1,8 +1,3 @@
-// app/online-tailor-service/page.tsx
-// ✅ BUILD HATASI DÜZELTİLDİ
-// Hata: <OnlineTailorClient /> prop'suz çağrılıyordu, 6 zorunlu prop eksikti.
-// Çözüm: GBP verileri burada tanımlanıp prop olarak geçirildi.
-
 import type { Metadata } from 'next';
 import OnlineTailorClient from './OnlineTailorClient';
 
@@ -13,15 +8,23 @@ const PHONE_E   = '+905318986418';
 const TODAY     = new Date().toISOString().split('T')[0];
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
-// DÜZELTME (2026-09-19): İki ayrı profil (Liman CID 16306058881247995687 ve
-// "ANTALYA TERZİ CAN - TAILOR" Hurma CID 14310476408054735480) tek, doğrulanmış
-// profile birleştirildi — TERZİ Can - Konyaaltı (5.0★, 11 yorum, Hurma
-// Mahallesi, 07130). Bkz. app/terzi/page.tsx ve app/ru/atelie-antalya
-// içindeki aynı doğrulama.
+// Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri
 const GBP1 = {
+  name:  'TERZİ Can - Konyaaltı Hurma',
+  addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
   maps:  'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
   short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
   embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
+  review:'https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0'
+};
+
+const GBP2 = {
+  name:  'TERZİ Can - Konyaaltı Liman & Ütü Hizmetleri',
+  addr:  'Liman Mahallesi, 07070 Konyaaltı / Antalya',
+  maps:  'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9',
+  short: 'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9?g_st=ac',
+  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Liman+Antalya&output=embed',
+  review:'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9'
 };
 
 export const metadata: Metadata = {
@@ -54,8 +57,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   other: {
-    'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8820;30.6980', ICBM: '36.8820, 30.6980',
+    'geo.region': 'TR-07', 'geo.placename': 'Hurma, Konyaaltı, Antalya',
+    'geo.position': '36.8615;30.6095', ICBM: '36.8615, 30.6095',
   },
   verification: {
     yandex: '4c73ee1911a4b197',
@@ -70,7 +73,7 @@ const jsonLd = {
       '@type': ['LocalBusiness', 'ClothingStore'],
       additionalType: 'https://schema.org/SewingService',
       '@id': `${SITE_URL}#business`,
-      name: 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat',
+      name: 'TERZİ Can - Konyaaltı Terzi Ve Ütü Hizmeti',
       alternateName: ['Online Tailor Service Antalya', 'Terzi Can Antalya', 'Tailor Can Antalya'],
       description:
         'Konyaaltı merkezli online terzi hizmeti. Erkek ve bayan kıyafet dikimi, ' +
@@ -82,24 +85,27 @@ const jsonLd = {
       hasMap: GBP1.maps,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR',
+        streetAddress: 'Hurma Mahallesi',
+        addressLocality: 'Konyaaltı',
+        addressRegion: 'Antalya',
+        postalCode: '07130',
+        addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8820, longitude: 30.6980 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         opens: '09:00', closes: '19:00',
       }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
-      sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
-      knowsLanguage: ['tr', 'en', 'ru'],
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '11', bestRating: '5', worstRating: '1' },
+      sameAs: [GBP1.maps, GBP1.short, GBP2.maps, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
+      knowsLanguage: ['tr', 'en', 'ru', 'de'],
     },
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
       name: 'Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti',
-      url: SITE_URL, inLanguage: ['tr','en','ru'], dateModified: TODAY,
+      url: SITE_URL, inLanguage: ['tr','en','ru','de'], dateModified: TODAY,
       about: { '@id': `${SITE_URL}#business` },
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
     },
@@ -131,14 +137,19 @@ export default function OnlineTailorServicePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {/* ✅ 6 zorunlu prop doğru şekilde geçiriliyor */}
       <OnlineTailorClient
+        gbpName1={GBP1.name}
+        gbpAddr1={GBP1.addr}
         gbpEmbed1={GBP1.embed}
-        gbpEmbed2={GBP1.embed}
         gbpMaps1={GBP1.maps}
-        gbpMaps2={GBP1.maps}
         gbpShort1={GBP1.short}
-        gbpShort2={GBP1.short}
+        gbpReview1={GBP1.review}
+        gbpName2={GBP2.name}
+        gbpAddr2={GBP2.addr}
+        gbpEmbed2={GBP2.embed}
+        gbpMaps2={GBP2.maps}
+        gbpShort2={GBP2.short}
+        gbpReview2={GBP2.review}
       />
     </>
   );
