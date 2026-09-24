@@ -885,9 +885,27 @@ export default function TerziClient({ gbp1 }: Props) {
         <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.3)', marginBottom: '.5rem' }}>
           © 2026 SwapHubs — Antalya Terzi · Bay & Bayan · Özel Dikim · Tekstil İmalatı · {PHONE_DISPLAY}
         </p>
-        <p style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem' }}>
-          Konyaaltı Terzi · Hurma Terzi · Liman Terzi · Uncalı Terzi · Sarısu Terzi · Çakırlar Terzi · Meltem Terzi · Göbi Terzi
-        </p>
+        <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
+  <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
+  {[
+    { n: 'Hurma', p: '/terzi/hurma-terzi' },
+    { n: 'Liman', p: '/terzi/liman-terzi' },
+    { n: 'Uncalı', p: '/terzi/uncali-terzi' },
+    { n: 'Sarısu', p: '/terzi/sarisu-terzi' },
+    { n: 'Çakırlar', p: '/terzi/cakirlar-terzi' },
+    { n: 'Meltem', p: '/terzi/meltem-terzi' }
+  ].map((mah) => (
+    <Link 
+      key={mah.p} 
+      href={mah.p} 
+      style={{ color: 'rgba(255,255,255,.3)', textDecoration: 'none', transition: 'color 0.2s' }}
+      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--gold2)'}
+      onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
+    >
+      {mah.n} Terzi
+    </Link>
+  ))}
+</div>
         <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '.8rem' }}>
           <a href={gbp1.maps} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.62rem', color: 'rgba(255,255,255,.2)', textDecoration: 'none' }}>
             Google Business · {gbp1.name}
