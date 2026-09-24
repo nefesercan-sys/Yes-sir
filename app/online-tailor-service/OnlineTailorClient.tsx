@@ -1,12 +1,5 @@
 'use client';
-// ─────────────────────────────────────────────────────────────────────────────
-// ROUTE: app/online-tailor-service/OnlineTailorClient.tsx
-// DÜZELTİLDİ:
-//  1. Unsplash → Pexels CDN (hotlink güvenilirliği)
-//  2. FAQ: useState → <details>/<summary> (SSR-friendly, Google snippet)
-//  3. GBP Maps embed prop'ları ile gerçek işletme konumu
-//  4. Harita bölümünde her iki GBP profili gösteriliyor
-// ─────────────────────────────────────────────────────────────────────────────
+
 import { useState, useEffect, useRef } from 'react';
 
 const PHONE_RAW = '905318986418';
@@ -14,15 +7,20 @@ const WA = (msg: string) => `https://wa.me/${PHONE_RAW}?text=${encodeURIComponen
 const WA_DEFAULT = WA('Merhaba, terzi hizmetiniz hakkında bilgi almak istiyorum.');
 
 interface Props {
+  gbpName1?: string;
+  gbpAddr1?: string;
   gbpEmbed1: string;
-  gbpEmbed2: string;
   gbpMaps1: string;
-  gbpMaps2: string;
   gbpShort1: string;
+  gbpReview1?: string;
+  gbpName2?: string;
+  gbpAddr2?: string;
+  gbpEmbed2: string;
+  gbpMaps2: string;
   gbpShort2: string;
+  gbpReview2?: string;
 }
 
-// ── Pexels CDN — Unsplash yerine ─────────────────────────────────────────────
 const IMGS = {
   hero:    'https://images.pexels.com/photos/6858614/pexels-photo-6858614.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop',
   erkek:   'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
@@ -140,7 +138,6 @@ const REVIEWS = [
   { name:'Ali R.', city:'Kemer', date:'Mayıs 2025', stars:5, text:'"Kemer\'deki otelimden kurye ile ütü hizmeti aldım. Aynı gün teslim, çok profesyonel."' },
 ];
 
-// FAQ — artık SSR'dan geliyor, burası yedek
 const FAQS: [string, string][] = [
   ["Antalya'da erkek takım elbise dikimi fiyatı ne kadar?", "₺2.500'den başlar. WhatsApp'tan fotoğraf ve ölçü gönderin, 30 dakika içinde fiyat bildiririz."],
   ["Online terzi hizmeti nasıl çalışır?", "WhatsApp'tan model fotoğrafı ve ölçülerinizi gönderin. Fiyatı onaylayın. Kıyafet dikildikten sonra adresinize kargo."],
@@ -153,7 +150,8 @@ const FAQS: [string, string][] = [
 ];
 
 export default function OnlineTailorClient({
-  gbpEmbed1, gbpEmbed2, gbpMaps1, gbpMaps2, gbpShort1, gbpShort2,
+  gbpName1, gbpAddr1, gbpEmbed1, gbpMaps1, gbpShort1, gbpReview1,
+  gbpName2, gbpAddr2, gbpEmbed2, gbpMaps2, gbpShort2, gbpReview2,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [priceTab, setPriceTab] = useState(0);
@@ -360,7 +358,7 @@ export default function OnlineTailorClient({
             <a href="#services" className="obtn obtn-ghost">Hizmetleri Gör ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Yıl Deneyim'],['5000+','Mutlu Müşteri'],['4.9★','112 Yorum'],['24–48h','Teslimat']] as [string,string][]).map(([n,l])=>(
+            {([['10+','Yıl Deneyim'],['5000+','Mutlu Müşteri'],['5.0★','11 Yorum'],['24–48h','Teslimat']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
@@ -487,7 +485,7 @@ export default function OnlineTailorClient({
               ['🏭','Seri İmalat Kapasitesi','Min. 50 adetten başlayan toplu üretim.'],
               ['💰','Şeffaf Fiyatlandırma','Gizli ücret yok, net fiyat peşin alın.'],
               ['🌍','Türkiye Geneli Kargo','Antalya dışından sipariş kargo ile.'],
-              ['⭐','4.9 / 5 · 112 Yorum',"Google'da en yüksek puanlı Antalya terzisi."],
+              ['⭐','5.0 / 5 · 11 Yorum',"Google'da tam puanlı Antalya terzisi."],
             ] as [string,string,string][]).map(([ic,t,d])=>(
               <div key={t} className="owhy-card">
                 <div className="owhy-ic" aria-hidden="true">{ic}</div>
@@ -543,7 +541,7 @@ export default function OnlineTailorClient({
       <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
         <div className="octr">
           <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">⭐ 4.9 / 5 · 112 Değerlendirme</span>
+            <span className="oeyebrow">⭐ 5.0 / 5 · Google İşletme Profili</span>
             <h2 className="oh2" id="rev-h">Müşterilerimiz Ne Diyor?</h2>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
           </div>
@@ -594,22 +592,39 @@ export default function OnlineTailorClient({
       {/* GOOGLE MAPS — İKİ PROFİL */}
       <section id="maps" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="maps-h">
         <div className="octr">
-          <span className="oeyebrow">📍 Konumumuz</span>
-          <h2 className="oh2" id="maps-h">Google Business Profilimiz</h2>
-          <p className="osh-sub">Hurma Mahallesi, Konyaaltı / Antalya.</p>
+          <span className="oeyebrow">📍 Konumlarımız</span>
+          <h2 className="oh2" id="maps-h">Google Business Profillerimiz</h2>
+          <p className="osh-sub">Hurma Mahallesi ve Liman Mahallesi, Konyaaltı / Antalya.</p>
           <div className="odivider" />
           <div className="omaps-grid">
+            {/* Kart 1 - Hurma Şubesi */}
             <div className="omap-card">
               <iframe src={gbpEmbed1} width="100%" height="240" style={{ border: 0, display: 'block' }}
                 allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                title="TERZİ Can - Konyaaltı — Hurma Mah." />
+                title={gbpName1 || "TERZİ Can - Konyaaltı Hurma"} />
               <div className="omap-info">
-                <div className="omap-name">TERZİ Can - Konyaaltı</div>
-                <div className="omap-addr">📍 Hurma Mahallesi, 07130 Konyaaltı / Antalya</div>
+                <div className="omap-name">{gbpName1 || "TERZİ Can - Konyaaltı Hurma"}</div>
+                <div className="omap-addr">📍 {gbpAddr1 || "Hurma Mahallesi, 07130 Konyaaltı / Antalya"}</div>
                 <div className="omap-btns">
                   <a href={gbpMaps1} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
                   <a href={gbpShort1} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-route">📍 Yol Tarifi</a>
-                  <a href="https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0" target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Yorum</a>
+                  <a href={gbpReview1 || gbpMaps1} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Yorum</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Kart 2 - Liman Şubesi */}
+            <div className="omap-card">
+              <iframe src={gbpEmbed2} width="100%" height="240" style={{ border: 0, display: 'block' }}
+                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                title={gbpName2 || "TERZİ Can - Konyaaltı Liman"} />
+              <div className="omap-info">
+                <div className="omap-name">{gbpName2 || "TERZİ Can - Konyaaltı Liman & Ütü"}</div>
+                <div className="omap-addr">📍 {gbpAddr2 || "Liman Mahallesi, 07070 Konyaaltı / Antalya"}</div>
+                <div className="omap-btns">
+                  <a href={gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
+                  <a href={gbpShort2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-route">📍 Yol Tarifi</a>
+                  <a href={gbpReview2 || gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Yorum</a>
                 </div>
               </div>
             </div>
