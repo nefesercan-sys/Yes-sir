@@ -988,4 +988,4 @@ export default function TerziClient({ gbp1 }: Props) {
       <TerziMarketingBottomNav />
     </>
   );
-}
+} 
