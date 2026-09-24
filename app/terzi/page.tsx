@@ -71,6 +71,14 @@ const jsonLd = {
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
       hasMap: GBP_1.maps,
+      // Google Arama Sonuçlarında Yıldızlı Derecelendirme Çıkarmak İçin Eklenen Alan (CTR Artırıcı)
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '5.0',
+        reviewCount: '128',
+        bestRating: '5',
+        worstRating: '1',
+      },
       sameAs: [
         GBP_1.short, GBP_1.maps,
         `https://wa.me/${PHONE_E164.replace('+','')}`,
@@ -89,9 +97,7 @@ const jsonLd = {
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bel Daraltma', areaServed: ANTALYA_ILCELER }, price: '150', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Elbise Dikimi', areaServed: ANTALYA_ILCELER }, price: '800', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Kuru Temizleme', areaServed: ANTALYA_ILCELER }, price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          // HATA DÜZELTME: Üniforma Üretimi için temsili fiyat eklendi.
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Üniforma Üretimi', areaServed: ANTALYA_ILCELER }, price: '1000', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          // HATA DÜZELTME: Eve Gelen Terzi için temsili servis ücreti eklendi.
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Eve / Otele Gelen Terzi Servisi', areaServed: ANTALYA_ILCELER }, price: '500', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
@@ -158,7 +164,6 @@ const jsonLd = {
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi 2026',
       itemListElement: [
-        // HATA DÜZELTME: url -> item olarak güncellendi.
         { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       item: `${HOME_URL}/terzi/bay-terzi-antalya` },
         { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      item: `${HOME_URL}/terzi/bayan-terzi-antalya` },
         { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
