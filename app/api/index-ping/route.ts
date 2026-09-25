@@ -16,7 +16,6 @@ const SAYFALAR = [
   "https://swaphubs.com/terzi/eve-gelen-terzi-antalya",
   "https://swaphubs.com/online-terzi-hizmeti",
   "https://swaphubs.com/tekstil-antalya",
-  "https://swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat",
 ];
 
 export const dynamic = "force-dynamic";
