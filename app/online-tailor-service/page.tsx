@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: {
       'tr': SITE_URL,
-      'ru': `${BASE_URL}/ru/atelie-antalya-online`,
+      'ru': `${BASE_URL}/ru/atelie-antalya`,
       'x-default': SITE_URL,
     },
   },
