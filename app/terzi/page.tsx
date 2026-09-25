@@ -1,21 +1,29 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import TerziClient from './TerziClient';
 
-const SITE_URL    = 'https://swaphubs.com/terzi';
-const HOME_URL    = 'https://swaphubs.com';
-const PHONE       = '+90 531 898 64 18';
-const PHONE_E164  = '+905318986418';
-const TODAY       = new Date().toISOString().split('T')[0];
+// ── Mobil / Tarayıcı Yapılandırması (Next.js 14+ Viewport) ─────────────────────
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#ffffff',
+};
+
+const SITE_URL      = 'https://swaphubs.com/terzi';
+const HOME_URL      = 'https://swaphubs.com';
+const PHONE         = '+90 531 898 64 18';
+const PHONE_E164    = '+905318986418';
+const LAST_MODIFIED = '2026-09-25'; // Statik derlemede tarihin takılı kalmaması için güncel tarih stringi
 
 // ── Google Business Profil ────────────────────────────────────────────────────
 const GBP_1 = {
-  cid:   '0x14c39311e6924c67:0x59547225251db8a0',
-  short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
-  maps:  'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
-  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
-  review:'https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0',
-  name:  'TERZİ Can - Konyaaltı',
-  addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
+  cid:    '0x14c39311e6924c67:0x59547225251db8a0',
+  short:  'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
+  maps:   'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
+  embed:  'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
+  review: 'https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0',
+  name:   'TERZİ Can - Konyaaltı',
+  addr:   'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
 };
 
 const PAGE_TITLE = 'Antalya Terzi Can — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
@@ -71,7 +79,6 @@ const jsonLd = {
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
       hasMap: GBP_1.maps,
-      // Google Arama Sonuçlarında Yıldızlı Derecelendirme Çıkarmak İçin Eklenen Alan (CTR Artırıcı)
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '5.0',
@@ -80,8 +87,11 @@ const jsonLd = {
         worstRating: '1',
       },
       sameAs: [
-        GBP_1.short, GBP_1.maps,
+        GBP_1.short,
+        GBP_1.maps,
         `https://wa.me/${PHONE_E164.replace('+','')}`,
+        'https://www.instagram.com/terzican.antalya', // Instagram hesabınız varsa güncelleyin
+        'https://www.facebook.com/terzicanantalya',   // Facebook hesabınız varsa güncelleyin
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
@@ -126,8 +136,8 @@ const jsonLd = {
       description: PAGE_DESC,
       inLanguage: 'tr',
       datePublished: '2024-01-01',
-      dateModified: TODAY,
-      lastReviewed: TODAY,
+      dateModified: LAST_MODIFIED,
+      lastReviewed: LAST_MODIFIED,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
       speakable: {
         '@type': 'SpeakableSpecification',
