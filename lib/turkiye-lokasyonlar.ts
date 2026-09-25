@@ -1,28 +1,12 @@
 // ============================================================
 // SwapHubs — lib/turkiye-lokasyonlar.ts
-// Antalya ilçeleri (öncelikli, fiziksel hizmet alanı) ve
-// Türkiye'nin diğer illeri (pazaryeri/online teklif odaklı)
-//
-// lat/lng: il merkezinin yaklaşık koordinatları. Bu koordinatlar,
-// /terzi/[il] sayfalarında o şehrin ~60km çevresindeki GERÇEK
-// aktif taleplerin sayısını MongoDB'den canlı olarak çekmek için
-// kullanılır (bkz. app/terzi/[il]/page.tsx) — şablon metne gömülü
-// uydurma istatistik yerine gerçek, güncel bir rakam göstermek içindir.
+// Terzi Can - Sadece Antalya ve çevresi fiziksel hizmet bölgeleri
 // ============================================================
 
 export type Lokasyon = { slug: string; ad: string; lat: number; lng: number };
 export type Mahalle = Lokasyon & { blurb: string };
 
-// Konyaaltı'nın 10 mahallesi — TERZİ Tailor Atelie'nin en yoğun hizmet verdiği
-// alt bölgeler (master sayfada zaten metinle tanıtılıyordu, ama linkleri
-// /terzi/konyaalti/{mahalle} hiç var olmayan bir sayfaya gidiyordu — bkz.
-// app/terzi/konyaalti/[mahalle]/page.tsx). Koordinatlar, canlı talep sayısı
-// sorgusu için gerekli.
-//
-// ÖNEMLİ: slug'lar bilinçli olarak Türkçe karakterli (ör. 'uncalı', 'çakırlar')
-// — çünkü yıldız sayfa (antalyada-terzi-dikim-tamirat-utu-hizmetleri) zaten
-// `d.name.toLocaleLowerCase('tr-TR')` ile bu tam hâliyle href üretiyor. ASCII
-// slug (ör. 'uncali') kullansaydık, o sayfadaki linkler yine 404 verirdi.
+// Konyaaltı'nın 10 mahallesi
 export const KONYAALTI_MAHALLELERI: Mahalle[] = [
   { slug: 'hurma', ad: 'Hurma', lat: 36.8481, lng: 30.6206, blurb: 'Sahil şeridine yakın site ve villalara aynı gün kuryeli alım.' },
   { slug: 'liman', ad: 'Liman', lat: 36.8656, lng: 30.6350, blurb: 'Liman mahallesindeki iş yerlerine ve konutlara hızlı teslimat.' },
@@ -36,7 +20,7 @@ export const KONYAALTI_MAHALLELERI: Mahalle[] = [
   { slug: 'güzeloba', ad: 'Güzeloba', lat: 36.8558, lng: 30.7889, blurb: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
 ];
 
-// Antalya'nın 19 ilçesi — Terzi Can'ın fiziksel hizmet verdiği bölge
+// Antalya'nın 19 ilçesi
 export const ANTALYA_ILCELERI: Lokasyon[] = [
   { slug: 'konyaalti', ad: 'Konyaaltı', lat: 36.8608, lng: 30.6339 },
   { slug: 'muratpasa', ad: 'Muratpaşa', lat: 36.8850, lng: 30.7061 },
@@ -57,88 +41,4 @@ export const ANTALYA_ILCELERI: Lokasyon[] = [
   { slug: 'kumluca', ad: 'Kumluca', lat: 36.3697, lng: 30.2867 },
   { slug: 'elmali', ad: 'Elmalı', lat: 36.7381, lng: 29.9142 },
   { slug: 'korkuteli', ad: 'Korkuteli', lat: 37.0639, lng: 30.1953 },
-];
-
-// Türkiye'nin diğer 80 ili — SwapHubs Terzi pazaryeri (online teklif sistemi) ulusal olarak çalıştığı için
-export const TURKIYE_ILLERI: Lokasyon[] = [
-  { slug: 'adana', ad: 'Adana', lat: 37.0000, lng: 35.3213 },
-  { slug: 'adiyaman', ad: 'Adıyaman', lat: 37.7648, lng: 38.2786 },
-  { slug: 'afyonkarahisar', ad: 'Afyonkarahisar', lat: 38.7507, lng: 30.5567 },
-  { slug: 'agri', ad: 'Ağrı', lat: 39.7191, lng: 43.0503 },
-  { slug: 'amasya', ad: 'Amasya', lat: 40.6499, lng: 35.8353 },
-  { slug: 'ankara', ad: 'Ankara', lat: 39.9334, lng: 32.8597 },
-  { slug: 'artvin', ad: 'Artvin', lat: 41.1828, lng: 41.8183 },
-  { slug: 'aydin', ad: 'Aydın', lat: 37.8560, lng: 27.8416 },
-  { slug: 'balikesir', ad: 'Balıkesir', lat: 39.6484, lng: 27.8826 },
-  { slug: 'bilecik', ad: 'Bilecik', lat: 40.1553, lng: 29.9833 },
-  { slug: 'bingol', ad: 'Bingöl', lat: 38.8847, lng: 40.4939 },
-  { slug: 'bitlis', ad: 'Bitlis', lat: 38.3938, lng: 42.1232 },
-  { slug: 'bolu', ad: 'Bolu', lat: 40.7392, lng: 31.6089 },
-  { slug: 'burdur', ad: 'Burdur', lat: 37.7203, lng: 30.2908 },
-  { slug: 'bursa', ad: 'Bursa', lat: 40.1885, lng: 29.0610 },
-  { slug: 'canakkale', ad: 'Çanakkale', lat: 40.1553, lng: 26.4142 },
-  { slug: 'cankiri', ad: 'Çankırı', lat: 40.6013, lng: 33.6134 },
-  { slug: 'corum', ad: 'Çorum', lat: 40.5506, lng: 34.9556 },
-  { slug: 'denizli', ad: 'Denizli', lat: 37.7765, lng: 29.0864 },
-  { slug: 'diyarbakir', ad: 'Diyarbakır', lat: 37.9144, lng: 40.2306 },
-  { slug: 'edirne', ad: 'Edirne', lat: 41.6771, lng: 26.5557 },
-  { slug: 'elazig', ad: 'Elazığ', lat: 38.6810, lng: 39.2264 },
-  { slug: 'erzincan', ad: 'Erzincan', lat: 39.7500, lng: 39.5000 },
-  { slug: 'erzurum', ad: 'Erzurum', lat: 39.9000, lng: 41.2700 },
-  { slug: 'eskisehir', ad: 'Eskişehir', lat: 39.7767, lng: 30.5206 },
-  { slug: 'gaziantep', ad: 'Gaziantep', lat: 37.0662, lng: 37.3833 },
-  { slug: 'giresun', ad: 'Giresun', lat: 40.9128, lng: 38.3895 },
-  { slug: 'gumushane', ad: 'Gümüşhane', lat: 40.4386, lng: 39.5086 },
-  { slug: 'hakkari', ad: 'Hakkari', lat: 37.5744, lng: 43.7408 },
-  { slug: 'hatay', ad: 'Hatay', lat: 36.2023, lng: 36.1613 },
-  { slug: 'isparta', ad: 'Isparta', lat: 37.7648, lng: 30.5566 },
-  { slug: 'mersin', ad: 'Mersin', lat: 36.8000, lng: 34.6333 },
-  { slug: 'istanbul', ad: 'İstanbul', lat: 41.0082, lng: 28.9784 },
-  { slug: 'izmir', ad: 'İzmir', lat: 38.4192, lng: 27.1287 },
-  { slug: 'kars', ad: 'Kars', lat: 40.6013, lng: 43.0975 },
-  { slug: 'kastamonu', ad: 'Kastamonu', lat: 41.3887, lng: 33.7827 },
-  { slug: 'kayseri', ad: 'Kayseri', lat: 38.7312, lng: 35.4787 },
-  { slug: 'kirklareli', ad: 'Kırklareli', lat: 41.7333, lng: 27.2167 },
-  { slug: 'kirsehir', ad: 'Kırşehir', lat: 39.1425, lng: 34.1709 },
-  { slug: 'kocaeli', ad: 'Kocaeli', lat: 40.8533, lng: 29.8815 },
-  { slug: 'konya', ad: 'Konya', lat: 37.8746, lng: 32.4932 },
-  { slug: 'kutahya', ad: 'Kütahya', lat: 39.4167, lng: 29.9833 },
-  { slug: 'malatya', ad: 'Malatya', lat: 38.3552, lng: 38.3095 },
-  { slug: 'manisa', ad: 'Manisa', lat: 38.6191, lng: 27.4289 },
-  { slug: 'kahramanmaras', ad: 'Kahramanmaraş', lat: 37.5858, lng: 36.9371 },
-  { slug: 'mardin', ad: 'Mardin', lat: 37.3212, lng: 40.7245 },
-  { slug: 'mugla', ad: 'Muğla', lat: 37.2153, lng: 28.3636 },
-  { slug: 'mus', ad: 'Muş', lat: 38.9462, lng: 41.7539 },
-  { slug: 'nevsehir', ad: 'Nevşehir', lat: 38.6939, lng: 34.6857 },
-  { slug: 'nigde', ad: 'Niğde', lat: 37.9667, lng: 34.6833 },
-  { slug: 'ordu', ad: 'Ordu', lat: 40.9839, lng: 37.8764 },
-  { slug: 'rize', ad: 'Rize', lat: 41.0201, lng: 40.5234 },
-  { slug: 'sakarya', ad: 'Sakarya', lat: 40.6940, lng: 30.4358 },
-  { slug: 'samsun', ad: 'Samsun', lat: 41.2867, lng: 36.3300 },
-  { slug: 'siirt', ad: 'Siirt', lat: 37.9333, lng: 41.9500 },
-  { slug: 'sinop', ad: 'Sinop', lat: 42.0231, lng: 35.1531 },
-  { slug: 'sivas', ad: 'Sivas', lat: 39.7477, lng: 37.0179 },
-  { slug: 'tekirdag', ad: 'Tekirdağ', lat: 40.9833, lng: 27.5167 },
-  { slug: 'tokat', ad: 'Tokat', lat: 40.3167, lng: 36.5500 },
-  { slug: 'trabzon', ad: 'Trabzon', lat: 41.0027, lng: 39.7168 },
-  { slug: 'tunceli', ad: 'Tunceli', lat: 39.1079, lng: 39.5401 },
-  { slug: 'sanliurfa', ad: 'Şanlıurfa', lat: 37.1591, lng: 38.7969 },
-  { slug: 'usak', ad: 'Uşak', lat: 38.6823, lng: 29.4082 },
-  { slug: 'van', ad: 'Van', lat: 38.4891, lng: 43.4089 },
-  { slug: 'yozgat', ad: 'Yozgat', lat: 39.8181, lng: 34.8147 },
-  { slug: 'zonguldak', ad: 'Zonguldak', lat: 41.4564, lng: 31.7987 },
-  { slug: 'aksaray', ad: 'Aksaray', lat: 38.3687, lng: 34.0360 },
-  { slug: 'bayburt', ad: 'Bayburt', lat: 40.2552, lng: 40.2249 },
-  { slug: 'karaman', ad: 'Karaman', lat: 37.1759, lng: 33.2287 },
-  { slug: 'kirikkale', ad: 'Kırıkkale', lat: 39.8468, lng: 33.5153 },
-  { slug: 'batman', ad: 'Batman', lat: 37.8812, lng: 41.1351 },
-  { slug: 'sirnak', ad: 'Şırnak', lat: 37.5164, lng: 42.4611 },
-  { slug: 'bartin', ad: 'Bartın', lat: 41.6344, lng: 32.3375 },
-  { slug: 'ardahan', ad: 'Ardahan', lat: 41.1105, lng: 42.7022 },
-  { slug: 'igdir', ad: 'Iğdır', lat: 39.9167, lng: 44.0333 },
-  { slug: 'yalova', ad: 'Yalova', lat: 40.6500, lng: 29.2667 },
-  { slug: 'karabuk', ad: 'Karabük', lat: 41.2061, lng: 32.6204 },
-  { slug: 'kilis', ad: 'Kilis', lat: 36.7184, lng: 37.1212 },
-  { slug: 'osmaniye', ad: 'Osmaniye', lat: 37.0742, lng: 36.2478 },
-  { slug: 'duzce', ad: 'Düzce', lat: 40.8438, lng: 31.1565 },
 ];
