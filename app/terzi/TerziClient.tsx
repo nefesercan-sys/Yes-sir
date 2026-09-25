@@ -683,6 +683,20 @@ export default function TerziClient({ gbp1 }: Props) {
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
             <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
           </div>
+
+          {/* SEO: hizmet alt sayfalarına dahili link — hub sayfası bunlara linklemiyordu, Google bu sayfaları sitemap dışında keşfedemiyordu */}
+          {lang === 'tr' && (
+            <nav aria-label="Terzi hizmet sayfaları" style={{ textAlign: 'center', padding: '0 2rem 3rem', display: 'flex', gap: '.6rem 1.2rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)', fontSize: '.85rem' }}>
+              <Link href="/terzi/bay-terzi-antalya">Bay Terzi Antalya</Link>
+              <Link href="/terzi/bayan-terzi-antalya">Bayan Terzi Antalya</Link>
+              <Link href="/terzi/eve-gelen-terzi-antalya">Eve Gelen Terzi</Link>
+              <Link href="/terzi/paca-kisaltma-antalya">Paça Kısaltma</Link>
+              <Link href="/terzi/uniforma-uretimi-antalya">Üniforma Üretimi</Link>
+              <Link href="/terzi/dikis-atolyesi-antalya">Dikiş Atölyesi</Link>
+              <Link href="/terzi/kuru-temizleme-antalya">Kuru Temizleme</Link>
+              <Link href="/online-terzi-hizmeti">Online Terzi Hizmeti</Link>
+            </nav>
+          )}
         </section>
 
         {/* NEDEN BİZ */}
