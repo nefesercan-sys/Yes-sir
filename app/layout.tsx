@@ -5,6 +5,7 @@ import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
+import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -174,6 +175,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // SEO Düzeltmesi: lang="tr" sabitti; /en, /de, /ru sayfaları da yanlışlıkla
+  // Türkçe olarak işaretleniyordu (hreflang etiketleriyle çelişiyordu).
+  // NOT: Bunu next/headers ile sunucu tarafında okumak, kök layout'u (ve dolayısıyla
+  // TÜM siteyi — generateStaticParams ile statik üretilen yüzlerce lokasyon sayfası
+  // dahil) dinamik render'a zorlar; bu da performans/Core Web Vitals'ı düşürerek SEO'ya
+  // daha büyük zarar verir. Bu yüzden statik üretimi bozmayan, istemci tarafında
+  // document.documentElement.lang'ı düzelten hafif bir bileşen kullanılıyor
+  // (app/components/LocaleHtmlLang.tsx). Başlangıç değeri "tr" kalıyor.
   return (
     <html
       lang="tr"
@@ -199,6 +208,7 @@ export default function RootLayout({
       <body className={`${jakarta.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
+            <LocaleHtmlLang />
             <main>{children}</main>
             <BottomNav />
             <Analytics />
