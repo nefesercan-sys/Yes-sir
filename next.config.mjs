@@ -50,7 +50,16 @@ const nextConfig = {
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
       { source: '/terzi/fermuar-degisimi', destination: '/terzi', permanent: true },
       { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi', permanent: true },
-      { source: '/terzi/dikis-atolyesi-antalya', destination: '/terzi', permanent: true },
+
+      // 4. Duplicate içerik birleştirme: kök seviyedeki eski kopya, /terzi/ altındaki
+      // gerçek/canlı sayfaya yönlendiriliyor (önceden tam tersi yapılıp canlı sayfa
+      // /terzi'ye, boş sayfa ise hiçbir yere yönlendirilmiyordu — canonical kırıktı).
+      { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
+
+      // 5. Rusça ikili çakışma: /ru/atelie-antalya ve /ru/atelie-antalya-online aynı
+      // konuyu (Konyaaltı ателье — tamir/dikim) hedefliyordu. /ru/atelie-antalya, canlı
+      // /terzi hub sayfasından hreflang ile gerçek link alıyor, o yüzden canonical seçildi.
+      { source: '/ru/atelie-antalya-online', destination: '/ru/atelie-antalya', permanent: true },
     ];
   },
 
