@@ -40,10 +40,13 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: SITE_URL,
+    // DÜZELTME (2026-09-26): Bu sayfa İNGİLİZCE içerik olduğu halde 'tr' olarak
+    // kendine referans veriyordu ve 'en' hiç tanımlanmamıştı — düzeltildi.
     languages: {
-      'tr': SITE_URL,
+      'tr': `${BASE_URL}/terzi`,
+      'en': SITE_URL,
       'ru': `${BASE_URL}/ru/atelie-antalya`,
-      'x-default': SITE_URL,
+      'x-default': `${BASE_URL}/terzi`,
     },
   },
   openGraph: {
