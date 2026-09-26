@@ -90,11 +90,17 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical: "https://swaphubs.com",
+    // DÜZELTME (2026-09-26 denetimi): Bu blok önceden 'en': '/en', 'de': '/de',
+    // 'ru': '/ru' olarak TANIMLIYORDU ama bu sayfalar (kök seviyede) HİÇ YOK —
+    // app/en/page.tsx, app/de/page.tsx, app/ru/page.tsx projede mevcut değil.
+    // Google bu URL'lere gidip 404 alıyordu; bu hem "geçersiz hreflang" hatası
+    // olarak Search Console'da raporlanır hem de sitenin uluslararası hedefleme
+    // güvenilirliğini zedeler. Ana sayfanın gerçek bir çevirisi olmadığından
+    // (SwapHubs ana sayfası çok sektörlü bir vitrin), şimdilik yalnızca kendine
+    // ve x-default'a işaret ediyor. Gerçek /en, /de, /ru ana sayfaları
+    // oluşturulduğunda buraya eklenmeli.
     languages: {
       tr: "https://swaphubs.com",
-      en: "https://swaphubs.com/en",
-      ru: "https://swaphubs.com/ru",
-      de: "https://swaphubs.com/de",
       "x-default": "https://swaphubs.com",
     },
   },
