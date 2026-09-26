@@ -50,6 +50,7 @@ export const metadata: Metadata = {
     languages: {
       'ru': PAGE_URL,
       'tr': `${SITE_URL}/terzi`,
+      'en': `${SITE_URL}/online-tailor-service`,
       'x-default': `${SITE_URL}/terzi`,
     },
   },
