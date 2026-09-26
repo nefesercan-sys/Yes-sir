@@ -20,11 +20,14 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: SITE_URL,
+    // DÜZELTME (2026-09-26): Önceki 'en'/'de'/'ar' değerleri ?lang= query
+    // parametresiyle AYNI URL'e işaret ediyordu ve bu sayfa gerçekte o
+    // parametreye göre farklı içerik göstermiyor (searchParams okuması yok) —
+    // yani bu diller için gerçek, ayrı bir sayfa yoktu. Sahte/işlevsiz hreflang
+    // beyanı kaldırıldı. Bu sayfa şu an yalnızca Türkçe; gerçek bir İngilizce/
+    // Almanca karşılığı yazılırsa buraya doğru şekilde eklenmelidir.
     languages: {
       'tr': SITE_URL,
-      'en': `${SITE_URL}?lang=en`,
-      'de': `${SITE_URL}?lang=de`,
-      'ar': `${SITE_URL}?lang=ar`,
       'x-default': SITE_URL,
     },
   },
