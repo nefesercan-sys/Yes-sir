@@ -16,6 +16,10 @@ export default function robots(): MetadataRoute.Robots {
     '/ilan-duzenle',
     '/online-terzi-hizmeti/client',
     '/bal/gorsel-yukle',
+    '/terzi-admin/',   // DÜZELTME (2026-09-26): şifre korumalı, bekleyen OTP kodlarını gösteriyor — kesinlikle taranmamalı
+    '/terzi-panel/',   // DÜZELTME (2026-09-26): terzi işletme paneli, oturum gerektiriyor
+    '/sifremi-unuttum',
+    '/sifre-sifirla',
     '/*?*sort=',
     '/*?*order=',
     '/*?*ref=',
