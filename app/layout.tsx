@@ -19,6 +19,8 @@ const unbounded = Unbounded({
   variable: "--font-unbounded",
 });
 
+const SITE_URL = "https://terzihizmeti.com.tr";
+
 export const viewport: Viewport = {
   themeColor: "#B8975A",
   width: "device-width",
@@ -27,18 +29,18 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://swaphubs.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | SwapHubs",
-    default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    template: "%s | Terzi Can Antalya",
+    default: "Konyaaltı Terzi Can | Express Paça, Fermuar & Ölçü Alımı",
   },
   description:
-    "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın. Tekstil, gıda, lojistik, fason ve daha fazlası. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
+    "Antalya Konyaaltı, Hurma ve Liman bölgesinde profesyonel terzi hizmeti. Pantolon paçası, fermuar değişimi, özel dikim, gelinlik tadilatı ve otellere özel servis.",
 
-  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
-  creator: "SwapHubs",
-  publisher: "SwapHubs",
-  category: "business",
+  authors: [{ name: "Terzi Can", url: SITE_URL }],
+  creator: "Terzi Can",
+  publisher: "Terzi Can",
+  category: "local business",
 
   icons: {
     icon: [
@@ -49,20 +51,20 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    title: "Konyaaltı Terzi Can | Express Paça, Fermuar & Ölçü Alımı",
     description:
-      "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
-    url: "https://swaphubs.com",
-    siteName: "SwapHubs",
+      "Antalya Konyaaltı'nda profesyonel giyim tadilatı, paça kısaltma, fermuar değişimi, özel dikim ve otele/adrese teslimat hizmeti.",
+    url: SITE_URL,
+    siteName: "Terzi Can - Terzi Hizmeti Antalya",
     locale: "tr_TR",
     alternateLocale: ["en_US", "ru_RU", "de_DE"],
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og/swaphubs-og.jpg",
+        url: `${SITE_URL}/og/terzican-og.jpg`,
         width: 1200,
         height: 630,
-        alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
+        alt: "Terzi Can — Antalya Konyaaltı Terzi Hizmetleri",
         type: "image/jpeg",
       },
     ],
@@ -70,10 +72,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-    description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
-    site: "@swaphubs",
-    images: ["https://swaphubs.com/og/swaphubs-og.jpg"],
+    title: "Konyaaltı Terzi Can | Express Paça & Tadilat Hizmeti",
+    description: "Antalya'da profesyonel terzi, özel dikim ve otel servisi.",
+    images: [`${SITE_URL}/og/terzican-og.jpg`],
   },
 
   robots: {
@@ -89,19 +90,10 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://swaphubs.com",
-    // DÜZELTME (2026-09-26 denetimi): Bu blok önceden 'en': '/en', 'de': '/de',
-    // 'ru': '/ru' olarak TANIMLIYORDU ama bu sayfalar (kök seviyede) HİÇ YOK —
-    // app/en/page.tsx, app/de/page.tsx, app/ru/page.tsx projede mevcut değil.
-    // Google bu URL'lere gidip 404 alıyordu; bu hem "geçersiz hreflang" hatası
-    // olarak Search Console'da raporlanır hem de sitenin uluslararası hedefleme
-    // güvenilirliğini zedeler. Ana sayfanın gerçek bir çevirisi olmadığından
-    // (SwapHubs ana sayfası çok sektörlü bir vitrin), şimdilik yalnızca kendine
-    // ve x-default'a işaret ediyor. Gerçek /en, /de, /ru ana sayfaları
-    // oluşturulduğunda buraya eklenmeli.
+    canonical: SITE_URL,
     languages: {
-      tr: "https://swaphubs.com",
-      "x-default": "https://swaphubs.com",
+      tr: SITE_URL,
+      "x-default": SITE_URL,
     },
   },
 
@@ -112,65 +104,62 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-// ─── JSON-LD: WebSite + Organization ─────────────────────────────────────────
+// ─── JSON-LD: WebSite + LocalBusiness (Terzi Can) ───────────────────────────
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://swaphubs.com/#website",
-      url: "https://swaphubs.com",
-      name: "SwapHubs",
-      description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Terzi Can - Terzi Hizmeti Antalya",
+      description: "Antalya Konyaaltı terzi, elbise tadilatı, paça kısaltma ve özel dikim hizmeti",
       inLanguage: ["tr", "en", "ru", "de"],
       potentialAction: {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: "https://swaphubs.com/ilanlar?q={search_term_string}",
+          urlTemplate: `${SITE_URL}/?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
     },
     {
-      "@type": "Organization",
-      "@id": "https://swaphubs.com/#organization",
-      name: "SwapHubs",
-      url: "https://swaphubs.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://swaphubs.com/og/logo.png",
-        width: 512,
-        height: 512,
-      },
-      image: "https://swaphubs.com/og/swaphubs-og.jpg",
+      "@type": ["LocalBusiness", "ClothingStore"],
+      "@id": `${SITE_URL}/#business`,
+      name: "Terzi Can - Terzi Hizmeti Antalya",
+      url: SITE_URL,
+      telephone: "+905318986418",
+      image: `${SITE_URL}/og/terzican-og.jpg`,
       description:
-        "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
-      areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
+        "Antalya Konyaaltı'nda giyim tadilatı, paça kısaltma, fermuar değişimi, abiye/gelinlik tadilatı, özel dikim ve otellere mobil terzi servisi.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Konyaaltı",
+        addressRegion: "Antalya",
+        addressCountry: "TR",
+      },
+      areaServed: ["Antalya", "Konyaaltı", "Hurma", "Liman", "Sarısu", "Lara", "Kemer", "Belek"],
       knowsAbout: [
         "Terzilik Hizmetleri",
-        "Özel Dikim ve Tekstil",
-        "Kuru Temizleme",
-        "B2B Ticaret",
-        "Tekstil Tedarik",
-        "Makine Ekipman",
-        "Turizm",
-        "İnşaat Malzemeleri",
-        "Lojistik",
-        "Temizlik",
-        "Fason Üretim",
-        "Hizmet ve Ürün Tedariği",
+        "Paça Kısaltma",
+        "Fermuar Değişimi",
+        "Gelinlik Tadilatı",
+        "Abiye Tadilatı",
+        "Özel Dikim",
+        "Otele Gelen Terzi",
+        "Üniforma İmalatı",
       ],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+905318986418",
         contactType: "customer service",
         areaServed: ["TR", "DE", "RU", "EN"],
-        availableLanguage: ["Turkish", "English", "Russian", "German"]
+        availableLanguage: ["Turkish", "English", "Russian", "German"],
       },
       sameAs: [
-        "https://twitter.com/swaphubs",
-        "https://www.linkedin.com/company/swaphubs",
+        SITE_URL,
+        "https://wa.me/905318986418",
       ],
     },
   ],
@@ -181,14 +170,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // SEO Düzeltmesi: lang="tr" sabitti; /en, /de, /ru sayfaları da yanlışlıkla
-  // Türkçe olarak işaretleniyordu (hreflang etiketleriyle çelişiyordu).
-  // NOT: Bunu next/headers ile sunucu tarafında okumak, kök layout'u (ve dolayısıyla
-  // TÜM siteyi — generateStaticParams ile statik üretilen yüzlerce lokasyon sayfası
-  // dahil) dinamik render'a zorlar; bu da performans/Core Web Vitals'ı düşürerek SEO'ya
-  // daha büyük zarar verir. Bu yüzden statik üretimi bozmayan, istemci tarafında
-  // document.documentElement.lang'ı düzelten hafif bir bileşen kullanılıyor
-  // (app/components/LocaleHtmlLang.tsx). Başlangıç değeri "tr" kalıyor.
   return (
     <html
       lang="tr"
