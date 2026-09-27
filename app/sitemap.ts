@@ -39,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // ✂️ 2. ANA HİZMETLER VE ÇOK DİLLİ ROTLAR (YÜKSEK ÖNCELİK: 0.90)
     { url: `${BASE_URL}/online-tailor-service`,                           lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
+    { url: `${BASE_URL}/de/online-schneiderservice-antalya`,              lastModified: new Date('2026-09-27'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/online-terzi-hizmeti`,                            lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,                     lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
