@@ -29,14 +29,14 @@ const GBP2 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti',
+  title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring · Ironing Service',
   description:
-    'Konyaaltı merkezli online terzi hizmeti. Erkek & bayan kıyafet dikimi, ütü, tamir, tadilat, ' +
-    'seri imalat. Türkiye geneline kargo. WhatsApp sipariş. ☎ ' + PHONE,
+    'Konyaaltı-based online tailor service. Menswear & womenswear tailoring, ironing, repairs, alterations, ' +
+    'mass production. Shipping across Turkey. Order via WhatsApp. ☎ ' + PHONE,
   keywords: [
-    'online terzi Antalya', 'erkek kıyafet dikimi Antalya', 'bayan kıyafet dikimi Antalya',
-    'ütü hizmeti Antalya', 'tamir tadilat Antalya', 'seri imalat Antalya',
-    'Konyaaltı terzi', 'online tailor Antalya', 'tailor Antalya',
+    'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
+    'ironing service Antalya', 'repairs alterations Antalya', 'mass production Antalya',
+    'Konyaaltı tailor', 'online tailor service', 'tailor Antalya',
   ],
   alternates: {
     canonical: SITE_URL,
@@ -45,14 +45,15 @@ export const metadata: Metadata = {
     languages: {
       'tr': `${BASE_URL}/terzi`,
       'en': SITE_URL,
+      'de': `${BASE_URL}/de/online-schneiderservice-antalya`,
       'ru': `${BASE_URL}/ru/atelie-antalya`,
       'x-default': `${BASE_URL}/terzi`,
     },
   },
   openGraph: {
-    title: 'Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi',
-    description: 'Erkek & bayan kıyafet dikimi, ütü, tamir, tadilat, seri imalat. Türkiye geneline kargo.',
-    url: SITE_URL, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website',
+    title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
+    description: 'Menswear & womenswear tailoring, ironing, repairs, alterations, mass production. Shipping across Turkey.',
+    url: SITE_URL, siteName: 'SwapHubs', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Tailor Service Antalya', type: 'image/jpeg' }],
   },
   robots: {
@@ -79,8 +80,8 @@ const jsonLd = {
       name: 'TERZİ Can - Konyaaltı Terzi Ve Ütü Hizmeti',
       alternateName: ['Online Tailor Service Antalya', 'Terzi Can Antalya', 'Tailor Can Antalya'],
       description:
-        'Konyaaltı merkezli online terzi hizmeti. Erkek ve bayan kıyafet dikimi, ' +
-        'ütü, tamir, tadilat, kişiye özel tasarım ve seri imalat.',
+        'Konyaaltı-based online tailor service. Menswear and womenswear tailoring, ' +
+        'ironing, repairs, alterations, custom design and mass production.',
       url: SITE_URL,
       telephone: PHONE_E,
       priceRange: '₺₺',
@@ -123,12 +124,12 @@ const jsonLd = {
     {
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: "Antalya'da erkek takım elbise dikimi fiyatı?",
-          acceptedAnswer: { '@type': 'Answer', text: `₺2.500'den başlar. WhatsApp'tan ölçü gönderin: ${PHONE}` } },
-        { '@type': 'Question', name: 'Online terzi hizmeti nasıl çalışır?',
-          acceptedAnswer: { '@type': 'Answer', text: `WhatsApp'tan model ve ölçü gönderin, dikip kargoluyoruz. ${PHONE}` } },
-        { '@type': 'Question', name: 'Ütü için otelime geliyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm Antalya otellerine kurye alım ve teslimat. Aynı gün. ${PHONE}` } },
+        { '@type': 'Question', name: "How much does a men's suit cost in Antalya?",
+          acceptedAnswer: { '@type': 'Answer', text: `Starts from ₺2,500. Send your measurements via WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'How does the online tailor service work?',
+          acceptedAnswer: { '@type': 'Answer', text: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` } },
+        { '@type': 'Question', name: 'Do you come to my hotel for ironing?',
+          acceptedAnswer: { '@type': 'Answer', text: `Yes! Courier pickup and delivery to every hotel in Antalya, same day. ${PHONE}` } },
         { '@type': 'Question', name: 'Is there an English-speaking tailor in Antalya?',
           acceptedAnswer: { '@type': 'Answer', text: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` } },
       ],
