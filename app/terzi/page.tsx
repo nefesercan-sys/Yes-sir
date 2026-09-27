@@ -232,13 +232,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
-    // DÜZELTME (2026-09-26): 'de' kaldırıldı — /de/schneider-service-hotel-antalya
-    // zaten /terzi/eve-gelen-terzi-antalya ile doğru şekilde eşleşmiş durumda
-    // (otel-ziyareti kümesi). Bu genel hub sayfasının onunla eşleşmesi içerik
-    // uyumsuzluğu yaratıyordu. 'tr' öz-referansı ve 'x-default' eksikti, eklendi.
     languages: {
       'tr': `${HOME_URL}/terzi`,
       'en': `${HOME_URL}/online-tailor-service`,
+      'de': `${HOME_URL}/de/online-schneiderservice-antalya`,
       'ru': `${HOME_URL}/ru/atelie-antalya`,
       'x-default': `${HOME_URL}/terzi`,
     },
