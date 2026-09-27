@@ -51,6 +51,7 @@ export const metadata: Metadata = {
       'ru': PAGE_URL,
       'tr': `${SITE_URL}/terzi`,
       'en': `${SITE_URL}/online-tailor-service`,
+      'de': `${SITE_URL}/de/online-schneiderservice-antalya`,
       'x-default': `${SITE_URL}/terzi`,
     },
   },
