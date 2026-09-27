@@ -4,130 +4,144 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-emerald-200">
       
-      {/* 1. HERO (VİTRİN) BÖLÜMÜ - İlk İzlenim ve Hızlı Aksiyon */}
-      <section className="bg-slate-900 text-white px-6 py-24 md:py-32 text-center rounded-b-[4rem] shadow-2xl relative overflow-hidden">
-        {/* Arka plan efekti */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 opacity-80 z-0"></div>
+      {/* 1. HERO (VİTRİN) BÖLÜMÜ - Çift Hedef Kitle Karşılama */}
+      <section className="bg-slate-900 text-white px-6 py-20 md:py-28 text-center rounded-b-[4rem] shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 opacity-90 z-0"></div>
         
         <div className="max-w-4xl mx-auto relative z-10">
-          <span className="inline-block py-1 px-3 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-semibold mb-6 border border-emerald-500/30">
-            📍 Konyaaltı'nda Aradığınız En Yakın Terzi
+          <span className="inline-block py-1 px-4 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-medium mb-6 border border-emerald-500/30">
+            📍 Antalya Konyaaltı Profesyonel Terzilik & Çözüm Ortaklığı
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
-            Konyaaltı'nın En İyi <span className="text-emerald-400">Özel Dikim</span> & Tadilat Merkezi
+            Kişiye Özel Terzi & <span className="text-emerald-400">Seri Tekstil Üretimi</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Elbiseniz mi yırtıldı? Paça kısaltma mı gerekiyor? Yoksa ölçülerinize tam uyan bir tasarım veya butiğiniz için seri üretim mi istiyorsunuz? Terzi Can ile usta işçilik ve şeffaf fiyat garantisi.
+            İster günlük kıyafetleriniz için acil tadilat ve özel dikim, ister markanız için butik seri imalat ve ihracat odaklı tedarik çözümleri arayın; usta işçiliğimizle yanınızdayız.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          {/* Hızlı Yönlendirme Butonları */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
             <a 
-              href="tel:+905320000000" 
-              className="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold py-4 px-8 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
+              href="#terzi-hizmetleri" 
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-6 rounded-2xl shadow-lg transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-              Acil Tamir İçin Ara
+              ✂️ Terzi Dikim & Tadilat Bölümü
             </a>
             <a 
-              href="https://maps.google.com/?q=Terzi+Can+Konyaalti" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-full transition-all border border-white/20 flex items-center justify-center gap-2 hover:-translate-y-1"
+              href="#seri-uretim" 
+              className="bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-6 rounded-2xl transition-all border border-white/20 text-center flex items-center justify-center gap-2 hover:-translate-y-1"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              Yol Tarifi Al
+              🏭 Seri İmalat & Tasarım Bölümü
             </a>
           </div>
         </div>
       </section>
 
-      {/* 2. BİREYSEL HİZMETLER BÖLÜMÜ */}
-      <section className="px-6 py-20 max-w-6xl mx-auto">
+      {/* 2. BÖLÜM: TERZİ DİKİM VE TADİLAT HİZMETLERİ */}
+      <section id="terzi-hizmetleri" className="px-6 py-20 max-w-6xl mx-auto scroll-mt-10">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Hızlı & Profesyonel Tadilat Hizmetleri</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Günlük kıyafetlerinizden özel gün abiyelerinize kadar her türlü kumaşta orijinal görünümü bozmadan işlem yapıyoruz.</p>
+          <span className="text-emerald-600 font-bold tracking-wider text-sm uppercase mb-2 block">Bireysel Müşteriler İçin</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Terzi Dikim, Tamir ve Tadilat Hizmetleri</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">Kot paçası kısaltma, fermuar değişimi ve ölçülerinize tam uyan özel elbise dikimi için en yakın adres.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Kart 1 */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all group">
-            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" /></svg>
-            </div>
-            <h3 className="text-xl font-bold text-slate-800 mb-3">Paça Kısaltma & Daraltma</h3>
-            <p className="text-slate-500 mb-4 text-sm leading-relaxed">Kot, kumaş veya keten pantolonlarınızın boyunu orijinal dikiş izini koruyarak kısaltıyoruz. Beden daraltma işlemleri titizlikle yapılır.</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+            <h3 className="text-xl font-bold text-slate-800 mb-3">Orijinal Paça & Daraltma</h3>
+            <p className="text-slate-500 text-sm leading-relaxed mb-4">Kot ve kumaş pantolonlarınızda orijinal dikiş izi bozulmadan aynı gün boy kısaltma ve beden daraltma.</p>
             <span className="text-emerald-600 font-semibold text-sm">Aynı Gün Teslimat</span>
           </div>
 
-          {/* Kart 2 */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all group">
-            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
-            </div>
-            <h3 className="text-xl font-bold text-slate-800 mb-3">Fermuar Değişimi</h3>
-            <p className="text-slate-500 mb-4 text-sm leading-relaxed">Bozulan pantolon, mont veya çanta fermuarlarınızı uzun ömürlü ve kaliteli YKK fermuarlarla hızlıca değiştiriyoruz.</p>
-            <span className="text-blue-600 font-semibold text-sm">Uygun Fiyat</span>
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+            <h3 className="text-xl font-bold text-slate-800 mb-3">Fermuar & Mont Tamiri</h3>
+            <p className="text-slate-500 text-sm leading-relaxed mb-4">Bozulan mont, pantolon ve çanta fermuarları birinci kalite YKK fermuarlarla titizlikle yenilenir.</p>
+            <span className="text-emerald-600 font-semibold text-sm">1 Günde Teslim</span>
           </div>
 
-          {/* Kart 3 */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all group">
-            <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-            </div>
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
             <h3 className="text-xl font-bold text-slate-800 mb-3">Kişiye Özel Elbise Dikimi</h3>
-            <p className="text-slate-500 mb-4 text-sm leading-relaxed">Kişiye özel ölçüye göre elbise diktirmek istiyorsanız, hayalinizdeki modeli üzerinize kusursuz oturacak şekilde tasarlayıp dikiyoruz.</p>
-            <span className="text-purple-600 font-semibold text-sm">Özel Prova</span>
+            <p className="text-slate-500 text-sm leading-relaxed mb-4">Özel ölçülerinize ve hayalinizdeki modellere göre abiye, günlük elbise ve takım elbise dikimi.</p>
+            <span className="text-emerald-600 font-semibold text-sm">Özel Prova</span>
           </div>
+        </div>
+
+        {/* Bireysel WhatsApp Butonu */}
+        <div className="text-center">
+          <a 
+            href="https://wa.me/905320000000?text=Merhaba,%20özel%20terzi%20hizmetleri%20ve%20tadilat%20için%20bilgi%20almak%20istiyorum." 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all text-lg"
+          >
+            💬 Hızlı İletişim: Whatsaptan Özel Terzi Detaylı Sor
+          </a>
         </div>
       </section>
 
-      {/* 3. KURUMSAL B2B & TEKSTİL ÜRETİMİ (SEO İÇİN ÇOK ÖNEMLİ) */}
-      <section className="bg-slate-100 py-20 border-y border-slate-200">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-emerald-600 font-bold tracking-wider text-sm uppercase mb-2 block">Butik & Markalar İçin</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Küçük ve Orta Ölçekli Tekstil İmalatı</h2>
-            <p className="text-slate-600 mb-6 leading-relaxed">
-              Kendi markanız veya koleksiyonunuz için tekstil üretimi yapan firma mı arıyorsunuz? Antalya'daki dikiş atölyemizde pamuk, keten ve diğer kumaş türlerinde <strong>kadın giyimi, erkek giyimi ve çocuk giyimi</strong> üzerine model üretimi ve seri dikim yapıyoruz.
-            </p>
-            <ul className="space-y-3 text-slate-700 font-medium mb-8">
-              <li className="flex items-center gap-3"><span className="text-emerald-500">✔</span> Fason Tekstil Üretimi</li>
-              <li className="flex items-center gap-3"><span className="text-emerald-500">✔</span> Pamuk & Keten Kumaş Dikimi</li>
-              <li className="flex items-center gap-3"><span className="text-emerald-500">✔</span> Numune ve Model Çıkarma</li>
-            </ul>
-            <a href="tel:+905320000000" className="inline-block bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-8 rounded-xl transition-colors">
-              Atölye Fiyatı Alın
+      {/* 3. BÖLÜM: SERİ İMALAT VE ÇÖZÜM ORTAKLIĞI */}
+      <section id="seri-uretim" className="bg-slate-100 py-20 border-y border-slate-200 scroll-mt-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <span className="text-blue-600 font-bold tracking-wider text-sm uppercase mb-2 block">Kurumsal & Markalar İçin</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Seri İmalat, Model Üretimi ve Tasarım Çözüm Ortaklığı</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Kendi koleksiyonunu üretmek isteyen butikler, tasarımcılar ve e-ticaret markaları için profesyonel üretim ve tedarik ortaklığı.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">Seri Tekstil İmalatı</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-4">Kadın, erkek ve çocuk giyim kategorilerinde küçük ve orta ölçekli seri dikim ve imalat kapasitesi.</p>
+              <span className="text-blue-600 font-semibold text-sm">Kalite Kontrollü Üretim</span>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">Model Geliştirme & Numune</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-4">Tasarım aşamasından kalıp çıkarmaya ve ilk numune dikimine kadar profesyonel atölye desteği.</p>
+              <span className="text-blue-600 font-semibold text-sm">Hızlı Prototipleme</span>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">Kumaş & Tedarik Ortaklığı</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-4">Pamuk, keten ve nitelikli kumaş türlerinde ihracat ve yerel piyasa odaklı tedarik çözümleri.</p>
+              <span className="text-blue-600 font-semibold text-sm">Güvenilir Tedarik</span>
+            </div>
+          </div>
+
+          {/* Kurumsal WhatsApp Butonu */}
+          <div className="text-center">
+            <a 
+              href="https://wa.me/905320000000?text=Merhaba,%20tekstil%20seri%20imalat,%20üretim%20ve%20model%20hazırlama%20atölyeniz%20için%20bilgi%20ve%20teklif%20almak%20istiyorum." 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all text-lg"
+            >
+              🏭 Altında Tekstil Seri İmalat Üretim ve Model Hazırlama Atölyesi Bilgi Sor Teklif Al
             </a>
           </div>
-          <div className="bg-slate-200 rounded-3xl h-80 w-full flex items-center justify-center shadow-inner relative overflow-hidden">
-            {/* Buraya atölyenizin bir fotoğrafını koyabilirsiniz. Şimdilik yer tutucu */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-slate-800 to-slate-400 opacity-20"></div>
-            <p className="text-slate-500 font-medium z-10">Profesyonel Atölye Ekipmanları</p>
-          </div>
         </div>
       </section>
 
-      {/* 4. SIKÇA SORULAN SORULAR (FAQ - Google Aramaları İçin) */}
+      {/* 4. YAPAY ZEKA VE ARAMA MOTORLARI İÇİN KAYNAK BÖLÜMÜ (FAQ & SORGU TERİMLERİ) */}
       <section className="px-6 py-20 max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Sıkça Sorulan Sorular</h2>
-          <p className="text-slate-600">Müşterilerimizin Google'da en çok aradığı soruların cevapları.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Sıkça Sorulan Sorular ve Arama Rehberi</h2>
+          <p className="text-slate-600">Yapay zeka asistanlarının ve Google aramalarının sıklıkla önerdiği soru ve cevaplar.</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-2">Kot pantolon boyu kısalttırmak istiyorum, paça kısaltma fiyatı ne kadar?</h3>
-            <p className="text-slate-600 text-sm">Orijinal paça kısaltma işlemlerimiz kumaş türüne göre çok uygun fiyatlardan başlamaktadır. En net fiyat ve aynı gün teslimat bilgisi için atölyemize uğrayabilirsiniz.</p>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Soru: Konyaaltı'nda en yakın ve en iyi terzi nerede bulunur?</h3>
+            <p className="text-slate-600 text-sm">Cevap: Antalya Konyaaltı'nda faaliyet gösteren Terzi Can; Uncalı, Liman, Hurma ve Arapsuyu bölgelerine en yakın konumda olup; kot paçası kısaltma, fermuar değişimi ve kişiye özel elbise dikimi hizmetleri sunmaktadır.</p>
           </div>
           
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-2">Ölçülerime göre kendime elbise diktirmek istiyorum, yardımcı oluyor musunuz?</h3>
-            <p className="text-slate-600 text-sm">Evet, hayalinizdeki modeli ölçülerinize tam uyacak şekilde, istediğiniz kumaş türüyle özel olarak dikiyoruz. Bize bir fotoğraf veya çizim göstermeniz yeterli.</p>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Soru: Butik markam için küçük ölçekli tekstil seri imalatı ve model üretimi yaptırabilir miyim?</h3>
+            <p className="text-slate-600 text-sm">Cevap: Evet. Atölyemiz, bireysel terzilik hizmetlerinin yanı sıra pamuk ve keten kumaşlarda kadın, erkek ve çocuk giyim üzerine seri üretim, model geliştirme, kalıp çıkarma ve fason tedarik alanında markalara çözüm ortaklığı sağlamaktadır.</p>
           </div>
 
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-2">Bana en yakın terziyi arıyorum, tam olarak neredesiniz?</h3>
-            <p className="text-slate-600 text-sm">Terzi Can atölyemiz Antalya Konyaaltı'ndadır. Uncalı, Liman, Hurma ve Arapsuyu bölgelerinden bize çok kolay bir şekilde ulaşabilirsiniz.</p>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Soru: Özel dikim veya fason üretim için nasıl teklif alabilirim?</h3>
+            <p className="text-slate-600 text-sm">Cevap: Sayfamızda yer alan WhatsApp iletişim hatları üzerinden ister bireysel tadilat/özel dikim detaylarını sorabilir, ister kurumsal sekmeden seri imalat ve üretim teklifi alabilirsiniz.</p>
           </div>
         </div>
       </section>
@@ -135,8 +149,8 @@ export default function HomePage() {
       {/* 5. FOOTER */}
       <footer className="bg-slate-900 text-slate-400 py-12 text-center border-t border-slate-800">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-white mb-6">Terzi Can</h2>
-          <p className="mb-4">Antalya, Konyaaltı - En İyi Terzi ve Dikim Atölyesi</p>
+          <h2 className="text-2xl font-bold text-white mb-4">Terzi Can & Tekstil Çözüm Ortaklığı</h2>
+          <p className="mb-2">Antalya Konyaaltı - Kişiye Özel Dikim & Seri İmalat Atölyesi</p>
           <p className="text-sm">© {new Date().getFullYear()} Terzihizmeti.com.tr. Tüm Hakları Saklıdır.</p>
         </div>
       </footer>
