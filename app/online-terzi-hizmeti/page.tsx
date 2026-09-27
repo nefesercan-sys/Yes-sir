@@ -20,12 +20,13 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: SITE_URL,
-    // DÜZELTME (2026-09-26): Önceki 'en'/'de'/'ar' değerleri ?lang= query
-    // parametresiyle AYNI URL'e işaret ediyordu ve bu sayfa gerçekte o
-    // parametreye göre farklı içerik göstermiyor (searchParams okuması yok) —
-    // yani bu diller için gerçek, ayrı bir sayfa yoktu. Sahte/işlevsiz hreflang
-    // beyanı kaldırıldı. Bu sayfa şu an yalnızca Türkçe; gerçek bir İngilizce/
-    // Almanca karşılığı yazılırsa buraya doğru şekilde eklenmelidir.
+    // NOT (2026-09-26): Bu sayfa /terzi'den içerik olarak farklı (Türkiye geneli
+    // kargo odaklı), ve /terzi zaten /online-tailor-service, /de/online-schneider-
+    // service-antalya, /ru/atelie-antalya üçlüsünün 'tr' çapası olarak ayarlı.
+    // Bu sayfayı da aynı yabancı sayfalara bağlamak çift/çelişkili 'tr' referansı
+    // yaratır (Search Console'da "hreflang karşılıklı değil" hatası). Bu sayfanın
+    // kendine özgü bir İngilizce/Almanca/Rusça çevirisi yazılana kadar dürüstçe
+    // yalnızca Türkçe olarak işaretli kalıyor.
     languages: {
       'tr': SITE_URL,
       'x-default': SITE_URL,
