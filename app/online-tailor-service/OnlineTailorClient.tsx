@@ -1,160 +1,300 @@
 import type { Metadata } from 'next';
-import OnlineTailorClient from './OnlineTailorClient';
+import OnlineTerziClient from './OnlineTerziClient';
 
-const BASE_URL  = 'https://swaphubs.com';
-const SITE_URL  = `${BASE_URL}/online-tailor-service`;
-const PHONE     = '+90 531 898 64 18';
-const PHONE_E   = '+905318986418';
-const TODAY     = new Date().toISOString().split('T')[0];
-const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
+const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
-// Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri
-const GBP1 = {
-  name:  'TERZİ Can - Konyaaltı Hurma',
-  addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
-  maps:  'https://www.google.com/maps/place/?q=place_id:0x14c39311e6924c67:0x59547225251db8a0',
-  short: 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8',
-  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Hurma+Antalya&output=embed',
-  review:'https://search.google.com/local/writereview?placeid=0x14c39311e6924c67:0x59547225251db8a0'
-};
-
-const GBP2 = {
-  name:  'TERZİ Can - Konyaaltı Liman & Ütü Hizmetleri',
-  addr:  'Liman Mahallesi, 07070 Konyaaltı / Antalya',
-  maps:  'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9',
-  short: 'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9?g_st=ac',
-  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Liman+Antalya&output=embed',
-  review:'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9'
-};
-
+// ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
-  title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring · Ironing Service',
+  metadataBase: new URL('https://swaphubs.com'),
+  title: "Online Terzi Hizmeti | 81 İle Özel Dikim & Kargo | SwapHubs",
   description:
-    'Konyaaltı-based online tailor service. Menswear & womenswear tailoring, ironing, repairs, alterations, ' +
-    'mass production. Shipping across Turkey. Order via WhatsApp. ☎ ' + PHONE,
+    "Türkiye'nin 81 iline kargo teslimatlı online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz kapınıza gelsin.",
   keywords: [
-    'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
-    'ironing service Antalya', 'repairs alterations Antalya', 'mass production Antalya',
-    'Konyaaltı tailor', 'online tailor service', 'tailor Antalya',
+    'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
+    'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',
+    'online gelinlik dikimi', 'online takım elbise dikimi',
+    'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
+    'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Türkiye',
+    'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
+    '81 ile terzi', 'online fason dikim', 'SwapHubs terzi',
   ],
   alternates: {
     canonical: SITE_URL,
-    // DÜZELTME (2026-09-26): Bu sayfa İNGİLİZCE içerik olduğu halde 'tr' olarak
-    // kendine referans veriyordu ve 'en' hiç tanımlanmamıştı — düzeltildi.
+    // NOT (2026-09-26): Bu sayfa /terzi'den içerik olarak farklı (Türkiye geneli
+    // kargo odaklı), ve /terzi zaten /online-tailor-service, /de/online-schneider-
+    // service-antalya, /ru/atelie-antalya üçlüsünün 'tr' çapası olarak ayarlı.
+    // Bu sayfayı da aynı yabancı sayfalara bağlamak çift/çelişkili 'tr' referansı
+    // yaratır (Search Console'da "hreflang karşılıklı değil" hatası). Bu sayfanın
+    // kendine özgü bir İngilizce/Almanca/Rusça çevirisi yazılana kadar dürüstçe
+    // yalnızca Türkçe olarak işaretli kalıyor.
     languages: {
-      'tr': `${BASE_URL}/terzi`,
-      'en': SITE_URL,
-      'de': `${BASE_URL}/de/online-schneiderservice-antalya`,
-      'ru': `${BASE_URL}/ru/atelie-antalya`,
-      'x-default': `${BASE_URL}/terzi`,
+      'tr': SITE_URL,
+      'x-default': SITE_URL,
     },
   },
   openGraph: {
-    title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
-    description: 'Menswear & womenswear tailoring, ironing, repairs, alterations, mass production. Shipping across Turkey.',
-    url: SITE_URL, siteName: 'SwapHubs', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
-    images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Tailor Service Antalya', type: 'image/jpeg' }],
+    title: "SwapHubs Online Terzi | Türkiye'nin 81 İline Özel Dikim",
+    description:
+      "WhatsApp üzerinden profesyonel ölçü alımı, abiye, gelinlik ve takım elbise dikimi. 81 ile teslimat ve tam uyum garantisi.",
+    url: SITE_URL,
+    siteName: 'SwapHubs',
+    locale: 'tr_TR',
+    alternateLocale: ['en_US', 'de_DE', 'ar_SA'],
+    type: 'website',
+    images: [
+      {
+        url: '/og/online-terzi.jpg',
+        width: 1200,
+        height: 630,
+        alt: "SwapHubs Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
+        type: 'image/jpeg',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@swaphubs',
+    title: 'SwapHubs Online Terzi | 81 İle Teslimat | TR · EN · DE · AR',
+    description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
+    images: ['/og/online-terzi.jpg'],
   },
   robots: {
-    index: true, follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
   other: {
-    'geo.region': 'TR-07', 'geo.placename': 'Hurma, Konyaaltı, Antalya',
-    'geo.position': '36.8615;30.6095', ICBM: '36.8615, 30.6095',
-  },
-  verification: {
-    yandex: '4c73ee1911a4b197',
-    other: { 'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3' },
+    'geo.region': 'TR-07',
+    'geo.placename': 'Antalya',
+    'geo.position': '36.8841;30.7056',
+    'ICBM': '36.8841, 30.7056',
   },
 };
 
+// ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    // 1. WebSite
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
-      additionalType: 'https://schema.org/SewingService',
+      '@type': 'WebSite',
+      '@id': 'https://www.swaphubs.com#website',
+      name: 'SwapHubs',
+      url: 'https://www.swaphubs.com',
+      publisher: {
+        '@type': 'Organization',
+        '@id': 'https://www.swaphubs.com#organization',
+        name: 'SwapHubs',
+        url: 'https://www.swaphubs.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.swaphubs.com/logo.png',
+          width: 512,
+          height: 512,
+        },
+      },
+    },
+
+    // 2. LocalBusiness
+    {
+      '@type': ['ClothingStore', 'LocalBusiness'],
       '@id': `${SITE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı Terzi Ve Ütü Hizmeti',
-      alternateName: ['Online Tailor Service Antalya', 'Terzi Can Antalya', 'Tailor Can Antalya'],
+      name: 'SwapHubs Online Terzi',
+      alternateName: ['SwapHubs E-Terzi', 'Online Terzi Türkiye', 'SwapHubs Tailor'],
       description:
-        'Konyaaltı-based online tailor service. Menswear and womenswear tailoring, ' +
-        'ironing, repairs, alterations, custom design and mass production.',
+        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma dikimi.",
       url: SITE_URL,
-      telephone: PHONE_E,
+      telephone: '+905318986418',
+      email: 'tekstil@swaphubs.com',
       priceRange: '₺₺',
-      image: OG_IMG,
-      hasMap: GBP1.maps,
+      image: ['https://www.swaphubs.com/og/online-terzi.jpg'],
+      logo: 'https://www.swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mahallesi',
-        addressLocality: 'Konyaaltı',
+        streetAddress: 'Konyaaltı',
+        addressLocality: 'Antalya',
         addressRegion: 'Antalya',
-        postalCode: '07130',
+        postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
-      openingHoursSpecification: [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
-      }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '11', bestRating: '5', worstRating: '1' },
-      sameAs: [GBP1.maps, GBP1.short, GBP2.maps, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+          opens: '09:00',
+          closes: '21:00',
+        },
+      ],
+      areaServed: { '@type': 'Country', name: 'Turkey' },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+905318986418',
+          contactType: 'customer service',
+          areaServed: 'TR',
+          availableLanguage: ['Turkish','English','German','Arabic'],
+        },
+      ],
+
+      // DÜZELTİLDİ: Nested itemOffered kaldırıldı, additionalType ve price eklendi
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SwapHubs Online Terzi Hizmetleri 2025–2026',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            name: 'Özel Tasarım Abiye & Gece Elbisesi Dikimi',
+            description: 'El işlemeli dantel, İtalyan saten ve Fransız şifon kumaşlarla abiye dikimi. 3D taslak onayı, ücretsiz revizyon.',
+            availability: 'https://schema.org/InStock',
+            price: '2000',
+            priceCurrency: 'TRY',
+            url: SITE_URL,
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            additionalType: 'https://schema.org/Service',
+          },
+          {
+            '@type': 'Offer',
+            name: 'Özel Gelinlik Tasarımı ve Dikimi',
+            description: 'Swarovski taşlar, el yapımı dantel aplikelerle özel gelinlik. Kişisel stil danışmanı, ücretsiz revizyon.',
+            availability: 'https://schema.org/InStock',
+            price: '5000',
+            priceCurrency: 'TRY',
+            url: SITE_URL,
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            additionalType: 'https://schema.org/Service',
+          },
+          {
+            '@type': 'Offer',
+            name: 'Özel Takım Elbise ve Smokin Dikimi',
+            description: 'İtalyan yün ve superfine wool kumaşlarla ölçüye özel takım elbise ve smokin dikimi.',
+            availability: 'https://schema.org/InStock',
+            price: '3000',
+            priceCurrency: 'TRY',
+            url: SITE_URL,
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            additionalType: 'https://schema.org/Service',
+          },
+          {
+            '@type': 'Offer',
+            name: 'Kurumsal Üniforma Üretimi',
+            description: 'Otel, restoran, sağlık, havacılık için logo nakışlı üniforma. Minimum 10 adet.',
+            availability: 'https://schema.org/InStock',
+            price: '500',
+            priceCurrency: 'TRY',
+            url: SITE_URL,
+            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            additionalType: 'https://schema.org/Service',
+          },
+        ],
+      },
+
+      sameAs: [
+        'https://wa.me/905318986418',
+        'https://www.swaphubs.com',
+        'https://www.swaphubs.com/terzi',
+      ],
     },
+
+    // 3. WebPage
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: 'Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti',
-      url: SITE_URL, inLanguage: ['tr','en','ru','de'], dateModified: TODAY,
+      name: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | SwapHubs",
+      url: SITE_URL,
+      isPartOf: { '@id': 'https://www.swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
+      description:
+        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet kapına gelsin.",
+      inLanguage: ['tr', 'en', 'de', 'ar'],
+      datePublished: '2024-01-01',
+      dateModified: new Date().toISOString().split('T')[0],
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
     },
+
+    // 4. BreadcrumbList
     {
-      '@type': 'BreadcrumbList', '@id': `${SITE_URL}#breadcrumb`,
+      '@type': 'BreadcrumbList',
+      '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
-        { '@type': 'ListItem', position: 3, name: 'Online Tailor Service', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://www.swaphubs.com' },
+        { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://www.swaphubs.com/terzi' },
+        { '@type': 'ListItem', position: 3, name: 'Online Terzi Hizmeti', item: SITE_URL },
       ],
     },
+
+    // 5. FAQPage
     {
       '@type': 'FAQPage',
+      '@id': `${SITE_URL}#faq`,
       mainEntity: [
-        { '@type': 'Question', name: "How much does a men's suit cost in Antalya?",
-          acceptedAnswer: { '@type': 'Answer', text: `Starts from ₺2,500. Send your measurements via WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'How does the online tailor service work?',
-          acceptedAnswer: { '@type': 'Answer', text: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` } },
-        { '@type': 'Question', name: 'Do you come to my hotel for ironing?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes! Courier pickup and delivery to every hotel in Antalya, same day. ${PHONE}` } },
-        { '@type': 'Question', name: 'Is there an English-speaking tailor in Antalya?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` } },
+        {
+          '@type': 'Question',
+          name: "Türkiye'nin herhangi bir şehrinden online terzi siparişi verebilir miyim?",
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: "Evet! İstanbul'dan Hakkari'ye, İzmir'den Kars'a 81 ilin tamamına kapıya kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor, atölyeye gelmenize gerek yok.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Online terzi için ölçülerimi nasıl alacağım?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Online terzi siparişim ne kadar sürede teslim edilir?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Temel modeller 7–10 iş gününde, abiye ve gelinlik 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti de mevcuttur.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Tam Uyum Garantimiz kapsamında ücretsiz revizyon hakkınız var. Ürünü iade edersiniz, revize edilmiş haliyle kapınıza gönderilir. Koşulsuz iade politikamız da mevcuttur.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Kendi kumaşımla online terzi hizmetinden yararlanabilir miyim?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Evet! Kendi kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Online terzi hizmeti kaç dilde sunuluyor?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Türkçe, İngilizce, Almanca ve Arapça dillerinde hizmet sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşteriler de kolayca sipariş verebilir.',
+          },
+        },
       ],
     },
   ],
 };
 
-export default function OnlineTailorServicePage() {
+export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <OnlineTailorClient
-        gbpName1={GBP1.name}
-        gbpAddr1={GBP1.addr}
-        gbpEmbed1={GBP1.embed}
-        gbpMaps1={GBP1.maps}
-        gbpShort1={GBP1.short}
-        gbpReview1={GBP1.review}
-        gbpName2={GBP2.name}
-        gbpAddr2={GBP2.addr}
-        gbpEmbed2={GBP2.embed}
-        gbpMaps2={GBP2.maps}
-        gbpShort2={GBP2.short}
-        gbpReview2={GBP2.review}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <OnlineTerziClient />
     </>
   );
 }
