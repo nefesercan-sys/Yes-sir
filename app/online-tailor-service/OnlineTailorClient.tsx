@@ -147,6 +147,10 @@ const FAQS: [string, string][] = [
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
   ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],
   ["Is there an English-speaking tailor in Antalya?", "Yes! Our tailor speaks English, Russian and German. WhatsApp: +90 531 898 64 18"],
+  ["My dress is torn — can you repair it the same day?", "Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate."],
+  ["Are you open in the evening or on weekends?", "Yes, we're open 6 days a week including evening hours. Message us on WhatsApp to book a time."],
+  ["Can I have a custom dress made for myself?", "Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns."],
+  ["Do you sew with natural fabrics like cotton or linen?", "Yes, we offer custom tailoring in 100% cotton and linen fabric."],
 ];
 
 export default function OnlineTailorClient({
