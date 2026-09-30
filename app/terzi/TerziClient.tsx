@@ -282,6 +282,10 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.'],
     ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. 24 saat ekspres.'],
+    ['Elbisem yırtıldı, aynı gün tamir edebilir misiniz?', `Evet, çoğu yırtık/söküm tamiri aynı gün tamamlanır. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Akşam veya hafta sonu açık mısınız?', `Haftanın 6 günü, akşam saatlerine kadar hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Kendime özel bir elbise diktirmek istiyorum, mümkün mü?', `Evet, ölçünüze ve modelinize göre özel dikim yapıyoruz. Model fotoğrafı gönderin. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Pamuklu veya keten gibi doğal kumaştan dikim yapıyor musunuz?', `Evet, %100 pamuk ve keten kumaştan kişiye özel dikim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
   ],
   en:[
     ['How much is trouser hemming in Antalya?', 'From ₺150 / €5. Same day service available. Send a photo on WhatsApp for instant quote.'],
