@@ -1,25 +1,14 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  // Ortak disallow listesi (Parametreler ve hassas yollar)
+  // Pazaryeri (swaphubs.com) sistemine ait kapalı kalması gereken rotalar
   const commonDisallows = [
-    '/admin/',
-    '/admin-ai/',
     '/api/',
+    '/admin-ai/',
+    '/bal/',
+    '/ilan-ver/',
     '/panel/',
     '/profil/',
-    '/mesajlar/',
-    '/bildirimler/',
-    '/giris',
-    '/uye-ol',
-    '/ilan-ver',
-    '/ilan-duzenle',
-    '/online-terzi-hizmeti/client',
-    '/bal/gorsel-yukle',
-    '/terzi-admin/',   // DÜZELTME (2026-09-26): şifre korumalı, bekleyen OTP kodlarını gösteriyor — kesinlikle taranmamalı
-    '/terzi-panel/',   // DÜZELTME (2026-09-26): terzi işletme paneli, oturum gerektiriyor
-    '/sifremi-unuttum',
-    '/sifre-sifirla',
     '/*?*sort=',
     '/*?*order=',
     '/*?*ref=',
@@ -37,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: commonDisallows, // Googlebot genel kuralları ezdiği için ortak liste eklendi
+        disallow: commonDisallows,
       },
       {
         userAgent: 'Google-Extended',
@@ -48,7 +37,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
+    // Sitemap doğru domaine ayarlandı
     sitemap: 'https://swaphubs.com/sitemap.xml',
-    host: 'https://swaphubs.com',
+    // DÜZELTME: host parametresi Googlebot uyarısına neden olduğu için KALDIRILDI.
   }
 }
