@@ -27,7 +27,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'TailorShop',
+      '@type': ['LocalBusiness', 'TailorShop'],
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can - Mobile & Hotel Tailor Antalya',
       alternateName: [
