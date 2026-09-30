@@ -147,6 +147,10 @@ const FAQS: [string, string][] = [
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],
   ["Versenden Sie in die ganze Türkei?", "Ja. Kostenloser Kurier innerhalb von Antalya, Versand in die ganze Türkei, 5–10 Werktage."],
   ["Gibt es einen deutschsprachigen Schneider in Antalya?", "Ja! Unser Schneider spricht Deutsch, Englisch und Russisch. WhatsApp: +90 531 898 64 18"],
+  ["Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?", "Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung."],
+  ["Haben Sie abends oder am Wochenende geöffnet?", "Ja, wir haben 6 Tage die Woche geöffnet, auch abends. Schreiben Sie uns auf WhatsApp für einen Termin."],
+  ["Kann ich mir ein individuelles Kleid anfertigen lassen?", "Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid."],
+  ["Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?", "Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an."],
 ];
 
 export default function OnlineSchneiderClient({
