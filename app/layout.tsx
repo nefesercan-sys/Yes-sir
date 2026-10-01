@@ -88,23 +88,10 @@ export const metadata: Metadata = {
     },
   },
 
-  alternates: {
-    canonical: "https://swaphubs.com",
-    // DÜZELTME (2026-09-26 denetimi): Bu blok önceden 'en': '/en', 'de': '/de',
-    // 'ru': '/ru' olarak TANIMLIYORDU ama bu sayfalar (kök seviyede) HİÇ YOK —
-    // app/en/page.tsx, app/de/page.tsx, app/ru/page.tsx projede mevcut değil.
-    // Google bu URL'lere gidip 404 alıyordu; bu hem "geçersiz hreflang" hatası
-    // olarak Search Console'da raporlanır hem de sitenin uluslararası hedefleme
-    // güvenilirliğini zedeler. Ana sayfanın gerçek bir çevirisi olmadığından
-    // (SwapHubs ana sayfası çok sektörlü bir vitrin), şimdilik yalnızca kendine
-    // ve x-default'a işaret ediyor. Gerçek /en, /de, /ru ana sayfaları
-    // oluşturulduğunda buraya eklenmeli.
-    languages: {
-      tr: "https://swaphubs.com",
-      "x-default": "https://swaphubs.com",
-    },
-  },
-
+  // NOT: canonical burada KÖKTE TANIMLI DEĞİL. Kökte canonical vermek, kendi
+  // canonical'ı olmayan her alt sayfayı ana sayfaya işaret ettirebilir ve
+  // Google'ın o sayfaları dizinden düşürmesine yol açar. Ana sayfa canonical'ını
+  // app/page.tsx zaten veriyor; /terzi kendi canonical'ını page.tsx'te veriyor.
   verification: {
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -112,7 +99,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-// ─── JSON-LD: WebSite + Organization ─────────────────────────────────────────
+// ─── JSON-LD: WebSite + Organization (SwapHubs = platform, arka planda) ──────
+// Terzi Can'a ait telefon/hizmet bilgileri BURADAN çıkarıldı; tek kaynağı
+// app/terzi/page.tsx. Böylece arama motorları telefon/hizmet varlığını
+// SwapHubs'a değil Terzi Can'a bağlar.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -123,6 +113,7 @@ const jsonLd = {
       name: "SwapHubs",
       description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
       inLanguage: ["tr", "en", "ru", "de"],
+      publisher: { "@id": "https://swaphubs.com/#organization" },
       potentialAction: {
         "@type": "SearchAction",
         target: {
@@ -148,9 +139,6 @@ const jsonLd = {
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
       knowsAbout: [
-        "Terzilik Hizmetleri",
-        "Özel Dikim ve Tekstil",
-        "Kuru Temizleme",
         "B2B Ticaret",
         "Tekstil Tedarik",
         "Makine Ekipman",
@@ -161,13 +149,7 @@ const jsonLd = {
         "Fason Üretim",
         "Hizmet ve Ürün Tedariği",
       ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+905318986418",
-        contactType: "customer service",
-        areaServed: ["TR", "DE", "RU", "EN"],
-        availableLanguage: ["Turkish", "English", "Russian", "German"]
-      },
+      subOrganization: { "@id": "https://swaphubs.com/terzi#business" },
       sameAs: [
         "https://twitter.com/swaphubs",
         "https://www.linkedin.com/company/swaphubs",
@@ -181,14 +163,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // SEO Düzeltmesi: lang="tr" sabitti; /en, /de, /ru sayfaları da yanlışlıkla
-  // Türkçe olarak işaretleniyordu (hreflang etiketleriyle çelişiyordu).
-  // NOT: Bunu next/headers ile sunucu tarafında okumak, kök layout'u (ve dolayısıyla
-  // TÜM siteyi — generateStaticParams ile statik üretilen yüzlerce lokasyon sayfası
-  // dahil) dinamik render'a zorlar; bu da performans/Core Web Vitals'ı düşürerek SEO'ya
-  // daha büyük zarar verir. Bu yüzden statik üretimi bozmayan, istemci tarafında
-  // document.documentElement.lang'ı düzelten hafif bir bileşen kullanılıyor
-  // (app/components/LocaleHtmlLang.tsx). Başlangıç değeri "tr" kalıyor.
   return (
     <html
       lang="tr"
@@ -203,7 +177,7 @@ export default function RootLayout({
         />
         <link
           rel="preconnect"
-          href="https://images.unsplash.com"
+          href="https://images.pexels.com"
           crossOrigin="anonymous"
         />
         <script
