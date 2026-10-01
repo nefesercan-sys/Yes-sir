@@ -82,7 +82,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`,                    lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,                  lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,                    lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
-    { url: `${BASE_URL}/tekstil-antalya`,                                 lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.75 },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.75 },
 
     // 📋 5. DÖNÜŞÜM & MÜŞTERİ TALEBİ SAYFALARI (0.60)
