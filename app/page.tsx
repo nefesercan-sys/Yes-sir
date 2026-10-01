@@ -1,10 +1,11 @@
 import AnaSayfaClient from "@/providers/AnaSayfaClient";
 import { getDb } from "@/lib/mongodb";
+import type { Metadata } from "next";
 
 // SEO standardı: www kaldırıldı, sitemap ve canonical ile %100 uyumlu hale getirildi
 const BASE = "https://swaphubs.com";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   description: "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. İlan verin, teklif alın — tamamen ücretsiz.",
   keywords: "ilan, hizmet, ürün, tedarik, fason, tekstil, gıda, lojistik, Türkiye, ihracat, tedarikçi bul",
