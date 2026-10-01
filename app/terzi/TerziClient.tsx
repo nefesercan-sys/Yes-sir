@@ -1,16 +1,21 @@
 'use client';
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/terzi/TerziClient.tsx
-// TAM OPTİMİZE VE FULL SÜRÜM:
-//  1. [SEO & AI / GEO] Gelişmiş Schema.org JSON-LD (TailorShop, OfferCatalog, FAQPage)
-//  2. [Turist & Otel SEO] Döviz (EUR/USD/RUB/TRY), ödeme tipleri, otelden alım-teslimat kurgusu
-//  3. [Fix] Mahalle çiplerine (tmahwrap) dinamik SEO uyumlu <Link> yönlendirmeleri eklendi
-//  4. [Multi-Lang SSR] Google & Yapay Zeka botları için SSS (FAQ) details/summary SSR yapısı
-//  5. [A11y & Semantik] ARIA rolleri, semantik HTML5 etiketleri ve duyarlı CSS
+// GÜNCEL SÜRÜM (2026-10-02):
+//  1. JSON-LD buradan KALDIRILDI — tek kaynak app/terzi/page.tsx (çakışan
+//     TailorShop / terzihizmeti.com.tr / farklı geo verisi silindi)
+//  2. <main> → <div>: root layout zaten <main> sarıyor (iç içe main geçersizdi)
+//  3. 404 veren linkler düzeltildi:
+//       - fermuar-degisimi-antalya ve gelinlik-tadilati-antalya listeden çıkarıldı
+//       - footer mahalleleri /terzi/konyaalti/[mahalle] adresine yönlendi
+//       - ilçe çipleri: sadece sayfası olan mahalleler link, diğerleri düz metin
+//         + ilçe sayfasına tek link
+//  4. Footer: SwapHubs yerine Terzi Can; "Hızlı İletİŞİM" yazım hatası düzeltildi
+//  5. İç linkler next/link ile (client-side navigasyon + prefetch)
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
+import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import TerziMarketingBottomNav from '@/components/terzi/MarketingBottomNav';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
@@ -216,19 +221,22 @@ const PRICES: Record<Lang, string[][]> = {
 };
 
 const ILCELER = [
-  {ilce:'Muratpaşa', m:['Fener','Kışla','Balbey','Kaleiçi','Meltem','Lara','Şirinyalı']},
-  {ilce:'Konyaaltı', m:['Hurma','Sarısu','Liman','Uncalı','Arapsuyu','Gürsu','Çakırlar','Meltem','Göbi','Öğretmenevleri']},
-  {ilce:'Kepez',     m:['Varsak','Santral','Pınarbaşı','Altındağ','Göksu','Atatürk']},
-  {ilce:'Döşemealtı',m:['Döşemealtı Merkez','Habibler','Çığlık','Erenköy']},
-  {ilce:'Aksu',      m:['Kundu','Güzeloba','Altıntaş','Boğazkent','Kadriye']},
-  {ilce:'Lara / Belek',m:['Belek','Kadriye','Boğazkent','Kundu','Ilıca']},
-  {ilce:'Kemer',     m:['Kemer Merkez','Beldibi','Göynük','Çamyuva','Tekirova','Kiriş']},
-  {ilce:'Alanya',    m:['Alanya Merkez','Mahmutlar','Oba','Tosmur','Avsallar','Kestel','Konaklı']},
-  {ilce:'Manavgat/Side',m:['Manavgat Merkez','Side','Sorgun','Kumköy','Evrenseki']},
-  {ilce:'Serik',     m:['Serik Merkez','Boğazkent','Belek yakını']},
-  {ilce:'Kaş & Diğer',m:['Kaş Merkez','Kalkan','Finike','Kumluca','Gazipaşa']},
+  {ilce:'Muratpaşa', slug:'muratpasa', m:['Fener','Kışla','Balbey','Kaleiçi','Meltem','Lara','Şirinyalı']},
+  {ilce:'Konyaaltı', slug:'konyaalti', m:['Hurma','Sarısu','Liman','Uncalı','Arapsuyu','Gürsu','Çakırlar','Meltem','Göbi','Öğretmenevleri']},
+  {ilce:'Kepez', slug:'kepez',     m:['Varsak','Santral','Pınarbaşı','Altındağ','Göksu','Atatürk']},
+  {ilce:'Döşemealtı', slug:'dosemealti',m:['Döşemealtı Merkez','Habibler','Çığlık','Erenköy']},
+  {ilce:'Aksu', slug:'aksu',      m:['Kundu','Güzeloba','Altıntaş','Boğazkent','Kadriye']},
+  {ilce:'Lara / Belek', slug:'belek',m:['Belek','Kadriye','Boğazkent','Kundu','Ilıca']},
+  {ilce:'Kemer', slug:'kemer',     m:['Kemer Merkez','Beldibi','Göynük','Çamyuva','Tekirova','Kiriş']},
+  {ilce:'Alanya', slug:'alanya',    m:['Alanya Merkez','Mahmutlar','Oba','Tosmur','Avsallar','Kestel','Konaklı']},
+  {ilce:'Manavgat/Side', slug:'manavgat',m:['Manavgat Merkez','Side','Sorgun','Kumköy','Evrenseki']},
+  {ilce:'Serik', slug:'serik',     m:['Serik Merkez','Boğazkent','Belek yakını']},
+  {ilce:'Kaş & Diğer', slug:'kas',m:['Kaş Merkez','Kalkan','Finike','Kumluca','Gazipaşa']},
 ];
 
+// Sadece GERÇEKTEN var olan sayfalar (GitHub ağacına göre).
+// fermuar-degisimi-antalya ve gelinlik-tadilati-antalya sayfaları yok → çıkarıldı.
+// Sayfalar oluşturulunca buraya geri eklenmeli.
 const ALT_SAYFALAR = [
   ['✂️','Paça Kısaltma Antalya','/terzi/paca-kisaltma-antalya'],
   ['👔','Bay Terzi Antalya','/terzi/bay-terzi-antalya'],
@@ -237,12 +245,20 @@ const ALT_SAYFALAR = [
   ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
   ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
   ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
-  ['🔗','Fermuar Değişimi Antalya','/terzi/fermuar-degisimi-antalya'],
-  ['💍','Gelinlik Tadilatı Antalya','/terzi/gelinlik-tadilati-antalya'],
   ['🏨','Hotel Tailor Antalya (EN)','/en/hotel-tailor-antalya'],
   ['🏨','Schneider im Hotel (DE)','/de/schneider-service-hotel-antalya'],
   ['🏨','Портной в отеле (RU)','/ru/vyezdnoy-portnoy-antalya'],
 ] as const;
+
+// Footer: Konyaaltı mahalle sayfaları → /terzi/konyaalti/[mahalle]
+const FOOTER_MAHALLELER = [
+  { n: 'Hurma', slug: 'hurma' },
+  { n: 'Liman', slug: 'liman' },
+  { n: 'Uncalı', slug: 'uncali' },
+  { n: 'Sarısu', slug: 'sarisu' },
+  { n: 'Çakırlar', slug: 'cakirlar' },
+  { n: 'Meltem', slug: 'meltem' },
+];
 
 const WHY = [
   { icon:'⚡', tr:['Max 24 Saat','Ekspres teslimat garantisi'], en:['Max 24h Express','Guaranteed delivery'], ru:['Макс 24 часа','Гарантия экспресс-доставки'], de:['Max 24h Express','Garantierte Lieferung'] },
@@ -262,10 +278,10 @@ const SEO_INTRO: Record<Lang, string> = {
 };
 
 const LABELS = {
-  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Otel Servisi · Tekstil İmalatı · Kuru Temizleme', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi ve otel servisiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, otelime/adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'09:00–19:00 · Pzt–Cmt', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletİŞİm', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profillerimiz', gbpNote:'Her iki profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular & Otel Servisi', konum:'Konumumuz', konumNote:'Konyaaltı Liman Mah. ve Hurma Mah. olmak üzere iki atölyemiz var.', reviewTitle:'Yorum Yaz' },
-  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Hotel Delivery · Alterations · Textile Manufacturing · Dry Cleaning", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring & hotel delivery service.', mobileMsg:'Hello, I need mobile tailor service at my hotel/address. Can you come for measurement?', hours:'09:00–19:00 · Mon–Sat', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Hotel Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profiles', gbpNote:'You can leave a review on either profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ & Hotel Service', konum:'Our Location', konumNote:'Two ateliers: Liman Mah. and Hurma Mah., Konyaaltı.', reviewTitle:'Write a Review' },
-  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Сервис в отелях · Переделка · Текстиль · Химчистка', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать об услугах портного и доставке в отель.', mobileMsg:'Здравствуйте, хочу выездной сервис в отель. Приедете для снятия мерок?', hours:'09:00–19:00 · Пн–Сб', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного в отель', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наши профили Google Business', gbpNote:'Вы можете оставить отзыв в любом профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы и Сервис в Отелях', konum:'Наше местоположение', konumNote:'Два ателье: Liman Mah. и Hurma Mah., Коньяалты.', reviewTitle:'Написать отзыв' },
-  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion · Reinigung', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'09:00–19:00 · Mo–Sa', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unsere Google Business Profile', gbpNote:'Sie können in beiden Profilen eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Zwei Ateliers: Liman Mah. und Hurma Mah., Konyaaltı.', reviewTitle:'Bewertung schreiben' },
+  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Otel Servisi · Tekstil İmalatı · Kuru Temizleme', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi ve otel servisiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, otelime/adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'09:00–19:00 · Pzt–Cmt', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletişim', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profilimiz', gbpNote:'Profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular & Otel Servisi', konum:'Konumumuz', konumNote:'Atölyemiz Konyaaltı, Antalya\'dadır.', reviewTitle:'Yorum Yaz', districtPage:'sayfasına git' },
+  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Hotel Delivery · Alterations · Textile Manufacturing · Dry Cleaning", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring & hotel delivery service.', mobileMsg:'Hello, I need mobile tailor service at my hotel/address. Can you come for measurement?', hours:'09:00–19:00 · Mon–Sat', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Hotel Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profile', gbpNote:'You can leave a review on our profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ & Hotel Service', konum:'Our Location', konumNote:'Our atelier is in Konyaaltı, Antalya.', reviewTitle:'Write a Review', districtPage:'page' },
+  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Сервис в отелях · Переделка · Текстиль · Химчистка', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать об услугах портного и доставке в отель.', mobileMsg:'Здравствуйте, хочу выездной сервис в отель. Приедете для снятия мерок?', hours:'09:00–19:00 · Пн–Сб', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного в отель', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наш профиль Google Business', gbpNote:'Вы можете оставить отзыв в нашем профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы и Сервис в Отелях', konum:'Наше местоположение', konumNote:'Наше ателье находится в Коньяалты, Анталья.', reviewTitle:'Написать отзыв', districtPage:'страница' },
+  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion · Reinigung', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'09:00–19:00 · Mo–Sa', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unser Google Business Profil', gbpNote:'Sie können in unserem Profil eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Unser Atelier befindet sich in Konyaaltı, Antalya.', reviewTitle:'Bewertung schreiben', districtPage:'Seite' },
 };
 
 const FAQ: Record<Lang, [string, string][]> = {
@@ -283,7 +299,7 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.'],
     ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. 24 saat ekspres.'],
     ['Elbisem yırtıldı, aynı gün tamir edebilir misiniz?', `Evet, çoğu yırtık/söküm tamiri aynı gün tamamlanır. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Akşam veya hafta sonu açık mısınız?', `Haftanın 6 günü, akşam saatlerine kadar hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Hafta sonu açık mısınız?', `Pazartesi–Cumartesi 09:00–19:00 arası hizmet veriyoruz, Pazar günleri kapalıyız. WhatsApp: ${PHONE_DISPLAY}`],
     ['Kendime özel bir elbise diktirmek istiyorum, mümkün mü?', `Evet, ölçünüze ve modelinize göre özel dikim yapıyoruz. Model fotoğrafı gönderin. WhatsApp: ${PHONE_DISPLAY}`],
     ['Pamuklu veya keten gibi doğal kumaştan dikim yapıyor musunuz?', `Evet, %100 pamuk ve keten kumaştan kişiye özel dikim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
   ],
@@ -365,96 +381,18 @@ export default function TerziClient({ gbp1 }: Props) {
     return () => clearInterval(id);
   }, []);
 
-  // Yapay zeka (GEO) ve Google SEO için Gelişmiş Schema.org JSON-LD Entegrasyonu
-  const schemaOrgJSONLD = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "TailorShop",
-        "name": "Terzi Can - Antalya",
-        "image": HERO_IMAGES.map(img => img.src),
-        "telephone": PHONE_DISPLAY,
-        "url": "https://terzihizmeti.com.tr",
-        "priceRange": "₺₺ / €€",
-        "currenciesAccepted": "TRY, EUR, USD, RUB",
-        "paymentAccepted": "Cash, Credit Card, Contactless",
-        "knowsLanguage": ["Turkish", "English", "Russian", "German"],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Antalya",
-          "addressRegion": "Antalya",
-          "addressCountry": "TR"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 36.8407,
-          "longitude": 30.6133
-        },
-        "areaServed": [
-          { "@type": "AdministrativeArea", "name": "Konyaaltı" },
-          { "@type": "AdministrativeArea", "name": "Lara" },
-          { "@type": "AdministrativeArea", "name": "Kundu Oteller Bölgesi" },
-          { "@type": "AdministrativeArea", "name": "Belek" },
-          { "@type": "AdministrativeArea", "name": "Kemer" },
-          { "@type": "AdministrativeArea", "name": "Muratpaşa" },
-          { "@type": "AdministrativeArea", "name": "Kepez" }
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Tourist & Express Hotel Tailoring Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Mobile Tailor & Express Hotel Delivery Service"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Same-Day Trouser Hemming & Dress Alteration"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Dry Cleaning & Hotel Express Laundry"
-              }
-            }
-          ]
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "09:00",
-          "closes": "19:00"
-        },
-        "description": SEO_INTRO[lang]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": FAQ[lang].map(([q, a]) => ({
-          "@type": "Question",
-          "name": q,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": a
-          }
-        }))
-      }
-    ]
-  };
+  // Seçili ilçe için: sayfası olan mahalle / ilçe sayfası çözümlemesi
+  const aktif = activeIlce ? ILCELER.find(i => i.ilce === activeIlce) : null;
+  const isKonyaalti = aktif?.slug === 'konyaalti';
+  const ilceSayfasi = aktif
+    ? ANTALYA_ILCELERI.find(x => x.slug === aktif.slug)
+    : undefined;
+  const mahalleSayfasiVar = (m: string) =>
+    isKonyaalti && KONYAALTI_MAHALLELERI.some(k => k.slug === slugify(m));
 
   return (
     <>
-      {/* JSON-LD Yapısal Veri Gösterimi */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgJSONLD) }}
-      />
+      {/* NOT: JSON-LD artık yalnızca app/terzi/page.tsx içinde (tek kaynak). */}
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         :root{--gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;--cream:#FAF7F2;--cream2:#F2EDE4;--ink:#1C1814;--ink2:#2E2820;--text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;--serif:'Georgia',serif;--sans:var(--font-jakarta,system-ui,sans-serif);--unbounded:var(--font-unbounded,'Georgia',serif);--shadow:0 4px 32px rgba(60,40,20,.1);--shadow-lg:0 16px 64px rgba(60,40,20,.16)}
@@ -513,7 +451,9 @@ export default function TerziClient({ gbp1 }: Props) {
         .tilbtn{background:none;border:1px solid rgba(184,151,90,.2);color:var(--text);font-size:.76rem;padding:.4rem 1rem;cursor:pointer;font-family:var(--sans);border-radius:2px;transition:all .25s}.tilbtn.on,.tilbtn:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
         .tmahwrap{background:#fff;border:1px solid rgba(184,151,90,.15);border-radius:2px;padding:1.2rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;box-shadow:var(--shadow)}
         .tmchip{font-size:.72rem;color:var(--muted);border:1px solid rgba(184,151,90,.15);padding:.22rem .65rem;border-radius:2px;text-decoration:none;transition:all .2s}
-        .tmchip:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
+        a.tmchip:hover{border-color:var(--gold);color:var(--gold3);background:rgba(184,151,90,.08)}
+        .tmchip-static{cursor:default}
+        .tmchip-all{font-weight:600;color:var(--gold3);border-color:var(--gold)}
         /* ── ALL SVC ── */
         .tallsvc{background:var(--ink);padding:5rem 2rem}.tallsvc-inner{max-width:1100px;margin:0 auto}
         .tallsvc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-top:2.5rem}
@@ -532,6 +472,7 @@ export default function TerziClient({ gbp1 }: Props) {
         .tcrow{display:flex;gap:.8rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.06)}.tclbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:.2rem;font-weight:500}.tcval{font-size:.9rem;color:rgba(255,255,255,.85)}.tcval a{color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}.tcval a:hover{color:var(--gold2)}
         .tfooter{background:var(--ink2);border-top:1px solid rgba(184,151,90,.1);padding:2.5rem 2rem;text-align:center}
         .tfootnav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.2rem}.tfootnav a{font-size:.72rem;color:rgba(212,176,122,.75);text-decoration:none;border:1px solid rgba(184,151,90,.18);padding:.25rem .65rem;border-radius:2px;transition:all .25s}.tfootnav a:hover{color:var(--gold2);border-color:rgba(184,151,90,.4)}
+        .tfootmah a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}.tfootmah a:hover{color:var(--gold2)}
         .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .3s}.btn-gold:hover{background:var(--gold3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,90,.35)}
         .btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.9);padding:.9rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:all .3s}.btn-outline:hover{border-color:var(--gold2);color:var(--gold2)}
         .btn-outline-dark{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold3);padding:.85rem 1.8rem;font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(184,151,90,.35);cursor:pointer;transition:all .3s}.btn-outline-dark:hover{border-color:var(--gold);color:var(--gold)}
@@ -556,7 +497,7 @@ export default function TerziClient({ gbp1 }: Props) {
 
       {/* NAV */}
       <nav className={`tnav${scrolled ? ' up' : ''}`} aria-label="Ana Menü">
-        <a href="#" className="tnav-logo" aria-label="Anasayfa">Terzi <span>Can</span></a>
+        <Link href="/terzi" className="tnav-logo" aria-label="Terzi Can Anasayfa">Terzi <span>Can</span></Link>
         <ul className="tnav-links">
           <li><a href="#services">Hizmetler</a></li>
           <li><a href="#prices">Fiyatlar</a></li>
@@ -566,10 +507,10 @@ export default function TerziClient({ gbp1 }: Props) {
         </ul>
         <div className="lsw" role="group" aria-label="Dil Seçimi">
           {(['tr','en','ru','de'] as Lang[]).map(l => (
-            <button 
-              key={l} 
+            <button
+              key={l}
               type="button"
-              className={`lb${lang === l ? ' on' : ''}`} 
+              className={`lb${lang === l ? ' on' : ''}`}
               aria-pressed={lang === l}
               onClick={() => setLang(l)}
             >
@@ -579,9 +520,9 @@ export default function TerziClient({ gbp1 }: Props) {
         </div>
       </nav>
 
-      {/* ANA İÇERİK - SEO Hiyerarşisi İçin */}
-      <main id="main-content">
-        
+      {/* ANA İÇERİK — root layout zaten <main> sardığı için burada <div> kullanılır */}
+      <div id="main-content">
+
         {/* HERO */}
         <header className="thero" aria-label="Karşılama Alanı">
           {HERO_IMAGES.map((img, i) => (
@@ -592,14 +533,14 @@ export default function TerziClient({ gbp1 }: Props) {
           <div className="thov" />
           <div className="thdots" role="tablist">
             {HERO_IMAGES.map((_, i) => (
-              <button 
-                key={i} 
+              <button
+                key={i}
                 type="button"
                 role="tab"
                 aria-selected={i === heroIdx}
-                className={`thdot${i === heroIdx ? ' on' : ''}`} 
-                onClick={() => setHeroIdx(i)} 
-                aria-label={`Slayt ${i + 1} göster`} 
+                className={`thdot${i === heroIdx ? ' on' : ''}`}
+                onClick={() => setHeroIdx(i)}
+                aria-label={`Slayt ${i + 1} göster`}
               />
             ))}
           </div>
@@ -608,15 +549,15 @@ export default function TerziClient({ gbp1 }: Props) {
             <h1>{L.h1}<br /><em>{L.h1em}</em></h1>
             <p className="thsub">{L.sub}</p>
             <div className="thacts">
-              <a href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
-              <a href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</a>
+              <Link href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</Link>
+              <Link href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</Link>
             </div>
             <div className="thacts" style={{ marginTop: '.6rem' }}>
               <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
             </div>
-            <a href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+            <Link href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
               🔧 Terzi veya kuru temizlemecisin? İş bulmak için buraya
-            </a>
+            </Link>
           </div>
         </header>
 
@@ -640,7 +581,7 @@ export default function TerziClient({ gbp1 }: Props) {
               ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-              <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</a>
+              <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</Link>
             </div>
           </div>
         </section>
@@ -649,13 +590,13 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="tstrip-wrap" aria-label="Terzi Can Fotoğraf Kesitleri">
           <div className="tstrip" ref={stripRef}>
             {[...FILM_STRIP, ...FILM_STRIP].map((src, i) => (
-              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${i + 1}`} className="tstrip-img" loading="lazy" />
+              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${(i % FILM_STRIP.length) + 1}`} className="tstrip-img" loading="lazy" />
             ))}
           </div>
         </section>
 
-        {/* SEO INTRO — Server-rendered, Google bunu okur */}
-        <section className="tseoblk" id="terzi-can-ozet" aria-label="Firma SEO Özeti">
+        {/* SEO INTRO — Server-rendered (tr), Google bunu okur */}
+        <section className="tseoblk" id="terzi-can-ozet" aria-label="Firma Özeti">
           <p>{SEO_INTRO[lang]}</p>
         </section>
 
@@ -683,12 +624,12 @@ export default function TerziClient({ gbp1 }: Props) {
             ))}
           </div>
           <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
-            <a href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</a>
+            <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</Link>
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
             <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
           </div>
 
-          {/* SEO: hizmet alt sayfalarına dahili link — hub sayfası bunlara linklemiyordu, Google bu sayfaları sitemap dışında keşfedemiyordu */}
+          {/* SEO: hizmet alt sayfalarına dahili link */}
           {lang === 'tr' && (
             <nav aria-label="Terzi hizmet sayfaları" style={{ textAlign: 'center', padding: '0 2rem 3rem', display: 'flex', gap: '.6rem 1.2rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)', fontSize: '.85rem' }}>
               <Link href="/terzi/bay-terzi-antalya">Bay Terzi Antalya</Link>
@@ -721,7 +662,7 @@ export default function TerziClient({ gbp1 }: Props) {
           </div>
         </section>
 
-        {/* GOOGLE YORUMLARI — gerçek profillere yönlendirme */}
+        {/* GOOGLE YORUMLARI — gerçek profile yönlendirme */}
         <section className="trev" aria-labelledby="reviews-title">
           <div className="trev-inner">
             <div style={{ textAlign: 'center' }}>
@@ -732,7 +673,6 @@ export default function TerziClient({ gbp1 }: Props) {
                 Güncel puan ve yorumlarımızı doğrudan Google Haritalar'daki profillerimizden görebilirsiniz.
               </p>
             </div>
-            {/* Yorum görüntüleme/yazma butonu */}
             <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href={gbp1.review} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '.75rem', padding: '.7rem 1.4rem' }}>
                 ⭐ Google'da Görüntüle — {gbp1.name.split(' — ')[0]}
@@ -830,8 +770,7 @@ export default function TerziClient({ gbp1 }: Props) {
             </div>
 
             <div className="tgbp-note">
-              <strong>💡 {L.gbpLabel}:</strong> {L.gbpNote}<br />
-              <span style={{ fontSize: '.72rem', opacity: .7 }}>CID: {gbp1.cid}</span>
+              <strong>💡 {L.gbpLabel}:</strong> {L.gbpNote}
             </div>
           </div>
         </section>
@@ -847,28 +786,33 @@ export default function TerziClient({ gbp1 }: Props) {
             </div>
             <div className="tilwrap" role="group" aria-label="İlçe Seçimi">
               {ILCELER.map(({ ilce }) => (
-                <button 
-                  key={ilce} 
+                <button
+                  key={ilce}
                   type="button"
                   aria-pressed={activeIlce === ilce}
-                  className={`tilbtn${activeIlce === ilce ? ' on' : ''}`} 
+                  className={`tilbtn${activeIlce === ilce ? ' on' : ''}`}
                   onClick={() => setActiveIlce(activeIlce === ilce ? null : ilce)}
                 >
                   {ilce}
                 </button>
               ))}
             </div>
-            {activeIlce && (
+            {aktif && (
               <div className="tmahwrap" aria-live="polite">
-                {ILCELER.find(i => i.ilce === activeIlce)?.m.map(m => (
-                  <Link 
-                    key={m} 
-                    href={`/terzi/${slugify(activeIlce)}/${slugify(m)}`} 
-                    className="tmchip"
-                  >
-                    {m}
+                {/* Sayfası olan mahalle → link; olmayan → düz metin (404 üretmez) */}
+                {aktif.m.map(m =>
+                  mahalleSayfasiVar(m) ? (
+                    <Link key={m} href={`/terzi/konyaalti/${slugify(m)}`} className="tmchip">{m}</Link>
+                  ) : (
+                    <span key={m} className="tmchip tmchip-static">{m}</span>
+                  )
+                )}
+                {/* İlçe sayfası varsa tek link */}
+                {ilceSayfasi && !isKonyaalti && (
+                  <Link href={`/terzi/antalya/${ilceSayfasi.slug}`} className="tmchip tmchip-all">
+                    {activeIlce} {L.districtPage} →
                   </Link>
-                ))}
+                )}
               </div>
             )}
           </div>
@@ -893,7 +837,7 @@ export default function TerziClient({ gbp1 }: Props) {
           </div>
         </section>
 
-        {/* FAQ — <details>/<summary> — Google SSS snippet için SSR-friendly */}
+        {/* FAQ — <details>/<summary> — SSR-friendly */}
         <section className="tfaq" id="faq" aria-labelledby="sik-sorulan-sorular">
           <div className="tfaq-inner">
             <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
@@ -954,14 +898,14 @@ export default function TerziClient({ gbp1 }: Props) {
             <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine ve Otellerine Hizmet Veriyoruz</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
               {ANTALYA_ILCELERI.map(i => (
-                <a key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
+                <Link key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>
                   {i.ad} Terzi
-                </a>
+                </Link>
               ))}
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* FOOTER */}
       <footer className="tfooter" role="contentinfo">
@@ -969,25 +913,12 @@ export default function TerziClient({ gbp1 }: Props) {
           Terzi Can · Tailor Can · Портной Кан · Schneider Can
         </div>
         <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.3)', marginBottom: '.5rem' }}>
-          © 2026 SwapHubs — Antalya Terzi · Bay & Bayan · Özel Dikim · Otel Servisi · Tekstil İmalatı · {PHONE_DISPLAY}
+          © 2026 Terzi Can — Antalya Terzi · Bay & Bayan · Özel Dikim · Otel Servisi · Tekstil İmalatı · {PHONE_DISPLAY}
         </p>
-        <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
+        <div className="tfootmah" style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
           <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
-          {[
-            { n: 'Hurma', p: '/terzi/hurma-terzi' },
-            { n: 'Liman', p: '/terzi/liman-terzi' },
-            { n: 'Uncalı', p: '/terzi/uncali-terzi' },
-            { n: 'Sarısu', p: '/terzi/sarisu-terzi' },
-            { n: 'Çakırlar', p: '/terzi/cakirlar-terzi' },
-            { n: 'Meltem', p: '/terzi/meltem-terzi' }
-          ].map((mah) => (
-            <Link 
-              key={mah.p} 
-              href={mah.p} 
-              style={{ color: 'rgba(255,255,255,.3)', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--gold2)'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
-            >
+          {FOOTER_MAHALLELER.map(mah => (
+            <Link key={mah.slug} href={`/terzi/konyaalti/${mah.slug}`}>
               {mah.n} Terzi
             </Link>
           ))}
@@ -1006,4 +937,4 @@ export default function TerziClient({ gbp1 }: Props) {
       <TerziMarketingBottomNav />
     </>
   );
-} 
+}
