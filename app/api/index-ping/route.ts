@@ -6,6 +6,7 @@
 import { NextResponse } from "next/server";
 
 const SAYFALAR = [
+  // 🇹🇷 Türkçe Ana Hizmetler
   "https://swaphubs.com/terzi",
   "https://swaphubs.com/terzi/paca-kisaltma-antalya",
   "https://swaphubs.com/terzi/bay-terzi-antalya",
@@ -15,6 +16,36 @@ const SAYFALAR = [
   "https://swaphubs.com/terzi/kuru-temizleme-antalya",
   "https://swaphubs.com/terzi/eve-gelen-terzi-antalya",
   "https://swaphubs.com/online-terzi-hizmeti",
+
+  // 🇬🇧 İngilizce (English)
+  "https://swaphubs.com/online-tailor-service",
+  "https://swaphubs.com/en/hotel-tailor-antalya",
+  "https://swaphubs.com/en/hotel-tailor-antalya/belek",
+  "https://swaphubs.com/en/hotel-tailor-antalya/lara",
+  "https://swaphubs.com/en/hotel-tailor-antalya/kemer",
+  "https://swaphubs.com/en/hotel-tailor-antalya/side",
+  "https://swaphubs.com/en/hotel-tailor-antalya/kundu",
+  "https://swaphubs.com/en/hotel-tailor-antalya/guzeloba",
+
+  // 🇩🇪 Almanca (Deutsch)
+  "https://swaphubs.com/de/online-schneiderservice-antalya",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/belek",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/lara",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/kemer",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/side",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/kundu",
+  "https://swaphubs.com/de/schneider-service-hotel-antalya/guzeloba",
+
+  // 🇷🇺 Rusça (Русский)
+  "https://swaphubs.com/ru/atelie-antalya",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/belek",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/lara",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/kemer",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/side",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/kundu",
+  "https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/guzeloba",
 ];
 
 export const dynamic = "force-dynamic";
@@ -22,11 +53,8 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const results: { url: string; status: string }[] = [];
 
-  // Google Indexing API ping (sitemap üzerinden)
-  // Sitemap ping — Google botunu uyarır
-  const sitemapPingUrl =
-    `https://www.google.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
-
+  // Google Sitemap Ping
+  const sitemapPingUrl = `https://www.google.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
   try {
     const pingRes = await fetch(sitemapPingUrl, { method: "GET" });
     results.push({
@@ -37,9 +65,8 @@ export async function GET() {
     results.push({ url: "sitemap-ping", status: "❌ hata" });
   }
 
-  // Bing ping (bonus — Bing de önemli turist aramaları için)
-  const bingPing =
-    `https://www.bing.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
+  // Bing Sitemap Ping
+  const bingPing = `https://www.bing.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
   try {
     const bingRes = await fetch(bingPing, { method: "GET" });
     results.push({
@@ -70,7 +97,7 @@ export async function GET() {
 </head>
 <body>
   <h1>🔍 Google & Bing Index Ping</h1>
-  <p>swaphubs.com/terzi sayfaları Google ve Bing'e bildirildi.</p>
+  <p>swaphubs.com/terzi Türkçe ve Yabancı Dil sayfaları Google ve Bing'e bildirildi.</p>
   <table>
     <thead><tr><th>Hedef</th><th>Durum</th></tr></thead>
     <tbody>
@@ -106,4 +133,3 @@ export async function GET() {
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });
 }
- 
