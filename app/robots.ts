@@ -46,8 +46,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    // Sitemap doğru domaine ayarlandı
     sitemap: 'https://swaphubs.com/sitemap.xml',
-    // DÜZELTME: host parametresi Googlebot uyarısına neden olduğu için KALDIRILDI.
+    host: 'https://swaphubs.com', 
+
   }
 }
