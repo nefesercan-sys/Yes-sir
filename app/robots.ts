@@ -1,12 +1,13 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  // Pazaryeri (swaphubs.com) sistemine ait kapalı kalması gereken rotalar
   const commonDisallows = [
     '/admin/',
     '/admin-ai/',
     '/api/',
     '/panel/',
+    '/terzi-panel/',
+    '/terzi-admin/',
     '/profil/',
     '/mesajlar/',
     '/bildirimler/',
@@ -15,8 +16,6 @@ export default function robots(): MetadataRoute.Robots {
     '/ilan-ver',
     '/ilan-duzenle',
     '/online-terzi-hizmeti/client',
-    // DÜZELTME (2026-09-24): '/bal/' tamamı değil, sadece görsel yükleme aracı
-    // engellenmeli — aksi halde tüm bal ürün kataloğu aramadan gizleniyor.
     '/bal/gorsel-yukle',
     '/*?*sort=',
     '/*?*order=',
@@ -33,21 +32,22 @@ export default function robots(): MetadataRoute.Robots {
         disallow: commonDisallows,
       },
       {
-        userAgent: 'Googlebot',
+        // AI arama/asistan botları: aynı kısıtlarla tüm herkese açık sayfalar açık
+        userAgent: [
+          'Google-Extended',
+          'GPTBot',
+          'ChatGPT-User',
+          'OAI-SearchBot',
+          'PerplexityBot',
+          'ClaudeBot',
+          'Claude-SearchBot',
+          'Applebot-Extended',
+        ],
         allow: '/',
         disallow: commonDisallows,
       },
-      {
-        userAgent: 'Google-Extended',
-        allow: '/',
-      },
-      {
-        userAgent: ['GPTBot', 'ChatGPT-User', 'PerplexityBot', 'ClaudeBot'],
-        allow: '/',
-      },
     ],
     sitemap: 'https://swaphubs.com/sitemap.xml',
-    host: 'https://swaphubs.com', 
-
+    host: 'https://swaphubs.com',
   }
 }
