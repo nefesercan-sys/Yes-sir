@@ -3,12 +3,21 @@ import { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
   // Pazaryeri (swaphubs.com) sistemine ait kapalı kalması gereken rotalar
   const commonDisallows = [
-    '/api/',
+    '/admin/',
     '/admin-ai/',
-    '/bal/',
-    '/ilan-ver/',
+    '/api/',
     '/panel/',
     '/profil/',
+    '/mesajlar/',
+    '/bildirimler/',
+    '/giris',
+    '/uye-ol',
+    '/ilan-ver',
+    '/ilan-duzenle',
+    '/online-terzi-hizmeti/client',
+    // DÜZELTME (2026-09-24): '/bal/' tamamı değil, sadece görsel yükleme aracı
+    // engellenmeli — aksi halde tüm bal ürün kataloğu aramadan gizleniyor.
+    '/bal/gorsel-yukle',
     '/*?*sort=',
     '/*?*order=',
     '/*?*ref=',
