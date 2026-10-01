@@ -2,7 +2,6 @@ import type { MetadataRoute } from 'next'
 import { getDb } from '@/lib/mongodb'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 
-// Performans için 24 saatlik önbellek (ISR) - Botlar veritabanını yormaz
 export const revalidate = 86400 
 
 const BASE_URL = 'https://swaphubs.com'
@@ -37,38 +36,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: BASE_URL,                                                      lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
     { url: `${BASE_URL}/terzi`,                                           lastModified: new Date('2026-09-20'), changeFrequency: 'daily',  priority: 1.0 },
 
-    // ✂️ 2. ANA HİZMETLER VE ÇOK DİLLİ ROTLAR (YÜKSEK ÖNCELİK: 0.90)
-    { url: `${BASE_URL}/online-tailor-service`,                           lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
-    { url: `${BASE_URL}/de/online-schneiderservice-antalya`,              lastModified: new Date('2026-09-27'), changeFrequency: 'weekly', priority: 0.90 },
+    // ✂️️ 2. ANA HİZMETLER VE ÇOK DİLLİ MERKEZİ ROTLAR (YÜKSEK ÖNCELİK: 0.90)
     { url: `${BASE_URL}/online-terzi-hizmeti`,                            lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`,                     lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,                       lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`,                   lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
-    // NOT: /ru/atelie-antalya-online artık /ru/atelie-antalya'ya 301 yönlendiriliyor
-    // (next.config.mjs) — sadece canonical (yönlendirilen hedef) sayfa listeleniyor.
-    { url: `${BASE_URL}/ru/atelie-antalya`,                               lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
+    
+    // 🇬🇧 İngilizce Ana Sayfalar
+    { url: `${BASE_URL}/online-tailor-service`,                           lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/en/hotel-tailor-antalya`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
-    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,                     lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
+    
+    // 🇩🇪 Almanca Ana Sayfalar
+    { url: `${BASE_URL}/de/online-schneiderservice-antalya`,              lastModified: new Date('2026-09-27'), changeFrequency: 'weekly', priority: 0.90 },
     { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,              lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
+    
+    // 🇷🇺 Rusça Ana Sayfalar
+    { url: `${BASE_URL}/ru/atelie-antalya`,                               lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
+    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,                     lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.90 },
 
-    // 📍 3. YEREL SEO LOKASYONLARI (KONYAALTI, İLÇELER VE OTELLER: 0.80 - 0.85)
+    // 📍 3. YEREL SEO LOKASYONLARI (KONYAALTI, İLÇELER VE TURİSTİK BÖLGELER: 0.80 - 0.85)
     ...KONYAALTI_MAHALLELERI.map(m => ({
       url: `${BASE_URL}/terzi/konyaalti/${m.slug}`,
       lastModified: new Date('2026-09-20'),
       changeFrequency: 'weekly' as const,
       priority: 0.85,
     })),
-    // NOT: 'konyaalti' ilçesi next.config.mjs'de /terzi'ye 301 yönlendiriliyor
-    // (mahalle bazlı /terzi/konyaalti/{mahalle} sayfalarıyla çakışmayı önlemek için).
-    // Yönlenen bir URL'i sitemap'te listelemek crawl bütçesini boşa harcar, bu yüzden hariç tutuluyor.
+
     ...ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti').map(i => ({
       url: `${BASE_URL}/terzi/antalya/${i.slug}`,
       lastModified: new Date('2026-09-20'),
       changeFrequency: 'weekly' as const,
       priority: 0.80,
     })),
-    // 💡 Kemer ve Kundu eklendi
+
+    // 🌍 Otel / Turizm Bölgeleri İçin Yabancı Dil Sayfaları (Belek, Lara, Güzeloba, Side, Kemer, Kundu)
     ...['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu'].flatMap((slug) => [
       { url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`,             lastModified: new Date('2026-09-20'), changeFrequency: 'weekly' as const, priority: 0.80 },
       { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`,         lastModified: new Date('2026-09-20'), changeFrequency: 'weekly' as const, priority: 0.80 },
@@ -76,21 +78,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ]),
     
     // 👕 4. DİĞER KUMAŞ VE ATÖLYE SAYFALARI (0.75)
-    // Düzeltme: kök /dikis-atolyesi-antalya artık /terzi/dikis-atolyesi-antalya'ya
-    // 301 yönlendiriliyor (next.config.mjs) — sitemap'te CANONICAL (yönlenen değil,
-    // yönlendirilen hedef) sayfa listelenmeli.
     { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`,                    lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`,                  lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,                    lastModified: new Date('2026-09-20'), changeFrequency: 'weekly', priority: 0.75 },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,                         lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.75 },
 
     // 📋 5. DÖNÜŞÜM & MÜŞTERİ TALEBİ SAYFALARI (0.60)
-    // terzi-panel sitemap'ten çıkarıldı.
     { url: `${BASE_URL}/terzi-cagir`,                                     lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.60 },
     { url: `${BASE_URL}/terzi-talep`,                                     lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.60 },
 
-    // 🔽 6. SWAPHUBS GENEL İLAN / DİĞER (EN DÜŞÜK ÖNCELİK: 0.20 - 0.30)
-    { url: `${BASE_URL}/ilanlar`,                                        lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.30 },
+    // 🔽 6. GENEL İLAN / DİĞER (0.20 - 0.30)
+    { url: `${BASE_URL}/ilanlar`,                                         lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.30 },
     { url: `${BASE_URL}/kesfet`,                                          lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.30 },
     { url: `${BASE_URL}/ilan`,                                            lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.30 },
     { url: `${BASE_URL}/bal`,                                             lastModified: new Date('2026-09-20'), changeFrequency: 'monthly', priority: 0.20 },
