@@ -1,83 +1,57 @@
-import { NextResponse } from 'next'
-import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
+import type { MetadataRoute } from 'next'
+import { getDb } from '@/lib/mongodb'
 
 export const revalidate = 86400
 
 const BASE_URL = 'https://swaphubs.com'
+const SLUG_REGEX = /^[a-z0-9-]+$/i
 const D = new Date('2026-10-02')
 
-export async function GET() {
-  const terziSayfalar = [
-    // 🌟 1. ANA ODAK SAYFALAR (Priority: 1.0)
-    { url: `${BASE_URL}/terzi`, priority: '1.0', freq: 'daily' },
-    { url: `${BASE_URL}/online-tailor-service`, priority: '1.0', freq: 'daily' },
+async function getIlanlar() {
+  try {
+    const db = await getDb()
+    return await db
+      .collection('ilanlar')
+      .find(
+        { durum: 'aktif', slug: { $exists: true,$nin: [null, ''] } },
+        { projection: { slug: 1, updatedAt: 1, createdAt: 1, _id: 0 } }
+      )
+      .toArray()
+  } catch (e) {
+    console.error('[sitemap] ilan hatası:', e)
+    return []
+  }
+}
 
-    // 🔥 2. YÜKSEK TRAFİKLİ URL'LER (Priority: 0.95)
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,      priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,    priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                              priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,             priority: '0.95', freq: 'weekly' },
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toDate(val: any, fallback = '2026-09-20'): Date {
+  if (!val) return new Date(fallback)
+  const d = new Date(val)
+  return isNaN(d.getTime()) ? new Date(fallback) : d
+}
 
-    // ✂️ 3. MİKRO TERZİ SAYFALARI (Priority: 0.90)
-    { url: `${BASE_URL}/online-terzi-hizmeti`,        priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`, priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/bay-terzi-antalya`,     priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,   priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/gelinlik-tadilati`,     priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/fermuar-degisimi`,      priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/antalya/konyaalti`,     priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/dikis-atolyesi-antalya`,      priority: '0.90', freq: 'weekly' },
-
-    // 🌐 4. ÇOK DİLLİ (B2B & OTEL) SAYFALAR (Priority: 0.90)
-    { url: `${BASE_URL}/en/hotel-tailor-antalya`,             priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/de/online-schneiderservice-antalya`,  priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,  priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/ru/atelie-antalya`,                   priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/ru/atelie-antalya-online`,            priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,         priority: '0.90', freq: 'weekly' },
-
-    // 👕 6. ATÖLYE, FASON VE KUMAŞ (Priority: 0.75)
-    { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`, priority: '0.75', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,   priority: '0.75', freq: 'weekly' },
-    { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,        priority: '0.75', freq: 'monthly' },
-
-    // 📋 7. FORM VE DÖNÜŞÜM SAYFALARI (Priority: 0.60)
-    { url: `${BASE_URL}/terzi-cagir`, priority: '0.60', freq: 'monthly' },
-    { url: `${BASE_URL}/terzi-talep`, priority: '0.60', freq: 'monthly' },
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // 🔽 TERZİ DIŞI GENEL SAYFALAR (Arka Plan - Düşük Öncelik)
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE_URL,                 lastModified: D, changeFrequency: 'weekly',  priority: 0.40 },
+    { url: `${BASE_URL}/ilanlar`,    lastModified: D, changeFrequency: 'monthly', priority: 0.20 },
+    { url: `${BASE_URL}/kesfet`,     lastModified: D, changeFrequency: 'monthly', priority: 0.20 },
+    { url: `${BASE_URL}/ilan`,       lastModified: D, changeFrequency: 'monthly', priority: 0.20 },
+    { url: `${BASE_URL}/bal`,        lastModified: D, changeFrequency: 'monthly', priority: 0.10 },
   ]
 
-  // 📍 5. YEREL SEO (İlçe ve Mahalleler) (Priority: 0.80 - 0.85)
-  KONYAALTI_MAHALLELERI.forEach(m => {
-    terziSayfalar.push({ url: `${BASE_URL}/terzi/konyaalti/${m.slug}`, priority: '0.85', freq: 'weekly' })
-  })
+  const ilanlar = await getIlanlar()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ilanUrls: MetadataRoute.Sitemap = ilanlar
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .filter((i: any) => i.slug && SLUG_REGEX.test(i.slug))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .map((i: any) => ({
+      url: `${BASE_URL}/ilan/${i.slug}`,
+      lastModified: toDate(i.updatedAt ?? i.createdAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.10,
+    }))
 
-  ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti').forEach(i => {
-    terziSayfalar.push({ url: `${BASE_URL}/terzi/antalya/${i.slug}`, priority: '0.80', freq: 'weekly' })
-  })
-
-  const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu']
-  turistik.forEach(slug => {
-    terziSayfalar.push({ url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
-    terziSayfalar.push({ url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
-    terziSayfalar.push({ url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
-  })
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${terziSayfalar.map(s => `  <url>
-    <loc>${s.url}</loc>
-    <lastmod>${D.toISOString()}</lastmod>
-    <changefreq>${s.freq}</changefreq>
-    <priority>${s.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`
-
-  return new NextResponse(xml, {
-    headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=43200',
-    },
-  })
+  return [...staticPages, ...ilanUrls]
 }
