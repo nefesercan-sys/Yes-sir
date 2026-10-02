@@ -25,10 +25,7 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,     priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,   priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/gelinlik-tadilati`,     priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/fermuar-degisimi`,      priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/antalya/konyaalti`,     priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/dikis-atolyesi-antalya`,      priority: '0.90', freq: 'weekly' },
 
     // 🌐 4. ÇOK DİLLİ (B2B & OTEL) SAYFALAR (Priority: 0.90)
     { url: `${BASE_URL}/en/hotel-tailor-antalya`,             priority: '0.90', freq: 'weekly' },
