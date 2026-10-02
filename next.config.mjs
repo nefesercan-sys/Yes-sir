@@ -27,7 +27,7 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi (SEO Otoritesini Tek Çatıda Toplama)
+      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
@@ -35,30 +35,16 @@ const nextConfig = {
         permanent: true,
       },
 
-      // 2. Cannibalization (İçerik Çakışması) Engelleme
-      // HEDEF: Tüm eski ve çakışan URL'lerin otoritesi, sitenin EN GÜÇLÜ sayfası olan /terzi ana merkezine akıtılıyor.
-      { source: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', destination: '/terzi', permanent: true },
-      { source: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', destination: '/terzi', permanent: true },
-      { source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', destination: '/terzi', permanent: true },
-      { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/terzi', permanent: true },
-      { source: '/antalya-terzi-elbise-dikimi', destination: '/terzi', permanent: true },
-      
-      // 3. Bölgesel/Tipografi Hataları ve Yan Sayfa Konsolidasyonları
-      { source: '/terzi/antalya/konyaalti', destination: '/terzi', permanent: true },
-      { source: '/terzi/gelinlik-tadilati', destination: '/terzi', permanent: true },
+      // 2. Tipografi Hataları ve Yan Sayfa Yönlendirmeleri
+      // (Aktifleşen 5 ana terzi sayfası ve /terzi/fermuar-degisimi buradan kaldırılmıştır)
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
-      { source: '/terzi/fermuar-degisimi', destination: '/terzi', permanent: true },
-      { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi', permanent: true },
+      { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi/fermuar-degisimi', permanent: true },
 
-      // 4. Duplicate içerik birleştirme: kök seviyedeki eski kopya, /terzi/ altındaki
-      // gerçek/canlı sayfaya yönlendiriliyor (önceden tam tersi yapılıp canlı sayfa
-      // /terzi'ye, boş sayfa ise hiçbir yere yönlendirilmiyordu — canonical kırıktı).
+      // 3. Duplicate içerik birleştirme
       { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
 
-      // 5. Rusça ikili çakışma: /ru/atelie-antalya ve /ru/atelie-antalya-online aynı
-      // konuyu (Konyaaltı ателье — tamir/dikim) hedefliyordu. /ru/atelie-antalya, canlı
-      // /terzi hub sayfasından hreflang ile gerçek link alıyor, o yüzden canonical seçildi.
+      // 4. Rusça ikili çakışma
       { source: '/ru/atelie-antalya-online', destination: '/ru/atelie-antalya', permanent: true },
     ];
   },
