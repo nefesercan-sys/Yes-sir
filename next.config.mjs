@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   poweredByHeader: false,
 
   compiler: {
@@ -27,30 +26,30 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // 1. WWW -> non-WWW Alan Adı Yönlendirmesi
+      // www → www'siz yönlendirme
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.swaphubs.com' }],
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
-
-      // 2. Tipografi Hataları ve Yan Sayfa Yönlendirmeleri
-      // (Aktifleşen 5 ana terzi sayfası ve /terzi/fermuar-degisimi buradan kaldırılmıştır)
+      // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
+      { source: '/terzi/gelinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
+      
+      // DİKKAT: /terzi/fermuar-degisimi GitHub'da olduğu için YÖNLENDİRİLMİYOR, SERBEST BIRAKILDI.
+      // Sadece sonu -antalya ile biten hatalı versiyonunu gerçek sayfasına aktarıyoruz.
       { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi/fermuar-degisimi', permanent: true },
 
-      // 3. Duplicate içerik birleştirme
-      { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
-
-      // 4. Rusça ikili çakışma
-      { source: '/ru/atelie-antalya-online', destination: '/ru/atelie-antalya', permanent: true },
-    ];
+      // DİKKAT: /antalya-terzi-elbise-dikimi sayfası yüksek trafikli olduğu için 
+      // 15 Ağustos dosyasındaki yönlendirme komutu KALDIRILDI. Artık 200 OK yanıtı verecek.
+    ]
   },
 
   async headers() {
     return [
+      // Global güvenlik başlıkları
       {
         source: '/(.*)',
         headers: [
@@ -62,12 +61,14 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },
         ],
       },
+      // Static assets cache
       {
         source: '/_next/static/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      // API: no-index, no-cache
       {
         source: '/api/(.*)',
         headers: [
@@ -75,6 +76,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
+      // Giriş gerektiren sayfalar — noindex
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
@@ -82,8 +84,77 @@ const nextConfig = {
       { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
       { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-    ];
-  },
-};
 
-export default nextConfig;
+      // ── Terzi sayfaları (ÖZEL SEO SİNYALLERİNİZ KORUNDU) ──────────────────────────
+      {
+        source: '/terzi',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, de, ru' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/terzi/(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, ru, de' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+
+      // ── Online Terzi Hizmeti ─────────────────────────────────────────────
+      {
+        source: '/online-terzi-hizmeti',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, de, ru, ar' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-terzi-hizmeti/(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+
+      // ── Diğer SEO sayfaları ─────────────────────────────────────────────
+      {
+        source: '/tekstil-antalya',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/online-tailor-service',
+        headers: [
+          { key: 'Content-Language', value: 'en, tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en, ru' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/arimbalim',
+        headers: [
+          { key: 'Content-Language', value: 'tr' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+      {
+        source: '/pamuknest(.*)',
+        headers: [
+          { key: 'Content-Language', value: 'tr, en' },
+          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
+        ],
+      },
+    ]
+  },
+}
+
+export default nextConfig
