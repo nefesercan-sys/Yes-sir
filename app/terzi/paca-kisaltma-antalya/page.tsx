@@ -339,7 +339,7 @@ export default function PacaKisaltmaPage() {
               {[
                 ['Fermuar Değişimi Antalya', '/terzi/fermuar-degisimi-antalya'],
                 ['Kuru Temizleme Antalya', '/terzi/kuru-temizleme-antalya'],
-                ['Elbise Dikimi Antalya', '/terzi'],
+                ['Elbise Dikimi Antalya', '/terzi/elbise-dikimi-antalya'],
                 ['Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
                 ['Üniforma Dikimi Antalya', '/terzi/uniforma-uretimi-antalya'],
                 ['← Tüm Hizmetler', '/terzi'],
