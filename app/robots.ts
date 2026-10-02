@@ -47,7 +47,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: commonDisallows,
       },
     ],
-    sitemap: 'https://swaphubs.com/sitemap.xml',
+    // Güncellenen kısım: İki site haritası da dizi (array) olarak eklendi
+    sitemap: [
+      'https://swaphubs.com/sitemap.xml',
+      'https://swaphubs.com/sitemap-terzi.xml',
+    ],
     host: 'https://swaphubs.com',
   }
 }
