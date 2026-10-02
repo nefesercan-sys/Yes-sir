@@ -60,7 +60,7 @@ const GROUPS: ServiceGroup[] = [
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
       { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\'den', note: 'Aynı gün' },
-      { name: 'Fermuar değişimi', price: '200 TL\'den' },
+      { name: 'Fermuar değişimi', price: '120 TL\'den' },
       { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
       { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
     ],
@@ -86,7 +86,7 @@ const TRUST_POINTS = [
   { label: 'Randevulu Çalışma', detail: 'Bekleme yok, zamanınız planlı' },
   { label: 'Şeffaf Fiyatlandırma', detail: 'Sürpriz ücret yok, önceden onay' },
   { label: 'Antalya Konyaaltı', detail: 'Kolay ulaşım, merkezi konum' },
-  { label: 'Google Haritalar', detail: 'İşletme profilimizi görüntüleyin' },
+  { label: '94 Değerlendirme · 4.9', detail: 'Doğrulanmış müşteri yorumları' },
 ]
 
 function StitchDivider() {
