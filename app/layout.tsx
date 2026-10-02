@@ -88,10 +88,6 @@ export const metadata: Metadata = {
     },
   },
 
-  // NOT: canonical burada KÖKTE TANIMLI DEĞİL. Kökte canonical vermek, kendi
-  // canonical'ı olmayan her alt sayfayı ana sayfaya işaret ettirebilir ve
-  // Google'ın o sayfaları dizinden düşürmesine yol açar. Ana sayfa canonical'ını
-  // app/page.tsx zaten veriyor; /terzi kendi canonical'ını page.tsx'te veriyor.
   verification: {
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -99,10 +95,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-// ─── JSON-LD: WebSite + Organization (SwapHubs = platform, arka planda) ──────
-// Terzi Can'a ait telefon/hizmet bilgileri BURADAN çıkarıldı; tek kaynağı
-// app/terzi/page.tsx. Böylece arama motorları telefon/hizmet varlığını
-// SwapHubs'a değil Terzi Can'a bağlar.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -131,10 +123,13 @@ const jsonLd = {
       logo: {
         "@type": "ImageObject",
         url: "https://swaphubs.com/og/logo.png",
-        width: 512,
-        height: 512,
+        width: "512",
+        height: "512",
       },
-      image: "https://swaphubs.com/og/swaphubs-og.jpg",
+      image: {
+        "@type": "ImageObject",
+        url: "https://swaphubs.com/og/swaphubs-og.jpg",
+      },
       description:
         "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
       areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
@@ -149,6 +144,7 @@ const jsonLd = {
         "Fason Üretim",
         "Hizmet ve Ürün Tedariği",
       ],
+      // Terzi Can'ı ayrı bir entite olarak bağlamak çok doğru bir mimari
       subOrganization: { "@id": "https://swaphubs.com/terzi#business" },
       sameAs: [
         "https://twitter.com/swaphubs",
@@ -158,14 +154,19 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
+// Eğer next-intl kullanıyorsan veya dil rotalaması varsa params'dan locale'i almak en iyisidir
+type Props = {
   children: React.ReactNode;
-}) {
+  params: { locale?: string }; 
+};
+
+export default function RootLayout({ children, params }: Props) {
+  // Locale parametresi yoksa varsayılan olarak "tr" ata
+  const lang = params?.locale || "tr";
+
   return (
     <html
-      lang="tr"
+      lang={lang}
       suppressHydrationWarning
       className={`${jakarta.variable} ${unbounded.variable}`}
     >
