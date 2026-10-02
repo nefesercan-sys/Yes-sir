@@ -87,16 +87,11 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      // TODO: koordinatları Google Maps profilinden doğrula
       geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
       hasMap: GBP_1.maps,
-      // aggregateRating KALDIRILDI: sayfada görünür/doğrulanabilir yorum yoksa
-      // Google "self-serving / sahte yapısal veri" sayar ve manuel işlem riski doğurur.
-      // Gerçek GBP puanı sayfada görünür olursa geri eklenebilir.
       sameAs: [
         GBP_SHARE,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
-        // Instagram/Facebook: sadece GERÇEK hesap URL'leri varsa ekle.
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
@@ -126,7 +121,7 @@ const jsonLd = {
       }],
     },
 
-    // ── WebSite: /terzi kendi başına bir site varlığı (eksik @id düzeltildi) ──
+    // ── WebSite: /terzi kendi başına bir site varlığı ──
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}#website`,
@@ -157,7 +152,7 @@ const jsonLd = {
       mainEntity: { '@id': `${SITE_URL}#business` },
     },
 
-    // Breadcrumb: Terzi Can birinci sırada (SwapHubs ana sayfa öne çıkmasın)
+    // Breadcrumb: Terzi Can birinci sırada
     {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
@@ -184,13 +179,13 @@ const jsonLd = {
       '@id': `${SITE_URL}#hizmet-listesi`,
       name: 'Terzi Can Hizmetleri — Antalya Terzi 2026',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       item: `${HOME_URL}/terzi/bay-terzi-antalya` },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      item: `${HOME_URL}/terzi/bayan-terzi-antalya` },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: `${HOME_URL}/terzi/paca-kisaltma-antalya` },
-        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', item: `${HOME_URL}/terzi/dikis-atolyesi-antalya` },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       item: `${HOME_URL}/terzi/uniforma-uretimi-antalya` },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  item: `${HOME_URL}/terzi/kuru-temizleme-antalya` },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                item: `${HOME_URL}/terzi/eve-gelen-terzi-antalya` },
+        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       item: { '@id': `${HOME_URL}/terzi/bay-terzi-antalya` } },
+        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      item: { '@id': `${HOME_URL}/terzi/bayan-terzi-antalya` } },
+        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: { '@id': `${HOME_URL}/terzi/paca-kisaltma-antalya` } },
+        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', item: { '@id': `${HOME_URL}/terzi/dikis-atolyesi-antalya` } },
+        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       item: { '@id': `${HOME_URL}/terzi/uniforma-uretimi-antalya` } },
+        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  item: { '@id': `${HOME_URL}/terzi/kuru-temizleme-antalya` } },
+        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                item: { '@id': `${HOME_URL}/terzi/eve-gelen-terzi-antalya` } },
       ],
     },
 
@@ -217,7 +212,7 @@ const jsonLd = {
 // ── Metadata ──────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: PAGE_TITLE }, // layout.tsx'teki "| SwapHubs" şablonu uygulanmasın
+  title: { absolute: PAGE_TITLE }, 
   description: PAGE_DESC,
   applicationName: 'Terzi Can',
   keywords: [
@@ -249,7 +244,7 @@ export const metadata: Metadata = {
     title: PAGE_TITLE,
     description: PAGE_DESC,
     url: SITE_URL,
-    siteName: 'Terzi Can Antalya', // "SwapHubs" yerine
+    siteName: 'Terzi Can Antalya', 
     locale: 'tr_TR',
     type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can Antalya', type: 'image/jpeg' }],
@@ -280,9 +275,6 @@ export default function TerziPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Gizli "AI context" bloğu kaldırıldı: gizli metin Google spam politikasına
-          aykırıdır, AI botları da görünür içeriğe güvenir. Aynı bilgi zaten
-          görünür SEO özeti, SSS ve fiyat tablosunda var. */}
       <TerziClient gbp1={GBP_1} />
     </>
   );
