@@ -218,7 +218,7 @@ export default function PacaKisaltmaPage() {
                 ['✂️','Orijinal Dikiş','Kot pantolonlarda orijinal paça dikişi tekniği — marka etiketi korunur.'],
                 ['💰','Şeffaf Fiyat','Fiyatlar önceden bildirilir, sürpriz ücret yok. Rekabetçi, adil fiyatlandırma.'],
                 ['🌍','4 Dil','Türkçe, İngilizce, Rusça, Almanca hizmet. Turistler için ideal.'],
-                ['⭐','4.9 Puan','Google\'da 94 değerlendirme ile Antalya\'nın en çok tercih edilen terzisi.'],
+                ['⭐','Müşteri Memnuniyeti','Kaliteli işçilik ve zamanında teslimat ile Antalya\'da güvenilir terzi hizmeti.'],
               ].map(([ic, t, d]) => (
                 <div key={t as string} style={{ background: '#fff', padding: '1.4rem', borderRadius: '2px', borderTop: '2px solid rgba(184,151,90,.3)' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.6rem' }}>{ic}</div>
@@ -230,7 +230,7 @@ export default function PacaKisaltmaPage() {
           </div>
         </section>
 
-        {/* PANTALon KURTARMA — unique içerik */}
+        {/* PANTALON KURTARMA — unique içerik */}
         <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '1rem' }}>
@@ -325,7 +325,7 @@ export default function PacaKisaltmaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '.76rem', color: 'rgba(255,255,255,.75)' }}>
-            ⭐ 4.9 · 94 değerlendirme · 09:00–19:00 · Pzt–Cmt · Tüm Antalya
+            09:00–19:00 · Pzt–Cmt · Tüm Antalya
           </p>
         </section>
 
@@ -339,7 +339,7 @@ export default function PacaKisaltmaPage() {
               {[
                 ['Fermuar Değişimi Antalya', '/terzi/fermuar-degisimi-antalya'],
                 ['Kuru Temizleme Antalya', '/terzi/kuru-temizleme-antalya'],
-                ['Elbise Dikimi Antalya', '/terzi/elbise-dikimi-antalya'],
+                ['Elbise Dikimi Antalya', '/antalya-terzi-elbise-dikimi'],
                 ['Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
                 ['Üniforma Dikimi Antalya', '/terzi/uniforma-uretimi-antalya'],
                 ['← Tüm Hizmetler', '/terzi'],
