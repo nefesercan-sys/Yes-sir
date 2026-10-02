@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
 
     if (segment && IS_OBJECTID.test(segment)) {
       try {
-        // Hardcoded domain yerine 'origin' kullanılarak localhost, staging ve prod ortamlarda sorunsuz çalışması sağlandı
+        // Dinamik origin sayesinde Localhost ve Prod ortamlarında hatasız çalışır
         const res = await fetch(`${origin}/api/ilanlar?id=${segment}`);
         if (res.ok) {
           const data = await res.json();
@@ -24,42 +24,44 @@ export async function middleware(request: NextRequest) {
           }
         }
       } catch {
-        // Bağlantı hatasında akışı kesme
+        // API yanıt vermezse site çökmesin, standart akışa devam etsin
       }
       return NextResponse.next();
     }
   }
 
-  // 2. /ilanlar Query Parametrelerini temiz URL yapısına (SEO Friendly) dönüştürme
+  // 2. /ilanlar Query Parametrelerini temiz URL yapısına dönüştürme (SEO Friendly)
   if (pathname === "/ilanlar") {
     const sektor = searchParams.get("sektor");
     const tip    = searchParams.get("tip");
     const sehir  = searchParams.get("sehir");
 
-    // Şehir ve Sektör seçildiyse
+    let targetPath = null;
+    const keysToRemove = []; // URL'den çıkarılıp path'e eklenecek anahtarlar
+
     if (sehir && sektor) {
-      const targetUrl = new URL(`/ilanlar/${sehir}/${sektor}`, request.url);
-      searchParams.forEach((val, key) => {
-        if (key !== "sehir" && key !== "sektor") targetUrl.searchParams.set(key, val);
-      });
-      return NextResponse.redirect(targetUrl, { status: 301 });
+      targetPath = `/ilanlar/${sehir}/${sektor}`;
+      keysToRemove.push("sehir", "sektor");
+    } 
+    else if (sektor && tip) {
+      targetPath = `/ilanlar/turkiye/${sektor}/${tip}`;
+      keysToRemove.push("sektor", "tip");
+    } 
+    else if (sektor) {
+      targetPath = `/ilanlar/turkiye/${sektor}`;
+      keysToRemove.push("sektor");
     }
 
-    // Sektör ve Tip seçildiyse
-    if (sektor && tip) {
-      const targetUrl = new URL(`/ilanlar/turkiye/${sektor}`, request.url);
+    if (targetPath) {
+      const targetUrl = new URL(targetPath, request.url);
+      
+      // Filtreleme (fiyat, sıralama) veya sayfalama (page) gibi ekstra parametreleri yeni adrese taşı
       searchParams.forEach((val, key) => {
-        if (key !== "sektor") targetUrl.searchParams.set(key, val);
+        if (!keysToRemove.includes(key)) {
+          targetUrl.searchParams.set(key, val);
+        }
       });
-      return NextResponse.redirect(targetUrl, { status: 301 });
-    }
-
-    // Sadece Sektör seçildiyse
-    if (sektor) {
-      const targetUrl = new URL(`/ilanlar/turkiye/${sektor}`, request.url);
-      searchParams.forEach((val, key) => {
-        if (key !== "sektor") targetUrl.searchParams.set(key, val);
-      });
+      
       return NextResponse.redirect(targetUrl, { status: 301 });
     }
   }
