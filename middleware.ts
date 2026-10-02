@@ -11,7 +11,6 @@ export async function middleware(request: NextRequest) {
 
     if (segment && IS_OBJECTID.test(segment)) {
       try {
-        // Dinamik origin sayesinde Localhost ve Prod ortamlarında hatasız çalışır
         const res = await fetch(`${origin}/api/ilanlar?id=${segment}`);
         if (res.ok) {
           const data = await res.json();
@@ -33,19 +32,14 @@ export async function middleware(request: NextRequest) {
   // 2. /ilanlar Query Parametrelerini temiz URL yapısına dönüştürme (SEO Friendly)
   if (pathname === "/ilanlar") {
     const sektor = searchParams.get("sektor");
-    const tip    = searchParams.get("tip");
     const sehir  = searchParams.get("sehir");
 
     let targetPath = null;
-    const keysToRemove = []; // URL'den çıkarılıp path'e eklenecek anahtarlar
+    const keysToRemove: string[] = [];
 
     if (sehir && sektor) {
       targetPath = `/ilanlar/${sehir}/${sektor}`;
       keysToRemove.push("sehir", "sektor");
-    } 
-    else if (sektor && tip) {
-      targetPath = `/ilanlar/turkiye/${sektor}/${tip}`;
-      keysToRemove.push("sektor", "tip");
     } 
     else if (sektor) {
       targetPath = `/ilanlar/turkiye/${sektor}`;
@@ -55,7 +49,7 @@ export async function middleware(request: NextRequest) {
     if (targetPath) {
       const targetUrl = new URL(targetPath, request.url);
       
-      // Filtreleme (fiyat, sıralama) veya sayfalama (page) gibi ekstra parametreleri yeni adrese taşı
+      // tip, fiyat, sayfalama vb. ekstra parametreleri yeni adreste query string olarak koru
       searchParams.forEach((val, key) => {
         if (!keysToRemove.includes(key)) {
           targetUrl.searchParams.set(key, val);
