@@ -4,56 +4,35 @@ const BASE = 'https://swaphubs.com'
 export const dynamic = 'force-dynamic'
 
 const terziSayfalar = [
-  // ── Ana terzi sayfası ──────────────────────────────────────────────
-  { url: `${BASE}/terzi`,                                                   priority: '1.0',  freq: 'weekly' },
+  // ── 1. Ana Terzi & İngilizce Sayfalar (Priority: 1.0) ─────────────
+  { url: `${BASE}/terzi`,                                                   priority: '1.0',  freq: 'daily' },
+  { url: `${BASE}/online-tailor-service`,                                   priority: '1.0',  freq: 'daily' },
 
-  // ── Yapay Zekâ (AEO) & Master Yerel SEO Sayfaları ───────────────────
-  // Botların ve yapay zeka tarayıcılarının bu güçlü sayfaları sürekli kontrol etmesi için eklendi
-  { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '1.0',  freq: 'daily' },
-  // DÜZELTME (2026-08-13): antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat
-  // master sayfayla (yukarıdaki) neredeyse birebir aynı içeriği tekrar ediyordu
-  // ve hiçbiri diğerine canonical vermiyordu — Google iki sayfayı near-duplicate
-  // görüp otoriteyi bölüyordu. 301 ile master sayfaya birleştirildi, kaldırıldı.
-  // ✅ YENİ: fiziksel var olup hiçbir sitemap'te olmayan 2 sayfa eklendi
-  { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.9',  freq: 'weekly' },
-  { url: `${BASE}/terzi-cagir`,                                             priority: '0.95', freq: 'weekly' },
+  // ── 2. Yüksek Trafikli Sayfalar (1. Ekran Görüntüsündeki 5 URL) ─────
+  { url: `${BASE}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,            priority: '0.95', freq: 'daily' },
+  { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.95', freq: 'daily' },
+  { url: `${BASE}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,      priority: '0.95', freq: 'daily' },
+  { url: `${BASE}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,    priority: '0.95', freq: 'daily' },
+  { url: `${BASE}/antalya-terzi-elbise-dikimi`,                              priority: '0.95', freq: 'daily' },
 
-  // ── Antalya Alt Hizmet Sayfaları ───────────────────────────────────
-  { url: `${BASE}/terzi/paca-kisaltma-antalya`,                             priority: '0.95', freq: 'weekly' },
-  { url: `${BASE}/terzi/bay-terzi-antalya`,                                 priority: '0.95', freq: 'weekly' },
-  { url: `${BASE}/terzi/bayan-terzi-antalya`,                               priority: '0.95', freq: 'weekly' },
-  { url: `${BASE}/terzi/dikis-atolyesi-antalya`,                            priority: '0.9',  freq: 'weekly' },
-  { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                          priority: '0.9',  freq: 'weekly' },
-  { url: `${BASE}/terzi/kuru-temizleme-antalya`,                            priority: '0.9',  freq: 'weekly' },
-  { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                           priority: '0.95', freq: 'weekly' },
-  // DÜZELTME (2026-08-13): fermuar-degisimi-antalya ve gelinlik-tadilati-antalya
-  // fiziksel sayfa değil — next.config.mjs'te /terzi'ye 301 redirect ediyorlar.
-  // Redirect eden URL'yi sitemap'te tutmak GSC uyarısı üretir. Kaldırıldı.
+  // ── 3. app/terzi/ İçindeki Fiziksel Alt Klasörler (2. Ekran Görüntüsü) ──
+  { url: `${BASE}/terzi/bay-terzi-antalya`,                                 priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/bayan-terzi-antalya`,                               priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/dikis-atolyesi-antalya`,                            priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/eve-gelen-terzi-antalya`,                           priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/fermuar-degisimi`,                                  priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/kuru-temizleme-antalya`,                            priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/paca-kisaltma-antalya`,                             priority: '0.90', freq: 'weekly' },
+  { url: `${BASE}/terzi/uniforma-uretimi-antalya`,                          priority: '0.90', freq: 'weekly' },
 
-  // ── Tekstil & Terzi Diğer Sayfalar ────────────────────────────────
-  // DÜZELTME (2026-07-13): "/antalya-terzi-elbise-dikimi" satırı kaldırıldı.
-  // DÜZELTME (2026-08-13): "/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat"
-  // da master sayfaya 301 ile birleştirildi, aynı sebeple kaldırıldı.
-  { url: `${BASE}/tekstil-antalya`,                                         priority: '0.9',  freq: 'weekly' },
+  // ── 4. Online Terzi & Dönüşüm Sayfaları ──────────────────────────────
+  { url: `${BASE}/online-terzi-hizmeti`,                                    priority: '0.95', freq: 'weekly' },
+  { url: `${BASE}/terzi-cagir`,                                             priority: '0.90', freq: 'weekly' },
 
-  // ── Online Terzi Hizmeti ───────────────────────────────────────────
-  // DÜZELTME (2026-08-13): abiye-dikim, gelinlik-dikim, takim-elbise-dikim,
-  // uniforma-dikim, spor-giyim-dikim, gece-davet-kiyafeti, muslin-keten-kiyafet,
-  // gunluk-kiyafet-dikim, olcu-rehberi, kurumsal, sss — bu 11 alt sayfanın
-  // hiçbiri app/online-terzi-hizmeti/ altında fiziksel olarak yoktu.
-  // Gerçekten yazılınca buraya geri eklenmeli.
-  { url: `${BASE}/online-terzi-hizmeti`,                                    priority: '1.0',  freq: 'weekly' },
-
-  // ── Online Tailor Service (EN) ─────────────────────────────────────
-  { url: `${BASE}/online-tailor-service`,                                   priority: '0.9',  freq: 'weekly' },
-  // DÜZELTME (2026-08-13): /online-terzi-servisi hiçbir zaman fiziksel
-  // olarak var olmadı — kaldırıldı.
-
-  // ── Rusça Sayfa ────────────────────────────────────────────────────
-  { url: `${BASE}/ru/atelie-antalya`,                                       priority: '0.9',  freq: 'weekly' },
-
-  // ── Doğal Keten/Pamuk ─────────────────────────────────────────────
-  { url: `${BASE}/dogal-keten-pamuk-giyim`,                                 priority: '0.85', freq: 'weekly' },
+  // ── 5. Diğer Tekstil & Çok Dilli Sayfalar ────────────────────────────
+  { url: `${BASE}/tekstil-antalya`,                                         priority: '0.85', freq: 'weekly' },
+  { url: `${BASE}/ru/atelie-antalya`,                                       priority: '0.85', freq: 'weekly' },
+  { url: `${BASE}/dogal-keten-pamuk-giyim`,                                 priority: '0.80', freq: 'weekly' },
 ]
 
 export async function GET() {
