@@ -86,7 +86,7 @@ const TRUST_POINTS = [
   { label: 'Randevulu Çalışma', detail: 'Bekleme yok, zamanınız planlı' },
   { label: 'Şeffaf Fiyatlandırma', detail: 'Sürpriz ücret yok, önceden onay' },
   { label: 'Antalya Konyaaltı', detail: 'Kolay ulaşım, merkezi konum' },
-  { label: '94 Değerlendirme · 4.9', detail: 'Doğrulanmış müşteri yorumları' },
+  { label: 'Hızlı Teslimat', detail: 'Pratik işlemlerde aynı gün teslim' },
 ]
 
 function StitchDivider() {
@@ -881,7 +881,7 @@ export default function ElbiseDikimiClient() {
                 <div>
                   <span className="location-row-label">Çalışma Saatleri</span>
                   <span className="location-row-val">
-                    Pazartesi – Cumartesi<br />09:00 – 19:00
+                    Pazartesi – Cumartesi<br />09:00 – 20:00
                   </span>
                 </div>
               </div>
@@ -927,11 +927,6 @@ export default function ElbiseDikimiClient() {
             role="region"
             aria-label="Terzi Can Konyaaltı konum haritası"
           >
-            {/*
-              Terzi Can — Hurma Mahallesi, Konyaaltı, Antalya
-              Place ID: ChIJZ0ySzpExwxQRoLgdJSJyVFk
-              Google Maps Share: https://maps.app.goo.gl/CNZghczJNRQX3mLM9
-            */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.8!2d30.6930!3d36.8851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39311e6924c67%3A0x59547225251db8a0!2sTERZ%C4%B0%20Can!5e0!3m2!1str!2str!4v1720000000000!5m2!1str!2str"
               width="100%"
@@ -978,4 +973,3 @@ export default function ElbiseDikimiClient() {
     </main>
   )
 }
-
