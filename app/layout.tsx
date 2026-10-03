@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
+import IcerikHaritasi from "@/components/IcerikHaritasi";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -191,6 +192,7 @@ export default function RootLayout({ children, params }: Props) {
           <AuthProvider>
             <LocaleHtmlLang />
             <main>{children}</main>
+            <IcerikHaritasi />
             <BottomNav />
             <Analytics />
           </AuthProvider>
