@@ -92,11 +92,10 @@ const jsonLd = {
       geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        opens: '08:00', closes: '23:00',
       }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '11', bestRating: '5', worstRating: '1' },
-      sameAs: [GBP1.maps, GBP1.short, GBP2.maps, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
+      sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
     },
     {
@@ -129,7 +128,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?',
           acceptedAnswer: { '@type': 'Answer', text: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` } },
         { '@type': 'Question', name: 'Haben Sie abends oder am Wochenende geöffnet?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja, wir haben 6 Tage die Woche geöffnet, auch abends. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` } },
+          acceptedAnswer: { '@type': 'Answer', text: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` } },
         { '@type': 'Question', name: 'Kann ich mir ein individuelles Kleid anfertigen lassen?',
           acceptedAnswer: { '@type': 'Answer', text: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` } },
         { '@type': 'Question', name: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?',
