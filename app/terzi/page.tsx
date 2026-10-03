@@ -15,7 +15,7 @@ const PHONE_E164    = '+905318986418';
 const LAST_MODIFIED = '2026-10-04'; // Güncel Tarih
 
 // ── Google Business Profil ────────────────────────────────────────────────────
-const GBP_SHARE = 'https://share.google/ppkxQGTVWahWAmDpg';
+const GBP_SHARE = 'https://share.google/PnzazRlw4flD84YYB'; // TERZİ Can Antalya Tailor Service
 const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.07765171764!2d30.6133!3d36.8407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUwJzI2LjUiTiAzMMKwMzYnNDcuOSJF!5e0!3m2!1str!2str!4v1234567890123'; // Lütfen kendi asıl harita embed URL'n ile değiştir.
 
 const GBP_1 = {
@@ -80,33 +80,6 @@ const jsonLd = {
       image: [OG_IMAGE],
       logo: `${HOME_URL}/logo.png`,
       parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
-      
-      // YENİ EKLENEN: YILDIZ VE YORUM ŞEMALARI
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '142',
-        bestRating: '5',
-        worstRating: '1'
-      },
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ahmet Yılmaz' },
-          datePublished: '2026-09-15',
-          reviewBody: 'Konyaaltı\'nda bulabileceğiniz en iyi terzi. Paça kısaltma ve ceket daraltma işlemlerimi kusursuz ve çok hızlı yaptılar. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Elena Petrova' },
-          datePublished: '2026-08-20',
-          reviewBody: 'Otelimize kadar gelip ölçü aldılar ve elbisemi ertesi gün mükemmel bir şekilde teslim ettiler. Harika bir kurye terzi hizmeti.',
-          reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }
-        }
-      ],
-      // YENİ EKLENEN SONU
-
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',
@@ -123,8 +96,8 @@ const jsonLd = {
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        opens: '08:00', closes: '23:00',
       }],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
