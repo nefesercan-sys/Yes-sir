@@ -60,7 +60,7 @@ const GROUPS: ServiceGroup[] = [
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
       { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\'den', note: 'Aynı gün' },
-      { name: 'Fermuar değişimi', price: '120 TL\'den' },
+      { name: 'Fermuar değişimi', price: '200 TL\'den' },
       { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
       { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
     ],
@@ -881,7 +881,7 @@ export default function ElbiseDikimiClient() {
                 <div>
                   <span className="location-row-label">Çalışma Saatleri</span>
                   <span className="location-row-val">
-                    Pazartesi – Cumartesi<br />09:00 – 20:00
+                    Haftanın her günü<br />08:00 – 23:00
                   </span>
                 </div>
               </div>
