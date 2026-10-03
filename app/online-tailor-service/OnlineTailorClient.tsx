@@ -148,7 +148,7 @@ const FAQS: [string, string][] = [
   ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],
   ["Is there an English-speaking tailor in Antalya?", "Yes! Our tailor speaks English, Russian and German. WhatsApp: +90 531 898 64 18"],
   ["My dress is torn — can you repair it the same day?", "Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate."],
-  ["Are you open in the evening or on weekends?", "Yes, we're open 6 days a week including evening hours. Message us on WhatsApp to book a time."],
+  ["Are you open in the evening or on weekends?", "Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time."],
   ["Can I have a custom dress made for myself?", "Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns."],
   ["Do you sew with natural fabrics like cotton or linen?", "Yes, we offer custom tailoring in 100% cotton and linen fabric."],
 ];
@@ -362,7 +362,7 @@ export default function OnlineTailorClient({
             <a href="#services" className="obtn obtn-ghost">See Our Services ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Years of Experience'],['5000+','Happy Customers'],['5.0★','11 Reviews'],['24–48h','Delivery']] as [string,string][]).map(([n,l])=>(
+            {([['10+','Years of Experience'],['5000+','Happy Customers'],['4','Languages Spoken'],['24–48h','Delivery']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
@@ -489,7 +489,7 @@ export default function OnlineTailorClient({
               ['🏭','Mass Production Capacity','Bulk production starting from a minimum of 50 pieces.'],
               ['💰','Transparent Pricing','No hidden fees — get a clear price upfront.'],
               ['🌍','Nationwide Shipping','Order from anywhere in Turkey, shipped to you.'],
-              ['⭐','5.0 / 5 · 11 Reviews',"A top-rated tailor on Google in Antalya."],
+              ['📍','Find Us on Google Maps',"Open our Google Business Profile for directions and customer reviews."],
             ] as [string,string,string][]).map(([ic,t,d])=>(
               <div key={t} className="owhy-card">
                 <div className="owhy-ic" aria-hidden="true">{ic}</div>
@@ -545,7 +545,7 @@ export default function OnlineTailorClient({
       <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
         <div className="octr">
           <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">⭐ 5.0 / 5 · Google Business Profile</span>
+            <span className="oeyebrow">Customer Feedback</span>
             <h2 className="oh2" id="rev-h">What Our Customers Say</h2>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
           </div>
