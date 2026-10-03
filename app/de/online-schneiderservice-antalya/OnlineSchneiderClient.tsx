@@ -148,7 +148,7 @@ const FAQS: [string, string][] = [
   ["Versenden Sie in die ganze Türkei?", "Ja. Kostenloser Kurier innerhalb von Antalya, Versand in die ganze Türkei, 5–10 Werktage."],
   ["Gibt es einen deutschsprachigen Schneider in Antalya?", "Ja! Unser Schneider spricht Deutsch, Englisch und Russisch. WhatsApp: +90 531 898 64 18"],
   ["Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?", "Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung."],
-  ["Haben Sie abends oder am Wochenende geöffnet?", "Ja, wir haben 6 Tage die Woche geöffnet, auch abends. Schreiben Sie uns auf WhatsApp für einen Termin."],
+  ["Haben Sie abends oder am Wochenende geöffnet?", "Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin."],
   ["Kann ich mir ein individuelles Kleid anfertigen lassen?", "Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid."],
   ["Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?", "Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an."],
 ];
@@ -362,7 +362,7 @@ export default function OnlineSchneiderClient({
             <a href="#services" className="obtn obtn-ghost">Unsere Leistungen ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Jahre Erfahrung'],['5000+','Zufriedene Kunden'],['5.0★','11 Bewertungen'],['24–48h','Lieferung']] as [string,string][]).map(([n,l])=>(
+            {([['10+','Jahre Erfahrung'],['5000+','Zufriedene Kunden'],['4','Sprachen'],['24–48h','Lieferung']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
@@ -489,7 +489,7 @@ export default function OnlineSchneiderClient({
               ['🏭','Serienproduktionskapazität','Serienproduktion ab mindestens 50 Stück.'],
               ['💰','Transparente Preise','Keine versteckten Kosten — klarer Preis im Voraus.'],
               ['🌍','Versand In Die Ganze Türkei','Von überall in der Türkei bestellen, geliefert zu Ihnen.'],
-              ['⭐','5.0 / 5 · 11 Bewertungen',"Ein bestbewerteter Schneider bei Google in Antalya."],
+              ['📍','Auf Google Maps finden',"Öffnen Sie unser Google-Unternehmensprofil für Route und Kundenbewertungen."],
             ] as [string,string,string][]).map(([ic,t,d])=>(
               <div key={t} className="owhy-card">
                 <div className="owhy-ic" aria-hidden="true">{ic}</div>
@@ -545,7 +545,7 @@ export default function OnlineSchneiderClient({
       <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
         <div className="octr">
           <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">⭐ 5.0 / 5 · Google Unternehmensprofil</span>
+            <span className="oeyebrow">Kundenstimmen</span>
             <h2 className="oh2" id="rev-h">Was Unsere Kunden Sagen</h2>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
           </div>
