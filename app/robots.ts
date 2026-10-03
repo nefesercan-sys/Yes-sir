@@ -9,6 +9,11 @@ export default function robots(): MetadataRoute.Robots {
     '/terzi-panel/',
     '/terzi-admin/',
     '/profil/',
+    '/otel-profil',
+    '/kayit',
+    '/sifre-sifirla',
+    '/sifremi-unuttum',
+    '/ilan-detay',
     '/mesajlar/',
     '/bildirimler/',
     '/giris',
@@ -32,7 +37,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: commonDisallows,
       },
       {
-        // AI arama/asistan botları: aynı kısıtlarla tüm herkese açık sayfalar açık
+        // Arama motorları ve AI asistan botları: herkese açık sayfalar açık
         userAgent: [
           'Google-Extended',
           'GPTBot',
@@ -42,12 +47,16 @@ export default function robots(): MetadataRoute.Robots {
           'ClaudeBot',
           'Claude-SearchBot',
           'Applebot-Extended',
+          'Bingbot',
+          'YandexBot',
+          'Amazonbot',
+          'meta-externalagent',
+          'DuckAssistBot',
         ],
         allow: '/',
         disallow: commonDisallows,
       },
     ],
-    // Güncellenen kısım: İki site haritası da dizi (array) olarak eklendi
     sitemap: [
       'https://swaphubs.com/sitemap.xml',
       'https://swaphubs.com/sitemap-terzi.xml',
@@ -55,4 +64,3 @@ export default function robots(): MetadataRoute.Robots {
     host: 'https://swaphubs.com',
   }
 }
- 
