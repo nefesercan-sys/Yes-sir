@@ -41,13 +41,6 @@ const jsonLd = {
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Contactless, Apple Pay',
       knowsLanguage: ['English', 'Russian', 'German', 'Turkish'],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '142',
-        bestRating: '5',
-        worstRating: '1'
-      },
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Konyaaltı',
@@ -167,7 +160,7 @@ export default function HotelTailorAntalyaPage() {
           <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'center' }}>
             <div>
               <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
-                ⭐ 4.9/5 Rated Hotel Tailor Service · All Antalya
+                Hotel Tailor Service · All Antalya
               </div>
               <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2.2rem,5vw,4rem)', fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: '1.2rem' }}>
                 Mobile Tailor Antalya<br />
@@ -182,7 +175,7 @@ export default function HotelTailorAntalyaPage() {
               {/* Trust Badges */}
               <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
                 {[
-                  ['⭐', '4.9/5 Google Rating'],
+                  ['📍', 'Find Us on Google Maps'],
                   ['🏨', 'All Hotels Covered'],
                   ['💳', 'EUR / USD / Cards Accepted'],
                   ['⚡', '24h Express Delivery'],
@@ -381,7 +374,7 @@ export default function HotelTailorAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            Open daily · 09:00–19:00 · English, Russian, German & Turkish spoken
+            Open daily · 08:00–23:00 · English, Russian, German & Turkish spoken
           </p>
         </section>
 
