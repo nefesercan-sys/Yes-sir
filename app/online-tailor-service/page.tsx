@@ -101,11 +101,10 @@ const jsonLd = {
       geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        opens: '08:00', closes: '23:00',
       }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '11', bestRating: '5', worstRating: '1' },
-      sameAs: [GBP1.maps, GBP1.short, GBP2.maps, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
+      sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
     },
     {
@@ -138,7 +137,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'My dress is torn — can you repair it the same day?',
           acceptedAnswer: { '@type': 'Answer', text: `Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` } },
         { '@type': 'Question', name: 'Are you open in the evening or on weekends?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes, we're open 6 days a week including evening hours. Message us on WhatsApp to book a time. ${PHONE}` } },
+          acceptedAnswer: { '@type': 'Answer', text: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` } },
         { '@type': 'Question', name: 'Can I have a custom dress made for myself?',
           acceptedAnswer: { '@type': 'Answer', text: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` } },
         { '@type': 'Question', name: 'Do you sew with natural fabrics like cotton or linen?',
