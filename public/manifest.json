@@ -1,8 +1,8 @@
 {
-  "name": "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-  "short_name": "SwapHubs",
-  "description": "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın.",
-  "start_url": "/",
+  "name": "Terzi Can — Antalya Konyaaltı Terzi",
+  "short_name": "Terzi Can",
+  "description": "Konyaaltı terzi: tadilat, dikim, kuru temizleme. Eve ve otele servis. Her gün 08:00–23:00.",
+  "start_url": "/terzi",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#B8975A",
@@ -13,5 +13,6 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "lang": "tr"
 }
