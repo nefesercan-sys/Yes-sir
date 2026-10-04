@@ -13,7 +13,7 @@ const MAPS_URL        = `https://www.google.com/maps?cid=${GBP_CID}`;
 const MAPS_SHORT      = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
 const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
 const MAPS_REVIEW     = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
-const MAPS_EMBED      = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
+const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
 const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
 const TODAY = '2026-10-04';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье Анталия Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–22:00. ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -42,12 +42,6 @@ export const metadata: Metadata = {
   ].join(', '),
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      'ru': PAGE_URL,
-      'tr': `${BASE_URL}/terzi`,
-      'en': `${BASE_URL}/online-terzi-hizmeti`,
-      'x-default': `${BASE_URL}/terzi`,
-    },
   },
   openGraph: {
     title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',
@@ -65,8 +59,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8841;30.7056',
-    'ICBM': '36.8841, 30.7056',
+    'geo.position': '36.857466;30.596987',
+    'ICBM': '36.857466, 30.596987',
   },
 };
 
@@ -105,7 +99,7 @@ export default function RuAtelieAntalyaPage() {
       <BusinessSchema
         path='/ru/atelie-antalya-online'
         name='Ателье Анталия Коньяалты — Говорим по-русски | Terzi Can'
-        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски. Ежедневно 08:00–22:00.'
+        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски. Ежедневно 08:00–23:00.'
         lang={'ru'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Ателье на русском', path: '/ru/atelie-antalya-online' }]}
@@ -138,7 +132,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–22:00
+          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
         </div>
 
         {/* ── HERO ── */}
