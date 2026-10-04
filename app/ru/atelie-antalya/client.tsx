@@ -34,7 +34,7 @@ const FAQ_ITEMS = [
   { q: 'Работаете ли вы с кожаными изделиями?', a: 'Да, у нас есть оборудование для кожаных курток, дублёнок, пальто и плотного денима.' },
   { q: 'Шьёте ли вы платья на заказ?', a: 'Да, пошив по индивидуальным меркам — от 800 лир, срок изготовления 3–5 рабочих дней.' },
   { q: 'Моё платье порвалось, можете починить в тот же день?', a: 'Да, большинство разрывов и распоротых швов чинится в тот же день. Отправьте фото в WhatsApp для быстрой оценки.' },
-  { q: 'Работаете ли вы вечером или в выходные?', a: 'Да, мы работаем 6 дней в неделю, включая вечерние часы. Напишите нам в WhatsApp, чтобы записаться.' },
+  { q: 'Работаете ли вы вечером или в выходные?', a: 'Да, мы работаем ежедневно с 08:00 до 23:00, включая вечерние часы и выходные. Напишите нам в WhatsApp, чтобы записаться.' },
   { q: 'Шьёте ли вы из натуральных тканей — хлопка или льна?', a: 'Да, предлагаем пошив одежды на заказ из 100% хлопка и льна.' },
 ]
 
@@ -336,7 +336,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
               <div className="location-brand">Terzi Can</div>
               <div className="location-brand-sub">Партнёр платформы SwapHubs</div>
               <div className="location-row"><strong>📍 Адрес:</strong> Hurma Mahallesi, Konyaaltı, Antalya</div>
-              <div className="location-row"><strong>⏰ Режим работы:</strong> Пн–Сб, 09:00–19:00</div>
+              <div className="location-row"><strong>⏰ Режим работы:</strong> Ежедневно, 08:00–23:00</div>
               <div className="location-row"><strong>📞 Телефон:</strong> {PHONE_DISPLAY}</div>
             </div>
             <a className="location-link" href={gmapsDirections} target="_blank" rel="noopener noreferrer">
