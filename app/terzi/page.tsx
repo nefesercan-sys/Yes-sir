@@ -60,6 +60,27 @@ const offer = (name: string, price: string) => ({
   availability: 'https://schema.org/InStock',
 });
 
+// ── Gerçek yorumlar ───────────────────────────────────────────────────────────
+// SADECE gerçekten alınmış (Google profilinde görünen) yorumları ekle. Boşsa puan şemaya girmez.
+type RealReview = { author: string; rating: number; text: string; date: string };
+const REAL_REVIEWS: RealReview[] = [
+  // { author: 'Ad S.', rating: 5, text: 'Yorumun birebir metni', date: '2026-09-20' },
+];
+function buildReviewProps(): Record<string, unknown> {
+  if (REAL_REVIEWS.length === 0) return {};
+  const avg = REAL_REVIEWS.reduce((t, r) => t + r.rating, 0) / REAL_REVIEWS.length;
+  return {
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: avg.toFixed(1), reviewCount: String(REAL_REVIEWS.length), bestRating: '5' },
+    review: REAL_REVIEWS.map(r => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      datePublished: r.date,
+      reviewBody: r.text,
+      reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
+    })),
+  };
+}
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -88,8 +109,7 @@ const jsonLd = {
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       image: [OG_IMAGE],
-      logo: `${HOME_URL}/logo.png`,
-      parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
+      logo: `${HOME_URL}/og/logo.png`,
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',
@@ -130,29 +150,8 @@ const jsonLd = {
         areaServed: 'TR',
         availableLanguage: ['Turkish','English','Russian','German'],
       }],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: '2',
-        bestRating: '5',
-        worstRating: '1',
-      },
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ahmet Y.' },
-          datePublished: '2026-09-20',
-          reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Elena M.' },
-          datePublished: '2026-10-02',
-          reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-      ],
+      // aggregateRating/review YOK: yalnızca gerçek, doğrulanabilir yorumlar (REAL_REVIEWS).
+      ...buildReviewProps(),
     },
 
     // ── WebSite ──
@@ -178,20 +177,11 @@ const jsonLd = {
       inLanguage: 'tr',
       datePublished: '2024-01-01',
       dateModified: LAST_MODIFIED,
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
       speakable: {
         '@type': 'SpeakableSpecification',
         cssSelector: ['#hizmet-fiyatlari', '#sik-sorulan-sorular', '#terzi-can-ozet'],
       },
       mainEntity: { '@id': `${SITE_URL}#business` },
-    },
-
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${SITE_URL}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Terzi Can Antalya', item: SITE_URL },
-      ],
     },
 
     {
