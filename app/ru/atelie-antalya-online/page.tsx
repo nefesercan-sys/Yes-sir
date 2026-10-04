@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье Анталия Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто Пн–Сб 09:00–19:00. ⭐4.9 (94 отзыва) ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',
-    description: 'Ремонт одежды, подгонка, пошив на заказ. Говорим по-русски. Liman Mah., Коньяалты. ⭐4.9 ☎ +90 531 898 64 18',
+    description: 'Ремонт одежды, подгонка, пошив на заказ. Говорим по-русски. Коньяалты, Анталия. ☎ +90 531 898 64 18',
     url: PAGE_URL, siteName: 'SwapHubs', locale: 'ru_RU', type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталия', type: 'image/jpeg' }],
   },
@@ -87,8 +87,7 @@ const jsonLd = {
       sameAs: [MAPS_SHORT, MAPS_URL, `${BASE_URL}/terzi`],
       address: { '@type': 'PostalAddress', streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '19:00' }],
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '94', bestRating: '5', worstRating: '1' },
+      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Konyaaltı','Hurma','Liman','Sarısu','Lara','Belek','Kemer','Antalya'].map(n => ({ '@type': 'Place', name: n })),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -181,7 +180,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; ⭐ 4.9 (94 отзыва) &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Пн–Сб 09:00–19:00
+          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
         </div>
 
         {/* ── HERO ── */}
@@ -218,12 +217,6 @@ export default function RuAtelieAntalyaPage() {
               </a>
             </div>
 
-            {/* Рейтинг */}
-            <div style={{ display:'flex',alignItems:'center',justifyContent:'center',gap:8,fontSize:13,color:'rgba(255,255,255,.6)' }}>
-              <span style={{ color:'#FACC15',fontSize:17 }}>★★★★★</span>
-              <strong style={{ color:'#fff' }}>4.9</strong>
-              <span>· 94 отзыва</span>
-            </div>
           </div>
         </header>
 
@@ -239,8 +232,7 @@ export default function RuAtelieAntalyaPage() {
                 <span style={{ flexShrink:0,background:'#DCFCE7',color:'#166534',fontSize:11,fontWeight:700,padding:'4px 10px',borderRadius:20 }}>● Открыто</span>
               </div>
               <div style={{ display:'flex',alignItems:'center',gap:6,fontSize:13,color:'#6B7280' }}>
-                <span style={{ color:'#FACC15',fontWeight:700 }}>★ 4.9</span>
-                <span>(94 отзыва)</span>
+                <span>Google Карты</span>
                 <span>·</span>
                 <span>Liman Mah., Коньяалты</span>
               </div>
