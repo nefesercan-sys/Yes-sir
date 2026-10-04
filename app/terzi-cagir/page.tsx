@@ -35,8 +35,8 @@ const jsonLd = {
       hasMap: MAPS_URL,
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        opens: '08:00', closes: '23:00',
       }],
       areaServed: [
         'Konyaaltı','Hurma','Liman','Sarısu','Uncalı','Gürsu',
@@ -52,8 +52,8 @@ const jsonLd = {
         availableLanguage: ['Turkish','English','Russian','German'],
         hoursAvailable: {
           '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-          opens: '09:00', closes: '19:00',
+          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+          opens: '08:00', closes: '23:00',
         },
       },
     },
@@ -536,7 +536,7 @@ export default function TerziCagirPage() {
             <div className="map-bar">
               <div className="map-bar-info">
                 <div className="map-bar-name">Terzi Can — Konyaaltı, Antalya</div>
-                <div>Hurma Mah. · 09:00–19:00 · Pzt–Cmt</div>
+                <div>Hurma Mah. · Her gün 08:00–23:00</div>
               </div>
               <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="btn-call" style={{background:'#D4A843',color:'#000'}}>
                 🗺️ Yol Tarifi
@@ -573,7 +573,7 @@ export default function TerziCagirPage() {
             Terziniz bir telefon uzağında
           </p>
           <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.55)',marginBottom:'1.2rem'}}>
-            Konyaaltı ve tüm Antalya — 09:00–19:00 · Pzt–Cmt
+            Konyaaltı ve tüm Antalya — Her gün 08:00–23:00
           </p>
           <div style={{display:'flex',flexDirection:'column',gap:'.7rem'}}>
             <a href={`tel:${PHONE_E164}`} className="btn-call-big" style={{justifyContent:'center'}}>
@@ -592,7 +592,7 @@ export default function TerziCagirPage() {
         <footer className="footer">
           <div className="footer-brand">Terzi Can · Konyaaltı, Antalya</div>
           <p style={{fontSize:'.72rem',color:'rgba(255,255,255,.3)'}}>
-            © 2026 SwapHubs · {PHONE} · 09:00–19:00 Pzt–Cmt
+            © 2026 SwapHubs · {PHONE} · Her gün 08:00–23:00
           </p>
           <nav className="footer-links">
             {[
