@@ -333,7 +333,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            Täglich geöffnet · 09:00–19:00
+            Täglich geöffnet · 08:00–23:00
           </p>
         </section>
 
