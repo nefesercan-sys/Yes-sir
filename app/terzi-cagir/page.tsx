@@ -31,7 +31,7 @@ const jsonLd = {
         postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.693 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       hasMap: MAPS_URL,
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
@@ -124,8 +124,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8851;30.6930',
-    ICBM: '36.8851, 30.6930',
+    'geo.position': '36.857466;30.596987',
+    ICBM: '36.857466, 30.596987',
   },
 };
 
@@ -526,7 +526,7 @@ export default function TerziCagirPage() {
         <section className="map-sec" id="konum">
           <div className="map-wrap">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.8!2d30.6930!3d36.8851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39311e6924c67%3A0x59547225251db8a0!2sTERZ%C4%B0%20Can!5e0!3m2!1str!2str!4v1720000000000!5m2!1str!2str"
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed"
               height="240"
               allowFullScreen
               loading="lazy"
