@@ -320,7 +320,7 @@ export default function HotelTailorAntalyaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>
-            Open daily · 08:00–22:00 · English, Russian, German & Turkish spoken
+            Open daily · 08:00–23:00 · English, Russian, German & Turkish spoken
           </p>
         </section>
 
