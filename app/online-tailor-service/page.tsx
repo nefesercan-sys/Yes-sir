@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07', 'geo.placename': 'Hurma, Konyaaltı, Antalya',
-    'geo.position': '36.8615;30.6095', ICBM: '36.8615, 30.6095',
+    'geo.position': '36.857466;30.596987', ICBM: '36.857466, 30.596987',
   },
   verification: {
     yandex: '4c73ee1911a4b197',
@@ -80,7 +80,7 @@ const FAQ = [
   { q: 'Do you come to my hotel for ironing?', a: `Yes! Courier pickup and delivery to every hotel in Antalya, same day. ${PHONE}` },
   { q: 'Is there an English-speaking tailor in Antalya?', a: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` },
   { q: 'My dress is torn — can you repair it the same day?', a: `Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
-  { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–22:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
+  { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
   { q: 'Can I have a custom dress made for myself?', a: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` },
   { q: 'Do you sew with natural fabrics like cotton or linen?', a: `Yes, we offer custom tailoring in 100% cotton and linen fabric. ${PHONE}` },
 ];
@@ -91,7 +91,7 @@ export default function OnlineTailorServicePage() {
       <BusinessSchema
         path={SITE_URL.replace(BASE_URL, '')}
         name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti'
-        description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, ironing, repairs, alterations, custom design and mass production. Open daily 08:00–22:00.'
+        description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, ironing, repairs, alterations, custom design and mass production. Open daily 08:00–23:00.'
         lang={['tr','en','ru','de']}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Tailor Service', path: SITE_URL.replace(BASE_URL, '') }]}
