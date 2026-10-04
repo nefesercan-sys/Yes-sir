@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
+import IcerikHaritasi from "@/components/IcerikHaritasi";
+import { headers } from "next/headers";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -26,19 +28,24 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://swaphubs.com"),
-  title: {
-    template: "%s | SwapHubs",
-    default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-  },
-  description:
-    "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın. Tekstil, gıda, lojistik, fason ve daha fazlası. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
+const SITE = "https://swaphubs.com";
+const TITLE = "Terzi Can Antalya — Konyaaltı Terzi, Tadilat, Dikim | Her Gün 08:00–23:00";
+const DESC =
+  "Antalya Konyaaltı (Hurma) terzi: paça kısaltma, fermuar değişimi, elbise dikimi, tadilat, kuru temizleme ve ütü. Eve ve otele gelen terzi servisi. Haftanın her günü 08:00–23:00. Türkçe, English, Русский, Deutsch. WhatsApp: +90 531 898 64 18";
 
-  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
-  creator: "SwapHubs",
-  publisher: "SwapHubs",
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE),
+  title: {
+    template: "%s | Terzi Can",
+    default: TITLE,
+  },
+  description: DESC,
+
+  authors: [{ name: "Terzi Can", url: `${SITE}/terzi` }],
+  creator: "Terzi Can",
+  publisher: "Terzi Can",
   category: "business",
+  applicationName: "Terzi Can",
 
   icons: {
     icon: [
@@ -49,20 +56,20 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    title: "Terzi Can Antalya — Konyaaltı Terzi · Her Gün 08:00–23:00",
     description:
-      "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
-    url: "https://swaphubs.com",
-    siteName: "SwapHubs",
+      "Paça kısaltma, fermuar, elbise dikimi, tadilat ve kuru temizleme. Eve ve otele gelen terzi. Konyaaltı, Hurma Mahallesi.",
+    url: `${SITE}/terzi`,
+    siteName: "Terzi Can",
     locale: "tr_TR",
     alternateLocale: ["en_US", "ru_RU", "de_DE"],
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og/swaphubs-og.jpg",
+        url: `${SITE}/og/terzi-can.jpg`,
         width: 1200,
         height: 630,
-        alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
+        alt: "Terzi Can — Konyaaltı, Antalya terzi atölyesi",
         type: "image/jpeg",
       },
     ],
@@ -70,10 +77,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-    description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
-    site: "@swaphubs",
-    images: ["https://swaphubs.com/og/swaphubs-og.jpg"],
+    title: "Terzi Can Antalya — Konyaaltı Terzi",
+    description: "Tadilat, dikim, kuru temizleme. Her gün 08:00–23:00. Eve ve otele servis.",
+    images: [`${SITE}/og/terzi-can.jpg`],
   },
 
   robots: {
@@ -88,23 +94,6 @@ export const metadata: Metadata = {
     },
   },
 
-  alternates: {
-    canonical: "https://swaphubs.com",
-    // DÜZELTME (2026-09-26 denetimi): Bu blok önceden 'en': '/en', 'de': '/de',
-    // 'ru': '/ru' olarak TANIMLIYORDU ama bu sayfalar (kök seviyede) HİÇ YOK —
-    // app/en/page.tsx, app/de/page.tsx, app/ru/page.tsx projede mevcut değil.
-    // Google bu URL'lere gidip 404 alıyordu; bu hem "geçersiz hreflang" hatası
-    // olarak Search Console'da raporlanır hem de sitenin uluslararası hedefleme
-    // güvenilirliğini zedeler. Ana sayfanın gerçek bir çevirisi olmadığından
-    // (SwapHubs ana sayfası çok sektörlü bir vitrin), şimdilik yalnızca kendine
-    // ve x-default'a işaret ediyor. Gerçek /en, /de, /ru ana sayfaları
-    // oluşturulduğunda buraya eklenmeli.
-    languages: {
-      tr: "https://swaphubs.com",
-      "x-default": "https://swaphubs.com",
-    },
-  },
-
   verification: {
     yandex: "4c73ee1911a4b197",
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
@@ -112,86 +101,44 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-// ─── JSON-LD: WebSite + Organization ─────────────────────────────────────────
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://swaphubs.com/#website",
-      url: "https://swaphubs.com",
-      name: "SwapHubs",
-      description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "Terzi Can",
+      alternateName: ["Terzi Can Antalya", "SwapHubs"],
+      description: "Antalya Konyaaltı terzi, tadilat, dikim ve kuru temizleme — eve ve otele servis.",
       inLanguage: ["tr", "en", "ru", "de"],
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: "https://swaphubs.com/ilanlar?q={search_term_string}",
-        },
-        "query-input": "required name=search_term_string",
-      },
+      publisher: { "@id": `${SITE}/#organization` },
     },
     {
       "@type": "Organization",
-      "@id": "https://swaphubs.com/#organization",
+      "@id": `${SITE}/#organization`,
       name: "SwapHubs",
-      url: "https://swaphubs.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://swaphubs.com/og/logo.png",
-        width: 512,
-        height: 512,
-      },
-      image: "https://swaphubs.com/og/swaphubs-og.jpg",
-      description:
-        "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
-      areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
-      knowsAbout: [
-        "Terzilik Hizmetleri",
-        "Özel Dikim ve Tekstil",
-        "Kuru Temizleme",
-        "B2B Ticaret",
-        "Tekstil Tedarik",
-        "Makine Ekipman",
-        "Turizm",
-        "İnşaat Malzemeleri",
-        "Lojistik",
-        "Temizlik",
-        "Fason Üretim",
-        "Hizmet ve Ürün Tedariği",
-      ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+905318986418",
-        contactType: "customer service",
-        areaServed: ["TR", "DE", "RU", "EN"],
-        availableLanguage: ["Turkish", "English", "Russian", "German"]
-      },
-      sameAs: [
-        "https://twitter.com/swaphubs",
-        "https://www.linkedin.com/company/swaphubs",
-      ],
+      url: SITE,
+      logo: { "@type": "ImageObject", url: `${SITE}/og/logo.png`, width: 512, height: 512 },
+      description: "Terzi Can'ın bağlı olduğu hizmet ve ürün platformu.",
+      subOrganization: { "@id": `${SITE}/terzi#business` },
     },
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // SEO Düzeltmesi: lang="tr" sabitti; /en, /de, /ru sayfaları da yanlışlıkla
-  // Türkçe olarak işaretleniyordu (hreflang etiketleriyle çelişiyordu).
-  // NOT: Bunu next/headers ile sunucu tarafında okumak, kök layout'u (ve dolayısıyla
-  // TÜM siteyi — generateStaticParams ile statik üretilen yüzlerce lokasyon sayfası
-  // dahil) dinamik render'a zorlar; bu da performans/Core Web Vitals'ı düşürerek SEO'ya
-  // daha büyük zarar verir. Bu yüzden statik üretimi bozmayan, istemci tarafında
-  // document.documentElement.lang'ı düzelten hafif bir bileşen kullanılıyor
-  // (app/components/LocaleHtmlLang.tsx). Başlangıç değeri "tr" kalıyor.
+type Props = { children: React.ReactNode };
+
+const SUPPORTED = ["tr", "en", "ru", "de"];
+
+export default async function RootLayout({ children }: Props) {
+  // middleware.ts URL'den dili çıkarıp x-lang başlığına yazar → ham HTML'de doğru <html lang>
+  const h = await Promise.resolve(headers());
+  const hdr = h.get("x-lang") || "tr";
+  const lang = SUPPORTED.includes(hdr) ? hdr : "tr";
+
   return (
     <html
-      lang="tr"
+      lang={lang}
       suppressHydrationWarning
       className={`${jakarta.variable} ${unbounded.variable}`}
     >
@@ -203,12 +150,12 @@ export default function RootLayout({
         />
         <link
           rel="preconnect"
-          href="https://images.unsplash.com"
+          href="https://images.pexels.com"
           crossOrigin="anonymous"
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
       </head>
       <body className={`${jakarta.className} antialiased`}>
@@ -216,6 +163,7 @@ export default function RootLayout({
           <AuthProvider>
             <LocaleHtmlLang />
             <main>{children}</main>
+            <IcerikHaritasi />
             <BottomNav />
             <Analytics />
           </AuthProvider>
