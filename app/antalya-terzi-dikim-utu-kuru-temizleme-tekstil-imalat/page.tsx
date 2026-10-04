@@ -59,8 +59,8 @@ const jsonLd = {
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-        opens: '09:00',
-        closes: '23:30',
+        opens: '08:00',
+        closes: '23:00',
       }],
       contactPoint: [{
         '@type': 'ContactPoint',
@@ -645,7 +645,7 @@ export default function AntalyaTerziPage() {
             <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
                 { icon: '📍', label: 'Adres', value: 'Sarısu, Hurma, Liman, Konyaaltı / Antalya' },
-                { icon: '🕐', label: 'Çalışma Saatleri', value: 'Her gün 09:00 – 23:30' },
+                { icon: '🕐', label: 'Çalışma Saatleri', value: 'Her gün 08:00 – 23:00' },
                 { icon: '🗺️', label: 'Google Profili', value: 'Google Haritalar\'da görüntüleyin' },
                 { icon: '📞', label: 'Telefon', value: PHONE },
               ].map(({ icon, label, value }) => (
