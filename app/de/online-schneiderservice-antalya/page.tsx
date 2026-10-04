@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import BusinessSchema from '@/components/BusinessSchema';
 import OnlineSchneiderClient from './OnlineSchneiderClient';
 
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/de/online-schneiderservice-antalya`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY     = new Date().toISOString().split('T')[0];
+const TODAY = '2026-10-04';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri (EN sayfasıyla aynı, gerçek işletme verisi)
@@ -64,84 +65,30 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['LocalBusiness', 'ClothingStore'],
-      additionalType: 'https://schema.org/SewingService',
-      '@id': `${SITE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı Terzi Ve Ütü Hizmeti',
-      alternateName: ['Online Schneiderservice Antalya', 'Terzi Can Antalya', 'Tailor Can Antalya'],
-      description:
-        'Online-Schneiderservice mit Sitz in Konyaaltı. Herren- und Damenschneiderei, ' +
-        'Bügelservice, Reparaturen, Änderungen, individuelles Design und Serienproduktion.',
-      url: SITE_URL,
-      telephone: PHONE_E,
-      priceRange: '₺₺',
-      image: OG_IMG,
-      hasMap: GBP1.maps,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mahallesi',
-        addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya',
-        postalCode: '07130',
-        addressCountry: 'TR',
-      },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
-      openingHoursSpecification: [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
-        opens: '08:00', closes: '23:00',
-      }],
-      sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${SITE_URL}#webpage`,
-      name: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice',
-      url: SITE_URL, inLanguage: 'de', dateModified: TODAY,
-      about: { '@id': `${SITE_URL}#business` },
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
-    },
-    {
-      '@type': 'BreadcrumbList', '@id': `${SITE_URL}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
-        { '@type': 'ListItem', position: 3, name: 'Online Schneiderservice', item: SITE_URL },
-      ],
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Was kostet ein Herrenanzug in Antalya?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ab ₺2.500. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Wie funktioniert der Online-Schneiderservice?',
-          acceptedAnswer: { '@type': 'Answer', text: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` } },
-        { '@type': 'Question', name: 'Kommen Sie für den Bügelservice zu meinem Hotel?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, am selben Tag. ${PHONE}` } },
-        { '@type': 'Question', name: 'Gibt es einen deutschsprachigen Schneider in Antalya?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` } },
-        { '@type': 'Question', name: 'Haben Sie abends oder am Wochenende geöffnet?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` } },
-        { '@type': 'Question', name: 'Kann ich mir ein individuelles Kleid anfertigen lassen?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` } },
-        { '@type': 'Question', name: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?',
-          acceptedAnswer: { '@type': 'Answer', text: `Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an. ${PHONE}` } },
-      ],
-    },
-  ],
-};
+const FAQ = [
+  { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Ab ₺2.500. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
+  { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
+  { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, am selben Tag. ${PHONE}` },
+  { q: 'Gibt es einen deutschsprachigen Schneider in Antalya?', a: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` },
+  { q: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?', a: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
+  { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 22:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
+  { q: 'Kann ich mir ein individuelles Kleid anfertigen lassen?', a: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` },
+  { q: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?', a: `Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an. ${PHONE}` },
+];
 
 export default function OnlineSchneiderservicePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BusinessSchema
+        path={SITE_URL.replace(BASE_URL, '')}
+        name='Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice'
+        description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–22:00 geöffnet.'
+        lang={'de'}
+        lastModified={TODAY}
+        breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Schneiderservice', path: SITE_URL.replace(BASE_URL, '') }]}
+        faq={FAQ}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+      />
       <OnlineSchneiderClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}
