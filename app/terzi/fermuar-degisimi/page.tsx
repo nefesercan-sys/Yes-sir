@@ -9,7 +9,7 @@ const PARENT    = `${BASE_URL}/terzi`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
 const GBP_URL   = 'https://share.google/dsCVIz116FhbjISfz'; // TERZİ Can Antalya Tailor Service
-const HOURS     = '08:00–22:00';
+const HOURS     = '08:00–23:00';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
 // ── Renkler / yazı tipi (açık, modern tema) ──────────────────────────────
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Fermuar Değişimi Antalya · 200 TL\'den · Her Gün 08–23 | Terzi Can' },
   description:
     'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
-    '200 TL\'den başlayan fiyatlar, 24 saatte teslim, acil durumda aynı gün. Haftanın her günü 08:00–22:00. WhatsApp: ' + PHONE,
+    '200 TL\'den başlayan fiyatlar, 24 saatte teslim, acil durumda aynı gün. Haftanın her günü 08:00–23:00. WhatsApp: ' + PHONE,
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Fermuar Değişimi Antalya · 200 TL\'den | Terzi Can',
-    description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–22:00, Konyaaltı / Antalya.',
+    description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–23:00, Konyaaltı / Antalya.',
     url: SITE_URL,
     siteName: 'SwapHubs',
     locale: 'tr_TR',
@@ -137,7 +137,7 @@ const jsonLd = {
             '@type': 'OpeningHoursSpecification',
             dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             opens: '08:00',
-            closes: '22:00',
+            closes: '23:00',
           },
         ],
         sameAs: [GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
