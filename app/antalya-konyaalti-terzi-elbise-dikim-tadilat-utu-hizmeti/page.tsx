@@ -18,7 +18,7 @@ const GBP1_NAME   = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
 const GBP1_CID    = '1496201377277644027';
 const GBP1_MAPS   = `https://www.google.com/maps?cid=${GBP1_CID}`;
 const GBP1_SHORT  = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
-const GBP1_EMBED  = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1str!2str!4v1';
+const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
 const GBP1_DIR    = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
 const GBP1_REVIEW = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
 
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8841;30.7056', 'ICBM': '36.8841, 30.7056',
+    'geo.position': '36.857466;30.596987', 'ICBM': '36.857466, 30.596987',
     'content-language': 'tr',
   },
 };
@@ -82,7 +82,7 @@ const jsonLd = {
     // İki GBP profili için Place
     { '@type': 'Place', '@id': `${PAGE_URL}#place1`, name: GBP1_NAME, hasMap: GBP1_MAPS,
       address: { '@type': 'PostalAddress', streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 } },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 } },
     { '@type': 'Place', '@id': `${PAGE_URL}#place2`, name: GBP2_NAME, hasMap: GBP2_MAPS,
       address: { '@type': 'PostalAddress', streetAddress: 'Hurma Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8923, longitude: 30.6982 } },
@@ -100,7 +100,7 @@ const jsonLd = {
       image: OG_IMAGE, hasMap: GBP1_MAPS,
       sameAs: [GBP1_SHORT, GBP1_MAPS, GBP2_SHORT, GBP2_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
       address: { '@type': 'PostalAddress', streetAddress: 'Hurma & Liman Mah., Konyaaltı', addressLocality: 'Antalya', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Hurma','Liman','Uncalı','Sarısu','Gürsu','Meltem','Göbi','Çakırlar','Öğretmenevleri','Konyaaltı','Antalya','Lara','Belek','Kemer'].map(n => ({ '@type': 'Place', name: n })),
       contactPoint: [{ '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', availableLanguage: ['Turkish','English','Russian','German'] }],
