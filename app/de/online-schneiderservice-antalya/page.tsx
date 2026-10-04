@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07', 'geo.placename': 'Hurma, Konyaaltı, Antalya',
-    'geo.position': '36.8615;30.6095', ICBM: '36.8615, 30.6095',
+    'geo.position': '36.857466;30.596987', ICBM: '36.857466, 30.596987',
   },
 };
 
@@ -71,7 +71,7 @@ const FAQ = [
   { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, am selben Tag. ${PHONE}` },
   { q: 'Gibt es einen deutschsprachigen Schneider in Antalya?', a: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` },
   { q: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?', a: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
-  { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 22:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
+  { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
   { q: 'Kann ich mir ein individuelles Kleid anfertigen lassen?', a: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` },
   { q: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?', a: `Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an. ${PHONE}` },
 ];
@@ -82,7 +82,7 @@ export default function OnlineSchneiderservicePage() {
       <BusinessSchema
         path={SITE_URL.replace(BASE_URL, '')}
         name='Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice'
-        description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–22:00 geöffnet.'
+        description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–23:00 geöffnet.'
         lang={'de'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Schneiderservice', path: SITE_URL.replace(BASE_URL, '') }]}
