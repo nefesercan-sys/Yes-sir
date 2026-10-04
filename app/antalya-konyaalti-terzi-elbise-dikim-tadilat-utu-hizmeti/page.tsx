@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026',
   description:
-    `${GBP1_NAME} · Terzi · Liman & Hurma Mah., Konyaaltı, Antalya · Pzt–Cmt 09:00–19:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
+    `${GBP1_NAME} · Terzi · Liman & Hurma Mah., Konyaaltı, Antalya · Her gün 08:00–23:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
   keywords: [
     'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Liman terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü | Antalya 2026',
-    description: `Liman & Hurma Mah., Konyaaltı · Pzt–Cmt 09:00–19:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
+    description: `Liman & Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
     url: PAGE_URL, siteName: 'SwapHubs', locale: 'tr_TR',
     alternateLocale: ['en_US','ru_RU'], type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: GBP1_NAME, type: 'image/jpeg' }],
@@ -101,7 +101,7 @@ const jsonLd = {
       sameAs: [GBP1_SHORT, GBP1_MAPS, GBP2_SHORT, GBP2_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
       address: { '@type': 'PostalAddress', streetAddress: 'Hurma & Liman Mah., Konyaaltı', addressLocality: 'Antalya', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '19:00' }],
+      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Hurma','Liman','Uncalı','Sarısu','Gürsu','Meltem','Göbi','Çakırlar','Öğretmenevleri','Konyaaltı','Antalya','Lara','Belek','Kemer'].map(n => ({ '@type': 'Place', name: n })),
       contactPoint: [{ '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', availableLanguage: ['Turkish','English','Russian','German'] }],
       hasOfferCatalog: {
@@ -291,7 +291,7 @@ export default function KonyaaltiTerziPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 10, fontSize: '.82rem', flexWrap: 'wrap' }}>
                 <span style={{ color: D.gold2, fontWeight: 700 }}>Terzi · Kadın Terzisi · Erkek Terzisi</span>
               </div>
-              <div style={{ fontSize: '.76rem', color: D.s, marginTop: 4 }}>Pzt–Cmt 09:00–19:00</div>
+              <div style={{ fontSize: '.76rem', color: D.s, marginTop: 4 }}>Her gün 08:00–23:00</div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginTop: 14 }}>
                 {[
