@@ -56,10 +56,10 @@ export default function KonyaaltiTerziPage() {
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": [
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
       ],
-      "opens": "09:00",
-      "closes": "19:00"
+      "opens": "08:00",
+      "closes": "23:00"
     }
   };
 
@@ -176,7 +176,7 @@ export default function KonyaaltiTerziPage() {
                 <span className="text-2xl mt-1">⏰</span>
                 <div>
                   <strong className="block text-gray-900">Çalışma Saatleri:</strong>
-                  <span className="text-gray-600">Pzt - Cts: 09:00 - 19:00</span>
+                  <span className="text-gray-600">Her gün: 08:00 - 23:00</span>
                 </div>
               </li>
             </ul>
