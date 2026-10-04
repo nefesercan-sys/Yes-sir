@@ -33,7 +33,7 @@ export const BUSINESS = {
     addressCountry: 'TR',
   },
   // Google Haritalar'dan doğrulanıp güncellenmeli (sayfalarda farklı değerler var)
-  geo: { latitude: 36.8615, longitude: 30.6095 },
-  hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '22:00' },
-  sameAs: ['https://share.google/dsCVIz116FhbjISfz'],
+  geo: { latitude: 36.857466, longitude: 30.596987 },
+  hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '23:00' },
+  sameAs: ['https://www.google.com/maps?cid=5846987472659818117'],
 } as const;
