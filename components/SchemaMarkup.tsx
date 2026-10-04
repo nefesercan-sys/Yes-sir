@@ -68,7 +68,7 @@ const buildJsonLd = (gbpUrl: string, reviewProps: Record<string, unknown>) => ({
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       hasMap: gbpUrl,
       sameAs: [
         gbpUrl,
@@ -77,7 +77,7 @@ const buildJsonLd = (gbpUrl: string, reviewProps: Record<string, unknown>) => ({
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
-        opens: '08:00', closes: '22:00',
+        opens: '08:00', closes: '23:00',
       }],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
