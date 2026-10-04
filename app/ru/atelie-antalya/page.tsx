@@ -109,7 +109,7 @@ const jsonLd = {
         addressCountry: 'TR',
       },
       // DÜZELTME: uydurma koordinat yerine gerçek işletme konumu.
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       hasMap: GMAPS_SHORT_LINK,
       openingHoursSpecification: [
         {
