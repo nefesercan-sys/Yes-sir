@@ -284,7 +284,7 @@ export default function UniformaUretimiPage() {
               📞 {PHONE}
             </a>
           </div>
-          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Pzt–Cmt 09:00–19:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
+          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Her gün 08:00–23:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
         </section>
 
         <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
