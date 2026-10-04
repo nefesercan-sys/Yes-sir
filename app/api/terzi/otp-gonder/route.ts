@@ -10,6 +10,7 @@
 //  3) Aynı IP: saatte en fazla 15 kod isteği (farklı numaralara toplu istek atmayı engeller)
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
+import { randomInt } from 'crypto';
 import { getDb } from '@/lib/mongodb';
 import { telegramMesajGonder } from '@/lib/telegram';
 
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
       yeniTalepSayisi = (kullanici.otpTalepSayisiSaatlik || 0) + 1;
     }
 
-    const kod = Math.floor(100000 + Math.random() * 900000).toString();
+    const kod = randomInt(100000, 1000000).toString();
 
     await db.collection('terziKullanicilar').updateOne(
       { telefon },
