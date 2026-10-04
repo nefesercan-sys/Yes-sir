@@ -114,9 +114,9 @@ const jsonLd = {
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          opens: '09:00',
-          closes: '19:00',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '08:00',
+          closes: '23:00',
         },
       ],
       areaServed: [
@@ -202,7 +202,7 @@ const jsonLd = {
         {
           '@type': 'Question',
           name: 'Работаете ли вы вечером или в выходные?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, мы работаем 6 дней в неделю, включая вечерние часы. Напишите нам в WhatsApp, чтобы записаться. WhatsApp: ${PHONE}` },
+          acceptedAnswer: { '@type': 'Answer', text: `Да, мы работаем ежедневно с 08:00 до 23:00, включая вечерние часы и выходные. Напишите нам в WhatsApp, чтобы записаться. WhatsApp: ${PHONE}` },
         },
         {
           '@type': 'Question',
