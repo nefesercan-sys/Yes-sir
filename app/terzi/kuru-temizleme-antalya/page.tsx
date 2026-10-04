@@ -27,7 +27,7 @@ const jsonLd = {
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '19:00' }],
+      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
     },
     {
       '@type': 'Service',
@@ -277,7 +277,7 @@ export default function KuruTemizlemePage() {
               📞 {PHONE}
             </a>
           </div>
-          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Pzt–Cmt 09:00–19:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
+          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Her gün 08:00–23:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
         </section>
 
         <section style={{ padding: '2rem 1.5rem', background: '#F2EDE4' }}>
