@@ -881,7 +881,7 @@ export default function ElbiseDikimiClient() {
                 <div>
                   <span className="location-row-label">Çalışma Saatleri</span>
                   <span className="location-row-val">
-                    Haftanın her günü<br />08:00 – 23:00
+                    Haftanın her günü<br />08:00–23:00
                   </span>
                 </div>
               </div>
@@ -928,7 +928,7 @@ export default function ElbiseDikimiClient() {
             aria-label="Terzi Can Konyaaltı konum haritası"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.8!2d30.6930!3d36.8851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39311e6924c67%3A0x59547225251db8a0!2sTERZ%C4%B0%20Can!5e0!3m2!1str!2str!4v1720000000000!5m2!1str!2str"
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, display: 'block' }}
