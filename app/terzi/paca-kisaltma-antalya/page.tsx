@@ -325,7 +325,7 @@ export default function PacaKisaltmaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '.76rem', color: 'rgba(255,255,255,.75)' }}>
-            09:00–19:00 · Pzt–Cmt · Tüm Antalya
+            Her gün 08:00–23:00 · Tüm Antalya
           </p>
         </section>
 
