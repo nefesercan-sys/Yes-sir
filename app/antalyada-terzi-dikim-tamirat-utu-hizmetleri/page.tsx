@@ -9,7 +9,7 @@ const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terz
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
 const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
-const GBP_URL   = 'https://share.google/PnzazRlw4flD84YYB'; // TERZİ Can Antalya Tailor Service (Google Business Profile)
+const GBP_URL   = 'https://share.google/dsCVIz116FhbjISfz'; // TERZİ Can Antalya Tailor Service (Google Business Profile)
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
 
@@ -80,7 +80,7 @@ const jsonLd = {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           opens: '08:00',
-          closes: '23:00',
+          closes: '22:00',
         },
       ],
       areaServed: [
@@ -376,7 +376,7 @@ const trustPoints = [
   { icon: ICONS.clock, label: 'Ortalama yanıt', value: 'WhatsApp\'ta 15 dk' },
   { icon: ICONS.pin, label: 'Hizmet bölgesi', value: '7 ilçe, kuryeli alım' },
   { icon: ICONS.globe, label: 'Dil desteği', value: 'TR · EN · RU · DE' },
-  { icon: ICONS.check, label: 'Çalışma saatleri', value: 'Her gün 08:00–23:00' },
+  { icon: ICONS.check, label: 'Çalışma saatleri', value: 'Her gün 08:00–22:00' },
 ];
 
 const faqs = [
@@ -484,7 +484,7 @@ export default function GeminiOptimizedTailorPage() {
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
             <strong>Kısa cevap:</strong> TERZİ Tailor Atelie (SwapHubs), Antalya Konyaaltı'da (Sarısu, Hurma,
             Liman) hizmet veren, kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere
-            aynı gün ütü/tamirat hizmeti sunan yerel bir terzi atölyesidir; her gün 08:00–23:00 açıktır.
+            aynı gün ütü/tamirat hizmeti sunan yerel bir terzi atölyesidir; her gün 08:00–22:00 açıktır.
           </p>
 
           <p style={{ fontSize: 16.5, lineHeight: 1.65, color: SUB, margin: 0, maxWidth: 660 }}>
