@@ -4,7 +4,7 @@ import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonl
 export const revalidate = 86400
 
 const BASE_URL = 'https://swaphubs.com'
-const D = new Date('2026-10-02')
+const D = new Date('2026-10-04')
 
 export async function GET() {
   const terziSayfalar = [
