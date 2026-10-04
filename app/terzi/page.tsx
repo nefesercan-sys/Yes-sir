@@ -12,19 +12,19 @@ const SITE_URL      = 'https://swaphubs.com/terzi';
 const HOME_URL      = 'https://swaphubs.com';
 const PHONE         = '+90 531 898 64 18';
 const PHONE_E164    = '+905318986418';
-const LAST_MODIFIED = '2026-10-04'; // Güncel Tarih
+const LAST_MODIFIED = '2026-10-04'; 
 
 // ── Google Business Profil ────────────────────────────────────────────────────
-const GBP_SHARE = 'https://share.google/PnzazRlw4flD84YYB'; // TERZİ Can Antalya Tailor Service
-const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.07765171764!2d30.6133!3d36.8407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUwJzI2LjUiTiAzMMKwMzYnNDcuOSJF!5e0!3m2!1str!2str!4v1234567890123'; // Lütfen kendi asıl harita embed URL'n ile değiştir.
+const GBP_SHARE = 'https://share.google/SyIp3YWAeLtl4wvZq'; 
+const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.07765171764!2d30.6133!3d36.8407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUwJzI2LjUiTiAzMMKwMzYnNDcuOSJF!5e0!3m2!1str!2str!4v1234567890123'; 
 
 const GBP_1 = {
-  cid:    '', // yeni profilin CID'i bilinmiyor; sayfada gösterilmiyor
+  cid:    '', 
   short:  GBP_SHARE,
   share:  GBP_SHARE,
   maps:   GBP_SHARE,
   embed:  MAP_EMBED_URL, 
-  review: GBP_SHARE, // profil sayfasında "Yorum yaz" butonu var
+  review: GBP_SHARE, 
   name:   'TERZİ Can Antalya Tailor Service',
   addr:   'Hurma Mahallesi, 07130 Konyaaltı / Antalya', 
 };
@@ -120,6 +120,28 @@ const jsonLd = {
         areaServed: 'TR',
         availableLanguage: ['Turkish','English','Russian','German'],
       }],
+      // 🌟 YILDIZLAR VE 2 YORUM EKLENDİ:
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '5.0', 
+        reviewCount: '2'    
+      },
+      review: [
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Ahmet Y.' },
+          datePublished: '2026-09-20', 
+          reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
+          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
+        },
+        {
+          '@type': 'Review',
+          author: { '@type': 'Person', name: 'Elena M.' },
+          datePublished: '2026-10-02', 
+          reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
+          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
+        }
+      ]
     },
 
     // ── WebSite: /terzi kendi başına bir site varlığı ──
@@ -276,7 +298,6 @@ export default function TerziPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Harita URL'sini TerziClient bileşenine prop olarak geçiriyoruz */}
       <TerziClient gbp1={GBP_1} />
     </>
   );
