@@ -29,8 +29,8 @@ const jsonLd = {
       geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        opens: '09:00', closes: '19:00',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        opens: '08:00', closes: '23:00',
       }],
     },
     {
@@ -302,7 +302,7 @@ export default function DikisAtölyesiPage() {
               📞 {PHONE}
             </a>
           </div>
-          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Pzt–Cmt 09:00–19:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
+          <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Her gün 08:00–23:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>
         </section>
 
         {/* İLGİLİ SAYFALAR */}
