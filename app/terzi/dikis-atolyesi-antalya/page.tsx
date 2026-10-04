@@ -26,7 +26,7 @@ const jsonLd = {
         postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-  other: { 'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya', 'geo.position': '36.8841;30.7056', ICBM: '36.8841, 30.7056' },
+  other: { 'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya', 'geo.position': '36.857466;30.596987', ICBM: '36.857466, 30.596987' },
 };
 
 const HIZMETLER = [
