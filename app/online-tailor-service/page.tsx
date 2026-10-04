@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import BusinessSchema from '@/components/BusinessSchema';
 import OnlineTailorClient from './OnlineTailorClient';
 
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/online-tailor-service`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY     = new Date().toISOString().split('T')[0];
+const TODAY = '2026-10-04';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri
@@ -73,84 +74,30 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['LocalBusiness', 'ClothingStore'],
-      additionalType: 'https://schema.org/SewingService',
-      '@id': `${SITE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı Terzi Ve Ütü Hizmeti',
-      alternateName: ['Online Tailor Service Antalya', 'Terzi Can Antalya', 'Tailor Can Antalya'],
-      description:
-        'Konyaaltı-based online tailor service. Menswear and womenswear tailoring, ' +
-        'ironing, repairs, alterations, custom design and mass production.',
-      url: SITE_URL,
-      telephone: PHONE_E,
-      priceRange: '₺₺',
-      image: OG_IMG,
-      hasMap: GBP1.maps,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mahallesi',
-        addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya',
-        postalCode: '07130',
-        addressCountry: 'TR',
-      },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8615, longitude: 30.6095 },
-      openingHoursSpecification: [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
-        opens: '08:00', closes: '23:00',
-      }],
-      sameAs: [GBP1.maps, GBP1.short, `https://wa.me/${PHONE_E.replace('+','')}`, `${BASE_URL}/terzi`],
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${SITE_URL}#webpage`,
-      name: 'Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti',
-      url: SITE_URL, inLanguage: ['tr','en','ru','de'], dateModified: TODAY,
-      about: { '@id': `${SITE_URL}#business` },
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
-    },
-    {
-      '@type': 'BreadcrumbList', '@id': `${SITE_URL}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
-        { '@type': 'ListItem', position: 3, name: 'Online Tailor Service', item: SITE_URL },
-      ],
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: "How much does a men's suit cost in Antalya?",
-          acceptedAnswer: { '@type': 'Answer', text: `Starts from ₺2,500. Send your measurements via WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'How does the online tailor service work?',
-          acceptedAnswer: { '@type': 'Answer', text: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` } },
-        { '@type': 'Question', name: 'Do you come to my hotel for ironing?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes! Courier pickup and delivery to every hotel in Antalya, same day. ${PHONE}` } },
-        { '@type': 'Question', name: 'Is there an English-speaking tailor in Antalya?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'My dress is torn — can you repair it the same day?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` } },
-        { '@type': 'Question', name: 'Are you open in the evening or on weekends?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` } },
-        { '@type': 'Question', name: 'Can I have a custom dress made for myself?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` } },
-        { '@type': 'Question', name: 'Do you sew with natural fabrics like cotton or linen?',
-          acceptedAnswer: { '@type': 'Answer', text: `Yes, we offer custom tailoring in 100% cotton and linen fabric. ${PHONE}` } },
-      ],
-    },
-  ],
-};
+const FAQ = [
+  { q: "How much does a men's suit cost in Antalya?", a: `Starts from ₺2,500. Send your measurements via WhatsApp: ${PHONE}` },
+  { q: 'How does the online tailor service work?', a: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` },
+  { q: 'Do you come to my hotel for ironing?', a: `Yes! Courier pickup and delivery to every hotel in Antalya, same day. ${PHONE}` },
+  { q: 'Is there an English-speaking tailor in Antalya?', a: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` },
+  { q: 'My dress is torn — can you repair it the same day?', a: `Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
+  { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–22:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
+  { q: 'Can I have a custom dress made for myself?', a: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` },
+  { q: 'Do you sew with natural fabrics like cotton or linen?', a: `Yes, we offer custom tailoring in 100% cotton and linen fabric. ${PHONE}` },
+];
 
 export default function OnlineTailorServicePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BusinessSchema
+        path={SITE_URL.replace(BASE_URL, '')}
+        name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti'
+        description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, ironing, repairs, alterations, custom design and mass production. Open daily 08:00–22:00.'
+        lang={['tr','en','ru','de']}
+        lastModified={TODAY}
+        breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Tailor Service', path: SITE_URL.replace(BASE_URL, '') }]}
+        faq={FAQ}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+      />
       <OnlineTailorClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}
