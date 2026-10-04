@@ -22,6 +22,7 @@ export async function GET() {
     // ✂️ 3. MİKRO TERZİ SAYFALARI (Priority: 0.90)
     { url: `${BASE_URL}/online-terzi-hizmeti`,        priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/paca-kisaltma-antalya`, priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`, priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,     priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,   priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly' },
@@ -40,9 +41,8 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,   priority: '0.75', freq: 'weekly' },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,        priority: '0.75', freq: 'monthly' },
 
-    // 📋 7. FORM VE DÖNÜŞÜM SAYFALARI (Priority: 0.60)
+    // 📋 7. DÖNÜŞÜM SAYFASI (/terzi-talep noindex olduğu için sitemap'ten çıkarıldı)
     { url: `${BASE_URL}/terzi-cagir`, priority: '0.60', freq: 'monthly' },
-    { url: `${BASE_URL}/terzi-talep`, priority: '0.60', freq: 'monthly' },
   ]
 
   // 📍 5. YEREL SEO (İlçe ve Mahalleler) (Priority: 0.80 - 0.85)
