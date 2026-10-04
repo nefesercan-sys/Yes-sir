@@ -16,7 +16,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 'www.swaphubs.com' },
       { protocol: 'https', hostname: 'swaphubs.com' },
       { protocol: 'https', hostname: 'maps.googleapis.com' },
-      { protocol: 'https', hostname: '**' },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -34,9 +33,10 @@ const nextConfig = {
         permanent: true,
       },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
-      { source: '/terzi/gelinlik-tadilati', destination: '/terzi', permanent: true },
-      { source: '/terzi/gekinlik-tadilati', destination: '/terzi', permanent: true },
-      { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi', permanent: true },
+      // Gelinlik sayfası artık gerçek (app/terzi/gelinlik-tadilati). Yazım hataları ona yönlenir.
+      { source: '/terzi/gekinlik-tadilati', destination: '/terzi/gelinlik-tadilati', permanent: true },
+      { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi/gelinlik-tadilati', permanent: true },
+      { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
       
       // DİKKAT: /terzi/fermuar-degisimi GitHub'da olduğu için YÖNLENDİRİLMİYOR, SERBEST BIRAKILDI.
       // Sadece sonu -antalya ile biten hatalı versiyonunu gerçek sayfasına aktarıyoruz.
@@ -76,8 +76,17 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
+      // Dil başlıkları (tek değer)
+      { source: '/en/(.*)', headers: [{ key: 'Content-Language', value: 'en' }] },
+      { source: '/ru/(.*)', headers: [{ key: 'Content-Language', value: 'ru' }] },
+      { source: '/de/(.*)', headers: [{ key: 'Content-Language', value: 'de' }] },
+
       // Giriş gerektiren sayfalar — noindex
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/panel(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/terzi-panel(.*)',  headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/terzi-admin(.*)',  headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/mesajlar(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
@@ -89,14 +98,12 @@ const nextConfig = {
       {
         source: '/terzi',
         headers: [
-          { key: 'Content-Language', value: 'tr, en, de, ru' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
       {
         source: '/terzi/(.*)',
         headers: [
-          { key: 'Content-Language', value: 'tr, en, ru, de' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
@@ -105,14 +112,12 @@ const nextConfig = {
       {
         source: '/online-terzi-hizmeti',
         headers: [
-          { key: 'Content-Language', value: 'tr, en, de, ru, ar' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
       {
         source: '/online-terzi-hizmeti/(.*)',
         headers: [
-          { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
@@ -121,35 +126,18 @@ const nextConfig = {
       {
         source: '/tekstil-antalya',
         headers: [
-          { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
       {
         source: '/online-tailor-service',
         headers: [
-          { key: 'Content-Language', value: 'en, tr' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
       {
         source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
         headers: [
-          { key: 'Content-Language', value: 'tr, en, ru' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/arimbalim',
-        headers: [
-          { key: 'Content-Language', value: 'tr' },
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/pamuknest(.*)',
-        headers: [
-          { key: 'Content-Language', value: 'tr, en' },
           { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
         ],
       },
