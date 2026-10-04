@@ -18,7 +18,7 @@ const TODAY = new Date().toISOString().split('T')[0]
 const MAPS_CID_URL = 'https://share.google/dsCVIz116FhbjISfz'
 // TODO: Bu embed kodu eski/doğrulanmamış CID'e ait olabilir. Google Maps'te
 // doğru işletmeyi bulup "Paylaş → Haritayı Yerleştir" ile yeni embed kodu alın.
-const MAPS_EMBED = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi!5e0!3m2!1str!2str!4v1'
+const MAPS_EMBED = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed'
 
 // SEO için Konyaaltı mahalleleri
 const KONYAALTI_MAHALLELERI = [
@@ -53,14 +53,14 @@ const jsonLd = {
         postalCode: '07070',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       hasMap: MAPS_CID_URL,
       sameAs: [MAPS_CID_URL],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
         opens: '08:00',
-        closes: '22:00',
+        closes: '23:00',
       }],
       contactPoint: [{
         '@type': 'ContactPoint',
@@ -157,8 +157,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8841;30.7056',
-    ICBM: '36.8841, 30.7056',
+    'geo.position': '36.857466;30.596987',
+    ICBM: '36.857466, 30.596987',
   },
 }
 
@@ -645,7 +645,7 @@ export default function AntalyaTerziPage() {
             <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
                 { icon: '📍', label: 'Adres', value: 'Sarısu, Hurma, Liman, Konyaaltı / Antalya' },
-                { icon: '🕐', label: 'Çalışma Saatleri', value: 'Her gün 08:00 – 22:00' },
+                { icon: '🕐', label: 'Çalışma Saatleri', value: 'Her gün 08:00–23:00' },
                 { icon: '🗺️', label: 'Google Profili', value: 'Google Haritalar\'da görüntüleyin' },
                 { icon: '📞', label: 'Telefon', value: PHONE },
               ].map(({ icon, label, value }) => (
