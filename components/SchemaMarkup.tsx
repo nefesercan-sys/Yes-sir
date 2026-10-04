@@ -7,20 +7,7 @@ const PHONE         = '+90 531 898 64 18';
 const PHONE_E164    = '+905318986418';
 const LAST_MODIFIED = '2026-10-04'; 
 
-// ── Google Business Profil ────────────────────────────────────────────────────
-const GBP_SHARE = 'https://share.google/SyIp3YWAeLtl4wvZq'; 
-const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.07765171764!2d30.6133!3d36.8407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUwJzI2LjUiTiAzMMKwMzYnNDcuOSJF!5e0!3m2!1str!2str!4v1234567890123'; 
-
-const GBP_1 = {
-  cid:    '', 
-  short:  GBP_SHARE,
-  share:  GBP_SHARE,
-  maps:   GBP_SHARE,
-  embed:  MAP_EMBED_URL, 
-  review: GBP_SHARE, 
-  name:   'TERZİ Can Antalya Tailor Service',
-  addr:   'Hurma Mahallesi, 07130 Konyaaltı / Antalya', 
-};
+const GBP_NAME = 'TERZİ Can Antalya Tailor Service';
 
 const PAGE_TITLE = 'Terzi Can Antalya — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
 const PAGE_DESC  =
@@ -44,16 +31,16 @@ const offer = (name: string, price: string) => ({
 });
 
 // ── JSON-LD Verisi ────────────────────────────────────────────────────────────
-const jsonLd = {
+const buildJsonLd = (gbpUrl: string, reviewProps: Record<string, unknown>) => ({
   '@context': 'https://schema.org',
   '@graph': [
     // ── ANA VARLIK: Terzi Can ──
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningOrLaundry'],
       '@id': `${SITE_URL}#business`,
-      name: 'Terzi Can',
+      name: GBP_NAME,
       alternateName: [
-        GBP_1.name,
+        'Terzi Can',
         'Tailor Can Antalya',
         'Портной Кан Анталья',
         'Schneider Can Antalya',
@@ -73,7 +60,6 @@ const jsonLd = {
       knowsLanguage: ['tr', 'en', 'ru', 'de'],
       image: [OG_IMAGE],
       logo: `${HOME_URL}/logo.png`,
-      parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',
@@ -83,15 +69,15 @@ const jsonLd = {
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
-      hasMap: GBP_1.maps,
+      hasMap: gbpUrl,
       sameAs: [
-        GBP_SHARE,
+        gbpUrl,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
-        opens: '08:00', closes: '23:00',
+        opens: '08:00', closes: '22:00',
       }],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -103,7 +89,7 @@ const jsonLd = {
           offer('Elbise Dikimi', '800'),
           offer('Kuru Temizleme', '300'),
           offer('Üniforma Üretimi', '1000'),
-          offer('Eve / Otele Gelen Terzi Servisi', '500'),
+          offer('Eve / Otele Gelen Terzi Servisi', '0'),
         ],
       },
       areaServed: ANTALYA_ILCELER,
@@ -114,28 +100,9 @@ const jsonLd = {
         areaServed: 'TR',
         availableLanguage: ['Turkish','English','Russian','German'],
       }],
-      // 🌟 YILDIZLAR VE 2 YORUM:
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0', 
-        reviewCount: '2'    
-      },
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ahmet Y.' },
-          datePublished: '2026-09-20', 
-          reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Elena M.' },
-          datePublished: '2026-10-02', 
-          reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
-        }
-      ]
+      // NOT: aggregateRating/review YOK. Sadece gerçek, doğrulanabilir yorumlar
+      // aşağıdaki REAL_REVIEWS listesiyle eklenir (bkz. buildReviewProps); `reviews` yerine REAL_REVIEWS listesi kullanılır.
+      ...reviewProps,
     },
 
     // ── WebSite ──
@@ -228,14 +195,42 @@ const jsonLd = {
       ],
     },
   ],
-};
+});
+
+// ── Gerçek yorumlar ───────────────────────────────────────────────────────────
+// SADECE gerçekten alınmış, Google profilinde veya müşteriden yazılı gelen yorumları ekle.
+// Boş bırakılırsa puan/yorum şemaya hiç girmez (doğru olan budur).
+type RealReview = { author: string; rating: number; text: string; date: string };
+const REAL_REVIEWS: RealReview[] = [
+  // { author: 'Ad S.', rating: 5, text: 'Müşterinin gerçek yorumu', date: '2026-09-20' },
+];
+
+function buildReviewProps(): Record<string, unknown> {
+  if (REAL_REVIEWS.length === 0) return {};
+  const avg = REAL_REVIEWS.reduce((s, r) => s + r.rating, 0) / REAL_REVIEWS.length;
+  return {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: avg.toFixed(1),
+      reviewCount: String(REAL_REVIEWS.length),
+      bestRating: '5',
+    },
+    review: REAL_REVIEWS.map(r => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      datePublished: r.date,
+      reviewBody: r.text,
+      reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
+    })),
+  };
+}
 
 // ── Bileşen Çıktısı ───────────────────────────────────────────────────────────
-export default function SchemaMarkup() {
+export default function SchemaMarkup({ gbpUrl }: { gbpUrl: string }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(gbpUrl, buildReviewProps())) }}
     />
   );
 }
