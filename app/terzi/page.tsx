@@ -12,26 +12,36 @@ const SITE_URL      = 'https://swaphubs.com/terzi';
 const HOME_URL      = 'https://swaphubs.com';
 const PHONE         = '+90 531 898 64 18';
 const PHONE_E164    = '+905318986418';
-const LAST_MODIFIED = '2026-10-04'; 
+const LAST_MODIFIED = '2026-10-04';
 
 // ── Google Business Profil ────────────────────────────────────────────────────
-const GBP_SHARE = 'https://share.google/SyIp3YWAeLtl4wvZq'; 
-const MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.07765171764!2d30.6133!3d36.8407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUwJzI2LjUiTiAzMMKwMzYnNDcuOSJF!5e0!3m2!1str!2str!4v1234567890123'; 
+// Kaynak: maps.app.goo.gl/3U3dCZ2iURWFwfJF6  →  ftid 0x14c393757afe22b7:0x5124ac20b20c2685
+const GBP_SHORT = 'https://maps.app.goo.gl/3U3dCZ2iURWFwfJF6';
+const GBP_CID   = '5846987472659818117';
+const GBP_MAPS  = `https://www.google.com/maps?cid=${GBP_CID}`;
+const GBP_NAME  = 'TERZİ Can Antalya Tailor Service';
+const GBP_ADDR  = 'Hurma Mahallesi, 07130 Konyaaltı / Antalya';
+
+// Harita işletme kaydına (ftid) bağlı: pin artık limana değil işletmeye düşer.
+const MAP_EMBED_URL =
+  'https://www.google.com/maps?q=' +
+  encodeURIComponent(`${GBP_NAME}, Hurma, 07130 Konyaaltı/Antalya`) +
+  '&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
 
 const GBP_1 = {
-  cid:    '', 
-  short:  GBP_SHARE,
-  share:  GBP_SHARE,
-  maps:   GBP_SHARE,
-  embed:  MAP_EMBED_URL, 
-  review: GBP_SHARE, 
-  name:   'TERZİ Can Antalya Tailor Service',
-  addr:   'Hurma Mahallesi, 07130 Konyaaltı / Antalya', 
+  cid:    GBP_CID,
+  short:  GBP_SHORT,
+  share:  GBP_SHORT,
+  maps:   GBP_MAPS,
+  embed:  MAP_EMBED_URL,
+  review: GBP_SHORT,
+  name:   GBP_NAME,
+  addr:   GBP_ADDR,
 };
 
 const PAGE_TITLE = 'Terzi Can Antalya — Bay & Bayan Terzi, Özel Dikim, Tadilat, Dikiş Atölyesi 2026';
 const PAGE_DESC  =
-  'Terzi Can Konyaaltı: paça kısaltma ₺150, fermuar değişimi ₺200, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve & otele araçlı terzi servisi. Tüm Antalya ilçeleri. ☎ ' + PHONE;
+  'Terzi Can Konyaaltı: paça kısaltma ₺150, fermuar değişimi ₺200, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve & otele ücretsiz terzi servisi. Her gün 08:00–23:00. ☎ ' + PHONE;
 
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
@@ -59,7 +69,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can',
       alternateName: [
-        GBP_1.name,
+        GBP_NAME,
         'Tailor Can Antalya',
         'Портной Кан Анталья',
         'Schneider Can Antalya',
@@ -69,7 +79,7 @@ const jsonLd = {
         'Dikiş Atölyesi Antalya',
       ],
       description:
-        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Tüm Antalya ilçelerine araçlı terzi servisi.",
+        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve ve otele ücretsiz terzi servisi.",
       url: SITE_URL,
       mainEntityOfPage: { '@id': `${SITE_URL}#webpage` },
       telephone: PHONE_E164,
@@ -88,15 +98,15 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8851, longitude: 30.6930 },
-      hasMap: GBP_1.maps,
+      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      hasMap: GBP_MAPS,
       sameAs: [
-        GBP_SHARE,
+        GBP_MAPS,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
         opens: '08:00', closes: '23:00',
       }],
       hasOfferCatalog: {
@@ -109,7 +119,7 @@ const jsonLd = {
           offer('Elbise Dikimi', '800'),
           offer('Kuru Temizleme', '300'),
           offer('Üniforma Üretimi', '1000'),
-          offer('Eve / Otele Gelen Terzi Servisi', '500'),
+          offer('Eve / Otele Gelen Terzi Servisi (ücretsiz)', '0'),
         ],
       },
       areaServed: ANTALYA_ILCELER,
@@ -120,31 +130,32 @@ const jsonLd = {
         areaServed: 'TR',
         availableLanguage: ['Turkish','English','Russian','German'],
       }],
-      // 🌟 YILDIZLAR VE 2 YORUM EKLENDİ:
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '5.0', 
-        reviewCount: '2'    
+        ratingValue: '5.0',
+        reviewCount: '2',
+        bestRating: '5',
+        worstRating: '1',
       },
       review: [
         {
           '@type': 'Review',
           author: { '@type': 'Person', name: 'Ahmet Y.' },
-          datePublished: '2026-09-20', 
+          datePublished: '2026-09-20',
           reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
+          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
         },
         {
           '@type': 'Review',
           author: { '@type': 'Person', name: 'Elena M.' },
-          datePublished: '2026-10-02', 
+          datePublished: '2026-10-02',
           reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' }
-        }
-      ]
+          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
+        },
+      ],
     },
 
-    // ── WebSite: /terzi kendi başına bir site varlığı ──
+    // ── WebSite ──
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}#website`,
@@ -175,7 +186,6 @@ const jsonLd = {
       mainEntity: { '@id': `${SITE_URL}#business` },
     },
 
-    // Breadcrumb: Terzi Can birinci sırada
     {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
@@ -188,7 +198,7 @@ const jsonLd = {
       '@type': 'HowTo',
       '@id': `${SITE_URL}#howto-olcu`,
       name: 'Terzi Can ile Adrese Gelen Terzi Servisi Nasıl Çalışır?',
-      description: 'Araçlı terzi servisimizle adresinizde ölçü alma ve teslimat süreci.',
+      description: 'Ücretsiz eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
       step: [
         { '@type': 'HowToStep', name: 'WhatsApp ile iletişim', text: `WhatsApp ${PHONE} üzerinden adresinizi ve hizmet talebinizi bildirin.` },
         { '@type': 'HowToStep', name: 'Terzi adresinize gelir', text: 'Anlaşılan saatte terzimiz adresinize gelir, yerinde ölçü alır.' },
@@ -217,11 +227,12 @@ const jsonLd = {
       '@id': `${SITE_URL}#faq`,
       mainEntity: [
         { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺150 / €5'den başlar, aynı gün teslim. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp 24 saat içinde otele teslim ediyoruz. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, eve ve otele servis ücretsizdir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp 24 saat içinde otele teslim ediyoruz. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Çalışma saatleriniz nedir?', acceptedAnswer: { '@type': 'Answer', text: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Hangi ödeme yöntemleri ve para birimleri geçerli?', acceptedAnswer: { '@type': 'Answer', text: 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.' } },
         { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Aynı gün teslim mümkün. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺150 / €5'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Tüm Antalya. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis ücretsizdir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
@@ -235,7 +246,7 @@ const jsonLd = {
 // ── Metadata ──────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: PAGE_TITLE }, 
+  title: { absolute: PAGE_TITLE },
   description: PAGE_DESC,
   applicationName: 'Terzi Can',
   keywords: [
@@ -267,7 +278,7 @@ export const metadata: Metadata = {
     title: PAGE_TITLE,
     description: PAGE_DESC,
     url: SITE_URL,
-    siteName: 'Terzi Can Antalya', 
+    siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can Antalya', type: 'image/jpeg' }],
@@ -281,8 +292,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.8851;30.6930',
-    ICBM: '36.8851, 30.6930',
+    'geo.position': '36.857466;30.596987',
+    ICBM: '36.857466, 30.596987',
     'content-language': 'tr',
   },
   verification: {
