@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import BusinessSchema from '@/components/BusinessSchema';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────
 const BASE_URL        = 'https://swaphubs.com';
@@ -14,7 +15,7 @@ const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Kony
 const MAPS_REVIEW     = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
 const MAPS_EMBED      = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.7056!3d36.8841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39339b5158cfb%3A0xeaaa1afa8df430c0!2sKonyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat!5e0!3m2!1sru!2str!4v1';
 const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
-const TODAY           = new Date().toISOString().split('T')[0];
+const TODAY = '2026-10-04';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Хочу узнать об услугах ателье (ремонт/пошив).');
 
@@ -30,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: 'Ателье Анталия Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–22:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -70,64 +71,12 @@ export const metadata: Metadata = {
 };
 
 // ─── JSON-LD ─────────────────────────────────────────────────────
-const jsonLd = {
-  // ... (JSON-LD içeriğiniz aynı kalıyor, buraya dokunmadım çünkü kusursuz)
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['LocalBusiness', 'ClothingStore'],
-      '@id': `${PAGE_URL}#business`,
-      name: GBP_NAME,
-      alternateName: ['Terzi Can','Ателье Коньяалты','Портной Анталья','Ремонт одежды Анталия'],
-      description: 'Профессиональное ателье в Коньяалты, Анталия. Ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски.',
-      url: PAGE_URL, telephone: PHONE_TEL, priceRange: '₺₺',
-      currenciesAccepted: 'TRY, EUR, USD, RUB',
-      paymentAccepted: 'Cash, Credit Card',
-      image: OG_IMAGE, hasMap: MAPS_URL,
-      sameAs: [MAPS_SHORT, MAPS_URL, `${BASE_URL}/terzi`],
-      address: { '@type': 'PostalAddress', streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8841, longitude: 30.7056 },
-      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
-      areaServed: ['Konyaaltı','Hurma','Liman','Sarısu','Lara','Belek','Kemer','Antalya'].map(n => ({ '@type': 'Place', name: n })),
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Услуги ателье',
-        itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, price: '150', priceCurrency: 'TRY' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Замена молнии' }, price: '200', priceCurrency: 'TRY' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Подгонка по фигуре' }, price: '150', priceCurrency: 'TRY' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Пошив платья' }, price: '600', priceCurrency: 'TRY' },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Химчистка' }, price: '300', priceCurrency: 'TRY' },
-        ],
-      },
-      knowsLanguage: ['tr','ru','en'],
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Где находится ателье в Анталии?', acceptedAnswer: { '@type': 'Answer', text: 'Ателье Terzi Can находится в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' } },
-        { '@type': 'Question', name: 'Говорят ли в ателье по-русски?', acceptedAnswer: { '@type': 'Answer', text: 'Да! Принимаем заказы на русском языке через WhatsApp. Пишите — ответим быстро.' } },
-        { '@type': 'Question', name: 'Сколько стоит укоротить брюки в Анталии?', acceptedAnswer: { '@type': 'Answer', text: 'Укорачивание брюк от ₺150. Точную цену скажем по фото в WhatsApp.' } },
-        { '@type': 'Question', name: 'Есть ли выездной портной?', acceptedAnswer: { '@type': 'Answer', text: 'Да, выездной портной работает по всей Анталии. Заберём вещи на дом или в отель.' } },
-      ],
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
-        { '@type': 'ListItem', position: 3, name: 'Ателье на русском', item: PAGE_URL },
-      ],
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${PAGE_URL}#webpage`,
-      name: 'Ателье Анталия Коньяалты — Говорим по-русски | Terzi Can',
-      url: PAGE_URL, inLanguage: 'ru', dateModified: TODAY,
-      about: { '@id': `${PAGE_URL}#business` },
-    },
-  ],
-};
+const FAQ = [
+  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
+  { q: 'Говорят ли в ателье по-русски?', a: 'Да! Принимаем заказы на русском языке через WhatsApp. Пишите — ответим быстро.' },
+  { q: 'Сколько стоит укоротить брюки в Анталии?', a: 'Укорачивание брюк от ₺150. Точную цену скажем по фото в WhatsApp.' },
+  { q: 'Есть ли выездной портной?', a: 'Да, выездной портной работает по всей Анталии. Заберём вещи на дом или в отель.' },
+];
 
 // ─── SERVICES DATA ────────────────────────────────────────────────
 const SERVICES = [
@@ -153,7 +102,16 @@ const FAQS = [
 export default function RuAtelieAntalyaPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BusinessSchema
+        path='/ru/atelie-antalya-online'
+        name='Ателье Анталия Коньяалты — Говорим по-русски | Terzi Can'
+        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски. Ежедневно 08:00–22:00.'
+        lang={'ru'}
+        lastModified={TODAY}
+        breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Ателье на русском', path: '/ru/atelie-antalya-online' }]}
+        faq={FAQ}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+      />
 
       <main style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
         <style>{`
@@ -180,7 +138,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
+          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–22:00
         </div>
 
         {/* ── HERO ── */}
