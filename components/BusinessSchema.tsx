@@ -37,9 +37,10 @@ export default function BusinessSchema({
 }: Props) {
   const url = `${SITE_URL}${path}`;
   const b = BUSINESS;
+  const formattedPhone = b.phone.replace('+', ''); // WhatsApp URL'si için '+' işaretini kaldırır
 
   const business: Record<string, unknown> = {
-    '@type': ['LocalBusiness', 'ClothingStore'],
+    '@type': ['LocalBusiness', 'ClothingStore', 'Tailor'],
     '@id': b.id,
     name: b.name,
     alternateName: [...b.alternateName, ...alternateNames],
@@ -59,6 +60,24 @@ export default function BusinessSchema({
       dayOfWeek: b.hours.days, opens: b.hours.opens, closes: b.hours.closes,
     }],
     sameAs: b.sameAs,
+    
+    // 🌟 YAPAY ZEKA (GEO) VE DOĞRUDAN EYLEM OPTİMİZASYONU 🌟
+    potentialAction: [
+      {
+        '@type': 'CommunicateAction',
+        name: "WhatsApp'tan Resim At, Fiyat Al",
+        target: `https://wa.me/${formattedPhone}?text=${encodeURIComponent('Merhaba, kıyafetimin fotoğrafını gönderip fiyat almak istiyorum.')}`,
+      },
+      {
+        '@type': 'ReserveAction',
+        name: 'Otele veya Adrese Terzi Çağır',
+        target: `https://wa.me/${formattedPhone}?text=${encodeURIComponent('Merhaba, bulunduğum adrese/otele terzi kurye çağırmak istiyorum.')}`,
+      }
+    ],
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.ai-speakable', '#quick-actions', '#hizmet-fiyatlari', '#sik-sorulan-sorular'],
+    },
   };
 
   if (areaServed?.length) business.areaServed = areaServed.map(n => ({ '@type': 'City', name: n }));
