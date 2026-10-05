@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/uniforma-uretimi-antalya';
@@ -87,7 +88,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul Sağlık · Seri İmalat 2026 | Terzi Can',
+  title: { absolute: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul Sağlık · Seri İmalat 2026 | Terzi Can' },
   description: "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden. Min 10 adet. ☎ " + PHONE,
   keywords: [
     'üniforma üretimi Antalya', 'otel üniforması Antalya', 'aşçı üniforması Antalya',
@@ -132,6 +133,8 @@ export default function UniformaUretimiPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+
+        <QuickActionBanner lang="tr" service="uniforma" />
 
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
