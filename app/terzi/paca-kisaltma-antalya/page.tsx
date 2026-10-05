@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/paca-kisaltma-antalya';
@@ -76,7 +77,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: 'Paça Kısaltma Antalya · Kot Paça ₺150 · Pantolon Kısaltma Fiyatları 2026 | Terzi Can',
+  title: { absolute: 'Paça Kısaltma Antalya · Kot Paça ₺150 · Pantolon Kısaltma Fiyatları 2026 | Terzi Can' },
   description: "Antalya paça kısaltma fiyatları 2026: kot paça ₺150, kumaş pantolon ₺175. 24 saatte teslim. Eve ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya. ☎ +90 531 898 64 18",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
@@ -124,6 +125,7 @@ export default function PacaKisaltmaPage() {
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         {/* BREADCRUMB */}
+        <QuickActionBanner lang="tr" service="paca" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
