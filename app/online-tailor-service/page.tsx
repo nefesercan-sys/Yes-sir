@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import OnlineTailorClient from './OnlineTailorClient';
 
@@ -30,7 +31,7 @@ const GBP2 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring · Ironing Service',
+  title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quick Quote · Hotel Pickup | Terzi Can' },
   description:
     'Konyaaltı-based online tailor service. Menswear & womenswear tailoring, ironing, repairs, alterations, ' +
     'mass production. Shipping across Turkey. Order via WhatsApp. ☎ ' + PHONE,
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
     description: 'Menswear & womenswear tailoring, ironing, repairs, alterations, mass production. Shipping across Turkey.',
-    url: SITE_URL, siteName: 'SwapHubs', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
+    url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Tailor Service Antalya', type: 'image/jpeg' }],
   },
   robots: {
@@ -98,6 +99,7 @@ export default function OnlineTailorServicePage() {
         faq={FAQ}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
+      <QuickActionBanner lang="en" />
       <OnlineTailorClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}
