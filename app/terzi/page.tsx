@@ -1,329 +1,370 @@
-import type { Metadata, Viewport } from 'next';
-import TerziClient from './TerziClient';
+import type { Metadata } from 'next';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import Link from 'next/link';
+import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
-// ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  themeColor: '#ffffff',
-};
+// ── Sabitler ──────────────────────────────────────────────────────────────
+const BASE_URL  = 'https://swaphubs.com';
+const SITE_URL  = `${BASE_URL}/terzi/fermuar-degisimi`;
+const PARENT    = `${BASE_URL}/terzi`;
+const PHONE     = '+90 531 898 64 18';
+const PHONE_E   = '+905318986418';
+const GBP_URL   = 'https://share.google/dsCVIz116FhbjISfz'; // TERZİ Can Antalya Tailor Service
+const HOURS     = '08:00–23:00';
+const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
-const SITE_URL      = 'https://swaphubs.com/terzi';
-const HOME_URL      = 'https://swaphubs.com';
-const PHONE         = '+90 531 898 64 18';
-const PHONE_E164    = '+905318986418';
-const LAST_MODIFIED = '2026-10-04';
+// ── Renkler / yazı tipi (açık, modern tema) ──────────────────────────────
+const GREEN  = '#2d8c6e';
+const INK    = '#1f2a24';
+const TEXT   = '#3b4a42';
+const MUTED  = '#6b7a72';
+const SOFT   = '#f4faf7';
+const BORDER = '#e3ece7';
+const FONT   = "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 
-// ── Google Business Profil ────────────────────────────────────────────────────
-// Kaynak: maps.app.goo.gl/3U3dCZ2iURWFwfJF6  →  ftid 0x14c393757afe22b7:0x5124ac20b20c2685
-const GBP_SHORT = 'https://maps.app.goo.gl/3U3dCZ2iURWFwfJF6';
-const GBP_CID   = '5846987472659818117';
-const GBP_MAPS  = `https://www.google.com/maps?cid=${GBP_CID}`;
-const GBP_NAME  = 'TERZİ Can Antalya Tailor Service';
-const GBP_ADDR  = 'Hurma Mahallesi, 07130 Konyaaltı / Antalya';
+// ── Görünür içerik = şema içeriği (aynı kaynak) ──────────────────────────
+const FAQ: { q: string; a: string }[] = [
+  {
+    q: 'Antalya\'da fermuar değişimi ne kadar?',
+    a: 'Fermuar değişimi 200 TL\'den başlar. Fiyat kıyafetin türüne, fermuarın boyuna ve işlemin zorluğuna göre değişir. WhatsApp\'tan fermuarın fotoğrafını gönderirseniz kesin fiyatı bildiririz.',
+  },
+  {
+    q: 'Fermuar değişimi kaç saatte biter?',
+    a: 'Normal şartlarda 24 saat içinde teslim ederiz, acil durumlarda aynı gün teslim mümkündür. Fermuarın temin süresine ve yoğunluğa göre değişebilir; acil ihtiyacınızı yazarken belirtin.',
+  },
+  {
+    q: 'Akşam ve hafta sonu açık mısınız?',
+    a: `Evet, haftanın her günü ${HOURS} saatleri arasında hizmet veriyoruz.`,
+  },
+  {
+    q: 'Mont ve ceket fermuarı da değişiyor mu?',
+    a: 'Evet, mont, kaban, ceket ve blazer fermuarlarını değiştiriyoruz. Deri ürünlerde işlem özel olduğu için önce fotoğrafa bakıp fiyat veriyoruz.',
+  },
+  {
+    q: 'Fermuar tamir edilir mi, yoksa değişim mi gerekir?',
+    a: 'Dişler sağlamsa ve yalnızca kaydırıcı bozulduysa tamir yeterli olabilir. Dişler kopmuş, açılmış ya da çevresindeki kumaş yırtılmışsa fermuarın tamamen değişmesi gerekir. Fotoğrafa bakıp doğru yöntemi söyleriz.',
+  },
+  {
+    q: 'Adrese gelip kıyafeti alıyor musunuz?',
+    a: 'Konyaaltı başta olmak üzere Antalya genelinde adresten alım ve teslim servisimiz var. Bölgenizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.',
+  },
+];
 
-// Harita işletme kaydına (ftid) bağlı: pin artık limana değil işletmeye düşer.
-const MAP_EMBED_URL =
-  'https://www.google.com/maps?q=' +
-  encodeURIComponent(`${GBP_NAME}, Hurma, 07130 Konyaaltı/Antalya`) +
-  '&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
+const FERMUAR_TURLERI: { ic: string; baslik: string; aciklama: string }[] = [
+  { ic: '👖', baslik: 'Pantolon & Kot', aciklama: 'Ön fermuar değişimi; kot pantolonlarda dayanıklı fermuar ve düzgün dikiş.' },
+  { ic: '👗', baslik: 'Elbise', aciklama: 'Sırt ve yan fermuarlar, gizli fermuar değişimi; kumaşa zarar vermeden.' },
+  { ic: '🩳', baslik: 'Etek & Şort', aciklama: 'Yan ve arka fermuar değişimi, bel hattına uygun yerleşim.' },
+  { ic: '🧥', baslik: 'Mont & Kaban', aciklama: 'Uzun mont ve kaban fermuarlarının değişimi, astar ve kumaş korunarak.' },
+  { ic: '🥼', baslik: 'Ceket & Blazer', aciklama: 'Ceket ve blazer fermuarları; ön kapama ve cep fermuarları.' },
+  { ic: '🧵', baslik: 'Deri Ürünler', aciklama: 'Deri mont ve ceket fermuarları özel işlemdir; fotoğrafa göre fiyat verilir.' },
+];
 
-const GBP_1 = {
-  cid:    GBP_CID,
-  short:  GBP_SHORT,
-  share:  GBP_SHORT,
-  maps:   GBP_MAPS,
-  embed:  MAP_EMBED_URL,
-  review: GBP_SHORT,
-  name:   GBP_NAME,
-  addr:   GBP_ADDR,
-};
+const ADIMLAR: { no: string; baslik: string; aciklama: string }[] = [
+  { no: '1', baslik: 'Fotoğraf gönderin', aciklama: 'Bozuk fermuarın ve kıyafetin fotoğrafını WhatsApp\'tan yollayın.' },
+  { no: '2', baslik: 'Fiyat ve süre netleşir', aciklama: 'Fermuar türüne göre kesin fiyatı ve teslim süresini size bildiririz.' },
+  { no: '3', baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakabilir veya adresten alım için bizimle konuşabilirsiniz.' },
+  { no: '4', baslik: 'Teslim', aciklama: 'Normal şartlarda 24 saatte, acil durumda aynı gün hazır olur.' },
+];
 
-const PAGE_TITLE = "Antalya Terzi · Fotoğraf At, Fiyat Al · Otele Terzi Çağır | Terzi Can";
-const PAGE_DESC  =
-  "Terzi Can Konyaaltı: WhatsApp'tan fotoğraf at, hızlı fiyat al. Adresten alıp adrese teslim, otele terzi çağır. Paça kısaltma ₺150, fermuar değişimi ₺200. Her gün 08:00–23:00. ☎ " + PHONE;
+const DIGER_HIZMETLER: { href: string; ad: string }[] = [
+  { href: '/terzi/paca-kisaltma-antalya', ad: 'Paça kısaltma' },
+  { href: '/terzi/bay-terzi-antalya', ad: 'Bay terzi' },
+  { href: '/terzi/bayan-terzi-antalya', ad: 'Bayan terzi' },
+  { href: '/terzi/eve-gelen-terzi-antalya', ad: 'Eve gelen terzi' },
+  { href: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', ad: 'Tamirat ve ütü hizmetleri' },
+  { href: '/terzi', ad: 'Tüm terzi hizmetleri' },
+];
 
-const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
-
-const ANTALYA_ILCELER = [
-  'Antalya','Konyaaltı','Muratpaşa','Kepez','Döşemealtı','Aksu',
-  'Lara','Belek','Kemer','Alanya','Manavgat','Side','Serik',
-  'Kaş','Kalkan','Finike','Kumluca','Gazipaşa','Mahmutlar',
-  'Kundu','Boğazkent','Kadriye','Beldibi','Göynük','Tekirova',
-].map(name => ({ '@type': 'City', name }));
-
-const offer = (name: string, price: string) => ({
-  '@type': 'Offer',
-  itemOffered: { '@type': 'Service', name, areaServed: ANTALYA_ILCELER },
-  price,
-  priceCurrency: 'TRY',
-  availability: 'https://schema.org/InStock',
-});
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    // ── ANA VARLIK: Terzi Can ──
-    {
-      '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningOrLaundry'],
-      '@id': `${SITE_URL}#business`,
-      name: 'Terzi Can',
-      alternateName: [
-        GBP_NAME,
-        'Tailor Can Antalya',
-        'Портной Кан Анталья',
-        'Schneider Can Antalya',
-        'Konyaaltı Terzi Can',
-        'Bay Terzi Antalya',
-        'Bayan Terzi Antalya',
-        'Dikiş Atölyesi Antalya',
-      ],
-      description:
-        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve ve otele ücretsiz terzi servisi.",
-      url: SITE_URL,
-      mainEntityOfPage: { '@id': `${SITE_URL}#webpage` },
-      telephone: PHONE_E164,
-      priceRange: '$$',
-      currenciesAccepted: 'TRY, EUR, USD, RUB',
-      paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
-      image: [OG_IMAGE],
-      logo: `${HOME_URL}/logo.png`,
-      parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mahallesi',
-        addressLocality: 'Konyaaltı',
-        addressRegion: 'Antalya',
-        postalCode: '07130',
-        addressCountry: 'TR',
-      },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
-      hasMap: GBP_MAPS,
-      sameAs: [
-        GBP_MAPS,
-        `https://wa.me/${PHONE_E164.replace('+', '')}`,
-      ],
-      openingHoursSpecification: [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-        opens: '08:00', closes: '23:00',
-      }],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Terzi Can — Tüm Terzilik ve Tekstil Hizmetleri 2026',
-        itemListElement: [
-          offer('Paça Kısaltma', '150'),
-          offer('Fermuar Değişimi', '200'),
-          offer('Bel Daraltma', '150'),
-          offer('Elbise Dikimi', '800'),
-          offer('Kuru Temizleme', '300'),
-          offer('Üniforma Üretimi', '1000'),
-          offer('Eve / Otele Gelen Terzi Servisi (ücretsiz)', '0'),
-        ],
-      },
-      potentialAction: [
-        {
-          '@type': 'CommunicateAction',
-          name: "WhatsApp'tan fotoğraf at, fiyat al",
-          target: { '@type': 'EntryPoint', urlTemplate: `https://wa.me/${PHONE_E164.replace('+', '')}?text=${encodeURIComponent("Merhaba, kıyafetimin fotoğrafını gönderiyorum. Fiyat alabilir miyim?")}` },
-        },
-        {
-          '@type': 'CommunicateAction',
-          name: 'Otele terzi çağır',
-          target: { '@type': 'EntryPoint', urlTemplate: `https://wa.me/${PHONE_E164.replace('+', '')}?text=${encodeURIComponent("Merhaba, kaldığım otele terzi çağırmak istiyorum.")}` },
-        },
-      ],
-      areaServed: ANTALYA_ILCELER,
-      contactPoint: [{
-        '@type': 'ContactPoint',
-        telephone: PHONE_E164,
-        contactType: 'customer service',
-        areaServed: 'TR',
-        availableLanguage: ['Turkish','English','Russian','German'],
-      }],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: '2',
-        bestRating: '5',
-        worstRating: '1',
-      },
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ahmet Y.' },
-          datePublished: '2026-09-20',
-          reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Elena M.' },
-          datePublished: '2026-10-02',
-          reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-      ],
-    },
-
-    // ── WebSite ──
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE_URL}#website`,
-      name: 'Terzi Can Antalya',
-      alternateName: 'Terzi Can',
-      url: SITE_URL,
-      inLanguage: 'tr',
-      publisher: { '@id': `${SITE_URL}#business` },
-    },
-
-    {
-      '@type': 'WebPage',
-      '@id': `${SITE_URL}#webpage`,
-      name: PAGE_TITLE,
-      url: SITE_URL,
-      isPartOf: { '@id': `${SITE_URL}#website` },
-      about: { '@id': `${SITE_URL}#business` },
-      primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE },
-      description: PAGE_DESC,
-      inLanguage: 'tr',
-      datePublished: '2024-01-01',
-      dateModified: LAST_MODIFIED,
-      breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
-      speakable: {
-        '@type': 'SpeakableSpecification',
-        cssSelector: ['.hero-slogan', '#quick-actions', '#hizmet-fiyatlari', '#sik-sorulan-sorular', '#terzi-can-ozet'],
-      },
-      mainEntity: { '@id': `${SITE_URL}#business` },
-    },
-
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${SITE_URL}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Terzi Can Antalya', item: SITE_URL },
-      ],
-    },
-
-    {
-      '@type': 'HowTo',
-      '@id': `${SITE_URL}#howto-olcu`,
-      name: 'Terzi Can ile Adrese Gelen Terzi Servisi Nasıl Çalışır?',
-      description: 'Ücretsiz eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
-      step: [
-        { '@type': 'HowToStep', name: 'WhatsApp ile iletişim', text: `WhatsApp ${PHONE} üzerinden adresinizi ve hizmet talebinizi bildirin.` },
-        { '@type': 'HowToStep', name: 'Terzi adresinize gelir', text: 'Anlaşılan saatte terzimiz adresinize gelir, yerinde ölçü alır.' },
-        { '@type': 'HowToStep', name: 'Atölyede tamamlanır', text: 'Ölçülere göre kıyafetiniz atölyemizde özenle dikilir veya tadilatı yapılır.' },
-        { '@type': 'HowToStep', name: 'Adresinize teslim', text: 'Tamamlanan kıyafet anlaşılan vakitte adresinize teslim edilir.' },
-      ],
-    },
-
-    {
-      '@type': 'ItemList',
-      '@id': `${SITE_URL}#hizmet-listesi`,
-      name: 'Terzi Can Hizmetleri — Antalya Terzi 2026',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Bay Terzi — Erkek Kıyafet Dikimi',       item: { '@id': `${HOME_URL}/terzi/bay-terzi-antalya` } },
-        { '@type': 'ListItem', position: 2, name: 'Bayan Terzi — Kadın Elbise Dikimi',      item: { '@id': `${HOME_URL}/terzi/bayan-terzi-antalya` } },
-        { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: { '@id': `${HOME_URL}/terzi/paca-kisaltma-antalya` } },
-        { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', item: { '@id': `${HOME_URL}/terzi/dikis-atolyesi-antalya` } },
-        { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       item: { '@id': `${HOME_URL}/terzi/uniforma-uretimi-antalya` } },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  item: { '@id': `${HOME_URL}/terzi/kuru-temizleme-antalya` } },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                item: { '@id': `${HOME_URL}/terzi/eve-gelen-terzi-antalya` } },
-      ],
-    },
-
-    {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}#faq`,
-      mainEntity: [
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺150 / €5'den başlar, aynı gün teslim. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, eve ve otele servis ücretsizdir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp 24 saat içinde otele teslim ediyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Çalışma saatleriniz nedir?', acceptedAnswer: { '@type': 'Answer', text: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Hangi ödeme yöntemleri ve para birimleri geçerli?', acceptedAnswer: { '@type': 'Answer', text: 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.' } },
-        { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Aynı gün teslim mümkün. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺150 / €5'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis ücretsizdir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Kuru temizleme ve ütü Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. 24 saat ekspres.' } },
-        { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.' } },
-      ],
-    },
-  ],
-};
-
-// ── Metadata ──────────────────────────────────────────────────────────────────
+// ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL(HOME_URL),
-  title: { absolute: PAGE_TITLE },
-  description: PAGE_DESC,
-  applicationName: 'Terzi Can',
+  metadataBase: new URL(BASE_URL),
+  title: { absolute: 'Fermuar Değişimi Antalya · 200 TL\'den · Her Gün 08–23 | Terzi Can' },
+  description:
+    'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
+    '200 TL\'den başlayan fiyatlar, 24 saatte teslim, acil durumda aynı gün. Haftanın her günü 08:00–23:00. WhatsApp: ' + PHONE,
   keywords: [
-    'Antalya terzi','Konyaaltı terzi','terzi Antalya 2026','bay terzi Antalya','bayan terzi Antalya',
-    'paça kısaltma Antalya','fermuar değişimi Antalya','bel daraltma Antalya',
-    'özel dikim Antalya','eve gelen terzi Antalya','otele gelen terzi Antalya',
-    'dikiş atölyesi Antalya','üniforma üretimi Antalya','kuru temizleme Antalya',
-    'tailor Antalya','English speaking tailor Antalya','портной Анталья','Schneider Antalya',
-    'yakınımda terzi','en yakın terzi','Terzi Can',
+    'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
+    'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
   ],
-  authors: [{ name: 'Terzi Can', url: SITE_URL }],
-  creator: 'Terzi Can',
-  publisher: 'Terzi Can',
-  robots: {
-    index: true, follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
-  },
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      'tr': `${HOME_URL}/terzi`,
-      'en': `${HOME_URL}/online-tailor-service`,
-      'de': `${HOME_URL}/de/online-schneiderservice-antalya`,
-      'ru': `${HOME_URL}/ru/atelie-antalya`,
-      'x-default': `${HOME_URL}/terzi`,
-    },
-  },
+  alternates: { canonical: SITE_URL },
   openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESC,
+    title: 'Fermuar Değişimi Antalya · 200 TL\'den | Terzi Can',
+    description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–23:00, Konyaaltı / Antalya.',
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can Antalya', type: 'image/jpeg' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: PAGE_TITLE,
-    description: PAGE_DESC,
-    images: [OG_IMAGE],
-  },
-  other: {
-    'geo.region': 'TR-07',
-    'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987',
-    ICBM: '36.857466, 30.596987',
-    'content-language': 'tr',
-  },
-  verification: {
-    yandex: '4c73ee1911a4b197',
-    other: { 'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
 };
 
-export default function TerziPage() {
+// ── JSON-LD (yalnızca bu server component'te) ────────────────────────────
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${SITE_URL}#service`,
+      name: 'Fermuar Değişimi Antalya',
+      serviceType: 'Fermuar değişimi',
+      description:
+        'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
+        'Normal şartlarda 24 saatte teslim, acil durumda aynı gün.',
+      url: SITE_URL,
+      inLanguage: 'tr',
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Konyaaltı' },
+        { '@type': 'City', name: 'Antalya' },
+      ],
+      provider: {
+        '@type': ['LocalBusiness', 'ClothingStore'],
+        '@id': `${PARENT}#business`,
+        name: 'TERZİ Can Antalya Tailor Service',
+        url: PARENT,
+        telephone: PHONE_E,
+        hasMap: GBP_URL,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Konyaaltı',
+          addressRegion: 'Antalya',
+          addressCountry: 'TR',
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            opens: '08:00',
+            closes: '23:00',
+          },
+        ],
+        sameAs: [GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
+      },
+      offers: {
+        '@type': 'Offer',
+        name: 'Fermuar değişimi (başlangıç fiyatı)',
+        price: '200',
+        priceCurrency: 'TRY',
+        availability: 'https://schema.org/InStock',
+        url: SITE_URL,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${SITE_URL}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi', item: PARENT },
+        { '@type': 'ListItem', position: 3, name: 'Fermuar Değişimi', item: SITE_URL },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${SITE_URL}#faq`,
+      mainEntity: FAQ.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+
+// ── Sayfa ─────────────────────────────────────────────────────────────────
+export default function FermuarDegisimiPage() {
+  const btnGreen = {
+    display: 'inline-block', background: GREEN, color: '#fff', padding: '.85rem 1.6rem', borderRadius: 10,
+    fontWeight: 700, fontSize: '.95rem', textDecoration: 'none',
+  } as const;
+  const btnLine = {
+    display: 'inline-block', background: '#fff', color: INK, padding: '.85rem 1.4rem', borderRadius: 10,
+    fontWeight: 600, fontSize: '.95rem', textDecoration: 'none', border: `1px solid ${BORDER}`,
+  } as const;
+  const h2 = { fontSize: 'clamp(1.35rem,3vw,1.75rem)', color: INK, margin: '0 0 .6rem', fontWeight: 800, letterSpacing: '-.01em' } as const;
+  const wrap = { maxWidth: 960, margin: '0 auto' } as const;
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <QuickActionBanner lang="tr" />
-      <TerziClient gbp1={GBP_1} />
-    </>
+    <main style={{ fontFamily: FONT, color: TEXT, background: '#fff', lineHeight: 1.65 }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      <QuickActionBanner lang="tr" service="fermuar" />
+      {/* HERO */}
+      <section style={{ background: SOFT, borderBottom: `1px solid ${BORDER}`, padding: '2.2rem 1.25rem 2.6rem' }}>
+        <div style={wrap}>
+          <nav aria-label="Sayfa yolu" style={{ fontSize: '.8rem', color: MUTED, marginBottom: '1.1rem' }}>
+            <Link href="/" style={{ color: MUTED, textDecoration: 'none' }}>SwapHubs</Link>
+            {' › '}
+            <Link href="/terzi" style={{ color: MUTED, textDecoration: 'none' }}>Antalya Terzi</Link>
+            {' › '}
+            <span style={{ color: INK }}>Fermuar Değişimi</span>
+          </nav>
+
+          <div style={{ display: 'inline-block', background: '#fff', border: `1px solid ${BORDER}`, color: GREEN, fontSize: '.8rem', fontWeight: 700, padding: '.3rem .8rem', borderRadius: 999, marginBottom: '1rem' }}>
+            🕗 Haftanın her günü {HOURS}
+          </div>
+
+          <h1 style={{ fontSize: 'clamp(2rem,6vw,3rem)', lineHeight: 1.1, color: INK, margin: '0 0 1rem', fontWeight: 800, letterSpacing: '-.02em' }}>
+            Fermuar Değişimi Antalya
+          </h1>
+
+          <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}>
+            <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı&apos;nda pantolon, kot, elbise, etek, mont ve ceket
+            fermuarlarını <strong>200 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 24 saatte,
+            acil durumda aynı gün teslim; haftanın her günü {HOURS} arası açıktır.
+          </p>
+
+          <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap' }}>
+            <a href={WA('Merhaba, fermuar değişimi için fiyat almak istiyorum. Fotoğrafı gönderiyorum.')}
+               target="_blank" rel="noopener noreferrer" style={btnGreen}>
+              💬 Fotoğraf Gönder, Fiyat Al
+            </a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+          </div>
+        </div>
+      </section>
+
+      {/* HIZLI BİLGİ */}
+      <section style={{ padding: '2rem 1.25rem 0' }}>
+        <div style={{ ...wrap, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '.8rem' }}>
+          {[
+            ['Başlangıç fiyatı', '200 TL\'den'],
+            ['Teslim süresi', '24 saat · acilde aynı gün'],
+            ['Çalışma saatleri', `Her gün ${HOURS}`],
+            ['Servis bölgesi', 'Konyaaltı ve Antalya geneli'],
+          ].map(([k, v]) => (
+            <div key={k} style={{ border: `1px solid ${BORDER}`, borderRadius: 12, padding: '1rem 1.1rem', background: '#fff' }}>
+              <div style={{ fontSize: '.72rem', color: MUTED, textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.25rem' }}>{k}</div>
+              <div style={{ fontWeight: 700, color: INK }}>{v}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HANGİ FERMUARLAR */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Hangi kıyafetlerin fermuarını değiştiriyoruz?</h2>
+          <p style={{ margin: '0 0 1.2rem', color: MUTED }}>
+            Fermuar değişimi; kumaşa, astara ve dikiş hattına zarar vermeden yapılır.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '.9rem' }}>
+            {FERMUAR_TURLERI.map(t => (
+              <div key={t.baslik} style={{ border: `1px solid ${BORDER}`, borderRadius: 12, padding: '1.1rem 1.2rem' }}>
+                <div style={{ fontSize: '1.5rem', marginBottom: '.3rem' }}>{t.ic}</div>
+                <h3 style={{ margin: '0 0 .3rem', fontSize: '1.05rem', color: INK }}>{t.baslik}</h3>
+                <p style={{ margin: 0, fontSize: '.92rem' }}>{t.aciklama}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FİYAT */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Fermuar değişimi fiyatı</h2>
+          <div style={{ border: `1px solid ${BORDER}`, borderRadius: 12, overflow: 'hidden' }}>
+            {[
+              ['Pantolon, kot, etek, elbise fermuarı', '200 TL\'den'],
+              ['Mont, kaban, ceket fermuarı', 'Fotoğrafa göre fiyat'],
+              ['Deri ürün fermuarı (özel işlem)', 'Fotoğrafa göre fiyat'],
+            ].map(([ad, fiyat], i) => (
+              <div key={ad} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', padding: '.95rem 1.2rem', background: i % 2 ? SOFT : '#fff', borderTop: i ? `1px solid ${BORDER}` : 'none' }}>
+                <span>{ad}</span>
+                <strong style={{ color: GREEN, whiteSpace: 'nowrap' }}>{fiyat}</strong>
+              </div>
+            ))}
+          </div>
+          <p style={{ margin: '.8rem 0 0', fontSize: '.88rem', color: MUTED }}>
+            Fiyatlar başlangıç fiyatıdır; fermuar boyu, kumaş ve işlemin zorluğuna göre değişebilir.
+            Kesin fiyat için fermuarın fotoğrafını WhatsApp&apos;tan gönderin.
+          </p>
+        </div>
+      </section>
+
+      {/* NASIL ÇALIŞIR */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Nasıl çalışır?</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(210px,1fr))', gap: '.9rem', marginTop: '1rem' }}>
+            {ADIMLAR.map(a => (
+              <div key={a.no} style={{ borderRadius: 12, padding: '1.1rem 1.2rem', background: SOFT, border: `1px solid ${BORDER}` }}>
+                <div style={{ width: 30, height: 30, borderRadius: 999, background: GREEN, color: '#fff', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '.6rem' }}>{a.no}</div>
+                <h3 style={{ margin: '0 0 .25rem', fontSize: '1rem', color: INK }}>{a.baslik}</h3>
+                <p style={{ margin: 0, fontSize: '.9rem' }}>{a.aciklama}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BÖLGELER */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Konyaaltı mahalleleri</h2>
+          <p style={{ margin: '0 0 1rem', color: MUTED }}>
+            Konyaaltı ve Antalya genelinde adresten alım ve teslim için bölgenizi bize yazın.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+            {KONYAALTI_MAHALLELERI.map(m => (
+              <Link key={m.slug} href={`/terzi/konyaalti/${m.slug}`}
+                style={{ border: `1px solid ${BORDER}`, borderRadius: 999, padding: '.4rem .9rem', fontSize: '.88rem', color: INK, textDecoration: 'none', background: '#fff' }}>
+                {m.ad} terzi
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SSS */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Sık sorulan sorular</h2>
+          <div style={{ marginTop: '1rem', display: 'grid', gap: '.6rem' }}>
+            {FAQ.map(({ q, a }) => (
+              <details key={q} style={{ border: `1px solid ${BORDER}`, borderRadius: 12, padding: '.9rem 1.1rem', background: '#fff' }}>
+                <summary style={{ cursor: 'pointer', fontWeight: 700, color: INK }}>{q}</summary>
+                <p style={{ margin: '.6rem 0 0', fontSize: '.95rem' }}>{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DİĞER HİZMETLER */}
+      <section style={{ padding: '2.6rem 1.25rem 0' }}>
+        <div style={wrap}>
+          <h2 style={h2}>Diğer terzi hizmetleri</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.8rem' }}>
+            {DIGER_HIZMETLER.map(h => (
+              <Link key={h.href} href={h.href}
+                style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: '.55rem 1rem', fontSize: '.9rem', color: GREEN, fontWeight: 600, textDecoration: 'none' }}>
+                {h.ad} →
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ALT ÇAĞRI */}
+      <section style={{ padding: '2.6rem 1.25rem 3rem' }}>
+        <div style={{ ...wrap, background: SOFT, border: `1px solid ${BORDER}`, borderRadius: 16, padding: '1.8rem 1.4rem', textAlign: 'center' }}>
+          <h2 style={{ ...h2, margin: '0 0 .4rem' }}>Fermuarınız bozuldu mu?</h2>
+          <p style={{ margin: '0 0 1.1rem' }}>
+            Haftanın her günü {HOURS} arası WhatsApp&apos;tan yazın, fotoğrafı gönderin; fiyatı ve teslim süresini bildirelim.
+          </p>
+          <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <a href={WA('Merhaba, fermuar değişimi için bilgi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={btnGreen}>
+              💬 WhatsApp&apos;tan Yaz
+            </a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+            <a href={GBP_URL} target="_blank" rel="noopener noreferrer" style={btnLine}>🗺️ Google Haritalar</a>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
