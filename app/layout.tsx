@@ -99,7 +99,7 @@ export const metadata: Metadata = {
 
 type Props = {
   children: React.ReactNode;
-  params: { locale?: string }; 
+  params: { locale?: string };
 };
 
 export default function RootLayout({ children, params }: Props) {
@@ -122,14 +122,15 @@ export default function RootLayout({ children, params }: Props) {
           href="https://images.pexels.com"
           crossOrigin="anonymous"
         />
-        {/* URL'de terzi kelimesi geçtiğinde SwapHubs şemasını gizleyen Client Component */}
+        {/* Terzi / tekstil sayfalarında SwapHubs şemasını gizleyen Client Component (yol listesi GlobalSchema.tsx içinde) */}
         <GlobalSchema />
       </head>
       <body className={`${jakarta.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <LocaleHtmlLang />
-            <main>{children}</main>
+            {/* Sayfalar kendi <main> etiketini taşıdığı için burada <div> kullanılır (iç içe <main> geçersizdir) */}
+            <div id="icerik">{children}</div>
             <IcerikHaritasi />
             <BottomNav />
             <Analytics />
