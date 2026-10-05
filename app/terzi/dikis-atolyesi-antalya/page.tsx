@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/dikis-atolyesi-antalya';
@@ -88,7 +89,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp Çıkarma · Seri İmalat 2026 | Terzi Can',
+  title: { absolute: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp Çıkarma · Seri İmalat 2026 | Terzi Can' },
   description: "Antalya dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim min. 50 adet, seri imalat, nakış, baskı. Markalar, butikler, e-ticaret, spor kulüpleri için. ☎ " + PHONE,
   keywords: [
     'dikiş atölyesi Antalya', 'fason üretim Antalya', 'kalıp çıkarma Antalya',
@@ -140,6 +141,7 @@ export default function DikisAtölyesiPage() {
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         {/* BREADCRUMB */}
+        <QuickActionBanner lang="tr" service="dikis" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}<Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
