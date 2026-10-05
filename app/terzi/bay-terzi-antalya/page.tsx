@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bay-terzi-antalya';
@@ -27,7 +28,7 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type':'ListItem', position:1, name:'SwapHubs', item:'https://www.swaphubs.com' },
+        { '@type':'ListItem', position:1, name:'SwapHubs', item:'https://swaphubs.com' },
         { '@type':'ListItem', position:2, name:'Antalya Terzi', item:PARENT },
         { '@type':'ListItem', position:3, name:'Bay Terzi Antalya', item:SITE_URL },
       ],
@@ -46,8 +47,8 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.swaphubs.com'),
-  title: 'Bay Terzi Antalya · Erkek Takım Elbise Dikimi · Pantolon Kısaltma 2026 | Terzi Can',
+  metadataBase: new URL('https://swaphubs.com'),
+  title: { absolute: 'Bay Terzi Antalya · Erkek Takım Elbise Dikimi · Pantolon Kısaltma 2026 | Terzi Can' },
   description: "Antalya bay terzi: erkek takım elbise ₺2500, pantolon kısaltma ₺150, gömlek ₺400, smoking, damatlık. Eve gelen terzi servisi. ☎ +90 531 898 64 18",
   keywords: [
     'bay terzi Antalya', 'erkek terzi Antalya', 'erkek takım elbise dikimi Antalya',
@@ -86,6 +87,8 @@ export default function BayTerziPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ ...s, background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+
+        <QuickActionBanner lang="tr" service="bay" />
 
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
