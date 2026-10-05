@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/app/components/theme-provider";
 import BottomNav from "@/components/BottomNav";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
 import IcerikHaritasi from "@/components/IcerikHaritasi";
+import GlobalSchema from "@/components/GlobalSchema";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -96,73 +97,12 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://swaphubs.com/#website",
-      url: "https://swaphubs.com",
-      name: "SwapHubs",
-      description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
-      inLanguage: ["tr", "en", "ru", "de"],
-      publisher: { "@id": "https://swaphubs.com/#organization" },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: "https://swaphubs.com/ilanlar?q={search_term_string}",
-        },
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://swaphubs.com/#organization",
-      name: "SwapHubs",
-      url: "https://swaphubs.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://swaphubs.com/og/logo.png",
-        width: "512",
-        height: "512",
-      },
-      image: {
-        "@type": "ImageObject",
-        url: "https://swaphubs.com/og/swaphubs-og.jpg",
-      },
-      description:
-        "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturan B2B platformu.",
-      areaServed: ["TR", "DE", "AE", "SA", "US", "GB", "RU"],
-      knowsAbout: [
-        "B2B Ticaret",
-        "Tekstil Tedarik",
-        "Makine Ekipman",
-        "Turizm",
-        "İnşaat Malzemeleri",
-        "Lojistik",
-        "Temizlik",
-        "Fason Üretim",
-        "Hizmet ve Ürün Tedariği",
-      ],
-      // Terzi Can'ı ayrı bir entite olarak bağlamak çok doğru bir mimari
-      subOrganization: { "@id": "https://swaphubs.com/terzi#business" },
-      sameAs: [
-        "https://twitter.com/swaphubs",
-        "https://www.linkedin.com/company/swaphubs",
-      ],
-    },
-  ],
-};
-
-// Eğer next-intl kullanıyorsan veya dil rotalaması varsa params'dan locale'i almak en iyisidir
 type Props = {
   children: React.ReactNode;
   params: { locale?: string }; 
 };
 
 export default function RootLayout({ children, params }: Props) {
-  // Locale parametresi yoksa varsayılan olarak "tr" ata
   const lang = params?.locale || "tr";
 
   return (
@@ -182,10 +122,8 @@ export default function RootLayout({ children, params }: Props) {
           href="https://images.pexels.com"
           crossOrigin="anonymous"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {/* URL'de terzi kelimesi geçtiğinde SwapHubs şemasını gizleyen Client Component */}
+        <GlobalSchema />
       </head>
       <body className={`${jakarta.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
