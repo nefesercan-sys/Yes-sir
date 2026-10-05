@@ -1,58 +1,77 @@
-'use client';
+// Sunucu bileşeni (JS gerektirmez): botlar ham HTML'de slogan, saat ve WhatsApp bağlantısını görür.
+import {
+  VALUE_PROPS, STEPS, HOURS_LINE, CALL_LABEL, SERVICE_WA_TR,
+  PHONE_TEL, waUrl, type Lang, type ServiceKey,
+} from '@/lib/value-props';
 
-import React from 'react';
-import { BUSINESS } from '@/lib/business';
-import { getProps, Language } from '@/lib/value-props';
-
-interface QuickActionBannerProps {
-  lang?: Language;
-  variantIndex?: number;
-  customSlogan?: string;
-  customWaMessage?: string;
+interface Props {
+  lang?: Lang;
+  service?: ServiceKey;   // sadece Türkçe sayfalarda hazır mesajı hizmete göre değiştirir
+  variant?: 'instant-quote' | 'hotel-service' | 'door-pickup';
 }
 
-export default function QuickActionBanner({
-  lang = 'tr',
-  variantIndex = 0,
-  customSlogan,
-  customWaMessage,
-}: QuickActionBannerProps) {
-  const propsList = getProps(lang);
-  const selectedProp = propsList[variantIndex] || propsList[0];
-
-  const slogan = customSlogan || selectedProp.slogan;
-  const badge = selectedProp.badge;
-  const actionText = selectedProp.actionText;
-  const waTemplate = customWaMessage || selectedProp.waTemplate;
-
-  const formattedPhone = BUSINESS.phone.replace('+', '');
-  const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(waTemplate)}`;
+export default function QuickActionBanner({ lang = 'tr', service = 'genel', variant = 'instant-quote' }: Props) {
+  const list = VALUE_PROPS[lang] ?? VALUE_PROPS.tr;
+  const primary = list.find(p => p.id === variant) ?? list[0];
+  const message = lang === 'tr' && variant === 'instant-quote' ? SERVICE_WA_TR[service] : primary.waTemplate;
+  const steps = STEPS[lang];
 
   return (
-    <div
+    <section
       id="quick-actions"
-      className="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 text-white py-2.5 px-4 sticky top-0 z-50 shadow-lg border-b border-orange-500/30"
+      aria-label={primary.slogan}
+      style={{
+        background: 'linear-gradient(90deg,#8a6a2f,#b8975a)',
+        color: '#fff',
+        padding: '14px 16px',
+        fontFamily: "system-ui,-apple-system,'Segoe UI',sans-serif",
+      }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
-        <div className="flex items-center gap-2">
-          <span className="bg-white/20 text-white text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider hidden md:inline-block backdrop-blur-sm">
-            {badge}
-          </span>
-          <h2 className="text-xs md:text-sm font-bold tracking-tight ai-speakable text-amber-50">
-            ⚡ {slogan}
+      <div style={{
+        maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap',
+        alignItems: 'center', justifyContent: 'space-between', gap: 12,
+      }}>
+        <div style={{ flex: '1 1 280px', minWidth: 0 }}>
+          <span style={{
+            display: 'inline-block', background: '#fff', color: '#6b4f1d', fontSize: 11, fontWeight: 800,
+            padding: '3px 10px', borderRadius: 999, letterSpacing: '.04em', textTransform: 'uppercase', marginBottom: 6,
+          }}>{primary.badge}</span>
+          <h2 className="hero-slogan" style={{ margin: 0, fontSize: 'clamp(1rem,2.6vw,1.25rem)', fontWeight: 800, lineHeight: 1.25 }}>
+            {primary.slogan}
           </h2>
+          <p style={{ margin: '4px 0 0', fontSize: 13, opacity: .95 }}>{HOURS_LINE[lang]}</p>
+          <ol style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '8px 0 0', fontSize: 12 }}>
+            {steps.map((s, i) => (
+              <li key={s} style={{ background: 'rgba(255,255,255,.18)', borderRadius: 999, padding: '3px 10px' }}>
+                {i + 1}. {s}
+              </li>
+            ))}
+          </ol>
         </div>
 
-        <a
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-green-500 hover:bg-green-600 text-white font-extrabold text-xs md:text-sm px-4 py-2 rounded-xl transition-all transform hover:scale-105 flex items-center gap-2 shadow-md whitespace-nowrap animate-pulse"
-        >
-          <span className="text-base">💬</span>
-          <span>{actionText}</span>
-        </a>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', width: '100%', maxWidth: 360 }}>
+          <a
+            href={waUrl(message)}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              flex: '1 1 180px', textAlign: 'center', background: '#25d366', color: '#fff', fontWeight: 800,
+              fontSize: 14, padding: '12px 16px', borderRadius: 10, textDecoration: 'none',
+            }}
+          >
+            💬 {primary.actionText}
+          </a>
+          <a
+            href={`tel:${PHONE_TEL}`}
+            style={{
+              flex: '0 0 auto', textAlign: 'center', background: '#fff', color: '#6b4f1d', fontWeight: 800,
+              fontSize: 14, padding: '12px 16px', borderRadius: 10, textDecoration: 'none',
+            }}
+          >
+            📞 {CALL_LABEL[lang]}
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
