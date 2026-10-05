@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -122,7 +123,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can',
+  title: { absolute: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can' },
   description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya dahil tüm ilçelere araçlı terzi. Paça kısaltma ₺150, elbise tadilatı. 24 saat. ☎ " + PHONE,
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
@@ -167,6 +168,7 @@ export default function EveGelenTerziPage() {
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         {/* BREADCRUMB */}
+        <QuickActionBanner lang="tr" service="otel" variant="hotel-service" />
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
