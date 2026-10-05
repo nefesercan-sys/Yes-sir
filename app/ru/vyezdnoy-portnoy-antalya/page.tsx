@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
@@ -93,7 +94,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: 'Выездной портной Анталья · Обслуживание в отеле · Terzi Can',
+  title: { absolute: 'Вызов портного в отель Анталья · Доставка за 24 часа | Terzi Can' },
   description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере, Аланье. Срочный ремонт, говорим по-русски. ☎ ' + PHONE,
   keywords: [
     'выездной портной Анталья','портной в отель Анталья','портной Анталья',
@@ -130,6 +131,8 @@ export default function VyezdnoyPortnoyAntalyaPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+
+        <QuickActionBanner lang="ru" variant="hotel-service" />
 
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
