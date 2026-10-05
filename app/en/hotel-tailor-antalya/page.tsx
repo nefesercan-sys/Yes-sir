@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
 
@@ -45,7 +46,7 @@ const HOWTO = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: 'Mobile Tailor Antalya · Hotel Tailor Service · Terzi Can',
+  title: { absolute: 'Call a Tailor to Your Hotel in Antalya · 24h Delivery | Terzi Can' },
   description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer, Alanya. Same-day alterations, English speaking tailor, accepts EUR/USD/RUB/Cards. ☎ ' + PHONE,
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
@@ -92,6 +93,8 @@ export default function HotelTailorAntalyaPage() {
         extra={[HOWTO]}
       />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+
+        <QuickActionBanner lang="en" variant="hotel-service" />
 
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
