@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { Metadata } from 'next'
+import QuickActionBanner from '@/components/QuickActionBanner';
 import AtelieClient from './client'
 
 const SITE_URL = 'https://swaphubs.com'
@@ -31,7 +32,7 @@ const GMAPS_PLACE_LINK = `https://www.google.com/maps/place/?q=place_id:${GMAPS_
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: 'Ателье в Анталии (Коньяалты) — Ремонт и Пошив Одежды | Terzi Can',
+  title: { absolute: 'Ателье в Анталии (Коньяалты): ремонт и пошив, фото в WhatsApp — цена | Terzi Can' },
 
   description:
     'Профессиональное ателье Terzi Can в Анталии, район Коньяалты. Ремонт одежды, подгонка по фигуре, замена молнии, индивидуальный пошив, работа с кожей. Говорим по-русски. ☎ ' +
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: PAGE_URL,
-    siteName: 'SwapHubs',
+    siteName: 'Terzi Can Antalya',
     title: 'Ателье в Анталии (Коньяалты) — Ремонт и Пошив Одежды | Terzi Can',
     description:
       'Ремонт, подгонка, пошив одежды и работа с кожей в Анталии. Срочный ремонт, выездной портной. Говорим по-русски.',
@@ -221,6 +222,7 @@ export default function AtelieAntalyaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <QuickActionBanner lang="ru" />
       <AtelieClient
         gmapsDirections={GMAPS_DIRECTIONS}
         gmapsPlaceLink={GMAPS_PLACE_LINK}
