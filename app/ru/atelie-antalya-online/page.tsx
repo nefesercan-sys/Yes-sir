@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 
 // ─── CONSTANTS ────────────────────────────────────────────────────
@@ -30,7 +31,7 @@ export const viewport: Viewport = {
 // ─── METADATA ────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Ателье Анталия Коньяалты — Ремонт и Пошив Одежды | Terzi Can',
+  title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp — быстрый расчёт цены | Terzi Can' },
   description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',
     description: 'Ремонт одежды, подгонка, пошив на заказ. Говорим по-русски. Коньяалты, Анталия. ☎ +90 531 898 64 18',
-    url: PAGE_URL, siteName: 'SwapHubs', locale: 'ru_RU', type: 'website',
+    url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'ru_RU', type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталия', type: 'image/jpeg' }],
   },
   twitter: {
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
 
 // ─── JSON-LD ─────────────────────────────────────────────────────
 const FAQ = [
-  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в Hurma Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
+  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
   { q: 'Говорят ли в ателье по-русски?', a: 'Да! Принимаем заказы на русском языке через WhatsApp. Пишите — ответим быстро.' },
   { q: 'Сколько стоит укоротить брюки в Анталии?', a: 'Укорачивание брюк от ₺150. Точную цену скажем по фото в WhatsApp.' },
   { q: 'Есть ли выездной портной?', a: 'Да, выездной портной работает по всей Анталии. Заберём вещи на дом или в отель.' },
@@ -85,7 +86,7 @@ const SERVICES = [
 ];
 
 const FAQS = [
-  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в Hurma Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
+  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
   { q: '💬 Говорите ли вы по-русски?', a: 'Да! Работаем с русскоязычными клиентами через WhatsApp. Пишите на родном языке — ответим быстро.' },
   { q: '⏱️ Как быстро выполняется ремонт?', a: 'Простой ремонт (укорачивание, замена молнии) — несколько часов или 1 день. Сложная подгонка — 1-2 дня. Пошив — 3-7 дней.' },
   { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель по всей Анталии. Привозим готовое обратно за 24 часа.' },
@@ -106,6 +107,8 @@ export default function RuAtelieAntalyaPage() {
         faq={FAQ}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
+
+      <QuickActionBanner lang="ru" />
 
       <main style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
         <style>{`
@@ -186,7 +189,7 @@ export default function RuAtelieAntalyaPage() {
               <div style={{ display:'flex',alignItems:'center',gap:6,fontSize:13,color:'#6B7280' }}>
                 <span>Google Карты</span>
                 <span>·</span>
-                <span>Hurma Mah., Коньяалты</span>
+                <span>Liman Mah., Коньяалты</span>
               </div>
             </div>
 
