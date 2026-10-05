@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
 const SITE_URL = 'https://swaphubs.com/terzi/kuru-temizleme-antalya';
@@ -88,7 +89,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: 'Kuru Temizleme Antalya · Otel Alım Teslimat · 24 Saat Ekspres · 2026 | Terzi Can',
+  title: { absolute: 'Kuru Temizleme Antalya · Otel Alım Teslimat · 24 Saat Ekspres · 2026 | Terzi Can' },
   description: "Antalya kuru temizleme. Elbise ₺300, mont ₺500, takım elbise ₺450, çamaşır ₺80/kg. Otel ve adresten alım + teslimat. 24 saat ekspres. ☎ " + PHONE,
   keywords: [
     'kuru temizleme Antalya', 'kuru temizleme Antalya fiyat 2026', 'otele kuru temizleme Antalya',
@@ -130,6 +131,8 @@ export default function KuruTemizlemePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
+
+        <QuickActionBanner lang="tr" service="kuru-temizleme" />
 
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
