@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import OnlineSchneiderClient from './OnlineSchneiderClient';
 
@@ -30,7 +31,7 @@ const GBP2 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice',
+  title: { absolute: 'Schneider Antalya: Foto senden, schnell Preis erhalten · Abholservice | Terzi Can' },
   description:
     'Online-Schneiderservice mit Sitz in Konyaaltı. Herren- & Damenschneiderei, Bügelservice, Reparaturen, ' +
     'Änderungen, Serienproduktion. Versand in die ganze Türkei. Bestellung per WhatsApp. ☎ ' + PHONE,
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei',
     description: 'Herren- & Damenschneiderei, Bügelservice, Reparaturen, Änderungen, Serienproduktion. Versand in die ganze Türkei.',
-    url: SITE_URL, siteName: 'SwapHubs', locale: 'de_DE', alternateLocale: ['tr_TR', 'en_US', 'ru_RU'], type: 'website',
+    url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'de_DE', alternateLocale: ['tr_TR', 'en_US', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Schneiderservice Antalya', type: 'image/jpeg' }],
   },
   robots: {
@@ -89,6 +90,7 @@ export default function OnlineSchneiderservicePage() {
         faq={FAQ}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
+      <QuickActionBanner lang="de" />
       <OnlineSchneiderClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}
