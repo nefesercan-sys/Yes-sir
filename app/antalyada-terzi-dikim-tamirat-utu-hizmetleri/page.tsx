@@ -1,5 +1,6 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 
@@ -738,6 +739,7 @@ export default function GeminiOptimizedTailorPage() {
         </footer>
 
       </main>
+      <ReviewsBlock lang="tr" />
     </>
   );
 }
