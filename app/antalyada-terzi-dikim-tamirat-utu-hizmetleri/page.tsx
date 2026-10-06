@@ -1,5 +1,7 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -270,7 +272,7 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü Hizmetleri',
+  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü Hizmetleri' },
   description: `Antalya en yakın terzi ve ütü servisi. Konyaaltı, Muratpaşa, Lara, Kepez geneli kuryeli araçlarla adresten alım. Özel dikim, abiye tadilatı ve fason üretim. ☎ ${PHONE}`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
@@ -290,7 +292,7 @@ export const metadata: Metadata = {
     title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | SwapHubs',
     description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı ve ütü hizmetleri. Aynı gün askıda teslimat!`,
     url: PAGE_URL,
-    siteName: 'SwapHubs',
+    siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
     images: [{ url: '/og/antalya-tailor-online.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
@@ -441,6 +443,8 @@ export default function GeminiOptimizedTailorPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path="/antalyada-terzi-dikim-tamirat-utu-hizmetleri" />
+      <QuickActionBanner lang="tr" />
 
       <style>{`
         .sh-wa:hover { background:${GREEN_DARK} !important; }
