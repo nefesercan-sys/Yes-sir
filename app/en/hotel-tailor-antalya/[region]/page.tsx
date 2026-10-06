@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { OTEL_BOLGELERI, bulOtelBolgesi } from '@/lib/otel-bolgeleri';
 import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
 
   return {
     metadataBase: new URL(HOME_URL),
-    title,
+    title: { absolute: title },
     description: desc,
     keywords: [
       `VIP tailor ${r.name}`, 
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
         'x-default': url,
       },
     },
-    openGraph: { title, description: desc, url, type: 'website', locale: 'en_US', siteName: 'Terzi Can - SwapHubs', images: [{ url: ogImage, width: 1200, height: 630, alt: `VIP Tailor in ${r.name}` }] },
+    openGraph: { title, description: desc, url, type: 'website', locale: 'en_US', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `VIP Tailor in ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   };
@@ -103,6 +105,8 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path={`${BASE_PATH}/${r.slug}`} />
+      <QuickActionBanner lang="en" variant="hotel-service" />
       <OtelBolgeSayfasi 
         lang="en" 
         region={r} 
