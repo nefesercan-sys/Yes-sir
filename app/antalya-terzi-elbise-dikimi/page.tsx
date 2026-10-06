@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -88,6 +89,7 @@ export default function Page() {
       <SpeakableSchema path="/antalya-terzi-elbise-dikimi" />
       <QuickActionBanner lang="tr" />
       <ElbiseDikimiClient />
+      <ReviewsBlock lang="tr" />
       <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"
         items={[
