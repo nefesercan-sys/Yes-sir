@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { Metadata } from 'next'
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import AtelieClient from './client'
 
@@ -222,6 +223,7 @@ export default function AtelieAntalyaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <SpeakableSchema path="/ru/atelie-antalya" />
       <QuickActionBanner lang="ru" />
       <AtelieClient
         gmapsDirections={GMAPS_DIRECTIONS}
