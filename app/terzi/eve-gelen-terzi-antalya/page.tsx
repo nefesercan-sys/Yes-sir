@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
@@ -453,7 +454,8 @@ export default function EveGelenTerziPage() {
             </div>
           </div>
         </section>
-      </main>
+      <ReviewsBlock lang="tr" />
+    </main>
     </>
   );
 }
