@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
@@ -90,7 +92,7 @@ export const metadata: Metadata = {
     title: 'Fermuar Değişimi Antalya · 200 TL\'den | Terzi Can',
     description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–23:00, Konyaaltı / Antalya.',
     url: SITE_URL,
-    siteName: 'SwapHubs',
+    siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
   },
@@ -189,6 +191,8 @@ export default function FermuarDegisimiPage() {
     <main style={{ fontFamily: FONT, color: TEXT, background: '#fff', lineHeight: 1.65 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
+      <SpeakableSchema path="/terzi/fermuar-degisimi" />
+      <QuickActionBanner lang="tr" service="fermuar" />
       {/* HERO */}
       <section style={{ background: SOFT, borderBottom: `1px solid ${BORDER}`, padding: '2.2rem 1.25rem 2.6rem' }}>
         <div style={wrap}>
