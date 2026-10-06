@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 
@@ -108,6 +109,7 @@ export default function RuAtelieAntalyaPage() {
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
 
+      <SpeakableSchema path="/ru/atelie-antalya-online" />
       <QuickActionBanner lang="ru" />
 
       <main style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
