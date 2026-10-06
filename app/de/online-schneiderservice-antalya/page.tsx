@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import OnlineSchneiderClient from './OnlineSchneiderClient';
@@ -90,6 +91,7 @@ export default function OnlineSchneiderservicePage() {
         faq={FAQ}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
+      <SpeakableSchema path="/de/online-schneiderservice-antalya" />
       <QuickActionBanner lang="de" />
       <OnlineSchneiderClient
         gbpName1={GBP1.name}
