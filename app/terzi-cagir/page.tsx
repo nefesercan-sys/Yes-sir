@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 
 const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
@@ -99,7 +101,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can Konyaaltı',
+  title: { absolute: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can Konyaaltı' },
   description:
     'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺150, bel daraltma ₺150, fermuar ₺200. Terzimiz kapınıza gelir, ölçü alır, 24 saatte teslim eder. Hemen ara: +90 531 898 64 18',
   keywords: [
@@ -114,7 +116,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can',
     description: 'Paça kısaltma ₺150. Terzimiz kapınıza gelir. Hemen ara: +90 531 898 64 18',
-    url: PAGE_URL, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website',
+    url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Terzi Can Antalya' }],
   },
   robots: {
@@ -160,6 +162,8 @@ export default function TerziCagirPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <SpeakableSchema path="/terzi-cagir" />
+      <QuickActionBanner lang="tr" />
       <main style={{
         fontFamily: "'DM Sans',system-ui,sans-serif",
         background: '#0F1B1A',
