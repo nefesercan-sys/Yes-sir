@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import OnlineTerziClient from './OnlineTerziClient';
 
 const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
@@ -6,7 +8,7 @@ const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 // ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: "Online Terzi Hizmeti | 81 İle Özel Dikim & Kargo | SwapHubs",
+  title: { absolute: "Online Terzi Hizmeti | 81 İle Özel Dikim & Kargo | Terzi Can" },
   description:
     "Türkiye'nin 81 iline kargo teslimatlı online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz kapınıza gelsin.",
   keywords: [
@@ -33,11 +35,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "SwapHubs Online Terzi | Türkiye'nin 81 İline Özel Dikim",
+    title: "Terzi Can Online Terzi | Türkiye'nin 81 İline Özel Dikim",
     description:
       "WhatsApp üzerinden profesyonel ölçü alımı, abiye, gelinlik ve takım elbise dikimi. 81 ile teslimat ve tam uyum garantisi.",
     url: SITE_URL,
-    siteName: 'SwapHubs',
+    siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     alternateLocale: ['en_US', 'de_DE', 'ar_SA'],
     type: 'website',
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
         url: '/og/online-terzi.jpg',
         width: 1200,
         height: 630,
-        alt: "SwapHubs Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
+        alt: "Terzi Can Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
         type: 'image/jpeg',
       },
     ],
@@ -54,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'SwapHubs Online Terzi | 81 İle Teslimat | TR · EN · DE · AR',
+    title: 'Terzi Can Online Terzi | 81 İle Teslimat | TR · EN · DE · AR',
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
     images: ['/og/online-terzi.jpg'],
   },
@@ -84,17 +86,17 @@ const jsonLd = {
     // 1. WebSite
     {
       '@type': 'WebSite',
-      '@id': 'https://www.swaphubs.com#website',
+      '@id': 'https://swaphubs.com#website',
       name: 'SwapHubs',
-      url: 'https://www.swaphubs.com',
+      url: 'https://swaphubs.com',
       publisher: {
         '@type': 'Organization',
-        '@id': 'https://www.swaphubs.com#organization',
+        '@id': 'https://swaphubs.com#organization',
         name: 'SwapHubs',
-        url: 'https://www.swaphubs.com',
+        url: 'https://swaphubs.com',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.swaphubs.com/logo.png',
+          url: 'https://swaphubs.com/logo.png',
           width: 512,
           height: 512,
         },
@@ -105,16 +107,16 @@ const jsonLd = {
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
       '@id': `${SITE_URL}#business`,
-      name: 'SwapHubs Online Terzi',
-      alternateName: ['SwapHubs E-Terzi', 'Online Terzi Türkiye', 'SwapHubs Tailor'],
+      name: 'Terzi Can Online Terzi',
+      alternateName: ['Terzi Can E-Terzi', 'Online Terzi Türkiye', 'Terzi Can Tailor'],
       description:
         "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma dikimi.",
       url: SITE_URL,
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
       priceRange: '₺₺',
-      image: ['https://www.swaphubs.com/og/online-terzi.jpg'],
-      logo: 'https://www.swaphubs.com/logo.png',
+      image: ['https://swaphubs.com/og/online-terzi.jpg'],
+      logo: 'https://swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Konyaaltı',
@@ -146,7 +148,7 @@ const jsonLd = {
       // DÜZELTİLDİ: Nested itemOffered kaldırıldı, additionalType ve price eklendi
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'SwapHubs Online Terzi Hizmetleri 2025–2026',
+        name: 'Terzi Can Online Terzi Hizmetleri 2025–2026',
         itemListElement: [
           {
             '@type': 'Offer',
@@ -156,7 +158,7 @@ const jsonLd = {
             price: '2000',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -167,7 +169,7 @@ const jsonLd = {
             price: '5000',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -178,7 +180,7 @@ const jsonLd = {
             price: '3000',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -189,7 +191,7 @@ const jsonLd = {
             price: '500',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'SwapHubs Online Terzi' },
+            seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
             additionalType: 'https://schema.org/Service',
           },
         ],
@@ -197,8 +199,8 @@ const jsonLd = {
 
       sameAs: [
         'https://wa.me/905318986418',
-        'https://www.swaphubs.com',
-        'https://www.swaphubs.com/terzi',
+        'https://swaphubs.com',
+        'https://swaphubs.com/terzi',
       ],
     },
 
@@ -206,9 +208,9 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | SwapHubs",
+      name: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | Terzi Can",
       url: SITE_URL,
-      isPartOf: { '@id': 'https://www.swaphubs.com#website' },
+      isPartOf: { '@id': 'https://swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
       description:
         "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet kapına gelsin.",
@@ -223,8 +225,8 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://www.swaphubs.com' },
-        { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://www.swaphubs.com/terzi' },
+        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://swaphubs.com' },
+        { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://swaphubs.com/terzi' },
         { '@type': 'ListItem', position: 3, name: 'Online Terzi Hizmeti', item: SITE_URL },
       ],
     },
@@ -294,6 +296,8 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <SpeakableSchema path="/online-terzi-hizmeti" />
+      <QuickActionBanner lang="tr" />
       <OnlineTerziClient />
     </>
   );
