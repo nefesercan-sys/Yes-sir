@@ -3,6 +3,9 @@
 // Antalya'nın 19 ilçesi için terzi sayfaları.
 // ============================================================
 import type { Metadata } from 'next';
+import FaqBlock from '@/components/FaqBlock';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import { getDb } from '@/lib/mongodb';
@@ -52,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const url = `${HOME_URL}/terzi/antalya/${ilce.slug}`;
 
   return {
-    title, 
+    title: { absolute: title },
     description: desc,
     keywords: [
       `${ilce.ad} terzi`, `${ilce.ad} terzi Antalya`, `${ilce.ad} paça kısaltma`, `${ilce.ad} kuru temizleme`,
@@ -66,7 +69,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title, 
       description: desc, 
       url, 
-      siteName: 'SwapHubs', 
+      siteName: 'Terzi Can Antalya', 
       locale: 'tr_TR', 
       type: 'website' 
     },
@@ -112,6 +115,8 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path={`/terzi/antalya/${ilce.slug}`} />
+      <QuickActionBanner lang="tr" />
       <BolgeSayfasi
         tip="antalya-ilce"
         lokasyonAdi={ilce.ad}
@@ -119,6 +124,15 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => `/terzi/antalya/${slug}`}
         aktifTalepSayisi={aktifTalepSayisi}
+      />
+      <FaqBlock
+        heading={`${ilce.ad} Terzi — Sık Sorulan Sorular`}
+        items={[
+          { q: `${ilce.ad} bölgesinde terzi var mı?`, a: `Evet. Terzi Can, Konyaaltı'ndaki atölyesinden ${ilce.ad} bölgesine hizmet verir: adresten alır veya yerinde ölçü alır, adrese teslim eder. WhatsApp: +90 531 898 64 18, her gün 08:00–23:00.` },
+          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺150'den, fermuar değişimi ₺200'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
+          { q: `Terzi servisi ücretli mi?`, a: `Eve ve otele terzi servisi ücretsizdir. Ölçü alma ve teslimat için ek servis ücreti alınmaz.` },
+          { q: `Çalışma saatleriniz nedir?`, a: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz.` },
+        ]}
       />
     </>
   );
