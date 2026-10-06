@@ -24,7 +24,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 })
   }
 
-  const all = [`https://${HOST}/llms.txt`, ...(await sitemapUrls())]
+  const all = [
+    `https://${HOST}/llms.txt`,
+    `https://${HOST}/llms-full.txt`,
+    ...(await sitemapUrls()),
+  ]
   const urlList = Array.from(new Set(all)).slice(0, 10000)
   const results: number[] = []
   try {
