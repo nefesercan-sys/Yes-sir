@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 
@@ -575,6 +576,7 @@ export default function KonyaaltiTerziPage() {
           </div>
         </footer>
       </div>
+      <ReviewsBlock lang="tr" />
     </>
   );
 }
