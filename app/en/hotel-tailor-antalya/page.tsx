@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
@@ -94,6 +95,7 @@ export default function HotelTailorAntalyaPage() {
       />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
+        <SpeakableSchema path="/en/hotel-tailor-antalya" />
         <QuickActionBanner lang="en" variant="hotel-service" />
 
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
