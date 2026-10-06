@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti/page.tsx
@@ -37,7 +39,7 @@ const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyoru
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026',
+  title: { absolute: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026' },
   description:
     `${GBP1_NAME} · Terzi · Liman & Hurma Mah., Konyaaltı, Antalya · Her gün 08:00–23:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
   keywords: [
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü | Antalya 2026',
     description: `Liman & Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
-    url: PAGE_URL, siteName: 'SwapHubs', locale: 'tr_TR',
+    url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR',
     alternateLocale: ['en_US','ru_RU'], type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: GBP1_NAME, type: 'image/jpeg' }],
   },
@@ -205,6 +207,8 @@ export default function KonyaaltiTerziPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path="/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti" />
+      <QuickActionBanner lang="tr" />
 
       <div style={{ minHeight: '100vh', background: D.bg, color: D.ink, fontFamily: 'var(--font-jakarta,system-ui,sans-serif)', overflowX: 'hidden' }} className="pb-24">
 
