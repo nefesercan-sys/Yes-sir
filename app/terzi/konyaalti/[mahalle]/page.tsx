@@ -2,6 +2,9 @@
 // SwapHubs — app/terzi/konyaalti/[mahalle]/page.tsx
 // ============================================================
 import type { Metadata } from 'next';
+import FaqBlock from '@/components/FaqBlock';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import { getDb } from '@/lib/mongodb';
@@ -129,6 +132,8 @@ export default async function KonyaaltiMahalleTerziSayfasi({ params }: PageProps
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path={`/terzi/konyaalti/${m.slug}`} />
+      <QuickActionBanner lang="tr" />
       <BolgeSayfasi
         tip="konyaalti-mahalle"
         lokasyonAdi={m.ad}
@@ -136,6 +141,15 @@ export default async function KonyaaltiMahalleTerziSayfasi({ params }: PageProps
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => `/terzi/konyaalti/${slug}`}
         aktifTalepSayisi={aktifTalepSayisi}
+      />
+      <FaqBlock
+        heading={`${m.ad} Terzi — Sık Sorulan Sorular`}
+        items={[
+          { q: `${m.ad} bölgesinde terzi var mı?`, a: `Evet. Terzi Can, Konyaaltı'ndaki atölyesinden ${m.ad} bölgesine hizmet verir: adresten alır veya yerinde ölçü alır, adrese teslim eder. WhatsApp: +90 531 898 64 18, her gün 08:00–23:00.` },
+          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺150'den, fermuar değişimi ₺200'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
+          { q: `Terzi servisi ücretli mi?`, a: `Eve ve otele terzi servisi ücretsizdir. Ölçü alma ve teslimat için ek servis ücreti alınmaz.` },
+          { q: `Çalışma saatleriniz nedir?`, a: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz.` },
+        ]}
       />
     </>
   );
