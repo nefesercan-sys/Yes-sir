@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
@@ -125,6 +126,7 @@ export default function PacaKisaltmaPage() {
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         {/* BREADCRUMB */}
+        <SpeakableSchema path="/terzi/paca-kisaltma-antalya" />
         <QuickActionBanner lang="tr" service="paca" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
