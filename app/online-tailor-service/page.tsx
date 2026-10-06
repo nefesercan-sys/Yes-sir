@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import OnlineTailorClient from './OnlineTailorClient';
@@ -99,6 +100,7 @@ export default function OnlineTailorServicePage() {
         faq={FAQ}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
       />
+      <SpeakableSchema path="/online-tailor-service" />
       <QuickActionBanner lang="en" />
       <OnlineTailorClient
         gbpName1={GBP1.name}
