@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -212,6 +213,7 @@ export default function KonyaaltiTerziPage() {
           { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },
         ]}
       />
+    <ReviewsBlock lang="tr" />
     </main>
   );
 }
