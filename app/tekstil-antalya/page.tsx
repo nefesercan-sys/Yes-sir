@@ -9,6 +9,7 @@
 // stok/sahte görsel kullanılmadı, temiz SVG ikonlarla tasarlandı.
 
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 
 const BASE_URL   = 'https://swaphubs.com';
 const PAGE_URL   = `${BASE_URL}/tekstil-antalya`;
@@ -21,7 +22,7 @@ const WA_DEFAULT = WA('Merhaba, Anavera Tekstil seri imalat ve numune çalışma
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Anavera Tekstil Antalya | Seri İmalat, Numune & İhracat',
+  title: { absolute: 'Anavera Tekstil Antalya | Seri İmalat, Numune & İhracat' },
   description:
     'Antalya merkezli tekstil üreticisi Anavera Tekstil: numune çalışması, seri imalat, ' +
     'erkek/kadın/çocuk tekstili üretimi ve ihracat. Min. 300 adetten OEM/fason üretim. ☎ ' + PHONE,
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Anavera Tekstil Antalya — Seri İmalat, Numune & İhracat',
     description: 'Numune çalışmasından seri üretime, erkek/kadın/çocuk tekstili imalatı ve ihracat.',
-    url: PAGE_URL, siteName: 'SwapHubs', locale: 'tr_TR', type: 'website',
+    url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website',
     images: [{ url: `${BASE_URL}/og/swaphubs-og.jpg`, width: 1200, height: 630, alt: 'Anavera Tekstil Antalya' }],
   },
 };
@@ -92,6 +93,7 @@ export default function TekstilAntalyaPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path="/tekstil-antalya" />
       <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', backgroundColor: '#F8FAFC', color: '#0F172A' }}>
 
         {/* HEADER */}
