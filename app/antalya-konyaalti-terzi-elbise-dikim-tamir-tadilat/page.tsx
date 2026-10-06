@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
+import FaqBlock from '@/components/FaqBlock';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Script from 'next/script';
 
 // ── SEO METADATA (Google Arama Sonuçlarında Görünecek Kısım) ──
 export const metadata: Metadata = {
-  title: 'Antalya Konyaaltı Terzi | Dikim, Tamir ve Tadilat | 0531 898 64 18',
+  title: { absolute: 'Antalya Konyaaltı Terzi | Dikim, Tamir ve Tadilat | 0531 898 64 18' },
   description: 'Antalya Konyaaltı profesyonel terzi servisi. Özel elbise dikimi, tamir, tadilat ve ütü hizmeti. Hızlı servis için hemen arayın: 0531 898 64 18',
   keywords: 'antalya konyaaltı terzi, elbise dikim antalya, terzi tamir tadilat, konyaaltı ütü servisi, liman mahallesi terzi, hurma terzi, Konyaaltında terzi, fermuar tamiri, paca kisaltma terzi, bel daraltma, uncalı terzi, terzi fiyatlari',
   openGraph: {
@@ -65,6 +68,8 @@ export default function KonyaaltiTerziPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 font-sans text-gray-800">
+      <SpeakableSchema path="/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat" />
+      <QuickActionBanner lang="tr" />
       {/* Schema.org JSON-LD Enjeksiyonu */}
       <Script
         id="local-business-schema"
@@ -198,6 +203,15 @@ export default function KonyaaltiTerziPage() {
 
         </div>
       </section>
+          <FaqBlock
+        heading="Konyaaltı Terzi — Sık Sorulan Sorular"
+        items={[
+          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis ücretsizdir.' },
+          { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺150\'den, fermuar değişimi ₺200\'den, bel daraltma ₺150\'den, elbise dikimi ₺800\'den başlar. Kesin fiyat için fotoğraf göndermeniz yeterli.' },
+          { q: 'Fiyatı gitmeden nasıl öğrenirim?', a: 'Kıyafetin ve yapılacak işlemin fotoğrafını WhatsApp\'tan gönderin: +90 531 898 64 18.' },
+          { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },
+        ]}
+      />
     </main>
   );
 }
