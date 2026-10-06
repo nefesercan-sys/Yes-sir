@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { GOOGLE_REVIEWS, reviewStats } from '@/lib/reviews';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -146,41 +148,19 @@ const jsonLd = {
       }],
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: '4',
+        ratingValue: reviewStats().average,
+        reviewCount: String(reviewStats().count),
         bestRating: '5',
         worstRating: '1',
       },
-      review: [
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Ahmet Y.' },
-          datePublished: '2026-09-20',
-          reviewBody: 'Takım elbisemin daraltma işlemini kusursuz yaptılar. Kurye ile otelden alıp tekrar teslim etmeleri çok büyük bir kolaylık. Kesinlikle tavsiye ederim.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Elena M.' },
-          datePublished: '2026-10-02',
-          reviewBody: 'Very professional and fast alteration service. They picked up my dresses from the hotel and returned them perfectly tailored the next day.',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Anastasia B.' },
-          datePublished: '2026-10-05',
-          reviewBody: 'Very happy with the Service. Quick and efficient. Got my trousers picked up and delivered the next day. Can only recommend',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-        {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Selvinaz D.' },
-          datePublished: '2026-10-05',
-          reviewBody: 'Terzi can a Özel kiyafet diktirdim ve önceki kıyafetlerimin de tadilatını yaptırdım dikis kalitesi ve kalıp olarak oturması cok güzel oldu ve zamaninda teslim ettii ve istedigim elbise tam gibi dikti elbiselerimde bek daraltma ve bir kaç boy kisaltma isinide ojinal sekolde yaptı cok memnun kaldım antalyadakj en iyi en profesyonel ve en guker yüzlü terzi',
-          reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5' },
-        },
-      ],
+      review: GOOGLE_REVIEWS.map(r => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.author },
+        datePublished: r.date,
+        reviewBody: r.text,
+        inLanguage: r.lang,
+        reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
+      })),
     },
 
     // ── WebSite ──
@@ -340,6 +320,7 @@ export default function TerziPage() {
       <SpeakableSchema path="/terzi" />
       <QuickActionBanner lang="tr" />
       <TerziClient gbp1={GBP_1} />
+      <ReviewsBlock lang="tr" />
     </>
   );
 }
