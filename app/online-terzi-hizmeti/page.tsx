@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OnlineTerziClient from './OnlineTerziClient';
@@ -299,6 +300,7 @@ export default function Page() {
       <SpeakableSchema path="/online-terzi-hizmeti" />
       <QuickActionBanner lang="tr" />
       <OnlineTerziClient />
+      <ReviewsBlock lang="tr" />
     </>
   );
 }
