@@ -1,5 +1,7 @@
 // app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link'
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
@@ -127,7 +129,7 @@ const jsonLd = {
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: 'Konyaaltı Terzi · Elbise dikimi, tadilatı, Tamiri, Ütü yapımı, Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Özel Terzi Servisi 2026',
+  title: { absolute: 'Konyaaltı Terzi · Elbise dikimi, tadilatı, Tamiri, Ütü yapımı, Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Özel Terzi Servisi 2026' },
   description: "Antalya Konyaaltı'nda profesyonel terzi. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Ozel Terzi, adrese gelen terzi servisi. Paça, fermuar, dikim, elbise tadilatı, ütü, kuru temizleme. Terziniz kapınıza gelsin! ☎ " + PHONE,
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
@@ -227,6 +229,8 @@ export default function AntalyaTerziPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily: SANS, background: BG, color: METIN, minHeight: '100vh' }}>
 
+        <SpeakableSchema path="/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat" />
+        <QuickActionBanner lang="tr" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.72rem', color: GRI, background: BG2, borderBottom: `1px solid rgba(184,151,90,.12)` }}>
           <Link href="/" style={{ color: ALTIN, textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
