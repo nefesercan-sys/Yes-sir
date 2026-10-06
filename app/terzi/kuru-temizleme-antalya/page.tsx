@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 
@@ -132,6 +133,7 @@ export default function KuruTemizlemePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
+        <SpeakableSchema path="/terzi/kuru-temizleme-antalya" />
         <QuickActionBanner lang="tr" service="kuru-temizleme" />
 
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
