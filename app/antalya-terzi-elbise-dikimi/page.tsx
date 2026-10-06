@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import FaqBlock from '@/components/FaqBlock';
+import SpeakableSchema from '@/components/SpeakableSchema';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import ElbiseDikimiClient from './client';
 
 const BASE_URL = 'https://swaphubs.com';
@@ -9,7 +12,7 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Antalya Terzi · Elbise Dikimi, Tadilat ve Tamirat — Konyaaltı Atölyesi | Terzi Can',
+  title: { absolute: 'Antalya Terzi · Elbise Dikimi, Tadilat ve Tamirat — Konyaaltı Atölyesi | Terzi Can' },
   description:
     "Antalya Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü. Randevulu çalışma, şeffaf fiyat: " +
     "günlük elbise 800 TL'den, paça kısaltma 150 TL'den. WhatsApp: +90 531 898 64 18",
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
     title: 'Antalya Terzi · Elbise Dikimi ve Tadilat — Terzi Can',
     description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü hizmeti.",
     url: SITE_URL,
-    siteName: 'SwapHubs',
+    siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Antalya terzi elbise dikimi' }],
@@ -82,7 +85,18 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SpeakableSchema path="/antalya-terzi-elbise-dikimi" />
+      <QuickActionBanner lang="tr" />
       <ElbiseDikimiClient />
+      <FaqBlock
+        heading="Konyaaltı Terzi — Sık Sorulan Sorular"
+        items={[
+          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis ücretsizdir.' },
+          { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺150\'den, fermuar değişimi ₺200\'den, bel daraltma ₺150\'den, elbise dikimi ₺800\'den başlar. Kesin fiyat için fotoğraf göndermeniz yeterli.' },
+          { q: 'Fiyatı gitmeden nasıl öğrenirim?', a: 'Kıyafetin ve yapılacak işlemin fotoğrafını WhatsApp\'tan gönderin: +90 531 898 64 18.' },
+          { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },
+        ]}
+      />
     </>
   );
 }
