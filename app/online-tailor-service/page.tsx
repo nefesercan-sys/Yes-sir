@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
@@ -116,6 +117,7 @@ export default function OnlineTailorServicePage() {
         gbpShort2={GBP2.short}
         gbpReview2={GBP2.review}
       />
+      <ReviewsBlock lang="en" />
     </>
   );
 }
