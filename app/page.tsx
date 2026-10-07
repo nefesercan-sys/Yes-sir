@@ -1,4 +1,5 @@
 import AnaSayfaClient from "@/providers/AnaSayfaClient";
+import TerziVitrin from "@/components/TerziVitrin";
 import { getDb } from "@/lib/mongodb";
 import type { Metadata } from "next";
 
@@ -6,9 +7,9 @@ import type { Metadata } from "next";
 const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
-  title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-  description: "Üretici, tedarikçi, hizmet sağlayıcı ve alıcıları tek platformda buluşturuyoruz. İlan verin, teklif alın — tamamen ücretsiz.",
-  keywords: "ilan, hizmet, ürün, tedarik, fason, tekstil, gıda, lojistik, Türkiye, ihracat, tedarikçi bul",
+  title: "SwapHubs — İlan Ver, Teklif Al | Terzi, Tekstil ve Hizmet Platformu",
+  description: "Ücretsiz ilan verin, teklif alın. Terzi, tekstil, fason üretim ve hizmet ilanları tek platformda. Antalya Konyaaltı Terzi Can: paça kısaltma, fermuar, elbise dikimi, her gün 08:00–23:00.",
+  keywords: "ilan ver, ücretsiz ilan, teklif al, terzi, Antalya terzi, Konyaaltı terzi, tekstil, fason üretim, hizmet ilanları, ihracat, tedarikçi bul",
   openGraph: {
     title: "SwapHubs — Türkiye'den Dünyaya",
     description: "Üretici, tedarikçi ve alıcıları buluşturan Türkiye'nin global iş platformu.",
@@ -48,5 +49,10 @@ export default async function AnaSayfa() {
   }
 
   // SSR tam kapasite devrede. Googlebot boş div'ler değil, 24 adet ilanı dolu dolu görecek.
-  return <AnaSayfaClient initialIlanlar={ilanlar} ilkGorsel={null} />;
+  return (
+    <>
+      <AnaSayfaClient initialIlanlar={ilanlar} ilkGorsel={null} />
+      <TerziVitrin />
+    </>
+  );
 }
