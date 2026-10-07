@@ -44,7 +44,7 @@ export default function KonyaaltiTerziPage() {
       "@type": "PostalAddress",
       "streetAddress": "Konyaaltı",
       "addressLocality": "Antalya",
-      "postalCode": "07070",
+      "postalCode": "07130",
       "addressCountry": "TR"
     },
     "geo": {
