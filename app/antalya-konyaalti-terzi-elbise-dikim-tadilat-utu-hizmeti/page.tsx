@@ -13,26 +13,15 @@ const PAGE_URL  = `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-
 const TERZI_URL = `${BASE_URL}/terzi`;
 const PHONE_DISPLAY = '+90 531 898 64 18';
 const PHONE_TEL     = '+905318986418';
-const TODAY = new Date().toISOString().split('T')[0];
+const TODAY = '2026-10-07'; // içerik gerçekten değiştiğinde elle güncelle
 const OG_IMAGE = `${BASE_URL}/og/terzi-can.jpg`;
 
-// ── Google Business — Profil 1 (Liman) ──────────────────────────────────────
-const GBP1_NAME   = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
-const GBP1_CID    = '1496201377277644027';
-const GBP1_MAPS   = `https://www.google.com/maps?cid=${GBP1_CID}`;
-const GBP1_SHORT  = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
+// ── Google Business Profile (tek konum: Hurma, Konyaaltı) ─────────────────
+const GBP1_NAME   = 'TERZİ Can Antalya Tailor Service';
+const GBP1_MAPS   = 'https://www.google.com/maps?cid=5846987472659818117';
 const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
-const GBP1_DIR    = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
-const GBP1_REVIEW = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
-
-// ── Google Business — Profil 2 (Hurma) ──────────────────────────────────────
-const GBP2_NAME   = 'ANTALYA TERZİ CAN - TAILOR';
-const GBP2_CID    = '1496201834409914715';
-const GBP2_MAPS   = `https://www.google.com/maps?cid=${GBP2_CID}`;
-const GBP2_SHORT  = 'https://maps.app.goo.gl/rpgwjJgWZHfgafTy5';
-const GBP2_EMBED  = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12763.2!2d30.6982!3d36.8923!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c393a4244a715b%3A0x66ac5fa54fba4507!2sANTALYA+TERZ%C4%B0+CAN+-+TAILOR!5e0!3m2!1str!2str!4v1';
-const GBP2_DIR    = `https://www.google.com/maps/dir/?api=1&destination=ANTALYA+TERZ%C4%B0+CAN+-+TAILOR&destination_place_id=ChIJW3FKJKSTwxQRB0W6T6X1rGY`;
-const GBP2_REVIEW = 'https://search.google.com/local/writereview?placeid=ChIJW3FKJKSTwxQRB0W6T6X1rGY';
+const GBP1_DIR    = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987';
+const GBP1_REVIEW = 'https://g.page/r/CYUmDLIgrCRREAE/review';
 
 const WA = (msg: string) => `https://wa.me/${PHONE_TEL.replace('+','')}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyorum.');
@@ -42,9 +31,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026' },
   description:
-    `${GBP1_NAME} · Terzi · Liman & Hurma Mah., Konyaaltı, Antalya · Her gün 08:00–23:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
+    `${GBP1_NAME} · Terzi · Hurma Mah., Konyaaltı, Antalya · Her gün 08:00–23:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
   keywords: [
-    'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Liman terzi', 'Uncalı terzi',
+    'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',
     'paça kısaltma Antalya', 'fermuar değişimi Antalya', 'bel daraltma Antalya',
     'elbise dikimi Antalya', 'kuru temizleme Konyaaltı', 'ütü hizmeti Antalya',
@@ -64,7 +53,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü | Antalya 2026',
-    description: `Liman & Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
+    description: `Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR',
     alternateLocale: ['en_US','ru_RU'], type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: GBP1_NAME, type: 'image/jpeg' }],
@@ -82,27 +71,19 @@ const jsonLd = {
   '@graph': [
     { '@type': 'WebSite', '@id': `${BASE_URL}#website`, name: 'SwapHubs', url: BASE_URL, inLanguage: ['tr','en','ru'] },
 
-    // İki GBP profili için Place
-    { '@type': 'Place', '@id': `${PAGE_URL}#place1`, name: GBP1_NAME, hasMap: GBP1_MAPS,
-      address: { '@type': 'PostalAddress', streetAddress: 'Liman Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 } },
-    { '@type': 'Place', '@id': `${PAGE_URL}#place2`, name: GBP2_NAME, hasMap: GBP2_MAPS,
-      address: { '@type': 'PostalAddress', streetAddress: 'Hurma Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.8923, longitude: 30.6982 } },
-
     // LocalBusiness — ana işletme
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
       additionalType: ['https://schema.org/SewingService', 'https://schema.org/DryCleaningService'],
       '@id': `${TERZI_URL}#business`,
       name: 'Terzi Can Konyaaltı',
-      alternateName: [GBP1_NAME, GBP2_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
+      alternateName: [GBP1_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
       description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Ütü ve kuru temizleme. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine ücretsiz adrese servis.',
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB', paymentAccepted: 'Cash, Credit Card',
       image: OG_IMAGE, hasMap: GBP1_MAPS,
-      sameAs: [GBP1_SHORT, GBP1_MAPS, GBP2_SHORT, GBP2_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
-      address: { '@type': 'PostalAddress', streetAddress: 'Hurma & Liman Mah., Konyaaltı', addressLocality: 'Antalya', addressRegion: 'Antalya', postalCode: '07070', addressCountry: 'TR' },
+      sameAs: [GBP1_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
+      address: { '@type': 'PostalAddress', streetAddress: 'Hurma Mah., Konyaaltı', addressLocality: 'Antalya', addressRegion: 'Antalya', postalCode: '07130', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Hurma','Liman','Uncalı','Sarısu','Gürsu','Meltem','Göbi','Çakırlar','Öğretmenevleri','Konyaaltı','Antalya','Lara','Belek','Kemer'].map(n => ({ '@type': 'Place', name: n })),
@@ -286,7 +267,7 @@ export default function KonyaaltiTerziPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 10 }}>
                 <div style={{ flex: 1 }}>
                   <h2 style={{ fontSize: '1.1rem', fontWeight: 900, margin: 0, lineHeight: 1.3, color: D.ink }}>{GBP1_NAME}</h2>
-                  <p style={{ fontSize: '.78rem', color: D.s, margin: '.3rem 0 0' }}>Liman, 07070 Konyaaltı/Antalya</p>
+                  <p style={{ fontSize: '.78rem', color: D.s, margin: '.3rem 0 0' }}>Hurma, 07130 Konyaaltı/Antalya</p>
                 </div>
                 <span style={{ flexShrink: 0, background: '#ecfdf5', color: '#065f46', fontSize: '.68rem', fontWeight: 700, padding: '.28rem .7rem', borderRadius: 999 }}>
                   ● Açık
@@ -469,15 +450,14 @@ export default function KonyaaltiTerziPage() {
         {/* ─── İKİ PROFİL HARİTASI ────────────────────────────────────────── */}
         <section style={{ maxWidth: 900, margin: '3rem auto 0', padding: '0 1.2rem' }}>
           <h2 style={{ textAlign: 'center', fontFamily: 'var(--font-unbounded,Georgia,serif)', fontSize: 'clamp(1.3rem,3vw,1.8rem)', fontWeight: 700, margin: '0 0 .5rem', color: D.ink }}>
-            Konumumuz — İki Atölye
+            Konumumuz — Hurma, Konyaaltı
           </h2>
           <p style={{ textAlign: 'center', fontSize: '.82rem', color: D.s, marginBottom: '1.5rem' }}>
-            Liman Mah. ve Hurma Mah. olmak üzere Konyaaltı'nda iki atölyemiz var.
+            Atölyemiz Konyaaltı Hurma Mahallesi'nde; Liman, Uncalı, Sarısu ve çevre mahallelere ücretsiz adrese servis veriyoruz.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16 }}>
             {[
-              { name: GBP1_NAME, addr: 'Liman Mahallesi, Konyaaltı / Antalya', embed: GBP1_EMBED, maps: GBP1_MAPS, dir: GBP1_DIR, review: GBP1_REVIEW },
-              { name: GBP2_NAME, addr: 'Hurma Mah., 37. Cd No:50, Konyaaltı / Antalya', embed: GBP2_EMBED, maps: GBP2_MAPS, dir: GBP2_DIR, review: GBP2_REVIEW },
+              { name: GBP1_NAME, addr: 'Hurma, 07130 Konyaaltı / Antalya', embed: GBP1_EMBED, maps: GBP1_MAPS, dir: GBP1_DIR, review: GBP1_REVIEW },
             ].map(p => (
               <div key={p.name} style={{ background: '#fff', border: `1px solid ${D.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: '0 2px 16px rgba(0,0,0,.07)' }}>
                 <a href={p.maps} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'relative' }}>
