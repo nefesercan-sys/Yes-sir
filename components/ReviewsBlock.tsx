@@ -1,6 +1,6 @@
 // Görünür müşteri yorumları (Google'daki gerçek yorumlar). Şema ayrıca üretilmez:
 // işletme şeması zaten aynı yorumları lib/reviews.ts'ten alır (çift işaretleme olmasın).
-import { GOOGLE_REVIEWS, GOOGLE_REVIEW_URL, reviewStats } from '@/lib/reviews';
+import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
 
 type L = 'tr' | 'en';
 const T = {
@@ -34,7 +34,7 @@ export default function ReviewsBlock({ lang = 'tr' }: { lang?: L }) {
         ))}
       </div>
       <p style={{ marginTop: 12, fontSize: 14 }}>
-        <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer">{t.all}</a>
+        <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer">{t.all}</a>
       </p>
     </section>
   );
