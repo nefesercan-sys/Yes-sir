@@ -9,15 +9,14 @@ const PAGE_URL        = `${BASE_URL}/ru/atelie-antalya-online`;
 const PHONE_DISPLAY   = '+90 531 898 64 18';
 const PHONE_TEL       = '+905318986418';
 const WA_NUMBER       = '905318986418';
-const GBP_NAME        = 'Konyaaltı Terzi - Terzi Dikim Tamir Tadilat';
-const GBP_CID         = '1496201377277644027';
-const MAPS_URL        = `https://www.google.com/maps?cid=${GBP_CID}`;
-const MAPS_SHORT      = 'https://maps.app.goo.gl/i73c4xKZwr7uaSjbA';
-const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Konyaalt%C4%B1+Terzi+-+Terzi+Dikim+Tamir+Tadilat&destination_place_id=ChIJ-4wVtTmTwxQRwDB9jfqqquoA`;
-const MAPS_REVIEW     = 'https://search.google.com/local/writereview?placeid=ChIJ-4wVtTmTwxQRwDB9jfqqquoA';
+const GBP_NAME        = 'TERZİ Can Antalya Tailor Service';
+const MAPS_URL        = 'https://www.google.com/maps?cid=5846987472659818117';
+const MAPS_SHORT      = 'https://www.google.com/maps?cid=5846987472659818117';
+const MAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987';
+const MAPS_REVIEW     = 'https://g.page/r/CYUmDLIgrCRREAE/review';
 const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
 const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
-const TODAY = '2026-10-04';
+const TODAY = '2026-10-07';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Хочу узнать об услугах ателье (ремонт/пошив).');
 
@@ -68,7 +67,7 @@ export const metadata: Metadata = {
 
 // ─── JSON-LD ─────────────────────────────────────────────────────
 const FAQ = [
-  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
+  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
   { q: 'Говорят ли в ателье по-русски?', a: 'Да! Принимаем заказы на русском языке через WhatsApp. Пишите — ответим быстро.' },
   { q: 'Сколько стоит укоротить брюки в Анталии?', a: 'Укорачивание брюк от ₺150. Точную цену скажем по фото в WhatsApp.' },
   { q: 'Есть ли выездной портной?', a: 'Да, выездной портной работает по всей Анталии. Заберём вещи на дом или в отель.' },
@@ -87,7 +86,7 @@ const SERVICES = [
 ];
 
 const FAQS = [
-  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в Liman Mahallesi, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
+  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
   { q: '💬 Говорите ли вы по-русски?', a: 'Да! Работаем с русскоязычными клиентами через WhatsApp. Пишите на родном языке — ответим быстро.' },
   { q: '⏱️ Как быстро выполняется ремонт?', a: 'Простой ремонт (укорачивание, замена молнии) — несколько часов или 1 день. Сложная подгонка — 1-2 дня. Пошив — 3-7 дней.' },
   { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель по всей Анталии. Привозим готовое обратно за 24 часа.' },
@@ -191,7 +190,7 @@ export default function RuAtelieAntalyaPage() {
               <div style={{ display:'flex',alignItems:'center',gap:6,fontSize:13,color:'#6B7280' }}>
                 <span>Google Карты</span>
                 <span>·</span>
-                <span>Liman Mah., Коньяалты</span>
+                <span>Hurma, Коньяалты</span>
               </div>
             </div>
 
