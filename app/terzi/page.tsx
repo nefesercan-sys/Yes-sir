@@ -107,6 +107,7 @@ const jsonLd = {
       sameAs: [
         GBP_MAPS,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
+        'https://terzihizmeti.com.tr',
       ],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
@@ -321,6 +322,9 @@ export default function TerziPage() {
       <QuickActionBanner lang="tr" />
       <TerziClient gbp1={GBP_1} />
       <ReviewsBlock lang="tr" />
+      <p style={{ maxWidth: 1000, margin: '0 auto 32px', padding: '0 16px', fontSize: 14, textAlign: 'center' }}>
+        Terzi Can resmi sitesi: <a href="https://terzihizmeti.com.tr">terzihizmeti.com.tr</a>
+      </p>
     </>
   );
 }
