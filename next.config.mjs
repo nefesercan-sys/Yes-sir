@@ -32,17 +32,19 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+      // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
+      { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
       // Gelinlik sayfası artık gerçek (app/terzi/gelinlik-tadilati). Yazım hataları ona yönlenir.
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi/gelinlik-tadilati', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi/gelinlik-tadilati', permanent: true },
       { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
-      
+
       // DİKKAT: /terzi/fermuar-degisimi GitHub'da olduğu için YÖNLENDİRİLMİYOR, SERBEST BIRAKILDI.
       // Sadece sonu -antalya ile biten hatalı versiyonunu gerçek sayfasına aktarıyoruz.
       { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi/fermuar-degisimi', permanent: true },
 
-      // DİKKAT: /antalya-terzi-elbise-dikimi sayfası yüksek trafikli olduğu için 
+      // DİKKAT: /antalya-terzi-elbise-dikimi sayfası yüksek trafikli olduğu için
       // 15 Ağustos dosyasındaki yönlendirme komutu KALDIRILDI. Artık 200 OK yanıtı verecek.
     ]
   },
@@ -146,5 +148,3 @@ const nextConfig = {
 }
 
 export default nextConfig
- 
- 
