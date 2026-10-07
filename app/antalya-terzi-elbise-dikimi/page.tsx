@@ -8,7 +8,7 @@ import ElbiseDikimiClient from './client';
 const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
 const PHONE_E = '+905318986418';
-const GBP_URL = 'https://share.google/dsCVIz116FhbjISfz'; // TERZİ Can Antalya Tailor Service
+const GBP_URL = 'https://www.google.com/maps?cid=5846987472659818117'; // TERZİ Can Antalya Tailor Service
 const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
