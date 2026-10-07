@@ -11,7 +11,8 @@ export interface GoogleReview {
   lang: 'tr' | 'en' | 'ru' | 'de';
 }
 
-export const GOOGLE_REVIEW_URL = 'https://www.google.com/maps?cid=5846987472659818117';
+export const GOOGLE_PROFILE_URL = 'https://www.google.com/maps?cid=5846987472659818117';
+export const GOOGLE_REVIEW_URL  = 'https://g.page/r/CYUmDLIgrCRREAE/review';
 
 export const GOOGLE_REVIEWS: GoogleReview[] = [
   {
