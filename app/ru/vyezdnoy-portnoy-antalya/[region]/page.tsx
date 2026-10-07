@@ -7,7 +7,7 @@ import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
 
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
-const MAPS = 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8';
+const MAPS = 'https://www.google.com/maps?cid=5846987472659818117';
 const BASE_PATH = '/ru/vyezdnoy-portnoy-antalya';
 
 export const dynamicParams = false;
