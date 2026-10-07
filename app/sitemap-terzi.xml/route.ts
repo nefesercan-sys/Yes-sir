@@ -39,6 +39,7 @@ export async function GET() {
     // 👕 6. ATÖLYE, FASON VE KUMAŞ (Priority: 0.75)
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`, priority: '0.75', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kuru-temizleme-antalya`,   priority: '0.75', freq: 'weekly' },
+    { url: `${BASE_URL}/tekstil-antalya`,             priority: '0.75', freq: 'weekly' },
     { url: `${BASE_URL}/dogal-keten-pamuk-giyim`,        priority: '0.75', freq: 'monthly' },
 
     // 📋 7. DÖNÜŞÜM SAYFASI (/terzi-talep noindex olduğu için sitemap'ten çıkarıldı)
