@@ -123,7 +123,7 @@ const jsonLd = {
         streetAddress: 'Konyaaltı',
         addressLocality: 'Antalya',
         addressRegion: 'Antalya',
-        postalCode: '07070',
+        postalCode: '07130',
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
