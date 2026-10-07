@@ -91,7 +91,8 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    yandex: "4c73ee1911a4b197",
+    // Yandex Webmaster: eski kod korunur, yeni doğrulama kodu eklendi (birden fazla etiket basılır)
+    yandex: ["4c73ee1911a4b197", "c81788c5ebe2163f"],
     other: { "msvalidate.01": "EE22134B7D1B55A44BA700154371D5C3" },
   },
   manifest: "/manifest.json",
