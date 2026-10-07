@@ -47,7 +47,7 @@ const SEKTOR_ADLARI: Record<string, string> = {
   tamir:'Tamir & Bakım', usta:'Usta & İşçi', temizlik:'Temizlik Hizmetleri',
   uretim:'Üretim & Özel Sipariş', giyim:'Giyim & Tekstil', saglik:'Sağlık & Güzellik',
   egitim:'Eğitim & Danışmanlık', etkinlik:'Etkinlik & Düğün', mobilya:'Mobilya & Dekorasyon',
-  tekstil:'Tekstil & Hazır Giyim', 'mermer-tas':'Mermer & Doğal Taş',
+  tekstil:'Tekstil & Hazır Giyim', 'terzi-kuru-temizleme':'Terzi & Kuru Temizleme', 'mermer-tas':'Mermer & Doğal Taş',
   'metal-celik':'Metal & Çelik', 'plastik-pvc':'Plastik & PVC',
   'ahsap-mob':'Ahşap & Mobilya', 'gida-tarim':'Gıda & Tarım Ürünleri',
   'insaat-malz':'İnşaat Malzemeleri', elektrik:'Elektrik & Enerji',
@@ -55,11 +55,22 @@ const SEKTOR_ADLARI: Record<string, string> = {
   'kimya-boya':'Kimya & Boya', 'saglik-med':'Sağlık & Medikal',
 };
 
+// Terzi / tekstil ilanlarından Terzi Can sayfalarına gerçek (taranabilir) bağlantılar
+const TERZI_SEKTORLER = ['tekstil', 'giyim', 'terzi-kuru-temizleme', 'uretim'];
+const TERZI_LINKLER: { href: string; label: string }[] = [
+  { href: '/terzi', label: 'Terzi Can — Antalya Terzi' },
+  { href: '/terzi/paca-kisaltma-antalya', label: 'Paça Kısaltma' },
+  { href: '/terzi/fermuar-degisimi', label: 'Fermuar Değişimi' },
+  { href: '/terzi/dikis-atolyesi-antalya', label: 'Dikiş Atölyesi, Fason Üretim' },
+  { href: '/terzi/uniforma-uretimi-antalya', label: 'Üniforma Üretimi' },
+  { href: '/tekstil-antalya', label: 'Tekstil Antalya' },
+];
+
 function sektorEmoji(id: string): string {
   const map: Record<string, string> = {
     turizm:'🏨', seyahat:'✈️', kiralama:'🔑', tamir:'🔧', usta:'👷',
     temizlik:'🧹', uretim:'🏭', giyim:'👗', saglik:'💊', egitim:'📚',
-    etkinlik:'🎊', mobilya:'🪑', tekstil:'👕', 'mermer-tas':'🪨',
+    etkinlik:'🎊', mobilya:'🪑', tekstil:'👕', 'terzi-kuru-temizleme':'🧵', 'mermer-tas':'🪨',
     'metal-celik':'⚙️', 'plastik-pvc':'🧴', 'ahsap-mob':'🪵',
     'gida-tarim':'🌾', 'insaat-malz':'🏗️', elektrik:'⚡',
     makine:'🏭', lojistik:'🚢', 'kimya-boya':'🧪', 'saglik-med':'🏥',
@@ -88,7 +99,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
   const ilanData = d.ilan || d;
   if (ilanData && ilanData._id) {
     setIlan(ilanData);
-          fetch(`/api/ilanlar?sektor=${d.ilan.sektorId}&limit=10`)
+          fetch(`/api/ilanlar?sektor=${ilanData.sektorId}&limit=10`)
             .then(res => res.json())
             .then(data => {
               const liste = data.ilanlar || data.data || data || [];
@@ -230,9 +241,9 @@ function IlanDetayIcerik({ id }: { id: string }) {
 
       <div className="hero-bar">
         <div className="breadcrumb">
-          <span className="bc" onClick={() => router.push('/')}>Ana Sayfa</span>
+          <a className="bc" href="/" style={{ textDecoration: 'none' }}>Ana Sayfa</a>
           <span className="bc-sep">›</span>
-          <span className="bc" onClick={() => router.push('/ilanlar')}>İlanlar</span>
+          <a className="bc" href="/ilanlar" style={{ textDecoration: 'none' }}>İlanlar</a>
           <span className="bc-sep">›</span>
           <span className="bc" onClick={() => router.push(`/ilanlar?tip=${ilan.tip}`)}>
             {ilan.tip === 'ticari' ? 'Ticari' : 'Bireysel'}
@@ -381,6 +392,22 @@ function IlanDetayIcerik({ id }: { id: string }) {
           </div>
         </div>
 
+        {/* TERZİ CAN — terzi / tekstil ilanlarında */}
+        {TERZI_SEKTORLER.includes(ilan.sektorId) && (
+          <div style={{ marginTop: 32, background: '#fff', border: '1.5px solid var(--border)', borderRadius: 16, padding: 20 }}>
+            <div className="ozellikler-baslik">🧵 Antalya'da Terzi ve Tekstil Hizmeti</div>
+            <p style={{ fontSize: '.82rem', color: 'var(--mid)', marginBottom: 12, lineHeight: 1.7 }}>
+              Terzi Can, Konyaaltı: paça kısaltma, fermuar değişimi, elbise dikimi, kuru temizleme ve seri üretim.
+              Eve ve otele ücretsiz servis, her gün 08:00–23:00. WhatsApp: +90 531 898 64 18
+            </p>
+            <div className="ozellikler" style={{ marginBottom: 0 }}>
+              {TERZI_LINKLER.map(l => (
+                <a key={l.href} href={l.href} className="ozellik" style={{ textDecoration: 'none' }}>{l.label}</a>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* BENZER İLANLAR */}
         {benzerIlanlar.length > 0 && (
           <div className="benzer-ilanlar-section">
@@ -394,7 +421,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
                 const bBirim = bIlan.butceBirimi ?? '₺';
                 
                 return (
-                  <div key={bIlan._id} className="benzer-kart" onClick={() => router.push(`/ilan/${bIlan._id}`)}>
+                  <a key={bIlan._id} href={`/ilan/${bIlan._id}`} className="benzer-kart" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="benzer-kart-resim">
                       {bResim ? <img src={bResim} alt={bIlan.baslik} loading="lazy" /> : sektorEmoji(bIlan.sektorId)}
                     </div>
@@ -410,7 +437,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
