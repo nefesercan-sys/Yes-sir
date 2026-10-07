@@ -13,12 +13,6 @@ interface Props {
   gbpMaps1: string;
   gbpShort1: string;
   gbpReview1?: string;
-  gbpName2?: string;
-  gbpAddr2?: string;
-  gbpEmbed2: string;
-  gbpMaps2: string;
-  gbpShort2: string;
-  gbpReview2?: string;
 }
 
 const IMGS = {
@@ -155,7 +149,6 @@ const FAQS: [string, string][] = [
 
 export default function OnlineSchneiderClient({
   gbpName1, gbpAddr1, gbpEmbed1, gbpMaps1, gbpShort1, gbpReview1,
-  gbpName2, gbpAddr2, gbpEmbed2, gbpMaps2, gbpShort2, gbpReview2,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [priceTab, setPriceTab] = useState(0);
@@ -268,7 +261,7 @@ export default function OnlineSchneiderClient({
         .orauth-name{font-size:.72rem;color:var(--gold);font-weight:600}
         .orauth-info{font-size:.68rem;color:var(--muted)}
         /* ── MAPS ── */
-        .omaps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+        .omaps-grid{display:grid;grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto;gap:1.5rem;margin-top:2rem}
         .omap-card{background:var(--ink3);border:1px solid rgba(201,168,76,.12);border-radius:4px;overflow:hidden}
         .omap-card iframe{display:block;width:100%;height:240px;border:0}
         .omap-info{padding:1rem 1.2rem}
@@ -593,12 +586,12 @@ export default function OnlineSchneiderClient({
         </div>
       </section>
 
-      {/* GOOGLE MAPS — İKİ PROFİL */}
+      {/* GOOGLE MAPS — TEK PROFİL */}
       <section id="maps" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="maps-h">
         <div className="octr">
           <span className="oeyebrow">📍 Unsere Standorte</span>
-          <h2 className="oh2" id="maps-h">Unsere Google Unternehmensprofile</h2>
-          <p className="osh-sub">Stadtteile Hurma und Liman, Konyaaltı / Antalya.</p>
+          <h2 className="oh2" id="maps-h">Unser Google Unternehmensprofil</h2>
+          <p className="osh-sub">Stadtteil Hurma, Konyaaltı / Antalya.</p>
           <div className="odivider" />
           <div className="omaps-grid">
             {/* Kart 1 - Hurma Şubesi */}
@@ -616,26 +609,7 @@ export default function OnlineSchneiderClient({
                 </div>
               </div>
             </div>
-
-            {/* Kart 2 - Liman Şubesi */}
-            <div className="omap-card">
-              <iframe src={gbpEmbed2} width="100%" height="240" style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                title={gbpName2 || "TERZİ Can - Konyaaltı Liman"} />
-              <div className="omap-info">
-                <div className="omap-name">{gbpName2 || "TERZİ Can - Konyaaltı Liman & Ütü"}</div>
-                <div className="omap-addr">📍 {gbpAddr2 || "Liman Mahallesi, 07070 Konyaaltı / Antalya"}</div>
-                <div className="omap-btns">
-                  <a href={gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
-                  <a href={gbpShort2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-route">📍 Route</a>
-                  <a href={gbpReview2 || gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Bewertung</a>
-                </div>
-              </div>
-            </div>
           </div>
-          <p style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '1.2rem', textAlign: 'center' }}>
-            Sie können auf beiden Profilen eine Bewertung hinterlassen — das hilft direkt unserem Google-Ranking.
-          </p>
         </div>
       </section>
 
