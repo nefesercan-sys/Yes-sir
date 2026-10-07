@@ -901,7 +901,7 @@ export default function ElbiseDikimiClient() {
 
             <div className="location-btns">
               <a
-                href="https://maps.app.goo.gl/CNZghczJNRQX3mLM9"
+                href="https://www.google.com/maps?cid=5846987472659818117"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-map"
@@ -964,7 +964,7 @@ export default function ElbiseDikimiClient() {
           <a href="/terzi">Terzi Can Ana Sayfa</a>
           <a href="/online-terzi-hizmeti">Online Terzi Hizmeti</a>
           <a href="/antalya-bay-tailor-online-terzi-utu-hizmeti">Bay Tailor</a>
-          <a href="https://maps.app.goo.gl/CNZghczJNRQX3mLM9" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.google.com/maps?cid=5846987472659818117" target="_blank" rel="noopener noreferrer">
             Google Haritalar
           </a>
         </nav>
