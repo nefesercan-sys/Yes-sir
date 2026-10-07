@@ -11,7 +11,7 @@ const SITE_URL  = `${BASE_URL}/terzi/fermuar-degisimi`;
 const PARENT    = `${BASE_URL}/terzi`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const GBP_URL   = 'https://share.google/dsCVIz116FhbjISfz'; // TERZİ Can Antalya Tailor Service
+const GBP_URL   = 'https://www.google.com/maps?cid=5846987472659818117'; // TERZİ Can Antalya Tailor Service
 const HOURS     = '08:00–23:00';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
