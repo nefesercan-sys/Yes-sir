@@ -6,7 +6,7 @@ const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
 const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
-const MAPS_URL = 'https://maps.app.goo.gl/CNZghczJNRQX3mLM9';
+const MAPS_URL = 'https://www.google.com/maps?cid=5846987472659818117';
 const WA_MSG = 'Merhaba, Konyaaltı bölgesinde terzi hizmetiniz için bilgi almak istiyorum.';
 
 const jsonLd = {
@@ -30,7 +30,7 @@ const jsonLd = {
         streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
-        postalCode: '07070',
+        postalCode: '07130',
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
