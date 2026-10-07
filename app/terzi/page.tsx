@@ -20,7 +20,7 @@ const LAST_MODIFIED = '2026-10-04';
 
 // ── Google Business Profil ────────────────────────────────────────────────────
 // Kaynak: maps.app.goo.gl/3U3dCZ2iURWFwfJF6  →  ftid 0x14c393757afe22b7:0x5124ac20b20c2685
-const GBP_SHORT = 'https://maps.app.goo.gl/3U3dCZ2iURWFwfJF6';
+const GBP_SHORT = 'https://www.google.com/maps?cid=5846987472659818117';
 const GBP_CID   = '5846987472659818117';
 const GBP_MAPS  = `https://www.google.com/maps?cid=${GBP_CID}`;
 const GBP_NAME  = 'TERZİ Can Antalya Tailor Service';
