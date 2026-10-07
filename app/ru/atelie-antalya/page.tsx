@@ -25,10 +25,9 @@ const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/wrap-dress-stone.jpg`
 
 // Gerçek Google Maps kaydı (maps.app.goo.gl linkinden çözümlendi)
 // TERZİ Can - Konyaaltı, Hurma, 07000 Konyaaltı/Antalya
-const GMAPS_CID = '0x14c39311e6924c67:0x59547225251db8a0'
-const GMAPS_SHORT_LINK = 'https://maps.app.goo.gl/QEgSkRoA8Nz8H62g8'
-const GMAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=Terzi+Can+Konyaalti+Antalya&destination_place_id=${GMAPS_CID}`
-const GMAPS_PLACE_LINK = `https://www.google.com/maps/place/?q=place_id:${GMAPS_CID}`
+const GMAPS_SHORT_LINK = 'https://www.google.com/maps?cid=5846987472659818117'
+const GMAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987'
+const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
