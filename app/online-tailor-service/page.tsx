@@ -13,22 +13,14 @@ const TODAY = '2026-10-04';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri
+// Google İşletme Profili: TEK profil (Hurma, 07130)
 const GBP1 = {
   name:  'TERZİ Can Antalya Tailor Service',
   addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
   maps:  'https://www.google.com/maps?cid=5846987472659818117',
-  short: 'https://maps.app.goo.gl/3U3dCZ2iURWFwfJF6',
+  short: 'https://www.google.com/maps/dir/?api=1&destination=TERZ%C4%B0+Can+Antalya+Tailor+Service+Hurma+Konyaalt%C4%B1+Antalya',
   embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed',
-  review:'https://maps.app.goo.gl/3U3dCZ2iURWFwfJF6'
-};
-
-const GBP2 = {
-  name:  'TERZİ Can - Konyaaltı Liman & Ütü Hizmetleri',
-  addr:  'Liman Mahallesi, 07070 Konyaaltı / Antalya',
-  maps:  'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9',
-  short: 'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9?g_st=ac',
-  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Konyaalt%C4%B1+Liman+Antalya&output=embed',
-  review:'https://maps.app.goo.gl/VjFEbtfVYRzc7dBN9'
+  review:'https://g.page/r/CYUmDLIgrCRREAE/review'
 };
 
 export const metadata: Metadata = {
@@ -110,12 +102,6 @@ export default function OnlineTailorServicePage() {
         gbpMaps1={GBP1.maps}
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
-        gbpName2={GBP2.name}
-        gbpAddr2={GBP2.addr}
-        gbpEmbed2={GBP2.embed}
-        gbpMaps2={GBP2.maps}
-        gbpShort2={GBP2.short}
-        gbpReview2={GBP2.review}
       />
       <ReviewsBlock lang="en" />
     </>
