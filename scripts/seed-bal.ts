@@ -4,7 +4,9 @@
 
 import { MongoClient } from 'mongodb';
 
-const MONGODB_URI = mongodb+srv://nexusadmin:pandora1x@cluster0.ifg5d7n.mongodb.net/swaphubs_db?retryWrites=true&w=majority || '';
+// Bağlantı adresi koda YAZILMAZ: ortam değişkeninden okunur (MONGODB_URI=... npx tsx scripts/seed-bal.ts)
+const MONGODB_URI = process.env.MONGODB_URI || '';
+if (!MONGODB_URI) throw new Error('MONGODB_URI ortam değişkeni tanımlı değil');
 
 const urunler = [
   {
