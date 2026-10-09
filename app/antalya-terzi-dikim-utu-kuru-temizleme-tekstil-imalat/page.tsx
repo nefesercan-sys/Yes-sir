@@ -1,4 +1,4 @@
-// app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
+l// app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -18,7 +18,7 @@ const TODAY = new Date().toISOString().split('T')[0]
 // Önceki sürümde farklı bir CID (1496201377277644027) kullanılıyordu.
 // GBP ekran görüntüsünde bu kaydın "kopya profil" olarak işaretlendiği görüldü —
 // aynı işletme için iki farklı CID kullanmak Google'ın güven skorunu düşürür.
-const MAPS_CID_URL = 'https://share.google/dsCVIz116FhbjISfz'
+const MAPS_CID_URL = 'https://www.google.com/maps?cid=5846987472659818117'
 // TODO: Bu embed kodu eski/doğrulanmamış CID'e ait olabilir. Google Maps'te
 // doğru işletmeyi bulup "Paylaş → Haritayı Yerleştir" ile yeni embed kodu alın.
 const MAPS_EMBED = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed'
@@ -53,7 +53,7 @@ const jsonLd = {
         streetAddress: 'Sarısu, Hurma, Liman',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
-        postalCode: '07070',
+        postalCode: '07130',
         addressCountry: 'TR',
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
