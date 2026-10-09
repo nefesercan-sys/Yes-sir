@@ -82,9 +82,9 @@ const SERVICES = [
   { id:'seri-imalat', icon:'🏭', badge:'B2B', badgeColor:'#1E40AF',
     img: IMGS.seri,
     title:'Textilatelier & Serienproduktion', sub:'Lohnfertigung · Sammelbestellungen · Eigenmarke',
-    desc:'Komplette Textilproduktion für Marken und Boutiquen. Serienproduktion ab mindestens 50 Stück.',
-    feats:['Lohnfertigung','Schnittentwicklung','Qualitätskontrolle','Mind. 50 Stück'],
-    price:'Angebot Anfordern', note:'Mind. 50 Stück', time:'Je nach Menge',
+    desc:'Komplette Textilproduktion für Marken und Boutiquen. Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt.',
+    feats:['Lohnfertigung','Schnittentwicklung','Qualitätskontrolle','Keine Mindestmenge'],
+    price:'Angebot Anfordern', note:'Keine Mindestmenge', time:'Je nach Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Serienproduktion.' },
   { id:'spor-gunluk', icon:'🏃', badge:'', badgeColor:'',
     img: IMGS.spor,
@@ -142,7 +142,7 @@ const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Ab ₺2.500. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
   ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, mit garantierter Lieferung am selben Tag."],
-  ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Mindestens 50 Stück. Für Muster und Prototypen wird auch ein Einzelstück akzeptiert."],
+  ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Keine feste Mindestmenge; jedes Projekt wird einzeln kalkuliert. Für Muster und Prototypen wird auch ein Einzelstück akzeptiert."],
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],
   ["Versenden Sie in die ganze Türkei?", "Ja. Kostenloser Kurier innerhalb von Antalya, Versand in die ganze Türkei, 5–10 Werktage."],
@@ -387,7 +387,7 @@ export default function OnlineSchneiderClient({
           <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya und in die ganze Türkei:
           Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen, individuelle Schnittentwicklung,
           Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch, chemische Reinigung. Sportbekleidung, Trainingsanzüge
-          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
+          und Sweatshirts nach Maß. Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
         </p>
       </div>
 
@@ -486,7 +486,7 @@ export default function OnlineSchneiderClient({
               ['⚡','Express-Lieferung','Reparaturen am selben Tag, Maßanfertigung in 3–7 Tagen.'],
               ['📱','Online-Bestellung',"Per WhatsApp bestellen, landesweiter Versand."],
               ['🎨','Individuelles Design','Bringen Sie Ihr eigenes Design mit oder arbeiten Sie mit unserem Expertenteam.'],
-              ['🏭','Serienproduktionskapazität','Serienproduktion ab mindestens 50 Stück.'],
+              ['🏭','Serienproduktionskapazität','Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt.'],
               ['💰','Transparente Preise','Keine versteckten Kosten — klarer Preis im Voraus.'],
               ['🌍','Versand In Die Ganze Türkei','Von überall in der Türkei bestellen, geliefert zu Ihnen.'],
               ['📍','Auf Google Maps finden',"Öffnen Sie unser Google-Unternehmensprofil für Route und Kundenbewertungen."],
