@@ -1,4 +1,4 @@
-l// app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
+// app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
