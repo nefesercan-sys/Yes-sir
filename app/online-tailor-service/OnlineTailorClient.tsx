@@ -82,9 +82,9 @@ const SERVICES = [
   { id:'seri-imalat', icon:'🏭', badge:'B2B', badgeColor:'#1E40AF',
     img: IMGS.seri,
     title:'Textile Workshop & Mass Production', sub:'Contract Manufacturing · Bulk Orders · Private Label',
-    desc:'End-to-end textile manufacturing for brands and boutiques. Bulk production starting from a minimum of 50 pieces.',
-    feats:['Contract Manufacturing','Pattern Making','Quality Control','Min. 50 Pieces'],
-    price:'Get a Quote', note:'Min. 50 pieces', time:'Depends on quantity',
+    desc:'End-to-end textile manufacturing for brands and boutiques. Bulk production with no fixed minimum order, quoted per project.',
+    feats:['Contract Manufacturing','Pattern Making','Quality Control','No Fixed Minimum'],
+    price:'Get a Quote', note:'Quoted per project', time:'Depends on quantity',
     waMsg:'Hello, I would like information about mass production.' },
   { id:'spor-gunluk', icon:'🏃', badge:'', badgeColor:'',
     img: IMGS.spor,
@@ -142,7 +142,7 @@ const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "Starts from ₺2,500. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to every hotel in Antalya, with same-day delivery guaranteed."],
-  ["What\'s the minimum order quantity for mass production?", "Minimum 50 pieces. Single pieces are accepted for samples and prototypes."],
+  ["What\'s the minimum order quantity for mass production?", "No fixed minimum; each project is quoted separately. Single pieces are accepted for samples and prototypes."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
   ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],
@@ -387,7 +387,7 @@ export default function OnlineTailorClient({
           <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya and across Turkey:
           menswear and womenswear tailoring, ironing, repairs, alterations, custom pattern design,
           mass production and contract manufacturing. Hemming, zipper replacement, dry cleaning. Sportswear, tracksuits
-          and sweatshirts made to order. Bulk production from a minimum of 50 pieces. Free courier within Antalya, shipping nationwide.
+          and sweatshirts made to order. Bulk production with no fixed minimum order. Free courier within Antalya, shipping nationwide.
         </p>
       </div>
 
@@ -486,7 +486,7 @@ export default function OnlineTailorClient({
               ['⚡','Express Delivery','Same-day repairs, custom tailoring in 3–7 days.'],
               ['📱','Online Ordering',"Order via WhatsApp, shipped nationwide."],
               ['🎨','Original Design','Bring your own design or work with our expert team.'],
-              ['🏭','Mass Production Capacity','Bulk production starting from a minimum of 50 pieces.'],
+              ['🏭','Mass Production Capacity','Bulk production with no fixed minimum order, quoted per project.'],
               ['💰','Transparent Pricing','No hidden fees — get a clear price upfront.'],
               ['🌍','Nationwide Shipping','Order from anywhere in Turkey, shipped to you.'],
               ['📍','Find Us on Google Maps',"Open our Google Business Profile for directions and customer reviews."],
