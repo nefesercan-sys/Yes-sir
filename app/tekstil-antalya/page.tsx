@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Anavera Tekstil Antalya | Seri İmalat, Numune & İhracat' },
   description:
     'Antalya merkezli tekstil üreticisi Anavera Tekstil: numune çalışması, seri imalat, ' +
-    'erkek/kadın/çocuk tekstili üretimi ve ihracat. Min. 300 adetten OEM/fason üretim. ☎ ' + PHONE,
+    'erkek/kadın/çocuk tekstili üretimi ve ihracat. Sipariş sınırı yok, OEM/fason üretim proje bazında teklif edilir. ☎ ' + PHONE,
   keywords: [
     'Antalya tekstil üreticisi', 'seri imalat Antalya', 'numune çalışması tekstil',
     'model tasarım dikim atölyesi', 'fason üretim Antalya', 'tekstil ihracat Antalya',
@@ -77,7 +77,7 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Minimum sipariş adediniz nedir?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Stil/renk başına 300 adetten başlıyor. Numune ve prototip için tek adet de kabul edilir.' } },
+          acceptedAnswer: { '@type': 'Answer', text: 'Sabit bir minimum sipariş şartı koymuyoruz; numune, az adetli ve yüksek adetli işler proje bazında teklif edilir. Numune ve prototip için tek adet de kabul edilir.' } },
         { '@type': 'Question', name: 'Numune süreci nasıl işliyor?',
           acceptedAnswer: { '@type': 'Answer', text: 'Tasarımınıza veya referans ürününüze göre numune hazırlanır, onayınızdan sonra seri üretime geçilir.' } },
         { '@type': 'Question', name: 'Yurt dışına ihracat yapıyor musunuz?',
@@ -169,7 +169,7 @@ export default function TekstilAntalyaPage() {
           <h2 style={{ textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, marginBottom: '2rem' }}>Sık Sorulan Sorular</h2>
           <div style={{ display: 'grid', gap: '1rem' }}>
             {[
-              ['Minimum sipariş adediniz nedir?', 'Stil/renk başına 300 adetten başlıyor. Numune ve prototip için tek adet de kabul edilir.'],
+              ['Minimum sipariş adediniz nedir?', 'Sabit bir minimum sipariş şartı koymuyoruz; numune, az adetli ve yüksek adetli işler proje bazında teklif edilir. Numune ve prototip için tek adet de kabul edilir.'],
               ['Numune süreci nasıl işliyor?', 'Tasarımınıza veya referans ürününüze göre numune hazırlanır, onayınızdan sonra seri üretime geçilir.'],
               ["Yurt dışına ihracat yapıyor musunuz?", "Evet, Avrupa Birliği ülkelerine ve Rusya'ya düzenli ihracat yapıyoruz, gerekli gümrük evraklarını hazırlıyoruz."],
               ['Erkek, kadın ve çocuk tekstili aynı siparişte üretilebilir mi?', 'Evet, numune onayından sonra tek bir karma siparişte birleştirebiliyoruz.'],
