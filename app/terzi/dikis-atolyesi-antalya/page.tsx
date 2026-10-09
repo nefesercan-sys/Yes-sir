@@ -40,7 +40,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Dikiş Atölyesi Antalya — Fason Üretim Kalıp Çıkarma Seri İmalat 2026',
-      description: "Antalya dikiş atölyesi. Kalıp çıkarma, numune dikimi, fason üretim min. 50 adet, seri imalat, nakış & baskı. Markalar, butikler, e-ticaret, spor kulüpleri için.",
+      description: "Antalya dikiş atölyesi. Kalıp çıkarma, numune dikimi, fason üretim (minimum adet şartı yok, proje bazında teklif), seri imalat, nakış & baskı. Markalar, butikler, e-ticaret, spor kulüpleri için.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Muratpaşa','Kepez','Alanya','Manavgat'].map(name => ({ '@type': 'City', name })),
       offers: {
@@ -50,7 +50,7 @@ const jsonLd = {
         offers: [
           { '@type': 'Offer', name: 'Kalıp Çıkarma', description: 'Tasarım veya referans üründen teknik kalıp çıkarma + gradaj', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Numune Dikimi (1 adet)', description: 'Prototip ve onay numunesi, tek adet', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Fason Üretim (min 50 adet)', description: 'Kesim, dikim, overlok, ütü, paket dahil seri üretim', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', name: 'Fason Üretim (adet projeye göre)', description: 'Kesim, dikim, overlok, ütü, paket dahil seri üretim', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Nakış & Logo Baskı', price: '100', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
@@ -79,11 +79,11 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Dikiş atölyesi Antalya fiyatı ne kadar 2026?', acceptedAnswer: { '@type': 'Answer', text: `Kalıp çıkarma, numune ve fason üretim fiyatları proje bazlıdır. Adet, model ve kumaşa göre teklif verilir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Fason üretim Antalya minimum kaç adet?', acceptedAnswer: { '@type': 'Answer', text: 'Fason seri üretim için minimum 50 adet gereklidir. Numune ve prototip tek adet kabul edilir.' } },
+        { '@type': 'Question', name: 'Fason üretim Antalya minimum kaç adet?', acceptedAnswer: { '@type': 'Answer', text: 'Sabit bir minimum adet şartı koymuyoruz; her proje ayrı teklif edilir. Numune ve prototip tek adet kabul edilir.' } },
         { '@type': 'Question', name: 'Marka için kıyafet üretimi Antalya yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Markalar, butikler ve e-ticaret firmaları için kalıp + numune + seri üretim paketi. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Sweatshirt ve eşofman üretimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Sweatshirt, eşofman, hırka, polo yaka üretimi + nakış/baskı. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'E-ticaret için kıyafet üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Sewing workshop Antalya — minimum order?', acceptedAnswer: { '@type': 'Answer', text: `Tailor Can sewing workshop in Antalya accepts minimum 50 units for production. Samples accepted as 1 unit. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Sewing workshop Antalya — minimum order?', acceptedAnswer: { '@type': 'Answer', text: `Tailor Can sewing workshop in Antalya has no fixed minimum order; each project is quoted separately. Samples accepted as 1 unit. WhatsApp: ${PHONE}` } },
       ],
     },
   ],
@@ -92,7 +92,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp Çıkarma · Seri İmalat 2026 | Terzi Can' },
-  description: "Antalya dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim min. 50 adet, seri imalat, nakış, baskı. Markalar, butikler, e-ticaret, spor kulüpleri için. ☎ " + PHONE,
+  description: "Antalya dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim (minimum adet şartı yok, proje bazında teklif), seri imalat, nakış, baskı. Markalar, butikler, e-ticaret, spor kulüpleri için. ☎ " + PHONE,
   keywords: [
     'dikiş atölyesi Antalya', 'fason üretim Antalya', 'kalıp çıkarma Antalya',
     'seri imalat kıyafet Antalya', 'numune dikimi Antalya', 'butik üretim Antalya',
@@ -104,7 +104,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
   openGraph: {
     title: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp · Seri İmalat | Terzi Can',
-    description: "Kalıp çıkarma, numune, fason üretim min. 50 adet. Markalar için tam paket. ☎ " + PHONE,
+    description: "Kalıp çıkarma, numune, fason üretim (minimum adet şartı yok, proje bazında teklif). Markalar için tam paket. ☎ " + PHONE,
     url: SITE_URL, type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },
@@ -115,7 +115,7 @@ export const metadata: Metadata = {
 const HIZMETLER = [
   { ic: '📐', baslik: 'Kalıp Çıkarma & Gradaj', aciklama: 'Tasarım dosyasından veya referans üründen teknik kalıp çıkarma. XS–3XL beden gradajı. CAD destekli kalıp.' },
   { ic: '🧵', baslik: 'Numune & Prototip Dikimi', aciklama: 'Prototip ve onay numunesi dikimi. Tek adet sipariş kabul edilir. 5–7 iş günü teslim.' },
-  { ic: '✂️', baslik: 'Fason Üretim (min. 50 adet)', aciklama: 'Kesim + dikim + overlok + ütü + paket dahil tam seri üretim. Hız ve kalite garantisi.' },
+  { ic: '✂️', baslik: 'Fason Üretim (adet projeye göre)', aciklama: 'Kesim + dikim + overlok + ütü + paket dahil tam seri üretim. Hız ve kalite garantisi.' },
   { ic: '🏭', baslik: 'Büyük Seri İmalat', aciklama: '500+ adet büyük sipariş kapasitesi. İş planı, süreç takibi ve kalite kontrolü dahil.' },
   { ic: '🪡', baslik: 'Nakış & Dijital Baskı', aciklama: 'Logo nakışı, isim baskısı, serigrafi, DTF & dijital baskı. Sweatshirt, polo, t-shirt ve tüm kıyafetler.' },
   { ic: '📦', baslik: 'Etiket & Paketleme', aciklama: 'Ütülü, etiketli (barkod dahil) ve ambalajlı teslim. E-ticaret depolarına hazır sevkiyat.' },
@@ -164,11 +164,11 @@ export default function DikisAtölyesiPage() {
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.85, maxWidth: '640px', marginBottom: '1.5rem' }}>
               Markalar, butikler ve e-ticaret firmaları için <strong style={{ color: '#fff' }}>kalıp çıkarma, numune dikimi,
-              fason üretim ve seri imalat</strong>. Minimum 50 adet. Nakış, baskı ve paketleme dahil.
+              fason üretim ve seri imalat</strong>. Minimum adet şartı yok, proje bazında teklif. Nakış, baskı ve paketleme dahil.
               <strong style={{ color: '#D4B07A' }}> Prototip tek adet.</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '2rem' }}>
-              {[['Kalıp','Özel çıkarma'],['Numune','Tek adet'],['Fason','Min 50 adet'],['Nakış','Logo & isim'],['Teslim','Paketli']].map(([t,d]) => (
+              {[['Kalıp','Özel çıkarma'],['Numune','Tek adet'],['Fason','Projeye göre'],['Nakış','Logo & isim'],['Teslim','Paketli']].map(([t,d]) => (
                 <div key={t} style={{ background: 'rgba(255,255,255,.04)', padding: '1rem', textAlign: 'center' }}>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#D4B07A', marginBottom: '.3rem' }}>{t}</div>
                   <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)' }}>{d}</div>
@@ -275,12 +275,12 @@ export default function DikisAtölyesiPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Dikiş Atölyesi — Sık Sorulan Sorular</h2>
             {[
-              ['Fason üretim Antalya minimum kaç adet?', 'Seri üretim için minimum 50 adet gereklidir. Numune ve prototip tek adet kabul edilir.'],
+              ['Fason üretim Antalya minimum kaç adet?', 'Sabit bir minimum adet şartı koymuyoruz; her proje ayrı teklif edilir. Numune ve prototip tek adet kabul edilir.'],
               ['Kalıp çıkarma hizmeti var mı?', `Evet! Tasarım dosyası veya referans üründen teknik kalıp + gradaj. WhatsApp: ${PHONE}`],
-              ['Sweatshirt ve eşofman üretimi yapılıyor mu?', `Evet! Nakış ve baskı dahil. Minimum 50 adet. WhatsApp: ${PHONE}`],
+              ['Sweatshirt ve eşofman üretimi yapılıyor mu?', `Evet! Nakış ve baskı dahil. Sabit minimum adet yok, proje bazında teklif. WhatsApp: ${PHONE}`],
               ['E-ticaret için ürün üretimi yapılıyor mu?', `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim. WhatsApp: ${PHONE}`],
               ['Teslimat süresi ne kadar?', 'Numune onayından sonra seri imalat 15–30 iş günüdür. Büyük siparişlerde proje planı yapılır.'],
-              ['Do you offer garment manufacturing in Antalya in English?', `Yes! Tailor Can sewing workshop offers production for international brands. Min 50 pcs. WhatsApp: ${PHONE}`],
+              ['Do you offer garment manufacturing in Antalya in English?', `Yes! Tailor Can sewing workshop offers production for international brands. No fixed minimum, quoted per project. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.9rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
