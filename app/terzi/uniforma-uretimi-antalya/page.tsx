@@ -77,7 +77,7 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Otel üniforması üretimi Antalya fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Otel üniforma üretimi adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Minimum sipariş 10 adet olup daha az için görüşme yapılabilir. Numune dikimi tek adet kabul edilir.' } },
+        { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Sabit bir minimum sipariş şartı yok; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.' } },
         { '@type': 'Question', name: 'Aşçı ve garson üniforması dikimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Aşçı, şef, garson, barista, catering personeli üniforması üretiyoruz. Nakış dahil. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Okul üniforması seri üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Üniformaya logo nakışı veya baskı yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış ₺100'den başlar. WhatsApp: ${PHONE}` } },
