@@ -50,7 +50,7 @@ const jsonLd = {
       image: [`${HOME}/og/terzi-can.jpg`],
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Sarısu, Hurma, Liman',
+        streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07130',
@@ -649,7 +649,7 @@ export default function AntalyaTerziPage() {
 
             <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
-                { icon: '📍', label: 'Adres', value: 'Sarısu, Hurma, Liman, Konyaaltı / Antalya' },
+                { icon: '📍', label: 'Adres', value: 'Hurma Mahallesi, Konyaaltı / Antalya' },
                 { icon: '🕐', label: 'Çalışma Saatleri', value: 'Her gün 08:00–23:00' },
                 { icon: '🗺️', label: 'Google Profili', value: 'Google Haritalar\'da görüntüleyin' },
                 { icon: '📞', label: 'Telefon', value: PHONE },
