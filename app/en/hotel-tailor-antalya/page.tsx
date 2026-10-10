@@ -264,7 +264,7 @@ export default function HotelTailorAntalyaPage() {
                   ['Dress / Jacket Alteration','₺200+ (~€7)','48h'],
                   ['Sleeve Shortening','₺200+ (~€7)','48h'],
                   ['Evening Gown Repair','₺350+ (~€12)','48h'],
-                  ['Wedding Dress Alteration','₺500+ (~€17)','3–5 days'],
+                  ['Wedding Dress Alteration','₺800+ (~€24)','3–5 days'],
                   ['Men\'s Suit Tailoring','₺2,500+ (~€85)','5–7 days'],
                   ['Tear Repair','₺100+ (~€3)','Same day'],
                 ].map(([s, p, t], i) => (
