@@ -70,7 +70,7 @@ const jsonLd = {
       image: OG_IMAGE,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Sarısu, Hurma, Liman',
+        streetAddress: 'Hurma Mahallesi',
         addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07130',
@@ -363,7 +363,7 @@ const serviceRows = [
     title: 'Express Otel Servisi',
     detail: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
     area: 'Lara, Kundu Otelleri, Belek, Kemer, Konyaaltı Sahil Şeridi',
-    time: '2 - 4 Saat (Acil VIP)',
+    time: 'Aynı gün (işe göre)',
     price: '60 TL\'den',
   },
   {
@@ -434,8 +434,8 @@ const districtBlurbs = [
   { name: 'Sarısu', text: 'Sarısu sahil hattındaki site ve rezidanslara aynı gün kurye.' },
   { name: 'Gürsu', text: 'Gürsu mahallesindeki konut ve iş yerlerine randevulu adresten alım.' },
   { name: 'Çakırlar', text: 'Çakırlar bölgesine araçlı terzi servisi ve hızlı teslimat.' },
-  { name: 'Meltem', text: 'Meltem mahallesine aynı gün veya 24 saat içinde teslimat garantisi.' },
-  { name: 'Şirinyalı', text: 'Otel yoğun bölgede VIP acil ütü ve tadilat hizmeti önceliklidir.' },
+  { name: 'Meltem', text: 'Meltem mahallesine randevulu adresten alım ve teslimat; süre işleme göre değişir.' },
+  { name: 'Şirinyalı', text: 'Otel yoğun bölgede acil ütü ve tadilat talepleri için WhatsApp üzerinden randevu alınır.' },
   { name: 'Fener', text: 'Fener sahil bölgesine özel akşam saatlerinde teslimat imkanı.' },
   { name: 'Güzeloba', text: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
 ];
@@ -730,7 +730,7 @@ export default function GeminiOptimizedTailorPage() {
             SwapHubs Professional Tailoring & Textile Solutions
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '6px 18px', fontSize: 13.5, margin: '18px 0 0' }}>
-            <span>Sarısu, Hurma, Liman, 07130 Konyaaltı/Antalya</span>
+            <span>Hurma Mahallesi, 07130 Konyaaltı/Antalya</span>
             <span>WhatsApp: {PHONE}</span>
           </div>
           <p style={{ fontSize: 11.5, color: '#4d564f', marginTop: 20 }}>
