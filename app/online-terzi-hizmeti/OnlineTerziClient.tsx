@@ -201,7 +201,7 @@ const FAQS = [
 ];
 
 const STATS = [
-  { n: '12.000+', label: 'Mutlu Müşteri' },
+  { n: '2006', label: 'Yılından Beri' },
   { n: '81', label: 'İl Teslimat' },
   { n: '4', label: 'Dil Hizmet' },
   { n: '%98', label: 'Memnuniyet' },
@@ -547,7 +547,7 @@ export default function OnlineTerziClient() {
                 Türkiye'nin En Yenilikçi <span style={{ color: C.gold, fontStyle: 'italic' }}>Online Terzi Platformu</span>
               </h2>
               <p style={{ fontSize: 15, color: C.slate, lineHeight: 1.85, marginBottom: 32, fontFamily: 'system-ui, sans-serif' }}>
-                2017'den bu yana Antalya merkezli atölyemizde 12.000'den fazla müşteri için özel kıyafet tasarladık ve diktik. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren hibrit modelimizle Türkiye'nin 81 iline hizmet veriyoruz.
+                2006'dan bu yana Antalya merkezli atölyemizde özel kıyafet tasarlıyor ve dikiyoruz. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren hibrit modelimizle Türkiye'nin 81 iline hizmet veriyoruz.
               </p>
               <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, padding: 0, listStyle: 'none' }}>
                 {[
