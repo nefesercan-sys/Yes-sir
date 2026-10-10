@@ -9,6 +9,7 @@ import Script from 'next/script';
 export const metadata: Metadata = {
   title: { absolute: 'Antalya Konyaaltı Terzi | Dikim, Tamir ve Tadilat | 0531 898 64 18' },
   description: 'Antalya Konyaaltı profesyonel terzi servisi. Özel elbise dikimi, tamir, tadilat ve ütü hizmeti. Hızlı servis için hemen arayın: 0531 898 64 18',
+  alternates: { canonical: 'https://swaphubs.com/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat' },
   keywords: 'antalya konyaaltı terzi, elbise dikim antalya, terzi tamir tadilat, konyaaltı ütü servisi, liman mahallesi terzi, hurma terzi, Konyaaltında terzi, fermuar tamiri, paca kisaltma terzi, bel daraltma, uncalı terzi, terzi fiyatlari',
   openGraph: {
     title: 'Konyaaltı Terzi, Elbise Dikim ve Tadilat Servisi - Antalya',
