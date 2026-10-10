@@ -705,7 +705,9 @@ export function KeywordBlock({ slug }: { slug: string }) {
           {SERVICES.map((s) => (<a key={s.id} href={serviceUrl(lang, s)} style={linkChip}>{s.name.tr}</a>))}
         </div>
         <div style={{ marginTop: '.6rem' }}>
-          {(['en', 'ru', 'de'] as Lang[]).map((l) => (<a key={l} href={districtUrl(l, d)} hrefLang={l} lang={l} style={linkChip}>{{ en: 'English', ru: 'Русский', de: 'Deutsch' }[l]}</a>))}
+          {/* DÜZELTME: `as Lang[]` yerine `as const` — böylece l yalnızca 'en' | 'ru' | 'de' olur
+              ve aşağıdaki { en, ru, de }[l] indekslemesi 'tr' anahtarı yüzünden hata vermez. */}
+          {(['en', 'ru', 'de'] as const).map((l) => (<a key={l} href={districtUrl(l, d)} hrefLang={l} lang={l} style={linkChip}>{{ en: 'English', ru: 'Русский', de: 'Deutsch' }[l]}</a>))}
         </div>
       </div></div>
     </section>
