@@ -319,7 +319,7 @@ export default function EveGelenTerziPage() {
                   ['Elbise / Ceket Daraltma','₺200+','48 saat'],
                   ['Kol Kısaltma','₺200+','48 saat'],
                   ['Abiye Tamiri','₺350+','48 saat'],
-                  ['Gelinlik Tadilatı','₺500+','3–5 gün'],
+                  ['Gelinlik Tadilatı','₺800+','3–5 gün'],
                   ['Erkek Takım Elbise Dikimi','₺2.500+','5–7 gün'],
                   ['Yırtık Onarımı','₺100+','Aynı gün'],
                 ].map(([s, p, t], i) => (
