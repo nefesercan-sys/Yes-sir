@@ -37,7 +37,7 @@ const T: Record<Lang, any> = {
       ['🧺', 'Ironing & Dry Cleaning', 'Professional steam press and dry cleaning'],
     ],
     priceH: 'Prices', priceSub: 'The hotel visit itself is free — you only pay for the work',
-    priceRows: [['Hotel Visit Fee', 'FREE'], ['Hemming', '₺150+'], ['Zipper Replacement', '₺200+'], ['Dress / Suit Alteration', '₺200+'], ['Wedding Dress Alteration', '₺500+'], ['Ironing (per item)', '₺80+'], ['Dry Cleaning', '₺300+']],
+    priceRows: [['Hotel Visit Fee', 'FREE'], ['Hemming', '₺150+'], ['Zipper Replacement', '₺200+'], ['Dress / Suit Alteration', '₺200+'], ['Wedding Dress Alteration', '₺800+'], ['Ironing (per item)', '₺80+'], ['Dry Cleaning', '₺300+']],
     faqH: 'Frequently Asked Questions',
     faq: (r: string) => [
       [`Do you come to all hotels in ${r}?`, `Yes! We visit every hotel in ${r} — just share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
@@ -72,7 +72,7 @@ const T: Record<Lang, any> = {
       ['🧺', 'Глажка и химчистка', 'Профессиональная паровая глажка и химчистка'],
     ],
     priceH: 'Цены', priceSub: 'Сам выезд в отель бесплатный — платите только за работу',
-    priceRows: [['Выезд в отель', 'БЕСПЛАТНО'], ['Укорачивание', 'от ₺150'], ['Замена молнии', 'от ₺200'], ['Подгонка платья/костюма', 'от ₺200'], ['Подгонка свадебного платья', 'от ₺500'], ['Глажка (за вещь)', 'от ₺80'], ['Химчистка', 'от ₺300']],
+    priceRows: [['Выезд в отель', 'БЕСПЛАТНО'], ['Укорачивание', 'от ₺150'], ['Замена молнии', 'от ₺200'], ['Подгонка платья/костюма', 'от ₺200'], ['Подгонка свадебного платья', 'от ₺800'], ['Глажка (за вещь)', 'от ₺80'], ['Химчистка', 'от ₺300']],
     faqH: 'Часто задаваемые вопросы',
     faq: (r: string) => [
       [`Вы приезжаете во все отели ${r}?`, `Да! Мы приезжаем в каждый отель района ${r} — просто напишите название отеля и номер комнаты в WhatsApp. WhatsApp: ${PHONE}`],
@@ -107,7 +107,7 @@ const T: Record<Lang, any> = {
       ['🧺', 'Bügeln & Reinigung', 'Professionelles Dampfbügeln und chemische Reinigung'],
     ],
     priceH: 'Preise', priceSub: 'Der Hotelbesuch selbst ist kostenlos — Sie zahlen nur für die Arbeit',
-    priceRows: [['Hotelbesuch', 'KOSTENLOS'], ['Kürzen', 'ab ₺150'], ['Reißverschluss ersetzen', 'ab ₺200'], ['Kleid-/Anzugänderung', 'ab ₺200'], ['Brautkleid ändern', 'ab ₺500'], ['Bügeln (pro Stück)', 'ab ₺80'], ['Chemische Reinigung', 'ab ₺300']],
+    priceRows: [['Hotelbesuch', 'KOSTENLOS'], ['Kürzen', 'ab ₺150'], ['Reißverschluss ersetzen', 'ab ₺200'], ['Kleid-/Anzugänderung', 'ab ₺200'], ['Brautkleid ändern', 'ab ₺800'], ['Bügeln (pro Stück)', 'ab ₺80'], ['Chemische Reinigung', 'ab ₺300']],
     faqH: 'Häufig gestellte Fragen',
     faq: (r: string) => [
       [`Kommen Sie zu allen Hotels in ${r}?`, `Ja! Wir besuchen jedes Hotel in ${r} — teilen Sie einfach Hotelname und Zimmernummer per WhatsApp mit. WhatsApp: ${PHONE}`],
