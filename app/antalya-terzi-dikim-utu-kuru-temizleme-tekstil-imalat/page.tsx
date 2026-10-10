@@ -14,7 +14,7 @@ const PHONE_E   = '+905318986418'
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`
 const TODAY = new Date().toISOString().split('T')[0]
 
-// ── DÜZELTME: Doğrulanmış tek GBP kaydı (CID: 16306058881247995687) ──
+// ── DÜZELTME: Doğrulanmış tek GBP kaydı (cid=5846987472659818117) ──
 // Önceki sürümde farklı bir CID (1496201377277644027) kullanılıyordu.
 // GBP ekran görüntüsünde bu kaydın "kopya profil" olarak işaretlendiği görüldü —
 // aynı işletme için iki farklı CID kullanmak Google'ın güven skorunu düşürür.
