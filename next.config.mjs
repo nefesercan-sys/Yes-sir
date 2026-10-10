@@ -35,9 +35,10 @@ const nextConfig = {
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
-      // Gelinlik sayfası artık gerçek (app/terzi/gelinlik-tadilati). Yazım hataları ona yönlenir.
-      { source: '/terzi/gekinlik-tadilati', destination: '/terzi/gelinlik-tadilati', permanent: true },
-      { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi/gelinlik-tadilati', permanent: true },
+      // Gelinlik: gerçek sayfa app/terzi/hizmet/[hizmet] (gelinlik-abiye-tadilati). Eski/yazım hatalı adresler ona yönlenir.
+      { source: '/terzi/gelinlik-tadilati', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
+      { source: '/terzi/gekinlik-tadilati', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
+      { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
       { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
 
       // DİKKAT: /terzi/fermuar-degisimi GitHub'da olduğu için YÖNLENDİRİLMİYOR, SERBEST BIRAKILDI.
