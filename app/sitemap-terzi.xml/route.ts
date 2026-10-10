@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
+import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
 
@@ -62,11 +63,29 @@ export async function GET() {
     terziSayfalar.push({ url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
   })
 
+  // 🔎 Bölge × hizmet SEO sayfaları (4 dil, karşılıklı hreflang)
+  type Item = { url: string; priority: string; freq: string; alt?: Record<string, string> }
+  const hasAlt = (urlFor: (l: Lang) => string): Record<string, string> => ({
+    ...Object.fromEntries(LANGS.map((l) => [l, `${BASE_URL}${urlFor(l)}`])),
+    'x-default': `${BASE_URL}${urlFor('tr')}`,
+  })
+  const seoItems: Item[] = [
+    ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: hasAlt((x) => SERVICE_BASE[x]) })),
+    ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt: hasAlt((x) => serviceUrl(x, sv)) }))),
+    ...DISTRICTS.flatMap((d) => LANGS.map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d)) }))),
+  ]
+  // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
+  const seen = new Set(terziSayfalar.map((x) => x.url))
+  const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
+  // Mevcut Türkçe sayfalara da hreflang karşılığı vermek için alt bilgisini eşle
+  const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
+  const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) })), ...seoUnique]
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${terziSayfalar.map(s => `  <url>
-    <loc>${s.url}</loc>
-    <lastmod>${D.toISOString()}</lastmod>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${all.map(s => `  <url>
+    <loc>${s.url}</loc>${s.alt ? '\n' + Object.entries(s.alt).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${u}"/>`).join('\n') : ''}
+    <lastmod>${(seoUnique.includes(s) ? new Date(LAST_UPDATE) : D).toISOString()}</lastmod>
     <changefreq>${s.freq}</changefreq>
     <priority>${s.priority}</priority>
   </url>`).join('\n')}
