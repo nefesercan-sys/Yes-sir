@@ -13,12 +13,6 @@ interface Props {
   gbpMaps1: string;
   gbpShort1: string;
   gbpReview1?: string;
-  gbpName2?: string;
-  gbpAddr2?: string;
-  gbpEmbed2?: string;
-  gbpMaps2?: string;
-  gbpShort2?: string;
-  gbpReview2?: string;
 }
 
 const IMGS = {
@@ -82,9 +76,9 @@ const SERVICES = [
   { id:'seri-imalat', icon:'🏭', badge:'B2B', badgeColor:'#1E40AF',
     img: IMGS.seri,
     title:'Textile Workshop & Mass Production', sub:'Contract Manufacturing · Bulk Orders · Private Label',
-    desc:'End-to-end textile manufacturing for brands and boutiques. Bulk production with no fixed minimum order, quoted per project.',
-    feats:['Contract Manufacturing','Pattern Making','Quality Control','No Fixed Minimum'],
-    price:'Get a Quote', note:'Quoted per project', time:'Depends on quantity',
+    desc:'End-to-end textile manufacturing for brands and boutiques. Bulk production starting from a minimum of 50 pieces.',
+    feats:['Contract Manufacturing','Pattern Making','Quality Control','Min. 50 Pieces'],
+    price:'Get a Quote', note:'Min. 50 pieces', time:'Depends on quantity',
     waMsg:'Hello, I would like information about mass production.' },
   { id:'spor-gunluk', icon:'🏃', badge:'', badgeColor:'',
     img: IMGS.spor,
@@ -142,7 +136,7 @@ const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "Starts from ₺2,500. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to every hotel in Antalya, with same-day delivery guaranteed."],
-  ["What\'s the minimum order quantity for mass production?", "No fixed minimum; each project is quoted separately. Single pieces are accepted for samples and prototypes."],
+  ["What\'s the minimum order quantity for mass production?", "Minimum 50 pieces. Single pieces are accepted for samples and prototypes."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
   ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],
@@ -155,7 +149,6 @@ const FAQS: [string, string][] = [
 
 export default function OnlineTailorClient({
   gbpName1, gbpAddr1, gbpEmbed1, gbpMaps1, gbpShort1, gbpReview1,
-  gbpName2, gbpAddr2, gbpEmbed2, gbpMaps2, gbpShort2, gbpReview2,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [priceTab, setPriceTab] = useState(0);
@@ -268,7 +261,7 @@ export default function OnlineTailorClient({
         .orauth-name{font-size:.72rem;color:var(--gold);font-weight:600}
         .orauth-info{font-size:.68rem;color:var(--muted)}
         /* ── MAPS ── */
-        .omaps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+        .omaps-grid{display:grid;grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto;gap:1.5rem;margin-top:2rem}
         .omap-card{background:var(--ink3);border:1px solid rgba(201,168,76,.12);border-radius:4px;overflow:hidden}
         .omap-card iframe{display:block;width:100%;height:240px;border:0}
         .omap-info{padding:1rem 1.2rem}
@@ -362,7 +355,7 @@ export default function OnlineTailorClient({
             <a href="#services" className="obtn obtn-ghost">See Our Services ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Years of Experience'],['5.0★','Google Rating'],['4','Languages Spoken'],['24–48h','Delivery']] as [string,string][]).map(([n,l])=>(
+            {([['20+','Years of Experience'],['5.0★','Google Rating'],['4','Languages Spoken'],['≤ 3 days','Delivery']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
@@ -387,7 +380,7 @@ export default function OnlineTailorClient({
           <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya and across Turkey:
           menswear and womenswear tailoring, ironing, repairs, alterations, custom pattern design,
           mass production and contract manufacturing. Hemming, zipper replacement, dry cleaning. Sportswear, tracksuits
-          and sweatshirts made to order. Bulk production with no fixed minimum order. Free courier within Antalya, shipping nationwide.
+          and sweatshirts made to order. Bulk production from a minimum of 50 pieces. Free courier within Antalya, shipping nationwide.
         </p>
       </div>
 
@@ -486,7 +479,7 @@ export default function OnlineTailorClient({
               ['⚡','Express Delivery','Same-day repairs, custom tailoring in 3–7 days.'],
               ['📱','Online Ordering',"Order via WhatsApp, shipped nationwide."],
               ['🎨','Original Design','Bring your own design or work with our expert team.'],
-              ['🏭','Mass Production Capacity','Bulk production with no fixed minimum order, quoted per project.'],
+              ['🏭','Mass Production Capacity','Bulk production starting from a minimum of 50 pieces.'],
               ['💰','Transparent Pricing','No hidden fees — get a clear price upfront.'],
               ['🌍','Nationwide Shipping','Order from anywhere in Turkey, shipped to you.'],
               ['📍','Find Us on Google Maps',"Open our Google Business Profile for directions and customer reviews."],
@@ -593,10 +586,10 @@ export default function OnlineTailorClient({
         </div>
       </section>
 
-      {/* GOOGLE MAPS — İKİ PROFİL */}
+      {/* GOOGLE MAPS — TEK PROFİL */}
       <section id="maps" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="maps-h">
         <div className="octr">
-          <span className="oeyebrow">📍 Our Location</span>
+          <span className="oeyebrow">📍 Our Locations</span>
           <h2 className="oh2" id="maps-h">Our Google Business Profile</h2>
           <p className="osh-sub">Hurma neighbourhood, Konyaaltı / Antalya.</p>
           <div className="odivider" />
@@ -616,30 +609,7 @@ export default function OnlineTailorClient({
                 </div>
               </div>
             </div>
-
-            {gbpMaps2 && gbpEmbed2 && (
-            <>
-{/* Kart 2: yalnızca ikinci profil verilirse */}
-            <div className="omap-card">
-              <iframe src={gbpEmbed2} width="100%" height="240" style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                title={gbpName2 || "TERZİ Can - Konyaaltı Liman"} />
-              <div className="omap-info">
-                <div className="omap-name">{gbpName2 || "TERZİ Can - Konyaaltı Liman & Ütü"}</div>
-                <div className="omap-addr">📍 {gbpAddr2}</div>
-                <div className="omap-btns">
-                  <a href={gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
-                  <a href={gbpShort2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-route">📍 Directions</a>
-                  <a href={gbpReview2 || gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Review</a>
-                </div>
-              </div>
-            </div>
-            </>
-          )}
           </div>
-          <p style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '1.2rem', textAlign: 'center' }}>
-            Happy with our service? A short Google review helps other travellers find us.
-          </p>
         </div>
       </section>
 
@@ -688,4 +658,3 @@ export default function OnlineTailorClient({
     </div>
   );
 }
- 
