@@ -158,9 +158,9 @@ const CATEGORIES = [
     tag: '%100 Organik',
     title: 'Müslin & Keten Doğal Koleksiyon',
     subtitle: 'Doğayla Uyum, Bedeninizle Özgürlük',
-    desc: `%100 organik sertifikalı müslin ve keten kumaşlardan, cildinize nefes aldıran, GOTS sertifikasını taşıyan koleksiyonumuzu keşfedin. Kadın için rahat elbiseler, erkek için keten gömlekler, bebek ve çocuklar için antialerjik tulum ve takımlar tasarlıyoruz. Anne-bebek kombini koleksiyonumuz özel fotoğraf çekimleri için birebir aynı kumaştan uyumlu tasarımlar sunmaktadır.`,
+    desc: `Müslin ve keten gibi doğal kumaşlardan, cildinize nefes aldıran koleksiyonumuzu keşfedin. Kadın için rahat elbiseler, erkek için keten gömlekler, bebek ve çocuklar için antialerjik tulum ve takımlar tasarlıyoruz. Anne-bebek kombini koleksiyonumuz özel fotoğraf çekimleri için birebir aynı kumaştan uyumlu tasarımlar sunmaktadır.`,
     images: [IMG.muslin1, IMG.muslin2, IMG.muslin3],
-    features: ['GOTS & OEKO-TEX sertifikalı', 'Kimyasal içermeyen doğal boyalar', 'Anne-bebek kombin serisi', 'Bebek antialerjik koleksiyon', 'Tüm mevsim yazlık modeller'],
+    features: ['Doğal kumaş seçenekleri', 'Cilt dostu kumaşlar', 'Anne-bebek kombin serisi', 'Bebek antialerjik koleksiyon', 'Tüm mevsim yazlık modeller'],
     waMsg: 'Merhaba, müslin ve keten doğal koleksiyon siparişi vermek istiyorum.',
   },
   {
@@ -553,7 +553,7 @@ export default function OnlineTerziClient() {
                 {[
                   { icon: '🎯', title: 'Sıfır Hata Garantisi', desc: 'Kalıp çıkarmada dijital ölçüm teknolojisi' },
                   { icon: '⚡', title: 'Hızlı Teslimat', desc: 'Temel modeller 7–10 iş günü içinde hazır' },
-                  { icon: '🌿', title: 'Sürdürülebilir Moda', desc: 'OEKO-TEX & GOTS sertifikalı organik kumaşlar' },
+                  { icon: '🌿', title: 'Sürdürülebilir Moda', desc: 'Doğal ve nefes alan kumaşlar' },
                   { icon: '🌍', title: '4 Dil Desteği', desc: 'TR · EN · DE · AR dillerinde tam hizmet' },
                 ].map(w => (
                   <li key={w.title} style={{ padding: 20, borderRadius: 16, border: '1px solid #F3F4F6', backgroundColor: C.cream }}>
