@@ -8,16 +8,15 @@ const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/de/online-schneiderservice-antalya`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY = '2026-10-04';
+const TODAY = '2026-10-07';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
-// Konyaaltı Hurma ve Liman Şube / Lokasyon Bilgileri (EN sayfasıyla aynı, gerçek işletme verisi)
-// Google İşletme Profili: TEK profil (Hurma, 07130)
+// Tek konum: Hurma, Konyaaltı (Google Business Profile)
 const GBP1 = {
   name:  'TERZİ Can Antalya Tailor Service',
   addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
   maps:  'https://www.google.com/maps?cid=5846987472659818117',
-  short: 'https://www.google.com/maps/dir/?api=1&destination=TERZ%C4%B0+Can+Antalya+Tailor+Service+Hurma+Konyaalt%C4%B1+Antalya',
+  short: 'https://www.google.com/maps?cid=5846987472659818117',
   embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed',
   review:'https://g.page/r/CYUmDLIgrCRREAE/review'
 };
