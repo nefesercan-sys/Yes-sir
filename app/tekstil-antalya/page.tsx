@@ -81,7 +81,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Numune süreci nasıl işliyor?',
           acceptedAnswer: { '@type': 'Answer', text: 'Tasarımınıza veya referans ürününüze göre numune hazırlanır, onayınızdan sonra seri üretime geçilir.' } },
         { '@type': 'Question', name: 'Yurt dışına ihracat yapıyor musunuz?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Evet, Avrupa Birliği ülkelerine ve Rusya\'ya düzenli ihracat yapıyoruz, gerekli gümrük evraklarını (ATR/EUR.1) hazırlıyoruz.' } },
+          acceptedAnswer: { '@type': 'Answer', text: 'Evet, Avrupa Birliği ülkelerine ve Rusya\'ya düzenli ihracat yapıyoruz, ihracat evrak desteği sağlıyoruz.' } },
         { '@type': 'Question', name: 'Erkek, kadın ve çocuk tekstili aynı siparişte üretilebilir mi?',
           acceptedAnswer: { '@type': 'Answer', text: 'Evet, kategoriler için ayrı üretim hatlarımız var; numune onayından sonra tek bir karma siparişte birleştirebiliyoruz.' } },
       ],
