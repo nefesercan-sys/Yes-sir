@@ -3,6 +3,7 @@
 // Sayfa sonu "içerik haritası" verisi + eksik sayfalar için BreadcrumbList
 // Not: Yalnızca gerçekten var olan sayfalara link verir. Puan/yorum verisi içermez.
 // ============================================================
+import { DISTRICTS, SERVICES, districtUrl, serviceUrl } from '@/lib/seo-data';
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
 export type Lang = 'tr' | 'en' | 'de' | 'ru';
@@ -71,6 +72,29 @@ export function getLang(pathname: string): Lang | null {
 
 // ── Sayfa sonu içerik haritası ─────────────────────────────────────────────
 export function getSiteMap(pathname: string): SiteMap | null {
+  const base = getBaseSiteMap(pathname);
+  if (!base) return null;
+  const p = norm(pathname);
+  const not = (l: MapLink) => l.href !== p;
+  const L = base.lang;
+  const titles = {
+    tr: ['Terzi hizmetleri (paça, fermuar, tadilat, dikim)', 'Antalya bölgelerine göre terzi'],
+    en: ['Tailor services (hemming, zippers, alterations, dress making)', 'Tailor by area in Antalya'],
+    ru: ['Услуги портного (подшив, молнии, переделка, пошив)', 'Портной по районам Антальи'],
+    de: ['Schneider-Leistungen (Kürzen, Reißverschluss, Änderungen, Maßanfertigung)', 'Schneider nach Gebiet in Antalya'],
+  }[L];
+  const dl = (d: (typeof DISTRICTS)[number]) => ({ tr: `${d.name.tr} terzi`, en: `Tailor ${d.name.en}`, ru: `Портной ${d.name.ru}`, de: `Schneider ${d.name.de}` }[L]);
+  return {
+    ...base,
+    sections: [
+      ...base.sections,
+      { title: titles[0], links: SERVICES.map((sv) => ({ href: serviceUrl(L, sv), label: sv.name[L] })).filter(not) },
+      { title: titles[1], links: DISTRICTS.map((d) => ({ href: districtUrl(L, d), label: dl(d) })).filter(not) },
+    ],
+  };
+}
+
+function getBaseSiteMap(pathname: string): SiteMap | null {
   const p = norm(pathname);
   const lang = getLang(p);
   if (!lang) return null;
