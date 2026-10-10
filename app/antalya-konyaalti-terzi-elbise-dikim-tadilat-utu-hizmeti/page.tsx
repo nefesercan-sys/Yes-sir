@@ -222,7 +222,7 @@ export default function KonyaaltiTerziPage() {
             </h1>
 
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.72)', lineHeight: 1.8, maxWidth: 540, margin: '0 auto 1.8rem' }}>
-              <strong style={{ color: '#fff' }}>Terzi Can</strong> — Konyaaltı'nda 2017'den beri hizmet veren profesyonel terzi atölyesi.
+              <strong style={{ color: '#fff' }}>Terzi Can</strong> — Konyaaltı'nda 2006'dan beri hizmet veren profesyonel terzi atölyesi.
               Hurma, Liman, Uncalı, Sarısu, Gürsu ve tüm Konyaaltı mahallelerine
               <strong style={{ color: D.gold2 }}> ücretsiz adrese servis</strong>.
             </p>
@@ -250,7 +250,7 @@ export default function KonyaaltiTerziPage() {
 
             {/* Stat şeridi */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1px', background: 'rgba(255,255,255,.06)', marginTop: '2.5rem', maxWidth: 600, margin: '2.5rem auto 0', borderRadius: 8, overflow: 'hidden' }}>
-              {[['2017','Açılış yılı'],['Max 24 Sa','Aynı gün teslim'],['10+','Yıllık deneyim'],['Tüm Konyaaltı','Adrese servis']].map(([n,l]) => (
+              {[['2006','Açılış yılı'],['Aynı gün','Paça, daraltma, fermuar'],['20+','Yıllık deneyim'],['Tüm Konyaaltı','Adrese servis']].map(([n,l]) => (
                 <div key={l} style={{ padding: '1rem .5rem', textAlign: 'center', background: 'rgba(255,255,255,.03)' }}>
                   <div style={{ fontFamily: 'var(--font-unbounded,Georgia,serif)', fontSize: '.95rem', color: D.gold2, fontWeight: 700, marginBottom: 3 }}>{n}</div>
                   <div style={{ fontSize: '.6rem', color: 'rgba(255,255,255,.4)', textTransform: 'uppercase', letterSpacing: '.08em' }}>{l}</div>
