@@ -13,12 +13,6 @@ interface Props {
   gbpMaps1: string;
   gbpShort1: string;
   gbpReview1?: string;
-  gbpName2?: string;
-  gbpAddr2?: string;
-  gbpEmbed2?: string;
-  gbpMaps2?: string;
-  gbpShort2?: string;
-  gbpReview2?: string;
 }
 
 const IMGS = {
@@ -82,9 +76,9 @@ const SERVICES = [
   { id:'seri-imalat', icon:'🏭', badge:'B2B', badgeColor:'#1E40AF',
     img: IMGS.seri,
     title:'Textilatelier & Serienproduktion', sub:'Lohnfertigung · Sammelbestellungen · Eigenmarke',
-    desc:'Komplette Textilproduktion für Marken und Boutiquen. Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt.',
-    feats:['Lohnfertigung','Schnittentwicklung','Qualitätskontrolle','Keine Mindestmenge'],
-    price:'Angebot Anfordern', note:'Keine Mindestmenge', time:'Je nach Menge',
+    desc:'Komplette Textilproduktion für Marken und Boutiquen. Serienproduktion ab mindestens 50 Stück.',
+    feats:['Lohnfertigung','Schnittentwicklung','Qualitätskontrolle','Mind. 50 Stück'],
+    price:'Angebot Anfordern', note:'Mind. 50 Stück', time:'Je nach Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Serienproduktion.' },
   { id:'spor-gunluk', icon:'🏃', badge:'', badgeColor:'',
     img: IMGS.spor,
@@ -142,7 +136,7 @@ const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Ab ₺2.500. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
   ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, mit garantierter Lieferung am selben Tag."],
-  ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Keine feste Mindestmenge; jedes Projekt wird einzeln kalkuliert. Für Muster und Prototypen wird auch ein Einzelstück akzeptiert."],
+  ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Mindestens 50 Stück. Für Muster und Prototypen wird auch ein Einzelstück akzeptiert."],
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],
   ["Versenden Sie in die ganze Türkei?", "Ja. Kostenloser Kurier innerhalb von Antalya, Versand in die ganze Türkei, 5–10 Werktage."],
@@ -155,7 +149,6 @@ const FAQS: [string, string][] = [
 
 export default function OnlineSchneiderClient({
   gbpName1, gbpAddr1, gbpEmbed1, gbpMaps1, gbpShort1, gbpReview1,
-  gbpName2, gbpAddr2, gbpEmbed2, gbpMaps2, gbpShort2, gbpReview2,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [priceTab, setPriceTab] = useState(0);
@@ -268,7 +261,7 @@ export default function OnlineSchneiderClient({
         .orauth-name{font-size:.72rem;color:var(--gold);font-weight:600}
         .orauth-info{font-size:.68rem;color:var(--muted)}
         /* ── MAPS ── */
-        .omaps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+        .omaps-grid{display:grid;grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto;gap:1.5rem;margin-top:2rem}
         .omap-card{background:var(--ink3);border:1px solid rgba(201,168,76,.12);border-radius:4px;overflow:hidden}
         .omap-card iframe{display:block;width:100%;height:240px;border:0}
         .omap-info{padding:1rem 1.2rem}
@@ -362,7 +355,7 @@ export default function OnlineSchneiderClient({
             <a href="#services" className="obtn obtn-ghost">Unsere Leistungen ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Jahre Erfahrung'],['5.0★','Google-Bewertung'],['4','Sprachen'],['24–48h','Lieferung']] as [string,string][]).map(([n,l])=>(
+            {([['20+','Jahre Erfahrung'],['5.0★','Google-Bewertung'],['4','Sprachen'],['≤ 3 Tage','Lieferung']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
@@ -387,7 +380,7 @@ export default function OnlineSchneiderClient({
           <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya und in die ganze Türkei:
           Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen, individuelle Schnittentwicklung,
           Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch, chemische Reinigung. Sportbekleidung, Trainingsanzüge
-          und Sweatshirts nach Maß. Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
+          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
         </p>
       </div>
 
@@ -486,7 +479,7 @@ export default function OnlineSchneiderClient({
               ['⚡','Express-Lieferung','Reparaturen am selben Tag, Maßanfertigung in 3–7 Tagen.'],
               ['📱','Online-Bestellung',"Per WhatsApp bestellen, landesweiter Versand."],
               ['🎨','Individuelles Design','Bringen Sie Ihr eigenes Design mit oder arbeiten Sie mit unserem Expertenteam.'],
-              ['🏭','Serienproduktionskapazität','Serienproduktion ohne feste Mindestmenge, Angebot pro Projekt.'],
+              ['🏭','Serienproduktionskapazität','Serienproduktion ab mindestens 50 Stück.'],
               ['💰','Transparente Preise','Keine versteckten Kosten — klarer Preis im Voraus.'],
               ['🌍','Versand In Die Ganze Türkei','Von überall in der Türkei bestellen, geliefert zu Ihnen.'],
               ['📍','Auf Google Maps finden',"Öffnen Sie unser Google-Unternehmensprofil für Route und Kundenbewertungen."],
@@ -593,12 +586,12 @@ export default function OnlineSchneiderClient({
         </div>
       </section>
 
-      {/* GOOGLE MAPS — İKİ PROFİL */}
+      {/* GOOGLE MAPS — TEK PROFİL */}
       <section id="maps" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="maps-h">
         <div className="octr">
           <span className="oeyebrow">📍 Unsere Standorte</span>
-          <h2 className="oh2" id="maps-h">Unsere Google Unternehmensprofile</h2>
-          <p className="osh-sub">Stadtteile Hurma und Liman, Konyaaltı / Antalya.</p>
+          <h2 className="oh2" id="maps-h">Unser Google Unternehmensprofil</h2>
+          <p className="osh-sub">Stadtteil Hurma, Konyaaltı / Antalya.</p>
           <div className="odivider" />
           <div className="omaps-grid">
             {/* Kart 1 - Hurma Şubesi */}
@@ -616,30 +609,7 @@ export default function OnlineSchneiderClient({
                 </div>
               </div>
             </div>
-
-            {gbpMaps2 && gbpEmbed2 && (
-            <>
-{/* Kart 2: yalnızca ikinci profil verilirse */}
-            <div className="omap-card">
-              <iframe src={gbpEmbed2} width="100%" height="240" style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                title={gbpName2 || "TERZİ Can - Konyaaltı Liman"} />
-              <div className="omap-info">
-                <div className="omap-name">{gbpName2 || "TERZİ Can - Konyaaltı Liman & Ütü"}</div>
-                <div className="omap-addr">📍 {gbpAddr2}</div>
-                <div className="omap-btns">
-                  <a href={gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
-                  <a href={gbpShort2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-route">📍 Route</a>
-                  <a href={gbpReview2 || gbpMaps2} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-rev">⭐ Bewertung</a>
-                </div>
-              </div>
-            </div>
-            </>
-          )}
           </div>
-          <p style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '1.2rem', textAlign: 'center' }}>
-            Sie können auf beiden Profilen eine Bewertung hinterlassen — das hilft direkt unserem Google-Ranking.
-          </p>
         </div>
       </section>
 
