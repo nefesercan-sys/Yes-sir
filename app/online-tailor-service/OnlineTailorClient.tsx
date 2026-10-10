@@ -362,7 +362,7 @@ export default function OnlineTailorClient({
             <a href="#services" className="obtn obtn-ghost">See Our Services ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['10+','Years of Experience'],['5000+','Happy Customers'],['4','Languages Spoken'],['24–48h','Delivery']] as [string,string][]).map(([n,l])=>(
+            {([['10+','Years of Experience'],['5.0★','Google Rating'],['4','Languages Spoken'],['24–48h','Delivery']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>
