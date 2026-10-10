@@ -21,8 +21,8 @@ export const KONYAALTI_MAHALLELERI: Mahalle[] = [
   { slug: 'sarisu', ad: 'Sarısu', lat: 36.8386, lng: 30.6142, blurb: 'Sarısu sahil hattındaki site ve rezidanslara aynı gün kurye.' },
   { slug: 'gursu', ad: 'Gürsu', lat: 36.8797, lng: 30.6394, blurb: 'Gürsu mahallesindeki konut ve iş yerlerine randevulu adresten alım.' },
   { slug: 'cakirlar', ad: 'Çakırlar', lat: 36.9308, lng: 30.6469, blurb: 'Çakırlar bölgesine araçlı terzi servisi ve hızlı teslimat.' },
-  { slug: 'meltem', ad: 'Meltem', lat: 36.8975, lng: 30.6706, blurb: 'Meltem mahallesine aynı gün veya 24 saat içinde teslimat garantisi.' },
-  { slug: 'sirinyali', ad: 'Şirinyalı', lat: 36.8747, lng: 30.6997, blurb: 'Otel yoğun bölgede VIP acil ütü ve tadilat hizmeti önceliklidir.' },
+  { slug: 'meltem', ad: 'Meltem', lat: 36.8975, lng: 30.6706, blurb: 'Meltem mahallesine randevulu adresten alım ve teslimat; süre işleme göre değişir.' },
+  { slug: 'sirinyali', ad: 'Şirinyalı', lat: 36.8747, lng: 30.6997, blurb: 'Otel yoğun bölgede acil ütü ve tadilat talepleri için WhatsApp üzerinden randevu alınır.' },
   { slug: 'fener', ad: 'Fener', lat: 36.8697, lng: 30.6875, blurb: 'Fener sahil bölgesine özel akşam saatlerinde teslimat imkanı.' },
   { slug: 'guzeloba', ad: 'Güzeloba', lat: 36.8558, lng: 30.7889, blurb: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
 ];
