@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import { getDb } from '@/lib/mongodb';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
+import { KeywordBlock } from '@/components/terzi/SeoLanding';
 
 const HOME_URL = 'https://swaphubs.com';
 const SEKTOR_ID = 'terzi-kuru-temizleme';
@@ -134,6 +135,7 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
           { q: `Çalışma saatleriniz nedir?`, a: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz.` },
         ]}
       />
+      <KeywordBlock slug={ilce.slug} />
     </>
   );
 }
