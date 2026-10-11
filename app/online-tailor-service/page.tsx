@@ -14,12 +14,12 @@ const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Tek konum: Hurma, Konyaaltı (Google Business Profile)
 const GBP1 = {
-  name:  'TERZİ Can Antalya Tailor Service',
+  name:  'TERZİ Can - Konyaaltı',
   addr:  'Hurma Mahallesi, 07130 Konyaaltı / Antalya',
-  maps:  'https://www.google.com/maps?cid=5846987472659818117',
-  short: 'https://www.google.com/maps?cid=5846987472659818117',
-  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed',
-  review:'https://g.page/r/CYUmDLIgrCRREAE/review'
+  maps:  'https://www.google.com/maps?cid=6436895271281342624',
+  short: 'https://www.google.com/maps?cid=6436895271281342624',
+  embed: 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed',
+  review:'https://www.google.com/maps?cid=6436895271281342624'
 };
 
 export const metadata: Metadata = {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07', 'geo.placename': 'Hurma, Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987', ICBM: '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193', ICBM: '36.8572868, 30.5970193',
   },
   verification: {
     yandex: '4c73ee1911a4b197',
