@@ -2,6 +2,7 @@
 // SwapHubs — app/api/teklifler/route.ts
 // Teklif sistemi — ver, al, kabul et, reddet & Admin Denetimi
 // ============================================================
+import { isAdminRequest } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { getDb } from "@/lib/mongodb";
@@ -20,7 +21,7 @@ export async function GET(req: NextRequest) {
     const ilanId = searchParams.get("ilanId");  // belirli bir ilana teklifler
     
     // Panel veya Komuta Merkezinden özel bir "x-admin-key" gönderilmişse Admin kabul et
-    const isAdmin = session.user.email === ADMIN_EMAIL || req.headers.get("x-admin-key") === process.env.NEXT_PUBLIC_ADMIN_KEY;
+    const isAdmin = session.user.email === ADMIN_EMAIL || await isAdminRequest(req);
 
     const db = await getDb();
     let filter: Record<string, any> = {};
