@@ -34,7 +34,7 @@ const SERVICES = [
   { id:'erkek-dikim', icon:'👔', badge:'MOST POPULAR', badgeColor:'#C5973A',
     img: IMGS.erkek,
     title:'Menswear Tailoring', sub:'Suits · Shirts · Trousers · Blazers · Tuxedos',
-    desc:'Made-to-measure menswear. A perfect fit guaranteed, from business meetings to special occasions. Local and imported fabric options.',
+    desc:'Made-to-measure menswear. Tailored for a perfect fit, from business meetings to special occasions. Local and imported fabric options.',
     feats:['Suit','Shirt','Trousers','Blazer','Tuxedo','Waistcoat'],
     price:'₺800+', note:"Suits from ₺2,500", time:'3–7 days',
     waMsg:'Hello, I would like information about menswear tailoring.' },
@@ -135,7 +135,7 @@ const REVIEWS = [
 const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "Starts from ₺2,500. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
-  ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to every hotel in Antalya, with same-day delivery guaranteed."],
+  ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to every hotel in Antalya. We agree the delivery time with you on WhatsApp."],
   ["What\'s the minimum order quantity for mass production?", "Minimum 50 pieces. Single pieces are accepted for samples and prototypes."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
@@ -475,7 +475,7 @@ export default function OnlineTailorClient({
           <div className="odivider" />
           <div className="owhy-grid">
             {([
-              ['📐','Perfect Fit Guaranteed','Every garment is tailored exactly to your measurements.'],
+              ['📐','Made to Your Measurements','Every garment is tailored exactly to your measurements.'],
               ['⚡','Express Delivery','Same-day repairs, custom tailoring in 3–7 days.'],
               ['📱','Online Ordering',"Order via WhatsApp, shipped nationwide."],
               ['🎨','Original Design','Bring your own design or work with our expert team.'],
