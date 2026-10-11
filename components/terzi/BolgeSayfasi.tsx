@@ -51,10 +51,9 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://swaphubs.com' },
-          { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://swaphubs.com/terzi' },
-          ...(antalyaIlcesi ? [{ '@type': 'ListItem', position: 3, name: `${lokasyonAdi} Terzi`, item: url }]
-            : [{ '@type': 'ListItem', position: 3, name: `${lokasyonAdi} Terzi`, item: url }]),
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: 'https://swaphubs.com/terzi' },
+          ...(antalyaIlcesi ? [{ '@type': 'ListItem', position: 2, name: `${lokasyonAdi} Terzi`, item: url }]
+            : [{ '@type': 'ListItem', position: 2, name: `${lokasyonAdi} Terzi`, item: url }]),
         ],
       },
       {
