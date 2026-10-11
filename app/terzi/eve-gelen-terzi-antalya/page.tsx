@@ -60,7 +60,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can',
       url: SITE_URL,
-      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer, Alanya dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. 24 saat. ☎ " + PHONE,
+      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer, Alanya dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. Her gün 08:00–23:00. ☎ " + PHONE,
       inLanguage: 'tr',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -94,8 +94,8 @@ const jsonLd = {
         },
         {
           '@type':'Question',
-          name:'Mobile tailor Antalya — same day service?',
-          acceptedAnswer:{'@type':'Answer',text:`Yes! Tailor Can offers same-day and 24-hour mobile tailor service across all Antalya districts including Lara, Belek, Kemer and Alanya hotels. WhatsApp: ${PHONE}`},
+          name:'Mobile tailor Antalya — how fast is the service?',
+          acceptedAnswer:{'@type':'Answer',text:`Yes! Tailor Can offers a mobile tailor service across Antalya districts including Lara, Belek, Kemer and Alanya hotels. Timing depends on the job and workload and is confirmed on WhatsApp. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
@@ -112,12 +112,11 @@ const jsonLd = {
     {
       '@type': 'HowTo',
       name: 'Eve veya Otele Gelen Terzi Servisi Nasıl Çalışır?',
-      totalTime: 'PT24H',
       step: [
         {'@type':'HowToStep', name:'WhatsApp yazın', text:`${PHONE} numarasına konumunuzu veya otel adınızı gönderin.`},
-        {'@type':'HowToStep', name:'Randevu alın', text:'30 dakika içinde terzi size uygun saati bildirir.'},
+        {'@type':'HowToStep', name:'Randevu alın', text:'Terzi size uygun saati WhatsApp\'tan bildirir.'},
         {'@type':'HowToStep', name:'Terzi gelir', text:'Belirtilen saatte araçlı terzi adresinize gelir, ölçü alır, kıyafetleri atar.'},
-        {'@type':'HowToStep', name:'Teslim alın', text:'24–48 saat içinde kıyafetiniz dikilerek kapınıza teslim edilir.'},
+        {'@type':'HowToStep', name:'Teslim alın', text:'Kıyafetiniz hazır olunca kapınıza teslim edilir; süre işe göre WhatsApp\'ta netleşir.'},
       ],
     },
   ],
@@ -126,7 +125,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can' },
-  description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya dahil tüm ilçelere araçlı terzi. Paça kısaltma ₺150, elbise tadilatı. 24 saat. ☎ " + PHONE,
+  description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya dahil tüm ilçelere araçlı terzi. Paça kısaltma ₺150, elbise tadilatı. Her gün 08:00–23:00. ☎ " + PHONE,
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
     'araçlı terzi servisi Antalya','mobile tailor Antalya',
@@ -146,7 +145,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis',
-    description: "Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerine terzi servisi. 24 saat. ☎ " + PHONE,
+    description: "Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerine terzi servisi. Her gün 08:00–23:00. ☎ " + PHONE,
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true },
@@ -194,7 +193,7 @@ export default function EveGelenTerziPage() {
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> araçlı terzi servisiyle <strong style={{ color: '#D4B07A' }}>tüm Antalya ilçelerine</strong> geliyoruz.
               Belek, Lara, Kemer, Alanya dahil tüm oteller. Ölçü alım, dikim ve teslimat kapınıza.
-              24–48 saat ekspres.
+              Süre işe göre WhatsApp'ta netleşir.
             </p>
             {/* Çok dil karşılama */}
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
@@ -232,9 +231,9 @@ export default function EveGelenTerziPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'WhatsApp\'tan Konum Paylaşın', `${PHONE} numarasına konum veya otel adı gönderin`],
-                ['📞', '30 Dk İçinde Randevu', 'Terzi size uygun saati bildirir'],
+                ['📞', 'Randevu', 'Terzi size uygun saati bildirir'],
                 ['✂️', 'Yerinde Ölçü Alım', 'Terzi adresinize gelir, ölçü alır, kıyafetleri atar'],
-                ['🚗', '24–48 Saat Teslim', 'Dikilen kıyafet kapınıza teslim edilir'],
+                ['🚗', 'Kapıya Teslim', 'Dikilen kıyafet kapınıza teslim edilir'],
               ].map(([ic, t, d], i) => (
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
@@ -315,7 +314,7 @@ export default function EveGelenTerziPage() {
                 {[
                   ['Araçlı Servis Ücreti','ÜCRETSIZ','—'],
                   ['Paça / Pantolon Kısaltma','₺150+','24 saat'],
-                  ['Fermuar Değişimi','₺120+','Aynı gün'],
+                  ['Fermuar Değişimi','₺200+','Aynı gün'],
                   ['Elbise / Ceket Daraltma','₺200+','48 saat'],
                   ['Kol Kısaltma','₺200+','48 saat'],
                   ['Abiye Tamiri','₺350+','48 saat'],
@@ -342,14 +341,14 @@ export default function EveGelenTerziPage() {
             </h2>
             <p style={{ color: 'rgba(255,255,255,.7)', fontSize: '.9rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
               Visiting Antalya for a gala dinner, business meeting or wedding? Tailor Can's mobile tailor service
-              delivers <strong style={{ color: '#fff' }}>same-day and 24-hour alterations</strong> directly to your hotel room.
+              delivers <strong style={{ color: '#fff' }}>alterations</strong> directly to your hotel room, with timing confirmed on WhatsApp.
               We speak <strong style={{ color: '#D4B07A' }}>English, Russian, German and Turkish</strong>.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '1rem', marginBottom: '2rem' }}>
               {[
-                ['👗','Dress altered before dinner','24h express'],
-                ['💼','Suit ready for meeting','Same day possible'],
-                ['💍','Wedding dress adjusted','48h turnaround'],
+                ['👗','Dress altered before dinner','Ask on WhatsApp'],
+                ['💼','Suit ready for meeting','Ask on WhatsApp'],
+                ['💍','Wedding dress adjusted','Ask on WhatsApp'],
                 ['🚗','We come to your hotel','Free service call'],
               ].map(([ic, t, s]) => (
                 <div key={t as string} style={{ background: 'rgba(255,255,255,.05)', border: '1px solid rgba(212,176,122,.15)', borderRadius: '2px', padding: '1.2rem' }}>
@@ -393,7 +392,7 @@ export default function EveGelenTerziPage() {
               ['Araçlı terzi servisi ücretli mi?', 'Hayır! Araçlı terzi servisi tamamen ücretsizdir. Sadece yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺150, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
-              ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazıldıktan 30 dakika içinde randevu belirlenir. Genellikle aynı gün veya ertesi gün terzi adresinize gelmektedir.'],
+              ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
               ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
@@ -412,7 +411,7 @@ export default function EveGelenTerziPage() {
             Terziyi Şimdi Çağırın
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Konum paylaşın — 30 dk içinde randevu, 24 saat içinde teslim
+            Konum paylaşın — randevu saatini birlikte belirleyelim
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
