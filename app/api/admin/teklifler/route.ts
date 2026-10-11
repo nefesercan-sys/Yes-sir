@@ -1,11 +1,10 @@
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
 export async function GET(req: NextRequest) {
-  const adminKey = req.headers.get('x-admin-key');
-  if (!adminKey || adminKey.length < 5) {
-    return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-  }
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
 
   try {
     const db = await getDb();
