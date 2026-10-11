@@ -70,9 +70,8 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: HOME },
-        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi', item: PARENT },
-        { '@type': 'ListItem', position: 3, name: 'Kuru Temizleme Antalya', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Antalya Terzi', item: PARENT },
+        { '@type': 'ListItem', position: 2, name: 'Kuru Temizleme Antalya', item: SITE_URL },
       ],
     },
     {
@@ -138,8 +137,7 @@ export default function KuruTemizlemePage() {
         <QuickActionBanner lang="tr" service="kuru-temizleme" />
 
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
-          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
-          {' › '}<Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
+          <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
           {' › '}<span>Kuru Temizleme Antalya</span>
         </nav>
 
