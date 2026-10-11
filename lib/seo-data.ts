@@ -18,7 +18,7 @@ export const SITE = 'https://swaphubs.com';
 export const BUSINESS_ID = 'https://swaphubs.com/terzi#business'; // app/terzi/page.tsx ile aynı işletme varlığı
 export const PHONE = '+90 531 898 64 18';
 export const PHONE_TEL = '+905318986418';
-export const MAPS = 'https://www.google.com/maps?cid=5846987472659818117';
+export const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
 export const LAST_UPDATE = '2026-10-10';
 
 // ── URL şeması ──────────────────────────────────────────────
