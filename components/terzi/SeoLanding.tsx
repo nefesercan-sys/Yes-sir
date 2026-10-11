@@ -15,6 +15,7 @@ import {
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
   type Lang, type District, type Service,
 } from '@/lib/seo-data';
+import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/terzi-can.jpg`;
@@ -103,6 +104,18 @@ const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string) => ({
 });
 
 // ── Metin üreticileri ───────────────────────────────────────
+const SVC_FAR: Record<Lang, string> = {
+  tr: "Alım-teslim WhatsApp'tan planlanır", en: 'Collection & delivery planned on WhatsApp',
+  ru: 'Забор и доставка — в WhatsApp', de: 'Abholung & Lieferung per WhatsApp',
+};
+
+const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: string; hub: string }> = {
+  tr: { h: (n) => `${n} hakkında`, where: 'Konum', needs: 'Bu bölgede en çok istenen işler', hub: 'Atölye: Hurma, Konyaaltı' },
+  en: { h: (n) => `About ${n}`, where: 'Location', needs: 'Most common jobs from this area', hub: 'Workshop: Hurma, Konyaaltı' },
+  ru: { h: (n) => `О районе: ${n}`, where: 'Расположение', needs: 'Что чаще всего приносят из этого района', hub: 'Мастерская: Хурма, Коньяалты' },
+  de: { h: (n) => `Über ${n}`, where: 'Lage', needs: 'Häufigste Aufträge aus dieser Gegend', hub: 'Werkstatt: Hurma, Konyaaltı' },
+};
+
 function districtCopy(lang: Lang, d: District) {
   const n = d.name[lang];
   const loc = d.loc[lang];
@@ -113,11 +126,16 @@ function districtCopy(lang: Lang, d: District) {
     ru: `Портной ${n}, Анталья — подшив, молния, ремонт одежды`,
     de: `Schneider ${n}, Antalya — Hose kürzen, Reißverschluss, Änderungen`,
   }[lang];
+  const far = FAR_DISTRICTS.includes(d.slug);
+  const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
+  const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
+  const svcRu = far ? 'Забор и доставка согласуются в WhatsApp' : 'Бесплатный выезд в отели и на дом';
+  const svcDe = far ? 'Abholung und Lieferung per WhatsApp geplant' : 'Kostenloser Service zu Hotels und nach Hause';
   const desc = {
-    tr: `${loc} terzi mi arıyorsunuz? Paça kısaltma, bel daraltma, fermuar değişimi, elbise dikimi ve tamiri, gelinlik ₺800'den, abiye ₺400'den. Otele ve eve ücretsiz servis, her gün 08:00–23:00.`,
-    en: `Looking for a tailor ${loc}? Trouser hemming, waist alteration, zipper replacement, dress making and repair, wedding dress from ₺800. Free service to hotels and homes, open daily 08:00–23:00.`,
-    ru: `Нужен портной ${loc}? Подшив брюк, ушивание, замена молнии, пошив и ремонт платьев, свадебное платье от ₺800. Бесплатный выезд в отели и на дом, ежедневно 08:00–23:00.`,
-    de: `Schneider ${loc} gesucht? Hose kürzen, Taille enger machen, Reißverschluss wechseln, Kleider nähen und ändern, Brautkleid ab ₺800. Kostenloser Service zu Hotels und nach Hause, täglich 08:00–23:00.`,
+    tr: `${loc} terzi mi arıyorsunuz? Paça kısaltma, bel daraltma, fermuar değişimi, elbise dikimi ve tamiri, gelinlik ₺800'den, abiye ₺400'den. ${svcTr}, her gün 08:00–23:00.`,
+    en: `Looking for a tailor ${loc}? Trouser hemming, waist alteration, zipper replacement, dress making and repair, wedding dress from ₺800. ${svcEn}, open daily 08:00–23:00.`,
+    ru: `Нужен портной ${loc}? Подшив брюк, ушивание, замена молнии, пошив и ремонт платьев, свадебное платье от ₺800. ${svcRu}, ежедневно 08:00–23:00.`,
+    de: `Schneider ${loc} gesucht? Hose kürzen, Taille enger machen, Reißverschluss wechseln, Kleider nähen und ändern, Brautkleid ab ₺800. ${svcDe}, täglich 08:00–23:00.`,
   }[lang];
   return { n, loc, kw, title, desc };
 }
@@ -153,6 +171,24 @@ function districtAbout(lang: Lang, d: District): string {
 function districtFaq(lang: Lang, d: District): [string, string][] {
   const loc = d.loc[lang];
   const n = d.name[lang];
+  const fact = DISTRICT_FACTS[d.slug];
+  const extra: [string, string][] = fact ? [[{
+    tr: `${n} nerede, ${loc} terzi hizmeti nasıl işliyor?`, en: `Where is ${n} and how does the tailor service work ${loc}?`,
+    ru: `Где находится ${n} и как работает услуга портного ${loc}?`, de: `Wo liegt ${n} und wie funktioniert der Schneiderservice ${loc}?`,
+  }[lang], `${fact.where[lang]} ${fact.needs[lang]}`]] : [];
+  const base = districtFaqBase(lang, d, loc, n);
+  const far = FAR_DISTRICTS.includes(d.slug);
+  const farFix: [string, string][] = [
+    ['otel ve eve servis ücretsizdir', "alım-teslim WhatsApp'tan planlanır"],
+    ['service to hotels and homes is free', 'collection and delivery are planned on WhatsApp'],
+    ['выезд в отели и на дом бесплатный', 'забор и доставка согласуются в WhatsApp'],
+    ['der Service zu Hotels und nach Hause ist kostenlos', 'Abholung und Lieferung werden per WhatsApp geplant'],
+  ];
+  const fixed = far ? base.map(([q, an]) => [q, farFix.reduce((t, [x, y]) => t.split(x).join(y), an)] as [string, string]) : base;
+  return [...fixed, ...extra];
+}
+
+function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [string, string][] {
   const by = (id: string) => SERVICES.find((s) => s.id === id)!;
   return {
     tr: [
@@ -456,8 +492,19 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
-        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${u.free} · ${u.hours}`} h1={h1}
+        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${FAR_DISTRICTS.includes(d.slug) ? SVC_FAR[lang] : u.free} · ${u.hours}`} h1={h1}
           desc={`${districtAbout(lang, d)}`} waMsg={waMsg} />
+
+        {DISTRICT_FACTS[d.slug] && (
+          <section className="sl-sec" aria-labelledby="local-h" style={{ paddingBottom: '1rem' }}>
+            <div className="sl-ctr" style={{ maxWidth: 820 }}>
+              <h2 className="sl-sec-h sl-ff" id="local-h" style={{ textAlign: 'left' }}>{LOCAL_UI[lang].h(d.name[lang])}</h2>
+              <p style={{ fontSize: '.92rem', lineHeight: 1.8, color: 'rgba(255,255,255,.78)', margin: '.6rem 0' }}><strong>{LOCAL_UI[lang].where}:</strong> {DISTRICT_FACTS[d.slug].where[lang]}</p>
+              <p style={{ fontSize: '.92rem', lineHeight: 1.8, color: 'rgba(255,255,255,.78)', margin: '.6rem 0' }}><strong>{LOCAL_UI[lang].needs}:</strong> {DISTRICT_FACTS[d.slug].needs[lang]}</p>
+              <p style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.5)', margin: '.6rem 0 0' }}>{LOCAL_UI[lang].hub}</p>
+            </div>
+          </section>
+        )}
 
         <section className="sl-sec" aria-labelledby="svc-h">
           <div className="sl-ctr">
