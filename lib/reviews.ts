@@ -45,15 +45,36 @@ export const GOOGLE_REVIEWS: GoogleReview[] = [
     text: 'Çok iyi bir terzi. Yaptığı işten çok memnun kaldım. Fiyatları uygun, dikişleri ve işçiliği oldukça kaliteli. Titiz ve özenli çalışıyor. Kesinlikle tavsiye ederim.\n\nДействительно очень хороший портной. И цены доступные, и качество работы отличное. Всё делает аккуратно и качественно. Я очень довольна результатом. С чистой совестью рекомендую.',
   },
   {
+    author: 'Mehmet E.',
+    rating: 5,
+    date: '2026-07',
+    lang: 'tr',
+    text: 'İş tecrübesi ve ustalığı çok iyi. Fiyatları uygun.',
+  },
+  {
+    author: 'Alena U.',
+    rating: 5,
+    date: '2026-07',
+    lang: 'tr',
+    text: 'Her şey harika.',
+  },
+  {
     author: 'Ira G.',
     rating: 5,
     date: '2026-07',
     lang: 'ru',
     text: 'Супер мастер своего дела. Очень аккуратно выполняет работу, может подчинить любую вещь, а также сшить любую модель на заказ. ВСЕМ РЕКОМЕНДУЮ 👍👍👍👍👍👌',
   },
+  {
+    author: 'Cemile N.',
+    rating: 5,
+    date: '2026-07',
+    lang: 'tr',
+    text: 'Arkadaşlarımızla eğlenmeye çıktık arkadaşımın elbisenin fermuarı patladı gittik 15 dkda halloldu kesinlikle tavsiye ediyoruz ayriyetten çok güler yüzlü bir abimizdi 🙏❤️',
+  },
 ];
 
-// Google profilindeki toplam puan ve yorum sayısı (sahibin bildirdiği: 9 yorum, ortalama 5.0). Yeni yorum gelince count'u güncelle.
+// Google profilindeki toplam puan ve yorum sayısı (Google profil ekranında doğrulandı: 5,0 · 9 yorum). Yeni yorum gelince count'u güncelle.
 // Listedeki GOOGLE_REVIEWS yalnızca metni birebir doğrulanmış yorumlardır; sayı profildeki toplamı gösterir.
 export const GOOGLE_PROFILE_STATS = { count: 9, average: '5.0' };
 
