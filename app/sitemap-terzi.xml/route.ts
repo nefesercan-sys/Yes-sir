@@ -56,7 +56,8 @@ export async function GET() {
     terziSayfalar.push({ url: `${BASE_URL}/terzi/antalya/${i.slug}`, priority: '0.80', freq: 'weekly' })
   })
 
-  const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu']
+  // Yalnızca gerçekten sayfası olan bölgeler (lib/otel-bolgeleri.ts). Kundu için sayfa yok → eklenirse buraya da ekle.
+  const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer']
   turistik.forEach(slug => {
     terziSayfalar.push({ url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
     terziSayfalar.push({ url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
