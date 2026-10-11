@@ -1,3 +1,4 @@
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
@@ -16,8 +17,10 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
 }
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
-    const body = await req.json();
+    const { _id, ...body } = await req.json();
     const db = await getDb();
     await db.collection('bal_urunler').updateOne(
       { _id: new ObjectId(params.id) },
@@ -29,7 +32,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
     const db = await getDb();
     await db.collection('bal_urunler').updateOne(
