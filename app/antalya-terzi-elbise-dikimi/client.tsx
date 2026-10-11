@@ -963,7 +963,7 @@ export default function ElbiseDikimiClient() {
         <nav className="footer-links" aria-label="Footer bağlantılar">
           <a href="/terzi">Terzi Can Ana Sayfa</a>
           <a href="/online-terzi-hizmeti">Online Terzi Hizmeti</a>
-          <a href="/antalya-bay-tailor-online-terzi-utu-hizmeti">Bay Tailor</a>
+          <a href="/terzi/bay-terzi-antalya">Bay Tailor</a>
           <a href="https://www.google.com/maps?cid=5846987472659818117" target="_blank" rel="noopener noreferrer">
             Google Haritalar
           </a>
