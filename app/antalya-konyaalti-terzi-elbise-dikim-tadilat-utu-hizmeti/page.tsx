@@ -17,11 +17,11 @@ const TODAY = '2026-10-07'; // içerik gerçekten değiştiğinde elle güncelle
 const OG_IMAGE = `${BASE_URL}/og/terzi-can.jpg`;
 
 // ── Google Business Profile (tek konum: Hurma, Konyaaltı) ─────────────────
-const GBP1_NAME   = 'TERZİ Can Antalya Tailor Service';
-const GBP1_MAPS   = 'https://www.google.com/maps?cid=5846987472659818117';
-const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
-const GBP1_DIR    = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987';
-const GBP1_REVIEW = 'https://g.page/r/CYUmDLIgrCRREAE/review';
+const GBP1_NAME   = 'TERZİ Can - Konyaaltı';
+const GBP1_MAPS   = 'https://www.google.com/maps?cid=6436895271281342624';
+const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
+const GBP1_DIR    = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193';
+const GBP1_REVIEW = 'https://www.google.com/maps?cid=6436895271281342624';
 
 const WA = (msg: string) => `https://wa.me/${PHONE_TEL.replace('+','')}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyorum.');
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987', 'ICBM': '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193', 'ICBM': '36.8572868, 30.5970193',
     'content-language': 'tr',
   },
 };
@@ -84,7 +84,7 @@ const jsonLd = {
       image: OG_IMAGE, hasMap: GBP1_MAPS,
       sameAs: [GBP1_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
       address: { '@type': 'PostalAddress', streetAddress: 'Hurma Mah., Konyaaltı', addressLocality: 'Antalya', addressRegion: 'Antalya', postalCode: '07130', addressCountry: 'TR' },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Hurma','Liman','Uncalı','Sarısu','Gürsu','Meltem','Göbi','Çakırlar','Öğretmenevleri','Konyaaltı','Antalya','Lara','Belek','Kemer'].map(n => ({ '@type': 'Place', name: n })),
       contactPoint: [{ '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', availableLanguage: ['Turkish','English','Russian','German'] }],
