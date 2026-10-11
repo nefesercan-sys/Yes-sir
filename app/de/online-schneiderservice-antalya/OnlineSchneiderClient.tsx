@@ -34,7 +34,7 @@ const SERVICES = [
   { id:'erkek-dikim', icon:'👔', badge:'AM BELIEBTESTEN', badgeColor:'#C5973A',
     img: IMGS.erkek,
     title:'Herrenschneiderei', sub:'Anzüge · Hemden · Hosen · Blazer · Smoking',
-    desc:'Maßgeschneiderte Herrenbekleidung. Perfekte Passform garantiert, vom Geschäftstermin bis zum besonderen Anlass. Einheimische und importierte Stoffe.',
+    desc:'Maßgeschneiderte Herrenbekleidung. Perfekte Passform als Ziel, vom Geschäftstermin bis zum besonderen Anlass. Einheimische und importierte Stoffe.',
     feats:['Anzug','Hemd','Hose','Blazer','Smoking','Weste'],
     price:'₺800+', note:"Anzüge ab ₺2.500", time:'3–7 Tage',
     waMsg:'Hallo, ich hätte gerne Informationen zur Herrenschneiderei.' },
@@ -135,7 +135,7 @@ const REVIEWS = [
 const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Ab ₺2.500. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
-  ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, mit garantierter Lieferung am selben Tag."],
+  ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya. Den Liefertermin klären wir per WhatsApp."],
   ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Mindestens 50 Stück. Für Muster und Prototypen wird auch ein Einzelstück akzeptiert."],
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],
@@ -475,7 +475,7 @@ export default function OnlineSchneiderClient({
           <div className="odivider" />
           <div className="owhy-grid">
             {([
-              ['📐','Perfekte Passform Garantiert','Jedes Kleidungsstück wird exakt nach Ihren Maßen gefertigt.'],
+              ['📐','Maßanfertigung nach Ihren Maßen','Jedes Kleidungsstück wird exakt nach Ihren Maßen gefertigt.'],
               ['⚡','Express-Lieferung','Reparaturen am selben Tag, Maßanfertigung in 3–7 Tagen.'],
               ['📱','Online-Bestellung',"Per WhatsApp bestellen, landesweiter Versand."],
               ['🎨','Individuelles Design','Bringen Sie Ihr eigenes Design mit oder arbeiten Sie mit unserem Expertenteam.'],
