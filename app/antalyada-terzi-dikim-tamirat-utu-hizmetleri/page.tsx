@@ -230,7 +230,7 @@ const jsonLd = {
           name: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp'tan yazın; düzeltmeyi birlikte planlarız.'
+            text: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp\'tan yazın; düzeltmeyi birlikte planlarız.'
           }
         },
         {
@@ -401,7 +401,7 @@ const faqs = [
   },
   {
     q: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
-    a: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp'tan yazın; düzeltmeyi birlikte planlarız.',
+    a: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp\'tan yazın; düzeltmeyi birlikte planlarız.',
   },
   {
     q: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
