@@ -1,8 +1,8 @@
 // app/api/bal/seed/route.ts
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-const SECRET = 'arimbalim2024';
 
 const urunler = [
   {
@@ -134,11 +134,8 @@ const urunler = [
 ];
 
 export async function GET(req: NextRequest) {
-  const secret = req.nextUrl.searchParams.get('secret');
-
-  if (secret !== SECRET) {
-    return NextResponse.json({ error: 'Yetkisiz erişim' }, { status: 401 });
-  }
+  const guard = await requireAdmin(req); // oturum VEYA ?secret=ADMIN_API_KEY
+  if (guard) return guard;
 
   try {
     const db = await getDb();
