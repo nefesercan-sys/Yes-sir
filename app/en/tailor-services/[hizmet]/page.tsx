@@ -17,3 +17,4 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
   if (!s) notFound();
   return <ServicePage lang="en" s={s} />;
 }
+ 
