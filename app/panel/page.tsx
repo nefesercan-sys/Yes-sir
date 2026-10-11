@@ -688,12 +688,12 @@ function PanelIcerik() {
 
           {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
           {isAdmin && aktifTab === "ai_ilan_bireysel" && (
-            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey="" onSuccess={yukle} />
           )}
 
           {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
           {isAdmin && aktifTab === "ai_ilan_ticari" && (
-            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey={process.env.NEXT_PUBLIC_ADMIN_KEY || ""} onSuccess={yukle} />
+            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey="" onSuccess={yukle} />
           )}
 
           {/* ── ADMIN: TEKSTİL VİTRİN YÖNETİMİ ── */}
