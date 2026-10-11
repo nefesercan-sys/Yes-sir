@@ -261,7 +261,7 @@ const FOOTER_MAHALLELER = [
 ];
 
 const WHY = [
-  { icon:'⚡', tr:['Aynı Gün','Paça, daraltma, fermuar'], en:['Same Day','Hemming, taking in, zippers'], ru:['В тот же день','Подшив, ушивание, молнии'], de:['Am selben Tag','Kürzen, Enger machen, Reißverschluss'] },
+  { icon:'⚡', tr:['Hızlı Servis','Süre işe göre WhatsApp\'ta netleşir'], en:['Fast Service','Timing confirmed on WhatsApp'], ru:['Быстрый сервис','Сроки уточняются в WhatsApp'], de:['Schneller Service','Zeit per WhatsApp bestätigt'] },
   { icon:'📍', tr:['Yerinde Ölçü','Adresinize gelip ölçü alıyoruz'], en:['On-Site Fitting','We come to your address'], ru:['Замеры на месте','Приедем по адресу'], de:['Maß vor Ort','Wir kommen zu Ihnen'] },
   { icon:'🚗', tr:['Araçlı Servis','Eve ve otele gelen terzi'], en:['Mobile Tailor','We come to you'], ru:['Выездной портной','Приедем к вам'], de:['Mobiler Schneider','Kommen zu Ihnen'] },
   { icon:'🌍', tr:['4 Dil','TR · EN · RU · DE'], en:['4 Languages','TR · EN · RU · DE'], ru:['4 языка','TR · EN · RU · DE'], de:['4 Sprachen','TR · EN · RU · DE'] },
@@ -286,10 +286,10 @@ const LABELS = {
 
 const FAQ: Record<Lang, [string, string][]> = {
   tr:[
-    ['Paça kısaltma fiyatı 2026?', `₺150 / €5'den başlar, aynı gün teslim. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp 24 saat içinde otele teslim ediyoruz. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Paça kısaltma fiyatı 2026?', `₺150 / €5'den başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hangi ödeme yöntemleri ve para birimleri geçerli?', 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.'],
-    ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Aynı gün teslim mümkün. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺150 / €5'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
     ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Tüm Antalya. WhatsApp: ${PHONE_DISPLAY}`],
     ['Tişört, sweatshirt, pantolon, gobi imalatı?', `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
@@ -298,16 +298,16 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.'],
     ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. 24 saat ekspres.'],
-    ['Elbisem yırtıldı, aynı gün tamir edebilir misiniz?', `Evet, çoğu yırtık/söküm tamiri aynı gün tamamlanır. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Elbisem yırtıldı, tamir edebilir misiniz?', `Evet, yırtık ve söküm tamiri yapıyoruz; süre hasara ve yoğunluğa göre değişir. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hafta sonu açık mısınız?', `Haftanın her günü 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Kendime özel bir elbise diktirmek istiyorum, mümkün mü?', `Evet, ölçünüze ve modelinize göre özel dikim yapıyoruz. Model fotoğrafı gönderin. WhatsApp: ${PHONE_DISPLAY}`],
     ['Pamuklu veya keten gibi doğal kumaştan dikim yapıyor musunuz?', `Evet, %100 pamuk ve keten kumaştan kişiye özel dikim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
   ],
   en:[
-    ['How much is trouser hemming in Antalya?', 'From ₺150 / €5. Same day service available. Send a photo on WhatsApp for instant quote.'],
-    ['Do you offer hotel pickup and delivery service?', 'Yes! We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back within 24 hours.'],
+    ['How much is trouser hemming in Antalya?', 'From ₺150 / €5. Timing depends on the job and is confirmed on WhatsApp. Send a photo for a quick quote.'],
+    ['Do you offer hotel pickup and delivery service?', 'Yes! We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back. Timing is confirmed on WhatsApp.'],
     ['Which currencies and payment methods do you accept?', 'We accept EUR, USD, RUB, TRY cash, as well as all major international credit cards and contactless payments.'],
-    ['Zip replacement cost?', 'Trousers/jeans/coat/jacket zip from ₺200 / €6. Express same-day service available.'],
+    ['Zip replacement cost?', 'Trousers/jeans/coat/jacket zip from ₺200 / €6. Timing depends on the job and is confirmed on WhatsApp.'],
     ['Waist alteration and dress taking in?', 'From ₺150 / €5. WhatsApp us for an exact quote.'],
     ['Do you offer on-site fitting and home delivery?', 'Yes! We visit your hotel or residence, take measurements on-site, perform alterations, and deliver back.'],
     ['Do you produce t-shirts, sweatshirts, trousers, shorts, gobi?', 'Yes! Custom and mass production of all textile items with custom embroidery and digital printing.'],
@@ -318,10 +318,10 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Dry cleaning and laundry prices for tourists?', 'Dry cleaning ₺300 / €9, coat ₺500 / €15, laundry ₺80/kg / €2.5/kg. Hotel pickup & express 24h delivery.'],
   ],
   ru:[
-    ['Стоимость подгонки брюк в Анталье?', 'От ₺150 / €5. В тот же день. Отправьте фото в WhatsApp.'],
-    ['Есть ли выездной сервис и доставка в отели?', 'Да! Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно за 24 часа.'],
+    ['Стоимость подгонки брюк в Анталье?', 'От ₺150 / €5. Сроки зависят от работы и уточняются в WhatsApp. Отправьте фото.'],
+    ['Есть ли выездной сервис и доставка в отели?', 'Да! Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно. Сроки уточняются в WhatsApp.'],
     ['Какую валюту и способы оплаты вы принимаете?', 'Мы принимаем наличные EUR, USD, RUB, TRY, а также любые международные кредитные карты.'],
-    ['Стоимость замены молнии?', 'Брюки/джинсы/пальто/куртка от ₺200 / €6. Возможен экспресс-ремонт в тот же день.'],
+    ['Стоимость замены молнии?', 'Брюки/джинсы/пальто/куртка от ₺200 / €6. Сроки зависят от работы и уточняются в WhatsApp.'],
     ['Заужение талии и подгонка платьев?', 'От ₺150 / €5. WhatsApp для точной оценки.'],
     ['Снятие мерок на месте и доставка?', 'Да! Приедем в отель или по адресу, снимем мерки, сошьём/подогоним и доставим обратно.'],
     ['Производство футболок, худи, брюк, шорт?', 'Да! Серийное производство любого текстиля с вышивкой и печатью.'],
@@ -332,10 +332,10 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Химчистка и стирка для туристов?', 'Химчистка ₺300 / €9, пальто ₺500 / €15, стирка ₺80/кг / €2.5/кг. Забор из отеля и экспресс 24ч.'],
   ],
   de:[
-    ['Hosenänderung Preis in Antalya?', 'Ab ₺150 / €5. Gleicher Tag möglich. Foto per WhatsApp senden.'],
-    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern innerhalb von 24 Stunden zurück.'],
+    ['Hosenänderung Preis in Antalya?', 'Ab ₺150 / €5. Dauer je nach Auftrag, per WhatsApp bestätigt. Foto senden.'],
+    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern zurück. Dauer per WhatsApp bestätigt.'],
     ['Welche Währungen und Zahlungsmethoden akzeptieren Sie?', 'Wir akzeptieren EUR, USD, RUB, TRY Bargeld sowie alle internationalen Kreditkarten und kontaktlose Zahlung.'],
-    ['Reißverschluss-Kosten?', 'Hosen/Jeans/Mantel/Jacke ab ₺200 / €6. Expressdienst am selben Tag möglich.'],
+    ['Reißverschluss-Kosten?', 'Hosen/Jeans/Mantel/Jacke ab ₺200 / €6. Dauer je nach Auftrag, per WhatsApp bestätigt.'],
     ['Bund einengen und Kleid einengen?', 'Ab ₺150 / €5. WhatsApp für genaues Angebot.'],
     ['Maßabnahme vor Ort im Hotel?', 'Ja! Wir kommen zu Ihrem Hotel oder Ihrer Adresse, nehmen Maß und liefern fertig zurück.'],
     ['T-Shirts, Sweatshirts, Hosen, Shorts Produktion?', 'Ja! Serienproduktion aller Textilien mit Stickerei und Digitaldruck.'],
@@ -720,7 +720,7 @@ export default function TerziClient({ gbp1 }: Props) {
               {[
                 ['📍', 'WhatsApp ile Yazın', 'Adresinizi ve hizmet talebinizi bildirin.'],
                 ['📏', 'Terzi Gelir', 'Otele/adresinize gelip yerinde ölçü alır.'],
-                ['✂️', 'Atölyede Tamamlanır', 'Ölçüye göre 24 saatte hazır.'],
+                ['✂️', 'Atölyede Tamamlanır', 'İşe ve yoğunluğa göre hazırlanır.'],
                 ['🚗', 'Kapıya Teslim', 'Anlaşılan vakitte resepsiyona/kapınıza getirilir.'],
               ].map(([ic, t, d], i) => (
                 <article key={i} className="tmob-step">
