@@ -6,7 +6,7 @@ const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
 const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
-const MAPS_URL = 'https://www.google.com/maps?cid=5846987472659818117';
+const MAPS_URL = 'https://www.google.com/maps?cid=6436895271281342624';
 const WA_MSG = 'Merhaba, Konyaaltı bölgesinde terzi hizmetiniz için bilgi almak istiyorum.';
 
 const jsonLd = {
@@ -33,7 +33,7 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: MAPS_URL,
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
@@ -126,8 +126,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987',
-    ICBM: '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193',
+    ICBM: '36.8572868, 30.5970193',
   },
 };
 
@@ -530,7 +530,7 @@ export default function TerziCagirPage() {
         <section className="map-sec" id="konum">
           <div className="map-wrap">
             <iframe
-              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed"
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed"
               height="240"
               allowFullScreen
               loading="lazy"
