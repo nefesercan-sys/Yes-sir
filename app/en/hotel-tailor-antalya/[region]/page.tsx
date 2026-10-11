@@ -23,9 +23,9 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   if (!r) return {};
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
-  // Yeni VIP SEO Başlığı ve Açıklaması (Dinamik)
-  const title = `VIP Tailor & Alteration Service in ${r.name} | Hotel Pickup`;
-  const desc = `Need urgent clothing alterations during your holiday? Terzi Can provides professional tailoring, hemming, and repair services with VIP hotel pickup in ${r.name}. Contact us via WhatsApp!`;
+  // Dinamik SEO başlığı ve açıklaması
+  const title = `Tailor & Alteration Service in ${r.name} | Hotel Pickup`;
+  const desc = `Need urgent clothing alterations during your holiday? Terzi Can provides professional tailoring, hemming, and repair services with hotel pickup and delivery in ${r.name}. Contact us via WhatsApp!`;
   const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
   return {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
     title: { absolute: title },
     description: desc,
     keywords: [
-      `VIP tailor ${r.name}`, 
+      `tailor ${r.name}`, 
       `hotel pickup tailor ${r.name}`, 
       `${r.name} clothing alterations`, 
       'mobile tailor Antalya', 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
         'x-default': url,
       },
     },
-    openGraph: { title, description: desc, url, type: 'website', locale: 'en_US', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `VIP Tailor in ${r.name}` }] },
+    openGraph: { title, description: desc, url, type: 'website', locale: 'en_US', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Tailor in ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   };
@@ -62,12 +62,12 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
 
-  // Yabancı turistleri ikna edici VIP Otel Servisi metinleri
+  // Yabancı turistler için otel servisi metinleri
   const seoContent = {
     h1: `Premium Tailor Service for Hotel Guests in ${r.name}`,
     h2: `Fast & Professional Alterations Without Leaving Your Resort`,
     body1: `Enjoying your holiday in ${r.name} but need a quick wardrobe fix? Whether you bought a new dress that needs resizing, broke a zipper on your favorite jacket, or need emergency alterations for a special event, Terzi Can is here to help.`,
-    body2: `Based in Antalya, we specialize in high-quality garment alterations, repairs, and custom tailoring. We understand that your holiday time is precious. That is why we offer a VIP Mobile Tailor Service exclusively for guests staying in resorts and hotels across ${r.name}.`
+    body2: `Based in Antalya, we specialize in high-quality garment alterations, repairs, and custom tailoring. We understand that your holiday time is precious. That is why we offer a hotel pickup and delivery tailor service for guests staying in resorts and hotels across ${r.name}.`
   };
 
   const jsonLd = {
@@ -76,7 +76,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
       {
         '@type': 'Service',
         '@id': `${url}#service`,
-        name: `VIP Hotel Tailor ${r.name} — Pickup & Delivery`,
+        name: `Hotel Tailor ${r.name} — Pickup & Delivery`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
         provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
@@ -89,7 +89,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         mainEntity: [
           {
             '@type': 'Question',
-            name: `How does the VIP pickup work in ${r.name}?`,
+            name: `How does hotel pickup work in ${r.name}?`,
             acceptedAnswer: { '@type': 'Answer', text: `Message us on WhatsApp with a photo of your garment. We will collect the item directly from your hotel reception in ${r.name} and deliver it back once altered.` },
           },
           {
