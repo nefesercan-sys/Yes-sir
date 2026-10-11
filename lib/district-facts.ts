@@ -1,0 +1,104 @@
+// ============================================================
+// swaphubs.com — lib/district-facts.ts
+// Bölge sayfaları için YEREL içerik: bölgenin coğrafi konumu ve tipik terzi ihtiyaçları.
+// Kurallar: sadece genel coğrafi gerçekler (hangi ilçeye bağlı, hangi yönde, ne ile bilinir).
+// Mesafe/dakika, süre veya fiyat vaadi YOK. Atölye: Hurma, Konyaaltı.
+// ============================================================
+import type { Lang } from '@/lib/seo-data';
+
+type L4 = Record<Lang, string>;
+export interface DistrictFact {
+  where: L4; // bölge nerede
+  needs: L4; // bu bölgede kıyafet/terzi ihtiyacı genelde nedir
+}
+
+const f = (where: [string, string, string, string], needs: [string, string, string, string]): DistrictFact => ({
+  where: { tr: where[0], en: where[1], ru: where[2], de: where[3] },
+  needs: { tr: needs[0], en: needs[1], ru: needs[2], de: needs[3] },
+});
+
+export const DISTRICT_FACTS: Record<string, DistrictFact> = {
+  muratpasa: f(
+    ["Muratpaşa, Antalya'nın merkez ilçesidir; Kaleiçi, Şarampol, Lara ve Meltem hattı bu ilçeye bağlıdır.", 'Muratpaşa is the central district of Antalya; Kaleiçi, Şarampol, Lara and Meltem all belong to it.', 'Муратпаша — центральный район Антальи; Калеичи, Шарампол, Лара и Мельтем входят в его состав.', 'Muratpaşa ist der zentrale Stadtbezirk von Antalya; Kaleiçi, Şarampol, Lara und Meltem gehören dazu.'],
+    ['Merkezde yaşayan ve çalışanlar çoğunlukla iş kıyafeti, gömlek, takım elbise ve günlük pantolon için paça kısaltma, bel daraltma ve beden ayarı yaptırır.', 'People living and working in the centre mostly bring office wear, shirts, suits and everyday trousers for hemming, waist alterations and resizing.', 'Жители и работающие в центре чаще всего приносят офисную одежду, рубашки, костюмы и повседневные брюки: подшив, ушивание талии, подгонка по размеру.', 'Wer im Zentrum wohnt oder arbeitet, bringt meist Business-Kleidung, Hemden, Anzüge und Alltagshosen zum Kürzen, Enger-Machen und Anpassen.'],
+  ),
+  konyaalti: f(
+    ["Konyaaltı, Antalya'nın batısındaki sahil ilçesidir; atölyemiz bu ilçede, Hurma Mahallesi'ndedir.", 'Konyaaltı is the coastal district on the west side of Antalya; our workshop is here, in the Hurma neighbourhood.', 'Коньяалты — прибрежный район на западе Антальи; наша мастерская находится здесь, в квартале Хурма.', 'Konyaaltı ist der Küstenbezirk im Westen von Antalya; unsere Werkstatt liegt hier, im Stadtteil Hurma.'],
+    ['Sahil ve site hayatı nedeniyle yazlık keten pantolon, şort, tişört, elbise ve mayo üstü giysilerde kısaltma ve beden ayarı sık istenir.', 'With the beach and residential complexes, linen trousers, shorts, T-shirts and dresses are often brought in for hemming and resizing.', 'Из-за пляжа и жилых комплексов часто приносят льняные брюки, шорты, футболки и платья на подшив и подгонку.', 'Wegen Strand und Wohnanlagen werden häufig Leinenhosen, Shorts, T-Shirts und Kleider zum Kürzen und Anpassen gebracht.'],
+  ),
+  meltem: f(
+    ["Meltem, Muratpaşa ilçesine bağlı, sahile yakın yerleşik bir mahalledir.", 'Meltem is a residential neighbourhood of Muratpaşa district, close to the coast.', 'Мельтем — жилой квартал района Муратпаша недалеко от побережья.', 'Meltem ist ein Wohnviertel im Bezirk Muratpaşa, nahe der Küste.'],
+    ['Aileler ve öğrenciler genelde pantolon paçası, fermuar ve günlük giysi tamirleri için gelir.', 'Families and students mostly come for trouser hems, zippers and everyday clothing repairs.', 'Семьи и студенты чаще всего обращаются по поводу подшива брюк, молний и ремонта повседневной одежды.', 'Familien und Studierende kommen meist wegen Hosensäumen, Reißverschlüssen und Reparaturen von Alltagskleidung.'],
+  ),
+  fener: f(
+    ["Fener, Muratpaşa'ya bağlı; Lara yönündeki ana caddenin çevresinde yer alan yerleşik bir mahalledir.", 'Fener is a neighbourhood of Muratpaşa, a residential area along the main road towards Lara.', 'Фенер — квартал района Муратпаша, жилая зона вдоль главной дороги в сторону Лары.', 'Fener ist ein Viertel in Muratpaşa, ein Wohngebiet an der Hauptstraße Richtung Lara.'],
+    ['Site sakinleri sıklıkla elbise tamiri, bel daraltma, pantolon ve ceket ayarı yaptırır.', 'Residents of the apartment complexes often have dresses repaired and trousers and jackets adjusted.', 'Жители жилых комплексов часто заказывают ремонт платьев, ушивание брюк и подгонку пиджаков.', 'Bewohner der Wohnanlagen lassen häufig Kleider reparieren sowie Hosen und Sakkos anpassen.'],
+  ),
+  sirinyali: f(
+    ["Şirinyalı, Muratpaşa ilçesinde, Antalya merkez ile Lara arasındaki yerleşik bölgelerden biridir.", 'Şirinyalı is in Muratpaşa district, one of the residential areas between the city centre and Lara.', 'Ширинъялы находится в районе Муратпаша — один из жилых кварталов между центром и Ларой.', 'Şirinyalı liegt im Bezirk Muratpaşa, eines der Wohngebiete zwischen Zentrum und Lara.'],
+    ['Günlük pantolon, gömlek, kot ve elbise düzeltmeleri bu bölgede en çok istenen işlerdir.', 'Everyday trousers, shirts, jeans and dress alterations are the most common jobs from this area.', 'Чаще всего из этого района приносят повседневные брюки, рубашки, джинсы и платья.', 'Alltagshosen, Hemden, Jeans und Kleiderkorrekturen sind hier die häufigsten Aufträge.'],
+  ),
+  lara: f(
+    ["Lara, Antalya'nın doğusunda, Muratpaşa'ya bağlı; uzun kumsalı ve otel hattıyla bilinen turizm bölgesidir.", 'Lara lies east of Antalya, part of Muratpaşa; it is a tourist area known for its long beach and hotel strip.', 'Лара находится к востоку от Антальи, в составе Муратпаши; туристическая зона с длинным пляжем и линией отелей.', 'Lara liegt östlich von Antalya, gehört zu Muratpaşa und ist für seinen langen Strand und die Hotelzeile bekannt.'],
+    ['Otel misafirleri çoğunlukla bozulan fermuar, kopan dikiş, akşam yemeği için elbise ve takım ayarı, tatilde alınan kıyafetlerin kısaltılması için başvurur.', 'Hotel guests mostly need broken zippers, torn seams, dresses or suits adjusted for a dinner, or holiday purchases shortened.', 'Гости отелей чаще всего обращаются из-за сломанных молний, разошедшихся швов, подгонки платья или костюма к ужину и подшива вещей, купленных на отдыхе.', 'Hotelgäste brauchen meist Hilfe bei kaputten Reißverschlüssen, aufgegangenen Nähten, Kleid oder Anzug für ein Abendessen und gekürzten Urlaubskäufen.'],
+  ),
+  guzeloba: f(
+    ["Güzeloba, Muratpaşa'ya bağlı; Lara'nın batısındaki otel ve yerleşim bölgesidir.", 'Güzeloba is part of Muratpaşa, a hotel and residential area just west of Lara.', 'Гюзельоба относится к Муратпаше — район отелей и жилых домов к западу от Лары.', 'Güzeloba gehört zu Muratpaşa, ein Hotel- und Wohngebiet westlich von Lara.'],
+    ['Hem otelde konaklayanlar hem de bölgede yaşayanlar için elbise, pantolon ve gömlek tamiri ve ayarı yapılır.', 'We handle repairs and adjustments of dresses, trousers and shirts for both hotel guests and local residents.', 'Для гостей отелей и местных жителей делаем ремонт и подгонку платьев, брюк и рубашек.', 'Für Hotelgäste und Anwohner übernehmen wir Reparaturen und Anpassungen von Kleidern, Hosen und Hemden.'],
+  ),
+  kundu: f(
+    ["Kundu, Antalya'nın doğusunda, Muratpaşa'ya bağlı; büyük otellerin sıralandığı sahil bölgesidir.", 'Kundu lies east of Antalya, part of Muratpaşa; a coastal area lined with large resort hotels.', 'Кунду находится к востоку от Антальи, в составе Муратпаши; прибрежная зона с крупными курортными отелями.', 'Kundu liegt östlich von Antalya, gehört zu Muratpaşa und ist eine Küstenzone mit großen Resorthotels.'],
+    ['Resort misafirleri için tatil sırasında acil dikiş, fermuar ve kısaltma işleri öne çıkar; kıyafet otelden alınıp teslim edilebilir.', 'For resort guests, urgent stitching, zipper and hemming jobs during the holiday are typical; garments can be collected from and returned to the hotel.', 'Для гостей курортных отелей типичны срочные работы во время отдыха: шов, молния, подшив; вещи можно забрать из отеля и вернуть.', 'Bei Resortgästen sind dringende Näh-, Reißverschluss- und Kürzungsarbeiten im Urlaub typisch; Kleidung kann im Hotel abgeholt und zurückgebracht werden.'],
+  ),
+  arapsuyu: f(
+    ["Arapsuyu, Konyaaltı ilçesine bağlı, sahil hattına yakın bir mahalledir.", 'Arapsuyu is a neighbourhood of Konyaaltı district, close to the coastline.', 'Арапсую — квартал района Коньяалты недалеко от береговой линии.', 'Arapsuyu ist ein Viertel im Bezirk Konyaaltı, nahe der Küste.'],
+    ['Atölyemizle aynı ilçede olduğu için kıyafetini getirip prova yaptırmak isteyenler için kolaydır; paça, bel ve fermuar işleri yaygındır.', 'Being in the same district as our workshop, it is easy to drop garments off and have them fitted; hems, waists and zippers are typical.', 'Находясь в том же районе, что и мастерская, сюда удобно принести вещь и пройти примерку; типичны подшив, талия и молнии.', 'Da es im selben Bezirk wie unsere Werkstatt liegt, lässt sich Kleidung einfach vorbeibringen und anprobieren; Säume, Taillen und Reißverschlüsse sind typisch.'],
+  ),
+  toros: f(
+    ["Toros Mahallesi, Konyaaltı ilçesine bağlı bir yerleşim bölgesidir.", 'Toros is a residential neighbourhood of Konyaaltı district.', 'Торос — жилой квартал района Коньяалты.', 'Toros ist ein Wohnviertel im Bezirk Konyaaltı.'],
+    ['Günlük giysi, okul ve iş kıyafeti düzeltmeleri; kot ve pantolon paçası, bel daraltma ve fermuar değişimi sık yapılan işlerdir.', 'Alterations of everyday, school and work clothes; jeans and trouser hems, waist taking-in and zipper replacement are common jobs.', 'Подгонка повседневной, школьной и рабочей одежды; частые работы — подшив джинсов и брюк, ушивание талии, замена молний.', 'Änderungen an Alltags-, Schul- und Arbeitskleidung; Jeans- und Hosensäume, Taille enger machen und Reißverschlusswechsel sind häufig.'],
+  ),
+  ogretmenevleri: f(
+    ["Öğretmenevleri, Antalya'nın yerleşik merkez bölgelerinden biridir.", 'Öğretmenevleri is one of the residential areas in central Antalya.', 'Огретменевлери — один из жилых районов центральной Антальи.', 'Öğretmenevleri ist eines der Wohngebiete im Zentrum von Antalya.'],
+    ['Çalışanlar ve aileler için gömlek, pantolon, ceket ve elbise düzeltmeleri öne çıkar.', 'Shirts, trousers, jackets and dress alterations for workers and families are typical.', 'Типичны подгонка рубашек, брюк, пиджаков и платьев для работающих и семей.', 'Typisch sind Änderungen an Hemden, Hosen, Sakkos und Kleidern für Berufstätige und Familien.'],
+  ),
+  kepez: f(
+    ["Kepez, Antalya'nın kuzeyinde, nüfusu en kalabalık ilçelerinden biridir.", 'Kepez lies north of Antalya and is one of its most populous districts.', 'Кепез расположен к северу от Антальи и является одним из самых густонаселённых районов.', 'Kepez liegt nördlich von Antalya und ist einer der bevölkerungsreichsten Bezirke.'],
+    ['Aileler, çalışanlar ve öğrenciler için günlük giysi tamiri, kot ve pantolon kısaltma, fermuar değişimi sık istenir.', 'Everyday clothing repairs, jeans and trouser hemming and zipper replacement are often requested by families, workers and students.', 'Семьи, работающие и студенты часто заказывают ремонт повседневной одежды, подшив джинсов и брюк, замену молний.', 'Familien, Berufstätige und Studierende fragen häufig Reparaturen von Alltagskleidung, Jeans- und Hosenkürzungen und Reißverschlusswechsel nach.'],
+  ),
+  aksu: f(
+    ["Aksu, Antalya'nın doğusunda ayrı bir ilçedir; Perge antik kenti bu ilçededir.", 'Aksu is a separate district east of Antalya; the ancient city of Perge is located here.', 'Аксу — отдельный район к востоку от Антальи; здесь находится древний город Перге.', 'Aksu ist ein eigener Bezirk östlich von Antalya; die antike Stadt Perge liegt hier.'],
+    ['Konut siteleri ve işyerleri için alım-teslim planlaması WhatsApp üzerinden yapılır; kıyafet türü ve miktarına göre günü birlikte belirleriz.', 'For residential complexes and workplaces, collection and delivery are planned over WhatsApp; we fix the day together depending on the garments.', 'Для жилых комплексов и офисов забор и доставку планируем в WhatsApp; день согласуем исходя из вещей.', 'Für Wohnanlagen und Betriebe planen wir Abholung und Lieferung per WhatsApp; den Tag legen wir je nach Kleidungsstücken gemeinsam fest.'],
+  ),
+  dosemealti: f(
+    ["Döşemealtı, Antalya'nın kuzeybatısında, doğa ve sanayi alanlarını barındıran ayrı bir ilçedir.", 'Döşemealtı is a separate district northwest of Antalya, with both rural areas and industrial zones.', 'Дёшемеалты — отдельный район к северо-западу от Антальи с сельскими и промышленными зонами.', 'Döşemealtı ist ein eigener Bezirk nordwestlich von Antalya mit ländlichen und gewerblichen Gebieten.'],
+    ['Evler, siteler ve işyerleri için alım-teslim WhatsApp üzerinden planlanır; iş kıyafeti ve günlük giysi tamirleri öne çıkar.', 'Collection and delivery for homes, complexes and workplaces are arranged on WhatsApp; work wear and everyday repairs are typical.', 'Забор и доставка для домов, комплексов и офисов согласуются в WhatsApp; типичны рабочая одежда и повседневный ремонт.', 'Abholung und Lieferung für Häuser, Wohnanlagen und Betriebe werden per WhatsApp geplant; Arbeitskleidung und Alltagsreparaturen sind typisch.'],
+  ),
+  belek: f(
+    ["Belek, Antalya'nın doğusunda, Serik ilçesine bağlı; golf sahaları ve büyük resort otelleriyle bilinir.", 'Belek lies east of Antalya, in Serik district; it is known for its golf courses and large resort hotels.', 'Белек находится к востоку от Антальи, в районе Серик; известен гольф-полями и крупными курортными отелями.', 'Belek liegt östlich von Antalya im Bezirk Serik und ist für Golfplätze und große Resorthotels bekannt.'],
+    ['Otel misafirleri için tatilde bozulan fermuar, dikiş ve kısaltma işleri öne çıkar; alım-teslim otelle birlikte WhatsApp üzerinden planlanır.', 'For hotel guests, broken zippers, seams and hemming during the holiday are typical; collection and delivery are planned via WhatsApp together with the hotel.', 'Для гостей отелей типичны сломанные молнии, швы и подшив во время отдыха; забор и доставку планируем в WhatsApp.', 'Bei Hotelgästen sind kaputte Reißverschlüsse, Nähte und Kürzungen im Urlaub typisch; Abholung und Lieferung planen wir per WhatsApp.'],
+  ),
+  side: f(
+    ["Side, Antalya'nın doğusunda, Manavgat ilçesine bağlı; antik kenti ve Apollon Tapınağı ile bilinen tatil beldesidir.", 'Side lies east of Antalya, in Manavgat district; a resort town known for its ancient city and the Temple of Apollo.', 'Сиде находится к востоку от Антальи, в районе Манавгат; курортный город, известный древним городом и храмом Аполлона.', 'Side liegt östlich von Antalya im Bezirk Manavgat; ein Urlaubsort, bekannt für die antike Stadt und den Apollontempel.'],
+    ['Tatilciler için acil fermuar, dikiş ve kısaltma işleri öne çıkar; mesafe nedeniyle alım-teslimi WhatsApp üzerinden birlikte planlarız.', 'Urgent zipper, seam and hemming jobs for holidaymakers are typical; because of the distance we plan collection and delivery together on WhatsApp.', 'Для отдыхающих типичны срочные молнии, швы и подшив; из-за расстояния забор и доставку планируем в WhatsApp.', 'Für Urlauber sind dringende Reißverschluss-, Näh- und Kürzungsarbeiten typisch; wegen der Entfernung planen wir Abholung und Lieferung per WhatsApp.'],
+  ),
+  manavgat: f(
+    ["Manavgat, Antalya'nın doğusunda ayrı bir ilçedir; Manavgat Nehri ve Şelalesi ile bilinir.", 'Manavgat is a separate district east of Antalya, known for the Manavgat River and Waterfall.', 'Манавгат — отдельный район к востоку от Антальи, известен рекой и водопадом Манавгат.', 'Manavgat ist ein eigener Bezirk östlich von Antalya, bekannt für den Manavgat-Fluss und den Wasserfall.'],
+    ['Ev, işyeri ve oteller için alım-teslim mesafe nedeniyle WhatsApp üzerinden günü ve saati birlikte belirleyerek yapılır.', 'Because of the distance, collection and delivery for homes, workplaces and hotels are arranged by agreeing day and time together on WhatsApp.', 'Из-за расстояния забор и доставка для домов, офисов и отелей согласуются по дню и времени в WhatsApp.', 'Wegen der Entfernung werden Abholung und Lieferung für Wohnungen, Betriebe und Hotels per WhatsApp nach Tag und Uhrzeit abgestimmt.'],
+  ),
+  kemer: f(
+    ["Kemer, Antalya'nın batısında, Toros Dağları ile deniz arasında uzanan bir tatil ilçesidir; Kemer Marina ve Phaselis bu hatta yer alır.", 'Kemer is a resort district west of Antalya, between the Taurus mountains and the sea; Kemer Marina and Phaselis are here.', 'Кемер — курортный район к западу от Антальи между горами Тавр и морем; здесь находятся марина Кемер и Фазелис.', 'Kemer ist ein Urlaubsbezirk westlich von Antalya zwischen Taurusgebirge und Meer; Kemer Marina und Phaselis liegen hier.'],
+    ['Otel misafirleri için tatil sırasında bozulan fermuar, dikiş ve kısaltma işleri öne çıkar; alım-teslim WhatsApp üzerinden planlanır.', 'For hotel guests, broken zippers, seams and hemming during the holiday are typical; collection and delivery are planned on WhatsApp.', 'Для гостей отелей типичны сломанные молнии, швы и подшив во время отдыха; забор и доставку планируем в WhatsApp.', 'Bei Hotelgästen sind kaputte Reißverschlüsse, Nähte und Kürzungen im Urlaub typisch; Abholung und Lieferung planen wir per WhatsApp.'],
+  ),
+  beldibi: f(
+    ["Beldibi, Kemer ilçesine bağlı; Antalya ile Kemer arasındaki sahil yolu üzerinde, Beldibi Mağarası ile bilinen bir beldedir.", 'Beldibi belongs to Kemer district, on the coast road between Antalya and Kemer, known for the Beldibi Cave.', 'Бельдиби относится к району Кемер, на прибрежной дороге между Анталией и Кемером, известен пещерой Бельдиби.', 'Beldibi gehört zum Bezirk Kemer, liegt an der Küstenstraße zwischen Antalya und Kemer und ist für die Beldibi-Höhle bekannt.'],
+    ['Otel misafirleri ve yerleşikler için alım-teslim WhatsApp üzerinden planlanır; fermuar, kısaltma ve dikiş onarımları yaygındır.', 'Collection and delivery for hotel guests and residents are planned on WhatsApp; zipper, hemming and seam repairs are common.', 'Забор и доставка для гостей отелей и жителей планируются в WhatsApp; частые работы — молнии, подшив и ремонт швов.', 'Abholung und Lieferung für Hotelgäste und Anwohner planen wir per WhatsApp; Reißverschluss-, Kürzungs- und Nahtreparaturen sind häufig.'],
+  ),
+  goynuk: f(
+    ["Göynük, Kemer ilçesine bağlı; ormanla çevrili tatil beldesidir ve Göynük Kanyonu ile bilinir.", 'Göynük belongs to Kemer district; a forest-surrounded resort village known for the Göynük Canyon.', 'Гёйнюк относится к району Кемер; курортный посёлок среди лесов, известный каньоном Гёйнюк.', 'Göynük gehört zum Bezirk Kemer; ein von Wald umgebener Urlaubsort, bekannt für den Göynük-Canyon.'],
+    ['Otel misafirleri için tatil sırasında acil dikiş ve fermuar işleri öne çıkar; alım-teslim WhatsApp üzerinden planlanır.', 'For hotel guests, urgent stitching and zipper jobs during the holiday are typical; collection and delivery are planned on WhatsApp.', 'Для гостей отелей типичны срочные швы и молнии во время отдыха; забор и доставку планируем в WhatsApp.', 'Bei Hotelgästen sind dringende Näh- und Reißverschlussarbeiten im Urlaub typisch; Abholung und Lieferung planen wir per WhatsApp.'],
+  ),
+};
+
+// Uzak bölgeler: "ücretsiz servis" iddiası yapılmaz, alım-teslim WhatsApp'ta planlanır.
+export const FAR_DISTRICTS = ['belek', 'side', 'manavgat', 'kemer', 'beldibi', 'goynuk', 'aksu', 'dosemealti'];
