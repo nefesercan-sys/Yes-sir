@@ -901,7 +901,7 @@ export default function ElbiseDikimiClient() {
 
             <div className="location-btns">
               <a
-                href="https://www.google.com/maps?cid=5846987472659818117"
+                href="https://www.google.com/maps?cid=6436895271281342624"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-map"
@@ -928,7 +928,7 @@ export default function ElbiseDikimiClient() {
             aria-label="Terzi Can Konyaaltı konum haritası"
           >
             <iframe
-              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed"
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, display: 'block' }}
@@ -964,7 +964,7 @@ export default function ElbiseDikimiClient() {
           <a href="/terzi">Terzi Can Ana Sayfa</a>
           <a href="/online-terzi-hizmeti">Online Terzi Hizmeti</a>
           <a href="/terzi/bay-terzi-antalya">Bay Tailor</a>
-          <a href="https://www.google.com/maps?cid=5846987472659818117" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.google.com/maps?cid=6436895271281342624" target="_blank" rel="noopener noreferrer">
             Google Haritalar
           </a>
         </nav>
