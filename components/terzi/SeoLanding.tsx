@@ -97,8 +97,8 @@ function businessNode(lang: Lang) {
   };
 }
 
-const alternatesFor = (urlFor: (l: Lang) => string) => ({
-  canonical: urlFor('tr'),
+const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string) => ({
+  canonical: urlFor(lang),
   languages: { tr: urlFor('tr'), en: urlFor('en'), ru: urlFor('ru'), de: urlFor('de'), 'x-default': urlFor('tr') },
 });
 
@@ -157,30 +157,30 @@ function districtFaq(lang: Lang, d: District): [string, string][] {
   return {
     tr: [
       [`${loc} terzi var mı, yakınımdaki terzi nerede?`, `Atölyemiz Konyaaltı Hurma Mahallesi'ndedir. ${n} için kıyafetinizi adresinizden veya otelinizden alıp teslim ediyoruz; otel ve eve servis ücretsizdir. Her gün 08:00–23:00 arası WhatsApp'tan ulaşabilirsiniz.`],
-      [`${loc} ${by('paca').q.tr} ve ${by('fermuar').q.tr} ne kadar sürer?`, 'Paça kısaltma, daraltma ve fermuar değişimi/tamiri aynı gün teslim edilir.'],
-      [`${loc} gelinlik ve abiye tadilatı kaç TL?`, "Gelinlik tadilatı ₺800'den, abiye tadilatı ₺400'den başlar; kesin fiyat fotoğraf ve işlem detayına göre söylenir. Abiye tadilatı ertesi gün teslim edilir."],
-      [`${loc} ${by('elbise-dikim').q.tr} kaç günde teslim edilir?`, 'Elbise dikimi 3 günde teslim edilir. Elbise, ceket, gömlek, mont ve abiye tadilat ya da tamiri 1 gün sonra teslim edilir.'],
+      [`${loc} ${by('paca').q.tr} ve ${by('fermuar').q.tr} ne kadar sürer?`, 'Paça kısaltma, daraltma ve fermuar işleri genellikle aynı gün biter; kesin süre işe ve yoğunluğa göre WhatsApp\'ta netleşir.'],
+      [`${loc} gelinlik ve abiye tadilatı kaç TL?`, "Gelinlik tadilatı ₺800'den, abiye tadilatı ₺400'den başlar; kesin fiyat fotoğraf ve işlem detayına göre söylenir. Abiye tadilatı genellikle ertesi gün hazır olur; gelinlikte süre işin kapsamına göre netleşir."],
+      [`${loc} ${by('elbise-dikim').q.tr} kaç günde teslim edilir?`, 'Elbise dikimi genellikle 3 gün içinde hazırlanır. Elbise, ceket, gömlek, mont ve abiye tadilat ya da tamiri genellikle ertesi gün biter; kesin süre WhatsApp\'ta netleşir.'],
       [`${loc} yabancı turistler için terzi hizmeti var mı?`, 'Evet. Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz; otel ve eve servis ücretsizdir. Fotoğrafı WhatsApp\'tan gönderip fiyat alabilirsiniz.'],
     ],
     en: [
       [`Is there a tailor ${loc}? Where is the nearest tailor?`, `Our workshop is in Hurma, Konyaaltı. For ${n} we collect garments from your address or hotel and bring them back; service to hotels and homes is free. Message us on WhatsApp daily 08:00–23:00.`],
-      [`How long do ${by('paca').q.en} and ${by('fermuar').q.en} take ${loc}?`, 'Trouser hemming, taking in and zipper replacement or repair are ready the same day.'],
-      [`How much does wedding or evening dress alteration cost ${loc}?`, 'Wedding dress alteration starts from ₺800 and evening dress alteration from ₺400; the exact price depends on a photo and the work needed. Evening dress alterations are ready the next day.'],
-      [`How many days does ${by('elbise-dikim').q.en} take ${loc}?`, 'Dress making is ready in 3 days. Alterations or repairs of dresses, jackets, shirts, coats and evening dresses are ready after 1 day.'],
+      [`How long do ${by('paca').q.en} and ${by('fermuar').q.en} take ${loc}?`, 'Trouser hemming, taking in and zipper work are usually ready the same day; the exact time depends on the job and workload and is confirmed on WhatsApp.'],
+      [`How much does wedding or evening dress alteration cost ${loc}?`, 'Wedding dress alteration starts from ₺800 and evening dress alteration from ₺400; the exact price depends on a photo and the work needed. Evening dress alterations are usually ready the next day; for wedding dresses the time depends on the work.'],
+      [`How many days does ${by('elbise-dikim').q.en} take ${loc}?`, 'Dress making usually takes about 3 days. Alterations or repairs of dresses, jackets, shirts, coats and evening dresses usually take about 1 day; the exact time is confirmed on WhatsApp.'],
       [`Is there a tailor service for tourists ${loc}?`, 'Yes. We serve in English, Turkish, Russian and German, and service to hotels and homes is free. Send a photo on WhatsApp to get a price.'],
     ],
     ru: [
       [`Есть ли портной ${loc}? Где ближайшее ателье?`, `Наша мастерская — в Хурме (Коньяалты). Для района ${n} забираем вещи с вашего адреса или из отеля и возвращаем; выезд в отели и на дом бесплатный. Пишите в WhatsApp ежедневно с 08:00 до 23:00.`],
-      [`Как быстро делают ${by('paca').q.ru} и ${by('fermuar').q.ru} ${loc}?`, 'Подшив и ушивание брюк, а также замена или ремонт молнии выполняются в тот же день.'],
-      [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного платья — от ₺800, вечернего — от ₺400; точную цену называем по фото и объёму работ. Вечерние платья готовы на следующий день.'],
-      [`За сколько дней делают ${by('elbise-dikim').q.ru} ${loc}?`, 'Пошив платья — 3 дня. Переделка или ремонт платья, пиджака, рубашки, куртки и вечернего платья — через 1 день.'],
+      [`Как быстро делают ${by('paca').q.ru} и ${by('fermuar').q.ru} ${loc}?`, 'Подшив и ушивание брюк, а также замена или ремонт молнии обычно делаем в тот же день; точный срок зависит от работы и загрузки и уточняется в WhatsApp.'],
+      [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного платья — от ₺800, вечернего — от ₺400; точную цену называем по фото и объёму работ. Вечерние платья обычно готовы на следующий день; для свадебных срок зависит от объёма работы.'],
+      [`За сколько дней делают ${by('elbise-dikim').q.ru} ${loc}?`, 'Пошив платья обычно занимает около 3 дней. Переделка или ремонт платья, пиджака, рубашки, куртки и вечернего платья — обычно около 1 дня; точный срок уточняется в WhatsApp.'],
       [`Есть ли услуги портного для туристов ${loc}?`, 'Да. Мы говорим по-русски, по-английски, по-турецки и по-немецки; выезд в отели и на дом бесплатный. Пришлите фото в WhatsApp и узнайте цену.'],
     ],
     de: [
       [`Gibt es einen Schneider ${loc}? Wo ist der nächste Schneider?`, `Unsere Werkstatt liegt in Hurma, Konyaaltı. Für ${n} holen wir Kleidung an Ihrer Adresse oder im Hotel ab und bringen sie zurück; der Service zu Hotels und nach Hause ist kostenlos. WhatsApp täglich 08:00–23:00.`],
-      [`Wie lange dauern ${by('paca').q.de} und ${by('fermuar').q.de} ${loc}?`, 'Hosen kürzen, enger machen sowie Reißverschluss wechseln oder reparieren sind am selben Tag fertig.'],
-      [`Was kostet eine Brautkleid- oder Abendkleid-Änderung ${loc}?`, 'Brautkleid-Änderungen beginnen bei ₺800, Abendkleid-Änderungen bei ₺400; der genaue Preis richtet sich nach Foto und Aufwand. Abendkleider sind am nächsten Tag fertig.'],
-      [`Wie viele Tage dauert ${by('elbise-dikim').q.de} ${loc}?`, 'Ein Kleid nähen dauert 3 Tage. Änderungen oder Reparaturen von Kleidern, Sakkos, Hemden, Mänteln und Abendkleidern sind nach 1 Tag fertig.'],
+      [`Wie lange dauern ${by('paca').q.de} und ${by('fermuar').q.de} ${loc}?`, 'Hosen kürzen, enger machen sowie Reißverschlussarbeiten sind meist am selben Tag fertig; die genaue Dauer hängt vom Auftrag ab und wird per WhatsApp bestätigt.'],
+      [`Was kostet eine Brautkleid- oder Abendkleid-Änderung ${loc}?`, 'Brautkleid-Änderungen beginnen bei ₺800, Abendkleid-Änderungen bei ₺400; der genaue Preis richtet sich nach Foto und Aufwand. Abendkleider sind meist am nächsten Tag fertig; beim Brautkleid hängt es vom Umfang ab.'],
+      [`Wie viele Tage dauert ${by('elbise-dikim').q.de} ${loc}?`, 'Ein Kleid nähen dauert meist etwa 3 Tage. Änderungen oder Reparaturen von Kleidern, Sakkos, Hemden, Mänteln und Abendkleidern dauern meist etwa 1 Tag; die genaue Dauer wird per WhatsApp bestätigt.'],
       [`Gibt es einen Schneiderservice für Touristen ${loc}?`, 'Ja. Wir sprechen Deutsch, Englisch, Russisch und Türkisch; der Service zu Hotels und nach Hause ist kostenlos. Foto per WhatsApp senden und Preis erfahren.'],
     ],
   }[lang] as [string, string][];
@@ -247,7 +247,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
     description: c.desc,
     keywords: Array.from(new Set(kw)),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alternatesFor((l) => abs(districtUrl(l, d))),
+    alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d))),
     openGraph: {
       title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
@@ -264,7 +264,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     description: c.desc,
     keywords: Array.from(new Set([...s.vars[lang], ...s.vars[lang].slice(0, 3).map((v) => `${v} Antalya`)])),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alternatesFor((l) => abs(serviceUrl(l, s))),
+    alternates: alternatesFor(lang, (l) => abs(serviceUrl(l, s))),
     openGraph: {
       title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
@@ -291,7 +291,7 @@ export function hubMetadata(lang: Lang): Metadata {
     title: { absolute: title },
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alternatesFor((l) => abs(SERVICE_BASE[l])),
+    alternates: alternatesFor(lang, (l) => abs(SERVICE_BASE[l])),
     openGraph: { title, description, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
@@ -414,7 +414,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
         breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: LAST_UPDATE,
-        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.sl-hero-desc'] },
       },
       {
         '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
@@ -537,7 +537,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
         breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: LAST_UPDATE,
-        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.sl-hero-desc'] },
       },
       {
         '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
@@ -696,7 +696,7 @@ export function KeywordBlock({ slug }: { slug: string }) {
       <div className="sl-sec"><div className="sl-ctr" style={{ maxWidth: 900 }}>
         <h2 id="kw-h" className="sl-sec-h sl-ff" style={{ fontSize: '1.4rem' }}>{d.name.tr} — terzi hizmetleri</h2>
         <p className="sl-sec-sub" style={{ margin: '.6rem 0 1.2rem' }}>
-          Paça kısaltma ve fermuar aynı gün; elbise, ceket, gömlek, mont ve abiye tadilatı 1 gün sonra; elbise dikimi 3 günde teslim. Gelinlik tadilatı ₺800&apos;den, abiye ₺400&apos;den. Otel ve eve ücretsiz servis, her gün 08:00–23:00.
+          Paça kısaltma ve fermuar genellikle aynı gün; elbise, ceket, gömlek, mont ve abiye tadilatı genellikle ertesi gün; elbise dikimi genellikle 3 gün içinde. Kesin süre işe göre WhatsApp&apos;ta netleşir. Gelinlik tadilatı ₺800&apos;den, abiye ₺400&apos;den. Otel ve eve ücretsiz servis, her gün 08:00–23:00.
         </p>
         <ul style={{ listStyle: 'none', padding: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.75)' }}>
           {popular.map((p) => (<li key={p}>✂️ {p}</li>))}
