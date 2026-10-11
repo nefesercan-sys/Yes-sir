@@ -3,7 +3,7 @@
 // Bölge × hizmet arama sorguları için TEK veri kaynağı (TR/EN/RU/DE).
 // Kurallar:
 //  - Sadece doğrulanmış bilgi: tek atölye (Hurma, Konyaaltı), 2006'dan beri, her gün 08:00–23:00,
-//    otel ve eve ücretsiz servis, teslim süreleri (aynı gün / 1 gün / 3 gün), gelinlik ₺800+, abiye ₺400+.
+//    otel ve eve ücretsiz servis, tahmini süreler (genellikle aynı gün / 1 gün / 3 gün; kesin süre WhatsApp'ta), gelinlik ₺800+, abiye ₺400+.
 //  - Mesafe/dakika, puan, müşteri sayısı, sahte vaat YOK.
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
@@ -237,10 +237,10 @@ export const SERVICES: Service[] = [
       de: 'Brautkleid-Änderung ab ₺800, Abendkleid-Änderung ab ₺400.',
     },
     timeText: {
-      tr: 'Abiye tadilatı ertesi gün (1 gün) teslim edilir; gelinlikte süre işlemin kapsamına göre WhatsApp\'ta netleştirilir.',
-      en: 'Evening dress alterations are ready the next day (1 day); for wedding dresses the time depends on the work and is confirmed on WhatsApp.',
-      ru: 'Вечерние платья готовы на следующий день (1 день); для свадебных платьев срок зависит от объёма работы и уточняется в WhatsApp.',
-      de: 'Abendkleid-Änderungen sind am nächsten Tag (1 Tag) fertig; beim Brautkleid hängt die Dauer vom Umfang ab und wird per WhatsApp geklärt.',
+      tr: 'Abiye tadilatı genellikle ertesi gün hazır olur; gelinlikte süre işlemin kapsamına göre WhatsApp\'ta netleştirilir.',
+      en: 'Evening dress alterations are usually ready the next day; for wedding dresses the time depends on the work and is confirmed on WhatsApp.',
+      ru: 'Вечерние платья обычно готовы на следующий день; для свадебных платьев срок зависит от объёма работы и уточняется в WhatsApp.',
+      de: 'Abendkleid-Änderungen sind meist am nächsten Tag fertig; beim Brautkleid hängt die Dauer vom Umfang ab und wird per WhatsApp geklärt.',
     },
     intro: {
       tr: 'Gelinlik ve abiyede daraltma, boy ayarı, korse ve askı düzenlemesi gibi hassas işleri provalı olarak yapıyoruz. Otelde konaklayan gelinler ve davetliler için servis mümkündür.',
@@ -395,9 +395,9 @@ export function query(lang: Lang, d: District, s: Service): string {
 }
 
 export const TIME_TEXT: Record<TimeKey, L4> = {
-  same: { tr: 'Aynı gün teslim', en: 'Same-day delivery', ru: 'Готово в тот же день', de: 'Am selben Tag fertig' },
-  next: { tr: '1 gün sonra (ertesi gün) teslim', en: 'Ready the next day (1 day)', ru: 'Готово на следующий день (1 день)', de: 'Am nächsten Tag fertig (1 Tag)' },
-  three: { tr: '3 günde teslim', en: 'Ready in 3 days', ru: 'Готово за 3 дня', de: 'In 3 Tagen fertig' },
+  same: { tr: 'Genellikle aynı gün', en: 'Usually same day', ru: 'Обычно в тот же день', de: 'Meist am selben Tag' },
+  next: { tr: 'Genellikle ertesi gün', en: 'Usually the next day', ru: 'Обычно на следующий день', de: 'Meist am nächsten Tag' },
+  three: { tr: 'Genellikle 3 gün içinde', en: 'Usually within 3 days', ru: 'Обычно за 3 дня', de: 'Meist in 3 Tagen' },
   none: { tr: 'Süre işleme göre WhatsApp\'ta netleştirilir', en: 'Time confirmed on WhatsApp depending on the work', ru: 'Срок уточняется в WhatsApp в зависимости от работы', de: 'Dauer wird per WhatsApp je nach Arbeit geklärt' },
 };
 export const timeOf = (lang: Lang, s: Service) => (s.timeText ? s.timeText[lang] : TIME_TEXT[s.time][lang]);
