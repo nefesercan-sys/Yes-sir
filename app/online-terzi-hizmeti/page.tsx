@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terzi Can Online Terzi | Türkiye'nin 81 İline Özel Dikim",
     description:
-      "WhatsApp üzerinden profesyonel ölçü alımı, abiye, gelinlik ve takım elbise dikimi. 81 ile teslimat ve tam uyum garantisi.",
+      "WhatsApp üzerinden profesyonel ölçü alımı, abiye, gelinlik ve takım elbise dikimi. 81 ile teslimat ve oturmayan kıyafette revizyon desteği.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'Terzi Can Online Terzi | 81 İle Teslimat | TR · EN · DE · AR',
+    title: 'Terzi Can Online Terzi | 81 İle Teslimat | TR · EN · DE · RU',
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
     images: ['/og/online-terzi.jpg'],
   },
@@ -215,7 +215,7 @@ const jsonLd = {
       about: { '@id': `${SITE_URL}#business` },
       description:
         "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet kapına gelsin.",
-      inLanguage: ['tr', 'en', 'de', 'ar'],
+      inLanguage: ['tr', 'en', 'de', 'ru'],
       datePublished: '2024-01-01',
       dateModified: new Date().toISOString().split('T')[0],
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -266,7 +266,7 @@ const jsonLd = {
           name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Tam Uyum Garantimiz kapsamında ücretsiz revizyon hakkınız var. Ürünü iade edersiniz, revize edilmiş haliyle kapınıza gönderilir. Koşulsuz iade politikamız da mevcuttur.',
+            text: 'Kıyafet tam oturmadıysa WhatsApp'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir.',
           },
         },
         {
@@ -282,7 +282,7 @@ const jsonLd = {
           name: 'Online terzi hizmeti kaç dilde sunuluyor?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Türkçe, İngilizce, Almanca ve Arapça dillerinde hizmet sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşteriler de kolayca sipariş verebilir.',
+            text: 'Türkçe, İngilizce, Almanca ve Rusça dillerinde hizmet sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşteriler de kolayca sipariş verebilir.',
           },
         },
       ],
