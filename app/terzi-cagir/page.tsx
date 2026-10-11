@@ -465,7 +465,7 @@ export default function TerziCagirPage() {
               ['1','Ara veya WhatsApp Yaz',`${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Fotoğraf ile anında fiyat alın.`],
               ['2','Terzimiz Adresinize Gelir','Anlaşılan saatte terzimiz Konyaaltı içinde adresinize gelir. Yerinde ölçü alır, kıyafeti teslim alır.'],
               ['3','Atölyede Hazırlanır','Kıyafetiniz profesyonel atölyemizde deneyimli ustalarımız tarafından özenle yapılır.'],
-              ['4','Kapınıza Teslim','Tamamlanan kıyafet adresinize teslim edilir. Teslim süresi işe ve yoğunluğa göre WhatsApp'ta netleşir.'],
+              ['4','Kapınıza Teslim','Tamamlanan kıyafet adresinize teslim edilir. Teslim süresi işe ve yoğunluğa göre WhatsApp\'ta netleşir.'],
             ].map(([n,t,d]) => (
               <div key={n} className="callout-step">
                 <div className="callout-step-num">{n}</div>
