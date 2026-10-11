@@ -50,7 +50,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Mobiler Schneider Antalya · Schneiderservice im Hotel · Terzi Can',
       url: SITE_URL,
-      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer, Alanya und alle Bezirke. Änderungen am selben Tag oder in 24 Stunden. Wir sprechen Deutsch. ☎ ' + PHONE,
+      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer, Alanya und alle Bezirke. Änderungen mit Anprobe im Hotel. Wir sprechen Deutsch. ☎ ' + PHONE,
       inLanguage: 'de',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -73,8 +73,8 @@ const jsonLd = {
           acceptedAnswer:{'@type':'Answer',text:`Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
           acceptedAnswer:{'@type':'Answer',text:`Ja, der Besuch selbst ist kostenlos — Sie zahlen nur für die Schneiderarbeit. Kürzen ab ₺150, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Sind Änderungen am selben Tag vor einem Termin möglich?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja! Terzi Can bietet Änderungen am selben Tag oder innerhalb von 24 Stunden in ganz Antalya an, einschließlich Hotels in Belek, Lara, Kemer und Alanya. WhatsApp: ${PHONE}`} },
+        { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
+          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in ganz Antalya, einschließlich Hotels in Belek, Lara, Kemer und Alanya. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
           acceptedAnswer:{'@type':'Answer',text:`Ja, unser Team spricht Deutsch, Englisch, Russisch und Türkisch. WhatsApp: ${PHONE}`} },
       ],
@@ -82,12 +82,11 @@ const jsonLd = {
     {
       '@type': 'HowTo',
       name: 'So funktioniert der mobile Schneider- / Hotelservice',
-      totalTime: 'PT24H',
       step: [
         { '@type':'HowToStep', name:'Schreiben Sie uns auf WhatsApp', text:`Senden Sie Ihren Standort oder Hotelnamen an ${PHONE}.` },
-        { '@type':'HowToStep', name:'Termin vereinbaren', text:'Wir bestätigen innerhalb von 30 Minuten eine passende Zeit.' },
+        { '@type':'HowToStep', name:'Termin vereinbaren', text:'Wir bestätigen per WhatsApp eine passende Zeit.' },
         { '@type':'HowToStep', name:'Schneider besucht Sie', text:'Unser mobiler Schneider kommt zu Ihnen, nimmt Maß und nimmt das Kleidungsstück mit.' },
-        { '@type':'HowToStep', name:'Lieferung', text:'Ihr fertiges Kleidungsstück wird innerhalb von 24–48 Stunden zu Ihnen geliefert.' },
+        { '@type':'HowToStep', name:'Lieferung', text:'Ihr fertiges Kleidungsstück wird zu Ihnen geliefert; die Übergabezeit legen wir beim Termin fest.' },
       ],
     },
   ],
@@ -95,8 +94,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Schneider ins Hotel Antalya bestellen · Lieferung in 24 Std. | Terzi Can' },
-  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Alanya. Änderungen am selben Tag, wir sprechen Deutsch. ☎ ' + PHONE,
+  title: { absolute: 'Schneider im Hotel Antalya · Mobiler Schneiderservice | Terzi Can' },
+  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Alanya. Änderungen mit Anprobe im Hotel, wir sprechen Deutsch. ☎ ' + PHONE,
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',
@@ -157,7 +156,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> kommt mit dem mobilen Schneiderservice in <strong style={{ color: '#D4B07A' }}>jeden Bezirk von Antalya</strong>.
               Belek, Lara, Kemer, Alanya — alle Hotels. Maßnahme, Änderung und Lieferung direkt zu Ihnen.
-              Express in 24–48 Stunden.
+              Die Übergabezeit legen wir per WhatsApp fest.
             </p>
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {[
@@ -193,9 +192,9 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'Standort per WhatsApp senden', `Senden Sie Standort oder Hotelnamen an ${PHONE}`],
-                ['📞', 'Termin innerhalb von 30 Min', 'Wir bestätigen eine passende Uhrzeit'],
+                ['📞', 'Termin per WhatsApp', 'Wir bestätigen eine passende Uhrzeit'],
                 ['✂️', 'Maßnehmen vor Ort', 'Unser Schneider kommt, nimmt Maß und das Kleidungsstück mit'],
-                ['🚗', 'Lieferung in 24–48 Std', 'Das fertige Kleidungsstück wird zu Ihnen geliefert'],
+                ['🚗', 'Lieferung zu Ihnen', 'Das fertige Kleidungsstück wird zu Ihnen geliefert'],
               ].map(([ic, t, d], i) => (
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
@@ -278,7 +277,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 {[
                   ['Anfahrtsgebühr','KOSTENLOS','—'],
                   ['Hosen kürzen','ab ₺150','24 Std'],
-                  ['Reißverschluss wechseln','ab ₺120','Am selben Tag'],
+                  ['Reißverschluss wechseln','ab ₺200','Am selben Tag'],
                   ['Kleid / Jacke enger machen','ab ₺200','48 Std'],
                   ['Ärmel kürzen','ab ₺200','48 Std'],
                   ['Abendkleid reparieren','ab ₺350','48 Std'],
@@ -307,7 +306,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
               ['Ist der Hausbesuch kostenlos?', 'Ja! Der Besuch selbst ist komplett kostenlos — Sie zahlen nur für die Schneiderarbeit. Kürzen ab ₺150, Kleideränderungen ab ₺200.'],
               ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
               ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
-              ['Wie schnell kommt der Schneider?', 'Wir bestätigen einen Termin innerhalb von 30 Minuten nach Ihrer WhatsApp-Nachricht. Meist kommt der Schneider noch am selben oder am nächsten Tag.'],
+              ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
               ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
@@ -325,7 +324,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             Jetzt Schneider buchen
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Standort teilen — Termin in 30 Min, Lieferung in 24 Stunden
+            Standort teilen — wir bestätigen den Termin und liefern zu Ihnen
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
