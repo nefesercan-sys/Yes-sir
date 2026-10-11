@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   // Yeni VIP SEO Başlığı ve Açıklaması (Dinamik)
   const title = `VIP Tailor & Alteration Service in ${r.name} | Hotel Pickup`;
   const desc = `Need urgent clothing alterations during your holiday? Terzi Can provides professional tailoring, hemming, and repair services with VIP hotel pickup in ${r.name}. Contact us via WhatsApp!`;
-  const ogImage = `${HOME_URL}/terzi-can-hero.jpg`;
+  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -78,7 +78,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `VIP Hotel Tailor ${r.name} — Pickup & Delivery`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/terzi-can-hero.jpg`, priceRange: '$$' },
+        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,
@@ -95,7 +95,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
           {
             '@type': 'Question',
             name: `How long do alterations take for hotel guests?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Our expert tailors work their magic within 24 to 48 hours for guests in ${r.name}.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Delivery time depends on the job and our workload; simple alterations are often ready within a day or two. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
           },
         ],
       },
