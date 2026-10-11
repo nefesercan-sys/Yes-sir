@@ -1,9 +1,12 @@
-import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin-auth";
+import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
     const db = await getDb();
 
