@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { uploadMedia } from '@/lib/cloudinary';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+
+// Giriş yapmamış ziyaretçi (ör. terzi talep formu): yalnızca resim, küçük boyut, IP başına sınırlı sayıda.
+// NOT: Bellekteki sayaç sunucusuz ortamda her örnekte ayrıdır; kalıcı sınır için Upstash/Redis kullanın.
+const ANONIM_MAX_RESIM = 8 * 1024 * 1024;
+const ANONIM_LIMIT = 10;            // 10 dakikada en fazla 10 yükleme
+const PENCERE_MS = 10 * 60 * 1000;
+const sayac = new Map<string, number[]>();
+function limitAsildi(ip: string) {
+  const simdi = Date.now();
+  const liste = (sayac.get(ip) || []).filter((t) => simdi - t < PENCERE_MS);
+  liste.push(simdi);
+  sayac.set(ip, liste);
+  if (sayac.size > 5000) sayac.clear();
+  return liste.length > ANONIM_LIMIT;
+}
 
 export const maxDuration = 60;
 
@@ -12,14 +29,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Dosya bulunamadı' }, { status: 400 });
     }
 
+    const oturum = await getServerSession(authOptions);
+    const girisli = !!oturum?.user?.email;
     const isVideo = file.type.startsWith('video/');
-    const MAX_RESIM = 20 * 1024 * 1024;
+
+    if (!girisli) {
+      if (isVideo) {
+        return NextResponse.json({ error: 'Video yüklemek için giriş yapın' }, { status: 401 });
+      }
+      const ip = (req.headers.get('x-forwarded-for') || 'bilinmiyor').split(',')[0].trim();
+      if (limitAsildi(ip)) {
+        return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
+      }
+    }
+
+    const MAX_RESIM = girisli ? 20 * 1024 * 1024 : ANONIM_MAX_RESIM;
     const MAX_VIDEO = 200 * 1024 * 1024;
     const maxSize = isVideo ? MAX_VIDEO : MAX_RESIM;
 
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: `Dosya çok büyük. Maksimum: ${isVideo ? '200MB' : '20MB'}` },
+        { error: `Dosya çok büyük. Maksimum: ${isVideo ? '200MB' : girisli ? '20MB' : '8MB'}` },
         { status: 400 }
       );
     }
