@@ -121,8 +121,8 @@ const jsonLd = {
       '@type': 'FAQPage', '@id': `${PAGE_URL}#faq`,
       mainEntity: [
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺150'den başlar, aynı gün teslim. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺200'den başlar, aynı gün. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺150'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Konyaaltı kuru temizleme fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Elbise kuru temizleme ₺300, mont ₺500'den başlar. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
       ],
@@ -142,12 +142,12 @@ const D = {
 };
 
 const SERVICES = [
-  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti. Aynı gün teslim.', price: '₺150+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
+  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺150+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺200+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
   { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺150+', time: '24 saat', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺600+', time: '3–7 gün', color: '#dcfce7', tc: '#15803d' },
   { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: '₺80+', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
-  { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, max 24 saatte teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
+  { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
 const PRICES = [
@@ -173,8 +173,8 @@ const PRICES = [
 
 const FAQS = [
   ['Konyaaltı Hurma, Liman, Uncalı mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Paça kısaltma fiyatı 2026?', `₺150'den başlar, aynı gün teslim. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Fermuar değişimi kaç lira?', `₺200'den başlar, aynı gün. Mont, ceket, pantolon fermuarı. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Paça kısaltma fiyatı 2026?', `₺150'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Fermuar değişimi kaç lira?', `₺200'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Elbise dikimi fiyatı?', `Kadın elbise ₺600+, abiye ₺1.200+, erkek takım ₺2.500+ . WhatsApp: ${PHONE_DISPLAY}`],
   ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Konyaaltı içi ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
@@ -250,7 +250,7 @@ export default function KonyaaltiTerziPage() {
 
             {/* Stat şeridi */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1px', background: 'rgba(255,255,255,.06)', marginTop: '2.5rem', maxWidth: 600, margin: '2.5rem auto 0', borderRadius: 8, overflow: 'hidden' }}>
-              {[['2006','Açılış yılı'],['Aynı gün','Paça, daraltma, fermuar'],['20+','Yıllık deneyim'],['Tüm Konyaaltı','Adrese servis']].map(([n,l]) => (
+              {[['2006','Açılış yılı'],['08–23','Her gün açık'],['20+','Yıllık deneyim'],['Tüm Konyaaltı','Adrese servis']].map(([n,l]) => (
                 <div key={l} style={{ padding: '1rem .5rem', textAlign: 'center', background: 'rgba(255,255,255,.03)' }}>
                   <div style={{ fontFamily: 'var(--font-unbounded,Georgia,serif)', fontSize: '.95rem', color: D.gold2, fontWeight: 700, marginBottom: 3 }}>{n}</div>
                   <div style={{ fontSize: '.6rem', color: 'rgba(255,255,255,.4)', textTransform: 'uppercase', letterSpacing: '.08em' }}>{l}</div>
@@ -411,10 +411,10 @@ export default function KonyaaltiTerziPage() {
             </h2>
             <p style={{ fontSize: '.92rem', color: 'rgba(255,255,255,.65)', lineHeight: 1.8, marginBottom: '2rem' }}>
               Siz yorulmayın — terzimiz adresinize gelsin. Konyaaltı'nın tüm mahallelerinde
-              profesyonel ve hızlı terzi hizmeti kapınızda. Ölçü alır, en geç <strong style={{ color: D.gold2 }}>24 saatte</strong> teslim eder.
+              profesyonel ve hızlı terzi hizmeti kapınızda. Ölçü alır, <strong style={{ color: D.gold2 }}>hazır olunca</strong> teslim eder.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 10, maxWidth: 560, margin: '0 auto 2rem', background: 'rgba(255,255,255,.06)', borderRadius: 12, padding: '1px' }}>
-              {[['📍','Arayın / Yazın','WhatsApp veya telefon'],['📏','Terzi Gelir','Ölçü alır / teslim alır'],['✂️','24 Saat','Tadilat tamamlanır'],['🚗','Kapıya Teslim','Tekrar getirilir']].map(([ic,t,d]) => (
+              {[['📍','Arayın / Yazın','WhatsApp veya telefon'],['📏','Terzi Gelir','Ölçü alır / teslim alır'],['✂️','Atölyede','Tadilat tamamlanır'],['🚗','Kapıya Teslim','Tekrar getirilir']].map(([ic,t,d]) => (
                 <div key={t} style={{ padding: '1.2rem .8rem', textAlign: 'center', background: 'rgba(255,255,255,.04)', borderRadius: 11 }}>
                   <div style={{ fontSize: '1.6rem', marginBottom: 8 }}>{ic}</div>
                   <div style={{ fontWeight: 700, color: '#fff', fontSize: '.82rem', marginBottom: 4 }}>{t}</div>
