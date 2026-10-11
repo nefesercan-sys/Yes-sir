@@ -123,7 +123,7 @@ const SEKTORLER = [
 
 const AVANTAJLAR = [
   ['🎨', 'Ücretsiz Tasarım Danışmanlığı', 'Renk, model ve kumaş seçiminde ücretsiz danışmanlık hizmeti.'],
-  ['📐', 'Özel Kalıp Çıkarma', 'Markanıza özel kalıp çıkarılır, gradaj yapılır. Beden tutarlılığı garanti.'],
+  ['📐', 'Özel Kalıp Çıkarma', 'Markanıza özel kalıp çıkarılır, gradaj yapılır. Beden tutarlılığı gözetilir.'],
   ['🪡', 'Nakış & Logo Baskı', 'Bilgisayarlı nakış, dijital & DTF baskı. ₺100\'den başlar.'],
   ['📦', 'Etiketli & Paketli Teslim', 'Her üniformaya etiket, ambalaj ve teslimat. Kurumsal görünüm.'],
   ['🚐', 'Tüm Antalya Teslimat', 'Belek, Kemer, Alanya, Lara dahil tüm Antalya\'ya teslimat.'],
