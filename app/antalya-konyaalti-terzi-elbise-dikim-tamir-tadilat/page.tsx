@@ -50,8 +50,8 @@ export default function KonyaaltiTerziPage() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 36.857466,
-      "longitude": 30.596987 
+      "latitude": 36.8572868,
+      "longitude": 30.5970193 
     },
     "areaServed": mahalleler.map(m => ({
       "@type": "City",
@@ -192,7 +192,7 @@ export default function KonyaaltiTerziPage() {
           <div className="md:w-1/2 h-80 md:h-auto bg-gray-200">
             {/* Google Haritalar'dan kendi işletmenizin embed kodunu buraya yapıştırabilirsiniz */}
             <iframe 
-              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed" 
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0, minHeight: '300px' }} 
