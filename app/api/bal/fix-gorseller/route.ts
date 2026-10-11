@@ -1,14 +1,12 @@
 // app/api/bal/fix-gorseller/route.ts
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-const SECRET = 'arimbalim2024';
 
 export async function GET(req: NextRequest) {
-  const secret = req.nextUrl.searchParams.get('secret');
-  if (secret !== SECRET) {
-    return NextResponse.json({ error: 'Yetkisiz erişim' }, { status: 401 });
-  }
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
 
   try {
     const db = await getDb();
