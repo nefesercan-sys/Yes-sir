@@ -19,18 +19,18 @@ const PHONE_E164    = '+905318986418';
 const LAST_MODIFIED = '2026-10-04';
 
 // ── Google Business Profil ────────────────────────────────────────────────────
-// Kaynak: maps.app.goo.gl/3U3dCZ2iURWFwfJF6  →  ftid 0x14c393757afe22b7:0x5124ac20b20c2685
-const GBP_SHORT = 'https://www.google.com/maps?cid=5846987472659818117';
-const GBP_CID   = '5846987472659818117';
+// Kaynak: maps.app.goo.gl/kFRDqRohAc4fRsbS9  →  ftid 0x14c39311e6924c67:0x59547225251db8a0
+const GBP_SHORT = 'https://www.google.com/maps?cid=6436895271281342624';
+const GBP_CID   = '6436895271281342624';
 const GBP_MAPS  = `https://www.google.com/maps?cid=${GBP_CID}`;
-const GBP_NAME  = 'TERZİ Can Antalya Tailor Service';
+const GBP_NAME  = 'TERZİ Can - Konyaaltı';
 const GBP_ADDR  = 'Hurma Mahallesi, 07130 Konyaaltı / Antalya';
 
 // Harita işletme kaydına (ftid) bağlı: pin artık limana değil işletmeye düşer.
 const MAP_EMBED_URL =
   'https://www.google.com/maps?q=' +
   encodeURIComponent(`${GBP_NAME}, Hurma, 07130 Konyaaltı/Antalya`) +
-  '&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
+  '&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
 
 const GBP_1 = {
   cid:    GBP_CID,
@@ -102,7 +102,7 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: GBP_MAPS,
       sameAs: [
         GBP_MAPS,
@@ -301,8 +301,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987',
-    ICBM: '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193',
+    ICBM: '36.8572868, 30.5970193',
     'content-language': 'tr',
   },
   verification: {
