@@ -60,8 +60,8 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'ServiceAreaBusiness'],
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Tailor Atelie',
-      alternateName: 'SwapHubs Antalya Terzi Atölyesi',
+      name: 'TERZİ Can Antalya Tailor Service',
+      alternateName: 'Terzi Can Antalya',
       description: "Antalya genelinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi ve otel ekspres ütü hizmeti sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
       sameAs: [GBP_URL],
@@ -159,7 +159,7 @@ const jsonLd = {
       '@type': 'HowTo',
       '@id': `${PAGE_URL}#howto`,
       name: 'Antalya\'da Kuryeli Terzi Hizmetinden Nasıl Yararlanılır',
-      description: 'SwapHubs kuryeli terzi hizmetinden adım adım nasıl faydalanacağınızı gösterir.',
+      description: 'Terzi Can kuryeli terzi hizmetinden adım adım nasıl faydalanacağınızı gösterir.',
       totalTime: 'PT15M',
       step: [
         {
@@ -198,7 +198,7 @@ const jsonLd = {
           name: "Antalya'da otellere acil terzi ve ütü hizmeti veren yer neresi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "SwapHubs, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere özel kuryeli acil terzi, kıyafet tamiratı ve ekspres ütü hizmeti sunmaktadır. Kıyafetleriniz otelden veya evden alınır, işlem bittikten sonra aynı gün içinde askılı olarak teslim edilir."
+            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere özel kuryeli acil terzi, kıyafet tamiratı ve ekspres ütü hizmeti sunmaktadır. Kıyafetleriniz otelden veya evden alınır, işlem bittikten sonra aynı gün içinde askılı olarak teslim edilir."
           }
         },
         {
@@ -206,7 +206,7 @@ const jsonLd = {
           name: "Where can I find an English or Russian speaking tailor in Antalya?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "SwapHubs provides professional tailoring, suit alterations, and dress repair services with English, Russian, and German speaking customer support in Antalya (Konyaalti, Lara, Muratpasa, Belek)."
+            text: "Terzi Can provides professional tailoring, suit alterations, and dress repair services with English, Russian, and German speaking customer support in Antalya (Konyaalti, Lara, Muratpasa, Belek)."
           }
         },
         {
@@ -290,7 +290,7 @@ export const metadata: Metadata = {
     languages: { 'tr-TR': PAGE_URL, 'x-default': PAGE_URL },
   },
   openGraph: {
-    title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | SwapHubs',
+    title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | Terzi Can',
     description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı ve ütü hizmetleri. Aynı gün askıda teslimat!`,
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
@@ -385,7 +385,7 @@ const trustPoints = [
 const faqs = [
   {
     q: "Antalya'da pazar günü açık terzi veya acil ütü yeri var mı?",
-    a: 'SwapHubs online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımız üzerinden 7/24 anlık durum sorgulaması yapabilirsiniz.',
+    a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımız üzerinden 7/24 anlık durum sorgulaması yapabilirsiniz.',
   },
   {
     q: 'Deri ceket boyama ve yırtık deri mont tamiri yapıyor musunuz?',
@@ -421,9 +421,9 @@ const processSteps = [
 // public/images/terzi/ altında hiç yoktu, galeri kırık gösteriyordu.
 // public/ içinde zaten gerçek atölye fotoğrafları mevcuttu — onlara bağlandı.
 const galleryImages = [
-  { src: '/images/terzi/card-atolye.jpg', alt: 'TERZİ Tailor Atelie, Konyaaltı Antalya dikim ve tadilat atölyesi' },
+  { src: '/images/terzi/card-atolye.jpg', alt: 'Terzi Can, Konyaaltı Antalya dikim ve tadilat atölyesi' },
   { src: '/images/terzi/card-tadilat.jpg', alt: 'Antalya terzi atölyesinde kıyafet tamiri ve tadilat çalışması' },
-  { src: '/images/terzi/card-bay-terzi.jpg', alt: 'SwapHubs erkek terzi hizmeti, takım elbise dikim ve tadilat' },
+  { src: '/images/terzi/card-bay-terzi.jpg', alt: 'Terzi Can erkek terzi hizmeti, takım elbise dikim ve tadilat' },
   { src: '/images/terzi/card-gelinlik.jpg', alt: 'Gelinlik ve abiye tadilat detay çalışması Antalya terzi' },
 ];
 
@@ -470,7 +470,7 @@ export default function GeminiOptimizedTailorPage() {
         {/* HEADER */}
         <header style={{ borderBottom: `1px solid ${BORDER}`, paddingBottom: 32, marginBottom: 36 }}>
           <nav aria-label="Breadcrumb" style={{ fontSize: 13, color: SUB, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <a href={BASE_URL} style={{ color: SUB, textDecoration: 'none' }}>SwapHubs</a>
+            <a href={`${BASE_URL}/terzi`} style={{ color: SUB, textDecoration: 'none' }}>Terzi Can</a>
             <span style={{ color: '#c7cbc8' }}>/</span>
             <span style={{ color: INK, fontWeight: 500 }}>Antalya Terzi & Ütü</span>
           </nav>
@@ -487,7 +487,7 @@ export default function GeminiOptimizedTailorPage() {
           </h1>
 
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
-            <strong>Kısa cevap:</strong> TERZİ Tailor Atelie (SwapHubs), Antalya Konyaaltı'da (Sarısu, Hurma,
+            <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı'da (Sarısu, Hurma,
             Liman) hizmet veren, kuryeli adresten alım ile kıyafet tamiri, özel dikim ve otellere
             aynı gün ütü/tamirat hizmeti sunan yerel bir terzi atölyesidir; her gün 08:00–23:00 açıktır.
           </p>
@@ -640,7 +640,7 @@ export default function GeminiOptimizedTailorPage() {
             </h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.7, color: SUB, margin: 0 }}>
               Geleneksel terzi anlayışını teknoloji ve lojistik hızla birleştiriyoruz. Sadece yakınınızdaki
-              terzileri aramakla kalmayın; SwapHubs lojistik ağı sayesinde{' '}
+              terzileri aramakla kalmayın; Terzi Can kuryeli alım ve teslim hizmeti sayesinde{' '}
               <strong style={{ color: INK }}>Hurma, Liman, Uncalı, Şirinyalı, Fener ve Güzeloba</strong> gibi
               yoğun semtlerde kıyafetlerinizi kapınızdan motorlu veya araçlı kuryelerimizle alıyor, kusursuz
               şekilde tamir ettikten sonra yine kapınıza teslim ediyoruz.
@@ -678,7 +678,7 @@ export default function GeminiOptimizedTailorPage() {
               Atölye Hakkında
             </h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.7, color: SUB, margin: 0 }}>
-              TERZİ Tailor Atelie, Konyaaltı Sarısu'da faaliyet gösteren, geleneksel terzilik ustalığını
+              Terzi Can, Konyaaltı Sarısu'da faaliyet gösteren, geleneksel terzilik ustalığını
               modern lojistik altyapıyla birleştiren bir atölyedir. Amacımız, Antalya'da yaşayanların ve
               bölgeyi ziyaret eden turistlerin kıyafet ihtiyaçlarını en kısa sürede, atölyeye gitmeden
               çözebilmelerini sağlamak. Otel misafirlerinden yerel esnafa, gelinlik tadilatından günlük
@@ -724,10 +724,10 @@ export default function GeminiOptimizedTailorPage() {
         {/* FOOTER NAP */}
         <footer style={{ marginTop: 52, padding: '36px 28px', borderRadius: 20, textAlign: 'center', background: '#111413', color: '#9aa39e' }}>
           <p style={{ fontWeight: 800, fontSize: 18, color: '#fff', margin: 0 }}>
-            TERZİ Tailor Atelie
+            Terzi Can
           </p>
           <p style={{ fontSize: 13, margin: '4px 0 0', color: '#7d8781' }}>
-            SwapHubs Professional Tailoring & Textile Solutions
+            Terzi Can — Professional Tailoring & Textile Solutions
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '6px 18px', fontSize: 13.5, margin: '18px 0 0' }}>
             <span>Hurma Mahallesi, 07130 Konyaaltı/Antalya</span>
