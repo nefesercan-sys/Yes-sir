@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
   title: {
-    template: "%s | SwapHubs",
+    template: "%s",
     default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
   },
   description:
