@@ -42,12 +42,12 @@ const OTHER_LANG_HUBS: MapLink[] = [
 ];
 
 // ── Turistik bölgeler (en / de / ru alt sayfaları) ─────────────────────────
-const REGIONS = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu'] as const;
+const REGIONS = ['belek', 'lara', 'guzeloba', 'side', 'kemer'] as const; // lib/otel-bolgeleri.ts ile aynı olmalı (Kundu sayfası yok)
 const REGION_NAME: Record<Lang, Record<string, string>> = {
-  tr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', kundu: 'Kundu' },
-  en: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', kundu: 'Kundu' },
-  de: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', kundu: 'Kundu' },
-  ru: { belek: 'Белек', lara: 'Лара', guzeloba: 'Гюзельоба', side: 'Сиде', kemer: 'Кемер', kundu: 'Кунду' },
+  tr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
+  en: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
+  de: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
+  ru: { belek: 'Белек', lara: 'Лара', guzeloba: 'Гюзельоба', side: 'Сиде', kemer: 'Кемер' },
 };
 
 const EN_BASE = '/en/hotel-tailor-antalya';
