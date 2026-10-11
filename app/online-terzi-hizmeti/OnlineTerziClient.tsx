@@ -195,7 +195,7 @@ const FAQS = [
   { q: "Türkiye'nin herhangi bir şehrinden sipariş verebilir miyim?", a: "Kesinlikle! İstanbul'dan Hakkari'ye, İzmir'den Kars'a Türkiye'nin 81 iline kapıya kadar kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor; mağazaya ya da atölyeye gelmenize gerek yok." },
   { q: "Ölçülerimi nasıl alacağım, yardımcı olur musunuz?", a: "Evet! WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli." },
   { q: "Sipariş ne kadar sürede teslim edilir?", a: "Temel modeller 7–10 iş gününde, abiye ve gelinlik gibi detaylı modeller 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti mevcuttur." },
-  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Kıyafet tam oturmadıysa WhatsApp'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir." },
+  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Kıyafet tam oturmadıysa WhatsApp\'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir." },
   { q: "Kendi kumaşımı getirip diktirebilir miyim?", a: "Evet! Kendi kumaşınızla fason dikim hizmeti de sunuyoruz. Kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir." },
   { q: "4 dilde hizmet gerçekten mümkün mü?", a: "Türkçe, İngilizce, Almanca ve Rusça dillerinde müşteri hizmeti sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşterilerimiz için özellikle geliştirdiğimiz bu hizmet sayesinde dünyada nerede olursanız olun, SwapHubs Online Terzi hizmetinden faydalanabilirsiniz." },
 ];
@@ -516,7 +516,7 @@ export default function OnlineTerziClient() {
               { n: '01', icon: '📏', title: 'Ölçünüzü Alın', desc: 'Evdeki mezuranızla 5 temel ölçüyü alın. Yardıma ihtiyacınız varsa WhatsApp görüntülü ölçü seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir.' },
               { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Tasarımcılarımız 48 saat içinde taslak hazırlar.' },
               { n: '03', icon: '✂️', title: 'Üretim Başlıyor', desc: 'Taslağı onayladığınız anda atölyemiz harekete geçer. Kalıp çıkarma, kesim, dikim, ütü ve kalite kontrol aşamaları eksiksiz tamamlanır.' },
-              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Özenle paketlenen kıyafetiniz Türkiye\'nin 81 iline teslimat yapılır. Oturmayan bir yer olursa WhatsApp'tan yazın, revizyonu birlikte planlarız.' },
+              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Özenle paketlenen kıyafetiniz Türkiye\'nin 81 iline teslimat yapılır. Oturmayan bir yer olursa WhatsApp\'tan yazın, revizyonu birlikte planlarız.' },
             ].map(s => (
               <li key={s.n} style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 20, padding: 32, border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}>
                 <div aria-hidden="true" style={{ color: C.gold, fontSize: 36, fontWeight: 700, opacity: 0.3, lineHeight: 1, marginBottom: 16, fontFamily: 'system-ui, sans-serif' }}>{s.n}</div>
