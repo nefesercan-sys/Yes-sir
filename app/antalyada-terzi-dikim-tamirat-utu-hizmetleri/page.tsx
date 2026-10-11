@@ -12,7 +12,7 @@ const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terz
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
 const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
-const GBP_URL   = 'https://www.google.com/maps?cid=5846987472659818117'; // TERZİ Can Antalya Tailor Service (Google Business Profile)
+const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Konyaaltı (Google Business Profile)
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
 
@@ -60,7 +60,7 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'ServiceAreaBusiness'],
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Can Antalya Tailor Service',
+      name: 'TERZİ Can - Konyaaltı',
       alternateName: 'Terzi Can Antalya',
       description: "Antalya genelinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi ve otel ekspres ütü hizmeti sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
@@ -76,7 +76,7 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: GBP_URL,
       openingHoursSpecification: [
         {
@@ -301,8 +301,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Antalya',
-    'geo.position': '36.857466;30.596987',
-    'ICBM': '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193',
+    'ICBM': '36.8572868, 30.5970193',
   },
   robots: {
     index: true,
