@@ -158,9 +158,8 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi', item: PARENT },
-        { '@type': 'ListItem', position: 3, name: 'Fermuar Değişimi', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Antalya Terzi', item: PARENT },
+        { '@type': 'ListItem', position: 2, name: 'Fermuar Değişimi', item: SITE_URL },
       ],
     },
     {
@@ -198,9 +197,7 @@ export default function FermuarDegisimiPage() {
       <section style={{ background: SOFT, borderBottom: `1px solid ${BORDER}`, padding: '2.2rem 1.25rem 2.6rem' }}>
         <div style={wrap}>
           <nav aria-label="Sayfa yolu" style={{ fontSize: '.8rem', color: MUTED, marginBottom: '1.1rem' }}>
-            <Link href="/" style={{ color: MUTED, textDecoration: 'none' }}>SwapHubs</Link>
-            {' › '}
-            <Link href="/terzi" style={{ color: MUTED, textDecoration: 'none' }}>Antalya Terzi</Link>
+          <Link href="/terzi" style={{ color: MUTED, textDecoration: 'none' }}>Antalya Terzi</Link>
             {' › '}
             <span style={{ color: INK }}>Fermuar Değişimi</span>
           </nav>
