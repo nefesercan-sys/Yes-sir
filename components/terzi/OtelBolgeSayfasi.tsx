@@ -25,9 +25,9 @@ const T: Record<Lang, any> = {
     howH: 'How It Works', howSub: 'Tailor service delivered to your hotel room in 4 steps',
     steps: [
       ['📍', 'Share Hotel & Room', `Send your hotel name and room number to ${PHONE}`],
-      ['📞', 'Booking Within 30 Min', 'We confirm a convenient time'],
+      ['📞', 'Quick Confirmation', 'We confirm a convenient time on WhatsApp'],
       ['✂️', 'On-Site Measurement', 'Our tailor visits your hotel, measures and collects the garment'],
-      ['🚗', '24–48h Delivery', 'Finished garment delivered back to your room'],
+      ['🚗', 'Room Delivery', 'Finished garment delivered back to your room'],
     ],
     servicesH: 'Tailoring, Repair & Ironing Services', servicesSub: 'Full-service workshop — everything handled off-site, delivered to your hotel',
     services: [
@@ -42,10 +42,10 @@ const T: Record<Lang, any> = {
     faq: (r: string) => [
       [`Do you come to all hotels in ${r}?`, `Yes! We visit every hotel in ${r} — just share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
       ['Is the hotel visit free?', 'Yes, completely free — you only pay for the tailoring or repair work itself.'],
-      ['How fast is the service?', 'Most repairs and hemming are completed within 24–48 hours, some same-day.'],
+      ['How fast is the service?', 'It depends on the job and our workload; simple repairs and hemming are often ready within a day or two. We agree the handover time on WhatsApp.'],
       ['Do you speak English?', `Yes, our team speaks English, Russian, German and Turkish. WhatsApp: ${PHONE}`],
     ],
-    ctaH: (r: string) => `Book Your ${r} Hotel Tailor Now`, ctaSub: 'Share your hotel name — booked within 30 minutes',
+    ctaH: (r: string) => `Book Your ${r} Hotel Tailor Now`, ctaSub: 'Share your hotel name — we confirm your appointment on WhatsApp',
     waBtn: 'WhatsApp — Share Hotel Name', related: 'Other Hotel Districts', allDistricts: '← All Antalya Districts',
   },
   ru: {
@@ -60,9 +60,9 @@ const T: Record<Lang, any> = {
     howH: 'Как это работает', howSub: 'Сервис портного прямо в ваш номер за 4 шага',
     steps: [
       ['📍', 'Отель и номер', `Отправьте название отеля и номер комнаты на ${PHONE}`],
-      ['📞', 'Запись за 30 минут', 'Мы согласуем удобное время'],
+      ['📞', 'Запись в WhatsApp', 'Мы согласуем удобное время'],
       ['✂️', 'Снятие мерок на месте', 'Портной приезжает в отель, снимает мерки и забирает вещь'],
-      ['🚗', 'Доставка за 24–48ч', 'Готовая вещь доставляется обратно в номер'],
+      ['🚗', 'Доставка в номер', 'Готовая вещь доставляется обратно в номер'],
     ],
     servicesH: 'Пошив, ремонт и глажка', servicesSub: 'Полный цикл услуг — всё делается в мастерской, доставка в отель',
     services: [
@@ -77,10 +77,10 @@ const T: Record<Lang, any> = {
     faq: (r: string) => [
       [`Вы приезжаете во все отели ${r}?`, `Да! Мы приезжаем в каждый отель района ${r} — просто напишите название отеля и номер комнаты в WhatsApp. WhatsApp: ${PHONE}`],
       ['Выезд в отель бесплатный?', 'Да, полностью бесплатный — вы платите только за саму работу.'],
-      ['Как быстро выполняется услуга?', 'Большинство работ по ремонту и подгонке выполняются за 24–48 часов, некоторые — в тот же день.'],
+      ['Как быстро выполняется услуга?', 'Зависит от работы и загрузки; простой ремонт и подшив часто готовы за день-два. Время выдачи согласуем в WhatsApp.'],
       ['Вы говорите по-русски?', `Да, наша команда говорит по-русски, английски, немецки и турецки. WhatsApp: ${PHONE}`],
     ],
-    ctaH: (r: string) => `Вызвать портного в отель — ${r}`, ctaSub: 'Отправьте название отеля — запись за 30 минут',
+    ctaH: (r: string) => `Вызвать портного в отель — ${r}`, ctaSub: 'Отправьте название отеля — подтвердим запись в WhatsApp',
     waBtn: 'WhatsApp — Отправить название отеля', related: 'Другие отельные районы', allDistricts: '← Все районы Антальи',
   },
   de: {
@@ -95,9 +95,9 @@ const T: Record<Lang, any> = {
     howH: 'So funktioniert es', howSub: 'Schneiderservice direkt auf Ihr Hotelzimmer in 4 Schritten',
     steps: [
       ['📍', 'Hotel & Zimmer angeben', `Senden Sie Hotelname und Zimmernummer an ${PHONE}`],
-      ['📞', 'Termin in 30 Min', 'Wir bestätigen eine passende Zeit'],
+      ['📞', 'Termin per WhatsApp', 'Wir bestätigen eine passende Zeit'],
       ['✂️', 'Maßnehmen vor Ort', 'Unser Schneider kommt ins Hotel, nimmt Maß und das Kleidungsstück mit'],
-      ['🚗', 'Lieferung in 24–48 Std', 'Fertiges Kleidungsstück wird zurück auf Ihr Zimmer geliefert'],
+      ['🚗', 'Lieferung aufs Zimmer', 'Fertiges Kleidungsstück wird zurück auf Ihr Zimmer geliefert'],
     ],
     servicesH: 'Schneiderei, Reparatur & Bügelservice', servicesSub: 'Voller Service — alles in der Werkstatt erledigt, Lieferung ins Hotel',
     services: [
@@ -112,10 +112,10 @@ const T: Record<Lang, any> = {
     faq: (r: string) => [
       [`Kommen Sie zu allen Hotels in ${r}?`, `Ja! Wir besuchen jedes Hotel in ${r} — teilen Sie einfach Hotelname und Zimmernummer per WhatsApp mit. WhatsApp: ${PHONE}`],
       ['Ist der Hotelbesuch kostenlos?', 'Ja, völlig kostenlos — Sie zahlen nur für die eigentliche Schneiderarbeit.'],
-      ['Wie schnell ist der Service?', 'Die meisten Reparaturen und Kürzungen werden innerhalb von 24–48 Stunden erledigt, manche am selben Tag.'],
+      ['Wie schnell ist der Service?', 'Das hängt von der Arbeit und der Auslastung ab; einfache Reparaturen und Kürzungen sind oft in ein bis zwei Tagen fertig. Die Übergabezeit klären wir per WhatsApp.'],
       ['Sprechen Sie Deutsch?', `Ja, unser Team spricht Deutsch, Englisch, Russisch und Türkisch. WhatsApp: ${PHONE}`],
     ],
-    ctaH: (r: string) => `Jetzt Schneider ins Hotel buchen — ${r}`, ctaSub: 'Hotelnamen senden — Termin in 30 Minuten',
+    ctaH: (r: string) => `Jetzt Schneider ins Hotel buchen — ${r}`, ctaSub: 'Hotelnamen senden — wir bestätigen den Termin per WhatsApp',
     waBtn: 'WhatsApp — Hotelnamen senden', related: 'Andere Hotelbezirke', allDistricts: '← Alle Bezirke von Antalya',
   },
 };
