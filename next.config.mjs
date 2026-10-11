@@ -39,6 +39,9 @@ const nextConfig = {
       { source: '/terzi/gelinlik-tadilati', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
       { source: '/terzi/gekinlik-tadilati', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
       { source: '/terzi/gelinlik-tadilati-antalya', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },
+      { source: '/terzi-hizmet', destination: '/terzi/hizmet', permanent: true },
+      { source: '/tailor-service', destination: '/en/tailor-services', permanent: true },
+      { source: '/terzi-konyalti/:mahalle', destination: '/terzi/konyaalti/:mahalle', permanent: true },
       { source: '/dikis-atolyesi-antalya', destination: '/terzi/dikis-atolyesi-antalya', permanent: true },
 
       // DİKKAT: /terzi/fermuar-degisimi GitHub'da olduğu için YÖNLENDİRİLMİYOR, SERBEST BIRAKILDI.
@@ -149,4 +152,3 @@ const nextConfig = {
 }
 
 export default nextConfig
- 
