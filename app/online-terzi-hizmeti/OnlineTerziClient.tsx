@@ -74,7 +74,7 @@ const IMG = {
   atolye4:'https://images.pexels.com/photos/1181562/pexels-photo-1181562.jpeg?auto=compress&cs=tinysrgb&w=500',
 };
 
-const LANGS = ['TR', 'EN', 'DE', 'AR'];
+const LANGS = ['TR', 'EN', 'DE', 'RU'];
 
 const SLOGANS = [
   "Terziniz Bir Tık Yakınınızda",
@@ -132,9 +132,9 @@ const CATEGORIES = [
     tag: 'B2B Kurumsal',
     title: 'Üniforma & Kurumsal Kıyafet',
     subtitle: 'Kurumsal Kimliğinizi Giyinin',
-    desc: `Kurumsal imajınızın en güçlü yansıması çalışanlarınızın giydiği üniforma olduğunu biliyoruz. Otel resepsiyonistlerinden şeflere, medikal personelden havacılık ekiplerine kadar her sektörün ihtiyaçlarına göre üniforma koleksiyonları tasarlıyoruz. Minimum 10 adet siparişten başlayan toplu üretim ve 60 gün sonra tekrar sipariş garantisi sunuyoruz.`,
+    desc: `Kurumsal imajınızın en güçlü yansıması çalışanlarınızın giydiği üniforma olduğunu biliyoruz. Otel resepsiyonistlerinden şeflere, medikal personelden havacılık ekiplerine kadar her sektörün ihtiyaçlarına göre üniforma koleksiyonları tasarlıyoruz. Minimum 10 adet siparişten başlayan toplu üretim için fiyat ve süre WhatsApp'ta netleştirilir.`,
     images: [IMG.uni1, IMG.uni2, IMG.uni3],
-    features: ['Min. 10 adet toplu üretim', 'Logo nakışı & baskı', 'Antimikrobiyal & leke itici', 'Sağlık / Turizm / Havacılık', '60 gün yeniden sipariş garantisi'],
+    features: ['Min. 10 adet toplu üretim', 'Logo nakışı & baskı', 'Antimikrobiyal & leke itici', 'Sağlık / Turizm / Havacılık', 'Tekrar sipariş için kayıtlı kalıp'],
     waMsg: 'Merhaba, kurumsal üniforma üretimi için fiyat teklifi almak istiyorum.',
   },
   {
@@ -195,9 +195,9 @@ const FAQS = [
   { q: "Türkiye'nin herhangi bir şehrinden sipariş verebilir miyim?", a: "Kesinlikle! İstanbul'dan Hakkari'ye, İzmir'den Kars'a Türkiye'nin 81 iline kapıya kadar kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor; mağazaya ya da atölyeye gelmenize gerek yok." },
   { q: "Ölçülerimi nasıl alacağım, yardımcı olur musunuz?", a: "Evet! WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli." },
   { q: "Sipariş ne kadar sürede teslim edilir?", a: "Temel modeller 7–10 iş gününde, abiye ve gelinlik gibi detaylı modeller 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti mevcuttur." },
-  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Tam Uyum Garantimiz kapsamında ücretsiz revizyon hakkınız var. Ürünü iade edersiniz, revize edilmiş haliyle tekrar kapınıza gönderilir. Hiçbir şekilde memnun kalmazsanız koşulsuz iade politikamız devreye girer." },
+  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Kıyafet tam oturmadıysa WhatsApp'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir." },
   { q: "Kendi kumaşımı getirip diktirebilir miyim?", a: "Evet! Kendi kumaşınızla fason dikim hizmeti de sunuyoruz. Kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir." },
-  { q: "4 dilde hizmet gerçekten mümkün mü?", a: "Türkçe, İngilizce, Almanca ve Arapça dillerinde müşteri hizmeti sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşterilerimiz için özellikle geliştirdiğimiz bu hizmet sayesinde dünyada nerede olursanız olun, SwapHubs Online Terzi hizmetinden faydalanabilirsiniz." },
+  { q: "4 dilde hizmet gerçekten mümkün mü?", a: "Türkçe, İngilizce, Almanca ve Rusça dillerinde müşteri hizmeti sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşterilerimiz için özellikle geliştirdiğimiz bu hizmet sayesinde dünyada nerede olursanız olun, SwapHubs Online Terzi hizmetinden faydalanabilirsiniz." },
 ];
 
 const STATS = [
@@ -277,7 +277,7 @@ export default function OnlineTerziClient() {
 
       {/* ── GÜVEN ÇUBUĞU ─────────────────────────────────────────── */}
       <div role="banner" style={{ background: `linear-gradient(90deg, ${C.charcoal}, ${C.charcoalMid}, ${C.charcoal})`, color: C.goldLight, fontSize: 12, fontWeight: 600, padding: '9px 16px', textAlign: 'center', letterSpacing: '0.08em', fontFamily: 'system-ui, sans-serif' }}>
-        🌍 Türkiye'nin 81 İline Ücretsiz Teslimat &nbsp;·&nbsp; 4 Dil: TR · EN · DE · AR &nbsp;·&nbsp; ✓ Tam Uyum Garantisi &nbsp;·&nbsp; ✓ Ücretsiz Revizyon
+        🌍 Türkiye'nin 81 İline Ücretsiz Teslimat &nbsp;·&nbsp; 4 Dil: TR · EN · DE · RU &nbsp;·&nbsp; ✓ Ölçüye Göre Dikim &nbsp;·&nbsp; ✓ Revizyon Desteği
       </div>
 
       {/* ── NAV ──────────────────────────────────────────────────── */}
@@ -516,7 +516,7 @@ export default function OnlineTerziClient() {
               { n: '01', icon: '📏', title: 'Ölçünüzü Alın', desc: 'Evdeki mezuranızla 5 temel ölçüyü alın. Yardıma ihtiyacınız varsa WhatsApp görüntülü ölçü seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir.' },
               { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Tasarımcılarımız 48 saat içinde taslak hazırlar.' },
               { n: '03', icon: '✂️', title: 'Üretim Başlıyor', desc: 'Taslağı onayladığınız anda atölyemiz harekete geçer. Kalıp çıkarma, kesim, dikim, ütü ve kalite kontrol aşamaları eksiksiz tamamlanır.' },
-              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Özenle paketlenen kıyafetiniz Türkiye\'nin 81 iline teslimat yapılır. Memnun kalmazsanız ücretsiz revizyon veya koşulsuz iade garantimiz devreye girer.' },
+              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Özenle paketlenen kıyafetiniz Türkiye\'nin 81 iline teslimat yapılır. Oturmayan bir yer olursa WhatsApp'tan yazın, revizyonu birlikte planlarız.' },
             ].map(s => (
               <li key={s.n} style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 20, padding: 32, border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}>
                 <div aria-hidden="true" style={{ color: C.gold, fontSize: 36, fontWeight: 700, opacity: 0.3, lineHeight: 1, marginBottom: 16, fontFamily: 'system-ui, sans-serif' }}>{s.n}</div>
@@ -551,10 +551,10 @@ export default function OnlineTerziClient() {
               </p>
               <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, padding: 0, listStyle: 'none' }}>
                 {[
-                  { icon: '🎯', title: 'Sıfır Hata Garantisi', desc: 'Kalıp çıkarmada dijital ölçüm teknolojisi' },
+                  { icon: '🎯', title: 'Ölçüye Göre Kalıp', desc: 'Kalıp, aldığımız ölçülere göre çıkarılır' },
                   { icon: '⚡', title: 'Hızlı Teslimat', desc: 'Temel modeller 7–10 iş günü içinde hazır' },
                   { icon: '🌿', title: 'Sürdürülebilir Moda', desc: 'Doğal ve nefes alan kumaşlar' },
-                  { icon: '🌍', title: '4 Dil Desteği', desc: 'TR · EN · DE · AR dillerinde tam hizmet' },
+                  { icon: '🌍', title: '4 Dil Desteği', desc: 'TR · EN · DE · RU dillerinde hizmet' },
                 ].map(w => (
                   <li key={w.title} style={{ padding: 20, borderRadius: 16, border: '1px solid #F3F4F6', backgroundColor: C.cream }}>
                     <div aria-hidden="true" style={{ fontSize: 24, marginBottom: 8 }}>{w.icon}</div>
