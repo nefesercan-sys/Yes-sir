@@ -455,9 +455,8 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
       {
         '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: `${SITE}/terzi` },
-          { '@type': 'ListItem', position: 2, name: HUB_NAME[lang], item: abs(HUB_MAIN[lang]) },
-          { '@type': 'ListItem', position: 3, name: d.name[lang], item: url },
+          { '@type': 'ListItem', position: 1, name: HUB_NAME[lang], item: abs(HUB_MAIN[lang]) },
+          { '@type': 'ListItem', position: 2, name: d.name[lang], item: url },
         ],
       },
       {
