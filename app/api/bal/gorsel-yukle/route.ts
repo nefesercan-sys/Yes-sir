@@ -1,3 +1,4 @@
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -8,6 +9,8 @@ cloudinary.config({
 });
 
 export async function POST(req: Request) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
