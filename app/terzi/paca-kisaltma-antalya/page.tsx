@@ -259,7 +259,7 @@ export default function PacaKisaltmaPage() {
               </p>
               <p>
                 <strong>Eşofman ve spor pantolon paça kısaltmada</strong> orijinal lastik seçeneği korunabilir ya da düz paça
-                yapılabilir. İnce jersey kumaşlarda overlok işlemi ile sağlam bir dikiş garantilenmektedir.
+                yapılabilir. İnce jersey kumaşlarda overlok işlemi ile sağlam bir dikiş sağlanır.
               </p>
             </div>
           </div>
