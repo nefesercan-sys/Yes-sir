@@ -53,9 +53,9 @@ export const GOOGLE_REVIEWS: GoogleReview[] = [
   },
 ];
 
-// Google profilindeki toplam puan ve yorum sayısı. Şimdilik doğrulanabilen sayı: 6 yorum (5'i metinli, 1'i yalnızca puanlı), hepsi 5 yıldız.
-// Profilde daha fazla yorum varsa buradaki count'u profil ekranındaki gerçek toplamla güncelle.
-export const GOOGLE_PROFILE_STATS = { count: 6, average: '5.0' };
+// Google profilindeki toplam puan ve yorum sayısı (sahibin bildirdiği: 9 yorum, ortalama 5.0). Yeni yorum gelince count'u güncelle.
+// Listedeki GOOGLE_REVIEWS yalnızca metni birebir doğrulanmış yorumlardır; sayı profildeki toplamı gösterir.
+export const GOOGLE_PROFILE_STATS = { count: 9, average: '5.0' };
 
 export function reviewStats() {
   return GOOGLE_PROFILE_STATS;
