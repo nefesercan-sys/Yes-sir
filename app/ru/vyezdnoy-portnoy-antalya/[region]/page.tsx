@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   if (!r) return {};
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
-  const title = `VIP Ателье и Портной в ${r.name} | Доставка в отель`;
+  const title = `Ателье и портной в ${r.name} | Доставка в отель`;
   const desc = `Срочный ремонт и подгонка одежды во время отпуска. Ателье Terzi Can предлагает профессиональные услуги портного с выездом в отели ${r.name}. Пишите в WhatsApp!`;
   const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
     title: { absolute: title },
     description: desc,
     keywords: [
-      `VIP Ателье ${r.name}`, 
+      `Ателье ${r.name}`, 
       `выездной портной ${r.name}`, 
       `ремонт одежды отель ${r.name}`, 
       'портной Анталия', 
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
         'x-default': `${HOME_URL}/en/hotel-tailor-antalya/${r.slug}`,
       },
     },
-    openGraph: { title, description: desc, url, type: 'website', locale: 'ru_RU', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `VIP Портной в ${r.name}` }] },
+    openGraph: { title, description: desc, url, type: 'website', locale: 'ru_RU', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Портной в ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   };
@@ -64,7 +64,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
     h1: `Профессиональные услуги портного для гостей отелей в ${r.name}`,
     h2: `Быстрый ремонт и подгонка одежды без выезда из отеля`,
     body1: `Отдыхаете в ${r.name} и вам нужно срочно укоротить купленные брюки, подогнать вечернее платье по фигуре или починить сломанную молнию? Ателье Terzi Can решит эту проблему быстро и качественно.`,
-    body2: `Мы специализируемся на ремонте, подгонке и пошиве одежды любой сложности. Мы знаем, что вы не хотите тратить драгоценное время отпуска на поиски ателье в городе. Именно поэтому мы предлагаем VIP-услугу выездного портного для гостей, проживающих в отелях ${r.name}.`
+    body2: `Мы специализируемся на ремонте, подгонке и пошиве одежды любой сложности. Мы знаем, что вы не хотите тратить драгоценное время отпуска на поиски ателье в городе. Именно поэтому мы предлагаем услугу портного с забором и доставкой для гостей, проживающих в отелях ${r.name}.`
   };
 
   const jsonLd = {
@@ -73,7 +73,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
       {
         '@type': 'Service',
         '@id': `${url}#service`,
-        name: `VIP Выездной Портной ${r.name} — Забор и Доставка`,
+        name: `Выездной портной ${r.name} — Забор и Доставка`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
         provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
