@@ -1,3 +1,4 @@
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
@@ -18,8 +19,10 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
-    const body = await req.json();
+    const { _id, ...body } = await req.json(); // _id dışarıdan verilemez
     const db = await getDb();
     const urun = {
       ...body,
