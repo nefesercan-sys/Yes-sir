@@ -87,12 +87,12 @@ const jsonLd = {
         {
           '@type': 'Question',
           name: 'Paça kısaltma fiyatı ne kadar?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Paça kısaltma ₺150\'den başlar. Aynı gün teslim mümkündür.' },
+          acceptedAnswer: { '@type': 'Answer', text: 'Paça kısaltma ₺150\'den başlar. Teslim süresi işe ve yoğunluğa göre WhatsApp\'ta netleşir.' },
         },
         {
           '@type': 'Question',
           name: 'Terzi ne zaman kapıma gelir?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Arayın veya WhatsApp yazın, aynı gün veya ertesi gün randevu alın. Terzimiz adresinize gelir, ölçü alır, 24 saat içinde teslim eder.' },
+          acceptedAnswer: { '@type': 'Answer', text: 'Arayın veya WhatsApp yazın, randevu saatini birlikte belirleyelim. Terzimiz adresinize gelir, ölçü alır, hazır olunca teslim eder.' },
         },
       ],
     },
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { absolute: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can Konyaaltı' },
   description:
-    'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺150, bel daraltma ₺150, fermuar ₺200. Terzimiz kapınıza gelir, ölçü alır, 24 saatte teslim eder. Hemen ara: +90 531 898 64 18',
+    'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺150, bel daraltma ₺150, fermuar ₺200. Terzimiz kapınıza gelir, ölçü alır, hazır olunca teslim eder. Hemen ara: +90 531 898 64 18',
   keywords: [
     'terzi çağır Antalya', 'Antalya terzi', 'Konyaaltı terzi',
     'eve gelen terzi Antalya', 'kapıya gelen terzi',
@@ -421,7 +421,7 @@ export default function TerziCagirPage() {
           <p className="hero-sub">
             Antalya Konyaaltı'nın tüm mahallelerine <strong style={{color:'#D4A843'}}>araçlı terzi servisi</strong>.
             Siz yorulmayın — terzimiz adresinize gelir, ölçü alır,
-            <strong style={{color:'#D4A843'}}> en geç 24 saatte teslim eder</strong>.
+            <strong style={{color:'#D4A843'}}> hazır olunca teslim eder</strong>.
             Paça kısaltma <strong style={{color:'#D4A843'}}>₺150</strong>, fermuar <strong style={{color:'#D4A843'}}>₺200</strong>.
           </p>
           <div className="cta-group">
@@ -441,7 +441,7 @@ export default function TerziCagirPage() {
         <div className="trust">
           {[
             ['🌟 Google', 'Yorumlarımızı Görün'],
-            ['⚡ 24 Saat','Hızlı Teslim'],
+            ['⚡ Hızlı Servis','Süre WhatsApp\'ta netleşir'],
             ['🚗 Adrese','Araçlı Servis'],
             ['✂️ 15 Yıl','Tecrübe'],
           ].map(([v,l]) => (
@@ -465,7 +465,7 @@ export default function TerziCagirPage() {
               ['1','Ara veya WhatsApp Yaz',`${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Fotoğraf ile anında fiyat alın.`],
               ['2','Terzimiz Adresinize Gelir','Anlaşılan saatte terzimiz Konyaaltı içinde adresinize gelir. Yerinde ölçü alır, kıyafeti teslim alır.'],
               ['3','Atölyede Hazırlanır','Kıyafetiniz profesyonel atölyemizde deneyimli ustalarımız tarafından özenle yapılır.'],
-              ['4','Kapınıza Teslim','En geç 24 saatte tamamlanan kıyafet adresinize teslim edilir. Acil işler aynı gün teslim.'],
+              ['4','Kapınıza Teslim','Tamamlanan kıyafet adresinize teslim edilir. Teslim süresi işe ve yoğunluğa göre WhatsApp'ta netleşir.'],
             ].map(([n,t,d]) => (
               <div key={n} className="callout-step">
                 <div className="callout-step-num">{n}</div>
@@ -554,13 +554,13 @@ export default function TerziCagirPage() {
           <h2>Sık Sorulan Sorular</h2>
           {[
             ['Terzi çağırmak için ne yapmam gerekiyor?',
-             `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Aynı gün veya ertesi gün randevu alın — terzimiz kapınıza gelsin.`],
+             `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Randevu saatini birlikte belirleyelim — terzimiz kapınıza gelsin.`],
             ['Hangi mahallelere servis yapıyorsunuz?',
              'Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevi, Meltem, Çakırlar, Konyaaltı Merkez ve tüm Antalya ilçelerine araçlı terzi servisi sunuyoruz.'],
             ['Paça kısaltma ve bel daraltma fiyatı ne kadar?',
-             'Paça kısaltma ₺150, bel daraltma ₺150, etek kısaltma ₺150. Aynı gün teslim mümkündür. WhatsApp\'tan fotoğraf gönderin — 30 dakika içinde kesin fiyat alın.'],
+             'Paça kısaltma ₺150, bel daraltma ₺150, etek kısaltma ₺150. WhatsApp\'tan fotoğraf gönderin, fiyatı net olarak öğrenin.'],
             ['Teslim süresi ne kadar?',
-             'Paça kısaltma, fermuar, küçük tamirler aynı gün teslim. Büyük tadilatlar 24–48 saat. Elbise dikimi 3–5 iş günü.'],
+             'Teslim süresi işin türüne ve o günkü yoğunluğa göre değişir; küçük tamirler genellikle daha hızlı biter. Net süre WhatsApp\'ta konuşulur.'],
             ['İngilizce veya Rusça hizmet veriyor musunuz?',
              'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için özel otel teslimat hizmeti de mevcuttur.'],
           ].map(([q,a]) => (
