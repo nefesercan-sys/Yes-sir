@@ -61,6 +61,5 @@ export default function robots(): MetadataRoute.Robots {
       'https://swaphubs.com/sitemap.xml',
       'https://swaphubs.com/sitemap-terzi.xml',
     ],
-    host: 'https://swaphubs.com',
   }
 }
