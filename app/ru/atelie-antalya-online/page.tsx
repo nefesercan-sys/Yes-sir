@@ -9,12 +9,12 @@ const PAGE_URL        = `${BASE_URL}/ru/atelie-antalya-online`;
 const PHONE_DISPLAY   = '+90 531 898 64 18';
 const PHONE_TEL       = '+905318986418';
 const WA_NUMBER       = '905318986418';
-const GBP_NAME        = 'TERZİ Can Antalya Tailor Service';
-const MAPS_URL        = 'https://www.google.com/maps?cid=5846987472659818117';
-const MAPS_SHORT      = 'https://www.google.com/maps?cid=5846987472659818117';
-const MAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987';
-const MAPS_REVIEW     = 'https://g.page/r/CYUmDLIgrCRREAE/review';
-const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed';
+const GBP_NAME        = 'TERZİ Can - Konyaaltı';
+const MAPS_URL        = 'https://www.google.com/maps?cid=6436895271281342624';
+const MAPS_SHORT      = 'https://www.google.com/maps?cid=6436895271281342624';
+const MAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193';
+const MAPS_REVIEW     = 'https://www.google.com/maps?cid=6436895271281342624';
+const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
 const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
 const TODAY = '2026-10-07';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -60,8 +60,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987',
-    'ICBM': '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193',
+    'ICBM': '36.8572868, 30.5970193',
   },
 };
 
