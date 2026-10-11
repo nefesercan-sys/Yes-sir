@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `VIP Änderungsschneiderei ${r.name} | Hotel-Service & Abholung`;
   const desc = `Schnelle Kleiderreparatur im Urlaub? Terzi Can bietet professionelle Änderungsschneiderei mit VIP-Abholung in den Hotels von ${r.name}. Kontaktieren Sie uns über WhatsApp!`;
-  const ogImage = `${HOME_URL}/terzi-can-hero.jpg`;
+  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -75,7 +75,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         '@id': `${url}#service`,
         name: `VIP Hotel Schneider Service ${r.name} — Abholung & Lieferung`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/terzi-can-hero.jpg`, priceRange: '$$' },
+        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,
@@ -92,7 +92,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
           {
             '@type': 'Question',
             name: `Wie schnell ist die Bearbeitung?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Unsere erfahrenen Schneider erledigen die Arbeit und liefern es in der Regel innerhalb von 24 bis 48 Stunden an Ihr Hotel in ${r.name} zurück.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Unsere erfahrenen Schneider erledigen die Arbeit und liefern es an Ihr Hotel in ${r.name} zurück. Die Dauer hängt von der Arbeit und der Auslastung ab; einfache Änderungen sind oft in ein bis zwei Tagen fertig, die Übergabezeit klären wir per WhatsApp.` },
           },
         ],
       },
