@@ -1,4 +1,5 @@
 // app/api/bal/upload-gorsel/route.ts
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
@@ -52,9 +53,8 @@ export async function POST(req: NextRequest) {
     const file = formData.get('file') as File;
     const secret = formData.get('secret') as string;
 
-    if (secret !== 'arimbalim2024') {
-      return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-    }
+    const guard = await requireAdmin(req, secret); // oturum VEYA ADMIN_API_KEY
+    if (guard) return guard;
 
     if (!slug || !file) {
       return NextResponse.json({ error: 'slug ve file gerekli' }, { status: 400 });
