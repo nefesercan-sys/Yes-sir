@@ -8,11 +8,11 @@ export const SITE_URL = 'https://swaphubs.com';
 
 export const BUSINESS = {
   id: `${SITE_URL}/terzi#business`,
-  name: 'TERZİ Can Antalya Tailor Service', // Google profil adıyla birebir aynı
+  name: 'TERZİ Can - Konyaaltı', // Google profil adıyla birebir aynı
   legalShortName: 'Terzi Can',
   alternateName: [
     'Terzi Can',
-    'TERZİ Can - Konyaaltı',
+    'TERZİ Can Antalya Tailor Service',
     'Terzi Can Antalya',
     'Tailor Can Antalya',
     'Портной Кан Анталья',
@@ -33,7 +33,7 @@ export const BUSINESS = {
     addressCountry: 'TR',
   },
   // Google Haritalar'dan doğrulanıp güncellenmeli (sayfalarda farklı değerler var)
-  geo: { latitude: 36.857466, longitude: 30.596987 },
+  geo: { latitude: 36.8572868, longitude: 30.5970193 },
   hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '23:00' },
-  sameAs: ['https://www.google.com/maps?cid=5846987472659818117', 'https://terzihizmeti.com.tr'],
+  sameAs: ['https://www.google.com/maps?cid=6436895271281342624', 'https://terzihizmeti.com.tr'],
 } as const;
