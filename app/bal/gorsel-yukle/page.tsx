@@ -38,7 +38,7 @@ export default function BalGorselYukle() {
       const form = new FormData();
       form.append('slug', slug);
       form.append('file', file);
-      form.append('secret', 'arimbalim2024');
+      // Yetki artık sunucuda: yönetici olarak giriş yapmış oturum gerekir (şifre tarayıcı koduna gömülmez).
       const res = await fetch('/api/bal/upload-gorsel', { method: 'POST', body: form });
       const data = await res.json();
       if (data.success) {
