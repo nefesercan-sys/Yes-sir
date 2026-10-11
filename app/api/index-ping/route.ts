@@ -3,6 +3,8 @@
 // curl https://swaphubs.com/api/index-ping
 // VEYA tarayıcıdan açın — Google'a tüm yeni sayfaları bildirir
 
+import { requireAdmin } from "@/lib/admin-auth";
+import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const SAYFALAR = [
@@ -50,7 +52,9 @@ const SAYFALAR = [
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   const results: { url: string; status: string }[] = [];
 
   // Google Sitemap Ping
