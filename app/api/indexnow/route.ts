@@ -30,18 +30,24 @@ export async function GET(req: NextRequest) {
     ...(await sitemapUrls()),
   ]
   const urlList = Array.from(new Set(all)).slice(0, 10000)
-  const results: number[] = []
-  try {
-    for (const endpoint of ['https://api.indexnow.org/indexnow', 'https://yandex.com/indexnow']) {
+  const results: { endpoint: string; status?: number; error?: string }[] = []
+  const body = JSON.stringify({ host: HOST, key: KEY, keyLocation: `https://${HOST}/${KEY}.txt`, urlList })
+  // Her uç nokta ayrı denenir: biri hata verse bile diğerleri gönderilir, asıl hata görünür.
+  for (const endpoint of ['https://www.bing.com/indexnow', 'https://api.indexnow.org/indexnow', 'https://yandex.com/indexnow']) {
+    try {
       const r = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ host: HOST, key: KEY, keyLocation: `https://${HOST}/${KEY}.txt`, urlList }),
+        body,
+        cache: 'no-store',
+        signal: AbortSignal.timeout(8000),
       })
-      results.push(r.status)
+      results.push({ endpoint, status: r.status })
+    } catch (e) {
+      results.push({ endpoint, error: e instanceof Error ? e.message : String(e) })
     }
-    return NextResponse.json({ success: true, submitted: urlList.length, statuses: results })
-  } catch {
-    return NextResponse.json({ success: false, error: 'ping failed' }, { status: 500 })
   }
+  // 200/202 = kabul edildi
+  const ok = results.some((r) => r.status === 200 || r.status === 202)
+  return NextResponse.json({ success: ok, submitted: urlList.length, results }, { status: ok ? 200 : 502 })
 }
