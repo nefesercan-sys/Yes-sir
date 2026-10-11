@@ -21,6 +21,12 @@ const TERZI_PREFIXES = [
   '/de/schneider-service-hotel-antalya',
   '/ru/atelie-antalya',
   '/ru/vyezdnoy-portnoy-antalya',
+  '/en/tailor-antalya',
+  '/en/tailor-services',
+  '/de/schneider-antalya',
+  '/de/schneider-leistungen',
+  '/ru/portnoy-antalya',
+  '/ru/uslugi-portnogo',
 ];
 
 function isTerziPath(pathname: string | null): boolean {
