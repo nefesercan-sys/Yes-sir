@@ -50,7 +50,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Выездной портной Анталья · Обслуживание в отеле · Terzi Can',
       url: SITE_URL,
-      description: 'Выездной портной и обслуживание в отеле в Анталье. Белек, Лара, Кемер, Аланья и все районы. Срочный ремонт за 24–48 часов. Говорим по-русски. ☎ ' + PHONE,
+      description: 'Выездной портной и обслуживание в отеле в Анталье. Белек, Лара, Кемер, Аланья и все районы. Срочный ремонт по договорённости. Говорим по-русски. ☎ ' + PHONE,
       inLanguage: 'ru',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -73,8 +73,8 @@ const jsonLd = {
           acceptedAnswer:{'@type':'Answer',text:`Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Выезд портного платный?',
           acceptedAnswer:{'@type':'Answer',text:`Нет, сам выезд бесплатный — оплачивается только выполненная работа. Подшив брюк от ₺150, ушив платья от ₺200. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Можно ли сделать срочный ремонт в тот же день перед мероприятием?',
-          acceptedAnswer:{'@type':'Answer',text:`Да! Портной Кан делает срочный ремонт в тот же день или за 24 часа по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`} },
+        { '@type':'Question', name:'Можно ли сделать срочный ремонт перед мероприятием?',
+          acceptedAnswer:{'@type':'Answer',text:`Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; простые работы часто готовы за день-два, в зависимости от загрузки. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Вы говорите по-русски?',
           acceptedAnswer:{'@type':'Answer',text:`Да, наша команда говорит по-русски, английски, немецки и турецки. WhatsApp: ${PHONE}`} },
       ],
@@ -82,12 +82,11 @@ const jsonLd = {
     {
       '@type': 'HowTo',
       name: 'Как работает выездной портной / обслуживание в отеле',
-      totalTime: 'PT24H',
       step: [
         { '@type':'HowToStep', name:'Напишите в WhatsApp', text:`Отправьте геолокацию или название отеля на номер ${PHONE}.` },
-        { '@type':'HowToStep', name:'Согласуйте время', text:'В течение 30 минут мы подтвердим удобное время.' },
+        { '@type':'HowToStep', name:'Согласуйте время', text:'Мы подтвердим удобное время в WhatsApp.' },
         { '@type':'HowToStep', name:'Портной приезжает', text:'Портной приезжает по адресу, снимает мерки и забирает вещь.' },
-        { '@type':'HowToStep', name:'Доставка', text:'Готовая вещь доставляется обратно за 24–48 часов.' },
+        { '@type':'HowToStep', name:'Доставка', text:'Готовая вещь доставляется обратно; время выдачи согласуем при записи.' },
       ],
     },
   ],
@@ -95,7 +94,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Вызов портного в отель Анталья · Доставка за 24 часа | Terzi Can' },
+  title: { absolute: 'Выездной портной в Анталье · Портной в отель | Terzi Can' },
   description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере, Аланье. Срочный ремонт, говорим по-русски. ☎ ' + PHONE,
   keywords: [
     'выездной портной Анталья','портной в отель Анталья','портной Анталья',
@@ -157,7 +156,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> приезжает <strong style={{ color: '#D4B07A' }}>в любой район Антальи</strong> с выездным сервисом.
               Белек, Лара, Кемер, Аланья — все отели. Снятие мерок, пошив и доставка к вашей двери.
-              Срочно за 24–48 часов.
+              Время выдачи согласуем в WhatsApp.
             </p>
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {[
@@ -193,9 +192,9 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'Отправьте геолокацию в WhatsApp', `Отправьте адрес или название отеля на номер ${PHONE}`],
-                ['📞', 'Запись в течение 30 минут', 'Мы согласуем удобное для вас время'],
+                ['📞', 'Запись в WhatsApp', 'Мы согласуем удобное для вас время'],
                 ['✂️', 'Снятие мерок на месте', 'Портной приезжает, снимает мерки и забирает вещь'],
-                ['🚗', 'Доставка за 24–48 часов', 'Готовая вещь доставляется к вашей двери'],
+                ['🚗', 'Доставка к вам', 'Готовая вещь доставляется к вашей двери'],
               ].map(([ic, t, d], i) => (
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
@@ -278,7 +277,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 {[
                   ['Стоимость выезда','БЕСПЛАТНО','—'],
                   ['Подшив брюк','от ₺150','24 часа'],
-                  ['Замена молнии','от ₺120','В тот же день'],
+                  ['Замена молнии','от ₺200','В тот же день'],
                   ['Ушив платья / пиджака','от ₺200','48 часов'],
                   ['Укорачивание рукавов','от ₺200','48 часов'],
                   ['Ремонт вечернего платья','от ₺350','48 часов'],
@@ -307,7 +306,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               ['Выезд портного платный?', 'Нет! Сам выезд полностью бесплатный — оплачивается только выполненная работа. Подшив брюк от ₺150, ушив платья от ₺200.'],
               ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
               ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
-              ['Как быстро приезжает портной?', 'Мы согласуем время в течение 30 минут после вашего сообщения в WhatsApp. Обычно портной приезжает в тот же день или на следующий.'],
+              ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
               ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
@@ -325,7 +324,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             Вызвать портного сейчас
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Отправьте геолокацию — запись за 30 минут, доставка за 24 часа
+            Отправьте геолокацию — подтвердим запись и привезём готовую вещь
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
