@@ -2,14 +2,16 @@
 // işletme şeması zaten aynı yorumları lib/reviews.ts'ten alır (çift işaretleme olmasın).
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
 
-type L = 'tr' | 'en';
+type L = 'tr' | 'en' | 'ru' | 'de';
 const T = {
   tr: { h: 'Müşteri Yorumları', on: "Google'da", rev: 'yorum', all: "Tüm yorumları Google'da gör" },
   en: { h: 'Customer Reviews', on: 'on Google', rev: 'reviews', all: 'See all reviews on Google' },
+  ru: { h: 'Отзывы клиентов', on: 'в Google', rev: 'отзывов', all: 'Все отзывы в Google' },
+  de: { h: 'Kundenbewertungen', on: 'bei Google', rev: 'Bewertungen', all: 'Alle Bewertungen bei Google ansehen' },
 } as const;
 
 export default function ReviewsBlock({ lang = 'tr' }: { lang?: L }) {
-  const t = T[lang];
+  const t = T[lang] ?? T.en;
   const { count, average } = reviewStats();
   // Sayfa dilindeki yorumlar önce
   const list = [...GOOGLE_REVIEWS].sort((a, b) => Number(b.lang === lang) - Number(a.lang === lang));
@@ -26,7 +28,7 @@ export default function ReviewsBlock({ lang = 'tr' }: { lang?: L }) {
         {list.map(r => (
           <figure key={r.author + r.date} style={{ margin: 0, border: '1px solid rgba(128,128,128,.35)', borderRadius: 12, padding: 14 }}>
             <div style={{ color: '#f5a623', fontSize: 14 }} aria-label={`${r.rating} / 5`}>{'★'.repeat(r.rating)}</div>
-            <blockquote style={{ margin: '8px 0', fontSize: 14, lineHeight: 1.6 }}>{r.text}</blockquote>
+            <blockquote style={{ margin: '8px 0', fontSize: 14, lineHeight: 1.6, whiteSpace: 'pre-line' }}>{r.text}</blockquote>
             <figcaption style={{ fontSize: 12, opacity: 0.7 }}>
               {r.author} · {r.date}
             </figcaption>
