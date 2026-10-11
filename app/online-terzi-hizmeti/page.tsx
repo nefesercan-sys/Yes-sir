@@ -266,7 +266,7 @@ const jsonLd = {
           name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Kıyafet tam oturmadıysa WhatsApp'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir.',
+            text: 'Kıyafet tam oturmadıysa WhatsApp\'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir.',
           },
         },
         {
