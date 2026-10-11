@@ -31,28 +31,27 @@ const FAQ = [
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
   { q: 'Is the hotel tailor visit free?', a: `Yes, the hotel visit itself is free — you only pay for the tailoring work. Trouser hemming starts at ₺150 (€5), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
-  { q: 'Can I get same-day alterations before an event?', a: `Yes! Tailor Can offers same-day and 24-hour express service across all Antalya hotel zones, including Belek, Lara, Kemer and Alanya. WhatsApp: ${PHONE}` },
+  { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; simple jobs are often ready within a day or two, depending on workload. We serve hotels in Belek, Lara, Kemer, Alanya and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
   '@type': 'HowTo',
   name: 'How the Mobile / Hotel Tailor Service Works',
-  totalTime: 'PT24H',
   step: [
     { '@type':'HowToStep', name:'Message us on WhatsApp', text:`Send your hotel name or room details to ${PHONE}.` },
-    { '@type':'HowToStep', name:'Book a time', text:'Our English-speaking coordinator confirms a suitable time within 30 minutes.' },
+    { '@type':'HowToStep', name:'Book a time', text:'Our English-speaking coordinator confirms a suitable time with you on WhatsApp.' },
     { '@type':'HowToStep', name:'Tailor visits your hotel', text:'Our professional tailor visits your hotel lobby or room, takes measurements and collects the garment.' },
-    { '@type':'HowToStep', name:'Fast Delivery', text:'Your finished garment is delivered back to your hotel within 24–48 hours.' },
+    { '@type':'HowToStep', name:'Fast Delivery', text:'Your finished garment is delivered back to your hotel; the handover time is agreed at the appointment.' },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Call a Tailor to Your Hotel in Antalya · 24h Delivery | Terzi Can' },
+  title: { absolute: 'Hotel Tailor Antalya · Mobile Tailor Comes to Your Hotel | Terzi Can' },
   description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer, Alanya. Same-day alterations, English speaking tailor, accepts EUR/USD/RUB/Cards. ☎ ' + PHONE,
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
     'English speaking tailor Antalya','Belek hotel tailor','Lara hotel tailor',
-    'Kemer hotel tailor','Alanya hotel tailor','same day tailor Antalya',
+    'Kemer hotel tailor','Alanya hotel tailor','emergency tailor Antalya',
     'dress alteration Antalya hotel','suit alteration Antalya',
   ],
   alternates: {
@@ -119,7 +118,7 @@ export default function HotelTailorAntalyaPage() {
               </h1>
               <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
                 <strong style={{ color: '#fff' }}>Tailor Can</strong> comes directly to your hotel room or lobby across <strong style={{ color: '#D4B07A' }}>Belek, Lara, Kemer, Side, and Alanya</strong>. 
-                Professional measurement, emergency dress alterations, suit repairs, and express 24h room delivery. 
+                Professional measurement, emergency dress alterations, suit repairs, and delivery back to your room. 
                 <span style={{ display: 'block', marginTop: '.5rem', color: '#D4B07A', fontSize: '.9rem' }}>💳 We accept EUR, USD, RUB, TRY & Credit Cards.</span>
               </p>
 
@@ -129,7 +128,7 @@ export default function HotelTailorAntalyaPage() {
                   ['📍', 'Find Us on Google Maps'],
                   ['🏨', 'All Hotels Covered'],
                   ['💳', 'EUR / USD / Cards Accepted'],
-                  ['⚡', '24h Express Delivery'],
+                  ['⚡', 'Delivered to Your Room'],
                 ].map(([icon, text]) => (
                   <span key={icon} style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.8)', background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', padding: '.35rem .8rem', borderRadius: '4px' }}>
                     {icon} {text}
@@ -173,9 +172,9 @@ export default function HotelTailorAntalyaPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'Message on WhatsApp', `Send your hotel name and room or request to ${PHONE}`],
-                ['📞', 'Quick Confirmation', 'Our English-speaking team confirms appointment within 30 minutes'],
+                ['📞', 'Quick Confirmation', 'Our English-speaking team confirms an appointment time on WhatsApp'],
                 ['✂️', 'Tailor Visits Hotel', 'Our professional mobile tailor visits your hotel room or lobby'],
-                ['🚗', '24h Room Delivery', 'Finished garment delivered back to your hotel door'],
+                ['🚗', 'Room Delivery', 'Finished garment delivered back to your hotel door'],
               ].map(([ic, t, d], i) => (
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
@@ -260,7 +259,7 @@ export default function HotelTailorAntalyaPage() {
                 {[
                   ['Hotel Visit / Measurement','FREE','—'],
                   ['Trouser / Pant Hemming','₺150+ (~€5)','24h'],
-                  ['Zipper Replacement','₺120+ (~€4)','Same day'],
+                  ['Zipper Replacement','₺200+ (~€6)','Same day'],
                   ['Dress / Jacket Alteration','₺200+ (~€7)','48h'],
                   ['Sleeve Shortening','₺200+ (~€7)','48h'],
                   ['Evening Gown Repair','₺350+ (~€12)','48h'],
@@ -293,7 +292,7 @@ export default function HotelTailorAntalyaPage() {
               ['What currencies and payment methods do you accept?', 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.'],
               ['Is the hotel visit free of charge?', 'Yes! The hotel visit and measurement session is completely free — you only pay for the tailoring work itself.'],
               ['Do you serve Belek and Lara luxury hotels?', `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, Side, and Alanya. WhatsApp: ${PHONE}`],
-              ['How fast can the tailor arrive at my hotel?', 'We confirm an appointment within 30 minutes on WhatsApp. The tailor typically arrives the same day.'],
+              ['How fast can the tailor arrive at my hotel?', 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.'],
               ['Do your tailors speak English?', `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
@@ -312,7 +311,7 @@ export default function HotelTailorAntalyaPage() {
             Need an Urgent Tailor at Your Hotel?
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Send your hotel name on WhatsApp — booking within 30 min, room delivery within 24 hours.
+            Send your hotel name on WhatsApp — we confirm your appointment and deliver back to your room.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
