@@ -45,7 +45,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
     },
     {
       id: 'hotel-service',
-      slogan: 'Otele Terzi Çağır — Yerinde Ölçü, 24 Saatte Teslim',
+      slogan: 'Otele Terzi Çağır — Yerinde Ölçü, Otele Teslim',
       badge: 'Otellere Özel',
       actionText: 'Otele Terzi Çağır',
       waTemplate: 'Merhaba, kaldığım otele terzi çağırmak istiyorum. Otel adını ve konumu gönderebilirim.',
@@ -75,7 +75,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
     },
     {
       id: 'hotel-service',
-      slogan: 'Call a Tailor to Your Hotel — Fitting On Site, 24h Delivery',
+      slogan: 'Call a Tailor to Your Hotel — Fitting On Site, Delivered Back',
       badge: 'Hotel Service',
       actionText: 'Call a Tailor to My Hotel',
       waTemplate: 'Hello, I need a tailor at my hotel in Antalya. I can send the hotel name and location.',
@@ -105,7 +105,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
     },
     {
       id: 'hotel-service',
-      slogan: 'Schneider ins Hotel bestellen — Lieferung in 24 Std.',
+      slogan: 'Schneider ins Hotel bestellen — Anprobe vor Ort, Lieferung zu Ihnen',
       badge: 'Hotelservice',
       actionText: 'Schneider ins Hotel',
       waTemplate: 'Hallo, ich möchte einen Schneider in mein Hotel in Antalya bestellen.',
@@ -128,7 +128,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
     },
     {
       id: 'hotel-service',
-      slogan: 'Вызов портного в отель — доставка за 24 часа',
+      slogan: 'Вызов портного в отель — мерки на месте, доставка к вам',
       badge: 'Для отелей',
       actionText: 'Вызвать портного в отель',
       waTemplate: 'Здравствуйте, хочу вызвать портного в мой отель в Анталии.',
