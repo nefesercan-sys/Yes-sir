@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `VIP Ателье и Портной в ${r.name} | Доставка в отель`;
   const desc = `Срочный ремонт и подгонка одежды во время отпуска. Ателье Terzi Can предлагает профессиональные услуги портного с выездом в отели ${r.name}. Пишите в WhatsApp!`;
-  const ogImage = `${HOME_URL}/terzi-can-hero.jpg`;
+  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -75,7 +75,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `VIP Выездной Портной ${r.name} — Забор и Доставка`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/terzi-can-hero.jpg`, priceRange: '$$' },
+        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,
@@ -92,7 +92,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
           {
             '@type': 'Question',
             name: `Сколько времени занимает работа?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Наши мастера выполнят заказ за 24–48 часов с бесплатной доставкой в ваш отель в ${r.name}.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Срок зависит от работы и загрузки; простые работы часто готовы за день-два. Время выдачи согласуем в WhatsApp, доставка в ваш отель в ${r.name} бесплатная.` },
           },
         ],
       },
