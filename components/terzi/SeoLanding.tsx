@@ -7,7 +7,6 @@
 import type { Metadata } from 'next';
 import './seo-landing.css';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewStats } from '@/lib/reviews';
 import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
 import {
   DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
@@ -72,7 +71,6 @@ const SVC_HUB_NAME: Record<Lang, string> = {
 function businessNode(lang: Lang) {
   return {
     '@type': ['LocalBusiness', 'ClothingStore'],
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: reviewStats().average, reviewCount: String(reviewStats().count), bestRating: '5', worstRating: '1' },
     '@id': BUSINESS_ID,
     name: 'Terzi Can',
     url: `${SITE}/terzi`,
@@ -285,7 +283,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d))),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -302,7 +300,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(serviceUrl(l, s))),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -328,7 +326,7 @@ export function hubMetadata(lang: Lang): Metadata {
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(SERVICE_BASE[l])),
-    openGraph: { title, description, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
+    openGraph: { title, description, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
 
