@@ -2,6 +2,7 @@
 // SwapHubs — app/api/ai-ilan/route.ts
 // AI İlan Üretim Motoru + Akıllı Görsel Atama (Tüm Yeni Sektörler)
 // ============================================================
+import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import Anthropic from '@anthropic-ai/sdk';
@@ -229,11 +230,8 @@ function slugify(text: string): string {
 export async function POST(req: NextRequest) {
   try {
     const body     = await req.json();
-    const adminKey = body.adminKey as string;
-
-    if (!adminKey || adminKey.length < 5) {
-      return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-    }
+    const guard = await requireAdmin(req);
+    if (guard) return guard;
 
     const sektorId = body.sektorId as string;
     const adet     = Math.min(Math.max(parseInt(body.adet ?? '5'), 1), 30);
