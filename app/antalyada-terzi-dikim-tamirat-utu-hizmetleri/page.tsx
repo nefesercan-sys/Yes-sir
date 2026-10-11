@@ -227,10 +227,10 @@ const jsonLd = {
         },
         {
           '@type': 'Question',
-          name: 'Gelinlik veya abiye tadilatında garanti veriyor musunuz?',
+          name: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet, hassas dikim gerektiren gelinlik ve abiye tadilatlarında ölçü provası sonrası teslim edilir; teslimat sonrası uyumsuzluk durumunda ücretsiz düzeltme yapılır.'
+            text: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp'tan yazın; düzeltmeyi birlikte planlarız.'
           }
         },
         {
@@ -400,8 +400,8 @@ const faqs = [
     a: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Konyaaltı, Muratpaşa, Lara ve Kepez bölgelerinde kuryeli ekip aynı gün içinde adresten alım yapar.',
   },
   {
-    q: 'Gelinlik veya abiye tadilatında garanti veriyor musunuz?',
-    a: 'Evet, hassas dikim gerektiren gelinlik ve abiye tadilatlarında ölçü provası sonrası teslim edilir; teslimat sonrası uyumsuzluk durumunda ücretsiz düzeltme yapılır.',
+    q: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
+    a: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp'tan yazın; düzeltmeyi birlikte planlarız.',
   },
   {
     q: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
