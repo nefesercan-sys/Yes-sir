@@ -265,7 +265,7 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
       `}} />
 
       <nav className="nav">
-        <a className="nav-logo" onClick={() => router.push("/")}>
+        <a className="nav-logo" href="/" onClick={(e) => { e.preventDefault(); router.push("/"); }}>
           <div className="nav-logo-icon">🔄</div>
           Swap<span>Hubs</span>
         </a>
