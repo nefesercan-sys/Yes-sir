@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -42,15 +43,16 @@ export const metadata: Metadata = {
     'tailor Konyaalti Antalya', 'портной Коньяалты',
   ],
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-  alternates: {
-    canonical: PAGE_URL,
-    languages: {
-      'tr': PAGE_URL,
-      'en': `${BASE_URL}/online-tailor-service`,
-      'ru': `${BASE_URL}/ru/atelie-antalya-online`,
-      'x-default': PAGE_URL,
-    },
-  },
+  alternates: (() => {
+    const d = findDistrict('konyaalti')!;
+    return {
+      canonical: PAGE_URL,
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])),
+        'x-default': PAGE_URL,
+      },
+    };
+  })(),
   openGraph: {
     title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü | Antalya 2026',
     description: `Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
