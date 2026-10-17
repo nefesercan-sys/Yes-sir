@@ -2,6 +2,7 @@
 // SwapHubs — app/terzi/konyaalti/[mahalle]/page.tsx
 // ============================================================
 import type { Metadata } from 'next';
+import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -65,7 +66,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${m.ad} paça kısaltma`, `${m.ad} fermuar değişimi`, `${m.ad} eve gelen terzi`,
       'Konyaaltı terzi', 'Antalya terzi',
     ],
-    alternates: { canonical: url },
+    alternates: (() => {
+      const d = findDistrict(m.slug);
+      if (!d || abs(districtUrl('tr', d)) !== url) return { canonical: url };
+      return {
+        canonical: url,
+        languages: {
+          ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])),
+          'x-default': url,
+        },
+      };
+    })(),
     openGraph: {
       title,
       description: desc,
