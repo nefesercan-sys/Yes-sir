@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -21,7 +22,16 @@ export const metadata: Metadata = {
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
     'abiye dikimi antalya', 'özel dikim antalya', 'paça kısaltma antalya',
   ],
-  alternates: { canonical: SITE_URL },
+  alternates: (() => {
+    const sv = SERVICES.find((x) => x.id === 'elbise-dikim')!;
+    return {
+      canonical: SITE_URL,
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        'x-default': SITE_URL,
+      },
+    };
+  })(),
   openGraph: {
     title: 'Antalya Terzi · Elbise Dikimi ve Tadilat — Terzi Can',
     description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü hizmeti.",
