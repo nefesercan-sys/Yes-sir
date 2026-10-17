@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -88,7 +89,16 @@ export const metadata: Metadata = {
     'paça kısaltma Belek', 'paça kısaltma Lara', 'paça kısaltma Kemer', 'paça kısaltma Alanya',
     'pantolon tadilat Antalya', 'hızlı paça kısaltma Antalya', '24 saat paça kısaltma',
   ],
-  alternates: { canonical: SITE_URL },
+  alternates: (() => {
+    const sv = SERVICES.find((x) => x.id === 'paca')!;
+    return {
+      canonical: SITE_URL,
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        'x-default': SITE_URL,
+      },
+    };
+  })(),
   openGraph: {
     title: 'Paça Kısaltma Antalya · Kot Paça ₺150 · 24 Saatte Teslim',
     description: "Kot paça ₺150, kumaş pantolon ₺175. Eve ve otele gelen terzi. Tüm Antalya ilçeleri. ☎ +90 531 898 64 18",
