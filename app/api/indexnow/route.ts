@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // Korumalı IndexNow tetikleyici.
 // Kullanım: GET /api/indexnow  +  başlık  Authorization: Bearer <INDEXNOW_SECRET>
+//       veya GET /api/indexnow?token=<INDEXNOW_SECRET>
 // (Vercel → Settings → Environment Variables → INDEXNOW_SECRET). Secret yoksa endpoint kapalıdır.
 const HOST = 'swaphubs.com'
 const KEY = '02de353ea7f34c5db5448385d852cc59'
@@ -20,7 +21,9 @@ async function sitemapUrls(): Promise<string[]> {
 export async function GET(req: NextRequest) {
   const secret = process.env.INDEXNOW_SECRET
   const auth = req.headers.get('authorization')
-  if (!secret || auth !== `Bearer ${secret}`) {
+  const token = new URL(req.url).searchParams.get('token')
+  // Yetki: Authorization: Bearer <secret> başlığı VEYA ?token=<secret>
+  if (!secret || (auth !== `Bearer ${secret}` && token !== secret)) {
     return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 })
   }
 
