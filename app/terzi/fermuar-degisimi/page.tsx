@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -88,7 +89,16 @@ export const metadata: Metadata = {
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
   ],
-  alternates: { canonical: SITE_URL },
+  alternates: (() => {
+    const sv = SERVICES.find((x) => x.id === 'fermuar')!;
+    return {
+      canonical: SITE_URL,
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        'x-default': SITE_URL,
+      },
+    };
+  })(),
   openGraph: {
     title: 'Fermuar Değişimi Antalya · 200 TL\'den | Terzi Can',
     description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–23:00, Konyaaltı / Antalya.',
