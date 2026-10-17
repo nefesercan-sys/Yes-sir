@@ -3,6 +3,7 @@
 // Antalya'nın 19 ilçesi için terzi sayfaları.
 // ============================================================
 import type { Metadata } from 'next';
+import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -65,7 +66,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${ilce.ad} eve gelen terzi`, `${ilce.ad} terzi telefon numarası`, `${ilce.ad} aynı gün terzi`,
       'Antalya terzi', 'Antalya kuru temizleme', 'Antalya dikim atölyesi',
     ],
-    alternates: { canonical: url },
+    alternates: (() => {
+      const d = findDistrict(ilce.slug);
+      if (!d || abs(districtUrl('tr', d)) !== url) return { canonical: url };
+      return {
+        canonical: url,
+        languages: {
+          ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])),
+          'x-default': url,
+        },
+      };
+    })(),
     openGraph: { 
       title, 
       description: desc, 
