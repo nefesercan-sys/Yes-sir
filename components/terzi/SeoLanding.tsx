@@ -116,6 +116,15 @@ const TIME_SHORT: Record<Lang, Record<'same' | 'next' | 'three' | 'none', string
   de: { same: 'Am selben Tag', next: 'Am nächsten Tag', three: 'In 3 Tagen', none: 'In der Nähe' },
 };
 
+// ── Bölge önceliği: TR'de yerel mahalleler, yabancı dilde tatil bölgeleri öne ──
+const TR_PRI = ['konyaalti', 'ogretmenevleri'];
+const FG_PRI = ['side', 'kundu', 'belek', 'lara', 'konyaalti', 'kemer', 'beldibi'];
+function sortD(lang: Lang, list: District[]): District[] {
+  const pri = lang === 'tr' ? TR_PRI : FG_PRI;
+  const rank = (x: District) => { const i = pri.indexOf(x.slug); return i < 0 ? 999 : i; };
+  return [...list].sort((a, b) => rank(a) - rank(b));
+}
+
 // ── Metin üreticileri ───────────────────────────────────────
 const SVC_FAR: Record<Lang, string> = {
   tr: "Alım-teslim WhatsApp'tan planlanır", en: 'Collection & delivery planned on WhatsApp',
@@ -140,7 +149,7 @@ function districtCopy(lang: Lang, d: District) {
     ru: [`Вызвать портного: ${n}, Анталья, подшив, молнии`, `Портной ${n}: цена по фото в WhatsApp`, `Портной ${n}, Анталья`],
     de: [`Schneider rufen: ${n}, Antalya, Kürzen, Zipper`, `Schneider ${n}: Preis per WhatsApp-Foto`, `Schneider ${n}, Antalya`],
   }[lang];
-  const title = pickFit(titles, 60);
+  let title = pickFit(titles, 60);
   const far = FAR_DISTRICTS.includes(d.slug);
   const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
   const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
@@ -160,7 +169,22 @@ function districtCopy(lang: Lang, d: District) {
          `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen ab ₺150, Reißverschluss ab ₺200. ${PH}`,
          `Schneider ${loc} ${PH}: Foto senden, Preis erhalten.`],
   }[lang];
-  const desc = pickFit(descs, 158);
+  const priT: string[] = lang === 'tr'
+    ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı Terzi Çağır: Hurma, Uncalı, Gürsu | Terzi Can`, `Konyaaltı Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`] : [`${n} Terzi Çağır: Fiyat Al, Paça ₺150 | Terzi Can`, `${n} Terzi Çağır | Terzi Can`]) : [])
+    : (FG_PRI.includes(d.slug) ? ({
+      en: [`Tailor in ${n}: Hotel Pick-up, Price by Photo | Terzi Can`, `Tailor in ${n}, Antalya · Hotel Pick-up | Terzi Can`],
+      ru: [`Портной ${n}: цена по фото, забор из отеля | Terzi Can`, `Портной ${n}, Анталья · из отеля | Terzi Can`],
+      de: [`Schneider ${n}: Preis per Foto, Hotelabholung | Terzi Can`, `Schneider ${n}, Antalya · Hotelabholung | Terzi Can`],
+    } as Record<string, string[]>)[lang] : []);
+  const priD: string[] = lang === 'tr'
+    ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı, Hurma, Liman, Uncalı, Gürsu'da terzi lazım mı? Fotoğrafı WhatsApp'tan at, fiyatı öğren: paça ₺150'den, fermuar ₺200'den. ${PH}`, `Konyaaltı terzi: Hurma, Liman, Uncalı, Gürsu. Fotoğraf at, fiyat al. Paça ₺150'den. ${PH}`] : [`${loc} terzi lazım mı? Fotoğraf at, ücreti öğren: paça ₺150'den, fermuar ₺200'den. ${svcTr}. ${PH}`, `${loc} terzi: fotoğraf at, ücreti öğren. Paça ₺150'den. ${PH}`]) : [])
+    : (FG_PRI.includes(d.slug) ? ({
+      en: [`Staying ${loc}? Send a photo on WhatsApp, get the price, and we collect from your hotel. Hemming from ₺150. ${PH}`, `Staying ${loc}? Photo on WhatsApp, price back, hotel pick-up. Hemming from ₺150. ${PH}`],
+      ru: [`Отдыхаете ${loc}? Пришлите фото в WhatsApp — назовём цену и заберём вещь из отеля. Подшив от ₺150. ${PH}`, `Отдыхаете ${loc}? Фото в WhatsApp, цена в ответ, забор из отеля. ${PH}`],
+      de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab. Kürzen ab ₺150. ${PH}`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung. ${PH}`],
+    } as Record<string, string[]>)[lang] : []);
+  if (priT.length) title = pickFit([...priT, ...titles], 60);
+  const desc = pickFit([...priD, ...descs], 158);
   return { n, loc, kw, title, desc };
 }
 
@@ -259,7 +283,8 @@ function serviceCopy(lang: Lang, s: Service) {
     ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
     de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  const title = pickFit(ps ? t1 : t1.slice(1), 60);
+  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? ${ps} 2026 | Terzi Can`, `${Q} ücreti ne kadar? ${ps} | Terzi Can`, `${Q} fiyatları 2026 · ${ps} | Terzi Can`] : [];
+  const title = pickFit([...trPrice, ...(ps ? t1 : t1.slice(1))], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
   const tm = tm0.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + tm0.slice(1);
@@ -269,7 +294,8 @@ function serviceCopy(lang: Lang, s: Service) {
   const open = { tr: 'Her gün 08:00–23:00', en: 'Daily 08:00–23:00', ru: 'Ежедневно 08:00–23:00', de: 'Täglich 08:00–23:00' }[lang];
   const pick = { tr: 'Otele servis ücretsiz', en: 'Free hotel service', ru: 'Выезд в отель бесплатно', de: 'Hotelservice gratis' }[lang];
   const tel = `☎ ${PHONE}`;
-  const info = [tm, price].filter(Boolean).join(', ');
+  const priceTxt = price ? (lang === 'tr' ? `2026 fiyatı ${price}` : price) : '';
+  const info = [tm, priceTxt].filter(Boolean).join(', ');
   const candidates = [
     `${nm}: ${info}. ${lead} ${rep} ${pick}. ${tel}`,
     `${nm}: ${info}. ${lead} ${rep} ${tel}`,
@@ -359,10 +385,10 @@ export function hubMetadata(lang: Lang): Metadata {
     de: 'Schneider Leistungen & Preise Antalya · Kürzen ab ₺150',
   }[lang];
   const description = {
-    tr: `Paça kısaltma, bel daraltma, fermuar, elbise dikimi, tadilat. Konyaaltı, Lara, Belek; otel ve eve ücretsiz servis. ☎ ${PHONE}`,
-    en: `Hemming, waist alterations, zippers, dress making. Konyaaltı, Lara, Belek; free hotel and home service. ☎ ${PHONE}`,
-    ru: `Подшив, ушивание, молнии, пошив и переделка. Коньяалты, Лара, Белек; выезд в отели бесплатно. ☎ ${PHONE}`,
-    de: `Kürzen, Taille anpassen, Reißverschlüsse, Kleider nähen. Konyaaltı, Lara, Belek; Hotelservice gratis. ☎ ${PHONE}`,
+    tr: `Terzi Konyaaltı, Hurma, Liman, Uncalı, Gürsu, Öğretmenevleri: paça, fermuar, bel daraltma, elbise dikimi. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
+    en: `Tailor for hotels in Side, Kundu, Belek, Lara, Kemer, Beldibi: hemming, zippers, dress making. Send a photo, get a price. ☎ ${PHONE}`,
+    ru: `Портной для отелей Сиде, Кунду, Белек, Лара, Кемер, Бельдиби: подшив, молнии, пошив. Фото — и цена. ☎ ${PHONE}`,
+    de: `Schneider für Hotels in Side, Kundu, Belek, Lara, Kemer, Beldibi: Kürzen, Reißverschlüsse, Kleider nähen. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
@@ -686,7 +712,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="areas-h">{u.districts}</h2></div>
             <div>
-              {DISTRICTS.map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{query(lang, d, s)}</a>))}
+              {sortD(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{query(lang, d, s)}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
           </div>
@@ -760,7 +786,7 @@ export function HubPage({ lang }: { lang: Lang }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="dist-h">{u.districts}</h2></div>
             <div>
-              {DISTRICTS.map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
+              {sortD(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
           </div>
