@@ -3,7 +3,7 @@
 // Antalya'nın 19 ilçesi için terzi sayfaları.
 // ============================================================
 import type { Metadata } from 'next';
-import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
+import { findDistrict, districtUrl, abs, LANGS, isOuterSlug } from '@/lib/seo-data';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -59,6 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: { absolute: title },
     description: desc,
+    ...(isOuterSlug(ilce.slug) ? { robots: { index: false, follow: true } } : {}),
     keywords: [
       `${ilce.ad} terzi`, `${ilce.ad} terzi Antalya`, `${ilce.ad} paça kısaltma`, `${ilce.ad} kuru temizleme`,
       `${ilce.ad} dikim atölyesi`, `${ilce.ad} tadilat`, `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`,
