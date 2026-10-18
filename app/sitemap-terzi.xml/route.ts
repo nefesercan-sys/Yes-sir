@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
-import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, type Lang } from '@/lib/seo-data'
+import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
 
@@ -52,7 +52,7 @@ export async function GET() {
     terziSayfalar.push({ url: `${BASE_URL}/terzi/konyaalti/${m.slug}`, priority: '0.85', freq: 'weekly' })
   })
 
-  ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti').forEach(i => {
+  ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti' && !isOuterSlug(i.slug)).forEach(i => {
     terziSayfalar.push({ url: `${BASE_URL}/terzi/antalya/${i.slug}`, priority: '0.80', freq: 'weekly' })
   })
 
@@ -73,7 +73,7 @@ export async function GET() {
   const seoItems: Item[] = [
     ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: hasAlt((x) => SERVICE_BASE[x]) })),
     ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt: hasAlt((x) => serviceUrl(x, sv)) }))),
-    ...DISTRICTS.flatMap((d) => LANGS.map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d)) }))),
+    ...DISTRICTS.filter((d) => !isOuterSlug(d.slug)).flatMap((d) => LANGS.map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d)) }))),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))
