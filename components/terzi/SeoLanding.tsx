@@ -13,7 +13,7 @@ import {
   DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
   SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
-  type Lang, type District, type Service,
+  type Lang, type District, type Service, isOuterSlug,
 } from '@/lib/seo-data';
 import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
 
@@ -121,10 +121,10 @@ function districtCopy(lang: Lang, d: District) {
   const loc = d.loc[lang];
   const kw = (lang === 'tr' ? [`${n} terzi`, `${n} terzi hizmeti`, ...d.alias.map((a) => `${a} terzi`)] : []);
   const title = {
-    tr: `${n} Terzi — Paça Kısaltma, Fermuar, Elbise Tamiri`,
-    en: `Tailor in ${n}, Antalya — Hemming, Zipper & Alterations`,
-    ru: `Портной ${n}, Анталья — подшив, молния, ремонт одежды`,
-    de: `Schneider ${n}, Antalya — Hose kürzen, Reißverschluss, Änderungen`,
+    tr: `${n} Terzi — Paça, Fermuar, Tadilat | Terzi Can`,
+    en: `Tailor in ${n}, Antalya — Hemming & Alterations`,
+    ru: `Портной ${n}, Анталья — подшив и подгонка`,
+    de: `Schneider ${n}, Antalya — Kürzen & Anpassen`,
   }[lang];
   const far = FAR_DISTRICTS.includes(d.slug);
   const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
@@ -132,10 +132,10 @@ function districtCopy(lang: Lang, d: District) {
   const svcRu = far ? 'Забор и доставка согласуются в WhatsApp' : 'Бесплатный выезд в отели и на дом';
   const svcDe = far ? 'Abholung und Lieferung per WhatsApp geplant' : 'Kostenloser Service zu Hotels und nach Hause';
   const desc = {
-    tr: `${loc} terzi mi arıyorsunuz? Paça kısaltma, bel daraltma, fermuar değişimi, elbise dikimi ve tamiri, gelinlik ₺800'den, abiye ₺400'den. ${svcTr}, her gün 08:00–23:00.`,
-    en: `Looking for a tailor ${loc}? Trouser hemming, waist alteration, zipper replacement, dress making and repair, wedding dress from ₺800. ${svcEn}, open daily 08:00–23:00.`,
-    ru: `Нужен портной ${loc}? Подшив брюк, ушивание, замена молнии, пошив и ремонт платьев, свадебное платье от ₺800. ${svcRu}, ежедневно 08:00–23:00.`,
-    de: `Schneider ${loc} gesucht? Hose kürzen, Taille enger machen, Reißverschluss wechseln, Kleider nähen und ändern, Brautkleid ab ₺800. ${svcDe}, täglich 08:00–23:00.`,
+    tr: `${loc} terzi mi arıyorsunuz? Paça, bel, fermuar, elbise dikimi ve tamiri. ${svcTr}, her gün 08:00–23:00.`,
+    en: `Tailor ${loc}? Hemming, waist and zipper work, dress making and repair. ${svcEn}, open daily 08:00–23:00.`,
+    ru: `Портной ${loc}? Подшив, ушивание, молнии, пошив и ремонт платьев. ${svcRu}, ежедневно 08:00–23:00.`,
+    de: `Schneider ${loc}? Kürzen, enger machen, Reißverschluss, Kleider nähen und ändern. ${svcDe}, täglich 08:00–23:00.`,
   }[lang];
   return { n, loc, kw, title, desc };
 }
@@ -225,18 +225,23 @@ function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [stri
 function serviceCopy(lang: Lang, s: Service) {
   const nm = s.name[lang];
   const title = {
-    tr: `${nm} Antalya — Konyaaltı, Muratpaşa, Lara, Belek`,
-    en: `${nm} in Antalya — Konyaaltı, Lara, Belek, Kemer`,
-    ru: `${nm} в Анталье — Коньяалты, Лара, Белек, Кемер`,
-    de: `${nm} in Antalya — Konyaaltı, Lara, Belek, Kemer`,
+    tr: `${nm} — Terzi Can Konyaaltı`,
+    en: `${nm} — Terzi Can, Antalya`,
+    ru: `${nm} — Terzi Can, Анталья`,
+    de: `${nm} — Terzi Can, Antalya`,
   }[lang];
   const price = priceOf(lang, s);
-  const desc = {
-    tr: `${s.intro.tr.split('. ')[0]}. ${timeOf('tr', s)}.${price ? ' ' + price + '.' : ''} Konyaaltı, Muratpaşa, Lara, Belek, Side, Kemer — otel ve eve ücretsiz servis.`,
-    en: `${s.intro.en.split('. ')[0]}. ${timeOf('en', s)}.${price ? ' ' + price + '.' : ''} Konyaaltı, Lara, Belek, Side, Kemer — free service to hotels and homes.`,
-    ru: `${s.intro.ru.split('. ')[0]}. ${timeOf('ru', s)}.${price ? ' ' + price + '.' : ''} Коньяалты, Лара, Белек, Сиде, Кемер — бесплатный выезд в отели и на дом.`,
-    de: `${s.intro.de.split('. ')[0]}. ${timeOf('de', s)}.${price ? ' ' + price + '.' : ''} Konyaaltı, Lara, Belek, Side, Kemer — kostenloser Service zu Hotels und nach Hause.`,
+  const p = price ? ' ' + price + '.' : '';
+  const tails = {
+    tr: ['Konyaaltı atölyesi, otel ve eve ücretsiz servis. Her gün 08:00–23:00.', 'Otel ve eve ücretsiz servis. Her gün 08:00–23:00.', 'Her gün 08:00–23:00.'],
+    en: ['Konyaaltı workshop, free hotel and home service. Daily 08:00–23:00.', 'Free hotel and home service. Daily 08:00–23:00.', 'Daily 08:00–23:00.'],
+    ru: ['Мастерская в Коньяалты, бесплатный выезд в отели и на дом. Ежедневно 08:00–23:00.', 'Бесплатный выезд в отели и на дом. Ежедневно 08:00–23:00.', 'Ежедневно 08:00–23:00.'],
+    de: ['Werkstatt in Konyaaltı, kostenloser Hotel- und Heimservice. Täglich 08:00–23:00.', 'Kostenloser Hotel- und Heimservice. Täglich 08:00–23:00.', 'Täglich 08:00–23:00.'],
   }[lang];
+  const head = `${nm}: ${timeOf(lang, s)}.`;
+  // Google ~155-160 karakter gösterir: sığan en uzun varyant; süre/saat bilgisi başta kalır.
+  const candidates = [...tails.map((t) => `${head}${p} ${t}`), ...tails.map((t) => `${head} ${t}`)];
+  const desc = candidates.find((c) => c.length <= 158) ?? candidates[candidates.length - 1];
   return { nm, title, desc };
 }
 
@@ -282,7 +287,9 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
     title: { absolute: c.title },
     description: c.desc,
     keywords: Array.from(new Set(kw)),
-    robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
+    robots: isOuterSlug(d.slug)
+      ? { index: false, follow: true }
+      : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d))),
     openGraph: {
       title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
@@ -310,16 +317,16 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Terzi Hizmetleri Antalya — Paça, Fermuar, Elbise Dikimi, Tadilat',
-    en: 'Tailor Services in Antalya — Hemming, Zippers, Dress Making, Alterations',
-    ru: 'Услуги портного в Анталье — подшив, молнии, пошив и переделка',
-    de: 'Schneider-Leistungen in Antalya — Kürzen, Reißverschluss, Kleider, Änderungen',
+    tr: 'Terzi Hizmetleri Antalya — Paça, Fermuar, Dikim, Tadilat',
+    en: 'Tailor Services in Antalya — Hemming, Zippers, Alterations',
+    ru: 'Услуги портного в Анталье — подшив, молнии, пошив',
+    de: 'Schneider Antalya — Kürzen, Reißverschluss, Änderungen',
   }[lang];
   const description = {
-    tr: 'Paça kısaltma, bel daraltma, fermuar değişimi, elbise dikimi, elbise-ceket-mont-gömlek tadilatı, gelinlik ve abiye. Konyaaltı, Muratpaşa, Lara, Belek, Side, Kemer ve çevresi; otel ve eve ücretsiz servis.',
-    en: 'Trouser hemming, waist alterations, zipper replacement, dress making, dress, jacket, coat and shirt alterations, wedding and evening gowns. Konyaaltı, Muratpaşa, Lara, Belek, Side, Kemer and more; free service to hotels and homes.',
-    ru: 'Подшив брюк, ушивание, замена молнии, пошив платьев, переделка платьев, пиджаков, курток и рубашек, свадебные и вечерние платья. Коньяалты, Муратпаша, Лара, Белек, Сиде, Кемер; бесплатный выезд в отели и на дом.',
-    de: 'Hose kürzen, Taille enger machen, Reißverschluss wechseln, Kleider nähen, Kleider, Sakkos, Mäntel und Hemden ändern, Braut- und Abendkleider. Konyaaltı, Muratpaşa, Lara, Belek, Side, Kemer; kostenloser Service zu Hotels und nach Hause.',
+    tr: 'Paça kısaltma, bel daraltma, fermuar, elbise dikimi, tadilat, gelinlik ve abiye. Konyaaltı, Lara, Belek, Side, Kemer; otel ve eve ücretsiz servis.',
+    en: 'Hemming, waist alterations, zippers, dress making, alterations, wedding and evening gowns. Konyaaltı, Lara, Belek, Side, Kemer; free hotel and home service.',
+    ru: 'Подшив, ушивание, молнии, пошив и переделка одежды, свадебные и вечерние платья. Коньяалты, Лара, Белек, Сиде, Кемер; выезд в отели и на дом бесплатный.',
+    de: 'Kürzen, enger machen, Reißverschlüsse, Kleider nähen und ändern, Braut- und Abendkleider. Konyaaltı, Lara, Belek, Side, Kemer; kostenloser Hotelservice.',
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
