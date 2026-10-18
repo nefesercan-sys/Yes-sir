@@ -14,10 +14,10 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi · Elbise Dikimi, Tadilat ve Tamirat — Konyaaltı Atölyesi | Terzi Can' },
+  title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
   description:
-    "Antalya Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü. Randevulu çalışma, şeffaf fiyat: " +
-    "günlük elbise 800 TL'den, paça kısaltma 150 TL'den. WhatsApp: +90 531 898 64 18",
+    "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü. Şeffaf fiyat, paça kısaltma 150 TL'den. " +
+    "Her gün 08:00–23:00. ☎ +90 531 898 64 18",
   keywords: [
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
     'abiye dikimi antalya', 'özel dikim antalya', 'paça kısaltma antalya',
