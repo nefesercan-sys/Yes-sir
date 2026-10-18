@@ -16,6 +16,7 @@ import {
   type Lang, type District, type Service, isOuterSlug,
 } from '@/lib/seo-data';
 import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
+import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/terzi-can.jpg`;
@@ -30,7 +31,7 @@ const UI = {
     related: 'İlgili hizmetler', time: 'Teslim süresi', price: 'Fiyat', photoPrice: 'Fotoğraf gönderin, fiyatı hemen söyleyelim',
     mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Otel ve eve ücretsiz servis',
     hours: 'Her gün 08:00–23:00', since: "2006'dan beri", where: 'Atölye: Hurma Mahallesi, Konyaaltı, Antalya',
-    footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Terzi Can — Antalya terzi', pricesHref: '/terzi',
+    contact: 'İletişim · Telefon', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Terzi Can — Antalya terzi', pricesHref: '/terzi',
   },
   en: {
     home: '← Home', wa: 'WHATSAPP →', waBtn: '💬 Message us on WhatsApp →', brand: 'Terzi Can', svcWord: 'Services',
@@ -39,7 +40,7 @@ const UI = {
     related: 'Related services', time: 'Turnaround', price: 'Price', photoPrice: 'Send a photo and we will quote right away',
     mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Free service to hotels and homes',
     hours: 'Open daily 08:00–23:00', since: 'Serving since 2006', where: 'Workshop: Hurma, Konyaaltı, Antalya',
-    footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online tailor service Antalya', pricesHref: '/online-tailor-service',
+    contact: 'Contact', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online tailor service Antalya', pricesHref: '/online-tailor-service',
   },
   ru: {
     home: '← Главная', wa: 'WHATSAPP →', waBtn: '💬 Написать в WhatsApp →', brand: 'Terzi Can', svcWord: 'Услуги',
@@ -48,7 +49,7 @@ const UI = {
     related: 'Похожие услуги', time: 'Срок', price: 'Цена', photoPrice: 'Пришлите фото — сразу назовём цену',
     mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Бесплатный выезд в отели и на дом',
     hours: 'Ежедневно 08:00–23:00', since: 'Работаем с 2006 года', where: 'Мастерская: Хурма, Коньяалты, Анталья',
-    footer: 'Terzi Can · Хурма, Коньяалты, Анталья', pricesLink: 'Ателье в Анталье', pricesHref: '/ru/atelie-antalya',
+    contact: 'Контакты', footer: 'Terzi Can · Хурма, Коньяалты, Анталья', pricesLink: 'Ателье в Анталье', pricesHref: '/ru/atelie-antalya',
   },
   de: {
     home: '← Startseite', wa: 'WHATSAPP →', waBtn: '💬 Per WhatsApp schreiben →', brand: 'Terzi Can', svcWord: 'Leistungen',
@@ -57,7 +58,7 @@ const UI = {
     related: 'Ähnliche Leistungen', time: 'Dauer', price: 'Preis', photoPrice: 'Foto senden, Preis sofort per WhatsApp',
     mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Kostenloser Service zu Hotels und nach Hause',
     hours: 'Täglich 08:00–23:00', since: 'Seit 2006', where: 'Werkstatt: Hurma, Konyaaltı, Antalya',
-    footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online Schneiderservice Antalya', pricesHref: '/de/online-schneiderservice-antalya',
+    contact: 'Kontakt', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online Schneiderservice Antalya', pricesHref: '/de/online-schneiderservice-antalya',
   },
 } as const;
 
@@ -103,6 +104,18 @@ const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string) => ({
   languages: { tr: urlFor('tr'), en: urlFor('en'), ru: urlFor('ru'), de: urlFor('de'), 'x-default': urlFor('tr') },
 });
 
+// ── Arama sorgusu odaklı başlık/açıklama yardımcıları ──────────────────────
+const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(lang === 'tr' ? 'tr-TR' : lang) + t.slice(1) : t);
+const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
+const priceShortOf = (lang: Lang, s: Service) =>
+  s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : '';
+const TIME_SHORT: Record<Lang, Record<'same' | 'next' | 'three' | 'none', string>> = {
+  tr: { same: 'Aynı Gün', next: 'Ertesi Gün', three: '3 Günde', none: 'Yakınınızda' },
+  en: { same: 'Same Day', next: 'Next Day', three: 'In 3 Days', none: 'Near You' },
+  ru: { same: 'В тот же день', next: 'За 1 день', three: 'За 3 дня', none: 'Рядом' },
+  de: { same: 'Am selben Tag', next: 'Am nächsten Tag', three: 'In 3 Tagen', none: 'In der Nähe' },
+};
+
 // ── Metin üreticileri ───────────────────────────────────────
 const SVC_FAR: Record<Lang, string> = {
   tr: "Alım-teslim WhatsApp'tan planlanır", en: 'Collection & delivery planned on WhatsApp',
@@ -120,23 +133,34 @@ function districtCopy(lang: Lang, d: District) {
   const n = d.name[lang];
   const loc = d.loc[lang];
   const kw = (lang === 'tr' ? [`${n} terzi`, `${n} terzi hizmeti`, ...d.alias.map((a) => `${a} terzi`)] : []);
-  const title = {
-    tr: `${n} Terzi — Paça, Fermuar, Tadilat | Terzi Can`,
-    en: `Tailor in ${n}, Antalya — Hemming & Alterations`,
-    ru: `Портной ${n}, Анталья — подшив и подгонка`,
-    de: `Schneider ${n}, Antalya — Kürzen & Anpassen`,
+  const PH = `☎ ${PHONE}`;
+  const titles = {
+    tr: [`${n} Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`, `${n} Terzi: Fiyat Al, Aynı Gün Teslim | Terzi Can`, `${n} Terzi Hizmeti | Terzi Can`],
+    en: [`Call a Tailor to ${n}, Antalya: Hemming, Zippers`, `Tailor ${n} Antalya: Get a Price on WhatsApp`, `Tailor in ${n}, Antalya`],
+    ru: [`Вызвать портного: ${n}, Анталья, подшив, молнии`, `Портной ${n}: цена по фото в WhatsApp`, `Портной ${n}, Анталья`],
+    de: [`Schneider rufen: ${n}, Antalya, Kürzen, Zipper`, `Schneider ${n}: Preis per WhatsApp-Foto`, `Schneider ${n}, Antalya`],
   }[lang];
+  const title = pickFit(titles, 60);
   const far = FAR_DISTRICTS.includes(d.slug);
   const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
   const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
   const svcRu = far ? 'Забор и доставка согласуются в WhatsApp' : 'Бесплатный выезд в отели и на дом';
   const svcDe = far ? 'Abholung und Lieferung per WhatsApp geplant' : 'Kostenloser Service zu Hotels und nach Hause';
-  const desc = {
-    tr: `${loc} terzi mi arıyorsunuz? Paça, bel, fermuar, elbise dikimi ve tamiri. ${svcTr}, her gün 08:00–23:00.`,
-    en: `Tailor ${loc}? Hemming, waist and zipper work, dress making and repair. ${svcEn}, open daily 08:00–23:00.`,
-    ru: `Портной ${loc}? Подшив, ушивание, молнии, пошив и ремонт платьев. ${svcRu}, ежедневно 08:00–23:00.`,
-    de: `Schneider ${loc}? Kürzen, enger machen, Reißverschluss, Kleider nähen und ändern. ${svcDe}, täglich 08:00–23:00.`,
+  const descs = {
+    tr: [`${loc} terzi lazım mı? Kıyafetin fotoğrafını WhatsApp'tan at, fiyatı söyleyelim: paça ₺150'den, fermuar ₺200'den. ${svcTr}. ${PH}`,
+         `${loc} terzi: fotoğraf at, fiyatı ve teslim gününü öğren. Paça ₺150'den, fermuar ₺200'den. ${PH}`,
+         `${loc} terzi ${PH}: fotoğraf at, fiyat al.`],
+    en: [`Need a tailor ${loc}? Send a photo on WhatsApp and get the price: hemming from ₺150, zippers from ₺200. ${svcEn}. ${PH}`,
+         `Tailor ${loc}: send a photo, get price and ready date. Hemming from ₺150, zippers from ₺200. ${PH}`,
+         `Tailor ${loc} ${PH}: send a photo, get a price.`],
+    ru: [`Нужен портной ${loc}? Пришлите фото в WhatsApp — назовём цену: подшив от ₺150, молния от ₺200. ${svcRu}. ${PH}`,
+         `Портной ${loc}: фото в WhatsApp, цена и срок в ответ. Подшив от ₺150, молния от ₺200. ${PH}`,
+         `Портной ${loc} ${PH}: фото — и цена.`],
+    de: [`Schneider ${loc} gesucht? Foto per WhatsApp senden, Preis kommt zurück: Kürzen ab ₺150, Reißverschluss ab ₺200. ${svcDe}. ${PH}`,
+         `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen ab ₺150, Reißverschluss ab ₺200. ${PH}`,
+         `Schneider ${loc} ${PH}: Foto senden, Preis erhalten.`],
   }[lang];
+  const desc = pickFit(descs, 158);
   return { n, loc, kw, title, desc };
 }
 
@@ -224,24 +248,36 @@ function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [stri
 
 function serviceCopy(lang: Lang, s: Service) {
   const nm = s.name[lang];
-  const title = {
-    tr: `${nm} — Terzi Can Konyaaltı`,
-    en: `${nm} — Terzi Can, Antalya`,
-    ru: `${nm} — Terzi Can, Анталья`,
-    de: `${nm} — Terzi Can, Antalya`,
+  const q = s.q[lang];
+  const Q = capFirst(lang, q);
+  const ps = priceShortOf(lang, s);
+  const ts = TIME_SHORT[lang][s.time];
+  // Başlık: insanların yazdığı sorgu ifadesi + (varsa) fiyat + süre. SERP ~60 karakterde keser; sığan en zengin varyant seçilir.
+  const t1 = {
+    tr: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
+    en: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
+    ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
+    de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  const price = priceOf(lang, s);
-  const p = price ? ' ' + price + '.' : '';
-  const tails = {
-    tr: ['Konyaaltı atölyesi, otel ve eve ücretsiz servis. Her gün 08:00–23:00.', 'Otel ve eve ücretsiz servis. Her gün 08:00–23:00.', 'Her gün 08:00–23:00.'],
-    en: ['Konyaaltı workshop, free hotel and home service. Daily 08:00–23:00.', 'Free hotel and home service. Daily 08:00–23:00.', 'Daily 08:00–23:00.'],
-    ru: ['Мастерская в Коньяалты, бесплатный выезд в отели и на дом. Ежедневно 08:00–23:00.', 'Бесплатный выезд в отели и на дом. Ежедневно 08:00–23:00.', 'Ежедневно 08:00–23:00.'],
-    de: ['Werkstatt in Konyaaltı, kostenloser Hotel- und Heimservice. Täglich 08:00–23:00.', 'Kostenloser Hotel- und Heimservice. Täglich 08:00–23:00.', 'Täglich 08:00–23:00.'],
-  }[lang];
-  const head = `${nm}: ${timeOf(lang, s)}.`;
-  // Google ~155-160 karakter gösterir: sığan en uzun varyant; süre/saat bilgisi başta kalır.
-  const candidates = [...tails.map((t) => `${head}${p} ${t}`), ...tails.map((t) => `${head} ${t}`)];
-  const desc = candidates.find((c) => c.length <= 158) ?? candidates[candidates.length - 1];
+  const title = pickFit(ps ? t1 : t1.slice(1), 60);
+  const price = priceShortOf(lang, s);
+  const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
+  const tm = tm0.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + tm0.slice(1);
+  // Açıklama: kullanıcının sorusunu aynen tekrar eden ilk cümle + cevap (süre, fiyat, saat, telefon).
+  const lead = { tr: 'Fotoğrafını WhatsApp\'tan at,', en: 'Send a photo on WhatsApp,', ru: 'Пришлите фото в WhatsApp,', de: 'Foto per WhatsApp senden,' }[lang];
+  const rep = { tr: 'fiyatı ve gününü söyleyelim.', en: 'we reply with price and date.', ru: 'ответим ценой и сроком.', de: 'wir nennen Preis und Termin.' }[lang];
+  const open = { tr: 'Her gün 08:00–23:00', en: 'Daily 08:00–23:00', ru: 'Ежедневно 08:00–23:00', de: 'Täglich 08:00–23:00' }[lang];
+  const pick = { tr: 'Otele servis ücretsiz', en: 'Free hotel service', ru: 'Выезд в отель бесплатно', de: 'Hotelservice gratis' }[lang];
+  const tel = `☎ ${PHONE}`;
+  const info = [tm, price].filter(Boolean).join(', ');
+  const candidates = [
+    `${nm}: ${info}. ${lead} ${rep} ${pick}. ${tel}`,
+    `${nm}: ${info}. ${lead} ${rep} ${tel}`,
+    `${nm}: ${price || tm}. ${lead} ${rep} ${tel}`,
+    `${nm}. ${lead} ${rep} ${tel}`,
+    `${nm}. ${open}. ${tel}`,
+  ];
+  const desc = pickFit(candidates, 158);
   return { nm, title, desc };
 }
 
@@ -317,16 +353,16 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Terzi Hizmetleri Antalya — Paça, Fermuar, Dikim, Tadilat',
-    en: 'Tailor Services in Antalya — Hemming, Zippers, Alterations',
-    ru: 'Услуги портного в Анталье — подшив, молнии, пошив',
-    de: 'Schneider Antalya — Kürzen, Reißverschluss, Änderungen',
+    tr: 'Terzi Hizmetleri Antalya · Paça ₺150, Fermuar ₺200',
+    en: 'Tailor Services & Prices Antalya · Hemming ₺150, Zipper ₺200',
+    ru: 'Услуги и цены портного в Анталье · подшив ₺150, молния ₺200',
+    de: 'Schneider Leistungen & Preise Antalya · Kürzen ab ₺150',
   }[lang];
   const description = {
-    tr: 'Paça kısaltma, bel daraltma, fermuar, elbise dikimi, tadilat, gelinlik ve abiye. Konyaaltı, Lara, Belek, Side, Kemer; otel ve eve ücretsiz servis.',
-    en: 'Hemming, waist alterations, zippers, dress making, alterations, wedding and evening gowns. Konyaaltı, Lara, Belek, Side, Kemer; free hotel and home service.',
-    ru: 'Подшив, ушивание, молнии, пошив и переделка одежды, свадебные и вечерние платья. Коньяалты, Лара, Белек, Сиде, Кемер; выезд в отели и на дом бесплатный.',
-    de: 'Kürzen, enger machen, Reißverschlüsse, Kleider nähen und ändern, Braut- und Abendkleider. Konyaaltı, Lara, Belek, Side, Kemer; kostenloser Hotelservice.',
+    tr: `Paça kısaltma, bel daraltma, fermuar, elbise dikimi, tadilat. Konyaaltı, Lara, Belek; otel ve eve ücretsiz servis. ☎ ${PHONE}`,
+    en: `Hemming, waist alterations, zippers, dress making. Konyaaltı, Lara, Belek; free hotel and home service. ☎ ${PHONE}`,
+    ru: `Подшив, ушивание, молнии, пошив и переделка. Коньяалты, Лара, Белек; выезд в отели бесплатно. ☎ ${PHONE}`,
+    de: `Kürzen, Taille anpassen, Reißverschlüsse, Kleider nähen. Konyaaltı, Lara, Belek; Hotelservice gratis. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
@@ -359,6 +395,7 @@ function Shell({ lang, waMsg, children, footLinks }: { lang: Lang; waMsg: string
         <div>© {new Date().getFullYear()} {u.footer} · {PHONE}</div>
         <nav className="sl-foot-links" aria-label="Footer">
           {footLinks.map((l) => (<a key={l.href} href={l.href}>{l.label}</a>))}
+          <a href={CONTACT_URL[lang]} hrefLang={lang}>{u.contact}</a>
           <a href={MAPS} target="_blank" rel="noopener noreferrer">Google Maps</a>
         </nav>
       </footer>
