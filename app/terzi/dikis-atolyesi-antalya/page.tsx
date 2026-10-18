@@ -90,8 +90,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp Çıkarma · Seri İmalat 2026 | Terzi Can' },
-  description: "Antalya dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim (minimum adet şartı yok, proje bazında teklif), seri imalat, nakış, baskı. Markalar, butikler, e-ticaret, spor kulüpleri için. ☎ " + PHONE,
+  title: { absolute: 'Dikiş Atölyesi Antalya · Fason Üretim, Kalıp, Seri İmalat' },
+  description: "Antalya dikiş atölyesi: kalıp çıkarma, numune, fason ve seri imalat, nakış, baskı. Marka, butik, e-ticaret için; min. adet şartı yok. ☎ " + PHONE,
   keywords: [
     'dikiş atölyesi Antalya', 'fason üretim Antalya', 'kalıp çıkarma Antalya',
     'seri imalat kıyafet Antalya', 'numune dikimi Antalya', 'butik üretim Antalya',
