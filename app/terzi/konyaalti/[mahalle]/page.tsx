@@ -54,8 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const m = bul(mahalle);
   if (!m) return {};
 
-  const title = `${m.ad} Terzi — Adrese Gelen Terzi Servisi | Terzi Can Antalya`;
-  const desc = `${m.ad} (Konyaaltı) bölgesine adrese gelen terzi ve kuru temizleme servisi. ${m.blurb} Paça kısaltma, fermuar değişimi, bel daraltma, ütü. ☎ ${PHONE}`;
+  const title = `${m.ad} Terzi Çağır: Paça ₺150, Fermuar ₺200 | Terzi Can`;
+  const desc = `${m.ad} terzi lazım mı? Fotoğrafı WhatsApp'tan at, ücreti öğren: paça kısaltma ₺150'den, fermuar ₺200'den. Adrese servis, her gün 08:00–23:00. ☎ ${PHONE}`;
   const url = `${TERZI_URL}/konyaalti/${m.slug}`;
 
   return {
