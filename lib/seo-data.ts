@@ -21,6 +21,12 @@ export const PHONE_TEL = '+905318986418';
 export const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
 export const LAST_UPDATE = '2026-10-17';
 
+// Uzak ilçe ("outer") sayfaları az değer taşıyor ve tarama bütçesini harcıyor:
+// true iken bu sayfalar noindex olur ve sitemap'ten çıkar. Şu an false: uzak ilçeler (Aksu, Döşemealtı, Manavgat) dizinde kalır.
+export const NOINDEX_OUTER = false;
+export const isOuterSlug = (slug: string): boolean =>
+  NOINDEX_OUTER && DISTRICTS.some((d) => d.slug === slug && d.kind === 'outer');
+
 // ── URL şeması ──────────────────────────────────────────────
 export const DISTRICT_BASE: L4 = {
   tr: '/terzi/bolge', en: '/en/tailor-antalya', ru: '/ru/portnoy-antalya', de: '/de/schneider-antalya',
