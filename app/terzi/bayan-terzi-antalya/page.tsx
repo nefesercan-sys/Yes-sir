@@ -43,7 +43,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Gelinlik Tadilatı 2026 | Terzi Can' },
+  title: { absolute: 'Bayan Terzi Antalya · Elbise Dikimi, Gelinlik Tadilatı' },
   description: "Antalya bayan terzi: elbise dikimi ₺600, gelinlik tadilatı ₺800, abiye tamiri ₺350, etek kısaltma ₺175. Eve gelen terzi servisi. ☎ +90 531 898 64 18",
   keywords: [
     'bayan terzi Antalya', 'kadın terzi Antalya', 'kadın elbise dikimi Antalya',
