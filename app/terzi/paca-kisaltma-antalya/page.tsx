@@ -80,8 +80,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Paça Kısaltma Antalya · Kot Paça ₺150 · Pantolon Kısaltma Fiyatları 2026 | Terzi Can' },
-  description: "Antalya paça kısaltma fiyatları 2026: kot paça ₺150, kumaş pantolon ₺175. 24 saatte teslim. Eve ve otele gelen terzi servisi. Belek, Lara, Kemer, Alanya. ☎ +90 531 898 64 18",
+  title: { absolute: 'Paça Kısaltma Antalya · Kot Paça ₺150 | Terzi Can' },
+  description: "Antalya paça kısaltma: kot paça ₺150, kumaş pantolon ₺175, 24 saatte teslim. Eve ve otele gelen terzi. ☎ +90 531 898 64 18",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
     'kot paça kısaltma Antalya', 'Antalya paça kısaltma kaç lira', 'pantolon boyu kısaltma Antalya',
