@@ -30,9 +30,9 @@ const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyoru
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026' },
+  title: { absolute: 'Konyaaltı Terzi · Tadilat, Dikim, Ütü | 0531 898 64 18' },
   description:
-    `${GBP1_NAME} · Terzi · Hurma Mah., Konyaaltı, Antalya · Her gün 08:00–23:00 · Paça kısaltma, fermuar, elbise dikimi, kuru temizleme. Adrese servis. ☎ ${PHONE_DISPLAY}`,
+    `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat, ütü. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis. ☎ ${PHONE_DISPLAY}`,
   keywords: [
     'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',
