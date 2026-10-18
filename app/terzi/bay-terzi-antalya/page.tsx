@@ -50,7 +50,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Bay Terzi Antalya · Erkek Takım Elbise Dikimi · Pantolon Kısaltma 2026 | Terzi Can' },
+  title: { absolute: 'Bay Terzi Antalya · Takım Elbise ve Tadilat | Terzi Can' },
   description: "Antalya bay terzi: erkek takım elbise ₺2500, pantolon kısaltma ₺150, gömlek ₺400, smoking, damatlık. Eve gelen terzi servisi. ☎ +90 531 898 64 18",
   keywords: [
     'bay terzi Antalya', 'erkek terzi Antalya', 'erkek takım elbise dikimi Antalya',
