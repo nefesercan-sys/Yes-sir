@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
+import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
@@ -74,6 +75,8 @@ export async function GET() {
     ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: hasAlt((x) => SERVICE_BASE[x]) })),
     ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt: hasAlt((x) => serviceUrl(x, sv)) }))),
     ...DISTRICTS.filter((d) => !isOuterSlug(d.slug)).flatMap((d) => LANGS.map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d)) }))),
+    // 📞 İletişim sayfaları (4 dil, karşılıklı hreflang) — "terzi can telefon / iletişim / adres" aramaları
+    ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))
