@@ -130,8 +130,8 @@ const jsonLd = {
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Konyaaltı Terzi · Elbise dikimi, tadilatı, Tamiri, Ütü yapımı, Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Özel Terzi Servisi 2026' },
-  description: "Antalya Konyaaltı'nda profesyonel terzi. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Ozel Terzi, adrese gelen terzi servisi. Paça, fermuar, dikim, elbise tadilatı, ütü, kuru temizleme. Terziniz kapınıza gelsin! ☎ " + PHONE,
+  title: { absolute: 'Konyaaltı Terzi · Tamir, Dikim, Ütü, Adrese Servis | Terzi Can' },
+  description: "Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat, ütü; adrese gelen terzi. Her gün 08:00–23:00. ☎ " + PHONE,
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
     'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Özel terzi',
