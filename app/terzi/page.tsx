@@ -43,9 +43,9 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Antalya Terzi · Fotoğraf At, Fiyat Al · Otele Terzi Çağır | Terzi Can";
+const PAGE_TITLE = "Antalya Terzi · Fotoğraf At, Fiyat Al · Otele Terzi | Terzi Can";
 const PAGE_DESC  =
-  "Terzi Can Konyaaltı: WhatsApp'tan fotoğraf at, hızlı fiyat al. Adresten alıp adrese teslim, otele terzi çağır. Paça kısaltma ₺150, fermuar değişimi ₺200. Her gün 08:00–23:00. ☎ " + PHONE;
+  "Terzi Can Konyaaltı: WhatsApp'tan fotoğraf at, hızlı fiyat al. Otele ve eve terzi. Paça ₺150, fermuar ₺200. Her gün 08:00–23:00. ☎ " + PHONE;
 
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
