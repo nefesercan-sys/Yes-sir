@@ -118,6 +118,7 @@ const TIME_SHORT: Record<Lang, Record<'same' | 'next' | 'three' | 'none', string
 
 // ── Bölge önceliği: TR'de yerel mahalleler, yabancı dilde tatil bölgeleri öne ──
 const TR_PRI = ['konyaalti', 'ogretmenevleri'];
+const REPAIR_NEAR = ['konyaalti', 'ogretmenevleri', 'arapsuyu'];
 const FG_PRI = ['side', 'kundu', 'belek', 'lara', 'konyaalti', 'kemer', 'beldibi'];
 function sortD(lang: Lang, list: District[]): District[] {
   const pri = lang === 'tr' ? TR_PRI : FG_PRI;
@@ -177,6 +178,7 @@ function districtCopy(lang: Lang, d: District) {
     de: [`Schneider rufen: ${n}, Antalya, Kürzen, Zipper`, `Schneider ${n}: Preis per WhatsApp-Foto`, `Schneider ${n}, Antalya`],
   }[lang];
   let title = pickFit(titles, 60);
+  let desc = '';
   const far = FAR_DISTRICTS.includes(d.slug);
   const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
   const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
@@ -211,7 +213,32 @@ function districtCopy(lang: Lang, d: District) {
       de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab. Kürzen ab ₺150. ${PH}`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung. ${PH}`],
     } as Record<string, string[]>)[lang] : []);
   if (priT.length) title = pickFit([...priT, ...titles], 60);
-  const desc = pickFit([...priD, ...descs], 158);
+  desc = pickFit([...priD, ...descs], 158);
+  // Tamir-tadilat vurgusu yalnızca atölyeye yakın bölgelerde (Konyaaltı / Hurma çevresi); uzak bölgelerde öne çıkarılmaz.
+  const rep = REPAIR_NEAR.includes(d.slug);
+  if (rep) {
+    const repT = ({
+      tr: [`${n} Tamir Tadilat: Fotoğraf At, Fiyat Al | Terzi Can`, `${n} Tamir Tadilat Terzi | Terzi Can`],
+      en: [`Clothing Repair in ${n}: Price by Photo | Terzi Can`, `Clothing Repair in ${n}, Antalya · Hemming | Terzi Can`, `Clothing Repair in ${n}, Antalya | Terzi Can`],
+      ru: [`Ремонт одежды ${n}: цена по фото | Terzi Can`, `Ремонт одежды ${n}, Анталья · подшив | Terzi Can`, `Ремонт одежды ${n}, Анталья | Terzi Can`],
+      de: [`Kleidung reparieren ${n}: Preis per Foto | Terzi Can`, `Kleidung reparieren ${n}, Antalya · Kürzen | Terzi Can`, `Kleidung reparieren ${n}, Antalya | Terzi Can`],
+    } as Record<string, string[]>)[lang];
+    const repD = ({
+      tr: [`${loc} tamir tadilat: söküğü, yırtığı dikme, paça ₺150'den, fermuar ₺200'den, bay bayan. Fotoğraf at, fiyat al. ${PH}`, `${loc} tamir tadilat: söküğü dikme, paça ₺150, fermuar ₺200. Fotoğraf at, fiyat al. ${PH}`],
+      en: [`Clothing repair ${loc}: torn seams, hemming from ₺150, zipper replacement from ₺200, men & women. Send a photo, get a price. ${PH}`],
+      ru: [`Ремонт одежды ${loc}: зашить дырку, подшив от ₺150, молния от ₺200, мужская и женская. Фото — и цена. ${PH}`],
+      de: [`Kleidung reparieren ${loc}: Risse nähen, Kürzen ab ₺150, Reißverschluss ab ₺200, Damen & Herren. Foto senden, Preis erhalten. ${PH}`],
+    } as Record<string, string[]>)[lang];
+    title = pickFit([...repT, ...titles], 60);
+    desc = pickFit([...repD, ...priD, ...descs], 158);
+    kw.push(...({
+      tr: [`${n} tamir tadilat`, `${n} söküğü dikme`, `${n} yırtık tamiri`, `${n} elbise tamiri`],
+      en: [`clothing repair ${n} Antalya`, `torn clothes repair ${n}`],
+      ru: [`ремонт одежды ${n} Анталья`],
+      de: [`Kleidung reparieren ${n} Antalya`],
+    } as Record<string, string[]>)[lang]);
+    return { n, loc, kw, title, desc };
+  }
   return { n, loc, kw, title, desc };
 }
 
@@ -413,9 +440,9 @@ export function hubMetadata(lang: Lang): Metadata {
   }[lang];
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
-    en: `Clothing repair for hotels in Side, Kundu, Belek, Lara, Kemer: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
-    ru: `Ремонт одежды для отелей Сиде, Кунду, Белек, Лара, Кемер: дырки, подшив, молнии. Фото — и цена. ☎ ${PHONE}`,
-    de: `Kleidung reparieren für Hotels in Side, Kundu, Belek, Lara, Kemer: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
+    en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
+    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. ☎ ${PHONE}`,
+    de: `Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
