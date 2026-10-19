@@ -43,10 +43,10 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Bayan Terzi Antalya · Elbise Dikimi, Gelinlik Tadilatı' },
-  description: "Antalya bayan terzi: elbise dikimi ₺600, gelinlik tadilatı ₺800, abiye tamiri ₺350, etek kısaltma ₺175. Eve gelen terzi servisi. ☎ +90 531 898 64 18",
+  title: { absolute: 'Bayan Terzi Antalya · Elbise Tamiri, Tadilat | Terzi Can' },
+  description: "Antalya bayan terzi: kadın tamir tadilat, elbise tamiri, etek kısaltma ₺175, fermuar değişimi ₺200, yırtık dikme, abiye tamiri ₺350. Eve servis. ☎ +90 531 898 64 18",
   keywords: [
-    'bayan terzi Antalya', 'kadın terzi Antalya', 'kadın elbise dikimi Antalya',
+    'bayan tamir tadilat Antalya', 'elbise tamiri ve tadilatı Antalya', 'elbise fermuar değişimi Antalya', 'yırtık elbise tamiri Antalya', 'bayan terzi Antalya', 'kadın terzi Antalya', 'kadın elbise dikimi Antalya',
     'gelinlik tadilatı Antalya', 'abiye tamiri Antalya', 'etek kısaltma Antalya',
     'bayan terzi fiyatları 2026', 'elbise daraltma Antalya', 'abiye dikimi Antalya',
     'büyük beden bayan terzi Antalya', 'women tailor Antalya', 'dress alteration Antalya',
