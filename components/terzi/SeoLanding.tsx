@@ -125,6 +125,33 @@ function sortD(lang: Lang, list: District[]): District[] {
   return [...list].sort((a, b) => rank(a) - rank(b));
 }
 
+// ── Atölyenin kendi sitesine (terzihizmeti.com.tr) doğal bağlantılar ──
+const TZ_SITE = 'https://terzihizmeti.com.tr';
+const TZ_DISTRICT_BASE: Record<Lang, string> = { tr: '/antalya-terzi', en: '/en/tailor-antalya', ru: '/ru/portnoy-antalya', de: '/de/schneider-antalya' };
+const TZ_HUB: Record<Lang, string> = { tr: '/antalya-terzi', en: '/en/tailor-service-antalya', ru: '/ru/uslugi-portnogo-antalya', de: '/de/schneiderservice-antalya' };
+function tzDistrictLink(lang: Lang, d: District): { href: string; label: string } | null {
+  const n = d.name[lang];
+  if (lang === 'tr') {
+    if (d.slug === 'ogretmenevleri') return { href: `${TZ_SITE}${TZ_DISTRICT_BASE.tr}/${d.slug}`, label: `Terzi Can atölyesinin kendi sitesi: ${n} terzi` };
+    if (d.slug === 'konyaalti') return { href: `${TZ_SITE}${TZ_HUB.tr}`, label: 'Terzi Can atölyesinin kendi sitesi: Antalya terzi' };
+    return null;
+  }
+  if (!FG_PRI.includes(d.slug)) return null;
+  const href = `${TZ_SITE}${TZ_DISTRICT_BASE[lang]}/${d.slug}`;
+  const label = {
+    en: `Terzi Can workshop website: tailor in ${n}`,
+    ru: `Сайт мастерской Terzi Can: портной ${n}`,
+    de: `Website der Werkstatt Terzi Can: Schneider ${n}`,
+  }[lang];
+  return { href, label };
+}
+const tzHubLabel: Record<Lang, string> = {
+  tr: 'Terzi Can atölyesinin kendi sitesi: terzihizmeti.com.tr',
+  en: 'Terzi Can workshop website: terzihizmeti.com.tr',
+  ru: 'Сайт мастерской Terzi Can: terzihizmeti.com.tr',
+  de: 'Website der Werkstatt Terzi Can: terzihizmeti.com.tr',
+};
+
 // ── Metin üreticileri ───────────────────────────────────────
 const SVC_FAR: Record<Lang, string> = {
   tr: "Alım-teslim WhatsApp'tan planlanır", en: 'Collection & delivery planned on WhatsApp',
@@ -379,16 +406,16 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Terzi Hizmetleri Antalya · Paça ₺150, Fermuar ₺200',
-    en: 'Tailor Services & Prices Antalya · Hemming ₺150, Zipper ₺200',
-    ru: 'Услуги и цены портного в Анталье · подшив ₺150, молния ₺200',
-    de: 'Schneider Leistungen & Preise Antalya · Kürzen ab ₺150',
+    tr: 'Tamir Tadilat Terzi Antalya · Paça ₺150, Fermuar ₺200',
+    en: 'Clothing Repair & Alterations Antalya · Hemming ₺150',
+    ru: 'Ремонт и подшив одежды в Анталье · подшив ₺150',
+    de: 'Kleidung ändern & reparieren Antalya · Kürzen ab ₺150',
   }[lang];
   const description = {
-    tr: `Terzi Konyaaltı, Hurma, Liman, Uncalı, Gürsu, Öğretmenevleri: paça, fermuar, bel daraltma, elbise dikimi. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
-    en: `Tailor for hotels in Side, Kundu, Belek, Lara, Kemer, Beldibi: hemming, zippers, dress making. Send a photo, get a price. ☎ ${PHONE}`,
-    ru: `Портной для отелей Сиде, Кунду, Белек, Лара, Кемер, Бельдиби: подшив, молнии, пошив. Фото — и цена. ☎ ${PHONE}`,
-    de: `Schneider für Hotels in Side, Kundu, Belek, Lara, Kemer, Beldibi: Kürzen, Reißverschlüsse, Kleider nähen. Foto senden, Preis erhalten. ☎ ${PHONE}`,
+    tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
+    en: `Clothing repair for hotels in Side, Kundu, Belek, Lara, Kemer: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
+    ru: `Ремонт одежды для отелей Сиде, Кунду, Белек, Лара, Кемер: дырки, подшив, молнии. Фото — и цена. ☎ ${PHONE}`,
+    de: `Kleidung reparieren für Hotels in Side, Kundu, Belek, Lara, Kemer: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
@@ -621,6 +648,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
               {nearby.map((x) => (<a key={x.slug} href={districtUrl(lang, x)} style={linkChip}>{x.name[lang]}</a>))}
               {d.slug === 'konyaalti' && MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
+            {(() => { const tz = tzDistrictLink(lang, d); return tz ? (<p style={{ marginTop: '1rem', fontSize: '.9rem' }}><a href={tz.href} hrefLang={lang} style={{ textDecoration: 'underline' }}>{tz.label}</a></p>) : null; })()}
           </div>
         </section>
         {otherLangLinks(lang, (l) => districtUrl(l, d))}
@@ -789,6 +817,7 @@ export function HubPage({ lang }: { lang: Lang }) {
               {sortD(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
+            <p style={{ marginTop: '1rem', fontSize: '.9rem' }}><a href={`${TZ_SITE}${TZ_HUB[lang]}`} hrefLang={lang} style={{ textDecoration: 'underline' }}>{tzHubLabel[lang]}</a></p>
           </div>
         </section>
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />
