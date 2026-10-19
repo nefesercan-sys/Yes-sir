@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!m) return {};
 
   const title = `${m.ad} Terzi Çağır: Paça ₺150, Fermuar ₺200 | Terzi Can`;
-  const desc = `${m.ad} terzi lazım mı? Fotoğrafı WhatsApp'tan at, ücreti öğren: paça kısaltma ₺150'den, fermuar ₺200'den. Adrese servis, her gün 08:00–23:00. ☎ ${PHONE}`;
+  const desc = `${m.ad} tamir tadilat lazım mı? Söküğü, yırtığı dikme, paça ₺150'den, fermuar ₺200'den. Fotoğraf at, fiyat al. Adrese servis. ☎ ${PHONE}`;
   const url = `${TERZI_URL}/konyaalti/${m.slug}`;
 
   return {
@@ -164,6 +164,13 @@ export default async function KonyaaltiMahalleTerziSayfasi({ params }: PageProps
         ]}
       />
       <KeywordBlock slug={m.slug} />
+      {['hurma', 'liman', 'sarisu', 'uncali', 'gursu'].includes(m.slug) && (
+        <p style={{ maxWidth: 820, margin: '0 auto', padding: '0 1rem 2rem', fontSize: '.9rem' }}>
+          <a href={`https://terzihizmeti.com.tr/${m.slug}-terzi`} style={{ textDecoration: 'underline' }}>
+            Terzi Can atölyesinin kendi sitesi: {m.ad} terzi
+          </a>
+        </p>
+      )}
     </>
   );
 }
