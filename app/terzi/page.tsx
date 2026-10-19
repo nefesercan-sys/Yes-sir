@@ -43,9 +43,9 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Antalya Terzi · Fotoğraf At, Fiyat Al · Otele Terzi | Terzi Can";
+const PAGE_TITLE = "Tamir Tadilat Terzi Antalya · Fotoğraftan Fiyat | Terzi Can";
 const PAGE_DESC  =
-  "Terzi Can Konyaaltı: WhatsApp'tan fotoğraf at, hızlı fiyat al. Otele ve eve terzi. Paça ₺150, fermuar ₺200. Her gün 08:00–23:00. ☎ " + PHONE;
+  "Bay bayan tamir tadilat: yırtığı dikme, paça ₺150, fermuar ₺200. WhatsApp'tan fotoğraf at, fiyat al. Otele ve eve terzi, 08:00–23:00. ☎ " + PHONE;
 
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
@@ -259,7 +259,7 @@ export const metadata: Metadata = {
   description: PAGE_DESC,
   applicationName: 'Terzi Can',
   keywords: [
-    'Antalya terzi','Konyaaltı terzi','terzi Antalya 2026','bay terzi Antalya','bayan terzi Antalya',
+    'tamir tadilat Antalya','bay bayan tamir tadilat','söküğü dikme Antalya','yırtık tamiri Antalya','elbise tamiri ve tadilatı Antalya','etek kısaltma Antalya','Antalya terzi','Konyaaltı terzi','terzi Antalya 2026','bay terzi Antalya','bayan terzi Antalya',
     'paça kısaltma Antalya','fermuar değişimi Antalya','bel daraltma Antalya',
     'özel dikim Antalya','eve gelen terzi Antalya','otele gelen terzi Antalya',
     'dikiş atölyesi Antalya','üniforma üretimi Antalya','kuru temizleme Antalya',
