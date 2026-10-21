@@ -5,8 +5,8 @@ const SITE_URL = 'https://swaphubs.com/dogal-keten-pamuk-giyim';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: '%100 Keten & Pamuk Doğal Giyim | Kadın Erkek | SwapHubs',
-  description: '%100 doğal keten ve pamuk kumaştan üretilmiş kadın, erkek, çocuk ve bebek giyim koleksiyonu. Nefes alan, çevre dostu, organik tekstil. Türkiye\'den üretim, kapıda ödeme. SwapHubs.',
+  title: '%100 Keten Pamuk · Özel Dikim, Seri Üretim | SwapHubs',
+  description: '%100 doğal keten ve pamuk kumaştan kadın, erkek, çocuk, bebek giyim; özel dikim ve seri üretim. Nefes alan, çevre dostu. Türkiye\'den, kapıda ödeme.',
   keywords: [
     '%100 Keten Giyim',
     '%100 Pamuk Giyim',
@@ -28,6 +28,12 @@ export const metadata: Metadata = {
     'Sürdürülebilir Moda',
     'Doğal Lif Giyim',
     'Keten Pijama',
+    'Keten Özel Dikim',
+    'Pamuk Özel Dikim',
+    'Keten Seri Üretim',
+    'Pamuk Seri Üretim',
+    'Keten Giyim İmalatı',
+    'Genel Giyim Özel Dikim',
   ],
   alternates: {
     canonical: SITE_URL,

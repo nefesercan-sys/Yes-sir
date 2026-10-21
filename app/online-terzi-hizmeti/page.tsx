@@ -187,7 +187,7 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Kurumsal Üniforma Üretimi',
-            description: 'Otel, restoran, sağlık, havacılık için logo nakışlı üniforma. Minimum 10 adet.',
+            description: 'Otel, restoran, sağlık, havacılık için logo nakışlı üniforma. Minimum sipariş şartı yok.',
             availability: 'https://schema.org/InStock',
             price: '500',
             priceCurrency: 'TRY',

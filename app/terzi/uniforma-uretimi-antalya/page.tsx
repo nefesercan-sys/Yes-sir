@@ -257,7 +257,7 @@ export default function UniformaUretimiPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Üniforma Üretimi — Sık Sorulan Sorular</h2>
             {[
               ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
-              ['Minimum kaç adet üniforma siparişi verilebilir?', 'Minimum 10 adet sipariş kabul edilmektedir. Daha az için görüşme yapılabilir.'],
+              ['Minimum kaç adet üniforma siparişi verilebilir?', 'Sabit bir minimum sipariş şartı yok; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
               ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış ₺100'den başlar. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
               ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara, Alanya dahil tüm Antalya ilçelerine teslim yapılmaktadır. WhatsApp: ${PHONE}`],
               ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. Min 10 pcs. WhatsApp: ${PHONE}`],

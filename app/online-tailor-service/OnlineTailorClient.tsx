@@ -136,7 +136,7 @@ const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "Starts from ₺2,500. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to every hotel in Antalya. We agree the delivery time with you on WhatsApp."],
-  ["What\'s the minimum order quantity for mass production?", "Minimum 50 pieces. Single pieces are accepted for samples and prototypes."],
+  ["What\'s the minimum order quantity for mass production?", "There is no minimum order. Samples, prototypes, small runs and large orders are quoted per project."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
   ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],

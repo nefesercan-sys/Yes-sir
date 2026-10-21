@@ -132,7 +132,7 @@ const CATEGORIES = [
     tag: 'B2B Kurumsal',
     title: 'Üniforma & Kurumsal Kıyafet',
     subtitle: 'Kurumsal Kimliğinizi Giyinin',
-    desc: `Kurumsal imajınızın en güçlü yansıması çalışanlarınızın giydiği üniforma olduğunu biliyoruz. Otel resepsiyonistlerinden şeflere, medikal personelden havacılık ekiplerine kadar her sektörün ihtiyaçlarına göre üniforma koleksiyonları tasarlıyoruz. Minimum 10 adet siparişten başlayan toplu üretim için fiyat ve süre WhatsApp'ta netleştirilir.`,
+    desc: `Kurumsal imajınızın en güçlü yansıması çalışanlarınızın giydiği üniforma olduğunu biliyoruz. Otel resepsiyonistlerinden şeflere, medikal personelden havacılık ekiplerine kadar her sektörün ihtiyaçlarına göre üniforma koleksiyonları tasarlıyoruz. Minimum sipariş şartı yoktur; toplu üretim için fiyat ve süre WhatsApp'ta netleştirilir.`,
     images: [IMG.uni1, IMG.uni2, IMG.uni3],
     features: ['Min. 10 adet toplu üretim', 'Logo nakışı & baskı', 'Antimikrobiyal & leke itici', 'Sağlık / Turizm / Havacılık', 'Tekrar sipariş için kayıtlı kalıp'],
     waMsg: 'Merhaba, kurumsal üniforma üretimi için fiyat teklifi almak istiyorum.',
