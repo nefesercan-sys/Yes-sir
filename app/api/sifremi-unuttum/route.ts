@@ -36,13 +36,13 @@ export async function POST(req: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail', 
       auth: {
-        user: process.env.EMAIL_USER, // Senin nefesercan@gmail.com adresin
-        pass: process.env.EMAIL_PASS, // Google'dan alacağın 16 haneli uygulama şifresi
+        user: process.env.EMAIL_USER || process.env.SMTP_USER, // Senin nefesercan@gmail.com adresin
+        pass: process.env.EMAIL_PASS || process.env.SMTP_PASS, // Google'dan alacağın 16 haneli uygulama şifresi
       },
     });
 
     const mailOptions = {
-      from: `"SwapHubs" <${process.env.EMAIL_USER}>`,
+      from: `"SwapHubs" <${process.env.EMAIL_USER || process.env.SMTP_USER}>`,
       to: emailKucuk,
       subject: 'SwapHubs - Şifre Sıfırlama Talebi',
       html: `

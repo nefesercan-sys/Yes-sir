@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
-import { createHash } from 'crypto';
+import bcrypt from 'bcryptjs';
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     if (!reset) return NextResponse.json({ error: 'Geçersiz veya süresi dolmuş link.' }, { status: 400 });
 
-    const hash = createHash('sha256').update(sifre).digest('hex');
+    const hash = await bcrypt.hash(sifre, 12); // NextAuth bcrypt ile karşılaştırır; SHA-256 giriş yapılamamasına yol açıyordu
 
     await db.collection('users').updateOne(
       { email: reset.email },

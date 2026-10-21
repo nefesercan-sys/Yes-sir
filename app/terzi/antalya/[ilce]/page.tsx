@@ -73,8 +73,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return {
         canonical: url,
         languages: {
-          ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])),
-          'x-default': url,
+          ...Object.fromEntries(LANGS.filter((l) => !(l === 'tr' && isOuterSlug(ilce.slug))).map((l) => [l, abs(districtUrl(l, d))])),
+          'x-default': isOuterSlug(ilce.slug) ? abs(districtUrl('en', d)) : url,
         },
       };
     })(),

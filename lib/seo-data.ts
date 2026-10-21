@@ -21,11 +21,16 @@ export const PHONE_TEL = '+905318986418';
 export const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
 export const LAST_UPDATE = '2026-10-17';
 
-// Uzak ilçe ("outer") sayfaları az değer taşıyor ve tarama bütçesini harcıyor:
-// true iken bu sayfalar noindex olur ve sitemap'ten çıkar. Şu an false: uzak ilçeler (Aksu, Döşemealtı, Manavgat) dizinde kalır.
-export const NOINDEX_OUTER = false;
-export const isOuterSlug = (slug: string): boolean =>
-  NOINDEX_OUTER && DISTRICTS.some((d) => d.slug === slug && d.kind === 'outer');
+// ── BÖLGE STRATEJİSİ (tek ayar noktası) ─────────────────────
+// Türkçe sayfalar yalnızca atölyeye (Konyaaltı/Hurma) yakın bölgelerde aramaya açık; uzak bölgelerin Türkçe sayfaları
+// noindex olur, sitemap'ten, iç linklerden ve hreflang'dan çıkar. Yabancı dil (EN/RU/DE) sayfaları TÜM bölgelerde açıktır.
+// Bir bölgeyi Türkçede açmak/kapatmak için bu listeyi değiştirmek yeterli.
+export const TR_NEAR_SLUGS = ['konyaalti', 'muratpasa', 'meltem', 'fener', 'sirinyali', 'arapsuyu', 'toros', 'ogretmenevleri'];
+export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);
+/** Bu dil + bölge sayfası aramaya açık mı? */
+export const isIndexable = (lang: Lang, slug: string): boolean => lang !== 'tr' || isTrNear(slug);
+/** Türkçe ilçe sayfası uzak bölgeye mi ait (noindex + sitemap dışı)? */
+export const isOuterSlug = (slug: string): boolean => !isTrNear(slug);
 
 // ── URL şeması ──────────────────────────────────────────────
 export const DISTRICT_BASE: L4 = {
@@ -134,10 +139,10 @@ export const SERVICES: Service[] = [
       de: 'Wir kürzen Anzughosen, Stoffhosen und Röcke exakt auf Ihre Länge. Die Länge wird direkt am Körper abgesteckt und sauber genäht.',
     },
     vars: {
-      tr: ['pantolon paça kısaltma', 'paça kısaltma terzi', 'kumaş pantolon boy kısaltma', 'pantolon boyu kısaltma', 'paça tadilatı', 'yakınımdaki terzi paça kısaltma', 'aynı gün paça kısaltma'],
-      en: ['trouser hemming', 'shorten trousers', 'pants hemming near me', 'trouser length alteration', 'hem pants tailor', 'same day trouser hemming'],
-      ru: ['подшить брюки', 'укоротить брюки', 'подшив брюк срочно', 'ателье подшить брюки рядом', 'укорочение брюк', 'подшив низа брюк'],
-      de: ['Hose kürzen', 'Hosen kürzen lassen', 'Hosensaum kürzen', 'Änderungsschneiderei Hose kürzen', 'Hose kürzen in der Nähe', 'Hosenlänge ändern'],
+      tr: ['pantolon paça kısaltma', 'etek boy kısaltma', 'etek kısaltma', 'etek daraltma', 'paça kısaltma terzi', 'kumaş pantolon boy kısaltma', 'pantolon boyu kısaltma', 'paça tadilatı', 'yakınımdaki terzi paça kısaltma', 'aynı gün paça kısaltma'],
+      en: ['trouser hemming', 'skirt hemming', 'shorten skirt', 'shorten trousers', 'pants hemming near me', 'trouser length alteration', 'hem pants tailor', 'same day trouser hemming'],
+      ru: ['подшить брюки', 'укоротить юбку', 'подшить юбку', 'укоротить брюки', 'подшив брюк срочно', 'ателье подшить брюки рядом', 'укорочение брюк', 'подшив низа брюк'],
+      de: ['Hose kürzen', 'Rock kürzen', 'Rock enger machen', 'Hosen kürzen lassen', 'Hosensaum kürzen', 'Änderungsschneiderei Hose kürzen', 'Hose kürzen in der Nähe', 'Hosenlänge ändern'],
     },
   },
   {

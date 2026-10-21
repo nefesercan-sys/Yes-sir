@@ -89,7 +89,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul Sağlık · Seri İmalat 2026 | Terzi Can' },
+  title: { absolute: 'Üniforma Üretimi Antalya · Otel, Okul, Sağlık | Terzi Can' },
   description: "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden. Min 10 adet. ☎ " + PHONE,
   keywords: [
     'üniforma üretimi Antalya', 'otel üniforması Antalya', 'aşçı üniforması Antalya',

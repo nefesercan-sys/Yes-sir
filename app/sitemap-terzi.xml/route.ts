@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
-import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, type Lang } from '@/lib/seo-data'
+import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
 
@@ -67,14 +67,17 @@ export async function GET() {
 
   // 🔎 Bölge × hizmet SEO sayfaları (4 dil, karşılıklı hreflang)
   type Item = { url: string; priority: string; freq: string; alt?: Record<string, string> }
-  const hasAlt = (urlFor: (l: Lang) => string): Record<string, string> => ({
-    ...Object.fromEntries(LANGS.map((l) => [l, `${BASE_URL}${urlFor(l)}`])),
-    'x-default': `${BASE_URL}${urlFor('tr')}`,
-  })
+  const hasAlt = (urlFor: (l: Lang) => string, ok: (l: Lang) => boolean = () => true): Record<string, string> => {
+    const ls = LANGS.filter(ok)
+    return {
+      ...Object.fromEntries(ls.map((l) => [l, `${BASE_URL}${urlFor(l)}`])),
+      'x-default': `${BASE_URL}${urlFor(ls.includes('tr') ? 'tr' : 'en')}`,
+    }
+  }
   const seoItems: Item[] = [
     ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: hasAlt((x) => SERVICE_BASE[x]) })),
     ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt: hasAlt((x) => serviceUrl(x, sv)) }))),
-    ...DISTRICTS.filter((d) => !isOuterSlug(d.slug)).flatMap((d) => LANGS.map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d)) }))),
+    ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d), (x) => isIndexable(x, d.slug)) }))),
     // 📞 İletişim sayfaları (4 dil, karşılıklı hreflang) — "terzi can telefon / iletişim / adres" aramaları
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
   ]

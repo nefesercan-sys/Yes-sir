@@ -3,7 +3,7 @@
 // Sayfa sonu "içerik haritası" verisi + eksik sayfalar için BreadcrumbList
 // Not: Yalnızca gerçekten var olan sayfalara link verir. Puan/yorum verisi içermez.
 // ============================================================
-import { DISTRICTS, SERVICES, districtUrl, serviceUrl } from '@/lib/seo-data';
+import { DISTRICTS, SERVICES, districtUrl, serviceUrl, isIndexable } from '@/lib/seo-data';
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
 export type Lang = 'tr' | 'en' | 'de' | 'ru';
@@ -89,7 +89,7 @@ export function getSiteMap(pathname: string): SiteMap | null {
     sections: [
       ...base.sections,
       { title: titles[0], links: SERVICES.map((sv) => ({ href: serviceUrl(L, sv), label: sv.name[L] })).filter(not) },
-      { title: titles[1], links: DISTRICTS.map((d) => ({ href: districtUrl(L, d), label: dl(d) })).filter(not) },
+      { title: titles[1], links: DISTRICTS.filter((d) => isIndexable(L, d.slug)).map((d) => ({ href: districtUrl(L, d), label: dl(d) })).filter(not) },
     ],
   };
 }

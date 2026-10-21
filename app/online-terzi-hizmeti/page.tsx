@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og/online-terzi.jpg',
+        url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
         alt: "Terzi Can Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     site: '@swaphubs',
     title: 'Terzi Can Online Terzi | 81 İle Teslimat | TR · EN · DE · RU',
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
-    images: ['/og/online-terzi.jpg'],
+    images: ['/og/terzi-can.jpg'],
   },
   robots: {
     index: true,
@@ -116,7 +116,7 @@ const jsonLd = {
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
       priceRange: '₺₺',
-      image: ['https://swaphubs.com/og/online-terzi.jpg'],
+      image: ['https://swaphubs.com/og/terzi-can.jpg'],
       logo: 'https://swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',

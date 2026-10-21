@@ -1,25 +1,14 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
+  // NOT: Giriş/panel/kayıt gibi özel sayfalar burada ENGELLENMEZ; bu sayfalarda <meta robots noindex> var.
+  // robots.txt ile engellenirse Google noindex'i göremez ve URL'yi içeriksiz dizine ekleyebilir.
   const commonDisallows = [
     '/admin/',
     '/admin-ai/',
     '/api/',
-    '/panel/',
-    '/terzi-panel/',
-    '/terzi-admin/',
     '/profil/',
-    '/otel-profil',
-    '/kayit',
-    '/sifre-sifirla',
-    '/sifremi-unuttum',
-    '/ilan-detay',
-    '/mesajlar/',
     '/bildirimler/',
-    '/giris',
-    '/uye-ol',
-    '/ilan-ver',
-    '/ilan-duzenle',
     '/online-terzi-hizmeti/client',
     '/bal/gorsel-yukle',
     '/*?*sort=',

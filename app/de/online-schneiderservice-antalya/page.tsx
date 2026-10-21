@@ -23,7 +23,7 @@ const GBP1 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Schneider Antalya: Foto senden, schnell Preis erhalten · Abholservice | Terzi Can' },
+  title: { absolute: 'Schneider Antalya: Foto senden, Preis erhalten | Terzi Can' },
   description:
     'Online-Schneiderservice mit Sitz in Konyaaltı. Herren- & Damenschneiderei, Bügelservice, Reparaturen, ' +
     'Änderungen, Serienproduktion. Versand in die ganze Türkei. Bestellung per WhatsApp. ☎ ' + PHONE,

@@ -1,43 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
-import { createHash } from 'crypto';
+import bcrypt from 'bcryptjs';
+import { clean, isEmail, rateLimited } from '@/lib/api-guard';
 
+// /uye-ol sayfası bu uca kayıt gönderir. Şifre artık bcrypt ile saklanır (NextAuth giriş kontrolüyle aynı yöntem).
 export async function POST(req: NextRequest) {
   try {
-    const {
-      ad, soyad, email, sifre,
-      telefon, sehir, firmaAd, tip,
-    } = await req.json();
+    if (rateLimited(req, 'kayit', 5, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: 'Çok fazla deneme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
+    }
+    const b = await req.json();
+    const ad = clean(b?.ad, 80);
+    const soyad = clean(b?.soyad, 80);
+    const email = clean(b?.email, 254).toLowerCase();
+    const sifre = typeof b?.sifre === 'string' ? b.sifre : '';
 
     if (!ad || !email || !sifre) {
       return NextResponse.json({ error: 'Ad, e-posta ve şifre zorunlu' }, { status: 400 });
     }
-
-    if (sifre.length < 6) {
+    if (!isEmail(email)) {
+      return NextResponse.json({ error: 'E-posta adresi geçersiz' }, { status: 400 });
+    }
+    if (sifre.length < 6 || sifre.length > 128) {
       return NextResponse.json({ error: 'Şifre en az 6 karakter olmalı' }, { status: 400 });
     }
 
-    const emailKucuk = email.toLowerCase().trim();
     const db = await getDb();
 
-    const mevcut = await db.collection('users').findOne({ email: emailKucuk });
+    const mevcut = await db.collection('users').findOne({ email });
     if (mevcut) {
       return NextResponse.json({ error: 'Bu e-posta adresi zaten kayıtlı' }, { status: 409 });
     }
 
-    const hash = createHash('sha256').update(sifre).digest('hex');
+    const hash = await bcrypt.hash(sifre, 12);
+    const tamAd = `${ad} ${soyad}`.trim();
 
     const user = {
-      ad: `${ad.trim()} ${(soyad || '').trim()}`.trim(),
-      email: emailKucuk,
+      name: tamAd,            // NextAuth oturumunun okuduğu alan
+      ad: tamAd,              // eski alan (geriye dönük uyum)
+      email,
       password: hash,
-      telefon: telefon?.trim() || '',
-      sehir: sehir?.trim() || '',
-      firmaAd: firmaAd?.trim() || '',
-      tip: tip || 'hizmet_alan',
+      role: 'user',
+      telefon: clean(b?.telefon, 30),
+      sehir: clean(b?.sehir, 60),
+      firmaAd: clean(b?.firmaAd, 120),
+      tip: clean(b?.tip, 30) || 'hizmet_alan',
       bakiye: 0,
       profilTamamlandi: false,
       olusturuldu: new Date(),
+      createdAt: new Date(),
       guncellendi: new Date(),
     };
 

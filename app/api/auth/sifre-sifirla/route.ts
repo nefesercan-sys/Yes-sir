@@ -13,7 +13,8 @@ export async function POST(req: NextRequest) {
     const user = await db.collection('users').findOne({ email: emailKucuk });
 
     if (!user) {
-      return NextResponse.json({ error: 'Bu e-posta adresi sistemde kayıtlı değil!' }, { status: 404 });
+      // Kayıtlı olup olmadığı dışarıya belli edilmez (hesap taraması engellenir).
+      return NextResponse.json({ success: true });
     }
 
     const token = crypto.randomBytes(32).toString('hex');
@@ -34,13 +35,13 @@ export async function POST(req: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.SMTP_USER, 
-        pass: process.env.SMTP_PASS, 
+        user: process.env.SMTP_USER || process.env.EMAIL_USER, 
+        pass: process.env.SMTP_PASS || process.env.EMAIL_PASS, 
       },
     });
 
     const mailOptions = {
-      from: `"SwapHubs" <${process.env.SMTP_USER}>`,
+      from: `"SwapHubs" <${process.env.SMTP_USER || process.env.EMAIL_USER}>`,
       to: emailKucuk,
       subject: 'SwapHubs - Şifre Sıfırlama Talebi',
       html: `
@@ -68,6 +69,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error: any) {
     console.error("Mail gönderme hatası:", error);
-    return NextResponse.json({ error: `Gmail Hatası: ${error.message}` }, { status: 500 });
+    return NextResponse.json({ error: 'E-posta gönderilemedi, lütfen daha sonra tekrar deneyin.' }, { status: 500 });
   }
 }

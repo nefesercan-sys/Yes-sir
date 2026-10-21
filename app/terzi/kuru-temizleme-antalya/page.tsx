@@ -90,7 +90,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Kuru Temizleme Antalya · Otel Alım Teslimat · 24 Saat Ekspres · 2026 | Terzi Can' },
+  title: { absolute: 'Kuru Temizleme Antalya · Otel Alım Teslim · 24 Saat | Terzi Can' },
   description: "Antalya kuru temizleme. Elbise ₺300, mont ₺500, takım elbise ₺450, çamaşır ₺80/kg. Otel ve adresten alım + teslimat. 24 saat ekspres. ☎ " + PHONE,
   keywords: [
     'kuru temizleme Antalya', 'kuru temizleme Antalya fiyat 2026', 'otele kuru temizleme Antalya',

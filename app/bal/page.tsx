@@ -5,7 +5,7 @@ const SITE_URL = 'https://www.swaphubs.com/bal';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.swaphubs.com'),
-  title: 'Arım Balım Çiçeğim | Sivas Doğal Yayla Balı, Polen & Propolis',
+  title: 'Arım Balım Çiçeğim | Sivas Doğal Yayla Balı, Polen',
   description:
     "Sivas'ın el değmemiş dağ yaylalarından doğal yayla balı, taze çiçek poleni ve ham propolis. Endemik bitkilerden süzülen katkısız bal. 81 ile kargo.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Bir damla balda binlerce çiçeğin özüne ulaşırsınız.',
     url: SITE_URL,
     siteName: 'SwapHubs',
-    images: [{ url: '/og/arim-balim.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/swaphubs-og.jpg', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
 };

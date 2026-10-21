@@ -9,7 +9,7 @@ import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 // Admin e-posta tanımlaması
-const ADMIN_EMAIL = 'nefesercan@gmail.com';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'nefesercan@gmail.com'; // Vercel'de ADMIN_EMAIL tanımlanabilir
 
 export async function GET(req: NextRequest) {
   try {

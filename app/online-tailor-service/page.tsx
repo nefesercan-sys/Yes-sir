@@ -24,7 +24,7 @@ const GBP1 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quick Quote · Hotel Pickup | Terzi Can' },
+  title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quote | Terzi Can' },
   description:
     'Konyaaltı-based online tailor service. Menswear & womenswear tailoring, ironing, repairs, alterations, ' +
     'mass production. Shipping across Turkey. Order via WhatsApp. ☎ ' + PHONE,

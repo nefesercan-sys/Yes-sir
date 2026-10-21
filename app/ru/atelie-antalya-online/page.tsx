@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 // ─── METADATA ────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp — быстрый расчёт цены | Terzi Can' },
+  title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp, цена | Terzi Can' },
   description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',

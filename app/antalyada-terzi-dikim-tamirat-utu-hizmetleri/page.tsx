@@ -296,7 +296,7 @@ export const metadata: Metadata = {
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
-    images: [{ url: '/og/antalya-tailor-online.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
+    images: [{ url: '/antalya-tailor-online.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
   },
   other: {
     'geo.region': 'TR-07',

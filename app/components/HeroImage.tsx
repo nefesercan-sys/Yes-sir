@@ -5,7 +5,7 @@ export default function HeroImage() {
     // Mobilde 300px, masaüstünde 500px yükseklik daha dengeli bir görünüm sağlar
     <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden">
       <Image
-        src="/og_image.svg" // .jpg olan uzantıyı .svg olarak düzelttik
+        src="/og-image.svg"
         alt="SwapHubs Takas ve Ticaret Merkezi"
         fill
         priority // LCP puanını iyileştirmek için en önemli ayar

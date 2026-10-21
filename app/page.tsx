@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
-  title: "SwapHubs — İlan Ver, Teklif Al | Terzi, Tekstil ve Hizmet Platformu",
+  title: "SwapHubs — İlan Ver, Teklif Al | Terzi ve Tekstil Platformu",
   description: "Ücretsiz ilan verin, teklif alın. Terzi, tekstil, fason üretim ve hizmet ilanları tek platformda. Antalya Konyaaltı Terzi Can: paça kısaltma, fermuar, elbise dikimi, her gün 08:00–23:00.",
   keywords: "ilan ver, ücretsiz ilan, teklif al, terzi, Antalya terzi, Konyaaltı terzi, tekstil, fason üretim, hizmet ilanları, ihracat, tedarikçi bul",
   openGraph: {

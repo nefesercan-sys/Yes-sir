@@ -32,7 +32,7 @@ const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: { absolute: 'Ателье в Анталии (Коньяалты): ремонт и пошив, фото в WhatsApp — цена | Terzi Can' },
+  title: { absolute: 'Ателье в Анталии (Коньяалты): ремонт и пошив | Terzi Can' },
 
   description:
     'Профессиональное ателье Terzi Can в Анталии, район Коньяалты. Ремонт одежды, подгонка по фигуре, замена молнии, индивидуальный пошив, работа с кожей. Говорим по-русски. ☎ ' +

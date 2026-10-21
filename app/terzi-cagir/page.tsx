@@ -101,7 +101,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: { absolute: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can Konyaaltı' },
+  title: { absolute: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can' },
   description:
     'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺150, bel daraltma ₺150, fermuar ₺200. Terzimiz kapınıza gelir, ölçü alır, hazır olunca teslim eder. Hemen ara: +90 531 898 64 18',
   keywords: [
