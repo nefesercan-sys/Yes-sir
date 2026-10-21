@@ -230,7 +230,8 @@ function districtCopy(lang: Lang, d: District) {
   // Tamir-tadilat açısı: Türkçede yalnızca yakın bölgelerde, yabancı dillerde tüm bölgelerde çıkabilir (lib/seo-angles.ts).
   {
     const near = isTrNear(d.slug);
-    const a = angleFor(lang, d.slug, near, Math.max(0, TR_NEAR_SLUGS.indexOf(d.slug)));
+    const order = lang === 'tr' ? Math.max(0, TR_NEAR_SLUGS.indexOf(d.slug)) : Math.max(0, DISTRICTS.findIndex((x) => x.slug === d.slug));
+    const a = angleFor(lang, d.slug, near, order);
     const tail = ({ tr: `Fotoğraf at, fiyat al ${PH}`, en: `Photo in, price back ${PH}`, ru: `Фото — и цена ${PH}`, de: `Foto senden, Preis ${PH}` } as Record<string, string>)[lang];
     const ctx = { lang, n, loc, free: near, tail };
     title = pickFit([...angleTitles(lang, a, n), ...titles], 60);
