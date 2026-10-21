@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-// Özel / işlem sayfası: arama sonuçlarında çıkmasın (robots.txt'te engellemiyoruz ki Google noindex'i görebilsin).
+// Herkese açık kategori vitrini: indekslenebilir; bağlantılar izlenir.
 export const metadata: Metadata = {
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

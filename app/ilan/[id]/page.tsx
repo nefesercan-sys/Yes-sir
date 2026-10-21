@@ -12,19 +12,24 @@ const kisalt = (s: string, n: number) => {
   return t.length <= n ? t : t.slice(0, n - 1).replace(/[\s,.;:-]+\S*$/, '') + '…';
 };
 
-async function ilanGetir(id: string): Promise<any | null> {
+// hata: veritabanı geçici olarak yanıt vermediyse true. Bu durumda sayfa noindex YAPILMAZ (yalnızca gerçekten bulunamayan ilan noindex olur).
+async function ilanGetir(id: string): Promise<{ ilan: any | null; hata: boolean }> {
   try {
     const db = await getDb();
     const q = ObjectId.isValid(id) ? { $or: [{ _id: new ObjectId(id) }, { slug: id }] } : { slug: id };
-    return await db.collection('ilanlar').findOne(q);
+    return { ilan: await db.collection('ilanlar').findOne(q), hata: false };
   } catch {
-    return null;
+    return { ilan: null, hata: true };
   }
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const ilan = await ilanGetir(params.id);
+  const { ilan, hata } = await ilanGetir(params.id);
   if (!ilan) {
+    if (hata) {
+      // Geçici veritabanı hatası: noindex verme, kanonik adresi koru
+      return { title: 'İlan | SwapHubs', alternates: { canonical: `${SITE}/ilan/${params.id}` } };
+    }
     return { title: 'İlan | SwapHubs', robots: { index: false, follow: true } };
   }
   const baslik = String(ilan.seo?.metaBaslik || ilan.baslik || 'İlan');
