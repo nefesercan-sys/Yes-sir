@@ -93,9 +93,9 @@ const jsonLd = {
       hasOfferCatalog: {
         '@type': 'OfferCatalog', name: 'Terzi Can — Hizmet Kataloğu 2026',
         itemListElement: [
-          { '@type': 'Offer', price: '150', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Paça Kısaltma' } },
-          { '@type': 'Offer', price: '150', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Bel Daraltma' } },
-          { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Fermuar Değişimi' } },
+          { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Paça Kısaltma' } },
+          { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Bel Daraltma' } },
+          { '@type': 'Offer', price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Fermuar Değişimi' } },
           { '@type': 'Offer', price: '800', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Elbise Dikimi' } },
           { '@type': 'Offer', price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Kuru Temizleme' } },
           { '@type': 'Offer', price: '80',  priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Ütü Hizmeti' } },
@@ -123,8 +123,8 @@ const jsonLd = {
       '@type': 'FAQPage', '@id': `${PAGE_URL}#faq`,
       mainEntity: [
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺150'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Konyaaltı kuru temizleme fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Elbise kuru temizleme ₺300, mont ₺500'den başlar. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
       ],
@@ -144,25 +144,25 @@ const D = {
 };
 
 const SERVICES = [
-  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺150+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
-  { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺200+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
-  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺150+', time: '24 saat', color: '#ede9fe', tc: '#5b21b6' },
-  { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺600+', time: '3–7 gün', color: '#dcfce7', tc: '#15803d' },
+  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺200+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
+  { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
+  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: '24 saat', color: '#ede9fe', tc: '#5b21b6' },
+  { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: '3–7 gün', color: '#dcfce7', tc: '#15803d' },
   { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: '₺80+', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
 const PRICES = [
-  ['Paça Kısaltma', '₺150+', 'Aynı gün'],
-  ['Bel Daraltma', '₺150+', '24 saat'],
+  ['Paça Kısaltma', '₺200+', 'Aynı gün'],
+  ['Bel Daraltma', '₺200+', '24 saat'],
   ['Elbise Tamiri', '₺150+', 'Aynı gün'],
   ['Gömlek Tamiri', '₺150+', 'Aynı gün'],
   ['T-Shirt Tamiri', '₺100+', 'Aynı gün'],
-  ['Fermuar Değişimi', '₺200+', 'Aynı gün'],
+  ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
   ['Ceket / Mont Tamiri', '₺200+', '24 saat'],
   ['Kol Kısaltma', '₺200+', '48 saat'],
-  ['Abiye Tamiri', '₺400+', '24–48 saat'],
-  ['Kadın Elbise Dikimi', '₺600+', '3–5 gün'],
+  ['Abiye Tamiri', '₺800+', '24–48 saat'],
+  ['Kadın Elbise Dikimi', '₺800+', '3–5 gün'],
   ['Abiye / Gece Elbisesi', '₺1.200+', '5–7 gün'],
   ['Erkek Takım Elbise', '₺2.500+', '5–7 gün'],
   ['Gelinlik Dikimi', '₺5.000+', '14–21 gün'],
@@ -175,9 +175,9 @@ const PRICES = [
 
 const FAQS = [
   ['Konyaaltı Hurma, Liman, Uncalı mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Paça kısaltma fiyatı 2026?', `₺150'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Fermuar değişimi kaç lira?', `₺200'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Elbise dikimi fiyatı?', `Kadın elbise ₺600+, abiye ₺1.200+, erkek takım ₺2.500+ . WhatsApp: ${PHONE_DISPLAY}`],
+  ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+, abiye ₺1.200+, erkek takım ₺2.500+ . WhatsApp: ${PHONE_DISPLAY}`],
   ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Konyaaltı içi ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
 ];

@@ -44,7 +44,7 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/atelier-dress.jpg',
     imageAlt: 'Atölyede prova edilen bağcıklı beyaz keten elbise',
     rows: [
-      { name: 'Bel daraltma', price: '180 TL\'den' },
+      { name: 'Bel daraltma', price: '200 TL\'den' },
       { name: 'Göğüs / sırt daraltma', price: '220 TL\'den' },
       { name: 'Askı kısaltma / ayarı', price: '90 TL\'den' },
       { name: 'Genel elbise tadilatı', price: '200 TL\'den', note: 'İnceleme sonrası netleşir' },
@@ -59,8 +59,8 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/jumpsuit-harbor.jpg',
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
-      { name: 'Paça kısaltma (pantolon/etek)', price: '150 TL\'den', note: 'Aynı gün' },
-      { name: 'Fermuar değişimi', price: '200 TL\'den' },
+      { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Aynı gün' },
+      { name: 'Fermuar değişimi', price: '300 TL\'den' },
       { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
       { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
     ],
@@ -817,7 +817,7 @@ export default function ElbiseDikimiClient() {
         <div className="faq-item">
           <h3 className="faq-q">Paça kısaltma fiyatı ne kadar?</h3>
           <p className="faq-a">
-            Paça kısaltma 150 TL&apos;den başlar. Kumaş tipine ve dikim
+            Paça kısaltma 200 TL&apos;den başlar. Kumaş tipine ve dikim
             şekline göre fiyat değişebilir. Kesin fiyat için WhatsApp&apos;tan
             fotoğraf gönderebilirsiniz.
           </p>

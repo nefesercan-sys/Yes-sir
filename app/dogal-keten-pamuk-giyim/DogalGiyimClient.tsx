@@ -394,6 +394,7 @@ export default function DogalGiyimClient() {
         <p className="hero-sub sans">
           Kadın, erkek, çocuk ve bebek için %100 doğal keten ve pamuk koleksiyonu.
           Nefes alan kumaş, hassas ciltler için güvenli, çevre dostu üretim.
+          Pantolon, gömlek, ceket, şort, etek ve elbise; bay bayan özel dikim, tek ve seri adet, yurt içi ve yurt dışı gönderim.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#koleksiyon" className="btn btn-altin">Koleksiyonu Keşfet ↓</a>

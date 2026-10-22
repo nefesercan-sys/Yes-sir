@@ -142,8 +142,8 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
         heading={`${ilce.ad} Terzi — Sık Sorulan Sorular`}
         items={[
           { q: `${ilce.ad} bölgesinde terzi var mı?`, a: `Evet. Terzi Can, Konyaaltı'ndaki atölyesinden ${ilce.ad} bölgesine hizmet verir: adresten alır veya yerinde ölçü alır, adrese teslim eder. WhatsApp: +90 531 898 64 18, her gün 08:00–23:00.` },
-          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺150'den, fermuar değişimi ₺200'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
-          { q: `Terzi servisi ücretli mi?`, a: `Eve ve otele terzi servisi ücretsizdir. Ölçü alma ve teslimat için ek servis ücreti alınmaz.` },
+          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺200'den, fermuar değişimi ₺300'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
+          { q: `Terzi servisi ücretli mi?`, a: `Konyaaltı'nda eve ve otele terzi servisi ücretsizdir; diğer bölgelerde servis ücreti mesafeye göre belirlenir ve gelmeden önce WhatsApp'tan netleştirilir.` },
           { q: `Çalışma saatleriniz nedir?`, a: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz.` },
         ]}
       />

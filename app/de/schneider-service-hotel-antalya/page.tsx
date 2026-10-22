@@ -72,7 +72,7 @@ const jsonLd = {
         { '@type':'Question', name:'Welche Hotels in Belek und Lara werden bedient?',
           acceptedAnswer:{'@type':'Answer',text:`Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja, der Besuch selbst ist kostenlos — Sie zahlen nur für die Schneiderarbeit. Kürzen ab ₺150, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Der Besuch in Konyaaltı ist kostenlos, in anderen Gebieten richtet sich das Entgelt nach der Entfernung — dazu zahlen Sie die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
           acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in ganz Antalya, einschließlich Hotels in Belek, Lara, Kemer und Alanya. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
@@ -264,7 +264,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Preise für mobilen Schneider / Hotelservice
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Der Besuch selbst ist kostenlos — Sie zahlen nur für die Schneiderarbeit</p>
+            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Besuch in Konyaaltı kostenlos, andere Gebiete je nach Entfernung — dazu die Schneiderarbeit</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -276,11 +276,11 @@ export default function SchneiderServiceHotelAntalyaPage() {
               <tbody>
                 {[
                   ['Anfahrtsgebühr','KOSTENLOS','—'],
-                  ['Hosen kürzen','ab ₺150','24 Std'],
-                  ['Reißverschluss wechseln','ab ₺200','Am selben Tag'],
+                  ['Hosen kürzen','ab ₺200','24 Std'],
+                  ['Reißverschluss wechseln','ab ₺300','Am selben Tag'],
                   ['Kleid / Jacke enger machen','ab ₺200','48 Std'],
                   ['Ärmel kürzen','ab ₺200','48 Std'],
-                  ['Abendkleid reparieren','ab ₺350','48 Std'],
+                  ['Abendkleid reparieren','ab ₺800','48 Std'],
                   ['Brautkleid ändern','ab ₺800','3–5 Tage'],
                   ['Herrenanzug maßschneidern','ab ₺2.500','5–7 Tage'],
                   ['Riss reparieren','ab ₺100','Am selben Tag'],
@@ -303,7 +303,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h2>
             {[
               ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
-              ['Ist der Hausbesuch kostenlos?', 'Ja! Der Besuch selbst ist komplett kostenlos — Sie zahlen nur für die Schneiderarbeit. Kürzen ab ₺150, Kleideränderungen ab ₺200.'],
+              ['Ist der Hausbesuch kostenlos?', 'In Konyaaltı ist der Besuch kostenlos, in anderen Gebieten richtet sich das Entgelt nach der Entfernung — dazu zahlen Sie die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200.'],
               ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
               ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],

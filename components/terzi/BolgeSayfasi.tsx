@@ -33,7 +33,7 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
   // Perplexity, Google AI Overview) referans alması için FAQPage şeması ──
   const sorular = antalyaIlcesi ? [
     { s: `${lokasyonAdi}'de terzi nasıl bulunur?`, c: `${lokasyonAdi} bölgesinde terzi bulmak için swaphubs.com/terzi-talep sayfasından ücretsiz talep oluşturabilir veya Terzi Can'a doğrudan WhatsApp'tan (${PHONE}) ulaşabilirsiniz.` },
-    { s: `${lokasyonAdi} paça kısaltma fiyatı ne kadar 2026?`, c: `${lokasyonAdi} dahil tüm Antalya'da paça kısaltma ₺150'den başlıyor. Kesin fiyat kumaş ve modele göre değişebilir, WhatsApp'tan anında fiyat teklifi alabilirsiniz.` },
+    { s: `${lokasyonAdi} paça kısaltma fiyatı ne kadar 2026?`, c: `${lokasyonAdi} dahil tüm Antalya'da paça kısaltma ₺200'den başlıyor. Kesin fiyat kumaş ve modele göre değişebilir, WhatsApp'tan anında fiyat teklifi alabilirsiniz.` },
     { s: `${lokasyonAdi}'de aynı gün teslim terzi var mı?`, c: `Evet, Terzi Can birçok tadilat işini (paça kısaltma, fermuar değişimi, bel daraltma) aynı gün içinde tamamlayıp ${lokasyonAdi}'ye teslim edebiliyor.` },
     { s: `${lokasyonAdi}'ye eve veya otele gelen terzi hizmeti var mı?`, c: `Evet, araçlı terzi servisiyle ${lokasyonAdi} dahil tüm Antalya ilçelerine gidip yerinde ölçü alıyoruz.` },
     { s: `${lokasyonAdi}'de kuru temizleme fiyatları nedir?`, c: `${lokasyonAdi} bölgesinde kuru temizleme ₺300'den başlıyor, mont ve kaban için fiyat değişebilir. Otelden kurye alım seçeneği de mevcut.` },

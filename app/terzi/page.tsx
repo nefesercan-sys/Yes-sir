@@ -45,7 +45,7 @@ const GBP_1 = {
 
 const PAGE_TITLE = "Tamir Tadilat Terzi Antalya · Fotoğraftan Fiyat | Terzi Can";
 const PAGE_DESC  =
-  "Bay bayan tamir tadilat: yırtığı dikme, paça ₺150, fermuar ₺200. WhatsApp'tan fotoğraf at, fiyat al. Otele ve eve terzi, 08:00–23:00. ☎ " + PHONE;
+  "Bay bayan tamir tadilat: yırtığı dikme, paça ₺200, fermuar ₺300. WhatsApp'tan fotoğraf at, fiyat al. Otele ve eve terzi, 08:00–23:00. ☎ " + PHONE;
 
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
@@ -83,7 +83,7 @@ const jsonLd = {
         'Dikiş Atölyesi Antalya',
       ],
       description:
-        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve ve otele ücretsiz terzi servisi.",
+        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve ve otele terzi servisi (Konyaaltı'nda ücretsiz).",
       url: SITE_URL,
       mainEntityOfPage: { '@id': `${SITE_URL}#webpage` },
       telephone: PHONE_E164,
@@ -124,7 +124,7 @@ const jsonLd = {
           offer('Elbise Dikimi', '800'),
           offer('Kuru Temizleme', '300'),
           offer('Üniforma Üretimi', '1000'),
-          offer('Eve / Otele Gelen Terzi Servisi (ücretsiz)', '0'),
+          offer('Eve / Otele Gelen Terzi Servisi (Konyaaltı\'nda ücretsiz)', '0'),
         ],
       },
       potentialAction: [
@@ -235,13 +235,13 @@ const jsonLd = {
       '@type': 'FAQPage',
       '@id': `${SITE_URL}#faq`,
       mainEntity: [
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺150 / €5'den başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, eve ve otele servis ücretsizdir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺200 / €6'den başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet. Konyaaltı'nda eve ve otele servis ücretsizdir; Lara, Kundu, Belek, Kemer gibi diğer bölgelerde ücret mesafeye göre belirlenir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Çalışma saatleriniz nedir?', acceptedAnswer: { '@type': 'Answer', text: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Hangi ödeme yöntemleri ve para birimleri geçerli?', acceptedAnswer: { '@type': 'Answer', text: 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.' } },
-        { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot/mont/ceket fermuarı ₺200 / €6. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺150 / €5'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis ücretsizdir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot/mont/ceket fermuarı ₺300 / €9. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺200 / €6'den başlar. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis Konyaaltı'nda ücretsizdir, diğer bölgelerde mesafeye göre belirlenir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },

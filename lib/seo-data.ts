@@ -3,7 +3,7 @@
 // Bölge × hizmet arama sorguları için TEK veri kaynağı (TR/EN/RU/DE).
 // Kurallar:
 //  - Sadece doğrulanmış bilgi: tek atölye (Hurma, Konyaaltı), 2006'dan beri, her gün 08:00–23:00,
-//    otel ve eve ücretsiz servis, tahmini süreler (genellikle aynı gün / 1 gün / 3 gün; kesin süre WhatsApp'ta), gelinlik ₺800+, abiye ₺400+.
+//    otel ve eve ücretsiz servis, tahmini süreler (genellikle aynı gün / 1 gün / 3 gün; kesin süre WhatsApp'ta), gelinlik ₺800+, abiye ₺800+.
 //  - Mesafe/dakika, puan, müşteri sayısı, sahte vaat YOK.
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
@@ -25,7 +25,10 @@ export const LAST_UPDATE = '2026-10-17';
 // Türkçe sayfalar yalnızca atölyeye (Konyaaltı/Hurma) yakın bölgelerde aramaya açık; uzak bölgelerin Türkçe sayfaları
 // noindex olur, sitemap'ten, iç linklerden ve hreflang'dan çıkar. Yabancı dil (EN/RU/DE) sayfaları TÜM bölgelerde açıktır.
 // Bir bölgeyi Türkçede açmak/kapatmak için bu listeyi değiştirmek yeterli.
-export const TR_NEAR_SLUGS = ['konyaalti', 'muratpasa', 'meltem', 'fener', 'sirinyali', 'arapsuyu', 'toros', 'ogretmenevleri'];
+export const TR_NEAR_SLUGS = ['konyaalti', 'muratpasa', 'meltem', 'fener', 'sirinyali', 'arapsuyu', 'toros', 'ogretmenevleri', 'uluc', 'siteler', 'altinkum'];
+/** Ücretsiz alım-teslim servisi yalnızca Konyaaltı ve mahallelerinde; diğer bölgelerde servis ücreti bölgeye göre belirlenir. */
+export const FREE_SERVICE_SLUGS = ['konyaalti', 'uluc', 'siteler', 'altinkum'];
+export const isFreeService = (slug: string): boolean => FREE_SERVICE_SLUGS.includes(slug);
 export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);
 /** Bu dil + bölge sayfası aramaya açık mı? */
 export const isIndexable = (lang: Lang, slug: string): boolean => lang !== 'tr' || isTrNear(slug);
@@ -98,6 +101,12 @@ export const DISTRICTS: District[] = [
     loc: { tr: "Beldibi'nde", en: 'in Beldibi', ru: 'в Бельдиби', de: 'in Beldibi' }, alias: [] },
   { slug: 'goynuk', kind: 'resort', name: { tr: 'Göynük', en: 'Göynük', ru: 'Гёйнюк', de: 'Göynük' },
     loc: { tr: "Göynük'te", en: 'in Göynük', ru: 'в Гёйнюке', de: 'in Göynük' }, alias: ['Goynuk'] },
+  { slug: 'uluc', kind: 'central', name: { tr: 'Uluç', en: 'Uluç', ru: 'Улуч', de: 'Uluç' },
+    loc: { tr: "Uluç'ta", en: 'in Uluç', ru: 'в Улуче', de: 'in Uluç' }, alias: ['Uluc', 'Uluç Konyaaltı'] },
+  { slug: 'siteler', kind: 'central', name: { tr: 'Siteler', en: 'Siteler', ru: 'Ситлер', de: 'Siteler' },
+    loc: { tr: "Siteler'de", en: 'in Siteler', ru: 'в Ситлере', de: 'in Siteler' }, alias: ['Siteler Antalya', 'Siteler Konyaaltı'] },
+  { slug: 'altinkum', kind: 'central', name: { tr: 'Altınkum', en: 'Altınkum', ru: 'Алтынкум', de: 'Altınkum' },
+    loc: { tr: "Altınkum'da", en: 'in Altınkum', ru: 'в Алтынкуме', de: 'in Altınkum' }, alias: ['Altinkum', 'Altınkum Konyaaltı', 'Altinkum Antalya'] },
 ];
 
 // Zaten kendi sayfası olan Konyaaltı mahalleleri (yalnızca iç link için)
@@ -128,7 +137,7 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
-    id: 'paca', icon: '📏', time: 'same', priceFrom: 150,
+    id: 'paca', icon: '📏', time: 'same', priceFrom: 200,
     slug: { tr: 'pantolon-paca-kisaltma', en: 'trouser-hemming', ru: 'podshiv-bryuk', de: 'hosen-kuerzen' },
     name: { tr: 'Pantolon Paça Kısaltma', en: 'Trouser Hemming', ru: 'Подшив брюк', de: 'Hosen kürzen' },
     q: { tr: 'paça kısaltma', en: 'trouser hemming', ru: 'подшив брюк', de: 'Hosen kürzen' },
@@ -146,7 +155,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'kot', icon: '👖', time: 'same', priceFrom: 150,
+    id: 'kot', icon: '👖', time: 'same', priceFrom: 200,
     slug: { tr: 'kot-pantolon-paca-kisaltma', en: 'jeans-hemming', ru: 'podshiv-dzhinsov', de: 'jeans-kuerzen' },
     name: { tr: 'Kot Pantolon Daraltma ve Kısaltma', en: 'Jeans Hemming & Taking In', ru: 'Подшив и ушивание джинсов', de: 'Jeans kürzen und enger machen' },
     q: { tr: 'kot pantolon kısaltma', en: 'jeans hemming', ru: 'подшив джинсов', de: 'Jeans kürzen' },
@@ -164,7 +173,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'bel', icon: '🪡', time: 'same', priceFrom: 150,
+    id: 'bel', icon: '🪡', time: 'same', priceFrom: 200,
     slug: { tr: 'bel-daraltma', en: 'waist-taking-in', ru: 'ushivanie-v-talii', de: 'taille-enger-machen' },
     name: { tr: 'Bel Daraltma ve Genişletme', en: 'Waist Taking-in & Letting-out', ru: 'Ушивание и расширение в талии', de: 'Taille enger und weiter machen' },
     q: { tr: 'bel daraltma', en: 'waist alteration', ru: 'ушивание в талии', de: 'Taille enger machen' },
@@ -182,7 +191,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'fermuar', icon: '🔧', time: 'same', priceFrom: 200,
+    id: 'fermuar', icon: '🔧', time: 'same', priceFrom: 300,
     slug: { tr: 'fermuar-degisimi-tamiri', en: 'zipper-repair-replacement', ru: 'zamena-molnii', de: 'reissverschluss-wechseln' },
     name: { tr: 'Fermuar Değişimi ve Tamiri', en: 'Zipper Repair & Replacement', ru: 'Замена и ремонт молнии', de: 'Reißverschluss wechseln und reparieren' },
     q: { tr: 'fermuar değişimi', en: 'zipper replacement', ru: 'замена молнии', de: 'Reißverschluss wechseln' },
@@ -200,7 +209,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'elbise-dikim', icon: '👗', time: 'three', priceFrom: 600,
+    id: 'elbise-dikim', icon: '👗', time: 'three', priceFrom: 800,
     slug: { tr: 'elbise-dikimi', en: 'custom-dress-making', ru: 'poshiv-platya', de: 'kleid-naehen-lassen' },
     name: { tr: 'Elbise Dikimi (Ölçüye Göre)', en: 'Custom Dress Making', ru: 'Пошив платьев на заказ', de: 'Kleid nach Maß nähen' },
     q: { tr: 'elbise dikimi', en: 'custom dress making', ru: 'пошив платья', de: 'Kleid nähen lassen' },
@@ -242,10 +251,10 @@ export const SERVICES: Service[] = [
     name: { tr: 'Gelinlik ve Abiye Tadilatı', en: 'Wedding & Evening Dress Alteration', ru: 'Подгонка свадебных и вечерних платьев', de: 'Brautkleid und Abendkleid ändern' },
     q: { tr: 'gelinlik ve abiye tadilatı', en: 'wedding dress alteration', ru: 'подгонка свадебного платья', de: 'Brautkleid ändern' },
     priceText: {
-      tr: 'Gelinlik tadilatı ₺800\'den, abiye tadilatı ₺400\'den başlar.',
-      en: 'Wedding dress alteration starts from ₺800, evening dress alteration from ₺400.',
+      tr: 'Gelinlik tadilatı ₺800\'den, abiye tadilatı ₺800\'den başlar.',
+      en: 'Wedding dress alteration starts from ₺800, evening dress alteration from ₺800.',
       ru: 'Подгонка свадебного платья от ₺800, вечернего платья от ₺400.',
-      de: 'Brautkleid-Änderung ab ₺800, Abendkleid-Änderung ab ₺400.',
+      de: 'Brautkleid-Änderung ab ₺800, Abendkleid-Änderung ab ₺800.',
     },
     timeText: {
       tr: 'Abiye tadilatı genellikle ertesi gün hazır olur; gelinlikte süre işlemin kapsamına göre WhatsApp\'ta netleştirilir.',

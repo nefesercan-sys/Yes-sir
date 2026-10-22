@@ -16,12 +16,12 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Bay Terzi Antalya — Erkek Takım Elbise Dikimi Fiyatları 2026',
-      description: "Antalya'da bay terzi. Erkek takım elbise dikimi ₺2500, pantolon kısaltma ₺150, gömlek dikimi ₺400, smoking, damatlık. Eve ve otele gelen terzi servisi.",
+      description: "Antalya'da bay terzi. Erkek takım elbise dikimi ₺2500, pantolon kısaltma ₺200, gömlek dikimi ₺400, smoking, damatlık. Eve ve otele gelen terzi servisi.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya'].map(name=>({'@type':'City',name})),
       offers: {
         '@type': 'AggregateOffer',
-        lowPrice: '150',
+        lowPrice: '200',
         highPrice: '5000',
         priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
@@ -38,7 +38,7 @@ const jsonLd = {
     {
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type':'Question', name:'Bay terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Pantolon kısaltma ₺150, gömlek dikimi ₺400, takım elbise ₺2500, smoking ₺3500'den başlar. WhatsApp: ${PHONE}`}},
+        { '@type':'Question', name:'Bay terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Pantolon kısaltma ₺200, gömlek dikimi ₺400, takım elbise ₺2500, smoking ₺3500'den başlar. WhatsApp: ${PHONE}`}},
         { '@type':'Question', name:'Erkek takım elbise dikimi Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Erkek takım elbise (ceket+pantolon) dikimi ₺2500'den başlar. Kumaş seçimine ve modele göre değişir. WhatsApp: ${PHONE}`}},
         { '@type':'Question', name:'Damatlık dikimi Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Damatlık (takım elbise) dikimi ₺3000'den başlar. Özel kumaş ve aksesuar seçimi yapılabilir. WhatsApp: ${PHONE}`}},
         { '@type':'Question', name:'Erkek gömlek dikimi Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Erkek gömlek dikimi ₺400'den başlar. Ölçüye göre kişiselleştirme mevcuttur. WhatsApp: ${PHONE}`}},
@@ -51,7 +51,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: 'Bay Terzi Antalya · Tamir Tadilat, Takım Elbise | Terzi Can' },
-  description: "Antalya bay terzi: erkek tamir tadilat, pantolon paça kısaltma ₺150, fermuar değişimi, söküğü dikme; takım elbise ₺2500, gömlek ₺400. Eve servis. ☎ +90 531 898 64 18",
+  description: "Antalya bay terzi: erkek tamir tadilat, pantolon paça kısaltma ₺200, fermuar değişimi, söküğü dikme; takım elbise ₺2500, gömlek ₺400. Eve servis. ☎ +90 531 898 64 18",
   keywords: [
     'erkek tamir tadilat Antalya', 'erkek pantolon fermuar değişimi Antalya', 'erkek söküğü dikme Antalya', 'bay terzi Antalya', 'erkek terzi Antalya', 'erkek takım elbise dikimi Antalya',
     'damatlık dikimi Antalya', 'smoking dikimi Antalya', 'erkek gömlek dikimi Antalya',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Pantolon / Paça Kısaltma', '₺150', '24 saat'],
+  ['Pantolon / Paça Kısaltma', '₺200', '24 saat'],
   ['Pantolon Bel Daraltma', '₺200', '48 saat'],
   ['Ceket Kol Kısaltma', '₺200', '48 saat'],
   ['Ceket Beden Küçültme', '₺350', '48 saat'],
@@ -110,13 +110,13 @@ export default function BayTerziPage() {
               <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Erkek Takım Elbise · Gömlek · Pantolon 2026</span>
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
-              Pantolon kısaltma <strong style={{ color: '#D4B07A' }}>₺150</strong> ·
+              Pantolon kısaltma <strong style={{ color: '#D4B07A' }}>₺200</strong> ·
               Takım elbise <strong style={{ color: '#D4B07A' }}>₺2.500</strong> ·
               Smoking <strong style={{ color: '#D4B07A' }}>₺3.500</strong> ·
               <strong style={{ color: '#fff' }}> Eve ve otele gelen terzi servisi</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(140px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '1.5rem' }}>
-              {[['Pantolon Kısaltma','₺150'],['Gömlek Dikimi','₺400'],['Blazer','₺1.500'],['Takım Elbise','₺2.500'],['Smoking','₺3.500']].map(([n,p])=>(
+              {[['Pantolon Kısaltma','₺200'],['Gömlek Dikimi','₺400'],['Blazer','₺1.500'],['Takım Elbise','₺2.500'],['Smoking','₺3.500']].map(([n,p])=>(
                 <div key={n} style={{ background: 'rgba(255,255,255,.04)', padding: '.9rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '.68rem', color: 'rgba(255,255,255,.5)', marginBottom: '.2rem' }}>{n}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1.2rem', color: '#D4B07A', fontWeight: 700 }}>{p}</div>
@@ -205,7 +205,7 @@ export default function BayTerziPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Bay Terzi SSS</h2>
             {[
-              ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ₺150, gömlek ₺400, blazer ₺1.500, takım elbise ₺2.500, smoking ₺3.500. WhatsApp: ${PHONE}`],
+              ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ₺200, gömlek ₺400, blazer ₺1.500, takım elbise ₺2.500, smoking ₺3.500. WhatsApp: ${PHONE}`],
               ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise ₺2.500'den. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
               ['Damatlık dikimi Antalya fiyatı?', `Damatlık ₺3.000'den başlar. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
               ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. 24–48 saat teslim.'],
@@ -223,7 +223,7 @@ export default function BayTerziPage() {
 
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Erkek Kıyafet Fiyatı Öğrenin</h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — 30 dk fiyat · Araçlı servis ücretsiz</p>
+          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — 30 dk fiyat · Konyaaltı'nda servis ücretsiz</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, erkek kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
               style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>

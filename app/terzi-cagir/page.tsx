@@ -21,7 +21,7 @@ const jsonLd = {
         'Eve Gelen Terzi Antalya', 'Tailor Antalya', 'Портной Анталья',
       ],
       description:
-        'Antalya Konyaaltı terzi hizmeti. Paça kısaltma ₺150, fermuar ₺200, bel daraltma ₺150. Terzi çağır, terzi kapına gelsin. Hurma, Liman, Sarısu, Uncalı, Gürsu, Meltem, Çakırlar, Öğretmenevi mahallelerine araçlı servis.',
+        'Antalya Konyaaltı terzi hizmeti. Paça kısaltma ₺200, fermuar ₺300, bel daraltma ₺200. Terzi çağır, terzi kapına gelsin. Hurma, Liman, Sarısu, Uncalı, Gürsu, Meltem, Çakırlar, Öğretmenevi mahallelerine araçlı servis.',
       url: PAGE_URL,
       telephone: PHONE_E164,
       priceRange: '₺₺',
@@ -64,7 +64,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#webpage`,
       name: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi Servisi | Terzi Can',
       url: PAGE_URL,
-      description: 'Antalya Konyaaltı terzi çağır servisi. Hemen ara veya WhatsApp yaz. Paça kısaltma ₺150. Terzimiz kapınıza gelir.',
+      description: 'Antalya Konyaaltı terzi çağır servisi. Hemen ara veya WhatsApp yaz. Paça kısaltma ₺200. Terzimiz kapınıza gelir.',
       inLanguage: 'tr',
       isPartOf: { '@id': `${SITE}#website` },
       breadcrumb: {
@@ -87,7 +87,7 @@ const jsonLd = {
         {
           '@type': 'Question',
           name: 'Paça kısaltma fiyatı ne kadar?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Paça kısaltma ₺150\'den başlar. Teslim süresi işe ve yoğunluğa göre WhatsApp\'ta netleşir.' },
+          acceptedAnswer: { '@type': 'Answer', text: 'Paça kısaltma ₺200\'den başlar. Teslim süresi işe ve yoğunluğa göre WhatsApp\'ta netleşir.' },
         },
         {
           '@type': 'Question',
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { absolute: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can' },
   description:
-    'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺150, bel daraltma ₺150, fermuar ₺200. Terzimiz kapınıza gelir, ölçü alır, hazır olunca teslim eder. Hemen ara: +90 531 898 64 18',
+    'Antalya Konyaaltı terzi çağır servisi. Paça kısaltma ₺200, bel daraltma ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, hazır olunca teslim eder. Hemen ara: +90 531 898 64 18',
   keywords: [
     'terzi çağır Antalya', 'Antalya terzi', 'Konyaaltı terzi',
     'eve gelen terzi Antalya', 'kapıya gelen terzi',
@@ -115,7 +115,7 @@ export const metadata: Metadata = {
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can',
-    description: 'Paça kısaltma ₺150. Terzimiz kapınıza gelir. Hemen ara: +90 531 898 64 18',
+    description: 'Paça kısaltma ₺200. Terzimiz kapınıza gelir. Hemen ara: +90 531 898 64 18',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Terzi Can Antalya' }],
   },
@@ -135,18 +135,18 @@ export default function TerziCagirPage() {
   const waUrl = `https://wa.me/${PHONE_E164.replace('+','')}?text=${encodeURIComponent(WA_MSG)}`;
 
   const FIYATLAR = [
-    ['Paça Kısaltma', '₺150', 'Aynı gün'],
-    ['Bel Daraltma', '₺150', '24 saat'],
-    ['Etek Kısaltma', '₺150', 'Aynı gün'],
-    ['Pantolon Paçası', '₺150', 'Aynı gün'],
-    ['Fermuar Değişimi', '₺200', 'Aynı gün'],
-    ['Fermuar Tamiri', '₺200', 'Aynı gün'],
+    ['Paça Kısaltma', '₺200', 'Aynı gün'],
+    ['Bel Daraltma', '₺200', '24 saat'],
+    ['Etek Kısaltma', '₺200', 'Aynı gün'],
+    ['Pantolon Paçası', '₺200', 'Aynı gün'],
+    ['Fermuar Değişimi', '₺300', 'Aynı gün'],
+    ['Fermuar Tamiri', '₺300', 'Aynı gün'],
     ['Ceket Tamiri', '₺200', '24 saat'],
     ['Mont Tamiri', '₺200', '24 saat'],
     ['Gömlek Tamiri', '₺150', 'Aynı gün'],
     ['T-Shirt Tamiri', '₺100', 'Aynı gün'],
     ['Elbise Tamiri', '₺150+', '24 saat'],
-    ['Abiye Tamiri', '₺400', '48 saat'],
+    ['Abiye Tamiri', '₺800', '48 saat'],
     ['Elbise Dikimi', '₺800+', '3–5 gün'],
   ];
 
@@ -422,7 +422,7 @@ export default function TerziCagirPage() {
             Antalya Konyaaltı'nın tüm mahallelerine <strong style={{color:'#D4A843'}}>araçlı terzi servisi</strong>.
             Siz yorulmayın — terzimiz adresinize gelir, ölçü alır,
             <strong style={{color:'#D4A843'}}> hazır olunca teslim eder</strong>.
-            Paça kısaltma <strong style={{color:'#D4A843'}}>₺150</strong>, fermuar <strong style={{color:'#D4A843'}}>₺200</strong>.
+            Paça kısaltma <strong style={{color:'#D4A843'}}>₺200</strong>, fermuar <strong style={{color:'#D4A843'}}>₺300</strong>.
           </p>
           <div className="cta-group">
             <a href={`tel:${PHONE_E164}`} className="btn-call-big">
@@ -558,7 +558,7 @@ export default function TerziCagirPage() {
             ['Hangi mahallelere servis yapıyorsunuz?',
              'Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevi, Meltem, Çakırlar, Konyaaltı Merkez ve tüm Antalya ilçelerine araçlı terzi servisi sunuyoruz.'],
             ['Paça kısaltma ve bel daraltma fiyatı ne kadar?',
-             'Paça kısaltma ₺150, bel daraltma ₺150, etek kısaltma ₺150. WhatsApp\'tan fotoğraf gönderin, fiyatı net olarak öğrenin.'],
+             'Paça kısaltma ₺200, bel daraltma ₺200, etek kısaltma ₺200. WhatsApp\'tan fotoğraf gönderin, fiyatı net olarak öğrenin.'],
             ['Teslim süresi ne kadar?',
              'Teslim süresi işin türüne ve o günkü yoğunluğa göre değişir; küçük tamirler genellikle daha hızlı biter. Net süre WhatsApp\'ta konuşulur.'],
             ['İngilizce veya Rusça hizmet veriyor musunuz?',
@@ -619,17 +619,17 @@ export default function TerziCagirPage() {
 
 // Fiyat listesi sabit veri
 const FIYATLAR = [
-  ['Paça Kısaltma','₺150','Aynı gün'],
-  ['Bel Daraltma','₺150','24 saat'],
-  ['Etek Kısaltma','₺150','Aynı gün'],
-  ['Pantolon Paçası','₺150','Aynı gün'],
-  ['Fermuar Değişimi','₺200','Aynı gün'],
-  ['Fermuar Tamiri','₺200','Aynı gün'],
+  ['Paça Kısaltma','₺200','Aynı gün'],
+  ['Bel Daraltma','₺200','24 saat'],
+  ['Etek Kısaltma','₺200','Aynı gün'],
+  ['Pantolon Paçası','₺200','Aynı gün'],
+  ['Fermuar Değişimi','₺300','Aynı gün'],
+  ['Fermuar Tamiri','₺300','Aynı gün'],
   ['Ceket Tamiri','₺200','24 saat'],
   ['Mont Tamiri','₺200','24 saat'],
   ['Gömlek Tamiri','₺150','Aynı gün'],
   ['T-Shirt Tamiri','₺100','Aynı gün'],
   ['Elbise Tamiri','₺150+','24 saat'],
-  ['Abiye Tamiri','₺400','48 saat'],
+  ['Abiye Tamiri','₺800','48 saat'],
   ['Elbise Dikimi','₺800+','3–5 gün'],
 ];

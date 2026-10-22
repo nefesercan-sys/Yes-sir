@@ -92,7 +92,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
           {
             '@type': 'Question',
             name: `Сколько времени занимает работа?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Срок зависит от работы и загрузки; простые работы часто готовы за день-два. Время выдачи согласуем в WhatsApp, доставка в ваш отель в ${r.name} бесплатная.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Срок зависит от работы и загрузки; простые работы часто готовы за день-два. Время выдачи согласуем в WhatsApp, стоимость доставки в ваш отель в ${r.name} зависит от района.` },
           },
         ],
       },

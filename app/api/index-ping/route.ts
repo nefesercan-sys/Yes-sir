@@ -125,7 +125,7 @@ export async function GET(req: NextRequest) {
     <ul style="line-height:2.2;font-size:.9rem">
       <li>✅ Web sitesi: <code>https://swaphubs.com/terzi</code> ekli mi?</li>
       <li>✅ Kategori: <strong>Terzi</strong> + <strong>Kuru Temizleme</strong> seçili mi?</li>
-      <li>✅ Hizmetler listesi dolu mu? (paça kısaltma ₺150, fermuar ₺120...)</li>
+      <li>✅ Hizmetler listesi dolu mu? (paça kısaltma ₺200, fermuar ₺300...)</li>
       <li>✅ Bu hafta fotoğraf yükledin mi? (minimum 10)</li>
       <li>✅ Google Post paylaştın mı? (haftada 1)</li>
     </ul>

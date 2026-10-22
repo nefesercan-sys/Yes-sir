@@ -49,10 +49,10 @@ export interface AngleCtx {
 }
 
 const SVC: Record<ALang, { free: string; paid: string }> = {
-  tr: { free: 'Yakın bölgelere ücretsiz servis', paid: 'Uzak bölgede servis duruma göre' },
-  en: { free: 'Free pick-up nearby', paid: 'Pick-up priced by area' },
-  ru: { free: 'Выезд рядом бесплатно', paid: 'Выезд — по району' },
-  de: { free: 'Gratis-Abholung in der Nähe', paid: 'Abholung je nach Gebiet' },
+  tr: { free: 'Konyaaltı\'nda ücretsiz servis', paid: 'Uzak bölgede servis duruma göre' },
+  en: { free: 'Free pick-up in Konyaaltı', paid: 'Pick-up priced by area' },
+  ru: { free: 'Выезд в Коньяалты бесплатно', paid: 'Выезд — по району' },
+  de: { free: 'Gratis-Abholung in Konyaaltı', paid: 'Abholung je nach Gebiet' },
 };
 
 type T = { titles: (n: string) => string[]; core: (c: AngleCtx) => string; extra: string; kw: (n: string) => string[] };
@@ -140,7 +140,7 @@ const DE: T[] = [
 ];
 
 // ── Yabancı diller için 6 EK arama niyeti (6–11): turist, otelden alım, kot/şort, abiye/gelinlik, bay-bayan, yakınımda+fiyat ──
-// Yalnızca doğrulanmış bilgi: haftanın 7 günü, 08:00–23:00, otel/eve alım, paça ₺150'den, fermuar ₺200'den, EN/RU/DE konuşulur.
+// Yalnızca doğrulanmış bilgi: haftanın 7 günü, 08:00–23:00, otel/eve alım, paça ₺200'den, fermuar ₺300'den, EN/RU/DE konuşulur.
 const V = (c: AngleCtx, a: string[]) => a[hashStr(c.n) % a.length];
 
 const EN2: T[] = [
@@ -159,8 +159,8 @@ const EN2: T[] = [
   { titles: (n) => [`Men's & Women's Tailor in ${n} | Terzi Can`, `Tailor for Men and Women, ${n} | Terzi Can`, `Tailor in ${n} | Terzi Can`],
     core: (c) => V(c, [`Men's and women's tailor ${c.loc}: shirts, trousers, dresses, skirts, jackets; alterations and made to measure`, `Tailor for men and women ${c.loc}: alter, repair or sew to measure: shirts, trousers, dresses, jackets`]), extra: 'Clear prices',
     kw: (n) => [`mens tailor ${n}`, `womens tailor ${n}`, `suit trousers alteration ${n}`, `shirt tailor ${n}`, `dress tailor ${n}`, `tailor for men and women ${n}`] },
-  { titles: (n) => [`Tailor Near Me in ${n} · Open 7 Days | Terzi Can`, `Tailor in ${n}, Hemming from ₺150 | Terzi Can`, `Tailor in ${n} | Terzi Can`],
-    core: (c) => V(c, [`Tailor near you ${c.loc}: hemming from ₺150, zipper replacement from ₺200, repairs and custom sewing`, `Looking for a tailor ${c.loc}? Clear prices: hemming ₺150+, zippers ₺200+, repairs, custom clothes`]), extra: 'Quality work',
+  { titles: (n) => [`Tailor Near Me in ${n} · Open 7 Days | Terzi Can`, `Tailor in ${n}, Hemming from ₺200 | Terzi Can`, `Tailor in ${n} | Terzi Can`],
+    core: (c) => V(c, [`Tailor near you ${c.loc}: hemming from ₺200, zipper replacement from ₺300, repairs and custom sewing`, `Looking for a tailor ${c.loc}? Clear prices: hemming ₺200+, zippers ₺300+, repairs, custom clothes`]), extra: 'Quality work',
     kw: (n) => [`tailor near me ${n}`, `tailor prices ${n}`, `hemming price ${n}`, `zipper replacement price ${n}`, `tailor open sunday ${n}`, `tailor open late ${n}`] },
 ];
 const RU2: T[] = [
@@ -179,8 +179,8 @@ const RU2: T[] = [
   { titles: (n) => [`Портной для мужчин и женщин: ${n} | Terzi Can`, `Мужской и женский портной: ${n} | Terzi Can`, `Портной ${n} | Terzi Can`],
     core: (c) => V(c, [`Портной для мужчин и женщин ${c.loc}: рубашки, брюки, платья, юбки, пиджаки; подгонка и пошив`, `Мужская и женская одежда ${c.loc}: подгоним, отремонтируем или сошьём по меркам`]), extra: 'Понятные цены',
     kw: (n) => [`мужской портной ${n}`, `женский портной ${n}`, `подгонка брюк ${n}`, `пошив рубашки ${n}`, `пошив платья ${n}`] },
-  { titles: (n) => [`Портной рядом: ${n} · работаем 7 дней | Terzi Can`, `Портной ${n}: подшив от ₺150 | Terzi Can`, `Портной ${n} | Terzi Can`],
-    core: (c) => V(c, [`Портной рядом ${c.loc}: подшив от ₺150, замена молнии от ₺200, ремонт и пошив на заказ`, `Ищете портного ${c.loc}? Понятные цены: подшив от ₺150, молнии от ₺200, ремонт, пошив`]), extra: 'Качественно',
+  { titles: (n) => [`Портной рядом: ${n} · работаем 7 дней | Terzi Can`, `Портной ${n}: подшив от ₺200 | Terzi Can`, `Портной ${n} | Terzi Can`],
+    core: (c) => V(c, [`Портной рядом ${c.loc}: подшив от ₺200, замена молнии от ₺300, ремонт и пошив на заказ`, `Ищете портного ${c.loc}? Понятные цены: подшив от ₺200, молнии от ₺300, ремонт, пошив`]), extra: 'Качественно',
     kw: (n) => [`портной рядом ${n}`, `ателье рядом ${n}`, `цены на подшив ${n}`, `замена молнии цена ${n}`, `ателье работает в воскресенье ${n}`, `ателье до 23:00 ${n}`] },
 ];
 const DE2: T[] = [
@@ -199,8 +199,8 @@ const DE2: T[] = [
   { titles: (n) => [`Damen- & Herrenschneider in ${n} | Terzi Can`, `Schneider für Damen und Herren ${n} | Terzi Can`, `Schneider ${n} | Terzi Can`],
     core: (c) => V(c, [`Damen- und Herrenschneider ${c.loc}: Hemden, Hosen, Kleider, Röcke, Sakkos; ändern und nach Maß`, `Schneider für Damen und Herren ${c.loc}: ändern, reparieren oder nach Maß nähen`]), extra: 'Klare Preise',
     kw: (n) => [`Herrenschneider ${n}`, `Damenschneider ${n}`, `Anzughose kürzen ${n}`, `Hemd nach Maß ${n}`, `Kleid nach Maß ${n}`] },
-  { titles: (n) => [`Schneider in der Nähe: ${n} · 7 Tage offen | Terzi Can`, `Schneider ${n}: Kürzen ab ₺150 | Terzi Can`, `Schneider ${n} | Terzi Can`],
-    core: (c) => V(c, [`Schneider in Ihrer Nähe ${c.loc}: Kürzen ab ₺150, Reißverschluss ab ₺200, Reparatur, Maßanfertigung`, `Schneider gesucht ${c.loc}? Klare Preise: Kürzen ab ₺150, Reißverschluss ab ₺200, Reparatur`]), extra: 'Saubere Arbeit',
+  { titles: (n) => [`Schneider in der Nähe: ${n} · 7 Tage offen | Terzi Can`, `Schneider ${n}: Kürzen ab ₺200 | Terzi Can`, `Schneider ${n} | Terzi Can`],
+    core: (c) => V(c, [`Schneider in Ihrer Nähe ${c.loc}: Kürzen ab ₺200, Reißverschluss ab ₺300, Reparatur, Maßanfertigung`, `Schneider gesucht ${c.loc}? Klare Preise: Kürzen ab ₺200, Reißverschluss ab ₺300, Reparatur`]), extra: 'Saubere Arbeit',
     kw: (n) => [`Schneider in der Nähe ${n}`, `Schneider Preise ${n}`, `Hose kürzen Preis ${n}`, `Schneider sonntags geöffnet ${n}`, `Schneider abends geöffnet ${n}`] },
 ];
 
@@ -229,3 +229,69 @@ export function angleKeywords(lang: ALang, a: number, n: string): string[] {
   return Array.from(new Set([...own, ...pick]));
 }
 export const svcLine = (lang: ALang, free: boolean) => S(lang, free);
+
+// ── Ücretsiz servis yalnızca Konyaaltı bölgesinde; diğer bölgelerde "bölgeye göre" ──
+type UL = 'tr' | 'en' | 'ru' | 'de';
+const UNFREE: Record<UL, [RegExp, string][]> = {
+  tr: [
+    [/Yakın bölgelere ücretsiz servis/g, 'Servis ücreti bölgeye göre'],
+    [/yakın bölgelere ücretsiz servis/g, 'servis ücreti bölgeye göre'],
+    [/Otel ve eve ücretsiz servis/g, 'Otel ve eve servis ücreti bölgeye göre'],
+    [/otel ve eve ücretsiz alım/g, 'otel ve eve alım (ücret bölgeye göre)'],
+    [/otel ve eve ücretsiz servis/g, 'otel ve eve servis (ücret bölgeye göre)'],
+    [/otel ve eve servis ücretsiz/g, 'otel ve eve servis ücreti bölgeye göre belirlenir'],
+    [/alım-teslim ücretsizdir/g, 'alım-teslim ücreti bölgeye göre belirlenir'],
+    [/alım-teslim ücretsiz/g, 'alım-teslim ücreti bölgeye göre'],
+    [/ücretsiz alım/g, 'alım (ücret bölgeye göre)'],
+    [/ücretsiz servis/g, 'servis (ücret bölgeye göre)'],
+    [/ücretsizdir/g, 'bölgeye göre ücretlendirilir'],
+    [/ücretsiz/g, 'bölgeye göre ücretli'],
+  ],
+  en: [
+    [/Free pick-up nearby/g, 'Pick-up priced by area'],
+    [/Free pick-up and delivery/g, 'Pick-up and delivery by area'],
+    [/Free pick-up/g, 'Pick-up by area'],
+    [/Free service to hotels and homes/g, 'Hotel and home service priced by area'],
+    [/free of charge for hotels and homes/g, 'with the fee depending on the area'],
+    [/Pick-up and delivery in (.+?) and nearby is free\./g, 'Pick-up and delivery fee in $1 depends on the area.'],
+    [/(hotel and home service|pick-up and delivery to hotels and homes) is free/gi, '$1 is priced by area'],
+    [/free hotel pick-up/gi, 'hotel pick-up priced by area'],
+    [/free pick-up and delivery/gi, 'pick-up and delivery priced by area'],
+    [/free pick-up/gi, 'pick-up by area'],
+    [/free (hotel|home) (service|visit)/gi, '$1 $2 priced by area'],
+    [/free of charge/gi, 'priced by area'],
+    [/\bfree\b/gi, 'priced by area'],
+  ],
+  ru: [
+    [/Выезд рядом бесплатно/g, 'Выезд — по району'],
+    [/бесплатный выезд рядом/g, 'выезд — по району'],
+    [/Бесплатный выезд в отели и на дом/g, 'Выезд в отели и на дом — по району'],
+    [/забор из отелей бесплатно/g, 'забор из отелей — по району'],
+    [/[Вв]ыезд в отели и на дом бесплатны/g, 'выезд в отели и на дом — по району'],
+    [/забор и доставка в отели и на дом бесплатны/g, 'забор и доставка в отели и на дом — по району'],
+    [/[Бб]есплатный забор и доставка/g, 'Забор и доставка — по району'],
+    [/бесплатн\S*/gi, 'по району'],
+  ],
+  de: [
+    [/Gratis-Abholung in der Nähe/g, 'Abholung je nach Gebiet'],
+    [/Kostenloser Service zu Hotels und nach Hause/g, 'Hotel- und Heimservice je nach Gebiet'],
+    [/Hotelabholung gratis/g, 'Hotelabholung je nach Gebiet'],
+    [/Abholung gratis/g, 'Abholung je nach Gebiet'],
+    [/Abholung und Lieferung in (.+?) und Umgebung sind kostenlos/g, 'Abholung und Lieferung in $1 je nach Gebiet'],
+    [/(Hotel- und Heimservice sind|Abholung und Lieferung zu Hotels und nach Hause sind) kostenlos/g, '$1 je nach Gebiet'],
+    [/ist das kostenlos/g, 'richtet sich das Entgelt nach dem Gebiet'],
+    [/kostenlos(e[rn]?)?/gi, 'je nach Gebiet'],
+    [/gratis/gi, 'je nach Gebiet'],
+  ],
+};
+export function unfree(lang: string, s: string): string {
+  let o = s;
+  for (const [rx, to] of UNFREE[(lang as UL)] || []) o = o.replace(rx, to);
+  return o;
+}
+export function unfreeDeep<T>(lang: string, v: T): T {
+  if (typeof v === 'string') return unfree(lang, v) as unknown as T;
+  if (Array.isArray(v)) return v.map((x) => unfreeDeep(lang, x)) as unknown as T;
+  if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v as object).map(([k, x]) => [k, unfreeDeep(lang, x)])) as unknown as T;
+  return v;
+}

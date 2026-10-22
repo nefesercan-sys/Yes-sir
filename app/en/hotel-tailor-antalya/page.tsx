@@ -30,7 +30,7 @@ const FAQ = [
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
-  { q: 'Is the hotel tailor visit free?', a: `Yes, the hotel visit itself is free — you only pay for the tailoring work. Trouser hemming starts at ₺150 (€5), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
+  { q: 'Is the hotel tailor visit free?', a: `Yes, the hotel visit itself is free — you only pay for the tailoring work. Trouser hemming starts at ₺200 (€6), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
   { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; simple jobs are often ready within a day or two, depending on workload. We serve hotels in Belek, Lara, Kemer, Alanya and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
@@ -258,11 +258,11 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','FREE','—'],
-                  ['Trouser / Pant Hemming','₺150+ (~€5)','24h'],
-                  ['Zipper Replacement','₺200+ (~€6)','Same day'],
+                  ['Trouser / Pant Hemming','₺200+ (~€6)','24h'],
+                  ['Zipper Replacement','₺300+ (~€9)','Same day'],
                   ['Dress / Jacket Alteration','₺200+ (~€7)','48h'],
                   ['Sleeve Shortening','₺200+ (~€7)','48h'],
-                  ['Evening Gown Repair','₺350+ (~€12)','48h'],
+                  ['Evening Gown Repair','₺800+ (~€24)','48h'],
                   ['Wedding Dress Alteration','₺800+ (~€24)','3–5 days'],
                   ['Men\'s Suit Tailoring','₺2,500+ (~€85)','5–7 days'],
                   ['Tear Repair','₺100+ (~€3)','Same day'],

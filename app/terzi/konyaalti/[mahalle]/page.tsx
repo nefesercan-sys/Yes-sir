@@ -54,8 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const m = bul(mahalle);
   if (!m) return {};
 
-  const title = `${m.ad} Terzi Çağır: Paça ₺150, Fermuar ₺200 | Terzi Can`;
-  const desc = `${m.ad} tamir tadilat lazım mı? Söküğü, yırtığı dikme, paça ₺150'den, fermuar ₺200'den. Fotoğraf at, fiyat al. Adrese servis. ☎ ${PHONE}`;
+  const title = `${m.ad} Terzi Çağır: Paça ₺200, Fermuar ₺300 | Terzi Can`;
+  const desc = `${m.ad} tamir tadilat lazım mı? Söküğü, yırtığı dikme, paça ₺200'den, fermuar ₺300'den. Fotoğraf at, fiyat al. Adrese servis. ☎ ${PHONE}`;
   const url = `${TERZI_URL}/konyaalti/${m.slug}`;
 
   return {
@@ -65,6 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${m.ad} terzi`, `${m.ad} mahallesi terzi`, `${m.ad} kuru temizleme`,
       `${m.ad} paça kısaltma`, `${m.ad} fermuar değişimi`, `${m.ad} eve gelen terzi`,
       'Konyaaltı terzi', 'Antalya terzi',
+      `${m.ad} terzi`, `${m.ad} bay bayan terzi`, `${m.ad} dikim`, `${m.ad} tamir tadilat`, `${m.ad} elbise tamiri`, `${m.ad} elbise tadilatı`, `${m.ad} fermuar değişimi`, `${m.ad} fermuar tamiri`, `${m.ad} boy kısaltma`, `${m.ad} bel daraltma`, `${m.ad} etek boyu kısaltma`, `${m.ad} pantolon boyu kısaltma`, `${m.ad} paça kısaltma`, `${m.ad} kot paçası kısaltma`, `${m.ad} beden ölçüsüne göre elbise tadilatı`, `${m.ad} mont tamiri`, `${m.ad} ceket daraltma`, `${m.ad} gömlek daraltma`, `${m.ad} şort kısaltma`, `${m.ad} pantolon daraltma`, `${m.ad} etek daraltma`, `${m.ad} elbise daraltma`, `${m.ad} elbise dikimi`,
     ],
     alternates: (() => {
       const d = findDistrict(m.slug);
@@ -158,8 +159,8 @@ export default async function KonyaaltiMahalleTerziSayfasi({ params }: PageProps
         heading={`${m.ad} Terzi — Sık Sorulan Sorular`}
         items={[
           { q: `${m.ad} bölgesinde terzi var mı?`, a: `Evet. Terzi Can, Konyaaltı'ndaki atölyesinden ${m.ad} bölgesine hizmet verir: adresten alır veya yerinde ölçü alır, adrese teslim eder. WhatsApp: +90 531 898 64 18, her gün 08:00–23:00.` },
-          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺150'den, fermuar değişimi ₺200'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
-          { q: `Terzi servisi ücretli mi?`, a: `Eve ve otele terzi servisi ücretsizdir. Ölçü alma ve teslimat için ek servis ücreti alınmaz.` },
+          { q: `Paça kısaltma ve fermuar değişimi ne kadar?`, a: `Paça kısaltma ₺200'den, fermuar değişimi ₺300'den başlar. Kesin fiyat için kıyafetin fotoğrafını WhatsApp'tan göndermeniz yeterli.` },
+          { q: `Terzi servisi ücretli mi?`, a: `Konyaaltı'nda eve ve otele terzi servisi ücretsizdir; diğer bölgelerde servis ücreti mesafeye göre belirlenir ve gelmeden önce WhatsApp'tan netleştirilir.` },
           { q: `Çalışma saatleriniz nedir?`, a: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz.` },
         ]}
       />

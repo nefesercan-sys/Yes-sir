@@ -118,8 +118,8 @@ const jsonLd = {
       mainEntity: [
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. En geç 24 saat içinde işlem tamamlanır ve adresinize teslim edilir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺150'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺200'den başlar. Aynı gün teslim. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Aynı gün teslim. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tailor in Antalya Konyaalti — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! We offer English-speaking tailoring, alterations, dry cleaning and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Портной в Анталье Коньяалты — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Говорим по-русски. Подгонка, пошив, химчистка, доставка в отель. WhatsApp: ${PHONE}` } },
       ],
@@ -165,21 +165,21 @@ export const metadata: Metadata = {
   },
 }
 
-// ─── Fiyat Listesi (gerçek fermuar değişimi fiyatı doğrulandı: 200 TL) ───────
+// ─── Fiyat Listesi (gerçek fermuar değişimi fiyatı doğrulandı: 300 TL) ───────
 const FIYAT_LISTESI = [
-  { hizmet: 'Paça Kısaltma',            fiyat: '₺150',  sure: 'Aynı gün' },
-  { hizmet: 'Pantolon Paçası',           fiyat: '₺150',  sure: 'Aynı gün' },
-  { hizmet: 'Bel Daraltma',              fiyat: '₺150',  sure: '24 saat'  },
-  { hizmet: 'Etek Kısaltma',             fiyat: '₺150',  sure: 'Aynı gün' },
-  { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺150',  sure: 'Aynı gün' },
+  { hizmet: 'Paça Kısaltma',            fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Pantolon Paçası',           fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: '24 saat'  },
+  { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Aynı gün' },
   { hizmet: 'Elbise Tamiri',             fiyat: '₺150',  sure: 'Aynı gün' },
   { hizmet: 'Gömlek Tamiri',             fiyat: '₺150',  sure: 'Aynı gün' },
   { hizmet: 'T-Shirt Tamiri',            fiyat: '₺100',  sure: 'Aynı gün' },
-  { hizmet: 'Fermuar Değişimi',          fiyat: '₺200',  sure: 'Aynı gün' },
-  { hizmet: 'Fermuar Tamiri',            fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
   { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: '24 saat'  },
   { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: '24 saat'  },
-  { hizmet: 'Abiye Tamiri',              fiyat: '₺400',  sure: '24–48 sa' },
+  { hizmet: 'Abiye Tamiri',              fiyat: '₺800',  sure: '24–48 sa' },
   { hizmet: 'Elbise Dikimi',             fiyat: '₺800+', sure: '3–5 gün'  },
 ]
 
@@ -424,7 +424,7 @@ export default function AntalyaTerziPage() {
               <span style={{ fontSize: '1.2rem' }}>💡</span>
               <p style={{ fontSize: '.78rem', color: GRI, margin: 0, lineHeight: 1.6 }}>
                 Fiyatlar başlangıç fiyatı olup işin kapsamına göre değişebilir.
-                Kesin fiyat için <a href={WA('Merhaba, fiyat bilgisi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={{ color: ALTIN, textDecoration: 'none', fontWeight: 600 }}>WhatsApp'tan</a> ulaşabilirsiniz. Adrese servis ücretsizdir.
+                Kesin fiyat için <a href={WA('Merhaba, fiyat bilgisi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={{ color: ALTIN, textDecoration: 'none', fontWeight: 600 }}>WhatsApp'tan</a> ulaşabilirsiniz. Adrese servis Konyaaltı'nda ücretsizdir, diğer bölgelerde mesafeye göre.
               </p>
             </div>
           </div>
@@ -501,7 +501,7 @@ export default function AntalyaTerziPage() {
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
-                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı, astar değişimi. Aynı gün teslim.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺100\'den' },
+                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı, astar değişimi. Aynı gün teslim.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
                 { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise, kadın elbise, abiye, gelinlik, gömlek, pantolon, üniforma — ölçüye özel dikim.', href:'/terzi/bayan-terzi-antalya', fiyat:'₺350\'den' },
                 { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Evden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺80\'den' },
                 { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Servis imkanı.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺300\'den' },

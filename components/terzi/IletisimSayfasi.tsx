@@ -68,7 +68,7 @@ const T = {
     faq: [
       ['Pazar günü açık bir terzi var mı?', 'Evet, Terzi Can Pazar dahil her gün 08:00–23:00 arası açık.'],
       ['Terzi Can\'ın telefon numarası kaç?', `${PHONE}. Hem arayabilir hem aynı numaradan WhatsApp'ta yazabilirsiniz.`],
-      ['Fiyatı önceden nasıl öğrenirim?', 'Kıyafetin fotoğrafını WhatsApp\'tan atın. Başlangıç fiyatları: paça kısaltma ₺150, fermuar değişimi ₺200, abiye tadilatı ₺400, gelinlik tadilatı ₺800.'],
+      ['Fiyatı önceden nasıl öğrenirim?', 'Kıyafetin fotoğrafını WhatsApp\'tan atın. Başlangıç fiyatları: paça kısaltma ₺200, fermuar değişimi ₺300, abiye tadilatı ₺800, gelinlik tadilatı ₺800.'],
       ['Otelimden ya da evimden alıyor musunuz?', 'Konyaaltı\'nda otel ve eve alım-teslim ücretsiz. Daha uzak bölgelerde nasıl yapılacağını WhatsApp\'ta birlikte planlarız.'],
       ['Atölye tam olarak nerede?', 'Hurma Mahallesi, Konyaaltı. "Haritada Aç" düğmesiyle yol tarifi alabilirsiniz.'],
       ['Yabancı misafirlere hizmet veriyor musunuz?', 'Evet. Türkçenin yanında İngilizce, Rusça ve Almanca konuşuyoruz.'],
@@ -112,7 +112,7 @@ const T = {
     faq: [
       ['Is there a tailor open on Sunday in Antalya?', 'Yes, Terzi Can is open every day including Sunday, 08:00–23:00.'],
       ['What is the phone number of Terzi Can?', `${PHONE}. You can call it or message the same number on WhatsApp.`],
-      ['How do I find out the price in advance?', 'Send a photo of the garment on WhatsApp. Starting prices: hemming ₺150, zipper replacement ₺200, evening dress alteration ₺400, wedding gown alteration ₺800.'],
+      ['How do I find out the price in advance?', 'Send a photo of the garment on WhatsApp. Starting prices: hemming ₺200, zipper replacement ₺300, evening dress alteration ₺800, wedding gown alteration ₺800.'],
       ['Do you collect from my hotel or home?', 'In Konyaaltı, pick-up and delivery to hotels and homes is free. For farther areas we arrange it together on WhatsApp.'],
       ['Where exactly is the workshop?', 'Hurma Mahallesi, Konyaaltı. Use the "Open in Maps" button for directions.'],
       ['Do you serve foreign visitors?', 'Yes. Besides Turkish we speak English, Russian and German.'],
@@ -156,7 +156,7 @@ const T = {
     faq: [
       ['Есть ли в Анталье портной, который работает в воскресенье?', 'Да, Terzi Can открыт каждый день, включая воскресенье, с 08:00 до 23:00.'],
       ['Какой номер телефона у Terzi Can?', `${PHONE}. Можно позвонить или написать на тот же номер в WhatsApp.`],
-      ['Как узнать цену заранее?', 'Пришлите фото вещи в WhatsApp. Цены от: подшив ₺150, замена молнии ₺200, переделка вечернего платья ₺400, свадебного — ₺800.'],
+      ['Как узнать цену заранее?', 'Пришлите фото вещи в WhatsApp. Цены от: подшив ₺200, замена молнии ₺300, переделка вечернего платья ₺800, свадебного — ₺800.'],
       ['Вы забираете вещи из отеля или с дома?', 'В Коньяалты забор и доставка в отели и на дом бесплатны. Для дальних районов договариваемся вместе в WhatsApp.'],
       ['Где именно мастерская?', 'Hurma Mahallesi, Коньяалты. Кнопка «Открыть на карте» построит маршрут.'],
       ['Вы работаете с иностранными гостями?', 'Да. Помимо турецкого говорим по-русски, по-английски и по-немецки.'],
@@ -200,7 +200,7 @@ const T = {
     faq: [
       ['Gibt es in Antalya einen Schneider, der sonntags geöffnet hat?', 'Ja, Terzi Can ist jeden Tag, auch sonntags, von 08:00 bis 23:00 Uhr geöffnet.'],
       ['Wie ist die Telefonnummer von Terzi Can?', `${PHONE}. Sie können anrufen oder an dieselbe Nummer per WhatsApp schreiben.`],
-      ['Wie erfahre ich vorab den Preis?', 'Schicken Sie ein Foto per WhatsApp. Ab-Preise: Kürzen ₺150, Reißverschluss ersetzen ₺200, Abendkleid ändern ₺400, Brautkleid ändern ₺800.'],
+      ['Wie erfahre ich vorab den Preis?', 'Schicken Sie ein Foto per WhatsApp. Ab-Preise: Kürzen ₺200, Reißverschluss ersetzen ₺300, Abendkleid ändern ₺800, Brautkleid ändern ₺800.'],
       ['Holen Sie im Hotel oder zu Hause ab?', 'In Konyaaltı sind Abholung und Lieferung zu Hotels und nach Hause kostenlos. Für weiter entfernte Gebiete klären wir es gemeinsam per WhatsApp.'],
       ['Wo genau ist die Werkstatt?', 'Hurma Mahallesi, Konyaaltı. Mit „In Maps öffnen“ erhalten Sie die Route.'],
       ['Bedienen Sie ausländische Gäste?', 'Ja. Neben Türkisch sprechen wir Deutsch, Englisch und Russisch.'],

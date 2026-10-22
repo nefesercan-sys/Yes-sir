@@ -29,7 +29,7 @@ const FONT   = "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
 const FAQ: { q: string; a: string }[] = [
   {
     q: 'Antalya\'da fermuar değişimi ne kadar?',
-    a: 'Fermuar değişimi 200 TL\'den başlar. Fiyat kıyafetin türüne, fermuarın boyuna ve işlemin zorluğuna göre değişir. WhatsApp\'tan fermuarın fotoğrafını gönderirseniz kesin fiyatı bildiririz.',
+    a: 'Fermuar değişimi 300 TL\'den başlar. Fiyat kıyafetin türüne, fermuarın boyuna ve işlemin zorluğuna göre değişir. WhatsApp\'tan fermuarın fotoğrafını gönderirseniz kesin fiyatı bildiririz.',
   },
   {
     q: 'Fermuar değişimi kaç saatte biter?',
@@ -41,7 +41,15 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Mont ve ceket fermuarı da değişiyor mu?',
-    a: 'Evet, mont, kaban, ceket ve blazer fermuarlarını değiştiriyoruz. Deri ürünlerde işlem özel olduğu için önce fotoğrafa bakıp fiyat veriyoruz.',
+    a: 'Evet, mont, kaban, ceket ve blazer fermuarlarını değiştiriyoruz. Mont ve ceket fermuarı 300 TL\'den başlar. Deri ürünlerde işlem özel olduğu için önce fotoğrafa bakıp fiyat veriyoruz.',
+  },
+  {
+    q: 'Mont fermuarı değiştirme fiyatları ne kadar?',
+    a: 'Mont ve ceket fermuarı değişimi 300 TL\'den başlar; kalın ve su geçirmez montlarda fermuar türüne göre fiyat artabilir. WhatsApp\'tan fotoğraf gönderirseniz kesin fiyatı söyleriz.',
+  },
+  {
+    q: 'Çanta fermuarı tamiri yapılıyor mu, fiyatı nedir?',
+    a: 'Evet, çanta fermuarı tamiri ve değişimi yapıyoruz; 300 TL\'den başlar. Çantanın fotoğrafını WhatsApp\'tan gönderirseniz fiyatı netleştiririz.',
   },
   {
     q: 'Fermuar tamir edilir mi, yoksa değişim mi gerekir?',
@@ -81,13 +89,14 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
 // ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Fermuar Değişimi Antalya · 200 TL\'den · Her Gün 08–23 | Terzi Can' },
+  title: { absolute: 'Fermuar Değişimi Fiyatı 2026 Antalya · 300 TL | Terzi Can' },
   description:
-    'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
-    '200 TL\'den başlayan fiyatlar, 24 saatte teslim, acil durumda aynı gün. Haftanın her günü 08:00–23:00. WhatsApp: ' + PHONE,
+    'Fermuar değişimi ne kadar? Antalya: pantolon, kot, etek 200 TL, mont ceket 300 TL, çanta 250 TL\'den. 24 saatte teslim, her gün 08–23. ☎ ' + PHONE,
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
+    'fermuar değişimi fiyatları 2026', 'fermuar değişimi ne kadar', 'fermuar değişimi kaç tl', 'terzi fermuar değişimi fiyatları',
+    'mont fermuarı değiştirme fiyatları', 'çanta fermuarı tamiri', 'çanta fermuar tamiri fiyat', 'ceket fermuarı değişimi fiyatı',
   ],
   alternates: (() => {
     const sv = SERVICES.find((x) => x.id === 'fermuar')!;
@@ -100,7 +109,7 @@ export const metadata: Metadata = {
     };
   })(),
   openGraph: {
-    title: 'Fermuar Değişimi Antalya · 200 TL\'den | Terzi Can',
+    title: 'Fermuar Değişimi Antalya · 300 TL\'den | Terzi Can',
     description: 'Pantolon, elbise, mont ve ceket fermuar değişimi. Haftanın her günü 08:00–23:00, Konyaaltı / Antalya.',
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
@@ -222,7 +231,7 @@ export default function FermuarDegisimiPage() {
 
           <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}>
             <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı&apos;nda pantolon, kot, elbise, etek, mont ve ceket
-            fermuarlarını <strong>200 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 24 saatte,
+            fermuarlarını <strong>300 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 24 saatte,
             acil durumda aynı gün teslim; haftanın her günü {HOURS} arası açıktır.
           </p>
 
@@ -278,8 +287,9 @@ export default function FermuarDegisimiPage() {
           <h2 style={h2}>Fermuar değişimi fiyatı</h2>
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 12, overflow: 'hidden' }}>
             {[
-              ['Pantolon, kot, etek, elbise fermuarı', '200 TL\'den'],
-              ['Mont, kaban, ceket fermuarı', 'Fotoğrafa göre fiyat'],
+              ['Pantolon, kot, etek, elbise fermuarı', '300 TL\'den'],
+              ['Mont, kaban, ceket fermuarı', '300 TL\'den'],
+              ['Çanta fermuarı', '300 TL\'den'],
               ['Deri ürün fermuarı (özel işlem)', 'Fotoğrafa göre fiyat'],
             ].map(([ad, fiyat], i) => (
               <div key={ad} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', padding: '.95rem 1.2rem', background: i % 2 ? SOFT : '#fff', borderTop: i ? `1px solid ${BORDER}` : 'none' }}>

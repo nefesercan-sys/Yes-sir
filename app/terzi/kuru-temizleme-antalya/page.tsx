@@ -77,7 +77,7 @@ const jsonLd = {
     {
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. Otel alım + teslimat ücretsiz. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. Konyaaltı'nda otel alım + teslimat ücretsiz, diğer bölgelerde mesafeye göre. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya otele gelen kuru temizleme var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerinden kuru temizleme alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Kuru temizleme 24 saatte hazır mı?', acceptedAnswer: { '@type': 'Answer', text: 'Evet! Turistler ve acil durumlar için 24 saat ekspres kuru temizleme mevcuttur. Normal süre 48 saattir.' } },
         { '@type': 'Question', name: 'Mont ve palto kuru temizleme Antalya fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Mont kuru temizleme ₺500, palto ₺550'den başlar. 48 saat teslim. WhatsApp: ${PHONE}` } },
@@ -155,7 +155,7 @@ export default function KuruTemizlemePage() {
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.85, maxWidth: '640px', marginBottom: '1.5rem' }}>
               Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti.
               <strong style={{ color: '#fff' }}> Belek, Lara, Kemer, Alanya</strong> dahil tüm
-              Antalya otellerinden <strong style={{ color: '#D4B07A' }}>ücretsiz alım ve teslimat.</strong> 24 saat ekspres.
+              Antalya otellerinden <strong style={{ color: '#D4B07A' }}>alım ve teslimat (Konyaaltı'nda ücretsiz).</strong> 24 saat ekspres.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '2rem' }}>
               {[['Çamaşır','₺80/kg'],['Elbise','₺300'],['Takım Elbise','₺450'],['Mont','₺500'],['Abiye','₺600']].map(([t, d]) => (
@@ -181,7 +181,7 @@ export default function KuruTemizlemePage() {
         <section id="kuru-temizleme-fiyatlari" style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Kuru Temizleme Fiyatları 2025–2026</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Tüm fiyatlar başlangıç fiyatıdır. Otel alım + teslimat ücretsiz.</p>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Tüm fiyatlar başlangıç fiyatıdır. Konyaaltı'nda otel alım + teslimat ücretsiz, diğer bölgelerde mesafeye göre.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', boxShadow: '0 2px 12px rgba(0,0,0,.04)' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>

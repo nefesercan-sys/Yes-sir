@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
   description:
-    "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü. Şeffaf fiyat, paça kısaltma 150 TL'den. " +
+    "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü. Şeffaf fiyat, paça kısaltma 200 TL'den. " +
     "Her gün 08:00–23:00. ☎ +90 531 898 64 18",
   keywords: [
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
@@ -103,8 +103,8 @@ export default function Page() {
       <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"
         items={[
-          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis ücretsizdir.' },
-          { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺150\'den, fermuar değişimi ₺200\'den, bel daraltma ₺150\'den, elbise dikimi ₺800\'den başlar. Kesin fiyat için fotoğraf göndermeniz yeterli.' },
+          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis Konyaaltı\'nda ücretsizdir, diğer bölgelerde mesafeye göre belirlenir.' },
+          { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺200\'den, fermuar değişimi ₺300\'den, bel daraltma ₺200\'den, elbise dikimi ₺800\'den başlar. Kesin fiyat için fotoğraf göndermeniz yeterli.' },
           { q: 'Fiyatı gitmeden nasıl öğrenirim?', a: 'Kıyafetin ve yapılacak işlemin fotoğrafını WhatsApp\'tan gönderin: +90 531 898 64 18.' },
           { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },
         ]}
