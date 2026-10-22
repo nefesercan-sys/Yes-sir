@@ -8,6 +8,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
+import { mahalleMeta } from '@/lib/mahalle-meta';
 import { getDb } from '@/lib/mongodb';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 import { KeywordBlock } from '@/components/terzi/SeoLanding';
@@ -54,19 +55,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const m = bul(mahalle);
   if (!m) return {};
 
-  const title = `${m.ad} Terzi Çağır: Paça ₺200, Fermuar ₺300 | Terzi Can`;
-  const desc = `${m.ad} tamir tadilat lazım mı? Söküğü, yırtığı dikme, paça ₺200'den, fermuar ₺300'den. Fotoğraf at, fiyat al. Adrese servis. ☎ ${PHONE}`;
+  const { title, desc, kw } = mahalleMeta(m.slug, m.ad, PHONE);
   const url = `${TERZI_URL}/konyaalti/${m.slug}`;
 
   return {
     title: { absolute: title }, // layout'taki "| SwapHubs" şablonu uygulanmasın
     description: desc,
-    keywords: [
-      `${m.ad} terzi`, `${m.ad} mahallesi terzi`, `${m.ad} kuru temizleme`,
-      `${m.ad} paça kısaltma`, `${m.ad} fermuar değişimi`, `${m.ad} eve gelen terzi`,
-      'Konyaaltı terzi', 'Antalya terzi',
-      `${m.ad} terzi`, `${m.ad} bay bayan terzi`, `${m.ad} dikim`, `${m.ad} tamir tadilat`, `${m.ad} elbise tamiri`, `${m.ad} elbise tadilatı`, `${m.ad} fermuar değişimi`, `${m.ad} fermuar tamiri`, `${m.ad} boy kısaltma`, `${m.ad} bel daraltma`, `${m.ad} etek boyu kısaltma`, `${m.ad} pantolon boyu kısaltma`, `${m.ad} paça kısaltma`, `${m.ad} kot paçası kısaltma`, `${m.ad} beden ölçüsüne göre elbise tadilatı`, `${m.ad} mont tamiri`, `${m.ad} ceket daraltma`, `${m.ad} gömlek daraltma`, `${m.ad} şort kısaltma`, `${m.ad} pantolon daraltma`, `${m.ad} etek daraltma`, `${m.ad} elbise daraltma`, `${m.ad} elbise dikimi`,
-    ],
+    keywords: kw,
     alternates: (() => {
       const d = findDistrict(m.slug);
       if (!d || abs(districtUrl('tr', d)) !== url) return { canonical: url };
