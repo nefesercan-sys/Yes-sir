@@ -35,7 +35,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Üniforma Üretimi Antalya — Otel Restoran Sağlık Okul Güvenlik 2026',
-      description: "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık sektörü üniformaları. Tasarım + kalıp + seri imalat + nakış tek elden. Min 10 adet.",
+      description: "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık sektörü üniformaları. Tasarım + kalıp + seri imalat + nakış tek elden.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Kemer','Alanya','Manavgat','Side'].map(name => ({ '@type': 'City', name })),
       offers: {
@@ -58,7 +58,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       url: SITE_URL,
       name: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul Sağlık · 2026 | Terzi Can',
-      description: "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, spa, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış tek elden. Min 10 adet. ☎ " + PHONE,
+      description: "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, spa, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış tek elden. ☎ " + PHONE,
       inLanguage: ['tr', 'en', 'ru'],
       dateModified: TODAY,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -76,7 +76,7 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Otel üniforması üretimi Antalya fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Otel üniforma üretimi adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Sabit bir minimum sipariş şartı yok; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.' } },
+        { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.' } },
         { '@type': 'Question', name: 'Aşçı ve garson üniforması dikimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Aşçı, şef, garson, barista, catering personeli üniforması üretiyoruz. Nakış dahil. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Okul üniforması seri üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Üniformaya logo nakışı veya baskı yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış ₺100'den başlar. WhatsApp: ${PHONE}` } },
@@ -90,7 +90,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Üniforma Üretimi Antalya · Otel, Okul, Sağlık | Terzi Can' },
-  description: "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden. Min 10 adet. ☎ " + PHONE,
+  description: "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden. ☎ " + PHONE,
   keywords: [
     'üniforma üretimi Antalya', 'otel üniforması Antalya', 'aşçı üniforması Antalya',
     'garson üniforması Antalya', 'okul üniforması Antalya', 'sağlık üniforması Antalya',
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
   openGraph: {
     title: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul · Seri İmalat | Terzi Can',
-    description: "Otel, resepsiyon, aşçı, garson, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış. Min 10 adet. ☎ " + PHONE,
+    description: "Otel, resepsiyon, aşçı, garson, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış. ☎ " + PHONE,
     url: SITE_URL, type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },
@@ -157,10 +157,10 @@ export default function UniformaUretimiPage() {
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.85, maxWidth: '640px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Tasarım + Kalıp + Seri İmalat + Nakış</strong> tek elden.
               Antalya'nın otel, restoran, okul ve sağlık kuruluşlarına hizmet eden deneyimli üniforma üreticisi.
-              <strong style={{ color: '#D4B07A' }}> Min 10 adet. Numune tek adet.</strong>
+              <strong style={{ color: '#D4B07A' }}> Adet ve fiyat projeye göre belirlenir.</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '750px', marginBottom: '2rem' }}>
-              {[['Tasarım','Ücretsiz danışmanlık'],['Kalıp','Özel çıkarma'],['Seri','Min 10 adet'],['Nakış','Logo & isim'],['Teslimat','Tüm Antalya']].map(([t, d]) => (
+              {[['Tasarım','Ücretsiz danışmanlık'],['Kalıp','Özel çıkarma'],['Seri','Proje bazında'],['Nakış','Logo & isim'],['Teslimat','Tüm Antalya']].map(([t, d]) => (
                 <div key={t} style={{ background: 'rgba(255,255,255,.04)', padding: '1rem', textAlign: 'center' }}>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#D4B07A', marginBottom: '.3rem' }}>{t}</div>
                   <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)' }}>{d}</div>
@@ -257,10 +257,10 @@ export default function UniformaUretimiPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Üniforma Üretimi — Sık Sorulan Sorular</h2>
             {[
               ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
-              ['Minimum kaç adet üniforma siparişi verilebilir?', 'Sabit bir minimum sipariş şartı yok; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
+              ['Minimum kaç adet üniforma siparişi verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
               ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış ₺100'den başlar. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
               ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara, Alanya dahil tüm Antalya ilçelerine teslim yapılmaktadır. WhatsApp: ${PHONE}`],
-              ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. Min 10 pcs. WhatsApp: ${PHONE}`],
+              ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. WhatsApp: ${PHONE}`],
               ['Teslimat süresi ne kadar?', 'Numune onayından sonra 10 adetlik sipariş 7–10 iş günü, büyük siparişler 15–30 iş günü sürer.'],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.9rem 0' }}>

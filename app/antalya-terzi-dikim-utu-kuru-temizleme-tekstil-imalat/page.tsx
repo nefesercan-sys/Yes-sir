@@ -505,7 +505,7 @@ export default function AntalyaTerziPage() {
                 { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise, kadın elbise, abiye, gelinlik, gömlek, pantolon, üniforma — ölçüye özel dikim.', href:'/terzi/bayan-terzi-antalya', fiyat:'₺350\'den' },
                 { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Evden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺80\'den' },
                 { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Servis imkanı.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺300\'den' },
-                { ic:'🏭', baslik:'Üniforma & Seri İmalat', text:'Otel, restoran, okul, sağlık sektörü üniforması. Kalıp + nakış + seri üretim. Min 10 adet.', href:'/terzi/uniforma-uretimi-antalya', fiyat:'Teklif' },
+                { ic:'🏭', baslik:'Üniforma & Seri İmalat', text:'Otel, restoran, okul, sağlık sektörü üniforması. Kalıp + nakış + seri üretim.', href:'/terzi/uniforma-uretimi-antalya', fiyat:'Teklif' },
                 { ic:'🚗', baslik:'Adrese Terzi Servisi', text:'Terziniz kapınıza gelir! Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Gürsu dahil tüm Konyaaltı. Ücretsiz alım + teslimat.', href:'/terzi/eve-gelen-terzi-antalya', fiyat:'Ücretsiz' },
               ].map(({ ic, baslik, text, href, fiyat }) => (
                 <div key={baslik} style={{ background: '#fff', padding: '2rem 1.6rem', position: 'relative' }}>
