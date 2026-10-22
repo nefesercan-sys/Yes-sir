@@ -5,7 +5,6 @@
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
 import type { Metadata } from 'next';
-import './seo-landing.css';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewStats } from '@/lib/reviews';
 import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
@@ -17,6 +16,8 @@ import {
   isTrNear, isIndexable, TR_NEAR_SLUGS,
 } from '@/lib/seo-data';
 import { angleFor, angleTitles, angleDescs, angleKeywords } from '@/lib/seo-angles';
+import './seo-landing.css';
+import { fgNearDistrict, fgServiceMeta } from '@/lib/fg-meta';
 import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 
@@ -237,9 +238,15 @@ function districtCopy(lang: Lang, d: District) {
     title = pickFit([...angleTitles(lang, a, n), ...titles], 60);
     desc = pickFit([...angleDescs(lang, a, ctx), ...priD, ...descs], 158);
     kw.push(...angleKeywords(lang, a, n));
-    return { n, loc, kw, title, desc };
+    return metaOverride({ n, loc, kw, title, desc });
   }
-  return { n, loc, kw, title, desc };
+  return metaOverride({ n, loc, kw, title, desc });
+
+  function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
+    const o = lang === 'tr' ? undefined : fgNearDistrict(lang, d.slug, n); // Türkçe sayfalar şablonda kalır; yalnızca EN/RU/DE elle yazılmış meta kullanır
+    if (!o) return { ...r, title: r.title.replace(/ \| Terzi Can$/, ' | SwapHubs') };
+    return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: o.title, desc: o.desc };
+  }
 }
 
 function districtAbout(lang: Lang, d: District): string {
@@ -358,7 +365,9 @@ function serviceCopy(lang: Lang, s: Service) {
     `${nm}. ${open}. ${tel}`,
   ];
   const desc = pickFit(candidates, 158);
-  return { nm, title, desc };
+  const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
+  if (o) return { nm, title: o.title, desc: o.desc, kw: o.kw };
+  return { nm, title, desc, kw: [] as string[] };
 }
 
 function serviceFaq(lang: Lang, s: Service): [string, string][] {
@@ -422,6 +431,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     title: { absolute: c.title },
     description: c.desc,
     keywords: Array.from(new Set([
+      ...c.kw,
       ...s.vars[lang],
       ...s.vars[lang].slice(0, 3).map((v) => `${v} Antalya`),
       // Aramada sık yazılan ek kalıplar: fiyat + bay/bayan + 7 gün açık (her hizmette o hizmetin kendi kelimesiyle)
