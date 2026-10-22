@@ -17,6 +17,7 @@ import {
 import { angleFor, angleTitles, angleDescs, angleKeywords, unfreeDeep } from '@/lib/seo-angles';
 import './seo-landing.css';
 import { fgNearDistrict, fgServiceMeta } from '@/lib/fg-meta';
+import { trNearDistrict } from '@/lib/tr-meta';
 import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 
@@ -260,7 +261,7 @@ function _districtCopy(lang: Lang, d: District) {
   return metaOverride({ n, loc, kw, title, desc });
 
   function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
-    const o = lang === 'tr' ? undefined : fgNearDistrict(lang, d.slug, n); // Türkçe sayfalar şablonda kalır; yalnızca EN/RU/DE elle yazılmış meta kullanır
+    const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'SwapHubs') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
     if (!o) return { ...r, title: r.title.replace(/ \| Terzi Can$/, ' | SwapHubs') };
     return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: o.title, desc: o.desc };
   }
