@@ -3,16 +3,15 @@
 // Geo sorgular ($near) için zorunlu 2dsphere indexlerini oluşturur.
 // Terminal/Node ortamı olmayanlar için: tarayıcıdan tek tıkla
 // çalıştırılabilir. ADMIN_SECRET ile korunur.
-// Kullanım: /api/terzi/admin/index-olustur?secret=SENIN_PAROLAN
+// Kullanım: yönetici hesabıyla giriş yapıp /api/terzi/admin/index-olustur adresini açın (parola URL'ye YAZILMAZ).
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAdminSecretOrSession } from '@/lib/admin-auth';
 
 export async function GET(req: NextRequest) {
-  const secret = new URL(req.url).searchParams.get('secret');
-  if (!process.env.ADMIN_SECRET || secret !== process.env.ADMIN_SECRET) {
-    return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-  }
+  const yetki = await requireAdminSecretOrSession(req);
+  if (yetki) return yetki;
 
   try {
     const db = await getDb();

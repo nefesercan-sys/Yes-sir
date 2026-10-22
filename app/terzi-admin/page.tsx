@@ -13,7 +13,7 @@ export default function TerziAdminPage() {
   const [hata, setHata] = useState('');
 
   const getir = async (s: string) => {
-    const res = await fetch(`/api/terzi/admin/bekleyen-kodlar?secret=${encodeURIComponent(s)}`);
+    const res = await fetch('/api/terzi/admin/bekleyen-kodlar', { headers: { 'x-admin-secret': s } });
     if (!res.ok) { setHata('Parola hatalı'); setGirisYapildi(false); return; }
     setKayitlar(await res.json());
     setHata('');

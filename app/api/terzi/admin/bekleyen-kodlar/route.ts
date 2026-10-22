@@ -6,12 +6,11 @@
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAdminSecretOrSession } from '@/lib/admin-auth';
 
 export async function GET(req: NextRequest) {
-  const secret = req.headers.get('x-admin-secret') || new URL(req.url).searchParams.get('secret');
-  if (!process.env.ADMIN_SECRET || secret !== process.env.ADMIN_SECRET) {
-    return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-  }
+  const yetki = await requireAdminSecretOrSession(req);
+  if (yetki) return yetki;
 
   const db = await getDb();
 

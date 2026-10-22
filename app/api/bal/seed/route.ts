@@ -134,7 +134,7 @@ const urunler = [
 ];
 
 export async function GET(req: NextRequest) {
-  const guard = await requireAdmin(req); // oturum VEYA ?secret=ADMIN_API_KEY
+  const guard = await requireAdmin(req); // oturum VEYA x-admin-key başlığı
   if (guard) return guard;
 
   try {

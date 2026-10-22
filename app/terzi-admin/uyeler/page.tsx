@@ -22,7 +22,7 @@ export default function TerziAdminUyelerPage() {
   const [detay, setDetay] = useState<{ ilanlar: any[]; teklifler: any[] } | null>(null);
 
   const uyeleriGetir = async (s: string) => {
-    const res = await fetch(`/api/terzi/admin/uyeler?secret=${encodeURIComponent(s)}`);
+    const res = await fetch('/api/terzi/admin/uyeler', { headers: { 'x-admin-secret': s } });
     if (!res.ok) { setHata('Parola hatalı'); setGirisYapildi(false); return; }
     setUyeler(await res.json());
     setHata('');
@@ -32,7 +32,7 @@ export default function TerziAdminUyelerPage() {
   const detayGetir = async (uye: Uye) => {
     setSeciliUye(uye);
     setDetay(null);
-    const res = await fetch(`/api/terzi/admin/uye-detay?secret=${encodeURIComponent(secret)}&userId=${uye._id}`);
+    const res = await fetch(`/api/terzi/admin/uye-detay?userId=${encodeURIComponent(uye._id)}`, { headers: { 'x-admin-secret': secret } });
     if (res.ok) {
       const veri = await res.json();
       setDetay({ ilanlar: veri.ilanlar, teklifler: veri.teklifler });

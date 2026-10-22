@@ -3,7 +3,7 @@
 // Yetkili sayılma yolları:
 //  1) Giriş yapmış NextAuth oturumunun e-postası yönetici listesinde ise
 //     (varsayılan: nefesercan@gmail.com + Vercel'deki ADMIN_EMAILS="a@x.com,b@y.com")
-//  2) Sunucuda tanımlı gizli anahtar: x-admin-key başlığı (veya ?secret=) == ADMIN_API_KEY
+//  2) Sunucuda tanımlı gizli anahtar: x-admin-key başlığı == ADMIN_API_KEY (URL'de ?secret= artık KABUL EDİLMEZ: adres geçmişine/log'a düşer)
 //     (ADMIN_API_KEY'i Vercel → Environment Variables'a ekleyin. NEXT_PUBLIC_ ile BAŞLAMASIN;
 //      NEXT_PUBLIC_ değişkenler tarayıcıya açık olur.)
 import { NextResponse } from 'next/server';
@@ -34,13 +34,26 @@ export async function isAdminRequest(req: Request, aday?: string): Promise<boole
   const anahtar = process.env.ADMIN_API_KEY;
   if (!anahtar) return false;
   let verilen = aday ?? req.headers.get('x-admin-key') ?? '';
-  if (!verilen) {
-    try { verilen = new URL(req.url).searchParams.get('secret') ?? ''; } catch { /* yoksay */ }
-  }
   return verilen.length > 0 && esit(verilen, anahtar);
 }
 
 /** Yetkisizse 401 yanıtı döner, yetkiliyse null. Kullanım: const g = await requireAdmin(req); if (g) return g; */
 export async function requireAdmin(req: Request, aday?: string): Promise<NextResponse | null> {
   return (await isAdminRequest(req, aday)) ? null : NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
+}
+
+/**
+ * Eski paylaşılan-parola uçları (ADMIN_SECRET) için: yalnızca x-admin-secret BAŞLIĞI kabul edilir (URL'de parola yok),
+ * karşılaştırma sabit zamanlı. Giriş yapmış yönetici oturumu da geçerlidir.
+ */
+export async function requireAdminSecretOrSession(req: Request): Promise<NextResponse | null> {
+  const anahtar = process.env.ADMIN_SECRET;
+  const verilen = req.headers.get('x-admin-secret') ?? '';
+  if (anahtar && verilen.length > 0 && esit(verilen, anahtar)) return null;
+  try {
+    const s = await getServerSession(authOptions);
+    const mail = s?.user?.email?.toLowerCase();
+    if (mail && yoneticiler().includes(mail)) return null;
+  } catch { /* oturum okunamadı */ }
+  return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
 }

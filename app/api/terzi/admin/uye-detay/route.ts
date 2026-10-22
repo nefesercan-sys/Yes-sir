@@ -5,14 +5,13 @@
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { requireAdminSecretOrSession } from '@/lib/admin-auth';
 import { ObjectId } from 'mongodb';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const secret = req.headers.get('x-admin-secret') || searchParams.get('secret');
-  if (!process.env.ADMIN_SECRET || secret !== process.env.ADMIN_SECRET) {
-    return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 });
-  }
+  const yetki = await requireAdminSecretOrSession(req);
+  if (yetki) return yetki;
 
   const userId = searchParams.get('userId');
   if (!userId) return NextResponse.json({ error: 'userId zorunlu' }, { status: 400 });
