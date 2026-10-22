@@ -19,7 +19,7 @@ export const BUSINESS_ID = 'https://swaphubs.com/terzi#business'; // app/terzi/p
 export const PHONE = '+90 531 898 64 18';
 export const PHONE_TEL = '+905318986418';
 export const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
-export const LAST_UPDATE = '2026-10-17';
+export const LAST_UPDATE = '2026-10-23';
 
 // ── BÖLGE STRATEJİSİ (tek ayar noktası) ─────────────────────
 // Türkçe sayfalar yalnızca atölyeye (Konyaaltı/Hurma) yakın bölgelerde aramaya açık; uzak bölgelerin Türkçe sayfaları
