@@ -2,15 +2,16 @@
 // Kurallar: başlık ≤60, açıklama ≤158 (telefon dahil); doğrulanmamış vaat yok (mesafe, dakika, puan, kurye süresi);
 // ücretsiz servis yalnızca yakın mahallelerde; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
-const FREE = ' Konyaaltı’nda ücretsiz alım-teslim.';
+const FREE = ' {{F}}';
+const FREE_SLUGS = ['hurma', 'liman', 'sarisu', 'uncali', 'gursu', 'cakirlar']; // ücretsiz alım-teslim yalnızca Konyaaltı ve mahallelerinde
 const BANK: Record<string, M> = {
   hurma: { t: 'Hurma Terzi Çağır · Tamir, Tadilat, Dikim', d: "Hurma'da tamir tadilat, özel dikim, daraltma, kısaltma: fotoğraf at, fiyat al. Paça ₺200'den, fermuar ₺300'den." + FREE,
     kw: ['tamir tadilat', 'özel dikim', 'ölçüye göre dikim', 'bay bayan elbise dikimi', 'elbise daraltma', 'elbise kısaltma', 'pantolon kısaltma', 'kot paçası kısaltma', 'fermuar değişimi', 'abiye tamiri', 'beden ayarlama', 'yakınımda terzi'] },
   liman: { t: 'Liman Terzi · Fermuar Değişimi, Beden Ayarı', d: "Liman'da fermuar değişimi ₺300'den, paça kısaltma ₺200'den, bel daraltma, beden ayarlama. Fotoğraf at, fiyat al." + FREE,
     kw: ['fermuar değişimi', 'fermuar tamiri', 'mont fermuar değişimi', 'beden ayarlama', 'beden küçültme', 'beden büyütme', 'bel daraltma', 'pantolon daraltma', 'kot paçası kısaltma', 'şort kısaltma', 'tamir tadilat', 'özel dikim'] },
-  sarisu: { t: 'Sarısu Terzi · Kot Paçası, Şort, Etek Kısaltma', d: "Sarısu'da kot paçası, şort, etek ve pantolon kısaltma, bel daraltma, tamir tadilat. Paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
+  sarisu: { t: 'Sarısu Terzi · Kot Paçası, Şort, Etek Kısaltma', d: "Sarısu'da kot paçası, şort, etek, pantolon kısaltma, bel daraltma, tamir tadilat. Paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
     kw: ['kot paçası kısaltma', 'kot daraltma', 'şort kısaltma', 'şort daraltma', 'etek kısaltma', 'etek daraltma', 'pantolon kısaltma', 'bel daraltma', 'çocuk kıyafet tadilatı', 'özel dikim', 'fermuar değişimi', 'tamir tadilat'] },
-  uncali: { t: 'Uncalı Terzi · Abiye Tamiri, Elbise Tadilat', d: "Uncalı'da abiye tamiri ve tadilatı, elbise daraltma, kısaltma. Abiye tamiri ₺800'den, paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
+  uncali: { t: 'Uncalı Terzi · Abiye Tamiri, Elbise Tadilat', d: "Uncalı'da abiye tamiri, tadilatı, elbise daraltma, kısaltma. Abiye ₺800'den, paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
     kw: ['abiye tamiri', 'abiye tadilatı', 'abiye daraltma', 'abiye kısaltma', 'abiye fermuar değişimi', 'elbise daraltma', 'elbise kısaltma', 'bayan elbise dikimi', 'gelinlik tadilatı', 'etek kısaltma', 'ölçüye göre özel dikim', 'tamir tadilat'] },
   gursu: { t: 'Gürsu Terzi · Pantolon, Ceket, Mont Tadilatı', d: "Gürsu'da pantolon, ceket, mont, gömlek tadilatı; kısaltma, daraltma, fermuar. Paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
     kw: ['pantolon kısaltma', 'pantolon daraltma', 'ceket tadilatı', 'ceket daraltma', 'mont kısaltma', 'mont tamiri', 'gömlek daraltma', 'gömlek kısaltma', 'erkek terzi', 'bay bayan terzi', 'fermuar değişimi', 'özel dikim'] },
@@ -28,7 +29,8 @@ const BANK: Record<string, M> = {
 export function mahalleMeta(slug: string, ad: string, phone: string) {
   const b = BANK[slug];
   const title = b ? `${b.t} | SwapHubs` : `${ad} Terzi Çağır | SwapHubs`;
-  const desc = b ? `${b.d} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
+  const dd = b ? b.d.replace(' {{F}}', FREE_SLUGS.includes(slug) ? ' Ücretsiz alım-teslim.' : '') : '';
+  const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} Konyaaltı terzi`, `${ad} terzi çağır`];
   const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), 'Konyaaltı terzi', 'Antalya terzi'];
   return { title, desc, kw: Array.from(new Set(kw)) };
