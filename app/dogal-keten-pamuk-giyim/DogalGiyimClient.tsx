@@ -2,6 +2,21 @@
 
 import { useState } from 'react';
 
+// Terzi Can özel dikim stil örnekleri (dosyalar terzihizmeti.com.tr/public/linen içinde)
+const ORNEKLER = [
+  { f: 'linen-maxi-dress-hadrians-gate.jpg', w: 938, h: 768, alt: 'Kahverengi işlemeli yakalı keten maxi elbise — özel dikim örneği' },
+  { f: 'linen-dress-slit-hadrians-gate-antalya.jpg', w: 720, h: 1290, alt: 'Yandan yırtmaçlı bej keten maxi elbise — özel dikim örneği' },
+  { f: 'linen-dress-white-garden.jpg', w: 760, h: 1018, alt: 'İnce askılı beyaz keten yazlık elbise — özel dikim örneği' },
+  { f: 'linen-shirt-man-tea-antalya.jpg', w: 1100, h: 600, alt: 'Açık mavi keten erkek gömlek — özel dikim örneği' },
+  { f: 'linen-shirt-trousers-man-castle-antalya.jpg', w: 720, h: 1290, alt: 'Keten gömlek ve beyaz keten pantolon — erkek özel dikim örneği' },
+  { f: 'linen-jacket-couple-kaleici-antalya.jpg', w: 720, h: 1290, alt: 'Yapısız keten ceket ve rahat keten elbise — özel dikim örneği' },
+  { f: 'kids-linen-clothing-hadrians-gate-antalya.jpg', w: 720, h: 1290, alt: 'Keten gömlek, elbise ve bahçıvan tulum — çocuk özel dikim örneği' },
+  { f: 'kids-linen-shirt-shorts-kaleici.jpg', w: 938, h: 768, alt: 'Hardal rengi keten gömlek ve şort — çocuk özel dikim örneği' },
+];
+
+// Ürün görselleri: Terzi Can'ın gerçek stil fotoğrafları (dosyalar terzihizmeti.com.tr/public/linen içinde)
+const TZ_IMG = 'https://terzihizmeti.com.tr/linen/';
+
 // ─── ÜRÜNLER ──────────────────────────────────────────────────────────────────
 const URUNLER = [
   // ── KADIN ──
@@ -10,7 +25,7 @@ const URUNLER = [
     baslik: 'Kadın Keten Maxi Elbise',
     aciklama: '%100 doğal keten kumaştan üretilmiş, yazın serin tutan, nefes alan maxi elbise. Geniş kesim, bağcıklı bel, uzun boy. Sahil tatillerinin vazgeçilmezi.',
     fiyat: 890,
-    img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80',
+    img: `${TZ_IMG}linen-maxi-dress-hadrians-gate.jpg`,
     bedenler: ['XS','S','M','L','XL','XXL'],
     renkler: ['Doğal Krem','Açık Gri','Toprak'],
   },
@@ -19,7 +34,7 @@ const URUNLER = [
     baslik: 'Kadın Pamuk Oversize Gömlek',
     aciklama: '%100 organik pamuktan dokunmuş, oversize kesim, uzun kollu günlük gömlek. Hem iş hem de rahat günler için ideal. Yıkamaya dayanıklı, solmaz renkler.',
     fiyat: 650,
-    img: 'https://images.unsplash.com/photo-1603344204980-4edb0ea63148?w=600&q=80',
+    img: `${TZ_IMG}linen-dress-white-garden.jpg`,
     bedenler: ['XS','S','M','L','XL'],
     renkler: ['Beyaz','Açık Mavi','Çizgili'],
   },
@@ -28,7 +43,7 @@ const URUNLER = [
     baslik: 'Kadın Keten Wide-Leg Pantolon',
     aciklama: 'Yüksek belli, bol paçalı %100 keten pantolon. Ofisten sahile her ortama uyum sağlar. Elastik bel bantlı, yan cepli konforlu kesim.',
     fiyat: 720,
-    img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80',
+    img: `${TZ_IMG}linen-jacket-couple-harbour-antalya.jpg`,
     bedenler: ['XS','S','M','L','XL','XXL'],
     renkler: ['Bej','Haki','Siyah','Beyaz'],
   },
@@ -37,7 +52,7 @@ const URUNLER = [
     baslik: 'Kadın Pamuk Midi Etek',
     aciklama: 'Midi boy, %100 pamuk, hafif ve akışkan yapılı günlük etek. Elastik bel, A-line kesim. Yazın serinliği, baharda zarafeti.',
     fiyat: 580,
-    img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&q=80',
+    img: `${TZ_IMG}linen-dress-slit-hadrians-gate-antalya.jpg`,
     bedenler: ['XS','S','M','L','XL'],
     renkler: ['Ekru','Terracotta','Lacivert'],
   },
@@ -46,7 +61,7 @@ const URUNLER = [
     baslik: 'Kadın Keten Kimono Hırka',
     aciklama: 'Açık kesim, %100 keten kumaş kimono hırka. Plaj üstü, ev içi veya dışarıda şık bir katman. Uzun boy, bağcıksız serbest kesim.',
     fiyat: 760,
-    img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=80',
+    img: `${TZ_IMG}linen-jacket-couple-kaleici-antalya.jpg`,
     bedenler: ['S/M','L/XL','XXL'],
     renkler: ['Doğal Krem','Açık Kahve','Beyaz'],
   },
@@ -57,7 +72,7 @@ const URUNLER = [
     baslik: 'Erkek Keten Yazlık Gömlek',
     aciklama: '%100 keten, hafif dokulu erkek gömleği. Sıcak havalarda nefes alan yapısıyla terletmez. Düğmeli yaka, yarım kollu seçenek mevcut.',
     fiyat: 680,
-    img: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80',
+    img: `${TZ_IMG}linen-shirt-man-tea-antalya.jpg`,
     bedenler: ['S','M','L','XL','XXL','3XL'],
     renkler: ['Beyaz','Açık Mavi','Bej','Haki'],
   },
@@ -66,7 +81,7 @@ const URUNLER = [
     baslik: 'Erkek Pamuk Slim Pantolon',
     aciklama: '%100 organik pamuk, slim fit kesim erkek pantolonu. Günlük ve yarı resmi kullanıma uygun. Bel bandı ayarlanabilir, iki yan cep.',
     fiyat: 750,
-    img: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=80',
+    img: `${TZ_IMG}linen-shirt-trousers-man-castle-antalya.jpg`,
     bedenler: ['28','30','32','34','36','38'],
     renkler: ['Lacivert','Haki','Gri','Bej'],
   },
@@ -75,7 +90,7 @@ const URUNLER = [
     baslik: 'Erkek Keten-Pamuk Takım',
     aciklama: '%100 keten-pamuk karışımı 2 parça takım. Hafif blazer ceket ve slim pantolon. Düğün, davet ve özel günler için doğal ve şık seçenek.',
     fiyat: 1850,
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+    img: `${TZ_IMG}linen-jacket-couple-harbour-antalya.jpg`,
     bedenler: ['S','M','L','XL','XXL'],
     renkler: ['Doğal Krem','Açık Gri','Bej'],
   },
@@ -84,7 +99,7 @@ const URUNLER = [
     baslik: 'Erkek Pamuk Polo Tişört',
     aciklama: '%100 organik pamuk polo yaka tişört. Hafif pique dokusundan üretilmiş, günlük ve spor kullanıma uygun. Solmaz boyama.',
     fiyat: 420,
-    img: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&q=80',
+    img: `${TZ_IMG}linen-shirt-man-harbour-antalya.jpg`,
     bedenler: ['S','M','L','XL','XXL','3XL'],
     renkler: ['Beyaz','Lacivert','Haki','Terracotta'],
   },
@@ -93,7 +108,7 @@ const URUNLER = [
     baslik: 'Erkek Keten Şort',
     aciklama: '%100 keten, diz üstü boy erkek şort. Elastik ve ip bağcıklı bel, yan ve arka cep. Plaj, tatil ve günlük kullanım için ideal.',
     fiyat: 480,
-    img: 'https://images.unsplash.com/photo-1591195853828-11db59a44f43?w=600&q=80',
+    img: `${TZ_IMG}linen-shirt-trousers-man-castle-antalya.jpg`,
     bedenler: ['S','M','L','XL','XXL'],
     renkler: ['Bej','Haki','Beyaz','Lacivert'],
   },
@@ -104,7 +119,7 @@ const URUNLER = [
     baslik: 'Çocuk Keten Elbise (Kız)',
     aciklama: 'Kız çocukları için %100 keten, kolsuz A-line elbise. Omuz askılı, bağcıklı sırt. Nefes alan yapısı hassas ciltler için idealdir.',
     fiyat: 420,
-    img: 'https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-hadrians-gate-antalya.jpg`,
     bedenler: ['2-3Y','4-5Y','6-7Y','8-9Y','10-11Y','12Y'],
     renkler: ['Pembe','Ekru','Açık Mavi'],
   },
@@ -113,7 +128,7 @@ const URUNLER = [
     baslik: 'Çocuk Pamuk Takım (Erkek)',
     aciklama: 'Erkek çocukları için %100 organik pamuk, kısa kollu gömlek + şort takım. Yumuşak ve dayanıklı, aktif çocuklar için tasarlandı.',
     fiyat: 560,
-    img: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-shirt-shorts-kaleici.jpg`,
     bedenler: ['2-3Y','4-5Y','6-7Y','8-9Y','10-11Y'],
     renkler: ['Mavi-Beyaz','Bej','Haki'],
   },
@@ -122,7 +137,7 @@ const URUNLER = [
     baslik: 'Çocuk Keten Yazlık Tulum',
     aciklama: 'Hem kız hem erkek çocuklar için unisex %100 keten tulum. Çıtçıtlı kapanma, geniş kesim. Yaz sıcaklarında en konforlu seçenek.',
     fiyat: 490,
-    img: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-cobblestone-antalya.jpg`,
     bedenler: ['2-3Y','4-5Y','6-7Y','8-9Y','10-11Y','12Y'],
     renkler: ['Ekru','Açık Gri','Terracotta'],
   },
@@ -131,7 +146,7 @@ const URUNLER = [
     baslik: 'Çocuk Pamuk Pijama Takımı',
     aciklama: '%100 organik pamuk, yumuşak dokulu çocuk pijama takımı. Uzun kollu üst + uzun pantolon. Dört mevsim kullanıma uygun, hipoalerjenik.',
     fiyat: 520,
-    img: 'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-hadrians-gate-antalya.jpg`,
     bedenler: ['2-3Y','4-5Y','6-7Y','8-9Y','10-11Y','12Y'],
     renkler: ['Açık Mavi','Pembe','Ekru'],
   },
@@ -142,7 +157,7 @@ const URUNLER = [
     baslik: 'Bebek Keten Tulum',
     aciklama: 'Yeni doğan ve küçük bebekler için %100 doğal keten tulum. Çıtçıtlı kapanma, hassas deri dostu. Formaldehit içermez, Oeko-Tex sertifikalı.',
     fiyat: 380,
-    img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-cobblestone-antalya.jpg`,
     bedenler: ['0-3M','3-6M','6-9M','9-12M','12-18M'],
     renkler: ['Ekru','Açık Pembe','Açık Mavi'],
   },
@@ -151,7 +166,7 @@ const URUNLER = [
     baslik: 'Bebek Pamuk Zıbın Seti (5li)',
     aciklama: '%100 organik pamuk, 5 adet zıbın seti. Çıtçıtlı, farklı renk ve desenlerde. Hassas bebek ciltleri için en güvenli seçenek.',
     fiyat: 450,
-    img: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-shirt-shorts-kaleici.jpg`,
     bedenler: ['0-3M','3-6M','6-9M','9-12M'],
     renkler: ['Karışık Pastel','Beyaz Set','Ekru Set'],
   },
@@ -160,7 +175,7 @@ const URUNLER = [
     baslik: 'Bebek Keten Şapka + Elbise Set',
     aciklama: 'Bebek kız için %100 keten, kolsuz elbise ve geniş kenarlı şapka seti. Güneş koruması yüksek, nefes alan yapı. Fotoğraf çekimleri için ideal.',
     fiyat: 520,
-    img: 'https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-hadrians-gate-antalya.jpg`,
     bedenler: ['3-6M','6-9M','9-12M','12-18M','18-24M'],
     renkler: ['Ekru','Pembe','Açık Sarı'],
   },
@@ -169,7 +184,7 @@ const URUNLER = [
     baslik: 'Bebek Pamuk Uyku Tulumu',
     aciklama: '%100 organik pamuk uyku tulumu. Bebek geceleri güvenle uyusun diye tasarlandı. Fermuar kapanma, ayak kısmı açılabilir.',
     fiyat: 490,
-    img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
+    img: `${TZ_IMG}kids-linen-clothing-cobblestone-antalya.jpg`,
     bedenler: ['0-6M','6-12M','12-18M','18-24M'],
     renkler: ['Ekru','Açık Mavi','Açık Pembe'],
   },
@@ -289,7 +304,7 @@ export default function DogalGiyimClient() {
         .kart{background:#fff;border-radius:4px;overflow:hidden;
               box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
         .kart:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
-        .kart-img{width:100%;height:280px;object-fit:cover;display:block;cursor:pointer}
+        .kart-img{width:100%;height:280px;object-fit:cover;object-position:center 25%;display:block;cursor:pointer}
         .kart-grup{position:absolute;top:.8rem;left:.8rem;background:var(--yesil);
                    color:#fff;font-family:var(--sans);font-size:.58rem;
                    letter-spacing:.15em;text-transform:uppercase;padding:.25rem .65rem;border-radius:1px}
@@ -325,7 +340,7 @@ export default function DogalGiyimClient() {
                  display:flex;align-items:center;justify-content:center;padding:1rem}
         .modal{background:#fff;border-radius:4px;max-width:680px;width:100%;
                max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr}
-        .modal-img{height:100%;min-height:400px;object-fit:cover}
+        .modal-img{height:100%;min-height:400px;object-fit:cover;object-position:center 25%}
         .modal-body{padding:2rem;overflow-y:auto}
         .modal-close{position:absolute;top:1rem;right:1rem;background:#fff;
                      border:none;width:32px;height:32px;border-radius:50%;
@@ -479,6 +494,24 @@ export default function DogalGiyimClient() {
         })}
       </div>
 
+      {/* TERZİ CAN ÖZEL DİKİM ÖRNEKLERİ — gerçek stil fotoğrafları (terzihizmeti.com.tr/linen ile ortak) */}
+      <div className="seo-sec">
+        <h2>Terzi Can Keten &amp; Pamuk Özel Dikim Örnekleri</h2>
+        <p className="sans" style={{ marginBottom: '1rem' }}>
+          Bay, bayan ve çocuk modellerinde ölçüye göre özel dikim örnekleri. Kendi modelinizi gönderin, model ve kalıp çıkaralım; seri ve fason üretim de yapıyoruz.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: '.6rem', marginBottom: '1rem' }}>
+          {ORNEKLER.map((o) => (
+            <img key={o.f} src={`https://terzihizmeti.com.tr/linen/${o.f}`} alt={o.alt} width={o.w} height={o.h}
+              style={{ width: '100%', height: 240, objectFit: 'cover', objectPosition: 'center 25%', display: 'block', borderRadius: 4 }}
+              loading="lazy" decoding="async" />
+          ))}
+        </div>
+        <p className="sans">
+          <a href="https://terzihizmeti.com.tr/keten-pamuk-ozel-dikim" style={{ textDecoration: 'underline' }}>Tüm modeller ve sipariş: Terzi Can Keten &amp; Pamuk Özel Dikim</a>
+        </p>
+      </div>
+
       {/* SEO TEXT SECTION */}
       <div className="seo-sec">
         <h2>%100 Doğal Keten & Pamuk Neden Tercih Edilmeli?</h2>
@@ -487,6 +520,11 @@ export default function DogalGiyimClient() {
           serinletir, kış aylarında ise vücut ısısını dengeler. Kimyasal işlem görmemiş organik kumaşlar, hassas ciltler ve
           bebekler için en güvenli seçenektir. Sürdürülebilir moda anlayışıyla üretilen koleksiyonumuz; kadın, erkek, çocuk
           ve bebek kategorilerinde geniş bir yelpazeye sahiptir. Türkiye'de üretilmiş, kapıda ödeme seçeneğiyle sipariş verin.
+        </p>
+        <p className="sans">
+          Kendi modelinizi diktirmek, model ve kalıp çıkarmak ya da seri ve fason üretim yaptırmak isterseniz:{' '}
+          <a href="https://terzihizmeti.com.tr/keten-pamuk-ozel-dikim" style={{ textDecoration: 'underline' }}>Terzi Can — Keten &amp; Pamuk Özel Dikim ve Seri Üretim</a>.
+          Siparişler Avrupa, Rusya ve diğer ülkelere gönderilir.
         </p>
       </div>
 
