@@ -89,9 +89,9 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
 // ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Fermuar Değişimi Fiyatı 2026 Antalya · 300 TL | Terzi Can' },
+  title: { absolute: 'Fermuar Değişimi 300 TL · Aynı Gün Teslim | Terzi Can' },
   description:
-    'Fermuar değişimi ne kadar? Antalya: pantolon, kot, etek 200 TL, mont ceket 300 TL, çanta 250 TL\'den. 24 saatte teslim, her gün 08–23. ☎ ' + PHONE,
+    'Fermuar değişimi ne kadar? Pantolon, kot, etek, mont, ceket ve çanta fermuarı 300 TL\'den. Çoğu iş aynı gün teslim, her gün 08–23. ☎ ' + PHONE,
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
@@ -167,7 +167,7 @@ const jsonLd = {
       offers: {
         '@type': 'Offer',
         name: 'Fermuar değişimi (başlangıç fiyatı)',
-        price: '200',
+        price: '300',
         priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
         url: SITE_URL,
@@ -249,7 +249,7 @@ export default function FermuarDegisimiPage() {
       <section style={{ padding: '2rem 1.25rem 0' }}>
         <div style={{ ...wrap, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '.8rem' }}>
           {[
-            ['Başlangıç fiyatı', '200 TL\'den'],
+            ['Başlangıç fiyatı', '300 TL\'den'],
             ['Teslim süresi', '24 saat · acilde aynı gün'],
             ['Çalışma saatleri', `Her gün ${HOURS}`],
             ['Servis bölgesi', 'Konyaaltı ve Antalya geneli'],

@@ -43,7 +43,7 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Tamir Tadilat Terzi Antalya · Fotoğraftan Fiyat | Terzi Can";
+const PAGE_TITLE = "Tamir Tadilat Terzi Antalya · Paça ₺200, Fermuar ₺300";
 const PAGE_DESC  =
   "Bay bayan tamir tadilat: yırtığı dikme, paça ₺200, fermuar ₺300. WhatsApp'tan fotoğraf at, fiyat al. Otele ve eve terzi, 08:00–23:00. ☎ " + PHONE;
 
