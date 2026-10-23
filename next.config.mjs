@@ -23,6 +23,14 @@ const nextConfig = {
     minimumCacheTTL: 2592000,
   },
 
+  // /hesapla → public/hesapla-static (statik hesaplama araçları)
+  async rewrites() {
+    return [
+      { source: '/hesapla', destination: '/hesapla-static/index.html' },
+      { source: '/hesapla/:path*', destination: '/hesapla-static/:path*/index.html' },
+    ]
+  },
+
   async redirects() {
     return [
       // www → www'siz yönlendirme
