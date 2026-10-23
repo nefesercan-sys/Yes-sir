@@ -27,28 +27,16 @@ export const KONYAALTI_MAHALLELERI: Mahalle[] = [
   { slug: 'guzeloba', ad: 'Güzeloba', lat: 36.8558, lng: 30.7889, blurb: 'Lara-Güzeloba hattındaki otellere ekspres kurye desteği.' },
 ];
 
-// Antalya ilçe ve turistik bölgeleri
-// (Resmi ilçe: Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Kemer, Serik,
-//  Manavgat, Alanya, Gazipaşa, Kaş, Finike, Kumluca, Elmalı, Korkuteli.
-//  Lara, Belek, Side, Kalkan turistik bölge/semt olarak eklenmiştir.)
+// Antalya'da GERÇEKTEN hizmet verilen bölgeler (ilçe sayfası yalnızca bunlar için vardır).
+// Hizmet verilmeyen ilçeler (Elmalı, Korkuteli, Kaş, Kalkan, Finike, Kumluca, Alanya, Gazipaşa, Manavgat, Serik,
+// Kemer, Kepez, Döşemealtı) kasıtlı olarak ÇIKARILDI: sayfaları 404 döner, sitemap ve iç linklerde yer almaz.
 export const ANTALYA_ILCELERI: Lokasyon[] = [
   { slug: 'konyaalti', ad: 'Konyaaltı', lat: 36.8608, lng: 30.6339 },
   { slug: 'muratpasa', ad: 'Muratpaşa', lat: 36.8850, lng: 30.7061 },
-  { slug: 'kepez', ad: 'Kepez', lat: 36.9214, lng: 30.7169 },
   { slug: 'lara', ad: 'Lara', lat: 36.8558, lng: 30.7889 },
-  { slug: 'dosemealti', ad: 'Döşemealtı', lat: 37.0000, lng: 30.5667 },
+  { slug: 'kundu', ad: 'Kundu', lat: 36.8583, lng: 30.8531 },
   { slug: 'aksu', ad: 'Aksu', lat: 36.9139, lng: 30.8306 },
-  { slug: 'kemer', ad: 'Kemer', lat: 36.6019, lng: 30.5597 },
   { slug: 'belek', ad: 'Belek', lat: 36.8625, lng: 31.0561 },
-  { slug: 'serik', ad: 'Serik', lat: 36.9161, lng: 31.1006 },
-  { slug: 'manavgat', ad: 'Manavgat', lat: 36.7867, lng: 31.4425 },
   { slug: 'side', ad: 'Side', lat: 36.7673, lng: 31.3893 },
-  { slug: 'alanya', ad: 'Alanya', lat: 36.5438, lng: 31.9998 },
-  { slug: 'gazipasa', ad: 'Gazipaşa', lat: 36.2708, lng: 32.3253 },
-  { slug: 'kas', ad: 'Kaş', lat: 36.2019, lng: 29.6408 },
-  { slug: 'kalkan', ad: 'Kalkan', lat: 36.2664, lng: 29.4181 },
-  { slug: 'finike', ad: 'Finike', lat: 36.2989, lng: 30.1503 },
-  { slug: 'kumluca', ad: 'Kumluca', lat: 36.3697, lng: 30.2867 },
-  { slug: 'elmali', ad: 'Elmalı', lat: 36.7381, lng: 29.9142 },
-  { slug: 'korkuteli', ad: 'Korkuteli', lat: 37.0639, lng: 30.1953 },
+  { slug: 'beldibi', ad: 'Beldibi', lat: 36.7122, lng: 30.5622 },
 ];

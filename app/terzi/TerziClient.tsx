@@ -895,7 +895,7 @@ export default function TerziClient({ gbp1 }: Props) {
         {/* ANTALYA İLÇELERİ — iç linkleme */}
         <section aria-labelledby="antalya-ilceleri-title" style={{ background: '#f7faf9', padding: '3rem 1.5rem' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Antalya'nın Tüm İlçelerine ve Otellerine Hizmet Veriyoruz</h2>
+            <h2 id="antalya-ilceleri-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.2rem' }}>Hizmet Verdiğimiz Bölgeler</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', justifyContent: 'center' }}>
               {ANTALYA_ILCELERI.map(i => (
                 <Link key={i.slug} href={`/terzi/antalya/${i.slug}`} style={{ fontSize: '.8rem', color: '#2d8c6e', textDecoration: 'none', border: '1px solid #cfe8dd', padding: '.5rem 1rem', borderRadius: 20 }}>

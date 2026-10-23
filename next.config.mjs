@@ -32,6 +32,10 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+      // Hizmet verilmeyen ilçelerin eski sayfaları (Google'da dizinde kalmış olabilir) → terzi ana sayfası
+      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'manavgat', 'serik', 'kemer', 'kepez', 'dosemealti'].map((slug) => ({
+        source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
+      })),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
