@@ -133,7 +133,7 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Услуги ателье',
         itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 150, priceCurrency: 'TRY', minPrice: 150 } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 200, priceCurrency: 'TRY', minPrice: 200 } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Замена молнии' }, priceSpecification: { '@type': 'PriceSpecification', price: 120, priceCurrency: 'TRY', minPrice: 120 } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Подгонка по фигуре' }, priceSpecification: { '@type': 'PriceSpecification', price: 180, priceCurrency: 'TRY', minPrice: 180 } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Пошив платья на заказ' }, priceSpecification: { '@type': 'PriceSpecification', price: 800, priceCurrency: 'TRY', minPrice: 800 } },

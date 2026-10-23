@@ -343,7 +343,7 @@ function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [stri
     ru: [
       [`Есть ли портной ${loc}? Где ближайшее ателье?`, `Наша мастерская — в Хурме (Коньяалты). Для района ${n} забираем вещи с вашего адреса или из отеля и возвращаем; выезд в отели и на дом бесплатный. Пишите в WhatsApp ежедневно с 08:00 до 23:00.`],
       [`Как быстро делают ${by('paca').q.ru} и ${by('fermuar').q.ru} ${loc}?`, 'Подшив и ушивание брюк, а также замена или ремонт молнии обычно делаем в тот же день; точный срок зависит от работы и загрузки и уточняется в WhatsApp.'],
-      [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного платья — от ₺800, вечернего — от ₺400; точную цену называем по фото и объёму работ. Вечерние платья обычно готовы на следующий день; для свадебных срок зависит от объёма работы.'],
+      [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного и вечернего платья — от ₺800; точную цену называем по фото и объёму работ. Вечерние платья обычно готовы на следующий день; для свадебных срок зависит от объёма работы.'],
       [`За сколько дней делают ${by('elbise-dikim').q.ru} ${loc}?`, 'Пошив платья обычно занимает около 3 дней. Переделка или ремонт платья, пиджака, рубашки, куртки и вечернего платья — обычно около 1 дня; точный срок уточняется в WhatsApp.'],
       [`Есть ли услуги портного для туристов ${loc}?`, 'Да. Мы говорим по-русски, по-английски, по-турецки и по-немецки; выезд в отели и на дом бесплатный. Пришлите фото в WhatsApp и узнайте цену.'],
     ],
@@ -402,24 +402,24 @@ function serviceFaq(lang: Lang, s: Service): [string, string][] {
   const time = timeOf(lang, s);
   return {
     tr: [
-      [`Antalya'da ${s.vars.tr[0]} nerede yapılır?`, `Terzi Can atölyesinde, Konyaaltı Hurma'da. ${s.intro.tr} Otel ve eve ücretsiz servis vardır, her gün 08:00–23:00 açığız.`],
+      [`Antalya'da ${s.vars.tr[0]} nerede yapılır?`, `Terzi Can atölyesinde, Konyaaltı Hurma'da. ${s.intro.tr} Konyaaltı'nda otel ve eve servis ücretsizdir, diğer bölgelerde ücret mesafeye göre belirlenir. Her gün 08:00–23:00 açığız.`],
       [`${nm} ne kadar sürer ve kaç TL?`, `${time}.${price ? ' ' + price + '; kesin fiyat kumaşa ve işlem detayına göre söylenir.' : ' Fiyat için kıyafetin fotoğrafını WhatsApp\'tan gönderin.'}`],
-      [`${nm} için otelime veya evime gelir misiniz?`, 'Evet, otel ve eve alım-teslim servisimiz ücretsizdir. Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Belek, Side ve Kemer gibi bölgelerde hizmet veriyoruz.'],
+      [`${nm} için otelime veya evime gelir misiniz?`, 'Evet. Konyaaltı\'nda alım-teslim ücretsizdir; Muratpaşa, Lara, Güzeloba, Kundu, Belek ve Side gibi bölgelerde servis ücreti mesafeye göre belirlenir.'],
     ],
     en: [
       [`Where can I get ${s.vars.en[0]} in Antalya?`, `At the Terzi Can workshop in Hurma, Konyaaltı. ${s.intro.en} Free service to hotels and homes; open daily 08:00–23:00.`],
       [`How long does ${nm.toLowerCase()} take and what does it cost?`, `${time}.${price ? ' ' + price + '; the exact price depends on the fabric and the work.' : ' Send a photo of the garment on WhatsApp for a price.'}`],
-      [`Can you come to my hotel or home for ${nm.toLowerCase()}?`, 'Yes, pick-up and delivery to hotels and homes is free. We serve areas such as Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Belek, Side and Kemer.'],
+      [`Can you come to my hotel or home for ${nm.toLowerCase()}?`, 'Yes. Pick-up and delivery is free in Konyaaltı; in areas such as Muratpaşa, Lara, Güzeloba, Kundu, Belek and Side the service fee depends on the distance.'],
     ],
     ru: [
-      [`Где в Анталье сделать: ${s.vars.ru[0]}?`, `В мастерской Terzi Can в Хурме (Коньяалты). ${s.intro.ru} Выезд в отели и на дом бесплатный; работаем ежедневно 08:00–23:00.`],
+      [`Где в Анталье сделать: ${s.vars.ru[0]}?`, `В мастерской Terzi Can в Хурме (Коньяалты). ${s.intro.ru} В Коньяалты выезд в отели и на дом бесплатный, в другие районы — по расстоянию; работаем ежедневно 08:00–23:00.`],
       [`Сколько времени занимает «${nm}» и сколько это стоит?`, `${time}.${price ? ' ' + price + '; точная цена зависит от ткани и объёма работ.' : ' Пришлите фото вещи в WhatsApp — назовём цену.'}`],
-      [`Приедете ли вы в отель или домой: «${nm}»?`, 'Да, забор и доставка в отели и на дом бесплатны. Работаем в Коньяалты, Муратпаше, Ларе, Гюзельобе, Кунду, Белеке, Сиде и Кемере.'],
+      [`Приедете ли вы в отель или домой: «${nm}»?`, 'Да. В Коньяалты забор и доставка бесплатны; в Муратпаше, Ларе, Гюзельобе, Кунду, Белеке и Сиде стоимость зависит от расстояния.'],
     ],
     de: [
       [`Wo kann ich in Antalya „${s.vars.de[0]}“ lassen?`, `In der Werkstatt von Terzi Can in Hurma, Konyaaltı. ${s.intro.de} Kostenloser Service zu Hotels und nach Hause; täglich 08:00–23:00 geöffnet.`],
       [`Wie lange dauert „${nm}“ und was kostet es?`, `${time}.${price ? ' ' + price + '; der genaue Preis hängt vom Stoff und vom Aufwand ab.' : ' Foto des Kleidungsstücks per WhatsApp senden, dann nennen wir den Preis.'}`],
-      [`Kommen Sie für „${nm}“ ins Hotel oder nach Hause?`, 'Ja, Abholung und Lieferung zu Hotels und nach Hause sind kostenlos. Wir sind in Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Belek, Side und Kemer unterwegs.'],
+      [`Kommen Sie für „${nm}“ ins Hotel oder nach Hause?`, 'Ja. In Konyaaltı sind Abholung und Lieferung kostenlos; in Muratpaşa, Lara, Güzeloba, Kundu, Belek und Side richtet sich die Gebühr nach der Entfernung.'],
     ],
   }[lang] as [string, string][];
 }
@@ -937,7 +937,7 @@ export function KeywordBlock({ slug }: { slug: string }) {
       <div className="sl-sec"><div className="sl-ctr" style={{ maxWidth: 900 }}>
         <h2 id="kw-h" className="sl-sec-h sl-ff" style={{ fontSize: '1.4rem' }}>{d.name.tr} — terzi hizmetleri</h2>
         <p className="sl-sec-sub" style={{ margin: '.6rem 0 1.2rem' }}>
-          Paça kısaltma ve fermuar genellikle aynı gün; elbise, ceket, gömlek, mont ve abiye tadilatı genellikle ertesi gün; elbise dikimi genellikle 3 gün içinde. Kesin süre işe göre WhatsApp&apos;ta netleşir. Gelinlik tadilatı ₺800&apos;den, abiye ₺800&apos;den. Otel ve eve ücretsiz servis, her gün 08:00–23:00.
+          Paça kısaltma ve fermuar genellikle aynı gün; elbise, ceket, gömlek, mont ve abiye tadilatı genellikle ertesi gün; elbise dikimi genellikle 3 gün içinde. Kesin süre işe göre WhatsApp&apos;ta netleşir. Gelinlik tadilatı ₺800&apos;den, abiye ₺800&apos;den. Konyaaltı'nda otel ve eve ücretsiz servis, her gün 08:00–23:00.
         </p>
         <ul style={{ listStyle: 'none', padding: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.75)' }}>
           {popular.map((p) => (<li key={p}>✂️ {p}</li>))}

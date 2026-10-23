@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 };
 
 const FAQ = [
-  { q: "How much does a men's suit cost in Antalya?", a: `Starts from ₺2,500. Send your measurements via WhatsApp: ${PHONE}` },
+  { q: "How much does a men's suit cost in Antalya?", a: `The price depends on fabric and style. Send your measurements via WhatsApp: ${PHONE}` },
   { q: 'How does the online tailor service work?', a: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` },
   { q: 'Do you come to my hotel for ironing?', a: `Yes! Courier pickup and delivery to hotels in Antalya: free in Konyaaltı, priced by distance elsewhere. We agree the timing on WhatsApp. ${PHONE}` },
   { q: 'Is there an English-speaking tailor in Antalya?', a: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` },

@@ -118,9 +118,9 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Terzi Can — Tüm Terzilik ve Tekstil Hizmetleri 2026',
         itemListElement: [
-          offer('Paça Kısaltma', '150'),
+          offer('Paça Kısaltma', '200'),
           offer('Fermuar Değişimi', '200'),
-          offer('Bel Daraltma', '150'),
+          offer('Bel Daraltma', '200'),
           offer('Elbise Dikimi', '800'),
           offer('Kuru Temizleme', '300'),
           offer('Üniforma Üretimi', '1000'),
@@ -207,7 +207,7 @@ const jsonLd = {
       '@type': 'HowTo',
       '@id': `${SITE_URL}#howto-olcu`,
       name: 'Terzi Can ile Adrese Gelen Terzi Servisi Nasıl Çalışır?',
-      description: 'Ücretsiz eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
+      description: 'Konyaaltı\'nda ücretsiz, diğer bölgelerde mesafeye göre eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
       step: [
         { '@type': 'HowToStep', name: 'WhatsApp ile iletişim', text: `WhatsApp ${PHONE} üzerinden adresinizi ve hizmet talebinizi bildirin.` },
         { '@type': 'HowToStep', name: 'Terzi adresinize gelir', text: 'Anlaşılan saatte terzimiz adresinize gelir, yerinde ölçü alır.' },

@@ -59,7 +59,7 @@ export const metadata: Metadata = {
 };
 
 const FAQ = [
-  { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Ab ₺2.500. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
+  { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Der Preis hängt von Stoff und Modell ab. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
   { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
   { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu Hotels in Antalya: in Konyaaltı kostenlos, in anderen Bezirken nach Entfernung. Die Zeit klären wir per WhatsApp. ${PHONE}` },
   { q: 'Gibt es einen deutschsprachigen Schneider in Antalya?', a: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` },

@@ -172,8 +172,6 @@ const FIYAT_LISTESI = [
   { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: '24 saat'  },
   { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Aynı gün' },
   { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Aynı gün' },
-  { hizmet: 'Elbise Tamiri',             fiyat: '₺150',  sure: 'Aynı gün' },
-  { hizmet: 'Gömlek Tamiri',             fiyat: '₺150',  sure: 'Aynı gün' },
   { hizmet: 'T-Shirt Tamiri',            fiyat: '₺100',  sure: 'Aynı gün' },
   { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Aynı gün' },
   { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
@@ -184,18 +182,15 @@ const FIYAT_LISTESI = [
 ]
 
 const DIKIMLER = [
-  { hizmet: 'Erkek Takım Elbise',     fiyat: '₺2.500+', sure: '5–7 gün'   },
   { hizmet: 'Kadın Elbise / Tunik',   fiyat: '₺800+',   sure: '3–5 gün'   },
   { hizmet: 'Abiye / Gece Elbisesi',  fiyat: '₺1.200+', sure: '5–7 gün'   },
   { hizmet: 'Gelinlik Dikimi',        fiyat: '₺5.000+', sure: '14–21 gün' },
-  { hizmet: 'Gömlek / Bluz',          fiyat: '₺400+',   sure: '3–5 gün'   },
   { hizmet: 'Pantolon / Etek',        fiyat: '₺350+',   sure: '3–5 gün'   },
   { hizmet: 'Üniforma (adet başına)', fiyat: 'Teklif',  sure: '7–14 gün'  },
 ]
 
 const UTU_TEMIZLEME = [
   { hizmet: 'Gömlek Ütü',                      fiyat: '₺80',    sure: '2–6 saat'  },
-  { hizmet: 'Takım Elbise Buharlı Pres',       fiyat: '₺150',   sure: '2–6 saat'  },
   { hizmet: 'Abiye Buharlama',                 fiyat: '₺120',   sure: '2–6 saat'  },
   { hizmet: 'Çamaşır Yıkama + Kurutma',        fiyat: '₺80/kg', sure: '24 saat'   },
   { hizmet: 'Elbise Kuru Temizleme',           fiyat: '₺300',   sure: '24–48 saat'},

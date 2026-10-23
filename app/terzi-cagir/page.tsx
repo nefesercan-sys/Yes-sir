@@ -143,9 +143,7 @@ export default function TerziCagirPage() {
     ['Fermuar Tamiri', '₺300', 'Aynı gün'],
     ['Ceket Tamiri', '₺200', '24 saat'],
     ['Mont Tamiri', '₺200', '24 saat'],
-    ['Gömlek Tamiri', '₺150', 'Aynı gün'],
     ['T-Shirt Tamiri', '₺100', 'Aynı gün'],
-    ['Elbise Tamiri', '₺150+', '24 saat'],
     ['Abiye Tamiri', '₺800', '48 saat'],
     ['Elbise Dikimi', '₺800+', '3–5 gün'],
   ];
@@ -627,9 +625,7 @@ const FIYATLAR = [
   ['Fermuar Tamiri','₺300','Aynı gün'],
   ['Ceket Tamiri','₺200','24 saat'],
   ['Mont Tamiri','₺200','24 saat'],
-  ['Gömlek Tamiri','₺150','Aynı gün'],
   ['T-Shirt Tamiri','₺100','Aynı gün'],
-  ['Elbise Tamiri','₺150+','24 saat'],
   ['Abiye Tamiri','₺800','48 saat'],
   ['Elbise Dikimi','₺800+','3–5 gün'],
 ];

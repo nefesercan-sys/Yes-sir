@@ -36,7 +36,7 @@ const SERVICES = [
     title:'Menswear Tailoring', sub:'Suits · Shirts · Trousers · Blazers · Tuxedos',
     desc:'Made-to-measure menswear. Tailored for a perfect fit, from business meetings to special occasions. Local and imported fabric options.',
     feats:['Suit','Shirt','Trousers','Blazer','Tuxedo','Waistcoat'],
-    price:'₺800+', note:"Suits from ₺2,500", time:'3–7 days',
+    price:'₺800+', note:"Price quoted from photo and measurements", time:'3–7 days',
     waMsg:'Hello, I would like information about menswear tailoring.' },
   { id:'bayan-dikim', icon:'👗', badge:'', badgeColor:'',
     img: IMGS.bayan,
@@ -91,12 +91,9 @@ const SERVICES = [
 
 const PRICE_TABLE = [
   { cat:'Menswear', rows:[
-    ['Suit (2-piece)','₺2,500+','5–7 days'],
     ['Suit (3-piece)','₺3,200+','7–10 days'],
     ['Men\'s Shirt','₺800+','3–5 days'],
     ['Men\'s Trousers','₺700+','3–5 days'],
-    ['Blazer / Jacket','₺1,500+','5–7 days'],
-    ['Tuxedo','₺3,500+','7–14 days'],
   ]},
   { cat:'Womenswear', rows:[
     ['Everyday Dress','₺800+','3–5 days'],
@@ -108,7 +105,6 @@ const PRICE_TABLE = [
   ]},
   { cat:'Ironing & Cleaning', rows:[
     ['Shirt Ironing','₺80+','Same day'],
-    ['Suit Pressing','₺150+','Same day'],
     ['Dress Steaming','₺120+','Same day'],
     ['Coat Ironing','₺200+','24 hours'],
     ['Bulk Ironing (10+ items)','₺60+/item','Same day'],
@@ -133,7 +129,7 @@ const REVIEWS = [
 ];
 
 const FAQS: [string, string][] = [
-  ["How much does a men\'s suit cost in Antalya?", "Starts from ₺2,500. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
+  ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for ironing?", "Yes! Courier pickup and delivery to hotels in Antalya: free in Konyaaltı, priced by distance elsewhere. We agree the delivery time with you on WhatsApp."],
   ["What\'s the minimum order quantity for mass production?", "Quantities depend on the project. Samples, prototypes, small runs and large orders are quoted per project."],

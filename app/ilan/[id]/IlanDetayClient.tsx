@@ -398,7 +398,7 @@ function IlanDetayIcerik({ id }: { id: string }) {
             <div className="ozellikler-baslik">🧵 Antalya'da Terzi ve Tekstil Hizmeti</div>
             <p style={{ fontSize: '.82rem', color: 'var(--mid)', marginBottom: 12, lineHeight: 1.7 }}>
               Terzi Can, Konyaaltı: paça kısaltma, fermuar değişimi, elbise dikimi, kuru temizleme ve seri üretim.
-              Eve ve otele ücretsiz servis, her gün 08:00–23:00. WhatsApp: +90 531 898 64 18
+              Konyaaltı'nda eve ve otele ücretsiz servis, her gün 08:00–23:00. WhatsApp: +90 531 898 64 18
             </p>
             <div className="ozellikler" style={{ marginBottom: 0 }}>
               {TERZI_LINKLER.map(l => (

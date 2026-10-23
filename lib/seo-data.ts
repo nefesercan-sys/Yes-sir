@@ -253,7 +253,7 @@ export const SERVICES: Service[] = [
     priceText: {
       tr: 'Gelinlik tadilatı ₺800\'den, abiye tadilatı ₺800\'den başlar.',
       en: 'Wedding dress alteration starts from ₺800, evening dress alteration from ₺800.',
-      ru: 'Подгонка свадебного платья от ₺800, вечернего платья от ₺400.',
+      ru: 'Подгонка свадебного и вечернего платья от ₺800.',
       de: 'Brautkleid-Änderung ab ₺800, Abendkleid-Änderung ab ₺800.',
     },
     timeText: {

@@ -319,7 +319,6 @@ export default function EveGelenTerziPage() {
                   ['Kol Kısaltma','₺200+','48 saat'],
                   ['Abiye Tamiri','₺800+','48 saat'],
                   ['Gelinlik Tadilatı','₺800+','3–5 gün'],
-                  ['Erkek Takım Elbise Dikimi','₺2.500+','5–7 gün'],
                   ['Yırtık Onarımı','₺100+','Aynı gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
@@ -389,7 +388,7 @@ export default function EveGelenTerziPage() {
             </h2>
             {[
               ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın tüm ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
-              ['Araçlı terzi servisi ücretli mi?', 'Hayır! Araçlı terzi servisi tamamen ücretsizdir. Sadece yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
+              ['Araçlı terzi servisi ücretli mi?', 'Konyaaltı\'nda araçlı terzi servisi ücretsizdir, diğer bölgelerde mesafeye göre belirlenir. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],

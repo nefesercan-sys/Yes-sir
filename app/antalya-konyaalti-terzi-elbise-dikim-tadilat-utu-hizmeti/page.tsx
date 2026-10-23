@@ -155,8 +155,6 @@ const SERVICES = [
 const PRICES = [
   ['Paça Kısaltma', '₺200+', 'Aynı gün'],
   ['Bel Daraltma', '₺200+', '24 saat'],
-  ['Elbise Tamiri', '₺150+', 'Aynı gün'],
-  ['Gömlek Tamiri', '₺150+', 'Aynı gün'],
   ['T-Shirt Tamiri', '₺100+', 'Aynı gün'],
   ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
   ['Ceket / Mont Tamiri', '₺200+', '24 saat'],
@@ -164,10 +162,8 @@ const PRICES = [
   ['Abiye Tamiri', '₺800+', '24–48 saat'],
   ['Kadın Elbise Dikimi', '₺800+', '3–5 gün'],
   ['Abiye / Gece Elbisesi', '₺1.200+', '5–7 gün'],
-  ['Erkek Takım Elbise', '₺2.500+', '5–7 gün'],
   ['Gelinlik Dikimi', '₺5.000+', '14–21 gün'],
   ['Gömlek Ütü', '₺80+', '2–6 saat'],
-  ['Takım Elbise Pres', '₺150+', '2–6 saat'],
   ['Elbise Kuru Temizleme', '₺300+', '24–48 saat'],
   ['Mont Kuru Temizleme', '₺500+', '48 saat'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
@@ -177,7 +173,7 @@ const FAQS = [
   ['Konyaaltı Hurma, Liman, Uncalı mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
   ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+, abiye ₺1.200+, erkek takım ₺2.500+ . WhatsApp: ${PHONE_DISPLAY}`],
+  ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+. Diğer dikim işlerinde fiyat kumaş ve modele göre belirlenir; fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
   ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Konyaaltı içi ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
 ];

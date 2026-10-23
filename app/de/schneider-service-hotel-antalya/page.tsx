@@ -282,7 +282,6 @@ export default function SchneiderServiceHotelAntalyaPage() {
                   ['Ärmel kürzen','ab ₺200','48 Std'],
                   ['Abendkleid reparieren','ab ₺800','48 Std'],
                   ['Brautkleid ändern','ab ₺800','3–5 Tage'],
-                  ['Herrenanzug maßschneidern','ab ₺2.500','5–7 Tage'],
                   ['Riss reparieren','ab ₺100','Am selben Tag'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>

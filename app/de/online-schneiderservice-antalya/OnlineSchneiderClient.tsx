@@ -36,7 +36,7 @@ const SERVICES = [
     title:'Herrenschneiderei', sub:'Anzüge · Hemden · Hosen · Blazer · Smoking',
     desc:'Maßgeschneiderte Herrenbekleidung. Perfekte Passform als Ziel, vom Geschäftstermin bis zum besonderen Anlass. Einheimische und importierte Stoffe.',
     feats:['Anzug','Hemd','Hose','Blazer','Smoking','Weste'],
-    price:'₺800+', note:"Anzüge ab ₺2.500", time:'3–7 Tage',
+    price:'₺800+', note:"Preis nach Foto und Maßen", time:'3–7 Tage',
     waMsg:'Hallo, ich hätte gerne Informationen zur Herrenschneiderei.' },
   { id:'bayan-dikim', icon:'👗', badge:'', badgeColor:'',
     img: IMGS.bayan,
@@ -91,12 +91,9 @@ const SERVICES = [
 
 const PRICE_TABLE = [
   { cat:'Herrenschneiderei', rows:[
-    ['Anzug (2-teilig)','₺2.500+','5–7 Tage'],
     ['Anzug (3-teilig)','₺3.200+','7–10 Tage'],
     ['Herrenhemd','₺800+','3–5 Tage'],
     ['Herrenhose','₺700+','3–5 Tage'],
-    ['Blazer / Jacke','₺1.500+','5–7 Tage'],
-    ['Smoking','₺3.500+','7–14 Tage'],
   ]},
   { cat:'Damenschneiderei', rows:[
     ['Alltagskleid','₺800+','3–5 Tage'],
@@ -108,7 +105,6 @@ const PRICE_TABLE = [
   ]},
   { cat:'Bügeln & Reinigung', rows:[
     ['Hemd Bügeln','₺80+','Am selben Tag'],
-    ['Anzug Pressen','₺150+','Am selben Tag'],
     ['Kleid Dämpfen','₺120+','Am selben Tag'],
     ['Mantel Bügeln','₺200+','24 Stunden'],
     ['Sammelbügeln (10+ Stück)','₺60+/Stück','Am selben Tag'],
@@ -116,7 +112,6 @@ const PRICE_TABLE = [
   { cat:'Reparatur & Änderungen', rows:[
     ['Kürzen','₺200+','Am selben Tag'],
     ['Reißverschluss Austausch','₺300+','Am selben Tag'],
-    ['Bund Enger Machen','₺150+','24 Stunden'],
     ['Rissreparatur','₺100+','Am selben Tag'],
     ['Ärmel Kürzen','₺200+','24–48 Stunden'],
     ['Futter Austausch','₺300+','48 Stunden'],
@@ -133,7 +128,7 @@ const REVIEWS = [
 ];
 
 const FAQS: [string, string][] = [
-  ["Was kostet ein Herrenanzug in Antalya?", "Ab ₺2.500. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
+  ["Was kostet ein Herrenanzug in Antalya?", "Der Preis hängt von Stoff und Modell ab. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
   ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu Hotels in Antalya: in Konyaaltı kostenlos, sonst nach Entfernung. Den Liefertermin klären wir per WhatsApp."],
   ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Die Menge richtet sich nach dem Projekt. Muster, Prototypen, Kleinserien und Großaufträge werden projektbezogen kalkuliert."],
