@@ -425,6 +425,28 @@ function serviceFaq(lang: Lang, s: Service): [string, string][] {
 }
 
 // ── Metadata ────────────────────────────────────────────────
+// EN/RU/DE bölge sayfaları için ek anahtar kelimeler: ceket/mont, gömlek, etek, şort, fiyat, "yakınımda", otel, bay-bayan.
+function foreignExtraKeywords(lang: Lang, n: string): string[] {
+  if (lang === 'tr') return [];
+  return ({
+    en: [
+      `tailor near me ${n}`, `tailor near hotels ${n}`, `${n} tailor for hotel guests`, `${n} tailor men and women`,
+      `jacket alteration ${n}`, `coat alteration ${n}`, `shirt alteration ${n}`, `skirt hemming ${n}`, `shorts hemming ${n}`,
+      `${n} alteration prices`, `${n} tailor price`, `hemming price ${n}`, `zipper replacement price ${n}`,
+    ],
+    ru: [
+      `портной рядом ${n}`, `портной рядом с отелем ${n}`, `ателье для туристов ${n}`, `${n} ателье мужская и женская одежда`,
+      `ремонт куртки ${n}`, `подгонка пиджака ${n}`, `переделка рубашки ${n}`, `укоротить юбку ${n}`, `подшить шорты ${n}`,
+      `${n} ателье цены`, `${n} стоимость подшива`, `замена молнии цена ${n}`,
+    ],
+    de: [
+      `Schneider in der Nähe ${n}`, `Schneider Hotel ${n}`, `Schneiderei für Hotelgäste ${n}`, `${n} Schneider Damen und Herren`,
+      `Jacke ändern ${n}`, `Mantel kürzen ${n}`, `Hemd ändern ${n}`, `Rock kürzen ${n}`, `Shorts kürzen ${n}`,
+      `${n} Änderungsschneiderei Preise`, `Hose kürzen Preis ${n}`, `Reißverschluss wechseln Preis ${n}`,
+    ],
+  } as Record<string, string[]>)[lang];
+}
+
 export function districtMetadata(lang: Lang, d: District): Metadata {
   const c = districtCopy(lang, d);
   const url = abs(districtUrl(lang, d));
@@ -432,6 +454,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
     ...c.kw,
     ...SERVICES.slice(0, 8).map((s) => query(lang, d, s)),
     ...SERVICES.slice(0, 6).map((s) => `${d.name[lang]} ${s.vars[lang][0]}`),
+    ...foreignExtraKeywords(lang, d.name[lang]),
   ];
   return {
     metadataBase: new URL(SITE),
