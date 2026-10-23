@@ -135,7 +135,7 @@ const REVIEWS = [
 const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Ab ₺2.500. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
-  ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya. Den Liefertermin klären wir per WhatsApp."],
+  ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Kurierabholung und -lieferung zu Hotels in Antalya: in Konyaaltı kostenlos, sonst nach Entfernung. Den Liefertermin klären wir per WhatsApp."],
   ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Die Menge richtet sich nach dem Projekt. Muster, Prototypen, Kleinserien und Großaufträge werden projektbezogen kalkuliert."],
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],

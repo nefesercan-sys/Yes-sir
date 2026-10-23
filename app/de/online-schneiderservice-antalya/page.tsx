@@ -61,12 +61,16 @@ export const metadata: Metadata = {
 const FAQ = [
   { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Ab ₺2.500. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
   { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
-  { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu jedem Hotel in Antalya, am selben Tag. ${PHONE}` },
+  { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu Hotels in Antalya: in Konyaaltı kostenlos, in anderen Bezirken nach Entfernung. Die Zeit klären wir per WhatsApp. ${PHONE}` },
   { q: 'Gibt es einen deutschsprachigen Schneider in Antalya?', a: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` },
   { q: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?', a: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
   { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
   { q: 'Kann ich mir ein individuelles Kleid anfertigen lassen?', a: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` },
   { q: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?', a: `Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an. ${PHONE}` },
+  { q: "Wo kann ich in Antalya in meiner Nähe eine Hose kürzen lassen?", a: `Bei Terzi Can in Hurma, Konyaaltı, täglich von 08:00 bis 23:00 geöffnet. Hosen und Jeans kürzen ab ₺200, meist am selben Tag oder innerhalb von 24 Stunden. WhatsApp: ${PHONE}` },
+  { q: "Was kostet Kürzen und Reißverschluss wechseln in Antalya?", a: `Kürzen ab ₺200, Taille enger machen ab ₺200, Reißverschluss wechseln ab ₺300, Brautkleid ändern ab ₺800 (Preise 2026). Den genauen Preis nennen wir nach einem Foto per WhatsApp.` },
+  { q: "Ändern Sie auch Jacken, Mäntel, Hemden, Röcke und Shorts?", a: `Ja. Wir ändern und reparieren Jacken, Mäntel, Hemden, Röcke, Shorts, Kleider und Hosen für Damen und Herren. Senden Sie ein Foto per WhatsApp, wir nennen Preis und Dauer.` },
+  { q: "Ich bin nur wenige Tage im Hotel. Reicht die Zeit?", a: `Ja. Kürzen und Reparaturen sind meist am selben Tag oder innerhalb von 24 Stunden fertig. Wir holen die Kleidung im Hotel ab und bringen sie zurück (in Konyaaltı kostenlos, sonst nach Entfernung).` },
 ];
 
 export default function OnlineSchneiderservicePage() {
