@@ -228,6 +228,24 @@ export const SERVICES: Service[] = [
     },
   },
   {
+    id: 'ozel-dikim', icon: '✂️', time: 'none',
+    slug: { tr: 'ozel-dikim-antalya', en: 'custom-tailoring-made-to-measure', ru: 'poshiv-na-zakaz', de: 'massanfertigung-schneider' },
+    name: { tr: 'Özel Dikim (Ölçüye Göre)', en: 'Custom Tailoring (Made to Measure)', ru: 'Индивидуальный пошив на заказ', de: 'Maßanfertigung (Schneider nach Maß)' },
+    q: { tr: 'özel dikim', en: 'custom tailoring', ru: 'индивидуальный пошив', de: 'Maßanfertigung' },
+    intro: {
+      tr: 'Ölçünüze göre özel dikim: elbise, gömlek, pantolon, etek ve diğer giysiler. Model, kumaş ve ölçü birlikte belirlenir; süre ve fiyat işe göre WhatsApp\'tan netleşir.',
+      en: 'Custom tailoring made to your measurements: dresses, shirts, trousers, skirts and other garments. Style, fabric and size are decided together; timing and price are confirmed on WhatsApp.',
+      ru: 'Индивидуальный пошив по вашим меркам: платья, рубашки, брюки, юбки и другая одежда. Модель, ткань и размер выбираем вместе; срок и цену уточняем в WhatsApp.',
+      de: 'Maßanfertigung nach Ihren Maßen: Kleider, Hemden, Hosen, Röcke und weitere Kleidung. Schnitt, Stoff und Größe legen wir gemeinsam fest; Dauer und Preis klären wir per WhatsApp.',
+    },
+    vars: {
+      tr: ['özel dikim', 'özel dikim terzi', 'ölçüye göre dikim', 'ısmarlama dikim', 'özel terzi', 'kıyafet diktirme'],
+      en: ['custom tailoring', 'made to measure clothing', 'bespoke tailor', 'custom clothing tailor', 'get clothes made'],
+      ru: ['индивидуальный пошив', 'пошив одежды на заказ', 'пошив по меркам', 'ателье пошив одежды', 'заказать пошив одежды'],
+      de: ['Maßanfertigung', 'Schneider nach Maß', 'Kleidung nähen lassen', 'Maßschneiderei', 'Änderungsschneiderei und Maßanfertigung'],
+    },
+  },
+  {
     id: 'elbise-tamir', icon: '🧵', time: 'next',
     slug: { tr: 'elbise-tamiri-tadilati', en: 'dress-repair-alteration', ru: 'remont-i-pereshiv-platya', de: 'kleid-aendern-reparieren' },
     name: { tr: 'Elbise Tamiri ve Tadilatı', en: 'Dress Repair & Alteration', ru: 'Ремонт и переделка платьев', de: 'Kleider ändern und reparieren' },

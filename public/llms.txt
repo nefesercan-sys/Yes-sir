@@ -100,3 +100,14 @@ Official site indexes for search engine crawlers and LLM readers:
 - **Description:** A premier Turkish marketplace connecting producers, suppliers, service providers, and buyers across 20+ sectors including textiles, real estate, logistics, and local trades.
 
 *(Last updated: 2026-10-05. Refer to live site endpoints for dynamic pricing and real-time availability.)*
+
+---
+
+## 1c. Custom Tailoring (Özel Dikim) & Alterations — per language
+
+Terzi Can makes clothes to measure (custom tailoring) and does alterations/repairs in Konyaaltı, Antalya. Timing and price are confirmed on WhatsApp (+905318986418).
+
+- **TR (özel dikim, tamir, tadilat):** https://swaphubs.com/terzi/hizmet/ozel-dikim-antalya
+- **EN (custom tailoring, alterations):** https://swaphubs.com/en/tailor-services/custom-tailoring-made-to-measure
+- **RU (индивидуальный пошив, ремонт, подгонка):** https://swaphubs.com/ru/uslugi-portnogo/poshiv-na-zakaz
+- **DE (Maßanfertigung, Änderungen):** https://swaphubs.com/de/schneider-leistungen/massanfertigung-schneider
