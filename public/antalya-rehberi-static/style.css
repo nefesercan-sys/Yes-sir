@@ -25,3 +25,4 @@ footer{margin-top:40px;padding:22px 0;border-top:1px solid var(--line);color:var
 .langs{display:flex;gap:8px;margin-left:12px}.langs a{padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:.8rem;text-decoration:none;color:var(--mut)}.langs a.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 .sec ul{padding-left:20px}.sec li{margin:6px 0}.meta{font-size:.82rem;color:var(--mut);margin-bottom:10px}.cta{display:block;text-align:center;background:var(--acc);color:#fff;border-radius:10px;padding:12px;font-weight:700;text-decoration:none;margin:14px 0}.disc{font-size:.8rem;color:var(--mut)}
 @media(prefers-color-scheme:dark){.cta,.langs a.on{color:#06201d}}
+.rq form{display:grid;gap:10px;position:relative}.rq label{display:grid;gap:4px;font-size:.9rem}.rq input,.rq textarea{padding:10px;border:1px solid #cbd5d1;border-radius:8px;font:inherit}.rq .ck{display:block}.rq .ck input{margin-right:6px}.rq button{border:0;cursor:pointer}
