@@ -62,12 +62,52 @@
     var A = P * Math.pow(1 + r / n, n * y);
     show(root, rows([['Vade sonu tutar', tl(A), 1], ['Toplam kazanç', tl(A - P)], ['Anaparanın katı', nf.format(A / P) + ' kat']]) + '<p class="note">Stopaj ve vergiler dahil değildir.</p>');
   };
+  C.yakit = function (root, v) {
+    var km = num(v.km), t = num(v.tuk), f = num(v.fiyat), k = Math.max(1, Math.round(num(v.kisi) || 1));
+    if (!(km > 0) || !(t > 0) || !(f >= 0)) return bad(root, 'Yol, tüketim ve fiyatı doğru girin.');
+    var l = km * t / 100, m = l * f;
+    show(root, rows([['Gereken yakıt', nf.format(l) + ' litre'], ['Toplam yakıt maliyeti', tl(m), 1], ['Kişi başı (' + k + ' kişi)', tl(m / k)], ['Kilometre başına', tl(m / km)]]));
+  };
+  C.ihbar = function (root, v) {
+    var a = new Date(v.giris), b = new Date(v.cikis); if (isNaN(a) || isNaN(b)) return bad(root, 'İki tarihi de seçin.');
+    if (a > b) return bad(root, 'Çıkış tarihi girişten önce olamaz.');
+    var ay = (b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() - a.getMonth() + (b.getDate() >= a.getDate() ? 0 : -1);
+    var hf = ay < 6 ? 2 : ay < 18 ? 4 : ay < 36 ? 6 : 8, son = new Date(b.getTime() + hf * 7 * 864e5);
+    show(root, rows([['Çalışma süresi', Math.floor(ay / 12) + ' yıl ' + (ay % 12) + ' ay'], ['Bildirim (ihbar) süresi', hf + ' hafta', 1], ['Süre sonu (bildirimden itibaren)', son.toLocaleDateString('tr-TR')]]) + '<p class="note">4857 sayılı İş Kanunu md. 17 asgari sürelerine göre tahmindir; sözleşmeniz daha uzun süre öngörebilir.</p>');
+  };
+  C.kidem = function (root, v) {
+    var a = new Date(v.giris), b = new Date(v.cikis), br = num(v.brut), tv = num(v.tavan);
+    if (isNaN(a) || isNaN(b) || a > b) return bad(root, 'Giriş ve çıkış tarihlerini doğru seçin.');
+    if (!(br > 0)) return bad(root, 'Brüt ücreti girin.');
+    var y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), g = b.getDate() - a.getDate();
+    if (g < 0) { m--; g += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); } if (m < 0) { y--; m += 12; }
+    var yil = y + m / 12 + g / 365, esas = tv > 0 ? Math.min(br, tv) : br, brut = esas * yil, dv = brut * 0.00759;
+    show(root, rows([['Çalışma süresi', y + ' yıl ' + m + ' ay ' + g + ' gün'], ['Hesaba esas aylık ücret', tl(esas)], ['Brüt kıdem tazminatı', tl(brut), 1], ['Damga vergisi (binde 7,59)', tl(dv)], ['Net tahmini tutar', tl(brut - dv), 1]]) + '<p class="note">Tahmindir. Tazminata hak kazanma koşulları ve güncel tavan için resmi kaynaklara veya avukata danışın.' + (tv > 0 ? '' : ' Tavan girmediniz; tutar tavana takılabilir.') + '</p>');
+  };
+  C.kira = function (root, v) {
+    var k = num(v.kira), o = num(v.oran);
+    if (!(k > 0) || isNaN(o)) return bad(root, 'Kira ve oranı girin.');
+    var y = k * (1 + o / 100);
+    show(root, rows([['Yeni aylık kira', tl(y), 1], ['Aylık artış', tl(y - k)], ['Yıllık ek yük', tl((y - k) * 12)]]));
+  };
+  C.ortalama = function (root, v) {
+    var a = String(v.liste).split(/[\s;]+|,(?!\d)/).map(num).filter(function (x) { return !isNaN(x); });
+    if (!a.length) return bad(root, 'En az bir sayı girin.');
+    var s = a.reduce(function (p, c) { return p + c; }, 0);
+    show(root, rows([['Ortalama', nf.format(s / a.length), 1], ['Toplam', nf.format(s)], ['Adet', ni.format(a.length)], ['En küçük / en büyük', nf.format(Math.min.apply(null, a)) + ' / ' + nf.format(Math.max.apply(null, a))]]));
+  };
+  C.birikim = function (root, v) {
+    var H = num(v.hedef), n = Math.round(num(v.ay)), o = num(v.oran) / 100;
+    if (!(H > 0) || !(n > 0) || !(o >= 0)) return bad(root, 'Hedef, süre ve oranı doğru girin.');
+    var r = Math.pow(1 + o, 1 / 12) - 1, aylik = r === 0 ? H / n : H * r / (Math.pow(1 + r, n) - 1);
+    show(root, rows([['Aylık biriktirmeniz gereken', tl(aylik), 1], ['Toplam yatırdığınız', tl(aylik * n)], ['Getiri payı', tl(H - aylik * n)]]) + '<p class="note">Getiri varsayımdır, garanti değildir; vergiler dahil değildir.</p>');
+  };
   document.querySelectorAll('[data-calc]').forEach(function (root) {
     var kind = root.getAttribute('data-calc'), form = $(root, 'form');
     var pre = {}; try { pre = JSON.parse(root.getAttribute('data-preset') || '{}'); } catch (e) {}
     Object.keys(pre).forEach(function (k) { var el = form.elements[k]; if (el) el.value = pre[k]; });
     function run(e) { if (e) e.preventDefault(); var v = {}; for (var i = 0; i < form.elements.length; i++) { var el = form.elements[i]; if (el.name) v[el.name] = el.value; } C[kind](root, v); }
     form.addEventListener('submit', run);
-    if (pre && Object.keys(pre).length && kind !== 'yas' && kind !== 'tarih') run();
+    if (pre && Object.keys(pre).length && kind !== 'yas' && kind !== 'tarih' && kind !== 'ihbar' && kind !== 'kidem') run();
   });
 })();
