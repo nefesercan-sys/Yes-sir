@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
+import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
@@ -80,6 +81,8 @@ export async function GET() {
     ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d), (x) => isIndexable(x, d.slug)) }))),
     // 📞 İletişim sayfaları (4 dil, karşılıklı hreflang) — "terzi can telefon / iletişim / adres" aramaları
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
+    // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
+    ...(['keten', 'tekstil'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))
