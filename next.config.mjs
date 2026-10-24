@@ -26,6 +26,8 @@ const nextConfig = {
   // /hesapla → public/hesapla-static (statik hesaplama araçları)
   async rewrites() {
     return [
+      { source: '/antalya-rehberi', destination: '/antalya-rehberi-static/index.html' },
+      { source: '/antalya-rehberi/:path*', destination: '/antalya-rehberi-static/:path*/index.html' },
       { source: '/hesapla', destination: '/hesapla-static/index.html' },
       { source: '/hesapla/:path*', destination: '/hesapla-static/:path*/index.html' },
     ]
