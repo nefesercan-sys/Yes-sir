@@ -4,6 +4,7 @@ import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
+  if (!ObjectId.isValid(params.id)) return NextResponse.json({ error: 'Geçersiz kimlik' }, { status: 400 });
   try {
     const db = await getDb();
     const urun = await db
@@ -19,6 +20,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
   const guard = await requireAdmin(req);
   if (guard) return guard;
+  if (!ObjectId.isValid(params.id)) return NextResponse.json({ error: 'Geçersiz kimlik' }, { status: 400 });
   try {
     const { _id, ...body } = await req.json();
     const db = await getDb();
@@ -35,6 +37,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const guard = await requireAdmin(req);
   if (guard) return guard;
+  if (!ObjectId.isValid(params.id)) return NextResponse.json({ error: 'Geçersiz kimlik' }, { status: 400 });
   try {
     const db = await getDb();
     await db.collection('bal_urunler').updateOne(

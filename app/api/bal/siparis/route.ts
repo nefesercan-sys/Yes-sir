@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     const result = await db.collection('bal_siparisler').insertOne(siparis);
 
     const waMsg = `🍯 YENİ SİPARİŞ\n\nÜrün: ${urunAd}\nMiktar: ${miktar}\nMüşteri: ${adSoyad}\nTel: ${telefon}\nŞehir: ${sehir}\nToplam: ₺${toplamFiyat}\nNot: ${notlar || 'Yok'}`;
-    const waLink = `https://wa.me/${process.env.BAL_WA_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+    const waLink = `https://wa.me/${process.env.BAL_WA_NUMBER || process.env.NEXT_PUBLIC_BAL_WA || '905345104458'}?text=${encodeURIComponent(waMsg)}`;
 
     return NextResponse.json({ success: true, siparisId: result.insertedId, waLink }, { status: 201 });
   } catch {

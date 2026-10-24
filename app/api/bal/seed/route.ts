@@ -2,9 +2,10 @@
 import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { balMetinUygula } from '@/lib/bal-icerik';
 
 
-const urunler = [
+const urunlerHam = [
   {
     slug: 'sivas-yayla-bali-500g',
     ad: 'Sivas Yayla Balı — 500g',
@@ -133,9 +134,16 @@ const urunler = [
   },
 ];
 
+const urunler = urunlerHam.map(balMetinUygula);
+
 export async function GET(req: NextRequest) {
   const guard = await requireAdmin(req); // oturum VEYA x-admin-key başlığı
   if (guard) return guard;
+
+  // Bu işlem tüm ürünleri silip yeniden yükler; yanlışlıkla tetiklenmesin diye onay gerekir.
+  if (req.nextUrl.searchParams.get('onay') !== 'evet') {
+    return NextResponse.json({ error: 'Tüm ürünleri silip yeniden yükler. Devam için ?onay=evet ekleyin.' }, { status: 400 });
+  }
 
   try {
     const db = await getDb();

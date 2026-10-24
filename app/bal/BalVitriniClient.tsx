@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { waLink, formatFiyat, stokLabel } from '@/lib/bal-helpers';
 
-const WA = process.env.NEXT_PUBLIC_BAL_WA || '905XXXXXXXXX';
+const WA = process.env.NEXT_PUBLIC_BAL_WA || '905345104458';
 
 interface Urun {
   _id: string;
@@ -17,7 +17,7 @@ interface Urun {
   gorsel: string;
 }
 
-export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
+export default function BalVitriniClient({ urunler, sss = [] }: { urunler: Urun[]; sss?: [string, string][] }) {
   const [aktifKat, setAktifKat] = useState('tumu');
 
   const kategoriler = [
@@ -35,7 +35,7 @@ export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
     : urunler.filter(u => u.kategori === aktifKat);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#FDF6E3', fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#FDF6E3', fontFamily: "var(--font-nunito), 'Nunito', sans-serif" }}>
 
       {/* Hero */}
       <section style={{
@@ -48,17 +48,17 @@ export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
           <span style={{ display: 'inline-block', background: 'rgba(245,166,35,.2)', border: '1px solid rgba(245,166,35,.4)', color: '#FFC85A', fontSize: '.65rem', fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', padding: '.3rem .9rem', borderRadius: 999, marginBottom: '1.2rem' }}>
             🐝 Sivas Dağ Yaylalarından
           </span>
-          <h1 style={{ fontFamily: "'Lora', serif", fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '.8rem', textShadow: '0 2px 16px rgba(0,0,0,.4)' }}>
+          <h1 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '.8rem', textShadow: '0 2px 16px rgba(0,0,0,.4)' }}>
             Bir Damla Balda<br /><em style={{ color: '#FFC85A' }}>Binlerce Çiçeğin Özü</em>
           </h1>
-          <p style={{ fontFamily: "'Lora', serif", fontStyle: 'italic', color: 'rgba(255,255,255,.8)', fontSize: '1.1rem', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: 'italic', color: 'rgba(255,255,255,.8)', fontSize: '1.1rem', marginBottom: '2rem' }}>
             "Bir damla balda binlerce çiçeğin özüne ulaşırsınız"
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#urunler" style={{ background: '#D4870A', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
               🍯 Ürünleri Gör
             </a>
-            <a href={waLink(WA, 'Merhaba, bal sipariş etmek istiyorum')} target="_blank" rel="noopener" style={{ background: '#25D366', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
+            <a href={waLink(WA, 'Merhaba, bal sipariş etmek istiyorum')} target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
               💬 WhatsApp Sipariş
             </a>
           </div>
@@ -90,7 +90,7 @@ export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
                   loading="lazy"
                 />
                 <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ fontFamily: "'Lora', serif", fontSize: '1.1rem', fontWeight: 700, color: '#1C0F00', marginBottom: '.4rem' }}>{urun.ad}</h3>
+                  <h3 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '1.1rem', fontWeight: 700, color: '#1C0F00', marginBottom: '.4rem' }}>{urun.ad}</h3>
                   <p style={{ fontSize: '.8rem', color: '#7A6040', lineHeight: 1.7, marginBottom: '.8rem', flex: 1 }}>{urun.aciklama}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginBottom: '.8rem' }}>
                     {urun.icerik?.map(i => (
@@ -99,10 +99,10 @@ export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(28,15,0,.06)', paddingTop: '.8rem' }}>
                     <div>
-                      <div style={{ fontFamily: "'Lora', serif", fontSize: '1.3rem', fontWeight: 700, color: '#D4870A' }}>{formatFiyat(urun.fiyat)}</div>
+                      <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '1.3rem', fontWeight: 700, color: '#D4870A' }}>{formatFiyat(urun.fiyat)}</div>
                       <div style={{ fontSize: '.65rem', color: '#7A6040' }}>{urun.birim} · {stokLabel(urun.stok)}</div>
                     </div>
-                    <a href={waLink(WA, `Merhaba, ${urun.ad} sipariş etmek istiyorum`)} target="_blank" rel="noopener"
+                    <a href={waLink(WA, `Merhaba, ${urun.ad} sipariş etmek istiyorum`)} target="_blank" rel="noopener noreferrer"
                       style={{ background: '#D4870A', color: '#fff', padding: '.5rem 1.1rem', borderRadius: 999, fontSize: '.75rem', fontWeight: 700, textDecoration: 'none' }}>
                       🛒 Satın Al
                     </a>
@@ -114,22 +114,35 @@ export default function BalVitriniClient({ urunler }: { urunler: Urun[] }) {
         )}
       </section>
 
+      {/* SSS */}
+      {sss.length > 0 && (
+        <section style={{ maxWidth: 800, margin: '0 auto', padding: '1rem 1.5rem 3rem' }}>
+          <h2 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '1.5rem', color: '#1C0F00', marginBottom: '1rem' }}>Sık Sorulan Sorular</h2>
+          {sss.map(([q, a]) => (
+            <div key={q} style={{ marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1rem', color: '#1C0F00', marginBottom: '.2rem' }}>{q}</h3>
+              <p style={{ fontSize: '.9rem', color: '#7A6040', lineHeight: 1.7 }}>{a}</p>
+            </div>
+          ))}
+        </section>
+      )}
+
       {/* CTA */}
       <div style={{ background: 'linear-gradient(135deg, #D4870A, #7A3E00)', padding: '4rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: "'Lora', serif", fontSize: 'clamp(1.5rem,3vw,2.5rem)', color: '#fff', fontWeight: 700, marginBottom: '.8rem' }}>
-          Sezon Başlamadan Rezervasyon Yapın
+        <h2 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: 'clamp(1.5rem,3vw,2.5rem)', color: '#fff', fontWeight: 700, marginBottom: '.8rem' }}>
+          Sipariş ve Bilgi İçin Bize Yazın
         </h2>
         <p style={{ color: 'rgba(255,255,255,.8)', marginBottom: '1.5rem', fontSize: '.9rem' }}>
-          Ağustos öncesi sipariş alınıyor — stoklar her yıl hızla tükeniyor
+          Ürünler, stok ve teslimat hakkında WhatsApp'tan hemen yazabilirsiniz.
         </p>
-        <a href={waLink(WA, 'Merhaba, bal rezervasyonu yapmak istiyorum')} target="_blank" rel="noopener"
+        <a href={waLink(WA, 'Merhaba, bal hakkında bilgi almak ve sipariş vermek istiyorum')} target="_blank" rel="noopener noreferrer"
           style={{ background: '#fff', color: '#7A3E00', padding: '.9rem 2rem', borderRadius: 999, fontWeight: 700, fontSize: '.9rem', textDecoration: 'none', display: 'inline-block' }}>
-          🍯 Hemen Rezervasyon Yap
+          💬 WhatsApp ile Yazın
         </a>
       </div>
 
       {/* WA Float */}
-      <a href={waLink(WA, 'Merhaba, bal hakkında bilgi almak istiyorum')} target="_blank" rel="noopener"
+      <a href={waLink(WA, 'Merhaba, bal hakkında bilgi almak istiyorum')} target="_blank" rel="noopener noreferrer"
         aria-label="WhatsApp"
         style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', width: 52, height: 52, background: '#25D366', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.5)', zIndex: 999 }}>
         💬

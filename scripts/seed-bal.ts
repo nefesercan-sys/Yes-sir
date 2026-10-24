@@ -3,12 +3,13 @@
 // veya: npx tsx scripts/seed-bal.ts
 
 import { MongoClient } from 'mongodb';
+import { balMetinUygula } from '../lib/bal-icerik';
 
 // Bağlantı adresi koda YAZILMAZ: ortam değişkeninden okunur (MONGODB_URI=... npx tsx scripts/seed-bal.ts)
 const MONGODB_URI = process.env.MONGODB_URI || '';
 if (!MONGODB_URI) throw new Error('MONGODB_URI ortam değişkeni tanımlı değil');
 
-const urunler = [
+const urunlerHam = [
   {
     slug: 'sivas-yayla-bali-500g',
     ad: 'Sivas Yayla Balı — 500g',
@@ -136,6 +137,8 @@ const urunler = [
     createdAt: new Date(),
   },
 ];
+
+const urunler = urunlerHam.map(balMetinUygula);
 
 async function seed() {
   if (!MONGODB_URI) {
