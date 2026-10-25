@@ -8,6 +8,7 @@ import BottomNav from "@/components/BottomNav";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
 import IcerikHaritasi from "@/components/IcerikHaritasi";
 import GlobalSchema from "@/components/GlobalSchema";
+import RuTelegramButton from "@/components/RuTelegramButton";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -132,6 +133,7 @@ export default function RootLayout({ children, params }: Props) {
             <LocaleHtmlLang />
             {/* Sayfalar kendi <main> etiketini taşıdığı için burada <div> kullanılır (iç içe <main> geçersizdir) */}
             <div id="icerik">{children}</div>
+            <RuTelegramButton />
             <IcerikHaritasi />
             <BottomNav />
             <Analytics />
