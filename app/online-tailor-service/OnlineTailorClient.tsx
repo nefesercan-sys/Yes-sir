@@ -135,7 +135,7 @@ const FAQS: [string, string][] = [
   ["What\'s the minimum order quantity for mass production?", "Quantities depend on the project. Samples, prototypes, small runs and large orders are quoted per project."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
-  ["Do you ship across Turkey?", "Yes. Free courier within Antalya, shipping nationwide across Turkey, 5–10 business days."],
+  ["Do you ship across Turkey?", "Yes. Courier within Antalya and shipping across Turkey, 5–10 business days; delivery cost is confirmed on WhatsApp."],
   ["Is there an English-speaking tailor in Antalya?", "Yes! Our tailor speaks English, Russian and German. WhatsApp: +90 531 898 64 18"],
   ["My dress is torn — can you repair it the same day?", "Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate."],
   ["Are you open in the evening or on weekends?", "Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time."],
@@ -376,7 +376,7 @@ export default function OnlineTailorClient({
           <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya and across Turkey:
           menswear and womenswear tailoring, ironing, repairs, alterations, custom pattern design,
           mass production and contract manufacturing. Hemming, zipper replacement, dry cleaning. Sportswear, tracksuits
-          and sweatshirts made to order. Bulk production quoted per project. Free courier within Antalya, shipping nationwide.
+          and sweatshirts made to order. Bulk production quoted per project. Courier within Antalya and nationwide shipping; delivery cost confirmed on WhatsApp.
         </p>
       </div>
 
@@ -445,7 +445,7 @@ export default function OnlineTailorClient({
               ['01','📸','Send a Photo & Measurements',"Send your reference design and measurements via WhatsApp — completely free."],
               ['02','🎨','Design & Fabric Selection','Work out the details with our expert tailor and confirm the price.'],
               ['03','✂️','We Start Sewing','Once approved, we begin sewing in our workshop.'],
-              ['04','🚗','Delivery','Free courier within Antalya, shipped nationwide across Turkey.'],
+              ['04','🚗','Delivery','Courier within Antalya, shipped across Turkey; delivery cost confirmed on WhatsApp.'],
             ] as [string,string,string,string][]).map(([n,ic,t,d])=>(
               <div key={n} className="ohow-card">
                 <div className="ohow-n">{n}</div>

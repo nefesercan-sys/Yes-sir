@@ -30,7 +30,7 @@ const FAQ = [
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
-  { q: 'Is the hotel tailor visit free?', a: `Yes, the hotel visit itself is free — you only pay for the tailoring work. Trouser hemming starts at ₺200 (€6), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
+  { q: 'Is the hotel tailor visit free?', a: `In Konyaaltı the visit is free; in other areas the fee depends on the distance, confirmed on WhatsApp. You also pay for the tailoring work. Trouser hemming starts at ₺200 (€6), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
   { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; simple jobs are often ready within a day or two, depending on workload. We serve hotels in Belek, Lara, Kemer, Alanya and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
@@ -289,7 +289,7 @@ export default function HotelTailorAntalyaPage() {
             {[
               ['Do you offer mobile tailor service directly to hotel rooms?', `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
               ['What currencies and payment methods do you accept?', 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.'],
-              ['Is the hotel visit free of charge?', 'Yes! The hotel visit and measurement session is completely free — you only pay for the tailoring work itself.'],
+              ['Is the hotel visit free of charge?', 'In Konyaaltı the visit is free. In other areas the fee depends on the distance and is confirmed on WhatsApp. You also pay for the tailoring work itself.'],
               ['Do you serve Belek and Lara luxury hotels?', `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, Side, and Alanya. WhatsApp: ${PHONE}`],
               ['How fast can the tailor arrive at my hotel?', 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.'],
               ['Do your tailors speak English?', `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.`],

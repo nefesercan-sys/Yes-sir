@@ -14,11 +14,11 @@ import {
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
   type Lang, type District, type Service,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
-import { angleFor, angleTitles, angleDescs, angleKeywords, unfreeDeep } from '@/lib/seo-angles';
+import { angleFor, angleTitles, angleDescs, angleKeywords, unfreeDeep, unfree } from '@/lib/seo-angles';
 import './seo-landing.css';
 import { fgNearDistrict, fgServiceMeta } from '@/lib/fg-meta';
 import { trNearDistrict } from '@/lib/tr-meta';
-import { DISTRICT_FACTS, FAR_DISTRICTS } from '@/lib/district-facts';
+import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
@@ -195,7 +195,7 @@ function _districtCopy(lang: Lang, d: District) {
   }[lang];
   let title = pickFit(titles, 60);
   let desc = '';
-  const far = FAR_DISTRICTS.includes(d.slug);
+  const far = !isFreeService(d.slug);
   const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
   const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
   const svcRu = far ? 'Забор и доставка согласуются в WhatsApp' : 'Бесплатный выезд в отели и на дом';
@@ -256,9 +256,9 @@ function _districtCopy(lang: Lang, d: District) {
         `${n} şort kısaltma`, `${n} mont tamiri`, `${n} ceket daraltma`, `${n} ceket kısaltma`, `${n} elbise dikimi`, `${n} elbise daraltma`,
         `${n} abiye tamiri`, `${n} özel dikim`, `${n} bana yakın terzi`);
     }
-    return metaOverride({ n, loc, kw, title, desc });
+    return metaOverride({ n, loc, kw, title, desc: isFreeService(d.slug) ? desc : unfree(lang, desc) });
   }
-  return metaOverride({ n, loc, kw, title, desc });
+  return metaOverride({ n, loc, kw, title, desc: isFreeService(d.slug) ? desc : unfree(lang, desc) });
 
   function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
     const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'SwapHubs') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
@@ -312,7 +312,7 @@ function _districtFaq(lang: Lang, d: District): [string, string][] {
     ru: `Где находится ${n} и как работает услуга портного ${loc}?`, de: `Wo liegt ${n} und wie funktioniert der Schneiderservice ${loc}?`,
   }[lang], `${fact.where[lang]} ${fact.needs[lang]}`]] : [];
   const base = districtFaqBase(lang, d, loc, n);
-  const far = FAR_DISTRICTS.includes(d.slug);
+  const far = !isFreeService(d.slug);
   const farFix: [string, string][] = [
     ['otel ve eve servis ücretsizdir', "alım-teslim WhatsApp'tan planlanır"],
     ['service to hotels and homes is free', 'collection and delivery are planned on WhatsApp'],
@@ -684,7 +684,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
-        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${FAR_DISTRICTS.includes(d.slug) ? SVC_FAR[lang] : u.free} · ${u.hours}`} h1={h1}
+        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${!isFreeService(d.slug) ? SVC_FAR[lang] : u.free} · ${u.hours}`} h1={h1}
           desc={`${districtAbout(lang, d)}`} waMsg={waMsg} />
 
         {DISTRICT_FACTS[d.slug] && (

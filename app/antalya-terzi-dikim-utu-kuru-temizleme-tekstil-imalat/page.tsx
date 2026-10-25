@@ -665,7 +665,7 @@ export default function AntalyaTerziPage() {
             </h2>
             <p style={{ color: 'rgba(255,255,255,.85)', fontSize: '.9rem', marginBottom: '1.8rem', lineHeight: 1.7 }}>
               Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Gürsu, Öğretmenevleri ve tüm Konyaaltı mahallelerine
-              <strong> ücretsiz adrese gelen terzi servisi</strong>. Hemen arayın veya WhatsApp'tan yazın.
+              <strong> ücretsiz adrese gelen terzi servisi</strong> (diğer bölgelerde servis ücreti mesafeye göre). Hemen arayın veya WhatsApp'tan yazın.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               <a href={WA('Merhaba, adresime terzi servisi istiyorum.')}

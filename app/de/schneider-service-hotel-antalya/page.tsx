@@ -275,7 +275,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
               </thead>
               <tbody>
                 {[
-                  ['Anfahrtsgebühr','KOSTENLOS','—'],
+                  ['Anfahrt','Konyaaltı kostenlos','—'],
                   ['Hosen kürzen','ab ₺200','24 Std'],
                   ['Reißverschluss wechseln','ab ₺300','Am selben Tag'],
                   ['Kleid / Jacke enger machen','ab ₺200','48 Std'],
@@ -286,7 +286,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='KOSTENLOS'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='Konyaaltı kostenlos'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#7A6E62', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
