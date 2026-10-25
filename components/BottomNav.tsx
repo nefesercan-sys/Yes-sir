@@ -1,6 +1,7 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { isTerziPath } from "@/components/GlobalSchema";
 
 const NAV_ITEMS = [
   { icon: "🏠", label: "Ana Sayfa", href: "/" },
@@ -18,7 +19,7 @@ export default function BottomNav() {
   // Terzi bölümünün tüm sayfaları (uygulama kabuğu + tanıtım sayfası + il/ilçe
   // sayfaları) kendi menüsünü kullanıyor — sitenin genel menüsüyle çakışmaması
   // için burada gizleniyor.
-  const terziKabugu = pathname?.startsWith('/terzi');
+  const terziKabugu = isTerziPath(pathname);
   if (terziKabugu) return null;
 
   return (

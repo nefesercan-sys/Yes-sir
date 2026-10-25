@@ -34,9 +34,12 @@ const TERZI_PREFIXES = [
   '/de/schneider-leistungen',
   '/ru/portnoy-antalya',
   '/ru/uslugi-portnogo',
+  '/en/contact-tailor-antalya',
+  '/ru/kontakty-portnoy-antalya',
+  '/de/kontakt-schneider-antalya',
 ];
 
-function isTerziPath(pathname: string | null): boolean {
+export function isTerziPath(pathname: string | null): boolean {
   if (!pathname) return false;
   const p = pathname.toLowerCase();
   return TERZI_PREFIXES.some((x) => p === x || p.startsWith(x));
