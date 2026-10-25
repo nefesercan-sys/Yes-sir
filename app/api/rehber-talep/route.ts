@@ -57,13 +57,16 @@ export async function POST(req: NextRequest) {
     }
     const user = process.env.EMAIL_USER || process.env.SMTP_USER;
     const pass = process.env.EMAIL_PASS || process.env.SMTP_PASS;
-    if (!bildirildi && user && pass) {
+    if (user && pass) {
       try {
         const t = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
         await t.sendMail({ from: user, to: ADMIN_EMAIL, subject: `Antalya rehberi talebi: ${konu}`.slice(0, 150), html: metin.replace(/\n/g, '<br>') });
       } catch (e) {
         console.error('[rehber-talep] e-posta hatası:', e);
       }
+    }
+    if (!bildirildi && !(user && pass)) {
+      console.error('[rehber-talep] BİLDİRİM GİDEMEDİ: ADMIN_TELEGRAM_CHAT_ID ve EMAIL_USER/EMAIL_PASS tanımlı değil. Talep yalnızca veritabanında.');
     }
     return NextResponse.json({ ok: true });
   } catch (e) {
