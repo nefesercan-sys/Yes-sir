@@ -129,7 +129,7 @@ const HEDEF_KITLELER = [
 
 const SUREC = [
   ['💬', 'Bize Yazın', 'Ürün konseptinizi, modelinizi ve tahmini adedi WhatsApp\'tan gönderin.'],
-  ['📋', 'Teklif', '24 saat içinde detaylı fiyat teklifi ve üretim takvimi göndeririz.'],
+  ['📋', 'Teklif', '1–2 gün içinde detaylı fiyat teklifi ve üretim takvimi göndeririz.'],
   ['🧵', 'Numune Onayı', 'Numune dikilir, onaylanır. Değişiklik talepleri uygulanır.'],
   ['🏭', 'Seri Üretim', 'Onaylanan numune üzerinden seri üretim başlar. Kalite kontrol dahil.'],
   ['📦', 'Teslim', 'Etiketli, ütülü ve paketlenmiş ürünler teslim edilir veya kargoya verilir.'],
@@ -294,7 +294,7 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Fason Üretim Teklifi Alın</h2>
           <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Ürün ve adet bilgisini gönderin — 24 saat içinde fiyat teklifi
+            Ürün ve adet bilgisini gönderin — 1–2 gün içinde fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, fason üretim için teklif almak istiyorum. Ürün ve adet: ')} target="_blank" rel="noopener noreferrer"

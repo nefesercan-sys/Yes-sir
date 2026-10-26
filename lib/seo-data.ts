@@ -25,9 +25,9 @@ export const LAST_UPDATE = '2026-10-23';
 // Türkçe sayfalar yalnızca atölyeye (Konyaaltı/Hurma) yakın bölgelerde aramaya açık; uzak bölgelerin Türkçe sayfaları
 // noindex olur, sitemap'ten, iç linklerden ve hreflang'dan çıkar. Yabancı dil (EN/RU/DE) sayfaları TÜM bölgelerde açıktır.
 // Bir bölgeyi Türkçede açmak/kapatmak için bu listeyi değiştirmek yeterli.
-export const TR_NEAR_SLUGS = ['konyaalti', 'muratpasa', 'meltem', 'fener', 'sirinyali', 'arapsuyu', 'toros', 'ogretmenevleri', 'uluc', 'siteler', 'altinkum'];
-/** Ücretsiz alım-teslim servisi yalnızca Konyaaltı ve mahallelerinde; diğer bölgelerde servis ücreti bölgeye göre belirlenir. */
-export const FREE_SERVICE_SLUGS = ['konyaalti', 'uluc', 'siteler', 'altinkum'];
+export const TR_NEAR_SLUGS = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem', 'muratpasa', 'fener', 'sirinyali', 'toros'];
+/** Ücretsiz alım-teslim yalnızca işletme sahibinin onayladığı yakın mahallelerde (Ekim 2026 listesi); diğer bölgelerde ücret bölgeye göre belirlenir. */
+export const FREE_SERVICE_SLUGS = ['konyaalti', 'hurma', 'sarisu', 'liman', 'uncali', 'altinkum', 'ogretmenevleri', 'siteler', 'arapsuyu', 'gursu', 'uluc'];
 export const isFreeService = (slug: string): boolean => FREE_SERVICE_SLUGS.includes(slug);
 export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);
 /** Bu dil + bölge sayfası aramaya açık mı? */
@@ -65,6 +65,16 @@ export const DISTRICTS: District[] = [
     loc: { tr: "Muratpaşa'da", en: 'in Muratpaşa', ru: 'в Муратпаше', de: 'in Muratpaşa' }, alias: ['Muratpasa'] },
   { slug: 'konyaalti', kind: 'central', name: { tr: 'Konyaaltı', en: 'Konyaaltı', ru: 'Коньяалты', de: 'Konyaaltı' },
     loc: { tr: "Konyaaltı'nda", en: 'in Konyaaltı', ru: 'в Коньяалты', de: 'in Konyaaltı' }, alias: ['Konyaalti', 'Konyaalti Antalya'] },
+  { slug: 'hurma', kind: 'central', name: { tr: 'Hurma', en: 'Hurma', ru: 'Хурма', de: 'Hurma' },
+    loc: { tr: "Hurma'da", en: 'in Hurma', ru: 'в Хурме', de: 'in Hurma' }, alias: ['Hurma Konyaaltı', 'Hurma Mahallesi'] },
+  { slug: 'liman', kind: 'central', name: { tr: 'Liman', en: 'Liman', ru: 'Лиман', de: 'Liman' },
+    loc: { tr: "Liman'da", en: 'in Liman', ru: 'в Лимане', de: 'in Liman' }, alias: ['Liman Mahallesi', 'Liman Konyaaltı'] },
+  { slug: 'gursu', kind: 'central', name: { tr: 'Gürsu', en: 'Gürsu', ru: 'Гюрсу', de: 'Gürsu' },
+    loc: { tr: "Gürsu'da", en: 'in Gürsu', ru: 'в Гюрсу', de: 'in Gürsu' }, alias: ['Gursu', 'Gürsu Mahallesi'] },
+  { slug: 'uncali', kind: 'central', name: { tr: 'Uncalı', en: 'Uncalı', ru: 'Унджалы', de: 'Uncalı' },
+    loc: { tr: "Uncalı'da", en: 'in Uncalı', ru: 'в Унджалы', de: 'in Uncalı' }, alias: ['Uncali', 'Uncalı Mahallesi'] },
+  { slug: 'sarisu', kind: 'central', name: { tr: 'Sarısu', en: 'Sarısu', ru: 'Сарысу', de: 'Sarısu' },
+    loc: { tr: "Sarısu'da", en: 'in Sarısu', ru: 'в Сарысу', de: 'in Sarısu' }, alias: ['Sarisu', 'Sarısu Mahallesi'] },
   { slug: 'meltem', kind: 'central', name: { tr: 'Meltem', en: 'Meltem', ru: 'Мельтем', de: 'Meltem' },
     loc: { tr: "Meltem'de", en: 'in Meltem', ru: 'в Мельтеме', de: 'in Meltem' }, alias: [] },
   { slug: 'fener', kind: 'central', name: { tr: 'Fener', en: 'Fener', ru: 'Фенер', de: 'Fener' },
@@ -110,13 +120,8 @@ export const DISTRICTS: District[] = [
 ];
 
 // Zaten kendi sayfası olan Konyaaltı mahalleleri (yalnızca iç link için)
-export const MAHALLE_PAGES: { href: string; name: L4 }[] = [
-  { href: '/terzi/konyaalti/hurma', name: { tr: 'Hurma', en: 'Hurma', ru: 'Хурма', de: 'Hurma' } },
-  { href: '/terzi/konyaalti/liman', name: { tr: 'Liman', en: 'Liman', ru: 'Лиман', de: 'Liman' } },
-  { href: '/terzi/konyaalti/sarisu', name: { tr: 'Sarısu', en: 'Sarısu', ru: 'Сарысу', de: 'Sarısu' } },
-  { href: '/terzi/konyaalti/uncali', name: { tr: 'Uncalı', en: 'Uncalı', ru: 'Унджалы', de: 'Uncalı' } },
-  { href: '/terzi/konyaalti/gursu', name: { tr: 'Gürsu', en: 'Gürsu', ru: 'Гюрсу', de: 'Gürsu' } },
-];
+// Eski tek tek mahalle linkleri artık DISTRICTS içinde (hurma, liman, gursu, uncali, sarisu); tekrar link çıkmasın diye boş.
+export const MAHALLE_PAGES: { href: string; name: L4 }[] = [];
 
 // ── Hizmetler ───────────────────────────────────────────────
 export type TimeKey = 'same' | 'next' | 'three' | 'none';

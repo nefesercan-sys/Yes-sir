@@ -277,7 +277,7 @@ export default function UniformaUretimiPage() {
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Üniforma Teklifi Alın</h2>
           <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Sektör ve adet bilgisini gönderin — 24 saat içinde tasarım + fiyat teklifi
+            Sektör ve adet bilgisini gönderin — 1–2 gün içinde tasarım + fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, üniforma üretimi için teklif almak istiyorum. Sektör: , Adet: ')} target="_blank" rel="noopener noreferrer"

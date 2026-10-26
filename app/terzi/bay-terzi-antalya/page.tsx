@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Pantolon / Paça Kısaltma', '₺200', '24 saat'],
+  ['Pantolon / Paça Kısaltma', '₺200', '1–2 gün'],
   ['Pantolon Bel Daraltma', '₺200', '48 saat'],
   ['Ceket Kol Kısaltma', '₺200', '48 saat'],
   ['Ceket Beden Küçültme', '₺350', '48 saat'],

@@ -258,7 +258,7 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','FREE','—'],
-                  ['Trouser / Pant Hemming','₺200+ (~€6)','24h'],
+                  ['Trouser / Pant Hemming','₺200+ (~€6)','1–2 days'],
                   ['Zipper Replacement','₺300+ (~€9)','Same day'],
                   ['Dress / Jacket Alteration','₺200+ (~€7)','48h'],
                   ['Sleeve Shortening','₺200+ (~€7)','48h'],

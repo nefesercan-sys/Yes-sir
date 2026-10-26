@@ -106,7 +106,7 @@ const PRICE_TABLE = [
   { cat:'Bügeln & Reinigung', rows:[
     ['Hemd Bügeln','₺80+','Am selben Tag'],
     ['Kleid Dämpfen','₺120+','Am selben Tag'],
-    ['Mantel Bügeln','₺200+','24 Stunden'],
+    ['Mantel Bügeln','₺200+','1–2 Tage'],
     ['Sammelbügeln (10+ Stück)','₺60+/Stück','Am selben Tag'],
   ]},
   { cat:'Reparatur & Änderungen', rows:[

@@ -106,13 +106,13 @@ const PRICE_TABLE = [
   { cat:'Ironing & Cleaning', rows:[
     ['Shirt Ironing','₺80+','Same day'],
     ['Dress Steaming','₺120+','Same day'],
-    ['Coat Ironing','₺200+','24 hours'],
+    ['Coat Ironing','₺200+','1–2 days'],
     ['Bulk Ironing (10+ items)','₺60+/item','Same day'],
   ]},
   { cat:'Repairs & Alterations', rows:[
     ['Hemming','₺200+','Same day'],
     ['Zipper Replacement','₺300+','Same day'],
-    ['Taking In Waist','₺200+','24 hours'],
+    ['Taking In Waist','₺200+','1–2 days'],
     ['Tear Repair','₺100+','Same day'],
     ['Sleeve Shortening','₺200+','24–48 hours'],
     ['Lining Replacement','₺300+','48 hours'],

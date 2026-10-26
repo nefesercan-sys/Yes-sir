@@ -14,11 +14,11 @@ const PHONE_E   = '+905318986418'
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`
 const TODAY = new Date().toISOString().split('T')[0]
 
-// ── DÜZELTME: Doğrulanmış tek GBP kaydı (cid=5846987472659818117) ──
+// ── DÜZELTME: Doğrulanmış tek GBP kaydı (cid=6436895271281342624) ──
 // Önceki sürümde farklı bir CID (1496201377277644027) kullanılıyordu.
 // GBP ekran görüntüsünde bu kaydın "kopya profil" olarak işaretlendiği görüldü —
 // aynı işletme için iki farklı CID kullanmak Google'ın güven skorunu düşürür.
-const MAPS_CID_URL = 'https://www.google.com/maps?cid=5846987472659818117'
+const MAPS_CID_URL = 'https://www.google.com/maps?cid=6436895271281342624'
 // TODO: Bu embed kodu eski/doğrulanmamış CID'e ait olabilir. Google Maps'te
 // doğru işletmeyi bulup "Paylaş → Haritayı Yerleştir" ile yeni embed kodu alın.
 const MAPS_EMBED = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed'
@@ -117,7 +117,7 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. En geç 24 saat içinde işlem tamamlanır ve adresinize teslim edilir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Genellikle 1–2 gün içinde işlem tamamlanır ve adresinize teslim edilir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Aynı gün teslim. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tailor in Antalya Konyaalti — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! We offer English-speaking tailoring, alterations, dry cleaning and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}` } },
@@ -169,14 +169,14 @@ export const metadata: Metadata = {
 const FIYAT_LISTESI = [
   { hizmet: 'Paça Kısaltma',            fiyat: '₺200',  sure: 'Aynı gün' },
   { hizmet: 'Pantolon Paçası',           fiyat: '₺200',  sure: 'Aynı gün' },
-  { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: '24 saat'  },
+  { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: '1–2 gün'  },
   { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Aynı gün' },
   { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Aynı gün' },
   { hizmet: 'T-Shirt Tamiri',            fiyat: '₺100',  sure: 'Aynı gün' },
   { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Aynı gün' },
   { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
-  { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: '24 saat'  },
-  { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: '24 saat'  },
+  { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: '1–2 gün'  },
+  { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: '1–2 gün'  },
   { hizmet: 'Abiye Tamiri',              fiyat: '₺800',  sure: '24–48 sa' },
   { hizmet: 'Elbise Dikimi',             fiyat: '₺800+', sure: '3–5 gün'  },
 ]
@@ -192,7 +192,7 @@ const DIKIMLER = [
 const UTU_TEMIZLEME = [
   { hizmet: 'Gömlek Ütü',                      fiyat: '₺80',    sure: '2–6 saat'  },
   { hizmet: 'Abiye Buharlama',                 fiyat: '₺120',   sure: '2–6 saat'  },
-  { hizmet: 'Çamaşır Yıkama + Kurutma',        fiyat: '₺80/kg', sure: '24 saat'   },
+  { hizmet: 'Çamaşır Yıkama + Kurutma',        fiyat: '₺80/kg', sure: '1–2 gün'   },
   { hizmet: 'Elbise Kuru Temizleme',           fiyat: '₺300',   sure: '24–48 saat'},
   { hizmet: 'Takım Elbise Kuru Temizleme',     fiyat: '₺450',   sure: '48 saat'   },
   { hizmet: 'Mont Kuru Temizleme',             fiyat: '₺500',   sure: '48 saat'   },
@@ -215,7 +215,7 @@ const SANS    = 'system-ui,sans-serif'
 const SERVIS_ADIMLARI = [
   { numara: '01', baslik: 'Arayın veya Yazın', aciklama: 'Telefon veya WhatsApp ile randevu alın. Konyaaltı içi tüm mahalleler için ücretsiz servis.' },
   { numara: '02', baslik: 'Terzi Kapınıza Gelir', aciklama: 'Profesyonel terzimiz adresinize gelir, ölçünüzü alır veya tadilat için kıyafetlerinizi teslim alır.' },
-  { numara: '03', baslik: 'En Geç 24 Saatte Hazır', aciklama: 'Tadilat ve onarım işlemleri en geç 24 saat içinde tamamlanır. Dikim işleri için süre hizmet türüne göre değişir.' },
+  { numara: '03', baslik: 'Genellikle 1–2 Günde Hazır', aciklama: 'Tadilat ve onarım işlemleri genellikle 1–2 gün içinde tamamlanır. Dikim işleri için süre hizmet türüne göre değişir.' },
   { numara: '04', baslik: 'Adresinize Teslim', aciklama: 'Hazır olan kıyafetleriniz tekrar adresinize getirilir.' },
 ]
 
@@ -345,7 +345,7 @@ export default function AntalyaTerziPage() {
             }}>
               <div>
                 <div style={{ fontFamily: SERIF, fontSize: '1.3rem', color: '#fff', marginBottom: '.4rem', fontWeight: 600 }}>
-                  Adresinizde Ölçü Alım + En Geç 24 Saatte Teslim
+                  Adresinizde Ölçü Alım + Genellikle 1–2 Günde Teslim
                 </div>
                 <div style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.55)', lineHeight: 1.6 }}>
                   Hurma · Liman · Uncalı · Sarısu · Gürsu · Çakırlar · Meltem · Göbi · Öğretmenevleri · Konyaaltı Merkez
@@ -461,7 +461,7 @@ export default function AntalyaTerziPage() {
               Ütü & Kuru Temizleme Fiyatları
             </h2>
             <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
-              Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi dahil tüm Konyaaltı mahallelerine alım + teslimat. 24 saat ekspres.
+              Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi dahil tüm Konyaaltı mahallelerine alım + teslimat. hızlı ekspres.
             </p>
 
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', boxShadow: '0 2px 20px rgba(28,24,20,.06)' }}>

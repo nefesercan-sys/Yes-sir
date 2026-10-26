@@ -136,13 +136,13 @@ export default function TerziCagirPage() {
 
   const FIYATLAR = [
     ['Paça Kısaltma', '₺200', 'Aynı gün'],
-    ['Bel Daraltma', '₺200', '24 saat'],
+    ['Bel Daraltma', '₺200', '1–2 gün'],
     ['Etek Kısaltma', '₺200', 'Aynı gün'],
     ['Pantolon Paçası', '₺200', 'Aynı gün'],
     ['Fermuar Değişimi', '₺300', 'Aynı gün'],
     ['Fermuar Tamiri', '₺300', 'Aynı gün'],
-    ['Ceket Tamiri', '₺200', '24 saat'],
-    ['Mont Tamiri', '₺200', '24 saat'],
+    ['Ceket Tamiri', '₺200', '1–2 gün'],
+    ['Mont Tamiri', '₺200', '1–2 gün'],
     ['T-Shirt Tamiri', '₺100', 'Aynı gün'],
     ['Abiye Tamiri', '₺800', '48 saat'],
     ['Elbise Dikimi', '₺800+', '3–5 gün'],
@@ -618,13 +618,13 @@ export default function TerziCagirPage() {
 // Fiyat listesi sabit veri
 const FIYATLAR = [
   ['Paça Kısaltma','₺200','Aynı gün'],
-  ['Bel Daraltma','₺200','24 saat'],
+  ['Bel Daraltma','₺200','1–2 gün'],
   ['Etek Kısaltma','₺200','Aynı gün'],
   ['Pantolon Paçası','₺200','Aynı gün'],
   ['Fermuar Değişimi','₺300','Aynı gün'],
   ['Fermuar Tamiri','₺300','Aynı gün'],
-  ['Ceket Tamiri','₺200','24 saat'],
-  ['Mont Tamiri','₺200','24 saat'],
+  ['Ceket Tamiri','₺200','1–2 gün'],
+  ['Mont Tamiri','₺200','1–2 gün'],
   ['T-Shirt Tamiri','₺100','Aynı gün'],
   ['Abiye Tamiri','₺800','48 saat'],
   ['Elbise Dikimi','₺800+','3–5 gün'],
