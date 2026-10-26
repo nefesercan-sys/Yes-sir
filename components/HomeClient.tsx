@@ -534,7 +534,7 @@ export default function HomeClient({ ilkIlanlar }: Props) {
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <button onClick={closeModal} className="modal-close" aria-label="Kapat">✕</button>
             <div className="modal-header">
-              <img alt="İlan görseli" src={optimizeCloudinary(getImageUrl(seciliIlan), 80, 80)} className="modal-img"
+              <img src={optimizeCloudinary(getImageUrl(seciliIlan), 80, 80)} className="modal-img"
                 alt={seciliIlan.baslik || "Ürün"} loading="lazy" width={80} height={80} />
               <div className="modal-info">
                 <span className="modal-type-label">{modalTuru === "takas" ? "Takas Teklifi" : "Güvenli Satın Alma"}</span>
