@@ -33,7 +33,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Fermuar değişimi kaç saatte biter?',
-    a: 'Normal şartlarda 24 saat içinde teslim ederiz, acil durumlarda aynı gün teslim mümkündür. Fermuarın temin süresine ve yoğunluğa göre değişebilir; acil ihtiyacınızı yazarken belirtin.',
+    a: 'Normal şartlarda 1–2 gün içinde teslim ederiz, acil durumlarda aynı gün teslim mümkündür. Fermuarın temin süresine ve yoğunluğa göre değişebilir; acil ihtiyacınızı yazarken belirtin.',
   },
   {
     q: 'Akşam ve hafta sonu açık mısınız?',
@@ -74,7 +74,7 @@ const ADIMLAR: { no: string; baslik: string; aciklama: string }[] = [
   { no: '1', baslik: 'Fotoğraf gönderin', aciklama: 'Bozuk fermuarın ve kıyafetin fotoğrafını WhatsApp\'tan yollayın.' },
   { no: '2', baslik: 'Fiyat ve süre netleşir', aciklama: 'Fermuar türüne göre kesin fiyatı ve teslim süresini size bildiririz.' },
   { no: '3', baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakabilir veya adresten alım için bizimle konuşabilirsiniz.' },
-  { no: '4', baslik: 'Teslim', aciklama: 'Normal şartlarda 24 saatte, acil durumda aynı gün hazır olur.' },
+  { no: '4', baslik: 'Teslim', aciklama: 'Normal şartlarda 1–2 günde, acil durumda aynı gün hazır olur.' },
 ];
 
 const DIGER_HIZMETLER: { href: string; ad: string }[] = [
@@ -134,7 +134,7 @@ const jsonLd = {
       serviceType: 'Fermuar değişimi',
       description:
         'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
-        'Normal şartlarda 24 saatte teslim, acil durumda aynı gün.',
+        'Normal şartlarda 1–2 günde teslim, acil durumda aynı gün.',
       url: SITE_URL,
       inLanguage: 'tr',
       areaServed: [
@@ -231,7 +231,7 @@ export default function FermuarDegisimiPage() {
 
           <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}>
             <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı&apos;nda pantolon, kot, elbise, etek, mont ve ceket
-            fermuarlarını <strong>300 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 24 saatte,
+            fermuarlarını <strong>300 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 1–2 günde,
             acil durumda aynı gün teslim; haftanın her günü {HOURS} arası açıktır.
           </p>
 
@@ -250,7 +250,7 @@ export default function FermuarDegisimiPage() {
         <div style={{ ...wrap, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '.8rem' }}>
           {[
             ['Başlangıç fiyatı', '300 TL\'den'],
-            ['Teslim süresi', '24 saat · acilde aynı gün'],
+            ['Teslim süresi', '1–2 gün · acilde aynı gün'],
             ['Çalışma saatleri', `Her gün ${HOURS}`],
             ['Servis bölgesi', 'Konyaaltı ve Antalya geneli'],
           ].map(([k, v]) => (

@@ -146,7 +146,7 @@ const D = {
 const SERVICES = [
   { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺200+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
-  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: '24 saat', color: '#ede9fe', tc: '#5b21b6' },
+  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: '1–2 gün', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: '3–7 gün', color: '#dcfce7', tc: '#15803d' },
   { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: '₺80+', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
@@ -154,10 +154,10 @@ const SERVICES = [
 
 const PRICES = [
   ['Paça Kısaltma', '₺200+', 'Aynı gün'],
-  ['Bel Daraltma', '₺200+', '24 saat'],
+  ['Bel Daraltma', '₺200+', '1–2 gün'],
   ['T-Shirt Tamiri', '₺100+', 'Aynı gün'],
   ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
-  ['Ceket / Mont Tamiri', '₺200+', '24 saat'],
+  ['Ceket / Mont Tamiri', '₺200+', '1–2 gün'],
   ['Kol Kısaltma', '₺200+', '48 saat'],
   ['Abiye Tamiri', '₺800+', '24–48 saat'],
   ['Kadın Elbise Dikimi', '₺800+', '3–5 gün'],

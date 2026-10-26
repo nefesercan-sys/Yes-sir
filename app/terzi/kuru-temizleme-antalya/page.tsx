@@ -35,8 +35,8 @@ const jsonLd = {
     {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
-      name: 'Kuru Temizleme Antalya — Otel Alım Teslimat 24 Saat Ekspres 2026',
-      description: "Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti. Otel ve adresten alım + teslimat. 24 saat ekspres. Elbise ₺300, mont ₺500, çamaşır ₺80/kg.",
+      name: 'Kuru Temizleme Antalya — Otel Alım Teslimat Hızlı Ekspres 2026',
+      description: "Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti. Otel ve adresten alım + teslimat. hızlı ekspres. Elbise ₺300, mont ₺500, çamaşır ₺80/kg.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya','Manavgat','Side'].map(name => ({ '@type': 'City', name })),
       offers: {
@@ -59,8 +59,8 @@ const jsonLd = {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
       url: SITE_URL,
-      name: 'Kuru Temizleme Antalya · Otele Alım Teslimat · 24 Saat Ekspres · 2026 | Terzi Can',
-      description: "Antalya kuru temizleme ve çamaşır hizmeti. Elbise ₺300, mont ₺500, çamaşır ₺80/kg. Otele alım + teslimat. 24 saat ekspres. ☎ " + PHONE,
+      name: 'Kuru Temizleme Antalya · Otele Alım Teslimat · Hızlı Ekspres · 2026 | Terzi Can',
+      description: "Antalya kuru temizleme ve çamaşır hizmeti. Elbise ₺300, mont ₺500, çamaşır ₺80/kg. Otele alım + teslimat. hızlı ekspres. ☎ " + PHONE,
       inLanguage: ['tr', 'en', 'ru'],
       dateModified: TODAY,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -79,7 +79,7 @@ const jsonLd = {
       mainEntity: [
         { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. Konyaaltı'nda otel alım + teslimat ücretsiz, diğer bölgelerde mesafeye göre. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya otele gelen kuru temizleme var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerinden kuru temizleme alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Kuru temizleme 24 saatte hazır mı?', acceptedAnswer: { '@type': 'Answer', text: 'Evet! Turistler ve acil durumlar için 24 saat ekspres kuru temizleme mevcuttur. Normal süre 48 saattir.' } },
+        { '@type': 'Question', name: 'Kuru temizleme 1–2 günde hazır mı?', acceptedAnswer: { '@type': 'Answer', text: 'Evet! Turistler ve acil durumlar için hızlı ekspres kuru temizleme mevcuttur. Normal süre 48 saattir.' } },
         { '@type': 'Question', name: 'Mont ve palto kuru temizleme Antalya fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Mont kuru temizleme ₺500, palto ₺550'den başlar. 48 saat teslim. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Dry cleaning Antalya hotel pickup — how does it work?', acceptedAnswer: { '@type': 'Answer', text: `WhatsApp us on ${PHONE}, we pick up from your hotel, clean, and deliver back within 24–48 hours. English speaking service.` } },
         { '@type': 'Question', name: 'Химчистка в Анталье с доставкой в отель?', acceptedAnswer: { '@type': 'Answer', text: `Да! Портной Кан предоставляет услуги химчистки с забором и доставкой в отель по всей Анталье. Говорим по-русски. WhatsApp: ${PHONE}` } },
@@ -91,7 +91,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Kuru Temizleme Antalya · Otel Alım Teslim · 24 Saat | Terzi Can' },
-  description: "Antalya kuru temizleme. Elbise ₺300, mont ₺500, takım elbise ₺450, çamaşır ₺80/kg. Otel ve adresten alım + teslimat. 24 saat ekspres. ☎ " + PHONE,
+  description: "Antalya kuru temizleme. Elbise ₺300, mont ₺500, takım elbise ₺450, çamaşır ₺80/kg. Otel ve adresten alım + teslimat. hızlı ekspres. ☎ " + PHONE,
   keywords: [
     'kuru temizleme Antalya', 'kuru temizleme Antalya fiyat 2026', 'otele kuru temizleme Antalya',
     'ekspres kuru temizleme Antalya', 'çamaşır yıkama Antalya', 'ütü hizmeti Antalya',
@@ -99,12 +99,12 @@ export const metadata: Metadata = {
     'abiye kuru temizleme Antalya', 'Belek kuru temizleme', 'Kemer kuru temizleme',
     'dry cleaning Antalya', 'laundry service Antalya', 'hotel laundry Antalya',
     'химчистка Анталья', 'прачечная Анталья', 'Alanya kuru temizleme',
-    'kıyafet temizleme Antalya', '24 saat kuru temizleme Antalya',
+    'kıyafet temizleme Antalya', 'hızlı kuru temizleme Antalya',
   ],
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
   openGraph: {
-    title: 'Kuru Temizleme Antalya · Otele Alım Teslimat · 24 Saat Ekspres | Terzi Can',
-    description: "Elbise ₺300, mont ₺500, çamaşır ₺80/kg. Otel alım + teslimat. 24 saat ekspres. ☎ " + PHONE,
+    title: 'Kuru Temizleme Antalya · Otele Alım Teslimat · Hızlı Ekspres | Terzi Can',
+    description: "Elbise ₺300, mont ₺500, çamaşır ₺80/kg. Otel alım + teslimat. hızlı ekspres. ☎ " + PHONE,
     url: SITE_URL, type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },
@@ -113,9 +113,9 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Çamaşır Yıkama + Kurutma', '₺80 / kg', '24 saat'],
+  ['Çamaşır Yıkama + Kurutma', '₺80 / kg', '1–2 gün'],
   ['Ütü (adet başına)', '₺50', '12 saat'],
-  ['Gömlek / Bluz', '₺150', '24 saat'],
+  ['Gömlek / Bluz', '₺150', '1–2 gün'],
   ['Elbise / Etek', '₺300', '24–48 saat'],
   ['Takım Elbise (ceket+pantolon)', '₺450', '48 saat'],
   ['Mont / Kaban', '₺500', '48 saat'],
@@ -123,7 +123,7 @@ const FIYATLAR = [
   ['Abiye / Gece Elbisesi', '₺600', '48–72 saat'],
   ['Gelinlik Kuru Temizleme', '₺800+', '72 saat'],
   ['Deri Mont / Ceket', '₺700', '72 saat'],
-  ['Çocuk Kıyafeti', '₺100', '24 saat'],
+  ['Çocuk Kıyafeti', '₺100', '1–2 gün'],
   ['Otel Alım + Teslimat', 'ÜCRETSİZ', '—'],
 ];
 
@@ -150,12 +150,12 @@ export default function KuruTemizlemePage() {
             </div>
             <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '1rem' }}>
               Kuru Temizleme Antalya<br />
-              <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Otele Alım · Teslimat · 24 Saat Ekspres</span>
+              <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Otele Alım · Teslimat · Hızlı Ekspres</span>
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.85, maxWidth: '640px', marginBottom: '1.5rem' }}>
               Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti.
               <strong style={{ color: '#fff' }}> Belek, Lara, Kemer, Alanya</strong> dahil tüm
-              Antalya otellerinden <strong style={{ color: '#D4B07A' }}>alım ve teslimat (Konyaaltı'nda ücretsiz).</strong> 24 saat ekspres.
+              Antalya otellerinden <strong style={{ color: '#D4B07A' }}>alım ve teslimat (Konyaaltı'nda ücretsiz).</strong> hızlı ekspres.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '2rem' }}>
               {[['Çamaşır','₺80/kg'],['Elbise','₺300'],['Takım Elbise','₺450'],['Mont','₺500'],['Abiye','₺600']].map(([t, d]) => (
@@ -239,7 +239,7 @@ export default function KuruTemizlemePage() {
             <div style={{ fontSize: '.9rem', color: '#5A4E42', lineHeight: 1.9, background: '#F2EDE4', padding: '1.5rem', borderRadius: '2px' }}>
               <strong>Antalya'da kuru temizleme hizmetimiz</strong> tüm ilçe ve tatil bölgelerini kapsamaktadır.
               Belek, Kemer ve Lara'daki 5 yıldızlı otellere, Side ve Alanya'ya araçlı alım + teslimat yapıyoruz.
-              Turist ve otel misafirleri için <strong>24 saat ekspres kuru temizleme</strong> mevcuttur.
+              Turist ve otel misafirleri için <strong>hızlı ekspres kuru temizleme</strong> mevcuttur.
             </div>
           </div>
         </section>
@@ -251,8 +251,8 @@ export default function KuruTemizlemePage() {
             {[
               ['Antalya kuru temizleme fiyatı 2026?', `Çamaşır ₺80/kg, elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600'den başlar. WhatsApp: ${PHONE}`],
               ['Otele gelen kuru temizleme var mı?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine alım + teslimat yapıyoruz. WhatsApp: ${PHONE}`],
-              ['24 saatte kuru temizleme mümkün mü?', 'Evet! Ekspres servis mevcuttur. Sabah alınan kıyafetler ertesi gün teslim edilir.'],
-              ['Dry cleaning Antalya — how to order?', `WhatsApp ${PHONE}, we pick up from your hotel and deliver back within 24 hours. English service.`],
+              ['1–2 günde kuru temizleme mümkün mü?', 'Evet! Ekspres servis mevcuttur. Sabah alınan kıyafetler ertesi gün teslim edilir.'],
+              ['Dry cleaning Antalya — how to order?', `WhatsApp ${PHONE}, we pick up from your hotel and deliver back usually within 1–2 days. English service.`],
               ['Химчистка Анталья — как заказать?', `Напишите нам в WhatsApp ${PHONE}. Заберем из отеля и вернем в течение 24–48 часов. Говорим по-русски.`],
               ['Gelinlik kuru temizleme Antalya?', `Evet! Gelinlik kuru temizleme ₺800'den başlar. 72 saat teslim. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (

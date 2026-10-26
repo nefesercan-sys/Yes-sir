@@ -349,7 +349,7 @@ const serviceRows = [
     title: 'Kıyafet Tamiri & Tadilat',
     detail: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
     area: 'Konyaaltı (Hurma, Liman, Uncalı), Muratpaşa, Lara, Kepez',
-    time: 'Aynı Gün / 24 Saat',
+    time: 'Aynı Gün / 1–2 Gün',
     price: '200 TL\'den',
   },
   {
