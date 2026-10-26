@@ -50,7 +50,7 @@ const SERVICES = [
     title:'Online Tailor Service', sub:'Send a Photo · Share Your Measurements · Delivered to Your Door',
     desc:'Send your design and measurements via WhatsApp — we tailor it and ship it anywhere in Turkey.',
     feats:['Order via WhatsApp','Video-Call Fitting','Style Selection','Shipped Delivery'],
-    price:'Free', note:'Free consultation', time:'5–10 days (incl. shipping)',
+    price:'Quote', note:'Price confirmed on WhatsApp', time:'5–10 days (incl. shipping)',
     waMsg:'Hello, I would like information about the online tailor service.' },
   { id:'utu-hizmeti', icon:'💨', badge:'EXPRESS', badgeColor:'#E11D48',
     img: IMGS.utu,
@@ -442,7 +442,7 @@ export default function OnlineTailorClient({
           </div>
           <div className="ohow-grid">
             {([
-              ['01','📸','Send a Photo & Measurements',"Send your reference design and measurements via WhatsApp — completely free."],
+              ['01','📸','Send a Photo & Measurements',"Send your reference design and measurements via WhatsApp — no obligation."],
               ['02','🎨','Design & Fabric Selection','Work out the details with our expert tailor and confirm the price.'],
               ['03','✂️','We Start Sewing','Once approved, we begin sewing in our workshop.'],
               ['04','🚗','Delivery','Courier within Antalya, shipped across Turkey; delivery cost confirmed on WhatsApp.'],

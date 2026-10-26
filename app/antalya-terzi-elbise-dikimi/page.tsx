@@ -14,7 +14,7 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Antalya Terzi · Elbise Dikimi ₺800'den, Tadilat | Terzi Can" },
+  title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
   description:
     "Konyaaltı'nda özel ölçü elbise dikimi ₺800'den, tadilat, tamirat ve ütü. Paça kısaltma 200 TL'den. " +
     "Her gün 08:00–23:00. ☎ +90 531 898 64 18",

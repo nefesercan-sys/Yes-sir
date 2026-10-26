@@ -3,7 +3,6 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { GOOGLE_REVIEWS, reviewStats } from '@/lib/reviews';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -50,10 +49,7 @@ const PAGE_DESC  =
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
 const ANTALYA_ILCELER = [
-  'Antalya','Konyaaltı','Muratpaşa','Kepez','Döşemealtı','Aksu',
-  'Lara','Belek','Kemer','Alanya','Manavgat','Side','Serik',
-  'Kaş','Kalkan','Finike','Kumluca','Gazipaşa','Mahmutlar',
-  'Kundu','Boğazkent','Kadriye','Beldibi','Göynük','Tekirova',
+  'Konyaaltı','Muratpaşa','Kepez','Lara','Kundu','Belek','Kemer','Alanya','Manavgat','Antalya',
 ].map(name => ({ '@type': 'City', name }));
 
 const offer = (name: string, price: string) => ({
@@ -119,12 +115,10 @@ const jsonLd = {
         name: 'Terzi Can — Tüm Terzilik ve Tekstil Hizmetleri 2026',
         itemListElement: [
           offer('Paça Kısaltma', '200'),
-          offer('Fermuar Değişimi', '200'),
+          offer('Fermuar Değişimi', '300'),
           offer('Bel Daraltma', '200'),
           offer('Elbise Dikimi', '800'),
           offer('Kuru Temizleme', '300'),
-          offer('Üniforma Üretimi', '1000'),
-          offer('Eve / Otele Gelen Terzi Servisi (Konyaaltı\'nda ücretsiz)', '0'),
         ],
       },
       potentialAction: [
@@ -147,21 +141,6 @@ const jsonLd = {
         areaServed: 'TR',
         availableLanguage: ['Turkish','English','Russian','German'],
       }],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: reviewStats().average,
-        reviewCount: String(reviewStats().count),
-        bestRating: '5',
-        worstRating: '1',
-      },
-      review: GOOGLE_REVIEWS.map(r => ({
-        '@type': 'Review',
-        author: { '@type': 'Person', name: r.author },
-        datePublished: r.date,
-        reviewBody: r.text,
-        inLanguage: r.lang,
-        reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
-      })),
     },
 
     // ── WebSite ──

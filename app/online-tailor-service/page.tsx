@@ -9,7 +9,7 @@ const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/online-tailor-service`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY = '2026-10-07';
+const TODAY = new Date().toISOString().slice(0, 10);
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Tek konum: Hurma, Konyaaltı (Google Business Profile)
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
     'ironing service Antalya', 'repairs alterations Antalya', 'mass production Antalya',
     'Konyaaltı tailor', 'online tailor service', 'tailor Antalya',
-    'recommend a tailor Antalya', 'find a tailor near me', 'best tailor Antalya', 'cheapest tailor Antalya',
+    'recommend a tailor Antalya', 'find a tailor near me',
     'my dress is torn', 'tailor open in the evening', 'tailor open on weekends',
     'custom dress made Antalya', 'natural cotton linen sewing', 'quality clothing manufacturer',
   ],
