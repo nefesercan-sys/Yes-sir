@@ -1,4 +1,4 @@
-import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
+import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
 
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
@@ -7,10 +7,11 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
   const ui = UI[lang];
   const path = URLS[topic][lang];
   const url = `${BASE}${path}`;
-  const other: Topic = topic === 'keten' ? 'tekstil' : 'keten';
+  const other: Topic = RELATED(topic);
   const isKeten = topic === 'keten';
+  const isTerzi = topic !== 'tekstil';
 
-  const provider = isKeten
+  const provider = isTerzi
     ? { '@type': ['LocalBusiness', 'ClothingStore'], name: 'Terzi Can', url: `${BASE}/terzi`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı, Antalya', addressCountry: 'TR' } }
     : { '@type': ['Organization', 'ClothingStore'], name: 'Anavera Tekstil', url, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Antalya', addressCountry: 'TR' } };
 

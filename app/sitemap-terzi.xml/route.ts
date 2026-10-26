@@ -82,7 +82,7 @@ export async function GET() {
     // 📞 İletişim sayfaları (4 dil, karşılıklı hreflang) — "terzi can telefon / iletişim / adres" aramaları
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
     // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
-    ...(['keten', 'tekstil'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
+    ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))

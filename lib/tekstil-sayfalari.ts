@@ -2,12 +2,17 @@
 // İçerik yalnızca site sahibinin doğruladığı bilgileri içerir: fiyat, stok, organik/çevre dostu,
 // kampanya veya kapıda ödeme iddiası YOKTUR. Tüm ürünler siparişe özel dikilir.
 export type Lang = 'tr' | 'en' | 'ru' | 'de';
-export type Topic = 'keten' | 'tekstil';
+import { TATIL_URLS, TATIL_CONTENT, TATIL_NEXT, type TatilTopic } from './tatil-sayfalari';
+export type { TatilTopic };
+export type Topic = 'keten' | 'tekstil' | TatilTopic;
+export const isTatil = (t: Topic): t is TatilTopic => t === 'acil' || t === 'otel' || t === 'etkinlik';
+export const RELATED = (t: Topic): Topic => (isTatil(t) ? TATIL_NEXT[t] : t === 'keten' ? 'tekstil' : 'keten');
 export const LANGS: Lang[] = ['tr', 'en', 'ru', 'de'];
 export const BASE = 'https://swaphubs.com';
 export const WA_NUMBER = '905318986418';
 
 export const URLS: Record<Topic, Record<Lang, string>> = {
+  ...TATIL_URLS,
   keten: {
     tr: '/dogal-keten-pamuk-giyim',
     en: '/en/linen-clothing-custom-made-antalya',
@@ -56,6 +61,7 @@ export type Page = {
 };
 
 export const CONTENT: Record<Topic, Record<Lang, Page>> = {
+  ...TATIL_CONTENT,
   keten: {
     tr: {
       t: 'Keten Giyim Özel Dikim ve Seri Üretim | Terzi Can Antalya',
