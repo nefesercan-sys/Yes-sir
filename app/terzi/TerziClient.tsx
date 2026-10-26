@@ -506,7 +506,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <header className="thero" aria-label="Karşılama Alanı">
           {HERO_IMAGES.map((img, i) => (
             <div key={i} className={`thslide${i === heroIdx ? ' active' : ' inactive'}`} aria-hidden={i !== heroIdx}>
-              <img src={img.src} alt={img.alt || 'Terzi Can Karşılama Görseli'} loading={i === 0 ? 'eager' : 'lazy'} />
+              <img src={img.src} alt={img.alt || 'Terzi Can Karşılama Görseli'} width={1200} height={800} loading={i === 0 ? 'eager' : 'lazy'} />
             </div>
           ))}
           <div className="thov" />
@@ -569,7 +569,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="tstrip-wrap" aria-label="Terzi Can Fotoğraf Kesitleri">
           <div className="tstrip" ref={stripRef}>
             {[...FILM_STRIP, ...FILM_STRIP].map((src, i) => (
-              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${(i % FILM_STRIP.length) + 1}`} className="tstrip-img" loading="lazy" />
+              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${(i % FILM_STRIP.length) + 1}`} className="tstrip-img" width={600} height={400} loading="lazy" />
             ))}
           </div>
         </section>
