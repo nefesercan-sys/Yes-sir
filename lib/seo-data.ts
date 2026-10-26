@@ -27,7 +27,7 @@ export const LAST_UPDATE = '2026-10-23';
 // Bir bölgeyi Türkçede açmak/kapatmak için bu listeyi değiştirmek yeterli.
 export const TR_NEAR_SLUGS = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem', 'muratpasa', 'fener', 'sirinyali', 'toros'];
 /** Ücretsiz alım-teslim yalnızca işletme sahibinin onayladığı yakın mahallelerde (Ekim 2026 listesi); diğer bölgelerde ücret bölgeye göre belirlenir. */
-export const FREE_SERVICE_SLUGS = ['konyaalti', 'hurma', 'sarisu', 'liman', 'uncali', 'altinkum', 'ogretmenevleri', 'siteler', 'arapsuyu', 'gursu', 'uluc'];
+export const FREE_SERVICE_SLUGS = ['konyaalti', 'hurma', 'sarisu', 'liman', 'uncali', 'altinkum', 'ogretmenevleri', 'siteler', 'arapsuyu', 'gursu', 'uluc', 'meltem'];
 export const isFreeService = (slug: string): boolean => FREE_SERVICE_SLUGS.includes(slug);
 export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);
 /** Bu dil + bölge sayfası aramaya açık mı? */
