@@ -585,6 +585,7 @@ export default function TerziClient({ gbp1 }: Props) {
             <span className="ey">✦ Hizmetler</span>
             <h2 id="services-title" className="tst">Antalya Terzi Hizmetleri</h2>
             <p className="tss">Paça kısaltma, fermuar, bel daraltma, özel dikim, otel servisi, tekstil imalatı ve daha fazlası. Aşağıdan ihtiyacını gör, sonra ücretsiz teklif al.</p>
+            {lang === 'tr' && <p className="tss">Ücretsiz adrese servis: Hurma, Sarısu, Liman, Uncalı, Altınkum, Öğretmenevleri, Siteler, Arapsuyu, Gürsu ve Konyaaltı. Diğer bölgeler için servis WhatsApp'ta netleşir.</p>}
             <span className="tgl" />
           </div>
           <div className="tsvc-grid">
@@ -603,7 +604,7 @@ export default function TerziClient({ gbp1 }: Props) {
             ))}
           </div>
           <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
-            <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Ücretsiz Teklif Al</Link>
+            <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>{lang === 'tr' ? '📝 Formla Teklif İste' : '📝 Request a Quote'}</Link>
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
             <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
           </div>
@@ -627,7 +628,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="twhy" aria-labelledby="why-title">
           <div className="twhy-inner">
             <span className="ey">✦ Neden Terzi Can?</span>
-            <h2 id="why-title" className="tst">10+ Yıllık Deneyim · 4 Dil · Tüm Antalya</h2>
+            <h2 id="why-title" className="tst">Deneyimli Ekip · 4 Dil · Tüm Antalya</h2>
             <span className="tgl" />
             <div className="twhy-grid">
               {WHY.map((w, i) => (
