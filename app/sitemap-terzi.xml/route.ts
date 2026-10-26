@@ -17,7 +17,6 @@ export async function GET() {
 
     // 🔥 2. YÜKSEK TRAFİKLİ URL'LER (Priority: 0.95)
     { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat`,      priority: '0.95', freq: 'weekly' },
     { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,    priority: '0.95', freq: 'weekly' },
     { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                              priority: '0.95', freq: 'weekly' },
     { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,             priority: '0.95', freq: 'weekly' },

@@ -61,7 +61,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `https://www.swaphubs.com/ilanlar/${params.sehir}/${params.sektor}`,
+      canonical: `https://swaphubs.com/ilanlar/${params.sehir}/${params.sektor}`,
     },
   };
 }

@@ -189,7 +189,7 @@ export default function IlanDetayPage() {
           <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 20, marginBottom: 14, display: "flex", alignItems: "center", gap: 14 }}>
             <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg,#2563eb,#7c3aed)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 18, fontWeight: 800, flexShrink: 0 }}>
               {ilan.kullanici.avatarUrl
-                ? <img src={ilan.kullanici.avatarUrl} style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover" }} />
+                ? <img alt="Kullanıcı fotoğrafı" src={ilan.kullanici.avatarUrl} style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover" }} />
                 : (ilan.kullanici.ad || ilan.kullanici.isim || "?")[0].toUpperCase()}
             </div>
             <div>
