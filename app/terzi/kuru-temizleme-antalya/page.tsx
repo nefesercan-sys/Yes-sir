@@ -38,7 +38,7 @@ const jsonLd = {
       name: 'Kuru Temizleme Antalya — Otel Alım Teslimat Hızlı Ekspres 2026',
       description: "Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti. Otel ve adresten alım + teslimat. hızlı ekspres. Elbise ₺300, mont ₺500, çamaşır ₺80/kg.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
-      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya','Manavgat','Side'].map(name => ({ '@type': 'City', name })),
+      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Side'].map(name => ({ '@type': 'City', name })),
       offers: {
         '@type': 'AggregateOffer',
         lowPrice: '80',
@@ -78,7 +78,7 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. Konyaaltı'nda otel alım + teslimat ücretsiz, diğer bölgelerde mesafeye göre. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya otele gelen kuru temizleme var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerinden kuru temizleme alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya otele gelen kuru temizleme var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer ve Side otellerinden kuru temizleme alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Kuru temizleme 1–2 günde hazır mı?', acceptedAnswer: { '@type': 'Answer', text: 'Evet! Turistler ve acil durumlar için hızlı ekspres kuru temizleme mevcuttur. Normal süre 48 saattir.' } },
         { '@type': 'Question', name: 'Mont ve palto kuru temizleme Antalya fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Mont kuru temizleme ₺500, palto ₺550'den başlar. 48 saat teslim. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Dry cleaning Antalya hotel pickup — how does it work?', acceptedAnswer: { '@type': 'Answer', text: `WhatsApp us on ${PHONE}, we pick up from your hotel, clean, and deliver back within 24–48 hours. English speaking service.` } },
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     'mont kuru temizleme Antalya', 'takım elbise kuru temizleme Antalya',
     'abiye kuru temizleme Antalya', 'Belek kuru temizleme', 'Kemer kuru temizleme',
     'dry cleaning Antalya', 'laundry service Antalya', 'hotel laundry Antalya',
-    'химчистка Анталья', 'прачечная Анталья', 'Alanya kuru temizleme',
+    'химчистка Анталья', 'прачечная Анталья',
     'kıyafet temizleme Antalya', 'hızlı kuru temizleme Antalya',
   ],
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
@@ -154,8 +154,8 @@ export default function KuruTemizlemePage() {
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.85, maxWidth: '640px', marginBottom: '1.5rem' }}>
               Antalya'da kuru temizleme, çamaşır yıkama ve ütü hizmeti.
-              <strong style={{ color: '#fff' }}> Belek, Lara, Kemer, Alanya</strong> dahil tüm
-              Antalya otellerinden <strong style={{ color: '#D4B07A' }}>alım ve teslimat (Konyaaltı'nda ücretsiz).</strong> hızlı ekspres.
+              <strong style={{ color: '#fff' }}> Belek, Lara, Kemer ve Side</strong> otellerinden
+              <strong style={{ color: '#D4B07A' }}>alım ve teslimat (Konyaaltı'nda ücretsiz).</strong> hızlı ekspres.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '2rem' }}>
               {[['Çamaşır','₺80/kg'],['Elbise','₺300'],['Takım Elbise','₺450'],['Mont','₺500'],['Abiye','₺600']].map(([t, d]) => (
@@ -230,15 +230,15 @@ export default function KuruTemizlemePage() {
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '1rem' }}>Hizmet Verdiğimiz Bölgeler</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: '.8rem', marginBottom: '1.5rem' }}>
-              {['Konyaaltı', 'Muratpaşa', 'Belek', 'Lara', 'Kemer', 'Alanya', 'Manavgat', 'Side', 'Serik', 'Kepez'].map(b => (
+              {['Konyaaltı', 'Muratpaşa', 'Belek', 'Lara', 'Kemer', 'Side', 'Serik', 'Kepez'].map(b => (
                 <div key={b} style={{ background: '#F2EDE4', padding: '.8rem 1rem', textAlign: 'center', borderLeft: '2px solid #B8975A', fontSize: '.85rem', fontWeight: 500 }}>
                   📍 {b}
                 </div>
               ))}
             </div>
             <div style={{ fontSize: '.9rem', color: '#5A4E42', lineHeight: 1.9, background: '#F2EDE4', padding: '1.5rem', borderRadius: '2px' }}>
-              <strong>Antalya'da kuru temizleme hizmetimiz</strong> tüm ilçe ve tatil bölgelerini kapsamaktadır.
-              Belek, Kemer ve Lara'daki 5 yıldızlı otellere, Side ve Alanya'ya araçlı alım + teslimat yapıyoruz.
+              <strong>Antalya'da kuru temizleme hizmetimiz</strong> Konyaaltı, Lara, Belek, Kemer ve Side bölgelerini kapsamaktadır.
+              Belek, Kemer ve Lara'daki 5 yıldızlı otellere, Side'a araçlı alım + teslimat yapıyoruz.
               Turist ve otel misafirleri için <strong>hızlı ekspres kuru temizleme</strong> mevcuttur.
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function KuruTemizlemePage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Kuru Temizleme — Sık Sorulan Sorular</h2>
             {[
               ['Antalya kuru temizleme fiyatı 2026?', `Çamaşır ₺80/kg, elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600'den başlar. WhatsApp: ${PHONE}`],
-              ['Otele gelen kuru temizleme var mı?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine alım + teslimat yapıyoruz. WhatsApp: ${PHONE}`],
+              ['Otele gelen kuru temizleme var mı?', `Evet! Belek, Lara, Kemer ve Side otellerine alım + teslimat yapıyoruz. WhatsApp: ${PHONE}`],
               ['1–2 günde kuru temizleme mümkün mü?', 'Evet! Ekspres servis mevcuttur. Sabah alınan kıyafetler ertesi gün teslim edilir.'],
               ['Dry cleaning Antalya — how to order?', `WhatsApp ${PHONE}, we pick up from your hotel and deliver back usually within 1–2 days. English service.`],
               ['Химчистка Анталья — как заказать?', `Напишите нам в WhatsApp ${PHONE}. Заберем из отеля и вернем в течение 24–48 часов. Говорим по-русски.`],

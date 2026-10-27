@@ -41,7 +41,7 @@ const jsonLd = {
       // aynı resmi ad + alternateName kullanılıyor — NAP tutarlılığı için kritik
       name: 'TERZİ Tailor Atelie',
       alternateName: ['Terzi Can Konyaaltı', 'Tailor Can Antalya', 'Портной Кан Анталья', 'Schneider Can Antalya', 'Konyaaltı Terzi'],
-      description: "Antalya Konyaaltı'nda profesyonel terzi, dikiş atölyesi ve kuru temizleme. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri başta olmak üzere tüm Antalya'ya adrese servis. Kıyafet dikimi, paça kısaltma, fermuar değişimi.",
+      description: "Antalya Konyaaltı'nda profesyonel terzi, dikiş atölyesi ve kuru temizleme. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri başta olmak üzere Konyaaltı ve çevresi'ya adrese servis. Kıyafet dikimi, paça kısaltma, fermuar değişimi.",
       url: TERZI_URL,
       telephone: PHONE_E,
       priceRange: '₺₺',
@@ -435,7 +435,7 @@ export default function AntalyaTerziPage() {
               Kıyafet Dikimi Fiyatları
             </h2>
             <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
-              Takım elbise, elbise, abiye, gelinlik, gömlek, pantolon — ölçüye özel dikim. Konyaaltı ve Antalya geneli adrese servis.
+              Takım elbise, elbise, abiye, gelinlik, gömlek, pantolon — ölçüye özel dikim. Konyaaltı ve yakın bölgeler adrese servis.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
@@ -521,13 +521,13 @@ export default function AntalyaTerziPage() {
         <section style={{ background: KOYU, padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: SERIF, fontSize: '1.8rem', color: '#fff', marginBottom: '.5rem' }}>
-              Tüm Antalya'nın Her İlçesine <span style={{ color: ALTIN2, fontStyle: 'italic' }}>Adrese Servis</span>
+              Konyaaltı ve Yakın Bölgelere <span style={{ color: ALTIN2, fontStyle: 'italic' }}>Adrese Servis</span>
             </h2>
             <p style={{ color: 'rgba(255,255,255,.55)', fontSize: '.85rem', marginBottom: '2rem' }}>
               Konyaaltı'ndaki mahalle servislerimize ek olarak, diğer Antalya ilçelerine de servisimiz vardır.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(140px,1fr))', gap: '1px', background: 'rgba(255,255,255,.05)' }}>
-              {['Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Serik','Aksu','Döşemealtı'].map(b => (
+              {['Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Serik','Aksu','Döşemealtı'].map(b => (
                 <div key={b} style={{ background: 'rgba(255,255,255,.03)', padding: '.8rem 1rem', fontSize: '.8rem', color: 'rgba(255,255,255,.6)', textAlign: 'center' }}>
                   📍 {b}
                 </div>

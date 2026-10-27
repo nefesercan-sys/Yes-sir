@@ -82,7 +82,7 @@ const jsonLd = {
         {
           '@type': 'Question',
           name: 'Antalya\'da terzi çağırabilir miyim?',
-          acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Antalya Konyaaltı ve tüm ilçelerine araçlı terzi servisi sunuyoruz. Hemen arayın: ${PHONE}` },
+          acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Antalya Konyaaltı ve yakın ilçelerine araçlı terzi servisi sunuyoruz. Hemen arayın: ${PHONE}` },
         },
         {
           '@type': 'Question',
@@ -455,7 +455,7 @@ export default function TerziCagirPage() {
           <div className="callout-icon">🚗</div>
           <h2>Terzi Çağır —<br/><span>Terzi Gelsin!</span></h2>
           <p>
-            Konyaaltı, Hurma, Liman, Sarısu, Uncalı, Gürsu, Meltem ve tüm Antalya'ya
+            Konyaaltı, Hurma, Liman, Sarısu, Uncalı, Gürsu, Meltem ve yakın bölgelere
             kapıya gelen profesyonel terzi servisi. Güvenli, hızlı ve kaliteli.
           </p>
           <div className="callout-steps">
@@ -512,7 +512,7 @@ export default function TerziCagirPage() {
         <section className="mahs" id="mahalleler">
           <h2>🏘️ Hizmet Verilen Mahalleler</h2>
           <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.55)',marginBottom:'1rem',lineHeight:1.6}}>
-            Tüm Konyaaltı mahallelerine ve Antalya'nın tüm ilçelerine araçlı terzi servisi.
+            Tüm Konyaaltı mahallelerine ve Antalya'nın yakın ilçelerine araçlı terzi servisi.
           </p>
           <div className="mah-grid">
             {MAHALLELER.map(m => (
@@ -554,7 +554,7 @@ export default function TerziCagirPage() {
             ['Terzi çağırmak için ne yapmam gerekiyor?',
              `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Randevu saatini birlikte belirleyelim — terzimiz kapınıza gelsin.`],
             ['Hangi mahallelere servis yapıyorsunuz?',
-             'Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevi, Meltem, Çakırlar, Konyaaltı Merkez ve tüm Antalya ilçelerine araçlı terzi servisi sunuyoruz.'],
+             'Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevi, Meltem, Çakırlar, Konyaaltı Merkez ve Antalya\'nın yakın ilçelerine araçlı terzi servisi sunuyoruz.'],
             ['Paça kısaltma ve bel daraltma fiyatı ne kadar?',
              'Paça kısaltma ₺200, bel daraltma ₺200, etek kısaltma ₺200. WhatsApp\'tan fotoğraf gönderin, fiyatı net olarak öğrenin.'],
             ['Teslim süresi ne kadar?',
@@ -575,7 +575,7 @@ export default function TerziCagirPage() {
             Terziniz bir telefon uzağında
           </p>
           <p style={{fontSize:'.8rem',color:'rgba(255,255,255,.55)',marginBottom:'1.2rem'}}>
-            Konyaaltı ve tüm Antalya — Her gün 08:00–23:00
+            Konyaaltı ve yakın bölgeler — Her gün 08:00–23:00
           </p>
           <div style={{display:'flex',flexDirection:'column',gap:'.7rem'}}>
             <a href={`tel:${PHONE_E164}`} className="btn-call-big" style={{justifyContent:'center'}}>

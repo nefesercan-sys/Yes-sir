@@ -94,7 +94,7 @@ export default function OnlineTailorServicePage() {
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Tailor Service', path: SITE_URL.replace(BASE_URL, '') }]}
         faq={FAQ}
-        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Antalya']}
       />
       <SpeakableSchema path="/online-tailor-service" />
       <QuickActionBanner lang="en" />

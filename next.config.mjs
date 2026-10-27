@@ -40,6 +40,11 @@ const nextConfig = {
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'manavgat', 'serik', 'kemer', 'kepez', 'dosemealti'].map((slug) => ({
         source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
       })),
+      // Hizmet verilmeyen Manavgat sayfaları → ilgili dil ana sayfası
+      { source: '/terzi/bolge/manavgat', destination: '/terzi', permanent: true },
+      { source: '/en/tailor-antalya/manavgat', destination: '/online-tailor-service', permanent: true },
+      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/atelie-antalya', permanent: true },
+      { source: '/de/schneider-antalya/manavgat', destination: '/de/online-schneiderservice-antalya', permanent: true },
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu

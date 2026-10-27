@@ -103,8 +103,6 @@ export const DISTRICTS: District[] = [
     loc: { tr: "Belek'te", en: 'in Belek', ru: 'в Белеке', de: 'in Belek' }, alias: [] },
   { slug: 'side', kind: 'resort', hotelSlug: 'side', name: { tr: 'Side', en: 'Side', ru: 'Сиде', de: 'Side' },
     loc: { tr: "Side'de", en: 'in Side', ru: 'в Сиде', de: 'in Side' }, alias: ['Manavgat Side'] },
-  { slug: 'manavgat', kind: 'outer', name: { tr: 'Manavgat', en: 'Manavgat', ru: 'Манавгат', de: 'Manavgat' },
-    loc: { tr: "Manavgat'ta", en: 'in Manavgat', ru: 'в Манавгате', de: 'in Manavgat' }, alias: [] },
   { slug: 'kemer', kind: 'resort', hotelSlug: 'kemer', name: { tr: 'Kemer', en: 'Kemer', ru: 'Кемер', de: 'Kemer' },
     loc: { tr: "Kemer'de", en: 'in Kemer', ru: 'в Кемере', de: 'in Kemer' }, alias: [] },
   { slug: 'beldibi', kind: 'resort', name: { tr: 'Beldibi', en: 'Beldibi', ru: 'Бельдиби', de: 'Beldibi' },

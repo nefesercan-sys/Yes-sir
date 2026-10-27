@@ -37,7 +37,7 @@ const jsonLd = {
         'Выездной портной Анталья','Mobile Schneiderdienst Antalya',
         'Araçlı Terzi Servisi Antalya',
       ],
-      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Konyaaltı, Lara, Belek, Kemer, Alanya, Side, Manavgat — tüm ilçelere araçlı terzi servisi. Ölçü alma, dikim ve teslimat kapınıza.",
+      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Konyaaltı, Lara, Belek, Kemer, Side — yakın ilçelere araçlı terzi servisi. Ölçü alma, dikim ve teslimat kapınıza.",
       provider: {
         '@type': 'ClothingStore',
         '@id': `${PARENT_URL}#business`,
@@ -46,8 +46,7 @@ const jsonLd = {
       },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
-        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Alanya'},
-        {name:'Manavgat'},{name:'Side'},{name:'Kepez'},
+        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Side'},{name:'Kepez'},
       ].map(c=>({...c,'@type':'City'})),
       offers: {
         '@type': 'Offer',
@@ -60,7 +59,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can',
       url: SITE_URL,
-      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer, Alanya dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. Her gün 08:00–23:00. ☎ " + PHONE,
+      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. Her gün 08:00–23:00. ☎ " + PHONE,
       inLanguage: 'tr',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -80,12 +79,12 @@ const jsonLd = {
         {
           '@type':'Question',
           name:'Eve gelen terzi Antalya var mı?',
-          acceptedAnswer:{'@type':'Answer',text:`Evet! Terzi Can'ın araçlı terzi servisi ile Antalya'nın tüm ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin ve teslim etsin. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Evet! Terzi Can'ın araçlı terzi servisi ile Antalya'nın yakın ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin ve teslim etsin. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
           name:'Otele gelen terzi Antalya — hangi otellere hizmet veriyorsunuz?',
-          acceptedAnswer:{'@type':'Answer',text:`Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic dahil tüm Antalya otellere terzi servisi veriyoruz. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic dahil Konyaaltı, Lara, Belek, Kemer ve Side otellerine terzi servisi veriyoruz. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
@@ -95,7 +94,7 @@ const jsonLd = {
         {
           '@type':'Question',
           name:'Mobile tailor Antalya — how fast is the service?',
-          acceptedAnswer:{'@type':'Answer',text:`Yes! Tailor Can offers a mobile tailor service across Antalya districts including Lara, Belek, Kemer and Alanya hotels. Timing depends on the job and workload and is confirmed on WhatsApp. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Yes! Tailor Can offers a mobile tailor service in Konyaaltı and nearby districts, including Lara, Belek, Kemer and Side hotels. Timing depends on the job and workload and is confirmed on WhatsApp. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
@@ -105,7 +104,7 @@ const jsonLd = {
         {
           '@type':'Question',
           name:'Выездной портной Анталья — есть ли обслуживание в отеле?',
-          acceptedAnswer:{'@type':'Answer',text:`Да! Портной Кан обслуживает все отели Антальи — Белек, Лара, Кемер, Аланья. Говорим по-русски. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Да! Портной Кан обслуживает отели Белека, Лары, Кемера и Сиде — Белек, Лара, Кемер. Говорим по-русски. WhatsApp: ${PHONE}`},
         },
       ],
     },
@@ -125,12 +124,12 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Eve ve Otele Gelen Terzi Antalya · Araçlı Servis' },
-  description: "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer, Alanya dahil. Paça ₺200, tadilat. Her gün 08:00–23:00. ☎ " + PHONE,
+  description: "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00. ☎ " + PHONE,
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
     'araçlı terzi servisi Antalya','mobile tailor Antalya',
     'hotel tailor Antalya','Belek terzi','Lara terzi','Kemer terzi',
-    'Alanya terzi','Belek hotel tailor','tailor service Antalya hotel',
+    'Belek hotel tailor','tailor service Antalya hotel',
     'выездной портной Анталья','портной в отель Анталья',
   ],
   alternates: {
@@ -145,7 +144,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis',
-    description: "Belek, Lara, Kemer, Alanya dahil tüm Antalya otellerine terzi servisi. Her gün 08:00–23:00. ☎ " + PHONE,
+    description: "Belek, Lara, Kemer ve Side otellerine terzi servisi. Her gün 08:00–23:00. ☎ " + PHONE,
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true },
@@ -155,10 +154,9 @@ const ILCELER = [
   {ad:'Belek',yol:'~35 dk', aciklama:'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
   {ad:'Lara',yol:'~10 dk', aciklama:'Tüm Lara otelleri — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
   {ad:'Kemer',yol:'~45 dk', aciklama:'Tüm Kemer otelleri — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
-  {ad:'Alanya',yol:'~1.5 saat', aciklama:'Alanya merkez ve çevresi — Mahmutlar, Oba, Konaklı, Avsallar'},
   {ad:'Muratpaşa / Liman',yol:'~5 dk', aciklama:'Şehir merkezi, Kaleiçi, Şirinyalı, Fener'},
   {ad:'Konyaaltı',yol:'Merkez', aciklama:'Terzi Can merkezi — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {ad:'Manavgat / Side',yol:'~1 saat', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
+  {ad:'Side',yol:'~1 saat', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
   {ad:'Serik / Döşemealtı',yol:'~40 dk', aciklama:'Serik merkez ve çevre köyler'},
 ];
 
@@ -184,15 +182,15 @@ export default function EveGelenTerziPage() {
           <div style={{ position: 'absolute', top: 0, right: 0, width: '40%', height: '100%', background: `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80&auto=format&fit=crop') center/cover`, opacity: .15 }} />
           <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
-              🚗 Araçlı Terzi Servisi · Tüm Antalya
+              🚗 Araçlı Terzi Servisi · Konyaaltı ve çevresi
             </div>
             <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2.2rem,5vw,4rem)', fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: '1.2rem' }}>
               Eve Gelen Terzi Antalya<br />
               <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Otele Gelen Terzi Servisi</span>
             </h1>
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
-              <strong style={{ color: '#fff' }}>Terzi Can</strong> araçlı terzi servisiyle <strong style={{ color: '#D4B07A' }}>tüm Antalya ilçelerine</strong> geliyoruz.
-              Belek, Lara, Kemer, Alanya dahil tüm oteller. Ölçü alım, dikim ve teslimat kapınıza.
+              <strong style={{ color: '#fff' }}>Terzi Can</strong> araçlı terzi servisiyle <strong style={{ color: '#D4B07A' }}>Antalya'nın yakın ilçelerine</strong> geliyoruz.
+              Belek, Lara, Kemer ve Side otelleri. Ölçü alım, dikim ve teslimat kapınıza.
               Süre işe göre WhatsApp'ta netleşir.
             </p>
             {/* Çok dil karşılama */}
@@ -251,7 +249,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Antalya'nın Tüm İlçelerine Araçlı Terzi Servisi
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Konyaaltı merkezimizden tüm Antalya ilçelerine terzi servisi</p>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Konyaaltı merkezimizden Antalya'nın yakın ilçelerine terzi servisi</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {ILCELER.map(({ad, yol, aciklama}) => (
                 <div key={ad} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
@@ -273,7 +271,7 @@ export default function EveGelenTerziPage() {
               Antalya Otellerinde Terzi Hizmeti
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>
-              Aşağıdaki oteller dahil tüm Antalya otellerine terzi servisimizle geliyoruz.
+              Aşağıdaki oteller dahil yakın bölgelerdeki otellere terzi servisimizle geliyoruz.
               Concierge'e sormadan direkt WhatsApp'tan yazabilirsiniz.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginBottom: '1.5rem' }}>
@@ -387,12 +385,12 @@ export default function EveGelenTerziPage() {
               Eve / Otele Gelen Terzi — Sık Sorulan Sorular
             </h2>
             {[
-              ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın tüm ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
+              ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
               ['Araçlı terzi servisi ücretli mi?', 'Konyaaltı\'nda araçlı terzi servisi ücretsizdir, diğer bölgelerde mesafeye göre belirlenir. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
+              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

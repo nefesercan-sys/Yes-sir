@@ -207,10 +207,8 @@ const ILCELER = [
   {ilce:'Aksu', slug:'aksu',      m:['Kundu','Güzeloba','Altıntaş','Boğazkent','Kadriye']},
   {ilce:'Lara / Belek', slug:'belek',m:['Belek','Kadriye','Boğazkent','Kundu','Ilıca']},
   {ilce:'Kemer', slug:'kemer',     m:['Kemer Merkez','Beldibi','Göynük','Çamyuva','Tekirova','Kiriş']},
-  {ilce:'Alanya', slug:'alanya',    m:['Alanya Merkez','Mahmutlar','Oba','Tosmur','Avsallar','Kestel','Konaklı']},
-  {ilce:'Manavgat/Side', slug:'manavgat',m:['Manavgat Merkez','Side','Sorgun','Kumköy','Evrenseki']},
+  {ilce:'Side', slug:'side',m:['Side','Sorgun','Kumköy','Evrenseki']},
   {ilce:'Serik', slug:'serik',     m:['Serik Merkez','Boğazkent','Belek yakını']},
-  {ilce:'Kaş & Diğer', slug:'kas',m:['Kaş Merkez','Kalkan','Finike','Kumluca','Gazipaşa']},
 ];
 
 // Sadece GERÇEKTEN var olan sayfalar (GitHub ağacına göre).
@@ -244,7 +242,7 @@ const WHY = [
   { icon:'📍', tr:['Yerinde Ölçü','Adresinize gelip ölçü alıyoruz'], en:['On-Site Fitting','We come to your address'], ru:['Замеры на месте','Приедем по адресу'], de:['Maß vor Ort','Wir kommen zu Ihnen'] },
   { icon:'🚗', tr:['Araçlı Servis','Eve ve otele gelen terzi'], en:['Mobile Tailor','We come to you'], ru:['Выездной портной','Приедем к вам'], de:['Mobiler Schneider','Kommen zu Ihnen'] },
   { icon:'🌍', tr:['4 Dil','TR · EN · RU · DE'], en:['4 Languages','TR · EN · RU · DE'], ru:['4 языка','TR · EN · RU · DE'], de:['4 Sprachen','TR · EN · RU · DE'] },
-  { icon:'🏨', tr:['Otele Teslimat','Tüm Antalya otellerine'], en:['Hotel Delivery','All Antalya hotels'], ru:['Доставка в отель','Все отели Антальи'], de:['Hotel Lieferung','Alle Antalya-Hotels'] },
+  { icon:'🏨', tr:['Otele Teslimat','Belek, Lara, Kemer ve Side otellerine'], en:['Hotel Delivery','Hotels in Belek, Lara, Kemer, Side'], ru:['Доставка в отель','Все отели Антальи'], de:['Hotel Lieferung','Alle Antalya-Hotels'] },
   { icon:'👔', tr:['Bay & Bayan','Erkek ve kadın kıyafeti uzman ekip'], en:['Men & Women','Specialist team for both'], ru:['Мужской & Женский','Специалисты для обоих'], de:['Herren & Damen','Spezialisiert für beide'] },
   { icon:'🏭', tr:['Tekstil İmalatı','Tişört, sweatshirt, pantolon seri üretim'], en:['Textile Mfg','T-shirt, sweatshirt, trousers production'], ru:['Производство','Серийное производство'], de:['Textilproduktion','Serienproduktion'] },
 ];
@@ -270,12 +268,12 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Hangi ödeme yöntemleri ve para birimleri geçerli?', 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.'],
     ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺300 / €9. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺200 / €6'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Tüm Antalya. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Konyaaltı ve yakın bölgelerde hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Tişört, sweatshirt, pantolon, gobi imalatı?', `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bay terzi Antalya — erkek kıyafet dikimi?', `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bayan terzi Antalya — kadın elbise dikimi?', `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE_DISPLAY}`],
     ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.'],
+    ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.'],
     ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. hızlı ekspres.'],
     ['Elbisem yırtıldı, tamir edebilir misiniz?', `Evet, yırtık ve söküm tamiri yapıyoruz; süre hasara ve yoğunluğa göre değişir. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hafta sonu açık mısınız?', `Haftanın her günü 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
@@ -293,7 +291,7 @@ const FAQ: Record<Lang, [string, string][]> = {
     ["Do you offer men's bespoke tailoring?", 'Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, and groom suits.'],
     ["Do you offer women's dressmaking and alterations?", 'Yes! Evening gowns, wedding dresses, skirts, blouses, plus size fitting, and emergency repairs.'],
     ['Sewing workshop for mass production?', 'Yes! Pattern making, prototypes, and full-package mass production for brands.'],
-    ['Which Antalya districts and hotel zones do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu Hotel Zone, Belek, Kemer, Alanya, Manavgat, Side, and Serik.'],
+    ['Which Antalya districts and hotel zones do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu Hotel Zone, Belek, Kemer, Side, and Serik.'],
     ['Dry cleaning and laundry prices for tourists?', 'Dry cleaning ₺300 / €9, coat ₺500 / €15, laundry ₺80/kg / €2.5/kg. Hotel pickup & fast delivery.'],
   ],
   ru:[
@@ -307,7 +305,7 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Есть мужской портной?', 'Да! Костюмы, брюки, рубашки, пиджаки, смокинги.'],
     ['Есть женский портной?', 'Да! Вечерние и свадебные платья, юбки, подгонка больших размеров.'],
     ['Ателье для серийного производства?', 'Да! Лекала, образцы и серийное производство для брендов.'],
-    ['В какие районы и отельные зоны выезжаете?', 'Коньяалты, Муратпаша, Кепез, Лара, Кунду, Белек, Кемер, Алания, Манавгат, Сиде, Серик.'],
+    ['В какие районы и отельные зоны выезжаете?', 'Коньяалты, Муратпаша, Кепез, Лара, Кунду, Белек, Кемер, Алания, Сиде, Серик.'],
     ['Химчистка и стирка для туристов?', 'Химчистка ₺300 / €9, пальто ₺500 / €15, стирка ₺80/кг / €2.5/кг. Забор из отеля и экспресс 24ч.'],
   ],
   de:[
@@ -321,7 +319,7 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Herrenschneider in Antalya?', 'Ja! Maßanzüge, Hosen, Hemden, Jacken, Blazer, Smoking.'],
     ['Damenschneiderin in Antalya?', 'Ja! Kleider, Abendkleider, Brautkleider, Übergrößen.'],
     ['Nähwerkstatt Serienproduktion?', 'Ja! Schnittmuster, Prototypen, Serienproduktion für Marken.'],
-    ['Welche Hotelzonen und Bezirke bedienen Sie?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu, Belek, Kemer, Alanya, Manavgat, Side, Serik.'],
+    ['Welche Hotelzonen und Bezirke bedienen Sie?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu, Belek, Kemer, Side, Serik.'],
     ['Reinigung und Bügeln für Touristen?', 'Reinigung ₺300 / €9, Mantel ₺500 / €15, Wäsche ₺80/kg / €2.5/kg. Kurierabholung im Hotel Express.'],
   ],
 };
@@ -628,7 +626,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="twhy" aria-labelledby="why-title">
           <div className="twhy-inner">
             <span className="ey">✦ Neden Terzi Can?</span>
-            <h2 id="why-title" className="tst">Deneyimli Ekip · 4 Dil · Tüm Antalya</h2>
+            <h2 id="why-title" className="tst">Deneyimli Ekip · 4 Dil · Konyaaltı ve çevresi</h2>
             <span className="tgl" />
             <div className="twhy-grid">
               {WHY.map((w, i) => (
@@ -694,7 +692,7 @@ export default function TerziClient({ gbp1 }: Props) {
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <span className="ey ey-light">🚗 Adrese Ve Otele Gelen Terzi Servisi</span>
             <h2 id="mob-title" className="tst tst-light">Kapınıza Geliyoruz</h2>
-            <p className="tss tss-light">Araçlı terzi servisimizle tüm Antalya otellerine ve adreslere hizmet veriyoruz.</p>
+            <p className="tss tss-light">Araçlı terzi servisimizle Belek, Lara, Kemer ve Side otellerine ve adreslere hizmet veriyoruz.</p>
             <span className="tgl" />
             <div className="tmob-steps">
               {[
@@ -846,7 +844,7 @@ export default function TerziClient({ gbp1 }: Props) {
                   { ic: '📞', lbl: 'Telefon', val: <a href={`tel:+${PHONE_RAW}`}>{PHONE_DISPLAY}</a> },
                   { ic: '💬', lbl: 'WhatsApp', val: <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer">{PHONE_DISPLAY}</a> },
                   { ic: '🕐', lbl: 'Çalışma Saatleri', val: <span>{L.hours}</span> },
-                  { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Tüm Antalya İlçeleri & Otelleri — Araçlı Terzi Servisi' : lang === 'en' ? 'All Antalya Districts & Hotels — Mobile Tailor' : lang === 'ru' ? 'Все районы и отели Антальи' : 'Alle Antalya-Bezirke & Hotels'}</span> },
+                  { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Konyaaltı, Lara, Belek, Kemer, Side — Araçlı Terzi Servisi' : lang === 'en' ? 'Konyaaltı & Nearby Districts & Hotels — Mobile Tailor' : lang === 'ru' ? 'Все районы и отели Антальи' : 'Alle Antalya-Bezirke & Hotels'}</span> },
                   { ic: '💳', lbl: lang === 'tr' ? 'Ödeme & Para Birimleri' : 'Payment & Currencies', val: <span>EUR · USD · RUB · TRY · Credit Card</span> },
                   { ic: '🌍', lbl: lang === 'tr' ? 'Diller' : 'Languages', val: <span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span> },
                 ].map(({ ic, lbl, val }, i) => (

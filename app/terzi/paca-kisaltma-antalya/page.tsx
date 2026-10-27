@@ -20,7 +20,7 @@ const jsonLd = {
       description: "Antalya'da paça kısaltma ve pantolon kısaltma hizmeti. Kot paça ₺200, kumaş pantolon ₺200. 1–2 günde teslim. Eve ve otele gelen terzi servisi.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: [
-        {name:'Antalya'},{name:'Konyaaltı'},{name:'Belek'},{name:'Lara'},{name:'Kemer'},{name:'Alanya'}
+        {name:'Antalya'},{name:'Konyaaltı'},{name:'Belek'},{name:'Lara'},{name:'Kemer'}
       ].map(c=>({...c,'@type':'City'})),
       offers: {
         '@type': 'AggregateOffer',
@@ -59,7 +59,7 @@ const jsonLd = {
       mainEntity: [
         { '@type':'Question', name:'Antalya paça kısaltma fiyatı ne kadar? 2026', acceptedAnswer:{ '@type':'Answer', text:`Antalya'da paça kısaltma fiyatı: kot paça ₺200, kumaş pantolon ₺200, deri pantolon ₺250'den başlar. Konyaaltı'nda servis ücretsiz, uzak bölgeler duruma göre fiyatlandırılır. WhatsApp: ${PHONE}` }},
         { '@type':'Question', name:'Paça kısaltma kaç saatte olur?', acceptedAnswer:{ '@type':'Answer', text:'Normal işlemlerde 1–2 gün, acil durumlarda aynı gün paça kısaltma yapılmaktadır. WhatsApp\'tan iletişime geçin.' }},
-        { '@type':'Question', name:'Eve gelen paça kısaltma Antalya var mı?', acceptedAnswer:{ '@type':'Answer', text:`Evet! Terzi Can araçlı servisle Antalya ilçelerine geliyor. Konyaaltı'nda servis ücretsiz; Belek, Lara, Kemer, Alanya gibi uzak bölgelerde duruma göre fiyatlandırılır. WhatsApp: ${PHONE}` }},
+        { '@type':'Question', name:'Eve gelen paça kısaltma Antalya var mı?', acceptedAnswer:{ '@type':'Answer', text:`Evet! Terzi Can araçlı servisle Antalya ilçelerine geliyor. Konyaaltı'nda servis ücretsiz; Belek, Lara, Kemer gibi uzak bölgelerde duruma göre fiyatlandırılır. WhatsApp: ${PHONE}` }},
         { '@type':'Question', name:'Kot paça kısaltma fiyatı nedir?', acceptedAnswer:{ '@type':'Answer', text:"Kot paça kısaltma ₺200'dir. Orjinal dikiş tekniğiyle yapılır. 1–2 günde teslim." }},
         { '@type':'Question', name:'Pantolon paça kısaltma ile pantolon kısaltma aynı şey mi?', acceptedAnswer:{ '@type':'Answer', text:'Evet, paça kısaltma ve pantolon boyu kısaltma aynı işlemdir. Pantolonun boyu belirlenen ölçüye göre kısaltılır ve yeniden dikilir.' }},
         { '@type':'Question', name:'Pantolon paçası kaç TL, paça kısaltma ücreti ne kadar?', acceptedAnswer:{ '@type':'Answer', text:`Paça kısaltma ücreti 2026: kot paça ₺200, eşofman ₺200, kumaş pantolon ₺200, deri pantolon ₺250'den başlar. WhatsApp: ${PHONE}` }},
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
     'kot paça kısaltma Antalya', 'Antalya paça kısaltma kaç lira', 'pantolon boyu kısaltma Antalya',
     'eşofman paça kısaltma', 'eve gelen paça kısaltma Antalya', 'paça kısaltma Konyaaltı',
-    'paça kısaltma Belek', 'paça kısaltma Lara', 'paça kısaltma Kemer', 'paça kısaltma Alanya',
+    'paça kısaltma Belek', 'paça kısaltma Lara', 'paça kısaltma Kemer',
     'pantolon tadilat Antalya', 'hızlı paça kısaltma Antalya', 'hızlı paça kısaltma',
     'paça kısaltma fiyatları 2026', 'paça kısaltma ücreti', 'pantolon paçası kaç tl', 'pantolon paça kısaltma ücreti 2026',
     'terzi paça kısaltma fiyatları 2026', 'terzi paça fiyatları 2026', 'paça kısaltma ne kadar',
@@ -119,7 +119,7 @@ const FIYATLAR = [
   ['Kadife Pantolon Paça', '₺200', '48 saat', 'Hassas kumaş'],
   ['Tulum / Tulum Paça', '₺200', '1–2 gün', 'Her model'],
   ['Geniş Paça → Dar Paça', '₺200', '48 saat', 'Şekil değişikliği'],
-  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—', 'Tüm Antalya'],
+  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—', 'Konyaaltı ve çevresi'],
 ];
 
 const ILCELER = [
@@ -129,8 +129,7 @@ const ILCELER = [
   { ad: 'Lara', sure: '~20 dk', detay: 'Lara merkez, Kundu, Güzeloba' },
   { ad: 'Belek', sure: '~35 dk', detay: 'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo' },
   { ad: 'Kemer', sure: '~45 dk', detay: 'Kemer merkez, Beldibi, Göynük, Tekirova' },
-  { ad: 'Alanya', sure: '~90 dk', detay: 'Alanya merkez, Mahmutlar, Oba, Konaklı' },
-  { ad: 'Manavgat / Side', sure: '~60 dk', detay: 'Side, Sorgun, Kumköy, Evrenseki' },
+  { ad: 'Side', sure: '~60 dk', detay: 'Side, Sorgun, Kumköy, Evrenseki' },
 ];
 
 export default function PacaKisaltmaPage() {
@@ -282,7 +281,7 @@ export default function PacaKisaltmaPage() {
         <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '.5rem' }}>
-              Paça Kısaltma Hizmet Bölgeleri — Tüm Antalya
+              Paça Kısaltma Hizmet Bölgeleri — Konyaaltı ve çevresi
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Konyaaltı merkezimizden Konyaaltı'na ücretsiz, uzak bölgelere duruma göre fiyatlandırılan araçlı servis</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '.8rem' }}>
@@ -308,7 +307,7 @@ export default function PacaKisaltmaPage() {
             {[
               ['Antalya paça kısaltma fiyatı 2026 ne kadar?', "Kot paça kısaltma ₺200, kumaş pantolon ₺200, deri pantolon ₺250'den başlar. Konyaaltı'nda servis ücretsizdir, uzak bölgelerde duruma göre fiyatlandırılır."],
               ['Paça kısaltma kaç saatte tamamlanır?', 'Standart işlemlerde 1–2 gün, acil durumlarda aynı gün teslim yapılmaktadır. WhatsApp\'tan talep edin.'],
-              ['Eve gelen paça kısaltma Antalya var mı?', 'Evet! Araçlı terzi servisimizle Antalya\'nın ilçelerine geliyoruz. Konyaaltı\'nda servis ücretsiz; Belek, Lara, Kemer, Alanya gibi uzak bölgelerde duruma göre fiyatlandırılır.'],
+              ['Eve gelen paça kısaltma Antalya var mı?', 'Evet! Araçlı terzi servisimizle Antalya\'nın ilçelerine geliyoruz. Konyaaltı\'nda servis ücretsiz; Belek, Lara, Kemer gibi uzak bölgelerde duruma göre fiyatlandırılır.'],
               ['Kot paça orijinal dikiş tekniğiyle mi kısaltılıyor?', 'Evet. Levi\'s, Mavi ve diğer markalarda orijinal zincir dikiş veya çift dikiş tekniği kullanılmaktadır.'],
               ['Pantolon paçası kaç TL, paça kısaltma ücreti ne kadar?', "Paça kısaltma ücreti 2026: kot paça ₺200, eşofman ₺200, kumaş pantolon ₺200, deri pantolon ₺250'den başlar."],
               ['Eşofman paça kısaltma kaç lira?', "Eşofman ve spor pantolon paça kısaltma ₺200'dir. Lastikli veya düz paça seçeneği mevcuttur."],
@@ -344,7 +343,7 @@ export default function PacaKisaltmaPage() {
             </a>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '.76rem', color: 'rgba(255,255,255,.75)' }}>
-            Her gün 08:00–23:00 · Tüm Antalya
+            Her gün 08:00–23:00 · Konyaaltı ve çevresi
           </p>
         </section>
 

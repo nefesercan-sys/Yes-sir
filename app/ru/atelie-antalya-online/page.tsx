@@ -105,7 +105,7 @@ export default function RuAtelieAntalyaPage() {
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Ателье на русском', path: '/ru/atelie-antalya-online' }]}
         faq={FAQ}
-        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Antalya']}
       />
 
       <SpeakableSchema path="/ru/atelie-antalya-online" />

@@ -46,7 +46,7 @@ const T: Record<Lang, any> = {
       ['Do you speak English?', `Yes, our team speaks English, Russian, German and Turkish. WhatsApp: ${PHONE}`],
     ],
     ctaH: (r: string) => `Book Your ${r} Hotel Tailor Now`, ctaSub: 'Share your hotel name — we confirm your appointment on WhatsApp',
-    waBtn: 'WhatsApp — Share Hotel Name', related: 'Other Hotel Districts', allDistricts: '← All Antalya Districts',
+    waBtn: 'WhatsApp — Share Hotel Name', related: 'Other Hotel Districts', allDistricts: '← Konyaaltı & Nearby Districts',
   },
   ru: {
     tag: (r: string) => `🚗 Выездной портной · Отельная зона ${r}`,
@@ -116,7 +116,7 @@ const T: Record<Lang, any> = {
       ['Sprechen Sie Deutsch?', `Ja, unser Team spricht Deutsch, Englisch, Russisch und Türkisch. WhatsApp: ${PHONE}`],
     ],
     ctaH: (r: string) => `Jetzt Schneider ins Hotel buchen — ${r}`, ctaSub: 'Hotelnamen senden — wir bestätigen den Termin per WhatsApp',
-    waBtn: 'WhatsApp — Hotelnamen senden', related: 'Andere Hotelbezirke', allDistricts: '← Alle Bezirke von Antalya',
+    waBtn: 'WhatsApp — Hotelnamen senden', related: 'Andere Hotelbezirke', allDistricts: '← Bezirke von Antalya',
   },
 };
 

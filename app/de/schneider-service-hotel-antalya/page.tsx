@@ -36,12 +36,11 @@ const jsonLd = {
         'Schneider im Hotel Antalya','Mobiler Schneiderdienst Antalya','Deutschsprachiger Schneider Antalya',
         'Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya',
       ],
-      description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Alanya, Side, Manavgat — in alle Bezirke von Antalya. Maßnahme, Änderung und Lieferung direkt zu Ihnen.',
+      description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Side und nahegelegene Bezirke. Maßnahme, Änderung und Lieferung direkt zu Ihnen.',
       provider: { '@type': 'ClothingStore', '@id': `${PARENT_URL}#business`, name: 'Terzi Can', telephone: PHONE_E164 },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
-        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Alanya'},
-        {name:'Manavgat'},{name:'Side'},{name:'Kepez'},
+        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Side'},{name:'Kepez'},
       ].map(c=>({...c,'@type':'City'})),
       offers: { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },
@@ -50,7 +49,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Mobiler Schneider Antalya · Schneiderservice im Hotel · Terzi Can',
       url: SITE_URL,
-      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer, Alanya und alle Bezirke. Änderungen mit Anprobe im Hotel. Wir sprechen Deutsch. ☎ ' + PHONE,
+      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer und nahegelegene Bezirke. Änderungen mit Anprobe im Hotel. Wir sprechen Deutsch. ☎ ' + PHONE,
       inLanguage: 'de',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -74,7 +73,7 @@ const jsonLd = {
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
           acceptedAnswer:{'@type':'Answer',text:`Der Besuch in Konyaaltı ist kostenlos, in anderen Gebieten richtet sich das Entgelt nach der Entfernung — dazu zahlen Sie die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in ganz Antalya, einschließlich Hotels in Belek, Lara, Kemer und Alanya. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
           acceptedAnswer:{'@type':'Answer',text:`Ja, unser Team spricht Deutsch, Englisch, Russisch und Türkisch. WhatsApp: ${PHONE}`} },
       ],
@@ -95,11 +94,11 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Schneider im Hotel Antalya · Mobiler Service | Terzi Can' },
-  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Alanya. Änderungen mit Anprobe im Hotel, wir sprechen Deutsch. ☎ ' + PHONE,
+  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer. Änderungen mit Anprobe im Hotel, wir sprechen Deutsch. ☎ ' + PHONE,
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',
-    'Schneider Kemer Hotel','Schneider Alanya Hotel','Änderungsschneiderei Antalya',
+    'Schneider Kemer Hotel','Änderungsschneiderei Antalya',
     'Kleid ändern Antalya Hotel','Anzug ändern Antalya',
   ],
   alternates: {
@@ -108,7 +107,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Mobiler Schneider Antalya · Schneiderservice im Hotel',
-    description: 'Mobiler Schneiderservice zu Ihrem Hotel in Belek, Lara, Kemer, Alanya und ganz Antalya.',
+    description: 'Mobiler Schneiderservice zu Ihrem Hotel in Belek, Lara, Kemer und ganz Antalya.',
     url: SITE_URL, type: 'website', locale: 'de_DE',
   },
   robots: { index: true, follow: true },
@@ -119,7 +118,6 @@ const DISTRICTS = [
   {name:'Lara', time:'~10 Min', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
   {name:'Güzeloba', time:'~15 Min', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
   {name:'Kemer', time:'~45 Min', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Alanya', time:'~1,5 Std', desc:'Alanya Zentrum und Umgebung — Mahmutlar, Oba, Konaklı, Avsallar'},
   {name:'Muratpaşa / Liman', time:'~5 Min', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Vor Ort', desc:'Werkstatt von Terzi Can — Hurma, Uncalı, Arapsuyu, Sarısu'},
   {name:'Side', time:'~1 Std', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
@@ -155,7 +153,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h1>
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> kommt mit dem mobilen Schneiderservice in <strong style={{ color: '#D4B07A' }}>jeden Bezirk von Antalya</strong>.
-              Belek, Lara, Kemer, Alanya — alle Hotels. Maßnahme, Änderung und Lieferung direkt zu Ihnen.
+              Belek, Lara, Kemer, Side — alle Hotels. Maßnahme, Änderung und Lieferung direkt zu Ihnen.
               Die Übergabezeit legen wir per WhatsApp fest.
             </p>
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
@@ -306,7 +304,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
               ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
               ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
+              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

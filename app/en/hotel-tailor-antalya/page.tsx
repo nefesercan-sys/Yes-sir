@@ -31,7 +31,7 @@ const FAQ = [
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
   { q: 'Is the hotel tailor visit free?', a: `In Konyaaltı the visit is free; in other areas the fee depends on the distance, confirmed on WhatsApp. You also pay for the tailoring work. Trouser hemming starts at ₺200 (€6), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
-  { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; simple jobs are often ready within a day or two, depending on workload. We serve hotels in Belek, Lara, Kemer, Alanya and across Antalya. WhatsApp: ${PHONE}` },
+  { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; simple jobs are often ready within a day or two, depending on workload. We serve hotels in Belek, Lara, Kemer and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
   '@type': 'HowTo',
@@ -47,11 +47,11 @@ const HOWTO = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Hotel Tailor Antalya · Tailor Comes to Your Hotel | Terzi Can' },
-  description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer, Alanya. Same-day alterations, English speaking tailor, accepts EUR/USD/RUB/Cards. ☎ ' + PHONE,
+  description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer. Same-day alterations, English speaking tailor, accepts EUR/USD/RUB/Cards. ☎ ' + PHONE,
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
     'English speaking tailor Antalya','Belek hotel tailor','Lara hotel tailor',
-    'Kemer hotel tailor','Alanya hotel tailor','emergency tailor Antalya',
+    'Kemer hotel tailor','emergency tailor Antalya',
     'dress alteration Antalya hotel','suit alteration Antalya',
   ],
   alternates: {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Mobile Tailor Antalya · Hotel Tailor Service',
-    description: 'Mobile tailor service to your hotel in Belek, Lara, Kemer, Alanya and all Antalya districts. Accepts foreign currencies & cards.',
+    description: 'Mobile tailor service to your hotel in Belek, Lara, Kemer, Side and nearby districts. Accepts foreign currencies & cards.',
     url: SITE_URL, type: 'website', locale: 'en_US',
   },
   robots: { index: true, follow: true },
@@ -71,7 +71,6 @@ const DISTRICTS = [
   {name:'Lara', time:'~10 min', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
   {name:'Güzeloba', time:'~15 min', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
   {name:'Kemer', time:'~45 min', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Alanya', time:'~1.5 hr', desc:'Alanya center and surroundings — Mahmutlar, Oba, Konaklı, Avsallar'},
   {name:'Muratpaşa / Liman', time:'~5 min', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Local', desc:'Terzi Can workshop — Hurma, Uncalı, Arapsuyu, Sarısu'},
   {name:'Side', time:'~1 hr', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
@@ -84,12 +83,12 @@ export default function HotelTailorAntalyaPage() {
       <BusinessSchema
         path='/en/hotel-tailor-antalya'
         name='Mobile Tailor Antalya · Hotel Tailor Service · Terzi Can'
-        description='Mobile and hotel tailor service in Antalya. We come to your hotel in Belek, Lara, Kemer, Alanya, Side — all Antalya districts. Measurement, tailoring and delivery to your door. Accepts EUR, USD, RUB, TRY and cards.'
+        description='Mobile and hotel tailor service in Antalya. We come to your hotel in Belek, Lara, Kemer, Side — Konyaaltı and nearby districts. Measurement, tailoring and delivery to your door. Accepts EUR, USD, RUB, TRY and cards.'
         lang={'en'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Mobile Tailor Antalya', path: '/en/hotel-tailor-antalya' }]}
         faq={FAQ}
-        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Antalya']}
         extra={[HOWTO]}
       />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
@@ -110,14 +109,14 @@ export default function HotelTailorAntalyaPage() {
           <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'center' }}>
             <div>
               <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
-                Hotel Tailor Service · All Antalya
+                Hotel Tailor Service · Konyaaltı & Nearby
               </div>
               <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2.2rem,5vw,4rem)', fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: '1.2rem' }}>
                 Mobile Tailor Antalya<br />
                 <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>We Come to Your Hotel</span>
               </h1>
               <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
-                <strong style={{ color: '#fff' }}>Tailor Can</strong> comes directly to your hotel room or lobby across <strong style={{ color: '#D4B07A' }}>Belek, Lara, Kemer, Side, and Alanya</strong>. 
+                <strong style={{ color: '#fff' }}>Tailor Can</strong> comes directly to your hotel room or lobby across <strong style={{ color: '#D4B07A' }}>Belek, Lara, Kemer, and Side</strong>. 
                 Professional measurement, emergency dress alterations, suit repairs, and delivery back to your room. 
                 <span style={{ display: 'block', marginTop: '.5rem', color: '#D4B07A', fontSize: '.9rem' }}>💳 We accept EUR, USD, RUB, TRY & Credit Cards.</span>
               </p>
@@ -190,7 +189,7 @@ export default function HotelTailorAntalyaPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
-              Hotel Tailor Service Across All Antalya Districts
+              Hotel Tailor Service Across Konyaaltı & Nearby Districts
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Fast dispatch from our Konyaaltı and Lara stations to resort regions</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
@@ -290,7 +289,7 @@ export default function HotelTailorAntalyaPage() {
               ['Do you offer mobile tailor service directly to hotel rooms?', `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
               ['What currencies and payment methods do you accept?', 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.'],
               ['Is the hotel visit free of charge?', 'In Konyaaltı the visit is free. In other areas the fee depends on the distance and is confirmed on WhatsApp. You also pay for the tailoring work itself.'],
-              ['Do you serve Belek and Lara luxury hotels?', `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, Side, and Alanya. WhatsApp: ${PHONE}`],
+              ['Do you serve Belek and Lara luxury hotels?', `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}`],
               ['How fast can the tailor arrive at my hotel?', 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.'],
               ['Do your tailors speak English?', `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.`],
             ].map(([q, a], i) => (
@@ -340,7 +339,7 @@ export default function HotelTailorAntalyaPage() {
                 ['Lara Hotel Tailor', '/en/hotel-tailor-antalya/lara'],
                 ['Kemer Hotel Tailor', '/en/hotel-tailor-antalya/kemer'],
                 ['Side Hotel Tailor', '/en/hotel-tailor-antalya/side'],
-                ['← All Antalya Services', '/terzi'],
+                ['← Konyaaltı & Nearby Services', '/terzi'],
               ].map(([label, href]) => (
                 <Link key={label} href={href}
                   style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: '2px', background: '#fff' }}>

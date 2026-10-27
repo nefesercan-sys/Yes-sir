@@ -62,7 +62,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
       alternateName: 'Terzi Can Antalya',
-      description: "Antalya genelinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi ve otel ekspres ütü hizmeti sunan profesyonel tekstil atölyesi.",
+      description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi ve otel ekspres ütü hizmeti sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
       sameAs: [GBP_URL],
       telephone: '+905318986418',
@@ -355,7 +355,7 @@ const serviceRows = [
   {
     title: 'Özel Dikim (Bespoke)',
     detail: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
-    area: 'Tüm Antalya (Atölye prova esaslı)',
+    area: 'Konyaaltı ve çevresi (Atölye prova esaslı)',
     time: '3 - 7 Gün (Provaya bağlı)',
     price: '800 TL\'den',
   },
@@ -493,7 +493,7 @@ export default function GeminiOptimizedTailorPage() {
           </p>
 
           <p style={{ fontSize: 16.5, lineHeight: 1.65, color: SUB, margin: 0, maxWidth: 660 }}>
-            Antalya genelinde (Konyaaltı, Muratpaşa, Lara, Kepez, Belek, Kemer) modern, hızlı ve kuryeli
+            Antalya'nın yakın bölgelerinde (Konyaaltı, Muratpaşa, Lara, Kepez, Belek, Kemer) modern, hızlı ve kuryeli
             terzilik çözümleri sunan profesyonel atölye altyapısı. Giysilerinizi evinizden veya otelinizden
             alıyor, kusursuzca teslim ediyoruz.
           </p>

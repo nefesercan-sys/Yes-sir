@@ -37,7 +37,7 @@ const jsonLd = {
       name: 'Üniforma Üretimi Antalya — Otel Restoran Sağlık Okul Güvenlik 2026',
       description: "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık sektörü üniformaları. Tasarım + kalıp + seri imalat + nakış tek elden.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
-      areaServed: ['Antalya','Konyaaltı','Belek','Kemer','Alanya','Manavgat','Side'].map(name => ({ '@type': 'City', name })),
+      areaServed: ['Antalya','Konyaaltı','Belek','Kemer','Side'].map(name => ({ '@type': 'City', name })),
       offers: {
         '@type': 'AggregateOffer',
         priceCurrency: 'TRY',
@@ -125,7 +125,7 @@ const AVANTAJLAR = [
   ['📐', 'Özel Kalıp Çıkarma', 'Markanıza özel kalıp çıkarılır, gradaj yapılır. Beden tutarlılığı gözetilir.'],
   ['🪡', 'Nakış & Logo Baskı', 'Bilgisayarlı nakış, dijital & DTF baskı. ₺100\'den başlar.'],
   ['📦', 'Etiketli & Paketli Teslim', 'Her üniformaya etiket, ambalaj ve teslimat. Kurumsal görünüm.'],
-  ['🚐', 'Tüm Antalya Teslimat', 'Belek, Kemer, Alanya, Lara dahil tüm Antalya\'ya teslimat.'],
+  ['🚐', 'Yakın Bölgelere Teslimat', 'Belek, Kemer, Lara dahil Konyaaltı ve çevresi\'ya teslimat.'],
   ['🌍', 'Çok Dilli Hizmet', 'TR · EN · RU · DE dört dilde iletişim. Uluslararası oteller için ideal.'],
 ];
 
@@ -160,7 +160,7 @@ export default function UniformaUretimiPage() {
               <strong style={{ color: '#D4B07A' }}> Adet ve fiyat projeye göre belirlenir.</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '750px', marginBottom: '2rem' }}>
-              {[['Tasarım','Ücretsiz danışmanlık'],['Kalıp','Özel çıkarma'],['Seri','Proje bazında'],['Nakış','Logo & isim'],['Teslimat','Tüm Antalya']].map(([t, d]) => (
+              {[['Tasarım','Ücretsiz danışmanlık'],['Kalıp','Özel çıkarma'],['Seri','Proje bazında'],['Nakış','Logo & isim'],['Teslimat','Konyaaltı ve çevresi']].map(([t, d]) => (
                 <div key={t} style={{ background: 'rgba(255,255,255,.04)', padding: '1rem', textAlign: 'center' }}>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#D4B07A', marginBottom: '.3rem' }}>{t}</div>
                   <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)' }}>{d}</div>
@@ -259,7 +259,7 @@ export default function UniformaUretimiPage() {
               ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
               ['Minimum kaç adet üniforma siparişi verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
               ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış ₺100'den başlar. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
-              ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara, Alanya dahil tüm Antalya ilçelerine teslim yapılmaktadır. WhatsApp: ${PHONE}`],
+              ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara ve Side'ye teslim yapılmaktadır. WhatsApp: ${PHONE}`],
               ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. WhatsApp: ${PHONE}`],
               ['Teslimat süresi ne kadar?', 'Numune onayından sonra 10 adetlik sipariş 7–10 iş günü, büyük siparişler 15–30 iş günü sürer.'],
             ].map(([q, a], i) => (

@@ -18,7 +18,7 @@ const jsonLd = {
       name: 'Bay Terzi Antalya — Erkek Takım Elbise Dikimi Fiyatları 2026',
       description: "Antalya'da bay terzi. Erkek takım elbise dikimi, pantolon kısaltma ₺200, gömlek dikimi, smoking, damatlık. Eve ve otele gelen terzi servisi.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
-      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya'].map(name=>({'@type':'City',name})),
+      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: {
         '@type': 'AggregateOffer',
         lowPrice: '200',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Bay Terzi Antalya · Erkek Takım Elbise · Pantolon Kısaltma',
-    description: "Pantolon kısaltma ₺200'den, takım elbise dikimi. Eve gelen terzi. Tüm Antalya. ☎ +90 531 898 64 18",
+    description: "Pantolon kısaltma ₺200'den, takım elbise dikimi. Eve gelen terzi. Konyaaltı ve çevresi. ☎ +90 531 898 64 18",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },
@@ -203,7 +203,7 @@ export default function BayTerziPage() {
               ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise dikimi; fiyat kumaş ve modele göre belirlenir. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
               ['Damatlık dikimi Antalya fiyatı?', `Damatlık ₺3.000'den başlar. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
               ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. 24–48 saat teslim.'],
-              ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
+              ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
             ].map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>

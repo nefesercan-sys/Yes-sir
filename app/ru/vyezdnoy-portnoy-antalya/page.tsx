@@ -36,12 +36,11 @@ const jsonLd = {
         'Портной в отель Анталья','Выездной портной','Русскоговорящий портной Анталья',
         'Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya',
       ],
-      description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере, Аланье, Сиде, Манавгате — во все районы Антальи. Снятие мерок, пошив и доставка к вашей двери.',
+      description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере и Сиде, а также в ближайших районах Антальи. Снятие мерок, пошив и доставка к вашей двери.',
       provider: { '@type': 'ClothingStore', '@id': `${PARENT_URL}#business`, name: 'Terzi Can', telephone: PHONE_E164 },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
-        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Alanya'},
-        {name:'Manavgat'},{name:'Side'},{name:'Kepez'},
+        {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Side'},{name:'Kepez'},
       ].map(c=>({...c,'@type':'City'})),
       offers: { '@type': 'Offer', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },
@@ -50,7 +49,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Выездной портной Анталья · Обслуживание в отеле · Terzi Can',
       url: SITE_URL,
-      description: 'Выездной портной и обслуживание в отеле в Анталье. Белек, Лара, Кемер, Аланья и все районы. Срочный ремонт по договорённости. Говорим по-русски. ☎ ' + PHONE,
+      description: 'Выездной портной и обслуживание в отеле в Анталье. Белек, Лара, Кемер и все районы. Срочный ремонт по договорённости. Говорим по-русски. ☎ ' + PHONE,
       inLanguage: 'ru',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -95,7 +94,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Выездной портной в Анталье · Портной в отель | Terzi Can' },
-  description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере, Аланье. Срочный ремонт, говорим по-русски. ☎ ' + PHONE,
+  description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере. Срочный ремонт, говорим по-русски. ☎ ' + PHONE,
   keywords: [
     'выездной портной Анталья','портной в отель Анталья','портной Анталья',
     'русскоговорящий портной Анталья','ателье Белек','ателье Лара',
@@ -108,7 +107,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Выездной портной Анталья · Обслуживание в отеле',
-    description: 'Выездной портной приедет в ваш отель в Белеке, Ларе, Кемере, Аланье и по всей Анталье.',
+    description: 'Выездной портной приедет в ваш отель в Белеке, Ларе, Кемере и по всей Анталье.',
     url: SITE_URL, type: 'website', locale: 'ru_RU',
   },
   robots: { index: true, follow: true },
@@ -209,9 +208,9 @@ export default function VyezdnoyPortnoyAntalyaPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
-              Выездной портной во все районы Антальи
+              Выездной портной в ближайшие районы Антальи
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — во все районы Антальи</p>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — в ближайшие районы Антальи</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {DISTRICTS.map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
@@ -237,7 +236,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               Портной в отелях Антальи
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>
-              Мы приезжаем во все отели Антальи, включая перечисленные ниже.
+              Мы приезжаем в отели Белека, Лары, Кемера и Сиде, включая перечисленные ниже.
               Не обязательно обращаться к консьержу — просто напишите нам напрямую в WhatsApp.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginBottom: '1.5rem' }}>
@@ -306,7 +305,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
               ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves all Antalya hotels — Belek, Lara, Kemer, Alanya, Manavgat. English-speaking tailor service. WhatsApp: ${PHONE}`],
+              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
             ].map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

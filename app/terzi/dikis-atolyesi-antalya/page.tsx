@@ -42,7 +42,7 @@ const jsonLd = {
       name: 'Dikiş Atölyesi Antalya — Fason Üretim Kalıp Çıkarma Seri İmalat 2026',
       description: "Antalya dikiş atölyesi. Kalıp çıkarma, numune dikimi, fason üretim (adet projeye göre belirlenir, proje bazında teklif), seri imalat, nakış & baskı. Markalar, butikler, e-ticaret, spor kulüpleri için.",
       provider: { '@type': 'LocalBusiness', '@id': `${PARENT}#business` },
-      areaServed: ['Antalya','Konyaaltı','Muratpaşa','Kepez','Alanya','Manavgat'].map(name => ({ '@type': 'City', name })),
+      areaServed: ['Antalya','Konyaaltı','Muratpaşa','Kepez'].map(name => ({ '@type': 'City', name })),
       offers: {
         '@type': 'AggregateOffer',
         priceCurrency: 'TRY',

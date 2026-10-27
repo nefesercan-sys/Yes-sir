@@ -49,7 +49,7 @@ const PAGE_DESC  =
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 
 const ANTALYA_ILCELER = [
-  'Konyaaltı','Muratpaşa','Kepez','Lara','Kundu','Belek','Kemer','Alanya','Manavgat','Antalya',
+  'Konyaaltı','Muratpaşa','Kepez','Lara','Kundu','Belek','Kemer','Antalya',
 ].map(name => ({ '@type': 'City', name }));
 
 const offer = (name: string, price: string) => ({
@@ -225,7 +225,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Kuru temizleme ve ütü Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. hızlı ekspres.' } },
-        { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Alanya, Manavgat, Side, Serik ve tüm Antalya otellerine geliyoruz.' } },
+        { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.' } },
       ],
     },
   ],

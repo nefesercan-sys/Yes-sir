@@ -84,7 +84,7 @@ export default function OnlineSchneiderservicePage() {
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Schneiderservice', path: SITE_URL.replace(BASE_URL, '') }]}
         faq={FAQ}
-        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Alanya','Manavgat','Side','Antalya']}
+        areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Antalya']}
       />
       <SpeakableSchema path="/de/online-schneiderservice-antalya" />
       <QuickActionBanner lang="de" />

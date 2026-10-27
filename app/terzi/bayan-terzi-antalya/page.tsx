@@ -18,7 +18,7 @@ const jsonLd = {
       name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi Fiyatları 2026',
       description: "Antalya'da bayan terzi. Kadın elbise dikimi ₺800, etek kısaltma ₺200, abiye tamiri ₺800, gelinlik tadilatı ₺800. Eve ve otele gelen terzi servisi.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
-      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer','Alanya'].map(name=>({'@type':'City',name})),
+      areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: { '@type': 'AggregateOffer', lowPrice: '200', highPrice: '3000', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },
     {
@@ -182,7 +182,7 @@ export default function BayanTerziPage() {
               ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz düzeltme. Nisan–Ekim sezonu. WhatsApp: ${PHONE}`],
               ['Abiye tamiri 1–2 günde olur mu?', 'Evet! Ekspres abiye tamiri 24–48 saatte yapılmaktadır. Tatildesiniz, gala yemeğiniz var — aynı gün servis mümkün.'],
               ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi ₺700'den başlar. WhatsApp: ${PHONE}`],
-              ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer dahil tüm Antalya otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
+              ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
               ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılmaktadır. WhatsApp: ${PHONE}`],
             ].map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>

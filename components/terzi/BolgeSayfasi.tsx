@@ -33,9 +33,9 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
   // Perplexity, Google AI Overview) referans alması için FAQPage şeması ──
   const sorular = antalyaIlcesi ? [
     { s: `${lokasyonAdi}'de terzi nasıl bulunur?`, c: `${lokasyonAdi} bölgesinde terzi bulmak için swaphubs.com/terzi-talep sayfasından ücretsiz talep oluşturabilir veya Terzi Can'a doğrudan WhatsApp'tan (${PHONE}) ulaşabilirsiniz.` },
-    { s: `${lokasyonAdi} paça kısaltma fiyatı ne kadar 2026?`, c: `${lokasyonAdi} dahil tüm Antalya'da paça kısaltma ₺200'den başlıyor. Kesin fiyat kumaş ve modele göre değişebilir, WhatsApp'tan anında fiyat teklifi alabilirsiniz.` },
+    { s: `${lokasyonAdi} paça kısaltma fiyatı ne kadar 2026?`, c: `${lokasyonAdi} dahil Konyaaltı ve çevresi'da paça kısaltma ₺200'den başlıyor. Kesin fiyat kumaş ve modele göre değişebilir, WhatsApp'tan anında fiyat teklifi alabilirsiniz.` },
     { s: `${lokasyonAdi}'de aynı gün teslim terzi var mı?`, c: `Evet, Terzi Can birçok tadilat işini (paça kısaltma, fermuar değişimi, bel daraltma) aynı gün içinde tamamlayıp ${lokasyonAdi}'ye teslim edebiliyor.` },
-    { s: `${lokasyonAdi}'ye eve veya otele gelen terzi hizmeti var mı?`, c: `Evet, araçlı terzi servisiyle ${lokasyonAdi} dahil tüm Antalya ilçelerine gidip yerinde ölçü alıyoruz.` },
+    { s: `${lokasyonAdi}'ye eve veya otele gelen terzi hizmeti var mı?`, c: `Evet, araçlı terzi servisiyle ${lokasyonAdi} dahil Antalya'nın yakın ilçelerine gidip yerinde ölçü alıyoruz.` },
     { s: `${lokasyonAdi}'de kuru temizleme fiyatları nedir?`, c: `${lokasyonAdi} bölgesinde kuru temizleme ₺300'den başlıyor, mont ve kaban için fiyat değişebilir. Otelden kurye alım seçeneği de mevcut.` },
   ] : [
     { s: `${lokasyonAdi}'de terzi nasıl bulunur?`, c: `${lokasyonAdi}'de terzi bulmak için swaphubs.com/terzi-talep sayfasından ihtiyacınızı ve konumunuzu girip ücretsiz talep oluşturun — ${lokasyonAdi}'deki terziler ve kuru temizlemeciler size fiyat teklifi versin.` },
@@ -147,7 +147,7 @@ export default function BolgeSayfasi({ tip, lokasyonAdi, url, komsuLokasyonlar, 
           <div style={{ maxWidth: 700, margin: '0 auto' }}>
             <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.8rem' }}>Terzi Can — {lokasyonAdi}'ye Hizmet Veriyor</h2>
             <p style={{ color: '#64748b', fontSize: '.9rem', marginBottom: '1.5rem' }}>
-              Konyaaltı merkezli atölyemiz, araçlı terzi servisiyle {lokasyonAdi} dahil tüm Antalya ilçelerine hizmet veriyor. Yerinde ölçü alma, aynı gün teslim seçenekleri mevcut.
+              Konyaaltı merkezli atölyemiz, araçlı terzi servisiyle {lokasyonAdi} dahil Antalya'nın yakın ilçelerine hizmet veriyor. Yerinde ölçü alma, aynı gün teslim seçenekleri mevcut.
             </p>
             <a href={WA(`Merhaba, ${lokasyonAdi}'de terzi hizmeti hakkında bilgi almak istiyorum.`)} target="_blank" rel="noopener noreferrer"
               style={{ background: YESIL, color: '#fff', padding: '.8rem 1.6rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.9rem' }}>

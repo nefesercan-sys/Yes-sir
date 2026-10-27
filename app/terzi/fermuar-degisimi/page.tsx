@@ -57,7 +57,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Adrese gelip kıyafeti alıyor musunuz?',
-    a: 'Konyaaltı başta olmak üzere Antalya genelinde adresten alım ve teslim servisimiz var. Bölgenizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.',
+    a: 'Konyaaltı başta olmak üzere yakın bölgelerde adresten alım ve teslim servisimiz var. Bölgenizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.',
   },
 ];
 
@@ -252,7 +252,7 @@ export default function FermuarDegisimiPage() {
             ['Başlangıç fiyatı', '300 TL\'den'],
             ['Teslim süresi', '1–2 gün · acilde aynı gün'],
             ['Çalışma saatleri', `Her gün ${HOURS}`],
-            ['Servis bölgesi', 'Konyaaltı ve Antalya geneli'],
+            ['Servis bölgesi', 'Konyaaltı ve yakın bölgeler'],
           ].map(([k, v]) => (
             <div key={k} style={{ border: `1px solid ${BORDER}`, borderRadius: 12, padding: '1rem 1.1rem', background: '#fff' }}>
               <div style={{ fontSize: '.72rem', color: MUTED, textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.25rem' }}>{k}</div>
@@ -326,7 +326,7 @@ export default function FermuarDegisimiPage() {
         <div style={wrap}>
           <h2 style={h2}>Konyaaltı mahalleleri</h2>
           <p style={{ margin: '0 0 1rem', color: MUTED }}>
-            Konyaaltı ve Antalya genelinde adresten alım ve teslim için bölgenizi bize yazın.
+            Konyaaltı ve yakın bölgelerde adresten alım ve teslim için bölgenizi bize yazın.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
             {KONYAALTI_MAHALLELERI.map(m => (
