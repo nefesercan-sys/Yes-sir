@@ -5,6 +5,8 @@ const IS_OBJECTID = /^[0-9a-f]{24}$/i;
 // Kaldırılan programatik sayfalar: 404 yerine 410 (kalıcı silindi).
 // NOT: /ilan/ ve /ilanlar/ listede YOK — üyelerin ilanları çalışmaya devam ediyor.
 const GONE_PREFIXES = ["/ulke/", "/turkiye/", "/meslek/", "/sektor/"];
+// Silinen statik bölümler (hesaplama araçları, Antalya rehberi, Riviera rehberi): 404 yerine 410.
+const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide"];
 
 // URL'den dili çıkar → kök layout <html lang> değerini SUNUCU HTML'inde doğru verir
 // (botlar JS çalıştırmadan ham HTML'i okur).
@@ -20,7 +22,10 @@ export async function middleware(request: NextRequest) {
   const { pathname, searchParams, origin } = request.nextUrl;
 
   // 0. Kaldırılan sayfalar → 410 Gone
-  if (GONE_PREFIXES.some((p) => pathname.startsWith(p))) {
+  if (
+    GONE_PREFIXES.some((p) => pathname.startsWith(p)) ||
+    GONE_SECTIONS.some((p) => pathname === p || pathname.startsWith(p + "/"))
+  ) {
     return new NextResponse("Gone", {
       status: 410,
       headers: {
