@@ -514,18 +514,12 @@ export function hubMetadata(lang: Lang): Metadata {
     de: `Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
-  const trUrl = abs(SERVICE_BASE['tr']);
-  const alts = alternatesFor(lang, (l) => abs(SERVICE_BASE[l]));
-  // Non-TR language pages should have TR as canonical
-  if (lang !== 'tr') {
-    alts.canonical = trUrl;
-  }
   return {
     metadataBase: new URL(SITE),
     title: { absolute: title },
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alts,
+    alternates: alternatesFor(lang, (l) => abs(SERVICE_BASE[l])),
     openGraph: { title, description, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
