@@ -23,16 +23,8 @@ const nextConfig = {
     minimumCacheTTL: 2592000,
   },
 
-  // /hesapla → public/hesapla-static (statik hesaplama araçları)
   async rewrites() {
-    return [
-      { source: '/antalya-rehberi', destination: '/antalya-rehberi-static/index.html' },
-      { source: '/antalya-rehberi/:path*', destination: '/antalya-rehberi-static/:path*/index.html' },
-      { source: '/riviera-guide', destination: '/riviera-guide-static/index.html' },
-      { source: '/riviera-guide/:path*', destination: '/riviera-guide-static/:path*/index.html' },
-      { source: '/hesapla', destination: '/hesapla-static/index.html' },
-      { source: '/hesapla/:path*', destination: '/hesapla-static/:path*/index.html' },
-    ]
+    return []
   },
 
   async redirects() {

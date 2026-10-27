@@ -49,9 +49,6 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: [
       'https://swaphubs.com/sitemap.xml',
       'https://swaphubs.com/sitemap-terzi.xml',
-      'https://swaphubs.com/sitemap-hesapla.xml',
-      'https://swaphubs.com/sitemap-rehberi.xml',
-      'https://swaphubs.com/sitemap-riviera.xml',
     ],
   }
 }
