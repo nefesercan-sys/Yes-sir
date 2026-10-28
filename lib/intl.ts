@@ -36,8 +36,8 @@ export type ICopy = {
 export const INTL: Record<ILang, ICopy> = {
   es: {
     locale: 'es_ES', name: 'Español', dir: 'ltr', hreflang: 'es',
-    title: 'Guía: qué hacer si su ropa necesita un arreglo durante las vacaciones en Antalya',
-    desc: 'Cremallera rota, bajo largo o un traje que no queda bien: guía práctica para resolver arreglos de ropa en Antalya sin perder días de vacaciones, con lista de qué enviar y cómo funciona la recogida.',
+    title: 'Arreglos de ropa en vacaciones en Antalya: guía',
+    desc: 'Cremallera rota o bajo largo: guía práctica para arreglar ropa en Antalya sin perder vacaciones, con lista de qué enviar y cómo es la recogida.',
     keywords: ['arreglos de ropa vacaciones Antalya', 'qué hacer si se rompe la ropa de viaje', 'sastre Antalya turistas guía', 'ajustar ropa en vacaciones Turquía'],
     tag: 'Guía de vacaciones · Antalya', h1: 'Ropa que necesita arreglo en vacaciones: guía práctica para Antalya',
     lead: 'No hace falta perder una mañana de playa por un botón o una cremallera. Esta guía explica qué problemas se resuelven rápido, qué conviene preparar y cómo organizar el arreglo desde su hotel.',
@@ -54,8 +54,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   fr: {
     locale: 'fr_FR', name: 'Français', dir: 'ltr', hreflang: 'fr',
-    title: 'Guide : que faire quand un vêtement a besoin d\'une retouche pendant vos vacances à Antalya',
-    desc: 'Fermeture éclair cassée, ourlet trop long ou tenue à ajuster : guide pratique pour faire retoucher vos vêtements à Antalya sans gâcher vos vacances, avec la liste de ce qu\'il faut envoyer.',
+    title: 'Retouches de vêtements en vacances à Antalya : guide',
+    desc: 'Fermeture cassée ou ourlet trop long : guide pour faire retoucher vos vêtements à Antalya sans gâcher vos vacances, avec la liste à envoyer.',
     keywords: ['retouche vêtements vacances Antalya', 'fermeture éclair cassée en voyage', 'couturier Antalya touristes guide', 'ajuster vêtement vacances Turquie'],
     tag: 'Guide vacances · Antalya', h1: 'Un vêtement à retoucher en vacances : le guide pratique pour Antalya',
     lead: 'Inutile de sacrifier une matinée de plage pour un bouton ou une fermeture. Ce guide explique ce qui se règle vite, quoi préparer et comment organiser la retouche depuis votre hôtel.',
@@ -72,8 +72,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   pl: {
     locale: 'pl_PL', name: 'Polski', dir: 'ltr', hreflang: 'pl',
-    title: 'Poradnik: co zrobić, gdy ubranie wymaga poprawki na wakacjach w Antalyi',
-    desc: 'Zepsuty zamek, za długa nogawka albo strój do dopasowania: praktyczny poradnik, jak załatwić przeróbkę ubrania w Antalyi bez tracenia wakacji, z listą, co wysłać krawcowi.',
+    title: 'Przeróbki ubrań na wakacjach w Antalyi: poradnik',
+    desc: 'Zepsuty zamek lub za długie nogawki: poradnik, jak poprawić ubrania w Antalyi bez tracenia wakacji, z listą tego, co wysłać.',
     keywords: ['przeróbki ubrań wakacje Antalya', 'zepsuty zamek w podróży', 'krawiec Antalya poradnik dla turystów', 'dopasowanie ubrania na wakacjach Turcja'],
     tag: 'Poradnik wakacyjny · Antalya', h1: 'Ubranie do poprawki na wakacjach: praktyczny poradnik dla Antalyi',
     lead: 'Nie warto tracić plażowego poranka przez guzik czy zamek. Poradnik wyjaśnia, co da się załatwić szybko, co przygotować i jak zorganizować przeróbkę z poziomu hotelu.',
@@ -90,8 +90,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   uk: {
     locale: 'uk_UA', name: 'Українська', dir: 'ltr', hreflang: 'uk',
-    title: 'Гід: що робити, якщо одяг потребує ремонту під час відпустки в Анталії',
-    desc: 'Зламана блискавка, задовгі штани чи вбрання, яке треба підігнати: практичний гід, як вирішити підгонку одягу в Анталії, не втрачаючи днів відпустки, зі списком того, що надіслати.',
+    title: 'Підгонка одягу у відпустці в Анталії: путівник',
+    desc: 'Зламана блискавка чи задовга довжина: путівник, як підігнати одяг в Анталії, не втрачаючи відпустку, зі списком, що надіслати.',
     keywords: ['підгонка одягу відпустка Анталія', 'зламалась блискавка в подорожі', 'кравець Анталія гід для туристів', 'підігнати одяг у відпустці Туреччина'],
     tag: 'Гід для відпустки · Анталія', h1: 'Одяг потребує підгонки у відпустці: практичний гід по Анталії',
     lead: 'Не варто втрачати ранок на пляжі через ґудзик чи блискавку. Гід пояснює, що вирішується швидко, що підготувати і як організувати підгонку з готелю.',
@@ -108,8 +108,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   nl: {
     locale: 'nl_NL', name: 'Nederlands', dir: 'ltr', hreflang: 'nl',
-    title: 'Gids: wat te doen als uw kleding op vakantie in Antalya een aanpassing nodig heeft',
-    desc: 'Kapotte rits, te lange pijp of een outfit die beter moet zitten: praktische gids om kleding in Antalya te laten vermaken zonder vakantiedagen te verliezen, met een lijstje van wat u moet doorsturen.',
+    title: 'Kleding laten vermaken op vakantie in Antalya: gids',
+    desc: 'Kapotte rits of te lange broek: praktische gids om kleding in Antalya te laten vermaken zonder vakantiedagen te verliezen, met checklist.',
     keywords: ['kleding vermaken vakantie Antalya', 'kapotte rits op reis', 'kleermaker Antalya gids toeristen', 'kleding aanpassen op vakantie Turkije'],
     tag: 'Vakantiegids · Antalya', h1: 'Kleding aanpassen op vakantie: praktische gids voor Antalya',
     lead: 'U hoeft geen strandochtend te missen voor een knoop of rits. Deze gids legt uit wat snel opgelost is, wat u moet voorbereiden en hoe u het vermaken vanuit uw hotel regelt.',
@@ -126,7 +126,7 @@ export const INTL: Record<ILang, ICopy> = {
   },
   ar: {
     locale: 'ar_AR', name: 'العربية', dir: 'rtl', hreflang: 'ar',
-    title: 'دليل: ماذا تفعل إذا احتاجت ملابسك إلى تعديل أثناء إجازتك في أنطاليا',
+    title: 'تعديل الملابس أثناء العطلة في أنطاليا: دليل عملي',
     desc: 'سحّاب معطّل أو بنطلون طويل أو إطلالة تحتاج إلى ضبط: دليل عملي لتعديل الملابس في أنطاليا دون إضاعة أيام الإجازة، مع قائمة بما ترسله.',
     keywords: ['تعديل ملابس الإجازة أنطاليا', 'سحاب مكسور أثناء السفر', 'خياط أنطاليا دليل السياح', 'تعديل الملابس في العطلة تركيا'],
     tag: 'دليل الإجازة · أنطاليا', h1: 'ملابس تحتاج تعديلاً أثناء الإجازة: دليل عملي لأنطاليا',
