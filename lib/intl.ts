@@ -143,3 +143,14 @@ export const INTL: Record<ILang, ICopy> = {
     cta: 'أرسل الصور عبر واتساب', wa: 'مرحباً، أنا في إجازة في أنطاليا وأحتاج إلى تعديل ملابس. أرسل لكم صوراً.', call: 'اتصل', mapLabel: 'افتح في خرائط Google', otherLangs: 'لغات أخرى', updated: 'آخر تحديث',
   },
 };
+
+
+/** Ücretsiz alım-teslim mahalleleri (işletme sahibinin onayladığı liste, Ekim 2026) — her dilde mahalle adlarıyla görünür. */
+export const NB: Record<ILang, { title: string; text: string }> = {
+  es: { title: '¿Hay recogida gratis en su zona?', text: 'Sí: en Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum y Arapsuyu no se cobra la recogida y entrega. Si su hotel está en otra zona, pregunte por WhatsApp. Atención de 08:00 a 23:00.' },
+  fr: { title: 'La prise en charge est-elle gratuite chez vous ?', text: 'Oui : à Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum et Arapsuyu, la prise en charge et la livraison sont gratuites. Si votre hôtel est ailleurs, demandez sur WhatsApp. Ouvert de 08h00 à 23h00.' },
+  pl: { title: 'Czy odbiór jest bezpłatny w Twojej okolicy?', text: 'Tak: w Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum i Arapsuyu odbiór i dowóz są bezpłatne. Jeśli hotel jest gdzie indziej, zapytaj na WhatsApp. Godziny: 08:00–23:00.' },
+  uk: { title: 'Чи безкоштовний забір у вашому районі?', text: 'Так: у Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum та Arapsuyu забір і доставка безкоштовні. Якщо ваш готель в іншому районі, запитайте у WhatsApp. Працюємо 08:00–23:00.' },
+  nl: { title: 'Is ophalen gratis in jouw buurt?', text: 'Ja: in Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum en Arapsuyu is ophalen en terugbrengen gratis. Zit je hotel elders, vraag het dan via WhatsApp. Open van 08:00 tot 23:00.' },
+  ar: { title: 'هل الاستلام مجاني في منطقتك؟', text: 'نعم: في Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum, Arapsuyu الاستلام والتسليم مجاني. إذا كان فندقك في منطقة أخرى فاسأل عبر واتساب. ساعات العمل 08:00–23:00.' },
+};

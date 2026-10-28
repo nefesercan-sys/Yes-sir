@@ -225,6 +225,12 @@ const ALT_SAYFALAR = [
   ['🏨','Hotel Tailor Antalya (EN)','/en/hotel-tailor-antalya'],
   ['🏨','Schneider im Hotel (DE)','/de/schneider-service-hotel-antalya'],
   ['🏨','Портной в отеле (RU)','/ru/vyezdnoy-portnoy-antalya'],
+  ['🌍','Español','/es/arreglos-de-ropa-en-vacaciones-antalya'],
+  ['🌍','Français','/fr/retouches-vetements-vacances-antalya'],
+  ['🌍','Polski','/pl/przerobki-ubran-na-wakacjach-antalya'],
+  ['🌍','Українська','/uk/pidhonka-odyahu-u-vidpustci-antaliya'],
+  ['🌍','Nederlands','/nl/kleding-laten-vermaken-op-vakantie-antalya'],
+  ['🌍','العربية','/ar/tadil-malabis-fi-el-ijaza-antalya'],
 ] as const;
 
 // Footer: Konyaaltı mahalle sayfaları → /terzi/konyaalti/[mahalle]
