@@ -51,9 +51,16 @@ const TERZI_PREFIXES = [
   '/de/kontakt-schneider-antalya',
 ];
 
+// Ek turist dilleri (tek sayfa; tam eşleşme)
+const INTL_PATHS = [
+  '/es/arreglos-de-ropa-en-vacaciones-antalya', '/fr/retouches-vetements-vacances-antalya', '/pl/przerobki-ubran-na-wakacjach-antalya',
+  '/uk/pidhonka-odyahu-u-vidpustci-antaliya', '/nl/kleding-laten-vermaken-op-vakantie-antalya', '/ar/tadil-malabis-fi-el-ijaza-antalya',
+];
+
 export function isTerziPath(pathname: string | null): boolean {
   if (!pathname) return false;
   const p = pathname.toLowerCase();
+  if (INTL_PATHS.includes(p.replace(/\/$/, ''))) return true;
   return TERZI_PREFIXES.some((x) => p === x || p.startsWith(x));
 }
 

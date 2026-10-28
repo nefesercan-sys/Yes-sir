@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
 import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
+import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
@@ -82,6 +83,8 @@ export async function GET() {
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
     // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
     ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
+    // 🌍 Ek turist dilleri (ES/FR/PL/UK/NL/AR): tek tanıtım sayfası, kendi aralarında hreflang
+    ...ILANGS.map((l) => ({ url: `${BASE_URL}${iUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${iUrl(x)}`])) })),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))

@@ -19,9 +19,13 @@ export default function LocaleHtmlLang() {
     else if (pathname === '/ru' || pathname.startsWith('/ru/')) locale = 'ru';
     else if (pathname === '/de' || pathname.startsWith('/de/')) locale = 'de';
 
+    const m = pathname.match(/^\/(es|fr|pl|uk|nl|ar)(\/|$)/);
+    if (m) locale = m[1];
+
     if (document.documentElement.lang !== locale) {
       document.documentElement.lang = locale;
     }
+    document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
   }, [pathname]);
 
   return null;
