@@ -18,6 +18,18 @@ function limitAsildi(ip: string) {
   return liste.length > ANONIM_LIMIT;
 }
 
+function icerikTurleUyumlu(b: Buffer, tip: string): boolean {
+  const ascii = (a: number, z: number) => b.subarray(a, z).toString('latin1');
+  if (tip === 'image/jpeg' || tip === 'image/jpg') return b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff;
+  if (tip === 'image/png') return ascii(1, 4) === 'PNG';
+  if (tip === 'image/gif') return ascii(0, 3) === 'GIF';
+  if (tip === 'image/webp') return ascii(0, 4) === 'RIFF' && ascii(8, 12) === 'WEBP';
+  if (tip === 'video/webm') return b.length > 4 && b[0] === 0x1a && b[1] === 0x45 && b[2] === 0xdf && b[3] === 0xa3;
+  if (tip === 'video/avi') return ascii(0, 4) === 'RIFF' && ascii(8, 11) === 'AVI';
+  if (tip === 'video/mp4' || tip === 'video/quicktime') return ascii(4, 8) === 'ftyp' || ascii(4, 8) === 'moov' || ascii(4, 8) === 'mdat' || ascii(4, 8) === 'wide';
+  return false;
+}
+
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
@@ -68,6 +80,11 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+
+    // Dosya içeriği (magic bytes) bildirilen türle uyuşmalı; yalnızca file.type'a güvenilmez.
+    if (!icerikTurleUyumlu(buffer, file.type)) {
+      return NextResponse.json({ error: 'Dosya içeriği türüyle uyuşmuyor' }, { status: 400 });
+    }
     const base64 = `data:${file.type};base64,${buffer.toString('base64')}`;
 
     const klasor = isVideo ? 'hizmetara/videolar' : 'hizmetara/resimler';

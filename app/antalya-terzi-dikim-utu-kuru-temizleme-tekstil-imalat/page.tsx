@@ -19,9 +19,8 @@ const TODAY = new Date().toISOString().split('T')[0]
 // GBP ekran görüntüsünde bu kaydın "kopya profil" olarak işaretlendiği görüldü —
 // aynı işletme için iki farklı CID kullanmak Google'ın güven skorunu düşürür.
 const MAPS_CID_URL = 'https://www.google.com/maps?cid=6436895271281342624'
-// TODO: Bu embed kodu eski/doğrulanmamış CID'e ait olabilir. Google Maps'te
-// doğru işletmeyi bulup "Paylaş → Haritayı Yerleştir" ile yeni embed kodu alın.
-const MAPS_EMBED = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c393757afe22b7:0x5124ac20b20c2685&z=17&output=embed'
+// Embed, MAPS_CID_URL ile aynı işletmeye (swaphubs profili) ait ftid kullanır.
+const MAPS_EMBED = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed'
 
 // SEO için Konyaaltı mahalleleri
 const KONYAALTI_MAHALLELERI = [
@@ -621,13 +620,6 @@ export default function AntalyaTerziPage() {
                 }}>
                 🗺️ Yol Tarifi Al
               </a>
-              {/*
-                TODO: Aşağıdaki "Yorum Yaz" linkindeki placeid, doğrulanmamış eski
-                CID'e ait olabilir. Google Business Profile uygulamasından
-                "Daha fazla yorum alın" bölümünde size özel doğru linki kopyalayıp
-                buraya yapıştırın — yanlış placeid, yorumları başka bir işletmeye
-                gönderebilir.
-              */}
               <a
                 href={MAPS_CID_URL}
                 target="_blank" rel="noopener noreferrer"
