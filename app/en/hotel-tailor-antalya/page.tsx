@@ -152,6 +152,7 @@ export default function HotelTailorAntalyaPage() {
               <img 
                 src="https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?w=800&q=80&auto=format&fit=crop" 
                 alt="Professional tailor measuring suit for hotel guest in Antalya Belek and Lara" 
+                width={800} height={360} loading="lazy" decoding="async"
                 style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
               />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', padding: '1.5rem 1rem 1rem', color: '#fff', fontSize: '.8rem' }}>
