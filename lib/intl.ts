@@ -36,8 +36,8 @@ export type ICopy = {
 export const INTL: Record<ILang, ICopy> = {
   es: {
     locale: 'es_ES', name: 'Español', dir: 'ltr', hreflang: 'es',
-    title: 'Guía: qué hacer si su ropa necesita un arreglo durante las vacaciones en Antalya',
-    desc: 'Cremallera rota, bajo largo o un traje que no queda bien: guía práctica para resolver arreglos de ropa en Antalya sin perder días de vacaciones, con lista de qué enviar y cómo funciona la recogida.',
+    title: 'Guía: arreglo de ropa en vacaciones en Antalya',
+    desc: 'Cremallera rota o bajo largo en vacaciones: guía para arreglar ropa en Antalya, qué enviar por foto y cómo funciona la recogida en el hotel.',
     keywords: ['arreglos de ropa vacaciones Antalya', 'qué hacer si se rompe la ropa de viaje', 'sastre Antalya turistas guía', 'ajustar ropa en vacaciones Turquía'],
     tag: 'Guía de vacaciones · Antalya', h1: 'Ropa que necesita arreglo en vacaciones: guía práctica para Antalya',
     lead: 'No hace falta perder una mañana de playa por un botón o una cremallera. Esta guía explica qué problemas se resuelven rápido, qué conviene preparar y cómo organizar el arreglo desde su hotel.',
@@ -54,8 +54,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   fr: {
     locale: 'fr_FR', name: 'Français', dir: 'ltr', hreflang: 'fr',
-    title: 'Guide : que faire quand un vêtement a besoin d\'une retouche pendant vos vacances à Antalya',
-    desc: 'Fermeture éclair cassée, ourlet trop long ou tenue à ajuster : guide pratique pour faire retoucher vos vêtements à Antalya sans gâcher vos vacances, avec la liste de ce qu\'il faut envoyer.',
+    title: 'Guide : retouches de vêtements en vacances à Antalya',
+    desc: 'Fermeture cassée, ourlet trop long : le guide pour faire retoucher vos vêtements à Antalya, quoi envoyer en photo et comment se passe la prise en charge.',
     keywords: ['retouche vêtements vacances Antalya', 'fermeture éclair cassée en voyage', 'couturier Antalya touristes guide', 'ajuster vêtement vacances Turquie'],
     tag: 'Guide vacances · Antalya', h1: 'Un vêtement à retoucher en vacances : le guide pratique pour Antalya',
     lead: 'Inutile de sacrifier une matinée de plage pour un bouton ou une fermeture. Ce guide explique ce qui se règle vite, quoi préparer et comment organiser la retouche depuis votre hôtel.',
@@ -72,8 +72,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   pl: {
     locale: 'pl_PL', name: 'Polski', dir: 'ltr', hreflang: 'pl',
-    title: 'Poradnik: co zrobić, gdy ubranie wymaga poprawki na wakacjach w Antalyi',
-    desc: 'Zepsuty zamek, za długa nogawka albo strój do dopasowania: praktyczny poradnik, jak załatwić przeróbkę ubrania w Antalyi bez tracenia wakacji, z listą, co wysłać krawcowi.',
+    title: 'Poradnik: przeróbki ubrań na wakacjach w Antalyi',
+    desc: 'Zepsuty zamek lub za długie nogawki na wakacjach? Jak załatwić przeróbki w Antalyi: co wysłać na zdjęciu i jak działa odbiór z hotelu.',
     keywords: ['przeróbki ubrań wakacje Antalya', 'zepsuty zamek w podróży', 'krawiec Antalya poradnik dla turystów', 'dopasowanie ubrania na wakacjach Turcja'],
     tag: 'Poradnik wakacyjny · Antalya', h1: 'Ubranie do poprawki na wakacjach: praktyczny poradnik dla Antalyi',
     lead: 'Nie warto tracić plażowego poranka przez guzik czy zamek. Poradnik wyjaśnia, co da się załatwić szybko, co przygotować i jak zorganizować przeróbkę z poziomu hotelu.',
@@ -90,8 +90,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   uk: {
     locale: 'uk_UA', name: 'Українська', dir: 'ltr', hreflang: 'uk',
-    title: 'Гід: що робити, якщо одяг потребує ремонту під час відпустки в Анталії',
-    desc: 'Зламана блискавка, задовгі штани чи вбрання, яке треба підігнати: практичний гід, як вирішити підгонку одягу в Анталії, не втрачаючи днів відпустки, зі списком того, що надіслати.',
+    title: 'Гід: підгонка одягу у відпустці в Анталії',
+    desc: 'Зламалась блискавка чи довгі штани у відпустці? Гід: як підігнати одяг в Анталії, що надіслати на фото і як працює забір із готелю.',
     keywords: ['підгонка одягу відпустка Анталія', 'зламалась блискавка в подорожі', 'кравець Анталія гід для туристів', 'підігнати одяг у відпустці Туреччина'],
     tag: 'Гід для відпустки · Анталія', h1: 'Одяг потребує підгонки у відпустці: практичний гід по Анталії',
     lead: 'Не варто втрачати ранок на пляжі через ґудзик чи блискавку. Гід пояснює, що вирішується швидко, що підготувати і як організувати підгонку з готелю.',
@@ -108,8 +108,8 @@ export const INTL: Record<ILang, ICopy> = {
   },
   nl: {
     locale: 'nl_NL', name: 'Nederlands', dir: 'ltr', hreflang: 'nl',
-    title: 'Gids: wat te doen als uw kleding op vakantie in Antalya een aanpassing nodig heeft',
-    desc: 'Kapotte rits, te lange pijp of een outfit die beter moet zitten: praktische gids om kleding in Antalya te laten vermaken zonder vakantiedagen te verliezen, met een lijstje van wat u moet doorsturen.',
+    title: 'Gids: kleding laten vermaken op vakantie in Antalya',
+    desc: 'Kapotte rits of te lange broek op vakantie? Zo regel je kledingaanpassingen in Antalya: wat je als foto stuurt en hoe ophalen bij je hotel werkt.',
     keywords: ['kleding vermaken vakantie Antalya', 'kapotte rits op reis', 'kleermaker Antalya gids toeristen', 'kleding aanpassen op vakantie Turkije'],
     tag: 'Vakantiegids · Antalya', h1: 'Kleding aanpassen op vakantie: praktische gids voor Antalya',
     lead: 'U hoeft geen strandochtend te missen voor een knoop of rits. Deze gids legt uit wat snel opgelost is, wat u moet voorbereiden en hoe u het vermaken vanuit uw hotel regelt.',
@@ -126,7 +126,7 @@ export const INTL: Record<ILang, ICopy> = {
   },
   ar: {
     locale: 'ar_AR', name: 'العربية', dir: 'rtl', hreflang: 'ar',
-    title: 'دليل: ماذا تفعل إذا احتاجت ملابسك إلى تعديل أثناء إجازتك في أنطاليا',
+    title: 'دليل: تعديل الملابس أثناء الإجازة في أنطاليا',
     desc: 'سحّاب معطّل أو بنطلون طويل أو إطلالة تحتاج إلى ضبط: دليل عملي لتعديل الملابس في أنطاليا دون إضاعة أيام الإجازة، مع قائمة بما ترسله.',
     keywords: ['تعديل ملابس الإجازة أنطاليا', 'سحاب مكسور أثناء السفر', 'خياط أنطاليا دليل السياح', 'تعديل الملابس في العطلة تركيا'],
     tag: 'دليل الإجازة · أنطاليا', h1: 'ملابس تحتاج تعديلاً أثناء الإجازة: دليل عملي لأنطاليا',
@@ -142,4 +142,15 @@ export const INTL: Record<ILang, ICopy> = {
     providerTitle: 'من ينفّذ هذه التعديلات', providerText: 'Terzi Can ورشة خياطة في حي هورما بكونيالتي تعمل منذ عام 2006، وتستقبل في الورشة وتستلم الملابس من الفنادق.', providerLink: 'عرض خدمة الخياطة',
     cta: 'أرسل الصور عبر واتساب', wa: 'مرحباً، أنا في إجازة في أنطاليا وأحتاج إلى تعديل ملابس. أرسل لكم صوراً.', call: 'اتصل', mapLabel: 'افتح في خرائط Google', otherLangs: 'لغات أخرى', updated: 'آخر تحديث',
   },
+};
+
+
+/** Ücretsiz alım-teslim mahalleleri (işletme sahibinin onayladığı liste, Ekim 2026) — her dilde mahalle adlarıyla görünür. */
+export const NB: Record<ILang, { title: string; text: string }> = {
+  es: { title: '¿Hay recogida gratis en su zona?', text: 'Sí: en Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum y Arapsuyu no se cobra la recogida y entrega. Si su hotel está en otra zona, pregunte por WhatsApp. Atención de 08:00 a 23:00.' },
+  fr: { title: 'La prise en charge est-elle gratuite chez vous ?', text: 'Oui : à Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum et Arapsuyu, la prise en charge et la livraison sont gratuites. Si votre hôtel est ailleurs, demandez sur WhatsApp. Ouvert de 08h00 à 23h00.' },
+  pl: { title: 'Czy odbiór jest bezpłatny w Twojej okolicy?', text: 'Tak: w Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum i Arapsuyu odbiór i dowóz są bezpłatne. Jeśli hotel jest gdzie indziej, zapytaj na WhatsApp. Godziny: 08:00–23:00.' },
+  uk: { title: 'Чи безкоштовний забір у вашому районі?', text: 'Так: у Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum та Arapsuyu забір і доставка безкоштовні. Якщо ваш готель в іншому районі, запитайте у WhatsApp. Працюємо 08:00–23:00.' },
+  nl: { title: 'Is ophalen gratis in jouw buurt?', text: 'Ja: in Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum en Arapsuyu is ophalen en terugbrengen gratis. Zit je hotel elders, vraag het dan via WhatsApp. Open van 08:00 tot 23:00.' },
+  ar: { title: 'هل الاستلام مجاني في منطقتك؟', text: 'نعم: في Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum, Arapsuyu الاستلام والتسليم مجاني. إذا كان فندقك في منطقة أخرى فاسأل عبر واتساب. ساعات العمل 08:00–23:00.' },
 };
