@@ -132,7 +132,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
     },
     en: {
       t: 'Hotel Tailor in Antalya: How It Works | Terzi Can',
-      d: 'How does a hotel tailor work? Send a photo, get a price, and we collect and return your clothes at your hotel. Free in Konyaaltı, priced by distance elsewhere.',
+      d: 'How does a hotel tailor work? Send a photo, get a price, and we collect and return clothes at your hotel. Free in Konyaaltı, priced by distance elsewhere.',
       h1: 'Hotel Tailor in Antalya: How It Works, Step by Step',
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: 'You do not have to go to a tailor on holiday: we collect your garment from your hotel, fix it in our workshop and bring it back. To start, just send a photo on WhatsApp.',

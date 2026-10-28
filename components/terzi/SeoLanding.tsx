@@ -510,7 +510,7 @@ export function hubMetadata(lang: Lang): Metadata {
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
     en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
-    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. ☎ ${PHONE}`,
+    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив от ₺200, молнии ₺300. Фото — и цена. Ежедневно. ☎ ${PHONE}`,
     de: `Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
