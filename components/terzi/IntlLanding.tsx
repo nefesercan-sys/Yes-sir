@@ -2,7 +2,7 @@
 // terzihizmeti.com.tr'deki tanıtım sayfalarından farklı: bilgi niyetli rehber (sorunlar, hazırlık listesi, adımlar, SSS).
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
-import { ILANGS, INTL, NB, iUrl, type ILang } from '@/lib/intl';
+import { ILANGS, INTL, NB, NB_DISTRICT, iUrl, type ILang } from '@/lib/intl';
 import { ZCOPY, ZONE_SLUGS, zoneData, zoneUrl } from '@/lib/intl-zones';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
@@ -78,7 +78,9 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
 
         <section style={{ marginBottom: '1.8rem' }}>
           <H2>{NB[lang].title}</H2>
-          <p style={{ margin: 0 }}>{NB[lang].text}</p>
+          <p style={{ margin: '0 0 1rem' }}>{NB[lang].text}</p>
+          <h3 style={{ fontSize: '1.02rem', color: C.ink, margin: '0 0 .25rem' }}>{NB_DISTRICT[lang].title}</h3>
+          <p style={{ margin: 0 }}>{NB_DISTRICT[lang].text}</p>
         </section>
 
         <section style={{ marginBottom: '1.8rem' }}>

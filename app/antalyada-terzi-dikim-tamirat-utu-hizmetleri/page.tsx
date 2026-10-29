@@ -387,7 +387,7 @@ const trustPoints = [
 const faqs = [
   {
     q: "Antalya'da pazar günü açık terzi veya acil ütü yeri var mı?",
-    a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımız üzerinden 7/24 anlık durum sorgulaması yapabilirsiniz.',
+    a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımızdan her gün 08:00–23:00 arasında işinizin durumunu sorabilirsiniz.',
   },
   {
     q: 'Deri ceket boyama ve yırtık deri mont tamiri yapıyor musunuz?',

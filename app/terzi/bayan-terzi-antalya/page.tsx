@@ -44,7 +44,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: 'Bayan Terzi Antalya · Elbise Tamiri, Tadilat | Terzi Can' },
-  description: "Antalya bayan terzi: kadın tamir tadilat, elbise tamiri, etek kısaltma ₺200, fermuar değişimi ₺300, yırtık dikme, abiye tamiri ₺800. Eve servis. ☎ +90 531 898 64 18",
+  description: "Antalya bayan terzi: elbise tamiri, etek kısaltma ₺200, fermuar ₺300, abiye tamiri ₺800'den. Eve servis. ☎ +90 531 898 64 18",
   keywords: [
     'bayan tamir tadilat Antalya', 'elbise tamiri ve tadilatı Antalya', 'elbise fermuar değişimi Antalya', 'yırtık elbise tamiri Antalya', 'bayan terzi Antalya', 'kadın terzi Antalya', 'kadın elbise dikimi Antalya',
     'gelinlik tadilatı Antalya', 'abiye tamiri Antalya', 'etek kısaltma Antalya',

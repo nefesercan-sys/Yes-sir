@@ -8,7 +8,7 @@ const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
   title: "SwapHubs — İlan Ver, Teklif Al | Terzi ve Tekstil Platformu",
-  description: "Ücretsiz ilan verin, teklif alın. Terzi, tekstil, fason üretim ve hizmet ilanları tek platformda. Antalya Konyaaltı Terzi Can: paça kısaltma, fermuar, elbise dikimi, her gün 08:00–23:00.",
+  description: "Ücretsiz ilan verin, teklif alın. Terzi, tekstil ve fason üretim ilanları tek yerde. Konyaaltı'nda Terzi Can: paça, fermuar, elbise dikimi, 08:00–23:00.",
   keywords: "ilan ver, ücretsiz ilan, teklif al, terzi, Antalya terzi, Konyaaltı terzi, tekstil, fason üretim, hizmet ilanları, ihracat, tedarikçi bul",
   openGraph: {
     title: "SwapHubs — Türkiye'den Dünyaya",

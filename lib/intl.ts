@@ -154,3 +154,13 @@ export const NB: Record<ILang, { title: string; text: string }> = {
   nl: { title: 'Is ophalen gratis in jouw buurt?', text: 'Ja: in Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum en Arapsuyu is ophalen en terugbrengen gratis. Zit je hotel elders, vraag het dan via WhatsApp. Open van 08:00 tot 23:00.' },
   ar: { title: 'هل الاستلام مجاني في منطقتك؟', text: 'نعم: في Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Meltem, Siteler, Öğretmenevleri, Altınkum, Arapsuyu الاستلام والتسليم مجاني. إذا كان فندقك في منطقة أخرى فاسأل عبر واتساب. ساعات العمل 08:00–23:00.' },
 };
+
+// İlçe/mahalle bağlantısı (Konyaaltı ve Muratpaşa) — 6 yeni dil
+export const NB_DISTRICT: Record<ILang, { title: string; text: string }> = {
+  es: { title: '¿De qué distrito es cada barrio?', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum y Arapsuyu son barrios del distrito de Konyaaltı, el mismo donde está nuestro taller (en Hurma). Meltem pertenece al distrito de Muratpaşa. En todos ellos la recogida y entrega es gratuita.' },
+  fr: { title: 'De quel district dépend chaque quartier ?', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum et Arapsuyu sont des quartiers du district de Konyaaltı, celui de notre atelier (à Hurma). Meltem relève du district de Muratpaşa. La prise en charge et la livraison y sont gratuites.' },
+  pl: { title: 'Do którego dystryktu należy każde osiedle?', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum i Arapsuyu to osiedla dystryktu Konyaaltı, tego samego, w którym mamy pracownię (w Hurma). Meltem należy do dystryktu Muratpaşa. Odbiór i dowóz są tam bezpłatne.' },
+  uk: { title: 'До якого району належить кожен мікрорайон?', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum та Arapsuyu — мікрорайони району Коньяалти, де розташоване наше ательє (у Hurma). Meltem належить до району Муратпаша. Забір і доставка там безкоштовні.' },
+  nl: { title: 'Bij welk district hoort elke wijk?', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum en Arapsuyu zijn wijken van het district Konyaaltı, waar ook ons atelier staat (in Hurma). Meltem hoort bij het district Muratpaşa. Ophalen en terugbrengen is er gratis.' },
+  ar: { title: 'إلى أي منطقة يتبع كل حي؟', text: 'Hurma, Liman, Sarısu, Gürsu, Uluç, Uncalı, Siteler, Öğretmenevleri, Altınkum, Arapsuyu أحياء تابعة لمنطقة Konyaaltı حيث تقع ورشتنا (في Hurma). أما Meltem فتتبع منطقة Muratpaşa. الاستلام والتسليم فيها مجاني.' },
+};

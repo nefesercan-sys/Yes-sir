@@ -29,8 +29,8 @@ const jsonLd = {
         priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
         offers: [
-          { '@type':'Offer', name:'Kot Paça Kısaltma', price:'200', priceCurrency:'TRY', description:'Kot pantolon paça kısaltma — 24 saat teslim' },
-          { '@type':'Offer', name:'Kumaş Pantolon Paça Kısaltma', price:'200', priceCurrency:'TRY', description:'Kumaş pantolon paça kısaltma — 24 saat teslim' },
+          { '@type':'Offer', name:'Kot Paça Kısaltma', price:'200', priceCurrency:'TRY', description:'Kot pantolon paça kısaltma — aynı gün teslim' },
+          { '@type':'Offer', name:'Kumaş Pantolon Paça Kısaltma', price:'200', priceCurrency:'TRY', description:'Kumaş pantolon paça kısaltma — aynı gün teslim' },
           { '@type':'Offer', name:'Eşofman / Spor Pantolon Paça', price:'200', priceCurrency:'TRY', description:'Spor pantolon paça kısaltma' },
           { '@type':'Offer', name:'Keten / Yazlık Pantolon Paça', price:'200', priceCurrency:'TRY', description:'Yazlık keten pantolon paça kısaltma' },
           { '@type':'Offer', name:'Deri Pantolon Paça', price:'250', priceCurrency:'TRY', description:'Deri pantolon paça kısaltma — özel işlem' },
