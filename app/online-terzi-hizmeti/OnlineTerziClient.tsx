@@ -93,9 +93,9 @@ const CATEGORIES = [
     tag: 'Özel Tasarım',
     title: 'Abiye & Gece Elbiseleri',
     subtitle: 'Her Gecenin Yıldızı Olun',
-    desc: `Hayatınızın en özel gecelerinde tam anlamıyla parlamak için tasarlanmış koleksiyonumuz; her bedenin güzelliğini ön plana çıkaran kesimler, el işlemeli dantel detaylar, Fransız şifon ve İtalyan saten kumaşlarla hayata geçirilmektedir. Düğün, nişan, mezuniyet ve kokteyl davetleri için size özel kalıp çıkarıyor, bedeninizin her konturuna mükemmel oturan tek parça tasarımlar üretiyoruz.`,
+    desc: `Düğün, nişan, mezuniyet ve davetler için ölçünüze göre abiye ve gece elbiseleri dikiyoruz. Modelinizi veya bir fotoğrafı WhatsApp'tan gönderin, ölçülerinizi online alalım.`,
     images: [IMG.abiye1, IMG.abiye2, IMG.abiye3],
-    features: ['El işlemeli dantel & boncuk', 'İtalyan saten & Fransız şifon', 'Balık / Prenses / A-line kesim', '3D taslak onayı', 'Ücretsiz revizyon'],
+    features: ['Ölçüye özel dikim', 'Model veya fotoğraftan çalışma', 'Balık / Prenses / A-line kesim', 'Oturmazsa değişim veya düzeltme'],
     waMsg: 'Merhaba, özel tasarım abiye siparişi vermek istiyorum.',
   },
   {
@@ -106,9 +106,9 @@ const CATEGORIES = [
     tag: 'Prestij Serisi',
     title: 'Takım Elbise & Smokin',
     subtitle: 'Her Ortamda Fark Yaratın',
-    desc: `İngiltere'nin klasik Savile Row geleneğini dijital çağın kolaylığıyla buluşturuyoruz. Her detayı sizin için özelleştirilen takım elbiselerimiz; İtalyan yün karışımlı kumaşlar ve süperfine wool seçenekleriyle sunulmaktadır. Tek düğme slim fit, çift düğme klasik, üç parçalı yelek — tamamen kişiselleştirilmektedir. Damat takımları, iş görüşmeleri ve smokin tasarımları üretiyoruz.`,
+    desc: `Ölçünüze göre takım elbise, ceket, pantolon ve yelek dikiyoruz. Kalıp ve kumaş seçenekleri WhatsApp'ta konuşulur; kumaşı biz temin ederiz ya da siz getirebilirsiniz.`,
     images: [IMG.takim1, IMG.takim2, IMG.takim3],
-    features: ['İtalyan wool & superfine kumaş', 'Slim / Classic / Modern fit', 'Damat & düğün özel serisi', 'Kol, yaka, cep kişiselleştirme', 'Yaka nakışı & monogram'],
+    features: ['Ölçüye özel dikim', 'Slim / Klasik kesim', 'Kumaşı biz temin ederiz veya siz getirirsiniz', 'Oturmazsa değişim veya düzeltme'],
     waMsg: 'Merhaba, özel takım elbise veya smokin siparişi vermek istiyorum.',
   },
   {
@@ -119,9 +119,9 @@ const CATEGORIES = [
     tag: 'Performans Serisi',
     title: 'Spor & Aktif Giyim',
     subtitle: 'Hareket Özgürlüğü, Stil Mükemmelliği',
-    desc: `Spor salonundan açık havaya, yogadan crossfit'e kadar her aktivite için bedeninizin hareketini özgürleştiren özel spor kıyafetler tasarlıyoruz. 4 yönlü streç likra, nem uzaklaştırıcı coolmax, UV korumalı kumaşlar kullanarak her parçayı hem estetik hem işlevsel yapıyoruz. Takım sporları için grup siparişlerinde %20 indirim uygulanmaktadır.`,
+    desc: `Spor ve aktif giyim için ölçüye özel veya seri dikim yapıyoruz. Model, kumaş ve adet bilgisini WhatsApp'tan paylaşın.`,
     images: [IMG.spor1, IMG.spor2, IMG.spor3],
-    features: ['4 yönlü streç & coolmax', 'UV koruma & antibakteriyel', 'Logo & renk kişiselleştirme', 'Takım siparişi %20 indirim', 'Su sporları & outdoor serisi'],
+    features: ['Ölçüye özel veya seri dikim', 'Logo ve renk seçeneği', 'Model ve kumaş WhatsApp\'ta netleşir'],
     waMsg: 'Merhaba, özel spor ve aktif giyim siparişi vermek istiyorum.',
   },
   {
@@ -132,9 +132,9 @@ const CATEGORIES = [
     tag: 'B2B Kurumsal',
     title: 'Üniforma & Kurumsal Kıyafet',
     subtitle: 'Kurumsal Kimliğinizi Giyinin',
-    desc: `Kurumsal imajınızın en güçlü yansıması çalışanlarınızın giydiği üniforma olduğunu biliyoruz. Otel resepsiyonistlerinden şeflere, medikal personelden havacılık ekiplerine kadar her sektörün ihtiyaçlarına göre üniforma koleksiyonları tasarlıyoruz. Adet projeye göre belirlenir; toplu üretim için fiyat ve süre WhatsApp'ta netleştirilir.`,
+    desc: `Otel, restoran, sağlık, güvenlik ve diğer sektörler için üniforma üretiyoruz. Minimum sipariş adedi yoktur; fiyat ve süre WhatsApp'ta netleştirilir.`,
     images: [IMG.uni1, IMG.uni2, IMG.uni3],
-    features: ['Adet projeye göre toplu üretim', 'Logo nakışı & baskı', 'Antimikrobiyal & leke itici', 'Sağlık / Turizm / Havacılık', 'Tekrar sipariş için kayıtlı kalıp'],
+    features: ['Minimum sipariş adedi yok', 'Logo nakışı ve baskı', 'Kendi etiket ve markanızla üretim', 'Yurt içi ve yurt dışı gönderim'],
     waMsg: 'Merhaba, kurumsal üniforma üretimi için fiyat teklifi almak istiyorum.',
   },
   {
@@ -145,9 +145,9 @@ const CATEGORIES = [
     tag: 'Lüks Koleksiyon',
     title: 'Gece & Davet Kıyafetleri',
     subtitle: 'Her Davet Bir Sahne, Her Kıyafet Bir Başyapıt',
-    desc: `Kokteyl partilerinden gala gecelerine kadar her ortamda sizi en zarif şekilde temsil edecek kıyafetler tasarlıyoruz. Fransız dantel, İtalyan organze ve Türk ipek dokumalarını kullanan tasarımcı ekibimiz; mini, midi ve maksi boy seçeneklerinde özel kalıplar çıkarmaktadır. Renk danışmanlığı ve 3D model görselleştirme ücretsiz olarak sunulmaktadır.`,
+    desc: `Kokteyl ve davet kıyafetlerini ölçünüze göre dikiyoruz. Mini, midi ve maksi boy seçeneklerinde modelinizi WhatsApp'tan paylaşabilirsiniz.`,
     images: [IMG.gece1, IMG.gece2, IMG.gece3],
-    features: ['Fransız dantel & İtalyan organze', 'Vücut tipi & renk analizi', '3D model görselleştirme', 'Aksesuar & stil danışmanlığı', 'Mini / Midi / Maksi seçenekler'],
+    features: ['Ölçüye özel dikim', 'Mini / Midi / Maksi seçenekler', 'Model veya fotoğraftan çalışma'],
     waMsg: 'Merhaba, gece daveti için özel kıyafet tasarımı yaptırmak istiyorum.',
   },
   {
@@ -158,9 +158,9 @@ const CATEGORIES = [
     tag: '%100 Organik',
     title: 'Müslin & Keten Doğal Koleksiyon',
     subtitle: 'Doğayla Uyum, Bedeninizle Özgürlük',
-    desc: `Müslin ve keten gibi doğal kumaşlardan, cildinize nefes aldıran koleksiyonumuzu keşfedin. Kadın için rahat elbiseler, erkek için keten gömlekler, bebek ve çocuklar için antialerjik tulum ve takımlar tasarlıyoruz. Anne-bebek kombini koleksiyonumuz özel fotoğraf çekimleri için birebir aynı kumaştan uyumlu tasarımlar sunmaktadır.`,
+    desc: `Müslin ve keten gibi doğal kumaşlardan kadın, erkek ve çocuk kıyafetleri dikiyoruz. Ölçünüze göre elbise, gömlek ve takım yapılır.`,
     images: [IMG.muslin1, IMG.muslin2, IMG.muslin3],
-    features: ['Doğal kumaş seçenekleri', 'Cilt dostu kumaşlar', 'Anne-bebek kombin serisi', 'Bebek antialerjik koleksiyon', 'Tüm mevsim yazlık modeller'],
+    features: ['Keten ve müslin kumaşlar', 'Kadın, erkek ve çocuk modelleri', 'Ölçüye özel dikim'],
     waMsg: 'Merhaba, müslin ve keten doğal koleksiyon siparişi vermek istiyorum.',
   },
   {
@@ -171,9 +171,9 @@ const CATEGORIES = [
     tag: 'Hayat Boyu Anı',
     title: 'Gelinlik & Düğün Koleksiyonu',
     subtitle: 'O Güne Layık Tek Parça — Sadece Sizin İçin',
-    desc: `Hayatınızın en kutsal gününde taşıyacağınız gelinliği hazır raflardan değil, sizin için özel olarak tasarlayıp dikiyoruz. İlk danışma görüşmesinden son prova ve teslimat aşamasına kadar kişisel stil danışmanınız yanınızda. Swarovski taşlar, el yapımı dantel aplikeler ve kişisel anlam taşıyan gizli detaylarla benzersiz gelinliğinizi yaratıyoruz.`,
+    desc: `Gelinlik ve düğün kıyafetlerini ölçünüze göre dikiyoruz; var olan gelinlikte tadilat da yapıyoruz. Modelinizi WhatsApp'tan paylaşın, süre ve fiyat işe göre netleşir.`,
     images: [IMG.gelin1, IMG.gelin2, IMG.gelin3],
-    features: ['Kişisel stil danışmanı', 'Swarovski & el nakışı detay', 'Gizli anlamlı detaylar', 'Ücretsiz kargo & revizyon', 'Ömür boyu saklama çantası'],
+    features: ['Ölçüye özel dikim', 'Gelinlik tadilatı', 'Prova ve düzeltme', 'Oturmazsa değişim veya düzeltme'],
     waMsg: 'Merhaba, özel gelinlik tasarımı ve dikimi için randevu almak istiyorum.',
   },
   {
@@ -184,29 +184,27 @@ const CATEGORIES = [
     tag: 'Her Gün Şıklık',
     title: 'Günlük & Casual Koleksiyon',
     subtitle: 'Konfor ve Stil, Her Gün Her Yerde',
-    desc: `Sabah kahvesinden akşam yemeğine, iş toplantısından hafta sonu pikniğine kadar her anınıza eşlik eden, tam bedeninize oturan günlük kıyafetler artık sadece birkaç ölçü paylaşımı kadar uzağınızda. Hazır giyimde yaşadığınız beden sorunlarına son veriyoruz — kıyafet size uyar. İstediğiniz renk, desen, kumaş ve model kombinasyonunda üretim yapıyoruz.`,
+    desc: `Pantolon, bluz, elbise ve gömlek gibi günlük kıyafetleri ölçünüze göre dikiyoruz. Renk, desen, kumaş ve model seçimi WhatsApp'ta konuşulur.`,
     images: [IMG.gunluk1, IMG.gunluk2, IMG.gunluk3],
-    features: ['Tüm beden tiplerine özel kalıp', 'Makinede yıkanabilir kumaşlar', 'İstediğiniz renk & desen', 'Pantolon / Bluz / Elbise / Gömlek', '48 saat içinde taslak onayı'],
+    features: ['Ölçüye özel kalıp', 'İstediğiniz renk ve desen', 'Pantolon / Bluz / Elbise / Gömlek'],
     waMsg: 'Merhaba, günlük ve casual kıyafet siparişi vermek istiyorum.',
   },
 ];
 
 const FAQS = [
-  { q: "Türkiye'nin herhangi bir şehrinden sipariş verebilir miyim?", a: "Kesinlikle! İstanbul'dan Hakkari'ye, İzmir'den Kars'a Türkiye'nin 81 iline kapıya kadar kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor; mağazaya ya da atölyeye gelmenize gerek yok." },
-  { q: "Ölçülerimi nasıl alacağım, yardımcı olur musunuz?", a: "Evet! WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli." },
-  { q: "Sipariş ne kadar sürede teslim edilir?", a: "Temel modeller 7–10 iş gününde, abiye ve gelinlik gibi detaylı modeller 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti mevcuttur." },
-  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Kıyafet tam oturmadıysa WhatsApp'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir." },
-  { q: "Kendi kumaşımı getirip diktirebilir miyim?", a: "Evet! Kendi kumaşınızla fason dikim hizmeti de sunuyoruz. Kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir." },
-  { q: "4 dilde hizmet gerçekten mümkün mü?", a: "Türkçe, İngilizce, Almanca ve Rusça dillerinde müşteri hizmeti sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşterilerimiz için özellikle geliştirdiğimiz bu hizmet sayesinde dünyada nerede olursanız olun, SwapHubs Online Terzi hizmetinden faydalanabilirsiniz." },
+  { q: "Yurt dışından veya başka bir şehirden sipariş verebilir miyim?", a: "Evet. Ölçülerinizi online alıp kıyafeti Antalya'daki atölyemizde dikiyor, istediğiniz ülkeye veya şehre gönderiyoruz. Tüm süreç WhatsApp üzerinden yürütülür." },
+  { q: "Ölçülerimi nasıl alacağım, yardımcı olur musunuz?", a: "Evet. WhatsApp üzerinden ölçü alma konusunda sizi adım adım yönlendiriyoruz; bir mezura ve telefonunuz yeterli." },
+  { q: "Sipariş ne kadar sürede teslim edilir?", a: "Dikim süresi modele göre değişir; yaklaşık süreyi WhatsApp'ta söyleriz. Yurt dışı kargo genelde 1–3 hafta sürer." },
+  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Oturmayan ürünü değiştiriyor veya düzeltiyoruz. WhatsApp'tan bize yazın, işi birlikte planlarız." },
+  { q: "Kumaşı kim temin ediyor, kendi kumaşımı getirebilir miyim?", a: "Kumaşı biz temin edebiliriz; isterseniz kendi kumaşınızı da getirebilirsiniz." },
+  { q: "Ödemeyi nasıl yapıyorum?", a: "Ödemeyi havale ile alabiliyoruz. Fiyat ve ödeme detayları WhatsApp'ta netleştirilir." },
+  { q: "Hangi dillerde yazışabiliriz?", a: "WhatsApp'tan her dilde yazışabilirsiniz; her dilde cevap veriyoruz." },
 ];
 
 const STATS = [
   { n: '2006', label: 'Yılından Beri' },
-  { n: '81', label: 'İl Teslimat' },
-  { n: '4', label: 'Dil Hizmet' },
-  { n: '%98', label: 'Memnuniyet' },
-  { n: '7+', label: 'Yıl Tecrübe' },
-  { n: '500+', label: 'Farklı Model' },
+  { n: '08–23', label: 'Her Gün Açık' },
+  { n: 'WhatsApp', label: 'Her Dilde Cevap' },
 ];
 
 // ─── Güvenli resim bileşeni — yüklenemezse placeholder gösterir ──────────────
@@ -277,7 +275,7 @@ export default function OnlineTerziClient() {
 
       {/* ── GÜVEN ÇUBUĞU ─────────────────────────────────────────── */}
       <div role="banner" style={{ background: `linear-gradient(90deg, ${C.charcoal}, ${C.charcoalMid}, ${C.charcoal})`, color: C.goldLight, fontSize: 12, fontWeight: 600, padding: '9px 16px', textAlign: 'center', letterSpacing: '0.08em', fontFamily: 'system-ui, sans-serif' }}>
-        🌍 Türkiye'nin 81 İline Ücretsiz Teslimat &nbsp;·&nbsp; 4 Dil: TR · EN · DE · RU &nbsp;·&nbsp; ✓ Ölçüye Göre Dikim &nbsp;·&nbsp; ✓ Revizyon Desteği
+        🌍 Türkiye'ye ve yurt dışına gönderim &nbsp;·&nbsp; WhatsApp'tan her dilde cevap &nbsp;·&nbsp; ✓ Ölçüye Göre Dikim &nbsp;·&nbsp; ✓ Oturmazsa Değişim / Düzeltme
       </div>
 
       {/* ── NAV ──────────────────────────────────────────────────── */}
@@ -354,7 +352,7 @@ export default function OnlineTerziClient() {
             </div>
 
             <p style={{ fontSize: 15, color: '#9CA3AF', marginBottom: 40, lineHeight: 1.8, maxWidth: 540, fontFamily: 'system-ui, sans-serif' }}>
-              Türkiye'nin neresinde olursanız olun — ölçülerinizi paylaşın, modelinizi seçin, hayalinizdeki kıyafet size özel dikilip kapınıza gelsin. 4 dilde hizmet, 81 ile teslimat, sıfır ödün verilen kalite.
+              Türkiye'nin neresinde olursanız olun — ölçülerinizi paylaşın, modelinizi seçin, hayalinizdeki kıyafet size özel dikilip kapınıza gelsin. Ölçüleriniz online alınır, atölyemizde dikilir ve istediğiniz yere gönderilir.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 48 }}>
@@ -516,7 +514,7 @@ export default function OnlineTerziClient() {
               { n: '01', icon: '📏', title: 'Ölçünüzü Alın', desc: 'Evdeki mezuranızla 5 temel ölçüyü alın. Yardıma ihtiyacınız varsa WhatsApp görüntülü ölçü seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir.' },
               { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Tasarımcılarımız 48 saat içinde taslak hazırlar.' },
               { n: '03', icon: '✂️', title: 'Üretim Başlıyor', desc: 'Taslağı onayladığınız anda atölyemiz harekete geçer. Kalıp çıkarma, kesim, dikim, ütü ve kalite kontrol aşamaları eksiksiz tamamlanır.' },
-              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Özenle paketlenen kıyafetiniz Türkiye\'nin 81 iline teslimat yapılır. Oturmayan bir yer olursa WhatsApp\'tan yazın, revizyonu birlikte planlarız.' },
+              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Kıyafetiniz paketlenip istediğiniz şehre veya ülkeye gönderilir; yurt dışı kargo genelde 1–3 hafta sürer. Oturmayan bir yer olursa WhatsApp\'tan yazın, değiştirir veya düzeltiriz.' },
             ].map(s => (
               <li key={s.n} style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 20, padding: 32, border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}>
                 <div aria-hidden="true" style={{ color: C.gold, fontSize: 36, fontWeight: 700, opacity: 0.3, lineHeight: 1, marginBottom: 16, fontFamily: 'system-ui, sans-serif' }}>{s.n}</div>
@@ -547,7 +545,7 @@ export default function OnlineTerziClient() {
                 Türkiye'nin En Yenilikçi <span style={{ color: C.gold, fontStyle: 'italic' }}>Online Terzi Platformu</span>
               </h2>
               <p style={{ fontSize: 15, color: C.slate, lineHeight: 1.85, marginBottom: 32, fontFamily: 'system-ui, sans-serif' }}>
-                2006'dan bu yana Antalya merkezli atölyemizde özel kıyafet tasarlıyor ve dikiyoruz. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren hibrit modelimizle Türkiye'nin 81 iline hizmet veriyoruz.
+                2006'dan bu yana Antalya merkezli atölyemizde özel kıyafet tasarlıyor ve dikiyoruz. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren online ölçü alıp dikerek Türkiye'ye ve yurt dışına gönderiyoruz.
               </p>
               <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, padding: 0, listStyle: 'none' }}>
                 {[
@@ -642,7 +640,7 @@ export default function OnlineTerziClient() {
                 SwapHubs <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
               </div>
               <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-                Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'dan 81 ile, 4 dilde premium hizmet. WhatsApp üzerinden bize ölçülerinizi gönderin, istediğiniz kıyafeti dikelim, kapınıza ücretsiz kargo ile ulaştıralım.
+                Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'dan Türkiye'ye ve yurt dışına gönderim. WhatsApp üzerinden ölçülerinizi gönderin, istediğiniz kıyafeti dikelim, adresinize gönderelim.
               </p>
               <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
                 {LANGS.map(l => (
@@ -665,7 +663,7 @@ export default function OnlineTerziClient() {
             <div>
               <div style={{ color: C.white, fontWeight: 700, marginBottom: 16, fontSize: 13, fontFamily: 'system-ui, sans-serif' }}>Hizmetler</div>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13, color: '#6B7280', fontFamily: 'system-ui, sans-serif', padding: 0, listStyle: 'none' }}>
-                {['Özel Tasarım & Dikim', 'Kalıp Çıkarma', 'Fason Üretim', 'Kurumsal Tekstil', 'Kendi Kumaşınla Dikim', '3D Model Görselleştirme'].map(s => (
+                {['Özel Tasarım & Dikim', 'Kalıp Çıkarma', 'Fason Üretim', 'Kurumsal Tekstil', 'Kendi Kumaşınla Dikim'].map(s => (
                   <li key={s}>{s}</li>
                 ))}
               </ul>
@@ -678,7 +676,7 @@ export default function OnlineTerziClient() {
                 </a>
                 <a href="mailto:tekstil@swaphubs.com" style={{ color: '#6B7280', textDecoration: 'none' }}>✉️ tekstil@swaphubs.com</a>
                 <span style={{ color: '#6B7280' }}>📍 Antalya, Türkiye</span>
-                <span style={{ color: '#4B5563' }}>🚚 81 İle Ücretsiz Kargo</span>
+                <span style={{ color: '#4B5563' }}>🚚 Türkiye ve Yurt Dışı Gönderim</span>
                 <span style={{ color: '#4B5563' }}>🌍 Yurt Dışı Teslimat Mevcut</span>
               </address>
             </div>

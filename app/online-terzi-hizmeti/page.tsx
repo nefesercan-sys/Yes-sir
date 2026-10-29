@@ -10,9 +10,9 @@ const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 // ─── METADATA ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: "Online Terzi Hizmeti | 81 İle Özel Dikim & Kargo | Terzi Can" },
+  title: { absolute: "Online Terzi Hizmeti | Ölçüye Özel Dikim & Kargo | Terzi Can" },
   description:
-    "Türkiye'nin 81 iline kargo teslimatlı online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz kapınıza gelsin.",
+    "Türkiye'ye ve yurt dışına gönderimli online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
   keywords: [
     'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
     'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
     'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Türkiye',
     'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
-    '81 ile terzi', 'online fason dikim', 'SwapHubs terzi',
+    'online fason dikim', 'SwapHubs terzi',
   ],
   alternates: {
     canonical: SITE_URL,
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Terzi Can Online Terzi | Türkiye'nin 81 İline Özel Dikim",
+    title: "Terzi Can Online Terzi | Ölçüye Özel Dikim, Yurt Dışına Gönderim",
     description:
-      "WhatsApp üzerinden profesyonel ölçü alımı, abiye, gelinlik ve takım elbise dikimi. 81 ile teslimat ve oturmayan kıyafette revizyon desteği.",
+      "WhatsApp üzerinden ölçü alımı, abiye, gelinlik ve takım elbise dikimi. Türkiye'ye ve yurt dışına gönderim; oturmayan kıyafette değişim veya düzeltme.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: '/og/terzi-can.jpg',
         width: 1200,
         height: 630,
-        alt: "Terzi Can Online Terzi Hizmeti — Türkiye'nin 81 İline Özel Dikim",
+        alt: "Terzi Can Online Terzi Hizmeti — Ölçüye Özel Dikim",
         type: 'image/jpeg',
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'Terzi Can Online Terzi | 81 İle Teslimat | TR · EN · DE · RU',
+    title: 'Terzi Can Online Terzi | Türkiye ve Yurt Dışına Gönderim',
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
     images: ['/og/terzi-can.jpg'],
   },
@@ -113,7 +113,7 @@ const jsonLd = {
       name: 'Terzi Can Online Terzi',
       alternateName: ['Terzi Can E-Terzi', 'Online Terzi Türkiye', 'Terzi Can Tailor'],
       description:
-        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma dikimi.",
+        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma dikimi.",
       url: SITE_URL,
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
@@ -137,14 +137,14 @@ const jsonLd = {
           closes: '23:00',
         },
       ],
-      areaServed: { '@type': 'Country', name: 'Turkey' },
+      areaServed: [{ '@type': 'Country', name: 'Turkey' }, { '@type': 'Place', name: 'Worldwide (shipping)' }],
       contactPoint: [
         {
           '@type': 'ContactPoint',
           telephone: '+905318986418',
           contactType: 'customer service',
           areaServed: 'TR',
-          availableLanguage: ['Turkish','English','German','Arabic'],
+          availableLanguage: ['Turkish','English','German','Russian','Arabic','Spanish','French','Polish','Ukrainian','Dutch'],
         },
       ],
 
@@ -156,9 +156,8 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Özel Tasarım Abiye & Gece Elbisesi Dikimi',
-            description: 'El işlemeli dantel, İtalyan saten ve Fransız şifon kumaşlarla abiye dikimi. 3D taslak onayı, ücretsiz revizyon.',
+            description: 'Ölçüye özel abiye ve gece elbisesi dikimi. Oturmazsa değişim veya düzeltme.',
             availability: 'https://schema.org/InStock',
-            price: '2000',
             priceCurrency: 'TRY',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
@@ -167,9 +166,8 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Özel Gelinlik Tasarımı ve Dikimi',
-            description: 'Swarovski taşlar, el yapımı dantel aplikelerle özel gelinlik. Kişisel stil danışmanı, ücretsiz revizyon.',
+            description: 'Ölçüye özel gelinlik dikimi ve gelinlik tadilatı. Oturmazsa değişim veya düzeltme.',
             availability: 'https://schema.org/InStock',
-            price: '5000',
             priceCurrency: 'TRY',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
@@ -178,9 +176,8 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Özel Takım Elbise ve Smokin Dikimi',
-            description: 'İtalyan yün ve superfine wool kumaşlarla ölçüye özel takım elbise ve smokin dikimi.',
+            description: 'Ölçüye özel takım elbise ve smokin dikimi.',
             availability: 'https://schema.org/InStock',
-            price: '3000',
             priceCurrency: 'TRY',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
@@ -189,9 +186,8 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Kurumsal Üniforma Üretimi',
-            description: 'Otel, restoran, sağlık, havacılık için logo nakışlı üniforma. Adet projeye göre belirlenir.',
+            description: 'Otel, restoran, sağlık ve diğer sektörler için logo nakışlı üniforma. Minimum sipariş adedi yok.',
             availability: 'https://schema.org/InStock',
-            price: '500',
             priceCurrency: 'TRY',
             url: SITE_URL,
             seller: { '@type': 'Organization', name: 'Terzi Can Online Terzi' },
@@ -211,15 +207,15 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${SITE_URL}#webpage`,
-      name: "Online Terzi Hizmeti | Türkiye'nin 81 İline Özel Dikim | Terzi Can",
+      name: "Online Terzi Hizmeti | Ölçüye Özel Dikim | Terzi Can",
       url: SITE_URL,
       isPartOf: { '@id': 'https://swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
       description:
-        "Türkiye'nin 81 iline kapıya teslimat yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet kapına gelsin.",
-      inLanguage: ['tr', 'en', 'de', 'ru'],
+        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet adresine gelsin.",
+      inLanguage: 'tr',
       datePublished: '2024-01-01',
-      dateModified: new Date().toISOString().split('T')[0],
+      dateModified: '2026-10-29',
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
     },
 
@@ -244,7 +240,7 @@ const jsonLd = {
           name: "Türkiye'nin herhangi bir şehrinden online terzi siparişi verebilir miyim?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Evet! İstanbul'dan Hakkari'ye, İzmir'den Kars'a 81 ilin tamamına kapıya kargo teslimatı yapıyoruz. Tüm süreç WhatsApp üzerinden yürütülüyor, atölyeye gelmenize gerek yok.",
+            text: "Evet. Ölçülerinizi online alıp kıyafeti Antalya'daki atölyemizde dikiyor, istediğiniz şehre veya ülkeye gönderiyoruz. Tüm süreç WhatsApp üzerinden yürütülür.",
           },
         },
         {
@@ -252,7 +248,7 @@ const jsonLd = {
           name: 'Online terzi için ölçülerimi nasıl alacağım?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'WhatsApp üzerinden görüntülü ölçü alma seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir; sadece bir mezura ve akıllı telefonunuz yeterli.',
+            text: 'WhatsApp üzerinden ölçü alma konusunda sizi adım adım yönlendiriyoruz; bir mezura ve telefonunuz yeterli.',
           },
         },
         {
@@ -260,7 +256,7 @@ const jsonLd = {
           name: 'Online terzi siparişim ne kadar sürede teslim edilir?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Temel modeller 7–10 iş gününde, abiye ve gelinlik 15–21 iş gününde tamamlanır. Kargo 1–3 iş günü içinde kapınıza ulaşır. Acele sipariş hizmeti de mevcuttur.',
+            text: 'Dikim süresi modele göre değişir; yaklaşık süreyi WhatsApp üzerinden söyleriz. Yurt dışı kargo genelde 1–3 hafta sürer.',
           },
         },
         {
@@ -268,7 +264,7 @@ const jsonLd = {
           name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Kıyafet tam oturmadıysa WhatsApp\'tan bize yazın. Revizyonu birlikte planlarız; ürün atölyeye gönderilir, düzeltilmiş haliyle size geri teslim edilir. Koşullar işin türüne göre netleşir.',
+            text: 'Oturmayan ürünü değiştiriyor veya düzeltiyoruz. WhatsApp\'tan bize yazın, işi birlikte planlarız.',
           },
         },
         {
@@ -276,15 +272,15 @@ const jsonLd = {
           name: 'Kendi kumaşımla online terzi hizmetinden yararlanabilir miyim?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Evet! Kendi kumaşınızı kargo ile atölyemize gönderin, ölçü ve model bilgilerinizle birlikte kıyafetiniz dikilip kapınıza gönderilir.',
+            text: 'Kumaşı biz temin edebiliriz; isterseniz kendi kumaşınızı da getirebilir veya gönderebilirsiniz.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Online terzi hizmeti kaç dilde sunuluyor?',
+          name: 'Hangi dillerde yazışabiliriz?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Türkçe, İngilizce, Almanca ve Rusça dillerinde hizmet sunuyoruz. Yurt dışında yaşayan Türkler ve uluslararası müşteriler de kolayca sipariş verebilir.',
+            text: 'WhatsApp üzerinden her dilde yazışabilirsiniz; her dilde cevap veriyoruz. Ödemeyi havale ile alıyoruz.',
           },
         },
       ],

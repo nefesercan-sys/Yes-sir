@@ -10,7 +10,7 @@ const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/de/online-schneiderservice-antalya`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY = '2026-10-07';
+const TODAY = '2026-10-29';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Tek konum: Hurma, Konyaaltı (Google Business Profile)
@@ -64,7 +64,8 @@ const FAQ = [
   { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Der Preis hängt von Stoff und Modell ab. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
   { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
   { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Kurierabholung und -lieferung zu Hotels in Antalya: in Konyaaltı kostenlos, in anderen Bezirken nach Entfernung. Die Zeit klären wir per WhatsApp. ${PHONE}` },
-  { q: 'Gibt es einen deutschsprachigen Schneider in Antalya?', a: `Ja! Wir sprechen Deutsch, Englisch und Russisch. WhatsApp: ${PHONE}` },
+  { q: 'Antworten Sie in meiner Sprache?', a: `Ja. Schreiben Sie uns auf WhatsApp in jeder Sprache, wir antworten in dieser Sprache: ${PHONE}` },
+  { q: 'Kann ich aus dem Ausland bestellen?', a: 'Ja. Wir nehmen Ihre Maße online auf, nähen das Kleidungsstück in Antalya und senden es in Ihr Land, meist innerhalb von 1–3 Wochen. Die Zahlung erfolgt per Überweisung. Passt es nicht, tauschen wir es um oder ändern es. Den Stoff können wir besorgen oder Sie stellen ihn selbst.' },
   { q: 'Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?', a: `Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
   { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
   { q: 'Kann ich mir ein individuelles Kleid anfertigen lassen?', a: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` },

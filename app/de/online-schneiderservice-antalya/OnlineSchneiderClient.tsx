@@ -91,7 +91,6 @@ const SERVICES = [
 
 const PRICE_TABLE = [
   { cat:'Herrenschneiderei', rows:[
-    ['Anzug (3-teilig)','₺3.200+','7–10 Tage'],
     ['Herrenhemd','₺800+','3–5 Tage'],
     ['Herrenhose','₺700+','3–5 Tage'],
   ]},
@@ -99,7 +98,6 @@ const PRICE_TABLE = [
     ['Alltagskleid','₺800+','3–5 Tage'],
     ['Business-Kleidung','₺800+','3–5 Tage'],
     ['Abendkleid','₺1.200+','5–7 Tage'],
-    ['Brautkleid','₺5.000+','14–21 Tage'],
     ['Bluse / Rock','₺500+','2–4 Tage'],
     ['Overall','₺900+','4–6 Tage'],
   ]},
@@ -118,15 +116,6 @@ const PRICE_TABLE = [
   ]},
 ];
 
-const REVIEWS = [
-  { name:'Kemal A.', city:'Antalya', date:'April 2025', stars:5, text:'"Ich kam wegen eines Herrenanzugs. Die Passform war perfekt und das Online-Bestellsystem sehr praktisch."' },
-  { name:'Ayşe T.', city:'Istanbul', date:'Mai 2025', stars:5, text:'"Ich habe online aus Istanbul bestellt. Es kam in 8 Tagen an meine Tür. Die Passform war perfekt — sehr zufrieden!"' },
-  { name:'Mehmet S.', city:'Ankara', date:'März 2025', stars:5, text:'"Wir haben 200 Arbeitshemden in Serie fertigen lassen. Pünktlich, vollständig und in toller Qualität geliefert."' },
-  { name:'Sarah M.', city:'London', date:'Juni 2025', stars:5, text:'"War in Antalya und brauchte dringend mein Kleid gebügelt. Vom Hotel abgeholt, in 3 Stunden geliefert. Fantastisch!"' },
-  { name:'Fatma K.', city:'Antalya', date:'Februar 2025', stars:5, text:'"Ich habe mir ein individuelles Brautkleid entwerfen lassen. Das Ergebnis war noch schöner als erträumt!"' },
-  { name:'Ali R.', city:'Kemer', date:'Mai 2025', stars:5, text:'"Ich habe den Bügelservice per Kurier von meinem Hotel in Kemer erhalten. Lieferung am selben Tag, sehr professionell."' },
-];
-
 const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Der Preis hängt von Stoff und Modell ab. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
@@ -135,7 +124,8 @@ const FAQS: [string, string][] = [
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Einfache Arbeiten wie Kürzen oder Reißverschlüsse sind am selben Tag fertig. Änderungen dauern 24–48 Stunden. Express-Service verfügbar."],
   ["Versenden Sie in die ganze Türkei?", "Ja. Kostenloser Kurier innerhalb von Antalya, Versand in die ganze Türkei, 5–10 Werktage."],
-  ["Gibt es einen deutschsprachigen Schneider in Antalya?", "Ja! Unser Schneider spricht Deutsch, Englisch und Russisch. WhatsApp: +90 531 898 64 18"],
+  ["Antworten Sie in meiner Sprache?", "Ja. Schreiben Sie uns auf WhatsApp in jeder Sprache, wir antworten in dieser Sprache: +90 531 898 64 18"],
+  ["Kann ich aus dem Ausland bestellen?", "Ja. Wir nehmen Ihre Maße online auf, nähen das Kleidungsstück in Antalya und senden es in Ihr Land, meist innerhalb von 1–3 Wochen. Die Zahlung erfolgt per Überweisung. Passt es nicht, tauschen wir es um oder ändern es. Den Stoff können wir besorgen oder Sie stellen ihn selbst."],
   ["Mein Kleid ist gerissen — können Sie es am selben Tag reparieren?", "Ja, die meisten Risse und offenen Nähte werden am selben Tag repariert. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung."],
   ["Haben Sie abends oder am Wochenende geöffnet?", "Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin."],
   ["Kann ich mir ein individuelles Kleid anfertigen lassen?", "Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid."],
@@ -325,7 +315,7 @@ export default function OnlineSchneiderClient({
       <nav className={`onav${scrolled ? ' up' : ''}`} aria-label="Ana navigasyon">
         <a href="https://swaphubs.com" className="onav-logo">SwapHubs <em>/ Online Schneiderei</em></a>
         <ul className="onav-links">
-          {[['#services','Leistungen'],['#prices','Preise'],['#reviews','Bewertungen'],['#faq','FAQ'],['#maps','Standorte']].map(([h,l])=>(
+          {[['#services','Leistungen'],['#prices','Preise'],['#faq','FAQ'],['#maps','Standorte']].map(([h,l])=>(
             <li key={h}><a href={h}>{l}</a></li>
           ))}
         </ul>
@@ -525,26 +515,6 @@ export default function OnlineSchneiderClient({
             <a href={WA('Hallo, ich hätte gerne ein Preisangebot.')} target="_blank" rel="noopener noreferrer" className="obtn obtn-gold">
               📲 Kostenloses Angebot
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* YORUMLAR */}
-      <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
-        <div className="octr">
-          <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">Kundenstimmen</span>
-            <h2 className="oh2" id="rev-h">Was Unsere Kunden Sagen</h2>
-            <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
-          </div>
-          <div className="orev-grid">
-            {REVIEWS.map(r => (
-              <article key={r.name} className="orcard">
-                <div className="orstars" aria-label={`${r.stars} Sterne`}>{'★'.repeat(r.stars)}</div>
-                <p className="ortxt">{r.text}</p>
-                <div><span className="orauth-name">{r.name}</span>{' '}<span className="orauth-info">— {r.city} · {r.date}</span></div>
-              </article>
-            ))}
           </div>
         </div>
       </section>

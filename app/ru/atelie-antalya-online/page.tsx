@@ -18,7 +18,7 @@ const MAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.8
 const MAPS_REVIEW     = 'https://www.google.com/maps?cid=6436895271281342624';
 const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
 const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
-const TODAY = '2026-10-07';
+const TODAY = '2026-10-29';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Хочу узнать об услугах ателье (ремонт/пошив).');
 
@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp, цена | Terzi Can' },
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Говорим по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив на заказ. Отвечаем в WhatsApp по-русски. Открыто ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',
-    description: 'Ремонт одежды, подгонка, пошив на заказ. Говорим по-русски. Коньяалты, Анталия. ☎ +90 531 898 64 18',
+    description: 'Ремонт одежды, подгонка, пошив на заказ. Отвечаем в WhatsApp по-русски. Коньяалты, Анталия. ☎ +90 531 898 64 18',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'ru_RU', type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталия', type: 'image/jpeg' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ателье Коньяалты — Говорим по-русски | Terzi Can',
+    title: 'Ателье Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can',
     description: 'Ремонт одежды, пошив, химчистка. Анталия. ☎ +90 531 898 64 18',
     images: [OG_IMAGE],
   },
@@ -70,18 +70,18 @@ export const metadata: Metadata = {
 // ─── JSON-LD ─────────────────────────────────────────────────────
 const FAQ = [
   { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
-  { q: 'Говорят ли в ателье по-русски?', a: 'Да! Принимаем заказы на русском языке через WhatsApp. Пишите — ответим быстро.' },
+  { q: 'Говорят ли в ателье по-русски?', a: 'Да, можно писать в WhatsApp по-русски — мы отвечаем на любом языке.' },
   { q: 'Сколько стоит укоротить брюки в Анталии?', a: 'Укорачивание брюк от ₺200. Точную цену скажем по фото в WhatsApp.' },
-  { q: 'Есть ли выездной портной?', a: 'Да, выездной портной работает по всей Анталии. Заберём вещи на дом или в отель.' },
+  { q: 'Есть ли выездной портной?', a: 'Да. Заберём вещи на дом или в отель: в районах Коньяалты бесплатно, для отдалённых районов условия уточняем в WhatsApp.' },
 ];
 
 // ─── SERVICES DATA ────────────────────────────────────────────────
 const SERVICES = [
   { icon: '✂️', name: 'Укорачивание брюк', desc: 'Подгибка брюк, джинсов, юбок и платьев точно по вашей фигуре.', price: 'от ₺200', time: 'В тот же день' },
-  { icon: '🔒', name: 'Замена молнии', desc: 'Молнии на куртках, джинсах, сумках, платьях. Быстро и качественно.', price: 'от ₺200', time: 'В тот же день' },
+  { icon: '🔒', name: 'Замена молнии', desc: 'Молнии на куртках, джинсах, сумках, платьях. Быстро и качественно.', price: 'от ₺300', time: 'В тот же день' },
   { icon: '📐', name: 'Подгонка по фигуре', desc: 'Заужение платья, брюк, пиджака. Подгоняем по вашим меркам.', price: 'от ₺200', time: '1–2 дня' },
-  { icon: '🧥', name: 'Кожа и плотные ткани', desc: 'Кожаные куртки, дублёнки, пальто, плотный деним — берёмся за всё.', price: 'от ₺250', time: '1–2 дня' },
-  { icon: '👗', name: 'Пошив на заказ', desc: 'Платья, блузки, брюки по вашим меркам и эскизам. Любые ткани.', price: 'от ₺800', time: '3–7 дней' },
+  { icon: '🧥', name: 'Кожа и плотные ткани', desc: 'Ремонт и подгонка кожаных курток, пальто и плотного денима. Новые вещи из кожи и денима не шьём.', price: 'от ₺250', time: '1–2 дня' },
+  { icon: '👗', name: 'Пошив на заказ', desc: 'Платья, блузки, брюки по вашим меркам и эскизам: лён, хлопок, трикотаж, атлас, шёлк.', price: 'от ₺800', time: '3–7 дней' },
   { icon: '🧺', name: 'Химчистка и глажка', desc: 'Профессиональная стирка, химчистка, отпаривание, глажка.', price: 'от ₺80', time: '1–2 дня' },
   { icon: '🚗', name: 'Выездной портной', desc: 'Заберём вещи на дом или в отель, привезём обратно обычно за 1–2 дня.', price: 'Бесплатно', time: '1–2 дня' },
   { icon: '🏨', name: 'Пошив формы', desc: 'Гостиничная форма, ресторанная, медицинская, школьная. Опт.', price: 'По запросу', time: 'По договору' },
@@ -91,7 +91,7 @@ const FAQS = [
   { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
   { q: '💬 Говорите ли вы по-русски?', a: 'Да! Работаем с русскоязычными клиентами через WhatsApp. Пишите на родном языке — ответим быстро.' },
   { q: '⏱️ Как быстро выполняется ремонт?', a: 'Простой ремонт (укорачивание, замена молнии) — несколько часов или 1 день. Сложная подгонка — 1-2 дня. Пошив — 3-7 дней.' },
-  { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель по всей Анталии. Привозим готовое обратно обычно за 1–2 дня.' },
+  { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель: в районах Коньяалты бесплатно, для отдалённых районов условия уточняем в WhatsApp. Готовое привозим обратно обычно за 1–2 дня.' },
   { q: '💰 Сколько стоит укоротить брюки?', a: 'От ₺200. Пришлите фото в WhatsApp — скажем точную цену за несколько минут.' },
 ];
 
@@ -102,8 +102,8 @@ export default function RuAtelieAntalyaPage() {
       <BusinessSchema
         reviews={GOOGLE_REVIEWS}
         path='/ru/atelie-antalya-online'
-        name='Ателье Анталия Коньяалты — Говорим по-русски | Terzi Can'
-        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски. Ежедневно 08:00–23:00.'
+        name='Ателье Анталия Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can'
+        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.'
         lang={'ru'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Ателье на русском', path: '/ru/atelie-antalya-online' }]}
@@ -139,7 +139,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Говорим по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
+          🌍 Отвечаем в WhatsApp по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
         </div>
 
         {/* ── HERO ── */}
@@ -147,7 +147,7 @@ export default function RuAtelieAntalyaPage() {
           <div style={{ position:'absolute',inset:0,backgroundImage:'radial-gradient(circle at 75% 25%,rgba(74,222,128,.06) 0%,transparent 50%)',pointerEvents:'none' }} />
           <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
             <span className="fu" style={{ display:'inline-block',background:'rgba(74,222,128,.12)',border:'1px solid rgba(74,222,128,.3)',color:'#4ADE80',fontSize:11,fontWeight:700,padding:'5px 16px',borderRadius:20,letterSpacing:1,marginBottom:20,textTransform:'uppercase' }}>
-              ✨ Профессиональное Ателье — Говорим по-русски
+              ✨ Профессиональное Ателье — Отвечаем в WhatsApp по-русски
             </span>
 
             <h1 className="fu2" style={{ fontSize:'clamp(28px,5vw,48px)',fontWeight:900,color:'#fff',lineHeight:1.15,marginBottom:14 }}>
@@ -232,7 +232,7 @@ export default function RuAtelieAntalyaPage() {
         {/* ── SEO & ABOUT CONTENT (YENİ EKLENDİ - GOOGLE İÇİN ÇOK ÖNEMLİ) ── */}
         <section style={{ padding: '52px 16px 20px', maxWidth: 800, margin: '0 auto' }}>
           <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', border: '1px solid #E8E4DC', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
-            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Русскоговорящий портной в Коньяалты (Анталия)</h2>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Портной в Коньяалты с ответами по-русски (Анталия)</h2>
             <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, marginBottom: 16 }}>
               Ищете профессиональное <strong>ателье в Анталии</strong>, где вас поймут с полуслова? <b>Terzi Can</b> — это надежное ателье по ремонту и пошиву одежды, расположенное в самом сердце района Коньяалты (Лиман, Хурма, Сарысу). Мы гордимся тем, что предоставляем высококачественный сервис для местных жителей и экспатов. Вам больше не нужно переживать о языковом барьере: мы свободно общаемся с нашими клиентами на русском языке через WhatsApp.
             </p>

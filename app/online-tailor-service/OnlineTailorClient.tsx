@@ -91,7 +91,6 @@ const SERVICES = [
 
 const PRICE_TABLE = [
   { cat:'Menswear', rows:[
-    ['Suit (3-piece)','₺3,200+','7–10 days'],
     ['Men\'s Shirt','₺800+','3–5 days'],
     ['Men\'s Trousers','₺700+','3–5 days'],
   ]},
@@ -99,7 +98,6 @@ const PRICE_TABLE = [
     ['Everyday Dress','₺800+','3–5 days'],
     ['Office Wear','₺800+','3–5 days'],
     ['Evening Gown','₺1,200+','5–7 days'],
-    ['Wedding Dress','₺5,000+','14–21 days'],
     ['Blouse / Skirt','₺500+','2–4 days'],
     ['Jumpsuit','₺900+','4–6 days'],
   ]},
@@ -119,15 +117,6 @@ const PRICE_TABLE = [
   ]},
 ];
 
-const REVIEWS = [
-  { name:'Kemal A.', city:'Antalya', date:'April 2025', stars:5, text:'"I came in for a men\'s suit. The fit was perfect and the online ordering system was very convenient."' },
-  { name:'Ayşe T.', city:'Istanbul', date:'May 2025', stars:5, text:'"I ordered online from Istanbul. It arrived at my door in 8 days. The fit was perfect — very happy!"' },
-  { name:'Mehmet S.', city:'Ankara', date:'March 2025', stars:5, text:'"We had 200 work shirts mass-produced. Delivered on time, complete, and great quality."' },
-  { name:'Sarah M.', city:'London', date:'June 2025', stars:5, text:'"Visited Antalya, needed my dress ironed urgently. Picked up from hotel, delivered in 3h. Amazing!"' },
-  { name:'Fatma K.', city:'Antalya', date:'February 2025', stars:5, text:'"I had a custom wedding dress designed. The result was even better than I imagined!"' },
-  { name:'Ali R.', city:'Kemer', date:'May 2025', stars:5, text:'"I got ironing service by courier from my hotel in Kemer. Same-day delivery, very professional."' },
-];
-
 const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
@@ -136,7 +125,8 @@ const FAQS: [string, string][] = [
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Simple jobs like hemming or zippers are same-day. Alterations take 24–48 hours. Express service available."],
   ["Do you ship across Turkey?", "Yes. Courier within Antalya and shipping across Turkey, 5–10 business days; delivery cost is confirmed on WhatsApp."],
-  ["Is there an English-speaking tailor in Antalya?", "Yes! Our tailor speaks English, Russian and German. WhatsApp: +90 531 898 64 18"],
+  ["Can you reply in my language?", "Yes. Message us on WhatsApp in any language and we reply in it: +90 531 898 64 18"],
+  ["Can I order from abroad?", "Yes. We take your measurements online, sew the garment in Antalya and ship it to your country, usually within 1–3 weeks. Payment is by bank transfer. If it does not fit, we exchange or alter it. We can supply the fabric, or you can provide your own."],
   ["My dress is torn — can you repair it the same day?", "Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate."],
   ["Are you open in the evening or on weekends?", "Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time."],
   ["Can I have a custom dress made for myself?", "Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns."],
@@ -326,7 +316,7 @@ export default function OnlineTailorClient({
       <nav className={`onav${scrolled ? ' up' : ''}`} aria-label="Ana navigasyon">
         <a href="https://swaphubs.com" className="onav-logo">SwapHubs <em>/ Online Tailor</em></a>
         <ul className="onav-links">
-          {[['#services','Services'],['#prices','Prices'],['#reviews','Reviews'],['#faq','FAQ'],['#maps','Locations']].map(([h,l])=>(
+          {[['#services','Services'],['#prices','Prices'],['#faq','FAQ'],['#maps','Locations']].map(([h,l])=>(
             <li key={h}><a href={h}>{l}</a></li>
           ))}
         </ul>
@@ -526,26 +516,6 @@ export default function OnlineTailorClient({
             <a href={WA('Hello, I would like a price quote.')} target="_blank" rel="noopener noreferrer" className="obtn obtn-gold">
               📲 Get a Free Quote
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* YORUMLAR */}
-      <section id="reviews" className="osec" style={{ background: 'var(--ink3)' }} aria-labelledby="rev-h">
-        <div className="octr">
-          <div style={{ textAlign: 'center' }}>
-            <span className="oeyebrow">Customer Feedback</span>
-            <h2 className="oh2" id="rev-h">What Our Customers Say</h2>
-            <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
-          </div>
-          <div className="orev-grid">
-            {REVIEWS.map(r => (
-              <article key={r.name} className="orcard">
-                <div className="orstars" aria-label={`${r.stars} stars`}>{'★'.repeat(r.stars)}</div>
-                <p className="ortxt">{r.text}</p>
-                <div><span className="orauth-name">{r.name}</span>{' '}<span className="orauth-info">— {r.city} · {r.date}</span></div>
-              </article>
-            ))}
           </div>
         </div>
       </section>

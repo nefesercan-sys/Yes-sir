@@ -10,7 +10,7 @@ const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/online-tailor-service`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const TODAY = new Date().toISOString().slice(0, 10);
+const TODAY = '2026-10-29';
 const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
 
 // Tek konum: Hurma, Konyaaltı (Google Business Profile)
@@ -73,7 +73,8 @@ const FAQ = [
   { q: "How much does a men's suit cost in Antalya?", a: `The price depends on fabric and style. Send your measurements via WhatsApp: ${PHONE}` },
   { q: 'How does the online tailor service work?', a: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` },
   { q: 'Do you come to my hotel for ironing?', a: `Yes! Courier pickup and delivery to hotels in Antalya: free in Konyaaltı, priced by distance elsewhere. We agree the timing on WhatsApp. ${PHONE}` },
-  { q: 'Is there an English-speaking tailor in Antalya?', a: `Yes! We speak English, Russian and German. WhatsApp: ${PHONE}` },
+  { q: 'Can you reply in my language?', a: `Yes. Message us on WhatsApp in any language and we reply in it: ${PHONE}` },
+  { q: 'Can I order from abroad?', a: 'Yes. We take your measurements online, sew the garment in Antalya and ship it to your country, usually within 1–3 weeks. Payment is by bank transfer. If it does not fit, we exchange or alter it. We can supply the fabric, or you can provide your own.' },
   { q: 'My dress is torn — can you repair it the same day?', a: `Yes, most tears and split seams are fixed the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
   { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
   { q: 'Can I have a custom dress made for myself?', a: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` },
