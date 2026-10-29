@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { ILANGS, INTL, NB, iUrl, type ILang } from '@/lib/intl';
+import { ZCOPY, ZONE_SLUGS, zoneData, zoneUrl } from '@/lib/intl-zones';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -78,6 +79,15 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
         <section style={{ marginBottom: '1.8rem' }}>
           <H2>{NB[lang].title}</H2>
           <p style={{ margin: 0 }}>{NB[lang].text}</p>
+        </section>
+
+        <section style={{ marginBottom: '1.8rem' }}>
+          <H2>{ZCOPY[lang].zonesLabel}</H2>
+          <p style={{ margin: 0 }}>
+            {ZONE_SLUGS.map((z, i) => (
+              <span key={z}>{i > 0 && ' · '}<Link href={zoneUrl(lang, z)} style={{ color: C.green }}>{zoneData(lang, z).name}</Link></span>
+            ))}
+          </p>
         </section>
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>

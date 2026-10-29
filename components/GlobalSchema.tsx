@@ -61,6 +61,7 @@ export function isTerziPath(pathname: string | null): boolean {
   if (!pathname) return false;
   const p = pathname.toLowerCase();
   if (INTL_PATHS.includes(p.replace(/\/$/, ''))) return true;
+  if (/^\/(es|fr|pl|uk|nl|ar)\/(sastre-hoteles|couturier-hotels|krawiec-hotele|kravets-hoteli|kleermaker-hotels|khayyat-fanadiq)-[a-z]+$/.test(p)) return true;
   return TERZI_PREFIXES.some((x) => p === x || p.startsWith(x));
 }
 
