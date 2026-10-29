@@ -1,4 +1,3 @@
-import ReviewsBlock from '@/components/ReviewsBlock';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -109,7 +108,6 @@ export default function OnlineTailorServicePage() {
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
       />
-      <ReviewsBlock lang="en" />
       <ReviewsBlock lang="en" />
     </>
   );
