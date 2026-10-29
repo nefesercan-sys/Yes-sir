@@ -81,3 +81,26 @@ export const GOOGLE_PROFILE_STATS = { count: 9, average: '5.0' };
 export function reviewStats() {
   return GOOGLE_PROFILE_STATS;
 }
+
+// LocalBusiness düğümüne `...reviewSchema()` olarak eklenir. Yorum yoksa boş döner.
+export function reviewSchema(): Record<string, unknown> {
+  const { count, average } = reviewStats();
+  if (!count) return {};
+  return {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: average,
+      reviewCount: String(count),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: GOOGLE_REVIEWS.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      datePublished: r.date,
+      reviewBody: r.text,
+      inLanguage: r.lang,
+      reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
+    })),
+  };
+}

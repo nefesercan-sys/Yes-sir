@@ -6,7 +6,7 @@
 // ============================================================
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewStats } from '@/lib/reviews';
+import { reviewSchema } from '@/lib/reviews';
 import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
 import {
   DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
@@ -76,7 +76,7 @@ const SVC_HUB_NAME: Record<Lang, string> = {
 function businessNode(lang: Lang) {
   return {
     '@type': ['LocalBusiness', 'ClothingStore'],
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: reviewStats().average, reviewCount: String(reviewStats().count), bestRating: '5', worstRating: '1' },
+    ...reviewSchema(),
     '@id': BUSINESS_ID,
     name: 'Terzi Can',
     url: `${SITE}/terzi`,
