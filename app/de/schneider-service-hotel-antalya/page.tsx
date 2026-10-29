@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
@@ -362,6 +364,8 @@ export default function SchneiderServiceHotelAntalyaPage() {
           </div>
         </section>
       </main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164, ...reviewSchema() }) }} />
+      <ReviewsBlock lang="de" />
     </>
   );
 }
