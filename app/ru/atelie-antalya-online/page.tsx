@@ -1,3 +1,5 @@
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata, Viewport } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -98,6 +100,7 @@ export default function RuAtelieAntalyaPage() {
   return (
     <>
       <BusinessSchema
+        reviews={GOOGLE_REVIEWS}
         path='/ru/atelie-antalya-online'
         name='Ателье Анталия Коньяалты — Говорим по-русски | Terzi Can'
         description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии, химчистка и глажка. Говорим по-русски. Ежедневно 08:00–23:00.'
@@ -332,6 +335,7 @@ export default function RuAtelieAntalyaPage() {
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#25D366',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
         </div>
       </main>
+      <ReviewsBlock lang="ru" />
     </>
   );
 }

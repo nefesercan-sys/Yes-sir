@@ -6,6 +6,8 @@
 // önceki düzeltilmiş sürümden korundu.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import type { Metadata } from 'next'
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -89,6 +91,7 @@ const jsonLd = {
       // DÜZELTME: 'Tailor' tipi schema.org'da YOK — bu yeni belgede de
       // tekrarlanmıştı. Geçerli tipler: LocalBusiness + ClothingStore.
       '@type': ['LocalBusiness', 'ClothingStore'],
+      ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
       name: 'Terzi Can',
       alternateName: ['Ателье Terzi Can', 'Портной Кан Анталья', 'Tailor Can Antalya'],
@@ -232,6 +235,7 @@ export default function AtelieAntalyaPage() {
         gmapsDirections={GMAPS_DIRECTIONS}
         gmapsPlaceLink={GMAPS_PLACE_LINK}
       />
+      <ReviewsBlock lang="ru" />
     </>
   )
 }

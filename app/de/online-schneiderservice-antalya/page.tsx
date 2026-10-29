@@ -1,3 +1,5 @@
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -77,6 +79,7 @@ export default function OnlineSchneiderservicePage() {
   return (
     <>
       <BusinessSchema
+        reviews={GOOGLE_REVIEWS}
         path={SITE_URL.replace(BASE_URL, '')}
         name='Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice'
         description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–23:00 geöffnet.'
@@ -96,6 +99,7 @@ export default function OnlineSchneiderservicePage() {
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
       />
+      <ReviewsBlock lang="de" />
     </>
   );
 }

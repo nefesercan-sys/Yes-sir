@@ -1,3 +1,5 @@
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -81,6 +83,7 @@ export default function HotelTailorAntalyaPage() {
   return (
     <>
       <BusinessSchema
+        reviews={GOOGLE_REVIEWS}
         path='/en/hotel-tailor-antalya'
         name='Mobile Tailor Antalya · Hotel Tailor Service · Terzi Can'
         description='Mobile and hotel tailor service in Antalya. We come to your hotel in Belek, Lara, Kemer, Side — Konyaaltı and nearby districts. Measurement, tailoring and delivery to your door. Accepts EUR, USD, RUB, TRY and cards.'
@@ -351,6 +354,7 @@ export default function HotelTailorAntalyaPage() {
           </div>
         </section>
       </main>
+      <ReviewsBlock lang="en" />
     </>
   );
 }

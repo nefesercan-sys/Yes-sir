@@ -1,3 +1,5 @@
+import ReviewsBlock from '@/components/ReviewsBlock';
+import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -87,6 +89,7 @@ export default function OnlineTailorServicePage() {
   return (
     <>
       <BusinessSchema
+        reviews={GOOGLE_REVIEWS}
         path={SITE_URL.replace(BASE_URL, '')}
         name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti'
         description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, ironing, repairs, alterations, custom design and mass production. Open daily 08:00–23:00.'
@@ -106,6 +109,7 @@ export default function OnlineTailorServicePage() {
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
       />
+      <ReviewsBlock lang="en" />
       <ReviewsBlock lang="en" />
     </>
   );
