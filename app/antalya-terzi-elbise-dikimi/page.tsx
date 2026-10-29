@@ -70,7 +70,7 @@ const jsonLd = {
         addressCountry: 'TR',
       },
       areaServed: { '@type': 'AdministrativeArea', name: 'Konyaaltı, Antalya' },
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
+      knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       sameAs: [GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`, `${BASE_URL}/terzi`],
     },
     {

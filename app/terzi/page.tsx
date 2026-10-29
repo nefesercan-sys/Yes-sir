@@ -88,7 +88,7 @@ const jsonLd = {
       priceRange: '$$',
       currenciesAccepted: 'TRY, EUR, USD, RUB',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
+      knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       image: [OG_IMAGE],
       logo: `${HOME_URL}/logo.png`,
       parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
@@ -141,7 +141,7 @@ const jsonLd = {
         telephone: PHONE_E164,
         contactType: 'customer service',
         areaServed: 'TR',
-        availableLanguage: ['Turkish','English','Russian','German'],
+        availableLanguage: ['Turkish','English','Russian','German','Polish','Ukrainian','Dutch','French','Spanish','Arabic'],
       }],
     },
 

@@ -131,7 +131,7 @@ const jsonLd = {
         { '@type': 'Place', name: 'Kemer' },
         { '@type': 'City', name: 'Antalya' },
       ],
-      knowsLanguage: ['ru', 'tr', 'en'],
+      knowsLanguage: ['ru', 'tr', 'en', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Услуги ателье',

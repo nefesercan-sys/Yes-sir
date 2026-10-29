@@ -21,7 +21,7 @@ export const BUSINESS = {
   phone: '+905318986418',
   phoneDisplay: '+90 531 898 64 18',
   priceRange: '$$',
-  languages: ['tr', 'en', 'ru', 'de'],
+  languages: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
   currencies: 'TRY, EUR, USD, RUB',
   payments: 'Cash, Credit Card, Bank Transfer',
   image: `${SITE_URL}/og/terzi-can.jpg`,

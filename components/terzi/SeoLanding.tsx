@@ -95,8 +95,8 @@ function businessNode(lang: Lang) {
       opens: '08:00', closes: '23:00',
     }],
     foundingDate: '2006',
-    knowsLanguage: ['tr', 'en', 'ru', 'de'],
-    availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
+    knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
+    availableLanguage: ['Turkish', 'English', 'Russian', 'German', 'Polish', 'Ukrainian', 'Dutch', 'French', 'Spanish', 'Arabic'],
     sameAs: [MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
     inLanguage: lang,
   };

@@ -285,10 +285,10 @@ function buildJsonLd(lang: Lang) {
         }],
         contactPoint: [{
           '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', areaServed: 'TR',
-          availableLanguage: ['Turkish', 'English', 'Russian', 'German'],
+          availableLanguage: ['Turkish', 'English', 'Russian', 'German', 'Polish', 'Ukrainian', 'Dutch', 'French', 'Spanish', 'Arabic'],
         }],
         sameAs: SITE_CFG.sameAs,
-        knowsLanguage: ['tr', 'en', 'ru', 'de'],
+        knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       },
       {
         '@type': 'ContactPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,

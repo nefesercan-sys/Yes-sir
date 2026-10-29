@@ -91,7 +91,7 @@ const jsonLd = {
       geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
       areaServed: ['Hurma','Liman','Uncalı','Sarısu','Gürsu','Meltem','Göbi','Çakırlar','Öğretmenevleri','Konyaaltı','Antalya','Lara','Belek','Kemer'].map(n => ({ '@type': 'Place', name: n })),
-      contactPoint: [{ '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', availableLanguage: ['Turkish','English','Russian','German'] }],
+      contactPoint: [{ '@type': 'ContactPoint', telephone: PHONE_TEL, contactType: 'customer service', availableLanguage: ['Turkish','English','Russian','German','Polish','Ukrainian','Dutch','French','Spanish','Arabic'] }],
       hasOfferCatalog: {
         '@type': 'OfferCatalog', name: 'Terzi Can — Hizmet Kataloğu 2026',
         itemListElement: [
@@ -103,7 +103,7 @@ const jsonLd = {
           { '@type': 'Offer', price: '80',  priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Ütü Hizmeti' } },
         ],
       },
-      knowsLanguage: ['tr','ru','en','de'],
+      knowsLanguage: ['tr','ru','en','de','pl','uk','nl','fr','es','ar'],
     },
 
     {

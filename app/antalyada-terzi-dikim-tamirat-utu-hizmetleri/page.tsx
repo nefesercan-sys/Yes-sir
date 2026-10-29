@@ -109,7 +109,7 @@ const jsonLd = {
         { '@type': 'Place', name: 'Çakırlar Mahallesi, Konyaaltı' },
         { '@type': 'Place', name: 'Meltem Mahallesi, Muratpaşa' },
       ],
-      knowsLanguage: ['tr', 'en', 'ru', 'de'],
+      knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Terzilik Hizmetleri',

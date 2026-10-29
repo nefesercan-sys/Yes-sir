@@ -51,7 +51,7 @@ const jsonLd = {
         '@type': 'ContactPoint',
         telephone: PHONE_E164,
         contactType: 'customer service',
-        availableLanguage: ['Turkish','English','Russian','German'],
+        availableLanguage: ['Turkish','English','Russian','German','Polish','Ukrainian','Dutch','French','Spanish','Arabic'],
         hoursAvailable: {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'],

@@ -70,7 +70,7 @@ const jsonLd = {
         '@type': 'ContactPoint',
         telephone: PHONE_E,
         contactType: 'customer service',
-        availableLanguage: ['Turkish','English','Russian','German'],
+        availableLanguage: ['Turkish','English','Russian','German','Polish','Ukrainian','Dutch','French','Spanish','Arabic'],
       }],
       areaServed: [
         { '@type': 'AdministrativeArea', name: 'Konyaaltı' },

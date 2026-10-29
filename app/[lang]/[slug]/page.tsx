@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
+import SvcGuideLanding from '@/components/terzi/SvcGuideLanding';
+import { SVCG, svcgUrl, parseSvcg } from '@/lib/intl-svc';
 import { ILANGS, INTL, SLUG, iUrl, isILang } from '@/lib/intl';
 import { ZCOPY, ZONE_SLUGS, parseZone, zoneData, zoneSlug, zoneUrl } from '@/lib/intl-zones';
 import { SITE } from '@/lib/seo-data';
@@ -11,6 +13,7 @@ export const dynamicParams = false;
 export function generateStaticParams() {
   return ILANGS.flatMap((lang) => [
     { lang, slug: SLUG[lang] },
+    { lang, slug: SVCG[lang].slug },
     ...ZONE_SLUGS.map((z) => ({ lang, slug: zoneSlug(lang, z) })),
   ]);
 }
@@ -38,6 +41,20 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     };
   }
 
+  if (parseSvcg(lang, slug)) {
+    const sc = SVCG[lang];
+    const surl = `${SITE}${svcgUrl(lang)}`;
+    return {
+      metadataBase: new URL(SITE),
+      title: { absolute: sc.title },
+      description: sc.desc,
+      robots,
+      alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
+      openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
+      twitter: { card: 'summary_large_image', title: sc.title, description: sc.desc, images: [OG_DEFAULT] },
+    };
+  }
+
   const zone = parseZone(lang, slug);
   if (!zone) return {};
   const z = zoneData(lang, zone);
@@ -60,6 +77,7 @@ export default async function Page({ params }: P) {
   const { lang, slug } = await params;
   if (!isILang(lang)) notFound();
   if (slug === SLUG[lang]) return <IntlLanding lang={lang} />;
+  if (parseSvcg(lang, slug)) return <SvcGuideLanding lang={lang} />;
   const zone = parseZone(lang, slug);
   if (!zone) notFound();
   return <ZoneLanding lang={lang} zone={zone} />;

@@ -4,6 +4,7 @@ import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
 import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
+import { svcgUrl } from '@/lib/intl-svc'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
@@ -86,6 +87,8 @@ export async function GET() {
     ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
     // 🌍 Ek turist dilleri (ES/FR/PL/UK/NL/AR): tek tanıtım sayfası, kendi aralarında hreflang
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${iUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${iUrl(x)}`])) })),
+    // 🧵 Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (6 dil, kendi aralarında hreflang)
+    ...ILANGS.map((l) => ({ url: `${BASE_URL}${svcgUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${svcgUrl(x)}`])) })),
     // 🏨 Otel bölgesi derinlik sayfaları (6 dil × 6 bölge, bölge başına 6 dilli hreflang)
     ...ZONE_SLUGS.flatMap((z) => ILANGS.map((l) => ({ url: `${BASE_URL}${zoneUrl(l, z)}`, priority: '0.65', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${zoneUrl(x, z)}`])) }))),
   ]
