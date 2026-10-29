@@ -225,12 +225,6 @@ const ALT_SAYFALAR = [
   ['🏨','Hotel Tailor Antalya (EN)','/en/hotel-tailor-antalya'],
   ['🏨','Schneider im Hotel (DE)','/de/schneider-service-hotel-antalya'],
   ['🏨','Портной в отеле (RU)','/ru/vyezdnoy-portnoy-antalya'],
-  ['🌍','Español','/es/arreglos-de-ropa-en-vacaciones-antalya'],
-  ['🌍','Français','/fr/retouches-vetements-vacances-antalya'],
-  ['🌍','Polski','/pl/przerobki-ubran-na-wakacjach-antalya'],
-  ['🌍','Українська','/uk/pidhonka-odyahu-u-vidpustci-antaliya'],
-  ['🌍','Nederlands','/nl/kleding-laten-vermaken-op-vakantie-antalya'],
-  ['🌍','العربية','/ar/tadil-malabis-fi-el-ijaza-antalya'],
 ] as const;
 
 // Footer: Konyaaltı mahalle sayfaları → /terzi/konyaalti/[mahalle]
@@ -899,6 +893,18 @@ export default function TerziClient({ gbp1 }: Props) {
         <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.3)', marginBottom: '.5rem' }}>
           © 2026 Terzi Can — Antalya Terzi · Bay & Bayan · Özel Dikim · Otel Servisi · Tekstil İmalatı · {PHONE_DISPLAY}
         </p>
+        <nav aria-label="Languages" style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.4)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '.6rem', justifyContent: 'center' }}>
+          {[
+            ['es', 'Español', '/es/arreglos-de-ropa-en-vacaciones-antalya'],
+            ['fr', 'Français', '/fr/retouches-vetements-vacances-antalya'],
+            ['pl', 'Polski', '/pl/przerobki-ubran-na-wakacjach-antalya'],
+            ['uk', 'Українська', '/uk/pidhonka-odyahu-u-vidpustci-antaliya'],
+            ['nl', 'Nederlands', '/nl/kleding-laten-vermaken-op-vakantie-antalya'],
+            ['ar', 'العربية', '/ar/tadil-malabis-fi-el-ijaza-antalya'],
+          ].map(([l, n, h]) => (
+            <Link key={l} href={h} hrefLang={l} lang={l}>{n}</Link>
+          ))}
+        </nav>
         <div className="tfootmah" style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
           <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
           {FOOTER_MAHALLELER.map(mah => (
