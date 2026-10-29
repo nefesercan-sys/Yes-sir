@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -53,6 +54,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': ['LocalBusiness', 'ClothingStore'],
+      ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
       alternateName: ['Terzi Can', 'Terzi Can Konyaaltı'],

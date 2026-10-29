@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 
@@ -76,6 +77,7 @@ const jsonLd = {
     // LocalBusiness — ana işletme
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
+      ...reviewSchema(),
       additionalType: ['https://schema.org/SewingService', 'https://schema.org/DryCleaningService'],
       '@id': `${TERZI_URL}#business`,
       name: 'Terzi Can Konyaaltı',

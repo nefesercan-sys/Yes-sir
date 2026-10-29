@@ -3,6 +3,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -67,6 +68,7 @@ const jsonLd = {
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningOrLaundry'],
       '@id': `${SITE_URL}#business`,
+      ...reviewSchema(),
       name: 'Terzi Can',
       alternateName: [
         GBP_NAME,

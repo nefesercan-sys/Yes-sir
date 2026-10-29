@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OnlineTerziClient from './OnlineTerziClient';
@@ -107,6 +108,7 @@ const jsonLd = {
     // 2. LocalBusiness
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
+      ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can Online Terzi',
       alternateName: ['Terzi Can E-Terzi', 'Online Terzi Türkiye', 'Terzi Can Tailor'],

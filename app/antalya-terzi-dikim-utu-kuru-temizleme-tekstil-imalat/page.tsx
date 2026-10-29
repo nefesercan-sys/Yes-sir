@@ -1,6 +1,7 @@
 // app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link'
@@ -35,6 +36,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningOrLaundry'],
+      ...reviewSchema(),
       '@id': `${TERZI_URL}#business`,
       // DÜZELTME: sitedeki ana sayfayla (antalyada-terzi-dikim-tamirat-utu-hizmetleri)
       // aynı resmi ad + alternateName kullanılıyor — NAP tutarlılığı için kritik

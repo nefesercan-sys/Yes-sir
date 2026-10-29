@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -36,6 +37,7 @@ export default function KonyaaltiTerziPage() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    ...reviewSchema(),
     "name": "Antalya Konyaaltı Terzi - Elbise Dikim, Tamir ve Tadilat",
     "image": "https://swaphubs.com/logo.png", // Kendi logonuzla değiştirin
     "@id": "https://swaphubs.com/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat",

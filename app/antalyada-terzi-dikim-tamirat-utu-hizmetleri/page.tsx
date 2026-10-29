@@ -1,6 +1,7 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 
@@ -59,6 +60,7 @@ const jsonLd = {
     },
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'ServiceAreaBusiness'],
+      ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
       alternateName: 'Terzi Can Antalya',
