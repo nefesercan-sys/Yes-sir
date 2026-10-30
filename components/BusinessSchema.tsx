@@ -10,6 +10,7 @@
 // ============================================================
 import { BUSINESS, SITE_URL, areaServedSchema } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
+import { reviewStats } from '@/lib/reviews';
 
 type Crumb = { name: string; path: string };
 type Faq = { q: string; a: string };
@@ -89,9 +90,10 @@ export default function BusinessSchema({
     };
   }
 
+  // Yorum işaretlemesi yalnızca yorumların sayfada GÖRÜNÜR olduğu sayfalarda (ReviewsBlock) `reviews` ile verilir.
+  // aggregateRating Google profilindeki toplamı yansıtır (lib/reviews.ts GOOGLE_PROFILE_STATS) — listedeki 8 metinden hesaplanmaz.
   const real = (reviews ?? []).filter(r => r.author && r.text && r.rating >= 1 && r.rating <= 5);
   if (real.length > 0) {
-    const avg = real.reduce((s, r) => s + r.rating, 0) / real.length;
     business.review = real.map(r => ({
       '@type': 'Review',
       author: { '@type': 'Person', name: r.author },
@@ -99,10 +101,11 @@ export default function BusinessSchema({
       reviewBody: r.text,
       ...(r.date ? { datePublished: r.date } : {}),
     }));
+    const stats = reviewStats();
     business.aggregateRating = {
       '@type': 'AggregateRating',
-      ratingValue: avg.toFixed(1),
-      reviewCount: String(real.length),
+      ratingValue: stats.average,
+      reviewCount: String(Math.max(stats.count, real.length)),
       bestRating: '5',
     };
   }

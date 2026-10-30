@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
@@ -18,7 +17,6 @@ const jsonLd = {
   '@graph': [
     {
       '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningService'],
-      ...reviewSchema(),
       '@id': `${PARENT}#business`,
       name: 'Terzi Can',
       telephone: PHONE_E,

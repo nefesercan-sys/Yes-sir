@@ -9,15 +9,17 @@ export interface GoogleReview {
   rating: 1 | 2 | 3 | 4 | 5;
   text: string;
   date: string;            // YYYY-MM-DD veya YYYY-MM (Google "3 ay önce" gibi göreli tarih gösterdiğinde ay hassasiyetinde)
-  lang: 'tr' | 'en' | 'ru' | 'de';
+  /** Yorum metninin dili; iki dilde yazılmış yorumlarda dizi (metin değiştirilmez, yalnız etiket doğru verilir). */
+  lang: RLang | RLang[];
 }
+export type RLang = 'tr' | 'en' | 'ru' | 'de';
 
 export const GOOGLE_PROFILE_URL = 'https://www.google.com/maps?cid=6436895271281342624';
 export const GOOGLE_REVIEW_URL  = 'https://www.google.com/maps?cid=6436895271281342624';
 
 export const GOOGLE_REVIEWS: GoogleReview[] = [
   {
-    author: 'STYLE',
+    author: 'Style', // Google'daki görünen ad büyük harfle "STYLE"; diğer yazarlarla aynı biçimde yazıldı
     rating: 5,
     date: '2026-09',
     lang: 'tr',
@@ -41,7 +43,7 @@ export const GOOGLE_REVIEWS: GoogleReview[] = [
     author: 'Sumaya U.',
     rating: 5,
     date: '2026-07',
-    lang: 'tr',
+    lang: ['tr', 'ru'], // metnin ilk paragrafı Türkçe, ikinci paragrafı Rusça
     text: 'Çok iyi bir terzi. Yaptığı işten çok memnun kaldım. Fiyatları uygun, dikişleri ve işçiliği oldukça kaliteli. Titiz ve özenli çalışıyor. Kesinlikle tavsiye ederim.\n\nДействительно очень хороший портной. И цены доступные, и качество работы отличное. Всё делает аккуратно и качественно. Я очень довольна результатом. С чистой совестью рекомендую.',
   },
   {
@@ -100,6 +102,7 @@ export function reviewSchema(): Record<string, unknown> {
       datePublished: r.date,
       reviewBody: r.text,
       inLanguage: r.lang,
+      // reviewCount (GOOGLE_PROFILE_STATS.count) Google profilindeki toplamdır; burada metni doğrulanmış yorumlar listelenir
       reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: String(r.rating) },
     })),
   };
