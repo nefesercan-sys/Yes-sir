@@ -71,7 +71,7 @@ const T = {
       ['Fiyatı önceden nasıl öğrenirim?', 'Kıyafetin fotoğrafını WhatsApp\'tan atın. Başlangıç fiyatları: paça kısaltma ₺200, fermuar değişimi ₺300, abiye tadilatı ₺800, gelinlik tadilatı ₺800.'],
       ['Otelimden ya da evimden alıyor musunuz?', 'Konyaaltı\'nda otel ve eve alım-teslim ücretsiz. Daha uzak bölgelerde nasıl yapılacağını WhatsApp\'ta birlikte planlarız.'],
       ['Atölye tam olarak nerede?', 'Hurma Mahallesi, Konyaaltı. "Haritada Aç" düğmesiyle yol tarifi alabilirsiniz.'],
-      ['Yabancı misafirlere hizmet veriyor musunuz?', 'Evet. WhatsApp'tan kendi dilinizde yazabilirsiniz.'],
+      ['Yabancı misafirlere hizmet veriyor musunuz?', 'Evet. WhatsApp\'tan kendi dilinizde yazabilirsiniz.'],
     ] as [string, string][],
     moreH: 'Bunlara da bakın',
     more: { prices: 'Hizmetler ve fiyatlar', services: 'Tüm hizmetler', hotel: 'Otele terzi çağır', home: 'Terzi Can ana sayfa' },
