@@ -51,7 +51,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Mobiler Schneider Antalya · Schneiderservice im Hotel · Terzi Can',
       url: SITE_URL,
-      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer und nahegelegene Bezirke. Änderungen mit Anprobe im Hotel. Wir sprechen Deutsch. ☎ ' + PHONE,
+      description: 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer und nahegelegene Bezirke. Änderungen mit Anprobe im Hotel. schreiben Sie uns per WhatsApp. ☎ ' + PHONE,
       inLanguage: 'de',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -77,7 +77,7 @@ const jsonLd = {
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
           acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja, unser Team spricht Deutsch, Englisch, Russisch und Türkisch. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`} },
       ],
     },
     {
@@ -96,7 +96,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Schneider im Hotel Antalya · Mobiler Service | Terzi Can' },
-  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer. Änderungen mit Anprobe, wir sprechen Deutsch. ☎ ' + PHONE,
+  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer. Änderungen mit Anprobe, schreiben Sie uns per WhatsApp. ☎ ' + PHONE,
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',

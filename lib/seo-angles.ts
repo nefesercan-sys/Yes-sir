@@ -145,7 +145,7 @@ const V = (c: AngleCtx, a: string[]) => a[hashStr(c.n) % a.length];
 
 const EN2: T[] = [
   { titles: (n) => [`Holiday Clothing Repair in ${n} | Terzi Can`, `Tailor for Tourists in ${n} | Terzi Can`, `Tailor in ${n} | Terzi Can`],
-    core: (c) => V(c, [`Holiday clothes torn or too tight? Hemming, zippers, dress fixes ${c.loc}; we speak English`, `Tailor for visitors ${c.loc}: torn seam, broken zipper or a dress for a special evening; English spoken`]), extra: 'Quality work, clear prices',
+    core: (c) => V(c, [`Holiday clothes torn or too tight? Hemming, zippers, dress fixes ${c.loc}; message us on WhatsApp in your language`, `Tailor for visitors ${c.loc}: torn seam, broken zipper or a dress for a special evening; English spoken`]), extra: 'Quality work, clear prices',
     kw: (n) => [`tourist clothing alterations ${n}`, `tailor for tourists ${n}`, `holiday clothes repair ${n}`, `english speaking tailor ${n}`, `fix torn clothes on holiday ${n}`, `zip repair holiday ${n}`] },
   { titles: (n) => [`Hotel Pick-up Tailor in ${n} | Terzi Can`, `Tailor Comes to Your Hotel, ${n} | Terzi Can`, `Tailor in ${n} | Terzi Can`],
     core: (c) => V(c, [`A tailor that collects from your hotel ${c.loc}: alterations, hemming, zippers, repairs, then back to you`, `Hotel tailor service ${c.loc}: we collect clothes, alter or repair them in our workshop and return them`]), extra: 'Careful stitching',
@@ -165,7 +165,7 @@ const EN2: T[] = [
 ];
 const RU2: T[] = [
   { titles: (n) => [`Ремонт одежды для туристов: ${n} | Terzi Can`, `Портной для туристов: ${n} | Terzi Can`, `Портной ${n} | Terzi Can`],
-    core: (c) => V(c, [`Порвалась одежда в отпуске? Подшив, молнии, платья ${c.loc}; говорим по-русски`, `Портной для отдыхающих ${c.loc}: шов, молния, платье для особого вечера; русский язык`]), extra: 'Качественно',
+    core: (c) => V(c, [`Порвалась одежда в отпуске? Подшив, молнии, платья ${c.loc}; пишите в WhatsApp на своём языке`, `Портной для отдыхающих ${c.loc}: шов, молния, платье для особого вечера; русский язык`]), extra: 'Качественно',
     kw: (n) => [`ремонт одежды для туристов ${n}`, `портной для туристов ${n}`, `русскоговорящий портной ${n}`, `зашить одежду в отпуске ${n}`, `ремонт молнии в отпуске ${n}`] },
   { titles: (n) => [`Портной с выездом в отель: ${n} | Terzi Can`, `Ателье с забором из отеля: ${n} | Terzi Can`, `Портной ${n} | Terzi Can`],
     core: (c) => V(c, [`Портной забирает вещи из отеля ${c.loc}: подгонка, подшив, молнии, ремонт и возврат`, `Ателье для отелей ${c.loc}: заберём одежду, подгоним или отремонтируем и вернём`]), extra: 'Аккуратно',
@@ -185,7 +185,7 @@ const RU2: T[] = [
 ];
 const DE2: T[] = [
   { titles: (n) => [`Schneider für Urlauber in ${n} | Terzi Can`, `Kleidung im Urlaub ändern, ${n} | Terzi Can`, `Schneider ${n} | Terzi Can`],
-    core: (c) => V(c, [`Kleidung im Urlaub gerissen oder zu eng ${c.loc}? Kürzen, Reißverschluss, Kleider ändern; wir sprechen Deutsch`, `Schneider für Urlauber ${c.loc}: Naht nähen, Reißverschluss ersetzen, Kleid anpassen; Deutsch gesprochen`]), extra: 'Saubere Arbeit',
+    core: (c) => V(c, [`Kleidung im Urlaub gerissen oder zu eng ${c.loc}? Kürzen, Reißverschluss, Kleider ändern; schreiben Sie uns per WhatsApp`, `Schneider für Urlauber ${c.loc}: Naht nähen, Reißverschluss ersetzen, Kleid anpassen; Deutsch gesprochen`]), extra: 'Saubere Arbeit',
     kw: (n) => [`Schneider Urlaub ${n}`, `Kleidung im Urlaub ändern ${n}`, `deutschsprachiger Schneider ${n}`, `Reißverschluss kaputt Urlaub ${n}`, `Schneider für Touristen ${n}`] },
   { titles: (n) => [`Schneider mit Hotelabholung in ${n} | Terzi Can`, `Hotel-Schneider ${n} | Terzi Can`, `Schneider ${n} | Terzi Can`],
     core: (c) => V(c, [`Schneider holt Kleidung im Hotel ab ${c.loc}: ändern, kürzen, Reißverschluss, reparieren, zurückbringen`, `Schneider-Service fürs Hotel ${c.loc}: wir holen ab, ändern oder reparieren und liefern zurück`]), extra: 'Sorgfältige Nähte',

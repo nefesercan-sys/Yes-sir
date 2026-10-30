@@ -27,9 +27,15 @@ function ipAl(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { telefon, kod, isProvider } = await req.json();
+    const b = await req.json().catch(() => null);
+    const telefon = typeof b?.telefon === 'string' ? b.telefon.trim() : '';
+    const kod = typeof b?.kod === 'string' || typeof b?.kod === 'number' ? String(b.kod).trim() : '';
+    const isProvider = b?.isProvider === true;
     if (!telefon || !kod) {
       return NextResponse.json({ error: 'Telefon ve kod zorunlu' }, { status: 400 });
+    }
+    if (!/^\+?\d{10,15}$/.test(telefon) || !/^\d{4,8}$/.test(kod)) {
+      return NextResponse.json({ error: 'Geçersiz telefon veya kod biçimi' }, { status: 400 });
     }
 
     const db = await getDb();

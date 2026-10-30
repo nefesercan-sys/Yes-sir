@@ -17,9 +17,14 @@ const KILIT_SURESI_MS = 15 * 60 * 1000; // 15 dakika
 
 export async function POST(req: NextRequest) {
   try {
-    const { telefon, sifre } = await req.json();
+    const b = await req.json().catch(() => null);
+    const telefon = typeof b?.telefon === 'string' ? b.telefon.trim() : '';
+    const sifre = typeof b?.sifre === 'string' ? b.sifre : '';
     if (!telefon || !sifre) {
       return NextResponse.json({ error: 'Telefon ve şifre zorunlu' }, { status: 400 });
+    }
+    if (!/^\+?\d{10,15}$/.test(telefon) || sifre.length > 200) {
+      return NextResponse.json({ error: 'Geçersiz telefon veya şifre biçimi' }, { status: 400 });
     }
 
     const db = await getDb();

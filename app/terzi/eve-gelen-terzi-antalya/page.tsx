@@ -339,7 +339,7 @@ export default function EveGelenTerziPage() {
             <p style={{ color: 'rgba(255,255,255,.7)', fontSize: '.9rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
               Visiting Antalya for a gala dinner, business meeting or wedding? Tailor Can's mobile tailor service
               delivers <strong style={{ color: '#fff' }}>alterations</strong> directly to your hotel room, with timing confirmed on WhatsApp.
-              We speak <strong style={{ color: '#D4B07A' }}>English, Russian, German and Turkish</strong>.
+              Message us on <strong style={{ color: '#D4B07A' }}>WhatsApp in your own language</strong>.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '1rem', marginBottom: '2rem' }}>
               {[

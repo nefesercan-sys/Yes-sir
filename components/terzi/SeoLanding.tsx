@@ -345,14 +345,14 @@ function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [stri
       [`Как быстро делают ${by('paca').q.ru} и ${by('fermuar').q.ru} ${loc}?`, 'Подшив и ушивание брюк, а также замена или ремонт молнии обычно делаем в тот же день; точный срок зависит от работы и загрузки и уточняется в WhatsApp.'],
       [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного и вечернего платья — от ₺800; точную цену называем по фото и объёму работ. Вечерние платья обычно готовы на следующий день; для свадебных срок зависит от объёма работы.'],
       [`За сколько дней делают ${by('elbise-dikim').q.ru} ${loc}?`, 'Пошив платья обычно занимает около 3 дней. Переделка или ремонт платья, пиджака, рубашки, куртки и вечернего платья — обычно около 1 дня; точный срок уточняется в WhatsApp.'],
-      [`Есть ли услуги портного для туристов ${loc}?`, 'Да. Мы говорим по-русски, по-английски, по-турецки и по-немецки; выезд в отели и на дом бесплатный. Пришлите фото в WhatsApp и узнайте цену.'],
+      [`Есть ли услуги портного для туристов ${loc}?`, 'Да. Напишите нам в WhatsApp на своём языке; выезд в отели и на дом бесплатный. Пришлите фото в WhatsApp и узнайте цену.'],
     ],
     de: [
       [`Gibt es einen Schneider ${loc}? Wo ist der nächste Schneider?`, `Unsere Werkstatt liegt in Hurma, Konyaaltı. Für ${n} holen wir Kleidung an Ihrer Adresse oder im Hotel ab und bringen sie zurück; der Service zu Hotels und nach Hause ist kostenlos. WhatsApp täglich 08:00–23:00.`],
       [`Wie lange dauern ${by('paca').q.de} und ${by('fermuar').q.de} ${loc}?`, 'Hosen kürzen, enger machen sowie Reißverschlussarbeiten sind meist am selben Tag fertig; die genaue Dauer hängt vom Auftrag ab und wird per WhatsApp bestätigt.'],
       [`Was kostet eine Brautkleid- oder Abendkleid-Änderung ${loc}?`, 'Brautkleid-Änderungen beginnen bei ₺800, Abendkleid-Änderungen bei ₺800; der genaue Preis richtet sich nach Foto und Aufwand. Abendkleider sind meist am nächsten Tag fertig; beim Brautkleid hängt es vom Umfang ab.'],
       [`Wie viele Tage dauert ${by('elbise-dikim').q.de} ${loc}?`, 'Ein Kleid nähen dauert meist etwa 3 Tage. Änderungen oder Reparaturen von Kleidern, Sakkos, Hemden, Mänteln und Abendkleidern dauern meist etwa 1 Tag; die genaue Dauer wird per WhatsApp bestätigt.'],
-      [`Gibt es einen Schneiderservice für Touristen ${loc}?`, 'Ja. Wir sprechen Deutsch, Englisch, Russisch und Türkisch; der Service zu Hotels und nach Hause ist kostenlos. Foto per WhatsApp senden und Preis erfahren.'],
+      [`Gibt es einen Schneiderservice für Touristen ${loc}?`, 'Ja. Schreiben Sie uns per WhatsApp in Ihrer Sprache; der Service zu Hotels und nach Hause ist kostenlos. Foto per WhatsApp senden und Preis erfahren.'],
     ],
   }[lang] as [string, string][];
 }
