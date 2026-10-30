@@ -9,7 +9,7 @@
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
 
-import { KONYAALTI_MAHALLELERI, ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
+import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI, ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import { SITE_URL, BUSINESS_ID as B_ID, PHONE_DISPLAY, PHONE_E164, MAPS_URL, FREE_SERVICE_SLUGS as FREE_SLUGS, isFreeService as isFree, PRICE_FROM, DURATION } from '@/lib/business';
 
 export type Lang = 'tr' | 'en' | 'ru' | 'de';
@@ -87,7 +87,7 @@ export const DISTRICTS: District[] = [
     loc: { tr: "Lara'da", en: 'in Lara', ru: 'в Ларе', de: 'in Lara' }, alias: ['Lara Plajı'] },
   { slug: 'guzeloba', kind: 'resort', hotelSlug: 'guzeloba', name: { tr: 'Güzeloba', en: 'Güzeloba', ru: 'Гюзельоба', de: 'Güzeloba' },
     loc: { tr: "Güzeloba'da", en: 'in Güzeloba', ru: 'в Гюзельобе', de: 'in Güzeloba' }, alias: ['Guzeloba', 'Güzel Oba'] },
-  { slug: 'kundu', kind: 'resort', hotelSlug: 'kundu', name: { tr: 'Kundu', en: 'Kundu', ru: 'Кунду', de: 'Kundu' },
+  { slug: 'kundu', kind: 'resort', name: { tr: 'Kundu', en: 'Kundu', ru: 'Кунду', de: 'Kundu' },
     loc: { tr: "Kundu'da", en: 'in Kundu', ru: 'в Кунду', de: 'in Kundu' }, alias: [] },
   { slug: 'arapsuyu', kind: 'central', name: { tr: 'Arapsuyu', en: 'Arapsuyu', ru: 'Арапсую', de: 'Arapsuyu' },
     loc: { tr: "Arapsuyu'nda", en: 'in Arapsuyu', ru: 'в Арапсую', de: 'in Arapsuyu' }, alias: [] },
@@ -459,12 +459,14 @@ export const SERVICES: Service[] = [
 // ── Yardımcılar ─────────────────────────────────────────────
 // Türkçe sayfalar: swaphubs'ta zaten var olan rotalar korunur, yalnızca eksikler için yeni rota kullanılır
 const KONYAALTI_SLUGS = new Set(KONYAALTI_MAHALLELERI.map((m) => m.slug));
+const MURATPASA_SLUGS = new Set(MURATPASA_MAHALLELERI.map((m) => m.slug));
 const ILCE_SLUGS = new Set(ANTALYA_ILCELERI.map((i) => i.slug));
-export const trDistrictHasOwnRoute = (slug: string) => slug === 'konyaalti' || KONYAALTI_SLUGS.has(slug) || ILCE_SLUGS.has(slug);
+export const trDistrictHasOwnRoute = (slug: string) => slug === 'konyaalti' || KONYAALTI_SLUGS.has(slug) || MURATPASA_SLUGS.has(slug) || ILCE_SLUGS.has(slug);
 export const districtUrl = (lang: Lang, d: District) => {
   if (lang !== 'tr') return `${DISTRICT_BASE[lang]}/${d.slug}`;
   if (d.slug === 'konyaalti') return '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti';
   if (KONYAALTI_SLUGS.has(d.slug)) return `/terzi/konyaalti/${d.slug}`;
+  if (MURATPASA_SLUGS.has(d.slug)) return `/terzi/muratpasa/${d.slug}`;
   if (ILCE_SLUGS.has(d.slug)) return `/terzi/antalya/${d.slug}`;
   return `${DISTRICT_BASE.tr}/${d.slug}`;
 };

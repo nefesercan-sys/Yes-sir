@@ -36,15 +36,27 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
-      // Hizmet verilmeyen ilçelerin eski sayfaları (Google'da dizinde kalmış olabilir) → terzi ana sayfası
-      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'manavgat', 'serik', 'kemer', 'kepez', 'dosemealti'].map((slug) => ({
+      // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
+      // Manavgat (Side dahil) ve Kemer'e HİZMET VERİLİR: bu adresler aşağıda ilgili gerçek sayfalara yönlenir.
+      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'serik'].map((slug) => ({
         source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
       })),
-      // Hizmet verilmeyen Manavgat sayfaları → ilgili dil ana sayfası
-      { source: '/terzi/bolge/manavgat', destination: '/terzi', permanent: true },
-      { source: '/en/tailor-antalya/manavgat', destination: '/online-tailor-service', permanent: true },
-      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/atelie-antalya', permanent: true },
-      { source: '/de/schneider-antalya/manavgat', destination: '/de/online-schneiderservice-antalya', permanent: true },
+      // Kepez ve Döşemealtı'nın bölge sayfası /terzi/bolge/<slug> altında üretilir
+      { source: '/terzi/antalya/kepez', destination: '/terzi/bolge/kepez', permanent: true },
+      { source: '/terzi/antalya/dosemealti', destination: '/terzi/bolge/dosemealti', permanent: true },
+      // Kemer: gerçek sayfa /terzi/bolge/kemer (+ EN/RU/DE bölge ve otel sayfaları)
+      { source: '/terzi/antalya/kemer', destination: '/terzi/bolge/kemer', permanent: true },
+      // Manavgat: Side, Manavgat ilçesine bağlıdır; Manavgat aramaları Side sayfalarına yönlenir
+      { source: '/terzi/antalya/manavgat', destination: '/terzi/antalya/side', permanent: true },
+      { source: '/terzi/bolge/manavgat', destination: '/terzi/antalya/side', permanent: true },
+      { source: '/en/tailor-antalya/manavgat', destination: '/en/tailor-antalya/side', permanent: true },
+      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/portnoy-antalya/side', permanent: true },
+      { source: '/de/schneider-antalya/manavgat', destination: '/de/schneider-antalya/side', permanent: true },
+      // Meltem, Şirinyalı, Fener ve Güzeloba Muratpaşa'ya bağlıdır: eski Konyaaltı mahalle adresleri yeni yola
+      ...['meltem', 'sirinyali', 'fener', 'guzeloba'].flatMap((slug) => [
+        { source: `/terzi/konyaalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
+        { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
+      ]),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu

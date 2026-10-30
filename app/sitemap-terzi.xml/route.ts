@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
+import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
 import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
 import { PROMO_ALL } from '@/lib/intl-promo'
-import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
+import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
 
@@ -56,8 +56,12 @@ export async function GET() {
   KONYAALTI_MAHALLELERI.forEach(m => {
     terziSayfalar.push({ url: `${BASE_URL}/terzi/konyaalti/${m.slug}`, priority: '0.85', freq: 'weekly' })
   })
+  // Meltem, Şirinyalı, Fener, Güzeloba: Muratpaşa'ya bağlı (eski /terzi/konyaalti/<slug> → 301)
+  MURATPASA_MAHALLELERI.forEach(m => {
+    terziSayfalar.push({ url: `${BASE_URL}/terzi/muratpasa/${m.slug}`, priority: '0.85', freq: 'weekly' })
+  })
 
-  ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti' && !isOuterSlug(i.slug)).forEach(i => {
+  ANTALYA_ILCELERI.filter(i => i.slug !== 'konyaalti').forEach(i => {
     terziSayfalar.push({ url: `${BASE_URL}/terzi/antalya/${i.slug}`, priority: '0.80', freq: 'weekly' })
   })
 

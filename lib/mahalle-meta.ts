@@ -1,4 +1,4 @@
-// SwapHubs — Konyaaltı mahalle sayfaları için elle yazılmış başlık / açıklama / anahtar kelime.
+// SwapHubs — Konyaaltı ve Muratpaşa mahalle sayfaları için elle yazılmış başlık / açıklama / anahtar kelime.
 // Kurallar: başlık ≤60, açıklama ≤158 (telefon dahil); doğrulanmamış vaat yok (mesafe, dakika, puan, kurye süresi);
 // ücretsiz servis yalnızca yakın mahallelerde; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
@@ -27,12 +27,12 @@ const BANK: Record<string, M> = {
   guzeloba: { t: 'Güzeloba Terzi · Fotoğrafla Fiyat Al', d: "Güzeloba için terzi: tamir, tadilat, kısaltma, daraltma. Fotoğraf at, fiyat al, birlikte netleştirelim. Paça ₺200'den.",
     kw: ['tamir tadilat', 'kısaltma', 'daraltma', 'fermuar değişimi'] },
 };
-export function mahalleMeta(slug: string, ad: string, phone: string) {
+export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Konyaaltı') {
   const b = BANK[slug];
   const title = b ? `${b.t} | SwapHubs` : `${ad} Terzi Çağır | SwapHubs`;
   const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Ücretsiz alım-teslim.' : ' Otele ücretsiz servis.') : '';
   const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
-  const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} Konyaaltı terzi`, `${ad} terzi çağır`];
-  const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), 'Konyaaltı terzi', 'Antalya terzi'];
+  const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];
+  const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), `${ilce} terzi`, 'Antalya terzi'];
   return { title, desc, kw: Array.from(new Set(kw)) };
 }
