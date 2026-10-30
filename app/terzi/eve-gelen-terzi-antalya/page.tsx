@@ -89,7 +89,7 @@ const jsonLd = {
         {
           '@type':'Question',
           name:'Araçlı terzi servisi kaç lira?',
-          acceptedAnswer:{'@type':'Answer',text:`Araçlı terzi servisi Konyaaltı'nda ücretsizdir, diğer bölgelerde mesafeye göre belirlenir; ayrıca yapılan iş için ücret alınır. Paça kısaltma ₺200, elbise tadilatı ₺200'den başlar. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Araçlı terzi servisi otellere ücretsiz; eve servis Konyaaltı ve yakınında ücretsiz; ayrıca yapılan iş için ücret alınır. Paça kısaltma ₺200, elbise tadilatı ₺200'den başlar. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
@@ -299,7 +299,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Eve / Otele Gelen Terzi Fiyatları
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Konyaaltı'nda servis ücretsiz, diğer bölgelerde mesafeye göre — ayrıca yapılan iş ücretlendirilir</p>
+            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -311,13 +311,13 @@ export default function EveGelenTerziPage() {
               <tbody>
                 {[
                   ['Araçlı Servis Ücreti','ÜCRETSIZ','—'],
-                  ['Paça / Pantolon Kısaltma','₺200+','1–2 gün'],
-                  ['Fermuar Değişimi','₺300+','Aynı gün'],
-                  ['Elbise / Ceket Daraltma','₺200+','48 saat'],
-                  ['Kol Kısaltma','₺200+','48 saat'],
-                  ['Abiye Tamiri','₺800+','48 saat'],
-                  ['Gelinlik Tadilatı','₺800+','3–5 gün'],
-                  ['Yırtık Onarımı','₺100+','Aynı gün'],
+                  ['Paça / Pantolon Kısaltma','₺200+','Ertesi gün'],
+                  ['Fermuar Değişimi','₺300+','Ertesi gün'],
+                  ['Elbise / Ceket Daraltma','₺200+','Ertesi gün'],
+                  ['Kol Kısaltma','₺200+','Ertesi gün'],
+                  ['Abiye Tamiri','₺800+','Ertesi gün'],
+                  ['Gelinlik Tadilatı','₺800+','Ertesi gün'],
+                  ['Yırtık Onarımı','₺100+','Ertesi gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
@@ -346,7 +346,7 @@ export default function EveGelenTerziPage() {
                 ['👗','Dress altered before dinner','Ask on WhatsApp'],
                 ['💼','Suit ready for meeting','Ask on WhatsApp'],
                 ['💍','Wedding dress adjusted','Ask on WhatsApp'],
-                ['🚗','We come to your hotel','Free in Konyaaltı'],
+                ['🚗','We come to your hotel','Free hotel visit'],
               ].map(([ic, t, s]) => (
                 <div key={t as string} style={{ background: 'rgba(255,255,255,.05)', border: '1px solid rgba(212,176,122,.15)', borderRadius: '2px', padding: '1.2rem' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.5rem' }}>{ic}</div>
@@ -367,7 +367,7 @@ export default function EveGelenTerziPage() {
               </h3>
               <p style={{ color: 'rgba(255,255,255,.65)', fontSize: '.85rem', lineHeight: 1.8, marginBottom: '1rem' }}>
                 Портной Кан приедет в ваш отель в Белеке, Ларе, Кемере или Аланье.
-                Снимем мерки, сошьём в ателье и доставим обратно за 24–48 часов.
+                Снимем мерки, сделаем работу в ателье и доставим обратно: обычно на следующий день, срочно — за 1–2 часа.
                 Говорим по-русски.
               </p>
               <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Здравствуйте, хочу вызвать портного в мой отель. Отель: ')}`} target="_blank" rel="noopener noreferrer"
@@ -386,7 +386,7 @@ export default function EveGelenTerziPage() {
             </h2>
             {[
               ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
-              ['Araçlı terzi servisi ücretli mi?', 'Konyaaltı\'nda araçlı terzi servisi ücretsizdir, diğer bölgelerde mesafeye göre belirlenir. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
+              ['Araçlı terzi servisi ücretli mi?', 'Otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],

@@ -55,11 +55,11 @@ const GROUPS: ServiceGroup[] = [
     eyebrow: 'Hızlı Çözüm',
     title: 'Paça, Fermuar & Tamirat',
     description:
-      'Günlük giyimin en sık ihtiyaç duyduğu işler. Randevulu çalışırız; çoğu işlem aynı gün veya ertesi gün teslim edilir.',
+      'Günlük giyimin en sık ihtiyaç duyduğu işler. Randevulu çalışırız; tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır.',
     image: '/images/elbise-dikimi/jumpsuit-harbor.jpg',
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
-      { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Aynı gün' },
+      { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Ertesi gün' },
       { name: 'Fermuar değişimi', price: '300 TL\'den' },
       { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
       { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
@@ -86,7 +86,7 @@ const TRUST_POINTS = [
   { label: 'Randevulu Çalışma', detail: 'Bekleme yok, zamanınız planlı' },
   { label: 'Şeffaf Fiyatlandırma', detail: 'Sürpriz ücret yok, önceden onay' },
   { label: 'Antalya Konyaaltı', detail: 'Kolay ulaşım, merkezi konum' },
-  { label: 'Hızlı Teslimat', detail: 'Pratik işlemlerde aynı gün teslim' },
+  { label: 'Hızlı Teslimat', detail: 'Pratik işlemlerde ertesi gün teslim (acil 1–2 saat)' },
 ]
 
 function StitchDivider() {
@@ -810,7 +810,7 @@ export default function ElbiseDikimiClient() {
           <h3 className="faq-q">Antalya&apos;da elbise dikimi ne kadar sürer?</h3>
           <p className="faq-a">
             Standart elbise dikimi 3-5 iş günü içinde tamamlanır. Acil
-            siparişlerde aynı gün veya ertesi gün teslim mümkündür, lütfen
+            siparişlerde acil tadilat 1–2 saatte, normal tadilat ertesi gün teslim edilir, lütfen
             randevu sırasında belirtin.
           </p>
         </div>

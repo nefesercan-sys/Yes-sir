@@ -95,7 +95,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
           {
             '@type': 'Question',
             name: `How long do alterations take for hotel guests?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Delivery time depends on the job and our workload; simple alterations are often ready within a day or two. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Regular alterations are ready the next day and urgent jobs in 1–2 hours. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
           },
         ],
       },

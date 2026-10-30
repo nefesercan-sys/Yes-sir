@@ -33,7 +33,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Fermuar değişimi kaç saatte biter?',
-    a: 'Normal şartlarda 1–2 gün içinde teslim ederiz, acil durumlarda aynı gün teslim mümkündür. Fermuarın temin süresine ve yoğunluğa göre değişebilir; acil ihtiyacınızı yazarken belirtin.',
+    a: 'Normal işler ertesi gün teslim edilir, acil durumda 1–2 saatte hazır olur. Fermuarın temin süresine ve yoğunluğa göre değişebilir; acil ihtiyacınızı yazarken belirtin.',
   },
   {
     q: 'Akşam ve hafta sonu açık mısınız?',
@@ -74,7 +74,7 @@ const ADIMLAR: { no: string; baslik: string; aciklama: string }[] = [
   { no: '1', baslik: 'Fotoğraf gönderin', aciklama: 'Bozuk fermuarın ve kıyafetin fotoğrafını WhatsApp\'tan yollayın.' },
   { no: '2', baslik: 'Fiyat ve süre netleşir', aciklama: 'Fermuar türüne göre kesin fiyatı ve teslim süresini size bildiririz.' },
   { no: '3', baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakabilir veya adresten alım için bizimle konuşabilirsiniz.' },
-  { no: '4', baslik: 'Teslim', aciklama: 'Normal şartlarda 1–2 günde, acil durumda aynı gün hazır olur.' },
+  { no: '4', baslik: 'Teslim', aciklama: 'Normal işler ertesi gün teslim edilir, acil durumda 1–2 saatte hazır olur.' },
 ];
 
 const DIGER_HIZMETLER: { href: string; ad: string }[] = [
@@ -89,9 +89,9 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
 // ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Fermuar Değişimi 300 TL · Aynı Gün Teslim | Terzi Can' },
+  title: { absolute: 'Fermuar Değişimi 300 TL · Ertesi Gün Teslim | Terzi Can' },
   description:
-    'Fermuar değişimi ne kadar? Pantolon, kot, etek, mont, ceket ve çanta fermuarı 300 TL\'den. Çoğu iş aynı gün teslim, her gün 08–23. ☎ ' + PHONE,
+    'Fermuar değişimi ne kadar? Pantolon, kot, etek, mont, ceket ve çanta fermuarı 300 TL\'den. Çoğu iş ertesi gün teslim (acil 1–2 saat), her gün 08–23. ☎ ' + PHONE,
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',
@@ -134,7 +134,7 @@ const jsonLd = {
       serviceType: 'Fermuar değişimi',
       description:
         'Antalya Konyaaltı\'nda pantolon, kot, elbise, etek, mont ve ceket fermuar değişimi. ' +
-        'Normal şartlarda 1–2 günde teslim, acil durumda aynı gün.',
+        'Normal şartlarda ertesi gün teslim, acil durumda 1–2 saat.',
       url: SITE_URL,
       inLanguage: 'tr',
       areaServed: [
@@ -231,8 +231,8 @@ export default function FermuarDegisimiPage() {
 
           <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}>
             <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı&apos;nda pantolon, kot, elbise, etek, mont ve ceket
-            fermuarlarını <strong>300 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda 1–2 günde,
-            acil durumda aynı gün teslim; haftanın her günü {HOURS} arası açıktır.
+            fermuarlarını <strong>300 TL&apos;den başlayan fiyatlarla</strong> değiştirir. Normal şartlarda ertesi gün,
+            acil durumda 1–2 saatte teslim; haftanın her günü {HOURS} arası açıktır.
           </p>
 
           <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap' }}>
@@ -250,7 +250,7 @@ export default function FermuarDegisimiPage() {
         <div style={{ ...wrap, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '.8rem' }}>
           {[
             ['Başlangıç fiyatı', '300 TL\'den'],
-            ['Teslim süresi', '1–2 gün · acilde aynı gün'],
+            ['Teslim süresi', 'Ertesi gün · acilde 1–2 saat'],
             ['Çalışma saatleri', `Her gün ${HOURS}`],
             ['Servis bölgesi', 'Konyaaltı ve yakın bölgeler'],
           ].map(([k, v]) => (

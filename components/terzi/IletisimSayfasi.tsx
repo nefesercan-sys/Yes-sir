@@ -61,7 +61,7 @@ const T = {
     stepsH: 'Üç adımda halloluyor',
     steps: [
       ['1', 'Fotoğrafı atın', 'Kıyafetin ve yaptırmak istediğiniz işin fotoğrafını WhatsApp\'tan gönderin.'],
-      ['2', 'Fiyatı öğrenin', 'Fiyatı ve teslim gününü yazarız. Paça, bel ve fermuar işleri çoğunlukla aynı gün biter.'],
+      ['2', 'Fiyatı öğrenin', 'Fiyatı ve teslim gününü yazarız. Normal tamir ve tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır.'],
       ['3', 'Getirin ya da alalım', 'Atölyeye uğrayın; isterseniz otelinizden ya da evinizden biz alıp getirelim.'],
     ] as [string, string, string][],
     faqH: 'Merak edilenler',
@@ -105,7 +105,7 @@ const T = {
     stepsH: 'Done in three steps',
     steps: [
       ['1', 'Send the photo', 'Send a photo of the garment and what you want done on WhatsApp.'],
-      ['2', 'Get the price', 'We reply with the price and the ready date. Hems, waist and zipper jobs are usually finished the same day.'],
+      ['2', 'Get the price', 'We reply with the price and the ready date. Regular repairs are ready the next day and urgent jobs in 1–2 hours.'],
       ['3', 'Bring it or we collect it', 'Drop by the workshop, or we pick it up from your hotel or home and bring it back.'],
     ] as [string, string, string][],
     faqH: 'Good to know',
@@ -149,7 +149,7 @@ const T = {
     stepsH: 'Всё в три шага',
     steps: [
       ['1', 'Пришлите фото', 'Отправьте в WhatsApp фото вещи и напишите, что нужно сделать.'],
-      ['2', 'Узнайте цену', 'Ответим с ценой и датой готовности. Подшив, талия и молния обычно готовы в тот же день.'],
+      ['2', 'Узнайте цену', 'Ответим с ценой и датой готовности. Обычный ремонт готов на следующий день, срочный — за 1–2 часа.'],
       ['3', 'Принесите или мы заберём', 'Заходите в мастерскую или мы заберём вещь из отеля или с дома и привезём обратно.'],
     ] as [string, string, string][],
     faqH: 'Полезно знать',
@@ -193,7 +193,7 @@ const T = {
     stepsH: 'In drei Schritten erledigt',
     steps: [
       ['1', 'Foto schicken', 'Senden Sie per WhatsApp ein Foto des Teils und sagen Sie, was gemacht werden soll.'],
-      ['2', 'Preis erfahren', 'Wir antworten mit Preis und Fertigstellungstermin. Kürzen, Taille und Reißverschluss sind meist am selben Tag fertig.'],
+      ['2', 'Preis erfahren', 'Wir antworten mit Preis und Fertigstellungstermin. Normale Reparaturen sind am nächsten Tag fertig, dringende in 1–2 Stunden.'],
       ['3', 'Vorbeibringen oder abholen lassen', 'Kommen Sie in die Werkstatt, oder wir holen es im Hotel oder zu Hause ab und bringen es zurück.'],
     ] as [string, string, string][],
     faqH: 'Gut zu wissen',
