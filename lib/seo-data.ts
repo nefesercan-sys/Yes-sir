@@ -3,36 +3,38 @@
 // Bölge × hizmet arama sorguları için TEK veri kaynağı (TR/EN/RU/DE).
 // Kurallar:
 //  - Sadece doğrulanmış bilgi: tek atölye (Hurma, Konyaaltı), 2006'dan beri, her gün 08:00–23:00,
-//    otel ve eve ücretsiz servis, tahmini süreler (genellikle aynı gün / 1 gün / 3 gün; kesin süre WhatsApp'ta), gelinlik ₺800+, abiye ₺800+.
+//    otellere ücretsiz servis; eve ücretsiz servis yalnız Konyaaltı ve yakın mahallelerde (lib/business.ts);
+//    süreler: normal tamir/tadilat ertesi gün, acil 1–2 saat, özel dikim modele/adede göre (lib/business.ts DURATION).
 //  - Mesafe/dakika, puan, müşteri sayısı, sahte vaat YOK.
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
 
 import { KONYAALTI_MAHALLELERI, ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
+import { SITE_URL, BUSINESS_ID as B_ID, PHONE_DISPLAY, PHONE_E164, MAPS_URL, FREE_SERVICE_SLUGS as FREE_SLUGS, isFreeService as isFree, PRICE_FROM, DURATION } from '@/lib/business';
 
 export type Lang = 'tr' | 'en' | 'ru' | 'de';
 export const LANGS: Lang[] = ['tr', 'en', 'ru', 'de'];
 type L4<T = string> = Record<Lang, T>;
 
-export const SITE = 'https://swaphubs.com';
-export const BUSINESS_ID = 'https://swaphubs.com/terzi#business'; // app/terzi/page.tsx ile aynı işletme varlığı
-export const PHONE = '+90 531 898 64 18';
-export const PHONE_TEL = '+905318986418';
-export const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
+// İşletme sabitleri lib/business.ts'ten gelir (tek kaynak); burada yalnızca geriye dönük adlarla yeniden dışa aktarılır.
+export const SITE = SITE_URL;
+export const BUSINESS_ID = B_ID;
+export const PHONE = PHONE_DISPLAY;
+export const PHONE_TEL = PHONE_E164;
+export const MAPS = MAPS_URL;
 export const LAST_UPDATE = '2026-10-27';
 
 // ── BÖLGE STRATEJİSİ (tek ayar noktası) ─────────────────────
-// Türkçe sayfalar yalnızca atölyeye (Konyaaltı/Hurma) yakın bölgelerde aramaya açık; uzak bölgelerin Türkçe sayfaları
-// noindex olur, sitemap'ten, iç linklerden ve hreflang'dan çıkar. Yabancı dil (EN/RU/DE) sayfaları TÜM bölgelerde açıktır.
-// Bir bölgeyi Türkçede açmak/kapatmak için bu listeyi değiştirmek yeterli.
+// TR_NEAR_SLUGS yalnızca METİN tonu ve sıralama için kullanılır (yakın mahalle / uzak bölge anlatımı).
+// İşletme sahibinin kararı (Ekim 2026): terzilik/tekstil sayfalarının HİÇBİRİ noindex yapılmaz; tüm dillerde tüm bölgeler aramaya açıktır.
 export const TR_NEAR_SLUGS = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem', 'muratpasa', 'fener', 'sirinyali', 'toros'];
-/** Ücretsiz alım-teslim yalnızca işletme sahibinin onayladığı yakın mahallelerde (Ekim 2026 listesi); diğer bölgelerde ücret bölgeye göre belirlenir. */
-export const FREE_SERVICE_SLUGS = ['konyaalti', 'hurma', 'sarisu', 'liman', 'uncali', 'altinkum', 'ogretmenevleri', 'siteler', 'arapsuyu', 'gursu', 'uluc', 'meltem'];
-export const isFreeService = (slug: string): boolean => FREE_SERVICE_SLUGS.includes(slug);
+/** EV adresine ücretsiz alım-teslim listesi (tek kaynak: lib/business.ts). Otellere servis her bölgede ücretsizdir. */
+export const FREE_SERVICE_SLUGS: readonly string[] = FREE_SLUGS;
+export const isFreeService = (slug: string): boolean => isFree(slug);
 export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);
-/** Bu dil + bölge sayfası aramaya açık mı? */
-export const isIndexable = (lang: Lang, slug: string): boolean => lang !== 'tr' || isTrNear(slug);
-/** Türkçe ilçe sayfası uzak bölgeye mi ait (noindex + sitemap dışı)? */
+/** Bu dil + bölge sayfası aramaya açık mı? Sahibin kararıyla tüm terzi bölge sayfaları açık. */
+export const isIndexable = (_lang: Lang, _slug: string): boolean => true;
+/** Atölyeye uzak bölge mi (yalnız metin tonu için; indexleme kararı DEĞİL). */
 export const isOuterSlug = (slug: string): boolean => !isTrNear(slug);
 
 // ── URL şeması ──────────────────────────────────────────────
@@ -122,7 +124,8 @@ export const DISTRICTS: District[] = [
 export const MAHALLE_PAGES: { href: string; name: L4 }[] = [];
 
 // ── Hizmetler ───────────────────────────────────────────────
-export type TimeKey = 'same' | 'next' | 'three' | 'none';
+/** repair: normal tamir/tadilat ertesi gün, acil 1–2 saat · custom: özel dikim, süre modele/adede göre · mixed: dikim + tadilat */
+export type TimeKey = 'repair' | 'custom' | 'mixed';
 export interface Service {
   id: string;
   icon: string;
@@ -134,13 +137,12 @@ export interface Service {
   time: TimeKey;
   priceFrom?: number; // ₺ — yalnızca sitede zaten yayınlanan başlangıç fiyatları
   priceText?: L4;     // fiyat birden fazla kaleme bölünüyorsa serbest metin
-  timeText?: L4;      // süre için özel metin (varsa time yerine)
   extra?: { href: string; label: L4 };
 }
 
 export const SERVICES: Service[] = [
   {
-    id: 'paca', icon: '📏', time: 'same', priceFrom: 200,
+    id: 'paca', icon: '📏', time: 'repair', priceFrom: PRICE_FROM.paca,
     slug: { tr: 'pantolon-paca-kisaltma', en: 'trouser-hemming', ru: 'podshiv-bryuk', de: 'hosen-kuerzen' },
     name: { tr: 'Pantolon Paça Kısaltma', en: 'Trouser Hemming', ru: 'Подшив брюк', de: 'Hosen kürzen' },
     q: { tr: 'paça kısaltma', en: 'trouser hemming', ru: 'подшив брюк', de: 'Hosen kürzen' },
@@ -151,14 +153,14 @@ export const SERVICES: Service[] = [
       de: 'Wir kürzen Anzughosen, Stoffhosen und Röcke exakt auf Ihre Länge. Die Länge wird direkt am Körper abgesteckt und sauber genäht.',
     },
     vars: {
-      tr: ['pantolon paça kısaltma', 'etek boy kısaltma', 'etek kısaltma', 'etek daraltma', 'paça kısaltma terzi', 'kumaş pantolon boy kısaltma', 'pantolon boyu kısaltma', 'paça tadilatı', 'yakınımdaki terzi paça kısaltma', 'aynı gün paça kısaltma'],
-      en: ['trouser hemming', 'skirt hemming', 'shorten skirt', 'shorten trousers', 'pants hemming near me', 'trouser length alteration', 'hem pants tailor', 'same day trouser hemming'],
+      tr: ['pantolon paça kısaltma', 'etek boy kısaltma', 'etek kısaltma', 'etek daraltma', 'paça kısaltma terzi', 'kumaş pantolon boy kısaltma', 'pantolon boyu kısaltma', 'paça tadilatı', 'yakınımdaki terzi paça kısaltma', 'acil paça kısaltma'],
+      en: ['trouser hemming', 'skirt hemming', 'shorten skirt', 'shorten trousers', 'pants hemming near me', 'trouser length alteration', 'hem pants tailor', 'urgent trouser hemming'],
       ru: ['подшить брюки', 'укоротить юбку', 'подшить юбку', 'укоротить брюки', 'подшив брюк срочно', 'ателье подшить брюки рядом', 'укорочение брюк', 'подшив низа брюк'],
       de: ['Hose kürzen', 'Rock kürzen', 'Rock enger machen', 'Hosen kürzen lassen', 'Hosensaum kürzen', 'Änderungsschneiderei Hose kürzen', 'Hose kürzen in der Nähe', 'Hosenlänge ändern'],
     },
   },
   {
-    id: 'kot', icon: '👖', time: 'same', priceFrom: 200,
+    id: 'kot', icon: '👖', time: 'repair', priceFrom: PRICE_FROM.paca,
     slug: { tr: 'kot-pantolon-paca-kisaltma', en: 'jeans-hemming', ru: 'podshiv-dzhinsov', de: 'jeans-kuerzen' },
     name: { tr: 'Kot Pantolon Daraltma ve Kısaltma', en: 'Jeans Hemming & Taking In', ru: 'Подшив и ушивание джинсов', de: 'Jeans kürzen und enger machen' },
     q: { tr: 'kot pantolon kısaltma', en: 'jeans hemming', ru: 'подшив джинсов', de: 'Jeans kürzen' },
@@ -176,7 +178,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'bel', icon: '🪡', time: 'same', priceFrom: 200,
+    id: 'bel', icon: '🪡', time: 'repair', priceFrom: PRICE_FROM.bel,
     slug: { tr: 'bel-daraltma', en: 'waist-taking-in', ru: 'ushivanie-v-talii', de: 'taille-enger-machen' },
     name: { tr: 'Bel Daraltma ve Genişletme', en: 'Waist Taking-in & Letting-out', ru: 'Ушивание и расширение в талии', de: 'Taille enger und weiter machen' },
     q: { tr: 'bel daraltma', en: 'waist alteration', ru: 'ушивание в талии', de: 'Taille enger machen' },
@@ -194,7 +196,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'fermuar', icon: '🔧', time: 'same', priceFrom: 300,
+    id: 'fermuar', icon: '🔧', time: 'repair', priceFrom: PRICE_FROM.fermuar,
     slug: { tr: 'fermuar-degisimi-tamiri', en: 'zipper-repair-replacement', ru: 'zamena-molnii', de: 'reissverschluss-wechseln' },
     name: { tr: 'Fermuar Değişimi ve Tamiri', en: 'Zipper Repair & Replacement', ru: 'Замена и ремонт молнии', de: 'Reißverschluss wechseln und reparieren' },
     q: { tr: 'fermuar değişimi', en: 'zipper replacement', ru: 'замена молнии', de: 'Reißverschluss wechseln' },
@@ -212,7 +214,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'elbise-dikim', icon: '👗', time: 'three', priceFrom: 800,
+    id: 'elbise-dikim', icon: '👗', time: 'custom', priceFrom: PRICE_FROM.elbiseDikim,
     slug: { tr: 'elbise-dikimi', en: 'custom-dress-making', ru: 'poshiv-platya', de: 'kleid-naehen-lassen' },
     name: { tr: 'Elbise Dikimi (Ölçüye Göre)', en: 'Custom Dress Making', ru: 'Пошив платьев на заказ', de: 'Kleid nach Maß nähen' },
     q: { tr: 'elbise dikimi', en: 'custom dress making', ru: 'пошив платья', de: 'Kleid nähen lassen' },
@@ -231,7 +233,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'ozel-dikim', icon: '✂️', time: 'none',
+    id: 'ozel-dikim', icon: '✂️', time: 'custom',
     slug: { tr: 'ozel-dikim-antalya', en: 'custom-tailoring-made-to-measure', ru: 'poshiv-na-zakaz', de: 'massanfertigung-schneider' },
     name: { tr: 'Özel Dikim (Ölçüye Göre)', en: 'Custom Tailoring (Made to Measure)', ru: 'Индивидуальный пошив на заказ', de: 'Maßanfertigung (Schneider nach Maß)' },
     q: { tr: 'özel dikim', en: 'custom tailoring', ru: 'индивидуальный пошив', de: 'Maßanfertigung' },
@@ -249,7 +251,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'elbise-tamir', icon: '🧵', time: 'next',
+    id: 'elbise-tamir', icon: '🧵', time: 'repair',
     slug: { tr: 'elbise-tamiri-tadilati', en: 'dress-repair-alteration', ru: 'remont-i-pereshiv-platya', de: 'kleid-aendern-reparieren' },
     name: { tr: 'Elbise Tamiri ve Tadilatı', en: 'Dress Repair & Alteration', ru: 'Ремонт и переделка платьев', de: 'Kleider ändern und reparieren' },
     q: { tr: 'elbise tamiri ve tadilatı', en: 'clothing repair and alterations', ru: 'ремонт и переделка одежды', de: 'Kleidung ändern und reparieren' },
@@ -267,21 +269,15 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'gelinlik-abiye', icon: '👰', time: 'none',
+    id: 'gelinlik-abiye', icon: '👰', time: 'repair',
     slug: { tr: 'gelinlik-abiye-tadilati', en: 'wedding-evening-dress-alteration', ru: 'podgonka-svadebnogo-vechernego-platya', de: 'brautkleid-abendkleid-aendern' },
     name: { tr: 'Gelinlik ve Abiye Tadilatı', en: 'Wedding & Evening Dress Alteration', ru: 'Подгонка свадебных и вечерних платьев', de: 'Brautkleid und Abendkleid ändern' },
     q: { tr: 'gelinlik ve abiye tadilatı', en: 'wedding dress alteration', ru: 'подгонка свадебного платья', de: 'Brautkleid ändern' },
     priceText: {
-      tr: 'Gelinlik tadilatı ₺800\'den, abiye tadilatı ₺800\'den başlar.',
-      en: 'Wedding dress alteration starts from ₺800, evening dress alteration from ₺800.',
-      ru: 'Подгонка свадебного и вечернего платья от ₺800.',
-      de: 'Brautkleid-Änderung ab ₺800, Abendkleid-Änderung ab ₺800.',
-    },
-    timeText: {
-      tr: 'Abiye tadilatı genellikle ertesi gün hazır olur; gelinlikte süre işlemin kapsamına göre WhatsApp\'ta netleştirilir.',
-      en: 'Evening dress alterations are usually ready the next day; for wedding dresses the time depends on the work and is confirmed on WhatsApp.',
-      ru: 'Вечерние платья обычно готовы на следующий день; для свадебных платьев срок зависит от объёма работы и уточняется в WhatsApp.',
-      de: 'Abendkleid-Änderungen sind meist am nächsten Tag fertig; beim Brautkleid hängt die Dauer vom Umfang ab und wird per WhatsApp geklärt.',
+      tr: `Gelinlik tadilatı ₺${PRICE_FROM.gelinlik}'den, abiye tadilatı ₺${PRICE_FROM.abiye}'den başlar.`,
+      en: `Wedding dress alteration starts from ₺${PRICE_FROM.gelinlik}, evening dress alteration from ₺${PRICE_FROM.abiye}.`,
+      ru: `Подгонка свадебного и вечернего платья от ₺${PRICE_FROM.abiye}.`,
+      de: `Brautkleid-Änderung ab ₺${PRICE_FROM.gelinlik}, Abendkleid-Änderung ab ₺${PRICE_FROM.abiye}.`,
     },
     intro: {
       tr: 'Gelinlik ve abiyede daraltma, boy ayarı, korse ve askı düzenlemesi gibi hassas işleri provalı olarak yapıyoruz. Otelde konaklayan gelinler ve davetliler için servis mümkündür.',
@@ -297,7 +293,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'takim', icon: '🤵', time: 'next',
+    id: 'takim', icon: '🤵', time: 'repair',
     slug: { tr: 'takim-elbise-ceket-tadilati', en: 'suit-jacket-alteration', ru: 'podgonka-kostyuma-pidzhaka', de: 'anzug-sakko-aendern' },
     name: { tr: 'Takım Elbise ve Ceket Tadilatı', en: 'Suit & Jacket Alteration', ru: 'Подгонка костюма и пиджака', de: 'Anzug und Sakko ändern' },
     q: { tr: 'takım elbise tadilatı', en: 'suit alteration', ru: 'подгонка костюма', de: 'Anzug ändern' },
@@ -315,7 +311,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'mont', icon: '🧥', time: 'next',
+    id: 'mont', icon: '🧥', time: 'repair',
     slug: { tr: 'mont-palto-tadilati', en: 'coat-jacket-alteration', ru: 'podgonka-kurtki-palto', de: 'mantel-jacke-aendern' },
     name: { tr: 'Mont ve Palto Tadilatı', en: 'Coat & Jacket Alteration', ru: 'Подгонка курток и пальто', de: 'Mantel und Jacke ändern' },
     q: { tr: 'mont tadilatı', en: 'coat alteration', ru: 'подгонка куртки', de: 'Mantel ändern' },
@@ -333,7 +329,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'gomlek', icon: '👔', time: 'next',
+    id: 'gomlek', icon: '👔', time: 'repair',
     slug: { tr: 'gomlek-daraltma-kisaltma', en: 'shirt-alteration', ru: 'podgonka-rubashki', de: 'hemd-aendern' },
     name: { tr: 'Gömlek Daraltma ve Kısaltma', en: 'Shirt Alteration', ru: 'Подгонка рубашек', de: 'Hemd ändern' },
     q: { tr: 'gömlek daraltma', en: 'shirt alteration', ru: 'подгонка рубашки', de: 'Hemd enger machen' },
@@ -351,7 +347,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'deri', icon: '🧤', time: 'none',
+    id: 'deri', icon: '🧤', time: 'repair',
     slug: { tr: 'deri-ceket-pantolon-tadilati', en: 'leather-jacket-alteration', ru: 'remont-kozhanoy-odezhdy', de: 'lederjacke-lederhose-aendern' },
     name: { tr: 'Deri Ceket ve Deri Pantolon Tadilatı', en: 'Leather Jacket & Leather Trousers Alteration', ru: 'Ремонт и подгонка кожаной одежды', de: 'Lederjacke und Lederhose ändern' },
     q: { tr: 'deri ceket tadilatı', en: 'leather jacket alteration', ru: 'ремонт кожаной куртки', de: 'Lederjacke ändern' },
@@ -369,7 +365,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'tisort', icon: '👕', time: 'none',
+    id: 'tisort', icon: '👕', time: 'repair',
     slug: { tr: 'tisort-sort-tadilati', en: 'tshirt-shorts-alteration', ru: 'podgonka-futbolok-shortov', de: 'tshirt-shorts-aendern' },
     name: { tr: 'Tişört ve Şort Tadilatı', en: 'T-shirt & Shorts Alteration', ru: 'Подгонка футболок и шортов', de: 'T-Shirt und Shorts ändern' },
     q: { tr: 'tişört şort tadilatı', en: 'shorts alteration', ru: 'подгонка шортов', de: 'Shorts ändern' },
@@ -387,7 +383,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'etek', icon: '👗', time: 'none',
+    id: 'etek', icon: '👗', time: 'repair',
     slug: { tr: 'etek-kisaltma-daraltma', en: 'skirt-hemming-alteration', ru: 'podgonka-yubki', de: 'rock-kuerzen-aendern' },
     name: { tr: 'Etek Kısaltma ve Daraltma', en: 'Skirt Hemming & Alteration', ru: 'Подгонка и укорачивание юбок', de: 'Rock kürzen und ändern' },
     q: { tr: 'etek kısaltma', en: 'skirt hemming', ru: 'подшить юбку', de: 'Rock kürzen' },
@@ -405,7 +401,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'gece-kiyafeti', icon: '✨', time: 'none',
+    id: 'gece-kiyafeti', icon: '✨', time: 'mixed',
     slug: { tr: 'gece-kiyafeti-dikimi-tadilati', en: 'evening-wear-making-alteration', ru: 'vechernyaya-odezhda-poshiv-podgonka', de: 'abendmode-naehen-aendern' },
     name: { tr: 'Gece Kıyafeti Dikimi ve Tadilatı', en: 'Evening Wear Making & Alteration', ru: 'Пошив и подгонка вечерней одежды', de: 'Abendmode nähen und ändern' },
     q: { tr: 'gece kıyafeti', en: 'evening wear tailor', ru: 'вечерняя одежда', de: 'Abendmode' },
@@ -423,7 +419,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'kiyafet-tamiri', icon: '🪡', time: 'none',
+    id: 'kiyafet-tamiri', icon: '🪡', time: 'repair',
     slug: { tr: 'kiyafet-tamiri-onarimi', en: 'clothing-repair-mending', ru: 'remont-odezhdy', de: 'kleidung-reparieren' },
     name: { tr: 'Kıyafet Tamiri ve Onarımı', en: 'Clothing Repair & Mending', ru: 'Ремонт одежды', de: 'Kleidung reparieren' },
     q: { tr: 'kıyafet tamiri', en: 'clothing repair', ru: 'ремонт одежды', de: 'Kleidung reparieren' },
@@ -441,7 +437,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'beden', icon: '📐', time: 'none',
+    id: 'beden', icon: '📐', time: 'repair',
     slug: { tr: 'olcuye-gore-beden-ayarlama', en: 'size-adjustment-tailor', ru: 'podgonka-odezhdy-po-figure', de: 'kleidung-anpassen-nach-mass' },
     name: { tr: 'Ölçüye Göre Beden Ayarlama', en: 'Fit Adjustment to Your Measurements', ru: 'Подгонка одежды по фигуре', de: 'Kleidung auf Ihre Maße anpassen' },
     q: { tr: 'beden ayarlama', en: 'size adjustment', ru: 'подгонка по фигуре', de: 'Kleidung anpassen' },
@@ -489,12 +485,14 @@ export function query(lang: Lang, d: District, s: Service): string {
   return `${s.q[lang]} ${d.loc[lang]}`;
 }
 
-export const TIME_TEXT: Record<TimeKey, L4> = {
-  same: { tr: 'Genellikle aynı gün', en: 'Usually same day', ru: 'Обычно в тот же день', de: 'Meist am selben Tag' },
-  next: { tr: 'Genellikle ertesi gün', en: 'Usually the next day', ru: 'Обычно на следующий день', de: 'Meist am nächsten Tag' },
-  three: { tr: 'Genellikle 3 gün içinde', en: 'Usually within 3 days', ru: 'Обычно за 3 дня', de: 'Meist in 3 Tagen' },
-  none: { tr: 'Süre işleme göre WhatsApp\'ta netleştirilir', en: 'Time confirmed on WhatsApp depending on the work', ru: 'Срок уточняется в WhatsApp в зависимости от работы', de: 'Dauer wird per WhatsApp je nach Arbeit geklärt' },
-};
-export const timeOf = (lang: Lang, s: Service) => (s.timeText ? s.timeText[lang] : TIME_TEXT[s.time][lang]);
+// Süre metinleri lib/business.ts DURATION'dan üretilir (tek kaynak).
+export const TIME_TEXT: Record<TimeKey, L4> = Object.fromEntries((['repair', 'custom', 'mixed'] as TimeKey[]).map((k) => [k,
+  Object.fromEntries(LANGS.map((l) => {
+    const D = DURATION[l];
+    const lowerFirst = (t: string) => t.charAt(0).toLocaleLowerCase(l === 'tr' ? 'tr-TR' : l) + t.slice(1);
+    return [l, k === 'repair' ? D.repairLine : k === 'custom' ? D.custom : `${D.repairLine}; ${lowerFirst(D.custom)}`];
+  })) as L4,
+])) as Record<TimeKey, L4>;
+export const timeOf = (lang: Lang, s: Service) => TIME_TEXT[s.time][lang];
 export const priceOf = (lang: Lang, s: Service) =>
   s.priceText ? s.priceText[lang] : s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den başlar` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : null;

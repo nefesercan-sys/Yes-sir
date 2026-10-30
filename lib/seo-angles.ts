@@ -48,11 +48,12 @@ export interface AngleCtx {
   tail: string;       // site tonuna göre kapanış: telefon + (saat | fotoğraf at, fiyat al)
 }
 
+// Servis kuralı (lib/business.ts): otellere servis her bölgede ücretsiz; eve servis yalnız Konyaaltı ve yakın mahallelerde ücretsiz.
 const SVC: Record<ALang, { free: string; paid: string }> = {
-  tr: { free: 'Konyaaltı\'nda ücretsiz servis', paid: 'Uzak bölgede servis duruma göre' },
-  en: { free: 'Free pick-up in Konyaaltı', paid: 'Pick-up priced by area' },
-  ru: { free: 'Выезд в Коньяалты бесплатно', paid: 'Выезд — по району' },
-  de: { free: 'Gratis-Abholung in Konyaaltı', paid: 'Abholung je nach Gebiet' },
+  tr: { free: 'Otele ve eve ücretsiz servis', paid: 'Otellere ücretsiz servis' },
+  en: { free: 'Free hotel & home pick-up', paid: 'Free hotel pick-up' },
+  ru: { free: 'Выезд в отель и на дом бесплатно', paid: 'Выезд в отели бесплатно' },
+  de: { free: 'Gratis-Abholung Hotel & Zuhause', paid: 'Hotelabholung gratis' },
 };
 
 type T = { titles: (n: string) => string[]; core: (c: AngleCtx) => string; extra: string; kw: (n: string) => string[] };
@@ -230,64 +231,68 @@ export function angleKeywords(lang: ALang, a: number, n: string): string[] {
 }
 export const svcLine = (lang: ALang, free: boolean) => S(lang, free);
 
-// ── Ücretsiz servis yalnızca Konyaaltı bölgesinde; diğer bölgelerde "bölgeye göre" ──
+// ── Ev adresine ücretsiz servis yalnız Konyaaltı ve yakın mahallelerde; OTELLERE servis her bölgede ücretsiz ──
+// unfree(): "otel ve eve ücretsiz" kalıplarını, eve ücretsiz servisin olmadığı bölgeler için "otele ücretsiz, eve bölgeye göre"
+// biçimine çevirir. Çıktıdaki ücretsiz kelimesi \u0000 işaretiyle korunur ki sonraki kurallar tekrar dönüştürmesin.
 type UL = 'tr' | 'en' | 'ru' | 'de';
+const F = '\u0000f', FU = '\u0000F';
+const FREE_WORD: Record<UL, [string, string]> = { tr: ['ücretsiz', 'Ücretsiz'], en: ['free', 'Free'], ru: ['бесплатно', 'Бесплатно'], de: ['kostenlos', 'Kostenlos'] };
 const UNFREE: Record<UL, [RegExp, string][]> = {
   tr: [
-    [/Yakın bölgelere ücretsiz servis/g, 'Servis ücreti bölgeye göre'],
-    [/yakın bölgelere ücretsiz servis/g, 'servis ücreti bölgeye göre'],
-    [/Otel ve eve ücretsiz servis/g, 'Otel ve eve servis ücreti bölgeye göre'],
-    [/otel ve eve ücretsiz alım/g, 'otel ve eve alım (ücret bölgeye göre)'],
-    [/otel ve eve ücretsiz servis/g, 'otel ve eve servis (ücret bölgeye göre)'],
-    [/otel ve eve servis ücretsiz/g, 'otel ve eve servis ücreti bölgeye göre belirlenir'],
-    [/alım-teslim ücretsizdir/g, 'alım-teslim ücreti bölgeye göre belirlenir'],
-    [/alım-teslim ücretsiz/g, 'alım-teslim ücreti bölgeye göre'],
-    [/ücretsiz alım/g, 'alım (ücret bölgeye göre)'],
-    [/ücretsiz servis/g, 'servis (ücret bölgeye göre)'],
-    [/ücretsizdir/g, 'bölgeye göre ücretlendirilir'],
-    [/ücretsiz/g, 'bölgeye göre ücretli'],
+    [/Yakın bölgelere ücretsiz servis/g, `Otellere ${F} servis`],
+    [/yakın bölgelere ücretsiz servis/g, `otellere ${F} servis`],
+    [/Otele ve eve ücretsiz servis/g, `Otele ${F} servis, eve bölgeye göre`],
+    [/Otel ve eve ücretsiz servis/g, `Otele ${F} servis, eve bölgeye göre`],
+    [/otel ve eve ücretsiz alım/g, `otelden ${F} alım, evden bölgeye göre`],
+    [/otel ve eve ücretsiz servis/g, `otele ${F} servis, eve bölgeye göre`],
+    [/otel ve eve servis ücretsizdir/g, `otele servis ${F}dir; eve servis ücreti bölgeye göre belirlenir`],
+    [/otel ve eve servis ücretsiz/g, `otele servis ${F}, eve servis ücreti bölgeye göre`],
+    [/alım-teslim ücretsizdir/g, `otelden alım-teslim ${F}dir; ev adresinde ücret bölgeye göre belirlenir`],
+    [/alım-teslim ücretsiz/g, `otelden alım-teslim ${F}`],
+    [/ücretsiz alım/g, `otelden ${F} alım`],
+    [/ücretsiz servis/g, `otele ${F} servis`],
   ],
   en: [
-    [/Free pick-up nearby/g, 'Pick-up priced by area'],
-    [/Free pick-up and delivery/g, 'Pick-up and delivery by area'],
-    [/Free pick-up/g, 'Pick-up by area'],
-    [/Free service to hotels and homes/g, 'Hotel and home service priced by area'],
-    [/free of charge for hotels and homes/g, 'with the fee depending on the area'],
-    [/Pick-up and delivery in (.+?) and nearby is free\./g, 'Pick-up and delivery fee in $1 depends on the area.'],
-    [/(hotel and home service|pick-up and delivery to hotels and homes) is free/gi, '$1 is priced by area'],
-    [/free hotel pick-up/gi, 'hotel pick-up priced by area'],
-    [/free pick-up and delivery/gi, 'pick-up and delivery priced by area'],
-    [/free pick-up/gi, 'pick-up by area'],
-    [/free (hotel|home) (service|visit)/gi, '$1 $2 priced by area'],
-    [/free of charge/gi, 'priced by area'],
-    [/\bfree\b/gi, 'priced by area'],
+    [/Free pick-up nearby/g, `${FU} hotel pick-up`],
+    [/Free hotel & home pick-up/g, `${FU} hotel pick-up`],
+    [/Free pick-up and delivery/g, `${FU} hotel pick-up and delivery`],
+    [/Free pick-up/g, `${FU} hotel pick-up`],
+    [/Free service to hotels and homes/g, `${FU} service to hotels; home pick-up by area`],
+    [/free of charge for hotels and homes/g, `${F} of charge for hotels, with home pick-up priced by area`],
+    [/Pick-up and delivery in (.+?) and nearby is free\./g, `Hotel pick-up in $1 is ${F}; home pick-up is priced by area.`],
+    [/(hotel and home service|pick-up and delivery to hotels and homes) is free/gi, `hotel service is ${F} and home pick-up is priced by area`],
+    [/service to hotels and homes is free/g, `service to hotels is ${F} and home pick-up is priced by area`],
+    [/collection and delivery are free/g, `hotel collection and delivery are ${F}`],
+    [/pick-up and delivery are free/gi, `hotel pick-up and delivery are ${F}`],
+    [/free pick-up and delivery/gi, `${F} hotel pick-up and delivery`],
+    [/free pick-up/gi, `${F} hotel pick-up`],
   ],
   ru: [
-    [/Выезд рядом бесплатно/g, 'Выезд — по району'],
-    [/бесплатный выезд рядом/g, 'выезд — по району'],
-    [/Бесплатный выезд в отели и на дом/g, 'Выезд в отели и на дом — по району'],
-    [/забор из отелей бесплатно/g, 'забор из отелей — по району'],
-    [/[Вв]ыезд в отели и на дом бесплатны/g, 'выезд в отели и на дом — по району'],
-    [/забор и доставка в отели и на дом бесплатны/g, 'забор и доставка в отели и на дом — по району'],
-    [/[Бб]есплатный забор и доставка/g, 'Забор и доставка — по району'],
-    [/бесплатн\S*/gi, 'по району'],
+    [/Выезд рядом бесплатно/g, `Выезд в отели ${F}`],
+    [/бесплатный выезд рядом/g, `выезд в отели ${F}`],
+    [/Выезд в отель и на дом бесплатно/g, `Выезд в отели ${F}, на дом — по району`],
+    [/Бесплатный выезд в отели и на дом/g, `Выезд в отели ${F}, на дом — по району`],
+    [/[Вв]ыезд в отели и на дом бесплатны\S*/g, `выезд в отели ${F}, на дом — по району`],
+    [/забор и доставка в отели и на дом бесплатны/g, `забор и доставка в отели ${F}, на дом — по району`],
+    [/[Зз]абор и доставка бесплатны/g, `забор и доставка из отеля ${F}`],
+    [/[Бб]есплатный забор и доставка/g, `Забор и доставка из отеля ${F}`],
   ],
   de: [
-    [/Gratis-Abholung in der Nähe/g, 'Abholung je nach Gebiet'],
-    [/Kostenloser Service zu Hotels und nach Hause/g, 'Hotel- und Heimservice je nach Gebiet'],
-    [/Hotelabholung gratis/g, 'Hotelabholung je nach Gebiet'],
-    [/Abholung gratis/g, 'Abholung je nach Gebiet'],
-    [/Abholung und Lieferung in (.+?) und Umgebung sind kostenlos/g, 'Abholung und Lieferung in $1 je nach Gebiet'],
-    [/(Hotel- und Heimservice sind|Abholung und Lieferung zu Hotels und nach Hause sind) kostenlos/g, '$1 je nach Gebiet'],
-    [/ist das kostenlos/g, 'richtet sich das Entgelt nach dem Gebiet'],
-    [/kostenlos(e[rn]?)?/gi, 'je nach Gebiet'],
-    [/gratis/gi, 'je nach Gebiet'],
+    [/Gratis-Abholung in der Nähe/g, `Hotelabholung ${F}`],
+    [/Gratis-Abholung Hotel & Zuhause/g, `Hotelabholung ${F}`],
+    [/Kostenloser Service zu Hotels und nach Hause/g, `Hotelservice ${F}, Hausabholung je nach Gebiet`],
+    [/Abholung und Lieferung in (.+?) und Umgebung sind kostenlos/g, `Hotelabholung in $1 ${F}, Hausabholung je nach Gebiet`],
+    [/(Hotel- und Heimservice sind|Abholung und Lieferung zu Hotels und nach Hause sind) kostenlos/g, `Hotelservice ist ${F}, Hausabholung je nach Gebiet`],
+    [/der Service zu Hotels und nach Hause ist kostenlos/g, `der Service zu Hotels ist ${F}, Hausabholung je nach Gebiet`],
+    [/Abholung und Lieferung sind kostenlos/g, `Hotelabholung und -lieferung sind ${F}`],
   ],
 };
 export function unfree(lang: string, s: string): string {
+  const L = (lang as UL);
   let o = s;
-  for (const [rx, to] of UNFREE[(lang as UL)] || []) o = o.replace(rx, to);
-  return o;
+  for (const [rx, to] of UNFREE[L] || []) o = o.replace(rx, to);
+  const w = FREE_WORD[L];
+  return w ? o.split(FU).join(w[1]).split(F).join(w[0]) : o;
 }
 export function unfreeDeep<T>(lang: string, v: T): T {
   if (typeof v === 'string') return unfree(lang, v) as unknown as T;

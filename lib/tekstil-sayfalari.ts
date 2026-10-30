@@ -8,8 +8,9 @@ export type Topic = 'keten' | 'tekstil' | 'promo' | TatilTopic;
 export const isTatil = (t: Topic): t is TatilTopic => t === 'acil' || t === 'otel' || t === 'etkinlik';
 export const RELATED = (t: Topic): Topic => (isTatil(t) ? TATIL_NEXT[t] : t === 'keten' || t === 'promo' ? 'tekstil' : 'keten');
 export const LANGS: Lang[] = ['tr', 'en', 'ru', 'de'];
-export const BASE = 'https://swaphubs.com';
-export const WA_NUMBER = '905318986418';
+import { SITE_URL, WA_NUMBER as WA_NUM } from '@/lib/business';
+export const BASE = SITE_URL;
+export const WA_NUMBER = WA_NUM;
 
 export const URLS: Record<Topic, Record<Lang, string>> = {
   ...TATIL_URLS,

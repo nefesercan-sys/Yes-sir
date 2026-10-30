@@ -12,7 +12,7 @@ import {
   DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
   SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
-  type Lang, type District, type Service,
+  type Lang, type District, type Service, type TimeKey,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
 import { angleFor, angleTitles, angleDescs, angleKeywords, unfreeDeep, unfree } from '@/lib/seo-angles';
 import './seo-landing.css';
@@ -20,6 +20,7 @@ import { fgNearDistrict, fgServiceMeta } from '@/lib/fg-meta';
 import { trNearDistrict } from '@/lib/tr-meta';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
+import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib/business';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/terzi-can.jpg`;
@@ -74,30 +75,30 @@ const SVC_HUB_NAME: Record<Lang, string> = {
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
 function businessNode(lang: Lang) {
+  // Tek işletme varlığı: tüm alanlar lib/business.ts'ten (NAP, saat, areaServed).
+  const b = BUSINESS;
   return {
     '@type': ['LocalBusiness', 'ClothingStore'],
     ...reviewSchema(),
     '@id': BUSINESS_ID,
-    name: 'Terzi Can',
+    name: b.name,
+    alternateName: [...b.alternateName],
     url: `${SITE}/terzi`,
-    telephone: PHONE_TEL,
-    priceRange: '₺₺',
+    telephone: b.phone,
+    priceRange: b.priceRange,
     image: OG,
     hasMap: MAPS,
-    address: {
-      '@type': 'PostalAddress', streetAddress: 'Hurma Mahallesi', addressLocality: 'Konyaaltı',
-      addressRegion: 'Antalya', postalCode: '07130', addressCountry: 'TR',
-    },
-    geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
+    address: { '@type': 'PostalAddress', ...b.address },
+    geo: { '@type': 'GeoCoordinates', ...b.geo },
     openingHoursSpecification: [{
       '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '08:00', closes: '23:00',
+      dayOfWeek: [...b.hours.days], opens: b.hours.opens, closes: b.hours.closes,
     }],
-    foundingDate: '2006',
-    knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
+    areaServed: areaServedSchema(),
+    foundingDate: b.foundingYear,
+    knowsLanguage: [...b.languages],
     availableLanguage: ['Turkish', 'English', 'Russian', 'German', 'Polish', 'Ukrainian', 'Dutch', 'French', 'Spanish', 'Arabic'],
-    sameAs: [MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
+    sameAs: [MAPS, waUrl(), 'https://terzihizmeti.com.tr'],
     inLanguage: lang,
   };
 }
@@ -121,12 +122,10 @@ const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(l
 const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
 const priceShortOf = (lang: Lang, s: Service) =>
   s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : '';
-const TIME_SHORT: Record<Lang, Record<'same' | 'next' | 'three' | 'none', string>> = {
-  tr: { same: 'Aynı Gün', next: 'Ertesi Gün', three: '3 Günde', none: 'Yakınınızda' },
-  en: { same: 'Same Day', next: 'Next Day', three: 'In 3 Days', none: 'Near You' },
-  ru: { same: 'В тот же день', next: 'За 1 день', three: 'За 3 дня', none: 'Рядом' },
-  de: { same: 'Am selben Tag', next: 'Am nächsten Tag', three: 'In 3 Tagen', none: 'In der Nähe' },
-};
+// Başlıklar için kısa süre ifadeleri (lib/business.ts DURATION'dan)
+const TIME_SHORT: Record<Lang, Record<TimeKey, string>> = Object.fromEntries(LANGS.map((l) => [l, {
+  repair: DURATION[l].normalShort, custom: DURATION[l].customShort, mixed: DURATION[l].normalShort,
+}])) as Record<Lang, Record<TimeKey, string>>;
 
 // ── Bölge önceliği: TR'de yerel mahalleler, yabancı dilde tatil bölgeleri öne ──
 const TR_PRI = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem'];

@@ -3,7 +3,8 @@
 // ücretsiz servis yalnızca yakın mahallelerde; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
 const FREE = ' {{F}}';
-const FREE_SLUGS = ['hurma', 'liman', 'sarisu', 'uncali', 'gursu', 'cakirlar']; // ücretsiz alım-teslim yalnızca Konyaaltı ve mahallelerinde
+import { isFreeService } from '@/lib/business';
+// Ücretsiz servis listesi tek kaynaktan (lib/business.ts FREE_SERVICE_SLUGS); otellere servis her bölgede ücretsiz.
 const BANK: Record<string, M> = {
   hurma: { t: 'Hurma Terzi Çağır · Tamir, Tadilat, Dikim', d: "Hurma'da tamir tadilat, özel dikim, daraltma, kısaltma: fotoğraf at, fiyat al. Paça ₺200'den, fermuar ₺300'den." + FREE,
     kw: ['tamir tadilat', 'özel dikim', 'ölçüye göre dikim', 'bay bayan elbise dikimi', 'elbise daraltma', 'elbise kısaltma', 'pantolon kısaltma', 'kot paçası kısaltma', 'fermuar değişimi', 'abiye tamiri', 'beden ayarlama', 'yakınımda terzi'] },
@@ -29,7 +30,7 @@ const BANK: Record<string, M> = {
 export function mahalleMeta(slug: string, ad: string, phone: string) {
   const b = BANK[slug];
   const title = b ? `${b.t} | SwapHubs` : `${ad} Terzi Çağır | SwapHubs`;
-  const dd = b ? b.d.replace(' {{F}}', FREE_SLUGS.includes(slug) ? ' Ücretsiz alım-teslim.' : '') : '';
+  const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Ücretsiz alım-teslim.' : ' Otele ücretsiz servis.') : '';
   const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} Konyaaltı terzi`, `${ad} terzi çağır`];
   const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), 'Konyaaltı terzi', 'Antalya terzi'];

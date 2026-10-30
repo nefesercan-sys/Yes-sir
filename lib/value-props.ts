@@ -3,10 +3,13 @@
 // Telefon/saat için lib/business.ts esas alınır; burada sadece metinler var.
 // NOT: "7/24" veya "2 dakika" gibi tutulamayacak sözler bilerek YOK.
 // ============================================================
+import { WA_NUMBER as WA_NUM, PHONE_E164, waUrl as bizWaUrl } from '@/lib/business';
+
 export type Lang = 'tr' | 'en' | 'de' | 'ru';
 
-export const WA_NUMBER = '905318986418';
-export const PHONE_TEL = '+905318986418';
+// Telefon/WhatsApp: lib/business.ts (tek kaynak); geriye dönük adlarla yeniden dışa aktarılır.
+export const WA_NUMBER = WA_NUM;
+export const PHONE_TEL = PHONE_E164;
 
 export interface ValueProp {
   id: string;
@@ -17,10 +20,10 @@ export interface ValueProp {
 }
 
 export const HOURS_LINE: Record<Lang, string> = {
-  tr: "Her gün 08:00–23:00 · Konyaaltı'nda eve ve otele servis ücretsiz",
-  en: 'Every day 08:00–23:00 · Free home & hotel service in Konyaaltı',
-  de: 'Täglich 08:00–23:00 · Hotel- und Hausservice in Konyaaltı kostenlos',
-  ru: 'Ежедневно 08:00–23:00 · Выезд домой и в отель бесплатно в Коньяалты',
+  tr: "Her gün 08:00–23:00 · Otellere servis ücretsiz · Konyaaltı ve yakınında eve de ücretsiz",
+  en: 'Every day 08:00–23:00 · Free service to hotels · free home pick-up in Konyaaltı and nearby',
+  de: 'Täglich 08:00–23:00 · Hotelservice kostenlos · Hausabholung in Konyaaltı und Umgebung kostenlos',
+  ru: 'Ежедневно 08:00–23:00 · Выезд в отели бесплатно · на дом бесплатно в Коньяалты и рядом',
 };
 
 export const CALL_LABEL: Record<Lang, string> = {
@@ -161,5 +164,5 @@ export const SERVICE_WA_TR: Record<ServiceKey, string> = {
 };
 
 export function waUrl(text: string): string {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  return bizWaUrl(text);
 }
