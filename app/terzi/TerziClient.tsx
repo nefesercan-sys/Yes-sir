@@ -96,7 +96,7 @@ const SERVICES = [
     img: 'https://images.pexels.com/photos/8459366/pexels-photo-8459366.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
     alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can',
     tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik dikimi · gelinlik tadilatı · damatlık · abiye dikimi · abiye tamiri · nişan elbisesi · kına kıyafeti', p: '₺800+' },
-    en: { n: 'Wedding · Evening · Special', d: 'Wedding dress · bridal alterations · groom suit · evening gown · engagement dress. Perfect fit guaranteed.', p: '₺800+' },
+    en: { n: 'Wedding · Evening · Special', d: 'Wedding dress · bridal alterations · groom suit · evening gown · engagement dress. Fit checked at the fitting.', p: '₺800+' },
     ru: { n: 'Свадьба · Вечер · Торжество', d: 'Свадебное платье · подгонка · смокинг · вечернее платье · платье на помолвку.', p: '₺800+' },
     de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid · Anpassung · Smoking · Abendkleid · Verlobungskleid. Perfekte Passform.', p: '₺800+' } },
   { icon: '🏨', id: 'uniforma',

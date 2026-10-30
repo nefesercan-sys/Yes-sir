@@ -116,7 +116,7 @@ export const metadata: Metadata = {
 const HIZMETLER = [
   { ic: '📐', baslik: 'Kalıp Çıkarma & Gradaj', aciklama: 'Tasarım dosyasından veya referans üründen teknik kalıp çıkarma. XS–3XL beden gradajı. CAD destekli kalıp.' },
   { ic: '🧵', baslik: 'Numune & Prototip Dikimi', aciklama: 'Prototip ve onay numunesi dikimi. Tek adet sipariş kabul edilir. 5–7 iş günü teslim.' },
-  { ic: '✂️', baslik: 'Fason Üretim (adet projeye göre)', aciklama: 'Kesim + dikim + overlok + ütü + paket dahil tam seri üretim. Hız ve kalite garantisi.' },
+  { ic: '✂️', baslik: 'Fason Üretim (adet projeye göre)', aciklama: 'Kesim + dikim + overlok + ütü + paket dahil tam seri üretim. Hız ve kalite odaklı çalışırız.' },
   { ic: '🏭', baslik: 'Büyük Seri İmalat', aciklama: '500+ adet büyük sipariş kapasitesi. İş planı, süreç takibi ve kalite kontrolü dahil.' },
   { ic: '🪡', baslik: 'Nakış & Dijital Baskı', aciklama: 'Logo nakışı, isim baskısı, serigrafi, DTF & dijital baskı. Sweatshirt, polo, t-shirt ve tüm kıyafetler.' },
   { ic: '📦', baslik: 'Etiket & Paketleme', aciklama: 'Ütülü, etiketli (barkod dahil) ve ambalajlı teslim. E-ticaret depolarına hazır sevkiyat.' },

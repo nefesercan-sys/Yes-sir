@@ -230,7 +230,7 @@ export default function UniformaUretimiPage() {
             <div style={{ fontSize: '.9rem', color: '#5A4E42', lineHeight: 1.95 }}>
               <p style={{ marginBottom: '1rem' }}>
                 Antalya Türkiye'nin en yoğun turizm merkezi olup <strong>Belek, Kemer, Lara ve Side</strong> gibi
-                tatil bölgelerinde binlerce otel ve restoran bulunmaktadır. Bu işletmelerin personel
+                tatil bölgelerinde çok sayıda otel ve restoran bulunmaktadır. Bu işletmelerin personel
                 üniforması ihtiyacı sürekli yenilenmekte; Terzi Can bu ihtiyacı karşılayan
                 <strong> Antalya'nın deneyimli üniforma üreticisidir.</strong>
               </p>
