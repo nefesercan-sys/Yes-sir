@@ -22,7 +22,7 @@ export const BUSINESS_ID = B_ID;
 export const PHONE = PHONE_DISPLAY;
 export const PHONE_TEL = PHONE_E164;
 export const MAPS = MAPS_URL;
-export const LAST_UPDATE = '2026-10-27';
+export const LAST_UPDATE = '2026-10-30';
 
 // ── BÖLGE STRATEJİSİ (tek ayar noktası) ─────────────────────
 // TR_NEAR_SLUGS yalnızca METİN tonu ve sıralama için kullanılır (yakın mahalle / uzak bölge anlatımı).

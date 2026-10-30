@@ -6,6 +6,7 @@
 // Siteye özgü ayarlar yalnızca aşağıdaki SITE_CFG bloğundadır.
 // ============================================================
 import type { Metadata } from 'next';
+import { crossCanonical } from '@/lib/cross-canonical';
 import {
   SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LANGS, LAST_UPDATE, SERVICES, SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   serviceUrl, type Lang,
@@ -231,23 +232,17 @@ function needUrl(lang: Lang, k: NeedKey): string {
   return s ? serviceUrl(lang, s) : SERVICE_BASE[lang];
 }
 
-const alternates = () => ({
-  canonical: abs(SITE_CFG.contactUrl.tr),
-  languages: {
-    tr: abs(SITE_CFG.contactUrl.tr), en: abs(SITE_CFG.contactUrl.en), ru: abs(SITE_CFG.contactUrl.ru), de: abs(SITE_CFG.contactUrl.de),
-    'x-default': abs(SITE_CFG.contactUrl.tr),
-  },
-});
 
 export function iletisimMetadata(lang: Lang): Metadata {
   const c = T[lang];
   const url = abs(SITE_CFG.contactUrl[lang]);
-  const alt = alternates();
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
     description: c.desc,
-    alternates: { canonical: url, languages: alt.languages },
+    // EN/RU/DE iletişim sayfalarının terzihizmeti.com.tr'de birebir karşılığı var → cross-domain canonical, hreflang yok.
+    // Türkçe iletişim sayfası swaphubs'ta canonical kalır (karşılıkları başka sitede olduğu için hreflang verilmez).
+    alternates: { canonical: crossCanonical(SITE_CFG.contactUrl[lang]) ?? url },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     openGraph: {
       title: c.title, description: c.desc, url, siteName: SITE_CFG.siteName, locale: OG_LOCALE[lang], type: 'website',

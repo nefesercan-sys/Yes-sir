@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { crossCanonical } from '@/lib/cross-canonical';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -103,10 +104,8 @@ export const metadata: Metadata = {
     'Schneider Kemer Hotel','Änderungsschneiderei Antalya',
     'Kleid ändern Antalya Hotel','Anzug ändern Antalya',
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': TR_URL, 'en': EN_URL, 'ru': RU_URL, 'de': SITE_URL, 'x-default': TR_URL },
-  },
+  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  alternates: { canonical: crossCanonical('/de/schneider-service-hotel-antalya')! },
   openGraph: {
     title: 'Mobiler Schneider Antalya · Schneiderservice im Hotel',
     description: 'Mobiler Schneiderservice zu Ihrem Hotel in Belek, Lara, Kemer und ganz Antalya.',

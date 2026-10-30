@@ -5,7 +5,7 @@
 // ============================================================
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
+import { findDistrict } from '@/lib/seo-data';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -72,7 +72,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!ilce) return {};
   const { title, desc } = meta(ilce.slug, ilce.ad);
   const url = `${SITE_URL}/terzi/antalya/${ilce.slug}`;
-  const d = findDistrict(ilce.slug);
   return {
     title: { absolute: title },
     description: desc,
@@ -81,9 +80,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`, `${ilce.ad} bel daraltma`, `${ilce.ad} elbise dikimi`,
       `${ilce.ad} otele gelen terzi`, `${ilce.ad} acil terzi`, 'Antalya terzi', 'acil terzi Antalya',
     ],
-    alternates: !d || abs(districtUrl('tr', d)) !== url
-      ? { canonical: url }
-      : { canonical: url, languages: { ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])), 'x-default': url } },
+    // Yabancı dil karşılıkları terzihizmeti.com.tr'ye canonical'landığı için hreflang verilmez
+    alternates: { canonical: url },
     openGraph: { title, description: desc, url, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
     twitter: { card: 'summary_large_image', title, description: desc },
   };

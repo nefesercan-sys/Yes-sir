@@ -43,8 +43,11 @@ export const metadata: Metadata = {
     'выездной портной анталия','терзи коньяалты',
     'konyaaltı terzi rusça','antalya terzi rusça',
   ].join(', '),
+  // Ayrı bir RU sayfası: TR/EN/DE karşılıkları /ru/atelie-antalya ile aynı kümede olduğundan ikinci bir küme açılmaz;
+  // kendini işaret eden ru hreflang'ı eksik bırakılmaz.
   alternates: {
     canonical: PAGE_URL,
+    languages: { ru: PAGE_URL },
   },
   openGraph: {
     title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',

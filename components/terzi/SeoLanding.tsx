@@ -21,6 +21,7 @@ import { trNearDistrict } from '@/lib/tr-meta';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib/business';
+import { crossCanonical } from '@/lib/cross-canonical';
 import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
@@ -105,14 +106,13 @@ function businessNode(lang: Lang, withReviews = true) {
   };
 }
 
-const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, slug?: string) => {
-  // Uzak bölgenin Türkçe sayfası noindex olduğu için hreflang'a girmez; x-default İngilizce olur.
-  const trOk = !slug || isTrNear(slug);
-  const languages: Record<string, string> = {};
-  if (trOk) languages.tr = urlFor('tr');
-  languages.en = urlFor('en'); languages.ru = urlFor('ru'); languages.de = urlFor('de');
-  languages['x-default'] = urlFor(trOk ? 'tr' : 'en');
-  return { canonical: urlFor(lang), languages };
+// EN/RU/DE bölge, hizmet ve hub sayfalarının terzihizmeti.com.tr'de birebir karşılığı var → canonical oraya (hreflang yok).
+// Türkçe sayfalar swaphubs'ta canonical kalır; yabancı karşılıkları başka siteye canonical'landığı için hreflang verilmez
+// (canonical ile çelişen, karşılıksız hreflang kümesi oluşmasın).
+const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, _slug?: string) => {
+  const own = urlFor(lang);
+  const cross = crossCanonical(own.replace(SITE, ''));
+  return cross ? { canonical: cross } : { canonical: own };
 };
 const _alternatesForOld = (lang: Lang, urlFor: (l: Lang) => string) => ({
   canonical: urlFor(lang),

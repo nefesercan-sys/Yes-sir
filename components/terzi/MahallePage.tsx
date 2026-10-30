@@ -5,7 +5,6 @@
 // ============================================================
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -51,10 +50,8 @@ export async function mahalleMetadata(ilce: MahalleIlce, { params }: MahallePara
   if (!m) return {};
   const { title, desc, kw } = mahalleMeta(m.slug, m.ad, PHONE_DISPLAY, MAHALLE_ILCE[ilce].ad);
   const url = `${SITE_URL}${pathOf(ilce, m.slug)}`;
-  const d = findDistrict(m.slug);
-  const alternates = !d || abs(districtUrl('tr', d)) !== url
-    ? { canonical: url }
-    : { canonical: url, languages: { ...Object.fromEntries(LANGS.map((l) => [l, abs(districtUrl(l, d))])), 'x-default': url } };
+  // Yabancı dil karşılıkları terzihizmeti.com.tr'ye canonical'landığı için hreflang verilmez
+  const alternates = { canonical: url };
   return {
     title: { absolute: title },
     description: desc,

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { crossCanonical } from '@/lib/cross-canonical';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -103,10 +104,8 @@ export const metadata: Metadata = {
     'ателье Кемер','ателье Аланья','срочный ремонт одежды Анталья',
     'подгонка платья Анталья отель','подгонка костюма Анталья',
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': TR_URL, 'en': EN_URL, 'ru': SITE_URL, 'de': DE_URL, 'x-default': TR_URL },
-  },
+  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  alternates: { canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya')! },
   openGraph: {
     title: 'Выездной портной Анталья · Обслуживание в отеле',
     description: 'Выездной портной приедет в ваш отель в Белеке, Ларе, Кемере и по всей Анталье.',

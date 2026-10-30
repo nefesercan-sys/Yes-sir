@@ -6,12 +6,22 @@ import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
 import { PROMO_ALL } from '@/lib/intl-promo'
-import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isIndexable, type Lang } from '@/lib/seo-data'
+import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, isIndexable, type Lang } from '@/lib/seo-data'
+import { crossCanonical } from '@/lib/cross-canonical'
 
 export const revalidate = 86400
 
 const BASE_URL = 'https://swaphubs.com'
-const D = new Date('2026-10-04')
+// lastmod: yalnızca içeriği gerçekten değişen sayfalar güncel tarihi alır (sahte güncelleme sinyali verilmez).
+// 2026-10-30: süre/ücretsiz servis/Muratpaşa/kopya içerik düzeltmeleriyle değişen terzi sayfaları.
+// Bu düzeltmelerden etkilenmeyen sayfalar (keten/pamuk ve Anavera tekstil tanıtımları, üniforma) eski tarihlerinde kalır.
+const CHANGED = '2026-10-30'
+const OLD = '2026-10-04'
+const UNCHANGED_PREFIXES = ['/dogal-keten-pamuk-giyim', '/en/linen-clothing-custom-made-antalya', '/ru/lnyanaya-odezhda-poshiv-antalya', '/de/leinenkleidung-massanfertigung-antalya',
+  '/tekstil-antalya', '/en/textile-manufacturer-antalya', '/ru/tekstilnoe-proizvodstvo-antalya', '/de/textilhersteller-antalya', '/terzi/uniforma-uretimi-antalya']
+const lastmodOf = (url: string) => (UNCHANGED_PREFIXES.some((p) => url === `${BASE_URL}${p}`) ? OLD : CHANGED)
+// terzihizmeti.com.tr'ye canonical'lanan sayfalar sitemap'e girmez
+const isOwnCanonical = (url: string) => !crossCanonical(url.replace(BASE_URL, ''))
 
 export async function GET() {
   const terziSayfalar = [
@@ -73,7 +83,8 @@ export async function GET() {
     terziSayfalar.push({ url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
   })
 
-  // 🔎 Bölge × hizmet SEO sayfaları (4 dil, karşılıklı hreflang)
+  // 🔎 Bölge × hizmet SEO sayfaları. EN/RU/DE karşılıkları terzihizmeti.com.tr'ye canonical'landığı için yalnız TR'ler listelenir
+  // ve hreflang verilmez (canonical ile tutarlı).
   type Item = { url: string; priority: string; freq: string; alt?: Record<string, string>; lastmod?: string }
   const hasAlt = (urlFor: (l: Lang) => string, ok: (l: Lang) => boolean = () => true): Record<string, string> => {
     const ls = LANGS.filter(ok)
@@ -83,11 +94,11 @@ export async function GET() {
     }
   }
   const seoItems: Item[] = [
-    ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: hasAlt((x) => SERVICE_BASE[x]) })),
-    ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt: hasAlt((x) => serviceUrl(x, sv)) }))),
-    ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly', alt: hasAlt((x) => districtUrl(x, d), (x) => isIndexable(x, d.slug)) }))),
-    // 📞 İletişim sayfaları (4 dil, karşılıklı hreflang) — "terzi can telefon / iletişim / adres" aramaları
-    ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly', alt: hasAlt((x) => CONTACT_URL[x]) })),
+    ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly' })),
+    ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly' }))),
+    ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly' }))),
+    // 📞 İletişim sayfası (TR; EN/RU/DE karşılıkları terzihizmeti.com.tr'de)
+    ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly' })),
     // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
     ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
     // 🌍 Ek turist dilleri (ES/FR/PL/UK/NL/AR): tek tanıtım sayfası, kendi aralarında hreflang
@@ -96,7 +107,7 @@ export async function GET() {
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${svcgUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${svcgUrl(x)}`])) })),
     // 🎽 Promosyon tekstili ve baskılı bez çanta rehberi (10 dil, karşılıklı hreflang + x-default)
     ...PROMO_ALL.map((x) => ({
-      url: `${BASE_URL}${x.path}`, priority: '0.70', freq: 'monthly', lastmod: '2026-10-30',
+      url: `${BASE_URL}${x.path}`, priority: '0.70', freq: 'monthly',
       alt: { ...Object.fromEntries(PROMO_ALL.map((y) => [y.hreflang, `${BASE_URL}${y.path}`])), 'x-default': `${BASE_URL}${PROMO_ALL[0].path}` },
     })),
     // 🏨 Otel bölgesi derinlik sayfaları (6 dil × 6 bölge, bölge başına 6 dilli hreflang)
@@ -105,15 +116,15 @@ export async function GET() {
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))
   const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
-  // Mevcut Türkçe sayfalara da hreflang karşılığı vermek için alt bilgisini eşle
   const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
   const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) })), ...seoUnique]
+    .filter((x) => isOwnCanonical(x.url))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${all.map(s => `  <url>
     <loc>${s.url}</loc>${s.alt ? '\n' + Object.entries(s.alt).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${u}"/>`).join('\n') : ''}
-    <lastmod>${(s.lastmod ? new Date(s.lastmod) : seoUnique.includes(s) ? new Date(LAST_UPDATE) : D).toISOString()}</lastmod>
+    <lastmod>${s.lastmod ?? lastmodOf(s.url)}</lastmod>
     <changefreq>${s.freq}</changefreq>
     <priority>${s.priority}</priority>
   </url>`).join('\n')}

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
@@ -37,16 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
       'Textilreparatur Antalya', 
       'Deutschsprechender Schneider Antalya'
     ],
-    alternates: {
-      canonical: url,
-      languages: {
-        'tr': `${HOME_URL}/terzi/otele-gelen-terzi-antalya/${r.slug}`,
-        'en': `${HOME_URL}/en/hotel-tailor-antalya/${r.slug}`,
-        'ru': `${HOME_URL}/ru/vyezdnoy-portnoy-antalya/${r.slug}`,
-        'de': url,
-        'x-default': `${HOME_URL}/en/hotel-tailor-antalya/${r.slug}`,
-      },
-    },
+    // terzihizmeti.com.tr'de birebir aynı bölge sayfası → cross-domain canonical (hreflang kümesi yok)
+    alternates: { canonical: crossCanonical(`${BASE_PATH}/${r.slug}`) ?? url },
     openGraph: { title, description: desc, url, type: 'website', locale: 'de_DE', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Schneider in ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },

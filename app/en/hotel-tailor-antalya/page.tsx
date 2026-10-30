@@ -1,4 +1,5 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { crossCanonical } from '@/lib/cross-canonical';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -56,10 +57,8 @@ export const metadata: Metadata = {
     'Kemer hotel tailor','emergency tailor Antalya',
     'dress alteration Antalya hotel','suit alteration Antalya',
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': TR_URL, 'en': SITE_URL, 'ru': RU_URL, 'de': DE_URL, 'x-default': TR_URL },
-  },
+  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  alternates: { canonical: crossCanonical('/en/hotel-tailor-antalya')! },
   openGraph: {
     title: 'Mobile Tailor Antalya · Hotel Tailor Service',
     description: 'Mobile tailor service to your hotel in Belek, Lara, Kemer, Side and nearby districts. Accepts foreign currencies & cards.',
