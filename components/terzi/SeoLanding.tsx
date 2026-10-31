@@ -576,7 +576,7 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
       <div className="sl-hero-content">
         <span className="sl-hero-tag">{tag}</span>
         <h1 id="hero-h">{h1}</h1>
-        <p className="sl-hero-desc">{desc}</p>
+        <p className="sl-hero-desc" id="dogrudan-cevap">{desc}</p>
         <div className="sl-hero-btns">
           <a href={WA(waMsg)} target="_blank" rel="noopener noreferrer" className="sl-btn-primary">{u.waBtn}</a>
           <a href={`tel:${PHONE_TEL}`} className="sl-btn-secondary">📞 {PHONE}</a>

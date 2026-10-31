@@ -10,7 +10,7 @@ export default function SpeakableSchema({ path }: { path: string }) {
     url: `${SITE}${path}`,
     speakable: {
       '@type': 'SpeakableSpecification',
-      cssSelector: ['h1', '.hero-slogan', '#quick-actions', '#sik-sorulan-sorular'],
+      cssSelector: ['h1', '#dogrudan-cevap', '.hero-slogan', '#quick-actions', '#sik-sorulan-sorular'],
     },
   };
   return (
