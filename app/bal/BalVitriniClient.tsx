@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import { waLink, formatFiyat, stokLabel } from '@/lib/bal-helpers';
 
 const WA = process.env.NEXT_PUBLIC_BAL_WA || '905345104458';
@@ -83,14 +84,18 @@ export default function BalVitriniClient({ urunler, sss = [] }: { urunler: Urun[
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
             {filtrelenmis.map(urun => (
               <article key={urun._id} style={{ background: '#fff', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 20px rgba(28,15,0,.08)', display: 'flex', flexDirection: 'column' }}>
-                <img
-                  src={urun.gorsel || 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=400&q=80'}
-                  alt={urun.ad}
-                  style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }}
-                  loading="lazy"
-                />
+                <Link href={`/bal/${urun.slug}`} aria-label={urun.ad} style={{ display: 'block' }}>
+                  <img
+                    src={urun.gorsel || 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=400&q=80'}
+                    alt={urun.ad}
+                    style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </Link>
                 <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '1.1rem', fontWeight: 700, color: '#1C0F00', marginBottom: '.4rem' }}>{urun.ad}</h3>
+                  <h3 style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '1.1rem', fontWeight: 700, color: '#1C0F00', marginBottom: '.4rem' }}>
+                    <Link href={`/bal/${urun.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>{urun.ad}</Link>
+                  </h3>
                   <p style={{ fontSize: '.8rem', color: '#7A6040', lineHeight: 1.7, marginBottom: '.8rem', flex: 1 }}>{urun.aciklama}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginBottom: '.8rem' }}>
                     {urun.icerik?.map(i => (

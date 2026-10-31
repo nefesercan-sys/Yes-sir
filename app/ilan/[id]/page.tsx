@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { ObjectId } from 'mongodb';
 import { getDb } from '@/lib/mongodb';
 import IlanDetayPageClient from './IlanDetayPageClient';
@@ -58,6 +59,23 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default function IlanDetayPage() {
-  return <IlanDetayPageClient />;
+export default async function IlanDetayPage({ params }: { params: { id: string } }) {
+  const { ilan, hata } = await ilanGetir(params.id);
+  // Gerçekten olmayan ilan: 404 (veritabanı geçici hatasında istemci kendi çeker)
+  if (!ilan && !hata) notFound();
+  const veri = ilan
+    ? JSON.parse(
+        JSON.stringify({
+          ...ilan,
+          id: String(ilan._id),
+          _id: String(ilan._id),
+          olusturmaTarihi: ilan.olusturmaTarihi || ilan.createdAt || new Date().toISOString(),
+          kullanici: ilan.kullanici || (ilan.sahibi ? { id: ilan.sahibi.email || '', name: ilan.sahibi.ad || 'İsimsiz', image: ilan.sahibi.resim || null } : null),
+          kullaniciId: ilan.kullaniciId || ilan.sahibi?.email || '',
+          aciklama: ilan.aciklama || ilan.formData?.aciklama || '',
+          iletisim: ilan.iletisim || ilan.formData?.iletisim || '',
+        })
+      )
+    : null;
+  return <IlanDetayPageClient ilan={veri} />;
 }

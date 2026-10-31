@@ -52,7 +52,7 @@ interface Ilan {
 
 
 
-function IlanDetayIcerik() {
+function IlanDetayIcerik({ ilanInitial }: { ilanInitial?: Ilan | null }) {
 
   const { data: session } = useSession();
 
@@ -68,9 +68,9 @@ function IlanDetayIcerik() {
 
 
 
-  const [ilan, setIlan] = useState<Ilan | null>(null);
+  const [ilan, setIlan] = useState<Ilan | null>(ilanInitial ?? null);
 
-  const [yukleniyor, setYukleniyor] = useState(true);
+  const [yukleniyor, setYukleniyor] = useState(!ilanInitial);
 
   const [hata, setHata] = useState("");
 
@@ -86,7 +86,7 @@ function IlanDetayIcerik() {
 
   useEffect(() => {
 
-    if (!ilanId) return;
+    if (!ilanId || ilanInitial) return; // sunucudan geldiyse tekrar çekme
 
     (async () => {
 
@@ -291,7 +291,7 @@ function IlanDetayIcerik() {
 
         <div style={{ flex: 1, minWidth: 0 }}>
 
-          <h1 style={{ color: "#fff", fontSize: 14, fontWeight: 800, fontFamily: "Unbounded, sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{ilan.baslik}</h1>
+          <div role="presentation" style={{ color: "#fff", fontSize: 14, fontWeight: 800, fontFamily: "Unbounded, sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{ilan.baslik}</div>
 
           <p style={{ color: "rgba(255,255,255,.4)", fontSize: 11, marginTop: 2 }}>{ilan.sehir}{ilan.ulke && ilan.ulke !== "Türkiye" ? `, ${ilan.ulke}` : ""} · {ilan.tip === "ticari" ? "Ticari" : "Bireysel"}</p>
 
@@ -601,7 +601,7 @@ function IlanDetayIcerik() {
 
 
 
-export default function IlanDetayPage() {
+export default function IlanDetayPage({ ilan }: { ilan?: Ilan | null }) {
 
   return (
 
@@ -615,7 +615,7 @@ export default function IlanDetayPage() {
 
     }>
 
-      <IlanDetayIcerik />
+      <IlanDetayIcerik ilanInitial={ilan} />
 
     </Suspense>
 

@@ -3,6 +3,7 @@ import { getDb } from '@/lib/mongodb';
 import { notFound } from 'next/navigation';
 import { balMetinUygula } from '@/lib/bal-icerik';
 import BalDetayClient from './BalDetayClient';
+import { jsonLdString } from '@/lib/json-ld';
 
 export const revalidate = 300;
 
@@ -74,7 +75,7 @@ export default async function BalDetayPage({ params }: { params: { slug: string 
   ];
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <BalDetayClient urun={urun} />
     </>
   );
