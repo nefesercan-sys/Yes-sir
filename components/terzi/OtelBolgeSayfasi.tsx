@@ -320,7 +320,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       </section>
 
       {/* CTA Section */}
-      <OrnekGorselSeridi lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
+      <OrnekGorselSeridi konu={'otel'} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
       <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#fff', marginBottom: '.7rem' }}>{t.ctaH(region.name)}</h2>
