@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { TerziBottomNav, SekmeId } from '@/components/terzi/BottomNav';
+import { medyaYukle } from '@/lib/medya-yukle';
 
 const YESIL = '#2d8c6e';
 
@@ -212,17 +213,19 @@ function TerziTalepIcerik() {
   const medyaSec = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const dosyalar = Array.from(e.target.files || []);
     if (dosyalar.length === 0) return;
+    setHata('');
     setMedyaYukleniyor(true);
+    const sorunlar: string[] = [];
     for (const dosya of dosyalar) {
-      const fd = new FormData();
-      fd.append('file', dosya);
       try {
-        const res = await fetch('/api/upload', { method: 'POST', body: fd });
-        const data = await res.json();
-        if (res.ok) setMedyalar(prev => [...prev, { url: data.url, tip: data.tip === 'video' ? 'video' : 'resim' }]);
-      } catch { /* tek dosya başarısız olursa sessizce geç */ }
+        const m = await medyaYukle(dosya);
+        setMedyalar(prev => [...prev, { url: m.url, tip: m.tip }]);
+      } catch (err) {
+        sorunlar.push(err instanceof Error ? err.message : 'Bir dosya yüklenemedi.');
+      }
     }
     setMedyaYukleniyor(false);
+    if (sorunlar.length) setHata(sorunlar.join(' '));
     if (fileRef.current) fileRef.current.value = '';
   };
 

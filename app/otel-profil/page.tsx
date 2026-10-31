@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { SEKTORLER } from '@/lib/sektorler';
 
+import { medyaYukle } from '@/lib/medya-yukle';
 const otelSektor = SEKTORLER.find(s => s.id === 'turizm')!;
 
 export default function OtelProfilPage() {
@@ -33,13 +34,19 @@ export default function OtelProfilPage() {
 
   const uploadDosya = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
+    const input = e.target;
+    setHata('');
+    const sorunlar: string[] = [];
     for (const file of files) {
-      const fd = new FormData(); fd.append('file', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (data.url) setMedyalar(p => [...p, data.url]);
+      try {
+        const m = await medyaYukle(file);
+        setMedyalar(p => [...p, m.url]);
+      } catch (err) {
+        sorunlar.push(err instanceof Error ? err.message : 'Bir dosya yüklenemedi.');
+      }
     }
-    e.target.value = '';
+    if (sorunlar.length) setHata(sorunlar.join(' '));
+    input.value = '';
   };
 
   const handleKaydet = async () => {
