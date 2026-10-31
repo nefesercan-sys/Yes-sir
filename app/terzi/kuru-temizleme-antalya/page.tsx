@@ -144,7 +144,7 @@ export default function KuruTemizlemePage() {
 
         {/* HERO */}
         <section style={{ background: 'linear-gradient(135deg,#1C1814,#2E2820)', padding: '4.5rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: "url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&q=70') center/cover", opacity: .1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/kuru-temizleme-utu.webp') center/cover", opacity: .1 }} />
           <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
               👔 Terzi Can · Antalya · Kuru Temizleme & Çamaşır Hizmeti

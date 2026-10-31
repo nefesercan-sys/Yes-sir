@@ -16,18 +16,18 @@ interface Props {
 }
 
 const IMGS = {
-  hero:    'https://images.pexels.com/photos/6858614/pexels-photo-6858614.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop',
-  erkek:   'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  bayan:   'https://images.pexels.com/photos/4620863/pexels-photo-4620863.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  online:  'https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  utu:     'https://images.pexels.com/photos/4620866/pexels-photo-4620866.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  tamir:   'https://images.pexels.com/photos/6567607/pexels-photo-6567607.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  tasarim: 'https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  seri:    'https://images.pexels.com/photos/3768167/pexels-photo-3768167.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  spor:    'https://images.pexels.com/photos/4620868/pexels-photo-4620868.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
-  about1:  'https://images.pexels.com/photos/3861971/pexels-photo-3861971.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-  about2:  'https://images.pexels.com/photos/6858618/pexels-photo-6858618.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-  about3:  'https://images.pexels.com/photos/4620864/pexels-photo-4620864.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+  hero:    '/gorseller/paca-kisaltma.webp',
+  erkek:   '/gorseller/kalip-ve-makas.webp',
+  bayan:   '/gorseller/bel-daraltma-manken.webp',
+  online:  '/gorseller/dikis-makinesi.webp',
+  utu:     '/gorseller/kuru-temizleme-utu.webp',
+  tamir:   '/gorseller/fermuar-degisimi.webp',
+  tasarim: '/gorseller/kalip-ve-makas.webp',
+  seri:    '/gorseller/hazir-giyim-atolye.webp',
+  spor:    '/gorseller/hazir-giyim-atolye.webp',
+  about1:  '/gorseller/dikis-makinesi.webp',
+  about2:  '/gorseller/paca-kisaltma.webp',
+  about3:  '/gorseller/bez-canta-atolye.webp',
 };
 
 const SERVICES = [

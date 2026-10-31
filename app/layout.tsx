@@ -127,11 +127,6 @@ export default function RootLayout({ children }: Props) {
           href="https://res.cloudinary.com"
           crossOrigin="anonymous"
         />
-        <link
-          rel="preconnect"
-          href="https://images.pexels.com"
-          crossOrigin="anonymous"
-        />
         {/* Terzi / tekstil sayfalarında SwapHubs şemasını gizleyen Client Component (yol listesi GlobalSchema.tsx içinde) */}
         <GlobalSchema />
       </head>
