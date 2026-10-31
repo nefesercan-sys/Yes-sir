@@ -1,9 +1,10 @@
 // Örnek görsel şeridi: başlık (h3) + açıklama (figcaption) + dilde alt metin + ImageObject JSON-LD.
 // Görseller yapay zekâ ile üretilmiştir; "örnek görsel" etiketi ve not her zaman gösterilir.
+import { ALT_BASLIKLAR, type Konu } from '@/lib/alt-basliklar';
 import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 
-export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koyu', baslik, sayfaUrl, base = '' }: {
-  lang?: GLang; anahtarlar: GorselAnahtar[]; tema?: 'koyu' | 'acik'; baslik?: string; sayfaUrl?: string; base?: string;
+export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koyu', baslik, sayfaUrl, base = '', konu }: {
+  lang?: GLang; anahtarlar: GorselAnahtar[]; tema?: 'koyu' | 'acik'; baslik?: string; sayfaUrl?: string; base?: string; konu?: Konu | Konu[];
 }) {
   const koyu = tema === 'koyu';
   const fg = koyu ? '#F5F1E8' : '#0F172A';
@@ -40,6 +41,16 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
             );
           })}
         </div>
+        {konu && (
+          <div style={{ marginTop: '2.2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.2rem' }}>
+            {(Array.isArray(konu) ? konu : [konu]).flatMap((k) => ALT_BASLIKLAR[k]).map((a, i) => (
+              <div key={i}>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h[lang]}</h2>
+                <p style={{ color: soluk, fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p[lang]}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

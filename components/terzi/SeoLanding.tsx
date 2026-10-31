@@ -809,6 +809,8 @@ const HIZMET_GORSEL: Record<string, GorselAnahtar[]> = {
   'kiyafet-tamiri': ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'], beden: ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'],
 };
 
+const HIZMET_KONU: Record<string, 'paca' | 'fermuar' | 'gelinlik' | 'genel'> = { paca: 'paca', kot: 'paca', fermuar: 'fermuar', 'gelinlik-abiye': 'gelinlik', 'elbise-dikim': 'gelinlik', 'elbise-tamir': 'gelinlik', 'gece-kiyafeti': 'gelinlik' };
+
 export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const u = UI[lang];
   const c = serviceCopy(lang, s);
@@ -898,7 +900,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           </div>
         </section>
 
-        {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi lang={lang} anahtarlar={HIZMET_GORSEL[s.id]} sayfaUrl={url} base={SITE} />}
+        {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi konu={HIZMET_KONU[s.id] || 'genel'} lang={lang} anahtarlar={HIZMET_GORSEL[s.id]} sayfaUrl={url} base={SITE} />}
 
         <Faq lang={lang} items={faq} />
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />

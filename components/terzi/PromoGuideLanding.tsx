@@ -64,7 +64,7 @@ export default function PromoGuideLanding({ lang }: { lang: ILang }) {
 
         <p style={{ margin: '0 0 1.5rem', fontSize: '.88rem', color: C.muted }}>{c.note}</p>
 
-        <OrnekGorselSeridi lang={lang} tema="acik" anahtarlar={['bez-canta-atolye', 'hazir-giyim-atolye', 'polar-yelek', 'yun-pantolon-metre', 'sef-mutfak-uniforma', 'uniforma']} sayfaUrl={`${BASE}${promoUrl(lang)}`} base={BASE} />
+        <OrnekGorselSeridi konu={'promo'} lang={lang} tema="acik" anahtarlar={['bez-canta-atolye', 'hazir-giyim-atolye', 'polar-yelek', 'yun-pantolon-metre', 'sef-mutfak-uniforma', 'uniforma']} sayfaUrl={`${BASE}${promoUrl(lang)}`} base={BASE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>
