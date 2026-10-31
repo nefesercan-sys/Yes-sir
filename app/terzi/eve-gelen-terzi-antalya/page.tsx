@@ -180,7 +180,7 @@ export default function EveGelenTerziPage() {
 
         {/* HERO */}
         <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', top: 0, right: 0, width: '40%', height: '100%', background: `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80&auto=format&fit=crop') center/cover`, opacity: .15 }} />
+          <div style={{ position: 'absolute', top: 0, right: 0, width: '40%', height: '100%', background: `url('/gorseller/eve-gelen-terzi.webp') center/cover`, opacity: .15 }} />
           <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
               🚗 Araçlı Terzi Servisi · Konyaaltı ve çevresi

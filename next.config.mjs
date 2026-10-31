@@ -4,7 +4,7 @@ const CSP_REPORT_ONLY = [
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "img-src 'self' data: blob: https://res.cloudinary.com https://images.pexels.com https://images.unsplash.com https://ui-avatars.com https://maps.gstatic.com https://maps.googleapis.com https://*.googleusercontent.com https://www.google-analytics.com",
+  "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://ui-avatars.com https://maps.gstatic.com https://maps.googleapis.com https://*.googleusercontent.com https://www.google-analytics.com",
   "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.cloudinary.com https://www.google-analytics.com",
   "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com",
   "media-src 'self' https://res.cloudinary.com",
@@ -26,7 +26,6 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'images.pexels.com' },
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'www.swaphubs.com' },
       { protocol: 'https', hostname: 'swaphubs.com' },

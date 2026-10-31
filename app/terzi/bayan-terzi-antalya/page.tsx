@@ -93,7 +93,7 @@ export default function BayanTerziPage() {
         </nav>
 
         <section style={{ background: 'linear-gradient(135deg,#1C1814,#2E2820)', padding: '4rem 1.5rem 3.5rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=70') center/cover", opacity: .1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/bel-daraltma-manken.webp') center/cover", opacity: .1 }} />
           <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
               👗 Terzi Can · Antalya · Bayan Terzi Uzmanı
