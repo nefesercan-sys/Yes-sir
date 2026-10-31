@@ -1,5 +1,6 @@
 // swaphubs.com — Ek turist dilleri için rehber sayfası (veri: lib/intl.ts). Sunucu bileşeni, stil inline.
 // terzihizmeti.com.tr'deki tanıtım sayfalarından farklı: bilgi niyetli rehber (sorunlar, hazırlık listesi, adımlar, SSS).
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { ILANGS, INTL, NB, NB_DISTRICT, iUrl, type ILang } from '@/lib/intl';
@@ -97,6 +98,8 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
             ))}
           </p>
         </section>
+
+        <OrnekGorselSeridi lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-elbise-atolye', 'erkek-takim-olcu', 'yun-pantolon-metre']} sayfaUrl={`${SITE}${iUrl(lang)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <H2>{c.providerTitle}</H2>

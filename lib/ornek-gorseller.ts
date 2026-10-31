@@ -1,20 +1,39 @@
 // Örnek görseller (yapay zekâ ile üretilmiş; gerçek iş/müşteri fotoğrafı DEĞİLDİR). Tek kaynak: başlık + açıklama 4 dilde.
 // Kullanım: <OrnekGorselSeridi lang="tr" anahtarlar={['sef-mutfak-uniforma', ...]} />
-export type GLang = 'tr' | 'en' | 'de' | 'ru';
-type L = Record<GLang, string>;
+export type L4 = 'tr' | 'en' | 'de' | 'ru';
+export type GLang = L4 | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
+type L = Record<L4, string>;
+type LA = Record<GLang, string>;
+import { EK_METIN, type EkLang } from './ornek-gorseller-ek';
 export interface OrnekGorsel { src: string; w: number; h: number; baslik: L; aciklama: L }
+
+/** Dile göre başlık + açıklama (tr/en/de/ru ana veri; es/fr/pl/uk/nl/ar ek dosyadan; yoksa İngilizce). */
+export function gorselMetin(k: GorselAnahtar, lang: GLang): { baslik: string; aciklama: string } {
+  const g = GORSELLER[k];
+  if (lang === 'tr' || lang === 'en' || lang === 'de' || lang === 'ru') return { baslik: g.baslik[lang], aciklama: g.aciklama[lang] };
+  const e = EK_METIN[k]?.[lang as EkLang];
+  return e ? { baslik: e[0], aciklama: e[1] } : { baslik: g.baslik.en, aciklama: g.aciklama.en };
+}
 
 const W = 1600, H = 893; // 1376×768 kaynaklar 1600 genişliğe ölçeklendi; 1264×848 kaynaklar olduğu gibi
 const S = (n: string, w = 1264, h = 848) => ({ src: `/gorseller/${n}.webp`, w, h });
 const WIDE = (n: string) => S(n, 1376, 768);
 
-export const ORNEK_ETIKET: L = { tr: 'örnek görsel', en: 'illustrative image', de: 'Beispielbild', ru: 'пример изображения' };
-export const ORNEK_BASLIK: L = { tr: 'Örnek görseller', en: 'Sample images', de: 'Beispielbilder', ru: 'Примеры изображений' };
-export const ORNEK_NOT: L = {
+export const ORNEK_ETIKET: LA = { tr: 'örnek görsel', en: 'illustrative image', de: 'Beispielbild', ru: 'пример изображения',
+  es: 'imagen ilustrativa', fr: 'image d’illustration', pl: 'obraz poglądowy', uk: 'ілюстративне зображення', nl: 'illustratieve afbeelding', ar: 'صورة توضيحية' };
+export const ORNEK_BASLIK: LA = { tr: 'Örnek görseller', en: 'Sample images', de: 'Beispielbilder', ru: 'Примеры изображений',
+  es: 'Imágenes de ejemplo', fr: 'Exemples d’images', pl: 'Przykładowe obrazy', uk: 'Приклади зображень', nl: 'Voorbeeldafbeeldingen', ar: 'صور توضيحية' };
+export const ORNEK_NOT: LA = {
   tr: 'Bu görseller yapay zekâ ile üretilmiş örneklerdir; gerçek iş veya müşteri fotoğrafı değildir.',
   en: 'These are AI-generated illustrations, not photos of real work or customers.',
   de: 'Diese Bilder sind KI-generierte Beispiele, keine Fotos echter Arbeiten oder Kunden.',
   ru: 'Это изображения, созданные ИИ, а не фотографии реальных работ или клиентов.',
+  es: 'Estas imágenes están generadas por IA; no son fotos de trabajos o clientes reales.',
+  fr: 'Ces images sont générées par IA ; ce ne sont pas des photos de vrais travaux ou clients.',
+  pl: 'Są to obrazy wygenerowane przez AI, a nie zdjęcia prawdziwych prac ani klientów.',
+  uk: 'Це зображення, створені ШІ, а не фотографії реальних робіт чи клієнтів.',
+  nl: "Dit zijn door AI gegenereerde afbeeldingen, geen foto's van echt werk of klanten.",
+  ar: 'هذه صور مُنشأة بالذكاء الاصطناعي وليست صورًا لأعمال أو عملاء حقيقيين.',
 };
 
 export const GORSELLER = {
@@ -84,6 +103,15 @@ export const GORSELLER = {
   'kuru-temizleme-utu': { ...S('kuru-temizleme-utu'),
     baslik: { tr: 'Kuru temizleme ve ütü', en: 'Dry cleaning and ironing', de: 'Reinigung und Bügeln', ru: 'Химчистка и глажка' },
     aciklama: { tr: 'Kuru temizleme, buharlı ütü ve pres hizmeti.', en: 'Dry cleaning, steam ironing and pressing.', de: 'Reinigung, Dampfbügeln und Pressen.', ru: 'Химчистка, отпаривание и глажка.' } },
+  'bez-canta-atolye': { ...S('bez-canta-atolye'),
+    baslik: { tr: 'Bez çanta', en: 'Tote bags', de: 'Stofftaschen', ru: 'Тканевые сумки' },
+    aciklama: { tr: 'Logolu baskılı bez çanta imalatı: fuar ve organizasyonlar için.', en: 'Printed tote bags with your logo: for fairs and events.', de: 'Stofftaschen mit Logodruck: für Messen und Events.', ru: 'Тканевые сумки с логотипом: для выставок и мероприятий.' } },
+  'hazir-giyim-atolye': { ...S('hazir-giyim-atolye'),
+    baslik: { tr: 'Tişört', en: 'T-shirts', de: 'T-Shirts', ru: 'Футболки' },
+    aciklama: { tr: 'Logonuzla ya da kendi tasarımınızla baskılı tişört.', en: 'T-shirts printed with your logo or your own design.', de: 'T-Shirts mit Ihrem Logo oder eigenem Design.', ru: 'Футболки с вашим логотипом или дизайном.' } },
+  'uniforma': { ...S('uniforma'),
+    baslik: { tr: 'Uniforma', en: 'Uniforms', de: 'Uniformen', ru: 'Униформа' },
+    aciklama: { tr: 'İstediğiniz model ve baskıyla uniforma.', en: 'Uniforms in the model and print you want.', de: 'Uniformen in gewünschtem Modell und Druck.', ru: 'Униформа в нужной модели и с нужной печатью.' } },
 } satisfies Record<string, OrnekGorsel>;
 
 export type GorselAnahtar = keyof typeof GORSELLER;

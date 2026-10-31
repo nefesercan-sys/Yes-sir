@@ -1,4 +1,5 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { crossCanonical } from '@/lib/cross-canonical';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -305,6 +306,8 @@ export default function HotelTailorAntalyaPage() {
         </section>
 
         {/* CTA SECTION */}
+        <OrnekGorselSeridi lang="en" tema="acik" anahtarlar={['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
+
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.8rem' }}>
             Need an Urgent Tailor at Your Hotel?
