@@ -18,6 +18,19 @@ import { jsonLdString } from '@/lib/json-ld';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { PROCESS, processesFor } from '@/lib/bolge-icerik';
 
+
+// H1 varyantları (bölge slug'ına göre deterministik); bölge adı vurgulu kalır.
+const H1V: Record<string, ((r: string) => [string, string])[]> = {
+  en: [(r) => ['Hotel Tailor', r], (r) => ['Tailor that comes to your hotel in', r], (r) => [`${r} hotel tailor service`, 'Free pickup and delivery']],
+  ru: [(r) => ['Портной в отеле', r], (r) => ['Портной с выездом в отель:', r], (r) => [`Портной для отелей: ${r}`, 'Забор и доставка бесплатно']],
+  de: [(r) => ['Schneider im Hotel', r], (r) => ['Schneider kommt ins Hotel:', r], (r) => [`Hotel-Schneider ${r}`, 'Abholung und Lieferung kostenlos']],
+};
+const h1Varyant = (lang: string, slug: string, r: string) => {
+  const v = H1V[lang]; if (!v) return null;
+  const [a, b] = v[[...slug].reduce((x, c) => x + c.charCodeAt(0), 0) % v.length](r);
+  return <>{a}<br /><span style={{ color: '#D4B07A', fontStyle: 'italic' }}>{b}</span></>;
+};
+
 const T: Record<Lang, any> = {
   en: {
     tag: (r: string) => `🚗 Mobile Tailor · ${r} Hotel Zone`,
@@ -175,7 +188,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           
           <h1 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(2.2rem,5vw,4rem)', fontWeight: 700, lineHeight: 1.05, color: '#fff', marginBottom: '1.2rem' }}>
             {seoContent ? seoContent.h1 : (
-              <>{t.h1a}<br /><span style={{ color: '#D4B07A', fontStyle: 'italic' }}>{t.h1b(region.name)}</span></>
+              h1Varyant(lang, region.slug, region.name) ?? <>{t.h1a}<br /><span style={{ color: '#D4B07A', fontStyle: 'italic' }}>{t.h1b(region.name)}</span></>
             )}
           </h1>
           

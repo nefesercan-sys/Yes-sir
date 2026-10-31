@@ -1,4 +1,5 @@
 // swaphubs.com — Otel bölgesi derinlik sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-zones.ts. Sunucu bileşeni, stil inline.
+import { ZONE_H1, zoneH1Index } from '@/lib/zone-h1';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -51,7 +52,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <p style={{ margin: '0 0 .8rem', fontSize: '.85rem' }}><Link href={iUrl(lang)} style={{ color: C.gold }}>{c.back}</Link></p>
-          <h1 id="hero-h" style={{ fontFamily: serif, fontSize: 'clamp(1.6rem,4.6vw,2.4rem)', fontWeight: 700, lineHeight: 1.2, color: '#fff', margin: '0 0 .9rem' }}>{c.h1(z.name)}</h1>
+          <h1 id="hero-h" style={{ fontFamily: serif, fontSize: 'clamp(1.6rem,4.6vw,2.4rem)', fontWeight: 700, lineHeight: 1.2, color: '#fff', margin: '0 0 .9rem' }}>{(() => { const i = zoneH1Index(zone); return i === 0 || !ZONE_H1[lang] ? c.h1(z.name) : ZONE_H1[lang][i - 1](z.name); })()}</h1>
           <p className="hero-desc" style={{ fontSize: '1.02rem', color: 'rgba(255,255,255,.92)', margin: 0 }}>{pick(`zlead:${lang}:${zone}`, [c.lead, ...ZONE_LEAD_ALT[lang]])(z.name)}</p>
         </div>
       </header>
