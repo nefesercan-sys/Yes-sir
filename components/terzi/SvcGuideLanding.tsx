@@ -63,7 +63,7 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
           ))}
         </section>
 
-        <OrnekGorselSeridi konu={'genel'} lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${svcgUrl(lang)}`} base={SITE} />
+        <OrnekGorselSeridi konu={'fiyat'} lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${svcgUrl(lang)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>

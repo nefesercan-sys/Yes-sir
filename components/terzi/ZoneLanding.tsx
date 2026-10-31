@@ -81,7 +81,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
           ))}
         </section>
 
-        <OrnekGorselSeridi konu={'otel'} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'erkek-takim-olcu', 'beyaz-gomlek-katli', 'yun-pantolon-metre']} sayfaUrl={`${SITE}${zoneUrl(lang, zone)}`} base={SITE} />
+        <OrnekGorselSeridi konu="bolge" yer={z.name} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'erkek-takim-olcu', 'beyaz-gomlek-katli', 'yun-pantolon-metre']} sayfaUrl={`${SITE}${zoneUrl(lang, zone)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>
