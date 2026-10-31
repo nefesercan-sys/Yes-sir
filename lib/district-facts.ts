@@ -131,6 +131,3 @@ export const DISTRICT_FACTS: Record<string, DistrictFact> = {
     ['Otel misafirleri için tatil sırasında acil dikiş ve fermuar işleri öne çıkar; alım-teslim WhatsApp üzerinden planlanır.', 'For hotel guests, urgent stitching and zipper jobs during the holiday are typical; collection and delivery are planned on WhatsApp.', 'Для гостей отелей типичны срочные швы и молнии во время отдыха; забор и доставку планируем в WhatsApp.', 'Bei Hotelgästen sind dringende Näh- und Reißverschlussarbeiten im Urlaub typisch; Abholung und Lieferung planen wir per WhatsApp.'],
   ),
 };
-
-// Uzak bölgeler: "ücretsiz servis" iddiası yapılmaz, alım-teslim WhatsApp'ta planlanır.
-export const FAR_DISTRICTS = ['belek', 'side', 'manavgat', 'kemer', 'beldibi', 'goynuk', 'aksu', 'dosemealti'];

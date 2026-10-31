@@ -844,32 +844,3 @@ export const KATEGORILER_ANA = [
 
 export const BIREYSEL_SEKTORLER = SEKTORLER.filter(s => s.tip === "bireysel" || s.tip === "both");
 export const TICARI_SEKTORLER   = SEKTORLER.filter(s => s.tip === "ticari"   || s.tip === "both");
-
-// ============================================================
-// MESLEKLER
-// ============================================================
-export const MESLEKLER: Record<string, string[]> = {
-  yazilim: ["Frontend Geliştirici", "Backend Geliştirici", "Fullstack", "Mobil Geliştirici", "DevOps", "Veri Bilimci", "Yapay Zeka Uzmanı"],
-  tasarim: ["Grafik Tasarımcı", "UI/UX Tasarımcı", "Logo Tasarımcı", "Web Tasarımcı", "3D Tasarımcı", "Motion Designer"],
-  pazarlama: ["SEO Uzmanı", "Google Ads", "Sosyal Medya Uzmanı", "E-posta Pazarlama", "CRO Uzmanı"],
-  egitim: ["Matematik Öğretmeni", "İngilizce Öğretmeni", "Yazılım Eğitmeni", "İş Koçu", "Kariyer Danışmanı"],
-  hukuk: ["Avukat", "İş Hukuku Uzmanı", "Aile Hukuku", "Şirket Hukuku", "Vergi Hukuku"],
-  muhasebe: ["Mali Müşavir", "Vergi Uzmanı", "Muhasebeci", "Denetçi", "Finansal Analist"],
-  saglik: ["Doktor", "Psikolog", "Fizyoterapist", "Diyetisyen", "Eczacı", "Güzellik Uzmanı"],
-  insaat: ["Mimar", "İnşaat Mühendisi", "Elektrik Ustası", "Tesisat Ustası", "Boyacı"],
-  temizlik: ["Ev Temizliği", "Ofis Temizliği", "İnşaat Sonrası", "Dezenfeksiyon"],
-  nakliye: ["Şehir İçi Nakliye", "Şehirlerarası", "Uluslararası", "Kurye"],
-};
-
-export const ISLEM_TIPLERI = [
-  { slug: "hizmet-ver", ad: "Hizmet Ver", desc: "Hizmetini sun ve kazan" },
-  { slug: "hizmet-al",  ad: "Hizmet Al",  desc: "İhtiyacın olan hizmeti bul" },
-  { slug: "teklif-al",  ad: "Teklif Al",  desc: "Fiyat teklifi al" },
-  { slug: "teklif-ver", ad: "Teklif Ver", desc: "Fiyat teklifi ver" },
-  { slug: "ilan-ver",   ad: "İlan Ver",   desc: "Ürün veya hizmet ilanı ver" },
-];
-
-export const KULLANICI_TIPLERI = [
-  { slug: "bireysel", ad: "Bireysel",       desc: "Kişisel kullanım" },
-  { slug: "ticari",   ad: "Ticari / Firma", desc: "Kurumsal kullanım" },
-];
