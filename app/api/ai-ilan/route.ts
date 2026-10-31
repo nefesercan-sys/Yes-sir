@@ -5,6 +5,7 @@
 import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { clean } from '@/lib/api-guard';
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
@@ -188,7 +189,7 @@ Zorunlu rol: "${rol}"
 DİĞER KURALLAR:
 1. İlanlar GERÇEKÇİ olsun, yapay zeka tarafından yazıldığı kesinlikle anlaşılmasın. İnsan gibi yaz.
 2. Başlıklar ve açıklamalar şu anahtar kelimeleri içersin: ${keywords.slice(0, 5).join(', ')}
-3. Sektör spesifik olsun (Eğer yazılımsa kodlama dilleri, eğer emlaksa m2/oda sayısı, eğer araçsa marka/model detayları gibi özellikler uydur).
+3. Sektör spesifik olsun (yazılımsa genel teknoloji alanları, emlaksa genel konut tipi, araçsa genel araç sınıfı gibi). Var olmayan marka/model, sahte telefon/adres/sertifika, doğrulanamaz kesin teknik değer veya sayısal iddia UYDURMA; genel ve makul ifadeler kullan.
 4. Bütçeler piyasa şartlarına uygun olsun${ticari ? ' (dolar/euro veya TL, toptan / B2B ticari fiyat mantığı)' : ' (TL, bireysel fiyat)'}
 5. Her ilana 4-6 adet "özellik" ekle (kısa bullet point formatında)
 6. Lokasyon: ${lokasyon}
@@ -227,25 +228,40 @@ function slugify(text: string): string {
     .slice(0, 80);
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const body     = await req.json();
-    const guard = await requireAdmin(req);
-    if (guard) return guard;
+// Girdi doğrulama yardımcıları (yalnızca yönetici çağırır, ama istem enjeksiyonu/bozuk veri yine de sınırlanır)
+const SEKTOR_BICIM = /^[a-z0-9-]{1,60}$/;
+const YER_BICIM = /^[\p{L}\p{M}\s.'-]{1,60}$/u;
+const BIRIMLER = ['₺', 'TL', 'USD', 'EUR', '$', '€'];
+const metin = (v: unknown, n: number) => (typeof v === 'string' ? clean(v, n) : '');
+const liste = (v: unknown, adet: number, n: number) =>
+  Array.isArray(v) ? v.map((x) => metin(x, n)).filter(Boolean).slice(0, adet) : [];
 
-    const sektorId = body.sektorId as string;
-    const adet     = Math.min(Math.max(parseInt(body.adet ?? '5'), 1), 30);
-    const tip      = (body.tip as string) ?? 'bireysel';
+export async function POST(req: NextRequest) {
+  // Yetki gövde ayrıştırılmadan ÖNCE kontrol edilir
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
+
+  try {
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== 'object') {
+      return NextResponse.json({ error: 'Geçersiz istek' }, { status: 400 });
+    }
+
+    const sektorId = typeof body.sektorId === 'string' && SEKTOR_BICIM.test(body.sektorId) ? body.sektorId : '';
+    if (!sektorId) return NextResponse.json({ error: 'Geçersiz sektör' }, { status: 400 });
+    const adet     = Math.min(Math.max(parseInt(body.adet ?? '5') || 5, 1), 30);
+    const tip      = body.tip === 'ticari' ? 'ticari' : 'bireysel';
     const yapay    = Boolean(body.yapay ?? true);
 
-    const sehir = body.sehir && body.sehir !== 'Rastgele' ? body.sehir : SEHIRLER[Math.floor(Math.random() * SEHIRLER.length)];
-    const ulke  = body.ulke && body.ulke !== 'Rastgele' ? body.ulke : (tip === 'ticari' ? ULKELER[Math.floor(Math.random() * ULKELER.length)] : 'Türkiye');
+    const yerSecimi = (v: unknown) => (typeof v === 'string' && v !== 'Rastgele' && YER_BICIM.test(v.trim()) ? v.trim() : null);
+    const sehir = yerSecimi(body.sehir) ?? SEHIRLER[Math.floor(Math.random() * SEHIRLER.length)];
+    const ulke  = yerSecimi(body.ulke) ?? (tip === 'ticari' ? ULKELER[Math.floor(Math.random() * ULKELER.length)] : 'Türkiye');
 
     const keywords = SEO_KEYWORDS[sektorId] ?? [sektorId];
     const sektorAd = SEKTOR_ADLARI[sektorId] ?? sektorId;
 
-    // YENİ MANTIK: AI'ın rol dağılımını kesin olarak alıyoruz
-    const roller: Array<'alan' | 'veren'> = body.rol && body.rol !== 'her-ikisi'
+    // Rol: yalnızca 'alan' | 'veren' | 'her-ikisi'
+    const roller: Array<'alan' | 'veren'> = body.rol === 'alan' || body.rol === 'veren'
       ? [body.rol]
       : ['veren', 'alan'];
 
@@ -275,7 +291,7 @@ export async function POST(req: NextRequest) {
         const jsonMatch = rawText.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
           const parsed = JSON.parse(jsonMatch[0]);
-          ilanlar = parsed.ilanlar ?? [];
+          ilanlar = Array.isArray(parsed.ilanlar) ? parsed.ilanlar : [];
         }
       } catch {
         console.error('JSON parse hatası:', rawText.slice(0, 200));
@@ -283,26 +299,33 @@ export async function POST(req: NextRequest) {
       }
 
       if (ilanlar.length > 0) {
-        const docs = ilanlar.map(ilan => {
+        const docs = ilanlar
+          .filter((ilan) => ilan && typeof ilan === 'object' && metin(ilan.baslik, 200))
+          .map(ilan => {
           // GÖRSEL ATAMA: AI'ın ürettiği her ilana o an rastgele farklı bir resim çek
           const atanacakGorsel = getRandomImageForSector(sektorId);
-          
+          // Model çıktısı güvenilmez girdidir: türler zorlanır, metinler kırpılır
+          const baslik = metin(ilan.baslik, 200);
+          const ilanSehir = metin(ilan.sehir, 60) || sehir;
+          const ozellikler = liste(ilan.ozellikler, 8, 120);
+          const birim = typeof ilan.butceBirimi === 'string' && BIRIMLER.includes(ilan.butceBirimi) ? ilan.butceBirimi : (tip === 'ticari' ? 'USD' : '₺');
+
           return {
             // AI'ın uydurma ihtimaline karşı sistemin kesin değerleriyle zorluyoruz:
             sektorId:     sektorId,
             tip:          tip,
             rol:          rol,
-            baslik:       ilan.baslik,
+            baslik,
             formData: {
-              sehir:      ilan.sehir ?? sehir,
-              aciklama:   ilan.aciklama,
-              ozellikler: ilan.ozellikler ?? [],
+              sehir:      ilanSehir,
+              aciklama:   metin(ilan.aciklama, 3000),
+              ozellikler,
             },
             medyalar:     [atanacakGorsel],
             resimUrl:     atanacakGorsel,
-            butceMin:     Number(ilan.butceMin) || 0,
-            butceMax:     Number(ilan.butceMax) || 0,
-            butceBirimi:  (ilan.butceBirimi as string) ?? '₺',
+            butceMin:     Math.max(0, Number(ilan.butceMin) || 0),
+            butceMax:     Math.max(0, Number(ilan.butceMax) || 0),
+            butceBirimi:  birim,
             durum:        'aktif',
             teklifSayisi: 0,
             goruntulenme: 0,
@@ -314,26 +337,28 @@ export async function POST(req: NextRequest) {
             guncellendi:  new Date(),
             kategoriSlug: sektorId,
             kategoriAd:   sektorAd,
-            ulke:         (ilan.ulke as string) ?? ulke ?? 'Türkiye',
-            ozellikler:   ilan.ozellikler ?? [],
-            teslimat:     [ilan.teslimat as string].filter(Boolean),
+            ulke:         metin(ilan.ulke, 60) || ulke || 'Türkiye',
+            ozellikler,
+            teslimat:     [metin(ilan.teslimat, 80)].filter(Boolean),
             yapay,
             is_ai_generated: yapay,
             seo: {
-              metaBaslik:       `${ilan.baslik} | SwapHubs`,
-              metaAciklama:     ilan.metaAciklama ?? '',
+              metaBaslik:       `${baslik} | SwapHubs`,
+              metaAciklama:     metin(ilan.metaAciklama, 200),
               anahtarKelimeler: [
-                ...(ilan.anahtarKelimeler as string[] ?? []),
+                ...liste(ilan.anahtarKelimeler, 10, 60),
                 ...keywords.slice(0, 3),
                 'SwapHubs', sehir, sektorAd,
               ],
-              slug: slugify(String(ilan.baslik)),
+              slug: slugify(baslik),
             },
           };
         });
 
-        const result = await db.collection('ilanlar').insertMany(docs);
-        toplamEklenen += result.insertedCount;
+        if (docs.length > 0) {
+          const result = await db.collection('ilanlar').insertMany(docs);
+          toplamEklenen += result.insertedCount;
+        }
       }
     }
 
@@ -341,6 +366,7 @@ export async function POST(req: NextRequest) {
 
   } catch (err) {
     console.error('AI ilan hatası:', err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    // İç hata ayrıntısı (SDK/ağ/API anahtarı bilgisi) istemciye verilmez
+    return NextResponse.json({ error: 'İlan üretimi başarısız oldu' }, { status: 500 });
   }
 }

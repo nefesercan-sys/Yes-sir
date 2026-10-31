@@ -3,19 +3,13 @@ import { requireAdmin } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
-const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || 'diuamcnej';
+const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || process.env.CLOUD_NAME || 'diuamcnej';
 const API_KEY = process.env.CLOUDINARY_API_KEY || '';
 const API_SECRET = process.env.CLOUDINARY_API_SECRET || '';
 
-async function cloudinaryUpload(file: Buffer, filename: string): Promise<string> {
+async function cloudinaryUpload(file: Buffer, filename: string, mime = 'image/jpeg'): Promise<string> {
   const base64 = file.toString('base64');
-  const dataURI = `data:image/jpeg;base64,${base64}`;
-
-  const formData = new FormData();
-  formData.append('file', dataURI);
-  formData.append('upload_preset', 'unsigned_bal');
-  formData.append('folder', 'bal');
-  formData.append('public_id', filename);
+  const dataURI = `data:${mime};base64,${base64}`;
 
   // Signed upload
   const timestamp = Math.round(Date.now() / 1000);
@@ -42,35 +36,40 @@ async function cloudinaryUpload(file: Buffer, filename: string): Promise<string>
   );
 
   const result = await res.json();
-  if (!result.secure_url) throw new Error(result.error?.message || 'Upload failed');
+  if (!result.secure_url) throw new Error(result.error?.message || 'Cloudinary yüklemesi başarısız');
   return result.secure_url;
 }
 
+const MAX_BOYUT = 10 * 1024 * 1024; // 10 MB
+
 export async function POST(req: NextRequest) {
+  // Yetki ÖNCE (gövde ayrıştırılmadan): yönetici oturumu VEYA x-admin-key başlığı. Anahtar form alanından/URL'den alınmaz.
+  const guard = await requireAdmin(req);
+  if (guard) return guard;
   try {
     const formData = await req.formData();
-    const slug = formData.get('slug') as string;
-    const file = formData.get('file') as File;
-    const secret = formData.get('secret') as string;
+    const slug = formData.get('slug');
+    const file = formData.get('file');
 
-    const guard = await requireAdmin(req, secret); // oturum VEYA ADMIN_API_KEY
-    if (guard) return guard;
-
-    if (!slug || !file) {
-      return NextResponse.json({ error: 'slug ve file gerekli' }, { status: 400 });
+    if (typeof slug !== 'string' || !/^[a-z0-9-]{1,80}$/.test(slug) || !(file instanceof File)) {
+      return NextResponse.json({ error: 'Geçerli slug ve file gerekli' }, { status: 400 });
+    }
+    if (!file.type.startsWith('image/') || file.size === 0 || file.size > MAX_BOYUT) {
+      return NextResponse.json({ error: 'Dosya bir resim olmalı (en fazla 10 MB)' }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const url = await cloudinaryUpload(buffer, slug);
-
     const db = await getDb();
-    await db.collection('bal_urunler').updateOne(
-      { slug },
-      { $set: { gorsel: url } }
-    );
+    const urun = await db.collection('bal_urunler').findOne({ slug }, { projection: { _id: 1 } });
+    if (!urun) return NextResponse.json({ error: 'Ürün bulunamadı' }, { status: 404 });
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const url = await cloudinaryUpload(buffer, slug, file.type);
+
+    await db.collection('bal_urunler').updateOne({ slug }, { $set: { gorsel: url } });
 
     return NextResponse.json({ success: true, url });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error('Bal görseli yükleme hatası:', err); // ayrıntı yalnızca sunucu günlüğünde
+    return NextResponse.json({ error: 'Yükleme başarısız' }, { status: 500 });
   }
 }

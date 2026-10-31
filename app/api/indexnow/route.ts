@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { timingSafeEqual } from 'crypto'
 
 // Korumalı IndexNow tetikleyici.
 // Kullanım: GET /api/indexnow  +  başlık  Authorization: Bearer <INDEXNOW_SECRET>
-//       veya GET /api/indexnow?token=<INDEXNOW_SECRET>
+// (?token= sorgu parametresi KABUL EDİLMEZ: adres geçmişine/erişim günlüğüne düşer.)
 // (Vercel → Settings → Environment Variables → INDEXNOW_SECRET). Secret yoksa endpoint kapalıdır.
 const HOST = 'swaphubs.com'
 const KEY = '02de353ea7f34c5db5448385d852cc59'
@@ -18,12 +19,18 @@ async function sitemapUrls(): Promise<string[]> {
   return Array.from(new Set(out)).filter((u) => u.startsWith(`https://${HOST}/`) || u === `https://${HOST}`)
 }
 
+// Sabit zamanlı karşılaştırma (uzunluk farkında da erken çıkış zamanlaması sızdırmaz)
+function esit(a: string, b: string) {
+  const x = Buffer.from(a)
+  const y = Buffer.from(b)
+  return x.length === y.length && timingSafeEqual(x, y)
+}
+
 export async function GET(req: NextRequest) {
   const secret = process.env.INDEXNOW_SECRET
-  const auth = req.headers.get('authorization')
-  const token = new URL(req.url).searchParams.get('token')
-  // Yetki: Authorization: Bearer <secret> başlığı VEYA ?token=<secret>
-  if (!secret || (auth !== `Bearer ${secret}` && token !== secret)) {
+  const auth = req.headers.get('authorization') || ''
+  // Yetki: yalnızca Authorization: Bearer <secret> başlığı
+  if (!secret || !auth.startsWith('Bearer ') || !esit(auth.slice(7), secret)) {
     return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 })
   }
 

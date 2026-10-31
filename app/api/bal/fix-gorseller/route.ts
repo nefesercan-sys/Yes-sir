@@ -4,7 +4,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
 
-export async function GET(req: NextRequest) {
+// Yan etkili işlem: yalnızca POST.
+export async function GET() {
+  return NextResponse.json({ error: 'Yalnızca POST kabul edilir' }, { status: 405, headers: { Allow: 'POST' } });
+}
+
+export async function POST(req: NextRequest) {
   const guard = await requireAdmin(req);
   if (guard) return guard;
 
@@ -35,7 +40,8 @@ export async function GET(req: NextRequest) {
       mesaj: '3 ürün görseli güncellendi',
       guncellenenler: ['ham-propolis-50g', 'karisik-koy-seti', 'kusburnu-kuru-100g'],
     });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error('Bal görsel düzeltme hatası:', err);
+    return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
 }

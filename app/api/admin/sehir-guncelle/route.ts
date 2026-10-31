@@ -4,7 +4,12 @@ import { getDb } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(req: NextRequest) {
+// Yan etkili toplu güncelleme: yalnızca POST.
+export async function GET() {
+  return NextResponse.json({ error: "Yalnızca POST kabul edilir" }, { status: 405, headers: { Allow: "POST" } });
+}
+
+export async function POST(req: NextRequest) {
   const guard = await requireAdmin(req);
   if (guard) return guard;
   try {

@@ -146,8 +146,8 @@ function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
     try {
       const res = await fetch('/api/ai-ilan', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sektorId: secilenSektor, sehir: secilenSehir === 'Rastgele' ? null : secilenSehir, adet, adminKey, tip: 'bireysel', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+        body: JSON.stringify({ sektorId: secilenSektor, sehir: secilenSehir === 'Rastgele' ? null : secilenSehir, adet, tip: 'bireysel', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
       });
       const data = await res.json();
       if (data.success) { setSonuc(data); addLog(`✅ ${data.uretilen} ilan oluşturuldu!`); }
@@ -164,8 +164,8 @@ function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
       try {
         const res = await fetch('/api/ai-ilan', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: null, adet: 5, adminKey, tip: 'bireysel', yapay: true }),
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+          body: JSON.stringify({ sektorId: s.id, sehir: null, adet: 5, tip: 'bireysel', yapay: true }),
         });
         const data = await res.json();
         if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }
@@ -275,8 +275,8 @@ function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
     try {
       const res = await fetch('/api/ai-ilan', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sektorId: secilenSektor, sehir: 'Merkez', ulke: secilenUlke === 'Rastgele' ? null : secilenUlke, adet, adminKey, tip: 'ticari', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+        body: JSON.stringify({ sektorId: secilenSektor, sehir: 'Merkez', ulke: secilenUlke === 'Rastgele' ? null : secilenUlke, adet, tip: 'ticari', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
       });
       const data = await res.json();
       if (data.success) { setSonuc(data); addLog(`✅ ${data.uretilen} ilan oluşturuldu!`); }
@@ -293,8 +293,8 @@ function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
       try {
         const res = await fetch('/api/ai-ilan', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: 'Merkez', ulke: null, adet, adminKey, tip: 'ticari', yapay: true }),
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+          body: JSON.stringify({ sektorId: s.id, sehir: 'Merkez', ulke: null, adet, tip: 'ticari', yapay: true }),
         });
         const data = await res.json();
         if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }

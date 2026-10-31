@@ -3,6 +3,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { guvenliYol } from '@/lib/validate';
 
 function GirisIcerik() {
   const router       = useRouter();
@@ -33,8 +34,9 @@ function GirisIcerik() {
     });
     setYukleniyor(false);
     if (sonuc?.ok) {
-      const callbackUrl = searchParams.get('callbackUrl') ?? '/panel';
-      router.push(callbackUrl);
+      // Yönlendirme hedefi: callbackUrl (NextAuth) veya redirect (panel/otel-profil) — yalnızca site içi yol (açık yönlendirme koruması)
+      const hedef = guvenliYol(searchParams.get('callbackUrl'), '') || guvenliYol(searchParams.get('redirect'), '/panel');
+      router.push(hedef);
     } else {
       setHata('E-posta veya şifre hatalı.');
     }
