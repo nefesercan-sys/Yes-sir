@@ -24,16 +24,16 @@ export const ORNEK_ETIKET: LA = { tr: 'örnek görsel', en: 'illustrative image'
 export const ORNEK_BASLIK: LA = { tr: 'Örnek görseller', en: 'Sample images', de: 'Beispielbilder', ru: 'Примеры изображений',
   es: 'Imágenes de ejemplo', fr: 'Exemples d’images', pl: 'Przykładowe obrazy', uk: 'Приклади зображень', nl: 'Voorbeeldafbeeldingen', ar: 'صور توضيحية' };
 export const ORNEK_NOT: LA = {
-  tr: 'Bu görseller yapay zekâ ile üretilmiş örneklerdir; gerçek iş veya müşteri fotoğrafı değildir.',
-  en: 'These are AI-generated illustrations, not photos of real work or customers.',
-  de: 'Diese Bilder sind KI-generierte Beispiele, keine Fotos echter Arbeiten oder Kunden.',
-  ru: 'Это изображения, созданные ИИ, а не фотографии реальных работ или клиентов.',
-  es: 'Estas imágenes están generadas por IA; no son fotos de trabajos o clientes reales.',
-  fr: 'Ces images sont générées par IA ; ce ne sont pas des photos de vrais travaux ou clients.',
-  pl: 'Są to obrazy wygenerowane przez AI, a nie zdjęcia prawdziwych prac ani klientów.',
-  uk: 'Це зображення, створені ШІ, а не фотографії реальних робіт чи клієнтів.',
-  nl: "Dit zijn door AI gegenereerde afbeeldingen, geen foto's van echt werk of klanten.",
-  ar: 'هذه صور مُنشأة بالذكاء الاصطناعي وليست صورًا لأعمال أو عملاء حقيقيين.',
+  tr: 'Görseller örnek niteliğindedir; gerçek iş veya müşteri fotoğrafı değildir.',
+  en: 'Images are illustrative examples, not photos of real work or customers.',
+  de: 'Die Bilder sind Beispielbilder, keine Fotos echter Arbeiten oder Kunden.',
+  ru: 'Изображения носят иллюстративный характер и не являются фотографиями реальных работ или клиентов.',
+  es: 'Las imágenes son ilustrativas; no son fotos de trabajos o clientes reales.',
+  fr: 'Les images sont illustratives ; ce ne sont pas des photos de vrais travaux ou clients.',
+  pl: 'Zdjęcia mają charakter poglądowy i nie przedstawiają prawdziwych prac ani klientów.',
+  uk: 'Зображення є ілюстративними й не є фотографіями реальних робіт чи клієнтів.',
+  nl: "De afbeeldingen zijn illustratief en geen foto's van echt werk of klanten.",
+  ar: 'الصور توضيحية وليست صورًا لأعمال أو عملاء حقيقيين.',
 };
 
 export const GORSELLER = {
