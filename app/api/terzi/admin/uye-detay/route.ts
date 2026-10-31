@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { requireAdminSecretOrSession } from '@/lib/admin-auth';
 import { ObjectId } from 'mongodb';
+import { idGecerli } from '@/lib/validate';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -14,7 +15,7 @@ export async function GET(req: NextRequest) {
   if (yetki) return yetki;
 
   const userId = searchParams.get('userId');
-  if (!userId) return NextResponse.json({ error: 'userId zorunlu' }, { status: 400 });
+  if (!idGecerli(userId)) return NextResponse.json({ error: 'Geçerli bir userId zorunlu' }, { status: 400 });
 
   const db = await getDb();
 

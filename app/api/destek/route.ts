@@ -1,5 +1,7 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
 import { ADMIN_EMAIL, clean, isEmail, rateLimited } from "@/lib/api-guard";
 
@@ -14,9 +16,16 @@ export async function POST(req: NextRequest) {
     const eposta = clean(body?.email, 254).toLowerCase();
     const db = await getDb();
 
+    // Giriş yapmış kullanıcıda gönderen oturumdan alınır (doğrulanmış); aksi halde istemcinin yazdığı e-posta DOĞRULANMAMIŞtır
+    // ve admin görünümünde sahte "gönderen" ile karıştırılmaması için ayrı alanla işaretlenir.
+    const oturum = await getServerSession(authOptions);
+    const oturumEposta = oturum?.user?.email || null;
+
     // Mesajı panelinizin okuyabileceği formata dönüştürüp doğrudan Admine yolluyoruz
     const destekMesaji = {
-      gonderen: isEmail(eposta) ? eposta : "ziyaretci@swaphubs.com",
+      gonderen: oturumEposta ?? (isEmail(eposta) ? eposta : "ziyaretci@swaphubs.com"),
+      gonderenDogrulanmadi: !oturumEposta, // true: e-posta kullanıcının beyanı, doğrulanmadı
+      ...(oturumEposta && isEmail(eposta) && eposta !== oturumEposta.toLowerCase() ? { iletisimEposta: eposta } : {}),
       alici: ADMIN_EMAIL, // Admin e-postası: ADMIN_EMAIL ortam değişkeni (yoksa eski varsayılan)
       mesaj,
       ilanId: "destek", // Sistem bunun normal ilan olmadığını anlasın diye
