@@ -1,22 +1,19 @@
 {
-  "name": "hizmetara",
+  "name": "swaphubs",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next-intl": "^3.11.1",
-    "lucide-react": "^0.344.0",
     "@anthropic-ai/sdk": "^0.18.0",
     "@vercel/analytics": "^1.2.2",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.2.0",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.0.0",
     "next": "14.2.35",
     "next-auth": "^4.2.3",
     "nodemailer": "^6.9.9",
@@ -34,5 +31,8 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18.17.0 <23"
   }
 }

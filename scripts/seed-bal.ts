@@ -140,42 +140,42 @@ const urunlerHam = [
 
 const urunler = urunlerHam.map(balMetinUygula);
 
-async function seed() {
-  if (!MONGODB_URI) {
-    console.error('❌ MONGODB_URI bulunamadı. .env.local dosyasını kontrol et.');
-    process.exit(1);
-  }
+// Veritabanı adı lib/mongodb.ts ile aynı olmalı (uygulama 'hizmetara' veritabanını okur)
+const DB_ADI = 'hizmetara';
 
+async function seed() {
   const client = new MongoClient(MONGODB_URI);
 
   try {
     await client.connect();
-    console.log('✅ MongoDB bağlantısı kuruldu');
+    console.log('MongoDB bağlantısı kuruldu');
 
-    const db = client.db();
-    const col = db.collection('bal_urunler');
+    const col = client.db(DB_ADI).collection('bal_urunler');
 
-    // Önce mevcut ürünleri sil
-    await col.deleteMany({});
-    console.log('🗑️  Eski ürünler temizlendi');
+    // Mevcut ürünler silinmez: slug'a göre upsert (varsa günceller, yoksa ekler; createdAt korunur)
+    const islemler = urunler.map((u) => {
+      const { createdAt, ...alanlar } = u;
+      return {
+        updateOne: {
+          filter: { slug: u.slug },
+          update: { $set: { ...alanlar, updatedAt: new Date() }, $setOnInsert: { createdAt } },
+          upsert: true,
+        },
+      };
+    });
+    const sonuc = await col.bulkWrite(islemler, { ordered: true });
+    console.log(`${sonuc.upsertedCount} ürün eklendi, ${sonuc.modifiedCount} ürün güncellendi`);
 
-    // Yeni ürünleri ekle
-    const result = await col.insertMany(urunler);
-    console.log(`✅ ${result.insertedCount} ürün eklendi:`);
-    urunler.forEach(u => console.log(`   🍯 ${u.ad} — ${u.fiyat}₺`));
-
-    // Index ekle
     await col.createIndex({ slug: 1 }, { unique: true });
     await col.createIndex({ kategori: 1 });
     await col.createIndex({ aktif: 1 });
-    console.log('✅ Index\'ler oluşturuldu');
-
-  } catch (err) {
-    console.error('❌ Hata:', err);
+    console.log('Index\'ler hazır');
   } finally {
     await client.close();
-    console.log('🔒 Bağlantı kapatıldı');
   }
 }
 
-seed();
+seed().catch((err) => {
+  console.error('Hata:', err);
+  process.exit(1);
+});
