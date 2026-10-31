@@ -6,6 +6,9 @@ export async function GET(
   _req: NextRequest,
   { params }: { params: { uuid: string } }
 ) {
+  if (!ObjectId.isValid(params.uuid)) {
+    return NextResponse.json({ error: "Geçersiz ID" }, { status: 400 });
+  }
   try {
     const db = await getDb();
     const ilan = await db

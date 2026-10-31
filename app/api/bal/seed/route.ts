@@ -136,21 +136,32 @@ const urunlerHam = [
 
 const urunler = urunlerHam.map(balMetinUygula);
 
-export async function GET(req: NextRequest) {
+// Yan etkili işlem: yalnızca POST (GET ile adres çubuğundan/önbellekten/bot taramasıyla tetiklenemez).
+export async function GET() {
+  return NextResponse.json({ error: 'Yalnızca POST kabul edilir' }, { status: 405, headers: { Allow: 'POST' } });
+}
+
+export async function POST(req: NextRequest) {
   const guard = await requireAdmin(req); // oturum VEYA x-admin-key başlığı
   if (guard) return guard;
-
-  // Bu işlem tüm ürünleri silip yeniden yükler; yanlışlıkla tetiklenmesin diye onay gerekir.
-  if (req.nextUrl.searchParams.get('onay') !== 'evet') {
-    return NextResponse.json({ error: 'Tüm ürünleri silip yeniden yükler. Devam için ?onay=evet ekleyin.' }, { status: 400 });
-  }
 
   try {
     const db = await getDb();
     const col = db.collection('bal_urunler');
 
-    await col.deleteMany({});
-    await col.insertMany(urunler);
+    // Silip yeniden eklemek yerine slug bazlı upsert: işlem yarıda kesilse bile ürün kaybı olmaz,
+    // yönetici panelinden yüklenen görseller (gorsel) ve ilk oluşturma tarihi korunur.
+    const ops = urunler.map(({ gorsel, createdAt, ...alanlar }) => ({
+      updateOne: {
+        filter: { slug: alanlar.slug },
+        update: {
+          $set: { ...alanlar, updatedAt: new Date() },
+          $setOnInsert: { gorsel, createdAt },
+        },
+        upsert: true,
+      },
+    }));
+    const sonuc = await col.bulkWrite(ops, { ordered: false });
 
     try {
       await col.createIndex({ slug: 1 }, { unique: true });
@@ -160,10 +171,11 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      mesaj: `${urunler.length} ürün başarıyla güncellendi`,
+      mesaj: `${urunler.length} ürün güncellendi (yeni: ${sonuc.upsertedCount}, değişen: ${sonuc.modifiedCount})`,
       urunler: urunler.map(u => ({ ad: u.ad, fiyat: u.fiyat })),
     });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error('Bal seed hatası:', err);
+    return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
 }

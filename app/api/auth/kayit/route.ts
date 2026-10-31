@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
 import { clean, isEmail, rateLimited } from '@/lib/api-guard';
+import { adminEpostasiMi } from '@/lib/admin-auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,6 +28,11 @@ export async function POST(req: NextRequest) {
     const mevcut = await db.collection('users').findOne({ email });
     if (mevcut) {
       return NextResponse.json({ error: 'Bu e-posta zaten kayıtlı' }, { status: 409 });
+    }
+
+    // Yönetici e-postasıyla yeni kayıt yapılamaz (yetki ele geçirmeyi önler); yönetici hesabı zaten kayıtlı olmalı.
+    if (adminEpostasiMi(email)) {
+      return NextResponse.json({ error: 'Bu e-posta adresiyle kayıt yapılamaz' }, { status: 403 });
     }
 
     const hash = await bcrypt.hash(sifre, 12);

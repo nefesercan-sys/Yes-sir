@@ -3,6 +3,14 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { getDb } from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import { createHash, timingSafeEqual } from "crypto";
+import { pencereSayaci, sayaciSifirla } from "@/lib/hiz-sayaci";
+
+// E-posta başına giriş denemesi sınırı (MongoDB'de atomik sayaç; sunucusuz örnekler arası ortak).
+const GIRIS_PENCERE_MS = 15 * 60 * 1000;
+const GIRIS_MAX_DENEME = 10;
+// Kullanıcı yokken de bcrypt çalıştırmak için sahte özet (zamanlama farkıyla hesap taramasını zorlaştırır); ilk kullanımda üretilir.
+let sahteHash: Promise<string> | null = null;
+const sahteHashAl = () => (sahteHash ??= bcrypt.hash("sahte-parola-zamanlama", 12));
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,14 +21,23 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (typeof credentials?.email !== "string" || typeof credentials?.password !== "string") return null;
+        if (!credentials.email || !credentials.password) return null;
+        if (credentials.email.length > 254 || credentials.password.length > 200) return null;
 
+        const email = credentials.email.toLowerCase().trim();
         const db = await getDb();
-        const user = await db.collection("users").findOne({ 
-          email: credentials.email.toLowerCase().trim() 
-        });
 
-        if (!user || !user.password) return null;
+        // Deneme hakkı karşılaştırmadan ÖNCE atomik olarak harcanır; limit aşıldıysa doğru şifre bile kabul edilmez.
+        const deneme = await pencereSayaci(db, `giris:${email}`, GIRIS_PENCERE_MS);
+        if (deneme > GIRIS_MAX_DENEME) return null;
+
+        const user = await db.collection("users").findOne({ email });
+
+        if (!user || !user.password) {
+          await bcrypt.compare(credentials.password, await sahteHashAl()).catch(() => false);
+          return null;
+        }
 
         const stored = String(user.password);
         let isPasswordCorrect = false;
@@ -40,6 +57,8 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (!isPasswordCorrect) return null;
+
+        await sayaciSifirla(db, `giris:${email}`).catch(() => {}); // başarılı giriş sayacı sıfırlar
 
         return {
           id: user._id.toString(),

@@ -3,26 +3,31 @@
 // Gönderilen kodu doğrular ve oturum çerezini set eder.
 //
 // KÖTÜYE KULLANIM ENGELLEME:
-//  Kodu tahmin etmeye çalışan biri (000000-999999 deneyerek)
-//  başkasının hesabına giremesin diye:
-//  - Bir numaraya en fazla 5 yanlış deneme hakkı var
-//  - 5. yanlış denemeden sonra kod tamamen geçersiz sayılır,
-//    saldırgan yeni kod isteyip baştan başlamak zorunda kalır
-//    (ki o yeni kod da yalnızca gerçek numara sahibine WhatsApp'tan gider)
-//  - Ayrıca IP başına saatlik doğrulama deneme limiti var
+//  - Deneme hakkı, kod karşılaştırılmadan ÖNCE tek atomik güncellemeyle harcanır (paralel isteklerle atlatılamaz)
+//  - Bir kod en fazla 5 denemede geçerlidir; 5. yanlıştan sonra kod tamamen iptal edilir
+//  - Kod tek kullanımlıktır (doğru girişte atomik olarak silinir)
+//  - IP başına saatlik doğrulama deneme limiti
+//  - Başarısızlık nedeni ne olursa olsun TEK TİP hata mesajı döner (numara/kod durumu sızmaz)
+// Kod karşılaştırması sabit zamanlıdır. Kod düz saklanır (personel panelinin göstermesi gerekir; bkz. otp-gonder).
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac, timingSafeEqual } from 'crypto';
 import { getDb } from '@/lib/mongodb';
 import { setSessionCookie } from '@/lib/terzi-session';
+import { pencereSayaci } from '@/lib/hiz-sayaci';
+import { clientIp } from '@/lib/api-guard';
 
-const NUMARA_MAX_YANLIS_DENEME = 5;
+const NUMARA_MAX_DENEME = 5;
 const IP_SAATLIK_DENEME_LIMIT = 20;
 const PENCERE_MS = 60 * 60 * 1000;
+const TEK_HATA = 'Kod hatalı veya süresi dolmuş, yeni kod isteyin.';
 
-function ipAl(req: NextRequest) {
-  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-    || req.headers.get('x-real-ip')
-    || 'bilinmiyor';
+// Farklı uzunluklu girdilerde bile sabit zamanlı karşılaştırma: iki tarafı da HMAC'leyip eşitlik bakılır.
+function kodEsit(a: string, b: string): boolean {
+  const anahtar = process.env.TERZI_SESSION_SECRET || process.env.NEXTAUTH_SECRET || 'otp';
+  const x = createHmac('sha256', anahtar).update(a).digest();
+  const y = createHmac('sha256', anahtar).update(b).digest();
+  return timingSafeEqual(x, y);
 }
 
 export async function POST(req: NextRequest) {
@@ -39,56 +44,56 @@ export async function POST(req: NextRequest) {
     }
 
     const db = await getDb();
+    const col = db.collection('terziKullanicilar');
     const simdi = new Date();
-    const ip = ipAl(req);
 
-    // ── IP bazlı saatlik doğrulama deneme limiti ──
-    const ipKaydi = await db.collection('otpDogrulaIpLimit').findOne({ ip });
-    if (ipKaydi && simdi.getTime() - new Date(ipKaydi.pencereBaslangic).getTime() < PENCERE_MS) {
-      if (ipKaydi.sayi >= IP_SAATLIK_DENEME_LIMIT) {
-        return NextResponse.json({ error: 'Çok fazla deneme yapıldı. Lütfen bir süre sonra tekrar deneyin.' }, { status: 429 });
-      }
-      await db.collection('otpDogrulaIpLimit').updateOne({ ip }, { $inc: { sayi: 1 } });
-    } else {
-      await db.collection('otpDogrulaIpLimit').updateOne(
-        { ip }, { $set: { ip, sayi: 1, pencereBaslangic: simdi } }, { upsert: true }
-      );
+    // ── IP bazlı saatlik doğrulama deneme limiti (atomik) ──
+    if ((await pencereSayaci(db, `otpv-ip:${clientIp(req)}`, PENCERE_MS)) > IP_SAATLIK_DENEME_LIMIT) {
+      return NextResponse.json({ error: 'Çok fazla deneme yapıldı. Lütfen bir süre sonra tekrar deneyin.' }, { status: 429 });
     }
 
-    const kullanici = await db.collection('terziKullanicilar').findOne({ telefon });
-
-    if (!kullanici || !kullanici.otpKod) {
-      return NextResponse.json({ error: 'Kod hatalı veya süresi dolmuş, yeni kod isteyin' }, { status: 400 });
-    }
-    if (!kullanici.otpSonGecerlilik || new Date(kullanici.otpSonGecerlilik) < simdi) {
-      return NextResponse.json({ error: 'Kodun süresi doldu, tekrar isteyin' }, { status: 400 });
-    }
-
-    // ── Yanlış kod: deneme sayacını artır, limite ulaştıysa kodu tamamen iptal et ──
-    if (kullanici.otpKod !== kod) {
-      const yeniDenemeSayisi = (kullanici.otpBasarisizDeneme || 0) + 1;
-
-      if (yeniDenemeSayisi >= NUMARA_MAX_YANLIS_DENEME) {
-        await db.collection('terziKullanicilar').updateOne(
-          { telefon },
-          { $unset: { otpKod: '', otpSonGecerlilik: '' }, $set: { otpBasarisizDeneme: 0 } }
-        );
-        return NextResponse.json({ error: 'Çok fazla yanlış deneme. Güvenlik için kod iptal edildi, lütfen yeni kod isteyin.' }, { status: 429 });
-      }
-
-      await db.collection('terziKullanicilar').updateOne({ telefon }, { $set: { otpBasarisizDeneme: yeniDenemeSayisi } });
-      const kalanDeneme = NUMARA_MAX_YANLIS_DENEME - yeniDenemeSayisi;
-      return NextResponse.json({ error: `Kod hatalı. ${kalanDeneme} deneme hakkınız kaldı.` }, { status: 400 });
-    }
-
-    // ── Doğru kod: oturumu aç, sayaçları sıfırla ──
-    await db.collection('terziKullanicilar').updateOne(
-      { telefon },
+    // ── Deneme hakkını ATOMİK harca: aktif kodu olan ve hakkı kalan kayıt eşleşir ──
+    const r: any = await col.findOneAndUpdate(
       {
-        $set: { dogrulandi: true, otpBasarisizDeneme: 0, ...(isProvider ? { isProvider: true } : {}) },
-        $unset: { otpKod: '', otpSonGecerlilik: '' },
-      }
+        telefon,
+        otpKod: { $type: 'string' },
+        otpSonGecerlilik: { $gt: simdi },
+        otpBasarisizDeneme: { $not: { $gte: NUMARA_MAX_DENEME } },
+      },
+      { $inc: { otpBasarisizDeneme: 1 } },
+      { returnDocument: 'after' }
     );
+    const kayit = r && 'value' in r ? r.value : r;
+    if (!kayit) {
+      return NextResponse.json({ error: TEK_HATA }, { status: 400 });
+    }
+
+    if (!kodEsit(String(kayit.otpKod), kod)) {
+      // Hak bittiyse kodu tamamen iptal et (yeni kod istemek zorunda)
+      if ((kayit.otpBasarisizDeneme || 0) >= NUMARA_MAX_DENEME) {
+        await col.updateOne({ _id: kayit._id, otpKod: kayit.otpKod }, { $unset: { otpKod: '', otpSonGecerlilik: '' } });
+      }
+      return NextResponse.json({ error: TEK_HATA }, { status: 400 });
+    }
+
+    // ── Doğru kod: TEK KULLANIM — kodu atomik olarak tüket (aynı kodla paralel iki istekten yalnızca biri geçer) ──
+    const tuketilen: any = await col.findOneAndUpdate(
+      { _id: kayit._id, otpKod: kayit.otpKod },
+      {
+        $set: {
+          dogrulandi: true,
+          otpBasarisizDeneme: 0,
+          otpDogrulamaZamani: simdi, // sifre-belirle: yakın zamanda OTP doğrulaması yapıldı (şifremi unuttum akışı)
+          ...(isProvider ? { isProvider: true } : {}),
+        },
+        $unset: { otpKod: '', otpSonGecerlilik: '' },
+      },
+      { returnDocument: 'after' }
+    );
+    const kullanici = tuketilen && 'value' in tuketilen ? tuketilen.value : tuketilen;
+    if (!kullanici) {
+      return NextResponse.json({ error: TEK_HATA }, { status: 400 });
+    }
 
     setSessionCookie(kullanici._id.toString());
     return NextResponse.json({ success: true, userId: kullanici._id.toString() });

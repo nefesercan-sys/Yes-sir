@@ -3,6 +3,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+import { isAdminRequest } from "@/lib/admin-auth";
+import { getSessionUserId } from "@/lib/terzi-session";
+import { ilanHerkeseAcik, ilanSahibiMi } from "@/lib/ilan-public";
+import { clean } from "@/lib/api-guard";
+import { medyaListesi, temizObje } from "@/lib/validate";
 
 function toObjectId(id: string) {
   try { return new ObjectId(id); } catch { return null; }
@@ -27,16 +32,25 @@ export async function GET(
 
     if (!ilan) return NextResponse.json({ error: "İlan bulunamadı" }, { status: 404 });
 
+    // Sahibi/yönetici tam veriyi görür; diğer herkes PII'siz görünümü alır (e-posta, telefon, userId, token, tam konum yok).
+    const oturum = await getServerSession(authOptions);
+    let terziId: string | null = null;
+    try { terziId = getSessionUserId(); } catch { /* terzi oturumu yok */ }
+    const tam = (await isAdminRequest(req)) ||
+      ilanSahibiMi(ilan, { email: oturum?.user?.email, id: (oturum?.user as any)?.id, terziId });
+    const kaynak = tam ? ilan : ilanHerkeseAcik(ilan);
+    const ham = ilan.sahibi?.email || "";
+
     return NextResponse.json({
-      ...ilan,
+      ...kaynak,
       id: ilan._id.toString(),
       olusturmaTarihi: ilan.olusturmaTarihi || ilan.createdAt || new Date().toISOString(),
-      kullanici: ilan.kullanici || (ilan.sahibi ? {
-        id: ilan.sahibi.email || "",
+      kullanici: kaynak.kullanici || (ilan.sahibi ? {
+        id: tam ? ham : kaynak.sahibi?.id || "",
         name: ilan.sahibi.ad || "İsimsiz",
         image: ilan.sahibi.resim || null,
       } : null),
-      kullaniciId: ilan.kullaniciId || ilan.sahibi?.email || "",
+      kullaniciId: tam ? (ilan.kullaniciId || ham) : (kaynak.sahibi?.id || ""),
       aciklama: ilan.aciklama || ilan.formData?.aciklama || "",
       iletisim: ilan.iletisim || ilan.formData?.iletisim || "",
     });
@@ -68,32 +82,38 @@ export async function PUT(
 
     // Yetki kontrolü
     const ilanSahibiId = mevcutIlan.kullaniciId || mevcutIlan.sahibi?.email || "";
-    const yetkili = ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail;
+    const yetkili = (ilanSahibiId && (ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail)) || (await isAdminRequest(req));
     if (!yetkili) {
       return NextResponse.json({ error: "Bu ilanı düzenleme yetkiniz yok" }, { status: 403 });
     }
 
-    const body = await req.json();
-    if (!body.baslik?.trim()) return NextResponse.json({ error: "Başlık zorunludur" }, { status: 400 });
-    if (!body.aciklama?.trim()) return NextResponse.json({ error: "Açıklama zorunludur" }, { status: 400 });
-    if (!body.iletisim?.trim()) return NextResponse.json({ error: "İletişim bilgisi zorunludur" }, { status: 400 });
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== "object") return NextResponse.json({ error: "Geçersiz istek" }, { status: 400 });
+    const baslik = clean(body.baslik, 200);
+    const aciklama = clean(body.aciklama, 5000);
+    const iletisim = clean(body.iletisim, 120);
+    if (!baslik) return NextResponse.json({ error: "Başlık zorunludur" }, { status: 400 });
+    if (!aciklama) return NextResponse.json({ error: "Açıklama zorunludur" }, { status: 400 });
+    if (!iletisim) return NextResponse.json({ error: "İletişim bilgisi zorunludur" }, { status: 400 });
+    const sayi = (v: unknown) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? n : 0; };
 
+    // Alan beyaz listesi (mevcut davranış korunur; yapay/durum/sahibi gibi alanlar yazılamaz)
     const guncelleme = {
-      sektorId:       body.sektorId,
-      baslik:         body.baslik.trim(),
-      aciklama:       body.aciklama.trim(),
-      iletisim:       body.iletisim.trim(),
-      adres:          body.adres?.trim() || null,
-      kategori:       body.kategori,
-      formData:       body.formData,
-      medyalar:       body.medyalar || [],
-      butceMin:       body.butceMin || 0,
-      butceMax:       body.butceMax || 0,
-      butceBirimi:    body.butceBirimi || "₺",
-      tip:            body.tip,
-      rol:            body.rol,
-      ulke:           body.ulke,
-      sehir:          body.sehir,
+      sektorId:       clean(body.sektorId, 60) || mevcutIlan.sektorId,
+      baslik,
+      aciklama,
+      iletisim,
+      adres:          clean(body.adres, 300) || null,
+      kategori:       clean(body.kategori, 80),
+      formData:       temizObje(body.formData && typeof body.formData === "object" ? body.formData : {}),
+      medyalar:       medyaListesi(body.medyalar, 10),
+      butceMin:       sayi(body.butceMin),
+      butceMax:       sayi(body.butceMax),
+      butceBirimi:    clean(body.butceBirimi, 8) || "₺",
+      tip:            body.tip === "ticari" ? "ticari" : "bireysel",
+      rol:            body.rol === "veren" ? "veren" : "alan",
+      ulke:           clean(body.ulke, 60),
+      sehir:          clean(body.sehir, 60),
       guncellemeTarihi: new Date().toISOString(),
     };
 
@@ -136,7 +156,7 @@ export async function DELETE(
 
     // Yetki kontrolü
     const ilanSahibiId = mevcutIlan.kullaniciId || mevcutIlan.sahibi?.email || "";
-    const yetkili = ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail;
+    const yetkili = (ilanSahibiId && (ilanSahibiId === sessionUserId || ilanSahibiId === sessionEmail)) || (await isAdminRequest(req));
     if (!yetkili) {
       return NextResponse.json({ error: "Bu ilanı silme yetkiniz yok" }, { status: 403 });
     }

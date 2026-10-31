@@ -5,6 +5,11 @@
 // TELEGRAM_BOT_USERNAME .env'e ekle.
 // ============================================================
 
+/** Telegram HTML parse_mode için kullanıcı kaynaklı metni kaçırır (<, >, &). */
+export function htmlKacir(v: unknown): string {
+  return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 export async function telegramMesajGonder(chatId: string | number, mesaj: string) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   if (!token) return { success: false, error: 'TELEGRAM_BOT_TOKEN tanımlı değil' };
@@ -14,13 +19,14 @@ export async function telegramMesajGonder(chatId: string | number, mesaj: string
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chatId, text: mesaj, parse_mode: 'HTML' }),
+      signal: AbortSignal.timeout(8000),
     });
     const data = await res.json();
     if (!data.ok) return { success: false, error: data.description };
     return { success: true };
   } catch (err) {
     console.error('Telegram gönderim hatası:', err);
-    return { success: false, error: String(err) };
+    return { success: false, error: 'Telegram isteği başarısız' }; // iç hata ayrıntısı (bot token içerebilir) dışarı verilmez
   }
 }
 

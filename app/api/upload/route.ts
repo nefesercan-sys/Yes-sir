@@ -2,21 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { uploadMedia } from '@/lib/cloudinary';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { rateLimited } from '@/lib/api-guard';
 
 // Giriş yapmamış ziyaretçi (ör. terzi talep formu): yalnızca resim, küçük boyut, IP başına sınırlı sayıda.
-// NOT: Bellekteki sayaç sunucusuz ortamda her örnekte ayrıdır; kalıcı sınır için Upstash/Redis kullanın.
+// NOT: Sayaçlar bellek içidir (sunucusuz ortamda her örnekte ayrı, lib/api-guard.ts); kalıcı sınır için Upstash/Redis önerilir.
 const ANONIM_MAX_RESIM = 8 * 1024 * 1024;
-const ANONIM_LIMIT = 10;            // 10 dakikada en fazla 10 yükleme
+const GIRISLI_MAX_RESIM = 20 * 1024 * 1024;
+const MAX_VIDEO = 200 * 1024 * 1024;
 const PENCERE_MS = 10 * 60 * 1000;
-const sayac = new Map<string, number[]>();
-function limitAsildi(ip: string) {
-  const simdi = Date.now();
-  const liste = (sayac.get(ip) || []).filter((t) => simdi - t < PENCERE_MS);
-  liste.push(simdi);
-  sayac.set(ip, liste);
-  if (sayac.size > 5000) sayac.clear();
-  return liste.length > ANONIM_LIMIT;
-}
 
 function icerikTurleUyumlu(b: Buffer, tip: string): boolean {
   const ascii = (a: number, z: number) => b.subarray(a, z).toString('latin1');
@@ -34,30 +27,39 @@ export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
-    const file = formData.get('file') as File;
+    // 1) Önce oturum ve hız sınırı: kimliği/limiti geçmeyen istek için gövde (formData) hiç okunmaz.
+    const oturum = await getServerSession(authOptions);
+    const girisli = !!oturum?.user?.email;
 
-    if (!file) {
+    if (girisli) {
+      if (rateLimited(req, 'upload-girisli', 60, PENCERE_MS)) {
+        return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
+      }
+    } else if (rateLimited(req, 'upload-anonim', 10, PENCERE_MS)) {
+      return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
+    }
+
+    // 2) Gövde boyutu ön kontrolü (başlık sahte olabilir; asıl kontrol dosya boyutunda yapılır)
+    const tavan = girisli ? MAX_VIDEO : ANONIM_MAX_RESIM;
+    const bildirilen = Number(req.headers.get('content-length') || 0);
+    if (bildirilen > tavan + 1024 * 1024) {
+      return NextResponse.json({ error: 'Dosya çok büyük' }, { status: 413 });
+    }
+
+    const formData = await req.formData();
+    const file = formData.get('file');
+
+    if (!(file instanceof File)) {
       return NextResponse.json({ error: 'Dosya bulunamadı' }, { status: 400 });
     }
 
-    const oturum = await getServerSession(authOptions);
-    const girisli = !!oturum?.user?.email;
     const isVideo = file.type.startsWith('video/');
 
-    if (!girisli) {
-      if (isVideo) {
-        return NextResponse.json({ error: 'Video yüklemek için giriş yapın' }, { status: 401 });
-      }
-      const ip = (req.headers.get('x-forwarded-for') || 'bilinmiyor').split(',')[0].trim();
-      if (limitAsildi(ip)) {
-        return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
-      }
+    if (!girisli && isVideo) {
+      return NextResponse.json({ error: 'Video yüklemek için giriş yapın' }, { status: 401 });
     }
 
-    const MAX_RESIM = girisli ? 20 * 1024 * 1024 : ANONIM_MAX_RESIM;
-    const MAX_VIDEO = 200 * 1024 * 1024;
-    const maxSize = isVideo ? MAX_VIDEO : MAX_RESIM;
+    const maxSize = isVideo ? MAX_VIDEO : girisli ? GIRISLI_MAX_RESIM : ANONIM_MAX_RESIM;
 
     if (file.size > maxSize) {
       return NextResponse.json(
@@ -99,9 +101,9 @@ export async function POST(req: NextRequest) {
       yukseklik: result.height,
       format: result.format,
     });
-  } catch (e: any) {
+  } catch (e) {
+    // İç hata ayrıntısı (Cloudinary/ağ mesajı) istemciye verilmez; yalnızca sunucu günlüğüne yazılır.
     console.error('Upload hatası:', e);
-    return NextResponse.json({ error: 'Yükleme başarısız: ' + e.message }, { status: 500 });
+    return NextResponse.json({ error: 'Yükleme başarısız. Lütfen tekrar deneyin.' }, { status: 500 });
   }
 }
- 

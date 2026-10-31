@@ -2,19 +2,23 @@ export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+import { isEmail, rateLimited } from "@/lib/api-guard";
+import { idGecerli } from "@/lib/validate";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.email) return NextResponse.json([], { status: 401 });
 
     const email = session.user.email;
     const { searchParams } = new URL(req.url);
-    const withUser = searchParams.get("with");
-    const ilanId = searchParams.get("ilanId");
+    const withUser = (searchParams.get("with") || "").slice(0, 254) || null;
+    const ilanId = (searchParams.get("ilanId") || "").slice(0, 40) || null;
     const yeniSohbet = searchParams.get("yeniSohbet");
+    if (yeniSohbet && !idGecerli(yeniSohbet)) return NextResponse.json({ error: "Geçersiz ilan" }, { status: 400 });
 
     const db = await getDb();
 
@@ -97,13 +101,27 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.email) return NextResponse.json({ error: "Giriş yapın" }, { status: 401 });
 
-    const body = await req.json();
-    const { alici, mesaj, ilanId } = body;
+    if (rateLimited(req, "mesajlar-post", 30, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: "Çok fazla mesaj gönderdiniz. Lütfen biraz bekleyin." }, { status: 429 });
+    }
+
+    const body = await req.json().catch(() => null);
+    const alici = typeof body?.alici === "string" ? body.alici.trim() : "";
+    // Mesaj metni: yalnızca string; satır sonları korunur, diğer kontrol karakterleri atılır, en çok 2000 karakter
+    const mesaj = typeof body?.mesaj === "string"
+      ? body.mesaj.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim()
+      : "";
+    const ilanId = body?.ilanId;
 
     if (!alici || !mesaj) return NextResponse.json({ error: "Eksik bilgi" }, { status: 400 });
+    if (!isEmail(alici)) return NextResponse.json({ error: "Alıcı geçersiz" }, { status: 400 });
+    if (mesaj.length > 2000) return NextResponse.json({ error: "Mesaj en fazla 2000 karakter olabilir" }, { status: 400 });
+    if (ilanId !== undefined && ilanId !== null && ilanId !== "destek" && !idGecerli(ilanId)) {
+      return NextResponse.json({ error: "Geçersiz ilan" }, { status: 400 });
+    }
 
     const db = await getDb();
 

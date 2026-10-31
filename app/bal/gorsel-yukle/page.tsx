@@ -13,23 +13,12 @@ const URUNLER = [
   { slug: 'dag-kekigi-kuru-100g', ad: 'Dağ Kekiği Kuru 100g' },
 ];
 
-const ADMIN_SIFRE = 'ArimBalim2024!';
-
 export default function BalGorselYukle() {
-  const [girisYapildi, setGirisYapildi] = useState(false);
-  const [sifre, setSifre] = useState('');
-  const [sifreHata, setSifreHata] = useState(false);
+  // Yetki TAMAMEN sunucuda: yönetici olarak giriş yapmış oturum VEYA ADMIN_API_KEY gerekir.
+  // Anahtar yalnızca bellekte tutulur (depolanmaz, URL'ye yazılmaz); istek başlığında (x-admin-key) gönderilir.
+  const [adminAnahtar, setAdminAnahtar] = useState('');
   const [durumlar, setDurumlar] = useState<Record<string, string>>({});
   const [yukleniyor, setYukleniyor] = useState<string | null>(null);
-
-  function girisYap() {
-    if (sifre === ADMIN_SIFRE) {
-      setGirisYapildi(true);
-      setSifreHata(false);
-    } else {
-      setSifreHata(true);
-    }
-  }
 
   async function yukle(slug: string, file: File) {
     setYukleniyor(slug);
@@ -38,91 +27,22 @@ export default function BalGorselYukle() {
       const form = new FormData();
       form.append('slug', slug);
       form.append('file', file);
-      // Yetki artık sunucuda: yönetici olarak giriş yapmış oturum gerekir (şifre tarayıcı koduna gömülmez).
-      const res = await fetch('/api/bal/upload-gorsel', { method: 'POST', body: form });
-      const data = await res.json();
+      const headers: Record<string, string> = {};
+      if (adminAnahtar) headers['x-admin-key'] = adminAnahtar;
+      const res = await fetch('/api/bal/upload-gorsel', { method: 'POST', body: form, headers });
+      const data = await res.json().catch(() => ({}));
       if (data.success) {
         setDurumlar(d => ({ ...d, [slug]: '✅ Yüklendi' }));
+      } else if (res.status === 401) {
+        setDurumlar(d => ({ ...d, [slug]: '❌ Yetkisiz: yönetici hesabıyla giriş yapın veya admin anahtarını girin' }));
       } else {
-        setDurumlar(d => ({ ...d, [slug]: `❌ Hata: ${data.error}` }));
+        setDurumlar(d => ({ ...d, [slug]: `❌ Hata: ${data.error || 'Yükleme başarısız'}` }));
       }
     } catch (err: any) {
       setDurumlar(d => ({ ...d, [slug]: `❌ ${err.message}` }));
     } finally {
       setYukleniyor(null);
     }
-  }
-
-  // Giriş ekranı
-  if (!girisYapildi) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        background: '#FDF6E3',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'sans-serif',
-        padding: '2rem',
-      }}>
-        <div style={{
-          background: '#fff',
-          borderRadius: 20,
-          padding: '2.5rem 2rem',
-          boxShadow: '0 8px 32px rgba(28,15,0,.1)',
-          width: '100%',
-          maxWidth: 360,
-          textAlign: 'center',
-        }}>
-          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🍯</div>
-          <h1 style={{ fontFamily: 'serif', fontSize: '1.4rem', color: '#1C0F00', marginBottom: '0.3rem' }}>
-            Admin Girişi
-          </h1>
-          <p style={{ color: '#7A6040', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-            Arım Balım Çiçeğim
-          </p>
-          <input
-            type="password"
-            placeholder="Şifre"
-            value={sifre}
-            onChange={e => setSifre(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && girisYap()}
-            style={{
-              width: '100%',
-              padding: '0.8rem 1rem',
-              borderRadius: 10,
-              border: sifreHata ? '2px solid #e00' : '1.5px solid #E5E7EB',
-              fontSize: '1rem',
-              marginBottom: '0.5rem',
-              boxSizing: 'border-box',
-              outline: 'none',
-            }}
-          />
-          {sifreHata && (
-            <p style={{ color: '#e00', fontSize: '0.8rem', marginBottom: '0.8rem' }}>
-              ❌ Şifre yanlış
-            </p>
-          )}
-          <button
-            onClick={girisYap}
-            style={{
-              width: '100%',
-              background: '#D4870A',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 10,
-              padding: '0.9rem',
-              fontWeight: 700,
-              fontSize: '1rem',
-              cursor: 'pointer',
-              marginTop: '0.5rem',
-            }}
-          >
-            Giriş Yap
-          </button>
-        </div>
-      </div>
-    );
   }
 
   // Admin paneli
@@ -133,16 +53,18 @@ export default function BalGorselYukle() {
           <h1 style={{ fontFamily: 'serif', fontSize: '1.8rem', color: '#1C0F00' }}>
             🍯 Ürün Görselleri
           </h1>
-          <button
-            onClick={() => setGirisYapildi(false)}
-            style={{ background: 'transparent', border: '1px solid #ccc', borderRadius: 8, padding: '0.3rem 0.8rem', cursor: 'pointer', fontSize: '0.8rem', color: '#7A6040' }}
-          >
-            Çıkış
-          </button>
         </div>
-        <p style={{ color: '#7A6040', marginBottom: '2rem', fontSize: '0.9rem' }}>
-          Her ürün için fotoğraf seç — otomatik yüklenir.
+        <p style={{ color: '#7A6040', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          Her ürün için fotoğraf seç — otomatik yüklenir. Yönetici hesabıyla giriş yaptıysanız anahtar gerekmez.
         </p>
+        <input
+          type="password"
+          autoComplete="off"
+          placeholder="Admin anahtarı (isteğe bağlı)"
+          value={adminAnahtar}
+          onChange={e => setAdminAnahtar(e.target.value)}
+          style={{ width: '100%', padding: '0.7rem 1rem', borderRadius: 10, border: '1.5px solid #E5E7EB', fontSize: '0.9rem', marginBottom: '1.5rem', boxSizing: 'border-box' }}
+        />
 
         {URUNLER.map(urun => (
           <div key={urun.slug} style={{

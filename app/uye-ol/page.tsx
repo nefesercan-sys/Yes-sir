@@ -2,13 +2,14 @@
 import { useState, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { guvenliYol } from '@/lib/validate';
 
 // 🚨 SİBER DÜZELTME: Tüm üyelik mantığı ayrı bir bileşene alındı
 function UyeOlIcerik() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tip = searchParams.get('tip') || 'hizmet_alan';
-  const redirect = searchParams.get('redirect') || '/panel';
+  const redirect = guvenliYol(searchParams.get('redirect'), '/panel'); // yalnızca site içi yol (açık yönlendirme koruması)
 
   const [mod, setMod] = useState<'secim' | 'form'>('secim');
   const [uyeTip, setUyeTip] = useState(tip);

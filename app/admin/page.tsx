@@ -1,40 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-const SEKTORLER = [
-  { id:'turizm',   ad:'Turizm & Konaklama',    emoji:'🏨' },
-  { id:'seyahat',  ad:'Seyahat & Transfer',     emoji:'✈️' },
-  { id:'kiralama', ad:'Kiralama',               emoji:'🔑' },
-  { id:'tamir',    ad:'Tamir & Bakım',          emoji:'🔧' },
-  { id:'usta',     ad:'Usta & İşçi',            emoji:'👷' },
-  { id:'temizlik', ad:'Temizlik Hizmetleri',    emoji:'🧹' },
-  { id:'uretim',   ad:'Üretim & Özel Sipariş', emoji:'🏭' },
-  { id:'giyim',    ad:'Giyim & Tekstil',        emoji:'👗' },
-  { id:'saglik',   ad:'Sağlık & Güzellik',      emoji:'💊' },
-  { id:'egitim',   ad:'Eğitim & Danışmanlık',   emoji:'📚' },
-  { id:'etkinlik', ad:'Etkinlik & Düğün',       emoji:'🎊' },
-  { id:'mobilya',  ad:'Mobilya & Dekorasyon',   emoji:'🪑' },
-];
 
-const ENDUSTRIYEL_SEKTORLER = [
-  { id:'tekstil',     ad:'Tekstil & Hazır Giyim',  emoji:'👕' },
-  { id:'mermer-tas',  ad:'Mermer & Doğal Taş',     emoji:'🪨' },
-  { id:'metal-celik', ad:'Metal & Çelik',          emoji:'⚙️' },
-  { id:'plastik-pvc', ad:'Plastik & PVC',          emoji:'🧴' },
-  { id:'ahsap-mob',   ad:'Ahşap & Mobilya',        emoji:'🪵' },
-  { id:'gida-tarim',  ad:'Gıda & Tarım',           emoji:'🌾' },
-  { id:'insaat-malz', ad:'İnşaat Malzemeleri',     emoji:'🏗️' },
-  { id:'elektrik',    ad:'Elektrik & Enerji',      emoji:'⚡' },
-  { id:'makine',      ad:'Makine & Ekipman',       emoji:'🏭' },
-  { id:'lojistik',    ad:'Lojistik',               emoji:'🚢' },
-  { id:'kimya-boya',  ad:'Kimya & Boya',           emoji:'🧪' },
-  { id:'saglik-med',  ad:'Sağlık & Medikal',       emoji:'🏥' },
-];
 
-const SEHIRLER = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Rastgele'];
-const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-type Sekme = 'bireysel' | 'endustriyel' | 'sistem_ilanlari' | 'mesajlar' | 'sistem_ticaret' | 'uyeler' | 'istatistik';
+type Sekme = 'sistem_ilanlari' | 'mesajlar' | 'sistem_ticaret' | 'uyeler' | 'istatistik';
 
 interface Mesaj {
   _id: string;
@@ -66,7 +36,7 @@ const DURUM_RENK: Record<string, string> = {
 export default function AdminPage() {
   const [adminKey, setAdminKey] = useState('');
   const [giris,    setGiris]    = useState(false);
-  const [sekme,    setSekme]    = useState<Sekme>('bireysel');
+  const [sekme,    setSekme]    = useState<Sekme>('sistem_ilanlari');
 
   if (!giris) {
     return (
@@ -100,8 +70,6 @@ export default function AdminPage() {
         </div>
         <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
           {([
-            { k:'bireysel',        l:'🙋 Bireysel AI' },
-            { k:'endustriyel',     l:'🏭 Endüstriyel AI' },
             { k:'sistem_ilanlari', l:'📋 Tüm İlanlar' },
             { k:'mesajlar',        l:'📩 Gelen Talepler' },
             { k:'sistem_ticaret',  l:'💸 Üyeler Arası Ticaret' },
@@ -116,277 +84,11 @@ export default function AdminPage() {
             </button>
           ))}
         </div>
-        {sekme === 'bireysel'        && <BireyselIlanUretici    adminKey={adminKey} />}
-        {sekme === 'endustriyel'     && <EndustriyelIlanUretici adminKey={adminKey} />}
         {sekme === 'sistem_ilanlari' && <SistemIlanlariPaneli   adminKey={adminKey} />}
         {sekme === 'mesajlar'        && <MesajlarPaneli         adminKey={adminKey} />}
         {sekme === 'sistem_ticaret'  && <SistemTicaretPaneli    adminKey={adminKey} />}
         {sekme === 'uyeler'          && <UyelerPaneli           adminKey={adminKey} />}
         {sekme === 'istatistik'      && <IstatistikPaneli       adminKey={adminKey} />}
-      </div>
-    </div>
-  );
-}
-
-function BireyselIlanUretici({ adminKey }: { adminKey: string }) {
-  const [secilenSektor, setSecilenSektor] = useState('');
-  const [secilenSehir,  setSecilenSehir]  = useState('Rastgele');
-  const [adet,          setAdet]          = useState(5);
-  const [rolSecim,      setRolSecim]      = useState<'her-ikisi'|'veren'|'alan'>('her-ikisi');
-  const [yukleniyor,    setYukleniyor]    = useState(false);
-  const [sonuc,         setSonuc]         = useState<{ uretilen: number } | null>(null);
-  const [log,           setLog]           = useState<string[]>([]);
-
-  const addLog = (msg: string) => setLog(p => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...p]);
-
-  const handleUret = async () => {
-    if (!secilenSektor) return alert('Sektör seçiniz');
-    setYukleniyor(true); setSonuc(null);
-    addLog(`${secilenSektor} → ${rolSecim} için ${adet} ilan üretiliyor...`);
-    try {
-      const res = await fetch('/api/ai-ilan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sektorId: secilenSektor, sehir: secilenSehir === 'Rastgele' ? null : secilenSehir, adet, adminKey, tip: 'bireysel', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
-      });
-      const data = await res.json();
-      if (data.success) { setSonuc(data); addLog(`✅ ${data.uretilen} ilan oluşturuldu!`); }
-      else addLog(`❌ Hata: ${data.error}`);
-    } catch { addLog('❌ Bağlantı hatası'); }
-    setYukleniyor(false);
-  };
-
-  const handleTumSektorler = async () => {
-    if (!confirm('Tüm bireysel sektörler için ilan üretilecek. Devam?')) return;
-    let toplam = 0;
-    for (const s of SEKTORLER) {
-      addLog(`${s.emoji} ${s.ad} işleniyor...`);
-      try {
-        const res = await fetch('/api/ai-ilan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: null, adet: 5, adminKey, tip: 'bireysel', yapay: true }),
-        });
-        const data = await res.json();
-        if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }
-        else addLog(`❌ ${s.ad}: ${data.error}`);
-      } catch { addLog(`❌ ${s.ad}: bağlantı hatası`); }
-      await new Promise(r => setTimeout(r, 2000));
-    }
-    setSonuc({ uretilen: toplam });
-    addLog('🎉 Tüm sektörler tamamlandı!');
-  };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
-          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">İlan Rolü</label>
-          <div className="grid grid-cols-3 gap-2">
-            {([
-              { v:'her-ikisi', l:'🔄 Mix' },
-              { v:'veren',     l:'⚡ Veren' },
-              { v:'alan',      l:'🙋 Alan' },
-            ] as { v:'her-ikisi'|'veren'|'alan'; l:string }[]).map(({ v, l }) => (
-              <button key={v} onClick={() => setRolSecim(v)}
-                className={`p-2.5 rounded-xl text-xs font-bold transition-all text-center ${
-                  rolSecim === v ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
-                }`}>{l}</button>
-            ))}
-          </div>
-        </div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg h-[300px] overflow-y-auto">
-          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">Bireysel Sektör</label>
-          <div className="grid grid-cols-1 gap-2">
-            {SEKTORLER.map(s => (
-              <button key={s.id} onClick={() => setSecilenSektor(s.id)}
-                className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-3 ${
-                  secilenSektor === s.id ? 'bg-blue-600 text-white border border-blue-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500'
-                }`}>
-                <span className="text-xl">{s.emoji}</span>
-                <span className="text-xs">{s.ad}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Şehir</label>
-              <select value={secilenSehir} onChange={e => setSecilenSehir(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-                {SEHIRLER.map(s => <option key={s}>{s}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Adet</label>
-              <select value={adet} onChange={e => setAdet(Number(e.target.value))}
-                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-                {[3,5,10,15,20,50].map(n => <option key={n} value={n}>{n} ilan</option>)}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="flex gap-3 mb-4">
-          <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
-            className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-            {yukleniyor ? '⏳ Üretiliyor...' : '⚡ İlan Üret'}
-          </button>
-          <button onClick={handleTumSektorler} disabled={yukleniyor}
-            className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-            🚀 Tüm Sektörler
-          </button>
-        </div>
-        {sonuc && (
-          <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex items-center gap-3">
-            <span className="text-2xl">✅</span>
-            <p className="text-green-400 font-bold text-sm">{sonuc.uretilen} ilan başarıyla sisteme enjekte edildi.</p>
-          </div>
-        )}
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4 shadow-lg h-[200px] flex flex-col">
-          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 shrink-0">Terminal Log</p>
-          <div className="space-y-1.5 overflow-y-auto flex-1 pr-2">
-            {log.length === 0 ? <p className="text-gray-600 text-xs italic">Sistem hazır...</p> :
-             log.map((l, i) => <p key={i} className="text-gray-300 text-[11px] font-mono leading-tight">{l}</p>)}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EndustriyelIlanUretici({ adminKey }: { adminKey: string }) {
-  const [secilenSektor, setSecilenSektor] = useState('');
-  const [secilenUlke,   setSecilenUlke]   = useState('Rastgele');
-  const [adet,          setAdet]          = useState(5);
-  const [rolSecim,      setRolSecim]      = useState<'her-ikisi'|'veren'|'alan'>('her-ikisi');
-  const [yukleniyor,    setYukleniyor]    = useState(false);
-  const [sonuc,         setSonuc]         = useState<{ uretilen: number } | null>(null);
-  const [log,           setLog]           = useState<string[]>([]);
-
-  const addLog = (msg: string) => setLog(p => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...p]);
-
-  const handleUret = async () => {
-    if (!secilenSektor) return alert('Sektör seçiniz');
-    setYukleniyor(true); setSonuc(null);
-    addLog(`${secilenSektor} → ${rolSecim} için ${adet} endüstriyel ilan üretiliyor...`);
-    try {
-      const res = await fetch('/api/ai-ilan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sektorId: secilenSektor, sehir: 'Merkez', ulke: secilenUlke === 'Rastgele' ? null : secilenUlke, adet, adminKey, tip: 'ticari', rol: rolSecim === 'her-ikisi' ? undefined : rolSecim, yapay: true }),
-      });
-      const data = await res.json();
-      if (data.success) { setSonuc(data); addLog(`✅ ${data.uretilen} ilan oluşturuldu!`); }
-      else addLog(`❌ Hata: ${data.error}`);
-    } catch { addLog('❌ Bağlantı hatası'); }
-    setYukleniyor(false);
-  };
-
-  const handleTumSektorler = async () => {
-    if (!confirm(`Tüm endüstriyel sektörler için ${adet}er ilan üretilecek. Devam?`)) return;
-    let toplam = 0;
-    for (const s of ENDUSTRIYEL_SEKTORLER) {
-      addLog(`${s.emoji} ${s.ad} işleniyor...`);
-      try {
-        const res = await fetch('/api/ai-ilan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sektorId: s.id, sehir: 'Merkez', ulke: null, adet, adminKey, tip: 'ticari', yapay: true }),
-        });
-        const data = await res.json();
-        if (data.success) { toplam += data.uretilen; addLog(`✅ ${s.ad}: ${data.uretilen} ilan`); }
-        else addLog(`❌ ${s.ad}: ${data.error}`);
-      } catch { addLog(`❌ ${s.ad}: bağlantı hatası`); }
-      await new Promise(r => setTimeout(r, 2000));
-    }
-    setSonuc({ uretilen: toplam });
-    addLog('🎉 Tüm endüstriyel sektörler tamamlandı!');
-  };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
-          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">B2B Ticaret Rolü</label>
-          <div className="grid grid-cols-1 gap-2">
-            {([
-              { v:'her-ikisi', l:'🔄 Mix (Tedarik & Talep)', a:'Pazarı canlandırır' },
-              { v:'veren',     l:'🏭 Üretici / Tedarikçi',   a:'Müşteri çekmek için' },
-              { v:'alan',      l:'📦 Alıcı / İthalatçı',     a:'Tedarikçi çekmek için' },
-            ] as { v:'her-ikisi'|'veren'|'alan'; l:string; a:string }[]).map(({ v, l, a }) => (
-              <button key={v} onClick={() => setRolSecim(v)}
-                className={`p-3 rounded-xl text-xs font-bold transition-all text-left flex justify-between items-center ${
-                  rolSecim === v ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700'
-                }`}>
-                <span>{l}</span>
-                <span className="text-[10px] opacity-70 font-normal">{a}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg h-[300px] overflow-y-auto">
-          <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 block">Sanayi & Endüstri Sektörü</label>
-          <div className="grid grid-cols-1 gap-2">
-            {ENDUSTRIYEL_SEKTORLER.map(s => (
-              <button key={s.id} onClick={() => setSecilenSektor(s.id)}
-                className={`p-3 rounded-xl text-sm font-bold transition-all text-left flex items-center gap-3 ${
-                  secilenSektor === s.id ? 'bg-green-600 text-white border border-green-400' : 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-green-500'
-                }`}>
-                <span className="text-xl">{s.emoji}</span>
-                <span className="text-xs">{s.ad}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-4 shadow-lg">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Hedef Ülke</label>
-              <select value={secilenUlke} onChange={e => setSecilenUlke(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-                {ULKELER.map(u => <option key={u}>{u}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Adet</label>
-              <select value={adet} onChange={e => setAdet(Number(e.target.value))}
-                className="w-full bg-gray-800 border border-gray-600 text-white rounded-xl px-3 py-2.5 outline-none text-sm">
-                {[3,5,10,20,50].map(n => <option key={n} value={n}>{n} ilan</option>)}
-              </select>
-            </div>
-          </div>
-          <p className="text-yellow-500 text-[11px] mt-4 bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20 leading-relaxed">
-            ⚠️ <strong>Önemli:</strong> Bu ilanlar sisteme &quot;yapay&quot; olarak işlenir.
-          </p>
-        </div>
-        <div className="flex gap-3 mb-4">
-          <button onClick={handleUret} disabled={yukleniyor || !secilenSektor}
-            className="flex-1 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-            {yukleniyor ? '⏳ Üretiliyor...' : '🏭 Endüstriyel İlan Üret'}
-          </button>
-          <button onClick={handleTumSektorler} disabled={yukleniyor}
-            className="flex-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white py-4 rounded-xl font-black text-sm transition-all">
-            🚀 Tüm Sektörler
-          </button>
-        </div>
-        {sonuc && (
-          <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex items-center gap-3">
-            <span className="text-2xl">✅</span>
-            <p className="text-green-400 font-bold text-sm">{sonuc.uretilen} sanayi ilanı ağa eklendi.</p>
-          </div>
-        )}
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-4 shadow-lg h-[200px] flex flex-col">
-          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3 shrink-0">B2B Terminal Log</p>
-          <div className="space-y-1.5 overflow-y-auto flex-1 pr-2">
-            {log.length === 0 ? <p className="text-gray-600 text-xs italic">Sistem hazır...</p> :
-             log.map((l, i) => <p key={i} className="text-gray-300 text-[11px] font-mono leading-tight">{l}</p>)}
-          </div>
-        </div>
       </div>
     </div>
   );

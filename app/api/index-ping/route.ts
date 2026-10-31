@@ -1,7 +1,7 @@
 // app/api/index-ping/route.ts
 // Bu route'u deploy sonrası bir kez çağırın:
 // curl https://swaphubs.com/api/index-ping
-// VEYA tarayıcıdan açın — Google'a tüm yeni sayfaları bildirir
+// VEYA tarayıcıdan açın (yönetici oturumuyla) — Bing'e sitemap bildirir; Google için aşağıdaki Search Console adımı izlenir
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { NextRequest } from "next/server";
@@ -57,17 +57,7 @@ export async function GET(req: NextRequest) {
   if (guard) return guard;
   const results: { url: string; status: string }[] = [];
 
-  // Google Sitemap Ping
-  const sitemapPingUrl = `https://www.google.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
-  try {
-    const pingRes = await fetch(sitemapPingUrl, { method: "GET" });
-    results.push({
-      url: "sitemap-ping",
-      status: pingRes.ok ? "✅ ping gönderildi" : `❌ ${pingRes.status}`,
-    });
-  } catch (e) {
-    results.push({ url: "sitemap-ping", status: "❌ hata" });
-  }
+  // NOT: Google sitemap ping uç noktası kullanımdan kaldırıldı (404 döner); Google için Search Console kullanılır.
 
   // Bing Sitemap Ping
   const bingPing = `https://www.bing.com/ping?sitemap=https://swaphubs.com/sitemap.xml`;
@@ -101,7 +91,7 @@ export async function GET(req: NextRequest) {
 </head>
 <body>
   <h1>🔍 Google & Bing Index Ping</h1>
-  <p>swaphubs.com/terzi Türkçe ve Yabancı Dil sayfaları Google ve Bing'e bildirildi.</p>
+  <p>Sitemap Bing'e bildirildi. Google için aşağıdaki Search Console adımını izleyin (Google'ın sitemap ping uç noktası kaldırıldı).</p>
   <table>
     <thead><tr><th>Hedef</th><th>Durum</th></tr></thead>
     <tbody>

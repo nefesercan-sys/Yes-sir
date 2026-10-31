@@ -7,7 +7,6 @@ export const dynamic = 'force-dynamic';
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TUM_SEKTORLER } from "@/lib/sektorler";
 
 const BTN_SM = (bg: string, c: string) => ({
   padding: "6px 12px",
@@ -22,10 +21,8 @@ const BTN_SM = (bg: string, c: string) => ({
   transition: "all 0.15s",
 });
 
-const SEHIRLER = ['Rastgele','İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Mersin','Kayseri','Trabzon','Denizli'];
-const ULKELER  = ['Türkiye','Almanya','ABD','İngiltere','Fransa','Hollanda','BAE','Suudi Arabistan','Mısır','Nijerya','Hindistan','Rastgele'];
 
-type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "ai_ilan_bireysel" | "ai_ilan_ticari" | "tekstil_yonetim";
+type Tab = "ozet" | "ilanlarim" | "tekliflerim" | "gelenTeklifler" | "siparisler" | "mesajlar" | "bildirimler" | "profil" | "ayarlar" | "tekstil_yonetim";
 type Rol = "alan" | "veren";
 type Tip = "bireysel" | "ticari";
 
@@ -215,8 +212,6 @@ function PanelIcerik() {
     { key: "bildirimler", label: "Bildirimler", icon: "🔔", badge: stats.okunmamisBildirim },
     { key: "profil", label: "Profilim", icon: "🏢" },
     { key: "ayarlar", label: "Ayarlar", icon: "⚙️" },
-    { key: "ai_ilan_bireysel", label: "🤖 AI İlan (Bireysel)", icon: "⚡", adminOnly: true },
-    { key: "ai_ilan_ticari", label: "🤖 AI İlan (B2B)", icon: "🏭", adminOnly: true },
     { key: "tekstil_yonetim", label: "🧵 Tekstil Vitrini", icon: "👗", adminOnly: true },
   ];
 
@@ -686,16 +681,6 @@ function PanelIcerik() {
             </div>
           )}
 
-          {/* ── ADMIN: BİREYSEL AI İLAN MOTORU ── */}
-          {isAdmin && aktifTab === "ai_ilan_bireysel" && (
-            <AiIlanBileseni tip="bireysel" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'bireysel' || s.tip === 'both')} adminKey="" onSuccess={yukle} />
-          )}
-
-          {/* ── ADMIN: TİCARİ AI İLAN MOTORU ── */}
-          {isAdmin && aktifTab === "ai_ilan_ticari" && (
-            <AiIlanBileseni tip="ticari" sektorler={TUM_SEKTORLER.filter(s => s.tip === 'ticari' || s.tip === 'both')} adminKey="" onSuccess={yukle} />
-          )}
-
           {/* ── ADMIN: TEKSTİL VİTRİN YÖNETİMİ ── */}
           {isAdmin && aktifTab === "tekstil_yonetim" && (
             <TekstilYonetimBileseni onSuccess={yukle} />
@@ -707,100 +692,7 @@ function PanelIcerik() {
   );
 }
 
-const SEL: React.CSSProperties = { 
-  width: "100%", padding: "10px 12px", borderRadius: 10, 
-  border: "1.5px solid #e2e8f0", fontSize: 13, 
-  fontFamily: "inherit", background: "#fff", outline: "none" 
-};
 
-function AiIlanBileseni({ tip, sektorler, adminKey, onSuccess }: { tip: string, sektorler: any[], adminKey: string, onSuccess: () => void }) {
-  const [secilenSektor, setSecilenSektor] = useState("");
-  const [rol, setRol] = useState("her-ikisi");
-  const [ulke, setUlke] = useState("Türkiye"); 
-  const [sehir, setSehir] = useState("Rastgele");
-  const [adet, setAdet] = useState(5);
-  const [yukleniyor, setYukleniyor] = useState(false);
-  const [sonuc, setSonuc] = useState("");
-
-  const uret = async () => {
-    if (!secilenSektor) return alert("Sektör seçin");
-    setYukleniyor(true); setSonuc("");
-    try {
-      const res = await fetch("/api/ai-ilan", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sektorId: secilenSektor, adet, tip, adminKey,
-          rol: rol === "her-ikisi" ? undefined : rol,
-          ulke: ulke === "Rastgele" ? null : ulke,
-          sehir: sehir === "Rastgele" ? null : sehir,
-          yapay: true
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSonuc(`✅ ${data.uretilen} adet ${tip} ilan ağa eklendi.`);
-        onSuccess();
-      } else setSonuc(`❌ Hata: ${data.error}`);
-    } catch { setSonuc("❌ Bağlantı hatası"); }
-    setYukleniyor(false);
-  };
-
-  return (
-    <div className="card">
-      <p className="sttl">{tip === 'ticari' ? '🏭 Endüstriyel B2B AI Motoru' : '🙋 Bireysel AI İlan Motoru'}</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
-        <div>
-          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Rolü</label>
-          <select value={rol} onChange={e => setRol(e.target.value)} style={SEL}>
-            <option value="her-ikisi">🔄 Mix (Hem Alan Hem Veren)</option>
-            <option value="veren">💼 Sadece Hizmet/Ürün Veren</option>
-            <option value="alan">🛒 Sadece Hizmet/Ürün Alan</option>
-          </select>
-        </div>
-        <div>
-          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Sektör</label>
-          <select value={secilenSektor} onChange={e => setSecilenSektor(e.target.value)} style={SEL}>
-            <option value="">-- Sektör Seçin --</option>
-            {sektorler.map(s => <option key={s.id} value={s.id}>{s.emoji} {s.ad}</option>)}
-          </select>
-        </div>
-      </div>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginBottom: 20 }}>
-        <div>
-          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Ülke</label>
-          <select value={ulke} onChange={e => {
-              setUlke(e.target.value);
-              if(e.target.value !== 'Türkiye') setSehir('Rastgele'); 
-          }} style={SEL}>
-            {ULKELER.map(u => <option key={u} value={u}>{u}</option>)}
-          </select>
-        </div>
-
-        {ulke === 'Türkiye' && (
-          <div>
-            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>Şehir</label>
-            <select value={sehir} onChange={e => setSehir(e.target.value)} style={SEL}>
-              {SEHIRLER.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-          </div>
-        )}
-
-        <div>
-          <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", display: "block", marginBottom: 5 }}>İlan Sayısı: {adet}</label>
-          <input type="range" min={1} max={30} value={adet} onChange={e => setAdet(Number(e.target.value))} style={{ width: '100%', marginTop: 8 }} />
-        </div>
-      </div>
-
-      <button onClick={uret} disabled={yukleniyor || !secilenSektor} style={{ width: "100%", padding: "14px", borderRadius: 10, background: yukleniyor ? "#94a3b8" : "#7c3aed", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: yukleniyor ? "not-allowed" : "pointer" }}>
-        {yukleniyor ? "⏳ Claude AI Düşünüyor..." : "⚡ Ağa İlan Bas"}
-      </button>
-      {sonuc && <div style={{ marginTop: 16, padding: 12, borderRadius: 8, background: sonuc.includes('❌') ? '#fef2f2' : '#ecfdf5', color: sonuc.includes('❌') ? '#dc2626' : '#059669', fontSize: 13, fontWeight: 700 }}>{sonuc}</div>}
-    </div>
-  );
-}
-
-// ── TEKSTİL YÖNETİM BİLEŞENİ (ÇOKLU DOSYA DESTEKLİ) ──────────
 function TekstilYonetimBileseni({ onSuccess }: { onSuccess: () => void }) {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [sonuc, setSonuc] = useState("");
