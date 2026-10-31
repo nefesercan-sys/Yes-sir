@@ -1,6 +1,7 @@
 import { PROMO_ALL } from '@/lib/intl-promo';
 import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
 import { jsonLdString } from '@/lib/json-ld';
+import OrnekGorseller from '@/components/tekstil/OrnekGorseller';
 
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
@@ -83,6 +84,8 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
             </div>
           </section>
         )}
+
+        <OrnekGorseller topic={topic} lang={lang} url={url} base={BASE} />
 
         <section id="sik-sorulan-sorular" style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '.9rem' }}>{ui.faq}</h2>
