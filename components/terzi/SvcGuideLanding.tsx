@@ -4,6 +4,7 @@ import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { INTL, iUrl, type ILang } from '@/lib/intl';
 import { SVCG, svcgUrl } from '@/lib/intl-svc';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
+import { jsonLdString } from '@/lib/json-ld';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -33,7 +34,7 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
   const g = INTL[lang]; const c = SVCG[lang];
   return (
     <main lang={lang} dir={g.dir} style={{ fontFamily: 'system-ui,sans-serif', background: C.cream, color: '#3A3028', minHeight: '100vh', lineHeight: 1.7 }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(svcgJsonLd(lang)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(svcgJsonLd(lang)) }} />
 
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>

@@ -3,6 +3,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bay-terzi-antalya';
 const PARENT = 'https://swaphubs.com/terzi';
@@ -69,12 +70,12 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Pantolon / Paça Kısaltma', '₺200', '1–2 gün'],
-  ['Pantolon Bel Daraltma', '₺200', '48 saat'],
-  ['Ceket Kol Kısaltma', '₺200', '48 saat'],
-  ['Ceket Beden Küçültme', '₺350', '48 saat'],
-  ['Erkek Pantolon Dikimi', '₺600', '3–5 gün'],
-  ['Damatlık Takım Elbise', '₺3.000', '7–10 gün'],
+  ['Pantolon / Paça Kısaltma', '₺200', 'Ertesi gün'],
+  ['Pantolon Bel Daraltma', '₺200', 'Ertesi gün'],
+  ['Ceket Kol Kısaltma', '₺200', 'Ertesi gün'],
+  ['Ceket Beden Küçültme', '₺350', 'Ertesi gün'],
+  ['Erkek Pantolon Dikimi', '₺600', 'Modele ve adede göre'],
+  ['Damatlık Takım Elbise', '₺3.000', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];
 
@@ -83,7 +84,7 @@ const s = { fontFamily: "'Jost',system-ui,sans-serif" as const };
 export default function BayTerziPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ ...s, background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         <SpeakableSchema path="/terzi/bay-terzi-antalya" />
@@ -189,7 +190,7 @@ export default function BayTerziPage() {
               </p>
               <p>
                 <strong>Erkek pantolon tadilat ve kısaltmada</strong> paça kısaltma, bel daraltma, ağ dikimi
-                ve fermuar değişimi yapılmaktadır. Tüm işlemler 24–48 saat içinde tamamlanmaktadır.
+                ve fermuar değişimi yapılmaktadır. Tüm işlemler ertesi gün teslim edilir; acil işler 1–2 saatte tamamlanır.
               </p>
             </div>
           </div>
@@ -202,7 +203,7 @@ export default function BayTerziPage() {
               ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ₺200'den başlar. Takım elbise, gömlek, blazer ve smoking dikim fiyatı kumaş ve modele göre belirlenir; fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
               ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise dikimi; fiyat kumaş ve modele göre belirlenir. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
               ['Damatlık dikimi Antalya fiyatı?', `Damatlık ₺3.000'den başlar. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
-              ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. 24–48 saat teslim.'],
+              ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. Ertesi gün teslim; acilse 1–2 saat.'],
               ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
             ].map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>
@@ -217,7 +218,7 @@ export default function BayTerziPage() {
 
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Erkek Kıyafet Fiyatı Öğrenin</h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — 30 dk fiyat · Konyaaltı'nda servis ücretsiz</p>
+          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis ücretsiz</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, erkek kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
               style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>

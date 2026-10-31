@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/dikis-atolyesi-antalya';
 const PARENT   = 'https://swaphubs.com/terzi';
@@ -18,7 +18,6 @@ const jsonLd = {
   '@graph': [
     {
       '@type': ['LocalBusiness', 'ClothingStore'],
-      ...reviewSchema(),
       '@id': `${PARENT}#business`,
       name: 'Terzi Can',
       telephone: PHONE_E,
@@ -115,7 +114,7 @@ export const metadata: Metadata = {
 
 const HIZMETLER = [
   { ic: '📐', baslik: 'Kalıp Çıkarma & Gradaj', aciklama: 'Tasarım dosyasından veya referans üründen teknik kalıp çıkarma. XS–3XL beden gradajı. CAD destekli kalıp.' },
-  { ic: '🧵', baslik: 'Numune & Prototip Dikimi', aciklama: 'Prototip ve onay numunesi dikimi. Tek adet sipariş kabul edilir. 5–7 iş günü teslim.' },
+  { ic: '🧵', baslik: 'Numune & Prototip Dikimi', aciklama: 'Prototip ve onay numunesi dikimi. Tek adet sipariş kabul edilir. Teslim süresi modele ve adede göre belirlenir.' },
   { ic: '✂️', baslik: 'Fason Üretim (adet projeye göre)', aciklama: 'Kesim + dikim + overlok + ütü + paket dahil tam seri üretim. Hız ve kalite odaklı çalışırız.' },
   { ic: '🏭', baslik: 'Büyük Seri İmalat', aciklama: '500+ adet büyük sipariş kapasitesi. İş planı, süreç takibi ve kalite kontrolü dahil.' },
   { ic: '🪡', baslik: 'Nakış & Dijital Baskı', aciklama: 'Logo nakışı, isim baskısı, serigrafi, DTF & dijital baskı. Sweatshirt, polo, t-shirt ve tüm kıyafetler.' },
@@ -140,7 +139,7 @@ const SUREC = [
 export default function DikisAtölyesiPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ fontFamily: "'Jost',system-ui,sans-serif", background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         {/* BREADCRUMB */}

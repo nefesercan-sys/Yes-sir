@@ -5,6 +5,7 @@ import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { ILANGS, INTL, NB, NB_DISTRICT, iUrl, type ILang } from '@/lib/intl';
 import { ZCOPY, ZONE_SLUGS, zoneData, zoneUrl } from '@/lib/intl-zones';
 import { SVCG, svcgUrl } from '@/lib/intl-svc';
+import { jsonLdString } from '@/lib/json-ld';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -38,7 +39,7 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
   const wa = waLink(c.wa);
   return (
     <main lang={lang} dir={c.dir} style={{ fontFamily: 'system-ui,sans-serif', background: C.cream, color: '#3A3028', minHeight: '100vh', lineHeight: 1.7 }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(intlJsonLd(lang)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(intlJsonLd(lang)) }} />
 
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>

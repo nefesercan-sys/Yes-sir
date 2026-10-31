@@ -12,6 +12,7 @@ import type { Metadata } from 'next'
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import AtelieClient from './client'
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com'
 const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
@@ -200,8 +201,8 @@ const jsonLd = {
         },
         {
           '@type': 'Question',
-          name: 'Моё платье порвалось, можете почитить в тот же день?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, большинство разрывов и распоротых швов чинится в тот же день. Отправьте фото в WhatsApp для быстрой оценки. WhatsApp: ${PHONE}` },
+          name: 'Моё платье порвалось, можно починить срочно?',
+          acceptedAnswer: { '@type': 'Answer', text: `Да, срочный ремонт разрывов и швов занимает 1–2 часа, обычный — готов на следующий день. Отправьте фото в WhatsApp для быстрой оценки. WhatsApp: ${PHONE}` },
         },
         {
           '@type': 'Question',
@@ -213,10 +214,10 @@ const jsonLd = {
           name: 'Шьёте ли вы из натуральных тканей — хлопка или льна?',
           acceptedAnswer: { '@type': 'Answer', text: `Да, предлагаем пошив одежды на заказ из 100% хлопка и льна. WhatsApp: ${PHONE}` },
         },
-        { '@type': 'Question', name: "Где в Анталье подшить брюки рядом со мной?", acceptedAnswer: { '@type': 'Answer', text: `В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов от ₺200, обычно в тот же день или обычно за 1–2 дня. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: "Где в Анталье подшить брюки рядом со мной?", acceptedAnswer: { '@type': 'Answer', text: `В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов от ₺200, готово на следующий день, срочно — за 1–2 часа. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: "Сколько стоит подшив и замена молнии в Анталье?", acceptedAnswer: { '@type': 'Answer', text: `Подшив от ₺200, ушивание по талии от ₺200, замена молнии от ₺300, подгонка свадебного платья от ₺800 (цены 2026). Точную цену назовём по фото в WhatsApp.` } },
         { '@type': 'Question', name: "Вы переделываете куртки, пальто, рубашки, юбки и шорты?", acceptedAnswer: { '@type': 'Answer', text: `Да. Переделываем и ремонтируем куртки, пальто, рубашки, юбки, шорты, платья и брюки, мужские и женские. Пришлите фото вещи в WhatsApp — назовём цену и срок.` } },
-        { '@type': 'Question', name: "Я живу в отеле всего несколько дней. Успеете?", acceptedAnswer: { '@type': 'Answer', text: `Да. Подшив и ремонт обычно готовы в тот же день или обычно за 1–2 дня; заберём вещи из отеля и вернём обратно (бесплатно в Коньяалты, в другие районы — стоимость по расстоянию).` } },
+        { '@type': 'Question', name: "Я живу в отеле всего несколько дней. Успеете?", acceptedAnswer: { '@type': 'Answer', text: `Да. Подшив и ремонт готовы на следующий день, срочно — за 1–2 часа; забор из отеля и доставка обратно бесплатны во всех отельных районах.` } },
       ],
     },
   ],
@@ -227,7 +228,7 @@ export default function AtelieAntalyaPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/ru/atelie-antalya" />
       <QuickActionBanner lang="ru" />

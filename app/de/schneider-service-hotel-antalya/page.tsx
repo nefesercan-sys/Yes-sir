@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewSchema } from '@/lib/reviews';
+import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/de/schneider-service-hotel-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -73,9 +74,9 @@ const jsonLd = {
         { '@type':'Question', name:'Welche Hotels in Belek und Lara werden bedient?',
           acceptedAnswer:{'@type':'Answer',text:`Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
-          acceptedAnswer:{'@type':'Answer',text:`Der Besuch in Konyaaltı ist kostenlos, in anderen Gebieten richtet sich das Entgelt nach der Entfernung — dazu zahlen Sie die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; einfache Arbeiten sind je nach Auslastung oft in ein bis zwei Tagen fertig. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am nächsten Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
           acceptedAnswer:{'@type':'Answer',text:`Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`} },
       ],
@@ -103,10 +104,8 @@ export const metadata: Metadata = {
     'Schneider Kemer Hotel','Änderungsschneiderei Antalya',
     'Kleid ändern Antalya Hotel','Anzug ändern Antalya',
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': TR_URL, 'en': EN_URL, 'ru': RU_URL, 'de': SITE_URL, 'x-default': TR_URL },
-  },
+  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  alternates: { canonical: crossCanonical('/de/schneider-service-hotel-antalya')! },
   openGraph: {
     title: 'Mobiler Schneider Antalya · Schneiderservice im Hotel',
     description: 'Mobiler Schneiderservice zu Ihrem Hotel in Belek, Lara, Kemer und ganz Antalya.',
@@ -129,7 +128,7 @@ const DISTRICTS = [
 export default function SchneiderServiceHotelAntalyaPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         <SpeakableSchema path="/de/schneider-service-hotel-antalya" />
@@ -264,7 +263,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Preise für mobilen Schneider / Hotelservice
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Besuch in Konyaaltı kostenlos, andere Gebiete je nach Entfernung — dazu die Schneiderarbeit</p>
+            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotelbesuch in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -275,18 +274,18 @@ export default function SchneiderServiceHotelAntalyaPage() {
               </thead>
               <tbody>
                 {[
-                  ['Anfahrt','Konyaaltı kostenlos','—'],
-                  ['Hosen kürzen','ab ₺200','24 Std'],
-                  ['Reißverschluss wechseln','ab ₺300','Am selben Tag'],
-                  ['Kleid / Jacke enger machen','ab ₺200','48 Std'],
-                  ['Ärmel kürzen','ab ₺200','48 Std'],
-                  ['Abendkleid reparieren','ab ₺800','48 Std'],
-                  ['Brautkleid ändern','ab ₺800','3–5 Tage'],
-                  ['Riss reparieren','ab ₺100','Am selben Tag'],
+                  ['Anfahrt','Kostenlos','—'],
+                  ['Hosen kürzen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
+                  ['Reißverschluss wechseln','ab ₺300','Nächster Tag · eilig 1–2 Std.'],
+                  ['Kleid / Jacke enger machen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
+                  ['Ärmel kürzen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
+                  ['Abendkleid reparieren','ab ₺800','Nächster Tag · eilig 1–2 Std.'],
+                  ['Brautkleid ändern','ab ₺800','Nächster Tag · eilig 1–2 Std.'],
+                  ['Riss reparieren','ab ₺100','Nächster Tag · eilig 1–2 Std.'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='Konyaaltı kostenlos'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='Kostenlos'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#7A6E62', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
@@ -302,7 +301,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h2>
             {[
               ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
-              ['Ist der Hausbesuch kostenlos?', 'In Konyaaltı ist der Besuch kostenlos, in anderen Gebieten richtet sich das Entgelt nach der Entfernung — dazu zahlen Sie die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200.'],
+              ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200.'],
               ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
               ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
@@ -364,7 +363,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
           </div>
         </section>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164, ...reviewSchema() }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164 }) }} />
       <ReviewsBlock lang="de" />
     </>
   );

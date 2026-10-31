@@ -8,8 +8,9 @@ export type Topic = 'keten' | 'tekstil' | 'promo' | TatilTopic;
 export const isTatil = (t: Topic): t is TatilTopic => t === 'acil' || t === 'otel' || t === 'etkinlik';
 export const RELATED = (t: Topic): Topic => (isTatil(t) ? TATIL_NEXT[t] : t === 'keten' || t === 'promo' ? 'tekstil' : 'keten');
 export const LANGS: Lang[] = ['tr', 'en', 'ru', 'de'];
-export const BASE = 'https://swaphubs.com';
-export const WA_NUMBER = '905318986418';
+import { SITE_URL, WA_NUMBER as WA_NUM } from '@/lib/business';
+export const BASE = SITE_URL;
+export const WA_NUMBER = WA_NUM;
 
 export const URLS: Record<Topic, Record<Lang, string>> = {
   ...TATIL_URLS,
@@ -276,8 +277,8 @@ export const CONTENT: Record<Topic, Record<Lang, Page>> = {
       note: 'Time and price are settled per order; product, model and print are chosen together.', foot: 'Anavera Tekstil · Antalya, Türkiye',
     },
     ru: {
-      t: 'Рекламный текстиль и сумки-шопперы с печатью: как планировать',
-      d: 'Как спланировать рекламный текстиль для выставок и мероприятий: шопперы, футболки, флисовые жилеты, униформа, файл логотипа, печать и порядок заказа.',
+      t: 'Рекламный текстиль и шопперы с печатью: как планировать',
+      d: 'Как спланировать рекламный текстиль для выставок и мероприятий: шопперы, футболки, жилеты, униформа, логотип, печать и заказ.',
       h1: 'Рекламный текстиль и сумки-шопперы с логотипом для выставок и мероприятий: как всё спланировать',
       badge: 'Anavera Tekstil · Анталья, Турция',
       lead: 'Когда готовите текстиль с логотипом к выставке или мероприятию, больше всего времени экономит правильный порядок: сначала изделия, затем файл логотипа, затем печать. Эта страница описывает такой порядок. Производство у нас в Анталье.',

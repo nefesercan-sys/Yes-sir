@@ -7,8 +7,6 @@ export default function robots(): MetadataRoute.Robots {
     '/admin/',
     '/admin-ai/',
     '/api/',
-    '/profil/',
-    '/bildirimler/',
     '/online-terzi-hizmeti/client',
     '/bal/gorsel-yukle',
     '/*?*sort=',

@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { OTEL_BOLGELERI, bulOtelBolgesi } from '@/lib/otel-bolgeleri';
 import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
+import { jsonLdString } from '@/lib/json-ld';
 
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
@@ -39,16 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
       'mobile tailor Antalya', 
       'English speaking tailor Antalya'
     ],
-    alternates: {
-      canonical: url,
-      languages: {
-        'tr': `${HOME_URL}/terzi/otele-gelen-terzi-antalya/${r.slug}`,
-        'en': url,
-        'ru': `${HOME_URL}/ru/vyezdnoy-portnoy-antalya/${r.slug}`,
-        'de': `${HOME_URL}/de/schneider-service-hotel-antalya/${r.slug}`,
-        'x-default': url,
-      },
-    },
+    // terzihizmeti.com.tr'de birebir aynı bölge sayfası → cross-domain canonical (hreflang kümesi yok)
+    alternates: { canonical: crossCanonical(`${BASE_PATH}/${r.slug}`) ?? url },
     openGraph: { title, description: desc, url, type: 'website', locale: 'en_US', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Tailor in ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
@@ -95,7 +89,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
           {
             '@type': 'Question',
             name: `How long do alterations take for hotel guests?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Delivery time depends on the job and our workload; simple alterations are often ready within a day or two. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Regular alterations are ready the next day and urgent jobs in 1–2 hours. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
           },
         ],
       },
@@ -104,7 +98,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path={`${BASE_PATH}/${r.slug}`} />
       <QuickActionBanner lang="en" variant="hotel-service" />
       <OtelBolgeSayfasi 

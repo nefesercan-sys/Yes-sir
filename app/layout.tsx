@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/app/components/AuthProvider";
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og/swaphubs-og.jpg",
+        url: "https://swaphubs.com/swaphubs-og.jpg",
         width: 1200,
         height: 630,
         alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
     title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
     description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
     site: "@swaphubs",
-    images: ["https://swaphubs.com/og/swaphubs-og.jpg"],
+    images: ["https://swaphubs.com/swaphubs-og.jpg"],
   },
 
   robots: {
@@ -101,15 +102,22 @@ export const metadata: Metadata = {
 
 type Props = {
   children: React.ReactNode;
-  params: { locale?: string };
 };
 
-export default function RootLayout({ children, params }: Props) {
-  const lang = params?.locale || "tr";
+export default function RootLayout({ children }: Props) {
+  // Dil, middleware'in x-lang başlığından gelir (ham HTML'de doğru <html lang>).
+  let lang = "tr";
+  try {
+    const h = headers().get("x-lang");
+    if (h && /^(tr|en|ru|de|es|fr|pl|uk|nl|ar)$/.test(h)) lang = h;
+  } catch {
+    // statik üretimde başlık yok: varsayılan tr
+  }
 
   return (
     <html
       lang={lang}
+      dir={lang === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
       className={`${jakarta.variable} ${unbounded.variable}`}
     >

@@ -59,11 +59,18 @@ function IlanDetayIcerik() {
     return () => clearTimeout(t);
   }, [toast]);
 
+  useEffect(() => {
+    if (!silOnay) return;
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setSilOnay(false); };
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  }, [silOnay]);
+
   const handleSil = async () => {
     setSiliyor(true);
     try {
       const res = await fetch(`/api/ilanlar/${ilanId}`, { method: "DELETE" });
-      if (res.ok) router.push("/profil?silindi=1");
+      if (res.ok) router.push("/panel?silindi=1");
       else { const d = await res.json(); setHata(d.error || "Silme başarısız."); setSilOnay(false); }
     } catch { setHata("Bağlantı hatası."); setSilOnay(false); }
     setSiliyor(false);
@@ -118,7 +125,6 @@ function IlanDetayIcerik() {
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 100 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
         *{box-sizing:border-box}
         @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         @keyframes spin{to{transform:rotate(360deg)}}
@@ -259,7 +265,7 @@ function IlanDetayIcerik() {
       </div>
 
       {silOnay && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
+        <div role="dialog" aria-modal="true" aria-label="Silme onayı" style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
           <div style={{ background: "#fff", borderRadius: 20, padding: 24, width: "100%", maxWidth: 420, animation: "fadeIn .2s ease" }}>
             <p style={{ fontSize: 24, textAlign: "center", marginBottom: 8 }}>🗑️</p>
             <h3 style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", textAlign: "center", marginBottom: 8, fontFamily: "Unbounded, sans-serif" }}>İlanı Sil?</h3>

@@ -6,6 +6,7 @@ export const revalidate = 86400
 const BASE_URL = 'https://swaphubs.com'
 const SLUG_REGEX = /^[a-z0-9-]+$/i
 const D = new Date('2026-10-02')
+const D_YENI = new Date('2026-10-30') // bu turda içeriği/başlığı değişen sayfalar
 
 async function getBalUrunler() {
   try {
@@ -46,10 +47,9 @@ function toDate(val: any, fallback = '2026-09-20'): Date {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 🔽 TERZİ DIŞI GENEL SAYFALAR (Arka Plan - Düşük Öncelik)
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL,                 lastModified: D, changeFrequency: 'weekly',  priority: 0.40 },
-    { url: `${BASE_URL}/ilanlar`,    lastModified: D, changeFrequency: 'monthly', priority: 0.20 },
-    { url: `${BASE_URL}/ilan`,       lastModified: D, changeFrequency: 'monthly', priority: 0.20 },
-    { url: `${BASE_URL}/bal`,        lastModified: D, changeFrequency: 'monthly', priority: 0.50 },
+    { url: BASE_URL,                 lastModified: D_YENI, changeFrequency: 'weekly',  priority: 0.40 },
+    { url: `${BASE_URL}/ilanlar`,    lastModified: D_YENI, changeFrequency: 'monthly', priority: 0.20 },
+    { url: `${BASE_URL}/bal`,        lastModified: D_YENI, changeFrequency: 'monthly', priority: 0.50 },
   ]
 
   const ilanlar = await getIlanlar()

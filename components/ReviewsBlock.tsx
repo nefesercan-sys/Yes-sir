@@ -3,18 +3,19 @@
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
 
 type L = 'tr' | 'en' | 'ru' | 'de';
+const hasLang = (x: string | string[], l: string) => (Array.isArray(x) ? x.includes(l) : x === l);
 const T = {
-  tr: { h: 'Müşteri Yorumları', on: "Google'da", rev: 'yorum', all: "Tüm yorumları Google'da gör" },
-  en: { h: 'Customer Reviews', on: 'on Google', rev: 'reviews', all: 'See all reviews on Google' },
-  ru: { h: 'Отзывы клиентов', on: 'в Google', rev: 'отзывов', all: 'Все отзывы в Google' },
-  de: { h: 'Kundenbewertungen', on: 'bei Google', rev: 'Bewertungen', all: 'Alle Bewertungen bei Google ansehen' },
+  tr: { h: 'Müşteri Yorumları', on: "Google'da", rev: 'yorum', all: "Tüm yorumları Google'da gör", shown: (n: number, c: number) => `Google profilinde ${c} yorum var; metni doğrulanmış ${n} tanesi burada gösteriliyor.` },
+  en: { h: 'Customer Reviews', on: 'on Google', rev: 'reviews', all: 'See all reviews on Google', shown: (n: number, c: number) => `The Google profile has ${c} reviews; the ${n} with verified text are shown here.` },
+  ru: { h: 'Отзывы клиентов', on: 'в Google', rev: 'отзывов', all: 'Все отзывы в Google', shown: (n: number, c: number) => `В профиле Google ${c} отзывов; здесь показаны ${n} с проверенным текстом.` },
+  de: { h: 'Kundenbewertungen', on: 'bei Google', rev: 'Bewertungen', all: 'Alle Bewertungen bei Google ansehen', shown: (n: number, c: number) => `Das Google-Profil hat ${c} Bewertungen; ${n} mit geprüftem Text werden hier gezeigt.` },
 } as const;
 
-export default function ReviewsBlock({ lang = 'tr' }: { lang?: L }) {
-  const t = T[lang] ?? T.en;
+export default function ReviewsBlock({ lang = 'tr' }: { lang?: L | string }) {
+  const t = T[(lang in T ? lang : 'en') as L];
   const { count, average } = reviewStats();
   // Sayfa dilindeki yorumlar önce
-  const list = [...GOOGLE_REVIEWS].sort((a, b) => Number(b.lang === lang) - Number(a.lang === lang));
+  const list = [...GOOGLE_REVIEWS].sort((a, b) => Number(hasLang(b.lang, lang)) - Number(hasLang(a.lang, lang)));
   return (
     <section
       id="musteri-yorumlari"
@@ -24,6 +25,7 @@ export default function ReviewsBlock({ lang = 'tr' }: { lang?: L }) {
       <p style={{ fontSize: 14, margin: '0 0 14px', opacity: 0.85 }}>
         <span aria-hidden="true" style={{ color: '#f5a623' }}>★★★★★</span> {average} · {count} {t.rev} {t.on}
       </p>
+      <p style={{ fontSize: 12, margin: '-8px 0 14px', opacity: 0.7 }}>{t.shown(list.length, count)}</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 12 }}>
         {list.map(r => (
           <figure key={r.author + r.date} style={{ margin: 0, border: '1px solid rgba(128,128,128,.35)', borderRadius: 12, padding: 14 }}>

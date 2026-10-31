@@ -8,7 +8,9 @@
 // Puan/yorum: varsayılan YOK. Sadece gerçek yorumlar `reviews` ile verilirse eklenir
 // (en az 1 gerçek yorum; puan verilen yorumlardan hesaplanır, uydurma sayı yok).
 // ============================================================
-import { BUSINESS, SITE_URL } from '@/lib/business';
+import { BUSINESS, SITE_URL, areaServedSchema } from '@/lib/business';
+import { jsonLdString } from '@/lib/json-ld';
+import { reviewStats } from '@/lib/reviews';
 
 type Crumb = { name: string; path: string };
 type Faq = { q: string; a: string };
@@ -73,7 +75,8 @@ export default function BusinessSchema({
     ],
   };
 
-  if (areaServed?.length) business.areaServed = areaServed.map(n => ({ '@type': 'City', name: n }));
+  // areaServed: verilmezse tek kaynaktaki hizmet bölgeleri (Konyaaltı, Muratpaşa, Lara, Belek, Side/Manavgat, Kemer, Antalya)
+  business.areaServed = areaServed?.length ? areaServed.map(n => ({ '@type': 'Place', name: n })) : areaServedSchema();
   if (catalog) {
     business.hasOfferCatalog = {
       '@type': 'OfferCatalog',
@@ -87,9 +90,10 @@ export default function BusinessSchema({
     };
   }
 
+  // Yorum işaretlemesi yalnızca yorumların sayfada GÖRÜNÜR olduğu sayfalarda (ReviewsBlock) `reviews` ile verilir.
+  // aggregateRating Google profilindeki toplamı yansıtır (lib/reviews.ts GOOGLE_PROFILE_STATS) — listedeki 8 metinden hesaplanmaz.
   const real = (reviews ?? []).filter(r => r.author && r.text && r.rating >= 1 && r.rating <= 5);
   if (real.length > 0) {
-    const avg = real.reduce((s, r) => s + r.rating, 0) / real.length;
     business.review = real.map(r => ({
       '@type': 'Review',
       author: { '@type': 'Person', name: r.author },
@@ -97,10 +101,11 @@ export default function BusinessSchema({
       reviewBody: r.text,
       ...(r.date ? { datePublished: r.date } : {}),
     }));
+    const stats = reviewStats();
     business.aggregateRating = {
       '@type': 'AggregateRating',
-      ratingValue: avg.toFixed(1),
-      reviewCount: String(real.length),
+      ratingValue: stats.average,
+      reviewCount: String(Math.max(stats.count, real.length)),
       bestRating: '5',
     };
   }
@@ -151,7 +156,7 @@ export default function BusinessSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }) }}
+      dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@graph': graph }) }}
     />
   );
 }

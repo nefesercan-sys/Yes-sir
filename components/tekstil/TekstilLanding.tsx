@@ -1,5 +1,6 @@
 import { PROMO_ALL } from '@/lib/intl-promo';
 import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
+import { jsonLdString } from '@/lib/json-ld';
 
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
@@ -34,7 +35,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
   const ink = '#0F172A', gold = '#C9A227';
   return (
     <div lang={lang} style={{ fontFamily: 'system-ui, -apple-system, sans-serif', backgroundColor: '#F8FAFC', color: ink }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <header style={{ backgroundColor: ink, borderBottom: `2px solid ${gold}` }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: '.9rem 1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           <a href={BASE} style={{ color: '#fff', fontWeight: 800, textDecoration: 'none' }}>{ui.home}</a>

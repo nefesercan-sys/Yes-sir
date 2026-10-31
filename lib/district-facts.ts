@@ -67,7 +67,7 @@ export const DISTRICT_FACTS: Record<string, DistrictFact> = {
     ['Hem otelde konaklayanlar hem de bölgede yaşayanlar için elbise, pantolon ve gömlek tamiri ve ayarı yapılır.', 'We handle repairs and adjustments of dresses, trousers and shirts for both hotel guests and local residents.', 'Для гостей отелей и местных жителей делаем ремонт и подгонку платьев, брюк и рубашек.', 'Für Hotelgäste und Anwohner übernehmen wir Reparaturen und Anpassungen von Kleidern, Hosen und Hemden.'],
   ),
   kundu: f(
-    ["Kundu, Antalya'nın doğusunda, Muratpaşa'ya bağlı; büyük otellerin sıralandığı sahil bölgesidir.", 'Kundu lies east of Antalya, part of Muratpaşa; a coastal area lined with large resort hotels.', 'Кунду находится к востоку от Антальи, в составе Муратпаши; прибрежная зона с крупными курортными отелями.', 'Kundu liegt östlich von Antalya, gehört zu Muratpaşa und ist eine Küstenzone mit großen Resorthotels.'],
+    ["Kundu, Antalya'nın doğusunda, Aksu'ya bağlı; büyük otellerin sıralandığı sahil bölgesidir.", 'Kundu lies east of Antalya, part of Aksu; a coastal area lined with large resort hotels.', 'Кунду находится к востоку от Антальи, в составе Аксу; прибрежная зона с крупными курортными отелями.', 'Kundu liegt östlich von Antalya, gehört zu Aksu und ist eine Küstenzone mit großen Resorthotels.'],
     ['Resort misafirleri için tatil sırasında acil dikiş, fermuar ve kısaltma işleri öne çıkar; kıyafet otelden alınıp teslim edilebilir.', 'For resort guests, urgent stitching, zipper and hemming jobs during the holiday are typical; garments can be collected from and returned to the hotel.', 'Для гостей курортных отелей типичны срочные работы во время отдыха: шов, молния, подшив; вещи можно забрать из отеля и вернуть.', 'Bei Resortgästen sind dringende Näh-, Reißverschluss- und Kürzungsarbeiten im Urlaub typisch; Kleidung kann im Hotel abgeholt und zurückgebracht werden.'],
   ),
   arapsuyu: f(
@@ -131,6 +131,3 @@ export const DISTRICT_FACTS: Record<string, DistrictFact> = {
     ['Otel misafirleri için tatil sırasında acil dikiş ve fermuar işleri öne çıkar; alım-teslim WhatsApp üzerinden planlanır.', 'For hotel guests, urgent stitching and zipper jobs during the holiday are typical; collection and delivery are planned on WhatsApp.', 'Для гостей отелей типичны срочные швы и молнии во время отдыха; забор и доставку планируем в WhatsApp.', 'Bei Hotelgästen sind dringende Näh- und Reißverschlussarbeiten im Urlaub typisch; Abholung und Lieferung planen wir per WhatsApp.'],
   ),
 };
-
-// Uzak bölgeler: "ücretsiz servis" iddiası yapılmaz, alım-teslim WhatsApp'ta planlanır.
-export const FAR_DISTRICTS = ['belek', 'side', 'manavgat', 'kemer', 'beldibi', 'goynuk', 'aksu', 'dosemealti'];

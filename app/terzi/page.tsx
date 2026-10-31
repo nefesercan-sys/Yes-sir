@@ -4,6 +4,7 @@ import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -188,7 +189,7 @@ const jsonLd = {
       '@type': 'HowTo',
       '@id': `${SITE_URL}#howto-olcu`,
       name: 'Terzi Can ile Adrese Gelen Terzi Servisi Nasıl Çalışır?',
-      description: 'Konyaaltı\'nda ücretsiz, diğer bölgelerde mesafeye göre eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
+      description: 'otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
       step: [
         { '@type': 'HowToStep', name: 'WhatsApp ile iletişim', text: `WhatsApp ${PHONE} üzerinden adresinizi ve hizmet talebinizi bildirin.` },
         { '@type': 'HowToStep', name: 'Terzi adresinize gelir', text: 'Anlaşılan saatte terzimiz adresinize gelir, yerinde ölçü alır.' },
@@ -217,16 +218,16 @@ const jsonLd = {
       '@id': `${SITE_URL}#faq`,
       mainEntity: [
         { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺200 / €6'den başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet. Konyaaltı'nda eve ve otele servis ücretsizdir; Lara, Kundu, Belek, Kemer gibi diğer bölgelerde ücret mesafeye göre belirlenir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet. Konyaaltı'nda eve ve otele servis ücretsizdir; Lara, Kundu, Belek, Kemer ve Side gibi tüm otel bölgelerinde otele servis de ücretsizdir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Çalışma saatleriniz nedir?', acceptedAnswer: { '@type': 'Answer', text: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Hangi ödeme yöntemleri ve para birimleri geçerli?', acceptedAnswer: { '@type': 'Answer', text: 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.' } },
         { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot/mont/ceket fermuarı ₺300 / €9. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺200 / €6'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis Konyaaltı'nda ücretsizdir, diğer bölgelerde mesafeye göre belirlenir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Kuru temizleme ve ütü Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden kurye alım. hızlı ekspres.' } },
+        { '@type': 'Question', name: 'Kuru temizleme ve ütü Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: 'Kuru temizleme ₺300 / €9, mont ₺500 / €15, çamaşır ₺80/kg / €2.5/kg. Otelden alım ücretsiz.' } },
         { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.' } },
       ],
     },
@@ -297,7 +298,7 @@ export default function TerziPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/terzi" />
       <QuickActionBanner lang="tr" />

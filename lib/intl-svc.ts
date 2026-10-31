@@ -4,7 +4,7 @@
 // terzihizmeti.com.tr'deki "hizmetler ve kumaşlar" sayfasından bilerek farklı yapı/üslup (rehber: sorular + adımlar).
 // Kural (işletme sahibi, 29 Eki 2026): deri ve kot YALNIZCA tamir/tadilat; sıfırdan dikim keten, pamuk, penye, saten, ipek vb.
 // Yurt dışı: ölçü online, Antalya'da dikim, istenen ülkeye kargo; banka havalesi; kargo ücreti müşteriye ait; kumaşı biz temin ederiz;
-// uymazsa düzeltme; genelde 1–3 hafta. Tadilat ~1 gün, özel dikim ~3 gün, acil çoğu kez 2–4 saat. 08:00–23:00. Fiyat YAZILMAZ.
+// uymazsa düzeltme; genelde 1–3 hafta. Süreler lib/business.ts DURATION: normal tadilat ertesi gün, acil 1–2 saat, özel dikim modele/adede göre. 08:00–23:00. Fiyat YAZILMAZ.
 // ============================================================
 import type { ILang } from '@/lib/intl';
 
@@ -23,9 +23,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'Esta guía resume qué trabajos admite el taller Terzi Can de Konyaaltı (desde 2006, cada día de 08:00 a 23:00), con qué telas trabaja y cómo se encarga una prenda desde otro país.',
     back: '← Guía de arreglos en vacaciones',
     sections: [
-      { h: 'Arreglos que se piden con más frecuencia', p: ['Acortar o ajustar pantalones, vaqueros, faldas y vestidos, estrechar cintura y costados, y cambiar o reparar cremalleras. También abrigos y chaquetas (mangas, largo, cremallera) y vestidos de noche (estrechar, acortar o ensanchar).', 'Los arreglos sencillos suelen estar listos en un día y las urgencias a menudo en 2–4 horas; confirme el plazo por WhatsApp.'] },
+      { h: 'Arreglos que se piden con más frecuencia', p: ['Acortar o ajustar pantalones, vaqueros, faldas y vestidos, estrechar cintura y costados, y cambiar o reparar cremalleras. También abrigos y chaquetas (mangas, largo, cremallera) y vestidos de noche (estrechar, acortar o ensanchar).', 'Los arreglos normales están listos al día siguiente y los urgentes en 1–2 horas.'] },
       { h: 'Cuero y vaqueros: solo reparación', p: ['Con el cuero y los vaqueros se hacen arreglos y reparaciones (acortar vaqueros, reparar o estrechar una chaqueta o un pantalón de cuero, cambiar cremalleras). No se confeccionan prendas nuevas de cuero ni de vaquero.'] },
-      { h: 'Ropa a medida y telas', p: ['La ropa a medida (mujer y hombre, vestidos de noche, modelos propios) se cose en lino, algodón, punto (penye), satén y seda. La tela la proporciona el taller. También se diseñan y producen modelos, y existe producción en serie.', 'Una prenda a medida suele llevar unos 3 días.'] },
+      { h: 'Ropa a medida y telas', p: ['La ropa a medida (mujer y hombre, vestidos de noche, modelos propios) se cose en lino, algodón, punto (penye), satén y seda. La tela la proporciona el taller. También se diseñan y producen modelos, y existe producción en serie.', 'En una prenda a medida el plazo depende del modelo y la cantidad.'] },
       { h: 'Si se aloja en un hotel', p: ['Se pueden tomar las medidas en el hotel y devolver allí la prenda terminada. En los barrios de Konyaaltı la recogida y entrega es gratuita; para zonas más alejadas se acuerda por WhatsApp.'] },
       { h: 'Pedir desde el extranjero', p: ['1) Envíe por WhatsApp el modelo y sus medidas. 2) Se cose en el taller de Antalya. 3) Se envía al país que indique. El pago es por transferencia bancaria y el envío lo paga el cliente; suele tardar de 1 a 3 semanas. Si la prenda no le queda bien, se corrige.'] },
     ],
@@ -45,9 +45,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'Ce guide résume les travaux acceptés par l’atelier Terzi Can de Konyaaltı (depuis 2006, tous les jours de 08h00 à 23h00), les tissus utilisés et la façon de commander depuis un autre pays.',
     back: '← Guide des retouches en vacances',
     sections: [
-      { h: 'Retouches les plus demandées', p: ['Raccourcir ou ajuster pantalons, jeans, jupes et robes, reprendre la taille et les côtés, remplacer ou réparer les fermetures éclair. Aussi manteaux et vestes (manches, longueur, fermeture) et robes de soirée (reprendre, raccourcir ou élargir).', 'Les retouches simples sont souvent prêtes en une journée, les urgences en 2 à 4 heures ; le délai se confirme sur WhatsApp.'] },
+      { h: 'Retouches les plus demandées', p: ['Raccourcir ou ajuster pantalons, jeans, jupes et robes, reprendre la taille et les côtés, remplacer ou réparer les fermetures éclair. Aussi manteaux et vestes (manches, longueur, fermeture) et robes de soirée (reprendre, raccourcir ou élargir).', 'Les retouches normales sont prêtes le lendemain, les urgences en 1 à 2 heures.'] },
       { h: 'Cuir et jean : réparation uniquement', p: ['Pour le cuir et le jean, on effectue des retouches et des réparations (raccourcir un jean, réparer ou reprendre une veste ou un pantalon en cuir, changer une fermeture). Aucun vêtement neuf en cuir ou en jean n’est confectionné.'] },
-      { h: 'Sur-mesure et tissus', p: ['Le sur-mesure (femme et homme, robes de soirée, modèles personnels) se réalise en lin, coton, jersey (penye), satin et soie. Le tissu est fourni par l’atelier. Des modèles sont aussi conçus et produits, et la production en série existe.', 'Un vêtement sur mesure demande en général environ 3 jours.'] },
+      { h: 'Sur-mesure et tissus', p: ['Le sur-mesure (femme et homme, robes de soirée, modèles personnels) se réalise en lin, coton, jersey (penye), satin et soie. Le tissu est fourni par l’atelier. Des modèles sont aussi conçus et produits, et la production en série existe.', 'Pour un vêtement sur mesure, le délai dépend du modèle et de la quantité.'] },
       { h: 'Si vous séjournez à l’hôtel', p: ['Les mesures peuvent être prises à l’hôtel et le vêtement terminé y est rapporté. Dans les quartiers de Konyaaltı, la collecte et la livraison sont gratuites ; pour les secteurs plus éloignés, on convient des conditions sur WhatsApp.'] },
       { h: 'Commander depuis l’étranger', p: ['1) Envoyez le modèle et vos mesures sur WhatsApp. 2) Le vêtement est cousu à l’atelier d’Antalya. 3) Il est expédié dans le pays de votre choix. Paiement par virement bancaire, frais d’expédition à la charge du client, en général 1 à 3 semaines. Si le vêtement ne vous va pas, il est corrigé.'] },
     ],
@@ -67,9 +67,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'Ten przewodnik opisuje, jakie prace przyjmuje zakład Terzi Can w Konyaaltı (od 2006 roku, codziennie 08:00–23:00), z jakich tkanin szyje i jak zamówić ubranie z innego kraju.',
     back: '← Przewodnik po przeróbkach na wakacjach',
     sections: [
-      { h: 'Najczęstsze przeróbki', p: ['Skracanie i dopasowanie spodni, jeansów, spódnic i sukienek, zwężanie talii i boków, wymiana i naprawa zamków. Także płaszcze i kurtki (rękawy, długość, zamek) oraz suknie wieczorowe (zwężanie, skracanie, poszerzanie).', 'Proste przeróbki zwykle są gotowe w jeden dzień, pilne często w 2–4 godziny; termin potwierdza się na WhatsApp.'] },
+      { h: 'Najczęstsze przeróbki', p: ['Skracanie i dopasowanie spodni, jeansów, spódnic i sukienek, zwężanie talii i boków, wymiana i naprawa zamków. Także płaszcze i kurtki (rękawy, długość, zamek) oraz suknie wieczorowe (zwężanie, skracanie, poszerzanie).', 'Zwykłe przeróbki są gotowe następnego dnia, pilne w 1–2 godziny.'] },
       { h: 'Skóra i jeans: tylko naprawy', p: ['Skórę i jeans przerabiamy i naprawiamy (skracanie jeansów, naprawa lub zwężenie skórzanej kurtki czy spodni, wymiana zamków). Nowych ubrań ze skóry ani z jeansu nie szyjemy.'] },
-      { h: 'Szycie na miarę i tkaniny', p: ['Odzież na miarę (damska i męska, suknie wieczorowe, własne modele) szyjemy z lnu, bawełny, dzianiny (penye), satyny i jedwabiu. Tkaninę zapewnia zakład. Projektujemy i produkujemy też modele, jest także produkcja seryjna.', 'Ubranie na miarę zajmuje zwykle około 3 dni.'] },
+      { h: 'Szycie na miarę i tkaniny', p: ['Odzież na miarę (damska i męska, suknie wieczorowe, własne modele) szyjemy z lnu, bawełny, dzianiny (penye), satyny i jedwabiu. Tkaninę zapewnia zakład. Projektujemy i produkujemy też modele, jest także produkcja seryjna.', 'Przy ubraniu na miarę termin zależy od modelu i liczby sztuk.'] },
       { h: 'Jeśli mieszkasz w hotelu', p: ['Miarę można wziąć w hotelu, a gotowe ubranie odwieźć tam z powrotem. W dzielnicach Konyaaltı odbiór i dostawa są bezpłatne; dla dalszych rejonów warunki ustala się na WhatsApp.'] },
       { h: 'Zamówienie z zagranicy', p: ['1) Wyślij na WhatsApp model i swoje wymiary. 2) Ubranie szyjemy w zakładzie w Antalyi. 3) Wysyłamy do wybranego kraju. Płatność przelewem bankowym, koszt wysyłki ponosi klient, zwykle 1–3 tygodnie. Jeśli ubranie nie pasuje, poprawiamy je.'] },
     ],
@@ -89,9 +89,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'Цей путівник описує, які роботи приймає майстерня Terzi Can у Коньяалти (з 2006 року, щодня 08:00–23:00), з яких тканин шиє і як замовити річ з іншої країни.',
     back: '← Путівник з підгонки одягу у відпустці',
     sections: [
-      { h: 'Найчастіші роботи з підгонки', p: ['Вкорочення та підгонка штанів, джинсів, спідниць і суконь, звуження талії та боків, заміна й ремонт блискавок. Також пальта й куртки (рукави, довжина, блискавка) та вечірні сукні (звузити, вкоротити, розширити).', 'Прості роботи зазвичай готові за день, термінові часто за 2–4 години; термін уточнюйте у WhatsApp.'] },
+      { h: 'Найчастіші роботи з підгонки', p: ['Вкорочення та підгонка штанів, джинсів, спідниць і суконь, звуження талії та боків, заміна й ремонт блискавок. Також пальта й куртки (рукави, довжина, блискавка) та вечірні сукні (звузити, вкоротити, розширити).', 'Звичайні роботи готові наступного дня, термінові — за 1–2 години.'] },
       { h: 'Шкіра й джинс: лише ремонт', p: ['Зі шкірою та джинсом виконуємо підгонку й ремонт (вкоротити джинси, відремонтувати або звузити шкіряну куртку чи штани, замінити блискавку). Нових речей зі шкіри чи джинсу не шиємо.'] },
-      { h: 'Пошив на замовлення й тканини', p: ['Одяг на замовлення (жіночий і чоловічий, вечірні сукні, власні моделі) шиємо з льону, бавовни, трикотажу (пенье), атласу та шовку. Тканину забезпечує майстерня. Також розробляємо й виробляємо моделі, є серійне виробництво.', 'Річ на замовлення зазвичай потребує близько 3 днів.'] },
+      { h: 'Пошив на замовлення й тканини', p: ['Одяг на замовлення (жіночий і чоловічий, вечірні сукні, власні моделі) шиємо з льону, бавовни, трикотажу (пенье), атласу та шовку. Тканину забезпечує майстерня. Також розробляємо й виробляємо моделі, є серійне виробництво.', 'Строк пошиття на замовлення залежить від моделі та кількості.'] },
       { h: 'Якщо ви живете в готелі', p: ['Мірки можна зняти в готелі, а готову річ привезти назад. У районах Коньяалти забір і доставка безкоштовні; для віддаленіших районів умови узгоджуємо у WhatsApp.'] },
       { h: 'Замовлення з-за кордону', p: ['1) Надішліть у WhatsApp модель і свої мірки. 2) Річ шиємо в майстерні в Анталії. 3) Відправляємо у вибрану вами країну. Оплата банківським переказом, доставку оплачує клієнт, зазвичай 1–3 тижні. Якщо річ не підійшла, ми її виправимо.'] },
     ],
@@ -111,9 +111,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'Deze gids beschrijft welk werk het atelier Terzi Can in Konyaaltı aanneemt (sinds 2006, dagelijks 08:00–23:00), met welke stoffen het werkt en hoe u vanuit een ander land bestelt.',
     back: '← Gids kleding vermaken op vakantie',
     sections: [
-      { h: 'Vaakgevraagd vermaakwerk', p: ['Broeken, spijkerbroeken, rokken en jurken korter maken of aanpassen, taille en zijkanten innemen, ritsen vervangen of repareren. Ook jassen en jasjes (mouwen, lengte, rits) en avondjurken (innemen, korter maken of uitleggen).', 'Eenvoudig werk is meestal in een dag klaar, spoedwerk vaak in 2–4 uur; de termijn bevestigen we via WhatsApp.'] },
+      { h: 'Vaakgevraagd vermaakwerk', p: ['Broeken, spijkerbroeken, rokken en jurken korter maken of aanpassen, taille en zijkanten innemen, ritsen vervangen of repareren. Ook jassen en jasjes (mouwen, lengte, rits) en avondjurken (innemen, korter maken of uitleggen).', 'Gewoon werk is de volgende dag klaar, spoedwerk binnen 1–2 uur.'] },
       { h: 'Leer en spijkerstof: alleen reparatie', p: ['Leer en spijkerstof vermaken en repareren we (spijkerbroek korter maken, leren jas of broek repareren of innemen, rits vervangen). Nieuwe kleding van leer of spijkerstof maken we niet.'] },
-      { h: 'Maatkleding en stoffen', p: ['Maatkleding (dames en heren, avondjurken, eigen modellen) naaien we in linnen, katoen, tricot (penye), satijn en zijde. De stof leveren wij. We ontwerpen en produceren ook modellen en er is serieproductie.', 'Een maatwerkstuk duurt meestal ongeveer 3 dagen.'] },
+      { h: 'Maatkleding en stoffen', p: ['Maatkleding (dames en heren, avondjurken, eigen modellen) naaien we in linnen, katoen, tricot (penye), satijn en zijde. De stof leveren wij. We ontwerpen en produceren ook modellen en er is serieproductie.', 'Bij een maatwerkstuk hangt de doorlooptijd af van model en aantal.'] },
       { h: 'Verblijft u in een hotel?', p: ['De maten kunnen in het hotel worden opgenomen en het afgewerkte stuk wordt er teruggebracht. In de wijken van Konyaaltı zijn ophalen en bezorgen gratis; voor verder gelegen gebieden spreken we de voorwaarden af via WhatsApp.'] },
       { h: 'Bestellen vanuit het buitenland', p: ['1) Stuur via WhatsApp het model en uw maten. 2) Het stuk wordt in ons atelier in Antalya genaaid. 3) Het wordt verzonden naar het land van uw keuze. Betaling per bankoverschrijving, de klant betaalt de verzendkosten, meestal 1–3 weken. Past het niet, dan wordt het aangepast.'] },
     ],
@@ -133,9 +133,9 @@ export const SVCG: Record<ILang, SvcGuide> = {
     lead: 'يلخّص هذا الدليل الأعمال التي يقبلها مشغل تيرزي جان في كونيالتي (منذ 2006، يوميًا من 08:00 إلى 23:00)، والأقمشة التي يعمل بها، وكيف تطلب قطعة من بلد آخر.',
     back: '← دليل تعديل الملابس في العطلة',
     sections: [
-      { h: 'أكثر التعديلات طلبًا', p: ['تقصير البنطلونات والجينز والتنانير والفساتين وتعديل مقاسها، وتضييق الخصر والجانبين، واستبدال السحّابات أو إصلاحها. وكذلك المعاطف والسترات (الأكمام والطول والسحّاب) وفساتين السهرة (تضييق أو تقصير أو توسيع).', 'تُنجز التعديلات البسيطة عادةً في يوم واحد والمستعجلة غالبًا خلال 2–4 ساعات، ويُؤكَّد الموعد عبر واتساب.'] },
+      { h: 'أكثر التعديلات طلبًا', p: ['تقصير البنطلونات والجينز والتنانير والفساتين وتعديل مقاسها، وتضييق الخصر والجانبين، واستبدال السحّابات أو إصلاحها. وكذلك المعاطف والسترات (الأكمام والطول والسحّاب) وفساتين السهرة (تضييق أو تقصير أو توسيع).', 'التعديلات العادية جاهزة في اليوم التالي، والمستعجلة خلال ساعة إلى ساعتين.'] },
       { h: 'الجلد والجينز: الإصلاح فقط', p: ['نُصلح الجلد والجينز ونعدّلهما (تقصير الجينز، إصلاح سترة أو بنطلون جلد أو تضييقهما، استبدال السحّاب). لا نخيط ملابس جديدة من الجلد أو الجينز.'] },
-      { h: 'الخياطة حسب الطلب والأقمشة', p: ['نخيط الملابس حسب الطلب (نسائية ورجالية، فساتين سهرة، نماذج خاصة) من الكتان والقطن والجيرسي (بينيه) والساتان والحرير. القماش يوفّره المشغل. كما نصمّم النماذج وننتجها، ويتوفر الإنتاج بالجملة.', 'تستغرق القطعة حسب الطلب عادةً نحو 3 أيام.'] },
+      { h: 'الخياطة حسب الطلب والأقمشة', p: ['نخيط الملابس حسب الطلب (نسائية ورجالية، فساتين سهرة، نماذج خاصة) من الكتان والقطن والجيرسي (بينيه) والساتان والحرير. القماش يوفّره المشغل. كما نصمّم النماذج وننتجها، ويتوفر الإنتاج بالجملة.', 'مدة القطعة حسب الطلب تتوقف على الموديل والكمية.'] },
       { h: 'إذا كنت تقيم في فندق', p: ['يمكن أخذ المقاسات في الفندق وتسليم القطعة الجاهزة إليه. الاستلام والتسليم مجانيان في أحياء كونيالتي، أما المناطق الأبعد فيُتفق عليها عبر واتساب.'] },
       { h: 'الطلب من خارج تركيا', p: ['1) أرسل النموذج ومقاساتك عبر واتساب. 2) تُخاط القطعة في مشغلنا في أنطاليا. 3) تُشحن إلى البلد الذي تختاره. الدفع بالحوالة المصرفية وتكلفة الشحن على العميل، وعادةً خلال 1–3 أسابيع. وإن لم تناسبك القطعة نعدّلها.'] },
     ],

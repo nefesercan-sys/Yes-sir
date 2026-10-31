@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
-import { reviewSchema } from '@/lib/reviews';
+import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -73,9 +74,9 @@ const jsonLd = {
         { '@type':'Question', name:'В какие отели Белека и Лары вы приезжаете?',
           acceptedAnswer:{'@type':'Answer',text:`Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Выезд портного платный?',
-          acceptedAnswer:{'@type':'Answer',text:`В Коньяалты выезд бесплатный, в другие районы — по расстоянию; дополнительно оплачивается выполненная работа. Подшив брюк от ₺200, ушив платья от ₺200. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк от ₺200, ушив платья от ₺200. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Можно ли сделать срочный ремонт перед мероприятием?',
-          acceptedAnswer:{'@type':'Answer',text:`Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; простые работы часто готовы за день-два, в зависимости от загрузки. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; обычная подгонка готова на следующий день, срочная — за 1–2 часа. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Вы говорите по-русски?',
           acceptedAnswer:{'@type':'Answer',text:`Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`} },
       ],
@@ -103,10 +104,8 @@ export const metadata: Metadata = {
     'ателье Кемер','ателье Аланья','срочный ремонт одежды Анталья',
     'подгонка платья Анталья отель','подгонка костюма Анталья',
   ],
-  alternates: {
-    canonical: SITE_URL,
-    languages: { 'tr': TR_URL, 'en': EN_URL, 'ru': SITE_URL, 'de': DE_URL, 'x-default': TR_URL },
-  },
+  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  alternates: { canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya')! },
   openGraph: {
     title: 'Выездной портной Анталья · Обслуживание в отеле',
     description: 'Выездной портной приедет в ваш отель в Белеке, Ларе, Кемере и по всей Анталье.',
@@ -130,7 +129,7 @@ const DISTRICTS = [
 export default function VyezdnoyPortnoyAntalyaPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         <SpeakableSchema path="/ru/vyezdnoy-portnoy-antalya" />
@@ -265,7 +264,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Цены на выездного портного
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в Коньяалты бесплатный, в другие районы — по расстоянию; плюс стоимость работы</p>
+            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в отель бесплатный во всех районах, где мы работаем, — оплачивается только работа</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -277,13 +276,13 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               <tbody>
                 {[
                   ['Стоимость выезда','БЕСПЛАТНО','—'],
-                  ['Подшив брюк','от ₺200','1–2 дня'],
-                  ['Замена молнии','от ₺300','В тот же день'],
-                  ['Ушив платья / пиджака','от ₺200','48 часов'],
-                  ['Укорачивание рукавов','от ₺200','48 часов'],
-                  ['Ремонт вечернего платья','от ₺800','48 часов'],
-                  ['Ушив свадебного платья','от ₺800','3–5 дней'],
-                  ['Ремонт разрыва ткани','от ₺100','В тот же день'],
+                  ['Подшив брюк','от ₺200','На след. день · срочно 1–2 ч'],
+                  ['Замена молнии','от ₺300','На след. день · срочно 1–2 ч'],
+                  ['Ушив платья / пиджака','от ₺200','На след. день · срочно 1–2 ч'],
+                  ['Укорачивание рукавов','от ₺200','На след. день · срочно 1–2 ч'],
+                  ['Ремонт вечернего платья','от ₺800','На след. день · срочно 1–2 ч'],
+                  ['Ушив свадебного платья','от ₺800','На след. день · срочно 1–2 ч'],
+                  ['Ремонт разрыва ткани','от ₺100','На след. день · срочно 1–2 ч'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
@@ -303,7 +302,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </h2>
             {[
               ['Есть ли выездной портной в Анталье?', `Да! Портной Кан приедет по любому адресу в Анталье. Напишите адрес или отель в WhatsApp. WhatsApp: ${PHONE}`],
-              ['Выезд портного платный?', 'В Коньяалты выезд бесплатный, в другие районы — по расстоянию; дополнительно оплачивается выполненная работа. Подшив брюк от ₺200, ушив платья от ₺200.'],
+              ['Выезд портного платный?', 'Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк от ₺200, ушив платья от ₺200.'],
               ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
               ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
@@ -365,7 +364,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
           </div>
         </section>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164, ...reviewSchema() }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164 }) }} />
       <ReviewsBlock lang="ru" />
     </>
   );

@@ -4,6 +4,7 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import { fitDesc } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
@@ -12,7 +13,7 @@ import {
   DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
   SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
-  type Lang, type District, type Service,
+  type Lang, type District, type Service, type TimeKey,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
 import { angleFor, angleTitles, angleDescs, angleKeywords, unfreeDeep, unfree } from '@/lib/seo-angles';
 import './seo-landing.css';
@@ -20,6 +21,10 @@ import { fgNearDistrict, fgServiceMeta } from '@/lib/fg-meta';
 import { trNearDistrict } from '@/lib/tr-meta';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
+import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib/business';
+import { crossCanonical } from '@/lib/cross-canonical';
+import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
+import { jsonLdString } from '@/lib/json-ld';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/terzi-can.jpg`;
@@ -32,7 +37,7 @@ const UI = {
     popular: 'Sık aranan aramalar', faq: 'Sık Sorulan Sorular', nearby: 'Yakın bölgeler', all: 'Tüm hizmetler',
     otherLang: 'Diğer diller', hotelLink: 'Otel bölgesi sayfası', districts: 'Hizmet verdiğimiz bölgeler',
     related: 'İlgili hizmetler', time: 'Teslim süresi', price: 'Fiyat', photoPrice: 'Fotoğraf gönderin, fiyatı hemen söyleyelim',
-    mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Otel ve eve ücretsiz servis', paid: 'Servis ücreti bölgeye göre',
+    mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Otellere ücretsiz servis', paid: 'Eve servis ücreti bölgeye göre',
     hours: 'Her gün 08:00–23:00', since: "2006'dan beri", where: 'Atölye: Hurma Mahallesi, Konyaaltı, Antalya',
     contact: 'İletişim · Telefon', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Terzi Can — Antalya terzi', pricesHref: '/terzi',
   },
@@ -41,7 +46,7 @@ const UI = {
     popular: 'Popular searches', faq: 'Frequently Asked Questions', nearby: 'Nearby areas', all: 'All services',
     otherLang: 'Other languages', hotelLink: 'Hotel area page', districts: 'Areas we serve',
     related: 'Related services', time: 'Turnaround', price: 'Price', photoPrice: 'Send a photo and we will quote right away',
-    mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Free service to hotels and homes', paid: 'Pick-up priced by area',
+    mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Free service to hotels', paid: 'Home pick-up priced by area',
     hours: 'Open daily 08:00–23:00', since: 'Serving since 2006', where: 'Workshop: Hurma, Konyaaltı, Antalya',
     contact: 'Contact', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online tailor service Antalya', pricesHref: '/online-tailor-service',
   },
@@ -50,7 +55,7 @@ const UI = {
     popular: 'Частые запросы', faq: 'Частые вопросы', nearby: 'Ближайшие районы', all: 'Все услуги',
     otherLang: 'Другие языки', hotelLink: 'Страница отельного района', districts: 'Районы обслуживания',
     related: 'Похожие услуги', time: 'Срок', price: 'Цена', photoPrice: 'Пришлите фото — сразу назовём цену',
-    mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Бесплатный выезд в отели и на дом', paid: 'Выезд — по району',
+    mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Бесплатный выезд в отели', paid: 'Выезд на дом — по району',
     hours: 'Ежедневно 08:00–23:00', since: 'Работаем с 2006 года', where: 'Мастерская: Хурма, Коньяалты, Анталья',
     contact: 'Контакты', footer: 'Terzi Can · Хурма, Коньяалты, Анталья', pricesLink: 'Ателье в Анталье', pricesHref: '/ru/atelie-antalya',
   },
@@ -59,7 +64,7 @@ const UI = {
     popular: 'Häufige Suchanfragen', faq: 'Häufige Fragen', nearby: 'Nahegelegene Gebiete', all: 'Alle Leistungen',
     otherLang: 'Andere Sprachen', hotelLink: 'Seite für das Hotelgebiet', districts: 'Gebiete, die wir bedienen',
     related: 'Ähnliche Leistungen', time: 'Dauer', price: 'Preis', photoPrice: 'Foto senden, Preis sofort per WhatsApp',
-    mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Kostenloser Service zu Hotels und nach Hause', paid: 'Abholung je nach Gebiet',
+    mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Kostenloser Hotelservice', paid: 'Hausabholung je nach Gebiet',
     hours: 'Täglich 08:00–23:00', since: 'Seit 2006', where: 'Werkstatt: Hurma, Konyaaltı, Antalya',
     contact: 'Kontakt', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online Schneiderservice Antalya', pricesHref: '/de/online-schneiderservice-antalya',
   },
@@ -73,43 +78,43 @@ const SVC_HUB_NAME: Record<Lang, string> = {
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
-function businessNode(lang: Lang) {
+function businessNode(lang: Lang, withReviews = true) {
+  // Tek işletme varlığı: tüm alanlar lib/business.ts'ten (NAP, saat, areaServed).
+  const b = BUSINESS;
   return {
     '@type': ['LocalBusiness', 'ClothingStore'],
-    ...reviewSchema(),
+    // Yorum işaretlemesi yalnızca yorumların görünür olduğu sayfalarda (ReviewsBlock) eklenir
+    ...(withReviews ? reviewSchema() : {}),
     '@id': BUSINESS_ID,
-    name: 'Terzi Can',
+    name: b.name,
+    alternateName: [...b.alternateName],
     url: `${SITE}/terzi`,
-    telephone: PHONE_TEL,
-    priceRange: '₺₺',
+    telephone: b.phone,
+    priceRange: b.priceRange,
     image: OG,
     hasMap: MAPS,
-    address: {
-      '@type': 'PostalAddress', streetAddress: 'Hurma Mahallesi', addressLocality: 'Konyaaltı',
-      addressRegion: 'Antalya', postalCode: '07130', addressCountry: 'TR',
-    },
-    geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
+    address: { '@type': 'PostalAddress', ...b.address },
+    geo: { '@type': 'GeoCoordinates', ...b.geo },
     openingHoursSpecification: [{
       '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '08:00', closes: '23:00',
+      dayOfWeek: [...b.hours.days], opens: b.hours.opens, closes: b.hours.closes,
     }],
-    foundingDate: '2006',
-    knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
+    areaServed: areaServedSchema(),
+    foundingDate: b.foundingYear,
+    knowsLanguage: [...b.languages],
     availableLanguage: ['Turkish', 'English', 'Russian', 'German', 'Polish', 'Ukrainian', 'Dutch', 'French', 'Spanish', 'Arabic'],
-    sameAs: [MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
+    sameAs: [MAPS, waUrl(), 'https://terzihizmeti.com.tr'],
     inLanguage: lang,
   };
 }
 
-const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, slug?: string) => {
-  // Uzak bölgenin Türkçe sayfası noindex olduğu için hreflang'a girmez; x-default İngilizce olur.
-  const trOk = !slug || isTrNear(slug);
-  const languages: Record<string, string> = {};
-  if (trOk) languages.tr = urlFor('tr');
-  languages.en = urlFor('en'); languages.ru = urlFor('ru'); languages.de = urlFor('de');
-  languages['x-default'] = urlFor(trOk ? 'tr' : 'en');
-  return { canonical: urlFor(lang), languages };
+// EN/RU/DE bölge, hizmet ve hub sayfalarının terzihizmeti.com.tr'de birebir karşılığı var → canonical oraya (hreflang yok).
+// Türkçe sayfalar swaphubs'ta canonical kalır; yabancı karşılıkları başka siteye canonical'landığı için hreflang verilmez
+// (canonical ile çelişen, karşılıksız hreflang kümesi oluşmasın).
+const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, _slug?: string) => {
+  const own = urlFor(lang);
+  const cross = crossCanonical(own.replace(SITE, ''));
+  return cross ? { canonical: cross } : { canonical: own };
 };
 const _alternatesForOld = (lang: Lang, urlFor: (l: Lang) => string) => ({
   canonical: urlFor(lang),
@@ -121,12 +126,10 @@ const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(l
 const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
 const priceShortOf = (lang: Lang, s: Service) =>
   s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : '';
-const TIME_SHORT: Record<Lang, Record<'same' | 'next' | 'three' | 'none', string>> = {
-  tr: { same: 'Aynı Gün', next: 'Ertesi Gün', three: '3 Günde', none: 'Yakınınızda' },
-  en: { same: 'Same Day', next: 'Next Day', three: 'In 3 Days', none: 'Near You' },
-  ru: { same: 'В тот же день', next: 'За 1 день', three: 'За 3 дня', none: 'Рядом' },
-  de: { same: 'Am selben Tag', next: 'Am nächsten Tag', three: 'In 3 Tagen', none: 'In der Nähe' },
-};
+// Başlıklar için kısa süre ifadeleri (lib/business.ts DURATION'dan)
+const TIME_SHORT: Record<Lang, Record<TimeKey, string>> = Object.fromEntries(LANGS.map((l) => [l, {
+  repair: DURATION[l].normalShort, custom: DURATION[l].customShort, mixed: DURATION[l].normalShort,
+}])) as Record<Lang, Record<TimeKey, string>>;
 
 // ── Bölge önceliği: TR'de yerel mahalleler, yabancı dilde tatil bölgeleri öne ──
 const TR_PRI = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem'];
@@ -166,9 +169,12 @@ const tzHubLabel: Record<Lang, string> = {
 };
 
 // ── Metin üreticileri ───────────────────────────────────────
+// Eve ücretsiz servisin olmadığı bölgelerde rozet: otellere servis yine ücretsiz (lib/business.ts kuralı)
 const SVC_FAR: Record<Lang, string> = {
-  tr: "Alım-teslim WhatsApp'tan planlanır", en: 'Collection & delivery planned on WhatsApp',
-  ru: 'Забор и доставка — в WhatsApp', de: 'Abholung & Lieferung per WhatsApp',
+  tr: 'Otellere ücretsiz servis', en: 'Free service to hotels', ru: 'Выезд в отели бесплатно', de: 'Hotelservice kostenlos',
+};
+const SVC_NEAR: Record<Lang, string> = {
+  tr: 'Otele ve eve ücretsiz servis', en: 'Free hotel & home service', ru: 'Выезд в отель и на дом бесплатно', de: 'Hotel- & Hausservice kostenlos',
 };
 
 const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: string; hub: string }> = {
@@ -188,7 +194,7 @@ function _districtCopy(lang: Lang, d: District) {
   const kw = (lang === 'tr' ? [`${n} terzi`, `${n} terzi hizmeti`, ...d.alias.map((a) => `${a} terzi`)] : []);
   const PH = `☎ ${PHONE}`;
   const titles = {
-    tr: [`${n} Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`, `${n} Terzi: Fiyat Al, Aynı Gün Teslim | Terzi Can`, `${n} Terzi Hizmeti | Terzi Can`],
+    tr: [`${n} Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`, `${n} Terzi: Fiyat Al, Ertesi Gün Teslim | Terzi Can`, `${n} Terzi Hizmeti | Terzi Can`],
     en: [`Call a Tailor to ${n}, Antalya: Hemming, Zippers`, `Tailor ${n} Antalya: Get a Price on WhatsApp`, `Tailor in ${n}, Antalya`],
     ru: [`Вызвать портного: ${n}, Анталья, подшив, молнии`, `Портной ${n}: цена по фото в WhatsApp`, `Портной ${n}, Анталья`],
     de: [`Schneider rufen: ${n}, Antalya, Kürzen, Zipper`, `Schneider ${n}: Preis per WhatsApp-Foto`, `Schneider ${n}, Antalya`],
@@ -196,10 +202,10 @@ function _districtCopy(lang: Lang, d: District) {
   let title = pickFit(titles, 60);
   let desc = '';
   const far = !isFreeService(d.slug);
-  const svcTr = far ? 'Alım-teslim WhatsApp\'tan planlanır' : 'Otele ve eve ücretsiz servis';
-  const svcEn = far ? 'Collection and delivery planned on WhatsApp' : 'Free service to hotels and homes';
-  const svcRu = far ? 'Забор и доставка согласуются в WhatsApp' : 'Бесплатный выезд в отели и на дом';
-  const svcDe = far ? 'Abholung und Lieferung per WhatsApp geplant' : 'Kostenloser Service zu Hotels und nach Hause';
+  const svcTr = far ? SVC_FAR.tr : SVC_NEAR.tr;
+  const svcEn = far ? SVC_FAR.en : SVC_NEAR.en;
+  const svcRu = far ? SVC_FAR.ru : SVC_NEAR.ru;
+  const svcDe = far ? SVC_FAR.de : SVC_NEAR.de;
   const descs = {
     tr: [`${loc} terzi lazım mı? Kıyafetin fotoğrafını WhatsApp'tan at, fiyatı söyleyelim: paça ₺200'den, fermuar ₺300'den. ${svcTr}. ${PH}`,
          `${loc} terzi: fotoğraf at, fiyatı ve teslim gününü öğren. Paça ₺200'den, fermuar ₺300'den. ${PH}`,
@@ -268,94 +274,97 @@ function _districtCopy(lang: Lang, d: District) {
 }
 
 function districtAbout(lang: Lang, d: District): string {
-  const r = _districtAbout(lang, d);
-  return isFreeService(d.slug) ? r : unfreeDeep(lang, r);
-}
-function _districtAbout(lang: Lang, d: District): string {
+  // Bölge türüne göre 3 kalıptan biri slug'a göre seçilir; servis kuralı bölgeye göre eklenir.
   const n = d.name[lang];
   const loc = d.loc[lang];
-  const t = {
+  const rule = serviceRuleFor(lang, d.slug);
+  const V: Record<Lang, Record<'central' | 'resort' | 'outer', string[]>> = {
     tr: {
-      central: `${loc} yaşayan ve çalışanlar kıyafetini atölyemize getirebilir ya da adresinden alınmasını isteyebilir. Atölyemiz Konyaaltı Hurma'dadır; ${n} ve çevresi için alım-teslim ücretsiz servistir.`,
-      resort: `${loc} otelde konaklayan misafirler için terzi servisimiz var. Valiz yetersiz kaldığında, bir kıyafet bozulduğunda ya da özel akşam için son dakika ayarı gerektiğinde otelinizden alıp teslim ediyoruz; Türkçe, İngilizce, Rusça ve Almanca anlaşabilirsiniz.`,
-      outer: `${loc} ev, işyeri ve konut siteleri için terzi alım-teslim servisi veriyoruz. Mesafe nedeniyle günü ve saati WhatsApp'tan birlikte planlıyoruz.`,
+      central: [
+        `${loc} yaşayan ve çalışanlar kıyafetini Hurma'daki atölyeye getirebilir ya da adresinden aldırabilir.`,
+        `${n} günlük işlerin yoğun olduğu bir bölge: iş pantolonu, okul kıyafeti, kot ve elbise düzeltmeleri en sık gelen işlerdir.`,
+        `${n} için prova gereken işlerde ölçü yerinde alınabilir; basit kısaltma ve fermuar işlerinde fotoğraf genellikle yeterlidir.`,
+      ],
+      resort: [
+        `${loc} otelde kalan misafirler için kıyafet otelden alınır, işlem atölyede yapılır ve otele geri getirilir.`,
+        `Tatilde bozulan fermuar, söküğü açılan dikiş ya da özel bir akşam için daraltılması gereken elbise: ${n} otellerinden gelen işlerin çoğu bunlardır.`,
+        `${n} otellerinden yazan misafirler için Türkçe, İngilizce, Rusça ve Almanca yazışılabilir; fotoğraf ve otel adı yeterlidir.`,
+      ],
+      outer: [
+        `${loc} ev, işyeri ve siteler için alım-teslim yapılır; gün ve saat WhatsApp'ta birlikte planlanır.`,
+        `${n} atölyeye uzak olduğundan işler genellikle tek seferde toplanır; birden fazla kıyafet varsa hepsini aynı fotoğraf mesajında göndermek kolaylık sağlar.`,
+        `${n} için önce fotoğrafla fiyat netleşir, ardından alım günü belirlenir.`,
+      ],
     },
     en: {
-      central: `Residents and workers ${loc} can bring garments to our workshop or ask us to collect them from their address. We are based in Hurma, Konyaaltı; pick-up and delivery for ${n} and the surrounding area is free.`,
-      resort: `We offer a tailor service for guests staying at hotels ${loc}. If a garment tears, no longer fits or needs a last-minute adjustment for a special evening, we collect it from your hotel and bring it back; you can speak English, Turkish, Russian or German with us.`,
-      outer: `We offer pick-up and delivery for homes, offices and residential complexes ${loc}. Because of the distance we agree on the day and time with you on WhatsApp.`,
+      central: [
+        `People living or working ${loc} can bring garments to the workshop in Hurma or have them collected from their address.`,
+        `${n} is a busy everyday area: work trousers, school uniforms, jeans and dress adjustments are the most common jobs.`,
+        `For jobs that need a fitting ${loc}, measurements can be taken on site; for simple hems and zippers a photo is usually enough.`,
+      ],
+      resort: [
+        `For guests staying at hotels ${loc}, the garment is collected from the hotel, worked on in the workshop and brought back.`,
+        `A zipper that broke on holiday, a seam that opened, a dress to take in for a special dinner: most jobs from ${n} hotels look like this.`,
+        `Guests in ${n} can write in English, Russian, German or Turkish; a photo and the hotel name are enough to start.`,
+      ],
+      outer: [
+        `Pick-up and delivery is available for homes, offices and residential complexes ${loc}; day and time are agreed on WhatsApp.`,
+        `As ${n} is further from the workshop, jobs are usually collected in one trip; if you have several garments, send them all in one photo message.`,
+        `For ${n} the price is confirmed from a photo first, then a collection day is set.`,
+      ],
     },
     ru: {
-      central: `Жители и работающие ${loc} могут принести вещи в мастерскую или попросить забрать их по адресу. Мастерская находится в Хурме (Коньяалты); забор и доставка по району ${n} бесплатны.`,
-      resort: `Для гостей отелей ${loc} у нас есть услуга портного. Порвалась вещь, перестала подходить по размеру или нужна срочная подгонка к вечеру — заберём из отеля и вернём; можно общаться на русском, английском, турецком и немецком.`,
-      outer: `Забираем и привозим вещи ${loc} — на дом, в офис или в жилой комплекс. Из-за расстояния день и время согласуем с вами в WhatsApp.`,
+      central: [
+        `Жители и работающие ${loc} могут принести вещи в мастерскую в Хурме или попросить забрать их по адресу.`,
+        `${n} — район повседневных задач: рабочие брюки, школьная форма, джинсы и платья чаще всего требуют подгонки.`,
+        `Если нужна примерка, мерки ${loc} можно снять на месте; для подшива и замены молнии обычно достаточно фото.`,
+      ],
+      resort: [
+        `Для гостей отелей ${loc} вещь забирают из отеля, работу делают в мастерской и привозят обратно.`,
+        `Сломанная в отпуске молния, разошедшийся шов, платье, которое нужно ушить к ужину, — так выглядит большинство заказов из отелей района ${n}.`,
+        `Гости в районе ${n} могут писать по-русски, по-английски, по-немецки или по-турецки; достаточно фото и названия отеля.`,
+      ],
+      outer: [
+        `Забираем и привозим вещи ${loc} — на дом, в офис или в жилой комплекс; день и время согласуем в WhatsApp.`,
+        `Район ${n} дальше от мастерской, поэтому вещи обычно забирают за один выезд; если вещей несколько, пришлите их одним сообщением.`,
+        `Для района ${n} сначала по фото согласуем цену, затем назначаем день забора.`,
+      ],
     },
     de: {
-      central: `Anwohner und Berufstätige ${loc} können Kleidung in unsere Werkstatt bringen oder von zu Hause abholen lassen. Wir sind in Hurma, Konyaaltı; Abholung und Lieferung für ${n} und Umgebung sind kostenlos.`,
-      resort: `Für Gäste, die in Hotels ${loc} wohnen, bieten wir einen Schneiderservice an. Reißt etwas, passt etwas nicht mehr oder braucht es kurzfristig eine Anpassung für einen besonderen Abend — wir holen es im Hotel ab und bringen es zurück; Sie können auf Deutsch, Englisch, Russisch oder Türkisch sprechen.`,
-      outer: `Wir holen und liefern Kleidung ${loc} für Wohnungen, Büros und Wohnanlagen. Wegen der Entfernung legen wir Tag und Uhrzeit per WhatsApp mit Ihnen fest.`,
+      central: [
+        `Wer ${loc} wohnt oder arbeitet, kann Kleidung in die Werkstatt in Hurma bringen oder an der Adresse abholen lassen.`,
+        `${n} ist ein Alltagsviertel: Arbeitshosen, Schuluniformen, Jeans und Kleider werden hier am häufigsten angepasst.`,
+        `Für Arbeiten mit Anprobe ${loc} kann vor Ort Maß genommen werden; bei einfachen Säumen und Reißverschlüssen genügt meist ein Foto.`,
+      ],
+      resort: [
+        `Für Gäste in Hotels ${loc} wird die Kleidung im Hotel abgeholt, in der Werkstatt bearbeitet und zurückgebracht.`,
+        `Ein im Urlaub kaputter Reißverschluss, eine offene Naht, ein Kleid, das für ein Abendessen enger muss: So sehen die meisten Aufträge aus Hotels in ${n} aus.`,
+        `Gäste in ${n} können auf Deutsch, Englisch, Russisch oder Türkisch schreiben; ein Foto und der Hotelname reichen.`,
+      ],
+      outer: [
+        `Abholung und Lieferung ${loc} für Wohnungen, Büros und Wohnanlagen; Tag und Uhrzeit werden per WhatsApp vereinbart.`,
+        `Da ${n} weiter von der Werkstatt entfernt ist, werden Aufträge meist auf einer Fahrt gesammelt; mehrere Teile am besten in einer Nachricht schicken.`,
+        `Für ${n} wird zuerst der Preis per Foto geklärt, danach der Abholtag festgelegt.`,
+      ],
     },
-  }[lang];
-  return t[d.kind];
+  };
+  return `${pick(`about:${d.slug}:${lang}`, V[lang][d.kind])} ${rule}.`;
 }
 
 function districtFaq(lang: Lang, d: District): [string, string][] {
-  const r = _districtFaq(lang, d);
-  return isFreeService(d.slug) ? r : unfreeDeep(lang, r);
+  return districtFaqItems({ lang, slug: d.slug, n: d.name[lang], loc: d.loc[lang], resort: d.kind === 'resort', focus: [faqFocus(lang, d)] });
 }
-function _districtFaq(lang: Lang, d: District): [string, string][] {
-  const loc = d.loc[lang];
-  const n = d.name[lang];
-  const fact = DISTRICT_FACTS[d.slug];
-  const extra: [string, string][] = fact ? [[{
-    tr: `${n} nerede, ${loc} terzi hizmeti nasıl işliyor?`, en: `Where is ${n} and how does the tailor service work ${loc}?`,
-    ru: `Где находится ${n} и как работает услуга портного ${loc}?`, de: `Wo liegt ${n} und wie funktioniert der Schneiderservice ${loc}?`,
-  }[lang], `${fact.where[lang]} ${fact.needs[lang]}`]] : [];
-  const base = districtFaqBase(lang, d, loc, n);
-  const far = !isFreeService(d.slug);
-  const farFix: [string, string][] = [
-    ['otel ve eve servis ücretsizdir', "alım-teslim WhatsApp'tan planlanır"],
-    ['service to hotels and homes is free', 'collection and delivery are planned on WhatsApp'],
-    ['выезд в отели и на дом бесплатный', 'забор и доставка согласуются в WhatsApp'],
-    ['der Service zu Hotels und nach Hause ist kostenlos', 'Abholung und Lieferung werden per WhatsApp geplant'],
-  ];
-  const fixed = far ? base.map(([q, an]) => [q, farFix.reduce((t, [x, y]) => t.split(x).join(y), an)] as [string, string]) : base;
-  return [...fixed, ...extra];
+const PROC_H: Record<Lang, (loc: string) => string> = {
+  tr: (loc) => `${loc} sık yapılan işler nasıl yapılır?`, en: (loc) => `How common jobs are done ${loc}`,
+  ru: (loc) => `Как выполняются частые заказы ${loc}`, de: (loc) => `So werden häufige Aufträge ${loc} erledigt`,
+};
+function faqFocus(lang: Lang, d: District): ProcId {
+  const near = isTrNear(d.slug);
+  const order = lang === 'tr' ? Math.max(0, TR_NEAR_SLUGS.indexOf(d.slug)) : Math.max(0, DISTRICTS.findIndex((x) => x.slug === d.slug));
+  return ANGLE_PROC[angleFor(lang, d.slug, near, order) % ANGLE_PROC.length];
 }
-
-function districtFaqBase(lang: Lang, d: District, loc: string, n: string): [string, string][] {
-  const by = (id: string) => SERVICES.find((s) => s.id === id)!;
-  return {
-    tr: [
-      [`${loc} terzi var mı, yakınımdaki terzi nerede?`, `Atölyemiz Konyaaltı Hurma Mahallesi'ndedir. ${n} için kıyafetinizi adresinizden veya otelinizden alıp teslim ediyoruz; otel ve eve servis ücretsizdir. Her gün 08:00–23:00 arası WhatsApp'tan ulaşabilirsiniz.`],
-      [`${loc} ${by('paca').q.tr} ve ${by('fermuar').q.tr} ne kadar sürer?`, 'Paça kısaltma, daraltma ve fermuar işleri genellikle aynı gün biter; kesin süre işe ve yoğunluğa göre WhatsApp\'ta netleşir.'],
-      [`${loc} gelinlik ve abiye tadilatı kaç TL?`, "Gelinlik tadilatı ₺800'den, abiye tadilatı ₺800'den başlar; kesin fiyat fotoğraf ve işlem detayına göre söylenir. Abiye tadilatı genellikle ertesi gün hazır olur; gelinlikte süre işin kapsamına göre netleşir."],
-      [`${loc} ${by('elbise-dikim').q.tr} kaç günde teslim edilir?`, 'Elbise dikimi genellikle 3 gün içinde hazırlanır. Elbise, ceket, gömlek, mont ve abiye tadilat ya da tamiri genellikle ertesi gün biter; kesin süre WhatsApp\'ta netleşir.'],
-      [`${loc} yabancı turistler için terzi hizmeti var mı?`, 'Evet. Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz; otel ve eve servis ücretsizdir. Fotoğrafı WhatsApp\'tan gönderip fiyat alabilirsiniz.'],
-    ],
-    en: [
-      [`Is there a tailor ${loc}? Where is the nearest tailor?`, `Our workshop is in Hurma, Konyaaltı. For ${n} we collect garments from your address or hotel and bring them back; service to hotels and homes is free. Message us on WhatsApp daily 08:00–23:00.`],
-      [`How long do ${by('paca').q.en} and ${by('fermuar').q.en} take ${loc}?`, 'Trouser hemming, taking in and zipper work are usually ready the same day; the exact time depends on the job and workload and is confirmed on WhatsApp.'],
-      [`How much does wedding or evening dress alteration cost ${loc}?`, 'Wedding dress alteration starts from ₺800 and evening dress alteration from ₺800; the exact price depends on a photo and the work needed. Evening dress alterations are usually ready the next day; for wedding dresses the time depends on the work.'],
-      [`How many days does ${by('elbise-dikim').q.en} take ${loc}?`, 'Dress making usually takes about 3 days. Alterations or repairs of dresses, jackets, shirts, coats and evening dresses usually take about 1 day; the exact time is confirmed on WhatsApp.'],
-      [`Is there a tailor service for tourists ${loc}?`, 'Yes. We serve in English, Turkish, Russian and German, and service to hotels and homes is free. Send a photo on WhatsApp to get a price.'],
-    ],
-    ru: [
-      [`Есть ли портной ${loc}? Где ближайшее ателье?`, `Наша мастерская — в Хурме (Коньяалты). Для района ${n} забираем вещи с вашего адреса или из отеля и возвращаем; выезд в отели и на дом бесплатный. Пишите в WhatsApp ежедневно с 08:00 до 23:00.`],
-      [`Как быстро делают ${by('paca').q.ru} и ${by('fermuar').q.ru} ${loc}?`, 'Подшив и ушивание брюк, а также замена или ремонт молнии обычно делаем в тот же день; точный срок зависит от работы и загрузки и уточняется в WhatsApp.'],
-      [`Сколько стоит подгонка свадебного или вечернего платья ${loc}?`, 'Подгонка свадебного и вечернего платья — от ₺800; точную цену называем по фото и объёму работ. Вечерние платья обычно готовы на следующий день; для свадебных срок зависит от объёма работы.'],
-      [`За сколько дней делают ${by('elbise-dikim').q.ru} ${loc}?`, 'Пошив платья обычно занимает около 3 дней. Переделка или ремонт платья, пиджака, рубашки, куртки и вечернего платья — обычно около 1 дня; точный срок уточняется в WhatsApp.'],
-      [`Есть ли услуги портного для туристов ${loc}?`, 'Да. Напишите нам в WhatsApp на своём языке; выезд в отели и на дом бесплатный. Пришлите фото в WhatsApp и узнайте цену.'],
-    ],
-    de: [
-      [`Gibt es einen Schneider ${loc}? Wo ist der nächste Schneider?`, `Unsere Werkstatt liegt in Hurma, Konyaaltı. Für ${n} holen wir Kleidung an Ihrer Adresse oder im Hotel ab und bringen sie zurück; der Service zu Hotels und nach Hause ist kostenlos. WhatsApp täglich 08:00–23:00.`],
-      [`Wie lange dauern ${by('paca').q.de} und ${by('fermuar').q.de} ${loc}?`, 'Hosen kürzen, enger machen sowie Reißverschlussarbeiten sind meist am selben Tag fertig; die genaue Dauer hängt vom Auftrag ab und wird per WhatsApp bestätigt.'],
-      [`Was kostet eine Brautkleid- oder Abendkleid-Änderung ${loc}?`, 'Brautkleid-Änderungen beginnen bei ₺800, Abendkleid-Änderungen bei ₺800; der genaue Preis richtet sich nach Foto und Aufwand. Abendkleider sind meist am nächsten Tag fertig; beim Brautkleid hängt es vom Umfang ab.'],
-      [`Wie viele Tage dauert ${by('elbise-dikim').q.de} ${loc}?`, 'Ein Kleid nähen dauert meist etwa 3 Tage. Änderungen oder Reparaturen von Kleidern, Sakkos, Hemden, Mänteln und Abendkleidern dauern meist etwa 1 Tag; die genaue Dauer wird per WhatsApp bestätigt.'],
-      [`Gibt es einen Schneiderservice für Touristen ${loc}?`, 'Ja. Schreiben Sie uns per WhatsApp in Ihrer Sprache; der Service zu Hotels und nach Hause ist kostenlos. Foto per WhatsApp senden und Preis erfahren.'],
-    ],
-  }[lang] as [string, string][];
-}
+// Bölgenin arama açısına göre öne çıkan süreç (seo-angles açı sırası: dikim, tamir, fermuar-paça, daraltma, keten, üst giyim, …)
+const ANGLE_PROC: ProcId[] = ['ozel-dikim', 'kiyafet-tamiri', 'fermuar', 'bel', 'ozel-dikim', 'mont', 'gelinlik-abiye', 'paca', 'takim', 'kot', 'gomlek', 'etek'];
 
 function serviceCopy(lang: Lang, s: Service) {
   const nm = s.name[lang];
@@ -379,12 +388,12 @@ function serviceCopy(lang: Lang, s: Service) {
   const lead = { tr: 'Fotoğrafını WhatsApp\'tan at,', en: 'Send a photo on WhatsApp,', ru: 'Пришлите фото в WhatsApp,', de: 'Foto per WhatsApp senden,' }[lang];
   const rep = { tr: 'fiyatı ve gününü söyleyelim.', en: 'we reply with price and date.', ru: 'ответим ценой и сроком.', de: 'wir nennen Preis und Termin.' }[lang];
   const open = { tr: 'Her gün 08:00–23:00', en: 'Daily 08:00–23:00', ru: 'Ежедневно 08:00–23:00', de: 'Täglich 08:00–23:00' }[lang];
-  const pick = { tr: 'Konyaaltı\'nda ücretsiz servis', en: 'free pick-up in Konyaaltı', ru: 'выезд в Коньяалты бесплатно', de: 'Gratis-Abholung in Konyaaltı' }[lang];
+  const pickup = { tr: 'otellere ücretsiz servis', en: 'free hotel pick-up', ru: 'выезд в отели бесплатно', de: 'Hotelabholung gratis' }[lang];
   const tel = `☎ ${PHONE}`;
   const priceTxt = price ? (lang === 'tr' ? `2026 fiyatı ${price}` : price) : '';
   const info = [tm, priceTxt].filter(Boolean).join(', ');
   const candidates = [
-    `${nm}: ${info}. ${lead} ${rep} ${pick}. ${tel}`,
+    `${nm}: ${info}. ${lead} ${rep} ${pickup}. ${tel}`,
     `${nm}: ${info}. ${lead} ${rep} ${tel}`,
     `${nm}: ${price || tm}. ${lead} ${rep} ${tel}`,
     `${nm}. ${lead} ${rep} ${tel}`,
@@ -400,28 +409,36 @@ function serviceFaq(lang: Lang, s: Service): [string, string][] {
   const nm = s.name[lang];
   const price = priceOf(lang, s);
   const time = timeOf(lang, s);
-  return {
+  const R = SERVICE_RULE[lang];
+  const proc = PROCESS[PROC_OF_SERVICE[s.id] ?? 'kiyafet-tamiri'][lang];
+  const D = DURATION[lang];
+  const base: [string, string][] = {
     tr: [
-      [`Antalya'da ${s.vars.tr[0]} nerede yapılır?`, `Terzi Can atölyesinde, Konyaaltı Hurma'da. ${s.intro.tr} Konyaaltı'nda otel ve eve servis ücretsizdir, diğer bölgelerde ücret mesafeye göre belirlenir. Her gün 08:00–23:00 açığız.`],
-      [`${nm} ne kadar sürer ve kaç TL?`, `${time}.${price ? ' ' + price + '; kesin fiyat kumaşa ve işlem detayına göre söylenir.' : ' Fiyat için kıyafetin fotoğrafını WhatsApp\'tan gönderin.'}`],
-      [`${nm} için otelime veya evime gelir misiniz?`, 'Evet. Konyaaltı\'nda alım-teslim ücretsizdir; Muratpaşa, Lara, Güzeloba, Kundu, Belek ve Side gibi bölgelerde servis ücreti mesafeye göre belirlenir.'],
+      [`Antalya'da ${s.vars.tr[0]} nerede yapılır?`, `Terzi Can atölyesinde, Konyaaltı Hurma'da. ${s.intro.tr} ${R.full} Her gün 08:00–23:00 açıktır.`],
+      [`${nm} ne kadar sürer, fiyatı ne kadar?`, `${time}.${price ? ' ' + price + '; kesin fiyat kumaşa ve işlem detayına göre söylenir.' : ' Fiyat için kıyafetin fotoğrafını WhatsApp\'tan gönderin.'}`],
+      [`${nm} için otelime veya evime gelir misiniz?`, `Evet. ${R.full}`],
     ],
     en: [
-      [`Where can I get ${s.vars.en[0]} in Antalya?`, `At the Terzi Can workshop in Hurma, Konyaaltı. ${s.intro.en} Free service to hotels and homes; open daily 08:00–23:00.`],
+      [`Where can I get ${s.vars.en[0]} in Antalya?`, `At the Terzi Can workshop in Hurma, Konyaaltı. ${s.intro.en} ${R.full} Open daily 08:00–23:00.`],
       [`How long does ${nm.toLowerCase()} take and what does it cost?`, `${time}.${price ? ' ' + price + '; the exact price depends on the fabric and the work.' : ' Send a photo of the garment on WhatsApp for a price.'}`],
-      [`Can you come to my hotel or home for ${nm.toLowerCase()}?`, 'Yes. Pick-up and delivery is free in Konyaaltı; in areas such as Muratpaşa, Lara, Güzeloba, Kundu, Belek and Side the service fee depends on the distance.'],
+      [`Can you come to my hotel or home for ${nm.toLowerCase()}?`, `Yes. ${R.full}`],
     ],
     ru: [
-      [`Где в Анталье сделать: ${s.vars.ru[0]}?`, `В мастерской Terzi Can в Хурме (Коньяалты). ${s.intro.ru} В Коньяалты выезд в отели и на дом бесплатный, в другие районы — по расстоянию; работаем ежедневно 08:00–23:00.`],
+      [`Где в Анталье сделать: ${s.vars.ru[0]}?`, `В мастерской Terzi Can в Хурме (Коньяалты). ${s.intro.ru} ${R.full} Работаем ежедневно 08:00–23:00.`],
       [`Сколько времени занимает «${nm}» и сколько это стоит?`, `${time}.${price ? ' ' + price + '; точная цена зависит от ткани и объёма работ.' : ' Пришлите фото вещи в WhatsApp — назовём цену.'}`],
-      [`Приедете ли вы в отель или домой: «${nm}»?`, 'Да. В Коньяалты забор и доставка бесплатны; в Муратпаше, Ларе, Гюзельобе, Кунду, Белеке и Сиде стоимость зависит от расстояния.'],
+      [`Приедете ли вы в отель или домой: «${nm}»?`, `Да. ${R.full}`],
     ],
     de: [
-      [`Wo kann ich in Antalya „${s.vars.de[0]}“ lassen?`, `In der Werkstatt von Terzi Can in Hurma, Konyaaltı. ${s.intro.de} Kostenloser Service zu Hotels und nach Hause; täglich 08:00–23:00 geöffnet.`],
+      [`Wo kann ich in Antalya „${s.vars.de[0]}“ lassen?`, `In der Werkstatt von Terzi Can in Hurma, Konyaaltı. ${s.intro.de} ${R.full} Täglich 08:00–23:00 geöffnet.`],
       [`Wie lange dauert „${nm}“ und was kostet es?`, `${time}.${price ? ' ' + price + '; der genaue Preis hängt vom Stoff und vom Aufwand ab.' : ' Foto des Kleidungsstücks per WhatsApp senden, dann nennen wir den Preis.'}`],
-      [`Kommen Sie für „${nm}“ ins Hotel oder nach Hause?`, 'Ja. In Konyaaltı sind Abholung und Lieferung kostenlos; in Muratpaşa, Lara, Güzeloba, Kundu, Belek und Side richtet sich die Gebühr nach der Entfernung.'],
+      [`Kommen Sie für „${nm}“ ins Hotel oder nach Hause?`, `Ja. ${R.full}`],
     ],
   }[lang] as [string, string][];
+  // Hizmete özgü süreç sorusu + (tamir/tadilat hizmetlerinde) acil iş sorusu
+  const urgentQ: Record<Lang, string> = { tr: `${nm} acil yapılabilir mi?`, en: `Can ${nm.toLowerCase()} be done urgently?`, ru: `Можно ли сделать «${nm}» срочно?`, de: `Geht „${nm}“ auch dringend?` };
+  const extra: [string, string][] = [[proc.h, proc.p]];
+  if (s.time !== 'custom') extra.push([urgentQ[lang], `${D.urgent}. ${D.normal}.`]);
+  return [...base, ...extra];
 }
 
 // ── Metadata ────────────────────────────────────────────────
@@ -466,7 +483,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
       : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d)), d.slug),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: fitDesc(c.desc), url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -478,7 +495,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: c.desc,
+    description: fitDesc(c.desc),
     keywords: Array.from(new Set([
       ...c.kw,
       ...s.vars[lang],
@@ -559,7 +576,7 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
       <div className="sl-hero-content">
         <span className="sl-hero-tag">{tag}</span>
         <h1 id="hero-h">{h1}</h1>
-        <p className="sl-hero-desc">{desc}</p>
+        <p className="sl-hero-desc" id="dogrudan-cevap">{desc}</p>
         <div className="sl-hero-btns">
           <a href={WA(waMsg)} target="_blank" rel="noopener noreferrer" className="sl-btn-primary">{u.waBtn}</a>
           <a href={`tel:${PHONE_TEL}`} className="sl-btn-secondary">📞 {PHONE}</a>
@@ -627,6 +644,10 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
     ru: `Здравствуйте, нужен портной ${c.loc}.`,
     de: `Hallo, ich brauche einen Schneider ${c.loc}.`,
   }[lang];
+  // Hizmet kartları: bölgenin açısına göre öne çıkan 6 hizmet (diğerleri bağlantı olarak); her bölgede farklı seçki
+  const procs = processesFor(d.slug, [faqFocus(lang, d)]);
+  const featIds = new Set<string>([...procs.map((p) => Object.keys(PROC_OF_SERVICE).find((k) => PROC_OF_SERVICE[k] === p) ?? ''), ...pickN(`feat:${d.slug}:${lang}`, SERVICES.map((x) => x.id), 6)]);
+  const featured = SERVICES.filter((x) => featIds.has(x.id)).slice(0, 6);
   const nearby = DISTRICTS.filter((x) => x.slug !== d.slug && x.kind === d.kind && isIndexable(lang, x.slug)).slice(0, 8);
   const hotel = HOTEL_BASE[lang] && d.hotelSlug && OTEL_BOLGELERI.some((r) => r.slug === d.hotelSlug) ? `${HOTEL_BASE[lang]}/${d.hotelSlug}` : null;
   // Aynı bölge için farklı yazılışlar: her bölge hizmet varyantlarının farklı bir dilimini gösterir
@@ -638,7 +659,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      businessNode(lang),
+      businessNode(lang, false),
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
@@ -678,14 +699,19 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
-        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${!isFreeService(d.slug) ? SVC_FAR[lang] : u.free} · ${u.hours}`} h1={h1}
-          desc={`${districtAbout(lang, d)}`} waMsg={waMsg} />
+        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${!isFreeService(d.slug) ? SVC_FAR[lang] : SVC_NEAR[lang]} · ${u.hours}`} h1={h1}
+          desc={directAnswer(lang, d.slug, d.name[lang], d.loc[lang], d.kind === 'resort')} waMsg={waMsg} />
+        <section className="sl-sec" style={{ paddingBottom: 0 }}>
+          <div className="sl-ctr" style={{ maxWidth: 820 }}>
+            <p style={{ fontSize: '.95rem', lineHeight: 1.8, color: 'rgba(255,255,255,.8)', margin: 0 }}>{districtAbout(lang, d)}</p>
+          </div>
+        </section>
 
         {DISTRICT_FACTS[d.slug] && (
           <section className="sl-sec" aria-labelledby="local-h" style={{ paddingBottom: '1rem' }}>
@@ -707,7 +733,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
               }[lang]}</h2>
             </div>
             <div className="sl-price-grid">
-              {SERVICES.map((s) => (
+              {featured.map((s) => (
                 <a key={s.id} href={serviceUrl(lang, s)} className="sl-price-card" style={{ display: 'block' }}>
                   <div className="sl-price-head">
                     <span className="sl-price-icon" aria-hidden="true">{s.icon}</span>
@@ -720,7 +746,23 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
                 </a>
               ))}
             </div>
+            <div style={{ marginTop: '1.2rem' }}>
+              {SERVICES.filter((s) => !featured.includes(s)).map((s) => (<a key={s.id} href={serviceUrl(lang, s)} style={linkChip}>{s.name[lang]}</a>))}
+            </div>
             <p style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)', marginTop: '1.2rem', textAlign: 'center' }}>{u.photoPrice}</p>
+          </div>
+        </section>
+
+        <section className="sl-sec" aria-labelledby="proc-h">
+          <div className="sl-ctr" style={{ maxWidth: 820 }}>
+            <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="proc-h">{PROC_H[lang](c.loc)}</h2></div>
+            {procs.map((id) => (
+              <div key={id} style={{ marginBottom: '1.1rem' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 .3rem', color: '#C9A96E' }}>{PROCESS[id][lang].h}</h3>
+                <p style={{ fontSize: '.9rem', lineHeight: 1.75, color: 'rgba(255,255,255,.78)', margin: 0 }}>{PROCESS[id][lang].p}</p>
+              </div>
+            ))}
+            <p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.6)', marginTop: '.8rem' }}>{DURATION[lang].all}</p>
           </div>
         </section>
 
@@ -748,7 +790,6 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
           </div>
         </section>
         {otherLangLinks(lang, (l) => districtUrl(l, d), (l) => isIndexable(l, d.slug))}
-        <ReviewsBlock lang={lang === 'tr' ? 'tr' : 'en'} />
       </Shell>
     </>
   );
@@ -772,7 +813,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      businessNode(lang),
+      businessNode(lang, false),
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
@@ -802,14 +843,14 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
         <Hero lang={lang} tag={`${s.icon} ${u.free} · ${u.hours}`} h1={<>{s.name[lang]}<br /><span className="sl-accent">Antalya</span></>}
-          desc={s.intro[lang]} waMsg={waMsg} />
+          desc={`${s.intro[lang]} ${timeOf(lang, s)}.`} waMsg={waMsg} />
 
         <section className="sl-sec" aria-labelledby="det-h">
           <div className="sl-ctr" style={{ maxWidth: 720 }}>
@@ -817,8 +858,10 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
             <div className="sl-howto-list">
               <div className="sl-howto-item"><div className="sl-howto-t">{u.time}</div><div className="sl-howto-d">{timeOf(lang, s)}</div></div>
               {price && (<div className="sl-howto-item"><div className="sl-howto-t">{u.price}</div><div className="sl-howto-d">{price}</div></div>)}
-              <div className="sl-howto-item"><div className="sl-howto-t">{u.free}</div><div className="sl-howto-d">{u.where} · {u.hours}</div></div>
+              <div className="sl-howto-item"><div className="sl-howto-t">{u.free}</div><div className="sl-howto-d">{SERVICE_RULE[lang].full}</div></div>
             </div>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '1.4rem 0 .3rem', color: '#C9A96E' }}>{PROCESS[PROC_OF_SERVICE[s.id] ?? 'kiyafet-tamiri'][lang].h}</h3>
+            <p style={{ fontSize: '.9rem', lineHeight: 1.75, color: 'rgba(255,255,255,.78)', margin: 0 }}>{PROCESS[PROC_OF_SERVICE[s.id] ?? 'kiyafet-tamiri'][lang].p}</p>
             {s.extra && (<p style={{ marginTop: '1.2rem', fontSize: '.84rem' }}><a href={s.extra.href} style={{ color: '#C9A96E', fontWeight: 700 }}>{s.extra.label[lang]} →</a></p>)}
           </div>
         </section>
@@ -852,7 +895,6 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           </div>
         </section>
         {otherLangLinks(lang, (l) => serviceUrl(l, s))}
-        <ReviewsBlock lang={lang === 'tr' ? 'tr' : 'en'} />
       </Shell>
     </>
   );
@@ -886,7 +928,7 @@ export function HubPage({ lang }: { lang: Lang }) {
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: u.pricesHref, label: u.pricesLink },
@@ -918,7 +960,7 @@ export function HubPage({ lang }: { lang: Lang }) {
         </section>
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />
         {otherLangLinks(lang, (l) => SERVICE_BASE[l])}
-        <ReviewsBlock lang={lang === 'tr' ? 'tr' : 'en'} />
+        <ReviewsBlock lang={lang} />
       </Shell>
     </>
   );
@@ -937,7 +979,7 @@ export function KeywordBlock({ slug }: { slug: string }) {
       <div className="sl-sec"><div className="sl-ctr" style={{ maxWidth: 900 }}>
         <h2 id="kw-h" className="sl-sec-h sl-ff" style={{ fontSize: '1.4rem' }}>{d.name.tr} — terzi hizmetleri</h2>
         <p className="sl-sec-sub" style={{ margin: '.6rem 0 1.2rem' }}>
-          Paça kısaltma ve fermuar genellikle aynı gün; elbise, ceket, gömlek, mont ve abiye tadilatı genellikle ertesi gün; elbise dikimi genellikle 3 gün içinde. Kesin süre işe göre WhatsApp&apos;ta netleşir. Gelinlik tadilatı ₺800&apos;den, abiye ₺800&apos;den. Konyaaltı'nda otel ve eve ücretsiz servis, her gün 08:00–23:00.
+          {DURATION.tr.all} Gelinlik ve abiye tadilatı ₺800&apos;den başlar. {serviceRuleFor('tr', d.slug)}; her gün 08:00–23:00.
         </p>
         <ul style={{ listStyle: 'none', padding: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.75)' }}>
           {popular.map((p) => (<li key={p}>✂️ {p}</li>))}

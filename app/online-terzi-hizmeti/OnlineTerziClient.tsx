@@ -512,7 +512,7 @@ export default function OnlineTerziClient() {
           <ol style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 24, padding: 0, listStyle: 'none' }}>
             {[
               { n: '01', icon: '📏', title: 'Ölçünüzü Alın', desc: 'Evdeki mezuranızla 5 temel ölçüyü alın. Yardıma ihtiyacınız varsa WhatsApp görüntülü ölçü seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir.' },
-              { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Tasarımcılarımız 48 saat içinde taslak hazırlar.' },
+              { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Taslak ve dikim süresi modele ve adede göre WhatsApp\'ta netleşir.' },
               { n: '03', icon: '✂️', title: 'Üretim Başlıyor', desc: 'Taslağı onayladığınız anda atölyemiz harekete geçer. Kalıp çıkarma, kesim, dikim, ütü ve kalite kontrol aşamaları eksiksiz tamamlanır.' },
               { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Kıyafetiniz paketlenip istediğiniz şehre veya ülkeye gönderilir; yurt dışı kargo genelde 1–3 hafta sürer. Oturmayan bir yer olursa WhatsApp\'tan yazın, değiştirir veya düzeltiriz.' },
             ].map(s => (

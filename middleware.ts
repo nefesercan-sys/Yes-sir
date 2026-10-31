@@ -10,16 +10,19 @@ const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide"];
 
 // URL'den dili çıkar → kök layout <html lang> değerini SUNUCU HTML'inde doğru verir
 // (botlar JS çalıştırmadan ham HTML'i okur).
-function langFromPath(pathname: string): "tr" | "en" | "ru" | "de" {
+type Lang = "tr" | "en" | "ru" | "de" | "es" | "fr" | "pl" | "uk" | "nl" | "ar";
+function langFromPath(pathname: string): Lang {
   if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
   if (pathname === "/ru" || pathname.startsWith("/ru/")) return "ru";
   if (pathname === "/de" || pathname.startsWith("/de/")) return "de";
+  const m = pathname.match(/^\/(es|fr|pl|uk|nl|ar)(\/|$)/);
+  if (m) return m[1] as Lang;
   if (pathname.startsWith("/online-tailor-service")) return "en";
   return "tr";
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname, searchParams, origin } = request.nextUrl;
+  const { pathname, origin } = request.nextUrl;
 
   // 0. Kaldırılan sayfalar → 410 Gone
   if (
@@ -54,27 +57,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 2. /ilanlar query parametrelerini temiz URL'ye çevir
-  if (pathname === "/ilanlar") {
-    const sektor = searchParams.get("sektor");
-    const sehir = searchParams.get("sehir");
-    let targetPath: string | null = null;
-    const keysToRemove: string[] = [];
-    if (sehir && sektor) {
-      targetPath = `/ilanlar/${sehir}/${sektor}`;
-      keysToRemove.push("sehir", "sektor");
-    } else if (sektor) {
-      targetPath = `/ilanlar/turkiye/${sektor}`;
-      keysToRemove.push("sektor");
-    }
-    if (targetPath) {
-      const targetUrl = new URL(targetPath, request.url);
-      searchParams.forEach((val, key) => {
-        if (!keysToRemove.includes(key)) targetUrl.searchParams.set(key, val);
-      });
-      return NextResponse.redirect(targetUrl, { status: 301 });
-    }
-  }
+  // /ilanlar/[sehir]/[sektor] sayfası kendisi /ilanlar?sehir=&sektor= adresine yönlenir (döngü olmaması için burada ters yönlendirme yok).
 
   // 3. Dil başlığı (kök layout okur)
   const headers = new Headers(request.headers);

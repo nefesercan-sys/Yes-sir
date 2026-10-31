@@ -327,7 +327,6 @@ function IlanVerIcerik() {
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 80 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
         * { box-sizing: border-box; }
         input:focus, select:focus, textarea:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
         input[type=number]::-webkit-inner-spin-button { opacity: 1; }
@@ -462,10 +461,10 @@ function IlanVerIcerik() {
             <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
               
               <div style={{ marginBottom: 16 }}>
-                <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                <label htmlFor="appilanv-f1" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
                   İlan Başlığı <span style={{ color: "#dc2626" }}>*</span>
                 </label>
-                <input
+                <input id="appilanv-f1"
                   value={formData.baslik || ""}
                   onChange={e => setField("baslik", e.target.value)}
                   placeholder="Kısa, açıklayıcı bir başlık yazın..."
@@ -478,10 +477,10 @@ function IlanVerIcerik() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  <label htmlFor="appilanv-f2" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
                     Ülke <span style={{ color: "#dc2626" }}>*</span>
                   </label>
-                  <select
+                  <select id="appilanv-f2"
                     value={seciliUlke}
                     onChange={e => setSeciliUlke(e.target.value)}
                     style={INP}
@@ -536,10 +535,10 @@ function IlanVerIcerik() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  <label htmlFor="appilanv-f3" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
                     İletişim Bilgisi <span style={{ color: "#dc2626" }}>*</span>
                   </label>
-                  <input
+                  <input id="appilanv-f3"
                     type="text"
                     value={formData.iletisim || ""}
                     onChange={e => setField("iletisim", e.target.value)}
@@ -549,10 +548,10 @@ function IlanVerIcerik() {
                   <p style={{ fontSize: 10, color: "#94a3b8", marginTop: 4 }}>Müşterilerin size ulaşacağı numara veya adres.</p>
                 </div>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
+                  <label htmlFor="appilanv-f4" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>
                     Açık Adres (Opsiyonel)
                   </label>
-                  <input
+                  <input id="appilanv-f4"
                     type="text"
                     value={formData.adres || ""}
                     onChange={e => setField("adres", e.target.value)}

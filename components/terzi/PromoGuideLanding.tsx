@@ -5,6 +5,7 @@ import { INTL, type ILang } from '@/lib/intl';
 import { PROMO, PROMO_ALL, promoUrl } from '@/lib/intl-promo';
 import { BASE, URLS, WA_NUMBER } from '@/lib/tekstil-sayfalari';
 import { OG_DEFAULT } from '@/components/terzi/IntlLanding';
+import { jsonLdString } from '@/lib/json-ld';
 
 const UPDATED = '2026-10-30';
 
@@ -31,7 +32,7 @@ export default function PromoGuideLanding({ lang }: { lang: ILang }) {
   const c = PROMO[lang]; const g = INTL[lang];
   return (
     <main lang={lang} dir={g.dir} style={{ fontFamily: 'system-ui,sans-serif', background: C.cream, color: '#3A3028', minHeight: '100vh', lineHeight: 1.7 }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(promoJsonLd(lang)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(promoJsonLd(lang)) }} />
 
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>

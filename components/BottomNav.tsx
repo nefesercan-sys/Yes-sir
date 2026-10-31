@@ -22,6 +22,10 @@ export default function BottomNav() {
   const terziKabugu = isTerziPath(pathname);
   if (terziKabugu) return null;
 
+  // İlan detayı (kendi sabit alt çubuğu var), bal bölümü ve giriş/kayıt akışlarında gizli
+  const GIZLI = ["/ilan/", "/bal", "/giris", "/uye-ol", "/kayit", "/sifremi-unuttum", "/sifre-sifirla"];
+  if (pathname && GIZLI.some((p) => (p.endsWith("/") ? pathname.startsWith(p) : pathname === p || pathname.startsWith(p + "/")))) return null;
+
   return (
     <>
       <style>{`

@@ -33,13 +33,13 @@ const FAQ_ITEMS = [
   { q: 'Говорите ли вы по-русски?', a: 'Да, вы можете оформить заказ и обсудить все детали на русском языке через WhatsApp — без переводчика.' },
   { q: 'Работаете ли вы с кожаными изделиями?', a: 'Да, у нас есть оборудование для кожаных курток, дублёнок, пальто и плотного денима.' },
   { q: 'Шьёте ли вы платья на заказ?', a: 'Да, пошив по индивидуальным меркам — от 800 лир, срок изготовления 3–5 рабочих дней.' },
-  { q: 'Моё платье порвалось, можете починить в тот же день?', a: 'Да, большинство разрывов и распоротых швов чинится в тот же день. Отправьте фото в WhatsApp для быстрой оценки.' },
+  { q: 'Моё платье порвалось, можно починить срочно?', a: 'Да, срочный ремонт разрывов и швов занимает 1–2 часа, обычный — готов на следующий день. Отправьте фото в WhatsApp для быстрой оценки.' },
   { q: 'Работаете ли вы вечером или в выходные?', a: 'Да, мы работаем ежедневно с 08:00 до 23:00, включая вечерние часы и выходные. Напишите нам в WhatsApp, чтобы записаться.' },
   { q: 'Шьёте ли вы из натуральных тканей — хлопка или льна?', a: 'Да, предлагаем пошив одежды на заказ из 100% хлопка и льна.' },
-  { q: "Где в Анталье подшить брюки рядом со мной?", a: 'В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов от ₺200, обычно в тот же день или обычно за 1–2 дня. WhatsApp: +90 531 898 64 18' },
+  { q: "Где в Анталье подшить брюки рядом со мной?", a: 'В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов от ₺200, готово на следующий день, срочно — за 1–2 часа. WhatsApp: +90 531 898 64 18' },
   { q: "Сколько стоит подшив и замена молнии в Анталье?", a: 'Подшив от ₺200, ушивание по талии от ₺200, замена молнии от ₺300, подгонка свадебного платья от ₺800 (цены 2026). Точную цену назовём по фото в WhatsApp.' },
   { q: "Вы переделываете куртки, пальто, рубашки, юбки и шорты?", a: 'Да. Переделываем и ремонтируем куртки, пальто, рубашки, юбки, шорты, платья и брюки, мужские и женские. Пришлите фото вещи в WhatsApp — назовём цену и срок.' },
-  { q: "Я живу в отеле всего несколько дней. Успеете?", a: 'Да. Подшив и ремонт обычно готовы в тот же день или обычно за 1–2 дня; заберём вещи из отеля и вернём обратно (бесплатно в Коньяалты, в другие районы — стоимость по расстоянию).' },
+  { q: "Я живу в отеле всего несколько дней. Успеете?", a: 'Да. Подшив и ремонт готовы на следующий день, срочно — за 1–2 часа; забор из отеля и доставка обратно бесплатны во всех отельных районах.' },
 ]
 
 export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props) {
@@ -69,7 +69,6 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
           --font-display: 'Fraunces', Georgia, serif;
           --font-body: 'Inter', system-ui, -apple-system, sans-serif;
         }
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap');
         * { box-sizing: border-box; }
         .page { background: var(--linen); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
@@ -278,7 +277,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
         <article className="group">
           <h3 className="group-title">Ремонт и подгонка</h3>
           <div className="price-list">
-            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">в тот же день</span></span><span className="price-value">200 ₺</span></div>
+            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">на следующий день</span></span><span className="price-value">200 ₺</span></div>
             <div className="price-row"><span className="price-name">Замена молнии (брюки/куртка)</span><span className="price-value">от 120 ₺</span></div>
             <div className="price-row"><span className="price-name">Заужение по фигуре</span><span className="price-value">от 180 ₺</span></div>
             <div className="price-row"><span className="price-name">Ремонт кожаных изделий</span><span className="price-value">от 300 ₺</span></div>

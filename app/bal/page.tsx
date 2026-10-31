@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getDb } from '@/lib/mongodb';
 import { balMetinUygula, BAL_WA_VARSAYILAN, SSS } from '@/lib/bal-icerik';
 import BalVitriniClient from './BalVitriniClient';
+import { jsonLdString } from '@/lib/json-ld';
 
 export const revalidate = 300;
 
@@ -76,7 +77,7 @@ export default async function BalPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <BalVitriniClient urunler={urunler} sss={SSS} />
     </>

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
 
 const SEHIR_ETIKETLER: Record<string, string> = {
   turkiye:    "Tüm Türkiye",   // ← yeni eklendi
@@ -41,47 +42,22 @@ const SEKTOR_ETIKETLER: Record<string, string> = {
   "saglik-med":   "Sağlık & Medikal",
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { sehir: string; sektor: string };
-}): Promise<Metadata> {
-  const sehir  = SEHIR_ETIKETLER[params.sehir]  ?? params.sehir;
-  const sektor = SEKTOR_ETIKETLER[params.sektor] ?? params.sektor;
+// Bu adres gerçek ilan listesi olmayan programatik bir kısayoldur: bilinmeyen şehir/sektör 404,
+// bilinenler gerçek listeye (/ilanlar?sehir=&sektor=) yönlenir. Boş içerikli sayfa indexlenmez.
+export const dynamicParams = true;
 
-  const title = params.sehir === "turkiye"
-    ? `${sektor} İlanları — Tüm Türkiye | SwapHubs`
-    : `${sehir} ${sektor} İlanları | SwapHubs`;
-
-  const description = params.sehir === "turkiye"
-    ? `Türkiye genelinde ${sektor} sektöründe ticari ve bireysel ilanlar. SwapHubs güvenli platform.`
-    : `${sehir}'da ${sektor} alanında ilanlar. SwapHubs güvenli platform.`;
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `https://swaphubs.com/ilanlar/${params.sehir}/${params.sektor}`,
-    },
-  };
-}
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
 
 export default function IlanlarSayfasi({
   params,
 }: {
   params: { sehir: string; sektor: string };
 }) {
-  const sehir  = SEHIR_ETIKETLER[params.sehir]  ?? params.sehir;
-  const sektor = SEKTOR_ETIKETLER[params.sektor] ?? params.sektor;
-
-  const baslik = params.sehir === "turkiye"
-    ? `${sektor} İlanları — Tüm Türkiye`
-    : `${sehir} — ${sektor} İlanları`;
-
-  return (
-    <main>
-      <h1>{baslik}</h1>
-      {/* Mevcut ilan listesi bileşeninizi buraya ekleyin */}
-    </main>
-  );
+  if (!(params.sehir in SEHIR_ETIKETLER) || !(params.sektor in SEKTOR_ETIKETLER)) notFound();
+  const q = new URLSearchParams();
+  q.set("sektor", params.sektor);
+  if (params.sehir !== "turkiye") q.set("sehir", params.sehir);
+  redirect(`/ilanlar?${q.toString()}`);
 }

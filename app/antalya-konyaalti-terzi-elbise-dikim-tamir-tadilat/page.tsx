@@ -5,6 +5,7 @@ import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Script from 'next/script';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ── SEO METADATA (Google Arama Sonuçlarında Görünecek Kısım) ──
 export const metadata: Metadata = {
@@ -78,7 +79,7 @@ export default function KonyaaltiTerziPage() {
       <Script
         id="local-business-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(schemaData) }}
       />
 
       {/* ── HERO BÖLÜMÜ ── */}
@@ -210,7 +211,7 @@ export default function KonyaaltiTerziPage() {
           <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"
         items={[
-          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis Konyaaltı\'nda ücretsizdir, diğer bölgelerde mesafeye göre belirlenir.' },
+          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Servis otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz.' },
           { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺200\'den, fermuar değişimi ₺300\'den, bel daraltma ₺200\'den, elbise dikimi ₺800\'den başlar. Kesin fiyat için fotoğraf göndermeniz yeterli.' },
           { q: 'Fiyatı gitmeden nasıl öğrenirim?', a: 'Kıyafetin ve yapılacak işlemin fotoğrafını WhatsApp\'tan gönderin: +90 531 898 64 18.' },
           { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
@@ -135,17 +136,17 @@ export default function TerziCagirPage() {
   const waUrl = `https://wa.me/${PHONE_E164.replace('+','')}?text=${encodeURIComponent(WA_MSG)}`;
 
   const FIYATLAR = [
-    ['Paça Kısaltma', '₺200', 'Aynı gün'],
-    ['Bel Daraltma', '₺200', '1–2 gün'],
-    ['Etek Kısaltma', '₺200', 'Aynı gün'],
-    ['Pantolon Paçası', '₺200', 'Aynı gün'],
-    ['Fermuar Değişimi', '₺300', 'Aynı gün'],
-    ['Fermuar Tamiri', '₺300', 'Aynı gün'],
-    ['Ceket Tamiri', '₺200', '1–2 gün'],
-    ['Mont Tamiri', '₺200', '1–2 gün'],
-    ['T-Shirt Tamiri', '₺100', 'Aynı gün'],
-    ['Abiye Tamiri', '₺800', '48 saat'],
-    ['Elbise Dikimi', '₺800+', '3–5 gün'],
+    ['Paça Kısaltma', '₺200', 'Ertesi gün'],
+    ['Bel Daraltma', '₺200', 'Ertesi gün'],
+    ['Etek Kısaltma', '₺200', 'Ertesi gün'],
+    ['Pantolon Paçası', '₺200', 'Ertesi gün'],
+    ['Fermuar Değişimi', '₺300', 'Ertesi gün'],
+    ['Fermuar Tamiri', '₺300', 'Ertesi gün'],
+    ['Ceket Tamiri', '₺200', 'Ertesi gün'],
+    ['Mont Tamiri', '₺200', 'Ertesi gün'],
+    ['T-Shirt Tamiri', '₺100', 'Ertesi gün'],
+    ['Abiye Tamiri', '₺800', 'Ertesi gün'],
+    ['Elbise Dikimi', '₺800+', 'Modele göre'],
   ];
 
   const MAHALLELER = [
@@ -158,7 +159,7 @@ export default function TerziCagirPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/terzi-cagir" />
       <QuickActionBanner lang="tr" />
@@ -171,7 +172,6 @@ export default function TerziCagirPage() {
         overflowX: 'hidden',
       }}>
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap');
           *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
           html{scroll-behavior:smooth}
           :root{
@@ -617,15 +617,15 @@ export default function TerziCagirPage() {
 
 // Fiyat listesi sabit veri
 const FIYATLAR = [
-  ['Paça Kısaltma','₺200','Aynı gün'],
-  ['Bel Daraltma','₺200','1–2 gün'],
-  ['Etek Kısaltma','₺200','Aynı gün'],
-  ['Pantolon Paçası','₺200','Aynı gün'],
-  ['Fermuar Değişimi','₺300','Aynı gün'],
-  ['Fermuar Tamiri','₺300','Aynı gün'],
-  ['Ceket Tamiri','₺200','1–2 gün'],
-  ['Mont Tamiri','₺200','1–2 gün'],
-  ['T-Shirt Tamiri','₺100','Aynı gün'],
-  ['Abiye Tamiri','₺800','48 saat'],
-  ['Elbise Dikimi','₺800+','3–5 gün'],
+  ['Paça Kısaltma','₺200','Ertesi gün'],
+  ['Bel Daraltma','₺200','Ertesi gün'],
+  ['Etek Kısaltma','₺200','Ertesi gün'],
+  ['Pantolon Paçası','₺200','Ertesi gün'],
+  ['Fermuar Değişimi','₺300','Ertesi gün'],
+  ['Fermuar Tamiri','₺300','Ertesi gün'],
+  ['Ceket Tamiri','₺200','Ertesi gün'],
+  ['Mont Tamiri','₺200','Ertesi gün'],
+  ['T-Shirt Tamiri','₺100','Ertesi gün'],
+  ['Abiye Tamiri','₺800','Ertesi gün'],
+  ['Elbise Dikimi','₺800+','Modele göre'],
 ];

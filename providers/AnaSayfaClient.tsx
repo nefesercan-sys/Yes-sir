@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { TICARI_SEKTORLER, BIREYSEL_SEKTORLER } from "@/lib/sektorler";
 
 interface Ilan {
@@ -29,14 +30,6 @@ const STATS = [
   { v: "8K+", l: "Üye" },
   { v: "50+", l: "Ülke" },
   { v: "₺0", l: "İlan Ücreti" },
-];
-
-const BOTTOM_NAV = [
-  { icon: "🏠", label: "Ana Sayfa", href: "/" },
-  { icon: "🔍", label: "Keşfet", href: "/ilanlar" },
-  { icon: "➕", label: "İlan Ver", href: "/ilan-ver", primary: true },
-  { icon: "💬", label: "Mesajlar", href: "/mesajlar" },
-  { icon: "👤", label: "Profilim", href: "/panel" },
 ];
 
 interface Props {
@@ -244,12 +237,6 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
         .destek-body { padding: 16px; }
         .destek-ta { width: 100%; padding: 12px; border: 1.5px solid var(--border); border-radius: 12px; font-family: inherit; font-size: .85rem; resize: none; height: 100px; outline: none; }
         .destek-send { width: 100%; margin-top: 10px; padding: 12px; border-radius: 12px; background: var(--navy); border: none; color: #fff; font-family: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: var(--navy); display: flex; align-items: stretch; z-index: 400; box-shadow: 0 -4px 20px rgba(0,0,0,.25); }
-        .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,.5); font-family: inherit; font-size: .62rem; font-weight: 700; transition: .18s; position: relative; padding: 0; text-transform: uppercase; }
-        .bottom-nav-item:hover { color: rgba(255,255,255,.85); }
-        .bottom-nav-icon { font-size: 1.25rem; line-height: 1; }
-        .bottom-nav-primary { background: var(--red) !important; color: #fff !important; margin: 8px 6px; border-radius: 12px !important; height: calc(100% - 16px); }
-        @media (min-width: 768px) { .bottom-nav { display: none; } }
         @media (max-width: 900px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 640px) {
           .hero { padding: 50px 16px 90px; }
@@ -401,10 +388,11 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
               const gorselUrl = gorsel(ilan);
               const oncelikli = idx < 4;
               return (
-                <div
+                <Link
                   key={ilan._id}
                   className="kart"
-                  onClick={() => router.push(`/ilan/${ilan._id || ilan.id}`)}
+                  href={`/ilan/${ilan._id || ilan.id}`}
+                  style={{ textDecoration: "none", color: "inherit", display: "block" }}
                 >
                   <div className="kart-img">
                     {gorselUrl ? (
@@ -456,15 +444,15 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
                           ? `${fmt(ilan.butceMin!)} ${ilan.butceBirimi || "₺"}`
                           : "Teklif Al"}
                       </div>
-                      <button
+                      <span
                         className={`kart-btn ${ilan.rol === "alan" ? "red" : ""}`}
-                        onClick={e => { e.stopPropagation(); router.push(`/ilan/${ilan._id || ilan.id}`); }}
+                        style={{ display: "inline-block" }}
                       >
                         {ilan.rol === "alan" ? "Teklif Ver →" : "İncele →"}
-                      </button>
+                      </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })
           )}
@@ -525,27 +513,6 @@ export default function AnaSayfaClient({ initialIlanlar, ilkGorsel }: Props) {
           </div>
         </div>
       )}
-
-      <nav className="bottom-nav" aria-label="Alt navigasyon">
-        {BOTTOM_NAV.map(item => (
-          <button
-            key={item.href}
-            className={`bottom-nav-item ${item.primary ? "bottom-nav-primary" : ""}`}
-            onClick={() => {
-              if (item.href === "/ilan-ver") {
-                router.push(`/ilan-ver?tip=${aktifTip}&rol=${aktifRol}`);
-              } else if (item.href === "/panel" && status !== "authenticated") {
-                router.push("/giris");
-              } else {
-                router.push(item.href);
-              }
-            }}
-          >
-            <span className="bottom-nav-icon">{item.icon}</span>
-            {item.label}
-          </button>
-        ))}
-      </nav>
     </>
   );
 }

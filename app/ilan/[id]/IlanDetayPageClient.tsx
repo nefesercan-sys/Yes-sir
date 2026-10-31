@@ -52,7 +52,7 @@ interface Ilan {
 
 
 
-function IlanDetayIcerik() {
+function IlanDetayIcerik({ ilanInitial }: { ilanInitial?: Ilan | null }) {
 
   const { data: session } = useSession();
 
@@ -68,9 +68,9 @@ function IlanDetayIcerik() {
 
 
 
-  const [ilan, setIlan] = useState<Ilan | null>(null);
+  const [ilan, setIlan] = useState<Ilan | null>(ilanInitial ?? null);
 
-  const [yukleniyor, setYukleniyor] = useState(true);
+  const [yukleniyor, setYukleniyor] = useState(!ilanInitial);
 
   const [hata, setHata] = useState("");
 
@@ -86,7 +86,7 @@ function IlanDetayIcerik() {
 
   useEffect(() => {
 
-    if (!ilanId) return;
+    if (!ilanId || ilanInitial) return; // sunucudan geldiyse tekrar çekme
 
     (async () => {
 
@@ -130,6 +130,13 @@ function IlanDetayIcerik() {
 
 
 
+  useEffect(() => {
+    if (!silOnay) return;
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setSilOnay(false); };
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  }, [silOnay]);
+
   const handleSil = async () => {
 
     setSiliyor(true);
@@ -140,7 +147,7 @@ function IlanDetayIcerik() {
 
       if (res.ok) {
 
-        router.push("/profil?silindi=1");
+        router.push("/panel?silindi=1");
 
       } else {
 
@@ -274,7 +281,6 @@ function IlanDetayIcerik() {
 
       <style>{`
 
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
 
         *{box-sizing:border-box}
 
@@ -292,7 +298,7 @@ function IlanDetayIcerik() {
 
         <div style={{ flex: 1, minWidth: 0 }}>
 
-          <h1 style={{ color: "#fff", fontSize: 14, fontWeight: 800, fontFamily: "Unbounded, sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{ilan.baslik}</h1>
+          <div role="presentation" style={{ color: "#fff", fontSize: 14, fontWeight: 800, fontFamily: "Unbounded, sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{ilan.baslik}</div>
 
           <p style={{ color: "rgba(255,255,255,.4)", fontSize: 11, marginTop: 2 }}>{ilan.sehir}{ilan.ulke && ilan.ulke !== "Türkiye" ? `, ${ilan.ulke}` : ""} · {ilan.tip === "ticari" ? "Ticari" : "Bireysel"}</p>
 
@@ -546,7 +552,7 @@ function IlanDetayIcerik() {
 
       {silOnay && (
 
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
+        <div role="dialog" aria-modal="true" aria-label="Silme onayı" style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
 
           <div style={{ background: "#fff", borderRadius: 20, padding: 24, width: "100%", maxWidth: 420, animation: "fadeIn .2s ease" }}>
 
@@ -602,7 +608,7 @@ function IlanDetayIcerik() {
 
 
 
-export default function IlanDetayPage() {
+export default function IlanDetayPage({ ilan }: { ilan?: Ilan | null }) {
 
   return (
 
@@ -616,7 +622,7 @@ export default function IlanDetayPage() {
 
     }>
 
-      <IlanDetayIcerik />
+      <IlanDetayIcerik ilanInitial={ilan} />
 
     </Suspense>
 

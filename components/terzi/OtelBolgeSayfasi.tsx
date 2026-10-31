@@ -12,6 +12,11 @@ const BASE_PATH: Record<Lang, string> = {
   ru: '/ru/vyezdnoy-portnoy-antalya',
 };
 
+import { DURATION, MAPS_URL } from '@/lib/business';
+import { jsonLdString } from '@/lib/json-ld';
+import { DISTRICT_FACTS } from '@/lib/district-facts';
+import { PROCESS, processesFor } from '@/lib/bolge-icerik';
+
 const T: Record<Lang, any> = {
   en: {
     tag: (r: string) => `🚗 Mobile Tailor · ${r} Hotel Zone`,
@@ -19,7 +24,7 @@ const T: Record<Lang, any> = {
     heroDesc: (r: string, blurb: string) => `${blurb} Terzi Can's mobile tailor comes directly to your hotel in ${r} — measurement, tailoring, alterations, ironing and dry cleaning, delivered back to your room.`,
     waShare: 'Share Hotel Name →', callBtn: PHONE,
     flags: [['🇬🇧', 'We come to your hotel'], ['🇷🇺', 'Приедем в ваш отель'], ['🇩🇪', 'Wir kommen zu Ihnen'], ['🇹🇷', 'Otele geliyoruz']],
-    aboutH: (r: string) => `About the ${r} Hotel District`, travelLabel: 'Travel time:',
+    aboutH: (r: string) => `About the ${r} Hotel District`, travelLabel: 'Workshop: Hurma, Konyaaltı ·',
     hotelsH: (r: string) => `Hotels in the ${r} Area`, hotelsSub: 'We can reach you at any hotel in this district — just share your hotel name and we\'ll confirm.',
     otherHotels: '+ every other hotel in this district. Just message your hotel name on WhatsApp.',
     howH: 'How It Works', howSub: 'Tailor service delivered to your hotel room in 4 steps',
@@ -36,13 +41,13 @@ const T: Record<Lang, any> = {
       ['👗', 'Wedding & Evening Wear', 'Delicate alterations for special occasions'],
       ['🧺', 'Ironing & Dry Cleaning', 'Professional steam press and dry cleaning'],
     ],
-    priceH: 'Prices', priceSub: 'Hotel visit free in Konyaaltı, other areas priced by distance — plus the price of the work',
+    priceH: 'Prices', priceSub: 'The hotel visit is free in every hotel area we cover — you only pay for the work',
     priceRows: [['Hotel Visit Fee', 'FREE'], ['Hemming', '₺200+'], ['Zipper Replacement', '₺300+'], ['Dress / Suit Alteration', '₺200+'], ['Wedding Dress Alteration', '₺800+'], ['Ironing (per item)', '₺80+'], ['Dry Cleaning', '₺300+']],
     faqH: 'Frequently Asked Questions',
     faq: (r: string) => [
       [`Do you come to all hotels in ${r}?`, `Yes! We visit every hotel in ${r} — just share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
-      ['Is the hotel visit free?', 'Free in Konyaaltı. For other areas the visit fee is set by distance and confirmed on WhatsApp before we come; you then pay for the work itself.'],
-      ['How fast is the service?', 'It depends on the job and our workload; simple repairs and hemming are often ready within a day or two. We agree the handover time on WhatsApp.'],
+      ['Is the hotel visit free?', 'Yes. Collection from and delivery to your hotel are free in every hotel area we cover; you only pay for the work itself.'],
+      ['How fast is the service?', DURATION.en.all],
       ['Do you speak English?', `Yes — write to us on WhatsApp in your own language and we will reply. WhatsApp: ${PHONE}`],
     ],
     ctaH: (r: string) => `Book Your ${r} Hotel Tailor Now`, ctaSub: 'Share your hotel name — we confirm your appointment on WhatsApp',
@@ -54,7 +59,7 @@ const T: Record<Lang, any> = {
     heroDesc: (r: string, blurb: string) => `${blurb} Выездной портной Terzi Can приедет прямо в ваш отель в районе ${r} — снятие мерок, пошив, подгонка, глажка и химчистка с доставкой в номер.`,
     waShare: 'Отправить название отеля →', callBtn: PHONE,
     flags: [['🇷🇺', 'Приедем в ваш отель'], ['🇬🇧', 'We come to your hotel'], ['🇩🇪', 'Wir kommen zu Ihnen'], ['🇹🇷', 'Otele geliyoruz']],
-    aboutH: (r: string) => `Об отельном районе ${r}`, travelLabel: 'Время в пути:',
+    aboutH: (r: string) => `Об отельном районе ${r}`, travelLabel: 'Мастерская: Хурма, Коньяалты ·',
     hotelsH: (r: string) => `Отели в районе ${r}`, hotelsSub: 'Мы можем приехать в любой отель этого района — просто напишите название отеля, и мы подтвердим.',
     otherHotels: '+ все остальные отели этого района. Просто напишите название отеля в WhatsApp.',
     howH: 'Как это работает', howSub: 'Сервис портного прямо в ваш номер за 4 шага',
@@ -71,13 +76,13 @@ const T: Record<Lang, any> = {
       ['👗', 'Свадебная и вечерняя одежда', 'Деликатная подгонка для особых случаев'],
       ['🧺', 'Глажка и химчистка', 'Профессиональная паровая глажка и химчистка'],
     ],
-    priceH: 'Цены', priceSub: 'Выезд в отель: в Коньяалты бесплатно, в другие районы — по расстоянию, плюс стоимость работы',
+    priceH: 'Цены', priceSub: 'Выезд в отель бесплатный во всех отельных районах, где мы работаем, — оплачивается только работа',
     priceRows: [['Выезд в отель', 'БЕСПЛАТНО'], ['Укорачивание', 'от ₺200'], ['Замена молнии', 'от ₺300'], ['Подгонка платья/костюма', 'от ₺200'], ['Подгонка свадебного платья', 'от ₺800'], ['Глажка (за вещь)', 'от ₺80'], ['Химчистка', 'от ₺300']],
     faqH: 'Часто задаваемые вопросы',
     faq: (r: string) => [
       [`Вы приезжаете во все отели ${r}?`, `Да! Мы приезжаем в каждый отель района ${r} — просто напишите название отеля и номер комнаты в WhatsApp. WhatsApp: ${PHONE}`],
-      ['Выезд в отель бесплатный?', 'В Коньяалты — бесплатно. В другие районы стоимость выезда зависит от расстояния и согласуется в WhatsApp заранее; затем вы платите за саму работу.'],
-      ['Как быстро выполняется услуга?', 'Зависит от работы и загрузки; простой ремонт и подшив часто готовы за день-два. Время выдачи согласуем в WhatsApp.'],
+      ['Выезд в отель бесплатный?', 'Да. Забор из отеля и доставка обратно бесплатны во всех отельных районах, где мы работаем; вы платите только за работу.'],
+      ['Как быстро выполняется услуга?', DURATION.ru.all],
       ['Вы говорите по-русски?', `Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`],
     ],
     ctaH: (r: string) => `Вызвать портного в отель — ${r}`, ctaSub: 'Отправьте название отеля — подтвердим запись в WhatsApp',
@@ -89,7 +94,7 @@ const T: Record<Lang, any> = {
     heroDesc: (r: string, blurb: string) => `${blurb} Der mobile Schneider von Terzi Can kommt direkt zu Ihrem Hotel in ${r} — Maßnehmen, Schneidern, Änderungen, Bügeln und chemische Reinigung, geliefert zurück auf Ihr Zimmer.`,
     waShare: 'Hotelnamen senden →', callBtn: PHONE,
     flags: [['🇩🇪', 'Wir kommen zu Ihnen'], ['🇬🇧', 'We come to your hotel'], ['🇷🇺', 'Приедем в ваш отель'], ['🇹🇷', 'Otele geliyoruz']],
-    aboutH: (r: string) => `Über den Hotelbezirk ${r}`, travelLabel: 'Anfahrtszeit:',
+    aboutH: (r: string) => `Über den Hotelbezirk ${r}`, travelLabel: 'Werkstatt: Hurma, Konyaaltı ·',
     hotelsH: (r: string) => `Hotels im Gebiet ${r}`, hotelsSub: 'Wir erreichen Sie in jedem Hotel dieses Bezirks — teilen Sie einfach Ihren Hotelnamen mit, wir bestätigen den Termin.',
     otherHotels: '+ alle anderen Hotels in diesem Bezirk. Teilen Sie einfach Ihren Hotelnamen per WhatsApp mit.',
     howH: 'So funktioniert es', howSub: 'Schneiderservice direkt auf Ihr Hotelzimmer in 4 Schritten',
@@ -106,13 +111,13 @@ const T: Record<Lang, any> = {
       ['👗', 'Braut- & Abendkleidung', 'Behutsame Änderungen für besondere Anlässe'],
       ['🧺', 'Bügeln & Reinigung', 'Professionelles Dampfbügeln und chemische Reinigung'],
     ],
-    priceH: 'Preise', priceSub: 'Hotelbesuch in Konyaaltı kostenlos, andere Gebiete je nach Entfernung — dazu der Preis der Arbeit',
+    priceH: 'Preise', priceSub: 'Der Hotelbesuch ist in allen von uns bedienten Hotelgebieten kostenlos — Sie zahlen nur die Arbeit',
     priceRows: [['Hotelbesuch', 'KOSTENLOS'], ['Kürzen', 'ab ₺200'], ['Reißverschluss ersetzen', 'ab ₺300'], ['Kleid-/Anzugänderung', 'ab ₺200'], ['Brautkleid ändern', 'ab ₺800'], ['Bügeln (pro Stück)', 'ab ₺80'], ['Chemische Reinigung', 'ab ₺300']],
     faqH: 'Häufig gestellte Fragen',
     faq: (r: string) => [
       [`Kommen Sie zu allen Hotels in ${r}?`, `Ja! Wir besuchen jedes Hotel in ${r} — teilen Sie einfach Hotelname und Zimmernummer per WhatsApp mit. WhatsApp: ${PHONE}`],
-      ['Ist der Hotelbesuch kostenlos?', 'In Konyaaltı ja. Für andere Gebiete richtet sich das Entgelt nach der Entfernung und wird vorab per WhatsApp bestätigt; dazu zahlen Sie die eigentliche Schneiderarbeit.'],
-      ['Wie schnell ist der Service?', 'Das hängt von der Arbeit und der Auslastung ab; einfache Reparaturen und Kürzungen sind oft in ein bis zwei Tagen fertig. Die Übergabezeit klären wir per WhatsApp.'],
+      ['Ist der Hotelbesuch kostenlos?', 'Ja. Abholung im Hotel und Rücklieferung sind in allen von uns bedienten Hotelgebieten kostenlos; Sie zahlen nur die Schneiderarbeit.'],
+      ['Wie schnell ist der Service?', DURATION.de.all],
       ['Sprechen Sie Deutsch?', `Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`],
     ],
     ctaH: (r: string) => `Jetzt Schneider ins Hotel buchen — ${r}`, ctaSub: 'Hotelnamen senden — wir bestätigen den Termin per WhatsApp',
@@ -158,7 +163,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
     <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
       />
       {/* Hero Section */}
       <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem' }}>
@@ -204,10 +209,37 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           )}
 
           <p style={{ fontSize: '.85rem', color: '#B8975A', fontWeight: 700 }}>
-            🚗 {t.travelLabel} {maps ? <a href={maps} target="_blank" rel="noopener noreferrer" style={{ color: '#B8975A', textDecoration: 'underline' }}>{region.travelTime[lang]}</a> : region.travelTime[lang]}
+            📍 {t.travelLabel} <a href={maps || MAPS_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#B8975A', textDecoration: 'underline' }}>Google Maps</a>
           </p>
         </div>
       </section>
+
+      {/* Bölgeye özgü bilgi ve süreç anlatımı (bölge slug'ına göre deterministik; sayfalar arası kopya içeriği azaltır) */}
+      {(() => {
+        const fact = DISTRICT_FACTS[region.slug];
+        const surecler = processesFor(region.slug, []);
+        const h = lang === 'ru' ? 'Что важно знать' : lang === 'de' ? 'Gut zu wissen' : 'Good to know';
+        const lbl = lang === 'ru' ? ['Район', 'Чаще всего заказывают'] : lang === 'de' ? ['Lage', 'Häufigste Aufträge'] : ['Area', 'Most requested jobs'];
+        return (
+          <section style={{ background: '#fff', padding: '2.5rem 1.5rem' }}>
+            <div style={{ maxWidth: 860, margin: '0 auto' }}>
+              <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.4rem', color: '#1C1814', marginBottom: '.7rem' }}>{h} · {region.name}</h2>
+              {fact && (
+                <>
+                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.5rem' }}><strong>{lbl[0]}:</strong> {fact.where[lang]}</p>
+                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.9rem' }}><strong>{lbl[1]}:</strong> {fact.needs[lang]}</p>
+                </>
+              )}
+              {surecler.map((id) => (
+                <div key={id} style={{ marginBottom: '.7rem' }}>
+                  <h3 style={{ fontSize: '1rem', color: '#1C1814', margin: '0 0 .2rem' }}>{PROCESS[id][lang].h}</h3>
+                  <p style={{ color: '#7A6E62', fontSize: '.9rem', lineHeight: 1.7, margin: 0 }}>{PROCESS[id][lang].p}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Hotels Section */}
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>

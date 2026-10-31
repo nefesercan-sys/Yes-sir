@@ -2,7 +2,8 @@
 // EN / RU / DE sayfalar için bölge ve hizmet başına ELLE yazılmış, birbirinden FARKLI başlık / açıklama / anahtar kelime.
 // Her yakın bölge ayrı bir ihtiyaca odaklanır (tamir-tadilat, abiye/gelinlik, takım elbise, yırtık onarımı, keten-pamuk özel dikim,
 // kot/paça, mont/deri...). Hem tamir-tadilat hem özel dikim (keten, pamuk; bay, bayan) kapsanır.
-// Yalnızca doğrulanmış bilgi: paça ₺200'den, fermuar ₺300'den, abiye ve gelinlik ₺800'den, elbise dikimi ₺800'den, ücretsiz servis (yakın bölgeler).
+// Yalnızca doğrulanmış bilgi: paça ₺200'den, fermuar ₺300'den, abiye ve gelinlik ₺800'den, elbise dikimi ₺800'den; otellere servis ücretsiz,
+// eve ücretsiz servis yakın bölgelerde (lib/business.ts); süreler: normal ertesi gün, acil 1–2 saat.
 // Bölgede kayıt yoksa sayfa lib/seo-angles.ts şablonuna döner.
 // ============================================================
 
@@ -42,9 +43,9 @@ const FG_DISTRICT: Record<string, Row> = {
     de: { t: "Arapsuyu: Herren- und Damenkleidung ändern | SwapHubs", d: "Herren- und Damenkleidung in Arapsuyu: Jeans kürzen, Hose enger machen, Kleid reparieren, Nähte schließen. Abholung und Lieferung gratis. ☎ +90 531 898 64 18", kw: ["Schneider Arapsuyu", "Jeans kürzen Arapsuyu", "Kleidung reparieren Arapsuyu"] },
   },
   "toros": {
-    en: { t: "Toros Tailor Near Me: Same-Day Trouser Hemming | SwapHubs", d: "Trousers, skirts and jeans hemmed near Toros from ₺200, often the same day. Pick-up arranged on WhatsApp. ☎ +90 531 898 64 18", kw: ["tailor near me Toros", "trouser hemming near me", "same day hemming Antalya", "tailor open now Antalya"] },
-    ru: { t: "Портной рядом, Торос: подшив брюк в тот же день | SwapHubs", d: "Портной рядом, район Торос: подшив брюк, юбок и джинсов от ₺200, обычно в тот же день. Забор — по договорённости в WhatsApp. ☎ +90 531 898 64 18", kw: ["портной рядом Торос", "подшить брюки рядом", "подшив в тот же день Анталья"] },
-    de: { t: "Toros: Schneider in der Nähe, Hose am selben Tag | SwapHubs", d: "Schneider nahe Toros: Hosen, Röcke und Jeans kürzen ab ₺200, oft am selben Tag. Abholung per WhatsApp. ☎ +90 531 898 64 18", kw: ["Schneider in der Nähe Toros", "Hose kürzen in der Nähe", "Hose kürzen am selben Tag Antalya"] },
+    en: { t: "Toros Tailor Near Me: Next-Day Trouser Hemming | SwapHubs", d: "Trousers, skirts and jeans hemmed near Toros from ₺200, ready the next day or in 1–2 hours if urgent. ☎ +90 531 898 64 18", kw: ["tailor near me Toros", "trouser hemming near me", "urgent hemming Antalya", "tailor open now Antalya"] },
+    ru: { t: "Портной рядом, Торос: подшив брюк на следующий день | SwapHubs", d: "Портной рядом, район Торос: подшив брюк, юбок и джинсов от ₺200, готово на следующий день, срочно — за 1–2 часа. ☎ +90 531 898 64 18", kw: ["портной рядом Торос", "подшить брюки рядом", "срочный подшив Анталья"] },
+    de: { t: "Toros: Schneider in der Nähe, Hose kürzen bis morgen | SwapHubs", d: "Schneider nahe Toros: Hosen, Röcke und Jeans kürzen ab ₺200, am nächsten Tag fertig, eilig in 1–2 Stunden. ☎ +90 531 898 64 18", kw: ["Schneider in der Nähe Toros", "Hose kürzen in der Nähe", "Hose kürzen eilig Antalya"] },
   },
   "ogretmenevleri": {
     en: { t: "Öğretmenevleri Tailor: Coat, Leather, Zipper Fix | SwapHubs", d: "Coat, jacket and leather jacket alterations in Öğretmenevleri: shorten, take in, replace zippers from ₺300. Free pick-up and delivery. ☎ +90 531 898 64 18", kw: ["tailor Öğretmenevleri", "coat alteration Antalya", "leather jacket repair Antalya", "zipper replacement Öğretmenevleri"] },
@@ -130,9 +131,9 @@ const FG_DISTRICT: Record<string, Row> = {
 
 const FG_SERVICE: Record<string, Row> = {
   "paca": {
-    en: { t: "Trouser & Skirt Hemming Antalya from ₺200 | SwapHubs", d: "Hemming for trousers, skirts and jeans in Antalya from ₺200. Length pinned on you, neat stitching, often done the same day. ☎ +90 531 898 64 18", kw: ["skirt hemming", "trouser hemming Antalya", "shorten trousers", "hem pants near me"] },
-    ru: { t: "Подшив брюк и юбок в Анталье от ₺200 | SwapHubs", d: "Подшив брюк, юбок и джинсов в Анталье от ₺200. Длину отмечаем на вас, шов аккуратный, часто готово в тот же день. ☎ +90 531 898 64 18", kw: ["подшить юбку", "подшив брюк Анталья", "укоротить брюки"] },
-    de: { t: "Hosen & Röcke kürzen in Antalya ab ₺200 | SwapHubs", d: "Hosen, Röcke und Jeans in Antalya ab ₺200 kürzen. Länge am Körper abgesteckt, saubere Naht, oft am selben Tag. ☎ +90 531 898 64 18", kw: ["Rock kürzen", "Hose kürzen Antalya", "Hosensaum kürzen"] },
+    en: { t: "Trouser & Skirt Hemming Antalya from ₺200 | SwapHubs", d: "Hemming for trousers, skirts and jeans in Antalya from ₺200. Length pinned on you, ready the next day or in 1–2 hours if urgent. ☎ +90 531 898 64 18", kw: ["skirt hemming", "trouser hemming Antalya", "shorten trousers", "hem pants near me"] },
+    ru: { t: "Подшив брюк и юбок в Анталье от ₺200 | SwapHubs", d: "Подшив брюк, юбок и джинсов в Анталье от ₺200. Длину отмечаем на вас; готово на следующий день, срочно — за 1–2 часа. ☎ +90 531 898 64 18", kw: ["подшить юбку", "подшив брюк Анталья", "укоротить брюки"] },
+    de: { t: "Hosen & Röcke kürzen in Antalya ab ₺200 | SwapHubs", d: "Hosen, Röcke und Jeans in Antalya ab ₺200 kürzen. Länge am Körper abgesteckt; am nächsten Tag fertig, eilig in 1–2 Std. ☎ +90 531 898 64 18", kw: ["Rock kürzen", "Hose kürzen Antalya", "Hosensaum kürzen"] },
   },
   "kot": {
     en: { t: "Jeans Hemming & Taking In Antalya from ₺200 | SwapHubs", d: "Jeans shortened or taken in from ₺200 in Antalya. Heavy-duty thread for thick denim; leg length and width to your measurements. ☎ +90 531 898 64 18", kw: ["jeans hemming", "taper jeans tailor", "take in jeans waist Antalya"] },
@@ -140,9 +141,9 @@ const FG_SERVICE: Record<string, Row> = {
     de: { t: "Jeans kürzen & enger machen Antalya ab ₺200 | SwapHubs", d: "Jeans in Antalya ab ₺200 kürzen oder enger machen. Garn für dicken Denim, Länge und Beinweite nach Ihren Maßen. ☎ +90 531 898 64 18", kw: ["Jeans kürzen", "Jeans enger machen", "Jeans Bund enger Antalya"] },
   },
   "bel": {
-    en: { t: "Take In Waist: Trousers, Skirts, Dresses Antalya | SwapHubs", d: "Clothes too loose? Waists of trousers, skirts, dresses and jackets taken in at a fitting in Antalya, often the same day. ☎ +90 531 898 64 18", kw: ["waist alteration", "take in trousers waist", "clothes too big alteration", "skirt waist alteration"] },
-    ru: { t: "Ушить в талии: брюки, юбка, платье, Анталья | SwapHubs", d: "Велика одежда? Ушиваем талию брюк, юбок, платьев и пиджаков в Анталье на примерке, нередко в тот же день. ☎ +90 531 898 64 18", kw: ["ушить в талии", "ушить брюки", "ушить платье", "уменьшить размер одежды"] },
-    de: { t: "Taille enger machen: Hose, Rock, Kleid Antalya | SwapHubs", d: "Kleidung zu weit? Taille von Hosen, Röcken, Kleidern und Sakkos in Antalya bei der Anprobe enger machen, oft am selben Tag. ☎ +90 531 898 64 18", kw: ["Taille enger machen", "Hose enger machen", "Kleid enger machen", "Kleidung zu groß ändern"] },
+    en: { t: "Take In Waist: Trousers, Skirts, Dresses Antalya | SwapHubs", d: "Clothes too loose? Waists of trousers, skirts, dresses and jackets taken in at a fitting in Antalya, ready the next day. ☎ +90 531 898 64 18", kw: ["waist alteration", "take in trousers waist", "clothes too big alteration", "skirt waist alteration"] },
+    ru: { t: "Ушить в талии: брюки, юбка, платье, Анталья | SwapHubs", d: "Велика одежда? Ушиваем талию брюк, юбок, платьев и пиджаков в Анталье на примерке, готово на следующий день. ☎ +90 531 898 64 18", kw: ["ушить в талии", "ушить брюки", "ушить платье", "уменьшить размер одежды"] },
+    de: { t: "Taille enger machen: Hose, Rock, Kleid Antalya | SwapHubs", d: "Kleidung zu weit? Taille von Hosen, Röcken, Kleidern und Sakkos in Antalya bei der Anprobe enger machen, am nächsten Tag fertig. ☎ +90 531 898 64 18", kw: ["Taille enger machen", "Hose enger machen", "Kleid enger machen", "Kleidung zu groß ändern"] },
   },
   "fermuar": {
     en: { t: "Zipper Repair & Replacement Antalya from ₺300 | SwapHubs", d: "Zippers replaced or repaired in Antalya from ₺300, for trousers, jackets, coats, dresses and bags. ☎ +90 531 898 64 18", kw: ["zipper repair", "zipper replacement Antalya", "jacket zipper replacement", "bag zipper repair"] },

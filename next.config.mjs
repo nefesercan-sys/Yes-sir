@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
+const CSP_REPORT_ONLY = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https://res.cloudinary.com https://images.pexels.com https://images.unsplash.com https://ui-avatars.com https://maps.gstatic.com https://maps.googleapis.com https://*.googleusercontent.com https://www.google-analytics.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.cloudinary.com https://www.google-analytics.com",
+  "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com",
+  "media-src 'self' https://res.cloudinary.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+].join('; ')
+
 const nextConfig = {
   poweredByHeader: false,
 
@@ -36,16 +51,30 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
-      // Hizmet verilmeyen ilçelerin eski sayfaları (Google'da dizinde kalmış olabilir) → terzi ana sayfası
-      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'manavgat', 'serik', 'kemer', 'kepez', 'dosemealti'].map((slug) => ({
+      // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
+      // Manavgat (Side dahil) ve Kemer'e HİZMET VERİLİR: bu adresler aşağıda ilgili gerçek sayfalara yönlenir.
+      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'serik'].map((slug) => ({
         source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
       })),
-      // Hizmet verilmeyen Manavgat sayfaları → ilgili dil ana sayfası
-      { source: '/terzi/bolge/manavgat', destination: '/terzi', permanent: true },
-      { source: '/en/tailor-antalya/manavgat', destination: '/online-tailor-service', permanent: true },
-      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/atelie-antalya', permanent: true },
-      { source: '/de/schneider-antalya/manavgat', destination: '/de/online-schneiderservice-antalya', permanent: true },
+      // Kepez ve Döşemealtı'nın bölge sayfası /terzi/bolge/<slug> altında üretilir
+      { source: '/terzi/antalya/kepez', destination: '/terzi/bolge/kepez', permanent: true },
+      { source: '/terzi/antalya/dosemealti', destination: '/terzi/bolge/dosemealti', permanent: true },
+      // Kemer: gerçek sayfa /terzi/bolge/kemer (+ EN/RU/DE bölge ve otel sayfaları)
+      { source: '/terzi/antalya/kemer', destination: '/terzi/bolge/kemer', permanent: true },
+      // Manavgat: Side, Manavgat ilçesine bağlıdır; Manavgat aramaları Side sayfalarına yönlenir
+      { source: '/terzi/antalya/manavgat', destination: '/terzi/antalya/side', permanent: true },
+      { source: '/terzi/bolge/manavgat', destination: '/terzi/antalya/side', permanent: true },
+      { source: '/en/tailor-antalya/manavgat', destination: '/en/tailor-antalya/side', permanent: true },
+      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/portnoy-antalya/side', permanent: true },
+      { source: '/de/schneider-antalya/manavgat', destination: '/de/schneider-antalya/side', permanent: true },
+      // Meltem, Şirinyalı, Fener ve Güzeloba Muratpaşa'ya bağlıdır: eski Konyaaltı mahalle adresleri yeni yola
+      ...['meltem', 'sirinyali', 'fener', 'guzeloba'].flatMap((slug) => [
+        { source: `/terzi/konyaalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
+        { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
+      ]),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
+      // Tek kayıt akışı: /kayit (bcrypt'li /api/auth/kayit); /uye-ol eski ve ikinci akıştır
+      { source: '/uye-ol', destination: '/kayit', permanent: false },
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
       // Gelinlik: gerçek sayfa app/terzi/hizmet/[hizmet] (gelinlik-abiye-tadilati). Eski/yazım hatalı adresler ona yönlenir.
@@ -74,7 +103,7 @@ const nextConfig = {
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'Content-Security-Policy-Report-Only', value: CSP_REPORT_ONLY },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },
@@ -113,53 +142,7 @@ const nextConfig = {
       { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
 
-      // ── Terzi sayfaları (ÖZEL SEO SİNYALLERİNİZ KORUNDU) ──────────────────────────
-      {
-        source: '/terzi',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/terzi/(.*)',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-
-      // ── Online Terzi Hizmeti ─────────────────────────────────────────────
-      {
-        source: '/online-terzi-hizmeti',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/online-terzi-hizmeti/(.*)',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-
-      // ── Diğer SEO sayfaları ─────────────────────────────────────────────
-      {
-        source: '/tekstil-antalya',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/online-tailor-service',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
+      // Not: indexlenebilirlik sayfa metadata'sındaki robots ile belirlenir; zorla 'index' başlığı eklenmez.
     ]
   },
 }

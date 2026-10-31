@@ -69,13 +69,13 @@ function SifreSifirlaIcerik() {
             <form onSubmit={sifreGuncelle}
               style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
-                <label style={lbl}>Yeni Şifre</label>
-                <input style={inp} type="password" required placeholder="En az 6 karakter"
+                <label htmlFor="appsifreb-f1" style={lbl}>Yeni Şifre</label>
+                <input id="appsifreb-f1" style={inp} type="password" required placeholder="En az 6 karakter"
                   value={yeniSifre} onChange={e => setYeniSifre(e.target.value)} />
               </div>
               <div>
-                <label style={lbl}>Yeni Şifre Tekrar</label>
-                <input style={inp} type="password" required placeholder="Tekrar girin"
+                <label htmlFor="appsifreb-f2" style={lbl}>Yeni Şifre Tekrar</label>
+                <input id="appsifreb-f2" style={inp} type="password" required placeholder="Tekrar girin"
                   value={yeniSifre2} onChange={e => setYeniSifre2(e.target.value)} />
               </div>
               <button type="submit" disabled={yukleniyor} style={btnPrimary}>
@@ -109,8 +109,8 @@ function SifreSifirlaIcerik() {
             <form onSubmit={emailGonder}
               style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
-                <label style={lbl}>E-posta</label>
-                <input style={inp} type="email" required placeholder="email@domain.com"
+                <label htmlFor="appsifreb-f3" style={lbl}>E-posta</label>
+                <input id="appsifreb-f3" style={inp} type="email" required placeholder="email@domain.com"
                   value={email} onChange={e => setEmail(e.target.value)} />
               </div>
               <button type="submit" disabled={yukleniyor} style={btnPrimary}>
