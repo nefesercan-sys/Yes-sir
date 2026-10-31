@@ -5,6 +5,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ── Sabitler ──────────────────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -208,7 +209,7 @@ export default function FermuarDegisimiPage() {
 
   return (
     <main style={{ fontFamily: FONT, color: TEXT, background: '#fff', lineHeight: 1.65 }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
 
       <SpeakableSchema path="/terzi/fermuar-degisimi" />
       <QuickActionBanner lang="tr" service="fermuar" />

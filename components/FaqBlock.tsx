@@ -1,3 +1,4 @@
+import { jsonLdString } from '@/lib/json-ld';
 // Görünür SSS bölümü + aynı metinle FAQPage JSON-LD (şema ile görünen içerik birebir aynı).
 export interface FaqItem { q: string; a: string }
 
@@ -16,7 +17,7 @@ export default function FaqBlock({ items, heading = 'Sık Sorulan Sorular' }: { 
       id="sik-sorulan-sorular"
       style={{ maxWidth: 900, margin: '32px auto', padding: '0 16px', fontFamily: 'system-ui,-apple-system,sans-serif' }}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(data) }} />
       <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12 }}>{heading}</h2>
       {items.map(i => (
         <details key={i.q} style={{ border: '1px solid rgba(128,128,128,.35)', borderRadius: 10, padding: '12px 14px', marginBottom: 8 }}>

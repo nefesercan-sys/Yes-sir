@@ -6,6 +6,7 @@
 // usePathname sunucuda da çalışır, bu yüzden ham HTML'de doğru şema çıkar.
 // ============================================================
 import { usePathname } from 'next/navigation';
+import { jsonLdString } from '@/lib/json-ld';
 
 // Terzi / tekstil sayfa yolları (önek eşleşmesi). Yeni terzi sayfası eklerken buraya ekle.
 const TERZI_PREFIXES = [
@@ -125,7 +126,7 @@ export default function GlobalSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
     />
   );
 }

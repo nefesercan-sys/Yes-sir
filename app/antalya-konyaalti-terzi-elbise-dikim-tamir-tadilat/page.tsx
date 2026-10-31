@@ -5,6 +5,7 @@ import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Script from 'next/script';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ── SEO METADATA (Google Arama Sonuçlarında Görünecek Kısım) ──
 export const metadata: Metadata = {
@@ -78,7 +79,7 @@ export default function KonyaaltiTerziPage() {
       <Script
         id="local-business-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(schemaData) }}
       />
 
       {/* ── HERO BÖLÜMÜ ── */}

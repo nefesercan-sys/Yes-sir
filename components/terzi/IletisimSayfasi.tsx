@@ -11,6 +11,7 @@ import {
   SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LANGS, LAST_UPDATE, SERVICES, SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   serviceUrl, type Lang,
 } from '@/lib/seo-data';
+import { jsonLdString } from '@/lib/json-ld';
 
 type L4<T = string> = Record<Lang, T>;
 
@@ -358,7 +359,7 @@ export default function IletisimSayfasi({ lang }: { lang: Lang }) {
   const LANG_LABEL: Record<Lang, string> = { tr: 'Türkçe', en: 'English', ru: 'Русский', de: 'Deutsch' };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(lang)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(buildJsonLd(lang)) }} />
       <style>{CSS}</style>
       <div className="ct" lang={lang}>
         <main id="main">

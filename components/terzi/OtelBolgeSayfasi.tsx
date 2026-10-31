@@ -13,6 +13,7 @@ const BASE_PATH: Record<Lang, string> = {
 };
 
 import { DURATION, MAPS_URL } from '@/lib/business';
+import { jsonLdString } from '@/lib/json-ld';
 
 const T: Record<Lang, any> = {
   en: {
@@ -160,7 +161,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
     <main style={{ fontFamily: 'system-ui,sans-serif', background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
       />
       {/* Hero Section */}
       <section style={{ background: 'linear-gradient(135deg,#1C1814 0%,#2E2820 100%)', padding: '5rem 1.5rem 4rem' }}>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
@@ -158,7 +159,7 @@ export default function TerziCagirPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/terzi-cagir" />
       <QuickActionBanner lang="tr" />

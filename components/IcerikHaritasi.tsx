@@ -8,6 +8,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { breadcrumbJsonLd, getBreadcrumb, getSiteMap } from '@/lib/icerik-haritasi';
+import { jsonLdString } from '@/lib/json-ld';
 
 export default function IcerikHaritasi() {
   const pathname = usePathname() || '/';
@@ -31,7 +32,7 @@ export default function IcerikHaritasi() {
       }}
     >
       {crumbs && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(crumbs)) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbJsonLd(crumbs)) }} />
       )}
 
       <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 1rem', color: 'inherit' }}>{map.heading}</h2>

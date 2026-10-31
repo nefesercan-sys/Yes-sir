@@ -5,6 +5,7 @@ import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link'
+import { jsonLdString } from '@/lib/json-ld';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 const SITE_URL  = 'https://swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat'
@@ -223,7 +224,7 @@ const SERVIS_ADIMLARI = [
 export default function AntalyaTerziPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ fontFamily: SANS, background: BG, color: METIN, minHeight: '100vh' }}>
 
         <SpeakableSchema path="/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat" />

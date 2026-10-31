@@ -4,6 +4,7 @@ import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -297,7 +298,7 @@ export default function TerziPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/terzi" />
       <QuickActionBanner lang="tr" />

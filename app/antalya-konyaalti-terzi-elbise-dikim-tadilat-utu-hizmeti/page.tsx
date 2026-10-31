@@ -4,6 +4,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti/page.tsx
@@ -188,7 +189,7 @@ const NEIGHBORHOODS = [
 export default function KonyaaltiTerziPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path="/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti" />
       <QuickActionBanner lang="tr" />
 

@@ -3,6 +3,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bay-terzi-antalya';
 const PARENT = 'https://swaphubs.com/terzi';
@@ -83,7 +84,7 @@ const s = { fontFamily: "'Jost',system-ui,sans-serif" as const };
 export default function BayTerziPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ ...s, background: '#FAF7F2', color: '#3A3028', minHeight: '100vh' }}>
 
         <SpeakableSchema path="/terzi/bay-terzi-antalya" />

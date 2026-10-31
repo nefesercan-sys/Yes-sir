@@ -12,6 +12,7 @@ import type { Metadata } from 'next'
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import AtelieClient from './client'
+import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com'
 const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
@@ -227,7 +228,7 @@ export default function AtelieAntalyaPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/ru/atelie-antalya" />
       <QuickActionBanner lang="ru" />

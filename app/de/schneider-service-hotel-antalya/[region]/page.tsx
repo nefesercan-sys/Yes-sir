@@ -5,6 +5,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import { notFound } from 'next/navigation';
 import { OTEL_BOLGELERI, bulOtelBolgesi } from '@/lib/otel-bolgeleri';
 import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
+import { jsonLdString } from '@/lib/json-ld';
 
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
@@ -94,7 +95,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path={`${BASE_PATH}/${r.slug}`} />
       <QuickActionBanner lang="de" variant="hotel-service" />
       <OtelBolgeSayfasi 

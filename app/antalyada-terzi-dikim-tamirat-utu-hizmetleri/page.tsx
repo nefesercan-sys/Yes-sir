@@ -5,6 +5,7 @@ import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { jsonLdString } from '@/lib/json-ld';
 
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -439,7 +440,7 @@ const districtBlurbs = [
 export default function GeminiOptimizedTailorPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path="/antalyada-terzi-dikim-tamirat-utu-hizmetleri" />
       <QuickActionBanner lang="tr" />
 

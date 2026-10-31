@@ -23,6 +23,7 @@ import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib/business';
 import { crossCanonical } from '@/lib/cross-canonical';
 import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
+import { jsonLdString } from '@/lib/json-ld';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/terzi-can.jpg`;
@@ -697,7 +698,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: SERVICE_BASE[lang], label: u.all },
@@ -841,7 +842,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: SERVICE_BASE[lang], label: u.all },
@@ -926,7 +927,7 @@ export function HubPage({ lang }: { lang: Lang }) {
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <Shell lang={lang} waMsg={waMsg} footLinks={[
         { href: HUB_MAIN[lang], label: u.home.replace('← ', '') },
         { href: u.pricesHref, label: u.pricesLink },

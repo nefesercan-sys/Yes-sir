@@ -6,6 +6,7 @@ import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ElbiseDikimiClient from './client';
+import { jsonLdString } from '@/lib/json-ld';
 
 const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
@@ -97,7 +98,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path="/antalya-terzi-elbise-dikimi" />
       <QuickActionBanner lang="tr" />
       <ElbiseDikimiClient />
