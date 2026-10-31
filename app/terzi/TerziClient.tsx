@@ -332,12 +332,7 @@ export default function TerziClient({ gbp1 }: Props) {
   const stripRef = useRef<HTMLDivElement>(null);
   const L = LABELS[lang];
 
-  useEffect(() => {
-    const bl = (navigator.language || '').toLowerCase();
-    if (bl.startsWith('de')) setLang('de');
-    else if (bl.startsWith('ru')) setLang('ru');
-    else if (bl.startsWith('en')) setLang('en');
-  }, []);
+  // Dil yalnızca kullanıcı seçince değişir: tarayıcı diline göre otomatik değişim sunucu HTML'iyle (tr) çelişiyordu.
 
   useEffect(() => {
     const t = setInterval(() => setHeroIdx(i => (i + 1) % HERO_IMAGES.length), 5000);
