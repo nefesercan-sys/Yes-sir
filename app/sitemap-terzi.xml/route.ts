@@ -5,6 +5,7 @@ import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
+import { PROMO_ALL } from '@/lib/intl-promo'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, LAST_UPDATE, isOuterSlug, isIndexable, type Lang } from '@/lib/seo-data'
 
 export const revalidate = 86400
@@ -69,7 +70,7 @@ export async function GET() {
   })
 
   // 🔎 Bölge × hizmet SEO sayfaları (4 dil, karşılıklı hreflang)
-  type Item = { url: string; priority: string; freq: string; alt?: Record<string, string> }
+  type Item = { url: string; priority: string; freq: string; alt?: Record<string, string>; lastmod?: string }
   const hasAlt = (urlFor: (l: Lang) => string, ok: (l: Lang) => boolean = () => true): Record<string, string> => {
     const ls = LANGS.filter(ok)
     return {
@@ -89,6 +90,11 @@ export async function GET() {
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${iUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${iUrl(x)}`])) })),
     // 🧵 Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (6 dil, kendi aralarında hreflang)
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${svcgUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${svcgUrl(x)}`])) })),
+    // 🎽 Promosyon tekstili ve baskılı bez çanta rehberi (10 dil, karşılıklı hreflang + x-default)
+    ...PROMO_ALL.map((x) => ({
+      url: `${BASE_URL}${x.path}`, priority: '0.70', freq: 'monthly', lastmod: '2026-10-30',
+      alt: { ...Object.fromEntries(PROMO_ALL.map((y) => [y.hreflang, `${BASE_URL}${y.path}`])), 'x-default': `${BASE_URL}${PROMO_ALL[0].path}` },
+    })),
     // 🏨 Otel bölgesi derinlik sayfaları (6 dil × 6 bölge, bölge başına 6 dilli hreflang)
     ...ZONE_SLUGS.flatMap((z) => ILANGS.map((l) => ({ url: `${BASE_URL}${zoneUrl(l, z)}`, priority: '0.65', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${zoneUrl(x, z)}`])) }))),
   ]
@@ -103,7 +109,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${all.map(s => `  <url>
     <loc>${s.url}</loc>${s.alt ? '\n' + Object.entries(s.alt).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${u}"/>`).join('\n') : ''}
-    <lastmod>${(seoUnique.includes(s) ? new Date(LAST_UPDATE) : D).toISOString()}</lastmod>
+    <lastmod>${(s.lastmod ? new Date(s.lastmod) : seoUnique.includes(s) ? new Date(LAST_UPDATE) : D).toISOString()}</lastmod>
     <changefreq>${s.freq}</changefreq>
     <priority>${s.priority}</priority>
   </url>`).join('\n')}

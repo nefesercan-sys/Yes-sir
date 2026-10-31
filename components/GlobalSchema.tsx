@@ -21,6 +21,10 @@ const TERZI_PREFIXES = [
   '/en/textile-manufacturer-antalya',
   '/ru/tekstilnoe-proizvodstvo-antalya',
   '/de/textilhersteller-antalya',
+  '/promosyon-tekstil-bez-canta-antalya',
+  '/en/promotional-textiles-tote-bags-antalya',
+  '/ru/reklamnyy-tekstil-sumki-antalya',
+  '/de/werbetextilien-stoffbeutel-antalya',
   '/online-tailor-service',
   '/online-terzi-hizmeti',
   '/en/hotel-tailor-antalya',
@@ -62,6 +66,7 @@ export function isTerziPath(pathname: string | null): boolean {
   const p = pathname.toLowerCase();
   if (INTL_PATHS.includes(p.replace(/\/$/, ''))) return true;
   if (/^\/(es|fr|pl|uk|nl|ar)\/(guia-servicios-telas-sastreria-antalya|guide-services-tissus-couture-antalya|przewodnik-uslugi-tkaniny-krawiec-antalya|putivnyk-poslugy-tkanyny-kravets-antaliya|gids-diensten-stoffen-kleermaker-antalya|dalil-khadamat-aqmisha-khayyat-antalya)$/.test(p)) return true;
+  if (/^\/(es|fr|pl|uk|nl|ar)\/(textil-promocional-bolsas-de-tela-antalya|textile-promotionnel-sacs-en-tissu-antalya|tekstylia-reklamowe-torby-materialowe-antalya|reklamnyi-tekstyl-tkanynovi-sumky-antaliya|promotiekleding-stoffen-tassen-antalya|mansujat-tarwijiya-haqaib-qumash-antalya)$/.test(p)) return true;
   if (/^\/(es|fr|pl|uk|nl|ar)\/(sastre-hoteles|couturier-hotels|krawiec-hotele|kravets-hoteli|kleermaker-hotels|khayyat-fanadiq)-[a-z]+$/.test(p)) return true;
   return TERZI_PREFIXES.some((x) => p === x || p.startsWith(x));
 }

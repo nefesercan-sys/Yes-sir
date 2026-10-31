@@ -1,3 +1,4 @@
+import { PROMO_ALL } from '@/lib/intl-promo';
 import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
 
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -9,7 +10,12 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
   const url = `${BASE}${path}`;
   const other: Topic = RELATED(topic);
   const isKeten = topic === 'keten';
-  const isTerzi = topic !== 'tekstil';
+  const isPromo = topic === 'promo';
+  const isTerzi = topic !== 'tekstil' && !isPromo;
+  // Anavera Tekstil sayfası, yeni promosyon rehberine de bağlanır (tekstil -> promo)
+  const extra: Topic | null = topic === 'tekstil' ? 'promo' : null;
+  // Promosyon sayfası 10 dilde yayımlanır; dil seçicide hepsi görünür
+  const nav = isPromo ? PROMO_ALL : LANGS.map((l) => ({ code: l, hreflang: HREFLANG[l], name: l.toUpperCase(), path: URLS[topic][l] }));
 
   const provider = isTerzi
     ? { '@type': ['LocalBusiness', 'ClothingStore'], name: 'Terzi Can', url: `${BASE}/terzi`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı, Antalya', addressCountry: 'TR' } }
@@ -32,11 +38,11 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
       <header style={{ backgroundColor: ink, borderBottom: `2px solid ${gold}` }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: '.9rem 1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           <a href={BASE} style={{ color: '#fff', fontWeight: 800, textDecoration: 'none' }}>{ui.home}</a>
-          <nav aria-label={ui.langs} style={{ display: 'flex', gap: '.5rem' }}>
-            {LANGS.map((l) => (
-              <a key={l} href={URLS[topic][l]} hrefLang={HREFLANG[l]} aria-current={l === lang ? 'page' : undefined}
-                style={{ color: l === lang ? ink : '#fff', background: l === lang ? gold : 'transparent', border: '1px solid rgba(255,255,255,.3)', borderRadius: 6, padding: '.25rem .6rem', fontSize: '.8rem', fontWeight: 700, textDecoration: 'none' }}>
-                {l.toUpperCase()}
+          <nav aria-label={ui.langs} style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
+            {nav.map((x) => (
+              <a key={x.code} href={x.path} hrefLang={x.hreflang} aria-current={x.code === lang ? 'page' : undefined} title={isPromo ? x.name : undefined}
+                style={{ color: x.code === lang ? ink : '#fff', background: x.code === lang ? gold : 'transparent', border: '1px solid rgba(255,255,255,.3)', borderRadius: 6, padding: '.25rem .6rem', fontSize: '.8rem', fontWeight: 700, textDecoration: 'none' }}>
+                {x.code.toUpperCase()}
               </a>
             ))}
           </nav>
@@ -89,18 +95,20 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
           </div>
         </section>
 
-        <p style={{ fontSize: '.85rem', color: '#64748B', marginBottom: '1.5rem' }}>{ui.note}</p>
+        <p style={{ fontSize: '.85rem', color: '#64748B', marginBottom: '1.5rem' }}>{c.note ?? ui.note}</p>
 
         <section style={{ textAlign: 'center', background: '#fff', border: '1px solid #E2E8F0', borderRadius: 12, padding: '1.5rem' }}>
           <a href={wa(c.wa)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#25D366', color: '#fff', padding: '.8rem 1.5rem', borderRadius: 8, fontWeight: 700, textDecoration: 'none' }}>💬 {c.cta}</a>
           <p style={{ marginTop: '1rem', fontSize: '.9rem' }}>
-            {ui.other}: <a href={URLS[other][lang]}>{CONTENT[other][lang].crumb}</a> · <a href={SERVICE_URL[lang]}>{ui.service}</a>
+            {ui.other}: <a href={URLS[other][lang]}>{CONTENT[other][lang].crumb}</a>
+            {extra && <> · <a href={URLS[extra][lang]}>{CONTENT[extra][lang].crumb}</a></>}
+            {!isPromo && <> · <a href={SERVICE_URL[lang]}>{ui.service}</a></>}
           </p>
         </section>
       </main>
 
       <footer style={{ padding: '1.5rem 1.2rem', textAlign: 'center', fontSize: '.8rem', color: '#94A3B8', background: '#020617' }}>
-        {ui.foot} · <a href={BASE} style={{ color: '#94A3B8' }}>SwapHubs.com</a>
+        {c.foot ?? ui.foot} · <a href={BASE} style={{ color: '#94A3B8' }}>SwapHubs.com</a>
       </footer>
     </div>
   );
