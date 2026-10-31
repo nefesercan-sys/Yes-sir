@@ -7,7 +7,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { getSessionUserId } from '@/lib/terzi-session';
-import { smsGonder } from '@/lib/sms';
+import { smsGonder, smsMetin } from '@/lib/sms';
+import { clean, rateLimited } from '@/lib/api-guard';
+import { enlemBoylamGecerli, idGecerli, sonluSayi } from '@/lib/validate';
+
+// Kabul edilmemiş tekliflerde karşı tarafın telefonu/kimliği gösterilmez (iletişim bilgisi yalnızca kabulden sonra açılır).
+function gizle(t: any) {
+  if (!t || t.durum === 'kabul_edildi') return t;
+  const o = { ...t };
+  if (o.ilanSahibi) o.ilanSahibi = { tip: o.ilanSahibi.tip };
+  if (o.teklifVeren) o.teklifVeren = { userId: o.teklifVeren.userId };
+  return o;
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -26,18 +37,20 @@ export async function GET(req: NextRequest) {
         .sort({ createdAt: -1 })
         .limit(50)
         .toArray();
-      return NextResponse.json(JSON.parse(JSON.stringify(teklifler)));
+      // Teklif veren yalnızca KABUL edilmiş tekliflerde ilan sahibinin telefonunu görür
+      return NextResponse.json(JSON.parse(JSON.stringify(teklifler.map((t: any) => gizle(t)))));
     }
 
-    if (!ilanId) return NextResponse.json({ error: 'ilanId zorunlu' }, { status: 400 });
+    if (!idGecerli(ilanId)) return NextResponse.json({ error: 'Geçerli bir ilanId zorunlu' }, { status: 400 });
 
     const ilan = await db.collection('ilanlar').findOne({ _id: new ObjectId(ilanId) });
     if (!ilan || ilan.sahibi?.userId !== userId) {
       return NextResponse.json({ error: 'Yetkiniz yok' }, { status: 403 });
     }
 
-    const teklifler = await db.collection('teklifler').find({ ilanId }).sort({ createdAt: -1 }).toArray();
-    return NextResponse.json(JSON.parse(JSON.stringify(teklifler)));
+    // İlan sahibi, teklif verenlerin telefonunu yalnızca kabul ettiği teklifte görür
+    const teklifler = await db.collection('teklifler').find({ ilanId }).sort({ createdAt: -1 }).limit(200).toArray();
+    return NextResponse.json(JSON.parse(JSON.stringify(teklifler.map((t: any) => gizle(t)))));
   } catch (err) {
     console.error('GET terzi teklifler hatası:', err);
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
@@ -49,10 +62,23 @@ export async function POST(req: NextRequest) {
     const userId = getSessionUserId();
     if (!userId) return NextResponse.json({ error: 'Önce telefon ile giriş yapın' }, { status: 401 });
 
-    const { ilanId, fiyat, mesaj, lat, lng } = await req.json();
-    if (!ilanId || !fiyat) {
+    // Kullanıcı başına basit hız sınırı (saatte 20 teklif)
+    if (rateLimited(req, `terzi-teklif:${userId}`, 20, 60 * 60 * 1000)) {
+      return NextResponse.json({ error: 'Çok fazla teklif gönderdiniz. Lütfen daha sonra tekrar deneyin.' }, { status: 429 });
+    }
+
+    const b = await req.json().catch(() => null);
+    const ilanId = b?.ilanId;
+    const fiyatHam = sonluSayi(b?.fiyat);
+    if (!idGecerli(ilanId) || fiyatHam === null) {
       return NextResponse.json({ error: 'İlan ve fiyat zorunlu' }, { status: 400 });
     }
+    if (fiyatHam <= 0 || fiyatHam > 1000000) {
+      return NextResponse.json({ error: 'Fiyat 0 ile 1.000.000 arasında olmalı' }, { status: 400 });
+    }
+    const fiyat = Math.round(fiyatHam * 100) / 100; // yalnızca sayı; SMS ve bildirimlere bu değer girer
+    const mesaj = clean(b?.mesaj, 500);
+    const { lat, lng } = b ?? {};
 
     const db = await getDb();
     const [saglayici, ilan] = await Promise.all([
@@ -74,9 +100,9 @@ export async function POST(req: NextRequest) {
     const teklif = {
       ilanId,
       ilanBaslik: ilan.baslik,
-      teklifFiyat: Number(fiyat),
-      mesaj: mesaj || '',
-      location: (typeof lat === 'number' && typeof lng === 'number')
+      teklifFiyat: fiyat,
+      mesaj,
+      location: enlemBoylamGecerli(lat, lng)
         ? { type: 'Point', coordinates: [lng, lat] } : null,
       durum: 'bekliyor',
       teklifVeren: { userId, telefon: saglayici?.telefon },
@@ -91,14 +117,15 @@ export async function POST(req: NextRequest) {
     await db.collection('bildirimler').insertOne({
       aliciTelefon: ilan.sahibi?.telefon,
       tip: 'yeni_teklif',
-      mesaj: `Talebinize ${Number(fiyat).toLocaleString('tr-TR')} ₺ teklif geldi.`,
+      mesaj: `Talebinize ${fiyat.toLocaleString('tr-TR')} ₺ teklif geldi.`,
       ilanId,
       teklifId: result.insertedId.toString(),
       okundu: false,
       tarih: new Date(),
     });
     if (ilan.sahibi?.telefon) {
-      await smsGonder(ilan.sahibi.telefon, `SwapHubs: "${ilan.baslik}" talebinize ${fiyat} ₺ teklif geldi. Uygulamadan görüntüleyin.`);
+      // SMS'e yalnızca sayısal fiyat ve temizlenmiş/kısaltılmış başlık girer (URL içeremez)
+      await smsGonder(ilan.sahibi.telefon, `SwapHubs: "${smsMetin(ilan.baslik, 40)}" talebinize ${fiyat} TL teklif geldi. Uygulamadan görüntüleyin.`);
     }
 
     return NextResponse.json({ success: true, id: result.insertedId }, { status: 201 });

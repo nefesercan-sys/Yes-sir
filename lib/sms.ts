@@ -11,6 +11,20 @@ function maskele(telefon: string): string {
   return t.length <= 5 ? '***' : `${t.slice(0, 5)}${'*'.repeat(Math.max(t.length - 7, 1))}${t.slice(-2)}`;
 }
 
+/**
+ * Kullanıcı kaynaklı metni (ör. ilan başlığı) SMS içine koymadan önce temizler: URL/alan adı ve kontrol karakterleri atılır,
+ * metin kısaltılır (oltalama bağlantısı taşınmasın).
+ */
+export function smsMetin(v: unknown, max = 40): string {
+  const t = String(v ?? '')
+    .replace(/[\u0000-\u001F\u007F"<>]/g, ' ')
+    .replace(/(?:https?:\/\/|www\.)\S+/gi, '')
+    .replace(/\S+\.(?:com|net|org|info|biz|xyz|tr|ru|io|co|me|ly|gl|cc|top|site|online|link)\b\S*/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return t.length > max ? `${t.slice(0, max - 1)}…` : t;
+}
+
 export async function smsGonder(telefon: string, mesaj: string) {
   try {
     if (process.env.SMS_PROVIDER === 'netgsm') {

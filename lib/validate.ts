@@ -74,3 +74,9 @@ export function teklifEposta(t: any): string | null {
   const e = t?.teklifVeren?.email ?? t?.teklifci?.email ?? t?.gonderen?.email ?? null;
   return typeof e === 'string' && e ? e : null;
 }
+
+/** Teklifi veren tarafın bilgi nesnesi (üç şemadan hangisi varsa); yoksa boş nesne. */
+export function teklifTaraf(t: any): { email?: string; ad?: string; telefon?: string; [k: string]: unknown } {
+  const x = t?.teklifVeren ?? t?.teklifci ?? t?.gonderen;
+  return x && typeof x === 'object' ? x : {};
+}
