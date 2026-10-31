@@ -257,13 +257,13 @@ function IlanDuzenleIcerik() {
         <div style={{ background: "#fff", borderRadius: 16, border: "1.5px solid #e2e8f0", padding: 18, marginBottom: 14 }}>
           <h3 style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 14, textTransform: "uppercase", letterSpacing: ".08em" }}>📌 Temel Bilgiler</h3>
           <div style={{ marginBottom: 16 }}>
-            <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>İlan Başlığı <span style={{ color: "#dc2626" }}>*</span></label>
-            <input value={formData.baslik || ""} onChange={e => setField("baslik", e.target.value)} placeholder="Kısa, açıklayıcı bir başlık yazın..." style={INP} />
+            <label htmlFor="appiland-f1" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>İlan Başlığı <span style={{ color: "#dc2626" }}>*</span></label>
+            <input id="appiland-f1" value={formData.baslik || ""} onChange={e => setField("baslik", e.target.value)} placeholder="Kısa, açıklayıcı bir başlık yazın..." style={INP} />
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <div>
-              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>Ülke <span style={{ color: "#dc2626" }}>*</span></label>
-              <select value={seciliUlke} onChange={e => { setSeciliUlke(e.target.value); setField("sehir", ""); }} style={INP}>
+              <label htmlFor="appiland-f2" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>Ülke <span style={{ color: "#dc2626" }}>*</span></label>
+              <select id="appiland-f2" value={seciliUlke} onChange={e => { setSeciliUlke(e.target.value); setField("sehir", ""); }} style={INP}>
                 {COUNTRIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}
               </select>
             </div>
@@ -285,12 +285,12 @@ function IlanDuzenleIcerik() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <div>
-              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>İletişim Bilgisi <span style={{ color: "#dc2626" }}>*</span></label>
-              <input type="text" value={formData.iletisim || ""} onChange={e => setField("iletisim", e.target.value)} placeholder="05XX XXX XX XX veya E-posta" style={INP} />
+              <label htmlFor="appiland-f3" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>İletişim Bilgisi <span style={{ color: "#dc2626" }}>*</span></label>
+              <input id="appiland-f3" type="text" value={formData.iletisim || ""} onChange={e => setField("iletisim", e.target.value)} placeholder="05XX XXX XX XX veya E-posta" style={INP} />
             </div>
             <div>
-              <label style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>Açık Adres (Opsiyonel)</label>
-              <input type="text" value={formData.adres || ""} onChange={e => setField("adres", e.target.value)} placeholder="Mahalle, Sokak, İlçe vb." style={INP} />
+              <label htmlFor="appiland-f4" style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", display: "block", marginBottom: 8 }}>Açık Adres (Opsiyonel)</label>
+              <input id="appiland-f4" type="text" value={formData.adres || ""} onChange={e => setField("adres", e.target.value)} placeholder="Mahalle, Sokak, İlçe vb." style={INP} />
             </div>
           </div>
         </div>

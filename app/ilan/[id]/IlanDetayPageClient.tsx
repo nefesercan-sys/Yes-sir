@@ -130,6 +130,13 @@ function IlanDetayIcerik({ ilanInitial }: { ilanInitial?: Ilan | null }) {
 
 
 
+  useEffect(() => {
+    if (!silOnay) return;
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setSilOnay(false); };
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  }, [silOnay]);
+
   const handleSil = async () => {
 
     setSiliyor(true);
@@ -545,7 +552,7 @@ function IlanDetayIcerik({ ilanInitial }: { ilanInitial?: Ilan | null }) {
 
       {silOnay && (
 
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
+        <div role="dialog" aria-modal="true" aria-label="Silme onayı" style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 300, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 16 }}>
 
           <div style={{ background: "#fff", borderRadius: 20, padding: 24, width: "100%", maxWidth: 420, animation: "fadeIn .2s ease" }}>
 

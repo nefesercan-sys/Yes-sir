@@ -113,20 +113,20 @@ export default function OtelProfilPage() {
             <div style={card}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '13px' }}>
                 <div>
-                  <label style={lbl}>Tesis Adı *</label>
-                  <input value={form.otelAdi || ''} onChange={e => setField('otelAdi', e.target.value)} placeholder="Grand Hotel İstanbul" style={inp} />
+                  <label htmlFor="appotelpb-f1" style={lbl}>Tesis Adı *</label>
+                  <input id="appotelpb-f1" value={form.otelAdi || ''} onChange={e => setField('otelAdi', e.target.value)} placeholder="Grand Hotel İstanbul" style={inp} />
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <div>
-                    <label style={lbl}>Yıldız *</label>
-                    <select value={form.yildiz || ''} onChange={e => setField('yildiz', e.target.value)} style={inp}>
+                    <label htmlFor="appotelpb-f2" style={lbl}>Yıldız *</label>
+                    <select id="appotelpb-f2" value={form.yildiz || ''} onChange={e => setField('yildiz', e.target.value)} style={inp}>
                       <option value="">Seçin</option>
                       {['1 Yıldız', '2 Yıldız', '3 Yıldız', '4 Yıldız', '5 Yıldız', 'Butik Otel', 'Apart', 'Pansiyon', 'Villa'].map(v => <option key={v}>{v}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label style={lbl}>Tesis Tipi</label>
-                    <select value={form.testisTipi || ''} onChange={e => setField('tesisTipi', e.target.value)} style={inp}>
+                    <label htmlFor="appotelpb-f3" style={lbl}>Tesis Tipi</label>
+                    <select id="appotelpb-f3" value={form.testisTipi || ''} onChange={e => setField('tesisTipi', e.target.value)} style={inp}>
                       <option value="">Seçin</option>
                       {['Otel', 'Resort', 'Butik Otel', 'Apart Otel', 'Pansiyon', 'Villa', 'Bungalov', 'Tatil Köyü', 'Kamp'].map(v => <option key={v}>{v}</option>)}
                     </select>
@@ -134,35 +134,35 @@ export default function OtelProfilPage() {
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <div>
-                    <label style={lbl}>Ülke *</label>
-                    <select value={form.ulke || ''} onChange={e => setField('ulke', e.target.value)} style={inp}>
+                    <label htmlFor="appotelpb-f4" style={lbl}>Ülke *</label>
+                    <select id="appotelpb-f4" value={form.ulke || ''} onChange={e => setField('ulke', e.target.value)} style={inp}>
                       <option value="">Seçin</option>
                       {['Türkiye', 'İspanya', 'İtalya', 'Yunanistan', 'Mısır', 'Tayland', 'Maldivler', 'Dubai/BAE', 'Portekiz', 'Fransa', 'Hırvatistan', 'Diğer'].map(v => <option key={v}>{v}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label style={lbl}>Şehir / Bölge *</label>
-                    <input value={form.sehir || ''} onChange={e => setField('sehir', e.target.value)} placeholder="Antalya / Kemer" style={inp} />
+                    <label htmlFor="appotelpb-f5" style={lbl}>Şehir / Bölge *</label>
+                    <input id="appotelpb-f5" value={form.sehir || ''} onChange={e => setField('sehir', e.target.value)} placeholder="Antalya / Kemer" style={inp} />
                   </div>
                 </div>
                 <div>
-                  <label style={lbl}>Tam Adres</label>
-                  <textarea value={form.adres || ''} onChange={e => setField('adres', e.target.value)} placeholder="Cadde, Semt, Posta Kodu" rows={3}
+                  <label htmlFor="appotelpb-f6" style={lbl}>Tam Adres</label>
+                  <textarea id="appotelpb-f6" value={form.adres || ''} onChange={e => setField('adres', e.target.value)} placeholder="Cadde, Semt, Posta Kodu" rows={3}
                     style={{ ...inp, height: '80px', resize: 'vertical' }} />
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <div>
-                    <label style={lbl}>Web Sitesi</label>
-                    <input value={form.website || ''} onChange={e => setField('website', e.target.value)} placeholder="https://..." style={inp} />
+                    <label htmlFor="appotelpb-f7" style={lbl}>Web Sitesi</label>
+                    <input id="appotelpb-f7" value={form.website || ''} onChange={e => setField('website', e.target.value)} placeholder="https://..." style={inp} />
                   </div>
                   <div>
-                    <label style={lbl}>Telefon</label>
-                    <input value={form.telefon || ''} onChange={e => setField('telefon', e.target.value)} placeholder="+90..." style={inp} />
+                    <label htmlFor="appotelpb-f8" style={lbl}>Telefon</label>
+                    <input id="appotelpb-f8" value={form.telefon || ''} onChange={e => setField('telefon', e.target.value)} placeholder="+90..." style={inp} />
                   </div>
                 </div>
                 <div>
-                  <label style={lbl}>Toplam Oda Sayısı</label>
-                  <input type="number" value={form.odaSayisi || ''} onChange={e => setField('odaSayisi', e.target.value)} placeholder="150" style={inp} />
+                  <label htmlFor="appotelpb-f9" style={lbl}>Toplam Oda Sayısı</label>
+                  <input id="appotelpb-f9" type="number" value={form.odaSayisi || ''} onChange={e => setField('odaSayisi', e.target.value)} placeholder="150" style={inp} />
                 </div>
               </div>
             </div>
@@ -272,17 +272,17 @@ export default function OtelProfilPage() {
               <h3 style={{ fontSize: '13px', fontWeight: '700', color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px' }}>Fiyat Aralığı (Gecelik, Kişi Başı)</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' }}>
                 <div>
-                  <label style={lbl}>Minimum ($ USD)</label>
-                  <input type="number" value={form.fiyatMin || ''} onChange={e => setField('fiyatMin', e.target.value)} placeholder="50" style={inp} />
+                  <label htmlFor="appotelpb-f10" style={lbl}>Minimum ($ USD)</label>
+                  <input id="appotelpb-f10" type="number" value={form.fiyatMin || ''} onChange={e => setField('fiyatMin', e.target.value)} placeholder="50" style={inp} />
                 </div>
                 <div>
-                  <label style={lbl}>Maksimum ($ USD)</label>
-                  <input type="number" value={form.fiyatMax || ''} onChange={e => setField('fiyatMax', e.target.value)} placeholder="500" style={inp} />
+                  <label htmlFor="appotelpb-f11" style={lbl}>Maksimum ($ USD)</label>
+                  <input id="appotelpb-f11" type="number" value={form.fiyatMax || ''} onChange={e => setField('fiyatMax', e.target.value)} placeholder="500" style={inp} />
                 </div>
               </div>
               <div>
-                <label style={lbl}>Sezon Bilgisi</label>
-                <textarea value={form.sezonBilgisi || ''} onChange={e => setField('sezonBilgisi', e.target.value)}
+                <label htmlFor="appotelpb-f12" style={lbl}>Sezon Bilgisi</label>
+                <textarea id="appotelpb-f12" value={form.sezonBilgisi || ''} onChange={e => setField('sezonBilgisi', e.target.value)}
                   placeholder="Yüksek sezon: Haziran-Eylül. Düşük sezon: Kasım-Mart..."
                   style={{ ...inp, height: '70px', resize: 'vertical' }} />
               </div>

@@ -412,11 +412,11 @@ export default function TerziPanelPage() {
                 </div>
               ) : (
                 <>
-                  <label style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Fiyat Teklifiniz (₺)</label>
-                  <input value={fiyat} onChange={e => setFiyat(e.target.value)} type="number" placeholder="Örn: 200"
+                  <label htmlFor="appterzi-f1" style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Fiyat Teklifiniz (₺)</label>
+                  <input id="appterzi-f1" value={fiyat} onChange={e => setFiyat(e.target.value)} type="number" placeholder="Örn: 200"
                     style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 16, margin: '8px 0 14px' }} />
-                  <label style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Mesaj (opsiyonel)</label>
-                  <textarea value={mesaj} onChange={e => setMesaj(e.target.value)} placeholder="Örn: Bugün 15:00'te teslim alabilirim"
+                  <label htmlFor="appterzi-f2" style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Mesaj (opsiyonel)</label>
+                  <textarea id="appterzi-f2" value={mesaj} onChange={e => setMesaj(e.target.value)} placeholder="Örn: Bugün 15:00'te teslim alabilirim"
                     style={{ width: '100%', minHeight: 70, padding: 12, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 14, margin: '8px 0 18px', fontFamily: 'inherit' }} />
                   {hata && <p style={{ color: '#dc2626', fontSize: 13, marginBottom: 12 }}>{hata}</p>}
                   <button onClick={teklifVer} disabled={yukleniyor}
@@ -492,12 +492,12 @@ export default function TerziPanelPage() {
                 </div>
               </div>
 
-              <label style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Ad Soyad / İşletme Adı</label>
-              <input value={profilAdInput} onChange={e => setProfilAdInput(e.target.value)} placeholder="Adınızı girin"
+              <label htmlFor="appterzi-f3" style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Ad Soyad / İşletme Adı</label>
+              <input id="appterzi-f3" value={profilAdInput} onChange={e => setProfilAdInput(e.target.value)} placeholder="Adınızı girin"
                 style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 15, margin: '8px 0 14px' }} />
 
-              <label style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Varsayılan Hizmet Yarıçapı (km)</label>
-              <input value={profilYariCapInput} onChange={e => setProfilYariCapInput(Number(e.target.value))} type="number"
+              <label htmlFor="appterzi-f4" style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Varsayılan Hizmet Yarıçapı (km)</label>
+              <input id="appterzi-f4" value={profilYariCapInput} onChange={e => setProfilYariCapInput(Number(e.target.value))} type="number"
                 style={{ width: '100%', padding: 14, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 15, margin: '8px 0 14px' }} />
 
               <button onClick={profilKaydet}

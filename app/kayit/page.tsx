@@ -48,23 +48,23 @@ export default function KayitSayfasi() {
 
         <form onSubmit={kayitOl} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
-            <label style={lbl}>Ad Soyad</label>
-            <input style={inp} required placeholder="Adınız Soyadınız"
+            <label htmlFor="appkayitb-f1" style={lbl}>Ad Soyad</label>
+            <input id="appkayitb-f1" style={inp} required placeholder="Adınız Soyadınız"
               value={form.ad} onChange={e => setF('ad', e.target.value)} />
           </div>
           <div>
-            <label style={lbl}>E-posta</label>
-            <input style={inp} type="email" required placeholder="email@domain.com"
+            <label htmlFor="appkayitb-f2" style={lbl}>E-posta</label>
+            <input id="appkayitb-f2" style={inp} type="email" required placeholder="email@domain.com"
               value={form.email} onChange={e => setF('email', e.target.value)} />
           </div>
           <div>
-            <label style={lbl}>Şifre</label>
-            <input style={inp} type="password" required placeholder="En az 6 karakter"
+            <label htmlFor="appkayitb-f3" style={lbl}>Şifre</label>
+            <input id="appkayitb-f3" style={inp} type="password" required placeholder="En az 6 karakter"
               value={form.sifre} onChange={e => setF('sifre', e.target.value)} />
           </div>
           <div>
-            <label style={lbl}>Şifre Tekrar</label>
-            <input style={inp} type="password" required placeholder="Şifrenizi tekrar girin"
+            <label htmlFor="appkayitb-f4" style={lbl}>Şifre Tekrar</label>
+            <input id="appkayitb-f4" style={inp} type="password" required placeholder="Şifrenizi tekrar girin"
               value={form.sifre2} onChange={e => setF('sifre2', e.target.value)} />
           </div>
 
