@@ -7,6 +7,8 @@
 import { fitDesc } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
+import type { GorselAnahtar } from '@/lib/ornek-gorseller';
 import { reviewSchema } from '@/lib/reviews';
 import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
 import {
@@ -796,6 +798,17 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
 }
 
 // ── HİZMET SAYFASI ──────────────────────────────────────────
+// Hizmete göre örnek görseller (yapay zekâ ile üretilmiş; 'örnek görsel' etiketli)
+const HIZMET_GORSEL: Record<string, GorselAnahtar[]> = {
+  paca: ['yun-pantolon-metre', 'keten-pantolon-katli'], kot: ['yun-pantolon-metre', 'keten-pantolon-katli'],
+  fermuar: ['polar-yelek', 'kadin-trenckot-atolye'],
+  'elbise-dikim': ['abiye-elbise-atolye', 'keten-blazer-atolye', 'manken-bej-ceket'], 'ozel-dikim': ['abiye-elbise-atolye', 'keten-blazer-atolye', 'manken-bej-ceket'],
+  'elbise-tamir': ['abiye-elbise-atolye', 'abiye-askida'], 'gece-kiyafeti': ['abiye-elbise-atolye', 'abiye-askida'], 'gelinlik-abiye': ['abiye-askida', 'abiye-elbise-atolye'],
+  takim: ['erkek-takim-olcu', 'manken-palto-takim'], mont: ['erkek-palto-atolye', 'palto-yaka-detay', 'kadin-trenckot-atolye'],
+  gomlek: ['beyaz-gomlek-katli', 'erkek-gomlek-atolye'], tisort: ['sweatshirt-katli'], etek: ['pilili-etek'],
+  'kiyafet-tamiri': ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'], beden: ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'],
+};
+
 export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const u = UI[lang];
   const c = serviceCopy(lang, s);
@@ -884,6 +897,8 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
             </div>
           </div>
         </section>
+
+        {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi lang={lang} anahtarlar={HIZMET_GORSEL[s.id]} sayfaUrl={url} base={SITE} />}
 
         <Faq lang={lang} items={faq} />
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />
