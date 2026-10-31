@@ -4,6 +4,7 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import { fitDesc } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
@@ -482,7 +483,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
       : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d)), d.slug),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: fitDesc(c.desc), url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -494,7 +495,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: c.desc,
+    description: fitDesc(c.desc),
     keywords: Array.from(new Set([
       ...c.kw,
       ...s.vars[lang],

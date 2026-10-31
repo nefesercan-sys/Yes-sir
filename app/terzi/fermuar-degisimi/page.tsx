@@ -92,7 +92,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Fermuar Değişimi 300 TL · Ertesi Gün Teslim | Terzi Can' },
   description:
-    'Fermuar değişimi ne kadar? Pantolon, kot, etek, mont, ceket ve çanta fermuarı 300 TL\'den. Çoğu iş ertesi gün teslim (acil 1–2 saat), her gün 08–23. ☎ ' + PHONE,
+    'Fermuar değişimi 300 TL\'den: pantolon, kot, etek, mont, ceket, çanta. Ertesi gün teslim (acil 1–2 saat), her gün 08–23. ☎ ' + PHONE,
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',

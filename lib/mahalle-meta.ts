@@ -3,6 +3,7 @@
 // ücretsiz servis yalnızca yakın mahallelerde; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
 const FREE = ' {{F}}';
+import { fitDesc } from './meta-fit';
 import { isFreeService } from '@/lib/business';
 // Ücretsiz servis listesi tek kaynaktan (lib/business.ts FREE_SERVICE_SLUGS); otellere servis her bölgede ücretsiz.
 const BANK: Record<string, M> = {
@@ -34,5 +35,5 @@ export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Kon
   const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];
   const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), `${ilce} terzi`, 'Antalya terzi'];
-  return { title, desc, kw: Array.from(new Set(kw)) };
+  return { title, desc: fitDesc(desc), kw: Array.from(new Set(kw)) };
 }

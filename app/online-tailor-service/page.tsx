@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quote | Terzi Can' },
   description:
-    'Konyaaltı-based online tailor service. Menswear & womenswear tailoring, ironing, repairs, alterations, ' +
-    'mass production. Shipping across Turkey. Order via WhatsApp. ☎ ' + PHONE,
+    'Online tailor service in Konyaaltı: menswear & womenswear tailoring, ironing, repairs, alterations, ' +
+    'bulk production. Shipping in Turkey. ☎ ' + PHONE,
   keywords: [
     'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
     'ironing service Antalya', 'repairs alterations Antalya', 'mass production Antalya',

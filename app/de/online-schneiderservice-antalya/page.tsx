@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Schneider Antalya: Foto senden, Preis erhalten | Terzi Can' },
   description:
     'Online-Schneiderservice in Konyaaltı: Herren- & Damenschneiderei, Bügeln, Reparaturen, Änderungen. ' +
-    'Versand in die ganze Türkei. WhatsApp. ☎ ' + PHONE,
+    'Versand in die ganze Türkei. ☎ ' + PHONE,
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
     'Bügelservice Antalya', 'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',
