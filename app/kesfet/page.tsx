@@ -39,7 +39,9 @@ function KesfetIcerik() {
     else router.push("/");
   };
   const ilanlarGit = (kategoriSlug: string) => {
-    router.push(`/ilanlar?rol=${rol}&tip=${tip}&kategori=${kategoriSlug}`);
+    // /ilanlar listesi lib/sektorler.ts içindeki sektör id'lerini kullanır; keşfet slug'ları buna çevrilir
+    const sektorId = KESFET_SEKTOR[kategoriSlug];
+    router.push(`/ilanlar?rol=${rol}&tip=${tip}${sektorId ? `&sektor=${sektorId}` : ""}`);
   };
   const ilanVerGit = (kategoriSlug: string) => {
     router.push(`/ilan-ver?rol=${rol}&tip=${tip}&kategori=${kategoriSlug}`);
@@ -249,6 +251,16 @@ function KesfetIcerik() {
     </>
   );
 }
+// keşfet kategori slug'ı -> sektorler.ts id'si (karşılığı olmayanlar tüm ilanlara gider)
+const KESFET_SEKTOR: Record<string, string> = {
+  "otel-tatil": "turizm", "arac-kiralama": "turizm", "tamir-bakim": "usta", temizlik: "temizlik",
+  usta: "usta", nakliyat: "nakliye", egitim: "egitim", saglik: "saglik", teknoloji: "yazilim",
+  tekstil: "tekstil", "mermer-tas": "uretim", "metal-celik": "metal-celik", "plastik-pvc": "uretim",
+  "ahsap-mobilya": "mobilya", "gida-tarim": "gida-tarim", "insaat-malz": "insaat-malz",
+  "elektrik-enerji": "uretim", "makine-ekipman": "uretim", lojistik: "lojistik",
+  "kimya-boya": "uretim", "saglik-medikal": "saglik",
+};
+
 export default function KesfetSayfa() {
   return (
     <Suspense>

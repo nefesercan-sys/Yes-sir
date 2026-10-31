@@ -73,6 +73,8 @@ const nextConfig = {
         { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
       ]),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
+      // Tek kayıt akışı: /kayit (bcrypt'li /api/auth/kayit); /uye-ol eski ve ikinci akıştır
+      { source: '/uye-ol', destination: '/kayit', permanent: false },
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
       // Gelinlik: gerçek sayfa app/terzi/hizmet/[hizmet] (gelinlik-abiye-tadilati). Eski/yazım hatalı adresler ona yönlenir.
