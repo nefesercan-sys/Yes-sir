@@ -1,4 +1,5 @@
 // swaphubs.com — Otel bölgesi derinlik sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-zones.ts. Sunucu bileşeni, stil inline.
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { INTL, iUrl, type ILang } from '@/lib/intl';
@@ -79,6 +80,8 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
             </div>
           ))}
         </section>
+
+        <OrnekGorselSeridi lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'erkek-takim-olcu', 'beyaz-gomlek-katli', 'yun-pantolon-metre']} sayfaUrl={`${SITE}${zoneUrl(lang, zone)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>

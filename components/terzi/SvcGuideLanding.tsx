@@ -1,4 +1,5 @@
 // swaphubs.com — Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-svc.ts. Sunucu bileşeni, stil inline.
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { INTL, iUrl, type ILang } from '@/lib/intl';
@@ -61,6 +62,8 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
             </div>
           ))}
         </section>
+
+        <OrnekGorselSeridi lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${svcgUrl(lang)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>
