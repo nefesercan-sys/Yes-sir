@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
+const CSP_REPORT_ONLY = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https://res.cloudinary.com https://images.pexels.com https://images.unsplash.com https://ui-avatars.com https://maps.gstatic.com https://maps.googleapis.com https://*.googleusercontent.com https://www.google-analytics.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.cloudinary.com https://www.google-analytics.com",
+  "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com",
+  "media-src 'self' https://res.cloudinary.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+].join('; ')
+
 const nextConfig = {
   poweredByHeader: false,
 
@@ -86,7 +101,7 @@ const nextConfig = {
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'Content-Security-Policy-Report-Only', value: CSP_REPORT_ONLY },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },
@@ -125,53 +140,7 @@ const nextConfig = {
       { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
 
-      // ── Terzi sayfaları (ÖZEL SEO SİNYALLERİNİZ KORUNDU) ──────────────────────────
-      {
-        source: '/terzi',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/terzi/(.*)',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-
-      // ── Online Terzi Hizmeti ─────────────────────────────────────────────
-      {
-        source: '/online-terzi-hizmeti',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/online-terzi-hizmeti/(.*)',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-
-      // ── Diğer SEO sayfaları ─────────────────────────────────────────────
-      {
-        source: '/tekstil-antalya',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/online-tailor-service',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
-      {
-        source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'index, follow, max-image-preview:large, max-snippet:-1' },
-        ],
-      },
+      // Not: indexlenebilirlik sayfa metadata'sındaki robots ile belirlenir; zorla 'index' başlığı eklenmez.
     ]
   },
 }
