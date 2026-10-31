@@ -11,7 +11,7 @@ const KONU: Record<Topic, GorselAnahtar[]> = {
   otel: ['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu'],
   etkinlik: ['abiye-elbise-atolye', 'abiye-askida', 'erkek-takim-olcu'],
 };
-const KONU_ALT: Record<Topic, Konu[]> = { keten: ['keten'], promo: ['promo'], tekstil: ['uniforma'], acil: ['genel'], otel: ['otel'], etkinlik: ['gelinlik'] };
+const KONU_ALT: Record<Topic, Konu[]> = { keten: ['keten'], promo: ['promo'], tekstil: ['uniforma'], acil: ['otel'], otel: ['bolge'], etkinlik: ['gelinlik'] };
 export default function OrnekGorseller({ topic, lang, url, base }: { topic: Topic; lang: GLang; url: string; base: string }) {
   const items = KONU[topic].map((k) => {
     const g = GORSELLER[k]; const m = gorselMetin(k, lang);
@@ -47,8 +47,8 @@ export default function OrnekGorseller({ topic, lang, url, base }: { topic: Topi
           <div style={{ marginTop: '2.2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.2rem' }}>
             {KONU_ALT[topic].flatMap((k) => ALT_BASLIKLAR[k]).map((a, i) => (
               <div key={i}>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h[lang]}</h2>
-                <p style={{ color: '#475569', fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p[lang]}</p>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h[lang].replace(/\{y\}/g, 'Antalya')}</h2>
+                <p style={{ color: '#475569', fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p[lang].replace(/\{y\}/g, 'Antalya')}</p>
               </div>
             ))}
           </div>
