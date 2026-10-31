@@ -14,6 +14,8 @@ const BASE_PATH: Record<Lang, string> = {
 
 import { DURATION, MAPS_URL } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
+import { DISTRICT_FACTS } from '@/lib/district-facts';
+import { PROCESS, processesFor } from '@/lib/bolge-icerik';
 
 const T: Record<Lang, any> = {
   en: {
@@ -211,6 +213,33 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           </p>
         </div>
       </section>
+
+      {/* Bölgeye özgü bilgi ve süreç anlatımı (bölge slug'ına göre deterministik; sayfalar arası kopya içeriği azaltır) */}
+      {(() => {
+        const fact = DISTRICT_FACTS[region.slug];
+        const surecler = processesFor(region.slug, []);
+        const h = lang === 'ru' ? 'Что важно знать' : lang === 'de' ? 'Gut zu wissen' : 'Good to know';
+        const lbl = lang === 'ru' ? ['Район', 'Чаще всего заказывают'] : lang === 'de' ? ['Lage', 'Häufigste Aufträge'] : ['Area', 'Most requested jobs'];
+        return (
+          <section style={{ background: '#fff', padding: '2.5rem 1.5rem' }}>
+            <div style={{ maxWidth: 860, margin: '0 auto' }}>
+              <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.4rem', color: '#1C1814', marginBottom: '.7rem' }}>{h} · {region.name}</h2>
+              {fact && (
+                <>
+                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.5rem' }}><strong>{lbl[0]}:</strong> {fact.where[lang]}</p>
+                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.9rem' }}><strong>{lbl[1]}:</strong> {fact.needs[lang]}</p>
+                </>
+              )}
+              {surecler.map((id) => (
+                <div key={id} style={{ marginBottom: '.7rem' }}>
+                  <h3 style={{ fontSize: '1rem', color: '#1C1814', margin: '0 0 .2rem' }}>{PROCESS[id][lang].h}</h3>
+                  <p style={{ color: '#7A6E62', fontSize: '.9rem', lineHeight: 1.7, margin: 0 }}>{PROCESS[id][lang].p}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Hotels Section */}
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
