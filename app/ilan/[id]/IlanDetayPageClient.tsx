@@ -140,7 +140,7 @@ function IlanDetayIcerik() {
 
       if (res.ok) {
 
-        router.push("/profil?silindi=1");
+        router.push("/panel?silindi=1");
 
       } else {
 
@@ -274,7 +274,6 @@ function IlanDetayIcerik() {
 
       <style>{`
 
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
 
         *{box-sizing:border-box}
 

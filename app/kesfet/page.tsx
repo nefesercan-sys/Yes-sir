@@ -47,7 +47,6 @@ function KesfetIcerik() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Unbounded:wght@700;900&display=swap');
         :root{--ink:#080811;--cream:#f7f5f0;--red:#e8361a;--gold:#f5a623;
           --navy:#0d1b3e;--mid:#4a4860;--border:#e4e1db;--green:#18a558;--purple:#7c3aed}
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}

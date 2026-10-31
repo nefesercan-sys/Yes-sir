@@ -227,14 +227,13 @@ function IlanDuzenleIcerik() {
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", gap: 16, padding: 24 }}>
       <p style={{ fontSize: 40 }}>⚠️</p>
       <p style={{ fontSize: 16, fontWeight: 700, color: "#dc2626", textAlign: "center" }}>{yetkiHatasi}</p>
-      <button onClick={() => router.push("/profil")} style={{ padding: "10px 24px", borderRadius: 12, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Profilime Dön</button>
+      <button onClick={() => router.push("/panel")} style={{ padding: "10px 24px", borderRadius: 12, background: "#2563eb", border: "none", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Profilime Dön</button>
     </div>
   );
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 80 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
         * { box-sizing: border-box; }
         input:focus, select:focus, textarea:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
       `}</style>

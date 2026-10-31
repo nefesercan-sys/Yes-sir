@@ -63,7 +63,7 @@ function IlanDetayIcerik() {
     setSiliyor(true);
     try {
       const res = await fetch(`/api/ilanlar/${ilanId}`, { method: "DELETE" });
-      if (res.ok) router.push("/profil?silindi=1");
+      if (res.ok) router.push("/panel?silindi=1");
       else { const d = await res.json(); setHata(d.error || "Silme başarısız."); setSilOnay(false); }
     } catch { setHata("Bağlantı hatası."); setSilOnay(false); }
     setSiliyor(false);
@@ -118,7 +118,6 @@ function IlanDetayIcerik() {
   return (
     <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingBottom: 100 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap');
         *{box-sizing:border-box}
         @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         @keyframes spin{to{transform:rotate(360deg)}}

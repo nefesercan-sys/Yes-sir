@@ -86,7 +86,7 @@ export default function OtelProfilPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'Inter, sans-serif', paddingBottom: '80px' }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap'); * { box-sizing: border-box; } input:focus, select:focus, textarea:focus { border-color: #7c3aed !important; }`}</style>
+      <style>{`* { box-sizing: border-box; } input:focus, select:focus, textarea:focus { border-color: #7c3aed !important; }`}</style>
 
       {/* Header */}
       <div style={{ background: '#4c1d95', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '12px', position: 'sticky', top: 0, zIndex: 100 }}>
