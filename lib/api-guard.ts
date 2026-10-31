@@ -1,6 +1,6 @@
 // Herkese açık (girişsiz) form API'leri için ortak koruma: IP başına hız sınırı + girdi temizleme.
-// NOT: Bellek içi sayaçtır (sunucusuz ortamda her örnek için ayrı). Kaba spam'i keser; kesin sınır için
-// ileride Upstash/Redis tabanlı bir limit eklenebilir.
+// NOT: Bellek içi sayaçtır (sunucusuz ortamda her örnek için ayrı). Kaba spam'i keser; GERÇEK dağıtık limit için
+// Upstash Redis (@upstash/ratelimit) önerilir. Kritik uçlar (OTP, giriş) lib/hiz-sayaci.ts ile MongoDB'de atomik sayar.
 import type { NextRequest } from 'next/server';
 
 const kovalar = new Map<string, number[]>();
@@ -16,8 +16,17 @@ export function rateLimited(req: Request | NextRequest, anahtar: string, max: nu
   const k = `${anahtar}:${clientIp(req)}`;
   const liste = (kovalar.get(k) || []).filter((t) => simdi - t < pencereMs);
   liste.push(simdi);
+  // Map ekleme sırasını korur: yeniden eklemek anahtarı sona taşır (en eskiler başta kalır)
+  kovalar.delete(k);
   kovalar.set(k, liste);
-  if (kovalar.size > 5000) kovalar.clear();
+  if (kovalar.size > 5000) {
+    // Komple sıfırlamak yerine yalnızca en eski ~%10'u at (aktif saldırgan sayacı silinmesin)
+    let silinecek = Math.ceil(kovalar.size * 0.1);
+    for (const eski of Array.from(kovalar.keys())) {
+      if (silinecek-- <= 0 || eski === k) break;
+      kovalar.delete(eski);
+    }
+  }
   return liste.length > max;
 }
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
 import { clean, isEmail, rateLimited } from '@/lib/api-guard';
+import { adminEpostasiMi } from '@/lib/admin-auth';
 
 // /uye-ol sayfası bu uca kayıt gönderir. Şifre artık bcrypt ile saklanır (NextAuth giriş kontrolüyle aynı yöntem).
 export async function POST(req: NextRequest) {
@@ -30,6 +31,11 @@ export async function POST(req: NextRequest) {
     const mevcut = await db.collection('users').findOne({ email });
     if (mevcut) {
       return NextResponse.json({ error: 'Bu e-posta adresi zaten kayıtlı' }, { status: 409 });
+    }
+
+    // Yönetici e-postasıyla yeni kayıt yapılamaz (yetki ele geçirmeyi önler); yönetici hesabı zaten kayıtlı olmalı.
+    if (adminEpostasiMi(email)) {
+      return NextResponse.json({ error: 'Bu e-posta adresiyle kayıt yapılamaz' }, { status: 403 });
     }
 
     const hash = await bcrypt.hash(sifre, 12);

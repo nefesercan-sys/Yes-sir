@@ -14,25 +14,27 @@ const options: MongoClientOptions = {
   maxIdleTimeMS: 10000,   // 10 saniye boşta kalan bağlantıyı kapatıp RAM'i boşalt
 };
 
-let clientPromise: Promise<MongoClient>;
-
 declare global {
   var _mc: Promise<MongoClient> | undefined;
 }
 
-if (process.env.NODE_ENV === 'development') {
+// Her ortamda (üretim dahil) client global'de önbelleğe alınır: sıcak sunucusuz örnek yeniden bağlanmaz,
+// modül birden çok kez değerlendirilse bile bağlantı havuzu çoğalmaz.
+function baglan(): Promise<MongoClient> {
   if (!global._mc) {
-    global._mc = new MongoClient(uri, options).connect();
+    const p = new MongoClient(uri, options).connect();
+    global._mc = p;
+    // Bağlantı hatası kalıcı önbelleğe yapışmasın: sonraki istek yeniden denesin
+    p.catch(() => { if (global._mc === p) global._mc = undefined; });
   }
-  clientPromise = global._mc;
-} else {
-  // Production (Vercel) ortamında opsiyonlarla birlikte yeni client oluşturulur
-  clientPromise = new MongoClient(uri, options).connect();
+  return global._mc;
 }
+
+const clientPromise: Promise<MongoClient> = baglan();
 
 export default clientPromise;
 
-export async function getDb() { 
+export async function getDb() {
   // Bağlantı kurulduğunda veritabanını döndürür
-  return (await clientPromise).db('hizmetara'); 
+  return (await baglan()).db('hizmetara');
 }
