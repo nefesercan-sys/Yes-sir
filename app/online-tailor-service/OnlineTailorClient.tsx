@@ -121,7 +121,7 @@ const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for ironing?", "Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the delivery time with you on WhatsApp."],
-  ["What\'s the minimum order quantity for mass production?", "Quantities depend on the project. Samples, prototypes, small runs and large orders are quoted per project."],
+  ["What\'s the minimum order quantity for mass production?", "There is no minimum order quantity. Samples, small runs and large orders are quoted per project."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Regular repairs and alterations are ready the next day and urgent jobs in 1–2 hours. For custom tailoring the timing depends on the design and quantity."],
   ["Do you ship across Turkey?", "Yes. Courier within Antalya and shipping across Turkey, 5–10 business days; delivery cost is confirmed on WhatsApp."],

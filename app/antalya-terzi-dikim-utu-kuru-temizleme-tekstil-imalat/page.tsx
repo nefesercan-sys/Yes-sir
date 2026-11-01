@@ -214,7 +214,7 @@ const SERIF   = 'Georgia,serif'
 const SANS    = 'system-ui,sans-serif'
 
 const SERVIS_ADIMLARI = [
-  { numara: '01', baslik: 'Arayın veya Yazın', aciklama: 'Telefon veya WhatsApp ile randevu alın. Konyaaltı içi tüm mahalleler için ücretsiz servis.' },
+  { numara: '01', baslik: 'Arayın veya Yazın', aciklama: 'Telefon veya WhatsApp ile randevu alın. Eve ve otele tüm bölgelerde ücretsiz servis.' },
   { numara: '02', baslik: 'Terzi Kapınıza Gelir', aciklama: 'Profesyonel terzimiz adresinize gelir, ölçünüzü alır veya tadilat için kıyafetlerinizi teslim alır.' },
   { numara: '03', baslik: 'Genellikle Ertesi Gün Hazır', aciklama: 'Tadilat ve onarım ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.' },
   { numara: '04', baslik: 'Adresinize Teslim', aciklama: 'Hazır olan kıyafetleriniz tekrar adresinize getirilir.' },
@@ -436,7 +436,7 @@ export default function AntalyaTerziPage() {
               Kıyafet Dikimi Fiyatları
             </h2>
             <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
-              Takım elbise, elbise, abiye, gelinlik, gömlek, pantolon — ölçüye özel dikim. Konyaaltı ve yakın bölgeler adrese servis.
+              Takım elbise (damatlık dahil), elbise, abiye, gömlek, pantolon — ölçüye özel dikim. Gelinlik dikimi yapılmaz, tadilatı yapılır. Eve ve otele ücretsiz servis.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
@@ -498,9 +498,9 @@ export default function AntalyaTerziPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
                 { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı, astar değişimi. Ertesi gün teslim; acilse 1–2 saat.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
-                { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise, kadın elbise, abiye, gelinlik, gömlek, pantolon, üniforma — ölçüye özel dikim.', href:'/terzi/bayan-terzi-antalya', fiyat:'₺350\'den' },
-                { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Evden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺80\'den' },
-                { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Servis imkanı.', href:'/terzi/kuru-temizleme-antalya', fiyat:'₺300\'den' },
+                { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise (damatlık dahil), kadın elbise, abiye, gömlek, pantolon, üniforma — ölçüye özel dikim. Gelinlik dikimi yapılmaz, tadilatı yapılır.', href:'/terzi/bayan-terzi-antalya', fiyat:'Fotoğrafa göre' },
+                { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Evden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'Fotoğrafa göre' },
+                { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Servis imkanı.', href:'/terzi/kuru-temizleme-antalya', fiyat:'Fotoğrafa göre' },
                 { ic:'🏭', baslik:'Üniforma & Seri İmalat', text:'Otel, restoran, okul, sağlık sektörü üniforması. Kalıp + nakış + seri üretim.', href:'/terzi/uniforma-uretimi-antalya', fiyat:'Teklif' },
                 { ic:'🚗', baslik:'Adrese Terzi Servisi', text:'Terziniz kapınıza gelir! Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Gürsu dahil tüm Konyaaltı. Ücretsiz alım + teslimat.', href:'/terzi/eve-gelen-terzi-antalya', fiyat:'Ücretsiz' },
               ].map(({ ic, baslik, text, href, fiyat }) => (

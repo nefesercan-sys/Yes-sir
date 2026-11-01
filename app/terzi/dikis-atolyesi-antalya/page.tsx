@@ -79,11 +79,11 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Dikiş atölyesi Antalya fiyatı ne kadar 2026?', acceptedAnswer: { '@type': 'Answer', text: `Kalıp çıkarma, numune ve fason üretim fiyatları proje bazlıdır. Adet, model ve kumaşa göre teklif verilir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Fason üretim Antalya minimum kaç adet?', acceptedAnswer: { '@type': 'Answer', text: 'Adet projeye göre belirlenir; her proje ayrı teklif edilir. Numune ve prototip tek adet kabul edilir.' } },
+        { '@type': 'Question', name: 'Fason üretim Antalya minimum kaç adet?', acceptedAnswer: { '@type': 'Answer', text: 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız. Fiyat adet, model ve kumaşa göre teklif edilir.' } },
         { '@type': 'Question', name: 'Marka için kıyafet üretimi Antalya yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Markalar, butikler ve e-ticaret firmaları için kalıp + numune + seri üretim paketi. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Sweatshirt ve eşofman üretimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Sweatshirt, eşofman, hırka, polo yaka üretimi + nakış/baskı. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'E-ticaret için kıyafet üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Sewing workshop Antalya — minimum order?', acceptedAnswer: { '@type': 'Answer', text: `Tailor Can sewing workshop in Antalya quotes each project separately; quantity depends on the project. Samples accepted as 1 unit. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Sewing workshop Antalya — minimum order?', acceptedAnswer: { '@type': 'Answer', text: `Tailor Can sewing workshop in Antalya quotes each project separately; there is no minimum order quantity, from a single sample to serial production. WhatsApp: ${PHONE}` } },
       ],
     },
   ],
@@ -274,7 +274,7 @@ export default function DikisAtölyesiPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Dikiş Atölyesi — Sık Sorulan Sorular</h2>
             {[
-              ['Fason üretim Antalya minimum kaç adet?', 'Adet projeye göre belirlenir; her proje ayrı teklif edilir. Numune ve prototip tek adet kabul edilir.'],
+              ['Fason üretim Antalya minimum kaç adet?', 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız. Fiyat adet, model ve kumaşa göre teklif edilir.'],
               ['Kalıp çıkarma hizmeti var mı?', `Evet! Tasarım dosyası veya referans üründen teknik kalıp + gradaj. WhatsApp: ${PHONE}`],
               ['Sweatshirt ve eşofman üretimi yapılıyor mu?', `Evet! Nakış ve baskı dahil. Adet projeye göre belirlenir, proje bazında teklif. WhatsApp: ${PHONE}`],
               ['E-ticaret için ürün üretimi yapılıyor mu?', `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim. WhatsApp: ${PHONE}`],

@@ -29,11 +29,6 @@ const jsonLd = {
       name: 'SwapHubs',
       url: BASE_URL,
       inLanguage: ['tr', 'en', 'ru', 'de'],
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${BASE_URL}/search?q={search_term_string}`,
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       // Sesli asistanlar ve AI okuyucular için: sayfanın hangi bölümünün

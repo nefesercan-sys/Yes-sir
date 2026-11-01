@@ -81,7 +81,7 @@ const jsonLd = {
       url: 'https://swaphubs.com',
       name: 'SwapHubs',
       description: "Terzi Can: Antalya terzi, tadilat, özel dikim ve tekstil üretimi",
-      inLanguage: ['tr', 'en', 'ru', 'de'],
+      inLanguage: ['tr', 'en', 'de', 'ru', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'],
       publisher: { '@id': 'https://swaphubs.com/#organization' },
     },
     {
@@ -97,14 +97,14 @@ const jsonLd = {
       },
       image: { '@type': 'ImageObject', url: 'https://swaphubs.com/swaphubs-og.jpg' },
       description:
-        'Ücretsiz ilan platformu; terzi, tekstil, üretici, tedarikçi ve hizmet sağlayıcıları alıcılarla buluşturur.',
+        'SwapHubs, Konyaaltı Antalya\'daki Terzi Can terzi ve tekstil üretimi sayfalarını barındırır.',
       areaServed: ['TR', 'DE', 'AE', 'SA', 'US', 'GB', 'RU'],
       knowsAbout: [
         'Terzi ve Tadilat Hizmetleri',
         'Tekstil Tedarik',
         'Fason Üretim',
-        'B2B Ticaret',
-        'Hizmet ve Ürün Tedariği',
+        'Özel Dikim',
+        'Seri Üretim ve İhracat',
       ],
       subOrganization: { '@id': 'https://swaphubs.com/terzi#business' },
       sameAs: ['https://twitter.com/swaphubs', 'https://www.linkedin.com/company/swaphubs'],

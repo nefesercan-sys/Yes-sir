@@ -127,15 +127,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "Fermuar değişimi ₺300'den başlar. Acil işler 1–2 saatte, normal işler ertesi gün teslim edilir.",
-    "en": "Zipper replacement starts from €20. Urgent jobs are ready in 1–2 hours, normal jobs the next day.",
-    "de": "Der Austausch beginnt ab €20. Eilige Aufträge sind in 1–2 Stunden fertig, normale am nächsten Tag.",
-    "ru": "Замена молнии — от €20. Срочные заказы — за 1–2 часа, обычные — на следующий день.",
-    "es": "El cambio de cremallera cuesta desde €20. Los trabajos urgentes están listos en 1–2 horas y los normales al día siguiente.",
-    "fr": "Le remplacement commence à €20. Les travaux urgents sont prêts en 1 à 2 heures, les autres le lendemain.",
-    "pl": "Wymiana zamka zaczyna się od €20. Pilne zlecenia są gotowe w 1–2 godziny, zwykłe następnego dnia.",
-    "uk": "Заміна блискавки — від €20. Термінові замовлення — за 1–2 години, звичайні — наступного дня.",
-    "nl": "Ritsvervanging begint vanaf €20. Spoedwerk is klaar in 1–2 uur, gewoon werk de volgende dag.",
-    "ar": "يبدأ استبدال السحّاب من €20. الأعمال العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي."
+    "en": "Zipper replacement starts from €15. Urgent jobs are ready in 1–2 hours, normal jobs the next day.",
+    "de": "Der Austausch beginnt ab €15. Eilige Aufträge sind in 1–2 Stunden fertig, normale am nächsten Tag.",
+    "ru": "Замена молнии — от €15. Срочные заказы — за 1–2 часа, обычные — на следующий день.",
+    "es": "El cambio de cremallera cuesta desde €15. Los trabajos urgentes están listos en 1–2 horas y los normales al día siguiente.",
+    "fr": "Le remplacement commence à €15. Les travaux urgents sont prêts en 1 à 2 heures, les autres le lendemain.",
+    "pl": "Wymiana zamka zaczyna się od €15. Pilne zlecenia są gotowe w 1–2 godziny, zwykłe następnego dnia.",
+    "uk": "Заміна блискавки — від €15. Термінові замовлення — за 1–2 години, звичайні — наступного дня.",
+    "nl": "Ritsvervanging begint vanaf €15. Spoedwerk is klaar in 1–2 uur, gewoon werk de volgende dag.",
+    "ar": "يبدأ استبدال السحّاب من €15. الأعمال العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي."
    }
   },
   {
@@ -503,15 +503,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "{y} bölgesinde paça kısaltma, fermuar değişimi, bel daraltma, gelinlik ve abiye tadilatı ile özel dikim yapılır. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye ₺800'den başlar.",
-    "en": "In {y} we do hemming, zipper replacement, waist taking-in, wedding and evening dress alterations and custom tailoring. Prices start from €10 for hemming and waist, €20 for zippers and €40 for wedding and evening dresses.",
-    "de": "In {y} erledigen wir Saum kürzen, Reißverschluss-Wechsel, Bund enger machen, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Preise ab €10 für Saum und Bund, €20 für Reißverschlüsse, €40 für Brautkleider.",
-    "ru": "В {y} мы делаем подшив брюк, замену молний, ушивание в талии, переделку свадебных и вечерних платьев и индивидуальный пошив. Цены: подшив и талия — от €10, молния — от €20, платья — от €40.",
-    "es": "En {y} hacemos bajos, cambio de cremalleras, ajuste de cintura, arreglos de vestidos de novia y de noche y confección a medida. Precios desde €10 (bajos y cintura), €20 (cremalleras) y €40 (vestidos).",
-    "fr": "À {y}, nous faisons ourlets, remplacement de fermetures, ajustement de taille, retouches de robes de mariée et de soirée et couture sur mesure. Prix dès €10 (ourlet, taille), €20 (fermeture) et €40 (robes).",
-    "pl": "W {y} wykonujemy skracanie, wymianę zamków, zwężanie w talii, przeróbki sukni ślubnych i wieczorowych oraz szycie na miarę. Ceny od €10 (nogawki, talia), €20 (zamki) i €40 (suknie).",
-    "uk": "У {y} ми підшиваємо штани, міняємо блискавки, звужуємо в талії, переробляємо весільні й вечірні сукні та шиємо на замовлення. Ціни: підшивання й талія — від €10, блискавка — від €20, сукні — від €40.",
-    "nl": "In {y} doen we broekzoom, ritsvervanging, taille innemen, aanpassingen van bruids- en avondjurken en maatwerk. Prijzen vanaf €10 (zoom, taille), €20 (ritsen) en €40 (jurken).",
-    "ar": "نقدّم في {y} تقصير البنطلون واستبدال السحّاب وتضييق الخصر وتعديل فساتين الزفاف والسهرة والتفصيل الخاص. الأسعار من €10 للتقصير والخصر، €20 للسحّاب، €40 للفساتين."
+    "en": "In {y} we do hemming, zipper replacement, waist taking-in, wedding and evening dress alterations and custom tailoring. Prices start from €10 for hemming and waist, €15 for zippers and €40 for wedding and evening dresses.",
+    "de": "In {y} erledigen wir Saum kürzen, Reißverschluss-Wechsel, Bund enger machen, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Preise ab €10 für Saum und Bund, €15 für Reißverschlüsse, €40 für Brautkleider.",
+    "ru": "В {y} мы делаем подшив брюк, замену молний, ушивание в талии, переделку свадебных и вечерних платьев и индивидуальный пошив. Цены: подшив и талия — от €10, молния — от €15, платья — от €40.",
+    "es": "En {y} hacemos bajos, cambio de cremalleras, ajuste de cintura, arreglos de vestidos de novia y de noche y confección a medida. Precios desde €10 (bajos y cintura), €15 (cremalleras) y €40 (vestidos).",
+    "fr": "À {y}, nous faisons ourlets, remplacement de fermetures, ajustement de taille, retouches de robes de mariée et de soirée et couture sur mesure. Prix dès €10 (ourlet, taille), €15 (fermeture) et €40 (robes).",
+    "pl": "W {y} wykonujemy skracanie, wymianę zamków, zwężanie w talii, przeróbki sukni ślubnych i wieczorowych oraz szycie na miarę. Ceny od €10 (nogawki, talia), €15 (zamki) i €40 (suknie).",
+    "uk": "У {y} ми підшиваємо штани, міняємо блискавки, звужуємо в талії, переробляємо весільні й вечірні сукні та шиємо на замовлення. Ціни: підшивання й талія — від €10, блискавка — від €15, сукні — від €40.",
+    "nl": "In {y} doen we broekzoom, ritsvervanging, taille innemen, aanpassingen van bruids- en avondjurken en maatwerk. Prijzen vanaf €10 (zoom, taille), €15 (ritsen) en €40 (jurken).",
+    "ar": "نقدّم في {y} تقصير البنطلون واستبدال السحّاب وتضييق الخصر وتعديل فساتين الزفاف والسهرة والتفصيل الخاص. الأسعار من €10 للتقصير والخصر، €15 للسحّاب، €40 للفساتين."
    }
   },
   {
@@ -557,15 +557,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "Paça kısaltma ve bel daraltma ₺200'den, fermuar değişimi ₺300'den, gelinlik, abiye ve elbise tadilatı ₺800'den başlar.",
-    "en": "Hemming and waist taking-in start from €10, zipper replacement from €20, wedding, evening and dress alterations from €40.",
-    "de": "Saum kürzen und Bund enger machen ab €10, Reißverschluss-Wechsel ab €20, Änderungen an Braut-, Abend- und Kleidern ab €40.",
-    "ru": "Подшив и ушивание в талии — от €10, замена молнии — от €20, переделка свадебных, вечерних платьев — от €40.",
-    "es": "Bajos y cintura desde €10, cambio de cremallera desde €20, arreglos de vestidos de novia, de noche y de vestir desde €40.",
-    "fr": "Ourlet et taille dès €10, remplacement de fermeture dès €20, retouches de robes de mariée, de soirée et d’habillées dès €40.",
-    "pl": "Nogawki i talia od €10, wymiana zamka od €20, przeróbki sukni ślubnych, wieczorowych i sukienek od €40.",
-    "uk": "Підшивання й звуження в талії — від €10, заміна блискавки — від €20, переробка весільних і вечірніх суконь — від €40.",
-    "nl": "Zoom en taille innemen vanaf €10, ritsvervanging vanaf €20, aanpassingen van bruids-, avond- en gewone jurken vanaf €40.",
-    "ar": "التقصير وتضييق الخصر من €10، واستبدال السحّاب من €20، وتعديل فساتين الزفاف والسهرة من €40."
+    "en": "Hemming and waist taking-in start from €10, zipper replacement from €15, wedding, evening and dress alterations from €40.",
+    "de": "Saum kürzen und Bund enger machen ab €10, Reißverschluss-Wechsel ab €15, Änderungen an Braut-, Abend- und Kleidern ab €40.",
+    "ru": "Подшив и ушивание в талии — от €10, замена молнии — от €15, переделка свадебных, вечерних платьев — от €40.",
+    "es": "Bajos y cintura desde €10, cambio de cremallera desde €15, arreglos de vestidos de novia, de noche y de vestir desde €40.",
+    "fr": "Ourlet et taille dès €10, remplacement de fermeture dès €15, retouches de robes de mariée, de soirée et d’habillées dès €40.",
+    "pl": "Nogawki i talia od €10, wymiana zamka od €15, przeróbki sukni ślubnych, wieczorowych i sukienek od €40.",
+    "uk": "Підшивання й звуження в талії — від €10, заміна блискавки — від €15, переробка весільних і вечірніх суконь — від €40.",
+    "nl": "Zoom en taille innemen vanaf €10, ritsvervanging vanaf €15, aanpassingen van bruids-, avond- en gewone jurken vanaf €40.",
+    "ar": "التقصير وتضييق الخصر من €10، واستبدال السحّاب من €15، وتعديل فساتين الزفاف والسهرة من €40."
    }
   },
   {
@@ -611,15 +611,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "Acil tamir ve tadilat 1–2 saatte, normal işler ertesi gün teslim edilir. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye ₺800'den başlar.",
-    "en": "Urgent repairs and alterations are ready in 1–2 hours, normal jobs the next day. Prices start from €10 for hemming and waist, €20 for zippers and €40 for wedding and evening dresses.",
-    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig, normale am nächsten Tag. Preise ab €10 für Saum und Bund, €20 für Reißverschlüsse, €40 für Brautkleider.",
-    "ru": "Срочный ремонт и подгонка — за 1–2 часа, обычные работы — на следующий день. Цены: подшив и талия — от €10, молния — от €20, платья — от €40.",
-    "es": "Los arreglos urgentes están listos en 1–2 horas y los normales al día siguiente. Precios desde €10 (bajos y cintura), €20 (cremalleras) y €40 (vestidos).",
-    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures, les normales le lendemain. Prix dès €10 (ourlet et taille), €20 (fermeture) et €40 (robes).",
-    "pl": "Pilne naprawy są gotowe w 1–2 godziny, zwykłe następnego dnia. Ceny od €10 (nogawki, talia), €20 (zamki) i €40 (suknie).",
-    "uk": "Термінові ремонт і підгонка — за 1–2 години, звичайні — наступного дня. Ціни: підшивання й талія — від €10, блискавка — від €20, сукні — від €40.",
-    "nl": "Spoedreparaties zijn klaar in 1–2 uur, gewone de volgende dag. Prijzen vanaf €10 (zoom, taille), €20 (ritsen) en €40 (jurken).",
-    "ar": "التصليحات العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي. الأسعار من €10 للتقصير والخصر، €20 للسحّاب، €40 للفساتين."
+    "en": "Urgent repairs and alterations are ready in 1–2 hours, normal jobs the next day. Prices start from €10 for hemming and waist, €15 for zippers and €40 for wedding and evening dresses.",
+    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig, normale am nächsten Tag. Preise ab €10 für Saum und Bund, €15 für Reißverschlüsse, €40 für Brautkleider.",
+    "ru": "Срочный ремонт и подгонка — за 1–2 часа, обычные работы — на следующий день. Цены: подшив и талия — от €10, молния — от €15, платья — от €40.",
+    "es": "Los arreglos urgentes están listos en 1–2 horas y los normales al día siguiente. Precios desde €10 (bajos y cintura), €15 (cremalleras) y €40 (vestidos).",
+    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures, les normales le lendemain. Prix dès €10 (ourlet et taille), €15 (fermeture) et €40 (robes).",
+    "pl": "Pilne naprawy są gotowe w 1–2 godziny, zwykłe następnego dnia. Ceny od €10 (nogawki, talia), €15 (zamki) i €40 (suknie).",
+    "uk": "Термінові ремонт і підгонка — за 1–2 години, звичайні — наступного дня. Ціни: підшивання й талія — від €10, блискавка — від €15, сукні — від €40.",
+    "nl": "Spoedreparaties zijn klaar in 1–2 uur, gewone de volgende dag. Prijzen vanaf €10 (zoom, taille), €15 (ritsen) en €40 (jurken).",
+    "ar": "التصليحات العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي. الأسعار من €10 للتقصير والخصر، €15 للسحّاب، €40 للفساتين."
    }
   },
   {
@@ -665,15 +665,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "Acil tamir ve tadilat 1–2 saatte, normal işler ertesi gün teslim edilir. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye ₺800'den başlar.",
-    "en": "Urgent repairs and alterations are ready in 1–2 hours, normal jobs the next day. Prices start from €10 for hemming and waist, €20 for zippers and €40 for wedding and evening dresses.",
-    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig, normale am nächsten Tag. Preise ab €10 für Saum und Bund, €20 für Reißverschlüsse, €40 für Brautkleider.",
-    "ru": "Срочный ремонт и подгонка — за 1–2 часа, обычные работы — на следующий день. Цены: подшив и талия — от €10, молния — от €20, платья — от €40.",
-    "es": "Los arreglos urgentes están listos en 1–2 horas y los normales al día siguiente. Precios desde €10 (bajos y cintura), €20 (cremalleras) y €40 (vestidos).",
-    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures, les normales le lendemain. Prix dès €10 (ourlet et taille), €20 (fermeture) et €40 (robes).",
-    "pl": "Pilne naprawy są gotowe w 1–2 godziny, zwykłe następnego dnia. Ceny od €10 (nogawki, talia), €20 (zamki) i €40 (suknie).",
-    "uk": "Термінові ремонт і підгонка — за 1–2 години, звичайні — наступного дня. Ціни: підшивання й талія — від €10, блискавка — від €20, сукні — від €40.",
-    "nl": "Spoedreparaties zijn klaar in 1–2 uur, gewone de volgende dag. Prijzen vanaf €10 (zoom, taille), €20 (ritsen) en €40 (jurken).",
-    "ar": "التصليحات العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي. الأسعار من €10 للتقصير والخصر، €20 للسحّاب، €40 للفساتين."
+    "en": "Urgent repairs and alterations are ready in 1–2 hours, normal jobs the next day. Prices start from €10 for hemming and waist, €15 for zippers and €40 for wedding and evening dresses.",
+    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig, normale am nächsten Tag. Preise ab €10 für Saum und Bund, €15 für Reißverschlüsse, €40 für Brautkleider.",
+    "ru": "Срочный ремонт и подгонка — за 1–2 часа, обычные работы — на следующий день. Цены: подшив и талия — от €10, молния — от €15, платья — от €40.",
+    "es": "Los arreglos urgentes están listos en 1–2 horas y los normales al día siguiente. Precios desde €10 (bajos y cintura), €15 (cremalleras) y €40 (vestidos).",
+    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures, les normales le lendemain. Prix dès €10 (ourlet et taille), €15 (fermeture) et €40 (robes).",
+    "pl": "Pilne naprawy są gotowe w 1–2 godziny, zwykłe następnego dnia. Ceny od €10 (nogawki, talia), €15 (zamki) i €40 (suknie).",
+    "uk": "Термінові ремонт і підгонка — за 1–2 години, звичайні — наступного дня. Ціни: підшивання й талія — від €10, блискавка — від €15, сукні — від €40.",
+    "nl": "Spoedreparaties zijn klaar in 1–2 uur, gewone de volgende dag. Prijzen vanaf €10 (zoom, taille), €15 (ritsen) en €40 (jurken).",
+    "ar": "التصليحات العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم التالي. الأسعار من €10 للتقصير والخصر، €15 للسحّاب، €40 للفساتين."
    }
   },
   {

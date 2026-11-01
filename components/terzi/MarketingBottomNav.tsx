@@ -4,7 +4,6 @@ const YESIL = '#2d8c6e';
 
 const OGELER = [
   { href: '/terzi-talep', icon: '📷', label: 'Talep Ver' },
-  { href: '/terzi-talep?sekme=ilanlar', icon: '📋', label: 'İlanlar' },
   { href: '/terzi-talep?sekme=mesajlar', icon: '💬', label: 'Mesajlar' },
   { href: '/terzi-talep?sekme=profil', icon: '👤', label: 'Profil' },
 ];
