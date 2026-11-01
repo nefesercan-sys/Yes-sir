@@ -5,6 +5,7 @@ import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { INTL, iUrl, type ILang } from '@/lib/intl';
 import { SVCG, svcgUrl } from '@/lib/intl-svc';
 import { KONU, KONU_IDS, KONU_UI, konuUrl, type KonuId } from '@/lib/intl-konu';
+import { HZ, HZ_IDS, HZ_UI, hzUrl, type HzId } from '@/lib/intl-hz';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { jsonLdString } from '@/lib/json-ld';
 
@@ -12,9 +13,9 @@ const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4'
 const serif = 'Georgia,serif';
 const waLink = (text: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
-export function konuJsonLd(lang: ILang, t: KonuId) {
-  const c = KONU[lang][t];
-  const url = `${SITE}${konuUrl(lang, t)}`;
+export function konuJsonLd(lang: ILang, t: KonuId | HzId, isHz = false) {
+  const c = isHz ? HZ[lang][t as HzId] : KONU[lang][t as KonuId];
+  const url = `${SITE}${isHz ? hzUrl(lang, t as HzId) : konuUrl(lang, t as KonuId)}`;
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -32,11 +33,11 @@ export function konuJsonLd(lang: ILang, t: KonuId) {
   };
 }
 
-export default function KonuGuideLanding({ lang, topic }: { lang: ILang; topic: KonuId }) {
-  const g = INTL[lang]; const c = KONU[lang][topic]; const ui = KONU_UI[lang];
+export default function KonuGuideLanding({ lang, topic, hz }: { lang: ILang; topic?: KonuId; hz?: HzId }) {
+  const g = INTL[lang]; const c = hz ? HZ[lang][hz] : KONU[lang][topic as KonuId]; const ui = hz ? { ...KONU_UI[lang], ...HZ_UI[lang] } : KONU_UI[lang];
   return (
     <main lang={lang} dir={g.dir} style={{ fontFamily: 'system-ui,sans-serif', background: C.cream, color: '#3A3028', minHeight: '100vh', lineHeight: 1.7 }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(konuJsonLd(lang, topic)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(konuJsonLd(lang, (hz ?? topic) as KonuId | HzId, !!hz)) }} />
 
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
@@ -64,7 +65,7 @@ export default function KonuGuideLanding({ lang, topic }: { lang: ILang; topic: 
           ))}
         </section>
 
-        <OrnekGorselSeridi konu={'hizmetFp'} lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${konuUrl(lang, topic)}`} base={SITE} />
+        <OrnekGorselSeridi konu={'hizmetFp'} lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${hz ? hzUrl(lang, hz) : konuUrl(lang, topic as KonuId)}`} base={SITE} />
 
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>

@@ -120,13 +120,19 @@ const CORE_HL: Record<'tr' | 'en' | 'ru' | 'de', string> = { tr: 'tr-TR', en: 'e
 const SIX: ILang[] = ['es', 'fr', 'pl', 'uk', 'nl', 'ar'];
 /** Yeni 6 dil rehberleri (hreflang → mutlak URL). */
 export const sixAlt = (t: KonuId): Record<string, string> => Object.fromEntries(SIX.map((l) => [l, `${SITE_ABS}${konuUrl(l, t)}`]));
-/** Keten/tekstil için TR/EN/RU/DE çekirdek sayfalar; diğer konularda boş. */
+// Özel dikim: TR/EN/RU/DE "özel dikim" hizmet sayfası (birebir); tamir-tadilat: hizmetler ana sayfası (yaklaşık).
+const SVC_CORE: Partial<Record<KonuId, Record<'tr' | 'en' | 'ru' | 'de', string>>> = {
+  ozel: { tr: '/terzi/hizmet/ozel-dikim-antalya', en: '/en/tailor-services/custom-tailoring-made-to-measure', ru: '/ru/uslugi-portnogo/poshiv-na-zakaz', de: '/de/schneider-leistungen/massanfertigung-schneider' },
+  tamir: { tr: '/terzi/hizmet', en: '/en/tailor-services', ru: '/ru/uslugi-portnogo', de: '/de/schneider-leistungen' },
+};
+/** Keten/tekstil/özel/tamir için TR/EN/RU/DE çekirdek sayfalar. */
 export const coreAlt = (t: KonuId): Record<string, string> =>
   t === 'keten' || t === 'tekstil'
     ? Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [CORE_HL[l], `${SITE_ABS}${CORE_URLS[t][l]}`]))
-    : {};
+    : Object.fromEntries(Object.entries(SVC_CORE[t] ?? {}).map(([l, u]) => [l, `${SITE_ABS}${u}`]));
 /** Rehber sayfasının tam hreflang kümesi. */
 export const konuLanguages = (t: KonuId): Record<string, string> => {
   const m = { ...coreAlt(t), ...sixAlt(t) };
-  return t === 'keten' || t === 'tekstil' ? { ...m, 'x-default': m['tr-TR'] } : m;
+  const def = m['tr-TR'] ?? m.tr;
+  return def ? { ...m, 'x-default': def } : m;
 };

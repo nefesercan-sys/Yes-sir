@@ -6,6 +6,7 @@ import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
 import { KONU_IDS, konuUrl, konuLanguages, sixAlt } from '@/lib/intl-konu'
+import { HZ_IDS, hzUrl, hzLanguages, hzSixForService } from '@/lib/intl-hz'
 import { PROMO_ALL } from '@/lib/intl-promo'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, isIndexable, type Lang } from '@/lib/seo-data'
 import { crossCanonical } from '@/lib/cross-canonical'
@@ -95,8 +96,15 @@ export async function GET() {
     }
   }
   const seoItems: Item[] = [
-    ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly' })),
-    ...SERVICES.flatMap((sv) => LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly' }))),
+    ...LANGS.map((l) => ({ url: `${BASE_URL}${SERVICE_BASE[l]}`, priority: '0.80', freq: 'weekly', alt: { ...Object.fromEntries(LANGS.map((x) => [x, `${BASE_URL}${SERVICE_BASE[x]}`])), ...Object.fromEntries(Object.entries(sixAlt('tamir')).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])), 'x-default': `${BASE_URL}${SERVICE_BASE.tr}` } })),
+    ...SERVICES.flatMap((sv) => {
+      const sx = sv.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : hzSixForService(sv.slug.tr)
+      const alt = Object.keys(sx).length
+        ? { ...Object.fromEntries(LANGS.map((x) => [x, `${BASE_URL}${serviceUrl(x, sv)}`])), ...Object.fromEntries(Object.entries(sx).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])), 'x-default': `${BASE_URL}${serviceUrl('tr', sv)}` }
+        : undefined
+      return LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt }))
+    }),
+    ...HZ_IDS.flatMap((h) => (['es', 'fr', 'pl', 'uk', 'nl', 'ar'] as const).map((l) => ({ url: `${BASE_URL}${hzUrl(l, h)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(Object.entries(hzLanguages(h)).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])) }))),
     ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly' }))),
     // 📞 İletişim sayfası (TR; EN/RU/DE karşılıkları terzihizmeti.com.tr'de)
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly' })),
