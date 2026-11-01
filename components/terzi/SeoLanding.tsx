@@ -271,7 +271,7 @@ function _districtCopy(lang: Lang, d: District) {
   return metaOverride({ n, loc, kw, title, desc: isFreeService(d.slug) ? desc : unfree(lang, desc) });
 
   function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
-    const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'SwapHubs') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
+    const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'Terzi Can') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
     if (!o) return { ...r, title: pickFit(({ tr: [`${n} Terzi Çağır · Elbise Dikimi, Tamiri, Tadilatı`, `${n} Terzi Çağır: Dikim, Tamir, Tadilat | Antalya`, `${n} Terzi Çağır | Antalya Tadilat`, `${n} Terzi Çağır | Antalya`], en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60) };
     return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: pickFit(({ tr: [`${n} Terzi Çağır · Elbise Dikimi, Tamiri, Tadilatı`, `${n} Terzi Çağır: Dikim, Tamir, Tadilat | Antalya`, `${n} Terzi Çağır | Antalya Tadilat`, `${n} Terzi Çağır | Antalya`], en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60), desc: (lang === 'tr' ? o.desc : r.desc) };
   }
@@ -487,7 +487,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
       : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d)), d.slug),
     openGraph: {
-      title: c.title, description: fitDesc(c.desc), url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: fitDesc(c.desc), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -515,7 +515,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); const six = hzSixForService(s.slug.tr); const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : six; if (!Object.keys(sx).length) return a; const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(serviceUrl(l, s))])); return { ...a, languages: { ...core, ...sx, 'x-default': core.tr } }; })(),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -541,7 +541,7 @@ export function hubMetadata(lang: Lang): Metadata {
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(SERVICE_BASE[l])])); return { ...a, languages: { ...core, ...sixAlt('tamir'), 'x-default': core.tr } }; })(),
-    openGraph: { title, description, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
+    openGraph: { title, description, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
 
