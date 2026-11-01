@@ -174,7 +174,7 @@ const FIYAT_LISTESI = [
   { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: 'Ertesi gün'  },
   { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Ertesi gün' },
   { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Ertesi gün' },
-  { hizmet: 'T-Shirt Tamiri',            fiyat: '₺100',  sure: 'Ertesi gün' },
+  { hizmet: 'T-Shirt Tamiri',            fiyat: 'Fotoğrafa göre',  sure: 'Ertesi gün' },
   { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Ertesi gün' },
   { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Ertesi gün' },
   { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: 'Ertesi gün'  },
@@ -185,20 +185,19 @@ const FIYAT_LISTESI = [
 
 const DIKIMLER = [
   { hizmet: 'Kadın Elbise / Tunik',   fiyat: '₺800+',   sure: 'Modele göre'   },
-  { hizmet: 'Abiye / Gece Elbisesi',  fiyat: '₺1.200+', sure: 'Modele ve adede göre'   },
-  { hizmet: 'Gelinlik Dikimi',        fiyat: '₺5.000+', sure: 'Modele göre' },
-  { hizmet: 'Pantolon / Etek',        fiyat: '₺350+',   sure: 'Modele göre'   },
+  { hizmet: 'Abiye / Gece Elbisesi',  fiyat: 'Fotoğrafa göre', sure: 'Modele ve adede göre'   },
+  { hizmet: 'Pantolon / Etek',        fiyat: 'Fotoğrafa göre',   sure: 'Modele göre'   },
   { hizmet: 'Üniforma (adet başına)', fiyat: 'Teklif',  sure: '7–14 gün'  },
 ]
 
 const UTU_TEMIZLEME = [
-  { hizmet: 'Gömlek Ütü',                      fiyat: '₺80',    sure: '2–6 saat'  },
-  { hizmet: 'Abiye Buharlama',                 fiyat: '₺120',   sure: '2–6 saat'  },
-  { hizmet: 'Çamaşır Yıkama + Kurutma',        fiyat: '₺80/kg', sure: '1–2 gün'   },
-  { hizmet: 'Elbise Kuru Temizleme',           fiyat: '₺300',   sure: '24–48 saat'},
-  { hizmet: 'Takım Elbise Kuru Temizleme',     fiyat: '₺450',   sure: '48 saat'   },
-  { hizmet: 'Mont Kuru Temizleme',             fiyat: '₺500',   sure: '48 saat'   },
-  { hizmet: 'Abiye / Gelinlik Kuru Temizleme', fiyat: '₺600+',  sure: '48–72 sa'  },
+  { hizmet: 'Gömlek Ütü',                      fiyat: 'Fotoğrafa göre',    sure: '2–6 saat'  },
+  { hizmet: 'Abiye Buharlama',                 fiyat: 'Fotoğrafa göre',   sure: '2–6 saat'  },
+  { hizmet: 'Çamaşır Yıkama + Kurutma',        fiyat: 'Fotoğrafa göre', sure: '1–2 gün'   },
+  { hizmet: 'Elbise Kuru Temizleme',           fiyat: 'Fotoğrafa göre',   sure: '24–48 saat'},
+  { hizmet: 'Takım Elbise Kuru Temizleme',     fiyat: 'Fotoğrafa göre',   sure: '48 saat'   },
+  { hizmet: 'Mont Kuru Temizleme',             fiyat: 'Fotoğrafa göre',   sure: '48 saat'   },
+  { hizmet: 'Abiye / Gelinlik Kuru Temizleme', fiyat: 'Fotoğrafa göre',  sure: '48–72 sa'  },
   { hizmet: 'Konyaaltı Otel/Ev Alım Teslim',  fiyat: 'ÜCRETSİZ', sure: '—'       },
 ]
 

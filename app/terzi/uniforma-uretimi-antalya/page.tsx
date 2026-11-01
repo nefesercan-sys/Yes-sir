@@ -80,7 +80,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.' } },
         { '@type': 'Question', name: 'Aşçı ve garson üniforması dikimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Aşçı, şef, garson, barista, catering personeli üniforması üretiyoruz. Nakış dahil. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Okul üniforması seri üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Üniformaya logo nakışı veya baskı yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış ₺100'den başlar. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Üniformaya logo nakışı veya baskı yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış fiyatı adede ve logoya göre netleşir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Hotel uniform production Antalya — do you speak English?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can produces hotel staff uniforms in Antalya with English service. We work with Belek and Kemer hotels. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Производство форменной одежды в Анталье?', acceptedAnswer: { '@type': 'Answer', text: `Да! Портной Кан производит форму для отелей, ресторанов и медицины в Анталье. Говорим по-русски. WhatsApp: ${PHONE}` } },
       ],
@@ -124,7 +124,7 @@ const SEKTORLER = [
 const AVANTAJLAR = [
   ['🎨', 'Ücretsiz Tasarım Danışmanlığı', 'Renk, model ve kumaş seçiminde ücretsiz danışmanlık hizmeti.'],
   ['📐', 'Özel Kalıp Çıkarma', 'Markanıza özel kalıp çıkarılır, gradaj yapılır. Beden tutarlılığı gözetilir.'],
-  ['🪡', 'Nakış & Logo Baskı', 'Bilgisayarlı nakış, dijital & DTF baskı. ₺100\'den başlar.'],
+  ['🪡', 'Nakış & Logo Baskı', 'Bilgisayarlı nakış, dijital & DTF baskı. Fiyat adede ve logoya göre netleşir.'],
   ['📦', 'Etiketli & Paketli Teslim', 'Her üniformaya etiket, ambalaj ve teslimat. Kurumsal görünüm.'],
   ['🚐', 'Yakın Bölgelere Teslimat', 'Belek, Kemer, Lara dahil Konyaaltı ve çevresi\'ya teslimat.'],
   ['🌍', 'Çok Dilli Hizmet', 'TR · EN · RU · DE dört dilde iletişim. Uluslararası oteller için ideal.'],
@@ -259,7 +259,7 @@ export default function UniformaUretimiPage() {
             {[
               ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
               ['Minimum kaç adet üniforma siparişi verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
-              ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış ₺100'den başlar. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
+              ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış fiyatı adede ve logoya göre netleşir. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
               ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara ve Side'ye teslim yapılmaktadır. WhatsApp: ${PHONE}`],
               ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. WhatsApp: ${PHONE}`],
               ['Teslimat süresi ne kadar?', 'Numune onayından sonra 10 adetlik sipariş 7–10 iş günü, büyük siparişler 15–30 iş günü sürer.'],

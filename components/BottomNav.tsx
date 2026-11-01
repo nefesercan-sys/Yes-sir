@@ -19,6 +19,9 @@ export default function BottomNav() {
   // Terzi bölümünün tüm sayfaları (uygulama kabuğu + tanıtım sayfası + il/ilçe
   // sayfaları) kendi menüsünü kullanıyor — sitenin genel menüsüyle çakışmaması
   // için burada gizleniyor.
+  // Pazar menüsü (ilan/keşfet) gizlendi.
+  const PAZAR_MENUSU = false as boolean;
+  if (!PAZAR_MENUSU) return null;
   const terziKabugu = isTerziPath(pathname);
   if (terziKabugu) return null;
 

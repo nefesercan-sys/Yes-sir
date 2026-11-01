@@ -66,14 +66,13 @@ const FIYATLAR = [
   ['Elbise Daraltma / Beden Küçültme', '₺200', 'Ertesi gün'],
   ['Kol Kısaltma (Elbise/Bluz)', '₺200', 'Ertesi gün'],
   ['Invisible Fermuar Değişimi', '₺300', 'Ertesi gün'],
-  ['Bluz Dikimi', '₺350', 'Modele ve adede göre'],
+  ['Bluz Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Kadın Elbise Dikimi', '₺800', 'Modele ve adede göre'],
-  ['Tulum Dikimi', '₺700', 'Modele ve adede göre'],
+  ['Tulum Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Abiye Tamiri / Kısaltma', '₺800', 'Ertesi gün'],
-  ['Abiye Dikimi', '₺1.200', 'Modele ve adede göre'],
+  ['Abiye Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Gelinlik Tadilatı', '₺800', 'Ertesi gün'],
-  ['Gelinlik Dikimi', '₺3.000+', 'Modele ve adede göre'],
-  ['Büyük Beden Elbise Dikimi', '₺700+', 'Modele ve adede göre'],
+  ['Büyük Beden Elbise Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];
 
@@ -109,7 +108,7 @@ export default function BayanTerziPage() {
               <strong style={{ color: '#fff' }}> Eve ve otele gelen terzi servisi</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '1.5rem' }}>
-              {[['Etek Kısaltma','₺200'],['Elbise Dikimi','₺800'],['Abiye Tamiri','₺800'],['Gelinlik Tadilat','₺800'],['Abiye Dikimi','₺1.200']].map(([n,p])=>(
+              {[['Etek Kısaltma','₺200'],['Elbise Dikimi','₺800'],['Abiye Tamiri','₺800'],['Gelinlik Tadilat','₺800'],['Abiye Dikimi','Fotoğrafa göre']].map(([n,p])=>(
                 <div key={n} style={{ background: 'rgba(255,255,255,.04)', padding: '.9rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)', marginBottom: '.2rem' }}>{n}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1.2rem', color: '#D4B07A', fontWeight: 700 }}>{p}</div>
@@ -182,7 +181,7 @@ export default function BayanTerziPage() {
               ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺200, elbise daraltma ₺200, elbise dikimi ₺800, abiye tamiri ₺800, gelinlik tadilatı ₺800. WhatsApp: ${PHONE}`],
               ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz düzeltme. Nisan–Ekim sezonu. WhatsApp: ${PHONE}`],
               ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri ertesi gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
-              ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi ₺700'den başlar. WhatsApp: ${PHONE}`],
+              ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa göre netleşir. WhatsApp: ${PHONE}`],
               ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
               ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılmaktadır. WhatsApp: ${PHONE}`],
             ].map(([q,a],i)=>(

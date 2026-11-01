@@ -80,17 +80,9 @@ const jsonLd = {
       '@id': 'https://swaphubs.com/#website',
       url: 'https://swaphubs.com',
       name: 'SwapHubs',
-      description: "Türkiye'nin küresel B2B ve bireysel hizmet & ürün platformu",
+      description: "Terzi Can: Antalya terzi, tadilat, özel dikim ve tekstil üretimi",
       inLanguage: ['tr', 'en', 'ru', 'de'],
       publisher: { '@id': 'https://swaphubs.com/#organization' },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: 'https://swaphubs.com/ilanlar?q={search_term_string}',
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       '@type': 'Organization',

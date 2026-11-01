@@ -73,8 +73,8 @@ const FIYATLAR = [
   ['Pantolon / Paça Kısaltma', '₺200', 'Ertesi gün'],
   ['Pantolon Bel Daraltma', '₺200', 'Ertesi gün'],
   ['Ceket Kol Kısaltma', '₺200', 'Ertesi gün'],
-  ['Ceket Beden Küçültme', '₺350', 'Ertesi gün'],
-  ['Erkek Pantolon Dikimi', '₺600', 'Modele ve adede göre'],
+  ['Ceket Beden Küçültme', 'Fotoğrafa göre', 'Ertesi gün'],
+  ['Erkek Pantolon Dikimi', '₺1000+', 'Modele ve adede göre'],
   ['Damatlık Takım Elbise', '₺20.000', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];

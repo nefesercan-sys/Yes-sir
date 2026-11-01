@@ -144,7 +144,7 @@ export default function TerziCagirPage() {
     ['Fermuar Tamiri', '₺300', 'Ertesi gün'],
     ['Ceket Tamiri', '₺200', 'Ertesi gün'],
     ['Mont Tamiri', '₺200', 'Ertesi gün'],
-    ['T-Shirt Tamiri', '₺100', 'Ertesi gün'],
+    ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Ertesi gün'],
     ['Abiye Tamiri', '₺800', 'Ertesi gün'],
     ['Elbise Dikimi', '₺800+', 'Modele göre'],
   ];
@@ -625,7 +625,7 @@ const FIYATLAR = [
   ['Fermuar Tamiri','₺300','Ertesi gün'],
   ['Ceket Tamiri','₺200','Ertesi gün'],
   ['Mont Tamiri','₺200','Ertesi gün'],
-  ['T-Shirt Tamiri','₺100','Ertesi gün'],
+  ['T-Shirt Tamiri','Fotoğrafa göre','Ertesi gün'],
   ['Abiye Tamiri','₺800','Ertesi gün'],
   ['Elbise Dikimi','₺800+','Modele göre'],
 ];

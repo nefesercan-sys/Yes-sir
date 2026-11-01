@@ -320,7 +320,7 @@ export default function EveGelenTerziPage() {
                   ['Kol Kısaltma','₺200+','Ertesi gün'],
                   ['Abiye Tamiri','₺800+','Ertesi gün'],
                   ['Gelinlik Tadilatı','₺800+','Ertesi gün'],
-                  ['Yırtık Onarımı','₺100+','Ertesi gün'],
+                  ['Yırtık Onarımı','Fotoğrafa göre','Ertesi gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>

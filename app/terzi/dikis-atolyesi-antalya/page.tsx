@@ -258,7 +258,7 @@ export default function DikisAtölyesiPage() {
               <p style={{ marginBottom: '1rem' }}>
                 <strong>Sweatshirt, eşofman, polo yaka, kapüşonlu</strong> ve tüm casual giyim
                 üretiminde dijital baskı, DTF baskı ve bilgisayarlı nakış hizmetleri bir arada sunulmaktadır.
-                Logo nakışı ₺100'den başlamaktadır.
+                Logo nakışı fiyatı adede ve logoya göre netleşir.
               </p>
               <p>
                 <strong>E-ticaret satıcıları için</strong> ürünler barkodlu etiketli ve bireysel paketlenmiş

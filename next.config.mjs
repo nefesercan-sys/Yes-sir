@@ -50,6 +50,18 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+      // İlan/pazar sayfaları gizlendi (geçici 307; geri açmak için bu kayıtları silin ve app/sitemap.ts, app/page.tsx ILAN_ENABLED=true yapın).
+      { source: '/ilan', destination: '/terzi', permanent: false },
+      { source: '/ilan/:path*', destination: '/terzi', permanent: false },
+      { source: '/ilanlar', destination: '/terzi', permanent: false },
+      { source: '/ilanlar/:path*', destination: '/terzi', permanent: false },
+      { source: '/ilan-ver', destination: '/terzi', permanent: false },
+      { source: '/ilan-detay', destination: '/terzi', permanent: false },
+      { source: '/ilan-detay/:path*', destination: '/terzi', permanent: false },
+      { source: '/ilan-duzenle', destination: '/terzi', permanent: false },
+      { source: '/ilan-duzenle/:path*', destination: '/terzi', permanent: false },
+      { source: '/kesfet', destination: '/terzi', permanent: false },
+      { source: '/kesfet/:path*', destination: '/terzi', permanent: false },
       // Bal sayfaları gizlendi (geçici 307; geri açmak için bu iki kaydı silin ve app/sitemap.ts BAL_ENABLED=true yapın).
       { source: '/bal', destination: '/terzi', permanent: false },
       { source: '/bal/:path*', destination: '/terzi', permanent: false },
