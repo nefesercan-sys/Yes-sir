@@ -12,25 +12,13 @@
 // Bu sayfalarda hreflang kümesi kaldırılır (canonical başka sitedeyken hreflang çelişki yaratır); Türkçe karşılıkları
 // ve swaphubs'a özgü rehber sayfaları swaphubs'ta indexlenebilir kalır.
 // ============================================================
-import { DISTRICTS, SERVICES } from '@/lib/seo-data';
-import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
 
 export const TZ_SITE = 'https://terzihizmeti.com.tr';
 
-const HOTEL = ['/en/hotel-tailor-antalya', '/de/schneider-service-hotel-antalya', '/ru/vyezdnoy-portnoy-antalya'];
-const DISTRICT = ['/en/tailor-antalya', '/de/schneider-antalya', '/ru/portnoy-antalya'];
-const SERVICE: Record<'en' | 'de' | 'ru', string> = { en: '/en/tailor-services', de: '/de/schneider-leistungen', ru: '/ru/uslugi-portnogo' };
-const CONTACT = ['/en/contact-tailor-antalya', '/de/kontakt-schneider-antalya', '/ru/kontakty-portnoy-antalya'];
-
 /** Kardeş sitede birebir karşılığı doğrulanmış swaphubs yolları. */
-export const CROSS_CANONICAL_PATHS: ReadonlySet<string> = new Set<string>([
-  ...HOTEL,
-  ...HOTEL.flatMap((b) => OTEL_BOLGELERI.map((r) => `${b}/${r.slug}`)),
-  ...DISTRICT.flatMap((b) => DISTRICTS.map((d) => `${b}/${d.slug}`)),
-  ...Object.values(SERVICE),
-  ...(Object.keys(SERVICE) as ('en' | 'de' | 'ru')[]).flatMap((l) => SERVICES.map((s) => `${SERVICE[l]}/${s.slug[l]}`)),
-  ...CONTACT,
-]);
+// Sahibinin kararı (Kasım 2026): swaphubs EN/DE/RU sayfaları kendi adreslerinde canonical kalır, terzihizmeti'ne
+// cross-canonical VERİLMEZ. Küme boş; mekanizma korunuyor (eski liste git geçmişinde).
+export const CROSS_CANONICAL_PATHS: ReadonlySet<string> = new Set<string>();
 
 /** swaphubs yolu için kardeş sitedeki canonical URL (yoksa null). */
 export function crossCanonical(path: string): string | null {
