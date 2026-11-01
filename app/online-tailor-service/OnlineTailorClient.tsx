@@ -20,7 +20,6 @@ const IMGS = {
   erkek:   '/gorseller/kalip-ve-makas.webp',
   bayan:   '/gorseller/bel-daraltma-manken.webp',
   online:  '/gorseller/dikis-makinesi.webp',
-  utu:     '/gorseller/kuru-temizleme-utu.webp',
   tamir:   '/gorseller/fermuar-degisimi.webp',
   tasarim: '/gorseller/kalip-ve-makas.webp',
   seri:    '/gorseller/hazir-giyim-atolye.webp',
@@ -52,13 +51,6 @@ const SERVICES = [
     feats:['Order via WhatsApp','Video-Call Fitting','Style Selection','Shipped Delivery'],
     price:'Quote', note:'Price confirmed on WhatsApp', time:'By design & quantity (+ shipping)',
     waMsg:'Hello, I would like information about the online tailor service.' },
-  { id:'utu-hizmeti', icon:'💨', badge:'EXPRESS', badgeColor:'#E11D48',
-    img: IMGS.utu,
-    title:'Ironing & Steam Pressing', sub:'Professional Ironing · Free Hotel Pickup & Delivery · Next Day',
-    desc:'No wrinkled clothes on holiday! We pick up from your hotel, steam-press professionally, and deliver the next day – or in 1–2 hours if urgent.',
-    feats:['Shirt Ironing','Suit Pressing','Hotel Pickup','Next-Day Delivery'],
-    price:'by photo', note:'Bulk discounts available', time:'2–6 hours',
-    waMsg:'Hello, I would like ironing service. Can you come to my hotel?' },
   { id:'tamir-tadilat', icon:'✂️', badge:'', badgeColor:'',
     img: IMGS.tamir,
     title:'Repairs & Alterations', sub:'Hemming · Zippers · Tears · Taking In',
@@ -101,12 +93,6 @@ const PRICE_TABLE = [
     ['Blouse / Skirt','by photo','By design & quantity'],
     ['Jumpsuit','by photo','By design & quantity'],
   ]},
-  { cat:'Ironing & Cleaning', rows:[
-    ['Shirt Ironing','by photo','Next day'],
-    ['Dress Steaming','by photo','Next day'],
-    ['Coat Ironing','by photo','Next day'],
-    ['Bulk Ironing (10+ items)','by photo','Next day'],
-  ]},
   { cat:'Repairs & Alterations', rows:[
     ['Hemming','by photo','Next day'],
     ['Zipper Replacement','by photo','Next day'],
@@ -120,7 +106,7 @@ const PRICE_TABLE = [
 const FAQS: [string, string][] = [
   ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
-  ["Do you come to my hotel for ironing?", "Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the delivery time with you on WhatsApp."],
+  ["Do you come to my hotel for fittings and alterations?", "Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the delivery time with you on WhatsApp."],
   ["What\'s the minimum order quantity for mass production?", "There is no minimum order quantity. Samples, small runs and large orders are quoted per project."],
   ["Do you offer custom design services?", "Yes. You can bring your own design or work with our designers, including pattern making."],
   ["How long do repairs and alterations take?", "Regular repairs and alterations are ready the next day and urgent jobs in 1–2 hours. For custom tailoring the timing depends on the design and quantity."],
@@ -330,11 +316,11 @@ export default function OnlineTailorClient({
           <h1 id="hero-h">
             Custom Tailoring,<br />
             <em>Online Tailor</em>
-            &amp; Ironing Service
+            &amp; Tailor Atelier
           </h1>
           <p className="ohero-sub">
             Menswear and womenswear tailoring, custom pattern design, a full textile workshop,
-            mass production and professional ironing service. Based in Konyaaltı, shipping across Turkey.
+            and mass production. Based in Konyaaltı, shipping across Turkey.
           </p>
           <div className="ohero-btns">
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Order on WhatsApp</a>
@@ -364,8 +350,8 @@ export default function OnlineTailorClient({
       <div className="oseo" id="seo-intro">
         <p>
           <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya and across Turkey:
-          menswear and womenswear tailoring, ironing, repairs, alterations, custom pattern design,
-          mass production and contract manufacturing. Hemming, zipper replacement, dry cleaning. Sportswear, tracksuits
+          menswear and womenswear tailoring, repairs, alterations, custom pattern design,
+          mass production and contract manufacturing. Hemming, zipper replacement. Sportswear, tracksuits
           and sweatshirts made to order. Bulk production quoted per project. Courier within Antalya and nationwide shipping; delivery cost confirmed on WhatsApp.
         </p>
       </div>
@@ -385,7 +371,7 @@ export default function OnlineTailorClient({
         <div className="osvc-header">
           <span className="oeyebrow">✦ All Our Services</span>
           <h2 className="oh2" id="svc-h">What We Do</h2>
-          <p className="osh-sub">From menswear and womenswear tailoring to online ordering, ironing to mass production.</p>
+          <p className="osh-sub">From menswear and womenswear tailoring to online ordering and mass production.</p>
           <div className="odivider" />
         </div>
         <div className="osvc-grid">
@@ -597,7 +583,7 @@ export default function OnlineTailorClient({
             <div style={{ fontFamily: 'var(--font-unbounded,"Georgia",serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--bone)', marginBottom: '.5rem' }}>Antalya Terzi Can →</div>
             <p style={{ fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '.8rem' }}>Mobile tailor service based in Konyaaltı. We come to your home or hotel, take measurements, and deliver.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem' }}>
-              {['✂️ Alterations','👗 Tailoring','🧺 Dry Cleaning','🚗 Home-Visit Tailor'].map(t => (
+              {['✂️ Alterations','👗 Tailoring','🚗 Home-Visit Tailor'].map(t => (
                 <span key={t} style={{ fontSize: '.6rem', color: 'var(--gold)', border: '1px solid rgba(201,168,76,.2)', padding: '.18rem .5rem' }}>{t}</span>
               ))}
             </div>
@@ -616,7 +602,7 @@ export default function OnlineTailorClient({
           <a href="tel:+905318986418" style={{ color: 'rgba(201,168,76,.35)', textDecoration: 'none' }}>+90 531 898 64 18</a>
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center', marginTop: '1rem' }}>
-          {['Antalya Men\'s Tailor','Menswear Tailoring','Womenswear Tailoring','Online Tailor Antalya','Ironing Service Antalya','Mass Production Antalya','Tailor Antalya','Портной Анталья','Schneider Antalya'].map(k => (
+          {['Antalya Men\'s Tailor','Menswear Tailoring','Womenswear Tailoring','Online Tailor Antalya','Mass Production Antalya','Tailor Antalya','Портной Анталья','Schneider Antalya'].map(k => (
             <span key={k} style={{ fontSize: '.58rem', color: 'rgba(201,168,76,.22)', border: '1px solid rgba(201,168,76,.07)', padding: '.18rem .55rem' }}>{k}</span>
           ))}
         </div>

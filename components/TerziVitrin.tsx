@@ -10,7 +10,6 @@ const LINKS: { href: string; label: string }[] = [
   { href: "/terzi/bay-terzi-antalya", label: "Bay Terzi" },
   { href: "/terzi/bayan-terzi-antalya", label: "Bayan Terzi" },
   { href: "/terzi/eve-gelen-terzi-antalya", label: "Eve ve Otele Gelen Terzi" },
-  { href: "/terzi/kuru-temizleme-antalya", label: "Kuru Temizleme ve Ütü" },
   { href: "/terzi/dikis-atolyesi-antalya", label: "Dikiş Atölyesi, Fason Üretim" },
   { href: "/terzi/uniforma-uretimi-antalya", label: "Üniforma Üretimi" },
   { href: "/tekstil-antalya", label: "Tekstil Antalya" },
@@ -29,7 +28,7 @@ export default function TerziVitrin() {
         Terzi ve Tekstil Hizmetleri — Antalya
       </h2>
       <p style={{ fontSize: 14, opacity: 0.8, marginBottom: 12 }}>
-        Terzi Can: paça kısaltma, fermuar değişimi, elbise dikimi, kuru temizleme ve seri üretim.
+        Terzi Can: paça kısaltma, fermuar değişimi, elbise dikimi ve seri üretim.
         Her gün 08:00–23:00. WhatsApp: +90 531 898 64 18
       </p>
       <ul style={{ display: "flex", flexWrap: "wrap", gap: 8, listStyle: "none", padding: 0, margin: 0 }}>

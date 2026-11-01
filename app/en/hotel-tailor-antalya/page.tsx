@@ -317,7 +317,7 @@ export default function HotelTailorAntalyaPage() {
         </section>
 
         {/* CTA SECTION */}
-        <OrnekGorselSeridi konu="bolge" lang="en" tema="acik" anahtarlar={['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
+        <OrnekGorselSeridi konu="bolge" lang="en" tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.8rem' }}>

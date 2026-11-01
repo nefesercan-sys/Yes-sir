@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Schneider Antalya: Foto senden, Preis erhalten | Terzi Can' },
   description:
-    'Online-Schneiderservice in Konyaaltı: Herren- & Damenschneiderei, Bügeln, Reparaturen, Änderungen. ' +
+    'Online-Schneiderservice in Konyaaltı: Herren- & Damenschneiderei, Reparaturen, Änderungen. ' +
     'Versand in die ganze Türkei. ☎ ' + PHONE,
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
-    'Bügelservice Antalya', 'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',
+    'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',
     'Konyaaltı Schneider', 'Online Schneiderservice', 'Schneider Antalya',
   ],
   alternates: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei',
-    description: 'Herren- & Damenschneiderei, Bügelservice, Reparaturen, Änderungen, Serienproduktion. Versand in die ganze Türkei.',
+    description: 'Herren- & Damenschneiderei, Reparaturen, Änderungen, Serienproduktion. Versand in die ganze Türkei.',
     url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'de_DE', alternateLocale: ['tr_TR', 'en_US', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Schneiderservice Antalya', type: 'image/jpeg' }],
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 const FAQ = [
   { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Der Preis hängt von Stoff und Modell ab. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
   { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
-  { q: 'Kommen Sie für den Bügelservice zu meinem Hotel?', a: `Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen bedienten Hotelgebieten kostenlos. Die Zeit klären wir per WhatsApp. ${PHONE}` },
+  { q: 'Kommen Sie für Anproben und Änderungen zu meinem Hotel?', a: `Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen bedienten Hotelgebieten kostenlos. Die Zeit klären wir per WhatsApp. ${PHONE}` },
   { q: 'Antworten Sie in meiner Sprache?', a: `Ja. Schreiben Sie uns auf WhatsApp in jeder Sprache, wir antworten in dieser Sprache: ${PHONE}` },
   { q: 'Kann ich aus dem Ausland bestellen?', a: 'Ja. Wir nehmen Ihre Maße online auf, nähen das Kleidungsstück in Antalya und senden es in Ihr Land, meist innerhalb von 1–3 Wochen. Die Zahlung erfolgt per Überweisung. Passt es nicht, tauschen wir es um oder ändern es. Den Stoff können wir besorgen oder Sie stellen ihn selbst.' },
   { q: 'Mein Kleid ist gerissen — geht die Reparatur dringend?', a: `Ja, dringende Reparaturen sind in 1–2 Stunden fertig, normale am nächsten Tag. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
@@ -82,8 +82,8 @@ export default function OnlineSchneiderservicePage() {
       <BusinessSchema
         reviews={GOOGLE_REVIEWS}
         path={SITE_URL.replace(BASE_URL, '')}
-        name='Online Schneiderservice Antalya — Herren- & Damenschneiderei · Bügelservice'
-        description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–23:00 geöffnet.'
+        name='Online Schneiderservice Antalya — Herren- & Damenschneiderei'
+        description='Online-Schneiderservice von Terzi Can in Konyaaltı, Antalya: Herren- und Damenschneiderei, Reparaturen, Änderungen und Serienproduktion. Täglich 08:00–23:00 geöffnet.'
         lang={'de'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Schneiderservice', path: SITE_URL.replace(BASE_URL, '') }]}

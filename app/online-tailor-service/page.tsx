@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quote | Terzi Can' },
   description:
-    'Online tailor service in Konyaaltı: menswear & womenswear tailoring, ironing, repairs, alterations, ' +
+    'Online tailor service in Konyaaltı: menswear & womenswear tailoring, repairs, alterations, ' +
     'bulk production. Shipping in Turkey. ☎ ' + PHONE,
   keywords: [
     'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
-    'ironing service Antalya', 'repairs alterations Antalya', 'mass production Antalya',
+    'repairs alterations Antalya', 'mass production Antalya',
     'Konyaaltı tailor', 'online tailor service', 'tailor Antalya',
     'recommend a tailor Antalya', 'find a tailor near me',
     'my dress is torn', 'tailor open in the evening', 'tailor open on weekends',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
-    description: 'Menswear & womenswear tailoring, ironing, repairs, alterations, mass production. Shipping across Turkey.',
+    description: 'Menswear & womenswear tailoring, repairs, alterations, mass production. Shipping across Turkey.',
     url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Tailor Service Antalya', type: 'image/jpeg' }],
   },
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
 const FAQ = [
   { q: "How much does a men's suit cost in Antalya?", a: `The price depends on fabric and style. Send your measurements via WhatsApp: ${PHONE}` },
   { q: 'How does the online tailor service work?', a: `Send a reference photo and measurements via WhatsApp — we sew it and ship it. ${PHONE}` },
-  { q: 'Do you come to my hotel for ironing?', a: `Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the timing on WhatsApp. ${PHONE}` },
+  { q: 'Do you come to my hotel for fittings and alterations?', a: `Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the timing on WhatsApp. ${PHONE}` },
   { q: 'Can you reply in my language?', a: `Yes. Message us on WhatsApp in any language and we reply in it: ${PHONE}` },
   { q: 'Can I order from abroad?', a: 'Yes. We take your measurements online, sew the garment in Antalya and ship it to your country, usually within 1–3 weeks. Payment is by bank transfer. If it does not fit, we exchange or alter it. We can supply the fabric, or you can provide your own.' },
   { q: 'My dress is torn — can you repair it urgently?', a: `Yes, urgent repairs are ready in 1–2 hours and regular ones the next day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
@@ -92,7 +92,7 @@ export default function OnlineTailorServicePage() {
         reviews={GOOGLE_REVIEWS}
         path={SITE_URL.replace(BASE_URL, '')}
         name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti'
-        description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, ironing, repairs, alterations, custom design and mass production. Open daily 08:00–23:00.'
+        description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, repairs, alterations, custom design and mass production. Open daily 08:00–23:00.'
         lang={['tr','en','ru','de']}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Tailor Service', path: SITE_URL.replace(BASE_URL, '') }]}

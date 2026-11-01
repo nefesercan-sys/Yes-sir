@@ -357,7 +357,6 @@ export default function PacaKisaltmaPage() {
             <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
               {[
                 ['Fermuar Değişimi Antalya', '/terzi/fermuar-degisimi-antalya'],
-                ['Kuru Temizleme Antalya', '/terzi/kuru-temizleme-antalya'],
                 ['Elbise Dikimi Antalya', '/antalya-terzi-elbise-dikimi'],
                 ['Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
                 ['Üniforma Dikimi Antalya', '/terzi/uniforma-uretimi-antalya'],

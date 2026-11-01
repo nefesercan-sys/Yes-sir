@@ -263,7 +263,7 @@ function buildJsonLd(lang: Lang) {
     '@graph': [
       {
         '@type': ['LocalBusiness', 'ClothingStore'],
-        additionalType: ['https://schema.org/SewingService', 'https://schema.org/DryCleaningService'],
+        additionalType: ['https://schema.org/SewingService'],
         '@id': SITE_CFG.businessId,
         name: SITE_CFG.businessName,
         url: SITE,

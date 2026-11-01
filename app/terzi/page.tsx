@@ -67,7 +67,7 @@ const jsonLd = {
   '@graph': [
     // ── ANA VARLIK: Terzi Can ──
     {
-      '@type': ['LocalBusiness', 'ClothingStore', 'DryCleaningOrLaundry'],
+      '@type': ['LocalBusiness', 'ClothingStore'],
       '@id': `${SITE_URL}#business`,
       ...reviewSchema(),
       name: 'Terzi Can',
@@ -82,7 +82,7 @@ const jsonLd = {
         'Dikiş Atölyesi Antalya',
       ],
       description:
-        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi, kuru temizleme. Eve ve otele terzi servisi (Konyaaltı'nda ücretsiz).",
+        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi. Eve ve otele terzi servisi (Konyaaltı'nda ücretsiz).",
       url: SITE_URL,
       mainEntityOfPage: { '@id': `${SITE_URL}#webpage` },
       telephone: PHONE_E164,
@@ -121,7 +121,6 @@ const jsonLd = {
           offer('Fermuar Değişimi', '300'),
           offer('Bel Daraltma', '200'),
           offer('Elbise Dikimi', '800'),
-          offer('Kuru Temizleme', '300'),
         ],
       },
       potentialAction: [
@@ -208,8 +207,7 @@ const jsonLd = {
         { '@type': 'ListItem', position: 3, name: 'Paça Kısaltma',                          item: { '@id': `${HOME_URL}/terzi/paca-kisaltma-antalya` } },
         { '@type': 'ListItem', position: 4, name: 'Dikiş Atölyesi — Fason ve Seri Üretim', item: { '@id': `${HOME_URL}/terzi/dikis-atolyesi-antalya` } },
         { '@type': 'ListItem', position: 5, name: 'Üniforma Üretimi',                       item: { '@id': `${HOME_URL}/terzi/uniforma-uretimi-antalya` } },
-        { '@type': 'ListItem', position: 6, name: 'Kuru Temizleme ve Ütü',                  item: { '@id': `${HOME_URL}/terzi/kuru-temizleme-antalya` } },
-        { '@type': 'ListItem', position: 7, name: 'Eve / Otele Gelen Terzi',                item: { '@id': `${HOME_URL}/terzi/eve-gelen-terzi-antalya` } },
+        { '@type': 'ListItem', position: 6, name: 'Eve / Otele Gelen Terzi',                item: { '@id': `${HOME_URL}/terzi/eve-gelen-terzi-antalya` } },
       ],
     },
 
@@ -227,7 +225,6 @@ const jsonLd = {
         { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Kuru temizleme ve ütü Antalya fiyatları?', acceptedAnswer: { '@type': 'Answer', text: 'Kuru temizleme ve ütü fiyatı eşyaya göre belirlenir; fotoğrafı WhatsApp\'tan gönderin. Eve ve otele alım-teslim ücretsiz.' } },
         { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.' } },
       ],
     },
@@ -244,7 +241,7 @@ export const metadata: Metadata = {
     'tamir tadilat Antalya','bay bayan tamir tadilat','söküğü dikme Antalya','yırtık tamiri Antalya','elbise tamiri ve tadilatı Antalya','etek kısaltma Antalya','Antalya terzi','Konyaaltı terzi','terzi Antalya 2026','bay terzi Antalya','bayan terzi Antalya',
     'paça kısaltma Antalya','fermuar değişimi Antalya','bel daraltma Antalya',
     'özel dikim Antalya','eve gelen terzi Antalya','otele gelen terzi Antalya',
-    'dikiş atölyesi Antalya','üniforma üretimi Antalya','kuru temizleme Antalya',
+    'dikiş atölyesi Antalya','üniforma üretimi Antalya',
     'tailor Antalya','English speaking tailor Antalya','портной Анталья','Schneider Antalya',
     'yakınımda terzi','en yakın terzi','Terzi Can',
   ],
