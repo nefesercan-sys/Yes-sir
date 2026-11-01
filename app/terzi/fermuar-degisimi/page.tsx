@@ -66,7 +66,7 @@ const FERMUAR_TURLERI: { ic: string; baslik: string; aciklama: string }[] = [
   { ic: '👖', baslik: 'Pantolon & Kot', aciklama: 'Ön fermuar değişimi; kot pantolonlarda dayanıklı fermuar ve düzgün dikiş.' },
   { ic: '👗', baslik: 'Elbise', aciklama: 'Sırt ve yan fermuarlar, gizli fermuar değişimi; kumaşa zarar vermeden.' },
   { ic: '🩳', baslik: 'Etek & Şort', aciklama: 'Yan ve arka fermuar değişimi, bel hattına uygun yerleşim.' },
-  { ic: '🧥', baslik: 'Mont & Kaban', aciklama: 'Uzun mont ve kaban fermuarlarının değişimi, astar ve kumaş korunarak.' },
+  { ic: '🧥', baslik: 'Mont & Kaban', aciklama: 'Uzun mont ve kaban fermuarlarının değişimi, kumaş korunarak.' },
   { ic: '🥼', baslik: 'Ceket & Blazer', aciklama: 'Ceket ve blazer fermuarları; ön kapama ve cep fermuarları.' },
   { ic: '🧵', baslik: 'Deri Ürünler', aciklama: 'Deri mont ve ceket fermuarları özel işlemdir; fotoğrafa göre fiyat verilir.' },
 ];
@@ -268,7 +268,7 @@ export default function FermuarDegisimiPage() {
         <div style={wrap}>
           <h2 style={h2}>Hangi kıyafetlerin fermuarını değiştiriyoruz?</h2>
           <p style={{ margin: '0 0 1.2rem', color: MUTED }}>
-            Fermuar değişimi; kumaşa, astara ve dikiş hattına zarar vermeden yapılır.
+            Fermuar değişimi; kumaşa ve dikiş hattına zarar vermeden yapılır.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '.9rem' }}>
             {FERMUAR_TURLERI.map(t => (

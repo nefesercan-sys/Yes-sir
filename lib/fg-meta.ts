@@ -196,9 +196,9 @@ const FG_SERVICE: Record<string, Row> = {
     de: { t: "Hemd ändern: enger machen, Ärmel kürzen | Terzi Can", d: "Hemden in Antalya für Herren und Damen ändern: seitlich enger, Ärmel und Länge kürzen, Kragen anpassen. ☎ +90 531 898 64 18", kw: ["Hemd enger machen", "Hemd Ärmel kürzen", "Hemd ändern Antalya"] },
   },
   "deri": {
-    en: { t: "Leather Jacket & Trouser Repair in Antalya | Terzi Can", d: "Leather jackets and trousers repaired in Antalya: taking in, zipper replacement, lining repair. Send a photo for a quote. ☎ +90 531 898 64 18", kw: ["leather jacket repair", "leather jacket alteration Antalya", "leather trousers tailor"] },
-    ru: { t: "Ремонт кожаной куртки и брюк в Анталье | Terzi Can", d: "Ремонт кожаных курток и брюк в Анталье: ушить, заменить молнию, починить подкладку. Фото в WhatsApp — назовём цену. ☎ +90 531 898 64 18", kw: ["ремонт кожаной куртки", "ушить кожаную куртку", "кожаные брюки ателье Анталья"] },
-    de: { t: "Lederjacke & Lederhose reparieren in Antalya | Terzi Can", d: "Lederjacken und Lederhosen in Antalya reparieren: enger machen, Reißverschluss wechseln, Futter richten. Foto für Preisangebot. ☎ +90 531 898 64 18", kw: ["Lederjacke reparieren", "Lederjacke ändern Antalya", "Lederhose Schneider"] },
+    en: { t: "Leather Jacket & Trouser Repair in Antalya | Terzi Can", d: "Leather jackets and trousers repaired in Antalya: taking in and zipper replacement. Send a photo for a quote. ☎ +90 531 898 64 18", kw: ["leather jacket repair", "leather jacket alteration Antalya", "leather trousers tailor"] },
+    ru: { t: "Ремонт кожаной куртки и брюк в Анталье | Terzi Can", d: "Ремонт кожаных курток и брюк в Анталье: ушить и заменить молнию. Фото в WhatsApp — назовём цену. ☎ +90 531 898 64 18", kw: ["ремонт кожаной куртки", "ушить кожаную куртку", "кожаные брюки ателье Анталья"] },
+    de: { t: "Lederjacke & Lederhose reparieren in Antalya | Terzi Can", d: "Lederjacken und Lederhosen in Antalya reparieren: enger machen und Reißverschluss wechseln. Foto für Preisangebot. ☎ +90 531 898 64 18", kw: ["Lederjacke reparieren", "Lederjacke ändern Antalya", "Lederhose Schneider"] },
   },
   "tisort": {
     en: { t: "T-Shirt & Shorts Alteration, Hemming Antalya | Terzi Can", d: "T-shirt and shorts alteration in Antalya: shorten, take in, sleeve length, waistband fit. Send a photo on WhatsApp for the price. ☎ +90 531 898 64 18", kw: ["shorts hemming", "t-shirt alteration", "take in shorts Antalya"] },
@@ -221,9 +221,9 @@ const FG_SERVICE: Record<string, Row> = {
     de: { t: "Abendgarderobe ändern in Antalya | Terzi Can", d: "Abendkleider ändern in Antalya: enger machen, Saum. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Abendkleid ändern Antalya", "festliche Kleidung Schneider", "Abendkleid kürzen"] },
   },
   "kiyafet-tamiri": {
-    en: { t: "Clothing Repair Antalya, Tears & Seams | Terzi Can", d: "Clothing repair in Antalya: seams, tears, buttons, zippers. Free pick-up. ☎ +90 531 898 64 18", kw: ["clothing repair Antalya", "mend clothes", "fix torn clothes", "repair seams"] },
-    ru: { t: "Ремонт одежды в Анталье: швы, дыры | Terzi Can", d: "Ремонт одежды в Анталье: швы, дыры, пуговицы, молнии. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["ремонт одежды Анталья", "зашить одежду", "ремонт швов", "починить одежду"] },
-    de: { t: "Kleidung reparieren in Antalya, Risse & Nähte | Terzi Can", d: "Kleidung reparieren in Antalya: Nähte, Risse, Knöpfe, Reißverschlüsse. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Kleidung reparieren Antalya", "Risse nähen lassen", "Nähte reparieren", "Schneider Reparatur"] },
+    en: { t: "Clothing Repair Antalya, Tears & Seams | Terzi Can", d: "Clothing repair in Antalya: seams, tears, zippers. Free pick-up. ☎ +90 531 898 64 18", kw: ["clothing repair Antalya", "mend clothes", "fix torn clothes", "repair seams"] },
+    ru: { t: "Ремонт одежды в Анталье: швы, дыры | Terzi Can", d: "Ремонт одежды в Анталье: швы, дыры, молнии. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["ремонт одежды Анталья", "зашить одежду", "ремонт швов", "починить одежду"] },
+    de: { t: "Kleidung reparieren in Antalya, Risse & Nähte | Terzi Can", d: "Kleidung reparieren in Antalya: Nähte, Risse, Reißverschlüsse. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Kleidung reparieren Antalya", "Risse nähen lassen", "Nähte reparieren", "Schneider Reparatur"] },
   },
   "ozel-dikim": {
     en: { t: "Custom Tailoring Antalya, Made to Measure | Terzi Can", d: "Made-to-measure in Antalya: trousers, skirts, dresses, groom suits. Free pick-up. ☎ +90 531 898 64 18", kw: ["custom tailoring Antalya", "made to measure Antalya", "bespoke clothing", "groom suit tailor Antalya"] },

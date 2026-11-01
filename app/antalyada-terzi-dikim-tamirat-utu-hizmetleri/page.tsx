@@ -116,7 +116,7 @@ const jsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'Kıyafet Tamiri & Tadilat',
-              description: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
+              description: 'Orijinal paça, bel daraltma, fermuar yenileme, deri mont onarımı',
               areaServed: 'Antalya',
               offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 200, minPrice: 200, priceCurrency: 'TRY' } },
             },
@@ -346,7 +346,7 @@ const ICONS = {
 const serviceRows = [
   {
     title: 'Kıyafet Tamiri & Tadilat',
-    detail: 'Orijinal paça, bel daraltma, ceket astar değişimi, fermuar yenileme, deri mont onarımı',
+    detail: 'Orijinal paça, bel daraltma, fermuar yenileme, deri mont onarımı',
     area: 'Konyaaltı (Hurma, Liman, Uncalı), Muratpaşa, Lara, Kepez',
     time: 'Ertesi gün · acil 1–2 saat',
     price: '200 TL\'den',
@@ -388,7 +388,7 @@ const faqs = [
   },
   {
     q: 'Deri ceket boyama ve yırtık deri mont tamiri yapıyor musunuz?',
-    a: "Evet, Antalya'daki endüstriyel atölyemizde hakiki deri, süet ve kürk montların astar değişimi, parça yırtık tamiratı, fermuar değişimi ve profesyonel boyama işlemleri titizlikle yapılmaktadır.",
+    a: "Evet, Antalya'daki endüstriyel atölyemizde hakiki deri, süet ve kürk montların parça yırtık tamiratı, fermuar değişimi ve profesyonel boyama işlemleri titizlikle yapılmaktadır.",
   },
   {
     q: 'Antalya terzi fiyatları ne kadar?',

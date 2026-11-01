@@ -1,6 +1,6 @@
 // SwapHubs — Konyaaltı ve Muratpaşa mahalle sayfaları için elle yazılmış başlık / açıklama / anahtar kelime.
 // Kurallar: başlık ≤60, açıklama ≤158 (telefon dahil); doğrulanmamış vaat yok (mesafe, dakika, puan, kurye süresi);
-// ücretsiz servis yalnızca yakın mahallelerde; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
+// Eve ve otele ücretsiz servis her bölgede geçerlidir; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
 const FREE = ' {{F}}';
 import { fitDesc } from './meta-fit';

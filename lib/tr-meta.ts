@@ -1,6 +1,6 @@
 // TÜRKÇE yakın bölge sayfaları için elle yazılmış başlık/açıklama/anahtar kelime.
 // Kurallar: başlık ≤60 (marka eki dahil), açıklama ≤155 (telefon dahil), uzak bölge adı yok.
-// "{F}" yer tutucusu servis kuralına göre doldurulur (lib/business.ts: eve ücretsiz servis yalnız onaylı yakın mahallelerde, otellere her yerde).
+// "{F}" yer tutucusu servis kuralıyla doldurulur (lib/business.ts: eve ve otele ücretsiz servis her bölgede).
 // {loc} = sayfanın yer-durum kalıbı (örn. "Meltem'de"). Yeni bölge için bu tabloya satır ekle.
 import { isFreeService } from '@/lib/business';
 export interface TrMeta { title: string; desc: string; kw: string[] }
