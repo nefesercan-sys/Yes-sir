@@ -439,7 +439,6 @@ export default function EveGelenTerziPage() {
                 ['Bayan Terzi Antalya', '/terzi/bayan-terzi-antalya'],
                 ['Dikiş Atölyesi', '/terzi/dikis-atolyesi-antalya'],
                 ['Üniforma Üretimi', '/terzi/uniforma-uretimi-antalya'],
-                ['Kuru Temizleme', '/terzi/kuru-temizleme-antalya'],
                 ['English', '/en/hotel-tailor-antalya'],
                 ['Русский', '/ru/vyezdnoy-portnoy-antalya'],
                 ['Deutsch', '/de/schneider-service-hotel-antalya'],

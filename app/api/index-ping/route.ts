@@ -15,7 +15,6 @@ const SAYFALAR = [
   "https://swaphubs.com/terzi/bayan-terzi-antalya",
   "https://swaphubs.com/terzi/dikis-atolyesi-antalya",
   "https://swaphubs.com/terzi/uniforma-uretimi-antalya",
-  "https://swaphubs.com/terzi/kuru-temizleme-antalya",
   "https://swaphubs.com/terzi/eve-gelen-terzi-antalya",
   "https://swaphubs.com/online-terzi-hizmeti",
 

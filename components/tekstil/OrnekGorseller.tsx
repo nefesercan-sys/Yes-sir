@@ -8,7 +8,7 @@ const KONU: Record<Topic, GorselAnahtar[]> = {
   promo: ['bez-canta-atolye', 'hazir-giyim-atolye', 'polar-yelek', 'yun-pantolon-metre', 'sef-mutfak-uniforma', 'uniforma'],
   tekstil: ['atolye-kesim-masasi', 'manken-palto-takim', 'manken-bej-ceket', 'kadin-trenckot-atolye'],
   acil: ['beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek'],
-  otel: ['eve-gelen-terzi', 'kuru-temizleme-utu', 'erkek-takim-olcu'],
+  otel: ['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu'],
   etkinlik: ['abiye-elbise-atolye', 'abiye-askida', 'erkek-takim-olcu'],
 };
 const KONU_ALT: Record<Topic, Konu[]> = { keten: ['keten'], promo: ['promo'], tekstil: ['uniforma'], acil: ['otel'], otel: ['bolge'], etkinlik: ['gelinlik'] };

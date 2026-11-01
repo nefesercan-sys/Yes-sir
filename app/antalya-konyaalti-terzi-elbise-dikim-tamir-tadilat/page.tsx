@@ -135,14 +135,6 @@ export default function KonyaaltiTerziPage() {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition-shadow text-center">
-            <div className="text-amber-700 text-5xl mb-4">👔</div>
-            <h3 className="text-xl font-bold mb-3">Profesyonel Ütü</h3>
-            <p className="text-gray-600">
-              Evde ütülemekte zorlandığınız gömlek, takım elbise ve abiyeleri endüstriyel buharlı sistemimizle özenle ütülüyoruz.
-            </p>
-          </div>
-
         </div>
       </section>
 

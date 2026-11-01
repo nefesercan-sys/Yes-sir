@@ -149,7 +149,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
 // Sayfaya özel hazır WhatsApp mesajı (Türkçe sayfalar için)
 export type ServiceKey =
   | 'genel' | 'paca' | 'fermuar' | 'bay' | 'bayan'
-  | 'otel' | 'kuru-temizleme' | 'dikis' | 'uniforma';
+  | 'otel' | 'dikis' | 'uniforma';
 
 export const SERVICE_WA_TR: Record<ServiceKey, string> = {
   genel: 'Merhaba, kıyafetimin fotoğrafını gönderiyorum. Tadilat/dikim fiyatı alabilir miyim?',
@@ -158,7 +158,6 @@ export const SERVICE_WA_TR: Record<ServiceKey, string> = {
   bay: 'Merhaba, erkek kıyafeti dikim/tadilat için fiyat almak istiyorum. Fotoğraf gönderiyorum.',
   bayan: 'Merhaba, elbise/kadın giyim dikim ve tadilat için fiyat almak istiyorum. Fotoğraf gönderiyorum.',
   otel: 'Merhaba, kaldığım otele terzi çağırmak istiyorum. Otel adını ve konumu gönderebilirim.',
-  'kuru-temizleme': 'Merhaba, kuru temizleme ve ütü için fiyat ve alım saati öğrenmek istiyorum.',
   dikis: 'Merhaba, dikiş atölyesi / seri üretim için teklif almak istiyorum.',
   uniforma: 'Merhaba, üniforma üretimi için model ve adet bilgisiyle fiyat almak istiyorum.',
 };

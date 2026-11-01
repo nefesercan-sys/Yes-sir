@@ -65,6 +65,8 @@ const nextConfig = {
       // Bal sayfaları gizlendi (geçici 307; geri açmak için bu iki kaydı silin ve app/sitemap.ts BAL_ENABLED=true yapın).
       { source: '/bal', destination: '/terzi', permanent: false },
       { source: '/bal/:path*', destination: '/terzi', permanent: false },
+      // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
+      { source: '/terzi/kuru-temizleme-antalya', destination: '/terzi', permanent: false },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
       // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa'].map((slug) => ({

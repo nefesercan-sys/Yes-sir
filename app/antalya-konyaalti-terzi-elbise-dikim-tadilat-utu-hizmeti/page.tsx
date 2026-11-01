@@ -32,14 +32,14 @@ const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyoru
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Konyaaltı Terzi · Tadilat, Dikim, Ütü | 0531 898 64 18' },
+  title: { absolute: 'Konyaaltı Terzi · Tadilat, Dikim | 0531 898 64 18' },
   description:
-    `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat, ütü. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis. ☎ ${PHONE_DISPLAY}`,
+    `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis. ☎ ${PHONE_DISPLAY}`,
   keywords: [
     'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',
     'paça kısaltma Antalya', 'fermuar değişimi Antalya', 'bel daraltma Antalya',
-    'elbise dikimi Antalya', 'kuru temizleme Konyaaltı', 'ütü hizmeti Antalya',
+    'elbise dikimi Antalya',
     'eve gelen terzi Konyaaltı', 'adrese gelen terzi Antalya',
     'Konyaaltı terzi fiyatları 2026', 'Antalya terzi fiyatları 2026',
     'tailor Konyaalti Antalya', 'портной Коньяалты',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     };
   })(),
   openGraph: {
-    title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü | Antalya 2026',
+    title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat | Antalya 2026',
     description: `Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR',
     alternateLocale: ['en_US','ru_RU'], type: 'website',
@@ -79,11 +79,11 @@ const jsonLd = {
     {
       '@type': ['ClothingStore', 'LocalBusiness'],
       ...reviewSchema(),
-      additionalType: ['https://schema.org/SewingService', 'https://schema.org/DryCleaningService'],
+      additionalType: ['https://schema.org/SewingService'],
       '@id': `${TERZI_URL}#business`,
       name: 'Terzi Can Konyaaltı',
       alternateName: [GBP1_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
-      description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Ütü ve kuru temizleme. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine ücretsiz adrese servis.',
+      description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine ücretsiz adrese servis.',
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB', paymentAccepted: 'Cash, Credit Card',
       image: OG_IMAGE, hasMap: GBP1_MAPS,
@@ -100,8 +100,6 @@ const jsonLd = {
           { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Bel Daraltma' } },
           { '@type': 'Offer', price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Fermuar Değişimi' } },
           { '@type': 'Offer', price: '800', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Elbise Dikimi' } },
-          { '@type': 'Offer', price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Kuru Temizleme' } },
-          { '@type': 'Offer', price: '80',  priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Ütü Hizmeti' } },
         ],
       },
       knowsLanguage: ['tr','ru','en','de','pl','uk','nl','fr','es','ar'],
@@ -109,7 +107,7 @@ const jsonLd = {
 
     {
       '@type': 'WebPage', '@id': `${PAGE_URL}#webpage`,
-      name: 'Konyaaltı Terzi — Elbise Dikim, Tadilat, Ütü Hizmeti | Antalya 2026',
+      name: 'Konyaaltı Terzi — Elbise Dikim, Tadilat Hizmeti | Antalya 2026',
       url: PAGE_URL, isPartOf: { '@id': `${BASE_URL}#website` },
       about: { '@id': `${TERZI_URL}#business` }, inLanguage: ['tr','en','ru'], dateModified: TODAY,
       breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
@@ -119,7 +117,7 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: TERZI_URL },
-        { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Dikim · Tadilat · Ütü', item: PAGE_URL },
+        { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Dikim · Tadilat', item: PAGE_URL },
       ],
     },
     {
@@ -128,8 +126,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Konyaaltı kuru temizleme fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Kuru temizleme fiyatı eşyaya göre belirlenir; fotoğrafı WhatsApp'tan gönderin. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
       ],
     },
   ],
@@ -151,7 +148,6 @@ const SERVICES = [
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Ertesi gün', color: '#fce7f3', tc: '#9d174d' },
   { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Ertesi gün', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
-  { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: 'Fotoğrafa göre', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
@@ -165,9 +161,6 @@ const PRICES = [
   ['Abiye Tamiri', '₺800+', 'Ertesi gün'],
   ['Kadın Elbise Dikimi', '₺800+', 'Modele göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Gömlek Ütü', 'Fotoğrafa göre', '2–6 saat'],
-  ['Elbise Kuru Temizleme', 'Fotoğrafa göre', '24–48 saat'],
-  ['Mont Kuru Temizleme', 'Fotoğrafa göre', '48 saat'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
 ];
 
@@ -176,7 +169,6 @@ const FAQS = [
   ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+. Diğer dikim işlerinde fiyat kumaş ve modele göre belirlenir; fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Kuru temizleme fiyatı?', `Fiyat eşyaya göre belirlenir. Eve ve otele ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
 ];
 
@@ -218,7 +210,7 @@ export default function KonyaaltiTerziPage() {
 
             <h1 style={{ fontFamily: 'var(--font-unbounded,Georgia,serif)', fontSize: 'clamp(1.9rem,5.5vw,3.2rem)', fontWeight: 700, lineHeight: 1.08, margin: '0 0 1.1rem', letterSpacing: '-.02em' }}>
               Konyaaltı Terzi —<br />
-              <span style={{ color: D.gold2, fontWeight: 300, fontSize: '80%' }}>Dikim · Tadilat · Ütü · Kuru Temizleme</span>
+              <span style={{ color: D.gold2, fontWeight: 300, fontSize: '80%' }}>Dikim · Tadilat · Tamir</span>
             </h1>
 
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.72)', lineHeight: 1.8, maxWidth: 540, margin: '0 auto 1.8rem' }}>
@@ -326,7 +318,7 @@ export default function KonyaaltiTerziPage() {
         <section style={{ maxWidth: 720, margin: '2.5rem auto 0', padding: '0 1.2rem', textAlign: 'center' }}>
           <p style={{ fontSize: '.88rem', color: D.s, lineHeight: 1.85, margin: '0 0 1.5rem' }}>
             <strong style={{ color: D.ink }}>Terzi Can</strong> — Konyaaltı merkezli profesyonel terzi atölyesi.
-            Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma, kuru temizleme ve ütü.
+            Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma ve elbise tadilatı.
             Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine, ayrıca hizmet verdiğimiz tüm bölgelerde eve ve otele ücretsiz alım-teslim.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 10 }}>
@@ -501,8 +493,8 @@ export default function KonyaaltiTerziPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 12 }}>
             {[
-              { flag: '🇬🇧', lang: 'English', title: 'Professional Tailor in Konyaaltı', body: `Tailor Can offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hello, I need tailoring service in Konyaalti Antalya.' },
-              { flag: '🇷🇺', lang: 'Русский', title: 'Портной в Коньяалты Анталья', body: `Портной Кан — пошив, подгонка одежды, химчистка. Говорим по-русски. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Здравствуйте, мне нужен портной в Коньяалты Анталья.' },
+              { flag: '🇬🇧', lang: 'English', title: 'Professional Tailor in Konyaaltı', body: `Tailor Can offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hello, I need tailoring service in Konyaalti Antalya.' },
+              { flag: '🇷🇺', lang: 'Русский', title: 'Портной в Коньяалты Анталья', body: `Портной Кан — пошив и подгонка одежды. Говорим по-русски. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Здравствуйте, мне нужен портной в Коньяалты Анталья.' },
               { flag: '🇩🇪', lang: 'Deutsch', title: 'Schneider in Konyaalti Antalya', body: `Schneider Can bietet Maßschneiderei, Änderungsservice und Reinigung. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hallo, ich brauche einen Schneider in Konyaalti Antalya.' },
             ].map(({ flag, lang, title, body, wa: waMsg }) => (
               <div key={lang} style={{ background: '#fff', border: `1px solid ${D.border}`, borderRadius: 12, padding: '1.3rem', borderLeft: `4px solid ${D.gold}` }}>
@@ -550,7 +542,7 @@ export default function KonyaaltiTerziPage() {
             ))}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center' }}>
-            {['Konyaaltı Terzi','Hurma Terzi','Liman Terzi','Uncalı Terzi','Sarısu Terzi','Çakırlar Terzi','Paça Kısaltma','Fermuar Değişimi','Kuru Temizleme Konyaaltı'].map(k => (
+            {['Konyaaltı Terzi','Hurma Terzi','Liman Terzi','Uncalı Terzi','Sarısu Terzi','Çakırlar Terzi','Paça Kısaltma','Fermuar Değişimi'].map(k => (
               <span key={k} style={{ fontSize: '.58rem', color: 'rgba(122,112,96,.3)', border: '1px solid rgba(122,112,96,.1)', padding: '.15rem .5rem', borderRadius: 4 }}>{k}</span>
             ))}
           </div>

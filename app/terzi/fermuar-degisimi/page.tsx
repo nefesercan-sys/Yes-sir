@@ -83,7 +83,7 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
   { href: '/terzi/bay-terzi-antalya', ad: 'Bay terzi' },
   { href: '/terzi/bayan-terzi-antalya', ad: 'Bayan terzi' },
   { href: '/terzi/eve-gelen-terzi-antalya', ad: 'Eve gelen terzi' },
-  { href: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', ad: 'Tamirat ve ütü hizmetleri' },
+  { href: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', ad: 'Tamirat ve dikim hizmetleri' },
   { href: '/terzi', ad: 'Tüm terzi hizmetleri' },
 ];
 

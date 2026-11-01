@@ -20,7 +20,6 @@ const IMGS = {
   erkek:   '/gorseller/kalip-ve-makas.webp',
   bayan:   '/gorseller/bel-daraltma-manken.webp',
   online:  '/gorseller/dikis-makinesi.webp',
-  utu:     '/gorseller/kuru-temizleme-utu.webp',
   tamir:   '/gorseller/fermuar-degisimi.webp',
   tasarim: '/gorseller/kalip-ve-makas.webp',
   seri:    '/gorseller/hazir-giyim-atolye.webp',
@@ -52,13 +51,6 @@ const SERVICES = [
     feats:['Bestellung per WhatsApp','Videoanruf-Anprobe','Modellauswahl','Versand'],
     price:'Kostenlos', note:'Kostenlose Beratung', time:'Je nach Modell & Menge (+ Versand)',
     waMsg:'Hallo, ich hätte gerne Informationen zum Online-Schneiderservice.' },
-  { id:'utu-hizmeti', icon:'💨', badge:'EXPRESS', badgeColor:'#E11D48',
-    img: IMGS.utu,
-    title:'Bügel- & Dampfpressservice', sub:'Professionelles Bügeln · Hotelabholung · Am Selben Tag',
-    desc:'Keine zerknitterte Kleidung im Urlaub! Wir holen es aus Ihrem Hotel ab, bügeln professionell mit Dampf und liefern am nächsten Tag – eilig in 1–2 Stunden.',
-    feats:['Hemden Bügeln','Anzug Pressen','Hotelabholung','Lieferung Am Selben Tag'],
-    price:'per Foto', note:'Mengenrabatt möglich', time:'2–6 Stunden',
-    waMsg:'Hallo, ich möchte den Bügelservice nutzen. Können Sie zu meinem Hotel kommen?' },
   { id:'tamir-tadilat', icon:'✂️', badge:'', badgeColor:'',
     img: IMGS.tamir,
     title:'Reparatur & Änderungen', sub:'Kürzen · Reißverschluss · Risse · Enger Machen',
@@ -101,12 +93,6 @@ const PRICE_TABLE = [
     ['Bluse / Rock','per Foto','Je nach Modell & Menge'],
     ['Overall','per Foto','Je nach Modell & Menge'],
   ]},
-  { cat:'Bügeln & Reinigung', rows:[
-    ['Hemd Bügeln','per Foto','Am nächsten Tag'],
-    ['Kleid Dämpfen','per Foto','Am nächsten Tag'],
-    ['Mantel Bügeln','per Foto','Am nächsten Tag'],
-    ['Sammelbügeln (10+ Stück)','per Foto','Am nächsten Tag'],
-  ]},
   { cat:'Reparatur & Änderungen', rows:[
     ['Kürzen','per Foto','Am nächsten Tag'],
     ['Reißverschluss Austausch','per Foto','Am nächsten Tag'],
@@ -118,7 +104,7 @@ const PRICE_TABLE = [
 const FAQS: [string, string][] = [
   ["Was kostet ein Herrenanzug in Antalya?", "Der Preis hängt von Stoff und Modell ab. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
-  ["Kommen Sie für den Bügelservice zu meinem Hotel?", "Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen von uns bedienten Hotelgebieten kostenlos. Den Liefertermin klären wir per WhatsApp."],
+  ["Kommen Sie für Anproben und Änderungen zu meinem Hotel?", "Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen von uns bedienten Hotelgebieten kostenlos. Den Liefertermin klären wir per WhatsApp."],
   ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Die Menge richtet sich nach dem Projekt. Muster, Prototypen, Kleinserien und Großaufträge werden projektbezogen kalkuliert."],
   ["Bieten Sie individuelle Designdienstleistungen an?", "Ja. Sie können Ihr eigenes Design mitbringen oder mit unseren Designern zusammenarbeiten, inklusive Schnittentwicklung."],
   ["Wie lange dauern Reparaturen und Änderungen?", "Normale Reparaturen und Änderungen sind am nächsten Tag fertig, dringende in 1–2 Stunden. Bei Maßanfertigung richtet sich die Dauer nach Modell und Stückzahl."],
@@ -328,11 +314,11 @@ export default function OnlineSchneiderClient({
           <h1 id="hero-h">
             Maßgeschneiderte Kleidung,<br />
             <em>Online-Schneiderei</em>
-            &amp; Bügelservice
+            &amp; Schneiderei
           </h1>
           <p className="ohero-sub">
             Herren- und Damenschneiderei, individuelle Schnittentwicklung, ein komplettes Textilatelier,
-            Serienproduktion und professioneller Bügelservice. Basierend in Konyaaltı, Versand in die ganze Türkei.
+            Serienproduktion. Basierend in Konyaaltı, Versand in die ganze Türkei.
           </p>
           <div className="ohero-btns">
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Per WhatsApp Bestellen</a>
@@ -362,8 +348,8 @@ export default function OnlineSchneiderClient({
       <div className="oseo" id="seo-intro">
         <p>
           <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya und in die ganze Türkei:
-          Herren- und Damenschneiderei, Bügelservice, Reparaturen, Änderungen, individuelle Schnittentwicklung,
-          Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch, chemische Reinigung. Sportbekleidung, Trainingsanzüge
+          Herren- und Damenschneiderei, Reparaturen, Änderungen, individuelle Schnittentwicklung,
+          Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch. Sportbekleidung, Trainingsanzüge
           und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
         </p>
       </div>
@@ -383,7 +369,7 @@ export default function OnlineSchneiderClient({
         <div className="osvc-header">
           <span className="oeyebrow">✦ Alle Unsere Leistungen</span>
           <h2 className="oh2" id="svc-h">Was Wir Anbieten</h2>
-          <p className="osh-sub">Von Herren- und Damenschneiderei über Online-Bestellung bis zu Bügelservice und Serienproduktion.</p>
+          <p className="osh-sub">Von Herren- und Damenschneiderei über Online-Bestellung bis zu Serienproduktion.</p>
           <div className="odivider" />
         </div>
         <div className="osvc-grid">
@@ -595,7 +581,7 @@ export default function OnlineSchneiderClient({
             <div style={{ fontFamily: 'var(--font-unbounded,"Georgia",serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--bone)', marginBottom: '.5rem' }}>Antalya Terzi Can →</div>
             <p style={{ fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '.8rem' }}>Mobiler Schneiderservice mit Sitz in Konyaaltı. Wir kommen zu Ihnen nach Hause oder ins Hotel, nehmen Maß und liefern.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem' }}>
-              {['✂️ Änderungen','👗 Schneiderei','🧺 Chemische Reinigung','🚗 Hausbesuch-Schneider'].map(t => (
+              {['✂️ Änderungen','👗 Schneiderei','🚗 Hausbesuch-Schneider'].map(t => (
                 <span key={t} style={{ fontSize: '.6rem', color: 'var(--gold)', border: '1px solid rgba(201,168,76,.2)', padding: '.18rem .5rem' }}>{t}</span>
               ))}
             </div>
@@ -614,7 +600,7 @@ export default function OnlineSchneiderClient({
           <a href="tel:+905318986418" style={{ color: 'rgba(201,168,76,.35)', textDecoration: 'none' }}>+90 531 898 64 18</a>
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center', marginTop: '1rem' }}>
-          {['Antalya Herrenschneider','Herrenschneiderei','Damenschneiderei','Online Schneider Antalya','Bügelservice Antalya','Serienproduktion Antalya','Schneider Antalya','Tailor Antalya','Портной Анталья'].map(k => (
+          {['Antalya Herrenschneider','Herrenschneiderei','Damenschneiderei','Online Schneider Antalya','Serienproduktion Antalya','Schneider Antalya','Tailor Antalya','Портной Анталья'].map(k => (
             <span key={k} style={{ fontSize: '.58rem', color: 'rgba(201,168,76,.22)', border: '1px solid rgba(201,168,76,.07)', padding: '.18rem .55rem' }}>{k}</span>
           ))}
         </div>

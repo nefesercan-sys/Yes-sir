@@ -11,7 +11,7 @@ import { jsonLdString } from '@/lib/json-ld';
 const BASE_URL  = 'https://swaphubs.com';
 const PAGE_URL  = `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`;
 const PHONE     = '+90 531 898 64 18';
-const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terzi%20ve%20ütü%20hizmetiniz%20hakkında%20bilgi%20almak%20istiyorum.`;
+const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terzi%20hizmetiniz%20hakkında%20bilgi%20almak%20istiyorum.`;
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
 const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
@@ -61,7 +61,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
       alternateName: 'Terzi Can Antalya',
-      description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere ücretsiz ütü/tadilat servisi sunan profesyonel tekstil atölyesi.",
+      description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere ücretsiz tadilat servisi sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
       sameAs: [GBP_URL],
       telephone: '+905318986418',
@@ -136,7 +136,7 @@ const jsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'Otel Servisi',
-              description: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
+              description: 'Kuryeli adresten alım, acil elbise onarımı ve tadilat',
               areaServed: 'Lara, Kundu, Belek, Kemer',
               offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 60, minPrice: 60, priceCurrency: 'TRY' } },
             },
@@ -179,7 +179,7 @@ const jsonLd = {
         {
           '@type': 'HowToStep',
           name: 'İşlem ve kalite kontrolü',
-          text: 'Tamirat, dikim veya ütü işlemi atölyede tamamlanır, teslim öncesi kalite kontrolünden geçirilir.',
+          text: 'Tamirat veya dikim işlemi atölyede tamamlanır, teslim öncesi kalite kontrolünden geçirilir.',
         },
         {
           '@type': 'HowToStep',
@@ -194,10 +194,10 @@ const jsonLd = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: "Antalya'da otellere acil terzi ve ütü hizmeti veren yer neresi?",
+          name: "Antalya'da otellere acil terzi hizmeti veren yer neresi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi, kıyafet tamiratı ve ütü hizmeti sunmaktadır; otellere servis ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler ertesi gün, acil işler 1–2 saatte askılı olarak teslim edilir."
+            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; otellere servis ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler ertesi gün, acil işler 1–2 saatte askılı olarak teslim edilir."
           }
         },
         {
@@ -273,12 +273,12 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim, Tamir ve Ütü' },
-  description: `Antalya en yakın terzi ve ütü servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı. ☎ ${PHONE}`,
+  description: `Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı. ☎ ${PHONE}`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
     'Hurma terzi', 'Liman mahallesi terzi', 'Uncalı terzi', 'Şirinyalı terzi', 'Sarısu terzi',
     'Gürsu terzi', 'Çakırlar terzi', 'Meltem terzi',
-    'Antalya acil ütü', 'kuryeli terzi Antalya', 'özel dikim takım elbise Antalya', 'abiye tamiri Antalya',
+    'kuryeli terzi Antalya', 'özel dikim takım elbise Antalya', 'abiye tamiri Antalya',
     'gelinlik tadilatı Antalya', 'fermuar değişimi mont', 'deri ceket tamiri Antalya', 'fason üretim tekstil atölyesi'
   ],
   alternates: {
@@ -290,7 +290,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | Terzi Can',
-    description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı ve ütü hizmetleri. Ertesi gün askıda teslimat, acil işler 1–2 saatte!`,
+    description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı hizmetleri. Ertesi gün askıda teslimat, acil işler 1–2 saatte!`,
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -311,7 +311,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü',
-    description: 'Konyaaltı, Lara, Muratpaşa ve Kepez\'e kuryeli terzilik, kıyafet tamiratı ve ütü hizmetleri.',
+    description: 'Konyaaltı, Lara, Muratpaşa ve Kepez\'e kuryeli terzilik, kıyafet tamiratı hizmetleri.',
     images: [OG_IMAGE],
   },
 };
@@ -360,7 +360,7 @@ const serviceRows = [
   },
   {
     title: 'Otel Servisi',
-    detail: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
+    detail: 'Kuryeli adresten alım, acil elbise onarımı ve tadilat',
     area: 'Lara, Kundu Otelleri, Belek, Kemer, Konyaaltı Sahil Şeridi',
     time: 'Ertesi gün · acil 1–2 saat',
     price: 'Fotoğrafa göre',
@@ -383,7 +383,7 @@ const trustPoints = [
 
 const faqs = [
   {
-    q: "Antalya'da pazar günü açık terzi veya acil ütü yeri var mı?",
+    q: "Antalya'da pazar günü açık terzi veya acil tamir yeri var mı?",
     a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımızdan her gün 08:00–23:00 arasında işinizin durumunu sorabilirsiniz.',
   },
   {
@@ -412,7 +412,7 @@ const processSteps = [
   { n: '01', title: 'WhatsApp\'tan Yazın', text: 'Kıyafet fotoğrafınızı gönderin, 15 dakika içinde teklif alın.' },
   { n: '02', title: 'Adres Paylaşın', text: 'Konyaaltı, Lara, Muratpaşa veya Kepez\'de adresinizi belirtin.' },
   { n: '03', title: 'Kuryeli Alım', text: 'Kıyafetiniz evinizden veya otelinizden güvenle alınır.' },
-  { n: '04', title: 'Atölyede İşlem', text: 'Tamirat, dikim veya ütü işlemi kalite kontrolüyle tamamlanır.' },
+  { n: '04', title: 'Atölyede İşlem', text: 'Tamirat veya dikim işlemi kalite kontrolüyle tamamlanır.' },
   { n: '05', title: 'Ertesi Gün Teslimat', text: 'İşlem biten kıyafet askılı olarak kapınıza teslim edilir; acil işler 1–2 saatte.' },
 ];
 

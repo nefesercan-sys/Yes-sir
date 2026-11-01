@@ -66,7 +66,7 @@ const IMG = {
   gelin2: '/gorseller/gelinlik-abiye.webp',
   gelin3: '/gorseller/bel-daraltma-manken.webp',
   gunluk1:'/gorseller/hazir-giyim-atolye.webp',
-  gunluk2:'/gorseller/kuru-temizleme-utu.webp',
+  gunluk2:'/gorseller/bel-daraltma-manken.webp',
   gunluk3:'/gorseller/dikis-makinesi.webp',
   atolye1:'/gorseller/dikis-makinesi.webp',
   atolye2:'/gorseller/kalip-ve-makas.webp',

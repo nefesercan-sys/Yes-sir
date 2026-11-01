@@ -547,32 +547,6 @@ export const EK_METIN: Record<string, Record<EkLang, [string, string]>> = {
    "خيّاط يأتي إلى عنوانك لأخذ القياسات والبروفات."
   ]
  },
- "kuru-temizleme-utu": {
-  "es": [
-   "Limpieza en seco y planchado",
-   "Limpieza en seco, planchado a vapor y prensado."
-  ],
-  "fr": [
-   "Nettoyage à sec et repassage",
-   "Nettoyage à sec, repassage vapeur et pressage."
-  ],
-  "pl": [
-   "Pranie chemiczne i prasowanie",
-   "Pranie chemiczne, prasowanie parowe i prasowanie na prasie."
-  ],
-  "uk": [
-   "Хімчистка і прасування",
-   "Хімчистка, відпарювання та прасування."
-  ],
-  "nl": [
-   "Stomen en strijken",
-   "Stomerij, stoomstrijken en persen."
-  ],
-  "ar": [
-   "تنظيف جاف وكي",
-   "تنظيف جاف وكي بالبخار وكبس."
-  ]
- },
 "bez-canta-atolye": {
   "es": [
    "Bolsas de tela",

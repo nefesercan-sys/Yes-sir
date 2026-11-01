@@ -11,7 +11,6 @@ const HIZMETLER = [
   'Paça Kısaltma', 'Bel Daraltma', 'Etek Kısaltma', 'Fermuar Değişimi',
   'Fermuar Tamiri', 'Ceket Tamiri', 'Mont Tamiri', 'Gömlek Tamiri',
   'T-Shirt Tamiri', 'Elbise Tamiri', 'Abiye Tamiri', 'Özel Dikim',
-  'Ütü Hizmeti', 'Kuru Temizleme',
 ];
 
 const KURU_TEMIZLEME_URUNLERI = [
@@ -173,7 +172,7 @@ function TerziTalepIcerik() {
         setSekme(istenenSekme as SekmeId);
       }
       const istenenKategori = searchParams.get('kategori');
-      if (istenenKategori === 'terzi' || istenenKategori === 'kuru-temizleme') {
+      if (istenenKategori === 'terzi') {
         setKategori(istenenKategori as Kategori);
       }
     }
@@ -424,14 +423,6 @@ function TerziTalepIcerik() {
                 <span>
                   <span style={{ display: 'block', fontWeight: 800, fontSize: 15, color: '#0f172a' }}>Terzi Fiyatı Sor</span>
                   <span style={{ display: 'block', fontSize: 12, color: '#94a3b8', marginTop: 2 }}>Paça kısaltma, tadilat, özel dikim...</span>
-                </span>
-              </button>
-              <button onClick={() => setKategori('kuru-temizleme')}
-                style={{ width: '100%', textAlign: 'left', padding: 20, borderRadius: 14, border: '1.5px solid #dbe5e0', background: '#fff', display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer' }}>
-                <span style={{ fontSize: 30 }}>🧺</span>
-                <span>
-                  <span style={{ display: 'block', fontWeight: 800, fontSize: 15, color: '#0f172a' }}>Kuru Temizleme Fiyatı Sor</span>
-                  <span style={{ display: 'block', fontSize: 12, color: '#94a3b8', marginTop: 2 }}>Yıkama, ütü, kuru temizleme — ürün ürün seç</span>
                 </span>
               </button>
             </div>

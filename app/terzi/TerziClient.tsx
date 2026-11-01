@@ -67,7 +67,6 @@ const FILM_STRIP = [
   '/gorseller/uniforma.webp',
   '/gorseller/hazir-giyim-atolye.webp',
   '/gorseller/dikis-makinesi.webp',
-  '/gorseller/kuru-temizleme-utu.webp',
 ];
 
 const SERVICES = [
@@ -120,13 +119,6 @@ const SERVICES = [
     en: { n: 'Embroidery · Print · Custom', d: 'Logo embroidery · digital print · screen print. Sweatshirt · t-shirt · tracksuit · hoodie · polo production.', p: 'By photo' },
     ru: { n: 'Вышивка · Печать · Пошив', d: 'Вышивка логотипа · цифровая печать. Толстовки · футболки · спортивные костюмы · поло.', p: 'По фото' },
     de: { n: 'Stickerei · Druck · Produktion', d: 'Logo-Stickerei · Digitaldruck. Sweatshirts · T-Shirts · Trainingsanzüge · Polo-Produktion.', p: 'Per Foto' } },
-  { icon: '🧺', id: 'kuru-temizleme',
-    img: '/gorseller/kuru-temizleme-utu.webp',
-    alt: 'Kuru temizleme ütü çamaşır hizmeti otel Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Kuru Temizleme & Ütü', d: 'Kuru temizleme · çamaşır yıkama · ütü. Otel ve adreslerden alım; otellere ücretsiz. Turistler için.', p: 'Fotoğrafa göre' },
-    en: { n: 'Dry Cleaning & Laundry', d: 'Dry cleaning · laundry · ironing. Free hotel pickup. For tourists.', p: 'By photo' },
-    ru: { n: 'Химчистка · Стирка', d: 'Химчистка · стирка · глажка. Курьер из отеля. Экспресс 24ч.', p: 'По фото' },
-    de: { n: 'Reinigung · Wäsche', d: 'Chemische Reinigung · Wäsche · Bügeln. Kostenlose Abholung im Hotel.', p: 'Per Foto' } },
 ];
 
 const PRICES: Record<Lang, string[][]> = {
@@ -143,7 +135,6 @@ const PRICES: Record<Lang, string[][]> = {
     ['Gelinlik Tadilatı','₺800+','Ertesi gün · acil 1–2 sa'],
     ['Abiye Tadilatı','₺800+','Ertesi gün · acil 1–2 sa'],
     ['Yırtık Onarımı','Fotoğrafa göre','Ertesi gün · acil 1–2 sa'],
-    ['Kuru Temizleme & Ütü','Fotoğrafa göre','Fotoğrafa göre'],
     ['Üniforma (kişi başı)','Teklif / Quote','Sipariş miktarına göre'],
   ],
   en:[
@@ -159,7 +150,6 @@ const PRICES: Record<Lang, string[][]> = {
     ['Wedding Dress Alteration','€40+','Next day · urgent 1–2 h'],
     ['Evening Gown Alteration','€40+','Next day · urgent 1–2 h'],
     ['Tear Repair','By photo','Next day · urgent 1–2 h'],
-    ['Dry Cleaning & Ironing','By photo','By photo'],
     ['Uniform (per person)','Quote','On quantity'],
   ],
   ru:[
@@ -175,7 +165,6 @@ const PRICES: Record<Lang, string[][]> = {
     ['Подгонка свадебного платья','€40+','На след. день · срочно 1–2 ч'],
     ['Подгонка вечернего платья','€40+','На след. день · срочно 1–2 ч'],
     ['Ремонт разрывов','По фото','На след. день · срочно 1–2 ч'],
-    ['Химчистка и глажка','По фото','По фото'],
     ['Форма (на человека)','Запрос','По заказу'],
   ],
   de:[
@@ -191,7 +180,6 @@ const PRICES: Record<Lang, string[][]> = {
     ['Brautkleid ändern','€40+','Nächster Tag · eilig 1–2 Std.'],
     ['Abendkleid ändern','€40+','Nächster Tag · eilig 1–2 Std.'],
     ['Riss reparieren','Per Foto','Nächster Tag · eilig 1–2 Std.'],
-    ['Reinigung & Bügeln','Per Foto','Per Foto'],
     ['Uniform (pro Person)','Angebot','Je nach Menge'],
   ],
 };
@@ -218,7 +206,6 @@ const ALT_SAYFALAR = [
   ['👗','Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],
   ['🏭','Dikiş Atölyesi Antalya','/terzi/dikis-atolyesi-antalya'],
   ['🏨','Üniforma Üretimi Antalya','/terzi/uniforma-uretimi-antalya'],
-  ['🧺','Kuru Temizleme Antalya','/terzi/kuru-temizleme-antalya'],
   ['🚗','Eve Gelen Terzi Antalya','/terzi/eve-gelen-terzi-antalya'],
   ['🏨','Hotel Tailor Antalya (EN)','/en/hotel-tailor-antalya'],
   ['🏨','Schneider im Hotel (DE)','/de/schneider-service-hotel-antalya'],
@@ -246,17 +233,17 @@ const WHY = [
 ];
 
 const SEO_INTRO: Record<Lang, string> = {
-  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Otellerden kurye ile elbise alımı ve otele teslimat. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort seri üretimi. Dikiş atölyesi. Kuru temizleme. Üniforma üretimi. EUR, USD, RUB, TRY ve kredi kartı kabul edilir.",
-  en: "Tailor Can — Antalya's premier English-speaking tailor. Men's bespoke suits, trouser hemming, shirts, waist alterations. Women's dressmaking, evening gown repairs, wedding dress alterations. Free hotel pickup & delivery across Lara, Kundu, Konyaaltı, Belek, Side & Kemer. Textile manufacturing & sewing workshop. Dry cleaning & laundry. We accept EUR, USD, RUB, TRY and Credit Cards.",
-  ru: "Портной Кан — профессиональное ателье в Анталье. Мужской и женский портной: пошив костюмов, платьев, подгонка по фигуре, замена молний. Выездной сервис в отели Лара, Кунду, Коньяалты, Белек, Кемер (забор и доставка одежды). Химчистка и стирка. Принимаем EUR, USD, RUB, TRY и карты.",
-  de: "Schneider Can — Antalyas deutscher Schneiderservice. Herrenmaßanzüge, Hosen kürzen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider, Brautkleider. Hotel-Abhol- und Lieferservice in Lara, Kundu, Konyaaltı, Belek & Kemer. Nähwerkstatt & Textilproduktion. Chemische Reinigung. Wir akzeptieren EUR, USD, RUB, TRY & Kreditkarten.",
+  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Otellerden kurye ile elbise alımı ve otele teslimat. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort seri üretimi. Dikiş atölyesi. Üniforma üretimi. EUR, USD, RUB, TRY ve kredi kartı kabul edilir.",
+  en: "Tailor Can — Antalya's premier English-speaking tailor. Men's bespoke suits, trouser hemming, shirts, waist alterations. Women's dressmaking, evening gown repairs, wedding dress alterations. Free hotel pickup & delivery across Lara, Kundu, Konyaaltı, Belek, Side & Kemer. Textile manufacturing & sewing workshop. We accept EUR, USD, RUB, TRY and Credit Cards.",
+  ru: "Портной Кан — профессиональное ателье в Анталье. Мужской и женский портной: пошив костюмов, платьев, подгонка по фигуре, замена молний. Выездной сервис в отели Лара, Кунду, Коньяалты, Белек, Кемер (забор и доставка одежды). Принимаем EUR, USD, RUB, TRY и карты.",
+  de: "Schneider Can — Antalyas deutscher Schneiderservice. Herrenmaßanzüge, Hosen kürzen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider, Brautkleider. Hotel-Abhol- und Lieferservice in Lara, Kundu, Konyaaltı, Belek & Kemer. Nähwerkstatt & Textilproduktion. Wir akzeptieren EUR, USD, RUB, TRY & Kreditkarten.",
 };
 
 const LABELS = {
-  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Otel Servisi · Tekstil İmalatı · Kuru Temizleme', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi ve otel servisiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, otelime/adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'Her gün 08:00–23:00', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletişim', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profilimiz', gbpNote:'Profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular & Otel Servisi', konum:'Konumumuz', konumNote:'Atölyemiz Konyaaltı, Antalya\'dadır.', reviewTitle:'Yorum Yaz', districtPage:'sayfasına git' },
-  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Hotel Delivery · Alterations · Textile Manufacturing · Dry Cleaning", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring & hotel delivery service.', mobileMsg:'Hello, I need mobile tailor service at my hotel/address. Can you come for measurement?', hours:'08:00–23:00 · Mon–Sun', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Hotel Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profile', gbpNote:'You can leave a review on our profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ & Hotel Service', konum:'Our Location', konumNote:'Our atelier is in Konyaaltı, Antalya.', reviewTitle:'Write a Review', districtPage:'page' },
-  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Сервис в отелях · Переделка · Текстиль · Химчистка', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать об услугах портного и доставке в отель.', mobileMsg:'Здравствуйте, хочу выездной сервис в отель. Приедете для снятия мерок?', hours:'08:00–23:00 · ежедневно', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного в отель', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наш профиль Google Business', gbpNote:'Вы можете оставить отзыв в нашем профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы и Сервис в Отелях', konum:'Наше местоположение', konumNote:'Наше ателье находится в Коньяалты, Анталья.', reviewTitle:'Написать отзыв', districtPage:'страница' },
-  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion · Reinigung', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'08:00–23:00 · täglich', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unser Google Business Profil', gbpNote:'Sie können in unserem Profil eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Unser Atelier befindet sich in Konyaaltı, Antalya.', reviewTitle:'Bewertung schreiben', districtPage:'Seite' },
+  tr: { badge:'✦ Antalya · Terzi Can', h1:"Antalya'nın", h1em:'Terzisi', sub:'Bay Terzi · Bayan Terzi · Özel Dikim · Tadilat · Otel Servisi · Tekstil İmalatı', waBtn:"WhatsApp'tan Yazın", downBtn:'Hizmetleri Gör ↓', waMsg:'Merhaba, terzi ve otel servisiniz hakkında bilgi almak istiyorum.', mobileMsg:'Merhaba, otelime/adresime terzi servisi istiyorum. Yerinde ölçü alabilir misiniz?', hours:'Her gün 08:00–23:00', mapBtn:'📍 Google Maps', quoteBtn:'📲 Ücretsiz Teklif Al', bulkBtn:'🏭 Toplu Sipariş Teklifi', mobileCta:'🚗 Terzi Servisi Talep Et', reviewLabel:'Değerlendirme', priceTitle:'Terzi Fiyatları 2026', priceNote:"Başlangıç fiyatları — kesin teklif için WhatsApp'tan fotoğraf gönderin", areaLabel:'İlçeye tıklayın — mahalleleri görün', allSvcTitle:'Tüm Hizmet Sayfalarımız', contactTitle:'Hızlı İletişim', contactNote:'Hızlı yanıt için WhatsApp tercih edin.', gbpLabel:'Google Business Profilimiz', gbpNote:'Profilimizde yorum yazabilirsiniz:', bayBayanH:'Bay & Bayan Terzi', faqTitle:'Sık Sorulan Sorular & Otel Servisi', konum:'Konumumuz', konumNote:'Atölyemiz Konyaaltı, Antalya\'dadır.', reviewTitle:'Yorum Yaz', districtPage:'sayfasına git' },
+  en: { badge:'✦ Antalya · Tailor Can', h1:"Antalya's", h1em:'Master Tailor', sub:"Men's · Women's · Custom Tailoring · Hotel Delivery · Alterations · Textile Manufacturing", waBtn:'WhatsApp Us Now', downBtn:'View Services ↓', waMsg:'Hello, I would like information about your tailoring & hotel delivery service.', mobileMsg:'Hello, I need mobile tailor service at my hotel/address. Can you come for measurement?', hours:'08:00–23:00 · Mon–Sun', mapBtn:'📍 Google Maps', quoteBtn:'📲 Get Free Quote', bulkBtn:'🏭 Bulk Order Quote', mobileCta:'🚗 Request Hotel Tailor', reviewLabel:'Reviews', priceTitle:'Price List 2026', priceNote:'Starting prices — send a photo on WhatsApp for an exact quote', areaLabel:'Tap a district to see neighborhoods', allSvcTitle:'All Service Pages', contactTitle:'Quick Contact', contactNote:'For instant reply, prefer WhatsApp.', gbpLabel:'Our Google Business Profile', gbpNote:'You can leave a review on our profile:', bayBayanH:"Men's & Women's Tailor", faqTitle:'FAQ & Hotel Service', konum:'Our Location', konumNote:'Our atelier is in Konyaaltı, Antalya.', reviewTitle:'Write a Review', districtPage:'page' },
+  ru: { badge:'✦ Анталья · Портной Кан', h1:'Лучший', h1em:'Портной Антальи', sub:'Мужской · Женский · Пошив на заказ · Сервис в отелях · Переделка · Текстиль', waBtn:'Написать в WhatsApp', downBtn:'Смотреть услуги ↓', waMsg:'Здравствуйте, хотел бы узнать об услугах портного и доставке в отель.', mobileMsg:'Здравствуйте, хочу выездной сервис в отель. Приедете для снятия мерок?', hours:'08:00–23:00 · ежедневно', mapBtn:'📍 Google Maps', quoteBtn:'📲 Бесплатная оценка', bulkBtn:'🏭 Оптовый заказ', mobileCta:'🚗 Вызвать портного в отель', reviewLabel:'Отзывов', priceTitle:'Цены 2026', priceNote:'Начальные цены — фото в WhatsApp для точной оценки', areaLabel:'Нажмите на район', allSvcTitle:'Все страницы услуг', contactTitle:'Быстрый контакт', contactNote:'Для быстрого ответа — WhatsApp.', gbpLabel:'Наш профиль Google Business', gbpNote:'Вы можете оставить отзыв в нашем профиле:', bayBayanH:'Мужской и женский портной', faqTitle:'Вопросы и Сервис в Отелях', konum:'Наше местоположение', konumNote:'Наше ателье находится в Коньяалты, Анталья.', reviewTitle:'Написать отзыв', districtPage:'страница' },
+  de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'08:00–23:00 · täglich', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unser Google Business Profil', gbpNote:'Sie können in unserem Profil eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Unser Atelier befindet sich in Konyaaltı, Antalya.', reviewTitle:'Bewertung schreiben', districtPage:'Seite' },
 };
 
 const FAQ: Record<Lang, [string, string][]> = {
@@ -272,7 +259,6 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Bayan terzi Antalya — kadın elbise dikimi?', `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE_DISPLAY}`],
     ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.'],
-    ['Kuru temizleme ve ütü Antalya fiyatları?', 'Kuru temizleme ve ütü fiyatı eşyaya göre belirlenir; fotoğrafı WhatsApp\'tan gönderin. Eve ve otele alım-teslim ücretsiz.'],
     ['Elbisem yırtıldı, tamir edebilir misiniz?', `Evet, yırtık ve söküm tamiri yapıyoruz; süre hasara ve yoğunluğa göre değişir. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hafta sonu açık mısınız?', `Haftanın her günü 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Kendime özel bir elbise diktirmek istiyorum, mümkün mü?', `Evet, ölçünüze ve modelinize göre özel dikim yapıyoruz. Model fotoğrafı gönderin. WhatsApp: ${PHONE_DISPLAY}`],
@@ -290,7 +276,6 @@ const FAQ: Record<Lang, [string, string][]> = {
     ["Do you offer women's dressmaking and alterations?", 'Yes! Evening gowns, wedding dresses, skirts, blouses, plus size fitting, and emergency repairs.'],
     ['Sewing workshop for mass production?', 'Yes! Pattern making, prototypes, and full-package mass production for brands.'],
     ['Which Antalya districts and hotel zones do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu Hotel Zone, Belek, Kemer, Side, and Serik.'],
-    ['Dry cleaning and laundry prices for tourists?', 'Dry cleaning and ironing are priced per item; send a photo on WhatsApp. Free pick-up and delivery to homes and hotels.'],
   ],
   ru:[
     ['Стоимость подгонки брюк в Анталье?', 'От €10. Сроки зависят от работы и уточняются в WhatsApp. Отправьте фото.'],
@@ -304,7 +289,6 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Есть женский портной?', 'Да! Вечерние и свадебные платья, юбки, подгонка больших размеров.'],
     ['Ателье для серийного производства?', 'Да! Лекала, образцы и серийное производство для брендов.'],
     ['В какие районы и отельные зоны выезжаете?', 'Коньяалты, Муратпаша, Кепез, Лара, Кунду, Белек, Кемер, Алания, Сиде, Серик.'],
-    ['Химчистка и стирка для туристов?', 'Цена химчистки и глажки зависит от вещи; пришлите фото в WhatsApp. Бесплатный забор и доставка на дом и в отель.'],
   ],
   de:[
     ['Hosenänderung Preis in Antalya?', 'Ab €10. Dauer je nach Auftrag, per WhatsApp bestätigt. Foto senden.'],
@@ -318,7 +302,6 @@ const FAQ: Record<Lang, [string, string][]> = {
     ['Damenschneiderin in Antalya?', 'Ja! Kleider, Abendkleider, Brautkleider, Übergrößen.'],
     ['Nähwerkstatt Serienproduktion?', 'Ja! Schnittmuster, Prototypen, Serienproduktion für Marken.'],
     ['Welche Hotelzonen und Bezirke bedienen Sie?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu, Belek, Kemer, Side, Serik.'],
-    ['Reinigung und Bügeln für Touristen?', 'Reinigung und Bügeln werden pro Stück berechnet; senden Sie ein Foto per WhatsApp. Kostenlose Abholung und Lieferung zu Hause und im Hotel.'],
   ],
 };
 
@@ -520,13 +503,12 @@ export default function TerziClient({ gbp1 }: Props) {
             <p className="thsub">{L.sub}</p>
             <div className="thacts">
               <Link href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</Link>
-              <Link href="/terzi-talep?kategori=kuru-temizleme" className="btn-gold" style={{ background: '#1d6f57' }}>🧺 Kuru Temizleme Fiyatı Sor</Link>
             </div>
             <div className="thacts" style={{ marginTop: '.6rem' }}>
               <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
             </div>
             <Link href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
-              🔧 Terzi veya kuru temizlemecisin? İş bulmak için buraya
+              🔧 Terzi misin? İş bulmak için buraya
             </Link>
           </div>
         </header>
@@ -609,7 +591,6 @@ export default function TerziClient({ gbp1 }: Props) {
               <Link href="/terzi/paca-kisaltma-antalya">Paça Kısaltma</Link>
               <Link href="/terzi/uniforma-uretimi-antalya">Üniforma Üretimi</Link>
               <Link href="/terzi/dikis-atolyesi-antalya">Dikiş Atölyesi</Link>
-              <Link href="/terzi/kuru-temizleme-antalya">Kuru Temizleme</Link>
               <Link href="/online-terzi-hizmeti">Online Terzi Hizmeti</Link>
             </nav>
           )}
