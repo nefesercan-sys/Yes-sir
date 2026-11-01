@@ -163,7 +163,7 @@ export const CONTENT: Record<Topic, Record<Lang, Page>> = {
         { h: 'Fason ve özel marka', p: 'Kendi tasarımınızla veya referans ürünle gelebilirsiniz; fason ve özel marka (private label) üretim için proje bazında teklif veriyoruz.' },
       ],
       faq: [
-        ['Minimum sipariş adediniz nedir?', 'Adet projeye göre belirlenir; numune ve prototip için tek adet de kabul edilir.'],
+        ['Minimum sipariş adediniz nedir?', 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız.'],
         ['Numune süreci nasıl işliyor?', 'Tasarımınıza veya referans ürününüze göre numune hazırlanır, onayınızdan sonra seri üretime geçilir.'],
         ['Yurt dışı siparişleri alıyor musunuz?', 'Avrupa ve Rusya dahil yurt dışı siparişler proje bazında görüşülür; WhatsApp\'tan yazabilirsiniz.'],
         ['Erkek, kadın ve çocuk tekstili aynı siparişte üretilebilir mi?', 'Numune onayından sonra kategorileri tek siparişte birleştirmek için birlikte plan yaparız.'],
@@ -182,7 +182,7 @@ export const CONTENT: Record<Topic, Record<Lang, Page>> = {
         { h: 'Contract manufacturing and private label', p: 'Bring your own design or a reference garment; we quote contract manufacturing and private label production per project.' },
       ],
       faq: [
-        ['What is your minimum order quantity?', 'It depends on the project; a single piece is accepted for samples and prototypes.'],
+        ['What is your minimum order quantity?', 'There is no minimum order quantity; we work from a single sample piece to serial production.'],
         ['How does sampling work?', 'We make a sample from your design or reference garment, and move to series production after your approval.'],
         ['Do you take orders from abroad?', 'Orders from abroad, including Europe and Russia, are discussed project by project. Write to us on WhatsApp.'],
         ['Can men\'s, women\'s and children\'s items be made in one order?', 'After sample approval we plan together how to combine categories into one order.'],
@@ -201,7 +201,7 @@ export const CONTENT: Record<Topic, Record<Lang, Page>> = {
         { h: 'Контрактный пошив и собственная марка', p: 'Приносите свой дизайн или образец; мы рассчитываем контрактное производство и пошив под вашей маркой (private label) под проект.' },
       ],
       faq: [
-        ['Какой минимальный тираж?', 'Зависит от проекта; для образцов и прототипов принимается одно изделие.'],
+        ['Какой минимальный тираж?', 'Минимального тиража нет: работаем от одного образца до серийного производства.'],
         ['Как проходит работа над образцом?', 'Образец шьётся по вашему дизайну или референсному изделию, после утверждения переходим к серии.'],
         ['Принимаете заказы из-за границы?', 'Заказы из-за границы, включая Европу и Россию, обсуждаются под каждый проект. Напишите нам в WhatsApp.'],
         ['Можно ли шить мужское, женское и детское в одном заказе?', 'После утверждения образца вместе планируем объединение категорий в один заказ.'],
@@ -220,7 +220,7 @@ export const CONTENT: Record<Topic, Record<Lang, Page>> = {
         { h: 'Lohnfertigung und Eigenmarke', p: 'Bringen Sie Ihren eigenen Entwurf oder ein Referenzteil mit; wir erstellen projektbezogene Angebote für Lohnfertigung und Private Label.' },
       ],
       faq: [
-        ['Wie hoch ist die Mindestmenge?', 'Sie hängt vom Projekt ab; für Muster und Prototypen wird auch ein einzelnes Stück angenommen.'],
+        ['Wie hoch ist die Mindestmenge?', 'Es gibt keine Mindestmenge: vom einzelnen Musterstück bis zur Serienfertigung.'],
         ['Wie läuft die Musterfertigung ab?', 'Wir fertigen ein Muster nach Ihrem Entwurf oder Referenzteil und gehen nach Ihrer Freigabe in die Serie.'],
         ['Nehmen Sie Aufträge aus dem Ausland an?', 'Aufträge aus dem Ausland, auch aus Europa und Russland, besprechen wir projektbezogen. Schreiben Sie uns per WhatsApp.'],
         ['Können Herren-, Damen- und Kinderteile in einer Bestellung gefertigt werden?', 'Nach der Musterfreigabe planen wir gemeinsam, wie sich die Kategorien in einer Bestellung bündeln lassen.'],
