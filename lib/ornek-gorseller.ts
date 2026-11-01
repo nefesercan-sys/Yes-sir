@@ -93,7 +93,7 @@ export const GORSELLER = {
     aciklama: { tr: 'Paça kısaltmada boy ölçüyle belirlenir.', en: 'The length for hemming is set by measuring.', de: 'Die Länge beim Kürzen wird durch Messen festgelegt.', ru: 'Длину при подшиве определяют по замерам.' } },
   'palto-yaka-detay': { ...S('palto-yaka-detay'),
     baslik: { tr: 'Palto yakası ve dikiş detayı', en: 'Coat lapel and stitching detail', de: 'Mantelrevers und Nahtdetail', ru: 'Лацкан пальто и детали строчки' },
-    aciklama: { tr: 'Yün palto ve ceketlerde yaka, kol ve astar onarımı.', en: 'Lapel, sleeve and lining repair on wool coats and jackets.', de: 'Reparatur von Revers, Ärmel und Futter bei Woll­mänteln und Jacken.', ru: 'Ремонт лацканов, рукавов и подкладки шерстяных пальто и пиджаков.' } },
+    aciklama: { tr: 'Yün palto ve ceketlerde yaka ve kol onarımı.', en: 'Lapel and sleeve repair on wool coats and jackets.', de: 'Reparatur von Revers und Ärmel bei Woll­mänteln und Jacken.', ru: 'Ремонт лацканов и рукавов шерстяных пальто и пиджаков.' } },
   'polar-yelek': { ...S('polar-yelek'),
     baslik: { tr: 'Polar yelek', en: 'Fleece vest', de: 'Fleeceweste', ru: 'Флисовый жилет' },
     aciklama: { tr: 'Fermuarlı polar yelek; ekip giyimi için logolu üretim yapılır.', en: 'Zippered fleece vest; made with a logo for team wear.', de: 'Fleeceweste mit Reißverschluss; für Teamkleidung mit Logo.', ru: 'Флисовый жилет на молнии; для командной одежды — с логотипом.' } },

@@ -131,7 +131,7 @@ export default function KonyaaltiTerziPage() {
             <div className="text-amber-700 text-5xl mb-4">✂️</div>
             <h3 className="text-xl font-bold mb-3">Tamir & Tadilat</h3>
             <p className="text-gray-600">
-              Daraltma, bollaştırma, paça boyu ayarı, fermuar ve astar değişimi gibi onarımlarla kıyafetlerinizi ilk günkü haline getiriyoruz.
+              Daraltma, bollaştırma, paça boyu ayarı, fermuar değişimi gibi onarımlarla kıyafetlerinizi ilk günkü haline getiriyoruz.
             </p>
           </div>
 

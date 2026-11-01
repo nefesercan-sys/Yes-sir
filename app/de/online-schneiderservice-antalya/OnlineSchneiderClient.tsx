@@ -112,7 +112,6 @@ const PRICE_TABLE = [
     ['Reißverschluss Austausch','per Foto','Am nächsten Tag'],
     ['Rissreparatur','per Foto','Am nächsten Tag'],
     ['Ärmel Kürzen','per Foto','Am nächsten Tag'],
-    ['Futter Austausch','per Foto','48 Stunden'],
   ]},
 ];
 

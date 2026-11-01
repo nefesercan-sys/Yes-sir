@@ -497,7 +497,7 @@ export default function AntalyaTerziPage() {
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
-                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı, astar değişimi. Ertesi gün teslim; acilse 1–2 saat.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
+                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı. Ertesi gün teslim; acilse 1–2 saat.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
                 { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise (damatlık dahil), kadın elbise, abiye, gömlek, pantolon, üniforma — ölçüye özel dikim. Gelinlik dikimi yapılmaz, tadilatı yapılır.', href:'/terzi/bayan-terzi-antalya', fiyat:'Fotoğrafa göre' },
                 { ic:'💨', baslik:'Ütü & Buharlı Pres', text:'Endüstriyel buharlı pres ile gömlek, takım elbise, abiye ütüleme. Evden alım + teslimat.', href:'/terzi/kuru-temizleme-antalya', fiyat:'Fotoğrafa göre' },
                 { ic:'🧺', baslik:'Kuru Temizleme', text:'Hassas kumaşlar için kuru temizleme. Elbise, abiye, gelinlik, mont. 24–48 saat ekspres. Servis imkanı.', href:'/terzi/kuru-temizleme-antalya', fiyat:'Fotoğrafa göre' },

@@ -40,7 +40,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: "Fermuar bozuldu, dikiş söküldü, pantolon yırtıldı: tatildeyken de çözümü var. Kıyafetin fotoğrafını WhatsApp'tan gönderin, ne yapılabileceğini ve fiyatı söyleyelim.",
       secs: [
-        { h: 'Hangi sorunlara bakıyoruz?', ul: ["Fermuar değişimi: ₺300'den", "Paça kısaltma: ₺200'den", "Bel daraltma: ₺200'den", 'Söküklerin dikilmesi ve yırtık onarımı', 'Düğme, astar ve kemer tamiri'] },
+        { h: 'Hangi sorunlara bakıyoruz?', ul: ["Fermuar değişimi: ₺300'den", "Paça kısaltma: ₺200'den", "Bel daraltma: ₺200'den", 'Söküklerin dikilmesi ve yırtık onarımı'] },
         { h: 'Nasıl ilerliyor?', ul: ["Sorunlu kıyafetin fotoğrafını WhatsApp'tan gönderin", 'Yapılacak işi ve fiyatı yazılı olarak bildiririz', "Atölyeye getirin ya da otelden/evden alım-teslim isteyin: eve ve otellere ücretsiz", "Normal tamir ertesi gün teslim edilir; acil işler 1–2 saatte hazırlanır"] },
         { h: 'Atölye ve çalışma saatleri', p: "Atölyemiz Konyaaltı, Hurma Mahallesi'nde. Haftanın her günü 08:00–23:00 arası açığız; Türkçe, İngilizce, Rusça ve Almanca yazışabilirsiniz." },
       ],
@@ -78,7 +78,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       badge: 'Terzi Can · Коньяалты, Анталья',
       lead: 'Сломалась молния, разошёлся шов, порвались брюки: решение есть и в отпуске. Пришлите фото вещи в WhatsApp, и мы скажем, что можно сделать и сколько это стоит.',
       secs: [
-        { h: 'Что мы ремонтируем?', ul: ['Замена молнии', 'Подшив брюк', 'Ушивание в талии', 'Зашивание швов и ремонт разрывов', 'Пуговицы, подкладка, ремни'] },
+        { h: 'Что мы ремонтируем?', ul: ['Замена молнии', 'Подшив брюк', 'Ушивание в талии', 'Зашивание швов и ремонт разрывов'] },
         { h: 'Как это работает?', ul: ['Пришлите фото проблемы в WhatsApp', 'Мы письменно сообщим, что будем делать и сколько это стоит', 'Принесите вещь в мастерскую или закажите забор и доставку из отеля или с дома: из отелей бесплатно; с дома бесплатно в Коньяалты и рядом', 'Обычный ремонт готов на следующий день; срочный — за 1–2 часа'] },
         { h: 'Мастерская и часы работы', p: 'Наша мастерская находится в Хурме, Коньяалты. Мы работаем каждый день с 08:00 до 23:00; можно писать по-русски, по-английски, по-турецки и по-немецки.' },
       ],
@@ -97,7 +97,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: 'Reißverschluss kaputt, Naht aufgegangen, Hose gerissen: Auch im Urlaub gibt es eine Lösung. Senden Sie ein Foto per WhatsApp, wir sagen Ihnen, was möglich ist und was es kostet.',
       secs: [
-        { h: 'Was reparieren wir?', ul: ['Reißverschluss wechseln', 'Hosen kürzen', 'Bund enger machen', 'Aufgegangene Nähte und Risse', 'Knöpfe, Futter und Gürtel'] },
+        { h: 'Was reparieren wir?', ul: ['Reißverschluss wechseln', 'Hosen kürzen', 'Bund enger machen', 'Aufgegangene Nähte und Risse'] },
         { h: 'So läuft es ab', ul: ['Foto des Problems per WhatsApp senden', 'Wir nennen Ihnen schriftlich Arbeit und Preis', 'In die Werkstatt bringen oder Abholung und Lieferung am Hotel oder zu Hause wünschen: für Hotels kostenlos; zu Hause in Konyaaltı und Umgebung kostenlos', 'Normale Reparaturen sind am nächsten Tag fertig; dringende in 1–2 Stunden'] },
         { h: 'Werkstatt und Öffnungszeiten', p: 'Unsere Werkstatt liegt in Hurma, Konyaaltı. Wir sind jeden Tag von 08:00 bis 23:00 Uhr erreichbar; Sie können auf Deutsch, Englisch, Türkisch oder Russisch schreiben.' },
       ],

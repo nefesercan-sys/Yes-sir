@@ -51,7 +51,7 @@ const T: Record<Lang, any> = {
     servicesH: 'Tailoring, Repair & Ironing Services', servicesSub: 'Full-service workshop — everything handled off-site, delivered to your hotel',
     services: [
       ['✂️', 'Hemming & Alterations', 'Trousers, dresses, suits — precise fit adjustments'],
-      ['🔧', 'Zipper & Repair', 'Zipper replacement, tears, buttons'],
+      ['🔧', 'Zipper & Repair', 'Zipper replacement, tears'],
       ['👗', 'Wedding & Evening Wear', 'Delicate alterations for special occasions'],
       ['🧺', 'Ironing & Dry Cleaning', 'Professional steam press and dry cleaning'],
     ],
@@ -86,7 +86,7 @@ const T: Record<Lang, any> = {
     servicesH: 'Пошив, ремонт и глажка', servicesSub: 'Полный цикл услуг — всё делается в мастерской, доставка в отель',
     services: [
       ['✂️', 'Подгонка и укорачивание', 'Брюки, платья, костюмы — точная подгонка по фигуре'],
-      ['🔧', 'Молнии и ремонт', 'Замена молнии, разрывы, пуговицы'],
+      ['🔧', 'Молнии и ремонт', 'Замена молнии, разрывы'],
       ['👗', 'Свадебная и вечерняя одежда', 'Деликатная подгонка для особых случаев'],
       ['🧺', 'Глажка и химчистка', 'Профессиональная паровая глажка и химчистка'],
     ],
@@ -121,7 +121,7 @@ const T: Record<Lang, any> = {
     servicesH: 'Schneiderei, Reparatur & Bügelservice', servicesSub: 'Voller Service — alles in der Werkstatt erledigt, Lieferung ins Hotel',
     services: [
       ['✂️', 'Kürzen & Änderungen', 'Hosen, Kleider, Anzüge — präzise Passform-Anpassungen'],
-      ['🔧', 'Reißverschluss & Reparatur', 'Reißverschluss ersetzen, Risse, Knöpfe'],
+      ['🔧', 'Reißverschluss & Reparatur', 'Reißverschluss ersetzen, Risse'],
       ['👗', 'Braut- & Abendkleidung', 'Behutsame Änderungen für besondere Anlässe'],
       ['🧺', 'Bügeln & Reinigung', 'Professionelles Dampfbügeln und chemische Reinigung'],
     ],
