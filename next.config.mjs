@@ -51,24 +51,14 @@ const nextConfig = {
         permanent: true,
       },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
-      // Manavgat (Side dahil) ve Kemer'e HİZMET VERİLİR: bu adresler aşağıda ilgili gerçek sayfalara yönlenir.
+      // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'serik'].map((slug) => ({
         source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
       })),
-      // Kepez ve Döşemealtı'nın bölge sayfası /terzi/bolge/<slug> altında üretilir
-      { source: '/terzi/antalya/kepez', destination: '/terzi/bolge/kepez', permanent: true },
-      { source: '/terzi/antalya/dosemealti', destination: '/terzi/bolge/dosemealti', permanent: true },
-      // Kemer: gerçek sayfa /terzi/bolge/kemer (+ EN/RU/DE bölge ve otel sayfaları)
-      { source: '/terzi/antalya/kemer', destination: '/terzi/bolge/kemer', permanent: true },
-      // Manavgat: Side, Manavgat ilçesine bağlıdır; Manavgat aramaları Side sayfalarına yönlenir
-      { source: '/terzi/antalya/manavgat', destination: '/terzi/antalya/side', permanent: true },
-      { source: '/terzi/bolge/manavgat', destination: '/terzi/antalya/side', permanent: true },
-      { source: '/en/tailor-antalya/manavgat', destination: '/en/tailor-antalya/side', permanent: true },
-      { source: '/ru/portnoy-antalya/manavgat', destination: '/ru/portnoy-antalya/side', permanent: true },
-      { source: '/de/schneider-antalya/manavgat', destination: '/de/schneider-antalya/side', permanent: true },
-      // Meltem, Şirinyalı, Fener ve Güzeloba Muratpaşa'ya bağlıdır: eski Konyaaltı mahalle adresleri yeni yola
+      // Eski /terzi/bolge/manavgat adresi (bölge sayfası yok) ilçe sayfasına gider
+      { source: '/terzi/bolge/manavgat', destination: '/terzi/antalya/manavgat', permanent: true },
+      // Meltem, Şirinyalı, Fener, Güzeloba: /terzi/konyaalti/<slug> da 200 verir (canonical Muratpaşa); yalnız yazım hatalı /terzi-konyalti/ yönlenir
       ...['meltem', 'sirinyali', 'fener', 'guzeloba'].flatMap((slug) => [
-        { source: `/terzi/konyaalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
         { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
       ]),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
