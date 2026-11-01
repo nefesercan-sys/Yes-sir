@@ -30,7 +30,7 @@ const SITE_CFG = {
   } as L4,
   pricesUrl: SERVICE_BASE as L4,   // swaphubs'ta ayrı fiyat sayfası yok: hizmet merkezi (fiyatlar hizmet sayfalarında)
   homeUrl: HUB_MAIN as L4,
-  siteName: 'SwapHubs Terzi Can',
+  siteName: 'Terzi Can',
 };
 
 export const CONTACT_URL = SITE_CFG.contactUrl;
