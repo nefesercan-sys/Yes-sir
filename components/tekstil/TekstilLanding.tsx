@@ -3,6 +3,7 @@ import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE
 import { jsonLdString } from '@/lib/json-ld';
 import OrnekGorseller from '@/components/tekstil/OrnekGorseller';
 
+const B2B_PATH: Record<Lang, string> = { tr: '/giyim-uretici-antalya', en: '/en/clothing-manufacturer-antalya', ru: '/ru/shveynoe-proizvodstvo-antalya', de: '/de/bekleidungshersteller-antalya' };
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
 export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: Lang }) {
@@ -107,6 +108,10 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
             {ui.other}: <a href={URLS[other][lang]}>{CONTENT[other][lang].crumb}</a>
             {extra && <> · <a href={URLS[extra][lang]}>{CONTENT[extra][lang].crumb}</a></>}
             {!isPromo && <> · <a href={SERVICE_URL[lang]}>{ui.service}</a></>}
+          </p>
+          <p style={{ marginTop: '.5rem', fontSize: '.9rem' }}>
+            {{ tr: 'Numune, seri imalat ve yurt dışı gönderim', en: 'Samples, series production and shipping abroad', ru: 'Образцы, серийный пошив и отправка за границу', de: 'Muster, Serienfertigung und Versand ins Ausland' }[lang]}:{' '}
+            <a href={`https://terzihizmeti.com.tr${B2B_PATH[lang]}`}>Anavera Tekstil</a>
           </p>
         </section>
       </main>
