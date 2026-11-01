@@ -22,7 +22,7 @@ export function tekstilMetadata(topic: Topic, lang: Lang): Metadata {
       title: c.t,
       description: c.d,
       url,
-      siteName: 'SwapHubs',
+      siteName: 'Terzi Can',
       locale: LOCALE[lang],
       type: 'website',
       images: [{ url: ogImage, width: 1200, height: 630, alt: c.h1 }],

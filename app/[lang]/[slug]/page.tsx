@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       keywords: c.keywords,
       robots,
       alternates: { canonical: url, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${iUrl(l)}`])) },
-      openGraph: { title: c.title, description: c.desc, url, siteName: 'SwapHubs', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
+      openGraph: { title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
       twitter: { card: 'summary_large_image', title: c.title, description: c.desc, images: [OG_DEFAULT] },
     };
   }
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       description: sc.desc,
       robots,
       alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
-      openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
+      openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
       twitter: { card: 'summary_large_image', title: sc.title, description: sc.desc, images: [OG_DEFAULT] },
     };
   }
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       description: hc.desc,
       robots,
       alternates: { canonical: hurl, languages: hzLanguages(hz) },
-      openGraph: { title: hc.title, description: hc.desc, url: hurl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
+      openGraph: { title: hc.title, description: hc.desc, url: hurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
       twitter: { card: 'summary_large_image', title: hc.title, description: hc.desc, images: [OG_DEFAULT] },
     };
   }
@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       description: kc.desc,
       robots,
       alternates: { canonical: kurl, languages: konuLanguages(konu) },
-      openGraph: { title: kc.title, description: kc.desc, url: kurl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
+      openGraph: { title: kc.title, description: kc.desc, url: kurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
       twitter: { card: 'summary_large_image', title: kc.title, description: kc.desc, images: [OG_DEFAULT] },
     };
   }
@@ -106,7 +106,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       description: pc.desc,
       robots,
       alternates: { canonical: purl, languages },
-      openGraph: { title: pc.title, description: pc.desc, url: purl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: pc.h1 }] },
+      openGraph: { title: pc.title, description: pc.desc, url: purl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: pc.h1 }] },
       twitter: { card: 'summary_large_image', title: pc.title, description: pc.desc, images: [OG_DEFAULT] },
     };
   }
@@ -124,7 +124,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     description,
     robots,
     alternates: { canonical: url, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${zoneUrl(l, zone)}`])) },
-    openGraph: { title, description, url, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: title }] },
+    openGraph: { title, description, url, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: title }] },
     twitter: { card: 'summary_large_image', title, description, images: [OG_DEFAULT] },
   };
 }
