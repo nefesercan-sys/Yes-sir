@@ -11,7 +11,7 @@ import { ILANGS, type ILang } from '@/lib/intl';
 import { DURATION } from '@/lib/business';
 const DU = (l: ILang) => DURATION[l];
 
-export const ZONE_SLUGS = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'konyaalti', 'antalya'] as const;
+export const ZONE_SLUGS = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'konyaalti', 'kundu', 'muratpasa', 'goynuk', 'antalya'] as const;
 export type ZoneSlug = (typeof ZONE_SLUGS)[number];
 export const isZone = (s: string): s is ZoneSlug => (ZONE_SLUGS as readonly string[]).includes(s);
 
@@ -27,12 +27,12 @@ export const zoneAlt = (z: string): Record<string, string> =>
   isZone(z) ? Object.fromEntries(ILANGS.map((l) => [l, `https://swaphubs.com${zoneUrl(l, z)}`])) : {};
 
 const NAMES: Record<ILang, Record<ZoneSlug, string>> = {
-  es: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', antalya: 'Antalya' },
-  fr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', antalya: 'Antalya' },
-  pl: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', antalya: 'Antalya' },
-  nl: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', antalya: 'Antalya' },
-  uk: { belek: 'Белек', lara: 'Лара', guzeloba: 'Гюзельоба', side: 'Сіде', kemer: 'Кемер', konyaalti: 'Коньяалти', antalya: 'Анталія' },
-  ar: { belek: 'بيليك', lara: 'لارا', guzeloba: 'غوزيلوبا', side: 'سيدي', kemer: 'كيمر', konyaalti: 'كونيالتي', antalya: 'أنطاليا' },
+  es: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', kundu: 'Kundu', muratpasa: 'Muratpaşa', goynuk: 'Göynük', antalya: 'Antalya' },
+  fr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', kundu: 'Kundu', muratpasa: 'Muratpaşa', goynuk: 'Göynük', antalya: 'Antalya' },
+  pl: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', kundu: 'Kundu', muratpasa: 'Muratpaşa', goynuk: 'Göynük', antalya: 'Antalya' },
+  nl: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', kundu: 'Kundu', muratpasa: 'Muratpaşa', goynuk: 'Göynük', antalya: 'Antalya' },
+  uk: { belek: 'Белек', lara: 'Лара', guzeloba: 'Гюзельоба', side: 'Сіде', kemer: 'Кемер', konyaalti: 'Коньяалти', kundu: 'Кунду', muratpasa: 'Муратпаша', goynuk: 'Гейнюк', antalya: 'Анталія' },
+  ar: { belek: 'بيليك', lara: 'لارا', guzeloba: 'غوزيلوبا', side: 'سيدي', kemer: 'كيمر', konyaalti: 'كونيالتي', kundu: 'كوندو', muratpasa: 'موراتباشا', goynuk: 'غوينوك', antalya: 'أنطاليا' },
 };
 
 const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
@@ -43,6 +43,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `Side es un núcleo turístico con historia, cerca de Manavgat, donde las ruinas antiguas conviven con hoteles de playa.`,
     kemer: `Kemer es una población costera al pie de los montes Tauro, conocida por su puerto deportivo y sus resorts.`,
     konyaalti: `Konyaaltı es el distrito costero donde trabaja nuestro taller, con hoteles y apartahoteles a lo largo del litoral.`,
+    kundu: 'Kundu (Aksu), justo al este de Lara, es una zona hotelera con numerosos resorts de cinco estrellas todo incluido.',
+    muratpasa: 'Muratpaşa es el distrito central de Antalya: abarca Kaleiçi, los hoteles del centro, el barrio de Meltem y parte de la zona de Lara. En Meltem la recogida y la entrega son gratuitas.',
+    goynuk: 'Göynük, al norte de Kemer, es una tranquila franja de hoteles junto al mar, cerca del cañón de Göynük.',
     antalya: `Antalya reúne zonas hoteleras a lo largo de la costa: Konyaaltı, Lara, Belek, Side y Kemer. Atendemos hoteles en todas ellas.`,
   },
   fr: {
@@ -52,6 +55,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `Side est une station chargée d'histoire près de Manavgat, où ruines antiques et hôtels de plage se côtoient.`,
     kemer: `Kemer est une localité côtière au pied du Taurus, connue pour sa marina et ses complexes hôteliers.`,
     konyaalti: `Konyaaltı est le district côtier où travaille notre atelier, avec hôtels et résidences hôtelières le long du littoral.`,
+    kundu: 'Kundu (Aksu), juste à l\'est de Lara, est une zone hôtelière avec de nombreux resorts cinq étoiles tout compris.',
+    muratpasa: 'Muratpaşa est le district central d\'Antalya : il comprend Kaleiçi, les hôtels du centre, le quartier de Meltem et une partie de Lara. À Meltem, la collecte et la livraison sont gratuites.',
+    goynuk: 'Göynük, au nord de Kemer, est une paisible bande d\'hôtels en bord de mer, près du canyon de Göynük.',
     antalya: `Antalya compte des zones hôtelières le long de la côte : Konyaaltı, Lara, Belek, Side et Kemer. Nous desservons les hôtels de toutes ces zones.`,
   },
   pl: {
@@ -61,6 +67,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `Side to zabytkowa miejscowość wypoczynkowa koło Manavgat, gdzie antyczne ruiny sąsiadują z hotelami plażowymi.`,
     kemer: `Kemer to nadmorska miejscowość u stóp gór Taurus, znana z mariny i kompleksów hotelowych.`,
     konyaalti: `Konyaaltı to nadmorski dystrykt, w którym pracuje nasza pracownia, z hotelami i aparthotelami wzdłuż wybrzeża.`,
+    kundu: 'Kundu (Aksu), tuż na wschód od Lary, to strefa hotelowa z wieloma pięciogwiazdkowymi kompleksami all inclusive.',
+    muratpasa: 'Muratpaşa to centralny dystrykt Antalyi: obejmuje Kaleiçi, hotele w centrum, osiedle Meltem i część rejonu Lara. W Meltem odbiór i dowóz są bezpłatne.',
+    goynuk: 'Göynük, na północ od Kemer, to spokojny pas hoteli nad morzem, blisko kanionu Göynük.',
     antalya: `Antalya ma strefy hotelowe wzdłuż wybrzeża: Konyaaltı, Lara, Belek, Side i Kemer. Obsługujemy hotele we wszystkich tych rejonach.`,
   },
   uk: {
@@ -70,6 +79,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `Сіде — курорт з історією поблизу Манавгата, де античні руїни сусідять із пляжними готелями.`,
     kemer: `Кемер — приморське містечко біля підніжжя гір Тавр, відоме мариною та курортними готелями.`,
     konyaalti: `Коньяалти — прибережний район, де працює наше ательє, з готелями й апарт-готелями вздовж узбережжя.`,
+    kundu: 'Кунду (Аксу), одразу на схід від Лари, — готельна зона з численними п\'ятизірковими курортами «все включено».',
+    muratpasa: 'Муратпаша — центральний район Анталії: до нього входять Калеїчі, готелі в центрі, мікрорайон Мельтем і частина Лари. У Мельтемі забір і доставка безкоштовні.',
+    goynuk: 'Гейнюк, на північ від Кемера, — спокійна смуга готелів біля моря, поруч із каньйоном Гейнюк.',
     antalya: `В Анталії готельні зони розташовані вздовж узбережжя: Коньяалти, Лара, Белек, Сіде і Кемер. Ми обслуговуємо готелі в усіх цих районах.`,
   },
   nl: {
@@ -79,6 +91,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `Side is een vakantieplaats met geschiedenis bij Manavgat, waar oude ruïnes naast strandhotels liggen.`,
     kemer: `Kemer is een kustplaats aan de voet van het Taurusgebergte, bekend om de jachthaven en de resorts.`,
     konyaalti: `Konyaaltı is het kustdistrict waar ons atelier werkt, met hotels en aparthotels langs de kustlijn.`,
+    kundu: 'Kundu (Aksu), net ten oosten van Lara, is een hotelzone met veel vijfsterrenresorts met all-inclusive.',
+    muratpasa: 'Muratpaşa is het centrale district van Antalya: Kaleiçi, hotels in het centrum, de wijk Meltem en een deel van Lara. In Meltem is ophalen en terugbrengen gratis.',
+    goynuk: 'Göynük, ten noorden van Kemer, is een rustige hotelstrook aan zee, vlak bij de Göynük-kloof.',
     antalya: `Antalya heeft hotelzones langs de kust: Konyaaltı, Lara, Belek, Side en Kemer. Wij bedienen hotels in al deze zones.`,
   },
   ar: {
@@ -88,6 +103,9 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     side: `سيدي منتجع ذو تاريخ قرب مانافغات، تجاور فيه الآثار القديمة فنادق الشاطئ.`,
     kemer: `كيمر بلدة ساحلية عند سفح جبال طوروس، تُعرف بمرساها ومنتجعاتها.`,
     konyaalti: `كونيالتي منطقة ساحلية تعمل فيها ورشتنا، وفيها فنادق وشقق فندقية على امتداد الساحل.`,
+    kundu: 'كوندو (أكسو)، شرق لارا مباشرة، منطقة فنادق تضم منتجعات خمس نجوم عديدة بنظام الشامل.',
+    muratpasa: 'موراتباشا هي منطقة وسط أنطاليا وتشمل كاليتشي وفنادق المركز وحي ملتم وجزءًا من منطقة لارا. في حي ملتم الاستلام والتسليم مجاني.',
+    goynuk: 'غوينوك شمال كيمر شريط هادئ من الفنادق على البحر، قرب وادي غوينوك.',
     antalya: `تضم أنطاليا مناطق فنادق على امتداد الساحل: كونيالتي ولارا وبيليك وسيدي وكيمر. نخدم الفنادق في جميع هذه المناطق.`,
   },
 };
@@ -102,6 +120,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'En Side, junto a Manavgat, predominan los arreglos urgentes: cremalleras, costuras y bajos antes de una excursión o del vuelo de regreso.',
     kemer: 'En Kemer y sus pueblos de playa lo más frecuente son cremalleras rotas, costuras y bajos durante las vacaciones.',
     konyaalti: 'En Konyaaltı, por la vida de playa, se piden mucho bajos y ajustes de talla en pantalones de lino, shorts, camisetas y vestidos.',
+    kundu: `En Kundu, por los resorts todo incluido, se piden sobre todo cremalleras, costuras y ajustes rápidos durante la estancia.`,
+    muratpasa: `En Muratpaşa, en el centro y en Kaleiçi, se piden arreglos de vestidos, trajes y pantalones, y bajos de prendas compradas en la ciudad.`,
+    goynuk: `En Göynük, zona más tranquila junto a Kemer, lo habitual son cremalleras, costuras y bajos durante las vacaciones.`,
     antalya: `Los arreglos más pedidos por huéspedes de hotel en Antalya son cremalleras, costuras abiertas, bajos y ajustes de talla.`,
   },
   fr: {
@@ -111,6 +132,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'À Side, près de Manavgat, ce sont surtout des retouches urgentes : fermetures, coutures et ourlets avant une excursion ou le vol retour.',
     kemer: 'À Kemer et dans ses villages balnéaires, il s\'agit le plus souvent de fermetures cassées, de coutures et d\'ourlets en cours de séjour.',
     konyaalti: 'À Konyaaltı, vie de plage oblige, on demande souvent des ourlets et des ajustements de taille sur pantalons en lin, shorts, t-shirts et robes.',
+    kundu: `À Kundu, dans les complexes tout compris, on demande surtout des fermetures, des coutures et des retouches rapides pendant le séjour.`,
+    muratpasa: `À Muratpaşa, au centre et à Kaleiçi, on demande des retouches de robes, costumes et pantalons, et des ourlets de vêtements achetés en ville.`,
+    goynuk: `À Göynük, zone plus calme près de Kemer, on demande surtout fermetures, coutures et ourlets pendant les vacances.`,
     antalya: `Chez les clients d'hôtels d'Antalya, les retouches les plus demandées sont les fermetures, les coutures ouvertes, les ourlets et les ajustements de taille.`,
   },
   pl: {
@@ -120,6 +144,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'W Side koło Manavgat przeważają pilne poprawki: zamki, szwy i skracanie przed wycieczką lub lotem powrotnym.',
     kemer: 'W Kemer i okolicznych miejscowościach plażowych najczęściej są to zepsute zamki, szwy i skracanie w trakcie urlopu.',
     konyaalti: 'W Konyaaltı, przy plażowym trybie życia, często prosi się o skracanie i dopasowanie lnianych spodni, szortów, koszulek i sukienek.',
+    kundu: `W Kundu, w hotelach all inclusive, najczęściej zamawia się zamki, szwy i szybkie poprawki w trakcie pobytu.`,
+    muratpasa: `W Muratpaşa, w centrum i Kaleiçi, zamawia się poprawki sukienek, garniturów i spodni oraz skracanie rzeczy kupionych w mieście.`,
+    goynuk: `W Göynük, spokojniejszej okolicy obok Kemer, najczęściej chodzi o zamki, szwy i skracanie w czasie urlopu.`,
     antalya: `Goście hoteli w Antalyi najczęściej zamawiają wymianę zamków, naprawę rozprutych szwów, skracanie i dopasowanie rozmiaru.`,
   },
   uk: {
@@ -129,6 +156,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'У Сіде, поруч із Манавгатом, переважають термінові роботи: блискавки, шви й укорочення перед екскурсією чи зворотним рейсом.',
     kemer: 'У Кемері та курортних селищах поруч найчастіше це зламані блискавки, шви та вкорочення під час відпочинку.',
     konyaalti: 'У Коньяалти через пляжний спосіб життя часто просять вкоротити або підігнати лляні штани, шорти, футболки й сукні.',
+    kundu: `У Кунду, де багато готелів «все включено», найчастіше просять замінити блискавку, підшити шви та швидко підігнати одяг.`,
+    muratpasa: `У Муратпаші, в центрі та Калеїчі, найчастіше підганяють сукні, костюми й штани та підшивають речі, куплені в місті.`,
+    goynuk: `У Гейнюку, спокійнішому районі поруч із Кемером, найчастіше просять замінити блискавку, підшити шви та поділ під час відпустки.`,
     antalya: `Гості готелів в Анталії найчастіше замовляють заміну блискавок, ремонт розпоролих швів, підшивання та підгонку за розміром.`,
   },
   nl: {
@@ -138,6 +168,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'In Side, bij Manavgat, gaat het vooral om spoedklussen: ritsen, naden en zomen vóór een excursie of de terugvlucht.',
     kemer: 'In Kemer en de badplaatsen eromheen gaat het meestal om kapotte ritsen, naden en zomen tijdens de vakantie.',
     konyaalti: 'In Konyaaltı, met het strandleven, wordt vaak gevraagd om linnen broeken, shorts, T-shirts en jurken in te korten of passend te maken.',
+    kundu: `In Kundu, met veel all-inclusive resorts, draait het vooral om ritsen, naden en snelle aanpassingen tijdens het verblijf.`,
+    muratpasa: `In Muratpaşa, in het centrum en Kaleiçi, gaat het om jurken, pakken en broeken en om zomen van kleding die in de stad is gekocht.`,
+    goynuk: `In Göynük, een rustiger gebied naast Kemer, gaat het meestal om ritsen, naden en zomen tijdens de vakantie.`,
     antalya: `Hotelgasten in Antalya vragen vooral om ritsen, losgegane naden, zomen en maataanpassingen.`,
   },
   ar: {
@@ -147,6 +180,9 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
     side: 'في سيدي قرب مانافغات تغلب الأعمال العاجلة: السحّابات والدرزات والتقصير قبل رحلة أو قبل رحلة العودة.',
     kemer: 'في كيمر وقراها الساحلية تكون الطلبات غالباً سحّابات مكسورة ودرزات وتقصيراً أثناء العطلة.',
     konyaalti: 'في كونيالتي، مع حياة الشاطئ، يكثر طلب تقصير وضبط مقاس البناطيل الكتانية والشورتات والقمصان والفساتين.',
+    kundu: `في كوندو، حيث المنتجعات الشاملة، تكثر طلبات تبديل السحابات والدرزات والتعديلات السريعة أثناء الإقامة.`,
+    muratpasa: `في موراتباشا، في وسط المدينة وكاليتشي، تُطلب تعديلات الفساتين والبدلات والبناطيل وتقصير ما يُشترى من المدينة.`,
+    goynuk: `في غوينوك، المنطقة الأهدأ بجوار كيمر، تكثر طلبات السحابات والدرزات والتقصير أثناء العطلة.`,
     antalya: `أكثر ما يطلبه نزلاء فنادق أنطاليا هو تبديل السحابات وإصلاح الدرزات المفتوحة وتقصير الأطراف وتعديل المقاس.`,
   },
 };

@@ -256,6 +256,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       })()}
 
       {/* Hotels Section */}
+      {region.hotels.length > 0 && (
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.4rem' }}>{t.hotelsH(region.name)}</h2>
@@ -266,6 +267,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           <p style={{ fontSize: '.8rem', color: '#7A6E62', fontStyle: 'italic' }}>{t.otherHotels}</p>
         </div>
       </section>
+      )}
 
       {/* How it Works Section */}
       <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>

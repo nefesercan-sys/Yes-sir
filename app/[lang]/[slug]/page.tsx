@@ -31,7 +31,7 @@ type P = { params: Promise<{ lang: string; slug: string }> };
 
 const robots = { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' as const, 'max-snippet': -1 } };
 
-const FOUR_ZONE = ['belek', 'lara', 'guzeloba', 'side', 'kemer'];
+const FOUR_ZONE = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu', 'muratpasa', 'goynuk'];
 /** Bölge/otel ana sayfası hreflang kümesi: 6 dil + (varsa) EN/RU/DE (+ ana sayfada TR) karşılıkları. */
 function zoneLanguages(zone: (typeof ZONE_SLUGS)[number]): Record<string, string> {
   const six = Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${zoneUrl(l, zone)}`]));
