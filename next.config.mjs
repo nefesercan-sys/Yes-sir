@@ -50,6 +50,9 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
+      // Bal sayfaları gizlendi (geçici 307; geri açmak için bu iki kaydı silin ve app/sitemap.ts BAL_ENABLED=true yapın).
+      { source: '/bal', destination: '/terzi', permanent: false },
+      { source: '/bal/:path*', destination: '/terzi', permanent: false },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
       // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa'].map((slug) => ({

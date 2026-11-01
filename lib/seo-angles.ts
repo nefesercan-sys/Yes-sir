@@ -48,7 +48,7 @@ export interface AngleCtx {
   tail: string;       // site tonuna göre kapanış: telefon + (saat | fotoğraf at, fiyat al)
 }
 
-// Servis kuralı (lib/business.ts): otellere servis her bölgede ücretsiz; eve servis yalnız Konyaaltı ve yakın mahallelerde ücretsiz.
+// Servis kuralı (lib/business.ts): eve ve otele servis her bölgede ücretsiz.
 const SVC: Record<ALang, { free: string; paid: string }> = {
   tr: { free: 'Otele ve eve ücretsiz servis', paid: 'Otellere ücretsiz servis' },
   en: { free: 'Free hotel & home pick-up', paid: 'Free hotel pick-up' },
@@ -231,7 +231,7 @@ export function angleKeywords(lang: ALang, a: number, n: string): string[] {
 }
 export const svcLine = (lang: ALang, free: boolean) => S(lang, free);
 
-// ── Ev adresine ücretsiz servis yalnız Konyaaltı ve yakın mahallelerde; OTELLERE servis her bölgede ücretsiz ──
+// ── Eve ve otele servis her bölgede ücretsiz (unfree geriye dönük, artık tetiklenmez) ──
 // unfree(): "otel ve eve ücretsiz" kalıplarını, eve ücretsiz servisin olmadığı bölgeler için "otele ücretsiz, eve bölgeye göre"
 // biçimine çevirir. Çıktıdaki ücretsiz kelimesi \u0000 işaretiyle korunur ki sonraki kurallar tekrar dönüştürmesin.
 type UL = 'tr' | 'en' | 'ru' | 'de';

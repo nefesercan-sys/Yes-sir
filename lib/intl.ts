@@ -5,7 +5,7 @@
 // swaphubs rehber + hazırlık listesi + adım adım akış anlatır, hizmet sağlayıcıya (Terzi Can) /terzi üzerinden bağlanır.
 // Yalnızca doğrulanmış bilgi: Hurma/Konyaaltı atölye, 2006'dan beri, her gün 08:00–23:00; süreler lib/business.ts DURATION
 // (normal tamir/tadilat ertesi gün, acil 1–2 saat, özel dikim modele/adede göre), fiyat WhatsApp'tan fotoğrafla. Fiyat yazılmaz.
-// Otellere servis her bölgede ücretsiz; eve ücretsiz alım-teslim yalnız Konyaaltı ve yakın mahallelerde.
+// Eve ve otele alım-teslim her bölgede ücretsiz.
 // ============================================================
 export type ILang = 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export const ILANGS: ILang[] = ['es', 'fr', 'pl', 'uk', 'nl', 'ar'];

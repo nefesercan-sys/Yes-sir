@@ -78,7 +78,7 @@ const jsonLd = {
     {
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. otelden alım + teslimat ücretsiz; eve servis Konyaaltı ve yakınında ücretsiz. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya kuru temizleme fiyatı 2026 ne kadar?', acceptedAnswer: { '@type': 'Answer', text: `Elbise ₺300, takım elbise ₺450, mont ₺500, abiye ₺600, çamaşır ₺80/kg'den başlar. otelden alım + teslimat ücretsiz; eve de ücretsiz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya otele gelen kuru temizleme var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Belek, Lara, Kemer ve Side otellerinden kuru temizleme alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Kuru temizleme 1–2 günde hazır mı?', acceptedAnswer: { '@type': 'Answer', text: 'Evet! Turistler ve acil durumlar için hızlı ekspres kuru temizleme mevcuttur. Normal süre 48 saattir.' } },
         { '@type': 'Question', name: 'Mont ve palto kuru temizleme Antalya fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Mont kuru temizleme ₺500, palto ₺550'den başlar. 48 saat teslim. WhatsApp: ${PHONE}` } },
@@ -182,7 +182,7 @@ export default function KuruTemizlemePage() {
         <section id="kuru-temizleme-fiyatlari" style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Kuru Temizleme Fiyatları 2025–2026</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Tüm fiyatlar başlangıç fiyatıdır. Otelden alım + teslimat ücretsiz; eve servis Konyaaltı ve yakınında ücretsiz.</p>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Tüm fiyatlar başlangıç fiyatıdır. Otelden alım + teslimat ücretsiz; eve de ücretsiz.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', boxShadow: '0 2px 12px rgba(0,0,0,.04)' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>

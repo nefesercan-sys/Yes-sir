@@ -30,9 +30,9 @@ const GROUPS: ServiceGroup[] = [
     imageAlt: 'Özel dikim beyaz keten elbise, deniz manzarası önünde',
     rows: [
       { name: 'Günlük elbise (özel ölçü)', price: '800 TL\'den', note: '3-5 iş günü' },
-      { name: 'Davetiye / abiye dikimi', price: '1.400 TL\'den', note: 'Prova dahil' },
-      { name: 'Tulum / takım dikimi', price: '1.100 TL\'den', note: '4-6 iş günü' },
-      { name: 'Gelinlik dikimi', price: 'Fiyat teklifi', note: 'Atölyede görüşme' },
+      { name: 'Etek / pantolon dikimi', price: '1.000 TL\'den', note: 'Prova dahil' },
+      { name: 'Çocuk kıyafeti dikimi', price: '1.000 TL\'den', note: 'Modele göre' },
+      { name: 'Damatlık dikimi', price: '20.000 TL\'den', note: 'Prova dahil' },
     ],
   },
   {

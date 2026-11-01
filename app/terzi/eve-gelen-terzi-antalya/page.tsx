@@ -91,7 +91,7 @@ const jsonLd = {
         {
           '@type':'Question',
           name:'Araçlı terzi servisi kaç lira?',
-          acceptedAnswer:{'@type':'Answer',text:`Araçlı terzi servisi otellere ücretsiz; eve servis Konyaaltı ve yakınında ücretsiz; ayrıca yapılan iş için ücret alınır. Paça kısaltma ₺200, elbise tadilatı ₺200'den başlar. WhatsApp: ${PHONE}`},
+          acceptedAnswer:{'@type':'Answer',text:`Araçlı terzi servisi otellere ücretsiz; eve de ücretsiz; ayrıca yapılan iş için ücret alınır. Paça kısaltma ₺200, elbise tadilatı ₺200'den başlar. WhatsApp: ${PHONE}`},
         },
         {
           '@type':'Question',
@@ -302,7 +302,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Eve / Otele Gelen Terzi Fiyatları
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
+            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Eve ve otele servis ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -389,7 +389,7 @@ export default function EveGelenTerziPage() {
             </h2>
             {[
               ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
-              ['Araçlı terzi servisi ücretli mi?', 'Otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
+              ['Araçlı terzi servisi ücretli mi?', 'Eve ve otele servis ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],

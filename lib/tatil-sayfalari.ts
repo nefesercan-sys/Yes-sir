@@ -1,6 +1,6 @@
 // Turist niyetli 4 dilli rehber sayfaları (Terzi Can, Konyaaltı): acil onarım, otele gelen terzi, etkinlik kıyafeti tadilatı.
 // Yalnızca doğrulanmış bilgi: Hurma/Konyaaltı atölyesi, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat,
-// Otellere alım-teslim her bölgede ücretsiz, eve Konyaaltı ve yakınında ücretsiz (lib/business.ts); paça ₺200'den, fermuar ₺300'den,
+// Otellere alım-teslim her bölgede ücretsiz, eve de ücretsiz (lib/business.ts); paça ₺200'den, fermuar ₺300'den,
 // bel daraltma ₺200'den, abiye/gelinlik tadilatı ve elbise dikimi ₺800'den; süre: normal ertesi gün, acil 1–2 saat, özel dikim modele/adede göre.
 // Para birimi, ödeme yöntemi, puan, müşteri sayısı veya sahte vaat YOKTUR.
 type L4 = 'tr' | 'en' | 'ru' | 'de';
@@ -41,7 +41,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       lead: "Fermuar bozuldu, dikiş söküldü, pantolon yırtıldı: tatildeyken de çözümü var. Kıyafetin fotoğrafını WhatsApp'tan gönderin, ne yapılabileceğini ve fiyatı söyleyelim.",
       secs: [
         { h: 'Hangi sorunlara bakıyoruz?', ul: ["Fermuar değişimi: ₺300'den", "Paça kısaltma: ₺200'den", "Bel daraltma: ₺200'den", 'Söküklerin dikilmesi ve yırtık onarımı', 'Düğme, astar ve kemer tamiri'] },
-        { h: 'Nasıl ilerliyor?', ul: ["Sorunlu kıyafetin fotoğrafını WhatsApp'tan gönderin", 'Yapılacak işi ve fiyatı yazılı olarak bildiririz', "Atölyeye getirin ya da otelden/evden alım-teslim isteyin: otellere ücretsiz; eve Konyaaltı ve yakınında ücretsiz", "Normal tamir ertesi gün teslim edilir; acil işler 1–2 saatte hazırlanır"] },
+        { h: 'Nasıl ilerliyor?', ul: ["Sorunlu kıyafetin fotoğrafını WhatsApp'tan gönderin", 'Yapılacak işi ve fiyatı yazılı olarak bildiririz', "Atölyeye getirin ya da otelden/evden alım-teslim isteyin: eve ve otellere ücretsiz", "Normal tamir ertesi gün teslim edilir; acil işler 1–2 saatte hazırlanır"] },
         { h: 'Atölye ve çalışma saatleri', p: "Atölyemiz Konyaaltı, Hurma Mahallesi'nde. Haftanın her günü 08:00–23:00 arası açığız; Türkçe, İngilizce, Rusça ve Almanca yazışabilirsiniz." },
       ],
       faq: [
@@ -198,7 +198,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Neler yapıyoruz?', ul: ["Abiye ve gece elbisesi tadilatı: ₺800'den", "Gelinlik tadilatı: ₺800'den", 'Takım elbise ve ceket tadilatı', 'Daraltma, kısaltma, fermuar değişimi', "Ölçüye göre gece kıyafeti dikimi (elbise dikimi ₺800'den)"] },
         { h: 'Tarihinizi baştan yazın', p: "Etkinlik tarihini ve otelinizin bölgesini WhatsApp'ta yazın. Süre işe ve yoğunluğa göre değişir; abiye ve gelinlik gibi kapsamlı işlerde daha erken yazmanız gerekir. Yetişip yetişmeyeceğini baştan açıkça söyleriz." },
-        { h: 'Alım ve teslim', p: "Otelden alım-teslim tüm otel bölgelerinde ücretsizdir; evden alım Konyaaltı ve yakın mahallelerde ücretsiz, diğer adreslerde ücret WhatsApp'ta baştan söylenir." },
+        { h: 'Alım ve teslim', p: "Eve ve otele alım-teslim tüm bölgelerde ücretsizdir; yalnızca yapılan iş ücretlendirilir." },
       ],
       faq: [
         ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı ₺800'den başlar; işin kapsamı fotoğrafla netleşir."],

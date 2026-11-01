@@ -49,7 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL,                 lastModified: D_YENI, changeFrequency: 'weekly',  priority: 0.40 },
     { url: `${BASE_URL}/ilanlar`,    lastModified: D_YENI, changeFrequency: 'monthly', priority: 0.20 },
-    { url: `${BASE_URL}/bal`,        lastModified: D_YENI, changeFrequency: 'monthly', priority: 0.50 },
   ]
 
   const ilanlar = await getIlanlar()
@@ -65,7 +64,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.10,
     }))
 
-  const balUrunler = await getBalUrunler()
+  // Bal sayfaları gizlendi (next.config.mjs geçici yönlendirme): sitemap'e girmez. Geri açmak için BAL_ENABLED=true yapın.
+  const BAL_ENABLED = false as boolean
+  const balUrunler = BAL_ENABLED ? await getBalUrunler() : []
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const balUrls: MetadataRoute.Sitemap = balUrunler
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,6 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.40,
     }))
 
-  return [...staticPages, ...balUrls, ...ilanUrls]
+  return [...staticPages, ...(BAL_ENABLED ? [{ url: `${BASE_URL}/bal`, lastModified: D_YENI, changeFrequency: 'monthly' as const, priority: 0.5 }] : []), ...balUrls, ...ilanUrls]
 }
  

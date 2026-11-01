@@ -62,19 +62,25 @@ export const PRICE_FROM = {
   elbiseDikim: 800,
   gelinlik: 800,
   abiye: 800,
+  etekPantolonDikim: 1000,
+  cocukDikim: 1000,
+  damatlik: 20000,
 } as const;
 
+/** Yabancı dil sayfalarında fiyat EURO; kur varsayımı ₺20 = €1 (terzihizmeti.com.tr lib/facts.ts ile aynı). Gelinlik DİKİMİ yapılmaz (yalnız tadilat). */
+export const TRY_PER_EUR = 20;
+export const eurOf = (tl: number): number => Math.round(tl / TRY_PER_EUR);
+
 // ── Ücretsiz servis kuralı ─────────────────────────────────────────────────────────
-// 1) OTELLER: hizmet verilen tüm otel bölgelerinde (Konyaaltı, Lara, Güzeloba, Kundu, Belek, Side/Manavgat, Kemer…)
-//    otele alım-teslim ÜCRETSİZDİR.
-// 2) EV ADRESLERİ: yalnızca aşağıdaki Konyaaltı ve yakın mahallelerde ücretsiz; diğer adreslerde ücret bölgeye göre
+// Sahibin kararı (Ekim 2026): EVE VE OTELE alım-teslim hizmet verilen TÜM bölgelerde ücretsizdir (tek genel kural).
+// Aşağıdaki liste yalnızca geriye dönük uyumluluk içindir; isFreeService her zaman true döner. Eski not: bölgeye göre
 //    WhatsApp'ta netleşir. Liste işletme sahibinin onayladığı Ekim 2026 listesidir. Meltem idari olarak Muratpaşa'ya
 //    bağlıdır ancak Konyaaltı sınırında olduğu ve onaylı listede yer aldığı için korunmuştur.
 export const HOTEL_SERVICE_FREE = true;
 export const FREE_SERVICE_SLUGS = [
   'konyaalti', 'hurma', 'sarisu', 'liman', 'uncali', 'altinkum', 'ogretmenevleri', 'siteler', 'arapsuyu', 'gursu', 'uluc', 'meltem',
 ] as const;
-export const isFreeService = (slug: string): boolean => (FREE_SERVICE_SLUGS as readonly string[]).includes(slug);
+export const isFreeService = (_slug: string): boolean => true;
 
 // ── Teslim süreleri (TEK KAYNAK, 10 dil) ───────────────────────────────────────────
 // ACİL tamir/tadilat: 1–2 saat · NORMAL tamir/tadilat: ertesi gün teslim · ÖZEL DİKİM: modele ve adede göre (gün yazılmaz).
@@ -157,27 +163,27 @@ export const durationOf = (lang: DLang): DurationCopy => DURATION[lang] ?? DURAT
 export type SLang = 'tr' | 'en' | 'ru' | 'de';
 export const SERVICE_RULE: Record<SLang, { hotelFree: string; homeFree: string; homeByArea: string; full: string }> = {
   tr: {
-    hotelFree: 'Otellere servis ücretsiz',
-    homeFree: 'Konyaaltı ve yakın mahallelerde eve servis ücretsiz',
-    homeByArea: "Ev adreslerinde servis ücreti bölgeye göre WhatsApp'ta netleşir",
-    full: "Hizmet verdiğimiz tüm otel bölgelerinde otele servis ücretsizdir; ev adreslerine servis Konyaaltı ve yakın mahallelerde ücretsiz, diğer adreslerde bölgeye göre WhatsApp'ta netleşir.",
+    hotelFree: 'Eve ve otele servis ücretsiz',
+    homeFree: 'Eve ve otele servis ücretsiz',
+    homeByArea: 'Eve ve otele servis ücretsiz',
+    full: 'Hizmet verdiğimiz tüm bölgelerde eve ve otele alım-teslim ücretsizdir; yalnızca yapılan iş ücretlendirilir.',
   },
   en: {
-    hotelFree: 'Free service to hotels',
-    homeFree: 'Free home service in Konyaaltı and nearby',
-    homeByArea: 'Home pick-up fee depends on the area, confirmed on WhatsApp',
-    full: 'Service to hotels is free in every hotel area we cover; home pick-up is free in Konyaaltı and nearby neighbourhoods and priced by area elsewhere, confirmed on WhatsApp.',
+    hotelFree: 'Free service to homes and hotels',
+    homeFree: 'Free service to homes and hotels',
+    homeByArea: 'Free service to homes and hotels',
+    full: 'Pick-up and delivery to homes and hotels is free in every area we serve; you only pay for the work itself.',
   },
   ru: {
-    hotelFree: 'Выезд в отели бесплатно',
-    homeFree: 'Выезд на дом в Коньяалты и рядом бесплатно',
-    homeByArea: 'Выезд на дом — по району, уточняется в WhatsApp',
-    full: 'Выезд в отели бесплатный во всех отельных районах, где мы работаем; выезд на дом бесплатный в Коньяалты и соседних кварталах, в остальных районах стоимость уточняется в WhatsApp.',
+    hotelFree: 'Бесплатный выезд на дом и в отель',
+    homeFree: 'Бесплатный выезд на дом и в отель',
+    homeByArea: 'Бесплатный выезд на дом и в отель',
+    full: 'Забор и доставка на дом и в отели бесплатны во всех районах, где мы работаем; вы платите только за саму работу.',
   },
   de: {
-    hotelFree: 'Hotelservice kostenlos',
-    homeFree: 'Hausservice in Konyaaltı und Umgebung kostenlos',
-    homeByArea: 'Hausabholung je nach Gebiet, per WhatsApp geklärt',
-    full: 'Der Service zu Hotels ist in allen von uns bedienten Hotelgebieten kostenlos; die Abholung zu Hause ist in Konyaaltı und Umgebung kostenlos, anderswo je nach Gebiet per WhatsApp geklärt.',
+    hotelFree: 'Kostenloser Service zu Hause und im Hotel',
+    homeFree: 'Kostenloser Service zu Hause und im Hotel',
+    homeByArea: 'Kostenloser Service zu Hause und im Hotel',
+    full: 'Abholung und Lieferung zu Hause und im Hotel sind in allen von uns bedienten Gebieten kostenlos; Sie zahlen nur die eigentliche Arbeit.',
   },
 };

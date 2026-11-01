@@ -177,7 +177,7 @@ const FAQS = [
   ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+. Diğer dikim işlerinde fiyat kumaş ve modele göre belirlenir; fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Konyaaltı içi ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Eve ve otele ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
 ];
 

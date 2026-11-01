@@ -169,7 +169,7 @@ export default function BayanTerziPage() {
               </p>
               <p>
                 <strong>Abiye tamiri ve kısaltmada</strong> taş ve süslemeler korunarak işlem yapılmaktadır.
-                Tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden alım ve teslim ücretsizdir; eve servis Konyaaltı ve yakınında ücretsizdir.
+                Tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden alım ve teslim ücretsizdir; eve de ücretsizdir.
               </p>
             </div>
           </div>
