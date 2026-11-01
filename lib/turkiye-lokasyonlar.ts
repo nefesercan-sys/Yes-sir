@@ -52,4 +52,5 @@ export const ANTALYA_ILCELERI: Lokasyon[] = [
   { slug: 'kemer', ad: 'Kemer' },
   { slug: 'kepez', ad: 'Kepez' },
   { slug: 'dosemealti', ad: 'Döşemealtı' },
+  { slug: 'serik', ad: 'Serik' },
 ];

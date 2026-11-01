@@ -52,7 +52,7 @@ const nextConfig = {
       },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
       // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
-      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa', 'serik'].map((slug) => ({
+      ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa'].map((slug) => ({
         source: `/terzi/antalya/${slug}`, destination: '/terzi', permanent: true,
       })),
       // Eski /terzi/bolge/manavgat adresi (bölge sayfası yok) ilçe sayfasına gider
