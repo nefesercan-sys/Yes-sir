@@ -34,10 +34,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
   title: {
     template: "%s",
-    default: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    default: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
   },
   description:
-    "Türkiye'nin üretici & tedarikçi platformu. 20+ sektörde ücretsiz ilan verin, teklif alın. Tekstil, gıda, lojistik, fason ve daha fazlası. Üretici, tedarikçi ve alıcıları buluşturuyoruz.",
+    "Konyaaltı Antalya'da Terzi Can: tadilat, özel dikim, tekstil üretimi. Eve ve otele ücretsiz servis. Hurma Mahallesi. Her gün 08:00–23:00.",
 
   authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
   creator: "SwapHubs",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
+    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
     description:
-      "20+ sektörde ücretsiz ilan verin. Tedarikçi, üretici ve alıcıları buluşturan Türkiye'nin B2B platformu.",
+      "Konyaaltı Antalya'da terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele ücretsiz servis.",
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
@@ -74,8 +74,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "SwapHubs — Türkiye'den Dünyaya Hizmet & Ürün Platformu",
-    description: "20+ sektörde ücretsiz ilan verin, teklif alın.",
+    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
+    description: "Antalya terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele ücretsiz servis.",
     site: "@swaphubs",
     images: ["https://swaphubs.com/swaphubs-og.jpg"],
   },

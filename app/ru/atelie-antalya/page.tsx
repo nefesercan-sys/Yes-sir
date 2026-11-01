@@ -100,8 +100,8 @@ const jsonLd = {
         'Профессиональное ателье в Анталии, район Коньяалты (Хурма). Ремонт и пошив одежды, подгонка по фигуре, замена молнии и фурнитуры, работа с кожей и плотными тканями, срочный ремонт.',
       url: PAGE_URL,
       telephone: PHONE_E164,
-      priceRange: '₺₺',
-      currenciesAccepted: 'TRY, RUB, USD, EUR',
+      priceRange: '$$',
+      currenciesAccepted: 'EUR, TRY',
       paymentAccepted: 'Cash, Credit Card',
       image: [OG_IMAGE],
       // DÜZELTME: uydurma adres yerine gerçek Maps kaydındaki adres.
@@ -137,12 +137,8 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Услуги ателье',
         itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 200, priceCurrency: 'TRY', minPrice: 200 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Замена молнии' }, priceSpecification: { '@type': 'PriceSpecification', price: 120, priceCurrency: 'TRY', minPrice: 120 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Подгонка по фигуре' }, priceSpecification: { '@type': 'PriceSpecification', price: 180, priceCurrency: 'TRY', minPrice: 180 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Пошив платья на заказ' }, priceSpecification: { '@type': 'PriceSpecification', price: 800, priceCurrency: 'TRY', minPrice: 800 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Ремонт кожаных изделий' }, priceSpecification: { '@type': 'PriceSpecification', price: 300, priceCurrency: 'TRY', minPrice: 300 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Глажка / отпаривание' }, priceSpecification: { '@type': 'PriceSpecification', price: 60, priceCurrency: 'TRY', minPrice: 60 } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 10, priceCurrency: 'EUR', minPrice: 10 } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Пошив платья на заказ' }, priceSpecification: { '@type': 'PriceSpecification', price: 40, priceCurrency: 'EUR', minPrice: 40 } },
         ],
       },
       // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)

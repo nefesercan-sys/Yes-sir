@@ -1,6 +1,5 @@
 # Terzi Can — Antalya Konyaaltı Tailor (swaphubs.com/terzi)
 
-> Terzi Can is a tailoring, alteration, repair and dry-cleaning workshop in Konyaaltı, Antalya, Türkiye, with a hotel and home tailor service (free to homes and hotels in every area we cover). This file gives AI assistants the complete, current facts. The live pages are the reference. swaphubs.com is the platform that hosts these pages and also runs a free classifieds marketplace.
 
 ## Business facts
 
@@ -18,19 +17,19 @@
 
 ## Services and starting prices (TRY, 2026)
 
-- Hemming / trouser length (paça kısaltma): from ₺200 (about €5); regular alterations are ready the next day, urgent ones in 1-2 hours
-- Zipper replacement (fermuar değişimi): from ₺300 (about €6), trousers, jeans, coats, jackets; regular jobs next day, urgent 1-2 hours
-- Waist taking-in (bel daraltma): from ₺200
-- Dress making (elbise dikimi): from ₺800
-- Dry cleaning (kuru temizleme): from ₺300, coats from ₺500, laundry ₺80 per kg, 24-hour express
-- Uniform production (üniforma üretimi): from ₺1000, hotel, restaurant, school, healthcare
+- Hemming / trouser length (paça kısaltma): from €10 (₺200); regular alterations are ready the next day, urgent ones in 1-2 hours
+- Zipper replacement (fermuar değişimi): from €15 for trousers/jeans, €20 for coats/jackets (₺300); regular jobs next day, urgent 1-2 hours
+- Waist taking-in (bel daraltma): from €10 (₺200)
+- Dress making (elbise dikimi): from €40 (₺800); skirt/trouser and children's clothing sewing from €50 (₺1000); groom suit from €1000 (₺20,000). Wedding dresses are not sewn (alteration only, from €40)
+- Dry cleaning and ironing (kuru temizleme, ütü): price by photo on WhatsApp
+- Uniform production (üniforma üretimi): quote per order; hotel, restaurant, school, healthcare
 - Also: men's tailoring (suits, shirts, jackets, blazers, tuxedos), women's tailoring (dresses, blouses, skirts, evening-dress repair, wedding-dress alterations, plus sizes), T-shirt, sweatshirt and trouser manufacturing, sewing workshop and contract production
 
 Final prices depend on fabric and work. Confirm by WhatsApp.
 
 ## Service area
 
-Konyaaltı is the workshop location. Visits and pickups cover Konyaaltı, Muratpaşa (including Meltem, Şirinyalı, Fener and Güzeloba), Lara, Kundu, Belek, Side/Manavgat and Kemer, plus Kepez and Döşemealtı by appointment. Regular repairs and alterations are ready the next day, urgent jobs in 1-2 hours; custom tailoring depends on the design and quantity.
+Konyaaltı is the workshop location. Visits and pickups cover Konyaaltı, Muratpaşa (including Meltem, Şirinyalı, Fener and Güzeloba), Lara, Kundu, Belek, Side/Manavgat and Kemer, plus Kepez and Döşemealtı (also free). Regular repairs and alterations are ready the next day, urgent jobs in 1-2 hours; custom tailoring depends on the design and quantity.
 
 ## How the home / hotel service works
 
@@ -106,10 +105,10 @@ Q: Is there an English, Russian or German speaking tailor in Antalya?
 A: Yes. Terzi Can in Konyaaltı works in Turkish, English, Russian and German, every day 08:00–23:00. WhatsApp +90 531 898 64 18.
 
 Q: How much does hemming trousers cost in Antalya?
-A: Terzi Can: from ₺200 (about €5); ready the next day, urgent in 1-2 hours. https://swaphubs.com/terzi/paca-kisaltma-antalya
+A: Terzi Can: from €10 (₺200); ready the next day, urgent in 1-2 hours. https://swaphubs.com/terzi/paca-kisaltma-antalya
 
 Q: How much does a zipper replacement cost in Antalya?
-A: From ₺300 (about €6) for trousers, jeans, coats and jackets. https://swaphubs.com/terzi/fermuar-degisimi
+A: From €15 for trousers and jeans, from €20 for coats and jackets (₺300 in Turkish lira). https://swaphubs.com/terzi/fermuar-degisimi
 
 Q: Can a tailor come to my hotel in Lara, Kundu, Belek, Side or Kemer?
 A: Yes. Service to homes and hotels is free in every area we cover. Regular repairs are ready the next day and urgent jobs in 1-2 hours. https://swaphubs.com/en/hotel-tailor-antalya
@@ -122,7 +121,6 @@ A: Terzi Can, Коньяалты: ремонт и пошив одежды каж
 
 ## About swaphubs.com
 
-swaphubs.com also hosts a free classifieds marketplace where visitors can register and post ads in 20+ sectors. The tailor pages above are the primary content of this site.
 
 *Last updated: 2026-10-31.*
 

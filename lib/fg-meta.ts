@@ -250,7 +250,7 @@ const NEAR_KW: Record<L3, string> = { en: 'tailor near me', ru: 'портной 
 /** Hizmet başına başlangıç fiyatı (EUR); null = fotoğrafla fiyat. Yalnızca EN/RU/DE sayfalarda gösterilir. */
 export const EUR_FROM: Record<string, number | null> = {
   paca: 10, kot: 10, bel: 10, pantolon: 10, kol: 10, takim: 10, 'elbise-tamir': 10, gomlek: 10, tisort: 10, etek: 10,
-  'kiyafet-tamiri': 10, beden: 10, fermuar: 20, mont: 15, deri: 30,
+  'kiyafet-tamiri': 10, beden: 10, fermuar: 15, mont: 20, deri: 30,
 };
 export const eurFromText = (lang: string, id: string): string => {
   const n = EUR_FROM[id];

@@ -342,13 +342,13 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'kol', icon: '🧥', time: 'repair', priceText: {
-      tr: 'Gömlek kol boyu kısaltma ₺200, ceket kol boyu kısaltma ₺600, deri ceket kol boyu kısaltma ₺600–800.', en: 'Price by photo on WhatsApp.', ru: 'Цена по фото в WhatsApp.', de: 'Preis per Foto über WhatsApp.',
+      tr: 'Kol boyu kısaltma fiyatı kıyafete göre belirlenir; fotoğrafı WhatsApp\'tan gönderin.', en: 'Price by photo on WhatsApp.', ru: 'Цена по фото в WhatsApp.', de: 'Preis per Foto über WhatsApp.',
     },
     slug: { tr: 'kol-boyu-kisaltma', en: 'sleeve-shortening', ru: 'ukorochenie-rukavov', de: 'aermel-kuerzen' },
     name: { tr: 'Kol Boyu Kısaltma', en: 'Sleeve Shortening', ru: 'Укорочение рукавов', de: 'Ärmel kürzen' },
     q: { tr: 'kol boyu kısaltma', en: 'sleeve shortening', ru: 'укорочение рукавов', de: 'Ärmel kürzen' },
     intro: {
-      tr: 'Ceket, mont, palto, gömlek, kazak ve elbisede kol boyu kısaltma yapılır. Kol boyu, giysi üzerinizdeyken ve kolunuz doğal duruşundayken işaretlenir. Kol boyu kısaltma ücreti: gömlek ₺200, ceket ₺600, deri ceket ₺600–800. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
+      tr: 'Ceket, mont, palto, gömlek, kazak ve elbisede kol boyu kısaltma yapılır. Kol boyu, giysi üzerinizdeyken ve kolunuz doğal duruşundayken işaretlenir. Kol boyu kısaltma ücreti kıyafete göre belirlenir. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
       en: 'Sleeves are shortened on jackets, coats, shirts, sweaters and dresses. The length is marked while you wear the garment with your arm in a natural position. Normal jobs are ready the next day, urgent ones in 1–2 hours.',
       ru: 'Рукава укорачиваем у пиджаков, курток, пальто, рубашек, свитеров и платьев. Длину отмечают, пока вещь на вас и рука в естественном положении. Обычные работы готовы на следующий день, срочные — за 1–2 часа.',
       de: 'Ärmel werden bei Sakkos, Jacken, Mänteln, Hemden, Pullovern und Kleidern gekürzt. Die Länge wird am getragenen Kleidungsstück bei natürlicher Armhaltung markiert. Normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',

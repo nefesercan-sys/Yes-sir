@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sayfa Bulunamadı — SwapHubs',
+  title: 'Sayfa Bulunamadı — Terzi Can Antalya',
   description: 'Aradığınız sayfa mevcut değil. Ana sayfaya dönün.',
   robots: 'noindex, nofollow',
 };

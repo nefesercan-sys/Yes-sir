@@ -327,7 +327,7 @@ export default function KonyaaltiTerziPage() {
           <p style={{ fontSize: '.88rem', color: D.s, lineHeight: 1.85, margin: '0 0 1.5rem' }}>
             <strong style={{ color: D.ink }}>Terzi Can</strong> — Konyaaltı merkezli profesyonel terzi atölyesi.
             Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma, kuru temizleme ve ütü.
-            Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine ücretsiz kapıdan alım-teslim.
+            Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine, ayrıca hizmet verdiğimiz tüm bölgelerde eve ve otele ücretsiz alım-teslim.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 10 }}>
             {NEIGHBORHOODS.map(n => (
