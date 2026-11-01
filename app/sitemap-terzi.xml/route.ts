@@ -15,13 +15,21 @@ const BASE_URL = 'https://swaphubs.com'
 // lastmod: yalnızca içeriği gerçekten değişen sayfalar güncel tarihi alır (sahte güncelleme sinyali verilmez).
 // 2026-10-30: süre/ücretsiz servis/Muratpaşa/kopya içerik düzeltmeleriyle değişen terzi sayfaları.
 // Bu düzeltmelerden etkilenmeyen sayfalar (keten/pamuk ve Anavera tekstil tanıtımları, üniforma) eski tarihlerinde kalır.
-const CHANGED = '2026-10-30'
+const CHANGED = '2026-11-01'
 const OLD = '2026-10-04'
 const UNCHANGED_PREFIXES = ['/dogal-keten-pamuk-giyim', '/en/linen-clothing-custom-made-antalya', '/ru/lnyanaya-odezhda-poshiv-antalya', '/de/leinenkleidung-massanfertigung-antalya',
   '/tekstil-antalya', '/en/textile-manufacturer-antalya', '/ru/tekstilnoe-proizvodstvo-antalya', '/de/textilhersteller-antalya', '/terzi/uniforma-uretimi-antalya']
 const lastmodOf = (url: string) => (UNCHANGED_PREFIXES.some((p) => url === `${BASE_URL}${p}`) ? OLD : CHANGED)
 // terzihizmeti.com.tr'ye canonical'lanan sayfalar sitemap'e girmez
 const isOwnCanonical = (url: string) => !crossCanonical(url.replace(BASE_URL, ''))
+// next.config.mjs'te terzihizmeti.com.tr'ye 301 verilen Türkçe yollar: yönlenen adres sitemap'te bulunmaz. Yönlendirme eklenince buraya da ekle.
+const MOVED_TO_TZ = new Set([
+  '/terzi/paca-kisaltma-antalya', '/terzi/fermuar-degisimi', '/terzi/uniforma-uretimi-antalya', '/terzi/eve-gelen-terzi-antalya',
+  '/terzi/bay-terzi-antalya', '/terzi/bayan-terzi-antalya', '/terzi/dikis-atolyesi-antalya', '/terzi/kuru-temizleme-antalya',
+  '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
+  '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', '/antalya-terzi-elbise-dikimi', '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
+])
+const isMoved = (url: string) => MOVED_TO_TZ.has(url.replace(BASE_URL, ''))
 
 export async function GET() {
   const terziSayfalar = [
@@ -106,7 +114,7 @@ export async function GET() {
   const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
   const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
   const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) })), ...seoUnique]
-    .filter((x) => isOwnCanonical(x.url))
+    .filter((x) => isOwnCanonical(x.url) && !isMoved(x.url))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
