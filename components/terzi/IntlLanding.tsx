@@ -93,7 +93,7 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
         <section style={{ marginBottom: '1.8rem' }}>
           <H2>{ZCOPY[lang].zonesLabel}</H2>
           <p style={{ margin: 0 }}>
-            {ZONE_SLUGS.map((z, i) => (
+            {ZONE_SLUGS.filter((z) => z !== 'antalya').map((z, i) => (
               <span key={z}>{i > 0 && ' · '}<Link href={zoneUrl(lang, z)} style={{ color: C.green }}>{zoneData(lang, z).name}</Link></span>
             ))}
           </p>

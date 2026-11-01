@@ -1,5 +1,6 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
+import { zoneAlt } from '@/lib/intl-zones';
 import { crossCanonical } from '@/lib/cross-canonical';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -58,7 +59,17 @@ export const metadata: Metadata = {
     'dress alteration Antalya hotel','suit alteration Antalya',
   ],
   // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
-  alternates: { canonical: crossCanonical('/en/hotel-tailor-antalya')! },
+  alternates: {
+    canonical: crossCanonical('/en/hotel-tailor-antalya')!,
+    languages: {
+      tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+      en: 'https://swaphubs.com/en/hotel-tailor-antalya',
+      ru: 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
+      de: 'https://swaphubs.com/de/schneider-service-hotel-antalya',
+      ...zoneAlt('antalya'),
+      'x-default': 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+    },
+  },
   openGraph: {
     title: 'Mobile Tailor Antalya · Hotel Tailor Service',
     description: 'Mobile tailor service to your hotel in Belek, Lara, Kemer, Side and nearby districts. Accepts foreign currencies & cards.',

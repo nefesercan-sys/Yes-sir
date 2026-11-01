@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { zoneAlt } from '@/lib/intl-zones';
 import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -106,7 +107,17 @@ export const metadata: Metadata = {
     'подгонка платья Анталья отель','подгонка костюма Анталья',
   ],
   // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
-  alternates: { canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya')! },
+  alternates: {
+    canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya')!,
+    languages: {
+      tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+      en: 'https://swaphubs.com/en/hotel-tailor-antalya',
+      ru: 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
+      de: 'https://swaphubs.com/de/schneider-service-hotel-antalya',
+      ...zoneAlt('antalya'),
+      'x-default': 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+    },
+  },
   openGraph: {
     title: 'Выездной портной Анталья · Обслуживание в отеле',
     description: 'Выездной портной приедет в ваш отель в Белеке, Ларе, Кемере и по всей Анталье.',

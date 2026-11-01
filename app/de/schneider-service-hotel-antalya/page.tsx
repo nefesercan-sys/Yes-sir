@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { zoneAlt } from '@/lib/intl-zones';
 import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -106,7 +107,17 @@ export const metadata: Metadata = {
     'Kleid ändern Antalya Hotel','Anzug ändern Antalya',
   ],
   // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
-  alternates: { canonical: crossCanonical('/de/schneider-service-hotel-antalya')! },
+  alternates: {
+    canonical: crossCanonical('/de/schneider-service-hotel-antalya')!,
+    languages: {
+      tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+      en: 'https://swaphubs.com/en/hotel-tailor-antalya',
+      ru: 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
+      de: 'https://swaphubs.com/de/schneider-service-hotel-antalya',
+      ...zoneAlt('antalya'),
+      'x-default': 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
+    },
+  },
   openGraph: {
     title: 'Mobiler Schneider Antalya · Schneiderservice im Hotel',
     description: 'Mobiler Schneiderservice zu Ihrem Hotel in Belek, Lara, Kemer und ganz Antalya.',
