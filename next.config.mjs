@@ -71,23 +71,6 @@ const nextConfig = {
         { source: `/terzi/konyaalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
         { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
       ]),
-      // Türkçe terzi içerik sayfaları terzihizmeti.com.tr'ye taşındı (tek kanonik kaynak).
-      // Form/talep akışları (/terzi, /terzi-talep, /terzi-cagir) ve bölge sayfaları burada kalır.
-      ...[
-        ['/terzi/paca-kisaltma-antalya', '/konyaalti-paca-kisaltma'],
-        ['/terzi/fermuar-degisimi', '/konyaalti-fermuar-tamiri'],
-        ['/terzi/uniforma-uretimi-antalya', '/antalya-uniforma-imalati'],
-        ['/terzi/eve-gelen-terzi-antalya', '/otele-gelen-terzi-antalya'],
-        ['/terzi/bay-terzi-antalya', '/antalya-terzi'],
-        ['/terzi/bayan-terzi-antalya', '/antalya-terzi'],
-        ['/terzi/dikis-atolyesi-antalya', '/antalya-terzi'],
-        ['/terzi/kuru-temizleme-antalya', '/antalya-terzi'],
-        ['/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', '/antalya-terzi'],
-        ['/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', '/antalya-terzi'],
-        ['/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', '/antalya-terzi'],
-        ['/antalya-terzi-elbise-dikimi', '/antalya-terzi'],
-        ['/antalyada-terzi-dikim-tamirat-utu-hizmetleri', '/antalya-terzi'],
-      ].map(([source, yol]) => ({ source, destination: `https://terzihizmeti.com.tr${yol}`, permanent: true })),
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       // Tek kayıt akışı: /kayit (bcrypt'li /api/auth/kayit); /uye-ol eski ve ikinci akıştır
       { source: '/uye-ol', destination: '/kayit', permanent: false },
