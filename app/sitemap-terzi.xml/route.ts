@@ -5,7 +5,7 @@ import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
-import { KONU_IDS, konuUrl } from '@/lib/intl-konu'
+import { KONU_IDS, konuUrl, konuLanguages, sixAlt } from '@/lib/intl-konu'
 import { PROMO_ALL } from '@/lib/intl-promo'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, isIndexable, type Lang } from '@/lib/seo-data'
 import { crossCanonical } from '@/lib/cross-canonical'
@@ -101,13 +101,13 @@ export async function GET() {
     // 📞 İletişim sayfası (TR; EN/RU/DE karşılıkları terzihizmeti.com.tr'de)
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly' })),
     // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
-    ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
+    ...(['keten', 'tekstil', 'acil', 'otel', 'etkinlik'] as const).flatMap((tp) => LANGS.map((l) => ({ url: `${BASE_URL}${TEKSTIL_URLS[tp][l]}`, priority: '0.80', freq: 'monthly', alt: tp === 'keten' || tp === 'tekstil' ? { ...hasAlt((x) => TEKSTIL_URLS[tp][x]), ...sixAlt(tp) } : hasAlt((x) => TEKSTIL_URLS[tp][x]) }))),
     // 🌍 Ek turist dilleri (ES/FR/PL/UK/NL/AR): tek tanıtım sayfası, kendi aralarında hreflang
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${iUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${iUrl(x)}`])) })),
     // 🧵 Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (6 dil, kendi aralarında hreflang)
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${svcgUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${svcgUrl(x)}`])) })),
     // 🎽 Promosyon tekstili ve baskılı bez çanta rehberi (10 dil, karşılıklı hreflang + x-default)
-    ...KONU_IDS.flatMap((t) => ILANGS.map((l) => ({ url: `${BASE_URL}${konuUrl(l, t)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${konuUrl(x, t)}`])) }))),
+    ...KONU_IDS.flatMap((t) => ILANGS.map((l) => ({ url: `${BASE_URL}${konuUrl(l, t)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(Object.entries(konuLanguages(t)).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])) }))),
     ...PROMO_ALL.map((x) => ({
       url: `${BASE_URL}${x.path}`, priority: '0.70', freq: 'monthly',
       alt: { ...Object.fromEntries(PROMO_ALL.map((y) => [y.hreflang, `${BASE_URL}${y.path}`])), 'x-default': `${BASE_URL}${PROMO_ALL[0].path}` },

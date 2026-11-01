@@ -112,3 +112,21 @@ export const KONU: Record<ILang, Record<KonuId, Konu>> = {
 
 export const konuUrl = (l: ILang, t: KonuId) => `/${l}/${KONU[l][t].slug}`;
 export const parseKonu = (l: ILang, slug: string): KonuId | undefined => KONU_IDS.find((t) => KONU[l][t].slug === slug);
+
+// ── 10 dilli hreflang: keten ve tekstil konularında TR/EN/RU/DE çekirdek sayfalarla karşılıklı bağ ──
+import { URLS as CORE_URLS } from '@/lib/tekstil-sayfalari';
+const SITE_ABS = 'https://swaphubs.com';
+const CORE_HL: Record<'tr' | 'en' | 'ru' | 'de', string> = { tr: 'tr-TR', en: 'en', ru: 'ru', de: 'de' };
+const SIX: ILang[] = ['es', 'fr', 'pl', 'uk', 'nl', 'ar'];
+/** Yeni 6 dil rehberleri (hreflang → mutlak URL). */
+export const sixAlt = (t: KonuId): Record<string, string> => Object.fromEntries(SIX.map((l) => [l, `${SITE_ABS}${konuUrl(l, t)}`]));
+/** Keten/tekstil için TR/EN/RU/DE çekirdek sayfalar; diğer konularda boş. */
+export const coreAlt = (t: KonuId): Record<string, string> =>
+  t === 'keten' || t === 'tekstil'
+    ? Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [CORE_HL[l], `${SITE_ABS}${CORE_URLS[t][l]}`]))
+    : {};
+/** Rehber sayfasının tam hreflang kümesi. */
+export const konuLanguages = (t: KonuId): Record<string, string> => {
+  const m = { ...coreAlt(t), ...sixAlt(t) };
+  return t === 'keten' || t === 'tekstil' ? { ...m, 'x-default': m['tr-TR'] } : m;
+};

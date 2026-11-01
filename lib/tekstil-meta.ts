@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { BASE, CONTENT, HREFLANG, LANGS, LOCALE, URLS, type Lang, type Topic } from './tekstil-sayfalari';
 import { PROMO_ALL } from './intl-promo';
+import { sixAlt } from './intl-konu';
 
 export function tekstilMetadata(topic: Topic, lang: Lang): Metadata {
   const c = CONTENT[topic][lang];
@@ -8,7 +9,7 @@ export function tekstilMetadata(topic: Topic, lang: Lang): Metadata {
   // Promosyon sayfası 10 dilde yayımlanır (4 dil + ES/FR/PL/UK/NL/AR): hreflang kümesi hepsini içerir.
   const languages: Record<string, string> = topic === 'promo'
     ? Object.fromEntries(PROMO_ALL.map((x) => [x.hreflang, `${BASE}${x.path}`]))
-    : Object.fromEntries(LANGS.map((l) => [HREFLANG[l], `${BASE}${URLS[topic][l]}`]));
+    : { ...Object.fromEntries(LANGS.map((l) => [HREFLANG[l], `${BASE}${URLS[topic][l]}`])), ...(topic === 'keten' || topic === 'tekstil' ? sixAlt(topic) : {}) };
   languages['x-default'] = `${BASE}${URLS[topic].tr}`;
   const ogImage = `${BASE}/swaphubs-og.jpg`;
   return {

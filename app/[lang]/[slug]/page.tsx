@@ -4,7 +4,7 @@ import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
 import SvcGuideLanding from '@/components/terzi/SvcGuideLanding';
 import KonuGuideLanding from '@/components/terzi/KonuGuideLanding';
-import { KONU, KONU_IDS, parseKonu, konuUrl } from '@/lib/intl-konu';
+import { KONU, KONU_IDS, parseKonu, konuUrl, konuLanguages } from '@/lib/intl-konu';
 import PromoGuideLanding from '@/components/terzi/PromoGuideLanding';
 import { SVCG, svcgUrl, parseSvcg } from '@/lib/intl-svc';
 import { PROMO, PROMO_ALL, promoUrl, parsePromo } from '@/lib/intl-promo';
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       title: { absolute: kc.title },
       description: kc.desc,
       robots,
-      alternates: { canonical: kurl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${konuUrl(l, konu)}`])) },
+      alternates: { canonical: kurl, languages: konuLanguages(konu) },
       openGraph: { title: kc.title, description: kc.desc, url: kurl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
       twitter: { card: 'summary_large_image', title: kc.title, description: kc.desc, images: [OG_DEFAULT] },
     };
