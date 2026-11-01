@@ -16,7 +16,7 @@ export const revalidate = 86400
 const BASE_URL = 'https://swaphubs.com'
 
 // Otel ana sayfası / bölge sayfaları için hreflang kümesi (sayfa <head> değerleriyle aynı olmalı)
-const FOUR_ZONES = ['belek', 'lara', 'guzeloba', 'side', 'kemer']
+const FOUR_ZONES = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu', 'muratpasa', 'goynuk']
 const HUB_TR = `${BASE_URL}/terzi/eve-gelen-terzi-antalya`
 const HUB_EN = `${BASE_URL}/en/hotel-tailor-antalya`, HUB_RU = `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`, HUB_DE = `${BASE_URL}/de/schneider-service-hotel-antalya`
 function zoneAltMap(z: (typeof ZONE_SLUGS)[number]): Record<string, string> {
@@ -89,7 +89,7 @@ export async function GET() {
   })
 
   // Yalnızca gerçekten sayfası olan bölgeler (lib/otel-bolgeleri.ts). Kundu için sayfa yok → eklenirse buraya da ekle.
-  const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer']
+  const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer', 'kundu', 'muratpasa', 'goynuk']
   turistik.forEach(slug => {
     terziSayfalar.push({ url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, priority: '0.80', freq: 'weekly', alt: zoneAltMap(slug as (typeof ZONE_SLUGS)[number]) })
     terziSayfalar.push({ url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, priority: '0.80', freq: 'weekly', alt: zoneAltMap(slug as (typeof ZONE_SLUGS)[number]) })

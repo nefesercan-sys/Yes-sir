@@ -83,6 +83,36 @@ export const OTEL_BOLGELERI: OtelBolgesi[] = [
       de: 'Kemer ist eine Küstenstadt bei Antalya, wo das Taurus-Gebirge auf das Meer trifft, bekannt für seine Marina und Resort-Hotels.',
     },
   },
+  {
+    slug: 'kundu',
+    name: 'Kundu',
+    hotels: [],
+    blurb: {
+      en: 'Kundu (Aksu) lies just east of Lara and is a hotel district with many 5-star all-inclusive resorts.',
+      ru: 'Кунду (Аксу) находится сразу к востоку от Лары — отельный район с множеством 5-звёздочных курортов «всё включено».',
+      de: 'Kundu (Aksu) liegt direkt östlich von Lara und ist ein Hotelbezirk mit vielen 5-Sterne-All-inclusive-Resorts.',
+    },
+  },
+  {
+    slug: 'muratpasa',
+    name: 'Muratpaşa',
+    hotels: [],
+    blurb: {
+      en: 'Muratpaşa is the central district of Antalya: Kaleiçi, hotels in the city centre and part of the Lara area.',
+      ru: 'Муратпаша — центральный район Антальи: Калеичи, отели в центре города и часть района Лара.',
+      de: 'Muratpaşa ist der zentrale Bezirk von Antalya: Kaleiçi, Hotels im Stadtzentrum und ein Teil des Lara-Gebiets.',
+    },
+  },
+  {
+    slug: 'goynuk',
+    name: 'Göynük',
+    hotels: [],
+    blurb: {
+      en: 'Göynük lies just north of Kemer: a quieter row of seaside hotels near the Göynük Canyon.',
+      ru: 'Гёйнюк находится к северу от Кемера: более тихая полоса отелей у моря рядом с каньоном Гёйнюк.',
+      de: 'Göynük liegt nördlich von Kemer: eine ruhigere Hotelreihe am Meer, nahe dem Göynük-Canyon.',
+    },
+  },
 ];
 
 export function bulOtelBolgesi(slug: string) {
