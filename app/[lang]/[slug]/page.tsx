@@ -4,6 +4,7 @@ import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
 import SvcGuideLanding from '@/components/terzi/SvcGuideLanding';
 import KonuGuideLanding from '@/components/terzi/KonuGuideLanding';
+import { HZ, HZ_IDS, parseHz, hzUrl, hzLanguages } from '@/lib/intl-hz';
 import { KONU, KONU_IDS, parseKonu, konuUrl, konuLanguages } from '@/lib/intl-konu';
 import PromoGuideLanding from '@/components/terzi/PromoGuideLanding';
 import { SVCG, svcgUrl, parseSvcg } from '@/lib/intl-svc';
@@ -21,6 +22,7 @@ export function generateStaticParams() {
     { lang, slug: SVCG[lang].slug },
     { lang, slug: PROMO[lang].slug },
     ...KONU_IDS.map((t) => ({ lang, slug: KONU[lang][t].slug })),
+    ...HZ_IDS.map((h) => ({ lang, slug: HZ[lang][h].slug })),
     ...ZONE_SLUGS.map((z) => ({ lang, slug: zoneSlug(lang, z) })),
   ]);
 }
@@ -59,6 +61,21 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
       openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
       twitter: { card: 'summary_large_image', title: sc.title, description: sc.desc, images: [OG_DEFAULT] },
+    };
+  }
+
+  const hz = parseHz(lang, slug);
+  if (hz) {
+    const hc = HZ[lang][hz];
+    const hurl = `${SITE}${hzUrl(lang, hz)}`;
+    return {
+      metadataBase: new URL(SITE),
+      title: { absolute: hc.title },
+      description: hc.desc,
+      robots,
+      alternates: { canonical: hurl, languages: hzLanguages(hz) },
+      openGraph: { title: hc.title, description: hc.desc, url: hurl, siteName: 'SwapHubs', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
+      twitter: { card: 'summary_large_image', title: hc.title, description: hc.desc, images: [OG_DEFAULT] },
     };
   }
 
@@ -117,6 +134,8 @@ export default async function Page({ params }: P) {
   if (!isILang(lang)) notFound();
   if (slug === SLUG[lang]) return <IntlLanding lang={lang} />;
   if (parseSvcg(lang, slug)) return <SvcGuideLanding lang={lang} />;
+  const hz = parseHz(lang, slug);
+  if (hz) return <KonuGuideLanding lang={lang} hz={hz} />;
   const konu = parseKonu(lang, slug);
   if (konu) return <KonuGuideLanding lang={lang} topic={konu} />;
   if (parsePromo(lang, slug)) return <PromoGuideLanding lang={lang} />;

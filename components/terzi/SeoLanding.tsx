@@ -4,6 +4,8 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import { hzSixForService } from '@/lib/intl-hz';
+import { sixAlt } from '@/lib/intl-konu';
 import { fitDesc } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -511,7 +513,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
       } as Record<string, string[]>)[lang],
     ])),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alternatesFor(lang, (l) => abs(serviceUrl(l, s))),
+    alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); const six = hzSixForService(s.slug.tr); const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : six; if (!Object.keys(sx).length) return a; const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(serviceUrl(l, s))])); return { ...a, languages: { ...core, ...sx, 'x-default': core.tr } }; })(),
     openGraph: {
       title: c.title, description: c.desc, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
@@ -538,7 +540,7 @@ export function hubMetadata(lang: Lang): Metadata {
     title: { absolute: title },
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: alternatesFor(lang, (l) => abs(SERVICE_BASE[l])),
+    alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(SERVICE_BASE[l])])); return { ...a, languages: { ...core, ...sixAlt('tamir'), 'x-default': core.tr } }; })(),
     openGraph: { title, description, url, siteName: 'SwapHubs Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
