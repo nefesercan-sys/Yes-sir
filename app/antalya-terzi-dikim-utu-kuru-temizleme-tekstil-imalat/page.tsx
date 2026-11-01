@@ -123,7 +123,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Ertesi gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tailor in Antalya Konyaalti — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! We offer English-speaking tailoring, alterations and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Портной в Анталье Коньяалты — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Говорим по-русски. Подгонка, пошив, химчистка, доставка в отель. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Портной в Анталье Коньяалты — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Говорим по-русски. Подгонка, пошив, ремонт, доставка в отель. WhatsApp: ${PHONE}` } },
       ],
     },
   ],
@@ -507,7 +507,7 @@ export default function AntalyaTerziPage() {
                 <div style={{ fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN, marginBottom: '.6rem' }}>🇷🇺 Русский</div>
                 <p style={{ fontSize: '.85rem', color: GRI, lineHeight: 1.8 }}>
                   Профессиональный портной в районе Коньяалты.
-                  Подгонка одежды, пошив, химчистка. WhatsApp: <strong>{PHONE}</strong>
+                  Подгонка одежды, пошив, ремонт. WhatsApp: <strong>{PHONE}</strong>
                 </p>
               </div>
               <div style={{ background: '#fff', padding: '1.6rem', borderLeft: `3px solid ${ALTIN}` }}>
