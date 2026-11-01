@@ -89,8 +89,7 @@ const nextConfig = {
       // Sadece sonu -antalya ile biten hatalı versiyonunu gerçek sayfasına aktarıyoruz.
       { source: '/terzi/fermuar-degisimi-antalya', destination: '/terzi/fermuar-degisimi', permanent: true },
 
-      // NOT: /antalya-terzi-elbise-dikimi de terzihizmeti.com.tr/antalya-terzi adresine taşındı (yukarıdaki listede); eski not geçersizdi:
-      // yönlendirme geri eklendi ve sitemap'ten çıkarıldı.
+      // Bu sayfalar swaphubs.com'da kalır (yönlendirme yok): 200 OK yanıtı verir ve sitemap'te listelenir.
     ]
   },
 

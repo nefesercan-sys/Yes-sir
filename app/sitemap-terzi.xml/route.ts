@@ -22,14 +22,6 @@ const UNCHANGED_PREFIXES = ['/dogal-keten-pamuk-giyim', '/en/linen-clothing-cust
 const lastmodOf = (url: string) => (UNCHANGED_PREFIXES.some((p) => url === `${BASE_URL}${p}`) ? OLD : CHANGED)
 // terzihizmeti.com.tr'ye canonical'lanan sayfalar sitemap'e girmez
 const isOwnCanonical = (url: string) => !crossCanonical(url.replace(BASE_URL, ''))
-// next.config.mjs'te terzihizmeti.com.tr'ye 301 verilen Türkçe yollar: yönlenen adres sitemap'te bulunmaz. Yönlendirme eklenince buraya da ekle.
-const MOVED_TO_TZ = new Set([
-  '/terzi/paca-kisaltma-antalya', '/terzi/fermuar-degisimi', '/terzi/uniforma-uretimi-antalya', '/terzi/eve-gelen-terzi-antalya',
-  '/terzi/bay-terzi-antalya', '/terzi/bayan-terzi-antalya', '/terzi/dikis-atolyesi-antalya', '/terzi/kuru-temizleme-antalya',
-  '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
-  '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', '/antalya-terzi-elbise-dikimi', '/antalyada-terzi-dikim-tamirat-utu-hizmetleri',
-])
-const isMoved = (url: string) => MOVED_TO_TZ.has(url.replace(BASE_URL, ''))
 
 export async function GET() {
   const terziSayfalar = [
@@ -126,7 +118,7 @@ export async function GET() {
   const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
   const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
   const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) })), ...seoUnique]
-    .filter((x) => isOwnCanonical(x.url) && !isMoved(x.url))
+    .filter((x) => isOwnCanonical(x.url))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
