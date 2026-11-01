@@ -33,7 +33,7 @@ const FAQ = [
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
-  { q: 'Is the hotel tailor visit free?', a: `The hotel visit is free in every hotel area we cover. You also pay for the tailoring work. Trouser hemming starts at ₺200 (€6), dress alterations from ₺200 (€7). WhatsApp: ${PHONE}` },
+  { q: 'Is the hotel tailor visit free?', a: `The hotel visit is free in every hotel area we cover. You also pay for the tailoring work. The price is confirmed on WhatsApp from a photo. WhatsApp: ${PHONE}` },
   { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; regular alterations are ready the next day and urgent jobs in 1–2 hours. We serve hotels in Belek, Lara, Kemer and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
@@ -259,13 +259,13 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','FREE','—'],
-                  ['Trouser / Pant Hemming','₺200+ (~€6)','Next day · urgent 1–2 h'],
-                  ['Zipper Replacement','₺300+ (~€9)','Next day · urgent 1–2 h'],
-                  ['Dress / Jacket Alteration','₺200+ (~€7)','Next day · urgent 1–2 h'],
-                  ['Sleeve Shortening','₺200+ (~€7)','Next day · urgent 1–2 h'],
-                  ['Evening Gown Repair','₺800+ (~€24)','Next day · urgent 1–2 h'],
-                  ['Wedding Dress Alteration','₺800+ (~€24)','Next day · urgent 1–2 h'],
-                  ['Tear Repair','₺100+ (~€3)','Next day · urgent 1–2 h'],
+                  ['Trouser / Pant Hemming','by photo','Next day · urgent 1–2 h'],
+                  ['Zipper Replacement','by photo','Next day · urgent 1–2 h'],
+                  ['Dress / Jacket Alteration','by photo','Next day · urgent 1–2 h'],
+                  ['Sleeve Shortening','by photo','Next day · urgent 1–2 h'],
+                  ['Evening Gown Repair','by photo','Next day · urgent 1–2 h'],
+                  ['Wedding Dress Alteration','by photo','Next day · urgent 1–2 h'],
+                  ['Tear Repair','by photo','Next day · urgent 1–2 h'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>

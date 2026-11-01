@@ -168,42 +168,42 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "gelinlik": [
   {
    "h": {
-    "tr": "{y} gelinlik tadilatı fiyatı",
-    "en": "Wedding dress alteration price in {y}",
-    "de": "Brautkleid ändern in {y}: Preis",
-    "ru": "Цена переделки свадебного платья в {y}",
-    "es": "Precio de arreglos de vestido de novia en {y}",
-    "fr": "Prix des retouches de robe de mariée à {y}",
-    "pl": "Cena przeróbek sukni ślubnej w {y}",
-    "uk": "Ціна переробки весільної сукні в {y}",
-    "nl": "Prijs aanpassing bruidsjurk in {y}",
-    "ar": "سعر تعديل فستان الزفاف في {y}"
+    "tr": "{y} abiye tadilatı fiyatı",
+    "en": "Evening dress alteration price in {y}",
+    "de": "Abendkleid ändern in {y}: Preis",
+    "ru": "Цена подгонки вечернего платья в {y}",
+    "es": "Precio de arreglos de vestido de noche en {y}",
+    "fr": "Prix des retouches de robe de soirée à {y}",
+    "pl": "Cena przeróbek sukni wieczorowej w {y}",
+    "uk": "Ціна переробки вечірньої сукні в {y}",
+    "nl": "Prijs aanpassing avondjurk in {y}",
+    "ar": "سعر تعديل فستان السهرة في {y}"
    },
    "p": {
-    "tr": "Gelinlik, abiye ve elbise tadilatı ₺800'den başlar. Kesin fiyat, kumaşa ve yapılacak işe göre ilk provada netleşir.",
-    "en": "Wedding dress, evening gown and dress alterations start from ₺800. The exact price is set at the first fitting, depending on fabric and the work needed.",
-    "de": "Änderungen an Braut-, Abend- und Kleidern beginnen ab ₺800. Den genauen Preis legen wir bei der ersten Anprobe nach Stoff und Aufwand fest.",
-    "ru": "Переделка свадебных, вечерних платьев и платьев — от ₺800. Точная цена определяется на первой примерке в зависимости от ткани и объёма работ.",
-    "es": "Los arreglos de vestidos de novia, de noche y de vestir empiezan desde ₺800. El precio exacto se fija en la primera prueba, según la tela y el trabajo.",
-    "fr": "Les retouches de robes de mariée, de soirée et d’habillées commencent à ₺800. Le prix exact est fixé au premier essayage, selon le tissu et le travail.",
-    "pl": "Przeróbki sukni ślubnych, wieczorowych i sukienek zaczynają się od ₺800. Dokładną cenę ustalamy na pierwszej przymiarce, zależnie od tkaniny i zakresu prac.",
-    "uk": "Переробка весільних, вечірніх суконь і суконь — від ₺800. Точну ціну визначають на першій примірці залежно від тканини та обсягу робіт.",
-    "nl": "Aanpassingen van bruids-, avond- en gewone jurken beginnen vanaf ₺800. De exacte prijs wordt bij de eerste pasbeurt bepaald, afhankelijk van stof en werk.",
-    "ar": "يبدأ تعديل فساتين الزفاف والسهرة والفساتين من ₺800. يُحدَّد السعر الدقيق في البروفة الأولى حسب القماش والعمل."
+    "tr": "Abiye, gelinlik ve elbise tadilatı ₺800'den başlar. Kesin fiyat, kumaşa ve yapılacak işe göre ilk provada netleşir.",
+    "en": "Evening gown, wedding dress and dress alterations start from ₺800. The exact price is set at the first fitting, depending on fabric and the work needed.",
+    "de": "Änderungen an Abend-, Braut- und Kleidern beginnen ab ₺800. Den genauen Preis legen wir bei der ersten Anprobe nach Stoff und Aufwand fest.",
+    "ru": "Переделка вечерних, свадебных платьев и платьев — от ₺800. Точная цена определяется на первой примерке в зависимости от ткани и объёма работ.",
+    "es": "Los arreglos de vestidos de noche, de novia y de vestir empiezan desde ₺800. El precio exacto se fija en la primera prueba, según la tela y el trabajo.",
+    "fr": "Les retouches de robes de soirée, de mariée et d’habillées commencent à ₺800. Le prix exact est fixé au premier essayage, selon le tissu et le travail.",
+    "pl": "Przeróbki sukni wieczorowych, ślubnych i sukienek zaczynają się od ₺800. Dokładną cenę ustalamy na pierwszej przymiarce, zależnie od tkaniny i zakresu prac.",
+    "uk": "Переробка вечірніх, весільних суконь і суконь — від ₺800. Точну ціну визначають на першій примірці залежно від тканини та обсягу робіт.",
+    "nl": "Aanpassingen van avond-, bruids- en gewone jurken beginnen vanaf ₺800. De exacte prijs wordt bij de eerste pasbeurt bepaald, afhankelijk van stof en werk.",
+    "ar": "يبدأ تعديل فساتين السهرة والزفاف والفساتين من ₺800. يُحدَّد السعر الدقيق في البروفة الأولى حسب القماش والعمل."
    }
   },
   {
    "h": {
-    "tr": "Gelinlik ve abiye provası ne zaman yapılır?",
-    "en": "When to book wedding and evening dress fittings",
-    "de": "Wann Anproben für Braut- und Abendkleid?",
-    "ru": "Когда делать примерки свадебного и вечернего платья?",
-    "es": "¿Cuándo probar el vestido de novia o de noche?",
-    "fr": "Quand essayer robe de mariée et de soirée ?",
-    "pl": "Kiedy przymiarki sukni ślubnej i wieczorowej?",
-    "uk": "Коли робити примірки весільної та вечірньої сукні?",
-    "nl": "Wanneer pasbeurten voor bruids- en avondjurk?",
-    "ar": "متى تُجرى بروفات فستان الزفاف والسهرة؟"
+    "tr": "Abiye ve gelinlik provası ne zaman yapılır?",
+    "en": "When to book evening and wedding dress fittings",
+    "de": "Wann Anproben für Abend- und Brautkleid?",
+    "ru": "Когда делать примерки вечернего и свадебного платья?",
+    "es": "¿Cuándo probar el vestido de noche o de novia?",
+    "fr": "Quand essayer robe de soirée et de mariée ?",
+    "pl": "Kiedy przymiarki sukni wieczorowej i ślubnej?",
+    "uk": "Коли робити примірки вечірньої та весільної сукні?",
+    "nl": "Wanneer pasbeurten voor avond- en bruidsjurk?",
+    "ar": "متى تُجرى بروفات فستان السهرة والزفاف؟"
    },
    "p": {
     "tr": "Boy, bel ve korse ayarı için düğünden birkaç hafta önce ilk provayı, düğüne yakın bir tarihte son provayı yapmanız önerilir.",
@@ -812,3 +812,16 @@ const YENI_FP = {
  }
 };
 export const ALT_BASLIKLAR: Record<Konu, Item[]> = { ...BASE, terziFp: [YENI_FP, BASE.terzi[1]], hizmetFp: [YENI_FP, BASE.hizmet[1]] };
+
+/** Konuya ait alt başlıkları döndürür. Türkçe dışındaki dillerde fiyat (₺) içeren cümleler çıkarılır; yer adı {y} yerleştirilir. */
+export function altMetinler(konu: Konu | Konu[], lang: L10, yer = 'Antalya') {
+  const konular = Array.isArray(konu) ? konu : [konu];
+  const fiyatSayfasi = konular.includes('fiyat');
+  return konular.flatMap((k) => ALT_BASLIKLAR[k]).map((a) => {
+    let p = a.p[lang].replace(/\{y\}/g, yer);
+    if (lang !== 'tr' && !fiyatSayfasi && p.includes('₺')) {
+      p = p.split(/(?<=[.!?])\s+/).filter((c) => !c.includes('₺')).join(' ').trim();
+    }
+    return { h: a.h[lang].replace(/\{y\}/g, yer), p };
+  }).filter((a) => a.p.length > 0);
+}

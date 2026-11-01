@@ -1,6 +1,6 @@
 // Örnek görsel şeridi: başlık (h3) + açıklama (figcaption) + dilde alt metin + ImageObject JSON-LD.
 // Görseller yapay zekâ ile üretilmiştir; "örnek görsel" etiketi ve not her zaman gösterilir.
-import { ALT_BASLIKLAR, type Konu } from '@/lib/alt-basliklar';
+import { altMetinler, type Konu } from '@/lib/alt-basliklar';
 import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 
 export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koyu', baslik, sayfaUrl, base = '', konu, yer = 'Antalya' }: {
@@ -43,10 +43,10 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
         </div>
         {konu && (
           <div style={{ marginTop: '2.2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.2rem' }}>
-            {(Array.isArray(konu) ? konu : [konu]).flatMap((k) => ALT_BASLIKLAR[k]).map((a, i) => (
+            {altMetinler(konu, lang, yer).map((a, i) => (
               <div key={i}>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h[lang].replace(/\{y\}/g, yer)}</h2>
-                <p style={{ color: soluk, fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p[lang].replace(/\{y\}/g, yer)}</p>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h}</h2>
+                <p style={{ color: soluk, fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p}</p>
               </div>
             ))}
           </div>

@@ -1,5 +1,5 @@
 // Konuya göre örnek görseller (yapay zekâ ile üretilmiş; "örnek görsel" etiketi ve not her zaman gösterilir).
-import { ALT_BASLIKLAR, type Konu } from '@/lib/alt-basliklar';
+import { altMetinler, type Konu } from '@/lib/alt-basliklar';
 import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 import type { Topic } from '@/lib/tekstil-sayfalari';
 
@@ -45,10 +45,10 @@ export default function OrnekGorseller({ topic, lang, url, base }: { topic: Topi
       </div>
         {(
           <div style={{ marginTop: '2.2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.2rem' }}>
-            {KONU_ALT[topic].flatMap((k) => ALT_BASLIKLAR[k]).map((a, i) => (
+            {altMetinler(KONU_ALT[topic], lang).map((a, i) => (
               <div key={i}>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h[lang].replace(/\{y\}/g, 'Antalya')}</h2>
-                <p style={{ color: '#475569', fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p[lang].replace(/\{y\}/g, 'Antalya')}</p>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 .35rem' }}>{a.h}</h2>
+                <p style={{ color: '#475569', fontSize: '.92rem', lineHeight: 1.6, margin: 0 }}>{a.p}</p>
               </div>
             ))}
           </div>

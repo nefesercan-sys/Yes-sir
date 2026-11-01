@@ -160,8 +160,8 @@ const EN2: T[] = [
   { titles: (n) => [`Men's & Women's Tailor in ${n} | Terzi Can`, `Tailor for Men and Women, ${n} | Terzi Can`, `Tailor in ${n} | Terzi Can`],
     core: (c) => V(c, [`Men's and women's tailor ${c.loc}: shirts, trousers, dresses, skirts, jackets; alterations and made to measure`, `Tailor for men and women ${c.loc}: alter, repair or sew to measure: shirts, trousers, dresses, jackets`]), extra: 'Clear prices',
     kw: (n) => [`mens tailor ${n}`, `womens tailor ${n}`, `suit trousers alteration ${n}`, `shirt tailor ${n}`, `dress tailor ${n}`, `tailor for men and women ${n}`] },
-  { titles: (n) => [`Tailor Near Me in ${n} · Open 7 Days | Terzi Can`, `Tailor in ${n}, Hemming from ₺200 | Terzi Can`, `Tailor in ${n} | Terzi Can`],
-    core: (c) => V(c, [`Tailor near you ${c.loc}: hemming from ₺200, zipper replacement from ₺300, repairs and custom sewing`, `Looking for a tailor ${c.loc}? Clear prices: hemming ₺200+, zippers ₺300+, repairs, custom clothes`]), extra: 'Quality work',
+  { titles: (n) => [`Tailor Near Me in ${n} · Open 7 Days | Terzi Can`, `Tailor in ${n}, Hemming & Zippers | Terzi Can`, `Tailor in ${n} | Terzi Can`],
+    core: (c) => V(c, [`Tailor near you ${c.loc}: hemming, zipper replacement, repairs and custom sewing`, `Looking for a tailor ${c.loc}? Price by photo on WhatsApp: hemming, zippers, repairs, custom clothes`]), extra: 'Quality work',
     kw: (n) => [`tailor near me ${n}`, `tailor prices ${n}`, `hemming price ${n}`, `zipper replacement price ${n}`, `tailor open sunday ${n}`, `tailor open late ${n}`] },
 ];
 const RU2: T[] = [
@@ -180,8 +180,8 @@ const RU2: T[] = [
   { titles: (n) => [`Портной для мужчин и женщин: ${n} | Terzi Can`, `Мужской и женский портной: ${n} | Terzi Can`, `Портной ${n} | Terzi Can`],
     core: (c) => V(c, [`Портной для мужчин и женщин ${c.loc}: рубашки, брюки, платья, юбки, пиджаки; подгонка и пошив`, `Мужская и женская одежда ${c.loc}: подгоним, отремонтируем или сошьём по меркам`]), extra: 'Понятные цены',
     kw: (n) => [`мужской портной ${n}`, `женский портной ${n}`, `подгонка брюк ${n}`, `пошив рубашки ${n}`, `пошив платья ${n}`] },
-  { titles: (n) => [`Портной рядом: ${n} · работаем 7 дней | Terzi Can`, `Портной ${n}: подшив от ₺200 | Terzi Can`, `Портной ${n} | Terzi Can`],
-    core: (c) => V(c, [`Портной рядом ${c.loc}: подшив от ₺200, замена молнии от ₺300, ремонт и пошив на заказ`, `Ищете портного ${c.loc}? Понятные цены: подшив от ₺200, молнии от ₺300, ремонт, пошив`]), extra: 'Качественно',
+  { titles: (n) => [`Портной рядом: ${n} · работаем 7 дней | Terzi Can`, `Портной ${n}: подшив и молнии | Terzi Can`, `Портной ${n} | Terzi Can`],
+    core: (c) => V(c, [`Портной рядом ${c.loc}: подшив, замена молнии, ремонт и пошив на заказ`, `Ищете портного ${c.loc}? Цена по фото в WhatsApp: подшив, молнии, ремонт, пошив`]), extra: 'Качественно',
     kw: (n) => [`портной рядом ${n}`, `ателье рядом ${n}`, `цены на подшив ${n}`, `замена молнии цена ${n}`, `ателье работает в воскресенье ${n}`, `ателье до 23:00 ${n}`] },
 ];
 const DE2: T[] = [
@@ -200,8 +200,8 @@ const DE2: T[] = [
   { titles: (n) => [`Damen- & Herrenschneider in ${n} | Terzi Can`, `Schneider für Damen und Herren ${n} | Terzi Can`, `Schneider ${n} | Terzi Can`],
     core: (c) => V(c, [`Damen- und Herrenschneider ${c.loc}: Hemden, Hosen, Kleider, Röcke, Sakkos; ändern und nach Maß`, `Schneider für Damen und Herren ${c.loc}: ändern, reparieren oder nach Maß nähen`]), extra: 'Klare Preise',
     kw: (n) => [`Herrenschneider ${n}`, `Damenschneider ${n}`, `Anzughose kürzen ${n}`, `Hemd nach Maß ${n}`, `Kleid nach Maß ${n}`] },
-  { titles: (n) => [`Schneider in der Nähe: ${n} · 7 Tage offen | Terzi Can`, `Schneider ${n}: Kürzen ab ₺200 | Terzi Can`, `Schneider ${n} | Terzi Can`],
-    core: (c) => V(c, [`Schneider in Ihrer Nähe ${c.loc}: Kürzen ab ₺200, Reißverschluss ab ₺300, Reparatur, Maßanfertigung`, `Schneider gesucht ${c.loc}? Klare Preise: Kürzen ab ₺200, Reißverschluss ab ₺300, Reparatur`]), extra: 'Saubere Arbeit',
+  { titles: (n) => [`Schneider in der Nähe: ${n} · 7 Tage offen | Terzi Can`, `Schneider ${n}: Kürzen & Reißverschluss | Terzi Can`, `Schneider ${n} | Terzi Can`],
+    core: (c) => V(c, [`Schneider in Ihrer Nähe ${c.loc}: Kürzen, Reißverschluss, Reparatur, Maßanfertigung`, `Schneider gesucht ${c.loc}? Preis per Foto über WhatsApp: Kürzen, Reißverschluss, Reparatur`]), extra: 'Saubere Arbeit',
     kw: (n) => [`Schneider in der Nähe ${n}`, `Schneider Preise ${n}`, `Hose kürzen Preis ${n}`, `Schneider sonntags geöffnet ${n}`, `Schneider abends geöffnet ${n}`] },
 ];
 

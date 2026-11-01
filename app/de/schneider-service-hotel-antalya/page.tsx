@@ -75,7 +75,7 @@ const jsonLd = {
         { '@type':'Question', name:'Welche Hotels in Belek und Lara werden bedient?',
           acceptedAnswer:{'@type':'Answer',text:`Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
-          acceptedAnswer:{'@type':'Answer',text:`Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
           acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am nächsten Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
@@ -276,13 +276,13 @@ export default function SchneiderServiceHotelAntalyaPage() {
               <tbody>
                 {[
                   ['Anfahrt','Kostenlos','—'],
-                  ['Hosen kürzen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
-                  ['Reißverschluss wechseln','ab ₺300','Nächster Tag · eilig 1–2 Std.'],
-                  ['Kleid / Jacke enger machen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
-                  ['Ärmel kürzen','ab ₺200','Nächster Tag · eilig 1–2 Std.'],
-                  ['Abendkleid reparieren','ab ₺800','Nächster Tag · eilig 1–2 Std.'],
-                  ['Brautkleid ändern','ab ₺800','Nächster Tag · eilig 1–2 Std.'],
-                  ['Riss reparieren','ab ₺100','Nächster Tag · eilig 1–2 Std.'],
+                  ['Hosen kürzen','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Reißverschluss wechseln','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Kleid / Jacke enger machen','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Ärmel kürzen','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Abendkleid reparieren','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Brautkleid ändern','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Riss reparieren','per Foto','Nächster Tag · eilig 1–2 Std.'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
@@ -302,7 +302,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h2>
             {[
               ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
-              ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Kürzen ab ₺200, Kleideränderungen ab ₺200.'],
+              ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos.'],
               ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
               ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
               ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
