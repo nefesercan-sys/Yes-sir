@@ -218,17 +218,52 @@ const KW_PLACE: Record<L3, string[]> = {
   de: ['Kleid reparieren', 'Hose kürzen', 'Reißverschluss wechseln', 'Maßanfertigung Leinen Baumwolle', 'Schneider Damen Herren'],
 };
 
+const PH = ' ☎ +90 531 898 64 18';
+const splitPhone = (d: string) => (d.endsWith(PH) ? [d.slice(0, -PH.length), PH] : [d, '']);
+const OPEN_NEAR: Record<L3, string> = {
+  en: 'Near you, open daily 08:00–23:00.',
+  ru: 'Рядом, ежедневно 08:00–23:00.',
+  de: 'In der Nähe, täglich 08:00–23:00 geöffnet.',
+};
+const NEAR_KW: Record<L3, string> = { en: 'tailor near me', ru: 'портной рядом', de: 'Schneider in der Nähe' };
+
+/** Hizmet başına başlangıç fiyatı (EUR); null = fotoğrafla fiyat. Yalnızca EN/RU/DE sayfalarda gösterilir. */
+export const EUR_FROM: Record<string, number | null> = {
+  paca: 10, kot: 10, bel: 10, pantolon: 10, kol: 10, takim: 10, 'elbise-tamir': 10, gomlek: 10, tisort: 10, etek: 10,
+  'kiyafet-tamiri': 10, beden: 10, fermuar: 20, mont: 15, deri: 30,
+};
+export const eurFromText = (lang: string, id: string): string => {
+  const n = EUR_FROM[id];
+  if (!n) return '';
+  return lang === 'en' ? `From €${n}` : lang === 'de' ? `Ab ${n} €` : lang === 'ru' ? `От ${n} €` : '';
+};
+const PHOTO: Record<L3, string> = { en: 'Price by photo on WhatsApp', ru: 'Цена по фото в WhatsApp', de: 'Preis per Foto über WhatsApp' };
+const OPEN_SHORT: Record<L3, string> = { en: 'open daily 08:00–23:00', ru: 'ежедневно 08:00–23:00', de: 'täglich 08:00–23:00' };
+
 /** Yakın bölge sayfası için elle yazılmış EN/RU/DE meta; kayıt yoksa undefined. */
 export function fgNearDistrict(lang: string, slug: string, name: string): FgMeta | undefined {
   const x = FG_DISTRICT[slug]?.[lang as L3];
   if (!x) return undefined;
-  return { title: x.t, desc: x.d, kw: Array.from(new Set([...x.kw, ...KW_PLACE[lang as L3].map((k) => `${k} ${name}`)])) };
+  const l = lang as L3;
+  const [body, ph] = splitPhone(x.d);
+  return {
+    title: x.t,
+    desc: `${body} ${OPEN_NEAR[l]}${ph}`,
+    kw: Array.from(new Set([`${NEAR_KW[l]} ${name}`, ...x.kw, ...KW_PLACE[l].map((k) => `${k} ${name}`)])),
+  };
 }
 
-/** Hizmet sayfası için elle yazılmış EN/RU/DE meta; kayıt yoksa undefined. */
+/** Hizmet sayfası için elle yazılmış EN/RU/DE meta (başlangıç fiyatı dahil); kayıt yoksa undefined. */
 export function fgServiceMeta(lang: string, id: string): FgMeta | undefined {
   const x = FG_SERVICE[id]?.[lang as L3];
   if (!x) return undefined;
-  const city = { en: ['Antalya', 'Konyaaltı'], ru: ['Анталья', 'Коньяалты'], de: ['Antalya', 'Konyaaltı'] }[lang as L3];
-  return { title: x.t, desc: x.d, kw: Array.from(new Set(x.kw.flatMap((k) => [k, `${k} ${city[0]}`, `${k} ${city[1]}`]))) };
+  const l = lang as L3;
+  const city = { en: ['Antalya', 'Konyaaltı'], ru: ['Анталья', 'Коньяалты'], de: ['Antalya', 'Konyaaltı'] }[l];
+  const [body, ph] = splitPhone(x.d);
+  const price = eurFromText(lang, id) || PHOTO[l];
+  return {
+    title: x.t,
+    desc: `${body} ${price} · ${OPEN_SHORT[l]}.${ph}`,
+    kw: Array.from(new Set([...x.kw.flatMap((k) => [k, `${k} ${city[0]}`, `${k} ${city[1]}`]), `${NEAR_KW[l]} ${city[0]}`])),
+  };
 }

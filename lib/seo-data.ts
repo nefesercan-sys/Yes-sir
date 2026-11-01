@@ -9,6 +9,7 @@
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
 
+import { eurFromText } from '@/lib/fg-meta';
 import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI, ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import { SITE_URL, BUSINESS_ID as B_ID, PHONE_DISPLAY, PHONE_E164, MAPS_URL, FREE_SERVICE_SLUGS as FREE_SLUGS, isFreeService as isFree, PRICE_FROM, DURATION } from '@/lib/business';
 
@@ -565,4 +566,6 @@ export const TIME_TEXT: Record<TimeKey, L4> = Object.fromEntries((['repair', 'cu
 ])) as Record<TimeKey, L4>;
 export const timeOf = (lang: Lang, s: Service) => TIME_TEXT[s.time][lang];
 export const priceOf = (lang: Lang, s: Service) =>
-  s.priceText ? s.priceText[lang] : s.priceFrom && lang === 'tr' ? `₺${s.priceFrom}'den başlar` : null; // yabancı dil sayfalarında fiyat yazılmaz
+  lang !== 'tr' && eurFromText(lang, s.id)
+    ? eurFromText(lang, s.id)
+    : s.priceText ? s.priceText[lang] : s.priceFrom && lang === 'tr' ? `₺${s.priceFrom}'den başlar` : null; // yabancı dilde: EUR başlangıç fiyatı (varsa), yoksa fotoğrafla
