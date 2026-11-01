@@ -210,6 +210,26 @@ const FG_SERVICE: Record<string, Row> = {
     ru: { t: "Подгонка одежды по вашим меркам, Анталья | Terzi Can", d: "Изменился вес? Подгоним одежду по вашим меркам в Анталье: ушьём или расширим, с примеркой. ☎ +90 531 898 64 18", kw: ["подгонка одежды по меркам", "уменьшить размер одежды", "расширить одежду Анталья"] },
     de: { t: "Kleidung auf Ihre Maße ändern lassen, Antalya | Terzi Can", d: "Gewicht verändert? Wir passen Kleidung in Antalya an Ihre Maße an: enger oder weiter, mit Anprobe. ☎ +90 531 898 64 18", kw: ["Kleidung auf Maß ändern", "Kleidung enger machen lassen", "Kleidung weiter machen Antalya"] },
   },
+  "etek": {
+    en: { t: "Skirt Hemming & Alteration Antalya | Terzi Can", d: "Skirt shortening, taking in and zipper repair in Antalya. Free pick-up. ☎ +90 531 898 64 18", kw: ["skirt hemming Antalya", "shorten skirt", "skirt alteration", "take in skirt"] },
+    ru: { t: "Подшив и ушивание юбок в Анталье | Terzi Can", d: "Укорачивание, ушивание и ремонт молнии юбок в Анталье. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["подшив юбки Анталья", "укоротить юбку", "ушить юбку", "переделка юбок"] },
+    de: { t: "Rock kürzen & ändern in Antalya | Terzi Can", d: "Röcke kürzen und enger machen in Antalya. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Rock kürzen Antalya", "Rock ändern", "Rock enger machen", "Schneider Rock"] },
+  },
+  "gece-kiyafeti": {
+    en: { t: "Evening Wear Alteration Antalya | Terzi Can", d: "Evening dress alteration in Antalya: taking in, hem, straps. Free pick-up. ☎ +90 531 898 64 18", kw: ["evening dress alteration Antalya", "formal wear tailor", "evening gown hemming", "night outfit alteration"] },
+    ru: { t: "Переделка вечерних нарядов в Анталье | Terzi Can", d: "Переделка вечерних платьев в Анталье: ушивание, длина. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["переделка вечернего платья Анталья", "подгонка вечернего наряда", "подшить вечернее платье"] },
+    de: { t: "Abendgarderobe ändern in Antalya | Terzi Can", d: "Abendkleider ändern in Antalya: enger machen, Saum. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Abendkleid ändern Antalya", "festliche Kleidung Schneider", "Abendkleid kürzen"] },
+  },
+  "kiyafet-tamiri": {
+    en: { t: "Clothing Repair Antalya, Tears & Seams | Terzi Can", d: "Clothing repair in Antalya: seams, tears, buttons, zippers. Free pick-up. ☎ +90 531 898 64 18", kw: ["clothing repair Antalya", "mend clothes", "fix torn clothes", "repair seams"] },
+    ru: { t: "Ремонт одежды в Анталье: швы, дыры | Terzi Can", d: "Ремонт одежды в Анталье: швы, дыры, пуговицы, молнии. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["ремонт одежды Анталья", "зашить одежду", "ремонт швов", "починить одежду"] },
+    de: { t: "Kleidung reparieren in Antalya, Risse & Nähte | Terzi Can", d: "Kleidung reparieren in Antalya: Nähte, Risse, Knöpfe, Reißverschlüsse. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Kleidung reparieren Antalya", "Risse nähen lassen", "Nähte reparieren", "Schneider Reparatur"] },
+  },
+  "ozel-dikim": {
+    en: { t: "Custom Tailoring Antalya, Made to Measure | Terzi Can", d: "Made-to-measure in Antalya: trousers, skirts, dresses, groom suits. Free pick-up. ☎ +90 531 898 64 18", kw: ["custom tailoring Antalya", "made to measure Antalya", "bespoke clothing", "groom suit tailor Antalya"] },
+    ru: { t: "Индивидуальный пошив в Анталье | Terzi Can", d: "Пошив по меркам в Анталье: брюки, юбки, платья, костюмы жениха. Бесплатный забор. ☎ +90 531 898 64 18", kw: ["индивидуальный пошив Анталья", "пошив по меркам", "пошив на заказ", "костюм жениха Анталья"] },
+    de: { t: "Maßanfertigung in Antalya | Terzi Can", d: "Maßschneiderei in Antalya: Hosen, Röcke, Kleider, Bräutigamanzüge. Gratis-Abholung. ☎ +90 531 898 64 18", kw: ["Maßanfertigung Antalya", "Maßschneiderei", "Anzug nach Maß", "Schneider Antalya"] },
+  },
 };
 
 const KW_PLACE: Record<L3, string[]> = {
