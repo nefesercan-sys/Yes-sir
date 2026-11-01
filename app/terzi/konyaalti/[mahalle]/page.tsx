@@ -6,7 +6,10 @@ import { MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
 export const revalidate = 3600;
 export const dynamicParams = false;
-const muratpasa = async (p: MahalleParams) => MURATPASA_MAHALLELERI.some((m) => m.slug === (await p.params).mahalle);
+const muratpasa = async (p: MahalleParams) => {
+  const { mahalle } = await p.params;
+  return MURATPASA_MAHALLELERI.some((m) => m.slug === mahalle);
+};
 export function generateStaticParams() {
   return [...mahalleStaticParams('konyaalti'), ...mahalleStaticParams('muratpasa')];
 }
