@@ -20,7 +20,7 @@ export interface ValueProp {
 }
 
 export const HOURS_LINE: Record<Lang, string> = {
-  tr: "Her gün 08:00–23:00 · Otellere servis ücretsiz · Konyaaltı ve yakınında eve de ücretsiz",
+  tr: "Her gün 08:00–23:00 · Eve ve otele ücretsiz servis",
   en: 'Every day 08:00–23:00 · Free service to hotels · free home pick-up in Konyaaltı and nearby',
   de: 'Täglich 08:00–23:00 · Hotelservice kostenlos · Hausabholung in Konyaaltı und Umgebung kostenlos',
   ru: 'Ежедневно 08:00–23:00 · Выезд в отели бесплатно · на дом бесплатно в Коньяалты и рядом',

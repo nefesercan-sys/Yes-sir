@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: "Online Terzi Hizmeti | Ölçüye Özel Dikim & Kargo | Terzi Can" },
   description:
-    "Türkiye'ye ve yurt dışına gönderimli online özel terzi. Abiye, gelinlik, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
+    "Türkiye'ye ve yurt dışına gönderimli online özel terzi. Abiye ve gelinlik tadilatı, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
   keywords: [
     'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
     'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',
-    'online gelinlik dikimi', 'online takım elbise dikimi',
+    'online gelinlik tadilatı', 'online takım elbise dikimi',
     'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
     'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Türkiye',
     'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terzi Can Online Terzi | Ölçüye Özel Dikim, Yurt Dışına Gönderim",
     description:
-      "WhatsApp üzerinden ölçü alımı, abiye, gelinlik ve takım elbise dikimi. Türkiye'ye ve yurt dışına gönderim; oturmayan kıyafette değişim veya düzeltme.",
+      "WhatsApp üzerinden ölçü alımı, abiye ve gelinlik tadilatı, takım elbise dikimi. Türkiye'ye ve yurt dışına gönderim; oturmayan kıyafette değişim veya düzeltme.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -114,7 +114,7 @@ const jsonLd = {
       name: 'Terzi Can Online Terzi',
       alternateName: ['Terzi Can E-Terzi', 'Online Terzi Türkiye', 'Terzi Can Tailor'],
       description:
-        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi hizmeti. Abiye, gelinlik, takım elbise, üniforma dikimi.",
+        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi hizmeti. Abiye ve gelinlik tadilatı, takım elbise, üniforma dikimi.",
       url: SITE_URL,
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
@@ -166,8 +166,8 @@ const jsonLd = {
           },
           {
             '@type': 'Offer',
-            name: 'Özel Gelinlik Tasarımı ve Dikimi',
-            description: 'Ölçüye özel gelinlik dikimi ve gelinlik tadilatı. Oturmazsa değişim veya düzeltme.',
+            name: 'Gelinlik ve Abiye Tadilatı',
+            description: 'Gelinlik ve abiye tadilatı; fiyat ₺800\'den başlar.',
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,

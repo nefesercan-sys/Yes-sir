@@ -28,7 +28,7 @@ export const MURATPASA_MAHALLELERI: Mahalle[] = [
   { slug: 'meltem', ad: 'Meltem', lat: 36.8975, lng: 30.6706, blurb: 'Meltem mahallesinden randevulu adresten alım ve teslim; Konyaaltı sınırındaki konumu nedeniyle eve servis ücretsizdir.' },
   { slug: 'sirinyali', ad: 'Şirinyalı', lat: 36.8747, lng: 30.6997, blurb: 'Şirinyalı\'daki ev ve otellerden alım; randevu WhatsApp üzerinden alınır.' },
   { slug: 'fener', ad: 'Fener', lat: 36.8697, lng: 30.6875, blurb: 'Fener mahallesindeki konut ve sitelerden alım ve teslim WhatsApp\'ta planlanır.' },
-  { slug: 'guzeloba', ad: 'Güzeloba', blurb: 'Güzeloba\'daki otellere ücretsiz servis; evden alımda ücret bölgeye göre netleşir.' },
+  { slug: 'guzeloba', ad: 'Güzeloba', blurb: 'Güzeloba\'da eve ve otele servis ücretsiz.' },
 ];
 
 /** Mahalle → bağlı ilçe (URL ve metin için). */

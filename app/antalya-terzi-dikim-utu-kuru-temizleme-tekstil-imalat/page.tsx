@@ -421,7 +421,7 @@ export default function AntalyaTerziPage() {
               <span style={{ fontSize: '1.2rem' }}>💡</span>
               <p style={{ fontSize: '.78rem', color: GRI, margin: 0, lineHeight: 1.6 }}>
                 Fiyatlar başlangıç fiyatı olup işin kapsamına göre değişebilir.
-                Kesin fiyat için <a href={WA('Merhaba, fiyat bilgisi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={{ color: ALTIN, textDecoration: 'none', fontWeight: 600 }}>WhatsApp'tan</a> ulaşabilirsiniz. Adrese servis otellere servis ücretsiz; eve Konyaaltı ve yakınında ücretsiz.
+                Kesin fiyat için <a href={WA('Merhaba, fiyat bilgisi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={{ color: ALTIN, textDecoration: 'none', fontWeight: 600 }}>WhatsApp'tan</a> ulaşabilirsiniz. Adrese servis Eve ve otele servis ücretsiz.
               </p>
             </div>
           </div>
