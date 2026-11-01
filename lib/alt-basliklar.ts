@@ -2,8 +2,9 @@
 // Yalnızca doğrulanmış bilgiler: paça/bel ₺200+, fermuar ₺300+, gelinlik/abiye ₺800+, kuru temizleme ₺80+, acil 1–2 saat, normal ertesi gün,
 // özel dikim modele/adede göre, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat, hizmet verilen bölgelerde ücretsiz otel alım-teslim.
 export type L10 = 'tr' | 'en' | 'de' | 'ru' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
-export type Konu = 'genel' | 'paca' | 'fermuar' | 'gelinlik' | 'keten' | 'uniforma' | 'promo' | 'otel' | 'terzi' | 'fiyat' | 'hizmet' | 'bolge';
-export const ALT_BASLIKLAR: Record<Konu, { h: Record<L10, string>; p: Record<L10, string> }[]> = {
+export type Konu = 'genel' | 'paca' | 'fermuar' | 'gelinlik' | 'keten' | 'uniforma' | 'promo' | 'otel' | 'terzi' | 'fiyat' | 'hizmet' | 'bolge' | 'terziFp' | 'hizmetFp';
+type Item = { h: Record<L10, string>; p: Record<L10, string> };
+const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "paca": [
   {
    "h": {
@@ -783,3 +784,31 @@ export const ALT_BASLIKLAR: Record<Konu, { h: Record<L10, string>; p: Record<L10
   }
  ]
 };
+// Fiyat rakamı YAZILMAYAN diller (es/fr/pl/uk/nl/ar sayfaları: fiyat WhatsApp'ta netleşir).
+const YENI_FP = {
+ "h": {
+  "tr": "{y} terzi hizmetleri ve teslim süresi",
+  "en": "Tailor services in {y} and turnaround",
+  "de": "Schneiderservice in {y} und Dauer",
+  "ru": "Услуги портного в {y} и сроки",
+  "es": "Servicios de sastrería en {y}: bajos, cremalleras, cintura y vestidos",
+  "fr": "Services de couture à {y} : ourlets, fermetures, taille et robes",
+  "pl": "Usługi krawieckie w {y}: nogawki, zamki, talia i suknie",
+  "uk": "Послуги кравця в {y}: підшивання, блискавки, талія і сукні",
+  "nl": "Kleermakersdiensten in {y}: zoom, ritsen, taille en jurken",
+  "ar": "خدمات الخياطة في {y}: التقصير والسحّاب والخصر والفساتين"
+ },
+ "p": {
+  "tr": "Paça kısaltma, fermuar değişimi, bel daraltma, gelinlik ve abiye tadilatı ile özel dikim yapılır. Acil işler 1–2 saatte, normal işler ertesi gün teslim edilir; fiyat WhatsApp'ta netleşir.",
+  "en": "Hemming, zipper replacement, waist taking-in, wedding and evening dress alterations and custom tailoring. Urgent jobs are ready in 1–2 hours, normal jobs the next day; the price is confirmed on WhatsApp.",
+  "de": "Saum kürzen, Reißverschluss-Wechsel, Bund enger machen, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Eilige Aufträge in 1–2 Stunden, normale am nächsten Tag; der Preis wird per WhatsApp geklärt.",
+  "ru": "Подшив брюк, замена молний, ушивание в талии, переделка свадебных и вечерних платьев, индивидуальный пошив. Срочные заказы — за 1–2 часа, обычные — на следующий день; цена уточняется в WhatsApp.",
+  "es": "Acortar bajos, cambiar cremalleras, ajustar la cintura, arreglar vestidos de novia y de noche y confeccionar a medida. Los arreglos urgentes están listos en 1–2 horas y los normales al día siguiente; el precio se confirma por WhatsApp.",
+  "fr": "Ourlets, remplacement de fermetures, ajustement de taille, retouches de robes de mariée et de soirée et couture sur mesure. Retouches urgentes en 1 à 2 heures, normales le lendemain ; le prix est confirmé sur WhatsApp.",
+  "pl": "Skracanie nogawek, wymiana zamków, zwężanie w talii, przeróbki sukni ślubnych i wieczorowych oraz szycie na miarę. Pilne naprawy w 1–2 godziny, zwykłe następnego dnia; cenę potwierdzamy na WhatsApp.",
+  "uk": "Підшивання штанів, заміна блискавок, звуження в талії, переробка весільних і вечірніх суконь та пошив на замовлення. Термінові роботи — за 1–2 години, звичайні — наступного дня; ціну уточнюємо у WhatsApp.",
+  "nl": "Broekzoom, ritsvervanging, taille innemen, aanpassingen van bruids- en avondjurken en maatwerk. Spoedwerk klaar in 1–2 uur, gewoon werk de volgende dag; de prijs wordt via WhatsApp bevestigd.",
+  "ar": "تقصير البنطلون واستبدال السحّاب وتضييق الخصر وتعديل فساتين الزفاف والسهرة والتفصيل الخاص. الأعمال العاجلة خلال ساعة إلى ساعتين والعادية في اليوم التالي؛ ويُؤكَّد السعر عبر واتساب."
+ }
+};
+export const ALT_BASLIKLAR: Record<Konu, Item[]> = { ...BASE, terziFp: [YENI_FP, BASE.terzi[1]], hizmetFp: [YENI_FP, BASE.hizmet[1]] };
