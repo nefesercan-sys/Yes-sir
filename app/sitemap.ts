@@ -48,10 +48,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 🔽 TERZİ DIŞI GENEL SAYFALAR (Arka Plan - Düşük Öncelik)
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL,                 lastModified: D_YENI, changeFrequency: 'weekly',  priority: 0.40 },
-    { url: `${BASE_URL}/ilanlar`,    lastModified: D_YENI, changeFrequency: 'monthly', priority: 0.20 },
   ]
 
-  const ilanlar = await getIlanlar()
+  // İlan (pazar) sayfaları gizlendi: sitemap'e girmez (next.config.mjs yönlendirmesi). Geri açmak için ILAN_ENABLED=true.
+  const ILAN_ENABLED = false as boolean
+  const ilanlar = ILAN_ENABLED ? await getIlanlar() : []
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ilanUrls: MetadataRoute.Sitemap = ilanlar
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

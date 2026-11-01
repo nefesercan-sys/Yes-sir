@@ -41,16 +41,8 @@ export default function NotFound() {
           Terzi Hizmetleri
         </Link>
 
-        <Link href="/ilanlar" style={{
-          padding: '12px 24px',
-          backgroundColor: '#6c757d',
-          color: 'white',
-          textDecoration: 'none',
-          borderRadius: '4px',
-          fontSize: '16px',
-          fontWeight: 'bold'
-        }}>
-          İlanlar
+        <Link href="/" style={{ padding: '12px 24px', backgroundColor: '#6c757d', color: 'white', textDecoration: 'none', borderRadius: '4px', fontSize: '16px', fontWeight: 'bold' }}>
+          Ana Sayfa
         </Link>
       </div>
     </div>

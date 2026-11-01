@@ -368,7 +368,7 @@ const serviceRows = [
     detail: 'Kuryeli adresten alım, profesyonel pres ütüleme, kuru temizleme, acil elbise onarımı',
     area: 'Lara, Kundu Otelleri, Belek, Kemer, Konyaaltı Sahil Şeridi',
     time: 'Ertesi gün · acil 1–2 saat',
-    price: '60 TL\'den',
+    price: 'Fotoğrafa göre',
   },
   {
     title: 'Tekstil Fason Üretim',

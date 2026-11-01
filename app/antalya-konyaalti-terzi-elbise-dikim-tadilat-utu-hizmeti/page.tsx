@@ -128,7 +128,7 @@ const jsonLd = {
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Konyaaltı kuru temizleme fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Elbise kuru temizleme ₺300, mont ₺500'den başlar. WhatsApp: ${PHONE_DISPLAY}` } },
+        { '@type': 'Question', name: 'Konyaaltı kuru temizleme fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Kuru temizleme fiyatı eşyaya göre belirlenir; fotoğrafı WhatsApp'tan gönderin. WhatsApp: ${PHONE_DISPLAY}` } },
         { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations, dry cleaning and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
       ],
     },
@@ -151,24 +151,23 @@ const SERVICES = [
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Ertesi gün', color: '#fce7f3', tc: '#9d174d' },
   { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Ertesi gün', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
-  { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: '₺80+', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
+  { icon: '💨', title: 'Ütü & Kuru Temizleme', desc: 'Profesyonel buharlı pres, kuru temizleme. Otel/ev alım-teslim.', price: 'Fotoğrafa göre', time: '2–48 saat', color: '#dbeafe', tc: '#1d4ed8' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
 const PRICES = [
   ['Paça Kısaltma', '₺200+', 'Ertesi gün'],
   ['Bel Daraltma', '₺200+', 'Ertesi gün'],
-  ['T-Shirt Tamiri', '₺100+', 'Ertesi gün'],
+  ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Ertesi gün'],
   ['Fermuar Değişimi', '₺300+', 'Ertesi gün'],
   ['Ceket / Mont Tamiri', '₺200+', 'Ertesi gün'],
   ['Kol Kısaltma', '₺200+', 'Ertesi gün'],
   ['Abiye Tamiri', '₺800+', 'Ertesi gün'],
   ['Kadın Elbise Dikimi', '₺800+', 'Modele göre'],
-  ['Abiye / Gece Elbisesi', '₺1.200+', 'Modele ve adede göre'],
-  ['Gelinlik Dikimi', '₺5.000+', 'Modele göre'],
-  ['Gömlek Ütü', '₺80+', '2–6 saat'],
-  ['Elbise Kuru Temizleme', '₺300+', '24–48 saat'],
-  ['Mont Kuru Temizleme', '₺500+', '48 saat'],
+  ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
+  ['Gömlek Ütü', 'Fotoğrafa göre', '2–6 saat'],
+  ['Elbise Kuru Temizleme', 'Fotoğrafa göre', '24–48 saat'],
+  ['Mont Kuru Temizleme', 'Fotoğrafa göre', '48 saat'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
 ];
 
@@ -177,7 +176,7 @@ const FAQS = [
   ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
   ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+. Diğer dikim işlerinde fiyat kumaş ve modele göre belirlenir; fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Kuru temizleme fiyatı?', `Elbise ₺300+, mont ₺500+. Eve ve otele ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Kuru temizleme fiyatı?', `Fiyat eşyaya göre belirlenir. Eve ve otele ücretsiz alım-teslim. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
 ];
 

@@ -45,7 +45,7 @@ const GROUPS: ServiceGroup[] = [
     imageAlt: 'Atölyede prova edilen bağcıklı beyaz keten elbise',
     rows: [
       { name: 'Bel daraltma', price: '200 TL\'den' },
-      { name: 'Göğüs / sırt daraltma', price: '220 TL\'den' },
+      { name: 'Göğüs / sırt daraltma', price: 'Fotoğrafa göre' },
       { name: 'Askı kısaltma / ayarı', price: '90 TL\'den' },
       { name: 'Genel elbise tadilatı', price: '200 TL\'den', note: 'İnceleme sonrası netleşir' },
     ],
@@ -62,7 +62,7 @@ const GROUPS: ServiceGroup[] = [
       { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Ertesi gün' },
       { name: 'Fermuar değişimi', price: '300 TL\'den' },
       { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
-      { name: 'Düğme, kopça, fitil tamiri', price: '60 TL\'den' },
+      { name: 'Düğme, kopça, fitil tamiri', price: 'Fotoğrafa göre' },
     ],
   },
   {
@@ -74,9 +74,9 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/wrap-dress-stone.jpg',
     imageAlt: 'Taş duvar önünde sarma model beyaz elbise',
     rows: [
-      { name: 'Elbise / gömlek ütüsü', price: '60 TL\'den' },
+      { name: 'Elbise / gömlek ütüsü', price: 'Fotoğrafa göre' },
       { name: 'Takım elbise ütüsü', price: '120 TL\'den' },
-      { name: 'Gelinlik / abiye buharlama', price: '250 TL\'den' },
+      { name: 'Gelinlik / abiye buharlama', price: 'Fotoğrafa göre' },
       { name: 'Toplu ütü (5+ parça)', price: 'Adet bazlı indirim' },
     ],
   },
