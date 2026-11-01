@@ -30,7 +30,7 @@ const BANK: Record<string, M> = {
 };
 export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Konyaaltı') {
   const b = BANK[slug];
-  const title = b ? `${b.t} | SwapHubs` : `${ad} Terzi Çağır | SwapHubs`;
+  const title = b ? `${b.t} | Terzi Can` : `${ad} Terzi Çağır | Terzi Can`;
   const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Ücretsiz alım-teslim.' : ' Otele ücretsiz servis.') : '';
   const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];
