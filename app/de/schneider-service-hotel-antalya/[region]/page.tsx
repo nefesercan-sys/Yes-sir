@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { zoneAlt } from '@/lib/intl-zones';
 import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -40,7 +41,16 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
       'Deutschsprechender Schneider Antalya'
     ],
     // terzihizmeti.com.tr'de birebir aynı bölge sayfası → cross-domain canonical (hreflang kümesi yok)
-    alternates: { canonical: crossCanonical(`${BASE_PATH}/${r.slug}`) ?? url },
+    alternates: {
+      canonical: crossCanonical(`${BASE_PATH}/${r.slug}`) ?? url,
+      languages: {
+        en: `https://swaphubs.com/en/hotel-tailor-antalya/${r.slug}`,
+        ru: `https://swaphubs.com/ru/vyezdnoy-portnoy-antalya/${r.slug}`,
+        de: `https://swaphubs.com/de/schneider-service-hotel-antalya/${r.slug}`,
+        ...zoneAlt(r.slug),
+        'x-default': `https://swaphubs.com/en/hotel-tailor-antalya/${r.slug}`,
+      },
+    },
     openGraph: { title, description: desc, url, type: 'website', locale: 'de_DE', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Schneider in ${r.name}` }] },
     twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },

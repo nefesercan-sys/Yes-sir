@@ -97,7 +97,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
           </p>
           <p style={{ margin: 0, fontSize: '.88rem', color: C.muted }}>
             {c.zonesLabel}:{' '}
-            {ZONE_SLUGS.filter((s) => s !== zone).map((s, i) => (
+            {ZONE_SLUGS.filter((s) => s !== zone && s !== 'antalya').map((s, i) => (
               <span key={s}>{i > 0 && ' · '}<Link href={zoneUrl(lang, s)} style={{ color: C.green }}>{zoneData(lang, s).name}</Link></span>
             ))}
           </p>

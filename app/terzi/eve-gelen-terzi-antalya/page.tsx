@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { zoneAlt } from '@/lib/intl-zones';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -140,6 +141,7 @@ export const metadata: Metadata = {
       'en': 'https://swaphubs.com/en/hotel-tailor-antalya',
       'ru': 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
       'de': 'https://swaphubs.com/de/schneider-service-hotel-antalya',
+      ...zoneAlt('antalya'),
       'x-default': SITE_URL,
     },
   },

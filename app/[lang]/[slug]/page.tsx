@@ -31,6 +31,21 @@ type P = { params: Promise<{ lang: string; slug: string }> };
 
 const robots = { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' as const, 'max-snippet': -1 } };
 
+const FOUR_ZONE = ['belek', 'lara', 'guzeloba', 'side', 'kemer'];
+/** Bölge/otel ana sayfası hreflang kümesi: 6 dil + (varsa) EN/RU/DE (+ ana sayfada TR) karşılıkları. */
+function zoneLanguages(zone: (typeof ZONE_SLUGS)[number]): Record<string, string> {
+  const six = Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${zoneUrl(l, zone)}`]));
+  if (zone === 'antalya') {
+    const tr = `${SITE}/terzi/eve-gelen-terzi-antalya`;
+    return { tr, en: `${SITE}/en/hotel-tailor-antalya`, ru: `${SITE}/ru/vyezdnoy-portnoy-antalya`, de: `${SITE}/de/schneider-service-hotel-antalya`, ...six, 'x-default': tr };
+  }
+  if (FOUR_ZONE.includes(zone)) {
+    const en = `${SITE}/en/hotel-tailor-antalya/${zone}`;
+    return { en, ru: `${SITE}/ru/vyezdnoy-portnoy-antalya/${zone}`, de: `${SITE}/de/schneider-service-hotel-antalya/${zone}`, ...six, 'x-default': en };
+  }
+  return six;
+}
+
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { lang, slug } = await params;
   if (!isILang(lang)) return {};
@@ -123,7 +138,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     title: { absolute: title },
     description,
     robots,
-    alternates: { canonical: url, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${zoneUrl(l, zone)}`])) },
+    alternates: { canonical: url, languages: zoneLanguages(zone) },
     openGraph: { title, description, url, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: title }] },
     twitter: { card: 'summary_large_image', title, description, images: [OG_DEFAULT] },
   };

@@ -14,6 +14,17 @@ import { crossCanonical } from '@/lib/cross-canonical'
 export const revalidate = 86400
 
 const BASE_URL = 'https://swaphubs.com'
+
+// Otel ana sayfası / bölge sayfaları için hreflang kümesi (sayfa <head> değerleriyle aynı olmalı)
+const FOUR_ZONES = ['belek', 'lara', 'guzeloba', 'side', 'kemer']
+const HUB_TR = `${BASE_URL}/terzi/eve-gelen-terzi-antalya`
+const HUB_EN = `${BASE_URL}/en/hotel-tailor-antalya`, HUB_RU = `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`, HUB_DE = `${BASE_URL}/de/schneider-service-hotel-antalya`
+function zoneAltMap(z: (typeof ZONE_SLUGS)[number]): Record<string, string> {
+  const six = Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${zoneUrl(x, z)}`]))
+  if (z === 'antalya') return { tr: HUB_TR, en: HUB_EN, ru: HUB_RU, de: HUB_DE, ...six, 'x-default': HUB_TR }
+  if (FOUR_ZONES.includes(z)) return { en: `${HUB_EN}/${z}`, ru: `${HUB_RU}/${z}`, de: `${HUB_DE}/${z}`, ...six, 'x-default': `${HUB_EN}/${z}` }
+  return six
+}
 // lastmod: yalnızca içeriği gerçekten değişen sayfalar güncel tarihi alır (sahte güncelleme sinyali verilmez).
 // 2026-10-30: süre/ücretsiz servis/Muratpaşa/kopya içerik düzeltmeleriyle değişen terzi sayfaları.
 // Bu düzeltmelerden etkilenmeyen sayfalar (keten/pamuk ve Anavera tekstil tanıtımları, üniforma) eski tarihlerinde kalır.
@@ -43,16 +54,16 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/dikis-atolyesi-antalya`, priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/bay-terzi-antalya`,     priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,   priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly', alt: zoneAltMap('antalya') },
     { url: `${BASE_URL}/terzi/fermuar-degisimi`,      priority: '0.90', freq: 'weekly' },
 
     // 🌐 4. ÇOK DİLLİ (B2B & OTEL) SAYFALAR (Priority: 0.90)
-    { url: `${BASE_URL}/en/hotel-tailor-antalya`,             priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/en/hotel-tailor-antalya`,             priority: '0.90', freq: 'weekly', alt: zoneAltMap('antalya') },
     { url: `${BASE_URL}/de/online-schneiderservice-antalya`,  priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,  priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/de/schneider-service-hotel-antalya`,  priority: '0.90', freq: 'weekly', alt: zoneAltMap('antalya') },
     { url: `${BASE_URL}/ru/atelie-antalya`,                   priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/ru/atelie-antalya-online`,            priority: '0.90', freq: 'weekly' },
-    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,         priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya`,         priority: '0.90', freq: 'weekly', alt: zoneAltMap('antalya') },
 
     // 👕 6. ATÖLYE, FASON VE KUMAŞ (Priority: 0.75)
     { url: `${BASE_URL}/terzi/uniforma-uretimi-antalya`, priority: '0.75', freq: 'weekly' },
@@ -80,9 +91,9 @@ export async function GET() {
   // Yalnızca gerçekten sayfası olan bölgeler (lib/otel-bolgeleri.ts). Kundu için sayfa yok → eklenirse buraya da ekle.
   const turistik = ['belek', 'lara', 'guzeloba', 'side', 'kemer']
   turistik.forEach(slug => {
-    terziSayfalar.push({ url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
-    terziSayfalar.push({ url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
-    terziSayfalar.push({ url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.80', freq: 'weekly' })
+    terziSayfalar.push({ url: `${BASE_URL}/en/hotel-tailor-antalya/${slug}`, priority: '0.80', freq: 'weekly', alt: zoneAltMap(slug as (typeof ZONE_SLUGS)[number]) })
+    terziSayfalar.push({ url: `${BASE_URL}/ru/vyezdnoy-portnoy-antalya/${slug}`, priority: '0.80', freq: 'weekly', alt: zoneAltMap(slug as (typeof ZONE_SLUGS)[number]) })
+    terziSayfalar.push({ url: `${BASE_URL}/de/schneider-service-hotel-antalya/${slug}`, priority: '0.80', freq: 'weekly', alt: zoneAltMap(slug as (typeof ZONE_SLUGS)[number]) })
   })
 
   // 🔎 Bölge × hizmet SEO sayfaları. EN/RU/DE karşılıkları terzihizmeti.com.tr'ye canonical'landığı için yalnız TR'ler listelenir
@@ -121,13 +132,13 @@ export async function GET() {
       alt: { ...Object.fromEntries(PROMO_ALL.map((y) => [y.hreflang, `${BASE_URL}${y.path}`])), 'x-default': `${BASE_URL}${PROMO_ALL[0].path}` },
     })),
     // 🏨 Otel bölgesi derinlik sayfaları (6 dil × 6 bölge, bölge başına 6 dilli hreflang)
-    ...ZONE_SLUGS.flatMap((z) => ILANGS.map((l) => ({ url: `${BASE_URL}${zoneUrl(l, z)}`, priority: '0.65', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${zoneUrl(x, z)}`])) }))),
+    ...ZONE_SLUGS.flatMap((z) => ILANGS.map((l) => ({ url: `${BASE_URL}${zoneUrl(l, z)}`, priority: '0.65', freq: 'monthly', alt: zoneAltMap(z) }))),
   ]
   // aynı adres iki kez gelmesin (Türkçe sayfalar mevcut rotalarla çakışabilir)
   const seen = new Set(terziSayfalar.map((x) => x.url))
   const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
   const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
-  const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) })), ...seoUnique]
+  const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) ?? x.alt })), ...seoUnique]
     .filter((x) => isOwnCanonical(x.url))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
