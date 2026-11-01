@@ -36,14 +36,14 @@ const SERVICES = [
     title:'Herrenschneiderei', sub:'Anzüge · Hemden · Hosen · Blazer · Smoking',
     desc:'Maßgeschneiderte Herrenbekleidung. Perfekte Passform als Ziel, vom Geschäftstermin bis zum besonderen Anlass. Einheimische und importierte Stoffe.',
     feats:['Anzug','Hemd','Hose','Blazer','Smoking','Weste'],
-    price:'₺800+', note:"Preis nach Foto und Maßen", time:'Je nach Modell & Menge',
+    price:'per Foto', note:"Preis nach Foto und Maßen", time:'Je nach Modell & Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Herrenschneiderei.' },
   { id:'bayan-dikim', icon:'👗', badge:'', badgeColor:'',
     img: IMGS.bayan,
     title:'Damenschneiderei', sub:'Kleider · Blusen · Röcke · Overalls · Business-Kleidung · Abendkleider',
     desc:'Vom Alltagskleid bis zum Abendkleid, von Business-Kleidung bis zum Stück für besondere Anlässe — exakt nach Ihren Maßen gefertigt.',
     feats:['Kleid','Bluse','Rock','Overall','Business-Kleidung','Abendkleid','Brautkleid'],
-    price:'₺800+', note:"Abendkleider ab ₺1.200", time:'Je nach Modell & Menge',
+    price:'per Foto', note:"Preis nach Foto und Maßen", time:'Je nach Modell & Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Damenschneiderei.' },
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
     img: IMGS.online,
@@ -57,14 +57,14 @@ const SERVICES = [
     title:'Bügel- & Dampfpressservice', sub:'Professionelles Bügeln · Hotelabholung · Am Selben Tag',
     desc:'Keine zerknitterte Kleidung im Urlaub! Wir holen es aus Ihrem Hotel ab, bügeln professionell mit Dampf und liefern am nächsten Tag – eilig in 1–2 Stunden.',
     feats:['Hemden Bügeln','Anzug Pressen','Hotelabholung','Lieferung Am Selben Tag'],
-    price:'₺80+/Stück', note:'Mengenrabatt möglich', time:'2–6 Stunden',
+    price:'per Foto', note:'Mengenrabatt möglich', time:'2–6 Stunden',
     waMsg:'Hallo, ich möchte den Bügelservice nutzen. Können Sie zu meinem Hotel kommen?' },
   { id:'tamir-tadilat', icon:'✂️', badge:'', badgeColor:'',
     img: IMGS.tamir,
     title:'Reparatur & Änderungen', sub:'Kürzen · Reißverschluss · Risse · Enger Machen',
     desc:'Sie müssen Ihr Lieblingsstück nicht aufgeben. Am nächsten Tag fertig, eilig in 1–2 Stunden.',
-    feats:['Kürzen ₺200','Reißverschluss ₺300','Rissreparatur','Enger Machen','Ärmel Kürzen'],
-    price:'₺200+', note:"Kürzen ab ₺200", time:'Am nächsten Tag · eilig 1–2 Std.',
+    feats:['Kürzen','Reißverschluss','Rissreparatur','Enger Machen','Ärmel Kürzen'],
+    price:'per Foto', note:"Preis nach Foto", time:'Am nächsten Tag · eilig 1–2 Std.',
     waMsg:'Hallo, ich hätte gerne Informationen zu Reparaturen und Änderungen.' },
   { id:'model-tasarim', icon:'✏️', badge:'INDIVIDUELL', badgeColor:'#7C3AED',
     img: IMGS.tasarim,
@@ -85,34 +85,34 @@ const SERVICES = [
     title:'Sport- & Freizeitbekleidung', sub:'Trainingsanzug · Sweatshirt · Hoodie · Sportshorts',
     desc:'Auch bei Sportbekleidung ganz individuell. Stickerei und Logodruck inklusive.',
     feats:['Trainingsanzug','Sweatshirt','Hoodie','Logo-Stickerei','Team-Bestellung'],
-    price:'₺400+', note:'Mengenrabatt möglich', time:'Je nach Modell & Menge',
+    price:'per Foto', note:'Mengenrabatt möglich', time:'Je nach Modell & Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Sportbekleidung.' },
 ];
 
 const PRICE_TABLE = [
   { cat:'Herrenschneiderei', rows:[
-    ['Herrenhemd','₺800+','Je nach Modell & Menge'],
-    ['Herrenhose','₺700+','Je nach Modell & Menge'],
+    ['Herrenhemd','per Foto','Je nach Modell & Menge'],
+    ['Herrenhose','per Foto','Je nach Modell & Menge'],
   ]},
   { cat:'Damenschneiderei', rows:[
-    ['Alltagskleid','₺800+','Je nach Modell & Menge'],
-    ['Business-Kleidung','₺800+','Je nach Modell & Menge'],
-    ['Abendkleid','₺1.200+','Je nach Modell & Menge'],
-    ['Bluse / Rock','₺500+','Je nach Modell & Menge'],
-    ['Overall','₺900+','Je nach Modell & Menge'],
+    ['Alltagskleid','per Foto','Je nach Modell & Menge'],
+    ['Business-Kleidung','per Foto','Je nach Modell & Menge'],
+    ['Abendkleid','per Foto','Je nach Modell & Menge'],
+    ['Bluse / Rock','per Foto','Je nach Modell & Menge'],
+    ['Overall','per Foto','Je nach Modell & Menge'],
   ]},
   { cat:'Bügeln & Reinigung', rows:[
-    ['Hemd Bügeln','₺80+','Am nächsten Tag'],
-    ['Kleid Dämpfen','₺120+','Am nächsten Tag'],
-    ['Mantel Bügeln','₺200+','Am nächsten Tag'],
-    ['Sammelbügeln (10+ Stück)','₺60+/Stück','Am nächsten Tag'],
+    ['Hemd Bügeln','per Foto','Am nächsten Tag'],
+    ['Kleid Dämpfen','per Foto','Am nächsten Tag'],
+    ['Mantel Bügeln','per Foto','Am nächsten Tag'],
+    ['Sammelbügeln (10+ Stück)','per Foto','Am nächsten Tag'],
   ]},
   { cat:'Reparatur & Änderungen', rows:[
-    ['Kürzen','₺200+','Am nächsten Tag'],
-    ['Reißverschluss Austausch','₺300+','Am nächsten Tag'],
-    ['Rissreparatur','₺100+','Am nächsten Tag'],
-    ['Ärmel Kürzen','₺200+','Am nächsten Tag'],
-    ['Futter Austausch','₺300+','48 Stunden'],
+    ['Kürzen','per Foto','Am nächsten Tag'],
+    ['Reißverschluss Austausch','per Foto','Am nächsten Tag'],
+    ['Rissreparatur','per Foto','Am nächsten Tag'],
+    ['Ärmel Kürzen','per Foto','Am nächsten Tag'],
+    ['Futter Austausch','per Foto','48 Stunden'],
   ]},
 ];
 
@@ -482,7 +482,7 @@ export default function OnlineSchneiderClient({
       {/* FİYATLAR */}
       <section id="prices" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="prices-h">
         <div className="octr">
-          <span className="oeyebrow">₺ Transparente Preise</span>
+          <span className="oeyebrow">Transparente Preise</span>
           <h2 className="oh2" id="prices-h">Schneiderpreise 2026</h2>
           <p className="osh-sub">Startpreise. Senden Sie ein Foto per WhatsApp für ein genaues Angebot.</p>
           <div className="odivider" />

@@ -127,7 +127,7 @@ const _alternatesForOld = (lang: Lang, urlFor: (l: Lang) => string) => ({
 const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(lang === 'tr' ? 'tr-TR' : lang) + t.slice(1) : t);
 const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
 const priceShortOf = (lang: Lang, s: Service) =>
-  s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : '';
+  s.priceFrom && lang === 'tr' ? `₺${s.priceFrom}'den` : ''; // yabancı dillerde fiyat yazılmaz
 // Başlıklar için kısa süre ifadeleri (lib/business.ts DURATION'dan)
 const TIME_SHORT: Record<Lang, Record<TimeKey, string>> = Object.fromEntries(LANGS.map((l) => [l, {
   repair: DURATION[l].normalShort, custom: DURATION[l].customShort, mixed: DURATION[l].normalShort,
@@ -212,14 +212,14 @@ function _districtCopy(lang: Lang, d: District) {
     tr: [`${loc} terzi lazım mı? Kıyafetin fotoğrafını WhatsApp'tan at, fiyatı söyleyelim: paça ₺200'den, fermuar ₺300'den. ${svcTr}. ${PH}`,
          `${loc} terzi: fotoğraf at, fiyatı ve teslim gününü öğren. Paça ₺200'den, fermuar ₺300'den. ${PH}`,
          `${loc} terzi ${PH}: fotoğraf at, fiyat al.`],
-    en: [`Need a tailor ${loc}? Send a photo on WhatsApp and get the price: hemming from ₺200, zippers from ₺300. ${svcEn}. ${PH}`,
-         `Tailor ${loc}: send a photo, get price and ready date. Hemming from ₺200, zippers from ₺300. ${PH}`,
+    en: [`Need a tailor ${loc}? Send a photo on WhatsApp and get the price. ${svcEn}. ${PH}`,
+         `Tailor ${loc}: send a photo, get price and ready date. Hemming and zippers. ${PH}`,
          `Tailor ${loc} ${PH}: send a photo, get a price.`],
-    ru: [`Нужен портной ${loc}? Пришлите фото в WhatsApp — назовём цену: подшив от ₺200, молния от ₺300. ${svcRu}. ${PH}`,
-         `Портной ${loc}: фото в WhatsApp, цена и срок в ответ. Подшив от ₺200, молния от ₺300. ${PH}`,
+    ru: [`Нужен портной ${loc}? Пришлите фото в WhatsApp — назовём цену: подшив, молния. ${svcRu}. ${PH}`,
+         `Портной ${loc}: фото в WhatsApp, цена и срок в ответ. Подшив, молния. ${PH}`,
          `Портной ${loc} ${PH}: фото — и цена.`],
-    de: [`Schneider ${loc} gesucht? Foto per WhatsApp senden, Preis kommt zurück: Kürzen ab ₺200, Reißverschluss ab ₺300. ${svcDe}. ${PH}`,
-         `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen ab ₺200, Reißverschluss ab ₺300. ${PH}`,
+    de: [`Schneider ${loc} gesucht? Foto per WhatsApp senden, Preis kommt zurück. ${svcDe}. ${PH}`,
+         `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen und Reißverschluss. ${PH}`,
          `Schneider ${loc} ${PH}: Foto senden, Preis erhalten.`],
   }[lang];
   const priT: string[] = lang === 'tr'
@@ -232,9 +232,9 @@ function _districtCopy(lang: Lang, d: District) {
   const priD: string[] = lang === 'tr'
     ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı, Hurma, Liman, Uncalı, Gürsu'da terzi lazım mı? Fotoğrafı WhatsApp'tan at, fiyatı öğren: paça ₺200'den, fermuar ₺300'den. ${PH}`, `Konyaaltı terzi: Hurma, Liman, Uncalı, Gürsu. Fotoğraf at, fiyat al. Paça ₺200'den. ${PH}`] : [`${loc} terzi lazım mı? Fotoğraf at, ücreti öğren: paça ₺200'den, fermuar ₺300'den. ${svcTr}. ${PH}`, `${loc} terzi: fotoğraf at, ücreti öğren. Paça ₺200'den. ${PH}`]) : [])
     : (FG_PRI.includes(d.slug) ? ({
-      en: [`Staying ${loc}? Send a photo on WhatsApp, get the price, and we collect from your hotel. Hemming from ₺200. ${PH}`, `Staying ${loc}? Photo on WhatsApp, price back, hotel pick-up. Hemming from ₺200. ${PH}`],
-      ru: [`Отдыхаете ${loc}? Пришлите фото в WhatsApp — назовём цену и заберём вещь из отеля. Подшив от ₺200. ${PH}`, `Отдыхаете ${loc}? Фото в WhatsApp, цена в ответ, забор из отеля. ${PH}`],
-      de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab. Kürzen ab ₺200. ${PH}`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung. ${PH}`],
+      en: [`Staying ${loc}? Send a photo on WhatsApp, get the price, and we collect from your hotel. ${PH}`, `Staying ${loc}? Photo on WhatsApp, price back, hotel pick-up. ${PH}`],
+      ru: [`Отдыхаете ${loc}? Пришлите фото в WhatsApp — назовём цену и заберём вещь из отеля. Подшив. ${PH}`, `Отдыхаете ${loc}? Фото в WhatsApp, цена в ответ, забор из отеля. ${PH}`],
+      de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab. ${PH}`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung. ${PH}`],
     } as Record<string, string[]>)[lang] : []);
   if (priT.length) title = pickFit([...priT, ...titles], 60);
   desc = pickFit([...priD, ...descs], 158);
@@ -529,7 +529,7 @@ export function hubMetadata(lang: Lang): Metadata {
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
     en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
-    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив от ₺200, молнии ₺300. Фото — и цена. Ежедневно. ☎ ${PHONE}`,
+    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно. ☎ ${PHONE}`,
     de: `Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
@@ -827,11 +827,12 @@ const HIZMET_GORSEL: Record<string, GorselAnahtar[]> = {
   'elbise-dikim': ['abiye-elbise-atolye', 'keten-blazer-atolye', 'manken-bej-ceket'], 'ozel-dikim': ['abiye-elbise-atolye', 'keten-blazer-atolye', 'manken-bej-ceket'],
   'elbise-tamir': ['abiye-elbise-atolye', 'abiye-askida'], 'gece-kiyafeti': ['abiye-elbise-atolye', 'abiye-askida'], 'gelinlik-abiye': ['abiye-askida', 'abiye-elbise-atolye'],
   takim: ['erkek-takim-olcu', 'manken-palto-takim'], mont: ['erkek-palto-atolye', 'palto-yaka-detay', 'kadin-trenckot-atolye'],
+  abiye: ['abiye-elbise-atolye', 'abiye-askida', 'manken-bej-ceket'], pantolon: ['yun-pantolon-metre', 'keten-pantolon-katli'], kol: ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'palto-yaka-detay'],
   gomlek: ['beyaz-gomlek-katli', 'erkek-gomlek-atolye'], tisort: ['sweatshirt-katli'], etek: ['pilili-etek'],
   'kiyafet-tamiri': ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'], beden: ['erkek-takim-olcu', 'beyaz-gomlek-katli', 'pilili-etek'],
 };
 
-const HIZMET_KONU: Record<string, 'paca' | 'fermuar' | 'gelinlik' | 'hizmet'> = { paca: 'paca', kot: 'paca', fermuar: 'fermuar', 'gelinlik-abiye': 'gelinlik', 'elbise-dikim': 'gelinlik', 'elbise-tamir': 'gelinlik', 'gece-kiyafeti': 'gelinlik' };
+const HIZMET_KONU: Record<string, 'paca' | 'fermuar' | 'gelinlik' | 'hizmet'> = { paca: 'paca', kot: 'paca', pantolon: 'paca', abiye: 'gelinlik', fermuar: 'fermuar', 'gelinlik-abiye': 'gelinlik', 'elbise-dikim': 'gelinlik', 'elbise-tamir': 'gelinlik', 'gece-kiyafeti': 'gelinlik' };
 
 export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const u = UI[lang];

@@ -36,8 +36,8 @@ const FAQ_ITEMS = [
   { q: 'Моё платье порвалось, можно починить срочно?', a: 'Да, срочный ремонт разрывов и швов занимает 1–2 часа, обычный — готов на следующий день. Отправьте фото в WhatsApp для быстрой оценки.' },
   { q: 'Работаете ли вы вечером или в выходные?', a: 'Да, мы работаем ежедневно с 08:00 до 23:00, включая вечерние часы и выходные. Напишите нам в WhatsApp, чтобы записаться.' },
   { q: 'Шьёте ли вы из натуральных тканей — хлопка или льна?', a: 'Да, предлагаем пошив одежды на заказ из 100% хлопка и льна.' },
-  { q: "Где в Анталье подшить брюки рядом со мной?", a: 'В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов от ₺200, готово на следующий день, срочно — за 1–2 часа. WhatsApp: +90 531 898 64 18' },
-  { q: "Сколько стоит подшив и замена молнии в Анталье?", a: 'Подшив от ₺200, ушивание по талии от ₺200, замена молнии от ₺300, подгонка свадебного платья от ₺800 (цены 2026). Точную цену назовём по фото в WhatsApp.' },
+  { q: "Где в Анталье подшить брюки рядом со мной?", a: 'В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов готов на следующий день, срочно — за 1–2 часа. WhatsApp: +90 531 898 64 18' },
+  { q: "Сколько стоит подшив и замена молнии в Анталье?", a: 'Цена зависит от вещи и работы: подшив, ушивание по талии, замена молнии, подгонка вечерних и свадебных платьев. Точную цену назовём по фото в WhatsApp.' },
   { q: "Вы переделываете куртки, пальто, рубашки, юбки и шорты?", a: 'Да. Переделываем и ремонтируем куртки, пальто, рубашки, юбки, шорты, платья и брюки, мужские и женские. Пришлите фото вещи в WhatsApp — назовём цену и срок.' },
   { q: "Я живу в отеле всего несколько дней. Успеете?", a: 'Да. Подшив и ремонт готовы на следующий день, срочно — за 1–2 часа; забор из отеля и доставка обратно бесплатны во всех отельных районах.' },
 ]
@@ -277,20 +277,20 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
         <article className="group">
           <h3 className="group-title">Ремонт и подгонка</h3>
           <div className="price-list">
-            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">на следующий день</span></span><span className="price-value">200 ₺</span></div>
-            <div className="price-row"><span className="price-name">Замена молнии (брюки/куртка)</span><span className="price-value">от 120 ₺</span></div>
-            <div className="price-row"><span className="price-name">Заужение по фигуре</span><span className="price-value">от 180 ₺</span></div>
-            <div className="price-row"><span className="price-name">Ремонт кожаных изделий</span><span className="price-value">от 300 ₺</span></div>
-            <div className="price-row"><span className="price-name">Ремонт разрыва / штопка</span><span className="price-value">от 90 ₺</span></div>
+            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">на следующий день</span></span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Замена молнии (брюки/куртка)</span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Заужение по фигуре</span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Ремонт кожаных изделий</span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Ремонт разрыва / штопка</span><span className="price-value">по фото</span></div>
           </div>
         </article>
         <article className="group">
           <h3 className="group-title">Пошив и уход</h3>
           <div className="price-list">
-            <div className="price-row"><span className="price-name">Повседневное платье (по меркам)<span className="price-note">3–5 дней</span></span><span className="price-value">от 800 ₺</span></div>
-            <div className="price-row"><span className="price-name">Вечернее платье</span><span className="price-value">от 1400 ₺</span></div>
-            <div className="price-row"><span className="price-name">Глажка / отпаривание</span><span className="price-value">от 60 ₺</span></div>
-            <div className="price-row"><span className="price-name">Химчистка (за единицу)</span><span className="price-value">от 250 ₺</span></div>
+            <div className="price-row"><span className="price-name">Повседневное платье (по меркам)<span className="price-note">3–5 дней</span></span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Вечернее платье</span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Глажка / отпаривание</span><span className="price-value">по фото</span></div>
+            <div className="price-row"><span className="price-name">Химчистка (за единицу)</span><span className="price-value">по фото</span></div>
           </div>
         </article>
       </section>

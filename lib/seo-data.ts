@@ -271,13 +271,13 @@ export const SERVICES: Service[] = [
   {
     id: 'gelinlik-abiye', icon: '👰', time: 'repair',
     slug: { tr: 'gelinlik-abiye-tadilati', en: 'wedding-evening-dress-alteration', ru: 'podgonka-svadebnogo-vechernego-platya', de: 'brautkleid-abendkleid-aendern' },
-    name: { tr: 'Gelinlik ve Abiye Tadilatı', en: 'Wedding & Evening Dress Alteration', ru: 'Подгонка свадебных и вечерних платьев', de: 'Brautkleid und Abendkleid ändern' },
-    q: { tr: 'gelinlik ve abiye tadilatı', en: 'wedding dress alteration', ru: 'подгонка свадебного платья', de: 'Brautkleid ändern' },
+    name: { tr: 'Abiye ve Gelinlik Tadilatı', en: 'Evening & Wedding Dress Alteration', ru: 'Подгонка вечерних и свадебных платьев', de: 'Abendkleid und Brautkleid ändern' },
+    q: { tr: 'abiye ve gelinlik tadilatı', en: 'evening dress alteration', ru: 'подгонка вечернего платья', de: 'Abendkleid ändern' },
     priceText: {
-      tr: `Gelinlik tadilatı ₺${PRICE_FROM.gelinlik}'den, abiye tadilatı ₺${PRICE_FROM.abiye}'den başlar.`,
-      en: `Wedding dress alteration starts from ₺${PRICE_FROM.gelinlik}, evening dress alteration from ₺${PRICE_FROM.abiye}.`,
-      ru: `Подгонка свадебного и вечернего платья от ₺${PRICE_FROM.abiye}.`,
-      de: `Brautkleid-Änderung ab ₺${PRICE_FROM.gelinlik}, Abendkleid-Änderung ab ₺${PRICE_FROM.abiye}.`,
+      tr: `Abiye tadilatı ₺${PRICE_FROM.abiye}'den, gelinlik tadilatı ₺${PRICE_FROM.gelinlik}'den başlar.`,
+      en: `Evening dress and wedding dress alterations; the price is confirmed on WhatsApp from a photo.`,
+      ru: `Подгонка вечерних и свадебных платьев; цена уточняется в WhatsApp по фото.`,
+      de: `Abendkleid- und Brautkleid-Änderung; der Preis wird per WhatsApp anhand eines Fotos bestätigt.`,
     },
     intro: {
       tr: 'Gelinlik ve abiyede daraltma, boy ayarı, korse ve askı düzenlemesi gibi hassas işleri provalı olarak yapıyoruz. Otelde konaklayan gelinler ve davetliler için servis mümkündür.',
@@ -290,6 +290,68 @@ export const SERVICES: Service[] = [
       en: ['wedding dress alteration', 'bridal gown alterations', 'evening gown alteration', 'prom dress alteration', 'formal dress tailor', 'wedding dress tailor near me'],
       ru: ['подгонка свадебного платья', 'ушить свадебное платье', 'переделка вечернего платья', 'ателье свадебные платья', 'подгонка вечернего платья', 'ушить вечернее платье'],
       de: ['Brautkleid ändern', 'Brautkleid enger machen', 'Abendkleid ändern', 'Abendkleid kürzen', 'Brautkleid Änderungsschneiderei', 'Festliches Kleid ändern'],
+    },
+  },
+  {
+    id: 'abiye', icon: '👗', time: 'repair', priceFrom: PRICE_FROM.abiye, priceText: {
+      tr: 'Abiye tadilatı ₺800\'den başlar.', en: 'Evening dress alterations; the price is confirmed on WhatsApp from a photo.',
+      ru: 'Подгонка вечерних платьев; цена уточняется в WhatsApp по фото.', de: 'Abendkleid-Änderung; der Preis wird per WhatsApp anhand eines Fotos bestätigt.',
+    },
+    slug: { tr: 'abiye-tadilati-gece-kiyafetleri', en: 'evening-dress-alteration-formal-wear', ru: 'podgonka-vechernih-platev-narjadov', de: 'abendkleid-festmode-aendern' },
+    name: { tr: 'Abiye Tadilatı, Gece Kıyafetleri ve Özel Kıyafetler', en: 'Evening Dress, Formal & Special-Occasion Wear Alteration', ru: 'Подгонка вечерних платьев и нарядов для особых случаев', de: 'Abendkleid, Festmode und besondere Kleidung ändern' },
+    q: { tr: 'abiye tadilatı', en: 'evening dress alteration', ru: 'подгонка вечернего платья', de: 'Abendkleid ändern' },
+    intro: {
+      tr: 'Abiye, gece kıyafeti ve özel gün kıyafetlerinde daraltma, genişletme, boy kısaltma, askı, fermuar ve astar ayarı yaparız; ölçü kıyafet üzerinizdeyken alınır, gerekirse prova yapılır. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'For evening dresses, formal wear and special-occasion outfits we take in, let out, shorten, adjust straps and zippers and fix linings; we measure while you wear the garment and do a fitting when needed. Normal jobs are ready the next day, urgent ones in 1–2 hours.',
+      ru: 'Вечерние платья, нарядная одежда и наряды для особых случаев: ушиваем, расширяем, укорачиваем, подгоняем бретели, молнии и подкладку; мерки снимаем, пока вещь на вас, при необходимости делаем примерку. Обычные работы готовы на следующий день, срочные — за 1–2 часа.',
+      de: 'Bei Abendkleidern, Festmode und Kleidung für besondere Anlässe machen wir enger oder weiter, kürzen, passen Träger, Reißverschluss und Futter an; wir messen am getragenen Kleidungsstück und machen bei Bedarf eine Anprobe. Normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+    },
+    extra: { href: '/antalya-gelinlik-tadilati', label: { tr: 'Gelinlik tadilatı sayfası', en: 'Wedding dress page (Turkish)', ru: 'Страница о свадебных платьях (тур.)', de: 'Brautkleid-Seite (türkisch)' } },
+    vars: {
+      tr: ['abiye tadilatı', 'abiye elbise daraltma', 'abiye boy kısaltma', 'gece kıyafeti tadilatı', 'gece elbisesi daraltma', 'özel gün kıyafeti tadilatı', 'abiye tamiri', 'abiye elbise tadilat terzi'],
+      en: ['evening dress alteration', 'evening gown tailor', 'formal dress alteration', 'special occasion dress alteration', 'shorten evening dress', 'take in evening dress', 'cocktail dress alteration'],
+      ru: ['подгонка вечернего платья', 'ушить вечернее платье', 'укоротить вечернее платье', 'нарядное платье подгонка', 'ателье вечерние платья', 'переделка вечернего платья'],
+      de: ['Abendkleid ändern', 'Abendkleid enger machen', 'Abendkleid kürzen', 'Festliches Kleid ändern', 'Cocktailkleid ändern', 'Festmode Änderungsschneiderei'],
+    },
+  },
+  {
+    id: 'pantolon', icon: '👖', time: 'repair', priceText: {
+      tr: 'Paça kısaltma ve bel daraltma ₺200\'den başlar.', en: 'Price by photo on WhatsApp.', ru: 'Цена по фото в WhatsApp.', de: 'Preis per Foto über WhatsApp.',
+    },
+    slug: { tr: 'pantolon-tadilati', en: 'trouser-alteration', ru: 'podgonka-bryuk', de: 'hose-aendern' },
+    name: { tr: 'Pantolon Tadilatı', en: 'Trouser Alteration', ru: 'Подгонка брюк', de: 'Hosen ändern' },
+    q: { tr: 'pantolon tadilatı', en: 'trouser alteration', ru: 'подгонка брюк', de: 'Hose ändern' },
+    intro: {
+      tr: 'Kumaş pantolon, takım pantolonu ve kotta paça kısaltma, bel daraltma ve genişletme, dar kesim (daraltma), fermuar değişimi ve söküklerin tamiri yapılır. Pantolon ayakta, giyeceğiniz ayakkabıyla denenir; normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'For dress trousers, suit trousers and jeans: hemming, taking in or letting out the waist, slimming the legs, zipper replacement and mending seams. Trousers are tried on standing, with the shoes you will wear; normal jobs are ready the next day, urgent ones in 1–2 hours.',
+      ru: 'Классические, костюмные брюки и джинсы: подшив, ушивание и расширение в поясе, сужение штанин, замена молнии и ремонт швов. Брюки примеряют стоя, в обуви, с которой вы их будете носить; обычные работы готовы на следующий день, срочные — за 1–2 часа.',
+      de: 'Stoffhosen, Anzughosen und Jeans: Kürzen, Bund enger oder weiter machen, Beine schmaler machen, Reißverschluss wechseln und Nähte reparieren. Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden; normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+    },
+    extra: { href: '/konyaalti-paca-kisaltma', label: { tr: 'Paça kısaltma sayfası', en: 'Hemming page (Turkish)', ru: 'Страница о подшиве брюк (тур.)', de: 'Seite zum Kürzen (türkisch)' } },
+    vars: {
+      tr: ['pantolon tadilatı', 'pantolon daraltma', 'pantolon paça kısaltma', 'pantolon bel daraltma', 'pantolon bel genişletme', 'kumaş pantolon tadilatı', 'takım pantolon tadilatı', 'pantolon fermuar değişimi'],
+      en: ['trouser alteration', 'pants alteration', 'taper trousers', 'take in trousers', 'trouser waist alteration', 'suit trousers alteration', 'pants tailor near me'],
+      ru: ['подгонка брюк', 'ушить брюки', 'сузить брюки', 'ушить брюки в поясе', 'подгонка костюмных брюк', 'ателье брюки'],
+      de: ['Hose ändern', 'Hose enger machen', 'Hose Bund enger machen', 'Hose schmaler machen', 'Anzughose ändern', 'Hose Änderung Schneider'],
+    },
+  },
+  {
+    id: 'kol', icon: '🧥', time: 'repair',
+    slug: { tr: 'kol-boyu-kisaltma', en: 'sleeve-shortening', ru: 'ukorochenie-rukavov', de: 'aermel-kuerzen' },
+    name: { tr: 'Kol Boyu Kısaltma', en: 'Sleeve Shortening', ru: 'Укорочение рукавов', de: 'Ärmel kürzen' },
+    q: { tr: 'kol boyu kısaltma', en: 'sleeve shortening', ru: 'укорочение рукавов', de: 'Ärmel kürzen' },
+    intro: {
+      tr: 'Ceket, mont, palto, gömlek, kazak ve elbisede kol boyu kısaltma yapılır. Kol boyu, giysi üzerinizdeyken ve kolunuz doğal duruşundayken işaretlenir. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'Sleeves are shortened on jackets, coats, shirts, sweaters and dresses. The length is marked while you wear the garment with your arm in a natural position. Normal jobs are ready the next day, urgent ones in 1–2 hours.',
+      ru: 'Рукава укорачиваем у пиджаков, курток, пальто, рубашек, свитеров и платьев. Длину отмечают, пока вещь на вас и рука в естественном положении. Обычные работы готовы на следующий день, срочные — за 1–2 часа.',
+      de: 'Ärmel werden bei Sakkos, Jacken, Mänteln, Hemden, Pullovern und Kleidern gekürzt. Die Länge wird am getragenen Kleidungsstück bei natürlicher Armhaltung markiert. Normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+    },
+    extra: { href: '/antalya-terzi', label: { tr: 'Antalya terzi sayfası', en: 'Antalya tailor page (Turkish)', ru: 'Страница портного в Анталье (тур.)', de: 'Schneider-Seite Antalya (türkisch)' } },
+    vars: {
+      tr: ['kol boyu kısaltma', 'kol kısaltma', 'ceket kol kısaltma', 'mont kol kısaltma', 'gömlek kol kısaltma', 'palto kol kısaltma', 'kazak kol kısaltma', 'kol boyu ayarlama'],
+      en: ['sleeve shortening', 'shorten sleeves', 'jacket sleeve shortening', 'coat sleeve shortening', 'shirt sleeve shortening', 'sleeve length alteration'],
+      ru: ['укорочение рукавов', 'укоротить рукава', 'укоротить рукава пиджака', 'укоротить рукава куртки', 'укоротить рукава рубашки', 'подгонка длины рукава'],
+      de: ['Ärmel kürzen', 'Ärmellänge ändern', 'Sakko Ärmel kürzen', 'Mantel Ärmel kürzen', 'Hemd Ärmel kürzen', 'Ärmel kürzen Schneider'],
     },
   },
   {
@@ -497,4 +559,4 @@ export const TIME_TEXT: Record<TimeKey, L4> = Object.fromEntries((['repair', 'cu
 ])) as Record<TimeKey, L4>;
 export const timeOf = (lang: Lang, s: Service) => TIME_TEXT[s.time][lang];
 export const priceOf = (lang: Lang, s: Service) =>
-  s.priceText ? s.priceText[lang] : s.priceFrom ? (lang === 'tr' ? `₺${s.priceFrom}'den başlar` : lang === 'en' ? `from ₺${s.priceFrom}` : lang === 'ru' ? `от ₺${s.priceFrom}` : `ab ₺${s.priceFrom}`) : null;
+  s.priceText ? s.priceText[lang] : s.priceFrom && lang === 'tr' ? `₺${s.priceFrom}'den başlar` : null; // yabancı dil sayfalarında fiyat yazılmaz

@@ -36,14 +36,14 @@ const SERVICES = [
     title:'Menswear Tailoring', sub:'Suits · Shirts · Trousers · Blazers · Tuxedos',
     desc:'Made-to-measure menswear. Tailored for a perfect fit, from business meetings to special occasions. Local and imported fabric options.',
     feats:['Suit','Shirt','Trousers','Blazer','Tuxedo','Waistcoat'],
-    price:'₺800+', note:"Price quoted from photo and measurements", time:'By design & quantity',
+    price:'by photo', note:"Price quoted from photo and measurements", time:'By design & quantity',
     waMsg:'Hello, I would like information about menswear tailoring.' },
   { id:'bayan-dikim', icon:'👗', badge:'', badgeColor:'',
     img: IMGS.bayan,
     title:'Womenswear Tailoring', sub:'Dresses · Blouses · Skirts · Jumpsuits · Office Wear · Evening Gowns',
     desc:'From everyday dresses to evening gowns, office wear to special-occasion pieces — clothing tailored exactly to your measurements.',
     feats:['Dress','Blouse','Skirt','Jumpsuit','Office Wear','Evening Gown','Wedding Dress'],
-    price:'₺800+', note:"Evening gowns from ₺1,200", time:'By design & quantity',
+    price:'by photo', note:"Price quoted from photo and measurements", time:'By design & quantity',
     waMsg:'Hello, I would like information about womenswear tailoring.' },
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
     img: IMGS.online,
@@ -57,14 +57,14 @@ const SERVICES = [
     title:'Ironing & Steam Pressing', sub:'Professional Ironing · Free Hotel Pickup & Delivery · Next Day',
     desc:'No wrinkled clothes on holiday! We pick up from your hotel, steam-press professionally, and deliver the next day – or in 1–2 hours if urgent.',
     feats:['Shirt Ironing','Suit Pressing','Hotel Pickup','Next-Day Delivery'],
-    price:'₺80+/item', note:'Bulk discounts available', time:'2–6 hours',
+    price:'by photo', note:'Bulk discounts available', time:'2–6 hours',
     waMsg:'Hello, I would like ironing service. Can you come to my hotel?' },
   { id:'tamir-tadilat', icon:'✂️', badge:'', badgeColor:'',
     img: IMGS.tamir,
     title:'Repairs & Alterations', sub:'Hemming · Zippers · Tears · Taking In',
     desc:'No need to give up on your favourite garment. Same-day delivery often possible.',
-    feats:['Hemming ₺200','Zipper ₺300','Tear Repair','Taking In','Sleeve Shortening'],
-    price:'₺200+', note:"Hemming from ₺200", time:'Next day · urgent 1–2 h',
+    feats:['Hemming','Zipper','Tear Repair','Taking In','Sleeve Shortening'],
+    price:'by photo', note:"Price quoted from photo", time:'Next day · urgent 1–2 h',
     waMsg:'Hello, I would like information about clothing repairs and alterations.' },
   { id:'model-tasarim', icon:'✏️', badge:'CUSTOM', badgeColor:'#7C3AED',
     img: IMGS.tasarim,
@@ -85,35 +85,35 @@ const SERVICES = [
     title:'Sportswear & Casual Wear', sub:'Tracksuits · Sweatshirts · Hoodies · Sport Shorts',
     desc:'Made-to-measure sportswear too. Embroidery and logo printing included.',
     feats:['Tracksuit','Sweatshirt','Hoodie','Logo Embroidery','Team Orders'],
-    price:'₺400+', note:'Bulk discounts available', time:'By design & quantity',
+    price:'by photo', note:'Bulk discounts available', time:'By design & quantity',
     waMsg:'Hello, I would like information about sportswear tailoring.' },
 ];
 
 const PRICE_TABLE = [
   { cat:'Menswear', rows:[
-    ['Men\'s Shirt','₺800+','By design & quantity'],
-    ['Men\'s Trousers','₺700+','By design & quantity'],
+    ['Men\'s Shirt','by photo','By design & quantity'],
+    ['Men\'s Trousers','by photo','By design & quantity'],
   ]},
   { cat:'Womenswear', rows:[
-    ['Everyday Dress','₺800+','By design & quantity'],
-    ['Office Wear','₺800+','By design & quantity'],
-    ['Evening Gown','₺1,200+','By design & quantity'],
-    ['Blouse / Skirt','₺500+','By design & quantity'],
-    ['Jumpsuit','₺900+','By design & quantity'],
+    ['Everyday Dress','by photo','By design & quantity'],
+    ['Office Wear','by photo','By design & quantity'],
+    ['Evening Gown','by photo','By design & quantity'],
+    ['Blouse / Skirt','by photo','By design & quantity'],
+    ['Jumpsuit','by photo','By design & quantity'],
   ]},
   { cat:'Ironing & Cleaning', rows:[
-    ['Shirt Ironing','₺80+','Next day'],
-    ['Dress Steaming','₺120+','Next day'],
-    ['Coat Ironing','₺200+','Next day'],
-    ['Bulk Ironing (10+ items)','₺60+/item','Next day'],
+    ['Shirt Ironing','by photo','Next day'],
+    ['Dress Steaming','by photo','Next day'],
+    ['Coat Ironing','by photo','Next day'],
+    ['Bulk Ironing (10+ items)','by photo','Next day'],
   ]},
   { cat:'Repairs & Alterations', rows:[
-    ['Hemming','₺200+','Next day'],
-    ['Zipper Replacement','₺300+','Next day'],
-    ['Taking In Waist','₺200+','Next day'],
-    ['Tear Repair','₺100+','Next day'],
-    ['Sleeve Shortening','₺200+','Next day'],
-    ['Lining Replacement','₺300+','48 hours'],
+    ['Hemming','by photo','Next day'],
+    ['Zipper Replacement','by photo','Next day'],
+    ['Taking In Waist','by photo','Next day'],
+    ['Tear Repair','by photo','Next day'],
+    ['Sleeve Shortening','by photo','Next day'],
+    ['Lining Replacement','by photo','48 hours'],
   ]},
 ];
 
@@ -483,7 +483,7 @@ export default function OnlineTailorClient({
       {/* FİYATLAR */}
       <section id="prices" className="osec" style={{ background: 'var(--ink2)' }} aria-labelledby="prices-h">
         <div className="octr">
-          <span className="oeyebrow">₺ Transparent Pricing</span>
+          <span className="oeyebrow">Transparent Pricing</span>
           <h2 className="oh2" id="prices-h">Tailor Prices 2026</h2>
           <p className="osh-sub">Starting prices. Send a photo via WhatsApp for an exact quote.</p>
           <div className="odivider" />

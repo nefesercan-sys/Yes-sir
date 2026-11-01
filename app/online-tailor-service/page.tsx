@@ -79,8 +79,8 @@ const FAQ = [
   { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
   { q: 'Can I have a custom dress made for myself?', a: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` },
   { q: 'Do you sew with natural fabrics like cotton or linen?', a: `Yes, we offer custom tailoring in 100% cotton and linen fabric. ${PHONE}` },
-  { q: "Where can I get trousers hemmed near me in Antalya?", a: `At Terzi Can in Hurma, Konyaaltı, open every day 08:00–23:00. Hemming (trousers, jeans) starts at ₺200 and is ready the next day, or in 1–2 hours if urgent. WhatsApp: ${PHONE}` },
-  { q: "How much does hemming and zipper replacement cost in Antalya?", a: `Hemming from ₺200, waist taking-in from ₺200, zipper replacement from ₺300, wedding dress alteration from ₺800 (2026 prices). Send a photo on WhatsApp for an exact quote.` },
+  { q: "Where can I get trousers hemmed near me in Antalya?", a: `At Terzi Can in Hurma, Konyaaltı, open every day 08:00–23:00. Hemming (trousers, jeans) is ready the next day, or in 1–2 hours if urgent. WhatsApp: ${PHONE}` },
+  { q: "How much does hemming and zipper replacement cost in Antalya?", a: `The price depends on the garment and the work: hemming, waist taking-in, zipper replacement, evening and wedding dress alterations. Send a photo on WhatsApp for an exact quote.` },
   { q: "Can you alter a jacket, coat, shirt, skirt or shorts?", a: `Yes. We alter and repair jackets, coats, shirts, skirts, shorts, dresses and trousers for men and women. Send a photo of the garment on WhatsApp and we will quote the price and time.` },
   { q: "I am a hotel guest staying only a few days. Is that enough time?", a: `Yes. Hemming and repairs are ready the next day, urgent jobs in 1–2 hours, and hotel pick-up and return are free in every hotel area we cover.` },
 ];
