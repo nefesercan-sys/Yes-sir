@@ -47,4 +47,9 @@ export const ANTALYA_ILCELERI: Lokasyon[] = [
   { slug: 'belek', ad: 'Belek', lat: 36.8625, lng: 31.0561 },
   { slug: 'side', ad: 'Side', lat: 36.7673, lng: 31.3893 },
   { slug: 'beldibi', ad: 'Beldibi', lat: 36.7122, lng: 30.5622 },
+  // Koordinatsız: talep sayımı yapılmaz (yanlış koordinat yerine boş bırakıldı)
+  { slug: 'manavgat', ad: 'Manavgat' },
+  { slug: 'kemer', ad: 'Kemer' },
+  { slug: 'kepez', ad: 'Kepez' },
+  { slug: 'dosemealti', ad: 'Döşemealtı' },
 ];
