@@ -67,7 +67,7 @@ export const PRICE_FROM = {
   damatlik: 20000,
 } as const;
 
-/** Yabancı dil sayfalarında fiyat EURO; kur varsayımı ₺20 = €1 (terzihizmeti.com.tr lib/facts.ts ile aynı). Gelinlik DİKİMİ yapılmaz (yalnız tadilat). */
+/** Yabancı dil sayfalarında fiyat EURO; € fiyatlar sahibin belirlediği turist başlangıç fiyatlarıdır, gerçek kurla çevrilmez (sahip kararı, Kasım 2026; terzihizmeti.com.tr lib/facts.ts ile aynı). Gelinlik DİKİMİ yapılmaz (yalnız tadilat). */
 export const TRY_PER_EUR = 20;
 export const eurOf = (tl: number): number => Math.round(tl / TRY_PER_EUR);
 
