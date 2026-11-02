@@ -89,7 +89,7 @@ export default function KonyaaltiTerziPage() {
             Antalya Konyaaltı Terzi Servisi
           </h1>
           <p className="text-xl text-amber-100 mb-8">
-            Özel Elbise Dikimi, Tamir, Tadilat ve Ütü Hizmetleri
+            Özel Elbise Dikimi, Tamir ve Tadilat Hizmetleri
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
