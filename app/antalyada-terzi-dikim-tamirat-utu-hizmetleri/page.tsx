@@ -36,7 +36,7 @@ const jsonLd = {
       '@type': 'WebPage',
       '@id': `${PAGE_URL}#webpage`,
       url: PAGE_URL,
-      name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı ve Ütü Hizmetleri',
+      name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı Hizmetleri',
       description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere ücretsiz servis; normal tadilat ertesi gün, acil 1–2 saat.",
       inLanguage: 'tr',
       dateModified: '2026-07-03',
@@ -52,7 +52,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: BASE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi, Dikim, Tamirat ve Ütü Hizmetleri', item: PAGE_URL }
+        { '@type': 'ListItem', position: 2, name: 'Antalya Terzi, Dikim ve Tamirat Hizmetleri', item: PAGE_URL }
       ]
     },
     {
@@ -272,7 +272,7 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim, Tamir ve Ütü' },
+  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim ve Tamir' },
   description: `Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı. ☎ ${PHONE}`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
@@ -289,7 +289,7 @@ export const metadata: Metadata = {
     languages: { 'tr-TR': PAGE_URL, 'x-default': PAGE_URL },
   },
   openGraph: {
-    title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü | Terzi Can',
+    title: 'Antalya Terzi | Adrese Teslim Dikim ve Tamirat | Terzi Can',
     description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı hizmetleri. Ertesi gün askıda teslimat, acil işler 1–2 saatte!`,
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
@@ -310,7 +310,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antalya Terzi | Adrese Teslim Dikim, Tamirat ve Ütü',
+    title: 'Antalya Terzi | Adrese Teslim Dikim ve Tamirat',
     description: 'Konyaaltı, Lara, Muratpaşa ve Kepez\'e kuryeli terzilik, kıyafet tamiratı hizmetleri.',
     images: [OG_IMAGE],
   },
@@ -464,7 +464,7 @@ export default function GeminiOptimizedTailorPage() {
           <nav aria-label="Breadcrumb" style={{ fontSize: 13, color: SUB, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
             <a href={`${BASE_URL}/terzi`} style={{ color: SUB, textDecoration: 'none' }}>Terzi Can</a>
             <span style={{ color: '#c7cbc8' }}>/</span>
-            <span style={{ color: INK, fontWeight: 500 }}>Antalya Terzi & Ütü</span>
+            <span style={{ color: INK, fontWeight: 500 }}>Antalya Terzi</span>
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18, flexWrap: 'wrap' }}>
@@ -475,7 +475,7 @@ export default function GeminiOptimizedTailorPage() {
           </div>
 
           <h1 style={{ fontSize: 36, lineHeight: 1.14, fontWeight: 800, letterSpacing: '-0.02em', margin: '0 0 16px', color: '#0b0d0c' }}>
-            Antalya Terzi, Özel Dikim, Kıyafet Tamiratı ve Ütü Hizmetleri
+            Antalya Terzi, Özel Dikim, Kıyafet Tamiratı Hizmetleri
           </h1>
 
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>

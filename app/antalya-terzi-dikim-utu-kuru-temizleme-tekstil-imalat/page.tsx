@@ -132,7 +132,7 @@ const jsonLd = {
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Konyaaltı Terzi · Tamir, Dikim, Ütü, Servis | Terzi Can' },
+  title: { absolute: 'Konyaaltı Terzi · Tamir, Dikim, Servis | Terzi Can' },
   description: "Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi. Her gün 08:00–23:00. ☎ " + PHONE,
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
