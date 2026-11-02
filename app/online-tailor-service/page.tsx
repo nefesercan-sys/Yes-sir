@@ -91,7 +91,7 @@ export default function OnlineTailorServicePage() {
       <BusinessSchema
         reviews={GOOGLE_REVIEWS}
         path={SITE_URL.replace(BASE_URL, '')}
-        name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi · Ütü Hizmeti'
+        name='Online Tailor Service Antalya — Erkek & Bayan Kıyafet Dikimi'
         description='Online tailor service by Terzi Can in Konyaaltı, Antalya: menswear and womenswear tailoring, repairs, alterations, custom design and mass production. Open daily 08:00–23:00.'
         lang={['tr','en','ru','de']}
         lastModified={TODAY}
