@@ -65,21 +65,6 @@ const GROUPS: ServiceGroup[] = [
       { name: 'Düğme, kopça, fitil tamiri', price: 'Fotoğrafa göre' },
     ],
   },
-  {
-    id: 'utu',
-    eyebrow: 'Bitirme Hizmeti',
-    title: 'Ütü & Son Bakım',
-    description:
-      'Özel günler ve iş kıyafetleri için profesyonel ütü ve buharlama. Kıyafetiniz teslim aldığınız gün giyime hazır olur.',
-    image: '/images/elbise-dikimi/wrap-dress-stone.jpg',
-    imageAlt: 'Taş duvar önünde sarma model beyaz elbise',
-    rows: [
-      { name: 'Elbise / gömlek ütüsü', price: 'Fotoğrafa göre' },
-      { name: 'Takım elbise ütüsü', price: '120 TL\'den' },
-      { name: 'Gelinlik / abiye buharlama', price: 'Fotoğrafa göre' },
-      { name: 'Toplu ütü (5+ parça)', price: 'Adet bazlı indirim' },
-    ],
-  },
 ]
 
 const TRUST_POINTS = [
@@ -694,7 +679,7 @@ export default function ElbiseDikimiClient() {
               Elbiseniz tam size göre <em>dikilsin</em>, tam size göre otursun
             </h1>
             <p className="hero-sub">
-              Elbise dikimi, tamirat, tadilat ve ütü — randevulu, şeffaf
+              Elbise dikimi, tamirat ve tadilat — randevulu, şeffaf
               fiyatlı, profesyonel atölye hizmeti.
             </p>
             <div className="hero-actions">
@@ -794,7 +779,7 @@ export default function ElbiseDikimiClient() {
             <div className="process-step">
               <p className="step-label">Adım 4</p>
               <h3 className="step-title">Teslim Alın</h3>
-              <p className="step-desc">Ütülenmiş, giyime hazır kıyafetinizi teslim alın.</p>
+              <p className="step-desc">Giyime hazır kıyafetinizi teslim alın.</p>
             </div>
           </div>
         </div>

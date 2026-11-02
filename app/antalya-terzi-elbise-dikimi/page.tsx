@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
   description:
-    "Konyaaltı'nda özel ölçü elbise dikimi ₺800'den, tadilat, tamirat ve ütü. Paça kısaltma 200 TL'den. " +
+    "Konyaaltı'nda özel ölçü elbise dikimi ₺800'den, tadilat ve tamirat. Paça kısaltma 200 TL'den. " +
     "Her gün 08:00–23:00. ☎ +90 531 898 64 18",
   keywords: [
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   })(),
   openGraph: {
     title: 'Antalya Terzi · Elbise Dikimi ve Tadilat — Terzi Can',
-    description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat, tamirat ve ütü hizmeti.",
+    description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat ve tamirat hizmeti.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
