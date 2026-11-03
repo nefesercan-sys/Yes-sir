@@ -429,7 +429,12 @@ export default function TerziCagirPage() {
 
         {/* GÜVEN PUANLARI */}
         <div className="trust">
-          {FAQ.map(([v,l]) => (
+          {[
+            ['🌟 Google', 'Yorumlarımızı Görün'],
+            ['⚡ Hızlı Servis', 'Aynı gün · acil 1–2 saat'],
+            ['🚗 Adrese', 'Araçlı Servis'],
+            ['✂️ 15 Yıl', 'Tecrübe'],
+          ].map(([v,l]) => (
             <div key={l} className="trust-item">
               <div className="trust-val">{v}</div>
               <div className="trust-lbl">{l}</div>
@@ -537,18 +542,7 @@ export default function TerziCagirPage() {
         {/* SSS */}
         <section className="faq" id="sss">
           <h2>Sık Sorulan Sorular</h2>
-          {[
-            ['Terzi çağırmak için ne yapmam gerekiyor?',
-             `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Randevu saatini birlikte belirleyelim — terzimiz kapınıza gelsin.`],
-            ['Hangi mahallelere servis yapıyorsunuz?',
-             'Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevi, Meltem, Çakırlar, Konyaaltı Merkez ve Antalya\'nın yakın ilçelerine araçlı terzi servisi sunuyoruz.'],
-            ['Paça kısaltma ve bel daraltma fiyatı ne kadar?',
-             'Paça kısaltma ₺200, bel daraltma ₺200, etek kısaltma ₺200. WhatsApp\'tan fotoğraf gönderin, fiyatı net olarak öğrenin.'],
-            ['Teslim süresi ne kadar?',
-             'Teslim süresi işin türüne ve o günkü yoğunluğa göre değişir; küçük tamirler genellikle daha hızlı biter. Net süre WhatsApp\'ta konuşulur.'],
-            ['İngilizce veya Rusça hizmet veriyor musunuz?',
-             'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için özel otel teslimat hizmeti de mevcuttur.'],
-          ].map(([q,a]) => (
+          {FAQ.map(([q,a]) => (
             <div key={q} className="faq-item">
               <div className="faq-q">{q}</div>
               <div className="faq-a">{a}</div>
