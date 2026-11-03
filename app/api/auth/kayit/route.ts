@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
-import { clean, isEmail, rateLimited } from '@/lib/api-guard';
+import { clean, isEmail, rateLimitedDb } from '@/lib/api-guard';
 import { adminEpostasiMi } from '@/lib/admin-auth';
 
 export async function POST(req: NextRequest) {
   try {
-    if (rateLimited(req, 'auth-kayit', 5, 10 * 60 * 1000)) {
+    if (await rateLimitedDb(req, 'auth-kayit', 5, 10 * 60 * 1000)) {
       return NextResponse.json({ error: 'Çok fazla deneme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
     }
     const b = await req.json().catch(() => null);

@@ -14,6 +14,8 @@ const CSP_REPORT_ONLY = [
   "frame-ancestors 'self'",
 ].join('; ')
 
+const CSP_ENFORCED = ["frame-ancestors 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self'"].join('; ')
+
 const nextConfig = {
   poweredByHeader: false,
 
@@ -109,6 +111,8 @@ const nextConfig = {
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Content-Security-Policy-Report-Only', value: CSP_REPORT_ONLY },
+          // Zararsız yönergeler ZORUNLU: script/style kısıtı yok, bu yüzden mevcut işlevi bozmaz
+          { key: 'Content-Security-Policy', value: CSP_ENFORCED },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), payment=()' },

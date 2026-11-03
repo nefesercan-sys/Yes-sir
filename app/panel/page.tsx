@@ -43,7 +43,7 @@ function PanelIcerik() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const isAdmin = session?.user?.email === 'nefesercan@gmail.com' || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const isAdmin = (session?.user as any)?.isAdmin === true; // sunucu hesaplar (lib/auth.ts session callback)
 
   const [aktifTab, setAktifTab] = useState<Tab>(
     (searchParams.get("tab") as Tab) || "ozet"

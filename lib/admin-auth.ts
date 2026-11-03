@@ -11,21 +11,13 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { timingSafeEqual } from 'crypto';
 
-// Yönetici e-postaları: ADMIN_EMAILS (virgülle ayrılmış) ve ADMIN_EMAIL tanımlıysa YALNIZCA onlar geçerlidir.
-// Hiçbiri tanımlı değilse eski davranış korunur (varsayılan: site sahibinin doğrulanmış adresi).
-const VARSAYILAN_YONETICILER = ['nefesercan@gmail.com'];
-const yoneticiler = () => {
-  const env = [...(process.env.ADMIN_EMAILS || '').split(','), process.env.ADMIN_EMAIL || '']
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
-  return env.length > 0 ? env : VARSAYILAN_YONETICILER;
-};
+import { yoneticiler, adminEpostasiMi } from '@/lib/admin-list';
 
 /**
  * Bu e-posta yönetici listesinde mi? Kayıt uçları kullanır: yönetici e-postasıyla YENİ hesap açılamaz
  * (adres başkası tarafından önceden kapılıp yönetici yetkisi alınamasın); yalnızca zaten kayıtlıysa giriş yapabilir.
  */
-export const adminEpostasiMi = (email: string): boolean => yoneticiler().includes(String(email || '').trim().toLowerCase());
+export { adminEpostasiMi };
 
 function esit(a: string, b: string) {
   const x = Buffer.from(a);

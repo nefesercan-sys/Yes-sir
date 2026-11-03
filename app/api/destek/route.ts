@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
-import { ADMIN_EMAIL, clean, isEmail, rateLimited } from "@/lib/api-guard";
+import { ADMIN_EMAIL, clean, isEmail, rateLimitedDb } from "@/lib/api-guard";
 
 export async function POST(req: NextRequest) {
   try {
-    if (rateLimited(req, "destek", 6, 10 * 60 * 1000)) {
+    if (await rateLimitedDb(req, "destek", 6, 10 * 60 * 1000)) {
       return NextResponse.json({ error: "Çok fazla istek" }, { status: 429 });
     }
     const body = await req.json();

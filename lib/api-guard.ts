@@ -1,4 +1,5 @@
 // Herkese açık (girişsiz) form API'leri için ortak koruma: IP başına hız sınırı + girdi temizleme.
+import { birincilYonetici } from '@/lib/admin-list';
 // NOT: Bellek içi sayaçtır (sunucusuz ortamda her örnek için ayrı). Kaba spam'i keser; GERÇEK dağıtık limit için
 // Upstash Redis (@upstash/ratelimit) önerilir. Kritik uçlar (OTP, giriş) lib/hiz-sayaci.ts ile MongoDB'de atomik sayar.
 import type { NextRequest } from 'next/server';
@@ -39,4 +40,19 @@ export function clean(v: unknown, max = 500): string {
 export const isEmail = (v: string) => /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/.test(v) && v.length <= 254;
 export const isPhone = (v: string) => /^[+0-9()\s-]{7,20}$/.test(v);
 
-export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'nefesercan@gmail.com';
+export const ADMIN_EMAIL = birincilYonetici();
+
+/**
+ * Dağıtık (MongoDB atomik sayaç) + bellek içi birleşik hız sınırı. true dönerse limit aşıldı.
+ * Sunucusuz ortamda örnekler arası ortak çalışır; veritabanına ulaşılamazsa bellek içi sınıra düşer (istek engellenmez).
+ */
+export async function rateLimitedDb(req: Request | NextRequest, anahtar: string, max: number, pencereMs: number): Promise<boolean> {
+  if (rateLimited(req, anahtar, max, pencereMs)) return true;
+  try {
+    const [{ getDb }, { pencereSayaci }] = await Promise.all([import('@/lib/mongodb'), import('@/lib/hiz-sayaci')]);
+    const db = await getDb();
+    return (await pencereSayaci(db, `rl:${anahtar}:${clientIp(req)}`, pencereMs)) > max;
+  } catch {
+    return false;
+  }
+}
