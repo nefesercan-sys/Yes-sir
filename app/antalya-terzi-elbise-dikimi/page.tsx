@@ -7,6 +7,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ElbiseDikimiClient from './client';
 import { jsonLdString } from '@/lib/json-ld';
+import { hzSixForService } from '@/lib/intl-hz';
 
 const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
   description:
-    "Konyaaltı'nda özel ölçü elbise dikimi (fotoğrafa ve istediğiniz modele göre), tadilat ve tamirat. Paça kısaltma 200 TL'den. " +
+    "Konyaaltı'nda elbise dikimi (fotoğrafa ve istediğiniz modele göre), tadilat, tamirat. Paça kısaltma 200 TL'den. " +
     "Her gün 08:00–23:00. ☎ +90 531 898 64 18",
   keywords: [
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
       canonical: SITE_URL,
       languages: {
         ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        ...hzSixForService(sv.slug.tr),
         'x-default': SITE_URL,
       },
     };

@@ -5,6 +5,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import { hzSixForService } from '@/lib/intl-hz';
 
 const SITE_URL = 'https://swaphubs.com/terzi/paca-kisaltma-antalya';
 const PARENT = 'https://swaphubs.com/terzi';
@@ -99,6 +100,7 @@ export const metadata: Metadata = {
       canonical: SITE_URL,
       languages: {
         ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        ...hzSixForService(sv.slug.tr),
         'x-default': SITE_URL,
       },
     };
