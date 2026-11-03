@@ -37,7 +37,15 @@ const GROUPS: { id: string; label: string; ops: string[]; heads: ((n: string, l:
   { id: 'fermuar-dugme', label: 'fermuar, düğme ve astar',
     ops: ['pantolon, mont, ceket ve çanta fermuarı değişimi (fermuarlı ve fermuarsız modeller)', 'sıkışan fermuar tamiri', 'düğme değişimi', 'astar değişimi (kazak ve hırka hariç)', 'sökük ve yırtık onarımı'],
     heads: [(n) => `${n} fermuar değişimi ve tamiri`, (n) => `${n} fermuar, düğme, astar değişimi`, (n, l) => `${l} fermuarı bozulan kıyafet`],
-    intros: [(l, n, o) => `${l} fermuar, düğme ve astar işleri: ${o}.`, (l, n, o) => `Fermuarı bozulan, düğmesi düşen ya da astarı yırtılan kıyafetiniz için ${n}'de ${o}.`, (l, n, o) => `${n} için: ${o}.`] },
+    intros: [(l, n, o) => `${l} fermuar, düğme ve astar işleri: ${o}.`, (l, n, o) => `Fermuarı bozulan, düğmesi düşen ya da astarı yırtılan kıyafetiniz için ${l} ${o}.`, (l, n, o) => `${n} için: ${o}.`] },
+  { id: 'deri', label: 'deri ceket, pantolon ve yelek',
+    ops: ['deri ceket yaka değiştirme', 'deri ceket kol kısaltma', 'deri ceket boy kısaltma', 'deri ceket daraltma', 'deri pantolon bel daraltma', 'deri pantolon boy kısaltma', 'deri pantolon fermuar değişimi', 'deri yelek tamir ve tadilatı', 'deri fermuar tamiri'],
+    heads: [(n) => `${n} deri ceket, pantolon, yelek tadilatı`, (n) => `${n} deri ceket yaka ve kol değişimi`, (n, l) => `${l} deri pantolon bel daraltma, boy kısaltma`],
+    intros: [(l, n, o) => `${l} deri giysilerde ${o}; deri işleri ₺400'den başlar.`, (l, n, o) => `Deri ceket, deri pantolon ve deri yelek için ${l} ${o}. Fiyat ₺400'den başlar; netleşmesi için fotoğraf yeterli.`, (l, n, o) => `${n} çevresinde deri giysinize: ${o}.`] },
+  { id: 'kot', label: 'kot pantolon, ceket, mont, etek ve şort',
+    ops: ['kot pantolon paça kısaltma', 'kot pantolon orijinal paça yapımı', 'kot pantolon bel daraltma', 'kot pantolon bacak daraltma', 'kot ceket kol ve boy kısaltma', 'kot ceket daraltma', 'kot mont kısaltma ve daraltma', 'kot etek boy kısaltma ve bel daraltma', 'kot şort boy kısaltma', 'kot fermuar ve düğme değişimi', 'kot yırtık ve sökük onarımı'],
+    heads: [(n) => `${n} kot pantolon, ceket, mont tadilatı`, (n) => `${n} kot paça kısaltma ve orijinal paça`, (n, l) => `${l} kot etek ve kot şort kısaltma, daraltma`],
+    intros: [(l, n, o) => `${l} kot giysilerde ${o}; kot işleri ₺200'den başlar.`, (l, n, o) => `Kot pantolon, ceket, mont, etek ve şort için ${l} ${o}. Fiyat ₺200'den başlar.`, (l, n, o) => `${n} çevresinde kot ürünlerinize: ${o}.`] },
 ];
 
 const TITLES: ((loc: string, n: string) => string)[] = [
@@ -90,6 +98,9 @@ const FAQ: { id: string; f: (loc: string, n: string) => [string, string] }[] = [
   { id: 'etek', f: (l) => [`${l} etek kısaltma ve daraltma ne kadar?`, `Etek boyu kısaltma ve bel daraltma ₺200'den başlar; kot etek de yapılır. Normal işler aynı gün teslim edilir.`] },
   { id: 'dikim', f: (l, n) => [`${n} için elbise veya yelek, tulum, bluz, eşofman dikimi yapıyor musunuz?`, `Evet. Elbise, yelek, tulum, bluz ve eşofman dikimi ölçüye göre yapılır; model fotoğrafı gönderirseniz net fiyatı ve süreyi söyleriz. Gelinlik dikimi yapılmaz, gelinlik tadilatı yapılır.`] },
   { id: 'kaban', f: (l) => [`${l} kaban ve palto tadilatı yapılıyor mu?`, `Evet. Kaban ve palto için boy ve kol kısaltma, daraltma, fermuar ve astar değişimi yapıyoruz; fiyat işe göre fotoğrafla söylenir.`] },
+  { id: 'deri', f: (l) => [`${l} deri ceketin yakası, kolu veya boyu değişir mi?`, `Evet. Deri ceketin yaka değişimi, kol ve boy kısaltması ve daraltması yapılır; deri işleri ₺400'den başlar, net fiyat fotoğrafla söylenir.`] },
+  { id: 'deripant', f: (l) => [`${l} deri pantolonun belini daraltıyor, boyunu kısaltıyor musunuz?`, `Evet. Deri pantolon ve deri yelekte bel daraltma, boy kısaltma, fermuar değişimi ve tamir yapılır; ₺400'den başlar, net fiyat fotoğrafla söylenir.`] },
+  { id: 'kotmont', f: (l) => [`${l} kot ceket, kot mont ve kot şort kısaltma yapılıyor mu?`, `Evet. Kot ceket ve montta kol ve boy kısaltma, daraltma; kot şortta boy kısaltma yapılır; kot işleri ₺200'den başlar.`] },
 ];
 
 export function bolgeEkSss(slug: string, n: string, loc: string, exclude: string[] = []): [string, string][] {
