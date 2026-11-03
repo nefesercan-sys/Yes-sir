@@ -4,6 +4,7 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
 import { fitDesc } from '@/lib/meta-fit';
@@ -267,8 +268,8 @@ function _districtCopy(lang: Lang, d: District) {
 
   function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
     const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'Terzi Can') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
-    if (!o) return { ...r, title: pickFit(({ tr: [`${n} Terzi Çağır · Elbise Dikimi, Tamiri, Tadilatı`, `${n} Terzi Çağır: Dikim, Tamir, Tadilat | Antalya`, `${n} Terzi Çağır | Antalya Tadilat`, `${n} Terzi Çağır | Antalya`], en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60) };
-    return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: pickFit(({ tr: [`${n} Terzi Çağır · Elbise Dikimi, Tamiri, Tadilatı`, `${n} Terzi Çağır: Dikim, Tamir, Tadilat | Antalya`, `${n} Terzi Çağır | Antalya Tadilat`, `${n} Terzi Çağır | Antalya`], en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60), desc: (lang === 'tr' ? o.desc : r.desc) };
+    if (!o) return { ...r, title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60) };
+    return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60), desc: (lang === 'tr' ? o.desc : r.desc) };
   }
 }
 
@@ -636,7 +637,8 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
   const c = districtCopy(lang, d);
   const url = abs(districtUrl(lang, d));
   const idx = DISTRICTS.findIndex((x) => x.slug === d.slug);
-  const faq = districtFaq(lang, d);
+  const matris = lang === 'tr' ? bolgeMatrisi(d.slug, d.name.tr, d.loc.tr) : null;
+  const faq = lang === 'tr' ? [...districtFaq(lang, d), ...bolgeEkSss(d.slug, d.name.tr, d.loc.tr)] : districtFaq(lang, d);
   const waMsg = {
     tr: `Merhaba, ${c.loc} terzi hizmeti almak istiyorum.`,
     en: `Hello, I need a tailor ${c.loc}.`,
@@ -773,6 +775,22 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
             <p style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)', marginTop: '1.2rem', textAlign: 'center' }}>{u.photoPrice}</p>
           </div>
         </section>
+
+        {matris && (
+          <section className="sl-sec" aria-labelledby="mtx-h">
+            <div className="sl-ctr" style={{ maxWidth: 820 }}>
+              <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="mtx-h">{matris.title}</h2></div>
+              <p style={{ fontSize: '.92rem', lineHeight: 1.75, color: 'rgba(255,255,255,.8)', margin: '0 0 1rem' }}>{matris.lead}</p>
+              {matris.groups.map((g) => (
+                <div key={g.id} style={{ marginBottom: '1.1rem' }}>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 .3rem', color: '#C9A96E' }}>{g.heading}</h3>
+                  <p style={{ fontSize: '.9rem', lineHeight: 1.75, color: 'rgba(255,255,255,.78)', margin: 0 }}>{g.text}</p>
+                </div>
+              ))}
+              <p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.6)', marginTop: '.8rem' }}>{matris.price}</p>
+            </div>
+          </section>
+        )}
 
         <section className="sl-sec" aria-labelledby="proc-h">
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
