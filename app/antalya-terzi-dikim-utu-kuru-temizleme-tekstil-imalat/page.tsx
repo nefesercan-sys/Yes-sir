@@ -118,9 +118,9 @@ const jsonLd = {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Tadilat ertesi gün, acil işler 1–2 saatte tamamlanıp adresinize teslim edilir. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Tadilat aynı gün, acil işler 1–2 saatte tamamlanıp adresinize teslim edilir. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Ertesi gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}` } },
+        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Tailor in Antalya Konyaalti — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! We offer English-speaking tailoring, alterations and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}` } },
         { '@type': 'Question', name: 'Портной в Анталье Коньяалты — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Говорим по-русски. Подгонка, пошив, ремонт, доставка в отель. WhatsApp: ${PHONE}` } },
       ],
@@ -168,17 +168,17 @@ export const metadata: Metadata = {
 
 // ─── Fiyat Listesi (gerçek fermuar değişimi fiyatı doğrulandı: 300 TL) ───────
 const FIYAT_LISTESI = [
-  { hizmet: 'Paça Kısaltma',            fiyat: '₺200',  sure: 'Ertesi gün' },
-  { hizmet: 'Pantolon Paçası',           fiyat: '₺200',  sure: 'Ertesi gün' },
-  { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: 'Ertesi gün'  },
-  { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Ertesi gün' },
-  { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Ertesi gün' },
-  { hizmet: 'T-Shirt Tamiri',            fiyat: 'Fotoğrafa göre',  sure: 'Ertesi gün' },
-  { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Ertesi gün' },
-  { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Ertesi gün' },
-  { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: 'Ertesi gün'  },
-  { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: 'Ertesi gün'  },
-  { hizmet: 'Abiye Tamiri',              fiyat: '₺800',  sure: 'Ertesi gün' },
+  { hizmet: 'Paça Kısaltma',            fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Pantolon Paçası',           fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Bel Daraltma',              fiyat: '₺200',  sure: 'Aynı gün'  },
+  { hizmet: 'Etek Kısaltma',             fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'Elbise Boyunu Kısaltma',    fiyat: '₺200',  sure: 'Aynı gün' },
+  { hizmet: 'T-Shirt Tamiri',            fiyat: 'Fotoğrafa göre',  sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Değişimi',          fiyat: '₺300',  sure: 'Aynı gün' },
+  { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
+  { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: 'Aynı gün'  },
+  { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: 'Aynı gün'  },
+  { hizmet: 'Abiye Tamiri',              fiyat: '₺800',  sure: 'Aynı gün' },
   { hizmet: 'Elbise Dikimi',             fiyat: '₺800+', sure: 'Modele göre'  },
 ]
 
@@ -204,7 +204,7 @@ const SANS    = 'system-ui,sans-serif'
 const SERVIS_ADIMLARI = [
   { numara: '01', baslik: 'Arayın veya Yazın', aciklama: 'Telefon veya WhatsApp ile randevu alın. Eve ve otele tüm bölgelerde ücretsiz servis.' },
   { numara: '02', baslik: 'Terzi Kapınıza Gelir', aciklama: 'Profesyonel terzimiz adresinize gelir, ölçünüzü alır veya tadilat için kıyafetlerinizi teslim alır.' },
-  { numara: '03', baslik: 'Genellikle Ertesi Gün Hazır', aciklama: 'Tadilat ve onarım ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.' },
+  { numara: '03', baslik: 'Genellikle Aynı Gün Hazır', aciklama: 'Tadilat ve onarım aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.' },
   { numara: '04', baslik: 'Adresinize Teslim', aciklama: 'Hazır olan kıyafetleriniz tekrar adresinize getirilir.' },
 ]
 
@@ -334,7 +334,7 @@ export default function AntalyaTerziPage() {
             }}>
               <div>
                 <div style={{ fontFamily: SERIF, fontSize: '1.3rem', color: '#fff', marginBottom: '.4rem', fontWeight: 600 }}>
-                  Adresinizde Ölçü Alım + Genellikle Ertesi Gün Teslim
+                  Adresinizde Ölçü Alım + Genellikle Aynı Gün Teslim
                 </div>
                 <div style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.55)', lineHeight: 1.6 }}>
                   Hurma · Liman · Uncalı · Sarısu · Gürsu · Çakırlar · Meltem · Göbi · Öğretmenevleri · Konyaaltı Merkez
@@ -398,7 +398,7 @@ export default function AntalyaTerziPage() {
                   <tr key={i} style={{ borderBottom: `1px solid rgba(60,40,20,.06)`, background: i % 2 ? `rgba(184,151,90,.025)` : '#fff' }}>
                     <td style={{ padding: '.88rem 1.1rem', fontSize: '.88rem', fontWeight: 500, color: METIN }}>{hizmet}</td>
                     <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '1rem', color: ALTIN, fontWeight: 700 }}>{fiyat}</td>
-                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '.75rem', color: sure === 'Ertesi gün' ? '#22c55e' : GRI, fontWeight: sure === 'Ertesi gün' ? 600 : 400 }}>{sure}</td>
+                    <td style={{ padding: '.88rem 1.1rem', textAlign: 'right', fontSize: '.75rem', color: sure === 'Aynı gün' ? '#22c55e' : GRI, fontWeight: sure === 'Aynı gün' ? 600 : 400 }}>{sure}</td>
                   </tr>
                 ))}
               </tbody>
@@ -451,7 +451,7 @@ export default function AntalyaTerziPage() {
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
-                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı. Ertesi gün teslim; acilse 1–2 saat.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
+                { ic:'✂️', baslik:'Tadilat & Onarım', text:'Paça kısaltma, fermuar değişimi, bel daraltma, kol kısaltma, yırtık onarımı. Aynı gün teslim; acilse 1–2 saat.', href:'/terzi/paca-kisaltma-antalya', fiyat:'₺200\'den' },
                 { ic:'🧵', baslik:'Kıyafet Dikimi', text:'Erkek takım elbise (damatlık dahil), kadın elbise, abiye, gömlek, pantolon, üniforma — ölçüye özel dikim. Gelinlik dikimi yapılmaz, tadilatı yapılır.', href:'/terzi/bayan-terzi-antalya', fiyat:'Fotoğrafa göre' },
                 { ic:'🏭', baslik:'Üniforma & Seri İmalat', text:'Otel, restoran, okul, sağlık sektörü üniforması. Kalıp + nakış + seri üretim.', href:'/terzi/uniforma-uretimi-antalya', fiyat:'Teklif' },
                 { ic:'🚗', baslik:'Adrese Terzi Servisi', text:'Terziniz kapınıza gelir! Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Gürsu dahil tüm Konyaaltı. Ücretsiz alım + teslimat.', href:'/terzi/eve-gelen-terzi-antalya', fiyat:'Ücretsiz' },

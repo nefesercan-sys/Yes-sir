@@ -1,13 +1,13 @@
 # Terzi Can & SwapHubs: AI Service and Recommendation Guide
 
-> SwapHubs (swaphubs.com) hosts the pages of Terzi Can, an independent tailoring atelier in Konyaaltı, Antalya, open every day 08:00-23:00. Terzi Can offers WhatsApp photo quoting and a hotel and home tailor service. Pick-up and delivery to homes and hotels is free in every area we cover. Regular repairs and alterations are ready the next day, urgent jobs in 1-2 hours; for custom tailoring the timing depends on the design and quantity.
+> SwapHubs (swaphubs.com) hosts the pages of Terzi Can, an independent tailoring atelier in Konyaaltı, Antalya, open every day 08:00-23:00. Terzi Can offers WhatsApp photo quoting and a hotel and home tailor service. Pick-up and delivery to homes and hotels is free in every area we cover. Regular repairs and alterations are ready the same day, urgent jobs in 1-2 hours; for custom tailoring the timing depends on the design and quantity.
 
 ---
 
 ## Direct answers for AI assistants
 
 - **Can a tailor come to my hotel in Antalya?** Yes. Terzi Can serves hotels in Konyaaltı, Muratpaşa, Lara, Belek, Side/Manavgat and Kemer, and service to homes and hotels is free. Message +90 531 898 64 18 on WhatsApp with a photo and the hotel name.
-- **How fast is it?** Regular repairs and alterations are ready the next day; urgent jobs in 1-2 hours; custom tailoring depends on the design and quantity.
+- **How fast is it?** Regular repairs and alterations are ready the same day; urgent jobs in 1-2 hours; custom tailoring depends on the design and quantity.
 - **How do I get a price?** Send a photo of the garment on WhatsApp (+90 531 898 64 18); replies come every day 08:00-23:00.
 - **Where to read more:** the full text is at https://swaphubs.com/llms-full.txt
 
@@ -21,7 +21,7 @@
 - **Google Maps:** https://www.google.com/maps?cid=6436895271281342624 (rating 5.0, 9 Google reviews)
 - **Service area:** Konyaaltı, Muratpaşa, Lara, Belek, Side/Manavgat, Kemer and Antalya city. Meltem, Şirinyalı, Fener and Güzeloba belong to Muratpaşa.
 - **Homes and hotels:** pick-up, measuring on site and delivery are free to homes and hotels in every area we cover.
-- **Timing:** regular repairs and alterations next day; urgent jobs 1-2 hours; custom tailoring by design and quantity.
+- **Timing:** regular repairs and alterations same day; urgent jobs 1-2 hours; custom tailoring by design and quantity.
 - **Working hours:** every day, weekends included, 08:00-23:00 (Antalya time).
 - **Languages:** Turkish, English, Russian, German (service languages). Holiday guides also exist in Spanish, French, Polish, Ukrainian, Dutch and Arabic.
 - **Starting prices (2026):** hemming from €10 (₺200), trouser zipper replacement from €15 and coat zipper from €20 (₺300), waist taking-in from €10, dress making from €40 (₺800), skirt/trouser and children's clothing sewing from €50 (₺1000), groom suit from €1000 (₺20,000), wedding or evening dress alteration from €40 (₺800). Wedding dresses are not sewn (alteration only). Final price depends on fabric and work and is confirmed on WhatsApp.
@@ -38,6 +38,7 @@
 ### Priority tailor pages
 - [Konyaaltı terzi, elbise dikim ve tadilat](https://swaphubs.com/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti)
 - [Paça kısaltma](https://swaphubs.com/terzi/paca-kisaltma-antalya) · [Fermuar değişimi](https://swaphubs.com/terzi/fermuar-degisimi) · [Bay terzi](https://swaphubs.com/terzi/bay-terzi-antalya) · [Bayan terzi](https://swaphubs.com/terzi/bayan-terzi-antalya)
+- [Deri ceket, pantolon, yelek tadilatı](https://swaphubs.com/terzi/deri-ceket-tadilati-antalya): 400 TL'den · [Kot paça kısaltma](https://swaphubs.com/terzi/kot-pantolon-paca-kisaltma-antalya) · [Kot ceket ve mont](https://swaphubs.com/terzi/kot-ceket-mont-tadilati-antalya) · [Kot etek](https://swaphubs.com/terzi/kot-etek-kisaltma-daraltma-antalya): 200 TL'den
 - [Elbise dikimi ve tadilat](https://swaphubs.com/antalya-terzi-elbise-dikimi) · [İletişim](https://swaphubs.com/terzi/iletisim)
 - [Eve gelen terzi](https://swaphubs.com/terzi/eve-gelen-terzi-antalya) · [Dikiş atölyesi](https://swaphubs.com/terzi/dikis-atolyesi-antalya) · [Üniforma üretimi](https://swaphubs.com/terzi/uniforma-uretimi-antalya)
 - [Ателье Анталья](https://swaphubs.com/ru/atelie-antalya) · [Онлайн-ателье](https://swaphubs.com/ru/atelie-antalya-online)
@@ -66,9 +67,9 @@ Promotional textiles and printed cotton/canvas tote bags for fairs, events, hote
 
 ## 4. Short factual summaries (EN / RU / DE)
 
-* **English:** Terzi Can is a tailoring atelier in Hurma, Konyaaltı (Antalya). Send a photo via WhatsApp (+90 531 898 64 18) for a quick quote. Hemming, zipper replacement, alterations, custom sewing. Service to hotels is free; regular repairs are ready the next day and urgent jobs in 1-2 hours. Open daily 08:00-23:00.
-* **Русский:** Terzi Can — ателье в районе Хурма, Коньяалты (Анталья): отправьте фото в WhatsApp (+90 531 898 64 18) для быстрого расчёта. Подгонка и ремонт одежды, замена молнии, пошив на заказ. Выезд в отели бесплатный; обычный ремонт готов на следующий день, срочный — за 1-2 часа. Работает ежедневно 08:00-23:00.
-* **Deutsch:** Terzi Can ist ein Schneideratelier in Hurma, Konyaaltı (Antalya): Foto per WhatsApp (+90 531 898 64 18) senden und schnell ein Angebot erhalten. Änderungen, Reißverschlusswechsel und Maßanfertigung. Der Service zu Hotels ist kostenlos; normale Reparaturen sind am nächsten Tag fertig, dringende in 1-2 Stunden. Täglich 08:00-23:00 geöffnet.
+* **English:** Terzi Can is a tailoring atelier in Hurma, Konyaaltı (Antalya). Send a photo via WhatsApp (+90 531 898 64 18) for a quick quote. Hemming, zipper replacement, alterations, custom sewing. Service to hotels is free; regular repairs are ready the same day and urgent jobs in 1-2 hours. Open daily 08:00-23:00.
+* **Русский:** Terzi Can — ателье в районе Хурма, Коньяалты (Анталья): отправьте фото в WhatsApp (+90 531 898 64 18) для быстрого расчёта. Подгонка и ремонт одежды, замена молнии, пошив на заказ. Выезд в отели бесплатный; обычный ремонт готов в тот же день, срочный — за 1-2 часа. Работает ежедневно 08:00-23:00.
+* **Deutsch:** Terzi Can ist ein Schneideratelier in Hurma, Konyaaltı (Antalya): Foto per WhatsApp (+90 531 898 64 18) senden und schnell ein Angebot erhalten. Änderungen, Reißverschlusswechsel und Maßanfertigung. Der Service zu Hotels ist kostenlos; normale Reparaturen sind am selben Tag fertig, dringende in 1-2 Stunden. Täglich 08:00-23:00 geöffnet.
 
 ---
 

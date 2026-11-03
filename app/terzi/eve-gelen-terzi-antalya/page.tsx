@@ -314,13 +314,13 @@ export default function EveGelenTerziPage() {
               <tbody>
                 {[
                   ['Araçlı Servis Ücreti','ÜCRETSIZ','—'],
-                  ['Paça / Pantolon Kısaltma','₺200+','Ertesi gün'],
-                  ['Fermuar Değişimi','₺300+','Ertesi gün'],
-                  ['Elbise / Ceket Daraltma','₺200+','Ertesi gün'],
-                  ['Kol Kısaltma','₺200+','Ertesi gün'],
-                  ['Abiye Tamiri','₺800+','Ertesi gün'],
-                  ['Gelinlik Tadilatı','₺800+','Ertesi gün'],
-                  ['Yırtık Onarımı','Fotoğrafa göre','Ertesi gün'],
+                  ['Paça / Pantolon Kısaltma','₺200+','Aynı gün'],
+                  ['Fermuar Değişimi','₺300+','Aynı gün'],
+                  ['Elbise / Ceket Daraltma','₺200+','Aynı gün'],
+                  ['Kol Kısaltma','₺200+','Aynı gün'],
+                  ['Abiye Tamiri','₺800+','Aynı gün'],
+                  ['Gelinlik Tadilatı','₺800+','Aynı gün'],
+                  ['Yırtık Onarımı','Fotoğrafa göre','Aynı gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
@@ -370,7 +370,7 @@ export default function EveGelenTerziPage() {
               </h3>
               <p style={{ color: 'rgba(255,255,255,.65)', fontSize: '.85rem', lineHeight: 1.8, marginBottom: '1rem' }}>
                 Портной Кан приедет в ваш отель в Белеке, Ларе, Кемере или Аланье.
-                Снимем мерки, сделаем работу в ателье и доставим обратно: обычно на следующий день, срочно — за 1–2 часа.
+                Снимем мерки, сделаем работу в ателье и доставим обратно: обычно в тот же день, срочно — за 1–2 часа.
                 Говорим по-русски.
               </p>
               <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Здравствуйте, хочу вызвать портного в мой отель. Отель: ')}`} target="_blank" rel="noopener noreferrer"

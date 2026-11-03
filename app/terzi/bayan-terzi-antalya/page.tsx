@@ -35,7 +35,7 @@ const jsonLd = {
       mainEntity: [
         { '@type':'Question', name:'Bayan terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Etek kısaltma ₺200, elbise daraltma ₺200, kadın elbise dikimi ₺800, abiye tamiri ₺800, gelinlik tadilatı ₺800. WhatsApp: ${PHONE}`}},
         { '@type':'Question', name:'Gelinlik tadilatı Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz ayarı yapılmaktadır. Nisan–Ekim düğün sezonunda. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Abiye tamiri Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Abiye tamiri ₺800'den, abiye kısaltma ₺800'den başlar. Ertesi gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}`}},
+        { '@type':'Question', name:'Abiye tamiri Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Abiye tamiri ₺800'den, abiye kısaltma ₺800'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}`}},
         { '@type':'Question', name:'Kadın elbise dikimi Antalya?', acceptedAnswer:{'@type':'Answer', text:`Evet! Ölçüye özel kadın elbise dikimi ₺800'den başlar. Bluz, etek, tulum, abiye. WhatsApp: ${PHONE}`}},
       ],
     },
@@ -62,16 +62,16 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Etek / Pantolon Kısaltma', '₺200–175', 'Ertesi gün'],
-  ['Elbise Daraltma / Beden Küçültme', '₺200', 'Ertesi gün'],
-  ['Kol Kısaltma (Elbise/Bluz)', '₺200', 'Ertesi gün'],
-  ['Invisible Fermuar Değişimi', '₺300', 'Ertesi gün'],
+  ['Etek / Pantolon Kısaltma', '₺200–175', 'Aynı gün'],
+  ['Elbise Daraltma / Beden Küçültme', '₺200', 'Aynı gün'],
+  ['Kol Kısaltma (Elbise/Bluz)', '₺200', 'Aynı gün'],
+  ['Invisible Fermuar Değişimi', '₺300', 'Aynı gün'],
   ['Bluz Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Kadın Elbise Dikimi', '₺800', 'Modele ve adede göre'],
   ['Tulum Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Abiye Tamiri / Kısaltma', '₺800', 'Ertesi gün'],
+  ['Abiye Tamiri / Kısaltma', '₺800', 'Aynı gün'],
   ['Abiye Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Gelinlik Tadilatı', '₺800', 'Ertesi gün'],
+  ['Gelinlik Tadilatı', '₺800', 'Aynı gün'],
   ['Büyük Beden Elbise Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];
@@ -168,7 +168,7 @@ export default function BayanTerziPage() {
               </p>
               <p>
                 <strong>Abiye tamiri ve kısaltmada</strong> taş ve süslemeler korunarak işlem yapılmaktadır.
-                Tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden alım ve teslim ücretsizdir; eve de ücretsizdir.
+                Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden alım ve teslim ücretsizdir; eve de ücretsizdir.
               </p>
             </div>
           </div>
@@ -180,7 +180,7 @@ export default function BayanTerziPage() {
             {[
               ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺200, elbise daraltma ₺200, elbise dikimi ₺800, abiye tamiri ₺800, gelinlik tadilatı ₺800. WhatsApp: ${PHONE}`],
               ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz düzeltme. Nisan–Ekim sezonu. WhatsApp: ${PHONE}`],
-              ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri ertesi gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
+              ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri aynı gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
               ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa göre netleşir. WhatsApp: ${PHONE}`],
               ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
               ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılmaktadır. WhatsApp: ${PHONE}`],

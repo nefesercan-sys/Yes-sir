@@ -62,7 +62,7 @@ function meta(slug: string, ad: string) {
     `${ad} Terzi Çağır · Fotoğrafla Fiyat | Terzi Can`,
   ]);
   const svc = isFreeService(slug) ? 'Otele ve eve ücretsiz servis.' : resort ? 'Otele ücretsiz servis.' : 'Otellere servis ücretsiz.';
-  const desc = `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat ertesi gün, acil 1–2 saat. ${svc} ☎ ${PHONE_DISPLAY}`;
+  const desc = `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc} ☎ ${PHONE_DISPLAY}`;
   return { title, desc, loc, resort };
 }
 

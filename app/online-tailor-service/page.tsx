@@ -75,14 +75,14 @@ const FAQ = [
   { q: 'Do you come to my hotel for fittings and alterations?', a: `Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the timing on WhatsApp. ${PHONE}` },
   { q: 'Can you reply in my language?', a: `Yes. Message us on WhatsApp in any language and we reply in it: ${PHONE}` },
   { q: 'Can I order from abroad?', a: 'Yes. We take your measurements online, sew the garment in Antalya and ship it to your country, usually within 1–3 weeks. Payment is by bank transfer. If it does not fit, we exchange or alter it. We can supply the fabric, or you can provide your own.' },
-  { q: 'My dress is torn — can you repair it urgently?', a: `Yes, urgent repairs are ready in 1–2 hours and regular ones the next day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
+  { q: 'My dress is torn — can you repair it urgently?', a: `Yes, urgent repairs are ready in 1–2 hours and regular ones the same day. Send a photo via WhatsApp for an instant estimate. ${PHONE}` },
   { q: 'Are you open in the evening or on weekends?', a: `Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time. ${PHONE}` },
   { q: 'Can I have a custom dress made for myself?', a: `Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns. Send a reference photo via WhatsApp. ${PHONE}` },
   { q: 'Do you sew with natural fabrics like cotton or linen?', a: `Yes, we offer custom tailoring in 100% cotton and linen fabric. ${PHONE}` },
-  { q: "Where can I get trousers hemmed near me in Antalya?", a: `At Terzi Can in Hurma, Konyaaltı, open every day 08:00–23:00. Hemming (trousers, jeans) is ready the next day, or in 1–2 hours if urgent. WhatsApp: ${PHONE}` },
+  { q: "Where can I get trousers hemmed near me in Antalya?", a: `At Terzi Can in Hurma, Konyaaltı, open every day 08:00–23:00. Hemming (trousers, jeans) is ready the same day, or in 1–2 hours if urgent. WhatsApp: ${PHONE}` },
   { q: "How much does hemming and zipper replacement cost in Antalya?", a: `The price depends on the garment and the work: hemming, waist taking-in, zipper replacement, evening and wedding dress alterations. Send a photo on WhatsApp for an exact quote.` },
   { q: "Can you alter a jacket, coat, shirt, skirt or shorts?", a: `Yes. We alter and repair jackets, coats, shirts, skirts, shorts, dresses and trousers for men and women. Send a photo of the garment on WhatsApp and we will quote the price and time.` },
-  { q: "I am a hotel guest staying only a few days. Is that enough time?", a: `Yes. Hemming and repairs are ready the next day, urgent jobs in 1–2 hours, and hotel pick-up and return are free in every hotel area we cover.` },
+  { q: "I am a hotel guest staying only a few days. Is that enough time?", a: `Yes. Hemming and repairs are ready the same day, urgent jobs in 1–2 hours, and hotel pick-up and return are free in every hotel area we cover.` },
 ];
 
 export default function OnlineTailorServicePage() {

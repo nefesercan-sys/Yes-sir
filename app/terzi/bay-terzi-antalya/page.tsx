@@ -69,10 +69,10 @@ export const metadata: Metadata = {
 };
 
 const FIYATLAR = [
-  ['Pantolon / Paça Kısaltma', '₺200', 'Ertesi gün'],
-  ['Pantolon Bel Daraltma', '₺200', 'Ertesi gün'],
-  ['Ceket Kol Kısaltma', '₺200', 'Ertesi gün'],
-  ['Ceket Beden Küçültme', 'Fotoğrafa göre', 'Ertesi gün'],
+  ['Pantolon / Paça Kısaltma', '₺200', 'Aynı gün'],
+  ['Pantolon Bel Daraltma', '₺200', 'Aynı gün'],
+  ['Ceket Kol Kısaltma', '₺200', 'Aynı gün'],
+  ['Ceket Beden Küçültme', 'Fotoğrafa göre', 'Aynı gün'],
   ['Erkek Pantolon Dikimi', '₺1000+', 'Modele ve adede göre'],
   ['Damatlık Takım Elbise', '₺20.000', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
@@ -189,7 +189,7 @@ export default function BayTerziPage() {
               </p>
               <p>
                 <strong>Erkek pantolon tadilat ve kısaltmada</strong> paça kısaltma, bel daraltma, ağ dikimi
-                ve fermuar değişimi yapılmaktadır. Tüm işlemler ertesi gün teslim edilir; acil işler 1–2 saatte tamamlanır.
+                ve fermuar değişimi yapılmaktadır. Tüm işlemler aynı gün teslim edilir; acil işler 1–2 saatte tamamlanır.
               </p>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function BayTerziPage() {
               ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ₺200'den başlar. Takım elbise, gömlek, blazer ve smoking dikim fiyatı kumaş ve modele göre belirlenir; fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
               ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise dikimi; fiyat kumaş ve modele göre belirlenir. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
               ['Damatlık dikimi Antalya fiyatı?', `Damatlık ₺20.000'den başlar. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
-              ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. Ertesi gün teslim; acilse 1–2 saat.'],
+              ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. Aynı gün teslim; acilse 1–2 saat.'],
               ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
             ].map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>

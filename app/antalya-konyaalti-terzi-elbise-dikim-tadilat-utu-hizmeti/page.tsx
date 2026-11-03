@@ -144,21 +144,21 @@ const D = {
 };
 
 const SERVICES = [
-  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺200+', time: 'Ertesi gün', color: '#fef3c7', tc: '#b45309' },
-  { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Ertesi gün', color: '#fce7f3', tc: '#9d174d' },
-  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Ertesi gün', color: '#ede9fe', tc: '#5b21b6' },
+  { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺200+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
+  { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
+  { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Aynı gün', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
 const PRICES = [
-  ['Paça Kısaltma', '₺200+', 'Ertesi gün'],
-  ['Bel Daraltma', '₺200+', 'Ertesi gün'],
-  ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Ertesi gün'],
-  ['Fermuar Değişimi', '₺300+', 'Ertesi gün'],
-  ['Ceket / Mont Tamiri', '₺200+', 'Ertesi gün'],
-  ['Kol Kısaltma', '₺200+', 'Ertesi gün'],
-  ['Abiye Tamiri', '₺800+', 'Ertesi gün'],
+  ['Paça Kısaltma', '₺200+', 'Aynı gün'],
+  ['Bel Daraltma', '₺200+', 'Aynı gün'],
+  ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Aynı gün'],
+  ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
+  ['Ceket / Mont Tamiri', '₺200+', 'Aynı gün'],
+  ['Kol Kısaltma', '₺200+', 'Aynı gün'],
+  ['Abiye Tamiri', '₺800+', 'Aynı gün'],
   ['Kadın Elbise Dikimi', '₺800+', 'Modele göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
@@ -345,7 +345,7 @@ export default function KonyaaltiTerziPage() {
                 <p style={{ color: D.s, fontSize: '.82rem', lineHeight: 1.6, margin: '0 0 10px' }}>{s.desc}</p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <span style={{ display: 'inline-block', fontSize: '.72rem', fontWeight: 800, color: s.tc, background: s.color, padding: '.22rem .6rem', borderRadius: 6 }}>{s.price}</span>
-                  <span style={{ fontSize: '.68rem', color: s.time === 'Ertesi gün' ? D.green : D.s, fontWeight: s.time === 'Ertesi gün' ? 700 : 400 }}>⏱ {s.time}</span>
+                  <span style={{ fontSize: '.68rem', color: s.time === 'Aynı gün' ? D.green : D.s, fontWeight: s.time === 'Aynı gün' ? 700 : 400 }}>⏱ {s.time}</span>
                 </div>
               </div>
             ))}
@@ -372,7 +372,7 @@ export default function KonyaaltiTerziPage() {
                     <tr key={s} style={{ borderBottom: `1px solid ${D.border}`, background: i%2 ? D.bg : '#fff' }}>
                       <td style={{ padding: '.8rem 1rem', fontSize: '.84rem', color: D.ink }}>{s}</td>
                       <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontWeight: 700, color: p==='ÜCRETSİZ' ? D.green : D.gold, fontSize: '.88rem' }}>{p}</td>
-                      <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontSize: '.72rem', color: t==='Ertesi gün' ? D.green : D.s, fontWeight: t==='Ertesi gün' ? 600 : 400 }}>{t}</td>
+                      <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontSize: '.72rem', color: t==='Aynı gün' ? D.green : D.s, fontWeight: t==='Aynı gün' ? 600 : 400 }}>{t}</td>
                     </tr>
                   ))}
                 </tbody>
