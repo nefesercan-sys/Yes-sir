@@ -8,27 +8,19 @@
 //  - Kod tek kullanımlıktır (doğru girişte atomik olarak silinir)
 //  - IP başına saatlik doğrulama deneme limiti
 //  - Başarısızlık nedeni ne olursa olsun TEK TİP hata mesajı döner (numara/kod durumu sızmaz)
-// Kod karşılaştırması sabit zamanlıdır. Kod düz saklanır (personel panelinin göstermesi gerekir; bkz. otp-gonder).
+// Kod karşılaştırması sabit zamanlıdır. Kod HMAC olarak saklanır (otpHash); eski düz metin kayıtlar (otpKod) 5 dk'lık ömürleri boyunca geriye dönük doğrulanır.
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
-import { createHmac, timingSafeEqual } from 'crypto';
 import { getDb } from '@/lib/mongodb';
 import { setSessionCookie } from '@/lib/terzi-session';
 import { pencereSayaci } from '@/lib/hiz-sayaci';
 import { clientIp } from '@/lib/api-guard';
+import { otpHashle, otpEsit } from '@/lib/otp';
 
 const NUMARA_MAX_DENEME = 5;
 const IP_SAATLIK_DENEME_LIMIT = 20;
 const PENCERE_MS = 60 * 60 * 1000;
 const TEK_HATA = 'Kod hatalı veya süresi dolmuş, yeni kod isteyin.';
-
-// Farklı uzunluklu girdilerde bile sabit zamanlı karşılaştırma: iki tarafı da HMAC'leyip eşitlik bakılır.
-function kodEsit(a: string, b: string): boolean {
-  const anahtar = process.env.TERZI_SESSION_SECRET || process.env.NEXTAUTH_SECRET || 'otp';
-  const x = createHmac('sha256', anahtar).update(a).digest();
-  const y = createHmac('sha256', anahtar).update(b).digest();
-  return timingSafeEqual(x, y);
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -56,7 +48,7 @@ export async function POST(req: NextRequest) {
     const r: any = await col.findOneAndUpdate(
       {
         telefon,
-        otpKod: { $type: 'string' },
+        $or: [{ otpHash: { $type: 'string' } }, { otpKod: { $type: 'string' } }],
         otpSonGecerlilik: { $gt: simdi },
         otpBasarisizDeneme: { $not: { $gte: NUMARA_MAX_DENEME } },
       },
@@ -68,17 +60,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: TEK_HATA }, { status: 400 });
     }
 
-    if (!kodEsit(String(kayit.otpKod), kod)) {
+    const dogruMu = typeof kayit.otpHash === 'string'
+      ? otpEsit(String(kayit.otpHash), otpHashle(telefon, kod))
+      : otpEsit(String(kayit.otpKod), kod);
+    if (!dogruMu) {
       // Hak bittiyse kodu tamamen iptal et (yeni kod istemek zorunda)
       if ((kayit.otpBasarisizDeneme || 0) >= NUMARA_MAX_DENEME) {
-        await col.updateOne({ _id: kayit._id, otpKod: kayit.otpKod }, { $unset: { otpKod: '', otpSonGecerlilik: '' } });
+        await col.updateOne({ _id: kayit._id, otpSonGecerlilik: kayit.otpSonGecerlilik }, { $unset: { otpKod: '', otpHash: '', otpSifreli: '', otpSonGecerlilik: '' } });
       }
       return NextResponse.json({ error: TEK_HATA }, { status: 400 });
     }
 
     // ── Doğru kod: TEK KULLANIM — kodu atomik olarak tüket (aynı kodla paralel iki istekten yalnızca biri geçer) ──
     const tuketilen: any = await col.findOneAndUpdate(
-      { _id: kayit._id, otpKod: kayit.otpKod },
+      { _id: kayit._id, otpSonGecerlilik: kayit.otpSonGecerlilik, $or: [{ otpHash: { $type: 'string' } }, { otpKod: { $type: 'string' } }] },
       {
         $set: {
           dogrulandi: true,
@@ -86,7 +81,7 @@ export async function POST(req: NextRequest) {
           otpDogrulamaZamani: simdi, // sifre-belirle: yakın zamanda OTP doğrulaması yapıldı (şifremi unuttum akışı)
           ...(isProvider ? { isProvider: true } : {}),
         },
-        $unset: { otpKod: '', otpSonGecerlilik: '' },
+        $unset: { otpKod: '', otpHash: '', otpSifreli: '', otpSonGecerlilik: '' },
       },
       { returnDocument: 'after' }
     );

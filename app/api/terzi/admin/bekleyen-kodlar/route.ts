@@ -7,6 +7,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { requireAdminSecretOrSession } from '@/lib/admin-auth';
+import { otpCoz } from '@/lib/otp';
 
 export async function GET(req: NextRequest) {
   const yetki = await requireAdminSecretOrSession(req);
@@ -16,13 +17,18 @@ export async function GET(req: NextRequest) {
 
   const kayitlar = await db.collection('terziKullanicilar')
     .find({
-      otpKod: { $exists: true, $ne: null },
+      $or: [{ otpSifreli: { $type: 'string' } }, { otpKod: { $type: 'string' } }],
       otpSonGecerlilik: { $gt: new Date() },
     })
-    .project({ telefon: 1, otpKod: 1, otpSonGecerlilik: 1, _id: 0 })
+    .project({ telefon: 1, otpKod: 1, otpSifreli: 1, otpSonGecerlilik: 1, _id: 0 })
     .sort({ otpSonGecerlilik: -1 })
     .limit(20)
     .toArray();
 
-  return NextResponse.json(kayitlar);
+  // Kod DB'de şifreli tutulur (lib/otp.ts); yalnızca yetkili personele burada çözülüp gösterilir. Panel `otpKod` alanını bekler.
+  const cevap = kayitlar
+    .map((k: any) => ({ telefon: k.telefon, otpKod: otpCoz(k.otpSifreli) ?? (typeof k.otpKod === 'string' ? k.otpKod : null), otpSonGecerlilik: k.otpSonGecerlilik }))
+    .filter((k: any) => k.otpKod);
+
+  return NextResponse.json(cevap);
 }

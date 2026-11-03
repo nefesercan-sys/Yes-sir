@@ -15,7 +15,7 @@ export default function KayitSayfasi() {
     e.preventDefault();
     setHata('');
     if (form.sifre !== form.sifre2) { setHata('Şifreler eşleşmiyor.'); return; }
-    if (form.sifre.length < 6)      { setHata('Şifre en az 6 karakter olmalı.'); return; }
+    if (form.sifre.length < 8)      { setHata('Şifre en az 8 karakter olmalı.'); return; }
 
     setYukleniyor(true);
     try {
@@ -59,7 +59,7 @@ export default function KayitSayfasi() {
           </div>
           <div>
             <label htmlFor="appkayitb-f3" style={lbl}>Şifre</label>
-            <input id="appkayitb-f3" style={inp} type="password" required placeholder="En az 6 karakter"
+            <input id="appkayitb-f3" style={inp} type="password" required placeholder="En az 8 karakter"
               value={form.sifre} onChange={e => setF('sifre', e.target.value)} />
           </div>
           <div>

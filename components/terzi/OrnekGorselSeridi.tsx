@@ -1,5 +1,6 @@
 // Örnek görsel şeridi: başlık (h3) + açıklama (figcaption) + dilde alt metin + ImageObject JSON-LD.
 // Görseller yapay zekâ ile üretilmiştir; "örnek görsel" etiketi ve not her zaman gösterilir.
+import { jsonLdString } from '@/lib/json-ld';
 import { altMetinler, type Konu } from '@/lib/alt-basliklar';
 import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 
@@ -21,7 +22,7 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
   } : null;
   return (
     <section dir={lang === 'ar' ? 'rtl' : undefined} aria-label={baslik || ORNEK_BASLIK[lang]} style={{ padding: '3rem 1.5rem', color: fg }}>
-      {ld && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />}
+      {ld && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(ld) }} />}
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <h2 style={{ fontSize: 'clamp(1.4rem,3vw,1.9rem)', fontWeight: 800, margin: '0 0 .4rem', textAlign: 'center' }}>{baslik || ORNEK_BASLIK[lang]}</h2>
         <p style={{ textAlign: 'center', color: soluk, fontSize: '.82rem', margin: '0 0 1.6rem' }}>{ORNEK_NOT[lang]}</p>
