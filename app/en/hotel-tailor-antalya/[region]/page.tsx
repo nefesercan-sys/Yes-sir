@@ -87,22 +87,6 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         description: seoContent.body2,
         url,
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: `How does hotel pickup work in ${r.name}?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Message us on WhatsApp with a photo of your garment. We will collect the item directly from your hotel reception in ${r.name} and deliver it back once altered.` },
-          },
-          {
-            '@type': 'Question',
-            name: `How long do alterations take for hotel guests?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Regular alterations are ready the same day and urgent jobs in 1–2 hours. We agree the handover time with you on WhatsApp for guests in ${r.name}.` },
-          },
-        ],
-      },
     ],
   };
 

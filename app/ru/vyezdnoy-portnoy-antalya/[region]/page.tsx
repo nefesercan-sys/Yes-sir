@@ -84,22 +84,6 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
         description: seoContent.body2,
         url,
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: `Как работает забор одежды из отеля в ${r.name}?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Напишите нам в WhatsApp и отправьте фото одежды. Наш курьер заберет вещь прямо с ресепшена вашего отеля в ${r.name} и вернет после ремонта.` },
-          },
-          {
-            '@type': 'Question',
-            name: `Сколько времени занимает работа?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Обычная подгонка готова в тот же день, срочная — за 1–2 часа. Время выдачи согласуем в WhatsApp, стоимость доставки в ваш отель в ${r.name} зависит от района.` },
-          },
-        ],
-      },
     ],
   };
 
