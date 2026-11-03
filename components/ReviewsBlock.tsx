@@ -1,6 +1,8 @@
 // Görünür müşteri yorumları (Google'daki gerçek yorumlar). Şema ayrıca üretilmez:
 // işletme şeması zaten aynı yorumları lib/reviews.ts'ten alır (çift işaretleme olmasın).
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
+import { BUSINESS_ID, SITE_URL } from '@/lib/business';
+import { jsonLdString } from '@/lib/json-ld';
 
 type L = 'tr' | 'en' | 'ru' | 'de';
 const hasLang = (x: string | string[], l: string) => (Array.isArray(x) ? x.includes(l) : x === l);
@@ -11,16 +13,35 @@ const T = {
   de: { h: 'Kundenbewertungen', on: 'bei Google', rev: 'Bewertungen', all: 'Alle Bewertungen bei Google ansehen', shown: (n: number, c: number) => `Das Google-Profil hat ${c} Bewertungen; ${n} mit geprüftem Text werden hier gezeigt.` },
 } as const;
 
-export default function ReviewsBlock({ lang = 'tr' }: { lang?: L | string }) {
+// schema: sayfada işletme şeması yorumları zaten üretmiyorsa (BusinessSchema reviews=...) true ver; aynı @id'li düğüme yalnızca yorum alanlarını ekler.
+export default function ReviewsBlock({ lang = 'tr', schema = false }: { lang?: L | string; schema?: boolean }) {
   const t = T[(lang in T ? lang : 'en') as L];
   const { count, average } = reviewStats();
   // Sayfa dilindeki yorumlar önce
   const list = [...GOOGLE_REVIEWS].sort((a, b) => Number(hasLang(b.lang, lang)) - Number(hasLang(a.lang, lang)));
+  const reviewNode = schema
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': BUSINESS_ID,
+        name: 'Terzi Can',
+        url: SITE_URL,
+        aggregateRating: { '@type': 'AggregateRating', ratingValue: average, reviewCount: String(count), bestRating: '5', worstRating: '1' },
+        review: list.map((r) => ({
+          '@type': 'Review',
+          author: { '@type': 'Person', name: r.author },
+          reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
+          reviewBody: r.text,
+          datePublished: r.date,
+        })),
+      }
+    : null;
   return (
     <section
       id="musteri-yorumlari"
       style={{ maxWidth: 1000, margin: '32px auto', padding: '0 16px', fontFamily: 'system-ui,-apple-system,sans-serif' }}
     >
+      {reviewNode && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(reviewNode) }} />}
       <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 4 }}>{t.h}</h2>
       <p style={{ fontSize: 14, margin: '0 0 14px', opacity: 0.85 }}>
         <span aria-hidden="true" style={{ color: '#f5a623' }}>★★★★★</span> {average} · {count} {t.rev} {t.on}

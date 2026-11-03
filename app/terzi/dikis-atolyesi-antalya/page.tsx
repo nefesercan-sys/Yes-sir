@@ -326,7 +326,7 @@ export default function DikisAtölyesiPage() {
             </div>
           </div>
         </section>
-      <ReviewsBlock lang="tr" />
+      <ReviewsBlock lang="tr" schema />
     </main>
     </>
   );

@@ -370,7 +370,7 @@ export default function PacaKisaltmaPage() {
             </div>
           </div>
         </section>
-      <ReviewsBlock lang="tr" />
+      <ReviewsBlock lang="tr" schema />
     </main>
     </>
   );

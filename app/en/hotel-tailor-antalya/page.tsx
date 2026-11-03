@@ -365,7 +365,7 @@ export default function HotelTailorAntalyaPage() {
           </div>
         </section>
       </main>
-      <ReviewsBlock lang="en" />
+      <ReviewsBlock lang="en" schema />
     </>
   );
 }

@@ -378,7 +378,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
         </section>
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164 }) }} />
-      <ReviewsBlock lang="de" />
+      <ReviewsBlock lang="de" schema />
     </>
   );
 }
