@@ -44,6 +44,8 @@ const DATA: KonuData = {
     { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim tüm hizmet bölgelerimizde ücretsizdir; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
+    { href: '/terzi/kot-pantolon-daraltma-antalya', ad: 'Kot pantolon daraltma' },
+    { href: '/terzi/orijinal-kot-paca-yapimi-antalya', ad: 'Orijinal kot paça' },
     { href: 'href', ad: 'ad' },
     { href: 'href', ad: 'ad' },
     { href: 'href', ad: 'ad' },
