@@ -5,6 +5,7 @@
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
+import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolge-hizmet-matrisi-i18n';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
 import { fitDesc } from '@/lib/meta-fit';
@@ -268,8 +269,8 @@ function _districtCopy(lang: Lang, d: District) {
 
   function metaOverride(r: { n: string; loc: string; kw: string[]; title: string; desc: string }) {
     const o = lang === 'tr' ? trNearDistrict(d.slug, n, r.loc, PHONE, 'Terzi Can') : fgNearDistrict(lang, d.slug, n); // elle yazılmış meta (TR yakın bölgeler + EN/RU/DE)
-    if (!o) return { ...r, title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60) };
-    return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: [`Call a Tailor to ${n}, Antalya: Dressmaking, Repairs`, `Tailor ${n}, Antalya: Dressmaking, Alterations`, `Tailor in ${n}, Antalya`], ru: [`Вызвать портного: ${n}, Анталья, пошив и ремонт`, `Портной ${n}: пошив, ремонт, переделка`, `Портной ${n}, Анталья`], de: [`Schneider rufen: ${n}, Antalya, Nähen, Reparatur`, `Schneider ${n}: Nähen, Reparatur, Ändern`, `Schneider ${n}, Antalya`] } as Record<string, string[]>)[lang], 60), desc: (lang === 'tr' ? o.desc : r.desc) };
+    if (!o) return { ...r, title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: intlDistrictTitles('en', n, DISTRICTS.findIndex((x) => x.slug === d.slug)), ru: intlDistrictTitles('ru', n, DISTRICTS.findIndex((x) => x.slug === d.slug)), de: intlDistrictTitles('de', n, DISTRICTS.findIndex((x) => x.slug === d.slug)) } as Record<string, string[]>)[lang], 60) };
+    return { n: r.n, loc: r.loc, kw: Array.from(new Set([...o.kw, ...r.kw])), title: pickFit(({ tr: trDistrictTitles(d.slug, n, DISTRICTS.filter((x) => isIndexable('tr', x.slug)).findIndex((x) => x.slug === d.slug)), en: intlDistrictTitles('en', n, DISTRICTS.findIndex((x) => x.slug === d.slug)), ru: intlDistrictTitles('ru', n, DISTRICTS.findIndex((x) => x.slug === d.slug)), de: intlDistrictTitles('de', n, DISTRICTS.findIndex((x) => x.slug === d.slug)) } as Record<string, string[]>)[lang], 60), desc: (lang === 'tr' ? o.desc : r.desc) };
   }
 }
 
@@ -637,8 +638,8 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
   const c = districtCopy(lang, d);
   const url = abs(districtUrl(lang, d));
   const idx = DISTRICTS.findIndex((x) => x.slug === d.slug);
-  const matris = lang === 'tr' ? bolgeMatrisi(d.slug, d.name.tr, d.loc.tr) : null;
-  const faq = lang === 'tr' ? [...districtFaq(lang, d), ...bolgeEkSss(d.slug, d.name.tr, d.loc.tr)] : districtFaq(lang, d);
+  const matris = lang === 'tr' ? bolgeMatrisi(d.slug, d.name.tr, d.loc.tr) : bolgeMatrisiI18n(lang, d.slug, d.name[lang], d.loc[lang]);
+  const faq = lang === 'tr' ? [...districtFaq(lang, d), ...bolgeEkSss(d.slug, d.name.tr, d.loc.tr)] : [...districtFaq(lang, d), ...bolgeEkSssI18n(lang, d.slug, d.name[lang], d.loc[lang])];
   const waMsg = {
     tr: `Merhaba, ${c.loc} terzi hizmeti almak istiyorum.`,
     en: `Hello, I need a tailor ${c.loc}.`,
