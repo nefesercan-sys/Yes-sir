@@ -19,6 +19,7 @@ const TR_SERVICES: MapLink[] = [
   { href: '/terzi', label: 'Antalya Terzi — Terzi Can' },
   { href: '/terzi/paca-kisaltma-antalya', label: 'Paça kısaltma' },
   { href: '/terzi/fermuar-degisimi', label: 'Fermuar değişimi' },
+  { href: '/terzi/mont-tamiri-tadilati-antalya', label: 'Mont tamiri ve tadilatı' },
   { href: '/terzi/deri-ceket-tadilati-antalya', label: 'Deri ceket tadilatı' },
   { href: '/terzi/kot-pantolon-paca-kisaltma-antalya', label: 'Kot paça kısaltma' },
   { href: '/terzi/kot-pantolon-daraltma-antalya', label: 'Kot pantolon daraltma' },
