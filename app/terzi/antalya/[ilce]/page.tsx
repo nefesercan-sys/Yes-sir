@@ -15,7 +15,7 @@ import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 import { KeywordBlock } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
-import { districtFaqItems, trLoc, pick } from '@/lib/bolge-icerik';
+import { districtFaqItems, withEkSss, trLoc, pick } from '@/lib/bolge-icerik';
 
 const SEKTOR_ID = 'terzi-kuru-temizleme';
 const YARICAP_KM = 20;
@@ -110,7 +110,7 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
   };
 
   const komsular = ANTALYA_ILCELERI.filter(i => i.slug !== ilce.slug).slice(0, 10);
-  const faq = districtFaqItems({ lang: 'tr', slug: ilce.slug, n: ilce.ad, loc, resort, focus: [] }).map(([q, a]) => ({ q, a }));
+  const faq = withEkSss(districtFaqItems({ lang: 'tr', slug: ilce.slug, n: ilce.ad, loc, resort, focus: [] }), ilce.slug, ilce.ad, loc);
 
   return (
     <>
