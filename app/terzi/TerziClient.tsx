@@ -16,6 +16,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
+import { DURATION, PRICE_BY_MODEL } from '@/lib/business';
+import { TERZI_FAQ as FAQ } from './faq-data';
 import TerziMarketingBottomNav from '@/components/terzi/MarketingBottomNav';
 
 type Lang = 'tr' | 'en' | 'ru' | 'de';
@@ -87,17 +89,17 @@ const SERVICES = [
   { icon: '👗', id: 'bayan-terzi',
     img: '/gorseller/bel-daraltma-manken.webp',
     alt: 'Bayan terzi kadın elbise dikimi özel dikim Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Bayan Terzi', d: 'Kadın elbise dikimi · bluz · etek kısaltma · elbise daraltma · bel daraltma · abiye tamiri · gelinlik tadilatı · büyük beden', p: '₺200+' },
-    en: { n: "Women's Tailor", d: 'Dress making · blouse · skirt shortening · dress taking in · evening gown repair · wedding dress · plus size', p: '€10+' },
-    ru: { n: 'Женский портной', d: 'Платья · блузки · юбки · заужение · вечерние платья · свадебные платья · большие размеры', p: '€10+' },
-    de: { n: 'Damenschneiderin', d: 'Kleider · Blusen · Röcke kürzen · Kleid einengen · Abendkleider · Brautkleid · Übergrößen', p: '€10+' } },
+    tr: { n: 'Bayan Terzi', d: 'Kadın elbise dikimi (fotoğrafa göre) · bluz · etek kısaltma · elbise daraltma · bel daraltma · abiye tamiri · gelinlik tadilatı · büyük beden', p: '₺200+' },
+    en: { n: "Women's Tailor", d: 'Dress making by photo · blouse · skirt shortening · dress taking in · evening gown repair · wedding dress alterations · plus size', p: '€10+' },
+    ru: { n: 'Женский портной', d: 'Пошив платьев по фото · блузки · юбки · заужение · вечерние платья · подгонка свадебных платьев · большие размеры', p: '€10+' },
+    de: { n: 'Damenschneiderin', d: 'Kleider nach Foto · Blusen · Röcke kürzen · Kleid einengen · Abendkleider · Brautkleid ändern · Übergrößen', p: '€10+' } },
   { icon: '💍', id: 'gelinlik',
     img: '/gorseller/gelinlik-abiye.webp',
     alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik tadilatı · damatlık · abiye tadilatı · abiye tamiri · nişan elbisesi · kına kıyafeti', p: '₺800+' },
-    en: { n: 'Wedding · Evening · Special', d: 'Wedding dress · bridal alterations · groom suit · evening gown · engagement dress. Fit checked at the fitting.', p: '€40+' },
-    ru: { n: 'Свадьба · Вечер · Торжество', d: 'Свадебное платье · подгонка · смокинг · вечернее платье · платье на помолвку.', p: '€40+' },
-    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid · Anpassung · Smoking · Abendkleid · Verlobungskleid. Perfekte Passform.', p: '€40+' } },
+    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik ve abiye TADİLATI (gelinlik dikimi yapılmaz) · abiye tamiri · nişan ve kına kıyafeti tadilatı', p: 'Tadilat ₺800+' },
+    en: { n: 'Wedding · Evening · Special', d: 'Wedding and evening dress ALTERATIONS (we do not sew wedding dresses) · engagement dress alterations.', p: 'Alteration €40+' },
+    ru: { n: 'Свадьба · Вечер · Торжество', d: 'Подгонка свадебных и вечерних платьев (свадебные платья не шьём) · платья на помолвку.', p: 'Подгонка €40+' },
+    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid- und Abendkleid-ÄNDERUNG (wir nähen keine Brautkleider) · Verlobungskleid ändern.', p: 'Änderung €40+' } },
   { icon: '🏨', id: 'uniforma',
     img: '/gorseller/uniforma.webp',
     alt: 'Otel üniforma aşçı garson personel dikimi Antalya — Terzi Can (örnek görsel)',
@@ -108,81 +110,49 @@ const SERVICES = [
   { icon: '🏭', id: 'atolye',
     img: '/gorseller/hazir-giyim-atolye.webp',
     alt: 'Dikiş atölyesi tişört sweatshirt pantolon seri imalat Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Tekstil İmalatı · Seri Üretim', d: 'Tişört · sweatshirt · pantolon · gömlek · mont · şort · gobi seri üretimi. Kalıp çıkarma · fason · numune · prototip.', p: 'Teklif Al' },
-    en: { n: 'Textile Manufacturing', d: 'T-shirt · sweatshirt · trousers · shirt · coat · shorts · gobi mass production. Pattern · sample · prototype.', p: 'Get Quote' },
+    tr: { n: 'Tekstil İmalatı · Seri Üretim', d: 'Tişört · sweatshirt · pantolon · gömlek · mont · şort seri üretimi. Kalıp çıkarma · fason · numune · prototip.', p: 'Teklif Al' },
+    en: { n: 'Textile Manufacturing', d: 'T-shirt · sweatshirt · trousers · shirt · coat · shorts mass production. Pattern · sample · prototype.', p: 'Get Quote' },
     ru: { n: 'Производство текстиля', d: 'Футболки · худи · брюки · рубашки · куртки серийно. Лекала · образцы · прототип.', p: 'Запрос' },
     de: { n: 'Textilproduktion', d: 'T-Shirts · Sweatshirts · Hosen · Hemden · Mäntel Serienproduktion. Schnittmuster · Muster · Prototyp.', p: 'Angebot' } },
   { icon: '🪡', id: 'nakis',
     img: '/gorseller/dikis-makinesi.webp',
     alt: 'Nakış logo baskı tişört sweatshirt dikimi Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Nakış · Baskı · Özel Dikim', d: 'Logo nakışı · isim nakışı · dijital baskı · serigrafi. Sweatshirt · tişört · eşofman · kapüşonlu · polo · gobi seri dikimi.', p: 'Fotoğrafa göre' },
+    tr: { n: 'Nakış · Baskı · Özel Dikim', d: 'Logo nakışı · isim nakışı · dijital baskı · serigrafi. Sweatshirt · tişört · eşofman · kapüşonlu · polo seri dikimi.', p: 'Fotoğrafa göre' },
     en: { n: 'Embroidery · Print · Custom', d: 'Logo embroidery · digital print · screen print. Sweatshirt · t-shirt · tracksuit · hoodie · polo production.', p: 'By photo' },
     ru: { n: 'Вышивка · Печать · Пошив', d: 'Вышивка логотипа · цифровая печать. Толстовки · футболки · спортивные костюмы · поло.', p: 'По фото' },
     de: { n: 'Stickerei · Druck · Produktion', d: 'Logo-Stickerei · Digitaldruck. Sweatshirts · T-Shirts · Trainingsanzüge · Polo-Produktion.', p: 'Per Foto' } },
 ];
 
-const PRICES: Record<Lang, string[][]> = {
-  tr:[
-    ['Paça / Pantolon / Etek Kısaltma','₺200+','Aynı gün · acil 1–2 sa'],
-    ['Bel Daraltma','₺200+','Aynı gün · acil 1–2 sa'],
-    ['Fermuar Değişimi — Pantolon/Kot','₺300+','Aynı gün · acil 1–2 sa'],
-    ['Fermuar Değişimi — Mont/Ceket','₺300+','Aynı gün · acil 1–2 sa'],
-    ['Kol Kısaltma','₺200+','Aynı gün · acil 1–2 sa'],
-    ['Etek / Pantolon Dikimi','₺1.000+','Modele ve adede göre'],
-    ['Kadın Elbise Dikimi','₺800+','Modele ve adede göre'],
-    ['Çocuk Kıyafeti Dikimi','₺1.000+','Modele ve adede göre'],
-    ['Damatlık Dikimi','₺20.000+','Modele ve adede göre'],
-    ['Gelinlik Tadilatı','₺800+','Aynı gün · acil 1–2 sa'],
-    ['Abiye Tadilatı','₺800+','Aynı gün · acil 1–2 sa'],
-    ['Yırtık Onarımı','Fotoğrafa göre','Aynı gün · acil 1–2 sa'],
-    ['Üniforma (kişi başı)','Teklif / Quote','Sipariş miktarına göre'],
-  ],
-  en:[
-    ['Trouser / Skirt Hemming','€10+','Same day · urgent 1–2 h'],
-    ['Waist Taking In','€10+','Same day · urgent 1–2 h'],
-    ['Zip — Trousers / Jeans','€20+','Same day · urgent 1–2 h'],
-    ['Zip — Coat / Jacket','€15+','Same day · urgent 1–2 h'],
-    ['Sleeve Shortening','€10+','Same day · urgent 1–2 h'],
-    ['Skirt / Trousers Sewing','€50+','By design & quantity'],
-    ['Women\'s Dress Making','€40+','By design & quantity'],
-    ['Children\'s Clothing Sewing','€50+','By design & quantity'],
-    ['Groom Suit','€1000+','By design & quantity'],
-    ['Wedding Dress Alteration','€40+','Same day · urgent 1–2 h'],
-    ['Evening Gown Alteration','€40+','Same day · urgent 1–2 h'],
-    ['Tear Repair','By photo','Same day · urgent 1–2 h'],
-    ['Uniform (per person)','Quote','On quantity'],
-  ],
-  ru:[
-    ['Подгонка брюк / юбки','€10+','На след. день · срочно 1–2 ч'],
-    ['Заужение талии','€10+','На след. день · срочно 1–2 ч'],
-    ['Молния — брюки/джинсы','€20+','На след. день · срочно 1–2 ч'],
-    ['Молния — пальто/пиджак','€15+','На след. день · срочно 1–2 ч'],
-    ['Укорочение рукавов','€10+','На след. день · срочно 1–2 ч'],
-    ['Пошив юбки / брюк','€50+','По модели и количеству'],
-    ['Пошив женского платья','€40+','По модели и количеству'],
-    ['Пошив детской одежды','€50+','По модели и количеству'],
-    ['Костюм жениха','€1000+','По модели и количеству'],
-    ['Подгонка свадебного платья','€40+','На след. день · срочно 1–2 ч'],
-    ['Подгонка вечернего платья','€40+','На след. день · срочно 1–2 ч'],
-    ['Ремонт разрывов','По фото','На след. день · срочно 1–2 ч'],
-    ['Форма (на человека)','Запрос','По заказу'],
-  ],
-  de:[
-    ['Hose / Rock kürzen','€10+','Nächster Tag · eilig 1–2 Std.'],
-    ['Taille enger machen','€10+','Nächster Tag · eilig 1–2 Std.'],
-    ['Reißverschluss — Hose/Jeans','€20+','Nächster Tag · eilig 1–2 Std.'],
-    ['Reißverschluss — Mantel/Jacke','€15+','Nächster Tag · eilig 1–2 Std.'],
-    ['Ärmel kürzen','€10+','Nächster Tag · eilig 1–2 Std.'],
-    ['Rock / Hose nähen','€50+','Je nach Modell & Menge'],
-    ['Damenkleid nähen','€40+','Je nach Modell & Menge'],
-    ['Kinderkleidung nähen','€50+','Je nach Modell & Menge'],
-    ['Herrenanzug (Bräutigam)','€1000+','Je nach Modell & Menge'],
-    ['Brautkleid ändern','€40+','Nächster Tag · eilig 1–2 Std.'],
-    ['Abendkleid ändern','€40+','Nächster Tag · eilig 1–2 Std.'],
-    ['Riss reparieren','Per Foto','Nächster Tag · eilig 1–2 Std.'],
-    ['Uniform (pro Person)','Angebot','Je nach Menge'],
-  ],
-};
+// Fiyat tablosu: süre sütunu lib/business.ts DURATION'dan (tek kaynak), dikim satırlarında sabit fiyat YOK (sahip kararı).
+const cap = (t: string) => t.charAt(0).toLocaleUpperCase() + t.slice(1);
+const repairTime = (l: Lang) => `${DURATION[l].normalShort} · ${DURATION[l].urgentShort}`;
+const sewRow = (l: Lang, n: string): string[] => [n, cap(PRICE_BY_MODEL[l]), DURATION[l].customShort];
+const PRICES: Record<Lang, string[][]> = (() => {
+  const mk = (l: Lang, rows: [string, string][], sew: string[], tail: string[][]): string[][] => [
+    ...rows.map(([n, p]) => [n, p, repairTime(l)]),
+    ...sew.map((n) => sewRow(l, n)),
+    ...tail,
+  ];
+  return {
+    tr: mk('tr', [
+      ['Paça / Pantolon / Etek Kısaltma', '₺200+'], ['Bel Daraltma', '₺200+'], ['Fermuar Değişimi — Pantolon/Kot', '₺300+'],
+      ['Fermuar Değişimi — Mont/Ceket/Deri', '₺300+'], ['Kol Kısaltma', '₺200+'], ['Gelinlik Tadilatı (dikimi yapılmaz)', '₺800+'], ['Abiye Tadilatı', '₺800+'],
+      ['Yırtık Onarımı', 'Fotoğrafa göre'],
+    ], ['Elbise / Abiye Dikimi', 'Etek / Pantolon Dikimi', 'Çocuk Kıyafeti Dikimi', 'Damatlık / Takım Dikimi'], [['Üniforma (kişi başı)', 'Teklif / Quote', 'Sipariş miktarına göre']]),
+    en: mk('en', [
+      ['Trouser / Skirt Hemming', '€10+'], ['Waist Taking In', '€10+'], ['Zip — Trousers / Jeans', '€15+'], ['Zip — Coat / Jacket / Leather', '€20+'],
+      ['Sleeve Shortening', '€10+'], ['Wedding Dress Alteration (no wedding dress sewing)', '€40+'], ['Evening Gown Alteration', '€40+'], ['Tear Repair', 'By photo'],
+    ], ['Dress / Evening Gown Making', 'Skirt / Trousers Sewing', "Children's Clothing Sewing", 'Groom Suit / Suit Making'], [['Uniform (per person)', 'Quote', 'On quantity']]),
+    ru: mk('ru', [
+      ['Подгонка брюк / юбки', '€10+'], ['Заужение талии', '€10+'], ['Молния — брюки/джинсы', '€15+'], ['Молния — пальто/пиджак/кожа', '€20+'],
+      ['Укорочение рукавов', '€10+'], ['Подгонка свадебного платья (пошив не делаем)', '€40+'], ['Подгонка вечернего платья', '€40+'], ['Ремонт разрывов', 'По фото'],
+    ], ['Пошив платья / вечернего платья', 'Пошив юбки / брюк', 'Пошив детской одежды', 'Костюм жениха / костюм на заказ'], [['Форма (на человека)', 'Запрос', 'По заказу']]),
+    de: mk('de', [
+      ['Hose / Rock kürzen', '€10+'], ['Taille enger machen', '€10+'], ['Reißverschluss — Hose/Jeans', '€15+'], ['Reißverschluss — Mantel/Jacke/Leder', '€20+'],
+      ['Ärmel kürzen', '€10+'], ['Brautkleid ändern (kein Brautkleid-Nähen)', '€40+'], ['Abendkleid ändern', '€40+'], ['Riss reparieren', 'Per Foto'],
+    ], ['Kleid / Abendkleid nähen', 'Rock / Hose nähen', 'Kinderkleidung nähen', 'Anzug (Bräutigam) nähen'], [['Uniform (pro Person)', 'Angebot', 'Je nach Menge']]),
+  };
+})();
 
 
 const ILCELER = [
@@ -233,10 +203,10 @@ const WHY = [
 ];
 
 const SEO_INTRO: Record<Lang, string> = {
-  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye, gelinlik tadilatı. Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Otellerden kurye ile elbise alımı ve otele teslimat. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort seri üretimi. Dikiş atölyesi. Üniforma üretimi. EUR, USD, RUB, TRY ve kredi kartı kabul edilir.",
-  en: "Tailor Can — Antalya's premier English-speaking tailor. Men's bespoke suits, trouser hemming, shirts, waist alterations. Women's dressmaking, evening gown repairs, wedding dress alterations. Free hotel pickup & delivery across Lara, Kundu, Konyaaltı, Belek, Side & Kemer. Textile manufacturing & sewing workshop. We accept EUR, USD, RUB, TRY and Credit Cards.",
+  tr: "Antalya'nın köklü terzisi Terzi Can. Bay terzisi: erkek takım elbise, pantolon kısaltma, gömlek, ceket. Bayan terzisi: kadın elbise, etek, abiye tadilatı, gelinlik tadilatı (gelinlik dikimi yapılmaz). Özel dikim: beden ölçüsüne göre tasarım, yerinde ölçü alma. Otellerden kurye ile elbise alımı ve otele teslimat. Tekstil imalatı: tişört, sweatshirt, pantolon, gömlek, mont, şort seri üretimi. Dikiş atölyesi. Üniforma üretimi. EUR, USD, RUB, TRY ve kredi kartı kabul edilir.",
+  en: "Tailor Can — Antalya's premier English-speaking tailor. Men's bespoke suits, trouser hemming, shirts, waist alterations. Women's dressmaking by photo, evening gown repairs, wedding dress alterations (no wedding dress sewing). Free hotel pickup & delivery across Lara, Kundu, Konyaaltı, Belek, Side & Kemer. Textile manufacturing & sewing workshop. We accept EUR, USD, RUB, TRY and Credit Cards.",
   ru: "Портной Кан — профессиональное ателье в Анталье. Мужской и женский портной: пошив костюмов, платьев, подгонка по фигуре, замена молний. Выездной сервис в отели Лара, Кунду, Коньяалты, Белек, Кемер (забор и доставка одежды). Принимаем EUR, USD, RUB, TRY и карты.",
-  de: "Schneider Can — Antalyas deutscher Schneiderservice. Herrenmaßanzüge, Hosen kürzen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider, Brautkleider. Hotel-Abhol- und Lieferservice in Lara, Kundu, Konyaaltı, Belek & Kemer. Nähwerkstatt & Textilproduktion. Wir akzeptieren EUR, USD, RUB, TRY & Kreditkarten.",
+  de: "Schneider Can — Antalyas deutscher Schneiderservice. Herrenmaßanzüge, Hosen kürzen, Hemden, Bund einengen. Damenschneiderin: Kleider, Abendkleider ändern, Brautkleid-Änderungen. Hotel-Abhol- und Lieferservice in Lara, Kundu, Konyaaltı, Belek & Kemer. Nähwerkstatt & Textilproduktion. Wir akzeptieren EUR, USD, RUB, TRY & Kreditkarten.",
 };
 
 const LABELS = {
@@ -246,64 +216,6 @@ const LABELS = {
   de: { badge:'✦ Antalya · Schneider Can', h1:'Antalyas', h1em:'Meisterschneider', sub:'Herren · Damen · Maßanfertigung · Hotel Service · Änderungen · Textilproduktion', waBtn:'WhatsApp schreiben', downBtn:'Leistungen ↓', waMsg:'Hallo, ich möchte Informationen über Ihren Schneider- & Hotelservice.', mobileMsg:'Hallo, ich möchte den mobilen Schneiderdienst im Hotel für Maßabnahme.', hours:'08:00–23:00 · täglich', mapBtn:'📍 Google Maps', quoteBtn:'📲 Kostenloses Angebot', bulkBtn:'🏭 Großauftrag', mobileCta:'🚗 Mobilen Schneider anfragen', reviewLabel:'Bewertungen', priceTitle:'Preise 2026', priceNote:'Startpreise — Foto per WhatsApp für genaues Angebot', areaLabel:'Bezirk antippen', allSvcTitle:'Alle Serviceseiten', contactTitle:'Schneller Kontakt', contactNote:'WhatsApp für schnelle Antwort.', gbpLabel:'Unser Google Business Profil', gbpNote:'Sie können in unserem Profil eine Bewertung hinterlassen:', bayBayanH:'Herren- & Damenschneider', faqTitle:'Fragen & Hotelservice', konum:'Unser Standort', konumNote:'Unser Atelier befindet sich in Konyaaltı, Antalya.', reviewTitle:'Bewertung schreiben', districtPage:'Seite' },
 };
 
-const FAQ: Record<Lang, [string, string][]> = {
-  tr:[
-    ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Hangi ödeme yöntemleri ve para birimleri geçerli?', 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.'],
-    ['Fermuar değişimi kaç lira?', `Pantolon/kot/mont/ceket fermuarı ₺300. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺200'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Konyaaltı ve yakın bölgelerde hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Tişört, sweatshirt, pantolon, gobi imalatı?', `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Bay terzi Antalya — erkek kıyafet dikimi?', `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Bayan terzi Antalya — kadın elbise dikimi?', `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Dikiş atölyesi — fason ve seri imalat?', `Evet! Kalıp çıkarma, numune, prototip, seri imalat. Markalar için tam paket. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Hangi Antalya ilçelerine terzi servisi geliyor?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.'],
-    ['Elbisem yırtıldı, tamir edebilir misiniz?', `Evet, yırtık ve söküm tamiri yapıyoruz; süre hasara ve yoğunluğa göre değişir. Fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Hafta sonu açık mısınız?', `Haftanın her günü 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Kendime özel bir elbise diktirmek istiyorum, mümkün mü?', `Evet, ölçünüze ve modelinize göre özel dikim yapıyoruz. Model fotoğrafı gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Pamuklu veya keten gibi doğal kumaştan dikim yapıyor musunuz?', `Evet, %100 pamuk ve keten kumaştan kişiye özel dikim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-  ],
-  en:[
-    ['How much is trouser hemming in Antalya?', 'From €10. Timing depends on the job and is confirmed on WhatsApp. Send a photo for a quick quote.'],
-    ['Do you offer hotel pickup and delivery service?', 'Yes! We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back. Timing is confirmed on WhatsApp.'],
-    ['Which currencies and payment methods do you accept?', 'We accept EUR, USD, RUB, TRY cash, as well as all major international credit cards and contactless payments.'],
-    ['Zip replacement cost?', 'Trousers/jeans/coat/jacket zip from €15. Timing depends on the job and is confirmed on WhatsApp.'],
-    ['Waist alteration and dress taking in?', 'From €10. WhatsApp us for an exact quote.'],
-    ['Do you offer on-site fitting and home delivery?', 'Yes! We visit your hotel or residence, take measurements on-site, perform alterations, and deliver back.'],
-    ['Do you produce t-shirts, sweatshirts, trousers, shorts, gobi?', 'Yes! Custom and mass production of all textile items with custom embroidery and digital printing.'],
-    ["Do you offer men's bespoke tailoring?", 'Yes! Bespoke suits, trouser hemming, shirts, jackets, blazers, tuxedos, and groom suits.'],
-    ["Do you offer women's dressmaking and alterations?", 'Yes! Evening gowns, wedding dresses, skirts, blouses, plus size fitting, and emergency repairs.'],
-    ['Sewing workshop for mass production?', 'Yes! Pattern making, prototypes, and full-package mass production for brands.'],
-    ['Which Antalya districts and hotel zones do you serve?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu Hotel Zone, Belek, Kemer, Side, and Serik.'],
-  ],
-  ru:[
-    ['Стоимость подгонки брюк в Анталье?', 'От €10. Сроки зависят от работы и уточняются в WhatsApp. Отправьте фото.'],
-    ['Есть ли выездной сервис и доставка в отели?', 'Да! Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно. Сроки уточняются в WhatsApp.'],
-    ['Какую валюту и способы оплаты вы принимаете?', 'Мы принимаем наличные EUR, USD, RUB, TRY, а также любые международные кредитные карты.'],
-    ['Стоимость замены молнии?', 'Брюки/джинсы/пальто/куртка от €15. Сроки зависят от работы и уточняются в WhatsApp.'],
-    ['Заужение талии и подгонка платьев?', 'От €10. WhatsApp для точной оценки.'],
-    ['Снятие мерок на месте и доставка?', 'Да! Приедем в отель или по адресу, снимем мерки, сошьём/подогоним и доставим обратно.'],
-    ['Производство футболок, худи, брюк, шорт?', 'Да! Серийное производство любого текстиля с вышивкой и печатью.'],
-    ['Есть мужской портной?', 'Да! Костюмы, брюки, рубашки, пиджаки, смокинги.'],
-    ['Есть женский портной?', 'Да! Вечерние и свадебные платья, юбки, подгонка больших размеров.'],
-    ['Ателье для серийного производства?', 'Да! Лекала, образцы и серийное производство для брендов.'],
-    ['В какие районы и отельные зоны выезжаете?', 'Коньяалты, Муратпаша, Кепез, Лара, Кунду, Белек, Кемер, Алания, Сиде, Серик.'],
-  ],
-  de:[
-    ['Hosenänderung Preis in Antalya?', 'Ab €10. Dauer je nach Auftrag, per WhatsApp bestätigt. Foto senden.'],
-    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern zurück. Dauer per WhatsApp bestätigt.'],
-    ['Welche Währungen und Zahlungsmethoden akzeptieren Sie?', 'Wir akzeptieren EUR, USD, RUB, TRY Bargeld sowie alle internationalen Kreditkarten und kontaktlose Zahlung.'],
-    ['Reißverschluss-Kosten?', 'Hosen/Jeans/Mantel/Jacke ab €15. Dauer je nach Auftrag, per WhatsApp bestätigt.'],
-    ['Bund einengen und Kleid einengen?', 'Ab €10. WhatsApp für genaues Angebot.'],
-    ['Maßabnahme vor Ort im Hotel?', 'Ja! Wir kommen zu Ihrem Hotel oder Ihrer Adresse, nehmen Maß und liefern fertig zurück.'],
-    ['T-Shirts, Sweatshirts, Hosen, Shorts Produktion?', 'Ja! Serienproduktion aller Textilien mit Stickerei und Digitaldruck.'],
-    ['Herrenschneider in Antalya?', 'Ja! Maßanzüge, Hosen, Hemden, Jacken, Blazer, Smoking.'],
-    ['Damenschneiderin in Antalya?', 'Ja! Kleider, Abendkleider, Brautkleider, Übergrößen.'],
-    ['Nähwerkstatt Serienproduktion?', 'Ja! Schnittmuster, Prototypen, Serienproduktion für Marken.'],
-    ['Welche Hotelzonen und Bezirke bedienen Sie?', 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Lara, Kundu, Belek, Kemer, Side, Serik.'],
-  ],
-};
 
 export default function TerziClient({ gbp1 }: Props) {
   const [lang, setLang] = useState<Lang>('tr');
@@ -507,9 +419,6 @@ export default function TerziClient({ gbp1 }: Props) {
             <div className="thacts" style={{ marginTop: '.6rem' }}>
               <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
             </div>
-            <Link href="/terzi-panel" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '.72rem', color: 'rgba(255,255,255,.5)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
-              🔧 Terzi misin? İş bulmak için buraya
-            </Link>
           </div>
         </header>
 

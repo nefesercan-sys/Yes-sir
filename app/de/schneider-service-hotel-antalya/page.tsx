@@ -6,6 +6,7 @@ import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { DURATION } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/de/schneider-service-hotel-antalya';
@@ -18,6 +19,7 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Hallo, ich brauche einen mobilen Schneider. Mein Standort: ')}`;
 const TODAY = new Date().toISOString().split('T')[0];
+const TURN = `${DURATION.de.normalShort} · ${DURATION.de.urgentShort}`; // lib/business.ts DURATION (tek kaynak)
 
 const HOTELS = [
   'Rixos Downtown Antalya','Regnum Carya','Kaya Palazzo Golf Resort',
@@ -41,7 +43,7 @@ const jsonLd = {
         'Schneider im Hotel Antalya','Mobiler Schneiderdienst Antalya','Deutschsprachiger Schneider Antalya',
         'Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya',
       ],
-      description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Side und nahegelegene Bezirke. Maßnahme, Änderung und Lieferung direkt zu Ihnen.',
+      description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Side und nahegelegene Bezirke. Maßnehmen, Änderung und Lieferung direkt zu Ihnen.',
       provider: { '@type': 'ClothingStore', '@id': `${PARENT_URL}#business`, name: 'Terzi Can', telephone: PHONE_E164 },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
@@ -127,14 +129,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'~35 Min', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Lara', time:'~10 Min', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Güzeloba', time:'~15 Min', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
-  {name:'Kemer', time:'~45 Min', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Muratpaşa / Liman', time:'~5 Min', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
-  {name:'Konyaaltı', time:'Vor Ort', desc:'Werkstatt von Terzi Can — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Side', time:'~1 Std', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
-  {name:'Serik / Döşemealtı', time:'~40 Min', desc:'Serik Zentrum und umliegende Dörfer'},
+  {name:'Belek', time:'Gratis-Abholung', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'Gratis-Abholung', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'Gratis-Abholung', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
+  {name:'Kemer', time:'Gratis-Abholung', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Muratpaşa / Liman', time:'Gratis-Abholung', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
+  {name:'Konyaaltı', time:'Werkstattgebiet', desc:'Werkstatt von Terzi Can — Hurma, Uncalı, Arapsuyu, Sarısu'},
+  {name:'Side', time:'Gratis-Abholung', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
+  {name:'Serik / Döşemealtı', time:'Gratis-Abholung', desc:'Serik Zentrum und umliegende Dörfer'},
 ];
 
 export default function SchneiderServiceHotelAntalyaPage() {
@@ -166,13 +168,13 @@ export default function SchneiderServiceHotelAntalyaPage() {
             </h1>
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> kommt mit dem mobilen Schneiderservice in <strong style={{ color: '#D4B07A' }}>jeden Bezirk von Antalya</strong>.
-              Belek, Lara, Kemer, Side — alle Hotels. Maßnahme, Änderung und Lieferung direkt zu Ihnen.
+              Belek, Lara, Kemer, Side — alle Hotels. Maßnehmen, Änderung und Lieferung direkt zu Ihnen.
               Die Übergabezeit legen wir per WhatsApp fest.
             </p>
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {[
                 ['🇩🇪', 'Wir kommen zu Ihnen'],
-                ['🇹🇷', 'Eve ve otele geliyoruz'],
+                ['🇹🇷', 'Zu Hause und im Hotel'],
                 ['🇬🇧', 'We come to your hotel'],
                 ['🇷🇺', 'Приедем в ваш отель'],
               ].map(([flag, text]) => (
@@ -287,13 +289,13 @@ export default function SchneiderServiceHotelAntalyaPage() {
               <tbody>
                 {[
                   ['Anfahrt','Kostenlos','—'],
-                  ['Hosen kürzen','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Reißverschluss wechseln','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Kleid / Jacke enger machen','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Ärmel kürzen','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Abendkleid reparieren','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Brautkleid ändern','per Foto','Nächster Tag · eilig 1–2 Std.'],
-                  ['Riss reparieren','per Foto','Nächster Tag · eilig 1–2 Std.'],
+                  ['Hosen kürzen','ab €10',TURN],
+                  ['Reißverschluss wechseln','ab €15 (Mantel / Leder €20)',TURN],
+                  ['Kleid / Jacke enger machen','ab €10',TURN],
+                  ['Ärmel kürzen','ab €10',TURN],
+                  ['Abendkleid reparieren','ab €40',TURN],
+                  ['Brautkleid ändern (kein Brautkleid-Nähen)','ab €40',TURN],
+                  ['Riss reparieren','per Foto',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>

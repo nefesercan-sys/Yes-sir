@@ -219,7 +219,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'elbise-dikim', icon: '👗', time: 'custom', priceFrom: PRICE_FROM.elbiseDikim,
+    id: 'elbise-dikim', icon: '👗', time: 'custom', 
     slug: { tr: 'elbise-dikimi', en: 'custom-dress-making', ru: 'poshiv-platya', de: 'kleid-naehen-lassen' },
     name: { tr: 'Elbise Dikimi (Ölçüye Göre)', en: 'Custom Dress Making', ru: 'Пошив платьев на заказ', de: 'Kleid nach Maß nähen' },
     q: { tr: 'elbise dikimi', en: 'custom dress making', ru: 'пошив платья', de: 'Kleid nähen lassen' },

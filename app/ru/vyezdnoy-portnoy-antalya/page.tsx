@@ -6,6 +6,7 @@ import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import { DURATION } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
@@ -18,6 +19,7 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Здравствуйте, хочу вызвать выездного портного. Мой адрес: ')}`;
 const TODAY = new Date().toISOString().split('T')[0];
+const TURN = `${DURATION.ru.normalShort} · ${DURATION.ru.urgentShort}`; // lib/business.ts DURATION (tek kaynak)
 
 const HOTELS = [
   'Rixos Downtown Antalya','Regnum Carya','Kaya Palazzo Golf Resort',
@@ -103,7 +105,7 @@ export const metadata: Metadata = {
   keywords: [
     'выездной портной Анталья','портной в отель Анталья','портной Анталья',
     'русскоговорящий портной Анталья','ателье Белек','ателье Лара',
-    'ателье Кемер','ателье Аланья','срочный ремонт одежды Анталья',
+    'ателье Кемер','срочный ремонт одежды Анталья',
     'подгонка платья Анталья отель','подгонка костюма Анталья',
   ],
   // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
@@ -127,15 +129,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Белек', time:'~35 мин', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Лара', time:'~10 мин', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Гюзельоба', time:'~15 мин', desc:'Sherwood, Delphin Imperial, Adalya Elite и другие пляжные отели Гюзельобы', slug:'guzeloba'},
-  {name:'Кемер', time:'~45 мин', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Аланья', time:'~1.5 ч', desc:'Центр Аланьи и окрестности — Махмутлар, Оба, Конаклы, Авсаллар'},
-  {name:'Муратпаша / Лиман', time:'~5 мин', desc:'Центр города, Калеичи, Ширинъялы, Фенер'},
-  {name:'Коньяалты', time:'Рядом', desc:'Мастерская Terzi Can — Хурма, Унджалы, Арапсую, Сарысу'},
-  {name:'Сиде', time:'~1 ч', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки', slug:'side'},
-  {name:'Серик / Дёшемеалты', time:'~40 мин', desc:'Центр Серика и окрестные деревни'},
+  {name:'Белек', time:'Забор бесплатно', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Лара', time:'Забор бесплатно', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Гюзельоба', time:'Забор бесплатно', desc:'Sherwood, Delphin Imperial, Adalya Elite и другие пляжные отели Гюзельобы', slug:'guzeloba'},
+  {name:'Кемер', time:'Забор бесплатно', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Муратпаша / Лиман', time:'Забор бесплатно', desc:'Центр города, Калеичи, Ширинъялы, Фенер'},
+  {name:'Коньяалты', time:'Район мастерской', desc:'Мастерская Terzi Can — Хурма, Унджалы, Арапсую, Сарысу'},
+  {name:'Сиде', time:'Забор бесплатно', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки', slug:'side'},
+  {name:'Серик / Дёшемеалты', time:'Забор бесплатно', desc:'Центр Серика и окрестные деревни'},
 ];
 
 export default function VyezdnoyPortnoyAntalyaPage() {
@@ -167,13 +168,13 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </h1>
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> приезжает <strong style={{ color: '#D4B07A' }}>в любой район Антальи</strong> с выездным сервисом.
-              Белек, Лара, Кемер, Аланья — все отели. Снятие мерок, пошив и доставка к вашей двери.
+              Белек, Лара, Кемер, Сиде — все отели. Снятие мерок, пошив и доставка к вашей двери.
               Время выдачи согласуем в WhatsApp.
             </p>
             <div style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {[
                 ['🇷🇺', 'Приедем в ваш отель'],
-                ['🇹🇷', 'Eve ve otele geliyoruz'],
+                ['🇹🇷', 'Выезжаем на дом и в отель'],
                 ['🇬🇧', 'We come to your hotel'],
                 ['🇩🇪', 'Wir kommen zu Ihnen'],
               ].map(([flag, text]) => (
@@ -288,13 +289,13 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               <tbody>
                 {[
                   ['Стоимость выезда','БЕСПЛАТНО','—'],
-                  ['Подшив брюк','от','На след. день · срочно 1–2 ч'],
-                  ['Замена молнии','от','На след. день · срочно 1–2 ч'],
-                  ['Ушив платья / пиджака','от','На след. день · срочно 1–2 ч'],
-                  ['Укорачивание рукавов','от','На след. день · срочно 1–2 ч'],
-                  ['Ремонт вечернего платья','от','На след. день · срочно 1–2 ч'],
-                  ['Ушив свадебного платья','от','На след. день · срочно 1–2 ч'],
-                  ['Ремонт разрыва ткани','от','На след. день · срочно 1–2 ч'],
+                  ['Подшив брюк','от €10',TURN],
+                  ['Замена молнии','от €15 (пальто / кожа €20)',TURN],
+                  ['Ушив платья / пиджака','от €10',TURN],
+                  ['Укорачивание рукавов','от €10',TURN],
+                  ['Ремонт вечернего платья','от €40',TURN],
+                  ['Подгонка свадебного платья (пошив не делаем)','от €40',TURN],
+                  ['Ремонт разрыва ткани','по фото',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>

@@ -11,16 +11,11 @@ const HIZMETLER = [
   'Paça Kısaltma', 'Bel Daraltma', 'Etek Kısaltma', 'Fermuar Değişimi',
   'Fermuar Tamiri', 'Ceket Tamiri', 'Mont Tamiri', 'Gömlek Tamiri',
   'T-Shirt Tamiri', 'Elbise Tamiri', 'Abiye Tamiri', 'Özel Dikim',
+  'Yelek Dikimi', 'Tulum Dikimi', 'Bluz Dikimi', 'Eşofman Dikimi',
+  'Düğme Takma / Tamiri', 'Astar Değişimi (kazak ve hırka hariç)',
 ];
 
-const KURU_TEMIZLEME_URUNLERI = [
-  'Gömlek', 'Pantolon', 'Ceket', 'Takım Elbise', 'Elbise', 'Kazak',
-  'Mont / Kaban', 'T-Shirt', 'İç Giyim', 'Perde', 'Battaniye', 'Nevresim Takımı',
-];
-
-const HIZMET_TURLERI = ['Yıkama', 'Yıkama + Ütü', 'Sadece Ütü', 'Kuru Temizleme'];
-
-type Kategori = 'terzi' | 'kuru-temizleme';
+type Kategori = 'terzi';
 type Giris = 'giris' | 'kayit-telefon' | 'kayit-otp' | 'sifre-belirle';
 type Medya = { url: string; tip: 'resim' | 'video' };
 
@@ -53,8 +48,6 @@ function TerziTalepIcerik() {
   const [kategori, setKategori] = useState<Kategori | null>(null);
   const [secilenler, setSecilenler] = useState<string[]>([]);
   const [adet, setAdet] = useState(1);
-  const [hizmetTuru, setHizmetTuru] = useState('');
-  const [urunAdetleri, setUrunAdetleri] = useState<Record<string, number>>({});
   const [aciklama, setAciklama] = useState('');
   const [konum, setKonum] = useState<{ lat: number; lng: number } | null>(null);
   const [konumHata, setKonumHata] = useState('');
@@ -192,13 +185,6 @@ function TerziTalepIcerik() {
     setSecilenler(prev => prev.includes(h) ? prev.filter(x => x !== h) : [...prev, h]);
   };
 
-  const urunAdetDegistir = (urun: string, delta: number) => {
-    setUrunAdetleri(prev => {
-      const yeni = Math.max(0, (prev[urun] || 0) + delta);
-      return { ...prev, [urun]: yeni };
-    });
-  };
-
   const konumAl = () => {
     setKonumHata('');
     if (!navigator.geolocation) { setKonumHata('Cihazınız konum desteklemiyor'); return; }
@@ -236,15 +222,8 @@ function TerziTalepIcerik() {
 
     let govde: Record<string, any> = { kategori, aciklama, lat: konum.lat, lng: konum.lng, medyalar: medyalar.map(m => m.url) };
 
-    if (kategori === 'kuru-temizleme') {
-      const urunler = Object.entries(urunAdetleri).filter(([, a]) => a > 0).map(([ad, adet]) => ({ ad, adet }));
-      if (urunler.length === 0) { setHata('En az bir ürün ve adet girin'); return; }
-      if (!hizmetTuru) { setHata('Hizmet türünü seçin (Yıkama, Ütü vb.)'); return; }
-      govde = { ...govde, urunler, hizmetTuru };
-    } else {
-      if (secilenler.length === 0) { setHata('En az bir hizmet seçin'); return; }
-      govde = { ...govde, hizmetler: secilenler, adet };
-    }
+    if (secilenler.length === 0) { setHata('En az bir hizmet seçin'); return; }
+    govde = { ...govde, hizmetler: secilenler, adet };
 
     setAsama('gonderiliyor');
     const res = await fetch('/api/terzi/ilanlar', {
@@ -254,7 +233,7 @@ function TerziTalepIcerik() {
     const data = await res.json();
     if (!res.ok) { setHata(data.error || 'Talep gönderilemedi'); setAsama('form'); return; }
     setAsama('basarili');
-    setSecilenler([]); setAdet(1); setUrunAdetleri({}); setHizmetTuru(''); setAciklama(''); setMedyalar([]); setKonum(null); setKategori(null);
+    setSecilenler([]); setAdet(1); setAciklama(''); setMedyalar([]); setKonum(null); setKategori(null);
     talepleriGetir();
   };
 
@@ -488,84 +467,6 @@ function TerziTalepIcerik() {
 
               <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>5. Not <span style={{ fontWeight: 400, color: '#94a3b8' }}>(opsiyonel)</span></h3>
               <textarea value={aciklama} onChange={e => setAciklama(e.target.value)} placeholder="Örn: Kot pantolon 5cm kısaltılacak"
-                style={{ width: '100%', minHeight: 70, padding: 12, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 14, marginBottom: 20, fontFamily: 'inherit' }} />
-
-              {hata && <p style={{ color: '#dc2626', fontSize: 13, marginBottom: 12 }}>{hata}</p>}
-
-              <button onClick={talepGonder}
-                style={{ width: '100%', padding: 16, background: YESIL, color: '#fff', border: 'none', borderRadius: 12, fontWeight: 800, fontSize: 16 }}>
-                Teklif İste
-              </button>
-            </div>
-          )}
-
-          {sekme === 'ana' && asama === 'form' && kategori === 'kuru-temizleme' && (
-            <div>
-              <button onClick={() => setKategori(null)} style={{ border: 'none', background: 'none', color: YESIL, fontWeight: 700, fontSize: 13, marginBottom: 14, padding: 0 }}>← Kategori değiştir</button>
-
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>1. Hizmet Türü</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-                {HIZMET_TURLERI.map(h => (
-                  <button key={h} onClick={() => setHizmetTuru(h)}
-                    style={{
-                      padding: '9px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                      border: hizmetTuru === h ? `1.5px solid ${YESIL}` : '1.5px solid #dbe5e0',
-                      background: hizmetTuru === h ? '#eaf6f1' : '#fff',
-                      color: hizmetTuru === h ? YESIL : '#475569',
-                    }}>
-                    {h}
-                  </button>
-                ))}
-              </div>
-
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>2. Ürünler ve Adetleri</h3>
-              <div style={{ marginBottom: 20 }}>
-                {KURU_TEMIZLEME_URUNLERI.map(u => (
-                  <div key={u} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #f1f5f9' }}>
-                    <span style={{ fontSize: 14, color: '#0f172a', fontWeight: (urunAdetleri[u] || 0) > 0 ? 700 : 500 }}>{u}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <button onClick={() => urunAdetDegistir(u, -1)} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid #dbe5e0', background: '#fff', fontSize: 16 }}>-</button>
-                      <span style={{ fontSize: 15, fontWeight: 700, minWidth: 18, textAlign: 'center' }}>{urunAdetleri[u] || 0}</span>
-                      <button onClick={() => urunAdetDegistir(u, 1)} style={{ width: 30, height: 30, borderRadius: 8, border: 'none', background: YESIL, color: '#fff', fontSize: 16 }}>+</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>3. Konum</h3>
-              <button onClick={konumAl}
-                style={{
-                  width: '100%', padding: 14, borderRadius: 10, marginBottom: 4, fontWeight: 700, fontSize: 14, cursor: 'pointer',
-                  border: konum ? `1.5px solid ${YESIL}` : '1.5px solid #dbe5e0',
-                  background: konum ? '#eaf6f1' : '#fff', color: konum ? YESIL : '#475569',
-                }}>
-                {konum ? `📍 Konum alındı (${konum.lat.toFixed(4)}, ${konum.lng.toFixed(4)})` : '📍 Konumumu Paylaş'}
-              </button>
-              {konumHata && <p style={{ color: '#dc2626', fontSize: 13, marginBottom: 16 }}>{konumHata}</p>}
-              <div style={{ marginBottom: 20 }} />
-
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>4. Fotoğraf / Video Ekle <span style={{ fontWeight: 400, color: '#94a3b8' }}>(opsiyonel)</span></h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-                {medyalar.map(m => (
-                  <div key={m.url} style={{ position: 'relative', width: 78, height: 78, borderRadius: 10, overflow: 'hidden', background: '#f1f5f9' }}>
-                    {m.tip === 'video'
-                      ? <video src={m.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} muted />
-                      : <img src={m.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />}
-                    <button onClick={() => medyaSil(m.url)}
-                      style={{ position: 'absolute', top: 2, right: 2, width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'rgba(0,0,0,.6)', color: '#fff', fontSize: 12, lineHeight: '20px' }}>✕</button>
-                  </div>
-                ))}
-                <label style={{
-                  width: 78, height: 78, borderRadius: 10, border: `2px dashed ${YESIL}`, display: 'flex',
-                  alignItems: 'center', justifyContent: 'center', color: YESIL, fontSize: 24, cursor: 'pointer', fontWeight: 700,
-                }}>
-                  {medyaYukleniyor ? '…' : '+'}
-                  <input ref={fileRef} type="file" accept="image/*,video/*" capture="environment" multiple hidden onChange={medyaSec} />
-                </label>
-              </div>
-
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>5. Not <span style={{ fontWeight: 400, color: '#94a3b8' }}>(opsiyonel)</span></h3>
-              <textarea value={aciklama} onChange={e => setAciklama(e.target.value)} placeholder="Örn: Beyaz gömlekte leke var, dikkatli yıkanmalı"
                 style={{ width: '100%', minHeight: 70, padding: 12, borderRadius: 10, border: '1px solid #dbe5e0', fontSize: 14, marginBottom: 20, fontFamily: 'inherit' }} />
 
               {hata && <p style={{ color: '#dc2626', fontSize: 13, marginBottom: 12 }}>{hata}</p>}

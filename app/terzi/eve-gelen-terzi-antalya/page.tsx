@@ -154,13 +154,13 @@ export const metadata: Metadata = {
 };
 
 const ILCELER = [
-  {ad:'Belek',yol:'~35 dk', aciklama:'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
-  {ad:'Lara',yol:'~10 dk', aciklama:'Tüm Lara otelleri — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
-  {ad:'Kemer',yol:'~45 dk', aciklama:'Tüm Kemer otelleri — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
-  {ad:'Muratpaşa / Liman',yol:'~5 dk', aciklama:'Şehir merkezi, Kaleiçi, Şirinyalı, Fener'},
-  {ad:'Konyaaltı',yol:'Merkez', aciklama:'Terzi Can merkezi — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {ad:'Side',yol:'~1 saat', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
-  {ad:'Serik / Döşemealtı',yol:'~40 dk', aciklama:'Serik merkez ve çevre köyler'},
+  {ad:'Belek',yol:'Ücretsiz servis', aciklama:'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
+  {ad:'Lara',yol:'Ücretsiz servis', aciklama:'Tüm Lara otelleri — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
+  {ad:'Kemer',yol:'Ücretsiz servis', aciklama:'Tüm Kemer otelleri — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
+  {ad:'Muratpaşa / Liman',yol:'Ücretsiz servis', aciklama:'Şehir merkezi, Kaleiçi, Şirinyalı, Fener'},
+  {ad:'Konyaaltı',yol:'Atölye bölgesi', aciklama:'Terzi Can merkezi — Hurma, Uncalı, Arapsuyu, Sarısu'},
+  {ad:'Side',yol:'Ücretsiz servis', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
+  {ad:'Serik / Döşemealtı',yol:'Ücretsiz servis', aciklama:'Serik merkez ve çevre köyler'},
 ];
 
 export default function EveGelenTerziPage() {

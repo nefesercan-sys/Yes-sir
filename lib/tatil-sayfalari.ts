@@ -1,7 +1,7 @@
 // Turist niyetli 4 dilli rehber sayfaları (Terzi Can, Konyaaltı): acil onarım, otele gelen terzi, etkinlik kıyafeti tadilatı.
 // Yalnızca doğrulanmış bilgi: Hurma/Konyaaltı atölyesi, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat,
 // Otellere alım-teslim her bölgede ücretsiz, eve de ücretsiz (lib/business.ts); paça ₺200'den, fermuar ₺300'den,
-// bel daraltma ₺200'den, abiye/gelinlik tadilatı ve elbise dikimi ₺800'den; süre: normal aynı gün, acil 1–2 saat, özel dikim modele/adede göre.
+// bel daraltma ₺200'den, abiye/gelinlik TADİLATI ₺800'den. Sabit dikim fiyatı YAZILMAZ (fotoğrafa ve istediğiniz modele göre); süre: normal aynı gün, acil 1–2 saat, özel dikim modele/adede göre.
 // Para birimi, ödeme yöntemi, puan, müşteri sayısı veya sahte vaat YOKTUR.
 type L4 = 'tr' | 'en' | 'ru' | 'de';
 type Sec = { h: string; p?: string; ul?: string[] };
@@ -60,7 +60,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       lead: 'Broken zipper, open seam, torn trousers: there is a fix even on holiday. Send a photo of the garment on WhatsApp and we will tell you what can be done and the price.',
       secs: [
         { h: 'What can we fix?', ul: ['Zipper replacement', 'Trouser hemming', 'Waist taking in', 'Open seams and tear repairs', 'Buttons, lining and belt repairs'] },
-        { h: 'How does it work?', ul: ['Send a photo of the problem on WhatsApp', 'We reply with what we will do and the price, in writing', 'Bring it to the workshop or ask for hotel or home pick-up and delivery: free for hotels; free for homes in Konyaaltı and nearby', 'Regular repairs are ready the same day; urgent jobs in 1–2 hours'] },
+        { h: 'How does it work?', ul: ['Send a photo of the problem on WhatsApp', 'We reply with what we will do and the price, in writing', 'Bring it to the workshop or ask for hotel or home pick-up and delivery: free for hotels and for homes in every area we serve', 'Regular repairs are ready the same day; urgent jobs in 1–2 hours'] },
         { h: 'Workshop and opening hours', p: 'Our workshop is in Hurma, Konyaaltı. We are open every day of the week from 08:00 to 23:00 and you can write to us in English, Turkish, Russian or German.' },
       ],
       faq: [
@@ -79,7 +79,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       lead: 'Сломалась молния, разошёлся шов, порвались брюки: решение есть и в отпуске. Пришлите фото вещи в WhatsApp, и мы скажем, что можно сделать и сколько это стоит.',
       secs: [
         { h: 'Что мы ремонтируем?', ul: ['Замена молнии', 'Подшив брюк', 'Ушивание в талии', 'Зашивание швов и ремонт разрывов'] },
-        { h: 'Как это работает?', ul: ['Пришлите фото проблемы в WhatsApp', 'Мы письменно сообщим, что будем делать и сколько это стоит', 'Принесите вещь в мастерскую или закажите забор и доставку из отеля или с дома: из отелей бесплатно; с дома бесплатно в Коньяалты и рядом', 'Обычный ремонт готов в тот же день; срочный — за 1–2 часа'] },
+        { h: 'Как это работает?', ul: ['Пришлите фото проблемы в WhatsApp', 'Мы письменно сообщим, что будем делать и сколько это стоит', 'Принесите вещь в мастерскую или закажите забор и доставку из отеля или с дома: бесплатно и в отели, и на дом во всех районах', 'Обычный ремонт готов в тот же день; срочный — за 1–2 часа'] },
         { h: 'Мастерская и часы работы', p: 'Наша мастерская находится в Хурме, Коньяалты. Мы работаем каждый день с 08:00 до 23:00; можно писать по-русски, по-английски, по-турецки и по-немецки.' },
       ],
       faq: [
@@ -98,7 +98,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       lead: 'Reißverschluss kaputt, Naht aufgegangen, Hose gerissen: Auch im Urlaub gibt es eine Lösung. Senden Sie ein Foto per WhatsApp, wir sagen Ihnen, was möglich ist und was es kostet.',
       secs: [
         { h: 'Was reparieren wir?', ul: ['Reißverschluss wechseln', 'Hosen kürzen', 'Bund enger machen', 'Aufgegangene Nähte und Risse'] },
-        { h: 'So läuft es ab', ul: ['Foto des Problems per WhatsApp senden', 'Wir nennen Ihnen schriftlich Arbeit und Preis', 'In die Werkstatt bringen oder Abholung und Lieferung am Hotel oder zu Hause wünschen: für Hotels kostenlos; zu Hause in Konyaaltı und Umgebung kostenlos', 'Normale Reparaturen sind am selben Tag fertig; dringende in 1–2 Stunden'] },
+        { h: 'So läuft es ab', ul: ['Foto des Problems per WhatsApp senden', 'Wir nennen Ihnen schriftlich Arbeit und Preis', 'In die Werkstatt bringen oder Abholung und Lieferung am Hotel oder zu Hause wünschen: für Hotels und zu Hause überall kostenlos', 'Normale Reparaturen sind am selben Tag fertig; dringende in 1–2 Stunden'] },
         { h: 'Werkstatt und Öffnungszeiten', p: 'Unsere Werkstatt liegt in Hurma, Konyaaltı. Wir sind jeden Tag von 08:00 bis 23:00 Uhr erreichbar; Sie können auf Deutsch, Englisch, Türkisch oder Russisch schreiben.' },
       ],
       faq: [
@@ -196,7 +196,8 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: "Düğün, gala ya da özel bir akşam için kıyafetiniz olmuyor mu? Daraltma, kısaltma ve fermuar değişimi için fotoğraf gönderin; etkinlik tarihinizi yazın, buna göre planlayalım.",
       secs: [
-        { h: 'Neler yapıyoruz?', ul: ["Abiye ve gece elbisesi tadilatı: ₺800'den", "Gelinlik tadilatı: ₺800'den", 'Takım elbise ve ceket tadilatı', 'Daraltma, kısaltma, fermuar değişimi', "Ölçüye göre gece kıyafeti dikimi (elbise dikimi ₺800'den)"] },
+        { h: 'Neler yapıyoruz?', ul: ["Abiye ve gece elbisesi tadilatı: ₺800'den", "Gelinlik tadilatı: ₺800'den", 'Takım elbise ve ceket tadilatı', 'Daraltma, kısaltma, fermuar değişimi',
+          'Ölçüye göre gece kıyafeti dikimi (fiyat fotoğrafa ve istediğiniz modele göre)'] },
         { h: 'Tarihinizi baştan yazın', p: "Etkinlik tarihini ve otelinizin bölgesini WhatsApp'ta yazın. Süre işe ve yoğunluğa göre değişir; abiye ve gelinlik gibi kapsamlı işlerde daha erken yazmanız gerekir. Yetişip yetişmeyeceğini baştan açıkça söyleriz." },
         { h: 'Alım ve teslim', p: "Eve ve otele alım-teslim tüm bölgelerde ücretsizdir; yalnızca yapılan iş ücretlendirilir." },
       ],
@@ -204,7 +205,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
         ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı ₺800'den başlar; işin kapsamı fotoğrafla netleşir."],
         ['Etkinliğim birkaç gün sonra, yetişir mi?', 'Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır; özel dikimde süre modele ve adede göre belirlenir. Tarihi yazın, baştan söyleyelim.'],
         ['Kıyafeti otelden alıyor musunuz?', "Evet, otelden alım ve teslim ücretsizdir."],
-        ['Sıfırdan gece elbisesi diktirebilir miyim?', "Evet, ölçüye göre elbise dikimi yapıyoruz (₺800'den). Model ve kumaşı birlikte belirleriz; süre ve fiyat işe göre WhatsApp'ta netleşir."],
+        ['Sıfırdan gece elbisesi diktirebilir miyim?', "Evet, ölçüye göre elbise dikimi yapıyoruz; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. Gelinlik dikimi yapılmaz, yalnızca tadilat yapılır."],
       ],
       cta: "WhatsApp'tan fotoğraf gönderin", wa: 'Merhaba, bir etkinlik için kıyafet tadilatı gerekiyor. Fotoğrafı ve tarihi gönderiyorum.', crumb: 'Abiye ve takım tadilatı',
     },
@@ -215,15 +216,15 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: 'Is your outfit for a wedding, gala or special evening not fitting right? Send a photo for taking in, shortening or a zipper replacement, and tell us your event date so we can plan around it.',
       secs: [
-        { h: 'What do we do?', ul: ['Evening dress and gown alteration', 'Wedding dress alteration', 'Suit and jacket alteration', 'Taking in, shortening, zipper replacement', 'Evening outfits made to measure (dress making)'] },
+        { h: 'What do we do?', ul: ['Evening dress and gown alteration', 'Wedding dress alteration', 'Suit and jacket alteration', 'Taking in, shortening, zipper replacement', 'Evening outfits made to measure (priced by photo and the model you want)'] },
         { h: 'Tell us your date first', p: 'Write your event date and hotel area on WhatsApp. Timing depends on the job and workload; bigger jobs such as evening or wedding dresses need an earlier start. We tell you honestly at the beginning whether it will be ready in time.' },
-        { h: 'Pick-up and delivery', p: 'Hotel pick-up and delivery are free in every hotel area we cover; home pick-up is free in Konyaaltı and nearby, elsewhere the fee is confirmed on WhatsApp beforehand.' },
+        { h: 'Pick-up and delivery', p: 'Hotel pick-up and delivery are free in every hotel area we cover; pick-up and delivery to homes are free too. You only pay for the work itself.' },
       ],
       faq: [
         ['How much does an evening dress alteration cost?', 'The price of evening dress and wedding dress alterations depends on the work and is confirmed from a photo.'],
         ['My event is in a few days. Is that enough time?', 'Alterations are ready the same day and urgent jobs in 1–2 hours; for made-to-measure pieces the timing depends on the design and quantity. Tell us the date and we will say up front.'],
         ['Can you collect the outfit from my hotel?', 'Yes, hotel pick-up and delivery are free.'],
-        ['Can I have an evening dress made from scratch?', 'Yes, we make dresses to measure (price confirmed on WhatsApp). We decide the style and fabric together; time and price are confirmed on WhatsApp.'],
+        ['Can I have an evening dress made from scratch?', 'Yes, we make dresses to measure; the price is set by photo and the model you want, and timing depends on the design and quantity. We do not sew wedding dresses (alterations only).'],
       ],
       cta: 'Send a photo on WhatsApp', wa: 'Hello, I need an outfit altered for an event. I am sending a photo and the date.', crumb: 'Evening dress & suit alteration',
     },
@@ -236,13 +237,13 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Что мы делаем?', ul: ['Подгонка вечерних платьев', 'Подгонка свадебных платьев', 'Подгонка костюмов и пиджаков', 'Ушивание, укорачивание, замена молнии', 'Пошив вечернего наряда по меркам (пошив платья по меркам)'] },
         { h: 'Сразу напишите дату', p: 'Напишите в WhatsApp дату события и район вашего отеля. Срок зависит от работы и загрузки; для сложных работ, например вечерних и свадебных платьев, писать нужно заранее. Мы честно скажем в начале, успеем ли.' },
-        { h: 'Забор и доставка', p: 'Забор из отеля и доставка бесплатны во всех отельных районах, где мы работаем; с дома — бесплатно в Коньяалты и рядом, в остальных случаях сумму называем заранее в WhatsApp.' },
+        { h: 'Забор и доставка', p: 'Забор из отеля и доставка бесплатны во всех отельных районах, где мы работаем; на дом — тоже бесплатно. Вы платите только за саму работу.' },
       ],
       faq: [
         ['Сколько стоит подгонка вечернего платья?', 'Точная цена подгонки вечерних и свадебных платьев зависит от работы и уточняется по фото.'],
         ['Событие через несколько дней. Успеете?', 'Подгонка готова в тот же день, срочные работы — за 1–2 часа; срок пошива зависит от модели и количества. Напишите дату, и мы сразу скажем.'],
         ['Вы заберёте наряд из отеля?', 'Да, забор из отеля и доставка бесплатны.'],
-        ['Можно сшить вечернее платье с нуля?', 'Да, шьём платья по меркам. Модель и ткань выбираем вместе; срок и цену уточняем в WhatsApp.'],
+        ['Можно сшить вечернее платье с нуля?', 'Да, шьём платья по меркам; цена определяется по фото и желаемой модели, срок зависит от модели и количества. Свадебные платья не шьём — только подгонка.'],
       ],
       cta: 'Отправить фото в WhatsApp', wa: 'Здравствуйте, нужна подгонка наряда для события. Отправляю фото и дату.', crumb: 'Подгонка платья и костюма',
     },
@@ -255,13 +256,13 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Was machen wir?', ul: ['Abend- und Festkleid ändern', 'Brautkleid ändern', 'Anzug und Sakko ändern', 'Enger machen, Kürzen, Reißverschluss wechseln', 'Abendmode nach Maß (Kleid nähen)'] },
         { h: 'Nennen Sie uns zuerst den Termin', p: 'Schreiben Sie uns per WhatsApp Ihr Veranstaltungsdatum und Ihre Hotelgegend. Die Dauer hängt von Arbeit und Auslastung ab; bei größeren Arbeiten wie Abend- oder Brautkleidern sollten Sie früh schreiben. Wir sagen Ihnen gleich ehrlich, ob es rechtzeitig klappt.' },
-        { h: 'Abholung und Lieferung', p: 'Abholung im Hotel und Lieferung sind in allen von uns bedienten Hotelgebieten kostenlos; zu Hause in Konyaaltı und Umgebung kostenlos, sonst nennen wir den Preis vorher per WhatsApp.' },
+        { h: 'Abholung und Lieferung', p: 'Abholung im Hotel und Lieferung sind in allen von uns bedienten Hotelgebieten kostenlos; auch zu Hause ist es kostenlos. Sie zahlen nur die eigentliche Arbeit.' },
       ],
       faq: [
         ['Was kostet es, ein Abendkleid zu ändern?', 'Der Preis für Abend- und Brautkleid-Änderungen hängt von der Arbeit ab und wird anhand eines Fotos genannt.'],
         ['Mein Termin ist in wenigen Tagen. Reicht die Zeit?', 'Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden; bei Maßanfertigung je nach Modell und Stückzahl. Nennen Sie den Termin, wir sagen es sofort.'],
         ['Holen Sie das Outfit im Hotel ab?', 'Ja, Abholung im Hotel und Lieferung sind kostenlos.'],
-        ['Kann ich ein Abendkleid ganz neu anfertigen lassen?', 'Ja, wir nähen Kleider nach Maß (Preis per WhatsApp). Schnitt und Stoff legen wir gemeinsam fest; Dauer und Preis klären wir per WhatsApp.'],
+        ['Kann ich ein Abendkleid ganz neu anfertigen lassen?', 'Ja, wir nähen Kleider nach Maß; der Preis richtet sich nach Foto und gewünschtem Modell, die Dauer nach Modell und Stückzahl. Brautkleider nähen wir nicht (nur Änderungen).'],
       ],
       cta: 'Foto per WhatsApp senden', wa: 'Guten Tag, ich brauche eine Änderung für ein Outfit zu einem Anlass. Ich sende Foto und Datum.', crumb: 'Abendkleid & Anzug ändern',
     },

@@ -3,7 +3,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/dikis-atolyesi-antalya';
 const PARENT   = 'https://swaphubs.com/terzi';
@@ -12,6 +12,21 @@ const PHONE    = '+90 531 898 64 18';
 const PHONE_E  = '+905318986418';
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`;
 const TODAY    = new Date().toISOString().split('T')[0];
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Fason üretim Antalya minimum kaç adet?', 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız. Fiyat adet, model ve kumaşa göre teklif edilir.'],
+  ['Kalıp çıkarma hizmeti var mı?', `Evet! Tasarım dosyası veya referans üründen teknik kalıp + gradaj. WhatsApp: ${PHONE}`],
+  ['Sweatshirt ve eşofman üretimi yapılıyor mu?', `Evet! Nakış ve baskı dahil. Adet projeye göre belirlenir, proje bazında teklif. WhatsApp: ${PHONE}`],
+  ['E-ticaret için ürün üretimi yapılıyor mu?', `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim. WhatsApp: ${PHONE}`],
+  ['Teslimat süresi ne kadar?', 'Süre model ve adede göre belirlenir; numune onayından sonra proje planı birlikte yapılır.'],
+  ['Do you offer garment manufacturing in Antalya in English?', `Yes! Tailor Can sewing workshop offers production for international brands. Quantity and price are agreed per project. WhatsApp: ${PHONE}`],
+  ['Dikiş atölyesi Antalya fiyatı ne kadar 2026?', `Kalıp çıkarma, numune ve fason üretim fiyatları proje bazlıdır. Adet, model ve kumaşa göre teklif verilir. WhatsApp: ${PHONE}`],
+  ['Marka için kıyafet üretimi Antalya yapılıyor mu?', `Evet! Markalar, butikler ve e-ticaret firmaları için kalıp + numune + seri üretim paketi. WhatsApp: ${PHONE}`],
+  ['Sweatshirt ve eşofman üretimi Antalya?', `Evet! Sweatshirt, eşofman, hırka, polo yaka üretimi + nakış/baskı. WhatsApp: ${PHONE}`],
+  ['E-ticaret için kıyafet üretimi yapılıyor mu?', `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim yapıyoruz. WhatsApp: ${PHONE}`],
+  ['Sewing workshop Antalya — minimum order?', `Tailor Can sewing workshop in Antalya quotes each project separately; there is no minimum order quantity, from a single sample to serial production. WhatsApp: ${PHONE}`],
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -52,7 +67,7 @@ const jsonLd = {
           { '@type': 'Offer', name: 'Kalıp Çıkarma', description: 'Tasarım veya referans üründen teknik kalıp çıkarma + gradaj', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Numune Dikimi (1 adet)', description: 'Prototip ve onay numunesi, tek adet', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Fason Üretim (adet projeye göre)', description: 'Kesim, dikim, overlok, ütü, paket dahil seri üretim', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Nakış & Logo Baskı', price: '100', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', name: 'Nakış & Logo Baskı', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
     },
@@ -75,17 +90,7 @@ const jsonLd = {
         { '@type': 'ListItem', position: 2, name: 'Dikiş Atölyesi Antalya', item: SITE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Dikiş atölyesi Antalya fiyatı ne kadar 2026?', acceptedAnswer: { '@type': 'Answer', text: `Kalıp çıkarma, numune ve fason üretim fiyatları proje bazlıdır. Adet, model ve kumaşa göre teklif verilir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Fason üretim Antalya minimum kaç adet?', acceptedAnswer: { '@type': 'Answer', text: 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız. Fiyat adet, model ve kumaşa göre teklif edilir.' } },
-        { '@type': 'Question', name: 'Marka için kıyafet üretimi Antalya yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Markalar, butikler ve e-ticaret firmaları için kalıp + numune + seri üretim paketi. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Sweatshirt ve eşofman üretimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Sweatshirt, eşofman, hırka, polo yaka üretimi + nakış/baskı. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'E-ticaret için kıyafet üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Sewing workshop Antalya — minimum order?', acceptedAnswer: { '@type': 'Answer', text: `Tailor Can sewing workshop in Antalya quotes each project separately; there is no minimum order quantity, from a single sample to serial production. WhatsApp: ${PHONE}` } },
-      ],
-    },
+    faqPageSchema(FAQ),
   ],
 };
 
@@ -130,7 +135,7 @@ const HEDEF_KITLELER = [
 
 const SUREC = [
   ['💬', 'Bize Yazın', 'Ürün konseptinizi, modelinizi ve tahmini adedi WhatsApp\'tan gönderin.'],
-  ['📋', 'Teklif', '1–2 gün içinde detaylı fiyat teklifi ve üretim takvimi göndeririz.'],
+  ['📋', 'Teklif', 'Çalışma saatlerinde (08:00–23:00) yanıt verir, projeye göre detaylı fiyat teklifi ve üretim takvimi göndeririz.'],
   ['🧵', 'Numune Onayı', 'Numune dikilir, onaylanır. Değişiklik talepleri uygulanır.'],
   ['🏭', 'Seri Üretim', 'Onaylanan numune üzerinden seri üretim başlar. Kalite kontrol dahil.'],
   ['📦', 'Teslim', 'Etiketli, ütülü ve paketlenmiş ürünler teslim edilir veya kargoya verilir.'],
@@ -273,14 +278,7 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Dikiş Atölyesi — Sık Sorulan Sorular</h2>
-            {[
-              ['Fason üretim Antalya minimum kaç adet?', 'Minimum sipariş adedi yoktur; tek parça numuneden seri üretime kadar çalışırız. Fiyat adet, model ve kumaşa göre teklif edilir.'],
-              ['Kalıp çıkarma hizmeti var mı?', `Evet! Tasarım dosyası veya referans üründen teknik kalıp + gradaj. WhatsApp: ${PHONE}`],
-              ['Sweatshirt ve eşofman üretimi yapılıyor mu?', `Evet! Nakış ve baskı dahil. Adet projeye göre belirlenir, proje bazında teklif. WhatsApp: ${PHONE}`],
-              ['E-ticaret için ürün üretimi yapılıyor mu?', `Evet! Trendyol, Amazon, Hepsiburada satıcıları için etiketli + paketlenmiş üretim. WhatsApp: ${PHONE}`],
-              ['Teslimat süresi ne kadar?', 'Numune onayından sonra seri imalat 15–30 iş günüdür. Büyük siparişlerde proje planı yapılır.'],
-              ['Do you offer garment manufacturing in Antalya in English?', `Yes! Tailor Can sewing workshop offers production for international brands. Quantity and price are agreed per project. WhatsApp: ${PHONE}`],
-            ].map(([q, a], i) => (
+            {FAQ.map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.9rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
@@ -295,7 +293,7 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Fason Üretim Teklifi Alın</h2>
           <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Ürün ve adet bilgisini gönderin — 1–2 gün içinde fiyat teklifi
+            Ürün ve adet bilgisini gönderin — projeye göre fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, fason üretim için teklif almak istiyorum. Ürün ve adet: ')} target="_blank" rel="noopener noreferrer"

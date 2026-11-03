@@ -12,3 +12,11 @@ export function jsonLdString(data: unknown): string {
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
 }
+
+/** FAQPage şeması — görünür SSS ile AYNI dizi kullanılsın (tek kaynak): sayfada `const FAQ = [[soru, cevap], ...]`, hem <details> hem bu fonksiyon FAQ'dan beslenir. */
+export function faqPageSchema(items: ReadonlyArray<readonly [string, string]>) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: items.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  };
+}

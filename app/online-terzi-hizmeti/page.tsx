@@ -4,7 +4,8 @@ import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OnlineTerziClient from './OnlineTerziClient';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import { FAQS } from './faq-data';
 
 const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
@@ -231,61 +232,8 @@ const jsonLd = {
       ],
     },
 
-    // 5. FAQPage
-    {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: "Türkiye'nin herhangi bir şehrinden online terzi siparişi verebilir miyim?",
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: "Evet. Ölçülerinizi online alıp kıyafeti Antalya'daki atölyemizde dikiyor, istediğiniz şehre veya ülkeye gönderiyoruz. Tüm süreç WhatsApp üzerinden yürütülür.",
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Online terzi için ölçülerimi nasıl alacağım?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'WhatsApp üzerinden ölçü alma konusunda sizi adım adım yönlendiriyoruz; bir mezura ve telefonunuz yeterli.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Online terzi siparişim ne kadar sürede teslim edilir?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Dikim süresi modele göre değişir; yaklaşık süreyi WhatsApp üzerinden söyleriz. Yurt dışı kargo genelde 1–3 hafta sürer.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Online terzi kıyafetim tam oturmadıysa ne yapacağım?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Oturmayan ürünü değiştiriyor veya düzeltiyoruz. WhatsApp\'tan bize yazın, işi birlikte planlarız.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Kendi kumaşımla online terzi hizmetinden yararlanabilir miyim?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Kumaşı biz temin edebiliriz; isterseniz kendi kumaşınızı da getirebilir veya gönderebilirsiniz.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Hangi dillerde yazışabiliriz?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'WhatsApp üzerinden her dilde yazışabilirsiniz; her dilde cevap veriyoruz. Ödemeyi havale ile alıyoruz.',
-          },
-        },
-      ],
-    },
+    // 5. FAQPage — görünür SSS ile aynı dizi
+    { ...faqPageSchema(FAQS.map((f) => [f.q, f.a] as const)), '@id': `${SITE_URL}#faq` },
   ],
 };
 

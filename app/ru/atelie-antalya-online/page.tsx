@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp, цена | Terzi Can' },
-  description: 'Ателье в Коньяалты, Анталия. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
+  description: 'Ателье в Коньяалты, Анталья. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
     languages: { ru: PAGE_URL },
   },
   openGraph: {
-    title: 'Ателье Анталия Коньяалты — Ремонт и Пошив | Terzi Can',
-    description: 'Ремонт одежды, подгонка, пошив на заказ. Отвечаем в WhatsApp по-русски. Коньяалты, Анталия. ☎ +90 531 898 64 18',
+    title: 'Ателье Анталья Коньяалты — Ремонт и Пошив | Terzi Can',
+    description: 'Ремонт одежды, подгонка, пошив на заказ. Отвечаем в WhatsApp по-русски. Коньяалты, Анталья. ☎ +90 531 898 64 18',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'ru_RU', type: 'website',
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталия', type: 'image/jpeg' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталья', type: 'image/jpeg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Ателье Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can',
-    description: 'Ремонт одежды, пошив. Анталия. ☎ +90 531 898 64 18',
+    description: 'Ремонт одежды, пошив. Анталья. ☎ +90 531 898 64 18',
     images: [OG_IMAGE],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } },
@@ -72,9 +72,9 @@ export const metadata: Metadata = {
 
 // ─── JSON-LD ─────────────────────────────────────────────────────
 const FAQ = [
-  { q: 'Где находится ателье в Анталии?', a: 'Ателье Terzi Can находится в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» для навигации.' },
+  { q: 'Где находится ателье в Анталье?', a: 'Ателье Terzi Can находится в районе Hurma, Коньяалты, Анталья. Нажмите «Маршрут» для навигации.' },
   { q: 'Говорят ли в ателье по-русски?', a: 'Да, можно писать в WhatsApp по-русски — мы отвечаем на любом языке.' },
-  { q: 'Сколько стоит укоротить брюки в Анталии?', a: 'Укорачивание брюк. Точную цену скажем по фото в WhatsApp.' },
+  { q: 'Сколько стоит укоротить брюки в Анталье?', a: 'Укорачивание брюк. Точную цену скажем по фото в WhatsApp.' },
   { q: 'Есть ли выездной портной?', a: 'Да. Заберём вещи на дом или в отель: из отелей — бесплатно во всех районах, где мы работаем; на дом — бесплатно в Коньяалты и рядом.' },
 ];
 
@@ -90,11 +90,11 @@ const SERVICES = [
 ];
 
 const FAQS = [
-  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в районе Hurma, Коньяалты, Анталия. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
+  { q: '📍 Где находится ателье?', a: `Ателье «${GBP_NAME}» в районе Hurma, Коньяалты, Анталья. Нажмите «Маршрут» — откроется Google Maps с точным местоположением.` },
   { q: '💬 Говорите ли вы по-русски?', a: 'Да! Работаем с русскоязычными клиентами через WhatsApp. Пишите на родном языке — ответим быстро.' },
   { q: '⏱️ Как быстро выполняется ремонт?', a: 'Обычная подгонка — в тот же день, срочная — 1–2 часа. Срок пошива — по модели и количеству.' },
   { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель: из отелей — бесплатно во всех районах, где мы работаем; на дом — бесплатно в Коньяалты и рядом. Готовое привозим обратно обычно за 1–2 дня.' },
-  { q: '💰 Сколько стоит укоротить брюки?', a: 'От. Пришлите фото в WhatsApp — скажем точную цену за несколько минут.' },
+  { q: '💰 Сколько стоит укоротить брюки?', a: 'От. Пришлите фото в WhatsApp — скажем точную цену в рабочие часы (08:00–23:00).' },
 ];
 
 // ─── PAGE ────────────────────────────────────────────────────────
@@ -104,8 +104,8 @@ export default function RuAtelieAntalyaPage() {
       <BusinessSchema
         reviews={GOOGLE_REVIEWS}
         path='/ru/atelie-antalya-online'
-        name='Ателье Анталия Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can'
-        description='Профессиональное ателье Terzi Can в Коньяалты, Анталия: ремонт и пошив одежды, подгонка по фигуре, замена молнии. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.'
+        name='Ателье Анталья Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can'
+        description='Профессиональное ателье Terzi Can в Коньяалты, Анталья: ремонт и пошив одежды, подгонка по фигуре, замена молнии. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.'
         lang={'ru'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Ателье на русском', path: '/ru/atelie-antalya-online' }]}
@@ -141,7 +141,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TRUST BAR ── */}
         <div style={{ background: '#0F2417', color: '#4ADE80', fontSize: 11, fontWeight: 700, padding: '9px 16px', textAlign: 'center', letterSpacing: .5 }}>
-          🌍 Отвечаем в WhatsApp по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталия &nbsp;·&nbsp; Ежедневно 08:00–23:00
+          🌍 Отвечаем в WhatsApp по-русски &nbsp;·&nbsp; 📍 Коньяалты, Анталья &nbsp;·&nbsp; Ежедневно 08:00–23:00
         </div>
 
         {/* ── HERO ── */}
@@ -153,7 +153,7 @@ export default function RuAtelieAntalyaPage() {
             </span>
 
             <h1 className="fu2" style={{ fontSize:'clamp(28px,5vw,48px)',fontWeight:900,color:'#fff',lineHeight:1.15,marginBottom:14 }}>
-              Ателье в Анталии<br />
+              Ателье в Анталье<br />
               <span style={{ color:'#4ADE80' }}>Ремонт и Пошив Одежды</span>
             </h1>
 
@@ -188,7 +188,7 @@ export default function RuAtelieAntalyaPage() {
               <div style={{ display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:8,marginBottom:6 }}>
                 <div>
                   <h2 style={{ fontSize:18,fontWeight:800,color:'#111',lineHeight:1.2,marginBottom:4 }}>{GBP_NAME}</h2>
-                  <p style={{ fontSize:12,color:'#6B7280' }}>Ателье · Коньяалты, Анталия</p>
+                  <p style={{ fontSize:12,color:'#6B7280' }}>Ателье · Коньяалты, Анталья</p>
                 </div>
                 <span style={{ flexShrink:0,background:'#DCFCE7',color:'#166534',fontSize:11,fontWeight:700,padding:'4px 10px',borderRadius:20 }}>● Открыто</span>
               </div>
@@ -234,12 +234,12 @@ export default function RuAtelieAntalyaPage() {
         {/* ── SEO & ABOUT CONTENT (YENİ EKLENDİ - GOOGLE İÇİN ÇOK ÖNEMLİ) ── */}
         <section style={{ padding: '52px 16px 20px', maxWidth: 800, margin: '0 auto' }}>
           <div style={{ background: '#fff', padding: '32px', borderRadius: '16px', border: '1px solid #E8E4DC', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
-            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Портной в Коньяалты с ответами по-русски (Анталия)</h2>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Портной в Коньяалты с ответами по-русски (Анталья)</h2>
             <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7, marginBottom: 16 }}>
-              Ищете профессиональное <strong>ателье в Анталии</strong>, где вас поймут с полуслова? <b>Terzi Can</b> — это надежное ателье по ремонту и пошиву одежды, расположенное в самом сердце района Коньяалты (Лиман, Хурма, Сарысу). Мы гордимся тем, что предоставляем высококачественный сервис для местных жителей и экспатов. Вам больше не нужно переживать о языковом барьере: мы свободно общаемся с нашими клиентами на русском языке через WhatsApp.
+              Ищете профессиональное <strong>ателье в Анталье</strong>, где вас поймут с полуслова? <b>Terzi Can</b> — это надежное ателье по ремонту и пошиву одежды, расположенное в самом сердце района Коньяалты (Лиман, Хурма, Сарысу). Мы гордимся тем, что предоставляем высококачественный сервис для местных жителей и экспатов. Вам больше не нужно переживать о языковом барьере: мы свободно общаемся с нашими клиентами на русском языке через WhatsApp.
             </p>
             <p style={{ fontSize: 14, color: '#4B5563', lineHeight: 1.7 }}>
-              Наша команда мастеров выполняет любые задачи: от срочного укорачивания джинсов и замены сломанной молнии до сложной подгонки вечерних платьев и мужских костюмов по фигуре. Мы работаем с деликатными тканями, кожей и плотным денимом. Кроме того, мы предлагаем уникальную услугу — <em>выездной портной в Анталии</em>. Мы сами приедем к вам домой или в отель, заберем вещи на ремонт или подгонку, и вернем их в идеальном состоянии уже в тот же день.
+              Наша команда мастеров выполняет любые задачи: от срочного укорачивания джинсов и замены сломанной молнии до сложной подгонки вечерних платьев и мужских костюмов по фигуре. Мы работаем с деликатными тканями, кожей и плотным денимом. Кроме того, мы предлагаем уникальную услугу — <em>выездной портной в Анталье</em>. Мы сами приедем к вам домой или в отель, заберем вещи на ремонт или подгонку, и вернем их в идеальном состоянии уже в тот же день.
             </p>
           </div>
         </section>
@@ -272,7 +272,7 @@ export default function RuAtelieAntalyaPage() {
             <p style={{ fontSize:13,color:'rgba(255,255,255,.6)',marginBottom:32 }}>3 простых шага к идеальной одежде</p>
             <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:16 }}>
               {[
-                { n:'1',t:'Напишите нам',d:'WhatsApp или звонок — опишите задачу, получите цену за несколько минут.' },
+                { n:'1',t:'Напишите нам',d:'WhatsApp или звонок — опишите задачу, получите цену в рабочие часы (08:00–23:00).' },
                 { n:'2',t:'Принесите или закажите выезд',d:'Приезжайте в ателье или закажите выездного портного на дом.' },
                 { n:'3',t:'Готово!',d:'Вещь готова в срок, сидит идеально. Гарантия качества.' },
               ].map(s => (
@@ -307,7 +307,7 @@ export default function RuAtelieAntalyaPage() {
         <section style={{ padding:'48px 16px',background:'#064E3B',textAlign:'center' }}>
           <div style={{ maxWidth:560,margin:'0 auto' }}>
             <h2 style={{ fontSize:24,fontWeight:800,color:'#fff',marginBottom:12 }}>Ваша одежда будет готова в срок</h2>
-            <p style={{ fontSize:14,color:'rgba(255,255,255,.7)',marginBottom:28 }}>Пришлите фото в WhatsApp — узнайте цену за несколько минут</p>
+            <p style={{ fontSize:14,color:'rgba(255,255,255,.7)',marginBottom:28 }}>Пришлите фото в WhatsApp — узнайте цену в рабочие часы (08:00–23:00)</p>
             <div style={{ display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap' }}>
               <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn"
                 style={{ display:'inline-flex',alignItems:'center',gap:8,background:'#25D366',color:'#fff',padding:'14px 28px',borderRadius:28,fontSize:15,fontWeight:800,boxShadow:'0 6px 20px rgba(37,211,102,.4)' }}>

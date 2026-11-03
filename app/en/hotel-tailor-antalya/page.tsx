@@ -7,6 +7,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
+import { DURATION } from '@/lib/business';
 
 const SITE_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -18,6 +19,7 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Hello, I need a mobile tailor at my hotel. My location: ')}`;
 const TODAY = '2026-10-04';
+const TURN = `${DURATION.en.normalShort} · ${DURATION.en.urgentShort}`; // lib/business.ts DURATION (tek kaynak)
 
 const HOTELS = [
   'Rixos Downtown Antalya','Regnum Carya','Kaya Palazzo Golf Resort',
@@ -79,14 +81,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'~35 min', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Lara', time:'~10 min', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Güzeloba', time:'~15 min', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
-  {name:'Kemer', time:'~45 min', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Muratpaşa / Liman', time:'~5 min', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
-  {name:'Konyaaltı', time:'Local', desc:'Terzi Can workshop — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Side', time:'~1 hr', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
-  {name:'Serik / Döşemealtı', time:'~40 min', desc:'Serik center and surrounding villages'},
+  {name:'Belek', time:'Free pick-up', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'Free pick-up', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'Free pick-up', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
+  {name:'Kemer', time:'Free pick-up', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Muratpaşa / Liman', time:'Free pick-up', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
+  {name:'Konyaaltı', time:'Workshop area', desc:'Terzi Can workshop — Hurma, Uncalı, Arapsuyu, Sarısu'},
+  {name:'Side', time:'Free pick-up', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
+  {name:'Serik / Döşemealtı', time:'Free pick-up', desc:'Serik center and surrounding villages'},
 ];
 
 export default function HotelTailorAntalyaPage() {
@@ -204,7 +206,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Hotel Tailor Service Across Konyaaltı & Nearby Districts
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Fast dispatch from our Konyaaltı and Lara stations to resort regions</p>
+            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Free pick-up and delivery to every resort region we cover</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {DISTRICTS.map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
@@ -270,13 +272,13 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','FREE','—'],
-                  ['Trouser / Pant Hemming','by photo','Same day · urgent 1–2 h'],
-                  ['Zipper Replacement','by photo','Same day · urgent 1–2 h'],
-                  ['Dress / Jacket Alteration','by photo','Same day · urgent 1–2 h'],
-                  ['Sleeve Shortening','by photo','Same day · urgent 1–2 h'],
-                  ['Evening Gown Repair','by photo','Same day · urgent 1–2 h'],
-                  ['Wedding Dress Alteration','by photo','Same day · urgent 1–2 h'],
-                  ['Tear Repair','by photo','Same day · urgent 1–2 h'],
+                  ['Trouser / Pant Hemming','from €10',TURN],
+                  ['Zipper Replacement','from €15 (coat / leather €20)',TURN],
+                  ['Dress / Jacket Alteration','from €10',TURN],
+                  ['Sleeve Shortening','from €10',TURN],
+                  ['Evening Gown Repair','from €40',TURN],
+                  ['Wedding Dress Alteration (no wedding dress sewing)','from €40',TURN],
+                  ['Tear Repair','by photo',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>

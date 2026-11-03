@@ -29,10 +29,10 @@ const GROUPS: ServiceGroup[] = [
     image: '/images/elbise-dikimi/sea-dress.jpg',
     imageAlt: 'Özel dikim beyaz keten elbise, deniz manzarası önünde',
     rows: [
-      { name: 'Günlük elbise (özel ölçü)', price: '800 TL\'den', note: '3-5 iş günü' },
-      { name: 'Etek / pantolon dikimi', price: '1.000 TL\'den', note: 'Prova dahil' },
-      { name: 'Çocuk kıyafeti dikimi', price: '1.000 TL\'den', note: 'Modele göre' },
-      { name: 'Damatlık dikimi', price: '20.000 TL\'den', note: 'Prova dahil' },
+      { name: 'Günlük elbise (özel ölçü)', price: 'Fotoğrafa ve istediğiniz modele göre', note: 'Süre modele ve adede göre' },
+      { name: 'Etek / pantolon dikimi', price: 'Fotoğrafa ve istediğiniz modele göre', note: 'Prova dahil' },
+      { name: 'Çocuk kıyafeti dikimi', price: 'Fotoğrafa ve istediğiniz modele göre', note: 'Modele göre' },
+      { name: 'Damatlık / takım dikimi', price: 'Fotoğrafa ve istediğiniz modele göre', note: 'Prova dahil' },
     ],
   },
   {
@@ -46,7 +46,7 @@ const GROUPS: ServiceGroup[] = [
     rows: [
       { name: 'Bel daraltma', price: '200 TL\'den' },
       { name: 'Göğüs / sırt daraltma', price: 'Fotoğrafa göre' },
-      { name: 'Askı kısaltma / ayarı', price: '90 TL\'den' },
+      { name: 'Askı kısaltma / ayarı', price: 'Fotoğrafa göre' },
       { name: 'Genel elbise tadilatı', price: '200 TL\'den', note: 'İnceleme sonrası netleşir' },
     ],
   },
@@ -61,7 +61,7 @@ const GROUPS: ServiceGroup[] = [
     rows: [
       { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Aynı gün' },
       { name: 'Fermuar değişimi', price: '300 TL\'den' },
-      { name: 'Yırtık / söküğü onarımı', price: '90 TL\'den' },
+      { name: 'Yırtık / söküğü onarımı', price: 'Fotoğrafa göre' },
       { name: 'Düğme, kopça, fitil tamiri', price: 'Fotoğrafa göre' },
     ],
   },
@@ -793,25 +793,25 @@ export default function ElbiseDikimiClient() {
         <div className="faq-item">
           <h3 className="faq-q">Antalya&apos;da elbise dikimi ne kadar sürer?</h3>
           <p className="faq-a">
-            Standart elbise dikimi 3-5 iş günü içinde tamamlanır. Acil
-            siparişlerde acil tadilat 1–2 saatte, normal tadilat aynı gün teslim edilir, lütfen
-            randevu sırasında belirtin.
+            Elbise dikiminde süre modele ve adede göre belirlenir. Tadilat ve
+            tamirde ise normal işler aynı gün teslim edilir, acil işler 1–2 saatte
+            hazırlanır; lütfen randevu sırasında belirtin.
           </p>
         </div>
         <div className="faq-item">
           <h3 className="faq-q">Paça kısaltma fiyatı ne kadar?</h3>
           <p className="faq-a">
-            Paça kısaltma 200 TL&apos;den başlar. Kumaş tipine ve dikim
-            şekline göre fiyat değişebilir. Kesin fiyat için WhatsApp&apos;tan
+            Paça kısaltma 200 TL&apos;den başlar. İşin kapsamına göre
+            fiyat değişebilir. Kesin fiyat için WhatsApp&apos;tan
             fotoğraf gönderebilirsiniz.
           </p>
         </div>
         <div className="faq-item">
           <h3 className="faq-q">Gelinlik tadilatı yapıyor musunuz?</h3>
           <p className="faq-a">
-            Evet, gelinlik ve abiye tadilatında uzmanız. Bel daraltma, etek
-            kısaltma, askı ayarı ve fermuar değişimi dahil tüm özel gün
-            kıyafetlerine hizmet veriyoruz.
+            Evet, gelinlik ve abiye TADİLATI yapıyoruz (gelinlik dikimi yapılmaz).
+            Bel daraltma, etek kısaltma, askı ayarı ve fermuar değişimi dahil
+            mevcut özel gün kıyafetlerinize hizmet veriyoruz.
           </p>
         </div>
         <div className="faq-item">
