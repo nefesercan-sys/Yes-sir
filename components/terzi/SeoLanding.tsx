@@ -4,6 +4,7 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import { districtAngle, serviceAngle, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
 import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolge-hizmet-matrisi-i18n';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -77,6 +78,7 @@ const UI = {
   },
 } as const;
 
+const SVC_WORD: Record<Lang, (n: string) => string> = { tr: (n) => `${n} terzi işi`, en: (n) => `tailoring in ${n}`, ru: (n) => `услуги портного: ${n}`, de: (n) => `Schneiderarbeiten in ${n}` };
 const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
@@ -186,9 +188,16 @@ const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: s
   de: { h: (n) => `Über ${n}`, where: 'Lage', needs: 'Häufigste Aufträge aus dieser Gegend', hub: 'Werkstatt: Hurma, Konyaaltı' },
 };
 
+// swaphubs'a özgü başlık kalıbı: "fotoğraftan fiyat / otelden alım" (terzihizmeti.com.tr başlıkları fiyat ve rehber tonlu).
+const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
+  tr: [(n) => `${n} Terzi: Fotoğraftan Fiyat, Kapıdan Alım | Terzi Can`, (n) => `${n} Terzi · Fotoğraf At, Fiyat Al | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
+  en: [(n) => `Tailor in ${n}: Photo Quote, Hotel Pick-up | Terzi Can`, (n) => `${n} Tailor · Photo Quote, Pick-up | Terzi Can`, (n) => `Tailor in ${n} | Terzi Can`],
+  ru: [(n) => `Портной ${n}: цена по фото, забор из отеля | Terzi Can`, (n) => `Портной ${n}: фото-оценка и забор | Terzi Can`, (n) => `Портной ${n} | Terzi Can`],
+  de: [(n) => `Schneider ${n}: Foto-Angebot, Hotelabholung | Terzi Can`, (n) => `Schneider ${n}: Foto-Preis, Abholung | Terzi Can`, (n) => `Schneider ${n} | Terzi Can`],
+};
 function districtCopy(lang: Lang, d: District) {
   const r = _districtCopy(lang, d);
-  return r;
+  return { ...r, title: pickFit([...SW_DIST_TITLES[lang].map((f) => f(d.name[lang])), r.title], 60) };
 }
 function _districtCopy(lang: Lang, d: District) {
   const n = d.name[lang];
@@ -403,8 +412,10 @@ function serviceCopy(lang: Lang, s: Service) {
   ];
   const desc = pickFit(candidates, 158);
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
-  if (o) return { nm, title: o.title, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
-  return { nm, title, desc, kw: [] as string[] };
+  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
+  const swTitle = pickFit([...swT, title], 60);
+  if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
+  return { nm, title: swTitle, desc, kw: [] as string[] };
 }
 
 function serviceFaq(lang: Lang, s: Service): [string, string][] {
@@ -591,6 +602,24 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
   );
 }
 
+// swaphubs: bölge zincirleri alfabetik (terzihizmeti.com.tr öncelik sırasını kullanır; aynı dizilim olmasın)
+const byName = (lang: Lang, a: District[]) => [...a].sort((x, y) => x.name[lang].localeCompare(y.name[lang], lang));
+
+function AngleBlock({ a, id }: { a: Angle; id: string }) {
+  return (
+    <section className="sl-sec" aria-labelledby={id} style={{ paddingBottom: '1rem' }}>
+      <div className="sl-ctr" style={{ maxWidth: 820 }}>
+        <h2 className="sl-sec-h sl-ff" id={id} style={{ textAlign: 'left' }}>{a.h}</h2>
+        {a.p.map((t) => (<p key={t} style={{ fontSize: '.92rem', lineHeight: 1.8, color: 'rgba(255,255,255,.78)', margin: '.6rem 0' }}>{t}</p>))}
+        <h3 style={{ fontSize: '.95rem', fontWeight: 700, margin: '1rem 0 .4rem', color: '#C9A96E' }}>{a.stepsH}</h3>
+        <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '.88rem', lineHeight: 1.9, color: 'rgba(255,255,255,.75)' }}>
+          {a.steps.map((t) => (<li key={t}>{t}</li>))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 function Faq({ lang, items }: { lang: Lang; items: [string, string][] }) {
   return (
     <section className="sl-sec" id="faq" aria-labelledby="faq-h">
@@ -643,7 +672,8 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
   const url = abs(districtUrl(lang, d));
   const idx = DISTRICTS.findIndex((x) => x.slug === d.slug);
   const matris = lang === 'tr' ? bolgeMatrisi(d.slug, d.name.tr, d.loc.tr) : bolgeMatrisiI18n(lang, d.slug, d.name[lang], d.loc[lang]);
-  const faq = lang === 'tr' ? [...districtFaq(lang, d), ...bolgeEkSss(d.slug, d.name.tr, d.loc.tr)] : [...districtFaq(lang, d), ...bolgeEkSssI18n(lang, d.slug, d.name[lang], d.loc[lang])];
+  const faq = [...angleFaq(lang, SVC_WORD[lang](d.name[lang])), ...(lang === 'tr' ? [...districtFaq(lang, d), ...bolgeEkSss(d.slug, d.name.tr, d.loc.tr)] : [...districtFaq(lang, d), ...bolgeEkSssI18n(lang, d.slug, d.name[lang], d.loc[lang])])] as [string, string][];
+  const angle = districtAngle(lang, d.name[lang], d.loc[lang]);
   const waMsg = {
     tr: `Merhaba, ${c.loc} terzi hizmeti almak istiyorum.`,
     en: `Hello, I need a tailor ${c.loc}.`,
@@ -741,6 +771,8 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
           </div>
         </section>
 
+        <AngleBlock a={angle} id="angle-h" />
+
         {DISTRICT_FACTS[d.slug] && (
           <section className="sl-sec" aria-labelledby="local-h" style={{ paddingBottom: '1rem' }}>
             <div className="sl-ctr" style={{ maxWidth: 820 }}>
@@ -814,7 +846,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="pop-h">{u.popular} — {d.name[lang]}</h2></div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.7)' }}>
-              {popular.map((p) => (<li key={p}>✂️ {p}</li>))}
+              {[...popular].reverse().map((p) => (<li key={p}>✂️ {p}</li>))}
             </ul>
             {hotel && (<p style={{ marginTop: '1.2rem', fontSize: '.84rem' }}><a href={hotel} style={{ color: '#C9A96E', fontWeight: 700 }}>{u.hotelLink} →</a></p>)}
           </div>
@@ -858,7 +890,8 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const u = UI[lang];
   const c = serviceCopy(lang, s);
   const url = abs(serviceUrl(lang, s));
-  const faq = serviceFaq(lang, s);
+  const nmLow = lang === 'en' ? s.name.en.toLowerCase() : lang === 'tr' ? s.name.tr.toLocaleLowerCase('tr-TR') : s.name[lang];
+  const faq = [...angleFaq(lang, nmLow), ...serviceFaq(lang, s)] as [string, string][];
   const price = priceOf(lang, s);
   const waMsg = {
     tr: `Merhaba, ${s.name.tr.toLowerCase()} için fiyat ve süre öğrenmek istiyorum.`,
@@ -910,13 +943,14 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         <Hero lang={lang} tag={`${s.icon} ${u.free} · ${u.hours}`} h1={<>{s.name[lang]}<br /><span className="sl-accent">Antalya</span></>}
           desc={`${s.intro[lang]} ${timeOf(lang, s)}.`} waMsg={waMsg} />
 
+        <AngleBlock a={serviceAngle(lang, s.name[lang])} id="angle-h" />
+
         <section className="sl-sec" aria-labelledby="det-h">
           <div className="sl-ctr" style={{ maxWidth: 720 }}>
             <div className="sl-sec-head"><span className="sl-eyebrow">{u.since}</span><h2 className="sl-sec-h sl-ff" id="det-h">{s.name[lang]}</h2></div>
             <div className="sl-howto-list">
               <div className="sl-howto-item"><div className="sl-howto-t">{u.time}</div><div className="sl-howto-d">{timeOf(lang, s)}</div></div>
               {price && (<div className="sl-howto-item"><div className="sl-howto-t">{u.price}</div><div className="sl-howto-d">{price}</div></div>)}
-              <div className="sl-howto-item"><div className="sl-howto-t">{u.free}</div><div className="sl-howto-d">{SERVICE_RULE[lang].full}</div></div>
             </div>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '1.4rem 0 .3rem', color: '#C9A96E' }}>{PROCESS[PROC_OF_SERVICE[s.id] ?? 'kiyafet-tamiri'][lang].h}</h3>
             <p style={{ fontSize: '.9rem', lineHeight: 1.75, color: 'rgba(255,255,255,.78)', margin: 0 }}>{PROCESS[PROC_OF_SERVICE[s.id] ?? 'kiyafet-tamiri'][lang].p}</p>
@@ -928,7 +962,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="var-h">{u.popular}</h2></div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.7)' }}>
-              {s.vars[lang].map((v) => (<li key={v}>✂️ {v}</li>))}
+              {[...s.vars[lang]].reverse().map((v) => (<li key={v}>✂️ {v}</li>))}
             </ul>
           </div>
         </section>
@@ -937,13 +971,13 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="areas-h">{u.districts}</h2></div>
             <div>
-              {sortD(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{query(lang, d, s)}</a>))}
+              {byName(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip} title={query(lang, d, s)}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
           </div>
         </section>
 
-        {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi konu={HIZMET_KONU[s.id] || 'hizmet'} lang={lang} anahtarlar={HIZMET_GORSEL[s.id]} sayfaUrl={url} base={SITE} />}
+        {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi konu={HIZMET_KONU[s.id] || 'hizmet'} lang={lang} anahtarlar={[...HIZMET_GORSEL[s.id]].reverse()} sayfaUrl={url} base={SITE} />}
 
         <Faq lang={lang} items={faq} />
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />
@@ -951,7 +985,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         <section className="sl-sec" aria-labelledby="rel-h" style={{ paddingBottom: '1.5rem' }}>
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
             <h2 id="rel-h" style={{ fontSize: '.78rem', letterSpacing: '.12em', textTransform: 'uppercase', opacity: .55, marginBottom: '.9rem' }}>{u.related}</h2>
-            <div>{related.map((x) => (<a key={x.id} href={serviceUrl(lang, x)} style={linkChip}>{x.name[lang]}</a>))}</div>
+            <div>{[...related].reverse().map((x) => (<a key={x.id} href={serviceUrl(lang, x)} style={linkChip}>{x.name[lang]}</a>))}</div>
           </div>
         </section>
         {otherLangLinks(lang, (l) => serviceUrl(l, s))}
@@ -994,14 +1028,14 @@ export function HubPage({ lang }: { lang: Lang }) {
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
         <Hero lang={lang} tag={`📍 ${u.where}`} h1={<>{SVC_HUB_NAME[lang]}<br /><span className="sl-accent">Antalya</span></>} desc={desc} waMsg={waMsg} />
+        <AngleBlock a={hubAngle(lang)} id="angle-h" />
         <section className="sl-sec" aria-labelledby="all-h">
           <div className="sl-ctr">
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="all-h">{u.svcWord}</h2></div>
             <div className="sl-price-grid">
-              {SERVICES.map((s) => (
+              {[...SERVICES].reverse().map((s) => (
                 <a key={s.id} href={serviceUrl(lang, s)} className="sl-price-card" style={{ display: 'block' }}>
                   <div className="sl-price-head"><span className="sl-price-icon" aria-hidden="true">{s.icon}</span><div className="sl-price-tr">{s.name[lang]}</div></div>
-                  <p className="sl-price-desc">{s.intro[lang]}</p>
                   <div style={{ fontSize: '.78rem', color: '#C9A96E', fontWeight: 700 }}>{TIME_TEXT[s.time][lang] === timeOf(lang, s) ? TIME_TEXT[s.time][lang] : timeOf(lang, s)}</div>
                 </a>
               ))}
@@ -1012,7 +1046,7 @@ export function HubPage({ lang }: { lang: Lang }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="dist-h">{u.districts}</h2></div>
             <div>
-              {sortD(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
+              {byName(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
             <p style={{ marginTop: '1rem', fontSize: '.9rem' }}><a href={`${TZ_SITE}${TZ_HUB[lang]}`} hrefLang={lang} style={{ textDecoration: 'underline' }}>{tzHubLabel[lang]}</a></p>

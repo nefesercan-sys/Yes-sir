@@ -7,7 +7,7 @@
 // swaphubs tonu: bilgi/rehber. terzihizmeti.com.tr'deki cümleler kopyalanmaz.
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
-import { DURATION, SERVICE_RULE, PRICE_FROM, PRICE_BY_MODEL, PHONE_DISPLAY, isFreeService } from '@/lib/business';
+import { DURATION, SERVICE_RULE, PRICE_FROM, PRICE_BY_MODEL, PHONE_DISPLAY } from '@/lib/business';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { bolgeEkSss } from '@/lib/bolge-hizmet-matrisi';
 
@@ -135,9 +135,9 @@ export const PROC_OF_SERVICE: Record<string, ProcId> = {
 };
 
 // ── Servis kuralı (bölgeye göre) ─────────────────────────────────────────────
-export function serviceRuleFor(lang: BLang, slug: string): string {
-  const r = SERVICE_RULE[lang];
-  return isFreeService(slug) ? `${r.hotelFree}; ${r.homeFree.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + r.homeFree.slice(1)}` : `${r.hotelFree}; ${r.homeByArea.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + r.homeByArea.slice(1)}`;
+export function serviceRuleFor(lang: BLang, _slug: string): string {
+  // Eve ve otele alım-teslim hizmet verilen tüm bölgelerde ücretsiz (tek kural): tekrar eden yarım cümle üretilmez.
+  return SERVICE_RULE[lang].hotelFree;
 }
 
 // ── Doğrudan cevap paragrafı (sayfa başı, 1–2 cümle) ─────────────────────────
