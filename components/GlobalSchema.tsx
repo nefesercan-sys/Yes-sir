@@ -65,6 +65,7 @@ const INTL_PATHS = [
 export function isTerziPath(pathname: string | null): boolean {
   if (!pathname) return false;
   const p = pathname.toLowerCase();
+  if (/^\/(es|fr|pl|uk|nl|ar)\//.test(p)) return true; // ES/FR/PL/UK/NL/AR tüm sayfalar terzi yoludur
   if (INTL_PATHS.includes(p.replace(/\/$/, ''))) return true;
   if (/^\/(es|fr|pl|uk|nl|ar)\/(guia-servicios-telas-sastreria-antalya|guide-services-tissus-couture-antalya|przewodnik-uslugi-tkaniny-krawiec-antalya|putivnyk-poslugy-tkanyny-kravets-antaliya|gids-diensten-stoffen-kleermaker-antalya|dalil-khadamat-aqmisha-khayyat-antalya)$/.test(p)) return true;
   if (/^\/(es|fr|pl|uk|nl|ar)\/(textil-promocional-bolsas-de-tela-antalya|textile-promotionnel-sacs-en-tissu-antalya|tekstylia-reklamowe-torby-materialowe-antalya|reklamnyi-tekstyl-tkanynovi-sumky-antaliya|promotiekleding-stoffen-tassen-antalya|mansujat-tarwijiya-haqaib-qumash-antalya)$/.test(p)) return true;

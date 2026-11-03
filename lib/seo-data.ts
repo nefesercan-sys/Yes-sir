@@ -311,7 +311,7 @@ export const SERVICES: Service[] = [
       ru: 'Вечерние платья, нарядная одежда и наряды для особых случаев: ушиваем, расширяем, укорачиваем, подгоняем бретели и молнии; мерки снимаем, пока вещь на вас, при необходимости делаем примерку. Обычные работы готовы в тот же день, срочные — за 1–2 часа.',
       de: 'Bei Abendkleidern, Festmode und Kleidung für besondere Anlässe machen wir enger oder weiter, kürzen, passen Träger und Reißverschluss an; wir messen am getragenen Kleidungsstück und machen bei Bedarf eine Anprobe. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
-    extra: { href: '/antalya-gelinlik-tadilati', label: { tr: 'Gelinlik tadilatı sayfası', en: 'Wedding dress page (Turkish)', ru: 'Страница о свадебных платьях (тур.)', de: 'Brautkleid-Seite (türkisch)' } },
+    extra: { href: '/terzi/bayan-terzi-antalya', label: { tr: 'Gelinlik tadilatı sayfası', en: 'Wedding dress page (Turkish)', ru: 'Страница о свадебных платьях (тур.)', de: 'Brautkleid-Seite (türkisch)' } },
     vars: {
       tr: ['abiye tadilatı', 'abiye elbise daraltma', 'abiye boy kısaltma', 'gece kıyafeti tadilatı', 'gece elbisesi daraltma', 'özel gün kıyafeti tadilatı', 'abiye tamiri', 'abiye elbise tadilat terzi'],
       en: ['evening dress alteration', 'evening gown tailor', 'formal dress alteration', 'special occasion dress alteration', 'shorten evening dress', 'take in evening dress', 'cocktail dress alteration'],
@@ -332,7 +332,7 @@ export const SERVICES: Service[] = [
       ru: 'Классические, костюмные брюки и джинсы: подшив, ушивание и расширение в поясе, сужение штанин, замена молнии и ремонт швов. Брюки примеряют стоя, в обуви, с которой вы их будете носить; обычные работы готовы в тот же день, срочные — за 1–2 часа.',
       de: 'Stoffhosen, Anzughosen und Jeans: Kürzen, Bund enger oder weiter machen, Beine schmaler machen, Reißverschluss wechseln und Nähte reparieren. Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden; normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
-    extra: { href: '/konyaalti-paca-kisaltma', label: { tr: 'Paça kısaltma sayfası', en: 'Hemming page (Turkish)', ru: 'Страница о подшиве брюк (тур.)', de: 'Seite zum Kürzen (türkisch)' } },
+    extra: { href: '/terzi/paca-kisaltma-antalya', label: { tr: 'Paça kısaltma sayfası', en: 'Hemming page (Turkish)', ru: 'Страница о подшиве брюк (тур.)', de: 'Seite zum Kürzen (türkisch)' } },
     vars: {
       tr: ['pantolon tadilatı', 'pantolon daraltma', 'pantolon paça kısaltma', 'pantolon bel daraltma', 'pantolon bel genişletme', 'kumaş pantolon tadilatı', 'takım pantolon tadilatı', 'pantolon fermuar değişimi'],
       en: ['trouser alteration', 'pants alteration', 'taper trousers', 'take in trousers', 'trouser waist alteration', 'suit trousers alteration', 'pants tailor near me'],
@@ -353,7 +353,7 @@ export const SERVICES: Service[] = [
       ru: 'Рукава укорачиваем у пиджаков, курток, пальто, рубашек, свитеров и платьев. Длину отмечают, пока вещь на вас и рука в естественном положении. Обычные работы готовы в тот же день, срочные — за 1–2 часа.',
       de: 'Ärmel werden bei Sakkos, Jacken, Mänteln, Hemden, Pullovern und Kleidern gekürzt. Die Länge wird am getragenen Kleidungsstück bei natürlicher Armhaltung markiert. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
-    extra: { href: '/antalya-terzi', label: { tr: 'Antalya terzi sayfası', en: 'Antalya tailor page (Turkish)', ru: 'Страница портного в Анталье (тур.)', de: 'Schneider-Seite Antalya (türkisch)' } },
+    extra: { href: '/terzi', label: { tr: 'Antalya terzi sayfası', en: 'Antalya tailor page (Turkish)', ru: 'Страница портного в Анталье (тур.)', de: 'Schneider-Seite Antalya (türkisch)' } },
     vars: {
       tr: ['kol boyu kısaltma', 'kol kısaltma', 'ceket kol kısaltma', 'mont kol kısaltma', 'gömlek kol kısaltma', 'palto kol kısaltma', 'kazak kol kısaltma', 'kol boyu ayarlama'],
       en: ['sleeve shortening', 'shorten sleeves', 'jacket sleeve shortening', 'coat sleeve shortening', 'shirt sleeve shortening', 'sleeve length alteration'],

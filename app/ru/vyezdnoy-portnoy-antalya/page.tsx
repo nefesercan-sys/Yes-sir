@@ -7,7 +7,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { DURATION } from '@/lib/business';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -30,6 +30,19 @@ const HOTELS = [
   'Sheraton Cesme','Rixos Premium Belek','Crystal Sunset Luxury Resort',
   'Fame Residence Lara','Akra Hotel','Hillside Su Hotel','Lara Barut Collection',
   'Concorde De Luxe Resort','Papillon Ayscha Resort','Limak Atlantis',
+];
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Есть ли выездной портной в Анталье?', `Да! Портной Кан приедет по любому адресу в Анталье. Напишите адрес или отель в WhatsApp. WhatsApp: ${PHONE}`],
+  ['Выезд портного платный?', 'Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк, ушив платья.'],
+  ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
+  ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
+  ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
+  ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
+  ['В какие отели Белека и Лары вы приезжаете?', `Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. WhatsApp: ${PHONE}`],
+  ['Можно ли сделать срочный ремонт перед мероприятием?', `Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; обычная подгонка готова в тот же день, срочная — за 1–2 часа. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`],
+  ['Вы говорите по-русски?', `Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`],
 ];
 
 const jsonLd = {
@@ -70,21 +83,7 @@ const jsonLd = {
         {position:3, name:'Выездной портной Анталья', item:SITE_URL},
       ].map(i=>({...i,'@type':'ListItem'})),
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type':'Question', name:'Есть ли выездной портной в Анталье?',
-          acceptedAnswer:{'@type':'Answer',text:`Да! Портной Кан приедет по любому адресу в Анталье. Напишите название отеля или адрес в WhatsApp — портной приедет, снимет мерки, сошьёт и доставит. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'В какие отели Белека и Лары вы приезжаете?',
-          acceptedAnswer:{'@type':'Answer',text:`Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Выезд портного платный?',
-          acceptedAnswer:{'@type':'Answer',text:`Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк, ушив платья. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Можно ли сделать срочный ремонт перед мероприятием?',
-          acceptedAnswer:{'@type':'Answer',text:`Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; обычная подгонка готова в тот же день, срочная — за 1–2 часа. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Вы говорите по-русски?',
-          acceptedAnswer:{'@type':'Answer',text:`Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`} },
-      ],
-    },
+    faqPageSchema(FAQ),
     {
       '@type': 'HowTo',
       name: 'Как работает выездной портной / обслуживание в отеле',
@@ -108,9 +107,9 @@ export const metadata: Metadata = {
     'ателье Кемер','срочный ремонт одежды Анталья',
     'подгонка платья Анталья отель','подгонка костюма Анталья',
   ],
-  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  // Sahip kararı (Kasım 2026): swaphubs kendi adresinde canonical kalır; crossCanonical boşsa kendi URL'si kullanılır
   alternates: {
-    canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya')!,
+    canonical: crossCanonical('/ru/vyezdnoy-portnoy-antalya') ?? 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya',
     languages: {
       tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
       en: 'https://swaphubs.com/en/hotel-tailor-antalya',
@@ -313,14 +312,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '2rem' }}>
               Выездной портной Анталья — Часто задаваемые вопросы
             </h2>
-            {[
-              ['Есть ли выездной портной в Анталье?', `Да! Портной Кан приедет по любому адресу в Анталье. Напишите адрес или отель в WhatsApp. WhatsApp: ${PHONE}`],
-              ['Выезд портного платный?', 'Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк, ушив платья.'],
-              ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
-              ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
-              ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
-            ].map(([q, a], i) => (
+            {FAQ.map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
