@@ -386,7 +386,7 @@ export default function FermuarDegisimiPage() {
           </div>
         </div>
       </section>
-    <ReviewsBlock lang="tr" />
+    <ReviewsBlock lang="tr" schema />
     </main>
   );
 }

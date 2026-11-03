@@ -240,7 +240,7 @@ export default function BayTerziPage() {
             </div>
           </div>
         </section>
-      <ReviewsBlock lang="tr" />
+      <ReviewsBlock lang="tr" schema />
     </main>
     </>
   );

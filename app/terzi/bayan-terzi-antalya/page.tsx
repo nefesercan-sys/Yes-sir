@@ -219,7 +219,7 @@ export default function BayanTerziPage() {
             </div>
           </div>
         </section>
-      <ReviewsBlock lang="tr" />
+      <ReviewsBlock lang="tr" schema />
     </main>
     </>
   );
