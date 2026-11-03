@@ -4,7 +4,7 @@
 // Kurallar:
 //  - Sadece doğrulanmış bilgi: tek atölye (Hurma, Konyaaltı), 2006'dan beri, her gün 08:00–23:00,
 //    eve ve otele ücretsiz servis her bölgede (lib/business.ts);
-//    süreler: normal tamir/tadilat ertesi gün, acil 1–2 saat, özel dikim modele/adede göre (lib/business.ts DURATION).
+//    süreler: normal tamir/tadilat aynı gün, acil 1–2 saat, özel dikim modele/adede göre (lib/business.ts DURATION).
 //  - Mesafe/dakika, puan, müşteri sayısı, sahte vaat YOK.
 //  - Yeni bölge/hizmet eklemek için sadece bu dosyaya satır ekle; sayfalar, sitemap ve iç linkler otomatik oluşur.
 // ============================================================
@@ -129,7 +129,7 @@ export const DISTRICTS: District[] = [
 export const MAHALLE_PAGES: { href: string; name: L4 }[] = [];
 
 // ── Hizmetler ───────────────────────────────────────────────
-/** repair: normal tamir/tadilat ertesi gün, acil 1–2 saat · custom: özel dikim, süre modele/adede göre · mixed: dikim + tadilat */
+/** repair: normal tamir/tadilat aynı gün, acil 1–2 saat · custom: özel dikim, süre modele/adede göre · mixed: dikim + tadilat */
 export type TimeKey = 'repair' | 'custom' | 'mixed';
 export interface Service {
   id: string;
@@ -306,10 +306,10 @@ export const SERVICES: Service[] = [
     name: { tr: 'Abiye Tadilatı, Gece Kıyafetleri ve Özel Kıyafetler', en: 'Evening Dress, Formal & Special-Occasion Wear Alteration', ru: 'Подгонка вечерних платьев и нарядов для особых случаев', de: 'Abendkleid, Festmode und besondere Kleidung ändern' },
     q: { tr: 'abiye tadilatı', en: 'evening dress alteration', ru: 'подгонка вечернего платья', de: 'Abendkleid ändern' },
     intro: {
-      tr: 'Abiye, gece kıyafeti ve özel gün kıyafetlerinde daraltma, genişletme, boy kısaltma, askı, fermuar ayarı yaparız; ölçü kıyafet üzerinizdeyken alınır, gerekirse prova yapılır. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
-      en: 'For evening dresses, formal wear and special-occasion outfits we take in, let out, shorten, adjust straps and zippers; we measure while you wear the garment and do a fitting when needed. Normal jobs are ready the next day, urgent ones in 1–2 hours.',
-      ru: 'Вечерние платья, нарядная одежда и наряды для особых случаев: ушиваем, расширяем, укорачиваем, подгоняем бретели и молнии; мерки снимаем, пока вещь на вас, при необходимости делаем примерку. Обычные работы готовы на следующий день, срочные — за 1–2 часа.',
-      de: 'Bei Abendkleidern, Festmode und Kleidung für besondere Anlässe machen wir enger oder weiter, kürzen, passen Träger und Reißverschluss an; wir messen am getragenen Kleidungsstück und machen bei Bedarf eine Anprobe. Normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+      tr: 'Abiye, gece kıyafeti ve özel gün kıyafetlerinde daraltma, genişletme, boy kısaltma, askı, fermuar ayarı yaparız; ölçü kıyafet üzerinizdeyken alınır, gerekirse prova yapılır. Normal işte aynı gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'For evening dresses, formal wear and special-occasion outfits we take in, let out, shorten, adjust straps and zippers; we measure while you wear the garment and do a fitting when needed. Normal jobs are ready the same day, urgent ones in 1–2 hours.',
+      ru: 'Вечерние платья, нарядная одежда и наряды для особых случаев: ушиваем, расширяем, укорачиваем, подгоняем бретели и молнии; мерки снимаем, пока вещь на вас, при необходимости делаем примерку. Обычные работы готовы в тот же день, срочные — за 1–2 часа.',
+      de: 'Bei Abendkleidern, Festmode und Kleidung für besondere Anlässe machen wir enger oder weiter, kürzen, passen Träger und Reißverschluss an; wir messen am getragenen Kleidungsstück und machen bei Bedarf eine Anprobe. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
     extra: { href: '/antalya-gelinlik-tadilati', label: { tr: 'Gelinlik tadilatı sayfası', en: 'Wedding dress page (Turkish)', ru: 'Страница о свадебных платьях (тур.)', de: 'Brautkleid-Seite (türkisch)' } },
     vars: {
@@ -327,10 +327,10 @@ export const SERVICES: Service[] = [
     name: { tr: 'Pantolon Tadilatı', en: 'Trouser Alteration', ru: 'Подгонка брюк', de: 'Hosen ändern' },
     q: { tr: 'pantolon tadilatı', en: 'trouser alteration', ru: 'подгонка брюк', de: 'Hose ändern' },
     intro: {
-      tr: 'Kumaş pantolon, takım pantolonu ve kotta paça kısaltma, bel daraltma ve genişletme, dar kesim (daraltma), fermuar değişimi ve söküklerin tamiri yapılır. Pantolon ayakta, giyeceğiniz ayakkabıyla denenir; normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
-      en: 'For dress trousers, suit trousers and jeans: hemming, taking in or letting out the waist, slimming the legs, zipper replacement and mending seams. Trousers are tried on standing, with the shoes you will wear; normal jobs are ready the next day, urgent ones in 1–2 hours.',
-      ru: 'Классические, костюмные брюки и джинсы: подшив, ушивание и расширение в поясе, сужение штанин, замена молнии и ремонт швов. Брюки примеряют стоя, в обуви, с которой вы их будете носить; обычные работы готовы на следующий день, срочные — за 1–2 часа.',
-      de: 'Stoffhosen, Anzughosen und Jeans: Kürzen, Bund enger oder weiter machen, Beine schmaler machen, Reißverschluss wechseln und Nähte reparieren. Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden; normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+      tr: 'Kumaş pantolon, takım pantolonu ve kotta paça kısaltma, bel daraltma ve genişletme, dar kesim (daraltma), fermuar değişimi ve söküklerin tamiri yapılır. Pantolon ayakta, giyeceğiniz ayakkabıyla denenir; normal işte aynı gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'For dress trousers, suit trousers and jeans: hemming, taking in or letting out the waist, slimming the legs, zipper replacement and mending seams. Trousers are tried on standing, with the shoes you will wear; normal jobs are ready the same day, urgent ones in 1–2 hours.',
+      ru: 'Классические, костюмные брюки и джинсы: подшив, ушивание и расширение в поясе, сужение штанин, замена молнии и ремонт швов. Брюки примеряют стоя, в обуви, с которой вы их будете носить; обычные работы готовы в тот же день, срочные — за 1–2 часа.',
+      de: 'Stoffhosen, Anzughosen und Jeans: Kürzen, Bund enger oder weiter machen, Beine schmaler machen, Reißverschluss wechseln und Nähte reparieren. Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden; normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
     extra: { href: '/konyaalti-paca-kisaltma', label: { tr: 'Paça kısaltma sayfası', en: 'Hemming page (Turkish)', ru: 'Страница о подшиве брюк (тур.)', de: 'Seite zum Kürzen (türkisch)' } },
     vars: {
@@ -348,10 +348,10 @@ export const SERVICES: Service[] = [
     name: { tr: 'Kol Boyu Kısaltma', en: 'Sleeve Shortening', ru: 'Укорочение рукавов', de: 'Ärmel kürzen' },
     q: { tr: 'kol boyu kısaltma', en: 'sleeve shortening', ru: 'укорочение рукавов', de: 'Ärmel kürzen' },
     intro: {
-      tr: 'Ceket, mont, palto, gömlek, kazak ve elbisede kol boyu kısaltma yapılır. Kol boyu, giysi üzerinizdeyken ve kolunuz doğal duruşundayken işaretlenir. Kol boyu kısaltma ücreti kıyafete göre belirlenir. Normal işte ertesi gün, acil işte 1–2 saatte teslim edilir.',
-      en: 'Sleeves are shortened on jackets, coats, shirts, sweaters and dresses. The length is marked while you wear the garment with your arm in a natural position. Normal jobs are ready the next day, urgent ones in 1–2 hours.',
-      ru: 'Рукава укорачиваем у пиджаков, курток, пальто, рубашек, свитеров и платьев. Длину отмечают, пока вещь на вас и рука в естественном положении. Обычные работы готовы на следующий день, срочные — за 1–2 часа.',
-      de: 'Ärmel werden bei Sakkos, Jacken, Mänteln, Hemden, Pullovern und Kleidern gekürzt. Die Länge wird am getragenen Kleidungsstück bei natürlicher Armhaltung markiert. Normale Arbeiten sind am nächsten Tag fertig, eilige in 1–2 Stunden.',
+      tr: 'Ceket, mont, palto, gömlek, kazak ve elbisede kol boyu kısaltma yapılır. Kol boyu, giysi üzerinizdeyken ve kolunuz doğal duruşundayken işaretlenir. Kol boyu kısaltma ücreti kıyafete göre belirlenir. Normal işte aynı gün, acil işte 1–2 saatte teslim edilir.',
+      en: 'Sleeves are shortened on jackets, coats, shirts, sweaters and dresses. The length is marked while you wear the garment with your arm in a natural position. Normal jobs are ready the same day, urgent ones in 1–2 hours.',
+      ru: 'Рукава укорачиваем у пиджаков, курток, пальто, рубашек, свитеров и платьев. Длину отмечают, пока вещь на вас и рука в естественном положении. Обычные работы готовы в тот же день, срочные — за 1–2 часа.',
+      de: 'Ärmel werden bei Sakkos, Jacken, Mänteln, Hemden, Pullovern und Kleidern gekürzt. Die Länge wird am getragenen Kleidungsstück bei natürlicher Armhaltung markiert. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden.',
     },
     extra: { href: '/antalya-terzi', label: { tr: 'Antalya terzi sayfası', en: 'Antalya tailor page (Turkish)', ru: 'Страница портного в Анталье (тур.)', de: 'Schneider-Seite Antalya (türkisch)' } },
     vars: {

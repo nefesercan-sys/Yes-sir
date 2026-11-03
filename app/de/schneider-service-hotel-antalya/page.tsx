@@ -78,7 +78,7 @@ const jsonLd = {
         { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
           acceptedAnswer:{'@type':'Answer',text:`Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am nächsten Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
+          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
         { '@type':'Question', name:'Sprechen Sie Deutsch?',
           acceptedAnswer:{'@type':'Answer',text:`Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`} },
       ],

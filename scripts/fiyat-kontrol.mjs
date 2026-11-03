@@ -4,7 +4,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const TRY_OK = new Set([200, 300, 800, 1000, 20000, 20]); // 20 = yalnız kur notu (₺20 = €1) için
+const TRY_OK = new Set([200, 300, 400, 800, 1000, 20000, 20]); // 20 = yalnız kur notu (₺20 = €1) için
 const EUR_OK = new Set([10, 15, 20, 30, 40, 50, 1000, 1]);
 const SKIP = /(^|\/)(node_modules|\.next|\.git|bal|ilan|api)(\/|$)|bal-icerik|fiyat-kontrol/;
 const EXT = /\.(ts|tsx|txt|md)$/;

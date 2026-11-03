@@ -83,11 +83,11 @@ export const FREE_SERVICE_SLUGS = [
 export const isFreeService = (_slug: string): boolean => true;
 
 // ── Teslim süreleri (TEK KAYNAK, 10 dil) ───────────────────────────────────────────
-// ACİL tamir/tadilat: 1–2 saat · NORMAL tamir/tadilat: ertesi gün teslim · ÖZEL DİKİM: modele ve adede göre (gün yazılmaz).
+// ACİL tamir/tadilat: 1–2 saat · NORMAL tamir/tadilat: aynı gün teslim · ÖZEL DİKİM: modele ve adede göre (gün yazılmaz).
 export type DLang = 'tr' | 'en' | 'ru' | 'de' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export interface DurationCopy {
   urgent: string;      // "Acil tamir ve tadilat: 1–2 saat"
-  normal: string;      // "Normal tamir ve tadilat: ertesi gün teslim"
+  normal: string;      // "Normal tamir ve tadilat: aynı gün teslim"
   custom: string;      // "Özel dikim: süre modele ve adede göre"
   urgentShort: string; // başlık/rozet için kısa
   normalShort: string;
@@ -97,64 +97,64 @@ export interface DurationCopy {
 }
 export const DURATION: Record<DLang, DurationCopy> = {
   tr: {
-    urgent: 'Acil tamir ve tadilat 1–2 saatte hazır', normal: 'Normal tamir ve tadilat ertesi gün teslim', custom: 'Özel dikimde süre modele ve adede göre belirlenir',
-    urgentShort: 'Acilse 1–2 Saat', normalShort: 'Ertesi Gün Teslim', customShort: 'Süre Modele Göre',
-    repairLine: 'Ertesi gün teslim; acil işler 1–2 saatte hazır',
-    all: 'Normal tamir ve tadilat ertesi gün teslim edilir, acil işler 1–2 saatte hazırlanır; özel dikimde süre modele ve adede göre belirlenir.',
+    urgent: 'Acil tamir ve tadilat 1–2 saatte hazır', normal: 'Normal tamir ve tadilat aynı gün teslim', custom: 'Özel dikimde süre modele ve adede göre belirlenir',
+    urgentShort: 'Acilse 1–2 Saat', normalShort: 'Aynı Gün Teslim', customShort: 'Süre Modele Göre',
+    repairLine: 'Aynı gün teslim; acil işler 1–2 saatte hazır',
+    all: 'Normal tamir ve tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır; özel dikimde süre modele ve adede göre belirlenir.',
   },
   en: {
-    urgent: 'Urgent repairs and alterations ready in 1–2 hours', normal: 'Regular repairs and alterations ready the next day', custom: 'Custom tailoring: timing depends on the design and quantity',
-    urgentShort: '1–2 Hours if Urgent', normalShort: 'Next-Day', customShort: 'Timing by Design',
-    repairLine: 'Ready the next day; urgent jobs in 1–2 hours',
-    all: 'Regular repairs and alterations are ready the next day and urgent jobs in 1–2 hours; for custom tailoring the timing depends on the design and quantity.',
+    urgent: 'Urgent repairs and alterations ready in 1–2 hours', normal: 'Regular repairs and alterations ready the same day', custom: 'Custom tailoring: timing depends on the design and quantity',
+    urgentShort: '1–2 Hours if Urgent', normalShort: 'Same-Day', customShort: 'Timing by Design',
+    repairLine: 'Ready the same day; urgent jobs in 1–2 hours',
+    all: 'Regular repairs and alterations are ready the same day and urgent jobs in 1–2 hours; for custom tailoring the timing depends on the design and quantity.',
   },
   ru: {
-    urgent: 'Срочный ремонт и подгонка — за 1–2 часа', normal: 'Обычный ремонт и подгонка — готово на следующий день', custom: 'Индивидуальный пошив: срок зависит от модели и количества',
-    urgentShort: 'Срочно — 1–2 часа', normalShort: 'На следующий день', customShort: 'Срок по модели',
-    repairLine: 'Готово на следующий день; срочно — за 1–2 часа',
-    all: 'Обычный ремонт и подгонка готовы на следующий день, срочные работы — за 1–2 часа; срок индивидуального пошива зависит от модели и количества.',
+    urgent: 'Срочный ремонт и подгонка — за 1–2 часа', normal: 'Обычный ремонт и подгонка — готово в тот же день', custom: 'Индивидуальный пошив: срок зависит от модели и количества',
+    urgentShort: 'Срочно — 1–2 часа', normalShort: 'В тот же день', customShort: 'Срок по модели',
+    repairLine: 'Готово в тот же день; срочно — за 1–2 часа',
+    all: 'Обычный ремонт и подгонка готовы в тот же день, срочные работы — за 1–2 часа; срок индивидуального пошива зависит от модели и количества.',
   },
   de: {
-    urgent: 'Dringende Reparaturen und Änderungen in 1–2 Stunden fertig', normal: 'Normale Reparaturen und Änderungen am nächsten Tag fertig', custom: 'Maßanfertigung: Dauer je nach Modell und Stückzahl',
-    urgentShort: 'Eilig in 1–2 Std.', normalShort: 'Am nächsten Tag', customShort: 'Dauer je nach Modell',
-    repairLine: 'Am nächsten Tag fertig; dringend in 1–2 Stunden',
-    all: 'Normale Reparaturen und Änderungen sind am nächsten Tag fertig, dringende Aufträge in 1–2 Stunden; bei Maßanfertigung richtet sich die Dauer nach Modell und Stückzahl.',
+    urgent: 'Dringende Reparaturen und Änderungen in 1–2 Stunden fertig', normal: 'Normale Reparaturen und Änderungen am selben Tag fertig', custom: 'Maßanfertigung: Dauer je nach Modell und Stückzahl',
+    urgentShort: 'Eilig in 1–2 Std.', normalShort: 'Am selben Tag', customShort: 'Dauer je nach Modell',
+    repairLine: 'Am selben Tag fertig; dringend in 1–2 Stunden',
+    all: 'Normale Reparaturen und Änderungen sind am selben Tag fertig, dringende Aufträge in 1–2 Stunden; bei Maßanfertigung richtet sich die Dauer nach Modell und Stückzahl.',
   },
   es: {
-    urgent: 'Arreglos urgentes listos en 1–2 horas', normal: 'Arreglos normales listos al día siguiente', custom: 'Confección a medida: el plazo depende del modelo y la cantidad',
+    urgent: 'Arreglos urgentes listos en 1–2 horas', normal: 'Arreglos normales listos el mismo día', custom: 'Confección a medida: el plazo depende del modelo y la cantidad',
     urgentShort: 'Urgente: 1–2 horas', normalShort: 'Al día siguiente', customShort: 'Plazo según modelo',
-    repairLine: 'Listo al día siguiente; urgencias en 1–2 horas',
-    all: 'Los arreglos normales están listos al día siguiente y los urgentes en 1–2 horas; en la confección a medida el plazo depende del modelo y la cantidad.',
+    repairLine: 'Listo el mismo día; urgencias en 1–2 horas',
+    all: 'Los arreglos normales están listos el mismo día y los urgentes en 1–2 horas; en la confección a medida el plazo depende del modelo y la cantidad.',
   },
   fr: {
-    urgent: 'Retouches urgentes prêtes en 1 à 2 heures', normal: 'Retouches normales prêtes le lendemain', custom: 'Sur mesure : délai selon le modèle et la quantité',
+    urgent: 'Retouches urgentes prêtes en 1 à 2 heures', normal: 'Retouches normales prêtes le jour même', custom: 'Sur mesure : délai selon le modèle et la quantité',
     urgentShort: 'Urgent : 1 à 2 h', normalShort: 'Le lendemain', customShort: 'Délai selon modèle',
-    repairLine: 'Prêt le lendemain ; urgences en 1 à 2 heures',
-    all: 'Les retouches normales sont prêtes le lendemain et les urgences en 1 à 2 heures ; pour le sur-mesure, le délai dépend du modèle et de la quantité.',
+    repairLine: 'Prêt le jour même ; urgences en 1 à 2 heures',
+    all: 'Les retouches normales sont prêtes le jour même et les urgences en 1 à 2 heures ; pour le sur-mesure, le délai dépend du modèle et de la quantité.',
   },
   pl: {
-    urgent: 'Pilne naprawy i przeróbki gotowe w 1–2 godziny', normal: 'Zwykłe naprawy i przeróbki gotowe następnego dnia', custom: 'Szycie na miarę: termin zależy od modelu i liczby sztuk',
+    urgent: 'Pilne naprawy i przeróbki gotowe w 1–2 godziny', normal: 'Zwykłe naprawy i przeróbki gotowe tego samego dnia', custom: 'Szycie na miarę: termin zależy od modelu i liczby sztuk',
     urgentShort: 'Pilne: 1–2 godziny', normalShort: 'Następnego dnia', customShort: 'Termin wg modelu',
-    repairLine: 'Gotowe następnego dnia; pilne w 1–2 godziny',
-    all: 'Zwykłe naprawy i przeróbki są gotowe następnego dnia, pilne w 1–2 godziny; przy szyciu na miarę termin zależy od modelu i liczby sztuk.',
+    repairLine: 'Gotowe tego samego dnia; pilne w 1–2 godziny',
+    all: 'Zwykłe naprawy i przeróbki są gotowe tego samego dnia, pilne w 1–2 godziny; przy szyciu na miarę termin zależy od modelu i liczby sztuk.',
   },
   uk: {
-    urgent: 'Термінові ремонт і підгонка — за 1–2 години', normal: 'Звичайні ремонт і підгонка — готово наступного дня', custom: 'Індивідуальне пошиття: термін залежить від моделі та кількості',
+    urgent: 'Термінові ремонт і підгонка — за 1–2 години', normal: 'Звичайні ремонт і підгонка — готово того ж дня', custom: 'Індивідуальне пошиття: термін залежить від моделі та кількості',
     urgentShort: 'Терміново — 1–2 год', normalShort: 'Наступного дня', customShort: 'Термін за моделлю',
-    repairLine: 'Готово наступного дня; терміново — за 1–2 години',
-    all: 'Звичайні ремонт і підгонка готові наступного дня, термінові роботи — за 1–2 години; термін індивідуального пошиття залежить від моделі та кількості.',
+    repairLine: 'Готово того ж дня; терміново — за 1–2 години',
+    all: 'Звичайні ремонт і підгонка готові того ж дня, термінові роботи — за 1–2 години; термін індивідуального пошиття залежить від моделі та кількості.',
   },
   nl: {
-    urgent: 'Spoedreparaties en -vermaak klaar in 1–2 uur', normal: 'Gewone reparaties en vermaak de volgende dag klaar', custom: 'Maatwerk: doorlooptijd hangt af van model en aantal',
+    urgent: 'Spoedreparaties en -vermaak klaar in 1–2 uur', normal: 'Gewone reparaties en vermaak dezelfde dag klaar', custom: 'Maatwerk: doorlooptijd hangt af van model en aantal',
     urgentShort: 'Spoed: 1–2 uur', normalShort: 'Volgende dag', customShort: 'Tijd per model',
     repairLine: 'De volgende dag klaar; spoed in 1–2 uur',
-    all: 'Gewone reparaties en vermaak zijn de volgende dag klaar, spoedklussen in 1–2 uur; bij maatwerk hangt de doorlooptijd af van model en aantal.',
+    all: 'Gewone reparaties en vermaak zijn dezelfde dag klaar, spoedklussen in 1–2 uur; bij maatwerk hangt de doorlooptijd af van model en aantal.',
   },
   ar: {
-    urgent: 'الإصلاح والتعديل العاجل جاهز خلال ساعة إلى ساعتين', normal: 'الإصلاح والتعديل العادي جاهز في اليوم التالي', custom: 'التفصيل حسب الطلب: المدة حسب الموديل والكمية',
-    urgentShort: 'العاجل: 1–2 ساعة', normalShort: 'في اليوم التالي', customShort: 'المدة حسب الموديل',
-    repairLine: 'جاهز في اليوم التالي؛ العاجل خلال ساعة إلى ساعتين',
-    all: 'الإصلاحات والتعديلات العادية جاهزة في اليوم التالي، والعاجلة خلال ساعة إلى ساعتين؛ أما التفصيل حسب الطلب فمدته حسب الموديل والكمية.',
+    urgent: 'الإصلاح والتعديل العاجل جاهز خلال ساعة إلى ساعتين', normal: 'الإصلاح والتعديل العادي جاهز في اليوم نفسه', custom: 'التفصيل حسب الطلب: المدة حسب الموديل والكمية',
+    urgentShort: 'العاجل: 1–2 ساعة', normalShort: 'في اليوم نفسه', customShort: 'المدة حسب الموديل',
+    repairLine: 'جاهز في اليوم نفسه؛ العاجل خلال ساعة إلى ساعتين',
+    all: 'الإصلاحات والتعديلات العادية جاهزة في اليوم نفسه، والعاجلة خلال ساعة إلى ساعتين؛ أما التفصيل حسب الطلب فمدته حسب الموديل والكمية.',
   },
 };
 export const durationOf = (lang: DLang): DurationCopy => DURATION[lang] ?? DURATION.en;

@@ -37,7 +37,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#webpage`,
       url: PAGE_URL,
       name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı Hizmetleri',
-      description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere ücretsiz servis; normal tadilat ertesi gün, acil 1–2 saat.",
+      description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere ücretsiz servis; normal tadilat aynı gün, acil 1–2 saat.",
       inLanguage: 'tr',
       dateModified: '2026-07-03',
       isPartOf: { '@id': `${BASE_URL}#website` },
@@ -184,7 +184,7 @@ const jsonLd = {
         {
           '@type': 'HowToStep',
           name: 'Adrese teslimat',
-          text: 'İşlem tamamlanan kıyafet askılı olarak adresinize veya otelinize teslim edilir: normal işler ertesi gün, acil işler 1–2 saatte.',
+          text: 'İşlem tamamlanan kıyafet askılı olarak adresinize veya otelinize teslim edilir: normal işler aynı gün, acil işler 1–2 saatte.',
         },
       ],
     },
@@ -197,7 +197,7 @@ const jsonLd = {
           name: "Antalya'da otellere acil terzi hizmeti veren yer neresi?",
           acceptedAnswer: {
             '@type': 'Answer',
-            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; otellere servis ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler ertesi gün, acil işler 1–2 saatte askılı olarak teslim edilir."
+            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; otellere servis ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler aynı gün, acil işler 1–2 saatte askılı olarak teslim edilir."
           }
         },
         {
@@ -245,7 +245,7 @@ const jsonLd = {
           name: 'Takım elbise paçasını ne kadar sürede kısaltıyorsunuz?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Normal paça kısaltma ertesi gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım ücretsizdir.'
+            text: 'Normal paça kısaltma aynı gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım ücretsizdir.'
           }
         },
         {
@@ -290,7 +290,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Antalya Terzi | Adrese Teslim Dikim ve Tamirat | Terzi Can',
-    description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı hizmetleri. Ertesi gün askıda teslimat, acil işler 1–2 saatte!`,
+    description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı hizmetleri. Aynı gün askıda teslimat, acil işler 1–2 saatte!`,
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -348,7 +348,7 @@ const serviceRows = [
     title: 'Kıyafet Tamiri & Tadilat',
     detail: 'Orijinal paça, bel daraltma, fermuar yenileme, deri mont onarımı',
     area: 'Konyaaltı (Hurma, Liman, Uncalı), Muratpaşa, Lara, Kepez',
-    time: 'Ertesi gün · acil 1–2 saat',
+    time: 'Aynı gün · acil 1–2 saat',
     price: '200 TL\'den',
   },
   {
@@ -362,7 +362,7 @@ const serviceRows = [
     title: 'Otel Servisi',
     detail: 'Kuryeli adresten alım, acil elbise onarımı ve tadilat',
     area: 'Lara, Kundu Otelleri, Belek, Kemer, Konyaaltı Sahil Şeridi',
-    time: 'Ertesi gün · acil 1–2 saat',
+    time: 'Aynı gün · acil 1–2 saat',
     price: 'Fotoğrafa göre',
   },
   {
@@ -413,7 +413,7 @@ const processSteps = [
   { n: '02', title: 'Adres Paylaşın', text: 'Konyaaltı, Lara, Muratpaşa veya Kepez\'de adresinizi belirtin.' },
   { n: '03', title: 'Kuryeli Alım', text: 'Kıyafetiniz evinizden veya otelinizden güvenle alınır.' },
   { n: '04', title: 'Atölyede İşlem', text: 'Tamirat veya dikim işlemi kalite kontrolüyle tamamlanır.' },
-  { n: '05', title: 'Ertesi Gün Teslimat', text: 'İşlem biten kıyafet askılı olarak kapınıza teslim edilir; acil işler 1–2 saatte.' },
+  { n: '05', title: 'Aynı Gün Teslimat', text: 'İşlem biten kıyafet askılı olarak kapınıza teslim edilir; acil işler 1–2 saatte.' },
 ];
 
 // DÜZELTME: Önceki sürümdeki dosya adları (atolye-terzi-can-tabela.jpg vb.)
@@ -481,7 +481,7 @@ export default function GeminiOptimizedTailorPage() {
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
             <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı'nda (Sarısu, Hurma,
             Liman) hizmet veren, adresten alım ile kıyafet tamiri ve özel dikim yapan, otellere ücretsiz
-            servis veren yerel bir terzi atölyesidir; normal tadilat ertesi gün, acil işler 1–2 saatte hazır; her gün 08:00–23:00 açıktır.
+            servis veren yerel bir terzi atölyesidir; normal tadilat aynı gün, acil işler 1–2 saatte hazır; her gün 08:00–23:00 açıktır.
           </p>
 
           <p style={{ fontSize: 16.5, lineHeight: 1.65, color: SUB, margin: 0, maxWidth: 660 }}>

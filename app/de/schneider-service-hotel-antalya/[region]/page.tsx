@@ -96,7 +96,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
           {
             '@type': 'Question',
             name: `Wie schnell ist die Bearbeitung?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Unsere erfahrenen Schneider erledigen die Arbeit und liefern es an Ihr Hotel in ${r.name} zurück. Normale Änderungen sind am nächsten Tag fertig, dringende in 1–2 Stunden; die Übergabezeit klären wir per WhatsApp.` },
+            acceptedAnswer: { '@type': 'Answer', text: `Unsere erfahrenen Schneider erledigen die Arbeit und liefern es an Ihr Hotel in ${r.name} zurück. Normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden; die Übergabezeit klären wir per WhatsApp.` },
           },
         ],
       },

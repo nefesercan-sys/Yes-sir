@@ -136,16 +136,16 @@ export default function TerziCagirPage() {
   const waUrl = `https://wa.me/${PHONE_E164.replace('+','')}?text=${encodeURIComponent(WA_MSG)}`;
 
   const FIYATLAR = [
-    ['Paça Kısaltma', '₺200', 'Ertesi gün'],
-    ['Bel Daraltma', '₺200', 'Ertesi gün'],
-    ['Etek Kısaltma', '₺200', 'Ertesi gün'],
-    ['Pantolon Paçası', '₺200', 'Ertesi gün'],
-    ['Fermuar Değişimi', '₺300', 'Ertesi gün'],
-    ['Fermuar Tamiri', '₺300', 'Ertesi gün'],
-    ['Ceket Tamiri', '₺200', 'Ertesi gün'],
-    ['Mont Tamiri', '₺200', 'Ertesi gün'],
-    ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Ertesi gün'],
-    ['Abiye Tamiri', '₺800', 'Ertesi gün'],
+    ['Paça Kısaltma', '₺200', 'Aynı gün'],
+    ['Bel Daraltma', '₺200', 'Aynı gün'],
+    ['Etek Kısaltma', '₺200', 'Aynı gün'],
+    ['Pantolon Paçası', '₺200', 'Aynı gün'],
+    ['Fermuar Değişimi', '₺300', 'Aynı gün'],
+    ['Fermuar Tamiri', '₺300', 'Aynı gün'],
+    ['Ceket Tamiri', '₺200', 'Aynı gün'],
+    ['Mont Tamiri', '₺200', 'Aynı gün'],
+    ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Aynı gün'],
+    ['Abiye Tamiri', '₺800', 'Aynı gün'],
     ['Elbise Dikimi', '₺800+', 'Modele göre'],
   ];
 
@@ -617,15 +617,15 @@ export default function TerziCagirPage() {
 
 // Fiyat listesi sabit veri
 const FIYATLAR = [
-  ['Paça Kısaltma','₺200','Ertesi gün'],
-  ['Bel Daraltma','₺200','Ertesi gün'],
-  ['Etek Kısaltma','₺200','Ertesi gün'],
-  ['Pantolon Paçası','₺200','Ertesi gün'],
-  ['Fermuar Değişimi','₺300','Ertesi gün'],
-  ['Fermuar Tamiri','₺300','Ertesi gün'],
-  ['Ceket Tamiri','₺200','Ertesi gün'],
-  ['Mont Tamiri','₺200','Ertesi gün'],
-  ['T-Shirt Tamiri','Fotoğrafa göre','Ertesi gün'],
-  ['Abiye Tamiri','₺800','Ertesi gün'],
+  ['Paça Kısaltma','₺200','Aynı gün'],
+  ['Bel Daraltma','₺200','Aynı gün'],
+  ['Etek Kısaltma','₺200','Aynı gün'],
+  ['Pantolon Paçası','₺200','Aynı gün'],
+  ['Fermuar Değişimi','₺300','Aynı gün'],
+  ['Fermuar Tamiri','₺300','Aynı gün'],
+  ['Ceket Tamiri','₺200','Aynı gün'],
+  ['Mont Tamiri','₺200','Aynı gün'],
+  ['T-Shirt Tamiri','Fotoğrafa göre','Aynı gün'],
+  ['Abiye Tamiri','₺800','Aynı gün'],
   ['Elbise Dikimi','₺800+','Modele göre'],
 ];
