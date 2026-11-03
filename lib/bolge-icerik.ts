@@ -9,6 +9,7 @@
 import { hashStr } from '@/lib/seo-angles';
 import { DURATION, SERVICE_RULE, PRICE_FROM, PRICE_BY_MODEL, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
+import { bolgeEkSss } from '@/lib/bolge-hizmet-matrisi';
 
 export type BLang = 'tr' | 'en' | 'ru' | 'de';
 
@@ -274,6 +275,12 @@ export function districtFaqItems(c: FaqCtx): QA[] {
 
 /** Türkçe mahalle sayfaları için SSS (FaqBlock biçiminde). */
 export function mahalleFaq(slug: string, ad: string, _ilce: string): { q: string; a: string }[] {
-  return districtFaqItems({ lang: 'tr', slug, n: ad, loc: trLoc(ad), resort: slug === 'guzeloba' || slug === 'sirinyali', focus: [] })
-    .map(([q, a]) => ({ q, a }));
+  return withEkSss(districtFaqItems({ lang: 'tr', slug, n: ad, loc: trLoc(ad), resort: slug === 'guzeloba' || slug === 'sirinyali', focus: [] }), slug, ad, trLoc(ad));
+}
+
+/** Bölge SSS listesine 3 ek (sorgu kalıplı) soru ekler; aynı soru tekrar etmez. FaqBlock biçiminde döner. */
+export function withEkSss(base: QA[], slug: string, ad: string, loc: string): { q: string; a: string }[] {
+  const seen = new Set(base.map(([q]) => q));
+  const ek = bolgeEkSss(slug, ad, loc).filter(([q]) => !seen.has(q));
+  return [...base, ...ek].map(([q, a]) => ({ q, a }));
 }

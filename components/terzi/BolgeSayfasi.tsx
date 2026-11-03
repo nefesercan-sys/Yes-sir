@@ -10,6 +10,7 @@ import { PHONE_DISPLAY, waUrl, DURATION } from '@/lib/business';
 import { directAnswer, processesFor, PROCESS, trLoc, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { findDistrict } from '@/lib/seo-data';
+import { bolgeMatrisi } from '@/lib/bolge-hizmet-matrisi';
 
 const YESIL = '#2d8c6e';
 const PHONE = PHONE_DISPLAY;
@@ -41,6 +42,7 @@ export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokas
   const resort = d?.kind === 'resort';
   const fact = DISTRICT_FACTS[slug];
   const cevap = directAnswer('tr', slug, lokasyonAdi, loc, resort);
+  const matris = bolgeMatrisi(slug, lokasyonAdi, loc);
   const surecler = processesFor(slug, ONCELIK[slug] ?? []);
   const ilceAdi = tip === 'konyaalti-mahalle' ? 'Konyaaltı' : tip === 'muratpasa-mahalle' ? 'Muratpaşa' : null;
   const altBaslik = pick(`h1:${slug}`, [
@@ -101,6 +103,19 @@ export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokas
           ))}
           <p style={{ fontSize: '.85rem', color: '#64748b', marginTop: '1rem' }}>{DURATION.tr.all}</p>
         </div>
+      </section>
+
+      {/* HİZMET MATRİSİ — bölgeye göre karıştırılan başlık, giriş ve iş grupları */}
+      <section style={{ padding: '3rem 1.5rem', maxWidth: 820, margin: '0 auto' }} aria-labelledby="mtx-h">
+        <h2 id="mtx-h" style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '.8rem' }}>{matris.title}</h2>
+        <p style={{ fontSize: '.92rem', lineHeight: 1.75, color: '#334155', margin: '0 0 1rem' }}>{matris.lead}</p>
+        {matris.groups.map((g) => (
+          <div key={g.id} style={{ marginBottom: '1.1rem' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 .3rem' }}>{g.heading}</h3>
+            <p style={{ fontSize: '.9rem', color: '#475569', lineHeight: 1.75, margin: 0 }}>{g.text}</p>
+          </div>
+        ))}
+        <p style={{ fontSize: '.85rem', color: '#64748b', marginTop: '.8rem' }}>{matris.price}</p>
       </section>
 
       {/* HİZMETLER LİSTESİ */}
