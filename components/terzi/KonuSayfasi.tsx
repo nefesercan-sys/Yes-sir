@@ -27,7 +27,7 @@ export interface KonuData {
   fiyatBaslik: string;
   fiyatlar: [string, string][];
   fiyatNot: string;
-  lowPrice: string;             // schema başlangıç fiyatı
+  lowPrice?: string;            // schema başlangıç fiyatı (yoksa Offer yazılmaz)
   adimlar: { baslik: string; aciklama: string }[];
   faq: { q: string; a: string }[];
   diger: { href: string; ad: string }[];
@@ -50,7 +50,7 @@ export default function KonuSayfasi({ d }: { d: KonuData }) {
           openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
           sameAs: [GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
         },
-        offers: { '@type': 'Offer', name: `${d.name} (başlangıç fiyatı)`, price: d.lowPrice, priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url },
+        ...(d.lowPrice ? { offers: { '@type': 'Offer', name: `${d.name} (başlangıç fiyatı)`, price: d.lowPrice, priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url } } : {}),
       },
       {
         '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,

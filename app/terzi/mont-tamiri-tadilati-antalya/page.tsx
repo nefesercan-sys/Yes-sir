@@ -47,6 +47,8 @@ const DATA: KonuData = {
     { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim tüm hizmet bölgelerimizde ücretsizdir; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
+    { href: '/terzi/kaban-palto-tadilati-antalya', ad: 'Kaban ve palto tadilatı' },
+    { href: '/terzi/yelek-tamiri-tadilati-antalya', ad: 'Yelek tamiri ve tadilatı' },
     { href: '/terzi/fermuar-degisimi', ad: 'Fermuar değişimi' },
     { href: '/terzi/deri-ceket-tadilati-antalya', ad: 'Deri ceket tadilatı' },
     { href: '/terzi/kot-ceket-mont-tadilati-antalya', ad: 'Kot ceket ve mont' },
