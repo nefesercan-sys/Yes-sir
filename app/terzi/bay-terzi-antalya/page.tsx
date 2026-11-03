@@ -23,7 +23,6 @@ const jsonLd = {
       offers: {
         '@type': 'AggregateOffer',
         lowPrice: '200',
-        highPrice: '5000',
         priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
       },
