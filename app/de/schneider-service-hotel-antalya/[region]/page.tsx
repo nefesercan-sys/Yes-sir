@@ -84,22 +84,6 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         description: seoContent.body2,
         url,
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: `Bieten Sie eine Abholung im Hotel in ${r.name} an?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Ja! Senden Sie uns ein Foto per WhatsApp. Wir holen das Kleidungsstück direkt an der Rezeption Ihres Hotels in ${r.name} ab und bringen es fertig zurück.` },
-          },
-          {
-            '@type': 'Question',
-            name: `Wie schnell ist die Bearbeitung?`,
-            acceptedAnswer: { '@type': 'Answer', text: `Unsere erfahrenen Schneider erledigen die Arbeit und liefern es an Ihr Hotel in ${r.name} zurück. Normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden; die Übergabezeit klären wir per WhatsApp.` },
-          },
-        ],
-      },
     ],
   };
 

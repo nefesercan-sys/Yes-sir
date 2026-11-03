@@ -4,7 +4,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
 const PARENT_URL = 'https://swaphubs.com/terzi';
@@ -25,6 +25,16 @@ const OTELLER = [
   'Fame Residence Lara','Akra Hotel','Hillside Su Hotel','Lara Barut Collection',
   'Concorde De Luxe Resort','Papillon Ayscha Resort','Limak Atlantis',
 ];
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+              ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
+              ['Araçlı terzi servisi ücretli mi?', 'Eve ve otele servis ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
+              ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
+              ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
+              ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
+              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
+            ];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -75,41 +85,7 @@ const jsonLd = {
         {position:3, name:'Eve Gelen Terzi Antalya', item:SITE_URL},
       ].map(i=>({...i,'@type':'ListItem'})),
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type':'Question',
-          name:'Eve gelen terzi Antalya var mı?',
-          acceptedAnswer:{'@type':'Answer',text:`Evet! Terzi Can'ın araçlı terzi servisi ile Antalya'nın yakın ilçelerine geliyoruz. WhatsApp'tan konum paylaşın, terzi adresinize gelsin, ölçü alsın, diksin ve teslim etsin. WhatsApp: ${PHONE}`},
-        },
-        {
-          '@type':'Question',
-          name:'Otele gelen terzi Antalya — hangi otellere hizmet veriyorsunuz?',
-          acceptedAnswer:{'@type':'Answer',text:`Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic dahil Konyaaltı, Lara, Belek, Kemer ve Side otellerine terzi servisi veriyoruz. WhatsApp: ${PHONE}`},
-        },
-        {
-          '@type':'Question',
-          name:'Araçlı terzi servisi kaç lira?',
-          acceptedAnswer:{'@type':'Answer',text:`Araçlı terzi servisi otellere ücretsiz; eve de ücretsiz; ayrıca yapılan iş için ücret alınır. Paça kısaltma ₺200, elbise tadilatı ₺200'den başlar. WhatsApp: ${PHONE}`},
-        },
-        {
-          '@type':'Question',
-          name:'Mobile tailor Antalya — how fast is the service?',
-          acceptedAnswer:{'@type':'Answer',text:`Yes! Tailor Can offers a mobile tailor service in Konyaaltı and nearby districts, including Lara, Belek, Kemer and Side hotels. Timing depends on the job and workload and is confirmed on WhatsApp. WhatsApp: ${PHONE}`},
-        },
-        {
-          '@type':'Question',
-          name:'Belek otelinde terzi hizmeti var mı?',
-          acceptedAnswer:{'@type':'Answer',text:`Evet! Belek'teki tüm büyük otellere — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil — terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`},
-        },
-        {
-          '@type':'Question',
-          name:'Выездной портной Анталья — есть ли обслуживание в отеле?',
-          acceptedAnswer:{'@type':'Answer',text:`Да! Портной Кан обслуживает отели Белека, Лары, Кемера и Сиде — Белек, Лара, Кемер. Говорим по-русски. WhatsApp: ${PHONE}`},
-        },
-      ],
-    },
+    faqPageSchema(FAQ),
     {
       '@type': 'HowTo',
       name: 'Eve veya Otele Gelen Terzi Servisi Nasıl Çalışır?',
@@ -387,14 +363,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '2rem' }}>
               Eve / Otele Gelen Terzi — Sık Sorulan Sorular
             </h2>
-            {[
-              ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
-              ['Araçlı terzi servisi ücretli mi?', 'Eve ve otele servis ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
-              ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
-              ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
-              ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
-            ].map(([q, a], i) => (
+            {FAQ.map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>

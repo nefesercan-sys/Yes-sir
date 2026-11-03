@@ -5,6 +5,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import OnlineSchneiderClient from './OnlineSchneiderClient';
+import { FAQS } from './faq-data';
 
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/de/online-schneiderservice-antalya`;
@@ -60,22 +61,6 @@ export const metadata: Metadata = {
   },
 };
 
-const FAQ = [
-  { q: 'Was kostet ein Herrenanzug in Antalya?', a: `Der Preis hängt von Stoff und Modell ab. Senden Sie Ihre Maße per WhatsApp: ${PHONE}` },
-  { q: 'Wie funktioniert der Online-Schneiderservice?', a: `Senden Sie ein Referenzfoto und Maße per WhatsApp — wir nähen und versenden es. ${PHONE}` },
-  { q: 'Kommen Sie für Anproben und Änderungen zu meinem Hotel?', a: `Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen bedienten Hotelgebieten kostenlos. Die Zeit klären wir per WhatsApp. ${PHONE}` },
-  { q: 'Antworten Sie in meiner Sprache?', a: `Ja. Schreiben Sie uns auf WhatsApp in jeder Sprache, wir antworten in dieser Sprache: ${PHONE}` },
-  { q: 'Kann ich aus dem Ausland bestellen?', a: 'Ja. Wir nehmen Ihre Maße online auf, nähen das Kleidungsstück in Antalya und senden es in Ihr Land, meist innerhalb von 1–3 Wochen. Die Zahlung erfolgt per Überweisung. Passt es nicht, tauschen wir es um oder ändern es. Den Stoff können wir besorgen oder Sie stellen ihn selbst.' },
-  { q: 'Mein Kleid ist gerissen — geht die Reparatur dringend?', a: `Ja, dringende Reparaturen sind in 1–2 Stunden fertig, normale am selben Tag. Senden Sie ein Foto per WhatsApp für eine sofortige Einschätzung. ${PHONE}` },
-  { q: 'Haben Sie abends oder am Wochenende geöffnet?', a: `Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin. ${PHONE}` },
-  { q: 'Kann ich mir ein individuelles Kleid anfertigen lassen?', a: `Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid. Senden Sie ein Referenzfoto per WhatsApp. ${PHONE}` },
-  { q: 'Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?', a: `Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an. ${PHONE}` },
-  { q: "Wo kann ich in Antalya in meiner Nähe eine Hose kürzen lassen?", a: `Bei Terzi Can in Hurma, Konyaaltı, täglich von 08:00 bis 23:00 geöffnet. Hosen und Jeans kürzen, am selben Tag fertig oder eilig in 1–2 Stunden. WhatsApp: ${PHONE}` },
-  { q: "Was kostet Kürzen und Reißverschluss wechseln in Antalya?", a: `Der Preis hängt von Kleidungsstück und Arbeit ab: Kürzen, Taille enger machen, Reißverschluss wechseln, Abend- und Brautkleid ändern. Den genauen Preis nennen wir nach einem Foto per WhatsApp.` },
-  { q: "Ändern Sie auch Jacken, Mäntel, Hemden, Röcke und Shorts?", a: `Ja. Wir ändern und reparieren Jacken, Mäntel, Hemden, Röcke, Shorts, Kleider und Hosen für Damen und Herren. Senden Sie ein Foto per WhatsApp, wir nennen Preis und Dauer.` },
-  { q: "Ich bin nur wenige Tage im Hotel. Reicht die Zeit?", a: `Ja. Kürzen und Reparaturen sind am selben Tag fertig, eilige in 1–2 Stunden. Abholung im Hotel und Rücklieferung sind in allen bedienten Hotelgebieten kostenlos.` },
-];
-
 export default function OnlineSchneiderservicePage() {
   return (
     <>
@@ -87,7 +72,7 @@ export default function OnlineSchneiderservicePage() {
         lang={'de'}
         lastModified={TODAY}
         breadcrumbs={[{ name: 'Terzi Can', path: '/terzi' }, { name: 'Online Schneiderservice', path: SITE_URL.replace(BASE_URL, '') }]}
-        faq={FAQ}
+        faq={FAQS.map(([q, a]) => ({ q, a }))}
         areaServed={['Konyaaltı','Muratpaşa','Kepez','Lara','Belek','Kemer','Side','Antalya']}
       />
       <SpeakableSchema path="/de/online-schneiderservice-antalya" />
