@@ -8,6 +8,8 @@ import { ZCOPY, ZONE_SLUGS, ZONE_LEAD_ALT, zoneData, zoneUrl, type ZoneSlug } fr
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { pick, pickN } from '@/lib/bolge-icerik';
 import { jsonLdString } from '@/lib/json-ld';
+import { bolgeMatrisiTurist, bolgeEkSssTurist } from '@/lib/bolge-hizmet-matrisi-turist';
+import PhotoBand from '@/components/terzi/PhotoBand';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -32,7 +34,7 @@ export function zoneJsonLd(lang: ILang, zone: ZoneSlug) {
       },
       {
         '@type': 'FAQPage', '@id': `${url}#faq`,
-        mainEntity: zoneFaq(c.faq(z.name, z.home), `${lang}:${zone}`).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+        mainEntity: [...zoneFaq(c.faq(z.name, z.home), `${lang}:${zone}`), ...bolgeEkSssTurist(lang, zone, z.name)].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
       },
     ],
   };
@@ -45,6 +47,8 @@ export function zoneFaq(all: [string, string][], seed: string): [string, string]
 
 export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlug }) {
   const g = INTL[lang]; const c = ZCOPY[lang]; const z = zoneData(lang, zone);
+  const matris = bolgeMatrisiTurist(lang, zone, z.name);
+  const faqAll = [...zoneFaq(c.faq(z.name, z.home), `${lang}:${zone}`), ...bolgeEkSssTurist(lang, zone, z.name)];
   return (
     <main lang={lang} dir={g.dir} style={{ fontFamily: 'system-ui,sans-serif', background: C.cream, color: '#3A3028', minHeight: '100vh', lineHeight: 1.7 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(zoneJsonLd(lang, zone)) }} />
@@ -56,6 +60,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
           <p className="hero-desc" style={{ fontSize: '1.02rem', color: 'rgba(255,255,255,.92)', margin: 0 }}>{pick(`zlead:${lang}:${zone}`, [c.lead, ...ZONE_LEAD_ALT[lang]])(z.name)}</p>
         </div>
       </header>
+      <PhotoBand lang={lang} />
 
       <article style={{ maxWidth: 820, margin: '0 auto', padding: '2rem 1.25rem' }}>
         <section style={{ marginBottom: '1.8rem' }}>
@@ -73,8 +78,20 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
         </section>
 
         <section style={{ marginBottom: '1.8rem' }}>
+          <H2>{matris.title}</H2>
+          <p style={{ margin: '0 0 1rem' }}>{matris.lead}</p>
+          {matris.groups.map((g) => (
+            <div key={g.id} style={{ marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.02rem', color: C.ink, margin: '0 0 .25rem' }}>{g.heading}</h3>
+              <p style={{ margin: 0 }}>{g.text}</p>
+            </div>
+          ))}
+          <p style={{ margin: '.8rem 0 0', fontSize: '.9rem', color: C.muted }}>{matris.price}</p>
+        </section>
+
+        <section style={{ marginBottom: '1.8rem' }}>
           <H2>{c.faqTitle}</H2>
-          {zoneFaq(c.faq(z.name, z.home), `${lang}:${zone}`).map(([q, a]) => (
+          {faqAll.map(([q, a]) => (
             <div key={q} style={{ marginBottom: '1rem' }}>
               <h3 style={{ fontSize: '1.02rem', color: C.ink, margin: '0 0 .25rem' }}>{q}</h3>
               <p style={{ margin: 0 }}>{a}</p>

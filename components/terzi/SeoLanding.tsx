@@ -6,6 +6,7 @@
 // ============================================================
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
 import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolge-hizmet-matrisi-i18n';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
 import { fitDesc } from '@/lib/meta-fit';
@@ -573,6 +574,7 @@ function Shell({ lang, waMsg, children, footLinks }: { lang: Lang; waMsg: string
 function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: React.ReactNode; desc: string; waMsg: string }) {
   const u = UI[lang];
   return (
+    <>
     <section className="sl-hero" aria-labelledby="hero-h">
       <div className="sl-hero-content">
         <span className="sl-hero-tag">{tag}</span>
@@ -584,6 +586,8 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
         </div>
       </div>
     </section>
+    <QuickActionBanner lang={lang} />
+    </>
   );
 }
 
