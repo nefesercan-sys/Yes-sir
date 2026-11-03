@@ -57,7 +57,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Deri Ceket Tadilatı 400 TL\'den · Pantolon, Yelek | Terzi Can' },
-  description: 'Deri ceket, deri pantolon ve deri yelek tamir ve tadilatı 400 TL\'den: daraltma, kol kısaltma, onarım. Önce fotoğraf, sonra net fiyat. Her gün 08–23. ☎ +90 531 898 64 18',
+  description: 'Deri ceket, deri pantolon ve deri yelek tamir ve tadilatı 400 TL\'den: daraltma, kol kısaltma, onarım. Önce fotoğraf, net fiyat. 08–23. ☎ +90 531 898 64 18',
   keywords: [
     'deri ceket tadilatı',
     'deri ceket tadilatı fiyat',

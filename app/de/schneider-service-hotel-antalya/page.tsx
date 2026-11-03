@@ -100,7 +100,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Schneider im Hotel Antalya · Mobiler Service | Terzi Can' },
-  description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer. Änderungen mit Anprobe, schreiben Sie uns per WhatsApp. ☎ ' + PHONE,
+  description: 'Mobiler Schneiderservice in Antalya. Wir kommen in Ihr Hotel in Belek, Lara, Kemer. Änderungen mit Anprobe, schreiben Sie uns per WhatsApp. ☎ ' + PHONE,
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',

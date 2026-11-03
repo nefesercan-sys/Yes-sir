@@ -52,7 +52,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Orijinal Kot Paça Yapımı 200 TL\'den · Paça Kısaltma | Terzi Can' },
+  title: { absolute: 'Orijinal Kot Paça 200 TL\'den · Paça Kısaltma | Terzi Can' },
   description: 'Kot paçasını kısaltırken orijinal paça görünümünü koruyoruz, 200 TL\'den. Boy ayakkabıyla işaretlenir; normal iş aynı gün. ☎ +90 531 898 64 18',
   keywords: [
     'orijinal kot paça yapımı',

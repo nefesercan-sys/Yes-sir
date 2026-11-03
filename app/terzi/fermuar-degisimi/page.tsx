@@ -6,6 +6,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import { jsonLdString } from '@/lib/json-ld';
+import { hzSixForService } from '@/lib/intl-hz';
 
 // ── Sabitler ──────────────────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -108,6 +109,7 @@ export const metadata: Metadata = {
       canonical: SITE_URL,
       languages: {
         ...Object.fromEntries(LANGS.map((l) => [l, abs(serviceUrl(l, sv))])),
+        ...hzSixForService(sv.slug.tr),
         'x-default': SITE_URL,
       },
     };

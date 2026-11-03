@@ -58,7 +58,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Mont Tamiri ve Tadilatı 200 TL\'den · Fermuar 300 TL | Terzi Can' },
+  title: { absolute: 'Mont Tamiri Tadilatı 200 TL\'den · Fermuar 300 TL' },
   description: 'Mont boy ve kol kısaltma, daraltma 200 TL\'den; mont fermuarı değişimi 300 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23. ☎ +90 531 898 64 18',
   keywords: ['mont tamiri','mont tadilatı','mont kısaltma','mont daraltma','mont kol kısaltma','mont tamiri antalya','mont tadilatı fiyat','kaban tadilatı'],
   alternates: { canonical: `${BASE_URL}${PATH}` },
