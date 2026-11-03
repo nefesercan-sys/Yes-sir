@@ -4,11 +4,12 @@ import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { INTL, iUrl, type ILang } from '@/lib/intl';
-import { ZCOPY, ZONE_SLUGS, ZONE_LEAD_ALT, zoneData, zoneUrl, type ZoneSlug } from '@/lib/intl-zones';
+import { ZCOPY, ZONE_SLUGS, ZONE_LEAD_ALT, ZONE_HOW_ALT, zoneData, zoneUrl, type ZoneSlug } from '@/lib/intl-zones';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { pick, pickN } from '@/lib/bolge-icerik';
 import { jsonLdString } from '@/lib/json-ld';
 import { bolgeMatrisiTurist, bolgeEkSssTurist } from '@/lib/bolge-hizmet-matrisi-turist';
+import { HOTEL_NOTE } from '@/lib/business';
 import PhotoBand from '@/components/terzi/PhotoBand';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
@@ -40,9 +41,9 @@ export function zoneJsonLd(lang: ILang, zone: ZoneSlug) {
   };
 }
 
-// SSS: ilk iki soru (servis + süre) her bölgede; kalan havuzdan bölgeye göre deterministik 2 soru
+// SSS: ilk soru (servis) her bölgede; kalan havuzdan bölgeye göre deterministik 3 soru (süre sorusu havuzda)
 export function zoneFaq(all: [string, string][], seed: string): [string, string][] {
-  return [...all.slice(0, 2), ...pickN(`zfaq:${seed}`, all.slice(2), 2)];
+  return [...all.slice(0, 1), ...pickN(`zfaq:${seed}`, all.slice(1), 3)];
 }
 
 export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlug }) {
@@ -68,13 +69,13 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
           <p style={{ margin: '0 0 .8rem' }}>{z.blurb}</p>
           <p style={{ margin: '0 0 .8rem' }}>{z.note}</p>
           {z.hotels.length > 0 && (
-            <p style={{ margin: 0, color: C.muted, fontSize: '.92rem' }}><strong>{c.hotelsLabel}:</strong> {z.hotels.slice(0, 8).join(' · ')}</p>
+            <p style={{ margin: 0, color: C.muted, fontSize: '.92rem' }}><strong>{c.hotelsLabel}:</strong> {z.hotels.slice(0, 8).join(' · ')}. {HOTEL_NOTE[lang]}</p>
           )}
         </section>
 
         <section style={{ background: '#fff', border: `1px solid ${C.line}`, borderRadius: 8, padding: '1.2rem 1.3rem', marginBottom: '1.8rem' }}>
           <H2>{c.howTitle}</H2>
-          <p style={{ margin: 0 }}>{c.how(z.name, z.home)}</p>
+          <p style={{ margin: 0 }}>{pick(`zhow:${lang}:${zone}`, [c.how, ...ZONE_HOW_ALT[lang]])(z.name, z.home)}</p>
         </section>
 
         <section style={{ marginBottom: '1.8rem' }}>
