@@ -166,7 +166,7 @@ export function bolgeMatrisiI18n(lang: ILang, slug: string, n: string, loc: stri
   const gs = GROUPS[lang];
   const order = rot(gs, h('g') % gs.length);
   const groups: MatrisGroup[] = order.map((g, gi) => {
-    const ops = rot(g.ops, h('o' + g.id) % g.ops.length); // tüm işlemler kalır, yalnızca sıra döner
+    const ops = rot(g.ops, h('o' + g.id) % g.ops.length).reverse(); // swaphubs: işlem sırası ters (terzihizmeti ile aynı dizilim olmasın) // tüm işlemler kalır, yalnızca sıra döner
     return {
       id: g.id,
       heading: g.heads[(h('h' + g.id) + gi) % g.heads.length](n, loc),

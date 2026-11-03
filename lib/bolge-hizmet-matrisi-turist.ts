@@ -221,7 +221,7 @@ export function bolgeMatrisiTurist(lang: ILang, slug: string, n: string): Matris
   const h = (s: string) => hashStr(slug + ':' + lang + ':' + s);
   const order = rot(P.groups, h('g') % P.groups.length);
   const groups = order.map((g) => {
-    const ops = rot(g.ops, h('o' + g.id) % g.ops.length); // tüm işlemler kalır, yalnızca sıra döner
+    const ops = rot(g.ops, h('o' + g.id) % g.ops.length).reverse(); // swaphubs: işlem sırası ters (terzihizmeti ile aynı dizilim olmasın) // tüm işlemler kalır, yalnızca sıra döner
     return { id: g.id, heading: g.heads[h('h' + g.id) % g.heads.length](n), text: g.intro(n, ops.join(lang === 'ar' ? '، ' : ', ')) };
   });
   return { title: P.titles[h('T') % P.titles.length](n), lead: P.leads[h('L') % P.leads.length](n), groups, price: P.price(n) };

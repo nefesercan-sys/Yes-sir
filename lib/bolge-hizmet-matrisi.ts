@@ -71,7 +71,7 @@ export function bolgeMatrisi(slug: string, n: string, loc: string): Matris {
   const order = rot(GROUPS, h('g') % GROUPS.length);
   const groups: MatrisGroup[] = order.map((g, gi) => {
     // Tüm işlemler her sayfada yer alır; yalnızca sıra döner (her işlem bağımsız bir ad öbeği olduğu için cümle bozulmaz)
-    const ops = rot(g.ops, h('o' + g.id) % g.ops.length);
+    const ops = rot(g.ops, h('o' + g.id) % g.ops.length).reverse(); // swaphubs: işlem sırası ters (terzihizmeti ile aynı dizilim olmasın)
     const text = g.intros[h('i' + g.id) % g.intros.length](loc, n, ops.join(', '));
     return { id: g.id, heading: g.heads[(h('h' + g.id) + gi) % g.heads.length](n, loc), text };
   });
