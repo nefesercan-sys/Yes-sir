@@ -6,7 +6,7 @@ import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { DURATION } from '@/lib/business';
+import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/de/schneider-service-hotel-antalya';
@@ -40,7 +40,7 @@ const FAQ: [string, string][] = [
   ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
   ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
   ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
-  ['Welche Hotels in Belek und Lara werden bedient?', `Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`],
+  ['Welche Hotels in Belek und Lara werden bedient?', `Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. ${HOTEL_NOTE.de} WhatsApp: ${PHONE}`],
   ['Sind Änderungen vor einem Termin möglich?', `Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`],
   ['Sprechen Sie Deutsch?', `Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`],
 ];
@@ -292,8 +292,8 @@ export default function SchneiderServiceHotelAntalyaPage() {
                   ['Reißverschluss wechseln','ab €15 (Mantel / Leder €20)',TURN],
                   ['Kleid / Jacke enger machen','ab €10',TURN],
                   ['Ärmel kürzen','ab €10',TURN],
-                  ['Abendkleid reparieren','ab €40',TURN],
-                  ['Brautkleid ändern (kein Brautkleid-Nähen)','ab €40',TURN],
+                  ['Abendkleid reparieren','nach Foto',TURN],
+                  ['Brautkleid ändern (kein Brautkleid-Nähen)','nach Foto',TURN],
                   ['Riss reparieren','per Foto',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>

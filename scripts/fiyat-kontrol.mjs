@@ -2,7 +2,7 @@
 // Kullanım: node scripts/fiyat-kontrol.mjs   (sorun varsa çıkış kodu 1)
 // Kurallar (sahip kararı, Kasım 2026):
 //  - Paça/bel/kol/boy ₺200 (€10), fermuar ₺300 (€15; mont/ceket/deri fermuarı €20), deri ₺400 (€20), kot ~₺200.
-//  - ₺800 / €40 yalnızca abiye/gelinlik TADİLATI satırında izinlidir (satırda tadilat/alteration vb. geçmeli, dikim/sewing geçmemeli).
+//  - Abiye/gelinlik/elbise TADİLATI için de sabit tutar YAZILMAZ (sahip kararı: "fotoğrafa veya işin detayına göre"); ₺800/€40 hiçbir yerde izinli değil.
 //  - DİKİM tutarları (₺800/₺1000/₺20.000, €40/€50/€1000 ve JSON-LD karşılıkları) HİÇBİR yerde yazılamaz:
 //    dikim işleri "fotoğrafa ve istediğiniz modele göre" fiyatlanır.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
@@ -10,8 +10,8 @@ import { join } from 'node:path';
 
 const TRY_OK = new Set([200, 300, 400, 20]); // 20 = yalnız kur notu (₺20 = €1) için
 const EUR_OK = new Set([10, 15, 20, 1]);
-const TADILAT_TRY = new Set([800]);
-const TADILAT_EUR = new Set([40]);
+const TADILAT_TRY = new Set([]);
+const TADILAT_EUR = new Set([]);
 const JSONLD_OK = new Set([200, 300, 400, 10, 15, 20]); // TRY 200/300/400 veya EUR 10/15/20 (dikim için sayısal fiyat YOK)
 const TADILAT = /tadilat|tamir|alteration|alter\b|änderung|ändern|anpass|reparatur|переделк|подгонк|ремонт|arreglo|retouche|przeróbk|переробк|aanpass|vermaak|تعديل|gelinlik|abiye|evening|wedding|bridal|brautkleid|abendkleid/i;
 const DIKIM = /dikim|diktir|sewing|dress ?making|nähen|пошив|confecci|couture|szycie|пошиття|maatwerk|خياطة|sew\b|tailoring from|groom suit|damatlık|bräutigam/i;

@@ -178,7 +178,7 @@ const FIYAT_LISTESI = [
   { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
   { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: 'Aynı gün'  },
   { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: 'Aynı gün'  },
-  { hizmet: 'Abiye / Gelinlik Tadilatı',   fiyat: '₺800',  sure: 'Aynı gün' },
+  { hizmet: 'Abiye / Gelinlik Tadilatı',   fiyat: 'Fotoğrafa göre',  sure: 'Aynı gün / 1–2 gün' },
   { hizmet: 'Elbise Dikimi',             fiyat: 'Fotoğrafa ve istediğiniz modele göre', sure: 'Modele göre'  },
 ]
 

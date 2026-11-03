@@ -33,7 +33,7 @@ export const BUSINESS = {
   phoneDisplay: PHONE_DISPLAY,
   priceRange: '$$',
   languages: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
-  currencies: 'TRY, EUR, USD, RUB',
+  currencies: 'Any currency (TRY, EUR, USD, RUB and others)',
   payments: 'Cash, Credit Card, Bank Transfer',
   image: `${SITE_URL}/og/terzi-can.jpg`,
   address: {
@@ -60,8 +60,6 @@ export const PRICE_FROM = {
   bel: 200,
   fermuar: 300,
   deri: 400,
-  gelinlik: 800, // yalnız TADİLAT
-  abiye: 800, // yalnız TADİLAT
 } as const;
 
 /** DİKİM işlerinde (elbise, abiye, etek, pantolon, çocuk, damatlık/takım, özel dikim, yelek/tulum/bluz/eşofman) sabit fiyat YAZILMAZ (sahip kararı, Kasım 2026). */
@@ -211,3 +209,11 @@ export const SERVICE_RULE: Record<SLang, { hotelFree: string; homeFree: string; 
     full: 'Abholung und Lieferung zu Hause und im Hotel sind in allen von uns bedienten Gebieten kostenlos; Sie zahlen nur die eigentliche Arbeit.',
   },
 };
+
+/** Sahip teyidi (Kasım 2026): otellerle ortaklık yok; Antalya'daki tüm otellere hizmet verilir. Otel listesi geçen her yerde bu cümle kullanılır. */
+export const HOTEL_NOTE = {
+  tr: "Bu otellerle ortaklığımız yoktur; Antalya'daki tüm otellere hizmet veriyoruz.",
+  en: 'We are not partnered with these hotels; we serve all hotels in Antalya.',
+  ru: 'Мы не являемся партнёрами этих отелей; мы обслуживаем все отели Антальи.',
+  de: 'Wir sind keine Partner dieser Hotels; wir bedienen alle Hotels in Antalya.',
+} as const;

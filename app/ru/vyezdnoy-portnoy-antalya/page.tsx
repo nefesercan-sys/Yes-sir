@@ -6,7 +6,7 @@ import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { DURATION } from '@/lib/business';
+import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
@@ -40,7 +40,7 @@ const FAQ: [string, string][] = [
   ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
   ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
   ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
-  ['В какие отели Белека и Лары вы приезжаете?', `Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. WhatsApp: ${PHONE}`],
+  ['В какие отели Белека и Лары вы приезжаете?', `Мы обслуживаем все крупные отели — Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria, Titanic. ${HOTEL_NOTE.ru} WhatsApp: ${PHONE}`],
   ['Можно ли сделать срочный ремонт перед мероприятием?', `Да. Напишите дату мероприятия в WhatsApp — скажем, что возможно; обычная подгонка готова в тот же день, срочная — за 1–2 часа. Работаем по всей Анталье, включая отели Белека, Лары, Кемера и Аланьи. WhatsApp: ${PHONE}`],
   ['Вы говорите по-русски?', `Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`],
 ];
@@ -292,8 +292,8 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                   ['Замена молнии','от €15 (пальто / кожа €20)',TURN],
                   ['Ушив платья / пиджака','от €10',TURN],
                   ['Укорачивание рукавов','от €10',TURN],
-                  ['Ремонт вечернего платья','от €40',TURN],
-                  ['Подгонка свадебного платья (пошив не делаем)','от €40',TURN],
+                  ['Ремонт вечернего платья','по фото',TURN],
+                  ['Подгонка свадебного платья (пошив не делаем)','по фото',TURN],
                   ['Ремонт разрыва ткани','по фото',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>

@@ -7,7 +7,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
-import { DURATION } from '@/lib/business';
+import { DURATION, HOTEL_NOTE } from '@/lib/business';
 
 const SITE_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -35,14 +35,14 @@ const HOTELS = [
 // SSS: görünür liste ve FAQPage şeması (BusinessSchema faq=) bu tek diziden beslenir.
 const FAQ = [
   { q: 'Do you offer mobile tailor service directly to hotel rooms?', a: `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}` },
-  { q: 'What currencies and payment methods do you accept?', a: 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.' },
+  { q: 'What currencies and payment methods do you accept?', a: 'Payment in any currency, cash or card, including international credit cards, contactless and mobile payments, right at your hotel. Prices do not include VAT.' },
   { q: 'Is the hotel visit free of charge?', a: 'The hotel visit is free in every hotel area we cover. You also pay for the tailoring work itself.' },
   { q: 'Do you serve Belek and Lara luxury hotels?', a: `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}` },
   { q: 'How fast can the tailor arrive at my hotel?', a: 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.' },
   { q: 'Do your tailors speak English?', a: `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.` },
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
-  { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
-  { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
+  { q: 'Which currencies and payment methods do you accept?', a: `Payment in any currency, cash or card, including international credit cards and contactless mobile payments, right at your hotel.` },
+  { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. ${HOTEL_NOTE.en} WhatsApp: ${PHONE}` },
   { q: 'Is the hotel tailor visit free?', a: `The hotel visit is free in every hotel area we cover. You also pay for the tailoring work. The price is confirmed on WhatsApp from a photo. WhatsApp: ${PHONE}` },
   { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; regular alterations are ready the same day and urgent jobs in 1–2 hours. We serve hotels in Belek, Lara, Kemer and across Antalya. WhatsApp: ${PHONE}` },
 ];
@@ -60,7 +60,7 @@ const HOWTO = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Hotel Tailor Antalya · We Come to Your Hotel | Terzi Can' },
-  description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer. Same-day alterations, English speaking tailor, accepts EUR/USD/RUB/Cards. ☎ ' + PHONE,
+  description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer. Same-day alterations, English speaking tailor, payment in any currency, cash or card. ☎ ' + PHONE,
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
     'English speaking tailor Antalya','Belek hotel tailor','Lara hotel tailor',
@@ -139,7 +139,7 @@ export default function HotelTailorAntalyaPage() {
               <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.8)', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
                 <strong style={{ color: '#fff' }}>Tailor Can</strong> comes directly to your hotel room or lobby across <strong style={{ color: '#D4B07A' }}>Belek, Lara, Kemer, and Side</strong>. 
                 Professional measurement, emergency dress alterations, suit repairs, and delivery back to your room. 
-                <span style={{ display: 'block', marginTop: '.5rem', color: '#D4B07A', fontSize: '.9rem' }}>💳 We accept EUR, USD, RUB, TRY & Credit Cards.</span>
+                <span style={{ display: 'block', marginTop: '.5rem', color: '#D4B07A', fontSize: '.9rem' }}>💳 Payment in any currency — cash or card.</span>
               </p>
 
               {/* Trust Badges */}
@@ -147,7 +147,7 @@ export default function HotelTailorAntalyaPage() {
                 {[
                   ['📍', 'Find Us on Google Maps'],
                   ['🏨', 'All Hotels Covered'],
-                  ['💳', 'EUR / USD / Cards Accepted'],
+                  ['💳', 'Any currency / cash / card'],
                   ['⚡', 'Delivered to Your Room'],
                 ].map(([icon, text]) => (
                   <span key={icon} style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.8)', background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', padding: '.35rem .8rem', borderRadius: '4px' }}>
@@ -265,7 +265,7 @@ export default function HotelTailorAntalyaPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
-              Transparent Tourist Pricing (TRY, EUR, USD, RUB)
+              Transparent Tourist Pricing (any currency)
             </h2>
             <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotel visit fee is 100% FREE — you only pay for professional tailoring work.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
@@ -283,8 +283,8 @@ export default function HotelTailorAntalyaPage() {
                   ['Zipper Replacement','from €15 (coat / leather €20)',TURN],
                   ['Dress / Jacket Alteration','from €10',TURN],
                   ['Sleeve Shortening','from €10',TURN],
-                  ['Evening Gown Repair','from €40',TURN],
-                  ['Wedding Dress Alteration (no wedding dress sewing)','from €40',TURN],
+                  ['Evening Gown Repair','by photo',TURN],
+                  ['Wedding Dress Alteration (no wedding dress sewing)','by photo',TURN],
                   ['Tear Repair','by photo',TURN],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
@@ -296,7 +296,7 @@ export default function HotelTailorAntalyaPage() {
               </tbody>
             </table>
             <div style={{ marginTop: '1rem', fontSize: '.8rem', color: '#7A6E62', textAlign: 'center' }}>
-              💳 Accepted Payments: Cash (TRY, EUR, USD, RUB) & Credit Cards / Contactless / Apple Pay.
+              💳 Payment in any currency: cash or credit card / contactless / Apple Pay. Prices do not include VAT.
             </div>
           </div>
         </section>

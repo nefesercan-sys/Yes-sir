@@ -159,7 +159,7 @@ const PRICES = [
   ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
   ['Ceket / Mont Tamiri', '₺200+', 'Aynı gün'],
   ['Kol Kısaltma', '₺200+', 'Aynı gün'],
-  ['Abiye / Gelinlik Tadilatı', '₺800+', 'Aynı gün'],
+  ['Abiye / Gelinlik Tadilatı', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
   ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],

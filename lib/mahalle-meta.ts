@@ -13,7 +13,7 @@ const BANK: Record<string, M> = {
     kw: ['fermuar değişimi', 'fermuar tamiri', 'mont fermuar değişimi', 'beden ayarlama', 'beden küçültme', 'beden büyütme', 'bel daraltma', 'pantolon daraltma', 'kot paçası kısaltma', 'şort kısaltma', 'tamir tadilat', 'özel dikim'] },
   sarisu: { t: 'Sarısu Terzi · Kot Paçası, Şort, Etek Kısaltma', d: "Sarısu'da kot paçası, şort, etek, pantolon kısaltma, bel daraltma, tamir. Paça ₺200'den. Fiyat için fotoğraf at." + FREE,
     kw: ['kot paçası kısaltma', 'kot daraltma', 'şort kısaltma', 'şort daraltma', 'etek kısaltma', 'etek daraltma', 'pantolon kısaltma', 'bel daraltma', 'çocuk kıyafet tadilatı', 'özel dikim', 'fermuar değişimi', 'tamir tadilat'] },
-  uncali: { t: 'Uncalı Terzi · Abiye Tamiri, Elbise Tadilat', d: "Uncalı'da abiye tamiri, tadilatı, elbise daraltma, kısaltma. Abiye ₺800'den, paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
+  uncali: { t: 'Uncalı Terzi · Abiye Tamiri, Elbise Tadilat', d: "Uncalı'da abiye tamiri, tadilatı, elbise daraltma, kısaltma. Abiye fotoğrafa göre, paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
     kw: ['abiye tamiri', 'abiye tadilatı', 'abiye daraltma', 'abiye kısaltma', 'abiye fermuar değişimi', 'elbise daraltma', 'elbise kısaltma', 'bayan elbise dikimi', 'gelinlik tadilatı', 'etek kısaltma', 'ölçüye göre özel dikim', 'tamir tadilat'] },
   gursu: { t: 'Gürsu Terzi · Pantolon, Ceket, Mont Tadilatı', d: "Gürsu'da pantolon, ceket, mont, gömlek tadilatı; kısaltma, daraltma, fermuar. Paça ₺200'den. Fotoğraf at, fiyat al." + FREE,
     kw: ['pantolon kısaltma', 'pantolon daraltma', 'ceket tadilatı', 'ceket daraltma', 'mont kısaltma', 'mont tamiri', 'gömlek daraltma', 'gömlek kısaltma', 'erkek terzi', 'bay bayan terzi', 'fermuar değişimi', 'özel dikim'] },
