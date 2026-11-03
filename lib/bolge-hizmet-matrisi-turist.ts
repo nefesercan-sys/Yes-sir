@@ -12,6 +12,8 @@ import { hashStr } from '@/lib/seo-angles';
 const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 20, leather: 20 } as const;
 const eurFrom = (k: keyof typeof EUR) => EUR[k];
 import type { ILang } from '@/lib/intl';
+import { zoneData, isZone } from '@/lib/intl-zones';
+import { HOTEL_NOTE } from '@/lib/business';
 
 export interface MatrisGroup { id: string; heading: string; text: string }
 export interface Matris { title: string; lead: string; groups: MatrisGroup[]; price: string }
@@ -214,30 +216,80 @@ const PACKS: Record<ILang, Pack> = {
   },
 };
 
+/** Deterministik karıştırma (mulberry32 + Fisher–Yates): aynı tohum → aynı sıra; tüm elemanlar korunur. */
+const shuf = <T,>(a: T[], seed: number): T[] => {
+  const r = [...a]; let t = seed >>> 0;
+  const rnd = () => { t = (t + 0x6d2b79f5) >>> 0; let x = Math.imul(t ^ (t >>> 15), 1 | t); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; }
+  return r;
+};
+// Fiyat satırı için ek kalıplar (aynı rakamlar: ₺200'den ≈ €10, fermuar €15/€20, deri €20; KDV hariç yazılmaz çünkü ana satırla aynı kalır → fiyat denetimi tek kaynak).
+const PRICE_ALT: Record<ILang, ((n: string) => string)[]> = {
+  es: [(n) => `Orientación para ${n}: bajos, cintura y mangas desde ${e('hem')}; cremallera desde ${e('zipperPants')} (chaquetas y abrigos ${e('zipperCoat')}); piel desde ${e('leather')}. Lo demás se presupuesta por foto.`],
+  fr: [(n) => `Repères pour ${n} : ourlets, taille et manches dès ${e('hem')} ; fermeture éclair dès ${e('zipperPants')} (vestes et manteaux ${e('zipperCoat')}) ; cuir dès ${e('leather')}. Le reste est chiffré sur photo.`],
+  pl: [(n) => `Orientacyjnie dla ${n}: nogawki, talia i rękawy od ${e('hem')}; zamek od ${e('zipperPants')} (kurtki i płaszcze ${e('zipperCoat')}); skóra od ${e('leather')}. Resztę wyceniamy ze zdjęcia.`],
+  uk: [(n) => `Орієнтири для ${n}: низ штанин, талія й рукави від ${e('hem')}; блискавка від ${e('zipperPants')} (куртки й пальта ${e('zipperCoat')}); шкіра від ${e('leather')}. Решту оцінюємо за фото.`],
+  nl: [(n) => `Richtprijzen voor ${n}: zomen, taille en mouwen vanaf ${e('hem')}; rits vanaf ${e('zipperPants')} (jassen en mantels ${e('zipperCoat')}); leer vanaf ${e('leather')}. De rest begroten wij op basis van een foto.`],
+  ar: [(n) => `أسعار استرشادية في ${n}: الأطراف والخصر والأكمام من ${e('hem')}؛ السحاب من ${e('zipperPants')} (السترات والمعاطف ${e('zipperCoat')})؛ الجلد من ${e('leather')}. وباقي الأعمال نسعّرها من الصورة.`],
+};
+
+const LEAD_ALT: Partial<Record<ILang, ((n: string) => string)[]>> = {
+  es: [(n) => `¿Qué puede arreglarse durante su estancia en ${n}? Casi todo: bajos, cinturas, mangas, cremalleras, botones, forros, rotos y prendas de piel, además de confección a medida. Recogida y entrega gratuitas en el hotel.`],
+  fr: [(n) => `Que peut-on retoucher pendant un séjour à ${n} ? Presque tout : ourlets, tailles, manches, fermetures, boutons, doublures, déchirures et articles en cuir, ainsi que la confection sur mesure. Collecte et livraison gratuites à l'hôtel.`],
+};
+
 const rot = <T,>(a: T[], k: number): T[] => a.map((_, i) => a[(i + k) % a.length]);
 
 export function bolgeMatrisiTurist(lang: ILang, slug: string, n: string): Matris {
   const P = PACKS[lang];
   const h = (s: string) => hashStr(slug + ':' + lang + ':' + s);
-  const order = rot(P.groups, h('g') % P.groups.length);
+  const order = shuf(P.groups, h('g'));
   const groups = order.map((g) => {
-    const ops = rot(g.ops, h('o' + g.id) % g.ops.length).reverse(); // swaphubs: işlem sırası ters (terzihizmeti ile aynı dizilim olmasın) // tüm işlemler kalır, yalnızca sıra döner
+    const all = shuf(g.ops, h('o' + g.id)); const ops = g.ops.length > 5 ? all.slice(0, Math.max(5, Math.ceil(g.ops.length * 0.6))) : all; // işlemlerin ~%60'i (en az 5) bölgeye göre seçilir, her işlem başka bölgelerde yer alır; sıra bölgeye göre deterministik karışır (terzihizmeti ile ve bölgeler arası farklı dizilim)
     return { id: g.id, heading: g.heads[h('h' + g.id) % g.heads.length](n), text: g.intro(n, ops.join(lang === 'ar' ? '، ' : ', ')) };
   });
-  return { title: P.titles[h('T') % P.titles.length](n), lead: P.leads[h('L') % P.leads.length](n), groups, price: P.price(n) };
+  return { title: P.titles[h('T') % P.titles.length](n), lead: [...P.leads, ...(LEAD_ALT[lang] ?? [])][h('L') % (P.leads.length + (LEAD_ALT[lang]?.length ?? 0))](n), groups, price: [P.price, ...PRICE_ALT[lang]][h('P') % (1 + PRICE_ALT[lang].length)](n) };
 }
 
-/** Bölge başına 3 ek soru; slug karmasıyla farklı alt küme. */
+/** Bölge başına 2 ek soru + 1 bölgeye özgü otel sorusu; slug karmasıyla farklı alt küme. */
 export function bolgeEkSssTurist(lang: ILang, slug: string, n: string): [string, string][] {
   const pool = PACKS[lang].faq;
   const start = hashStr(slug + ':' + lang + ':faq2') % pool.length;
   const step = [1, 3, 5][hashStr(slug + ':' + lang + ':fs2') % 3];
   const out: typeof pool = [];
-  for (let i = 0; out.length < 3 && i < pool.length * 3; i++) {
+  for (let i = 0; out.length < 2 && i < pool.length * 3; i++) {
     const x = pool[(start + i * step) % pool.length];
     if (!out.includes(x)) out.push(x);
   }
-  return out.map((x) => x.f(n));
+  const list = shuf(out, hashStr(slug + ':' + lang + ':fo')).map((x) => x.f(n));
+  const hf = hotelFaq(lang, slug, n);
+  if (hf) list.splice(hashStr(slug + ':' + lang + ':hp') % (list.length + 1), 0, hf);
+  return list;
+}
+
+// Bölgeye özgü otel sorusu: o bölgenin örnek otel adlarını içerir (sayfayı benzersizleştirir); ortaklık iddiası yok.
+const HQ: Record<ILang, (n: string, h: string) => string> = {
+  es: (n, h) => `¿Atienden en hoteles de ${n} como ${h}?`,
+  fr: (n, h) => `Intervenez-vous dans les hôtels de ${n} comme ${h} ?`,
+  pl: (n, h) => `Czy obsługujecie hotele w ${n}, takie jak ${h}?`,
+  uk: (n, h) => `Чи обслуговуєте ви готелі в районі ${n}, як-от ${h}?`,
+  nl: (n, h) => `Komen jullie naar hotels in ${n} zoals ${h}?`,
+  ar: (n, h) => `هل تخدمون فنادق ${n} مثل ${h}؟`,
+};
+const HA: Record<ILang, string> = {
+  es: 'Sí. Recogemos y entregamos la prenda en el hotel sin coste; si hace falta una prueba, nos vemos en el hotel.',
+  fr: "Oui. Nous récupérons et rapportons le vêtement à l'hôtel sans frais ; si un essayage est utile, nous nous retrouvons à l'hôtel.",
+  pl: 'Tak. Odbieramy i dowozimy ubranie do hotelu bezpłatnie; jeśli potrzebna jest przymiarka, spotykamy się w hotelu.',
+  uk: 'Так. Забираємо й привозимо одяг до готелю безкоштовно; якщо потрібна приміряння, зустрічаємося в готелі.',
+  nl: 'Ja. Wij halen het kledingstuk gratis op in het hotel en brengen het terug; is een pasbeurt nodig, dan spreken we af in het hotel.',
+  ar: 'نعم. نستلم القطعة ونسلّمها في الفندق مجاناً؛ وإذا لزم القياس نلتقي في الفندق.',
+};
+function hotelFaq(lang: ILang, slug: string, n: string): [string, string] | null {
+  if (!isZone(slug)) return null;
+  const hs = zoneData(lang, slug).hotels;
+  if (!hs.length) return null;
+  const pick = shuf(hs, hashStr(slug + ':' + lang + ':hn')).slice(0, 3).join(lang === 'ar' ? '، ' : ', ');
+  return [HQ[lang](n, pick), HA[lang] + ' ' + HOTEL_NOTE[lang]];
 }
 
 /** Bölgeye göre farklı başlık/açıklama için ek başlık alternatifleri (ZCOPY.title'a ek). */

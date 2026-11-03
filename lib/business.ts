@@ -216,4 +216,10 @@ export const HOTEL_NOTE = {
   en: 'We are not partnered with these hotels; we serve all hotels in Antalya.',
   ru: 'Мы не являемся партнёрами этих отелей; мы обслуживаем все отели Антальи.',
   de: 'Wir sind keine Partner dieser Hotels; wir bedienen alle Hotels in Antalya.',
+  es: 'No somos socios de estos hoteles; atendemos a todos los hoteles de Antalya.',
+  fr: "Nous ne sommes pas partenaires de ces hôtels ; nous servons tous les hôtels d'Antalya.",
+  pl: 'Nie jesteśmy partnerem tych hoteli; obsługujemy wszystkie hotele w Antalyi.',
+  uk: 'Ми не є партнерами цих готелів; ми обслуговуємо всі готелі Анталії.',
+  nl: 'Wij zijn geen partner van deze hotels; wij bedienen alle hotels in Antalya.',
+  ar: 'لسنا شركاء لهذه الفنادق؛ نخدم جميع فنادق أنطاليا.',
 } as const;

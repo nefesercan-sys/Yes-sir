@@ -187,6 +187,34 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
   },
 };
 
+/** "Nasıl ilerliyoruz" bölümü için ek kalıplar (ZCOPY.how ile birlikte 3 seçenek; bölgeye göre deterministik). Ücret yok, dakika/mesafe yok. */
+export const ZONE_HOW_ALT: Record<ILang, ((z: string, home: boolean) => string)[]> = {
+  es: [
+    (z, home) => `Envíe por WhatsApp la foto de la prenda ${home ? 'y el nombre de su hotel de Konyaaltı' : `y el nombre de su hotel en ${z}`}; le respondemos con precio y plazo, recogemos la prenda sin coste y se la devolvemos ya arreglada.`,
+    (z, home) => `Tres pasos: foto por WhatsApp, confirmación de precio y plazo, y recogida y entrega gratuitas ${home ? 'en su hotel' : `en su hotel de ${z}`}. Si hace falta una prueba, nos vemos en el hotel.`,
+  ],
+  fr: [
+    (z, home) => `Envoyez la photo du vêtement sur WhatsApp ${home ? 'avec le nom de votre hôtel de Konyaaltı' : `avec le nom de votre hôtel à ${z}`} ; nous répondons avec prix et délai, récupérons le vêtement sans frais et vous le rapportons retouché.`,
+    (z, home) => `Trois étapes : photo sur WhatsApp, confirmation du prix et du délai, puis collecte et livraison gratuites ${home ? 'à votre hôtel' : `à votre hôtel de ${z}`}. Si un essayage est utile, nous nous retrouvons à l'hôtel.`,
+  ],
+  pl: [
+    (z, home) => `Wyślij na WhatsApp zdjęcie ubrania ${home ? 'i nazwę hotelu w Konyaaltı' : `i nazwę hotelu w ${z}`}; odpowiadamy ceną i terminem, odbieramy ubranie bezpłatnie i oddajemy poprawione.`,
+    (z, home) => `Trzy kroki: zdjęcie na WhatsApp, potwierdzenie ceny i terminu oraz bezpłatny odbiór i dostawa ${home ? 'do hotelu' : `do hotelu w ${z}`}. Jeśli potrzebna jest przymiarka, spotykamy się w hotelu.`,
+  ],
+  uk: [
+    (z, home) => `Надішліть у WhatsApp фото одягу ${home ? 'і назву готелю в Коньяалти' : `і назву готелю в районі ${z}`}; ми відповімо ціною та строком, безкоштовно заберемо річ і привеземо її виправленою.`,
+    (z, home) => `Три кроки: фото у WhatsApp, підтвердження ціни та строку, безкоштовне забирання й доставка ${home ? 'до готелю' : `до готелю в районі ${z}`}. Якщо потрібна приміряння, зустрінемося в готелі.`,
+  ],
+  nl: [
+    (z, home) => `Stuur via WhatsApp een foto van het kledingstuk ${home ? 'en de naam van uw hotel in Konyaaltı' : `en de naam van uw hotel in ${z}`}; wij antwoorden met prijs en termijn, halen het kledingstuk gratis op en brengen het verstelde terug.`,
+    (z, home) => `Drie stappen: foto via WhatsApp, bevestiging van prijs en termijn, en gratis ophalen en terugbrengen ${home ? 'bij uw hotel' : `bij uw hotel in ${z}`}. Is een pasbeurt nodig, dan spreken we af in het hotel.`,
+  ],
+  ar: [
+    (z, home) => `أرسل عبر واتساب صورة القطعة ${home ? 'مع اسم فندقك في كونيالتي' : `مع اسم فندقك في ${z}`}؛ نرد عليك بالسعر والمدة، ونستلم القطعة مجاناً ونعيدها إليك بعد إصلاحها.`,
+    (z, home) => `ثلاث خطوات: صورة عبر واتساب، وتأكيد السعر والمدة، ثم استلام وتسليم مجانيان ${home ? 'في فندقك' : `في فندقك في ${z}`}. وإذا لزم القياس نلتقي في الفندق.`,
+  ],
+};
+
 /** Giriş paragrafı için ek kalıplar (bölgeye göre deterministik seçilir; ZCOPY.lead ile birlikte 3 seçenek). */
 export const ZONE_LEAD_ALT: Record<ILang, ((z: string) => string)[]> = {
   es: [
