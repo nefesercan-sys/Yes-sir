@@ -7,7 +7,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { DURATION } from '@/lib/business';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/de/schneider-service-hotel-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -30,6 +30,19 @@ const HOTELS = [
   'Sheraton Cesme','Rixos Premium Belek','Crystal Sunset Luxury Resort',
   'Fame Residence Lara','Akra Hotel','Hillside Su Hotel','Lara Barut Collection',
   'Concorde De Luxe Resort','Papillon Ayscha Resort','Limak Atlantis',
+];
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
+  ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos.'],
+  ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
+  ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
+  ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
+  ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
+  ['Welche Hotels in Belek und Lara werden bedient?', `Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`],
+  ['Sind Änderungen vor einem Termin möglich?', `Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`],
+  ['Sprechen Sie Deutsch?', `Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`],
 ];
 
 const jsonLd = {
@@ -70,21 +83,7 @@ const jsonLd = {
         {position:3, name:'Mobiler Schneider Antalya', item:SITE_URL},
       ].map(i=>({...i,'@type':'ListItem'})),
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type':'Question', name:'Gibt es einen mobilen Schneiderservice in Antalya?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Ihren Hotelnamen oder Standort per WhatsApp mit — der Schneider kommt, nimmt Maß, näht und liefert. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Welche Hotels in Belek und Lara werden bedient?',
-          acceptedAnswer:{'@type':'Answer',text:`Wir bedienen alle großen Hotels, darunter Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria und Titanic. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Ist der Hausbesuch kostenlos?',
-          acceptedAnswer:{'@type':'Answer',text:`Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Sind Änderungen vor einem Termin möglich?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja. Nennen Sie uns Ihren Termin per WhatsApp, wir sagen Ihnen, was möglich ist; normale Änderungen sind am selben Tag fertig, dringende in 1–2 Stunden. Wir arbeiten in Konyaaltı und Umgebung sowie in Hotels in Belek, Lara, Kemer und Side. WhatsApp: ${PHONE}`} },
-        { '@type':'Question', name:'Sprechen Sie Deutsch?',
-          acceptedAnswer:{'@type':'Answer',text:`Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`} },
-      ],
-    },
+    faqPageSchema(FAQ),
     {
       '@type': 'HowTo',
       name: 'So funktioniert der mobile Schneider- / Hotelservice',
@@ -108,9 +107,9 @@ export const metadata: Metadata = {
     'Schneider Kemer Hotel','Änderungsschneiderei Antalya',
     'Kleid ändern Antalya Hotel','Anzug ändern Antalya',
   ],
-  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  // Sahip kararı (Kasım 2026): swaphubs kendi adresinde canonical kalır; crossCanonical boşsa kendi URL'si kullanılır
   alternates: {
-    canonical: crossCanonical('/de/schneider-service-hotel-antalya')!,
+    canonical: crossCanonical('/de/schneider-service-hotel-antalya') ?? 'https://swaphubs.com/de/schneider-service-hotel-antalya',
     languages: {
       tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
       en: 'https://swaphubs.com/en/hotel-tailor-antalya',
@@ -313,14 +312,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '2rem' }}>
               Mobiler Schneider Antalya — Häufig gestellte Fragen
             </h2>
-            {[
-              ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
-              ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos.'],
-              ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
-              ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
-              ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
-              ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
-            ].map(([q, a], i) => (
+            {FAQ.map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>

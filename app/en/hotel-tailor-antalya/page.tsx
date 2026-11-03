@@ -32,7 +32,14 @@ const HOTELS = [
   'Concorde De Luxe Resort','Papillon Ayscha Resort','Limak Atlantis',
 ];
 
+// SSS: görünür liste ve FAQPage şeması (BusinessSchema faq=) bu tek diziden beslenir.
 const FAQ = [
+  { q: 'Do you offer mobile tailor service directly to hotel rooms?', a: `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}` },
+  { q: 'What currencies and payment methods do you accept?', a: 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.' },
+  { q: 'Is the hotel visit free of charge?', a: 'The hotel visit is free in every hotel area we cover. You also pay for the tailoring work itself.' },
+  { q: 'Do you serve Belek and Lara luxury hotels?', a: `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}` },
+  { q: 'How fast can the tailor arrive at my hotel?', a: 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.' },
+  { q: 'Do your tailors speak English?', a: `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.` },
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
   { q: 'Which currencies and payment methods do you accept?', a: `We accept EUR, USD, RUB, TRY cash as well as all international credit cards and contactless mobile payments right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. WhatsApp: ${PHONE}` },
@@ -60,9 +67,9 @@ export const metadata: Metadata = {
     'Kemer hotel tailor','emergency tailor Antalya',
     'dress alteration Antalya hotel','suit alteration Antalya',
   ],
-  // terzihizmeti.com.tr'de birebir aynı yol ve niyet → cross-domain canonical (hreflang kümesi yok)
+  // Sahip kararı (Kasım 2026): swaphubs kendi adresinde canonical kalır; crossCanonical boşsa kendi URL'si kullanılır
   alternates: {
-    canonical: crossCanonical('/en/hotel-tailor-antalya')!,
+    canonical: crossCanonical('/en/hotel-tailor-antalya') ?? 'https://swaphubs.com/en/hotel-tailor-antalya',
     languages: {
       tr: 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya',
       en: 'https://swaphubs.com/en/hotel-tailor-antalya',
@@ -300,14 +307,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '2rem' }}>
               Mobile & Hotel Tailor Antalya — FAQ
             </h2>
-            {[
-              ['Do you offer mobile tailor service directly to hotel rooms?', `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
-              ['What currencies and payment methods do you accept?', 'We accept cash in TRY, EUR, USD, and RUB, as well as all international credit cards, contactless cards, and mobile payments right at your hotel.'],
-              ['Is the hotel visit free of charge?', 'The hotel visit is free in every hotel area we cover. You also pay for the tailoring work itself.'],
-              ['Do you serve Belek and Lara luxury hotels?', `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}`],
-              ['How fast can the tailor arrive at my hotel?', 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.'],
-              ['Do your tailors speak English?', `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.`],
-            ].map(([q, a], i) => (
+            {FAQ.map(({ q, a }, i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '1rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
