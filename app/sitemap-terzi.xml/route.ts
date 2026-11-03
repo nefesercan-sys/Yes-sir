@@ -58,6 +58,8 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/fermuar-degisimi`,      priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/deri-ceket-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-pantolon-paca-kisaltma-antalya`, priority: '0.85', freq: 'weekly' },
+    { url: `${BASE_URL}/terzi/kot-pantolon-daraltma-antalya`, priority: '0.85', freq: 'weekly' },
+    { url: `${BASE_URL}/terzi/orijinal-kot-paca-yapimi-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-ceket-mont-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-etek-kisaltma-daraltma-antalya`, priority: '0.85', freq: 'weekly' },
 
