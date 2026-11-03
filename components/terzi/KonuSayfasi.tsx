@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import { jsonLdString } from '@/lib/json-ld';
 
@@ -68,6 +69,7 @@ export default function KonuSayfasi({ d }: { d: KonuData }) {
   return (
     <main style={{ fontFamily: FONT, color: TEXT, background: '#fff', lineHeight: 1.65 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
+      <QuickActionBanner lang="tr" />
       <section style={{ background: SOFT, borderBottom: `1px solid ${BORDER}`, padding: '2.2rem 1.25rem 2.6rem' }}>
         <div style={wrap}>
           <nav aria-label="Sayfa yolu" style={{ fontSize: '.8rem', color: MUTED, marginBottom: '1.1rem' }}>
