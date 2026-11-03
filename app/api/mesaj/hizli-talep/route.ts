@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/mongodb";
-import { clean, isEmail, rateLimited } from "@/lib/api-guard";
+import { clean, isEmail, rateLimitedDb } from "@/lib/api-guard";
 
 export async function POST(req: NextRequest) {
   try {
-    if (rateLimited(req, "hizli-talep", 5, 10 * 60 * 1000)) {
+    if (await rateLimitedDb(req, "hizli-talep", 5, 10 * 60 * 1000)) {
       return NextResponse.json({ mesaj:"Çok fazla istek. Lütfen biraz sonra tekrar deneyin." }, { status:429 });
     }
     const b = await req.json();

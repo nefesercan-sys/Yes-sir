@@ -1,3 +1,4 @@
+import { adminEpostasiMi } from "@/lib/admin-list";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getDb } from "@/lib/mongodb";
@@ -83,6 +84,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as any).id = token.id;   // ✅ id session'a taşındı
         (session.user as any).role = token.role;
+        (session.user as any).isAdmin = adminEpostasiMi(session.user.email || ''); // yönetici bayrağı sunucuda hesaplanır; e-posta istemci paketine girmez
       }
       return session;
     }

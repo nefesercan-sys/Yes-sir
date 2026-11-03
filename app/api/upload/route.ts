@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { uploadMedia } from '@/lib/cloudinary';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { rateLimited } from '@/lib/api-guard';
+import { rateLimited, rateLimitedDb } from '@/lib/api-guard';
 
 // Giriş yapmamış ziyaretçi (ör. terzi talep formu): yalnızca resim, küçük boyut, IP başına sınırlı sayıda.
 // NOT: Sayaçlar bellek içidir (sunucusuz ortamda her örnekte ayrı, lib/api-guard.ts); kalıcı sınır için Upstash/Redis önerilir.
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       if (rateLimited(req, 'upload-girisli', 60, PENCERE_MS)) {
         return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
       }
-    } else if (rateLimited(req, 'upload-anonim', 10, PENCERE_MS)) {
+    } else if (await rateLimitedDb(req, 'upload-anonim', 10, PENCERE_MS)) {
       return NextResponse.json({ error: 'Çok fazla yükleme. Lütfen biraz sonra tekrar deneyin.' }, { status: 429 });
     }
 

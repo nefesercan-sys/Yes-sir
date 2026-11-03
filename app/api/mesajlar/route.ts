@@ -6,6 +6,7 @@ import { authOptions } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 import { isEmail, rateLimited } from "@/lib/api-guard";
+import { birincilYonetici } from "@/lib/admin-list";
 import { idGecerli } from "@/lib/validate";
 
 export async function GET(req: NextRequest) {
@@ -73,7 +74,7 @@ export async function GET(req: NextRequest) {
         const ilan = await db.collection("ilanlar").findOne({ _id: new ObjectId(yeniSohbet) });
         if (ilan) {
             // Eğer ilan yapay zeka ilanıysa (sahibi yoksa), mesajları doğrudan Admine yönlendir!
-            const aliciEmail = ilan.sahibi?.email || "nefesercan@gmail.com"; 
+            const aliciEmail = ilan.sahibi?.email || birincilYonetici(); 
             const key = `${aliciEmail}_${yeniSohbet}`;
             
             if (!map.has(key)) {
