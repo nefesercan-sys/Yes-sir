@@ -7,7 +7,7 @@
 // swaphubs tonu: bilgi/rehber. terzihizmeti.com.tr'deki cümleler kopyalanmaz.
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
-import { DURATION, SERVICE_RULE, PRICE_FROM, PHONE_DISPLAY, isFreeService } from '@/lib/business';
+import { DURATION, SERVICE_RULE, PRICE_FROM, PRICE_BY_MODEL, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 
 export type BLang = 'tr' | 'en' | 'ru' | 'de';
@@ -189,7 +189,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
         [`${loc} paça kısaltma kaç TL?`, `Paça kısaltma ₺${P.paca}'den, fermuar değişimi ₺${P.fermuar}'den, bel daraltma ₺${P.bel}'den başlar; kesin fiyat fotoğrafa göre söylenir.`],
         [`Acil terzi lazım, ${n} için 1–2 saatte yetişir mi?`, `${D.urgent}. Acil olduğunu yazarken belirtin; işin uygunluğu fotoğrafa bakılarak hemen söylenir.`],
         [`${loc} gelinlik veya abiye tadilatı yapılıyor mu?`, `Evet. Gelinlik tadilatı ₺${P.gelinlik}'den, abiye tadilatı ₺${P.abiye}'den başlar; işlem provayla planlanır. ${D.normal}.`],
-        [`${loc} ölçüye göre elbise diktirebilir miyim?`, `Evet. Model ve kumaş birlikte seçilir; elbise dikimi ₺${P.elbiseDikim}'den başlar. ${D.custom}.`],
+        [`${loc} ölçüye göre elbise diktirebilir miyim?`, `Evet. Model ve kumaş birlikte seçilir; elbise dikiminde fiyat ${PRICE_BY_MODEL.tr} belirlenir. ${D.custom}.`],
         [`Fiyatı nasıl öğrenirim?`, `Kıyafetin tamamını ve sorunlu yeri gösteren iki fotoğrafı ${PHONE_DISPLAY} numarasına WhatsApp'tan gönderin; fiyat ve teslim günü yanıtla birlikte gelir.`],
         [`Hafta sonu açık mısınız?`, `Evet, hafta sonu dahil her gün 08:00–23:00 arası hizmet verilir.`],
         procQ(c.focus[0] ?? 'paca'),

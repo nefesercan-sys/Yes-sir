@@ -59,13 +59,37 @@ export const PRICE_FROM = {
   paca: 200,
   bel: 200,
   fermuar: 300,
-  elbiseDikim: 800,
-  gelinlik: 800,
-  abiye: 800,
-  etekPantolonDikim: 1000,
-  cocukDikim: 1000,
-  damatlik: 20000,
+  deri: 400,
+  gelinlik: 800, // yalnız TADİLAT
+  abiye: 800, // yalnız TADİLAT
 } as const;
+
+/** DİKİM işlerinde (elbise, abiye, etek, pantolon, çocuk, damatlık/takım, özel dikim, yelek/tulum/bluz/eşofman) sabit fiyat YAZILMAZ (sahip kararı, Kasım 2026). */
+export const PRICE_BY_MODEL: Record<DLang, string> = {
+  tr: 'fotoğrafa ve istediğiniz modele göre',
+  en: 'by photo and the model you want',
+  ru: 'по фото и желаемой модели',
+  de: 'nach Foto und gewünschtem Modell',
+  es: 'según la foto y el modelo que desee',
+  fr: 'selon la photo et le modèle souhaité',
+  pl: 'według zdjęcia i wybranego modelu',
+  uk: 'за фото та бажаною моделлю',
+  nl: 'op basis van foto en gewenst model',
+  ar: 'حسب الصورة والموديل الذي تريده',
+};
+/** Dikim fiyatı cümlesi: "Fiyat fotoğrafa ve istediğiniz modele göre belirlenir." (kısa, 10 dil) */
+export const SEW_PRICE_LINE: Record<DLang, string> = {
+  tr: 'Dikimde fiyat fotoğrafa ve istediğiniz modele göre belirlenir.',
+  en: 'For sewing, the price is set by photo and the model you want.',
+  ru: 'Цена пошива определяется по фото и желаемой модели.',
+  de: 'Beim Nähen richtet sich der Preis nach Foto und gewünschtem Modell.',
+  es: 'En la confección, el precio se fija según la foto y el modelo que desee.',
+  fr: 'Pour la couture, le prix est fixé selon la photo et le modèle souhaité.',
+  pl: 'Przy szyciu cena zależy od zdjęcia i wybranego modelu.',
+  uk: 'Ціна пошиття визначається за фото та бажаною моделлю.',
+  nl: 'Bij het maken van kleding wordt de prijs bepaald op basis van foto en gewenst model.',
+  ar: 'في الخياطة يُحدَّد السعر حسب الصورة والموديل الذي تريده.',
+};
 
 /** Yabancı dil sayfalarında fiyat EURO; € fiyatlar sahibin belirlediği turist başlangıç fiyatlarıdır, gerçek kurla çevrilmez (sahip kararı, Kasım 2026; terzihizmeti.com.tr lib/facts.ts ile aynı). Gelinlik DİKİMİ yapılmaz (yalnız tadilat). */
 export const TRY_PER_EUR = 20;
@@ -122,32 +146,32 @@ export const DURATION: Record<DLang, DurationCopy> = {
   },
   es: {
     urgent: 'Arreglos urgentes listos en 1–2 horas', normal: 'Arreglos normales listos el mismo día', custom: 'Confección a medida: el plazo depende del modelo y la cantidad',
-    urgentShort: 'Urgente: 1–2 horas', normalShort: 'Al día siguiente', customShort: 'Plazo según modelo',
+    urgentShort: 'Urgente: 1–2 horas', normalShort: 'El mismo día', customShort: 'Plazo según modelo',
     repairLine: 'Listo el mismo día; urgencias en 1–2 horas',
     all: 'Los arreglos normales están listos el mismo día y los urgentes en 1–2 horas; en la confección a medida el plazo depende del modelo y la cantidad.',
   },
   fr: {
     urgent: 'Retouches urgentes prêtes en 1 à 2 heures', normal: 'Retouches normales prêtes le jour même', custom: 'Sur mesure : délai selon le modèle et la quantité',
-    urgentShort: 'Urgent : 1 à 2 h', normalShort: 'Le lendemain', customShort: 'Délai selon modèle',
+    urgentShort: 'Urgent : 1 à 2 h', normalShort: 'Le jour même', customShort: 'Délai selon modèle',
     repairLine: 'Prêt le jour même ; urgences en 1 à 2 heures',
     all: 'Les retouches normales sont prêtes le jour même et les urgences en 1 à 2 heures ; pour le sur-mesure, le délai dépend du modèle et de la quantité.',
   },
   pl: {
     urgent: 'Pilne naprawy i przeróbki gotowe w 1–2 godziny', normal: 'Zwykłe naprawy i przeróbki gotowe tego samego dnia', custom: 'Szycie na miarę: termin zależy od modelu i liczby sztuk',
-    urgentShort: 'Pilne: 1–2 godziny', normalShort: 'Następnego dnia', customShort: 'Termin wg modelu',
+    urgentShort: 'Pilne: 1–2 godziny', normalShort: 'Tego samego dnia', customShort: 'Termin wg modelu',
     repairLine: 'Gotowe tego samego dnia; pilne w 1–2 godziny',
     all: 'Zwykłe naprawy i przeróbki są gotowe tego samego dnia, pilne w 1–2 godziny; przy szyciu na miarę termin zależy od modelu i liczby sztuk.',
   },
   uk: {
     urgent: 'Термінові ремонт і підгонка — за 1–2 години', normal: 'Звичайні ремонт і підгонка — готово того ж дня', custom: 'Індивідуальне пошиття: термін залежить від моделі та кількості',
-    urgentShort: 'Терміново — 1–2 год', normalShort: 'Наступного дня', customShort: 'Термін за моделлю',
+    urgentShort: 'Терміново — 1–2 год', normalShort: 'Того ж дня', customShort: 'Термін за моделлю',
     repairLine: 'Готово того ж дня; терміново — за 1–2 години',
     all: 'Звичайні ремонт і підгонка готові того ж дня, термінові роботи — за 1–2 години; термін індивідуального пошиття залежить від моделі та кількості.',
   },
   nl: {
     urgent: 'Spoedreparaties en -vermaak klaar in 1–2 uur', normal: 'Gewone reparaties en vermaak dezelfde dag klaar', custom: 'Maatwerk: doorlooptijd hangt af van model en aantal',
-    urgentShort: 'Spoed: 1–2 uur', normalShort: 'Volgende dag', customShort: 'Tijd per model',
-    repairLine: 'De volgende dag klaar; spoed in 1–2 uur',
+    urgentShort: 'Spoed: 1–2 uur', normalShort: 'Dezelfde dag', customShort: 'Tijd per model',
+    repairLine: 'Dezelfde dag klaar; spoed in 1–2 uur',
     all: 'Gewone reparaties en vermaak zijn dezelfde dag klaar, spoedklussen in 1–2 uur; bij maatwerk hangt de doorlooptijd af van model en aantal.',
   },
   ar: {

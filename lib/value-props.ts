@@ -21,9 +21,9 @@ export interface ValueProp {
 
 export const HOURS_LINE: Record<Lang, string> = {
   tr: "Her gün 08:00–23:00 · Eve ve otele ücretsiz servis",
-  en: 'Every day 08:00–23:00 · Free service to hotels · free home pick-up in Konyaaltı and nearby',
-  de: 'Täglich 08:00–23:00 · Hotelservice kostenlos · Hausabholung in Konyaaltı und Umgebung kostenlos',
-  ru: 'Ежедневно 08:00–23:00 · Выезд в отели бесплатно · на дом бесплатно в Коньяалты и рядом',
+  en: 'Every day 08:00–23:00 · Free service to homes and hotels',
+  de: 'Täglich 08:00–23:00 · Kostenloser Service zu Hause und im Hotel',
+  ru: 'Ежедневно 08:00–23:00 · Бесплатный выезд на дом и в отель',
 };
 
 export const CALL_LABEL: Record<Lang, string> = {
@@ -134,7 +134,7 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
       slogan: 'Вызов портного в отель — мерки на месте, доставка к вам',
       badge: 'Для отелей',
       actionText: 'Вызвать портного в отель',
-      waTemplate: 'Здравствуйте, хочу вызвать портного в мой отель в Анталии.',
+      waTemplate: 'Здравствуйте, хочу вызвать портного в мой отель в Анталье.',
     },
     {
       id: 'door-pickup',

@@ -12,7 +12,8 @@ import type { Metadata } from 'next'
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import AtelieClient from './client'
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import { FAQ_ITEMS } from './faq-data';
 
 const SITE_URL = 'https://swaphubs.com'
 const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
@@ -35,17 +36,17 @@ const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: { absolute: 'Ателье в Анталии (Коньяалты): ремонт и пошив | Terzi Can' },
+  title: { absolute: 'Ателье в Анталье (Коньяалты): ремонт и пошив | Terzi Can' },
 
   description:
-    'Ателье Terzi Can в Анталии, Коньяалты: ремонт и подгонка одежды, замена молнии, пошив на заказ, кожа. Говорим по-русски. ☎ ' +
+    'Ателье Terzi Can в Анталье, Коньяалты: ремонт и подгонка одежды, замена молнии, пошив на заказ, кожа. Говорим по-русски. ☎ ' +
     PHONE,
 
   keywords: [
-    'ателье Анталия', 'портной Анталия', 'ателье Коньяалты', 'ремонт одежды Анталия',
-    'выездной портной Анталия', 'швея Анталия', 'подгонка одежды Анталия',
-    'замена молнии Анталия', 'укоротить брюки Анталия', 'пошив платья Анталия',
-    'ремонт кожаной куртки Анталия', 'срочный ремонт одежды Анталия',
+    'ателье Анталья', 'портной Анталья', 'ателье Коньяалты', 'ремонт одежды Анталья',
+    'выездной портной Анталья', 'швея Анталья', 'подгонка одежды Анталья',
+    'замена молнии Анталья', 'укоротить брюки Анталья', 'пошив платья Анталья',
+    'ремонт кожаной куртки Анталья', 'срочный ремонт одежды Анталья',
     'русское ателье Турция',
   ],
 
@@ -64,16 +65,16 @@ export const metadata: Metadata = {
     type: 'website',
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
-    title: 'Ателье в Анталии (Коньяалты) — Ремонт и Пошив Одежды | Terzi Can',
+    title: 'Ателье в Анталье (Коньяалты) — Ремонт и Пошив Одежды | Terzi Can',
     description:
-      'Ремонт, подгонка, пошив одежды и работа с кожей в Анталии. Срочный ремонт, выездной портной. Говорим по-русски.',
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can — ателье в Анталии, Коньяалты' }],
+      'Ремонт, подгонка, пошив одежды и работа с кожей в Анталье. Срочный ремонт, выездной портной. Говорим по-русски.',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can — ателье в Анталье, Коньяалты' }],
     locale: 'ru_RU',
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Ателье в Анталии (Коньяалты) — Terzi Can',
+    title: 'Ателье в Анталье (Коньяалты) — Terzi Can',
     description: 'Ремонт и пошив одежды. Говорим по-русски. ☎ ' + PHONE,
     images: [OG_IMAGE],
   },
@@ -97,7 +98,7 @@ const jsonLd = {
       name: 'Terzi Can',
       alternateName: ['Ателье Terzi Can', 'Портной Кан Анталья', 'Tailor Can Antalya'],
       description:
-        'Профессиональное ателье в Анталии, район Коньяалты (Хурма). Ремонт и пошив одежды, подгонка по фигуре, замена молнии и фурнитуры, работа с кожей и плотными тканями, срочный ремонт.',
+        'Профессиональное ателье в Анталье, район Коньяалты (Хурма). Ремонт и пошив одежды, подгонка по фигуре, замена молнии и фурнитуры, работа с кожей и плотными тканями, срочный ремонт.',
       url: PAGE_URL,
       telephone: PHONE_E164,
       priceRange: '$$',
@@ -138,7 +139,6 @@ const jsonLd = {
         name: 'Услуги ателье',
         itemListElement: [
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 10, priceCurrency: 'EUR', minPrice: 10 } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Пошив платья на заказ' }, priceSpecification: { '@type': 'PriceSpecification', price: 40, priceCurrency: 'EUR', minPrice: 40 } },
         ],
       },
       // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
@@ -150,9 +150,9 @@ const jsonLd = {
     {
       '@type': 'WebPage',
       '@id': `${PAGE_URL}#webpage`,
-      name: 'Ателье в Анталии (Коньяалты) — Ремонт и Пошив Одежды',
+      name: 'Ателье в Анталье (Коньяалты) — Ремонт и Пошив Одежды',
       url: PAGE_URL,
-      description: 'Ремонт, подгонка и пошив одежды в Анталии. Работа с кожей. Говорим по-русски.',
+      description: 'Ремонт, подгонка и пошив одежды в Анталье. Работа с кожей. Говорим по-русски.',
       inLanguage: 'ru',
       dateModified: TODAY,
       about: { '@id': `${PAGE_URL}#business` },
@@ -163,59 +163,10 @@ const jsonLd = {
       '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Ателье в Анталии', item: PAGE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Ателье в Анталье', item: PAGE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      '@id': `${PAGE_URL}#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Где находится ателье?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Ателье Terzi Can находится в районе Коньяалты, квартал Хурма. Нажмите кнопку «Найти ателье на карте», чтобы построить точный маршрут.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Как быстро выполняется ремонт одежды?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Простые операции — укорачивание брюк, замена молнии — обычно занимают от нескольких часов до одного дня. Срочный ремонт возможен день в день.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Говорите ли вы по-русски?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, вы можете оформить заказ и обсудить детали на русском языке через WhatsApp. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Работаете ли вы с кожаными изделиями?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Да, у нас есть оборудование для работы с кожаными куртками, дублёнками, пальто и плотным деномом.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Шьёте ли вы платья на заказ?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Да, пошив по индивидуальным меркам — от 800 лир, срок изготовления 3–5 рабочих дней.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Моё платье порвалось, можно починить срочно?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, срочный ремонт разрывов и швов занимает 1–2 часа, обычный — готов в тот же день. Отправьте фото в WhatsApp для быстрой оценки. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Работаете ли вы вечером или в выходные?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, мы работаем ежедневно с 08:00 до 23:00, включая вечерние часы и выходные. Напишите нам в WhatsApp, чтобы записаться. WhatsApp: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Шьёте ли вы из натуральных тканей — хлопка или льна?',
-          acceptedAnswer: { '@type': 'Answer', text: `Да, предлагаем пошив одежды на заказ из 100% хлопка и льна. WhatsApp: ${PHONE}` },
-        },
-        { '@type': 'Question', name: "Где в Анталье подшить брюки рядом со мной?", acceptedAnswer: { '@type': 'Answer', text: `В ателье Terzi Can в Хурме (Коньяалты), открыто ежедневно с 08:00 до 23:00. Подшив брюк и джинсов готов в тот же день, срочно — за 1–2 часа. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: "Сколько стоит подшив и замена молнии в Анталье?", acceptedAnswer: { '@type': 'Answer', text: `Цена зависит от вещи и работы: подшив, ушивание по талии, замена молнии, подгонка вечерних и свадебных платьев. Точную цену назовём по фото в WhatsApp.` } },
-        { '@type': 'Question', name: "Вы переделываете куртки, пальто, рубашки, юбки и шорты?", acceptedAnswer: { '@type': 'Answer', text: `Да. Переделываем и ремонтируем куртки, пальто, рубашки, юбки, шорты, платья и брюки, мужские и женские. Пришлите фото вещи в WhatsApp — назовём цену и срок.` } },
-        { '@type': 'Question', name: "Я живу в отеле всего несколько дней. Успеете?", acceptedAnswer: { '@type': 'Answer', text: `Да. Подшив и ремонт готовы в тот же день, срочно — за 1–2 часа; забор из отеля и доставка обратно бесплатны во всех отельных районах.` } },
-      ],
-    },
+    { ...faqPageSchema(FAQ_ITEMS.map((f) => [f.q, f.a] as const)), '@id': `${PAGE_URL}#faq` },
   ],
 }
 

@@ -41,7 +41,7 @@ const SERVICES = [
     img: IMGS.bayan,
     title:'Womenswear Tailoring', sub:'Dresses · Blouses · Skirts · Jumpsuits · Office Wear · Evening Gowns',
     desc:'From everyday dresses to evening gowns, office wear to special-occasion pieces — clothing tailored exactly to your measurements.',
-    feats:['Dress','Blouse','Skirt','Jumpsuit','Office Wear','Evening Gown','Wedding Dress'],
+    feats:['Dress','Blouse','Skirt','Jumpsuit','Office Wear','Evening Gown'],
     price:'by photo', note:"Price quoted from photo and measurements", time:'By design & quantity',
     waMsg:'Hello, I would like information about womenswear tailoring.' },
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
@@ -104,7 +104,7 @@ const PRICE_TABLE = [
 ];
 
 const FAQS: [string, string][] = [
-  ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you within 30 minutes."],
+  ["How much does a men\'s suit cost in Antalya?", "The price depends on fabric and style. Send a photo and your measurements via WhatsApp and we\'ll quote you during opening hours (daily 08:00–23:00)."],
   ["How does the online tailor service work?", "Send a reference photo and your measurements via WhatsApp. Confirm the price. Once sewn, we ship the garment to your address."],
   ["Do you come to my hotel for fittings and alterations?", "Yes! Pickup and delivery to hotels in Antalya are free in every hotel area we cover. We agree the delivery time with you on WhatsApp."],
   ["What\'s the minimum order quantity for mass production?", "There is no minimum order quantity. Samples, small runs and large orders are quoted per project."],

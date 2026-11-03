@@ -41,7 +41,7 @@ const SERVICES = [
     img: IMGS.bayan,
     title:'Damenschneiderei', sub:'Kleider · Blusen · Röcke · Overalls · Business-Kleidung · Abendkleider',
     desc:'Vom Alltagskleid bis zum Abendkleid, von Business-Kleidung bis zum Stück für besondere Anlässe — exakt nach Ihren Maßen gefertigt.',
-    feats:['Kleid','Bluse','Rock','Overall','Business-Kleidung','Abendkleid','Brautkleid'],
+    feats:['Kleid','Bluse','Rock','Overall','Business-Kleidung','Abendkleid'],
     price:'per Foto', note:"Preis nach Foto und Maßen", time:'Je nach Modell & Menge',
     waMsg:'Hallo, ich hätte gerne Informationen zur Damenschneiderei.' },
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
@@ -102,7 +102,7 @@ const PRICE_TABLE = [
 ];
 
 const FAQS: [string, string][] = [
-  ["Was kostet ein Herrenanzug in Antalya?", "Der Preis hängt von Stoff und Modell ab. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis innerhalb von 30 Minuten."],
+  ["Was kostet ein Herrenanzug in Antalya?", "Der Preis hängt von Stoff und Modell ab. Senden Sie ein Foto und Ihre Maße per WhatsApp, wir nennen Ihnen den Preis während der Öffnungszeiten (täglich 08:00–23:00)."],
   ["Wie funktioniert der Online-Schneiderservice?", "Senden Sie ein Referenzfoto und Ihre Maße per WhatsApp. Bestätigen Sie den Preis. Nach der Fertigung versenden wir das Kleidungsstück an Ihre Adresse."],
   ["Kommen Sie für Anproben und Änderungen zu meinem Hotel?", "Ja! Abholung und Lieferung zu Hotels in Antalya sind in allen von uns bedienten Hotelgebieten kostenlos. Den Liefertermin klären wir per WhatsApp."],
   ["Wie hoch ist die Mindestbestellmenge für die Serienproduktion?", "Die Menge richtet sich nach dem Projekt. Muster, Prototypen, Kleinserien und Großaufträge werden projektbezogen kalkuliert."],

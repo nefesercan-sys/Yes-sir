@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
       `Ателье ${r.name}`, 
       `выездной портной ${r.name}`, 
       `ремонт одежды отель ${r.name}`, 
-      'портной Анталия', 
-      'русскоговорящий портной Анталия'
+      'портной Анталья', 
+      'русскоговорящий портной Анталья'
     ],
     // terzihizmeti.com.tr'de birebir aynı bölge sayfası → cross-domain canonical (hreflang kümesi yok)
     alternates: {

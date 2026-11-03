@@ -3,7 +3,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/uniforma-uretimi-antalya';
 const PARENT   = 'https://swaphubs.com/terzi';
@@ -12,6 +12,22 @@ const PHONE    = '+90 531 898 64 18';
 const PHONE_E  = '+905318986418';
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`;
 const TODAY    = new Date().toISOString().split('T')[0];
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
+  ['Minimum kaç adet üniforma siparişi verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
+  ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış fiyatı adede ve logoya göre netleşir. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
+  ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara ve Side'ye teslim yapılmaktadır. WhatsApp: ${PHONE}`],
+  ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. WhatsApp: ${PHONE}`],
+  ['Teslimat süresi ne kadar?', 'Süre model ve adede göre belirlenir; numune onayından sonra proje planı birlikte yapılır.'],
+  ['Üniforma üretiminde minimum kaç adet sipariş verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.'],
+  ['Aşçı ve garson üniforması dikimi Antalya?', `Evet! Aşçı, şef, garson, barista, catering personeli üniforması üretiyoruz. Nakış dahil. WhatsApp: ${PHONE}`],
+  ['Okul üniforması seri üretimi yapılıyor mu?', `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}`],
+  ['Üniformaya logo nakışı veya baskı yapılıyor mu?', `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış fiyatı adede ve logoya göre netleşir. WhatsApp: ${PHONE}`],
+  ['Hotel uniform production Antalya — do you speak English?', `Yes! Tailor Can produces hotel staff uniforms in Antalya with English service. We work with Belek and Kemer hotels. WhatsApp: ${PHONE}`],
+  ['Производство форменной одежды в Анталье?', `Да! Портной Кан производит форму для отелей, ресторанов и медицины в Анталье. Говорим по-русски. WhatsApp: ${PHONE}`],
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -50,7 +66,7 @@ const jsonLd = {
           { '@type': 'Offer', name: 'Sağlık Sektörü Üniforması', description: 'Doktor önlüğü, hemşire, eczacı üniformaları', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Güvenlik & Hizmet Üniforması', description: 'Güvenlik görevlisi, AVM personeli, lojistik, fabrika iş elbisesi', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
           { '@type': 'Offer', name: 'Spa & Wellness Üniforması', description: 'Masaj terapisti, spa resepsiyon, hamam personeli üniformaları', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
-          { '@type': 'Offer', name: 'Nakış & Logo Baskı', price: '100', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+          { '@type': 'Offer', name: 'Nakış & Logo Baskı', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
         ],
       },
     },
@@ -73,18 +89,7 @@ const jsonLd = {
         { '@type': 'ListItem', position: 2, name: 'Üniforma Üretimi Antalya', item: SITE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Otel üniforması üretimi Antalya fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Otel üniforma üretimi adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Üniforma üretiminde minimum kaç adet sipariş verilebilir?', acceptedAnswer: { '@type': 'Answer', text: 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir. Numune dikimi tek adet kabul edilir.' } },
-        { '@type': 'Question', name: 'Aşçı ve garson üniforması dikimi Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Aşçı, şef, garson, barista, catering personeli üniforması üretiyoruz. Nakış dahil. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Okul üniforması seri üretimi yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Üniformaya logo nakışı veya baskı yapılıyor mu?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış fiyatı adede ve logoya göre netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Hotel uniform production Antalya — do you speak English?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can produces hotel staff uniforms in Antalya with English service. We work with Belek and Kemer hotels. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Производство форменной одежды в Анталье?', acceptedAnswer: { '@type': 'Answer', text: `Да! Портной Кан производит форму для отелей, ресторанов и медицины в Анталье. Говорим по-русски. WhatsApp: ${PHONE}` } },
-      ],
-    },
+    faqPageSchema(FAQ),
   ],
 };
 
@@ -256,14 +261,7 @@ export default function UniformaUretimiPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Üniforma Üretimi — Sık Sorulan Sorular</h2>
-            {[
-              ['Otel üniforması üretimi Antalya fiyatı 2026?', `Adet, model ve kumaşa göre fiyatlandırılır. Tasarım danışmanlığı ücretsiz. Teklif için WhatsApp: ${PHONE}`],
-              ['Minimum kaç adet üniforma siparişi verilebilir?', 'Adet projeye göre belirlenir; az adetli ve yüksek adetli siparişler proje bazında teklif edilir.'],
-              ['Üniformaya logo nakışı yapılıyor mu?', `Evet! Bilgisayarlı nakış fiyatı adede ve logoya göre netleşir. DTF ve dijital baskı da mevcuttur. WhatsApp: ${PHONE}`],
-              ['Belek otellerine teslimat yapılıyor mu?', `Evet! Belek, Kemer, Lara ve Side'ye teslim yapılmaktadır. WhatsApp: ${PHONE}`],
-              ['Hotel uniform Antalya — English service available?', `Yes! Tailor Can provides hotel uniform production in Antalya with English service. WhatsApp: ${PHONE}`],
-              ['Teslimat süresi ne kadar?', 'Numune onayından sonra 10 adetlik sipariş 7–10 iş günü, büyük siparişler 15–30 iş günü sürer.'],
-            ].map(([q, a], i) => (
+            {FAQ.map(([q, a], i) => (
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.9rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
@@ -278,7 +276,7 @@ export default function UniformaUretimiPage() {
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Üniforma Teklifi Alın</h2>
           <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
-            Sektör ve adet bilgisini gönderin — 1–2 gün içinde tasarım + fiyat teklifi
+            Sektör ve adet bilgisini gönderin — tasarım + fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, üniforma üretimi için teklif almak istiyorum. Sektör: , Adet: ')} target="_blank" rel="noopener noreferrer"

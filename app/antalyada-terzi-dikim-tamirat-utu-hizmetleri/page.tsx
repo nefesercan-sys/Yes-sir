@@ -5,7 +5,7 @@ import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import QuickActionBanner from '@/components/QuickActionBanner';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
@@ -18,6 +18,54 @@ const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
 const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Konyaaltı (Google Business Profile)
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir (jsonLd dosyanın başında olduğu için burada tanımlı).
+const faqs = [
+  {
+    q: "Antalya'da otellere acil terzi hizmeti veren yer neresi?",
+    a: 'Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; eve ve otele alım-teslim ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler aynı gün, acil işler 1–2 saatte askılı olarak teslim edilir.',
+  },
+  {
+    q: "Antalya'da pazar günü açık terzi veya acil tamir yeri var mı?",
+    a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımızdan her gün 08:00–23:00 arasında işinizin durumunu sorabilirsiniz.',
+  },
+  {
+    q: 'Where can I find an English or Russian speaking tailor in Antalya?',
+    a: 'Terzi Can provides tailoring, suit alterations and dress repair with English, Russian and German speaking customer support in Antalya (Konyaaltı, Lara, Muratpaşa, Belek).',
+  },
+  {
+    q: 'Deri ceket boyama ve yırtık deri mont tamiri yapıyor musunuz?',
+    a: "Evet, Antalya'daki endüstriyel atölyemizde hakiki deri, süet ve kürk montların parça yırtık tamiratı, fermuar değişimi ve profesyonel boyama işlemleri titizlikle yapılmaktadır.",
+  },
+  {
+    q: 'Antalya terzi fiyatları ne kadar?',
+    a: "Paça kısaltma ve bel daraltma ₺200'den, fermuar değişimi ₺300'den, deri işleri ₺400'den başlar. Özel dikimde (elbise, abiye, takım, çocuk kıyafeti) fiyat fotoğrafa ve istediğiniz modele göre belirlenir. Net fiyat için kıyafet fotoğrafını WhatsApp'tan gönderin.",
+  },
+  {
+    q: 'Kıyafetimi eve gelip almanız için ne yapmam gerekiyor?',
+    a: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Eve ve otele alım-teslim her bölgede ücretsizdir.',
+  },
+  {
+    q: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
+    a: "Gelinlik ve abiye tadilatı gibi hassas işlerde teslimden önce ölçü provası yapılır; gelinlik dikimi yapılmaz, yalnızca tadilat yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp'tan yazın; düzeltmeyi birlikte planlarız.",
+  },
+  {
+    q: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
+    a: 'Konyaaltı (Hurma, Liman, Uncalı, Sarısu), Muratpaşa (Şirinyalı, Fener, Meltem), Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz; alım-teslim ücretsizdir.',
+  },
+  {
+    q: 'Takım elbise paçasını ne kadar sürede kısaltıyorsunuz?',
+    a: 'Normal paça kısaltma aynı gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım ücretsizdir.',
+  },
+  {
+    q: 'Kumaşıma göre farklı bakım öneriyor musunuz?',
+    a: 'Evet, yün, keten, ipek ve sentetik karışım kumaşlar farklı ütü sıcaklığı ve dikim tekniği gerektirir. Atölyemizde her kumaş türüne uygun ekipman ve teknik kullanılır.',
+  },
+  {
+    q: 'Ödeme nasıl yapılıyor?',
+    a: 'Teslimat sırasında nakit veya kart ile ödeme yapılabilir; kurumsal ve otel siparişlerinde fatura karşılığı ödeme seçenekleri de sunulmaktadır.',
+  },
+];
 
 // ─── ULTIMATE LOCAL SEO & AI GROUNDING GRAPH STRUCTURE ──────────────────────
 const jsonLd = {
@@ -128,17 +176,6 @@ const jsonLd = {
               name: 'Özel Dikim (Bespoke)',
               description: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
               areaServed: 'Antalya',
-              offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 800, minPrice: 800, priceCurrency: 'TRY' } },
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Otel Servisi',
-              description: 'Kuryeli adresten alım, acil elbise onarımı ve tadilat',
-              areaServed: 'Lara, Kundu, Belek, Kemer',
-              offers: { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', price: 60, minPrice: 60, priceCurrency: 'TRY' } },
             },
           },
           {
@@ -159,12 +196,11 @@ const jsonLd = {
       '@id': `${PAGE_URL}#howto`,
       name: 'Antalya\'da Kuryeli Terzi Hizmetinden Nasıl Yararlanılır',
       description: 'Terzi Can kuryeli terzi hizmetinden adım adım nasıl faydalanacağınızı gösterir.',
-      totalTime: 'PT15M',
       step: [
         {
           '@type': 'HowToStep',
           name: 'WhatsApp üzerinden iletişime geçin',
-          text: 'Kıyafetinizin fotoğrafını ve talebinizi WhatsApp hattına gönderin, 15 dakika içinde fiyat teklifi alın.',
+          text: 'Kıyafetinizin fotoğrafını ve talebinizi WhatsApp hattına gönderin; çalışma saatlerinde (08:00–23:00) yanıt veriyoruz.',
         },
         {
           '@type': 'HowToStep',
@@ -188,84 +224,7 @@ const jsonLd = {
         },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      '@id': `${PAGE_URL}#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: "Antalya'da otellere acil terzi hizmeti veren yer neresi?",
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: "Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; otellere servis ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler aynı gün, acil işler 1–2 saatte askılı olarak teslim edilir."
-          }
-        },
-        {
-          '@type': 'Question',
-          name: "Where can I find an English or Russian speaking tailor in Antalya?",
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: "Terzi Can provides professional tailoring, suit alterations, and dress repair services with English, Russian, and German speaking customer support in Antalya (Konyaalti, Lara, Muratpasa, Belek)."
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Antalya terzi fiyatları ne kadar?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Fiyatlar işlemin türüne göre değişir: basit paça/fermuar tamiratı en uygun kategoridedir, özel dikim ve abiye tadilatı kumaş ve işçiliğe göre fiyatlandırılır. Net fiyat için kıyafet fotoğrafı WhatsApp üzerinden gönderilerek anında teklif alınabilir.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Kıyafetimi eve gelip almanız için ne yapmam gerekiyor?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Konyaaltı, Muratpaşa, Lara ve Kepez bölgelerinde adresten alım yapılır; otellere servis ücretsizdir.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp\'tan yazın; düzeltmeyi birlikte planlarız.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Konyaaltı (Hurma, Liman, Uncalı, Şirinyalı), Muratpaşa, Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Takım elbise paçasını ne kadar sürede kısaltıyorsunuz?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Normal paça kısaltma aynı gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım ücretsizdir.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Kumaşıma göre farklı bakım öneriyor musunuz?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Evet, yün, keten, ipek ve sentetik karışım kumaşlar farklı ütü sıcaklığı ve dikim tekniği gerektirir. Atölyemizde her kumaş türüne uygun ekipman ve teknik kullanılır.'
-          }
-        },
-        {
-          '@type': 'Question',
-          name: 'Ödeme nasıl yapılıyor?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Teslimat sırasında nakit veya kart ile ödeme yapılabilir; kurumsal ve otel siparişlerinde fatura karşılığı ödeme seçenekleri de sunulmaktadır.'
-          }
-        }
-      ]
-    }
+    { ...faqPageSchema(faqs.map((f) => [f.q, f.a] as const)), '@id': `${PAGE_URL}#faq` },
   ]
 };
 
@@ -356,7 +315,7 @@ const serviceRows = [
     detail: 'Erkek takım elbise, smokin, blazer ceket, kadın abiye ve gece elbisesi tasarımı',
     area: 'Konyaaltı ve çevresi (Atölye prova esaslı)',
     time: 'Modele ve adede göre',
-    price: '800 TL\'den',
+    price: 'Fotoğrafa ve istediğiniz modele göre',
   },
   {
     title: 'Otel Servisi',
@@ -375,41 +334,15 @@ const serviceRows = [
 ];
 
 const trustPoints = [
-  { icon: ICONS.clock, label: 'Ortalama yanıt', value: 'WhatsApp\'ta 15 dk' },
+  { icon: ICONS.clock, label: 'WhatsApp yanıtı', value: 'Çalışma saatlerinde (08:00–23:00)' },
   { icon: ICONS.pin, label: 'Hizmet bölgesi', value: '7 ilçe, kuryeli alım' },
   { icon: ICONS.globe, label: 'Dil desteği', value: 'TR · EN · RU · DE' },
   { icon: ICONS.check, label: 'Çalışma saatleri', value: 'Her gün 08:00–23:00' },
 ];
 
-const faqs = [
-  {
-    q: "Antalya'da pazar günü açık terzi veya acil tamir yeri var mı?",
-    a: 'Terzi Can online destek ve kuryeli alım ekibi, otel ve acil durum misafirleri için hafta sonu ve pazar günleri de dahil olmak üzere randevulu sistemle hizmet sunmaktadır. WhatsApp hattımızdan her gün 08:00–23:00 arasında işinizin durumunu sorabilirsiniz.',
-  },
-  {
-    q: 'Deri ceket boyama ve yırtık deri mont tamiri yapıyor musunuz?',
-    a: "Evet, Antalya'daki endüstriyel atölyemizde hakiki deri, süet ve kürk montların parça yırtık tamiratı, fermuar değişimi ve profesyonel boyama işlemleri titizlikle yapılmaktadır.",
-  },
-  {
-    q: 'Antalya terzi fiyatları ne kadar?',
-    a: 'Fiyatlar işlemin türüne göre değişir: basit paça/fermuar tamiratı en uygun kategoridedir, özel dikim ve abiye tadilatı kumaş ve işçiliğe göre fiyatlandırılır. Net fiyat için kıyafet fotoğrafı WhatsApp üzerinden gönderilerek anında teklif alınabilir.',
-  },
-  {
-    q: 'Kıyafetimi eve gelip almanız için ne yapmam gerekiyor?',
-    a: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Konyaaltı, Muratpaşa, Lara ve Kepez bölgelerinde adresten alım yapılır; otellere servis ücretsizdir.',
-  },
-  {
-    q: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
-    a: 'Gelinlik ve abiye gibi hassas dikim gerektiren işlerde teslimden önce ölçü provası yapılır. Teslimden sonra bir uyumsuzluk fark ederseniz WhatsApp\'tan yazın; düzeltmeyi birlikte planlarız.',
-  },
-  {
-    q: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
-    a: 'Konyaaltı (Hurma, Liman, Uncalı, Şirinyalı), Muratpaşa, Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz.',
-  },
-];
 
 const processSteps = [
-  { n: '01', title: 'WhatsApp\'tan Yazın', text: 'Kıyafet fotoğrafınızı gönderin, 15 dakika içinde teklif alın.' },
+  { n: '01', title: 'WhatsApp\'tan Yazın', text: 'Kıyafet fotoğrafınızı gönderin; çalışma saatlerinde (08:00–23:00) yanıt veriyoruz.' },
   { n: '02', title: 'Adres Paylaşın', text: 'Konyaaltı, Lara, Muratpaşa veya Kepez\'de adresinizi belirtin.' },
   { n: '03', title: 'Kuryeli Alım', text: 'Kıyafetiniz evinizden veya otelinizden güvenle alınır.' },
   { n: '04', title: 'Atölyede İşlem', text: 'Tamirat veya dikim işlemi kalite kontrolüyle tamamlanır.' },
@@ -615,7 +548,6 @@ export default function GeminiOptimizedTailorPage() {
                       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
                     <div style="display:none;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:${BG_SOFT};padding:12px;text-align:center;position:absolute;inset:0;">
                       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${GREEN_DARK}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l4.5-6 3.5 4.5 2.5-3L20 16M4 6h16v12H4V6z" /></svg>
-                      <span style="font-size:11.5px;color:${SUB};line-height:1.4;">Fotoğraf yakında eklenecek</span>
                     </div>
                   `,
                 }}

@@ -1,5 +1,6 @@
 'use client';
 
+import { FAQS } from './faq-data';
 import React, { useState, useEffect, useCallback } from 'react';
 
 const WA_NUMBER = "905318986418";
@@ -171,7 +172,7 @@ const CATEGORIES = [
     tag: 'Hayat Boyu Anı',
     title: 'Gelinlik Tadilatı & Damatlık',
     subtitle: 'O Güne Layık Tek Parça — Sadece Sizin İçin',
-    desc: `Gelinlik dikimi yapmıyoruz; var olan gelinlik ve abiyede tadilat (₺800'den) ve damatlık dikimi (₺20.000'den) yapıyoruz. Fotoğrafı WhatsApp'tan paylaşın, süre ve fiyat işe göre netleşir.`,
+    desc: `Gelinlik dikimi yapmıyoruz; yalnızca var olan gelinlik ve abiyede TADİLAT (₺800'den) yapıyoruz. Damatlık dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir. Fotoğrafı WhatsApp'tan paylaşın.`,
     images: [IMG.gelin1, IMG.gelin2, IMG.gelin3],
     features: ['Gelinlik ve abiye tadilatı', 'Damatlık dikimi', 'Prova ve düzeltme'],
     waMsg: 'Merhaba, gelinlik/abiye tadilatı veya damatlık dikimi için randevu almak istiyorum.',
@@ -191,15 +192,6 @@ const CATEGORIES = [
   },
 ];
 
-const FAQS = [
-  { q: "Yurt dışından veya başka bir şehirden sipariş verebilir miyim?", a: "Evet. Ölçülerinizi online alıp kıyafeti Antalya'daki atölyemizde dikiyor, istediğiniz ülkeye veya şehre gönderiyoruz. Tüm süreç WhatsApp üzerinden yürütülür." },
-  { q: "Ölçülerimi nasıl alacağım, yardımcı olur musunuz?", a: "Evet. WhatsApp üzerinden ölçü alma konusunda sizi adım adım yönlendiriyoruz; bir mezura ve telefonunuz yeterli." },
-  { q: "Sipariş ne kadar sürede teslim edilir?", a: "Dikim süresi modele göre değişir; yaklaşık süreyi WhatsApp'ta söyleriz. Yurt dışı kargo genelde 1–3 hafta sürer." },
-  { q: "Kıyafet tam oturmadıysa ne olacak?", a: "Oturmayan ürünü değiştiriyor veya düzeltiyoruz. WhatsApp'tan bize yazın, işi birlikte planlarız." },
-  { q: "Kumaşı kim temin ediyor, kendi kumaşımı getirebilir miyim?", a: "Kumaşı biz temin edebiliriz; isterseniz kendi kumaşınızı da getirebilirsiniz." },
-  { q: "Ödemeyi nasıl yapıyorum?", a: "Ödemeyi havale ile alabiliyoruz. Fiyat ve ödeme detayları WhatsApp'ta netleştirilir." },
-  { q: "Hangi dillerde yazışabiliriz?", a: "WhatsApp'tan her dilde yazışabilirsiniz; her dilde cevap veriyoruz." },
-];
 
 const STATS = [
   { n: '2006', label: 'Yılından Beri' },
@@ -550,7 +542,7 @@ export default function OnlineTerziClient() {
               <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, padding: 0, listStyle: 'none' }}>
                 {[
                   { icon: '🎯', title: 'Ölçüye Göre Kalıp', desc: 'Kalıp, aldığımız ölçülere göre çıkarılır' },
-                  { icon: '⚡', title: 'Hızlı Teslimat', desc: 'Temel modeller 7–10 iş günü içinde hazır' },
+                  { icon: '⚡', title: 'Hızlı Teslimat', desc: 'Süre modele ve adede göre belirlenir' },
                   { icon: '🌿', title: 'Sürdürülebilir Moda', desc: 'Doğal ve nefes alan kumaşlar' },
                   { icon: '🌍', title: '4 Dil Desteği', desc: 'TR · EN · DE · RU dillerinde hizmet' },
                 ].map(w => (

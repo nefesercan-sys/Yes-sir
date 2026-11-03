@@ -171,8 +171,8 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
       {
         title: 'Услуги',
         links: [
-          { href: RU_BASE, label: 'Выездной портной Анталия' },
-          { href: '/ru/atelie-antalya', label: 'Ателье Анталия' },
+          { href: RU_BASE, label: 'Выездной портной Анталья' },
+          { href: '/ru/atelie-antalya', label: 'Ателье Анталья' },
           { href: '/ru/atelie-antalya-online', label: 'Ателье онлайн' },
           { href: '/terzi', label: 'Antalya Terzi (Türkçe)' },
         ].filter(not),
@@ -198,7 +198,7 @@ export function getBreadcrumb(pathname: string): Crumb[] | null {
   const regionPages: [RegExp, string, string, Lang][] = [
     [/^\/en\/hotel-tailor-antalya\/([a-z0-9-]+)$/, EN_BASE, 'Hotel Tailor Antalya', 'en'],
     [/^\/de\/schneider-service-hotel-antalya\/([a-z0-9-]+)$/, DE_BASE, 'Schneider Service Hotel Antalya', 'de'],
-    [/^\/ru\/vyezdnoy-portnoy-antalya\/([a-z0-9-]+)$/, RU_BASE, 'Выездной портной Анталия', 'ru'],
+    [/^\/ru\/vyezdnoy-portnoy-antalya\/([a-z0-9-]+)$/, RU_BASE, 'Выездной портной Анталья', 'ru'],
   ];
   for (const [re, base, hubName, lang] of regionPages) {
     m = p.match(re);

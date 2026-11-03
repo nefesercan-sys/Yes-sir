@@ -1,6 +1,7 @@
 // app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
+import FaqBlock from '@/components/FaqBlock';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -114,19 +115,18 @@ const jsonLd = {
         availability: 'https://schema.org/InStock',
       },
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Adrese gelen terzi servisi nasıl çalışır?', acceptedAnswer: { '@type': 'Answer', text: `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Tadilat aynı gün, acil işler 1–2 saatte tamamlanıp adresinize teslim edilir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Antalya fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Tailor in Antalya Konyaalti — English service?', acceptedAnswer: { '@type': 'Answer', text: `Yes! We offer English-speaking tailoring, alterations and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Портной в Анталье Коньяалты — есть ли услуга по-русски?', acceptedAnswer: { '@type': 'Answer', text: `Да! Говорим по-русски. Подгонка, пошив, ремонт, доставка в отель. WhatsApp: ${PHONE}` } },
-      ],
-    },
   ],
 }
+
+// SSS: görünür liste (FaqBlock) ve FAQPage şeması tek diziden beslenir; şema yalnızca FaqBlock tarafından basılır.
+const FAQ: [string, string][] = [
+  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}`],
+  ['Adrese gelen terzi servisi nasıl çalışır?', `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Tadilat aynı gün, acil işler 1–2 saatte tamamlanıp adresinize teslim edilir. WhatsApp: ${PHONE}`],
+  ['Antalya paça kısaltma fiyatı 2026?', `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}`],
+  ['Antalya fermuar değişimi fiyatı 2026?', `Fermuar değişimi ₺300'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}`],
+  ['Tailor in Antalya Konyaalti — English service?', `Yes! We offer English-speaking tailoring, alterations and hotel pickup in Konyaalti, Lara, and Belek. WhatsApp: ${PHONE}`],
+  ['Портной в Анталье Коньяалты — есть ли услуга по-русски?', `Да! Говорим по-русски. Подгонка, пошив, ремонт, доставка в отель. WhatsApp: ${PHONE}`],
+];
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -178,15 +178,15 @@ const FIYAT_LISTESI = [
   { hizmet: 'Fermuar Tamiri',            fiyat: '₺300',  sure: 'Aynı gün' },
   { hizmet: 'Ceket Tamiri',              fiyat: '₺200',  sure: 'Aynı gün'  },
   { hizmet: 'Mont Tamiri',               fiyat: '₺200',  sure: 'Aynı gün'  },
-  { hizmet: 'Abiye Tamiri',              fiyat: '₺800',  sure: 'Aynı gün' },
-  { hizmet: 'Elbise Dikimi',             fiyat: '₺800+', sure: 'Modele göre'  },
+  { hizmet: 'Abiye / Gelinlik Tadilatı',   fiyat: '₺800',  sure: 'Aynı gün' },
+  { hizmet: 'Elbise Dikimi',             fiyat: 'Fotoğrafa ve istediğiniz modele göre', sure: 'Modele göre'  },
 ]
 
 const DIKIMLER = [
-  { hizmet: 'Kadın Elbise / Tunik',   fiyat: '₺800+',   sure: 'Modele göre'   },
+  { hizmet: 'Kadın Elbise / Tunik',   fiyat: 'Fotoğrafa ve istediğiniz modele göre',   sure: 'Modele göre'   },
   { hizmet: 'Abiye / Gece Elbisesi',  fiyat: 'Fotoğrafa göre', sure: 'Modele ve adede göre'   },
   { hizmet: 'Pantolon / Etek',        fiyat: 'Fotoğrafa göre',   sure: 'Modele göre'   },
-  { hizmet: 'Üniforma (adet başına)', fiyat: 'Teklif',  sure: '7–14 gün'  },
+  { hizmet: 'Üniforma (adet başına)', fiyat: 'Teklif',  sure: 'Sipariş miktarına göre'  },
 ]
 
 // ─── Stil sabitleri ──────────────────────────────────────────────────────────
@@ -639,6 +639,7 @@ export default function AntalyaTerziPage() {
           </p>
         </footer>
 
+      <FaqBlock heading="Sık Sorulan Sorular" items={FAQ.map(([q, a]) => ({ q, a }))} />
       <ReviewsBlock lang="tr" />
     </main>
     </>

@@ -4,7 +4,8 @@ import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import { TERZI_FAQ } from './faq-data';
 
 // ── Viewport (zoom engeli kaldırıldı: erişilebilirlik + Lighthouse) ───────────
 export const viewport: Viewport = {
@@ -120,7 +121,6 @@ const jsonLd = {
           offer('Paça Kısaltma', '200'),
           offer('Fermuar Değişimi', '300'),
           offer('Bel Daraltma', '200'),
-          offer('Elbise Dikimi', '800'),
         ],
       },
       potentialAction: [
@@ -211,23 +211,7 @@ const jsonLd = {
       ],
     },
 
-    {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}#faq`,
-      mainEntity: [
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `₺200 / €10'dan başlar; süre işe ve yoğunluğa göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Otellere ve adrese terzi kurye servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet. Eve ve otele servis her bölgede ücretsizdir; Lara, Kundu, Belek, Kemer ve Side gibi tüm otel bölgelerinde otele servis de ücretsizdir. Lara, Kundu, Konyaaltı, Belek ve Kemer otellerinden kıyafetlerinizi alıyor, ölçü alıp hazır olunca otele teslim ediyoruz; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Çalışma saatleriniz nedir?', acceptedAnswer: { '@type': 'Answer', text: `Haftanın her günü, hafta sonu dahil 08:00–23:00 arası hizmet veriyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Hangi ödeme yöntemleri ve para birimleri geçerli?', acceptedAnswer: { '@type': 'Answer', text: 'TRY, EUR, USD, RUB nakit kabul edilir. Tüm uluslararası kredi kartları ve temassız ödeme geçerlidir.' } },
-        { '@type': 'Question', name: 'Fermuar değişimi kaç lira?', acceptedAnswer: { '@type': 'Answer', text: `Pantolon/kot fermuarı ₺300 / €15'ten, mont fermuarı €20'den başlar. Süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bel daraltma ve elbise daraltma fiyatı?', acceptedAnswer: { '@type': 'Answer', text: `Bel daraltma ₺200 / €10'dan başlar. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Yerinde ölçü alma ve adrese teslim var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet, adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz. Servis Eve ve otele servis ücretsiz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Tişört, sweatshirt, pantolon, gobi imalatı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bay terzi Antalya — erkek kıyafet dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Bayan terzi Antalya — kadın elbise dikimi?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Elbise, bluz, etek, abiye tamiri, gelinlik tadilatı, büyük beden. WhatsApp: ${PHONE}` } },
-        { '@type': 'Question', name: 'Hangi Antalya ilçelerine terzi servisi geliyor?', acceptedAnswer: { '@type': 'Answer', text: 'Konyaaltı, Muratpaşa, Kepez, Döşemealtı, Aksu, Lara, Belek, Kemer, Side ve Serik otellerine geliyoruz.' } },
-      ],
-    },
+    { ...faqPageSchema(TERZI_FAQ.tr), '@id': `${SITE_URL}#faq` },
   ],
 };
 

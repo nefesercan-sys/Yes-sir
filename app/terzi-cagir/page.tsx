@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE = 'https://swaphubs.com';
 const PAGE_URL = `${SITE}/terzi-cagir`;
@@ -9,6 +9,17 @@ const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const MAPS_URL = 'https://www.google.com/maps?cid=6436895271281342624';
 const WA_MSG = 'Merhaba, Konyaaltı bölgesinde terzi hizmetiniz için bilgi almak istiyorum.';
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Terzi çağırmak için ne yapmam gerekiyor?', `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Randevu saatini birlikte belirleyelim — terzimiz kapınıza gelsin.`],
+  ["Antalya'da terzi çağırabilir miyim?", `Evet! Terzi Can olarak Antalya Konyaaltı ve yakın ilçelerine araçlı terzi servisi sunuyoruz; eve ve otele alım-teslim ücretsizdir. Hemen arayın: ${PHONE}`],
+  ['Hangi mahallelere servis yapıyorsunuz?', "Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevleri, Meltem, Çakırlar, Konyaaltı Merkez ve Antalya'nın yakın ilçelerine araçlı terzi servisi sunuyoruz."],
+  ['Paça kısaltma ve bel daraltma fiyatı ne kadar?', "Paça kısaltma, bel daraltma ve etek kısaltma ₺200'den başlar; fermuar değişimi ₺300'den. WhatsApp'tan fotoğraf gönderin, fiyatı net olarak öğrenin."],
+  ['Teslim süresi ne kadar?', 'Normal tamir ve tadilat aynı gün teslim edilir; acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.'],
+  ['Terzi ne zaman kapıma gelir?', 'Arayın veya WhatsApp yazın, randevu saatini birlikte belirleyelim. Terzimiz adresinize gelir, ölçü alır, hazır olunca teslim eder.'],
+  ['İngilizce veya Rusça hizmet veriyor musunuz?', 'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için eve ve otele ücretsiz alım-teslim hizmeti de mevcuttur.'],
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -77,26 +88,7 @@ const jsonLd = {
         ],
       },
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Antalya\'da terzi çağırabilir miyim?',
-          acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Antalya Konyaaltı ve yakın ilçelerine araçlı terzi servisi sunuyoruz. Hemen arayın: ${PHONE}` },
-        },
-        {
-          '@type': 'Question',
-          name: 'Paça kısaltma fiyatı ne kadar?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Paça kısaltma ₺200\'den başlar. Teslim süresi işe ve yoğunluğa göre WhatsApp\'ta netleşir.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Terzi ne zaman kapıma gelir?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Arayın veya WhatsApp yazın, randevu saatini birlikte belirleyelim. Terzimiz adresinize gelir, ölçü alır, hazır olunca teslim eder.' },
-        },
-      ],
-    },
+    faqPageSchema(FAQ),
   ],
 };
 
@@ -145,8 +137,8 @@ export default function TerziCagirPage() {
     ['Ceket Tamiri', '₺200', 'Aynı gün'],
     ['Mont Tamiri', '₺200', 'Aynı gün'],
     ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Aynı gün'],
-    ['Abiye Tamiri', '₺800', 'Aynı gün'],
-    ['Elbise Dikimi', '₺800+', 'Modele göre'],
+    ['Abiye / Gelinlik Tadilatı', '₺800', 'Aynı gün'],
+    ['Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ];
 
   const MAHALLELER = [
@@ -437,12 +429,7 @@ export default function TerziCagirPage() {
 
         {/* GÜVEN PUANLARI */}
         <div className="trust">
-          {[
-            ['🌟 Google', 'Yorumlarımızı Görün'],
-            ['⚡ Hızlı Servis','Süre WhatsApp\'ta netleşir'],
-            ['🚗 Adrese','Araçlı Servis'],
-            ['✂️ 15 Yıl','Tecrübe'],
-          ].map(([v,l]) => (
+          {FAQ.map(([v,l]) => (
             <div key={l} className="trust-item">
               <div className="trust-val">{v}</div>
               <div className="trust-lbl">{l}</div>
@@ -486,7 +473,7 @@ export default function TerziCagirPage() {
         {/* FİYAT TABLOSU */}
         <section className="prices" id="fiyatlar">
           <h2>Terzi Fiyat Listesi 2026</h2>
-          <p className="prices-note">Başlangıç fiyatları. Kesin fiyat için fotoğraf gönderin.</p>
+          <p className="prices-note">Başlangıç fiyatları; dikim işlerinde fiyat fotoğrafa ve istediğiniz modele göre belirlenir. Kesin fiyat için fotoğraf gönderin.</p>
           <table className="ptbl">
             <tbody>
               {FIYATLAR.map(([h, f, s]) => (
@@ -601,8 +588,8 @@ export default function TerziCagirPage() {
               ['Ana Terzi Sayfası','/terzi'],
               ['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],
               ['Eve Gelen Terzi','/terzi/eve-gelen-terzi-antalya'],
-              ['Hurma Terzi','/terzi/hurma-terzi'],
-              ['Liman Terzi','/terzi/liman-terzi'],
+              ['Hurma Terzi','/terzi/konyaalti/hurma'],
+              ['Liman Terzi','/terzi/konyaalti/liman'],
               ['Elbise Dikimi','/terzi'],
             ].map(([l,h]) => (
               <a key={h} href={h} className="footer-link">{l}</a>
@@ -614,18 +601,3 @@ export default function TerziCagirPage() {
     </>
   );
 }
-
-// Fiyat listesi sabit veri
-const FIYATLAR = [
-  ['Paça Kısaltma','₺200','Aynı gün'],
-  ['Bel Daraltma','₺200','Aynı gün'],
-  ['Etek Kısaltma','₺200','Aynı gün'],
-  ['Pantolon Paçası','₺200','Aynı gün'],
-  ['Fermuar Değişimi','₺300','Aynı gün'],
-  ['Fermuar Tamiri','₺300','Aynı gün'],
-  ['Ceket Tamiri','₺200','Aynı gün'],
-  ['Mont Tamiri','₺200','Aynı gün'],
-  ['T-Shirt Tamiri','Fotoğrafa göre','Aynı gün'],
-  ['Abiye Tamiri','₺800','Aynı gün'],
-  ['Elbise Dikimi','₺800+','Modele göre'],
-];

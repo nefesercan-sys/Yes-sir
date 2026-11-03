@@ -4,7 +4,7 @@
 //   <BusinessSchema path="/terzi/paca-kisaltma" name="Paça Kısaltma Antalya"
 //     description="..." lang="tr" lastModified="2026-10-04"
 //     breadcrumbs={[{name:'Terzi',path:'/terzi'},{name:'Paça Kısaltma',path:'/terzi/paca-kisaltma'}]}
-//     faq={[{q:'...',a:'...'}]} service={{name:'Paça Kısaltma', price:'150'}} />
+//     faq={[{q:'...',a:'...'}]} service={{name:'Paça Kısaltma', price:'200'}} />
 // Puan/yorum: varsayılan YOK. Sadece gerçek yorumlar `reviews` ile verilirse eklenir
 // (en az 1 gerçek yorum; puan verilen yorumlardan hesaplanır, uydurma sayı yok).
 // ============================================================

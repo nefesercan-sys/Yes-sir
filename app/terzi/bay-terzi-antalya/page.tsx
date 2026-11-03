@@ -3,12 +3,22 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bay-terzi-antalya';
 const PARENT = 'https://swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ve bel daraltma ₺200'den, fermuar değişimi ₺300'den başlar. Takım elbise, gömlek, blazer ve smoking dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
+  ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
+  ['Damatlık dikimi Antalya fiyatı?', `Damatlık (takım elbise) dikiminde fiyat sabit değildir; fotoğrafa ve istediğiniz modele göre belirlenir. Özel kumaş ve aksesuar seçimi yapılabilir. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
+  ['Erkek gömlek dikimi Antalya kaç lira?', `Erkek gömlek dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; ölçüye göre kişiselleştirme mevcuttur. Fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
+  ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket tadilatı, ceket kol kısaltma, bel alma, fermuar değişimi. Aynı gün teslim; acilse 1–2 saat.'],
+  ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -17,7 +27,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Bay Terzi Antalya — Erkek Takım Elbise Dikimi Fiyatları 2026',
-      description: "Antalya'da bay terzi. Erkek takım elbise dikimi, pantolon kısaltma ₺200, gömlek dikimi, smoking, damatlık. Eve ve otele gelen terzi servisi.",
+      description: "Antalya'da bay terzi: pantolon kısaltma ₺200, fermuar ₺300. Erkek takım elbise, gömlek, smoking ve damatlık dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele ücretsiz alım-teslim.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: {
@@ -35,16 +45,7 @@ const jsonLd = {
         { '@type':'ListItem', position:3, name:'Bay Terzi Antalya', item:SITE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type':'Question', name:'Bay terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Pantolon kısaltma ₺200'den başlar. Takım elbise, gömlek ve smoking dikim fiyatı kumaş ve modele göre belirlenir; fotoğraf veya ölçü gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Erkek takım elbise dikimi Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Erkek takım elbise (ceket+pantolon) dikim fiyatı kumaş seçimine ve modele göre değişir; fotoğraf veya ölçü gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Damatlık dikimi Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Damatlık (takım elbise) dikimi ₺20.000'den başlar. Özel kumaş ve aksesuar seçimi yapılabilir. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Erkek gömlek dikimi Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Erkek gömlek dikim fiyatı kumaş ve modele göre belirlenir. Ölçüye göre kişiselleştirme mevcuttur; fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Antalya\'da erkek kıyafeti tadilatı yapılıyor mu?', acceptedAnswer:{'@type':'Answer', text:`Evet! Pantolon kısaltma, ceket tadilatı, kol kısaltma, bel alma, fermuar değişimi. WhatsApp: ${PHONE}`}},
-      ],
-    },
+    faqPageSchema(FAQ),
   ],
 };
 
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Bay Terzi Antalya · Erkek Takım Elbise · Pantolon Kısaltma',
-    description: "Pantolon kısaltma ₺200'den, takım elbise dikimi. Eve gelen terzi. Konyaaltı ve çevresi. ☎ +90 531 898 64 18",
+    description: "Pantolon kısaltma ₺200'den; takım elbise dikimi fotoğrafa ve istediğiniz modele göre. Eve gelen terzi. Konyaaltı ve çevresi. ☎ +90 531 898 64 18",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },
@@ -73,8 +74,8 @@ const FIYATLAR = [
   ['Pantolon Bel Daraltma', '₺200', 'Aynı gün'],
   ['Ceket Kol Kısaltma', '₺200', 'Aynı gün'],
   ['Ceket Beden Küçültme', 'Fotoğrafa göre', 'Aynı gün'],
-  ['Erkek Pantolon Dikimi', '₺1000+', 'Modele ve adede göre'],
-  ['Damatlık Takım Elbise', '₺20.000', 'Modele ve adede göre'],
+  ['Erkek Pantolon Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
+  ['Damatlık / Takım Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];
 
@@ -198,13 +199,7 @@ export default function BayTerziPage() {
         <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Bay Terzi SSS</h2>
-            {[
-              ['Bay terzi Antalya fiyatları 2026?', `Pantolon kısaltma ₺200'den başlar. Takım elbise, gömlek, blazer ve smoking dikim fiyatı kumaş ve modele göre belirlenir; fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
-              ['Erkek takım elbise dikimi Antalya?', `Evet! Ölçüye özel erkek takım elbise dikimi; fiyat kumaş ve modele göre belirlenir. Kumaş seçimi, kalıp çıkarma ve dikim tek elden. WhatsApp: ${PHONE}`],
-              ['Damatlık dikimi Antalya fiyatı?', `Damatlık ₺20.000'den başlar. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
-              ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket kol kısaltma, bel alma, fermuar değişimi. Aynı gün teslim; acilse 1–2 saat.'],
-              ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
-            ].map(([q,a],i)=>(
+            {FAQ.map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
                   {q} <span style={{ color: '#B8975A' }}>+</span>

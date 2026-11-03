@@ -3,12 +3,23 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 const SITE_URL = 'https://swaphubs.com/terzi/bayan-terzi-antalya';
 const PARENT = 'https://swaphubs.com/terzi';
 const PHONE = '+90 531 898 64 18';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
+
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQ: [string, string][] = [
+  ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺200, elbise daraltma ₺200, fermuar değişimi ₺300, abiye tamiri ve gelinlik tadilatı ₺800'den başlar. Elbise, abiye, bluz ve tulum dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. WhatsApp: ${PHONE}`],
+  ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz düzeltme yapılır; gelinlik dikimi yapılmaz, yalnızca tadilat yapılır. Nisan–Ekim sezonunda önceden randevu alın. WhatsApp: ${PHONE}`],
+  ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri aynı gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
+  ['Kadın elbise dikimi Antalya?', `Evet. Ölçüye özel elbise, bluz, etek, tulum ve abiye dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. WhatsApp: ${PHONE}`],
+  ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa ve istediğiniz modele göre netleşir. WhatsApp: ${PHONE}`],
+  ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+  ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir. WhatsApp: ${PHONE}`],
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -17,7 +28,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi Fiyatları 2026',
-      description: "Antalya'da bayan terzi. Kadın elbise dikimi ₺800, etek kısaltma ₺200, abiye tamiri ₺800, gelinlik tadilatı ₺800. Eve ve otele gelen terzi servisi.",
+      description: "Antalya'da bayan terzi: etek kısaltma ₺200, fermuar ₺300, abiye ve gelinlik tadilatı ₺800'den. Kadın elbise dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele ücretsiz alım-teslim.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: { '@type': 'AggregateOffer', lowPrice: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
@@ -30,15 +41,7 @@ const jsonLd = {
         { '@type':'ListItem', position:3, name:'Bayan Terzi Antalya', item:SITE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type':'Question', name:'Bayan terzi Antalya fiyatları 2026?', acceptedAnswer:{'@type':'Answer', text:`Etek kısaltma ₺200, elbise daraltma ₺200, kadın elbise dikimi ₺800, abiye tamiri ₺800, gelinlik tadilatı ₺800. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Gelinlik tadilatı Antalya kaç lira?', acceptedAnswer:{'@type':'Answer', text:`Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz ayarı yapılmaktadır. Nisan–Ekim düğün sezonunda. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Abiye tamiri Antalya fiyatı?', acceptedAnswer:{'@type':'Answer', text:`Abiye tamiri ₺800'den, abiye kısaltma ₺800'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}`}},
-        { '@type':'Question', name:'Kadın elbise dikimi Antalya?', acceptedAnswer:{'@type':'Answer', text:`Evet! Ölçüye özel kadın elbise dikimi ₺800'den başlar. Bluz, etek, tulum, abiye. WhatsApp: ${PHONE}`}},
-      ],
-    },
+    faqPageSchema(FAQ),
   ],
 };
 
@@ -55,24 +58,24 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Bayan Terzi Antalya · Kadın Elbise Dikimi · Gelinlik Tadilatı',
-    description: "Elbise ₺800, gelinlik ve abiye tamiri ₺800'den. Eve gelen terzi. ☎ +90 531 898 64 18",
+    description: "Elbise dikimi fotoğrafa ve istediğiniz modele göre. Gelinlik ve abiye tadilatı ₺800'den. Eve gelen terzi. ☎ +90 531 898 64 18",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true },
 };
 
 const FIYATLAR = [
-  ['Etek / Pantolon Kısaltma', '₺200–175', 'Aynı gün'],
+  ['Etek / Pantolon Kısaltma', '₺200', 'Aynı gün'],
   ['Elbise Daraltma / Beden Küçültme', '₺200', 'Aynı gün'],
   ['Kol Kısaltma (Elbise/Bluz)', '₺200', 'Aynı gün'],
   ['Invisible Fermuar Değişimi', '₺300', 'Aynı gün'],
-  ['Bluz Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Kadın Elbise Dikimi', '₺800', 'Modele ve adede göre'],
-  ['Tulum Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
+  ['Bluz Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
+  ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
+  ['Tulum Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Abiye Tamiri / Kısaltma', '₺800', 'Aynı gün'],
-  ['Abiye Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Gelinlik Tadilatı', '₺800', 'Aynı gün'],
-  ['Büyük Beden Elbise Dikimi', 'Fotoğrafa göre', 'Modele ve adede göre'],
+  ['Abiye Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
+  ['Gelinlik Tadilatı (dikimi yapılmaz)', '₺800', 'Aynı gün'],
+  ['Büyük Beden Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
 ];
 
@@ -103,12 +106,18 @@ export default function BayanTerziPage() {
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
               Etek kısaltma <strong style={{ color: '#D4B07A' }}>₺200</strong> ·
-              Elbise dikimi <strong style={{ color: '#D4B07A' }}>₺800</strong> ·
+              Elbise dikimi <strong style={{ color: '#D4B07A' }}>fotoğrafa ve modele göre</strong> ·
               Gelinlik tadilatı <strong style={{ color: '#D4B07A' }}>₺800</strong> ·
               <strong style={{ color: '#fff' }}> Eve ve otele gelen terzi servisi</strong>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: '1px', background: 'rgba(255,255,255,.06)', maxWidth: '700px', marginBottom: '1.5rem' }}>
-              {[['Etek Kısaltma','₺200'],['Elbise Dikimi','₺800'],['Abiye Tamiri','₺800'],['Gelinlik Tadilat','₺800'],['Abiye Dikimi','Fotoğrafa göre']].map(([n,p])=>(
+              {[
+                ['Etek Kısaltma','₺200'],
+                ['Elbise Dikimi','Fotoğrafa göre'],
+                ['Abiye Tamiri','₺800'],
+                ['Gelinlik Tadilat','₺800'],
+                ['Abiye Dikimi','Fotoğrafa göre'],
+              ].map(([n,p])=>(
                 <div key={n} style={{ background: 'rgba(255,255,255,.04)', padding: '.9rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.5)', marginBottom: '.2rem' }}>{n}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1.2rem', color: '#D4B07A', fontWeight: 700 }}>{p}</div>
@@ -159,11 +168,11 @@ export default function BayanTerziPage() {
               <p style={{ marginBottom: '1rem' }}>
                 <strong>Kadın elbise dikimi</strong> en kişisel terzilik hizmetlerinden biridir. Terzi Can olarak
                 Antalya'da bluzdan tuluma, günlük elbiseden abiyeye kadar her tür kadın kıyafetini ölçüye göre dikiyoruz.
-                <strong> Kadın elbise dikimi ₺800'den</strong> başlamakta, model ve kumaş seçimine göre değişmektedir.
+                <strong> Kadın elbise dikiminde fiyat fotoğrafa ve istediğiniz modele göre</strong> belirlenir; süre model ve adede göre değişir.
               </p>
               <p style={{ marginBottom: '1rem' }}>
-                <strong>Gelinlik tadilatı</strong> özel dikkat gerektiren bir işlemdir. Ölçü almadan kısaltma, daraltma,
-                omuz ayarı ve süsleme ekleme yapılmaktadır. Nisan–Ekim düğün sezonunda önceden randevu almanızı öneririz.
+                <strong>Gelinlik tadilatı</strong> özel dikkat gerektiren bir işlemdir. Kısaltma, daraltma,
+                omuz ayarı ve süsleme ekleme yapılmaktadır; gelinlik dikimi yapılmaz, yalnızca tadilat yapılır. Nisan–Ekim düğün sezonunda önceden randevu almanızı öneririz.
                 Gelinlik tadilatı <strong>₺800'den</strong> başlamaktadır.
               </p>
               <p>
@@ -177,14 +186,7 @@ export default function BayanTerziPage() {
         <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '2rem' }}>Bayan Terzi SSS</h2>
-            {[
-              ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺200, elbise daraltma ₺200, elbise dikimi ₺800, abiye tamiri ₺800, gelinlik tadilatı ₺800. WhatsApp: ${PHONE}`],
-              ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı ₺800'den başlar. Kısaltma, daraltma, omuz düzeltme. Nisan–Ekim sezonu. WhatsApp: ${PHONE}`],
-              ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri aynı gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
-              ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa göre netleşir. WhatsApp: ${PHONE}`],
-              ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Belek, Lara, Kemer ve Side otellerine araçlı terzi servisi. WhatsApp: ${PHONE}`],
-              ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılmaktadır. WhatsApp: ${PHONE}`],
-            ].map(([q,a],i)=>(
+            {FAQ.map(([q,a],i)=>(
               <details key={i} style={{ borderBottom: '1px solid rgba(184,151,90,.1)', padding: '.8rem 0' }}>
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
                   {q} <span style={{ color: '#B8975A' }}>+</span>

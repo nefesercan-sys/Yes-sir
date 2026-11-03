@@ -2,8 +2,8 @@
 // EN / RU / DE sayfalar için bölge ve hizmet başına ELLE yazılmış, birbirinden FARKLI başlık / açıklama / anahtar kelime.
 // Her yakın bölge ayrı bir ihtiyaca odaklanır (tamir-tadilat, abiye/gelinlik, takım elbise, yırtık onarımı, keten-pamuk özel dikim,
 // kot/paça, mont/deri...). Hem tamir-tadilat hem özel dikim (keten, pamuk; bay, bayan) kapsanır.
-// Yalnızca doğrulanmış bilgi: paça ₺200'den, fermuar ₺300'den, abiye ve gelinlik ₺800'den, elbise dikimi ₺800'den; otellere servis ücretsiz,
-// eve ücretsiz servis yakın bölgelerde (lib/business.ts); süreler: normal aynı gün, acil 1–2 saat.
+// Yalnızca doğrulanmış bilgi: paça ₺200'den, fermuar ₺300'den, abiye ve gelinlik TADİLATI ₺800'den. Sabit dikim fiyatı YAZILMAZ (fotoğrafa ve istediğiniz modele göre); otellere servis ücretsiz,
+// eve ve otele alım-teslim her bölgede ücretsiz (lib/business.ts); süreler: normal aynı gün, acil 1–2 saat.
 // Bölgede kayıt yoksa sayfa lib/seo-angles.ts şablonuna döner.
 // ============================================================
 
@@ -20,7 +20,7 @@ const FG_DISTRICT: Record<string, Row> = {
   "muratpasa": {
     en: { t: "Muratpaşa Tailor: Evening & Wedding Dresses | Terzi Can", d: "Evening or wedding dress needs altering in Muratpaşa? Done with a fitting. Collection from hotel or home arranged on WhatsApp. ☎ +90 531 898 64 18", kw: ["tailor Muratpaşa", "evening dress alteration Muratpaşa", "wedding dress alteration Antalya", "dress tailor Muratpaşa"] },
     ru: { t: "Портной Муратпаша: вечерние и свадебные платья | Terzi Can", d: "Подгонка вечерних и свадебных платьев в Муратпаше: вечернее и свадебное. С примеркой, забор — по договорённости в WhatsApp. ☎ +90 531 898 64 18", kw: ["портной Муратпаша", "подгонка вечернего платья Муратпаша", "подгонка свадебного платья Анталья"] },
-    de: { t: "Schneider Muratpaşa: Abend- & Brautkleid ändern | Terzi Can", d: "Abend- oder Brautkleid in Muratpaşa ändern lassen:, mit Anprobe. Abholung per WhatsApp abstimmen. ☎ +90 531 898 64 18", kw: ["Schneider Muratpaşa", "Abendkleid ändern Muratpaşa", "Brautkleid ändern Antalya"] },
+    de: { t: "Schneider Muratpaşa: Abend- & Brautkleid ändern | Terzi Can", d: "Abend- oder Brautkleid in Muratpaşa ändern lassen? Das geht mit Anprobe. Abholung per WhatsApp abstimmen. ☎ +90 531 898 64 18", kw: ["Schneider Muratpaşa", "Abendkleid ändern Muratpaşa", "Brautkleid ändern Antalya"] },
   },
   "meltem": {
     en: { t: "Meltem Tailor: Suit, Jacket & Trouser Alteration | Terzi Can", d: "Suits, jackets and trousers altered in Meltem for men and women: sleeves, hems, waist, shoulders. Pick-up and delivery are free. ☎ +90 531 898 64 18", kw: ["tailor Meltem", "suit alteration Meltem", "jacket alteration Antalya", "trouser hemming Meltem"] },
@@ -45,7 +45,7 @@ const FG_DISTRICT: Record<string, Row> = {
   "toros": {
     en: { t: "Toros Tailor Near Me: Same-Day Trouser Hemming | Terzi Can", d: "Trousers, skirts and jeans hemmed near Toros, ready the same day or in 1–2 hours if urgent. ☎ +90 531 898 64 18", kw: ["tailor near me Toros", "trouser hemming near me", "urgent hemming Antalya", "tailor open now Antalya"] },
     ru: { t: "Портной рядом, Торос: подшив брюк в тот же день | Terzi Can", d: "Портной рядом, район Торос: подшив брюк, юбок и джинсов, готово в тот же день, срочно — за 1–2 часа. ☎ +90 531 898 64 18", kw: ["портной рядом Торос", "подшить брюки рядом", "срочный подшив Анталья"] },
-    de: { t: "Toros: Schneider in der Nähe, Hose kürzen bis morgen | Terzi Can", d: "Schneider nahe Toros: Hosen, Röcke und Jeans kürzen, am selben Tag fertig, eilig in 1–2 Stunden. ☎ +90 531 898 64 18", kw: ["Schneider in der Nähe Toros", "Hose kürzen in der Nähe", "Hose kürzen eilig Antalya"] },
+    de: { t: "Toros: Schneider in der Nähe, Hose kürzen am selben Tag | Terzi Can", d: "Schneider nahe Toros: Hosen, Röcke und Jeans kürzen, am selben Tag fertig, eilig in 1–2 Stunden. ☎ +90 531 898 64 18", kw: ["Schneider in der Nähe Toros", "Hose kürzen in der Nähe", "Hose kürzen eilig Antalya"] },
   },
   "ogretmenevleri": {
     en: { t: "Öğretmenevleri Tailor: Coat, Leather, Zipper Fix | Terzi Can", d: "Coat, jacket and leather jacket alterations in Öğretmenevleri: shorten, take in, replace zippers. Free pick-up and delivery. ☎ +90 531 898 64 18", kw: ["tailor Öğretmenevleri", "coat alteration Antalya", "leather jacket repair Antalya", "zipper replacement Öğretmenevleri"] },

@@ -4,7 +4,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
-import { jsonLdString } from '@/lib/json-ld';
+import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti/page.tsx
@@ -69,6 +69,16 @@ export const metadata: Metadata = {
   },
 };
 
+// SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
+const FAQS: [string, string][] = [
+  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz; eve ve otele alım-teslim ücretsizdir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Elbise dikimi fiyatı?', `Elbise, abiye, takım ve çocuk kıyafeti dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; fotoğraf gönderin. Gelinlik dikimi yapılmaz, yalnızca gelinlik ve abiye tadilatı yapılır. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Is there an English-speaking tailor in Konyaaltı Antalya?', `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations and free hotel pickup. WhatsApp: ${PHONE_DISPLAY}`],
+];
+
 // ─── JSON-LD ──────────────────────────────────────────────────────────────────
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -99,7 +109,6 @@ const jsonLd = {
           { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Paça Kısaltma' } },
           { '@type': 'Offer', price: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Bel Daraltma' } },
           { '@type': 'Offer', price: '300', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Fermuar Değişimi' } },
-          { '@type': 'Offer', price: '800', priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url: PAGE_URL, itemOffered: { '@type': 'Service', name: 'Elbise Dikimi' } },
         ],
       },
       knowsLanguage: ['tr','ru','en','de','pl','uk','nl','fr','es','ar'],
@@ -120,15 +129,7 @@ const jsonLd = {
         { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Dikim · Tadilat', item: PAGE_URL },
       ],
     },
-    {
-      '@type': 'FAQPage', '@id': `${PAGE_URL}#faq`,
-      mainEntity: [
-        { '@type': 'Question', name: 'Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', acceptedAnswer: { '@type': 'Answer', text: `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Paça kısaltma fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Paça kısaltma ₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Fermuar değişimi fiyatı 2026?', acceptedAnswer: { '@type': 'Answer', text: `Fermuar değişimi ₺300'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}` } },
-        { '@type': 'Question', name: 'Is there an English-speaking tailor in Konyaaltı Antalya?', acceptedAnswer: { '@type': 'Answer', text: `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}` } },
-      ],
-    },
+    { ...faqPageSchema(FAQS), '@id': `${PAGE_URL}#faq` },
   ],
 };
 
@@ -147,7 +148,7 @@ const SERVICES = [
   { icon: '✂️', title: 'Paça Kısaltma', desc: 'Kot, kumaş pantolon, etek, kadın kıyafeti.', price: '₺200+', time: 'Aynı gün', color: '#fef3c7', tc: '#b45309' },
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
   { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Aynı gün', color: '#ede9fe', tc: '#5b21b6' },
-  { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, gelinlik, erkek takım elbise, gömlek.', price: '₺800+', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
+  { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, erkek takım elbise, gömlek. Gelinlik dikimi yapılmaz; gelinlik/abiye yalnız tadilat.', price: 'Fotoğrafa ve istediğiniz modele göre', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
   { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
@@ -158,19 +159,12 @@ const PRICES = [
   ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
   ['Ceket / Mont Tamiri', '₺200+', 'Aynı gün'],
   ['Kol Kısaltma', '₺200+', 'Aynı gün'],
-  ['Abiye Tamiri', '₺800+', 'Aynı gün'],
-  ['Kadın Elbise Dikimi', '₺800+', 'Modele göre'],
+  ['Abiye / Gelinlik Tadilatı', '₺800+', 'Aynı gün'],
+  ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
 ];
 
-const FAQS = [
-  ['Konyaaltı Hurma, Liman, Uncalı mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; süre işe göre WhatsApp'ta netleşir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Elbise dikimi fiyatı?', `Kadın elbise ₺800+. Diğer dikim işlerinde fiyat kumaş ve modele göre belirlenir; fotoğraf gönderin. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
-];
 
 const NEIGHBORHOODS = [
   'Hurma', 'Liman', 'Uncalı', 'Sarısu', 'Gürsu',
