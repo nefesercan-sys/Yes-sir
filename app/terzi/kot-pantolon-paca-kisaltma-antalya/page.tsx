@@ -26,7 +26,7 @@ const DATA: KonuData = {
   fiyatlar: [
     ['Kot paça kısaltma', '200 TL\'den'],
     ['Kot pantolon daraltma', '200 TL\'den'],
-    ['Orijinal paça yapımı', 'Fotoğrafa göre fiyat'],
+    ['Orijinal paça yapımı', '200 TL\'den'],
   ],
   fiyatNot: 'Fiyatlar başlangıç fiyatıdır; kumaş kalınlığına ve işin kapsamına göre değişebilir. Net fiyat için fotoğrafı WhatsApp\'tan gönderin.',
   lowPrice: '200',
