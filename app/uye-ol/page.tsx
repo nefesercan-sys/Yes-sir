@@ -19,7 +19,7 @@ function UyeOlIcerik() {
 
   const handleKayit = async () => {
     if (!form.ad || !form.email || !form.sifre) { setHata('Ad, e-posta ve şifre zorunlu'); return; }
-    if (form.sifre.length < 6) { setHata('Şifre en az 6 karakter olmalı'); return; }
+    if (form.sifre.length < 8) { setHata('Şifre en az 8 karakter olmalı'); return; }
     setYukleniyor(true); setHata('');
 
     const res = await fetch('/api/kayit', {
@@ -176,7 +176,7 @@ function UyeOlIcerik() {
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', display: 'block', marginBottom: '5px', textTransform: 'uppercase' }}>Şifre *</label>
-              <input type="password" value={form.sifre} onChange={e => setForm(p => ({ ...p, sifre: e.target.value }))} placeholder="En az 6 karakter" style={inp} />
+              <input type="password" value={form.sifre} onChange={e => setForm(p => ({ ...p, sifre: e.target.value }))} placeholder="En az 8 karakter" style={inp} />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>

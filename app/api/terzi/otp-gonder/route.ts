@@ -9,8 +9,8 @@
 //  2) Aynı numara: saatte en fazla 5 kod isteği
 //  3) Aynı IP: saatte en fazla 15 kod isteği (farklı numaralara toplu istek atmayı engeller)
 //
-// NOT: Kod düz metin saklanır çünkü personelin /terzi-admin/bekleyen-kodlar ekranı kodu göstermek zorunda
-// (manuel WhatsApp teslimi). Bunun yerine kod 5 dk ömürlü, tek kullanımlık ve deneme sayacı atomik.
+// NOT: Kod DB'de düz metin tutulmaz: doğrulama için HMAC (otpHash), personel panelinin göstermesi için AES-GCM
+// şifreli kopya (otpSifreli; lib/otp.ts). Kod ayrıca 5 dk ömürlü, tek kullanımlık ve deneme sayacı atomik.
 // ============================================================
 import { NextRequest, NextResponse } from 'next/server';
 import { randomInt } from 'crypto';
@@ -18,6 +18,7 @@ import { getDb } from '@/lib/mongodb';
 import { telegramMesajGonder, htmlKacir } from '@/lib/telegram';
 import { pencereSayaci } from '@/lib/hiz-sayaci';
 import { clientIp } from '@/lib/api-guard';
+import { otpHashle, otpSifrele } from '@/lib/otp';
 
 const BEKLEME_SANIYE = 60;
 const NUMARA_SAATLIK_LIMIT = 5;
@@ -55,11 +56,13 @@ export async function POST(req: NextRequest) {
       { telefon },
       {
         $set: {
-          otpKod: kod,
+          otpHash: otpHashle(telefon, kod),
+          otpSifreli: otpSifrele(kod),
           otpSonGecerlilik: new Date(simdi.getTime() + 5 * 60000),
           otpSonTalepZamani: simdi,
           otpBasarisizDeneme: 0,
         },
+        $unset: { otpKod: '' }, // eski düz metin alanı varsa temizle
         $setOnInsert: { telefon, isProvider: false, createdAt: simdi },
       },
       { upsert: true }

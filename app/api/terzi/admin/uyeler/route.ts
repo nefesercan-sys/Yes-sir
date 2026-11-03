@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   const db = await getDb();
 
   const kullanicilar = await db.collection('terziKullanicilar')
-    .find({}, { projection: { otpKod: 0, otpSonGecerlilik: 0, otpBasarisizDeneme: 0, sifreBasarisizDeneme: 0 } })
+    .find({}, { projection: { otpKod: 0, otpHash: 0, otpSifreli: 0, otpSonGecerlilik: 0, otpBasarisizDeneme: 0, sifreBasarisizDeneme: 0 } })
     .sort({ createdAt: -1 })
     .limit(300)
     .toArray();

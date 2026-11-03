@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
   const [kullanici, ilanlar, teklifler] = await Promise.all([
     db.collection('terziKullanicilar').findOne(
       { _id: new ObjectId(userId) },
-      { projection: { otpKod: 0, otpSonGecerlilik: 0, sifreHash: 0, otpBasarisizDeneme: 0, sifreBasarisizDeneme: 0 } }
+      { projection: { otpKod: 0, otpHash: 0, otpSifreli: 0, otpSonGecerlilik: 0, sifreHash: 0, otpBasarisizDeneme: 0, sifreBasarisizDeneme: 0 } }
     ),
     db.collection('ilanlar').find({ sektorId: 'terzi-kuru-temizleme', 'sahibi.userId': userId }).sort({ createdAt: -1 }).toArray(),
     db.collection('teklifler').find({ 'teklifVeren.userId': userId }).sort({ createdAt: -1 }).toArray(),

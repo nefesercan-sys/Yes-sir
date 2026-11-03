@@ -12,7 +12,7 @@ import { tamSayi } from '@/lib/validate';
 
 // Şifre özeti, OTP ve deneme/kilit sayaçları istemciye ASLA dönmez.
 const GIZLI_ALANLAR = {
-  otpKod: 0, otpSonGecerlilik: 0, otpBasarisizDeneme: 0, otpSonTalepZamani: 0,
+  otpKod: 0, otpHash: 0, otpSifreli: 0, otpSonGecerlilik: 0, otpBasarisizDeneme: 0, otpSonTalepZamani: 0,
   otpTalepSayisiSaatlik: 0, otpTalepPencereBaslangic: 0, otpDogrulamaZamani: 0,
   sifreBasarisizDeneme: 0, sifreKilitlenmeZamani: 0,
 };

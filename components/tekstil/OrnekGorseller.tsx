@@ -1,4 +1,5 @@
 // Konuya göre örnek görseller (yapay zekâ ile üretilmiş; "örnek görsel" etiketi ve not her zaman gösterilir).
+import { jsonLdString } from '@/lib/json-ld';
 import { altMetinler, type Konu } from '@/lib/alt-basliklar';
 import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 import type { Topic } from '@/lib/tekstil-sayfalari';
@@ -26,7 +27,7 @@ export default function OrnekGorseller({ topic, lang, url, base }: { topic: Topi
   };
   return (
     <section aria-label={ORNEK_BASLIK[lang]} style={{ marginBottom: '2rem' }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(ld) }} />
       <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '.4rem' }}>{ORNEK_BASLIK[lang]}</h2>
       <p style={{ color: '#64748B', fontSize: '.82rem', margin: '0 0 1rem' }}>{ORNEK_NOT[lang]}</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: '1rem' }}>
