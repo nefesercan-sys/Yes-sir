@@ -96,10 +96,10 @@ const SERVICES = [
   { icon: '💍', id: 'gelinlik',
     img: '/gorseller/gelinlik-abiye.webp',
     alt: 'Gelinlik abiye özel gün kıyafeti dikimi Antalya — Terzi Can (örnek görsel)',
-    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik ve abiye TADİLATI (gelinlik dikimi yapılmaz) · abiye tamiri · nişan ve kına kıyafeti tadilatı', p: 'Tadilat ₺800+' },
-    en: { n: 'Wedding · Evening · Special', d: 'Wedding and evening dress ALTERATIONS (we do not sew wedding dresses) · engagement dress alterations.', p: 'Alteration €40+' },
-    ru: { n: 'Свадьба · Вечер · Торжество', d: 'Подгонка свадебных и вечерних платьев (свадебные платья не шьём) · платья на помолвку.', p: 'Подгонка €40+' },
-    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid- und Abendkleid-ÄNDERUNG (wir nähen keine Brautkleider) · Verlobungskleid ändern.', p: 'Änderung €40+' } },
+    tr: { n: 'Gelinlik · Abiye · Özel Gün', d: 'Gelinlik ve abiye TADİLATI (gelinlik dikimi yapılmaz) · abiye tamiri · nişan ve kına kıyafeti tadilatı', p: 'Fotoğrafa göre' },
+    en: { n: 'Wedding · Evening · Special', d: 'Wedding and evening dress ALTERATIONS (we do not sew wedding dresses) · engagement dress alterations.', p: 'By photo / job detail' },
+    ru: { n: 'Свадьба · Вечер · Торжество', d: 'Подгонка свадебных и вечерних платьев (свадебные платья не шьём) · платья на помолвку.', p: 'По фото / объёму работ' },
+    de: { n: 'Hochzeit · Abend · Anlass', d: 'Brautkleid- und Abendkleid-ÄNDERUNG (wir nähen keine Brautkleider) · Verlobungskleid ändern.', p: 'Nach Foto / Aufwand' } },
   { icon: '🏨', id: 'uniforma',
     img: '/gorseller/uniforma.webp',
     alt: 'Otel üniforma aşçı garson personel dikimi Antalya — Terzi Can (örnek görsel)',
@@ -136,20 +136,20 @@ const PRICES: Record<Lang, string[][]> = (() => {
   return {
     tr: mk('tr', [
       ['Paça / Pantolon / Etek Kısaltma', '₺200+'], ['Bel Daraltma', '₺200+'], ['Fermuar Değişimi — Pantolon/Kot', '₺300+'],
-      ['Fermuar Değişimi — Mont/Ceket/Deri', '₺300+'], ['Kol Kısaltma', '₺200+'], ['Gelinlik Tadilatı (dikimi yapılmaz)', '₺800+'], ['Abiye Tadilatı', '₺800+'],
+      ['Fermuar Değişimi — Mont/Ceket/Deri', '₺300+'], ['Kol Kısaltma', '₺200+'], ['Gelinlik Tadilatı (dikimi yapılmaz)', 'Fotoğrafa göre'], ['Abiye Tadilatı', 'Fotoğrafa göre'],
       ['Yırtık Onarımı', 'Fotoğrafa göre'],
     ], ['Elbise / Abiye Dikimi', 'Etek / Pantolon Dikimi', 'Çocuk Kıyafeti Dikimi', 'Damatlık / Takım Dikimi'], [['Üniforma (kişi başı)', 'Teklif / Quote', 'Sipariş miktarına göre']]),
     en: mk('en', [
       ['Trouser / Skirt Hemming', '€10+'], ['Waist Taking In', '€10+'], ['Zip — Trousers / Jeans', '€15+'], ['Zip — Coat / Jacket / Leather', '€20+'],
-      ['Sleeve Shortening', '€10+'], ['Wedding Dress Alteration (no wedding dress sewing)', '€40+'], ['Evening Gown Alteration', '€40+'], ['Tear Repair', 'By photo'],
+      ['Sleeve Shortening', '€10+'], ['Wedding Dress Alteration (no wedding dress sewing)', 'By photo'], ['Evening Gown Alteration', 'By photo'], ['Tear Repair', 'By photo'],
     ], ['Dress / Evening Gown Making', 'Skirt / Trousers Sewing', "Children's Clothing Sewing", 'Groom Suit / Suit Making'], [['Uniform (per person)', 'Quote', 'On quantity']]),
     ru: mk('ru', [
       ['Подгонка брюк / юбки', '€10+'], ['Заужение талии', '€10+'], ['Молния — брюки/джинсы', '€15+'], ['Молния — пальто/пиджак/кожа', '€20+'],
-      ['Укорочение рукавов', '€10+'], ['Подгонка свадебного платья (пошив не делаем)', '€40+'], ['Подгонка вечернего платья', '€40+'], ['Ремонт разрывов', 'По фото'],
+      ['Укорочение рукавов', '€10+'], ['Подгонка свадебного платья (пошив не делаем)', 'По фото'], ['Подгонка вечернего платья', 'По фото'], ['Ремонт разрывов', 'По фото'],
     ], ['Пошив платья / вечернего платья', 'Пошив юбки / брюк', 'Пошив детской одежды', 'Костюм жениха / костюм на заказ'], [['Форма (на человека)', 'Запрос', 'По заказу']]),
     de: mk('de', [
       ['Hose / Rock kürzen', '€10+'], ['Taille enger machen', '€10+'], ['Reißverschluss — Hose/Jeans', '€15+'], ['Reißverschluss — Mantel/Jacke/Leder', '€20+'],
-      ['Ärmel kürzen', '€10+'], ['Brautkleid ändern (kein Brautkleid-Nähen)', '€40+'], ['Abendkleid ändern', '€40+'], ['Riss reparieren', 'Per Foto'],
+      ['Ärmel kürzen', '€10+'], ['Brautkleid ändern (kein Brautkleid-Nähen)', 'Per Foto'], ['Abendkleid ändern', 'Per Foto'], ['Riss reparieren', 'Per Foto'],
     ], ['Kleid / Abendkleid nähen', 'Rock / Hose nähen', 'Kinderkleidung nähen', 'Anzug (Bräutigam) nähen'], [['Uniform (pro Person)', 'Angebot', 'Je nach Menge']]),
   };
 })();
@@ -728,7 +728,7 @@ export default function TerziClient({ gbp1 }: Props) {
                   { ic: '💬', lbl: 'WhatsApp', val: <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer">{PHONE_DISPLAY}</a> },
                   { ic: '🕐', lbl: 'Çalışma Saatleri', val: <span>{L.hours}</span> },
                   { ic: '📍', lbl: 'Bölge', val: <span>{lang === 'tr' ? 'Konyaaltı, Lara, Belek, Kemer, Side — Araçlı Terzi Servisi' : lang === 'en' ? 'Konyaaltı & Nearby Districts & Hotels — Mobile Tailor' : lang === 'ru' ? 'Все районы и отели Антальи' : 'Alle Antalya-Bezirke & Hotels'}</span> },
-                  { ic: '💳', lbl: lang === 'tr' ? 'Ödeme & Para Birimleri' : 'Payment & Currencies', val: <span>EUR · USD · RUB · TRY · Credit Card</span> },
+                  { ic: '💳', lbl: lang === 'tr' ? 'Ödeme & Para Birimleri' : 'Payment & Currencies', val: <span>{lang === 'tr' ? 'Tüm para birimleri · nakit · kart' : 'Any currency · cash · card'}</span> },
                   { ic: '🌍', lbl: lang === 'tr' ? 'Diller' : 'Languages', val: <span>🇹🇷 TR · 🇬🇧 EN · 🇷🇺 RU · 🇩🇪 DE</span> },
                 ].map(({ ic, lbl, val }, i) => (
                   <div key={i} className="tcrow">

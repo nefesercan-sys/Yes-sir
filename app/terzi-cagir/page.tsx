@@ -137,7 +137,7 @@ export default function TerziCagirPage() {
     ['Ceket Tamiri', '₺200', 'Aynı gün'],
     ['Mont Tamiri', '₺200', 'Aynı gün'],
     ['T-Shirt Tamiri', 'Fotoğrafa göre', 'Aynı gün'],
-    ['Abiye / Gelinlik Tadilatı', '₺800', 'Aynı gün'],
+    ['Abiye / Gelinlik Tadilatı', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
     ['Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ];
 

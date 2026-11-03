@@ -168,7 +168,7 @@ const jsonLd = {
           {
             '@type': 'Offer',
             name: 'Gelinlik ve Abiye Tadilatı',
-            description: 'Gelinlik ve abiye tadilatı; fiyat ₺800\'den başlar.',
+            description: 'Gelinlik ve abiye tadilatı; fiyat fotoğrafa veya işin detayına göre belirlenir.',
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,

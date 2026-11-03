@@ -172,7 +172,7 @@ const CATEGORIES = [
     tag: 'Hayat Boyu Anı',
     title: 'Gelinlik Tadilatı & Damatlık',
     subtitle: 'O Güne Layık Tek Parça — Sadece Sizin İçin',
-    desc: `Gelinlik dikimi yapmıyoruz; yalnızca var olan gelinlik ve abiyede TADİLAT (₺800'den) yapıyoruz. Damatlık dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir. Fotoğrafı WhatsApp'tan paylaşın.`,
+    desc: `Gelinlik dikimi yapmıyoruz; yalnızca var olan gelinlik ve abiyede TADİLAT (fotoğrafa veya işin detayına göre fiyatlanır) yapıyoruz. Damatlık dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir. Fotoğrafı WhatsApp'tan paylaşın.`,
     images: [IMG.gelin1, IMG.gelin2, IMG.gelin3],
     features: ['Gelinlik ve abiye tadilatı', 'Damatlık dikimi', 'Prova ve düzeltme'],
     waMsg: 'Merhaba, gelinlik/abiye tadilatı veya damatlık dikimi için randevu almak istiyorum.',

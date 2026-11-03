@@ -279,7 +279,7 @@ export const SERVICES: Service[] = [
     name: { tr: 'Abiye ve Gelinlik Tadilatı', en: 'Evening & Wedding Dress Alteration', ru: 'Подгонка вечерних и свадебных платьев', de: 'Abendkleid und Brautkleid ändern' },
     q: { tr: 'abiye ve gelinlik tadilatı', en: 'evening dress alteration', ru: 'подгонка вечернего платья', de: 'Abendkleid ändern' },
     priceText: {
-      tr: `Abiye tadilatı ₺${PRICE_FROM.abiye}'den, gelinlik tadilatı ₺${PRICE_FROM.gelinlik}'den başlar.`,
+      tr: `Abiye ve gelinlik tadilatı fotoğrafa veya işin detayına göre fiyatlanır.`,
       en: `Evening dress and wedding dress alterations; the price is confirmed on WhatsApp from a photo.`,
       ru: `Подгонка вечерних и свадебных платьев; цена уточняется в WhatsApp по фото.`,
       de: `Abendkleid- und Brautkleid-Änderung; der Preis wird per WhatsApp anhand eines Fotos bestätigt.`,
@@ -298,8 +298,8 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    id: 'abiye', icon: '👗', time: 'repair', priceFrom: PRICE_FROM.abiye, priceText: {
-      tr: 'Abiye tadilatı ₺800\'den başlar.', en: 'Evening dress alterations; the price is confirmed on WhatsApp from a photo.',
+    id: 'abiye', icon: '👗', time: 'repair', priceText: {
+      tr: 'Abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır.', en: 'Evening dress alterations; the price is confirmed on WhatsApp from a photo.',
       ru: 'Подгонка вечерних платьев; цена уточняется в WhatsApp по фото.', de: 'Abendkleid-Änderung; der Preis wird per WhatsApp anhand eines Fotos bestätigt.',
     },
     slug: { tr: 'abiye-tadilati-gece-kiyafetleri', en: 'evening-dress-alteration-formal-wear', ru: 'podgonka-vechernih-platev-narjadov', de: 'abendkleid-festmode-aendern' },

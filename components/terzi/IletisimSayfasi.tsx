@@ -72,7 +72,7 @@ const T = {
     faq: [
       ['Pazar günü açık bir terzi var mı?', 'Evet, Terzi Can Pazar dahil her gün 08:00–23:00 arası açık.'],
       ['Terzi Can\'ın telefon numarası kaç?', `${PHONE}. Hem arayabilir hem aynı numaradan WhatsApp'ta yazabilirsiniz.`],
-      ['Fiyatı önceden nasıl öğrenirim?', 'Kıyafetin fotoğrafını WhatsApp\'tan atın. Başlangıç fiyatları: paça kısaltma ₺200, fermuar değişimi ₺300, abiye tadilatı ₺800, gelinlik tadilatı ₺800.'],
+      ['Fiyatı önceden nasıl öğrenirim?', 'Kıyafetin fotoğrafını WhatsApp\'tan atın. Başlangıç fiyatları: paça kısaltma ₺200, fermuar değişimi ₺300, abiye ve gelinlik tadilatı fotoğrafa veya işin detayına göre fiyatlanır.'],
       ['Otelimden ya da evimden alıyor musunuz?', 'Evet. Eve ve otele alım-teslim hizmet verdiğimiz her bölgede ücretsizdir; yalnızca yapılan iş ücretlendirilir.'],
       ['Atölye tam olarak nerede?', 'Hurma Mahallesi, Konyaaltı. "Haritada Aç" düğmesiyle yol tarifi alabilirsiniz.'],
       ['Yabancı misafirlere hizmet veriyor musunuz?', 'Evet. WhatsApp\'tan kendi dilinizde yazabilirsiniz.'],
@@ -160,7 +160,7 @@ const T = {
     faq: [
       ['Есть ли в Анталье портной, который работает в воскресенье?', 'Да, Terzi Can открыт каждый день, включая воскресенье, с 08:00 до 23:00.'],
       ['Какой номер телефона у Terzi Can?', `${PHONE}. Можно позвонить или написать на тот же номер в WhatsApp.`],
-      ['Как узнать цену заранее?', 'Пришлите фото вещи в WhatsApp. Цены от: подшив — €10, замена молнии — €15, подгонка вечерних и свадебных платьев — €40.'],
+      ['Как узнать цену заранее?', 'Пришлите фото вещи в WhatsApp. Цены от: подшив — €10, замена молнии — €15, подгонка вечерних и свадебных платьев — по фото или объёму работ.'],
       ['Вы забираете вещи из отеля или с дома?', 'Да. Забор и доставка в отели и на дом бесплатны во всех районах, где мы работаем.'],
       ['Где именно мастерская?', 'Hurma Mahallesi, Коньяалты. Кнопка «Открыть на карте» построит маршрут.'],
       ['Вы работаете с иностранными гостями?', 'Да. Помимо турецкого говорим по-русски, по-английски и по-немецки.'],

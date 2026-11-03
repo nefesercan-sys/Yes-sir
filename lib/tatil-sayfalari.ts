@@ -1,7 +1,7 @@
 // Turist niyetli 4 dilli rehber sayfaları (Terzi Can, Konyaaltı): acil onarım, otele gelen terzi, etkinlik kıyafeti tadilatı.
 // Yalnızca doğrulanmış bilgi: Hurma/Konyaaltı atölyesi, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat,
 // Otellere alım-teslim her bölgede ücretsiz, eve de ücretsiz (lib/business.ts); paça ₺200'den, fermuar ₺300'den,
-// bel daraltma ₺200'den, abiye/gelinlik TADİLATI ₺800'den. Sabit dikim fiyatı YAZILMAZ (fotoğrafa ve istediğiniz modele göre); süre: normal aynı gün, acil 1–2 saat, özel dikim modele/adede göre.
+// bel daraltma ₺200'den, abiye/gelinlik TADİLATI fotoğrafa/işin detayına göre. Sabit dikim fiyatı YAZILMAZ (fotoğrafa ve istediğiniz modele göre); süre: normal aynı gün, acil 1–2 saat, özel dikim modele/adede göre.
 // Para birimi, ödeme yöntemi, puan, müşteri sayısı veya sahte vaat YOKTUR.
 type L4 = 'tr' | 'en' | 'ru' | 'de';
 type Sec = { h: string; p?: string; ul?: string[] };
@@ -191,18 +191,18 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
   etkinlik: {
     tr: {
       t: 'Tatilde Abiye ve Takım Tadilatı Antalya | Terzi Can',
-      d: "Düğün, gala ya da akşam yemeği için abiye, gece elbisesi ve takım elbise tadilatı. Abiye tadilatı ₺800'den. Fotoğraf gönderin, tarihinizi yazın.",
+      d: "Düğün, gala ya da akşam yemeği için abiye, gece elbisesi ve takım elbise tadilatı. Abiye tadilatı fotoğrafa göre fiyatlanır. Fotoğraf gönderin, tarihinizi yazın.",
       h1: 'Tatilde Etkinlik Kıyafeti Tadilatı: Abiye, Gece Elbisesi, Takım',
       badge: 'Terzi Can · Konyaaltı, Antalya',
       lead: "Düğün, gala ya da özel bir akşam için kıyafetiniz olmuyor mu? Daraltma, kısaltma ve fermuar değişimi için fotoğraf gönderin; etkinlik tarihinizi yazın, buna göre planlayalım.",
       secs: [
-        { h: 'Neler yapıyoruz?', ul: ["Abiye ve gece elbisesi tadilatı: ₺800'den", "Gelinlik tadilatı: ₺800'den", 'Takım elbise ve ceket tadilatı', 'Daraltma, kısaltma, fermuar değişimi',
+        { h: 'Neler yapıyoruz?', ul: ["Abiye ve gece elbisesi tadilatı: fotoğrafa göre", "Gelinlik tadilatı: fotoğrafa göre", 'Takım elbise ve ceket tadilatı', 'Daraltma, kısaltma, fermuar değişimi',
           'Ölçüye göre gece kıyafeti dikimi (fiyat fotoğrafa ve istediğiniz modele göre)'] },
         { h: 'Tarihinizi baştan yazın', p: "Etkinlik tarihini ve otelinizin bölgesini WhatsApp'ta yazın. Süre işe ve yoğunluğa göre değişir; abiye ve gelinlik gibi kapsamlı işlerde daha erken yazmanız gerekir. Yetişip yetişmeyeceğini baştan açıkça söyleriz." },
         { h: 'Alım ve teslim', p: "Eve ve otele alım-teslim tüm bölgelerde ücretsizdir; yalnızca yapılan iş ücretlendirilir." },
       ],
       faq: [
-        ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı ₺800'den başlar; işin kapsamı fotoğrafla netleşir."],
+        ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı fiyatı fotoğrafa veya işin detayına göre belirlenir; süre aynı gün ya da işe göre 1–2 gündür."],
         ['Etkinliğim birkaç gün sonra, yetişir mi?', 'Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır; özel dikimde süre modele ve adede göre belirlenir. Tarihi yazın, baştan söyleyelim.'],
         ['Kıyafeti otelden alıyor musunuz?', "Evet, otelden alım ve teslim ücretsizdir."],
         ['Sıfırdan gece elbisesi diktirebilir miyim?', "Evet, ölçüye göre elbise dikimi yapıyoruz; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. Gelinlik dikimi yapılmaz, yalnızca tadilat yapılır."],

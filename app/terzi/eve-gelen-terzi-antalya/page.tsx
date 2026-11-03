@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { zoneAlt } from '@/lib/intl-zones';
+import { HOTEL_NOTE } from '@/lib/business';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -30,7 +31,7 @@ const OTELLER = [
 const FAQ: [string, string][] = [
               ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
               ['Araçlı terzi servisi ücretli mi?', 'Eve ve otele servis ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
-              ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. WhatsApp: ${PHONE}`],
+              ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. ${HOTEL_NOTE.tr} WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
               ['Do you come to hotels in Antalya?', `Yes! Tailor Can serves hotels in Belek, Lara, Kemer and Side — Belek, Lara, Kemer. English-speaking tailor service. WhatsApp: ${PHONE}`],
@@ -294,8 +295,8 @@ export default function EveGelenTerziPage() {
                   ['Fermuar Değişimi','₺300+','Aynı gün'],
                   ['Elbise / Ceket Daraltma','₺200+','Aynı gün'],
                   ['Kol Kısaltma','₺200+','Aynı gün'],
-                  ['Abiye Tamiri','₺800+','Aynı gün'],
-                  ['Gelinlik Tadilatı','₺800+','Aynı gün'],
+                  ['Abiye Tamiri','Fotoğrafa göre','Aynı gün / 1–2 gün'],
+                  ['Gelinlik Tadilatı','Fotoğrafa göre','Aynı gün / 1–2 gün'],
                   ['Yırtık Onarımı','Fotoğrafa göre','Aynı gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
