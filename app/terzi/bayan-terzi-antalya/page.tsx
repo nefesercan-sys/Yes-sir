@@ -20,7 +20,7 @@ const jsonLd = {
       description: "Antalya'da bayan terzi. Kadın elbise dikimi ₺800, etek kısaltma ₺200, abiye tamiri ₺800, gelinlik tadilatı ₺800. Eve ve otele gelen terzi servisi.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
-      offers: { '@type': 'AggregateOffer', lowPrice: '200', highPrice: '3000', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
+      offers: { '@type': 'AggregateOffer', lowPrice: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },
     {
       '@type': 'BreadcrumbList',

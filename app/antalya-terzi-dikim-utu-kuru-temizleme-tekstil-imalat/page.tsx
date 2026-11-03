@@ -109,8 +109,7 @@ const jsonLd = {
       areaServed: { '@type': 'City', name: 'Antalya' },
       offers: {
         '@type': 'AggregateOffer',
-        lowPrice: '80',
-        highPrice: '5000',
+        lowPrice: '200',
         priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
       },
