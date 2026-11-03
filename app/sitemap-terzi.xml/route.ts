@@ -56,6 +56,7 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/bayan-terzi-antalya`,   priority: '0.90', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/eve-gelen-terzi-antalya`, priority: '0.90', freq: 'weekly', alt: zoneAltMap('antalya') },
     { url: `${BASE_URL}/terzi/fermuar-degisimi`,      priority: '0.90', freq: 'weekly' },
+    { url: `${BASE_URL}/terzi/mont-tamiri-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/deri-ceket-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-pantolon-paca-kisaltma-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-pantolon-daraltma-antalya`, priority: '0.85', freq: 'weekly' },

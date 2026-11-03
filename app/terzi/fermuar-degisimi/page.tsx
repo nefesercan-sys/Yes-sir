@@ -80,6 +80,7 @@ const ADIMLAR: { no: string; baslik: string; aciklama: string }[] = [
 
 const DIGER_HIZMETLER: { href: string; ad: string }[] = [
   { href: '/terzi/paca-kisaltma-antalya', ad: 'Paça kısaltma' },
+  { href: '/terzi/mont-tamiri-tadilati-antalya', ad: 'Mont tamiri ve tadilatı' },
   { href: '/terzi/deri-ceket-tadilati-antalya', ad: 'Deri ceket tadilatı' },
   { href: '/terzi/kot-pantolon-paca-kisaltma-antalya', ad: 'Kot paça kısaltma' },
   { href: '/terzi/bay-terzi-antalya', ad: 'Bay terzi' },
