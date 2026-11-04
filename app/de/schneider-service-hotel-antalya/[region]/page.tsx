@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { OTEL_BOLGELERI, bulOtelBolgesi } from '@/lib/otel-bolgeleri';
 import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
 import { jsonLdString } from '@/lib/json-ld';
+import ReviewsBlock from '@/components/ReviewsBlock';
 
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
@@ -84,6 +85,15 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         description: seoContent.body2,
         url,
       },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: HOME_URL },
+          { '@type': 'ListItem', position: 2, name: 'Hotel-Schneiderservice in Antalya', item: `${HOME_URL}${BASE_PATH}` },
+          { '@type': 'ListItem', position: 3, name: r.name, item: url },
+        ],
+      },
     ],
   };
 
@@ -100,6 +110,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         maps={MAPS} 
         seoContent={seoContent} 
       />
+      <ReviewsBlock lang="de" schema />
     </>
   );
 }

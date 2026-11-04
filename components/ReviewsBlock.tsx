@@ -4,13 +4,19 @@ import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
 import { BUSINESS_ID, SITE_URL } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 
-type L = 'tr' | 'en' | 'ru' | 'de';
+type L = 'tr' | 'en' | 'ru' | 'de' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 const hasLang = (x: string | string[], l: string) => (Array.isArray(x) ? x.includes(l) : x === l);
 const T = {
   tr: { h: 'Müşteri Yorumları', on: "Google'da", rev: 'yorum', all: "Tüm yorumları Google'da gör", shown: (n: number, c: number) => `Google profilinde ${c} yorum var; metni doğrulanmış ${n} tanesi burada gösteriliyor.` },
   en: { h: 'Customer Reviews', on: 'on Google', rev: 'reviews', all: 'See all reviews on Google', shown: (n: number, c: number) => `The Google profile has ${c} reviews; the ${n} with verified text are shown here.` },
   ru: { h: 'Отзывы клиентов', on: 'в Google', rev: 'отзывов', all: 'Все отзывы в Google', shown: (n: number, c: number) => `В профиле Google ${c} отзывов; здесь показаны ${n} с проверенным текстом.` },
   de: { h: 'Kundenbewertungen', on: 'bei Google', rev: 'Bewertungen', all: 'Alle Bewertungen bei Google ansehen', shown: (n: number, c: number) => `Das Google-Profil hat ${c} Bewertungen; ${n} mit geprüftem Text werden hier gezeigt.` },
+  es: { h: 'Opiniones de clientes', on: 'en Google', rev: 'opiniones', all: 'Ver todas las opiniones en Google', shown: (n: number, c: number) => `El perfil de Google tiene ${c} opiniones; aquí se muestran ${n} con texto verificado.` },
+  fr: { h: 'Avis clients', on: 'sur Google', rev: 'avis', all: 'Voir tous les avis sur Google', shown: (n: number, c: number) => `Le profil Google compte ${c} avis ; ${n} avec texte vérifié sont affichés ici.` },
+  pl: { h: 'Opinie klientów', on: 'w Google', rev: 'opinii', all: 'Zobacz wszystkie opinie w Google', shown: (n: number, c: number) => `Profil Google ma ${c} opinii; tutaj pokazano ${n} ze zweryfikowanym tekstem.` },
+  uk: { h: 'Відгуки клієнтів', on: 'у Google', rev: 'відгуків', all: 'Усі відгуки в Google', shown: (n: number, c: number) => `У профілі Google ${c} відгуків; тут показано ${n} з перевіреним текстом.` },
+  nl: { h: 'Klantbeoordelingen', on: 'op Google', rev: 'beoordelingen', all: 'Alle beoordelingen op Google bekijken', shown: (n: number, c: number) => `Het Google-profiel heeft ${c} beoordelingen; ${n} met geverifieerde tekst worden hier getoond.` },
+  ar: { h: 'آراء العملاء', on: 'على Google', rev: 'تقييمات', all: 'عرض كل التقييمات على Google', shown: (n: number, c: number) => `لدى ملف Google ${c} تقييمات؛ يُعرض هنا ${n} منها بنص موثّق.` },
 } as const;
 
 // schema: sayfada işletme şeması yorumları zaten üretmiyorsa (BusinessSchema reviews=...) true ver; aynı @id'li düğüme yalnızca yorum alanlarını ekler.

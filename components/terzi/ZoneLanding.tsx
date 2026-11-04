@@ -11,6 +11,7 @@ import { jsonLdString } from '@/lib/json-ld';
 import { bolgeMatrisiTurist, bolgeEkSssTurist } from '@/lib/bolge-hizmet-matrisi-turist';
 import { HOTEL_NOTE } from '@/lib/business';
 import PhotoBand from '@/components/terzi/PhotoBand';
+import ReviewsBlock from '@/components/ReviewsBlock';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -32,6 +33,14 @@ export function zoneJsonLd(lang: ILang, zone: ZoneSlug) {
         '@type': 'Service', '@id': `${url}#service`, serviceType: 'Clothing alterations and tailoring', name: c.h1(z.name),
         provider: { '@id': BUSINESS_ID }, areaServed: { '@type': 'Place', name: `${z.name}, Antalya` }, inLanguage: lang,
         availableChannel: { '@type': 'ServiceChannel', serviceUrl: url, servicePhone: PHONE_TEL },
+      },
+      {
+        '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: SITE },
+          { '@type': 'ListItem', position: 2, name: c.back.replace(/^[←→\s]+/, ''), item: `${SITE}${iUrl(lang)}` },
+          { '@type': 'ListItem', position: 3, name: z.name, item: url },
+        ],
       },
       {
         '@type': 'FAQPage', '@id': `${url}#faq`,
@@ -121,6 +130,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
           </p>
         </section>
       </article>
+      <ReviewsBlock lang={lang} schema />
     </main>
   );
 }
