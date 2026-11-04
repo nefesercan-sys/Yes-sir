@@ -74,11 +74,18 @@ export const GOOGLE_REVIEWS: GoogleReview[] = [
     lang: 'tr',
     text: 'Arkadaşlarımızla eğlenmeye çıktık arkadaşımın elbisenin fermuarı patladı gittik 15 dkda halloldu kesinlikle tavsiye ediyoruz ayriyetten çok güler yüzlü bir abimizdi 🙏❤️',
   },
+  {
+    author: 'Andy B.',
+    rating: 5,
+    date: '2026-11-04',
+    lang: 'de',
+    text: 'Top Service, tolle Arbeit. Vielen Dank und bis zum nächsten Mal.',
+  },
 ];
 
-// Google profilindeki toplam puan ve yorum sayısı (Google profil ekranında doğrulandı: 5,0 · 9 yorum). Yeni yorum gelince count'u güncelle.
+// Google profilindeki toplam puan ve yorum sayısı (Google profil ekranında doğrulandı: 5,0 · 10 yorum). Yeni yorum gelince count'u güncelle.
 // Listedeki GOOGLE_REVIEWS yalnızca metni birebir doğrulanmış yorumlardır; sayı profildeki toplamı gösterir.
-export const GOOGLE_PROFILE_STATS = { count: 9, average: '5.0' };
+export const GOOGLE_PROFILE_STATS = { count: 10, average: '5.0' };
 
 export function reviewStats() {
   return GOOGLE_PROFILE_STATS;
