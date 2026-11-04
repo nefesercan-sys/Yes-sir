@@ -69,6 +69,8 @@ const nextConfig = {
       { source: '/bal/:path*', destination: '/terzi', permanent: false },
       // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
       { source: '/terzi/kuru-temizleme-antalya', destination: '/terzi', permanent: false },
+      // Adresinde 'kuru-temizleme' geçen ama kuru temizleme verilmeyen eski sayfa → en yakın Konyaaltı sayfası (kanibalizasyon giderildi).
+      { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', permanent: true },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
       // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa'].map((slug) => ({
@@ -137,6 +139,12 @@ const nextConfig = {
       { source: '/en/(.*)', headers: [{ key: 'Content-Language', value: 'en' }] },
       { source: '/ru/(.*)', headers: [{ key: 'Content-Language', value: 'ru' }] },
       { source: '/de/(.*)', headers: [{ key: 'Content-Language', value: 'de' }] },
+      { source: '/es/(.*)', headers: [{ key: 'Content-Language', value: 'es' }] },
+      { source: '/fr/(.*)', headers: [{ key: 'Content-Language', value: 'fr' }] },
+      { source: '/pl/(.*)', headers: [{ key: 'Content-Language', value: 'pl' }] },
+      { source: '/uk/(.*)', headers: [{ key: 'Content-Language', value: 'uk' }] },
+      { source: '/nl/(.*)', headers: [{ key: 'Content-Language', value: 'nl' }] },
+      { source: '/ar/(.*)', headers: [{ key: 'Content-Language', value: 'ar' }] },
 
       // Giriş gerektiren sayfalar — noindex
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },

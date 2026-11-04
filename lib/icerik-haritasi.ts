@@ -35,7 +35,6 @@ const TR_SERVICES: MapLink[] = [
   { href: '/terzi/uniforma-uretimi-antalya', label: 'Üniforma üretimi' },
   { href: '/antalya-terzi-elbise-dikimi', label: 'Elbise dikimi' },
   { href: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', label: 'Dikim ve tamirat' },
-  { href: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', label: 'Dikim ve tekstil imalatı' },
   { href: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', label: 'Konyaaltı elbise dikim ve tadilat' },
   { href: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', label: 'Konyaaltı tadilat' },
   { href: '/online-terzi-hizmeti', label: 'Online terzi hizmeti' },

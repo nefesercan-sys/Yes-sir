@@ -8,7 +8,10 @@
 import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, timingSafeEqual } from 'crypto';
 
 function anahtarMetni(): string {
-  return process.env.TERZI_SESSION_SECRET || process.env.NEXTAUTH_SECRET || 'otp';
+  // Sabit yedek anahtar YOK: sır tanımlı değilse çağrı anında hata verilir (build sırasında değil).
+  const s = process.env.TERZI_SESSION_SECRET || process.env.NEXTAUTH_SECRET;
+  if (!s) throw new Error('TERZI_SESSION_SECRET (veya NEXTAUTH_SECRET) tanımlı olmalı');
+  return s;
 }
 
 export function otpHashle(telefon: string, kod: string): string {
