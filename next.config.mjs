@@ -82,6 +82,11 @@ const nextConfig = {
       ...['meltem', 'sirinyali', 'fener', 'guzeloba'].flatMap((slug) => [
         { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },
       ]),
+      // Search Console 404: Türkçe karakterli eski mahalle adresleri ve kesik adres → gerçek sayfa
+      ...[['çakırlar', 'cakirlar'], ['uncalı', 'uncali'], ['gürsu', 'gursu'], ['sarısu', 'sarisu']].map(([eski, yeni]) => ({
+        source: `/terzi/konyaalti/${eski}`, destination: `/terzi/konyaalti/${yeni}`, permanent: true,
+      })),
+      { source: '/online-terzi-hizme', destination: '/online-terzi-hizmeti', permanent: true },
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       // Tek kayıt akışı: /kayit (bcrypt'li /api/auth/kayit); /uye-ol eski ve ikinci akıştır
       { source: '/uye-ol', destination: '/kayit', permanent: false },
