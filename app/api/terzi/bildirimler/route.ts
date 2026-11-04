@@ -12,7 +12,7 @@ export async function GET() {
   if (!userId) return NextResponse.json([], { status: 401 });
 
   const db = await getDb();
-  const kullanici = await db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) });
+  const kullanici = await db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) }, { projection: { telefon: 1 } });
   if (!kullanici) return NextResponse.json([], { status: 404 });
 
   const bildirimler = await db.collection('bildirimler')

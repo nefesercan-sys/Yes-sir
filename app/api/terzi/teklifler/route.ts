@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
 
     const db = await getDb();
     const [saglayici, ilan] = await Promise.all([
-      db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) }),
+      db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) }, { projection: { telefon: 1 } }),
       db.collection('ilanlar').findOne({ _id: new ObjectId(ilanId) }),
     ]);
 

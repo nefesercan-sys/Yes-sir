@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
 
     const db = await getDb();
     if (!ObjectId.isValid(userId)) return NextResponse.json({ error: 'Geçersiz oturum' }, { status: 401 });
-    const kullanici = await db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) });
+    const kullanici = await db.collection('terziKullanicilar').findOne({ _id: new ObjectId(userId) }, { projection: { telefon: 1 } });
     if (!kullanici) return NextResponse.json({ error: 'Kullanıcı bulunamadı' }, { status: 404 });
 
     const ilan: Record<string, any> = {

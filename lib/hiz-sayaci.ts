@@ -1,6 +1,6 @@
 // lib/hiz-sayaci.ts — MongoDB tabanlı, ATOMİK sabit pencereli sayaç (sunucusuz ortamda örnekler arası ortak).
 // Tek belge üzerinde tek bir güncelleme boru hattı ile çalışır: oku-sonra-yaz yarışı yoktur.
-// Anahtar belgenin _id'sidir (string), bu yüzden ek indeks gerekmez. İsteğe bağlı TTL: { sonGuncelleme: 1 } expireAfterSeconds.
+// Anahtar belgenin _id'sidir (string), bu yüzden ek indeks gerekmez. TTL: { sonGuncelleme: 1 } expireAfterSeconds=86400 indeksi /api/terzi/admin/index-olustur ile oluşturulur.
 import type { Db } from 'mongodb';
 
 const KOLEKSIYON = 'hizSayaclari';
