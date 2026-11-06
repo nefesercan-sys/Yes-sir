@@ -1,0 +1,16 @@
+# Production deploy başarılı olunca IndexNow (Bing/Yandex → ChatGPT arama, Copilot) tetiklenir.
+# Gereken: GitHub → Settings → Secrets → INDEXNOW_SECRET (Vercel'deki INDEXNOW_SECRET ile aynı değer). Yoksa adım atlanır.
+name: IndexNow
+on:
+  deployment_status:
+jobs:
+  ping:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: IndexNow tetikle
+        env:
+          INDEXNOW_SECRET: ${{ secrets.INDEXNOW_SECRET }}
+        run: |
+          if [ -z "$INDEXNOW_SECRET" ]; then echo "INDEXNOW_SECRET tanımlı değil, atlanıyor."; exit 0; fi
+          curl -fsS -m 60 -H "Authorization: Bearer $INDEXNOW_SECRET" https://swaphubs.com/api/indexnow || echo "IndexNow çağrısı başarısız (kritik değil)."

@@ -11,11 +11,15 @@ export const PHONE_E164 = '+905318986418';
 export const PHONE_DISPLAY = '+90 531 898 64 18';
 export const WA_NUMBER = '905318986418';
 export const MAPS_URL = 'https://www.google.com/maps?cid=6436895271281342624';
+export const GOOGLE_REVIEW_URL = 'https://g.page/r/CYUmDLIgrCRREAE/review';
+/** Aynı işletmenin diğer RESMÎ web sitesi (iki site de resmîdir; her biri kendi adresinde canonical kalır). */
+export const OTHER_OFFICIAL_SITE = 'https://terzihizmeti.com.tr';
+export const OTHER_OFFICIAL_BUSINESS_ID = `${OTHER_OFFICIAL_SITE}/#business`;
 export const BUSINESS_ID = `${SITE_URL}/terzi#business`;
 export const waUrl = (text?: string) => `https://wa.me/${WA_NUMBER}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 /** Hizmet verilen bölgeler (schema.org areaServed ve metinler için tek liste). */
-export const AREA_SERVED = ['Konyaaltı', 'Muratpaşa', 'Lara', 'Belek', 'Side', 'Manavgat', 'Kemer', 'Antalya'] as const;
+export const AREA_SERVED = ['Konyaaltı', 'Muratpaşa', 'Lara', 'Güzeloba', 'Kundu', 'Kepez', 'Aksu', 'Döşemealtı', 'Belek', 'Serik', 'Side', 'Manavgat', 'Kemer', 'Beldibi', 'Göynük', 'Antalya'] as const;
 
 export const BUSINESS = {
   id: BUSINESS_ID,
@@ -31,10 +35,10 @@ export const BUSINESS = {
   ],
   phone: PHONE_E164,
   phoneDisplay: PHONE_DISPLAY,
-  priceRange: '$$',
+  priceRange: '₺₺',
   languages: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
-  currencies: 'Any currency (TRY, EUR, USD, RUB and others)',
-  payments: 'Cash, Credit Card, Bank Transfer',
+  currencies: 'TRY, EUR, USD, GBP, RUB and other currencies',
+  payments: 'Cash, Credit Card',
   image: `${SITE_URL}/og/terzi-can.jpg`,
   address: {
     streetAddress: 'Hurma Mahallesi',
@@ -48,11 +52,40 @@ export const BUSINESS = {
   hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '23:00' },
   foundingYear: '2006',
   areaServed: AREA_SERVED,
-  sameAs: [MAPS_URL, 'https://terzihizmeti.com.tr'],
+  sameAs: [MAPS_URL, GOOGLE_REVIEW_URL, `https://wa.me/${WA_NUMBER}`, OTHER_OFFICIAL_SITE],
 } as const;
 
 /** schema.org areaServed düğümleri (tek işletme varlığında kullanılır). */
 export const areaServedSchema = () => AREA_SERVED.map((name) => ({ '@type': name === 'Antalya' ? 'City' : 'Place', name }));
+
+
+/** Ortak işletme düğümü çekirdeği (tek kaynak). BusinessSchema ve lib/json-ld.ts normalizasyonu bunu kullanır. */
+export function businessCore() {
+  const b = BUSINESS;
+  return {
+    '@type': ['LocalBusiness', 'ClothingStore'],
+    '@id': b.id,
+    name: b.name,
+    url: `${SITE_URL}/terzi`,
+    telephone: b.phone,
+    priceRange: b.priceRange,
+    currenciesAccepted: b.currencies,
+    paymentAccepted: b.payments,
+    knowsLanguage: [...b.languages],
+    foundingDate: b.foundingYear,
+    image: b.image,
+    hasMap: MAPS_URL,
+    address: { '@type': 'PostalAddress', ...b.address },
+    geo: { '@type': 'GeoCoordinates', ...b.geo },
+    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: [...b.hours.days], opens: b.hours.opens, closes: b.hours.closes }],
+    areaServed: areaServedSchema(),
+    contactPoint: [
+      { '@type': 'ContactPoint', contactType: 'customer service', telephone: b.phone, availableLanguage: [...b.languages], hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: [...b.hours.days], opens: b.hours.opens, closes: b.hours.closes } },
+      { '@type': 'ContactPoint', contactType: 'sales', url: `https://wa.me/${WA_NUMBER}`, telephone: b.phone, availableLanguage: [...b.languages] },
+    ],
+    sameAs: [...b.sameAs],
+  };
+}
 
 // ── Fiyat başlangıçları (₺) — yalnızca sitede zaten yayınlanan rakamlar ────────────
 export const PRICE_FROM = {

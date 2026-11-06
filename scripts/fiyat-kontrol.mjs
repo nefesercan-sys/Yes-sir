@@ -64,7 +64,6 @@ try {
     const t = readFileSync(f, 'utf8');
     const satir = t.split('\n').find((l) => /Service area:|Visits and pickups cover/.test(l)) ?? '';
     for (const a of alanlar) if (!satir.includes(a === 'Side' ? 'Side' : a)) bulgu.push(`${f}  hizmet bölgesi satırında "${a}" yok (lib/business.ts AREA_SERVED ile aynı olmalı)`);
-    for (const x of ['Kepez', 'Döşemealtı', 'Serik', 'Aksu']) if (satir.includes(x)) bulgu.push(`${f}  hizmet bölgesi satırında AREA_SERVED dışı "${x}" var`);
     const n = (t.match(/Last updated/g) ?? []).length;
     if (n !== 1) bulgu.push(`${f}  "Last updated" ${n} kez geçiyor (1 olmalı)`);
     if (/^## About swaphubs\.com\s*\n\s*\n(\*|##)/mi.test(t)) bulgu.push(`${f}  "About swaphubs.com" başlığı boş`);

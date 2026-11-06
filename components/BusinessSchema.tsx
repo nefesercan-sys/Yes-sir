@@ -8,7 +8,7 @@
 // Puan/yorum: varsayılan YOK. Sadece gerçek yorumlar `reviews` ile verilirse eklenir
 // (en az 1 gerçek yorum; puan verilen yorumlardan hesaplanır, uydurma sayı yok).
 // ============================================================
-import { BUSINESS, SITE_URL, areaServedSchema } from '@/lib/business';
+import { BUSINESS, SITE_URL, areaServedSchema, businessCore } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import { reviewStats } from '@/lib/reviews';
 
@@ -41,26 +41,9 @@ export default function BusinessSchema({
   const b = BUSINESS;
 
   const business: Record<string, unknown> = {
-    '@type': ['LocalBusiness', 'ClothingStore'],
-    '@id': b.id,
-    name: b.name,
+    ...businessCore(),
     alternateName: [...b.alternateName, ...alternateNames],
     description: businessDescription ?? description,
-    hasMap: b.sameAs[0],
-    url: `${SITE_URL}/terzi`,
-    telephone: b.phone,
-    image: b.image,
-    priceRange: b.priceRange,
-    currenciesAccepted: b.currencies,
-    paymentAccepted: b.payments,
-    knowsLanguage: b.languages,
-    address: { '@type': 'PostalAddress', ...b.address },
-    geo: { '@type': 'GeoCoordinates', ...b.geo },
-    openingHoursSpecification: [{
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: b.hours.days, opens: b.hours.opens, closes: b.hours.closes,
-    }],
-    sameAs: b.sameAs,
     potentialAction: [
       {
         '@type': 'CommunicateAction',

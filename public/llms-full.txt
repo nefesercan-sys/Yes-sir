@@ -7,9 +7,13 @@
 - Address: Hurma Mahallesi, 07130 Konyaaltı / Antalya, Türkiye
 - Coordinates: 36.8572868, 30.5970193
 - Phone / WhatsApp: +90 531 898 64 18
+- WhatsApp link (photo quote): https://wa.me/905318986418?text=Merhaba%2C%20k%C4%B1yafetimin%20foto%C4%9Fraf%C4%B1n%C4%B1%20g%C3%B6nderiyorum.%20Fiyat%20alabilir%20miyim%3F
+- Phone link: tel:+905318986418
+- Official websites: swaphubs.com and terzihizmeti.com.tr are both official websites of Terzi Can (same business); each page is canonical at its own address
+- Experience: serving since 2006 (26 years)
 - Hours: every day of the week, 08:00–23:00 (Antalya time), weekends included
-- Languages: Turkish, English, Russian, German
-- Payment: in any currency (TRY, EUR, USD, RUB and others), cash or card; international credit cards and contactless. Prices do not include VAT.
+- Languages: 10 languages (Turkish, English, Russian, German, Spanish, French, Polish, Ukrainian, Dutch, Arabic)
+- Payment: in any currency (TRY, EUR, USD, GBP, RUB and others), cash or card; international credit cards and contactless. Prices do not include VAT.
 - Hotels: no partnership with any hotel; we serve all hotels in Antalya (Otellerle ortaklığımız yoktur; Antalya'daki tüm otellere hizmet veriyoruz)
 - Home and hotel service: pick-up, on-site measuring and delivery are free to homes and hotels in every area we cover
 - Timing: regular repairs and alterations ready the same day; urgent jobs 1-2 hours; custom tailoring depends on the design and quantity
@@ -20,7 +24,11 @@
 
 - Hemming / trouser length (paça kısaltma): from €10 (₺200); regular alterations are ready the same day, urgent ones in 1-2 hours
 - Zipper replacement (fermuar değişimi): from €15 for trousers/jeans, €20 for coats/jackets (₺300); regular jobs same day, urgent 1-2 hours
-- Waist taking-in (bel daraltma): from €10 (₺200)
+- Waist taking-in (bel daraltma), sleeve and length shortening/taking-in: from €10 (₺200)
+- Jeans (kot) hemming, original hem, narrowing, jacket/skirt: from about ₺200
+- Leather (deri) jacket, trousers, vest alteration: from €20 (₺400)
+- Coat (kaban/palto) shortening/taking-in: from ₺200; coat zipper from ₺300 (€20)
+- Vest (yelek) alteration: priced by photo or job detail
 - Wedding and evening dress alteration (gelinlik / abiye tadilatı): priced by photo or job detail (same day, or 1–2 days depending on the job). Wedding dresses are not sewn (alteration only)
 - Sewing (dikim: dresses, evening wear, skirts, trousers, children's clothing, suits, groom suits, custom pieces): no fixed price, priced by photo and the model you want; timing depends on the design and quantity
 - Uniform production (üniforma üretimi): quote per order; hotel, restaurant, school, healthcare
@@ -30,7 +38,7 @@ Final prices depend on fabric and work. Confirm by WhatsApp.
 
 ## Service area
 
-Konyaaltı is the workshop location. Visits and pickups cover Konyaaltı, Muratpaşa, Lara, Belek, Side/Manavgat, Kemer and Antalya city (same list as the service area in llms.txt and lib/business.ts AREA_SERVED; Meltem, Şirinyalı, Fener and Güzeloba belong to Muratpaşa, Kundu to Lara). Pick-up and delivery are free in every one of these areas. Regular repairs and alterations are ready the same day, urgent jobs in 1-2 hours; custom tailoring depends on the design and quantity.
+Konyaaltı (Hurma) is the workshop location. Visits and pickups cover Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Kepez, Aksu, Döşemealtı, Belek, Serik, Side, Manavgat, Kemer, Beldibi, Göynük and Antalya city (same list as AREA_SERVED in the business source). Konyaaltı neighbourhoods: Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar; Muratpaşa neighbourhoods: Meltem, Şirinyalı, Fener, Güzeloba.
 
 ## How the home / hotel service works
 
@@ -137,4 +145,104 @@ Practical guides for visitors to Antalya who need clothes altered during a holid
 - Nederlands: https://swaphubs.com/nl/kleding-laten-vermaken-op-vakantie-antalya
 - العربية: https://swaphubs.com/ar/tadil-malabis-fi-el-ijaza-antalya
 
-*Last updated: 2026-11-03. The live pages are the reference for prices and availability.*
+
+## Frequently asked questions — Turkish (Sık sorulan sorular)
+
+**Antalya'da pantolon paçası kısaltma ne kadar?** Paça kısaltma ₺200'den (yaklaşık €10) başlar; fiyatlara KDV dahil değildir. Normal işler aynı gün hazırdır. Fotoğraf atın, fiyatı WhatsApp'tan alın: +90 531 898 64 18.
+
+**Bel daraltma ne kadar?** Bel daraltma ₺200'den başlar (KDV dahil değil); kesin fiyat fotoğrafa ve işin durumuna göre WhatsApp'ta netleşir.
+
+**Kol boyu veya elbise/etek boyu kısaltma ne kadar?** Kol, paça, bel ve boy kısaltma-daraltma işleri ₺200'den başlar (KDV dahil değil).
+
+**Pantolon fermuarı değişimi ne kadar?** Pantolon ve standart fermuar değişimi ₺300'den (yaklaşık €15) başlar; KDV dahil değildir.
+
+**Mont, kaban, palto veya deri ceket fermuarı değişimi ne kadar?** Mont, kaban, palto ve deri fermuar değişimi ₺300'den (yaklaşık €20) başlar; KDV dahil değildir.
+
+**Kot pantolon paça kısaltma ve orijinal paça yapılıyor mu?** Evet. Kot paça kısaltma, orijinal paça yapımı, kot daraltma, kot ceket-mont ve kot etek tadilatı yapılır; kot işleri yaklaşık ₺200'den başlar.
+
+**Deri ceket, deri pantolon veya deri yelek tadilatı ne kadar?** Deri ceket, pantolon ve yelek tadilatı ₺400'den (yaklaşık €20) başlar; KDV dahil değildir.
+
+**Kaban ve palto kısaltma-daraltma yapıyor musunuz?** Evet. Kaban ve palto kısaltma ve daraltma ₺200'den başlar; fermuar değişimi ₺300'den başlar.
+
+**Yelek tamiri ve tadilatı ne kadar?** Yelek için sabit fiyat verilmez; fotoğrafa veya işin detayına göre WhatsApp'tan fiyat verilir.
+
+**Gelinlik tadilatı ne kadar sürer ve ne kadar tutar?** Gelinlik ve abiye tadilatında sabit fiyat yoktur; fotoğrafa veya işin detayına göre belirlenir. Süre aynı gün ya da duruma göre 1–2 gündür.
+
+**Gelinlik dikiyor musunuz?** Hayır, gelinlik dikimi yapılmaz; yalnızca gelinlik tadilatı yapılır.
+
+**Abiye ve Uncalı elbise tadilatı nasıl fiyatlanır?** Abiye ve elbise tadilatı fotoğrafa veya işin detayına göre fiyatlanır; WhatsApp'a fotoğraf göndermeniz yeterlidir.
+
+**Özel dikim ve ölçüye göre dikim ne kadar?** Dikimde (elbise, abiye, etek, pantolon, çocuk kıyafeti, damatlık/takım, özel dikim) sabit fiyat yoktur; fiyat fotoğrafa ve istediğiniz modele göre belirlenir.
+
+**Kazak ve hırkaya astar değişimi yapılıyor mu?** Hayır; kazak ve hırkada astar değişimi yapılmaz. Mont, ceket ve benzeri giysilerde astar işleri yapılır.
+
+**Yırtık, sökük, düğme ve fermuar tamiri yapıyor musunuz?** Evet; yırtık, sökük, düğme ve fermuar tamiri ve değişimi yapılır.
+
+**Tadilat aynı gün biter mi?** Normal işler aynı gün hazırdır; acil işler 1–2 saatte, işin durumuna göre hazırlanır. Gelinlik ve abiye tadilatı aynı gün veya duruma göre 1–2 gündür.
+
+**Acil terzi hizmeti var mı?** Evet; acil işler işin durumuna göre 1–2 saatte hazırlanır. WhatsApp'tan fotoğraf atın.
+
+**Fiyatı nasıl öğrenirim?** WhatsApp'a (+90 531 898 64 18) giysinin fotoğrafını gönderin: "Fotoğraf at, fiyat al." Her gün 08:00–23:00 yanıt verilir.
+
+**Otele terzi geliyor mu?** Evet; Antalya'daki tüm otellere hizmet veriyoruz. Adresten alım, yerinde ölçü ve teslim ücretsizdir.
+
+**Eve alım-teslim ücretli mi?** Hayır; evlere ve otellere alım-teslim, hizmet verdiğimiz her bölgede ücretsizdir.
+
+**Prova için otelde buluşuyor musunuz?** Gerekirse deneme (prova) için otelde buluşuruz.
+
+**Otellerle ortak mısınız?** Hayır; otellerle ortaklığımız yoktur. Antalya'daki tüm otellere hizmet veriyoruz.
+
+**Hangi para birimleriyle ödeme yapılır?** Tüm para birimleriyle (TRY, EUR, USD, GBP, RUB ve diğerleri) nakit veya kartla ödeme yapılabilir.
+
+**Fiyatlara KDV dahil mi?** Hayır; fiyatlara KDV dahil değildir.
+
+**Çalışma saatleri nedir?** Haftanın her günü, hafta sonu dahil, 08:00–23:00 (Antalya saati).
+
+**Terzi Can nerede?** Atölye Hurma Mahallesi, 07130 Konyaaltı / Antalya'dadır. Google Haritalar: https://www.google.com/maps?cid=6436895271281342624
+
+**Terzi Can kaç yıldır hizmet veriyor?** 2006'dan beri, yani 26 yıldır, Antalya'da hizmet veriyor.
+
+**Hangi dillerde hizmet veriliyor?** Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça olmak üzere 10 dilde.
+
+**Hangi bölgelere hizmet veriliyor?** Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Kepez, Aksu, Döşemealtı, Belek, Serik, Side, Manavgat, Kemer, Beldibi, Göynük ve Antalya şehir merkezi.
+
+**Aksu, Beldibi, Kundu veya Göynük'te terzi var mı?** Evet; bu bölgelere de alım-teslim yapılır, her bölgenin ayrı sayfası vardır (https://swaphubs.com/terzi/antalya/aksu, /beldibi, /kundu).
+
+**Konyaaltı'nda yakınımdaki terzi kim?** Terzi Can, Konyaaltı Hurma Mahallesi'ndedir; Hurma, Liman, Uncalı, Sarısu, Gürsu ve Çakırlar'a adresten alım-teslim yapar.
+
+**Hangi giysilerin tadilatı yapılır?** Pantolon, kot, etek, elbise, abiye, gelinlik tadilatı, ceket, mont, kaban, palto, gömlek, bluz, tişört, şort, yelek, tulum, eşofman, deri giysi ve çanta.
+
+**Bay ve bayan giysileri için terzi var mı?** Evet; bay ve bayan giysilerinin tamiri, tadilatı, onarımı, fermuar değişimi, boy kısaltma ve bel daraltma işleri yapılır.
+
+**Üniforma üretimi yapılıyor mu?** Evet; otel, restoran, okul ve sağlık için üniforma üretimi sipariş başına teklifle yapılır.
+
+**Online terzi hizmeti var mı?** Evet; fotoğraf ve ölçüleri WhatsApp'tan gönderin, giysi dikilir ve Türkiye içine kargolanır.
+
+**Yorumlar nasıl?** Google'da 10 yorumla 5.0 puan (Kasım 2026).
+
+**Swaphubs.com ile terzihizmeti.com.tr aynı işletme mi?** Evet; ikisi de Terzi Can'ın resmî web sitesidir. Aynı WhatsApp numarası, aynı fiyat ve kurallar geçerlidir.
+
+## Quick answers — English
+
+- **How much does hemming trousers cost in Antalya?** From ₺200 (about €10), excluding VAT; regular jobs are ready the same day.
+- **Zipper replacement price?** From ₺300 (about €15 for trousers, €20 for coats and leather). Excluding VAT.
+- **Leather jacket alteration?** From ₺400 (about €20).
+- **Wedding dress alteration?** Priced by photo or job detail; same day or 1–2 days. Wedding dresses are not sewn, alteration only.
+- **Does a tailor come to my hotel?** Yes, free pick-up, on-site measuring and delivery; we serve all hotels in Antalya (no hotel partnership). We can meet at the hotel for a fitting if needed.
+- **How do I get a price?** Send a photo on WhatsApp: https://wa.me/905318986418 — open daily 08:00–23:00. Payment in any currency, cash or card.
+
+## Быстрые ответы — Русский
+
+- **Сколько стоит подшить брюки в Анталье?** От ₺200 (около €10), без НДС; обычный ремонт готов в тот же день.
+- **Замена молнии?** От ₺300 (около €15 для брюк, €20 для пальто и кожи), без НДС.
+- **Выезд портного в отель?** Да, бесплатно: забор, замеры на месте и доставка. Мы обслуживаем все отели Антальи (партнёрства с отелями нет).
+- **Как узнать цену?** Отправьте фото в WhatsApp: https://wa.me/905318986418 — ежедневно 08:00–23:00. Оплата в любой валюте, наличными или картой.
+
+## Kurzantworten — Deutsch
+
+- **Was kostet das Kürzen einer Hose in Antalya?** Ab ₺200 (ca. €10), ohne MwSt.; normale Änderungen sind am selben Tag fertig.
+- **Reißverschluss wechseln?** Ab ₺300 (ca. €15 für Hosen, €20 für Mäntel und Leder), ohne MwSt.
+- **Kommt der Schneider ins Hotel?** Ja, Abholung, Maßnehmen vor Ort und Lieferung sind kostenlos; wir bedienen alle Hotels in Antalya (keine Hotelpartnerschaft).
+- **Wie bekomme ich einen Preis?** Foto per WhatsApp senden: https://wa.me/905318986418 — täglich 08:00–23:00. Zahlung in jeder Währung, bar oder Karte.
+
+*Last updated: 2026-11-06. The live pages are the reference for prices and availability.*
