@@ -89,7 +89,10 @@ export async function GET(req: NextRequest) {
     if (ilce)   ve.push({ $or: [{ ilce: rx(ilce) }, { "formData.ilce": rx(ilce) }] });
     if (meslek) ve.push({ $or: [{ meslek: rx(meslek) }, { "formData.meslek": rx(meslek) }, { baslik: rx(meslek) }] });
 
-    if (yapay === "true" || yapay === "false") {
+    if (!admin) {
+      // Herkese açık liste: yapay (AI) ilanlar hiçbir koşulda dönmez.
+      ve.push({ yapay: { $ne: true }, is_ai_generated: { $ne: true } });
+    } else if (yapay === "true" || yapay === "false") {
       const v = yapay === "true";
       ve.push({ $or: [{ yapay: v }, { is_ai_generated: v }] });
     }
