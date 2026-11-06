@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import KargoSection from '@/components/terzi/KargoSection';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -14,20 +15,19 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: "Online Terzi Hizmeti | Ölçüye Özel Dikim & Kargo | Terzi Can" },
   description:
-    "Türkiye'ye ve yurt dışına gönderimli online özel terzi. Abiye ve gelinlik tadilatı, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
+    "Antalya'da otelinize ve evinize gelen, yurt dışına kargolu online özel terzi. Abiye ve gelinlik tadilatı, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
   keywords: [
     'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
     'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',
     'online gelinlik tadilatı', 'online takım elbise dikimi',
     'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
-    'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Türkiye',
+    'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Antalya',
     'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
     'online fason dikim', 'SwapHubs terzi',
   ],
   alternates: {
     canonical: SITE_URL,
-    // NOT (2026-09-26): Bu sayfa /terzi'den içerik olarak farklı (Türkiye geneli
-    // kargo odaklı), ve /terzi zaten /online-tailor-service, /de/online-schneider-
+    // NOT (2026-09-26): Bu sayfa /terzi'den içerik olarak farklı (online/kargo odaklı), ve /terzi zaten /online-tailor-service, /de/online-schneider-
     // service-antalya, /ru/atelie-antalya üçlüsünün 'tr' çapası olarak ayarlı.
     // Bu sayfayı da aynı yabancı sayfalara bağlamak çift/çelişkili 'tr' referansı
     // yaratır (Search Console'da "hreflang karşılıklı değil" hatası). Bu sayfanın
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terzi Can Online Terzi | Ölçüye Özel Dikim, Yurt Dışına Gönderim",
     description:
-      "WhatsApp üzerinden ölçü alımı, abiye ve gelinlik tadilatı, takım elbise dikimi. Türkiye'ye ve yurt dışına gönderim; oturmayan kıyafette değişim veya düzeltme.",
+      "WhatsApp üzerinden ölçü alımı, abiye ve gelinlik tadilatı, takım elbise dikimi. Antalya'da teslim, yurt dışına kargo; oturmayan kıyafette değişim veya düzeltme.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@swaphubs',
-    title: 'Terzi Can Online Terzi | Türkiye ve Yurt Dışına Gönderim',
+    title: "Terzi Can Online Terzi | Antalya'da Teslim, Yurt Dışına Kargo",
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
     images: ['/og/terzi-can.jpg'],
   },
@@ -113,9 +113,9 @@ const jsonLd = {
       ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can Online Terzi',
-      alternateName: ['Terzi Can E-Terzi', 'Online Terzi Türkiye', 'Terzi Can Tailor'],
+      alternateName: ['Terzi Can E-Terzi', 'Online Terzi Antalya', 'Terzi Can Tailor'],
       description:
-        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi hizmeti. Abiye ve gelinlik tadilatı, takım elbise, üniforma dikimi.",
+        "Antalya'da teslim eden, yurt dışına kargoyla gönderen online özel terzi hizmeti. Abiye ve gelinlik tadilatı, takım elbise, üniforma dikimi.",
       url: SITE_URL,
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
@@ -139,7 +139,7 @@ const jsonLd = {
           closes: '23:00',
         },
       ],
-      areaServed: [{ '@type': 'Country', name: 'Turkey' }, { '@type': 'Place', name: 'Worldwide (shipping)' }],
+      areaServed: { '@type': 'City', name: 'Antalya' },
       contactPoint: [
         {
           '@type': 'ContactPoint',
@@ -214,7 +214,7 @@ const jsonLd = {
       isPartOf: { '@id': 'https://swaphubs.com#website' },
       about: { '@id': `${SITE_URL}#business` },
       description:
-        "Türkiye'ye ve yurt dışına gönderim yapan online özel terzi. WhatsApp üzerinden ölçü al, kıyafet adresine gelsin.",
+        "Antalya'da teslim eden, yurt dışına kargoyla gönderen online özel terzi. WhatsApp üzerinden ölçü al, kıyafet adresine gelsin.",
       inLanguage: 'tr',
       datePublished: '2024-01-01',
       dateModified: '2026-10-29',
@@ -247,6 +247,7 @@ export default function Page() {
       <SpeakableSchema path="/online-terzi-hizmeti" />
       <QuickActionBanner lang="tr" />
       <OnlineTerziClient />
+      <KargoSection lang="tr" />
       <ReviewsBlock lang="tr" />
     </>
   );

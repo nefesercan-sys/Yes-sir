@@ -6,6 +6,7 @@ import { INTL, iUrl, type ILang } from '@/lib/intl';
 import { SVCG, svcgUrl } from '@/lib/intl-svc';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { jsonLdString } from '@/lib/json-ld';
+import KargoSection from '@/components/terzi/KargoSection';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -52,6 +53,8 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
             {s.p.map((t) => <p key={t} style={{ margin: '0 0 .8rem' }}>{t}</p>)}
           </section>
         ))}
+
+        <KargoSection lang={lang} />
 
         <section style={{ marginBottom: '1.8rem' }}>
           <h2 style={{ fontFamily: serif, fontSize: '1.35rem', color: C.ink, margin: '0 0 .8rem', lineHeight: 1.25 }}>{c.faqTitle}</h2>

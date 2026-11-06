@@ -82,7 +82,7 @@ const SLOGANS = [
   "Terziniz Bir Tık Yakınınızda",
   "Hayalinizdeki Kıyafeti Tasarlayın",
   "Ölçünüzü Verin, Kapınıza Gelsin",
-  "Türkiye'nin Her Köşesine Özel Dikim",
+  "Antalya'da Otelinize ve Evinize Gelen Özel Dikim",
   "Sadece Size Özel — Tek Parça Üretim",
 ];
 
@@ -268,7 +268,7 @@ export default function OnlineTerziClient() {
 
       {/* ── GÜVEN ÇUBUĞU ─────────────────────────────────────────── */}
       <div role="banner" style={{ background: `linear-gradient(90deg, ${C.charcoal}, ${C.charcoalMid}, ${C.charcoal})`, color: C.goldLight, fontSize: 12, fontWeight: 600, padding: '9px 16px', textAlign: 'center', letterSpacing: '0.08em', fontFamily: 'system-ui, sans-serif' }}>
-        🌍 Türkiye'ye ve yurt dışına gönderim &nbsp;·&nbsp; WhatsApp'tan her dilde cevap &nbsp;·&nbsp; ✓ Ölçüye Göre Dikim &nbsp;·&nbsp; ✓ Oturmazsa Değişim / Düzeltme
+        🌍 Antalya'da teslim, yurt dışına kargo &nbsp;·&nbsp; WhatsApp'tan her dilde cevap &nbsp;·&nbsp; ✓ Ölçüye Göre Dikim &nbsp;·&nbsp; ✓ Oturmazsa Değişim / Düzeltme
       </div>
 
       {/* ── NAV ──────────────────────────────────────────────────── */}
@@ -345,7 +345,7 @@ export default function OnlineTerziClient() {
             </div>
 
             <p style={{ fontSize: 15, color: '#9CA3AF', marginBottom: 40, lineHeight: 1.8, maxWidth: 540, fontFamily: 'system-ui, sans-serif' }}>
-              Türkiye'nin neresinde olursanız olun — ölçülerinizi paylaşın, modelinizi seçin, hayalinizdeki kıyafet size özel dikilip kapınıza gelsin. Ölçüleriniz online alınır, atölyemizde dikilir ve istediğiniz yere gönderilir.
+              Antalya'dasınız: terzimiz otelinize veya evinize gelir, fotoğraftan fiyatı söyler. Ölçülerinizi WhatsApp'tan paylaşın, modelinizi seçin; kıyafet atölyemizde dikilir ve adresinize ulaştırılır. Kargoyla hizmet Antalya içi ve yurt dışı için geçerlidir.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 48 }}>
@@ -498,7 +498,7 @@ export default function OnlineTerziClient() {
               4 Adımda <span style={{ color: C.gold, fontStyle: 'italic' }}>Özel Kıyafetiniz</span> Kapınızda
             </h2>
             <p style={{ color: '#9CA3AF', maxWidth: 560, margin: '0 auto', fontSize: 15, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-              Türkiye'nin herhangi bir şehrinden, evden çıkmadan — sadece WhatsApp yeterli.
+              Antalya'da evden veya otelden çıkmadan — sadece WhatsApp yeterli.
             </p>
           </div>
 
@@ -507,7 +507,7 @@ export default function OnlineTerziClient() {
               { n: '01', icon: '📏', title: 'Ölçünüzü Alın', desc: 'Evdeki mezuranızla 5 temel ölçüyü alın. Yardıma ihtiyacınız varsa WhatsApp görüntülü ölçü seansı ayarlıyoruz. Uzman ekibimiz sizi adım adım yönlendirir.' },
               { n: '02', icon: '✏️', title: 'Modelinizi Seçin', desc: 'Koleksiyonumuzdaki modeller arasından seçim yapın ya da hayalinizdeki kıyafetin fotoğrafını gönderin. Taslak ve dikim süresi modele ve adede göre WhatsApp\'ta netleşir.' },
               { n: '03', icon: '✂️', title: 'Üretim Başlıyor', desc: 'Taslağı onayladığınız anda atölyemiz harekete geçer. Kalıp çıkarma, kesim, dikim, ütü ve kalite kontrol aşamaları eksiksiz tamamlanır.' },
-              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Kıyafetiniz paketlenip istediğiniz şehre veya ülkeye gönderilir; yurt dışı kargo genelde 1–3 hafta sürer. Oturmayan bir yer olursa WhatsApp\'tan yazın, değiştirir veya düzeltiriz.' },
+              { n: '04', icon: '📦', title: 'Kapınıza Gelir', desc: 'Kıyafetiniz Antalya\'da adresinize ulaştırılır; yurt dışı için kargoyla gönderilir (kargo ve gümrük detayları WhatsApp\'tan netleştirilir). Oturmayan bir yer olursa WhatsApp\'tan yazın, değiştirir veya düzeltiriz.' },
             ].map(s => (
               <li key={s.n} style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 20, padding: 32, border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}>
                 <div aria-hidden="true" style={{ color: C.gold, fontSize: 36, fontWeight: 700, opacity: 0.3, lineHeight: 1, marginBottom: 16, fontFamily: 'system-ui, sans-serif' }}>{s.n}</div>
@@ -538,7 +538,7 @@ export default function OnlineTerziClient() {
                 Türkiye'nin En Yenilikçi <span style={{ color: C.gold, fontStyle: 'italic' }}>Online Terzi Platformu</span>
               </h2>
               <p style={{ fontSize: 15, color: C.slate, lineHeight: 1.85, marginBottom: 32, fontFamily: 'system-ui, sans-serif' }}>
-                2006'dan bu yana Antalya merkezli atölyemizde özel kıyafet tasarlıyor ve dikiyoruz. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren online ölçü alıp dikerek Türkiye'ye ve yurt dışına gönderiyoruz.
+                2006'dan bu yana Antalya merkezli atölyemizde özel kıyafet tasarlıyor ve dikiyoruz. Geleneksel terziliğin zanaat anlayışını dijital çağın konfort ve hızıyla birleştiren online ölçü alıp dikerek Antalya'da adrese teslim, yurt dışına kargoyla gönderiyoruz.
               </p>
               <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, padding: 0, listStyle: 'none' }}>
                 {[
@@ -608,7 +608,7 @@ export default function OnlineTerziClient() {
             Bir Mesaj Kadar Yakın
           </p>
           <p style={{ fontSize: 16, color: '#9CA3AF', marginBottom: 48, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-            Şu an WhatsApp'ta bize yazın. Ölçülerinizi alın, modelinizi seçin — kıyafetiniz kapınıza gelsin. Türkiye'nin tüm illerine ve yurt dışına teslimat yapıyoruz.
+            Şu an WhatsApp'ta bize yazın. Ölçülerinizi alın, modelinizi seçin — kıyafetiniz kapınıza gelsin. Antalya'da adrese teslim ediyor, yurt dışına kargoyla gönderiyoruz.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center' }}>
             <a href={waLink("Merhaba! Özel kıyafet tasarımı ve dikimi hakkında bilgi almak istiyorum.")} target="_blank" rel="noopener noreferrer"
@@ -633,7 +633,7 @@ export default function OnlineTerziClient() {
                 SwapHubs <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
               </div>
               <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
-                Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'dan Türkiye'ye ve yurt dışına gönderim. WhatsApp üzerinden ölçülerinizi gönderin, istediğiniz kıyafeti dikelim, adresinize gönderelim.
+                Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'da adrese teslim, yurt dışına kargoyla gönderim. WhatsApp üzerinden ölçülerinizi gönderin, istediğiniz kıyafeti dikelim, adresinize gönderelim.
               </p>
               <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
                 {LANGS.map(l => (
@@ -669,14 +669,14 @@ export default function OnlineTerziClient() {
                 </a>
                 <a href="mailto:tekstil@swaphubs.com" style={{ color: '#6B7280', textDecoration: 'none' }}>✉️ tekstil@swaphubs.com</a>
                 <span style={{ color: '#6B7280' }}>📍 Antalya, Türkiye</span>
-                <span style={{ color: '#4B5563' }}>🚚 Türkiye ve Yurt Dışı Gönderim</span>
+                <span style={{ color: '#4B5563' }}>🚚 Antalya'da Teslim · Yurt Dışına Kargo</span>
                 <span style={{ color: '#4B5563' }}>🌍 Yurt Dışı Teslimat Mevcut</span>
               </address>
             </div>
           </div>
           <div style={{ borderTop: '1px solid #1F1F1F', paddingTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, fontSize: 11, color: '#4B5563', fontFamily: 'system-ui, sans-serif' }}>
             <span>© {new Date().getFullYear()} SwapHubs Online Terzi Platformu. Tüm Hakları Saklıdır.</span>
-            <span>Antalya'dan 🇹🇷 Türkiye'ye & Dünyaya</span>
+            <span>Antalya'dan 🇹🇷 Dünyaya</span>
           </div>
         </div>
       </footer>

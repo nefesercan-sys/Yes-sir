@@ -48,7 +48,7 @@ const SERVICES = [
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
     img: IMGS.online,
     title:'Online-Schneiderservice', sub:'Foto Senden · Maße Angeben · Lieferung Nach Hause',
-    desc:'Senden Sie Ihr Design und Ihre Maße per WhatsApp — wir fertigen es an und versenden in ganz die Türkei.',
+    desc:'Senden Sie Ihr Design und Ihre Maße per WhatsApp — wir fertigen es an und liefern es in Antalya zu Ihnen oder versenden es ins Ausland.',
     feats:['Bestellung per WhatsApp','Videoanruf-Anprobe','Modellauswahl','Versand'],
     price:'Kostenlos', note:'Kostenlose Beratung', time:'Je nach Modell & Menge (+ Versand)',
     waMsg:'Hallo, ich hätte gerne Informationen zum Online-Schneiderservice.' },
@@ -303,7 +303,7 @@ export default function OnlineSchneiderClient({
           </h1>
           <p className="ohero-sub">
             Herren- und Damenschneiderei, individuelle Schnittentwicklung, ein komplettes Textilatelier,
-            Serienproduktion. Basierend in Konyaaltı, Versand in die ganze Türkei.
+            Serienproduktion. Basierend in Konyaaltı, mit Service in Ihrem Hotel oder zu Hause in Antalya.
           </p>
           <div className="ohero-btns">
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Per WhatsApp Bestellen</a>
@@ -332,10 +332,10 @@ export default function OnlineSchneiderClient({
       {/* SEO INTRO */}
       <div className="oseo" id="seo-intro">
         <p>
-          <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya und in die ganze Türkei:
+          <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya:
           Herren- und Damenschneiderei, Reparaturen, Änderungen, individuelle Schnittentwicklung,
           Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch. Sportbekleidung, Trainingsanzüge
-          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas, Versand landesweit.
+          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt.
         </p>
       </div>
 
@@ -396,7 +396,7 @@ export default function OnlineSchneiderClient({
           <div style={{ textAlign: 'center' }}>
             <span className="oeyebrow">📱 Online-Bestellung</span>
             <h2 className="oh2" id="how-h">So Funktioniert's</h2>
-            <p className="osh-sub" style={{ margin: '.9rem auto 0' }}>Bestellen Sie per WhatsApp, wir liefern in die ganze Türkei.</p>
+            <p className="osh-sub" style={{ margin: '.9rem auto 0' }}>Bestellen Sie per WhatsApp, wir liefern zu Ihnen in Antalya.</p>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
           </div>
           <div className="ohow-grid">
@@ -404,7 +404,7 @@ export default function OnlineSchneiderClient({
               ['01','📸','Foto & Maße Senden',"Senden Sie Ihr Referenzdesign und Ihre Maße per WhatsApp — völlig kostenlos."],
               ['02','🎨','Design & Stoffauswahl','Klären Sie die Details mit unserem Schneidermeister und bestätigen Sie den Preis.'],
               ['03','✂️','Wir Beginnen Zu Nähen','Nach Ihrer Freigabe beginnen wir in unserem Atelier mit der Fertigung.'],
-              ['04','🚗','Lieferung','Kostenloser Kurier innerhalb Antalyas, Versand in die ganze Türkei.'],
+              ['04','🚗','Lieferung','Kostenloser Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt, die Versandkosten trägt der Kunde.'],
             ] as [string,string,string,string][]).map(([n,ic,t,d])=>(
               <div key={n} className="ohow-card">
                 <div className="ohow-n">{n}</div>
@@ -432,11 +432,11 @@ export default function OnlineSchneiderClient({
             {([
               ['📐','Maßanfertigung nach Ihren Maßen','Jedes Kleidungsstück wird exakt nach Ihren Maßen gefertigt.'],
               ['⚡','Schnelle Lieferung','Reparaturen am selben Tag, eilig in 1–2 Stunden; Maßanfertigung je nach Modell und Stückzahl.'],
-              ['📱','Online-Bestellung',"Per WhatsApp bestellen, landesweiter Versand."],
+              ['📱','Online-Bestellung',"Per WhatsApp bestellen, Lieferung in Antalya."],
               ['🎨','Individuelles Design','Bringen Sie Ihr eigenes Design mit oder arbeiten Sie mit unserem Expertenteam.'],
               ['🏭','Serienproduktionskapazität','Serienproduktion ab mindestens 50 Stück.'],
               ['💰','Transparente Preise','Keine versteckten Kosten — klarer Preis im Voraus.'],
-              ['🌍','Versand In Die Ganze Türkei','Von überall in der Türkei bestellen, geliefert zu Ihnen.'],
+              ['🌍','Versand Aus Dem Ausland','Auch aus dem Ausland möglich; Details klären wir per WhatsApp.'],
               ['📍','Auf Google Maps finden',"Öffnen Sie unser Google-Unternehmensprofil für Route und Kundenbewertungen."],
             ] as [string,string,string][]).map(([ic,t,d])=>(
               <div key={t} className="owhy-card">
@@ -492,7 +492,7 @@ export default function OnlineSchneiderClient({
       {/* CTA */}
       <section className="octa-sec" aria-label="Bestellung aufgeben">
         <h2 className="octa-h">Ihr Kleidungsstück, Perfekt Angepasst<br /><em>Direkt An Ihre Tür</em></h2>
-        <p className="octa-sub">Online bestellen · Sofortkontakt per WhatsApp · Versand in die ganze Türkei</p>
+        <p className="octa-sub">Online bestellen · Sofortkontakt per WhatsApp · Lieferung in Antalya</p>
         <div className="octa-btns">
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Per WhatsApp Bestellen</a>
           <a href={WA('Hallo, ich hätte gerne Informationen zu Sammelbestellungen.')} target="_blank" rel="noopener noreferrer" className="obtn obtn-ghost">🏭 Sammelbestellung</a>
@@ -556,7 +556,7 @@ export default function OnlineSchneiderClient({
         </div>
         <div className="ocross-grid">
           <div className="ocross-card" style={{ background: 'var(--ink4)', border: '1px solid var(--gold)' }}>
-            <div style={{ fontSize: '.58rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '.6rem' }}>🌐 Landesweit · Aktuelle Seite</div>
+            <div style={{ fontSize: '.58rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '.6rem' }}>🌐 Online · Aktuelle Seite</div>
             <div style={{ fontFamily: 'var(--font-unbounded,"Georgia",serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--bone)', marginBottom: '.5rem' }}>Online-Schneiderservice</div>
             <p style={{ fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '.8rem' }}>Maßanfertigung, Abendkleider, Anzüge und Uniformen, Versand in alle 81 Provinzen.</p>
             <span style={{ fontSize: '.68rem', color: 'var(--gold)', fontWeight: 600 }}>✓ Sie sind hier</span>

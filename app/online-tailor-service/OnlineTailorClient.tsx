@@ -48,7 +48,7 @@ const SERVICES = [
   { id:'online-terzi', icon:'📱', badge:'YENİ', badgeColor:'#059669',
     img: IMGS.online,
     title:'Online Tailor Service', sub:'Send a Photo · Share Your Measurements · Delivered to Your Door',
-    desc:'Send your design and measurements via WhatsApp — we tailor it and ship it anywhere in Turkey.',
+    desc:'Send your design and measurements via WhatsApp — we tailor it and we deliver it to your address in Antalya, or ship it abroad.',
     feats:['Order via WhatsApp','Video-Call Fitting','Style Selection','Shipped Delivery'],
     price:'Quote', note:'Price confirmed on WhatsApp', time:'By design & quantity (+ shipping)',
     waMsg:'Hello, I would like information about the online tailor service.' },
@@ -305,7 +305,7 @@ export default function OnlineTailorClient({
           </h1>
           <p className="ohero-sub">
             Menswear and womenswear tailoring, custom pattern design, a full textile workshop,
-            and mass production. Based in Konyaaltı, shipping across Turkey.
+            and mass production. Based in Konyaaltı, coming to your hotel or home in Antalya.
           </p>
           <div className="ohero-btns">
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Order on WhatsApp</a>
@@ -334,10 +334,10 @@ export default function OnlineTailorClient({
       {/* SEO INTRO */}
       <div className="oseo" id="seo-intro">
         <p>
-          <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya and across Turkey:
+          <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya:
           menswear and womenswear tailoring, repairs, alterations, custom pattern design,
           mass production and contract manufacturing. Hemming, zipper replacement. Sportswear, tracksuits
-          and sweatshirts made to order. Bulk production quoted per project. Courier within Antalya and nationwide shipping; delivery cost confirmed on WhatsApp.
+          and sweatshirts made to order. Bulk production quoted per project. Free courier within Antalya; shipping abroad is confirmed on WhatsApp.
         </p>
       </div>
 
@@ -398,7 +398,7 @@ export default function OnlineTailorClient({
           <div style={{ textAlign: 'center' }}>
             <span className="oeyebrow">📱 Online Ordering</span>
             <h2 className="oh2" id="how-h">How It Works</h2>
-            <p className="osh-sub" style={{ margin: '.9rem auto 0' }}>Order via WhatsApp and we'll deliver anywhere in Turkey.</p>
+            <p className="osh-sub" style={{ margin: '.9rem auto 0' }}>Order via WhatsApp and we'll deliver to you in Antalya.</p>
             <div className="odivider" style={{ margin: '1.2rem auto 0' }} />
           </div>
           <div className="ohow-grid">
@@ -406,7 +406,7 @@ export default function OnlineTailorClient({
               ['01','📸','Send a Photo & Measurements',"Send your reference design and measurements via WhatsApp — no obligation."],
               ['02','🎨','Design & Fabric Selection','Work out the details with our expert tailor and confirm the price.'],
               ['03','✂️','We Start Sewing','Once approved, we begin sewing in our workshop.'],
-              ['04','🚗','Delivery','Courier within Antalya, shipped across Turkey; delivery cost confirmed on WhatsApp.'],
+              ['04','🚗','Delivery','Free courier within Antalya; international shipping details are confirmed on WhatsApp, and shipping cost is paid by the customer.'],
             ] as [string,string,string,string][]).map(([n,ic,t,d])=>(
               <div key={n} className="ohow-card">
                 <div className="ohow-n">{n}</div>
@@ -434,11 +434,11 @@ export default function OnlineTailorClient({
             {([
               ['📐','Made to Your Measurements','Every garment is tailored exactly to your measurements.'],
               ['⚡','Fast Turnaround','Repairs ready the same day, urgent ones in 1–2 hours; custom tailoring timed by design and quantity.'],
-              ['📱','Online Ordering',"Order via WhatsApp, shipped nationwide."],
+              ['📱','Online Ordering',"Order via WhatsApp, delivered in Antalya."],
               ['🎨','Original Design','Bring your own design or work with our expert team.'],
               ['🏭','Mass Production Capacity','Bulk production, quantity quoted per project.'],
               ['💰','Transparent Pricing','No hidden fees — get a clear price upfront.'],
-              ['🌍','Nationwide Shipping','Order from anywhere in Turkey, shipped to you.'],
+              ['🌍','Shipping from Abroad','Overseas customers can ship their garment to us; details are clarified on WhatsApp.'],
               ['📍','Find Us on Google Maps',"Open our Google Business Profile for directions and customer reviews."],
             ] as [string,string,string][]).map(([ic,t,d])=>(
               <div key={t} className="owhy-card">
@@ -494,7 +494,7 @@ export default function OnlineTailorClient({
       {/* CTA */}
       <section className="octa-sec" aria-label="Place an order">
         <h2 className="octa-h">Your Garment, Perfectly Fitted<br /><em>Delivered To Your Door</em></h2>
-        <p className="octa-sub">Order online · Instant WhatsApp contact · Nationwide shipping</p>
+        <p className="octa-sub">Order online · Instant WhatsApp contact · Antalya delivery</p>
         <div className="octa-btns">
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="obtn obtn-wa">💬 Order on WhatsApp</a>
           <a href={WA('Hello, I would like information about a bulk order.')} target="_blank" rel="noopener noreferrer" className="obtn obtn-ghost">🏭 Bulk Orders</a>
@@ -558,7 +558,7 @@ export default function OnlineTailorClient({
         </div>
         <div className="ocross-grid">
           <div className="ocross-card" style={{ background: 'var(--ink4)', border: '1px solid var(--gold)' }}>
-            <div style={{ fontSize: '.58rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '.6rem' }}>🌐 Nationwide · Current Page</div>
+            <div style={{ fontSize: '.58rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '.6rem' }}>🌐 Online · Current Page</div>
             <div style={{ fontFamily: 'var(--font-unbounded,"Georgia",serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--bone)', marginBottom: '.5rem' }}>Online Tailor Service</div>
             <p style={{ fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '.8rem' }}>Custom tailoring, evening gowns, suits and uniforms shipped to all 81 provinces.</p>
             <span style={{ fontSize: '.68rem', color: 'var(--gold)', fontWeight: 600 }}>✓ You are here</span>

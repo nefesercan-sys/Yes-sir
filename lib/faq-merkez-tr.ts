@@ -138,7 +138,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Online terzi hizmeti var mı?",
-  "Evet; fotoğraf ve ölçüleri WhatsApp'tan gönderin, giysi dikilir ve Türkiye içine kargolanır."
+  "Evet; fotoğraf ve ölçüleri WhatsApp'tan gönderin. Kargoyla hizmetimiz şu anda Antalya içi ve yurt dışı için geçerlidir (kargo ücreti müşteriye aittir); Türkiye'nin diğer illeri için WhatsApp'tan sorabilirsiniz."
  ],
  [
   "Yorumlar nasıl?",

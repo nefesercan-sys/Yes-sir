@@ -1,6 +1,7 @@
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import KargoSection from '@/components/terzi/KargoSection';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quote | Terzi Can' },
   description:
     'Online tailor service in Konyaaltı: menswear & womenswear tailoring, repairs, alterations, ' +
-    'bulk production. Shipping in Turkey. ☎ ' + PHONE,
+    'bulk production. Tailor to your hotel or home in Antalya. ☎ ' + PHONE,
   keywords: [
     'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
     'repairs alterations Antalya', 'mass production Antalya',
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
-    description: 'Menswear & womenswear tailoring, repairs, alterations, mass production. Shipping across Turkey.',
+    description: 'Menswear & womenswear tailoring, repairs, alterations, mass production. Tailor to your hotel or home in Antalya; shipping within Antalya and from abroad.',
     url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'en_US', alternateLocale: ['tr_TR', 'de_DE', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Tailor Service Antalya', type: 'image/jpeg' }],
   },
@@ -94,6 +95,7 @@ export default function OnlineTailorServicePage() {
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
       />
+      <KargoSection lang="en" />
       <ReviewsBlock lang="en" />
     </>
   );

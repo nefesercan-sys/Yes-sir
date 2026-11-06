@@ -1,4 +1,5 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
+import KargoSection from '@/components/terzi/KargoSection';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Schneider Antalya: Foto senden, Preis erhalten | Terzi Can' },
   description:
     'Online-Schneiderservice in Konyaaltı: Herren- & Damenschneiderei, Reparaturen, Änderungen. ' +
-    'Versand in die ganze Türkei. ☎ ' + PHONE,
+    'Schneider zu Ihnen ins Hotel oder nach Hause in Antalya. ☎ ' + PHONE,
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
     'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei',
-    description: 'Herren- & Damenschneiderei, Reparaturen, Änderungen, Serienproduktion. Versand in die ganze Türkei.',
+    description: 'Herren- & Damenschneiderei, Reparaturen, Änderungen, Serienproduktion. Schneider zu Ihnen ins Hotel oder nach Hause in Antalya; Versand innerhalb Antalyas und aus dem Ausland.',
     url: SITE_URL, siteName: 'Terzi Can Antalya', locale: 'de_DE', alternateLocale: ['tr_TR', 'en_US', 'ru_RU'], type: 'website',
     images: [{ url: OG_IMG, width: 1200, height: 630, alt: 'Online Schneiderservice Antalya', type: 'image/jpeg' }],
   },
@@ -85,6 +86,7 @@ export default function OnlineSchneiderservicePage() {
         gbpShort1={GBP1.short}
         gbpReview1={GBP1.review}
       />
+      <KargoSection lang="de" />
       <ReviewsBlock lang="de" />
     </>
   );
