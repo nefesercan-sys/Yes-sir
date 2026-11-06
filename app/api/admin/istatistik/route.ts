@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
       db.collection('ilanlar').countDocuments({ durum: 'aktif' }),
       db.collection('ilanlar').countDocuments({ durum: 'aktif', tip: 'bireysel' }),
       db.collection('ilanlar').countDocuments({ durum: 'aktif', tip: 'ticari' }),
-      db.collection('ilanlar').countDocuments({ yapay: true }),
+      db.collection('ilanlar').countDocuments({ $or: [{ yapay: true }, { is_ai_generated: true }] }),
       db.collection('users').countDocuments(),
       db.collection('mesajlar').countDocuments(),
       db.collection('teklifler').countDocuments(),

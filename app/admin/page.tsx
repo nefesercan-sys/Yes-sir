@@ -110,6 +110,42 @@ function SistemIlanlariPaneli({ adminKey }: { adminKey: string }) {
     setYukleniyor(false);
   };
 
+  const [yapayOnizleme, setYapayOnizleme] = useState<{ yapayIlanAdedi: number; baglıTeklifSayisi: number; ornekBasliklar: string[]; kayitlar: unknown[] } | null>(null);
+
+  const yapayOnizle = async () => {
+    try {
+      const r = await fetch('/api/admin/yapay-ilanlar');
+      const d = await r.json();
+      if (!r.ok) return alert(d.error || 'Önizleme alınamadı');
+      setYapayOnizleme(d);
+      // Yedek: silmeden önce kimlik/başlık listesi indirilir
+      const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `yapay-ilan-yedek-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+    } catch { alert('Önizleme alınamadı'); }
+  };
+
+  const yapayTopluSil = async () => {
+    if (!yapayOnizleme) return;
+    const n = yapayOnizleme.yapayIlanAdedi;
+    if (!confirm(`${n} yapay ilan KALICI olarak silinecek. Yedek dosyası indirildi mi?`)) return;
+    const yazi = prompt(`Onaylamak için tam olarak şunu yazın: ${n}`);
+    if (yazi !== String(n)) return alert('İptal edildi');
+    try {
+      const r = await fetch('/api/admin/yapay-ilanlar', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ onay: 'YAPAY-ILANLARI-SIL', adet: n }),
+      });
+      const d = await r.json();
+      if (!r.ok) return alert(d.error || 'Silinemedi');
+      alert(`${d.silinen} yapay ilan silindi`);
+      setYapayOnizleme(null);
+      yukle();
+    } catch { alert('Silinemedi'); }
+  };
+
   const ilanSil = async (id: string) => {
     if (!confirm('Bu ilanı silmek istediğinize emin misiniz?')) return;
     try {
@@ -135,6 +171,19 @@ function SistemIlanlariPaneli({ adminKey }: { adminKey: string }) {
         <button onClick={yukle} className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-600">
           🔄 Yenile
         </button>
+      </div>
+      <div className="mb-4 bg-gray-900 border border-purple-500/30 rounded-2xl p-4">
+        <div className="flex flex-wrap gap-2 items-center">
+          <button onClick={yapayOnizle} className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-xl text-xs font-bold">🔍 Yapay ilanları önizle (yedek indirir)</button>
+          {yapayOnizleme && yapayOnizleme.yapayIlanAdedi > 0 && (
+            <button onClick={yapayTopluSil} className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-bold">🗑️ {yapayOnizleme.yapayIlanAdedi} yapay ilanı kalıcı sil</button>
+          )}
+        </div>
+        {yapayOnizleme && (
+          <p className="text-gray-400 text-xs mt-3">
+            {yapayOnizleme.yapayIlanAdedi} yapay ilan, {yapayOnizleme.baglıTeklifSayisi} bağlı teklif. Örnek: {yapayOnizleme.ornekBasliklar.slice(0, 3).join(' · ')}
+          </p>
+        )}
       </div>
       {yukleniyor ? <p className="text-gray-500 text-sm text-center py-10">Yükleniyor...</p> :
        filtrelenmis.length === 0 ? <p className="text-gray-500 text-sm text-center py-10">İlan bulunamadı.</p> : (
@@ -366,11 +415,7 @@ function IstatistikPaneli({ adminKey }: { adminKey: string }) {
     try {
       const r = await fetch('/api/admin/istatistik', { headers: { 'x-admin-key': adminKey } });
       const data = await r.json();
-      setStats(data.toplamIlan ? data : {
-        toplamIlan: 1245, bireyselIlan: 450, ticariIlan: 795, yapayIlan: 1100,
-        toplamUye: 342, toplamMesaj: 89, toplamTeklif: 430, okunmadiMesaj: 12,
-        bugunYeniIlan: 45, bugunYeniMesaj: 8,
-      });
+      if (r.ok && typeof data.toplamUye === 'number') setStats(data);
     } catch { }
     setYukleniyor(false);
   };
