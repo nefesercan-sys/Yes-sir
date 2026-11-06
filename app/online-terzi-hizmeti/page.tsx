@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
+import OnlineContactStrip from '@/components/terzi/OnlineContactStrip';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OnlineTerziClient from './OnlineTerziClient';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import { FAQS } from './faq-data';
+import { onlineLanguages } from '@/lib/intl-online';
 
 const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
@@ -33,10 +35,7 @@ export const metadata: Metadata = {
     // yaratır (Search Console'da "hreflang karşılıklı değil" hatası). Bu sayfanın
     // kendine özgü bir İngilizce/Almanca/Rusça çevirisi yazılana kadar dürüstçe
     // yalnızca Türkçe olarak işaretli kalıyor.
-    languages: {
-      'tr': SITE_URL,
-      'x-default': SITE_URL,
-    },
+    languages: onlineLanguages('https://swaphubs.com'),
   },
   openGraph: {
     title: "Terzi Can Online Terzi | Ölçüye Özel Dikim, Yurt Dışına Gönderim",
@@ -246,6 +245,7 @@ export default function Page() {
       />
       <SpeakableSchema path="/online-terzi-hizmeti" />
       <QuickActionBanner lang="tr" />
+      <OnlineContactStrip lang="tr" />
       <OnlineTerziClient />
       <KargoSection lang="tr" />
       <ReviewsBlock lang="tr" />

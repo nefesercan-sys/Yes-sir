@@ -5,6 +5,7 @@ import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
 import { ILANGS, INTL, iUrl } from '@/lib/intl'
 import { ZONE_SLUGS, zoneUrl } from '@/lib/intl-zones'
 import { svcgUrl } from '@/lib/intl-svc'
+import { onlineLanguages, ONLINE_PATH } from '@/lib/intl-online'
 import { KONU_IDS, konuUrl, konuLanguages, sixAlt } from '@/lib/intl-konu'
 import { HZ_IDS, hzUrl, hzLanguages, hzSixForService } from '@/lib/intl-hz'
 import { PROMO_ALL } from '@/lib/intl-promo'
@@ -137,6 +138,8 @@ export async function GET() {
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${iUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${iUrl(x)}`])) })),
     // 🧵 Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (6 dil, kendi aralarında hreflang)
     ...ILANGS.map((l) => ({ url: `${BASE_URL}${svcgUrl(l)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(ILANGS.map((x) => [INTL[x].hreflang, `${BASE_URL}${svcgUrl(x)}`])) })),
+    // 🧵 Online terzi hizmeti: ES/FR/PL/UK/NL/AR yeni sayfalar (10 dilli karşılıklı hreflang + x-default; TR/EN/DE/RU sayfaları yukarıda)
+    ...ILANGS.map((l) => ({ url: `${BASE_URL}${ONLINE_PATH[l]}`, priority: '0.85', freq: 'weekly', alt: onlineLanguages(BASE_URL) })),
     // 🎽 Promosyon tekstili ve baskılı bez çanta rehberi (10 dil, karşılıklı hreflang + x-default)
     ...KONU_IDS.flatMap((t) => ILANGS.map((l) => ({ url: `${BASE_URL}${konuUrl(l, t)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(Object.entries(konuLanguages(t)).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])) }))),
     ...PROMO_ALL.map((x) => ({

@@ -13,4 +13,5 @@ export const FAQS: [string, string][] = [
   ["Haben Sie abends oder am Wochenende geöffnet?", "Ja, wir haben täglich von 08:00 bis 23:00 Uhr geöffnet, auch abends und am Wochenende. Schreiben Sie uns auf WhatsApp für einen Termin."],
   ["Kann ich mir ein individuelles Kleid anfertigen lassen?", "Ja, wir fertigen Kleidungsstücke nach Ihren Maßen und Ihrem gewünschten Stil — vom Alltagskleid bis zum Abendkleid."],
   ["Nähen Sie mit Naturstoffen wie Baumwolle oder Leinen?", "Ja, wir bieten maßgeschneiderte Kleidung aus 100% Baumwolle und Leinen an."],
+  ["Wie erfahre ich schnell den Preis?", "Senden Sie ein Foto des Kleidungsstücks per WhatsApp an +90 531 898 64 18; wir nennen Preis und Dauer. Abholung und Lieferung zu Hotels und Wohnungen in Antalya sind kostenlos; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr."],
 ];

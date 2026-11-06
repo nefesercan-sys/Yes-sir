@@ -13,4 +13,5 @@ export const FAQS: [string, string][] = [
   ["Are you open in the evening or on weekends?", "Yes, we're open every day of the week, 08:00–23:00, including evenings and weekends. Message us on WhatsApp to book a time."],
   ["Can I have a custom dress made for myself?", "Yes, we make custom garments to your measurements and chosen style — from everyday dresses to evening gowns."],
   ["Do you sew with natural fabrics like cotton or linen?", "Yes, we offer custom tailoring in 100% cotton and linen fabric."],
+  ["How can I get a price quickly?", "Send a photo of the garment on WhatsApp to +90 531 898 64 18 and we tell you the price and timing. Pick-up and delivery to hotels and homes in Antalya is free; you can message us every day 08:00–23:00."],
 ];
