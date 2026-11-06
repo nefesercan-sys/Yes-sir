@@ -6,16 +6,17 @@ import { authOptions } from "@/lib/auth";
 import { isAdminRequest } from "@/lib/admin-auth";
 import { getDb } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
-import { generateUniqueSlug } from "@/lib/slugify";
-import { clean, rateLimited } from "@/lib/api-guard";
-import { idGecerli, medyaListesi, regexKacir, sonluSayi, tamSayi, temizObje } from "@/lib/validate";
+import { clean } from "@/lib/api-guard";
+import { idGecerli, regexKacir, tamSayi } from "@/lib/validate";
 import { ilanHerkeseAcik } from "@/lib/ilan-public";
 
+// Yönetici aracı. Yapay ilanlar silindikten sonra bu uç kaldırılabilir.
 // ─── GET ───────────────────────────────────────────────────
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const admin = await isAdminRequest(req); // yönetici tam veri + yüksek limit alır
+    const admin = await isAdminRequest(req); // yalnızca yönetici (ilan sistemi herkese kapatıldı)
+    if (!admin) return NextResponse.json({ error: "Gone" }, { status: 410 });
 
     const par = (k: string, max = 100) => clean(searchParams.get(k) ?? "", max);
     const sektor   = par("sektor");
@@ -152,123 +153,4 @@ export async function GET(req: NextRequest) {
     console.error("GET /api/ilanlar error:", err);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
-}
-
-// ─── POST ──────────────────────────────────────────────────
-export async function POST(req: NextRequest) {
-  try {
-    if (rateLimited(req, "ilan-ver", 10, 60 * 60 * 1000)) {
-      return NextResponse.json({ error: "Çok fazla ilan gönderdiniz. Lütfen daha sonra tekrar deneyin." }, { status: 429 });
-    }
-    const session = await getServerSession(authOptions);
-    const body = await req.json().catch(() => null);
-    if (!body || typeof body !== "object") {
-      return NextResponse.json({ error: "Geçersiz istek" }, { status: 400 });
-    }
-
-    // Alan beyaz listesi: yapay/is_ai_generated, durum, teklifSayisi vb. istemciden ALINMAZ.
-    const sektorId = clean(body.sektorId, 60);
-    const baslik   = clean(body.baslik, 200);
-    if (!sektorId || !/^[a-zA-Z0-9_-]+$/.test(sektorId) || !baslik) {
-      return NextResponse.json({ error: "Sektör ve başlık zorunludur" }, { status: 400 });
-    }
-
-    const formDataHam = body.formData && typeof body.formData === "object" && !Array.isArray(body.formData) ? body.formData : {};
-    const formData = temizObje(formDataHam) as Record<string, any>;
-    if (JSON.stringify(formData).length > 30000) {
-      return NextResponse.json({ error: "Form verisi çok büyük" }, { status: 400 });
-    }
-    const medyalar = medyaListesi(body.medyalar, 10);
-    const kategori = clean(body.kategori, 80);
-    const kategoriSlug = clean(body.kategoriSlug, 80);
-    const tip = body.tip === "ticari" ? "ticari" : "bireysel";
-    const rol = body.rol === "veren" ? "veren" : "alan";
-    const butceMin = Math.max(0, sonluSayi(body.butceMin) ?? 0);
-    const butceMax = Math.max(0, sonluSayi(body.butceMax) ?? 0);
-    const butceBirimi = clean(body.butceBirimi, 8) || "₺";
-    const str = (v: unknown, n: number) => (typeof v === "string" ? clean(v, n) : "");
-
-    const db = await getDb();
-
-    const ilanSehir  = clean(body.sehir, 60) || str(formData?.sehir, 60) || "turkiye";
-    const ilanIlce   = clean(body.ilce, 60) || str(formData?.ilce, 60);
-    const ilanSektor = sektorId;
-    const ilanMeslek = clean(body.meslek, 80) || str(formData?.meslek, 80);
-
-    const slug = await generateUniqueSlug(
-      baslik,
-      ilanSehir,
-      ilanSektor,
-      async (s) => {
-        const existing = await db.collection("ilanlar").findOne({ slug: s });
-        return !!existing;
-      }
-    );
-
-    const aciklama = str(formData?.aciklama, 160);
-
-    const ilan = {
-      sektorId,
-      baslik,
-      slug,
-      kategori:     kategori || str(formData?.altKategori, 80) || sektorId,
-      kategoriSlug: kategoriSlug || sektorId,
-      formData,
-      medyalar,
-      resimUrl:     medyalar[0] || null,
-      butceMin,
-      butceMax,
-      butceBirimi,
-      tip,
-      rol,
-      ulke:         clean(body.ulke, 60) || str(formData?.ulke, 60) || "Türkiye",
-      sehir:        ilanSehir,
-      ilce:         ilanIlce,
-      meslek:       ilanMeslek,
-      durum:        "aktif",
-      teklifSayisi: 0,
-      goruntulenme: 0,
-      teklifeAcik:  true,
-      yapay:        false,
-      is_ai_generated: false,
-      // ── SEO Meta
-      seoTitle:       `${baslik} | SwapHubs`,
-      seoDescription: aciklama || `${baslik} - SwapHubs'ta güvenli alım satım ve hizmet platformu`,
-      sahibi: session
-        ? { email: session.user?.email, ad: session.user?.name, resim: session.user?.image }
-        : null,
-      misafirToken: session ? null : crypto.randomUUID(),
-      createdAt:    new Date(),
-      guncellendi:  new Date(),
-    };
-
-    const result = await db.collection("ilanlar").insertOne(ilan);
-
-    return NextResponse.json(
-      { success: true, id: result.insertedId, slug },
-      { status: 201 }
-    );
-
-  } catch (err) {
-    console.error("POST /api/ilanlar error:", err);
-    return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
-  }
-}
-
-// ─── YARDIMCI ──────────────────────────────────────────────
-function serialize(data: any): any {
-  if (Array.isArray(data)) return data.map(serialize);
-  if (data && typeof data === "object") {
-    const result: any = {};
-    for (const [k, v] of Object.entries(data)) {
-      if (k === "_id") {
-        result["_id"] = v?.toString();
-        result["id"] = v?.toString();
-      } else {
-        result[k] = serialize(v);
-      }
-    }
-    return result;
-  }
-  return data;
 }

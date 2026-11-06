@@ -52,21 +52,12 @@ const nextConfig = {
         destination: 'https://swaphubs.com/:path*',
         permanent: true,
       },
-      // İlan/pazar sayfaları gizlendi (geçici 307; geri açmak için bu kayıtları silin ve app/sitemap.ts, app/page.tsx ILAN_ENABLED=true yapın).
-      { source: '/ilan', destination: '/terzi', permanent: false },
-      { source: '/ilan/:path*', destination: '/terzi', permanent: false },
-      { source: '/ilanlar', destination: '/terzi', permanent: false },
-      { source: '/ilanlar/:path*', destination: '/terzi', permanent: false },
-      { source: '/ilan-ver', destination: '/terzi', permanent: false },
-      { source: '/ilan-detay', destination: '/terzi', permanent: false },
-      { source: '/ilan-detay/:path*', destination: '/terzi', permanent: false },
-      { source: '/ilan-duzenle', destination: '/terzi', permanent: false },
-      { source: '/ilan-duzenle/:path*', destination: '/terzi', permanent: false },
-      { source: '/kesfet', destination: '/terzi', permanent: false },
-      { source: '/kesfet/:path*', destination: '/terzi', permanent: false },
-      // Bal sayfaları gizlendi (geçici 307; geri açmak için bu iki kaydı silin ve app/sitemap.ts BAL_ENABLED=true yapın).
-      { source: '/bal', destination: '/terzi', permanent: false },
-      { source: '/bal/:path*', destination: '/terzi', permanent: false },
+      // İlan/pazar, bal ve üyelik sistemi kaldırıldı; site yalnızca terzi sitesidir (kalıcı 301). /giris yalnızca yönetici girişidir.
+      ...['ilan', 'ilanlar', 'ilan-ver', 'ilan-detay', 'ilan-duzenle', 'kesfet', 'bal', 'kayit', 'uye-ol', 'panel', 'terzi-panel', 'terzi-admin', 'mesajlar', 'otel-profil', 'sifremi-unuttum', 'sifre-sifirla'].flatMap((slug) => [
+        { source: `/${slug}`, destination: '/terzi', permanent: true },
+        { source: `/${slug}/:path*`, destination: '/terzi', permanent: true },
+      ]),
+      { source: '/terzi-talep', destination: '/terzi/iletisim', permanent: true },
       // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
       { source: '/terzi/kuru-temizleme-antalya', destination: '/terzi', permanent: false },
       // Adresinde 'kuru-temizleme' geçen ama kuru temizleme verilmeyen eski sayfa → en yakın Konyaaltı sayfası (kanibalizasyon giderildi).
@@ -88,8 +79,6 @@ const nextConfig = {
       })),
       { source: '/online-terzi-hizme', destination: '/online-terzi-hizmeti', permanent: true },
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
-      // Tek kayıt akışı: /kayit (bcrypt'li /api/auth/kayit); /uye-ol eski ve ikinci akıştır
-      { source: '/uye-ol', destination: '/kayit', permanent: false },
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
       // Gelinlik: gerçek sayfa app/terzi/hizmet/[hizmet] (gelinlik-abiye-tadilati). Eski/yazım hatalı adresler ona yönlenir.
@@ -153,15 +142,8 @@ const nextConfig = {
 
       // Giriş gerektiren sayfalar — noindex
       { source: '/giris',            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/panel(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/terzi-panel(.*)',  headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/terzi-admin(.*)',  headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/mesajlar(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/uye-ol',           headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin(.*)',        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/admin-ai(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/ilan-ver(.*)',     headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] },
-      { source: '/ilan-duzenle(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/online-terzi-hizmeti/client', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
 
       // Not: indexlenebilirlik sayfa metadata'sındaki robots ile belirlenir; zorla 'index' başlığı eklenmez.

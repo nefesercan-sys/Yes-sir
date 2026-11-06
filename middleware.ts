@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const IS_OBJECTID = /^[0-9a-f]{24}$/i;
-
 // Kaldırılan programatik sayfalar: 404 yerine 410 (kalıcı silindi).
-// NOT: /ilan/ ve /ilanlar/ listede YOK — üyelerin ilanları çalışmaya devam ediyor.
 const GONE_PREFIXES = ["/ulke/", "/turkiye/", "/meslek/", "/sektor/"];
 // Silinen statik bölümler (hesaplama araçları, Antalya rehberi, Riviera rehberi): 404 yerine 410.
 const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide"];
@@ -37,27 +34,6 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
-
-  // 1. /ilan/[id] ObjectId → SEO uyumlu slug adresine 301
-  if (pathname.startsWith("/ilan/")) {
-    const segment = pathname.split("/")[2];
-    if (segment && IS_OBJECTID.test(segment)) {
-      try {
-        const res = await fetch(`${origin}/api/ilanlar?id=${segment}`);
-        if (res.ok) {
-          const data = await res.json();
-          const slug = data?.slug;
-          if (slug) {
-            return NextResponse.redirect(new URL(`/ilan/${slug}`, request.url), { status: 301 });
-          }
-        }
-      } catch {
-        // API yanıt vermezse site çökmesin
-      }
-    }
-  }
-
-  // /ilanlar/[sehir]/[sektor] sayfası kendisi /ilanlar?sehir=&sektor= adresine yönlenir (döngü olmaması için burada ters yönlendirme yok).
 
   // 3. Dil başlığı (kök layout okur)
   const headers = new Headers(request.headers);

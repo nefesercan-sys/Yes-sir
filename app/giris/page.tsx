@@ -1,8 +1,7 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { guvenliYol } from '@/lib/validate';
 
 function GirisIcerik() {
@@ -11,16 +10,6 @@ function GirisIcerik() {
   const [form, setForm]           = useState({ email: '', sifre: '' });
   const [yukleniyor, setYukleniyor] = useState(false);
   const [hata, setHata]           = useState('');
-  const [basari, setBasari]       = useState('');
-
-  useEffect(() => {
-    if (searchParams.get('kayit') === 'ok') {
-      setBasari('Kayıt başarılı! Şimdi giriş yapabilirsiniz.');
-    }
-    if (searchParams.get('sifre') === 'ok') {
-      setBasari('Şifreniz güncellendi. Giriş yapabilirsiniz.');
-    }
-  }, [searchParams]);
 
   const setF = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
 
@@ -34,8 +23,8 @@ function GirisIcerik() {
     });
     setYukleniyor(false);
     if (sonuc?.ok) {
-      // Yönlendirme hedefi: callbackUrl (NextAuth) veya redirect (panel/otel-profil) — yalnızca site içi yol (açık yönlendirme koruması)
-      const hedef = guvenliYol(searchParams.get('callbackUrl'), '') || guvenliYol(searchParams.get('redirect'), '/panel');
+      // Yönlendirme hedefi: callbackUrl (NextAuth) veya redirect — yalnızca site içi yol (açık yönlendirme koruması)
+      const hedef = guvenliYol(searchParams.get('callbackUrl'), '') || guvenliYol(searchParams.get('redirect'), '/admin');
       router.push(hedef);
     } else {
       setHata('E-posta veya şifre hatalı.');
@@ -49,16 +38,9 @@ function GirisIcerik() {
           <span style={logoBadge}>S</span>
           <span>Swap<span style={{ color: '#e8361a' }}>Hubs</span></span>
         </div>
-        <h1 style={baslik}>Giriş Yap</h1>
-        <p style={altyazi}>Hesabınıza giriş yapın</p>
+        <h1 style={baslik}>Yönetici Girişi</h1>
+        <p style={altyazi}>Yalnızca site yöneticisi içindir</p>
 
-        {basari && (
-          <div style={{ background: '#edfaf3', border: '1px solid #a8eaca',
-            color: '#0d6e3f', borderRadius: 10, padding: '10px 14px',
-            fontSize: '.83rem', marginBottom: 14 }}>
-            ✅ {basari}
-          </div>
-        )}
         {hata && <div style={hataKutu}>❌ {hata}</div>}
 
         <form onSubmit={girisYap} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -71,12 +53,6 @@ function GirisIcerik() {
             <label style={lbl}>Şifre</label>
             <input style={inp} type="password" required placeholder="Şifreniz"
               value={form.sifre} onChange={e => setF('sifre', e.target.value)} />
-            <div style={{ textAlign: 'right', marginTop: 6 }}>
-              <Link href="/sifre-sifirla"
-                style={{ fontSize: '.75rem', color: '#e8361a', fontWeight: 600 }}>
-                Şifremi Unuttum
-              </Link>
-            </div>
           </div>
 
           <button type="submit" disabled={yukleniyor} style={btnPrimary}>
@@ -84,10 +60,6 @@ function GirisIcerik() {
           </button>
         </form>
 
-        <p style={altLink}>
-          Hesabın yok mu?{' '}
-          <Link href="/kayit" style={{ color: '#e8361a', fontWeight: 700 }}>Üye Ol</Link>
-        </p>
       </div>
     </div>
   );

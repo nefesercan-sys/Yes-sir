@@ -27,6 +27,8 @@ export const authOptions: NextAuthOptions = {
         if (credentials.email.length > 254 || credentials.password.length > 200) return null;
 
         const email = credentials.email.toLowerCase().trim();
+        // Üyelik kaldırıldı: yalnızca yönetici e-postaları giriş yapabilir.
+        if (!adminEpostasiMi(email)) return null;
         const db = await getDb();
 
         // Deneme hakkı karşılaştırmadan ÖNCE atomik olarak harcanır; limit aşıldıysa doğru şifre bile kabul edilmez.

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  // NOT: Giriş/panel/kayıt gibi özel sayfalar burada ENGELLENMEZ; bu sayfalarda <meta robots noindex> var.
+  // NOT: /giris (yönetici girişi) ve /admin burada ENGELLENMEZ; noindex başlığı ile işaretlidir.
   // robots.txt ile engellenirse Google noindex'i göremez ve URL'yi içeriksiz dizine ekleyebilir.
   const commonDisallows = [
     '/admin/',

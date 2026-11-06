@@ -1,3 +1,4 @@
+// NOT: Yapay ilanlar silindikten sonra bu uç ve admin ilan sekmesi kaldırılabilir.
 // app/api/admin/yapay-ilanlar/route.ts — yapay (AI ile üretilmiş) ilanları önizleme + güvenli toplu silme (yalnız yönetici).
 // GET  : Silmeden ÖNCE ne silineceğini gösterir (adet, kimlik/başlık listesi, bağlı teklif sayısı, Cloudinary public_id listesi).
 // POST : { onay: 'YAPAY-ILANLARI-SIL', adet: N } — N, GET'teki adetle birebir aynı değilse HİÇBİR ŞEY silinmez.
