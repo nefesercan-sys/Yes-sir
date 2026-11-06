@@ -1,5 +1,7 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
+import OnlineContactStrip from '@/components/terzi/OnlineContactStrip';
+import { onlineLanguages } from '@/lib/intl-online';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -38,13 +40,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: SITE_URL,
-    languages: {
-      'tr': `${BASE_URL}/terzi`,
-      'en': `${BASE_URL}/online-tailor-service`,
-      'de': SITE_URL,
-      'ru': `${BASE_URL}/ru/atelie-antalya`,
-      'x-default': `${BASE_URL}/terzi`,
-    },
+    languages: onlineLanguages(BASE_URL),
   },
   openGraph: {
     title: 'Online Schneiderservice Antalya — Herren- & Damenschneiderei',
@@ -78,6 +74,7 @@ export default function OnlineSchneiderservicePage() {
       />
       <SpeakableSchema path="/de/online-schneiderservice-antalya" />
       <QuickActionBanner lang="de" />
+      <OnlineContactStrip lang="de" />
       <OnlineSchneiderClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}

@@ -1,5 +1,7 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
+import OnlineContactStrip from '@/components/terzi/OnlineContactStrip';
+import { onlineLanguages } from '@/lib/intl-online';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata, Viewport } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -44,11 +46,10 @@ export const metadata: Metadata = {
     'выездной портной анталия','терзи коньяалты',
     'konyaaltı terzi rusça','antalya terzi rusça',
   ].join(', '),
-  // Ayrı bir RU sayfası: TR/EN/DE karşılıkları /ru/atelie-antalya ile aynı kümede olduğundan ikinci bir küme açılmaz;
-  // kendini işaret eden ru hreflang'ı eksik bırakılmaz.
+  // 10 dilli online terzi hizmeti kümesi (lib/intl-online.ts); her sayfa kendini ve diğer 9 dili işaretler.
   alternates: {
     canonical: PAGE_URL,
-    languages: { ru: PAGE_URL },
+    languages: onlineLanguages('https://swaphubs.com'),
   },
   openGraph: {
     title: 'Ателье Анталья Коньяалты — Ремонт и Пошив | Terzi Can',
@@ -77,6 +78,7 @@ const FAQ = [
   { q: 'Говорят ли в ателье по-русски?', a: 'Да, можно писать в WhatsApp по-русски — мы отвечаем на любом языке.' },
   { q: 'Сколько стоит укоротить брюки в Анталье?', a: 'Укорачивание брюк. Точную цену скажем по фото в WhatsApp.' },
   { q: 'Есть ли выездной портной?', a: 'Да. Заберём вещи на дом или в отель: из отелей — бесплатно во всех районах, где мы работаем; на дом — бесплатно в Коньяалты и рядом.' },
+  { q: 'Как быстро узнать цену?', a: 'Пришлите фото вещи в WhatsApp на +90 531 898 64 18 — назовём цену и срок. Забор и доставка в отели и дома Анталии бесплатны; писать можно каждый день с 08:00 до 23:00.' },
 ];
 
 // ─── SERVICES DATA ────────────────────────────────────────────────
@@ -96,6 +98,7 @@ const FAQS = [
   { q: '⏱️ Как быстро выполняется ремонт?', a: 'Обычная подгонка — в тот же день, срочная — 1–2 часа. Срок пошива — по модели и количеству.' },
   { q: '🚗 Есть ли выездной портной?', a: 'Да! Забираем вещи на дом или в отель: из отелей — бесплатно во всех районах, где мы работаем; на дом — бесплатно в Коньяалты и рядом. Готовое привозим обратно обычно за 1–2 дня.' },
   { q: '💰 Сколько стоит укоротить брюки?', a: 'От. Пришлите фото в WhatsApp — скажем точную цену в рабочие часы (08:00–23:00).' },
+  { q: 'Как быстро узнать цену?', a: 'Пришлите фото вещи в WhatsApp на +90 531 898 64 18 — назовём цену и срок. Забор и доставка в отели и дома Анталии бесплатны; писать можно каждый день с 08:00 до 23:00.' },
 ];
 
 // ─── PAGE ────────────────────────────────────────────────────────
@@ -117,6 +120,7 @@ export default function RuAtelieAntalyaPage() {
       <SpeakableSchema path="/ru/atelie-antalya-online" />
       <QuickActionBanner lang="ru" />
 
+      <OnlineContactStrip lang="ru" />
       <main style={{ minHeight: '100vh', fontFamily: 'system-ui,-apple-system,sans-serif', background: '#F8F7F4', color: '#1A1A1A', overflowX: 'hidden' }}>
         <style>{`
           *{box-sizing:border-box;margin:0;padding:0}

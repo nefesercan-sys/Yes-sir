@@ -6,6 +6,7 @@ import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
 import { ILANGS, INTL, NB, NB_DISTRICT, iUrl, type ILang } from '@/lib/intl';
 import { ZCOPY, ZONE_SLUGS, zoneData, zoneUrl } from '@/lib/intl-zones';
 import { SVCG, svcgUrl } from '@/lib/intl-svc';
+import { ONL, onlineUrl } from '@/lib/intl-online';
 import { jsonLdString } from '@/lib/json-ld';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
@@ -88,6 +89,7 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
 
         <section style={{ marginBottom: '1.8rem' }}>
           <p style={{ margin: 0 }}><Link href={svcgUrl(lang)} style={{ color: C.green, fontWeight: 600 }}>{SVCG[lang].h1}</Link></p>
+          <p style={{ margin: '.6rem 0 0' }}><Link href={onlineUrl(lang)} style={{ color: C.green, fontWeight: 600 }}>{ONL[lang].h1}</Link></p>
         </section>
 
         <section style={{ marginBottom: '1.8rem' }}>

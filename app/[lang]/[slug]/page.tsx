@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
 import SvcGuideLanding from '@/components/terzi/SvcGuideLanding';
+import OnlineGuideLanding from '@/components/terzi/OnlineGuideLanding';
+import { ONL, onlineUrl, onlineLanguages, parseOnline } from '@/lib/intl-online';
 import KonuGuideLanding from '@/components/terzi/KonuGuideLanding';
 import { HZ, HZ_IDS, parseHz, hzUrl, hzLanguages } from '@/lib/intl-hz';
 import { KONU, KONU_IDS, parseKonu, konuUrl, konuLanguages } from '@/lib/intl-konu';
@@ -21,6 +23,7 @@ export function generateStaticParams() {
   return ILANGS.flatMap((lang) => [
     { lang, slug: SLUG[lang] },
     { lang, slug: SVCG[lang].slug },
+    { lang, slug: ONL[lang].slug },
     { lang, slug: PROMO[lang].slug },
     ...KONU_IDS.map((t) => ({ lang, slug: KONU[lang][t].slug })),
     ...HZ_IDS.map((h) => ({ lang, slug: HZ[lang][h].slug })),
@@ -77,6 +80,20 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
       alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
       openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
       twitter: { card: 'summary_large_image', title: sc.title, description: sc.desc, images: [OG_DEFAULT] },
+    };
+  }
+
+  if (parseOnline(lang, slug)) {
+    const oc = ONL[lang];
+    const ourl = `${SITE}${onlineUrl(lang)}`;
+    return {
+      metadataBase: new URL(SITE),
+      title: { absolute: oc.title },
+      description: oc.desc,
+      robots,
+      alternates: { canonical: ourl, languages: onlineLanguages(SITE) },
+      openGraph: { title: oc.title, description: oc.desc, url: ourl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: oc.title }] },
+      twitter: { card: 'summary_large_image', title: oc.title, description: oc.desc, images: [OG_DEFAULT] },
     };
   }
 
@@ -151,6 +168,7 @@ export default async function Page({ params }: P) {
   if (!isILang(lang)) notFound();
   if (slug === SLUG[lang]) return <IntlLanding lang={lang} />;
   if (parseSvcg(lang, slug)) return <SvcGuideLanding lang={lang} />;
+  if (parseOnline(lang, slug)) return <OnlineGuideLanding lang={lang} />;
   const hz = parseHz(lang, slug);
   if (hz) return <KonuGuideLanding lang={lang} hz={hz} />;
   const konu = parseKonu(lang, slug);

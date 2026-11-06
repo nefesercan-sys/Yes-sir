@@ -2,6 +2,8 @@ import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
+import OnlineContactStrip from '@/components/terzi/OnlineContactStrip';
+import { onlineLanguages } from '@/lib/intl-online';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
@@ -43,13 +45,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     // DÜZELTME (2026-09-26): Bu sayfa İNGİLİZCE içerik olduğu halde 'tr' olarak
     // kendine referans veriyordu ve 'en' hiç tanımlanmamıştı — düzeltildi.
-    languages: {
-      'tr': `${BASE_URL}/terzi`,
-      'en': SITE_URL,
-      'de': `${BASE_URL}/de/online-schneiderservice-antalya`,
-      'ru': `${BASE_URL}/ru/atelie-antalya`,
-      'x-default': `${BASE_URL}/terzi`,
-    },
+    languages: onlineLanguages(BASE_URL),
   },
   openGraph: {
     title: 'Online Tailor Service Antalya — Menswear & Womenswear Tailoring',
@@ -87,6 +83,7 @@ export default function OnlineTailorServicePage() {
       />
       <SpeakableSchema path="/online-tailor-service" />
       <QuickActionBanner lang="en" />
+      <OnlineContactStrip lang="en" />
       <OnlineTailorClient
         gbpName1={GBP1.name}
         gbpAddr1={GBP1.addr}

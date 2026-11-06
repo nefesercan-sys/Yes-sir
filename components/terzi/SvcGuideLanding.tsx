@@ -7,6 +7,7 @@ import { SVCG, svcgUrl } from '@/lib/intl-svc';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { jsonLdString } from '@/lib/json-ld';
 import KargoSection from '@/components/terzi/KargoSection';
+import { ONL, onlineUrl } from '@/lib/intl-online';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -53,6 +54,8 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
             {s.p.map((t) => <p key={t} style={{ margin: '0 0 .8rem' }}>{t}</p>)}
           </section>
         ))}
+
+        <p style={{ margin: '0 0 1.8rem' }}><Link href={onlineUrl(lang)} style={{ color: C.green, fontWeight: 600 }}>{ONL[lang].h1}</Link></p>
 
         <KargoSection lang={lang} />
 
