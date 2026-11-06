@@ -1,4 +1,5 @@
 import ReviewsBlock from '@/components/ReviewsBlock';
+import KargoSection from '@/components/terzi/KargoSection';
 import { GOOGLE_REVIEWS } from '@/lib/reviews';
 import type { Metadata, Viewport } from 'next';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -337,6 +338,7 @@ export default function RuAtelieAntalyaPage() {
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#15803d',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
         </div>
       </main>
+      <KargoSection lang="ru" />
       <ReviewsBlock lang="ru" />
     </>
   );
