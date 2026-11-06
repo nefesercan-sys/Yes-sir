@@ -207,7 +207,6 @@ function SistemIlanlariPaneli({ adminKey }: { adminKey: string }) {
                 </div>
               </div>
               <div className="flex flex-col gap-2 shrink-0">
-                <a href={`/ilan/${i._id}`} target="_blank" className="text-center bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg text-[11px] font-bold">İncele</a>
                 <button onClick={() => ilanSil(i._id)} className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-1.5 rounded-lg text-[11px] font-bold border border-red-500/20">Sil</button>
               </div>
             </div>

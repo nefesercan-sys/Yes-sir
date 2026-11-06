@@ -69,9 +69,9 @@ export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokas
               style={{ background: YESIL, color: '#fff', padding: '.9rem 1.8rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.95rem' }}>
               💬 WhatsApp'tan Fotoğraf Gönder
             </a>
-            <a href="/terzi-talep"
+            <a href="tel:+905318986418"
               style={{ background: 'transparent', border: '1.5px solid rgba(255,255,255,.4)', color: '#fff', padding: '.9rem 1.8rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.95rem' }}>
-              📝 Talep Oluştur
+              📞 Ara
             </a>
           </div>
           {/* GERÇEK, CANLI VERİ — MongoDB'den o an sayılan aktif talep sayısı */}

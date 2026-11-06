@@ -10,7 +10,7 @@ import { jsonLdString } from '@/lib/json-ld';
 
 // Terzi / tekstil sayfa yolları (önek eşleşmesi). Yeni terzi sayfası eklerken buraya ekle.
 const TERZI_PREFIXES = [
-  '/terzi',                       // /terzi, /terzi/..., /terzi-cagir, /terzi-talep
+  '/terzi',                       // /terzi, /terzi/..., /terzi-cagir
   '/antalya-konyaalti-terzi',
   '/antalya-terzi',
   '/antalyada-terzi',

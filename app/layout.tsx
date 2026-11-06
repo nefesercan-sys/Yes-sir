@@ -2,10 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
 import "./globals.css";
-import AuthProvider from "@/app/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/app/components/theme-provider";
-import BottomNav from "@/components/BottomNav";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
 import IcerikHaritasi from "@/components/IcerikHaritasi";
 import GlobalSchema from "@/components/GlobalSchema";
@@ -132,15 +130,12 @@ export default function RootLayout({ children }: Props) {
       </head>
       <body className={`${jakarta.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
             <LocaleHtmlLang />
             {/* Sayfalar kendi <main> etiketini taşıdığı için burada <div> kullanılır (iç içe <main> geçersizdir) */}
             <div id="icerik">{children}</div>
             <RuTelegramButton />
             <IcerikHaritasi />
-            <BottomNav />
             <Analytics />
-          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

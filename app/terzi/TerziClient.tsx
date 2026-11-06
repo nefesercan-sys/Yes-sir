@@ -414,7 +414,7 @@ export default function TerziClient({ gbp1 }: Props) {
             <h1>{L.h1}<br /><em>{L.h1em}</em></h1>
             <p className="thsub">{L.sub}</p>
             <div className="thacts">
-              <Link href="/terzi-talep?kategori=terzi" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</Link>
+              <a href={WA('Merhaba, terzi hizmeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ background: '#2d8c6e' }}>🧵 Terzi Fiyatı Sor</a>
             </div>
             <div className="thacts" style={{ marginTop: '.6rem' }}>
               <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline">💬 {L.waBtn}</a>
@@ -442,7 +442,7 @@ export default function TerziClient({ gbp1 }: Props) {
               ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-              <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</Link>
+              <a href={WA('Merhaba, teklif almak istiyorum.')} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ background: '#2d8c6e' }}>📝 Hemen Teklif İste</a>
             </div>
           </div>
         </section>
@@ -486,7 +486,7 @@ export default function TerziClient({ gbp1 }: Props) {
             ))}
           </div>
           <div style={{ textAlign: 'center', padding: '2.5rem 2rem 4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', background: 'var(--cream)' }}>
-            <Link href="/terzi-talep" className="btn-gold" style={{ background: '#2d8c6e' }}>{lang === 'tr' ? '📝 Formla Teklif İste' : '📝 Request a Quote'}</Link>
+            <a href={WA(lang === 'tr' ? 'Merhaba, teklif almak istiyorum.' : 'Hello, I would like a quote.')} target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ background: '#2d8c6e' }}>{lang === 'tr' ? '📝 WhatsApp ile Teklif İste' : '📝 Request a Quote on WhatsApp'}</a>
             <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.quoteBtn}</a>
             <a href={WA(lang === 'tr' ? 'Merhaba, toplu tekstil sipariş için teklif almak istiyorum.' : 'Hello, bulk textile production quote please.')} target="_blank" rel="noopener noreferrer" className="btn-outline-dark">{L.bulkBtn}</a>
           </div>

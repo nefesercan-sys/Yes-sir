@@ -3,9 +3,8 @@
 const YESIL = '#2d8c6e';
 
 const OGELER = [
-  { href: '/terzi-talep', icon: '📷', label: 'Talep Ver' },
-  { href: '/terzi-talep?sekme=mesajlar', icon: '💬', label: 'Mesajlar' },
-  { href: '/terzi-talep?sekme=profil', icon: '👤', label: 'Profil' },
+  { href: 'https://wa.me/905318986418', icon: '💬', label: 'WhatsApp' },
+  { href: 'tel:+905318986418', icon: '📞', label: 'Ara' },
 ];
 
 export default function TerziMarketingBottomNav() {
