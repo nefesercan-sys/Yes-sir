@@ -31,6 +31,7 @@ export default function KargoSection({ lang, id }: { lang: KargoLang; id?: strin
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(schema) }} />
       <h2 style={{ color: INK, fontSize: '1.3rem', margin: '0 0 .7rem', lineHeight: 1.3 }}>{c.h}</h2>
       <p style={{ margin: '0 0 .9rem' }}>{c.lead}</p>
+      <p style={{ margin: '0 0 .9rem' }}>{c.scope}</p>
       <ol style={{ margin: '0 0 1.1rem', paddingInlineStart: '1.3rem' }}>
         {c.steps.map((s) => <li key={s} style={{ margin: '0 0 .3rem' }}>{s}</li>)}
       </ol>

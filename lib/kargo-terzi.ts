@@ -7,13 +7,14 @@
 export type KargoLang = 'tr' | 'en' | 'ru' | 'de' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 
 export interface KargoCopy {
-  h: string; lead: string; steps: string[]; faqH: string; faq: [string, string][]; waMsg: string; wa: string; svcName: string; svcDesc: string;
+  h: string; lead: string; scope: string; steps: string[]; faqH: string; faq: [string, string][]; waMsg: string; wa: string; svcName: string; svcDesc: string;
 }
 
 export const KARGO: Record<KargoLang, KargoCopy> = {
   tr: {
     h: 'Kargoyla da hizmet: Antalya içi ve yurt dışı',
     lead: "Asıl hizmetimiz Antalya'da otelinize veya evinize gelen terzi ve fotoğraftan fiyattır. Bunun yanında kıyafetinizi kargoyla da gönderebilirsiniz; kargoyla hizmet şu anda Antalya içi ve yurt dışı için geçerlidir. Tatil dönüşü evine dönenler veya yurt dışında yaşayanlar da fotoğrafla fiyat alıp kıyafetini bize ulaştırabilir.",
+    scope: "Her türlü giyim için bay, bayan ve çocuk kıyafetlerinde dikim, tamir, tadilat ve özel dikim yapılır: paça, bel, kol ve boy kısaltma-daraltma, fermuar değişimi, onarım, tadilat ve ölçüye göre dikim. Paça, bel, kol ve boy kısaltma-daraltma ₺200'den, fermuar değişimi ₺300'den (mont, kaban, palto ve deri fermuarı yaklaşık €20), deri tadilatı ₺400'den, kot yaklaşık ₺200'den başlar; fiyatlara KDV dahil değildir. Dikim, özel dikim ile abiye ve gelinlik tadilatında sabit fiyat yoktur, fiyat fotoğrafa veya işin detayına göre belirlenir. Gelinlik dikimi yapmıyoruz, yalnızca tadilat yapıyoruz. Özel dikimde ölçünün nasıl alınacağı WhatsApp'tan netleştirilir.",
     steps: ["WhatsApp'tan kıyafetin ve işlem yapılacak yerin fotoğrafını gönderin.", 'Fiyatı ve işi siz onaylayın.', 'Kıyafeti kargoyla bize gönderin (kargo ücreti müşteriye aittir).', 'İşlem yapılır ve kıyafet kargoyla adresinize teslim edilir.'],
     faqH: 'Kargoyla hizmet: kısa cevaplar',
     faq: [
@@ -29,6 +30,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   en: {
     h: 'Also by post: within Antalya and from abroad',
     lead: 'Our main service is a tailor who comes to your hotel or home in Antalya, with a price from your photo. On top of that you can post us your garment: shipping is currently available within Antalya and from abroad. If you are back home after your holiday, or you live abroad, you can still get a price from a photo and send the item to us.',
+    scope: "We handle sewing, repairs, alterations and made-to-measure tailoring for any garment, for men, women and children: hem, waist, sleeve and length shortening or taking in, zipper replacement, repairs, alterations and custom sewing. Hem, waist, sleeve and length work starts at ₺200, zipper replacement at ₺300 (about €20 for coat, jacket and leather zippers), leather alterations at ₺400 and jeans at about ₺200, excluding VAT. Sewing, made-to-measure jobs and wedding or evening dress alterations have no fixed price; the price depends on your photo or the job details. We alter wedding dresses but do not sew them from scratch. How to take your measurements for custom work is explained on WhatsApp.",
     steps: ['Send a photo of the garment and the area to work on via WhatsApp.', 'Approve the price and the job.', 'Post the garment to us (shipping is paid by the customer).', 'We do the work and ship it back to your address.'],
     faqH: 'Shipping: quick answers',
     faq: [
@@ -44,6 +46,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   ru: {
     h: 'Также по почте: по Анталье и из-за рубежа',
     lead: 'Наша основная услуга — портной, который приезжает к вам в отель или домой в Анталье, с ценой по фото. Дополнительно вещь можно отправить нам: отправка сейчас доступна внутри Антальи и из-за границы. Если вы уже вернулись домой после отпуска или живёте за рубежом, цену по фото вы всё равно узнаете и сможете отправить вещь нам.',
+    scope: "Мы выполняем пошив, ремонт, подгонку и индивидуальный пошив любой одежды — мужской, женской и детской: подшив и ушивание по низу, талии, рукавам и длине, замена молний, починка, переделка и пошив по меркам. Подшив и ушивание по низу, талии, рукавам и длине — от ₺200, замена молнии — от ₺300 (на пальто, куртке и коже около €20), работы с кожей — от ₺400, джинсы — около ₺200, без НДС. На пошив, индивидуальный пошив и подгонку свадебных и вечерних платьев фиксированной цены нет: она зависит от фото или деталей работы. Свадебные платья мы переделываем, но не шьём с нуля. Как снять мерки для индивидуального заказа, объясним в WhatsApp.",
     steps: ['Пришлите в WhatsApp фото вещи и нужного места.', 'Подтвердите цену и работу.', 'Отправьте вещь нам (доставку оплачивает клиент).', 'Мы выполняем работу и отправляем вещь обратно на ваш адрес.'],
     faqH: 'Отправка: короткие ответы',
     faq: [
@@ -59,6 +62,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   de: {
     h: 'Auch per Post: innerhalb von Antalya und aus dem Ausland',
     lead: 'Unser Hauptangebot ist der Schneider, der in Antalya zu Ihnen ins Hotel oder nach Hause kommt, mit Preis nach Foto. Zusätzlich können Sie uns Ihr Kleidungsstück schicken: Der Versand ist derzeit innerhalb von Antalya und aus dem Ausland möglich. Wer nach dem Urlaub schon wieder zu Hause ist oder im Ausland lebt, bekommt den Preis ebenfalls per Foto und kann uns das Stück zusenden.',
+    scope: "Wir nähen, reparieren, ändern und fertigen nach Maß für jede Art von Kleidung, für Herren, Damen und Kinder: Kürzen und Enger-Machen bei Saum, Taille, Ärmeln und Länge, Reißverschlusswechsel, Reparaturen, Änderungen und Maßanfertigung. Saum, Taille, Ärmel und Länge ab ₺200, Reißverschlusswechsel ab ₺300 (bei Mantel, Jacke und Leder etwa €20), Lederänderungen ab ₺400, Jeans ab etwa ₺200, jeweils ohne MwSt. Für Anfertigungen, Maßarbeit sowie Änderungen von Braut- und Abendkleidern gibt es keinen Festpreis; der Preis richtet sich nach Foto oder Arbeitsumfang. Brautkleider ändern wir, nähen sie aber nicht neu. Wie Sie Ihre Maße für Maßarbeit nehmen, klären wir per WhatsApp.",
     steps: ['Foto des Kleidungsstücks und der Stelle per WhatsApp senden.', 'Preis und Arbeit bestätigen.', 'Das Stück an uns versenden (Versandkosten trägt der Kunde).', 'Wir erledigen die Arbeit und senden es an Ihre Adresse zurück.'],
     faqH: 'Versand: kurze Antworten',
     faq: [
@@ -74,6 +78,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   es: {
     h: 'También por correo: dentro de Antalya y desde el extranjero',
     lead: 'Nuestro servicio principal es el sastre que va a su hotel o a su casa en Antalya, con precio según la foto. Además, puede enviarnos su prenda: el envío está disponible ahora dentro de Antalya y desde el extranjero. Si ya ha vuelto a casa tras las vacaciones o vive fuera de Turquía, también puede pedir precio por foto y mandarnos la prenda.',
+    scope: "Hacemos confección, reparaciones, arreglos y sastrería a medida para cualquier prenda de hombre, mujer y niño: acortar y ajustar bajos, cintura, mangas y largo, cambio de cremalleras, reparaciones, arreglos y costura personalizada. Bajos, cintura, mangas y largo desde ₺200, cremalleras desde ₺300 (en abrigo, chaqueta y piel unos 20 €), arreglos en piel desde ₺400 y vaqueros desde unos ₺200, sin IVA. La confección, el trabajo a medida y el arreglo de vestidos de novia o de noche no tienen precio fijo: depende de la foto o del detalle del trabajo. Arreglamos vestidos de novia, pero no los confeccionamos desde cero. Cómo tomar las medidas para un encargo a medida se aclara por WhatsApp.",
     steps: ['Envíe por WhatsApp una foto de la prenda y de la zona a trabajar.', 'Apruebe el precio y el trabajo.', 'Envíenos la prenda (el envío lo paga el cliente).', 'Hacemos el trabajo y se la devolvemos a su dirección.'],
     faqH: 'Envío: respuestas rápidas',
     faq: [
@@ -89,6 +94,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   fr: {
     h: 'Aussi par colis : à Antalya et depuis l’étranger',
     lead: "Notre service principal, c'est le couturier qui vient à votre hôtel ou chez vous à Antalya, avec un prix d'après photo. En complément, vous pouvez nous envoyer votre vêtement : l'envoi est possible actuellement à Antalya et depuis l'étranger. De retour chez vous après les vacances, ou installé à l'étranger, vous pouvez aussi obtenir un prix sur photo et nous expédier la pièce.",
+    scope: "Nous réalisons confection, réparations, retouches et couture sur mesure pour tout vêtement d'homme, de femme et d'enfant : raccourcir et ajuster ourlets, taille, manches et longueur, remplacement de fermetures, réparations, retouches et création sur mesure. Ourlet, taille, manches et longueur dès ₺200, fermetures dès ₺300 (manteau, veste et cuir environ 20 €), retouches cuir dès ₺400, jean dès environ ₺200, hors TVA. La confection, le sur-mesure et la retouche des robes de mariée ou de soirée n'ont pas de prix fixe : il dépend de la photo ou du détail du travail. Nous retouchons les robes de mariée, mais ne les confectionnons pas. La façon de prendre vos mesures pour le sur-mesure se précise sur WhatsApp.",
     steps: ["Envoyez sur WhatsApp une photo du vêtement et de la zone à travailler.", 'Validez le prix et le travail.', 'Expédiez-nous le vêtement (frais d’envoi à la charge du client).', 'Nous faisons le travail et le renvoyons à votre adresse.'],
     faqH: 'Envoi : réponses rapides',
     faq: [
@@ -104,6 +110,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   pl: {
     h: 'Także wysyłkowo: w Antalyi i z zagranicy',
     lead: 'Naszą główną usługą jest krawiec, który przyjeżdża do hotelu lub domu w Antalyi, z ceną na podstawie zdjęcia. Dodatkowo możesz wysłać nam ubranie: wysyłka jest obecnie dostępna w obrębie Antalyi i z zagranicy. Jeśli po wakacjach wróciłeś już do domu lub mieszkasz za granicą, cenę też poznasz ze zdjęcia i możesz przesłać nam rzecz.',
+    scope: "Wykonujemy szycie, naprawy, przeróbki i szycie na miarę dla każdej odzieży męskiej, damskiej i dziecięcej: skracanie i zwężanie nogawek, talii, rękawów i długości, wymianę zamków, naprawy, poprawki oraz szycie indywidualne. Nogawki, talia, rękawy i długość od ₺200, zamki od ₺300 (w płaszczu, kurtce i skórze ok. 20 €), przeróbki skóry od ₺400, jeans od ok. ₺200, bez VAT. Szycie, praca na miarę oraz przeróbki sukni ślubnych i wieczorowych nie mają stałej ceny: zależy ona od zdjęcia lub szczegółów zlecenia. Suknie ślubne przerabiamy, ale nie szyjemy ich od zera. Jak zdjąć miarę do szycia na miarę, wyjaśnimy na WhatsApp.",
     steps: ['Wyślij na WhatsApp zdjęcie ubrania i miejsca do pracy.', 'Zaakceptuj cenę i zakres pracy.', 'Wyślij nam ubranie (koszt przesyłki ponosi klient).', 'Wykonujemy pracę i odsyłamy ubranie pod Twój adres.'],
     faqH: 'Wysyłka: krótkie odpowiedzi',
     faq: [
@@ -119,6 +126,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   uk: {
     h: 'Також поштою: по Анталії та з-за кордону',
     lead: 'Наша основна послуга — кравець, який приїздить до вас у готель чи додому в Анталії, із ціною за фото. Додатково ви можете надіслати нам річ: відправлення зараз доступне в межах Анталії та з-за кордону. Якщо ви вже повернулися додому після відпустки або живете за кордоном, ціну за фото ви теж дізнаєтеся й зможете надіслати нам річ.',
+    scope: "Ми виконуємо пошив, ремонт, підгонку та індивідуальний пошив будь-якого одягу — чоловічого, жіночого й дитячого: підшивання та зауження низу, талії, рукавів і довжини, заміна блискавок, ремонт, переробка та пошив за мірками. Підшивка й зауження низу, талії, рукавів і довжини — від ₺200, заміна блискавки — від ₺300 (на пальті, куртці й шкірі близько €20), роботи зі шкірою — від ₺400, джинси — близько ₺200, без ПДВ. На пошив, індивідуальний пошив і підгонку весільних та вечірніх суконь фіксованої ціни немає: вона залежить від фото чи деталей роботи. Весільні сукні ми переробляємо, але не шиємо з нуля. Як зняти мірки для індивідуального замовлення, пояснимо у WhatsApp.",
     steps: ['Надішліть у WhatsApp фото речі та потрібного місця.', 'Погодьте ціну й роботу.', 'Відправте річ нам (доставку оплачує клієнт).', 'Ми виконуємо роботу й надсилаємо річ назад на вашу адресу.'],
     faqH: 'Відправлення: короткі відповіді',
     faq: [
@@ -134,6 +142,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   nl: {
     h: 'Ook per post: binnen Antalya en vanuit het buitenland',
     lead: 'Onze belangrijkste dienst is de kleermaker die naar je hotel of huis in Antalya komt, met een prijs op basis van een foto. Daarnaast kun je ons je kledingstuk opsturen: verzenden kan momenteel binnen Antalya en vanuit het buitenland. Ben je na je vakantie alweer thuis of woon je in het buitenland, dan krijg je ook een prijs via een foto en kun je het stuk naar ons sturen.',
+    scope: "Wij naaien, herstellen, vermaken en maken maatwerk voor elk kledingstuk voor heren, dames en kinderen: inkorten en innemen van zoom, taille, mouwen en lengte, ritsen vervangen, herstel, vermaak en maatkleding. Zoom, taille, mouwen en lengte vanaf ₺200, ritsen vanaf ₺300 (bij jas, jack en leer ca. € 20), leerwerk vanaf ₺400 en spijkerbroeken vanaf ca. ₺200, exclusief btw. Voor naaiwerk, maatwerk en het vermaken van bruids- en avondjurken is er geen vaste prijs: die hangt af van de foto of de details. Bruidsjurken vermaken we, maar we naaien ze niet helemaal nieuw. Hoe je je maten opneemt voor maatwerk leggen we uit via WhatsApp.",
     steps: ['Stuur via WhatsApp een foto van het kledingstuk en de plek waar het werk moet gebeuren.', 'Keur prijs en werk goed.', 'Stuur het kledingstuk naar ons (verzendkosten zijn voor de klant).', 'Wij doen het werk en sturen het terug naar je adres.'],
     faqH: 'Verzenden: korte antwoorden',
     faq: [
@@ -149,6 +158,7 @@ export const KARGO: Record<KargoLang, KargoCopy> = {
   ar: {
     h: 'وبالبريد أيضاً: داخل أنطاليا ومن خارج تركيا',
     lead: 'خدمتنا الأساسية هي الخياط الذي يأتي إلى فندقك أو منزلك في أنطاليا، مع سعر حسب الصورة. وإضافةً إلى ذلك يمكنك إرسال قطعتك إلينا: الشحن متاح حالياً داخل أنطاليا ومن خارج تركيا. وإذا عدت إلى بلدك بعد العطلة أو كنت تقيم في الخارج، فيمكنك أيضاً معرفة السعر من الصورة وإرسال القطعة إلينا.',
+    scope: "ننفّذ الخياطة والإصلاح والتعديل والخياطة حسب المقاس لأي نوع من الملابس للرجال والنساء والأطفال: تقصير وتضييق الأطراف والخصر والأكمام والطول، وتبديل السحّابات، والإصلاح، والتعديل، والتفصيل حسب الطلب. التقصير والتضييق من 200 ليرة، وتبديل السحّاب من 300 ليرة (حوالي 20 يورو للمعطف والجاكيت والجلد)، وتعديل الجلد من 400 ليرة، والجينز من حوالي 200 ليرة، دون ضريبة القيمة المضافة. الخياطة والتفصيل حسب المقاس وتعديل فساتين الزفاف والسهرة ليس لها سعر ثابت؛ بل يتحدد السعر حسب الصورة أو تفاصيل العمل. نعدّل فساتين الزفاف ولا نخيطها من الصفر. وطريقة أخذ المقاسات للتفصيل تُوضَّح عبر واتساب.",
     steps: ['أرسل عبر واتساب صورة للقطعة وللمكان المطلوب العمل عليه.', 'وافق على السعر والعمل.', 'أرسل القطعة إلينا بالشحن (تكلفة الشحن على العميل).', 'ننفّذ العمل ونعيد القطعة إلى عنوانك.'],
     faqH: 'الشحن: إجابات سريعة',
     faq: [
