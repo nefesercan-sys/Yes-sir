@@ -1,7 +1,7 @@
 // Görünür müşteri yorumları (Google'daki gerçek yorumlar). Şema ayrıca üretilmez:
 // işletme şeması zaten aynı yorumları lib/reviews.ts'ten alır (çift işaretleme olmasın).
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from '@/lib/reviews';
-import { BUSINESS_ID, SITE_URL } from '@/lib/business';
+import { BUSINESS, BUSINESS_ID, SITE_URL } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 
 type L = 'tr' | 'en' | 'ru' | 'de' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
@@ -30,8 +30,8 @@ export default function ReviewsBlock({ lang = 'tr', schema = false }: { lang?: L
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
         '@id': BUSINESS_ID,
-        name: 'Terzi Can',
-        url: SITE_URL,
+        name: BUSINESS.name,
+        url: `${SITE_URL}/terzi`,
         aggregateRating: { '@type': 'AggregateRating', ratingValue: average, reviewCount: String(count), bestRating: '5', worstRating: '1' },
         review: list.map((r) => ({
           '@type': 'Review',
