@@ -149,21 +149,25 @@ export function directAnswer(lang: BLang, slug: string, n: string, loc: string, 
       `${loc} terzi arıyorsanız: Terzi Can'ın atölyesi Konyaaltı Hurma'dadır ve ${n} bölgesine hizmet verir. ${rule}; ${D.repairLine.charAt(0).toLocaleLowerCase('tr-TR') + D.repairLine.slice(1)}.`,
       `Kısa cevap: ${n} için kıyafetin fotoğrafını WhatsApp'tan gönderip fiyat alabilir, ${resort ? 'otelinizden' : 'adresinizden'} aldırabilirsiniz. ${D.normal}, ${D.urgent.charAt(0).toLocaleLowerCase('tr-TR') + D.urgent.slice(1)}.`,
       `${n} bölgesinde tamir, tadilat ve özel dikim için en kısa yol: fotoğrafı ${PHONE_DISPLAY} numarasına WhatsApp'tan göndermek. ${rule}.`,
+      `${n} yakınımdaki terzi mi arıyorsunuz? Terzi Can ${resort ? 'otelinize' : 'adresinize'} gelir: fotoğrafı WhatsApp'tan gönderin, fiyatı alın. ${rule}.`,
     ],
     en: [
       `Looking for a tailor ${loc}? Terzi Can's workshop is in Hurma, Konyaaltı, and serves ${n}. ${rule}; ${D.repairLine.charAt(0).toLowerCase() + D.repairLine.slice(1)}.`,
       `Short answer: send a photo of the garment on WhatsApp for a price, and have it collected from your ${resort ? 'hotel' : 'address'} ${loc}. ${D.normal}; ${D.urgent.charAt(0).toLowerCase() + D.urgent.slice(1)}.`,
       `The quickest way to get a repair, alteration or made-to-measure piece ${loc}: send a photo to ${PHONE_DISPLAY} on WhatsApp. ${rule}.`,
+      `Tailor near me ${loc}? Terzi Can comes to your ${resort ? 'hotel' : 'address'}: send a photo on WhatsApp and get a price. ${rule}.`,
     ],
     ru: [
       `Ищете портного ${loc}? Мастерская Terzi Can находится в Хурме (Коньяалты) и обслуживает район ${n}. ${rule}; ${D.repairLine.charAt(0).toLowerCase() + D.repairLine.slice(1)}.`,
       `Коротко: пришлите фото вещи в WhatsApp — назовём цену и заберём её ${resort ? 'из отеля' : 'по адресу'} ${loc}. ${D.normal}; ${D.urgent.charAt(0).toLowerCase() + D.urgent.slice(1)}.`,
       `Самый быстрый способ заказать ремонт, подгонку или пошив ${loc} — отправить фото на ${PHONE_DISPLAY} в WhatsApp. ${rule}.`,
+      `Ищете портного рядом ${loc}? Terzi Can приедет ${resort ? 'в ваш отель' : 'по вашему адресу'}: отправьте фото в WhatsApp и узнайте цену. ${rule}.`,
     ],
     de: [
       `Schneider ${loc} gesucht? Die Werkstatt von Terzi Can liegt in Hurma, Konyaaltı, und bedient ${n}. ${rule}; ${D.repairLine.charAt(0).toLowerCase() + D.repairLine.slice(1)}.`,
       `Kurz gesagt: Foto des Kleidungsstücks per WhatsApp senden, Preis erhalten und ${resort ? 'im Hotel' : 'an Ihrer Adresse'} ${loc} abholen lassen. ${D.normal}; ${D.urgent.charAt(0).toLowerCase() + D.urgent.slice(1)}.`,
       `Der schnellste Weg zu Reparatur, Änderung oder Maßanfertigung ${loc}: ein Foto per WhatsApp an ${PHONE_DISPLAY}. ${rule}.`,
+      `Schneider in der Nähe ${loc}? Terzi Can kommt ${resort ? 'in Ihr Hotel' : 'zu Ihrer Adresse'}: Foto per WhatsApp senden und Preis erhalten. ${rule}.`,
     ],
   };
   return pick(`ans:${slug}:${lang}`, V[lang]);
