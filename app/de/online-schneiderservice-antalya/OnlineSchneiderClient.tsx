@@ -134,7 +134,7 @@ export default function OnlineSchneiderClient({
           --gold:#C9A84C;--gold2:#E8C97A;--gold3:#7A5C1E;
           --ink:#0C0B09;--ink2:#141210;--ink3:#1C1A16;--ink4:#242118;
           --bone:#F0EBE0;--bone2:#DDD5C4;--muted:#7A7060;
-          --wa:#25D366;
+          --wa:#15803d;
         }
         ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--gold3)}
         .skip{position:absolute;top:-40px;left:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;font-weight:700;z-index:999}.skip:focus{top:0}
@@ -160,7 +160,7 @@ export default function OnlineSchneiderClient({
         .obtn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;border-radius:2px;transition:all .25s}
         .obtn-gold{background:var(--gold);color:var(--ink)}.obtn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
         .obtn-ghost{background:transparent;color:var(--bone);border:1px solid rgba(240,235,224,.2)}.obtn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-        .obtn-wa{background:var(--wa);color:#fff}.obtn-wa:hover{background:#1eba56}
+        .obtn-wa{background:var(--wa);color:#fff}.obtn-wa:hover{background:#166534}
         .oseo{background:var(--ink2);padding:1.8rem 5rem;border-left:3px solid var(--gold3)}
         .oseo p{font-size:.8rem;color:var(--muted);line-height:1.9;max-width:1100px;margin:0 auto}
         .osec{padding:7rem 5rem}.octr{max-width:1200px;margin:0 auto}

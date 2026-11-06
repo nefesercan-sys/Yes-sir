@@ -144,7 +144,7 @@ export default function PacaKisaltmaPage() {
         {/* BREADCRUMB */}
         <SpeakableSchema path="/terzi/paca-kisaltma-antalya" />
         <QuickActionBanner lang="tr" service="paca" />
-        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
@@ -169,7 +169,7 @@ export default function PacaKisaltmaPage() {
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               <a href={WA('Merhaba, paça kısaltma için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
                 💬 Fotoğraf Gönder → Fiyat Al
               </a>
               <a href={`tel:+905318986418`}
@@ -196,7 +196,7 @@ export default function PacaKisaltmaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Paça Kısaltma Fiyat Listesi 2026
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '1.8rem' }}>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '1.8rem' }}>
               Antalya'da paça kısaltma başlangıç fiyatları — kesin fiyat için WhatsApp'tan kıyafetinizin fotoğrafını gönderin.
             </p>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -212,8 +212,8 @@ export default function PacaKisaltmaPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.025)' : '#fff' }}>
                     <td style={{ padding: '.9rem .8rem', fontSize: '.88rem', fontWeight: i === FIYATLAR.length-1 ? 600 : 400 }}>{tip}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat === 'ÜCRETSIZ' ? '#22c55e' : '#8A6E3E', fontWeight: 700, fontSize: '.92rem' }}>{fiyat}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#7A6E62', fontSize: '.8rem' }}>{sure}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#7A6E62', fontSize: '.76rem' }}>{not}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.8rem' }}>{sure}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.76rem' }}>{not}</td>
                   </tr>
                 ))}
               </tbody>
@@ -243,7 +243,7 @@ export default function PacaKisaltmaPage() {
                 <div key={t as string} style={{ background: '#fff', padding: '1.4rem', borderRadius: '2px', borderTop: '2px solid rgba(184,151,90,.3)' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.6rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#1C1814', marginBottom: '.4rem', fontWeight: 600 }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -286,7 +286,7 @@ export default function PacaKisaltmaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Paça Kısaltma Hizmet Bölgeleri — Konyaaltı ve çevresi
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Konyaaltı merkezimizden eve ve otele her bölgede ücretsiz araçlı servis</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Konyaaltı merkezimizden eve ve otele her bölgede ücretsiz araçlı servis</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '.8rem' }}>
               {ILCELER.map(({ ad, sure, detay }) => (
                 <div key={ad} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderLeft: '3px solid #B8975A', padding: '1.2rem' }}>
@@ -294,7 +294,7 @@ export default function PacaKisaltmaPage() {
                     <strong style={{ fontFamily: 'Georgia,serif', color: '#1C1814' }}>📍 {ad}</strong>
                     <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600 }}>{sure}</span>
                   </div>
-                  <p style={{ fontSize: '.76rem', color: '#7A6E62', lineHeight: 1.5 }}>{detay}</p>
+                  <p style={{ fontSize: '.76rem', color: '#6B5F53', lineHeight: 1.5 }}>{detay}</p>
                 </div>
               ))}
             </div>
@@ -312,7 +312,7 @@ export default function PacaKisaltmaPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
                   {q} <span style={{ color: '#B8975A' }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -320,19 +320,19 @@ export default function PacaKisaltmaPage() {
 
         {/* CTA */}
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>
             Paça Kısaltma Fiyatı Öğrenin
           </h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>
+          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>
             Fotoğraf gönderin — hızlı fiyat · aynı gün teslim · Otellere servis ücretsiz
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, paça kısaltma için fiyat almak istiyorum. Pantolonumun fotoğrafını göndereyim mi?')} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Fotoğraf Gönder
             </a>
             <a href={`tel:+905318986418`}
-              style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

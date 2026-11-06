@@ -260,7 +260,7 @@ export default function TerziClient({ gbp1 }: Props) {
       {/* NOT: JSON-LD artık yalnızca app/terzi/page.tsx içinde (tek kaynak). */}
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{--gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;--cream:#FAF7F2;--cream2:#F2EDE4;--ink:#1C1814;--ink2:#2E2820;--text:#3A3028;--muted:#7A6E62;--light:#F7F3ED;--serif:'Georgia',serif;--sans:var(--font-jakarta,system-ui,sans-serif);--unbounded:var(--font-unbounded,'Georgia',serif);--shadow:0 4px 32px rgba(60,40,20,.1);--shadow-lg:0 16px 64px rgba(60,40,20,.16)}
+        :root{--gold:#B8975A;--gold2:#D4B07A;--gold3:#8A6E3E;--cream:#FAF7F2;--cream2:#F2EDE4;--ink:#1C1814;--ink2:#2E2820;--text:#3A3028;--muted:#6B5F53;--light:#F7F3ED;--serif:'Georgia',serif;--sans:var(--font-jakarta,system-ui,sans-serif);--unbounded:var(--font-unbounded,'Georgia',serif);--shadow:0 4px 32px rgba(60,40,20,.1);--shadow-lg:0 16px 64px rgba(60,40,20,.16)}
         html{scroll-behavior:smooth}
         body{background:var(--cream);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
         ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--cream2)}::-webkit-scrollbar-thumb{background:var(--gold3)}
@@ -349,7 +349,7 @@ export default function TerziClient({ gbp1 }: Props) {
         .tss-light{color:rgba(255,255,255,.5)}
         .tgl{display:block;width:40px;height:1.5px;background:var(--gold);margin-top:1rem}
         .tgl-center{margin-left:auto;margin-right:auto}
-        .twafloat{position:fixed;bottom:1.8rem;right:1.8rem;z-index:150;width:3.2rem;height:3.2rem;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .3s}.twafloat:hover{transform:scale(1.1)}
+        .twafloat{position:fixed;bottom:1.8rem;right:1.8rem;z-index:150;width:3.2rem;height:3.2rem;border-radius:50%;background:#15803d;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .3s}.twafloat:hover{transform:scale(1.1)}
         .tmob{background:var(--ink);padding:5rem 2rem;position:relative;overflow:hidden}
         .tmob-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem;background:rgba(255,255,255,.06)}
         .tmob-step{background:var(--ink);padding:2rem 1.5rem;text-align:center}.tmob-ic{font-size:2rem;margin-bottom:.8rem}.tmob-t{font-family:var(--unbounded);font-size:.9rem;color:var(--gold2);margin-bottom:.4rem;font-weight:600}.tmob-d{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.6}

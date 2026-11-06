@@ -147,7 +147,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
         <SpeakableSchema path="/ru/vyezdnoy-portnoy-antalya" />
         <QuickActionBanner lang="ru" variant="hotel-service" />
 
-        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
+        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Портной Анталья</Link>
@@ -184,7 +184,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
                 💬 Отправить геолокацию → Портной приедет
               </a>
               <a href={`tel:${PHONE_E164}`}
@@ -200,7 +200,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.6rem' }}>
               Как работает выездной портной
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.9rem', marginBottom: '2.5rem' }}>Сервис к вашей двери за 4 шага</p>
+            <p style={{ color: '#6B5F53', fontSize: '.9rem', marginBottom: '2.5rem' }}>Сервис к вашей двери за 4 шага</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'Отправьте геолокацию в WhatsApp', `Отправьте адрес или название отеля на номер ${PHONE}`],
@@ -211,7 +211,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#B8975A', marginBottom: '.4rem' }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -223,7 +223,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Выездной портной в ближайшие районы Антальи
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — в ближайшие районы Антальи</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — в ближайшие районы Антальи</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {DISTRICTS.map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
@@ -234,7 +234,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                       <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
                       <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
                     </div>
-                    <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
+                    <p style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{desc}</p>
                     {slug && <p style={{ fontSize: '.72rem', color: '#B8975A', fontWeight: 600, marginTop: '.5rem' }}>Список отелей {name} →</p>}
                   </CardTag>
                 );
@@ -248,7 +248,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Портной в отелях Антальи
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>
               Мы приезжаем в отели Белека, Лары, Кемера и Сиде, включая перечисленные ниже.
               Не обязательно обращаться к консьержу — просто напишите нам напрямую в WhatsApp.
             </p>
@@ -259,12 +259,12 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 </span>
               ))}
             </div>
-            <p style={{ fontSize: '.8rem', color: '#7A6E62', fontStyle: 'italic' }}>
+            <p style={{ fontSize: '.8rem', color: '#6B5F53', fontStyle: 'italic' }}>
               + Все остальные отели Антальи. Просто напишите название вашего отеля в WhatsApp.
             </p>
             <div style={{ marginTop: '1.8rem' }}>
               <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Здравствуйте, нужен портной в наш отель. Наш отель: ')}`} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#25d366', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
+                style={{ background: '#15803d', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
                 💬 Напишите название отеля → Портной приедет
               </a>
             </div>
@@ -276,7 +276,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Цены на выездного портного
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в отель бесплатный во всех районах, где мы работаем, — оплачивается только работа</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в отель бесплатный во всех районах, где мы работаем, — оплачивается только работа</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -299,7 +299,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='БЕСПЛАТНО'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#7A6E62', textAlign: 'right' }}>{t}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
               </tbody>
@@ -317,7 +317,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -326,7 +326,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
         <OrnekGorselSeridi konu="bolge" lang="ru" tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.8rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.8rem' }}>
             Вызвать портного сейчас
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
@@ -334,11 +334,11 @@ export default function VyezdnoyPortnoyAntalyaPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Отправить геолокацию
             </a>
             <a href={`tel:${PHONE_E164}`}
-              style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

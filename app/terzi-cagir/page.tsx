@@ -167,7 +167,7 @@ export default function TerziCagirPage() {
           *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
           html{scroll-behavior:smooth}
           :root{
-            --gold:#D4A843;--gold2:#F0C060;--green:#25d366;
+            --gold:#D4A843;--gold2:#F0C060;--green:#15803d;
             --ink:#0F1B1A;--ink2:#1A2E2C;--ink3:#243432;
             --muted:rgba(255,255,255,.55);
           }

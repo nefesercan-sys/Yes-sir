@@ -59,7 +59,7 @@ export default function BalVitriniClient({ urunler, sss = [] }: { urunler: Urun[
             <a href="#urunler" style={{ background: '#D4870A', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
               🍯 Ürünleri Gör
             </a>
-            <a href={waLink(WA, 'Merhaba, bal sipariş etmek istiyorum')} target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
+            <a href={waLink(WA, 'Merhaba, bal sipariş etmek istiyorum')} target="_blank" rel="noopener noreferrer" style={{ background: '#15803d', color: '#fff', padding: '.8rem 1.8rem', borderRadius: 999, fontWeight: 700, fontSize: '.85rem', textDecoration: 'none' }}>
               💬 WhatsApp Sipariş
             </a>
           </div>
@@ -149,7 +149,7 @@ export default function BalVitriniClient({ urunler, sss = [] }: { urunler: Urun[
       {/* WA Float */}
       <a href={waLink(WA, 'Merhaba, bal hakkında bilgi almak istiyorum')} target="_blank" rel="noopener noreferrer"
         aria-label="WhatsApp"
-        style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', width: 52, height: 52, background: '#25D366', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.5)', zIndex: 999 }}>
+        style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', width: 52, height: 52, background: '#15803d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.5)', zIndex: 999 }}>
         💬
       </a>
     </div>

@@ -114,7 +114,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>
             <a href={waLink(c.wa(z.name))} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '.8rem 1.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: 4, display: 'inline-block' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '.8rem 1.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: 4, display: 'inline-block' }}>
               💬 {c.cta}
             </a>
           </p>

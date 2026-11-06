@@ -19,7 +19,7 @@ export default function NotFound() {
       <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
         <Link href="/" style={{
           padding: '12px 24px',
-          backgroundColor: '#007bff',
+          backgroundColor: '#0b5ed7',
           color: 'white',
           textDecoration: 'none',
           borderRadius: '4px',
@@ -31,7 +31,7 @@ export default function NotFound() {
 
         <Link href="/terzi" style={{
           padding: '12px 24px',
-          backgroundColor: '#28a745',
+          backgroundColor: '#15803d',
           color: 'white',
           textDecoration: 'none',
           borderRadius: '4px',

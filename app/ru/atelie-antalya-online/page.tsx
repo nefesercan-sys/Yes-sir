@@ -165,7 +165,7 @@ export default function RuAtelieAntalyaPage() {
             {/* 3 главных кнопки */}
             <div className="fu3" style={{ display:'flex',gap:10,justifyContent:'center',flexWrap:'wrap',marginBottom:28 }}>
               <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn"
-                style={{ display:'inline-flex',alignItems:'center',gap:8,background:'#25D366',color:'#fff',padding:'14px 22px',borderRadius:14,fontSize:14,fontWeight:800,boxShadow:'0 6px 20px rgba(37,211,102,.4)' }}>
+                style={{ display:'inline-flex',alignItems:'center',gap:8,background:'#15803d',color:'#fff',padding:'14px 22px',borderRadius:14,fontSize:14,fontWeight:800,boxShadow:'0 6px 20px rgba(37,211,102,.4)' }}>
                 💬 Написать в WhatsApp
               </a>
               <a href={MAPS_DIRECTIONS} target="_blank" rel="noopener noreferrer" className="btn"
@@ -284,7 +284,7 @@ export default function RuAtelieAntalyaPage() {
               ))}
             </div>
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn"
-              style={{ display:'inline-flex',alignItems:'center',gap:10,background:'#25D366',color:'#fff',padding:'16px 32px',borderRadius:28,fontSize:15,fontWeight:800,marginTop:32,boxShadow:'0 6px 24px rgba(37,211,102,.35)' }}>
+              style={{ display:'inline-flex',alignItems:'center',gap:10,background:'#15803d',color:'#fff',padding:'16px 32px',borderRadius:28,fontSize:15,fontWeight:800,marginTop:32,boxShadow:'0 6px 24px rgba(37,211,102,.35)' }}>
               💬 Написать в WhatsApp
             </a>
           </div>
@@ -310,7 +310,7 @@ export default function RuAtelieAntalyaPage() {
             <p style={{ fontSize:14,color:'rgba(255,255,255,.7)',marginBottom:28 }}>Пришлите фото в WhatsApp — узнайте цену в рабочие часы (08:00–23:00)</p>
             <div style={{ display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap' }}>
               <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn"
-                style={{ display:'inline-flex',alignItems:'center',gap:8,background:'#25D366',color:'#fff',padding:'14px 28px',borderRadius:28,fontSize:15,fontWeight:800,boxShadow:'0 6px 20px rgba(37,211,102,.4)' }}>
+                style={{ display:'inline-flex',alignItems:'center',gap:8,background:'#15803d',color:'#fff',padding:'14px 28px',borderRadius:28,fontSize:15,fontWeight:800,boxShadow:'0 6px 20px rgba(37,211,102,.4)' }}>
                 💬 WhatsApp
               </a>
               <a href={`tel:${PHONE_TEL}`} className="btn"
@@ -334,7 +334,7 @@ export default function RuAtelieAntalyaPage() {
         {/* Floating buttons */}
         <div style={{ position:'fixed',bottom:20,right:16,zIndex:100,display:'flex',flexDirection:'column',gap:10 }}>
           <a href={`tel:${PHONE_TEL}`} className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#1C1C1E',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(0,0,0,.3)' }}>📞</a>
-          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#25D366',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
+          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#15803d',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
         </div>
       </main>
       <ReviewsBlock lang="ru" />

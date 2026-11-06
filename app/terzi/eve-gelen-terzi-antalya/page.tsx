@@ -149,7 +149,7 @@ export default function EveGelenTerziPage() {
         {/* BREADCRUMB */}
         <SpeakableSchema path="/terzi/eve-gelen-terzi-antalya" />
         <QuickActionBanner lang="tr" service="otel" variant="hotel-service" />
-        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
+        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
@@ -188,7 +188,7 @@ export default function EveGelenTerziPage() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
                 💬 Konum Paylaş → Terzi Gelsin
               </a>
               <a href={`tel:${PHONE_E164}`}
@@ -205,7 +205,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.6rem' }}>
               Eve ve Otele Gelen Terzi Servisi Nasıl Çalışır?
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.9rem', marginBottom: '2.5rem' }}>4 adımda kapınıza terzi hizmeti</p>
+            <p style={{ color: '#6B5F53', fontSize: '.9rem', marginBottom: '2.5rem' }}>4 adımda kapınıza terzi hizmeti</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'WhatsApp\'tan Konum Paylaşın', `${PHONE} numarasına konum veya otel adı gönderin`],
@@ -216,7 +216,7 @@ export default function EveGelenTerziPage() {
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#B8975A', marginBottom: '.4rem' }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -229,7 +229,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Antalya'nın Tüm İlçelerine Araçlı Terzi Servisi
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Konyaaltı merkezimizden Antalya'nın yakın ilçelerine terzi servisi</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Konyaaltı merkezimizden Antalya'nın yakın ilçelerine terzi servisi</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {ILCELER.map(({ad, yol, aciklama}) => (
                 <div key={ad} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: '2px', padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
@@ -237,7 +237,7 @@ export default function EveGelenTerziPage() {
                     <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {ad}</strong>
                     <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{yol}</span>
                   </div>
-                  <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{aciklama}</p>
+                  <p style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{aciklama}</p>
                 </div>
               ))}
             </div>
@@ -250,7 +250,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Antalya Otellerinde Terzi Hizmeti
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>
               Aşağıdaki oteller dahil yakın bölgelerdeki otellere terzi servisimizle geliyoruz.
               Concierge'e sormadan direkt WhatsApp'tan yazabilirsiniz.
             </p>
@@ -261,12 +261,12 @@ export default function EveGelenTerziPage() {
                 </span>
               ))}
             </div>
-            <p style={{ fontSize: '.8rem', color: '#7A6E62', fontStyle: 'italic' }}>
+            <p style={{ fontSize: '.8rem', color: '#6B5F53', fontStyle: 'italic' }}>
               + Antalya'daki tüm diğer oteller. Otelinizin ismini WhatsApp'tan bildirin, geliyoruz.
             </p>
             <div style={{ marginTop: '1.8rem' }}>
               <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Merhaba, otelimize terzi servisi istiyorum. Otelimiz: ')}`} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#25d366', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
+                style={{ background: '#15803d', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
                 💬 Otel Adını Yazın → Terzi Gelsin
               </a>
             </div>
@@ -279,7 +279,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Eve / Otele Gelen Terzi Fiyatları
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Eve ve otele servis ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Eve ve otele servis ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -302,7 +302,7 @@ export default function EveGelenTerziPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#7A6E62', textAlign: 'right' }}>{t}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
               </tbody>
@@ -336,7 +336,7 @@ export default function EveGelenTerziPage() {
               ))}
             </div>
             <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Hello, I need a mobile tailor at my hotel in Antalya. Hotel: ')}`} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#B8975A', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', display: 'inline-block' }}>
+              style={{ background: '#B8975A', color: '#1C1814', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', display: 'inline-block' }}>
               💬 WhatsApp — English / Русский / Deutsch
             </a>
 
@@ -369,7 +369,7 @@ export default function EveGelenTerziPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -377,7 +377,7 @@ export default function EveGelenTerziPage() {
 
         {/* CTA */}
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.8rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.8rem' }}>
             Terziyi Şimdi Çağırın
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
@@ -385,11 +385,11 @@ export default function EveGelenTerziPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Konum Paylaş
             </a>
             <a href={`tel:${PHONE_E164}`}
-              style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

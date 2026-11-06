@@ -27,6 +27,7 @@ const C = {
   slateLight: '#9CA3AF',
   white: '#FFFFFF',
   wa: '#25D366',
+  waBtn: '#15803d',
   emerald: '#059669',
   rose: '#E11D48',
   indigo: '#4338CA',
@@ -349,7 +350,7 @@ export default function OnlineTerziClient() {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 48 }}>
               <a href={waLink("Merhaba, özel kıyafet siparişi vermek istiyorum.")} target="_blank" rel="noopener noreferrer"
-                style={{ backgroundColor: C.wa, color: C.white, padding: '16px 32px', borderRadius: 999, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 4px 24px rgba(37,211,102,0.4)', fontFamily: 'system-ui, sans-serif' }}>
+                style={{ backgroundColor: C.waBtn, color: C.white, padding: '16px 32px', borderRadius: 999, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 4px 24px rgba(37,211,102,0.4)', fontFamily: 'system-ui, sans-serif' }}>
                 <WaIcon size={20} />
                 Hemen Sipariş Ver
               </a>
@@ -519,7 +520,7 @@ export default function OnlineTerziClient() {
 
           <div style={{ textAlign: 'center', marginTop: 56 }}>
             <a href={waLink("Merhaba, ölçülerimi almak ve sipariş sürecini başlatmak istiyorum.")} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: C.wa, color: C.white, padding: '18px 40px', borderRadius: 999, fontWeight: 700, fontSize: 16, textDecoration: 'none', boxShadow: '0 6px 32px rgba(37,211,102,0.4)', fontFamily: 'system-ui, sans-serif' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: C.waBtn, color: C.white, padding: '18px 40px', borderRadius: 999, fontWeight: 700, fontSize: 16, textDecoration: 'none', boxShadow: '0 6px 32px rgba(37,211,102,0.4)', fontFamily: 'system-ui, sans-serif' }}>
               <WaIcon size={22} />
               WhatsApp'tan Sipariş Başlat
             </a>
@@ -611,7 +612,7 @@ export default function OnlineTerziClient() {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center' }}>
             <a href={waLink("Merhaba! Özel kıyafet tasarımı ve dikimi hakkında bilgi almak istiyorum.")} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: C.wa, color: C.white, padding: '18px 40px', borderRadius: 999, fontWeight: 700, fontSize: 16, textDecoration: 'none', boxShadow: '0 8px 32px rgba(37,211,102,0.45)', fontFamily: 'system-ui, sans-serif' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: C.waBtn, color: C.white, padding: '18px 40px', borderRadius: 999, fontWeight: 700, fontSize: 16, textDecoration: 'none', boxShadow: '0 8px 32px rgba(37,211,102,0.45)', fontFamily: 'system-ui, sans-serif' }}>
               <WaIcon size={22} />
               WhatsApp'tan Yazın
             </a>
@@ -683,7 +684,7 @@ export default function OnlineTerziClient() {
       {/* ── YÜZEN WA BUTONU ──────────────────────────────────────── */}
       <a href={waLink("Merhaba, e-terzi hizmeti hakkında bilgi almak istiyorum.")} target="_blank" rel="noopener noreferrer"
         aria-label="WhatsApp ile bize ulaşın"
-        style={{ position: 'fixed', bottom: 24, right: 24, backgroundColor: C.wa, color: C.white, width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37,211,102,0.55)', zIndex: 999, textDecoration: 'none', transition: 'transform 0.2s, box-shadow 0.2s' }}
+        style={{ position: 'fixed', bottom: 24, right: 24, backgroundColor: C.waBtn, color: C.white, width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37,211,102,0.55)', zIndex: 999, textDecoration: 'none', transition: 'transform 0.2s, box-shadow 0.2s' }}
         onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)'; }}
         onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}>
         <WaIcon size={30} />

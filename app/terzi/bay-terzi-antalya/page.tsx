@@ -90,7 +90,7 @@ export default function BayTerziPage() {
         <SpeakableSchema path="/terzi/bay-terzi-antalya" />
         <QuickActionBanner lang="tr" service="bay" />
 
-        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}<Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
           {' › '}<span>Bay Terzi Antalya</span>
@@ -120,7 +120,7 @@ export default function BayTerziPage() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href={WA('Merhaba, erkek kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
                 💬 Fotoğraf Gönder → Fiyat Al
               </a>
               <a href="tel:+905318986418" style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
@@ -133,7 +133,7 @@ export default function BayTerziPage() {
         <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Bay Terzi Fiyat Listesi 2026</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '1.8rem' }}>Başlangıç fiyatları — kesin fiyat için WhatsApp'tan yazın</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '1.8rem' }}>Başlangıç fiyatları — kesin fiyat için WhatsApp'tan yazın</p>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -147,7 +147,7 @@ export default function BayTerziPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i%2?'rgba(184,151,90,.025)':'#fff' }}>
                     <td style={{ padding: '.9rem .8rem', fontSize: '.88rem' }}>{tip}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#7A6E62', fontSize: '.8rem' }}>{sure}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.8rem' }}>{sure}</td>
                   </tr>
                 ))}
               </tbody>
@@ -168,7 +168,7 @@ export default function BayTerziPage() {
                 <div key={t as string} style={{ background: '#fff', padding: '1.4rem', borderTop: '2px solid rgba(184,151,90,.3)' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.6rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#1C1814', marginBottom: '.4rem', fontWeight: 600 }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -204,21 +204,21 @@ export default function BayTerziPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>
                   {q} <span style={{ color: '#B8975A' }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
         </section>
 
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Erkek Kıyafet Fiyatı Öğrenin</h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis ücretsiz</p>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>Erkek Kıyafet Fiyatı Öğrenin</h2>
+          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis ücretsiz</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, erkek kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp
             </a>
-            <a href="tel:+905318986418" style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+            <a href="tel:+905318986418" style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

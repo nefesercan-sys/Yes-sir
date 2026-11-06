@@ -117,7 +117,7 @@ export default function HotelTailorAntalyaPage() {
         <SpeakableSchema path="/en/hotel-tailor-antalya" />
         <QuickActionBanner lang="en" variant="hotel-service" />
 
-        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
+        <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
           <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Tailor</Link>
@@ -158,7 +158,7 @@ export default function HotelTailorAntalyaPage() {
 
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                  style={{ background: '#25d366', color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase', borderRadius: '4px', display: 'inline-flex', alignItems: 'center', gap: '.5rem' }}>
+                  style={{ background: '#15803d', color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase', borderRadius: '4px', display: 'inline-flex', alignItems: 'center', gap: '.5rem' }}>
                   💬 WhatsApp — Call Tailor to Hotel
                 </a>
                 <a href={`tel:${PHONE_E164}`}
@@ -189,7 +189,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.6rem' }}>
               How the Hotel Tailor Service Works
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.9rem', marginBottom: '2.5rem' }}>Seamless tailoring service delivered to your hotel in 4 easy steps</p>
+            <p style={{ color: '#6B5F53', fontSize: '.9rem', marginBottom: '2.5rem' }}>Seamless tailoring service delivered to your hotel in 4 easy steps</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {[
                 ['📍', 'Message on WhatsApp', `Send your hotel name and room or request to ${PHONE}`],
@@ -200,7 +200,7 @@ export default function HotelTailorAntalyaPage() {
                 <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '.7rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#B8975A', marginBottom: '.4rem' }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -213,7 +213,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Hotel Tailor Service Across Konyaaltı & Nearby Districts
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>Free pick-up and delivery to every resort region we cover</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Free pick-up and delivery to every resort region we cover</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {DISTRICTS.map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
@@ -224,7 +224,7 @@ export default function HotelTailorAntalyaPage() {
                       <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1.1rem', color: '#1C1814' }}>📍 {name}</strong>
                       <span style={{ fontSize: '.7rem', color: '#B8975A', fontWeight: 600, letterSpacing: '.08em' }}>{time}</span>
                     </div>
-                    <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{desc}</p>
+                    <p style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{desc}</p>
                     {slug && <p style={{ fontSize: '.72rem', color: '#B8975A', fontWeight: 600, marginTop: '.5rem' }}>View {name} hotel list →</p>}
                   </CardTag>
                 );
@@ -239,7 +239,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Partner & Frequently Visited Antalya Hotels
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>
               We regularly visit all major resort hotels in Antalya. No need to consult the concierge desk — message us directly on WhatsApp for fast service.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginBottom: '1.5rem' }}>
@@ -249,12 +249,12 @@ export default function HotelTailorAntalyaPage() {
                 </span>
               ))}
             </div>
-            <p style={{ fontSize: '.8rem', color: '#7A6E62', fontStyle: 'italic' }}>
+            <p style={{ fontSize: '.8rem', color: '#6B5F53', fontStyle: 'italic' }}>
               + Any other hotel or villa in Antalya region. Just tell us your hotel name via WhatsApp.
             </p>
             <div style={{ marginTop: '1.8rem' }}>
               <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#25d366', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
+                style={{ background: '#15803d', color: '#fff', padding: '1rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', borderRadius: '4px', display: 'inline-block' }}>
                 💬 Tell Us Your Hotel Name → Tailor Dispatched
               </a>
             </div>
@@ -267,7 +267,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Transparent Tourist Pricing (any currency)
             </h2>
-            <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotel visit fee is 100% FREE — you only pay for professional tailoring work.</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotel visit fee is 100% FREE — you only pay for professional tailoring work.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -290,12 +290,12 @@ export default function HotelTailorAntalyaPage() {
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='FREE'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#7A6E62', textAlign: 'right' }}>{t}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <div style={{ marginTop: '1rem', fontSize: '.8rem', color: '#7A6E62', textAlign: 'center' }}>
+            <div style={{ marginTop: '1rem', fontSize: '.8rem', color: '#6B5F53', textAlign: 'center' }}>
               💳 Payment in any currency: cash or credit card / contactless / Apple Pay. Prices do not include VAT.
             </div>
           </div>
@@ -312,7 +312,7 @@ export default function HotelTailorAntalyaPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.93rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.8rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -322,7 +322,7 @@ export default function HotelTailorAntalyaPage() {
         <OrnekGorselSeridi konu="bolge" lang="en" tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.8rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.8rem' }}>
             Need an Urgent Tailor at Your Hotel?
           </h2>
           <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '2rem', fontSize: '.92rem' }}>
@@ -330,11 +330,11 @@ export default function HotelTailorAntalyaPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Dispatch Tailor to Hotel
             </a>
             <a href={`tel:${PHONE_E164}`}
-              style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

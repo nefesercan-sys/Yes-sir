@@ -199,7 +199,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
             ))}
           </div>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#B8975A', color: '#fff', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>💬 {t.waShare}</a>
+            <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#B8975A', color: '#1C1814', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>💬 {t.waShare}</a>
             <a href={`tel:${PHONE_E164}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '1rem 1.8rem', textDecoration: 'none', fontSize: '.88rem' }}>📞 {t.callBtn}</a>
           </div>
         </div>
@@ -212,11 +212,11 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           
           {seoContent ? (
             <>
-              <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body1}</p>
-              <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body2}</p>
+              <p style={{ color: '#6B5F53', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body1}</p>
+              <p style={{ color: '#6B5F53', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{seoContent.body2}</p>
             </>
           ) : (
-            <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{region.blurb[lang]}</p>
+            <p style={{ color: '#6B5F53', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.8rem' }}>{region.blurb[lang]}</p>
           )}
 
           <p style={{ fontSize: '.85rem', color: '#B8975A', fontWeight: 700 }}>
@@ -237,14 +237,14 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
               <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.4rem', color: '#1C1814', marginBottom: '.7rem' }}>{h} · {region.name}</h2>
               {fact && (
                 <>
-                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.5rem' }}><strong>{lbl[0]}:</strong> {fact.where[lang]}</p>
-                  <p style={{ color: '#7A6E62', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.9rem' }}><strong>{lbl[1]}:</strong> {fact.needs[lang]}</p>
+                  <p style={{ color: '#6B5F53', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.5rem' }}><strong>{lbl[0]}:</strong> {fact.where[lang]}</p>
+                  <p style={{ color: '#6B5F53', fontSize: '.92rem', lineHeight: 1.8, marginBottom: '.9rem' }}><strong>{lbl[1]}:</strong> {fact.needs[lang]}</p>
                 </>
               )}
               {surecler.map((id) => (
                 <div key={id} style={{ marginBottom: '.7rem' }}>
                   <h3 style={{ fontSize: '1rem', color: '#1C1814', margin: '0 0 .2rem' }}>{PROCESS[id][lang].h}</h3>
-                  <p style={{ color: '#7A6E62', fontSize: '.9rem', lineHeight: 1.7, margin: 0 }}>{PROCESS[id][lang].p}</p>
+                  <p style={{ color: '#6B5F53', fontSize: '.9rem', lineHeight: 1.7, margin: 0 }}>{PROCESS[id][lang].p}</p>
                 </div>
               ))}
             </div>
@@ -257,11 +257,11 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.4rem' }}>{t.hotelsH(region.name)}</h2>
-          <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>{t.hotelsSub}</p>
+          <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>{t.hotelsSub}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginBottom: '1rem' }}>
             {region.hotels.map((h) => (<span key={h} style={{ fontSize: '.77rem', color: '#3A3028', background: '#fff', border: '1px solid rgba(184,151,90,.2)', padding: '.3rem .75rem', borderRadius: 2 }}>{h}</span>))}
           </div>
-          <p style={{ fontSize: '.8rem', color: '#7A6E62', fontStyle: 'italic' }}>{t.otherHotels}</p>
+          <p style={{ fontSize: '.8rem', color: '#6B5F53', fontStyle: 'italic' }}>{t.otherHotels}</p>
         </div>
       </section>
       )}
@@ -270,13 +270,13 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.howH}</h2>
-          <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>{t.howSub}</p>
+          <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>{t.howSub}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 1, background: '#E8E0D2' }}>
             {t.steps.map(([ic, ti, d]: string[], i: number) => (
               <div key={i} style={{ background: '#FAF7F2', padding: '2rem 1.5rem', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '.6rem' }}>{ic}</div>
                 <div style={{ fontFamily: 'Georgia,serif', fontSize: '.95rem', color: '#B8975A', marginBottom: '.3rem' }}>{ti}</div>
-                <div style={{ fontSize: '.77rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                <div style={{ fontSize: '.77rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
               </div>
             ))}
           </div>
@@ -287,13 +287,13 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       <section style={{ background: '#F2EDE4', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.servicesH}</h2>
-          <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>{t.servicesSub}</p>
+          <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>{t.servicesSub}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '1rem' }}>
             {t.services.map(([ic, ti, d]: string[]) => (
               <div key={ti} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderRadius: 2, padding: '1.4rem', borderLeft: '3px solid #B8975A' }}>
                 <div style={{ fontSize: '1.6rem', marginBottom: '.5rem' }}>{ic}</div>
                 <strong style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#1C1814', display: 'block', marginBottom: '.4rem' }}>{ti}</strong>
-                <p style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</p>
+                <p style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</p>
               </div>
             ))}
           </div>
@@ -304,7 +304,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       <section style={{ background: '#fff', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.7rem', color: '#1C1814', marginBottom: '.3rem' }}>{t.priceH}</h2>
-          <p style={{ color: '#7A6E62', fontSize: '.85rem', marginBottom: '1.5rem' }}>{t.priceSub}</p>
+          <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>{t.priceSub}</p>
           <table style={{ width: '100%', borderCollapse: 'collapse', background: '#F2EDE4' }}>
             <tbody>
               {t.priceRows.map(([s, p]: string[], i: number) => (
@@ -325,7 +325,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           {t.faq(region.name).map(([q, a]: string[]) => (
             <details key={q} style={{ borderBottom: '1px solid rgba(184,151,90,.15)', padding: '1rem 0' }}>
               <summary style={{ cursor: 'pointer', fontSize: '.9rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between' }}>{q} <span style={{ color: '#B8975A', fontWeight: 300 }}>+</span></summary>
-              <p style={{ marginTop: '.7rem', fontSize: '.82rem', color: '#7A6E62', lineHeight: 1.8 }}>{a}</p>
+              <p style={{ marginTop: '.7rem', fontSize: '.82rem', color: '#6B5F53', lineHeight: 1.8 }}>{a}</p>
             </details>
           ))}
         </div>
@@ -335,9 +335,9 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       <OrnekGorselSeridi konu="bolge" yer={region.name} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
       <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#fff', marginBottom: '.7rem' }}>{t.ctaH(region.name)}</h2>
+        <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '.7rem' }}>{t.ctaH(region.name)}</h2>
         <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '1.6rem', fontSize: '.9rem' }}>{t.ctaSub}</p>
-        <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#25d366', color: '#fff', padding: '1rem 2.3rem', fontWeight: 700, textDecoration: 'none', fontSize: '.9rem', borderRadius: 4, display: 'inline-block' }}>💬 {t.waBtn}</a>
+        <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#15803d', color: '#fff', padding: '1rem 2.3rem', fontWeight: 700, textDecoration: 'none', fontSize: '.9rem', borderRadius: 4, display: 'inline-block' }}>💬 {t.waBtn}</a>
       </section>
 
       {/* Footer / Rotalama */}

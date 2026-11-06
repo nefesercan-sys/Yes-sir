@@ -535,7 +535,7 @@ function TerziTalepIcerik() {
                       <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>Terziyle iletişime geç:</div>
                       <div style={{ display: 'flex', gap: 8, marginBottom: t.location ? 10 : 0 }}>
                         <a href={`https://wa.me/${t.teklifVeren.telefon.replace('+', '')}`} target="_blank" rel="noopener noreferrer"
-                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#15803d', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
                           💬 WhatsApp
                         </a>
                         <a href={`tel:${t.teklifVeren.telefon}`}
