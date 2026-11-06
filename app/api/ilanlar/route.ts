@@ -154,3 +154,20 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }
 }
+
+function serialize(data: any): any {
+  if (Array.isArray(data)) return data.map(serialize);
+  if (data && typeof data === "object") {
+    const result: any = {};
+    for (const [k, v] of Object.entries(data)) {
+      if (k === "_id") {
+        result["_id"] = (v as any)?.toString();
+        result["id"] = (v as any)?.toString();
+      } else {
+        result[k] = serialize(v);
+      }
+    }
+    return result;
+  }
+  return data;
+}
