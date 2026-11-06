@@ -28,7 +28,7 @@ function zoneAltMap(z: (typeof ZONE_SLUGS)[number]): Record<string, string> {
 // lastmod: yalnızca içeriği gerçekten değişen sayfalar güncel tarihi alır (sahte güncelleme sinyali verilmez).
 // 2026-10-30: süre/ücretsiz servis/Muratpaşa/kopya içerik düzeltmeleriyle değişen terzi sayfaları.
 // Bu düzeltmelerden etkilenmeyen sayfalar (keten/pamuk ve Anavera tekstil tanıtımları, üniforma) eski tarihlerinde kalır.
-const CHANGED = '2026-11-01'
+const CHANGED = '2026-11-06'
 const OLD = '2026-10-04'
 const UNCHANGED_PREFIXES = ['/dogal-keten-pamuk-giyim', '/en/linen-clothing-custom-made-antalya', '/ru/lnyanaya-odezhda-poshiv-antalya', '/de/leinenkleidung-massanfertigung-antalya',
   '/tekstil-antalya', '/en/textile-manufacturer-antalya', '/ru/tekstilnoe-proizvodstvo-antalya', '/de/textilhersteller-antalya', '/terzi/uniforma-uretimi-antalya']
@@ -58,6 +58,11 @@ export async function GET() {
     { url: `${BASE_URL}/terzi/mont-tamiri-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kaban-palto-tadilati-antalya`, priority: '0.80', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/yelek-tamiri-tadilati-antalya`, priority: '0.80', freq: 'weekly' },
+    // Sık sorulan sorular merkezi (4 dil)
+    { url: `${BASE_URL}/terzi/sik-sorulan-sorular`, priority: '0.85', freq: 'weekly', alt: { tr: `${BASE_URL}/terzi/sik-sorulan-sorular`, en: `${BASE_URL}/en/tailor-faq-antalya`, ru: `${BASE_URL}/ru/chasto-zadavaemye-voprosy-portnoy-antalya`, de: `${BASE_URL}/de/haeufige-fragen-schneider-antalya`, 'x-default': `${BASE_URL}/terzi/sik-sorulan-sorular` } },
+    { url: `${BASE_URL}/en/tailor-faq-antalya`, priority: '0.80', freq: 'weekly', alt: { tr: `${BASE_URL}/terzi/sik-sorulan-sorular`, en: `${BASE_URL}/en/tailor-faq-antalya`, ru: `${BASE_URL}/ru/chasto-zadavaemye-voprosy-portnoy-antalya`, de: `${BASE_URL}/de/haeufige-fragen-schneider-antalya`, 'x-default': `${BASE_URL}/terzi/sik-sorulan-sorular` } },
+    { url: `${BASE_URL}/ru/chasto-zadavaemye-voprosy-portnoy-antalya`, priority: '0.80', freq: 'weekly', alt: { tr: `${BASE_URL}/terzi/sik-sorulan-sorular`, en: `${BASE_URL}/en/tailor-faq-antalya`, ru: `${BASE_URL}/ru/chasto-zadavaemye-voprosy-portnoy-antalya`, de: `${BASE_URL}/de/haeufige-fragen-schneider-antalya`, 'x-default': `${BASE_URL}/terzi/sik-sorulan-sorular` } },
+    { url: `${BASE_URL}/de/haeufige-fragen-schneider-antalya`, priority: '0.80', freq: 'weekly', alt: { tr: `${BASE_URL}/terzi/sik-sorulan-sorular`, en: `${BASE_URL}/en/tailor-faq-antalya`, ru: `${BASE_URL}/ru/chasto-zadavaemye-voprosy-portnoy-antalya`, de: `${BASE_URL}/de/haeufige-fragen-schneider-antalya`, 'x-default': `${BASE_URL}/terzi/sik-sorulan-sorular` } },
     { url: `${BASE_URL}/terzi/deri-ceket-tadilati-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-pantolon-paca-kisaltma-antalya`, priority: '0.85', freq: 'weekly' },
     { url: `${BASE_URL}/terzi/kot-pantolon-daraltma-antalya`, priority: '0.85', freq: 'weekly' },

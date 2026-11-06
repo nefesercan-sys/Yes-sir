@@ -163,6 +163,7 @@ export default function KonuSayfasi({ d }: { d: KonuData }) {
         <div style={wrap}>
           <h2 style={h2}>Diğer terzi hizmetleri</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.8rem' }}>
+            <Link href="/terzi/sik-sorulan-sorular" style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: '.55rem 1rem', fontSize: '.9rem', color: GREEN, fontWeight: 600, textDecoration: 'none' }}>Sık sorulan sorular →</Link>
             {d.diger.map((h) => (
               <Link key={h.href} href={h.href} style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: '.55rem 1rem', fontSize: '.9rem', color: GREEN, fontWeight: 600, textDecoration: 'none' }}>{h.ad} →</Link>
             ))}
