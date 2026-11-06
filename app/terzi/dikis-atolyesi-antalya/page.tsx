@@ -150,7 +150,7 @@ export default function DikisAtölyesiPage() {
         {/* BREADCRUMB */}
         <SpeakableSchema path="/terzi/dikis-atolyesi-antalya" />
         <QuickActionBanner lang="tr" service="dikis" />
-        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
           {' › '}<span>Dikiş Atölyesi Antalya</span>
         </nav>
@@ -181,7 +181,7 @@ export default function DikisAtölyesiPage() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href={WA('Merhaba, fason üretim için teklif almak istiyorum. Ürün ve adet bilgisi: ')} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
                 🏭 Fason Teklifi Al
               </a>
               <a href={`tel:${PHONE_E}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
@@ -195,13 +195,13 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Atölye Hizmetleri</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Üretimin her aşamasında yanınızdayız</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Üretimin her aşamasında yanınızdayız</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(290px,1fr))', gap: '1rem' }}>
               {HIZMETLER.map(({ ic, baslik, aciklama }) => (
                 <div key={baslik} style={{ background: '#F2EDE4', border: '1px solid rgba(184,151,90,.15)', borderLeft: '3px solid #B8975A', padding: '1.6rem' }}>
                   <div style={{ fontSize: '1.5rem', marginBottom: '.6rem' }}>{ic}</div>
                   <h3 style={{ fontFamily: 'Georgia,serif', fontSize: '1.05rem', color: '#1C1814', marginBottom: '.5rem', fontWeight: 600 }}>{baslik}</h3>
-                  <p style={{ fontSize: '.8rem', color: '#7A6E62', lineHeight: 1.7 }}>{aciklama}</p>
+                  <p style={{ fontSize: '.8rem', color: '#6B5F53', lineHeight: 1.7 }}>{aciklama}</p>
                 </div>
               ))}
             </div>
@@ -212,13 +212,13 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Kimler İçin?</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Fason üretimimizi tercih eden sektörler</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Fason üretimimizi tercih eden sektörler</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '1rem' }}>
               {HEDEF_KITLELER.map(([ic, t, d]) => (
                 <div key={t} style={{ background: '#fff', padding: '1.5rem', borderTop: '2px solid rgba(184,151,90,.3)' }}>
                   <div style={{ fontSize: '1.5rem', marginBottom: '.6rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#1C1814', marginBottom: '.4rem', fontWeight: 600 }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.65 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.65 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -229,13 +229,13 @@ export default function DikisAtölyesiPage() {
         <section style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Üretim Süreci</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2.5rem' }}>5 adımda fason üretim</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>5 adımda fason üretim</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: '1px', background: '#E8E0D2' }}>
               {SUREC.map(([ic, t, d], i) => (
                 <div key={i} style={{ background: '#FAF7F2', padding: '1.8rem 1.2rem', textAlign: 'center' }}>
                   <div style={{ fontSize: '1.6rem', marginBottom: '.6rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '.95rem', color: '#B8975A', marginBottom: '.4rem', fontWeight: 600 }}>{t}</div>
-                  <div style={{ fontSize: '.72rem', color: '#7A6E62', lineHeight: 1.6 }}>{d}</div>
+                  <div style={{ fontSize: '.72rem', color: '#6B5F53', lineHeight: 1.6 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -283,7 +283,7 @@ export default function DikisAtölyesiPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -291,16 +291,16 @@ export default function DikisAtölyesiPage() {
 
         {/* CTA */}
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Fason Üretim Teklifi Alın</h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>Fason Üretim Teklifi Alın</h2>
+          <p style={{ color: '#1C1814', marginBottom: '2rem', fontSize: '.92rem' }}>
             Ürün ve adet bilgisini gönderin — projeye göre fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, fason üretim için teklif almak istiyorum. Ürün ve adet: ')} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Teklif İste
             </a>
-            <a href={`tel:${PHONE_E}`} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+            <a href={`tel:${PHONE_E}`} style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

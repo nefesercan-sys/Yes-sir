@@ -52,7 +52,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
           --champagne: #D4C4A8;
           --near-black: #0F1B1A;
           --maps-blue: #1A73E8;
-          --wa-green: #25D366;
+          --wa-green: #15803d;
           --font-display: 'Fraunces', Georgia, serif;
           --font-body: 'Inter', system-ui, -apple-system, sans-serif;
         }

@@ -61,7 +61,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
           <span style={{ display: 'inline-block', border: '1px solid rgba(201,162,39,.5)', color: '#FDE047', padding: '.3rem .9rem', borderRadius: 30, fontSize: '.78rem', fontWeight: 600, marginBottom: '1rem' }}>{c.badge}</span>
           <h1 style={{ fontSize: 'clamp(1.7rem,4.5vw,2.5rem)', fontWeight: 800, lineHeight: 1.2, marginBottom: '1rem' }}>{c.h1}</h1>
           <p style={{ color: '#CBD5E1', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '1.6rem' }}>{c.lead}</p>
-          <a href={wa(c.wa)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#25D366', color: '#fff', padding: '.85rem 1.6rem', borderRadius: 8, fontWeight: 700, textDecoration: 'none' }}>💬 {c.cta}</a>
+          <a href={wa(c.wa)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#15803d', color: '#fff', padding: '.85rem 1.6rem', borderRadius: 8, fontWeight: 700, textDecoration: 'none' }}>💬 {c.cta}</a>
         </div>
       </section>
 
@@ -103,7 +103,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
         <p style={{ fontSize: '.85rem', color: '#64748B', marginBottom: '1.5rem' }}>{c.note ?? ui.note}</p>
 
         <section style={{ textAlign: 'center', background: '#fff', border: '1px solid #E2E8F0', borderRadius: 12, padding: '1.5rem' }}>
-          <a href={wa(c.wa)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#25D366', color: '#fff', padding: '.8rem 1.5rem', borderRadius: 8, fontWeight: 700, textDecoration: 'none' }}>💬 {c.cta}</a>
+          <a href={wa(c.wa)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#15803d', color: '#fff', padding: '.8rem 1.5rem', borderRadius: 8, fontWeight: 700, textDecoration: 'none' }}>💬 {c.cta}</a>
           <p style={{ marginTop: '1rem', fontSize: '.9rem' }}>
             {ui.other}: <a href={URLS[other][lang]}>{CONTENT[other][lang].crumb}</a>
             {extra && <> · <a href={URLS[extra][lang]}>{CONTENT[extra][lang].crumb}</a></>}

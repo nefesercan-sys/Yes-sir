@@ -62,7 +62,7 @@
 .sl-root .sl-fbtn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 14px rgba(0,0,0,.4); transition: transform .2s; }
 .sl-root .sl-fbtn:hover { transform: scale(1.1); }
 .sl-root .sl-fbtn-call { background: #2C4A3E; color: #fff; border: 1px solid rgba(201,169,110,.3); }
-.sl-root .sl-fbtn-wa { background: #25D366; color: #fff; }
+.sl-root .sl-fbtn-wa { background: #15803d; color: #fff; }
 .sl-root .sl-sec { padding: 3rem 1.2rem; }
 .sl-root .sl-hero { padding: 7rem 1.2rem 2.5rem; }
 .sl-root .sl-faq-item summary { cursor: pointer; list-style: none; }

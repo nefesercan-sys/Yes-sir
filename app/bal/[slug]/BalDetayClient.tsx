@@ -22,7 +22,7 @@ export default function BalDetayClient({ urun }: { urun: any }) {
             <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontSize: '2rem', fontWeight: 700, color: '#D4870A', marginBottom: '.3rem' }}>{formatFiyat(urun.fiyat)}</div>
             <div style={{ fontSize: '.75rem', color: '#7A6040', marginBottom: '1.5rem' }}>{urun.birim} · {stokLabel(urun.stok)}</div>
             <a href={waLink(WA, `Merhaba, ${urun.ad} sipariş etmek istiyorum`)} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '.5rem', background: '#25D366', color: '#fff', padding: '.9rem 2rem', borderRadius: 999, fontWeight: 700, fontSize: '.9rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,.4)' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '.5rem', background: '#15803d', color: '#fff', padding: '.9rem 2rem', borderRadius: 999, fontWeight: 700, fontSize: '.9rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,.4)' }}>
               💬 WhatsApp ile Sipariş Ver
             </a>
           </div>

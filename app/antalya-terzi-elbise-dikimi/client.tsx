@@ -546,7 +546,7 @@ export default function ElbiseDikimiClient() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: #25D366;
+          background: #15803d;
           color: #fff;
           font-weight: 600;
           font-size: 0.88rem;

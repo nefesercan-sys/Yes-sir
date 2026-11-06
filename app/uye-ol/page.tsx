@@ -54,7 +54,7 @@ function UyeOlIcerik() {
           <h2 style={{ fontSize: '22px', fontWeight: '700', color: '#0f172a', fontFamily: 'Playfair Display, serif', marginBottom: '6px', textAlign: 'center' }}>
             Nasıl Kaydolmak İstiyorsunuz?
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '13px', textAlign: 'center', marginBottom: '24px' }}>
+          <p style={{ color: '#64748b', fontSize: '13px', textAlign: 'center', marginBottom: '24px' }}>
             Hesap tipinize göre farklı özellikler sunulur
           </p>
 
@@ -111,7 +111,7 @@ function UyeOlIcerik() {
 
           <div style={{ position: 'relative', marginBottom: '12px' }}>
             <div style={{ height: '1px', background: '#e2e8f0' }} />
-            <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: 'white', padding: '0 12px', color: '#94a3b8', fontSize: '12px' }}>veya</span>
+            <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: 'white', padding: '0 12px', color: '#64748b', fontSize: '12px' }}>veya</span>
           </div>
 
           <button onClick={() => signIn('google', { callbackUrl: redirect })}
@@ -120,7 +120,7 @@ function UyeOlIcerik() {
             Google ile Kayıt Ol
           </button>
 
-          <p style={{ textAlign: 'center', fontSize: '13px', color: '#94a3b8', marginTop: '16px' }}>
+          <p style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '16px' }}>
             Zaten üye misiniz?{' '}
             <span onClick={() => router.push('/giris')} style={{ color: '#2563eb', cursor: 'pointer', fontWeight: '600' }}>Giriş Yap</span>
           </p>
@@ -140,7 +140,7 @@ function UyeOlIcerik() {
                 uyeTip === 'hizmet_veren' ? '💼 Hizmet Veren Kaydı' :
                   '🛍️ Üye Kaydı'}
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '20px' }}>Tüm alanları eksiksiz doldurun</p>
+          <p style={{ color: '#64748b', fontSize: '12px', marginBottom: '20px' }}>Tüm alanları eksiksiz doldurun</p>
 
           {hata && (
             <div style={{ padding: '12px', borderRadius: '10px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '13px', marginBottom: '14px' }}>
@@ -197,7 +197,7 @@ function UyeOlIcerik() {
 
             <div style={{ position: 'relative' }}>
               <div style={{ height: '1px', background: '#e2e8f0' }} />
-              <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: 'white', padding: '0 12px', color: '#94a3b8', fontSize: '12px' }}>veya</span>
+              <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: 'white', padding: '0 12px', color: '#64748b', fontSize: '12px' }}>veya</span>
             </div>
 
             <button onClick={() => signIn('google', { callbackUrl: redirect })}

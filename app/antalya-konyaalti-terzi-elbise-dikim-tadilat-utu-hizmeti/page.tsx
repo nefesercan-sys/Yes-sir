@@ -137,7 +137,7 @@ const jsonLd = {
 const D = {
   gold: '#B8975A', gold2: '#D4A847', gold3: '#8A6E3E', goldbg: '#fef9ee',
   ink: '#1C1814', ink2: '#2E2820', ink3: '#3A3028',
-  s: '#7A6E62', s2: '#A09080', s3: '#C8B8A8',
+  s: '#6B5F53', s2: '#A09080', s3: '#C8B8A8',
   bg: '#FAF7F2', bg2: '#F2EDE4', bg3: '#E8E0D4',
   white: '#FFFFFF', border: '#E5DDD0',
   green: '#16A34A', blue: '#2563EB', rose: '#E11D48',
@@ -187,7 +187,7 @@ export default function KonyaaltiTerziPage() {
             📞
           </a>
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
-            style={{ width: 52, height: 52, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.45)' }}>
+            style={{ width: 52, height: 52, borderRadius: '50%', background: '#15803d', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.45)' }}>
             💬
           </a>
         </div>
@@ -225,7 +225,7 @@ export default function KonyaaltiTerziPage() {
             {/* CTA butonlar */}
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
               <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25d366', color: '#fff', padding: '.9rem 1.8rem', borderRadius: 10, fontWeight: 800, textDecoration: 'none', fontSize: '.88rem', boxShadow: '0 4px 20px rgba(37,211,102,.4)' }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#15803d', color: '#fff', padding: '.9rem 1.8rem', borderRadius: 10, fontWeight: 800, textDecoration: 'none', fontSize: '.88rem', boxShadow: '0 4px 20px rgba(37,211,102,.4)' }}>
                 💬 Terzi Çağır — WhatsApp
               </a>
               <a href={`tel:${PHONE_TEL}`}
@@ -295,7 +295,7 @@ export default function KonyaaltiTerziPage() {
         <section style={{ maxWidth: 820, margin: '1.5rem auto 0', padding: '0 1rem' }}>
           <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 4px 20px rgba(0,0,0,.07)', border: `1px solid ${D.border}`, padding: '1.2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 10 }}>
             {[
-              { href: WA_DEFAULT, bg: '#25d366', label: 'WhatsApp Yaz', sub: 'Hızlı yanıt', blank: true },
+              { href: WA_DEFAULT, bg: '#15803d', label: 'WhatsApp Yaz', sub: 'Hızlı yanıt', blank: true },
               { href: GBP1_DIR, bg: D.rose, label: 'Yol Tarifi Al', sub: 'Google Maps', blank: true },
               { href: `tel:${PHONE_TEL}`, bg: D.ink, label: 'Telefon Et', sub: PHONE_DISPLAY, blank: false },
             ].map(btn => (

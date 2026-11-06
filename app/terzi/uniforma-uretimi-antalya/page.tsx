@@ -144,7 +144,7 @@ export default function UniformaUretimiPage() {
         <SpeakableSchema path="/terzi/uniforma-uretimi-antalya" />
         <QuickActionBanner lang="tr" service="uniforma" />
 
-        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#7A6E62', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
+        <nav style={{ padding: '.8rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.12)' }}>
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Terzi</Link>
           {' › '}<span>Üniforma Üretimi Antalya</span>
         </nav>
@@ -175,7 +175,7 @@ export default function UniformaUretimiPage() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href={WA('Merhaba, üniforma üretimi için teklif almak istiyorum. Sektör ve adet: ')} target="_blank" rel="noopener noreferrer"
-                style={{ background: '#B8975A', color: '#fff', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+                style={{ background: '#B8975A', color: '#1C1814', padding: '.9rem 2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.85rem', letterSpacing: '.08em', textTransform: 'uppercase' }}>
                 📋 Üniforma Teklifi Al
               </a>
               <a href={`tel:${PHONE_E}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
@@ -189,7 +189,7 @@ export default function UniformaUretimiPage() {
         <section style={{ background: '#fff', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Hangi Sektörlere Üretim Yapıyoruz?</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Otel, restoran, sağlık, okul, güvenlik, spa ve daha fazlası</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Otel, restoran, sağlık, okul, güvenlik, spa ve daha fazlası</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '1rem' }}>
               {SEKTORLER.map(({ ic, baslik, list }) => (
                 <div key={baslik} style={{ background: '#F2EDE4', border: '1px solid rgba(184,151,90,.15)', borderLeft: '3px solid #B8975A', padding: '1.6rem' }}>
@@ -197,7 +197,7 @@ export default function UniformaUretimiPage() {
                   <h3 style={{ fontFamily: 'Georgia,serif', fontSize: '1.05rem', color: '#1C1814', marginBottom: '.8rem', fontWeight: 600 }}>{baslik}</h3>
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                     {list.map(item => (
-                      <li key={item} style={{ fontSize: '.78rem', color: '#7A6E62', padding: '.2rem 0', borderBottom: '1px solid rgba(184,151,90,.08)', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
+                      <li key={item} style={{ fontSize: '.78rem', color: '#6B5F53', padding: '.2rem 0', borderBottom: '1px solid rgba(184,151,90,.08)', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
                         <span style={{ color: '#B8975A', fontSize: '.6rem' }}>◆</span> {item}
                       </li>
                     ))}
@@ -212,13 +212,13 @@ export default function UniformaUretimiPage() {
         <section style={{ background: '#F2EDE4', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>Neden Terzi Can?</h2>
-            <p style={{ color: '#7A6E62', fontSize: '.88rem', marginBottom: '2rem' }}>Antalya'nın üniforma üreticisi tercih nedenleri</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Antalya'nın üniforma üreticisi tercih nedenleri</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1rem' }}>
               {AVANTAJLAR.map(([ic, t, d]) => (
                 <div key={t} style={{ background: '#fff', padding: '1.5rem', borderTop: '2px solid rgba(184,151,90,.3)' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.6rem' }}>{ic}</div>
                   <div style={{ fontFamily: 'Georgia,serif', fontSize: '1rem', color: '#1C1814', marginBottom: '.4rem', fontWeight: 600 }}>{t}</div>
-                  <div style={{ fontSize: '.78rem', color: '#7A6E62', lineHeight: 1.65 }}>{d}</div>
+                  <div style={{ fontSize: '.78rem', color: '#6B5F53', lineHeight: 1.65 }}>{d}</div>
                 </div>
               ))}
             </div>
@@ -266,7 +266,7 @@ export default function UniformaUretimiPage() {
                 <summary style={{ cursor: 'pointer', fontSize: '.92rem', fontWeight: 500, color: '#1C1814', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {q} <span style={{ color: '#B8975A', fontSize: '1.2rem', fontWeight: 300 }}>+</span>
                 </summary>
-                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#7A6E62', lineHeight: 1.85 }}>{a}</p>
+                <p style={{ marginTop: '.7rem', fontSize: '.84rem', color: '#6B5F53', lineHeight: 1.85 }}>{a}</p>
               </details>
             ))}
           </div>
@@ -274,16 +274,16 @@ export default function UniformaUretimiPage() {
 
         {/* CTA */}
         <section style={{ background: '#B8975A', padding: '4rem 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#fff', marginBottom: '.7rem' }}>Üniforma Teklifi Alın</h2>
-          <p style={{ color: 'rgba(255,255,255,.9)', marginBottom: '2rem', fontSize: '.92rem' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>Üniforma Teklifi Alın</h2>
+          <p style={{ color: '#1C1814', marginBottom: '2rem', fontSize: '.92rem' }}>
             Sektör ve adet bilgisini gönderin — tasarım + fiyat teklifi
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, üniforma üretimi için teklif almak istiyorum. Sektör: , Adet: ')} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               💬 WhatsApp — Teklif İste
             </a>
-            <a href={`tel:${PHONE_E}`} style={{ background: 'rgba(255,255,255,.2)', color: '#fff', border: '1px solid rgba(255,255,255,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
+            <a href={`tel:${PHONE_E}`} style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
               📞 {PHONE}
             </a>
           </div>

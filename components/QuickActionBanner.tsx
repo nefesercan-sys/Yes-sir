@@ -55,7 +55,7 @@ export default function QuickActionBanner({ lang = 'tr', service = 'genel', vari
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              flex: '1 1 180px', textAlign: 'center', background: '#25d366', color: '#fff', fontWeight: 800,
+              flex: '1 1 180px', textAlign: 'center', background: '#15803d', color: '#fff', fontWeight: 800,
               fontSize: 14, padding: '12px 16px', borderRadius: 10, textDecoration: 'none',
             }}
           >

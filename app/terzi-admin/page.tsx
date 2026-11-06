@@ -70,7 +70,7 @@ export default function TerziAdminPage() {
               </div>
               <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 4, color: YESIL, marginBottom: 12 }}>{k.otpKod}</div>
               <a href={whatsappLinki(k.telefon, k.otpKod)} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'block', textAlign: 'center', padding: 12, borderRadius: 10, background: '#25D366', color: '#fff', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>
+                style={{ display: 'block', textAlign: 'center', padding: 12, borderRadius: 10, background: '#15803d', color: '#fff', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>
                 💬 WhatsApp'tan Gönder
               </a>
             </div>

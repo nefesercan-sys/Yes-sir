@@ -444,7 +444,7 @@ export default function TerziPanelPage() {
                       <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>Müşteriyle iletişime geç:</div>
                       <div style={{ display: 'flex', gap: 8, marginBottom: t.ilanKonum ? 10 : 0 }}>
                         <a href={`https://wa.me/${t.ilanSahibi.telefon.replace('+', '')}`} target="_blank" rel="noopener noreferrer"
-                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                          style={{ flex: 1, textAlign: 'center', padding: 10, borderRadius: 8, background: '#15803d', color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
                           💬 WhatsApp
                         </a>
                         <a href={`tel:${t.ilanSahibi.telefon}`}

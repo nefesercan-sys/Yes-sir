@@ -81,7 +81,7 @@ export default function TerziAdminUyelerPage() {
                 {seciliUye.sifreVarMi ? '🔒 Şifre kurulu' : '⚠️ Şifre yok'}
               </span>
               <a href={`https://wa.me/${seciliUye.telefon.replace('+', '')}`} target="_blank" rel="noopener noreferrer"
-                style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 12, background: '#25D366', color: '#fff', textDecoration: 'none' }}>
+                style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 12, background: '#15803d', color: '#fff', textDecoration: 'none' }}>
                 💬 WhatsApp
               </a>
             </div>

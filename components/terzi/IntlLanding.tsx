@@ -106,7 +106,7 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
           <p style={{ margin: '0 0 1rem' }}>{c.providerText}</p>
           <p style={{ margin: '0 0 1rem' }}>
             <a href={wa} target="_blank" rel="noopener noreferrer"
-              style={{ background: '#25d366', color: '#fff', padding: '.8rem 1.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: 4, display: 'inline-block' }}>
+              style={{ background: '#15803d', color: '#fff', padding: '.8rem 1.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: 4, display: 'inline-block' }}>
               💬 {c.cta}
             </a>
           </p>
