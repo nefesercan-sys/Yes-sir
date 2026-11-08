@@ -14,6 +14,7 @@ const LINKS: { href: string; label: string }[] = [
   { href: "/terzi/dikis-atolyesi-antalya", label: "Dikiş Atölyesi, Fason Üretim" },
   { href: "/terzi/uniforma-uretimi-antalya", label: "Üniforma Üretimi" },
   { href: "/tekstil-antalya", label: "Tekstil Antalya" },
+  { href: "/siparise-ozel-dikim-dunyaya-kargo", label: "Siparişe Özel Dikim ve Kargo" },
   { href: "/online-tailor-service", label: "Online Tailor Service (EN)" },
   { href: "/de/online-schneiderservice-antalya", label: "Online Schneiderservice (DE)" },
   { href: "/ru/atelie-antalya", label: "Ателье Анталья (RU)" },

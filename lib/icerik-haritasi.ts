@@ -39,6 +39,7 @@ const TR_SERVICES: MapLink[] = [
   { href: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', label: 'Konyaaltı elbise dikim ve tadilat' },
   { href: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', label: 'Konyaaltı tadilat' },
   { href: '/online-terzi-hizmeti', label: 'Online terzi hizmeti' },
+  { href: '/siparise-ozel-dikim-dunyaya-kargo', label: 'Siparişe özel dikim ve kargo' },
   { href: '/tekstil-antalya', label: 'Tekstil Antalya' },
   { href: '/terzi-cagir', label: 'Terzi çağır' },
 ];
@@ -140,6 +141,7 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
           links: [
             { href: EN_BASE, label: 'Hotel Tailor Antalya' },
             { href: '/online-tailor-service', label: 'Online Tailor Service' },
+            { href: '/en/made-to-order-clothing-worldwide-antalya', label: 'Made-to-order clothing and shipping' },
             { href: '/terzi', label: 'Antalya Terzi (Türkçe)' },
           ].filter(not),
         },
@@ -158,6 +160,7 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
           links: [
             { href: DE_BASE, label: 'Schneider Service Hotel Antalya' },
             { href: '/de/online-schneiderservice-antalya', label: 'Online-Schneiderservice' },
+            { href: '/de/massgeschneiderte-kleidung-weltweit-antalya', label: 'Maßgeschneiderte Kleidung und Versand' },
             { href: '/terzi', label: 'Antalya Terzi (Türkçe)' },
           ].filter(not),
         },
@@ -176,6 +179,7 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
           { href: RU_BASE, label: 'Выездной портной Анталья' },
           { href: '/ru/atelie-antalya', label: 'Ателье Анталья' },
           { href: '/ru/atelie-antalya-online', label: 'Ателье онлайн' },
+          { href: '/ru/poshiv-na-zakaz-dostavka-po-miru-antalya', label: 'Пошив на заказ с доставкой' },
           { href: '/terzi', label: 'Antalya Terzi (Türkçe)' },
         ].filter(not),
       },
