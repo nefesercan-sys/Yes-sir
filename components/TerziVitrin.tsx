@@ -59,6 +59,7 @@ const LINK_GROUPS: { title: string; links: { href: string; label: string }[] }[]
     title: "Özel dikim ve online",
     links: [
       { href: "/siparise-ozel-dikim-dunyaya-kargo", label: "Siparişe Özel Dikim ve Kargo" },
+      { href: "/terzi/olcu-alma-rehberi", label: "Evde Ölçü Nasıl Alınır?" },
       { href: "/online-tailor-service", label: "Online Tailor Service (EN)" },
       { href: "/de/online-schneiderservice-antalya", label: "Online Schneiderservice (DE)" },
       { href: "/ru/atelie-antalya", label: "Ателье Анталья (RU)" },
