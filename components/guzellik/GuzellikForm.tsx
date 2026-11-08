@@ -8,7 +8,6 @@ type Props = { form: FormCopy; services: { id: string; name: string }[]; helloMs
 export default function GuzellikForm({ form, services, helloMsg }: Props) {
   const [sel, setSel] = useState<string[]>([]);
   const [area, setArea] = useState('');
-  const [mode, setMode] = useState<'home' | 'salon'>('salon');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [people, setPeople] = useState('1');
@@ -20,14 +19,13 @@ export default function GuzellikForm({ form, services, helloMsg }: Props) {
       helloMsg,
       names && `${form.msgService}: ${names}`,
       area && `${form.msgArea}: ${area === '__other' ? form.areaOther : area}`,
-      `${form.msgMode}: ${mode === 'home' ? form.home : form.salon}`,
       date && `${form.msgDate}: ${date}`,
       time && `${form.msgTime}: ${time}`,
       people && `${form.msgPeople}: ${people}`,
       note.trim() && `${form.msgNote}: ${note.trim().slice(0, 400)}`,
     ].filter(Boolean) as string[];
     return gWa(lines.join('\n'));
-  }, [sel, area, mode, date, time, people, note, form, services, helloMsg]);
+  }, [sel, area, date, time, people, note, form, services, helloMsg]);
 
   const toggle = (id: string) => setSel((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
@@ -67,18 +65,6 @@ export default function GuzellikForm({ form, services, helloMsg }: Props) {
           <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
         </label>
       </div>
-
-      <fieldset className="gz-fs">
-        <legend>{form.mode}</legend>
-        <div className="gz-chips">
-          <label className={`gz-chip${mode === 'salon' ? ' on' : ''}`}>
-            <input type="radio" name="gz-mode" checked={mode === 'salon'} onChange={() => setMode('salon')} />{form.salon}
-          </label>
-          <label className={`gz-chip${mode === 'home' ? ' on' : ''}`}>
-            <input type="radio" name="gz-mode" checked={mode === 'home'} onChange={() => setMode('home')} />{form.home}
-          </label>
-        </div>
-      </fieldset>
 
       <label className="gz-f">
         <span>{form.note}</span>

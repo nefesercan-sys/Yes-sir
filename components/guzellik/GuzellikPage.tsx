@@ -55,7 +55,7 @@ function schema(lang: GLang) {
         '@type': 'Service',
         '@id': `${url}#service`,
         name: c.svcName,
-        description: c.svcDesc,
+        description: `${c.svcDesc} ${c.campaign}`,
         serviceType: c.svcName,
         provider: { '@id': G_ID },
         areaServed: [{ '@type': 'City', name: 'Antalya' }, ...areas],
@@ -129,6 +129,7 @@ export default function GuzellikPage({ lang }: { lang: GLang }) {
 
         <section className="gz-box short-answer" aria-label={c.crumb}>
           <p>{c.lead}</p>
+          <p>{c.campaign}</p>
           <p className="gz-note"><strong>{c.transparency}</strong></p>
           <div className="gz-btns">
             <a className="gz-btn gz-wa" href={gWa(c.ctaMsg)} target="_blank" rel="noopener noreferrer">💬 {c.cta}</a>
