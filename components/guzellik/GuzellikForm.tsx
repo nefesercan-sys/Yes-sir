@@ -43,7 +43,7 @@ export default function GuzellikForm({ form, services, helloMsg }: Props) {
         </div>
       </fieldset>
 
-      <div className="gz-grid">
+      <div className="gz-g2">
         <label className="gz-f">
           <span>{form.area}</span>
           <select value={area} onChange={(e) => setArea(e.target.value)}>
@@ -71,7 +71,10 @@ export default function GuzellikForm({ form, services, helloMsg }: Props) {
         <textarea rows={3} maxLength={400} value={note} placeholder={form.notePh} onChange={(e) => setNote(e.target.value)} />
       </label>
 
-      <a className="gz-btn gz-wa" href={href} target="_blank" rel="noopener noreferrer">💬 {form.send}</a>
+      <a className="gz-btn" href={href} target="_blank" rel="noopener noreferrer">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6L4 20z" /></svg>
+        {form.send}
+      </a>
       <p className="gz-hint">{form.hint}</p>
     </form>
   );

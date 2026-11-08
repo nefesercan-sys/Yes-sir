@@ -783,3 +783,18 @@ export const G: Record<GLang, GCopy> = {
 
 /** WhatsApp bağlantısı (önceden doldurulmuş mesaj). */
 export const gWa = (text: string) => `https://wa.me/${G_WA}?text=${encodeURIComponent(text)}`;
+
+/** Görünüm metinleri: hero alt başlığı ve güven şeridi (yalnızca doğrulanmış bilgiler: anlaşmalı salon, saat, 10 dil, WhatsApp teklifi). */
+export type GUi = { sub: string; trust: [string, string, string, string] };
+export const G_UI: Record<GLang, GUi> = {
+  tr: { sub: "Antalya'nın bölgelerindeki anlaşmalı salonlarda saç, tırnak, makyaj ve bakım. Talebinizi gönderin, sizi size en yakın salona yönlendirelim.", trust: ['Anlaşmalı salonlar', 'Her gün 08:00–24:00', '10 dilde bilgi', 'WhatsApp’tan hızlı teklif'] },
+  en: { sub: 'Hair, nails, makeup and care at partner salons across Antalya. Send your request and we will direct you to the salon nearest to you.', trust: ['Partner salons', 'Every day 08:00–24:00', 'Information in 10 languages', 'Quick quote on WhatsApp'] },
+  de: { sub: 'Haare, Nägel, Make-up und Pflege in Partnersalons in ganz Antalya. Senden Sie Ihre Anfrage, wir leiten Sie an den nächstgelegenen Salon weiter.', trust: ['Partnersalons', 'Täglich 08:00–24:00 Uhr', 'Infos in 10 Sprachen', 'Schnelles Angebot per WhatsApp'] },
+  ru: { sub: 'Волосы, ногти, макияж и уход в салонах-партнёрах по всей Анталье. Отправьте заявку, и мы направим вас в ближайший к вам салон.', trust: ['Салоны-партнёры', 'Ежедневно 08:00–24:00', 'Информация на 10 языках', 'Быстрый расчёт в WhatsApp'] },
+  es: { sub: 'Peluquería, uñas, maquillaje y cuidados en salones asociados de toda Antalya. Envíe su solicitud y le dirigimos al salón más cercano.', trust: ['Salones asociados', 'Todos los días 08:00–24:00', 'Información en 10 idiomas', 'Presupuesto rápido por WhatsApp'] },
+  fr: { sub: 'Coiffure, ongles, maquillage et soins dans des salons partenaires partout à Antalya. Envoyez votre demande, nous vous orientons vers le salon le plus proche.', trust: ['Salons partenaires', 'Tous les jours 08h00–24h00', 'Informations en 10 langues', 'Devis rapide sur WhatsApp'] },
+  pl: { sub: 'Fryzjer, paznokcie, makijaż i pielęgnacja w salonach partnerskich w całej Antalyi. Wyślij zgłoszenie, a skierujemy Cię do najbliższego salonu.', trust: ['Salony partnerskie', 'Codziennie 08:00–24:00', 'Informacje w 10 językach', 'Szybka wycena na WhatsApp'] },
+  uk: { sub: 'Волосся, нігті, макіяж і догляд у салонах-партнерах по всій Анталії. Надішліть запит, і ми спрямуємо вас до найближчого салону.', trust: ['Салони-партнери', 'Щодня 08:00–24:00', 'Інформація 10 мовами', 'Швидкий розрахунок у WhatsApp'] },
+  nl: { sub: 'Haar, nagels, make-up en verzorging in partnersalons door heel Antalya. Stuur uw aanvraag en wij verwijzen u naar de dichtstbijzijnde salon.', trust: ['Partnersalons', 'Elke dag 08:00–24:00', 'Informatie in 10 talen', 'Snelle offerte via WhatsApp'] },
+  ar: { sub: 'شعر وأظافر ومكياج وعناية في صالونات شريكة في أنحاء أنطاليا. أرسل طلبك وسنوجهك إلى أقرب صالون إليك.', trust: ['صالونات شريكة', 'يوميًا 08:00–24:00', 'معلومات بـ 10 لغات', 'عرض سعر سريع عبر واتساب'] },
+};
