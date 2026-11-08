@@ -36,10 +36,10 @@ const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: { absolute: 'Ателье в Анталье (Коньяалты): ремонт и пошив | Terzi Can' },
+  title: { absolute: 'Ателье в Анталье: подшив от ₺200, ремонт, пошив | Terzi Can' },
 
   description:
-    'Ателье Terzi Can в Анталье, Коньяалты: ремонт и подгонка одежды, замена молнии, пошив на заказ, кожа. Говорим по-русски. ☎ ' +
+    'Ателье Terzi Can в Коньяалты: подшив от ₺200 (~€10), замена молнии от ₺300, кожа от ₺400, пошив. Забор и доставка в Анталье бесплатно. По-русски. ☎ ' +
     PHONE,
 
   keywords: [

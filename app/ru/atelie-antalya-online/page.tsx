@@ -164,7 +164,7 @@ export default function RuAtelieAntalyaPage() {
 
             <p className="fu3" style={{ fontSize:15,color:'rgba(255,255,255,.7)',lineHeight:1.8,marginBottom:32,maxWidth:520,margin:'0 auto 32px' }}>
               Ремонт одежды · Подгонка по фигуре · Замена молнии<br />
-              Пошив на заказ · Химчистка · Выездной портной в Коньяалты
+              Пошив на заказ · Ремонт и подгонка · Выездной портной в Коньяалты
             </p>
 
             {/* 3 главных кнопки */}
