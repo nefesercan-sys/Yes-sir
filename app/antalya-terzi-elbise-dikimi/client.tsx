@@ -679,8 +679,8 @@ export default function ElbiseDikimiClient() {
               Elbiseniz tam size göre <em>dikilsin</em>, tam size göre otursun
             </h1>
             <p className="hero-sub">
-              Elbise dikimi, tamirat ve tadilat — randevulu, şeffaf
-              fiyatlı, profesyonel atölye hizmeti.
+              Elbise dikimi, tamirat ve tadilat. Paça kısaltma 200 TL&apos;den,
+              normal işler aynı gün. Fotoğrafı gönderin, fiyatı öğrenin.
             </p>
             <div className="hero-actions">
               <a
@@ -718,6 +718,11 @@ export default function ElbiseDikimiClient() {
           kıyafet tadilatı üzerine uzmanlaşmıştır. Günlük giyimden özel gün
           kıyafetlerine kadar her parça, prova ve el işçiliğiyle tamamlanır.
           Fiyatlarımız net, randevularımız zamanında.
+        </p>
+        <p className="intro-text">
+          Bu sayfa size özel dikim ve mevcut kıyafetlerinizin tadilatı
+          (boy kısaltma, bel daraltma, fermuar değişimi) içindir.
+          Fiyatlar KDV hariçtir.
         </p>
       </section>
 

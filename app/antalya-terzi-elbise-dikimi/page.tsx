@@ -17,12 +17,12 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
+  title: { absolute: 'Konyaaltı Terzi · Elbise Dikimi ve Tadilat, Paça ₺200\'den | Terzi Can' },
   description:
-    "Konyaaltı'nda elbise dikimi (fotoğrafa ve istediğiniz modele göre), tadilat, tamirat. Paça kısaltma 200 TL'den. " +
-    "Her gün 08:00–23:00. ☎ +90 531 898 64 18",
+    "Antalya Konyaaltı terzi: elbise dikimi, abiye ve takım tadilatı, tamirat. Paça kısaltma 200 TL'den (KDV hariç), " +
+    "normal işler aynı gün. Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Her gün 08:00–23:00. ☎ +90 531 898 64 18",
   keywords: [
-    'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya',
+    'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya', 'elbise boyu kısaltma', 'abiye tadilat terzi antalya', 'takım elbise tadilatı antalya',
     'abiye dikimi antalya', 'özel dikim antalya', 'paça kısaltma antalya',
   ],
   alternates: (() => {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     };
   })(),
   openGraph: {
-    title: 'Antalya Terzi · Elbise Dikimi ve Tadilat — Terzi Can',
-    description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat ve tamirat hizmeti.",
+    title: 'Konyaaltı Terzi · Elbise Dikimi ve Tadilat — Terzi Can',
+    description: "Konyaaltı'nda özel ölçü elbise dikimi, tadilat ve tamirat. Paça kısaltma 200 TL'den, fotoğrafla fiyat.",
     url: SITE_URL,
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
@@ -108,7 +108,7 @@ export default function Page() {
       <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"
         items={[
-          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Eve ve otele alım-teslim ücretsizdir.' },
+          { q: 'Konyaaltı\'nda terzi nerede, adrese gelir mi?', a: 'Terzi Can, Hurma Mahallesi Konyaaltı\'nda. İsterseniz adresinizden veya otelinizden alıp yerinde ölçü alır, işlem sonrası adrese teslim ederiz. Antalya içinde eve ve otele alım-teslim ücretsizdir.' },
           { q: 'Elbise dikimi ve tadilat fiyatları nedir?', a: 'Paça kısaltma ₺200\'den, fermuar değişimi ₺300\'den, bel daraltma ₺200\'den başlar. Elbise dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; fotoğraf göndermeniz yeterli.' },
           { q: 'Fiyatı gitmeden nasıl öğrenirim?', a: 'Kıyafetin ve yapılacak işlemin fotoğrafını WhatsApp\'tan gönderin: +90 531 898 64 18.' },
           { q: 'Hafta sonu ve akşam açık mısınız?', a: 'Evet, her gün 08:00–23:00 arası açığız.' },
