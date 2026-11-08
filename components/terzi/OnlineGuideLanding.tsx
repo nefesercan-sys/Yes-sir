@@ -7,6 +7,7 @@ import { ONL, onlineUrl } from '@/lib/intl-online';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { jsonLdString } from '@/lib/json-ld';
 import KargoSection from '@/components/terzi/KargoSection';
+import { OZEL, ozelUrl } from '@/lib/ozel-dikim';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814' };
 const serif = 'Georgia,serif';
@@ -98,6 +99,7 @@ export default function OnlineGuideLanding({ lang }: { lang: ILang }) {
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <h2 style={{ fontFamily: serif, fontSize: '1.15rem', color: C.ink, margin: '0 0 .7rem' }}>{c.contactH}</h2>
           <p style={{ margin: '0 0 1rem' }}><a href={waLink(c.wa)} target="_blank" rel="noopener noreferrer" style={btn}>💬 {c.cta}</a></p>
+          <p style={{ margin: '0 0 .8rem', fontSize: '.92rem' }}><Link href={ozelUrl(lang)} style={{ color: C.green, fontWeight: 600 }}>{OZEL[lang].crumb}</Link></p>
           <p style={{ margin: 0, fontSize: '.92rem' }}>
             <a href={`tel:${PHONE_TEL}`} style={{ color: C.green }} dir="ltr">☎ {c.callLine}: {PHONE}</a>
             {' · '}<a href={MAPS} target="_blank" rel="noopener noreferrer" style={{ color: C.green }}>{g.mapLabel}</a>

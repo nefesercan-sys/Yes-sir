@@ -16,11 +16,11 @@ export const OLCU_NEW: ILang[] = ['es', 'fr', 'pl', 'uk', 'nl', 'ar'];
 export const OLCU_PATH: Record<OlcuLang, string> = {
   tr: '/terzi/olcu-alma-rehberi',
   en: '/en/how-to-measure-yourself-for-a-tailor',
-  de: '/de/koerpermasse-selbst-nehmen-anleitung',
+  de: '/de/massnehmen-zuhause-schneider-anleitung',
   ru: '/ru/kak-snyat-merki-doma-dlya-poshiva',
-  es: '/es/como-tomar-medidas-en-casa-para-sastre',
-  fr: '/fr/prendre-ses-mesures-chez-soi-couturier',
-  pl: '/pl/jak-zdjac-miary-w-domu-krawiec',
+  es: '/es/medirse-en-casa-guia-sastreria',
+  fr: '/fr/comment-se-mesurer-soi-meme-couture',
+  pl: '/pl/jak-samodzielnie-zmierzyc-sie-krawiec',
   uk: '/uk/yak-znyaty-miry-vdoma-dlya-poshyvu',
   nl: '/nl/zelf-maten-opnemen-voor-kleermaker',
   ar: '/ar/kayfa-ta-khudh-qiyasatik-fi-al-manzil',
@@ -258,7 +258,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     svcName: 'Measuring guide for made-to-measure clothing', contactH: 'Contact us directly', callLine: 'Call',
   },
   de: {
-    slug: 'koerpermasse-selbst-nehmen-anleitung',
+    slug: 'massnehmen-zuhause-schneider-anleitung',
     title: 'Körpermaße selbst nehmen: Anleitung für Maßschneiderei',
     desc: 'Maßband, Spiegel und eine zweite Person genügen: So nehmen Sie Brust-, Taillen-, Hüft-, Schulter-, Ärmel- und Beinmaße zu Hause und senden sie per WhatsApp.',
     h1: 'Körpermaße zu Hause selbst nehmen: Schritt für Schritt zum Maßauftrag',
@@ -440,7 +440,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     svcName: 'Инструкция по снятию мерок для пошива', contactH: 'Прямой контакт', callLine: 'Позвонить',
   },
   es: {
-    slug: 'como-tomar-medidas-en-casa-para-sastre',
+    slug: 'medirse-en-casa-guia-sastreria',
     title: 'Cómo tomar tus medidas en casa para un sastre: guía',
     desc: 'Con una cinta métrica, un espejo y un ayudante basta: cómo medir pecho, cintura, cadera, hombros, manga y pierna en casa y enviarlas por WhatsApp.',
     h1: 'Cómo tomar tus medidas en casa para ropa a medida',
@@ -531,7 +531,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     svcName: 'Guía para tomar medidas para ropa a medida', contactH: 'Contacto directo', callLine: 'Llame',
   },
   fr: {
-    slug: 'prendre-ses-mesures-chez-soi-couturier',
+    slug: 'comment-se-mesurer-soi-meme-couture',
     title: 'Prendre ses mesures chez soi pour un couturier : guide',
     desc: 'Un mètre ruban, un miroir et une aide suffisent : comment mesurer poitrine, taille, hanches, épaules, manche et jambe à la maison et les envoyer par WhatsApp.',
     h1: 'Comment prendre ses mesures chez soi pour un vêtement sur mesure',
@@ -622,7 +622,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     svcName: 'Guide pour prendre ses mesures (sur-mesure)', contactH: 'Contact direct', callLine: 'Appeler',
   },
   pl: {
-    slug: 'jak-zdjac-miary-w-domu-krawiec',
+    slug: 'jak-samodzielnie-zmierzyc-sie-krawiec',
     title: 'Jak zdjąć miary w domu dla krawca: poradnik krok po kroku',
     desc: 'Wystarczy miarka krawiecka, lustro i druga osoba: jak zmierzyć klatkę, talię, biodra, ramiona, rękaw i nogę w domu i wysłać miary przez WhatsApp.',
     h1: 'Jak samodzielnie zdjąć miary w domu pod odzież szytą na miarę',

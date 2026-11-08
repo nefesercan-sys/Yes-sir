@@ -10,6 +10,7 @@ import { OLCU_ALL, OLCU_PATH, olcuLanguages } from '@/lib/intl-olcu'
 import { KONU_IDS, konuUrl, konuLanguages, sixAlt } from '@/lib/intl-konu'
 import { HZ_IDS, hzUrl, hzLanguages, hzSixForService } from '@/lib/intl-hz'
 import { PROMO_ALL } from '@/lib/intl-promo'
+import { OZEL_ALL, OZEL_PATH, ozelLanguages } from '@/lib/ozel-dikim'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, isIndexable, type Lang } from '@/lib/seo-data'
 import { crossCanonical } from '@/lib/cross-canonical'
 
@@ -149,6 +150,8 @@ export async function GET() {
       url: `${BASE_URL}${x.path}`, priority: '0.70', freq: 'monthly',
       alt: { ...Object.fromEntries(PROMO_ALL.map((y) => [y.hreflang, `${BASE_URL}${y.path}`])), 'x-default': `${BASE_URL}${PROMO_ALL[0].path}` },
     })),
+    // 🧵 Siparişe özel dikim ve dünyaya kargo (10 dil, karşılıklı hreflang + x-default TR)
+    ...OZEL_ALL.map((l) => ({ url: `${BASE_URL}${OZEL_PATH[l]}`, priority: '0.80', freq: 'monthly', alt: ozelLanguages(BASE_URL) })),
     // 🏨 Otel bölgesi derinlik sayfaları (6 dil × 6 bölge, bölge başına 6 dilli hreflang)
     ...ZONE_SLUGS.flatMap((z) => ILANGS.map((l) => ({ url: `${BASE_URL}${zoneUrl(l, z)}`, priority: '0.65', freq: 'monthly', alt: zoneAltMap(z) }))),
   ]

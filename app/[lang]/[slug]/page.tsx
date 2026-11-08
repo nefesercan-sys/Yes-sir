@@ -6,6 +6,9 @@ import SvcGuideLanding from '@/components/terzi/SvcGuideLanding';
 import OnlineGuideLanding from '@/components/terzi/OnlineGuideLanding';
 import OlcuGuideLanding, { olcuMetadata } from '@/components/terzi/OlcuGuideLanding';
 import { OLCU } from '@/lib/intl-olcu';
+import OzelDikimLanding from '@/components/terzi/OzelDikimLanding';
+import { OZEL_PATH, parseOzel } from '@/lib/ozel-dikim';
+import { ozelMetadata } from '@/lib/ozel-meta';
 import { ONL, onlineUrl, onlineLanguages, parseOnline } from '@/lib/intl-online';
 import KonuGuideLanding from '@/components/terzi/KonuGuideLanding';
 import { HZ, HZ_IDS, parseHz, hzUrl, hzLanguages } from '@/lib/intl-hz';
@@ -28,6 +31,7 @@ export function generateStaticParams() {
     { lang, slug: ONL[lang].slug },
     { lang, slug: OLCU[lang].slug },
     { lang, slug: PROMO[lang].slug },
+    { lang, slug: OZEL_PATH[lang].split('/')[2] },
     ...KONU_IDS.map((t) => ({ lang, slug: KONU[lang][t].slug })),
     ...HZ_IDS.map((h) => ({ lang, slug: HZ[lang][h].slug })),
     ...ZONE_SLUGS.map((z) => ({ lang, slug: zoneSlug(lang, z) })),
@@ -87,6 +91,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   }
 
   if (OLCU[lang].slug === slug) return olcuMetadata(lang);
+  if (parseOzel(lang, slug)) return ozelMetadata(lang);
 
   if (parseOnline(lang, slug)) {
     const oc = ONL[lang];
@@ -175,6 +180,7 @@ export default async function Page({ params }: P) {
   if (parseSvcg(lang, slug)) return <SvcGuideLanding lang={lang} />;
   if (parseOnline(lang, slug)) return <OnlineGuideLanding lang={lang} />;
   if (OLCU[lang].slug === slug) return <OlcuGuideLanding lang={lang} />;
+  if (parseOzel(lang, slug)) return <OzelDikimLanding lang={lang} />;
   const hz = parseHz(lang, slug);
   if (hz) return <KonuGuideLanding lang={lang} hz={hz} />;
   const konu = parseKonu(lang, slug);

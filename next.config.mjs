@@ -78,6 +78,8 @@ const nextConfig = {
         source: `/terzi/konyaalti/${eski}`, destination: `/terzi/konyaalti/${yeni}`, permanent: true,
       })),
       { source: '/online-terzi-hizme', destination: '/online-terzi-hizmeti', permanent: true },
+      // Güzellik bölümü kök adresi → Türkçe ana sayfa (geçici)
+      { source: '/guzellik', destination: '/guzellik/guzellik-merkezi-antalya', permanent: false },
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
       { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu

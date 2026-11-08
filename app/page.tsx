@@ -5,12 +5,12 @@ import type { Metadata } from "next";
 const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
-  title: "Terzi Can Antalya — Terzi, Tadilat ve Özel Dikim | SwapHubs",
-  description: "Konyaaltı Antalya'da Terzi Can: paça kısaltma, fermuar, elbise tadilatı, özel dikim. Eve ve otele ücretsiz servis. Her gün 08:00–23:00.",
+  title: "Terzi Can Antalya — Tadilat, Özel Dikim, Dünyaya Kargo",
+  description: "Konyaaltı Antalya'da Terzi Can: paça, fermuar, tadilat, özel dikim. Eve ve otele ücretsiz alım-teslim; özel dikim dünyaya kargo. Her gün 08:00–23:00.",
   keywords: "Antalya terzi, Konyaaltı terzi, terzi tadilat, özel dikim, otele gelen terzi, tekstil, fason üretim",
   openGraph: {
-    title: "Terzi Can Antalya — Terzi ve Tekstil",
-    description: "Konyaaltı Antalya'da terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele ücretsiz servis.",
+    title: "Terzi Can Antalya — Tadilat, Özel Dikim ve Dünyaya Kargo",
+    description: "Konyaaltı Antalya'da terzi, tadilat ve özel dikim. Eve ve otele ücretsiz alım-teslim; siparişe özel dikim Antalya içine ve yurt dışına kargo.",
     url: BASE,
     siteName: "SwapHubs",
     locale: "tr_TR",

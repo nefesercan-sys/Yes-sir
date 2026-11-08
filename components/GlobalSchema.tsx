@@ -7,6 +7,7 @@
 // ============================================================
 import { usePathname } from 'next/navigation';
 import { jsonLdString } from '@/lib/json-ld';
+import { isGuzellikPath } from '@/lib/guzellik';
 
 // Terzi / tekstil sayfa yolları (önek eşleşmesi). Yeni terzi sayfası eklerken buraya ekle.
 const TERZI_PREFIXES = [
@@ -16,6 +17,13 @@ const TERZI_PREFIXES = [
   '/antalyada-terzi',
   '/tekstil-antalya',
   '/dogal-keten-pamuk-giyim',
+  '/siparise-ozel-dikim-dunyaya-kargo',
+  '/en/made-to-order-clothing-worldwide-antalya',
+  '/de/massgeschneiderte-kleidung-weltweit-antalya',
+  '/en/how-to-measure-yourself-for-a-tailor',
+  '/de/massnehmen-zuhause-schneider-anleitung',
+  '/ru/kak-snyat-merki-doma-dlya-poshiva',
+  '/ru/poshiv-na-zakaz-dostavka-po-miru-antalya',
   '/en/linen-clothing-custom-made-antalya',
   '/ru/lnyanaya-odezhda-poshiv-antalya',
   '/de/leinenkleidung-massanfertigung-antalya',
@@ -115,7 +123,7 @@ const jsonLd = {
 
 export default function GlobalSchema() {
   const pathname = usePathname();
-  if (isTerziPath(pathname)) return null;
+  if (isTerziPath(pathname) || isGuzellikPath(pathname)) return null; // güzellik sayfaları kendi şemasını taşır
   return (
     <script
       type="application/ld+json"
