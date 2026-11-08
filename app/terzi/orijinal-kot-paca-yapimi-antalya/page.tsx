@@ -67,5 +67,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <KonuSayfasi d={DATA} />;
+  return <KonuSayfasi d={DATA} kargoKisa />;
 }

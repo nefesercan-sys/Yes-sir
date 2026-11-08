@@ -1,3 +1,4 @@
+import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -391,6 +392,7 @@ export default function FermuarDegisimiPage() {
           </div>
         </div>
       </section>
+    <KargoFermuarKutusu lang="tr" />
     <ReviewsBlock lang="tr" schema />
     </main>
   );
