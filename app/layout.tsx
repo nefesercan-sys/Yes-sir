@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import ContactTracker from "@/components/ContactTracker";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import LocaleHtmlLang from "@/app/components/LocaleHtmlLang";
 import IcerikHaritasi from "@/components/IcerikHaritasi";
@@ -136,6 +137,7 @@ export default function RootLayout({ children }: Props) {
             <RuTelegramButton />
             <IcerikHaritasi />
             <Analytics />
+            <ContactTracker />
         </ThemeProvider>
       </body>
     </html>

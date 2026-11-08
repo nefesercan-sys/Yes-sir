@@ -9,6 +9,8 @@
 // Adres/koordinat yok (kendi salonumuz iddiası yok). Puan/yorum/sertifika/garanti/süre/mesafe/ücretsiz servis iddiası yok.
 // ============================================================
 
+import { G_PREFIX as _G_PREFIX, G_SLUG as _G_SLUG } from './guzellik-slugs';
+
 export type GLang = 'tr' | 'en' | 'ru' | 'de' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export const GLANGS: GLang[] = ['tr', 'en', 'de', 'ru', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'];
 
@@ -26,20 +28,9 @@ export const G_HOURS_CLOSE = '23:59';
 /** Bölge listesi (form + şema). 'Diğer' seçeneği formda ayrıca çevrilir. */
 export const G_AREAS = ['Konyaaltı', 'Muratpaşa', 'Lara', 'Kundu', 'Kepez', 'Döşemealtı', 'Aksu', 'Kemer', 'Belek', 'Serik', 'Side', 'Manavgat'] as const;
 
-/** Tüm güzellik adresleri tek /guzellik/ öneki altındadır (dil klasörü yok; slug dile özgüdür). */
-export const G_PREFIX = '/guzellik';
-export const G_SLUG: Record<GLang, string> = {
-  tr: 'guzellik-merkezi-antalya',
-  en: 'beauty-salon-antalya',
-  de: 'schoenheitssalon-antalya',
-  ru: 'salon-krasoty-antalya',
-  es: 'salon-de-belleza-antalya',
-  fr: 'salon-de-beaute-antalya',
-  pl: 'salon-urody-antalya',
-  uk: 'salon-krasy-antaliya',
-  nl: 'schoonheidssalon-antalya',
-  ar: 'salon-tajmeel-antalya',
-};
+/** Tüm güzellik adresleri tek /guzellik/ öneki altındadır (dil klasörü yok; slug dile özgüdür). Tanım: lib/guzellik-slugs.ts */
+export const G_PREFIX = _G_PREFIX;
+export const G_SLUG: Record<GLang, string> = _G_SLUG;
 export const G_PATH: Record<GLang, string> = Object.fromEntries(
   (Object.keys(G_SLUG) as GLang[]).map((l) => [l, `${G_PREFIX}/${G_SLUG[l]}`]),
 ) as Record<GLang, string>;
