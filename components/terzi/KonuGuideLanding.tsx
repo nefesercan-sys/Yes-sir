@@ -1,4 +1,5 @@
 // swaphubs.com — Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-svc.ts. Sunucu bileşeni, stil inline.
+import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -64,6 +65,8 @@ export default function KonuGuideLanding({ lang, topic, hz }: { lang: ILang; top
             </div>
           ))}
         </section>
+
+        {hz && ['fermuar', 'abiye', 'gelinlik', 'mont'].includes(hz) && <KargoFermuarKutusu lang={lang} />}
 
         <OrnekGorselSeridi konu={'hizmetFp'} lang={lang} tema="acik" anahtarlar={['erkek-takim-olcu', 'abiye-elbise-atolye', 'yun-pantolon-metre', 'beyaz-gomlek-katli', 'palto-yaka-detay', 'pilili-etek']} sayfaUrl={`${SITE}${hz ? hzUrl(lang, hz) : konuUrl(lang, topic as KonuId)}`} base={SITE} />
 
