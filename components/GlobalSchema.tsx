@@ -7,6 +7,7 @@
 // ============================================================
 import { usePathname } from 'next/navigation';
 import { jsonLdString } from '@/lib/json-ld';
+import { isGuzellikPath } from '@/lib/guzellik';
 
 // Terzi / tekstil sayfa yolları (önek eşleşmesi). Yeni terzi sayfası eklerken buraya ekle.
 const TERZI_PREFIXES = [
@@ -115,7 +116,7 @@ const jsonLd = {
 
 export default function GlobalSchema() {
   const pathname = usePathname();
-  if (isTerziPath(pathname)) return null;
+  if (isTerziPath(pathname) || isGuzellikPath(pathname)) return null; // güzellik sayfaları kendi şemasını taşır
   return (
     <script
       type="application/ld+json"
