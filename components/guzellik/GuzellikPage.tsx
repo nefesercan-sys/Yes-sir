@@ -115,10 +115,16 @@ const CSS = `
 .gz-trust svg{color:var(--pl)}
 .gz-ans{margin:1.4rem 0 0;background:var(--sf);border:1px solid var(--bd);border-inline-start:4px solid var(--gdl);border-radius:12px;padding:1rem 1.15rem}
 .gz-ans p{margin:0}
-.gz-grid-svc{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.9rem}
-.gz-card{display:flex;flex-direction:column;gap:.55rem;height:100%;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:1.1rem;transition:border-color .15s ease,transform .15s ease}
+.gz-grid-svc{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.9rem}
+.gz-grid-svc>li{flex:1 1 250px;max-width:380px;display:flex}
+.gz-grid-svc>li>.gz-card{width:100%}
+.gz-card{display:flex;flex-direction:column;height:100%;background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:border-color .15s ease,transform .15s ease}
+.gz-img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:var(--plt)}
+.gz-cb{display:flex;flex-direction:column;gap:.55rem;flex:1;padding:1rem 1.1rem 1.1rem}
+.gz-ch{display:flex;align-items:center;gap:.7rem}
+.gz-imgnote{font-size:.85rem;color:var(--mu);margin:.9rem 0 0;text-align:center}
 .gz-card:hover,.gz-card:focus-within{border-color:var(--gdl);transform:translateY(-2px)}
-.gz-ic{width:46px;height:46px;border-radius:14px;background:var(--plt);color:var(--pl);display:flex;align-items:center;justify-content:center}
+.gz-ic{width:40px;height:40px;flex:none;border-radius:12px;background:var(--plt);color:var(--pl);display:flex;align-items:center;justify-content:center}
 .gz-card p{color:var(--mu);font-size:.95rem;margin:0;flex:1}
 .gz-ask{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:44px;margin-top:.4rem;border-radius:999px;background:var(--wa);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;padding:.55rem 1rem;border:2px solid var(--wa)}
 .gz-ask:hover{box-shadow:0 6px 16px rgba(21,128,61,.28)}
@@ -187,6 +193,16 @@ const IC_PHONE = <Svg d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 
 const IC_CHECK = <Svg size={18} d="M5 12.5l4.5 4.5L19 7.5" />;
 const IC_STAR = <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" /></svg>;
 const TRUST_ICONS = [IC_PIN, IC_CLOCK, IC_GLOBE, IC_CHAT];
+// Temsilî (yapay zekâ ile üretilmiş) hizmet görselleri: /public/guzellik/*.webp. Gerçek boyutlar width/height için; kırpma konumu yüzleri korur.
+const IMG: Record<SvcId, { f: string; w: number; h: number; pos: string }> = {
+  hair: { f: 'sac', w: 425, h: 309, pos: 'center 22%' },
+  nails: { f: 'tirnak', w: 489, h: 238, pos: 'center 50%' },
+  brows: { f: 'kas-kirpik', w: 489, h: 220, pos: 'center 45%' },
+  makeup: { f: 'makyaj', w: 424, h: 304, pos: 'center 25%' },
+  bridal: { f: 'gelin', w: 370, h: 469, pos: 'center 30%' },
+  skin: { f: 'cilt-bakimi', w: 489, h: 223, pos: 'center 40%' },
+  wax: { f: 'agda', w: 370, h: 223, pos: 'center 40%' },
+};
 
 export default function GuzellikPage({ lang }: { lang: GLang }) {
   const c = G[lang];
@@ -229,14 +245,26 @@ export default function GuzellikPage({ lang }: { lang: GLang }) {
           {SVC_IDS.map((id) => (
             <li key={id}>
               <article className="gz-card">
-                <div className="gz-ic">{ICONS[id]}</div>
-                <h3>{c.svc[id].name}</h3>
-                <p>{c.svc[id].text}</p>
-                <a className="gz-ask" href={gWa(c.askMsg.replace('{s}', c.svc[id].name))} target="_blank" rel="noopener noreferrer">{IC_CHAT}{c.ask}</a>
+                <img
+                  className="gz-img"
+                  src={`/guzellik/${IMG[id].f}.webp`}
+                  width={IMG[id].w}
+                  height={IMG[id].h}
+                  style={{ objectPosition: IMG[id].pos }}
+                  alt={ui.imgAlt.replace('{s}', c.svc[id].name)}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="gz-cb">
+                  <div className="gz-ch"><div className="gz-ic">{ICONS[id]}</div><h3>{c.svc[id].name}</h3></div>
+                  <p>{c.svc[id].text}</p>
+                  <a className="gz-ask" href={gWa(c.askMsg.replace('{s}', c.svc[id].name))} target="_blank" rel="noopener noreferrer">{IC_CHAT}{c.ask}</a>
+                </div>
               </article>
             </li>
           ))}
         </ul>
+        <p className="gz-imgnote">{ui.imgNote}</p>
 
         <h2>{c.stepsH}</h2>
         <ol className="gz-steps">{c.steps.map((s) => (<li key={s}>{s}</li>))}</ol>
