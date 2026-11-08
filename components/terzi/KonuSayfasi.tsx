@@ -1,3 +1,4 @@
+import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import Link from 'next/link';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -35,7 +36,7 @@ export interface KonuData {
   ctaBaslik: string;
 }
 
-export default function KonuSayfasi({ d, kargoFermuar }: { d: KonuData; kargoFermuar?: boolean }) {
+export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuData; kargoFermuar?: boolean; kargoKisa?: boolean }) {
   const url = `${BASE_URL}${d.path}`;
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -183,6 +184,7 @@ export default function KonuSayfasi({ d, kargoFermuar }: { d: KonuData; kargoFer
         </div>
       </section>
       {kargoFermuar && <KargoFermuarKutusu lang="tr" />}
+      {kargoKisa && !kargoFermuar && <KargoKisaNot lang="tr" job={d.name} />}
       <ReviewsBlock lang="tr" schema />
     </main>
   );

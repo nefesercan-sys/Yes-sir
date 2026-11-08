@@ -4,6 +4,7 @@
 // için 4 dilli, veri odaklı sunucu bileşenleri + metadata üreticileri.
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
+import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import { districtAngle, serviceAngle, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
@@ -981,6 +982,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         {HIZMET_GORSEL[s.id] && <OrnekGorselSeridi konu={HIZMET_KONU[s.id] || 'hizmet'} lang={lang} anahtarlar={[...HIZMET_GORSEL[s.id]].reverse()} sayfaUrl={url} base={SITE} />}
 
         {['fermuar', 'abiye', 'gelinlik-abiye', 'mont'].includes(s.id) && <KargoFermuarKutusu lang={lang} />}
+        {s.time === 'repair' && !['fermuar', 'abiye', 'gelinlik-abiye', 'mont'].includes(s.id) && <KargoKisaNot lang={lang} job={s.name[lang]} />}
 
         <Faq lang={lang} items={faq} />
         <Cta lang={lang} waMsg={waMsg} text={u.photoPrice} />

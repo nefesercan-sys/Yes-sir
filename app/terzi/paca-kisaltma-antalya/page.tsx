@@ -1,3 +1,4 @@
+import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -363,6 +364,7 @@ export default function PacaKisaltmaPage() {
             </div>
           </div>
         </section>
+      <KargoKisaNot lang="tr" job="Paça kısaltma" />
       <ReviewsBlock lang="tr" schema />
     </main>
     </>
