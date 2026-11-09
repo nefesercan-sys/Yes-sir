@@ -84,8 +84,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Paça Kısaltma ₺200 · Aynı Gün Teslim | Terzi Can' },
-  description: "Paça kısaltma ücreti 2026: kot ve kumaş pantolon ₺200. Pantolon paçası kaç TL? Aynı gün teslim, otellere servis. 08–23. ☎ +90 531 898 64 18",
+  title: { absolute: 'Paça Kısaltma Kaç TL? 2026 Fiyatı ₺200 · Antalya | Terzi Can' },
+  description: "Pantolon paçası kaç TL? Antalya'da kot ve kumaş pantolon paça kısaltma 200 TL (KDV hariç), normal işler aynı gün, acil 1–2 saat. Fotoğrafı WhatsApp'tan gönderin. 08–23. ☎ +90 531 898 64 18",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
     'kot paça kısaltma Antalya', 'Antalya paça kısaltma kaç lira', 'pantolon boyu kısaltma Antalya',
