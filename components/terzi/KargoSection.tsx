@@ -10,7 +10,7 @@ const GREEN = '#2d8c6e';
 const SOFT = '#f4faf7';
 const BORDER = '#e3ece7';
 
-export default function KargoSection({ lang, id }: { lang: KargoLang; id?: string }) {
+export default function KargoSection({ lang, id, compact }: { lang: KargoLang; id?: string; compact?: boolean }) {
   const c = KARGO[lang];
   const schema = {
     '@context': 'https://schema.org',
@@ -31,10 +31,13 @@ export default function KargoSection({ lang, id }: { lang: KargoLang; id?: strin
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(schema) }} />
       <h2 style={{ color: INK, fontSize: '1.3rem', margin: '0 0 .7rem', lineHeight: 1.3 }}>{c.h}</h2>
       <p style={{ margin: '0 0 .9rem' }}>{c.lead}</p>
-      <p style={{ margin: '0 0 .9rem' }}>{c.scope}</p>
-      <ol style={{ margin: '0 0 1.1rem', paddingInlineStart: '1.3rem' }}>
-        {c.steps.map((s) => <li key={s} style={{ margin: '0 0 .3rem' }}>{s}</li>)}
-      </ol>
+      {/* compact: online sayfa kendi adımlarını ve hizmet kapsamını zaten gösterir; tekrar etme */}
+      {!compact && <p style={{ margin: '0 0 .9rem' }}>{c.scope}</p>}
+      {!compact && (
+        <ol style={{ margin: '0 0 1.1rem', paddingInlineStart: '1.3rem' }}>
+          {c.steps.map((s) => <li key={s} style={{ margin: '0 0 .3rem' }}>{s}</li>)}
+        </ol>
+      )}
       <h3 style={{ color: INK, fontSize: '1.05rem', margin: '0 0 .6rem' }}>{c.faqH}</h3>
       {c.faq.map(([q, a]) => (
         <div key={q} style={{ margin: '0 0 .8rem' }}>
