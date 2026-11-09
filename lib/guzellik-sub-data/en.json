@@ -1,0 +1,385 @@
+{
+ "ui": {
+  "svcLinksH": "More services",
+  "dstLinksH": "Areas",
+  "mainLink": "All beauty services",
+  "allDst": "Salons by area",
+  "waSvc": "Hello, I would like information and a price for {s} in Antalya.",
+  "waDst": "Hello, I would like information and a price for beauty services in {s}.",
+  "rule": "Appointments are made on WhatsApp; the salon and time are confirmed together. The price is given on WhatsApp.",
+  "faqH": "Frequently asked questions",
+  "langH": "Also available in"
+ },
+ "svc": {
+  "hair": {
+   "title": "Hair Salon in Antalya: Cut, Colour, Blow-dry | Can Beauty Studio",
+   "desc": "Hair salon in Antalya for cuts, colour, blow-dry and hair care at partner salons. Message us your area and we direct you; price on WhatsApp.",
+   "h1": "Hair Salon in Antalya: Cut, Colour and Blow-dry",
+   "crumb": "Hair salon",
+   "name": "Hair",
+   "lead": "Tell us on WhatsApp what you want done to your hair and where you are staying, and we will direct you to a partner salon in your area. Cuts, colour, blow-dry and hair care are available; you get the price on WhatsApp.",
+   "fitH": "Who it suits",
+   "fit": [
+    "Visitors who want a fresh cut or a new colour while on holiday.",
+    "Guests who need a blow-dry or styling before a dinner, wedding or party.",
+    "Anyone who wants to look after hair that has had sea, sun and pool."
+   ],
+   "expectH": "How the booking goes",
+   "expect": [
+    "You describe the work; a reference photo of the look you like makes it easier to explain.",
+    "We suggest a partner salon for your area and the day and time are agreed on WhatsApp.",
+    "Day and time are confirmed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "Should I send a photo before a colouring appointment?",
+     "A photo of the shade or style you want speeds up the quote and the booking. The price depends on the details and is given on WhatsApp."
+    ],
+    [
+     "Can I book a cut and a blow-dry together?",
+     "Write both on WhatsApp; availability and the time slot are confirmed with the salon."
+    ],
+    [
+     "Do you also direct men looking for a haircut?",
+     "Send your request and area, and we tell you on WhatsApp whether a salon can take it."
+    ]
+   ]
+  },
+  "nails": {
+   "title": "Nail Salon in Antalya: Manicure, Pedicure | Can Beauty Studio",
+   "desc": "Nail salon in Antalya for manicure, pedicure, gel polish and nail extensions at partner salons. Send your request; price on WhatsApp.",
+   "h1": "Nail Salon in Antalya: Manicure, Pedicure and Gel Polish",
+   "crumb": "Nail salon",
+   "name": "Nails",
+   "lead": "For a manicure, pedicure, gel polish or nail extensions, tell us the service and your area on WhatsApp. We direct you to a partner salon and share the price there.",
+   "fitH": "When it helps",
+   "fit": [
+    "Visitors who want neat, long-lasting nails for the whole holiday.",
+    "Sandal-and-beach weather, when a pedicure is the obvious choice.",
+    "Anyone refreshing colour and shape for a special day."
+   ],
+   "expectH": "What to tell us",
+   "expect": [
+    "Whether you want a manicure, a pedicure, gel polish or extensions.",
+    "A photo of a design you like, if you have one.",
+    "The day and time are agreed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "Are gel polish and nail extensions the same thing?",
+     "No. Gel polish is a long-lasting colour applied to your own nail, while extensions add length. Tell us which one you want."
+    ],
+    [
+     "Can I book a manicure and a pedicure together?",
+     "Yes, write both. Timing and availability are confirmed with the salon on WhatsApp."
+    ],
+    [
+     "Do I have to send a design photo?",
+     "Not required, but showing the style you like helps the salon understand your wish."
+    ]
+   ]
+  },
+  "brows": {
+   "title": "Brow and Lash Care in Antalya | Can Beauty Studio",
+   "desc": "Brow shaping and lash care at partner salons in Antalya. Tell us what you need and where you stay; we direct you, price on WhatsApp.",
+   "h1": "Brow Shaping and Lash Care in Antalya",
+   "crumb": "Brows and lashes",
+   "name": "Brows and lashes",
+   "lead": "For brow shaping or lash care, write the service and your area on WhatsApp and we will direct you to a partner salon. The price and the appointment time are agreed in the same chat.",
+   "fitH": "When people ask for it",
+   "fit": [
+    "Visitors who could not fit a brow appointment in before the trip.",
+    "Guests who want a quick tidy-up around the eyes.",
+    "Brides and party guests who want brows done before makeup."
+   ],
+   "expectH": "What to mention",
+   "expect": [
+    "Brows, lashes or both.",
+    "Any earlier brow or lash treatment you have had.",
+    "The day and time are agreed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "What should I send for a brow or lash appointment?",
+     "Just the service you want and your area. A photo makes your wish clearer."
+    ],
+    [
+     "Can brows be done on the day of my makeup?",
+     "Write both services; the day and time depend on the salon and are confirmed on WhatsApp."
+    ],
+    [
+     "What if I have allergies?",
+     "Please state them in your first message so the salon can take them into account."
+    ]
+   ]
+  },
+  "makeup": {
+   "title": "Makeup Artist in Antalya: Party Makeup | Can Beauty Studio",
+   "desc": "Day, party and evening makeup at partner salons in Antalya. Tell us the event and your area; we direct you, price on WhatsApp.",
+   "h1": "Makeup in Antalya: Day, Party and Evening Looks",
+   "crumb": "Makeup",
+   "name": "Makeup",
+   "lead": "For day, party or evening makeup, write the date and your area on WhatsApp. We direct you to a partner salon and confirm the price and appointment time there.",
+   "fitH": "Which occasions",
+   "fit": [
+    "A gala dinner, birthday or anniversary evening.",
+    "A photo shoot, a wedding you are invited to or a special meeting.",
+    "Holidaymakers who would rather leave their makeup to a professional."
+   ],
+   "expectH": "Before you book",
+   "expect": [
+    "Say what the event is and at what time; the makeup is planned around it.",
+    "You can attach a photo of the look you like.",
+    "Day and time are confirmed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "How early should I book before the event?",
+     "Write as early as you can; availability on that day and time is confirmed on WhatsApp."
+    ],
+    [
+     "Can I bring my own products?",
+     "Salon practice may differ. Mention it in your message and we will tell you."
+    ],
+    [
+     "Can makeup and hair be done in the same booking?",
+     "Write both; we try to direct you to one salon for both when possible."
+    ]
+   ]
+  },
+  "bridal": {
+   "title": "Bridal Hair and Makeup in Antalya | Can Beauty Studio",
+   "desc": "Bridal hair and makeup at partner salons in Antalya. Send your date and area; details and price are agreed on WhatsApp.",
+   "h1": "Bridal Hair and Makeup in Antalya",
+   "crumb": "Bridal hair and makeup",
+   "name": "Bridal hair and makeup",
+   "lead": "For bridal hair and makeup in Antalya, send your wedding date and area on WhatsApp. We direct you to a suitable partner salon and discuss the details and the price offer there.",
+   "fitH": "Who it is for",
+   "fit": [
+    "Couples marrying or renewing vows in Antalya.",
+    "Brides who want hair and makeup done before the ceremony or photos.",
+    "Family and friends who want to get ready alongside the bride."
+   ],
+   "expectH": "What we need from you",
+   "expect": [
+    "Ceremony date, time and area, plus reference photos if you have them.",
+    "How many people besides the bride need styling.",
+    "Details and price are discussed on WhatsApp; the salon and time are confirmed together."
+   ],
+   "faq": [
+    [
+     "How early should I write before the wedding?",
+     "As soon as the date is set. Availability changes with the date and is confirmed on WhatsApp."
+    ],
+    [
+     "Are bridal hair and makeup done at the same salon?",
+     "Write both together; we try to plan them at one salon."
+    ],
+    [
+     "Is a trial possible?",
+     "That depends on the salon. Ask on WhatsApp and we will tell you."
+    ]
+   ]
+  },
+  "skin": {
+   "title": "Facial and Skin Care in Antalya | Can Beauty Studio",
+   "desc": "Facial cleansing and skin care at partner salons in Antalya. Non-medical beauty care; tell us your area, price on WhatsApp.",
+   "h1": "Facial and Skin Care in Antalya",
+   "crumb": "Skin care",
+   "name": "Skin care",
+   "lead": "For facial cleansing and skin care, write the service and your area on WhatsApp and we will direct you to a partner salon. This is beauty care only, not a medical service.",
+   "fitH": "Why people choose it",
+   "fit": [
+    "To rest and refresh skin after a day or two in the summer sun.",
+    "To prepare the face before an important evening.",
+    "To set aside one day of the holiday for yourself."
+   ],
+   "expectH": "Good to know",
+   "expect": [
+    "Mention your skin type and any sensitivities in the message.",
+    "No medical treatment is given; only beauty care and cleansing.",
+    "The day, time and price are agreed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "Is skin care a medical treatment?",
+     "No. It is beauty care and cleansing only. For health problems please see a doctor."
+    ],
+    [
+     "My skin is sensitive, what should I do?",
+     "Tell us about the sensitivity and the products you use when you book; the salon plans the care accordingly."
+    ],
+    [
+     "Can I have skin care before makeup?",
+     "Yes, write both services; the order and time are agreed on WhatsApp."
+    ]
+   ]
+  },
+  "wax": {
+   "title": "Waxing in Antalya: Body and Face Waxing | Can Beauty Studio",
+   "desc": "Body and face waxing at partner salons in Antalya. Tell us the areas and where you stay; we direct you, price on WhatsApp.",
+   "h1": "Waxing in Antalya: Body and Face",
+   "crumb": "Waxing",
+   "name": "Waxing",
+   "lead": "For body or face waxing, tell us the areas you want and where you are staying on WhatsApp. We direct you to a partner salon and agree the price and time in the same chat.",
+   "fitH": "Why wax on holiday",
+   "fit": [
+    "Visitors who want smooth skin before beach and pool days.",
+    "Guests who want a quick facial waxing.",
+    "Travellers who would rather not pack their own waxing kit."
+   ],
+   "expectH": "Before the appointment",
+   "expect": [
+    "List the areas you would like waxed.",
+    "Mention skin sensitivity or an earlier reaction, if any.",
+    "The day and time are agreed on WhatsApp; the salon details are shared when you book."
+   ],
+   "faq": [
+    [
+     "Which areas can be waxed?",
+     "Body and face waxing are available. Tell us the areas and the salon confirms."
+    ],
+    [
+     "Can I wax if I have sunburn?",
+     "If your skin is burnt or irritated, say so. The salon decides whether waxing is suitable."
+    ],
+    [
+     "Can waxing be combined with other services on the same day?",
+     "Yes, write them together; availability is confirmed with the salon on WhatsApp."
+    ]
+   ]
+  }
+ },
+ "dst": {
+  "lara": {
+   "name": "Lara",
+   "title": "Beauty Salon in Lara, Antalya: Hair, Nails | Can Beauty Studio",
+   "desc": "Staying in Lara? We direct you to partner salons for hair, nails, makeup and bridal styling. Address shared at booking; price on WhatsApp.",
+   "h1": "Beauty Salon in Lara, Antalya: Hair, Nails and Makeup",
+   "crumb": "Lara",
+   "lead": "Staying in Lara? Write the service and day on WhatsApp and we will direct you to a partner salon in the area. The salon address is shared when you book, and the price is given on WhatsApp.",
+   "whoH": "Beauty care in Lara",
+   "who": "Lara lies on Antalya's eastern coast and has many holiday hotels. If you want hair, nails or makeup added to your programme, write the service on WhatsApp; we have partner salons and the address is shared when you book.",
+   "popH": "Services to ask about in Lara",
+   "pop": [
+    "Hair and makeup for an evening dinner or gala.",
+    "Manicure and pedicure for beach weather.",
+    "Brow and lash care that fits into a short stay."
+   ],
+   "faq": [
+    [
+     "How do I book from Lara?",
+     "Write your area and the service you want on WhatsApp. We have partner salons; the address is shared when you book."
+    ],
+    [
+     "Which services can I ask about for Lara?",
+     "Hair, nails, brows and lashes, makeup, bridal styling, skin care and waxing. The price is given on WhatsApp."
+    ]
+   ]
+  },
+  "belek": {
+   "name": "Belek",
+   "title": "Beauty Salon in Belek: Bridal, Hair, Makeup | Can Beauty Studio",
+   "desc": "Staying in Belek? We direct you to partner salons for hair, makeup, bridal styling and nails. Address shared at booking; price on WhatsApp.",
+   "h1": "Beauty Salon in Belek: Hair, Makeup and Bridal Styling",
+   "crumb": "Belek",
+   "lead": "Staying in Belek? Tell us the service and the day you prefer on WhatsApp. We direct you to a partner salon in the area, share its address when you book and give the price on WhatsApp.",
+   "whoH": "Planning in Belek",
+   "who": "Belek belongs to the Serik district and is known for its golf courses and large resort complexes. The day and time are set on WhatsApp; we have partner salons and the address is shared when you book.",
+   "popH": "Services to consider in Belek",
+   "pop": [
+    "Bridal hair and makeup for a wedding or ceremony.",
+    "Hair styling and makeup ahead of a party.",
+    "Gel polish and nail care for the whole stay."
+   ],
+   "faq": [
+    [
+     "Can bridal styling be arranged for my wedding in Belek?",
+     "Send your date on WhatsApp. Availability and details are confirmed for that date."
+    ],
+    [
+     "Where are the salons in Belek?",
+     "Partner salon addresses are not published on the page; they are shared on WhatsApp at booking."
+    ]
+   ]
+  },
+  "kemer": {
+   "name": "Kemer",
+   "title": "Beauty Salon in Kemer: Skin Care, Brows, Hair | Can Beauty Studio",
+   "desc": "Staying in Kemer? We direct you to partner salons for hair, brows and lashes, skin care and makeup. Address at booking; price on WhatsApp.",
+   "h1": "Beauty Salon in Kemer: Care, Hair and Makeup",
+   "crumb": "Kemer",
+   "lead": "On holiday in Kemer? Write the service you want on WhatsApp and we will direct you to a partner salon in the area. The day, time, address and price are all settled in the same conversation.",
+   "whoH": "Who writes from Kemer",
+   "who": "Kemer is a resort area on Antalya's west coast, where the sea meets the mountains. After hot summer days, many holidaymakers like to give one day to care, such as skin care, brows and lashes or a hair refresh.",
+   "popH": "Care options in Kemer",
+   "pop": [
+    "Skin cleansing and care.",
+    "Brow shaping and lash care.",
+    "Hair cut, colour and blow-dry."
+   ],
+   "faq": [
+    [
+     "How do I book in Kemer?",
+     "Write the service and day on WhatsApp. The salon and time are confirmed together; the address is shared when you book."
+    ],
+    [
+     "Is skin care a medical treatment?",
+     "No, it is beauty care and cleansing only."
+    ]
+   ]
+  },
+  "side": {
+   "name": "Side",
+   "title": "Beauty Salon in Side: Nails, Waxing, Makeup | Can Beauty Studio",
+   "desc": "Staying in Side or Manavgat? We direct you to partner salons for nails, waxing, hair and makeup. Address at booking; price on WhatsApp.",
+   "h1": "Beauty Salon in Side: Nails, Waxing and Makeup",
+   "crumb": "Side",
+   "lead": "Staying in Side or Manavgat? Tell us the service and your area on WhatsApp. We direct you to a partner salon, and the address, time and price are shared on WhatsApp.",
+   "whoH": "Planning in Side",
+   "who": "Side is a coastal town in the Manavgat district, known for its ancient ruins and wide beaches. After a day of sightseeing or beach, you can book nails, waxing, hair or makeup at a partner salon.",
+   "popH": "What fits a stay in Side",
+   "pop": [
+    "Manicure, pedicure and gel polish.",
+    "Body waxing before the beach.",
+    "Hair and makeup for an evening after sightseeing."
+   ],
+   "faq": [
+    [
+     "What should I write to find a salon in Side?",
+     "Your accommodation area (Side, Kumköy, Sorgun and so on), the service and the day. We tell you which salon suits."
+    ],
+    [
+     "Does this page also apply to Manavgat?",
+     "Yes, you can write from the Manavgat area to the same number."
+    ]
+   ]
+  },
+  "konyaalti": {
+   "name": "Konyaaltı",
+   "title": "Beauty Salon in Konyaaltı, Antalya | Can Beauty Studio",
+   "desc": "In Konyaaltı? We direct you to partner salons for hair, nails, makeup and skin care. Address shared at booking; price on WhatsApp.",
+   "h1": "Beauty Salon in Konyaaltı: Hair, Nails and Care",
+   "crumb": "Konyaaltı",
+   "lead": "Staying or living in Konyaaltı? Write the service and your preferred day on WhatsApp. We direct you to a partner salon in the area and share the address, time and price there.",
+   "whoH": "Beauty care in Konyaaltı",
+   "who": "Konyaaltı is a district west of the city centre, known for its long pebble beach. Both visitors and residents can ask for hair, nails, makeup, skin care and waxing.",
+   "popH": "What people can ask for in Konyaaltı",
+   "pop": [
+    "Hair colour and cuts.",
+    "Skin care and cleansing.",
+    "Brows, lashes and waxing."
+   ],
+   "faq": [
+    [
+     "Can residents of Konyaaltı book too?",
+     "Yes. Like visitors, residents can write the service and the day on WhatsApp."
+    ],
+    [
+     "Is the salon name shown on the page?",
+     "No. Partner salon names are not published; details are shared when you book."
+    ]
+   ]
+  }
+ }
+}

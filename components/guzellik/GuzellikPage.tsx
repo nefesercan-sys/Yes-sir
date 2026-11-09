@@ -8,9 +8,11 @@ import {
   type SvcId,
   gAbs, gLanguages, gUrl, gWa, type GLang,
 } from '@/lib/guzellik';
+import { SUB, subPath } from '@/lib/guzellik-sub';
+import { G_SUB_DST_IDS, G_SUB_LANGS, G_SUB_SVC_IDS, type GSubLang } from '@/lib/guzellik-slugs';
 import GuzellikForm from './GuzellikForm';
 
-const ROBOTS = { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' as const, 'max-snippet': -1 } };
+export const ROBOTS = { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' as const, 'max-snippet': -1 } };
 
 export function guzellikMetadata(lang: GLang): Metadata {
   const c = G[lang];
@@ -79,7 +81,7 @@ function schema(lang: GLang) {
 }
 
 // Tasarım: inci pembesi zemin, koyu erik vurgu, antik altın çizgi; ayna kemeri (arch) motifi. Saf CSS/SVG, ek font veya görsel yok.
-const CSS = `
+export const CSS = `
 .gz{--bg:#fbf6f7;--sf:#ffffff;--tx:#2a1622;--mu:#6a5560;--bd:#ead9df;--pl:#6b1d4a;--plt:#f3e3ea;--gd:#8a6420;--gdl:#c9a45c;--wa:#15803d;--hero1:#f7e6ee;--hero2:#fbf6f7;--hero3:#f3e7d0;--bar:#ffffffee;color-scheme:light;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.65}
 .dark .gz{--bg:#150e13;--sf:#201720;--tx:#f7eef3;--mu:#cdb9c3;--bd:#43303b;--pl:#f0b4d2;--plt:#33202c;--gd:#d9b36a;--gdl:#d9b36a;--wa:#15803d;--hero1:#2d1626;--hero2:#150e13;--hero3:#2b2216;--bar:#201720ee;color-scheme:dark}
 .gz{overflow-x:clip}
@@ -176,7 +178,7 @@ const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLineca
 const Svg = ({ d, size = 24, children }: { d?: string; size?: number; children?: ReactNode }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false" {...P}>{d ? <path d={d} /> : children}</svg>
 );
-const ICONS: Record<SvcId, ReactNode> = {
+export const ICONS: Record<SvcId, ReactNode> = {
   hair: <Svg d="M4 8c3-3 5 3 8 0s5 3 8 0M4 14c3-3 5 3 8 0s5 3 8 0M4 20c3-3 5 3 8 0s5 3 8 0" />,
   nails: <Svg d="M8 11h8v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-8zM10 11V6h4v5M11 3h2v3h-2z" />,
   brows: <Svg><path d="M2 14c3-5 7-7 10-7s7 2 10 7c-3 5-7 7-10 7S5 19 2 14z" /><circle cx="12" cy="14" r="3" /><path d="M5 5c4-2 10-2 14 0" /></Svg>,
@@ -185,16 +187,16 @@ const ICONS: Record<SvcId, ReactNode> = {
   skin: <Svg d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z" />,
   wax: <Svg d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z" />,
 };
-const IC_PIN = <Svg d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />;
-const IC_CLOCK = <Svg><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></Svg>;
-const IC_GLOBE = <Svg><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></Svg>;
-const IC_CHAT = <Svg d="M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6L4 20z" />;
-const IC_PHONE = <Svg d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />;
-const IC_CHECK = <Svg size={18} d="M5 12.5l4.5 4.5L19 7.5" />;
-const IC_STAR = <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" /></svg>;
+export const IC_PIN = <Svg d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />;
+export const IC_CLOCK = <Svg><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></Svg>;
+export const IC_GLOBE = <Svg><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></Svg>;
+export const IC_CHAT = <Svg d="M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6L4 20z" />;
+export const IC_PHONE = <Svg d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />;
+export const IC_CHECK = <Svg size={18} d="M5 12.5l4.5 4.5L19 7.5" />;
+export const IC_STAR = <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" /></svg>;
 const TRUST_ICONS = [IC_PIN, IC_CLOCK, IC_GLOBE, IC_CHAT];
 // Temsilî (yapay zekâ ile üretilmiş) hizmet görselleri: /public/guzellik/*.webp. Gerçek boyutlar width/height için; kırpma konumu yüzleri korur.
-const IMG: Record<SvcId, { f: string; w: number; h: number; pos: string }> = {
+export const IMG: Record<SvcId, { f: string; w: number; h: number; pos: string }> = {
   hair: { f: 'sac', w: 425, h: 309, pos: 'center 22%' },
   nails: { f: 'tirnak', w: 489, h: 238, pos: 'center 50%' },
   brows: { f: 'kas-kirpik', w: 489, h: 220, pos: 'center 45%' },
@@ -208,6 +210,7 @@ export default function GuzellikPage({ lang }: { lang: GLang }) {
   const c = G[lang];
   const ui = G_UI[lang];
   const services = SVC_IDS.map((id) => ({ id, name: c.svc[id].name }));
+  const subLang = (G_SUB_LANGS as string[]).includes(lang) ? (lang as GSubLang) : null;
   return (
     <main className="gz" lang={lang} dir={c.rtl ? 'rtl' : 'ltr'}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
@@ -268,6 +271,19 @@ export default function GuzellikPage({ lang }: { lang: GLang }) {
 
         <h2>{c.stepsH}</h2>
         <ol className="gz-steps">{c.steps.map((s) => (<li key={s}>{s}</li>))}</ol>
+
+        {subLang && (
+          <>
+            <h2>{SUB[subLang].ui.svcLinksH}</h2>
+            <ul className="gz-langs">
+              {G_SUB_SVC_IDS.map((id) => (<li key={id}><a href={subPath({ kind: 'svc', id, lang: subLang })}>{SUB[subLang].svc[id].crumb}</a></li>))}
+            </ul>
+            <h2>{SUB[subLang].ui.allDst}</h2>
+            <ul className="gz-langs">
+              {G_SUB_DST_IDS.map((id) => (<li key={id}><a href={subPath({ kind: 'dst', id, lang: subLang })}>{SUB[subLang].dst[id].name}</a></li>))}
+            </ul>
+          </>
+        )}
 
         <h2>{c.placeH}</h2>
         <div className="gz-place">{IC_PIN}<div>{c.place.slice(1).map((p) => (<p key={p}>{p}</p>))}</div></div>
