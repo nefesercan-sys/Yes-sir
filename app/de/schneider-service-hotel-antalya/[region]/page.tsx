@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   if (!r) return {};
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
-  const title = `Änderungsschneiderei ${r.name} | Hotel-Service & Abholung`;
-  const desc = `Schnelle Kleiderreparatur im Urlaub? Terzi Can bietet professionelle Änderungsschneiderei mit Abholung und Lieferung in den Hotels von ${r.name}. Kontaktieren Sie uns über WhatsApp!`;
+  const title = `Änderungsschneiderei ${r.name}: Hotelabholung gratis | Terzi Can`;
+  const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel kostenlos, Kürzen ab ₺200 (~10 €), Dauer je nach Arbeit. Foto per WhatsApp auf Deutsch senden.`;
   const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
 
   return {
@@ -110,6 +110,13 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         maps={MAPS} 
         seoContent={seoContent} 
       />
+      <nav aria-label="Weiterführende Seiten" style={{ maxWidth: 760, margin: '1.5rem auto', padding: '0 1rem', fontSize: '.92rem', lineHeight: 1.7 }}>
+        <strong>Mehr zum Hotel-Service:</strong>{' '}
+        <a href="/de/so-funktioniert-hotel-schneider-antalya">So funktioniert der Hotel-Schneider</a>
+        {' · '}<a href="/de/online-schneiderservice-antalya">Änderungen per Post</a>
+        {' · '}<a href="/de/haeufige-fragen-schneider-antalya">Häufige Fragen</a>
+        {' · '}<a href="/de/kontakt-schneider-antalya">Kontakt</a>
+      </nav>
       <ReviewsBlock lang="de" schema />
     </>
   );
