@@ -29,10 +29,10 @@ const GBP1 = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Schneider Antalya: Foto senden, Preis erhalten | Terzi Can' },
+  title: { absolute: 'Schneider per Post: Kleidung nach Antalya schicken | Terzi Can' },
   description:
-    'Online-Schneiderservice in Konyaaltı: Herren- & Damenschneiderei, Reparaturen, Änderungen. ' +
-    'Schneider zu Ihnen ins Hotel oder nach Hause in Antalya. ☎ ' + PHONE,
+    'Kleidung per Post nach Antalya schicken: Reparatur und Änderung, Rücksendung per Versand. ' +
+    'Versandkosten trägt der Kunde. Details per WhatsApp. ☎ ' + PHONE,
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
     'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',
