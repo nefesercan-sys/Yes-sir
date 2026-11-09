@@ -1,6 +1,6 @@
 // swaphubs.com — iletişim (WhatsApp / telefon) tıklama ölçümü için saf yardımcılar.
 // Kişisel veri YOK: yalnızca dil kodu, sayfa yolu ve marka. Çerez veya yerel depolama kullanılmaz.
-import { G_PREFIX, gSlugToLang } from './guzellik-slugs';
+import { G_PREFIX, gAnySlugToLang } from './guzellik-slugs';
 
 export type ContactType = 'whatsapp' | 'phone';
 export type ContactBrand = 'tailor' | 'beauty';
@@ -12,7 +12,7 @@ const BEAUTY_WA = '905315104458';
 export function langFromPath(pathname: string): string {
   const p = (pathname || '/').toLowerCase().replace(/\/+$/, '');
   const seg = p.split('/').filter(Boolean);
-  if (seg[0] === G_PREFIX.slice(1)) return (seg[1] && gSlugToLang(seg[1])) || 'tr';
+  if (seg[0] === G_PREFIX.slice(1)) return (seg[1] && gAnySlugToLang(seg[1])) || 'tr';
   if (seg[0] && NON_TR.includes(seg[0])) return seg[0];
   if (seg[0] === 'online-tailor-service') return 'en';
   return 'tr';

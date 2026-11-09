@@ -1,0 +1,385 @@
+{
+ "ui": {
+  "svcLinksH": "Diğer hizmetler",
+  "dstLinksH": "Bölgeler",
+  "mainLink": "Tüm güzellik hizmetleri",
+  "allDst": "Bölgeye göre salon",
+  "waSvc": "Merhaba, Antalya'da {s} için bilgi ve fiyat almak istiyorum.",
+  "waDst": "Merhaba, {s} bölgesinde güzellik hizmeti için bilgi ve fiyat almak istiyorum.",
+  "rule": "Randevu WhatsApp'tan alınır; salon ve saat birlikte netleştirilir. Fiyat WhatsApp'tan verilir.",
+  "faqH": "Sık sorulan sorular",
+  "langH": "Diğer dillerde"
+ },
+ "svc": {
+  "hair": {
+   "title": "Antalya Kuaför: Saç Kesim, Boya, Fön | Can Beauty Studio",
+   "desc": "Antalya'da saç kesimi, boya, fön ve saç bakımı için anlaşmalı salonlar. Hizmeti ve bölgeyi yazın, salona yönlendirelim; fiyat WhatsApp'tan.",
+   "h1": "Antalya'da Kuaför: Saç Kesimi, Boya ve Fön",
+   "crumb": "Kuaför",
+   "name": "Saç",
+   "lead": "Saç için istediğiniz işlemi ve konakladığınız bölgeyi WhatsApp'tan yazın; sizi bölgenizdeki anlaşmalı bir salona yönlendirelim. Kesim, boya, fön ve saç bakımı yapılır; fiyatı WhatsApp'tan öğrenirsiniz.",
+   "fitH": "Kimler için uygun?",
+   "fit": [
+    "Tatilde saçını yenilemek ya da rengini değiştirmek isteyenler.",
+    "Akşam yemeği, düğün veya bir davet öncesi fön ve saç düzeni isteyenler.",
+    "Deniz, güneş ve havuz sonrası saç bakımına vakit ayırmak isteyenler."
+   ],
+   "expectH": "Randevu nasıl ilerler?",
+   "expect": [
+    "Yaptırmak istediğiniz işlemi yazarsınız; örnek bir saç fotoğrafı eklemek isteğinizi anlatmayı kolaylaştırır.",
+    "Konakladığınız bölgeye göre anlaşmalı salon önerilir; gün ve saat WhatsApp'tan netleşir.",
+    "Gün ve saat WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Boya için önceden fotoğraf göndermeli miyim?",
+     "İstediğiniz rengin ya da modelin fotoğrafını göndermeniz fiyat teklifini ve randevuyu hızlandırır. Fiyat işin ayrıntısına göre WhatsApp'tan verilir."
+    ],
+    [
+     "Kesim ve fönü aynı randevuda yaptırabilir miyim?",
+     "İstediğiniz işlemleri WhatsApp'tan birlikte yazın; uygunluk ve randevu saati salona göre netleştirilir."
+    ],
+    [
+     "Erkek saçı için de yönlendirme yapıyor musunuz?",
+     "İsteğinizi ve bölgenizi yazın; salonun uygun olup olmadığı WhatsApp'tan size bildirilir."
+    ]
+   ]
+  },
+  "nails": {
+   "title": "Antalya Manikür Pedikür, Kalıcı Oje | Can Beauty Studio",
+   "desc": "Antalya'da manikür, pedikür, kalıcı oje ve protez tırnak için anlaşmalı salonlar. Talebinizi yazın, salona yönlendirelim; fiyat WhatsApp'tan.",
+   "h1": "Antalya'da Tırnak Bakımı: Manikür, Pedikür ve Kalıcı Oje",
+   "crumb": "Tırnak",
+   "name": "Tırnak",
+   "lead": "Manikür, pedikür, kalıcı oje ya da protez tırnak istiyorsanız hizmeti ve bölgenizi WhatsApp'tan yazın. Bölgenizdeki anlaşmalı salona yönlendirir, fiyat bilgisini WhatsApp'tan paylaşırız.",
+   "fitH": "Hangi durumlarda tercih edilir?",
+   "fit": [
+    "Tatil boyunca bakımlı ve dayanıklı bir tırnak görünümü isteyenler.",
+    "Sandalet ve plaj döneminde ayak bakımı, pedikür yaptırmak isteyenler.",
+    "Özel bir gün için tırnaklarını renk ve şekil olarak yenilemek isteyenler."
+   ],
+   "expectH": "Başvuru nasıl yapılır?",
+   "expect": [
+    "Manikür mü pedikür mü, kalıcı oje ya da protez mi istediğinizi yazarsınız.",
+    "Beğendiğiniz bir tasarım varsa fotoğrafını gönderebilirsiniz.",
+    "Randevu günü ve saati WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Kalıcı oje ile protez tırnak aynı şey mi?",
+     "Hayır. Kalıcı oje mevcut tırnağınıza uygulanan dayanıklı bir ojedir; protez tırnak ise tırnağı uzatmak için yapılır. Hangisini istediğinizi yazmanız yeterli."
+    ],
+    [
+     "Manikür ve pedikürü birlikte isteyebilir miyim?",
+     "Evet, iki işlemi birlikte yazabilirsiniz. Süre ve uygunluk salona göre WhatsApp'tan netleşir."
+    ],
+    [
+     "Tasarım fotoğrafı göndermem şart mı?",
+     "Şart değil ama beğendiğiniz modeli göstermek isteğinizin doğru anlaşılmasını sağlar."
+    ]
+   ]
+  },
+  "brows": {
+   "title": "Antalya Kaş ve Kirpik Bakımı | Can Beauty Studio",
+   "desc": "Antalya'da kaş şekillendirme ve kirpik bakımı için anlaşmalı salonlar. İsteğinizi ve bölgenizi yazın, yönlendirelim; fiyat WhatsApp'tan.",
+   "h1": "Antalya'da Kaş ve Kirpik Bakımı",
+   "crumb": "Kaş ve kirpik",
+   "name": "Kaş ve kirpik",
+   "lead": "Kaş şekillendirme ya da kirpik bakımı için WhatsApp'tan isteğinizi ve konakladığınız bölgeyi yazın; anlaşmalı bir salona yönlendirelim. Fiyatı ve randevu saatini yine WhatsApp'tan konuşuruz.",
+   "fitH": "Ne zaman akla gelir?",
+   "fit": [
+    "Tatile çıkmadan yapamadığı kaş bakımını yerinde yaptırmak isteyenler.",
+    "Göz çevresi için kısa bir düzenleme isteyenler.",
+    "Makyaj ya da gelin hazırlığından önce kaşını toparlamak isteyenler."
+   ],
+   "expectH": "Neleri belirtmelisiniz?",
+   "expect": [
+    "Kaş mı kirpik mi, yoksa ikisi mi istediğinizi yazarsınız.",
+    "Önceki bir kaş ya da kirpik uygulamanız varsa bunu not edersiniz.",
+    "Gün ve saat WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Kaş ve kirpik için hangi bilgiyi göndermeliyim?",
+     "Hangi işlemi istediğinizi ve konakladığınız bölgeyi yazmanız yeterli. Fotoğraf eklemek isteğinizi netleştirir."
+    ],
+    [
+     "Makyajla aynı gün kaş bakımı olur mu?",
+     "İki hizmeti birlikte yazın; gün ve saat uygunluğu salona göre WhatsApp'tan netleşir."
+    ],
+    [
+     "Alerjim varsa ne yapmalıyım?",
+     "Randevu mesajında alerjinizi mutlaka yazın. Uygulamayı yapacak salon bu bilgiyi dikkate almalıdır."
+    ]
+   ]
+  },
+  "makeup": {
+   "title": "Antalya Makyaj: Davet ve Gece Makyajı | Can Beauty Studio",
+   "desc": "Antalya'da günlük, davet ve gece makyajı için anlaşmalı salonlar. İstediğiniz makyajı ve bölgenizi yazın; fiyat WhatsApp'tan verilir.",
+   "h1": "Antalya'da Makyaj: Günlük, Davet ve Gece",
+   "crumb": "Makyaj",
+   "name": "Makyaj",
+   "lead": "Günlük, davet ya da gece makyajı istiyorsanız tarihi ve bölgenizi WhatsApp'tan yazın. Bölgenizdeki anlaşmalı salona yönlendirir, fiyatı ve randevu saatini WhatsApp'tan netleştiririz.",
+   "fitH": "Hangi etkinlikler için?",
+   "fit": [
+    "Gala yemeği, doğum günü ya da yıl dönümü akşamı için.",
+    "Fotoğraf çekimi, düğün konukluğu veya özel bir buluşma öncesi.",
+    "Tatilde makyajını kendi yapmak yerine uzmana bırakmak isteyenler için."
+   ],
+   "expectH": "Randevu öncesi hazırlık",
+   "expect": [
+    "Etkinliğin türünü ve saatini yazın; makyaj bu saate göre planlanır.",
+    "Beğendiğiniz bir makyaj görünümünün fotoğrafını ekleyebilirsiniz.",
+    "Gün ve saat WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Etkinlikten ne kadar önce randevu almalıyım?",
+     "Mümkün olduğunca erken yazın; salonun o gün ve saatteki uygunluğu WhatsApp'tan netleştirilir."
+    ],
+    [
+     "Kendi ürünlerimle gelebilir miyim?",
+     "Bu konuda salonun uygulaması farklı olabilir; randevu mesajında istediğinizi yazın, size bilgi verilir."
+    ],
+    [
+     "Makyaj ile saç aynı randevuda olur mu?",
+     "İkisini birlikte yazın; uygunluğa göre aynı salona yönlendirmeye çalışırız."
+    ]
+   ]
+  },
+  "bridal": {
+   "title": "Antalya Gelin Saçı ve Makyajı | Can Beauty Studio",
+   "desc": "Antalya'da gelin saçı ve gelin makyajı için anlaşmalı salonlar. Tarihi ve bölgenizi yazın; ayrıntılar ve fiyat WhatsApp'tan konuşulur.",
+   "h1": "Antalya'da Gelin Saçı ve Gelin Makyajı",
+   "crumb": "Gelin saçı ve makyajı",
+   "name": "Gelin saçı ve makyajı",
+   "lead": "Antalya'da gelin saçı ve makyajı için düğün tarihinizi ve bölgenizi WhatsApp'tan yazın. Anlaşmalı salonlardan size uygun olanına yönlendirir, ayrıntıları ve fiyat teklifini WhatsApp'tan konuşuruz.",
+   "fitH": "Kimler için?",
+   "fit": [
+    "Antalya'da düğün, nikâh ya da evlilik yıl dönümü yapacak çiftler.",
+    "Düğün fotoğrafı veya tören öncesi gelin hazırlığı isteyenler.",
+    "Gelinle birlikte hazırlanmak isteyen yakınlar."
+   ],
+   "expectH": "Bilgi vermeniz gerekenler",
+   "expect": [
+    "Tören tarihi, saati ve bölgesi; mümkünse örnek saç ve makyaj fotoğrafları.",
+    "Gelin dışında kaç kişinin hazırlanacağı.",
+    "Ayrıntılar ve fiyat WhatsApp'tan konuşulur; salon ve saat birlikte netleştirilir."
+   ],
+   "faq": [
+    [
+     "Düğün tarihimden ne kadar önce yazmalıyım?",
+     "Tarih sabitlenir sabitlenmez yazmanız en iyisidir; uygunluk tarihe göre değişir ve WhatsApp'tan netleştirilir."
+    ],
+    [
+     "Gelin saçı ve makyajı aynı salonda mı yapılır?",
+     "Birlikte yazın; mümkünse ikisini aynı salonda planlamaya çalışırız."
+    ],
+    [
+     "Prova yapılabilir mi?",
+     "Bu konuda salonun imkânı değişebilir; WhatsApp'ta istediğinizi yazın, size bilgi verilir."
+    ]
+   ]
+  },
+  "skin": {
+   "title": "Antalya Cilt Bakımı | Can Beauty Studio",
+   "desc": "Antalya'da cilt temizliği ve bakım uygulamaları için anlaşmalı salonlar. Tıbbi olmayan bakım; bölgenizi yazın, fiyat WhatsApp'tan.",
+   "h1": "Antalya'da Cilt Bakımı",
+   "crumb": "Cilt bakımı",
+   "name": "Cilt bakımı",
+   "lead": "Cilt temizliği ve bakım uygulamaları için hizmeti ve bölgenizi WhatsApp'tan yazın. Anlaşmalı salonlardan size yakın olanına yönlendiririz. Bu hizmet tıbbi değil, yalnızca güzellik bakımıdır.",
+   "fitH": "Ne için tercih edilir?",
+   "fit": [
+    "Yaz güneşinden sonra cildini dinlendirmek ve toparlamak isteyenler.",
+    "Önemli bir akşamdan önce yüzüne hazırlık yapmak isteyenler.",
+    "Tatilin bir gününü kendine bakım için ayırmak isteyenler."
+   ],
+   "expectH": "Bilmeniz gerekenler",
+   "expect": [
+    "Cilt tipinizi ve varsa hassasiyetlerinizi mesajda belirtin.",
+    "Tıbbi tedavi ya da sağlık amaçlı işlem yapılmaz; yalnızca bakım uygulamaları vardır.",
+    "Gün, saat ve fiyat WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Cilt bakımı tıbbi bir işlem mi?",
+     "Hayır. Yalnızca güzellik amaçlı bakım ve temizlik uygulamalarıdır; sağlık sorunları için bir hekime başvurmalısınız."
+    ],
+    [
+     "Cildim hassas, ne yapmalıyım?",
+     "Randevu mesajında hassasiyetinizi ve kullandığınız ürünleri yazın; salon uygulamayı buna göre planlar."
+    ],
+    [
+     "Cilt bakımını makyajdan önce yaptırabilir miyim?",
+     "Evet, iki hizmeti birlikte yazabilirsiniz; sıra ve saat salona göre WhatsApp'tan belirlenir."
+    ]
+   ]
+  },
+  "wax": {
+   "title": "Antalya Ağda: Vücut ve Yüz Ağdası | Can Beauty Studio",
+   "desc": "Antalya'da vücut ve yüz ağdası için anlaşmalı salonlar. Bölgenizi ve istediğiniz bölümü yazın; fiyat WhatsApp'tan verilir.",
+   "h1": "Antalya'da Ağda: Vücut ve Yüz",
+   "crumb": "Ağda",
+   "name": "Ağda",
+   "lead": "Vücut ya da yüz ağdası için hangi bölgeyi istediğinizi ve konakladığınız yeri WhatsApp'tan yazın. Anlaşmalı salona yönlendirir; fiyat ve randevu saatini WhatsApp'tan netleştiririz.",
+   "fitH": "Tatilde neden ağda?",
+   "fit": [
+    "Plaj ve havuz günlerinden önce pürüzsüz bir görünüm isteyenler.",
+    "Yüz bölgesi için kısa bir bakım isteyenler.",
+    "Tatil bavulunda ağda ürünü taşımak istemeyenler."
+   ],
+   "expectH": "Randevudan önce",
+   "expect": [
+    "Hangi bölgelere ağda istediğinizi listeleyin.",
+    "Cilt hassasiyetiniz ya da daha önce yaşadığınız bir reaksiyon varsa yazın.",
+    "Gün ve saat WhatsApp'tan netleşir; salon bilgisi randevuda paylaşılır."
+   ],
+   "faq": [
+    [
+     "Hangi bölgeler için ağda yapılıyor?",
+     "Vücut ve yüz ağdası yapılır. İstediğiniz bölgeleri yazarsanız salona göre netleştirilir."
+    ],
+    [
+     "Güneş yanığı varken ağda yaptırabilir miyim?",
+     "Ciltte yanık ya da tahriş varsa bunu mutlaka yazın; salon uygulamanın uygun olup olmadığına karar verir."
+    ],
+    [
+     "Ağdayı başka hizmetlerle aynı gün yaptırabilir miyim?",
+     "Evet, birlikte yazabilirsiniz; uygunluk salona göre WhatsApp'tan netleşir."
+    ]
+   ]
+  }
+ },
+ "dst": {
+  "lara": {
+   "name": "Lara",
+   "title": "Lara Güzellik Salonu: Saç, Tırnak, Makyaj | Can Beauty Studio",
+   "desc": "Lara'da kalıyorsanız saç, tırnak, makyaj ve gelin hazırlığı için anlaşmalı salona yönlendiriliriz. Adres randevuda paylaşılır; fiyat WhatsApp'tan.",
+   "h1": "Lara'da Güzellik Salonu: Saç, Tırnak ve Makyaj",
+   "crumb": "Lara",
+   "lead": "Lara'da konaklıyorsanız hizmeti ve gününüzü WhatsApp'tan yazın; bölgedeki anlaşmalı salona yönlendirelim. Salon adresi randevu aşamasında paylaşılır, fiyat WhatsApp'tan verilir.",
+   "whoH": "Lara'da bu hizmetler",
+   "who": "Lara, Antalya'nın doğu kıyısında birçok tatil otelinin bulunduğu bir bölge. Tatil programınıza saç, tırnak ya da makyaj gibi bir bakım eklemek istiyorsanız, hizmeti WhatsApp'tan yazın; anlaşmalı salonlarımız var, adres randevuda paylaşılır.",
+   "popH": "Lara'da sık sorulabilecek hizmetler",
+   "pop": [
+    "Akşam yemeği ve gala için saç ve makyaj.",
+    "Plaj döneminde manikür ve pedikür.",
+    "Tatil süresine yayılabilecek kaş ve kirpik bakımı."
+   ],
+   "faq": [
+    [
+     "Lara'da hangi bölgeden randevu alabilirim?",
+     "Kaldığınız yeri ve istediğiniz hizmeti WhatsApp'tan yazın. Anlaşmalı salonlarımız var; adres randevuda paylaşılır."
+    ],
+    [
+     "Lara için hangi hizmetlere bakılıyor?",
+     "Saç, tırnak, kaş ve kirpik, makyaj, gelin hazırlığı, cilt bakımı ve ağda için yazabilirsiniz; fiyat WhatsApp'tan verilir."
+    ]
+   ]
+  },
+  "belek": {
+   "name": "Belek",
+   "title": "Belek Güzellik Salonu: Gelin, Saç, Makyaj | Can Beauty Studio",
+   "desc": "Belek'te saç, makyaj, gelin hazırlığı ve tırnak bakımı için anlaşmalı salona yönlendiriliriz. Adres randevuda verilir; fiyat WhatsApp'tan.",
+   "h1": "Belek'te Güzellik Salonu: Saç, Makyaj ve Gelin Hazırlığı",
+   "crumb": "Belek",
+   "lead": "Belek'te kalıyorsanız hangi hizmeti istediğinizi ve tercih ettiğiniz günü WhatsApp'tan yazın. Bölgedeki anlaşmalı salona yönlendirir, adresi randevuda paylaşır, fiyatı WhatsApp'tan veririz.",
+   "whoH": "Belek'te nasıl planlanır?",
+   "who": "Belek, Serik ilçesine bağlı, golf sahaları ve büyük tatil komplekslerinin yer aldığı bir sahil bölgesi. Gün ve saat WhatsApp'tan ayarlanır; anlaşmalı salonlarımız var, adres randevuda paylaşılır.",
+   "popH": "Belek'te ilgilenebileceğiniz hizmetler",
+   "pop": [
+    "Düğün ya da nikâh için gelin saçı ve makyajı.",
+    "Davet öncesi saç düzeni ve makyaj.",
+    "Tatil boyunca kalıcı oje ve tırnak bakımı."
+   ],
+   "faq": [
+    [
+     "Belek'te düğünüm için gelin hazırlığı yapılır mı?",
+     "Gelin saçı ve makyajı için tarihinizi WhatsApp'tan yazın; uygunluk ve ayrıntılar tarihe göre netleştirilir."
+    ],
+    [
+     "Belek'te salonlar nerede?",
+     "Anlaşmalı salonların adresleri sayfada yayımlanmaz; randevu aşamasında WhatsApp'tan paylaşılır."
+    ]
+   ]
+  },
+  "kemer": {
+   "name": "Kemer",
+   "title": "Kemer Güzellik Salonu: Cilt, Kaş, Saç | Can Beauty Studio",
+   "desc": "Kemer'de saç, kaş-kirpik, cilt bakımı ve makyaj için anlaşmalı salona yönlendiriliriz. Adres randevuda paylaşılır; fiyat WhatsApp'tan.",
+   "h1": "Kemer'de Güzellik Salonu: Bakım, Saç ve Makyaj",
+   "crumb": "Kemer",
+   "lead": "Kemer'de tatildeyseniz almak istediğiniz hizmeti WhatsApp'tan yazın; bölgedeki anlaşmalı bir salona yönlendirelim. Randevu günü ve saati, adres ve fiyat bilgisi aynı yazışmada netleşir.",
+   "whoH": "Kemer'de kimler yazıyor?",
+   "who": "Kemer, Antalya'nın batısında deniz ile dağların birleştiği bir tatil bölgesi. Yaz sıcağından sonra bir günü bakıma ayırmak isteyenler için cilt bakımı, kaş ve kirpik ya da saç düzenlemesi gibi hizmetler planlanabilir.",
+   "popH": "Kemer'de bakım için seçenekler",
+   "pop": [
+    "Cilt bakımı ve temizlik uygulamaları.",
+    "Kaş şekillendirme ve kirpik bakımı.",
+    "Saç kesimi, boya ve fön."
+   ],
+   "faq": [
+    [
+     "Kemer'de randevuyu nasıl alırım?",
+     "Hizmeti ve günü WhatsApp'tan yazın. Salon ve saat birlikte netleştirilir; adres randevuda paylaşılır."
+    ],
+    [
+     "Cilt bakımı tıbbi bir işlem mi?",
+     "Hayır, yalnızca güzellik amaçlı bakım ve temizlik uygulamalarıdır."
+    ]
+   ]
+  },
+  "side": {
+   "name": "Side",
+   "title": "Side Güzellik Salonu: Tırnak, Ağda, Makyaj | Can Beauty Studio",
+   "desc": "Side ve Manavgat'ta tırnak, ağda, saç ve makyaj için anlaşmalı salona yönlendiriliriz. Adres randevuda verilir; fiyat WhatsApp'tan.",
+   "h1": "Side'de Güzellik Salonu: Tırnak, Ağda ve Makyaj",
+   "crumb": "Side",
+   "lead": "Side ya da Manavgat bölgesinde kalıyorsanız istediğiniz hizmeti ve bölgenizi WhatsApp'tan yazın. Anlaşmalı salona yönlendirir; adres, randevu saati ve fiyat bilgisi WhatsApp'tan paylaşılır.",
+   "whoH": "Side'de planlama",
+   "who": "Side, Manavgat ilçesinde antik kenti ve geniş plajlarıyla bilinen bir sahil kasabası. Tarih turundan ya da plajdan sonra kendinize vakit ayırmak isterseniz tırnak, ağda, saç veya makyaj için randevu ayarlanabilir.",
+   "popH": "Side'de öne çıkabilecek hizmetler",
+   "pop": [
+    "Manikür, pedikür ve kalıcı oje.",
+    "Plaj öncesi vücut ağdası.",
+    "Gezi sonrası akşam için saç ve makyaj."
+   ],
+   "faq": [
+    [
+     "Side'de salon bulmak için ne yazmalıyım?",
+     "Konakladığınız yeri (Side, Kumköy, Sorgun gibi), hizmeti ve gününüzü WhatsApp'tan yazın; size uygun salon bildirilir."
+    ],
+    [
+     "Manavgat için de aynı sayfa geçerli mi?",
+     "Evet, Manavgat bölgesi için de aynı numaradan yazabilirsiniz."
+    ]
+   ]
+  },
+  "konyaalti": {
+   "name": "Konyaaltı",
+   "title": "Konyaaltı Güzellik Salonu | Can Beauty Studio",
+   "desc": "Konyaaltı'nda saç, tırnak, makyaj ve cilt bakımı için anlaşmalı salona yönlendiriliriz. Adres randevuda verilir; fiyat WhatsApp'tan.",
+   "h1": "Konyaaltı'nda Güzellik Salonu: Saç, Tırnak ve Bakım",
+   "crumb": "Konyaaltı",
+   "lead": "Konyaaltı'nda kalıyor ya da yaşıyorsanız hizmeti ve tercih ettiğiniz günü WhatsApp'tan yazın. Bölgedeki anlaşmalı salona yönlendirir; adres, saat ve fiyat bilgisini WhatsApp'tan paylaşırız.",
+   "whoH": "Konyaaltı'nda hizmet",
+   "who": "Konyaaltı, şehir merkezinin batısında uzun çakıl plajıyla bilinen bir semt. Hem tatilciler hem bölgede yaşayanlar saç, tırnak, makyaj, cilt bakımı ve ağda gibi hizmetler için randevu isteyebilir.",
+   "popH": "Konyaaltı'nda istenebilecek hizmetler",
+   "pop": [
+    "Saç boyası ve kesim.",
+    "Cilt bakımı ve temizlik.",
+    "Kaş, kirpik ve ağda."
+   ],
+   "faq": [
+    [
+     "Konyaaltı'nda yaşayanlar da başvurabilir mi?",
+     "Evet. Tatilciler gibi bölgede yaşayanlar da hizmeti ve gününü WhatsApp'tan yazabilir."
+    ],
+    [
+     "Salonun adı sayfada yazıyor mu?",
+     "Hayır. Anlaşmalı salon adları yayımlanmaz; bilgi randevu aşamasında paylaşılır."
+    ]
+   ]
+  }
+ }
+}

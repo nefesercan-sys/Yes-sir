@@ -6,6 +6,7 @@ import { crossCanonical } from '@/lib/cross-canonical';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
+import BeautyLinkBox from '@/components/guzellik/BeautyLinkBox';
 import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
@@ -371,6 +372,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
           </div>
         </section>
       </main>
+      <BeautyLinkBox lang="de" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT_URL}#business`, name: 'Terzi Can', url: PARENT_URL, telephone: PHONE_E164 }) }} />
       <ReviewsBlock lang="de" schema />
     </>
