@@ -3,7 +3,7 @@
 // "hangi işleri yapıyoruz" bölümü, ek sorgu kalıplı SSS ve bölgeye göre başlık havuzu
 // (TR: lib/bolge-hizmet-matrisi.ts, EN/RU/DE: lib/bolge-hizmet-matrisi-i18n.ts).
 // Kurallar: yalnızca sahibin doğruladığı işler/fiyatlar (lib/facts.ts); düğme, astar, yelek, tulum, dikim fiyatı "fotoğrafa göre";
-// kazak ve hırkada astar değişimi yok; gelinlikte yalnızca tadilat; otele/eve alım-teslim ücretsiz; aynı gün, acil 1–2 saat.
+// kazak ve hırkada astar değişimi yok; gelinlikte yalnızca tadilat; otele/eve alım-teslim (ücretsiz denmez); aynı gün, acil 1–2 saat.
 // PL/UK'te yer adı çekimi yapılmaz (iki nokta kalıpları): bölge adı her zaman yalın hâlde geçer.
 // NOT: es/fr/pl/uk/nl/ar metinleri anadili konuşan biri tarafından gözden geçirilmelidir.
 // ============================================================
@@ -42,7 +42,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`¿Cuánto cuesta acortar un pantalón en ${n}?`, `Acortar bajos cuesta desde ${e('hem')}; el precio exacto se indica por foto en WhatsApp. Los trabajos normales están listos el mismo día y los urgentes en 1–2 horas.`] },
       { id: 'fermuar', f: (n) => [`Se me ha roto la cremallera en ${n}: ¿qué hago?`, `Envíe una foto de la cremallera por WhatsApp. Cambiarla cuesta desde ${e('zipperPants')} (abrigos y chaquetas ${e('zipperCoat')}); una cremallera atascada a menudo se repara sin cambiarla.`] },
-      { id: 'kol', f: (n) => [`¿Acortan mangas de chaquetas y abrigos en ${n}?`, `Sí. Acortar mangas y largo de chaquetas y abrigos cuesta desde ${e('hem')}; la manga se marca con la prenda puesta. La recogida y la entrega en el hotel son gratuitas.`] },
+      { id: 'kol', f: (n) => [`¿Acortan mangas de chaquetas y abrigos en ${n}?`, `Sí. Acortar mangas y largo de chaquetas y abrigos cuesta desde ${e('hem')}; la manga se marca con la prenda puesta. La recogida y la entrega en el hotel están disponibles.`] },
       { id: 'aski', f: (n) => [`¿Pueden ajustar los tirantes de un vestido en ${n}?`, 'Sí. Ajustamos la longitud de los tirantes en vestidos y ropa de fiesta; el precio depende del trabajo, envíe una foto. En vestidos de novia solo hacemos arreglos.'] },
       { id: 'astar', f: (n) => [`¿Cambian el forro de chaquetas y abrigos en ${n}?`, 'Sí, cambiamos forros (no en jerséis ni chaquetas de punto). El precio depende del forro y del trabajo; se indica por foto.'] },
       { id: 'dugme', f: (n) => [`¿Cambian botones en ${n}?`, 'Sí. Cambiamos botones en camisas, chaquetas, abrigos y pantalones; el precio se indica por foto.'] },
@@ -74,7 +74,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`Combien coûte le raccourcissement d'un pantalon à ${n} ?`, `Raccourcir l'ourlet coûte dès ${e('hem')} ; le prix exact est donné par photo sur WhatsApp. Travaux normaux prêts le jour même, urgents en 1 à 2 heures.`] },
       { id: 'fermuar', f: (n) => [`Ma fermeture éclair est cassée à ${n} : que faire ?`, `Envoyez une photo de la fermeture sur WhatsApp. Le remplacement coûte dès ${e('zipperPants')} (manteaux et vestes ${e('zipperCoat')}) ; une fermeture coincée peut souvent être réparée sans remplacement.`] },
-      { id: 'kol', f: (n) => [`Raccourcissez-vous les manches de vestes et manteaux à ${n} ?`, `Oui. Raccourcir manches et longueur de vestes et manteaux coûte dès ${e('hem')} ; la manche est marquée vêtement porté. La collecte et la livraison à l'hôtel sont gratuites.`] },
+      { id: 'kol', f: (n) => [`Raccourcissez-vous les manches de vestes et manteaux à ${n} ?`, `Oui. Raccourcir manches et longueur de vestes et manteaux coûte dès ${e('hem')} ; la manche est marquée vêtement porté. La collecte et la livraison à l'hôtel sont assurées.`] },
       { id: 'aski', f: (n) => [`Peut-on régler les bretelles d'une robe à ${n} ?`, 'Oui. Nous réglons la longueur des bretelles sur robes et tenues de soirée ; le prix dépend du travail, envoyez une photo. Robes de mariée : retouches uniquement.'] },
       { id: 'astar', f: (n) => [`Changez-vous la doublure des vestes et manteaux à ${n} ?`, 'Oui, nous changeons les doublures (pas sur pulls ni gilets en maille). Le prix dépend de la doublure et du travail, indiqué par photo.'] },
       { id: 'dugme', f: (n) => [`Remplacez-vous les boutons à ${n} ?`, 'Oui. Nous remplaçons les boutons de chemises, vestes, manteaux et pantalons ; le prix est indiqué par photo.'] },
@@ -106,7 +106,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`Ile kosztuje skrócenie spodni (${n})?`, `Skracanie nogawek od ${e('hem')}; dokładną cenę podajemy ze zdjęcia na WhatsAppie. Zwykłe prace gotowe tego samego dnia, pilne w 1–2 godziny.`] },
       { id: 'fermuar', f: (n) => [`Zepsuł mi się zamek (${n}) – co robić?`, `Wyślij zdjęcie zamka na WhatsAppie. Wymiana zamka od ${e('zipperPants')} (płaszcze i kurtki ${e('zipperCoat')}); zablokowany zamek często da się naprawić bez wymiany.`] },
-      { id: 'kol', f: (n) => [`Czy skracacie rękawy kurtek i płaszczy (${n})?`, `Tak. Skracanie rękawów i długości kurtek i płaszczy od ${e('hem')}; rękaw zaznaczamy na ubraniu założonym przez klienta. Odbiór i dostawa do hotelu są bezpłatne.`] },
+      { id: 'kol', f: (n) => [`Czy skracacie rękawy kurtek i płaszczy (${n})?`, `Tak. Skracanie rękawów i długości kurtek i płaszczy od ${e('hem')}; rękaw zaznaczamy na ubraniu założonym przez klienta. Odbiór i dostawa do hotelu są dostępne.`] },
       { id: 'aski', f: (n) => [`Czy można wyregulować ramiączka sukienki (${n})?`, 'Tak. Regulujemy długość ramiączek w sukienkach i strojach wieczorowych; cena zależy od pracy, wyślij zdjęcie. Suknie ślubne tylko przerabiamy.'] },
       { id: 'astar', f: (n) => [`Czy wymieniacie podszewkę w kurtkach i płaszczach (${n})?`, 'Tak, wymieniamy podszewki (nie w swetrach ani kardiganach). Cena zależy od podszewki i zakresu pracy, podajemy ją ze zdjęcia.'] },
       { id: 'dugme', f: (n) => [`Czy wymieniacie guziki (${n})?`, 'Tak. Wymieniamy guziki w koszulach, kurtkach, płaszczach i spodniach; cenę podajemy ze zdjęcia.'] },
@@ -138,7 +138,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`Скільки коштує підшити штани (${n})?`, `Підшивання низу штанів — від ${e('hem')}; точну ціну називаємо за фото у WhatsApp. Звичайні роботи готові того ж дня, термінові — за 1–2 години.`] },
       { id: 'fermuar', f: (n) => [`Зламалася блискавка (${n}) — що робити?`, `Надішліть фото блискавки у WhatsApp. Заміна блискавки — від ${e('zipperPants')} (куртки й пальта ${e('zipperCoat')}); заклинену блискавку часто можна полагодити без заміни.`] },
-      { id: 'kol', f: (n) => [`Чи вкорочуєте ви рукави курток і пальт (${n})?`, `Так. Вкорочення рукавів і довжини курток і пальт — від ${e('hem')}; довжину рукава позначаємо на вас. Забір і доставка до готелю безкоштовні.`] },
+      { id: 'kol', f: (n) => [`Чи вкорочуєте ви рукави курток і пальт (${n})?`, `Так. Вкорочення рукавів і довжини курток і пальт — від ${e('hem')}; довжину рукава позначаємо на вас. Забір і доставка до готелю доступні.`] },
       { id: 'aski', f: (n) => [`Чи можна підігнати бретельки сукні (${n})?`, 'Так. Регулюємо довжину бретельок на сукнях і вечірньому одязі; ціна залежить від роботи, надішліть фото. Весільні сукні лише переробляємо.'] },
       { id: 'astar', f: (n) => [`Чи міняєте ви підкладку на куртках і пальтах (${n})?`, 'Так, міняємо підкладку (крім светрів і кардиганів). Ціна залежить від підкладки й обсягу роботи, називаємо за фото.'] },
       { id: 'dugme', f: (n) => [`Чи міняєте ґудзики (${n})?`, 'Так. Міняємо ґудзики на сорочках, куртках, пальтах і штанах; ціну називаємо за фото.'] },
@@ -170,7 +170,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`Wat kost het om een broek korter te maken in ${n}?`, `Broekspijpen korter maken kost vanaf ${e('hem')}; de exacte prijs noemen wij op basis van een foto via WhatsApp. Gewoon werk is dezelfde dag klaar, spoed in 1–2 uur.`] },
       { id: 'fermuar', f: (n) => [`Mijn rits is kapot in ${n}: wat nu?`, `Stuur een foto van de rits via WhatsApp. Een rits vervangen kost vanaf ${e('zipperPants')} (jassen en mantels ${e('zipperCoat')}); een vastzittende rits kan vaak zonder vervanging worden gerepareerd.`] },
-      { id: 'kol', f: (n) => [`Kunnen jullie mouwen van jassen en mantels korter maken in ${n}?`, `Ja. Mouwen en lengte van jassen en mantels korter maken kost vanaf ${e('hem')}; de mouw wordt afgemerkt terwijl u de jas draagt. Ophalen en bezorgen bij het hotel is gratis.`] },
+      { id: 'kol', f: (n) => [`Kunnen jullie mouwen van jassen en mantels korter maken in ${n}?`, `Ja. Mouwen en lengte van jassen en mantels korter maken kost vanaf ${e('hem')}; de mouw wordt afgemerkt terwijl u de jas draagt. Ophalen en bezorgen bij het hotel is .`] },
       { id: 'aski', f: (n) => [`Kan de lengte van jurkbandjes worden aangepast in ${n}?`, 'Ja. Wij passen de bandjes van jurken en avondkleding aan; de prijs hangt af van het werk, stuur een foto. Bruidsjurken worden alleen vermaakt.'] },
       { id: 'astar', f: (n) => [`Vervangen jullie de voering van jassen en mantels in ${n}?`, 'Ja, wij vervangen voering (niet bij truien en vesten). De prijs hangt af van de voering en het werk en volgt op basis van een foto.'] },
       { id: 'dugme', f: (n) => [`Vervangen jullie knopen in ${n}?`, 'Ja. Wij vervangen knopen van overhemden, jassen, mantels en broeken; de prijs volgt op basis van een foto.'] },
@@ -202,7 +202,7 @@ const PACKS: Record<ILang, Pack> = {
     faq: [
       { id: 'paca', f: (n) => [`كم تكلفة تقصير البنطال في ${n}؟`, `تقصير أطراف البنطال يبدأ من ${e('hem')}؛ ونحدد السعر الدقيق من الصورة عبر واتساب. الأعمال العادية جاهزة في اليوم نفسه والمستعجلة خلال 1–2 ساعة.`] },
       { id: 'fermuar', f: (n) => [`انكسر السحاب عندي في ${n}، ماذا أفعل؟`, `أرسل صورة السحاب عبر واتساب. استبدال السحاب يبدأ من ${e('zipperPants')} (المعاطف والسترات ${e('zipperCoat')})؛ وغالباً يمكن إصلاح السحاب العالق دون استبداله.`] },
-      { id: 'kol', f: (n) => [`هل تقصّرون أكمام السترات والمعاطف في ${n}؟`, `نعم. تقصير أكمام وطول السترات والمعاطف يبدأ من ${e('hem')}؛ ونحدد طول الكم وأنت ترتدي القطعة. الاستلام والتسليم في الفندق مجانيان.`] },
+      { id: 'kol', f: (n) => [`هل تقصّرون أكمام السترات والمعاطف في ${n}؟`, `نعم. تقصير أكمام وطول السترات والمعاطف يبدأ من ${e('hem')}؛ ونحدد طول الكم وأنت ترتدي القطعة. الاستلام والتسليم في الفندق متاحان.`] },
       { id: 'aski', f: (n) => [`هل يمكن ضبط طول حمالات الفستان في ${n}؟`, 'نعم. نضبط طول الحمالات في الفساتين وملابس السهرة؛ والسعر حسب العمل، أرسل صورة. فساتين الزفاف نعدّلها فقط.'] },
       { id: 'astar', f: (n) => [`هل تستبدلون بطانة السترات والمعاطف في ${n}؟`, 'نعم، نستبدل البطانة (لا في البلوفرات والكارديجان). السعر حسب نوع البطانة وحجم العمل ونحدده من الصورة.'] },
       { id: 'dugme', f: (n) => [`هل تستبدلون الأزرار في ${n}؟`, 'نعم. نستبدل الأزرار في القمصان والسترات والمعاطف والبناطيل؛ ونحدد السعر من الصورة.'] },
@@ -234,8 +234,8 @@ const PRICE_ALT: Record<ILang, ((n: string) => string)[]> = {
 };
 
 const LEAD_ALT: Partial<Record<ILang, ((n: string) => string)[]>> = {
-  es: [(n) => `¿Qué puede arreglarse durante su estancia en ${n}? Casi todo: bajos, cinturas, mangas, cremalleras, botones, forros, rotos y prendas de piel, además de confección a medida. Recogida y entrega gratuitas en el hotel.`],
-  fr: [(n) => `Que peut-on retoucher pendant un séjour à ${n} ? Presque tout : ourlets, tailles, manches, fermetures, boutons, doublures, déchirures et articles en cuir, ainsi que la confection sur mesure. Collecte et livraison gratuites à l'hôtel.`],
+  es: [(n) => `¿Qué puede arreglarse durante su estancia en ${n}? Casi todo: bajos, cinturas, mangas, cremalleras, botones, forros, rotos y prendas de piel, además de confección a medida. Recogida y entrega disponibles en el hotel.`],
+  fr: [(n) => `Que peut-on retoucher pendant un séjour à ${n} ? Presque tout : ourlets, tailles, manches, fermetures, boutons, doublures, déchirures et articles en cuir, ainsi que la confection sur mesure. Collecte et livraison à l'hôtel.`],
 };
 
 const rot = <T,>(a: T[], k: number): T[] => a.map((_, i) => a[(i + k) % a.length]);
@@ -277,12 +277,12 @@ const HQ: Record<ILang, (n: string, h: string) => string> = {
   ar: (n, h) => `هل تخدمون فنادق ${n} مثل ${h}؟`,
 };
 const HA: Record<ILang, string> = {
-  es: 'Sí. Recogemos y entregamos la prenda en el hotel sin coste; si hace falta una prueba, nos vemos en el hotel.',
-  fr: "Oui. Nous récupérons et rapportons le vêtement à l'hôtel sans frais ; si un essayage est utile, nous nous retrouvons à l'hôtel.",
-  pl: 'Tak. Odbieramy i dowozimy ubranie do hotelu bezpłatnie; jeśli potrzebna jest przymiarka, spotykamy się w hotelu.',
-  uk: 'Так. Забираємо й привозимо одяг до готелю безкоштовно; якщо потрібна приміряння, зустрічаємося в готелі.',
-  nl: 'Ja. Wij halen het kledingstuk gratis op in het hotel en brengen het terug; is een pasbeurt nodig, dan spreken we af in het hotel.',
-  ar: 'نعم. نستلم القطعة ونسلّمها في الفندق مجاناً؛ وإذا لزم القياس نلتقي في الفندق.',
+  es: 'Sí. Recogemos y entregamos la prenda en el hotel; si hace falta una prueba, nos vemos en el hotel.',
+  fr: "Oui. Nous récupérons et rapportons le vêtement à l'hôtel ; si un essayage est utile, nous nous retrouvons à l'hôtel.",
+  pl: 'Tak. Odbieramy i dowozimy ubranie do hotelu; jeśli potrzebna jest przymiarka, spotykamy się w hotelu.',
+  uk: 'Так. Забираємо й привозимо одяг до готелю ; якщо потрібна приміряння, зустрічаємося в готелі.',
+  nl: 'Ja. Wij halen het kledingstuk op in het hotel en brengen het terug; is een pasbeurt nodig, dan spreken we af in het hotel.',
+  ar: 'نعم. نستلم القطعة ونسلّمها في الفندق؛ وإذا لزم القياس نلتقي في الفندق.',
 };
 function hotelFaq(lang: ILang, slug: string, n: string): [string, string] | null {
   if (!isZone(slug)) return null;

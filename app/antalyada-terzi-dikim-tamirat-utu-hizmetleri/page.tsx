@@ -23,7 +23,7 @@ const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZ
 const faqs = [
   {
     q: "Antalya'da otellere acil terzi hizmeti veren yer neresi?",
-    a: 'Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; eve ve otele alım-teslim ücretsizdir. Kıyafetleriniz otelden veya evden alınır; normal işler aynı gün, acil işler 1–2 saatte askılı olarak teslim edilir.',
+    a: 'Terzi Can, Antalya Konyaaltı, Lara, Kundu ve Belek bölgelerindeki otellere acil terzi ve kıyafet tamiratı hizmeti sunmaktadır; eve ve otele alım-teslim yapıyoruz. Kıyafetleriniz otelden veya evden alınır; normal işler aynı gün, acil işler 1–2 saatte askılı olarak teslim edilir.',
   },
   {
     q: "Antalya'da pazar günü açık terzi veya acil tamir yeri var mı?",
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: 'Kıyafetimi eve gelip almanız için ne yapmam gerekiyor?',
-    a: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Eve ve otele alım-teslim her bölgede ücretsizdir.',
+    a: 'WhatsApp hattından adres ve talep bilgisi paylaşmanız yeterli. Eve ve otele alım-teslim yapıyoruz.',
   },
   {
     q: 'Gelinlik veya abiye tadilatında prova yapılıyor mu?',
@@ -51,11 +51,11 @@ const faqs = [
   },
   {
     q: 'Hangi mahallelere kuryeli hizmet veriyorsunuz?',
-    a: 'Konyaaltı (Hurma, Liman, Uncalı, Sarısu), Muratpaşa (Şirinyalı, Fener, Meltem), Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz; alım-teslim ücretsizdir.',
+    a: 'Konyaaltı (Hurma, Liman, Uncalı, Sarısu), Muratpaşa (Şirinyalı, Fener, Meltem), Lara, Kepez, Belek ve Kemer bölgelerine kuryeli adresten alım ve teslimat hizmeti veriyoruz.',
   },
   {
     q: 'Takım elbise paçasını ne kadar sürede kısaltıyorsunuz?',
-    a: 'Normal paça kısaltma aynı gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım ücretsizdir.',
+    a: 'Normal paça kısaltma aynı gün teslim edilir; acil olduğunda 1–2 saatte hazırlanır. Otel misafirleri için otelden alım yapılır.',
   },
   {
     q: 'Kumaşıma göre farklı bakım öneriyor musunuz?',
@@ -85,7 +85,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#webpage`,
       url: PAGE_URL,
       name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı Hizmetleri',
-      description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere ücretsiz servis; normal tadilat aynı gün, acil 1–2 saat.",
+      description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere servis; normal tadilat aynı gün, acil 1–2 saat.",
       inLanguage: 'tr',
       dateModified: '2026-07-03',
       isPartOf: { '@id': `${BASE_URL}#website` },
@@ -109,7 +109,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
       alternateName: 'Terzi Can Antalya',
-      description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere ücretsiz tadilat servisi sunan profesyonel tekstil atölyesi.",
+      description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere tadilat servisi sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
       sameAs: [GBP_URL],
       telephone: '+905318986418',
@@ -413,7 +413,7 @@ export default function GeminiOptimizedTailorPage() {
 
           <p className="sh-speakable" style={{ fontSize: 15.5, lineHeight: 1.65, color: INK, background: BG_SOFT, border: `1px solid ${BORDER}`, borderRadius: 14, padding: '16px 18px', margin: '0 0 18px', maxWidth: 660 }}>
             <strong>Kısa cevap:</strong> Terzi Can, Antalya Konyaaltı'nda (Sarısu, Hurma,
-            Liman) hizmet veren, adresten alım ile kıyafet tamiri ve özel dikim yapan, otellere ücretsiz
+            Liman) hizmet veren, adresten alım ile kıyafet tamiri ve özel dikim yapan, otellere
             servis veren yerel bir terzi atölyesidir; normal tadilat aynı gün, acil işler 1–2 saatte hazır; her gün 08:00–23:00 açıktır.
           </p>
 

@@ -21,9 +21,9 @@ import { PROCESS, processesFor } from '@/lib/bolge-icerik';
 
 // H1 varyantları (bölge slug'ına göre deterministik); bölge adı vurgulu kalır.
 const H1V: Record<string, ((r: string) => [string, string])[]> = {
-  en: [(r) => ['Hotel Tailor', r], (r) => ['Tailor that comes to your hotel in', r], (r) => [`${r} hotel tailor service`, 'Free pickup and delivery']],
-  ru: [(r) => ['Портной в отеле', r], (r) => ['Портной с выездом в отель:', r], (r) => [`Портной для отелей: ${r}`, 'Забор и доставка бесплатно']],
-  de: [(r) => ['Schneider im Hotel', r], (r) => ['Schneider kommt ins Hotel:', r], (r) => [`Hotel-Schneider ${r}`, 'Abholung und Lieferung kostenlos']],
+  en: [(r) => ['Hotel Tailor', r], (r) => ['Tailor that comes to your hotel in', r], (r) => [`${r} hotel tailor service`, 'Pickup and delivery']],
+  ru: [(r) => ['Портной в отеле', r], (r) => ['Портной с выездом в отель:', r], (r) => [`Портной для отелей: ${r}`, 'Забор и доставка']],
+  de: [(r) => ['Schneider im Hotel', r], (r) => ['Schneider kommt ins Hotel:', r], (r) => [`Hotel-Schneider ${r}`, 'Abholung und Lieferung']],
 };
 const h1Varyant = (lang: string, slug: string, r: string) => {
   const v = H1V[lang]; if (!v) return null;
@@ -54,12 +54,12 @@ const T: Record<Lang, any> = {
       ['🔧', 'Zipper & Repair', 'Zipper replacement, tears'],
       ['👗', 'Wedding & Evening Wear', 'Delicate alterations for special occasions'],
     ],
-    priceH: 'Prices', priceSub: 'The hotel visit is free in every hotel area we cover — you only pay for the work',
-    priceRows: [['Hotel Visit Fee', 'FREE'], ['Hemming', 'by photo'], ['Zipper Replacement', 'by photo'], ['Dress / Suit Alteration', 'by photo'], ['Wedding Dress Alteration', 'by photo']],
+    priceH: 'Prices', priceSub: 'Hotel visits are arranged on WhatsApp — the work is priced from a photo',
+    priceRows: [['Hotel Visit', 'Arranged on WhatsApp'], ['Hemming', 'by photo'], ['Zipper Replacement', 'by photo'], ['Dress / Suit Alteration', 'by photo'], ['Wedding Dress Alteration', 'by photo']],
     faqH: 'Frequently Asked Questions',
     faq: (r: string) => [
       [`Do you come to all hotels in ${r}?`, `Yes! We visit every hotel in ${r} — just share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}`],
-      ['Is the hotel visit free?', 'Yes. Collection from and delivery to your hotel are free in every hotel area we cover; you only pay for the work itself.'],
+      ['Do you collect from my hotel?', 'Yes. We collect from and deliver to your hotel in every hotel area we cover; arrange the time on WhatsApp.'],
       ['How fast is the service?', DURATION.en.all],
       ['Do you speak English?', `Yes — write to us on WhatsApp in your own language and we will reply. WhatsApp: ${PHONE}`],
     ],
@@ -88,12 +88,12 @@ const T: Record<Lang, any> = {
       ['🔧', 'Молнии и ремонт', 'Замена молнии, разрывы'],
       ['👗', 'Свадебная и вечерняя одежда', 'Деликатная подгонка для особых случаев'],
     ],
-    priceH: 'Цены', priceSub: 'Выезд в отель бесплатный во всех отельных районах, где мы работаем, — оплачивается только работа',
+    priceH: 'Цены', priceSub: 'Выезд в отель обсуждается в WhatsApp — работа оценивается по фото',
     priceRows: [['Выезд в отель', 'БЕСПЛАТНО'], ['Укорачивание', 'по фото'], ['Замена молнии', 'по фото'], ['Подгонка платья/костюма', 'по фото'], ['Подгонка свадебного платья', 'по фото']],
     faqH: 'Часто задаваемые вопросы',
     faq: (r: string) => [
       [`Вы приезжаете во все отели ${r}?`, `Да! Мы приезжаем в каждый отель района ${r} — просто напишите название отеля и номер комнаты в WhatsApp. WhatsApp: ${PHONE}`],
-      ['Выезд в отель бесплатный?', 'Да. Забор из отеля и доставка обратно бесплатны во всех отельных районах, где мы работаем; вы платите только за работу.'],
+      ['Выезжаете ли вы в отель?', 'Да. Забор из отеля и доставка обратно доступен во всех отельных районах, где мы работаем; детали уточняются в WhatsApp.'],
       ['Как быстро выполняется услуга?', DURATION.ru.all],
       ['Вы говорите по-русски?', `Да — напишите нам в WhatsApp на своём языке, и мы ответим. WhatsApp: ${PHONE}`],
     ],
@@ -122,12 +122,12 @@ const T: Record<Lang, any> = {
       ['🔧', 'Reißverschluss & Reparatur', 'Reißverschluss ersetzen, Risse'],
       ['👗', 'Braut- & Abendkleidung', 'Behutsame Änderungen für besondere Anlässe'],
     ],
-    priceH: 'Preise', priceSub: 'Der Hotelbesuch ist in allen von uns bedienten Hotelgebieten kostenlos — Sie zahlen nur die Arbeit',
-    priceRows: [['Hotelbesuch', 'KOSTENLOS'], ['Kürzen', 'per Foto'], ['Reißverschluss ersetzen', 'per Foto'], ['Kleid-/Anzugänderung', 'per Foto'], ['Brautkleid ändern', 'per Foto']],
+    priceH: 'Preise', priceSub: 'Hotelbesuche stimmen wir per WhatsApp ab — die Arbeit wird nach Foto berechnet',
+    priceRows: [['Hotelbesuch', 'Per WhatsApp'], ['Kürzen', 'per Foto'], ['Reißverschluss ersetzen', 'per Foto'], ['Kleid-/Anzugänderung', 'per Foto'], ['Brautkleid ändern', 'per Foto']],
     faqH: 'Häufig gestellte Fragen',
     faq: (r: string) => [
       [`Kommen Sie zu allen Hotels in ${r}?`, `Ja! Wir besuchen jedes Hotel in ${r} — teilen Sie einfach Hotelname und Zimmernummer per WhatsApp mit. WhatsApp: ${PHONE}`],
-      ['Ist der Hotelbesuch kostenlos?', 'Ja. Abholung im Hotel und Rücklieferung sind in allen von uns bedienten Hotelgebieten kostenlos; Sie zahlen nur die Schneiderarbeit.'],
+      ['Kommen Sie ins Hotel?', 'Ja. Abholung im Hotel und Rücklieferung bieten wir in allen von uns bedienten Hotelgebieten an; die Arbeit wird nach Foto berechnet.'],
       ['Wie schnell ist der Service?', DURATION.de.all],
       ['Sprechen Sie Deutsch?', `Ja — schreiben Sie uns per WhatsApp in Ihrer Sprache, wir antworten. WhatsApp: ${PHONE}`],
     ],
@@ -310,7 +310,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
               {t.priceRows.map(([s, p]: string[], i: number) => (
                 <tr key={s} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.04)' : 'transparent' }}>
                   <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                  <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p.match(/FREE|БЕСПЛАТНО|KOSTENLOS/) ? '#22c55e' : '#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                  <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: '#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                 </tr>
               ))}
             </tbody>

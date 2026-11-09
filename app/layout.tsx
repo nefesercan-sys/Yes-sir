@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     default: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
   },
   description:
-    "Konyaaltı Antalya'da Terzi Can: tadilat, özel dikim, tekstil üretimi. Eve ve otele ücretsiz servis. Hurma Mahallesi. Her gün 08:00–23:00.",
+    "Konyaaltı Antalya'da Terzi Can: tadilat, özel dikim, tekstil üretimi. Eve ve otele servis. Hurma Mahallesi. Her gün 08:00–23:00.",
 
   authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
   creator: "SwapHubs",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
     description:
-      "Konyaaltı Antalya'da terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele ücretsiz servis.",
+      "Konyaaltı Antalya'da terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele servis.",
     url: "https://swaphubs.com",
     siteName: "SwapHubs",
     locale: "tr_TR",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
-    description: "Antalya terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele ücretsiz servis.",
+    description: "Antalya terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele servis.",
     site: "@swaphubs",
     images: ["https://swaphubs.com/swaphubs-og.jpg"],
   },

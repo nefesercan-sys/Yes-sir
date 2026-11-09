@@ -17,7 +17,7 @@ const FAQ: [string, string][] = [
   ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri aynı gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
   ['Kadın elbise dikimi Antalya?', `Evet. Ölçüye özel elbise, bluz, etek, tulum ve abiye dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. WhatsApp: ${PHONE}`],
   ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa ve istediğiniz modele göre netleşir. WhatsApp: ${PHONE}`],
-  ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+  ['Bayan kıyafeti tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim yapıyoruz. WhatsApp: ${PHONE}`],
   ['Bebek ve çocuk elbisesi dikimi yapılıyor mu?', `Evet! Bebek elbisesi, çocuk kıyafeti ve okul kıyafeti dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir. WhatsApp: ${PHONE}`],
 ];
 
@@ -28,7 +28,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi Fiyatları 2026',
-      description: "Antalya'da bayan terzi: etek kısaltma ₺200, fermuar ₺300, abiye ve gelinlik tadilatı fotoğrafa/işe göre. Kadın elbise dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele ücretsiz alım-teslim.",
+      description: "Antalya'da bayan terzi: etek kısaltma ₺200, fermuar ₺300, abiye ve gelinlik tadilatı fotoğrafa/işe göre. Kadın elbise dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele alım-teslim.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: { '@type': 'AggregateOffer', lowPrice: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
@@ -76,7 +76,7 @@ const FIYATLAR = [
   ['Abiye Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Gelinlik Tadilatı (dikimi yapılmaz)', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
   ['Büyük Beden Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
-  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
+  ['Araçlı Servis', 'WhatsApp\'ta netleşir', '—'],
 ];
 
 export default function BayanTerziPage() {
@@ -152,7 +152,7 @@ export default function BayanTerziPage() {
                 {FIYATLAR.map(([tip,fiyat,sure],i)=>(
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i%2?'rgba(184,151,90,.025)':'#fff' }}>
                     <td style={{ padding: '.9rem .8rem', fontSize: '.88rem' }}>{tip}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.8rem' }}>{sure}</td>
                   </tr>
                 ))}
@@ -177,7 +177,7 @@ export default function BayanTerziPage() {
               </p>
               <p>
                 <strong>Abiye tamiri ve kısaltmada</strong> taş ve süslemeler korunarak işlem yapılmaktadır.
-                Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden alım ve teslim ücretsizdir; eve de ücretsizdir.
+                Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır. Turistler için otelden, eve de alım ve teslim yapılır.
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function BayanTerziPage() {
 
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>Bayan Kıyafet Fiyatı Öğrenin</h2>
-          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis ücretsiz</p>
+          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, kadın kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
               style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>

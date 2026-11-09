@@ -335,7 +335,7 @@ export default function OnlineSchneiderClient({
           <strong style={{ color: 'var(--bone2)' }}>Online-Schneiderservice</strong> — von unserem Standort in Konyaaltı in ganz Antalya:
           Herren- und Damenschneiderei, Reparaturen, Änderungen, individuelle Schnittentwicklung,
           Serienproduktion und Lohnfertigung. Kürzen, Reißverschluss-Austausch. Sportbekleidung, Trainingsanzüge
-          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kostenloser Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt.
+          und Sweatshirts nach Maß. Serienproduktion ab mindestens 50 Stück. Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt.
         </p>
       </div>
 
@@ -404,7 +404,7 @@ export default function OnlineSchneiderClient({
               ['01','📸','Foto & Maße Senden',"Senden Sie Ihr Referenzdesign und Ihre Maße per WhatsApp — völlig kostenlos."],
               ['02','🎨','Design & Stoffauswahl','Klären Sie die Details mit unserem Schneidermeister und bestätigen Sie den Preis.'],
               ['03','✂️','Wir Beginnen Zu Nähen','Nach Ihrer Freigabe beginnen wir in unserem Atelier mit der Fertigung.'],
-              ['04','🚗','Lieferung','Kostenloser Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt, die Versandkosten trägt der Kunde.'],
+              ['04','🚗','Lieferung','Kurier innerhalb Antalyas; Versand ins Ausland wird per WhatsApp geklärt, die Versandkosten trägt der Kunde.'],
             ] as [string,string,string,string][]).map(([n,ic,t,d])=>(
               <div key={n} className="ohow-card">
                 <div className="ohow-n">{n}</div>
@@ -483,7 +483,7 @@ export default function OnlineSchneiderClient({
           </div>
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
             <a href={WA('Hallo, ich hätte gerne ein Preisangebot.')} target="_blank" rel="noopener noreferrer" className="obtn obtn-gold">
-              📲 Kostenloses Angebot
+              📲 Angebot anfragen
             </a>
           </div>
         </div>

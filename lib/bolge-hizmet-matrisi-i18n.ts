@@ -2,7 +2,7 @@
 // lib/bolge-hizmet-matrisi-i18n.ts — EN / RU / DE bölge sayfaları için "hangi işleri yapıyoruz" bölümü,
 // ek sorgu kalıplı SSS ve bölgeye göre değişen başlık havuzu (Türkçe karşılığı: lib/bolge-hizmet-matrisi.ts).
 // Kurallar: yalnızca sahibin doğruladığı işler ve fiyatlar (lib/facts.ts'ten); düğme/astar/yelek/tulum/dikim fiyatı
-// "fotoğrafa göre"; kazak ve hırkada astar değişimi yok; gelinlikte yalnızca tadilat. Eve/otele alım-teslim her bölgede ücretsiz.
+// "fotoğrafa göre"; kazak ve hırkada astar değişimi yok; gelinlikte yalnızca tadilat. Eve/otele alım-teslim her bölgede yapılır (ücretsiz denmez).
 // Sayfalar birbirinin kopyası olmasın diye grup sırası, başlık, giriş cümlesi ve işlem sırası slug karmasına göre döner.
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
@@ -21,7 +21,7 @@ const GROUPS: Record<ILang, G[]> = {
     { id: 'pantolon',
       ops: ['hem shortening', 'waist taking-in', 'leg tapering', 'waist letting-out', 'jeans hem shortening with the original hem kept', 'trouser zipper replacement and repair', 'button replacement', 'repair of rips and open seams'],
       heads: [(n) => `${n} trouser and jeans alterations`, (n) => `Hem shortening and waist taking-in: ${n}`, (n, l) => `Trousers, jeans hems and zippers ${l}`],
-      intros: [(l, n, o) => `Trousers and jeans ${l}: ${o}.`, (l, n, o) => `If your trousers are too long, too loose or damaged near ${n}: ${o}.`, (l, n, o) => `For trousers and jeans we offer ${o}, with free pickup and delivery to your home or hotel in ${n}.`] },
+      intros: [(l, n, o) => `Trousers and jeans ${l}: ${o}.`, (l, n, o) => `If your trousers are too long, too loose or damaged near ${n}: ${o}.`, (l, n, o) => `For trousers and jeans we offer ${o}, with pickup and delivery to your home or hotel in ${n}.`] },
     { id: 'etek-elbise',
       ops: ['skirt hem shortening', 'skirt waist taking-in', 'dress hem shortening', 'dress taking-in', 'strap length adjustment', 'dress zipper replacement', 'lining replacement', 'evening dress and wedding dress alterations', 'custom dress making to your measurements'],
       heads: [(n) => `${n} skirt and dress alterations`, (n) => `Dress repair, evening dresses and strap length: ${n}`, (n, l) => `Dress shortening, taking-in and sewing ${l}`],
@@ -89,7 +89,7 @@ const GROUPS: Record<ILang, G[]> = {
     { id: 'pantolon',
       ops: ['Hosen kürzen', 'Bund enger machen', 'Beine schmaler machen', 'Bund weiter machen', 'Jeans kürzen mit Original-Saum', 'Reißverschluss an Hosen wechseln und reparieren', 'Knöpfe ersetzen', 'Risse und offene Nähte reparieren'],
       heads: [(n) => `${n}: Hosen und Jeans ändern`, (n) => `${n}: Hosen kürzen und Bund enger machen`, (n, l) => `Hosen, Jeans-Saum und Reißverschlüsse ${l}`],
-      intros: [(l, n, o) => `Hosen und Jeans ${l}: ${o}.`, (l, n, o) => `Wenn Ihre Hose zu lang, zu weit oder kaputt ist (${n}): ${o}.`, (l, n, o) => `Für Hosen und Jeans: ${o}, mit kostenloser Abholung und Lieferung nach Hause oder ins Hotel (${n}).`] },
+      intros: [(l, n, o) => `Hosen und Jeans ${l}: ${o}.`, (l, n, o) => `Wenn Ihre Hose zu lang, zu weit oder kaputt ist (${n}): ${o}.`, (l, n, o) => `Für Hosen und Jeans: ${o}, mit Abholung und Lieferung nach Hause oder ins Hotel (${n}).`] },
     { id: 'etek-elbise',
       ops: ['Röcke kürzen', 'Rockbund enger machen', 'Kleider kürzen', 'Kleider enger machen', 'Trägerlänge anpassen', 'Reißverschluss am Kleid wechseln', 'Futter erneuern', 'Abendkleider und Brautkleider ändern', 'Kleider nach Maß anfertigen'],
       heads: [(n) => `${n}: Röcke und Kleider ändern`, (n) => `${n}: Kleid reparieren, Abendkleid, Träger`, (n, l) => `Kleid kürzen, enger machen, nähen ${l}`],
@@ -183,7 +183,7 @@ const FAQ: Record<ILang, F[]> = {
   en: [
     { id: 'paca', f: (l) => [`How much does hem shortening cost ${l}?`, `Hem shortening starts from ${e('hem')}; the exact price is quoted by photo on WhatsApp. Normal jobs are ready the same day, urgent jobs in 1–2 hours.`] },
     { id: 'fermuar', f: (l) => [`My zipper is broken ${l}, what should I do?`, `Send a photo of the zipper on WhatsApp. Zipper replacement starts from ${e('zipperPants')} (coats and jackets ${e('zipperCoat')}); stuck zippers can often be repaired without replacing them. Normal jobs are same day.`] },
-    { id: 'kol', f: (l, n) => [`Can you shorten jacket and coat sleeves near ${n}?`, `Yes. Sleeve and length shortening on jackets and coats starts from ${e('hem')}; the sleeve is marked while you wear the garment. Pickup and delivery to your home or hotel is free.`] },
+    { id: 'kol', f: (l, n) => [`Can you shorten jacket and coat sleeves near ${n}?`, `Yes. Sleeve and length shortening on jackets and coats starts from ${e('hem')}; the sleeve is marked while you wear the garment. Pickup and delivery to your home or hotel is available.`] },
     { id: 'bluz', f: (l) => [`Do you take in blouses and shirts ${l}?`, `Yes. We take in and shorten blouses, shirts and T-shirts; taking-in starts from ${e('waist')} and the exact price depends on the photo.`] },
     { id: 'aski', f: (l) => [`Can a dress strap length be adjusted ${l}?`, `Yes. We adjust strap length on dresses and evening wear; the price depends on the job, send a photo for an exact quote. Wedding dresses are altered only.`] },
     { id: 'astar', f: (l) => [`Do you replace the lining of coats and jackets ${l}?`, `Yes, we replace linings (not on sweaters and cardigans). The price depends on the lining and the scope of the job, quoted by photo.`] },
@@ -201,7 +201,7 @@ const FAQ: Record<ILang, F[]> = {
   ru: [
     { id: 'paca', f: (l) => [`Сколько стоит подшить брюки ${l}?`, `Подшив низа брюк — от ${e('hem')}; точную цену назовём по фото в WhatsApp. Обычные работы готовы в тот же день, срочные — за 1–2 часа.`] },
     { id: 'fermuar', f: (l) => [`Сломалась молния ${l}, что делать?`, `Пришлите фото молнии в WhatsApp. Замена молнии — от ${e('zipperPants')} (куртки и пальто — ${e('zipperCoat')}); заевшую молнию часто можно починить без замены. Обычные работы — в тот же день.`] },
-    { id: 'kol', f: (l, n) => [`Можно укоротить рукава куртки или пальто в районе ${n}?`, `Да. Укорочение рукавов и длины курток и пальто — от ${e('hem')}; длину рукава отмечаем на вас. Забор и доставка домой или в отель бесплатны.`] },
+    { id: 'kol', f: (l, n) => [`Можно укоротить рукава куртки или пальто в районе ${n}?`, `Да. Укорочение рукавов и длины курток и пальто — от ${e('hem')}; длину рукава отмечаем на вас. Забор и доставка домой или в отель доступны.`] },
     { id: 'bluz', f: (l) => [`Ушиваете блузки и рубашки ${l}?`, `Да. Ушиваем и укорачиваем блузки, рубашки и футболки; ушивание — от ${e('waist')}, точная цена зависит от фото.`] },
     { id: 'aski', f: (l) => [`Можно подогнать длину бретелей платья ${l}?`, `Да. Регулируем длину бретелей на платьях и вечерних нарядах; цена зависит от работы, для точной оценки пришлите фото. Свадебные платья только переделываем.`] },
     { id: 'astar', f: (l) => [`Меняете подкладку на куртках и пальто ${l}?`, `Да, меняем подкладку (кроме свитеров и кардиганов). Цена зависит от материала подкладки и объёма работы, оцениваем по фото.`] },
@@ -219,7 +219,7 @@ const FAQ: Record<ILang, F[]> = {
   de: [
     { id: 'paca', f: (l) => [`Was kostet Hosen kürzen ${l}?`, `Hosen kürzen ab ${e('hem')}; den genauen Preis nennen wir per Foto auf WhatsApp. Normale Arbeiten sind am selben Tag fertig, Express in 1–2 Stunden.`] },
     { id: 'fermuar', f: (l) => [`Mein Reißverschluss ist kaputt ${l}, was tun?`, `Schicken Sie ein Foto des Reißverschlusses per WhatsApp. Reißverschluss wechseln ab ${e('zipperPants')} (Mäntel und Jacken ${e('zipperCoat')}); klemmende Reißverschlüsse lassen sich oft ohne Austausch reparieren. Normale Arbeiten am selben Tag.`] },
-    { id: 'kol', f: (l, n) => [`Können Sie Jacken- und Mantelärmel in der Nähe von ${n} kürzen?`, `Ja. Ärmel und Länge von Jacken und Mänteln kürzen ab ${e('hem')}; die Ärmellänge wird am getragenen Kleidungsstück markiert. Abholung und Lieferung nach Hause oder ins Hotel sind kostenlos.`] },
+    { id: 'kol', f: (l, n) => [`Können Sie Jacken- und Mantelärmel in der Nähe von ${n} kürzen?`, `Ja. Ärmel und Länge von Jacken und Mänteln kürzen ab ${e('hem')}; die Ärmellänge wird am getragenen Kleidungsstück markiert. Abholung und Lieferung nach Hause oder ins Hotel sind möglich.`] },
     { id: 'bluz', f: (l) => [`Machen Sie Blusen und Hemden enger ${l}?`, `Ja. Wir machen Blusen, Hemden und T-Shirts enger und kürzer; Enger machen ab ${e('waist')}, der genaue Preis hängt vom Foto ab.`] },
     { id: 'aski', f: (l) => [`Kann man die Trägerlänge eines Kleides anpassen ${l}?`, `Ja. Wir passen die Trägerlänge bei Kleidern und Abendmode an; der Preis hängt von der Arbeit ab, schicken Sie ein Foto für ein genaues Angebot. Brautkleider werden nur geändert.`] },
     { id: 'astar', f: (l) => [`Erneuern Sie das Futter von Mänteln und Jacken ${l}?`, `Ja, wir erneuern Futter (nicht bei Pullovern und Strickjacken). Der Preis hängt vom Futter und vom Aufwand ab, Angebot per Foto.`] },

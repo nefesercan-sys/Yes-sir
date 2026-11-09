@@ -127,7 +127,7 @@ export const TRY_PER_EUR = 20;
 export const eurOf = (tl: number): number => Math.round(tl / TRY_PER_EUR);
 
 // ── Ücretsiz servis kuralı ─────────────────────────────────────────────────────────
-// Sahibin kararı (Ekim 2026): EVE VE OTELE alım-teslim hizmet verilen TÜM bölgelerde ücretsizdir (tek genel kural).
+// Sahibin kararı (Ekim 2026): EVE VE OTELE alım-teslim hizmet verilen tüm bölgelerde yapılır; sayfalarda 'ücretsiz' VAADİ YAZILMAZ (Kasım 2026 kararı).
 // Aşağıdaki liste yalnızca geriye dönük uyumluluk içindir; isFreeService her zaman true döner. Eski not: bölgeye göre
 //    WhatsApp'ta netleşir. Liste işletme sahibinin onayladığı Ekim 2026 listesidir. Meltem idari olarak Muratpaşa'ya
 //    bağlıdır ancak Konyaaltı sınırında olduğu ve onaylı listede yer aldığı için korunmuştur.
@@ -218,28 +218,28 @@ export const durationOf = (lang: DLang): DurationCopy => DURATION[lang] ?? DURAT
 export type SLang = 'tr' | 'en' | 'ru' | 'de';
 export const SERVICE_RULE: Record<SLang, { hotelFree: string; homeFree: string; homeByArea: string; full: string }> = {
   tr: {
-    hotelFree: 'Eve ve otele servis ücretsiz',
-    homeFree: 'Eve ve otele servis ücretsiz',
-    homeByArea: 'Eve ve otele servis ücretsiz',
-    full: 'Hizmet verdiğimiz tüm bölgelerde eve ve otele alım-teslim ücretsizdir; yalnızca yapılan iş ücretlendirilir.',
+    hotelFree: 'Eve ve otele servis',
+    homeFree: 'Eve ve otele servis',
+    homeByArea: 'Eve ve otele servis',
+    full: 'Hizmet verdiğimiz bölgelerde eve ve otele alım-teslim yapıyoruz; ayrıntı WhatsApp\'ta netleşir.',
   },
   en: {
-    hotelFree: 'Free service to homes and hotels',
-    homeFree: 'Free service to homes and hotels',
-    homeByArea: 'Free service to homes and hotels',
-    full: 'Pick-up and delivery to homes and hotels is free in every area we serve; you only pay for the work itself.',
+    hotelFree: 'Service to homes and hotels',
+    homeFree: 'Service to homes and hotels',
+    homeByArea: 'Service to homes and hotels',
+    full: 'We offer pick-up and delivery to homes and hotels in the areas we serve; details are confirmed on WhatsApp.',
   },
   ru: {
-    hotelFree: 'Бесплатный выезд на дом и в отель',
-    homeFree: 'Бесплатный выезд на дом и в отель',
-    homeByArea: 'Бесплатный выезд на дом и в отель',
-    full: 'Забор и доставка на дом и в отели бесплатны во всех районах, где мы работаем; вы платите только за саму работу.',
+    hotelFree: 'Выезд на дом и в отель',
+    homeFree: 'Выезд на дом и в отель',
+    homeByArea: 'Выезд на дом и в отель',
+    full: 'Мы забираем и доставляем вещи на дом и в отели в районах обслуживания; детали уточняются в WhatsApp.',
   },
   de: {
-    hotelFree: 'Kostenloser Service zu Hause und im Hotel',
-    homeFree: 'Kostenloser Service zu Hause und im Hotel',
-    homeByArea: 'Kostenloser Service zu Hause und im Hotel',
-    full: 'Abholung und Lieferung zu Hause und im Hotel sind in allen von uns bedienten Gebieten kostenlos; Sie zahlen nur die eigentliche Arbeit.',
+    hotelFree: 'Service zu Hause und im Hotel',
+    homeFree: 'Service zu Hause und im Hotel',
+    homeByArea: 'Service zu Hause und im Hotel',
+    full: 'Wir holen Ihre Kleidung zu Hause oder im Hotel ab und bringen sie zurück; Einzelheiten klären wir per WhatsApp.',
   },
 };
 

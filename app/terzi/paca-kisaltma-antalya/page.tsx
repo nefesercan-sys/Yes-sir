@@ -15,9 +15,9 @@ const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(
 
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
-  ['Antalya paça kısaltma fiyatı 2026 ne kadar?', `Kot paça, kumaş pantolon ve eşofman paça kısaltma ₺200'den, deri pantolon ₺400'den başlar. Eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+  ['Antalya paça kısaltma fiyatı 2026 ne kadar?', `Kot paça, kumaş pantolon ve eşofman paça kısaltma ₺200'den, deri pantolon ₺400'den başlar. Eve ve otele alım-teslim yapıyoruz. WhatsApp: ${PHONE}`],
   ['Paça kısaltma kaç saatte tamamlanır?', "Normal işler aynı gün teslim edilir, acil işler 1–2 saatte hazırdır. WhatsApp'tan talep edin."],
-  ['Eve gelen paça kısaltma Antalya var mı?', `Evet! Araçlı terzi servisimizle Antalya'nın ilçelerine geliyoruz. Eve ve otele alım-teslim Belek, Lara ve Kemer dahil her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+  ['Eve gelen paça kısaltma Antalya var mı?', `Evet! Araçlı terzi servisimizle Antalya'nın ilçelerine geliyoruz. Eve ve otele alım-teslim Belek, Lara ve Kemer dahil her bölgede yapılır. WhatsApp: ${PHONE}`],
   ['Kot paça orijinal dikiş tekniğiyle mi kısaltılıyor?', "Evet. Kot pantolonlarda orijinal zincir dikiş veya çift dikiş tekniği kullanılmaktadır."],
   ['Pantolon paçası kaç TL, paça kısaltma ücreti ne kadar?', "Paça kısaltma ücreti 2026: kot paça, eşofman ve kumaş pantolon ₺200'den, deri pantolon ₺400'den başlar."],
   ['Eşofman paça kısaltma kaç lira?', "Eşofman ve spor pantolon paça kısaltma ₺200'den başlar. Lastikli veya düz paça seçeneği mevcuttur."],
@@ -85,7 +85,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: 'Paça Kısaltma ₺200 · Aynı Gün Teslim | Terzi Can' },
-  description: "Paça kısaltma ücreti 2026: kot ve kumaş pantolon ₺200. Pantolon paçası kaç TL? Aynı gün teslim, otellere servis ücretsiz. 08–23. ☎ +90 531 898 64 18",
+  description: "Paça kısaltma ücreti 2026: kot ve kumaş pantolon ₺200. Pantolon paçası kaç TL? Aynı gün teslim, otellere servis. 08–23. ☎ +90 531 898 64 18",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
     'kot paça kısaltma Antalya', 'Antalya paça kısaltma kaç lira', 'pantolon boyu kısaltma Antalya',
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
   })(),
   openGraph: {
     title: 'Paça Kısaltma Antalya · Kot Paça ₺200 · Aynı Gün Teslim',
-    description: "Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis ücretsiz. ☎ +90 531 898 64 18",
+    description: "Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis. ☎ +90 531 898 64 18",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } },
@@ -123,17 +123,17 @@ const FIYATLAR = [
   ['Kadife Pantolon Paça', '₺200', 'Aynı gün', 'Hassas kumaş'],
   ['Tulum / Tulum Paça', '₺200', 'Aynı gün', 'Her model'],
   ['Geniş Paça → Dar Paça', '₺200', 'Aynı gün', 'Şekil değişikliği'],
-  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—', 'Konyaaltı ve çevresi'],
+  ['Araçlı Servis', 'WhatsApp\'ta netleşir', '—', 'Konyaaltı ve çevresi'],
 ];
 
 const ILCELER = [
   { ad: 'Konyaaltı', sure: 'Atölye bölgesi', detay: 'Hurma, Sarısu, Uncalı, Arapsuyu' },
-  { ad: 'Muratpaşa', sure: 'Ücretsiz servis', detay: 'Liman, Şirinyalı, Fener, Kaleiçi' },
-  { ad: 'Kepez', sure: 'Ücretsiz servis', detay: 'Varsak, Santral, Altındağ' },
-  { ad: 'Lara', sure: 'Ücretsiz servis', detay: 'Lara merkez, Kundu, Güzeloba' },
-  { ad: 'Belek', sure: 'Ücretsiz servis', detay: 'Belek otelleri' },
-  { ad: 'Kemer', sure: 'Ücretsiz servis', detay: 'Kemer merkez, Beldibi, Göynük, Tekirova' },
-  { ad: 'Side', sure: 'Ücretsiz servis', detay: 'Side, Sorgun, Kumköy, Evrenseki' },
+  { ad: 'Muratpaşa', sure: 'Otel servisi', detay: 'Liman, Şirinyalı, Fener, Kaleiçi' },
+  { ad: 'Kepez', sure: 'Otel servisi', detay: 'Varsak, Santral, Altındağ' },
+  { ad: 'Lara', sure: 'Otel servisi', detay: 'Lara merkez, Kundu, Güzeloba' },
+  { ad: 'Belek', sure: 'Otel servisi', detay: 'Belek otelleri' },
+  { ad: 'Kemer', sure: 'Otel servisi', detay: 'Kemer merkez, Beldibi, Göynük, Tekirova' },
+  { ad: 'Side', sure: 'Otel servisi', detay: 'Side, Sorgun, Kumköy, Evrenseki' },
 ];
 
 export default function PacaKisaltmaPage() {
@@ -165,8 +165,8 @@ export default function PacaKisaltmaPage() {
               <span style={{ color: '#D4B07A', fontStyle: 'italic' }}>Fiyatları 2026 — Kot Paça ₺200</span>
             </h1>
             <p style={{ color: 'rgba(255,255,255,.8)', fontSize: '1rem', lineHeight: 1.8, maxWidth: '600px', marginBottom: '1.5rem' }}>
-              <strong style={{ color: '#fff' }}>Aynı gün teslim</strong> · Kot paça ₺200, kumaş pantolon ₺200 · Otellere servis ücretsiz ·
-              Lara, Belek, Side ve Kemer dahil tüm otel bölgelerine ücretsiz geliyoruz; eve de ücretsizdir.
+              <strong style={{ color: '#fff' }}>Aynı gün teslim</strong> · Kot paça ₺200, kumaş pantolon ₺200 · Otellere servis ·
+              Lara, Belek, Side ve Kemer dahil tüm otel bölgelerine geliyoruz; eve de geliyoruz.
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               <a href={WA('Merhaba, paça kısaltma için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
@@ -212,7 +212,7 @@ export default function PacaKisaltmaPage() {
                 {FIYATLAR.map(([tip, fiyat, sure, not], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.025)' : '#fff' }}>
                     <td style={{ padding: '.9rem .8rem', fontSize: '.88rem', fontWeight: i === FIYATLAR.length-1 ? 600 : 400 }}>{tip}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat === 'ÜCRETSIZ' ? '#22c55e' : '#8A6E3E', fontWeight: 700, fontSize: '.92rem' }}>{fiyat}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#8A6E3E', fontWeight: 700, fontSize: '.92rem' }}>{fiyat}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.8rem' }}>{sure}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.76rem' }}>{not}</td>
                   </tr>
@@ -235,7 +235,7 @@ export default function PacaKisaltmaPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: '1rem' }}>
               {[
                 ['⚡','Hızlı Teslim','Normal işler aynı gün teslim edilir, acil durumda 1–2 saatte hazır olur. Tatildeyseniz beklemenize gerek yok.'],
-                ['🚗','Araçlı Servis (otellere ücretsiz)','Eve veya otele geliyor, ölçü alıyor, teslim ediyoruz. Eve ve otele servis ücretsiz.'],
+                ['🚗','Araçlı Servis (otellere)','Eve veya otele geliyor, ölçü alıyor, teslim ediyoruz. Eve ve otele servis.'],
                 ['✂️','Orijinal Dikiş','Kot pantolonlarda orijinal paça dikişi tekniği — marka etiketi korunur.'],
                 ['💰','Şeffaf Fiyat','Fiyatlar önceden bildirilir, sürpriz ücret yok. Rekabetçi, adil fiyatlandırma.'],
                 ['🌍','4 Dil','Türkçe, İngilizce, Rusça, Almanca hizmet. Turistler için ideal.'],
@@ -287,7 +287,7 @@ export default function PacaKisaltmaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Paça Kısaltma Hizmet Bölgeleri — Konyaaltı ve çevresi
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Konyaaltı merkezimizden eve ve otele her bölgede ücretsiz araçlı servis</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2rem' }}>Konyaaltı merkezimizden eve ve otele her bölgede araçlı servis</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '.8rem' }}>
               {ILCELER.map(({ ad, sure, detay }) => (
                 <div key={ad} style={{ background: '#fff', border: '1px solid rgba(184,151,90,.15)', borderLeft: '3px solid #B8975A', padding: '1.2rem' }}>
@@ -325,7 +325,7 @@ export default function PacaKisaltmaPage() {
             Paça Kısaltma Fiyatı Öğrenin
           </h2>
           <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>
-            Fotoğraf gönderin — hızlı fiyat · aynı gün teslim · Otellere servis ücretsiz
+            Fotoğraf gönderin — hızlı fiyat · aynı gün teslim · Otellere servis
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, paça kısaltma için fiyat almak istiyorum. Pantolonumun fotoğrafını göndereyim mi?')} target="_blank" rel="noopener noreferrer"

@@ -7,5 +7,5 @@ export const FAQS: { q: string; a: string }[] = [
   { q: "Kumaşı kim temin ediyor, kendi kumaşımı getirebilir miyim?", a: "Kumaşı biz temin edebiliriz; isterseniz kendi kumaşınızı da getirebilirsiniz." },
   { q: "Ödemeyi nasıl yapıyorum?", a: "Ödemeyi havale ile alabiliyoruz. Fiyat ve ödeme detayları WhatsApp'ta netleştirilir." },
   { q: "Hangi dillerde yazışabiliriz?", a: "WhatsApp'tan her dilde yazışabilirsiniz; her dilde cevap veriyoruz." },
-  { q: "Fiyatı hızlıca nasıl öğrenirim?", a: "Kıyafetin fotoğrafını WhatsApp'tan +90 531 898 64 18 numarasına gönderin; fiyatı ve süreyi söyleyelim. Antalya'da otel ve evlere alım-teslim ücretsizdir, her gün 08:00–23:00 yazabilirsiniz." },
+  { q: "Fiyatı hızlıca nasıl öğrenirim?", a: "Kıyafetin fotoğrafını WhatsApp'tan +90 531 898 64 18 numarasına gönderin; fiyatı ve süreyi söyleyelim. Antalya'da otel ve evlere alım-teslim yapıyoruz, her gün 08:00–23:00 yazabilirsiniz." },
 ];

@@ -14,7 +14,7 @@ const DATA: KonuData = {
     ['Başlangıç fiyatı', '400 TL\'den'],
     ['Süre', 'İşin kapsamına göre netleşir'],
     ['Çalışma saatleri', 'Her gün 08:00–23:00'],
-    ['Servis', 'Eve ve otele ücretsiz alım-teslim'],
+    ['Servis', 'Eve ve otele alım-teslim'],
   ],
   turlerBaslik: 'Hangi deri ürünlerde çalışıyoruz?',
   turler: [
@@ -33,7 +33,7 @@ const DATA: KonuData = {
   adimlar: [
     { baslik: 'Fotoğraf gönderin', aciklama: 'Deri parçanın ve yapılacak yerin fotoğrafını WhatsApp\'tan yollayın.' },
     { baslik: 'Deri cinsi görülür', aciklama: 'İşlemin yapılıp yapılamayacağı ve net fiyat söylenir.' },
-    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele ücretsiz alım-teslim isteyin.' },
+    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele alım-teslim isteyin.' },
     { baslik: 'Teslim', aciklama: 'Süre işin kapsamına göre WhatsApp\'ta netleşir.' },
   ],
   faq: [
@@ -42,7 +42,7 @@ const DATA: KonuData = {
     { q: 'Deri ceketin kolu kısaltılır mı?', a: 'Kol boyu ceket üzerinizdeyken işaretlenir; yapılabilecek işlem fotoğraftan değerlendirilir.' },
     { q: 'Deri pantolon ve yelek tamiri yapıyor musunuz?', a: 'Evet. Deri pantolon ve deri yelekte de tamir ve tadilat yapıyoruz; fiyatlar 400 TL\'den başlar.' },
     { q: 'Deri tadilatı kaç günde biter?', a: 'Süre işin kapsamına göre değişir; fotoğrafı gönderince net süreyi WhatsApp\'tan söyleriz.' },
-    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim tüm hizmet bölgelerimizde ücretsizdir; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
+    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim yapıyoruz; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
     { href: 'href', ad: 'ad' },

@@ -1,6 +1,6 @@
 // Sayfa alt başlıkları (H2) + kısa açıklamalar, 10 dilde. {y} = yer adı (varsayılan: Antalya).
 // Yalnızca doğrulanmış bilgiler: paça/bel ₺200+, fermuar ₺300+, gelinlik/abiye fotoğrafa veya işin detayına göre, acil 1–2 saat, normal aynı gün,
-// özel dikim modele/adede göre, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat, hizmet verilen bölgelerde ücretsiz otel alım-teslim.
+// özel dikim modele/adede göre, her gün 08:00–23:00, WhatsApp'tan fotoğrafla fiyat, hizmet verilen bölgelerde otel alım-teslim.
 export type L10 = 'tr' | 'en' | 'de' | 'ru' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export type Konu = 'genel' | 'paca' | 'fermuar' | 'gelinlik' | 'keten' | 'uniforma' | 'promo' | 'otel' | 'terzi' | 'fiyat' | 'hizmet' | 'bolge' | 'terziFp' | 'hizmetFp';
 type Item = { h: Record<L10, string>; p: Record<L10, string> };
@@ -436,28 +436,28 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Otel alım ve teslim ücretsiz mi?",
-    "en": "Is hotel pickup and delivery free?",
-    "de": "Sind Abholung und Lieferung im Hotel kostenlos?",
+    "tr": "Otel alım ve teslim yapıyor musunuz?",
+    "en": "Do you offer hotel pickup and delivery?",
+    "de": "Bieten Sie Abholung und Lieferung im Hotel an?",
     "ru": "Бесплатны ли забор и доставка в отеле?",
-    "es": "¿Son gratuitas la recogida y entrega en el hotel?",
-    "fr": "Prise en charge et livraison à l’hôtel gratuites ?",
-    "pl": "Czy odbiór i dostawa w hotelu są bezpłatne?",
-    "uk": "Чи безкоштовні забір і доставка в готелі?",
-    "nl": "Zijn ophalen en bezorgen in het hotel gratis?",
-    "ar": "هل الاستلام والتسليم في الفندق مجاني؟"
+    "es": "¿Son disponibles la recogida y entrega en el hotel?",
+    "fr": "Proposez-vous la prise en charge et la livraison à l’hôtel ?",
+    "pl": "Czy odbiór i dostawa w hotelu są dostępne?",
+    "uk": "Чи забір і доставка в готелі?",
+    "nl": "Zijn ophalen en bezorgen in het hotel mogelijk?",
+    "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi ücretsizdir.",
-    "en": "In the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings), hotel pickup and delivery are free.",
-    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) sind Abholung und Lieferung im Hotel kostenlos.",
-    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель бесплатны.",
-    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel son gratuitas.",
-    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont gratuites.",
-    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są bezpłatne.",
-    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель безкоштовні.",
-    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel gratis.",
-    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق مجاني."
+    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
+    "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
+    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
+    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
+    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel están disponibles.",
+    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont assurées.",
+    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są dostępne.",
+    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель доступні.",
+    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel mogelijk.",
+    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق متاح."
    }
   },
   {
@@ -636,16 +636,16 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "السعر عبر صورة والتسليم إلى فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi ücretsizdir; her gün 08:00–23:00 yazabilirsiniz.",
-    "en": "Send a photo of the garment on WhatsApp. In the areas we serve, hotel pickup and delivery are free; you can write every day from 08:00 to 23:00.",
-    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten sind Abholung und Lieferung im Hotel kostenlos; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
-    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель бесплатны; писать можно каждый день с 08:00 до 23:00.",
-    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel son gratuitas; puede escribir todos los días de 08:00 a 23:00.",
-    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont gratuites ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
-    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są bezpłatne; możesz pisać codziennie od 08:00 do 23:00.",
-    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель безкоштовні; писати можна щодня з 08:00 до 23:00.",
-    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel gratis; u kunt elke dag van 08:00 tot 23:00 schrijven.",
-    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق مجاني؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
+    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
+    "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
+    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
+    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
+    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel están disponibles; puede escribir todos los días de 08:00 a 23:00.",
+    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont assurées ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
+    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są dostępne; możesz pisać codziennie od 08:00 do 23:00.",
+    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель доступні; писати можна щодня з 08:00 до 23:00.",
+    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel mogelijk; u kunt elke dag van 08:00 tot 23:00 schrijven.",
+    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق متاح؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
    }
   }
  ],
@@ -690,16 +690,16 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "السعر عبر صورة والتسليم إلى فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi ücretsizdir; her gün 08:00–23:00 yazabilirsiniz.",
-    "en": "Send a photo of the garment on WhatsApp. In the areas we serve, hotel pickup and delivery are free; you can write every day from 08:00 to 23:00.",
-    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten sind Abholung und Lieferung im Hotel kostenlos; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
-    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель бесплатны; писать можно каждый день с 08:00 до 23:00.",
-    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel son gratuitas; puede escribir todos los días de 08:00 a 23:00.",
-    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont gratuites ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
-    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są bezpłatne; możesz pisać codziennie od 08:00 do 23:00.",
-    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель безкоштовні; писати можна щодня з 08:00 до 23:00.",
-    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel gratis; u kunt elke dag van 08:00 tot 23:00 schrijven.",
-    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق مجاني؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
+    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
+    "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
+    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
+    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
+    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel están disponibles; puede escribir todos los días de 08:00 a 23:00.",
+    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont assurées ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
+    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są dostępne; możesz pisać codziennie od 08:00 do 23:00.",
+    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель доступні; писати можна щодня з 08:00 до 23:00.",
+    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel mogelijk; u kunt elke dag van 08:00 tot 23:00 schrijven.",
+    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق متاح؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
    }
   }
  ],
@@ -732,28 +732,28 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Otel alım ve teslim ücretsiz mi?",
-    "en": "Is hotel pickup and delivery free?",
-    "de": "Sind Abholung und Lieferung im Hotel kostenlos?",
+    "tr": "Otel alım ve teslim yapıyor musunuz?",
+    "en": "Do you offer hotel pickup and delivery?",
+    "de": "Bieten Sie Abholung und Lieferung im Hotel an?",
     "ru": "Бесплатны ли забор и доставка в отеле?",
-    "es": "¿Son gratuitas la recogida y entrega en el hotel?",
-    "fr": "Prise en charge et livraison à l’hôtel gratuites ?",
-    "pl": "Czy odbiór i dostawa w hotelu są bezpłatne?",
-    "uk": "Чи безкоштовні забір і доставка в готелі?",
-    "nl": "Zijn ophalen en bezorgen in het hotel gratis?",
-    "ar": "هل الاستلام والتسليم في الفندق مجاني؟"
+    "es": "¿Son disponibles la recogida y entrega en el hotel?",
+    "fr": "Proposez-vous la prise en charge et la livraison à l’hôtel ?",
+    "pl": "Czy odbiór i dostawa w hotelu są dostępne?",
+    "uk": "Чи забір і доставка в готелі?",
+    "nl": "Zijn ophalen en bezorgen in het hotel mogelijk?",
+    "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi ücretsizdir.",
-    "en": "In the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings), hotel pickup and delivery are free.",
-    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) sind Abholung und Lieferung im Hotel kostenlos.",
-    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель бесплатны.",
-    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel son gratuitas.",
-    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont gratuites.",
-    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są bezpłatne.",
-    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель безкоштовні.",
-    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel gratis.",
-    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق مجاني."
+    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
+    "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
+    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
+    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
+    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel están disponibles.",
+    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont assurées.",
+    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są dostępne.",
+    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель доступні.",
+    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel mogelijk.",
+    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق متاح."
    }
   },
   {

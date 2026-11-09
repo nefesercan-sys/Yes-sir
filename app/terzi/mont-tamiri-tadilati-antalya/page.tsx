@@ -14,7 +14,7 @@ const DATA: KonuData = {
     ['Başlangıç fiyatı', 'Tadilat 200 TL\'den · fermuar 300 TL\'den'],
     ['Teslim süresi', 'Normal iş aynı gün · acilde 1–2 saat'],
     ['Çalışma saatleri', 'Her gün 08:00–23:00'],
-    ['Servis', 'Eve ve otele ücretsiz alım-teslim'],
+    ['Servis', 'Eve ve otele alım-teslim'],
   ],
   turlerBaslik: 'Montta hangi işleri yapıyoruz?',
   turler: [
@@ -35,7 +35,7 @@ const DATA: KonuData = {
   adimlar: [
     { baslik: 'Fotoğraf gönderin', aciklama: 'Montun ve yapılacak yerin fotoğrafını WhatsApp\'tan yollayın.' },
     { baslik: 'Fiyat netleşir', aciklama: 'Yapılacak işe göre net fiyatı bildiririz.' },
-    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele ücretsiz alım-teslim isteyin.' },
+    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele alım-teslim isteyin.' },
     { baslik: 'Teslim', aciklama: 'Normal işler aynı gün, acil işler 1–2 saatte teslim edilir.' },
   ],
   faq: [
@@ -44,7 +44,7 @@ const DATA: KonuData = {
     { q: 'Mont daraltma yapılıyor mu?', a: 'Evet, beden ve kol daraltma yapıyoruz; yapılabilecek işlem fotoğraftan değerlendirilir.' },
     { q: 'Mont fermuarı değişiyor mu?', a: 'Evet. Mont, kaban ve ceket fermuarı değişimi 300 TL\'den başlar.' },
     { q: 'Mont tadilatı ne kadar sürer?', a: 'Normal işler aynı gün, acil işler 1–2 saatte teslim edilir. Kapsamlı işlerde süreyi fotoğrafı görünce söyleriz.' },
-    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim tüm hizmet bölgelerimizde ücretsizdir; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
+    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim yapıyoruz; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
     { href: '/terzi/kaban-palto-tadilati-antalya', ad: 'Kaban ve palto tadilatı' },

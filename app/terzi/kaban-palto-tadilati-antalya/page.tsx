@@ -25,7 +25,7 @@ const DATA: KonuData = {
     ],
     [
       "Servis",
-      "Eve ve otele ücretsiz alım-teslim"
+      "Eve ve otele alım-teslim"
     ]
   ],
   "turlerBaslik": "Kaban ve Palto Tadilatı kapsamı",
@@ -86,7 +86,7 @@ const DATA: KonuData = {
     },
     {
       "baslik": "Getirin ya da alalım",
-      "aciklama": "Atölyeye bırakın ya da eve/otele ücretsiz alım-teslim isteyin."
+      "aciklama": "Atölyeye bırakın ya da eve/otele alım-teslim isteyin."
     },
     {
       "baslik": "Teslim",
@@ -120,7 +120,7 @@ const DATA: KonuData = {
     },
     {
       "q": "Kaban ve paltoyu eve veya otele gelip alıyor musunuz?",
-      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim ücretsizdir."
+      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim yapıyoruz."
     }
   ],
   "lowPrice": "200",
@@ -152,10 +152,10 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Kaban ve Palto Tadilatı 200 TL'den · Antalya" },
-  description: "Kaban ve palto boy, kol kısaltma ve daraltma 200 TL'den; fermuar değişimi 300 TL'den. Astar ve düğme onarımı. Eve ve otele ücretsiz. ☎ +90 531 898 64 18",
+  description: "Kaban ve palto boy, kol kısaltma ve daraltma 200 TL'den; fermuar değişimi 300 TL'den. Astar ve düğme onarımı. Eve ve otele servis. ☎ +90 531 898 64 18",
   keywords: ["kaban tadilatı", "palto tadilatı", "kaban kısaltma", "palto kısaltma", "palto daraltma", "kaban kol kısaltma", "palto astar değişimi", "kaban düğme değişimi", "palto tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: "Kaban ve Palto Tadilatı Antalya | Terzi Can", description: "Kaban ve palto boyu, kol boyu, bel ve beden daraltma; astar, düğme, cep ve yaka onarımı. Eve ve otele ücretsiz servis.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: "Kaban ve Palto Tadilatı Antalya | Terzi Can", description: "Kaban ve palto boyu, kol boyu, bel ve beden daraltma; astar, düğme, cep ve yaka onarımı. Eve ve otele servis.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

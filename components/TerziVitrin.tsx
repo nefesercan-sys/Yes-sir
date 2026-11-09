@@ -288,7 +288,7 @@ export default function TerziVitrin() {
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><path d="M2 6.5h11V16H2zM13 10h4.2L21 13.5V16h-8z" /><circle cx="7" cy="17.5" r="1.8" /><circle cx="17" cy="17.5" r="1.8" /></svg>
-            <div><strong>Ücretsiz alım-teslim</strong><span>Eve ve otele</span></div>
+            <div><strong>Alım-teslim</strong><span>Eve ve otele</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
@@ -303,7 +303,7 @@ export default function TerziVitrin() {
               <div className="tv-ic"><svg {...ICON}><path d="M8.1 8.1 20 20M8.1 15.9 20 4" /><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /></svg></div>
               <p className="tv-sub">Terzi Can</p>
               <h2 id="kart-terzi">Antalya&apos;da tadilat ve dikim</h2>
-              <p className="tv-val">Paça, bel, fermuar, deri ve mont tadilatı; kıyafetiniz evinizden veya otelinizden ücretsiz alınır ve geri getirilir.</p>
+              <p className="tv-val">Paça, bel, fermuar, deri ve mont tadilatı; kıyafetiniz evinizden veya otelinizden alınır ve geri getirilir.</p>
               <ul>
                 <li>Paça ve bel kısaltma-daraltma <b>{PRICE_FROM.paca} TL&apos;den</b></li>
                 <li>Fermuar değişimi <b>{PRICE_FROM.fermuar} TL&apos;den</b></li>
@@ -388,7 +388,7 @@ export default function TerziVitrin() {
         {/* ── Hizmet bölgeleri ── */}
         <section className="tv-sec" aria-labelledby="tv-bolge-baslik">
           <h2 id="tv-bolge-baslik">Alım-teslim bölgeleri</h2>
-          <p>Terzi Can, bu bölgelerde evinize ve otelinize alım-teslim yapar; yalnızca yapılan iş ücretlendirilir.</p>
+          <p>Terzi Can, bu bölgelerde evinize ve otelinize alım-teslim yapar.</p>
           <ul className="tv-areas">
             {AREA_SERVED.map((a) => (<li key={a}>{a}</li>))}
           </ul>

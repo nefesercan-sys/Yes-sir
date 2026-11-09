@@ -71,12 +71,12 @@ export const metadata: Metadata = {
 
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQS: [string, string][] = [
-  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz; eve ve otele alım-teslim ücretsizdir. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu mahallelerine adrese terzi servisi var mı?', `Evet! Terzi Can olarak Konyaaltı'nın tüm mahallelerine kapıdan alım ve teslimat yapıyoruz; eve ve otele alım-teslim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
   ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
   ['Fermuar değişimi kaç lira?', `₺300'den başlar. Mont, ceket, pantolon fermuarı; normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
   ['Elbise dikimi fiyatı?', `Elbise, abiye, takım ve çocuk kıyafeti dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; fotoğraf gönderin. Gelinlik dikimi yapılmaz, yalnızca gelinlik ve abiye tadilatı yapılır. WhatsApp: ${PHONE_DISPLAY}`],
   ['Terzi çağır, adrese gelir mi?', `Evet! WhatsApp'tan randevu alın, terzimiz Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine gelir. WhatsApp: ${PHONE_DISPLAY}`],
-  ['Is there an English-speaking tailor in Konyaaltı Antalya?', `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations and free hotel pickup. WhatsApp: ${PHONE_DISPLAY}`],
+  ['Is there an English-speaking tailor in Konyaaltı Antalya?', `Yes! Tailor Can in Konyaaltı offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}`],
 ];
 
 // ─── JSON-LD ──────────────────────────────────────────────────────────────────
@@ -93,7 +93,7 @@ const jsonLd = {
       '@id': `${TERZI_URL}#business`,
       name: 'Terzi Can Konyaaltı',
       alternateName: [GBP1_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
-      description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine ücretsiz adrese servis.',
+      description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine adrese servis.',
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB', paymentAccepted: 'Cash, Credit Card',
       image: OG_IMAGE, hasMap: GBP1_MAPS,
@@ -149,7 +149,7 @@ const SERVICES = [
   { icon: '🔗', title: 'Fermuar Değişimi', desc: 'Pantolon, mont, ceket, sweatshirt, çanta fermuarı.', price: '₺300+', time: 'Aynı gün', color: '#fce7f3', tc: '#9d174d' },
   { icon: '📐', title: 'Bel Daraltma', desc: 'Elbise, pantolon, ceket bel daraltma ve elbise boyunu kısaltma.', price: '₺200+', time: 'Aynı gün', color: '#ede9fe', tc: '#5b21b6' },
   { icon: '🪡', title: 'Elbise Dikimi', desc: 'Kadın elbise, abiye, erkek takım elbise, gömlek. Gelinlik dikimi yapılmaz; gelinlik/abiye yalnız tadilat.', price: 'Fotoğrafa ve istediğiniz modele göre', time: 'Modele ve adede göre', color: '#dcfce7', tc: '#15803d' },
-  { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'Ücretsiz', time: '—', color: '#f0fdf4', tc: '#166534' },
+  { icon: '🚗', title: 'Adrese Gelen Terzi', desc: 'Terziniz kapınıza gelir, ölçü alır, hazır olunca teslim eder.', price: 'WhatsApp\'ta netleşir', time: '—', color: '#f0fdf4', tc: '#166534' },
 ];
 
 const PRICES = [
@@ -162,7 +162,7 @@ const PRICES = [
   ['Abiye / Gelinlik Tadilatı', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
   ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
-  ['Adrese Alım-Teslim', 'ÜCRETSİZ', '—'],
+  ['Adrese Alım-Teslim', 'WhatsApp\'ta netleşir', '—'],
 ];
 
 
@@ -210,7 +210,7 @@ export default function KonyaaltiTerziPage() {
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.72)', lineHeight: 1.8, maxWidth: 540, margin: '0 auto 1.8rem' }}>
               <strong style={{ color: '#fff' }}>Terzi Can</strong> — Konyaaltı'nda 2006'dan beri hizmet veren profesyonel terzi atölyesi.
               Hurma, Liman, Uncalı, Sarısu, Gürsu ve tüm Konyaaltı mahallelerine
-              <strong style={{ color: D.gold2 }}> ücretsiz adrese servis</strong>.
+              <strong style={{ color: D.gold2 }}> adrese servis</strong>.
             </p>
 
             {/* Dil ve özellik badge'leri */}
@@ -313,7 +313,7 @@ export default function KonyaaltiTerziPage() {
           <p style={{ fontSize: '.88rem', color: D.s, lineHeight: 1.85, margin: '0 0 1.5rem' }}>
             <strong style={{ color: D.ink }}>Terzi Can</strong> — Konyaaltı merkezli profesyonel terzi atölyesi.
             Elbise dikimi, paça kısaltma, fermuar değişimi, bel daraltma ve elbise tadilatı.
-            Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine, ayrıca hizmet verdiğimiz tüm bölgelerde eve ve otele ücretsiz alım-teslim.
+            Hurma, Liman, Uncalı, Sarısu ve tüm Konyaaltı mahallelerine, ayrıca hizmet verdiğimiz tüm bölgelerde eve ve otele alım-teslim.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 10 }}>
             {NEIGHBORHOODS.map(n => (
@@ -322,7 +322,7 @@ export default function KonyaaltiTerziPage() {
               </span>
             ))}
           </div>
-          <p style={{ fontSize: '.74rem', color: D.s2, marginTop: 6 }}>* Belirtilen mahallelerden alım + teslimat ücretsizdir.</p>
+          <p style={{ fontSize: '.74rem', color: D.s2, marginTop: 6 }}>* Belirtilen mahallelerden alım + teslimat yapılır.</p>
         </section>
 
         {/* ─── HİZMETLER ──────────────────────────────────────────────────── */}
@@ -365,7 +365,7 @@ export default function KonyaaltiTerziPage() {
                   {PRICES.map(([s,p,t], i) => (
                     <tr key={s} style={{ borderBottom: `1px solid ${D.border}`, background: i%2 ? D.bg : '#fff' }}>
                       <td style={{ padding: '.8rem 1rem', fontSize: '.84rem', color: D.ink }}>{s}</td>
-                      <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontWeight: 700, color: p==='ÜCRETSİZ' ? D.green : D.gold, fontSize: '.88rem' }}>{p}</td>
+                      <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontWeight: 700, color: D.gold, fontSize: '.88rem' }}>{p}</td>
                       <td style={{ padding: '.8rem 1rem', textAlign: 'right', fontSize: '.72rem', color: t==='Aynı gün' ? D.green : D.s, fontWeight: t==='Aynı gün' ? 600 : 400 }}>{t}</td>
                     </tr>
                   ))}
@@ -439,7 +439,7 @@ export default function KonyaaltiTerziPage() {
             Konumumuz — Hurma, Konyaaltı
           </h2>
           <p style={{ textAlign: 'center', fontSize: '.82rem', color: D.s, marginBottom: '1.5rem' }}>
-            Atölyemiz Konyaaltı Hurma Mahallesi'nde; Liman, Uncalı, Sarısu ve çevre mahallelere ücretsiz adrese servis veriyoruz.
+            Atölyemiz Konyaaltı Hurma Mahallesi'nde; Liman, Uncalı, Sarısu ve çevre mahallelere adrese servis veriyoruz.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16 }}>
             {[
@@ -508,7 +508,7 @@ export default function KonyaaltiTerziPage() {
           </h2>
           <p style={{ fontSize: '.9rem', color: 'rgba(255,255,255,.85)', margin: '0 auto 1.8rem', maxWidth: 560, lineHeight: 1.7 }}>
             Hurma · Liman · Uncalı · Sarısu · Çakırlar · Meltem · Göbi ve tüm Konyaaltı mahallelerine
-            <strong> ücretsiz adrese gelen terzi servisi.</strong>
+            <strong> adrese gelen terzi servisi.</strong>
           </p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"

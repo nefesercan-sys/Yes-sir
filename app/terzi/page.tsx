@@ -83,7 +83,7 @@ const jsonLd = {
         'Dikiş Atölyesi Antalya',
       ],
       description:
-        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi. Eve ve otele terzi servisi (Konyaaltı'nda ücretsiz).",
+        "Antalya Konyaaltı'nda profesyonel bay ve bayan terzisi. Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi, özel dikim, tişört-sweatshirt-pantolon imalatı, üniforma üretimi. Eve ve otele terzi servisi.",
       url: SITE_URL,
       mainEntityOfPage: { '@id': `${SITE_URL}#webpage` },
       telephone: PHONE_E164,
@@ -188,7 +188,7 @@ const jsonLd = {
       '@type': 'HowTo',
       '@id': `${SITE_URL}#howto-olcu`,
       name: 'Terzi Can ile Adrese Gelen Terzi Servisi Nasıl Çalışır?',
-      description: 'Eve ve otele servis ücretsiz eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
+      description: 'Eve ve otele terzi servisiyle adresinizde ölçü alma ve teslimat süreci.',
       step: [
         { '@type': 'HowToStep', name: 'WhatsApp ile iletişim', text: `WhatsApp ${PHONE} üzerinden adresinizi ve hizmet talebinizi bildirin.` },
         { '@type': 'HowToStep', name: 'Terzi adresinize gelir', text: 'Anlaşılan saatte terzimiz adresinize gelir, yerinde ölçü alır.' },

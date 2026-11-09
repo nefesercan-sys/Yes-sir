@@ -74,11 +74,11 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Otele terzi geliyor mu?",
-  "Evet; Antalya'daki tüm otellere hizmet veriyoruz. Adresten alım, yerinde ölçü ve teslim ücretsizdir."
+  "Evet; Antalya'daki tüm otellere hizmet veriyoruz. Adresten alım, yerinde ölçü ve teslim hizmeti veriyoruz."
  ],
  [
-  "Eve alım-teslim ücretli mi?",
-  "Hayır; evlere ve otellere alım-teslim, hizmet verdiğimiz her bölgede ücretsizdir."
+  "Eve alım-teslim yapıyor musunuz?",
+  "Evlere ve otellere alım-teslim hizmeti veriyoruz; ayrıntıyı WhatsApp'tan yazabilirsiniz."
  ],
  [
   "Prova için otelde buluşuyor musunuz?",

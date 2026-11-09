@@ -36,7 +36,7 @@ const HOTELS = [
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
   ['Есть ли выездной портной в Анталье?', `Да! Портной Кан приедет по любому адресу в Анталье. Напишите адрес или отель в WhatsApp. WhatsApp: ${PHONE}`],
-  ['Выезд портного платный?', 'Выезд в отель бесплатный во всех отельных районах, где мы работаем; оплачивается только выполненная работа. Подшив брюк, ушив платья.'],
+  ['Выезжает ли портной в отель?', 'Да, выезжаем в отели во всех отельных районах, где мы работаем; детали уточняются в WhatsApp. Подшив брюк, ушив платья.'],
   ['Вы обслуживаете отели Белека?', `Да! Мы приезжаем во все отели Белека, включая Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal и Cornelia. WhatsApp: ${PHONE}`],
   ['Вы обслуживаете отели Лары?', `Да! Мы обслуживаем все отели Лары, включая Titanic Mardan, Delphin Diva, Fame Residence, Akra и Lara Barut Collection. WhatsApp: ${PHONE}`],
   ['Как быстро приезжает портной?', 'Мы согласуем время в WhatsApp в часы работы (ежедневно 08:00–23:00). Время приезда зависит от вашего адреса и нашего графика.'],
@@ -129,14 +129,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Белек', time:'Забор бесплатно', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Лара', time:'Забор бесплатно', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Гюзельоба', time:'Забор бесплатно', desc:'Sherwood, Delphin Imperial, Adalya Elite и другие пляжные отели Гюзельобы', slug:'guzeloba'},
-  {name:'Кемер', time:'Забор бесплатно', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Муратпаша / Лиман', time:'Забор бесплатно', desc:'Центр города, Калеичи, Ширинъялы, Фенер'},
+  {name:'Белек', time:'Забор из отеля', desc:'Все отели Белека — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Лара', time:'Забор из отеля', desc:'Все отели Лары — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Гюзельоба', time:'Забор из отеля', desc:'Sherwood, Delphin Imperial, Adalya Elite и другие пляжные отели Гюзельобы', slug:'guzeloba'},
+  {name:'Кемер', time:'Забор из отеля', desc:'Все отели Кемера — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Муратпаша / Лиман', time:'Забор из отеля', desc:'Центр города, Калеичи, Ширинъялы, Фенер'},
   {name:'Коньяалты', time:'Район мастерской', desc:'Мастерская Terzi Can — Хурма, Унджалы, Арапсую, Сарысу'},
-  {name:'Сиде', time:'Забор бесплатно', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки', slug:'side'},
-  {name:'Серик / Дёшемеалты', time:'Забор бесплатно', desc:'Центр Серика и окрестные деревни'},
+  {name:'Сиде', time:'Забор из отеля', desc:'Отели Сиде, Соргуна, Кумкёй, Эвренсеки', slug:'side'},
+  {name:'Серик / Дёшемеалты', time:'Забор из отеля', desc:'Центр Серика и окрестные деревни'},
 ];
 
 export default function VyezdnoyPortnoyAntalyaPage() {
@@ -277,7 +277,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Цены на выездного портного
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в отель бесплатный во всех районах, где мы работаем, — оплачивается только работа</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Выезд в отель обсуждается в WhatsApp — работа оценивается по фото</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>

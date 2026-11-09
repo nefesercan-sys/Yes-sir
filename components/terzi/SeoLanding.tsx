@@ -47,7 +47,7 @@ const UI = {
     popular: 'Sık aranan aramalar', faq: 'Sık Sorulan Sorular', nearby: 'Yakın bölgeler', all: 'Tüm hizmetler',
     otherLang: 'Diğer diller', hotelLink: 'Otel bölgesi sayfası', districts: 'Hizmet verdiğimiz bölgeler',
     related: 'İlgili hizmetler', time: 'Teslim süresi', price: 'Fiyat', photoPrice: 'Fotoğraf gönderin, fiyatı hemen söyleyelim',
-    mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Eve ve otele ücretsiz servis',
+    mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Eve ve otele servis',
     hours: 'Her gün 08:00–23:00', since: "2006'dan beri · 26 yıl deneyim", where: 'Atölye: Hurma Mahallesi, Konyaaltı, Antalya',
     contact: 'İletişim · Telefon', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Terzi Can — Antalya terzi', pricesHref: '/terzi',
   },
@@ -56,7 +56,7 @@ const UI = {
     popular: 'Popular searches', faq: 'Frequently Asked Questions', nearby: 'Nearby areas', all: 'All services',
     otherLang: 'Other languages', hotelLink: 'Hotel area page', districts: 'Areas we serve',
     related: 'Related services', time: 'Turnaround', price: 'Price', photoPrice: 'Send a photo and we will quote right away',
-    mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Free service to homes & hotels',
+    mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Service to homes & hotels',
     hours: 'Open daily 08:00–23:00', since: 'Serving since 2006 · 26 years of experience', where: 'Workshop: Hurma, Konyaaltı, Antalya',
     contact: 'Contact', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online tailor service Antalya', pricesHref: '/online-tailor-service',
   },
@@ -65,7 +65,7 @@ const UI = {
     popular: 'Частые запросы', faq: 'Частые вопросы', nearby: 'Ближайшие районы', all: 'Все услуги',
     otherLang: 'Другие языки', hotelLink: 'Страница отельного района', districts: 'Районы обслуживания',
     related: 'Похожие услуги', time: 'Срок', price: 'Цена', photoPrice: 'Пришлите фото — сразу назовём цену',
-    mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Бесплатный выезд на дом и в отели',
+    mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Выезд на дом и в отели',
     hours: 'Ежедневно 08:00–23:00', since: 'Работаем с 2006 года · 26 лет опыта', where: 'Мастерская: Хурма, Коньяалты, Анталья',
     contact: 'Контакты', footer: 'Terzi Can · Хурма, Коньяалты, Анталья', pricesLink: 'Ателье в Анталье', pricesHref: '/ru/atelie-antalya',
   },
@@ -74,7 +74,7 @@ const UI = {
     popular: 'Häufige Suchanfragen', faq: 'Häufige Fragen', nearby: 'Nahegelegene Gebiete', all: 'Alle Leistungen',
     otherLang: 'Andere Sprachen', hotelLink: 'Seite für das Hotelgebiet', districts: 'Gebiete, die wir bedienen',
     related: 'Ähnliche Leistungen', time: 'Dauer', price: 'Preis', photoPrice: 'Foto senden, Preis sofort per WhatsApp',
-    mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Kostenloser Service für Zuhause & Hotels',
+    mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Service für Zuhause & Hotels',
     hours: 'Täglich 08:00–23:00', since: 'Seit 2006 · 26 Jahre Erfahrung', where: 'Werkstatt: Hurma, Konyaaltı, Antalya',
     contact: 'Kontakt', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online Schneiderservice Antalya', pricesHref: '/de/online-schneiderservice-antalya',
   },
@@ -177,10 +177,10 @@ const tzHubLabel: Record<Lang, string> = {
 // ── Metin üreticileri ───────────────────────────────────────
 // Eve ücretsiz servisin olmadığı bölgelerde rozet: otellere servis yine ücretsiz (lib/business.ts kuralı)
 const SVC_FAR: Record<Lang, string> = {
-  tr: 'Otellere ücretsiz servis', en: 'Free service to hotels', ru: 'Выезд в отели бесплатно', de: 'Hotelservice kostenlos',
+  tr: 'Otellere servis', en: 'Service to hotels', ru: 'Выезд в отели', de: 'Hotelservice',
 };
 const SVC_NEAR: Record<Lang, string> = {
-  tr: 'Otele ve eve ücretsiz servis', en: 'Free hotel & home service', ru: 'Выезд в отель и на дом бесплатно', de: 'Hotel- & Hausservice kostenlos',
+  tr: 'Otele ve eve servis', en: 'Hotel & home service', ru: 'Выезд в отель и на дом', de: 'Hotel- & Hausservice',
 };
 
 const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: string; hub: string }> = {
@@ -401,7 +401,7 @@ function serviceCopy(lang: Lang, s: Service) {
   const lead = { tr: 'Fotoğrafını WhatsApp\'tan at,', en: 'Send a photo on WhatsApp,', ru: 'Пришлите фото в WhatsApp,', de: 'Foto per WhatsApp senden,' }[lang];
   const rep = { tr: 'fiyatı ve gününü söyleyelim.', en: 'we reply with price and date.', ru: 'ответим ценой и сроком.', de: 'wir nennen Preis und Termin.' }[lang];
   const open = { tr: 'Her gün 08:00–23:00', en: 'Daily 08:00–23:00', ru: 'Ежедневно 08:00–23:00', de: 'Täglich 08:00–23:00' }[lang];
-  const pickup = { tr: 'otellere ücretsiz servis', en: 'free hotel pick-up', ru: 'выезд в отели бесплатно', de: 'Hotelabholung gratis' }[lang];
+  const pickup = { tr: 'otellere servis', en: 'hotel pick-up', ru: 'выезд в отели', de: 'Hotelabholung' }[lang];
   const tel = `☎ ${PHONE}`;
   const priceTxt = price ? (lang === 'tr' ? `2026 fiyatı ${price}` : price) : '';
   const info = [tm, priceTxt].filter(Boolean).join(', ');
