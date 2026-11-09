@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Schneider per Post: Kleidung nach Antalya schicken | Terzi Can' },
   description:
-    'Kleidung per Post nach Antalya schicken: Reparatur und Änderung (auch Reißverschluss, Mantel, Abendkleid), Rücksendung per Versand. ' +
+    'Kleidung per Post nach Antalya schicken: Reparatur und Änderung, Rücksendung per Versand. ' +
     'Versandkosten trägt der Kunde. Details per WhatsApp. ☎ ' + PHONE,
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
