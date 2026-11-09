@@ -17,7 +17,7 @@ const GROUPS: { id: string; label: string; ops: string[]; heads: ((n: string, l:
   { id: 'pantolon', label: 'pantolon ve kot',
     ops: ['paça kısaltma', 'bel daraltma', 'bacak daraltma', 'bel genişletme', 'kot paçasını orijinal paça görünümüyle kısaltma', 'pantolon fermuarı değişimi ve tamiri', 'düğme değişimi', 'sökük ve yırtık onarımı'],
     heads: [(n) => `${n} pantolon ve kot tadilatı`, (n) => `${n} paça kısaltma ve bel daraltma`, (n, l) => `${l} pantolon, kot paçası, fermuar`],
-    intros: [(l, n, o) => `${l} pantolon ve kot için şu işleri yapıyoruz: ${o}.`, (l, n, o) => `${n} çevresinde pantolonunuz uzun, bol ya da bozuksa: ${o}.`, (l, n, o) => `Pantolon ve kotta ${o}; ${n} için eve ve otele ücretsiz alım-teslim yapılır.`] },
+    intros: [(l, n, o) => `${l} pantolon ve kot için şu işleri yapıyoruz: ${o}.`, (l, n, o) => `${n} çevresinde pantolonunuz uzun, bol ya da bozuksa: ${o}.`, (l, n, o) => `Pantolon ve kotta ${o}; ${n} için eve ve otele alım-teslim yapılır.`] },
   { id: 'etek-elbise', label: 'etek, elbise ve abiye',
     ops: ['etek boyu kısaltma', 'etek bel daraltma', 'elbise boyu kısaltma', 'elbise beden daraltma', 'askı boyu ayarlama', 'elbise fermuarı değişimi', 'astar değişimi', 'abiye ve gelinlik tadilatı', 'özel elbise dikimi'],
     heads: [(n) => `${n} etek ve elbise tadilatı`, (n) => `${n} elbise tamiri, abiye ve askı boyu ayarı`, (n, l) => `${l} elbise kısaltma, daraltma, dikim`],
@@ -87,7 +87,7 @@ export function bolgeMatrisi(slug: string, n: string, loc: string): Matris {
 const FAQ: { id: string; f: (loc: string, n: string) => [string, string] }[] = [
   { id: 'paca', f: (l) => [`${l} paça kısaltma fiyatı ne kadar?`, `Paça kısaltma ₺200'den başlar; net fiyat fotoğrafla WhatsApp'tan söylenir. Normal işler aynı gün, acil işler 1–2 saatte teslim edilir.`] },
   { id: 'fermuar', f: (l) => [`${l} pantolonun fermuarı bozuldu, ne yapmalıyım?`, `Fermuarın fotoğrafını WhatsApp'tan gönderin. Fermuar değişimi ₺300'den başlar; sıkışan fermuar çoğu zaman değişmeden onarılabilir. Normal işler aynı gün teslim edilir.`] },
-  { id: 'kol', f: (l, n) => [`${n} çevresinde ceket ve mont kolu kısaltan terzi var mı?`, `Evet. Ceket ve mont kol ve boy kısaltma ₺200'den başlar; kol boyu giysi üzerinizdeyken işaretlenir. ${n} için eve ve otele alım-teslim ücretsizdir.`] },
+  { id: 'kol', f: (l, n) => [`${n} çevresinde ceket ve mont kolu kısaltan terzi var mı?`, `Evet. Ceket ve mont kol ve boy kısaltma ₺200'den başlar; kol boyu giysi üzerinizdeyken işaretlenir. ${n} için eve ve otele alım-teslim yapıyoruz.`] },
   { id: 'bluz', f: (l) => [`${l} bluz ve gömlek daraltma yapılıyor mu?`, `Evet. Bluz, gömlek ve tişört daraltma ve kısaltma yapıyoruz; beden daraltma ₺200'den başlar, net fiyat fotoğrafa göre söylenir.`] },
   { id: 'aski', f: (l) => [`${l} elbise askı boyu ayarlanır mı?`, `Evet. Elbise ve abiyede askı boyu ayarlama yapıyoruz; fiyat işe göre değişir, fotoğraf gönderirseniz net fiyatı söyleriz. Gelinlikte yalnızca tadilat yapılır.`] },
   { id: 'astar', f: (l) => [`${l} mont ve ceket astarı değişir mi?`, `Evet. Astar değişimi yapıyoruz (kazak ve hırkada yapılmaz). Fiyat astarın türüne ve işin kapsamına göre fotoğrafla netleşir.`] },

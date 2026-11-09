@@ -37,14 +37,14 @@ const HOTELS = [
 const FAQ = [
   { q: 'Do you offer mobile tailor service directly to hotel rooms?', a: `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}` },
   { q: 'What currencies and payment methods do you accept?', a: 'Payment in any currency, cash or card, including international credit cards, contactless and mobile payments, right at your hotel. Prices do not include VAT.' },
-  { q: 'Is the hotel visit free of charge?', a: 'The hotel visit is free in every hotel area we cover. You also pay for the tailoring work itself.' },
+  { q: 'Do you visit hotels?', a: 'Yes. We visit hotels in every hotel area we cover; arrange the time on WhatsApp. The tailoring work is priced from a photo.' },
   { q: 'Do you serve Belek and Lara luxury hotels?', a: `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}` },
   { q: 'How fast can the tailor arrive at my hotel?', a: 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.' },
   { q: 'Do your tailors speak English?', a: `Yes, our customer coordinators and senior tailors speak fluent English, Russian, German, and Turkish.` },
   { q: 'Do you offer a mobile tailor service in Antalya hotels?', a: `Yes! Tailor Can's mobile tailor service comes to any hotel or address across Antalya. Share your hotel name or location on WhatsApp and our tailor will come to measure, sew and deliver. WhatsApp: ${PHONE}` },
   { q: 'Which currencies and payment methods do you accept?', a: `Payment in any currency, cash or card, including international credit cards and contactless mobile payments, right at your hotel.` },
   { q: 'Which hotels do you serve in Belek, Lara and Kemer?', a: `We serve all major hotels including Rixos, Regnum, Maxx Royal, Kaya Palazzo, Delphin, Calista, Gloria and Titanic. ${HOTEL_NOTE.en} WhatsApp: ${PHONE}` },
-  { q: 'Is the hotel tailor visit free?', a: `The hotel visit is free in every hotel area we cover. You also pay for the tailoring work. The price is confirmed on WhatsApp from a photo. WhatsApp: ${PHONE}` },
+  { q: 'Does the tailor come to the hotel?', a: `Yes, we visit hotels in every hotel area we cover. The price is confirmed on WhatsApp from a photo. WhatsApp: ${PHONE}` },
   { q: 'Can I get alterations done before an event?', a: `Yes. Tell us the date when you message us on WhatsApp and we will say what is possible; regular alterations are ready the same day and urgent jobs in 1–2 hours. We serve hotels in Belek, Lara, Kemer and across Antalya. WhatsApp: ${PHONE}` },
 ];
 const HOWTO = {
@@ -89,14 +89,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'Free pick-up', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Lara', time:'Free pick-up', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Güzeloba', time:'Free pick-up', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
-  {name:'Kemer', time:'Free pick-up', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Muratpaşa / Liman', time:'Free pick-up', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
+  {name:'Belek', time:'Hotel pick-up', desc:'All Belek hotels — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'Hotel pick-up', desc:'All Lara hotels — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'Hotel pick-up', desc:'Sherwood, Delphin Imperial, Adalya Elite and other Güzeloba beachfront hotels', slug:'guzeloba'},
+  {name:'Kemer', time:'Hotel pick-up', desc:'All Kemer hotels — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Muratpaşa / Liman', time:'Hotel pick-up', desc:'City center, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Workshop area', desc:'Terzi Can workshop — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Side', time:'Free pick-up', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
-  {name:'Serik / Döşemealtı', time:'Free pick-up', desc:'Serik center and surrounding villages'},
+  {name:'Side', time:'Hotel pick-up', desc:'Side, Sorgun, Kumköy, Evrenseki hotels', slug:'side'},
+  {name:'Serik / Döşemealtı', time:'Hotel pick-up', desc:'Serik center and surrounding villages'},
 ];
 
 export default function HotelTailorAntalyaPage() {
@@ -214,7 +214,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Hotel Tailor Service Across Konyaaltı & Nearby Districts
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Free pick-up and delivery to every resort region we cover</p>
+            <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Pick-up and delivery to every resort region we cover</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
               {DISTRICTS.map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
@@ -268,7 +268,7 @@ export default function HotelTailorAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Transparent Tourist Pricing (any currency)
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotel visit fee is 100% FREE — you only pay for professional tailoring work.</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotel visits and measurements are arranged on WhatsApp — the price is confirmed from a photo.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -279,7 +279,7 @@ export default function HotelTailorAntalyaPage() {
               </thead>
               <tbody>
                 {[
-                  ['Hotel Visit / Measurement','FREE','—'],
+                  ['Hotel Visit / Measurement','Arranged on WhatsApp','—'],
                   ['Trouser / Pant Hemming','from €10',TURN],
                   ['Zipper Replacement','from €15 (coat / leather €20)',TURN],
                   ['Dress / Jacket Alteration','from €10',TURN],
@@ -290,7 +290,7 @@ export default function HotelTailorAntalyaPage() {
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='FREE'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: '#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}

@@ -13,12 +13,12 @@ const WA_MSG = 'Merhaba, Konyaaltı bölgesinde terzi hizmetiniz için bilgi alm
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
   ['Terzi çağırmak için ne yapmam gerekiyor?', `${PHONE} numaralı hattımızı arayın veya WhatsApp mesajı gönderin. Kıyafetin fotoğrafını atın, fiyat alın. Randevu saatini birlikte belirleyelim — terzimiz kapınıza gelsin.`],
-  ["Antalya'da terzi çağırabilir miyim?", `Evet! Terzi Can olarak Antalya Konyaaltı ve yakın ilçelerine araçlı terzi servisi sunuyoruz; eve ve otele alım-teslim ücretsizdir. Hemen arayın: ${PHONE}`],
+  ["Antalya'da terzi çağırabilir miyim?", `Evet! Terzi Can olarak Antalya Konyaaltı ve yakın ilçelerine araçlı terzi servisi sunuyoruz; eve ve otele alım-teslim yapıyoruz. Hemen arayın: ${PHONE}`],
   ['Hangi mahallelere servis yapıyorsunuz?', "Hurma, Liman, Sarısu, Uncalı, Gürsu, Öğretmenevleri, Meltem, Çakırlar, Konyaaltı Merkez ve Antalya'nın yakın ilçelerine araçlı terzi servisi sunuyoruz."],
   ['Paça kısaltma ve bel daraltma fiyatı ne kadar?', "Paça kısaltma, bel daraltma ve etek kısaltma ₺200'den başlar; fermuar değişimi ₺300'den. WhatsApp'tan fotoğraf gönderin, fiyatı net olarak öğrenin."],
   ['Teslim süresi ne kadar?', 'Normal tamir ve tadilat aynı gün teslim edilir; acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.'],
   ['Terzi ne zaman kapıma gelir?', 'Arayın veya WhatsApp yazın, randevu saatini birlikte belirleyelim. Terzimiz adresinize gelir, ölçü alır, hazır olunca teslim eder.'],
-  ['İngilizce veya Rusça hizmet veriyor musunuz?', 'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için eve ve otele ücretsiz alım-teslim hizmeti de mevcuttur.'],
+  ['İngilizce veya Rusça hizmet veriyor musunuz?', 'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için eve ve otele alım-teslim hizmeti de mevcuttur.'],
 ];
 
 const jsonLd = {

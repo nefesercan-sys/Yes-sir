@@ -337,7 +337,7 @@ export default function OnlineTailorClient({
           <strong style={{ color: 'var(--bone2)' }}>Online Tailor Service</strong> — from our Konyaaltı base to all of Antalya:
           menswear and womenswear tailoring, repairs, alterations, custom pattern design,
           mass production and contract manufacturing. Hemming, zipper replacement. Sportswear, tracksuits
-          and sweatshirts made to order. Bulk production quoted per project. Free courier within Antalya; shipping abroad is confirmed on WhatsApp.
+          and sweatshirts made to order. Bulk production quoted per project. Courier within Antalya; shipping abroad is confirmed on WhatsApp.
         </p>
       </div>
 
@@ -406,7 +406,7 @@ export default function OnlineTailorClient({
               ['01','📸','Send a Photo & Measurements',"Send your reference design and measurements via WhatsApp — no obligation."],
               ['02','🎨','Design & Fabric Selection','Work out the details with our expert tailor and confirm the price.'],
               ['03','✂️','We Start Sewing','Once approved, we begin sewing in our workshop.'],
-              ['04','🚗','Delivery','Free courier within Antalya; international shipping details are confirmed on WhatsApp, and shipping cost is paid by the customer.'],
+              ['04','🚗','Delivery','Courier within Antalya; international shipping details are confirmed on WhatsApp, and shipping cost is paid by the customer.'],
             ] as [string,string,string,string][]).map(([n,ic,t,d])=>(
               <div key={n} className="ohow-card">
                 <div className="ohow-n">{n}</div>

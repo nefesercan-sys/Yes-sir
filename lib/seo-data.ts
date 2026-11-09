@@ -29,7 +29,7 @@ export const LAST_UPDATE = '2026-10-30';
 // TR_NEAR_SLUGS yalnızca METİN tonu ve sıralama için kullanılır (yakın mahalle / uzak bölge anlatımı).
 // İşletme sahibinin kararı (Ekim 2026): terzilik/tekstil sayfalarının HİÇBİRİ noindex yapılmaz; tüm dillerde tüm bölgeler aramaya açıktır.
 export const TR_NEAR_SLUGS = ['konyaalti', 'hurma', 'liman', 'gursu', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'uncali', 'sarisu', 'meltem', 'muratpasa', 'fener', 'sirinyali', 'toros'];
-/** EV adresine ücretsiz alım-teslim listesi (tek kaynak: lib/business.ts). Otellere servis her bölgede ücretsizdir. */
+/** EV adresine alım-teslim listesi (tek kaynak: lib/business.ts). Otellere servis her bölgede yapılır (ücretsiz denmez). */
 export const FREE_SERVICE_SLUGS: readonly string[] = FREE_SLUGS;
 export const isFreeService = (slug: string): boolean => isFree(slug);
 export const isTrNear = (slug: string): boolean => TR_NEAR_SLUGS.includes(slug);

@@ -14,7 +14,7 @@ const DATA: KonuData = {
     ['Başlangıç fiyatı', '200 TL\'den'],
     ['Teslim süresi', 'Normal iş aynı gün · acilde 1–2 saat'],
     ['Çalışma saatleri', 'Her gün 08:00–23:00'],
-    ['Servis', 'Eve ve otele ücretsiz alım-teslim'],
+    ['Servis', 'Eve ve otele alım-teslim'],
   ],
   turlerBaslik: 'Kot etekte neler yapıyoruz?',
   turler: [
@@ -33,7 +33,7 @@ const DATA: KonuData = {
   adimlar: [
     { baslik: 'Fotoğraf gönderin', aciklama: 'Kot eteğin fotoğrafını WhatsApp\'tan yollayın.' },
     { baslik: 'Fiyat netleşir', aciklama: 'Yapılacak işe göre net fiyatı size bildiririz.' },
-    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele ücretsiz alım-teslim isteyin.' },
+    { baslik: 'Getirin ya da alalım', aciklama: 'Atölyeye bırakın ya da eve/otele alım-teslim isteyin.' },
     { baslik: 'Teslim', aciklama: 'Normal işler aynı gün, acil işler 1–2 saatte teslim edilir.' },
   ],
   faq: [
@@ -41,7 +41,7 @@ const DATA: KonuData = {
     { q: 'Kot etek orijinal ucuyla kısaltılır mı?', a: 'Evet, orijinal etek ucu görünümünü koruyacak şekilde kısaltma yapıyoruz.' },
     { q: 'Kot etek daraltma yapıyor musunuz?', a: 'Evet. Bel ve kalça daraltma 200 TL\'den başlar.' },
     { q: 'Kot etek tadilatı ne kadar sürer?', a: 'Normal işler aynı gün, acil işler 1–2 saatte teslim edilir.' },
-    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim tüm hizmet bölgelerimizde ücretsizdir; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
+    { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim yapıyoruz; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
     { href: 'href', ad: 'ad' },

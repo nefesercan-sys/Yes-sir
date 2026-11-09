@@ -33,7 +33,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     home: 'Antalya Terzi', homePath: '/terzi', crumb: 'Sık Sorulan Sorular',
     h1: 'Antalya Terzi Sık Sorulan Sorular: Fiyat, Süre, Otel Servisi',
     kisaLabel: 'Kısa cevap',
-    kisa: "Terzi Can, Antalya Konyaaltı'nda 2006'dan beri bay ve bayan giysi tamiri, tadilatı ve özel dikim yapar. Paça, bel, kol ve boy kısaltma-daraltma ₺200'den, fermuar değişimi ₺300'den, deri tadilatı ₺400'den başlar (KDV dahil değil). Normal işler aynı gün hazırdır; evlere ve otellere alım-teslim ücretsizdir. Fotoğraf at, fiyat al.",
+    kisa: "Terzi Can, Antalya Konyaaltı'nda 2006'dan beri bay ve bayan giysi tamiri, tadilatı ve özel dikim yapar. Paça, bel, kol ve boy kısaltma-daraltma ₺200'den, fermuar değişimi ₺300'den, deri tadilatı ₺400'den başlar (KDV dahil değil). Normal işler aynı gün hazırdır; evlere ve otellere alım-teslim yapılır. Fotoğraf at, fiyat al.",
     waMsg: 'Merhaba, kıyafetimin fotoğrafını gönderiyorum. Fiyat alabilir miyim?',
     tableH: 'İşlem, başlangıç fiyatı ve süre', cols: ['İşlem', 'Başlangıç fiyatı', 'Süre'],
     rows: [
@@ -57,7 +57,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     home: 'Antalya Tailor', homePath: '/terzi', crumb: 'FAQ',
     h1: 'Antalya Tailor FAQ: Prices, Timing, Hotel Service',
     kisaLabel: 'Short answer',
-    kisa: 'Terzi Can has altered, repaired and made clothes in Konyaaltı, Antalya since 2006. Hemming and waist, sleeve and length alterations start from ₺200 (about €10), zipper replacement from ₺300, leather from ₺400, excluding VAT. Regular jobs are ready the same day; pick-up and delivery to homes and hotels are free. Send a photo, get a price.',
+    kisa: 'Terzi Can has altered, repaired and made clothes in Konyaaltı, Antalya since 2006. Hemming and waist, sleeve and length alterations start from ₺200 (about €10), zipper replacement from ₺300, leather from ₺400, excluding VAT. Regular jobs are ready the same day; pick-up and delivery to homes and hotels are available. Send a photo, get a price.',
     waMsg: 'Hello, I am sending a photo of my garment. Can I get a price?',
     tableH: 'Services, starting prices and timing', cols: ['Service', 'Starting price', 'Timing'],
     rows: [
@@ -81,7 +81,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     home: 'Портной Анталья', homePath: '/terzi', crumb: 'Вопросы и ответы',
     h1: 'Портной в Анталье: частые вопросы, цены, сроки, выезд в отель',
     kisaLabel: 'Коротко',
-    kisa: 'Terzi Can с 2006 года ремонтирует, переделывает и шьёт одежду в Коньяалты (Анталья). Подгонка длины, талии и рукавов — от ₺200 (около €10), замена молнии — от ₺300, кожа — от ₺400, без НДС. Обычная работа готова в тот же день; забор и доставка по домам и отелям бесплатны. Отправьте фото — назовём цену.',
+    kisa: 'Terzi Can с 2006 года ремонтирует, переделывает и шьёт одежду в Коньяалты (Анталья). Подгонка длины, талии и рукавов — от ₺200 (около €10), замена молнии — от ₺300, кожа — от ₺400, без НДС. Обычная работа готова в тот же день; забор и доставка по домам и отелям доступны. Отправьте фото — назовём цену.',
     waMsg: 'Здравствуйте, отправляю фото вещи. Подскажите цену?',
     tableH: 'Услуги, цены от и сроки', cols: ['Услуга', 'Цена от', 'Срок'],
     rows: [
@@ -105,7 +105,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     home: 'Schneider Antalya', homePath: '/terzi', crumb: 'Häufige Fragen',
     h1: 'Schneider Antalya: Häufige Fragen, Preise, Dauer, Hotelservice',
     kisaLabel: 'Kurz gesagt',
-    kisa: 'Terzi Can ändert, repariert und näht seit 2006 Kleidung in Konyaaltı, Antalya. Kürzen sowie Taille-, Ärmel- und Längenänderungen ab ₺200 (ca. €10), Reißverschlusswechsel ab ₺300, Leder ab ₺400, ohne MwSt. Normale Arbeiten sind am selben Tag fertig; Abholung und Lieferung zu Hause und ins Hotel sind kostenlos. Foto senden, Preis erhalten.',
+    kisa: 'Terzi Can ändert, repariert und näht seit 2006 Kleidung in Konyaaltı, Antalya. Kürzen sowie Taille-, Ärmel- und Längenänderungen ab ₺200 (ca. €10), Reißverschlusswechsel ab ₺300, Leder ab ₺400, ohne MwSt. Normale Arbeiten sind am selben Tag fertig; Abholung und Lieferung zu Hause und ins Hotel sind möglich. Foto senden, Preis erhalten.',
     waMsg: 'Guten Tag, ich sende ein Foto meines Kleidungsstücks. Können Sie mir einen Preis nennen?',
     tableH: 'Leistungen, Preise ab und Dauer', cols: ['Leistung', 'Preis ab', 'Dauer'],
     rows: [

@@ -25,7 +25,7 @@ const DATA: KonuData = {
     ],
     [
       "Servis",
-      "Eve ve otele ücretsiz alım-teslim"
+      "Eve ve otele alım-teslim"
     ]
   ],
   "turlerBaslik": "Yelek Tamiri ve Tadilatı kapsamı",
@@ -82,7 +82,7 @@ const DATA: KonuData = {
     },
     {
       "baslik": "Getirin ya da alalım",
-      "aciklama": "Atölyeye bırakın ya da eve/otele ücretsiz alım-teslim isteyin."
+      "aciklama": "Atölyeye bırakın ya da eve/otele alım-teslim isteyin."
     },
     {
       "baslik": "Teslim",
@@ -116,7 +116,7 @@ const DATA: KonuData = {
     },
     {
       "q": "Yeleği eve veya otele gelip alıyor musunuz?",
-      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim ücretsizdir."
+      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim yapıyoruz."
     }
   ],
   "diger": [
@@ -147,10 +147,10 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Yelek Tamiri ve Tadilatı Antalya · Aynı Gün" },
-  description: "Takım elbise yeleği, kot ve deri yelek daraltma, boy ayarı, fermuar ve düğme onarımı. Fiyat fotoğrafa göre. Eve ve otele ücretsiz. ☎ +90 531 898 64 18",
+  description: "Takım elbise yeleği, kot ve deri yelek daraltma, boy ayarı, fermuar ve düğme onarımı. Fiyat fotoğrafa göre. Eve ve otele servis. ☎ +90 531 898 64 18",
   keywords: ["yelek tamiri", "yelek tadilatı", "yelek daraltma", "yelek kısaltma", "yelek fermuarı değişimi", "takım elbise yeleği tadilatı", "deri yelek tamiri", "kot yelek tadilatı", "yelek tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: "Yelek Tamiri ve Tadilatı Antalya | Terzi Can", description: "Takım elbise, kot, deri ve şişme yelek: beden daraltma, boy ve omuz ayarı, fermuar ve düğme onarımı. Eve ve otele ücretsiz.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: "Yelek Tamiri ve Tadilatı Antalya | Terzi Can", description: "Takım elbise, kot, deri ve şişme yelek: beden daraltma, boy ve omuz ayarı, fermuar ve düğme onarımı. Eve ve otele servis.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

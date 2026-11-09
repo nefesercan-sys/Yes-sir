@@ -44,7 +44,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `Kemer es una población costera al pie de los montes Tauro, conocida por su puerto deportivo y sus resorts.`,
     konyaalti: `Konyaaltı es el distrito costero donde trabaja nuestro taller, con hoteles y apartahoteles a lo largo del litoral.`,
     kundu: 'Kundu (Aksu), justo al este de Lara, es una zona hotelera con numerosos resorts de cinco estrellas todo incluido.',
-    muratpasa: 'Muratpaşa es el distrito central de Antalya: abarca Kaleiçi, los hoteles del centro, el barrio de Meltem y parte de la zona de Lara. En Meltem la recogida y la entrega son gratuitas.',
+    muratpasa: 'Muratpaşa es el distrito central de Antalya: abarca Kaleiçi, los hoteles del centro, el barrio de Meltem y parte de la zona de Lara. En Meltem la recogida y la entrega están disponibles.',
     goynuk: 'Göynük, al norte de Kemer, es una tranquila franja de hoteles junto al mar, cerca del cañón de Göynük.',
     antalya: `Antalya reúne zonas hoteleras a lo largo de la costa: Konyaaltı, Lara, Belek, Side y Kemer. Atendemos hoteles en todas ellas.`,
   },
@@ -56,7 +56,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `Kemer est une localité côtière au pied du Taurus, connue pour sa marina et ses complexes hôteliers.`,
     konyaalti: `Konyaaltı est le district côtier où travaille notre atelier, avec hôtels et résidences hôtelières le long du littoral.`,
     kundu: 'Kundu (Aksu), juste à l\'est de Lara, est une zone hôtelière avec de nombreux resorts cinq étoiles tout compris.',
-    muratpasa: 'Muratpaşa est le district central d\'Antalya : il comprend Kaleiçi, les hôtels du centre, le quartier de Meltem et une partie de Lara. À Meltem, la collecte et la livraison sont gratuites.',
+    muratpasa: 'Muratpaşa est le district central d\'Antalya : il comprend Kaleiçi, les hôtels du centre, le quartier de Meltem et une partie de Lara. À Meltem, la collecte et la livraison sont assurées.',
     goynuk: 'Göynük, au nord de Kemer, est une paisible bande d\'hôtels en bord de mer, près du canyon de Göynük.',
     antalya: `Antalya compte des zones hôtelières le long de la côte : Konyaaltı, Lara, Belek, Side et Kemer. Nous desservons les hôtels de toutes ces zones.`,
   },
@@ -68,7 +68,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `Kemer to nadmorska miejscowość u stóp gór Taurus, znana z mariny i kompleksów hotelowych.`,
     konyaalti: `Konyaaltı to nadmorski dystrykt, w którym pracuje nasza pracownia, z hotelami i aparthotelami wzdłuż wybrzeża.`,
     kundu: 'Kundu (Aksu), tuż na wschód od Lary, to strefa hotelowa z wieloma pięciogwiazdkowymi kompleksami all inclusive.',
-    muratpasa: 'Muratpaşa to centralny dystrykt Antalyi: obejmuje Kaleiçi, hotele w centrum, osiedle Meltem i część rejonu Lara. W Meltem odbiór i dowóz są bezpłatne.',
+    muratpasa: 'Muratpaşa to centralny dystrykt Antalyi: obejmuje Kaleiçi, hotele w centrum, osiedle Meltem i część rejonu Lara. W Meltem odbiór i dowóz są dostępne.',
     goynuk: 'Göynük, na północ od Kemer, to spokojny pas hoteli nad morzem, blisko kanionu Göynük.',
     antalya: `Antalya ma strefy hotelowe wzdłuż wybrzeża: Konyaaltı, Lara, Belek, Side i Kemer. Obsługujemy hotele we wszystkich tych rejonach.`,
   },
@@ -80,7 +80,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `Кемер — приморське містечко біля підніжжя гір Тавр, відоме мариною та курортними готелями.`,
     konyaalti: `Коньяалти — прибережний район, де працює наше ательє, з готелями й апарт-готелями вздовж узбережжя.`,
     kundu: 'Кунду (Аксу), одразу на схід від Лари, — готельна зона з численними п\'ятизірковими курортами «все включено».',
-    muratpasa: 'Муратпаша — центральний район Анталії: до нього входять Калеїчі, готелі в центрі, мікрорайон Мельтем і частина Лари. У Мельтемі забір і доставка безкоштовні.',
+    muratpasa: 'Муратпаша — центральний район Анталії: до нього входять Калеїчі, готелі в центрі, мікрорайон Мельтем і частина Лари. У Мельтемі забір і доставка доступні.',
     goynuk: 'Гейнюк, на північ від Кемера, — спокійна смуга готелів біля моря, поруч із каньйоном Гейнюк.',
     antalya: `В Анталії готельні зони розташовані вздовж узбережжя: Коньяалти, Лара, Белек, Сіде і Кемер. Ми обслуговуємо готелі в усіх цих районах.`,
   },
@@ -92,7 +92,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `Kemer is een kustplaats aan de voet van het Taurusgebergte, bekend om de jachthaven en de resorts.`,
     konyaalti: `Konyaaltı is het kustdistrict waar ons atelier werkt, met hotels en aparthotels langs de kustlijn.`,
     kundu: 'Kundu (Aksu), net ten oosten van Lara, is een hotelzone met veel vijfsterrenresorts met all-inclusive.',
-    muratpasa: 'Muratpaşa is het centrale district van Antalya: Kaleiçi, hotels in het centrum, de wijk Meltem en een deel van Lara. In Meltem is ophalen en terugbrengen gratis.',
+    muratpasa: 'Muratpaşa is het centrale district van Antalya: Kaleiçi, hotels in het centrum, de wijk Meltem en een deel van Lara. In Meltem halen en brengen we het kledingstuk.',
     goynuk: 'Göynük, ten noorden van Kemer, is een rustige hotelstrook aan zee, vlak bij de Göynük-kloof.',
     antalya: `Antalya heeft hotelzones langs de kust: Konyaaltı, Lara, Belek, Side en Kemer. Wij bedienen hotels in al deze zones.`,
   },
@@ -104,7 +104,7 @@ const BLURB: Record<ILang, Record<ZoneSlug, string>> = {
     kemer: `كيمر بلدة ساحلية عند سفح جبال طوروس، تُعرف بمرساها ومنتجعاتها.`,
     konyaalti: `كونيالتي منطقة ساحلية تعمل فيها ورشتنا، وفيها فنادق وشقق فندقية على امتداد الساحل.`,
     kundu: 'كوندو (أكسو)، شرق لارا مباشرة، منطقة فنادق تضم منتجعات خمس نجوم عديدة بنظام الشامل.',
-    muratpasa: 'موراتباشا هي منطقة وسط أنطاليا وتشمل كاليتشي وفنادق المركز وحي ملتم وجزءًا من منطقة لارا. في حي ملتم الاستلام والتسليم مجاني.',
+    muratpasa: 'موراتباشا هي منطقة وسط أنطاليا وتشمل كاليتشي وفنادق المركز وحي ملتم وجزءًا من منطقة لارا. في حي ملتم الاستلام والتسليم متاح.',
     goynuk: 'غوينوك شمال كيمر شريط هادئ من الفنادق على البحر، قرب وادي غوينوك.',
     antalya: `تضم أنطاليا مناطق فنادق على امتداد الساحل: كونيالتي ولارا وبيليك وسيدي وكيمر. نخدم الفنادق في جميع هذه المناطق.`,
   },
@@ -190,55 +190,55 @@ export const ZONE_NOTE: Record<ILang, Record<ZoneSlug, string>> = {
 /** "Nasıl ilerliyoruz" bölümü için ek kalıplar (ZCOPY.how ile birlikte 3 seçenek; bölgeye göre deterministik). Ücret yok, dakika/mesafe yok. */
 export const ZONE_HOW_ALT: Record<ILang, ((z: string, home: boolean) => string)[]> = {
   es: [
-    (z, home) => `Envíe por WhatsApp la foto de la prenda ${home ? 'y el nombre de su hotel de Konyaaltı' : `y el nombre de su hotel en ${z}`}; le respondemos con precio y plazo, recogemos la prenda sin coste y se la devolvemos ya arreglada.`,
-    (z, home) => `Tres pasos: foto por WhatsApp, confirmación de precio y plazo, y recogida y entrega gratuitas ${home ? 'en su hotel' : `en su hotel de ${z}`}. Si hace falta una prueba, nos vemos en el hotel.`,
+    (z, home) => `Envíe por WhatsApp la foto de la prenda ${home ? 'y el nombre de su hotel de Konyaaltı' : `y el nombre de su hotel en ${z}`}; le respondemos con precio y plazo, recogemos la prenda y se la devolvemos ya arreglada.`,
+    (z, home) => `Tres pasos: foto por WhatsApp, confirmación de precio y plazo, y recogida y entrega disponibles ${home ? 'en su hotel' : `en su hotel de ${z}`}. Si hace falta una prueba, nos vemos en el hotel.`,
   ],
   fr: [
-    (z, home) => `Envoyez la photo du vêtement sur WhatsApp ${home ? 'avec le nom de votre hôtel de Konyaaltı' : `avec le nom de votre hôtel à ${z}`} ; nous répondons avec prix et délai, récupérons le vêtement sans frais et vous le rapportons retouché.`,
-    (z, home) => `Trois étapes : photo sur WhatsApp, confirmation du prix et du délai, puis collecte et livraison gratuites ${home ? 'à votre hôtel' : `à votre hôtel de ${z}`}. Si un essayage est utile, nous nous retrouvons à l'hôtel.`,
+    (z, home) => `Envoyez la photo du vêtement sur WhatsApp ${home ? 'avec le nom de votre hôtel de Konyaaltı' : `avec le nom de votre hôtel à ${z}`} ; nous répondons avec prix et délai, récupérons le vêtement et vous le rapportons retouché.`,
+    (z, home) => `Trois étapes : photo sur WhatsApp, confirmation du prix et du délai, puis collecte et livraison ${home ? 'à votre hôtel' : `à votre hôtel de ${z}`}. Si un essayage est utile, nous nous retrouvons à l'hôtel.`,
   ],
   pl: [
-    (z, home) => `Wyślij na WhatsApp zdjęcie ubrania ${home ? 'i nazwę hotelu w Konyaaltı' : `i nazwę hotelu w ${z}`}; odpowiadamy ceną i terminem, odbieramy ubranie bezpłatnie i oddajemy poprawione.`,
-    (z, home) => `Trzy kroki: zdjęcie na WhatsApp, potwierdzenie ceny i terminu oraz bezpłatny odbiór i dostawa ${home ? 'do hotelu' : `do hotelu w ${z}`}. Jeśli potrzebna jest przymiarka, spotykamy się w hotelu.`,
+    (z, home) => `Wyślij na WhatsApp zdjęcie ubrania ${home ? 'i nazwę hotelu w Konyaaltı' : `i nazwę hotelu w ${z}`}; odpowiadamy ceną i terminem, odbieramy ubranie i oddajemy poprawione.`,
+    (z, home) => `Trzy kroki: zdjęcie na WhatsApp, potwierdzenie ceny i terminu oraz odbiór i dostawa ${home ? 'do hotelu' : `do hotelu w ${z}`}. Jeśli potrzebna jest przymiarka, spotykamy się w hotelu.`,
   ],
   uk: [
-    (z, home) => `Надішліть у WhatsApp фото одягу ${home ? 'і назву готелю в Коньяалти' : `і назву готелю в районі ${z}`}; ми відповімо ціною та строком, безкоштовно заберемо річ і привеземо її виправленою.`,
-    (z, home) => `Три кроки: фото у WhatsApp, підтвердження ціни та строку, безкоштовне забирання й доставка ${home ? 'до готелю' : `до готелю в районі ${z}`}. Якщо потрібна приміряння, зустрінемося в готелі.`,
+    (z, home) => `Надішліть у WhatsApp фото одягу ${home ? 'і назву готелю в Коньяалти' : `і назву готелю в районі ${z}`}; ми відповімо ціною та строком, заберемо річ і привеземо її виправленою.`,
+    (z, home) => `Три кроки: фото у WhatsApp, підтвердження ціни та строку, забирання й доставка ${home ? 'до готелю' : `до готелю в районі ${z}`}. Якщо потрібна приміряння, зустрінемося в готелі.`,
   ],
   nl: [
-    (z, home) => `Stuur via WhatsApp een foto van het kledingstuk ${home ? 'en de naam van uw hotel in Konyaaltı' : `en de naam van uw hotel in ${z}`}; wij antwoorden met prijs en termijn, halen het kledingstuk gratis op en brengen het verstelde terug.`,
-    (z, home) => `Drie stappen: foto via WhatsApp, bevestiging van prijs en termijn, en gratis ophalen en terugbrengen ${home ? 'bij uw hotel' : `bij uw hotel in ${z}`}. Is een pasbeurt nodig, dan spreken we af in het hotel.`,
+    (z, home) => `Stuur via WhatsApp een foto van het kledingstuk ${home ? 'en de naam van uw hotel in Konyaaltı' : `en de naam van uw hotel in ${z}`}; wij antwoorden met prijs en termijn, halen het kledingstuk op en brengen het verstelde terug.`,
+    (z, home) => `Drie stappen: foto via WhatsApp, bevestiging van prijs en termijn, en ophalen en terugbrengen ${home ? 'bij uw hotel' : `bij uw hotel in ${z}`}. Is een pasbeurt nodig, dan spreken we af in het hotel.`,
   ],
   ar: [
-    (z, home) => `أرسل عبر واتساب صورة القطعة ${home ? 'مع اسم فندقك في كونيالتي' : `مع اسم فندقك في ${z}`}؛ نرد عليك بالسعر والمدة، ونستلم القطعة مجاناً ونعيدها إليك بعد إصلاحها.`,
-    (z, home) => `ثلاث خطوات: صورة عبر واتساب، وتأكيد السعر والمدة، ثم استلام وتسليم مجانيان ${home ? 'في فندقك' : `في فندقك في ${z}`}. وإذا لزم القياس نلتقي في الفندق.`,
+    (z, home) => `أرسل عبر واتساب صورة القطعة ${home ? 'مع اسم فندقك في كونيالتي' : `مع اسم فندقك في ${z}`}؛ نرد عليك بالسعر والمدة، ونستلم القطعة ونعيدها إليك بعد إصلاحها.`,
+    (z, home) => `ثلاث خطوات: صورة عبر واتساب، وتأكيد السعر والمدة، ثم استلام وتسليم متاحان ${home ? 'في فندقك' : `في فندقك في ${z}`}. وإذا لزم القياس نلتقي في الفندق.`,
   ],
 };
 
 /** Giriş paragrafı için ek kalıplar (bölgeye göre deterministik seçilir; ZCOPY.lead ile birlikte 3 seçenek). */
 export const ZONE_LEAD_ALT: Record<ILang, ((z: string) => string)[]> = {
   es: [
-    (z) => `Respuesta corta: si se aloja en ${z} y una prenda necesita arreglo, envíe una foto por WhatsApp; recogemos la prenda en su hotel sin coste y se la devolvemos.`,
+    (z) => `Respuesta corta: si se aloja en ${z} y una prenda necesita arreglo, envíe una foto por WhatsApp; recogemos la prenda en su hotel y se la devolvemos.`,
     (z) => `Las vacaciones en ${z} no tienen por qué complicarse por un bajo o una cremallera: el taller de Terzi Can en Konyaaltı arregla la prenda y la devuelve a su hotel.`,
   ],
   fr: [
-    (z) => `En bref : si vous séjournez à ${z} et qu'un vêtement doit être retouché, envoyez une photo sur WhatsApp ; nous le récupérons gratuitement à votre hôtel et le rapportons.`,
+    (z) => `En bref : si vous séjournez à ${z} et qu'un vêtement doit être retouché, envoyez une photo sur WhatsApp ; nous le récupérons à votre hôtel et le rapportons.`,
     (z) => `Un ourlet ou une fermeture ne doit pas gâcher un séjour à ${z} : l'atelier Terzi Can de Konyaaltı retouche le vêtement et le rapporte à votre hôtel.`,
   ],
   pl: [
-    (z) => `Krótko: jeśli mieszkasz w hotelu w ${z} i ubranie wymaga poprawki, wyślij zdjęcie na WhatsApp; bezpłatnie odbierzemy je z hotelu i odwieziemy.`,
+    (z) => `Krótko: jeśli mieszkasz w hotelu w ${z} i ubranie wymaga poprawki, wyślij zdjęcie na WhatsApp; odbierzemy je z hotelu i odwieziemy.`,
     (z) => `Urlop w ${z} nie musi się komplikować przez nogawkę czy zamek: pracownia Terzi Can w Konyaaltı poprawi ubranie i odwiezie je do hotelu.`,
   ],
   uk: [
-    (z) => `Коротко: якщо ви відпочиваєте в районі ${z} і річ потребує ремонту, надішліть фото у WhatsApp; ми безкоштовно заберемо її з готелю та повернемо.`,
+    (z) => `Коротко: якщо ви відпочиваєте в районі ${z} і річ потребує ремонту, надішліть фото у WhatsApp; ми заберемо її з готелю та повернемо.`,
     (z) => `Відпустку в районі ${z} не зіпсують задовгі штани чи блискавка: ательє Terzi Can у Коньяалти полагодить річ і привезе її до готелю.`,
   ],
   nl: [
-    (z) => `Kort antwoord: logeert u in ${z} en moet er iets aan uw kleding gebeuren, stuur dan een foto via WhatsApp; wij halen het gratis op bij uw hotel en brengen het terug.`,
+    (z) => `Kort antwoord: logeert u in ${z} en moet er iets aan uw kleding gebeuren, stuur dan een foto via WhatsApp; wij halen het op bij uw hotel en brengen het terug.`,
     (z) => `Een zoom of rits hoeft uw vakantie in ${z} niet te verstoren: het atelier van Terzi Can in Konyaaltı past het kledingstuk aan en brengt het naar uw hotel.`,
   ],
   ar: [
-    (z) => `باختصار: إذا كنت تقيم في ${z} وتحتاج قطعة ملابس إلى تعديل، أرسل صورة عبر واتساب؛ نستلمها من فندقك مجاناً ونعيدها إليك.`,
+    (z) => `باختصار: إذا كنت تقيم في ${z} وتحتاج قطعة ملابس إلى تعديل، أرسل صورة عبر واتساب؛ نستلمها من فندقك ونعيدها إليك.`,
     (z) => `لا داعي لأن يعكّر تقصير أو سحّاب عطلتك في ${z}: ورشة Terzi Can في كونيالتي تصلح القطعة وتعيدها إلى فندقك.`,
   ],
 };
@@ -261,11 +261,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `La zona de ${z} en pocas palabras`, hotelsLabel: 'Hoteles de la zona (a modo de ejemplo)',
     howTitle: 'Qué hacer, paso a paso',
     how: (z, home) => home
-      ? `1) Escriba por WhatsApp con una foto. 2) Le confirmamos plazo y precio. 3) Recogemos la prenda en su hotel de Konyaaltı sin coste y se la devolvemos allí.`
-      : `1) Escriba por WhatsApp con una foto y el nombre de su hotel en ${z}. 2) Le confirmamos plazo y precio. 3) Recogemos la prenda en su hotel sin coste y se la devolvemos arreglada.`,
+      ? `1) Escriba por WhatsApp con una foto. 2) Le confirmamos plazo y precio. 3) Recogemos la prenda en su hotel de Konyaaltı y se la devolvemos allí.`
+      : `1) Escriba por WhatsApp con una foto y el nombre de su hotel en ${z}. 2) Le confirmamos plazo y precio. 3) Recogemos la prenda en su hotel y se la devolvemos arreglada.`,
     faqTitle: 'Dudas habituales',
     faq: (z, home) => [
-      [`¿Se puede arreglar ropa durante una estancia en ${z}?`, home ? 'Sí: el taller está en Konyaaltı y la recogida en los hoteles es gratuita.' : `Sí. Atendemos a huéspedes de ${z} y la recogida en el hotel es gratuita.`],
+      [`¿Se puede arreglar ropa durante una estancia en ${z}?`, home ? 'Sí: el taller está en Konyaaltı y la recogida en los hoteles está disponible.' : `Sí. Atendemos a huéspedes de ${z} y la recogida en el hotel está disponible.`],
       ['¿En cuánto tiempo?', DU('es').all],
       ['¿Qué envío primero?', 'Una foto de la prenda entera y otra de lo que desea cambiar. Con eso le indicamos el precio.'],
       ['¿Llegaré antes de mi vuelo?', `Indique su fecha de salida al escribir. ${DU('es').urgent}.`],
@@ -282,11 +282,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `${z} en quelques mots`, hotelsLabel: 'Hôtels du secteur (à titre d\'exemple)',
     howTitle: 'Comment procéder, étape par étape',
     how: (z, home) => home
-      ? `1) Écrivez sur WhatsApp avec une photo. 2) Nous confirmons délai et prix. 3) Nous venons chercher le vêtement dans votre hôtel de Konyaaltı, sans frais, et nous le rapportons.`
-      : `1) Écrivez sur WhatsApp avec une photo et le nom de votre hôtel à ${z}. 2) Nous confirmons délai et prix. 3) Nous récupérons le vêtement à votre hôtel sans frais et vous le rapportons retouché.`,
+      ? `1) Écrivez sur WhatsApp avec une photo. 2) Nous confirmons délai et prix. 3) Nous venons chercher le vêtement dans votre hôtel de Konyaaltı, et nous le rapportons.`
+      : `1) Écrivez sur WhatsApp avec une photo et le nom de votre hôtel à ${z}. 2) Nous confirmons délai et prix. 3) Nous récupérons le vêtement à votre hôtel et vous le rapportons retouché.`,
     faqTitle: 'Questions courantes',
     faq: (z, home) => [
-      [`Peut-on faire retoucher un vêtement pendant un séjour à ${z} ?`, home ? 'Oui : l\'atelier est à Konyaaltı et la collecte dans les hôtels est gratuite.' : `Oui. Nous accueillons les clients de ${z} et la collecte à l'hôtel est gratuite.`],
+      [`Peut-on faire retoucher un vêtement pendant un séjour à ${z} ?`, home ? 'Oui : l\'atelier est à Konyaaltı et la collecte dans les hôtels est assurée.' : `Oui. Nous accueillons les clients de ${z} et la collecte à l'hôtel est assurée.`],
       ['En combien de temps ?', DU('fr').all],
       ['Que dois-je envoyer en premier ?', 'Une photo du vêtement entier et une du détail à changer. Nous indiquons le prix à partir de là.'],
       ['Serai-je prêt avant mon vol ?', `Indiquez votre date de départ en écrivant. ${DU('fr').urgent}.`],
@@ -303,11 +303,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `${z} w kilku słowach`, hotelsLabel: 'Hotele w okolicy (przykładowo)',
     howTitle: 'Jak to zrobić krok po kroku',
     how: (z, home) => home
-      ? `1) Napisz na WhatsApp i dołącz zdjęcie. 2) Potwierdzimy termin i cenę. 3) Odbierzemy ubranie z Twojego hotelu w Konyaaltı bez opłaty i tam je oddamy.`
-      : `1) Napisz na WhatsApp, dołącz zdjęcie i podaj nazwę hotelu w ${z}. 2) Potwierdzimy termin i cenę. 3) Bezpłatnie odbierzemy ubranie z hotelu i oddamy je poprawione.`,
+      ? `1) Napisz na WhatsApp i dołącz zdjęcie. 2) Potwierdzimy termin i cenę. 3) Odbierzemy ubranie z Twojego hotelu w Konyaaltı i tam je oddamy.`
+      : `1) Napisz na WhatsApp, dołącz zdjęcie i podaj nazwę hotelu w ${z}. 2) Potwierdzimy termin i cenę. 3) Odbierzemy ubranie z hotelu i oddamy je poprawione.`,
     faqTitle: 'Najczęstsze wątpliwości',
     faq: (z, home) => [
-      [`Czy można zrobić przeróbkę podczas pobytu w ${z}?`, home ? 'Tak: pracownia jest w Konyaaltı, a odbiór z hoteli jest bezpłatny.' : `Tak. Obsługujemy gości z ${z}, a odbiór z hotelu jest bezpłatny.`],
+      [`Czy można zrobić przeróbkę podczas pobytu w ${z}?`, home ? 'Tak: pracownia jest w Konyaaltı, a odbiór z hoteli jest dostępny.' : `Tak. Obsługujemy gości z ${z}, a odbiór z hotelu jest dostępny.`],
       ['Jak szybko?', DU('pl').all],
       ['Co wysłać na początek?', 'Zdjęcie całego ubrania i zbliżenie tego, co chcesz zmienić. Na tej podstawie podamy cenę.'],
       ['Czy zdążę przed wylotem?', `Podaj datę wyjazdu w wiadomości. ${DU('pl').urgent}.`],
@@ -324,11 +324,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `Район ${z} коротко`, hotelsLabel: 'Готелі району (для прикладу)',
     howTitle: 'Що робити крок за кроком',
     how: (z, home) => home
-      ? `1) Напишіть у WhatsApp і додайте фото. 2) Ми підтвердимо строк і ціну. 3) Заберемо річ у вашому готелі в Коньяалти безкоштовно й повернемо туди ж.`
+      ? `1) Напишіть у WhatsApp і додайте фото. 2) Ми підтвердимо строк і ціну. 3) Заберемо річ у вашому готелі в Коньяалти й повернемо туди ж.`
       : `1) Напишіть у WhatsApp, додайте фото та назвіть готель у районі ${z}. 2) Ми підтвердимо строк і ціну. 3) Безкоштовно заберемо річ із готелю й повернемо її підігнаною.`,
     faqTitle: 'Поширені запитання',
     faq: (z, home) => [
-      [`Чи можна підігнати одяг під час відпочинку в районі ${z}?`, home ? 'Так: ательє в Коньяалти, а забір із готелів безкоштовний.' : `Так. Ми обслуговуємо гостей району ${z}, і забір із готелю безкоштовний.`],
+      [`Чи можна підігнати одяг під час відпочинку в районі ${z}?`, home ? 'Так: ательє в Коньяалти, а забір із готелів доступний.' : `Так. Ми обслуговуємо гостей району ${z}, і забір із готелю доступний.`],
       ['Як швидко?', DU('uk').all],
       ['Що надіслати спочатку?', 'Фото речі повністю та фото місця, яке треба змінити. За ними ми назвемо ціну.'],
       ['Чи встигну до вильоту?', `Вкажіть дату виїзду в повідомленні. ${DU('uk').urgent}.`],
@@ -345,11 +345,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `${z} in het kort`, hotelsLabel: 'Hotels in de buurt (ter illustratie)',
     howTitle: 'Zo gaat het, stap voor stap',
     how: (z, home) => home
-      ? `1) Stuur een WhatsApp-bericht met een foto. 2) Wij bevestigen termijn en prijs. 3) Wij halen het kledingstuk gratis op bij uw hotel in Konyaaltı en brengen het daar terug.`
-      : `1) Stuur een WhatsApp-bericht met een foto en de naam van uw hotel in ${z}. 2) Wij bevestigen termijn en prijs. 3) Wij halen het kledingstuk gratis op bij uw hotel en brengen het aangepast terug.`,
+      ? `1) Stuur een WhatsApp-bericht met een foto. 2) Wij bevestigen termijn en prijs. 3) Wij halen het kledingstuk op bij uw hotel in Konyaaltı en brengen het daar terug.`
+      : `1) Stuur een WhatsApp-bericht met een foto en de naam van uw hotel in ${z}. 2) Wij bevestigen termijn en prijs. 3) Wij halen het kledingstuk op bij uw hotel en brengen het aangepast terug.`,
     faqTitle: 'Veelvoorkomende vragen',
     faq: (z, home) => [
-      [`Kan ik kleding laten vermaken tijdens mijn verblijf in ${z}?`, home ? 'Ja: het atelier ligt in Konyaaltı en ophalen bij hotels is gratis.' : `Ja. Wij helpen gasten uit ${z} en ophalen bij het hotel is gratis.`],
+      [`Kan ik kleding laten vermaken tijdens mijn verblijf in ${z}?`, home ? 'Ja: het atelier ligt in Konyaaltı en ophalen bij hotels is mogelijk.' : `Ja. Wij helpen gasten uit ${z} en ophalen bij het hotel is mogelijk.`],
       ['Hoe snel?', DU('nl').all],
       ['Wat stuur ik eerst?', 'Een foto van het hele kledingstuk en een van wat u wilt veranderen. Daarmee noemen wij de prijs.'],
       ['Is het klaar vóór mijn vlucht?', `Vermeld uw vertrekdatum in het bericht. ${DU('nl').urgent}.`],
@@ -366,11 +366,11 @@ export const ZCOPY: Record<ILang, ZCopy> = {
     aboutTitle: (z) => `${z} باختصار`, hotelsLabel: 'فنادق في المنطقة (على سبيل المثال)',
     howTitle: 'ماذا تفعل خطوة بخطوة',
     how: (z, home) => home
-      ? `1) راسلنا على واتساب مع صورة. 2) نؤكد لك الموعد والسعر. 3) نستلم القطعة من فندقك في كونيالتي مجاناً ونعيدها إليه.`
-      : `1) راسلنا على واتساب مع صورة واسم فندقك في ${z}. 2) نؤكد لك الموعد والسعر. 3) نستلم القطعة من فندقك مجاناً ونعيدها إليك بعد التعديل.`,
+      ? `1) راسلنا على واتساب مع صورة. 2) نؤكد لك الموعد والسعر. 3) نستلم القطعة من فندقك في كونيالتي ونعيدها إليه.`
+      : `1) راسلنا على واتساب مع صورة واسم فندقك في ${z}. 2) نؤكد لك الموعد والسعر. 3) نستلم القطعة من فندقك ونعيدها إليك بعد التعديل.`,
     faqTitle: 'أسئلة متكررة',
     faq: (z, home) => [
-      [`هل يمكن تعديل الملابس أثناء الإقامة في ${z}؟`, home ? 'نعم: الورشة في كونيالتي والاستلام من الفنادق مجاني.' : `نعم. نخدم نزلاء ${z}، والاستلام من الفندق مجاني.`],
+      [`هل يمكن تعديل الملابس أثناء الإقامة في ${z}؟`, home ? 'نعم: الورشة في كونيالتي والاستلام من الفنادق متاح.' : `نعم. نخدم نزلاء ${z}، والاستلام من الفندق متاح.`],
       ['كم يستغرق؟', DU('ar').all],
       ['ماذا أرسل أولاً؟', 'صورة للقطعة كاملة وصورة لما تريد تغييره. وبناءً عليهما نحدد السعر.'],
       ['هل ستكون جاهزة قبل رحلتي؟', `اذكر تاريخ مغادرتك في الرسالة. ${DU('ar').urgent}.`],

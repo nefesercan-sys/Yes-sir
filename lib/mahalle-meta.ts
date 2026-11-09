@@ -1,6 +1,6 @@
 // SwapHubs — Konyaaltı ve Muratpaşa mahalle sayfaları için elle yazılmış başlık / açıklama / anahtar kelime.
 // Kurallar: başlık ≤60, açıklama ≤158 (telefon dahil); doğrulanmamış vaat yok (mesafe, dakika, puan, kurye süresi);
-// Eve ve otele ücretsiz servis her bölgede geçerlidir; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
+// Eve ve otele servis her bölgede geçerlidir; terzihizmeti.com.tr ile aynı başlık kullanılmaz.
 type M = { t: string; d: string; kw: string[] };
 const FREE = ' {{F}}';
 import { fitDesc } from './meta-fit';
@@ -31,7 +31,7 @@ const BANK: Record<string, M> = {
 export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Konyaaltı') {
   const b = BANK[slug];
   const title = b ? `${b.t} | Terzi Can` : `${ad} Terzi Çağır | Terzi Can`;
-  const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Ücretsiz alım-teslim.' : ' Otele ücretsiz servis.') : '';
+  const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Alım-teslim.' : ' Otele servis.') : '';
   const desc = b ? `${dd} ☎ ${phone}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al. ☎ ${phone}`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];
   const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), `${ilce} terzi`, 'Antalya terzi'];

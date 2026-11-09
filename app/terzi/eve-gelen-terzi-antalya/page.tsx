@@ -30,7 +30,7 @@ const OTELLER = [
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
               ['Eve gelen terzi Antalya var mı?', `Evet! Terzi Can'ın araçlı terzi servisi Antalya'nın yakın ilçelerine gelmektedir. WhatsApp'tan konum paylaşın, terzi adresinize gelsin. WhatsApp: ${PHONE}`],
-              ['Araçlı terzi servisi ücretli mi?', 'Eve ve otele servis ücretsiz. Ayrıca yapılan terzilik işi ücretlendirilir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
+              ['Araçlı terzi servisi var mı?', 'Evet, eve ve otele servis veriyoruz; alım-teslim ayrıntısı WhatsApp\'ta netleşir. Paça kısaltma ₺200, elbise tadilatı ₺200\'den başlar.'],
               ['Belek otellerine terzi servisi var mı?', `Evet! Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal, Cornelia dahil tüm Belek otellerine terzi servisimizle geliyoruz. ${HOTEL_NOTE.tr} WhatsApp: ${PHONE}`],
               ['Lara otellerinde terzi hizmeti var mı?', `Evet! Titanic Mardan, Delphin Diva, Fame Residence, Akra, Lara Barut Collection dahil tüm Lara otellerine terzi servisi. WhatsApp: ${PHONE}`],
               ['Kaç saatte terzi geliyor?', 'WhatsApp\'tan yazdıktan sonra randevu saati birlikte belirlenir. Terzinin gelişi o günkü yoğunluğa göre değişir; net saat mesajda yazılır.'],
@@ -131,13 +131,13 @@ export const metadata: Metadata = {
 };
 
 const ILCELER = [
-  {ad:'Belek',yol:'Ücretsiz servis', aciklama:'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
-  {ad:'Lara',yol:'Ücretsiz servis', aciklama:'Tüm Lara otelleri — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
-  {ad:'Kemer',yol:'Ücretsiz servis', aciklama:'Tüm Kemer otelleri — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
-  {ad:'Muratpaşa / Liman',yol:'Ücretsiz servis', aciklama:'Şehir merkezi, Kaleiçi, Şirinyalı, Fener'},
+  {ad:'Belek',yol:'Otel servisi', aciklama:'Tüm Belek otelleri — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal'},
+  {ad:'Lara',yol:'Otel servisi', aciklama:'Tüm Lara otelleri — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection'},
+  {ad:'Kemer',yol:'Otel servisi', aciklama:'Tüm Kemer otelleri — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia'},
+  {ad:'Muratpaşa / Liman',yol:'Otel servisi', aciklama:'Şehir merkezi, Kaleiçi, Şirinyalı, Fener'},
   {ad:'Konyaaltı',yol:'Atölye bölgesi', aciklama:'Terzi Can merkezi — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {ad:'Side',yol:'Ücretsiz servis', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
-  {ad:'Serik / Döşemealtı',yol:'Ücretsiz servis', aciklama:'Serik merkez ve çevre köyler'},
+  {ad:'Side',yol:'Otel servisi', aciklama:'Side, Sorgun, Kumköy, Evrenseki otelleri'},
+  {ad:'Serik / Döşemealtı',yol:'Otel servisi', aciklama:'Serik merkez ve çevre köyler'},
 ];
 
 export default function EveGelenTerziPage() {
@@ -279,7 +279,7 @@ export default function EveGelenTerziPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Eve / Otele Gelen Terzi Fiyatları
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Eve ve otele servis ücretsiz — ayrıca yapılan iş ücretlendirilir</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Eve ve otele servis — fiyat fotoğrafa göre WhatsApp'ta</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -290,7 +290,7 @@ export default function EveGelenTerziPage() {
               </thead>
               <tbody>
                 {[
-                  ['Araçlı Servis Ücreti','ÜCRETSIZ','—'],
+                  ['Araçlı Servis','WhatsApp\'ta netleşir','—'],
                   ['Paça / Pantolon Kısaltma','₺200+','Aynı gün'],
                   ['Fermuar Değişimi','₺300+','Aynı gün'],
                   ['Elbise / Ceket Daraltma','₺200+','Aynı gün'],
@@ -301,7 +301,7 @@ export default function EveGelenTerziPage() {
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: '#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
@@ -326,7 +326,7 @@ export default function EveGelenTerziPage() {
                 ['👗','Dress altered before dinner','Ask on WhatsApp'],
                 ['💼','Suit ready for meeting','Ask on WhatsApp'],
                 ['💍','Wedding dress adjusted','Ask on WhatsApp'],
-                ['🚗','We come to your hotel','Free hotel visit'],
+                ['🚗','We come to your hotel','Hotel visit'],
               ].map(([ic, t, s]) => (
                 <div key={t as string} style={{ background: 'rgba(255,255,255,.05)', border: '1px solid rgba(212,176,122,.15)', borderRadius: '2px', padding: '1.2rem' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '.5rem' }}>{ic}</div>

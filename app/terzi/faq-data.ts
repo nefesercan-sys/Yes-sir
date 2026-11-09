@@ -5,11 +5,11 @@ const PHONE_DISPLAY = '+90 531 898 64 18';
 export const TERZI_FAQ: Record<Lang, [string, string][]> = {
   tr:[
     ['Paça kısaltma fiyatı 2026?', `₺200'den başlar; normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Eve ve otele alım-teslim her bölgede ücretsizdir: Lara, Kundu, Konyaaltı, Belek, Kemer ve diğer bölgelerdeki otellerden kıyafetlerinizi alıyor, işlem bitince otele teslim ediyoruz. Normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Otellere ve adrese terzi kurye servisi var mı?', `Evet! Eve ve otele alım-teslim yapıyoruz: Lara, Kundu, Konyaaltı, Belek, Kemer ve diğer bölgelerdeki otellerden kıyafetlerinizi alıyor, işlem bitince otele teslim ediyoruz. Normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
     ['Hangi ödeme yöntemleri ve para birimleri geçerli?', 'Ödeme tüm para birimleriyle yapılabilir (TL, euro, dolar, ruble ve diğerleri); nakit ve tüm uluslararası kredi kartları geçerlidir. Fiyatlara KDV dahil değildir.'],
     ['Fermuar değişimi kaç lira?', `Fermuar değişimi ₺300'den başlar (pantolon, kot, mont, ceket). Normal işler aynı gün, acil işler 1–2 saatte hazırdır. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bel daraltma ve elbise daraltma fiyatı?', `Bel daraltma ₺200'den başlar. WhatsApp: ${PHONE_DISPLAY}`],
-    ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz; eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE_DISPLAY}`],
+    ['Yerinde ölçü alma ve adrese teslim var mı?', `Evet! Adresinize gelip yerinde ölçü alıyor, dikip tekrar teslim ediyoruz; eve ve otele alım-teslim yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Tişört, sweatshirt, pantolon, şort imalatı?', `Evet! Tüm tekstil ürünlerinin özel dikimi ve seri imalatını yapıyoruz. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bay terzi Antalya — erkek kıyafet dikimi?', `Evet! Erkek takım elbise, pantolon, gömlek, ceket, blazer, smoking, damatlık. WhatsApp: ${PHONE_DISPLAY}`],
     ['Bayan terzi Antalya — kadın elbise dikimi?', `Evet! Elbise dikimi (fotoğrafa ve istediğiniz modele göre), bluz, etek, abiye tamiri, gelinlik tadilatı (gelinlik dikimi yapılmaz), büyük beden. WhatsApp: ${PHONE_DISPLAY}`],
@@ -22,7 +22,7 @@ export const TERZI_FAQ: Record<Lang, [string, string][]> = {
   ],
   en:[
     ['How much is trouser hemming in Antalya?', 'From €10. Regular jobs are ready the same day, urgent jobs in 1–2 hours. Send a photo for a quick quote.'],
-    ['Do you offer hotel pickup and delivery service?', 'Yes! Pick-up and delivery to hotels and homes is free in every area. We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back. Regular jobs are ready the same day, urgent jobs in 1–2 hours.'],
+    ['Do you offer hotel pickup and delivery service?', 'Yes! We offer pick-up and delivery to hotels and homes. We pick up your garments directly from hotels in Lara, Kundu, Konyaaltı, Belek, and Kemer, alter them, and deliver back. Regular jobs are ready the same day, urgent jobs in 1–2 hours.'],
     ['Which currencies and payment methods do you accept?', 'You can pay in any currency (TRY, EUR, USD, RUB and others), in cash or by card, including all major international cards and contactless. Prices do not include VAT.'],
     ['Zip replacement cost?', 'Trouser/jeans zip from €15; coat, jacket and leather zip from €20. Regular jobs are ready the same day, urgent jobs in 1–2 hours.'],
     ['Waist alteration and dress taking in?', 'From €10. WhatsApp us for an exact quote.'],
@@ -35,7 +35,7 @@ export const TERZI_FAQ: Record<Lang, [string, string][]> = {
   ],
   ru:[
     ['Стоимость подгонки брюк в Анталье?', 'От €10. Обычные работы готовы в тот же день, срочные — за 1–2 часа. Отправьте фото.'],
-    ['Есть ли выездной сервис и доставка в отели?', 'Да! Забор и доставка в отели и на дом бесплатны во всех районах. Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно. Обычные работы готовы в тот же день, срочные — за 1–2 часа.'],
+    ['Есть ли выездной сервис и доставка в отели?', 'Да! Забор и доставка в отели и на дом доступны во всех районах. Мы забираем одежду прямо из отелей в Лара, Кунду, Коньяалты, Белек и Кемер, подгоняем по фигуре и доставляем обратно. Обычные работы готовы в тот же день, срочные — за 1–2 часа.'],
     ['Какую валюту и способы оплаты вы принимаете?', 'Оплата возможна в любой валюте (TRY, EUR, USD, RUB и других), наличными или картой, включая международные карты. Цены без НДС.'],
     ['Стоимость замены молнии?', 'Молния на брюках/джинсах — от €15; на пальто, куртке и коже — от €20. Обычные работы готовы в тот же день, срочные — за 1–2 часа.'],
     ['Заужение талии и подгонка платьев?', 'От €10. WhatsApp для точной оценки.'],
@@ -48,7 +48,7 @@ export const TERZI_FAQ: Record<Lang, [string, string][]> = {
   ],
   de:[
     ['Hosenänderung Preis in Antalya?', 'Ab €10. Normale Aufträge am selben Tag fertig, dringende in 1–2 Stunden. Foto senden.'],
-    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Abholung und Lieferung zu Hause und im Hotel sind überall kostenlos. Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern zurück. Normale Aufträge am selben Tag fertig, dringende in 1–2 Stunden.'],
+    ['Bieten Sie Abhol- und Lieferservice im Hotel an?', 'Ja! Abholung und Lieferung zu Hause und im Hotel sind überall möglich. Wir holen Ihre Kleidung direkt in Hotels in Lara, Kundu, Konyaaltı, Belek und Kemer ab, passen sie an und liefern zurück. Normale Aufträge am selben Tag fertig, dringende in 1–2 Stunden.'],
     ['Welche Währungen und Zahlungsmethoden akzeptieren Sie?', 'Zahlung in jeder Währung (TRY, EUR, USD, RUB und weitere), bar oder mit Karte, auch internationale Kreditkarten und kontaktlos. Preise zzgl. MwSt.'],
     ['Reißverschluss-Kosten?', 'Hose/Jeans ab €15; Mantel, Jacke und Leder ab €20. Normale Aufträge am selben Tag fertig, dringende in 1–2 Stunden.'],
     ['Bund einengen und Kleid einengen?', 'Ab €10. WhatsApp für genaues Angebot.'],

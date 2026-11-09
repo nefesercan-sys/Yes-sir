@@ -50,10 +50,10 @@ export interface AngleCtx {
 
 // Servis kuralı (lib/business.ts): eve ve otele servis her bölgede ücretsiz.
 const SVC: Record<ALang, { free: string; paid: string }> = {
-  tr: { free: 'Otele ve eve ücretsiz servis', paid: 'Otellere ücretsiz servis' },
-  en: { free: 'Free hotel & home pick-up', paid: 'Free hotel pick-up' },
-  ru: { free: 'Выезд в отель и на дом бесплатно', paid: 'Выезд в отели бесплатно' },
-  de: { free: 'Gratis-Abholung Hotel & Zuhause', paid: 'Hotelabholung gratis' },
+  tr: { free: 'Otele ve eve servis', paid: 'Otellere servis' },
+  en: { free: 'Hotel & home pick-up', paid: 'Hotel pick-up' },
+  ru: { free: 'Выезд в отель и на дом', paid: 'Выезд в отели' },
+  de: { free: 'Abholung Hotel & Zuhause', paid: 'Hotelabholung' },
 };
 
 type T = { titles: (n: string) => string[]; core: (c: AngleCtx) => string; extra: string; kw: (n: string) => string[] };

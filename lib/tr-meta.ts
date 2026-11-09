@@ -1,6 +1,6 @@
 // TÜRKÇE yakın bölge sayfaları için elle yazılmış başlık/açıklama/anahtar kelime.
 // Kurallar: başlık ≤60 (marka eki dahil), açıklama ≤155 (telefon dahil), uzak bölge adı yok.
-// "{F}" yer tutucusu servis kuralıyla doldurulur (lib/business.ts: eve ve otele ücretsiz servis her bölgede).
+// "{F}" yer tutucusu servis kuralıyla doldurulur (lib/business.ts: eve ve otele servis).
 // {loc} = sayfanın yer-durum kalıbı (örn. "Meltem'de"). Yeni bölge için bu tabloya satır ekle.
 import { isFreeService } from '@/lib/business';
 export interface TrMeta { title: string; desc: string; kw: string[] }
@@ -19,7 +19,7 @@ const T: Record<string, { t: string; d: string; kw: string[] }> = {
 };
 export function trNearDistrict(slug: string, name: string, loc: string, phone: string, brand: string): TrMeta | undefined {
   const e = T[slug]; if (!e) return undefined;
-  const F = isFreeService(slug) ? 'Ücretsiz servis.' : 'Otele ücretsiz servis.';
+  const F = isFreeService(slug) ? 'Ücretsiz servis.' : 'Otele servis.';
   const d = e.d.includes('{F}') ? e.d.replace('{F}', F) : e.d;
   return { title: `${e.t} | ${brand}`, desc: `${d.replace('{loc}', loc.charAt(0).toUpperCase() + loc.slice(1))} ☎ ${phone}`.replace(/\s+/g, ' '), kw: e.kw.map((k) => `${name} ${k}`) };
 }

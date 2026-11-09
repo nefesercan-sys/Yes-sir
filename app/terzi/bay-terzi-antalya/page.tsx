@@ -17,7 +17,7 @@ const FAQ: [string, string][] = [
   ['Damatlık dikimi Antalya fiyatı?', `Damatlık (takım elbise) dikiminde fiyat sabit değildir; fotoğrafa ve istediğiniz modele göre belirlenir. Özel kumaş ve aksesuar seçimi yapılabilir. Düğün sezonunda (Nisan–Ekim) önce randevu alın. WhatsApp: ${PHONE}`],
   ['Erkek gömlek dikimi Antalya kaç lira?', `Erkek gömlek dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; ölçüye göre kişiselleştirme mevcuttur. Fotoğraf gönderin, fiyatı söyleyelim. WhatsApp: ${PHONE}`],
   ['Erkek kıyafet tadilatı Antalya?', 'Evet. Pantolon kısaltma, ceket tadilatı, ceket kol kısaltma, bel alma, fermuar değişimi. Aynı gün teslim; acilse 1–2 saat.'],
-  ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim her bölgede ücretsizdir. WhatsApp: ${PHONE}`],
+  ['Erkek kıyafet tadilatı otele geliyor mu?', `Evet! Eve ve otele alım-teslim yapıyoruz. WhatsApp: ${PHONE}`],
 ];
 
 const jsonLd = {
@@ -27,7 +27,7 @@ const jsonLd = {
       '@type': 'Service',
       '@id': `${SITE_URL}#service`,
       name: 'Bay Terzi Antalya — Erkek Takım Elbise Dikimi Fiyatları 2026',
-      description: "Antalya'da bay terzi: pantolon kısaltma ₺200, fermuar ₺300. Erkek takım elbise, gömlek, smoking ve damatlık dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele ücretsiz alım-teslim.",
+      description: "Antalya'da bay terzi: pantolon kısaltma ₺200, fermuar ₺300. Erkek takım elbise, gömlek, smoking ve damatlık dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele alım-teslim.",
       provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: {
@@ -76,7 +76,7 @@ const FIYATLAR = [
   ['Ceket Beden Küçültme', 'Fotoğrafa göre', 'Aynı gün'],
   ['Erkek Pantolon Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Damatlık / Takım Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
-  ['Araçlı Servis Ücreti', 'ÜCRETSIZ', '—'],
+  ['Araçlı Servis', 'WhatsApp\'ta netleşir', '—'],
 ];
 
 const s = { fontFamily: "'Jost',system-ui,sans-serif" as const };
@@ -146,7 +146,7 @@ export default function BayTerziPage() {
                 {FIYATLAR.map(([tip,fiyat,sure],i)=>(
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i%2?'rgba(184,151,90,.025)':'#fff' }}>
                     <td style={{ padding: '.9rem .8rem', fontSize: '.88rem' }}>{tip}</td>
-                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: fiyat==='ÜCRETSIZ'?'#22c55e':'#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
+                    <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#8A6E3E', fontWeight: 700 }}>{fiyat}</td>
                     <td style={{ padding: '.9rem .8rem', textAlign: 'center', color: '#6B5F53', fontSize: '.8rem' }}>{sure}</td>
                   </tr>
                 ))}
@@ -212,7 +212,7 @@ export default function BayTerziPage() {
 
         <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2rem', color: '#1C1814', marginBottom: '.7rem' }}>Erkek Kıyafet Fiyatı Öğrenin</h2>
-          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis ücretsiz</p>
+          <p style={{ color: '#1C1814', marginBottom: '1.8rem', fontSize: '.92rem' }}>Fotoğraf gönderin — hızlı fiyat · Otellere servis</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={WA('Merhaba, erkek kıyafeti için fiyat almak istiyorum.')} target="_blank" rel="noopener noreferrer"
               style={{ background: '#15803d', color: '#fff', padding: '1rem 2.5rem', fontWeight: 700, textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>

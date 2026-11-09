@@ -140,7 +140,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
       <section style={{ padding: '2.6rem 1.25rem 0' }}>
         <div style={wrap}>
           <h2 style={h2}>Konyaaltı mahalleleri</h2>
-          <p style={{ margin: '0 0 1rem', color: MUTED }}>Eve ve otele alım-teslim ücretsizdir; bölgenizi WhatsApp&apos;tan yazmanız yeterli.</p>
+          <p style={{ margin: '0 0 1rem', color: MUTED }}>Eve ve otele alım-teslim yapıyoruz; bölgenizi WhatsApp&apos;tan yazmanız yeterli.</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
             {KONYAALTI_MAHALLELERI.map((m) => (
               <Link key={m.slug} href={`/terzi/konyaalti/${m.slug}`} style={{ border: `1px solid ${BORDER}`, borderRadius: 999, padding: '.4rem .9rem', fontSize: '.88rem', color: INK, textDecoration: 'none', background: '#fff' }}>{m.ad} terzi</Link>

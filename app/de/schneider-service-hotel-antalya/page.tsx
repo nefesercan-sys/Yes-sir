@@ -36,7 +36,7 @@ const HOTELS = [
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
   ['Gibt es einen mobilen Schneiderservice in Antalya?', `Ja! Der mobile Schneiderservice von Terzi Can kommt zu jeder Adresse in Antalya. Teilen Sie Hotelname oder Standort per WhatsApp mit. WhatsApp: ${PHONE}`],
-  ['Ist der Hausbesuch kostenlos?', 'Der Hotelbesuch ist in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit. Den Preis nennen wir per WhatsApp anhand eines Fotos.'],
+  ['Kommen Sie zum Hotel?', 'Hotelbesuche sind in allen bedienten Hotelgebieten möglich. Den Preis nennen wir per WhatsApp anhand eines Fotos.'],
   ['Bedienen Sie Hotels in Belek?', `Ja! Wir kommen zu allen Hotels in Belek, darunter Regnum, Rixos, Kaya Palazzo, Gloria, Delphin, Calista, Maxx Royal und Cornelia. WhatsApp: ${PHONE}`],
   ['Bedienen Sie Hotels in Lara?', `Ja! Wir bedienen alle Hotels in Lara, darunter Titanic Mardan, Delphin Diva, Fame Residence, Akra und Lara Barut Collection. WhatsApp: ${PHONE}`],
   ['Wie schnell kommt der Schneider?', 'Wir bestätigen den Termin per WhatsApp während der Öffnungszeiten (täglich 08:00–23:00). Die Ankunftszeit hängt von Ihrem Standort und unserem Terminplan ab.'],
@@ -100,8 +100,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Schneider im Hotel Antalya: Abholung gratis, ab ₺200 | Terzi Can' },
-  description: 'Schneider im Hotel in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung in Antalya kostenlos, Dauer je nach Arbeit. WhatsApp auf Deutsch. ☎ ' + PHONE,
+  title: { absolute: 'Schneider im Hotel Antalya: Hotelservice ab ₺200 | Terzi Can' },
+  description: 'Schneider im Hotel in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung in Antalya, Dauer je nach Arbeit. WhatsApp auf Deutsch. ☎ ' + PHONE,
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',
@@ -129,14 +129,14 @@ export const metadata: Metadata = {
 };
 
 const DISTRICTS = [
-  {name:'Belek', time:'Gratis-Abholung', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
-  {name:'Lara', time:'Gratis-Abholung', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
-  {name:'Güzeloba', time:'Gratis-Abholung', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
-  {name:'Kemer', time:'Gratis-Abholung', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
-  {name:'Muratpaşa / Liman', time:'Gratis-Abholung', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
+  {name:'Belek', time:'Hotelabholung', desc:'Alle Hotels in Belek — Rixos, Regnum, Kaya Palazzo, Gloria, Delphin, Calista, Cornelia, Maxx Royal', slug:'belek'},
+  {name:'Lara', time:'Hotelabholung', desc:'Alle Hotels in Lara — Delphin Diva, Titanic Mardan, Fame Residence, Akra, Lara Barut Collection', slug:'lara'},
+  {name:'Güzeloba', time:'Hotelabholung', desc:'Sherwood, Delphin Imperial, Adalya Elite und weitere Strandhotels in Güzeloba', slug:'guzeloba'},
+  {name:'Kemer', time:'Hotelabholung', desc:'Alle Hotels in Kemer — Maxx Royal Kemer, Club Med Palmiye, Rixos Sungate, Sentido Perissia', slug:'kemer'},
+  {name:'Muratpaşa / Liman', time:'Hotelabholung', desc:'Stadtzentrum, Kaleiçi, Şirinyalı, Fener'},
   {name:'Konyaaltı', time:'Werkstattgebiet', desc:'Werkstatt von Terzi Can — Hurma, Uncalı, Arapsuyu, Sarısu'},
-  {name:'Side', time:'Gratis-Abholung', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
-  {name:'Serik / Döşemealtı', time:'Gratis-Abholung', desc:'Serik Zentrum und umliegende Dörfer'},
+  {name:'Side', time:'Hotelabholung', desc:'Hotels in Side, Sorgun, Kumköy, Evrenseki', slug:'side'},
+  {name:'Serik / Döşemealtı', time:'Hotelabholung', desc:'Serik Zentrum und umliegende Dörfer'},
 ];
 
 export default function SchneiderServiceHotelAntalyaPage() {
@@ -277,7 +277,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
             <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.9rem', color: '#1C1814', marginBottom: '.5rem' }}>
               Preise für mobilen Schneider / Hotelservice
             </h2>
-            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotelbesuch in allen bedienten Hotelgebieten kostenlos — Sie zahlen nur die Schneiderarbeit</p>
+            <p style={{ color: '#6B5F53', fontSize: '.85rem', marginBottom: '1.5rem' }}>Hotelbesuche stimmen wir per WhatsApp ab — die Arbeit wird nach Foto berechnet</p>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid rgba(184,151,90,.2)' }}>
@@ -288,7 +288,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
               </thead>
               <tbody>
                 {[
-                  ['Anfahrt','Kostenlos','—'],
+                  ['Anfahrt','Per WhatsApp','—'],
                   ['Hosen kürzen','ab €10',TURN],
                   ['Reißverschluss wechseln','ab €15 (Mantel / Leder €20)',TURN],
                   ['Kleid / Jacke enger machen','ab €10',TURN],
@@ -299,7 +299,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='Kostenlos'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: '#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}
