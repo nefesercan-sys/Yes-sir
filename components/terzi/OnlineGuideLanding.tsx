@@ -84,7 +84,7 @@ export default function OnlineGuideLanding({ lang }: { lang: ILang }) {
           </ol>
         </section>
 
-        <KargoSection lang={lang} />
+        <KargoSection lang={lang} compact />
 
         <section style={{ marginBottom: '1.8rem' }}>
           <h2 style={{ fontFamily: serif, fontSize: '1.35rem', color: C.ink, margin: '0 0 .8rem', lineHeight: 1.25 }}>{c.faqTitle}</h2>
