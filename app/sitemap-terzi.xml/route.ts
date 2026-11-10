@@ -31,7 +31,8 @@ function zoneAltMap(z: (typeof ZONE_SLUGS)[number]): Record<string, string> {
 // lastmod: yalnızca içeriği gerçekten değişen sayfalar güncel tarihi alır (sahte güncelleme sinyali verilmez).
 // 2026-10-30: süre/ücretsiz servis/Muratpaşa/kopya içerik düzeltmeleriyle değişen terzi sayfaları.
 // Bu düzeltmelerden etkilenmeyen sayfalar (keten/pamuk ve Anavera tekstil tanıtımları, üniforma) eski tarihlerinde kalır.
-const CHANGED = '2026-11-06'
+// 2026-11-10: bölge metinleri (10 dil), başlık/açıklama (telefon başta), ücretsiz ifadesi ve süre düzeltmeleri.
+const CHANGED = '2026-11-10'
 const OLD = '2026-10-04'
 const UNCHANGED_PREFIXES = ['/dogal-keten-pamuk-giyim', '/en/linen-clothing-custom-made-antalya', '/ru/lnyanaya-odezhda-poshiv-antalya', '/de/leinenkleidung-massanfertigung-antalya',
   '/tekstil-antalya', '/en/textile-manufacturer-antalya', '/ru/tekstilnoe-proizvodstvo-antalya', '/de/textilhersteller-antalya', '/terzi/uniforma-uretimi-antalya']
