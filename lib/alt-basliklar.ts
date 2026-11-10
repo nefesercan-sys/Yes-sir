@@ -8,7 +8,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "paca": [
   {
    "h": {
-    "tr": "{y} paça kısaltma fiyatı ve süresi",
+    "tr": "{y} paça kısaltma kaç TL, ne zaman hazır olur?",
     "en": "Trouser hemming in {y}: price and time",
     "de": "Hose kürzen in {y}: Preis und Dauer",
     "ru": "Подшив брюк в {y}: цена и срок",
@@ -20,7 +20,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تقصير البنطلون في {y}: السعر والمدة"
    },
    "p": {
-    "tr": "Paça kısaltma ₺200'den başlar. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir.",
+    "tr": "Başlangıç fiyatı ₺200'dür (KDV hariç). Normal işler aynı gün, acil işler 1–2 saatte hazır olur; süre işin durumuna göre değişir.",
     "en": "Trouser hemming starts from €10. Urgent jobs are ready in 1–2 hours, normal jobs the same day.",
     "de": "Das Kürzen beginnt ab €10. Eilige Aufträge sind in 1–2 Stunden fertig, normale am selben Tag.",
     "ru": "Подшив брюк — от €10. Срочные заказы — за 1–2 часа, обычные — в тот же день.",
@@ -34,7 +34,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Paça boyu nasıl ayarlanır?",
+    "tr": "Paça boyunu kim belirliyor?",
     "en": "How is the trouser length set?",
     "de": "Wie wird die Hosenlänge festgelegt?",
     "ru": "Как подбирается длина брюк?",
@@ -46,7 +46,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كيف يُضبط طول البنطلون؟"
    },
    "p": {
-    "tr": "Pantolon, giyeceğiniz ayakkabıyla ayakta denenir ve boy sizin tercihinize göre işaretlenir. Spor ve klasik ayakkabı için boy farklı olabilir.",
+    "tr": "Siz belirlersiniz. Pantolonu en çok giyeceğiniz ayakkabıyla deneyin; boy ayakta işaretlenir. Topuklu, klasik ve spor ayakkabıda doğru boy aynı değildir.",
     "en": "The trousers are tried on standing, with the shoes you will wear, and the length is marked to your preference. It can differ for sneakers and dress shoes.",
     "de": "Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden, und die Länge nach Ihrem Wunsch markiert. Für Sneaker und klassische Schuhe kann sie unterschiedlich sein.",
     "ru": "Брюки примеряют стоя, в обуви, с которой вы их будете носить, и отмечают длину по вашему желанию. Для кроссовок и классической обуви она может отличаться.",
@@ -60,7 +60,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Bel daraltma ve pantolon tadilatı",
+    "tr": "Beli bol gelen pantolon",
     "en": "Waist taking-in and trouser alterations",
     "de": "Bund enger machen und Hosenänderungen",
     "ru": "Ушивание в талии и переделка брюк",
@@ -72,7 +72,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تضييق الخصر وتعديل البنطلون"
    },
    "p": {
-    "tr": "Bel daraltma ₺200'den başlar. Kıyafetin fotoğrafını WhatsApp'tan göndererek yapılacak işe göre net fiyat alabilirsiniz.",
+    "tr": "Bel daraltma ₺200'den başlar. Ne kadar daraltılacağını yazıp fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
     "en": "Waist taking-in starts from €10. Send a photo of the garment on WhatsApp to get an exact price for the work needed.",
     "de": "Bund enger machen beginnt ab €10. Senden Sie ein Foto per WhatsApp, um den genauen Preis für die nötige Arbeit zu erhalten.",
     "ru": "Ушивание в талии — от €10. Пришлите фото вещи в WhatsApp, и мы назовём точную цену работы.",
@@ -88,7 +88,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "fermuar": [
   {
    "h": {
-    "tr": "{y} fermuar değişimi: tamir mi, yenisi mi?",
+    "tr": "{y} bozulan fermuar: onarılır mı, değişir mi?",
     "en": "Zipper repair in {y}: fix or replace?",
     "de": "Reißverschluss in {y}: reparieren oder ersetzen?",
     "ru": "Молния в {y}: ремонт или замена?",
@@ -100,7 +100,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "السحّاب في {y}: إصلاح أم استبدال؟"
    },
    "p": {
-    "tr": "Dişler sağlam ve şerit yırtık değilse çoğu zaman yalnızca sürgü değişir ya da sıkışma giderilir. Dişler kopmuşsa veya şerit yırtılmışsa fermuarın tamamı değişir.",
+    "tr": "Sorun sürgüdeyse çoğu zaman yalnızca sürgü yenilenir. Diş eksikse ya da fermuar şeridi yırtıksa fermuar baştan sona değiştirilir. Fotoğrafa bakıp hangisi olduğunu söyleriz.",
     "en": "If the teeth are intact and the tape isn't torn, often only the slider is replaced or the jam is cleared. If teeth are missing or the tape is torn, the whole zipper is replaced.",
     "de": "Sind die Zähne intakt und das Band nicht gerissen, genügt oft ein neuer Schieber oder das Beheben des Klemmens. Fehlen Zähne oder ist das Band gerissen, wird der ganze Reißverschluss ersetzt.",
     "ru": "Если зубцы целы, а лента не порвана, часто достаточно заменить бегунок или устранить заедание. Если зубцы выпали или лента порвана, молнию меняют полностью.",
@@ -114,7 +114,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Fermuar değişimi fiyatı ve teslim süresi",
+    "tr": "Fermuar değişimi kaç TL?",
     "en": "Zipper replacement price and turnaround",
     "de": "Preis und Dauer beim Reißverschluss-Wechsel",
     "ru": "Цена и срок замены молнии",
@@ -126,7 +126,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "سعر ومدة استبدال السحّاب"
    },
    "p": {
-    "tr": "Fermuar değişimi ₺300'den başlar. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir.",
+    "tr": "₺300'den başlar (KDV hariç); fermuarın boyu ve giysinin türü fiyatı etkiler. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.",
     "en": "Zipper replacement starts from €15. Urgent jobs are ready in 1–2 hours, normal jobs the same day.",
     "de": "Der Austausch beginnt ab €15. Eilige Aufträge sind in 1–2 Stunden fertig, normale am selben Tag.",
     "ru": "Замена молнии — от €15. Срочные заказы — за 1–2 часа, обычные — в тот же день.",
@@ -140,7 +140,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Mont, ceket ve pantolon fermuarı",
+    "tr": "Hangi ürünlerde fermuar değişir?",
     "en": "Zippers for coats, jackets and trousers",
     "de": "Reißverschlüsse für Mäntel, Jacken und Hosen",
     "ru": "Молнии для курток, пальто и брюк",
@@ -152,7 +152,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "سحّابات المعاطف والجاكيتات والبناطيل"
    },
    "p": {
-    "tr": "Fermuar değişimi pantolon, etek, elbise, ceket, mont ve çanta gibi kıyafet ve ürünlerde yapılır. Fotoğrafını WhatsApp'tan gönderin, yapılabilirliği söyleyelim.",
+    "tr": "Pantolon, etek, elbise, ceket, mont ve çantada değişir. Emin değilseniz ürünün fotoğrafını WhatsApp'tan gönderin; yapılıp yapılamayacağını yazarız.",
     "en": "Zipper replacement is done on trousers, skirts, dresses, jackets, coats and bags. Send a photo on WhatsApp and we will tell you if it can be done.",
     "de": "Der Austausch erfolgt bei Hosen, Röcken, Kleidern, Jacken, Mänteln und Taschen. Senden Sie ein Foto per WhatsApp, wir sagen Ihnen, ob es machbar ist.",
     "ru": "Замену молнии делают в брюках, юбках, платьях, куртках, пальто и сумках. Пришлите фото в WhatsApp, и мы скажем, возможно ли это.",
@@ -168,7 +168,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "gelinlik": [
   {
    "h": {
-    "tr": "{y} abiye tadilatı fiyatı",
+    "tr": "{y} abiye tadilatı nasıl fiyatlanır?",
     "en": "Evening dress alteration price in {y}",
     "de": "Abendkleid ändern in {y}: Preis",
     "ru": "Цена подгонки вечернего платья в {y}",
@@ -194,7 +194,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Abiye ve gelinlik provası ne zaman yapılır?",
+    "tr": "Abiye ya da gelinlik için ne zaman gelmeliyim?",
     "en": "When to book evening and wedding dress fittings",
     "de": "Wann Anproben für Abend- und Brautkleid?",
     "ru": "Когда делать примерки вечернего и свадебного платья?",
@@ -206,7 +206,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "متى تُجرى بروفات فستان السهرة والزفاف؟"
    },
    "p": {
-    "tr": "Boy, bel ve korse ayarı için düğünden birkaç hafta önce ilk provayı, düğüne yakın bir tarihte son provayı yapmanız önerilir.",
+    "tr": "İki prova öneriyoruz: ilki törenden birkaç hafta önce, sonuncusu törene yakın. Böylece boy, bel ve korse ayarı son ölçünüze göre yapılır.",
     "en": "For length, waist and bodice adjustments, we recommend a first fitting a few weeks before the event and a final fitting close to the date.",
     "de": "Für Länge, Taille und Mieder empfehlen wir die erste Anprobe einige Wochen vor dem Anlass und die letzte kurz davor.",
     "ru": "Для подгонки длины, талии и корсета рекомендуем первую примерку за несколько недель до события, а финальную — ближе к дате.",
@@ -220,7 +220,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Abiye elbise dikimi ve özel dikim",
+    "tr": "Abiye ya da elbise diktirmek",
     "en": "Evening dress sewing and custom tailoring",
     "de": "Abendkleid nähen und Maßanfertigung",
     "ru": "Пошив вечернего платья и индивидуальный пошив",
@@ -248,7 +248,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "keten": [
   {
    "h": {
-    "tr": "Keten kıyafet dikimi: kumaş çeker mi?",
+    "tr": "Keten diktirirsem yıkayınca küçülür mü?",
     "en": "Linen clothing tailoring: does the fabric shrink?",
     "de": "Leinenkleidung nähen: läuft der Stoff ein?",
     "ru": "Пошив льняной одежды: садится ли ткань?",
@@ -260,7 +260,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "خياطة ملابس الكتان: هل ينكمش القماش؟"
    },
    "p": {
-    "tr": "Keten, özellikle ilk yıkamada çekebilir. Dikimden önce kumaşın ön yıkamasının yapılması, bitmiş kıyafetin boyunun ve bedeninin sonradan değişmesini önler.",
+    "tr": "Keten ilk yıkamada çekebilir. Bu yüzden kumaş dikimden önce yıkanır; böylece kıyafetin boyu ve bedeni sonradan değişmez.",
     "en": "Linen can shrink, especially in the first wash. Pre-washing the fabric before sewing prevents the finished garment's length and fit from changing later.",
     "de": "Leinen kann besonders beim ersten Waschen einlaufen. Eine Vorwäsche des Stoffes vor dem Nähen verhindert, dass sich Länge und Passform später ändern.",
     "ru": "Лён может садиться, особенно при первой стирке. Предварительная стирка ткани перед пошивом не даёт готовой вещи изменить длину и посадку.",
@@ -274,7 +274,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Keten ve pamuk özel dikim: süre ve fiyat",
+    "tr": "Keten ve pamuk dikimde fiyat ve süre",
     "en": "Custom linen and cotton tailoring: time and price",
     "de": "Leinen und Baumwolle nach Maß: Dauer und Preis",
     "ru": "Индивидуальный пошив из льна и хлопка: срок и цена",
@@ -286,7 +286,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "الكتان والقطن بالتفصيل الخاص: المدة والسعر"
    },
    "p": {
-    "tr": "Özel dikimde süre ve fiyat modele, kumaşa ve adede göre belirlenir; dikime başlamadan önce net olarak konuşulur.",
+    "tr": "Sabit fiyat yoktur. Model, kumaş ve adet belli olunca fiyatı ve süreyi dikime başlamadan önce yazarız.",
     "en": "For custom tailoring, time and price depend on the model, fabric and quantity, and are agreed clearly before sewing begins.",
     "de": "Bei Maßanfertigung hängen Dauer und Preis von Modell, Stoff und Menge ab und werden vor Nähbeginn klar besprochen.",
     "ru": "Срок и цена зависят от модели, ткани и количества и обсуждаются до начала работы.",
@@ -302,7 +302,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "uniforma": [
   {
    "h": {
-    "tr": "{y} üniforma imalatı: sipariş için ne gerekir?",
+    "tr": "{y} üniforma siparişi vermek için ne lazım?",
     "en": "Uniform manufacturing in {y}: what do you need to order?",
     "de": "Uniformen in {y} fertigen lassen: was wird benötigt?",
     "ru": "Производство униформы в {y}: что нужно для заказа?",
@@ -314,7 +314,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تصنيع الزي الموحّد في {y}: ماذا تحتاج للطلب؟"
    },
    "p": {
-    "tr": "Model, adet, beden listesi ve varsa logo bilgisi yeterlidir. Seri üretimden önce numune üzerinde ölçü ve görünüm onaylanır.",
+    "tr": "Model, adet ve beden listesini, varsa logonuzu gönderin. Önce numune hazırlanır; ölçü ve görünümü onayladıktan sonra üretime geçilir.",
     "en": "The model, quantity, size list and logo (if any) are enough. Before serial production, size and appearance are approved on a sample.",
     "de": "Modell, Menge, Größenliste und gegebenenfalls Logo genügen. Vor der Serienproduktion werden Größe und Aussehen an einem Muster freigegeben.",
     "ru": "Достаточно модели, количества, списка размеров и логотипа (если есть). Перед серийным производством размер и вид утверждаются на образце.",
@@ -328,7 +328,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Otel, restoran ve şirket üniforması: süre ve teklif",
+    "tr": "Otel, restoran ve şirket üniformasında teklif",
     "en": "Hotel, restaurant and company uniforms: time and quote",
     "de": "Hotel-, Restaurant- und Firmenuniformen: Dauer und Angebot",
     "ru": "Униформа для отелей, ресторанов и компаний: срок и предложение",
@@ -340,7 +340,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "زي موحّد للفنادق والمطاعم والشركات: المدة وعرض السعر"
    },
    "p": {
-    "tr": "Üretim süresi modele ve adede göre belirlenir. Teklif için model, adet ve logo bilgisini WhatsApp'tan göndermeniz yeterli.",
+    "tr": "Teklif için model, adet ve logo bilgisini WhatsApp'tan yazın. Üretim süresi modele ve adede göre birlikte belirlenir.",
     "en": "Production time depends on the model and quantity. To get a quote, send the model, quantity and logo on WhatsApp.",
     "de": "Die Produktionsdauer hängt von Modell und Menge ab. Für ein Angebot senden Sie Modell, Menge und Logo per WhatsApp.",
     "ru": "Срок производства зависит от модели и количества. Для расчёта пришлите в WhatsApp модель, количество и логотип.",
@@ -356,7 +356,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "promo": [
   {
    "h": {
-    "tr": "Promosyon tekstil ve bez çanta: teklif için ne gönderilir?",
+    "tr": "Bez çanta ve promosyon ürününde teklif almak",
     "en": "Promotional textiles and tote bags: what to send for a quote",
     "de": "Werbetextilien und Stoffbeutel: was für ein Angebot senden",
     "ru": "Рекламный текстиль и сумки-шопперы: что прислать для расчёта",
@@ -368,7 +368,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "المنسوجات الدعائية والحقائب القماشية: ماذا ترسل للحصول على عرض سعر"
    },
    "p": {
-    "tr": "Logo veya tasarım dosyanızı, istediğiniz ürünü ve yaklaşık adedi gönderin. Elinizde yalnızca bir fikir ya da örnek fotoğraf varsa o da yeterli.",
+    "tr": "Hangi ürünü istediğinizi, yaklaşık adedi ve logonuzu gönderin. Hazır dosyanız yoksa örnek bir fotoğraf ya da kısa bir tarif de olur.",
     "en": "Send your logo or design file, the product you want and the approximate quantity. An idea or a reference photo is enough too.",
     "de": "Senden Sie Ihre Logo- oder Designdatei, das gewünschte Produkt und die ungefähre Menge. Auch eine Idee oder ein Beispielfoto genügt.",
     "ru": "Пришлите файл с логотипом или дизайном, нужное изделие и примерное количество. Достаточно и идеи или фото-примера.",
@@ -382,7 +382,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Logolu baskı çeşidi nasıl seçilir?",
+    "tr": "Hangi baskı uygun olur?",
     "en": "How to choose the print type for logo products",
     "de": "Druckart für Logo-Produkte richtig wählen",
     "ru": "Как выбрать вид печати логотипа",
@@ -394,7 +394,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كيف تختار نوع طباعة الشعار"
    },
    "p": {
-    "tr": "Baskı çeşidini ürüne ve tasarıma göre birlikte seçeriz. Fiyat ve süre; model, adet ve baskıya göre netleşir.",
+    "tr": "Baskıyı ürüne ve tasarıma bakarak birlikte seçeriz. Fiyat ve süre model, adet ve baskı belli olunca yazılır.",
     "en": "We choose the print type together, based on the product and the design. Price and time depend on the model, quantity and print.",
     "de": "Wir wählen die Druckart gemeinsam nach Produkt und Design. Preis und Dauer hängen von Modell, Menge und Druck ab.",
     "ru": "Вид печати мы выбираем вместе, исходя из изделия и дизайна. Цена и срок зависят от модели, количества и печати.",
@@ -410,7 +410,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "otel": [
   {
    "h": {
-    "tr": "{y} otele gelen terzi nasıl çalışır?",
+    "tr": "{y} otele terzi çağırınca ne olur?",
     "en": "How does the hotel tailor in {y} work?",
     "de": "So funktioniert der Hotel-Schneider in {y}",
     "ru": "Как работает портной с выездом в отель в {y}",
@@ -422,7 +422,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كيف يعمل الخيّاط الذي يأتي إلى الفندق في {y}"
    },
    "p": {
-    "tr": "Terzi otelinize gelir, ölçü alır, gerekirse kıyafeti atölyeye götürür ve tadilat bitince otelinize teslim eder. Randevu için WhatsApp'tan yazmanız yeterli.",
+    "tr": "WhatsApp'tan otelinizi ve işi yazarsınız. Terzi otele gelir, ölçüyü alır, kıyafeti atölyede yapar ve bitince otele geri getirir.",
     "en": "The tailor comes to your hotel, takes measurements, takes the garment to the workshop if needed and delivers it back when finished. Just message us on WhatsApp to book.",
     "de": "Der Schneider kommt in Ihr Hotel, nimmt Maß, bringt das Kleidungsstück bei Bedarf ins Atelier und liefert es zurück. Zur Terminvereinbarung schreiben Sie uns per WhatsApp.",
     "ru": "Портной приезжает в отель, снимает мерки, при необходимости забирает вещь в ателье и возвращает её после работы. Для записи достаточно написать в WhatsApp.",
@@ -448,7 +448,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
+    "tr": "Evet. Konyaaltı, Lara, Belek, Kemer, Side ve çevresindeki otellerden alıp geri getiriyoruz.",
     "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
     "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
     "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
@@ -462,7 +462,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Tatilde acil kıyafet tadilatı",
+    "tr": "Tatilde kıyafetim bozuldu, yetişir mi?",
     "en": "Urgent clothing alterations on holiday",
     "de": "Eilige Kleideränderungen im Urlaub",
     "ru": "Срочная подгонка одежды в отпуске",
@@ -474,7 +474,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تعديل الملابس العاجل أثناء العطلة"
    },
    "p": {
-    "tr": "Acil tamir ve tadilat 1–2 saatte hazırdır. Düğün, toplantı veya tatil öncesi son dakika paça, fermuar ve bel işleri için WhatsApp'tan yazın.",
+    "tr": "Acil paça, fermuar ve bel işleri 1–2 saatte hazır olur; süre işin durumuna göre değişir. Davet ya da toplantı saatinizi WhatsApp'tan yazın.",
     "en": "Urgent repairs and alterations are ready in 1–2 hours. For last-minute hemming, zipper and waist jobs before a wedding, meeting or trip, message us on WhatsApp.",
     "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig. Für kurzfristiges Kürzen, Reißverschluss und Bund vor Hochzeit, Termin oder Reise schreiben Sie uns per WhatsApp.",
     "ru": "Срочный ремонт и подгонка готовы за 1–2 часа. Для срочного подшива, молнии и талии перед свадьбой, встречей или поездкой пишите в WhatsApp.",
@@ -490,7 +490,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "terzi": [
   {
    "h": {
-    "tr": "{y} terzi hizmetleri: paça, fermuar, bel ve elbise",
+    "tr": "{y} terzide neler yaptırabilirim?",
     "en": "Tailor services in {y}: hemming, zippers, waist and dresses",
     "de": "Schneiderservice in {y}: Saum, Reißverschluss, Bund und Kleider",
     "ru": "Услуги портного в {y}: подшив, молнии, талия и платья",
@@ -516,7 +516,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Terzi hizmeti için WhatsApp'tan fotoğrafla fiyat",
+    "tr": "Gelmeden fiyat öğrenmek",
     "en": "Get a tailor quote by photo on WhatsApp",
     "de": "Schneider-Preis per Foto über WhatsApp",
     "ru": "Цена портного по фото в WhatsApp",
@@ -528,7 +528,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "سعر الخيّاط عبر صورة على واتساب"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını ve yapılacak işi WhatsApp'tan gönderin; net fiyat ve teslim süresini söyleyelim. Her gün 08:00–23:00 yazabilirsiniz.",
+    "tr": "Kıyafeti fotoğraflayıp ne istediğinizi WhatsApp'tan yazın. Net fiyatı ve ne zaman hazır olacağını cevaplarız; her gün 08:00–23:00 açığız.",
     "en": "Send a photo of the garment and the work you need on WhatsApp, and we will give you the exact price and turnaround. You can write every day from 08:00 to 23:00.",
     "de": "Senden Sie ein Foto des Kleidungsstücks und die gewünschte Arbeit per WhatsApp, wir nennen Preis und Dauer. Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
     "ru": "Пришлите в WhatsApp фото вещи и нужную работу, и мы назовём точную цену и срок. Писать можно каждый день с 08:00 до 23:00.",
@@ -544,7 +544,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "fiyat": [
   {
    "h": {
-    "tr": "Terzi fiyatları {y}: paça, fermuar, bel, gelinlik",
+    "tr": "{y} terzi fiyat listesi",
     "en": "Tailor prices in {y}: hemming, zipper, waist, wedding dress",
     "de": "Schneiderpreise in {y}: Saum, Reißverschluss, Bund, Brautkleid",
     "ru": "Цены портного в {y}: подшив, молния, талия, свадебное платье",
@@ -570,7 +570,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Kesin fiyat nasıl belirlenir?",
+    "tr": "Listedeki fiyat neden 'başlangıç' fiyatı?",
     "en": "How is the exact tailoring price decided?",
     "de": "Wie wird der genaue Schneiderpreis bestimmt?",
     "ru": "Как определяется точная цена?",
@@ -582,7 +582,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كيف يُحدَّد السعر الدقيق؟"
    },
    "p": {
-    "tr": "Fiyat; kumaşa, yapılacak işe ve aciliyete göre değişir. Fotoğrafı WhatsApp'tan gönderdiğinizde işe başlamadan önce net fiyatı öğrenirsiniz.",
+    "tr": "Çünkü kumaş, işin kapsamı ve aciliyet fiyatı değiştirir. Fotoğrafı gönderdiğinizde net fiyatı işe başlamadan önce yazarız; sürpriz olmaz.",
     "en": "The price varies with the fabric, the work and the urgency. When you send a photo on WhatsApp, you learn the exact price before any work begins.",
     "de": "Der Preis hängt von Stoff, Arbeit und Dringlichkeit ab. Wenn Sie ein Foto per WhatsApp senden, erfahren Sie den genauen Preis vor Arbeitsbeginn.",
     "ru": "Цена зависит от ткани, вида работы и срочности. Если прислать фото в WhatsApp, вы узнаете точную цену до начала работы.",
@@ -598,7 +598,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "hizmet": [
   {
    "h": {
-    "tr": "{y} terzi: teslim süresi ve fiyat",
+    "tr": "{y} terzi: ne zaman hazır, kaç TL?",
     "en": "Tailor in {y}: turnaround and price",
     "de": "Schneider in {y}: Dauer und Preis",
     "ru": "Портной в {y}: срок и цена",
@@ -624,7 +624,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Fotoğrafla fiyat al, otelinize teslim",
+    "tr": "Fotoğraf gönderin, otelinizden alalım",
     "en": "Get a price by photo, delivered to your hotel",
     "de": "Preis per Foto, Lieferung ins Hotel",
     "ru": "Цена по фото, доставка в отель",
@@ -636,7 +636,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "السعر عبر صورة والتسليم إلى فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
+    "tr": "Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Hizmet verdiğimiz bölgelerde kıyafeti otelinizden alıp geri getiriyoruz; her gün 08:00–23:00.",
     "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
     "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
     "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
@@ -652,7 +652,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "genel": [
   {
    "h": {
-    "tr": "{y} terzi: teslim süresi ve fiyat",
+    "tr": "{y} terzi: ne zaman hazır, kaç TL?",
     "en": "Tailor in {y}: turnaround and price",
     "de": "Schneider in {y}: Dauer und Preis",
     "ru": "Портной в {y}: срок и цена",
@@ -678,7 +678,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Fotoğrafla fiyat al, otelinize teslim",
+    "tr": "Fotoğraf gönderin, otelinizden alalım",
     "en": "Get a price by photo, delivered to your hotel",
     "de": "Preis per Foto, Lieferung ins Hotel",
     "ru": "Цена по фото, доставка в отель",
@@ -690,7 +690,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "السعر عبر صورة والتسليم إلى فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
+    "tr": "Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Hizmet verdiğimiz bölgelerde kıyafeti otelinizden alıp geri getiriyoruz; her gün 08:00–23:00.",
     "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
     "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
     "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
@@ -706,7 +706,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "bolge": [
   {
    "h": {
-    "tr": "{y} otele gelen terzi nasıl çalışır?",
+    "tr": "{y} otele terzi çağırınca ne olur?",
     "en": "How does the hotel tailor in {y} work?",
     "de": "So funktioniert der Hotel-Schneider in {y}",
     "ru": "Как работает портной с выездом в отель в {y}",
@@ -718,7 +718,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كيف يعمل الخيّاط الذي يأتي إلى الفندق في {y}"
    },
    "p": {
-    "tr": "Terzi otelinize gelir, ölçü alır, gerekirse kıyafeti atölyeye götürür ve tadilat bitince otelinize teslim eder. Randevu için WhatsApp'tan yazmanız yeterli.",
+    "tr": "WhatsApp'tan otelinizi ve işi yazarsınız. Terzi otele gelir, ölçüyü alır, kıyafeti atölyede yapar ve bitince otele geri getirir.",
     "en": "The tailor comes to your hotel, takes measurements, takes the garment to the workshop if needed and delivers it back when finished. Just message us on WhatsApp to book.",
     "de": "Der Schneider kommt in Ihr Hotel, nimmt Maß, bringt das Kleidungsstück bei Bedarf ins Atelier und liefert es zurück. Zur Terminvereinbarung schreiben Sie uns per WhatsApp.",
     "ru": "Портной приезжает в отель, снимает мерки, при необходимости забирает вещь в ателье и возвращает её после работы. Для записи достаточно написать в WhatsApp.",
@@ -744,7 +744,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
+    "tr": "Evet. Konyaaltı, Lara, Belek, Kemer, Side ve çevresindeki otellerden alıp geri getiriyoruz.",
     "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
     "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
     "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
@@ -758,7 +758,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Tatilde acil kıyafet tadilatı",
+    "tr": "Tatilde kıyafetim bozuldu, yetişir mi?",
     "en": "Urgent clothing alterations on holiday",
     "de": "Eilige Kleideränderungen im Urlaub",
     "ru": "Срочная подгонка одежды в отпуске",
@@ -770,7 +770,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تعديل الملابس العاجل أثناء العطلة"
    },
    "p": {
-    "tr": "Acil tamir ve tadilat 1–2 saatte hazırdır. Düğün, toplantı veya tatil öncesi son dakika paça, fermuar ve bel işleri için WhatsApp'tan yazın.",
+    "tr": "Acil paça, fermuar ve bel işleri 1–2 saatte hazır olur; süre işin durumuna göre değişir. Davet ya da toplantı saatinizi WhatsApp'tan yazın.",
     "en": "Urgent repairs and alterations are ready in 1–2 hours. For last-minute hemming, zipper and waist jobs before a wedding, meeting or trip, message us on WhatsApp.",
     "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig. Für kurzfristiges Kürzen, Reißverschluss und Bund vor Hochzeit, Termin oder Reise schreiben Sie uns per WhatsApp.",
     "ru": "Срочный ремонт и подгонка готовы за 1–2 часа. Для срочного подшива, молнии и талии перед свадьбой, встречей или поездкой пишите в WhatsApp.",
@@ -787,7 +787,7 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
 // Fiyat rakamı YAZILMAYAN diller (es/fr/pl/uk/nl/ar sayfaları: fiyat WhatsApp'ta netleşir).
 const YENI_FP = {
  "h": {
-  "tr": "{y} terzi hizmetleri ve teslim süresi",
+  "tr": "{y} terzi: yapılan işler ve süre",
   "en": "Tailor services in {y} and turnaround",
   "de": "Schneiderservice in {y} und Dauer",
   "ru": "Услуги портного в {y} и сроки",
@@ -799,7 +799,7 @@ const YENI_FP = {
   "ar": "خدمات الخياطة في {y}: التقصير والسحّاب والخصر والفساتين"
  },
  "p": {
-  "tr": "Paça kısaltma, fermuar değişimi, bel daraltma, gelinlik ve abiye tadilatı ile özel dikim yapılır. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir; fiyat WhatsApp'ta netleşir.",
+  "tr": "Paça, bel, fermuar, gelinlik ve abiye tadilatı ile özel dikim yapıyoruz. Normal işler aynı gün, acil işler 1–2 saatte hazır olur; net fiyatı WhatsApp'tan yazarız.",
   "en": "Hemming, zipper replacement, waist taking-in, wedding and evening dress alterations and custom tailoring. Urgent jobs are ready in 1–2 hours, normal jobs the same day; the price is confirmed on WhatsApp.",
   "de": "Saum kürzen, Reißverschluss-Wechsel, Bund enger machen, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Eilige Aufträge in 1–2 Stunden, normale am selben Tag; der Preis wird per WhatsApp geklärt.",
   "ru": "Подшив брюк, замена молний, ушивание в талии, переделка свадебных и вечерних платьев, индивидуальный пошив. Срочные заказы — за 1–2 часа, обычные — в тот же день; цена уточняется в WhatsApp.",
