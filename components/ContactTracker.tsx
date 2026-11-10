@@ -1,9 +1,9 @@
 'use client';
 // swaphubs.com — WhatsApp ve telefon tıklamalarını dile/sayfaya/markaya göre ölçer.
-// Tek, delege edilmiş dinleyici. Çerez/yerel depolama/kişisel veri YOK; JS kapalıysa bağlantılar aynen çalışır.
+// Müşterinin WhatsApp mesajına hiçbir şey eklenmez (etiket/adres yok). Tek, delege edilmiş dinleyici. Çerez/yerel depolama/kişisel veri YOK; JS kapalıysa bağlantılar aynen çalışır.
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { classify, isBeauty, langFromPath, pageCode, withRef } from '@/lib/contact-track';
+import { classify, isBeauty, langFromPath } from '@/lib/contact-track';
 
 export default function ContactTracker() {
   useEffect(() => {
@@ -19,9 +19,6 @@ export default function ContactTracker() {
         const pathname = window.location.pathname;
         const lang = langFromPath(pathname);
         const beauty = isBeauty(pathname, href);
-        if (c.type === 'whatsapp') {
-          a.setAttribute('href', withRef(href, lang, pageCode(pathname, beauty)));
-        }
         try {
           track('contact_click', { type: c.type, lang, page: pathname.slice(0, 120), brand: beauty ? 'beauty' : 'tailor' });
         } catch { /* ölçüm hiçbir zaman siteyi bozmaz */ }
