@@ -100,7 +100,7 @@ const PRICE_TABLE = [
     ['Taking In Waist','by photo','Same day'],
     ['Tear Repair','by photo','Same day'],
     ['Sleeve Shortening','by photo','Same day'],
-    ['Lining Replacement','by photo','48 hours'],
+    ['Lining Replacement','by photo','Depends on the job'],
   ]},
 ];
 

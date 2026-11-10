@@ -38,7 +38,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Gelinlik tadilatı ne kadar sürer ve ne kadar tutar?",
-  "Gelinlik ve abiye tadilatında sabit fiyat yoktur; fotoğrafa veya işin detayına göre belirlenir. Süre aynı gün ya da duruma göre 1–2 gündür."
+  "Gelinlik ve abiye tadilatında sabit fiyat yoktur; fotoğrafa veya işin detayına göre belirlenir. Süre işin durumuna göre belirlenir."
  ],
  [
   "Gelinlik dikiyor musunuz?",
@@ -62,7 +62,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Tadilat aynı gün biter mi?",
-  "Normal işler aynı gün hazırdır; acil işler 1–2 saatte, işin durumuna göre hazırlanır. Gelinlik ve abiye tadilatı aynı gün veya duruma göre 1–2 gündür."
+  "Normal işler aynı gün hazırdır; acil işler 1–2 saatte, işin durumuna göre hazırlanır. Gelinlik ve abiye tadilatının süresi işin durumuna göre belirlenir."
  ],
  [
   "Acil terzi hizmeti var mı?",

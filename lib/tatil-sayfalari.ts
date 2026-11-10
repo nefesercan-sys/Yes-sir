@@ -202,7 +202,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
         { h: 'Alım ve teslim', p: "Eve ve otele alım-teslim hizmet verdiğimiz bölgelerde yapılır; ayrıntı WhatsApp'ta netleşir." },
       ],
       faq: [
-        ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı fiyatı fotoğrafa veya işin detayına göre belirlenir; süre aynı gün ya da işe göre 1–2 gündür."],
+        ['Abiye tadilatı ne kadar?', "Abiye ve gelinlik tadilatı fiyatı fotoğrafa veya işin detayına göre belirlenir; süre işin durumuna göre belirlenir."],
         ['Etkinliğim birkaç gün sonra, yetişir mi?', 'Tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır; özel dikimde süre modele ve adede göre belirlenir. Tarihi yazın, baştan söyleyelim.'],
         ['Kıyafeti otelden alıyor musunuz?', "Evet, otelden alım ve teslim yapıyoruz."],
         ['Sıfırdan gece elbisesi diktirebilir miyim?', "Evet, ölçüye göre elbise dikimi yapıyoruz; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. Gelinlik dikimi yapılmaz, yalnızca tadilat yapılır."],

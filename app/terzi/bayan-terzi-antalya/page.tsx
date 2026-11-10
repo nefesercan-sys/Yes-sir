@@ -13,7 +13,7 @@ const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [
   ['Bayan terzi Antalya fiyatları 2026?', `Etek kısaltma ₺200, elbise daraltma ₺200, fermuar değişimi ₺300, abiye tamiri ve gelinlik tadilatı fotoğrafa veya işin detayına göre fiyatlanır. Elbise, abiye, bluz ve tulum dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. WhatsApp: ${PHONE}`],
-  ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı fiyatı fotoğrafa veya işin detayına göre belirlenir. Süre aynı gün veya işe göre 1–2 gündür. Kısaltma, daraltma, omuz düzeltme yapılır; gelinlik dikimi yapılmaz, yalnızca tadilat yapılır. Nisan–Ekim sezonunda önceden randevu alın. WhatsApp: ${PHONE}`],
+  ['Gelinlik tadilatı Antalya kaç lira?', `Gelinlik tadilatı fiyatı fotoğrafa veya işin detayına göre belirlenir. Süre işin durumuna göre belirlenir. Kısaltma, daraltma, omuz düzeltme yapılır; gelinlik dikimi yapılmaz, yalnızca tadilat yapılır. Nisan–Ekim sezonunda önceden randevu alın. WhatsApp: ${PHONE}`],
   ['Abiye tamiri ne kadar sürer?', 'Abiye tamiri aynı gün teslim edilir. Tatildesiniz ve gala yemeğiniz bugünse acil iş olarak 1–2 saatte hazırlanabilir.'],
   ['Kadın elbise dikimi Antalya?', `Evet. Ölçüye özel elbise, bluz, etek, tulum ve abiye dikimi yapılır; fiyat fotoğrafa ve istediğiniz modele göre belirlenir, süre modele ve adede göre değişir. WhatsApp: ${PHONE}`],
   ['Büyük beden bayan kıyafeti dikimi var mı?', `Evet! Büyük beden kadın elbise, pantolon ve gömlek dikimi fotoğrafa ve istediğiniz modele göre netleşir. WhatsApp: ${PHONE}`],
@@ -72,9 +72,9 @@ const FIYATLAR = [
   ['Bluz Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Tulum Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
-  ['Abiye Tamiri / Kısaltma', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
+  ['Abiye Tamiri / Kısaltma', 'Fotoğrafa göre', 'İşin durumuna göre'],
   ['Abiye Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
-  ['Gelinlik Tadilatı (dikimi yapılmaz)', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
+  ['Gelinlik Tadilatı (dikimi yapılmaz)', 'Fotoğrafa göre', 'İşin durumuna göre'],
   ['Büyük Beden Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Araçlı Servis', 'WhatsApp\'ta netleşir', '—'],
 ];

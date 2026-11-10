@@ -295,8 +295,8 @@ export default function EveGelenTerziPage() {
                   ['Fermuar Değişimi','₺300+','Aynı gün'],
                   ['Elbise / Ceket Daraltma','₺200+','Aynı gün'],
                   ['Kol Kısaltma','₺200+','Aynı gün'],
-                  ['Abiye Tamiri','Fotoğrafa göre','Aynı gün / 1–2 gün'],
-                  ['Gelinlik Tadilatı','Fotoğrafa göre','Aynı gün / 1–2 gün'],
+                  ['Abiye Tamiri','Fotoğrafa göre','İşin durumuna göre'],
+                  ['Gelinlik Tadilatı','Fotoğrafa göre','İşin durumuna göre'],
                   ['Yırtık Onarımı','Fotoğrafa göre','Aynı gün'],
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>

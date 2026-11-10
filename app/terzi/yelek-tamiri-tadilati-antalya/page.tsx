@@ -5,15 +5,14 @@ const BASE_URL = 'https://swaphubs.com';
 const PATH = '/terzi/yelek-tamiri-tadilati-antalya';
 
 const DATA: KonuData = {
-  "path": "/terzi/yelek-tamiri-tadilati-antalya",
   "name": "Yelek Tamiri ve Tadilatı",
-  "h1": "Yelek Tamiri ve Tadilatı Antalya",
-  "kisa": "Yelek daraltma, boy ayarı, fermuar ve düğme onarımı yapılır; fiyat yeleğin türüne (takım yelek, kot, deri, şişme) ve işe göre fotoğrafla söylenir. Normal işler aynı gün teslim edilir.",
-  "waIlk": "Merhaba, yelek tamiri/tadilatı için fiyat almak istiyorum. Fotoğrafı gönderiyorum.",
+  "h1": "Yelek Daraltma, Tamir ve Fermuar · Antalya",
+  "kisa": "Yeleğiniz bol mu geliyor, fermuarı mı bozuldu, düğmesi mi koptu? Yelek daraltma ve boy ayarı 200 TL'den, fermuar değişimi 300 TL'den, deri yelek işleri 400 TL'den başlar (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
+  "waIlk": "Merhaba, yeleğimde tadilat yaptırmak istiyorum. Fotoğrafını gönderiyorum, fiyat alabilir miyim?",
   "facts": [
     [
       "Başlangıç fiyatı",
-      "Fotoğrafa veya işin detayına göre"
+      "Daraltma 200 TL'den · fermuar 300 TL'den · deri 400 TL'den"
     ],
     [
       "Teslim süresi",
@@ -28,97 +27,100 @@ const DATA: KonuData = {
       "Eve ve otele alım-teslim"
     ]
   ],
-  "turlerBaslik": "Yelek Tamiri ve Tadilatı kapsamı",
+  "turlerBaslik": "Yelekte en sık gelen sorunlar",
   "turler": [
     {
       "ic": "📐",
-      "baslik": "Daraltma ve beden ayarı",
-      "aciklama": "Takım elbise yeleğinde sırt kemeri ve yan dikişlerden beden ayarlanır."
+      "baslik": "Yelek bol duruyor",
+      "aciklama": "Kilo verdikten sonra ya da hazır alınan takımda yelek bol kalır. Sırt ve yan dikişlerden içeri alınarak vücuda oturtulur."
     },
     {
       "ic": "📏",
-      "baslik": "Boy ve omuz",
-      "aciklama": "Yelek boyu ve omuz/kol çukuru ölçünüze göre düzenlenir."
+      "baslik": "Yelek uzun ya da kol evi geniş",
+      "aciklama": "Boy kısaltılır, kol evi daraltılır. İşaretleme yelek üzerinizdeyken yapılır; gelemiyorsanız ölçüyü WhatsApp'tan birlikte alırız."
     },
     {
       "ic": "🧷",
-      "baslik": "Fermuar ve düğme",
-      "aciklama": "Kot, deri ve şişme yelek fermuarı değişimi; düğme ve düğme iliği onarımı."
+      "baslik": "Fermuar takılıyor ya da açılıyor",
+      "aciklama": "Şişme, kot ve deri yeleklerde bozulan fermuar aynı boyda yenisiyle değiştirilir."
     },
     {
       "ic": "🪡",
-      "baslik": "Astar ve söküklerin onarımı",
-      "aciklama": "Yırtık astar, sökük dikiş ve cep onarımı."
+      "baslik": "Düğme, astar, cep",
+      "aciklama": "Kopan düğme, yırtılan astar, sökülen cep ağzı ve dikişler onarılır."
     }
   ],
-  "fiyatBaslik": "Yelek Tamiri ve Tadilatı fiyatı",
+  "fiyatBaslik": "Yelek tadilatı kaç TL?",
   "fiyatlar": [
     [
-      "Yelek Daraltma",
-      "Fotoğrafa göre fiyat"
+      "Yelek daraltma (kumaş, kot)",
+      "200 TL'den"
     ],
     [
-      "Yelek Boy / Omuz Ayarı",
-      "Fotoğrafa göre fiyat"
+      "Yelek boy kısaltma",
+      "200 TL'den"
     ],
     [
-      "Yelek Fermuarı Değişimi",
-      "Fotoğrafa göre fiyat"
+      "Yelek fermuarı değişimi",
+      "300 TL'den"
     ],
     [
-      "Düğme, Astar, Sökük Onarımı",
+      "Deri yelek tadilatı",
+      "400 TL'den"
+    ],
+    [
+      "Düğme, astar, cep, sökük",
       "Fotoğrafa göre fiyat"
     ]
   ],
-  "fiyatNot": "Net fiyat için fotoğrafı WhatsApp'tan gönderin; fiyatlar KDV dahil değildir.",
+  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahil değildir. Net fiyat işin fotoğrafına göre WhatsApp'tan söylenir.",
   "adimlar": [
     {
-      "baslik": "Fotoğraf Gönderin",
-      "aciklama": "Yeleğin ve yapılacak yerin fotoğrafını WhatsApp'tan gönderin, net fiyat alın."
+      "baslik": "Sorunu fotoğraflayın",
+      "aciklama": "Yeleği üzerinizde ve sorunlu yeri yakından çekip WhatsApp'tan gönderin."
     },
     {
-      "baslik": "Fiyat netleşir",
-      "aciklama": "Yapılacak işe göre net fiyatı bildiririz."
+      "baslik": "Fiyatı öğrenin",
+      "aciklama": "Hangi işlemin gerektiğini ve net fiyatı yazarız."
     },
     {
-      "baslik": "Getirin ya da alalım",
-      "aciklama": "Atölyeye bırakın ya da eve/otele alım-teslim isteyin."
+      "baslik": "Bırakın ya da aldıralım",
+      "aciklama": "Yeleği Konyaaltı Hurma'daki atölyeye getirebilir ya da evinizden, otelinizden aldırabilirsiniz."
     },
     {
-      "baslik": "Teslim",
-      "aciklama": "Normal işler aynı gün, acil işler 1–2 saatte teslim edilir."
+      "baslik": "Hazır olunca haber veririz",
+      "aciklama": "Normal işler aynı gün, acil işler 1–2 saatte, işin durumuna göre hazır olur."
     }
   ],
   "faq": [
     {
-      "q": "Yelek tamiri ve tadilatı ne kadar?",
-      "a": "Yelek fiyatı türüne (takım yelek, kot, deri, şişme) ve işe göre değişir; fotoğrafı WhatsApp'tan gönderirseniz net fiyatı söyleriz."
+      "q": "Yelek daraltma kaç TL?",
+      "a": "Kumaş ve kot yelek daraltma 200 TL'den, deri yelek 400 TL'den başlar; fiyatlara KDV dahil değildir. Net fiyat için fotoğraf yeterli."
     },
     {
-      "q": "Takım elbise yeleği daraltılır mı?",
-      "a": "Evet. Yelek beden ayarı sırt kemeri ve yan dikişlerden yapılır; kumaş ve astara göre fotoğraftan değerlendirilir."
+      "q": "Takım elbisemin yeleği bol geliyor, düzelir mi?",
+      "a": "Çoğu yelek sırt ve yan dikişlerinden içeri alınabilir. Ne kadar daraltılabileceği dikiş payına bağlıdır; fotoğrafa bakıp söyleriz."
     },
     {
-      "q": "Yelek boyu ve omuzu ayarlanır mı?",
-      "a": "Evet. Boy ve omuz/kol çukuru ölçünüze göre düzenlenir; ölçü yelek üzerinizdeyken işaretlenir."
+      "q": "Şişme yeleğin fermuarı bozuldu, değişir mi?",
+      "a": "Evet, fermuar değişimi 300 TL'den başlar. Şişme yelekte fermuar aynı boyda yenisiyle değiştirilir."
     },
     {
-      "q": "Yelek fermuarı değişiyor mu?",
-      "a": "Evet. Kot, deri ve şişme yeleklerin fermuarı değiştirilir; fiyat fermuar boyuna ve yeleğe göre söylenir."
+      "q": "Deri yelek tadilatı yapıyor musunuz?",
+      "a": "Evet. Deri yelekte daraltma, kısaltma ve fermuar işleri 400 TL'den başlar; deride yapılabilecek işlem fotoğraftan değerlendirilir."
     },
     {
-      "q": "Deri veya kot yelek tadilatı yapılıyor mu?",
-      "a": "Evet. Deri ve kot yelek tadilatı yapılıyor; ayrıntı için deri ceket ve kot sayfalarımıza bakabilirsiniz."
+      "q": "Yeleği ne zaman teslim alırım?",
+      "a": "Normal işler aynı gün hazır olur, acil durumda 1–2 saatte. Süre işin durumuna göre değişir, yazarken size söyleriz."
     },
     {
-      "q": "Yelek tadilatı ne kadar sürer?",
-      "a": "Normal işler aynı gün, acil işler 1–2 saatte teslim edilir. Kapsamlı işlerde süreyi fotoğrafı görünce söyleriz."
-    },
-    {
-      "q": "Yeleği eve veya otele gelip alıyor musunuz?",
-      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim yapıyoruz."
+      "q": "Atölyeye gelemiyorum, yeleği nasıl ulaştırırım?",
+      "a": "Antalya'da evden ve otelden alım-teslim yapıyoruz. Ayrıntıyı WhatsApp'tan netleştiririz."
     }
   ],
+  "ctaBaslik": "Yeleğinizin Fotoğrafını Gönderin, Fiyatı Söyleyelim",
+  "lowPrice": "200",
+  "path": "/terzi/yelek-tamiri-tadilati-antalya",
   "diger": [
     {
       "href": "/terzi/mont-tamiri-tadilati-antalya",
@@ -140,17 +142,16 @@ const DATA: KonuData = {
       "href": "/terzi",
       "ad": "Tüm terzi hizmetleri"
     }
-  ],
-  "ctaBaslik": "Yeleğinizi mi Yaptıracaksınız?"
+  ]
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Yelek Tamiri ve Tadilatı Antalya · Aynı Gün" },
-  description: "Takım elbise yeleği, kot ve deri yelek daraltma, boy ayarı, fermuar ve düğme onarımı. Fiyat fotoğrafa göre. Eve ve otele servis. ☎ +90 531 898 64 18",
+  title: { absolute: "Yelek Daraltma ve Tamiri Kaç TL? 200 TL'den · Antalya" },
+  description: "Yelek bol mu, fermuarı mı bozuk? Yelek daraltma 200 TL'den, fermuar 300 TL'den, deri yelek 400 TL'den (KDV hariç). Fotoğraf gönderin. ☎ +90 531 898 64 18",
   keywords: ["yelek tamiri", "yelek tadilatı", "yelek daraltma", "yelek kısaltma", "yelek fermuarı değişimi", "takım elbise yeleği tadilatı", "deri yelek tamiri", "kot yelek tadilatı", "yelek tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: "Yelek Tamiri ve Tadilatı Antalya | Terzi Can", description: "Takım elbise, kot, deri ve şişme yelek: beden daraltma, boy ve omuz ayarı, fermuar ve düğme onarımı. Eve ve otele servis.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: "Yelek Daraltma, Tamir ve Fermuar | Terzi Can Antalya", description: "Bol gelen yelek, bozulan fermuar, kopan düğme: fotoğrafı gönderin, net fiyatı öğrenin. Normal işler aynı gün.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

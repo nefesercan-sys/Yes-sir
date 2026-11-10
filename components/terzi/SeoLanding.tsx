@@ -1078,7 +1078,7 @@ export function KeywordBlock({ slug }: { slug: string }) {
       <div className="sl-sec"><div className="sl-ctr" style={{ maxWidth: 900 }}>
         <h2 id="kw-h" className="sl-sec-h sl-ff" style={{ fontSize: '1.4rem' }}>{d.name.tr} — terzi hizmetleri</h2>
         <p className="sl-sec-sub" style={{ margin: '.6rem 0 1.2rem' }}>
-          {DURATION.tr.all} Gelinlik ve abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır; süre aynı gün ya da işe göre 1–2 gündür. {serviceRuleFor('tr', d.slug)}; her gün 08:00–23:00.
+          {DURATION.tr.all} Gelinlik ve abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır; süre işin durumuna göre belirlenir. {serviceRuleFor('tr', d.slug)}; her gün 08:00–23:00.
         </p>
         <ul style={{ listStyle: 'none', padding: 0, columns: '2 260px', fontSize: '.84rem', lineHeight: 2, color: 'rgba(255,255,255,.75)' }}>
           {popular.map((p) => (<li key={p}>✂️ {p}</li>))}
