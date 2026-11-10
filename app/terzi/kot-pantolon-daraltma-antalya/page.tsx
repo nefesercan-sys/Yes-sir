@@ -54,7 +54,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Kot Pantolon Daraltma 200 TL\'den · Bacak ve Bel | Terzi Can' },
-  description: 'Kot pantolon bacak ve bel daraltma 200 TL\'den. Ölçü üzerinizde alınır; normal iş aynı gün, acil 1–2 saat. Her gün 08–23. ☎ +90 531 898 64 18',
+  description: '☎ +90 531 898 64 18 · Kot pantolon bacak ve bel daraltma 200 TL\'den. Ölçü üzerinizde alınır; normal iş aynı gün, acil 1–2 saat. Her gün 08–23.',
   keywords: [
     'kot pantolon daraltma',
     'kot daraltma fiyat',

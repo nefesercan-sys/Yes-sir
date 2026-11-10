@@ -45,9 +45,9 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Antalya Terzi · Tamir, Tadilat, Fermuar, Dikim — Terzi Can";
+const PAGE_TITLE = "Antalya Terzi · Tamir, Tadilat, Dikim · 0531 898 64 18";
 const PAGE_DESC  =
-  "Bay bayan tamir, tadilat, fermuar değişimi ve dikim: paça 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Her gün 08:00–23:00. ☎ " + PHONE;
+  "☎ 0531 898 64 18 · Bay bayan tamir, tadilat, fermuar değişimi ve dikim: paça 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.";
 
 const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
 

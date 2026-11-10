@@ -60,7 +60,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Kot Paça Kısaltma 200 TL\'den · Orijinal Paça | Terzi Can' },
-  description: 'Kot pantolon paça kısaltma, orijinal paça yapımı ve daraltma 200 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23. ☎ +90 531 898 64 18',
+  description: '☎ +90 531 898 64 18 · Kot pantolon paça kısaltma, orijinal paça yapımı ve daraltma 200 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23.',
   keywords: [
     'kot pantolon paça kısaltma',
     'kot paçası kısaltma',

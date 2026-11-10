@@ -72,7 +72,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis · Terzi Can',
       url: SITE_URL,
-      description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. Her gün 08:00–23:00. ☎ " + PHONE,
+      description: '☎ ' + PHONE + ' · ' + "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Lara, Belek, Kemer dahil tüm ilçelere. Ölçü alım, dikim, teslimat kapıda. Her gün 08:00–23:00.",
       inLanguage: 'tr',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -103,7 +103,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Eve ve Otele Gelen Terzi Antalya · Araçlı Servis' },
-  description: "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00. ☎ " + PHONE,
+  description: '☎ ' + PHONE + ' · ' + "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00.",
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
     'araçlı terzi servisi Antalya','mobile tailor Antalya',
@@ -124,7 +124,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Eve Gelen Terzi Antalya · Otele Gelen Terzi · Araçlı Servis',
-    description: "Belek, Lara, Kemer ve Side otellerine terzi servisi. Her gün 08:00–23:00. ☎ " + PHONE,
+    description: '☎ ' + PHONE + ' · ' + "Belek, Lara, Kemer ve Side otellerine terzi servisi. Her gün 08:00–23:00.",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true },

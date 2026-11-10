@@ -95,9 +95,9 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
 // ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Fermuar Değişimi 300 TL · Aynı Gün Teslim | Terzi Can' },
+  title: { absolute: "Fermuar Değişimi 300 TL'den · 0531 898 64 18 | Terzi Can" },
   description:
-    'Fermuar değişimi 300 TL\'den: pantolon, kot, etek, mont, ceket, çanta. Aynı gün teslim (acil 1–2 saat), her gün 08–23. ☎ ' + PHONE,
+    "☎ 0531 898 64 18 · Fermuar değişimi 300 TL'den (KDV hariç): pantolon, kot, etek, mont, ceket, çanta. Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',

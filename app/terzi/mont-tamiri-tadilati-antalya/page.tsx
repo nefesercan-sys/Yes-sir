@@ -61,7 +61,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Mont Tamiri Tadilatı 200 TL\'den · Fermuar 300 TL' },
-  description: 'Mont boy ve kol kısaltma, daraltma 200 TL\'den; mont fermuarı değişimi 300 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23. ☎ +90 531 898 64 18',
+  description: '☎ +90 531 898 64 18 · Mont boy ve kol kısaltma, daraltma 200 TL\'den; mont fermuarı değişimi 300 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23.',
   keywords: ['mont tamiri','mont tadilatı','mont kısaltma','mont daraltma','mont kol kısaltma','mont tamiri antalya','mont tadilatı fiyat','kaban tadilatı'],
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: { title: 'Mont Tamiri ve Tadilatı Antalya | Terzi Can', description: 'Mont kısaltma, daraltma, tamir ve fermuar değişimi. Aynı gün; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },

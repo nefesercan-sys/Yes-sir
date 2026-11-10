@@ -12,7 +12,7 @@ import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolg
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
-import { fitDesc } from '@/lib/meta-fit';
+import { fitDesc, phoneFirst } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -491,7 +491,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: c.desc,
+    description: phoneFirst(c.desc),
     keywords: Array.from(new Set(kw)),
     robots: !isIndexable(lang, d.slug)
       ? { index: false, follow: true }
@@ -526,7 +526,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); const six = hzSixForService(s.slug.tr); const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : six; if (!Object.keys(sx).length) return a; const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(serviceUrl(l, s))])); return { ...a, languages: { ...core, ...sx, 'x-default': core.tr } }; })(),
     openGraph: {
-      title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: phoneFirst(c.desc), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -540,10 +540,10 @@ export function hubMetadata(lang: Lang): Metadata {
     de: 'Schneider Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
-    tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al. ☎ ${PHONE}`,
-    en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price. ☎ ${PHONE}`,
-    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно. ☎ ${PHONE}`,
-    de: `Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten. ☎ ${PHONE}`,
+    tr: `☎ ${PHONE} · Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
+    en: `☎ ${PHONE} · Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
+    ru: `☎ ${PHONE} · Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
+    de: `☎ ${PHONE} · Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten.`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
