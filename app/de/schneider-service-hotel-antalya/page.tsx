@@ -100,8 +100,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Schneider im Hotel Antalya: Hotelservice ab ₺200 | Terzi Can' },
-  description: '☎ ' + PHONE + ' · ' + 'Schneider im Hotel in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung in Antalya, Dauer je nach Arbeit. WhatsApp auf Deutsch.',
+  title: { absolute: 'Schneiderei im Hotel Antalya: Hotelservice ab ₺200' },
+  description: '☎ ' + PHONE + ' · ' + 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung, Dauer je nach Arbeit.',
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',

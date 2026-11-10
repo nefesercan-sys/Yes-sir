@@ -537,13 +537,13 @@ export function hubMetadata(lang: Lang): Metadata {
     tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
     en: 'Antalya Tailor · Send a Photo, Get a Price',
     ru: 'Портной в Анталье · Фото и цена в WhatsApp',
-    de: 'Schneider Antalya · Foto senden, Preis erhalten',
+    de: 'Schneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
     tr: `☎ ${PHONE} · Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
     en: `☎ ${PHONE} · Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
     ru: `☎ ${PHONE} · Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
-    de: `☎ ${PHONE} · Kleidung reparieren in Konyaaltı, Hurma, Liman, Arapsuyu: Risse, Kürzen, Reißverschluss. Foto senden, Preis erhalten.`,
+    de: `☎ ${PHONE} · Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
