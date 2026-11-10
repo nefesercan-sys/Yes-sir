@@ -159,7 +159,7 @@ const PRICES = [
   ['Fermuar Değişimi', '₺300+', 'Aynı gün'],
   ['Ceket / Mont Tamiri', '₺200+', 'Aynı gün'],
   ['Kol Kısaltma', '₺200+', 'Aynı gün'],
-  ['Abiye / Gelinlik Tadilatı', 'Fotoğrafa göre', 'Aynı gün / 1–2 gün'],
+  ['Abiye / Gelinlik Tadilatı', 'Fotoğrafa göre', 'İşin durumuna göre'],
   ['Kadın Elbise Dikimi', 'Fotoğrafa ve istediğiniz modele göre', 'Modele ve adede göre'],
   ['Abiye / Gece Elbisesi', 'Fotoğrafa göre', 'Modele ve adede göre'],
   ['Adrese Alım-Teslim', 'WhatsApp\'ta netleşir', '—'],
@@ -489,7 +489,7 @@ export default function KonyaaltiTerziPage() {
             {[
               { flag: '🇬🇧', lang: 'English', title: 'Professional Tailor in Konyaaltı', body: `Tailor Can offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hello, I need tailoring service in Konyaalti Antalya.' },
               { flag: '🇷🇺', lang: 'Русский', title: 'Портной в Коньяалты Анталья', body: `Портной Кан — пошив и подгонка одежды. Говорим по-русски. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Здравствуйте, мне нужен портной в Коньяалты Анталья.' },
-              { flag: '🇩🇪', lang: 'Deutsch', title: 'Schneider in Konyaalti Antalya', body: `Schneider Can bietet Maßschneiderei, Änderungsservice und Reinigung. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hallo, ich brauche einen Schneider in Konyaalti Antalya.' },
+              { flag: '🇩🇪', lang: 'Deutsch', title: 'Schneider in Konyaalti Antalya', body: `Schneider Can bietet Maßschneiderei, Änderungsservice und Reparaturen. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hallo, ich brauche einen Schneider in Konyaalti Antalya.' },
             ].map(({ flag, lang, title, body, wa: waMsg }) => (
               <div key={lang} style={{ background: '#fff', border: `1px solid ${D.border}`, borderRadius: 12, padding: '1.3rem', borderLeft: `4px solid ${D.gold}` }}>
                 <div style={{ fontSize: '.65rem', letterSpacing: '.2em', textTransform: 'uppercase', color: D.gold, marginBottom: 6, fontWeight: 700 }}>{flag} {lang}</div>

@@ -19,7 +19,7 @@ const T: Record<string, { t: string; d: string; kw: string[] }> = {
 };
 export function trNearDistrict(slug: string, name: string, loc: string, phone: string, brand: string): TrMeta | undefined {
   const e = T[slug]; if (!e) return undefined;
-  const F = isFreeService(slug) ? 'Ücretsiz servis.' : 'Otele servis.';
+  const F = isFreeService(slug) ? 'Eve ve otele servis.' : 'Otele servis.';
   const d = e.d.includes('{F}') ? e.d.replace('{F}', F) : e.d;
   return { title: `${e.t} | ${brand}`, desc: `${d.replace('{loc}', loc.charAt(0).toUpperCase() + loc.slice(1))} ☎ ${phone}`.replace(/\s+/g, ' '), kw: e.kw.map((k) => `${name} ${k}`) };
 }

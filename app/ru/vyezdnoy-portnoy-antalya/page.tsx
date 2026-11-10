@@ -288,7 +288,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               </thead>
               <tbody>
                 {[
-                  ['Стоимость выезда','БЕСПЛАТНО','—'],
+                  ['Выезд в отель и на дом','По договорённости в WhatsApp','—'],
                   ['Подшив брюк','от €10',TURN],
                   ['Замена молнии','от €15 (пальто / кожа €20)',TURN],
                   ['Ушив платья / пиджака','от €10',TURN],
@@ -299,7 +299,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
                 ].map(([s, p, t], i) => (
                   <tr key={i} style={{ borderBottom: '1px solid rgba(60,40,20,.06)', background: i % 2 ? 'rgba(184,151,90,.02)' : '#fff' }}>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.88rem' }}>{s}</td>
-                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='БЕСПЛАТНО'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
+                    <td style={{ padding: '.85rem .8rem', fontSize: '.88rem', color: p==='По договорённости в WhatsApp'?'#22c55e':'#8A6E3E', fontWeight: 600, textAlign: 'right' }}>{p}</td>
                     <td style={{ padding: '.85rem .8rem', fontSize: '.78rem', color: '#6B5F53', textAlign: 'right' }}>{t}</td>
                   </tr>
                 ))}

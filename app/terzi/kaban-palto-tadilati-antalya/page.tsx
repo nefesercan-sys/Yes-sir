@@ -5,15 +5,14 @@ const BASE_URL = 'https://swaphubs.com';
 const PATH = '/terzi/kaban-palto-tadilati-antalya';
 
 const DATA: KonuData = {
-  "path": "/terzi/kaban-palto-tadilati-antalya",
   "name": "Kaban ve Palto Tadilatı",
-  "h1": "Kaban ve Palto Tadilatı Antalya",
-  "kisa": "Kaban ve palto boy-kol kısaltma ve daraltma 200 TL'den, fermuar değişimi 300 TL'den başlar; astar, düğme ve söküklerin onarımı fotoğrafa göre fiyatlanır. Normal işler aynı gün teslim edilir.",
-  "waIlk": "Merhaba, kaban veya palto tadilatı için fiyat almak istiyorum. Fotoğrafı gönderiyorum.",
+  "h1": "Kaban ve Palto Kısaltma, Daraltma · Antalya",
+  "kisa": "Palto uzun mu geldi, kaban kolu elinizi mi kapatıyor, astar mı yırtıldı? Boy ve kol kısaltma ile daraltma 200 TL'den, fermuar değişimi 300 TL'den başlar (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
+  "waIlk": "Merhaba, kabanım/paltom için tadilat fiyatı öğrenmek istiyorum. Fotoğrafını gönderiyorum.",
   "facts": [
     [
       "Başlangıç fiyatı",
-      "Kısaltma/daraltma 200 TL'den · fermuar 300 TL'den"
+      "Kısaltma ve daraltma 200 TL'den · fermuar 300 TL'den"
     ],
     [
       "Teslim süresi",
@@ -28,102 +27,103 @@ const DATA: KonuData = {
       "Eve ve otele alım-teslim"
     ]
   ],
-  "turlerBaslik": "Kaban ve Palto Tadilatı kapsamı",
+  "turlerBaslik": "Kaban ve paltoda en sık gelen sorunlar",
   "turler": [
     {
       "ic": "📏",
-      "baslik": "Boy ve kol kısaltma",
-      "aciklama": "Boy ve kol, kaban veya palto üzerinizdeyken işaretlenir; astar ve kumaş boyuna göre kısaltılır."
+      "baslik": "Kol elinizi kapatıyor",
+      "aciklama": "Kol boyu üzerinizde işaretlenir ve astarıyla birlikte kısaltılır; manşet ve kol düğmeleri yerine göre taşınır."
+    },
+    {
+      "ic": "✂️",
+      "baslik": "Palto fazla uzun",
+      "aciklama": "Etek boyu kısaltılır. Kalın yünlü ve kaşe kumaşta etek ucu ve astar birlikte yeniden dikilir."
     },
     {
       "ic": "📐",
-      "baslik": "Daraltma",
-      "aciklama": "Beden, bel ve kol daraltma; yün, kaşmir ve kalın kumaşlarda yapılabilecek işlem fotoğraftan değerlendirilir."
+      "baslik": "Beden bol, omuz düşük",
+      "aciklama": "Bel ve beden yan dikişlerden daraltılır. Omuz gibi kapsamlı işler kumaşa ve kalıba bağlıdır; fotoğraftan değerlendirip söyleriz."
     },
     {
       "ic": "🪡",
-      "baslik": "Astar ve düğme",
-      "aciklama": "Yırtılan astarın onarımı veya değişimi, düğme takılması ve düğme değişimi."
-    },
-    {
-      "ic": "🧷",
-      "baslik": "Fermuar, cep, yaka",
-      "aciklama": "Kaban fermuarı değişimi, cep ağzı ve yaka onarımı."
+      "baslik": "Astar, düğme, fermuar, cep",
+      "aciklama": "Yırtılan astar onarılır ya da değişir; düğme, fermuar, cep ağzı ve yaka yenilenir."
     }
   ],
-  "fiyatBaslik": "Kaban ve Palto Tadilatı fiyatı",
+  "fiyatBaslik": "Kaban ve palto tadilatı kaç TL?",
   "fiyatlar": [
     [
-      "Kaban / Palto Boy Kısaltma",
+      "Kaban / palto kol kısaltma",
       "200 TL'den"
     ],
     [
-      "Kaban / Palto Kol Kısaltma",
+      "Kaban / palto boy kısaltma",
       "200 TL'den"
     ],
     [
-      "Kaban / Palto Daraltma",
+      "Bel ve beden daraltma",
       "200 TL'den"
     ],
     [
-      "Kaban / Palto Fermuarı",
+      "Kaban fermuarı değişimi",
       "300 TL'den"
     ],
     [
-      "Astar, Düğme, Cep, Yaka Onarımı",
+      "Astar, düğme, cep, yaka",
       "Fotoğrafa göre fiyat"
     ]
   ],
-  "fiyatNot": "Net fiyat için fotoğrafı WhatsApp'tan gönderin; fiyatlar KDV dahil değildir.",
+  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahil değildir. Kalın kumaş, astar ve işin kapsamı fiyatı etkiler; net fiyat fotoğrafa göre söylenir.",
   "adimlar": [
     {
-      "baslik": "Fotoğraf Gönderin",
-      "aciklama": "Kaban veya paltonun ve yapılacak yerin fotoğrafını WhatsApp'tan gönderin."
+      "baslik": "Sorunu fotoğraflayın",
+      "aciklama": "Kabanı üzerinizde çekin; kısalacak ya da daralacak yeri gösterin ve WhatsApp'tan gönderin."
     },
     {
-      "baslik": "Fiyat netleşir",
-      "aciklama": "Yapılacak işe göre net fiyatı bildiririz."
+      "baslik": "Fiyatı öğrenin",
+      "aciklama": "Kumaşa ve işe bakıp net fiyatı yazarız."
     },
     {
-      "baslik": "Getirin ya da alalım",
-      "aciklama": "Atölyeye bırakın ya da eve/otele alım-teslim isteyin."
+      "baslik": "Bırakın ya da aldıralım",
+      "aciklama": "Konyaaltı Hurma'daki atölyeye getirebilir ya da evinizden, otelinizden aldırabilirsiniz."
     },
     {
-      "baslik": "Teslim",
-      "aciklama": "Normal işler aynı gün, acil işler 1–2 saatte teslim edilir."
+      "baslik": "Hazır olunca haber veririz",
+      "aciklama": "Normal işler aynı gün, acil işler 1–2 saatte, işin durumuna göre hazır olur."
     }
   ],
   "faq": [
     {
-      "q": "Kaban ve palto tadilatı ne kadar?",
-      "a": "Kaban ve palto boy/kol kısaltma ve daraltma 200 TL'den, fermuar değişimi 300 TL'den başlar. Astar, düğme ve onarım işleri kapsama göre fotoğrafla fiyatlanır."
+      "q": "Palto kısaltma kaç TL?",
+      "a": "Palto ve kaban boy kısaltma 200 TL'den başlar; fiyata KDV dahil değildir. Astarlı ve kalın kumaşlarda net fiyatı fotoğrafa göre söyleriz."
     },
     {
-      "q": "Paltonun boyu kısaltılır mı?",
-      "a": "Evet. Palto boyu üzerinizdeyken işaretlenir; astar ve kumaş boyuna göre kısaltılır. Başlangıç fiyatı ₺200'dür."
+      "q": "Kaban kolu kısaltılır mı?",
+      "a": "Evet, 200 TL'den başlar. Kol astarıyla birlikte kısaltılır; kolda fermuar, düğme ya da manşet varsa buna göre fiyat veririz."
     },
     {
-      "q": "Kaban kolu kısaltma ve daraltma yapılıyor mu?",
-      "a": "Evet. Kol boyu kısaltılır, kol ve beden daraltılır; kumaş ve astara göre yapılabilecek işlem fotoğraftan değerlendirilir."
+      "q": "Hazır aldığım palto bol geldi, daraltılır mı?",
+      "a": "Bel ve beden daraltma 200 TL'den başlar. Ne kadar daraltılabileceği dikiş payına ve kumaşa bağlıdır; fotoğraftan değerlendiririz."
     },
     {
-      "q": "Palto astarı değişir mi?",
-      "a": "Evet. Yırtılan veya eskiyen astar onarılır ya da değiştirilir; fiyat işin kapsamına göre fotoğrafla söylenir."
+      "q": "Paltonun astarı yırtıldı, değişir mi?",
+      "a": "Evet. Küçük yırtıklar onarılır, eskiyen astar değiştirilir. Fiyat astarın ne kadarının değişeceğine göre fotoğrafla söylenir."
     },
     {
-      "q": "Kaban fermuarı veya düğmesi değişiyor mu?",
-      "a": "Evet. Kaban fermuarı değişimi 300 TL'den başlar; düğme takma ve değiştirme yapılır."
+      "q": "Kaban fermuarı değişimi ne kadar?",
+      "a": "Kaban ve palto fermuarı değişimi 300 TL'den başlar; fermuarın boyu ve türü fiyatı etkiler."
     },
     {
-      "q": "Kaban ve palto tadilatı ne kadar sürer?",
-      "a": "Normal işler aynı gün, acil işler 1–2 saatte teslim edilir. Kapsamlı işlerde süreyi fotoğrafı görünce söyleriz."
+      "q": "Kaban tadilatı ne kadar sürer?",
+      "a": "Normal işler aynı gün, acil durumda 1–2 saatte hazır olur. Kapsamlı işlerde süreyi fotoğrafı görünce söyleriz."
     },
     {
-      "q": "Kaban ve paltoyu eve veya otele gelip alıyor musunuz?",
-      "a": "Evet. Konyaaltı, Muratpaşa ve çevresinde eve ve otele alım-teslim yapıyoruz."
+      "q": "Kabanı kargoyla gönderebilir miyim?",
+      "a": "Evet. Antalya içinden ve yurt dışından kargoyla gönderebilirsiniz; kargo ücreti müşteriye aittir, ayrıntı WhatsApp'tan netleştirilir."
     }
   ],
-  "lowPrice": "200",
+  "ctaBaslik": "Kaban veya Paltonuzun Fotoğrafını Gönderin",
+  "path": "/terzi/kaban-palto-tadilati-antalya",
   "diger": [
     {
       "href": "/terzi/mont-tamiri-tadilati-antalya",
@@ -146,16 +146,16 @@ const DATA: KonuData = {
       "ad": "Tüm terzi hizmetleri"
     }
   ],
-  "ctaBaslik": "Kaban veya Paltonuzu mu Yaptıracaksınız?"
+  "lowPrice": "200"
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Kaban ve Palto Tadilatı 200 TL'den · Antalya" },
-  description: "Kaban ve palto boy, kol kısaltma ve daraltma 200 TL'den; fermuar değişimi 300 TL'den. Astar ve düğme onarımı. Eve ve otele servis. ☎ +90 531 898 64 18",
+  title: { absolute: "Palto ve Kaban Kısaltma Kaç TL? 200 TL'den · Antalya" },
+  description: "Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğraf gönderin. ☎ +90 531 898 64 18",
   keywords: ["kaban tadilatı", "palto tadilatı", "kaban kısaltma", "palto kısaltma", "palto daraltma", "kaban kol kısaltma", "palto astar değişimi", "kaban düğme değişimi", "palto tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: "Kaban ve Palto Tadilatı Antalya | Terzi Can", description: "Kaban ve palto boyu, kol boyu, bel ve beden daraltma; astar, düğme, cep ve yaka onarımı. Eve ve otele servis.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: "Kaban ve Palto Kısaltma, Daraltma | Terzi Can Antalya", description: "Uzun kol, uzun etek, bol beden, yırtık astar: fotoğrafı gönderin, net fiyatı öğrenin. Normal işler aynı gün.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 
