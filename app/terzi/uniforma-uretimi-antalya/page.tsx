@@ -26,7 +26,7 @@ const FAQ: [string, string][] = [
   ['Okul üniforması seri üretimi yapılıyor mu?', `Evet! Öğrenci, öğretmen ve okul personeli üniforması seri üretimi yapılmaktadır. Nakış ve baskı dahil. WhatsApp: ${PHONE}`],
   ['Üniformaya logo nakışı veya baskı yapılıyor mu?', `Evet! Bilgisayarlı nakış, dijital baskı ve DTF baskı yapılmaktadır. Nakış fiyatı adede ve logoya göre netleşir. WhatsApp: ${PHONE}`],
   ['Hotel uniform production Antalya — do you speak English?', `Yes! Tailor Can produces hotel staff uniforms in Antalya with English service. We work with Belek and Kemer hotels. WhatsApp: ${PHONE}`],
-  ['Производство форменной одежды в Анталье?', `Да! Портной Кан производит форму для отелей, ресторанов и медицины в Анталье. Говорим по-русски. WhatsApp: ${PHONE}`],
+  ['Производство форменной одежды в Анталье?', `Да! Портной Кан производит форму для отелей, ресторанов и медицины в Анталье. WhatsApp на вашем языке. WhatsApp: ${PHONE}`],
 ];
 
 const jsonLd = {

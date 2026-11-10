@@ -182,7 +182,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
           <p className="hero-sub">
             Мастерская <strong style={{ color: 'var(--champagne)' }}>Terzi Can</strong> предлагает
             быструю подгонку по фигуре, замену фурнитуры и индивидуальный
-            пошив. Говорим по-русски — напишите нам прямо сейчас.
+            пошив. Пишите нам в WhatsApp на своём языке — прямо сейчас.
           </p>
         </div>
 
@@ -219,7 +219,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
       <section className="trust" aria-label="Преимущества">
         <div className="trust-grid">
           <div>
-            <div className="trust-item-label">Говорим по-русски</div>
+            <div className="trust-item-label">WhatsApp на вашем языке</div>
             <div className="trust-item-detail">Без языкового барьера</div>
           </div>
           <div>

@@ -98,7 +98,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     faqH: 'Частые вопросы', linksH: 'Страницы услуг',
     links: [['/ru/uslugi-portnogo', 'Все услуги портного'], ['/ru/vyezdnoy-portnoy-antalya', 'Выездной портной в отель'], ['/ru/kak-rabotaet-vyezdnoy-portnoy-antalya', 'Как это работает'], ['/ru/srochnyy-remont-odezhdy-antalya', 'Срочный ремонт одежды'], ['/ru/podgonka-naryada-dlya-sobytiya-antalya', 'Подгонка наряда'], ['/ru/kontakty-portnoy-antalya', 'Контакты'], ['/ru/atelie-antalya', 'Ателье Анталья']],
     ctaH: 'Отправьте фото — узнайте цену', ctaP: 'Пишите в WhatsApp ежедневно 08:00–23:00 — назовём цену и срок.', wa: 'Написать в WhatsApp',
-    title: 'Портной в Анталье: частые вопросы, цены, сроки',
+    title: 'Ателье и портной в Анталье: частые вопросы, цены, сроки',
     desc: 'Цены портного в Анталье, сроки, выезд в отель, переделка свадебных платьев, оплата и НДС: 20 ответов. Отправьте фото — назовём цену.',
   },
   de: {

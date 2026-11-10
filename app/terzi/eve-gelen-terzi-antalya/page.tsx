@@ -348,7 +348,7 @@ export default function EveGelenTerziPage() {
               <p style={{ color: 'rgba(255,255,255,.65)', fontSize: '.85rem', lineHeight: 1.8, marginBottom: '1rem' }}>
                 Портной Кан приедет в ваш отель в Белеке, Ларе, Кемере или Аланье.
                 Снимем мерки, сделаем работу в ателье и доставим обратно: обычно в тот же день, срочно — за 1–2 часа.
-                Говорим по-русски.
+                WhatsApp на вашем языке.
               </p>
               <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Здравствуйте, хочу вызвать портного в мой отель. Отель: ')}`} target="_blank" rel="noopener noreferrer"
                 style={{ background: 'rgba(212,176,122,.15)', color: '#D4B07A', border: '1px solid rgba(212,176,122,.3)', padding: '.8rem 1.5rem', textDecoration: 'none', fontSize: '.82rem', display: 'inline-block' }}>

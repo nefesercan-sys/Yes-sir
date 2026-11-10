@@ -488,7 +488,7 @@ export default function KonyaaltiTerziPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 12 }}>
             {[
               { flag: '🇬🇧', lang: 'English', title: 'Professional Tailor in Konyaaltı', body: `Tailor Can offers English-speaking tailoring, alterations and hotel pickup. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hello, I need tailoring service in Konyaalti Antalya.' },
-              { flag: '🇷🇺', lang: 'Русский', title: 'Портной в Коньяалты Анталья', body: `Портной Кан — пошив и подгонка одежды. Говорим по-русски. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Здравствуйте, мне нужен портной в Коньяалты Анталья.' },
+              { flag: '🇷🇺', lang: 'Русский', title: 'Портной в Коньяалты Анталья', body: `Портной Кан — пошив и подгонка одежды. WhatsApp на вашем языке. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Здравствуйте, мне нужен портной в Коньяалты Анталья.' },
               { flag: '🇩🇪', lang: 'Deutsch', title: 'Schneider in Konyaalti Antalya', body: `Schneider Can bietet Maßschneiderei, Änderungsservice und Reparaturen. WhatsApp: ${PHONE_DISPLAY}`, wa: 'Hallo, ich brauche einen Schneider in Konyaalti Antalya.' },
             ].map(({ flag, lang, title, body, wa: waMsg }) => (
               <div key={lang} style={{ background: '#fff', border: `1px solid ${D.border}`, borderRadius: 12, padding: '1.3rem', borderLeft: `4px solid ${D.gold}` }}>

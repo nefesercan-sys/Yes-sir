@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     siteName: 'Terzi Can Antalya',
     title: 'Ателье в Анталье (Коньяалты) — Ремонт и Пошив Одежды | Terzi Can',
     description:
-      'Ремонт, подгонка, пошив одежды и работа с кожей в Анталье. Срочный ремонт, выездной портной. Говорим по-русски.',
+      'Ремонт, подгонка, пошив одежды и работа с кожей в Анталье. Срочный ремонт, выездной портной. WhatsApp на вашем языке.',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Terzi Can — ателье в Анталье, Коньяалты' }],
     locale: 'ru_RU',
   },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Ателье в Анталье (Коньяалты) — Terzi Can',
-    description: '☎ ' + PHONE + ' · ' + 'Ремонт и пошив одежды. Говорим по-русски.',
+    description: '☎ ' + PHONE + ' · ' + 'Ремонт и пошив одежды. WhatsApp на вашем языке.',
     images: [OG_IMAGE],
   },
 
@@ -151,7 +151,7 @@ const jsonLd = {
       '@id': `${PAGE_URL}#webpage`,
       name: 'Ателье в Анталье (Коньяалты) — Ремонт и Пошив Одежды',
       url: PAGE_URL,
-      description: 'Ремонт, подгонка и пошив одежды в Анталье. Работа с кожей. Говорим по-русски.',
+      description: 'Ремонт, подгонка и пошив одежды в Анталье. Работа с кожей. WhatsApp на вашем языке.',
       inLanguage: 'ru',
       dateModified: TODAY,
       about: { '@id': `${PAGE_URL}#business` },
