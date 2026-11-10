@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Konyaaltı Terzi · Tadilat, Dikim | 0531 898 64 18' },
   description:
-    `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis. ☎ ${PHONE_DISPLAY}`,
+    `☎ ${PHONE_DISPLAY} · ${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis.`,
   keywords: [
     'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   })(),
   openGraph: {
     title: 'Konyaaltı Terzi — Elbise Dikim, Tadilat | Antalya 2026',
-    description: `Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis · ☎ ${PHONE_DISPLAY}`,
+    description: `☎ ${PHONE_DISPLAY} · Hurma Mah., Konyaaltı · Her gün 08:00–23:00 · Adrese servis ·`,
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR',
     alternateLocale: ['en_US','ru_RU'], type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: GBP1_NAME, type: 'image/jpeg' }],

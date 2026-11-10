@@ -37,7 +37,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp, цена | Terzi Can' },
-  description: 'Ателье в Коньяалты, Анталья. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00. ☎ +90 531 898 64 18',
+  description: '☎ +90 531 898 64 18 · Ателье в Коньяалты, Анталья. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.',
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия говорит по-русски','замена молнии анталия',
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Ателье Анталья Коньяалты — Ремонт и Пошив | Terzi Can',
-    description: 'Ремонт одежды, подгонка, пошив на заказ. Отвечаем в WhatsApp по-русски. Коньяалты, Анталья. ☎ +90 531 898 64 18',
+    description: '☎ +90 531 898 64 18 · Ремонт одежды, подгонка, пошив на заказ. Отвечаем в WhatsApp по-русски. Коньяалты, Анталья.',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'ru_RU', type: 'website',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Ателье Terzi Can Коньяалты Анталья', type: 'image/jpeg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Ателье Коньяалты — Отвечаем в WhatsApp по-русски | Terzi Can',
-    description: 'Ремонт одежды, пошив. Анталья. ☎ +90 531 898 64 18',
+    description: '☎ +90 531 898 64 18 · Ремонт одежды, пошив. Анталья.',
     images: [OG_IMAGE],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } },

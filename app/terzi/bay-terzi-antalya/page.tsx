@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Bay Terzi Antalya · Erkek Takım Elbise · Pantolon Kısaltma',
-    description: "Pantolon kısaltma ₺200'den; takım elbise dikimi fotoğrafa ve istediğiniz modele göre. Eve gelen terzi. Konyaaltı ve çevresi. ☎ +90 531 898 64 18",
+    description: "☎ +90 531 898 64 18 · Pantolon kısaltma ₺200'den; takım elbise dikimi fotoğrafa ve istediğiniz modele göre. Eve gelen terzi. Konyaaltı ve çevresi.",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },

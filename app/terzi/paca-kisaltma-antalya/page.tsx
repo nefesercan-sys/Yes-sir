@@ -108,7 +108,7 @@ export const metadata: Metadata = {
   })(),
   openGraph: {
     title: 'Paça Kısaltma Antalya · Kot Paça ₺200 · Aynı Gün Teslim',
-    description: "Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis. ☎ +90 531 898 64 18",
+    description: "☎ +90 531 898 64 18 · Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis.",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } },

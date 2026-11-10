@@ -57,8 +57,8 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Kot Etek Kısaltma, Daraltma 200 TL\'den | Terzi Can' },
-  description: 'Kot etek boy kısaltma, bel daraltma ve orijinal etek ucu yapımı 200 TL\'den. Normal iş aynı gün, acil 1–2 saat. ☎ +90 531 898 64 18',
+  title: { absolute: "Kot Etek Kısaltma, Daraltma 200 TL'den · 0531 898 64 18" },
+  description: '☎ +90 531 898 64 18 · Kot etek boy kısaltma, bel daraltma ve orijinal etek ucu yapımı 200 TL\'den. Normal iş aynı gün, acil 1–2 saat.',
   keywords: [
     'kot etek kısaltma',
     'kot etek daraltma',
