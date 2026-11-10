@@ -8,176 +8,176 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "paca": [
   {
    "h": {
-    "tr": "{y} paça kısaltma fiyatı ve süresi",
-    "en": "Trouser hemming in {y}: price and time",
-    "de": "Hose kürzen in {y}: Preis und Dauer",
-    "ru": "Подшив брюк в {y}: цена и срок",
-    "es": "Acortar bajos de pantalón en {y}: precio y plazo",
-    "fr": "Ourlet de pantalon à {y} : prix et délai",
-    "pl": "Skracanie spodni w {y}: cena i czas",
-    "uk": "Підшивання штанів у {y}: ціна й строк",
-    "nl": "Broek korter maken in {y}: prijs en tijd",
-    "ar": "تقصير البنطلون في {y}: السعر والمدة"
+    "tr": "{y} paça kısaltma kaç TL, ne zaman hazır olur?",
+    "en": "Trouser hemming in {y}: what it costs and when it is ready",
+    "de": "Hose kürzen in {y}: Was kostet es, wann ist es fertig?",
+    "ru": "Подшив брюк в {y}: сколько стоит и когда готово",
+    "es": "Acortar bajos de pantalón en {y}: cuánto cuesta y cuándo está listo",
+    "fr": "Ourlet de pantalon à {y} : combien ça coûte et quand c'est prêt",
+    "pl": "Skracanie spodni w {y}: ile kosztuje i kiedy będzie gotowe",
+    "uk": "Підшивання штанів у {y}: скільки коштує і коли буде готово",
+    "nl": "Broek korter maken in {y}: wat kost het en wanneer is het klaar?",
+    "ar": "تقصير البنطلون في {y}: كم يكلّف ومتى يكون جاهزاً؟"
    },
    "p": {
-    "tr": "Paça kısaltma ₺200'den başlar. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir.",
-    "en": "Trouser hemming starts from €10. Urgent jobs are ready in 1–2 hours, normal jobs the same day.",
-    "de": "Das Kürzen beginnt ab €10. Eilige Aufträge sind in 1–2 Stunden fertig, normale am selben Tag.",
-    "ru": "Подшив брюк — от €10. Срочные заказы — за 1–2 часа, обычные — в тот же день.",
-    "es": "Acortar bajos cuesta desde €10. Los trabajos urgentes están listos en 1–2 horas y los normales el mismo día.",
-    "fr": "Le raccourcissement commence à €10. Les travaux urgents sont prêts en 1 à 2 heures, les autres le jour même.",
-    "pl": "Skracanie nogawek zaczyna się od €10. Pilne zlecenia są gotowe w 1–2 godziny, zwykłe tego samego dnia.",
-    "uk": "Підшивання штанів — від €10. Термінові замовлення — за 1–2 години, звичайні — того ж дня.",
-    "nl": "Korter maken begint vanaf €10. Spoedwerk is klaar in 1–2 uur, gewoon werk dezelfde dag.",
-    "ar": "يبدأ تقصير الحاشية من €10. الأعمال العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم نفسه."
+    "tr": "Başlangıç fiyatı ₺200'dür (KDV hariç). Normal işler aynı gün, acil işler 1–2 saatte hazır olur; süre işin durumuna göre değişir.",
+    "en": "Prices start from €10, excluding VAT. Normal jobs are ready the same day and urgent ones in 1–2 hours, depending on the job.",
+    "de": "Ab €10, zzgl. MwSt. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden, je nach Arbeit.",
+    "ru": "От €10, без НДС. Обычные работы готовы в тот же день, срочные — за 1–2 часа, в зависимости от работы.",
+    "es": "Desde €10, IVA no incluido. Los trabajos normales están listos el mismo día y los urgentes en 1–2 horas, según el trabajo.",
+    "fr": "Dès €10, hors TVA. Les travaux normaux sont prêts le jour même et les urgents en 1 à 2 heures, selon le travail.",
+    "pl": "Od €10, bez VAT. Zwykłe prace są gotowe tego samego dnia, pilne w 1–2 godziny, zależnie od pracy.",
+    "uk": "Від €10, без ПДВ. Звичайні роботи готові того ж дня, термінові — за 1–2 години, залежно від роботи.",
+    "nl": "Vanaf €10, excl. btw. Gewoon werk is dezelfde dag klaar en spoed in 1–2 uur, afhankelijk van het werk.",
+    "ar": "من €10، غير شامل الضريبة. الأعمال العادية جاهزة في اليوم نفسه والمستعجلة خلال 1–2 ساعة، حسب العمل."
    }
   },
   {
    "h": {
-    "tr": "Paça boyu nasıl ayarlanır?",
-    "en": "How is the trouser length set?",
-    "de": "Wie wird die Hosenlänge festgelegt?",
-    "ru": "Как подбирается длина брюк?",
-    "es": "¿Cómo se ajusta el largo del pantalón?",
-    "fr": "Comment ajuster la longueur du pantalon ?",
-    "pl": "Jak ustala się długość spodni?",
-    "uk": "Як підбирають довжину штанів?",
-    "nl": "Hoe wordt de broeklengte bepaald?",
-    "ar": "كيف يُضبط طول البنطلون؟"
+    "tr": "Paça boyunu kim belirliyor?",
+    "en": "Who decides the trouser length?",
+    "de": "Wer legt die Hosenlänge fest?",
+    "ru": "Кто определяет длину брюк?",
+    "es": "¿Quién decide el largo del pantalón?",
+    "fr": "Qui décide de la longueur du pantalon ?",
+    "pl": "Kto decyduje o długości spodni?",
+    "uk": "Хто визначає довжину штанів?",
+    "nl": "Wie bepaalt de broeklengte?",
+    "ar": "من يحدد طول البنطلون؟"
    },
    "p": {
-    "tr": "Pantolon, giyeceğiniz ayakkabıyla ayakta denenir ve boy sizin tercihinize göre işaretlenir. Spor ve klasik ayakkabı için boy farklı olabilir.",
-    "en": "The trousers are tried on standing, with the shoes you will wear, and the length is marked to your preference. It can differ for sneakers and dress shoes.",
-    "de": "Die Hose wird im Stehen mit den Schuhen anprobiert, die Sie tragen werden, und die Länge nach Ihrem Wunsch markiert. Für Sneaker und klassische Schuhe kann sie unterschiedlich sein.",
-    "ru": "Брюки примеряют стоя, в обуви, с которой вы их будете носить, и отмечают длину по вашему желанию. Для кроссовок и классической обуви она может отличаться.",
-    "es": "El pantalón se prueba de pie, con los zapatos que va a usar, y el largo se marca según su preferencia. Puede cambiar para zapatillas o zapatos de vestir.",
-    "fr": "Le pantalon est essayé debout, avec les chaussures que vous porterez, et la longueur est marquée selon votre préférence. Elle peut différer pour des baskets ou des chaussures classiques.",
-    "pl": "Spodnie przymierza się na stojąco, w butach, w których będą noszone, a długość zaznacza według Twoich preferencji. Dla sportowych i klasycznych butów może być inna.",
-    "uk": "Штани приміряють стоячи, у взутті, з яким їх носитимуть, і позначають довжину за вашим бажанням. Для кросівок і класичного взуття вона може відрізнятися.",
-    "nl": "De broek wordt staand gepast, met de schoenen die u gaat dragen, en de lengte wordt naar uw wens gemarkeerd. Voor sneakers en nette schoenen kan die verschillen.",
-    "ar": "يُجرَّب البنطلون واقفًا مع الحذاء الذي سترتديه، ويُعلَّم الطول حسب رغبتك. وقد يختلف بين الحذاء الرياضي والكلاسيكي."
+    "tr": "Siz belirlersiniz. Pantolonu en çok giyeceğiniz ayakkabıyla deneyin; boy ayakta işaretlenir. Topuklu, klasik ve spor ayakkabıda doğru boy aynı değildir.",
+    "en": "You do. Try the trousers on with the shoes you will wear most; the length is marked while you stand. Heels, dress shoes and sneakers each need a different length.",
+    "de": "Sie selbst. Probieren Sie die Hose mit den Schuhen an, die Sie am häufigsten dazu tragen; die Länge wird im Stehen markiert. Absatz, Lederschuh und Sneaker brauchen jeweils eine andere Länge.",
+    "ru": "Вы сами. Примерьте брюки с той обувью, с которой будете носить их чаще всего; длину отмечаем стоя. Для каблуков, классической обуви и кроссовок длина разная.",
+    "es": "Usted. Pruébese el pantalón con los zapatos que más vaya a llevar; el largo se marca de pie. Tacón, zapato de vestir y zapatilla piden largos distintos.",
+    "fr": "Vous. Essayez le pantalon avec les chaussures que vous porterez le plus ; la longueur est marquée debout. Talons, chaussures de ville et baskets demandent des longueurs différentes.",
+    "pl": "Ty. Przymierz spodnie z butami, które będziesz do nich nosić najczęściej; długość zaznaczamy na stojąco. Obcasy, buty eleganckie i sportowe wymagają różnej długości.",
+    "uk": "Ви самі. Приміряйте штани з тим взуттям, з яким носитимете їх найчастіше; довжину позначаємо стоячи. Для підборів, класичного взуття і кросівок довжина різна.",
+    "nl": "U zelf. Pas de broek met de schoenen die u er het meest bij draagt; de lengte wordt staand afgemerkt. Hakken, nette schoenen en sneakers vragen elk een andere lengte.",
+    "ar": "أنت. جرّب البنطلون مع الحذاء الذي سترتديه معه غالباً؛ نحدد الطول وأنت واقف. الكعب والحذاء الرسمي والحذاء الرياضي لكلٍّ منها طول مختلف."
    }
   },
   {
    "h": {
-    "tr": "Bel daraltma ve pantolon tadilatı",
-    "en": "Waist taking-in and trouser alterations",
-    "de": "Bund enger machen und Hosenänderungen",
-    "ru": "Ушивание в талии и переделка брюк",
-    "es": "Ajuste de cintura y arreglos de pantalón",
-    "fr": "Ajustement de taille et retouches de pantalon",
-    "pl": "Zwężanie w talii i przeróbki spodni",
-    "uk": "Звуження в талії та переробка штанів",
-    "nl": "Taille innemen en broekaanpassingen",
-    "ar": "تضييق الخصر وتعديل البنطلون"
+    "tr": "Beli bol gelen pantolon",
+    "en": "Trousers too loose at the waist",
+    "de": "Hose am Bund zu weit",
+    "ru": "Брюки велики в поясе",
+    "es": "Pantalón ancho de cintura",
+    "fr": "Pantalon trop large à la taille",
+    "pl": "Spodnie za szerokie w pasie",
+    "uk": "Штани завеликі в поясі",
+    "nl": "Broek te wijd in de taille",
+    "ar": "بنطلون واسع عند الخصر"
    },
    "p": {
-    "tr": "Bel daraltma ₺200'den başlar. Kıyafetin fotoğrafını WhatsApp'tan göndererek yapılacak işe göre net fiyat alabilirsiniz.",
-    "en": "Waist taking-in starts from €10. Send a photo of the garment on WhatsApp to get an exact price for the work needed.",
-    "de": "Bund enger machen beginnt ab €10. Senden Sie ein Foto per WhatsApp, um den genauen Preis für die nötige Arbeit zu erhalten.",
-    "ru": "Ушивание в талии — от €10. Пришлите фото вещи в WhatsApp, и мы назовём точную цену работы.",
-    "es": "Ajustar la cintura cuesta desde €10. Envíe una foto de la prenda por WhatsApp para recibir el precio exacto del trabajo.",
-    "fr": "L’ajustement de taille commence à €10. Envoyez une photo du vêtement par WhatsApp pour obtenir le prix exact.",
-    "pl": "Zwężanie w talii zaczyna się od €10. Wyślij zdjęcie ubrania przez WhatsApp, aby poznać dokładną cenę pracy.",
-    "uk": "Звуження в талії — від €10. Надішліть фото речі у WhatsApp, щоб отримати точну ціну роботи.",
-    "nl": "Taille innemen begint vanaf €10. Stuur een foto van het kledingstuk via WhatsApp voor een exacte prijs.",
-    "ar": "يبدأ تضييق الخصر من €10. أرسل صورة القطعة عبر واتساب لتحصل على السعر الدقيق للعمل المطلوب."
+    "tr": "Bel daraltma ₺200'den başlar. Ne kadar daraltılacağını yazıp fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
+    "en": "Taking in the waist starts from €10. Tell us how much it should come in and send a photo on WhatsApp for the exact price.",
+    "de": "Bund enger machen ab €10. Schreiben Sie, wie viel enger es werden soll, und schicken Sie ein Foto per WhatsApp; dann nennen wir den genauen Preis.",
+    "ru": "Ушивание в поясе — от €10. Напишите, на сколько нужно ушить, и пришлите фото в WhatsApp — назовём точную цену.",
+    "es": "Estrechar la cintura cuesta desde €10. Díganos cuánto hay que estrechar y envíe una foto por WhatsApp para saber el precio exacto.",
+    "fr": "La reprise de taille commence à €10. Dites-nous de combien il faut reprendre et envoyez une photo sur WhatsApp pour connaître le prix exact.",
+    "pl": "Zwężenie w pasie kosztuje od €10. Napisz, o ile zwęzić, i wyślij zdjęcie na WhatsAppie, a podamy dokładną cenę.",
+    "uk": "Вшивання в поясі — від €10. Напишіть, на скільки потрібно вшити, і надішліть фото у WhatsApp — назвемо точну ціну.",
+    "nl": "De taille nauwer maken kost vanaf €10. Laat weten hoeveel het nauwer moet en stuur een foto via WhatsApp voor de exacte prijs.",
+    "ar": "تضييق الخصر يبدأ من €10. أخبرنا بمقدار التضييق وأرسل صورة عبر واتساب لتعرف السعر الدقيق."
    }
   }
  ],
  "fermuar": [
   {
    "h": {
-    "tr": "{y} fermuar değişimi: tamir mi, yenisi mi?",
-    "en": "Zipper repair in {y}: fix or replace?",
-    "de": "Reißverschluss in {y}: reparieren oder ersetzen?",
-    "ru": "Молния в {y}: ремонт или замена?",
-    "es": "Cremallera en {y}: ¿reparar o cambiar?",
-    "fr": "Fermeture à glissière à {y} : réparer ou remplacer ?",
-    "pl": "Zamek błyskawiczny w {y}: naprawa czy wymiana?",
-    "uk": "Блискавка в {y}: ремонт чи заміна?",
-    "nl": "Rits in {y}: repareren of vervangen?",
-    "ar": "السحّاب في {y}: إصلاح أم استبدال؟"
+    "tr": "{y} bozulan fermuar: onarılır mı, değişir mi?",
+    "en": "Broken zipper in {y}: repair it or replace it?",
+    "de": "Reißverschluss defekt in {y}: reparieren oder ersetzen?",
+    "ru": "Сломалась молния в {y}: чинить или менять?",
+    "es": "Cremallera rota en {y}: ¿se repara o se cambia?",
+    "fr": "Fermeture éclair cassée à {y} : réparer ou remplacer ?",
+    "pl": "Zepsuty zamek w {y}: naprawić czy wymienić?",
+    "uk": "Зламалася блискавка в {y}: лагодити чи міняти?",
+    "nl": "Rits kapot in {y}: repareren of vervangen?",
+    "ar": "سحاب مكسور في {y}: إصلاح أم استبدال؟"
    },
    "p": {
-    "tr": "Dişler sağlam ve şerit yırtık değilse çoğu zaman yalnızca sürgü değişir ya da sıkışma giderilir. Dişler kopmuşsa veya şerit yırtılmışsa fermuarın tamamı değişir.",
-    "en": "If the teeth are intact and the tape isn't torn, often only the slider is replaced or the jam is cleared. If teeth are missing or the tape is torn, the whole zipper is replaced.",
-    "de": "Sind die Zähne intakt und das Band nicht gerissen, genügt oft ein neuer Schieber oder das Beheben des Klemmens. Fehlen Zähne oder ist das Band gerissen, wird der ganze Reißverschluss ersetzt.",
-    "ru": "Если зубцы целы, а лента не порвана, часто достаточно заменить бегунок или устранить заедание. Если зубцы выпали или лента порвана, молнию меняют полностью.",
-    "es": "Si los dientes están intactos y la cinta no está rota, a menudo basta cambiar el cursor o desatascarla. Si faltan dientes o la cinta está rota, se cambia toda la cremallera.",
-    "fr": "Si les dents sont intactes et le ruban n’est pas déchiré, il suffit souvent de changer le curseur ou de débloquer la fermeture. Sinon, elle est remplacée en entier.",
-    "pl": "Jeśli ząbki są całe, a taśma nie jest rozdarta, często wystarczy wymienić suwak lub usunąć zacięcie. Gdy brakuje ząbków lub taśma jest rozdarta, wymienia się cały zamek.",
-    "uk": "Якщо зубці цілі, а стрічка не порвана, часто достатньо замінити бігунок або усунути заїдання. Якщо зубців бракує чи стрічка порвана, блискавку міняють повністю.",
-    "nl": "Zijn de tanden heel en de tape niet gescheurd, dan volstaat vaak een nieuwe schuif of het losmaken van de blokkade. Anders wordt de hele rits vervangen.",
-    "ar": "إذا كانت الأسنان سليمة والشريط غير ممزّق، يكفي غالبًا تبديل الزلّاجة أو إزالة الانحشار. وإذا كانت الأسنان مكسورة أو الشريط ممزّقًا، يُستبدل السحّاب كاملًا."
+    "tr": "Sorun sürgüdeyse çoğu zaman yalnızca sürgü yenilenir. Diş eksikse ya da fermuar şeridi yırtıksa fermuar baştan sona değiştirilir. Fotoğrafa bakıp hangisi olduğunu söyleriz.",
+    "en": "If the slider is the problem, usually only the slider is renewed. If teeth are missing or the tape is torn, the zipper is replaced from end to end. We tell you which from a photo.",
+    "de": "Liegt es am Schieber, wird meist nur der Schieber erneuert. Fehlen Zähne oder ist das Band gerissen, wird der Reißverschluss komplett ersetzt. Was nötig ist, sagen wir Ihnen nach Foto.",
+    "ru": "Если дело в бегунке, обычно меняем только его. Если не хватает зубцов или порвана тесьма, молнию меняем целиком. Что именно нужно, скажем по фото.",
+    "es": "Si el problema está en el cursor, normalmente solo se cambia el cursor. Si faltan dientes o la cinta está rota, la cremallera se cambia entera. Se lo decimos al ver la foto.",
+    "fr": "Si le problème vient du curseur, on ne change en général que le curseur. S'il manque des dents ou si le ruban est déchiré, la fermeture est remplacée entièrement. Nous vous le disons d'après la photo.",
+    "pl": "Jeśli problem tkwi w suwaku, zwykle wymieniamy tylko suwak. Gdy brakuje ząbków albo taśma jest rozdarta, wymieniamy cały zamek. Co jest potrzebne, powiemy po obejrzeniu zdjęcia.",
+    "uk": "Якщо справа в бігунку, зазвичай міняємо лише його. Якщо бракує зубців або порвана тасьма, блискавку міняємо повністю. Що саме потрібно, скажемо за фото.",
+    "nl": "Ligt het aan de schuiver, dan wordt meestal alleen de schuiver vernieuwd. Ontbreken er tanden of is het band gescheurd, dan wordt de hele rits vervangen. Wat nodig is, zeggen wij aan de hand van de foto.",
+    "ar": "إذا كانت المشكلة في المنزلق فغالباً يُستبدل المنزلق فقط. وإذا كانت الأسنان ناقصة أو الشريط ممزقاً يُستبدل السحاب كاملاً. نخبرك بما يلزم بعد رؤية الصورة."
    }
   },
   {
    "h": {
-    "tr": "Fermuar değişimi fiyatı ve teslim süresi",
-    "en": "Zipper replacement price and turnaround",
-    "de": "Preis und Dauer beim Reißverschluss-Wechsel",
-    "ru": "Цена и срок замены молнии",
-    "es": "Precio y plazo del cambio de cremallera",
-    "fr": "Prix et délai du remplacement de fermeture",
-    "pl": "Cena i czas wymiany zamka",
-    "uk": "Ціна й строк заміни блискавки",
-    "nl": "Prijs en doorlooptijd ritsvervanging",
-    "ar": "سعر ومدة استبدال السحّاب"
+    "tr": "Fermuar değişimi kaç TL?",
+    "en": "What does zipper replacement cost?",
+    "de": "Was kostet ein neuer Reißverschluss?",
+    "ru": "Сколько стоит замена молнии?",
+    "es": "¿Cuánto cuesta cambiar una cremallera?",
+    "fr": "Combien coûte un changement de fermeture éclair ?",
+    "pl": "Ile kosztuje wymiana zamka?",
+    "uk": "Скільки коштує заміна блискавки?",
+    "nl": "Wat kost een nieuwe rits?",
+    "ar": "كم يكلّف استبدال السحاب؟"
    },
    "p": {
-    "tr": "Fermuar değişimi ₺300'den başlar. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir.",
-    "en": "Zipper replacement starts from €15. Urgent jobs are ready in 1–2 hours, normal jobs the same day.",
-    "de": "Der Austausch beginnt ab €15. Eilige Aufträge sind in 1–2 Stunden fertig, normale am selben Tag.",
-    "ru": "Замена молнии — от €15. Срочные заказы — за 1–2 часа, обычные — в тот же день.",
-    "es": "El cambio de cremallera cuesta desde €15. Los trabajos urgentes están listos en 1–2 horas y los normales el mismo día.",
-    "fr": "Le remplacement commence à €15. Les travaux urgents sont prêts en 1 à 2 heures, les autres le jour même.",
-    "pl": "Wymiana zamka zaczyna się od €15. Pilne zlecenia są gotowe w 1–2 godziny, zwykłe tego samego dnia.",
-    "uk": "Заміна блискавки — від €15. Термінові замовлення — за 1–2 години, звичайні — того ж дня.",
-    "nl": "Ritsvervanging begint vanaf €15. Spoedwerk is klaar in 1–2 uur, gewoon werk dezelfde dag.",
-    "ar": "يبدأ استبدال السحّاب من €15. الأعمال العاجلة جاهزة خلال ساعة إلى ساعتين والعادية في اليوم نفسه."
+    "tr": "₺300'den başlar (KDV hariç); fermuarın boyu ve giysinin türü fiyatı etkiler. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.",
+    "en": "From €15, excluding VAT; coats and jackets from €20. Zipper length and garment type affect the price. Normal jobs are ready the same day, urgent ones in 1–2 hours.",
+    "de": "Ab €15, zzgl. MwSt.; Mäntel und Jacken ab €20. Länge des Reißverschlusses und Art des Kleidungsstücks beeinflussen den Preis. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden.",
+    "ru": "От €15, без НДС; куртки и пальто — от €20. Цена зависит от длины молнии и вида одежды. Обычные работы — в тот же день, срочные — за 1–2 часа.",
+    "es": "Desde €15, IVA no incluido; en abrigos y chaquetas desde €20. El largo de la cremallera y el tipo de prenda influyen en el precio. Trabajos normales el mismo día, urgentes en 1–2 horas.",
+    "fr": "Dès €15, hors TVA ; manteaux et vestes dès €20. La longueur de la fermeture et le type de vêtement influencent le prix. Travaux normaux le jour même, urgents en 1 à 2 heures.",
+    "pl": "Od €15, bez VAT; w płaszczach i kurtkach od €20. Na cenę wpływają długość zamka i rodzaj ubrania. Zwykłe prace tego samego dnia, pilne w 1–2 godziny.",
+    "uk": "Від €15, без ПДВ; на пальтах і куртках — від €20. Ціна залежить від довжини блискавки та виду одягу. Звичайні роботи — того ж дня, термінові — за 1–2 години.",
+    "nl": "Vanaf €15, excl. btw; jassen en mantels vanaf €20. De lengte van de rits en het soort kledingstuk bepalen de prijs. Gewoon werk dezelfde dag, spoed in 1–2 uur.",
+    "ar": "من €15، غير شامل الضريبة؛ وفي المعاطف والسترات من €20. طول السحاب ونوع القطعة يؤثران في السعر. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة."
    }
   },
   {
    "h": {
-    "tr": "Mont, ceket ve pantolon fermuarı",
-    "en": "Zippers for coats, jackets and trousers",
-    "de": "Reißverschlüsse für Mäntel, Jacken und Hosen",
-    "ru": "Молнии для курток, пальто и брюк",
-    "es": "Cremalleras de abrigos, chaquetas y pantalones",
-    "fr": "Fermetures de manteaux, vestes et pantalons",
-    "pl": "Zamki w płaszczach, kurtkach i spodniach",
-    "uk": "Блискавки для курток, пальто і штанів",
-    "nl": "Ritsen voor jassen, jacks en broeken",
-    "ar": "سحّابات المعاطف والجاكيتات والبناطيل"
+    "tr": "Hangi ürünlerde fermuar değişir?",
+    "en": "Which items can get a new zipper?",
+    "de": "An welchen Stücken wechseln wir den Reißverschluss?",
+    "ru": "На каких вещах меняем молнию?",
+    "es": "¿En qué prendas se cambia la cremallera?",
+    "fr": "Sur quels articles change-t-on la fermeture ?",
+    "pl": "W jakich rzeczach wymieniamy zamek?",
+    "uk": "На яких речах міняємо блискавку?",
+    "nl": "Bij welke artikelen vervangen wij de rits?",
+    "ar": "في أي القطع نستبدل السحاب؟"
    },
    "p": {
-    "tr": "Fermuar değişimi pantolon, etek, elbise, ceket, mont ve çanta gibi kıyafet ve ürünlerde yapılır. Fotoğrafını WhatsApp'tan gönderin, yapılabilirliği söyleyelim.",
-    "en": "Zipper replacement is done on trousers, skirts, dresses, jackets, coats and bags. Send a photo on WhatsApp and we will tell you if it can be done.",
-    "de": "Der Austausch erfolgt bei Hosen, Röcken, Kleidern, Jacken, Mänteln und Taschen. Senden Sie ein Foto per WhatsApp, wir sagen Ihnen, ob es machbar ist.",
-    "ru": "Замену молнии делают в брюках, юбках, платьях, куртках, пальто и сумках. Пришлите фото в WhatsApp, и мы скажем, возможно ли это.",
-    "es": "Se cambia la cremallera en pantalones, faldas, vestidos, chaquetas, abrigos y bolsos. Envíe una foto por WhatsApp y le diremos si es posible.",
-    "fr": "Le remplacement se fait sur pantalons, jupes, robes, vestes, manteaux et sacs. Envoyez une photo par WhatsApp, nous vous dirons si c’est faisable.",
-    "pl": "Wymieniamy zamki w spodniach, spódnicach, sukienkach, kurtkach, płaszczach i torbach. Wyślij zdjęcie przez WhatsApp, a powiemy, czy da się to zrobić.",
-    "uk": "Заміну блискавки роблять у штанах, спідницях, сукнях, куртках, пальтах і сумках. Надішліть фото у WhatsApp, і ми скажемо, чи це можливо.",
-    "nl": "Ritsvervanging gebeurt bij broeken, rokken, jurken, jacks, jassen en tassen. Stuur een foto via WhatsApp en we zeggen of het kan.",
-    "ar": "يُستبدل السحّاب في البناطيل والتنانير والفساتين والجاكيتات والمعاطف والحقائب. أرسل صورة عبر واتساب ونخبرك إن كان ذلك ممكنًا."
+    "tr": "Pantolon, etek, elbise, ceket, mont ve çantada değişir. Emin değilseniz ürünün fotoğrafını WhatsApp'tan gönderin; yapılıp yapılamayacağını yazarız.",
+    "en": "Trousers, skirts, dresses, jackets, coats and bags. If you are not sure, send a photo on WhatsApp and we will tell you whether it can be done.",
+    "de": "An Hosen, Röcken, Kleidern, Jacken, Mänteln und Taschen. Wenn Sie unsicher sind, schicken Sie ein Foto per WhatsApp; wir schreiben Ihnen, ob es möglich ist.",
+    "ru": "На брюках, юбках, платьях, пиджаках, куртках и сумках. Если не уверены, пришлите фото в WhatsApp — напишем, возможно ли это.",
+    "es": "En pantalones, faldas, vestidos, chaquetas, abrigos y bolsos. Si no está seguro, envíe una foto por WhatsApp y le decimos si se puede hacer.",
+    "fr": "Sur les pantalons, jupes, robes, vestes, manteaux et sacs. En cas de doute, envoyez une photo sur WhatsApp et nous vous disons si c'est faisable.",
+    "pl": "W spodniach, spódnicach, sukienkach, marynarkach, kurtkach i torbach. Jeśli nie masz pewności, wyślij zdjęcie na WhatsAppie, a napiszemy, czy da się to zrobić.",
+    "uk": "На штанах, спідницях, сукнях, піджаках, куртках і сумках. Якщо не впевнені, надішліть фото у WhatsApp — напишемо, чи це можливо.",
+    "nl": "Bij broeken, rokken, jurken, jassen, mantels en tassen. Twijfelt u, stuur dan een foto via WhatsApp en wij laten weten of het kan.",
+    "ar": "في البناطيل والتنانير والفساتين والسترات والمعاطف والحقائب. إن لم تكن متأكداً فأرسل صورة عبر واتساب ونخبرك إن كان ذلك ممكناً."
    }
   }
  ],
  "gelinlik": [
   {
    "h": {
-    "tr": "{y} abiye tadilatı fiyatı",
-    "en": "Evening dress alteration price in {y}",
-    "de": "Abendkleid ändern in {y}: Preis",
-    "ru": "Цена подгонки вечернего платья в {y}",
-    "es": "Precio de arreglos de vestido de noche en {y}",
-    "fr": "Prix des retouches de robe de soirée à {y}",
-    "pl": "Cena przeróbek sukni wieczorowej w {y}",
-    "uk": "Ціна переробки вечірньої сукні в {y}",
-    "nl": "Prijs aanpassing avondjurk in {y}",
-    "ar": "سعر تعديل فستان السهرة في {y}"
+    "tr": "{y} abiye tadilatı nasıl fiyatlanır?",
+    "en": "How are evening dress alterations priced in {y}?",
+    "de": "Wie wird die Änderung eines Abendkleids in {y} berechnet?",
+    "ru": "Как считается цена переделки вечернего платья в {y}?",
+    "es": "¿Cómo se presupuesta el arreglo de un vestido de fiesta en {y}?",
+    "fr": "Comment est chiffrée la retouche d'une robe de soirée à {y} ?",
+    "pl": "Jak wyceniamy przeróbkę sukni wieczorowej w {y}?",
+    "uk": "Як рахується ціна переробки вечірньої сукні в {y}?",
+    "nl": "Hoe wordt het vermaken van een avondjurk in {y} berekend?",
+    "ar": "كيف يُحسب سعر تعديل فستان السهرة في {y}؟"
    },
    "p": {
     "tr": "Abiye, gelinlik ve elbise tadilatı fotoğrafa veya işin detayına göre fiyatlanır. Kesin fiyat, kumaşa ve yapılacak işe göre ilk provada netleşir.",
@@ -194,42 +194,42 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Abiye ve gelinlik provası ne zaman yapılır?",
-    "en": "When to book evening and wedding dress fittings",
-    "de": "Wann Anproben für Abend- und Brautkleid?",
-    "ru": "Когда делать примерки вечернего и свадебного платья?",
-    "es": "¿Cuándo probar el vestido de noche o de novia?",
-    "fr": "Quand essayer robe de soirée et de mariée ?",
-    "pl": "Kiedy przymiarki sukni wieczorowej i ślubnej?",
-    "uk": "Коли робити примірки вечірньої та весільної сукні?",
-    "nl": "Wanneer pasbeurten voor avond- en bruidsjurk?",
-    "ar": "متى تُجرى بروفات فستان السهرة والزفاف؟"
+    "tr": "Abiye ya da gelinlik için ne zaman gelmeliyim?",
+    "en": "When should I come in for an evening or wedding dress?",
+    "de": "Wann sollte ich mit Abend- oder Brautkleid kommen?",
+    "ru": "Когда приходить с вечерним или свадебным платьем?",
+    "es": "¿Cuándo debo ir con un vestido de fiesta o de novia?",
+    "fr": "Quand venir avec une robe de soirée ou de mariée ?",
+    "pl": "Kiedy przyjść z suknią wieczorową lub ślubną?",
+    "uk": "Коли приходити з вечірньою чи весільною сукнею?",
+    "nl": "Wanneer moet ik komen met een avondjurk of bruidsjurk?",
+    "ar": "متى أحضر فستان السهرة أو فستان الزفاف؟"
    },
    "p": {
-    "tr": "Boy, bel ve korse ayarı için düğünden birkaç hafta önce ilk provayı, düğüne yakın bir tarihte son provayı yapmanız önerilir.",
-    "en": "For length, waist and bodice adjustments, we recommend a first fitting a few weeks before the event and a final fitting close to the date.",
-    "de": "Für Länge, Taille und Mieder empfehlen wir die erste Anprobe einige Wochen vor dem Anlass und die letzte kurz davor.",
-    "ru": "Для подгонки длины, талии и корсета рекомендуем первую примерку за несколько недель до события, а финальную — ближе к дате.",
-    "es": "Para ajustar largo, cintura y corpiño, recomendamos una primera prueba unas semanas antes del evento y una última cerca de la fecha.",
-    "fr": "Pour ajuster longueur, taille et corset, nous conseillons un premier essayage quelques semaines avant l’événement et un dernier à l’approche de la date.",
-    "pl": "Przy dopasowaniu długości, talii i gorsetu zalecamy pierwszą przymiarkę kilka tygodni przed wydarzeniem, a ostatnią tuż przed terminem.",
-    "uk": "Для підгонки довжини, талії та корсета радимо першу примірку за кілька тижнів до події, а останню — ближче до дати.",
-    "nl": "Voor lengte, taille en lijfje raden we een eerste pasbeurt een paar weken voor het evenement aan en een laatste vlak voor de datum.",
-    "ar": "لضبط الطول والخصر والكورسيه، ننصح ببروفة أولى قبل المناسبة بأسابيع وبروفة أخيرة قريبة من الموعد."
+    "tr": "İki prova öneriyoruz: ilki törenden birkaç hafta önce, sonuncusu törene yakın. Böylece boy, bel ve korse ayarı son ölçünüze göre yapılır.",
+    "en": "We suggest two fittings: the first a few weeks before the event and the last close to the date, so length, waist and bodice match your final measurements.",
+    "de": "Wir empfehlen zwei Anproben: die erste einige Wochen vor dem Anlass, die letzte kurz davor. So passen Länge, Taille und Korsage zu Ihren endgültigen Maßen.",
+    "ru": "Советуем две примерки: первую за несколько недель до события, последнюю ближе к дате. Так длина, талия и корсет будут подогнаны по окончательным меркам.",
+    "es": "Recomendamos dos pruebas: la primera unas semanas antes del evento y la última cerca de la fecha. Así el largo, la cintura y el corpiño se ajustan a sus medidas finales.",
+    "fr": "Nous conseillons deux essayages : le premier quelques semaines avant l'événement, le dernier peu avant la date. Longueur, taille et bustier sont ainsi ajustés à vos mesures définitives.",
+    "pl": "Zalecamy dwie przymiarki: pierwszą kilka tygodni przed uroczystością, ostatnią tuż przed nią. Dzięki temu długość, talia i gorset są dopasowane do ostatecznych wymiarów.",
+    "uk": "Радимо дві примірки: першу за кілька тижнів до події, останню ближче до дати. Так довжина, талія і корсет будуть підігнані за остаточними мірками.",
+    "nl": "Wij raden twee pasbeurten aan: de eerste enkele weken voor het evenement, de laatste vlak ervoor. Zo passen lengte, taille en lijfje bij uw uiteindelijke maten.",
+    "ar": "ننصح ببروفتين: الأولى قبل المناسبة بعدة أسابيع والأخيرة قرب الموعد. بهذا يُضبط الطول والخصر والكورسيه على مقاسك النهائي."
    }
   },
   {
    "h": {
-    "tr": "Abiye elbise dikimi ve özel dikim",
-    "en": "Evening dress sewing and custom tailoring",
-    "de": "Abendkleid nähen und Maßanfertigung",
-    "ru": "Пошив вечернего платья и индивидуальный пошив",
-    "es": "Confección de vestidos de noche y a medida",
-    "fr": "Couture de robes de soirée et sur mesure",
-    "pl": "Szycie sukienek wieczorowych i na miarę",
-    "uk": "Пошив вечірніх суконь та індивідуальний пошив",
-    "nl": "Avondjurk laten maken en maatwerk",
-    "ar": "خياطة فساتين السهرة والتفصيل الخاص"
+    "tr": "Abiye ya da elbise diktirmek",
+    "en": "Having an evening dress or dress made",
+    "de": "Abendkleid oder Kleid nähen lassen",
+    "ru": "Сшить вечернее платье или платье на заказ",
+    "es": "Encargar un vestido o un vestido de fiesta",
+    "fr": "Faire confectionner une robe ou une robe de soirée",
+    "pl": "Uszycie sukienki lub sukni wieczorowej",
+    "uk": "Пошити сукню або вечірню сукню на замовлення",
+    "nl": "Een jurk of avondjurk laten maken",
+    "ar": "تفصيل فستان أو فستان سهرة"
    },
    "p": {
     "tr": "Abiye ve elbise dikiminde fiyat fotoğrafa ve istediğiniz modele göre belirlenir; süre modele, kumaşa ve adede göre değişir.",
@@ -248,198 +248,198 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
  "keten": [
   {
    "h": {
-    "tr": "Keten kıyafet dikimi: kumaş çeker mi?",
-    "en": "Linen clothing tailoring: does the fabric shrink?",
-    "de": "Leinenkleidung nähen: läuft der Stoff ein?",
-    "ru": "Пошив льняной одежды: садится ли ткань?",
-    "es": "Confección de ropa de lino: ¿encoge la tela?",
-    "fr": "Couture de vêtements en lin : le tissu rétrécit-il ?",
-    "pl": "Szycie ubrań z lnu: czy tkanina się kurczy?",
-    "uk": "Пошив лляного одягу: чи сідає тканина?",
-    "nl": "Linnen kleding laten maken: krimpt de stof?",
-    "ar": "خياطة ملابس الكتان: هل ينكمش القماش؟"
+    "tr": "Keten diktirirsem yıkayınca küçülür mü?",
+    "en": "Will a linen garment shrink in the wash?",
+    "de": "Läuft ein Leinenstück beim Waschen ein?",
+    "ru": "Сядет ли льняная вещь после стирки?",
+    "es": "¿Encoge una prenda de lino al lavarla?",
+    "fr": "Un vêtement en lin rétrécit-il au lavage ?",
+    "pl": "Czy lniane ubranie kurczy się w praniu?",
+    "uk": "Чи сідає лляна річ після прання?",
+    "nl": "Krimpt linnen kleding in de was?",
+    "ar": "هل تنكمش قطعة الكتان بعد الغسيل؟"
    },
    "p": {
-    "tr": "Keten, özellikle ilk yıkamada çekebilir. Dikimden önce kumaşın ön yıkamasının yapılması, bitmiş kıyafetin boyunun ve bedeninin sonradan değişmesini önler.",
-    "en": "Linen can shrink, especially in the first wash. Pre-washing the fabric before sewing prevents the finished garment's length and fit from changing later.",
-    "de": "Leinen kann besonders beim ersten Waschen einlaufen. Eine Vorwäsche des Stoffes vor dem Nähen verhindert, dass sich Länge und Passform später ändern.",
-    "ru": "Лён может садиться, особенно при первой стирке. Предварительная стирка ткани перед пошивом не даёт готовой вещи изменить длину и посадку.",
-    "es": "El lino puede encoger, sobre todo en el primer lavado. Prelavar la tela antes de coser evita que el largo y el ajuste cambien después.",
-    "fr": "Le lin peut rétrécir, surtout au premier lavage. Prélaver le tissu avant la couture évite que la longueur et la coupe changent par la suite.",
-    "pl": "Len może się kurczyć, zwłaszcza przy pierwszym praniu. Wstępne pranie tkaniny przed szyciem zapobiega zmianie długości i dopasowania.",
-    "uk": "Льон може сідати, особливо при першому пранні. Попереднє прання тканини перед пошивом не дає готовій речі змінити довжину й посадку.",
-    "nl": "Linnen kan krimpen, vooral bij de eerste wasbeurt. Het stof voorwassen vóór het naaien voorkomt dat lengte en pasvorm later veranderen.",
-    "ar": "قد ينكمش الكتان، خاصة عند أول غسلة. غسل القماش مسبقًا قبل الخياطة يمنع تغيّر الطول والمقاس بعد الانتهاء."
+    "tr": "Keten ilk yıkamada çekebilir. Bu yüzden kumaş dikimden önce yıkanır; böylece kıyafetin boyu ve bedeni sonradan değişmez.",
+    "en": "Linen can shrink in its first wash. That is why the fabric is washed before sewing, so the garment keeps its length and fit afterwards.",
+    "de": "Leinen kann bei der ersten Wäsche einlaufen. Deshalb wird der Stoff vor dem Nähen gewaschen, damit Länge und Passform später gleich bleiben.",
+    "ru": "Лён может сесть при первой стирке. Поэтому ткань стирают до пошива, и готовая вещь потом не меняет длину и посадку.",
+    "es": "El lino puede encoger en el primer lavado. Por eso la tela se lava antes de coser y la prenda conserva después su largo y su talla.",
+    "fr": "Le lin peut rétrécir au premier lavage. C'est pourquoi le tissu est lavé avant la couture ; le vêtement garde ensuite sa longueur et sa taille.",
+    "pl": "Len może się skurczyć przy pierwszym praniu. Dlatego tkaninę pierzemy przed szyciem, a gotowe ubranie zachowuje potem długość i rozmiar.",
+    "uk": "Льон може сісти під час першого прання. Тому тканину перуть до пошиття, і готова річ потім зберігає довжину та розмір.",
+    "nl": "Linnen kan bij de eerste wasbeurt krimpen. Daarom wordt de stof vóór het naaien gewassen, zodat het kledingstuk daarna zijn lengte en pasvorm houdt.",
+    "ar": "قد ينكمش الكتان في الغسلة الأولى. لذلك يُغسل القماش قبل الخياطة فتحتفظ القطعة بطولها ومقاسها بعد ذلك."
    }
   },
   {
    "h": {
-    "tr": "Keten ve pamuk özel dikim: süre ve fiyat",
-    "en": "Custom linen and cotton tailoring: time and price",
-    "de": "Leinen und Baumwolle nach Maß: Dauer und Preis",
-    "ru": "Индивидуальный пошив из льна и хлопка: срок и цена",
-    "es": "Lino y algodón a medida: plazo y precio",
-    "fr": "Lin et coton sur mesure : délai et prix",
-    "pl": "Len i bawełna na miarę: czas i cena",
-    "uk": "Льон і бавовна на замовлення: строк і ціна",
-    "nl": "Linnen en katoen op maat: tijd en prijs",
-    "ar": "الكتان والقطن بالتفصيل الخاص: المدة والسعر"
+    "tr": "Keten ve pamuk dikimde fiyat ve süre",
+    "en": "Linen and cotton tailoring: price and time",
+    "de": "Leinen und Baumwolle nach Maß: Preis und Dauer",
+    "ru": "Пошив изо льна и хлопка: цена и срок",
+    "es": "Confección en lino y algodón: precio y plazo",
+    "fr": "Confection en lin et coton : prix et délai",
+    "pl": "Szycie z lnu i bawełny: cena i termin",
+    "uk": "Пошиття з льону та бавовни: ціна і строк",
+    "nl": "Maatwerk in linnen en katoen: prijs en doorlooptijd",
+    "ar": "الخياطة من الكتان والقطن: السعر والمدة"
    },
    "p": {
-    "tr": "Özel dikimde süre ve fiyat modele, kumaşa ve adede göre belirlenir; dikime başlamadan önce net olarak konuşulur.",
-    "en": "For custom tailoring, time and price depend on the model, fabric and quantity, and are agreed clearly before sewing begins.",
-    "de": "Bei Maßanfertigung hängen Dauer und Preis von Modell, Stoff und Menge ab und werden vor Nähbeginn klar besprochen.",
-    "ru": "Срок и цена зависят от модели, ткани и количества и обсуждаются до начала работы.",
-    "es": "Plazo y precio dependen del modelo, la tela y la cantidad, y se acuerdan claramente antes de empezar a coser.",
-    "fr": "Délai et prix dépendent du modèle, du tissu et de la quantité, et sont précisés avant de commencer.",
-    "pl": "Czas i cena zależą od modelu, tkaniny i ilości i są ustalane jasno przed rozpoczęciem szycia.",
-    "uk": "Строк і ціна залежать від моделі, тканини та кількості й обговорюються до початку роботи.",
-    "nl": "Tijd en prijs hangen af van model, stof en aantal en worden duidelijk afgesproken voordat het naaien begint.",
-    "ar": "تعتمد المدة والسعر على الموديل والقماش والكمية، ويُتَّفق عليهما بوضوح قبل بدء الخياطة."
+    "tr": "Sabit fiyat yoktur. Model, kumaş ve adet belli olunca fiyatı ve süreyi dikime başlamadan önce yazarız.",
+    "en": "There is no fixed price. Once model, fabric and quantity are clear, we tell you the price and time before sewing starts.",
+    "de": "Einen Festpreis gibt es nicht. Sobald Modell, Stoff und Stückzahl feststehen, nennen wir Preis und Dauer, bevor wir mit dem Nähen beginnen.",
+    "ru": "Фиксированной цены нет. Когда понятны модель, ткань и количество, называем цену и срок до начала пошива.",
+    "es": "No hay precio fijo. Cuando están claros el modelo, la tela y la cantidad, le indicamos precio y plazo antes de empezar a coser.",
+    "fr": "Il n'y a pas de prix fixe. Une fois le modèle, le tissu et la quantité définis, nous indiquons le prix et le délai avant de commencer la couture.",
+    "pl": "Nie ma stałej ceny. Gdy znamy model, tkaninę i liczbę sztuk, podajemy cenę i termin przed rozpoczęciem szycia.",
+    "uk": "Фіксованої ціни немає. Коли зрозумілі модель, тканина й кількість, називаємо ціну та строк до початку пошиття.",
+    "nl": "Er is geen vaste prijs. Zodra model, stof en aantal duidelijk zijn, noemen wij prijs en doorlooptijd voordat wij beginnen met naaien.",
+    "ar": "لا يوجد سعر ثابت. عندما يتضح الموديل والقماش والكمية نخبرك بالسعر والمدة قبل بدء الخياطة."
    }
   }
  ],
  "uniforma": [
   {
    "h": {
-    "tr": "{y} üniforma imalatı: sipariş için ne gerekir?",
-    "en": "Uniform manufacturing in {y}: what do you need to order?",
-    "de": "Uniformen in {y} fertigen lassen: was wird benötigt?",
-    "ru": "Производство униформы в {y}: что нужно для заказа?",
-    "es": "Fabricación de uniformes en {y}: ¿qué se necesita?",
-    "fr": "Fabrication d’uniformes à {y} : que faut-il fournir ?",
-    "pl": "Produkcja uniformów w {y}: czego potrzeba do zamówienia?",
-    "uk": "Виробництво уніформи в {y}: що потрібно для замовлення?",
-    "nl": "Uniformen laten maken in {y}: wat is nodig?",
-    "ar": "تصنيع الزي الموحّد في {y}: ماذا تحتاج للطلب؟"
+    "tr": "{y} üniforma siparişi vermek için ne lazım?",
+    "en": "What do I need to order uniforms in {y}?",
+    "de": "Was brauche ich für eine Uniformbestellung in {y}?",
+    "ru": "Что нужно, чтобы заказать униформу в {y}?",
+    "es": "¿Qué necesito para encargar uniformes en {y}?",
+    "fr": "Que faut-il pour commander des uniformes à {y} ?",
+    "pl": "Czego potrzeba, by zamówić uniformy w {y}?",
+    "uk": "Що потрібно, щоб замовити уніформу в {y}?",
+    "nl": "Wat heb ik nodig om uniformen te bestellen in {y}?",
+    "ar": "ما المطلوب لطلب زي موحد في {y}؟"
    },
    "p": {
-    "tr": "Model, adet, beden listesi ve varsa logo bilgisi yeterlidir. Seri üretimden önce numune üzerinde ölçü ve görünüm onaylanır.",
-    "en": "The model, quantity, size list and logo (if any) are enough. Before serial production, size and appearance are approved on a sample.",
-    "de": "Modell, Menge, Größenliste und gegebenenfalls Logo genügen. Vor der Serienproduktion werden Größe und Aussehen an einem Muster freigegeben.",
-    "ru": "Достаточно модели, количества, списка размеров и логотипа (если есть). Перед серийным производством размер и вид утверждаются на образце.",
-    "es": "Bastan el modelo, la cantidad, la lista de tallas y el logotipo, si lo hay. Antes de la producción en serie se aprueban medidas y aspecto en una muestra.",
-    "fr": "Le modèle, la quantité, la liste des tailles et le logo éventuel suffisent. Avant la série, taille et aspect sont validés sur un échantillon.",
-    "pl": "Wystarczą model, ilość, lista rozmiarów i ewentualne logo. Przed produkcją seryjną rozmiar i wygląd zatwierdza się na próbce.",
-    "uk": "Достатньо моделі, кількості, списку розмірів і логотипа (за наявності). Перед серією розмір і вигляд затверджують на зразку.",
-    "nl": "Model, aantal, maatlijst en eventueel een logo volstaan. Vóór de serieproductie worden maat en uiterlijk op een voorbeeld goedgekeurd.",
-    "ar": "يكفي تحديد الموديل والكمية وقائمة المقاسات والشعار إن وُجد. قبل الإنتاج بالجملة تُعتمد المقاسات والمظهر على نموذج."
+    "tr": "Model, adet ve beden listesini, varsa logonuzu gönderin. Önce numune hazırlanır; ölçü ve görünümü onayladıktan sonra üretime geçilir.",
+    "en": "Send the model, quantity and size list, plus your logo if you have one. A sample is made first; production starts once you approve its size and look.",
+    "de": "Schicken Sie Modell, Stückzahl und Größenliste, dazu Ihr Logo, falls vorhanden. Zuerst entsteht ein Muster; nach Ihrer Freigabe von Größe und Aussehen beginnt die Produktion.",
+    "ru": "Пришлите модель, количество и список размеров, а также логотип, если он есть. Сначала делаем образец; после вашего одобрения размера и вида начинаем производство.",
+    "es": "Envíe el modelo, la cantidad y la lista de tallas, y su logotipo si lo tiene. Primero se hace una muestra; cuando aprueba la talla y el aspecto, empieza la producción.",
+    "fr": "Envoyez le modèle, la quantité et la liste des tailles, ainsi que votre logo si vous en avez un. Un échantillon est d'abord réalisé ; la production commence après votre validation de la taille et de l'aspect.",
+    "pl": "Wyślij model, liczbę sztuk i listę rozmiarów oraz logo, jeśli je masz. Najpierw powstaje wzór; po akceptacji rozmiaru i wyglądu zaczynamy produkcję.",
+    "uk": "Надішліть модель, кількість і перелік розмірів, а також логотип, якщо він є. Спершу робимо зразок; після вашого схвалення розміру й вигляду починаємо виробництво.",
+    "nl": "Stuur het model, het aantal en de matenlijst, en uw logo als u dat heeft. Eerst maken wij een proefstuk; na uw akkoord op maat en uiterlijk start de productie.",
+    "ar": "أرسل الموديل والكمية وقائمة المقاسات، وشعارك إن وُجد. نُعدّ عيّنة أولاً؛ وبعد موافقتك على المقاس والشكل يبدأ الإنتاج."
    }
   },
   {
    "h": {
-    "tr": "Otel, restoran ve şirket üniforması: süre ve teklif",
-    "en": "Hotel, restaurant and company uniforms: time and quote",
-    "de": "Hotel-, Restaurant- und Firmenuniformen: Dauer und Angebot",
-    "ru": "Униформа для отелей, ресторанов и компаний: срок и предложение",
-    "es": "Uniformes de hotel, restaurante y empresa: plazo y presupuesto",
-    "fr": "Uniformes d’hôtel, de restaurant et d’entreprise : délai et devis",
-    "pl": "Uniformy dla hoteli, restauracji i firm: czas i wycena",
-    "uk": "Уніформа для готелів, ресторанів і компаній: строк і пропозиція",
-    "nl": "Uniformen voor hotels, restaurants en bedrijven: tijd en offerte",
-    "ar": "زي موحّد للفنادق والمطاعم والشركات: المدة وعرض السعر"
+    "tr": "Otel, restoran ve şirket üniformasında teklif",
+    "en": "Quotes for hotel, restaurant and company uniforms",
+    "de": "Angebot für Hotel-, Restaurant- und Firmenuniformen",
+    "ru": "Расчёт униформы для отелей, ресторанов и компаний",
+    "es": "Presupuesto de uniformes para hoteles, restaurantes y empresas",
+    "fr": "Devis d'uniformes pour hôtels, restaurants et entreprises",
+    "pl": "Wycena uniformów dla hoteli, restauracji i firm",
+    "uk": "Розрахунок уніформи для готелів, ресторанів і компаній",
+    "nl": "Offerte voor uniformen van hotels, restaurants en bedrijven",
+    "ar": "عرض سعر لأزياء الفنادق والمطاعم والشركات"
    },
    "p": {
-    "tr": "Üretim süresi modele ve adede göre belirlenir. Teklif için model, adet ve logo bilgisini WhatsApp'tan göndermeniz yeterli.",
-    "en": "Production time depends on the model and quantity. To get a quote, send the model, quantity and logo on WhatsApp.",
-    "de": "Die Produktionsdauer hängt von Modell und Menge ab. Für ein Angebot senden Sie Modell, Menge und Logo per WhatsApp.",
-    "ru": "Срок производства зависит от модели и количества. Для расчёта пришлите в WhatsApp модель, количество и логотип.",
-    "es": "El plazo depende del modelo y de la cantidad. Para un presupuesto, envíe por WhatsApp el modelo, la cantidad y el logotipo.",
-    "fr": "Le délai dépend du modèle et de la quantité. Pour un devis, envoyez le modèle, la quantité et le logo par WhatsApp.",
-    "pl": "Czas produkcji zależy od modelu i ilości. Aby otrzymać wycenę, wyślij przez WhatsApp model, ilość i logo.",
-    "uk": "Строк виробництва залежить від моделі та кількості. Для розрахунку надішліть у WhatsApp модель, кількість і логотип.",
-    "nl": "De productietijd hangt af van model en aantal. Stuur voor een offerte het model, het aantal en het logo via WhatsApp.",
-    "ar": "تعتمد مدة الإنتاج على الموديل والكمية. للحصول على عرض سعر أرسل الموديل والكمية والشعار عبر واتساب."
+    "tr": "Teklif için model, adet ve logo bilgisini WhatsApp'tan yazın. Üretim süresi modele ve adede göre birlikte belirlenir.",
+    "en": "For a quote, send the model, quantity and logo details on WhatsApp. The production time is agreed with you according to model and quantity.",
+    "de": "Für ein Angebot schreiben Sie uns Modell, Stückzahl und Logo per WhatsApp. Die Produktionszeit stimmen wir je nach Modell und Stückzahl mit Ihnen ab.",
+    "ru": "Для расчёта напишите в WhatsApp модель, количество и данные логотипа. Срок производства согласуем с вами в зависимости от модели и количества.",
+    "es": "Para el presupuesto, escríbanos por WhatsApp el modelo, la cantidad y los datos del logotipo. El plazo de producción se acuerda con usted según el modelo y la cantidad.",
+    "fr": "Pour un devis, écrivez-nous sur WhatsApp le modèle, la quantité et les informations du logo. Le délai de production est convenu avec vous selon le modèle et la quantité.",
+    "pl": "Aby otrzymać wycenę, napisz na WhatsAppie model, liczbę sztuk i dane logo. Termin produkcji ustalamy z Tobą zależnie od modelu i liczby sztuk.",
+    "uk": "Для розрахунку напишіть у WhatsApp модель, кількість і дані логотипа. Строк виробництва узгоджуємо з вами залежно від моделі та кількості.",
+    "nl": "Voor een offerte stuurt u model, aantal en logogegevens via WhatsApp. De productietijd spreken wij met u af op basis van model en aantal.",
+    "ar": "للحصول على عرض سعر اكتب لنا عبر واتساب الموديل والكمية وبيانات الشعار. نتفق معك على مدة الإنتاج حسب الموديل والكمية."
    }
   }
  ],
  "promo": [
   {
    "h": {
-    "tr": "Promosyon tekstil ve bez çanta: teklif için ne gönderilir?",
-    "en": "Promotional textiles and tote bags: what to send for a quote",
-    "de": "Werbetextilien und Stoffbeutel: was für ein Angebot senden",
-    "ru": "Рекламный текстиль и сумки-шопперы: что прислать для расчёта",
-    "es": "Textil promocional y bolsas de tela: qué enviar para un presupuesto",
-    "fr": "Textile promotionnel et sacs en tissu : que envoyer pour un devis",
-    "pl": "Tekstylia reklamowe i torby bawełniane: co wysłać do wyceny",
-    "uk": "Рекламний текстиль і сумки-шопери: що надіслати для розрахунку",
-    "nl": "Promotioneel textiel en katoenen tassen: wat sturen voor een offerte",
-    "ar": "المنسوجات الدعائية والحقائب القماشية: ماذا ترسل للحصول على عرض سعر"
+    "tr": "Bez çanta ve promosyon ürününde teklif almak",
+    "en": "Getting a quote for tote bags and promotional items",
+    "de": "Angebot für Stofftaschen und Werbeartikel einholen",
+    "ru": "Как получить расчёт на сумки и промопродукцию",
+    "es": "Pedir presupuesto de bolsas de tela y artículos promocionales",
+    "fr": "Obtenir un devis pour sacs en tissu et articles promotionnels",
+    "pl": "Wycena toreb materiałowych i artykułów promocyjnych",
+    "uk": "Як отримати розрахунок на тканинні сумки та промопродукцію",
+    "nl": "Offerte aanvragen voor stoffen tassen en promotieartikelen",
+    "ar": "طلب عرض سعر للحقائب القماشية والمنتجات الترويجية"
    },
    "p": {
-    "tr": "Logo veya tasarım dosyanızı, istediğiniz ürünü ve yaklaşık adedi gönderin. Elinizde yalnızca bir fikir ya da örnek fotoğraf varsa o da yeterli.",
-    "en": "Send your logo or design file, the product you want and the approximate quantity. An idea or a reference photo is enough too.",
-    "de": "Senden Sie Ihre Logo- oder Designdatei, das gewünschte Produkt und die ungefähre Menge. Auch eine Idee oder ein Beispielfoto genügt.",
-    "ru": "Пришлите файл с логотипом или дизайном, нужное изделие и примерное количество. Достаточно и идеи или фото-примера.",
-    "es": "Envíe su archivo de logotipo o diseño, el producto y la cantidad aproximada. También basta una idea o una foto de referencia.",
-    "fr": "Envoyez votre fichier de logo ou de design, le produit souhaité et la quantité approximative. Une idée ou une photo de référence suffit aussi.",
-    "pl": "Wyślij plik z logo lub projektem, wybrany produkt i przybliżoną ilość. Wystarczy też pomysł lub zdjęcie przykładowe.",
-    "uk": "Надішліть файл із логотипом чи дизайном, потрібний виріб і приблизну кількість. Достатньо й ідеї або фото-прикладу.",
-    "nl": "Stuur uw logo- of ontwerpbestand, het gewenste product en het geschatte aantal. Een idee of voorbeeldfoto is ook genoeg.",
-    "ar": "أرسل ملف الشعار أو التصميم والمنتج المطلوب والكمية التقريبية. تكفي أيضًا فكرة أو صورة مرجعية."
+    "tr": "Hangi ürünü istediğinizi, yaklaşık adedi ve logonuzu gönderin. Hazır dosyanız yoksa örnek bir fotoğraf ya da kısa bir tarif de olur.",
+    "en": "Tell us the product, the approximate quantity and send your logo. If you have no ready file, a reference photo or a short description is fine.",
+    "de": "Nennen Sie uns das Produkt und die ungefähre Stückzahl und schicken Sie Ihr Logo. Ohne fertige Datei genügt auch ein Beispielfoto oder eine kurze Beschreibung.",
+    "ru": "Напишите, какой товар нужен и примерное количество, пришлите логотип. Если готового файла нет, подойдёт фото-пример или короткое описание.",
+    "es": "Díganos qué producto quiere, la cantidad aproximada y envíe su logotipo. Si no tiene un archivo listo, sirve una foto de ejemplo o una breve descripción.",
+    "fr": "Indiquez le produit souhaité et la quantité approximative, et envoyez votre logo. Sans fichier prêt, une photo d'exemple ou une courte description suffit.",
+    "pl": "Napisz, jaki produkt i w jakiej przybliżonej liczbie chcesz zamówić, i wyślij logo. Jeśli nie masz gotowego pliku, wystarczy zdjęcie przykładowe lub krótki opis.",
+    "uk": "Напишіть, який товар потрібен і приблизну кількість, надішліть логотип. Якщо готового файла немає, підійде фото-приклад або короткий опис.",
+    "nl": "Laat weten welk product u wilt en het geschatte aantal, en stuur uw logo. Heeft u geen kant-en-klaar bestand, dan is een voorbeeldfoto of korte omschrijving genoeg.",
+    "ar": "أخبرنا بالمنتج المطلوب والكمية التقريبية وأرسل شعارك. إن لم يكن لديك ملف جاهز فتكفي صورة مثال أو وصف قصير."
    }
   },
   {
    "h": {
-    "tr": "Logolu baskı çeşidi nasıl seçilir?",
-    "en": "How to choose the print type for logo products",
-    "de": "Druckart für Logo-Produkte richtig wählen",
-    "ru": "Как выбрать вид печати логотипа",
-    "es": "Cómo elegir el tipo de impresión del logotipo",
-    "fr": "Comment choisir l’impression du logo",
-    "pl": "Jak wybrać rodzaj nadruku logo",
-    "uk": "Як обрати вид друку логотипа",
-    "nl": "Het juiste printtype voor logoproducten kiezen",
-    "ar": "كيف تختار نوع طباعة الشعار"
+    "tr": "Hangi baskı uygun olur?",
+    "en": "Which print suits my product?",
+    "de": "Welcher Druck passt?",
+    "ru": "Какая печать подойдёт?",
+    "es": "¿Qué tipo de estampado conviene?",
+    "fr": "Quelle impression convient ?",
+    "pl": "Jaki nadruk będzie odpowiedni?",
+    "uk": "Який друк підійде?",
+    "nl": "Welke bedrukking past het best?",
+    "ar": "أي نوع طباعة يناسب؟"
    },
    "p": {
-    "tr": "Baskı çeşidini ürüne ve tasarıma göre birlikte seçeriz. Fiyat ve süre; model, adet ve baskıya göre netleşir.",
-    "en": "We choose the print type together, based on the product and the design. Price and time depend on the model, quantity and print.",
-    "de": "Wir wählen die Druckart gemeinsam nach Produkt und Design. Preis und Dauer hängen von Modell, Menge und Druck ab.",
-    "ru": "Вид печати мы выбираем вместе, исходя из изделия и дизайна. Цена и срок зависят от модели, количества и печати.",
-    "es": "Elegimos juntos el tipo de impresión según el producto y el diseño. El precio y el plazo dependen del modelo, la cantidad y la impresión.",
-    "fr": "Nous choisissons ensemble le type d’impression selon le produit et le design. Le prix et le délai dépendent du modèle, de la quantité et de l’impression.",
-    "pl": "Rodzaj nadruku wybieramy razem, w zależności od produktu i projektu. Cena i czas zależą od modelu, ilości i nadruku.",
-    "uk": "Вид друку ми обираємо разом, виходячи з виробу й дизайну. Ціна й строк залежать від моделі, кількості та друку.",
-    "nl": "We kiezen het printtype samen, op basis van product en ontwerp. Prijs en tijd hangen af van model, aantal en print.",
-    "ar": "نختار نوع الطباعة معًا حسب المنتج والتصميم. يتحدد السعر والمدة حسب الموديل والكمية والطباعة."
+    "tr": "Baskıyı ürüne ve tasarıma bakarak birlikte seçeriz. Fiyat ve süre model, adet ve baskı belli olunca yazılır.",
+    "en": "We pick the print together after looking at the product and the design. Price and time follow once model, quantity and print are settled.",
+    "de": "Den Druck wählen wir gemeinsam nach Produkt und Design aus. Preis und Dauer nennen wir, sobald Modell, Stückzahl und Druck feststehen.",
+    "ru": "Печать выбираем вместе, исходя из изделия и дизайна. Цену и срок называем, когда определены модель, количество и печать.",
+    "es": "Elegimos el estampado juntos según el producto y el diseño. El precio y el plazo se indican cuando están definidos el modelo, la cantidad y el estampado.",
+    "fr": "Nous choisissons l'impression ensemble selon le produit et le design. Le prix et le délai sont indiqués une fois le modèle, la quantité et l'impression définis.",
+    "pl": "Nadruk dobieramy wspólnie do produktu i projektu. Cenę i termin podajemy, gdy ustalone są model, liczba sztuk i nadruk.",
+    "uk": "Друк обираємо разом, виходячи з виробу та дизайну. Ціну і строк називаємо, коли визначено модель, кількість і друк.",
+    "nl": "De bedrukking kiezen wij samen op basis van product en ontwerp. Prijs en doorlooptijd volgen zodra model, aantal en bedrukking vaststaan.",
+    "ar": "نختار الطباعة معاً حسب المنتج والتصميم. نخبرك بالسعر والمدة بعد تحديد الموديل والكمية والطباعة."
    }
   }
  ],
  "otel": [
   {
    "h": {
-    "tr": "{y} otele gelen terzi nasıl çalışır?",
-    "en": "How does the hotel tailor in {y} work?",
-    "de": "So funktioniert der Hotel-Schneider in {y}",
-    "ru": "Как работает портной с выездом в отель в {y}",
-    "es": "Cómo funciona el sastre a hoteles en {y}",
-    "fr": "Comment fonctionne le tailleur à l’hôtel à {y}",
-    "pl": "Jak działa krawiec dojeżdżający do hotelu w {y}",
-    "uk": "Як працює кравець із виїздом до готелю в {y}",
-    "nl": "Hoe werkt de hotelkleermaker in {y}",
-    "ar": "كيف يعمل الخيّاط الذي يأتي إلى الفندق في {y}"
+    "tr": "{y} otele terzi çağırınca ne olur?",
+    "en": "What happens when you call a tailor to your hotel in {y}?",
+    "de": "Was passiert, wenn Sie in {y} einen Schneider ins Hotel rufen?",
+    "ru": "Что происходит, когда вы вызываете портного в отель в {y}?",
+    "es": "¿Qué pasa cuando pide un sastre en su hotel de {y}?",
+    "fr": "Que se passe-t-il quand vous appelez un tailleur à votre hôtel à {y} ?",
+    "pl": "Co się dzieje, gdy wzywasz krawca do hotelu w {y}?",
+    "uk": "Що відбувається, коли ви викликаєте кравця в готель у {y}?",
+    "nl": "Wat gebeurt er als u in {y} een kleermaker naar uw hotel laat komen?",
+    "ar": "ماذا يحدث عندما تطلب خياطاً إلى فندقك في {y}؟"
    },
    "p": {
-    "tr": "Terzi otelinize gelir, ölçü alır, gerekirse kıyafeti atölyeye götürür ve tadilat bitince otelinize teslim eder. Randevu için WhatsApp'tan yazmanız yeterli.",
-    "en": "The tailor comes to your hotel, takes measurements, takes the garment to the workshop if needed and delivers it back when finished. Just message us on WhatsApp to book.",
-    "de": "Der Schneider kommt in Ihr Hotel, nimmt Maß, bringt das Kleidungsstück bei Bedarf ins Atelier und liefert es zurück. Zur Terminvereinbarung schreiben Sie uns per WhatsApp.",
-    "ru": "Портной приезжает в отель, снимает мерки, при необходимости забирает вещь в ателье и возвращает её после работы. Для записи достаточно написать в WhatsApp.",
-    "es": "El sastre va a su hotel, toma medidas, lleva la prenda al taller si hace falta y la devuelve al terminar. Para reservar, escríbanos por WhatsApp.",
-    "fr": "Le tailleur se rend à votre hôtel, prend les mesures, emporte le vêtement à l’atelier si besoin et le rapporte une fois terminé. Pour réserver, écrivez-nous sur WhatsApp.",
-    "pl": "Krawiec przyjeżdża do hotelu, zdejmuje miary, w razie potrzeby zabiera ubranie do pracowni i odwozi je po skończeniu. Aby umówić wizytę, napisz na WhatsApp.",
-    "uk": "Кравець приїздить до готелю, знімає мірки, за потреби забирає річ в ательє й повертає після роботи. Для запису напишіть у WhatsApp.",
-    "nl": "De kleermaker komt naar uw hotel, neemt maat, brengt het kledingstuk indien nodig naar het atelier en levert het terug. Stuur ons voor een afspraak een WhatsApp-bericht.",
-    "ar": "يأتي الخيّاط إلى فندقك ويأخذ المقاسات ويحمل القطعة إلى الورشة عند الحاجة ثم يُعيدها بعد الانتهاء. للحجز راسلنا عبر واتساب."
+    "tr": "WhatsApp'tan otelinizi ve işi yazarsınız. Terzi otele gelir, ölçüyü alır, kıyafeti atölyede yapar ve bitince otele geri getirir.",
+    "en": "You write your hotel and the job on WhatsApp. The tailor comes to the hotel, takes the measurements, does the work in the workshop and brings the garment back.",
+    "de": "Sie schreiben uns Hotel und Arbeit per WhatsApp. Der Schneider kommt ins Hotel, nimmt Maß, erledigt die Arbeit in der Werkstatt und bringt das Stück zurück.",
+    "ru": "Вы пишете в WhatsApp название отеля и задачу. Портной приезжает в отель, снимает мерки, выполняет работу в мастерской и привозит вещь обратно.",
+    "es": "Nos escribe por WhatsApp su hotel y el trabajo. El sastre va al hotel, toma las medidas, hace el trabajo en el taller y le devuelve la prenda.",
+    "fr": "Vous nous écrivez sur WhatsApp votre hôtel et le travail. Le tailleur vient à l'hôtel, prend les mesures, réalise le travail à l'atelier et vous rapporte le vêtement.",
+    "pl": "Piszesz na WhatsAppie nazwę hotelu i zakres pracy. Krawiec przyjeżdża do hotelu, bierze miarę, wykonuje pracę w pracowni i odwozi ubranie.",
+    "uk": "Ви пишете у WhatsApp назву готелю та завдання. Кравець приїжджає в готель, знімає мірки, виконує роботу в майстерні й привозить річ назад.",
+    "nl": "U stuurt ons via WhatsApp uw hotel en het werk. De kleermaker komt naar het hotel, neemt de maten, doet het werk in het atelier en brengt het kledingstuk terug.",
+    "ar": "تكتب لنا عبر واتساب اسم فندقك والعمل المطلوب. يأتي الخياط إلى الفندق ويأخذ المقاسات وينجز العمل في الورشة ثم يعيد القطعة إليك."
    }
   },
   {
    "h": {
     "tr": "Otel alım ve teslim yapıyor musunuz?",
-    "en": "Do you offer hotel pickup and delivery?",
-    "de": "Bieten Sie Abholung und Lieferung im Hotel an?",
-    "ru": "Есть ли забор и доставка в отеле?",
+    "en": "Do you collect from and deliver to hotels?",
+    "de": "Holen Sie im Hotel ab und liefern dorthin zurück?",
+    "ru": "Забираете ли вы вещи из отеля и привозите обратно?",
     "es": "¿Son disponibles la recogida y entrega en el hotel?",
     "fr": "Proposez-vous la prise en charge et la livraison à l’hôtel ?",
     "pl": "Czy odbiór i dostawa w hotelu są dostępne?",
@@ -448,58 +448,58 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
-    "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
-    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
-    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
-    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel están disponibles.",
-    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont assurées.",
-    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są dostępne.",
-    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель доступні.",
-    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel mogelijk.",
-    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق متاح."
+    "tr": "Evet. Konyaaltı, Lara, Belek, Kemer, Side ve çevresindeki otellerden alıp geri getiriyoruz.",
+    "en": "Yes. We collect from and return to hotels in Konyaaltı, Lara, Belek, Kemer, Side and nearby.",
+    "de": "Ja. Wir holen in Hotels in Konyaaltı, Lara, Belek, Kemer, Side und Umgebung ab und bringen zurück.",
+    "ru": "Да. Забираем из отелей в Коньяалты, Ларе, Белеке, Кемере, Сиде и рядом и привозим обратно.",
+    "es": "Sí. Recogemos y devolvemos en hoteles de Konyaaltı, Lara, Belek, Kemer, Side y alrededores.",
+    "fr": "Oui. Nous prenons et rapportons les vêtements dans les hôtels de Konyaaltı, Lara, Belek, Kemer, Side et des environs.",
+    "pl": "Tak. Odbieramy z hoteli i odwozimy do nich w Konyaaltı, Larze, Belek, Kemer, Side i okolicach.",
+    "uk": "Так. Забираємо з готелів і привозимо назад у Коньяалти, Ларі, Белеку, Кемері, Сіде та поруч.",
+    "nl": "Ja. Wij halen op bij en brengen terug naar hotels in Konyaaltı, Lara, Belek, Kemer, Side en omgeving.",
+    "ar": "نعم. نستلم من فنادق كونيالتي ولارا وبيليك وكيمير وسيدا وما حولها ونعيد القطعة إليها."
    }
   },
   {
    "h": {
-    "tr": "Tatilde acil kıyafet tadilatı",
-    "en": "Urgent clothing alterations on holiday",
-    "de": "Eilige Kleideränderungen im Urlaub",
-    "ru": "Срочная подгонка одежды в отпуске",
-    "es": "Arreglos urgentes de ropa en vacaciones",
-    "fr": "Retouches urgentes en vacances",
-    "pl": "Pilne poprawki ubrań na wakacjach",
-    "uk": "Термінова підгонка одягу у відпустці",
-    "nl": "Spoedaanpassingen van kleding op vakantie",
-    "ar": "تعديل الملابس العاجل أثناء العطلة"
+    "tr": "Tatilde kıyafetim bozuldu, yetişir mi?",
+    "en": "My outfit broke on holiday. Can it be ready in time?",
+    "de": "Mein Outfit ist im Urlaub kaputtgegangen. Wird es rechtzeitig fertig?",
+    "ru": "Одежда испортилась в отпуске. Успеете?",
+    "es": "Se me ha estropeado la ropa en vacaciones: ¿llegará a tiempo?",
+    "fr": "Mon vêtement s'est abîmé en vacances : sera-t-il prêt à temps ?",
+    "pl": "Ubranie zniszczyło się na wakacjach. Zdążycie?",
+    "uk": "Одяг зіпсувався у відпустці. Встигнете?",
+    "nl": "Mijn kleding is stukgegaan op vakantie: is het op tijd klaar?",
+    "ar": "تلفت ملابسي في العطلة، هل تلحقون؟"
    },
    "p": {
-    "tr": "Acil tamir ve tadilat 1–2 saatte hazırdır. Düğün, toplantı veya tatil öncesi son dakika paça, fermuar ve bel işleri için WhatsApp'tan yazın.",
-    "en": "Urgent repairs and alterations are ready in 1–2 hours. For last-minute hemming, zipper and waist jobs before a wedding, meeting or trip, message us on WhatsApp.",
-    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig. Für kurzfristiges Kürzen, Reißverschluss und Bund vor Hochzeit, Termin oder Reise schreiben Sie uns per WhatsApp.",
-    "ru": "Срочный ремонт и подгонка готовы за 1–2 часа. Для срочного подшива, молнии и талии перед свадьбой, встречей или поездкой пишите в WhatsApp.",
-    "es": "Los arreglos urgentes están listos en 1–2 horas. Para bajos, cremalleras y cintura de última hora antes de una boda, reunión o viaje, escríbanos por WhatsApp.",
-    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures. Pour un ourlet, une fermeture ou une taille de dernière minute avant un mariage, une réunion ou un voyage, écrivez-nous sur WhatsApp.",
-    "pl": "Pilne naprawy i przeróbki są gotowe w 1–2 godziny. Przy skracaniu, zamku i talii na ostatnią chwilę przed ślubem, spotkaniem lub podróżą napisz na WhatsApp.",
-    "uk": "Термінові ремонт і підгонка готові за 1–2 години. Для термінового підшивання, блискавки й талії перед весіллям, зустріччю чи поїздкою пишіть у WhatsApp.",
-    "nl": "Spoedreparaties en -aanpassingen zijn klaar in 1–2 uur. Voor last-minute zoom, rits en taille voor een bruiloft, vergadering of reis stuurt u een WhatsApp-bericht.",
-    "ar": "التصليحات والتعديلات العاجلة جاهزة خلال ساعة إلى ساعتين. للتقصير والسحّاب والخصر في اللحظة الأخيرة قبل حفل أو اجتماع أو سفر راسلنا عبر واتساب."
+    "tr": "Acil paça, fermuar ve bel işleri 1–2 saatte hazır olur; süre işin durumuna göre değişir. Davet ya da toplantı saatinizi WhatsApp'tan yazın.",
+    "en": "Urgent hem, zipper and waist jobs are ready in 1–2 hours, depending on the job. Tell us the time of your event or meeting on WhatsApp.",
+    "de": "Eilige Arbeiten an Saum, Reißverschluss und Bund sind in 1–2 Stunden fertig, je nach Arbeit. Schreiben Sie uns die Uhrzeit Ihres Termins per WhatsApp.",
+    "ru": "Срочные работы с низом, молнией и поясом готовы за 1–2 часа, в зависимости от работы. Напишите в WhatsApp, к какому времени нужна вещь.",
+    "es": "Los arreglos urgentes de bajos, cremalleras y cintura están listos en 1–2 horas, según el trabajo. Díganos por WhatsApp a qué hora es su evento.",
+    "fr": "Les travaux urgents d'ourlet, de fermeture et de taille sont prêts en 1 à 2 heures, selon le travail. Indiquez-nous sur WhatsApp l'heure de votre événement.",
+    "pl": "Pilne prace przy nogawkach, zamku i pasie są gotowe w 1–2 godziny, zależnie od pracy. Napisz na WhatsAppie, na którą godzinę potrzebujesz ubrania.",
+    "uk": "Термінові роботи з низом, блискавкою та поясом готові за 1–2 години, залежно від роботи. Напишіть у WhatsApp, на котру годину потрібна річ.",
+    "nl": "Spoedwerk aan zoom, rits en taille is klaar in 1–2 uur, afhankelijk van het werk. Laat ons via WhatsApp weten hoe laat uw afspraak is.",
+    "ar": "الأعمال المستعجلة للأطراف والسحاب والخصر جاهزة خلال 1–2 ساعة، حسب العمل. اكتب لنا عبر واتساب موعد مناسبتك."
    }
   }
  ],
  "terzi": [
   {
    "h": {
-    "tr": "{y} terzi hizmetleri: paça, fermuar, bel ve elbise",
-    "en": "Tailor services in {y}: hemming, zippers, waist and dresses",
-    "de": "Schneiderservice in {y}: Saum, Reißverschluss, Bund und Kleider",
-    "ru": "Услуги портного в {y}: подшив, молнии, талия и платья",
-    "es": "Servicios de sastrería en {y}: bajos, cremalleras, cintura y vestidos",
-    "fr": "Services de couture à {y} : ourlets, fermetures, taille et robes",
-    "pl": "Usługi krawieckie w {y}: nogawki, zamki, talia i suknie",
-    "uk": "Послуги кравця в {y}: підшивання, блискавки, талія і сукні",
-    "nl": "Kleermakersdiensten in {y}: zoom, ritsen, taille en jurken",
-    "ar": "خدمات الخياطة في {y}: التقصير والسحّاب والخصر والفساتين"
+    "tr": "{y} terzide neler yaptırabilirim?",
+    "en": "What can a tailor do for me in {y}?",
+    "de": "Was kann ein Schneider in {y} für mich tun?",
+    "ru": "Что может сделать портной в {y}?",
+    "es": "¿Qué puede hacer un sastre por mí en {y}?",
+    "fr": "Que peut faire un tailleur pour moi à {y} ?",
+    "pl": "Co może dla mnie zrobić krawiec w {y}?",
+    "uk": "Що може зробити для мене кравець у {y}?",
+    "nl": "Wat kan een kleermaker voor mij doen in {y}?",
+    "ar": "ماذا يمكن أن يفعل الخياط لي في {y}؟"
    },
    "p": {
     "tr": "{y} bölgesinde paça kısaltma, fermuar değişimi, bel daraltma, gelinlik ve abiye tadilatı ile özel dikim yapılır. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır.",
@@ -516,44 +516,44 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Terzi hizmeti için WhatsApp'tan fotoğrafla fiyat",
-    "en": "Get a tailor quote by photo on WhatsApp",
-    "de": "Schneider-Preis per Foto über WhatsApp",
-    "ru": "Цена портного по фото в WhatsApp",
-    "es": "Presupuesto de sastrería por foto en WhatsApp",
-    "fr": "Devis couturier par photo sur WhatsApp",
-    "pl": "Wycena krawiecka ze zdjęcia na WhatsApp",
-    "uk": "Ціна кравця за фото у WhatsApp",
-    "nl": "Kleermakersprijs via foto op WhatsApp",
-    "ar": "سعر الخيّاط عبر صورة على واتساب"
+    "tr": "Gelmeden fiyat öğrenmek",
+    "en": "Getting a price before you come",
+    "de": "Preis erfahren, bevor Sie kommen",
+    "ru": "Узнать цену заранее",
+    "es": "Saber el precio antes de venir",
+    "fr": "Connaître le prix avant de venir",
+    "pl": "Poznaj cenę, zanim przyjdziesz",
+    "uk": "Дізнатися ціну заздалегідь",
+    "nl": "De prijs weten voordat u komt",
+    "ar": "اعرف السعر قبل أن تأتي"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını ve yapılacak işi WhatsApp'tan gönderin; net fiyat ve teslim süresini söyleyelim. Her gün 08:00–23:00 yazabilirsiniz.",
-    "en": "Send a photo of the garment and the work you need on WhatsApp, and we will give you the exact price and turnaround. You can write every day from 08:00 to 23:00.",
-    "de": "Senden Sie ein Foto des Kleidungsstücks und die gewünschte Arbeit per WhatsApp, wir nennen Preis und Dauer. Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
-    "ru": "Пришлите в WhatsApp фото вещи и нужную работу, и мы назовём точную цену и срок. Писать можно каждый день с 08:00 до 23:00.",
-    "es": "Envíe por WhatsApp una foto de la prenda y el arreglo que necesita, y le diremos el precio y el plazo exactos. Puede escribir todos los días de 08:00 a 23:00.",
-    "fr": "Envoyez sur WhatsApp une photo du vêtement et le travail souhaité, nous vous donnerons le prix et le délai exacts. Vous pouvez écrire tous les jours de 08h00 à 23h00.",
-    "pl": "Wyślij przez WhatsApp zdjęcie ubrania i opis pracy, a podamy dokładną cenę i czas. Możesz pisać codziennie od 08:00 do 23:00.",
-    "uk": "Надішліть у WhatsApp фото речі та потрібну роботу, і ми назвемо точну ціну й строк. Писати можна щодня з 08:00 до 23:00.",
-    "nl": "Stuur via WhatsApp een foto van het kledingstuk en het gewenste werk, dan noemen we de exacte prijs en doorlooptijd. U kunt elke dag van 08:00 tot 23:00 schrijven.",
-    "ar": "أرسل عبر واتساب صورة القطعة والعمل المطلوب لنخبرك بالسعر الدقيق والمدة. يمكنك مراسلتنا يوميًا من 08:00 إلى 23:00."
+    "tr": "Kıyafeti fotoğraflayıp ne istediğinizi WhatsApp'tan yazın. Net fiyatı ve ne zaman hazır olacağını cevaplarız; her gün 08:00–23:00 açığız.",
+    "en": "Photograph the garment and tell us what you need on WhatsApp. We reply with the exact price and when it will be ready; we are open every day 08:00–23:00.",
+    "de": "Fotografieren Sie das Kleidungsstück und schreiben Sie uns per WhatsApp, was Sie brauchen. Wir antworten mit genauem Preis und Termin; geöffnet täglich 08:00–23:00.",
+    "ru": "Сфотографируйте вещь и напишите в WhatsApp, что нужно сделать. Ответим точной ценой и сроком; работаем ежедневно 08:00–23:00.",
+    "es": "Fotografíe la prenda y escríbanos por WhatsApp qué necesita. Le respondemos con el precio exacto y cuándo estará lista; abrimos todos los días de 08:00 a 23:00.",
+    "fr": "Photographiez le vêtement et écrivez-nous sur WhatsApp ce qu'il vous faut. Nous répondons avec le prix exact et la date de disponibilité ; ouvert tous les jours de 08:00 à 23:00.",
+    "pl": "Zrób zdjęcie ubrania i napisz na WhatsAppie, czego potrzebujesz. Odpowiemy, podając dokładną cenę i termin; pracujemy codziennie 08:00–23:00.",
+    "uk": "Сфотографуйте річ і напишіть у WhatsApp, що потрібно зробити. Відповімо точною ціною та строком; працюємо щодня 08:00–23:00.",
+    "nl": "Maak een foto van het kledingstuk en stuur via WhatsApp wat u nodig heeft. Wij antwoorden met de exacte prijs en wanneer het klaar is; elke dag open van 08:00 tot 23:00.",
+    "ar": "صوّر القطعة واكتب لنا عبر واتساب ما تحتاجه. نرد بالسعر الدقيق وموعد الجاهزية؛ نعمل يومياً من 08:00 إلى 23:00."
    }
   }
  ],
  "fiyat": [
   {
    "h": {
-    "tr": "Terzi fiyatları {y}: paça, fermuar, bel, gelinlik",
-    "en": "Tailor prices in {y}: hemming, zipper, waist, wedding dress",
-    "de": "Schneiderpreise in {y}: Saum, Reißverschluss, Bund, Brautkleid",
-    "ru": "Цены портного в {y}: подшив, молния, талия, свадебное платье",
-    "es": "Precios de sastrería en {y}: bajos, cremallera, cintura, novia",
-    "fr": "Tarifs de couture à {y} : ourlet, fermeture, taille, mariée",
-    "pl": "Cennik krawiecki w {y}: nogawki, zamek, talia, suknia ślubna",
-    "uk": "Ціни кравця в {y}: підшивання, блискавка, талія, весільна сукня",
-    "nl": "Kleermakersprijzen in {y}: zoom, rits, taille, bruidsjurk",
-    "ar": "أسعار الخياطة في {y}: التقصير والسحّاب والخصر وفستان الزفاف"
+    "tr": "{y} terzi fiyat listesi",
+    "en": "Tailor price list for {y}",
+    "de": "Schneider-Preisliste für {y}",
+    "ru": "Прайс-лист портного в {y}",
+    "es": "Lista de precios del sastre en {y}",
+    "fr": "Tarifs du tailleur à {y}",
+    "pl": "Cennik krawca w {y}",
+    "uk": "Прайс-лист кравця в {y}",
+    "nl": "Prijslijst kleermaker in {y}",
+    "ar": "قائمة أسعار الخياط في {y}"
    },
    "p": {
     "tr": "Paça kısaltma ve bel daraltma ₺200'den, fermuar değişimi ₺300'den, gelinlik, abiye ve elbise tadilatı fotoğrafa veya işin detayına göre fiyatlanır.",
@@ -570,44 +570,44 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Kesin fiyat nasıl belirlenir?",
-    "en": "How is the exact tailoring price decided?",
-    "de": "Wie wird der genaue Schneiderpreis bestimmt?",
-    "ru": "Как определяется точная цена?",
-    "es": "¿Cómo se fija el precio exacto?",
-    "fr": "Comment le prix exact est-il fixé ?",
-    "pl": "Jak ustalana jest dokładna cena?",
-    "uk": "Як визначається точна ціна?",
-    "nl": "Hoe wordt de exacte prijs bepaald?",
-    "ar": "كيف يُحدَّد السعر الدقيق؟"
+    "tr": "Listedeki fiyat neden 'başlangıç' fiyatı?",
+    "en": "Why are the listed prices 'from' prices?",
+    "de": "Warum sind die Preise 'ab'-Preise?",
+    "ru": "Почему цены указаны «от»?",
+    "es": "¿Por qué los precios de la lista son «desde»?",
+    "fr": "Pourquoi les prix affichés sont-ils des prix « à partir de » ?",
+    "pl": "Dlaczego ceny w cenniku są cenami „od”?",
+    "uk": "Чому ціни в переліку вказано «від»?",
+    "nl": "Waarom zijn de prijzen in de lijst vanafprijzen?",
+    "ar": "لماذا الأسعار في القائمة «تبدأ من»؟"
    },
    "p": {
-    "tr": "Fiyat; kumaşa, yapılacak işe ve aciliyete göre değişir. Fotoğrafı WhatsApp'tan gönderdiğinizde işe başlamadan önce net fiyatı öğrenirsiniz.",
-    "en": "The price varies with the fabric, the work and the urgency. When you send a photo on WhatsApp, you learn the exact price before any work begins.",
-    "de": "Der Preis hängt von Stoff, Arbeit und Dringlichkeit ab. Wenn Sie ein Foto per WhatsApp senden, erfahren Sie den genauen Preis vor Arbeitsbeginn.",
-    "ru": "Цена зависит от ткани, вида работы и срочности. Если прислать фото в WhatsApp, вы узнаете точную цену до начала работы.",
-    "es": "El precio varía según la tela, el trabajo y la urgencia. Si envía una foto por WhatsApp, conocerá el precio exacto antes de empezar.",
-    "fr": "Le prix varie selon le tissu, le travail et l’urgence. En envoyant une photo par WhatsApp, vous connaissez le prix exact avant le début des travaux.",
-    "pl": "Cena zależy od tkaniny, rodzaju pracy i pilności. Gdy wyślesz zdjęcie przez WhatsApp, poznasz dokładną cenę przed rozpoczęciem prac.",
-    "uk": "Ціна залежить від тканини, виду роботи й терміновості. Якщо надіслати фото у WhatsApp, ви дізнаєтеся точну ціну до початку роботи.",
-    "nl": "De prijs hangt af van stof, werk en spoed. Als u een foto via WhatsApp stuurt, kent u de exacte prijs vóór het werk begint.",
-    "ar": "يختلف السعر حسب القماش والعمل المطلوب والاستعجال. عند إرسال صورة عبر واتساب تعرف السعر الدقيق قبل بدء العمل."
+    "tr": "Çünkü kumaş, işin kapsamı ve aciliyet fiyatı değiştirir. Fotoğrafı gönderdiğinizde net fiyatı işe başlamadan önce yazarız; sürpriz olmaz.",
+    "en": "Because fabric, the scope of the job and urgency change the price. Once you send a photo, we give the exact price before any work begins, so there are no surprises.",
+    "de": "Weil Stoff, Umfang und Dringlichkeit den Preis verändern. Nach Ihrem Foto nennen wir den genauen Preis vor Arbeitsbeginn; Überraschungen gibt es nicht.",
+    "ru": "Потому что на цену влияют ткань, объём работы и срочность. Получив фото, называем точную цену до начала работы — без сюрпризов.",
+    "es": "Porque la tela, el alcance del trabajo y la urgencia cambian el precio. Con la foto le damos el precio exacto antes de empezar, sin sorpresas.",
+    "fr": "Parce que le tissu, l'ampleur du travail et l'urgence font varier le prix. Avec la photo, nous donnons le prix exact avant de commencer, sans surprise.",
+    "pl": "Bo tkanina, zakres pracy i pilność zmieniają cenę. Po otrzymaniu zdjęcia podajemy dokładną cenę przed rozpoczęciem pracy, bez niespodzianek.",
+    "uk": "Бо на ціну впливають тканина, обсяг роботи й терміновість. Отримавши фото, називаємо точну ціну до початку роботи — без несподіванок.",
+    "nl": "Omdat stof, omvang van het werk en spoed de prijs veranderen. Na uw foto noemen wij de exacte prijs voordat wij beginnen, zonder verrassingen.",
+    "ar": "لأن القماش وحجم العمل والاستعجال تغيّر السعر. بعد استلام الصورة نخبرك بالسعر الدقيق قبل بدء العمل، دون مفاجآت."
    }
   }
  ],
  "hizmet": [
   {
    "h": {
-    "tr": "{y} terzi: teslim süresi ve fiyat",
-    "en": "Tailor in {y}: turnaround and price",
-    "de": "Schneider in {y}: Dauer und Preis",
-    "ru": "Портной в {y}: срок и цена",
-    "es": "Sastre en {y}: plazo y precio",
-    "fr": "Couturier à {y} : délai et prix",
-    "pl": "Krawiec w {y}: czas i cena",
-    "uk": "Кравець у {y}: строк і ціна",
-    "nl": "Kleermaker in {y}: doorlooptijd en prijs",
-    "ar": "خيّاط في {y}: المدة والسعر"
+    "tr": "{y} terzi: ne zaman hazır, kaç TL?",
+    "en": "Tailor in {y}: when is it ready and what does it cost?",
+    "de": "Schneider in {y}: Wann fertig, was kostet es?",
+    "ru": "Портной в {y}: когда готово и сколько стоит?",
+    "es": "Sastre en {y}: cuándo está listo y cuánto cuesta",
+    "fr": "Tailleur à {y} : quand est-ce prêt et combien ça coûte ?",
+    "pl": "Krawiec w {y}: kiedy gotowe i ile kosztuje?",
+    "uk": "Кравець у {y}: коли готово і скільки коштує?",
+    "nl": "Kleermaker in {y}: wanneer klaar en wat kost het?",
+    "ar": "خياط في {y}: متى يجهز وكم يكلّف؟"
    },
    "p": {
     "tr": "Acil tamir ve tadilat 1–2 saatte, normal işler aynı gün teslim edilir. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır.",
@@ -624,44 +624,44 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Fotoğrafla fiyat al, otelinize teslim",
-    "en": "Get a price by photo, delivered to your hotel",
-    "de": "Preis per Foto, Lieferung ins Hotel",
-    "ru": "Цена по фото, доставка в отель",
-    "es": "Precio por foto, entrega en su hotel",
-    "fr": "Prix par photo, livraison à l’hôtel",
-    "pl": "Cena ze zdjęcia, dostawa do hotelu",
-    "uk": "Ціна за фото, доставка в готель",
-    "nl": "Prijs via foto, levering aan uw hotel",
-    "ar": "السعر عبر صورة والتسليم إلى فندقك"
+    "tr": "Fotoğraf gönderin, otelinizden alalım",
+    "en": "Send a photo, we collect from your hotel",
+    "de": "Foto schicken, wir holen im Hotel ab",
+    "ru": "Пришлите фото — заберём из отеля",
+    "es": "Envíe una foto y recogemos en su hotel",
+    "fr": "Envoyez une photo, nous passons à votre hôtel",
+    "pl": "Wyślij zdjęcie, odbierzemy z hotelu",
+    "uk": "Надішліть фото — заберемо з готелю",
+    "nl": "Stuur een foto, wij halen op bij uw hotel",
+    "ar": "أرسل صورة ونستلم من فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
-    "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
-    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
-    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
-    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel están disponibles; puede escribir todos los días de 08:00 a 23:00.",
-    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont assurées ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
-    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są dostępne; możesz pisać codziennie od 08:00 do 23:00.",
-    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель доступні; писати можна щодня з 08:00 до 23:00.",
-    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel mogelijk; u kunt elke dag van 08:00 tot 23:00 schrijven.",
-    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق متاح؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
+    "tr": "Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Hizmet verdiğimiz bölgelerde kıyafeti otelinizden alıp geri getiriyoruz; her gün 08:00–23:00.",
+    "en": "Send a photo on WhatsApp and get the price. In the areas we serve we collect the garment from your hotel and bring it back; every day 08:00–23:00.",
+    "de": "Foto per WhatsApp schicken und Preis erfahren. In unseren Gebieten holen wir das Kleidungsstück in Ihrem Hotel ab und bringen es zurück; täglich 08:00–23:00.",
+    "ru": "Пришлите фото в WhatsApp и узнайте цену. В районах, где мы работаем, забираем вещь из отеля и привозим обратно; ежедневно 08:00–23:00.",
+    "es": "Envíe una foto por WhatsApp y conozca el precio. En las zonas donde trabajamos recogemos la prenda en su hotel y se la devolvemos; todos los días de 08:00 a 23:00.",
+    "fr": "Envoyez une photo sur WhatsApp et obtenez le prix. Dans les zones que nous desservons, nous prenons le vêtement à votre hôtel et le rapportons ; tous les jours de 08:00 à 23:00.",
+    "pl": "Wyślij zdjęcie na WhatsAppie i poznaj cenę. W rejonach, które obsługujemy, odbieramy ubranie z hotelu i odwozimy je; codziennie 08:00–23:00.",
+    "uk": "Надішліть фото у WhatsApp і дізнайтеся ціну. У районах, де ми працюємо, забираємо річ із готелю та привозимо назад; щодня 08:00–23:00.",
+    "nl": "Stuur een foto via WhatsApp en ontvang de prijs. In de gebieden waar wij werken halen wij het kledingstuk op bij uw hotel en brengen het terug; elke dag van 08:00 tot 23:00.",
+    "ar": "أرسل صورة عبر واتساب واعرف السعر. في المناطق التي نخدمها نستلم القطعة من فندقك ونعيدها؛ يومياً من 08:00 إلى 23:00."
    }
   }
  ],
  "genel": [
   {
    "h": {
-    "tr": "{y} terzi: teslim süresi ve fiyat",
-    "en": "Tailor in {y}: turnaround and price",
-    "de": "Schneider in {y}: Dauer und Preis",
-    "ru": "Портной в {y}: срок и цена",
-    "es": "Sastre en {y}: plazo y precio",
-    "fr": "Couturier à {y} : délai et prix",
-    "pl": "Krawiec w {y}: czas i cena",
-    "uk": "Кравець у {y}: строк і ціна",
-    "nl": "Kleermaker in {y}: doorlooptijd en prijs",
-    "ar": "خيّاط في {y}: المدة والسعر"
+    "tr": "{y} terzi: ne zaman hazır, kaç TL?",
+    "en": "Tailor in {y}: when is it ready and what does it cost?",
+    "de": "Schneider in {y}: Wann fertig, was kostet es?",
+    "ru": "Портной в {y}: когда готово и сколько стоит?",
+    "es": "Sastre en {y}: cuándo está listo y cuánto cuesta",
+    "fr": "Tailleur à {y} : quand est-ce prêt et combien ça coûte ?",
+    "pl": "Krawiec w {y}: kiedy gotowe i ile kosztuje?",
+    "uk": "Кравець у {y}: коли готово і скільки коштує?",
+    "nl": "Kleermaker in {y}: wanneer klaar en wat kost het?",
+    "ar": "خياط في {y}: متى يجهز وكم يكلّف؟"
    },
    "p": {
     "tr": "Acil tamir ve tadilat 1–2 saatte, normal işler aynı gün teslim edilir. Fiyatlar paça ve bel ₺200'den, fermuar ₺300'den, gelinlik ve abiye tadilatı fotoğrafa veya işin detayına göre fiyatlanır.",
@@ -678,64 +678,64 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
   },
   {
    "h": {
-    "tr": "Fotoğrafla fiyat al, otelinize teslim",
-    "en": "Get a price by photo, delivered to your hotel",
-    "de": "Preis per Foto, Lieferung ins Hotel",
-    "ru": "Цена по фото, доставка в отель",
-    "es": "Precio por foto, entrega en su hotel",
-    "fr": "Prix par photo, livraison à l’hôtel",
-    "pl": "Cena ze zdjęcia, dostawa do hotelu",
-    "uk": "Ціна за фото, доставка в готель",
-    "nl": "Prijs via foto, levering aan uw hotel",
-    "ar": "السعر عبر صورة والتسليم إلى فندقك"
+    "tr": "Fotoğraf gönderin, otelinizden alalım",
+    "en": "Send a photo, we collect from your hotel",
+    "de": "Foto schicken, wir holen im Hotel ab",
+    "ru": "Пришлите фото — заберём из отеля",
+    "es": "Envíe una foto y recogemos en su hotel",
+    "fr": "Envoyez une photo, nous passons à votre hôtel",
+    "pl": "Wyślij zdjęcie, odbierzemy z hotelu",
+    "uk": "Надішліть фото — заберемо з готелю",
+    "nl": "Stuur een foto, wij halen op bij uw hotel",
+    "ar": "أرسل صورة ونستلم من فندقك"
    },
    "p": {
-    "tr": "Kıyafetin fotoğrafını WhatsApp'tan gönderin. Hizmet verilen bölgelerde otel alım ve teslimi yapılır; her gün 08:00–23:00 yazabilirsiniz.",
-    "en": "Send a photo of the garment on WhatsApp. We offer hotel pickup and delivery in the areas we serve; you can write every day from 08:00 to 23:00.",
-    "de": "Senden Sie ein Foto des Kleidungsstücks per WhatsApp. In unseren Servicegebieten bieten wir Abholung und Lieferung im Hotel an; Sie erreichen uns täglich von 08:00 bis 23:00 Uhr.",
-    "ru": "Пришлите фото вещи в WhatsApp. В районах обслуживания забор и доставка в отель доступны; писать можно каждый день с 08:00 до 23:00.",
-    "es": "Envíe una foto de la prenda por WhatsApp. En las zonas de servicio, la recogida y la entrega en el hotel están disponibles; puede escribir todos los días de 08:00 a 23:00.",
-    "fr": "Envoyez une photo du vêtement par WhatsApp. Dans les zones desservies, la prise en charge et la livraison à l’hôtel sont assurées ; vous pouvez écrire tous les jours de 08h00 à 23h00.",
-    "pl": "Wyślij zdjęcie ubrania przez WhatsApp. W obsługiwanych rejonach odbiór i dostawa w hotelu są dostępne; możesz pisać codziennie od 08:00 do 23:00.",
-    "uk": "Надішліть фото речі у WhatsApp. У районах обслуговування забір і доставка в готель доступні; писати можна щодня з 08:00 до 23:00.",
-    "nl": "Stuur een foto van het kledingstuk via WhatsApp. In de gebieden waar we werken zijn ophalen en bezorgen in het hotel mogelijk; u kunt elke dag van 08:00 tot 23:00 schrijven.",
-    "ar": "أرسل صورة القطعة عبر واتساب. في المناطق التي نخدمها الاستلام والتسليم في الفندق متاح؛ يمكنك المراسلة يوميًا من 08:00 إلى 23:00."
+    "tr": "Fotoğrafı WhatsApp'tan gönderin, fiyatı öğrenin. Hizmet verdiğimiz bölgelerde kıyafeti otelinizden alıp geri getiriyoruz; her gün 08:00–23:00.",
+    "en": "Send a photo on WhatsApp and get the price. In the areas we serve we collect the garment from your hotel and bring it back; every day 08:00–23:00.",
+    "de": "Foto per WhatsApp schicken und Preis erfahren. In unseren Gebieten holen wir das Kleidungsstück in Ihrem Hotel ab und bringen es zurück; täglich 08:00–23:00.",
+    "ru": "Пришлите фото в WhatsApp и узнайте цену. В районах, где мы работаем, забираем вещь из отеля и привозим обратно; ежедневно 08:00–23:00.",
+    "es": "Envíe una foto por WhatsApp y conozca el precio. En las zonas donde trabajamos recogemos la prenda en su hotel y se la devolvemos; todos los días de 08:00 a 23:00.",
+    "fr": "Envoyez une photo sur WhatsApp et obtenez le prix. Dans les zones que nous desservons, nous prenons le vêtement à votre hôtel et le rapportons ; tous les jours de 08:00 à 23:00.",
+    "pl": "Wyślij zdjęcie na WhatsAppie i poznaj cenę. W rejonach, które obsługujemy, odbieramy ubranie z hotelu i odwozimy je; codziennie 08:00–23:00.",
+    "uk": "Надішліть фото у WhatsApp і дізнайтеся ціну. У районах, де ми працюємо, забираємо річ із готелю та привозимо назад; щодня 08:00–23:00.",
+    "nl": "Stuur een foto via WhatsApp en ontvang de prijs. In de gebieden waar wij werken halen wij het kledingstuk op bij uw hotel en brengen het terug; elke dag van 08:00 tot 23:00.",
+    "ar": "أرسل صورة عبر واتساب واعرف السعر. في المناطق التي نخدمها نستلم القطعة من فندقك ونعيدها؛ يومياً من 08:00 إلى 23:00."
    }
   }
  ],
  "bolge": [
   {
    "h": {
-    "tr": "{y} otele gelen terzi nasıl çalışır?",
-    "en": "How does the hotel tailor in {y} work?",
-    "de": "So funktioniert der Hotel-Schneider in {y}",
-    "ru": "Как работает портной с выездом в отель в {y}",
-    "es": "Cómo funciona el sastre a hoteles en {y}",
-    "fr": "Comment fonctionne le tailleur à l’hôtel à {y}",
-    "pl": "Jak działa krawiec dojeżdżający do hotelu w {y}",
-    "uk": "Як працює кравець із виїздом до готелю в {y}",
-    "nl": "Hoe werkt de hotelkleermaker in {y}",
-    "ar": "كيف يعمل الخيّاط الذي يأتي إلى الفندق في {y}"
+    "tr": "{y} otele terzi çağırınca ne olur?",
+    "en": "What happens when you call a tailor to your hotel in {y}?",
+    "de": "Was passiert, wenn Sie in {y} einen Schneider ins Hotel rufen?",
+    "ru": "Что происходит, когда вы вызываете портного в отель в {y}?",
+    "es": "¿Qué pasa cuando pide un sastre en su hotel de {y}?",
+    "fr": "Que se passe-t-il quand vous appelez un tailleur à votre hôtel à {y} ?",
+    "pl": "Co się dzieje, gdy wzywasz krawca do hotelu w {y}?",
+    "uk": "Що відбувається, коли ви викликаєте кравця в готель у {y}?",
+    "nl": "Wat gebeurt er als u in {y} een kleermaker naar uw hotel laat komen?",
+    "ar": "ماذا يحدث عندما تطلب خياطاً إلى فندقك في {y}؟"
    },
    "p": {
-    "tr": "Terzi otelinize gelir, ölçü alır, gerekirse kıyafeti atölyeye götürür ve tadilat bitince otelinize teslim eder. Randevu için WhatsApp'tan yazmanız yeterli.",
-    "en": "The tailor comes to your hotel, takes measurements, takes the garment to the workshop if needed and delivers it back when finished. Just message us on WhatsApp to book.",
-    "de": "Der Schneider kommt in Ihr Hotel, nimmt Maß, bringt das Kleidungsstück bei Bedarf ins Atelier und liefert es zurück. Zur Terminvereinbarung schreiben Sie uns per WhatsApp.",
-    "ru": "Портной приезжает в отель, снимает мерки, при необходимости забирает вещь в ателье и возвращает её после работы. Для записи достаточно написать в WhatsApp.",
-    "es": "El sastre va a su hotel, toma medidas, lleva la prenda al taller si hace falta y la devuelve al terminar. Para reservar, escríbanos por WhatsApp.",
-    "fr": "Le tailleur se rend à votre hôtel, prend les mesures, emporte le vêtement à l’atelier si besoin et le rapporte une fois terminé. Pour réserver, écrivez-nous sur WhatsApp.",
-    "pl": "Krawiec przyjeżdża do hotelu, zdejmuje miary, w razie potrzeby zabiera ubranie do pracowni i odwozi je po skończeniu. Aby umówić wizytę, napisz na WhatsApp.",
-    "uk": "Кравець приїздить до готелю, знімає мірки, за потреби забирає річ в ательє й повертає після роботи. Для запису напишіть у WhatsApp.",
-    "nl": "De kleermaker komt naar uw hotel, neemt maat, brengt het kledingstuk indien nodig naar het atelier en levert het terug. Stuur ons voor een afspraak een WhatsApp-bericht.",
-    "ar": "يأتي الخيّاط إلى فندقك ويأخذ المقاسات ويحمل القطعة إلى الورشة عند الحاجة ثم يُعيدها بعد الانتهاء. للحجز راسلنا عبر واتساب."
+    "tr": "WhatsApp'tan otelinizi ve işi yazarsınız. Terzi otele gelir, ölçüyü alır, kıyafeti atölyede yapar ve bitince otele geri getirir.",
+    "en": "You write your hotel and the job on WhatsApp. The tailor comes to the hotel, takes the measurements, does the work in the workshop and brings the garment back.",
+    "de": "Sie schreiben uns Hotel und Arbeit per WhatsApp. Der Schneider kommt ins Hotel, nimmt Maß, erledigt die Arbeit in der Werkstatt und bringt das Stück zurück.",
+    "ru": "Вы пишете в WhatsApp название отеля и задачу. Портной приезжает в отель, снимает мерки, выполняет работу в мастерской и привозит вещь обратно.",
+    "es": "Nos escribe por WhatsApp su hotel y el trabajo. El sastre va al hotel, toma las medidas, hace el trabajo en el taller y le devuelve la prenda.",
+    "fr": "Vous nous écrivez sur WhatsApp votre hôtel et le travail. Le tailleur vient à l'hôtel, prend les mesures, réalise le travail à l'atelier et vous rapporte le vêtement.",
+    "pl": "Piszesz na WhatsAppie nazwę hotelu i zakres pracy. Krawiec przyjeżdża do hotelu, bierze miarę, wykonuje pracę w pracowni i odwozi ubranie.",
+    "uk": "Ви пишете у WhatsApp назву готелю та завдання. Кравець приїжджає в готель, знімає мірки, виконує роботу в майстерні й привозить річ назад.",
+    "nl": "U stuurt ons via WhatsApp uw hotel en het werk. De kleermaker komt naar het hotel, neemt de maten, doet het werk in het atelier en brengt het kledingstuk terug.",
+    "ar": "تكتب لنا عبر واتساب اسم فندقك والعمل المطلوب. يأتي الخياط إلى الفندق ويأخذ المقاسات وينجز العمل في الورشة ثم يعيد القطعة إليك."
    }
   },
   {
    "h": {
     "tr": "Otel alım ve teslim yapıyor musunuz?",
-    "en": "Do you offer hotel pickup and delivery?",
-    "de": "Bieten Sie Abholung und Lieferung im Hotel an?",
-    "ru": "Есть ли забор и доставка в отеле?",
+    "en": "Do you collect from and deliver to hotels?",
+    "de": "Holen Sie im Hotel ab und liefern dorthin zurück?",
+    "ru": "Забираете ли вы вещи из отеля и привозите обратно?",
     "es": "¿Son disponibles la recogida y entrega en el hotel?",
     "fr": "Proposez-vous la prise en charge et la livraison à l’hôtel ?",
     "pl": "Czy odbiór i dostawa w hotelu są dostępne?",
@@ -744,42 +744,42 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "هل الاستلام والتسليم في الفندق متاح؟"
    },
    "p": {
-    "tr": "Hizmet verilen bölgelerde (Konyaaltı, Lara, Belek, Kemer, Side ve çevresi) otel alım ve teslimi yapılır.",
-    "en": "We offer hotel pickup and delivery in the areas we serve (Konyaaltı, Lara, Belek, Kemer, Side and surroundings).",
-    "de": "In unseren Servicegebieten (Konyaaltı, Lara, Belek, Kemer, Side und Umgebung) bieten wir Abholung und Lieferung im Hotel an.",
-    "ru": "В районах обслуживания (Коньяалты, Лара, Белек, Кемер, Сиде и окрестности) забор и доставка в отель доступны.",
-    "es": "En las zonas donde damos servicio (Konyaaltı, Lara, Belek, Kemer, Side y alrededores), la recogida y la entrega en el hotel están disponibles.",
-    "fr": "Dans les zones desservies (Konyaaltı, Lara, Belek, Kemer, Side et alentours), la prise en charge et la livraison à l’hôtel sont assurées.",
-    "pl": "W obsługiwanych rejonach (Konyaaltı, Lara, Belek, Kemer, Side i okolice) odbiór i dostawa w hotelu są dostępne.",
-    "uk": "У районах обслуговування (Коньяалти, Лара, Белек, Кемер, Сіде та околиці) забір і доставка в готель доступні.",
-    "nl": "In de gebieden waar we werken (Konyaaltı, Lara, Belek, Kemer, Side en omgeving) zijn ophalen en bezorgen in het hotel mogelijk.",
-    "ar": "في المناطق التي نخدمها (كونيالتي، لارا، بلك، كمر، سيدي والمناطق المحيطة) الاستلام والتسليم في الفندق متاح."
+    "tr": "Evet. Konyaaltı, Lara, Belek, Kemer, Side ve çevresindeki otellerden alıp geri getiriyoruz.",
+    "en": "Yes. We collect from and return to hotels in Konyaaltı, Lara, Belek, Kemer, Side and nearby.",
+    "de": "Ja. Wir holen in Hotels in Konyaaltı, Lara, Belek, Kemer, Side und Umgebung ab und bringen zurück.",
+    "ru": "Да. Забираем из отелей в Коньяалты, Ларе, Белеке, Кемере, Сиде и рядом и привозим обратно.",
+    "es": "Sí. Recogemos y devolvemos en hoteles de Konyaaltı, Lara, Belek, Kemer, Side y alrededores.",
+    "fr": "Oui. Nous prenons et rapportons les vêtements dans les hôtels de Konyaaltı, Lara, Belek, Kemer, Side et des environs.",
+    "pl": "Tak. Odbieramy z hoteli i odwozimy do nich w Konyaaltı, Larze, Belek, Kemer, Side i okolicach.",
+    "uk": "Так. Забираємо з готелів і привозимо назад у Коньяалти, Ларі, Белеку, Кемері, Сіде та поруч.",
+    "nl": "Ja. Wij halen op bij en brengen terug naar hotels in Konyaaltı, Lara, Belek, Kemer, Side en omgeving.",
+    "ar": "نعم. نستلم من فنادق كونيالتي ولارا وبيليك وكيمير وسيدا وما حولها ونعيد القطعة إليها."
    }
   },
   {
    "h": {
-    "tr": "Tatilde acil kıyafet tadilatı",
-    "en": "Urgent clothing alterations on holiday",
-    "de": "Eilige Kleideränderungen im Urlaub",
-    "ru": "Срочная подгонка одежды в отпуске",
-    "es": "Arreglos urgentes de ropa en vacaciones",
-    "fr": "Retouches urgentes en vacances",
-    "pl": "Pilne poprawki ubrań na wakacjach",
-    "uk": "Термінова підгонка одягу у відпустці",
-    "nl": "Spoedaanpassingen van kleding op vakantie",
-    "ar": "تعديل الملابس العاجل أثناء العطلة"
+    "tr": "Tatilde kıyafetim bozuldu, yetişir mi?",
+    "en": "My outfit broke on holiday. Can it be ready in time?",
+    "de": "Mein Outfit ist im Urlaub kaputtgegangen. Wird es rechtzeitig fertig?",
+    "ru": "Одежда испортилась в отпуске. Успеете?",
+    "es": "Se me ha estropeado la ropa en vacaciones: ¿llegará a tiempo?",
+    "fr": "Mon vêtement s'est abîmé en vacances : sera-t-il prêt à temps ?",
+    "pl": "Ubranie zniszczyło się na wakacjach. Zdążycie?",
+    "uk": "Одяг зіпсувався у відпустці. Встигнете?",
+    "nl": "Mijn kleding is stukgegaan op vakantie: is het op tijd klaar?",
+    "ar": "تلفت ملابسي في العطلة، هل تلحقون؟"
    },
    "p": {
-    "tr": "Acil tamir ve tadilat 1–2 saatte hazırdır. Düğün, toplantı veya tatil öncesi son dakika paça, fermuar ve bel işleri için WhatsApp'tan yazın.",
-    "en": "Urgent repairs and alterations are ready in 1–2 hours. For last-minute hemming, zipper and waist jobs before a wedding, meeting or trip, message us on WhatsApp.",
-    "de": "Dringende Reparaturen und Änderungen sind in 1–2 Stunden fertig. Für kurzfristiges Kürzen, Reißverschluss und Bund vor Hochzeit, Termin oder Reise schreiben Sie uns per WhatsApp.",
-    "ru": "Срочный ремонт и подгонка готовы за 1–2 часа. Для срочного подшива, молнии и талии перед свадьбой, встречей или поездкой пишите в WhatsApp.",
-    "es": "Los arreglos urgentes están listos en 1–2 horas. Para bajos, cremalleras y cintura de última hora antes de una boda, reunión o viaje, escríbanos por WhatsApp.",
-    "fr": "Les retouches urgentes sont prêtes en 1 à 2 heures. Pour un ourlet, une fermeture ou une taille de dernière minute avant un mariage, une réunion ou un voyage, écrivez-nous sur WhatsApp.",
-    "pl": "Pilne naprawy i przeróbki są gotowe w 1–2 godziny. Przy skracaniu, zamku i talii na ostatnią chwilę przed ślubem, spotkaniem lub podróżą napisz na WhatsApp.",
-    "uk": "Термінові ремонт і підгонка готові за 1–2 години. Для термінового підшивання, блискавки й талії перед весіллям, зустріччю чи поїздкою пишіть у WhatsApp.",
-    "nl": "Spoedreparaties en -aanpassingen zijn klaar in 1–2 uur. Voor last-minute zoom, rits en taille voor een bruiloft, vergadering of reis stuurt u een WhatsApp-bericht.",
-    "ar": "التصليحات والتعديلات العاجلة جاهزة خلال ساعة إلى ساعتين. للتقصير والسحّاب والخصر في اللحظة الأخيرة قبل حفل أو اجتماع أو سفر راسلنا عبر واتساب."
+    "tr": "Acil paça, fermuar ve bel işleri 1–2 saatte hazır olur; süre işin durumuna göre değişir. Davet ya da toplantı saatinizi WhatsApp'tan yazın.",
+    "en": "Urgent hem, zipper and waist jobs are ready in 1–2 hours, depending on the job. Tell us the time of your event or meeting on WhatsApp.",
+    "de": "Eilige Arbeiten an Saum, Reißverschluss und Bund sind in 1–2 Stunden fertig, je nach Arbeit. Schreiben Sie uns die Uhrzeit Ihres Termins per WhatsApp.",
+    "ru": "Срочные работы с низом, молнией и поясом готовы за 1–2 часа, в зависимости от работы. Напишите в WhatsApp, к какому времени нужна вещь.",
+    "es": "Los arreglos urgentes de bajos, cremalleras y cintura están listos en 1–2 horas, según el trabajo. Díganos por WhatsApp a qué hora es su evento.",
+    "fr": "Les travaux urgents d'ourlet, de fermeture et de taille sont prêts en 1 à 2 heures, selon le travail. Indiquez-nous sur WhatsApp l'heure de votre événement.",
+    "pl": "Pilne prace przy nogawkach, zamku i pasie są gotowe w 1–2 godziny, zależnie od pracy. Napisz na WhatsAppie, na którą godzinę potrzebujesz ubrania.",
+    "uk": "Термінові роботи з низом, блискавкою та поясом готові за 1–2 години, залежно від роботи. Напишіть у WhatsApp, на котру годину потрібна річ.",
+    "nl": "Spoedwerk aan zoom, rits en taille is klaar in 1–2 uur, afhankelijk van het werk. Laat ons via WhatsApp weten hoe laat uw afspraak is.",
+    "ar": "الأعمال المستعجلة للأطراف والسحاب والخصر جاهزة خلال 1–2 ساعة، حسب العمل. اكتب لنا عبر واتساب موعد مناسبتك."
    }
   }
  ]
@@ -787,28 +787,28 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
 // Fiyat rakamı YAZILMAYAN diller (es/fr/pl/uk/nl/ar sayfaları: fiyat WhatsApp'ta netleşir).
 const YENI_FP = {
  "h": {
-  "tr": "{y} terzi hizmetleri ve teslim süresi",
-  "en": "Tailor services in {y} and turnaround",
-  "de": "Schneiderservice in {y} und Dauer",
-  "ru": "Услуги портного в {y} и сроки",
-  "es": "Servicios de sastrería en {y}: bajos, cremalleras, cintura y vestidos",
-  "fr": "Services de couture à {y} : ourlets, fermetures, taille et robes",
-  "pl": "Usługi krawieckie w {y}: nogawki, zamki, talia i suknie",
-  "uk": "Послуги кравця в {y}: підшивання, блискавки, талія і сукні",
-  "nl": "Kleermakersdiensten in {y}: zoom, ritsen, taille en jurken",
-  "ar": "خدمات الخياطة في {y}: التقصير والسحّاب والخصر والفساتين"
+  "tr": "{y} terzi: yapılan işler ve süre",
+  "en": "Tailor in {y}: what we do and how long it takes",
+  "de": "Schneider in {y}: Arbeiten und Dauer",
+  "ru": "Портной в {y}: работы и сроки",
+  "es": "Sastre en {y}: trabajos y plazos",
+  "fr": "Tailleur à {y} : travaux et délais",
+  "pl": "Krawiec w {y}: zakres prac i terminy",
+  "uk": "Кравець у {y}: роботи та строки",
+  "nl": "Kleermaker in {y}: werkzaamheden en doorlooptijd",
+  "ar": "خياط في {y}: الأعمال والمدة"
  },
  "p": {
-  "tr": "Paça kısaltma, fermuar değişimi, bel daraltma, gelinlik ve abiye tadilatı ile özel dikim yapılır. Acil işler 1–2 saatte, normal işler aynı gün teslim edilir; fiyat WhatsApp'ta netleşir.",
-  "en": "Hemming, zipper replacement, waist taking-in, wedding and evening dress alterations and custom tailoring. Urgent jobs are ready in 1–2 hours, normal jobs the same day; the price is confirmed on WhatsApp.",
-  "de": "Saum kürzen, Reißverschluss-Wechsel, Bund enger machen, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Eilige Aufträge in 1–2 Stunden, normale am selben Tag; der Preis wird per WhatsApp geklärt.",
-  "ru": "Подшив брюк, замена молний, ушивание в талии, переделка свадебных и вечерних платьев, индивидуальный пошив. Срочные заказы — за 1–2 часа, обычные — в тот же день; цена уточняется в WhatsApp.",
-  "es": "Acortar bajos, cambiar cremalleras, ajustar la cintura, arreglar vestidos de novia y de noche y confeccionar a medida. Los arreglos urgentes están listos en 1–2 horas y los normales el mismo día; el precio se confirma por WhatsApp.",
-  "fr": "Ourlets, remplacement de fermetures, ajustement de taille, retouches de robes de mariée et de soirée et couture sur mesure. Retouches urgentes en 1 à 2 heures, normales le jour même ; le prix est confirmé sur WhatsApp.",
-  "pl": "Skracanie nogawek, wymiana zamków, zwężanie w talii, przeróbki sukni ślubnych i wieczorowych oraz szycie na miarę. Pilne naprawy w 1–2 godziny, zwykłe tego samego dnia; cenę potwierdzamy na WhatsApp.",
-  "uk": "Підшивання штанів, заміна блискавок, звуження в талії, переробка весільних і вечірніх суконь та пошив на замовлення. Термінові роботи — за 1–2 години, звичайні — того ж дня; ціну уточнюємо у WhatsApp.",
-  "nl": "Broekzoom, ritsvervanging, taille innemen, aanpassingen van bruids- en avondjurken en maatwerk. Spoedwerk klaar in 1–2 uur, gewoon werk dezelfde dag; de prijs wordt via WhatsApp bevestigd.",
-  "ar": "تقصير البنطلون واستبدال السحّاب وتضييق الخصر وتعديل فساتين الزفاف والسهرة والتفصيل الخاص. الأعمال العاجلة خلال ساعة إلى ساعتين والعادية في اليوم نفسه؛ ويُؤكَّد السعر عبر واتساب."
+  "tr": "Paça, bel, fermuar, gelinlik ve abiye tadilatı ile özel dikim yapıyoruz. Normal işler aynı gün, acil işler 1–2 saatte hazır olur; net fiyatı WhatsApp'tan yazarız.",
+  "en": "We do hems, waists, zippers, wedding and evening dress alterations and made-to-measure sewing. Normal jobs are ready the same day, urgent ones in 1–2 hours; we send the exact price on WhatsApp.",
+  "de": "Wir machen Saum, Bund, Reißverschluss, Änderungen an Braut- und Abendkleidern sowie Maßanfertigung. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden; den genauen Preis schreiben wir per WhatsApp.",
+  "ru": "Делаем подшив, пояс, молнии, переделку свадебных и вечерних платьев и пошив по меркам. Обычные работы — в тот же день, срочные — за 1–2 часа; точную цену пишем в WhatsApp.",
+  "es": "Hacemos bajos, cintura, cremalleras, arreglos de vestidos de novia y de fiesta y confección a medida. Trabajos normales el mismo día, urgentes en 1–2 horas; el precio exacto se lo escribimos por WhatsApp.",
+  "fr": "Nous faisons ourlets, taille, fermetures éclair, retouches de robes de mariée et de soirée et confection sur mesure. Travaux normaux le jour même, urgents en 1 à 2 heures ; nous vous écrivons le prix exact sur WhatsApp.",
+  "pl": "Robimy nogawki, pas, zamki, przeróbki sukien ślubnych i wieczorowych oraz szycie na miarę. Zwykłe prace tego samego dnia, pilne w 1–2 godziny; dokładną cenę napiszemy na WhatsAppie.",
+  "uk": "Робимо підшивання, пояс, блискавки, переробку весільних і вечірніх суконь та пошиття за мірками. Звичайні роботи — того ж дня, термінові — за 1–2 години; точну ціну пишемо у WhatsApp.",
+  "nl": "Wij doen zoom, taille, ritsen, vermaak van bruids- en avondjurken en maatwerk. Gewoon werk dezelfde dag, spoed in 1–2 uur; de exacte prijs sturen wij via WhatsApp.",
+  "ar": "نقوم بتقصير الأطراف وتضييق الخصر واستبدال السحابات وتعديل فساتين الزفاف والسهرة والخياطة حسب المقاس. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة؛ ونكتب لك السعر الدقيق عبر واتساب."
  }
 };
 export const ALT_BASLIKLAR: Record<Konu, Item[]> = { ...BASE, terziFp: [YENI_FP, BASE.terzi[1]], hizmetFp: [YENI_FP, BASE.hizmet[1]] };
