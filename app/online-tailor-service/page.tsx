@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     'geo.position': '36.8572868;30.5970193', ICBM: '36.8572868, 30.5970193',
   },
   verification: {
-    yandex: '4c73ee1911a4b197',
+    yandex: ['4c73ee1911a4b197', 'c81788c5ebe2163f', '8e4cc899c1db4298'],
     other: { 'msvalidate.01': 'EE22134B7D1B55A44BA700154371D5C3' },
   },
 };
