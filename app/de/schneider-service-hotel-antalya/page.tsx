@@ -70,7 +70,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Mobiler Schneider Antalya · Schneiderservice im Hotel · Terzi Can',
       url: SITE_URL,
-      description: '☎ ' + PHONE + ' · ' + 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer und nahegelegene Bezirke. Änderungen mit Anprobe im Hotel. schreiben Sie uns per WhatsApp.',
+      description: 'Schneider fragen: ' + PHONE + ' · ' + 'Mobiler Schneider- und Hotelservice in Antalya. Belek, Lara, Kemer und nahegelegene Bezirke. Änderungen mit Anprobe im Hotel. schreiben Sie uns per WhatsApp.',
       inLanguage: 'de',
       dateModified: TODAY,
       breadcrumb: {'@id': `${SITE_URL}#breadcrumb`},
@@ -101,7 +101,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Schneiderei im Hotel Antalya: Hotelservice ab ₺200' },
-  description: '☎ ' + PHONE + ' · ' + 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung, Dauer je nach Arbeit.',
+  description: 'Schneider fragen: ' + PHONE + ' · ' + 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung, Dauer je nach Arbeit.',
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',

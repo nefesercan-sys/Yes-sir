@@ -76,7 +76,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       name: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp Çıkarma · Seri İmalat 2026 | Terzi Can',
       url: SITE_URL,
-      description: '☎ ' + PHONE + ' · ' + "Antalya'da dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim, seri imalat. Markalar, butikler, e-ticaret için tam üretim paketi.",
+      description: 'Terziye sor: ' + PHONE + ' · ' + "Antalya'da dikiş atölyesi: kalıp çıkarma, numune dikimi, fason üretim, seri imalat. Markalar, butikler, e-ticaret için tam üretim paketi.",
       inLanguage: ['tr', 'en'],
       dateModified: TODAY,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -97,7 +97,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Dikiş Atölyesi Antalya · Fason Üretim, Kalıp, Seri İmalat' },
-  description: '☎ ' + PHONE + ' · ' + "Antalya dikiş atölyesi: kalıp çıkarma, numune, fason ve seri imalat, nakış, baskı. Marka, butik, e-ticaret için; min. adet şartı yok.",
+  description: 'Terziye sor: ' + PHONE + ' · ' + "Antalya dikiş atölyesi: kalıp çıkarma, numune, fason ve seri imalat, nakış, baskı. Marka, butik, e-ticaret için; min. adet şartı yok.",
   keywords: [
     'dikiş atölyesi Antalya', 'fason üretim Antalya', 'kalıp çıkarma Antalya',
     'seri imalat kıyafet Antalya', 'numune dikimi Antalya', 'butik üretim Antalya',
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
   openGraph: {
     title: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp · Seri İmalat | Terzi Can',
-    description: '☎ ' + PHONE + ' · ' + "Kalıp çıkarma, numune, fason üretim (adet projeye göre belirlenir, proje bazında teklif). Markalar için tam paket.",
+    description: 'Terziye sor: ' + PHONE + ' · ' + "Kalıp çıkarma, numune, fason üretim (adet projeye göre belirlenir, proje bazında teklif). Markalar için tam paket.",
     url: SITE_URL, type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },

@@ -491,14 +491,14 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: phoneFirst(c.desc),
+    description: phoneFirst(c.desc, lang),
     keywords: Array.from(new Set(kw)),
     robots: !isIndexable(lang, d.slug)
       ? { index: false, follow: true }
       : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: alternatesFor(lang, (l) => abs(districtUrl(l, d)), d.slug),
     openGraph: {
-      title: c.title, description: fitDesc(c.desc), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: fitDesc(c.desc, undefined, lang), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -510,7 +510,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: fitDesc(c.desc),
+    description: fitDesc(c.desc, undefined, lang),
     keywords: Array.from(new Set([
       ...c.kw,
       ...s.vars[lang],
@@ -526,7 +526,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); const six = hzSixForService(s.slug.tr); const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : six; if (!Object.keys(sx).length) return a; const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(serviceUrl(l, s))])); return { ...a, languages: { ...core, ...sx, 'x-default': core.tr } }; })(),
     openGraph: {
-      title: c.title, description: phoneFirst(c.desc), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
+      title: c.title, description: phoneFirst(c.desc, lang), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
     },
   };
@@ -540,10 +540,10 @@ export function hubMetadata(lang: Lang): Metadata {
     de: 'Schneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
-    tr: `☎ ${PHONE} · Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
-    en: `☎ ${PHONE} · Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
-    ru: `☎ ${PHONE} · Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
-    de: `☎ ${PHONE} · Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
+    tr: `Terziye sor: ${PHONE} · Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
+    en: `Ask the tailor: ${PHONE} · Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
+    ru: `Спросите в ателье: ${PHONE} · Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
+    de: `Schneider fragen: ${PHONE} · Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
@@ -584,6 +584,13 @@ function Shell({ lang, waMsg, children, footLinks }: { lang: Lang; waMsg: string
   );
 }
 
+const ASK_LINE: Record<string, string> = {
+  tr: "Terziye sor: arayın ya da WhatsApp'tan yazın. Sormak ücretsiz.",
+  en: 'Ask the tailor: call or message us on WhatsApp. Asking is free.',
+  ru: 'Спросите в ателье: позвоните или напишите в WhatsApp. Спросить можно бесплатно.',
+  de: 'Schneider fragen: anrufen oder per WhatsApp schreiben. Fragen kostet nichts.',
+};
+
 function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: React.ReactNode; desc: string; waMsg: string }) {
   const u = UI[lang];
   return (
@@ -597,6 +604,7 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
           <a href={WA(waMsg)} target="_blank" rel="noopener noreferrer" className="sl-btn-primary">{u.waBtn}</a>
           <a href={`tel:${PHONE_TEL}`} className="sl-btn-secondary">📞 {PHONE}</a>
         </div>
+        <p className="sl-hero-ask" style={{ margin: '.85rem 0 0', fontSize: '.95rem', fontWeight: 600, opacity: 0.92 }}>{ASK_LINE[lang]}</p>
       </div>
     </section>
     <QuickActionBanner lang={lang} />

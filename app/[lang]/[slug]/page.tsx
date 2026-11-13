@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { fitDesc, withAsk } from '@/lib/meta-fit';
 import { notFound } from 'next/navigation';
 import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
@@ -67,12 +68,12 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: c.title },
-      description: c.desc,
+      description: fitDesc(withAsk(c.desc, lang), 158, lang),
       keywords: c.keywords,
       robots,
       alternates: { canonical: url, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${iUrl(l)}`])) },
-      openGraph: { title: c.title, description: c.desc, url, siteName: 'Terzi Can', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
-      twitter: { card: 'summary_large_image', title: c.title, description: c.desc, images: [OG_DEFAULT] },
+      openGraph: { title: c.title, description: fitDesc(withAsk(c.desc, lang), 158, lang), url, siteName: 'Terzi Can', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
+      twitter: { card: 'summary_large_image', title: c.title, description: fitDesc(withAsk(c.desc, lang), 158, lang), images: [OG_DEFAULT] },
     };
   }
 
@@ -82,11 +83,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: sc.title },
-      description: sc.desc,
+      description: fitDesc(withAsk(sc.desc, lang), 158, lang),
       robots,
       alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
-      openGraph: { title: sc.title, description: sc.desc, url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
-      twitter: { card: 'summary_large_image', title: sc.title, description: sc.desc, images: [OG_DEFAULT] },
+      openGraph: { title: sc.title, description: fitDesc(withAsk(sc.desc, lang), 158, lang), url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
+      twitter: { card: 'summary_large_image', title: sc.title, description: fitDesc(withAsk(sc.desc, lang), 158, lang), images: [OG_DEFAULT] },
     };
   }
 
@@ -99,11 +100,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: oc.title },
-      description: oc.desc,
+      description: fitDesc(withAsk(oc.desc, lang), 158, lang),
       robots,
       alternates: { canonical: ourl, languages: onlineLanguages(SITE) },
-      openGraph: { title: oc.title, description: oc.desc, url: ourl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: oc.title }] },
-      twitter: { card: 'summary_large_image', title: oc.title, description: oc.desc, images: [OG_DEFAULT] },
+      openGraph: { title: oc.title, description: fitDesc(withAsk(oc.desc, lang), 158, lang), url: ourl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: oc.title }] },
+      twitter: { card: 'summary_large_image', title: oc.title, description: fitDesc(withAsk(oc.desc, lang), 158, lang), images: [OG_DEFAULT] },
     };
   }
 
@@ -114,11 +115,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: hc.title },
-      description: hc.desc,
+      description: fitDesc(withAsk(hc.desc, lang), 158, lang),
       robots,
       alternates: { canonical: hurl, languages: hzLanguages(hz) },
-      openGraph: { title: hc.title, description: hc.desc, url: hurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
-      twitter: { card: 'summary_large_image', title: hc.title, description: hc.desc, images: [OG_DEFAULT] },
+      openGraph: { title: hc.title, description: fitDesc(withAsk(hc.desc, lang), 158, lang), url: hurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
+      twitter: { card: 'summary_large_image', title: hc.title, description: fitDesc(withAsk(hc.desc, lang), 158, lang), images: [OG_DEFAULT] },
     };
   }
 
@@ -129,11 +130,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: kc.title },
-      description: kc.desc,
+      description: fitDesc(withAsk(kc.desc, lang), 158, lang),
       robots,
       alternates: { canonical: kurl, languages: konuLanguages(konu) },
-      openGraph: { title: kc.title, description: kc.desc, url: kurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
-      twitter: { card: 'summary_large_image', title: kc.title, description: kc.desc, images: [OG_DEFAULT] },
+      openGraph: { title: kc.title, description: fitDesc(withAsk(kc.desc, lang), 158, lang), url: kurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
+      twitter: { card: 'summary_large_image', title: kc.title, description: fitDesc(withAsk(kc.desc, lang), 158, lang), images: [OG_DEFAULT] },
     };
   }
 
@@ -160,7 +161,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const zc = ZCOPY[lang];
   const seoT = zone === 'antalya' ? [] : zoneSeoTitles(lang, z.name, ZONE_SLUGS.indexOf(zone)); // bölgeye göre farklı, hizmet kelimeli başlık
   const title = seoT.find((t) => t.length <= 60) ?? zc.title(z.name);
-  const description = zc.desc(z.name);
+  const description = fitDesc(withAsk(zc.desc(z.name), lang), 158, lang);
   const url = `${SITE}${zoneUrl(lang, zone)}`;
   return {
     metadataBase: new URL(SITE),

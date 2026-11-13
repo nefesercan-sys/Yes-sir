@@ -59,7 +59,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Kot Ceket ve Mont Tadilatı 200 TL\'den · Aynı Gün | Terzi Can' },
-  description: '☎ +90 531 898 64 18 · Kot ceket ve kot mont kol kısaltma, boy kısaltma, daraltma ve orijinal görünümde dikiş 200 TL\'den. Normal iş aynı gün.',
+  description: 'Terziye sor: +90 531 898 64 18 · Kot ceket ve kot mont kol kısaltma, boy kısaltma, daraltma ve orijinal görünümde dikiş 200 TL\'den. Normal iş aynı gün.',
   keywords: [
     'kot ceket kısaltma',
     'kot ceket daraltma',

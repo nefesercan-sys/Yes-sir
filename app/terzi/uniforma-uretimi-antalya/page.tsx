@@ -75,7 +75,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       url: SITE_URL,
       name: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul Sağlık · 2026 | Terzi Can',
-      description: '☎ ' + PHONE + ' · ' + "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, spa, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış tek elden.",
+      description: 'Terziye sor: ' + PHONE + ' · ' + "Antalya üniforma üretimi. Otel, resepsiyon, aşçı, garson, spa, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış tek elden.",
       inLanguage: ['tr', 'en', 'ru'],
       dateModified: TODAY,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -96,7 +96,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Üniforma Üretimi Antalya · Otel, Okul, Sağlık | Terzi Can' },
-  description: '☎ ' + PHONE + ' · ' + "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden.",
+  description: 'Terziye sor: ' + PHONE + ' · ' + "Antalya üniforma üretimi: otel, resepsiyon, aşçı, garson, güvenlik, spa, okul, sağlık. Tasarım + seri imalat + nakış tek elden.",
   keywords: [
     'üniforma üretimi Antalya', 'otel üniforması Antalya', 'aşçı üniforması Antalya',
     'garson üniforması Antalya', 'okul üniforması Antalya', 'sağlık üniforması Antalya',
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL, languages: { 'x-default': SITE_URL } },
   openGraph: {
     title: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul · Seri İmalat | Terzi Can',
-    description: '☎ ' + PHONE + ' · ' + "Otel, resepsiyon, aşçı, garson, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış.",
+    description: 'Terziye sor: ' + PHONE + ' · ' + "Otel, resepsiyon, aşçı, garson, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış.",
     url: SITE_URL, type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
   },

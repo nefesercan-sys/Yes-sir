@@ -85,7 +85,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: 'Paça Kısaltma Kaç TL? ₺200 · +90 531 898 64 18 | Terzi Can' },
-  description: "☎ +90 531 898 64 18 · Pantolon paçası kaç TL? Antalya'da kot ve kumaş pantolon paça kısaltma 200 TL (KDV hariç). Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
+  description: "Terziye sor: +90 531 898 64 18 · Pantolon paçası kaç TL? Antalya'da kot ve kumaş pantolon paça kısaltma 200 TL (KDV hariç). Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
     'kot paça kısaltma Antalya', 'Antalya paça kısaltma kaç lira', 'pantolon boyu kısaltma Antalya',
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
   })(),
   openGraph: {
     title: 'Paça Kısaltma Antalya · Kot Paça ₺200 · Aynı Gün Teslim',
-    description: "☎ +90 531 898 64 18 · Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis.",
+    description: "Terziye sor: +90 531 898 64 18 · Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis.",
     url: SITE_URL, type: 'website',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } },
