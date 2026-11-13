@@ -376,7 +376,7 @@ export default function IletisimSayfasi({ lang }: { lang: Lang }) {
               <h1 id="ct-h1">{c.h1}</h1>
               <p className="ct-lead">{c.lead}</p>
               <div className="ct-btns">
-                <a className="ct-btn ct-call" href={`tel:${PHONE_TEL}`}>📞 {c.call}: {PHONE}</a>
+                <a className="ct-btn ct-call" href={`tel:${PHONE_TEL}`}><span className="ico-tel" aria-hidden="true" /> {c.call}: {PHONE}</a>
                 <a className="ct-btn ct-wa" href={waHref} target="_blank" rel="noopener noreferrer">💬 {c.wa}</a>
                 <a className="ct-btn ct-map" href={DIR_URL} target="_blank" rel="noopener noreferrer">📍 {c.maps}</a>
               </div>

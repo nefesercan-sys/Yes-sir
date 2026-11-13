@@ -247,7 +247,7 @@ export default function FermuarDegisimiPage() {
                target="_blank" rel="noopener noreferrer" style={btnGreen}>
               💬 Fotoğraf Gönder, Fiyat Al
             </a>
-            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}><span className="ico-tel" aria-hidden="true" /> {PHONE}</a>
           </div>
         </div>
       </section>
@@ -387,7 +387,7 @@ export default function FermuarDegisimiPage() {
             <a href={WA('Merhaba, fermuar değişimi için bilgi almak istiyorum.')} target="_blank" rel="noopener noreferrer" style={btnGreen}>
               💬 WhatsApp&apos;tan Yaz
             </a>
-            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}><span className="ico-tel" aria-hidden="true" /> {PHONE}</a>
             <a href={GBP_URL} target="_blank" rel="noopener noreferrer" style={btnLine}>🗺️ Google Haritalar</a>
           </div>
         </div>

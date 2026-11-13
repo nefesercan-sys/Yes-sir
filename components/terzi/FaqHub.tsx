@@ -157,7 +157,7 @@ export default function FaqHub({ lang }: { lang: FaqHubLang }) {
           <p style={{ fontSize: '1.05rem', maxWidth: 760, margin: '0 0 1.3rem', color: INK }}><strong>{t.kisaLabel}:</strong> {t.kisa}</p>
           <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap' }}>
             <a href={wa} target="_blank" rel="noopener noreferrer" style={btn}>💬 {t.wa}</a>
-            <a href={`tel:${PHONE_E164}`} style={btnLine}>📞 {PHONE_DISPLAY}</a>
+            <a href={`tel:${PHONE_E164}`} style={btnLine}><span className="ico-tel" aria-hidden="true" /> {PHONE_DISPLAY}</a>
           </div>
         </div>
       </section>
