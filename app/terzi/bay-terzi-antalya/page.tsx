@@ -51,8 +51,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: 'Bay Terzi Antalya · Tamir, Tadilat · 0531 898 64 18' },
-  description: "☎ 0531 898 64 18 · Antalya bay terzi: pantolon paça kısaltma ₺200, fermuar değişimi, söküğü dikme, takım elbise ve gömlek dikimi. Eve servis.",
+  title: { absolute: 'Bay Terzi Antalya · Tamir, Tadilat · +90 531 898 64 18' },
+  description: "☎ +90 531 898 64 18 · Antalya bay terzi: pantolon paça kısaltma ₺200, fermuar değişimi, söküğü dikme, takım elbise ve gömlek dikimi. Eve servis.",
   keywords: [
     'erkek tamir tadilat Antalya', 'erkek pantolon fermuar değişimi Antalya', 'erkek söküğü dikme Antalya', 'bay terzi Antalya', 'erkek terzi Antalya', 'erkek takım elbise dikimi Antalya',
     'damatlık dikimi Antalya', 'smoking dikimi Antalya', 'erkek gömlek dikimi Antalya',
