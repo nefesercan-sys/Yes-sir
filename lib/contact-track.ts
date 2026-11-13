@@ -6,7 +6,7 @@ export type ContactType = 'whatsapp' | 'phone';
 export type ContactBrand = 'tailor' | 'beauty';
 
 const NON_TR = ['en', 'ru', 'de', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'];
-const BEAUTY_WA = '905315104458';
+const BEAUTY_WA = '905423398584';
 
 /** Yoldan dil: /en/..., /de/... önekleri; kökteki /online-tailor-service İngilizce; /guzellik/<slug> dili slug'dan; aksi halde 'tr'. */
 export function langFromPath(pathname: string): string {

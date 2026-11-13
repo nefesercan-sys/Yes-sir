@@ -10,8 +10,8 @@ import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from "@/lib/reviews";
 // Görsel dil: terzi mezurası. Üstteki şerit sayfa açılırken bir kez "çekilir"; başka dekor yok.
 
 const BEAUTY_PATH = "/guzellik/guzellik-merkezi-antalya";
-const BEAUTY_WA_NUMBER = "905315104458";
-const BEAUTY_PHONE_DISPLAY = "+90 531 510 44 58";
+const BEAUTY_WA_NUMBER = "905423398584";
+const BEAUTY_PHONE_DISPLAY = "+90 542 339 85 84";
 const BEAUTY_WA_TEXT =
   "Merhaba, Can Beauty Studio hizmetleri için bilgi ve fiyat teklifi almak istiyorum. Konakladığım bölge: ";
 // Güzellik sayfaları (dil adresleri /guzellik/ önekinde)
