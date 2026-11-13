@@ -563,7 +563,7 @@ function Shell({ lang, waMsg, children, footLinks }: { lang: Lang; waMsg: string
   return (
     <div lang={lang} className="sl-root">
       <div className="sl-float">
-        <a href={`tel:${PHONE_TEL}`} className="sl-fbtn sl-fbtn-call" aria-label="Tel">📞</a>
+        <a href={`tel:${PHONE_TEL}`} className="sl-fbtn sl-fbtn-call" aria-label="Tel"><span className="ico-tel" aria-hidden="true" /></a>
         <a href={href} target="_blank" rel="noopener noreferrer" className="sl-fbtn sl-fbtn-wa" aria-label="WhatsApp">💬</a>
       </div>
       <nav className="sl-nav" aria-label="Navigation">
@@ -602,7 +602,7 @@ function Hero({ lang, tag, h1, desc, waMsg }: { lang: Lang; tag: string; h1: Rea
         <p className="sl-hero-desc" id="dogrudan-cevap">{desc}</p>
         <div className="sl-hero-btns">
           <a href={WA(waMsg)} target="_blank" rel="noopener noreferrer" className="sl-btn-primary">{u.waBtn}</a>
-          <a href={`tel:${PHONE_TEL}`} className="sl-btn-secondary">📞 {PHONE}</a>
+          <a href={`tel:${PHONE_TEL}`} className="sl-btn-secondary"><span className="ico-tel" aria-hidden="true" /> {PHONE}</a>
         </div>
         <p className="sl-hero-ask" style={{ margin: '.85rem 0 0', fontSize: '.95rem', fontWeight: 600, opacity: 0.92 }}>{ASK_LINE[lang]}</p>
       </div>

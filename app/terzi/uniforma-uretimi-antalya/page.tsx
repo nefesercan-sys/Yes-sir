@@ -179,7 +179,7 @@ export default function UniformaUretimiPage() {
                 📋 Üniforma Teklifi Al
               </a>
               <a href={`tel:${PHONE_E}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
-                📞 {PHONE}
+                <span className="ico-tel" aria-hidden="true" /> {PHONE}
               </a>
             </div>
           </div>
@@ -284,7 +284,7 @@ export default function UniformaUretimiPage() {
               💬 WhatsApp — Teklif İste
             </a>
             <a href={`tel:${PHONE_E}`} style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
-              📞 {PHONE}
+              <span className="ico-tel" aria-hidden="true" /> {PHONE}
             </a>
           </div>
           <p style={{ marginTop: '1rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>Her gün 08:00–23:00 açığız — güncel yorumlarımızı Google\'da görebilirsiniz</p>

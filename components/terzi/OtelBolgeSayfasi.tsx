@@ -200,7 +200,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
           </div>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ background: '#B8975A', color: '#1C1814', padding: '1rem 2.2rem', fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>💬 {t.waShare}</a>
-            <a href={`tel:${PHONE_E164}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '1rem 1.8rem', textDecoration: 'none', fontSize: '.88rem' }}>📞 {t.callBtn}</a>
+            <a href={`tel:${PHONE_E164}`} style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '1rem 1.8rem', textDecoration: 'none', fontSize: '.88rem' }}><span className="ico-tel" aria-hidden="true" /> {t.callBtn}</a>
           </div>
         </div>
       </section>

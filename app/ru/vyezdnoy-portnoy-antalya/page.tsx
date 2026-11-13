@@ -190,7 +190,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
               </a>
               <a href={`tel:${PHONE_E164}`}
                 style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '1rem 1.8rem', textDecoration: 'none', fontSize: '.88rem' }}>
-                📞 {PHONE}
+                <span className="ico-tel" aria-hidden="true" /> {PHONE}
               </a>
             </div>
           </div>
@@ -340,7 +340,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </a>
             <a href={`tel:${PHONE_E164}`}
               style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
-              📞 {PHONE}
+              <span className="ico-tel" aria-hidden="true" /> {PHONE}
             </a>
           </div>
           <p style={{ marginTop: '1.2rem', fontSize: '.78rem', color: 'rgba(255,255,255,.7)' }}>

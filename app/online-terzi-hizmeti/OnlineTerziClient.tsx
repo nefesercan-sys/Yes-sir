@@ -618,7 +618,7 @@ export default function OnlineTerziClient() {
             </a>
             <a href="tel:+905318986418"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, backgroundColor: 'rgba(255,255,255,0.08)', color: C.white, padding: '18px 32px', borderRadius: 999, fontWeight: 600, fontSize: 16, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.15)', fontFamily: 'system-ui, sans-serif' }}>
-              📞 +90 531 898 64 18
+              <span className="ico-tel" aria-hidden="true" /> +90 531 898 64 18
             </a>
           </div>
         </div>

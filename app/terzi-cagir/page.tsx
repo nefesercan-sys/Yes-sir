@@ -396,7 +396,7 @@ export default function TerziCagirPage() {
         <div className="sticky-bar">
           <div className="sticky-brand">Terzi <span>Can</span></div>
           <div className="sticky-btns">
-            <a href={`tel:${PHONE_E164}`} className="btn-call">📞 Ara</a>
+            <a href={`tel:${PHONE_E164}`} className="btn-call"><span className="ico-tel" aria-hidden="true" /> Ara</a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-wa-sm">💬 WA</a>
           </div>
         </div>
@@ -416,7 +416,7 @@ export default function TerziCagirPage() {
           </p>
           <div className="cta-group">
             <a href={`tel:${PHONE_E164}`} className="btn-call-big">
-              📞 Hemen Ara — {PHONE}
+              <span className="ico-tel" aria-hidden="true" /> Hemen Ara — {PHONE}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-wa-big">
               💬 WhatsApp'tan Yaz
@@ -467,7 +467,7 @@ export default function TerziCagirPage() {
             ))}
           </div>
           <a href={`tel:${PHONE_E164}`} className="btn-call-big" style={{marginBottom:'.7rem'}}>
-            📞 Hemen Ara — {PHONE}
+            <span className="ico-tel" aria-hidden="true" /> Hemen Ara — {PHONE}
           </a>
           <br/>
           <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-wa-big">
@@ -492,7 +492,7 @@ export default function TerziCagirPage() {
           </table>
           <div className="prices-cta">
             <a href={`tel:${PHONE_E164}`} className="btn-call-big" style={{display:'inline-flex',justifyContent:'center',width:'100%',marginBottom:'.7rem'}}>
-              📞 {PHONE} — Ara
+              <span className="ico-tel" aria-hidden="true" /> {PHONE} — Ara
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-wa-big" style={{display:'inline-flex',justifyContent:'center',width:'100%'}}>
               📲 WhatsApp Fiyat Teklifi Al
@@ -560,7 +560,7 @@ export default function TerziCagirPage() {
           </p>
           <div style={{display:'flex',flexDirection:'column',gap:'.7rem'}}>
             <a href={`tel:${PHONE_E164}`} className="btn-call-big" style={{justifyContent:'center'}}>
-              📞 Hemen Ara — {PHONE}
+              <span className="ico-tel" aria-hidden="true" /> Hemen Ara — {PHONE}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-wa-big" style={{justifyContent:'center'}}>
               💬 WhatsApp'tan Yaz

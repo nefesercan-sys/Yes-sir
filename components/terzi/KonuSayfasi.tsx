@@ -82,7 +82,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
           <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}><strong>Kısa cevap:</strong> {d.kisa}</p>
           <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap' }}>
             <a href={WA(d.waIlk)} target="_blank" rel="noopener noreferrer" style={btnGreen}>💬 Fotoğraf Gönder, Fiyat Al</a>
-            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}><span className="ico-tel" aria-hidden="true" /> {PHONE}</a>
           </div>
         </div>
       </section>
@@ -178,7 +178,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
           <p style={{ margin: '0 0 1.1rem' }}>Haftanın her günü {HOURS} arası WhatsApp&apos;tan yazın, fotoğrafı gönderin; fiyatı ve teslim süresini bildirelim.</p>
           <div style={{ display: 'flex', gap: '.7rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href={WA(d.waIlk)} target="_blank" rel="noopener noreferrer" style={btnGreen}>💬 WhatsApp&apos;tan Yaz</a>
-            <a href={`tel:${PHONE_E}`} style={btnLine}>📞 {PHONE}</a>
+            <a href={`tel:${PHONE_E}`} style={btnLine}><span className="ico-tel" aria-hidden="true" /> {PHONE}</a>
             <a href={GBP_URL} target="_blank" rel="noopener noreferrer" style={btnLine}>🗺️ Google Haritalar</a>
           </div>
         </div>

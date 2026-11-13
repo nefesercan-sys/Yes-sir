@@ -130,7 +130,7 @@ export default function BayanTerziPage() {
                 💬 Fotoğraf Gönder → Fiyat Al
               </a>
               <a href="tel:+905318986418" style={{ border: '1px solid rgba(255,255,255,.3)', color: '#fff', padding: '.9rem 1.6rem', textDecoration: 'none', fontSize: '.85rem' }}>
-                📞 {PHONE}
+                <span className="ico-tel" aria-hidden="true" /> {PHONE}
               </a>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function BayanTerziPage() {
               💬 WhatsApp
             </a>
             <a href="tel:+905318986418" style={{ background: 'rgba(255,255,255,.35)', color: '#1C1814', border: '1px solid rgba(28,24,20,.5)', padding: '1rem 2rem', textDecoration: 'none', fontSize: '.92rem', borderRadius: '4px' }}>
-              📞 {PHONE}
+              <span className="ico-tel" aria-hidden="true" /> {PHONE}
             </a>
           </div>
         </section>

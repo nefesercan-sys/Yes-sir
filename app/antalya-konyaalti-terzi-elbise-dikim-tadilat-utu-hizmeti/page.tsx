@@ -184,7 +184,7 @@ export default function KonyaaltiTerziPage() {
         <div style={{ position: 'fixed', bottom: 80, right: 16, zIndex: 100, display: 'flex', flexDirection: 'column', gap: 10 }}>
           <a href={`tel:${PHONE_TEL}`}
             style={{ width: 52, height: 52, borderRadius: '50%', background: D.ink, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,0,0,.35)' }}>
-            📞
+            <span className="ico-tel" aria-hidden="true" />
           </a>
           <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
             style={{ width: 52, height: 52, borderRadius: '50%', background: '#15803d', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.45)' }}>
@@ -230,7 +230,7 @@ export default function KonyaaltiTerziPage() {
               </a>
               <a href={`tel:${PHONE_TEL}`}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,.1)', color: '#fff', padding: '.9rem 1.6rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.88rem', border: '1px solid rgba(255,255,255,.2)' }}>
-                📞 {PHONE_DISPLAY}
+                <span className="ico-tel" aria-hidden="true" /> {PHONE_DISPLAY}
               </a>
             </div>
 
@@ -517,7 +517,7 @@ export default function KonyaaltiTerziPage() {
             </a>
             <a href={`tel:${PHONE_TEL}`}
               style={{ display: 'inline-block', border: '2px solid rgba(255,255,255,.7)', color: '#fff', padding: '.9rem 1.6rem', borderRadius: 10, fontWeight: 700, textDecoration: 'none', fontSize: '.88rem' }}>
-              📞 Hemen Ara
+              <span className="ico-tel" aria-hidden="true" /> Hemen Ara
             </a>
           </div>
         </section>
