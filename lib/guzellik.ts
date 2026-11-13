@@ -4,7 +4,7 @@
 // Terzi sayfalarından tamamen ayrıdır: kendi veri dosyası, kendi @id'si, kendi sitemap'i.
 //
 // SAHİP BİLGİSİ (uydurma yok): Antalya'nın bölgelerindeki ANLAŞMALI SALONLAR (salon adı gösterilmez). EV/OTEL HİZMETİ KONUSUNDA 'VAR' DE 'YOK' DE YAZILMAZ (sahip kararı; talep WhatsApp'ta görülecek).
-// Randevu WhatsApp'tan alınır; salon ve saat birlikte netleştirilir. Her gün 08:00–24:00; telefon ve WhatsApp +90 531 510 44 58;
+// Randevu WhatsApp'tan alınır; salon ve saat birlikte netleştirilir. Her gün 08:00–24:00; telefon ve WhatsApp +90 542 339 85 84;
 // fiyat sayfada YOK (WhatsApp'tan verilir). Sağlık/tıbbi/estetik işlem, lazer, masaj, kalıcı makyaj YAZILMAZ.
 // Adres/koordinat yok (kendi salonumuz iddiası yok). Puan/yorum/sertifika/garanti/süre/mesafe/ücretsiz servis iddiası yok.
 // ============================================================
@@ -20,9 +20,9 @@ export type SvcId = (typeof SVC_IDS)[number];
 export const G_SITE = 'https://swaphubs.com';
 export const G_BRAND = 'Can Beauty Studio';
 export const G_ID = `${G_SITE}/guzellik#studio`;
-export const G_PHONE = '+90 531 510 44 58';
-export const G_PHONE_TEL = '+905315104458';
-export const G_WA = '905315104458';
+export const G_PHONE = '+90 542 339 85 84';
+export const G_PHONE_TEL = '+905423398584';
+export const G_WA = '905423398584';
 export const G_HOURS_OPEN = '08:00';
 export const G_HOURS_CLOSE = '23:59';
 /** Bölge listesi (form + şema). 'Diğer' seçeneği formda ayrıca çevrilir. */
@@ -84,7 +84,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Güzellik Merkezi Antalya | Saç, Tırnak, Makyaj | Can Beauty Studio',
     desc: "Antalya'da saç, tırnak, makyaj, gelin hazırlığı, cilt bakımı ve ağda için anlaşmalı salonlar. Talep formunu doldurun, salona yönlendirilin, fiyatı WhatsApp'tan alın.",
     h1: "Antalya'da Güzellik Merkezi: Saç, Tırnak, Makyaj ve Bakım",
-    lead: "Kısa cevap: Almak istediğiniz hizmeti ve bölgenizi WhatsApp'tan +90 531 510 44 58 numarasına yazın; sizi Antalya'nın bölgelerindeki anlaşmalı salonlardan size en yakın olana yönlendirelim. Randevu WhatsApp'tan alınır; salon ve saat birlikte netleştirilir. Fiyat hizmete, bölgeye ve işin detayına göre WhatsApp'tan verilir. Her gün 08:00–24:00.",
+    lead: "Kısa cevap: Almak istediğiniz hizmeti ve bölgenizi WhatsApp'tan +90 542 339 85 84 numarasına yazın; sizi Antalya'nın bölgelerindeki anlaşmalı salonlardan size en yakın olana yönlendirelim. Randevu WhatsApp'tan alınır; salon ve saat birlikte netleştirilir. Fiyat hizmete, bölgeye ve işin detayına göre WhatsApp'tan verilir. Her gün 08:00–24:00.",
     campaign: "Konakladığınız bölgedeki anlaşmalı salonlara yönlendirilirsiniz; hizmet bilgisi, size özel fiyat teklifi ve güncel kampanyalar WhatsApp'tan paylaşılır.",
     crumb: 'Güzellik merkezi',
     keywords: ['güzellik merkezi antalya', 'antalya kuaför', 'antalya manikür pedikür', 'antalya gelin saçı makyajı', 'turist güzellik merkezi antalya', 'Can Beauty Studio'],
@@ -137,7 +137,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Sık sorulan sorular',
     faq: [
-      ["Randevuyu nasıl alırım?", "Talep formunu doldurun ya da +90 531 510 44 58 numarasına WhatsApp'tan hizmeti, bölgeyi ve istediğiniz günü yazın. Size fiyatı bildirir, bölgenizdeki anlaşmalı salona yönlendiririz."],
+      ["Randevuyu nasıl alırım?", "Talep formunu doldurun ya da +90 542 339 85 84 numarasına WhatsApp'tan hizmeti, bölgeyi ve istediğiniz günü yazın. Size fiyatı bildirir, bölgenizdeki anlaşmalı salona yönlendiririz."],
       ["Fiyat nasıl öğrenilir?", "Fiyat sayfada yazmaz; hizmete, bölgeye ve işin detayına göre WhatsApp'tan verilir. İstediğiniz işi yazmanız yeterli. Konakladığınız bölgedeki anlaşmalı salonlara yönlendirilirsiniz; hizmet bilgisi, size özel fiyat teklifi ve güncel kampanyalar WhatsApp'tan paylaşılır."],
       ["Hizmeti kim veriyor?", "Hizmet, bölgedeki anlaşmalı salonlar ve uzmanlar aracılığıyla verilir. Can Beauty Studio sizi doğru salona yönlendirir; salon adları sayfada gösterilmez."],
       ["Çalışma saatleri nedir?", "Her gün 08:00–24:00 arası WhatsApp ve telefondan ulaşabilirsiniz."],
@@ -152,7 +152,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Beauty Salon in Antalya | Hair, Nails, Makeup | Can Beauty Studio',
     desc: "Hair, nails, makeup, bridal styling, skin care and waxing at partner salons across Antalya. Send the quick request form, get directed to a salon and get your price on WhatsApp.",
     h1: 'Beauty Salon in Antalya: Hair, Nails, Makeup and Care for Visitors',
-    lead: "Short answer: message +90 531 510 44 58 on WhatsApp with the service and the area you are in, and we will direct you to the partner salon nearest to you among those in Antalya’s districts. Appointments are made on WhatsApp; the salon and time are confirmed together. Prices depend on the service, the area and the details, and are given on WhatsApp. Open every day 08:00–24:00.",
+    lead: "Short answer: message +90 542 339 85 84 on WhatsApp with the service and the area you are in, and we will direct you to the partner salon nearest to you among those in Antalya’s districts. Appointments are made on WhatsApp; the salon and time are confirmed together. Prices depend on the service, the area and the details, and are given on WhatsApp. Open every day 08:00–24:00.",
     campaign: "You are directed to the partner salons in the area where you are staying; service information, a price offer made for you and current campaigns are shared on WhatsApp.",
     crumb: 'Beauty salon',
     keywords: ['beauty salon antalya', 'hair salon antalya tourists', 'nails antalya manicure pedicure', 'bridal hair and makeup antalya', 'Can Beauty Studio'],
@@ -205,7 +205,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Frequently asked questions',
     faq: [
-      ["How do I book?", "Fill in the request form or write to +90 531 510 44 58 on WhatsApp with the service, the area and the day you want. We tell you the price and direct you to a partner salon in your area."],
+      ["How do I book?", "Fill in the request form or write to +90 542 339 85 84 on WhatsApp with the service, the area and the day you want. We tell you the price and direct you to a partner salon in your area."],
       ["How do I find out the price?", "Prices are not listed on the page. They depend on the service, the area and the details, and are given on WhatsApp. Just tell us what you need. You are directed to the partner salons in the area where you are staying; service information, a price offer made for you and current campaigns are shared on WhatsApp."],
       ["Who provides the service?", "The service is provided through partner salons and specialists in your area. Can Beauty Studio directs you to the right salon; salon names are not shown on the page."],
       ["What are your opening hours?", "You can reach us on WhatsApp and by phone every day from 08:00 to 24:00."],
@@ -220,7 +220,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Schönheitssalon Antalya | Haare, Nägel, Make-up | Can Beauty Studio',
     desc: "Friseur, Nagelpflege, Make-up, Brautstyling, Gesichtspflege und Waxing in Partnersalons in ganz Antalya. Anfrage senden, an einen Salon verwiesen werden und den Preis per WhatsApp erhalten.",
     h1: 'Schönheitssalon in Antalya: Haare, Nägel, Make-up und Pflege für Urlauber',
-    lead: "Kurz gesagt: Schreiben Sie uns per WhatsApp an +90 531 510 44 58, welche Behandlung Sie möchten und in welchem Gebiet Sie sind. Wir verweisen Sie an den Partnersalon in den Bezirken Antalyas, der Ihnen am nächsten liegt. Der Termin wird per WhatsApp vereinbart; Salon und Uhrzeit klären wir gemeinsam. Der Preis richtet sich nach Behandlung, Gebiet und Aufwand und wird per WhatsApp genannt. Täglich 08:00–24:00.",
+    lead: "Kurz gesagt: Schreiben Sie uns per WhatsApp an +90 542 339 85 84, welche Behandlung Sie möchten und in welchem Gebiet Sie sind. Wir verweisen Sie an den Partnersalon in den Bezirken Antalyas, der Ihnen am nächsten liegt. Der Termin wird per WhatsApp vereinbart; Salon und Uhrzeit klären wir gemeinsam. Der Preis richtet sich nach Behandlung, Gebiet und Aufwand und wird per WhatsApp genannt. Täglich 08:00–24:00.",
     campaign: "Sie werden an die Partnersalons in dem Gebiet verwiesen, in dem Sie wohnen; Informationen zu den Leistungen, ein persönliches Preisangebot und aktuelle Aktionen erhalten Sie per WhatsApp.",
     crumb: 'Schönheitssalon',
     keywords: ['schönheitssalon antalya', 'friseur antalya urlaub', 'maniküre pediküre antalya', 'brautstyling antalya', 'Can Beauty Studio'],
@@ -273,7 +273,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Häufige Fragen',
     faq: [
-      ["Wie buche ich?", "Füllen Sie das Formular aus oder schreiben Sie an +90 531 510 44 58 per WhatsApp: Leistung, Gebiet und Wunschtag. Wir nennen den Preis und verweisen Sie an einen Partnersalon in Ihrer Nähe."],
+      ["Wie buche ich?", "Füllen Sie das Formular aus oder schreiben Sie an +90 542 339 85 84 per WhatsApp: Leistung, Gebiet und Wunschtag. Wir nennen den Preis und verweisen Sie an einen Partnersalon in Ihrer Nähe."],
       ["Wie erfahre ich den Preis?", "Preise stehen nicht auf der Seite. Sie hängen von Leistung, Gebiet und Aufwand ab und werden per WhatsApp genannt. Schreiben Sie einfach, was Sie brauchen. Sie werden an die Partnersalons in dem Gebiet verwiesen, in dem Sie wohnen; Informationen zu den Leistungen, ein persönliches Preisangebot und aktuelle Aktionen erhalten Sie per WhatsApp."],
       ["Wer erbringt die Leistung?", "Die Leistung wird über Partnersalons und Fachkräfte in Ihrer Region erbracht. Can Beauty Studio verweist Sie an den passenden Salon; Salonnamen werden auf der Seite nicht genannt."],
       ["Wann sind Sie erreichbar?", "Per WhatsApp und Telefon täglich von 08:00 bis 24:00 Uhr."],
@@ -288,7 +288,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Салон красоты в Анталье | Волосы, ногти, макияж | Can Beauty Studio',
     desc: "Волосы, ногти, макияж, образ невесты, уход за кожей и шугаринг в салонах-партнёрах по всей Анталье. Отправьте заявку, получите направление в салон и узнайте цену в WhatsApp.",
     h1: 'Салон красоты в Анталье: волосы, ногти, макияж и уход для отдыхающих',
-    lead: "Коротко: напишите в WhatsApp на +90 531 510 44 58, какая услуга нужна и в каком районе вы находитесь, и мы направим вас в ближайший к вам салон-партнёр среди салонов районов Антальи. Запись проходит через WhatsApp; салон и время согласуем вместе. Цена зависит от услуги, района и деталей и называется в WhatsApp. Ежедневно 08:00–24:00.",
+    lead: "Коротко: напишите в WhatsApp на +90 542 339 85 84, какая услуга нужна и в каком районе вы находитесь, и мы направим вас в ближайший к вам салон-партнёр среди салонов районов Антальи. Запись проходит через WhatsApp; салон и время согласуем вместе. Цена зависит от услуги, района и деталей и называется в WhatsApp. Ежедневно 08:00–24:00.",
     campaign: "Вас направят в салоны-партнёры в районе, где вы остановились; информацию об услугах, индивидуальное ценовое предложение и актуальные акции сообщат в WhatsApp.",
     crumb: 'Салон красоты',
     keywords: ['салон красоты анталья', 'парикмахер анталья', 'маникюр педикюр анталья', 'свадебная причёска макияж анталья', 'Can Beauty Studio'],
@@ -341,7 +341,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Частые вопросы',
     faq: [
-      ["Как записаться?", "Заполните форму или напишите в WhatsApp на +90 531 510 44 58: услуга, район и желаемый день. Мы назовём цену и направим вас в салон-партнёр в вашем районе."],
+      ["Как записаться?", "Заполните форму или напишите в WhatsApp на +90 542 339 85 84: услуга, район и желаемый день. Мы назовём цену и направим вас в салон-партнёр в вашем районе."],
       ["Как узнать цену?", "Цены на странице не указаны. Они зависят от услуги, района и деталей и называются в WhatsApp. Просто напишите, что вам нужно. Вас направят в салоны-партнёры в районе, где вы остановились; информацию об услугах, индивидуальное ценовое предложение и актуальные акции сообщат в WhatsApp."],
       ["Кто оказывает услугу?", "Услуги оказываются через салоны-партнёры и мастеров в вашем районе. Can Beauty Studio направляет вас в нужный салон; названия салонов на странице не указываются."],
       ["Когда вы на связи?", "В WhatsApp и по телефону — ежедневно с 08:00 до 24:00."],
@@ -356,7 +356,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Salón de belleza en Antalya | Pelo, uñas, maquillaje | Can Beauty Studio',
     desc: "Pelo, uñas, maquillaje, novia, cuidado facial y cera en salones asociados de Antalya. Envía la solicitud y recibe el precio por WhatsApp.",
     h1: 'Salón de belleza en Antalya: pelo, uñas, maquillaje y cuidado para visitantes',
-    lead: "En breve: escribe por WhatsApp al +90 531 510 44 58 qué servicio quieres y en qué zona estás, y te dirigimos al salón asociado más cercano entre los de los distritos de Antalya. La cita se concierta por WhatsApp; el salón y la hora se acuerdan juntos. El precio depende del servicio, la zona y los detalles, y se indica por WhatsApp. Todos los días de 08:00 a 24:00.",
+    lead: "En breve: escribe por WhatsApp al +90 542 339 85 84 qué servicio quieres y en qué zona estás, y te dirigimos al salón asociado más cercano entre los de los distritos de Antalya. La cita se concierta por WhatsApp; el salón y la hora se acuerdan juntos. El precio depende del servicio, la zona y los detalles, y se indica por WhatsApp. Todos los días de 08:00 a 24:00.",
     campaign: "Te dirigimos a los salones asociados de la zona donde te alojas; la información de los servicios, una oferta de precio personalizada y las promociones vigentes se comparten por WhatsApp.",
     crumb: 'Salón de belleza',
     keywords: ['salón de belleza antalya', 'peluquería antalya turistas', 'manicura pedicura antalya', 'peinado y maquillaje de novia antalya', 'Can Beauty Studio'],
@@ -409,7 +409,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Preguntas frecuentes',
     faq: [
-      ["¿Cómo reservo?", "Rellena el formulario o escribe por WhatsApp al +90 531 510 44 58 con el servicio, la zona y el día que quieres. Te decimos el precio y te dirigimos a un salón asociado de tu zona."],
+      ["¿Cómo reservo?", "Rellena el formulario o escribe por WhatsApp al +90 542 339 85 84 con el servicio, la zona y el día que quieres. Te decimos el precio y te dirigimos a un salón asociado de tu zona."],
       ["¿Cómo sé el precio?", "Los precios no aparecen en la página. Dependen del servicio, la zona y los detalles, y se indican por WhatsApp. Cuéntanos qué necesitas. Te dirigimos a los salones asociados de la zona donde te alojas; la información de los servicios, una oferta de precio personalizada y las promociones vigentes se comparten por WhatsApp."],
       ["¿Quién presta el servicio?", "El servicio se presta a través de salones asociados y profesionales de tu zona. Can Beauty Studio te dirige al salón adecuado; los nombres de los salones no se muestran en la página."],
       ["¿Cuál es el horario?", "Puedes escribirnos por WhatsApp o llamar todos los días de 08:00 a 24:00."],
@@ -424,7 +424,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Salon de beauté à Antalya | Cheveux, ongles, maquillage | Can Beauty Studio',
     desc: "Coiffure, ongles, maquillage, mariée, soin du visage et cire dans des salons partenaires à Antalya. Envoyez la demande et recevez le prix sur WhatsApp.",
     h1: 'Salon de beauté à Antalya : cheveux, ongles, maquillage et soins pour les visiteurs',
-    lead: "En bref : écrivez sur WhatsApp au +90 531 510 44 58 le service souhaité et votre secteur, et nous vous orientons vers le salon partenaire le plus proche parmi ceux des quartiers d’Antalya. Le rendez-vous se prend sur WhatsApp ; le salon et l’heure sont précisés ensemble. Le prix dépend du service, du secteur et des détails, et il est communiqué sur WhatsApp. Tous les jours de 08h00 à 24h00.",
+    lead: "En bref : écrivez sur WhatsApp au +90 542 339 85 84 le service souhaité et votre secteur, et nous vous orientons vers le salon partenaire le plus proche parmi ceux des quartiers d’Antalya. Le rendez-vous se prend sur WhatsApp ; le salon et l’heure sont précisés ensemble. Le prix dépend du service, du secteur et des détails, et il est communiqué sur WhatsApp. Tous les jours de 08h00 à 24h00.",
     campaign: "Vous êtes orienté vers les salons partenaires du secteur où vous séjournez ; les informations sur les services, une offre de prix personnalisée et les promotions en cours sont communiquées sur WhatsApp.",
     crumb: 'Salon de beauté',
     keywords: ['salon de beauté antalya', 'coiffeur antalya vacances', 'manucure pédicure antalya', 'coiffure maquillage mariée antalya', 'Can Beauty Studio'],
@@ -477,7 +477,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Questions fréquentes',
     faq: [
-      ["Comment réserver ?", "Remplissez le formulaire ou écrivez sur WhatsApp au +90 531 510 44 58 avec le service, le secteur et le jour souhaité. Nous vous indiquons le prix et vous orientons vers un salon partenaire de votre secteur."],
+      ["Comment réserver ?", "Remplissez le formulaire ou écrivez sur WhatsApp au +90 542 339 85 84 avec le service, le secteur et le jour souhaité. Nous vous indiquons le prix et vous orientons vers un salon partenaire de votre secteur."],
       ["Comment connaître le prix ?", "Les prix ne figurent pas sur la page. Ils dépendent du service, du secteur et des détails, et sont communiqués sur WhatsApp. Dites-nous simplement ce dont vous avez besoin. Vous êtes orienté vers les salons partenaires du secteur où vous séjournez ; les informations sur les services, une offre de prix personnalisée et les promotions en cours sont communiquées sur WhatsApp."],
       ["Qui assure le service ?", "Le service est assuré par des salons partenaires et des spécialistes de votre secteur. Can Beauty Studio vous oriente vers le bon salon ; les noms des salons ne sont pas affichés sur la page."],
       ["Quels sont vos horaires ?", "Vous pouvez nous joindre sur WhatsApp et par téléphone tous les jours de 08h00 à 24h00."],
@@ -492,7 +492,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Salon urody w Antalyi | Włosy, paznokcie, makijaż | Can Beauty Studio',
     desc: "Włosy, paznokcie, makijaż, stylizacja ślubna, pielęgnacja twarzy i depilacja woskiem w salonach partnerskich w Antalyi. Wyślij zgłoszenie, cenę poznasz na WhatsAppie.",
     h1: 'Salon urody w Antalyi: włosy, paznokcie, makijaż i pielęgnacja dla turystów',
-    lead: "Krótko: napisz na WhatsAppie pod numer +90 531 510 44 58, jakiej usługi potrzebujesz i w jakiej okolicy jesteś, a skierujemy Cię do najbliższego salonu partnerskiego spośród salonów w dzielnicach Antalyi. Wizytę umawia się przez WhatsApp; salon i godzinę ustalamy razem. Cena zależy od usługi, okolicy i szczegółów i podawana jest na WhatsAppie. Codziennie 08:00–24:00.",
+    lead: "Krótko: napisz na WhatsAppie pod numer +90 542 339 85 84, jakiej usługi potrzebujesz i w jakiej okolicy jesteś, a skierujemy Cię do najbliższego salonu partnerskiego spośród salonów w dzielnicach Antalyi. Wizytę umawia się przez WhatsApp; salon i godzinę ustalamy razem. Cena zależy od usługi, okolicy i szczegółów i podawana jest na WhatsAppie. Codziennie 08:00–24:00.",
     campaign: "Zostaniesz skierowana lub skierowany do salonów partnerskich w okolicy, w której mieszkasz; informacje o usługach, indywidualną ofertę cenową i aktualne promocje przekazujemy na WhatsAppie.",
     crumb: 'Salon urody',
     keywords: ['salon urody antalya', 'fryzjer antalya wakacje', 'manicure pedicure antalya', 'fryzura i makijaż ślubny antalya', 'Can Beauty Studio'],
@@ -545,7 +545,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Najczęstsze pytania',
     faq: [
-      ["Jak się umówić?", "Wypełnij formularz lub napisz na WhatsAppie pod numer +90 531 510 44 58: usługa, okolica i dzień. Podamy cenę i skierujemy Cię do salonu partnerskiego w Twojej okolicy."],
+      ["Jak się umówić?", "Wypełnij formularz lub napisz na WhatsAppie pod numer +90 542 339 85 84: usługa, okolica i dzień. Podamy cenę i skierujemy Cię do salonu partnerskiego w Twojej okolicy."],
       ["Jak poznać cenę?", "Cen nie ma na stronie. Zależą od usługi, okolicy i szczegółów i są podawane na WhatsAppie. Napisz, czego potrzebujesz. Zostaniesz skierowana lub skierowany do salonów partnerskich w okolicy, w której mieszkasz; informacje o usługach, indywidualną ofertę cenową i aktualne promocje przekazujemy na WhatsAppie."],
       ["Kto świadczy usługę?", "Usługa jest świadczona przez salony partnerskie i specjalistów w Twojej okolicy. Can Beauty Studio kieruje Cię do właściwego salonu; nazw salonów nie podajemy na stronie."],
       ["Jakie są godziny pracy?", "Jesteśmy dostępni na WhatsAppie i telefonicznie codziennie od 08:00 do 24:00."],
@@ -560,7 +560,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Салон краси в Анталії | Волосся, нігті, макіяж | Can Beauty Studio',
     desc: "Волосся, нігті, макіяж, образ нареченої, догляд за шкірою та шугаринг у салонах-партнерах по всій Анталії. Надішліть заявку, отримайте направлення до салону й дізнайтеся ціну у WhatsApp.",
     h1: 'Салон краси в Анталії: волосся, нігті, макіяж та догляд для відпочивальників',
-    lead: "Коротко: напишіть у WhatsApp на +90 531 510 44 58, яка послуга потрібна і в якому районі ви перебуваєте, і ми скеруємо вас до найближчого салону-партнера серед салонів районів Анталії. Запис відбувається через WhatsApp; салон і час узгоджуємо разом. Ціна залежить від послуги, району та деталей і повідомляється у WhatsApp. Щодня 08:00–24:00.",
+    lead: "Коротко: напишіть у WhatsApp на +90 542 339 85 84, яка послуга потрібна і в якому районі ви перебуваєте, і ми скеруємо вас до найближчого салону-партнера серед салонів районів Анталії. Запис відбувається через WhatsApp; салон і час узгоджуємо разом. Ціна залежить від послуги, району та деталей і повідомляється у WhatsApp. Щодня 08:00–24:00.",
     campaign: "Вас скерують до салонів-партнерів у районі, де ви зупинилися; інформацію про послуги, індивідуальну цінову пропозицію й актуальні акції повідомлять у WhatsApp.",
     crumb: 'Салон краси',
     keywords: ['салон краси анталія', 'перукар анталія', 'манікюр педикюр анталія', 'весільна зачіска макіяж анталія', 'Can Beauty Studio'],
@@ -613,7 +613,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Часті запитання',
     faq: [
-      ["Як записатися?", "Заповніть форму або напишіть у WhatsApp на +90 531 510 44 58: послуга, район і бажаний день. Ми повідомимо ціну й скеруємо вас до салону-партнера у вашому районі."],
+      ["Як записатися?", "Заповніть форму або напишіть у WhatsApp на +90 542 339 85 84: послуга, район і бажаний день. Ми повідомимо ціну й скеруємо вас до салону-партнера у вашому районі."],
       ["Як дізнатися ціну?", "Цін на сторінці немає. Вони залежать від послуги, району та деталей і повідомляються у WhatsApp. Просто напишіть, що вам потрібно. Вас скерують до салонів-партнерів у районі, де ви зупинилися; інформацію про послуги, індивідуальну цінову пропозицію й актуальні акції повідомлять у WhatsApp."],
       ["Хто надає послугу?", "Послуги надаються через салони-партнери та майстрів у вашому районі. Can Beauty Studio скеровує вас до потрібного салону; назви салонів на сторінці не вказуються."],
       ["Коли ви на зв’язку?", "У WhatsApp і телефоном — щодня з 08:00 до 24:00."],
@@ -628,7 +628,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'Schoonheidssalon in Antalya | Haar, nagels, make-up | Can Beauty Studio',
     desc: "Haar, nagels, make-up, bruid, gezichtsverzorging en waxen in partnersalons in Antalya. Stuur de aanvraag en ontvang de prijs via WhatsApp.",
     h1: 'Schoonheidssalon in Antalya: haar, nagels, make-up en verzorging voor bezoekers',
-    lead: "Kort gezegd: stuur via WhatsApp naar +90 531 510 44 58 welke behandeling u wilt en in welk gebied u bent, dan verwijzen wij u naar de dichtstbijzijnde partnersalon in de wijken van Antalya. De afspraak wordt via WhatsApp gemaakt; salon en tijd stemmen we samen af. De prijs hangt af van de behandeling, het gebied en de details en wordt via WhatsApp genoemd. Elke dag 08:00–24:00.",
+    lead: "Kort gezegd: stuur via WhatsApp naar +90 542 339 85 84 welke behandeling u wilt en in welk gebied u bent, dan verwijzen wij u naar de dichtstbijzijnde partnersalon in de wijken van Antalya. De afspraak wordt via WhatsApp gemaakt; salon en tijd stemmen we samen af. De prijs hangt af van de behandeling, het gebied en de details en wordt via WhatsApp genoemd. Elke dag 08:00–24:00.",
     campaign: "U wordt doorverwezen naar de partnersalons in het gebied waar u verblijft; informatie over de behandelingen, een prijsaanbieding op maat en actuele acties worden via WhatsApp gedeeld.",
     crumb: 'Schoonheidssalon',
     keywords: ['schoonheidssalon antalya', 'kapper antalya vakantie', 'manicure pedicure antalya', 'bruidskapsel make-up antalya', 'Can Beauty Studio'],
@@ -681,7 +681,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'Veelgestelde vragen',
     faq: [
-      ["Hoe boek ik?", "Vul het formulier in of schrijf via WhatsApp naar +90 531 510 44 58 met de behandeling, het gebied en de gewenste dag. Wij noemen de prijs en verwijzen u naar een partnersalon in uw regio."],
+      ["Hoe boek ik?", "Vul het formulier in of schrijf via WhatsApp naar +90 542 339 85 84 met de behandeling, het gebied en de gewenste dag. Wij noemen de prijs en verwijzen u naar een partnersalon in uw regio."],
       ["Hoe weet ik de prijs?", "Prijzen staan niet op de pagina. Ze hangen af van de behandeling, het gebied en de details en worden via WhatsApp genoemd. Vertel ons gewoon wat u nodig hebt. U wordt doorverwezen naar de partnersalons in het gebied waar u verblijft; informatie over de behandelingen, een prijsaanbieding op maat en actuele acties worden via WhatsApp gedeeld."],
       ["Wie levert de dienst?", "De dienst wordt geleverd via partnersalons en specialisten in uw regio. Can Beauty Studio verwijst u naar de juiste salon; namen van salons worden op de pagina niet getoond."],
       ["Wat zijn de openingstijden?", "U kunt ons elke dag van 08:00 tot 24:00 bereiken via WhatsApp en telefoon."],
@@ -697,7 +697,7 @@ export const G: Record<GLang, GCopy> = {
     title: 'صالون تجميل في أنطاليا | شعر، أظافر، مكياج | Can Beauty Studio',
     desc: "خدمات الشعر والأظافر والمكياج وتجهيز العروس والعناية بالبشرة وإزالة الشعر بالشمع في صالونات شريكة في أنطاليا. أرسل الطلب، ويتم توجيهك إلى صالون، واحصل على السعر عبر واتساب.",
     h1: 'صالون تجميل في أنطاليا: شعر وأظافر ومكياج وعناية للزوّار',
-    lead: "باختصار: اكتبوا لنا على واتساب على الرقم +90 531 510 44 58 الخدمة التي تريدونها والمنطقة التي تقيمون فيها، وسنوجّهكم إلى أقرب صالون شريك بين صالونات أحياء أنطاليا. يُحجز الموعد عبر واتساب، ويُحدَّد الصالون والوقت معاً. يختلف السعر حسب الخدمة والمنطقة والتفاصيل ويُعطى عبر واتساب. يومياً من 08:00 إلى 24:00.",
+    lead: "باختصار: اكتبوا لنا على واتساب على الرقم +90 542 339 85 84 الخدمة التي تريدونها والمنطقة التي تقيمون فيها، وسنوجّهكم إلى أقرب صالون شريك بين صالونات أحياء أنطاليا. يُحجز الموعد عبر واتساب، ويُحدَّد الصالون والوقت معاً. يختلف السعر حسب الخدمة والمنطقة والتفاصيل ويُعطى عبر واتساب. يومياً من 08:00 إلى 24:00.",
     campaign: "يتم توجيهكم إلى الصالونات الشريكة في المنطقة التي تقيمون فيها؛ وتُشارَك معلومات الخدمات وعرض سعر خاص بكم والحملات الحالية عبر واتساب.",
     crumb: 'صالون تجميل',
     keywords: ['صالون تجميل أنطاليا', 'كوافير أنطاليا', 'مانيكير وباديكير أنطاليا', 'تجهيز العروس أنطاليا', 'Can Beauty Studio'],
@@ -750,7 +750,7 @@ export const G: Record<GLang, GCopy> = {
     },
     faqTitle: 'أسئلة شائعة',
     faq: [
-      ["كيف أحجز؟", "املؤوا النموذج أو اكتبوا على واتساب إلى +90 531 510 44 58 الخدمة والمنطقة واليوم المطلوب. نخبركم بالسعر ونوجّهكم إلى صالون شريك في منطقتكم."],
+      ["كيف أحجز؟", "املؤوا النموذج أو اكتبوا على واتساب إلى +90 542 339 85 84 الخدمة والمنطقة واليوم المطلوب. نخبركم بالسعر ونوجّهكم إلى صالون شريك في منطقتكم."],
       ["كيف أعرف السعر؟", "لا تُكتب الأسعار في الصفحة. تختلف حسب الخدمة والمنطقة والتفاصيل وتُعطى عبر واتساب. اكتبوا لنا ما تحتاجونه فقط. يتم توجيهكم إلى الصالونات الشريكة في المنطقة التي تقيمون فيها؛ وتُشارَك معلومات الخدمات وعرض سعر خاص بكم والحملات الحالية عبر واتساب."],
       ["من يقدّم الخدمة؟", "تُقدَّم الخدمة عبر الصالونات الشريكة والمختصين في منطقتكم. يوجّهكم Can Beauty Studio إلى الصالون المناسب، ولا تُذكر أسماء الصالونات في الصفحة."],
       ["ما ساعات العمل؟", "يمكنكم التواصل معنا عبر واتساب والهاتف يومياً من 08:00 إلى 24:00."],
