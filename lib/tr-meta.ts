@@ -21,5 +21,5 @@ export function trNearDistrict(slug: string, name: string, loc: string, phone: s
   const e = T[slug]; if (!e) return undefined;
   const F = isFreeService(slug) ? 'Eve ve otele servis.' : 'Otele servis.';
   const d = e.d.includes('{F}') ? e.d.replace('{F}', F) : e.d;
-  return { title: `${e.t} | ${brand}`, desc: `☎ ${phone} · ${d.replace('{loc}', loc.charAt(0).toUpperCase() + loc.slice(1))}`.replace(/\s+/g, ' '), kw: e.kw.map((k) => `${name} ${k}`) };
+  return { title: `${e.t} | ${brand}`, desc: `Terziye sor: ${phone} · ${d.replace('{loc}', loc.charAt(0).toUpperCase() + loc.slice(1))}`.replace(/\s+/g, ' '), kw: e.kw.map((k) => `${name} ${k}`) };
 }

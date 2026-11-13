@@ -96,7 +96,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { absolute: "Terzi Çağır Antalya · Kapınıza Gelir · +90 531 898 64 18" },
   description:
-    '☎ +90 531 898 64 18 · Antalya Konyaaltı terzi çağır: paça kısaltma ₺200, bel ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, teslim eder.',
+    'Terziye sor: +90 531 898 64 18 · Antalya Konyaaltı terzi çağır: paça kısaltma ₺200, bel ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, teslim eder.',
   keywords: [
     'terzi çağır Antalya', 'Antalya terzi', 'Konyaaltı terzi',
     'eve gelen terzi Antalya', 'kapıya gelen terzi',

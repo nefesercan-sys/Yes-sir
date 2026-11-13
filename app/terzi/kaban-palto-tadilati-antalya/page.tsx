@@ -152,7 +152,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Palto ve Kaban Kısaltma Kaç TL? 200 TL'den · Antalya" },
-  description: "☎ +90 531 898 64 18 · Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğraf gönderin.",
+  description: "Terziye sor: +90 531 898 64 18 · Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğraf gönderin.",
   keywords: ["kaban tadilatı", "palto tadilatı", "kaban kısaltma", "palto kısaltma", "palto daraltma", "kaban kol kısaltma", "palto astar değişimi", "kaban düğme değişimi", "palto tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: { title: "Kaban ve Palto Kısaltma, Daraltma | Terzi Can Antalya", description: "Uzun kol, uzun etek, bol beden, yırtık astar: fotoğrafı gönderin, net fiyatı öğrenin. Normal işler aynı gün.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },

@@ -32,7 +32,7 @@ export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Kon
   const b = BANK[slug];
   const title = b ? `${b.t} | Terzi Can` : `${ad} Terzi Çağır | Terzi Can`;
   const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Alım-teslim.' : ' Otele servis.') : '';
-  const desc = b ? `☎ ${phone} · ${dd}` : `☎ ${phone} · ${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al.`;
+  const desc = b ? `Terziye sor: ${phone} · ${dd}` : `Terziye sor: ${phone} · ${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al.`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];
   const kw = [...base, ...(b?.kw ?? []).map((k) => `${ad} ${k}`), `${ilce} terzi`, 'Antalya terzi'];
   return { title, desc: fitDesc(desc), kw: Array.from(new Set(kw)) };
