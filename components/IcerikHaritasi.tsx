@@ -20,6 +20,7 @@ export default function IcerikHaritasi() {
     <aside
       aria-label={map.heading}
       lang={map.lang}
+      dir={map.lang === 'ar' ? 'rtl' : undefined}
       style={{
         maxWidth: 1040,
         margin: '0 auto',

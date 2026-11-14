@@ -6,7 +6,8 @@
 import { DISTRICTS, SERVICES, districtUrl, serviceUrl, isIndexable } from '@/lib/seo-data';
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
-export type Lang = 'tr' | 'en' | 'de' | 'ru';
+type CoreLang = 'tr' | 'en' | 'de' | 'ru';
+export type Lang = 'tr' | 'en' | 'de' | 'ru' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export type MapLink = { href: string; label: string };
 export type MapSection = { title: string; links: MapLink[] };
 export type SiteMap = { lang: Lang; heading: string; sections: MapSection[] };
@@ -49,11 +50,17 @@ const OTHER_LANG_HUBS: MapLink[] = [
   { href: '/en/hotel-tailor-antalya', label: 'English — Hotel Tailor Antalya' },
   { href: '/de/schneider-service-hotel-antalya', label: 'Deutsch — Schneider Service Hotel' },
   { href: '/ru/vyezdnoy-portnoy-antalya', label: 'Русский — Выездной портной' },
+  { href: '/es/arreglos-de-ropa-en-vacaciones-antalya', label: 'Español — Arreglos de ropa' },
+  { href: '/fr/retouches-vetements-vacances-antalya', label: 'Français — Retouches vêtements' },
+  { href: '/pl/przerobki-ubran-na-wakacjach-antalya', label: 'Polski — Przeróbki ubrań' },
+  { href: '/uk/pidhonka-odyahu-u-vidpustci-antaliya', label: 'Українська — Підгонка одягу' },
+  { href: '/nl/kleding-laten-vermaken-op-vakantie-antalya', label: 'Nederlands — Kleding vermaken' },
+  { href: '/ar/tadil-malabis-fi-el-ijaza-antalya', label: 'العربية — تعديل الملابس' },
 ];
 
 // ── Turistik bölgeler (en / de / ru alt sayfaları) ─────────────────────────
 const REGIONS = ['belek', 'lara', 'guzeloba', 'side', 'kemer'] as const; // lib/otel-bolgeleri.ts ile aynı olmalı (Kundu sayfası yok)
-const REGION_NAME: Record<Lang, Record<string, string>> = {
+const REGION_NAME: Record<CoreLang, Record<string, string>> = {
   tr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
   en: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
   de: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
@@ -64,9 +71,38 @@ const EN_BASE = '/en/hotel-tailor-antalya';
 const DE_BASE = '/de/schneider-service-hotel-antalya';
 const RU_BASE = '/ru/vyezdnoy-portnoy-antalya';
 
+
+// ── Ek turist dilleri (ES/FR/PL/UK/NL/AR) ──────────────────────────────────
+// Not: istemci paketini şişirmemek için lib/intl*.ts içe aktarılmaz; adresler elle yazıldı
+// (lib/intl.ts SLUG, lib/intl-zones.ts PREFIX, lib/intl-online.ts ONLINE_PATH, lib/ozel-dikim.ts OZEL_PATH ile aynı olmalı).
+type ExtraLang = 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
+const EXTRA_LANGS: ExtraLang[] = ['es', 'fr', 'pl', 'uk', 'nl', 'ar'];
+const isExtra = (l: Lang): l is ExtraLang => (EXTRA_LANGS as string[]).includes(l);
+const EXTRA_ZONES = ['antalya', 'belek', 'lara', 'guzeloba', 'side', 'kemer', 'konyaalti', 'kundu', 'muratpasa', 'goynuk'] as const;
+const LATIN_ZONES: Record<string, string> = { antalya: 'Antalya', belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer', konyaalti: 'Konyaaltı', kundu: 'Kundu', muratpasa: 'Muratpaşa', goynuk: 'Göynük' };
+const EXTRA: Record<ExtraLang, {
+  heading: string; sTitle: string; zTitle: string; zonePrefix: string;
+  guide: [string, string]; online: [string, string]; ozel: [string, string]; zoneLabel: (n: string) => string; names?: Record<string, string>;
+}> = {
+  es: { heading: 'Más servicios de sastrería en Antalya', sTitle: 'Servicios', zTitle: 'Sastre en hoteles por zona', zonePrefix: 'sastre-hoteles',
+    guide: ['/es/arreglos-de-ropa-en-vacaciones-antalya', 'Arreglos de ropa en vacaciones'], online: ['/es/servicio-de-sastreria-online-antalya', 'Sastre online'], ozel: ['/es/ropa-a-medida-envio-internacional-antalya', 'Ropa a medida con envío'], zoneLabel: (n) => `Sastre en hoteles de ${n}` },
+  fr: { heading: 'Autres services de couture à Antalya', sTitle: 'Services', zTitle: 'Couturier hôtels par secteur', zonePrefix: 'couturier-hotels',
+    guide: ['/fr/retouches-vetements-vacances-antalya', 'Retouches en vacances'], online: ['/fr/service-de-couture-en-ligne-antalya', 'Couture en ligne'], ozel: ['/fr/vetements-sur-mesure-expedition-monde-antalya', 'Sur mesure avec expédition'], zoneLabel: (n) => `Couturier hôtels ${n}` },
+  pl: { heading: 'Więcej usług krawieckich w Antalyi', sTitle: 'Usługi', zTitle: 'Krawiec dla hoteli wg rejonu', zonePrefix: 'krawiec-hotele',
+    guide: ['/pl/przerobki-ubran-na-wakacjach-antalya', 'Przeróbki ubrań na wakacjach'], online: ['/pl/internetowy-serwis-krawiecki-antalya', 'Krawiec online'], ozel: ['/pl/odziez-szyta-na-miare-wysylka-za-granice-antalya', 'Szycie na miarę z wysyłką'], zoneLabel: (n) => `Krawiec hotele ${n}` },
+  uk: { heading: 'Більше послуг кравця в Анталії', sTitle: 'Послуги', zTitle: 'Кравець для готелів за районами', zonePrefix: 'kravets-hoteli',
+    guide: ['/uk/pidhonka-odyahu-u-vidpustci-antaliya', 'Підгонка одягу у відпустці'], online: ['/uk/onlayn-servis-kravtsya-antaliya', 'Кравець онлайн'], ozel: ['/uk/poshyv-na-zamovlennia-dostavka-za-kordon-antaliya', 'Пошив на замовлення з доставкою'], zoneLabel: (n) => `Кравець готелі ${n}`,
+    names: { antalya: 'Анталія', belek: 'Белек', lara: 'Лара', guzeloba: 'Гюзельоба', side: 'Сіде', kemer: 'Кемер', konyaalti: 'Коньяалти', kundu: 'Кунду', muratpasa: 'Муратпаша', goynuk: 'Гейнюк' } },
+  nl: { heading: 'Meer kleermakersdiensten in Antalya', sTitle: 'Diensten', zTitle: 'Kleermaker hotels per gebied', zonePrefix: 'kleermaker-hotels',
+    guide: ['/nl/kleding-laten-vermaken-op-vakantie-antalya', 'Kleding laten vermaken op vakantie'], online: ['/nl/online-kleermakersservice-antalya', 'Online kleermaker'], ozel: ['/nl/kleding-op-maat-verzending-wereldwijd-antalya', 'Kleding op maat met verzending'], zoneLabel: (n) => `Kleermaker hotels ${n}` },
+  ar: { heading: 'المزيد من خدمات الخياطة في أنطاليا', sTitle: 'الخدمات', zTitle: 'خياط الفنادق حسب المنطقة', zonePrefix: 'khayyat-fanadiq',
+    guide: ['/ar/tadil-malabis-fi-el-ijaza-antalya', 'تعديل الملابس أثناء الإجازة'], online: ['/ar/khidmat-khayyat-online-antalya', 'خياط أونلاين'], ozel: ['/ar/tafsil-malabis-bil-talab-shahn-dawli-antalya', 'تفصيل ملابس بالطلب مع الشحن'], zoneLabel: (n) => `خياط فنادق ${n}`,
+    names: { antalya: 'أنطاليا', belek: 'بيليك', lara: 'لارا', guzeloba: 'غوزيلوبا', side: 'سيدي', kemer: 'كيمر', konyaalti: 'كونيالتي', kundu: 'كوندو', muratpasa: 'موراتباشا', goynuk: 'غوينوك' } },
+};
+
 const norm = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 
-function regionLinks(base: string, lang: Lang, suffix: (n: string) => string): MapLink[] {
+function regionLinks(base: string, lang: CoreLang, suffix: (n: string) => string): MapLink[] {
   return REGIONS.map((r) => ({ href: `${base}/${r}`, label: suffix(REGION_NAME[lang][r]) }));
 }
 
@@ -75,6 +111,7 @@ export function getLang(pathname: string): Lang | null {
   if (p.startsWith('/en/') || p === '/online-tailor-service') return 'en';
   if (p.startsWith('/de/')) return 'de';
   if (p.startsWith('/ru/')) return 'ru';
+  for (const l of EXTRA_LANGS) if (p.startsWith(`/${l}/`)) return l;
   if (p === '/terzi' || p.startsWith('/terzi/')) return 'tr';
   if (TR_SERVICES.some((l) => l.href === p)) return 'tr';
   return null;
@@ -84,16 +121,17 @@ export function getLang(pathname: string): Lang | null {
 export function getSiteMap(pathname: string): SiteMap | null {
   const base = getBaseSiteMap(pathname);
   if (!base) return null;
+  if (isExtra(base.lang)) return base;
   const p = norm(pathname);
   const not = (l: MapLink) => l.href !== p;
-  const L = base.lang;
-  const titles = {
+  const L = base.lang as CoreLang;
+  const titles = ({
     tr: ['Terzi hizmetleri (paça, fermuar, tadilat, dikim)', 'Antalya bölgelerine göre terzi'],
     en: ['Tailor services (hemming, zippers, alterations, dress making)', 'Tailor by area in Antalya'],
     ru: ['Услуги портного (подшив, молнии, переделка, пошив)', 'Портной по районам Антальи'],
     de: ['Schneider-Leistungen (Kürzen, Reißverschluss, Änderungen, Maßanfertigung)', 'Schneider nach Gebiet in Antalya'],
-  }[L];
-  const dl = (d: (typeof DISTRICTS)[number]) => ({ tr: `${d.name.tr} terzi`, en: `Tailor ${d.name.en}`, ru: `Портной ${d.name.ru}`, de: `Schneider ${d.name.de}` }[L]);
+  } as Record<'tr' | 'en' | 'ru' | 'de', string[]>)[L as 'tr' | 'en' | 'ru' | 'de'];
+  const dl = (d: (typeof DISTRICTS)[number]) => ({ tr: `${d.name.tr} terzi`, en: `Tailor ${d.name.en}`, ru: `Портной ${d.name.ru}`, de: `Schneider ${d.name.de}` } as Record<string, string>)[L];
   return {
     ...base,
     sections: [
@@ -130,6 +168,29 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
     }
     sections.push({ title: 'Diğer diller', links: OTHER_LANG_HUBS });
     return { lang, heading: 'İlgili sayfalar', sections };
+  }
+
+  if (isExtra(lang)) {
+    const X = EXTRA[lang];
+    return {
+      lang,
+      heading: X.heading,
+      sections: [
+        {
+          title: X.sTitle,
+          links: [
+            { href: X.guide[0], label: X.guide[1] },
+            { href: X.online[0], label: X.online[1] },
+            { href: X.ozel[0], label: X.ozel[1] },
+            { href: '/terzi', label: 'Antalya Terzi (Türkçe)' },
+          ].filter(not),
+        },
+        {
+          title: X.zTitle,
+          links: EXTRA_ZONES.map((z) => ({ href: `/${lang}/${X.zonePrefix}-${z}`, label: X.zoneLabel((X.names || LATIN_ZONES)[z]) })).filter(not),
+        },
+      ],
+    };
   }
 
   if (lang === 'en') {
@@ -205,7 +266,7 @@ export function getBreadcrumb(pathname: string): Crumb[] | null {
     return [home, { name: 'Antalya Terzi', href: '/terzi' }, { name: `${ilce.ad} Terzi`, href: p }];
   }
 
-  const regionPages: [RegExp, string, string, Lang][] = [
+  const regionPages: [RegExp, string, string, CoreLang][] = [
     [/^\/en\/hotel-tailor-antalya\/([a-z0-9-]+)$/, EN_BASE, 'Hotel Tailor Antalya', 'en'],
     [/^\/de\/schneider-service-hotel-antalya\/([a-z0-9-]+)$/, DE_BASE, 'Schneider Service Hotel Antalya', 'de'],
     [/^\/ru\/vyezdnoy-portnoy-antalya\/([a-z0-9-]+)$/, RU_BASE, 'Выездной портной Анталья', 'ru'],
