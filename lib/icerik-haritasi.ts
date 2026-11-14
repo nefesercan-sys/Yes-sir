@@ -6,6 +6,7 @@
 import { DISTRICTS, SERVICES, districtUrl, serviceUrl, isIndexable } from '@/lib/seo-data';
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 
+type CoreLang = 'tr' | 'en' | 'de' | 'ru';
 export type Lang = 'tr' | 'en' | 'de' | 'ru' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export type MapLink = { href: string; label: string };
 export type MapSection = { title: string; links: MapLink[] };
@@ -59,7 +60,7 @@ const OTHER_LANG_HUBS: MapLink[] = [
 
 // ── Turistik bölgeler (en / de / ru alt sayfaları) ─────────────────────────
 const REGIONS = ['belek', 'lara', 'guzeloba', 'side', 'kemer'] as const; // lib/otel-bolgeleri.ts ile aynı olmalı (Kundu sayfası yok)
-const REGION_NAME: Record<Lang, Record<string, string>> = {
+const REGION_NAME: Record<CoreLang, Record<string, string>> = {
   tr: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
   en: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
   de: { belek: 'Belek', lara: 'Lara', guzeloba: 'Güzeloba', side: 'Side', kemer: 'Kemer' },
@@ -101,7 +102,7 @@ const EXTRA: Record<ExtraLang, {
 
 const norm = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 
-function regionLinks(base: string, lang: Lang, suffix: (n: string) => string): MapLink[] {
+function regionLinks(base: string, lang: CoreLang, suffix: (n: string) => string): MapLink[] {
   return REGIONS.map((r) => ({ href: `${base}/${r}`, label: suffix(REGION_NAME[lang][r]) }));
 }
 
@@ -123,7 +124,7 @@ export function getSiteMap(pathname: string): SiteMap | null {
   if (isExtra(base.lang)) return base;
   const p = norm(pathname);
   const not = (l: MapLink) => l.href !== p;
-  const L = base.lang;
+  const L = base.lang as CoreLang;
   const titles = ({
     tr: ['Terzi hizmetleri (paça, fermuar, tadilat, dikim)', 'Antalya bölgelerine göre terzi'],
     en: ['Tailor services (hemming, zippers, alterations, dress making)', 'Tailor by area in Antalya'],
@@ -265,7 +266,7 @@ export function getBreadcrumb(pathname: string): Crumb[] | null {
     return [home, { name: 'Antalya Terzi', href: '/terzi' }, { name: `${ilce.ad} Terzi`, href: p }];
   }
 
-  const regionPages: [RegExp, string, string, Lang][] = [
+  const regionPages: [RegExp, string, string, CoreLang][] = [
     [/^\/en\/hotel-tailor-antalya\/([a-z0-9-]+)$/, EN_BASE, 'Hotel Tailor Antalya', 'en'],
     [/^\/de\/schneider-service-hotel-antalya\/([a-z0-9-]+)$/, DE_BASE, 'Schneider Service Hotel Antalya', 'de'],
     [/^\/ru\/vyezdnoy-portnoy-antalya\/([a-z0-9-]+)$/, RU_BASE, 'Выездной портной Анталья', 'ru'],
