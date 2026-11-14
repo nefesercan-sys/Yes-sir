@@ -4,7 +4,7 @@ import { G_PREFIX, gAnySlugToLang } from "@/lib/guzellik-slugs";
 // Kaldırılan programatik sayfalar: 404 yerine 410 (kalıcı silindi).
 const GONE_PREFIXES = ["/ulke/", "/turkiye/", "/meslek/", "/sektor/"];
 // Silinen statik bölümler (hesaplama araçları, Antalya rehberi, Riviera rehberi): 404 yerine 410.
-const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide"];
+const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide", "/terzi/kuru-temizleme-antalya"];
 
 // URL'den dili çıkar → kök layout <html lang> değerini SUNUCU HTML'inde doğru verir
 // (botlar JS çalıştırmadan ham HTML'i okur).

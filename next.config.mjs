@@ -58,8 +58,7 @@ const nextConfig = {
         { source: `/${slug}/:path*`, destination: '/terzi', permanent: true },
       ]),
       { source: '/terzi-talep', destination: '/terzi/iletisim', permanent: true },
-      // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
-      { source: '/terzi/kuru-temizleme-antalya', destination: '/terzi', permanent: false },
+      // Kuru temizleme/ütü hizmeti verilmiyor: /terzi/kuru-temizleme-antalya artık middleware.ts'te 410 (Gone) döner.
       // Adresinde 'kuru-temizleme' geçen ama kuru temizleme verilmeyen eski sayfa → en yakın Konyaaltı sayfası (kanibalizasyon giderildi).
       { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', permanent: true },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
