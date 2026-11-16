@@ -4,29 +4,10 @@ import { ONLINE_ALL, ONLINE_PATH } from "@/lib/intl-online";
 import { OZEL_ALL, OZEL_PATH, OZEL_META } from "@/lib/ozel-dikim";
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from "@/lib/reviews";
 
-// Ana sayfa vitrini: üç ayrı bölüm (Terzi Can, siparişe özel dikim ve dünyaya kargo, Can Beauty Studio).
+// Ana sayfa vitrini: iki ayrı bölüm (Terzi Can, siparişe özel dikim ve dünyaya kargo).
 // Sunucu bileşeni: tüm bağlantılar ham HTML'de görünür (botlar JS çalıştırmadan okur). Kendi renk belirteçlerini taşır
 // (açık ve koyu tema, arka plan + yazı rengi birlikte verilir), böylece hiçbir temada kontrast bozulmaz.
 // Görsel dil: terzi mezurası. Üstteki şerit sayfa açılırken bir kez "çekilir"; başka dekor yok.
-
-const BEAUTY_PATH = "/guzellik/guzellik-merkezi-antalya";
-const BEAUTY_WA_NUMBER = "905423398584";
-const BEAUTY_PHONE_DISPLAY = "+90 542 339 85 84";
-const BEAUTY_WA_TEXT =
-  "Merhaba, Can Beauty Studio hizmetleri için bilgi ve fiyat teklifi almak istiyorum. Konakladığım bölge: ";
-// Güzellik sayfaları (dil adresleri /guzellik/ önekinde)
-const BEAUTY_LANG: { l: keyof typeof OZEL_META; slug: string }[] = [
-  { l: "tr", slug: "guzellik-merkezi-antalya" },
-  { l: "en", slug: "beauty-salon-antalya" },
-  { l: "de", slug: "schoenheitssalon-antalya" },
-  { l: "ru", slug: "salon-krasoty-antalya" },
-  { l: "es", slug: "salon-de-belleza-antalya" },
-  { l: "fr", slug: "salon-de-beaute-antalya" },
-  { l: "pl", slug: "salon-urody-antalya" },
-  { l: "uk", slug: "salon-krasy-antaliya" },
-  { l: "nl", slug: "schoonheidssalon-antalya" },
-  { l: "ar", slug: "salon-tajmeel-antalya" },
-];
 
 // Hizmet bağlantıları: kümeler halinde (14 iç bağlantının hepsi korunur).
 const LINK_GROUPS: { title: string; links: { href: string; label: string }[] }[] = [
@@ -170,7 +151,7 @@ const STYLES = `
 
 /* ── Hizmet kartları ── */
 .tv-cards{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:900px){.tv-cards{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media(min-width:900px){.tv-cards{grid-template-columns:repeat(2,1fr);gap:20px}}
 .tv-card{--acc:var(--accent-terzi);--icb:var(--icon-bg-terzi);background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--acc);border-radius:16px;padding:22px 20px 20px;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
 .tv-card:hover,.tv-card:focus-within{box-shadow:0 10px 28px rgba(13,27,62,.14)}
 .tv-card.ozel{--acc:var(--accent-ozel);--icb:var(--icon-bg-ozel)}
@@ -233,7 +214,6 @@ export default function TerziVitrin() {
   const waOzel = waUrl(
     "Merhaba, siparişe özel dikim yaptırmak istiyorum. Ürün türü, kumaş, ölçüler ve ülke/şehir bilgisini yazıyorum."
   );
-  const waBeauty = `https://wa.me/${BEAUTY_WA_NUMBER}?text=${encodeURIComponent(BEAUTY_WA_TEXT)}`;
 
   // Gerçek Google yorumlarından, metni birebir olan iki kısa alıntı (lib/reviews.ts; metin değiştirilmez).
   const { count, average } = reviewStats();
@@ -331,22 +311,6 @@ export default function TerziVitrin() {
                 <a className="tv-btn tv-wa" href={waOzel} rel="noopener">WhatsApp</a>
               </div>
             </article>
-
-            <article className="tv-card guzel" aria-labelledby="kart-guzellik">
-              <div className="tv-ic"><svg {...ICON}><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" /></svg></div>
-              <p className="tv-sub">Can Beauty Studio</p>
-              <h2 id="kart-guzellik">Antalya&apos;da güzellik hizmetleri</h2>
-              <p className="tv-val">Saç, tırnak, makyaj, gelin saçı ve makyajı, cilt bakımı, kaş-kirpik bakımı ve ağda için konakladığınız bölgedeki anlaşmalı salonlara yönlendirilirsiniz.</p>
-              <ul>
-                <li>Hizmet anlaşmalı salonlar aracılığıyla verilir; ev veya otele hizmet verilmez, salona kendiniz gidersiniz</li>
-                <li>Hizmet bilgisi, size özel fiyat teklifi ve güncel kampanyalar WhatsApp&apos;tan paylaşılır</li>
-              </ul>
-              <p className="tv-fine">Her gün 08:00–24:00 · {BEAUTY_PHONE_DISPLAY}</p>
-              <div className="tv-actions">
-                <Link className="tv-btn tv-detail" href={BEAUTY_PATH} aria-label="Can Beauty Studio sayfası, detaylar">Detaylar</Link>
-                <a className="tv-btn tv-wa" href={waBeauty} rel="noopener">WhatsApp</a>
-              </div>
-            </article>
           </div>
         </div>
 
@@ -410,14 +374,6 @@ export default function TerziVitrin() {
             <ul>
               {OZEL_ALL.map((l) => (
                 <li key={l}><a href={OZEL_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div className="tv-lang-row">
-            <h3>Can Beauty Studio</h3>
-            <ul>
-              {BEAUTY_LANG.map(({ l, slug }) => (
-                <li key={l}><a href={`/guzellik/${slug}`} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
               ))}
             </ul>
           </div>

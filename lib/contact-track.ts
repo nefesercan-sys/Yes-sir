@@ -1,33 +1,25 @@
 // swaphubs.com — iletişim (WhatsApp / telefon) tıklama ölçümü için saf yardımcılar.
 // Kişisel veri YOK: yalnızca dil kodu, sayfa yolu ve marka. Çerez veya yerel depolama kullanılmaz.
-import { G_PREFIX, gAnySlugToLang } from './guzellik-slugs';
 
 export type ContactType = 'whatsapp' | 'phone';
-export type ContactBrand = 'tailor' | 'beauty';
+export type ContactBrand = 'tailor';
 
 const NON_TR = ['en', 'ru', 'de', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'];
-const BEAUTY_WA = '905423398584';
 
-/** Yoldan dil: /en/..., /de/... önekleri; kökteki /online-tailor-service İngilizce; /guzellik/<slug> dili slug'dan; aksi halde 'tr'. */
+/** Yoldan dil: /en/..., /de/... önekleri; kökteki /online-tailor-service İngilizce; aksi halde 'tr'. */
 export function langFromPath(pathname: string): string {
   const p = (pathname || '/').toLowerCase().replace(/\/+$/, '');
   const seg = p.split('/').filter(Boolean);
-  if (seg[0] === G_PREFIX.slice(1)) return (seg[1] && gAnySlugToLang(seg[1])) || 'tr';
   if (seg[0] && NON_TR.includes(seg[0])) return seg[0];
   if (seg[0] === 'online-tailor-service') return 'en';
   return 'tr';
 }
 
-export function isBeauty(pathname: string, href: string): boolean {
-  const p = (pathname || '').toLowerCase();
-  return p === G_PREFIX || p.startsWith(`${G_PREFIX}/`) || href.includes(BEAUTY_WA);
-}
-
-/** Kısa sayfa kodu: yolun son parçası, en çok 28 karakter; güzellikte 'b-' öneki. */
-export function pageCode(pathname: string, beauty: boolean): string {
+/** Kısa sayfa kodu: yolun son parçası, en çok 28 karakter. */
+export function pageCode(pathname: string): string {
   const seg = (pathname || '/').replace(/\/+$/, '').split('/').filter(Boolean);
   const last = (seg[seg.length - 1] || 'home').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 28) || 'home';
-  return beauty ? `b-${last}`.slice(0, 28) : last;
+  return last;
 }
 
 const HELLO: Record<string, string> = {
