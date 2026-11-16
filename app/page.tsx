@@ -5,15 +5,15 @@ import type { Metadata } from "next";
 const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
-  title: "Terzi Can Antalya — Tadilat, Özel Dikim, Dünyaya Kargo",
-  description: "Konyaaltı Antalya'da Terzi Can: paça, fermuar, tadilat, özel dikim. Eve ve otele alım-teslim; özel dikim dünyaya kargo. Her gün 08:00–23:00.",
-  keywords: "Antalya terzi, Konyaaltı terzi, terzi tadilat, özel dikim, otele gelen terzi, tekstil, fason üretim",
+  title: { absolute: "Tailor in Antalya · Alterations, Custom Tailoring · +90 531 898 64 18" },
+  description: "Ask the tailor: +90 531 898 64 18 · Terzi Can, Konyaaltı Antalya since 2006. Hemming from 200 TL (€10), zipper from 300 TL (€15). Home and hotel pickup. WhatsApp a photo.",
+  keywords: "tailor Antalya, clothing alterations Antalya, hotel tailor Antalya, made to measure Antalya, Schneider Antalya, портной Анталья, Antalya terzi",
   openGraph: {
-    title: "Terzi Can Antalya — Tadilat, Özel Dikim ve Dünyaya Kargo",
-    description: "Konyaaltı Antalya'da terzi, tadilat ve özel dikim. Eve ve otele alım-teslim; siparişe özel dikim Antalya içine ve yurt dışına kargo.",
+    title: "Tailor in Antalya · Alterations, Custom Tailoring and Worldwide Shipping",
+    description: "Ask the tailor: +90 531 898 64 18 · Terzi Can in Konyaaltı, Antalya. Alterations, custom tailoring, home and hotel pickup, worldwide shipping.",
     url: BASE,
     siteName: "SwapHubs",
-    locale: "tr_TR",
+    locale: "en_US",
     type: "website",
   },
   alternates: {
