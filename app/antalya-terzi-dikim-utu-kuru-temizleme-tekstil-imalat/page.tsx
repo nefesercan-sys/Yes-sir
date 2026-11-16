@@ -202,7 +202,7 @@ const SERIF   = 'Georgia,serif'
 const SANS    = 'system-ui,sans-serif'
 
 const SERVIS_ADIMLARI = [
-  { numara: '01', baslik: 'Arayın veya Yazın', aciklama: 'Telefon veya WhatsApp ile randevu alın. Antalya'da eve ve otele alım-teslim yapılır.' },
+  { numara: '01', baslik: 'Arayın veya Yazın', aciklama: "Telefon veya WhatsApp ile randevu alın. Antalya'da eve ve otele alım-teslim yapılır." },
   { numara: '02', baslik: 'Terzi Kapınıza Gelir', aciklama: 'Profesyonel terzimiz adresinize gelir, ölçünüzü alır veya tadilat için kıyafetlerinizi teslim alır.' },
   { numara: '03', baslik: 'Genellikle Aynı Gün Hazır', aciklama: 'Tadilat ve onarım aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.' },
   { numara: '04', baslik: 'Adresinize Teslim', aciklama: 'Hazır olan kıyafetleriniz tekrar adresinize getirilir.' },
