@@ -85,6 +85,9 @@ const STYLES = `
 /* ── Hero ── */
 .tv-hero{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;position:relative;overflow:hidden}
 .tv-hero-in{max-width:1120px;margin:0 auto;padding:44px 16px 40px}
+.tv-langs ul{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-wrap:wrap;gap:2px 16px}
+.tv .tv-hero .tv-langs a{display:inline-block;padding:8px 0;font-size:14px;color:#dbe5fb;text-decoration:underline;text-underline-offset:3px}
+.tv .tv-hero .tv-langs a:hover{color:#fff}
 .tv-hero h1{
   font-family:var(--font-unbounded),var(--font-jakarta),system-ui,sans-serif;
   color:#fff;font-weight:600;font-size:clamp(25px,6.6vw,44px);line-height:1.18;letter-spacing:-.01em;
@@ -233,6 +236,13 @@ export default function TerziVitrin() {
       {/* ── Hero ── */}
       <header className="tv-hero">
         <div className="tv-hero-in">
+          <nav className="tv-langs" aria-label="Languages / Diller">
+            <ul>
+              {ONLINE_ALL.filter((l) => l !== "tr").map((l) => (
+                <li key={l}><a href={ONLINE_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
+              ))}
+            </ul>
+          </nav>
           <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: tadilat, özel dikim ve dünyaya kargo</h1>
           <p className="tv-lead">
             Terzi Can, Konyaaltı Hurma&apos;daki atölyesinde 2006&apos;dan beri Antalya&apos;da tadilat ve dikim işleri yapar.
