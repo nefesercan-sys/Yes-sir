@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRICE_FROM, PRICE_BY_MODEL, AREA_SERVED, PHONE_E164, PHONE_DISPLAY, waUrl } from "@/lib/business";
+import { AREA_SERVED, PHONE_E164, PHONE_DISPLAY, waUrl } from "@/lib/business";
 import { ONLINE_ALL, ONLINE_PATH } from "@/lib/intl-online";
 import { OZEL_ALL, OZEL_PATH, OZEL_META } from "@/lib/ozel-dikim";
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from "@/lib/reviews";
@@ -246,7 +246,7 @@ export default function TerziVitrin() {
           <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: tadilat, özel dikim ve dünyaya kargo</h1>
           <p className="tv-lead">
             Terzi Can, Konyaaltı Hurma&apos;daki atölyesinde 2006&apos;dan beri Antalya&apos;da tadilat ve dikim işleri yapar.
-            Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı yazılı olarak söyleriz.
+            Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı ve teslim zamanını söyleriz.
           </p>
           <div className="tv-actions">
             <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp&apos;tan yazın</a>
@@ -295,11 +295,10 @@ export default function TerziVitrin() {
               <h2 id="kart-terzi">Antalya&apos;da tadilat ve dikim</h2>
               <p className="tv-val">Paça, bel, fermuar, deri ve mont tadilatı; kıyafetiniz evinizden veya otelinizden alınır ve geri getirilir.</p>
               <ul>
-                <li>Paça ve bel kısaltma-daraltma <b>{PRICE_FROM.paca} TL&apos;den</b></li>
-                <li>Fermuar değişimi <b>{PRICE_FROM.fermuar} TL&apos;den</b></li>
-                <li>Deri tadilatı <b>{PRICE_FROM.deri} TL&apos;den</b></li>
+                <li>Paça, bel, kol ve boy kısaltma-daraltma</li>
+                <li>Fermuar değişimi ve tamiri</li>
+                <li>Deri ve mont tadilatı</li>
               </ul>
-              <p className="tv-fine">Dikim işlerinde fiyat {PRICE_BY_MODEL.tr} belirlenir.</p>
               <div className="tv-actions">
                 <Link className="tv-btn tv-detail" href="/terzi" aria-label="Terzi Can sayfası, detaylar">Detaylar</Link>
                 <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp</a>
