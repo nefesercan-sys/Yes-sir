@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRICE_FROM, PRICE_BY_MODEL, AREA_SERVED, PHONE_E164, PHONE_DISPLAY, waUrl } from "@/lib/business";
+import { AREA_SERVED, PHONE_E164, PHONE_DISPLAY, waUrl } from "@/lib/business";
 import { ONLINE_ALL, ONLINE_PATH } from "@/lib/intl-online";
 import { OZEL_ALL, OZEL_PATH, OZEL_META } from "@/lib/ozel-dikim";
 import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from "@/lib/reviews";
@@ -85,6 +85,9 @@ const STYLES = `
 /* ── Hero ── */
 .tv-hero{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;position:relative;overflow:hidden}
 .tv-hero-in{max-width:1120px;margin:0 auto;padding:44px 16px 40px}
+.tv-langs ul{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-wrap:wrap;gap:2px 16px}
+.tv .tv-hero .tv-langs a{display:inline-block;padding:8px 0;font-size:14px;color:#dbe5fb;text-decoration:underline;text-underline-offset:3px}
+.tv .tv-hero .tv-langs a:hover{color:#fff}
 .tv-hero h1{
   font-family:var(--font-unbounded),var(--font-jakarta),system-ui,sans-serif;
   color:#fff;font-weight:600;font-size:clamp(25px,6.6vw,44px);line-height:1.18;letter-spacing:-.01em;
@@ -233,10 +236,17 @@ export default function TerziVitrin() {
       {/* ── Hero ── */}
       <header className="tv-hero">
         <div className="tv-hero-in">
+          <nav className="tv-langs" aria-label="Languages / Diller">
+            <ul>
+              {ONLINE_ALL.filter((l) => l !== "tr").map((l) => (
+                <li key={l}><a href={ONLINE_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
+              ))}
+            </ul>
+          </nav>
           <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: tadilat, özel dikim ve dünyaya kargo</h1>
           <p className="tv-lead">
             Terzi Can, Konyaaltı Hurma&apos;daki atölyesinde 2006&apos;dan beri Antalya&apos;da tadilat ve dikim işleri yapar.
-            Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı yazılı olarak söyleriz.
+            Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı ve teslim zamanını söyleriz.
           </p>
           <div className="tv-actions">
             <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp&apos;tan yazın</a>
@@ -285,11 +295,10 @@ export default function TerziVitrin() {
               <h2 id="kart-terzi">Antalya&apos;da tadilat ve dikim</h2>
               <p className="tv-val">Paça, bel, fermuar, deri ve mont tadilatı; kıyafetiniz evinizden veya otelinizden alınır ve geri getirilir.</p>
               <ul>
-                <li>Paça ve bel kısaltma-daraltma <b>{PRICE_FROM.paca} TL&apos;den</b></li>
-                <li>Fermuar değişimi <b>{PRICE_FROM.fermuar} TL&apos;den</b></li>
-                <li>Deri tadilatı <b>{PRICE_FROM.deri} TL&apos;den</b></li>
+                <li>Paça, bel, kol ve boy kısaltma-daraltma</li>
+                <li>Fermuar değişimi ve tamiri</li>
+                <li>Deri ve mont tadilatı</li>
               </ul>
-              <p className="tv-fine">Fiyatlara KDV dahil değildir. Dikim işlerinde fiyat {PRICE_BY_MODEL.tr} belirlenir.</p>
               <div className="tv-actions">
                 <Link className="tv-btn tv-detail" href="/terzi" aria-label="Terzi Can sayfası, detaylar">Detaylar</Link>
                 <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp</a>
