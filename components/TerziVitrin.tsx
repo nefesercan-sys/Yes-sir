@@ -9,47 +9,41 @@ import { GOOGLE_REVIEWS, GOOGLE_PROFILE_URL, reviewStats } from "@/lib/reviews";
 // (açık ve koyu tema, arka plan + yazı rengi birlikte verilir), böylece hiçbir temada kontrast bozulmaz.
 // Görsel dil: terzi mezurası. Üstteki şerit sayfa açılırken bir kez "çekilir"; başka dekor yok.
 
-// Hizmet bağlantıları (ana sayfa İngilizce öncelikli; Türkçe sayfalar ayrı grupta).
+// Hizmet bağlantıları: kümeler halinde (14 iç bağlantının hepsi korunur).
 const LINK_GROUPS: { title: string; links: { href: string; label: string }[] }[] = [
   {
-    title: "Alterations and repairs",
+    title: "Terzi Can",
     links: [
-      { href: "/en/tailor-services", label: "All tailor services" },
-      { href: "/en/urgent-clothing-repair-antalya", label: "Urgent clothing repair" },
-      { href: "/en/event-outfit-alteration-antalya", label: "Event outfit alteration" },
-      { href: "/en/tailor-faq-antalya", label: "Tailor FAQ" },
-      { href: "/en/contact-tailor-antalya", label: "Contact the tailor" },
+      { href: "/terzi", label: "Terzi Can — Antalya Terzi" },
+      { href: "/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti", label: "Konyaaltı Terzi, Elbise Dikim ve Tadilat" },
+      { href: "/terzi/eve-gelen-terzi-antalya", label: "Eve ve Otele Gelen Terzi" },
     ],
   },
   {
-    title: "Hotel guests",
+    title: "Tadilat",
     links: [
-      { href: "/en/hotel-tailor-antalya", label: "Hotel tailor in Antalya" },
-      { href: "/en/how-hotel-tailor-works-antalya", label: "How hotel pickup works" },
-      { href: "/en/tailor-antalya", label: "Tailor by district" },
+      { href: "/terzi/paca-kisaltma-antalya", label: "Paça Kısaltma" },
+      { href: "/terzi/fermuar-degisimi", label: "Fermuar Değişimi" },
+      { href: "/terzi/bay-terzi-antalya", label: "Bay Terzi" },
+      { href: "/terzi/bayan-terzi-antalya", label: "Bayan Terzi" },
     ],
   },
   {
-    title: "Custom and online",
+    title: "Üretim",
     links: [
-      { href: "/online-tailor-service", label: "Online tailor service" },
-      { href: "/en/made-to-order-clothing-worldwide-antalya", label: "Made-to-order clothing and shipping" },
-      { href: "/en/how-to-measure-yourself-for-a-tailor", label: "How to measure yourself at home" },
-      { href: "/en/linen-clothing-custom-made-antalya", label: "Linen clothing, custom made" },
+      { href: "/terzi/dikis-atolyesi-antalya", label: "Dikiş Atölyesi, Fason Üretim" },
+      { href: "/terzi/uniforma-uretimi-antalya", label: "Üniforma Üretimi" },
+      { href: "/tekstil-antalya", label: "Tekstil Antalya" },
     ],
   },
   {
-    title: "Business",
+    title: "Özel dikim ve online",
     links: [
-      { href: "/en/textile-manufacturer-antalya", label: "Textile manufacturer" },
-      { href: "/en/promotional-textiles-tote-bags-antalya", label: "Promotional textiles and tote bags" },
-    ],
-  },
-  {
-    title: "Türkçe (Turkish)",
-    links: [
-      { href: "/terzi", label: "Antalya Terzi (Türkçe)" },
-      { href: "/terzi/eve-gelen-terzi-antalya", label: "Eve ve otele gelen terzi" },
+      { href: "/siparise-ozel-dikim-dunyaya-kargo", label: "Siparişe Özel Dikim ve Kargo" },
+      { href: "/terzi/olcu-alma-rehberi", label: "Evde Ölçü Nasıl Alınır?" },
+      { href: "/online-tailor-service", label: "Online Tailor Service (EN)" },
+      { href: "/de/online-schneiderservice-antalya", label: "Online Schneiderservice (DE)" },
+      { href: "/ru/atelie-antalya", label: "Ателье Анталья (RU)" },
     ],
   },
 ];
@@ -219,17 +213,17 @@ const STYLES = `
 const ICON = { fill: "none", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, viewBox: "0 0 24 24", "aria-hidden": true };
 
 export default function TerziVitrin() {
-  const wa = waUrl("Hello, I am sending a photo of my garment. I would like to know the price and delivery time.");
+  const wa = waUrl("Merhaba, kıyafetimin fotoğrafını gönderiyorum, fiyat ve teslim zamanını öğrenmek istiyorum.");
   const waOzel = waUrl(
-    "Hello, I would like a made-to-order garment. I will write the product type, fabric, measurements and my country/city."
+    "Merhaba, siparişe özel dikim yaptırmak istiyorum. Ürün türü, kumaş, ölçüler ve ülke/şehir bilgisini yazıyorum."
   );
 
-  // Gerçek Google yorumlarından, metni birebir olan iki kısa alıntı (lib/reviews.ts; metin değiştirilmez, yazıldıkları dilde gösterilir).
+  // Gerçek Google yorumlarından, metni birebir olan iki kısa alıntı (lib/reviews.ts; metin değiştirilmez).
   const { count, average } = reviewStats();
   const quotes = ["Hamza A.", "Mehmet E."]
     .map((a) => GOOGLE_REVIEWS.find((r) => r.author === a))
     .filter((r): r is NonNullable<typeof r> => Boolean(r));
-  const ay = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const ay = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   const tarih = (d: string) => {
     const [y, m] = d.split("-");
     return `${ay[Number(m) - 1] ?? ""} ${y}`.trim();
@@ -242,89 +236,88 @@ export default function TerziVitrin() {
       {/* ── Hero ── */}
       <header className="tv-hero">
         <div className="tv-hero-in">
-          <nav className="tv-langs" aria-label="Languages">
+          <nav className="tv-langs" aria-label="Languages / Diller">
             <ul>
-              <li><a href="/terzi" hrefLang="tr" lang="tr">Türkçe</a></li>
-              {ONLINE_ALL.filter((l) => l !== "tr" && l !== "en").map((l) => (
+              {ONLINE_ALL.filter((l) => l !== "tr").map((l) => (
                 <li key={l}><a href={ONLINE_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
               ))}
             </ul>
           </nav>
-          <h1 id="terzi-vitrin-baslik">Tailor in Antalya: alterations, custom tailoring and worldwide shipping</h1>
+          <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: tadilat, özel dikim ve dünyaya kargo</h1>
           <p className="tv-lead">
-            Terzi Can has made alterations and custom clothing in his workshop in Konyaaltı Hurma, Antalya, since 2006.
-            Send a photo of your garment on WhatsApp; once the job is clear, we tell you the price in writing.
+            Terzi Can, Konyaaltı Hurma&apos;daki atölyesinde 2006&apos;dan beri Antalya&apos;da tadilat ve dikim işleri yapar.
+            Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı yazılı olarak söyleriz.
           </p>
           <div className="tv-actions">
-            <a className="tv-btn tv-wa" href={wa} rel="noopener">Write on WhatsApp</a>
-            <a className="tv-btn tv-call" href={`tel:${PHONE_E164}`}>Call: {PHONE_DISPLAY}</a>
+            <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp&apos;tan yazın</a>
+            <a className="tv-btn tv-call" href={`tel:${PHONE_E164}`}>Ara: {PHONE_DISPLAY}</a>
           </div>
-          <p className="tv-hours">Open every day 08:00–23:00. We help you in Turkish, English, German and Russian, and in 10 languages in total.</p>
+          <p className="tv-hours">Terzi Can her gün 08:00–23:00 arasında açıktır. Yazışma Türkçe, İngilizce, Almanca ve Rusça yapılabilir.</p>
         </div>
         <div className="tv-tape" aria-hidden="true" />
       </header>
 
       <div className="tv-wrap">
         {/* ── Güven şeridi: yalnızca doğrulanmış bilgiler ── */}
-        <ul className="tv-trust" aria-label="About Terzi Can">
+        <ul className="tv-trust" aria-label="Terzi Can bilgileri">
           <li>
             <svg {...ICON} stroke="currentColor"><path d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" /></svg>
-            <div><strong>Since 2006</strong><span>26 years of experience</span></div>
+            <div><strong>2006&apos;dan beri</strong><span>26 yıllık deneyim</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" /></svg>
-            <div><strong>10 languages</strong><span>From Turkish to Arabic</span></div>
+            <div><strong>10 dilde hizmet</strong><span>Türkçeden Arapçaya</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2M9 2h6" /></svg>
-            <div><strong>Same-day jobs</strong><span>Urgent jobs in 1–2 hours</span></div>
+            <div><strong>Aynı gün teslim</strong><span>Acil işler 1–2 saatte hazır</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M3 10h18M7 15h3" /></svg>
-            <div><strong>Cash or card</strong><span>All currencies accepted</span></div>
+            <div><strong>Nakit veya kart</strong><span>Tüm para birimleriyle</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><path d="M2 6.5h11V16H2zM13 10h4.2L21 13.5V16h-8z" /><circle cx="7" cy="17.5" r="1.8" /><circle cx="17" cy="17.5" r="1.8" /></svg>
-            <div><strong>Pickup and delivery</strong><span>To homes and hotels</span></div>
+            <div><strong>Alım-teslim</strong><span>Eve ve otele</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-            <div><strong>Open every day</strong><span>08:00–23:00, Terzi Can workshop</span></div>
+            <div><strong>Her gün açık</strong><span>08:00–23:00, Terzi Can atölyesi</span></div>
           </li>
         </ul>
 
-        {/* ── İki ayrı bölüm ── */}
+        {/* ── Üç ayrı bölüm ── */}
         <div className="tv-sec">
           <div className="tv-cards">
             <article className="tv-card" aria-labelledby="kart-terzi">
               <div className="tv-ic"><svg {...ICON}><path d="M8.1 8.1 20 20M8.1 15.9 20 4" /><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /></svg></div>
               <p className="tv-sub">Terzi Can</p>
-              <h2 id="kart-terzi">Alterations and tailoring in Antalya</h2>
-              <p className="tv-val">Hemming, waist, zipper, leather and coat alterations. Your clothes are picked up from your home or hotel and brought back.</p>
+              <h2 id="kart-terzi">Antalya&apos;da tadilat ve dikim</h2>
+              <p className="tv-val">Paça, bel, fermuar, deri ve mont tadilatı; kıyafetiniz evinizden veya otelinizden alınır ve geri getirilir.</p>
               <ul>
-                <li>Hemming and waist alterations <b>from {PRICE_FROM.paca} TL (€10)</b></li>
-                <li>Zipper replacement <b>from {PRICE_FROM.fermuar} TL (€15)</b></li>
-                <li>Leather alterations <b>from {PRICE_FROM.deri} TL (€20)</b></li>
+                <li>Paça ve bel kısaltma-daraltma <b>{PRICE_FROM.paca} TL&apos;den</b></li>
+                <li>Fermuar değişimi <b>{PRICE_FROM.fermuar} TL&apos;den</b></li>
+                <li>Deri tadilatı <b>{PRICE_FROM.deri} TL&apos;den</b></li>
               </ul>
-              <p className="tv-fine">Prices exclude VAT. For tailoring (new clothes) the price is set {PRICE_BY_MODEL.en}.</p>
+              <p className="tv-fine">Dikim işlerinde fiyat {PRICE_BY_MODEL.tr} belirlenir.</p>
               <div className="tv-actions">
-                <Link className="tv-btn tv-detail" href="/en/tailor-services" aria-label="Tailor services, details">Details</Link>
+                <Link className="tv-btn tv-detail" href="/terzi" aria-label="Terzi Can sayfası, detaylar">Detaylar</Link>
                 <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp</a>
               </div>
             </article>
 
             <article className="tv-card ozel" aria-labelledby="kart-ozel">
               <div className="tv-ic"><svg {...ICON}><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z" /><path d="M3 7.5 12 12l9-4.5M12 12v9" /></svg></div>
-              <p className="tv-sub">Worldwide shipping</p>
-              <h2 id="kart-ozel">Made-to-order clothing</h2>
-              <p className="tv-val">Sewn to your measurements from linen, cotton and other fabrics, and shipped within Antalya and abroad.</p>
+              <p className="tv-sub">Dünyaya kargo</p>
+              <h2 id="kart-ozel">Siparişe özel dikim</h2>
+              <p className="tv-val">Keten, pamuk ve diğer kumaşlardan ölçünüze göre dikilir; Antalya içine ve yurt dışına kargolanır.</p>
               <ul>
-                <li>Women&apos;s and men&apos;s suits, trousers, shirts, skirts, shorts, evening dresses</li>
-                <li>You send the measurements and a photo of the model on WhatsApp; the price depends on the photo or the model you want</li>
-                <li>The shipping fee is paid by the customer; the time depends on the job</li>
+                <li>Kadın ve erkek takım, pantolon, gömlek, etek, şort, abiye, takım elbise</li>
+                <li>Ölçü ve model fotoğrafını WhatsApp&apos;tan gönderirsiniz; fiyat fotoğrafa veya istenilen modele göre verilir</li>
+                <li>Kargo ücreti müşteriye aittir; süre işin durumuna göre değişir</li>
               </ul>
               <div className="tv-actions">
-                <Link className="tv-btn tv-detail" href={OZEL_PATH.en} aria-label="Made-to-order clothing, details">Details</Link>
+                <Link className="tv-btn tv-detail" href={OZEL_PATH.tr} aria-label="Siparişe özel dikim sayfası, detaylar">Detaylar</Link>
                 <a className="tv-btn tv-wa" href={waOzel} rel="noopener">WhatsApp</a>
               </div>
             </article>
@@ -333,43 +326,43 @@ export default function TerziVitrin() {
 
         {/* ── Müşteri yorumları (Google'daki gerçek yorumlar) ── */}
         <section className="tv-sec" aria-labelledby="tv-yorum-baslik">
-          <h2 id="tv-yorum-baslik">Customer reviews</h2>
+          <h2 id="tv-yorum-baslik">Müşteri yorumları</h2>
           <div className="tv-rev">
             <div className="tv-score">
-              <b>{average}</b>
-              <div className="tv-stars" role="img" aria-label={`${average} out of 5 on Google`}>
+              <b>{average.replace(".", ",")}</b>
+              <div className="tv-stars" role="img" aria-label={`Google'da ${average.replace(".", ",")} üzerinden 5 puan`}>
                 {[0, 1, 2, 3, 4].map((i) => (
                   <svg key={i} viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.5l-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9z" /></svg>
                 ))}
               </div>
-              <small>{count} reviews on Google</small>
+              <small>Google&apos;da {count} yorum</small>
             </div>
             {quotes.map((r) => (
               <figure className="tv-q" key={r.author} style={{ margin: 0 }}>
                 <blockquote style={{ margin: 0 }}>
                   <p>&ldquo;{r.text}&rdquo;</p>
                 </blockquote>
-                <figcaption>{r.author} · {tarih(r.date)} · review in Turkish</figcaption>
+                <figcaption>{r.author} · {tarih(r.date)}</figcaption>
               </figure>
             ))}
           </div>
-          <a className="tv-gl" href={GOOGLE_PROFILE_URL} rel="noopener noreferrer" target="_blank">See all reviews on Google</a>
+          <a className="tv-gl" href={GOOGLE_PROFILE_URL} rel="noopener noreferrer" target="_blank">Tüm yorumları Google&apos;da gör</a>
         </section>
 
         {/* ── Nasıl çalışır ── */}
         <section className="tv-sec" aria-labelledby="tv-nasil-baslik">
-          <h2 id="tv-nasil-baslik">How it works</h2>
+          <h2 id="tv-nasil-baslik">Nasıl çalışır?</h2>
           <ol className="tv-steps">
-            <li><strong>Send a photo or measurements</strong><span>Write to us on WhatsApp with a photo of the garment, or the measurements and the model for custom clothing.</span></li>
-            <li><strong>Price and time are confirmed</strong><span>We tell you the price and delivery time in writing; the time depends on the job.</span></li>
-            <li><strong>Pickup, delivery or shipping</strong><span>In Antalya your garment is picked up from your address or hotel reception and brought back when it is ready; custom clothing is shipped.</span></li>
+            <li><strong>Fotoğraf veya ölçü gönderin</strong><span>Kıyafetin fotoğrafını ya da özel dikim için ölçü ve modeli WhatsApp&apos;tan yazın.</span></li>
+            <li><strong>Fiyat ve zaman netleşir</strong><span>Fiyat ve teslim zamanı yazılı olarak söylenir; süre işin durumuna göre değişir.</span></li>
+            <li><strong>Alım-teslim veya kargo</strong><span>Antalya&apos;da kıyafet adresinizden ya da otelin resepsiyonundan alınır, işlem bitince geri getirilir; özel dikim kargolanır.</span></li>
           </ol>
         </section>
 
         {/* ── Hizmet bölgeleri ── */}
         <section className="tv-sec" aria-labelledby="tv-bolge-baslik">
-          <h2 id="tv-bolge-baslik">Pickup and delivery areas</h2>
-          <p>Terzi Can picks up and delivers to homes and hotels in these areas.</p>
+          <h2 id="tv-bolge-baslik">Alım-teslim bölgeleri</h2>
+          <p>Terzi Can, bu bölgelerde evinize ve otelinize alım-teslim yapar.</p>
           <ul className="tv-areas">
             {AREA_SERVED.map((a) => (<li key={a}>{a}</li>))}
           </ul>
@@ -377,9 +370,9 @@ export default function TerziVitrin() {
 
         {/* ── Diğer diller ── */}
         <section className="tv-sec" aria-labelledby="tv-dil-baslik">
-          <h2 id="tv-dil-baslik">Other languages</h2>
+          <h2 id="tv-dil-baslik">Diğer dillerde</h2>
           <div className="tv-lang-row">
-            <h3>Online tailor service</h3>
+            <h3>Online terzi hizmeti</h3>
             <ul>
               {ONLINE_ALL.map((l) => (
                 <li key={l}><a href={ONLINE_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
@@ -387,7 +380,7 @@ export default function TerziVitrin() {
             </ul>
           </div>
           <div className="tv-lang-row">
-            <h3>Made-to-order clothing</h3>
+            <h3>Siparişe özel dikim</h3>
             <ul>
               {OZEL_ALL.map((l) => (
                 <li key={l}><a href={OZEL_PATH[l]} hrefLang={OZEL_META[l].hreflang} lang={OZEL_META[l].hreflang}>{OZEL_META[l].name}</a></li>
@@ -396,13 +389,13 @@ export default function TerziVitrin() {
           </div>
         </section>
 
-        {/* ── Hizmet sayfaları ── */}
+        {/* ── Terzi hizmet sayfaları ── */}
         <section className="tv-sec" aria-labelledby="tv-hizmet-baslik">
-          <h2 id="tv-hizmet-baslik">Tailor service pages</h2>
+          <h2 id="tv-hizmet-baslik">Terzi hizmet sayfaları</h2>
           <p>
-            For prices and services see <Link href="/en/tailor-services">all tailor services</Link>; if you are a hotel guest,
-            read <Link href="/en/hotel-tailor-antalya">hotel tailor in Antalya</Link>. Turkish pages: <Link href="/terzi">Antalya Terzi</Link>.
-            Phone and WhatsApp: {PHONE_DISPLAY}.
+            Fiyat listesi, mahalle sayfaları ve hizmet rehberi için <Link href="/terzi">Terzi Can sayfasına</Link> gidin;
+            otel konuğuysanız <Link href="/terzi/eve-gelen-terzi-antalya">eve ve otele gelen terzi</Link> sayfasına bakın.
+            Telefon ve WhatsApp: {PHONE_DISPLAY}.
           </p>
           <div className="tv-groups">
             {LINK_GROUPS.map((g) => (
@@ -421,8 +414,8 @@ export default function TerziVitrin() {
 
       {/* ── Mobil sabit çubuk ── */}
       <div className="tv-bar">
-        <a className="tv-btn tv-wa" href={wa} rel="noopener">Write on WhatsApp</a>
-        <a className="tv-btn tv-call2" href={`tel:${PHONE_E164}`} aria-label={`Call: ${PHONE_DISPLAY}`}>Call</a>
+        <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp&apos;tan yazın</a>
+        <a className="tv-btn tv-call2" href={`tel:${PHONE_E164}`} aria-label={`Ara: ${PHONE_DISPLAY}`}>Ara</a>
       </div>
     </section>
   );

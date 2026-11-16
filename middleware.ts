@@ -9,7 +9,6 @@ const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide", "/guzel
 // (botlar JS çalıştırmadan ham HTML'i okur).
 type Lang = "tr" | "en" | "ru" | "de" | "es" | "fr" | "pl" | "uk" | "nl" | "ar";
 function langFromPath(pathname: string): Lang {
-  if (pathname === "/") return "en";
   if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
   if (pathname === "/ru" || pathname.startsWith("/ru/")) return "ru";
   if (pathname === "/de" || pathname.startsWith("/de/")) return "de";
