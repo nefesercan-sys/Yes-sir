@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { G_PREFIX, gAnySlugToLang } from "@/lib/guzellik-slugs";
 
 // Kaldırılan programatik sayfalar: 404 yerine 410 (kalıcı silindi).
 const GONE_PREFIXES = ["/ulke/", "/turkiye/", "/meslek/", "/sektor/"];
 // Silinen statik bölümler (hesaplama araçları, Antalya rehberi, Riviera rehberi): 404 yerine 410.
-const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide"];
+const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide", "/guzellik"];
 
 // URL'den dili çıkar → kök layout <html lang> değerini SUNUCU HTML'inde doğru verir
 // (botlar JS çalıştırmadan ham HTML'i okur).
 type Lang = "tr" | "en" | "ru" | "de" | "es" | "fr" | "pl" | "uk" | "nl" | "ar";
 function langFromPath(pathname: string): Lang {
-  if (pathname.startsWith(G_PREFIX + "/")) return (gAnySlugToLang(pathname.slice(G_PREFIX.length + 1).replace(/\/$/, "")) ?? "tr") as Lang;
   if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
   if (pathname === "/ru" || pathname.startsWith("/ru/")) return "ru";
   if (pathname === "/de" || pathname.startsWith("/de/")) return "de";

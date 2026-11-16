@@ -3,7 +3,7 @@
 // Müşterinin WhatsApp mesajına hiçbir şey eklenmez (etiket/adres yok). Tek, delege edilmiş dinleyici. Çerez/yerel depolama/kişisel veri YOK; JS kapalıysa bağlantılar aynen çalışır.
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { classify, isBeauty, langFromPath } from '@/lib/contact-track';
+import { classify, langFromPath } from '@/lib/contact-track';
 
 export default function ContactTracker() {
   useEffect(() => {
@@ -18,9 +18,8 @@ export default function ContactTracker() {
         if (!c) return;
         const pathname = window.location.pathname;
         const lang = langFromPath(pathname);
-        const beauty = isBeauty(pathname, href);
         try {
-          track('contact_click', { type: c.type, lang, page: pathname.slice(0, 120), brand: beauty ? 'beauty' : 'tailor' });
+          track('contact_click', { type: c.type, lang, page: pathname.slice(0, 120), brand: 'tailor' });
         } catch { /* ölçüm hiçbir zaman siteyi bozmaz */ }
       } catch { /* sessizce geç */ }
     };

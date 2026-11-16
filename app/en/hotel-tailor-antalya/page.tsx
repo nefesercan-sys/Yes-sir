@@ -7,7 +7,6 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
-import BeautyLinkBox from '@/components/guzellik/BeautyLinkBox';
 import { DURATION, HOTEL_NOTE } from '@/lib/business';
 
 const SITE_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
@@ -368,7 +367,6 @@ export default function HotelTailorAntalyaPage() {
           </div>
         </section>
       </main>
-      <BeautyLinkBox lang="en" />
       <ReviewsBlock lang="en" schema />
     </>
   );

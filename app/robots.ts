@@ -49,7 +49,6 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: [
       'https://swaphubs.com/sitemap.xml',
       'https://swaphubs.com/sitemap-terzi.xml',
-      'https://swaphubs.com/sitemap-guzellik.xml',
     ],
   }
 }
