@@ -310,7 +310,7 @@ export default function OnlineSchneiderClient({
             <a href="#services" className="obtn obtn-ghost">Unsere Leistungen ↓</a>
           </div>
           <div className="ohero-stats">
-            {([['20+','Jahre Erfahrung'],['5.0★','Google-Bewertung'],['4','Sprachen'],['1–2 Std.','Eilreparatur']] as [string,string][]).map(([n,l])=>(
+            {([['20','Jahre Erfahrung'],['5.0★','Google-Bewertung'],['4','Sprachen'],['1–2 Std.','Eilreparatur']] as [string,string][]).map(([n,l])=>(
               <div key={l}><span className="ohstat-n">{n}</span><span className="ohstat-l">{l}</span></div>
             ))}
           </div>

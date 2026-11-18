@@ -29,7 +29,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#service`,
       name: 'Bayan Terzi Antalya — Kadın Elbise Dikimi Fiyatları 2026',
       description: "Antalya'da bayan terzi: etek kısaltma ₺200, fermuar ₺300, abiye ve gelinlik tadilatı fotoğrafa/işe göre. Kadın elbise dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele alım-teslim.",
-      provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
+      provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: { '@type': 'AggregateOffer', lowPrice: '200', priceCurrency: 'TRY', availability: 'https://schema.org/InStock' },
     },

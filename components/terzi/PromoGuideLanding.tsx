@@ -17,7 +17,7 @@ const waLink = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURICom
 export function promoJsonLd(lang: ILang) {
   const c = PROMO[lang];
   const url = `${BASE}${promoUrl(lang)}`;
-  const provider = { '@type': ['Organization', 'ClothingStore'], name: 'Anavera Tekstil', url: `${BASE}${URLS.tekstil.en}`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Antalya', addressCountry: 'TR' } };
+  const provider = { '@type': 'Organization', name: 'Anavera Tekstil', url: `${BASE}${URLS.tekstil.en}`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Antalya', addressCountry: 'TR' } };
   return {
     '@context': 'https://schema.org',
     '@graph': [

@@ -104,7 +104,7 @@ const jsonLd = {
       ]
     },
     {
-      '@type': ['LocalBusiness', 'ClothingStore', 'ServiceAreaBusiness'],
+      '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',
@@ -254,7 +254,7 @@ export const metadata: Metadata = {
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
-    images: [{ url: '/antalya-tailor-online.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
+    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
   },
   other: {
     'geo.region': 'TR-07',

@@ -68,10 +68,10 @@ const jsonLd = {
   '@graph': [
     // ── ANA VARLIK: Terzi Can ──
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       '@id': `${SITE_URL}#business`,
       ...reviewSchema(),
-      name: 'Terzi Can',
+      name: 'TERZİ Can - Konyaaltı',
       alternateName: [
         GBP_NAME,
         'Tailor Can Antalya',

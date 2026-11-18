@@ -25,7 +25,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       '@id': `${PAGE_URL}#business`,
       name: 'Terzi Can — Antalya Konyaaltı',
       alternateName: [
@@ -433,7 +433,7 @@ export default function TerziCagirPage() {
             ['🌟 Google', 'Yorumlarımızı Görün'],
             ['⚡ Hızlı Servis', 'Aynı gün · acil 1–2 saat'],
             ['🚗 Adrese', 'Araçlı Servis'],
-            ['✂️ 15 Yıl', 'Tecrübe'],
+            ['✂️ 20 Yıl', 'Tecrübe'],
           ].map(([v,l]) => (
             <div key={l} className="trust-item">
               <div className="trust-val">{v}</div>

@@ -48,7 +48,7 @@ const UI = {
     otherLang: 'Diğer diller', hotelLink: 'Otel bölgesi sayfası', districts: 'Hizmet verdiğimiz bölgeler',
     related: 'İlgili hizmetler', time: 'Teslim süresi', price: 'Fiyat', photoPrice: 'Fotoğraf gönderin, fiyatı hemen söyleyelim',
     mahalle: 'Konyaaltı mahalleleri', ctaH: 'Hemen Ulaşın', free: 'Eve ve otele servis',
-    hours: 'Her gün 08:00–23:00', since: "2006'dan beri · 26 yıl deneyim", where: 'Atölye: Hurma Mahallesi, Konyaaltı, Antalya',
+    hours: 'Her gün 08:00–23:00', since: "2006'dan beri · 20 yıl deneyim", where: 'Atölye: Hurma Mahallesi, Konyaaltı, Antalya',
     contact: 'İletişim · Telefon', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Terzi Can — Antalya terzi', pricesHref: '/terzi',
   },
   en: {
@@ -57,7 +57,7 @@ const UI = {
     otherLang: 'Other languages', hotelLink: 'Hotel area page', districts: 'Areas we serve',
     related: 'Related services', time: 'Turnaround', price: 'Price', photoPrice: 'Send a photo and we will quote right away',
     mahalle: 'Konyaaltı neighbourhoods (Turkish)', ctaH: 'Get in Touch', free: 'Service to homes & hotels',
-    hours: 'Open daily 08:00–23:00', since: 'Serving since 2006 · 26 years of experience', where: 'Workshop: Hurma, Konyaaltı, Antalya',
+    hours: 'Open daily 08:00–23:00', since: 'Serving since 2006 · 20 years of experience', where: 'Workshop: Hurma, Konyaaltı, Antalya',
     contact: 'Contact', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online tailor service Antalya', pricesHref: '/online-tailor-service',
   },
   ru: {
@@ -66,7 +66,7 @@ const UI = {
     otherLang: 'Другие языки', hotelLink: 'Страница отельного района', districts: 'Районы обслуживания',
     related: 'Похожие услуги', time: 'Срок', price: 'Цена', photoPrice: 'Пришлите фото — сразу назовём цену',
     mahalle: 'Районы Коньяалты (тур.)', ctaH: 'Свяжитесь с нами', free: 'Выезд на дом и в отели',
-    hours: 'Ежедневно 08:00–23:00', since: 'Работаем с 2006 года · 26 лет опыта', where: 'Мастерская: Хурма, Коньяалты, Анталья',
+    hours: 'Ежедневно 08:00–23:00', since: 'Работаем с 2006 года · 20 лет опыта', where: 'Мастерская: Хурма, Коньяалты, Анталья',
     contact: 'Контакты', footer: 'Terzi Can · Хурма, Коньяалты, Анталья', pricesLink: 'Ателье в Анталье', pricesHref: '/ru/atelie-antalya',
   },
   de: {
@@ -75,7 +75,7 @@ const UI = {
     otherLang: 'Andere Sprachen', hotelLink: 'Seite für das Hotelgebiet', districts: 'Gebiete, die wir bedienen',
     related: 'Ähnliche Leistungen', time: 'Dauer', price: 'Preis', photoPrice: 'Foto senden, Preis sofort per WhatsApp',
     mahalle: 'Stadtteile in Konyaaltı (türk.)', ctaH: 'Kontakt aufnehmen', free: 'Service für Zuhause & Hotels',
-    hours: 'Täglich 08:00–23:00', since: 'Seit 2006 · 26 Jahre Erfahrung', where: 'Werkstatt: Hurma, Konyaaltı, Antalya',
+    hours: 'Täglich 08:00–23:00', since: 'Seit 2006 · 20 Jahre Erfahrung', where: 'Werkstatt: Hurma, Konyaaltı, Antalya',
     contact: 'Kontakt', footer: 'Terzi Can · Hurma, Konyaaltı, Antalya', pricesLink: 'Online Schneiderservice Antalya', pricesHref: '/de/online-schneiderservice-antalya',
   },
 } as const;
@@ -93,7 +93,7 @@ function businessNode(lang: Lang, withReviews = true) {
   // Tek işletme varlığı: tüm alanlar lib/business.ts'ten (NAP, saat, areaServed).
   const b = BUSINESS;
   return {
-    '@type': ['LocalBusiness', 'ClothingStore'],
+    '@type': 'LocalBusiness',
     // Yorum işaretlemesi yalnızca yorumların görünür olduğu sayfalarda (ReviewsBlock) eklenir
     ...(withReviews ? reviewSchema() : {}),
     '@id': BUSINESS_ID,

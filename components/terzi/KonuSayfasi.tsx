@@ -46,7 +46,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
         description: d.kisa,
         areaServed: [{ '@type': 'AdministrativeArea', name: 'Konyaaltı' }, { '@type': 'City', name: 'Antalya' }],
         provider: {
-          '@type': ['LocalBusiness', 'ClothingStore'], '@id': `${PARENT}#business`, name: 'TERZİ Can - Konyaaltı', url: PARENT,
+          '@type': 'LocalBusiness', '@id': `${PARENT}#business`, name: 'TERZİ Can - Konyaaltı', url: PARENT,
           telephone: PHONE_E, hasMap: GBP_URL,
           address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', addressCountry: 'TR' },
           openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],

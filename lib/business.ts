@@ -63,7 +63,7 @@ export const areaServedSchema = () => AREA_SERVED.map((name) => ({ '@type': name
 export function businessCore() {
   const b = BUSINESS;
   return {
-    '@type': ['LocalBusiness', 'ClothingStore'],
+    '@type': 'LocalBusiness',
     '@id': b.id,
     name: b.name,
     url: `${SITE_URL}/terzi`,
