@@ -32,15 +32,15 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       '@id': `${PARENT}#business`,
-      name: 'Terzi Can',
+      name: 'TERZİ Can - Konyaaltı',
       telephone: PHONE_E,
       url: PARENT,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Konyaaltı',
-        addressLocality: 'Antalya',
+        streetAddress: 'Hurma Mahallesi',
+        addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07130',
         addressCountry: 'TR',

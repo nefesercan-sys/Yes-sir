@@ -52,9 +52,9 @@ const jsonLd = {
       ],
       description: "Antalya'da eve gelen terzi ve otele gelen terzi servisi. Konyaaltı, Lara, Belek, Kemer, Side — yakın ilçelere araçlı terzi servisi. Ölçü alma, dikim ve teslimat kapınıza.",
       provider: {
-        '@type': 'ClothingStore',
+        '@type': 'LocalBusiness',
         '@id': `${PARENT_URL}#business`,
-        name: 'Terzi Can',
+        name: 'TERZİ Can - Konyaaltı',
         telephone: PHONE_E164,
       },
       areaServed: [

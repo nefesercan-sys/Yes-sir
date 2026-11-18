@@ -91,10 +91,10 @@ const jsonLd = {
     {
       // DÜZELTME: 'Tailor' tipi schema.org'da YOK — bu yeni belgede de
       // tekrarlanmıştı. Geçerli tipler: LocalBusiness + ClothingStore.
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
-      name: 'Terzi Can',
+      name: 'TERZİ Can - Konyaaltı',
       alternateName: ['Ателье Terzi Can', 'Портной Кан Анталья', 'Tailor Can Antalya'],
       description:
         'Профессиональное ателье в Анталье, район Коньяалты (Хурма). Ремонт и пошив одежды, подгонка по фигуре, замена молнии и фурнитуры, работа с кожей и плотными тканями, срочный ремонт.',
@@ -107,8 +107,8 @@ const jsonLd = {
       // DÜZELTME: uydurma adres yerine gerçek Maps kaydındaki adres.
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Hurma Mahallesi, Konyaaltı',
-        addressLocality: 'Antalya',
+        streetAddress: 'Hurma Mahallesi',
+        addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07130',
         addressCountry: 'TR',

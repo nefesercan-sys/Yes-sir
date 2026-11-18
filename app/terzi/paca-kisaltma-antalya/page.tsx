@@ -33,7 +33,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#service`,
       name: 'Paça Kısaltma Antalya — Pantolon Kısaltma Fiyatları 2026',
       description: "Antalya'da paça kısaltma ve pantolon kısaltma hizmeti. Kot paça ₺200, kumaş pantolon ₺200. Aynı gün teslim. Eve ve otele gelen terzi servisi.",
-      provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
+      provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Belek'},{name:'Lara'},{name:'Kemer'}
       ].map(c=>({...c,'@type':'City'})),

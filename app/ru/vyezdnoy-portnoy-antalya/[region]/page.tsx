@@ -80,7 +80,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `Выездной портной ${r.name} — Забор и Доставка`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
+        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,

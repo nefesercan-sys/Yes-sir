@@ -106,7 +106,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Terzi Can kaç yıldır hizmet veriyor?",
-  "2006'dan beri, yani 26 yıldır, Antalya'da hizmet veriyor."
+  "2006'dan beri, yani 20 yıldır, Antalya'da hizmet veriyor."
  ],
  [
   "Hangi dillerde hizmet veriliyor?",

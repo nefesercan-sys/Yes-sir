@@ -108,7 +108,7 @@ const jsonLd = {
 
     // 2. LocalBusiness
     {
-      '@type': ['ClothingStore', 'LocalBusiness'],
+      '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
       name: 'Terzi Can Online Terzi',
@@ -123,8 +123,8 @@ const jsonLd = {
       logo: 'https://swaphubs.com/logo.png',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Konyaaltı',
-        addressLocality: 'Antalya',
+        streetAddress: 'Hurma Mahallesi',
+        addressLocality: 'Konyaaltı',
         addressRegion: 'Antalya',
         postalCode: '07130',
         addressCountry: 'TR',

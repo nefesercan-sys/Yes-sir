@@ -262,7 +262,7 @@ export default function TerziVitrin() {
         <ul className="tv-trust" aria-label="Terzi Can bilgileri">
           <li>
             <svg {...ICON} stroke="currentColor"><path d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" /></svg>
-            <div><strong>2006&apos;dan beri</strong><span>26 yıllık deneyim</span></div>
+            <div><strong>2006&apos;dan beri</strong><span>20 yıllık deneyim</span></div>
           </li>
           <li>
             <svg {...ICON} stroke="currentColor"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" /></svg>

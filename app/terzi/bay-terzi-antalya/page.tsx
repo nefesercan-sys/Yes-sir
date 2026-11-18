@@ -28,7 +28,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#service`,
       name: 'Bay Terzi Antalya — Erkek Takım Elbise Dikimi Fiyatları 2026',
       description: "Antalya'da bay terzi: pantolon kısaltma ₺200, fermuar ₺300. Erkek takım elbise, gömlek, smoking ve damatlık dikimi fotoğrafa ve istediğiniz modele göre fiyatlanır. Eve ve otele alım-teslim.",
-      provider: { '@type': 'ClothingStore', name: 'Terzi Can', telephone: '+905318986418', '@id': `${PARENT}#business` },
+      provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', telephone: '+905318986418', '@id': `${PARENT}#business` },
       areaServed: ['Antalya','Konyaaltı','Belek','Lara','Kemer'].map(name=>({'@type':'City',name})),
       offers: {
         '@type': 'AggregateOffer',

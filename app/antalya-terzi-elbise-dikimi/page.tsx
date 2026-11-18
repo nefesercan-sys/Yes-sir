@@ -56,7 +56,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
       name: 'TERZİ Can - Konyaaltı',

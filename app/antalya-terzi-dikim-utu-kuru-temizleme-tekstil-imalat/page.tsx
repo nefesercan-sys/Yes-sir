@@ -37,7 +37,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['LocalBusiness', 'ClothingStore'],
+      '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${TERZI_URL}#business`,
       // DÜZELTME: sitedeki ana sayfayla (antalyada-terzi-dikim-tamirat-utu-hizmetleri)

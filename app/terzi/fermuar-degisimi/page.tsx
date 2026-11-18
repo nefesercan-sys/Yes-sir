@@ -149,7 +149,7 @@ const jsonLd = {
         { '@type': 'City', name: 'Antalya' },
       ],
       provider: {
-        '@type': ['LocalBusiness', 'ClothingStore'],
+        '@type': 'LocalBusiness',
         '@id': `${PARENT}#business`,
         name: 'TERZİ Can - Konyaaltı',
         url: PARENT,
