@@ -1,6 +1,6 @@
 // ============================================================
 // lib/reviews.ts — Google işletme profilindeki GERÇEK yorumlar (tek kaynak)
-// Profil: TERZİ Can - Konyaaltı (cid=6436895271281342624)
+// Profil: TERZİ Can - Antalya Tailor Service (cid=6436895271281342624)
 // Yeni yorum geldikçe buraya ekle (metin Google'daki ile birebir aynı olmalı); sayıyı GOOGLE_PROFILE_STATS'ta güncelle.
 // Sadece Google'da gerçekten yayınlanmış yorumları ekle, metni değiştirme.
 // ============================================================

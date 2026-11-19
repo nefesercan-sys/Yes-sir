@@ -57,7 +57,7 @@ const jsonLd = {
         'Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya',
       ],
       description: 'Выездной портной в Анталье. Приедем в ваш отель в Белеке, Ларе, Кемере и Сиде, а также в ближайших районах Антальи. Снятие мерок, пошив и доставка к вашей двери.',
-      provider: { '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Konyaaltı', telephone: PHONE_E164 },
+      provider: { '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_E164 },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
         {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Side'},{name:'Kepez'},
@@ -371,7 +371,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
           </div>
         </section>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Konyaaltı', url: PARENT_URL, telephone: PHONE_E164 }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Antalya Tailor Service', url: PARENT_URL, telephone: PHONE_E164 }) }} />
       <ReviewsBlock lang="ru" schema />
     </>
   );

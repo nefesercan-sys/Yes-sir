@@ -11,7 +11,7 @@ export const PHONE_E164 = '+905318986418';
 export const PHONE_DISPLAY = '+90 531 898 64 18';
 export const WA_NUMBER = '905318986418';
 export const MAPS_URL = 'https://www.google.com/maps?cid=6436895271281342624';
-export const GOOGLE_REVIEW_URL = 'https://g.page/r/CYUmDLIgrCRREAE/review';
+export const GOOGLE_REVIEW_URL = 'https://g.page/r/CaC4HSUlclRZEAE/review';
 /** Aynı işletmenin diğer RESMÎ web sitesi (iki site de resmîdir; her biri kendi adresinde canonical kalır). */
 export const OTHER_OFFICIAL_SITE = 'https://terzihizmeti.com.tr';
 export const OTHER_OFFICIAL_BUSINESS_ID = `${OTHER_OFFICIAL_SITE}/#business`;
@@ -23,7 +23,7 @@ export const AREA_SERVED = ['Konyaaltı', 'Muratpaşa', 'Lara', 'Güzeloba', 'Ku
 
 export const BUSINESS = {
   id: BUSINESS_ID,
-  name: 'TERZİ Can - Konyaaltı', // Google profil adıyla birebir aynı
+  name: 'TERZİ Can - Antalya Tailor Service', // Google profil adıyla birebir aynı
   legalShortName: 'Terzi Can',
   alternateName: [
     'Terzi Can',

@@ -21,7 +21,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
   const nav = isPromo ? PROMO_ALL : LANGS.map((l) => ({ code: l, hreflang: HREFLANG[l], name: l.toUpperCase(), path: URLS[topic][l] }));
 
   const provider = isTerzi
-    ? { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', url: `${BASE}/terzi`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı, Antalya', addressCountry: 'TR' } }
+    ? { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', url: `${BASE}/terzi`, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı, Antalya', addressCountry: 'TR' } }
     : { '@type': 'Organization', name: 'Anavera Tekstil', url, telephone: `+${WA_NUMBER}`, address: { '@type': 'PostalAddress', addressLocality: 'Antalya', addressCountry: 'TR' } };
 
   const jsonLd = {

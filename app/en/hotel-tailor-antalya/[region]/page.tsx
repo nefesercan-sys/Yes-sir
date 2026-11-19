@@ -83,7 +83,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `Hotel Tailor ${r.name} — Pickup & Delivery`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Konyaaltı', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
+        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,

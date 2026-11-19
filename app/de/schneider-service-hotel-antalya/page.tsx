@@ -57,7 +57,7 @@ const jsonLd = {
         'Eve Gelen Terzi Antalya','Otele Gelen Terzi Antalya',
       ],
       description: 'Mobiler Schneiderservice in Antalya. Wir kommen zu Ihrem Hotel in Belek, Lara, Kemer, Side und nahegelegene Bezirke. Maßnehmen, Änderung und Lieferung direkt zu Ihnen.',
-      provider: { '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Konyaaltı', telephone: PHONE_E164 },
+      provider: { '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_E164 },
       areaServed: [
         {name:'Antalya'},{name:'Konyaaltı'},{name:'Muratpaşa'},
         {name:'Lara'},{name:'Belek'},{name:'Kemer'},{name:'Side'},{name:'Kepez'},
@@ -371,7 +371,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
           </div>
         </section>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Konyaaltı', url: PARENT_URL, telephone: PHONE_E164 }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString({ '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': `${PARENT_URL}#business`, name: 'TERZİ Can - Antalya Tailor Service', url: PARENT_URL, telephone: PHONE_E164 }) }} />
       <ReviewsBlock lang="de" schema />
     </>
   );

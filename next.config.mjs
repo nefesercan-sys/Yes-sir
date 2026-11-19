@@ -87,7 +87,7 @@ const nextConfig = {
       })),
       { source: '/online-terzi-hizme', destination: '/online-terzi-hizmeti', permanent: true },
       // Kısa yorum linki: swaphubs.com/yorum -> Google yorum yazma sayfası
-      { source: '/yorum', destination: 'https://g.page/r/CYUmDLIgrCRREAE/review', permanent: false },
+      { source: '/yorum', destination: 'https://g.page/r/CaC4HSUlclRZEAE/review', permanent: false },
       // Fiziksel olarak olmayan/yanlış yazılan sayfaların yönlendirmeleri korundu
       // Gelinlik: gerçek sayfa app/terzi/hizmet/[hizmet] (gelinlik-abiye-tadilati). Eski/yazım hatalı adresler ona yönlenir.
       { source: '/terzi/gelinlik-tadilati', destination: '/terzi/hizmet/gelinlik-abiye-tadilati', permanent: true },

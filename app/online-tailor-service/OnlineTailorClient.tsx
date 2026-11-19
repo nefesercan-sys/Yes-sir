@@ -535,9 +535,9 @@ export default function OnlineTailorClient({
             <div className="omap-card">
               <iframe src={gbpEmbed1} width="100%" height="240" style={{ border: 0, display: 'block' }}
                 allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                title={gbpName1 || "TERZİ Can - Konyaaltı Hurma"} />
+                title={gbpName1 || "TERZİ Can - Antalya Tailor Service"} />
               <div className="omap-info">
-                <div className="omap-name">{gbpName1 || "TERZİ Can - Konyaaltı Hurma"}</div>
+                <div className="omap-name">{gbpName1 || "TERZİ Can - Antalya Tailor Service"}</div>
                 <div className="omap-addr">📍 {gbpAddr1 || "Hurma Mahallesi, 07130 Konyaaltı / Antalya"}</div>
                 <div className="omap-btns">
                   <a href={gbpMaps1} target="_blank" rel="noopener noreferrer" className="omap-btn omap-btn-maps">🗺️ Maps</a>
