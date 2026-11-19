@@ -20,7 +20,7 @@ const MAPS_SHORT      = 'https://www.google.com/maps?cid=6436895271281342624';
 const MAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193';
 const MAPS_REVIEW     = 'https://www.google.com/maps?cid=6436895271281342624';
 const MAPS_EMBED      = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
-const OG_IMAGE        = `${BASE_URL}/og-image.jpg`;
+const OG_IMAGE        = `${BASE_URL}/og/terzi-can.jpg`;
 const TODAY = '2026-10-29';
 const WA = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DEFAULT = WA('Здравствуйте! Хочу узнать об услугах ателье (ремонт/пошив).');
