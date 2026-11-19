@@ -17,7 +17,7 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi · Elbise Dikimi ve Tadilat | Terzi Can' },
+  title: { absolute: 'Antalya Terzi · Elbise Dikimi, Tadilat · +90 531 898 64 18' },
   description:
     "Terziye sor: +90 531 898 64 18 · Antalya Konyaaltı terzi: elbise dikimi, abiye ve takım tadilatı, tamirat. Paça kısaltma 200 TL'den (KDV hariç), " +
     "normal işler aynı gün. Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.",
