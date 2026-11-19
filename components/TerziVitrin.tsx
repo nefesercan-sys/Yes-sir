@@ -252,7 +252,7 @@ export default function TerziVitrin() {
             <a className="tv-btn tv-wa" href={wa} rel="noopener">WhatsApp&apos;tan yazın</a>
             <a className="tv-btn tv-call" href={`tel:${PHONE_E164}`}>Ara: {PHONE_DISPLAY}</a>
           </div>
-          <p className="tv-hours">Terzi Can her gün 08:00–23:00 arasında açıktır. Yazışma Türkçe, İngilizce, Almanca ve Rusça yapılabilir.</p>
+          <p className="tv-hours">Terzi Can her gün 08:00–23:00 arasında açıktır. Yazışma Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça yapılabilir.</p>
         </div>
         <div className="tv-tape" aria-hidden="true" />
       </header>

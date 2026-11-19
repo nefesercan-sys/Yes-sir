@@ -18,7 +18,7 @@ const FAQ: [string, string][] = [
   ['Paça kısaltma ve bel daraltma fiyatı ne kadar?', "Paça kısaltma, bel daraltma ve etek kısaltma ₺200'den başlar; fermuar değişimi ₺300'den. WhatsApp'tan fotoğraf gönderin, fiyatı net olarak öğrenin."],
   ['Teslim süresi ne kadar?', 'Normal tamir ve tadilat aynı gün teslim edilir; acil işler 1–2 saatte hazırlanır. Özel dikimde süre modele ve adede göre belirlenir.'],
   ['Terzi ne zaman kapıma gelir?', 'Arayın veya WhatsApp yazın, randevu saatini birlikte belirleyelim. Terzimiz adresinize gelir, ölçü alır, hazır olunca teslim eder.'],
-  ['İngilizce veya Rusça hizmet veriyor musunuz?', 'Evet! Türkçe, İngilizce, Rusça ve Almanca hizmet veriyoruz. Turistler için eve ve otele alım-teslim hizmeti de mevcuttur.'],
+  ['İngilizce veya Rusça hizmet veriyor musunuz?', 'Evet! Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça hizmet veriyoruz. Turistler için eve ve otele alım-teslim hizmeti de mevcuttur.'],
 ];
 
 const jsonLd = {

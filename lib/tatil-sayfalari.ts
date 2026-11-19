@@ -42,13 +42,13 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Hangi sorunlara bakıyoruz?', ul: ["Fermuar değişimi: ₺300'den", "Paça kısaltma: ₺200'den", "Bel daraltma: ₺200'den", 'Söküklerin dikilmesi ve yırtık onarımı'] },
         { h: 'Nasıl ilerliyor?', ul: ["Sorunlu kıyafetin fotoğrafını WhatsApp'tan gönderin", 'Yapılacak işi ve fiyatı yazılı olarak bildiririz', "Atölyeye getirin ya da otelden/evden alım-teslim isteyin: eve ve otellere de gelinir", "Normal tamir aynı gün teslim edilir; acil işler 1–2 saatte hazırlanır"] },
-        { h: 'Atölye ve çalışma saatleri', p: "Atölyemiz Konyaaltı, Hurma Mahallesi'nde. Haftanın her günü 08:00–23:00 arası açığız; Türkçe, İngilizce, Rusça ve Almanca yazışabilirsiniz." },
+        { h: 'Atölye ve çalışma saatleri', p: "Atölyemiz Konyaaltı, Hurma Mahallesi'nde. Haftanın her günü 08:00–23:00 arası açığız; Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça yazışabilirsiniz." },
       ],
       faq: [
         ['Kıyafetim yarın lazım, yetişir mi?', 'Evet; normal tamir ve tadilat aynı gün teslim edilir. Daha acilse 1–2 saatte hazırlanır; fotoğrafla yazarken acil olduğunu belirtin.'],
         ['Otelimden alıp getiriyor musunuz?', "Evet. Hizmet verdiğimiz tüm otel bölgelerinde otelden alım-teslim yapılır."],
         ['Fermuar değişimi ne kadar?', "Fermuar değişimi ₺300'den başlar; kıyafete ve fermuar türüne göre netleşir."],
-        ['Hangi dillerde yazışabilirim?', 'Türkçe, İngilizce, Rusça ve Almanca.'],
+        ['Hangi dillerde yazışabilirim?', 'Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça.'],
       ],
       cta: "WhatsApp'tan fotoğraf gönderin", wa: 'Merhaba, kıyafetim için acil tamir gerekiyor. Fotoğrafı gönderiyorum.', crumb: 'Acil kıyafet tamiri',
     },
@@ -61,13 +61,13 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'What can we fix?', ul: ['Zipper replacement', 'Trouser hemming', 'Waist taking in', 'Open seams and tear repairs', 'Buttons, lining and belt repairs'] },
         { h: 'How does it work?', ul: ['Send a photo of the problem on WhatsApp', 'We reply with what we will do and the price, in writing', 'Bring it to the workshop or ask for hotel or home pick-up and delivery in the areas we serve', 'Regular repairs are ready the same day; urgent jobs in 1–2 hours'] },
-        { h: 'Workshop and opening hours', p: 'Our workshop is in Hurma, Konyaaltı. We are open every day of the week from 08:00 to 23:00 and you can write to us in English, Turkish, Russian or German.' },
+        { h: 'Workshop and opening hours', p: 'Our workshop is in Hurma, Konyaaltı. We are open every day of the week from 08:00 to 23:00 and you can write to us in Turkish, English, Russian, German, Spanish, French, Polish, Ukrainian, Dutch or Arabic.' },
       ],
       faq: [
         ['I need my clothes tomorrow. Is that possible?', 'Yes; regular repairs and alterations are ready the same day. If it is more urgent, it can be done in 1–2 hours; mention this when you send the photo.'],
         ['Can you collect from my hotel?', 'Yes. We offer hotel pick-up and delivery in every hotel area we cover.'],
         ['How much is a zipper replacement?', 'The final price of a zipper replacement depends on the garment and zipper type.'],
-        ['Which languages can I write in?', 'English, Turkish, Russian and German.'],
+        ['Which languages can I write in?', 'Turkish, English, Russian, German, Spanish, French, Polish, Ukrainian, Dutch and Arabic.'],
       ],
       cta: 'Send a photo on WhatsApp', wa: 'Hello, I need an urgent clothing repair. I am sending a photo.', crumb: 'Urgent clothing repair',
     },
@@ -80,7 +80,7 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Что мы ремонтируем?', ul: ['Замена молнии', 'Подшив брюк', 'Ушивание в талии', 'Зашивание швов и ремонт разрывов'] },
         { h: 'Как это работает?', ul: ['Пришлите фото проблемы в WhatsApp', 'Мы письменно сообщим, что будем делать и сколько это стоит', 'Принесите вещь в мастерскую или закажите забор и доставку из отеля или с дома: доступен и в отели, и на дом во всех районах', 'Обычный ремонт готов в тот же день; срочный — за 1–2 часа'] },
-        { h: 'Мастерская и часы работы', p: 'Наша мастерская находится в Хурме, Коньяалты. Мы работаем каждый день с 08:00 до 23:00; можно писать по-русски, по-английски, по-турецки и по-немецки.' },
+        { h: 'Мастерская и часы работы', p: 'Наша мастерская находится в Хурме, Коньяалты. Мы работаем каждый день с 08:00 до 23:00; можно писать по-турецки, по-английски, по-русски, по-немецки, по-испански, по-французски, по-польски, по-украински, по-нидерландски и по-арабски.' },
       ],
       faq: [
         ['Вещь нужна завтра. Успеете?', 'Да; обычный ремонт и подгонка готовы в тот же день. Если срочно — за 1–2 часа; укажите это, когда пришлёте фото.'],
@@ -99,13 +99,13 @@ export const TATIL_CONTENT: Record<TatilTopic, Record<L4, Pg>> = {
       secs: [
         { h: 'Was reparieren wir?', ul: ['Reißverschluss wechseln', 'Hosen kürzen', 'Bund enger machen', 'Aufgegangene Nähte und Risse'] },
         { h: 'So läuft es ab', ul: ['Foto des Problems per WhatsApp senden', 'Wir nennen Ihnen schriftlich Arbeit und Preis', 'In die Werkstatt bringen oder Abholung und Lieferung am Hotel oder zu Hause wünschen: für Hotels und zu Hause überall', 'Normale Reparaturen sind am selben Tag fertig; dringende in 1–2 Stunden'] },
-        { h: 'Werkstatt und Öffnungszeiten', p: 'Unsere Werkstatt liegt in Hurma, Konyaaltı. Wir sind jeden Tag von 08:00 bis 23:00 Uhr erreichbar; Sie können auf Deutsch, Englisch, Türkisch oder Russisch schreiben.' },
+        { h: 'Werkstatt und Öffnungszeiten', p: 'Unsere Werkstatt liegt in Hurma, Konyaaltı. Wir sind jeden Tag von 08:00 bis 23:00 Uhr erreichbar; Sie können auf Türkisch, Englisch, Russisch, Deutsch, Spanisch, Französisch, Polnisch, Ukrainisch, Niederländisch oder Arabisch schreiben.' },
       ],
       faq: [
         ['Ich brauche meine Kleidung morgen. Geht das?', 'Ja; normale Reparaturen und Änderungen sind am selben Tag fertig. Eilt es mehr, geht es in 1–2 Stunden; schreiben Sie das zum Foto dazu.'],
         ['Holen Sie die Kleidung im Hotel ab?', 'Ja. Abholung im Hotel und Rücklieferung bieten wir in allen von uns bedienten Hotelgebieten an.'],
         ['Was kostet ein Reißverschlusswechsel?', 'Der Endpreis für den Reißverschlusswechsel hängt vom Kleidungsstück und der Reißverschlussart ab.'],
-        ['In welcher Sprache kann ich schreiben?', 'Deutsch, Englisch, Türkisch und Russisch.'],
+        ['In welcher Sprache kann ich schreiben?', 'Türkisch, Englisch, Russisch, Deutsch, Spanisch, Französisch, Polnisch, Ukrainisch, Niederländisch und Arabisch.'],
       ],
       cta: 'Foto per WhatsApp senden', wa: 'Guten Tag, ich brauche eine dringende Kleiderreparatur. Ich sende ein Foto.', crumb: 'Dringende Kleiderreparatur',
     },

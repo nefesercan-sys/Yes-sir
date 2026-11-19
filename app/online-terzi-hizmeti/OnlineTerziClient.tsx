@@ -545,7 +545,7 @@ export default function OnlineTerziClient() {
                   { icon: '🎯', title: 'Ölçüye Göre Kalıp', desc: 'Kalıp, aldığımız ölçülere göre çıkarılır' },
                   { icon: '⚡', title: 'Hızlı Teslimat', desc: 'Süre modele ve adede göre belirlenir' },
                   { icon: '🌿', title: 'Sürdürülebilir Moda', desc: 'Doğal ve nefes alan kumaşlar' },
-                  { icon: '🌍', title: '4 Dil Desteği', desc: 'TR · EN · DE · RU dillerinde hizmet' },
+                  { icon: '🌍', title: '10 Dil Desteği', desc: 'TR · EN · RU · DE ve 6 dil daha' },
                 ].map(w => (
                   <li key={w.title} style={{ padding: 20, borderRadius: 16, border: '1px solid #F3F4F6', backgroundColor: C.cream }}>
                     <div aria-hidden="true" style={{ fontSize: 24, marginBottom: 8 }}>{w.icon}</div>

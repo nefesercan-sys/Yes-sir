@@ -127,15 +127,15 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
    },
    "p": {
     "tr": "₺300'den başlar (KDV hariç); fermuarın boyu ve giysinin türü fiyatı etkiler. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.",
-    "en": "From €15, excluding VAT; coats and jackets from €20. Zipper length and garment type affect the price. Normal jobs are ready the same day, urgent ones in 1–2 hours.",
-    "de": "Ab €15, zzgl. MwSt.; Mäntel und Jacken ab €20. Länge des Reißverschlusses und Art des Kleidungsstücks beeinflussen den Preis. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden.",
-    "ru": "От €15, без НДС; куртки и пальто — от €20. Цена зависит от длины молнии и вида одежды. Обычные работы — в тот же день, срочные — за 1–2 часа.",
-    "es": "Desde €15, IVA no incluido; en abrigos y chaquetas desde €20. El largo de la cremallera y el tipo de prenda influyen en el precio. Trabajos normales el mismo día, urgentes en 1–2 horas.",
-    "fr": "Dès €15, hors TVA ; manteaux et vestes dès €20. La longueur de la fermeture et le type de vêtement influencent le prix. Travaux normaux le jour même, urgents en 1 à 2 heures.",
-    "pl": "Od €15, bez VAT; w płaszczach i kurtkach od €20. Na cenę wpływają długość zamka i rodzaj ubrania. Zwykłe prace tego samego dnia, pilne w 1–2 godziny.",
-    "uk": "Від €15, без ПДВ; на пальтах і куртках — від €20. Ціна залежить від довжини блискавки та виду одягу. Звичайні роботи — того ж дня, термінові — за 1–2 години.",
-    "nl": "Vanaf €15, excl. btw; jassen en mantels vanaf €20. De lengte van de rits en het soort kledingstuk bepalen de prijs. Gewoon werk dezelfde dag, spoed in 1–2 uur.",
-    "ar": "من €15، غير شامل الضريبة؛ وفي المعاطف والسترات من €20. طول السحاب ونوع القطعة يؤثران في السعر. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة."
+    "en": "From €15, excluding VAT; coats and jackets from €15. Zipper length and garment type affect the price. Normal jobs are ready the same day, urgent ones in 1–2 hours.",
+    "de": "Ab €15, zzgl. MwSt.; Mäntel und Jacken ab €15. Länge des Reißverschlusses und Art des Kleidungsstücks beeinflussen den Preis. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden.",
+    "ru": "От €15, без НДС; куртки и пальто — от €15. Цена зависит от длины молнии и вида одежды. Обычные работы — в тот же день, срочные — за 1–2 часа.",
+    "es": "Desde €15, IVA no incluido; en abrigos y chaquetas desde €15. El largo de la cremallera y el tipo de prenda influyen en el precio. Trabajos normales el mismo día, urgentes en 1–2 horas.",
+    "fr": "Dès €15, hors TVA ; manteaux et vestes dès €15. La longueur de la fermeture et le type de vêtement influencent le prix. Travaux normaux le jour même, urgents en 1 à 2 heures.",
+    "pl": "Od €15, bez VAT; w płaszczach i kurtkach od €15. Na cenę wpływają długość zamka i rodzaj ubrania. Zwykłe prace tego samego dnia, pilne w 1–2 godziny.",
+    "uk": "Від €15, без ПДВ; на пальтах і куртках — від €15. Ціна залежить від довжини блискавки та виду одягу. Звичайні роботи — того ж дня, термінові — за 1–2 години.",
+    "nl": "Vanaf €15, excl. btw; jassen en mantels vanaf €15. De lengte van de rits en het soort kledingstuk bepalen de prijs. Gewoon werk dezelfde dag, spoed in 1–2 uur.",
+    "ar": "من €15، غير شامل الضريبة؛ وفي المعاطف والسترات من €15. طول السحاب ونوع القطعة يؤثران في السعر. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة."
    }
   },
   {

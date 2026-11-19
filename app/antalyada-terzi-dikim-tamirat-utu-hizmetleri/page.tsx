@@ -336,7 +336,7 @@ const serviceRows = [
 const trustPoints = [
   { icon: ICONS.clock, label: 'WhatsApp yanıtı', value: 'Çalışma saatlerinde (08:00–23:00)' },
   { icon: ICONS.pin, label: 'Hizmet bölgesi', value: '7 ilçe, kuryeli alım' },
-  { icon: ICONS.globe, label: 'Dil desteği', value: 'TR · EN · RU · DE' },
+  { icon: ICONS.globe, label: 'Dil desteği', value: '10 dil (TR · EN · RU · DE +6)' },
   { icon: ICONS.check, label: 'Çalışma saatleri', value: 'Her gün 08:00–23:00' },
 ];
 

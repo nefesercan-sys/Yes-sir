@@ -238,7 +238,7 @@ export default function PacaKisaltmaPage() {
                 ['🚗','Araçlı Servis (otellere)','Eve veya otele geliyor, ölçü alıyor, teslim ediyoruz. Eve ve otele servis.'],
                 ['✂️','Orijinal Dikiş','Kot pantolonlarda orijinal paça dikişi tekniği — marka etiketi korunur.'],
                 ['💰','Şeffaf Fiyat','Fiyatlar önceden bildirilir, sürpriz ücret yok. Rekabetçi, adil fiyatlandırma.'],
-                ['🌍','4 Dil','Türkçe, İngilizce, Rusça, Almanca hizmet. Turistler için ideal.'],
+                ['🌍','10 Dil','Türkçe, İngilizce, Rusça, Almanca ve 6 dil daha. Turistler için ideal.'],
                 ['⭐','Müşteri Memnuniyeti','Kaliteli işçilik ve zamanında teslimat ile Antalya\'da güvenilir terzi hizmeti.'],
               ].map(([ic, t, d]) => (
                 <div key={t as string} style={{ background: '#fff', padding: '1.4rem', borderRadius: '2px', borderTop: '2px solid rgba(184,151,90,.3)' }}>

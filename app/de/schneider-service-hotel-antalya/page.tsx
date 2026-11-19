@@ -289,7 +289,7 @@ export default function SchneiderServiceHotelAntalyaPage() {
                 {[
                   ['Anfahrt','Per WhatsApp','—'],
                   ['Hosen kürzen','ab €10',TURN],
-                  ['Reißverschluss wechseln','ab €15 (Mantel / Leder €20)',TURN],
+                  ['Reißverschluss wechseln','ab €15 (Mantel / Leder €15)',TURN],
                   ['Kleid / Jacke enger machen','ab €10',TURN],
                   ['Ärmel kürzen','ab €10',TURN],
                   ['Abendkleid reparieren','nach Foto',TURN],

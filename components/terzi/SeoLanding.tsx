@@ -304,7 +304,7 @@ function districtAbout(lang: Lang, d: District): string {
       resort: [
         `${loc} otelde kalan misafirler için kıyafet otelden alınır, işlem atölyede yapılır ve otele geri getirilir.`,
         `Tatilde bozulan fermuar, söküğü açılan dikiş ya da özel bir akşam için daraltılması gereken elbise: ${n} otellerinden gelen işlerin çoğu bunlardır.`,
-        `${n} otellerinden yazan misafirler için Türkçe, İngilizce, Rusça ve Almanca yazışılabilir; fotoğraf ve otel adı yeterlidir.`,
+        `${n} otellerinden yazan misafirler için Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça yazışılabilir; fotoğraf ve otel adı yeterlidir.`,
       ],
       outer: [
         `${loc} ev, işyeri ve siteler için alım-teslim yapılır; gün ve saat WhatsApp'ta birlikte planlanır.`,
@@ -321,7 +321,7 @@ function districtAbout(lang: Lang, d: District): string {
       resort: [
         `For guests staying at hotels ${loc}, the garment is collected from the hotel, worked on in the workshop and brought back.`,
         `A zipper that broke on holiday, a seam that opened, a dress to take in for a special dinner: most jobs from ${n} hotels look like this.`,
-        `Guests in ${n} can write in English, Russian, German or Turkish; a photo and the hotel name are enough to start.`,
+        `Guests in ${n} can write in Turkish, English, Russian, German, Spanish, French, Polish, Ukrainian, Dutch or Arabic; a photo and the hotel name are enough to start.`,
       ],
       outer: [
         `Pick-up and delivery is available for homes, offices and residential complexes ${loc}; day and time are agreed on WhatsApp.`,
@@ -338,7 +338,7 @@ function districtAbout(lang: Lang, d: District): string {
       resort: [
         `Для гостей отелей ${loc} вещь забирают из отеля, работу делают в мастерской и привозят обратно.`,
         `Сломанная в отпуске молния, разошедшийся шов, платье, которое нужно ушить к ужину, — так выглядит большинство заказов из отелей района ${n}.`,
-        `Гости в районе ${n} могут писать по-русски, по-английски, по-немецки или по-турецки; достаточно фото и названия отеля.`,
+        `Гости в районе ${n} могут писать по-турецки, по-английски, по-русски, по-немецки, по-испански, по-французски, по-польски, по-украински, по-нидерландски или по-арабски; достаточно фото и названия отеля.`,
       ],
       outer: [
         `Забираем и привозим вещи ${loc} — на дом, в офис или в жилой комплекс; день и время согласуем в WhatsApp.`,
@@ -355,7 +355,7 @@ function districtAbout(lang: Lang, d: District): string {
       resort: [
         `Für Gäste in Hotels ${loc} wird die Kleidung im Hotel abgeholt, in der Werkstatt bearbeitet und zurückgebracht.`,
         `Ein im Urlaub kaputter Reißverschluss, eine offene Naht, ein Kleid, das für ein Abendessen enger muss: So sehen die meisten Aufträge aus Hotels in ${n} aus.`,
-        `Gäste in ${n} können auf Deutsch, Englisch, Russisch oder Türkisch schreiben; ein Foto und der Hotelname reichen.`,
+        `Gäste in ${n} können auf Türkisch, Englisch, Russisch, Deutsch, Spanisch, Französisch, Polnisch, Ukrainisch, Niederländisch oder Arabisch schreiben; ein Foto und der Hotelname reichen.`,
       ],
       outer: [
         `Abholung und Lieferung ${loc} für Wohnungen, Büros und Wohnanlagen; Tag und Uhrzeit werden per WhatsApp vereinbart.`,

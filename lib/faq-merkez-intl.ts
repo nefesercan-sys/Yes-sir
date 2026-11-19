@@ -1,5 +1,5 @@
 // Sık sorulan sorular merkezi (EN/RU/DE) — görünen SSS ve FAQPage şeması bu diziyle aynıdır (tek kaynak).
-// Kurallar: lib/business.ts (paça/bel/kol/boy ₺200'den ≈ €10; fermuar ₺300'den ≈ €15 pantolon, €20 mont/kaban/palto/deri; deri ₺400'den ≈ €20;
+// Kurallar: lib/business.ts (paça/bel/kol/boy ₺200'den ≈ €10; fermuar ₺300'den ≈ €15 pantolon, €15 mont/kaban/palto/deri; deri ₺400'den ≈ €20;
 // dikimde sabit fiyat yok; KDV dahil değil; tüm para birimleriyle ödeme; otellerle ortaklık yok; gelinlik dikimi yok).
 export type FaqLang = 'en' | 'ru' | 'de';
 type QA = readonly [string, string];
@@ -8,7 +8,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
   en: [
     ['How much does hemming trousers cost in Antalya?', 'Hemming starts from ₺200 (about €10), excluding VAT. Regular jobs are ready the same day. Send a photo on WhatsApp for the exact price.'],
     ['How much do waist, sleeve and length alterations cost?', 'Waist taking-in, sleeve shortening and length alterations start from ₺200 (about €10), excluding VAT.'],
-    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €15); coat, jacket and leather zippers from about €20. Prices exclude VAT.'],
+    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €15); coat, jacket and leather zippers from about €15. Prices exclude VAT.'],
     ['How much does leather jacket, trouser or vest alteration cost?', 'Leather alteration starts from ₺400 (about €20), excluding VAT.'],
     ['Do you hem jeans and make an original hem?', 'Yes. Jeans hemming, original hem, narrowing, jacket and skirt alterations are done; jeans work starts from about ₺200.'],
     ['Do you shorten or take in coats?', 'Yes. Coat (kaban/palto) shortening and taking-in start from ₺200; a coat zipper replacement starts from ₺300.'],
@@ -30,7 +30,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
   ru: [
     ['Сколько стоит подшить брюки в Анталье?', 'Подгонка длины от ₺200 (около €10), без НДС. Обычная работа готова в тот же день. Для точной цены отправьте фото в WhatsApp.'],
     ['Сколько стоит ушить талию, укоротить рукав или длину?', 'Ушивание талии, укорачивание рукавов и длины — от ₺200 (около €10), без НДС.'],
-    ['Сколько стоит замена молнии?', 'Замена молнии на брюках и стандартной молнии — от ₺300 (около €15); на пальто, куртке и коже — от примерно €20. Цены без НДС.'],
+    ['Сколько стоит замена молнии?', 'Замена молнии на брюках и стандартной молнии — от ₺300 (около €15); на пальто, куртке и коже — от примерно €15. Цены без НДС.'],
     ['Сколько стоит переделка кожаной куртки, брюк или жилета?', 'Переделка кожаных вещей — от ₺400 (около €20), без НДС.'],
     ['Подшиваете ли вы джинсы и делаете оригинальный низ?', 'Да. Подшиваем джинсы, делаем оригинальный низ, ушиваем, переделываем джинсовые куртки и юбки; работа с джинсами — от примерно ₺200.'],
     ['Укорачиваете ли вы пальто?', 'Да. Укорачивание и ушивание пальто (kaban/palto) — от ₺200; замена молнии на пальто — от ₺300.'],
@@ -52,7 +52,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
   de: [
     ['Was kostet das Kürzen einer Hose in Antalya?', 'Kürzen ab ₺200 (ca. €10), ohne MwSt. Normale Arbeiten sind am selben Tag fertig. Für den genauen Preis ein Foto per WhatsApp senden.'],
     ['Was kosten Taille, Ärmel und Längenänderungen?', 'Taille enger machen, Ärmel und Länge kürzen ab ₺200 (ca. €10), ohne MwSt.'],
-    ['Was kostet ein Reißverschlusswechsel?', 'Reißverschlusswechsel bei Hosen und Standard ab ₺300 (ca. €15); Mantel, Jacke und Leder ab ca. €20. Preise ohne MwSt.'],
+    ['Was kostet ein Reißverschlusswechsel?', 'Reißverschlusswechsel bei Hosen und Standard ab ₺300 (ca. €15); Mantel, Jacke und Leder ab ca. €15. Preise ohne MwSt.'],
     ['Was kostet die Änderung von Lederjacke, -hose oder -weste?', 'Lederänderungen ab ₺400 (ca. €20), ohne MwSt.'],
     ['Kürzen Sie Jeans und machen den Originalsaum?', 'Ja. Jeans kürzen, Originalsaum, enger machen, Jeansjacken und -röcke ändern; Jeansarbeiten ab ca. ₺200.'],
     ['Kürzen oder verengen Sie Mäntel?', 'Ja. Mäntel (kaban/palto) kürzen und enger machen ab ₺200; ein Reißverschlusswechsel am Mantel ab ₺300.'],
