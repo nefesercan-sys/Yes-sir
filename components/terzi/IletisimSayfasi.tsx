@@ -38,7 +38,7 @@ export const CONTACT_URL = SITE_CFG.contactUrl;
 const OG_LOCALE: L4 = { tr: 'tr_TR', en: 'en_US', ru: 'ru_RU', de: 'de_DE' };
 const PHONE_LOCAL = '+90 531 898 64 18';
 // Yol tarifi: işletme koordinatları
-const DIR_URL = 'https://www.google.com/maps/dir/?api=1&destination=36.857466,30.596987';
+const DIR_URL = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193';
 const WA_BASE = `https://wa.me/${PHONE_TEL.replace('+', '')}`;
 const abs = (p: string) => `${SITE}${p}`;
 

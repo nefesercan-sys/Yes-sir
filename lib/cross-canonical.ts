@@ -1,29 +1,35 @@
 // ============================================================
 // lib/cross-canonical.ts — terzihizmeti.com.tr'ye cross-domain canonical
-// İşletme sahibinin kararı: terzi aramalarında ana site terzihizmeti.com.tr. swaphubs'ta, kardeş sitede
-// AYNI DİL + AYNI NİYET + AYNI KONU (aynı bölge/hizmet) karşılığı birebir bulunan sayfalar canonical'ı oraya verir.
-// Doğrulama (Ekim 2026, nefesercan-sys/terzi-hizmeti/app): aşağıdaki yolların hepsi kardeş sitede aynı yol ile var:
-//   /en/hotel-tailor-antalya (+[region]), /de/schneider-service-hotel-antalya (+[region]), /ru/vyezdnoy-portnoy-antalya (+[region])
-//     → kardeş sitenin otel-bolgeleri listesi swaphubs'takini (belek, lara, guzeloba, side, kemer) kapsıyor
-//   /en/tailor-antalya/[bolge], /de/schneider-antalya/[bolge], /ru/portnoy-antalya/[bolge] → aynı DISTRICTS slug listesi
-//   /en/tailor-services (+[hizmet]), /de/schneider-leistungen (+[hizmet]), /ru/uslugi-portnogo (+[hizmet]) → aynı SERVICES slug'ları
-//   /en/contact-tailor-antalya, /de/kontakt-schneider-antalya, /ru/kontakty-portnoy-antalya
-// NOT: /en/tailor-antalya, /de/schneider-antalya, /ru/portnoy-antalya kök yolları iki sitede de sayfa değildir (yalnız [bolge]).
-// Bu sayfalarda hreflang kümesi kaldırılır (canonical başka sitedeyken hreflang çelişki yaratır); Türkçe karşılıkları
-// ve swaphubs'a özgü rehber sayfaları swaphubs'ta indexlenebilir kalır.
+// Eski (Ekim 2026) EN/DE/RU → terzihizmeti listesi git geçmişinde. Güncel kural aşağıda.
 // ============================================================
 
 export const TZ_SITE = 'https://terzihizmeti.com.tr';
 
-/** Kardeş sitede birebir karşılığı doğrulanmış swaphubs yolları. */
-// Sahibinin kararı (Kasım 2026): swaphubs EN/DE/RU sayfaları kendi adreslerinde canonical kalır, terzihizmeti'ne
-// cross-canonical VERİLMEZ. Küme boş; mekanizma korunuyor (eski liste git geçmişinde).
-export const CROSS_CANONICAL_PATHS: ReadonlySet<string> = new Set<string>();
+// Sahibinin kararı (19 Kasım 2026): Türkçede asıl site terzihizmeti.com.tr, İngilizce/Almanca/Rusçada asıl site swaphubs.com.
+// Bu yüzden yalnız TÜRKÇE ve BİREBİR KOPYA olan sayfalar (aynı şablon + aynı veri, lib/seo-data.ts) canonical'ı terzihizmeti'ne verir:
+//   /terzi/hizmet ve /terzi/hizmet/<slug>  → terzihizmeti /terzi-hizmetleri(/<slug>)
+//   /terzi/bolge/<slug> (terzihizmeti'nde Türkçesi indexlenen bölgeler) → terzihizmeti'ndeki Türkçe bölge sayfası
+// swaphubs'a özgü Türkçe sayfalar (mahalle, ilçe, fermuar, paça vb.) ve tüm EN/DE/RU sayfalar swaphubs'ta canonical kalır.
+// terzihizmeti tarafında karşılığı: terzi-hizmeti/lib/twin.ts (EN/DE/RU kopyalar → swaphubs).
+
+/** terzihizmeti'nde Türkçe sayfası indexlenen bölgeler (terzi-hizmeti lib/seo-data.ts TR_NEAR_SLUGS + trHref) → TR adresi. */
+const TH_TR_DISTRICT: Record<string, string> = {
+  hurma: '/hurma-terzi', liman: '/liman-terzi', gursu: '/gursu-terzi', uncali: '/uncali-terzi', sarisu: '/sarisu-terzi',
+  ...Object.fromEntries(['konyaalti', 'uluc', 'altinkum', 'ogretmenevleri', 'arapsuyu', 'siteler', 'meltem', 'muratpasa', 'fener',
+    'sirinyali', 'toros', 'manavgat', 'serik', 'aksu', 'beldibi'].map((s) => [s, `/antalya-terzi/${s}`])),
+};
+/** Bölgenin terzihizmeti'ndeki Türkçe sayfası (tam URL) ya da null. */
+export const thTrDistrictUrl = (slug: string): string | null => (TH_TR_DISTRICT[slug] ? `${TZ_SITE}${TH_TR_DISTRICT[slug]}` : null);
 
 /** swaphubs yolu için kardeş sitedeki canonical URL (yoksa null). */
 export function crossCanonical(path: string): string | null {
-  const p = path.replace(/\/$/, '');
-  return CROSS_CANONICAL_PATHS.has(p) ? `${TZ_SITE}${p}` : null;
+  const p = path.length > 1 ? path.replace(/\/$/, '') : path;
+  if (p === '/terzi/hizmet') return `${TZ_SITE}/terzi-hizmetleri`;
+  const h = p.match(/^\/terzi\/hizmet\/([a-z0-9-]+)$/);
+  if (h) return `${TZ_SITE}/terzi-hizmetleri/${h[1]}`;
+  const b = p.match(/^\/terzi\/bolge\/([a-z0-9-]+)$/);
+  if (b) return thTrDistrictUrl(b[1]);
+  return null;
 }
 
 /** Next.js metadata.alternates: karşılığı varsa yalnız cross-domain canonical (hreflang yok), yoksa verilen değer. */
