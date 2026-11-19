@@ -111,7 +111,7 @@ const jsonLd = {
       '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: ['Terzi Can E-Terzi', 'Online Terzi Antalya', 'Terzi Can Tailor'],
       description:
         "Antalya'da teslim eden, yurt dışına kargoyla gönderen online özel terzi hizmeti. Abiye ve gelinlik tadilatı, takım elbise, üniforma dikimi.",
@@ -161,7 +161,7 @@ const jsonLd = {
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'TERZİ Can - Konyaaltı' },
+            seller: { '@type': 'Organization', name: 'TERZİ Can - Antalya Tailor Service' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -171,7 +171,7 @@ const jsonLd = {
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'TERZİ Can - Konyaaltı' },
+            seller: { '@type': 'Organization', name: 'TERZİ Can - Antalya Tailor Service' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -181,7 +181,7 @@ const jsonLd = {
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'TERZİ Can - Konyaaltı' },
+            seller: { '@type': 'Organization', name: 'TERZİ Can - Antalya Tailor Service' },
             additionalType: 'https://schema.org/Service',
           },
           {
@@ -191,7 +191,7 @@ const jsonLd = {
             availability: 'https://schema.org/InStock',
             priceCurrency: 'TRY',
             url: SITE_URL,
-            seller: { '@type': 'Organization', name: 'TERZİ Can - Konyaaltı' },
+            seller: { '@type': 'Organization', name: 'TERZİ Can - Antalya Tailor Service' },
             additionalType: 'https://schema.org/Service',
           },
         ],

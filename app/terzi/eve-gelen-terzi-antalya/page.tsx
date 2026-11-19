@@ -54,7 +54,7 @@ const jsonLd = {
       provider: {
         '@type': 'LocalBusiness',
         '@id': `${PARENT_URL}#business`,
-        name: 'TERZİ Can - Konyaaltı',
+        name: 'TERZİ Can - Antalya Tailor Service',
         telephone: PHONE_E164,
       },
       areaServed: [

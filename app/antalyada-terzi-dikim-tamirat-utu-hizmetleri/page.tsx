@@ -15,7 +15,7 @@ const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terz
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
 const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
-const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Konyaaltı (Google Business Profile)
+const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service (Google Business Profile)
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
 
@@ -107,7 +107,7 @@ const jsonLd = {
       '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: 'Terzi Can Antalya',
       description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere tadilat servisi sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,

@@ -12,7 +12,7 @@ import { hzSixForService } from '@/lib/intl-hz';
 const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
 const PHONE_E = '+905318986418';
-const GBP_URL = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Konyaaltı
+const GBP_URL = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service
 const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
 
 export const metadata: Metadata = {
@@ -59,7 +59,7 @@ const jsonLd = {
       '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${SITE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: ['Terzi Can', 'Terzi Can Konyaaltı'],
       url: SITE_URL,
       telephone: PHONE_E,

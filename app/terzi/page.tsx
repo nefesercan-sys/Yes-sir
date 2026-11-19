@@ -25,7 +25,7 @@ const LAST_MODIFIED = '2026-10-04';
 const GBP_SHORT = 'https://www.google.com/maps?cid=6436895271281342624';
 const GBP_CID   = '6436895271281342624';
 const GBP_MAPS  = `https://www.google.com/maps?cid=${GBP_CID}`;
-const GBP_NAME  = 'TERZİ Can - Konyaaltı';
+const GBP_NAME  = 'TERZİ Can - Antalya Tailor Service';
 const GBP_ADDR  = 'Hurma Mahallesi, 07130 Konyaaltı / Antalya';
 
 // Harita işletme kaydına (ftid) bağlı: pin artık limana değil işletmeye düşer.
@@ -71,7 +71,7 @@ const jsonLd = {
       '@type': 'LocalBusiness',
       '@id': `${SITE_URL}#business`,
       ...reviewSchema(),
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: [
         GBP_NAME,
         'Tailor Can Antalya',

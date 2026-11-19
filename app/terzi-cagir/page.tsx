@@ -27,7 +27,7 @@ const jsonLd = {
     {
       '@type': 'LocalBusiness',
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: [
         'Antalya Terzi', 'Konyaaltı Terzi', 'Terzi Çağır Antalya',
         'Eve Gelen Terzi Antalya', 'Tailor Antalya', 'Портной Анталья',
@@ -520,7 +520,7 @@ export default function TerziCagirPage() {
         <section className="map-sec" id="konum">
           <div className="map-wrap">
             <iframe
-              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed"
+              src="https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed"
               height="240"
               allowFullScreen
               loading="lazy"

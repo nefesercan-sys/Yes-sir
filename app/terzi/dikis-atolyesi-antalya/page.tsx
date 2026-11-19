@@ -34,7 +34,7 @@ const jsonLd = {
     {
       '@type': 'LocalBusiness',
       '@id': `${PARENT}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       telephone: PHONE_E,
       url: PARENT,
       address: {

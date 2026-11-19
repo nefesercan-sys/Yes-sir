@@ -20,9 +20,9 @@ const TODAY = '2026-10-07'; // içerik gerçekten değiştiğinde elle güncelle
 const OG_IMAGE = `${BASE_URL}/og/terzi-can.jpg`;
 
 // ── Google Business Profile (tek konum: Hurma, Konyaaltı) ─────────────────
-const GBP1_NAME   = 'TERZİ Can - Konyaaltı';
+const GBP1_NAME   = 'TERZİ Can - Antalya Tailor Service';
 const GBP1_MAPS   = 'https://www.google.com/maps?cid=6436895271281342624';
-const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Konyaalt%C4%B1%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
+const GBP1_EMBED  = 'https://www.google.com/maps?q=TERZ%C4%B0+Can+-+Antalya+Tailor+Service%2C+Hurma%2C+07130+Konyaalt%C4%B1%2FAntalya&ftid=0x14c39311e6924c67:0x59547225251db8a0&z=17&output=embed';
 const GBP1_DIR    = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193';
 const GBP1_REVIEW = 'https://www.google.com/maps?cid=6436895271281342624';
 
@@ -91,7 +91,7 @@ const jsonLd = {
       ...reviewSchema(),
       additionalType: ['https://schema.org/SewingService'],
       '@id': `${TERZI_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: [GBP1_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
       description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine adrese servis.',
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',

@@ -15,7 +15,7 @@ const SITE_URL  = `${BASE_URL}/terzi/fermuar-degisimi`;
 const PARENT    = `${BASE_URL}/terzi`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
-const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Konyaaltı
+const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service
 const HOURS     = '08:00–23:00';
 const WA = (t: string) => `https://wa.me/905318986418?text=${encodeURIComponent(t)}`;
 
@@ -151,7 +151,7 @@ const jsonLd = {
       provider: {
         '@type': 'LocalBusiness',
         '@id': `${PARENT}#business`,
-        name: 'TERZİ Can - Konyaaltı',
+        name: 'TERZİ Can - Antalya Tailor Service',
         url: PARENT,
         telephone: PHONE_E,
         hasMap: GBP_URL,

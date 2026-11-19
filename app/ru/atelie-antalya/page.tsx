@@ -28,7 +28,7 @@ const TODAY = '2026-06-30'
 const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/wrap-dress-stone.jpg`
 
 // Gerçek Google Maps kaydı (maps.app.goo.gl linkinden çözümlendi)
-// TERZİ Can - Konyaaltı, Hurma, 07000 Konyaaltı/Antalya
+// TERZİ Can - Antalya Tailor Service, Hurma, 07000 Konyaaltı/Antalya
 const GMAPS_SHORT_LINK = 'https://www.google.com/maps?cid=6436895271281342624'
 const GMAPS_DIRECTIONS = 'https://www.google.com/maps/dir/?api=1&destination=36.8572868,30.5970193'
 const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
@@ -94,7 +94,7 @@ const jsonLd = {
       '@type': 'LocalBusiness',
       ...reviewSchema(),
       '@id': `${PAGE_URL}#business`,
-      name: 'TERZİ Can - Konyaaltı',
+      name: 'TERZİ Can - Antalya Tailor Service',
       alternateName: ['Ателье Terzi Can', 'Портной Кан Анталья', 'Tailor Can Antalya'],
       description:
         'Профессиональное ателье в Анталье, район Коньяалты (Хурма). Ремонт и пошив одежды, подгонка по фигуре, замена молнии и фурнитуры, работа с кожей и плотными тканями, срочный ремонт.',
