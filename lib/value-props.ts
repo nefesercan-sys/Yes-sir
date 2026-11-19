@@ -5,7 +5,7 @@
 // ============================================================
 import { WA_NUMBER as WA_NUM, PHONE_E164, waUrl as bizWaUrl } from '@/lib/business';
 
-export type Lang = 'tr' | 'en' | 'de' | 'ru';
+export type Lang = 'tr' | 'en' | 'de' | 'ru' | 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 
 // Telefon/WhatsApp: lib/business.ts (tek kaynak); geriye dönük adlarla yeniden dışa aktarılır.
 export const WA_NUMBER = WA_NUM;
@@ -24,10 +24,17 @@ export const HOURS_LINE: Record<Lang, string> = {
   en: 'Every day 08:00–23:00 · Service to homes and hotels',
   de: 'Täglich 08:00–23:00 · Service zu Hause und im Hotel',
   ru: 'Ежедневно 08:00–23:00 · Выезд на дом и в отель',
+  es: 'Todos los días 08:00–23:00 · Servicio a domicilio y hoteles',
+  fr: 'Tous les jours 08:00–23:00 · Service à domicile et à l\'hôtel',
+  pl: 'Codziennie 08:00–23:00 · Obsługa w domu i w hotelu',
+  uk: 'Щодня 08:00–23:00 · Виїзд додому та в готель',
+  nl: 'Elke dag 08:00–23:00 · Service thuis en in het hotel',
+  ar: 'يومياً 08:00–23:00 · خدمة في المنزل والفندق',
 };
 
 export const CALL_LABEL: Record<Lang, string> = {
   tr: 'Ara', en: 'Call', de: 'Anrufen', ru: 'Позвонить',
+  es: 'Llamar', fr: 'Appeler', pl: 'Zadzwoń', uk: 'Зателефонувати', nl: 'Bellen', ar: 'اتصل',
 };
 
 export const STEPS: Record<Lang, [string, string, string]> = {
@@ -35,6 +42,12 @@ export const STEPS: Record<Lang, [string, string, string]> = {
   en: ['Send a photo', 'Get your quote', 'Delivered to you'],
   de: ['Foto senden', 'Preis erhalten', 'Lieferung zu Ihnen'],
   ru: ['Отправьте фото', 'Узнайте цену', 'Доставка по адресу'],
+  es: ['Envíe una foto', 'Reciba el precio', 'Recíbala'],
+  fr: ['Envoyez une photo', 'Recevez le prix', 'Récupérez-le'],
+  pl: ['Wyślij zdjęcie', 'Poznaj cenę', 'Odbierz'],
+  uk: ['Надішліть фото', 'Дізнайтеся ціну', 'Отримайте річ'],
+  nl: ['Stuur een foto', 'Ontvang de prijs', 'Ontvang het'],
+  ar: ['أرسل صورة', 'اعرف السعر', 'استلم القطعة'],
 };
 
 export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
@@ -143,6 +156,24 @@ export const VALUE_PROPS: Record<Lang, ValueProp[]> = {
       actionText: 'Вызвать портного',
       waTemplate: 'Здравствуйте, заберите мою одежду по адресу и привезите после ремонта.',
     },
+  ],
+  es: [
+    { id: 'instant-quote', slogan: "Envíe una foto por WhatsApp y le decimos el precio", badge: "Precio por foto", actionText: "Enviar foto, pedir precio", waTemplate: "Hola, le envío una foto de mi prenda. ¿Puede indicarme el precio del arreglo necesario?" },
+  ],
+  fr: [
+    { id: 'instant-quote', slogan: "Envoyez une photo sur WhatsApp, recevez le prix", badge: "Prix sur photo", actionText: "Envoyer la photo", waTemplate: "Bonjour, je vous envoie une photo de mon vêtement. Pouvez-vous m'indiquer le prix de la retouche ?" },
+  ],
+  pl: [
+    { id: 'instant-quote', slogan: "Wyślij zdjęcie na WhatsApp, podamy cenę", badge: "Cena po zdjęciu", actionText: "Wyślij zdjęcie", waTemplate: "Dzień dobry, wysyłam zdjęcie mojej odzieży. Jaka będzie cena poprawki?" },
+  ],
+  uk: [
+    { id: 'instant-quote', slogan: "Надішліть фото у WhatsApp: швидко назвемо ціну", badge: "Ціна за фото", actionText: "Надіслати фото", waTemplate: "Добрий день, надсилаю фото одягу. Скільки коштуватиме потрібна робота?" },
+  ],
+  nl: [
+    { id: 'instant-quote', slogan: "Stuur een foto via WhatsApp en ontvang snel een prijs", badge: "Prijs via foto", actionText: "Foto sturen, prijs vragen", waTemplate: "Hallo, ik stuur een foto van mijn kledingstuk. Wat kost de benodigde aanpassing?" },
+  ],
+  ar: [
+    { id: 'instant-quote', slogan: "أرسل صورة عبر واتساب واعرف السعر بسرعة", badge: "السعر بالصورة", actionText: "أرسل الصورة واسأل عن السعر", waTemplate: "مرحباً، أرسل صورة لملابسي. هل يمكنكم إخباري بسعر التعديل المطلوب؟" },
   ],
 };
 

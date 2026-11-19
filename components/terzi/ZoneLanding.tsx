@@ -1,4 +1,5 @@
 // swaphubs.com — Otel bölgesi derinlik sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-zones.ts. Sunucu bileşeni, stil inline.
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { ZONE_H1, zoneH1Index } from '@/lib/zone-h1';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
@@ -131,6 +132,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
         </section>
       </article>
       <ReviewsBlock lang={lang} schema />
+      <QuickActionBanner lang={lang} />
     </main>
   );
 }

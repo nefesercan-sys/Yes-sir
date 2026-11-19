@@ -5,6 +5,7 @@
 // Tek doğruluk kaynağı: lib/seo-data.ts (SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, SERVICES, serviceUrl...).
 // Siteye özgü ayarlar yalnızca aşağıdaki SITE_CFG bloğundadır.
 // ============================================================
+import QuickActionBanner from '@/components/QuickActionBanner';
 import type { Metadata } from 'next';
 import { crossCanonical } from '@/lib/cross-canonical';
 import {
@@ -457,6 +458,7 @@ export default function IletisimSayfasi({ lang }: { lang: Lang }) {
               </nav>
             </div>
           </section>
+          <QuickActionBanner lang={lang} />
         </main>
       </div>
     </>

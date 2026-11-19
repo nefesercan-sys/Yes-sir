@@ -3,7 +3,7 @@
 const YESIL = '#2d8c6e';
 
 const OGELER = [
-  { href: 'https://wa.me/905318986418', icon: '💬', label: 'WhatsApp' },
+  { href: `https://wa.me/905318986418?text=${encodeURIComponent('Merhaba, kıyafetimin fotoğrafını gönderiyorum. Tadilat/dikim fiyatı alabilir miyim?')}`, icon: '💬', label: 'WhatsApp' },
   { href: 'tel:+905318986418', icon: '📞', label: 'Ara' },
 ];
 

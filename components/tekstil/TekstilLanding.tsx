@@ -1,4 +1,5 @@
 import { PROMO_ALL } from '@/lib/intl-promo';
+import QuickActionBanner from '@/components/QuickActionBanner';
 import { BASE, CONTENT, GALLERY, GALLERY_BASE, HREFLANG, LANGS, RELATED, SERVICE_URL, UI, URLS, WA_NUMBER, type Lang, type Topic } from '@/lib/tekstil-sayfalari';
 import { jsonLdString } from '@/lib/json-ld';
 import OrnekGorseller from '@/components/tekstil/OrnekGorseller';
@@ -114,6 +115,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
             <a href={`https://terzihizmeti.com.tr${B2B_PATH[lang]}`}>Anavera Tekstil</a>
           </p>
         </section>
+        {topic !== 'tekstil' && topic !== 'promo' && <QuickActionBanner lang={lang} />}
       </main>
 
       <footer style={{ padding: '1.5rem 1.2rem', textAlign: 'center', fontSize: '.8rem', color: '#94A3B8', background: '#020617' }}>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import QuickActionBanner from "@/components/QuickActionBanner";
 import { AREA_SERVED, PHONE_E164, PHONE_DISPLAY, waUrl } from "@/lib/business";
 import { ONLINE_ALL, ONLINE_PATH } from "@/lib/intl-online";
 import { OZEL_ALL, OZEL_PATH, OZEL_META } from "@/lib/ozel-dikim";
@@ -410,6 +411,8 @@ export default function TerziVitrin() {
           </div>
         </section>
       </div>
+
+      <QuickActionBanner lang="tr" />
 
       {/* ── Mobil sabit çubuk ── */}
       <div className="tv-bar">
