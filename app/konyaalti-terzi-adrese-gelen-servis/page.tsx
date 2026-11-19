@@ -1,4 +1,4 @@
-// app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
+// app/konyaalti-terzi-adrese-gelen-servis/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { jsonLdString } from '@/lib/json-ld';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
-const SITE_URL  = 'https://swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat'
+const SITE_URL  = 'https://swaphubs.com/konyaalti-terzi-adrese-gelen-servis'
 const HOME      = 'https://swaphubs.com'
 const TERZI_URL = 'https://swaphubs.com/terzi'
 const PHONE     = '+90 531 898 64 18'
@@ -42,8 +42,8 @@ const jsonLd = {
       '@id': `${TERZI_URL}#business`,
       // DÜZELTME: sitedeki ana sayfayla (antalyada-terzi-dikim-tamirat-utu-hizmetleri)
       // aynı resmi ad + alternateName kullanılıyor — NAP tutarlılığı için kritik
-      name: 'TERZİ Tailor Atelie',
-      alternateName: ['Terzi Can Konyaaltı', 'Tailor Can Antalya', 'Портной Кан Анталья', 'Schneider Can Antalya', 'Konyaaltı Terzi'],
+      name: 'TERZİ Can - Konyaaltı',
+      alternateName: ['Terzi Can', 'Terzi Can Konyaaltı', 'Tailor Can Antalya', 'Портной Кан Анталья', 'Schneider Can Antalya', 'Konyaaltı Terzi'],
       description: "Antalya Konyaaltı'nda profesyonel terzi, dikiş atölyesi. Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri başta olmak üzere Konyaaltı ve çevresi'ya adrese servis. Kıyafet dikimi, paça kısaltma, fermuar değişimi.",
       url: TERZI_URL,
       telephone: PHONE_E,
@@ -98,7 +98,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: HOME },
-        { '@type': 'ListItem', position: 2, name: 'TERZİ Tailor Atelie', item: TERZI_URL },
+        { '@type': 'ListItem', position: 2, name: 'TERZİ Can - Konyaaltı', item: TERZI_URL },
         { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Tadilat ve Dikim', item: SITE_URL },
       ],
     },
@@ -120,7 +120,7 @@ const jsonLd = {
 
 // SSS: görünür liste (FaqBlock) ve FAQPage şeması tek diziden beslenir; şema yalnızca FaqBlock tarafından basılır.
 const FAQ: [string, string][] = [
-  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', `Evet! TERZİ Tailor Atelie olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}`],
+  ['Konyaaltı Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi mahallelerine eve servis var mı?', `Evet! TERZİ Can - Konyaaltı olarak Konyaaltı'nın tüm mahallelerine — Hurma, Liman, Uncalı, Sarısu, Gürsu, Çakırlar, Meltem, Göbi, Öğretmenevleri dahil — kapıdan alım ve teslimat yapıyoruz. WhatsApp: ${PHONE}`],
   ['Adrese gelen terzi servisi nasıl çalışır?', `Randevu alın, terzimiz adresinize gelir, ölçü alır veya kıyafetlerinizi teslim alır. Tadilat aynı gün, acil işler 1–2 saatte tamamlanıp adresinize teslim edilir. WhatsApp: ${PHONE}`],
   ['Antalya paça kısaltma fiyatı 2026?', `Paça kısaltma ₺200'den başlar. WhatsApp: ${PHONE}`],
   ['Antalya fermuar değişimi fiyatı 2026?', `Fermuar değişimi ₺300'den başlar. Aynı gün teslim; acilse 1–2 saat. WhatsApp: ${PHONE}`],
@@ -214,12 +214,12 @@ export default function AntalyaTerziPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <main style={{ fontFamily: SANS, background: BG, color: METIN, minHeight: '100vh' }}>
 
-        <SpeakableSchema path="/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat" />
+        <SpeakableSchema path="/konyaalti-terzi-adrese-gelen-servis" />
         <QuickActionBanner lang="tr" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.72rem', color: GRI, background: BG2, borderBottom: `1px solid rgba(184,151,90,.12)` }}>
           <Link href="/" style={{ color: ALTIN, textDecoration: 'none' }}>SwapHubs</Link>
           {' › '}
-          <Link href="/terzi" style={{ color: ALTIN, textDecoration: 'none' }}>TERZİ Tailor Atelie</Link>
+          <Link href="/terzi" style={{ color: ALTIN, textDecoration: 'none' }}>TERZİ Can - Konyaaltı</Link>
           {' › '}
           <span>Konyaaltı Terzi · Tadilat · Dikim</span>
         </nav>
@@ -248,7 +248,7 @@ export default function AntalyaTerziPage() {
             </h1>
 
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.78)', lineHeight: 1.9, maxWidth: '650px', marginBottom: '2rem' }}>
-              <strong style={{ color: '#fff' }}>TERZİ Tailor Atelie</strong> — Konyaaltı merkezli profesyonel dikiş atölyesi.
+              <strong style={{ color: '#fff' }}>TERZİ Can - Konyaaltı</strong> — Konyaaltı merkezli profesyonel dikiş atölyesi.
               Paça kısaltma, fermuar değişimi, bel daraltma, elbise dikimi için
               <strong style={{ color: ALTIN2 }}> Hurma, Liman, Sarısu, Uncalı, Gürsu, Çakırlar, Meltem, Göbi ve Öğretmenevleri </strong>
               mahallelerine <strong style={{ color: ALTIN2 }}>kapıdan alım ve teslimat</strong> yapıyoruz.
@@ -447,7 +447,7 @@ export default function AntalyaTerziPage() {
               <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Tüm Hizmetler</span>
             </div>
             <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '2rem' }}>
-              TERZİ Tailor Atelie Hizmet Alanları
+              TERZİ Can - Konyaaltı Hizmet Alanları
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(270px,1fr))', gap: '1px', background: 'rgba(184,151,90,.1)' }}>
               {[
@@ -498,7 +498,7 @@ export default function AntalyaTerziPage() {
               <div style={{ background: '#fff', padding: '1.6rem', borderLeft: `3px solid ${ALTIN}` }}>
                 <div style={{ fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase', color: ALTIN, marginBottom: '.6rem' }}>🇬🇧 English</div>
                 <p style={{ fontSize: '.85rem', color: GRI, lineHeight: 1.8 }}>
-                  <strong style={{ color: METIN }}>TERZİ Tailor Atelie</strong> is a professional tailor in Konyaalti offering
+                  <strong style={{ color: METIN }}>TERZİ Can - Konyaaltı</strong> is a professional tailor in Konyaalti offering
                   alterations, dress making and hotel pickup. English-speaking service. WhatsApp: <strong>{PHONE}</strong>
                 </p>
               </div>
@@ -527,10 +527,10 @@ export default function AntalyaTerziPage() {
               <span style={{ fontSize: '.65rem', letterSpacing: '.3em', textTransform: 'uppercase', color: ALTIN }}>Google Harita · Konum</span>
             </div>
             <h2 style={{ fontFamily: SERIF, fontSize: '1.9rem', color: KOYU, marginBottom: '.4rem' }}>
-              TERZİ Tailor Atelie — Konyaaltı Konumu
+              TERZİ Can - Konyaaltı — Konyaaltı Konumu
             </h2>
             <p style={{ color: GRI, fontSize: '.88rem', marginBottom: '2rem' }}>
-              Konyaaltı Sarısu / Hurma / Liman bölgesinde. Google Maps'te <strong style={{ color: METIN }}>"TERZİ Tailor Atelie"</strong> aratarak bize ulaşabilirsiniz.
+              Konyaaltı Sarısu / Hurma / Liman bölgesinde. Google Maps'te <strong style={{ color: METIN }}>"TERZİ Can - Konyaaltı"</strong> aratarak bize ulaşabilirsiniz.
             </p>
 
             <div style={{ position: 'relative', width: '100%', borderRadius: '2px', overflow: 'hidden', boxShadow: '0 4px 30px rgba(28,24,20,.1)', border: `1px solid rgba(184,151,90,.2)` }}>
@@ -542,7 +542,7 @@ export default function AntalyaTerziPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="TERZİ Tailor Atelie — Google Harita"
+                title="TERZİ Can - Konyaaltı — Google Harita"
               />
             </div>
 
@@ -628,13 +628,13 @@ export default function AntalyaTerziPage() {
         </section>
 
         <footer style={{ textAlign: 'center', padding: '3rem 1.5rem', background: KOYU2, color: 'rgba(255,255,255,.5)', fontSize: '.75rem', borderTop: `1px solid rgba(255,255,255,.05)` }}>
-          <p style={{ marginBottom: '.5rem' }}>© {new Date().getFullYear()} TERZİ Tailor Atelie · Konyaaltı. Tüm hakları saklıdır.</p>
+          <p style={{ marginBottom: '.5rem' }}>© {new Date().getFullYear()} TERZİ Can - Konyaaltı · Konyaaltı. Tüm hakları saklıdır.</p>
           <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.3)', marginBottom: '.5rem' }}>
             Hurma Terzi · Liman Terzi · Uncalı Terzi · Sarısu Terzi · Çakırlar Terzi · Meltem Terzi · Göbi Terzi · Gürsu Terzi · Öğretmenevleri Terzi · Konyaaltı Terzi Atölyesi
           </p>
           <p style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)' }}>
             <a href={MAPS_CID_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,.25)', textDecoration: 'none' }}>
-              Google Business · TERZİ Tailor Atelie — Terzi Dikim Tamir Tadilat
+              Google Business · TERZİ Can - Konyaaltı — Terzi Dikim Tamir Tadilat
             </a>
           </p>
         </footer>

@@ -59,7 +59,8 @@ const nextConfig = {
       ]),
       { source: '/terzi-talep', destination: '/terzi/iletisim', permanent: true },
       // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
-      { source: '/terzi/kuru-temizleme-antalya', destination: '/terzi', permanent: false },
+      // Kuru temizleme adresi taşınan sayfa (adreste kuru temizleme geçiyordu, hizmet verilmiyor)
+      { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/konyaalti-terzi-adrese-gelen-servis', permanent: true },
       // Sayfası olmayan eski ilçe adresleri (Google'da dizinde kalmış olabilir) → terzi ana sayfası.
       // Manavgat, Kemer, Kepez ve Döşemealtı'nın /terzi/antalya/<slug> sayfaları vardır (yönlendirme yok).
       ...['elmali', 'korkuteli', 'kas', 'kalkan', 'finike', 'kumluca', 'alanya', 'gazipasa'].map((slug) => ({
