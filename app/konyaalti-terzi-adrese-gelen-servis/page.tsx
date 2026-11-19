@@ -131,7 +131,7 @@ const FAQ: [string, string][] = [
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Konyaaltı Terzi · Tamir, Dikim, Servis · +90 531 898 64 18' },
+  title: { absolute: 'Adrese Gelen Terzi Konyaaltı · Tamir, Dikim | Terzi Can' },
   description: 'Terziye sor: ' + PHONE + ' · Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.',
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
