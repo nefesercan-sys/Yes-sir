@@ -19,10 +19,14 @@ const TH_TR_DISTRICT: Record<string, string> = {
     'sirinyali', 'toros', 'manavgat', 'serik', 'aksu', 'beldibi'].map((s) => [s, `/antalya-terzi/${s}`])),
 };
 /** Bölgenin terzihizmeti'ndeki Türkçe sayfası (tam URL) ya da null. */
-export const thTrDistrictUrl = (slug: string): string | null => (TH_TR_DISTRICT[slug] ? `${TZ_SITE}${TH_TR_DISTRICT[slug]}` : null);
+// Sahibin kararı (19 Kasım 2026 akşam): iki site arası canonical yönlendirmesi geri alındı; her sayfa kendi adresinde asıl.
+// Yeniden açmak için CROSS_OFF = false yapın.
+const CROSS_OFF: boolean = true;
+export const thTrDistrictUrl = (slug: string): string | null => (!CROSS_OFF && TH_TR_DISTRICT[slug] ? `${TZ_SITE}${TH_TR_DISTRICT[slug]}` : null);
 
 /** swaphubs yolu için kardeş sitedeki canonical URL (yoksa null). */
 export function crossCanonical(path: string): string | null {
+  if (CROSS_OFF) return null;
   const p = path.length > 1 ? path.replace(/\/$/, '') : path;
   if (p === '/terzi/hizmet') return `${TZ_SITE}/terzi-hizmetleri`;
   const h = p.match(/^\/terzi\/hizmet\/([a-z0-9-]+)$/);

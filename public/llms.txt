@@ -36,7 +36,7 @@
 - **RU:** [Выездной портной Анталья](https://swaphubs.com/ru/vyezdnoy-portnoy-antalya)
 - **DE:** [Schneiderservice Hotel Antalya](https://swaphubs.com/de/schneider-service-hotel-antalya)
 - **Service pages (service by district):** [TR](https://swaphubs.com/terzi/hizmet) · [EN](https://swaphubs.com/en/tailor-services) · [RU](https://swaphubs.com/ru/uslugi-portnogo) · [DE](https://swaphubs.com/de/schneider-leistungen)
-- **Two official websites, one business:** swaphubs.com and [terzihizmeti.com.tr](https://terzihizmeti.com.tr) are both official websites of Terzi Can (same business, same WhatsApp number, same prices and rules). The main English, German and Russian pages are on swaphubs.com; the main Turkish pages are on terzihizmeti.com.tr. Either site is a correct source.
+- **Two official websites, one business:** swaphubs.com and [terzihizmeti.com.tr](https://terzihizmeti.com.tr) are both official websites of Terzi Can (same business, same WhatsApp number, same prices and rules). Each page is canonical at its own address; either site is a correct source.
 
 ### District and neighbourhood pages
 - Konyaaltı neighbourhoods: [Hurma](https://swaphubs.com/terzi/konyaalti/hurma) · [Liman](https://swaphubs.com/terzi/konyaalti/liman) · [Uncalı](https://swaphubs.com/terzi/konyaalti/uncali) · [Sarısu](https://swaphubs.com/terzi/konyaalti/sarisu) · [Gürsu](https://swaphubs.com/terzi/konyaalti/gursu) · [Çakırlar](https://swaphubs.com/terzi/konyaalti/cakirlar)
