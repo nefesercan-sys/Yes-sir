@@ -51,7 +51,7 @@ export async function mahalleMetadata(ilce: MahalleIlce, { params }: MahallePara
   if (!m) return {};
   const { title, desc, kw } = mahalleMeta(m.slug, m.ad, PHONE_DISPLAY, MAHALLE_ILCE[ilce].ad);
   const url = `${SITE_URL}${pathOf(ilce, m.slug)}`;
-  // Yabancı dil karşılıkları terzihizmeti.com.tr'ye canonical'landığı için hreflang verilmez
+  // swaphubs'a özgü Türkçe sayfa: kendi adresinde canonical; birebir dil karşılığı olmadığı için hreflang kümesi verilmez
   const alternates = { canonical: url };
   return {
     title: { absolute: title },

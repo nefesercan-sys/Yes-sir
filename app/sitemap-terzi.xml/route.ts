@@ -12,7 +12,7 @@ import { HZ_IDS, hzUrl, hzLanguages, hzSixForService } from '@/lib/intl-hz'
 import { PROMO_ALL } from '@/lib/intl-promo'
 import { OZEL_ALL, OZEL_PATH, ozelLanguages } from '@/lib/ozel-dikim'
 import { DISTRICTS, SERVICES, LANGS, SERVICE_BASE, districtUrl, serviceUrl, isIndexable, type Lang } from '@/lib/seo-data'
-import { crossCanonical } from '@/lib/cross-canonical'
+import { crossCanonical, thTrDistrictUrl } from '@/lib/cross-canonical'
 
 export const revalidate = 86400
 
@@ -133,7 +133,16 @@ export async function GET() {
       return LANGS.map((l) => ({ url: `${BASE_URL}${serviceUrl(l, sv)}`, priority: '0.78', freq: 'monthly', alt }))
     }),
     ...HZ_IDS.flatMap((h) => (['es', 'fr', 'pl', 'uk', 'nl', 'ar'] as const).map((l) => ({ url: `${BASE_URL}${hzUrl(l, h)}`, priority: '0.70', freq: 'monthly', alt: Object.fromEntries(Object.entries(hzLanguages(h)).map(([k, v]) => [k, v.replace('https://swaphubs.com', BASE_URL)])) }))),
-    ...DISTRICTS.flatMap((d) => LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => ({ url: `${BASE_URL}${districtUrl(l, d)}`, priority: '0.76', freq: 'monthly' }))),
+    // Bölge sayfaları: tr = Türkçe asıl sayfa (varsa terzihizmeti'nde), en/ru/de = swaphubs (sayfa <head> kümesiyle aynı)
+    ...DISTRICTS.flatMap((d) => {
+      const tr = thTrDistrictUrl(d.slug) ?? `${BASE_URL}${districtUrl('tr', d)}`
+      const alt = { tr, en: `${BASE_URL}${districtUrl('en', d)}`, ru: `${BASE_URL}${districtUrl('ru', d)}`, de: `${BASE_URL}${districtUrl('de', d)}`, 'x-default': tr }
+      // Kümede yer almayan sayfaya (ör. swaphubs'a özgü /terzi/konyaalti/hurma) bu küme verilmez
+      return LANGS.filter((l) => isIndexable(l, d.slug)).map((l) => {
+        const url = `${BASE_URL}${districtUrl(l, d)}`
+        return { url, priority: '0.76', freq: 'monthly', ...(Object.values(alt).includes(url) ? { alt } : {}) }
+      })
+    }),
     // 📞 İletişim sayfası (TR; EN/RU/DE karşılıkları terzihizmeti.com.tr'de)
     ...(['tr', 'en', 'ru', 'de'] as Lang[]).map((l) => ({ url: `${BASE_URL}${CONTACT_URL[l]}`, priority: l === 'tr' ? '0.85' : '0.80', freq: 'monthly' })),
     // 🧵 Keten özel dikim + Anavera Tekstil (4 dil, karşılıklı hreflang)
@@ -161,8 +170,11 @@ export async function GET() {
   const seen = new Set(terziSayfalar.map((x) => x.url))
   const seoUnique = seoItems.filter((x) => (seen.has(x.url) ? false : (seen.add(x.url), true)))
   const altByUrl = new Map(seoItems.map((x) => [x.url, x.alt]))
+  // terzihizmeti'ne canonical veren Türkçe kopyalar sitemap'e girmez; hreflang kümelerinde onların yerine terzihizmeti adresi yazılır.
+  const toCanonical = (u: string) => (u.startsWith(BASE_URL) ? crossCanonical(u.replace(BASE_URL, '')) ?? u : u)
   const all: Item[] = [...terziSayfalar.map((x) => ({ ...x, alt: altByUrl.get(x.url) ?? x.alt })), ...seoUnique]
     .filter((x) => isOwnCanonical(x.url))
+    .map((x) => (x.alt ? { ...x, alt: Object.fromEntries(Object.entries(x.alt).map(([k, v]) => [k, toCanonical(v)])) } : x))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

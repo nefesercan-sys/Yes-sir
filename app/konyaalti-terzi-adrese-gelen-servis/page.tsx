@@ -59,7 +59,7 @@ const jsonLd = {
         postalCode: '07130',
         addressCountry: 'TR',
       },
-      geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
+      geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: MAPS_CID_URL,
       sameAs: [MAPS_CID_URL],
       openingHoursSpecification: [{
@@ -161,8 +161,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'TR-07',
     'geo.placename': 'Konyaaltı, Antalya',
-    'geo.position': '36.857466;30.596987',
-    ICBM: '36.857466, 30.596987',
+    'geo.position': '36.8572868;30.5970193',
+    ICBM: '36.8572868, 30.5970193',
   },
 }
 

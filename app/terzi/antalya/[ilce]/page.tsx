@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`, `${ilce.ad} bel daraltma`, `${ilce.ad} elbise dikimi`,
       `${ilce.ad} otele gelen terzi`, `${ilce.ad} acil terzi`, 'Antalya terzi', 'acil terzi Antalya',
     ],
-    // Yabancı dil karşılıkları terzihizmeti.com.tr'ye canonical'landığı için hreflang verilmez
+    // swaphubs'a özgü Türkçe sayfa: kendi adresinde canonical; birebir dil karşılığı olmadığı için hreflang kümesi verilmez
     alternates: { canonical: url },
     openGraph: { title, description: desc, url, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
     twitter: { card: 'summary_large_image', title, description: desc },

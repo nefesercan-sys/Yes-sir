@@ -68,6 +68,15 @@ const nextConfig = {
       })),
       // Eski /terzi/bolge/manavgat adresi (bölge sayfası yok) ilçe sayfasına gider
       { source: '/terzi/bolge/manavgat', destination: '/terzi/antalya/manavgat', permanent: true },
+      // Kendi sayfası olan bölgelerin /terzi/bolge/<slug> adresi üretilmiyor (404); Google'da kalan eski adresler kendi sayfasına gider.
+      { source: '/terzi/bolge/konyaalti', destination: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', permanent: true },
+      ...['hurma', 'liman', 'gursu', 'uncali', 'sarisu'].map((slug) => ({ source: `/terzi/bolge/${slug}`, destination: `/terzi/konyaalti/${slug}`, permanent: true })),
+      ...['meltem', 'fener', 'sirinyali', 'guzeloba'].map((slug) => ({ source: `/terzi/bolge/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true })),
+      ...['muratpasa', 'lara', 'kundu', 'kepez', 'aksu', 'dosemealti', 'belek', 'side', 'serik', 'kemer', 'beldibi'].map((slug) => ({ source: `/terzi/bolge/${slug}`, destination: `/terzi/antalya/${slug}`, permanent: true })),
+      // Kendi sayfası olan hizmetlerin /terzi/hizmet/<slug> adresi üretilmiyor (404) → kendi sayfası
+      { source: '/terzi/hizmet/pantolon-paca-kisaltma', destination: '/terzi/paca-kisaltma-antalya', permanent: true },
+      { source: '/terzi/hizmet/fermuar-degisimi-tamiri', destination: '/terzi/fermuar-degisimi', permanent: true },
+      { source: '/terzi/hizmet/elbise-dikimi', destination: '/antalya-terzi-elbise-dikimi', permanent: true },
       // Meltem, Şirinyalı, Fener, Güzeloba: /terzi/konyaalti/<slug> da 200 verir (canonical Muratpaşa); yalnız yazım hatalı /terzi-konyalti/ yönlenir
       ...['meltem', 'sirinyali', 'fener', 'guzeloba'].flatMap((slug) => [
         { source: `/terzi-konyalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true },

@@ -32,7 +32,7 @@ import { trNearDistrict } from '@/lib/tr-meta';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi';
 import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib/business';
-import { crossCanonical } from '@/lib/cross-canonical';
+import { crossCanonical, thTrDistrictUrl } from '@/lib/cross-canonical';
 import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
 import { jsonLdString } from '@/lib/json-ld';
 
@@ -119,14 +119,23 @@ function businessNode(lang: Lang, withReviews = true) {
   };
 }
 
-// EN/RU/DE bölge, hizmet ve hub sayfalarının terzihizmeti.com.tr'de birebir karşılığı var → canonical oraya (hreflang yok).
-// Türkçe sayfalar swaphubs'ta canonical kalır; yabancı karşılıkları başka siteye canonical'landığı için hreflang verilmez
-// (canonical ile çelişen, karşılıksız hreflang kümesi oluşmasın).
-const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, _slug?: string) => {
+// Canonical + hreflang (19 Kasım 2026): Türkçe kopyalar terzihizmeti'ne canonical verir (lib/cross-canonical.ts);
+// EN/RU/DE sayfalar swaphubs'ta asıldır. Dil kümesi: tr = Türkçe asıl sayfa (varsa terzihizmeti'ndeki), en/ru/de = swaphubs.
+// terzihizmeti'ndeki Türkçe sayfalar da aynı EN/RU/DE swaphubs adreslerini gösterir (karşılıklı küme, x-default = tr).
+const trAltUrl = (urlFor: (l: Lang) => string, slug?: string) => {
+  if (slug) { const th = thTrDistrictUrl(slug); if (th) return th; }
+  const tr = urlFor('tr');
+  return crossCanonical(tr.replace(SITE, '')) ?? tr;
+};
+const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, slug?: string): { canonical: string; languages?: Record<string, string> } => {
   const own = urlFor(lang);
   const cross = crossCanonical(own.replace(SITE, ''));
-  return cross ? { canonical: cross } : { canonical: own };
+  if (cross) return { canonical: cross };
+  const tr = trAltUrl(urlFor, slug);
+  return { canonical: own, languages: { tr, en: urlFor('en'), ru: urlFor('ru'), de: urlFor('de'), 'x-default': tr } };
 };
+/** Sitemap için aynı küme (bölge sayfaları). */
+export const districtAltMap = (d: District) => alternatesFor('en', (l) => abs(districtUrl(l, d)), d.slug).languages ?? {};
 // ── Arama sorgusu odaklı başlık/açıklama yardımcıları ──────────────────────
 const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(lang === 'tr' ? 'tr-TR' : lang) + t.slice(1) : t);
 const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
@@ -158,14 +167,8 @@ function tzDistrictLink(lang: Lang, d: District): { href: string; label: string 
     if (d.slug === 'konyaalti') return { href: `${TZ_SITE}${TZ_HUB.tr}`, label: 'Terzi Can atölyesinin kendi sitesi: Antalya terzi' };
     return null;
   }
-  if (!FG_PRI.includes(d.slug)) return null;
-  const href = `${TZ_SITE}${TZ_DISTRICT_BASE[lang]}/${d.slug}`;
-  const label = {
-    en: `Terzi Can workshop website: tailor in ${n}`,
-    ru: `Сайт мастерской Terzi Can: портной ${n}`,
-    de: `Website der Werkstatt Terzi Can: Schneider ${n}`,
-  }[lang];
-  return { href, label };
+  // EN/RU/DE bölge sayfalarının asıl adresi artık swaphubs (terzihizmeti'ndeki kopya buraya canonical verir): bağlantı verilmez.
+  return null;
 }
 const tzHubLabel: Record<Lang, string> = {
   tr: 'Terzi Can atölyesinin kendi sitesi: terzihizmeti.com.tr',
@@ -524,7 +527,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
       } as Record<string, string[]>)[lang],
     ])),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); const six = hzSixForService(s.slug.tr); const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : six; if (!Object.keys(sx).length) return a; const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(serviceUrl(l, s))])); return { ...a, languages: { ...core, ...sx, 'x-default': core.tr } }; })(),
+    alternates: (() => { const a = alternatesFor(lang, (l) => abs(serviceUrl(l, s))); if (!a.languages) return a; const sx = s.slug.tr === 'ozel-dikim-antalya' ? sixAlt('ozel') : hzSixForService(s.slug.tr); return { ...a, languages: { ...a.languages, ...sx } }; })(),
     openGraph: {
       title: c.title, description: phoneFirst(c.desc, lang), url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website',
       images: [{ url: OG, alt: c.title }],
@@ -551,7 +554,7 @@ export function hubMetadata(lang: Lang): Metadata {
     title: { absolute: title },
     description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-    alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); const core = Object.fromEntries((['tr', 'en', 'ru', 'de'] as const).map((l) => [l, abs(SERVICE_BASE[l])])); return { ...a, languages: { ...core, ...sixAlt('tamir'), 'x-default': core.tr } }; })(),
+    alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); if (!a.languages) return a; return { ...a, languages: { ...a.languages, ...sixAlt('tamir') } }; })(),
     openGraph: { title, description, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },
   };
 }
