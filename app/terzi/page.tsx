@@ -93,7 +93,6 @@ const jsonLd = {
       knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       image: [OG_IMAGE],
       logo: `${HOME_URL}/logo.png`,
-      parentOrganization: { '@type': 'Organization', name: 'SwapHubs', url: HOME_URL },
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',

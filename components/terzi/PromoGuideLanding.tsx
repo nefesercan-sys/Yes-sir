@@ -21,9 +21,9 @@ export function promoJsonLd(lang: ILang) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang, dateModified: UPDATED, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT }, isPartOf: { '@type': 'WebSite', name: 'SwapHubs', url: BASE } },
+      { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang, dateModified: UPDATED, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT }, isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: BASE } },
       { '@type': 'Service', name: c.h1, description: c.desc, inLanguage: lang, provider, areaServed: { '@type': 'City', name: 'Antalya' } },
-      { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE }, { '@type': 'ListItem', position: 2, name: c.crumb, item: url }] },
+      { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Terzi Can', item: BASE }, { '@type': 'ListItem', position: 2, name: c.crumb, item: url }] },
       { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
     ],
   };
@@ -37,7 +37,7 @@ export default function PromoGuideLanding({ lang }: { lang: ILang }) {
 
       <header style={{ background: C.green, padding: '3rem 1.25rem 2.4rem' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <p style={{ margin: '0 0 .8rem', fontSize: '.85rem' }}><a href={BASE} style={{ color: C.gold }}>SwapHubs</a> › {c.crumb}</p>
+          <p style={{ margin: '0 0 .8rem', fontSize: '.85rem' }}><a href={BASE} style={{ color: C.gold }}>Terzi Can</a> › {c.crumb}</p>
           <h1 id="hero-h" style={{ fontFamily: serif, fontSize: 'clamp(1.6rem,4.6vw,2.4rem)', fontWeight: 700, lineHeight: 1.2, color: '#fff', margin: '0 0 .9rem' }}>{c.h1}</h1>
           <p className="hero-desc" style={{ fontSize: '1.02rem', color: 'rgba(255,255,255,.92)', margin: 0 }}>{c.lead}</p>
         </div>

@@ -161,7 +161,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: SITE_URL },
         { '@type': 'ListItem', position: 2, name: 'Ателье в Анталье', item: PAGE_URL },
       ],
     },

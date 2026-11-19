@@ -83,7 +83,7 @@ const FAQS: [string, string][] = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebSite', '@id': `${BASE_URL}#website`, name: 'SwapHubs', url: BASE_URL, inLanguage: ['tr','en','ru'] },
+    { '@type': 'WebSite', '@id': `${BASE_URL}#website`, name: 'Terzi Can', url: BASE_URL, inLanguage: ['tr','en','ru'] },
 
     // LocalBusiness — ana işletme
     {
@@ -124,7 +124,7 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList', '@id': `${PAGE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: TERZI_URL },
         { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Dikim · Tadilat', item: PAGE_URL },
       ],
@@ -528,7 +528,7 @@ export default function KonyaaltiTerziPage() {
             Terzi Can · Tailor Can · Портной Кан · Schneider Can
           </div>
           <p style={{ fontSize: '.7rem', color: 'rgba(255,255,255,.25)', margin: '0 0 .6rem' }}>
-            © {new Date().getFullYear()} SwapHubs · {PHONE_DISPLAY} · Konyaaltı, Antalya
+            © {new Date().getFullYear()} Terzi Can · {PHONE_DISPLAY} · Konyaaltı, Antalya
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: '.8rem' }}>
             {[['/terzi','Terzi Can'],['/online-tailor-service','Online Tailor (EN)'],[`/ru/atelie-antalya-online`,'Портной (RU)'],[GBP1_MAPS,'Google Maps']].map(([h,l]) => (

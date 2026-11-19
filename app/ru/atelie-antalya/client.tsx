@@ -324,7 +324,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
           <div className="location-info">
             <div>
               <div className="location-brand">Terzi Can</div>
-              <div className="location-brand-sub">Партнёр платформы SwapHubs</div>
+              <div className="location-brand-sub">Партнёр платформы Terzi Can</div>
               <div className="location-row"><strong>📍 Адрес:</strong> Hurma Mahallesi, Konyaaltı, Antalya</div>
               <div className="location-row"><strong>⏰ Режим работы:</strong> Ежедневно, 08:00–23:00</div>
               <div className="location-row"><strong>📞 Телефон:</strong> {PHONE_DISPLAY}</div>

@@ -139,7 +139,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── TOP NAV (SEO Crawlability & UX) ── */}
         <nav style={{ background: '#0F2417', color: '#fff', padding: '12px 16px', display: 'flex', justifyContent: 'center', gap: '16px', fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <a href="/" style={{ opacity: 0.8 }} className="btn">← Главная (SwapHubs)</a>
+          <a href="/" style={{ opacity: 0.8 }} className="btn">← Главная (Terzi Can)</a>
           <span style={{ opacity: 0.3 }}>|</span>
           <a href="/terzi" style={{ opacity: 0.8 }} className="btn">🇹🇷 Türkçe Site</a>
         </nav>
@@ -328,7 +328,7 @@ export default function RuAtelieAntalyaPage() {
 
         {/* ── FOOTER ── */}
         <footer style={{ background:'#080808',padding:'24px 16px',textAlign:'center',fontSize:11,color:'rgba(255,255,255,.3)',borderTop:'1px solid rgba(255,255,255,.06)' }}>
-          <p>© {new Date().getFullYear()} SwapHubs · {GBP_NAME}</p>
+          <p>© {new Date().getFullYear()} Terzi Can · {GBP_NAME}</p>
           <div style={{ display:'flex',justifyContent:'center',gap:16,marginTop:10,flexWrap:'wrap' }}>
             <a href="/terzi" style={{ color:'rgba(255,255,255,.4)' }}>Terzi Can (TR)</a>
             <a href="/online-terzi-hizmeti" style={{ color:'rgba(255,255,255,.4)' }}>Online Terzi (TR)</a>

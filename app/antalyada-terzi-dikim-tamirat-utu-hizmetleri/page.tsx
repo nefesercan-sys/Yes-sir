@@ -74,7 +74,7 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': `${BASE_URL}#website`,
-      name: 'SwapHubs',
+      name: 'Terzi Can',
       url: BASE_URL,
       inLanguage: ['tr', 'en', 'ru', 'de'],
     },

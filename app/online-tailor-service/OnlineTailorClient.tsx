@@ -285,7 +285,7 @@ export default function OnlineTailorClient({
 
       {/* NAV */}
       <nav className={`onav${scrolled ? ' up' : ''}`} aria-label="Ana navigasyon">
-        <a href="https://swaphubs.com" className="onav-logo">SwapHubs <em>/ Online Tailor</em></a>
+        <a href="https://swaphubs.com" className="onav-logo">Terzi Can <em>/ Online Tailor</em></a>
         <ul className="onav-links">
           {[['#services','Services'],['#prices','Prices'],['#faq','FAQ'],['#maps','Locations']].map(([h,l])=>(
             <li key={h}><a href={h}>{l}</a></li>
@@ -318,13 +318,13 @@ export default function OnlineTailorClient({
           </div>
         </div>
         <div className="ohero-right" aria-hidden="true">
-          <img src={IMGS.hero} alt="Online Tailor Service — SwapHubs Antalya Konyaaltı Tailor" className="ohero-img" width={900} height={1200} loading="eager" />
+          <img src={IMGS.hero} alt="Online Tailor Service — Terzi Can Antalya Konyaaltı Tailor" className="ohero-img" width={900} height={1200} loading="eager" />
         </div>
       </section>
 
       {/* BREADCRUMB */}
       <nav className="obreadcrumb" aria-label="Breadcrumb">
-        <a href="https://swaphubs.com">SwapHubs</a>
+        <a href="https://swaphubs.com">Terzi Can</a>
         <span>›</span>
         <a href="/terzi">Terzi Can</a>
         <span>›</span>
@@ -363,7 +363,7 @@ export default function OnlineTailorClient({
           {SERVICES.map((s) => (
             <article key={s.id} id={s.id} className="oscard"
               style={visible.has(s.id) ? { opacity: 1, transform: 'none' } : {}}>
-              <img src={s.img} alt={`${s.title} — SwapHubs Online Tailor Antalya`} className="oscard-img" loading="lazy" width={800} height={420} />
+              <img src={s.img} alt={`${s.title} — Terzi Can Online Tailor Antalya`} className="oscard-img" loading="lazy" width={800} height={420} />
               <div className="oscard-ov" aria-hidden="true" />
               <div className="oscard-top">
                 {s.badge && <span className="oscard-badge" style={{ background: s.badgeColor, color: '#fff' }}>{s.badge}</span>}
@@ -427,7 +427,7 @@ export default function OnlineTailorClient({
       {/* NEDEN BİZ */}
       <section className="osec" style={{ background: 'var(--ink)' }} aria-labelledby="why-h">
         <div className="octr">
-          <span className="oeyebrow">✦ Why SwapHubs?</span>
+          <span className="oeyebrow">✦ Why Terzi Can?</span>
           <h2 className="oh2" id="why-h">Why Choose Us</h2>
           <div className="odivider" />
           <div className="owhy-grid">
@@ -553,7 +553,7 @@ export default function OnlineTailorClient({
       {/* ÇAPRAZ LİNK */}
       <section className="ocross-sec" aria-labelledby="cross-h">
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="oeyebrow">SwapHubs Tailor Services</span>
+          <span className="oeyebrow">Terzi Can Tailor Services</span>
           <h2 id="cross-h" className="oh2" style={{ fontSize: 'clamp(1.5rem,2.5vw,2rem)' }}>Are You In Antalya?</h2>
         </div>
         <div className="ocross-grid">
@@ -578,12 +578,12 @@ export default function OnlineTailorClient({
 
       {/* FOOTER */}
       <footer className="ofooter">
-        <div className="ofoot-brand">SwapHubs — Online Tailor Service | Antalya Tailor</div>
+        <div className="ofoot-brand">Terzi Can — Online Tailor Service | Antalya Tailor</div>
         <nav className="ofoot-links" aria-label="Footer">
           {[['https://swaphubs.com','Home'],['/terzi','Terzi Can Antalya'],['#services','Services'],['#prices','Prices'],['#faq','FAQ'],['#maps','Locations']].map(([h,l])=><a key={h} href={h}>{l}</a>)}
         </nav>
         <p className="ofoot-copy">
-          © {new Date().getFullYear()} SwapHubs · Antalya Tailor &amp; Textiles ·{' '}
+          © {new Date().getFullYear()} Terzi Can · Antalya Tailor &amp; Textiles ·{' '}
           <a href="tel:+905318986418" style={{ color: 'rgba(201,168,76,.35)', textDecoration: 'none' }}>+90 531 898 64 18</a>
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center', marginTop: '1rem' }}>

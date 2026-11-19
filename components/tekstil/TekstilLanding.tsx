@@ -27,7 +27,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'WebPage', '@id': `${url}#page`, url, name: c.t, description: c.d, inLanguage: lang, isPartOf: { '@type': 'WebSite', name: 'SwapHubs', url: BASE } },
+      { '@type': 'WebPage', '@id': `${url}#page`, url, name: c.t, description: c.d, inLanguage: lang, isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: BASE } },
       { '@type': 'Service', name: c.h1, description: c.d, inLanguage: lang, provider, areaServed: { '@type': 'City', name: 'Antalya' } },
       { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: ui.home, item: BASE }, { '@type': 'ListItem', position: 2, name: c.crumb, item: url }] },
       { '@type': 'FAQPage', mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
@@ -117,7 +117,7 @@ export default function TekstilLanding({ topic, lang }: { topic: Topic; lang: La
       </main>
 
       <footer style={{ padding: '1.5rem 1.2rem', textAlign: 'center', fontSize: '.8rem', color: '#94A3B8', background: '#020617' }}>
-        {c.foot ?? ui.foot} · <a href={BASE} style={{ color: '#94A3B8' }}>SwapHubs.com</a>
+        {c.foot ?? ui.foot} · <a href={BASE} style={{ color: '#94A3B8' }}>Terzi Can.com</a>
       </footer>
     </div>
   );

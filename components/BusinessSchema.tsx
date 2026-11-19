@@ -101,7 +101,7 @@ export default function BusinessSchema({
       url, name, description, inLanguage: lang,
       ...(lastModified ? { dateModified: lastModified } : {}),
       about: { '@id': b.id },
-      isPartOf: { '@type': 'WebSite', name: 'SwapHubs', url: SITE_URL },
+      isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: SITE_URL },
     },
   ];
 

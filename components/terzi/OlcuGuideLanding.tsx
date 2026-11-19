@@ -11,7 +11,7 @@ import { waUrl } from '@/lib/business';
 import OlcuForm from '@/components/terzi/OlcuForm';
 
 export const OLCU_UPDATED = '2026-11-08';
-export const OLCU_OG = `${SITE}/swaphubs-og.jpg`;
+export const OLCU_OG = `${SITE}/og/terzi-can.jpg`;
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814' };
 const serif = 'Georgia,serif';

@@ -82,7 +82,7 @@ const jsonLd = {
       breadcrumb: {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: SITE },
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: SITE },
           { '@type': 'ListItem', position: 2, name: 'Terzi', item: `${SITE}/terzi` },
           { '@type': 'ListItem', position: 3, name: 'Terzi Çağır', item: PAGE_URL },
         ],
@@ -575,7 +575,7 @@ export default function TerziCagirPage() {
         <footer className="footer">
           <div className="footer-brand">Terzi Can · Konyaaltı, Antalya</div>
           <p style={{fontSize:'.72rem',color:'rgba(255,255,255,.3)'}}>
-            © 2026 SwapHubs · {PHONE} · Her gün 08:00–23:00
+            © 2026 Terzi Can · {PHONE} · Her gün 08:00–23:00
           </p>
           <nav className="footer-links">
             {[

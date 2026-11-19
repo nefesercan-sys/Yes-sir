@@ -78,7 +78,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        {position:1, name:'SwapHubs', item:HOME_URL},
+        {position:1, name:'Terzi Can', item:HOME_URL},
         {position:2, name:'Портной Анталья', item:PARENT_URL},
         {position:3, name:'Выездной портной Анталья', item:SITE_URL},
       ].map(i=>({...i,'@type':'ListItem'})),
@@ -148,7 +148,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
         <QuickActionBanner lang="ru" variant="hotel-service" />
 
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
-          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
+          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>Terzi Can</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Портной Анталья</Link>
           {' › '}

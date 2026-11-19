@@ -12,7 +12,7 @@ import { jsonLdString } from '@/lib/json-ld';
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
 export const UPDATED = '2026-10-29';
-export const OG_DEFAULT = `${SITE}/swaphubs-og.jpg`;
+export const OG_DEFAULT = `${SITE}/og/terzi-can.jpg`;
 const waLink = (text: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
 export function intlJsonLd(lang: ILang) {
@@ -24,7 +24,7 @@ export function intlJsonLd(lang: ILang) {
       {
         '@type': 'Article', '@id': `${url}#article`, headline: c.h1, description: c.desc, url, inLanguage: lang,
         dateModified: UPDATED, image: OG_DEFAULT, mainEntityOfPage: url,
-        author: { '@type': 'Organization', name: 'SwapHubs', url: SITE }, publisher: { '@type': 'Organization', name: 'SwapHubs', url: SITE },
+        author: { '@type': 'Organization', name: 'Terzi Can', url: SITE }, publisher: { '@type': 'Organization', name: 'Terzi Can', url: SITE },
         about: { '@id': BUSINESS_ID },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
       },

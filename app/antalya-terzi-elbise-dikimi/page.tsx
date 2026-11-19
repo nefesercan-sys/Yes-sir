@@ -89,7 +89,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: BASE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: 'Terzi Can', item: `${BASE_URL}/terzi` },
         { '@type': 'ListItem', position: 3, name: 'Elbise Dikimi', item: SITE_URL },
       ],

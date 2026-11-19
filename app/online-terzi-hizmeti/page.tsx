@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     'online üniforma üretimi', 'müslin kıyafet dikimi', 'keten elbise dikimi',
     'özel tasarım kıyafet', 'ölçüye göre kıyafet', 'online terzi Antalya',
     'online terzi Antalya', 'online terzi İstanbul', 'WhatsApp terzi hizmeti',
-    'online fason dikim', 'SwapHubs terzi',
+    'online fason dikim', 'Terzi Can terzi',
   ],
   alternates: {
     canonical: SITE_URL,
@@ -90,12 +90,12 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': 'https://swaphubs.com#website',
-      name: 'SwapHubs',
+      name: 'Terzi Can',
       url: 'https://swaphubs.com',
       publisher: {
         '@type': 'Organization',
         '@id': 'https://swaphubs.com#organization',
-        name: 'SwapHubs',
+        name: 'Terzi Can',
         url: 'https://swaphubs.com',
         logo: {
           '@type': 'ImageObject',
@@ -225,7 +225,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: 'https://swaphubs.com' },
+        { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: 'https://swaphubs.com' },
         { '@type': 'ListItem', position: 2, name: 'Terzi', item: 'https://swaphubs.com/terzi' },
         { '@type': 'ListItem', position: 3, name: 'Online Terzi Hizmeti', item: SITE_URL },
       ],

@@ -97,7 +97,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       '@id': `${SITE_URL}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'SwapHubs', item: HOME },
+        { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: HOME },
         { '@type': 'ListItem', position: 2, name: 'TERZİ Can - Antalya Tailor Service', item: TERZI_URL },
         { '@type': 'ListItem', position: 3, name: 'Konyaaltı Terzi · Tadilat ve Dikim', item: SITE_URL },
       ],
@@ -217,7 +217,7 @@ export default function AntalyaTerziPage() {
         <SpeakableSchema path="/konyaalti-terzi-adrese-gelen-servis" />
         <QuickActionBanner lang="tr" />
         <nav style={{ padding: '.8rem 1.5rem', fontSize: '.72rem', color: GRI, background: BG2, borderBottom: `1px solid rgba(184,151,90,.12)` }}>
-          <Link href="/" style={{ color: ALTIN, textDecoration: 'none' }}>SwapHubs</Link>
+          <Link href="/" style={{ color: ALTIN, textDecoration: 'none' }}>Terzi Can</Link>
           {' › '}
           <Link href="/terzi" style={{ color: ALTIN, textDecoration: 'none' }}>TERZİ Can - Antalya Tailor Service</Link>
           {' › '}
