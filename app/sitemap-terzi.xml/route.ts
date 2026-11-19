@@ -50,7 +50,7 @@ export async function GET() {
     { url: `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti`, priority: '0.95', freq: 'weekly' },
     { url: `${BASE_URL}/antalya-terzi-elbise-dikimi`,                              priority: '0.95', freq: 'weekly' },
     { url: `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`,             priority: '0.95', freq: 'weekly' },
-    { url: `${BASE_URL}/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat`,    priority: '0.9',  freq: 'weekly' },
+    { url: `${BASE_URL}/konyaalti-terzi-adrese-gelen-servis`,    priority: '0.9',  freq: 'weekly' },
 
     // ✂️ 3. MİKRO TERZİ SAYFALARI (Priority: 0.90)
     { url: `${BASE_URL}/online-terzi-hizmeti`,        priority: '0.90', freq: 'weekly' },

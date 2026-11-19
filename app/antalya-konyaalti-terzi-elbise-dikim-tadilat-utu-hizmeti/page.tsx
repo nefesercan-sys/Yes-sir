@@ -91,7 +91,7 @@ const jsonLd = {
       ...reviewSchema(),
       additionalType: ['https://schema.org/SewingService'],
       '@id': `${TERZI_URL}#business`,
-      name: 'Terzi Can Konyaaltı',
+      name: 'TERZİ Can - Konyaaltı',
       alternateName: [GBP1_NAME, 'Tailor Can Antalya', 'Портной Кан Анталья'],
       description: 'Elbise dikimi, tamiri, tadilatı, fermuar değişimi, bel/paça ayarlama, elbise daraltma, elbise boyu kısaltma. Bay, bayan, çocuk kıyafetleri. Konyaaltı Hurma, Liman, Sarısu, Gürsu, Uncalı bölgesine adrese servis.',
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',

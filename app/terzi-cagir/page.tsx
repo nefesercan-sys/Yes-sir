@@ -27,7 +27,7 @@ const jsonLd = {
     {
       '@type': 'LocalBusiness',
       '@id': `${PAGE_URL}#business`,
-      name: 'Terzi Can — Antalya Konyaaltı',
+      name: 'TERZİ Can - Konyaaltı',
       alternateName: [
         'Antalya Terzi', 'Konyaaltı Terzi', 'Terzi Çağır Antalya',
         'Eve Gelen Terzi Antalya', 'Tailor Antalya', 'Портной Анталья',
