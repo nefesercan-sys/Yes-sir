@@ -7,7 +7,7 @@
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
 // Turist başlangıç fiyatları (€; terzihizmeti.com.tr lib/facts.ts ile aynı)
-const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 20, leather: 20 } as const;
+const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 15, leather: 20 } as const;
 const eurFrom = (k: keyof typeof EUR) => EUR[k];
 
 export type ILang = 'en' | 'ru' | 'de';

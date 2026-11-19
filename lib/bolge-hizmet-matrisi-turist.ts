@@ -9,7 +9,7 @@
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
 // Turist başlangıç fiyatları (€; terzihizmeti.com.tr lib/facts.ts ile aynı)
-const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 20, leather: 20 } as const;
+const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 15, leather: 20 } as const;
 const eurFrom = (k: keyof typeof EUR) => EUR[k];
 import type { ILang } from '@/lib/intl';
 import { zoneData, isZone } from '@/lib/intl-zones';
@@ -223,7 +223,7 @@ const shuf = <T,>(a: T[], seed: number): T[] => {
   for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; }
   return r;
 };
-// Fiyat satırı için ek kalıplar (aynı rakamlar: ₺200'den ≈ €10, fermuar €15/€20, deri €20; KDV hariç yazılmaz çünkü ana satırla aynı kalır → fiyat denetimi tek kaynak).
+// Fiyat satırı için ek kalıplar (aynı rakamlar: ₺200'den ≈ €10, fermuar €15, deri €20; KDV hariç yazılmaz çünkü ana satırla aynı kalır → fiyat denetimi tek kaynak).
 const PRICE_ALT: Record<ILang, ((n: string) => string)[]> = {
   es: [(n) => `Orientación para ${n}: bajos, cintura y mangas desde ${e('hem')}; cremallera desde ${e('zipperPants')} (chaquetas y abrigos ${e('zipperCoat')}); piel desde ${e('leather')}. Lo demás se presupuesta por foto.`],
   fr: [(n) => `Repères pour ${n} : ourlets, taille et manches dès ${e('hem')} ; fermeture éclair dès ${e('zipperPants')} (vestes et manteaux ${e('zipperCoat')}) ; cuir dès ${e('leather')}. Le reste est chiffré sur photo.`],

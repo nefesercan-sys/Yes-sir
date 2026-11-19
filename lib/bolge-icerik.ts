@@ -200,8 +200,8 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
         procQ(c.focus[0] ?? 'paca'),
       ],
       resort: [
-        [`${loc} otelime terzi gelir mi, ücretli mi?`, `${R.hotelFree}. Otel adını ve oda numarasını WhatsApp'tan yazmanız yeterli; teslim de otele yapılır.`],
-        [`Türkçe bilmiyorum, anlaşabilir miyiz?`, `Evet. Türkçe, İngilizce, Rusça ve Almanca yazışabilirsiniz; fotoğraf ve kısa bir not yeterlidir.`],
+        [`${loc} otelime terzi gelir mi?`, `${R.hotelFree}. Otel adını ve oda numarasını WhatsApp'tan yazmanız yeterli; teslim de otele yapılır.`],
+        [`Türkçe bilmiyorum, anlaşabilir miyiz?`, `Evet. Türkçe, İngilizce, Rusça, Almanca, İspanyolca, Fransızca, Lehçe, Ukraynaca, Felemenkçe ve Arapça yazışabilirsiniz; fotoğraf ve kısa bir not yeterlidir.`],
       ],
     };
     case 'en': return {
@@ -220,7 +220,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
       ],
       resort: [
         [`Will a tailor come to my hotel ${loc}, and is there a charge?`, `${R.hotelFree}. Just send the hotel name and room number on WhatsApp; the garment is delivered back to the hotel.`],
-        [`I don't speak Turkish — is that a problem?`, `No. You can write in English, Russian, German or Turkish; a photo and a short note are enough.`],
+        [`I don't speak Turkish — is that a problem?`, `No. You can write in Turkish, English, Russian, German, Spanish, French, Polish, Ukrainian, Dutch or Arabic; a photo and a short note are enough.`],
       ],
     };
     case 'ru': return {
@@ -239,7 +239,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
       ],
       resort: [
         [`Приедет ли портной в мой отель ${loc} и сколько это стоит?`, `${R.hotelFree}. Напишите в WhatsApp название отеля и номер комнаты — вещь привезём обратно в отель.`],
-        [`Я не говорю по-турецки — сможем договориться?`, `Да. Можно писать по-русски, по-английски, по-немецки или по-турецки; достаточно фото и короткого описания.`],
+        [`Я не говорю по-турецки — сможем договориться?`, `Да. Можно писать по-турецки, по-английски, по-русски, по-немецки, по-испански, по-французски, по-польски, по-украински, по-нидерландски или по-арабски; достаточно фото и короткого описания.`],
       ],
     };
     default: return {
@@ -258,7 +258,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
       ],
       resort: [
         [`Kommt ein Schneider in mein Hotel ${loc}, und kostet das etwas?`, `${R.hotelFree}. Schreiben Sie Hotelname und Zimmernummer per WhatsApp; die Kleidung wird ins Hotel zurückgebracht.`],
-        [`Ich spreche kein Türkisch — ist das ein Problem?`, `Nein. Sie können auf Deutsch, Englisch, Russisch oder Türkisch schreiben; ein Foto und eine kurze Notiz genügen.`],
+        [`Ich spreche kein Türkisch — ist das ein Problem?`, `Nein. Sie können auf Türkisch, Englisch, Russisch, Deutsch, Spanisch, Französisch, Polnisch, Ukrainisch, Niederländisch oder Arabisch schreiben; ein Foto und eine kurze Notiz genügen.`],
       ],
     };
   }

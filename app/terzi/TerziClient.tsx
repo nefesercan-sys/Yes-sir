@@ -140,15 +140,15 @@ const PRICES: Record<Lang, string[][]> = (() => {
       ['Yırtık Onarımı', 'Fotoğrafa göre'],
     ], ['Elbise / Abiye Dikimi', 'Etek / Pantolon Dikimi', 'Çocuk Kıyafeti Dikimi', 'Damatlık / Takım Dikimi'], [['Üniforma (kişi başı)', 'Teklif / Quote', 'Sipariş miktarına göre']]),
     en: mk('en', [
-      ['Trouser / Skirt Hemming', '€10+'], ['Waist Taking In', '€10+'], ['Zip — Trousers / Jeans', '€15+'], ['Zip — Coat / Jacket / Leather', '€20+'],
+      ['Trouser / Skirt Hemming', '€10+'], ['Waist Taking In', '€10+'], ['Zip — Trousers / Jeans', '€15+'], ['Zip — Coat / Jacket / Leather', '€15+'],
       ['Sleeve Shortening', '€10+'], ['Wedding Dress Alteration (no wedding dress sewing)', 'By photo'], ['Evening Gown Alteration', 'By photo'], ['Tear Repair', 'By photo'],
     ], ['Dress / Evening Gown Making', 'Skirt / Trousers Sewing', "Children's Clothing Sewing", 'Groom Suit / Suit Making'], [['Uniform (per person)', 'Quote', 'On quantity']]),
     ru: mk('ru', [
-      ['Подгонка брюк / юбки', '€10+'], ['Заужение талии', '€10+'], ['Молния — брюки/джинсы', '€15+'], ['Молния — пальто/пиджак/кожа', '€20+'],
+      ['Подгонка брюк / юбки', '€10+'], ['Заужение талии', '€10+'], ['Молния — брюки/джинсы', '€15+'], ['Молния — пальто/пиджак/кожа', '€15+'],
       ['Укорочение рукавов', '€10+'], ['Подгонка свадебного платья (пошив не делаем)', 'По фото'], ['Подгонка вечернего платья', 'По фото'], ['Ремонт разрывов', 'По фото'],
     ], ['Пошив платья / вечернего платья', 'Пошив юбки / брюк', 'Пошив детской одежды', 'Костюм жениха / костюм на заказ'], [['Форма (на человека)', 'Запрос', 'По заказу']]),
     de: mk('de', [
-      ['Hose / Rock kürzen', '€10+'], ['Taille enger machen', '€10+'], ['Reißverschluss — Hose/Jeans', '€15+'], ['Reißverschluss — Mantel/Jacke/Leder', '€20+'],
+      ['Hose / Rock kürzen', '€10+'], ['Taille enger machen', '€10+'], ['Reißverschluss — Hose/Jeans', '€15+'], ['Reißverschluss — Mantel/Jacke/Leder', '€15+'],
       ['Ärmel kürzen', '€10+'], ['Brautkleid ändern (kein Brautkleid-Nähen)', 'Per Foto'], ['Abendkleid ändern', 'Per Foto'], ['Riss reparieren', 'Per Foto'],
     ], ['Kleid / Abendkleid nähen', 'Rock / Hose nähen', 'Kinderkleidung nähen', 'Anzug (Bräutigam) nähen'], [['Uniform (pro Person)', 'Angebot', 'Je nach Menge']]),
   };
@@ -196,7 +196,7 @@ const WHY = [
   { icon:'⚡', tr:['Hızlı Servis','Süre işe göre WhatsApp\'ta netleşir'], en:['Fast Service','Timing confirmed on WhatsApp'], ru:['Быстрый сервис','Сроки уточняются в WhatsApp'], de:['Schneller Service','Zeit per WhatsApp bestätigt'] },
   { icon:'📍', tr:['Yerinde Ölçü','Adresinize gelip ölçü alıyoruz'], en:['On-Site Fitting','We come to your address'], ru:['Замеры на месте','Приедем по адресу'], de:['Maß vor Ort','Wir kommen zu Ihnen'] },
   { icon:'🚗', tr:['Araçlı Servis','Eve ve otele gelen terzi'], en:['Mobile Tailor','We come to you'], ru:['Выездной портной','Приедем к вам'], de:['Mobiler Schneider','Kommen zu Ihnen'] },
-  { icon:'🌍', tr:['4 Dil','TR · EN · RU · DE'], en:['4 Languages','TR · EN · RU · DE'], ru:['4 языка','TR · EN · RU · DE'], de:['4 Sprachen','TR · EN · RU · DE'] },
+  { icon:'🌍', tr:['10 Dil','TR · EN · RU · DE +6'], en:['10 Languages','TR · EN · RU · DE +6'], ru:['10 языков','TR · EN · RU · DE +6'], de:['10 Sprachen','TR · EN · RU · DE +6'] },
   { icon:'🏨', tr:['Otele Teslimat','Belek, Lara, Kemer ve Side otellerine'], en:['Hotel Delivery','Hotels in Belek, Lara, Kemer, Side'], ru:['Доставка в отель','Все отели Антальи'], de:['Hotel Lieferung','Alle Antalya-Hotels'] },
   { icon:'👔', tr:['Bay & Bayan','Erkek ve kadın kıyafeti uzman ekip'], en:['Men & Women','Specialist team for both'], ru:['Мужской & Женский','Специалисты для обоих'], de:['Herren & Damen','Spezialisiert für beide'] },
   { icon:'🏭', tr:['Tekstil İmalatı','Tişört, sweatshirt, pantolon seri üretim'], en:['Textile Mfg','T-shirt, sweatshirt, trousers production'], ru:['Производство','Серийное производство'], de:['Textilproduktion','Serienproduktion'] },
@@ -509,7 +509,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="twhy" aria-labelledby="why-title">
           <div className="twhy-inner">
             <span className="ey">✦ Neden Terzi Can?</span>
-            <h2 id="why-title" className="tst">Deneyimli Ekip · 4 Dil · Konyaaltı ve çevresi</h2>
+            <h2 id="why-title" className="tst">Deneyimli Ekip · 10 Dil · Konyaaltı ve çevresi</h2>
             <span className="tgl" />
             <div className="twhy-grid">
               {WHY.map((w, i) => (

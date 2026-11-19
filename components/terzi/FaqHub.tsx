@@ -39,7 +39,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     rows: [
       ['Paça, bel, kol ve boy kısaltma-daraltma', "₺200'den (≈ €10)", 'Aynı gün'],
       ['Pantolon fermuarı değişimi', "₺300'den (≈ €15)", 'Aynı gün'],
-      ['Mont, kaban, palto ve deri fermuarı değişimi', "₺300'den (≈ €20)", 'Aynı gün'],
+      ['Mont, kaban, palto ve deri fermuarı değişimi', "₺300'den (≈ €15)", 'Aynı gün'],
       ['Kot (paça, daraltma, ceket, etek)', "Yaklaşık ₺200'den", 'Aynı gün'],
       ['Kaban ve palto kısaltma-daraltma', "₺200'den", 'Aynı gün'],
       ['Deri ceket, pantolon, yelek tadilatı', "₺400'den (≈ €20)", 'İşin durumuna göre'],
@@ -63,7 +63,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     rows: [
       ['Hemming, waist, sleeve and length alterations', 'From ₺200 (about €10)', 'Same day'],
       ['Trouser zipper replacement', 'From ₺300 (about €15)', 'Same day'],
-      ['Coat, jacket and leather zipper replacement', 'From ₺300 (about €20)', 'Same day'],
+      ['Coat, jacket and leather zipper replacement', 'From ₺300 (about €15)', 'Same day'],
       ['Jeans (hem, narrowing, jacket, skirt)', 'From about ₺200', 'Same day'],
       ['Coat shortening and taking-in', 'From ₺200', 'Same day'],
       ['Leather jacket, trousers, vest', 'From ₺400 (about €20)', 'Depends on the job'],
@@ -87,7 +87,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     rows: [
       ['Подгонка длины, талии, рукавов', 'От ₺200 (около €10)', 'В тот же день'],
       ['Замена молнии на брюках', 'От ₺300 (около €15)', 'В тот же день'],
-      ['Замена молнии на пальто, куртке, коже', 'От ₺300 (около €20)', 'В тот же день'],
+      ['Замена молнии на пальто, куртке, коже', 'От ₺300 (около €15)', 'В тот же день'],
       ['Джинсы (низ, ушивание, куртка, юбка)', 'От примерно ₺200', 'В тот же день'],
       ['Укорачивание и ушивание пальто', 'От ₺200', 'В тот же день'],
       ['Кожаная куртка, брюки, жилет', 'От ₺400 (около €20)', 'По работе'],
@@ -111,7 +111,7 @@ export const FAQ_HUB: Record<FaqHubLang, L10n> = {
     rows: [
       ['Kürzen sowie Taille, Ärmel und Länge ändern', 'Ab ₺200 (ca. €10)', 'Am selben Tag'],
       ['Reißverschluss bei Hosen wechseln', 'Ab ₺300 (ca. €15)', 'Am selben Tag'],
-      ['Reißverschluss bei Mantel, Jacke, Leder wechseln', 'Ab ₺300 (ca. €20)', 'Am selben Tag'],
+      ['Reißverschluss bei Mantel, Jacke, Leder wechseln', 'Ab ₺300 (ca. €15)', 'Am selben Tag'],
       ['Jeans (Saum, enger machen, Jacke, Rock)', 'Ab ca. ₺200', 'Am selben Tag'],
       ['Mantel kürzen und enger machen', 'Ab ₺200', 'Am selben Tag'],
       ['Lederjacke, -hose, -weste', 'Ab ₺400 (ca. €20)', 'Je nach Arbeit'],

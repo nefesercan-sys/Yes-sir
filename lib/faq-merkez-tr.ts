@@ -18,7 +18,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Mont, kaban, palto veya deri ceket fermuarı değişimi ne kadar?",
-  "Mont, kaban, palto ve deri fermuar değişimi ₺300'den (yaklaşık €20) başlar; KDV dahil değildir."
+  "Mont, kaban, palto ve deri fermuar değişimi ₺300'den (yaklaşık €15) başlar; KDV dahil değildir."
  ],
  [
   "Kot pantolon paça kısaltma ve orijinal paça yapılıyor mu?",

@@ -132,7 +132,7 @@ const AVANTAJLAR = [
   ['🪡', 'Nakış & Logo Baskı', 'Bilgisayarlı nakış, dijital & DTF baskı. Fiyat adede ve logoya göre netleşir.'],
   ['📦', 'Etiketli & Paketli Teslim', 'Her üniformaya etiket, ambalaj ve teslimat. Kurumsal görünüm.'],
   ['🚐', 'Yakın Bölgelere Teslimat', 'Belek, Kemer, Lara dahil Konyaaltı ve çevresi\'ya teslimat.'],
-  ['🌍', 'Çok Dilli Hizmet', 'TR · EN · RU · DE dört dilde iletişim. Uluslararası oteller için ideal.'],
+  ['🌍', 'Çok Dilli Hizmet', 'TR · EN · RU · DE dahil 10 dilde iletişim. Uluslararası oteller için ideal.'],
 ];
 
 export default function UniformaUretimiPage() {
