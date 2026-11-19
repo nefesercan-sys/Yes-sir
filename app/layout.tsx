@@ -34,14 +34,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://swaphubs.com"),
   title: {
     template: "%s",
-    default: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
+    default: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | Terzi Can",
   },
   description:
     "Konyaaltı Antalya'da Terzi Can: tadilat, özel dikim, tekstil üretimi. Eve ve otele servis. Hurma Mahallesi. Her gün 08:00–23:00.",
 
-  authors: [{ name: "SwapHubs", url: "https://swaphubs.com" }],
-  creator: "SwapHubs",
-  publisher: "SwapHubs",
+  authors: [{ name: "Terzi Can", url: "https://swaphubs.com" }],
+  creator: "Terzi Can",
+  publisher: "Terzi Can",
   category: "business",
 
   icons: {
@@ -53,20 +53,20 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
+    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | Terzi Can",
     description:
       "Konyaaltı Antalya'da terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele servis.",
     url: "https://swaphubs.com",
-    siteName: "SwapHubs",
+    siteName: "Terzi Can",
     locale: "tr_TR",
     alternateLocale: ["en_US", "ru_RU", "de_DE"],
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/swaphubs-og.jpg",
+        url: "https://swaphubs.com/og/terzi-can.jpg",
         width: 1200,
         height: 630,
-        alt: "SwapHubs — Küresel Hizmet & Ürün Platformu",
+        alt: "Terzi Can Antalya — terzi, tadilat, özel dikim",
         type: "image/jpeg",
       },
     ],
@@ -74,10 +74,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | SwapHubs",
+    title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | Terzi Can",
     description: "Antalya terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele servis.",
-    site: "@swaphubs",
-    images: ["https://swaphubs.com/swaphubs-og.jpg"],
+    images: ["https://swaphubs.com/og/terzi-can.jpg"],
   },
 
   robots: {
@@ -127,7 +126,7 @@ export default function RootLayout({ children }: Props) {
           href="https://res.cloudinary.com"
           crossOrigin="anonymous"
         />
-        {/* Terzi / tekstil sayfalarında SwapHubs şemasını gizleyen Client Component (yol listesi GlobalSchema.tsx içinde) */}
+        {/* Terzi / tekstil sayfalarında Terzi Can şemasını gizleyen Client Component (yol listesi GlobalSchema.tsx içinde) */}
         <GlobalSchema />
       </head>
       <body className={`${jakarta.className} antialiased`}>

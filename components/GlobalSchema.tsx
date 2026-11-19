@@ -87,7 +87,8 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': 'https://swaphubs.com/#website',
       url: 'https://swaphubs.com',
-      name: 'SwapHubs',
+      name: 'Terzi Can Antalya',
+      alternateName: 'SwapHubs',
       description: "Terzi Can: Antalya terzi, tadilat, özel dikim ve tekstil üretimi",
       inLanguage: ['tr', 'en', 'de', 'ru', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'],
       publisher: { '@id': 'https://swaphubs.com/#organization' },
@@ -95,7 +96,7 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': 'https://swaphubs.com/#organization',
-      name: 'SwapHubs',
+      name: 'Terzi Can',
       url: 'https://swaphubs.com',
       logo: {
         '@type': 'ImageObject',
@@ -103,9 +104,9 @@ const jsonLd = {
         width: '512',
         height: '512',
       },
-      image: { '@type': 'ImageObject', url: 'https://swaphubs.com/swaphubs-og.jpg' },
+      image: { '@type': 'ImageObject', url: 'https://swaphubs.com/og/terzi-can.jpg' },
       description:
-        'SwapHubs, Konyaaltı Antalya\'daki Terzi Can terzi ve tekstil üretimi sayfalarını barındırır.',
+        "Terzi Can: Konyaaltı, Antalya'da 2006'dan beri terzi atölyesi; tadilat, özel dikim ve tekstil üretimi.",
       areaServed: ['TR', 'DE', 'AE', 'SA', 'US', 'GB', 'RU'],
       knowsAbout: [
         'Terzi ve Tadilat Hizmetleri',
@@ -115,7 +116,7 @@ const jsonLd = {
         'Seri Üretim ve İhracat',
       ],
       subOrganization: { '@id': 'https://swaphubs.com/terzi#business' },
-      sameAs: ['https://twitter.com/swaphubs', 'https://www.linkedin.com/company/swaphubs'],
+      sameAs: ['https://www.google.com/maps?cid=6436895271281342624', 'https://terzihizmeti.com.tr'],
     },
   ],
 };

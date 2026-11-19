@@ -257,7 +257,7 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
 // (Diğer sayfaların şemasında zaten var; çift üretmemek için burada yok.)
 export function getBreadcrumb(pathname: string): Crumb[] | null {
   const p = norm(pathname);
-  const home: Crumb = { name: 'SwapHubs', href: '/' };
+  const home: Crumb = { name: 'Terzi Can', href: '/' };
 
   let m = p.match(/^\/terzi\/antalya\/([a-z0-9-]+)$/);
   if (m) {

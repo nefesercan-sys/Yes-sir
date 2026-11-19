@@ -118,7 +118,7 @@ export default function HotelTailorAntalyaPage() {
         <QuickActionBanner lang="en" variant="hotel-service" />
 
         <nav style={{ padding: '1rem 1.5rem', fontSize: '.75rem', color: '#6B5F53', background: '#F2EDE4', borderBottom: '1px solid rgba(184,151,90,.1)' }}>
-          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>SwapHubs</Link>
+          <Link href="/" style={{ color: '#B8975A', textDecoration: 'none' }}>Terzi Can</Link>
           {' › '}
           <Link href="/terzi" style={{ color: '#B8975A', textDecoration: 'none' }}>Antalya Tailor</Link>
           {' › '}

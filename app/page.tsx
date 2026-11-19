@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Terzi Can Antalya — Tadilat, Özel Dikim ve Dünyaya Kargo",
     description: "Konyaaltı Antalya'da terzi, tadilat ve özel dikim. Eve ve otele alım-teslim; siparişe özel dikim Antalya içine ve yurt dışına kargo.",
     url: BASE,
-    siteName: "SwapHubs",
+    siteName: "Terzi Can",
     locale: "tr_TR",
     type: "website",
   },

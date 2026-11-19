@@ -282,9 +282,9 @@ export default function OnlineTerziClient() {
         transition: 'box-shadow 0.3s',
       }}>
         <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 68 }}>
-          <a href="https://swaphubs.com/online-terzi-hizmeti" aria-label="SwapHubs Terzi Ana Sayfa"
+          <a href="https://swaphubs.com/online-terzi-hizmeti" aria-label="Terzi Can Ana Sayfa"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 24, fontWeight: 700, color: C.charcoal, textDecoration: 'none' }}>
-            SwapHubs <span style={{ fontWeight: 300, color: C.gold, fontStyle: 'italic' }}>Terzi</span>
+            Terzi Can <span style={{ fontWeight: 300, color: C.gold, fontStyle: 'italic' }}>Terzi</span>
           </a>
 
           <div style={{ display: 'flex', gap: 4, alignItems: 'center' }} role="navigation" aria-label="Dil seçimi">
@@ -533,7 +533,7 @@ export default function OnlineTerziClient() {
         <div style={{ maxWidth: 1300, margin: '0 auto' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 60, alignItems: 'center' }}>
             <div style={{ flex: '1 1 300px' }}>
-              <span style={{ color: C.gold, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: 11, display: 'block', marginBottom: 12, fontFamily: 'system-ui, sans-serif' }}>Neden SwapHubs?</span>
+              <span style={{ color: C.gold, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: 11, display: 'block', marginBottom: 12, fontFamily: 'system-ui, sans-serif' }}>Neden Terzi Can?</span>
               <h2 id="neden-heading" style={{ fontSize: 'clamp(26px, 3.5vw, 42px)', fontWeight: 700, color: C.charcoal, margin: '0 0 20px', lineHeight: 1.2 }}>
                 Türkiye'nin En Yenilikçi <span style={{ color: C.gold, fontStyle: 'italic' }}>Online Terzi Platformu</span>
               </h2>
@@ -630,7 +630,7 @@ export default function OnlineTerziClient() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 40, marginBottom: 48 }}>
             <div>
               <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 26, color: C.white, fontWeight: 700, marginBottom: 16 }}>
-                SwapHubs <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
+                Terzi Can <span style={{ color: C.gold, fontStyle: 'italic', fontWeight: 300 }}>Terzi</span>
               </div>
               <p style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.7, fontFamily: 'system-ui, sans-serif' }}>
                 Türkiye'nin yeni nesil dijital özel terzi ve tekstil platformu. Antalya'da adrese teslim, yurt dışına kargoyla gönderim. WhatsApp üzerinden ölçülerinizi gönderin, istediğiniz kıyafeti dikelim, adresinize gönderelim.
@@ -675,7 +675,7 @@ export default function OnlineTerziClient() {
             </div>
           </div>
           <div style={{ borderTop: '1px solid #1F1F1F', paddingTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, fontSize: 11, color: '#4B5563', fontFamily: 'system-ui, sans-serif' }}>
-            <span>© {new Date().getFullYear()} SwapHubs Online Terzi Platformu. Tüm Hakları Saklıdır.</span>
+            <span>© {new Date().getFullYear()} Terzi Can Online Terzi Platformu. Tüm Hakları Saklıdır.</span>
             <span>Antalya'dan 🇹🇷 Dünyaya</span>
           </div>
         </div>
