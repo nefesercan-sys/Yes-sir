@@ -1,4 +1,5 @@
 // swaphubs.com — Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-svc.ts. Sunucu bileşeni, stil inline.
+import QuickActionBanner from '@/components/QuickActionBanner';
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import { KARGO_KISA_HZ, type KargoKisaHz } from '@/lib/kargo-kisa';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
@@ -90,6 +91,7 @@ export default function KonuGuideLanding({ lang, topic, hz }: { lang: ILang; top
           </p>
         </section>
       </article>
+      <QuickActionBanner lang={lang} />
     </main>
   );
 }
