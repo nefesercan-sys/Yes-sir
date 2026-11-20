@@ -1,5 +1,6 @@
 // swaphubs.com — Ek turist dilleri için rehber sayfası (veri: lib/intl.ts). Sunucu bileşeni, stil inline.
 // terzihizmeti.com.tr'deki tanıtım sayfalarından farklı: bilgi niyetli rehber (sorunlar, hazırlık listesi, adımlar, SSS).
+import ReviewsBlock from '@/components/ReviewsBlock';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
@@ -126,6 +127,7 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
           </p>
         </section>
       </article>
+      <ReviewsBlock lang={lang} schema />
       <QuickActionBanner lang={lang} />
     </main>
   );
