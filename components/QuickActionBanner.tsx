@@ -3,6 +3,7 @@ import {
   VALUE_PROPS, STEPS, HOURS_LINE, CALL_LABEL, SERVICE_WA_TR,
   PHONE_TEL, waUrl, type Lang, type ServiceKey,
 } from '@/lib/value-props';
+import OtelServisSatiri from '@/components/OtelServisSatiri';
 
 interface Props {
   lang?: Lang;
@@ -40,6 +41,7 @@ export default function QuickActionBanner({ lang = 'tr', service = 'genel', vari
             {primary.slogan}
           </h2>
           <p style={{ margin: '4px 0 0', fontSize: 13, opacity: .95 }}>{HOURS_LINE[lang]}</p>
+          {variant !== 'hotel-service' && <OtelServisSatiri lang={lang} color="#fff" />}
           <ol style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '8px 0 0', fontSize: 12 }}>
             {steps.map((s, i) => (
               <li key={s} style={{ background: 'rgba(255,255,255,.18)', borderRadius: 999, padding: '3px 10px' }}>
