@@ -1,5 +1,6 @@
 // swaphubs.com — "Online terzi hizmeti" sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-online.ts. Sunucu bileşeni.
 // Yapay zeka/sesli arama için: kısa cevap + telefon (düz metin) + tel: + önceden doldurulmuş wa.me, sayfanın üstünde ve altında.
+import ReviewsBlock from '@/components/ReviewsBlock';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -107,6 +108,7 @@ export default function OnlineGuideLanding({ lang }: { lang: ILang }) {
           </p>
         </section>
       </article>
+      <ReviewsBlock lang={lang} schema />
       <QuickActionBanner lang={lang} />
     </main>
   );

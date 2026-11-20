@@ -1,4 +1,5 @@
 // swaphubs.com — Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-svc.ts. Sunucu bileşeni, stil inline.
+import ReviewsBlock from '@/components/ReviewsBlock';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
@@ -85,6 +86,7 @@ export default function SvcGuideLanding({ lang }: { lang: ILang }) {
           </p>
         </section>
       </article>
+      <ReviewsBlock lang={lang} schema />
       <QuickActionBanner lang={lang} />
     </main>
   );

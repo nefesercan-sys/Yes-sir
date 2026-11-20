@@ -1,5 +1,6 @@
 // swaphubs.com — "Siparişe özel dikim, dünyaya kargo" sayfası (10 dil). Veri: lib/ozel-dikim.ts. Sunucu bileşeni; talep formu istemci bileşenidir.
 // Yapay zeka/sesli arama için: kısa cevap + telefon (düz metin) + tel: + önceden doldurulmuş wa.me.
+import ReviewsBlock from '@/components/ReviewsBlock';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -129,6 +130,7 @@ export default function OzelDikimLanding({ lang }: { lang: OzelLang }) {
           </p>
         </section>
       </article>
+      <ReviewsBlock lang={lang} schema />
       <QuickActionBanner lang={lang} />
     </main>
   );
