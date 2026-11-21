@@ -6,6 +6,7 @@
 // ============================================================
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
+import { HOTEL_H1, TOURIST_LEAD, districtLead } from '@/lib/turist-acisi';
 import { districtAngle, serviceAngle, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
 import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolge-hizmet-matrisi-i18n';
@@ -777,7 +778,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
         <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${!isFreeService(d.slug) ? SVC_FAR[lang] : SVC_NEAR[lang]} · ${u.hours}`} h1={h1}
-          desc={directAnswer(lang, d.slug, d.name[lang], d.loc[lang], d.kind === 'resort')} waMsg={waMsg} />
+          desc={`${districtLead(lang, d.loc[lang])} ${directAnswer(lang, d.slug, d.name[lang], d.loc[lang], d.kind === 'resort')}`} waMsg={waMsg} />
         <section className="sl-sec" style={{ paddingBottom: 0 }}>
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
             <p style={{ fontSize: '.95rem', lineHeight: 1.8, color: 'rgba(255,255,255,.8)', margin: 0 }}>{districtAbout(lang, d)}</p>
@@ -953,14 +954,16 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
-        <Hero lang={lang} tag={`${s.icon} ${u.free} · ${u.hours}`} h1={<>{s.name[lang]}<br /><span className="sl-accent">Antalya</span></>}
-          desc={`${s.intro[lang]} ${timeOf(lang, s)}.`} waMsg={waMsg} />
+        {/* swaphubs: turist/otel açısı (lib/turist-acisi.ts); terzihizmeti aynı hizmeti fiyat/hizmet açısıyla anlatır */}
+        <Hero lang={lang} tag={`${s.icon} ${u.free} · ${u.hours}`} h1={<>{s.name[lang]}<br /><span className="sl-accent">{HOTEL_H1[lang]}</span></>}
+          desc={`${TOURIST_LEAD[s.id]?.[lang] ?? s.intro[lang]} ${timeOf(lang, s)}.`} waMsg={waMsg} />
 
         <AngleBlock a={serviceAngle(lang, s.name[lang])} id="angle-h" />
 
         <section className="sl-sec" aria-labelledby="det-h">
           <div className="sl-ctr" style={{ maxWidth: 720 }}>
             <div className="sl-sec-head"><span className="sl-eyebrow">{u.since}</span><h2 className="sl-sec-h sl-ff" id="det-h">{s.name[lang]}</h2></div>
+            {TOURIST_LEAD[s.id] && <p style={{ fontSize: '.92rem', lineHeight: 1.75, color: 'rgba(255,255,255,.82)', margin: '0 0 1rem' }}>{s.intro[lang]}</p>}
             <div className="sl-howto-list">
               <div className="sl-howto-item"><div className="sl-howto-t">{u.time}</div><div className="sl-howto-d">{timeOf(lang, s)}</div></div>
               {price && (<div className="sl-howto-item"><div className="sl-howto-t">{u.price}</div><div className="sl-howto-d">{price}</div></div>)}
