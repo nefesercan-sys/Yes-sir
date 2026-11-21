@@ -45,7 +45,7 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Tamir Tadilat Terzi Antalya · Paça ₺200, Fermuar ₺300";
+const PAGE_TITLE = "Antalya Terzi · Elbise Dikimi, Tamir, Tadilat | Terzi Can";
 const PAGE_DESC  =
   "Terziye sor: +90 531 898 64 18 · Bay bayan tamir, tadilat, fermuar değişimi ve dikim: paça 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.";
 
