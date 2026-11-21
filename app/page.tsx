@@ -5,11 +5,11 @@ import type { Metadata } from "next";
 const BASE = "https://swaphubs.com";
 
 export const metadata: Metadata = {
-  title: "Terzi Can Antalya — Tadilat, Özel Dikim, Dünyaya Kargo",
+  title: "Terzi Can Antalya · Terzi Dikim, Tamir, Tadilat Hizmeti",
   description: "Konyaaltı Antalya'da Terzi Can: paça, fermuar, tadilat, özel dikim. Eve ve otele alım-teslim; özel dikim dünyaya kargo. Her gün 08:00–23:00.",
   keywords: "Antalya terzi, Konyaaltı terzi, terzi tadilat, özel dikim, otele gelen terzi, tekstil, fason üretim",
   openGraph: {
-    title: "Terzi Can Antalya — Tadilat, Özel Dikim ve Dünyaya Kargo",
+    title: "Terzi Can Antalya · Terzi Dikim, Tamir, Tadilat Hizmeti",
     description: "Konyaaltı Antalya'da terzi, tadilat ve özel dikim. Eve ve otele alım-teslim; siparişe özel dikim Antalya içine ve yurt dışına kargo.",
     url: BASE,
     siteName: "Terzi Can",
