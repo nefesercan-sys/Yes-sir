@@ -31,6 +31,13 @@ export function intlJsonLd(lang: ILang) {
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
       },
       {
+        '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: `${SITE}/terzi` },
+          { '@type': 'ListItem', position: 2, name: ONL[lang].crumb, item: url },
+        ],
+      },
+      {
         '@type': 'FAQPage', '@id': `${url}#faq`,
         mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
       },

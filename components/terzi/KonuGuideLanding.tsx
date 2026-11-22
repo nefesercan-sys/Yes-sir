@@ -13,6 +13,7 @@ import { KONU, KONU_IDS, KONU_UI, konuUrl, type KonuId } from '@/lib/intl-konu';
 import { HZ, HZ_IDS, HZ_UI, hzUrl, type HzId } from '@/lib/intl-hz';
 import { OG_DEFAULT, UPDATED } from '@/components/terzi/IntlLanding';
 import { jsonLdString } from '@/lib/json-ld';
+import { ONL } from '@/lib/intl-online';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -29,6 +30,14 @@ export function konuJsonLd(lang: ILang, t: KonuId | HzId, isHz = false) {
         dateModified: UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
         isPartOf: { '@id': `${SITE}${iUrl(lang)}#article` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
+      },
+      {
+        '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Terzi Can', item: `${SITE}/terzi` },
+          { '@type': 'ListItem', position: 2, name: ONL[lang].crumb, item: `${SITE}${iUrl(lang)}` },
+          { '@type': 'ListItem', position: 3, name: c.h1, item: url },
+        ],
       },
       {
         '@type': 'FAQPage', '@id': `${url}#faq`,
