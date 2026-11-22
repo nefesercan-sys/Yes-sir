@@ -46,7 +46,7 @@ const abs = (p: string) => `${SITE}${p}`;
 // ── Metinler ────────────────────────────────────────────────
 const T = {
   tr: {
-    title: `Terzi Can Konyaaltı Telefon ve WhatsApp | ${PHONE_LOCAL}`,
+    title: `Terzi Can Konyaaltı Telefon ve WhatsApp | Antalya`,
     desc: `Antalya Konyaaltı terzi telefonu ${PHONE}. Kıyafetin fotoğrafını WhatsApp'tan atın, fiyatı ve teslim gününü hemen öğrenin. Her gün 08:00–23:00.`,
     tag: 'Konyaaltı, Antalya · Haftanın 7 günü açık',
     h1: 'Terzi Çağırın ya da Fotoğraf Atın',
@@ -90,7 +90,7 @@ const T = {
     },
   },
   en: {
-    title: `Terzi Can Antalya Phone & WhatsApp | ${PHONE}`,
+    title: `Terzi Can Antalya Phone & WhatsApp`,
     desc: `Tailor in Konyaaltı, Antalya: call ${PHONE} or send a garment photo on WhatsApp and get price and ready date fast. Open daily 08:00–23:00.`,
     tag: 'Konyaaltı, Antalya · Open 7 days a week',
     h1: 'Call a Tailor or Send a Photo',
@@ -134,7 +134,7 @@ const T = {
     },
   },
   ru: {
-    title: `Terzi Can Анталья: телефон и WhatsApp | ${PHONE}`,
+    title: `Terzi Can Анталья: телефон и WhatsApp`,
     desc: `Портной в Коньяалты, Анталья: звоните ${PHONE} или пришлите фото вещи в WhatsApp — сразу назовём цену и срок. Ежедневно 08:00–23:00.`,
     tag: 'Коньяалты, Анталья · Работаем 7 дней в неделю',
     h1: 'Позвоните портному или пришлите фото',
@@ -178,7 +178,7 @@ const T = {
     },
   },
   de: {
-    title: `Terzi Can Antalya Telefon & WhatsApp | ${PHONE}`,
+    title: `Terzi Can Antalya Telefon & WhatsApp`,
     desc: `Schneider in Konyaaltı, Antalya: Anruf ${PHONE} oder Foto per WhatsApp senden – Preis und Fertigstellung nennen wir sofort. Täglich 08:00–23:00.`,
     tag: 'Konyaaltı, Antalya · 7 Tage die Woche geöffnet',
     h1: 'Schneider anrufen oder Foto schicken',
