@@ -96,7 +96,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { absolute: "Terzi Çağır Antalya · Kapınıza Gelir | Terzi Can" },
   description:
-    'Terziye sor: +90 531 898 64 18 · Antalya Konyaaltı terzi çağır: paça kısaltma ₺200, bel ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, teslim eder.',
+    'Antalya Konyaaltı terzi çağır: paça kısaltma ₺200, bel ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, teslim eder.',
   keywords: [
     'terzi çağır Antalya', 'Antalya terzi', 'Konyaaltı terzi',
     'eve gelen terzi Antalya', 'kapıya gelen terzi',
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can',
-    description: 'Paça kısaltma ₺200. Terzimiz kapınıza gelir. Hemen ara: +90 531 898 64 18',
+    description: 'Paça kısaltma ₺200. Terzimiz kapınıza gelir. WhatsApp’tan yazın.',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website',
     images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Terzi Can Antalya' }],
   },

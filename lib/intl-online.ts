@@ -47,7 +47,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   es: {
     slug: 'servicio-de-sastreria-online-antalya',
     title: 'Sastre online en Antalya: arreglos y ropa a medida',
-    desc: 'Sastre online en Antalya: envíe una foto por WhatsApp y reciba el precio. Recogida en su hotel o casa. Arreglos, ropa a medida y envío. +90 531 898 64 18',
+    desc: 'Sastre online en Antalya: envíe una foto por WhatsApp y reciba el precio. Recogida en su hotel o casa. Arreglos, ropa a medida y envío.',
     h1: 'Sastre online en Antalya: foto por WhatsApp, precio y recogida en su hotel',
     lead: 'Terzi Can (Konyaaltı, desde 2006) trabaja así: usted manda una foto de la prenda por WhatsApp, le decimos el precio y, si lo acepta, pasamos a recogerla a su hotel o a su casa en cualquier distrito de Antalya. Si está en otro país, también se puede hacer con envío.',
     crumb: 'Sastrería en Antalya',
@@ -81,7 +81,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   fr: {
     slug: 'service-de-couture-en-ligne-antalya',
     title: 'Service de couture en ligne à Antalya : retouches',
-    desc: 'Couturier en ligne à Antalya : envoyez une photo sur WhatsApp, recevez le prix. Ramassage à l’hôtel ou à domicile. Retouches, sur mesure, envoi. +90 531 898 64 18',
+    desc: 'Couturier en ligne à Antalya : envoyez une photo sur WhatsApp, recevez le prix. Ramassage à l’hôtel ou à domicile. Retouches, sur mesure, envoi.',
     h1: 'Service de couture en ligne à Antalya : photo sur WhatsApp, prix et ramassage à l’hôtel',
     lead: 'Terzi Can (Konyaaltı, depuis 2006) fonctionne simplement : vous envoyez une photo du vêtement sur WhatsApp, nous donnons le prix et, si vous acceptez, nous venons le chercher à votre hôtel ou à votre domicile, dans tous les quartiers d’Antalya. Depuis l’étranger, c’est possible par colis.',
     crumb: 'Couturier à Antalya',
@@ -115,7 +115,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   pl: {
     slug: 'internetowy-serwis-krawiecki-antalya',
     title: 'Internetowy serwis krawiecki Antalya: poprawki',
-    desc: 'Krawiec online w Antalyi: zdjęcie na WhatsApp, wycena, odbiór z hotelu lub domu. Poprawki, szycie na miarę, wysyłka. +90 531 898 64 18',
+    desc: 'Krawiec online w Antalyi: zdjęcie na WhatsApp, wycena, odbiór z hotelu lub domu. Poprawki, szycie na miarę, wysyłka.',
     h1: 'Internetowy serwis krawiecki w Antalyi: zdjęcie na WhatsApp, cena i odbiór z hotelu',
     lead: 'Terzi Can (Konyaaltı, od 2006 roku) działa prosto: wysyłasz zdjęcie ubrania na WhatsApp, podajemy cenę, a po akceptacji odbieramy rzecz z hotelu lub domu w każdej dzielnicy Antalyi. Z zagranicy można skorzystać z wysyłki.',
     crumb: 'Krawiec w Antalyi',
@@ -149,7 +149,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   uk: {
     slug: 'onlayn-servis-kravtsya-antaliya',
     title: 'Онлайн-сервіс кравця в Анталії: ремонт і пошив',
-    desc: 'Онлайн-кравець в Анталії: фото у WhatsApp, ціна, забір з готелю чи дому. Ремонт, підгонка, пошив, пересилання. +90 531 898 64 18',
+    desc: 'Онлайн-кравець в Анталії: фото у WhatsApp, ціна, забір з готелю чи дому. Ремонт, підгонка, пошив, пересилання.',
     h1: 'Онлайн-сервіс кравця в Анталії: фото у WhatsApp, ціна та забір з готелю',
     lead: 'Terzi Can (Коньяалти, з 2006 року) працює просто: ви надсилаєте у WhatsApp фото речі, ми називаємо ціну, а після вашої згоди забираємо її з готелю чи дому в будь-якому районі Анталії. З-за кордону можна скористатися пересиланням.',
     crumb: 'Кравець в Анталії',
@@ -183,7 +183,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   nl: {
     slug: 'online-kleermakersservice-antalya',
     title: 'Online kleermakersservice Antalya: vermaakwerk',
-    desc: 'Online kleermaker in Antalya: stuur een foto via WhatsApp en ontvang de prijs. Ophalen bij uw hotel of huis. Vermaakwerk, maatwerk, verzending. +90 531 898 64 18',
+    desc: 'Online kleermaker in Antalya: stuur een foto via WhatsApp en ontvang de prijs. Ophalen bij uw hotel of huis. Vermaakwerk, maatwerk, verzending.',
     h1: 'Online kleermakersservice in Antalya: foto via WhatsApp, prijs en ophalen bij uw hotel',
     lead: 'Terzi Can (Konyaaltı, sinds 2006) werkt eenvoudig: u stuurt een foto van het kledingstuk via WhatsApp, wij noemen de prijs en na uw akkoord halen we het op bij uw hotel of huis in elke wijk van Antalya. Vanuit het buitenland kan het per post.',
     crumb: 'Kleermaker in Antalya',
@@ -217,7 +217,7 @@ export const ONL: Record<ILang, OnlineGuide> = {
   ar: {
     slug: 'khidmat-khayyat-online-antalya',
     title: 'خدمة خياط أونلاين في أنطاليا: تعديل وتصليح',
-    desc: 'خياط أونلاين في أنطاليا: أرسل صورة عبر واتساب واعرف السعر. استلام وتسليم متاح من الفندق أو البيت. تعديل وتصليح وخياطة حسب الطلب وشحن. +90 531 898 64 18',
+    desc: 'خياط أونلاين في أنطاليا: أرسل صورة عبر واتساب واعرف السعر. استلام وتسليم متاح من الفندق أو البيت. تعديل وتصليح وخياطة حسب الطلب وشحن.',
     h1: 'خدمة خياط أونلاين في أنطاليا: صورة عبر واتساب، سعر، واستلام من فندقك',
     lead: 'ترزي جان (كونيالتي، منذ 2006) يعمل ببساطة: ترسل صورة القطعة عبر واتساب، فنحدد لك السعر، وإذا وافقت نستلمها من فندقك أو بيتك في أي منطقة من أنطاليا. ومن خارج تركيا يمكن الاستفادة من الخدمة بالشحن.',
     crumb: 'خياط في أنطاليا',

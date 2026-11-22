@@ -10,12 +10,12 @@ import { jsonLdString } from '@/lib/json-ld';
 // ── SEO METADATA (Google Arama Sonuçlarında Görünecek Kısım) ──
 export const metadata: Metadata = {
   title: { absolute: "Konyaaltı Terzi Fiyatı · Tamir, Tadilat | Terzi Can" },
-  description: 'Antalya Konyaaltı profesyonel terzi servisi. Özel elbise dikimi, tamir ve tadilat hizmeti. Hızlı servis için hemen arayın: +90 531 898 64 18',
+  description: 'Antalya Konyaaltı profesyonel terzi servisi. Özel elbise dikimi, tamir ve tadilat hizmeti. Hızlı servis için WhatsApp’tan yazın.',
   alternates: { canonical: 'https://swaphubs.com/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti' },
   keywords: 'antalya konyaaltı terzi, elbise dikim antalya, terzi tamir tadilat, liman mahallesi terzi, hurma terzi, Konyaaltında terzi, fermuar tamiri, paca kisaltma terzi, bel daraltma, uncalı terzi, terzi fiyatlari',
   openGraph: {
     title: 'Konyaaltı Terzi, Elbise Dikim ve Tadilat Servisi - Antalya',
-    description: 'Kapınıza teslim veya atölyemizde profesyonel terzi, özel dikim ve tadilat hizmetleri. İletişim: +90 531 898 64 18',
+    description: 'Kapınıza teslim veya atölyemizde profesyonel terzi, özel dikim ve tadilat hizmetleri.',
     url: 'https://swaphubs.com/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat',
     locale: 'tr_TR',
     type: 'website',
