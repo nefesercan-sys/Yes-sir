@@ -273,7 +273,6 @@ export default function OnlineSchneiderClient({
       `}</style>
 
       <a href="#main" className="skip">Zum Inhalt springen</a>
-      <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="owa-float" aria-label="WhatsApp">💬</a>
 
       {/* ANNOUNCE */}
       <div className="oannounce" role="banner">

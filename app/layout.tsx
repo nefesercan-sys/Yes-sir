@@ -10,6 +10,7 @@ import IcerikHaritasi from "@/components/IcerikHaritasi";
 import GlobalSchema from "@/components/GlobalSchema";
 import RuTelegramButton from "@/components/RuTelegramButton";
 import GoogleYorumSeridi from "@/components/GoogleYorumSeridi";
+import SabitIletisim from "@/components/SabitIletisim";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -136,6 +137,7 @@ export default function RootLayout({ children }: Props) {
             <div id="icerik">{children}</div>
             <GoogleYorumSeridi lang={lang} />
             <RuTelegramButton />
+            <SabitIletisim homeBar />
             <IcerikHaritasi />
             <Analytics />
             <ContactTracker />

@@ -358,7 +358,6 @@ export default function TerziClient({ gbp1 }: Props) {
       `}</style>
 
       {/* WhatsApp float */}
-      <a href={WA(L.waMsg)} target="_blank" rel="noopener noreferrer" className="twafloat" aria-label="WhatsApp İletişim Hattı">💬</a>
 
       {/* NAV */}
       <nav className={`tnav${scrolled ? ' up' : ''}`} aria-label="Ana Menü">

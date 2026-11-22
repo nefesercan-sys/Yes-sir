@@ -390,7 +390,6 @@ export default function TerziCagirPage() {
         `}</style>
 
         {/* WhatsApp float */}
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="wa-float" aria-label="WhatsApp">💬</a>
 
         {/* Sticky nav */}
         <div className="sticky-bar">

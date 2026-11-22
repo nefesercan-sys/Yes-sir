@@ -180,17 +180,6 @@ export default function KonyaaltiTerziPage() {
 
       <div style={{ minHeight: '100vh', background: D.bg, color: D.ink, fontFamily: 'var(--font-jakarta,system-ui,sans-serif)', overflowX: 'hidden' }} className="pb-24">
 
-        {/* Floating buttons */}
-        <div style={{ position: 'fixed', bottom: 80, right: 16, zIndex: 100, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <a href={`tel:${PHONE_TEL}`}
-            style={{ width: 52, height: 52, borderRadius: '50%', background: D.ink, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,0,0,.35)' }}>
-            <span className="ico-tel" aria-hidden="true" />
-          </a>
-          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer"
-            style={{ width: 52, height: 52, borderRadius: '50%', background: '#15803d', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, textDecoration: 'none', boxShadow: '0 4px 20px rgba(37,211,102,.45)' }}>
-            💬
-          </a>
-        </div>
 
         {/* ─── HERO ─────────────────────────────────────────────────────────── */}
         <header style={{ background: D.grad, color: '#fff', padding: '4.5rem 1.25rem 3.5rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>

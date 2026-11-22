@@ -681,14 +681,6 @@ export default function OnlineTerziClient() {
         </div>
       </footer>
 
-      {/* ── YÜZEN WA BUTONU ──────────────────────────────────────── */}
-      <a href={waLink("Merhaba, e-terzi hizmeti hakkında bilgi almak istiyorum.")} target="_blank" rel="noopener noreferrer"
-        aria-label="WhatsApp ile bize ulaşın"
-        style={{ position: 'fixed', bottom: 24, right: 24, backgroundColor: C.waBtn, color: C.white, width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37,211,102,0.55)', zIndex: 999, textDecoration: 'none', transition: 'transform 0.2s, box-shadow 0.2s' }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}>
-        <WaIcon size={30} />
-      </a>
 
     </div>
   );
