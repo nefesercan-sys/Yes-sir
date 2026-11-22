@@ -275,7 +275,6 @@ export default function OnlineTailorClient({
       `}</style>
 
       <a href="#main" className="skip">Skip to content</a>
-      <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="owa-float" aria-label="WhatsApp">💬</a>
 
       {/* ANNOUNCE */}
       <div className="oannounce" role="banner">

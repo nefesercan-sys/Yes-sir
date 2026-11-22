@@ -336,11 +336,6 @@ export default function RuAtelieAntalyaPage() {
           </div>
         </footer>
 
-        {/* Floating buttons */}
-        <div style={{ position:'fixed',bottom:20,right:16,zIndex:100,display:'flex',flexDirection:'column',gap:10 }}>
-          <a href={`tel:${PHONE_TEL}`} className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#1C1C1E',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(0,0,0,.3)' }}><span className="ico-tel" aria-hidden="true" /></a>
-          <a href={WA_DEFAULT} target="_blank" rel="noopener noreferrer" className="btn" style={{ width:52,height:52,borderRadius:'50%',background:'#15803d',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,boxShadow:'0 4px 16px rgba(37,211,102,.45)' }}>💬</a>
-        </div>
       </main>
       <KargoSection lang="ru" />
       <ReviewsBlock lang="ru" />
