@@ -1,26 +1,20 @@
-// swaphubs.com — kargoyla abiye/mont fermuarı değişimi kutusu. Fiyat içermez; WhatsApp'a yönlendirir. Kendi renkleriyle çalışır (açık/koyu sayfalarda okunur).
+// swaphubs.com — kargoyla abiye/mont fermuarı değişimi: yerel hizmet sayfalarında tek satırlık not (sayfanın konusu Antalya'da kalsın).
+// Ayrıntılar online terzi sayfasının #kargo bölümünde. Fiyat yok.
 import { KARGO_FERMUAR } from '@/lib/kargo-fermuar';
+import { KARGO_KISA } from '@/lib/kargo-kisa';
 import type { KargoLang } from '@/lib/kargo-terzi';
-import { waUrl } from '@/lib/business';
+import { ONLINE_PATH } from '@/lib/intl-online';
 
 export default function KargoFermuarKutusu({ lang }: { lang: KargoLang }) {
   const c = KARGO_FERMUAR[lang];
   return (
-    <section
-      id="kargo-fermuar"
+    <p
       lang={lang}
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
-      aria-label={c.h}
-      style={{ background: '#f4faf7', color: '#3b4a42', border: '1px solid #e3ece7', borderRadius: 12, padding: '1.2rem 1.25rem', margin: '2rem auto', maxWidth: 820, lineHeight: 1.7 }}
+      style={{ maxWidth: 820, margin: '1.5rem auto', padding: '.9rem 1.1rem', background: '#f4faf7', color: '#3b4a42', border: '1px solid #e3ece7', borderRadius: 10, lineHeight: 1.7, fontSize: '.95rem' }}
     >
-      <h2 style={{ color: '#1f2a24', fontSize: '1.2rem', margin: '0 0 .6rem', lineHeight: 1.3 }}>{c.h}</h2>
-      <p style={{ margin: '0 0 1rem' }}>{c.p}</p>
-      <p style={{ margin: 0 }}>
-        <a href={waUrl(c.waMsg)} target="_blank" rel="noopener noreferrer"
-          style={{ background: '#15803d', color: '#fff', padding: '.7rem 1.3rem', fontWeight: 700, textDecoration: 'none', borderRadius: 6, display: 'inline-block' }}>
-          💬 {c.wa}
-        </a>
-      </p>
-    </section>
+      📦 {c.h}.{' '}
+      <a href={`${ONLINE_PATH[lang]}#kargo`} style={{ color: '#15803d', fontWeight: 600 }}>{KARGO_KISA[lang].link} →</a>
+    </p>
   );
 }
