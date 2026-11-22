@@ -6,17 +6,17 @@ export const ASK: Record<string, string> = {
   fr: 'Demandez au tailleur', pl: 'Zapytaj krawca', uk: 'Запитайте кравця', nl: 'Vraag de kleermaker', ar: 'اسأل الخياط',
 };
 const ASK_ALT = Object.values(ASK).join('|');
-const PHONE_RE = new RegExp(`(?:(?:${ASK_ALT})\\s*:\\s*)?(?:☎\\s*)?(?:\\+90|0)\\s?531\\s?898\\s?64\\s?18`, 'gu');
+const PHONE_RE = new RegExp(`(?:(?:${ASK_ALT})\\s*:\\s*)?(?:☎\\s*)?(?:\\+90|0)\\s?531\\s?898\\s?64\\s?18`, 'g');
 /** Açıklamadan telefon numarasını ve "Terziye sor:" çağrısını çıkarır (numara sayfada ve işletme şemasında var). */
 export function stripPhone(s: string): string {
   return s
     .replace(PHONE_RE, ' ')
-    .replace(/☎/gu, ' ')
-    .replace(/(?:\s*·\s*){2,}/gu, ' · ')
-    .replace(/^\s*[·:,–-]\s*/u, '')
-    .replace(/\s*[·:,–-]\s*$/u, '')
-    .replace(/\s{2,}/gu, ' ')
-    .replace(/ ([,.;])/gu, '$1')
+    .replace(/☎/g, ' ')
+    .replace(/(?:\s*·\s*){2,}/g, ' · ')
+    .replace(/^\s*[·:,–-]\s*/, '')
+    .replace(/\s*[·:,–-]\s*$/, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/ ([,.;])/g, '$1')
     .trim();
 }
 
