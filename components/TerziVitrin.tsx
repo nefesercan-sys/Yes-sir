@@ -244,7 +244,7 @@ export default function TerziVitrin() {
               ))}
             </ul>
           </nav>
-          <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: tadilat, özel dikim ve dünyaya kargo</h1>
+          <h1 id="terzi-vitrin-baslik">Antalya&apos;da Terzi Can: terzi dikim, tamir ve tadilat</h1>
           <p className="tv-lead">
             Terzi Can, Konyaaltı Hurma&apos;daki atölyesinde 2006&apos;dan beri Antalya&apos;da tadilat ve dikim işleri yapar.
             Kıyafetin fotoğrafını WhatsApp&apos;tan gönderin; iş netleşince fiyatı ve teslim zamanını söyleriz.
