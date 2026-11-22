@@ -281,7 +281,10 @@ export default function TerziPage() {
         dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SpeakableSchema path="/terzi" />
-      <QuickActionBanner lang="tr" />
+      {/* Sabit üst menü (TerziClient .tnav) bandın üstüne binmesin */}
+      <div style={{ paddingTop: 76 }}>
+        <QuickActionBanner lang="tr" />
+      </div>
       <TerziClient gbp1={GBP_1} />
       <ReviewsBlock lang="tr" />
       <p style={{ maxWidth: 1000, margin: '0 auto 32px', padding: '0 16px', fontSize: 14, textAlign: 'center' }}>
