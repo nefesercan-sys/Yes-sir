@@ -64,7 +64,7 @@ export type OzelCopy = {
 export const OZEL: Record<OzelLang, OzelCopy> = {
   tr: {
     title: 'Siparişe Özel Dikim, Yurt Dışına Kargo | Terzi Can',
-    desc: 'Modelinize ve ölçünüze göre keten, pamuk ve diğer kumaşlardan özel dikim: takım, pantolon, gömlek, etek, şort, abiye, takım elbise. Antalya içi ve yurt dışına kargo. WhatsApp +90 531 898 64 18',
+    desc: 'Modelinize ve ölçünüze göre keten, pamuk ve diğer kumaşlardan özel dikim: takım, pantolon, gömlek, etek, şort, abiye, takım elbise. Antalya içi ve yurt dışına kargo.',
     h1: 'Siparişe özel dikim: istediğiniz modeli diktirin, Antalya\'dan kapınıza gönderelim',
     lead: 'Mağazada bulamadığınız kesimi, kumaşı ya da ölçüyü bize anlatın; Terzi Can (Konyaaltı, 2006\'dan beri) atölyesinde sizin için diker ve kargoyla gönderir. Ölçü ve model bilgisi WhatsApp\'tan gelir, ürün Antalya\'daki atölyede hazırlanır. Antalya içine ve yurt dışına gönderim yapılır.',
     crumb: 'Siparişe özel dikim',
@@ -103,7 +103,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   en: {
     title: 'Made-to-Order Clothing, Shipped Worldwide | Terzi Can',
-    desc: 'Clothing sewn to your design and measurements in linen, cotton and other fabrics: sets, trousers, shirts, skirts, shorts, evening wear, suits. Shipped within Antalya and abroad. WhatsApp +90 531 898 64 18',
+    desc: 'Clothing sewn to your design and measurements in linen, cotton and other fabrics: sets, trousers, shirts, skirts, shorts, evening wear, suits. Shipped within Antalya and abroad.',
     h1: 'Made-to-order clothing: tell us the design, we sew it in Antalya and ship it to you',
     lead: 'If you cannot find the cut, fabric or fit in the shops, describe it to us. Terzi Can (Konyaaltı, since 2006) sews it to order in the Antalya workshop and sends it by courier. Measurements and design details come through WhatsApp; delivery is within Antalya and to addresses abroad.',
     crumb: 'Made-to-order clothing',
@@ -142,7 +142,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   de: {
     title: 'Maßanfertigung nach Wunsch, Versand weltweit | Terzi Can',
-    desc: 'Kleidung nach Ihrem Modell und Ihren Maßen aus Leinen, Baumwolle und anderen Stoffen: Sets, Hosen, Hemden, Röcke, Shorts, Abendkleider, Anzüge. Versand in Antalya und ins Ausland. WhatsApp +90 531 898 64 18',
+    desc: 'Kleidung nach Ihrem Modell und Ihren Maßen aus Leinen, Baumwolle und anderen Stoffen: Sets, Hosen, Hemden, Röcke, Shorts, Abendkleider, Anzüge. Versand in Antalya und ins Ausland.',
     h1: 'Maßgeschneiderte Kleidung: Sie nennen das Modell, wir nähen es in Antalya und schicken es Ihnen',
     lead: 'Finden Sie den Schnitt, den Stoff oder die Passform im Laden nicht, beschreiben Sie ihn uns. Terzi Can (Konyaaltı, seit 2006) näht ihn auf Bestellung in der Werkstatt in Antalya und verschickt ihn per Paketdienst. Maße und Modellwünsche kommen per WhatsApp; geliefert wird innerhalb von Antalya und ins Ausland.',
     crumb: 'Maßgeschneiderte Kleidung',
@@ -181,7 +181,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   ru: {
     title: 'Пошив на заказ с доставкой по миру | Terzi Can',
-    desc: 'Одежда по вашей модели и меркам из льна, хлопка и других тканей: костюмы, брюки, рубашки, юбки, шорты, вечерние платья. Доставка по Анталье и за границу. WhatsApp +90 531 898 64 18',
+    desc: 'Одежда по вашей модели и меркам из льна, хлопка и других тканей: костюмы, брюки, рубашки, юбки, шорты, вечерние платья. Доставка по Анталье и за границу.',
     h1: 'Пошив на заказ: вы выбираете модель, мы шьём в Анталье и отправляем вам',
     lead: 'Если в магазинах нет нужного кроя, ткани или посадки, опишите это нам. Terzi Can (Коньяалты, с 2006 года) сошьёт вещь на заказ в мастерской в Анталье и отправит курьерской службой. Мерки и пожелания по модели приходят в WhatsApp; доставка возможна по Анталье и за границу.',
     crumb: 'Пошив на заказ',
@@ -220,7 +220,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   es: {
     title: 'Ropa a medida con envío internacional | Terzi Can',
-    desc: 'Ropa cosida según su modelo y medidas en lino, algodón y otras telas: conjuntos, pantalones, camisas, faldas, shorts, vestidos de fiesta, trajes. Envío en Antalya y al extranjero. WhatsApp +90 531 898 64 18',
+    desc: 'Ropa cosida según su modelo y medidas en lino, algodón y otras telas: conjuntos, pantalones, camisas, faldas, shorts, vestidos de fiesta, trajes. Envío en Antalya y al extranjero.',
     h1: 'Ropa a medida: usted elige el modelo, la cosemos en Antalya y se la enviamos',
     lead: 'Si no encuentra en las tiendas el corte, la tela o el ajuste que busca, descríbanoslo. Terzi Can (Konyaaltı, desde 2006) lo cose por encargo en su taller de Antalya y lo envía por mensajería. Las medidas y el modelo llegan por WhatsApp; el envío es dentro de Antalya y al extranjero.',
     crumb: 'Ropa a medida',
@@ -259,7 +259,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   fr: {
     title: 'Vêtements sur mesure, expédition dans le monde | Terzi Can',
-    desc: 'Vêtements cousus selon votre modèle et vos mesures en lin, coton et autres tissus : ensembles, pantalons, chemises, jupes, shorts, tenues de soirée, costumes. Envoi à Antalya et à l\'étranger. WhatsApp +90 531 898 64 18',
+    desc: 'Vêtements cousus selon votre modèle et vos mesures en lin, coton et autres tissus : ensembles, pantalons, chemises, jupes, shorts, tenues de soirée, costumes. Envoi à Antalya et à l\'étranger.',
     h1: 'Vêtements sur mesure : vous choisissez le modèle, nous le cousons à Antalya et vous l\'expédions',
     lead: 'Si vous ne trouvez pas en boutique la coupe, le tissu ou la taille voulus, décrivez-les-nous. Terzi Can (Konyaaltı, depuis 2006) le coud sur commande dans son atelier d\'Antalya et l\'envoie par transporteur. Mesures et modèle arrivent par WhatsApp ; l\'envoi se fait dans Antalya et à l\'étranger.',
     crumb: 'Vêtements sur mesure',
@@ -298,7 +298,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   pl: {
     title: 'Odzież szyta na miarę, wysyłka za granicę | Terzi Can',
-    desc: 'Odzież szyta według Twojego wzoru i miar z lnu, bawełny i innych tkanin: komplety, spodnie, koszule, spódnice, szorty, suknie wieczorowe, garnitury. Wysyłka w Antalyi i za granicę. WhatsApp +90 531 898 64 18',
+    desc: 'Odzież szyta według Twojego wzoru i miar z lnu, bawełny i innych tkanin: komplety, spodnie, koszule, spódnice, szorty, suknie wieczorowe, garnitury. Wysyłka w Antalyi i za granicę.',
     h1: 'Odzież szyta na miarę: Ty wybierasz fason, my szyjemy w Antalyi i wysyłamy do Ciebie',
     lead: 'Jeśli w sklepach nie ma kroju, tkaniny lub dopasowania, którego szukasz, opisz je nam. Terzi Can (Konyaaltı, od 2006 roku) uszyje to na zamówienie w pracowni w Antalyi i wyśle kurierem. Miary i opis fasonu przychodzą przez WhatsApp; wysyłka jest w obrębie Antalyi i za granicę.',
     crumb: 'Odzież szyta na miarę',
@@ -337,7 +337,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   uk: {
     title: 'Пошив на замовлення з доставкою за кордон | Terzi Can',
-    desc: 'Одяг за вашою моделлю та мірками з льону, бавовни й інших тканин: костюми, штани, сорочки, спідниці, шорти, вечірні сукні. Доставка по Анталії та за кордон. WhatsApp +90 531 898 64 18',
+    desc: 'Одяг за вашою моделлю та мірками з льону, бавовни й інших тканин: костюми, штани, сорочки, спідниці, шорти, вечірні сукні. Доставка по Анталії та за кордон.',
     h1: 'Пошив на замовлення: ви обираєте модель, ми шиємо в Анталії й надсилаємо вам',
     lead: 'Якщо в магазинах немає потрібного крою, тканини чи посадки, опишіть їх нам. Terzi Can (Коньяалти, з 2006 року) пошиє річ на замовлення в майстерні в Анталії та надішле кур\'єром. Мірки й побажання щодо моделі приходять у WhatsApp; доставка можлива по Анталії та за кордон.',
     crumb: 'Пошив на замовлення',
@@ -376,7 +376,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   nl: {
     title: 'Kleding op maat, wereldwijd verzonden | Terzi Can',
-    desc: 'Kleding genaaid naar uw model en maten in linnen, katoen en andere stoffen: setjes, broeken, overhemden, rokken, shorts, avondkleding, pakken. Verzending in Antalya en naar het buitenland. WhatsApp +90 531 898 64 18',
+    desc: 'Kleding genaaid naar uw model en maten in linnen, katoen en andere stoffen: setjes, broeken, overhemden, rokken, shorts, avondkleding, pakken. Verzending in Antalya en naar het buitenland.',
     h1: 'Kleding op maat: u kiest het model, wij naaien het in Antalya en sturen het naar u',
     lead: 'Vindt u de snit, de stof of de pasvorm niet in de winkel, beschrijf het ons dan. Terzi Can (Konyaaltı, sinds 2006) naait het op bestelling in het atelier in Antalya en verstuurt het met een koerier. Maten en modelwensen komen via WhatsApp; verzending kan binnen Antalya en naar het buitenland.',
     crumb: 'Kleding op maat',
@@ -415,7 +415,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
   },
   ar: {
     title: 'تفصيل ملابس حسب الطلب وشحن دولي | Terzi Can',
-    desc: 'ملابس تُخاط وفق نموذجك ومقاساتك من الكتان والقطن وأقمشة أخرى: أطقم وبناطيل وقمصان وتنانير وشورتات وفساتين سهرة وبدلات. شحن داخل أنطاليا وإلى الخارج. واتساب +90 531 898 64 18',
+    desc: 'ملابس تُخاط وفق نموذجك ومقاساتك من الكتان والقطن وأقمشة أخرى: أطقم وبناطيل وقمصان وتنانير وشورتات وفساتين سهرة وبدلات. شحن داخل أنطاليا وإلى الخارج.',
     h1: 'تفصيل ملابس حسب الطلب: اختر النموذج ونخيطه في أنطاليا ونرسله إليك',
     lead: 'إن لم تجد في المتاجر القَصّة أو القماش أو المقاس الذي تريده، صِفْه لنا. يخيطه Terzi Can (كونيالتي، منذ 2006) حسب الطلب في ورشته بأنطاليا ويرسله عبر شركة شحن. تصلنا المقاسات والنموذج عبر واتساب، ويكون الشحن داخل أنطاليا وإلى الخارج.',
     crumb: 'تفصيل حسب الطلب',

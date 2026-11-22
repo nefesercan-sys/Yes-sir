@@ -88,7 +88,7 @@ const jsonLd = {
       '@id': `${SITE_URL}#webpage`,
       url: SITE_URL,
       name: 'Konyaaltı Terzi · Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem Terzi Servisi · 2026',
-      description: "Konyaaltı terzi hizmetleri. Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri mahallelerine eve teslim terzi, paça kısaltma ve fermuar. ☎ " + PHONE,
+      description: "Konyaaltı terzi hizmetleri. Hurma, Liman, Uncalı, Sarısu, Çakırlar, Meltem, Göbi, Öğretmenevleri mahallelerine eve teslim terzi, paça kısaltma ve fermuar.",
       inLanguage: ['tr','en','ru'],
       dateModified: TODAY,
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
@@ -132,7 +132,7 @@ const FAQ: [string, string][] = [
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Adrese Gelen Terzi · Konyaaltı | Terzi Can' },
-  description: 'Terziye sor: ' + PHONE + ' · Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.',
+  description: 'Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.',
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
     'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Özel terzi',
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Konyaaltı Terzi · Adrese Gelen Terzi Servisi · Hurma, Liman, Uncalı, Gürsu, Sarısu, Çakırlar',
-    description: "Terziye sor: " + PHONE + " · Konyaaltı'nın tüm mahallelerine adrese gelen terzi hizmeti.",
+    description: "Konyaaltı'nın tüm mahallelerine adrese gelen terzi hizmeti.",
     url: SITE_URL,
     type: 'website',
     locale: 'tr_TR',

@@ -209,7 +209,6 @@ function _districtCopy(lang: Lang, d: District) {
   const n = d.name[lang];
   const loc = d.loc[lang];
   const kw = (lang === 'tr' ? [`${n} terzi`, `${n} terzi hizmeti`, ...d.alias.map((a) => `${a} terzi`)] : []);
-  const PH = `☎ ${PHONE}`;
   const titles = {
     tr: [`${n} Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`, `${n} Terzi: Fiyat Al, Aynı Gün Teslim | Terzi Can`, `${n} Terzi Hizmeti | Terzi Can`],
     en: [`Call a Tailor to ${n}, Antalya: Hemming, Zippers`, `Tailor ${n} Antalya: Get a Price on WhatsApp`, `Tailor in ${n}, Antalya`],
@@ -224,18 +223,18 @@ function _districtCopy(lang: Lang, d: District) {
   const svcRu = far ? SVC_FAR.ru : SVC_NEAR.ru;
   const svcDe = far ? SVC_FAR.de : SVC_NEAR.de;
   const descs = {
-    tr: [`${loc} terzi lazım mı? Kıyafetin fotoğrafını WhatsApp'tan at, fiyatı söyleyelim: paça ₺200'den, fermuar ₺300'den. ${svcTr}. ${PH}`,
-         `${loc} terzi: fotoğraf at, fiyatı ve teslim gününü öğren. Paça ₺200'den, fermuar ₺300'den. ${PH}`,
-         `${loc} terzi ${PH}: fotoğraf at, fiyat al.`],
-    en: [`Need a tailor ${loc}? Send a photo on WhatsApp and get the price. ${svcEn}. ${PH}`,
-         `Tailor ${loc}: send a photo, get price and ready date. Hemming and zippers. ${PH}`,
-         `Tailor ${loc} ${PH}: send a photo, get a price.`],
-    ru: [`Нужен портной ${loc}? Пришлите фото в WhatsApp — назовём цену: подшив, молния. ${svcRu}. ${PH}`,
-         `Портной ${loc}: фото в WhatsApp, цена и срок в ответ. Подшив, молния. ${PH}`,
-         `Портной ${loc} ${PH}: фото — и цена.`],
-    de: [`Schneider ${loc} gesucht? Foto per WhatsApp senden, Preis kommt zurück. ${svcDe}. ${PH}`,
-         `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen und Reißverschluss. ${PH}`,
-         `Schneider ${loc} ${PH}: Foto senden, Preis erhalten.`],
+    tr: [`${loc} terzi lazım mı? Kıyafetin fotoğrafını WhatsApp'tan at, fiyatı söyleyelim: paça ₺200'den, fermuar ₺300'den. ${svcTr}.`,
+         `${loc} terzi: fotoğraf at, fiyatı ve teslim gününü öğren. Paça ₺200'den, fermuar ₺300'den.`,
+         `${loc} terzi: fotoğraf at, fiyat al.`],
+    en: [`Need a tailor ${loc}? Send a photo on WhatsApp and get the price. ${svcEn}.`,
+         `Tailor ${loc}: send a photo, get price and ready date. Hemming and zippers.`,
+         `Tailor ${loc}: send a photo, get a price.`],
+    ru: [`Нужен портной ${loc}? Пришлите фото в WhatsApp — назовём цену: подшив, молния. ${svcRu}.`,
+         `Портной ${loc}: фото в WhatsApp, цена и срок в ответ. Подшив, молния.`,
+         `Портной ${loc}: фото — и цена.`],
+    de: [`Schneider ${loc} gesucht? Foto per WhatsApp senden, Preis kommt zurück. ${svcDe}.`,
+         `Schneider ${loc}: Foto senden, Preis und Termin erhalten. Kürzen und Reißverschluss.`,
+         `Schneider ${loc}: Foto senden, Preis erhalten.`],
   }[lang];
   const priT: string[] = lang === 'tr'
     ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı Terzi Çağır: Hurma, Uncalı, Gürsu | Terzi Can`, `Konyaaltı Terzi Çağır: Paça, Fermuar, Tadilat | Terzi Can`] : [`${n} Terzi Çağır: Fiyat Al, Paça ₺200 | Terzi Can`, `${n} Terzi Çağır | Terzi Can`]) : [])
@@ -245,11 +244,11 @@ function _districtCopy(lang: Lang, d: District) {
       de: [`Schneider ${n}: Preis per Foto, Hotelabholung | Terzi Can`, `Schneider ${n}, Antalya · Hotelabholung | Terzi Can`],
     } as Record<string, string[]>)[lang] : []);
   const priD: string[] = lang === 'tr'
-    ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı, Hurma, Liman, Uncalı, Gürsu'da terzi lazım mı? Fotoğrafı WhatsApp'tan at, fiyatı öğren: paça ₺200'den, fermuar ₺300'den. ${PH}`, `Konyaaltı terzi: Hurma, Liman, Uncalı, Gürsu. Fotoğraf at, fiyat al. Paça ₺200'den. ${PH}`] : [`${loc} terzi lazım mı? Fotoğraf at, ücreti öğren: paça ₺200'den, fermuar ₺300'den. ${svcTr}. ${PH}`, `${loc} terzi: fotoğraf at, ücreti öğren. Paça ₺200'den. ${PH}`]) : [])
+    ? (TR_PRI.includes(d.slug) ? (d.slug === 'konyaalti' ? [`Konyaaltı, Hurma, Liman, Uncalı, Gürsu'da terzi lazım mı? Fotoğrafı WhatsApp'tan at, fiyatı öğren: paça ₺200'den, fermuar ₺300'den.`, `Konyaaltı terzi: Hurma, Liman, Uncalı, Gürsu. Fotoğraf at, fiyat al. Paça ₺200'den.`] : [`${loc} terzi lazım mı? Fotoğraf at, ücreti öğren: paça ₺200'den, fermuar ₺300'den. ${svcTr}.`, `${loc} terzi: fotoğraf at, ücreti öğren. Paça ₺200'den.`]) : [])
     : (FG_PRI.includes(d.slug) ? ({
-      en: [`Staying ${loc}? Send a photo on WhatsApp, get the price, and we collect from your hotel. ${PH}`, `Staying ${loc}? Photo on WhatsApp, price back, hotel pick-up. ${PH}`],
-      ru: [`Отдыхаете ${loc}? Пришлите фото в WhatsApp — назовём цену и заберём вещь из отеля. Подшив. ${PH}`, `Отдыхаете ${loc}? Фото в WhatsApp, цена в ответ, забор из отеля. ${PH}`],
-      de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab. ${PH}`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung. ${PH}`],
+      en: [`Staying ${loc}? Send a photo on WhatsApp, get the price, and we collect from your hotel.`, `Staying ${loc}? Photo on WhatsApp, price back, hotel pick-up.`],
+      ru: [`Отдыхаете ${loc}? Пришлите фото в WhatsApp — назовём цену и заберём вещь из отеля. Подшив.`, `Отдыхаете ${loc}? Фото в WhatsApp, цена в ответ, забор из отеля.`],
+      de: [`Urlaub ${loc}? Foto per WhatsApp senden, Preis erhalten, wir holen im Hotel ab.`, `Urlaub ${loc}? Foto per WhatsApp, Preis zurück, Hotelabholung.`],
     } as Record<string, string[]>)[lang] : []);
   if (priT.length) title = pickFit([...priT, ...titles], 60);
   desc = pickFit([...priD, ...descs], 158);
@@ -260,7 +259,7 @@ function _districtCopy(lang: Lang, d: District) {
     const near = isTrNear(d.slug);
     const order = lang === 'tr' ? Math.max(0, TR_NEAR_SLUGS.indexOf(d.slug)) : Math.max(0, DISTRICTS.findIndex((x) => x.slug === d.slug));
     const a = angleFor(lang, d.slug, near, order);
-    const tail = ({ tr: `Fotoğraf at, fiyat al ${PH}`, en: `Photo in, price back ${PH}`, ru: `Фото — и цена ${PH}`, de: `Foto senden, Preis ${PH}` } as Record<string, string>)[lang];
+    const tail = ({ tr: `Fotoğraf at, fiyat al`, en: `Photo in, price back`, ru: `Фото — и цена`, de: `Foto senden, Preis` } as Record<string, string>)[lang];
     const ctx = { lang, n, loc, free: isFreeService(d.slug), tail };
     title = pickFit([...angleTitles(lang, a, n), ...titles], 60);
     desc = pickFit([...angleDescs(lang, a, ctx), ...priD, ...descs], 158);
@@ -406,15 +405,14 @@ function serviceCopy(lang: Lang, s: Service) {
   const rep = { tr: 'fiyatı ve gününü söyleyelim.', en: 'we reply with price and date.', ru: 'ответим ценой и сроком.', de: 'wir nennen Preis und Termin.' }[lang];
   const open = { tr: 'Her gün 08:00–23:00', en: 'Daily 08:00–23:00', ru: 'Ежедневно 08:00–23:00', de: 'Täglich 08:00–23:00' }[lang];
   const pickup = { tr: 'otellere servis', en: 'hotel pick-up', ru: 'выезд в отели', de: 'Hotelabholung' }[lang];
-  const tel = `☎ ${PHONE}`;
   const priceTxt = price ? (lang === 'tr' ? `2026 fiyatı ${price}` : price) : '';
   const info = [tm, priceTxt].filter(Boolean).join(', ');
   const candidates = [
-    `${nm}: ${info}. ${lead} ${rep} ${pickup}. ${tel}`,
-    `${nm}: ${info}. ${lead} ${rep} ${tel}`,
-    `${nm}: ${price || tm}. ${lead} ${rep} ${tel}`,
-    `${nm}. ${lead} ${rep} ${tel}`,
-    `${nm}. ${open}. ${tel}`,
+    `${nm}: ${info}. ${lead} ${rep} ${pickup}.`,
+    `${nm}: ${info}. ${lead} ${rep}`,
+    `${nm}: ${price || tm}. ${lead} ${rep}`,
+    `${nm}. ${lead} ${rep}`,
+    `${nm}. ${open}.`,
   ];
   const desc = pickFit(candidates, 158);
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
@@ -544,10 +542,10 @@ export function hubMetadata(lang: Lang): Metadata {
     de: 'Schneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
-    tr: `Terziye sor: ${PHONE} · Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
-    en: `Ask the tailor: ${PHONE} · Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
-    ru: `Спросите в ателье: ${PHONE} · Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
-    de: `Schneider fragen: ${PHONE} · Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
+    tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
+    en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
+    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
+    de: `Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);
   return {
