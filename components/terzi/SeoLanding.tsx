@@ -86,7 +86,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Hizmetleri', en: 'Tailor Services', ru: 'Услуги портного', de: 'Schneider-Leistungen',
+  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Услуги портного', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -395,8 +395,8 @@ function serviceCopy(lang: Lang, s: Service) {
     ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
     de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? ${ps} 2026 | Terzi Can`, `${Q} ücreti ne kadar? ${ps} | Terzi Can`, `${Q} fiyatları 2026 · ${ps} | Terzi Can`] : [];
-  const title = pickFit([...trPrice, ...(ps ? t1 : t1.slice(1))], 60);
+  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
+  const title = pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
   const tm = tm0.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + tm0.slice(1);
@@ -416,7 +416,7 @@ function serviceCopy(lang: Lang, s: Service) {
   ];
   const desc = pickFit(candidates, 158);
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
-  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [...(ps ? [`${nm} Antalya: ${ps} | Terzi Can`] : []), `${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
+  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
   const swTitle = pickFit([...swT, title], 60);
   if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
   return { nm, title: swTitle, desc, kw: [] as string[] };
@@ -537,13 +537,13 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
     tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
-    en: 'Antalya Tailor · Send a Photo, Get a Price',
+    en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
     ru: 'Портной в Анталье · Фото и цена в WhatsApp',
-    de: 'Schneiderei Antalya · Foto senden, Preis erhalten',
+    de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
-    en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
+    en: `Tailor & alterations in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
     ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
     de: `Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];

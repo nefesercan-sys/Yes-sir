@@ -59,7 +59,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Kot Paça Kısaltma 200 TL\'den · Orijinal Paça | Terzi Can' },
+  title: { absolute: 'Kot Paça Kısaltma Antalya · Orijinal Paça | Terzi Can' },
   description: 'Kot pantolon paça kısaltma, orijinal paça yapımı ve daraltma 200 TL\'den. Normal iş aynı gün, acil 1–2 saat. Her gün 08–23.',
   keywords: [
     'kot pantolon paça kısaltma',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     'jean paça kısaltma antalya',
   ],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: 'Kot Pantolon Paça Kısaltma Antalya · 200 TL\'den | Terzi Can', description: 'Kot paça kısaltma, orijinal paça ve daraltma. Aynı gün teslim; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: 'Kot Pantolon Paça Kısaltma Antalya | Terzi Can', description: 'Kot paça kısaltma, orijinal paça ve daraltma. Aynı gün teslim; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

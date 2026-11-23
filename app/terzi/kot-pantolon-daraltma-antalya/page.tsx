@@ -53,7 +53,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Kot Pantolon Daraltma 200 TL\'den · Bacak ve Bel | Terzi Can' },
+  title: { absolute: 'Kot Pantolon Daraltma Antalya · Bacak ve Bel | Terzi Can' },
   description: 'Kot pantolon bacak ve bel daraltma 200 TL\'den. Ölçü üzerinizde alınır; normal iş aynı gün, acil 1–2 saat. Her gün 08–23.',
   keywords: [
     'kot pantolon daraltma',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     'jean daraltma terzi',
   ],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: 'Kot Pantolon Daraltma Antalya · 200 TL\'den | Terzi Can', description: 'Kot pantolon bacak ve bel daraltma. Aynı gün teslim; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: 'Kot Pantolon Daraltma Antalya | Terzi Can', description: 'Kot pantolon bacak ve bel daraltma. Aynı gün teslim; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

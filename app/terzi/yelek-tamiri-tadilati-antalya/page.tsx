@@ -147,7 +147,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Yelek Daraltma ve Tamiri Kaç TL? 200 TL'den · Antalya" },
+  title: { absolute: "Yelek Daraltma ve Tamiri Fiyatı · Antalya | Terzi Can" },
   description: "Yelek bol mu, fermuarı mı bozuk? Yelek daraltma 200 TL'den, fermuar 300 TL'den, deri yelek 400 TL'den (KDV hariç). Fotoğraf gönderin.",
   keywords: ["yelek tamiri", "yelek tadilatı", "yelek daraltma", "yelek kısaltma", "yelek fermuarı değişimi", "takım elbise yeleği tadilatı", "deri yelek tamiri", "kot yelek tadilatı", "yelek tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },

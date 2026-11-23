@@ -84,7 +84,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
-  title: { absolute: "Paça Kısaltma Fiyatı 2026 Antalya · 200 TL'den | Terzi Can" },
+  title: { absolute: "Paça Kısaltma Fiyatı 2026 Antalya · Aynı Gün | Terzi Can" },
   description: "Pantolon paçası kaç TL? Antalya'da kot ve kumaş pantolon paça kısaltma 200 TL'den (KDV hariç). Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
   keywords: [
     'paça kısaltma Antalya', 'pantolon kısaltma Antalya', 'paça kısaltma fiyatı 2026',
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     };
   })(),
   openGraph: {
-    title: 'Paça Kısaltma Antalya · Kot Paça ₺200 · Aynı Gün Teslim',
+    title: 'Paça Kısaltma Antalya · Kot Paça · Aynı Gün Teslim',
     description: "Kot paça ₺200, kumaş pantolon ₺200. Eve ve otele gelen terzi; otellere servis.",
     url: SITE_URL, type: 'website',
   },

@@ -58,7 +58,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Kot Ceket ve Mont Tadilatı 200 TL\'den · Aynı Gün | Terzi Can' },
+  title: { absolute: 'Kot Ceket ve Mont Tadilatı Antalya · Aynı Gün | Terzi Can' },
   description: 'Kot ceket ve kot mont kol kısaltma, boy kısaltma, daraltma ve orijinal görünümde dikiş 200 TL\'den. Normal iş aynı gün.',
   keywords: [
     'kot ceket kısaltma',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     'kot mont tadilatı antalya',
   ],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: 'Kot Ceket ve Mont Tadilatı Antalya · 200 TL\'den | Terzi Can', description: 'Kot ceket ve mont kısaltma, daraltma, orijinal dikiş. Aynı gün; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: 'Kot Ceket ve Mont Tadilatı Antalya | Terzi Can', description: 'Kot ceket ve mont kısaltma, daraltma, orijinal dikiş. Aynı gün; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

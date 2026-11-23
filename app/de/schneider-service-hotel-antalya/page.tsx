@@ -99,7 +99,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Schneiderei im Hotel Antalya: Hotelservice ab ₺200' },
+  title: { absolute: 'Schneiderei im Hotel Antalya: Abholung und Rückgabe' },
   description: 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung, Dauer je nach Arbeit.',
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
