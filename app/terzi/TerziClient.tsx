@@ -391,7 +391,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <header className="thero" aria-label="Karşılama Alanı">
           {HERO_IMAGES.map((img, i) => (
             <div key={i} className={`thslide${i === heroIdx ? ' active' : ' inactive'}`} aria-hidden={i !== heroIdx}>
-              <img src={img.src} alt={img.alt || 'Terzi Can Karşılama Görseli'} width={1200} height={800} loading={i === 0 ? 'eager' : 'lazy'} />
+              <img src={img.src} srcSet={`${img.src.replace(/\.webp$/, '-640.webp')} 640w, ${img.src} 1264w`} sizes="100vw" alt={img.alt || 'Terzi Can Karşılama Görseli'} width={1200} height={800} loading={i === 0 ? 'eager' : 'lazy'} />
             </div>
           ))}
           <div className="thov" />
@@ -450,7 +450,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <section className="tstrip-wrap" aria-label="Terzi Can Fotoğraf Kesitleri">
           <div className="tstrip" ref={stripRef}>
             {[...FILM_STRIP, ...FILM_STRIP].map((src, i) => (
-              <img key={i} src={src} alt={`Terzi Can Antalya Atölye Kesiti ${(i % FILM_STRIP.length) + 1}`} className="tstrip-img" width={600} height={400} loading="lazy" />
+              <img key={i} src={src.replace(/\.webp$/, '-640.webp')} alt={`Terzi Can Antalya Atölye Kesiti ${(i % FILM_STRIP.length) + 1}`} className="tstrip-img" width={600} height={400} loading="lazy" />
             ))}
           </div>
         </section>
@@ -472,7 +472,7 @@ export default function TerziClient({ gbp1 }: Props) {
           <div className="tsvc-grid">
             {SERVICES.map((s, i) => (
               <article key={i} className="tsc" id={s.id} aria-labelledby={`svc-${s.id}`}>
-                <img src={s.img} alt={s.alt} loading={i < 2 ? 'eager' : 'lazy'} width="800" height="400" />
+                <img src={s.img} srcSet={`${s.img.replace(/\.webp$/, '-640.webp')} 640w, ${s.img} 1264w`} sizes="(max-width: 700px) 92vw, 420px" alt={s.alt} loading={i < 2 ? 'eager' : 'lazy'} width="800" height="400" />
                 <div className="tsc-ov" />
                 <div className="tsc-body">
                   <div className="tsc-ic" aria-hidden="true">{s.icon}</div>

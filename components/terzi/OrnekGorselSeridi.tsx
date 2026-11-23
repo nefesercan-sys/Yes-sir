@@ -31,7 +31,7 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
             const g = GORSELLER[k]; const m = gorselMetin(k, lang);
             return (
               <figure key={k} style={{ margin: 0, background: kart, border: `1px solid ${kenar}`, borderRadius: 12, overflow: 'hidden' }}>
-                <img src={g.src} alt={`${m.baslik} – ${ALT_EK[lang]} (${ORNEK_ETIKET[lang]})`} title={m.baslik} width={g.w} height={g.h} loading="lazy" decoding="async"
+                <img src={g.src} srcSet={`${g.src.replace(/\.webp$/, '-640.webp')} 640w, ${g.src} ${g.w}w`} sizes="(max-width: 700px) 92vw, 360px" alt={`${m.baslik} – ${ALT_EK[lang]} (${ORNEK_ETIKET[lang]})`} title={m.baslik} width={g.w} height={g.h} loading="lazy" decoding="async"
                   style={{ width: '100%', height: 'auto', aspectRatio: '3 / 2', objectFit: 'cover', display: 'block' }} />
                 <figcaption style={{ padding: '.9rem 1.1rem 1.1rem' }}>
                   <strong style={{ display: 'block', fontSize: '1rem', marginBottom: '.2rem' }}>{m.baslik}</strong>
