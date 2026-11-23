@@ -86,7 +86,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Hizmetleri', en: 'Tailor Services', ru: 'Услуги портного', de: 'Schneider-Leistungen',
+  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Услуги портного', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -537,13 +537,13 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
     tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
-    en: 'Antalya Tailor · Send a Photo, Get a Price',
+    en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
     ru: 'Портной в Анталье · Фото и цена в WhatsApp',
-    de: 'Schneiderei Antalya · Foto senden, Preis erhalten',
+    de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
-    en: `Clothing repair in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
+    en: `Tailor & alterations in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
     ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
     de: `Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];
