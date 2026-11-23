@@ -254,29 +254,9 @@ function getBaseSiteMap(pathname: string): SiteMap | null {
 
 // ── Yalnızca BreadcrumbList'i OLMAYAN sayfalar için ────────────────────────
 // (Diğer sayfaların şemasında zaten var; çift üretmemek için burada yok.)
-export function getBreadcrumb(pathname: string): Crumb[] | null {
-  const p = norm(pathname);
-  const home: Crumb = { name: 'Terzi Can', href: '/' };
-
-  let m = p.match(/^\/terzi\/antalya\/([a-z0-9-]+)$/);
-  if (m) {
-    const ilce = ANTALYA_ILCELERI.find((i) => i.slug === m![1]);
-    if (!ilce) return null;
-    return [home, { name: 'Antalya Terzi', href: '/terzi' }, { name: `${ilce.ad} Terzi`, href: p }];
-  }
-
-  const regionPages: [RegExp, string, string, CoreLang][] = [
-    [/^\/en\/hotel-tailor-antalya\/([a-z0-9-]+)$/, EN_BASE, 'Hotel Tailor Antalya', 'en'],
-    [/^\/de\/schneider-service-hotel-antalya\/([a-z0-9-]+)$/, DE_BASE, 'Schneider Service Hotel Antalya', 'de'],
-    [/^\/ru\/vyezdnoy-portnoy-antalya\/([a-z0-9-]+)$/, RU_BASE, 'Выездной портной Анталья', 'ru'],
-  ];
-  for (const [re, base, hubName, lang] of regionPages) {
-    m = p.match(re);
-    if (m && (REGIONS as readonly string[]).includes(m[1])) {
-      return [home, { name: hubName, href: base }, { name: REGION_NAME[lang][m[1]], href: p }];
-    }
-  }
-
+export function getBreadcrumb(_pathname: string): Crumb[] | null {
+  // 23 Kasım 2026 taraması: tüm sayfalar kendi BreadcrumbList şemasını basıyor (ilçe ve otel bölgesi sayfaları dahil);
+  // burada üretilirse çift şema olur. Kendi şeması olmayan yeni bir sayfa eklenirse burada döndürülebilir.
   return null;
 }
 
