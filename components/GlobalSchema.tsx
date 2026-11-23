@@ -88,7 +88,7 @@ const jsonLd = {
       '@id': 'https://swaphubs.com/#website',
       url: 'https://swaphubs.com',
       name: 'Terzi Can Antalya',
-      alternateName: 'SwapHubs',
+      alternateName: ['Terzi Can', 'swaphubs.com'],
       description: "Terzi Can: Antalya terzi, tadilat, özel dikim ve tekstil üretimi",
       inLanguage: ['tr', 'en', 'de', 'ru', 'es', 'fr', 'pl', 'uk', 'nl', 'ar'],
       publisher: { '@id': 'https://swaphubs.com/#organization' },
