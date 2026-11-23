@@ -1,6 +1,136 @@
 // 6 ek dilin (es fr pl uk nl ar) görsel başlık/açıklamaları; tr/en/de/ru için lib/ornek-gorseller.ts.
 export type EkLang = 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
 export const EK_METIN: Record<string, Record<EkLang, [string, string]>> = {
+ "paca-kisaltma": {
+ "es": [
+  "Bajo de pantalón: largo marcado con alfileres",
+  "El largo se marca con los zapatos puestos; el bajo se hace en el día."
+ ],
+ "fr": [
+  "Ourlet de pantalon : longueur marquée aux épingles",
+  "La longueur se marque chaussures aux pieds ; l’ourlet est fait le jour même."
+ ],
+ "pl": [
+  "Skracanie spodni: długość zaznaczona szpilkami",
+  "Długość zaznaczamy w butach; skracanie tego samego dnia."
+ ],
+ "uk": [
+  "Підшивання штанів: довжина позначена шпильками",
+  "Довжину позначаємо у взутті; підшиваємо того ж дня."
+ ],
+ "nl": [
+  "Broek inkorten: lengte afgespeld",
+  "De lengte wordt met schoenen aan afgespeld; inkorten op dezelfde dag."
+ ],
+ "ar": [
+  "تقصير البنطال: تحديد الطول بالدبابيس",
+  "يُحدَّد الطول مع ارتداء الحذاء، والتقصير في اليوم نفسه."
+ ]
+},
+ "fermuar-degisimi": {
+ "es": [
+  "Cambio y arreglo de cremallera",
+  "Cremalleras de abrigos, pantalones, faldas y bolsos: se quita la rota y se cose una nueva."
+ ],
+ "fr": [
+  "Remplacement et réparation de fermeture éclair",
+  "Fermetures de manteaux, pantalons, jupes et sacs : l’ancienne est retirée, une neuve est cousue."
+ ],
+ "pl": [
+  "Wymiana i naprawa zamka",
+  "Zamki w kurtkach, spodniach, spódnicach i torbach: stary wypruwamy, wszywamy nowy."
+ ],
+ "uk": [
+  "Заміна та ремонт блискавки",
+  "Блискавки на куртках, штанях, спідницях і сумках: стару знімаємо, нову вшиваємо."
+ ],
+ "nl": [
+  "Rits vervangen en repareren",
+  "Ritsen in jassen, broeken, rokken en tassen: de kapotte eruit, een nieuwe erin."
+ ],
+ "ar": [
+  "تغيير السحّاب وإصلاحه",
+  "سحّابات المعاطف والبناطيل والتنانير والحقائب: يُزال التالف ويُخاط سحّاب جديد."
+ ]
+},
+ "dikis-makinesi": {
+ "es": [
+  "Costura y arreglos a máquina",
+  "Costuras abiertas, rotos y ajustes se cosen firmes a máquina."
+ ],
+ "fr": [
+  "Couture et réparations à la machine",
+  "Coutures ouvertes, accrocs et retouches sont cousus solidement à la machine."
+ ],
+ "pl": [
+  "Szycie i naprawy na maszynie",
+  "Rozprute szwy, rozdarcia i przeróbki zszywamy mocno na maszynie."
+ ],
+ "uk": [
+  "Пошиття та ремонт на машині",
+  "Розпорені шви, розриви та шви підгонки міцно прошиваємо на машині."
+ ],
+ "nl": [
+  "Naaien en repareren op de machine",
+  "Open naden, scheuren en vermaaknaden worden stevig op de machine genaaid."
+ ],
+ "ar": [
+  "خياطة وتصليح على الماكينة",
+  "تُخاط الدروز المفتوحة والتمزقات ودروز التعديل بإحكام على الماكينة."
+ ]
+},
+ "bel-daraltma-manken": {
+ "es": [
+  "Entallar la cintura de un vestido",
+  "Primero se marca con alfileres lo que hay que entallar y luego se cose."
+ ],
+ "fr": [
+  "Reprise de taille d’une robe",
+  "La retouche est d’abord épinglée, puis cousue."
+ ],
+ "pl": [
+  "Zwężanie sukienki w talii",
+  "Najpierw spinamy szpilkami, potem zszywamy."
+ ],
+ "uk": [
+  "Ушивання сукні по талії",
+  "Спочатку заколюємо шпильками, потім прошиваємо."
+ ],
+ "nl": [
+  "Jurk innemen in de taille",
+  "Eerst wordt afgespeld, daarna genaaid."
+ ],
+ "ar": [
+  "تضييق خصر الفستان",
+  "يُحدَّد مقدار التضييق بالدبابيس أولًا ثم يُخاط."
+ ]
+},
+ "gelinlik-abiye": {
+ "es": [
+  "Arreglo de vestido de novia",
+  "En vestidos de novia solo hacemos arreglos: talla, largo y tirantes."
+ ],
+ "fr": [
+  "Retouche de robe de mariée",
+  "Pour les robes de mariée, uniquement des retouches : taille, longueur et bretelles."
+ ],
+ "pl": [
+  "Poprawki sukni ślubnej",
+  "Suknie ślubne tylko poprawiamy: rozmiar, długość i ramiączka."
+ ],
+ "uk": [
+  "Підгонка весільної сукні",
+  "Весільні сукні лише підганяємо: розмір, довжина та бретелі."
+ ],
+ "nl": [
+  "Trouwjurk vermaken",
+  "Trouwjurken worden alleen vermaakt: maat, lengte en bandjes."
+ ],
+ "ar": [
+  "تعديل فستان الزفاف",
+  "فساتين الزفاف نعدّلها فقط: المقاس والطول والحمالات."
+ ]
+},
  "keten-kadin-evde": {
   "es": [
    "Camisa y pantalón de lino para mujer",

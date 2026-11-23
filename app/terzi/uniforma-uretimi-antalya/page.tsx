@@ -151,7 +151,7 @@ export default function UniformaUretimiPage() {
 
         {/* HERO */}
         <section style={{ background: 'linear-gradient(135deg,#1C1814,#2E2820)', padding: '4.5rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/uniforma.webp') center/cover", opacity: .1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/antalya-uniforma-dikim-uretim.webp') center/cover", opacity: .1 }} />
           <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
               🏭 Terzi Can · Antalya · Üniforma Üretimi

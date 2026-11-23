@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -531,6 +532,7 @@ export default function KonyaaltiTerziPage() {
           </div>
         </footer>
       </div>
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['bel-daraltma-manken', 'fermuar-degisimi', 'erkek-takim-olcu']} sayfaUrl={PAGE_URL} />
       <ReviewsBlock lang="tr" />
     </>
   );

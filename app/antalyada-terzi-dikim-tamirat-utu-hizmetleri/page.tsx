@@ -1,6 +1,7 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
@@ -662,6 +663,7 @@ export default function GeminiOptimizedTailorPage() {
         </footer>
 
       </main>
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['dikis-makinesi', 'paca-kisaltma', 'abiye-askida']} sayfaUrl={PAGE_URL} />
       <ReviewsBlock lang="tr" />
     </>
   );

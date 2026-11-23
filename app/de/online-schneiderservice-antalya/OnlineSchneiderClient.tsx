@@ -17,17 +17,17 @@ interface Props {
 }
 
 const IMGS = {
-  hero:    '/gorseller/paca-kisaltma.webp',
-  erkek:   '/gorseller/kalip-ve-makas.webp',
-  bayan:   '/gorseller/bel-daraltma-manken.webp',
-  online:  '/gorseller/dikis-makinesi.webp',
-  tamir:   '/gorseller/fermuar-degisimi.webp',
-  tasarim: '/gorseller/kalip-ve-makas.webp',
-  seri:    '/gorseller/hazir-giyim-atolye.webp',
-  spor:    '/gorseller/hazir-giyim-atolye.webp',
-  about1:  '/gorseller/dikis-makinesi.webp',
-  about2:  '/gorseller/paca-kisaltma.webp',
-  about3:  '/gorseller/bez-canta-atolye.webp',
+  hero:    '/gorseller/antalya-terzi-paca-kisaltma.webp',
+  erkek:   '/gorseller/antalya-terzi-ozel-dikim-kalip-makas.webp',
+  bayan:   '/gorseller/antalya-terzi-elbise-bel-daraltma.webp',
+  online:  '/gorseller/antalya-terzi-dikim-tamir-dikis-makinesi.webp',
+  tamir:   '/gorseller/antalya-terzi-fermuar-degisimi-tamiri.webp',
+  tasarim: '/gorseller/antalya-terzi-ozel-dikim-kalip-makas.webp',
+  seri:    '/gorseller/antalya-tekstil-tisort-seri-uretim.webp',
+  spor:    '/gorseller/antalya-tekstil-tisort-seri-uretim.webp',
+  about1:  '/gorseller/antalya-terzi-dikim-tamir-dikis-makinesi.webp',
+  about2:  '/gorseller/antalya-terzi-paca-kisaltma.webp',
+  about3:  '/gorseller/antalya-baskili-bez-canta-uretim.webp',
 };
 
 const SERVICES = [

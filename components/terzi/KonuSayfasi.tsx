@@ -2,6 +2,8 @@ import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import Link from 'next/link';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
+import type { GorselAnahtar } from '@/lib/ornek-gorseller';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import { jsonLdString } from '@/lib/json-ld';
@@ -35,6 +37,19 @@ export interface KonuData {
   diger: { href: string; ad: string }[];
   ctaBaslik: string;
 }
+
+// Konu sayfası → örnek görseller (ilgili iş)
+const KONU_GORSEL: Record<string, GorselAnahtar[]> = {
+  '/terzi/mont-tamiri-tadilati-antalya': ['erkek-palto-atolye', 'fermuar-degisimi', 'kadin-trenckot-atolye'],
+  '/terzi/kot-ceket-mont-tadilati-antalya': ['kadin-trenckot-atolye', 'fermuar-degisimi', 'dikis-makinesi'],
+  '/terzi/deri-ceket-tadilati-antalya': ['palto-yaka-detay', 'erkek-palto-atolye', 'fermuar-degisimi'],
+  '/terzi/kaban-palto-tadilati-antalya': ['erkek-palto-atolye', 'manken-palto-takim', 'palto-yaka-detay'],
+  '/terzi/orijinal-kot-paca-yapimi-antalya': ['paca-kisaltma', 'yun-pantolon-metre', 'dikis-makinesi'],
+  '/terzi/kot-etek-kisaltma-daraltma-antalya': ['pilili-etek', 'bel-daraltma-manken', 'dikis-makinesi'],
+  '/terzi/kot-pantolon-daraltma-antalya': ['yun-pantolon-metre', 'paca-kisaltma', 'dikis-makinesi'],
+  '/terzi/kot-pantolon-paca-kisaltma-antalya': ['paca-kisaltma', 'keten-pantolon-katli', 'yun-pantolon-metre'],
+  '/terzi/yelek-tamiri-tadilati-antalya': ['polar-yelek', 'fermuar-degisimi', 'erkek-gomlek-atolye'],
+};
 
 export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuData; kargoFermuar?: boolean; kargoKisa?: boolean }) {
   const url = `${BASE_URL}${d.path}`;
@@ -185,6 +200,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
       </section>
       {kargoFermuar && <KargoFermuarKutusu lang="tr" />}
       {kargoKisa && !kargoFermuar && <KargoKisaNot lang="tr" job={d.name} />}
+      {KONU_GORSEL[d.path] && <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={KONU_GORSEL[d.path]} sayfaUrl={url} />}
       <ReviewsBlock lang="tr" schema />
     </main>
   );

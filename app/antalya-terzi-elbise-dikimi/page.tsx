@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -104,6 +105,7 @@ export default function Page() {
       <SpeakableSchema path="/antalya-terzi-elbise-dikimi" />
       <QuickActionBanner lang="tr" />
       <ElbiseDikimiClient />
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['abiye-elbise-atolye', 'bel-daraltma-manken', 'keten-kadin-evde']} sayfaUrl={'https://swaphubs.com/antalya-terzi-elbise-dikimi'} />
       <ReviewsBlock lang="tr" />
       <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"
