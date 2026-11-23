@@ -37,7 +37,6 @@ const TR_SERVICES: MapLink[] = [
   { href: '/terzi/uniforma-uretimi-antalya', label: 'Üniforma üretimi' },
   { href: '/antalya-terzi-elbise-dikimi', label: 'Elbise dikimi' },
   { href: '/antalyada-terzi-dikim-tamirat-utu-hizmetleri', label: 'Dikim ve tamirat' },
-  { href: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', label: 'Konyaaltı elbise dikim ve tadilat' },
   { href: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', label: 'Konyaaltı tadilat' },
   { href: '/online-terzi-hizmeti', label: 'Online terzi hizmeti' },
   { href: '/siparise-ozel-dikim-dunyaya-kargo', label: 'Siparişe özel dikim ve kargo' },
@@ -278,9 +277,6 @@ export function getBreadcrumb(pathname: string): Crumb[] | null {
     }
   }
 
-  if (p === '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat') {
-    return [home, { name: 'Antalya Terzi', href: '/terzi' }, { name: 'Konyaaltı Elbise Dikim ve Tadilat', href: p }];
-  }
   return null;
 }
 

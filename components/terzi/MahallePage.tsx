@@ -10,7 +10,6 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { MAHALLE_ILCE, type MahalleIlce } from '@/lib/turkiye-lokasyonlar';
 import { mahalleMeta } from '@/lib/mahalle-meta';
-import { getDb } from '@/lib/mongodb';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 import { KeywordBlock } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY } from '@/lib/business';
@@ -19,8 +18,6 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import { mahalleFaq } from '@/lib/bolge-icerik';
 
 const TERZI_URL = `${SITE_URL}/terzi`;
-const SEKTOR_ID = 'terzi-kuru-temizleme';
-const YARICAP_KM = 8; // mahalle ölçeğinde dar bir yarıçap
 
 export type MahalleParams = { params: Promise<{ mahalle: string }> };
 
@@ -28,22 +25,6 @@ export const mahalleStaticParams = (ilce: MahalleIlce) => MAHALLE_ILCE[ilce].lis
 const bul = (ilce: MahalleIlce, slug: string) => MAHALLE_ILCE[ilce].list.find((m) => m.slug === slug);
 const pathOf = (ilce: MahalleIlce, slug: string) => `/terzi/${ilce}/${slug}`;
 
-async function aktifTalepSayisiGetir(lat?: number, lng?: number): Promise<number> {
-  if (typeof lat !== 'number' || typeof lng !== 'number') return 0; // koordinatı doğrulanmamış mahalle: sayım yapılmaz
-  try {
-    const db = await getDb();
-    const yaricapRadyan = YARICAP_KM / 6378.1;
-    return await db.collection('ilanlar').countDocuments({
-      sektorId: SEKTOR_ID,
-      durum: 'aktif',
-      teklifeAcik: true,
-      location: { $geoWithin: { $centerSphere: [[lng, lat], yaricapRadyan] } },
-    });
-  } catch (e) {
-    console.error('[mahalle talep sayısı hatası]', e);
-    return 0;
-  }
-}
 
 export async function mahalleMetadata(ilce: MahalleIlce, { params }: MahalleParams): Promise<Metadata> {
   const { mahalle } = await params;
@@ -70,7 +51,6 @@ export async function MahallePage({ ilce, params }: { ilce: MahalleIlce } & Maha
   const I = MAHALLE_ILCE[ilce];
   const path = pathOf(ilce, m.slug);
   const url = `${SITE_URL}${path}`;
-  const aktifTalepSayisi = await aktifTalepSayisiGetir(m.lat, m.lng);
 
   // Tek işletmeye (#business) bağlı Service + WebPage + Breadcrumb; mahalle yalnızca "hizmet verilen bölge".
   const jsonLd = {
@@ -100,7 +80,6 @@ export async function MahallePage({ ilce, params }: { ilce: MahalleIlce } & Maha
         url={url}
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => pathOf(ilce, slug)}
-        aktifTalepSayisi={aktifTalepSayisi}
       />
       <FaqBlock heading={`${m.ad} Terzi — Sık Sorulan Sorular`} items={mahalleFaq(m.slug, m.ad, I.ad)} />
       <KeywordBlock slug={m.slug} />

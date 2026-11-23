@@ -10,15 +10,12 @@ import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
-import { getDb } from '@/lib/mongodb';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 import { KeywordBlock } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import { districtFaqItems, withEkSss, trLoc, pick } from '@/lib/bolge-icerik';
 
-const SEKTOR_ID = 'terzi-kuru-temizleme';
-const YARICAP_KM = 20;
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -35,22 +32,6 @@ function bul(slug: string) {
   return ANTALYA_ILCELERI.find(i => i.slug === slug);
 }
 
-async function aktifTalepSayisiGetir(lat?: number, lng?: number): Promise<number> {
-  if (typeof lat !== 'number' || typeof lng !== 'number') return 0;
-  try {
-    const db = await getDb();
-    const yaricapRadyan = YARICAP_KM / 6378.1;
-    return await db.collection('ilanlar').countDocuments({
-      sektorId: SEKTOR_ID,
-      durum: 'aktif',
-      teklifeAcik: true,
-      location: { $geoWithin: { $centerSphere: [[lng, lat], yaricapRadyan] } },
-    });
-  } catch (e) {
-    console.error('[ilçe talep sayısı hatası]', e);
-    return 0;
-  }
-}
 
 function meta(slug: string, ad: string) {
   const d = findDistrict(slug);
@@ -93,7 +74,6 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
   if (!ilce) notFound();
 
   const url = `${SITE_URL}/terzi/antalya/${ilce.slug}`;
-  const aktifTalepSayisi = await aktifTalepSayisiGetir(ilce.lat, ilce.lng);
   const { loc, resort } = meta(ilce.slug, ilce.ad);
 
   // Bölge için ayrı bir "şube" LocalBusiness'ı basılmaz (sahte şube/doorway riski): tek işletmeye bağlı Service.
@@ -124,7 +104,6 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
         url={url}
         komsuLokasyonlar={komsular}
         komsuHref={(s) => `/terzi/antalya/${s}`}
-        aktifTalepSayisi={aktifTalepSayisi}
       />
       <FaqBlock heading={`${ilce.ad} Terzi — Sık Sorulan Sorular`} items={faq} />
       <KeywordBlock slug={ilce.slug} />

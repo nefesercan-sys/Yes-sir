@@ -58,6 +58,10 @@ const nextConfig = {
         { source: `/${slug}/:path*`, destination: '/terzi', permanent: true },
       ]),
       { source: '/terzi-talep', destination: '/terzi/iletisim', permanent: true },
+      // Meltem, Şirinyalı, Fener, Güzeloba Muratpaşa mahallesi: /terzi/konyaalti/<slug> kopyası 301 ile asıl sayfaya (canonical zaten oradaydı)
+      ...['meltem', 'sirinyali', 'fener', 'guzeloba'].map((slug) => ({ source: `/terzi/konyaalti/${slug}`, destination: `/terzi/muratpasa/${slug}`, permanent: true })),
+      // Kopya sayfa: canonical'ı zaten Konyaaltı tadilat sayfasıydı; 301 ile birleştirildi (genel tarama, 23 Kasım)
+      { source: '/antalya-konyaalti-terzi-elbise-dikim-tamir-tadilat', destination: '/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', permanent: true },
       // Search Console yönlendirme hatası (23 Kasım): eski şehir sayfaları ve eski ölçü rehberi adresi
       { source: '/terzi/bursa', destination: '/online-terzi-hizmeti', permanent: true },
       { source: '/terzi/adana', destination: '/online-terzi-hizmeti', permanent: true },
