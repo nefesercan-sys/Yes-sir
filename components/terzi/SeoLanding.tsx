@@ -86,7 +86,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Услуги портного', de: 'Änderungsschneiderei',
+  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -416,7 +416,7 @@ function serviceCopy(lang: Lang, s: Service) {
   ];
   const desc = pickFit(candidates, 158);
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
-  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
+  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталии: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
   const swTitle = pickFit([...swT, title], 60);
   if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
   return { nm, title: swTitle, desc, kw: [] as string[] };
@@ -538,13 +538,13 @@ export function hubMetadata(lang: Lang): Metadata {
   const title = {
     tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
     en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
-    ru: 'Портной в Анталье · Фото и цена в WhatsApp',
+    ru: 'Ремонт одежды в Анталии · Портной и швея, цена по фото',
     de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
   }[lang];
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
     en: `Tailor & alterations in Konyaaltı, Hurma, Liman, Arapsuyu: torn seams, hemming, zippers. Send a photo, get a price.`,
-    ru: `Ремонт одежды в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
+    ru: `Ремонт одежды, швея и портной в Коньяалты, Хурме, Лимане, Арапсую: дырки, подшив, молнии. Фото — и цена. Ежедневно.`,
     de: `Änderungsschneiderei in der Nähe Ihres Hotels: Kürzen, Reißverschluss, Reparatur (Konyaaltı, Hurma, Liman). Foto senden, Preis erhalten.`,
   }[lang];
   const url = abs(SERVICE_BASE[lang]);

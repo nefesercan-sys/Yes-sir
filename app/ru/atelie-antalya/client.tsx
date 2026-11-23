@@ -177,7 +177,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
         <div className="hero-inner">
           <span className="hero-badge">✨ Профессиональное ателье в Коньяалты</span>
           <h1 className="hero-title">
-            Качественный ремонт и пошив одежды в Анталье
+            Ателье и швея в Анталии: ремонт и пошив одежды
           </h1>
           <p className="hero-sub">
             Мастерская <strong style={{ color: 'var(--champagne)' }}>Terzi Can</strong> предлагает
