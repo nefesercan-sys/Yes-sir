@@ -56,7 +56,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Deri Ceket Tadilatı 400 TL\'den · Pantolon, Yelek | Terzi Can' },
+  title: { absolute: 'Deri Ceket Tadilatı Antalya · Pantolon, Yelek | Terzi Can' },
   description: 'Deri ceket, deri pantolon ve deri yelek tamir ve tadilatı 400 TL\'den: daraltma, kol kısaltma, onarım. Önce fotoğraf, net fiyat. 08–23.',
   keywords: [
     'deri ceket tadilatı',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     'deri mont terzi',
   ],
   alternates: { canonical: `${BASE_URL}${PATH}` },
-  openGraph: { title: 'Deri Ceket Tadilatı Antalya · 400 TL\'den | Terzi Can', description: 'Deri ceket, pantolon ve yelek tamir ve tadilatı. Fotoğrafla net fiyat; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
+  openGraph: { title: 'Deri Ceket Tadilatı Antalya | Terzi Can', description: 'Deri ceket, pantolon ve yelek tamir ve tadilatı. Fotoğrafla net fiyat; Konyaaltı / Antalya.', url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
 };
 

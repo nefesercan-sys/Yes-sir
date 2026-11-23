@@ -37,7 +37,7 @@ const GMAPS_PLACE_LINK = GMAPS_SHORT_LINK
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  title: { absolute: 'Ателье в Анталье: подшив от ₺200, ремонт, пошив | Terzi Can' },
+  title: { absolute: 'Ателье в Анталье: подшив, ремонт, пошив | Terzi Can' },
 
   description:
     'Ателье Terzi Can в Коньяалты: подшив от ₺200 (~€10), замена молнии от ₺300, кожа от ₺400, пошив. Ателье рядом с отелем: забор и доставка. WhatsApp на вашем языке.',

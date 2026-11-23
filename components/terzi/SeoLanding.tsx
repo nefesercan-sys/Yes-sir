@@ -395,8 +395,8 @@ function serviceCopy(lang: Lang, s: Service) {
     ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
     de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? ${ps} 2026 | Terzi Can`, `${Q} ücreti ne kadar? ${ps} | Terzi Can`, `${Q} fiyatları 2026 · ${ps} | Terzi Can`] : [];
-  const title = pickFit([...trPrice, ...(ps ? t1 : t1.slice(1))], 60);
+  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
+  const title = pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
   const tm = tm0.charAt(0).toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang) + tm0.slice(1);
@@ -416,7 +416,7 @@ function serviceCopy(lang: Lang, s: Service) {
   ];
   const desc = pickFit(candidates, 158);
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
-  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [...(ps ? [`${nm} Antalya: ${ps} | Terzi Can`] : []), `${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
+  const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталье: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
   const swTitle = pickFit([...swT, title], 60);
   if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
   return { nm, title: swTitle, desc, kw: [] as string[] };
