@@ -18,7 +18,7 @@ const TERZI_URL = `${BASE_URL}/terzi`;
 const PHONE_DISPLAY = '+90 531 898 64 18';
 const PHONE_TEL     = '+905318986418';
 const TODAY = '2026-10-07'; // içerik gerçekten değiştiğinde elle güncelle
-const OG_IMAGE = `${BASE_URL}/og/terzi-can.jpg`;
+const OG_IMAGE = `${BASE_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
 // ── Google Business Profile (tek konum: Hurma, Konyaaltı) ─────────────────
 const GBP1_NAME   = 'TERZİ Can - Antalya Tailor Service';

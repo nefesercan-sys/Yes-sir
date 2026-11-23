@@ -51,7 +51,7 @@ const jsonLd = {
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      image: [`${HOME}/og/terzi-can.jpg`],
+      image: [`${HOME}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',
@@ -152,7 +152,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     type: 'website',
     locale: 'tr_TR',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630 }],
   },
   robots: {
     index: true,

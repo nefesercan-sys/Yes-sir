@@ -49,7 +49,7 @@ const PAGE_TITLE = "Terzi Can Antalya · Terzi Dikim, Tadilat Hizmeti";
 const PAGE_DESC  =
   "Bay bayan tamir, tadilat, fermuar değişimi ve dikim: paça 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.";
 
-const OG_IMAGE = `${HOME_URL}/og/terzi-can.jpg`;
+const OG_IMAGE = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
 const ANTALYA_ILCELER = [
   'Konyaaltı','Muratpaşa','Kepez','Lara','Kundu','Belek','Kemer','Antalya',
@@ -92,7 +92,7 @@ const jsonLd = {
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
       knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
       image: [OG_IMAGE],
-      logo: `${HOME_URL}/logo.png`,
+      logo: `${HOME_URL}/terzi-can-antalya-terzi-logo.png`,
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',

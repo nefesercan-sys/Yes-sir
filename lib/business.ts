@@ -39,7 +39,7 @@ export const BUSINESS = {
   languages: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
   currencies: 'TRY, EUR, USD, GBP, RUB and other currencies',
   payments: 'Cash, Credit Card',
-  image: `${SITE_URL}/og/terzi-can.jpg`,
+  image: `${SITE_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`,
   address: {
     streetAddress: 'Hurma Mahallesi',
     addressLocality: 'Konyaaltı',

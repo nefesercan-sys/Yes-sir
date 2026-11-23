@@ -14,7 +14,7 @@ const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
 const PHONE_E = '+905318986418';
 const GBP_URL = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service
-const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
+const OG_IMG = `${BASE_URL}/images/elbise-dikimi/antalya-terzi-elbise-takim-ozel-dikim.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

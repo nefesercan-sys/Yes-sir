@@ -110,7 +110,7 @@ export const metadata: Metadata = {
     title: 'Terzi Çağır Antalya — Kapınıza Gelen Terzi | Terzi Can',
     description: 'Paça kısaltma ₺200. Terzimiz kapınıza gelir. WhatsApp’tan yazın.',
     url: PAGE_URL, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Terzi Can Antalya' }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630, alt: 'Terzi Can Antalya' }],
   },
   robots: {
     index: true, follow: true,

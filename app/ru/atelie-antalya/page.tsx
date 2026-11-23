@@ -26,7 +26,7 @@ const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
 const PHONE = '+90 531 898 64 18'
 const PHONE_E164 = '+905318986418'
 const TODAY = '2026-06-30'
-const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/wrap-dress-stone.jpg`
+const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/antalya-terzi-kruvaze-elbise-dikimi.jpg`
 
 // Gerçek Google Maps kaydı (maps.app.goo.gl linkinden çözümlendi)
 // TERZİ Can - Antalya Tailor Service, Hurma, 07000 Konyaaltı/Antalya

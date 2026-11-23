@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     title: 'Dikiş Atölyesi Antalya · Fason Üretim · Kalıp · Seri İmalat | Terzi Can',
     description: "Kalıp çıkarma, numune, fason üretim (adet projeye göre belirlenir, proje bazında teklif). Markalar için tam paket.",
     url: SITE_URL, type: 'website',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   other: { 'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya', 'geo.position': '36.8572868;30.5970193', ICBM: '36.8572868, 30.5970193' },

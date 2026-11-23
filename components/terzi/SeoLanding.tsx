@@ -38,7 +38,7 @@ import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, 
 import { jsonLdString } from '@/lib/json-ld';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
-const OG = `${SITE}/og/terzi-can.jpg`;
+const OG = `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 const OG_LOCALE: Record<Lang, string> = { tr: 'tr_TR', en: 'en_US', ru: 'ru_RU', de: 'de_DE' };
 
 // ── Arayüz metinleri ────────────────────────────────────────

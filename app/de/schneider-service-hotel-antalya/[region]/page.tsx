@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `Änderungsschneiderei ${r.name}: Hotelabholung | Terzi Can`;
   const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel, Kürzen ab ₺200 (~10 €), Dauer je nach Arbeit. Foto per WhatsApp senden.`;
-  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
+  const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -80,7 +80,7 @@ export default async function BelekLaraGuzelobaSideDePage({ params }: { params: 
         '@id': `${url}#service`,
         name: `Hotel-Schneiderservice ${r.name} — Abholung & Lieferung`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
+        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,

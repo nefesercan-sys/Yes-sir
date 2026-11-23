@@ -100,11 +100,11 @@ const jsonLd = {
       url: 'https://swaphubs.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://swaphubs.com/og/logo.png',
+        url: 'https://swaphubs.com/og/terzi-can-antalya-terzi-logo.png',
         width: '512',
         height: '512',
       },
-      image: { '@type': 'ImageObject', url: 'https://swaphubs.com/og/terzi-can.jpg' },
+      image: { '@type': 'ImageObject', url: 'https://swaphubs.com/og/antalya-terzi-can-dikim-tamir-tadilat.jpg' },
       description:
         "Terzi Can: Konyaaltı, Antalya'da 2006'dan beri terzi atölyesi; tadilat, özel dikim ve tekstil üretimi.",
       areaServed: ['TR', 'DE', 'AE', 'SA', 'US', 'GB', 'RU'],

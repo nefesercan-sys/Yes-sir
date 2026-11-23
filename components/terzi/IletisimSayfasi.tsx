@@ -20,7 +20,7 @@ type L4<T = string> = Record<Lang, T>;
 const SITE_CFG = {
   businessId: BUSINESS_ID,
   businessName: 'TERZİ Can - Antalya Tailor Service', // Google profil adıyla birebir aynı
-  image: `${SITE}/og/terzi-can.jpg`,
+  image: `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`,
   geo: { latitude: 36.8572868, longitude: 30.5970193 },
   sameAs: [MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
   contactUrl: {
