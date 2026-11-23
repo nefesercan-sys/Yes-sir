@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -13,7 +14,7 @@ const BASE_URL = 'https://swaphubs.com';
 const SITE_URL = `${BASE_URL}/antalya-terzi-elbise-dikimi`;
 const PHONE_E = '+905318986418';
 const GBP_URL = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service
-const OG_IMG = `${BASE_URL}/images/elbise-dikimi/hero-couple.jpg`;
+const OG_IMG = `${BASE_URL}/images/elbise-dikimi/antalya-terzi-elbise-takim-ozel-dikim.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -104,6 +105,7 @@ export default function Page() {
       <SpeakableSchema path="/antalya-terzi-elbise-dikimi" />
       <QuickActionBanner lang="tr" />
       <ElbiseDikimiClient />
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['abiye-elbise-atolye', 'bel-daraltma-manken', 'keten-kadin-evde']} sayfaUrl={'https://swaphubs.com/antalya-terzi-elbise-dikimi'} />
       <ReviewsBlock lang="tr" />
       <FaqBlock
         heading="Konyaaltı Terzi — Sık Sorulan Sorular"

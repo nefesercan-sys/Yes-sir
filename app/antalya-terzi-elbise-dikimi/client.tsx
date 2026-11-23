@@ -26,7 +26,7 @@ const GROUPS: ServiceGroup[] = [
     title: 'Elbise Dikimi',
     description:
       'Kumaşınızı getirin veya atölye kataloğumuzdan seçin — ölçünüze özel, prova destekli dikim. Günlük, davetiye ve özel gün kıyafetleri için.',
-    image: '/images/elbise-dikimi/sea-dress.jpg',
+    image: '/images/elbise-dikimi/antalya-terzi-yazlik-elbise-dikimi.jpg',
     imageAlt: 'Özel dikim beyaz keten elbise, deniz manzarası önünde',
     rows: [
       { name: 'Günlük elbise (özel ölçü)', price: 'Fotoğrafa ve istediğiniz modele göre', note: 'Süre modele ve adede göre' },
@@ -41,7 +41,7 @@ const GROUPS: ServiceGroup[] = [
     title: 'Tadilat & Daraltma',
     description:
       'Mevcut kıyafetiniz vücudunuza tam otursun. Bel, göğüs ve sırt daraltma; askı ve kol ayarı — her tadilat el işçiliğiyle tamamlanır.',
-    image: '/images/elbise-dikimi/atelier-dress.jpg',
+    image: '/images/elbise-dikimi/antalya-terzi-elbise-dikimi-atolye.jpg',
     imageAlt: 'Atölyede prova edilen bağcıklı beyaz keten elbise',
     rows: [
       { name: 'Bel daraltma', price: '200 TL\'den' },
@@ -56,7 +56,7 @@ const GROUPS: ServiceGroup[] = [
     title: 'Paça, Fermuar & Tamirat',
     description:
       'Günlük giyimin en sık ihtiyaç duyduğu işler. Randevulu çalışırız; tadilat aynı gün teslim edilir, acil işler 1–2 saatte hazırlanır.',
-    image: '/images/elbise-dikimi/jumpsuit-harbor.jpg',
+    image: '/images/elbise-dikimi/antalya-terzi-tulum-ozel-dikim.jpg',
     imageAlt: 'Beyaz keten tulum giyen kadın, liman manzarası önünde',
     rows: [
       { name: 'Paça kısaltma (pantolon/etek)', price: '200 TL\'den', note: 'Aynı gün' },
@@ -666,7 +666,7 @@ export default function ElbiseDikimiClient() {
       <div className="hero" ref={heroRef}>
         <img
           className="hero-img"
-          src="/images/elbise-dikimi/hero-couple.jpg"
+          src="/images/elbise-dikimi/antalya-terzi-elbise-takim-ozel-dikim.jpg"
           alt="Antalya'da özel dikim beyaz keten kıyafetler giyen çift"
           width={1600}
           height={1067}

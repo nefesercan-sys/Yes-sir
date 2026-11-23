@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     title: 'Üniforma Üretimi Antalya · Otel Aşçı Garson Okul · Seri İmalat | Terzi Can',
     description: "Otel, resepsiyon, aşçı, garson, güvenlik, okul, sağlık. Tasarım + seri imalat + nakış.",
     url: SITE_URL, type: 'website',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   other: { 'geo.region': 'TR-07', 'geo.placename': 'Konyaaltı, Antalya', 'geo.position': '36.8572868;30.5970193', ICBM: '36.8572868, 30.5970193' },
@@ -151,7 +151,7 @@ export default function UniformaUretimiPage() {
 
         {/* HERO */}
         <section style={{ background: 'linear-gradient(135deg,#1C1814,#2E2820)', padding: '4.5rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/uniforma.webp') center/cover", opacity: .1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: "url('/gorseller/antalya-uniforma-dikim-uretim.webp') center/cover", opacity: .1 }} />
           <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
             <div style={{ fontSize: '.68rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#D4B07A', marginBottom: '1rem' }}>
               🏭 Terzi Can · Antalya · Üniforma Üretimi

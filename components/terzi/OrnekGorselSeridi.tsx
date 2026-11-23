@@ -2,7 +2,7 @@
 // Görseller yapay zekâ ile üretilmiştir; "örnek görsel" etiketi ve not her zaman gösterilir.
 import { jsonLdString } from '@/lib/json-ld';
 import { altMetinler, type Konu } from '@/lib/alt-basliklar';
-import { GORSELLER, gorselMetin, ORNEK_ETIKET, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
+import { GORSELLER, gorselMetin, ORNEK_ETIKET, ALT_EK, ORNEK_BASLIK, ORNEK_NOT, type GLang, type GorselAnahtar } from '@/lib/ornek-gorseller';
 
 export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koyu', baslik, sayfaUrl, base = '', konu, yer = 'Antalya' }: {
   lang?: GLang; anahtarlar: GorselAnahtar[]; tema?: 'koyu' | 'acik'; baslik?: string; sayfaUrl?: string; base?: string; konu?: Konu | Konu[]; yer?: string;
@@ -17,7 +17,7 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
     '@graph': anahtarlar.map((k) => {
       const g = GORSELLER[k]; const m = gorselMetin(k, lang);
       return { '@type': 'ImageObject', '@id': `${sayfaUrl}#img-${k}`, contentUrl: `${base}${g.src}`, url: `${base}${g.src}`,
-        name: m.baslik, caption: m.aciklama, description: `${m.baslik} (${ORNEK_ETIKET[lang]})`, width: g.w, height: g.h, inLanguage: lang };
+        name: m.baslik, caption: m.aciklama, description: `${m.baslik} – ${ALT_EK[lang]} (${ORNEK_ETIKET[lang]})`, width: g.w, height: g.h, inLanguage: lang };
     }),
   } : null;
   return (
@@ -31,7 +31,7 @@ export default function OrnekGorselSeridi({ lang = 'tr', anahtarlar, tema = 'koy
             const g = GORSELLER[k]; const m = gorselMetin(k, lang);
             return (
               <figure key={k} style={{ margin: 0, background: kart, border: `1px solid ${kenar}`, borderRadius: 12, overflow: 'hidden' }}>
-                <img src={g.src} alt={`${m.baslik} (${ORNEK_ETIKET[lang]})`} title={m.baslik} width={g.w} height={g.h} loading="lazy" decoding="async"
+                <img src={g.src} alt={`${m.baslik} – ${ALT_EK[lang]} (${ORNEK_ETIKET[lang]})`} title={m.baslik} width={g.w} height={g.h} loading="lazy" decoding="async"
                   style={{ width: '100%', height: 'auto', aspectRatio: '3 / 2', objectFit: 'cover', display: 'block' }} />
                 <figcaption style={{ padding: '.9rem 1.1rem 1.1rem' }}>
                   <strong style={{ display: 'block', fontSize: '1rem', marginBottom: '.2rem' }}>{m.baslik}</strong>

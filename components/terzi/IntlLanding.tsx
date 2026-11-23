@@ -14,7 +14,7 @@ import { jsonLdString } from '@/lib/json-ld';
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
 export const UPDATED = '2026-10-29';
-export const OG_DEFAULT = `${SITE}/og/terzi-can.jpg`;
+export const OG_DEFAULT = `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 const waLink = (text: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
 export function intlJsonLd(lang: ILang) {

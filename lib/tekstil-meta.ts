@@ -11,7 +11,7 @@ export function tekstilMetadata(topic: Topic, lang: Lang): Metadata {
     ? Object.fromEntries(PROMO_ALL.map((x) => [x.hreflang, `${BASE}${x.path}`]))
     : { ...Object.fromEntries(LANGS.map((l) => [HREFLANG[l], `${BASE}${URLS[topic][l]}`])), ...(topic === 'keten' || topic === 'tekstil' ? sixAlt(topic) : {}) };
   languages['x-default'] = `${BASE}${URLS[topic].tr}`;
-  const ogImage = `${BASE}/og/terzi-can.jpg`;
+  const ogImage = `${BASE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
   return {
     metadataBase: new URL(BASE),
     title: { absolute: c.t },

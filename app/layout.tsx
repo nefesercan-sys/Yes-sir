@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://swaphubs.com/og/terzi-can.jpg",
+        url: "https://swaphubs.com/og/antalya-terzi-can-dikim-tamir-tadilat.jpg",
         width: 1200,
         height: 630,
         alt: "Terzi Can Antalya — terzi, tadilat, özel dikim",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Terzi Can Antalya — Terzi, Tadilat, Özel Dikim | Terzi Can",
     description: "Antalya terzi, tadilat, özel dikim ve tekstil üretimi. Eve ve otele servis.",
-    images: ["https://swaphubs.com/og/terzi-can.jpg"],
+    images: ["https://swaphubs.com/og/antalya-terzi-can-dikim-tamir-tadilat.jpg"],
   },
 
   robots: {

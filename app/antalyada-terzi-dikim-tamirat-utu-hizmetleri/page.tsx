@@ -1,6 +1,7 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
@@ -14,7 +15,7 @@ const PHONE     = '+90 531 898 64 18';
 const WHATSAPP_LINK = `https://wa.me/905318986418?text=Merhaba,%20Antalya%20terzi%20hizmetiniz%20hakkında%20bilgi%20almak%20istiyorum.`;
 // DÜZELTME: "/og/antalya-tailor-online.jpg" public/ içinde yoktu (kırık paylaşım
 // önizlemesi). Gerçekten var olan dosyaya bağlandı.
-const OG_IMAGE  = `${BASE_URL}/og/terzi-can.jpg`;
+const OG_IMAGE  = `${BASE_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 const GBP_URL   = 'https://www.google.com/maps?cid=6436895271281342624'; // TERZİ Can - Antalya Tailor Service (Google Business Profile)
 
 // GBP'den doğrulanmış gerçek veriler — SAYI olarak tanımlanmalı, string TODO bırakılmamalı
@@ -254,7 +255,7 @@ export const metadata: Metadata = {
     siteName: 'Terzi Can Antalya',
     locale: 'tr_TR',
     type: 'website',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630, alt: 'Antalya Konyaaltı Lara Muratpaşa Terzi Hizmetleri' }],
   },
   other: {
     'geo.region': 'TR-07',
@@ -353,10 +354,10 @@ const processSteps = [
 // public/images/terzi/ altında hiç yoktu, galeri kırık gösteriyordu.
 // public/ içinde zaten gerçek atölye fotoğrafları mevcuttu — onlara bağlandı.
 const galleryImages = [
-  { src: '/images/terzi/card-atolye.jpg', alt: 'Terzi Can, Konyaaltı Antalya dikim ve tadilat atölyesi' },
-  { src: '/images/terzi/card-tadilat.jpg', alt: 'Antalya terzi atölyesinde kıyafet tamiri ve tadilat çalışması' },
-  { src: '/images/terzi/card-bay-terzi.jpg', alt: 'Terzi Can erkek terzi hizmeti, takım elbise dikim ve tadilat' },
-  { src: '/images/terzi/card-gelinlik.jpg', alt: 'Gelinlik ve abiye tadilat detay çalışması Antalya terzi' },
+  { src: '/images/terzi/antalya-terzi-dikis-atolyesi.jpg', alt: 'Terzi Can, Konyaaltı Antalya dikim ve tadilat atölyesi' },
+  { src: '/images/terzi/antalya-terzi-tamir-tadilat.jpg', alt: 'Antalya terzi atölyesinde kıyafet tamiri ve tadilat çalışması' },
+  { src: '/images/terzi/antalya-bay-terzi-takim-elbise.jpg', alt: 'Terzi Can erkek terzi hizmeti, takım elbise dikim ve tadilat' },
+  { src: '/images/terzi/antalya-terzi-gelinlik-abiye-tadilati.jpg', alt: 'Gelinlik ve abiye tadilat detay çalışması Antalya terzi' },
 ];
 
 // Mahalle kartları tek kaynaktan (lib/turkiye-lokasyonlar.ts): bağlı ilçeye göre doğru URL
@@ -662,6 +663,7 @@ export default function GeminiOptimizedTailorPage() {
         </footer>
 
       </main>
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['dikis-makinesi', 'paca-kisaltma', 'abiye-askida']} sayfaUrl={PAGE_URL} />
       <ReviewsBlock lang="tr" />
     </>
   );

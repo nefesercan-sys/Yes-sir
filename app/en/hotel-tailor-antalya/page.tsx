@@ -171,7 +171,7 @@ export default function HotelTailorAntalyaPage() {
             {/* Image SEO Element */}
             <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(184,151,90,0.3)' }}>
               <img 
-                src="/gorseller/eve-gelen-terzi.webp" 
+                src="/gorseller/antalya-eve-otele-gelen-terzi.webp" 
                 alt="Tailor with measuring tape and garment bag, hotel visit service in Antalya (illustrative image)" 
                 width={800} height={360} loading="lazy" decoding="async"
                 style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}

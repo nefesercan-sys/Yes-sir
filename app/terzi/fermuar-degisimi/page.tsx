@@ -2,6 +2,7 @@ import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
@@ -393,6 +394,7 @@ export default function FermuarDegisimiPage() {
         </div>
       </section>
     <KargoFermuarKutusu lang="tr" />
+    <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['fermuar-degisimi', 'polar-yelek', 'dikis-makinesi']} sayfaUrl={'https://swaphubs.com/terzi/fermuar-degisimi'} />
     <ReviewsBlock lang="tr" schema />
     </main>
   );

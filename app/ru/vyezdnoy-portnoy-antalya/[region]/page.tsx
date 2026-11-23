@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `Ателье и портной в ${r.name} | Доставка в отель`;
   const desc = `Срочный ремонт и подгонка одежды во время отпуска. Ателье Terzi Can предлагает профессиональные услуги портного с выездом в отели ${r.name}. Пишите в WhatsApp!`;
-  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
+  const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -80,7 +80,7 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `Выездной портной ${r.name} — Забор и Доставка`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
+        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,

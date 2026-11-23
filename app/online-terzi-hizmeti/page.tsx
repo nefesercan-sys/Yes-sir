@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og/terzi-can.jpg',
+        url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg',
         width: 1200,
         height: 630,
         alt: "Terzi Can Online Terzi Hizmeti — Ölçüye Özel Dikim",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     site: '@swaphubs',
     title: "Terzi Can Online Terzi | Antalya'da Teslim, Yurt Dışına Kargo",
     description: "WhatsApp üzerinden ölçü alımı, özel dikim, kapıya teslimat.",
-    images: ['/og/terzi-can.jpg'],
+    images: ['/og/antalya-terzi-can-dikim-tamir-tadilat.jpg'],
   },
   robots: {
     index: true,
@@ -99,7 +99,7 @@ const jsonLd = {
         url: 'https://swaphubs.com',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://swaphubs.com/logo.png',
+          url: 'https://swaphubs.com/terzi-can-antalya-terzi-logo.png',
           width: 512,
           height: 512,
         },
@@ -119,8 +119,8 @@ const jsonLd = {
       telephone: '+905318986418',
       email: 'tekstil@swaphubs.com',
       priceRange: '₺₺',
-      image: ['https://swaphubs.com/og/terzi-can.jpg'],
-      logo: 'https://swaphubs.com/logo.png',
+      image: ['https://swaphubs.com/og/antalya-terzi-can-dikim-tamir-tadilat.jpg'],
+      logo: 'https://swaphubs.com/terzi-can-antalya-terzi-logo.png',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',

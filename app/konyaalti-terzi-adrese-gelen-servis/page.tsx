@@ -1,6 +1,7 @@
 // app/konyaalti-terzi-adrese-gelen-servis/page.tsx
 import type { Metadata } from 'next'
 import ReviewsBlock from '@/components/ReviewsBlock';
+import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import FaqBlock from '@/components/FaqBlock';
 import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -50,7 +51,7 @@ const jsonLd = {
       priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD',
       paymentAccepted: 'Cash, Credit Card, Bank Transfer',
-      image: [`${HOME}/og/terzi-can.jpg`],
+      image: [`${HOME}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Hurma Mahallesi',
@@ -151,7 +152,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     type: 'website',
     locale: 'tr_TR',
-    images: [{ url: '/og/terzi-can.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og/antalya-terzi-can-dikim-tamir-tadilat.jpg', width: 1200, height: 630 }],
   },
   robots: {
     index: true,
@@ -640,6 +641,7 @@ export default function AntalyaTerziPage() {
         </footer>
 
       <FaqBlock heading="Sık Sorulan Sorular" items={FAQ.map(([q, a]) => ({ q, a }))} />
+      <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['eve-gelen-terzi', 'paca-kisaltma', 'dikis-makinesi']} sayfaUrl={'https://swaphubs.com/konyaalti-terzi-adrese-gelen-servis'} />
       <ReviewsBlock lang="tr" />
     </main>
     </>

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   // Dinamik SEO başlığı ve açıklaması
   const title = `Tailor & Alteration Service in ${r.name} | Hotel Pickup`;
   const desc = `Need urgent clothing alterations during your holiday? Terzi Can provides professional tailoring, hemming, and repair services with hotel pickup and delivery in ${r.name}. Contact us via WhatsApp!`;
-  const ogImage = `${HOME_URL}/og/terzi-can.jpg`;
+  const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
@@ -83,7 +83,7 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         '@id': `${url}#service`,
         name: `Hotel Tailor ${r.name} — Pickup & Delivery`,
         serviceType: 'Clothing Alterations & Mobile Tailoring',
-        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/terzi-can.jpg`, priceRange: '$$' },
+        provider: { '@type': 'LocalBusiness', name: 'TERZİ Can - Antalya Tailor Service', telephone: PHONE_TEL, url: `${HOME_URL}/terzi`, image: `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`, priceRange: '$$' },
         areaServed: { '@type': 'Place', name: `${r.name}, Antalya` },
         description: seoContent.body2,
         url,

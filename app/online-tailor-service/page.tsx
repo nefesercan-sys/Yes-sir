@@ -15,7 +15,7 @@ const SITE_URL  = `${BASE_URL}/online-tailor-service`;
 const PHONE     = '+90 531 898 64 18';
 const PHONE_E   = '+905318986418';
 const TODAY = '2026-10-29';
-const OG_IMG    = `${BASE_URL}/og/terzi-can.jpg`;
+const OG_IMG    = `${BASE_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
 // Tek konum: Hurma, Konyaaltı (Google Business Profile)
 const GBP1 = {
