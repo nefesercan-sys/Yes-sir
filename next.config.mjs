@@ -58,6 +58,10 @@ const nextConfig = {
         { source: `/${slug}/:path*`, destination: '/terzi', permanent: true },
       ]),
       { source: '/terzi-talep', destination: '/terzi/iletisim', permanent: true },
+      // Search Console yönlendirme hatası (23 Kasım): eski şehir sayfaları ve eski ölçü rehberi adresi
+      { source: '/terzi/bursa', destination: '/online-terzi-hizmeti', permanent: true },
+      { source: '/terzi/adana', destination: '/online-terzi-hizmeti', permanent: true },
+      { source: '/online-terzi-hizmeti/olcu-rehberi', destination: '/terzi/olcu-alma-rehberi', permanent: true },
       // Kuru temizleme/ütü hizmeti şimdilik verilmiyor (geçici 307; geri açmak için bu kaydı silin ve sitemap-terzi.xml/route.ts + link listelerine ekleyin).
       // Kuru temizleme adresi taşınan sayfa (adreste kuru temizleme geçiyordu, hizmet verilmiyor)
       { source: '/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', destination: '/konyaalti-terzi-adrese-gelen-servis', permanent: true },
