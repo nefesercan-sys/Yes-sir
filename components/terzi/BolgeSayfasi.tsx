@@ -25,7 +25,6 @@ type Props = {
   komsuLokasyonlar: { slug: string; ad: string }[];
   komsuHref: (slug: string) => string;
   /** MongoDB'den o bölgenin çevresinde sayılan GERÇEK aktif talep sayısı. */
-  aktifTalepSayisi: number;
 };
 
 // Bölgenin açısına göre öne çıkan süreç (DISTRICT_FACTS "needs" metnindeki işlerle uyumlu)
@@ -35,7 +34,7 @@ const ONCELIK: Record<string, ProcId[]> = {
   konyaalti: ['kiyafet-tamiri'], muratpasa: ['gelinlik-abiye'], lara: ['fermuar'], kundu: ['takim'], aksu: ['mont'], belek: ['takim'], side: ['fermuar'], beldibi: ['etek'],
 };
 
-export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokasyonlar, komsuHref, aktifTalepSayisi }: Props) {
+export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokasyonlar, komsuHref }: Props) {
   // FAQ bu bileşende basılmaz: sayfa kendi FaqBlock'u ile görünür SSS + FAQPage şemasını tek kez verir (çift FAQPage olmasın).
   const d = findDistrict(slug);
   const loc = d?.loc.tr ?? trLoc(lokasyonAdi);
@@ -75,11 +74,6 @@ export default function BolgeSayfasi({ tip, slug, lokasyonAdi, blurb, komsuLokas
             </a>
           </div>
           {/* GERÇEK, CANLI VERİ — MongoDB'den o an sayılan aktif talep sayısı */}
-          {aktifTalepSayisi > 0 && (
-            <p style={{ color: 'rgba(255,255,255,.6)', fontSize: '.8rem', marginTop: '1.2rem' }}>
-              📍 Şu anda {lokasyonAdi} çevresinde {aktifTalepSayisi} aktif terzi talebi var.
-            </p>
-          )}
         </div>
       </section>
 
