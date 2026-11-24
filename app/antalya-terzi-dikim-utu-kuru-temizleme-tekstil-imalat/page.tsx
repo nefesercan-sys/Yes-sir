@@ -1,5 +1,6 @@
 // app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
+import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
 import { reviewSchema } from '@/lib/reviews';
@@ -16,7 +17,7 @@ const TERZI_URL = 'https://swaphubs.com/terzi'
 const PHONE     = '+90 531 898 64 18'
 const PHONE_E   = '+905318986418'
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`
-const TODAY = new Date().toISOString().split('T')[0]
+const TODAY = lastMod('/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat', '2026-11-24'); // gerçek içerik tarihi (lib/lastmod.json); derleme günü değil
 
 // ── DÜZELTME: Doğrulanmış tek GBP kaydı (cid=6436895271281342624) ──
 // Önceki sürümde farklı bir CID (1496201377277644027) kullanılıyordu.

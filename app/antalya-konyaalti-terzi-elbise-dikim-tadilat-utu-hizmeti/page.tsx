@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -18,7 +19,7 @@ const PAGE_URL  = `${BASE_URL}/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-
 const TERZI_URL = `${BASE_URL}/terzi`;
 const PHONE_DISPLAY = '+90 531 898 64 18';
 const PHONE_TEL     = '+905318986418';
-const TODAY = '2026-10-07'; // içerik gerçekten değiştiğinde elle güncelle
+const TODAY = lastMod('/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti', '2026-10-07'); // içerik gerçekten değiştiğinde elle güncelle
 const OG_IMAGE = `${BASE_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
 // ── Google Business Profile (tek konum: Hurma, Konyaaltı) ─────────────────

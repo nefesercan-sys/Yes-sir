@@ -1,6 +1,7 @@
 // swaphubs.com — "Siparişe özel dikim, dünyaya kargo" sayfası (10 dil). Veri: lib/ozel-dikim.ts. Sunucu bileşeni; talep formu istemci bileşenidir.
 // Yapay zeka/sesli arama için: kısa cevap + telefon (düz metin) + tel: + önceden doldurulmuş wa.me.
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { lastMod } from '@/lib/lastmod';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -33,7 +34,7 @@ export function ozelJsonLd(lang: OzelLang) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
-        dateModified: UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
+        dateModified: lastMod(url, UPDATED), about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
         breadcrumb: { '@id': `${url}#breadcrumb` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc', '.short-answer'] },
       },

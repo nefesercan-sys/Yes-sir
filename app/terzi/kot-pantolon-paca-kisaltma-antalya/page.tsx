@@ -46,13 +46,11 @@ const DATA: KonuData = {
   diger: [
     { href: '/terzi/kot-pantolon-daraltma-antalya', ad: 'Kot pantolon daraltma' },
     { href: '/terzi/orijinal-kot-paca-yapimi-antalya', ad: 'Orijinal kot paça' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
+    { href: '/terzi/orijinal-kot-paca-yapimi-antalya', ad: 'Orijinal kot paça yapımı' },
+    { href: '/terzi/kot-pantolon-daraltma-antalya', ad: 'Kot pantolon daraltma' },
+    { href: '/terzi/kot-etek-kisaltma-daraltma-antalya', ad: 'Kot etek kısaltma ve daraltma' },
+    { href: '/terzi/kot-ceket-mont-tadilati-antalya', ad: 'Kot ceket ve mont tadilatı' },
+    { href: '/terzi/fermuar-degisimi', ad: 'Fermuar değişimi' },
   ],
   ctaBaslik: 'Kot pantolonunuz mu uzun?',
 };

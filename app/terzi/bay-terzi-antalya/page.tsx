@@ -228,7 +228,7 @@ export default function BayTerziPage() {
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <p style={{ fontSize: '.7rem', letterSpacing: '.18em', textTransform: 'uppercase', color: '#B8975A', marginBottom: '1rem' }}>Diğer Hizmetler</p>
             <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
-              {[['Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],['Fermuar Değişimi','/terzi/fermuar-degisimi-antalya'],['← Tüm Hizmetler','/terzi']].map(([l,h])=>(
+              {[['Bayan Terzi Antalya','/terzi/bayan-terzi-antalya'],['Paça Kısaltma','/terzi/paca-kisaltma-antalya'],['Fermuar Değişimi','/terzi/fermuar-degisimi'],['← Tüm Hizmetler','/terzi']].map(([l,h])=>(
                 <Link key={l} href={h} style={{ border: '1px solid rgba(184,151,90,.25)', color: '#8A6E3E', padding: '.4rem .9rem', textDecoration: 'none', fontSize: '.78rem', borderRadius: '2px', background: '#fff' }}>{l}</Link>
               ))}
             </div>

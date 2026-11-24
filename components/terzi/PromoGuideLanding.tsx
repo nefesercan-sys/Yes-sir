@@ -1,6 +1,7 @@
 // swaphubs.com — Promosyon tekstili ve baskılı bez çanta rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-promo.ts. Sunucu bileşeni, stil inline.
 // TR/EN/RU/DE karşılıkları components/tekstil/TekstilLanding.tsx ('promo' konusu) ile üretilir.
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
+import { lastMod } from '@/lib/lastmod';
 import Link from 'next/link';
 import { INTL, type ILang } from '@/lib/intl';
 import { PROMO, PROMO_ALL, promoUrl } from '@/lib/intl-promo';
@@ -21,7 +22,7 @@ export function promoJsonLd(lang: ILang) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang, dateModified: UPDATED, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT }, isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: BASE } },
+      { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang, dateModified: lastMod(url, UPDATED), primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT }, isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: BASE } },
       { '@type': 'Service', name: c.h1, description: c.desc, inLanguage: lang, provider, areaServed: { '@type': 'City', name: 'Antalya' } },
       { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Terzi Can', item: BASE }, { '@type': 'ListItem', position: 2, name: c.crumb, item: url }] },
       { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: c.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },

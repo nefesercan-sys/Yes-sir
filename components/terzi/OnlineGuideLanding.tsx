@@ -1,6 +1,7 @@
 // swaphubs.com — "Online terzi hizmeti" sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-online.ts. Sunucu bileşeni.
 // Yapay zeka/sesli arama için: kısa cevap + telefon (düz metin) + tel: + önceden doldurulmuş wa.me, sayfanın üstünde ve altında.
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { lastMod } from '@/lib/lastmod';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { PHONE, PHONE_TEL, MAPS, SITE, BUSINESS_ID } from '@/lib/seo-data';
@@ -23,7 +24,7 @@ export function onlineJsonLd(lang: ILang) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
-        dateModified: UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
+        dateModified: lastMod(url, UPDATED), about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
         isPartOf: { '@id': `${SITE}${iUrl(lang)}#article` },
         breadcrumb: { '@id': `${url}#breadcrumb` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc', '.short-answer'] },

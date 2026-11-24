@@ -6,6 +6,7 @@
 // Siteye özgü ayarlar yalnızca aşağıdaki SITE_CFG bloğundadır.
 // ============================================================
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { lastMod } from '@/lib/lastmod';
 import type { Metadata } from 'next';
 import { crossCanonical } from '@/lib/cross-canonical';
 import {
@@ -291,7 +292,7 @@ function buildJsonLd(lang: Lang) {
       },
       {
         '@type': 'ContactPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
-        dateModified: LAST_UPDATE,
+        dateModified: lastMod(url, LAST_UPDATE),
         mainEntity: { '@id': SITE_CFG.businessId },
         about: { '@id': SITE_CFG.businessId },
         breadcrumb: { '@id': `${url}#breadcrumb` },

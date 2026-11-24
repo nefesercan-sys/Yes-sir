@@ -1,5 +1,6 @@
 // swaphubs.com — Hizmetler, kumaşlar ve yurt dışı sipariş rehberi (ES/FR/PL/UK/NL/AR). Veri: lib/intl-svc.ts. Sunucu bileşeni, stil inline.
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { lastMod } from '@/lib/lastmod';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
 import { KARGO_KISA_HZ, type KargoKisaHz } from '@/lib/kargo-kisa';
@@ -27,7 +28,7 @@ export function konuJsonLd(lang: ILang, t: KonuId | HzId, isHz = false) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
-        dateModified: UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
+        dateModified: lastMod(url, UPDATED), about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
         isPartOf: { '@id': `${SITE}${iUrl(lang)}#article` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
       },
@@ -94,6 +95,10 @@ export default function KonuGuideLanding({ lang, topic, hz }: { lang: ILang; top
           <p style={{ margin: '0 0 .8rem', fontSize: '.9rem' }}><strong>{ui.more}:</strong>{' '}
             <Link href={svcgUrl(lang)} style={{ color: C.green }}>{SVCG[lang].h1}</Link>
             {KONU_IDS.filter((x) => x !== topic).map((x) => <span key={x}>{' · '}<Link href={konuUrl(lang, x)} style={{ color: C.green }}>{KONU[lang][x].h1}</Link></span>)}
+          </p>
+          {/* Aynı dildeki tüm iş rehberleri (bu sayfalara başka iç bağlantı yoktu) */}
+          <p style={{ margin: '0 0 .8rem', fontSize: '.88rem' }}><strong>{HZ_UI[lang].more}:</strong>{' '}
+            {HZ_IDS.filter((x) => x !== hz).map((x, i) => <span key={x}>{i > 0 && ' · '}<Link href={hzUrl(lang, x)} style={{ color: C.green }}>{HZ[lang][x].h1}</Link></span>)}
           </p>
           <p style={{ margin: 0, fontSize: '.92rem' }}>
             <a href={`tel:${PHONE_TEL}`} style={{ color: C.green }} dir="ltr">☎ {g.call}: {PHONE}</a>

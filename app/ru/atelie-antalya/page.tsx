@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { lastMod } from '@/lib/lastmod';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
 import type { Metadata } from 'next'
@@ -25,7 +26,7 @@ const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
 // (Name-Address-Phone) tutarlılığını bozarak Local SEO'yu zayıflatır.
 const PHONE = '+90 531 898 64 18'
 const PHONE_E164 = '+905318986418'
-const TODAY = '2026-06-30'
+const TODAY = lastMod('/ru/atelie-antalya', '2026-06-30')
 const OG_IMAGE = `${SITE_URL}/images/elbise-dikimi/antalya-terzi-kruvaze-elbise-dikimi.jpg`
 
 // Gerçek Google Maps kaydı (maps.app.goo.gl linkinden çözümlendi)
@@ -56,8 +57,7 @@ export const metadata: Metadata = {
     languages: {
       'ru': PAGE_URL,
       'tr': `${SITE_URL}/terzi`,
-      'en': `${SITE_URL}/online-tailor-service`,
-      'de': `${SITE_URL}/de/online-schneiderservice-antalya`,
+      // en/de çevrimiçi hizmet sayfaları bu sayfayı karşılık göstermiyor (kendi kümeleri var): tek yönlü hreflang verilmez
       'x-default': `${SITE_URL}/terzi`,
     },
   },

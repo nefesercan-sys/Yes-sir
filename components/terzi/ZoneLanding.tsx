@@ -1,5 +1,6 @@
 // swaphubs.com — Otel bölgesi derinlik sayfası (ES/FR/PL/UK/NL/AR). Veri: lib/intl-zones.ts. Sunucu bileşeni, stil inline.
 import QuickActionBanner from '@/components/QuickActionBanner';
+import { lastMod } from '@/lib/lastmod';
 import { ZONE_H1, zoneH1Index } from '@/lib/zone-h1';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
@@ -27,7 +28,7 @@ export function zoneJsonLd(lang: ILang, zone: ZoneSlug) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title(z.name), description: c.desc(z.name), inLanguage: lang,
-        dateModified: UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
+        dateModified: lastMod(url, UPDATED), about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_DEFAULT },
         isPartOf: { '@id': `${SITE}${iUrl(lang)}#article` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
       },

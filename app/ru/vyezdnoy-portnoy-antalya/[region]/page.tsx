@@ -112,6 +112,13 @@ export default async function BelekLaraGuzelobaSideRuPage({ params }: { params: 
         maps={MAPS} 
         seoContent={seoContent} 
       />
+      <nav aria-label="Другие страницы" style={{ maxWidth: 760, margin: '1.5rem auto', padding: '0 1rem', fontSize: '.92rem', lineHeight: 1.7 }}>
+        <strong>Подробнее о выезде в отель:</strong>{' '}
+        <a href="/ru/kak-rabotaet-vyezdnoy-portnoy-antalya">Как работает выездной портной</a>
+        {' · '}<a href="/ru/atelie-antalya-online">Ремонт одежды по почте</a>
+        {' · '}<a href="/ru/chasto-zadavaemye-voprosy-portnoy-antalya">Частые вопросы</a>
+        {' · '}<a href="/ru/kontakty-portnoy-antalya">Контакты</a>
+      </nav>
       <ReviewsBlock lang="ru" schema />
     </>
   );

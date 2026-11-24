@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { zoneAlt } from '@/lib/intl-zones';
@@ -19,7 +20,7 @@ const HOME_URL = 'https://swaphubs.com';
 const PHONE = '+90 531 898 64 18';
 const PHONE_E164 = '+905318986418';
 const WA_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent('Hallo, ich brauche einen mobilen Schneider. Mein Standort: ')}`;
-const TODAY = new Date().toISOString().split('T')[0];
+const TODAY = lastMod('/de/schneider-service-hotel-antalya', '2026-11-24'); // gerçek içerik tarihi (lib/lastmod.json); derleme günü değil
 const TURN = `${DURATION.de.normalShort} · ${DURATION.de.urgentShort}`; // lib/business.ts DURATION (tek kaynak)
 
 const HOTELS = [
