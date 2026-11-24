@@ -27,6 +27,7 @@ import {
   type Lang, type District, type Service, type TimeKey,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
 import { isFar, FAR_TAG, farDesc } from '@/lib/uzak-bolge';
+import { areaKwDesc, serviceKwDesc } from '@/lib/kw-desc';
 import { angleFor, angleTitles, angleDescs, angleKeywords } from '@/lib/seo-angles';
 import './seo-landing.css';
 import { fgNearDistrict, fgServiceMeta, eurFromText, EUR_FROM } from '@/lib/fg-meta';
@@ -205,7 +206,7 @@ const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
 };
 function districtCopy(lang: Lang, d: District) {
   const r0 = _districtCopy(lang, d);
-  const r = isFar(d.slug) ? { ...r0, desc: farDesc(lang, d.name[lang]) } : r0;
+  const r = isFar(d.slug) ? { ...r0, desc: farDesc(lang, d.name[lang]) } : lang === 'tr' ? r0 : { ...r0, desc: areaKwDesc(lang, d.name[lang], 'b', r0.desc) };
   return { ...r, title: pickFit([...SW_DIST_TITLES[lang].map((f) => f(d.name[lang])), r.title], 60) };
 }
 function _districtCopy(lang: Lang, d: District) {
@@ -421,8 +422,10 @@ function serviceCopy(lang: Lang, s: Service) {
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
   const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталии: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
   const swTitle = pickFit([...swT, title], 60);
-  if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
-  return { nm, title: swTitle, desc, kw: [] as string[] };
+  // Yabancı dillerde açıklama anahtar kelimeli kalıptan (lib/kw-desc.ts, swaphubs varyantı 'b'); başlık değişmez.
+  const d2 = lang === 'tr' ? desc : serviceKwDesc(lang, nm, 'b', desc);
+  if (o) return { nm, title: swTitle, desc: d2, kw: o.kw }; // swaphubs: açıklama terzihizmeti ile aynı olmasın
+  return { nm, title: swTitle, desc: d2, kw: [] as string[] };
 }
 
 function serviceFaq(lang: Lang, s: Service): [string, string][] {

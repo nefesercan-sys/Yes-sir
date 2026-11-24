@@ -29,9 +29,9 @@ export function farNote(lang: FarLang, n: string): string {
 /** Arama sonucu açıklaması (telefon yok, ~150 karakter). */
 export function farDesc(lang: FarLang, n: string): string {
   switch (lang) {
-    case 'tr': return `${n} terzi: atölyemiz Konyaaltı'nda. İşin durumuna göre gelebiliriz ya da atölyeye gelebilirsiniz. Fotoğraf gönderin, fiyatı söyleyelim.`;
-    case 'en': return `Tailor for ${n}: our workshop is in Konyaaltı. Depending on the job we come to you, or you visit us. Send a photo, get a price.`;
-    case 'ru': return `Портной для района ${n}: мастерская в Коньяалты. По договорённости приедем, или приходите к нам. Пришлите фото — назовём цену.`;
-    case 'de': return `Schneider für ${n}: Werkstatt in Konyaaltı. Je nach Auftrag kommen wir zu Ihnen oder Sie zu uns. Foto senden, Preis erhalten.`;
+    case 'tr': return `Terzi Can, ${n} için: atölye Konyaaltı Hurma'da; işin durumuna göre biz geliriz ya da siz atölyeye gelirsiniz. Fotoğrafla fiyat alın.`;
+    case 'en': return `Terzi Can for ${n}: workshop in Hurma, Konyaaltı. We visit by arrangement, or you bring the garment to us. Photo on WhatsApp, price back.`;
+    case 'ru': return `Terzi Can для района ${n}: мастерская в Хурме (Коньяалты). Выезд по договорённости или приходите сами. Фото в WhatsApp — цена в ответ.`;
+    case 'de': return `Terzi Can für ${n}: Werkstatt in Hurma, Konyaaltı. Besuch nach Absprache, oder Sie bringen das Stück vorbei. Foto per WhatsApp, Preis zurück.`;
   }
 }

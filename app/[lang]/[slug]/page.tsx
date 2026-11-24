@@ -22,6 +22,7 @@ import { ILANGS, INTL, SLUG, iUrl, isILang } from '@/lib/intl';
 import { ZCOPY, ZONE_SLUGS, parseZone, zoneData, zoneSlug, zoneUrl } from '@/lib/intl-zones';
 import { SITE } from '@/lib/seo-data';
 import { zoneSeoTitles } from '@/lib/bolge-hizmet-matrisi-turist';
+import { areaKwDesc } from '@/lib/kw-desc';
 
 // Yalnızca tanımlı rehber ve otel bölgesi sayfaları üretilir; diğer iki-segmentli yollar 404 olur.
 export const dynamicParams = false;
@@ -161,7 +162,8 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const zc = ZCOPY[lang];
   const seoT = zone === 'antalya' ? [] : zoneSeoTitles(lang, z.name, ZONE_SLUGS.indexOf(zone)); // bölgeye göre farklı, hizmet kelimeli başlık
   const title = seoT.find((t) => t.length <= 60) ?? zc.title(z.name);
-  const description = fitDesc(withAsk(zc.desc(z.name), lang), 158, lang);
+  // Anahtar kelimeli kalıp (lib/kw-desc.ts, swaphubs varyantı 'b')
+  const description = fitDesc((zone === 'antalya' ? withAsk(zc.desc(z.name), lang) : areaKwDesc(lang, z.name, 'b', withAsk(zc.desc(z.name), lang))), 158, lang);
   const url = `${SITE}${zoneUrl(lang, zone)}`;
   return {
     metadataBase: new URL(SITE),

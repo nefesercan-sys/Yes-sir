@@ -8,6 +8,7 @@ import { OTEL_BOLGELERI, bulOtelBolgesi } from '@/lib/otel-bolgeleri';
 import OtelBolgeSayfasi from '@/components/terzi/OtelBolgeSayfasi';
 import { jsonLdString } from '@/lib/json-ld';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { hotelKwDesc } from '@/lib/kw-desc';
 
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
@@ -28,12 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `Änderungsschneiderei ${r.name}: Hotelabholung | Terzi Can`;
   const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel, Kürzen ab ₺200 (~10 €), Dauer je nach Arbeit. Foto per WhatsApp senden.`;
+  const kwd = hotelKwDesc('de', r.name, 'b', desc); // anahtar kelimeli kalıp (lib/kw-desc.ts)
   const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 
   return {
     metadataBase: new URL(HOME_URL),
     title: { absolute: title },
-    description: desc,
+    description: kwd,
     keywords: [
       `Schneider ${r.name}`, 
       `Änderungsschneiderei ${r.name}`, 
@@ -52,8 +54,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
         'x-default': `https://swaphubs.com/en/hotel-tailor-antalya/${r.slug}`,
       },
     },
-    openGraph: { title, description: desc, url, type: 'website', locale: 'de_DE', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Schneider in ${r.name}` }] },
-    twitter: { card: 'summary_large_image', title, description: desc, images: [ogImage] },
+    openGraph: { title, description: kwd, url, type: 'website', locale: 'de_DE', siteName: 'Terzi Can Antalya', images: [{ url: ogImage, width: 1200, height: 630, alt: `Schneider in ${r.name}` }] },
+    twitter: { card: 'summary_large_image', title, description: kwd, images: [ogImage] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   };
 }
