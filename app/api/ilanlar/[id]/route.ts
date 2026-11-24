@@ -9,14 +9,15 @@ import { isAdminRequest } from "@/lib/admin-auth";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     if (!(await isAdminRequest(req))) {
       return NextResponse.json({ error: "Yetkisiz" }, { status: 403 });
     }
     let oid: ObjectId;
-    try { oid = new ObjectId(params.id); } catch {
+    const { id } = await params;
+    try { oid = new ObjectId(id); } catch {
       return NextResponse.json({ error: "Geçersiz kimlik" }, { status: 400 });
     }
     const db = await getDb();
