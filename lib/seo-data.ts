@@ -561,7 +561,7 @@ export const DISTRICT_PRIORITY: readonly string[] = [
 export const FAR_SLUGS: readonly string[] = ['dosemealti', 'serik'];
 export const isFar = (slug: string): boolean => FAR_SLUGS.includes(slug);
 const prioRank = (slug: string): number => { const i = DISTRICT_PRIORITY.indexOf(slug); return i < 0 ? 999 : i; };
-export const byPriority = <T extends { slug: string }>(list: readonly T[]): T[] => [...list].sort((a, b) => prioRank(a.slug) - prioRank(b.slug));
+export const byPriority = <T extends { slug?: string }>(list: readonly T[]): T[] => [...list].sort((a, b) => prioRank(a.slug ?? '') - prioRank(b.slug ?? ''));
 
 export const findDistrict = (slug: string) => DISTRICTS.find((d) => d.slug === slug);
 export const findServiceBySlug = (lang: Lang, slug: string) => SERVICES.find((s) => s.slug[lang] === slug);
