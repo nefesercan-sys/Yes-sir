@@ -5,7 +5,8 @@
 // ============================================================
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { findDistrict } from '@/lib/seo-data';
+import { findDistrict, byPriority } from '@/lib/seo-data';
+import { isFar, farDesc, farNote } from '@/lib/uzak-bolge';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -43,7 +44,7 @@ function meta(slug: string, ad: string) {
     `${ad} Terzi Çağır · Fotoğrafla Fiyat | Terzi Can`,
   ]);
   const svc = isFreeService(slug) ? 'Otele ve eve servis.' : resort ? 'Otele servis.' : 'Otellere servis.';
-  const desc = `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`;
+  const desc = isFar(slug) ? farDesc('tr', ad) : `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`;
   return { title, desc, loc, resort };
 }
 
@@ -89,7 +90,7 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
     ],
   };
 
-  const komsular = ANTALYA_ILCELERI.filter(i => i.slug !== ilce.slug).slice(0, 10);
+  const komsular = byPriority(ANTALYA_ILCELERI.filter(i => i.slug !== ilce.slug)).slice(0, 10);
   const faq = withEkSss(districtFaqItems({ lang: 'tr', slug: ilce.slug, n: ilce.ad, loc, resort, focus: [] }), ilce.slug, ilce.ad, loc);
 
   return (
@@ -97,6 +98,11 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <SpeakableSchema path={`/terzi/antalya/${ilce.slug}`} />
       <QuickActionBanner lang="tr" />
+      {isFar(ilce.slug) && (
+        <p role="note" style={{ maxWidth: 820, margin: '1rem auto', padding: '.9rem 1.1rem', borderRadius: 12, background: '#fff7e6', color: '#5a3b00', fontSize: '.98rem', lineHeight: 1.6 }}>
+          {farNote('tr', ilce.ad)}
+        </p>
+      )}
       <BolgeSayfasi
         tip="antalya-ilce"
         slug={ilce.slug}

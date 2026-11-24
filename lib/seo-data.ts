@@ -546,6 +546,23 @@ export const trServiceHasOwnRoute = (id: string) => id in TR_SERVICE_PAGES;
 export const serviceUrl = (lang: Lang, s: Service) =>
   lang === 'tr' && TR_SERVICE_PAGES[s.id] ? TR_SERVICE_PAGES[s.id] : `${SERVICE_BASE[lang]}/${s.slug[lang]}`;
 export const abs = (p: string) => `${SITE}${p}`;
+// ── Bölge önceliği (sahibin kararı, 24 Kasım 2026) ──────────────────────────
+// Listelerde ve bağlantılarda sıra: atölyeye en yakın Konyaaltı mahalleleri ve Konyaaltı sahil otelleri önce,
+// sonra turist/otel bölgeleri, sonra hizmet verilen diğer bölgeler; Döşemealtı ve Serik uzak (işin durumuna göre gidilir ya da müşteri atölyeye gelir).
+// DISTRICTS dizisinin kendi sırası DEĞİŞTİRİLMEZ (başlık havuzları dizindeki sıraya göre seçiliyor); sıralama yalnız görüntüde.
+export const DISTRICT_PRIORITY: readonly string[] = [
+  'konyaalti', 'hurma', 'liman', 'gursu', 'uncali', 'ogretmenevleri',
+  'sarisu', 'uluc', 'altinkum', 'siteler', 'arapsuyu',
+  // Turist ve otel bölgeleri (sahibin isteği: buralardaki turistlerden trafik gelsin)
+  'muratpasa', 'lara', 'guzeloba', 'kundu', 'belek', 'side', 'kemer', 'goynuk', 'beldibi',
+  'meltem', 'fener', 'sirinyali', 'toros', 'kepez', 'aksu', 'manavgat',
+  'dosemealti', 'serik',
+];
+export const FAR_SLUGS: readonly string[] = ['dosemealti', 'serik'];
+export const isFar = (slug: string): boolean => FAR_SLUGS.includes(slug);
+const prioRank = (slug: string): number => { const i = DISTRICT_PRIORITY.indexOf(slug); return i < 0 ? 999 : i; };
+export const byPriority = <T extends { slug: string }>(list: readonly T[]): T[] => [...list].sort((a, b) => prioRank(a.slug) - prioRank(b.slug));
+
 export const findDistrict = (slug: string) => DISTRICTS.find((d) => d.slug === slug);
 export const findServiceBySlug = (lang: Lang, slug: string) => SERVICES.find((s) => s.slug[lang] === slug);
 

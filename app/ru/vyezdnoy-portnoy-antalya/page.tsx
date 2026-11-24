@@ -8,6 +8,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import { byPriority } from '@/lib/seo-data';
 
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -225,7 +226,7 @@ export default function VyezdnoyPortnoyAntalyaPage() {
             </h2>
             <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Из нашей мастерской в Коньяалты — в ближайшие районы Антальи</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
-              {DISTRICTS.map(({name, time, desc, slug}) => {
+              {byPriority(DISTRICTS).map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
                 const cardProps = slug ? { href: `/ru/vyezdnoy-portnoy-antalya/${slug}` } : {};
                 return (
