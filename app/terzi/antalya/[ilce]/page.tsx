@@ -16,6 +16,7 @@ import { KeywordBlock } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import { districtFaqItems, withEkSss, trLoc, pick } from '@/lib/bolge-icerik';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 
 export const revalidate = 3600;
@@ -111,6 +112,7 @@ export default async function AntalyaIlceTerziSayfasi({ params }: PageProps) {
         komsuLokasyonlar={komsular}
         komsuHref={(s) => `/terzi/antalya/${s}`}
       />
+      {!isFar(ilce.slug) && <TerziHizmetleriBolumu lang="tr" />}
       <FaqBlock heading={`${ilce.ad} Terzi — Sık Sorulan Sorular`} items={faq} />
       <KeywordBlock slug={ilce.slug} />
     </>

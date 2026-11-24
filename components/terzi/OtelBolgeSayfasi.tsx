@@ -17,6 +17,7 @@ import { DURATION, MAPS_URL } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { PROCESS, processesFor } from '@/lib/bolge-icerik';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 
 // H1 varyantları (bölge slug'ına göre deterministik); bölge adı vurgulu kalır.
@@ -334,6 +335,7 @@ export default function OtelBolgeSayfasi({ lang, region, allRegions, seoContent,
       {/* CTA Section */}
       <OrnekGorselSeridi konu="bolge" yer={region.name} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'abiye-askida', 'erkek-takim-olcu', 'abiye-elbise-atolye']} />
 
+      <div style={{ background: '#fff', color: '#1C1814' }}><TerziHizmetleriBolumu lang={lang} /></div>
       <section style={{ background: '#B8975A', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '1.8rem', color: '#1C1814', marginBottom: '.7rem' }}>{t.ctaH(region.name)}</h2>
         <p style={{ color: 'rgba(255,255,255,.85)', marginBottom: '1.6rem', fontSize: '.9rem' }}>{t.ctaSub}</p>

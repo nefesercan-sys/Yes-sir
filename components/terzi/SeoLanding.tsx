@@ -37,6 +37,7 @@ import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib
 import { crossCanonical, thTrDistrictUrl } from '@/lib/cross-canonical';
 import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
 import { jsonLdString } from '@/lib/json-ld';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
@@ -785,6 +786,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
           </div>
         </section>
 
+        {!isFar(d.slug) && <TerziHizmetleriBolumu lang={lang} />}
         <AngleBlock a={angle} id="angle-h" />
 
         {DISTRICT_FACTS[d.slug] && (
