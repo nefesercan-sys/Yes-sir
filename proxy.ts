@@ -19,7 +19,7 @@ function langFromPath(pathname: string): Lang {
   return "tr";
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
 
   // 0. Kaldırılan sayfalar → 410 Gone

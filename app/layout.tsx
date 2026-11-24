@@ -104,11 +104,11 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
   // Dil, middleware'in x-lang başlığından gelir (ham HTML'de doğru <html lang>).
   let lang = "tr";
   try {
-    const h = headers().get("x-lang");
+    const h = (await headers()).get("x-lang");
     if (h && /^(tr|en|ru|de|es|fr|pl|uk|nl|ar)$/.test(h)) lang = h;
   } catch {
     // statik üretimde başlık yok: varsayılan tr
