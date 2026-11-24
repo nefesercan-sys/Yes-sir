@@ -116,7 +116,7 @@ export function hotelKwDesc(lang: string, area: string, v: V, fallback: string):
 }
 
 // Başlık/H1'deki "Antalya'da" kısmını atıp işin adını bırakır (ör. "Acortar pantalones en Antalya" → "Acortar pantalones").
-const AREA_TAIL = /\s*(?:[:·|–—-].*)?$/;
+const AREA_TAIL = /\s*(?:[:·|]|\s[–—-]\s).*$/; // yalnız boşluklu tire ayırır (T-Shirt bozulmasın)
 const LOC_RE: Record<KLang, RegExp> = {
   en: /\s+(?:in|for)\s+(?:Antalya|Konyaaltı).*$/i,
   de: /\s+in\s+(?:Antalya|Konyaaltı).*$/i,
