@@ -6,6 +6,7 @@
 // usePathname sunucuda da çalışır, bu yüzden ham HTML'de doğru şema çıkar.
 // ============================================================
 import { usePathname } from 'next/navigation';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 
 // Terzi / tekstil sayfa yolları (önek eşleşmesi). Yeni terzi sayfası eklerken buraya ekle.
@@ -116,7 +117,7 @@ const jsonLd = {
         'Seri Üretim ve İhracat',
       ],
       subOrganization: { '@id': 'https://swaphubs.com/terzi#business' },
-      sameAs: ['https://www.google.com/maps?cid=6436895271281342624', 'https://terzihizmeti.com.tr'],
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, 'https://www.google.com/maps?cid=6436895271281342624', 'https://terzihizmeti.com.tr'],
     },
   ],
 };

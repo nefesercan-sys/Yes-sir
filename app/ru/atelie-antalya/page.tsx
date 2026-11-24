@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
@@ -143,7 +144,7 @@ const jsonLd = {
         ],
       },
       // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)
-      sameAs: [
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, 
         GMAPS_SHORT_LINK,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
       ],

@@ -1,5 +1,6 @@
 // app/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat/page.tsx
 import type { Metadata } from 'next'
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import FaqBlock from '@/components/FaqBlock';
@@ -63,7 +64,7 @@ const jsonLd = {
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.857466, longitude: 30.596987 },
       hasMap: MAPS_CID_URL,
-      sameAs: [MAPS_CID_URL],
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, MAPS_CID_URL],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
