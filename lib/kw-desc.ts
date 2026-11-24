@@ -139,3 +139,51 @@ export function serviceKwDesc(lang: string, job: string, v: V, fallback: string)
   const j = jobName(lang, job);
   return j ? SERVICE[lang][v](j) : fallback;
 }
+
+// ── Bölge sayfası: başlıktaki işler açıklamada da geçsin (sahibin isteği, 24 Kasım 2026) ─────────
+// Başlıktan iş listesini çıkarır: "Schneider Gürsu: Mantel, Jacke, Jeans ändern" → "Mantel, Jacke, Jeans ändern".
+// Fiyat/foto/otel gibi iş olmayan başlık kuyrukları için null döner (o zaman genel kalıp kullanılır).
+const NOT_JOB = /foto|photo|fotoğraf|фото|preis|price|цена|fiyat|hotel|otel|отел|pick-up|abholung|забор|çağır|near me|nähe|рядом|whatsapp/i;
+export function titleJobs(title: string): string | null {
+  const t = title.replace(/\s*\|.*$/, '').trim();
+  const i = t.search(/[:·]/);
+  if (i < 0) return null;
+  const j = t.slice(i + 1).trim().replace(/[.!?]+$/, '');
+  if (!j || NOT_JOB.test(j) || j.length < 4) return null;
+  return j;
+}
+// Başlıktaki Büyük Harfli iş adları cümle içinde küçük harfe çevrilir (Almancada isimler büyük harfle kalır).
+const lowerFirst = (lang: string, s: string) => (lang === 'de' ? s : s.toLocaleLowerCase(lang === 'tr' ? 'tr-TR' : lang));
+
+const AREA_JOBS: Partial<Record<KLang, Record<V, (a: string, j: string) => string>>> = {
+  en: {
+    a: (a, j) => `Tailor in ${a}, Antalya: ${j}. Clothing repairs, alterations and made-to-measure for men and women. Hotel pick-up.`,
+    b: (a, j) => `${a}, Antalya tailor: ${j}; alterations, repairs and made-to-measure, men & women. Send a photo, get a price.`,
+  },
+  de: {
+    a: (a, j) => `Schneider in ${a}, Antalya: ${j}. Reparatur, Änderung und Maßanfertigung, Damen & Herren. Abholung im Hotel.`,
+    b: (a, j) => `Änderungsschneiderei für ${a}, Antalya: ${j}; ändern, reparieren, nach Maß nähen. Foto senden, Preis erhalten.`,
+  },
+  ru: {
+    a: (a, j) => `Портной и ателье: ${a}, Анталья — ${j}. Ремонт, подгонка и пошив одежды для мужчин и женщин. Забор из отеля.`,
+    b: (a, j) => `Ателье для района ${a} (Анталья): ${j}; ремонт, подгонка, пошив на заказ. Пришлите фото — назовём цену.`,
+  },
+};
+
+/** EN/DE/RU bölge sayfası: başlıktaki işler + genel üçlü; iş yoksa genel bölge kalıbı. */
+export function areaJobsDesc(lang: string, area: string, title: string, v: V, fallback: string): string {
+  const j = titleJobs(title);
+  const f = isK(lang) ? AREA_JOBS[lang] : undefined;
+  return j && f ? f[v](area, lowerFirst(lang, j)) : areaKwDesc(lang, area, v, fallback);
+}
+
+/** Türkçe bölge sayfası: "Lara'da terzi: abiye, elbise, askı boyu ayarı. Tamir, tadilat ve özel dikim…" */
+export function trAreaJobsDesc(loc: string, title: string, v: V, fallback: string): string {
+  const j = titleJobs(title);
+  if (!j) return fallback;
+  const jl = lowerFirst('tr', j);
+  const trio = (/tamir/i.test(jl) ? 1 : 0) + (/tadilat/i.test(jl) ? 1 : 0) + (/dikim/i.test(jl) ? 1 : 0);
+  const mid = trio >= 2 ? 'Bay bayan kıyafetleri, paça ₺200\'den, fermuar ₺300\'den.' : 'Tamir, tadilat ve özel dikim, bay bayan. Paça ₺200\'den, fermuar ₺300\'den.';
+  const end = v === 'a' ? 'Otele ve eve servis.' : 'Fotoğraf gönderin, fiyatı söyleyelim.';
+  return `${loc} terzi: ${jl}. ${mid} ${end}`;
+}
