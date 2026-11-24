@@ -5,7 +5,7 @@
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import { HOTEL_H1, TOURIST_LEAD, districtLead } from '@/lib/turist-acisi';
@@ -120,7 +120,7 @@ function businessNode(lang: Lang, withReviews = true) {
     foundingDate: b.foundingYear,
     knowsLanguage: [...b.languages],
     availableLanguage: ['Turkish', 'English', 'Russian', 'German', 'Polish', 'Ukrainian', 'Dutch', 'French', 'Spanish', 'Arabic'],
-    sameAs: [BING_PLACES_URL, MAPS, waUrl(), 'https://terzihizmeti.com.tr'],
+    sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, MAPS, waUrl(), 'https://terzihizmeti.com.tr'],
     inLanguage: lang,
   };
 }

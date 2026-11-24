@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -76,7 +76,7 @@ const jsonLd = {
       },
       areaServed: { '@type': 'AdministrativeArea', name: 'Konyaaltı, Antalya' },
       knowsLanguage: ['tr', 'en', 'ru', 'de', 'pl', 'uk', 'nl', 'fr', 'es', 'ar'],
-      sameAs: [BING_PLACES_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`, `${BASE_URL}/terzi`],
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`, `${BASE_URL}/terzi`],
     },
     {
       '@type': 'WebPage',

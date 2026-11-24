@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
@@ -59,7 +59,7 @@ const jsonLd = {
       ].map(n => ({ '@type': 'City', name: n })),
       // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94) burada da
       // vardı — Google'ın sahte-yorum politikasına aykırı, kaldırıldı.
-      sameAs: [BING_PLACES_URL, MAPS_URL, `https://wa.me/${PHONE_E164.replace('+','')}`],
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, MAPS_URL, `https://wa.me/${PHONE_E164.replace('+','')}`],
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: PHONE_E164,

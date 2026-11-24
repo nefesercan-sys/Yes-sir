@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import { findDistrict, districtUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -101,7 +101,7 @@ const jsonLd = {
       url: TERZI_URL, telephone: PHONE_TEL, priceRange: '₺₺',
       currenciesAccepted: 'TRY, EUR, USD, RUB', paymentAccepted: 'Cash, Credit Card',
       image: OG_IMAGE, hasMap: GBP1_MAPS,
-      sameAs: [BING_PLACES_URL, GBP1_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
+      sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, GBP1_MAPS, `https://wa.me/${PHONE_TEL.replace('+','')}`],
       address: { '@type': 'PostalAddress', streetAddress: 'Hurma Mahallesi', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', postalCode: '07130', addressCountry: 'TR' },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],

@@ -1,5 +1,5 @@
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import type { Metadata } from 'next';
 import { SERVICES, serviceUrl, abs, LANGS } from '@/lib/seo-data';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -171,7 +171,7 @@ const jsonLd = {
             closes: '23:00',
           },
         ],
-        sameAs: [BING_PLACES_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
+        sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
       },
       offers: {
         '@type': 'Offer',

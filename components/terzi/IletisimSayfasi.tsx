@@ -6,7 +6,7 @@
 // Siteye özgü ayarlar yalnızca aşağıdaki SITE_CFG bloğundadır.
 // ============================================================
 import QuickActionBanner from '@/components/QuickActionBanner';
-import { BING_PLACES_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import type { Metadata } from 'next';
 import { crossCanonical } from '@/lib/cross-canonical';
@@ -24,7 +24,7 @@ const SITE_CFG = {
   businessName: 'TERZİ Can - Antalya Tailor Service', // Google profil adıyla birebir aynı
   image: `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`,
   geo: { latitude: 36.8572868, longitude: 30.5970193 },
-  sameAs: [BING_PLACES_URL, MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
+  sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, MAPS, `https://wa.me/${PHONE_TEL.replace('+', '')}`, 'https://terzihizmeti.com.tr'],
   contactUrl: {
     tr: '/terzi/iletisim',
     en: '/en/contact-tailor-antalya',
