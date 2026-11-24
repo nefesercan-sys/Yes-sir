@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BING_PLACES_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
@@ -198,7 +199,7 @@ const jsonLd = {
         ],
       },
 
-      sameAs: [
+      sameAs: [BING_PLACES_URL, 
         'https://wa.me/905318986418',
         'https://swaphubs.com',
         'https://swaphubs.com/terzi',

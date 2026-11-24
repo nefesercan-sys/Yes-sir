@@ -5,6 +5,8 @@
 // lib/mahalle-meta.ts, lib/tr-meta.ts ve şema bileşenleri buradan okur.
 // NOT: Puan/yorum burada YOK. Gerçek ve doğrulanabilir yorumlar lib/reviews.ts'tedir.
 // ============================================================
+/** Bing Places işletme kaydı (Bing Haritalar; ChatGPT/Copilot yerel sonuçları). Sahip ekledi, 24 Kasım 2026. */
+export const BING_PLACES_URL = 'https://www.bing.com/maps?ss=ypid.YN74E8E19509337C43';
 export const SITE_URL = 'https://swaphubs.com';
 
 export const PHONE_E164 = '+905318986418';
@@ -52,7 +54,7 @@ export const BUSINESS = {
   hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '23:00' },
   foundingYear: '2006',
   areaServed: AREA_SERVED,
-  sameAs: [MAPS_URL, GOOGLE_REVIEW_URL, `https://wa.me/${WA_NUMBER}`, OTHER_OFFICIAL_SITE],
+  sameAs: [BING_PLACES_URL, MAPS_URL, GOOGLE_REVIEW_URL, `https://wa.me/${WA_NUMBER}`, OTHER_OFFICIAL_SITE],
 } as const;
 
 /** schema.org areaServed düğümleri (tek işletme varlığında kullanılır). */

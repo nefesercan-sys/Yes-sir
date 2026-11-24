@@ -1,5 +1,6 @@
 // app/konyaalti-terzi-adrese-gelen-servis/page.tsx
 import type { Metadata } from 'next'
+import { BING_PLACES_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -64,7 +65,7 @@ const jsonLd = {
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: MAPS_CID_URL,
-      sameAs: [MAPS_CID_URL],
+      sameAs: [BING_PLACES_URL, MAPS_CID_URL],
       openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],

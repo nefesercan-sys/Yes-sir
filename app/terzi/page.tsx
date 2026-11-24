@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { BING_PLACES_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import TerziClient from './TerziClient';
@@ -104,7 +105,7 @@ const jsonLd = {
       },
       geo: { '@type': 'GeoCoordinates', latitude: 36.8572868, longitude: 30.5970193 },
       hasMap: GBP_MAPS,
-      sameAs: [
+      sameAs: [BING_PLACES_URL, 
         GBP_MAPS,
         `https://wa.me/${PHONE_E164.replace('+', '')}`,
         'https://terzihizmeti.com.tr',

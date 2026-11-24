@@ -1,5 +1,6 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
+import { BING_PLACES_URL } from '@/lib/business';
 import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -113,7 +114,7 @@ const jsonLd = {
       alternateName: 'Terzi Can Antalya',
       description: "Antalya'nın yakın bölgelerinde (Konyaaltı, Lara, Muratpaşa, Kepez) kuryeli araçlarla adresten alım ve adrese teslimat yapan; özel dikim, abiye tamiratı, acil paça/fermuar değişimi (1–2 saat) ve otellere tadilat servisi sunan profesyonel tekstil atölyesi.",
       url: PAGE_URL,
-      sameAs: [GBP_URL],
+      sameAs: [BING_PLACES_URL, GBP_URL],
       telephone: '+905318986418',
       priceRange: '₺₺',
       image: OG_IMAGE,
