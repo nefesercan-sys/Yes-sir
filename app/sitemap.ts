@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { lastModDate } from '@/lib/lastmod'
 
 export const revalidate = 86400
 
@@ -16,7 +17,7 @@ function toDate(val: any, fallback = '2026-09-20'): Date {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 🔽 TERZİ DIŞI GENEL SAYFALAR (Arka Plan - Düşük Öncelik)
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL,                 lastModified: D_YENI, changeFrequency: 'weekly',  priority: 0.40 },
+    { url: BASE_URL,                 lastModified: lastModDate('/', D_YENI), changeFrequency: 'weekly',  priority: 0.40 },
   ]
 
   // İlan ve bal sayfaları kaldırıldı: sitemap yalnızca terzi sitesini içerir.

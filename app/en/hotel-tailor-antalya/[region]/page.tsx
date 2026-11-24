@@ -115,6 +115,13 @@ export default async function BelekLaraGuzelobaSideEnPage({ params }: { params: 
         maps={MAPS} 
         seoContent={seoContent} 
       />
+      <nav aria-label="More pages" style={{ maxWidth: 760, margin: '1.5rem auto', padding: '0 1rem', fontSize: '.92rem', lineHeight: 1.7 }}>
+        <strong>More about the hotel service:</strong>{' '}
+        <a href="/en/how-hotel-tailor-works-antalya">How the hotel tailor works</a>
+        {' · '}<a href="/online-tailor-service">Alterations by post</a>
+        {' · '}<a href="/en/tailor-faq-antalya">Frequently asked questions</a>
+        {' · '}<a href="/en/contact-tailor-antalya">Contact</a>
+      </nav>
       <ReviewsBlock lang="en" schema />
     </>
   );

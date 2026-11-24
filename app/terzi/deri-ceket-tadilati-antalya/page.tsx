@@ -45,11 +45,11 @@ const DATA: KonuData = {
     { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim yapıyoruz; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
+    { href: '/terzi/mont-tamiri-tadilati-antalya', ad: 'Mont tamiri ve tadilatı' },
+    { href: '/terzi/kot-ceket-mont-tadilati-antalya', ad: 'Kot ceket ve mont tadilatı' },
+    { href: '/terzi/kaban-palto-tadilati-antalya', ad: 'Kaban ve palto tadilatı' },
+    { href: '/terzi/yelek-tamiri-tadilati-antalya', ad: 'Yelek tamiri ve tadilatı' },
+    { href: '/terzi/fermuar-degisimi', ad: 'Fermuar değişimi' },
   ],
   ctaBaslik: 'Deri ürününüzü mü yaptıracaksınız?',
 };

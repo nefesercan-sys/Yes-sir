@@ -350,7 +350,7 @@ export default function PacaKisaltmaPage() {
             </p>
             <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
               {[
-                ['Fermuar Değişimi Antalya', '/terzi/fermuar-degisimi-antalya'],
+                ['Fermuar Değişimi Antalya', '/terzi/fermuar-degisimi'],
                 ['Elbise Dikimi Antalya', '/antalya-terzi-elbise-dikimi'],
                 ['Eve Gelen Terzi', '/terzi/eve-gelen-terzi-antalya'],
                 ['Üniforma Dikimi Antalya', '/terzi/uniforma-uretimi-antalya'],

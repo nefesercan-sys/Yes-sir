@@ -189,7 +189,7 @@ const FOOTER_MAHALLELER = [
   { n: 'Uncalı', slug: 'uncali' },
   { n: 'Sarısu', slug: 'sarisu' },
   { n: 'Çakırlar', slug: 'cakirlar' },
-  { n: 'Meltem', slug: 'meltem' },
+  { n: 'Meltem', slug: 'meltem', ilce: 'muratpasa' },
 ];
 
 const WHY = [
@@ -790,7 +790,7 @@ export default function TerziClient({ gbp1 }: Props) {
         <div className="tfootmah" style={{ fontSize: '.65rem', color: 'rgba(255,255,255,.2)', marginBottom: '.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
           <span style={{ color: 'rgba(255,255,255,.4)' }}>Konyaaltı Mahalleleri:</span>
           {FOOTER_MAHALLELER.map(mah => (
-            <Link key={mah.slug} href={`/terzi/konyaalti/${mah.slug}`}>
+            <Link key={mah.slug} href={`/terzi/${'ilce' in mah ? mah.ilce : 'konyaalti'}/${mah.slug}`}>
               {mah.n} Terzi
             </Link>
           ))}

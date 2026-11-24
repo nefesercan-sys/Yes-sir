@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import TerziClient from './TerziClient';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -18,7 +19,7 @@ const SITE_URL      = 'https://swaphubs.com/terzi';
 const HOME_URL      = 'https://swaphubs.com';
 const PHONE         = '+90 531 898 64 18';
 const PHONE_E164    = '+905318986418';
-const LAST_MODIFIED = '2026-10-04';
+const LAST_MODIFIED = lastMod('/terzi', '2026-10-04');
 
 // ── Google Business Profil ────────────────────────────────────────────────────
 // Kaynak: maps.app.goo.gl/kFRDqRohAc4fRsbS9  →  ftid 0x14c39311e6924c67:0x59547225251db8a0
@@ -239,8 +240,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: {
       'tr': `${HOME_URL}/terzi`,
-      'en': `${HOME_URL}/online-tailor-service`,
-      'de': `${HOME_URL}/de/online-schneiderservice-antalya`,
+      // en/de çevrimiçi hizmet sayfaları bu sayfayı karşılık göstermiyor (kendi kümeleri var): tek yönlü hreflang verilmez
       'ru': `${HOME_URL}/ru/atelie-antalya`,
       'x-default': `${HOME_URL}/terzi`,
     },

@@ -5,6 +5,7 @@
 // Veri: lib/seo-data.ts. Sadece doğrulanmış bilgi kullanılır (bkz. dosya başlığı).
 // ============================================================
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
+import { lastMod } from '@/lib/lastmod';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import { HOTEL_H1, TOURIST_LEAD, districtLead } from '@/lib/turist-acisi';
 import { districtAngle, serviceAngle, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
@@ -25,7 +26,7 @@ import {
   SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
   type Lang, type District, type Service, type TimeKey,
-  isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
+  isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService, findDistrict } from '@/lib/seo-data';
 import { isFar, FAR_TAG, farDesc } from '@/lib/uzak-bolge';
 import { serviceKwDesc, areaJobsDesc, trAreaJobsDesc } from '@/lib/kw-desc';
 import { angleFor, angleTitles, angleDescs, angleKeywords } from '@/lib/seo-angles';
@@ -140,6 +141,15 @@ const alternatesFor = (lang: Lang, urlFor: (l: Lang) => string, slug?: string): 
 };
 /** Sitemap için aynı küme (bölge sayfaları). */
 export const districtAltMap = (d: District) => alternatesFor('en', (l) => abs(districtUrl(l, d)), d.slug).languages ?? {};
+/** swaphubs'taki Türkçe bölge sayfası (ilçe/mahalle): EN/RU/DE bölge sayfaları tr olarak bu adresi gösteriyorsa küme karşılıklı verilir. */
+export const trDistrictAlternates = (slug: string, url: string): { canonical: string; languages?: Record<string, string> } => {
+  const d = findDistrict(slug);
+  const langs = d ? districtAltMap(d) : undefined;
+  if (langs && langs.tr === url) return { canonical: url, languages: langs };
+  // /terzi/antalya/konyaalti: Konyaaltı'nın asıl Türkçe sayfası başka adreste (districtUrl) → canonical oraya
+  if (d && slug === 'konyaalti') return { canonical: abs(districtUrl('tr', d)) };
+  return { canonical: url };
+};
 // ── Arama sorgusu odaklı başlık/açıklama yardımcıları ──────────────────────
 const capFirst = (lang: Lang, t: string) => (t ? t.charAt(0).toLocaleUpperCase(lang === 'tr' ? 'tr-TR' : lang) + t.slice(1) : t);
 const pickFit = (list: string[], max: number) => list.find((c) => c.length <= max) ?? list[list.length - 1];
@@ -719,7 +729,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
-        breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: LAST_UPDATE,
+        breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: lastMod(url, LAST_UPDATE),
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.sl-hero-desc'] },
       },
       {
@@ -929,7 +939,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID },
-        breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: LAST_UPDATE,
+        breadcrumb: { '@id': `${url}#breadcrumb` }, dateModified: lastMod(url, LAST_UPDATE),
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.sl-hero-desc'] },
       },
       {
@@ -1033,7 +1043,7 @@ export function HubPage({ lang }: { lang: Lang }) {
       businessNode(lang),
       {
         '@type': 'CollectionPage', '@id': `${url}#webpage`, url, name: title, description: desc, inLanguage: lang,
-        isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID }, dateModified: LAST_UPDATE,
+        isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': BUSINESS_ID }, dateModified: lastMod(url, LAST_UPDATE),
         mainEntity: { '@type': 'ItemList', itemListElement: SERVICES.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.name[lang], url: abs(serviceUrl(lang, s)) })) },
         breadcrumb: { '@id': `${url}#breadcrumb` },
       },

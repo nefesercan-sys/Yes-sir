@@ -11,7 +11,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import { MAHALLE_ILCE, type MahalleIlce } from '@/lib/turkiye-lokasyonlar';
 import { mahalleMeta } from '@/lib/mahalle-meta';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
-import { KeywordBlock } from '@/components/terzi/SeoLanding';
+import { KeywordBlock, trDistrictAlternates } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -35,8 +35,8 @@ export async function mahalleMetadata(ilce: MahalleIlce, { params }: MahallePara
   const { title, desc: desc0, kw } = mahalleMeta(m.slug, m.ad, PHONE_DISPLAY, MAHALLE_ILCE[ilce].ad);
   const desc = trAreaJobsDesc(trLoc(m.ad), title, 'b', desc0); // başlıktaki işler açıklamada da (lib/kw-desc.ts)
   const url = `${SITE_URL}${pathOf(ilce, m.slug)}`;
-  // swaphubs'a özgü Türkçe sayfa: kendi adresinde canonical; birebir dil karşılığı olmadığı için hreflang kümesi verilmez
-  const alternates = { canonical: url };
+  // Kendi adresinde canonical; EN/RU/DE bölge sayfaları bu adresi tr karşılığı olarak gösterdiğinden hreflang kümesi karşılıklı verilir
+  const alternates = trDistrictAlternates(m.slug, url);
   return {
     title: { absolute: title },
     description: desc,

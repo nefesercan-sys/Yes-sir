@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import KargoSection from '@/components/terzi/KargoSection';
 import OnlineContactStrip from '@/components/terzi/OnlineContactStrip';
@@ -216,7 +217,7 @@ const jsonLd = {
         "Antalya'da teslim eden, yurt dışına kargoyla gönderen online özel terzi. WhatsApp üzerinden ölçü al, kıyafet adresine gelsin.",
       inLanguage: 'tr',
       datePublished: '2024-01-01',
-      dateModified: '2026-10-29',
+      dateModified: lastMod('/online-terzi-hizmeti', '2026-10-29'),
       breadcrumb: { '@id': `${SITE_URL}#breadcrumb` },
     },
 

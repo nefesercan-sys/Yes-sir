@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -11,7 +12,7 @@ const HOME     = 'https://swaphubs.com';
 const PHONE    = '+90 531 898 64 18';
 const PHONE_E  = '+905318986418';
 const WA = (t: string) => `https://wa.me/${PHONE_E}?text=${encodeURIComponent(t)}`;
-const TODAY    = new Date().toISOString().split('T')[0];
+const TODAY = lastMod('/terzi/uniforma-uretimi-antalya', '2026-11-24'); // gerçek içerik tarihi (lib/lastmod.json); derleme günü değil
 
 // SSS: görünür liste ve FAQPage şeması bu tek diziden beslenir.
 const FAQ: [string, string][] = [

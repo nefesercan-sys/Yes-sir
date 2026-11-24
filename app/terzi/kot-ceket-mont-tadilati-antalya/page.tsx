@@ -45,13 +45,11 @@ const DATA: KonuData = {
     { q: 'Eve veya otele gelip alıyor musunuz?', a: 'Evet. Eve ve otele alım-teslim yapıyoruz; adresinizi ve saat tercihinizi WhatsApp\'tan yazmanız yeterli.' },
   ],
   diger: [
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
-    { href: 'href', ad: 'ad' },
+    { href: '/terzi/kot-pantolon-paca-kisaltma-antalya', ad: 'Kot pantolon paça kısaltma' },
+    { href: '/terzi/kot-pantolon-daraltma-antalya', ad: 'Kot pantolon daraltma' },
+    { href: '/terzi/kot-etek-kisaltma-daraltma-antalya', ad: 'Kot etek kısaltma ve daraltma' },
+    { href: '/terzi/mont-tamiri-tadilati-antalya', ad: 'Mont tamiri ve tadilatı' },
+    { href: '/terzi/deri-ceket-tadilati-antalya', ad: 'Deri ceket tadilatı' },
   ],
   ctaBaslik: 'Kot ceketiniz mi büyük?',
 };

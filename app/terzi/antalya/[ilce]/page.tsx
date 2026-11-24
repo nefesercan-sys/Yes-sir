@@ -13,7 +13,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { ANTALYA_ILCELERI } from '@/lib/turkiye-lokasyonlar';
 import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
-import { KeywordBlock } from '@/components/terzi/SeoLanding';
+import { KeywordBlock, trDistrictAlternates } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import { districtFaqItems, withEkSss, trLoc, pick } from '@/lib/bolge-icerik';
@@ -64,8 +64,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${ilce.ad} özel dikim`, `${ilce.ad} fermuar değişimi`, `${ilce.ad} bel daraltma`, `${ilce.ad} elbise dikimi`,
       `${ilce.ad} otele gelen terzi`, `${ilce.ad} acil terzi`, 'Antalya terzi', 'acil terzi Antalya',
     ],
-    // swaphubs'a özgü Türkçe sayfa: kendi adresinde canonical; birebir dil karşılığı olmadığı için hreflang kümesi verilmez
-    alternates: { canonical: url },
+    // Kendi adresinde canonical; EN/RU/DE bölge sayfaları bu adresi tr karşılığı olarak gösterdiğinden hreflang kümesi karşılıklı verilir
+    alternates: trDistrictAlternates(ilce.slug, url),
     openGraph: { title, description: desc, url, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
     twitter: { card: 'summary_large_image', title, description: desc },
   };

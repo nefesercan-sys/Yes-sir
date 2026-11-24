@@ -1,6 +1,9 @@
 // swaphubs.com — Ek turist dilleri için rehber sayfası (veri: lib/intl.ts). Sunucu bileşeni, stil inline.
 // terzihizmeti.com.tr'deki tanıtım sayfalarından farklı: bilgi niyetli rehber (sorunlar, hazırlık listesi, adımlar, SSS).
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { OLCU, OLCU_PATH } from '@/lib/intl-olcu';
+import { lastMod } from '@/lib/lastmod';
+import { HZ, HZ_IDS, HZ_UI, hzUrl } from '@/lib/intl-hz';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import Link from 'next/link';
@@ -25,7 +28,7 @@ export function intlJsonLd(lang: ILang) {
     '@graph': [
       {
         '@type': 'Article', '@id': `${url}#article`, headline: c.h1, description: c.desc, url, inLanguage: lang,
-        dateModified: UPDATED, image: OG_DEFAULT, mainEntityOfPage: url,
+        dateModified: lastMod(url, UPDATED), image: OG_DEFAULT, mainEntityOfPage: url,
         author: { '@type': 'Organization', name: 'Terzi Can', url: SITE }, publisher: { '@type': 'Organization', name: 'Terzi Can', url: SITE },
         about: { '@id': BUSINESS_ID },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc'] },
@@ -125,6 +128,11 @@ export default function IntlLanding({ lang }: { lang: ILang }) {
             <Link href="/terzi" style={{ color: C.green, fontWeight: 600 }}>{c.providerLink}</Link>
             {' · '}<a href={`tel:${PHONE_TEL}`} style={{ color: C.green }} dir="ltr">☎ {c.call}: {PHONE}</a>
             {' · '}<a href={MAPS} target="_blank" rel="noopener noreferrer" style={{ color: C.green }}>{c.mapLabel}</a>
+          </p>
+          <p style={{ margin: '0 0 .6rem', fontSize: '.92rem' }}><Link href={OLCU_PATH[lang]} style={{ color: C.green }}>{OLCU[lang].h1}</Link></p>
+          <p style={{ margin: '0 0 .6rem', fontSize: '.88rem' }}>
+            <strong>{HZ_UI[lang].more}:</strong>{' '}
+            {HZ_IDS.map((x, i) => <span key={x}>{i > 0 && ' · '}<Link href={hzUrl(lang, x)} style={{ color: C.green }}>{HZ[lang][x].h1}</Link></span>)}
           </p>
           <p style={{ margin: 0, fontSize: '.88rem', color: C.muted }}>
             {c.otherLangs}:{' '}

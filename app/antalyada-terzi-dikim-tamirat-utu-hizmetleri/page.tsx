@@ -1,5 +1,6 @@
 // app/antalyada-terzi-dikim-tamirat-utu-hizmetleri/page.tsx
 import type { Metadata } from 'next';
+import { lastMod } from '@/lib/lastmod';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { reviewSchema } from '@/lib/reviews';
@@ -88,7 +89,7 @@ const jsonLd = {
       name: 'Antalya Terzi, Özel Dikim, Kıyafet Tamiratı Hizmetleri',
       description: "Antalya Konyaaltı, Lara, Muratpaşa ve Kepez'e adresten alım ile kıyafet tamiri, özel dikim ve otellere servis; normal tadilat aynı gün, acil 1–2 saat.",
       inLanguage: 'tr',
-      dateModified: '2026-07-03',
+      dateModified: lastMod('/antalyada-terzi-dikim-tamirat-utu-hizmetleri', '2026-07-03'),
       isPartOf: { '@id': `${BASE_URL}#website` },
       about: { '@id': `${PAGE_URL}#business` },
       speakable: {

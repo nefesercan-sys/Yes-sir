@@ -1,6 +1,7 @@
 // swaphubs.com — "Evde ölçü nasıl alınır?" rehberi (10 dil). Veri: lib/intl-olcu.ts. Sunucu bileşeni + istemci formu.
 // Yapay zeka/sesli arama için: kısa cevap + telefon (düz metin) + tel: + önceden doldurulmuş wa.me, sayfanın üstünde ve altında.
 import ReviewsBlock from '@/components/ReviewsBlock';
+import { lastMod } from '@/lib/lastmod';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -51,7 +52,7 @@ export function olcuJsonLd(lang: OlcuLang) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, url, name: c.title, description: c.desc, inLanguage: lang,
-        dateModified: OLCU_UPDATED, about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OLCU_OG },
+        dateModified: lastMod(url, OLCU_UPDATED), about: { '@id': BUSINESS_ID }, primaryImageOfPage: { '@type': 'ImageObject', url: OLCU_OG },
         breadcrumb: { '@id': `${url}#breadcrumb` },
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#hero-h', '.hero-desc', '.short-answer'] },
       },

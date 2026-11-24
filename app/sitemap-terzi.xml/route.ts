@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { lastMod } from '@/lib/lastmod'
 import { ANTALYA_ILCELERI, KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-lokasyonlar'
 import { CONTACT_URL } from '@/components/terzi/IletisimSayfasi'
 import { URLS as TEKSTIL_URLS } from '@/lib/tekstil-sayfalari'
@@ -181,7 +182,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${all.map(s => `  <url>
     <loc>${s.url}</loc>${s.alt ? '\n' + Object.entries(s.alt).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${u}"/>`).join('\n') : ''}
-    <lastmod>${s.lastmod ?? lastmodOf(s.url)}</lastmod>
+    <lastmod>${lastMod(s.url) ?? s.lastmod ?? lastmodOf(s.url)}</lastmod>
     <changefreq>${s.freq}</changefreq>
     <priority>${s.priority}</priority>
   </url>`).join('\n')}

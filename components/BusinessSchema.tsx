@@ -9,6 +9,7 @@
 // (en az 1 gerçek yorum; puan verilen yorumlardan hesaplanır, uydurma sayı yok).
 // ============================================================
 import { BUSINESS, SITE_URL, areaServedSchema, businessCore } from '@/lib/business';
+import { lastMod } from '@/lib/lastmod';
 import { jsonLdString } from '@/lib/json-ld';
 import { reviewStats } from '@/lib/reviews';
 
@@ -99,7 +100,7 @@ export default function BusinessSchema({
       '@type': 'WebPage',
       '@id': `${url}#webpage`,
       url, name, description, inLanguage: lang,
-      ...(lastModified ? { dateModified: lastModified } : {}),
+      ...(lastMod(url, lastModified) ? { dateModified: lastMod(url, lastModified) } : {}),
       about: { '@id': b.id },
       isPartOf: { '@type': 'WebSite', name: 'Terzi Can', url: SITE_URL },
     },
