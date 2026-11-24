@@ -8,6 +8,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link'
 import { jsonLdString } from '@/lib/json-ld';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 const SITE_URL  = 'https://swaphubs.com/konyaalti-terzi-adrese-gelen-servis'
@@ -640,6 +641,7 @@ export default function AntalyaTerziPage() {
           </p>
         </footer>
 
+      <TerziHizmetleriBolumu lang="tr" />
       <FaqBlock heading="Sık Sorulan Sorular" items={FAQ.map(([q, a]) => ({ q, a }))} />
       <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['eve-gelen-terzi', 'paca-kisaltma', 'dikis-makinesi']} sayfaUrl={'https://swaphubs.com/konyaalti-terzi-adrese-gelen-servis'} />
       <ReviewsBlock lang="tr" />

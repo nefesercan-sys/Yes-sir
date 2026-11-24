@@ -16,6 +16,7 @@ import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { mahalleFaq } from '@/lib/bolge-icerik';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 const TERZI_URL = `${SITE_URL}/terzi`;
 
@@ -81,6 +82,7 @@ export async function MahallePage({ ilce, params }: { ilce: MahalleIlce } & Maha
         komsuLokasyonlar={komsular}
         komsuHref={(slug) => pathOf(ilce, slug)}
       />
+      <TerziHizmetleriBolumu lang="tr" />
       <FaqBlock heading={`${m.ad} Terzi — Sık Sorulan Sorular`} items={mahalleFaq(m.slug, m.ad, I.ad)} />
       <KeywordBlock slug={m.slug} />
       <ReviewsBlock lang="tr" schema />

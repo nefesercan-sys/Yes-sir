@@ -8,6 +8,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 import Link from 'next/link';
 import { DURATION, HOTEL_NOTE } from '@/lib/business';
+import { byPriority } from '@/lib/seo-data';
 
 const SITE_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
@@ -215,7 +216,7 @@ export default function HotelTailorAntalyaPage() {
             </h2>
             <p style={{ color: '#6B5F53', fontSize: '.88rem', marginBottom: '2.5rem' }}>Pick-up and delivery to every resort region we cover</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1rem' }}>
-              {DISTRICTS.map(({name, time, desc, slug}) => {
+              {byPriority(DISTRICTS).map(({name, time, desc, slug}) => {
                 const CardTag: any = slug ? Link : 'div';
                 const cardProps = slug ? { href: `/en/hotel-tailor-antalya/${slug}` } : {};
                 return (

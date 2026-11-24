@@ -21,11 +21,13 @@ import type { GorselAnahtar } from '@/lib/ornek-gorseller';
 import { reviewSchema } from '@/lib/reviews';
 import { OTEL_BOLGELERI } from '@/lib/otel-bolgeleri';
 import {
-  DISTRICTS, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
+  DISTRICTS, byPriority, SERVICES, MAHALLE_PAGES, LANGS, SITE, BUSINESS_ID, PHONE, PHONE_TEL, MAPS, LAST_UPDATE,
   SERVICE_BASE, HUB_MAIN, HOTEL_BASE,
   abs, districtUrl, serviceUrl, query, timeOf, priceOf, TIME_TEXT,
   type Lang, type District, type Service, type TimeKey,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
+import { isFar, FAR_TAG, farDesc } from '@/lib/uzak-bolge';
+import { areaKwDesc, serviceKwDesc } from '@/lib/kw-desc';
 import { angleFor, angleTitles, angleDescs, angleKeywords } from '@/lib/seo-angles';
 import './seo-landing.css';
 import { fgNearDistrict, fgServiceMeta, eurFromText, EUR_FROM } from '@/lib/fg-meta';
@@ -36,6 +38,7 @@ import { DURATION, SERVICE_RULE, BUSINESS, areaServedSchema, waUrl } from '@/lib
 import { crossCanonical, thTrDistrictUrl } from '@/lib/cross-canonical';
 import { districtFaqItems, directAnswer, serviceRuleFor, processesFor, PROCESS, PROC_OF_SERVICE, pick, pickN, type ProcId } from '@/lib/bolge-icerik';
 import { jsonLdString } from '@/lib/json-ld';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 const WA = (m: string) => `https://wa.me/${PHONE_TEL.replace('+', '')}?text=${encodeURIComponent(m)}`;
 const OG = `${SITE}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
@@ -202,7 +205,8 @@ const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
   de: [(n) => `Schneider ${n}: Foto-Angebot, Hotelabholung | Terzi Can`, (n) => `Schneider ${n}: Foto-Preis, Abholung | Terzi Can`, (n) => `Schneider ${n} | Terzi Can`],
 };
 function districtCopy(lang: Lang, d: District) {
-  const r = _districtCopy(lang, d);
+  const r0 = _districtCopy(lang, d);
+  const r = isFar(d.slug) ? { ...r0, desc: farDesc(lang, d.name[lang]) } : lang === 'tr' ? r0 : { ...r0, desc: areaKwDesc(lang, d.name[lang], 'b', r0.desc) };
   return { ...r, title: pickFit([...SW_DIST_TITLES[lang].map((f) => f(d.name[lang])), r.title], 60) };
 }
 function _districtCopy(lang: Lang, d: District) {
@@ -418,8 +422,10 @@ function serviceCopy(lang: Lang, s: Service) {
   const o = lang === 'tr' ? undefined : fgServiceMeta(lang, s.id);
   const swT = { tr: [`${nm} Antalya: Fotoğraftan Fiyat | Terzi Can`, `${nm} Antalya | Terzi Can`], en: [`${nm} in Antalya · Photo Quote | Terzi Can`, `${nm} · Photo Quote | Terzi Can`, `${nm} Antalya | Terzi Can`], ru: [`${nm} в Анталии: цена по фото | Terzi Can`, `${nm} Анталья | Terzi Can`], de: [`${nm} Antalya: Preis per Foto | Terzi Can`, `${nm} Antalya | Terzi Can`] }[lang];
   const swTitle = pickFit([...swT, title], 60);
-  if (o) return { nm, title: swTitle, desc, kw: o.kw }; // swaphubs: açıklama bu sitenin kendi (fotoğraf-fiyat tonlu) metni; terzihizmeti ile aynı olmasın
-  return { nm, title: swTitle, desc, kw: [] as string[] };
+  // Yabancı dillerde açıklama anahtar kelimeli kalıptan (lib/kw-desc.ts, swaphubs varyantı 'b'); başlık değişmez.
+  const d2 = lang === 'tr' ? desc : serviceKwDesc(lang, nm, 'b', desc);
+  if (o) return { nm, title: swTitle, desc: d2, kw: o.kw }; // swaphubs: açıklama terzihizmeti ile aynı olmasın
+  return { nm, title: swTitle, desc: d2, kw: [] as string[] };
 }
 
 function serviceFaq(lang: Lang, s: Service): [string, string][] {
@@ -696,7 +702,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
   const procs = processesFor(d.slug, [faqFocus(lang, d)]);
   const featIds = new Set<string>([...procs.map((p) => Object.keys(PROC_OF_SERVICE).find((k) => PROC_OF_SERVICE[k] === p) ?? ''), ...pickN(`feat:${d.slug}:${lang}`, SERVICES.map((x) => x.id), 6)]);
   const featured = SERVICES.filter((x) => featIds.has(x.id)).slice(0, 6);
-  const nearby = DISTRICTS.filter((x) => x.slug !== d.slug && x.kind === d.kind && isIndexable(lang, x.slug)).slice(0, 8);
+  const nearby = byPriority(DISTRICTS.filter((x) => x.slug !== d.slug && x.kind === d.kind && isIndexable(lang, x.slug))).slice(0, 8);
   const hotel = HOTEL_BASE[lang] && d.hotelSlug && OTEL_BOLGELERI.some((r) => r.slug === d.hotelSlug) ? `${HOTEL_BASE[lang]}/${d.hotelSlug}` : null;
   // Aynı bölge için farklı yazılışlar: her bölge hizmet varyantlarının farklı bir dilimini gösterir
   const popular = SERVICES.map((s, i) => {
@@ -775,7 +781,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
         { href: SERVICE_BASE[lang], label: u.all },
         { href: u.pricesHref, label: u.pricesLink },
       ]}>
-        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${!isFreeService(d.slug) ? SVC_FAR[lang] : SVC_NEAR[lang]} · ${u.hours}`} h1={h1}
+        <Hero lang={lang} tag={`📍 ${d.name[lang]} · ${isFar(d.slug) ? FAR_TAG[lang] : !isFreeService(d.slug) ? SVC_FAR[lang] : SVC_NEAR[lang]} · ${u.hours}`} h1={h1}
           desc={`${districtLead(lang, d.loc[lang])} ${directAnswer(lang, d.slug, d.name[lang], d.loc[lang], d.kind === 'resort')}`} waMsg={waMsg} />
         <section className="sl-sec" style={{ paddingBottom: 0 }}>
           <div className="sl-ctr" style={{ maxWidth: 820 }}>
@@ -783,6 +789,7 @@ export function DistrictPage({ lang, d }: { lang: Lang; d: District }) {
           </div>
         </section>
 
+        {!isFar(d.slug) && <TerziHizmetleriBolumu lang={lang} />}
         <AngleBlock a={angle} id="angle-h" />
 
         {DISTRICT_FACTS[d.slug] && (
@@ -985,7 +992,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="areas-h">{u.districts}</h2></div>
             <div>
-              {byName(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip} title={query(lang, d, s)}>{d.name[lang]}</a>))}
+              {byPriority(DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip} title={query(lang, d, s)}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
           </div>
@@ -1063,7 +1070,7 @@ export function HubPage({ lang }: { lang: Lang }) {
           <div className="sl-ctr" style={{ maxWidth: 900 }}>
             <div className="sl-sec-head"><h2 className="sl-sec-h sl-ff" id="dist-h">{u.districts}</h2></div>
             <div>
-              {byName(lang, DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
+              {byPriority(DISTRICTS).map((d) => (<a key={d.slug} href={districtUrl(lang, d)} style={linkChip}>{d.name[lang]}</a>))}
               {MAHALLE_PAGES.map((m) => (<a key={m.href} href={m.href} style={linkChip}>{m.name[lang]}</a>))}
             </div>
             <p style={{ marginTop: '1rem', fontSize: '.9rem' }}><a href={`${TZ_SITE}${TZ_HUB[lang]}`} hrefLang={lang} style={{ textDecoration: 'underline' }}>{tzHubLabel[lang]}</a></p>

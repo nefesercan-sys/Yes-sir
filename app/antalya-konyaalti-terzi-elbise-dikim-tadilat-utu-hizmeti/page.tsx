@@ -6,6 +6,7 @@ import { reviewSchema } from '@/lib/reviews';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti/page.tsx
@@ -533,6 +534,7 @@ export default function KonyaaltiTerziPage() {
         </footer>
       </div>
       <OrnekGorselSeridi lang="tr" tema="acik" anahtarlar={['bel-daraltma-manken', 'fermuar-degisimi', 'erkek-takim-olcu']} sayfaUrl={PAGE_URL} />
+      <TerziHizmetleriBolumu lang="tr" />
       <ReviewsBlock lang="tr" />
     </>
   );

@@ -10,6 +10,7 @@ import { hashStr } from '@/lib/seo-angles';
 import { DURATION, SERVICE_RULE, PRICE_FROM, PRICE_BY_MODEL, PHONE_DISPLAY } from '@/lib/business';
 import { DISTRICT_FACTS } from '@/lib/district-facts';
 import { bolgeEkSss } from '@/lib/bolge-hizmet-matrisi';
+import { isFar, farNote } from '@/lib/uzak-bolge';
 
 export type BLang = 'tr' | 'en' | 'ru' | 'de';
 
@@ -142,6 +143,7 @@ export function serviceRuleFor(lang: BLang, _slug: string): string {
 
 // ── Doğrudan cevap paragrafı (sayfa başı, 1–2 cümle) ─────────────────────────
 export function directAnswer(lang: BLang, slug: string, n: string, loc: string, resort = false): string {
+  if (isFar(slug)) return farNote(lang, n);
   const D = DURATION[lang];
   const rule = serviceRuleFor(lang, slug);
   const V: Record<BLang, string[]> = {
@@ -187,7 +189,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
   switch (c.lang) {
     case 'tr': return {
       always: [
-        [`${loc} en yakın terzi nerede?`, `Terzi Can'ın atölyesi Konyaaltı Hurma Mahallesi'ndedir; ${n} için kıyafet adresten veya otelden alınıp teslim edilir. ${rule}. Her gün 08:00–23:00 açıktır.`],
+        [`${loc} en yakın terzi nerede?`, isFar(c.slug) ? farNote('tr', n) : `Terzi Can'ın atölyesi Konyaaltı Hurma Mahallesi'ndedir; ${n} için kıyafet adresten veya otelden alınıp teslim edilir. ${rule}. Her gün 08:00–23:00 açıktır.`],
         [`${loc} tamir ve tadilat ne kadar sürer?`, `${D.all}`],
       ],
       opt: [
@@ -206,7 +208,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
     };
     case 'en': return {
       always: [
-        [`Where is the nearest tailor ${loc}?`, `Terzi Can's workshop is in Hurma, Konyaaltı; for ${n} garments are collected from your address or hotel and brought back. ${rule}. Open daily 08:00–23:00.`],
+        [`Where is the nearest tailor ${loc}?`, isFar(c.slug) ? farNote('en', n) : `Terzi Can's workshop is in Hurma, Konyaaltı; for ${n} garments are collected from your address or hotel and brought back. ${rule}. Open daily 08:00–23:00.`],
         [`How long do repairs and alterations take ${loc}?`, D.all],
       ],
       opt: [
@@ -225,7 +227,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
     };
     case 'ru': return {
       always: [
-        [`Где ближайший портной ${loc}?`, `Мастерская Terzi Can находится в Хурме (Коньяалты); для района ${n} вещи забирают с вашего адреса или из отеля и привозят обратно. ${rule}. Работаем ежедневно 08:00–23:00.`],
+        [`Где ближайший портной ${loc}?`, isFar(c.slug) ? farNote('ru', n) : `Мастерская Terzi Can находится в Хурме (Коньяалты); для района ${n} вещи забирают с вашего адреса или из отеля и привозят обратно. ${rule}. Работаем ежедневно 08:00–23:00.`],
         [`Сколько времени занимает ремонт и подгонка ${loc}?`, D.all],
       ],
       opt: [
@@ -244,7 +246,7 @@ function pool(c: FaqCtx): { always: QA[]; opt: QA[]; resort: QA[] } {
     };
     default: return {
       always: [
-        [`Wo ist der nächste Schneider ${loc}?`, `Die Werkstatt von Terzi Can liegt in Hurma, Konyaaltı; für ${n} wird Kleidung an Ihrer Adresse oder im Hotel abgeholt und zurückgebracht. ${rule}. Täglich 08:00–23:00 geöffnet.`],
+        [`Wo ist der nächste Schneider ${loc}?`, isFar(c.slug) ? farNote('de', n) : `Die Werkstatt von Terzi Can liegt in Hurma, Konyaaltı; für ${n} wird Kleidung an Ihrer Adresse oder im Hotel abgeholt und zurückgebracht. ${rule}. Täglich 08:00–23:00 geöffnet.`],
         [`Wie lange dauern Reparaturen und Änderungen ${loc}?`, D.all],
       ],
       opt: [

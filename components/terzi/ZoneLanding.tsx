@@ -13,6 +13,7 @@ import { bolgeMatrisiTurist, bolgeEkSssTurist } from '@/lib/bolge-hizmet-matrisi
 import { HOTEL_NOTE } from '@/lib/business';
 import PhotoBand from '@/components/terzi/PhotoBand';
 import ReviewsBlock from '@/components/ReviewsBlock';
+import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 const C = { green: '#2C4A3E', gold: '#D4B07A', cream: '#FAF7F2', sand: '#F2EDE4', ink: '#1C1814', muted: '#6B5F53', line: 'rgba(44,74,62,.15)' };
 const serif = 'Georgia,serif';
@@ -112,6 +113,7 @@ export default function ZoneLanding({ lang, zone }: { lang: ILang; zone: ZoneSlu
 
         <OrnekGorselSeridi konu="bolge" yer={z.name} lang={lang} tema="acik" anahtarlar={['eve-gelen-terzi', 'erkek-takim-olcu', 'beyaz-gomlek-katli', 'yun-pantolon-metre']} sayfaUrl={`${SITE}${zoneUrl(lang, zone)}`} base={SITE} />
 
+        <TerziHizmetleriBolumu lang={lang} />
         <section style={{ background: C.sand, borderRadius: 8, padding: '1.3rem' }}>
           <p style={{ margin: '0 0 1rem' }}>
             <a href={waLink(c.wa(z.name))} target="_blank" rel="noopener noreferrer"
