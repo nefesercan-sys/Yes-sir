@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { findDistrict, byPriority } from '@/lib/seo-data';
 import { isFar, farDesc, farNote } from '@/lib/uzak-bolge';
+import { trAreaJobsDesc } from '@/lib/kw-desc';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -45,7 +46,7 @@ function meta(slug: string, ad: string) {
     `${ad} Terzi Çağır · Fotoğrafla Fiyat | Terzi Can`,
   ]);
   const svc = isFreeService(slug) ? 'Otele ve eve servis.' : resort ? 'Otele servis.' : 'Otellere servis.';
-  const desc = isFar(slug) ? farDesc('tr', ad) : `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`;
+  const desc = isFar(slug) ? farDesc('tr', ad) : trAreaJobsDesc(loc, title, 'b', `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`);
   return { title, desc, loc, resort };
 }
 

@@ -27,7 +27,7 @@ import {
   type Lang, type District, type Service, type TimeKey,
   isTrNear, isIndexable, TR_NEAR_SLUGS, isFreeService } from '@/lib/seo-data';
 import { isFar, FAR_TAG, farDesc } from '@/lib/uzak-bolge';
-import { areaKwDesc, serviceKwDesc } from '@/lib/kw-desc';
+import { serviceKwDesc, areaJobsDesc, trAreaJobsDesc } from '@/lib/kw-desc';
 import { angleFor, angleTitles, angleDescs, angleKeywords } from '@/lib/seo-angles';
 import './seo-landing.css';
 import { fgNearDistrict, fgServiceMeta, eurFromText, EUR_FROM } from '@/lib/fg-meta';
@@ -206,8 +206,10 @@ const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
 };
 function districtCopy(lang: Lang, d: District) {
   const r0 = _districtCopy(lang, d);
-  const r = isFar(d.slug) ? { ...r0, desc: farDesc(lang, d.name[lang]) } : lang === 'tr' ? r0 : { ...r0, desc: areaKwDesc(lang, d.name[lang], 'b', r0.desc) };
-  return { ...r, title: pickFit([...SW_DIST_TITLES[lang].map((f) => f(d.name[lang])), r.title], 60) };
+  const title = pickFit([...SW_DIST_TITLES[lang].map((f) => f(d.name[lang])), r0.title], 60);
+  // Açıklama başlıktaki işleri tekrar eder (lib/kw-desc.ts); başlık değişmez.
+  const desc = isFar(d.slug) ? farDesc(lang, d.name[lang]) : lang === 'tr' ? trAreaJobsDesc(d.loc.tr, title, 'b', r0.desc) : areaJobsDesc(lang, d.name[lang], title, 'b', r0.desc);
+  return { ...r0, desc, title };
 }
 function _districtCopy(lang: Lang, d: District) {
   const n = d.name[lang];
