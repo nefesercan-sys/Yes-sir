@@ -7,7 +7,7 @@ const PATH = '/terzi/yelek-tamiri-tadilati-antalya';
 const DATA: KonuData = {
   "name": "Yelek Tamiri ve Tadilatı",
   "h1": "Yelek Daraltma, Tamir ve Fermuar · Antalya",
-  "kisa": "Yeleğiniz bol mu geliyor, fermuarı mı bozuldu, düğmesi mi koptu? Yelek daraltma ve boy ayarı 200 TL'den, fermuar değişimi 300 TL'den, deri yelek işleri 400 TL'den başlar (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
+  "kisa": "Yeleğiniz bol mu geliyor, fermuarı mı bozuldu, düğmesi mi koptu? Yelek daraltma ve boy ayarı 200 TL'den, fermuar değişimi 300 TL'den, deri yelek işleri 400 TL'den başlar (KDV dahil). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
   "waIlk": "Merhaba, yeleğimde tadilat yaptırmak istiyorum. Fotoğrafını gönderiyorum, fiyat alabilir miyim?",
   "facts": [
     [
@@ -73,7 +73,7 @@ const DATA: KonuData = {
       "Fotoğrafa göre fiyat"
     ]
   ],
-  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahil değildir. Net fiyat işin fotoğrafına göre WhatsApp'tan söylenir.",
+  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahildir. Net fiyat işin fotoğrafına göre WhatsApp'tan söylenir.",
   "adimlar": [
     {
       "baslik": "Sorunu fotoğraflayın",
@@ -95,7 +95,7 @@ const DATA: KonuData = {
   "faq": [
     {
       "q": "Yelek daraltma kaç TL?",
-      "a": "Kumaş ve kot yelek daraltma 200 TL'den, deri yelek 400 TL'den başlar; fiyatlara KDV dahil değildir. Net fiyat için fotoğraf yeterli."
+      "a": "Kumaş ve kot yelek daraltma 200 TL'den, deri yelek 400 TL'den başlar; fiyatlara KDV dahildir. Net fiyat için fotoğraf yeterli."
     },
     {
       "q": "Takım elbisemin yeleği bol geliyor, düzelir mi?",
@@ -148,7 +148,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Yelek Daraltma ve Tamiri Fiyatı · Antalya | Terzi Can" },
-  description: "Yelek bol mu, fermuarı mı bozuk? Yelek daraltma 200 TL'den, fermuar 300 TL'den, deri yelek 400 TL'den (KDV hariç). Fotoğraf gönderin.",
+  description: "Yelek bol mu, fermuarı mı bozuk? Yelek daraltma 200 TL'den, fermuar 300 TL'den, deri yelek 400 TL'den (KDV dahil). Fotoğraf gönderin.",
   keywords: ["yelek tamiri", "yelek tadilatı", "yelek daraltma", "yelek kısaltma", "yelek fermuarı değişimi", "takım elbise yeleği tadilatı", "deri yelek tamiri", "kot yelek tadilatı", "yelek tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: { title: "Yelek Daraltma, Tamir ve Fermuar | Terzi Can Antalya", description: "Bol gelen yelek, bozulan fermuar, kopan düğme: fotoğrafı gönderin, net fiyatı öğrenin. Normal işler aynı gün.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },

@@ -129,33 +129,33 @@ const TITLES: Record<ILang, ((l: string, n: string) => string)[]> = {
 const LEADS: Record<ILang, ((l: string, n: string) => string)[]> = {
   en: [
     (l, n) => `Before you ask for a price in ${n}, see what can be done on which garment and where prices start. The list is below; a photo is enough for an exact quote.`,
-    (l, n) => `Shortening and taking-in start from €10, zippers from €15 and leather from €20 (prices exclude VAT). The jobs we do for ${n} are grouped by garment below.`,
+    (l, n) => `Shortening and taking-in start from €10, zippers from €15 and leather from €20 (prices include VAT). The jobs we do for ${n} are grouped by garment below.`,
     (l) => `What a tailor can do for you ${l} and roughly what it costs, on one page. Send a photo on WhatsApp and we reply with the exact price.`,
   ],
   ru: [
     (l, n) => `Прежде чем спрашивать цену (${n}), посмотрите, что и на какой вещи можно сделать и от какой суммы. Список ниже; для точной цены достаточно фото.`,
-    (l, n) => `Укорочение и ушивание — от €10, молнии — от €15, кожа — от €20 (цены без НДС). Работы для района ${n} сгруппированы по видам одежды ниже.`,
+    (l, n) => `Укорочение и ушивание — от €10, молнии — от €15, кожа — от €20 (цены с НДС). Работы для района ${n} сгруппированы по видам одежды ниже.`,
     (l) => `Что портной может сделать ${l} и сколько это примерно стоит — на одной странице. Пришлите фото в WhatsApp, и мы назовём точную цену.`,
   ],
   de: [
     (l, n) => `Bevor Sie nach dem Preis fragen (${n}): Hier sehen Sie, was an welchem Kleidungsstück möglich ist und ab welchem Preis. Die Liste steht unten; für den genauen Preis genügt ein Foto.`,
-    (l, n) => `Kürzen und Enger machen ab €10, Reißverschlüsse ab €15, Leder ab €20 (zzgl. MwSt.). Die Arbeiten für ${n} sind unten nach Kleidungsstück geordnet.`,
+    (l, n) => `Kürzen und Enger machen ab €10, Reißverschlüsse ab €15, Leder ab €20 (inkl. MwSt.). Die Arbeiten für ${n} sind unten nach Kleidungsstück geordnet.`,
     (l) => `Was ein Schneider ${l} für Sie tun kann und was es ungefähr kostet, auf einer Seite. Foto per WhatsApp schicken, wir nennen den genauen Preis.`,
   ],
 };
 const e = (k: Parameters<typeof eurFrom>[0]) => '€' + eurFrom(k);
 const PRICES: Record<ILang, ((n: string) => string)[]> = {
   en: [
-    (n) => `Price summary for ${n}: hems, waists, sleeves and lengths from ${e('hem')}, zippers from ${e('zipperPants')} (coats and jackets ${e('zipperCoat')}), leather from ${e('leather')}; prices exclude VAT. Anything not listed is priced from a photo.`,
-    (n) => `In short (${n}): shortening and taking-in from ${e('hem')}, zipper replacement from ${e('zipperPants')}, leather alterations from ${e('leather')}, excluding VAT. Buttons, linings, waistcoats, jumpsuits and made-to-measure pieces are priced from a photo or model.`,
+    (n) => `Price summary for ${n}: hems, waists, sleeves and lengths from ${e('hem')}, zippers from ${e('zipperPants')} (coats and jackets ${e('zipperCoat')}), leather from ${e('leather')}; prices include VAT. Anything not listed is priced from a photo.`,
+    (n) => `In short (${n}): shortening and taking-in from ${e('hem')}, zipper replacement from ${e('zipperPants')}, leather alterations from ${e('leather')}, including VAT. Buttons, linings, waistcoats, jumpsuits and made-to-measure pieces are priced from a photo or model.`,
   ],
   ru: [
-    (n) => `Коротко о ценах (${n}): низ, пояс, рукав и длина — от ${e('hem')}, молнии — от ${e('zipperPants')} (куртки и пальто — ${e('zipperCoat')}), кожа — от ${e('leather')}; цены без НДС. Чего нет в списке, оцениваем по фото.`,
-    (n) => `Итого (${n}): укорочение и ушивание — от ${e('hem')}, замена молнии — от ${e('zipperPants')}, переделка кожи — от ${e('leather')}, без НДС. Пуговицы, подкладку, жилеты, комбинезоны и пошив оцениваем по фото или модели.`,
+    (n) => `Коротко о ценах (${n}): низ, пояс, рукав и длина — от ${e('hem')}, молнии — от ${e('zipperPants')} (куртки и пальто — ${e('zipperCoat')}), кожа — от ${e('leather')}; цены с НДС. Чего нет в списке, оцениваем по фото.`,
+    (n) => `Итого (${n}): укорочение и ушивание — от ${e('hem')}, замена молнии — от ${e('zipperPants')}, переделка кожи — от ${e('leather')}, с НДС. Пуговицы, подкладку, жилеты, комбинезоны и пошив оцениваем по фото или модели.`,
   ],
   de: [
-    (n) => `Preisübersicht für ${n}: Saum, Bund, Ärmel und Länge ab ${e('hem')}, Reißverschlüsse ab ${e('zipperPants')} (Mäntel und Jacken ${e('zipperCoat')}), Leder ab ${e('leather')}; Preise zzgl. MwSt. Was nicht aufgeführt ist, berechnen wir nach Foto.`,
-    (n) => `Kurz gesagt (${n}): Kürzen und Enger machen ab ${e('hem')}, Reißverschluss wechseln ab ${e('zipperPants')}, Lederänderung ab ${e('leather')}, zzgl. MwSt. Knöpfe, Futter, Westen, Overalls und Maßanfertigung nach Foto oder Modell.`,
+    (n) => `Preisübersicht für ${n}: Saum, Bund, Ärmel und Länge ab ${e('hem')}, Reißverschlüsse ab ${e('zipperPants')} (Mäntel und Jacken ${e('zipperCoat')}), Leder ab ${e('leather')}; Preise inkl. MwSt. Was nicht aufgeführt ist, berechnen wir nach Foto.`,
+    (n) => `Kurz gesagt (${n}): Kürzen und Enger machen ab ${e('hem')}, Reißverschluss wechseln ab ${e('zipperPants')}, Lederänderung ab ${e('leather')}, inkl. MwSt. Knöpfe, Futter, Westen, Overalls und Maßanfertigung nach Foto oder Modell.`,
   ],
 };
 
@@ -181,7 +181,7 @@ export function bolgeMatrisiI18n(lang: ILang, slug: string, n: string, loc: stri
 type F = { id: string; f: (l: string, n: string) => [string, string] };
 const FAQ: Record<ILang, F[]> = {
   en: [
-    { id: 'paca', f: (l) => [`What does it cost to shorten trousers ${l}?`, `From ${e('hem')}, excluding VAT. Send a photo on WhatsApp and we reply with the exact price. Normal jobs are ready the same day, urgent ones in 1–2 hours.`] },
+    { id: 'paca', f: (l) => [`What does it cost to shorten trousers ${l}?`, `From ${e('hem')}, including VAT. Send a photo on WhatsApp and we reply with the exact price. Normal jobs are ready the same day, urgent ones in 1–2 hours.`] },
     { id: 'fermuar', f: (l) => [`What does a new trouser zipper cost ${l}?`, `Zipper replacement starts from ${e('zipperPants')}; coats and jackets from ${e('zipperCoat')}. If only the slider is faulty it can often be fixed without changing the whole zipper. We tell you from a photo.`] },
     { id: 'kol', f: (l, n) => [`What does it cost to shorten jacket or coat sleeves in ${n}?`, `Sleeve and length shortening starts from ${e('hem')}. The sleeve is marked while you wear the garment; we can collect it in ${n} and bring it back.`] },
     { id: 'bluz', f: (l) => [`What does it cost to take in a blouse or shirt ${l}?`, `Taking-in starts from ${e('waist')}. Blouses, shirts and T-shirts can be taken in and shortened; the exact price follows from a photo.`] },
@@ -199,7 +199,7 @@ const FAQ: Record<ILang, F[]> = {
     { id: 'kotmont', f: (l) => [`What does shortening a denim jacket, denim coat or denim shorts cost ${l}?`, `Denim jobs start from ${e('hem')}. Jackets and coats get shorter sleeves or length and a closer fit; shorts are shortened.`] },
   ],
   ru: [
-    { id: 'paca', f: (l) => [`Во сколько обойдётся подшить брюки ${l}?`, `От ${e('hem')}, без НДС. Пришлите фото в WhatsApp — назовём точную цену. Обычные работы готовы в тот же день, срочные — за 1–2 часа.`] },
+    { id: 'paca', f: (l) => [`Во сколько обойдётся подшить брюки ${l}?`, `От ${e('hem')}, с НДС. Пришлите фото в WhatsApp — назовём точную цену. Обычные работы готовы в тот же день, срочные — за 1–2 часа.`] },
     { id: 'fermuar', f: (l) => [`Сколько стоит новая молния на брюках ${l}?`, `Замена молнии — от ${e('zipperPants')}; на куртках и пальто — от ${e('zipperCoat')}. Если сломан только бегунок, часто хватает ремонта без замены всей молнии. Скажем по фото.`] },
     { id: 'kol', f: (l, n) => [`Сколько стоит укоротить рукава куртки или пальто (${n})?`, `Укорочение рукавов и длины — от ${e('hem')}. Длину рукава отмечаем на вас; вещь можем забрать и привезти обратно.`] },
     { id: 'bluz', f: (l) => [`Сколько стоит ушить блузку или рубашку ${l}?`, `Ушивание — от ${e('waist')}. Блузки, рубашки и футболки ушиваем и укорачиваем; точную цену называем по фото.`] },
@@ -217,7 +217,7 @@ const FAQ: Record<ILang, F[]> = {
     { id: 'kotmont', f: (l) => [`Сколько стоит укоротить джинсовую куртку, пальто или шорты ${l}?`, `Работы с джинсой — от ${e('hem')}. В куртках и пальто укорачиваем рукава и длину и ушиваем; шорты укорачиваем.`] },
   ],
   de: [
-    { id: 'paca', f: (l) => [`Was kostet es, eine Hose zu kürzen ${l}?`, `Ab ${e('hem')}, zzgl. MwSt. Schicken Sie ein Foto per WhatsApp, wir nennen den genauen Preis. Normale Arbeiten sind am selben Tag fertig, Express in 1–2 Stunden.`] },
+    { id: 'paca', f: (l) => [`Was kostet es, eine Hose zu kürzen ${l}?`, `Ab ${e('hem')}, inkl. MwSt. Schicken Sie ein Foto per WhatsApp, wir nennen den genauen Preis. Normale Arbeiten sind am selben Tag fertig, Express in 1–2 Stunden.`] },
     { id: 'fermuar', f: (l) => [`Was kostet ein neuer Hosenreißverschluss ${l}?`, `Reißverschluss wechseln ab ${e('zipperPants')}; an Mänteln und Jacken ab ${e('zipperCoat')}. Ist nur der Schieber defekt, genügt oft eine Reparatur ohne kompletten Austausch. Das sagen wir Ihnen nach Foto.`] },
     { id: 'kol', f: (l, n) => [`Was kostet es, Jacken- oder Mantelärmel zu kürzen (${n})?`, `Ärmel und Länge kürzen ab ${e('hem')}. Die Ärmellänge wird am getragenen Stück markiert; wir können es abholen und zurückbringen.`] },
     { id: 'bluz', f: (l) => [`Was kostet es, eine Bluse oder ein Hemd enger zu machen ${l}?`, `Enger machen ab ${e('waist')}. Blusen, Hemden und T-Shirts machen wir enger und kürzer; den genauen Preis nennen wir nach Foto.`] },

@@ -277,7 +277,7 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
           <div className="price-list">
             <div className="price-row"><span className="price-name">Повседневное платье (по меркам)</span><span className="price-value">по фото</span></div>
             <div className="price-row"><span className="price-name">Вечернее платье</span><span className="price-value">по фото</span></div>
-            <p className="price-note" style={{ marginTop: '.6rem' }}>Цены указаны «от», без НДС; точная цена зависит от работы. Пошив оцениваем по фото и модели.</p>
+            <p className="price-note" style={{ marginTop: '.6rem' }}>Цены указаны «от», с НДС; точная цена зависит от работы. Пошив оцениваем по фото и модели.</p>
           </div>
         </article>
       </section>

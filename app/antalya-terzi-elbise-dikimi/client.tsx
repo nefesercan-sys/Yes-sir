@@ -722,7 +722,7 @@ export default function ElbiseDikimiClient() {
         <p className="intro-text">
           Bu sayfa size özel dikim ve mevcut kıyafetlerinizin tadilatı
           (boy kısaltma, bel daraltma, fermuar değişimi) içindir.
-          Fiyatlar KDV hariçtir.
+          Fiyatlar KDV dahildir.
         </p>
       </section>
 

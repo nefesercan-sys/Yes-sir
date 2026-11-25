@@ -146,7 +146,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Ölçüyü gönderdikten sonra',
     next: [
       'Ölçülerinizi, fotoğraflarınızı ve model fikrinizi WhatsApp\'tan gönderin; ayrıntıları orada konuşuruz.',
-      'Siparişe özel dikim ve abiye için sabit fiyat yazmıyoruz; fiyat fotoğrafa veya istenilen modele göre WhatsApp\'tan verilir. Fiyatlara KDV dahil değildir.',
+      'Siparişe özel dikim ve abiye için sabit fiyat yazmıyoruz; fiyat fotoğrafa veya istenilen modele göre WhatsApp\'tan verilir. Fiyatlara KDV dahildir.',
       'Kargo ücreti müşteriye aittir. Hizmet Antalya içi ve yurt dışı için geçerlidir; Türkiye\'nin diğer şehirleri için WhatsApp\'tan sorabilirsiniz.',
       'Teslim süresi işin durumuna göre belirlenir. Dikim ve tadilatta işçilik garantimiz vardır; beğenmediğiniz noktada yeniden düzeltme yapılır.',
     ],
@@ -237,7 +237,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'After you send your measurements',
     next: [
       'Send your numbers, photos and style idea on WhatsApp; we settle the details there.',
-      'We do not publish fixed prices for made-to-order sewing or evening wear; the price is given on WhatsApp from a photo or the model you want. Prices exclude VAT.',
+      'We do not publish fixed prices for made-to-order sewing or evening wear; the price is given on WhatsApp from a photo or the model you want. Prices include VAT.',
       'The shipping fee is paid by the customer. The service covers Antalya and abroad; for other cities in Turkey you can ask on WhatsApp.',
       'Delivery time depends on the job. Our sewing and alteration work carries our workmanship guarantee: if you are not happy with a point, it is corrected again.',
     ],
@@ -419,7 +419,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'После отправки мерок',
     next: [
       'Отправьте цифры, фото и идею модели в WhatsApp; детали обсудим там.',
-      'На индивидуальный пошив и вечерние наряды фиксированной цены нет; цену называют в WhatsApp по фото или желаемой модели. Цены без НДС.',
+      'На индивидуальный пошив и вечерние наряды фиксированной цены нет; цену называют в WhatsApp по фото или желаемой модели. Цены с НДС.',
       'Стоимость доставки оплачивает клиент. Услуга действует по Анталье и за границу; по другим городам Турции можно спросить в WhatsApp.',
       'Срок зависит от работы. На пошив и переделку действует наша гарантия на работу: если что-то не понравится, исправим снова.',
     ],
@@ -510,7 +510,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Después de enviar las medidas',
     next: [
       'Envíe sus cifras, fotos y la idea del modelo por WhatsApp; allí concretamos los detalles.',
-      'En la ropa a medida y de fiesta no publicamos precios fijos; el precio se da por WhatsApp según la foto o el modelo deseado. Los precios no incluyen IVA.',
+      'En la ropa a medida y de fiesta no publicamos precios fijos; el precio se da por WhatsApp según la foto o el modelo deseado. Los precios incluyen IVA.',
       'El coste del envío corre a cargo del cliente. El servicio cubre Antalya y el extranjero; para otras ciudades de Turquía puede preguntar por WhatsApp.',
       'El plazo de entrega depende del trabajo. En costura y arreglos ofrecemos garantía de mano de obra: si algún punto no le convence, se corrige de nuevo.',
     ],
@@ -601,7 +601,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Une fois les mesures envoyées',
     next: [
       'Envoyez vos chiffres, vos photos et l\'idée du modèle par WhatsApp ; nous réglons les détails là-bas.',
-      'Pour le sur-mesure et les tenues de soirée, nous n\'affichons pas de prix fixe ; le prix est donné sur WhatsApp d\'après la photo ou le modèle souhaité. Les prix s\'entendent hors TVA.',
+      'Pour le sur-mesure et les tenues de soirée, nous n\'affichons pas de prix fixe ; le prix est donné sur WhatsApp d\'après la photo ou le modèle souhaité. Les prix s\'entendent TVA comprise.',
       'Les frais d\'expédition sont à la charge du client. Le service couvre Antalya et l\'étranger ; pour les autres villes de Turquie, vous pouvez demander sur WhatsApp.',
       'Le délai dépend du travail. Pour la couture et les retouches, notre garantie de main-d\'œuvre s\'applique : si un point ne vous convient pas, il est repris.',
     ],
@@ -692,7 +692,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Po wysłaniu miar',
     next: [
       'Wyślij liczby, zdjęcia i pomysł na fason przez WhatsApp; tam ustalimy szczegóły.',
-      'Przy szyciu na zamówienie i odzieży wieczorowej nie podajemy stałych cen; cena jest podawana na WhatsApp na podstawie zdjęcia lub wybranego fasonu. Ceny nie zawierają VAT.',
+      'Przy szyciu na zamówienie i odzieży wieczorowej nie podajemy stałych cen; cena jest podawana na WhatsApp na podstawie zdjęcia lub wybranego fasonu. Ceny zawierają VAT.',
       'Koszt przesyłki ponosi klient. Usługa obejmuje Antalyę i zagranicę; w sprawie innych miast Turcji można zapytać na WhatsApp.',
       'Czas realizacji zależy od zlecenia. Na szycie i przeróbki obowiązuje nasza gwarancja wykonania: jeśli coś Ci się nie podoba, poprawimy to ponownie.',
     ],
@@ -783,7 +783,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Після надсилання мірок',
     next: [
       'Надішліть цифри, фото та ідею моделі у WhatsApp; подробиці обговоримо там.',
-      'На індивідуальне пошиття та вечірній одяг фіксованої ціни немає; ціну називають у WhatsApp за фото або бажаною моделлю. Ціни без ПДВ.',
+      'На індивідуальне пошиття та вечірній одяг фіксованої ціни немає; ціну називають у WhatsApp за фото або бажаною моделлю. Ціни з ПДВ.',
       'Вартість доставки сплачує клієнт. Послуга діє по Анталії та за кордон; щодо інших міст Туреччини можна запитати у WhatsApp.',
       'Строк залежить від роботи. На пошиття й переробку діє наша гарантія на роботу: якщо щось не сподобається, виправимо знову.',
     ],
@@ -874,7 +874,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'Nadat u de maten hebt verstuurd',
     next: [
       'Stuur uw getallen, foto\'s en modelidee via WhatsApp; daar regelen we de details.',
-      'Voor kleding op maat en galakleding publiceren we geen vaste prijzen; de prijs wordt via WhatsApp genoemd op basis van een foto of het gewenste model. Prijzen zijn exclusief btw.',
+      'Voor kleding op maat en galakleding publiceren we geen vaste prijzen; de prijs wordt via WhatsApp genoemd op basis van een foto of het gewenste model. Prijzen zijn inclusief btw.',
       'De verzendkosten komen voor rekening van de klant. De service geldt voor Antalya en het buitenland; voor andere steden in Turkije kunt u via WhatsApp navragen.',
       'De levertijd hangt af van de opdracht. Op naai- en vermaakwerk geldt onze garantie op het vakwerk: bevalt een punt u niet, dan wordt het opnieuw verbeterd.',
     ],
@@ -965,7 +965,7 @@ export const OLCU: Record<OlcuLang, OlcuCopy> = {
     nextH: 'بعد إرسال القياسات',
     next: [
       'أرسل أرقامك وصورك وفكرة التصميم عبر واتساب؛ نحدد التفاصيل هناك.',
-      'للخياطة حسب الطلب وملابس السهرة لا ننشر أسعارًا ثابتة؛ يُحدَّد السعر عبر واتساب بحسب الصورة أو التصميم المطلوب. الأسعار لا تشمل ضريبة القيمة المضافة.',
+      'للخياطة حسب الطلب وملابس السهرة لا ننشر أسعارًا ثابتة؛ يُحدَّد السعر عبر واتساب بحسب الصورة أو التصميم المطلوب. الأسعار تشمل ضريبة القيمة المضافة.',
       'تكلفة الشحن على العميل. الخدمة تشمل أنطاليا والخارج؛ وللمدن التركية الأخرى يمكنك السؤال عبر واتساب.',
       'يتحدد موعد التسليم بحسب العمل. للخياطة والتعديلات ضمان على الصنعة: إذا لم تعجبك نقطة ما تُصحَّح من جديد.',
     ],

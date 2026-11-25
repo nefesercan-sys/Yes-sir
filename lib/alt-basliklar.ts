@@ -20,16 +20,16 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "تقصير البنطلون في {y}: كم يكلّف ومتى يكون جاهزاً؟"
    },
    "p": {
-    "tr": "Başlangıç fiyatı ₺200'dür (KDV hariç). Normal işler aynı gün, acil işler 1–2 saatte hazır olur; süre işin durumuna göre değişir.",
-    "en": "Prices start from €10, excluding VAT. Normal jobs are ready the same day and urgent ones in 1–2 hours, depending on the job.",
-    "de": "Ab €10, zzgl. MwSt. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden, je nach Arbeit.",
-    "ru": "От €10, без НДС. Обычные работы готовы в тот же день, срочные — за 1–2 часа, в зависимости от работы.",
-    "es": "Desde €10, IVA no incluido. Los trabajos normales están listos el mismo día y los urgentes en 1–2 horas, según el trabajo.",
-    "fr": "Dès €10, hors TVA. Les travaux normaux sont prêts le jour même et les urgents en 1 à 2 heures, selon le travail.",
-    "pl": "Od €10, bez VAT. Zwykłe prace są gotowe tego samego dnia, pilne w 1–2 godziny, zależnie od pracy.",
-    "uk": "Від €10, без ПДВ. Звичайні роботи готові того ж дня, термінові — за 1–2 години, залежно від роботи.",
-    "nl": "Vanaf €10, excl. btw. Gewoon werk is dezelfde dag klaar en spoed in 1–2 uur, afhankelijk van het werk.",
-    "ar": "من €10، غير شامل الضريبة. الأعمال العادية جاهزة في اليوم نفسه والمستعجلة خلال 1–2 ساعة، حسب العمل."
+    "tr": "Başlangıç fiyatı ₺200'dür (KDV dahil). Normal işler aynı gün, acil işler 1–2 saatte hazır olur; süre işin durumuna göre değişir.",
+    "en": "Prices start from €10, including VAT. Normal jobs are ready the same day and urgent ones in 1–2 hours, depending on the job.",
+    "de": "Ab €10, inkl. MwSt. Normale Arbeiten sind am selben Tag fertig, eilige in 1–2 Stunden, je nach Arbeit.",
+    "ru": "От €10, с НДС. Обычные работы готовы в тот же день, срочные — за 1–2 часа, в зависимости от работы.",
+    "es": "Desde €10, IVA incluido. Los trabajos normales están listos el mismo día y los urgentes en 1–2 horas, según el trabajo.",
+    "fr": "Dès €10, TVA comprise. Les travaux normaux sont prêts le jour même et les urgents en 1 à 2 heures, selon le travail.",
+    "pl": "Od €10, z VAT. Zwykłe prace są gotowe tego samego dnia, pilne w 1–2 godziny, zależnie od pracy.",
+    "uk": "Від €10, з ПДВ. Звичайні роботи готові того ж дня, термінові — за 1–2 години, залежно від роботи.",
+    "nl": "Vanaf €10, incl. btw. Gewoon werk is dezelfde dag klaar en spoed in 1–2 uur, afhankelijk van het werk.",
+    "ar": "من €10، شامل الضريبة. الأعمال العادية جاهزة في اليوم نفسه والمستعجلة خلال 1–2 ساعة، حسب العمل."
    }
   },
   {
@@ -126,16 +126,16 @@ const BASE: Record<Exclude<Konu, 'terziFp' | 'hizmetFp'>, Item[]> = {
     "ar": "كم يكلّف استبدال السحاب؟"
    },
    "p": {
-    "tr": "₺300'den başlar (KDV hariç); fermuarın boyu ve giysinin türü fiyatı etkiler. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.",
-    "en": "From €15, excluding VAT; coats and jackets from €15. Zipper length and garment type affect the price. Normal jobs are ready the same day, urgent ones in 1–2 hours.",
-    "de": "Ab €15, zzgl. MwSt.; Mäntel und Jacken ab €15. Länge des Reißverschlusses und Art des Kleidungsstücks beeinflussen den Preis. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden.",
-    "ru": "От €15, без НДС; куртки и пальто — от €15. Цена зависит от длины молнии и вида одежды. Обычные работы — в тот же день, срочные — за 1–2 часа.",
-    "es": "Desde €15, IVA no incluido; en abrigos y chaquetas desde €15. El largo de la cremallera y el tipo de prenda influyen en el precio. Trabajos normales el mismo día, urgentes en 1–2 horas.",
-    "fr": "Dès €15, hors TVA ; manteaux et vestes dès €15. La longueur de la fermeture et le type de vêtement influencent le prix. Travaux normaux le jour même, urgents en 1 à 2 heures.",
-    "pl": "Od €15, bez VAT; w płaszczach i kurtkach od €15. Na cenę wpływają długość zamka i rodzaj ubrania. Zwykłe prace tego samego dnia, pilne w 1–2 godziny.",
-    "uk": "Від €15, без ПДВ; на пальтах і куртках — від €15. Ціна залежить від довжини блискавки та виду одягу. Звичайні роботи — того ж дня, термінові — за 1–2 години.",
-    "nl": "Vanaf €15, excl. btw; jassen en mantels vanaf €15. De lengte van de rits en het soort kledingstuk bepalen de prijs. Gewoon werk dezelfde dag, spoed in 1–2 uur.",
-    "ar": "من €15، غير شامل الضريبة؛ وفي المعاطف والسترات من €15. طول السحاب ونوع القطعة يؤثران في السعر. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة."
+    "tr": "₺300'den başlar (KDV dahil); fermuarın boyu ve giysinin türü fiyatı etkiler. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.",
+    "en": "From €15, including VAT; coats and jackets from €15. Zipper length and garment type affect the price. Normal jobs are ready the same day, urgent ones in 1–2 hours.",
+    "de": "Ab €15, inkl. MwSt.; Mäntel und Jacken ab €15. Länge des Reißverschlusses und Art des Kleidungsstücks beeinflussen den Preis. Normale Arbeiten am selben Tag, eilige in 1–2 Stunden.",
+    "ru": "От €15, с НДС; куртки и пальто — от €15. Цена зависит от длины молнии и вида одежды. Обычные работы — в тот же день, срочные — за 1–2 часа.",
+    "es": "Desde €15, IVA incluido; en abrigos y chaquetas desde €15. El largo de la cremallera y el tipo de prenda influyen en el precio. Trabajos normales el mismo día, urgentes en 1–2 horas.",
+    "fr": "Dès €15, TVA comprise ; manteaux et vestes dès €15. La longueur de la fermeture et le type de vêtement influencent le prix. Travaux normaux le jour même, urgents en 1 à 2 heures.",
+    "pl": "Od €15, z VAT; w płaszczach i kurtkach od €15. Na cenę wpływają długość zamka i rodzaj ubrania. Zwykłe prace tego samego dnia, pilne w 1–2 godziny.",
+    "uk": "Від €15, з ПДВ; на пальтах і куртках — від €15. Ціна залежить від довжини блискавки та виду одягу. Звичайні роботи — того ж дня, термінові — за 1–2 години.",
+    "nl": "Vanaf €15, incl. btw; jassen en mantels vanaf €15. De lengte van de rits en het soort kledingstuk bepalen de prijs. Gewoon werk dezelfde dag, spoed in 1–2 uur.",
+    "ar": "من €15، شامل الضريبة؛ وفي المعاطف والسترات من €15. طول السحاب ونوع القطعة يؤثران في السعر. الأعمال العادية في اليوم نفسه والمستعجلة خلال 1–2 ساعة."
    }
   },
   {

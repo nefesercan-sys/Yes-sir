@@ -56,12 +56,12 @@ const TITLES: ((loc: string, n: string) => string)[] = [
 ];
 const LEADS: ((loc: string, n: string) => string)[] = [
   (l, n) => `${n} için fiyat sormadan önce bakın: hangi giyside hangi iş yapılıyor ve başlangıç fiyatı ne? Liste aşağıda; net fiyat için fotoğraf yeterli.`,
-  (l, n) => `Kısaltma ve daraltma ₺200'den, fermuar ₺300'den, deri işleri ₺400'den başlar (KDV hariç). ${n} için yapılan işler giysi türüne göre aşağıda.`,
+  (l, n) => `Kısaltma ve daraltma ₺200'den, fermuar ₺300'den, deri işleri ₺400'den başlar (KDV dahil). ${n} için yapılan işler giysi türüne göre aşağıda.`,
   (l, n) => `${l} bir terziye ne yaptırabileceğinizi ve yaklaşık ne ödeyeceğinizi tek sayfada topladık. Fotoğrafı WhatsApp'tan gönderin, net fiyatı yazalım.`,
 ];
 const PRICES: ((n: string) => string)[] = [
-  (n) => `${n} için özet fiyat: paça, bel, kol ve boy işleri ₺200'den, fermuar ₺300'den, deri ₺400'den başlar; fiyatlara KDV dahil değildir. Listede olmayan işlerin fiyatı fotoğrafa göre yazılır.`,
-  (n) => `Kısaca: kısaltma ve daraltma ₺200'den, fermuar değişimi ₺300'den, deri tadilatı ₺400'den (KDV hariç). Düğme, astar, yelek, tulum ve dikimde fiyat fotoğraf ya da modele göre belirlenir (${n}).`,
+  (n) => `${n} için özet fiyat: paça, bel, kol ve boy işleri ₺200'den, fermuar ₺300'den, deri ₺400'den başlar; fiyatlara KDV dahildir. Listede olmayan işlerin fiyatı fotoğrafa göre yazılır.`,
+  (n) => `Kısaca: kısaltma ve daraltma ₺200'den, fermuar değişimi ₺300'den, deri tadilatı ₺400'den (KDV dahil). Düğme, astar, yelek, tulum ve dikimde fiyat fotoğraf ya da modele göre belirlenir (${n}).`,
 ];
 
 const rot = <T,>(a: T[], k: number): T[] => a.map((_, i) => a[(i + k) % a.length]);
@@ -85,7 +85,7 @@ export function bolgeMatrisi(slug: string, n: string, loc: string): Matris {
 
 // ── Ek sorgu kalıplı SSS (bölge başına 3 tane, slug karmasıyla farklı alt küme) ────────
 const FAQ: { id: string; f: (loc: string, n: string) => [string, string] }[] = [
-  { id: 'paca', f: (l) => [`${l} paça kısaltma kaç TL?`, `₺200'den başlar (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, net fiyatı yazalım. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.`] },
+  { id: 'paca', f: (l) => [`${l} paça kısaltma kaç TL?`, `₺200'den başlar (KDV dahil). Fotoğrafı WhatsApp'tan gönderin, net fiyatı yazalım. Normal işler aynı gün, acil işler 1–2 saatte hazır olur.`] },
   { id: 'fermuar', f: (l) => [`${l} pantolon fermuarı değişimi kaç TL?`, `Fermuar değişimi ₺300'den başlar. Yalnızca sürgüsü bozuksa fermuarın tamamı değişmeden onarılabilir; fotoğrafa bakıp söyleriz.`] },
   { id: 'kol', f: (l, n) => [`${n} için ceket ve mont kolu kısaltma kaç TL?`, `Kol ve boy kısaltma ₺200'den başlar. Kol boyu giysi üzerinizdeyken işaretlenir; ${n} adresinden alıp geri getirebiliriz.`] },
   { id: 'bluz', f: (l) => [`${l} bluz ve gömlek daraltma kaç TL?`, `Beden daraltma ₺200'den başlar. Bluz, gömlek ve tişörtte daraltma ve kısaltma yapılır; net fiyat fotoğrafa göre yazılır.`] },
