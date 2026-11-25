@@ -7,7 +7,7 @@ import { fitDesc } from './meta-fit';
 import { isFreeService } from '@/lib/business';
 // Ücretsiz servis listesi tek kaynaktan (lib/business.ts FREE_SERVICE_SLUGS); otellere servis her bölgede ücretsiz.
 const BANK: Record<string, M> = {
-  hurma: { t: 'Hurma Terzi Çağır · Tamir, Tadilat, Dikim', d: "Hurma'da tamir tadilat, özel dikim, daraltma, kısaltma: fotoğraf at, fiyat al. Paça ₺200'den, fermuar ₺300'den." + FREE,
+  hurma: { t: "Hurma Terzi Çağır · Paça ₺200'den, Eve Gelir", d: "Hurma'da tamir tadilat, özel dikim, daraltma, kısaltma: fotoğraf at, fiyat al. Paça ₺200'den, fermuar ₺300'den." + FREE,
     kw: ['tamir tadilat', 'özel dikim', 'ölçüye göre dikim', 'bay bayan elbise dikimi', 'elbise daraltma', 'elbise kısaltma', 'pantolon kısaltma', 'kot paçası kısaltma', 'fermuar değişimi', 'abiye tamiri', 'beden ayarlama', 'yakınımda terzi'] },
   liman: { t: 'Liman Terzi · Fermuar Değişimi, Beden Ayarı', d: "Liman'da fermuar değişimi ₺300'den, paça kısaltma ₺200'den, bel daraltma, beden ayarlama. Fotoğraf at, fiyat al." + FREE,
     kw: ['fermuar değişimi', 'fermuar tamiri', 'mont fermuar değişimi', 'beden ayarlama', 'beden küçültme', 'beden büyütme', 'bel daraltma', 'pantolon daraltma', 'kot paçası kısaltma', 'şort kısaltma', 'tamir tadilat', 'özel dikim'] },
@@ -25,7 +25,7 @@ const BANK: Record<string, M> = {
     kw: ['tamir tadilat', 'elbise tadilatı', 'abiye tadilatı', 'abiye tamiri', 'elbise kısaltma', 'pantolon kısaltma', 'şort kısaltma', 'fermuar değişimi', 'beden ayarlama', 'otel terzi'] },
   fener: { t: 'Fener Terzi · Gömlek, Etek, Elbise Tadilat', d: "Fener'de gömlek, etek, elbise, ceket tadilatı; kısaltma, daraltma, fermuar değişimi. Fotoğraf at, fiyat al. Paça ₺200'den." + FREE,
     kw: ['gömlek daraltma', 'gömlek kısaltma', 'etek kısaltma', 'elbise daraltma', 'elbise kısaltma', 'ceket tadilatı', 'mont tamiri', 'fermuar değişimi', 'bay bayan terzi', 'özel dikim', 'tamir tadilat'] },
-  guzeloba: { t: 'Güzeloba Terzi · Fotoğrafla Fiyat Al', d: "Güzeloba için terzi: tamir, tadilat, kısaltma, daraltma. Fotoğraf at, fiyat al, birlikte netleştirelim. Paça ₺200'den.",
+  guzeloba: { t: "Güzeloba Terzi · Paça ₺200'den, Fotoğrafla Fiyat", d: "Güzeloba için terzi: tamir, tadilat, kısaltma, daraltma. Fotoğraf at, fiyat al, birlikte netleştirelim. Paça ₺200'den.",
     kw: ['tamir tadilat', 'kısaltma', 'daraltma', 'fermuar değişimi'] },
 };
 export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Konyaaltı') {

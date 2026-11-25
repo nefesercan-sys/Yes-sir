@@ -97,7 +97,7 @@ const DIGER_HIZMETLER: { href: string; ad: string }[] = [
 // ── Metadata ──────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Fermuar Değişimi Fiyatı 2026 Antalya · Aynı Gün | Terzi Can" },
+  title: { absolute: "Fermuar Değişimi Ne Kadar? 2026: ₺300'den · Antalya" },
   description:
     "Fermuar değişimi kaç TL? Antalya'da 300 TL'den (KDV dahil): pantolon, kot, etek, mont, ceket, çanta. Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
   keywords: [

@@ -412,7 +412,8 @@ function serviceCopy(lang: Lang, s: Service) {
     ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
     de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
+  // Fiyat başlıkta (Search Console, Kasım 2026): '… ne kadar / kaç TL' aramalarına doğrudan cevap
+  const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? 2026: ₺${s.priceFrom}'den | Terzi Can`, `${Q} ne kadar? 2026 Antalya: ₺${s.priceFrom}'den`, `${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
   const title = pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
