@@ -264,11 +264,11 @@ export default function AtelieClient({ gmapsDirections, gmapsPlaceLink }: Props)
         <article className="group">
           <h3 className="group-title">Ремонт и подгонка</h3>
           <div className="price-list">
-            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">в тот же день</span></span><span className="price-value">от ₺200 (~€10)</span></div>
-            <div className="price-row"><span className="price-name">Замена молнии (брюки)</span><span className="price-value">от ₺300 (~€15)</span></div>
-            <div className="price-row"><span className="price-name">Замена молнии (пальто, куртка, кожа)</span><span className="price-value">от ₺300 (~€15)</span></div>
-            <div className="price-row"><span className="price-name">Заужение по фигуре</span><span className="price-value">от ₺200 (~€10)</span></div>
-            <div className="price-row"><span className="price-name">Ремонт кожаных изделий</span><span className="price-value">от ₺400 (~€20)</span></div>
+            <div className="price-row"><span className="price-name">Укорачивание брюк / юбки<span className="price-note">в тот же день</span></span><span className="price-value">от ₺200 (~€4)</span></div>
+            <div className="price-row"><span className="price-name">Замена молнии (брюки)</span><span className="price-value">от ₺300 (~€5)</span></div>
+            <div className="price-row"><span className="price-name">Замена молнии (пальто, куртка, кожа)</span><span className="price-value">от ₺300 (~€5)</span></div>
+            <div className="price-row"><span className="price-name">Заужение по фигуре</span><span className="price-value">от ₺200 (~€4)</span></div>
+            <div className="price-row"><span className="price-name">Ремонт кожаных изделий</span><span className="price-value">от ₺400 (~€7)</span></div>
             <div className="price-row"><span className="price-name">Ремонт разрыва / штопка</span><span className="price-value">по фото</span></div>
           </div>
         </article>

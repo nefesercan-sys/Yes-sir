@@ -4,7 +4,7 @@
 // (Search Console: "Keşfedildi/Tarandı – dizine eklenmedi"; sayfalar %97 aynıydı, Kasım 2026).
 // İki sitede aynı dosya kullanılır (terzihizmeti: lib/intl-hizmet.ts, swaphubs: lib/intl-hz.ts).
 // Fiyat ve süreler sahip kurallarından (terzihizmeti lib/facts.ts, lib/delivery.ts): € fiyatlar turist
-// başlangıç fiyatlarıdır (paça/bel/kol/boy €10, fermuar €15, deri €20), KDV dahildir; gelinlik/abiye
+// başlangıç fiyatlarıdır (paça/bel/kol/boy €4, fermuar €5, deri €7), KDV dahildir; gelinlik/abiye
 // tadilatı ve dikim işlerinde sabit fiyat yazılmaz. Burada fiyat değişirse lib/facts.ts ile birlikte değiştirin.
 // ============================================================
 export type IsLang = 'es' | 'fr' | 'pl' | 'uk' | 'nl' | 'ar';
@@ -28,11 +28,11 @@ const C: Record<IsLang, Copy> = {
   es: {
     h: 'Precio, plazo y consejos para este arreglo', priceL: 'Precio', timeL: 'Plazo', tipsH: 'Consejos prácticos',
     price: {
-      hem: 'desde 10 € (IVA incluido); el precio exacto se confirma con una foto',
-      zip: 'cambio de cremallera desde 15 € (IVA incluido), también en abrigos y chaquetas',
-      leather: 'arreglos en cuero desde 20 € (IVA incluido)',
-      suit: 'mangas y bajos desde 10 € (IVA incluido); otros ajustes según la foto o los detalles del trabajo',
-      coat: 'cremallera de abrigo desde 15 € (IVA incluido); otras reparaciones según la foto',
+      hem: 'desde 4 € (IVA incluido); el precio exacto se confirma con una foto',
+      zip: 'cambio de cremallera desde 5 € (IVA incluido), también en abrigos y chaquetas',
+      leather: 'arreglos en cuero desde 7 € (IVA incluido)',
+      suit: 'mangas y bajos desde 4 € (IVA incluido); otros ajustes según la foto o los detalles del trabajo',
+      coat: 'cremallera de abrigo desde 5 € (IVA incluido); otras reparaciones según la foto',
       byJob: 'según la foto o los detalles del trabajo; se lo decimos antes de empezar',
       byModel: 'según la foto y el modelo que quiera',
     },
@@ -57,11 +57,11 @@ const C: Record<IsLang, Copy> = {
   fr: {
     h: 'Prix, délai et conseils pour cette retouche', priceL: 'Prix', timeL: 'Délai', tipsH: 'Conseils pratiques',
     price: {
-      hem: 'à partir de 10 € (TVA incluse) ; le prix exact est confirmé sur photo',
-      zip: 'remplacement de fermeture à glissière à partir de 15 € (TVA incluse), aussi pour manteaux et vestes',
-      leather: 'retouches cuir à partir de 20 € (TVA incluse)',
-      suit: 'manches et ourlets à partir de 10 € (TVA incluse) ; autres ajustements selon la photo ou les détails du travail',
-      coat: 'fermeture de manteau à partir de 15 € (TVA incluse) ; autres réparations selon la photo',
+      hem: 'à partir de 4 € (TVA incluse) ; le prix exact est confirmé sur photo',
+      zip: 'remplacement de fermeture à glissière à partir de 5 € (TVA incluse), aussi pour manteaux et vestes',
+      leather: 'retouches cuir à partir de 7 € (TVA incluse)',
+      suit: 'manches et ourlets à partir de 4 € (TVA incluse) ; autres ajustements selon la photo ou les détails du travail',
+      coat: 'fermeture de manteau à partir de 5 € (TVA incluse) ; autres réparations selon la photo',
       byJob: 'selon la photo ou les détails du travail ; nous vous le disons avant de commencer',
       byModel: 'selon la photo et le modèle souhaité',
     },
@@ -86,11 +86,11 @@ const C: Record<IsLang, Copy> = {
   pl: {
     h: 'Cena, czas i porady do tej przeróbki', priceL: 'Cena', timeL: 'Czas', tipsH: 'Praktyczne porady',
     price: {
-      hem: 'od 10 € (z VAT); dokładną cenę potwierdzamy po zdjęciu',
-      zip: 'wymiana zamka od 15 € (z VAT), także w płaszczach i kurtkach',
-      leather: 'przeróbki skóry od 20 € (z VAT)',
-      suit: 'rękawy i dół od 10 € (z VAT); inne poprawki według zdjęcia lub zakresu prac',
-      coat: 'zamek w płaszczu od 15 € (z VAT); inne naprawy według zdjęcia',
+      hem: 'od 4 € (z VAT); dokładną cenę potwierdzamy po zdjęciu',
+      zip: 'wymiana zamka od 5 € (z VAT), także w płaszczach i kurtkach',
+      leather: 'przeróbki skóry od 7 € (z VAT)',
+      suit: 'rękawy i dół od 4 € (z VAT); inne poprawki według zdjęcia lub zakresu prac',
+      coat: 'zamek w płaszczu od 5 € (z VAT); inne naprawy według zdjęcia',
       byJob: 'według zdjęcia lub zakresu prac; podajemy cenę przed rozpoczęciem',
       byModel: 'według zdjęcia i wybranego modelu',
     },
@@ -115,11 +115,11 @@ const C: Record<IsLang, Copy> = {
   uk: {
     h: 'Ціна, термін і поради щодо цієї роботи', priceL: 'Ціна', timeL: 'Термін', tipsH: 'Практичні поради',
     price: {
-      hem: 'від 10 € (з ПДВ); точну ціну підтверджуємо за фото',
-      zip: 'заміна блискавки від 15 € (з ПДВ), також у пальтах і куртках',
-      leather: 'роботи зі шкірою від 20 € (з ПДВ)',
-      suit: 'рукави й низ від 10 € (з ПДВ); інші зміни за фото або за деталями роботи',
-      coat: 'блискавка в пальті від 15 € (з ПДВ); інший ремонт за фото',
+      hem: 'від 4 € (з ПДВ); точну ціну підтверджуємо за фото',
+      zip: 'заміна блискавки від 5 € (з ПДВ), також у пальтах і куртках',
+      leather: 'роботи зі шкірою від 7 € (з ПДВ)',
+      suit: 'рукави й низ від 4 € (з ПДВ); інші зміни за фото або за деталями роботи',
+      coat: 'блискавка в пальті від 5 € (з ПДВ); інший ремонт за фото',
       byJob: 'за фото або за деталями роботи; ціну скажемо до початку',
       byModel: 'за фото та бажаною моделлю',
     },
@@ -144,11 +144,11 @@ const C: Record<IsLang, Copy> = {
   nl: {
     h: 'Prijs, duur en tips voor deze aanpassing', priceL: 'Prijs', timeL: 'Duur', tipsH: 'Praktische tips',
     price: {
-      hem: 'vanaf € 10 (incl. btw); de exacte prijs bevestigen we op basis van een foto',
-      zip: 'rits vervangen vanaf € 15 (incl. btw), ook bij jassen en jacks',
-      leather: 'aanpassingen aan leer vanaf € 20 (incl. btw)',
-      suit: 'mouwen en zomen vanaf € 10 (incl. btw); andere aanpassingen op basis van foto of details van het werk',
-      coat: 'jasrits vanaf € 15 (incl. btw); andere reparaties op basis van een foto',
+      hem: 'vanaf € 4 (incl. btw); de exacte prijs bevestigen we op basis van een foto',
+      zip: 'rits vervangen vanaf € 5 (incl. btw), ook bij jassen en jacks',
+      leather: 'aanpassingen aan leer vanaf € 7 (incl. btw)',
+      suit: 'mouwen en zomen vanaf € 4 (incl. btw); andere aanpassingen op basis van foto of details van het werk',
+      coat: 'jasrits vanaf € 5 (incl. btw); andere reparaties op basis van een foto',
       byJob: 'op basis van foto of details van het werk; u hoort de prijs vooraf',
       byModel: 'op basis van foto en het gewenste model',
     },
@@ -173,11 +173,11 @@ const C: Record<IsLang, Copy> = {
   ar: {
     h: 'السعر والمدة ونصائح لهذا العمل', priceL: 'السعر', timeL: 'المدة', tipsH: 'نصائح عملية',
     price: {
-      hem: 'ابتداءً من 10 € (شامل ضريبة القيمة المضافة)؛ نؤكد السعر الدقيق من الصورة',
-      zip: 'تغيير السحاب ابتداءً من 15 € (شامل الضريبة)، ويشمل المعاطف والجاكيتات',
-      leather: 'تعديلات الجلد ابتداءً من 20 € (شامل الضريبة)',
-      suit: 'الأكمام والحواف ابتداءً من 10 € (شامل الضريبة)؛ التعديلات الأخرى حسب الصورة أو تفاصيل العمل',
-      coat: 'سحاب المعطف ابتداءً من 15 € (شامل الضريبة)؛ الإصلاحات الأخرى حسب الصورة',
+      hem: 'ابتداءً من 4 € (شامل ضريبة القيمة المضافة)؛ نؤكد السعر الدقيق من الصورة',
+      zip: 'تغيير السحاب ابتداءً من 5 € (شامل الضريبة)، ويشمل المعاطف والجاكيتات',
+      leather: 'تعديلات الجلد ابتداءً من 7 € (شامل الضريبة)',
+      suit: 'الأكمام والحواف ابتداءً من 4 € (شامل الضريبة)؛ التعديلات الأخرى حسب الصورة أو تفاصيل العمل',
+      coat: 'سحاب المعطف ابتداءً من 5 € (شامل الضريبة)؛ الإصلاحات الأخرى حسب الصورة',
       byJob: 'حسب الصورة أو تفاصيل العمل؛ نخبرك بالسعر قبل البدء',
       byModel: 'حسب الصورة والموديل الذي تريده',
     },

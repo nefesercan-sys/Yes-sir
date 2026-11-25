@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Ателье и швея в Анталии: подшив, ремонт одежды | Terzi Can' },
 
   description:
-    'Ателье и швея в Анталии, Коньяалты: подшив от ₺200 (~€10), замена молнии от ₺300, кожа от ₺400, пошив. Забор и доставка из отеля. WhatsApp на вашем языке.',
+    'Ателье и швея в Анталии, Коньяалты: подшив от ₺200 (~€4), замена молнии от ₺300, кожа от ₺400, пошив. Забор и доставка из отеля. WhatsApp на вашем языке.',
 
   keywords: [
     'ателье Анталия', 'швея Анталия', 'ремонт одежды Анталия',
@@ -140,7 +140,7 @@ const jsonLd = {
         '@type': 'OfferCatalog',
         name: 'Услуги ателье',
         itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 10, priceCurrency: 'EUR', minPrice: 10 } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Укорачивание брюк' }, priceSpecification: { '@type': 'PriceSpecification', price: 4, priceCurrency: 'EUR', minPrice: 4 } },
         ],
       },
       // KALDIRILDI (2026-09): doğrulanamayan aggregateRating (4.9/94)

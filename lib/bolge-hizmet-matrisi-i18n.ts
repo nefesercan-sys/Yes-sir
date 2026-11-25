@@ -7,7 +7,7 @@
 // ============================================================
 import { hashStr } from '@/lib/seo-angles';
 // Turist başlangıç fiyatları (€; terzihizmeti.com.tr lib/facts.ts ile aynı)
-const EUR = { hem: 10, waist: 10, sleeve: 10, zipperPants: 15, zipperCoat: 15, leather: 20 } as const;
+const EUR = { hem: 4, waist: 4, sleeve: 4, zipperPants: 5, zipperCoat: 5, leather: 7 } as const; // ₺200/₺300/₺400 ÷ 56 TL/€, tam euro (25 Kasım 2026)
 const eurFrom = (k: keyof typeof EUR) => EUR[k];
 
 export type ILang = 'en' | 'ru' | 'de';
@@ -129,17 +129,17 @@ const TITLES: Record<ILang, ((l: string, n: string) => string)[]> = {
 const LEADS: Record<ILang, ((l: string, n: string) => string)[]> = {
   en: [
     (l, n) => `Before you ask for a price in ${n}, see what can be done on which garment and where prices start. The list is below; a photo is enough for an exact quote.`,
-    (l, n) => `Shortening and taking-in start from €10, zippers from €15 and leather from €20 (prices include VAT). The jobs we do for ${n} are grouped by garment below.`,
+    (l, n) => `Shortening and taking-in start from €4, zippers from €5 and leather from €7 (prices include VAT). The jobs we do for ${n} are grouped by garment below.`,
     (l) => `What a tailor can do for you ${l} and roughly what it costs, on one page. Send a photo on WhatsApp and we reply with the exact price.`,
   ],
   ru: [
     (l, n) => `Прежде чем спрашивать цену (${n}), посмотрите, что и на какой вещи можно сделать и от какой суммы. Список ниже; для точной цены достаточно фото.`,
-    (l, n) => `Укорочение и ушивание — от €10, молнии — от €15, кожа — от €20 (цены с НДС). Работы для района ${n} сгруппированы по видам одежды ниже.`,
+    (l, n) => `Укорочение и ушивание — от €4, молнии — от €5, кожа — от €7 (цены с НДС). Работы для района ${n} сгруппированы по видам одежды ниже.`,
     (l) => `Что портной может сделать ${l} и сколько это примерно стоит — на одной странице. Пришлите фото в WhatsApp, и мы назовём точную цену.`,
   ],
   de: [
     (l, n) => `Bevor Sie nach dem Preis fragen (${n}): Hier sehen Sie, was an welchem Kleidungsstück möglich ist und ab welchem Preis. Die Liste steht unten; für den genauen Preis genügt ein Foto.`,
-    (l, n) => `Kürzen und Enger machen ab €10, Reißverschlüsse ab €15, Leder ab €20 (inkl. MwSt.). Die Arbeiten für ${n} sind unten nach Kleidungsstück geordnet.`,
+    (l, n) => `Kürzen und Enger machen ab €4, Reißverschlüsse ab €5, Leder ab €7 (inkl. MwSt.). Die Arbeiten für ${n} sind unten nach Kleidungsstück geordnet.`,
     (l) => `Was ein Schneider ${l} für Sie tun kann und was es ungefähr kostet, auf einer Seite. Foto per WhatsApp schicken, wir nennen den genauen Preis.`,
   ],
 };
@@ -252,11 +252,11 @@ export function bolgeEkSssI18n(lang: ILang, slug: string, n: string, loc: string
 export function intlDistrictTitles(lang: ILang, n: string, order = -1): string[] {
   const t: Record<ILang, string[]> = {
     en: [
-      `Tailor ${n} · Prices: Hems, Zippers, Waists`, `Tailor ${n}: What Does Shortening Cost?`, `Tailor ${n} · Hems from €10, Zippers from €15`, `Tailor ${n} · Waist Taking-in and Zipper Prices`, `Tailor ${n}: Coat, Jacket and Jeans Prices`, `Tailor ${n} · Repair, Alteration, Sewing Prices`, `Tailor ${n} · Zipper, Button, Lining: Prices`, `Men's & Women's Tailor ${n} · Price List`, `Tailor ${n} · Waistcoat, Jumpsuit, Tracksuit`, `Tailor ${n} | Jeans Hem, Skirt, Dress Prices`, `Tailor ${n}: Evening Dress Alteration Prices`, `Tailor ${n} · Leather Jacket and Coat Prices`],
+      `Tailor ${n} · Prices: Hems, Zippers, Waists`, `Tailor ${n}: What Does Shortening Cost?`, `Tailor ${n} · Hems from €4, Zippers from €5`, `Tailor ${n} · Waist Taking-in and Zipper Prices`, `Tailor ${n}: Coat, Jacket and Jeans Prices`, `Tailor ${n} · Repair, Alteration, Sewing Prices`, `Tailor ${n} · Zipper, Button, Lining: Prices`, `Men's & Women's Tailor ${n} · Price List`, `Tailor ${n} · Waistcoat, Jumpsuit, Tracksuit`, `Tailor ${n} | Jeans Hem, Skirt, Dress Prices`, `Tailor ${n}: Evening Dress Alteration Prices`, `Tailor ${n} · Leather Jacket and Coat Prices`],
     ru: [
-      `Портной ${n} · цены: подшив, молнии, пояс`, `Портной ${n}: сколько стоит укоротить?`, `Портной ${n} · подшив от €10, молнии от €15`, `Портной ${n} · ушить пояс, молния: цены`, `Портной ${n}: пальто, куртки, джинсы — цены`, `Портной ${n} · ремонт, переделка, пошив: цены`, `Портной ${n} · молния, пуговицы, подкладка: цены`, `Ателье ${n} · мужская и женская одежда, цены`, `Портной ${n} · жилет, комбинезон, костюм`, `Портной ${n} | джинсы, юбки, платья: цены`, `Портной ${n}: переделка вечернего платья`, `Портной ${n} · кожаные куртки и пальто: цены`],
+      `Портной ${n} · цены: подшив, молнии, пояс`, `Портной ${n}: сколько стоит укоротить?`, `Портной ${n} · подшив от €4, молнии от €5`, `Портной ${n} · ушить пояс, молния: цены`, `Портной ${n}: пальто, куртки, джинсы — цены`, `Портной ${n} · ремонт, переделка, пошив: цены`, `Портной ${n} · молния, пуговицы, подкладка: цены`, `Ателье ${n} · мужская и женская одежда, цены`, `Портной ${n} · жилет, комбинезон, костюм`, `Портной ${n} | джинсы, юбки, платья: цены`, `Портной ${n}: переделка вечернего платья`, `Портной ${n} · кожаные куртки и пальто: цены`],
     de: [
-      `Schneider ${n} · Preise: Saum, Reißverschluss`, `Schneider ${n}: Was kostet Kürzen?`, `Schneider ${n} · Kürzen ab €10, Reißverschluss ab €15`, `Schneider ${n} · Bund enger, Reißverschluss: Preise`, `Schneider ${n}: Mantel, Jacke, Jeans – Preise`, `Schneider ${n} · Reparatur, Änderung, Nähen: Preise`, `Schneider ${n} · Reißverschluss, Knopf, Futter: Preise`, `Änderungsschneiderei ${n} · Preisliste`, `Schneider ${n} · Weste, Overall, Jogginganzug`, `Schneider ${n} | Jeans, Rock, Kleid kürzen: Preise`, `Schneider ${n}: Abendkleid ändern – Preise`, `Schneider ${n} · Lederjacke und Mantel: Preise`],
+      `Schneider ${n} · Preise: Saum, Reißverschluss`, `Schneider ${n}: Was kostet Kürzen?`, `Schneider ${n} · Kürzen ab €4, Reißverschluss ab €5`, `Schneider ${n} · Bund enger, Reißverschluss: Preise`, `Schneider ${n}: Mantel, Jacke, Jeans – Preise`, `Schneider ${n} · Reparatur, Änderung, Nähen: Preise`, `Schneider ${n} · Reißverschluss, Knopf, Futter: Preise`, `Änderungsschneiderei ${n} · Preisliste`, `Schneider ${n} · Weste, Overall, Jogginganzug`, `Schneider ${n} | Jeans, Rock, Kleid kürzen: Preise`, `Schneider ${n}: Abendkleid ändern – Preise`, `Schneider ${n} · Lederjacke und Mantel: Preise`],
   };
   const fb: Record<ILang, string> = { en: `Tailor ${n}, Antalya`, ru: `Портной ${n}, Анталья`, de: `Schneider ${n}, Antalya` };
   const base = t[lang];

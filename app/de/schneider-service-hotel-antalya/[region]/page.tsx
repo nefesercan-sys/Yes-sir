@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
   const title = `Änderungsschneiderei ${r.name}: Hotelabholung | Terzi Can`;
-  const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel, Kürzen ab ₺200 (~10 €), Dauer je nach Arbeit. Foto per WhatsApp senden.`;
+  const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel, Kürzen ab ₺200 (~4 €), Dauer je nach Arbeit. Foto per WhatsApp senden.`;
   const kwd = hotelKwDesc('de', r.name, 'b', desc); // anahtar kelimeli kalıp (lib/kw-desc.ts)
   const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
 

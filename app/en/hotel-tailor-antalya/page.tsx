@@ -280,10 +280,10 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','Arranged on WhatsApp','—'],
-                  ['Trouser / Pant Hemming','from €10',TURN],
-                  ['Zipper Replacement','from €15 (coat / leather €15)',TURN],
-                  ['Dress / Jacket Alteration','from €10',TURN],
-                  ['Sleeve Shortening','from €10',TURN],
+                  ['Trouser / Pant Hemming','from €4',TURN],
+                  ['Zipper Replacement','from €5 (coat / leather €5)',TURN],
+                  ['Dress / Jacket Alteration','from €4',TURN],
+                  ['Sleeve Shortening','from €4',TURN],
                   ['Evening Gown Repair','by photo',TURN],
                   ['Wedding Dress Alteration (no wedding dress sewing)','by photo',TURN],
                   ['Tear Repair','by photo',TURN],

@@ -129,7 +129,7 @@ export const SEW_PRICE_LINE: Record<DLang, string> = {
 };
 
 /** Yabancı dil sayfalarında fiyat EURO; € fiyatlar sahibin belirlediği turist başlangıç fiyatlarıdır, gerçek kurla çevrilmez (sahip kararı, Kasım 2026; terzihizmeti.com.tr lib/facts.ts ile aynı). Gelinlik DİKİMİ yapılmaz (yalnız tadilat). */
-export const TRY_PER_EUR = 20;
+export const TRY_PER_EUR = 56; // sahip kararı 25 Kasım 2026: 1 € = 56 TL
 export const eurOf = (tl: number): number => Math.round(tl / TRY_PER_EUR);
 
 // ── Ücretsiz servis kuralı ─────────────────────────────────────────────────────────

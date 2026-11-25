@@ -2,7 +2,7 @@
 export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  [
   "Antalya'da pantolon paçası kısaltma ne kadar?",
-  "Paça kısaltma ₺200'den (yaklaşık €10) başlar; fiyatlara KDV dahildir. Normal işler aynı gün hazırdır. Fotoğraf atın, fiyatı WhatsApp'tan alın: +90 531 898 64 18."
+  "Paça kısaltma ₺200'den (yaklaşık €4) başlar; fiyatlara KDV dahildir. Normal işler aynı gün hazırdır. Fotoğraf atın, fiyatı WhatsApp'tan alın: +90 531 898 64 18."
  ],
  [
   "Bel daraltma ne kadar?",
@@ -14,11 +14,11 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Pantolon fermuarı değişimi ne kadar?",
-  "Pantolon ve standart fermuar değişimi ₺300'den (yaklaşık €15) başlar; KDV dahildir."
+  "Pantolon ve standart fermuar değişimi ₺300'den (yaklaşık €5) başlar; KDV dahildir."
  ],
  [
   "Mont, kaban, palto veya deri ceket fermuarı değişimi ne kadar?",
-  "Mont, kaban, palto ve deri fermuar değişimi ₺300'den (yaklaşık €15) başlar; KDV dahildir."
+  "Mont, kaban, palto ve deri fermuar değişimi ₺300'den (yaklaşık €5) başlar; KDV dahildir."
  ],
  [
   "Kot pantolon paça kısaltma ve orijinal paça yapılıyor mu?",
@@ -26,7 +26,7 @@ export const FAQ_TR: ReadonlyArray<readonly [string, string]> = [
  ],
  [
   "Deri ceket, deri pantolon veya deri yelek tadilatı ne kadar?",
-  "Deri ceket, pantolon ve yelek tadilatı ₺400'den (yaklaşık €20) başlar; KDV dahildir."
+  "Deri ceket, pantolon ve yelek tadilatı ₺400'den (yaklaşık €7) başlar; KDV dahildir."
  ],
  [
   "Kaban ve palto kısaltma-daraltma yapıyor musunuz?",
