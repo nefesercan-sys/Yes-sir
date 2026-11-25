@@ -3,6 +3,7 @@ import ReviewsBlock from '@/components/ReviewsBlock';
 import { lastMod } from '@/lib/lastmod';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
+import IsOzelBlok from '@/components/terzi/IsOzelBlok';
 import { KARGO_KISA_HZ, type KargoKisaHz } from '@/lib/kargo-kisa';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -69,6 +70,7 @@ export default function KonuGuideLanding({ lang, topic, hz }: { lang: ILang; top
             {s.p.map((t) => <p key={t} style={{ margin: '0 0 .8rem' }}>{t}</p>)}
           </section>
         ))}
+        {hz && <IsOzelBlok lang={lang} id={hz} ink={C.ink} accent={C.green} />}
 
         <section style={{ marginBottom: '1.8rem' }}>
           <h2 style={{ fontFamily: serif, fontSize: '1.35rem', color: C.ink, margin: '0 0 .8rem', lineHeight: 1.25 }}>{ui.faqTitle}</h2>

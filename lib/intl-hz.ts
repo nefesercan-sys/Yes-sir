@@ -4,6 +4,7 @@
 // madde listeli hizmet sayfalarından bilerek farklı). Fiyat YAZILMAZ; deri/kot yalnız tamir-tadilat; süreler lib/business.ts DURATION.
 // ============================================================
 import { DURATION } from '@/lib/business';
+import { isOzel, IS_LANGS } from '@/lib/is-ozel';
 import { SERVICES, serviceUrl } from '@/lib/seo-data';
 import type { ILang } from '@/lib/intl';
 import type { Konu } from '@/lib/intl-konu';
@@ -118,6 +119,13 @@ export const HZ: Record<ILang, Record<HzId, Konu>> = {
     tamir: { slug: "kayfa-islah-malabis-antalya", title: "من يصلح قطعة تضررت أثناء السفر؟ | Terzi Can", desc: "ورشة خياطة: الدرزات المفتوحة والتمزقات والأزرار والجيوب والبطانة والسحّابات تُصلَح بسرعة. الدرز المفتوح غالبًا أسرع إصلاح.", h1: "من يصلح قطعة تضررت أثناء السفر؟", lead: "ورشة خياطة: الدرزات المفتوحة والتمزقات والأزرار والجيوب والبطانة والسحّابات تُصلَح بسرعة. الدرز المفتوح غالبًا أسرع إصلاح.", sections: [{ h: "باختصار", p: ["ورشة خياطة: الدرزات المفتوحة والتمزقات والأزرار والجيوب والبطانة والسحّابات تُصلَح بسرعة. الدرز المفتوح غالبًا أسرع إصلاح."] }, { h: "كيف تسلّم القطعة في أنطاليا", p: [`نستلم القطعة ونسلّمها في فندقك، أو يمكنك إحضارها إلى ورشتنا في كونيالتي المفتوحة يوميًا من 08:00 إلى 23:00. أرسل أولًا صورة عبر واتساب ونخبرك بالسعر والمدة. ${T.ar.all}`] }, { h: "نصيحة عملية", p: ["أحضر الزر أو القطعة المنفصلة إن وجدت: نعيد تركيب القطعة نفسها لا قطعة مختلفة."] }], faq: [["كم يستغرق ذلك؟", `${T.ar.all}`], ["كم السعر؟", "يعتمد السعر على القطعة ونوع العمل. أرسل صورة عبر واتساب ونخبرك بالسعر قبل البدء."]], wa: "مرحبًا، أودّ الاستفسار عن: من يصلح قطعة تضررت أثناء السفر." },
   },
 };
+
+// Küçük dillerde (es, fr, pl, uk, nl, ar) SSS'deki süre ve fiyat cevapları işe özel (lib/is-ozel.ts): sayfalar birbirinin kopyası
+// olmasın ve gelinlik/abiye/dikimde genel "1–2 saat" süresi yazılmasın (sahip kuralı: işin durumuna göre).
+for (const l of IS_LANGS) for (const h of HZ_IDS) {
+  const o = isOzel(l, h); const c = HZ[l][h];
+  if (o && c.faq.length >= 2) c.faq = [[c.faq[0][0], `${o.time}.`], [c.faq[1][0], `${o.price}.`], ...c.faq.slice(2)];
+}
 
 export const hzUrl = (l: ILang, h: HzId) => `/${l}/${HZ[l][h].slug}`;
 export const parseHz = (l: ILang, slug: string): HzId | undefined => HZ_IDS.find((h) => HZ[l][h].slug === slug);
