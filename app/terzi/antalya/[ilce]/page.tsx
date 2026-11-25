@@ -41,9 +41,9 @@ function meta(slug: string, ad: string) {
   const loc = d?.loc.tr ?? trLoc(ad);
   const resort = d?.kind === 'resort';
   const title = pick(`t:${slug}`, [
-    `${ad} Terzi · Paça, Fermuar, Tadilat | Terzi Can`,
-    `${ad} Terzi: Tamir, Tadilat, Özel Dikim | Terzi Can`,
-    `${ad} Terzi Çağır · Fotoğrafla Fiyat | Terzi Can`,
+    `${ad} Terzi · Paça ₺200'den, Fermuar ₺300 | Terzi Can`,
+    `${ad} Terzi: Paça ₺200'den, Tamir, Dikim | Terzi Can`,
+    `${ad} Terzi Çağır · Paça ₺200'den | Terzi Can`,
   ]);
   const svc = isFreeService(slug) ? 'Otele ve eve servis.' : resort ? 'Otele servis.' : 'Otellere servis.';
   const desc = isFar(slug) ? farDesc('tr', ad) : trAreaJobsDesc(loc, title, 'b', `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`);

@@ -151,7 +151,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Palto ve Kaban Kısaltma Fiyatı · Antalya | Terzi Can" },
+  title: { absolute: "Kaban, Palto Daraltma ve Kısaltma Fiyatı · ₺200'den" },
   description: "Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV dahil). Fotoğraf gönderin.",
   keywords: ["kaban tadilatı", "palto tadilatı", "kaban kısaltma", "palto kısaltma", "palto daraltma", "kaban kol kısaltma", "palto astar değişimi", "kaban düğme değişimi", "palto tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
