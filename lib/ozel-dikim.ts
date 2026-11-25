@@ -3,7 +3,7 @@
 // "Siparişe özel dikim, dünyaya kargo" sayfaları, 10 dil (TR/EN/DE/RU adresleri kendi klasörlerinde, ES/FR/PL/UK/NL/AR [lang]/[slug] üzerinden).
 // Sahip onaylı gerçekler: keten, pamuk ve diğer kumaşlardan kadın/erkek/spor takım, pantolon, gömlek, etek, şort, abiye, takım elbise
 // ÖZEL SİPARİŞLE dikilir; ölçü/fotoğraf/model WhatsApp'tan gelir; Antalya içine ve yurt dışına kargolanır (diğer iller: WhatsApp'tan sorulur).
-// Özel dikim/abiye/takım elbise için SABİT FİYAT YOK ("fotoğrafa veya istenilen modele göre WhatsApp'tan verilir"); fiyatlara KDV dahil değil.
+// Özel dikim/abiye/takım elbise için SABİT FİYAT YOK ("fotoğrafa veya istenilen modele göre WhatsApp'tan verilir"); fiyatlara KDV dahil.
 // Gelinlik DİKİMİ yok (yalnız tadilat). Kargo ücreti müşteriye ait; süre işin durumuna göre (gün/saat sayısı, "ertesi gün" YAZILMAZ).
 // Garanti = kargo firmasının taşıma garantisi + sahibin dikim/tadilat garantisi; beğenilmezse yeniden düzeltme (para iadesi sözü YOK).
 // Ödeme yöntemi/zamanı, gümrük ve yurt dışı ayrıntıları WhatsApp'tan netleştirilir. 2006'dan beri; 10 dil; her gün 08:00–23:00.
@@ -74,7 +74,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Neleri özel olarak dikiyoruz?', p: ['Keten, pamuk ve diğer kumaşlardan kadın ve erkek için aşağıdaki ürünleri sipariş üzerine dikiyoruz:'], ul: ['Kadın ve erkek takımları', 'Spor takımlar', 'Pantolon', 'Gömlek', 'Etek', 'Şort', 'Abiye', 'Takım elbise'], },
       { h: 'Model ve ölçü nasıl belirlenir?', p: ['Model için bir fotoğraf, çizim ya da kısa bir tarif yeterlidir. Ölçülerinizi kendiniz alıp gönderebilirsiniz; ölçü alırken takıldığınız yerde WhatsApp\'tan yardımcı oluruz. Antalya\'daysanız ölçü ve gerekirse prova için otelinizde ya da evinizde buluşabiliriz.'] },
-      { h: 'Fiyat nasıl belirlenir?', p: ['Özel dikimde sabit fiyat listesi yoktur. Fiyat, gönderdiğiniz fotoğrafa veya istediğiniz modele göre WhatsApp\'tan verilir; fiyatlara KDV dahil değildir. Ödeme yöntemi ve ödeme zamanı onaydan önce WhatsApp\'tan netleştirilir.'] },
+      { h: 'Fiyat nasıl belirlenir?', p: ['Özel dikimde sabit fiyat listesi yoktur. Fiyat, gönderdiğiniz fotoğrafa veya istediğiniz modele göre WhatsApp\'tan verilir; fiyatlara KDV dahildir. Ödeme yöntemi ve ödeme zamanı onaydan önce WhatsApp\'tan netleştirilir.'] },
       { h: 'Kargo ve teslim', p: ['Dikilen ürün Antalya içine ve yurt dışına kargoyla gönderilir; kargo ücreti müşteriye aittir. Teslim süresi işin durumuna göre belirlenir ve siparişte size bildirilir. Yurt dışı gönderimde gümrük ve diğer ayrıntılar WhatsApp\'tan netleştirilir. Türkiye\'nin diğer şehirleri için WhatsApp\'tan sorabilirsiniz.'] },
       { h: 'Garanti', p: ['Taşıma sırasında kargo firmasının taşıma garantisi geçerlidir. Dikimimiz için de kendi garantimiz var: ürünü beğenmezseniz yeniden düzeltme yapılır.'] },
     ],
@@ -84,7 +84,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Hangi ürünleri özel olarak diktirebilirim?', 'Kadın ve erkek takımları, spor takımlar, pantolon, gömlek, etek, şort, abiye ve takım elbise; kumaş olarak keten, pamuk ve diğer kumaşlar. Gelinlik dikimi yapmıyoruz, gelinlik için yalnızca tadilat yapılır.'],
       ['Yurt dışından nasıl sipariş veririm?', 'Modelin fotoğrafını, ölçülerinizi, kumaş tercihinizi ve ülkenizi WhatsApp\'tan +90 531 898 64 18 numarasına yazın. Ölçüleri nasıl alacağınızı da isterseniz oradan anlatırız.'],
-      ['Fiyat nedir?', 'Özel dikimde sabit fiyat yoktur; fiyat fotoğrafa veya istenilen modele göre WhatsApp\'tan verilir. Fiyatlara KDV dahil değildir.'],
+      ['Fiyat nedir?', 'Özel dikimde sabit fiyat yoktur; fiyat fotoğrafa veya istenilen modele göre WhatsApp\'tan verilir. Fiyatlara KDV dahildir.'],
       ['Kargo ücretini kim öder, ne kadar sürer?', 'Kargo ücretini müşteri öder. Süre işin durumuna göre belirlenir; siparişte size bildirilir. Yurt dışı gönderim ayrıntıları WhatsApp\'tan netleştirilir.'],
       ['Ürünü beğenmezsem ne olur?', 'Dikim için kendi garantimiz var: beğenmediğiniz yeri yeniden düzeltiriz. Taşıma sırasında kargo firmasının taşıma garantisi geçerlidir.'],
       ['Türkiye\'nin başka şehirlerine gönderiyor musunuz?', 'Gönderim Antalya içine ve yurt dışına yapılıyor. Diğer şehirler için WhatsApp\'tan sorabilirsiniz.'],
@@ -99,7 +99,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'WhatsApp\'tan sipariş sor', wa: 'Merhaba, siparişe özel dikim hakkında bilgi ve fiyat almak istiyorum.',
     svcName: 'Siparişe özel dikim ve kargo', svcDesc: 'Keten, pamuk ve diğer kumaşlardan sipariş üzerine özel dikim; Antalya içine ve yurt dışına kargo.',
-    note: 'Fiyat fotoğrafa veya istenilen modele göre verilir; KDV dahil değildir. Teslim süresi işin durumuna göre belirlenir.', more: 'Ayrıca bakın',
+    note: 'Fiyat fotoğrafa veya istenilen modele göre verilir; KDV dahildir. Teslim süresi işin durumuna göre belirlenir.', more: 'Ayrıca bakın',
   },
   en: {
     title: 'Made-to-Order Clothing, Shipped Worldwide | Terzi Can',
@@ -113,7 +113,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'What do we sew to order?', p: ['In linen, cotton and other fabrics, for women and men, we sew the following to order:'], ul: ['Women\'s and men\'s sets', 'Sportswear sets', 'Trousers', 'Shirts', 'Skirts', 'Shorts', 'Evening wear', 'Suits'] },
       { h: 'How the design and size are agreed', p: ['A photo, a sketch or a short description of the design is enough. You can take your own measurements and send them; if you get stuck, we help you over WhatsApp. If you are in Antalya, we can meet at your hotel or home for measuring and, if needed, a fitting.'] },
-      { h: 'How the price is set', p: ['There is no fixed price list for made-to-order work. The price is given on WhatsApp from the photo you send or the model you want, and it does not include VAT. The payment method and timing are settled on WhatsApp before you confirm.'] },
+      { h: 'How the price is set', p: ['There is no fixed price list for made-to-order work. The price is given on WhatsApp from the photo you send or the model you want, and it includes VAT. The payment method and timing are settled on WhatsApp before you confirm.'] },
       { h: 'Shipping and delivery', p: ['The finished piece is sent by courier within Antalya and abroad, and the customer pays the shipping cost. Timing depends on the job and is told to you when you order. For international shipments, customs and other details are settled on WhatsApp. For other cities in Turkey, please ask us on WhatsApp.'] },
       { h: 'Guarantee', p: ['During transport the courier\'s own transport guarantee applies. For our sewing we also give our own guarantee: if you are not happy with the result, we correct it again.'] },
     ],
@@ -123,7 +123,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['What can I have made to order?', 'Women\'s and men\'s sets, sportswear sets, trousers, shirts, skirts, shorts, evening wear and suits, in linen, cotton and other fabrics. We do not sew wedding dresses; for wedding dresses we only do alterations.'],
       ['How do I order from abroad?', 'Send the design photo, your measurements, fabric choice and country on WhatsApp to +90 531 898 64 18. If you need help taking measurements, we explain how there.'],
-      ['What does it cost?', 'There is no fixed price for made-to-order work; the price is given on WhatsApp from the photo or the model you want. Prices do not include VAT.'],
+      ['What does it cost?', 'There is no fixed price for made-to-order work; the price is given on WhatsApp from the photo or the model you want. Prices include VAT.'],
       ['Who pays shipping and how long does it take?', 'The customer pays the shipping cost. Timing depends on the job and is told to you when you order. Details for international shipments are settled on WhatsApp.'],
       ['What if I do not like the result?', 'Our sewing is covered by our own guarantee: we correct what you are not happy with. During transport the courier\'s transport guarantee applies.'],
       ['Do you ship to other cities in Turkey?', 'We ship within Antalya and abroad. For other cities, please ask on WhatsApp.'],
@@ -138,7 +138,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Ask about an order on WhatsApp', wa: 'Hello, I would like information and a price for clothing made to order.',
     svcName: 'Made-to-order clothing and shipping', svcDesc: 'Clothing sewn to order in linen, cotton and other fabrics; shipped within Antalya and abroad.',
-    note: 'Price is given from the photo or the model you want and excludes VAT. Timing depends on the job.', more: 'See also',
+    note: 'Price is given from the photo or the model you want and includes VAT. Timing depends on the job.', more: 'See also',
   },
   de: {
     title: 'Maßanfertigung nach Wunsch, Versand weltweit | Terzi Can',
@@ -191,7 +191,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Что мы шьём на заказ', p: ['Из льна, хлопка и других тканей для женщин и мужчин мы шьём на заказ:'], ul: ['Женские и мужские комплекты', 'Спортивные костюмы', 'Брюки', 'Рубашки', 'Юбки', 'Шорты', 'Вечерние платья', 'Костюмы'] },
       { h: 'Как согласуем модель и размер', p: ['Достаточно фото, наброска или короткого описания модели. Мерки можно снять самому и прислать; если что-то не получается, поможем в WhatsApp. Если вы в Анталье, можем встретиться в отеле или дома для снятия мерок и, при необходимости, примерки.'] },
-      { h: 'Как определяется цена', p: ['Фиксированного прайса на пошив на заказ нет. Цену называем в WhatsApp по присланному фото или желаемой модели; НДС в цену не входит. Способ и время оплаты уточняем в WhatsApp до вашего подтверждения.'] },
+      { h: 'Как определяется цена', p: ['Фиксированного прайса на пошив на заказ нет. Цену называем в WhatsApp по присланному фото или желаемой модели; НДС входит в цену. Способ и время оплаты уточняем в WhatsApp до вашего подтверждения.'] },
       { h: 'Отправка и сроки', p: ['Готовое изделие отправляется курьерской службой по Анталье и за границу; доставку оплачивает клиент. Срок зависит от работы и сообщается при заказе. При отправке за границу таможню и остальные детали уточняем в WhatsApp. По другим городам Турции спросите нас в WhatsApp.'] },
       { h: 'Гарантия', p: ['При перевозке действует гарантия самой курьерской службы. На наш пошив мы даём и собственную гарантию: если результат вам не понравится, мы исправим работу ещё раз.'] },
     ],
@@ -201,7 +201,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Что можно заказать?', 'Женские и мужские комплекты, спортивные костюмы, брюки, рубашки, юбки, шорты, вечерние платья и костюмы из льна, хлопка и других тканей. Свадебные платья мы не шьём; для них выполняем только переделку.'],
       ['Как заказать из-за границы?', 'Пришлите фото модели, мерки, пожелания по ткани и страну в WhatsApp на +90 531 898 64 18. Как снять мерки, там же подскажем.'],
-      ['Сколько это стоит?', 'Фиксированной цены на пошив на заказ нет; цену называем в WhatsApp по фото или желаемой модели. НДС в цену не входит.'],
+      ['Сколько это стоит?', 'Фиксированной цены на пошив на заказ нет; цену называем в WhatsApp по фото или желаемой модели. НДС входит в цену.'],
       ['Кто оплачивает доставку и сколько ждать?', 'Доставку оплачивает клиент. Срок зависит от работы и сообщается при заказе. Детали отправки за границу уточняем в WhatsApp.'],
       ['Что, если результат не понравится?', 'На наш пошив действует собственная гарантия: то, что вам не понравилось, мы исправим. При перевозке действует гарантия курьерской службы.'],
       ['Отправляете ли вы в другие города Турции?', 'Мы отправляем по Анталье и за границу. По другим городам спросите в WhatsApp.'],
@@ -216,7 +216,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Спросить о заказе в WhatsApp', wa: 'Здравствуйте, хочу узнать цену и детали пошива одежды на заказ.',
     svcName: 'Пошив на заказ и доставка', svcDesc: 'Пошив одежды на заказ из льна, хлопка и других тканей; доставка по Анталье и за границу.',
-    note: 'Цена называется по фото или желаемой модели, без НДС. Срок зависит от работы.', more: 'Смотрите также',
+    note: 'Цена называется по фото или желаемой модели, с НДС. Срок зависит от работы.', more: 'Смотрите также',
   },
   es: {
     title: 'Ropa a medida con envío internacional | Terzi Can',
@@ -230,7 +230,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: '¿Qué cosemos por encargo?', p: ['En lino, algodón y otras telas, para mujer y hombre, cosemos por encargo:'], ul: ['Conjuntos de mujer y de hombre', 'Conjuntos deportivos', 'Pantalones', 'Camisas', 'Faldas', 'Shorts', 'Vestidos de fiesta', 'Trajes'] },
       { h: 'Cómo se acuerdan modelo y medidas', p: ['Basta con una foto, un boceto o una breve descripción del modelo. Puede tomar usted mismo las medidas y enviarlas; si se atasca, le ayudamos por WhatsApp. Si está en Antalya, podemos vernos en su hotel o en su casa para medir y, si hace falta, probar.'] },
-      { h: 'Cómo se fija el precio', p: ['Para la ropa a medida no hay una lista de precios fija. El precio se da por WhatsApp según la foto que envíe o el modelo que quiera, y no incluye IVA. La forma y el momento del pago se aclaran por WhatsApp antes de que confirme.'] },
+      { h: 'Cómo se fija el precio', p: ['Para la ropa a medida no hay una lista de precios fija. El precio se da por WhatsApp según la foto que envíe o el modelo que quiera, e incluye IVA. La forma y el momento del pago se aclaran por WhatsApp antes de que confirme.'] },
       { h: 'Envío y entrega', p: ['La prenda terminada se envía por mensajería dentro de Antalya y al extranjero, y el cliente paga el envío. El plazo depende del trabajo y se le indica al hacer el pedido. En los envíos al extranjero, la aduana y otros detalles se aclaran por WhatsApp. Para otras ciudades de Turquía, pregúntenos por WhatsApp.'] },
       { h: 'Garantía', p: ['Durante el transporte rige la garantía de transporte de la empresa de mensajería. Para nuestra costura damos además una garantía propia: si el resultado no le gusta, lo corregimos de nuevo.'] },
     ],
@@ -240,7 +240,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['¿Qué puedo encargar?', 'Conjuntos de mujer y de hombre, conjuntos deportivos, pantalones, camisas, faldas, shorts, vestidos de fiesta y trajes, en lino, algodón y otras telas. No cosemos vestidos de novia; en los vestidos de novia solo hacemos arreglos.'],
       ['¿Cómo pido desde el extranjero?', 'Envíe la foto del modelo, sus medidas, la tela que prefiere y su país por WhatsApp al +90 531 898 64 18. Si necesita ayuda para tomar las medidas, se lo explicamos allí.'],
-      ['¿Cuánto cuesta?', 'Para la ropa a medida no hay un precio fijo; el precio se da por WhatsApp según la foto o el modelo que quiera. Los precios no incluyen IVA.'],
+      ['¿Cuánto cuesta?', 'Para la ropa a medida no hay un precio fijo; el precio se da por WhatsApp según la foto o el modelo que quiera. Los precios incluyen IVA.'],
       ['¿Quién paga el envío y cuánto tarda?', 'El envío lo paga el cliente. El plazo depende del trabajo y se le indica al hacer el pedido. Los detalles de los envíos al extranjero se aclaran por WhatsApp.'],
       ['¿Y si no me gusta el resultado?', 'Nuestra costura tiene garantía propia: corregimos lo que no le guste. Durante el transporte rige la garantía de transporte de la mensajería.'],
       ['¿Envían a otras ciudades de Turquía?', 'Enviamos dentro de Antalya y al extranjero. Para otras ciudades, pregunte por WhatsApp.'],
@@ -255,7 +255,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Preguntar por un pedido en WhatsApp', wa: 'Hola, quisiera información y el precio de ropa hecha a medida.',
     svcName: 'Ropa a medida y envío', svcDesc: 'Ropa cosida por encargo en lino, algodón y otras telas; envío dentro de Antalya y al extranjero.',
-    note: 'El precio se da según la foto o el modelo que quiera y no incluye IVA. El plazo depende del trabajo.', more: 'Vea también',
+    note: 'El precio se da según la foto o el modelo que quiera e incluye IVA. El plazo depende del trabajo.', more: 'Vea también',
   },
   fr: {
     title: 'Vêtements sur mesure, expédition dans le monde | Terzi Can',
@@ -269,7 +269,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Que cousons-nous sur commande ?', p: ['En lin, coton et autres tissus, pour femme et pour homme, nous cousons sur commande :'], ul: ['Ensembles femme et homme', 'Ensembles de sport', 'Pantalons', 'Chemises', 'Jupes', 'Shorts', 'Tenues de soirée', 'Costumes'] },
       { h: 'Comment on fixe le modèle et les mesures', p: ['Une photo, un croquis ou une courte description du modèle suffit. Vous pouvez prendre vous-même vos mesures et nous les envoyer ; si vous êtes bloqué, nous vous aidons sur WhatsApp. Si vous êtes à Antalya, nous pouvons nous retrouver à votre hôtel ou chez vous pour prendre les mesures et, au besoin, faire un essayage.'] },
-      { h: 'Comment le prix est fixé', p: ['Pour le sur-mesure, il n\'y a pas de grille de prix fixe. Le prix est donné sur WhatsApp d\'après la photo envoyée ou le modèle voulu, et il s\'entend hors TVA. Le mode et le moment du paiement sont précisés sur WhatsApp avant votre confirmation.'] },
+      { h: 'Comment le prix est fixé', p: ['Pour le sur-mesure, il n\'y a pas de grille de prix fixe. Le prix est donné sur WhatsApp d\'après la photo envoyée ou le modèle voulu, et il s\'entend TVA comprise. Le mode et le moment du paiement sont précisés sur WhatsApp avant votre confirmation.'] },
       { h: 'Expédition et livraison', p: ['La pièce terminée est expédiée par transporteur dans Antalya et à l\'étranger, et le client paie l\'envoi. Le délai dépend du travail et vous est indiqué à la commande. Pour les envois à l\'étranger, la douane et les autres détails sont précisés sur WhatsApp. Pour les autres villes de Turquie, demandez-nous sur WhatsApp.'] },
       { h: 'Garantie', p: ['Pendant le transport s\'applique la garantie de transport du transporteur. Pour notre couture, nous donnons aussi notre propre garantie : si le résultat ne vous plaît pas, nous le reprenons.'] },
     ],
@@ -279,7 +279,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Que puis-je faire faire sur commande ?', 'Ensembles femme et homme, ensembles de sport, pantalons, chemises, jupes, shorts, tenues de soirée et costumes, en lin, coton et autres tissus. Nous ne cousons pas de robes de mariée ; pour elles, nous faisons seulement des retouches.'],
       ['Comment commander depuis l\'étranger ?', 'Envoyez la photo du modèle, vos mesures, le tissu souhaité et votre pays sur WhatsApp au +90 531 898 64 18. Pour prendre vos mesures, nous vous expliquons comment sur place.'],
-      ['Combien ça coûte ?', 'Pour le sur-mesure, il n\'y a pas de prix fixe ; le prix est donné sur WhatsApp d\'après la photo ou le modèle voulu. Les prix s\'entendent hors TVA.'],
+      ['Combien ça coûte ?', 'Pour le sur-mesure, il n\'y a pas de prix fixe ; le prix est donné sur WhatsApp d\'après la photo ou le modèle voulu. Les prix s\'entendent TVA comprise.'],
       ['Qui paie l\'envoi et combien de temps faut-il ?', 'L\'envoi est à la charge du client. Le délai dépend du travail et vous est indiqué à la commande. Les détails des envois à l\'étranger sont précisés sur WhatsApp.'],
       ['Et si le résultat ne me plaît pas ?', 'Notre couture a sa propre garantie : nous reprenons ce qui ne vous plaît pas. Pendant le transport s\'applique la garantie de transport du transporteur.'],
       ['Expédiez-vous vers d\'autres villes de Turquie ?', 'Nous expédions dans Antalya et à l\'étranger. Pour les autres villes, demandez sur WhatsApp.'],
@@ -294,7 +294,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Poser une question sur WhatsApp', wa: 'Bonjour, je souhaite des informations et le prix de vêtements sur mesure.',
     svcName: 'Vêtements sur mesure et expédition', svcDesc: 'Vêtements cousus sur commande en lin, coton et autres tissus ; envoi dans Antalya et à l\'étranger.',
-    note: 'Le prix est donné d\'après la photo ou le modèle voulu, hors TVA. Le délai dépend du travail.', more: 'Voir aussi',
+    note: 'Le prix est donné d\'après la photo ou le modèle voulu, TVA comprise. Le délai dépend du travail.', more: 'Voir aussi',
   },
   pl: {
     title: 'Odzież szyta na miarę, wysyłka za granicę | Terzi Can',
@@ -308,7 +308,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Co szyjemy na zamówienie?', p: ['Z lnu, bawełny i innych tkanin, dla kobiet i mężczyzn, szyjemy na zamówienie:'], ul: ['Komplety damskie i męskie', 'Komplety sportowe', 'Spodnie', 'Koszule', 'Spódnice', 'Szorty', 'Suknie wieczorowe', 'Garnitury'] },
       { h: 'Jak ustalamy fason i miary', p: ['Wystarczy zdjęcie, szkic lub krótki opis fasonu. Miary możesz zdjąć samodzielnie i nam przesłać; jeśli utkniesz, pomożemy przez WhatsApp. Jeśli jesteś w Antalyi, możemy spotkać się w Twoim hotelu lub w domu, aby zdjąć miary, a w razie potrzeby zrobić przymiarkę.'] },
-      { h: 'Jak ustalana jest cena', p: ['Przy szyciu na miarę nie ma stałego cennika. Cenę podajemy na WhatsApp na podstawie przesłanego zdjęcia lub wybranego fasonu; nie zawiera ona VAT. Sposób i termin płatności ustalamy na WhatsApp przed Twoim potwierdzeniem.'] },
+      { h: 'Jak ustalana jest cena', p: ['Przy szyciu na miarę nie ma stałego cennika. Cenę podajemy na WhatsApp na podstawie przesłanego zdjęcia lub wybranego fasonu; zawiera ona VAT. Sposób i termin płatności ustalamy na WhatsApp przed Twoim potwierdzeniem.'] },
       { h: 'Wysyłka i dostawa', p: ['Gotowy wyrób wysyłamy kurierem w obrębie Antalyi i za granicę; koszt wysyłki pokrywa klient. Czas zależy od zlecenia i podajemy go przy zamówieniu. Przy wysyłce za granicę kwestie celne i pozostałe szczegóły ustalamy na WhatsApp. W sprawie innych miast w Turcji prosimy zapytać na WhatsApp.'] },
       { h: 'Gwarancja', p: ['W czasie transportu obowiązuje gwarancja transportowa firmy kurierskiej. Na nasze szycie dajemy też własną gwarancję: jeśli wynik Ci się nie spodoba, poprawimy go ponownie.'] },
     ],
@@ -318,7 +318,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Co mogę zamówić?', 'Komplety damskie i męskie, komplety sportowe, spodnie, koszule, spódnice, szorty, suknie wieczorowe i garnitury z lnu, bawełny i innych tkanin. Nie szyjemy sukien ślubnych; w przypadku sukien ślubnych wykonujemy tylko poprawki.'],
       ['Jak zamówić z zagranicy?', 'Prześlij zdjęcie fasonu, miary, wybraną tkaninę i kraj na WhatsApp pod numer +90 531 898 64 18. Jeśli potrzebujesz pomocy przy braniu miar, wyjaśnimy to tam.'],
-      ['Ile to kosztuje?', 'Przy szyciu na miarę nie ma stałej ceny; cenę podajemy na WhatsApp na podstawie zdjęcia lub wybranego fasonu. Ceny nie zawierają VAT.'],
+      ['Ile to kosztuje?', 'Przy szyciu na miarę nie ma stałej ceny; cenę podajemy na WhatsApp na podstawie zdjęcia lub wybranego fasonu. Ceny zawierają VAT.'],
       ['Kto płaci za wysyłkę i jak długo to trwa?', 'Koszt wysyłki pokrywa klient. Czas zależy od zlecenia i podajemy go przy zamówieniu. Szczegóły wysyłki za granicę ustalamy na WhatsApp.'],
       ['A jeśli wynik mi się nie spodoba?', 'Nasze szycie objęte jest własną gwarancją: poprawiamy to, co Ci się nie podoba. W czasie transportu obowiązuje gwarancja transportowa firmy kurierskiej.'],
       ['Czy wysyłacie do innych miast w Turcji?', 'Wysyłamy w obrębie Antalyi i za granicę. W sprawie innych miast zapytaj na WhatsApp.'],
@@ -333,7 +333,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Zapytaj o zamówienie na WhatsApp', wa: 'Dzień dobry, chciał(a)bym poznać informacje i cenę odzieży szytej na miarę.',
     svcName: 'Odzież szyta na miarę i wysyłka', svcDesc: 'Odzież szyta na zamówienie z lnu, bawełny i innych tkanin; wysyłka w obrębie Antalyi i za granicę.',
-    note: 'Cenę podajemy na podstawie zdjęcia lub wybranego fasonu, bez VAT. Czas zależy od zlecenia.', more: 'Zobacz także',
+    note: 'Cenę podajemy na podstawie zdjęcia lub wybranego fasonu, z VAT. Czas zależy od zlecenia.', more: 'Zobacz także',
   },
   uk: {
     title: 'Пошив на замовлення з доставкою за кордон | Terzi Can',
@@ -347,7 +347,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Що ми шиємо на замовлення', p: ['З льону, бавовни й інших тканин для жінок і чоловіків ми шиємо на замовлення:'], ul: ['Жіночі та чоловічі комплекти', 'Спортивні костюми', 'Штани', 'Сорочки', 'Спідниці', 'Шорти', 'Вечірні сукні', 'Костюми'] },
       { h: 'Як погоджуємо модель і розмір', p: ['Досить фото, начерку або короткого опису моделі. Мірки можна зняти самому й надіслати; якщо щось не виходить, допоможемо у WhatsApp. Якщо ви в Анталії, можемо зустрітися в готелі чи вдома, щоб зняти мірки й, за потреби, зробити примірку.'] },
-      { h: 'Як визначається ціна', p: ['Фіксованого прайсу на пошив на замовлення немає. Ціну називаємо у WhatsApp за надісланим фото чи бажаною моделлю; ПДВ у ціну не входить. Спосіб і час оплати уточнюємо у WhatsApp до вашого підтвердження.'] },
+      { h: 'Як визначається ціна', p: ['Фіксованого прайсу на пошив на замовлення немає. Ціну називаємо у WhatsApp за надісланим фото чи бажаною моделлю; ПДВ входить у ціну. Спосіб і час оплати уточнюємо у WhatsApp до вашого підтвердження.'] },
       { h: 'Відправлення та терміни', p: ['Готовий виріб надсилається кур\'єрською службою по Анталії та за кордон; доставку оплачує клієнт. Термін залежить від роботи й повідомляється під час замовлення. Під час відправлення за кордон митницю та інші деталі уточнюємо у WhatsApp. Щодо інших міст Туреччини запитайте нас у WhatsApp.'] },
       { h: 'Гарантія', p: ['Під час перевезення діє гарантія самої кур\'єрської служби. На наш пошив ми даємо й власну гарантію: якщо результат вам не сподобається, ми виправимо роботу ще раз.'] },
     ],
@@ -357,7 +357,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Що можна замовити?', 'Жіночі та чоловічі комплекти, спортивні костюми, штани, сорочки, спідниці, шорти, вечірні сукні та костюми з льону, бавовни й інших тканин. Весільні сукні ми не шиємо; для них виконуємо лише переробку.'],
       ['Як замовити з-за кордону?', 'Надішліть фото моделі, мірки, побажання щодо тканини та країну у WhatsApp на +90 531 898 64 18. Як зняти мірки, там само підкажемо.'],
-      ['Скільки це коштує?', 'Фіксованої ціни на пошив на замовлення немає; ціну називаємо у WhatsApp за фото чи бажаною моделлю. ПДВ у ціну не входить.'],
+      ['Скільки це коштує?', 'Фіксованої ціни на пошив на замовлення немає; ціну називаємо у WhatsApp за фото чи бажаною моделлю. ПДВ входить у ціну.'],
       ['Хто оплачує доставку і скільки чекати?', 'Доставку оплачує клієнт. Термін залежить від роботи й повідомляється під час замовлення. Деталі відправлення за кордон уточнюємо у WhatsApp.'],
       ['Що, якщо результат не сподобається?', 'На наш пошив діє власна гарантія: те, що вам не сподобалося, ми виправимо. Під час перевезення діє гарантія кур\'єрської служби.'],
       ['Чи надсилаєте ви в інші міста Туреччини?', 'Ми надсилаємо по Анталії та за кордон. Щодо інших міст запитайте у WhatsApp.'],
@@ -372,7 +372,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Запитати про замовлення у WhatsApp', wa: 'Вітаю, хочу дізнатися ціну й деталі пошиву одягу на замовлення.',
     svcName: 'Пошив на замовлення та доставка', svcDesc: 'Пошив одягу на замовлення з льону, бавовни й інших тканин; доставка по Анталії та за кордон.',
-    note: 'Ціна називається за фото чи бажаною моделлю, без ПДВ. Термін залежить від роботи.', more: 'Дивіться також',
+    note: 'Ціна називається за фото чи бажаною моделлю, з ПДВ. Термін залежить від роботи.', more: 'Дивіться також',
   },
   nl: {
     title: 'Kleding op maat, wereldwijd verzonden | Terzi Can',
@@ -386,7 +386,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     sections: [
       { h: 'Wat naaien wij op bestelling?', p: ['In linnen, katoen en andere stoffen naaien wij voor dames en heren op bestelling:'], ul: ['Dames- en herensets', 'Sportsets', 'Broeken', 'Overhemden', 'Rokken', 'Shorts', 'Avondkleding', 'Pakken'] },
       { h: 'Hoe model en maten worden afgesproken', p: ['Een foto, een schets of een korte beschrijving van het model is genoeg. U kunt zelf uw maten opnemen en doorsturen; komt u er niet uit, dan helpen we via WhatsApp. Bent u in Antalya, dan kunnen we afspreken in uw hotel of bij u thuis om te meten en, indien nodig, te passen.'] },
-      { h: 'Hoe de prijs wordt bepaald', p: ['Voor kleding op maat bestaat geen vaste prijslijst. De prijs wordt via WhatsApp gegeven op basis van de foto die u stuurt of het model dat u wilt, en is exclusief btw. De betaalwijze en het betaalmoment regelen we via WhatsApp voordat u bevestigt.'] },
+      { h: 'Hoe de prijs wordt bepaald', p: ['Voor kleding op maat bestaat geen vaste prijslijst. De prijs wordt via WhatsApp gegeven op basis van de foto die u stuurt of het model dat u wilt, en is inclusief btw. De betaalwijze en het betaalmoment regelen we via WhatsApp voordat u bevestigt.'] },
       { h: 'Verzending en levering', p: ['Het afgewerkte stuk wordt met een koerier verstuurd binnen Antalya en naar het buitenland; de verzendkosten zijn voor de klant. De duur hangt af van de klus en wordt u bij de bestelling gemeld. Bij verzending naar het buitenland regelen we douane en andere details via WhatsApp. Voor andere steden in Turkije kunt u ons via WhatsApp vragen.'] },
       { h: 'Garantie', p: ['Tijdens het transport geldt de transportgarantie van de koerier. Op ons naaiwerk geven we bovendien onze eigen garantie: bevalt het resultaat u niet, dan verbeteren we het opnieuw.'] },
     ],
@@ -396,7 +396,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['Wat kan ik op maat laten maken?', 'Dames- en herensets, sportsets, broeken, overhemden, rokken, shorts, avondkleding en pakken, in linnen, katoen en andere stoffen. Bruidsjurken naaien we niet; bij bruidsjurken doen we alleen aanpassingen.'],
       ['Hoe bestel ik vanuit het buitenland?', 'Stuur de modelfoto, uw maten, uw stofkeuze en uw land via WhatsApp naar +90 531 898 64 18. Hoe u de maten opneemt, leggen we daar graag uit.'],
-      ['Wat kost het?', 'Voor kleding op maat is er geen vaste prijs; de prijs wordt via WhatsApp gegeven op basis van de foto of het gewenste model. Prijzen zijn exclusief btw.'],
+      ['Wat kost het?', 'Voor kleding op maat is er geen vaste prijs; de prijs wordt via WhatsApp gegeven op basis van de foto of het gewenste model. Prijzen zijn inclusief btw.'],
       ['Wie betaalt de verzending en hoe lang duurt het?', 'De verzendkosten betaalt de klant. De duur hangt af van de klus en wordt bij de bestelling gemeld. Details over verzending naar het buitenland regelen we via WhatsApp.'],
       ['Wat als het resultaat me niet bevalt?', 'Op ons naaiwerk geldt onze eigen garantie: we verbeteren wat u niet bevalt. Tijdens het transport geldt de transportgarantie van de koerier.'],
       ['Verzenden jullie naar andere steden in Turkije?', 'We verzenden binnen Antalya en naar het buitenland. Voor andere steden kunt u via WhatsApp vragen.'],
@@ -411,7 +411,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     },
     cta: 'Vraag via WhatsApp naar een bestelling', wa: 'Goedendag, ik wil informatie en een prijs voor kleding op maat.',
     svcName: 'Kleding op maat en verzending', svcDesc: 'Kleding op bestelling genaaid in linnen, katoen en andere stoffen; verzending binnen Antalya en naar het buitenland.',
-    note: 'De prijs wordt gegeven op basis van de foto of het gewenste model, exclusief btw. De duur hangt af van de klus.', more: 'Zie ook',
+    note: 'De prijs wordt gegeven op basis van de foto of het gewenste model, inclusief btw. De duur hangt af van de klus.', more: 'Zie ook',
   },
   ar: {
     title: 'تفصيل ملابس حسب الطلب وشحن دولي | Terzi Can',
@@ -435,7 +435,7 @@ export const OZEL: Record<OzelLang, OzelCopy> = {
     faq: [
       ['ماذا يمكنني أن أطلب؟', 'أطقم نسائية ورجالية، وأطقم رياضية، وبناطيل، وقمصان، وتنانير، وشورتات، وفساتين سهرة، وبدلات، من الكتان والقطن وأقمشة أخرى. لا نخيط فساتين الزفاف؛ ونكتفي في فساتين الزفاف بإجراء التعديلات.'],
       ['كيف أطلب من خارج تركيا؟', 'أرسل صورة النموذج ومقاساتك ونوع القماش وبلدك عبر واتساب إلى +90 531 898 64 18. وإذا احتجت مساعدة في أخذ المقاسات شرحنا لك الطريقة هناك.'],
-      ['كم السعر؟', 'لا يوجد سعر ثابت للتفصيل حسب الطلب؛ يُذكر السعر على واتساب بحسب الصورة أو النموذج المطلوب. الأسعار لا تشمل ضريبة القيمة المضافة.'],
+      ['كم السعر؟', 'لا يوجد سعر ثابت للتفصيل حسب الطلب؛ يُذكر السعر على واتساب بحسب الصورة أو النموذج المطلوب. الأسعار تشمل ضريبة القيمة المضافة.'],
       ['من يدفع الشحن وكم تستغرق المدة؟', 'يدفع العميل رسوم الشحن. تختلف المدة بحسب العمل وتُبلَّغ بها عند الطلب. أما تفاصيل الشحن إلى الخارج فنوضحها عبر واتساب.'],
       ['ماذا لو لم تعجبني النتيجة؟', 'خياطتنا مشمولة بضماننا الخاص: نصحّح ما لم يعجبك. وأثناء النقل يسري ضمان النقل الخاص بشركة الشحن.'],
       ['هل تشحنون إلى مدن تركية أخرى؟', 'نشحن داخل أنطاليا وإلى الخارج. أما المدن الأخرى فاسأل عنها على واتساب.'],

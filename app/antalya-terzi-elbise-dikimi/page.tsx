@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Terzi · Elbise Dikimi, Tadilat | Terzi Can' },
   description:
-    "Antalya Konyaaltı terzi: elbise dikimi, abiye ve takım tadilatı, tamirat. Paça kısaltma 200 TL'den (KDV hariç), " +
+    "Antalya Konyaaltı terzi: elbise dikimi, abiye ve takım tadilatı, tamirat. Paça kısaltma 200 TL'den (KDV dahil), " +
     "normal işler aynı gün. Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.",
   keywords: [
     'antalya terzi elbise dikimi', 'elbise dikimi antalya', 'konyaaltı terzi', 'elbise tadilatı antalya', 'elbise boyu kısaltma', 'abiye tadilat terzi antalya', 'takım elbise tadilatı antalya',

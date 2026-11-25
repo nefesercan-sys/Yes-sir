@@ -7,7 +7,7 @@ const PATH = '/terzi/kaban-palto-tadilati-antalya';
 const DATA: KonuData = {
   "name": "Kaban ve Palto Tadilatı",
   "h1": "Kaban ve Palto Kısaltma, Daraltma · Antalya",
-  "kisa": "Palto uzun mu geldi, kaban kolu elinizi mi kapatıyor, astar mı yırtıldı? Boy ve kol kısaltma ile daraltma 200 TL'den, fermuar değişimi 300 TL'den başlar (KDV hariç). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
+  "kisa": "Palto uzun mu geldi, kaban kolu elinizi mi kapatıyor, astar mı yırtıldı? Boy ve kol kısaltma ile daraltma 200 TL'den, fermuar değişimi 300 TL'den başlar (KDV dahil). Fotoğrafı WhatsApp'tan gönderin, net fiyatı öğrenin.",
   "waIlk": "Merhaba, kabanım/paltom için tadilat fiyatı öğrenmek istiyorum. Fotoğrafını gönderiyorum.",
   "facts": [
     [
@@ -73,7 +73,7 @@ const DATA: KonuData = {
       "Fotoğrafa göre fiyat"
     ]
   ],
-  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahil değildir. Kalın kumaş, astar ve işin kapsamı fiyatı etkiler; net fiyat fotoğrafa göre söylenir.",
+  "fiyatNot": "Fiyatlar başlangıç fiyatıdır ve KDV dahildir. Kalın kumaş, astar ve işin kapsamı fiyatı etkiler; net fiyat fotoğrafa göre söylenir.",
   "adimlar": [
     {
       "baslik": "Sorunu fotoğraflayın",
@@ -95,7 +95,7 @@ const DATA: KonuData = {
   "faq": [
     {
       "q": "Palto kısaltma kaç TL?",
-      "a": "Palto ve kaban boy kısaltma 200 TL'den başlar; fiyata KDV dahil değildir. Astarlı ve kalın kumaşlarda net fiyatı fotoğrafa göre söyleriz."
+      "a": "Palto ve kaban boy kısaltma 200 TL'den başlar; fiyata KDV dahildir. Astarlı ve kalın kumaşlarda net fiyatı fotoğrafa göre söyleriz."
     },
     {
       "q": "Kaban kolu kısaltılır mı?",
@@ -152,7 +152,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Palto ve Kaban Kısaltma Fiyatı · Antalya | Terzi Can" },
-  description: "Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV hariç). Fotoğraf gönderin.",
+  description: "Palto uzun, kaban kolu uzun ya da beden bol mu? Kısaltma ve daraltma 200 TL'den, fermuar 300 TL'den (KDV dahil). Fotoğraf gönderin.",
   keywords: ["kaban tadilatı", "palto tadilatı", "kaban kısaltma", "palto kısaltma", "palto daraltma", "kaban kol kısaltma", "palto astar değişimi", "kaban düğme değişimi", "palto tamiri Antalya"],
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: { title: "Kaban ve Palto Kısaltma, Daraltma | Terzi Can Antalya", description: "Uzun kol, uzun etek, bol beden, yırtık astar: fotoğrafı gönderin, net fiyatı öğrenin. Normal işler aynı gün.", url: `${BASE_URL}${PATH}`, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },

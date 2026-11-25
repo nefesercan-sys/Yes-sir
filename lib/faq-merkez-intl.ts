@@ -1,15 +1,15 @@
 // Sık sorulan sorular merkezi (EN/RU/DE) — görünen SSS ve FAQPage şeması bu diziyle aynıdır (tek kaynak).
-// Kurallar: lib/business.ts (paça/bel/kol/boy ₺200'den ≈ €10; fermuar ₺300'den ≈ €15 pantolon, €15 mont/kaban/palto/deri; deri ₺400'den ≈ €20;
-// dikimde sabit fiyat yok; KDV dahil değil; tüm para birimleriyle ödeme; otellerle ortaklık yok; gelinlik dikimi yok).
+// Kurallar: lib/business.ts (paça/bel/kol/boy ₺200'den ≈ €4; fermuar ₺300'den ≈ €5 pantolon, €5 mont/kaban/palto/deri; deri ₺400'den ≈ €7;
+// dikimde sabit fiyat yok; KDV dahil; tüm para birimleriyle ödeme; otellerle ortaklık yok; gelinlik dikimi yok).
 export type FaqLang = 'en' | 'ru' | 'de';
 type QA = readonly [string, string];
 
 export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
   en: [
-    ['How much does hemming trousers cost in Antalya?', 'Hemming starts from ₺200 (about €10), excluding VAT. Regular jobs are ready the same day. Send a photo on WhatsApp for the exact price.'],
-    ['How much do waist, sleeve and length alterations cost?', 'Waist taking-in, sleeve shortening and length alterations start from ₺200 (about €10), excluding VAT.'],
-    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €15); coat, jacket and leather zippers from about €15. Prices exclude VAT.'],
-    ['How much does leather jacket, trouser or vest alteration cost?', 'Leather alteration starts from ₺400 (about €20), excluding VAT.'],
+    ['How much does hemming trousers cost in Antalya?', 'Hemming starts from ₺200 (about €4), including VAT. Regular jobs are ready the same day. Send a photo on WhatsApp for the exact price.'],
+    ['How much do waist, sleeve and length alterations cost?', 'Waist taking-in, sleeve shortening and length alterations start from ₺200 (about €4), including VAT.'],
+    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €5); coat, jacket and leather zippers from about ₺300 (≈€5). Prices include VAT.'],
+    ['How much does leather jacket, trouser or vest alteration cost?', 'Leather alteration starts from ₺400 (about €7), including VAT.'],
     ['Do you hem jeans and make an original hem?', 'Yes. Jeans hemming, original hem, narrowing, jacket and skirt alterations are done; jeans work starts from about ₺200.'],
     ['Do you shorten or take in coats?', 'Yes. Coat (kaban/palto) shortening and taking-in start from ₺200; a coat zipper replacement starts from ₺300.'],
     ['Do you alter wedding dresses and evening dresses?', 'Yes. Wedding and evening dress alterations are priced by photo or job detail ; timing depends on the job. Wedding dresses are not sewn from scratch, alteration only.'],
@@ -20,7 +20,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
     ['Can we meet at the hotel for a fitting?', 'If needed, yes: we meet at the hotel for a fitting.'],
     ['Is Terzi Can partnered with hotels?', 'No. We have no partnership with any hotel; we serve all hotels in Antalya.'],
     ['Which currencies and payment methods do you accept?', 'Any currency (TRY, EUR, USD, GBP, RUB and others), in cash or by card.'],
-    ['Are prices including VAT?', 'No, prices do not include VAT.'],
+    ['Are prices including VAT?', 'Yes, prices include VAT.'],
     ['How do I get a price?', 'Send a photo of the garment on WhatsApp (+90 531 898 64 18): you get a price quickly. Open every day 08:00–23:00.'],
     ['Where is the workshop?', 'Hurma Mahallesi, 07130 Konyaaltı, Antalya. We serve Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Kepez, Aksu, Döşemealtı, Belek, Serik, Side, Manavgat, Kemer, Beldibi, Göynük and Antalya city.'],
     ['How long has Terzi Can been working?', 'Since 2006, which is 20 years of experience in Antalya.'],
@@ -28,10 +28,10 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
     ['Are swaphubs.com and terzihizmeti.com.tr the same business?', 'Yes. Both are official websites of Terzi Can, with the same WhatsApp number, prices and rules.'],
   ],
   ru: [
-    ['Сколько стоит подшить брюки в Анталье?', 'Подгонка длины от ₺200 (около €10), без НДС. Обычная работа готова в тот же день. Для точной цены отправьте фото в WhatsApp.'],
-    ['Сколько стоит ушить талию, укоротить рукав или длину?', 'Ушивание талии, укорачивание рукавов и длины — от ₺200 (около €10), без НДС.'],
-    ['Сколько стоит замена молнии?', 'Замена молнии на брюках и стандартной молнии — от ₺300 (около €15); на пальто, куртке и коже — от примерно €15. Цены без НДС.'],
-    ['Сколько стоит переделка кожаной куртки, брюк или жилета?', 'Переделка кожаных вещей — от ₺400 (около €20), без НДС.'],
+    ['Сколько стоит подшить брюки в Анталье?', 'Подгонка длины от ₺200 (около €4), с НДС. Обычная работа готова в тот же день. Для точной цены отправьте фото в WhatsApp.'],
+    ['Сколько стоит ушить талию, укоротить рукав или длину?', 'Ушивание талии, укорачивание рукавов и длины — от ₺200 (около €4), с НДС.'],
+    ['Сколько стоит замена молнии?', 'Замена молнии на брюках и стандартной молнии — от ₺300 (около €5); на пальто, куртке и коже — от примерно €5. Цены с НДС.'],
+    ['Сколько стоит переделка кожаной куртки, брюк или жилета?', 'Переделка кожаных вещей — от ₺400 (около €7), с НДС.'],
     ['Подшиваете ли вы джинсы и делаете оригинальный низ?', 'Да. Подшиваем джинсы, делаем оригинальный низ, ушиваем, переделываем джинсовые куртки и юбки; работа с джинсами — от примерно ₺200.'],
     ['Укорачиваете ли вы пальто?', 'Да. Укорачивание и ушивание пальто (kaban/palto) — от ₺200; замена молнии на пальто — от ₺300.'],
     ['Переделываете ли вы свадебные и вечерние платья?', 'Да. Переделка свадебных и вечерних платьев оценивается по фото или деталям работы; срок зависит от работы. Свадебные платья с нуля не шьём, только переделка.'],
@@ -42,7 +42,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
     ['Можно ли встретиться в отеле для примерки?', 'При необходимости да: встречаемся в отеле для примерки.'],
     ['Партнёр ли Terzi Can с отелями?', 'Нет. Партнёрства с отелями у нас нет; мы обслуживаем все отели Антальи.'],
     ['В какой валюте и как можно оплатить?', 'В любой валюте (TRY, EUR, USD, GBP, RUB и других), наличными или картой.'],
-    ['Цены указаны с НДС?', 'Нет, цены без НДС.'],
+    ['Цены указаны с НДС?', 'Да, цены с НДС.'],
     ['Как узнать цену?', 'Отправьте фото вещи в WhatsApp (+90 531 898 64 18) — цена будет быстро. Работаем ежедневно 08:00–23:00.'],
     ['Где находится мастерская?', 'Hurma Mahallesi, 07130 Коньяалты, Анталья. Обслуживаем Коньяалты, Муратпашу, Лару, Гюзельобу, Кунду, Кепез, Аксу, Дёшемеалты, Белек, Серик, Сиде, Манавгат, Кемер, Бельдиби, Гёйнюк и центр Антальи.'],
     ['Как давно работает Terzi Can?', 'С 2006 года — 20 лет опыта в Анталье.'],
@@ -50,10 +50,10 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
     ['Swaphubs.com и terzihizmeti.com.tr — один и тот же бизнес?', 'Да. Оба сайта — официальные сайты Terzi Can: один номер WhatsApp, те же цены и правила.'],
   ],
   de: [
-    ['Was kostet das Kürzen einer Hose in Antalya?', 'Kürzen ab ₺200 (ca. €10), ohne MwSt. Normale Arbeiten sind am selben Tag fertig. Für den genauen Preis ein Foto per WhatsApp senden.'],
-    ['Was kosten Taille, Ärmel und Längenänderungen?', 'Taille enger machen, Ärmel und Länge kürzen ab ₺200 (ca. €10), ohne MwSt.'],
-    ['Was kostet ein Reißverschlusswechsel?', 'Reißverschlusswechsel bei Hosen und Standard ab ₺300 (ca. €15); Mantel, Jacke und Leder ab ca. €15. Preise ohne MwSt.'],
-    ['Was kostet die Änderung von Lederjacke, -hose oder -weste?', 'Lederänderungen ab ₺400 (ca. €20), ohne MwSt.'],
+    ['Was kostet das Kürzen einer Hose in Antalya?', 'Kürzen ab ₺200 (ca. €4), inkl. MwSt. Normale Arbeiten sind am selben Tag fertig. Für den genauen Preis ein Foto per WhatsApp senden.'],
+    ['Was kosten Taille, Ärmel und Längenänderungen?', 'Taille enger machen, Ärmel und Länge kürzen ab ₺200 (ca. €4), inkl. MwSt.'],
+    ['Was kostet ein Reißverschlusswechsel?', 'Reißverschlusswechsel bei Hosen und Standard ab ₺300 (ca. €5); Mantel, Jacke und Leder ab ca. €5. Preise inkl. MwSt.'],
+    ['Was kostet die Änderung von Lederjacke, -hose oder -weste?', 'Lederänderungen ab ₺400 (ca. €7), inkl. MwSt.'],
     ['Kürzen Sie Jeans und machen den Originalsaum?', 'Ja. Jeans kürzen, Originalsaum, enger machen, Jeansjacken und -röcke ändern; Jeansarbeiten ab ca. ₺200.'],
     ['Kürzen oder verengen Sie Mäntel?', 'Ja. Mäntel (kaban/palto) kürzen und enger machen ab ₺200; ein Reißverschlusswechsel am Mantel ab ₺300.'],
     ['Ändern Sie Brautkleider und Abendkleider?', 'Ja. Änderungen an Braut- und Abendkleidern werden nach Foto oder Arbeitsumfang bepreist; die Dauer richtet sich nach der Arbeit. Brautkleider werden nicht neu genäht, nur geändert.'],
@@ -64,7 +64,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
     ['Können wir uns im Hotel zur Anprobe treffen?', 'Bei Bedarf ja: Wir treffen uns im Hotel zur Anprobe.'],
     ['Ist Terzi Can Partner von Hotels?', 'Nein. Wir haben keine Partnerschaft mit Hotels; wir bedienen alle Hotels in Antalya.'],
     ['Welche Währungen und Zahlungsarten akzeptieren Sie?', 'Jede Währung (TRY, EUR, USD, GBP, RUB und weitere), bar oder mit Karte.'],
-    ['Sind die Preise inklusive MwSt.?', 'Nein, die Preise verstehen sich ohne MwSt.'],
+    ['Sind die Preise inklusive MwSt.?', 'Ja, die Preise verstehen sich inkl. MwSt.'],
     ['Wie erhalte ich einen Preis?', 'Foto des Kleidungsstücks per WhatsApp (+90 531 898 64 18) senden: Sie erhalten schnell einen Preis. Täglich 08:00–23:00 geöffnet.'],
     ['Wo ist die Werkstatt?', 'Hurma Mahallesi, 07130 Konyaaltı, Antalya. Wir bedienen Konyaaltı, Muratpaşa, Lara, Güzeloba, Kundu, Kepez, Aksu, Döşemealtı, Belek, Serik, Side, Manavgat, Kemer, Beldibi, Göynük und Antalya Stadt.'],
     ['Seit wann gibt es Terzi Can?', 'Seit 2006, also 20 Jahre Erfahrung in Antalya.'],

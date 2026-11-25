@@ -36,7 +36,7 @@ const HOTELS = [
 // SSS: görünür liste ve FAQPage şeması (BusinessSchema faq=) bu tek diziden beslenir.
 const FAQ = [
   { q: 'Do you offer mobile tailor service directly to hotel rooms?', a: `Yes! Tailor Can's mobile tailor service visits any hotel across Antalya. Share your hotel name and room number on WhatsApp. WhatsApp: ${PHONE}` },
-  { q: 'What currencies and payment methods do you accept?', a: 'Payment in any currency, cash or card, including international credit cards, contactless and mobile payments, right at your hotel. Prices do not include VAT.' },
+  { q: 'What currencies and payment methods do you accept?', a: 'Payment in any currency, cash or card, including international credit cards, contactless and mobile payments, right at your hotel. Prices include VAT.' },
   { q: 'Do you visit hotels?', a: 'Yes. We visit hotels in every hotel area we cover; arrange the time on WhatsApp. The tailoring work is priced from a photo.' },
   { q: 'Do you serve Belek and Lara luxury hotels?', a: `Yes! We regularly visit all hotels in Belek, Lara, Kundu, Kemer, and Side. WhatsApp: ${PHONE}` },
   { q: 'How fast can the tailor arrive at my hotel?', a: 'We confirm an appointment on WhatsApp during opening hours (daily 08:00–23:00). The arrival time depends on your location and our schedule.' },
@@ -280,10 +280,10 @@ export default function HotelTailorAntalyaPage() {
               <tbody>
                 {[
                   ['Hotel Visit / Measurement','Arranged on WhatsApp','—'],
-                  ['Trouser / Pant Hemming','from €10',TURN],
-                  ['Zipper Replacement','from €15 (coat / leather €15)',TURN],
-                  ['Dress / Jacket Alteration','from €10',TURN],
-                  ['Sleeve Shortening','from €10',TURN],
+                  ['Trouser / Pant Hemming','from ₺200 (≈€4)',TURN],
+                  ['Zipper Replacement','from ₺300 (≈€5; coat / leather too)',TURN],
+                  ['Dress / Jacket Alteration','from ₺200 (≈€4)',TURN],
+                  ['Sleeve Shortening','from ₺200 (≈€4)',TURN],
                   ['Evening Gown Repair','by photo',TURN],
                   ['Wedding Dress Alteration (no wedding dress sewing)','by photo',TURN],
                   ['Tear Repair','by photo',TURN],
@@ -297,7 +297,7 @@ export default function HotelTailorAntalyaPage() {
               </tbody>
             </table>
             <div style={{ marginTop: '1rem', fontSize: '.8rem', color: '#6B5F53', textAlign: 'center' }}>
-              💳 Payment in any currency: cash or credit card / contactless / Apple Pay. Prices do not include VAT.
+              💳 Payment in any currency: cash or credit card / contactless / Apple Pay. Prices include VAT.
             </div>
           </div>
         </section>

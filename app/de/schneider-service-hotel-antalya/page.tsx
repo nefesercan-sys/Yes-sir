@@ -102,7 +102,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Schneiderei im Hotel Antalya: Abholung und Rückgabe' },
-  description: 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~10 €), Abholung und Lieferung, Dauer je nach Arbeit.',
+  description: 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~4 €), Abholung und Lieferung, Dauer je nach Arbeit.',
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',
@@ -290,10 +290,10 @@ export default function SchneiderServiceHotelAntalyaPage() {
               <tbody>
                 {[
                   ['Anfahrt','Per WhatsApp','—'],
-                  ['Hosen kürzen','ab €10',TURN],
-                  ['Reißverschluss wechseln','ab €15 (Mantel / Leder €15)',TURN],
-                  ['Kleid / Jacke enger machen','ab €10',TURN],
-                  ['Ärmel kürzen','ab €10',TURN],
+                  ['Hosen kürzen','ab ₺200 (≈€4)',TURN],
+                  ['Reißverschluss wechseln','ab ₺300 (≈€5; Mantel / Leder ebenso)',TURN],
+                  ['Kleid / Jacke enger machen','ab ₺200 (≈€4)',TURN],
+                  ['Ärmel kürzen','ab ₺200 (≈€4)',TURN],
                   ['Abendkleid reparieren','nach Foto',TURN],
                   ['Brautkleid ändern (kein Brautkleid-Nähen)','nach Foto',TURN],
                   ['Riss reparieren','per Foto',TURN],

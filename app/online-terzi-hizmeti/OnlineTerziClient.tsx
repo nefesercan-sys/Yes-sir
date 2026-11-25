@@ -157,7 +157,7 @@ const CATEGORIES = [
     icon: '🌿',
     color: C.emerald,
     colorLight: '#ECFDF5',
-    tag: '%100 Organik',
+    tag: 'Doğal Kumaş',
     title: 'Müslin & Keten Doğal Koleksiyon',
     subtitle: 'Doğayla Uyum, Bedeninizle Özgürlük',
     desc: `Müslin ve keten gibi doğal kumaşlardan kadın, erkek ve çocuk kıyafetleri dikiyoruz. Ölçünüze göre elbise, gömlek ve takım yapılır.`,
