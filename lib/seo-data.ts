@@ -490,7 +490,7 @@ export const SERVICES: Service[] = [
   {
     id: 'kiyafet-tamiri', icon: '🪡', time: 'repair',
     slug: { tr: 'kiyafet-tamiri-onarimi', en: 'clothing-repair-mending', ru: 'remont-odezhdy', de: 'kleidung-reparieren' },
-    name: { tr: 'Kıyafet Tamiri ve Onarımı', en: 'Clothing Repair & Mending', ru: 'Ремонт одежды', de: 'Kleidung reparieren' },
+    name: { tr: 'Kıyafet Tamiri ve Tadilatı', en: 'Clothing Repair & Mending', ru: 'Ремонт одежды', de: 'Kleidung reparieren' },
     q: { tr: 'kıyafet tamiri', en: 'clothing repair', ru: 'ремонт одежды', de: 'Kleidung reparieren' },
     intro: {
       tr: 'Söküklerin dikilmesi, yırtık onarımı ve fermuar değişimi: pantolon, gömlek, etek, elbise, mont ve kotta kıyafet tamiri yapıyoruz. Fotoğraf gönderin, fiyatı söyleyelim.',

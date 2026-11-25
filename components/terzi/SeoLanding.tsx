@@ -91,7 +91,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
+  tr: 'Tamir ve Tadilat Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -556,7 +556,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
+    tr: 'Tamir ve Tadilat Antalya · Kıyafet Tamiri, Terzi Çağır',
     en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
     ru: 'Ремонт одежды в Анталии · Портной и швея, цена по фото',
     de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
