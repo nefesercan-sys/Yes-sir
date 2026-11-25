@@ -4,6 +4,7 @@
 // Mahalle listesi ve bağlı ilçe: lib/turkiye-lokasyonlar.ts (MAHALLE_ILCE).
 // ============================================================
 import type { Metadata } from 'next';
+import { fitDesc } from '@/lib/meta-fit';
 import { notFound } from 'next/navigation';
 import FaqBlock from '@/components/FaqBlock';
 import SpeakableSchema from '@/components/SpeakableSchema';
@@ -39,7 +40,7 @@ export async function mahalleMetadata(ilce: MahalleIlce, { params }: MahallePara
   const alternates = trDistrictAlternates(m.slug, url);
   return {
     title: { absolute: title },
-    description: desc,
+    description: fitDesc(desc),
     keywords: kw,
     alternates,
     openGraph: { title, description: desc, url, siteName: 'Terzi Can Antalya', locale: 'tr_TR', type: 'website' },
