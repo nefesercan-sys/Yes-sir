@@ -56,7 +56,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Antalya Deri Ceket Tamiri · Pantolon, Yelek | Terzi Can" },
+  title: { absolute: "Antalya Terzi | Deri Ceket Tamiri ve Tadilatı" },
   description: 'Deri ceket, deri pantolon ve deri yelek tamir ve tadilatı 400 TL\'den: daraltma, kol kısaltma, onarım. Önce fotoğraf, net fiyat. 08–23.',
   keywords: [
     'deri ceket tadilatı',
