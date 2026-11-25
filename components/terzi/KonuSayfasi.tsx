@@ -1,5 +1,5 @@
 import KargoKisaNot from '@/components/terzi/KargoKisaNot';
-import { BING_PLACES_URL, YANDEX_MAPS_URL } from '@/lib/business';
+import { BING_PLACES_URL, YANDEX_MAPS_URL, INSTAGRAM_URL } from '@/lib/business';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import Link from 'next/link';
 import ReviewsBlock from '@/components/ReviewsBlock';
@@ -66,7 +66,7 @@ export default function KonuSayfasi({ d, kargoFermuar, kargoKisa }: { d: KonuDat
           telephone: PHONE_E, hasMap: GBP_URL,
           address: { '@type': 'PostalAddress', addressLocality: 'Konyaaltı', addressRegion: 'Antalya', addressCountry: 'TR' },
           openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '08:00', closes: '23:00' }],
-          sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
+          sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, INSTAGRAM_URL, GBP_URL, `https://wa.me/${PHONE_E.replace('+', '')}`],
         },
         ...(d.lowPrice ? { offers: { '@type': 'Offer', name: `${d.name} (başlangıç fiyatı)`, price: d.lowPrice, priceCurrency: 'TRY', availability: 'https://schema.org/InStock', url } } : {}),
       },

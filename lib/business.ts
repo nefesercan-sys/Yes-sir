@@ -9,6 +9,8 @@
 export const BING_PLACES_URL = 'https://www.bing.com/maps?ss=ypid.YN74E8E19509337C43';
 /** Yandex Haritalar işletme kaydı (Rus turistler, Yandex Alice). Sahip ekledi, 24 Kasım 2026. */
 export const YANDEX_MAPS_URL = 'https://yandex.com.tr/maps/org/terzi_can_kiyafet_dikimi_tadilati_utu_antalya_terzi_hizmetleri/150195433994/';
+/** Instagram işletme hesabı. Sahip ekledi, 25 Kasım 2026. */
+export const INSTAGRAM_URL = 'https://www.instagram.com/tailorantalyaterzican/';
 export const SITE_URL = 'https://swaphubs.com';
 
 export const PHONE_E164 = '+905318986418';
@@ -56,7 +58,7 @@ export const BUSINESS = {
   hours: { days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '08:00', closes: '23:00' },
   foundingYear: '2006',
   areaServed: AREA_SERVED,
-  sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, MAPS_URL, GOOGLE_REVIEW_URL, `https://wa.me/${WA_NUMBER}`, OTHER_OFFICIAL_SITE],
+  sameAs: [BING_PLACES_URL, YANDEX_MAPS_URL, INSTAGRAM_URL, MAPS_URL, GOOGLE_REVIEW_URL, `https://wa.me/${WA_NUMBER}`, OTHER_OFFICIAL_SITE],
 } as const;
 
 /** schema.org areaServed düğümleri (tek işletme varlığında kullanılır). */
