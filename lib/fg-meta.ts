@@ -256,7 +256,8 @@ export const EUR_FROM: Record<string, number | null> = {
 export const eurFromText = (lang: string, id: string): string => {
   const n = EUR_FROM[id];
   if (!n) return '';
-  return lang === 'en' ? `From €${n}` : lang === 'de' ? `Ab ${n} €` : lang === 'ru' ? `От ${n} €` : '';
+  const tl = ({ 4: 200, 5: 300, 7: 400 } as Record<number, number>)[n]; const p = tl ? `₺${tl} (≈€${n})` : `€${n}`; // TL önce
+  return lang === 'en' ? `From ${p}` : lang === 'de' ? `Ab ${p}` : lang === 'ru' ? `От ${p}` : '';
 };
 const PHOTO: Record<L3, string> = { en: 'Price by photo on WhatsApp', ru: 'Цена по фото в WhatsApp', de: 'Preis per Foto über WhatsApp' };
 const OPEN_SHORT: Record<L3, string> = { en: 'open daily 08:00–23:00', ru: 'ежедневно 08:00–23:00', de: 'täglich 08:00–23:00' };

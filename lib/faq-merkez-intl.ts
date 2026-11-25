@@ -8,7 +8,7 @@ export const FAQ_INTL: Record<FaqLang, ReadonlyArray<QA>> = {
   en: [
     ['How much does hemming trousers cost in Antalya?', 'Hemming starts from ₺200 (about €4), including VAT. Regular jobs are ready the same day. Send a photo on WhatsApp for the exact price.'],
     ['How much do waist, sleeve and length alterations cost?', 'Waist taking-in, sleeve shortening and length alterations start from ₺200 (about €4), including VAT.'],
-    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €5); coat, jacket and leather zippers from about €5. Prices include VAT.'],
+    ['How much does zipper replacement cost?', 'Trouser and standard zipper replacement starts from ₺300 (about €5); coat, jacket and leather zippers from about ₺300 (≈€5). Prices include VAT.'],
     ['How much does leather jacket, trouser or vest alteration cost?', 'Leather alteration starts from ₺400 (about €7), including VAT.'],
     ['Do you hem jeans and make an original hem?', 'Yes. Jeans hemming, original hem, narrowing, jacket and skirt alterations are done; jeans work starts from about ₺200.'],
     ['Do you shorten or take in coats?', 'Yes. Coat (kaban/palto) shortening and taking-in start from ₺200; a coat zipper replacement starts from ₺300.'],

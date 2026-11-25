@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 const GONE_PREFIXES = ["/ulke/", "/turkiye/", "/meslek/", "/sektor/"];
 // Silinen statik bölümler (hesaplama araçları, Antalya rehberi, Riviera rehberi): 404 yerine 410.
 // Kuru temizleme/ütü hizmeti verilmiyor: /terzi/kuru-temizleme-antalya 410 (aramalardan düşsün). Geri açılırsa buradan çıkarın.
-const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide", "/guzellik", "/terzi/kuru-temizleme-antalya"];
+// Eski yönetici paneli ve giriş (ilan/takas sistemi, KVKK: eski üye verileri artık sitede gösterilmez; 25 Kasım 2026): 410.
+const GONE_SECTIONS = ["/hesapla", "/antalya-rehberi", "/riviera-guide", "/guzellik", "/terzi/kuru-temizleme-antalya", "/admin", "/giris"];
 
 // URL'den dili çıkar → kök layout <html lang> değerini SUNUCU HTML'inde doğru verir
 // (botlar JS çalıştırmadan ham HTML'i okur).

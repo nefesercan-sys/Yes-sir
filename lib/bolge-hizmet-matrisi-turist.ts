@@ -19,14 +19,15 @@ export interface MatrisGroup { id: string; heading: string; text: string }
 export interface Matris { title: string; lead: string; groups: MatrisGroup[]; price: string }
 type G = { id: string; ops: string[]; heads: ((n: string) => string)[]; intro: (n: string, o: string) => string };
 type Pack = { titles: ((n: string) => string)[]; leads: ((n: string) => string)[]; price: (n: string) => string; groups: G[]; faq: { id: string; f: (n: string) => [string, string] }[]; seo: ((n: string) => string)[] };
-const e = (k: Parameters<typeof eurFrom>[0]) => '€' + eurFrom(k);
+const TRY = { hem: 200, waist: 200, sleeve: 200, zipperPants: 300, zipperCoat: 300, leather: 400 } as const;
+const e = (k: Parameters<typeof eurFrom>[0]) => `₺${TRY[k]} (≈€${eurFrom(k)})`; // TL önce, € bilgi amaçlı
 
 const PACKS: Record<ILang, Pack> = {
   es: {
     titles: [(n) => `Precios de sastre en ${n} y qué arreglos hacemos`, (n) => `Arreglos de ropa en ${n}: qué se puede hacer y cuánto cuesta`],
     leads: [
       (n) => `Antes de pedir precio en ${n}, vea qué se puede hacer en cada prenda y desde qué importe. La lista está abajo; con una foto le damos el precio exacto y recogemos la prenda en su hotel.`,
-      (n) => `Acortar y estrechar desde €4, cremalleras desde €5 y piel desde €7 (IVA incluido). Abajo tiene los arreglos para huéspedes de ${n}, ordenados por prenda.`,
+      (n) => `Acortar y estrechar desde ₺200 (≈€4), cremalleras desde ₺300 (≈€5) y piel desde ₺400 (≈€7; IVA incluido). Abajo tiene los arreglos para huéspedes de ${n}, ordenados por prenda.`,
     ],
     price: (n) => `Resumen de precios para ${n}: bajos, cintura, mangas y largo desde ${e('hem')}, cremalleras desde ${e('zipperPants')} (abrigos y chaquetas ${e('zipperCoat')}), piel desde ${e('leather')}; IVA incluido. Lo que no aparece en la lista se presupuesta por foto.`,
     groups: [
@@ -58,7 +59,7 @@ const PACKS: Record<ILang, Pack> = {
     titles: [(n) => `Prix du tailleur à ${n} et retouches proposées`, (n) => `Retouches à ${n} : ce qui est possible et combien ça coûte`],
     leads: [
       (n) => `Avant de demander un prix à ${n}, voyez ce qui peut être fait sur chaque vêtement et à partir de quel montant. La liste est ci-dessous ; une photo suffit pour un prix exact et nous passons prendre le vêtement à votre hôtel.`,
-      (n) => `Raccourcir et ajuster dès €4, fermetures éclair dès €5 et cuir dès €7 (TVA comprise). Vous trouverez ci-dessous les retouches pour les clients de ${n}, classées par vêtement.`,
+      (n) => `Raccourcir et ajuster dès ₺200 (≈€4), fermetures éclair dès ₺300 (≈€5) et cuir dès ₺400 (≈€7; TVA comprise). Vous trouverez ci-dessous les retouches pour les clients de ${n}, classées par vêtement.`,
     ],
     price: (n) => `Résumé des prix pour ${n} : ourlet, taille, manches et longueur dès ${e('hem')}, fermetures éclair dès ${e('zipperPants')} (manteaux et vestes ${e('zipperCoat')}), cuir dès ${e('leather')} ; TVA comprise. Ce qui ne figure pas dans la liste est chiffré sur photo.`,
     groups: [
@@ -90,7 +91,7 @@ const PACKS: Record<ILang, Pack> = {
     titles: [(n) => `${n}: ceny krawca i lista przeróbek`, (n) => `${n}: co można przerobić i ile to kosztuje`],
     leads: [
       (n) => `Zanim zapytasz o cenę (${n}), sprawdź, co da się zrobić przy danym ubraniu i od jakiej kwoty. Lista jest poniżej; do dokładnej wyceny wystarczy zdjęcie, a ubranie odbierzemy z hotelu.`,
-      (n) => `Skracanie i zwężanie od €4, zamki od €5, skóra od €7 (ceny z VAT). Poniżej przeróbki dla gości hotelowych (${n}), ułożone według rodzaju ubrania.`,
+      (n) => `Skracanie i zwężanie od ₺200 (≈€4), zamki od ₺300 (≈€5), skóra od ₺400 (≈€7; ceny z VAT). Poniżej przeróbki dla gości hotelowych (${n}), ułożone według rodzaju ubrania.`,
     ],
     price: (n) => `Ceny w skrócie (${n}): nogawki, pas, rękawy i długość od ${e('hem')}, zamki od ${e('zipperPants')} (płaszcze i kurtki ${e('zipperCoat')}), skóra od ${e('leather')}; ceny z VAT. Prace spoza listy wyceniamy ze zdjęcia.`,
     groups: [
@@ -122,7 +123,7 @@ const PACKS: Record<ILang, Pack> = {
     titles: [(n) => `${n}: ціни кравця і перелік робіт`, (n) => `${n}: що можна переробити і скільки це коштує`],
     leads: [
       (n) => `Перш ніж питати про ціну (${n}), подивіться, що можна зробити з кожною річчю і від якої суми. Перелік нижче; для точної ціни достатньо фото, а річ ми заберемо з готелю.`,
-      (n) => `Вкорочення та вшивання — від €4, блискавки — від €5, шкіра — від €7 (ціни з ПДВ). Нижче роботи для гостей готелів (${n}), згруповані за видами одягу.`,
+      (n) => `Вкорочення та вшивання — від ₺200 (≈€4), блискавки — від ₺300 (≈€5), шкіра — від ₺400 (≈€7; ціни з ПДВ). Нижче роботи для гостей готелів (${n}), згруповані за видами одягу.`,
     ],
     price: (n) => `Коротко про ціни (${n}): низ, пояс, рукави та довжина — від ${e('hem')}, блискавки — від ${e('zipperPants')} (пальта й куртки — ${e('zipperCoat')}), шкіра — від ${e('leather')}; ціни з ПДВ. Чого немає в переліку, оцінюємо за фото.`,
     groups: [
@@ -154,7 +155,7 @@ const PACKS: Record<ILang, Pack> = {
     titles: [(n) => `Kleermakersprijzen in ${n} en wat wij doen`, (n) => `Kleding vermaken in ${n}: wat kan er en wat kost het?`],
     leads: [
       (n) => `Voordat u in ${n} een prijs vraagt: bekijk wat er per kledingstuk mogelijk is en vanaf welk bedrag. De lijst staat hieronder; met een foto krijgt u de exacte prijs en wij halen het kledingstuk op bij uw hotel.`,
-      (n) => `Korter en nauwer maken vanaf €4, ritsen vanaf €5 en leer vanaf €7 (incl. btw). Hieronder staat het vermaakwerk voor hotelgasten in ${n}, per kledingstuk.`,
+      (n) => `Korter en nauwer maken vanaf ₺200 (≈€4), ritsen vanaf ₺300 (≈€5) en leer vanaf ₺400 (≈€7; incl. btw). Hieronder staat het vermaakwerk voor hotelgasten in ${n}, per kledingstuk.`,
     ],
     price: (n) => `Prijsoverzicht voor ${n}: zoom, taille, mouwen en lengte vanaf ${e('hem')}, ritsen vanaf ${e('zipperPants')} (jassen en mantels ${e('zipperCoat')}), leer vanaf ${e('leather')}; incl. btw. Wat niet in de lijst staat, berekenen wij op basis van een foto.`,
     groups: [
@@ -186,7 +187,7 @@ const PACKS: Record<ILang, Pack> = {
     titles: [(n) => `أسعار الخياط في ${n} والأعمال التي نقوم بها`, (n) => `تعديل الملابس في ${n}: ما الممكن وكم يكلّف؟`],
     leads: [
       (n) => `قبل أن تسأل عن السعر في ${n}، اطّلع على ما يمكن عمله لكل قطعة ومن أي مبلغ يبدأ. القائمة في الأسفل؛ تكفي صورة لمعرفة السعر الدقيق، ونستلم القطعة من فندقك.`,
-      (n) => `التقصير والتضييق من €4، والسحابات من €5، والجلد من €7 (الأسعار تشمل الضريبة). في الأسفل أعمال التعديل لنزلاء الفنادق في ${n} مرتبة حسب نوع القطعة.`,
+      (n) => `التقصير والتضييق من ₺200 (≈€4)، والسحابات من ₺300 (≈€5)، والجلد من ₺400 (≈€7; الأسعار تشمل الضريبة). في الأسفل أعمال التعديل لنزلاء الفنادق في ${n} مرتبة حسب نوع القطعة.`,
     ],
     price: (n) => `ملخص الأسعار في ${n}: الأطراف والخصر والأكمام والطول من ${e('hem')}، السحابات من ${e('zipperPants')} (المعاطف والسترات ${e('zipperCoat')})، الجلد من ${e('leather')}؛ الأسعار تشمل الضريبة. ما ليس في القائمة يُسعَّر حسب الصورة.`,
     groups: [

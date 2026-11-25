@@ -171,9 +171,9 @@ export const SERVICES: Service[] = [
     q: { tr: 'kot pantolon kısaltma', en: 'jeans hemming', ru: 'подшив джинсов', de: 'Jeans kürzen' },
     intro: {
       tr: 'Kot pantolon paça kısaltma, orijinal paça yapımı ve bel/bacak daraltmayı kalın kot kumaşa uygun makine ve iplikle yapıyoruz. Kot ceket, kot mont, kot etek ve kot şortta da kısaltma ve daraltma yapılır; kot işleri ₺200’den başlar.',
-      en: 'We hem and taper jeans (including hemming with the original hem kept) and take in the waist, using machines and thread suited to heavy denim. We also shorten and take in denim jackets, denim coats, denim skirts and denim shorts; denim work starts from €4.',
-      ru: 'Подшиваем и сужаем джинсы (в том числе с сохранением оригинального низа) и ушиваем в поясе на машине и нитками, подходящими для плотного денима. Также укорачиваем и ушиваем джинсовые куртки, пальто, юбки и шорты; работы с джинсой — от 4 €.',
-      de: 'Wir kürzen und verengen Jeans (auch mit Original-Saum) und machen den Bund enger, mit Maschinen und Garn für dicken Denim. Auch Jeansjacken, Jeansmäntel, Jeansröcke und Jeansshorts werden gekürzt und enger gemacht; Jeansarbeiten ab 4 €.',
+      en: 'We hem and taper jeans (including hemming with the original hem kept) and take in the waist, using machines and thread suited to heavy denim. We also shorten and take in denim jackets, denim coats, denim skirts and denim shorts; denim work starts from ₺200 (≈€4).',
+      ru: 'Подшиваем и сужаем джинсы (в том числе с сохранением оригинального низа) и ушиваем в поясе на машине и нитками, подходящими для плотного денима. Также укорачиваем и ушиваем джинсовые куртки, пальто, юбки и шорты; работы с джинсой — от ₺200 (≈4 €).',
+      de: 'Wir kürzen und verengen Jeans (auch mit Original-Saum) und machen den Bund enger, mit Maschinen und Garn für dicken Denim. Auch Jeansjacken, Jeansmäntel, Jeansröcke und Jeansshorts werden gekürzt und enger gemacht; Jeansarbeiten ab ₺200 (≈4 €).',
     },
     vars: {
       tr: ['kot pantolon paça kısaltma', 'kot pantolon daraltma', 'kot pantolon kısaltma', 'kot paçası kısaltma', 'jean paça kısaltma terzi', 'kot bel daraltma'],
@@ -422,9 +422,9 @@ export const SERVICES: Service[] = [
     q: { tr: 'deri ceket tadilatı', en: 'leather jacket alteration', ru: 'ремонт кожаной куртки', de: 'Lederjacke ändern' },
     intro: {
       tr: 'Deri ceket, deri pantolon ve deri yelekte yaka değiştirme, kol ve boy kısaltma, bel daraltma, fermuar değişimi ve onarım yapıyoruz; deri işleri ₺400’den başlar. Önce fotoğraf istiyoruz, deri cinsine göre net fiyat söylenir.',
-      en: 'On leather jackets, leather trousers and leather waistcoats we replace collars, shorten sleeves and length, take in the waist, replace zippers and repair; leather work starts from €7. We ask for a photo first and confirm the price once we know the type of leather.',
-      ru: 'На кожаных куртках, брюках и жилетах меняем воротники, укорачиваем рукава и длину, ушиваем в поясе, меняем молнии и ремонтируем; работы с кожей — от 7 €. Сначала просим фото, цену называем после определения типа кожи.',
-      de: 'An Lederjacken, Lederhosen und Lederwesten wechseln wir Kragen, kürzen Ärmel und Länge, machen den Bund enger, wechseln Reißverschlüsse und reparieren; Lederarbeiten ab 7 €. Wir bitten zuerst um ein Foto und nennen den Preis, sobald die Lederart klar ist.',
+      en: 'On leather jackets, leather trousers and leather waistcoats we replace collars, shorten sleeves and length, take in the waist, replace zippers and repair; leather work starts from ₺400 (≈€7). We ask for a photo first and confirm the price once we know the type of leather.',
+      ru: 'На кожаных куртках, брюках и жилетах меняем воротники, укорачиваем рукава и длину, ушиваем в поясе, меняем молнии и ремонтируем; работы с кожей — от ₺400 (≈7 €). Сначала просим фото, цену называем после определения типа кожи.',
+      de: 'An Lederjacken, Lederhosen und Lederwesten wechseln wir Kragen, kürzen Ärmel und Länge, machen den Bund enger, wechseln Reißverschlüsse und reparieren; Lederarbeiten ab ₺400 (≈7 €). Wir bitten zuerst um ein Foto und nennen den Preis, sobald die Lederart klar ist.',
     },
     vars: {
       tr: ['deri ceket tadilatı', 'deri ceket daraltma', 'deri pantolon tadilatı', 'deri ceket kol kısaltma', 'deri ceket tamiri', 'deri mont terzi', 'deri ceket yaka değiştirme', 'deri pantolon bel daraltma', 'deri yelek tamiri'],
