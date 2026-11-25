@@ -91,7 +91,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
+  tr: 'Tamir ve Tadilat Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -412,7 +412,7 @@ function serviceCopy(lang: Lang, s: Service) {
     ru: [`${Q}? Анталья: ${ps}, ${ts} | Terzi Can`, `${Q}? Анталья, ${ts} | Terzi Can`, `${Q}? Анталья | Terzi Can`],
     de: [`${Q}? Antalya: ${ps}, ${ts} | Terzi Can`, `${Q}? Antalya, ${ts} | Terzi Can`, `${Q}? Antalya | Terzi Can`],
   }[lang];
-  // Fiyat başlıkta (Search Console, Kasım 2026): '… ne kadar / kaç TL' aramalarına doğrudan cevap
+  // Sahip kararı (26 Kasım 2026): başlıkta rakam YALNIZCA fiyat niyetli başlıklarda ('ücreti ne kadar'); genel/bölge başlıklarında fiyat yok
   const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? 2026: ₺${s.priceFrom}'den | Terzi Can`, `${Q} ne kadar? 2026 Antalya: ₺${s.priceFrom}'den`, `${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
   const title = pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
@@ -556,7 +556,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Terzi Çağır Antalya · Fotoğraf At, Fiyat Al',
+    tr: 'Tamir ve Tadilat Antalya · Kıyafet Tamiri, Terzi Çağır',
     en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
     ru: 'Ремонт одежды в Анталии · Портной и швея, цена по фото',
     de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
