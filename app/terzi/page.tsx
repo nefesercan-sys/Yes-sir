@@ -47,7 +47,7 @@ const GBP_1 = {
   addr:   GBP_ADDR,
 };
 
-const PAGE_TITLE = "Terzi Can Antalya · Paça ₺200, Fermuar ₺300, Dikim";
+const PAGE_TITLE = "Terzi Can Antalya · Terzi Dikim, Tadilat Hizmeti";
 const PAGE_DESC  =
   "Bay bayan tamir, tadilat, fermuar değişimi ve dikim: paça 200 TL'den, fermuar 300 TL'den (KDV dahil). Fotoğrafı WhatsApp'tan gönderin. Her gün 08:00–23:00.";
 
