@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import FiyatNotu from '@/components/FiyatNotu';
 import SonGuncelleme from '@/components/SonGuncelleme';
 import { headers } from "next/headers";
 import { Plus_Jakarta_Sans, Unbounded } from "next/font/google";
@@ -136,6 +137,7 @@ export default async function RootLayout({ children }: Props) {
             <LocaleHtmlLang />
             {/* Sayfalar kendi <main> etiketini taşıdığı için burada <div> kullanılır (iç içe <main> geçersizdir) */}
             <div id="icerik">{children}</div>
+            <FiyatNotu />
             <SonGuncelleme />
             <GoogleYorumSeridi lang={lang} />
             <RuTelegramButton />

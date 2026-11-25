@@ -134,7 +134,7 @@ const FAQ: [string, string][] = [
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Konyaaltı Terzi · Tamir, Dikim, Tadilat ve Tekstil Atölyesi' },
+  title: { absolute: "Konyaaltı Terzi · Paça ₺200'den, Tamir, Dikim, Tadilat" },
   description: "Konyaaltı'nda terzi ve dikiş atölyesi: tamir, tadilat, özel dikim ve küçük tekstil imalatı. Paça ₺200'den, fermuar ₺300'den. Hurma, Liman, Uncalı, Sarısu.",
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
@@ -149,7 +149,7 @@ export const metadata: Metadata = {
     languages: { 'x-default': SITE_URL },
   },
   openGraph: {
-    title: 'Konyaaltı Terzi · Tamir, Dikim, Tadilat ve Tekstil Atölyesi',
+    title: "Konyaaltı Terzi · Paça ₺200'den, Tamir, Dikim, Tadilat",
     description: "Konyaaltı'nda terzi ve dikiş atölyesi: tamir, tadilat, özel dikim ve tekstil imalatı.",
     url: SITE_URL,
     type: 'website',

@@ -61,7 +61,7 @@ const HOWTO = {
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
   title: { absolute: 'Hotel Tailor Antalya · We Come to Your Hotel | Terzi Can' },
-  description: 'Mobile tailor service in Antalya hotels. Belek, Lara, Kemer. Same-day alterations, English speaking tailor, payment in any currency, cash or card.',
+  description: 'Hotel tailor in Antalya: Belek, Lara, Kemer. Hemming from ₺200 (≈€4), zipper from ₺300 (≈€5), same-day alterations, English-speaking tailor.',
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
     'English speaking tailor Antalya','Belek hotel tailor','Lara hotel tailor',

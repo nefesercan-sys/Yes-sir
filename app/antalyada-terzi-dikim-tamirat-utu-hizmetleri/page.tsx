@@ -234,7 +234,7 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim ve Tamir' },
+  title: { absolute: 'Antalya Terzi · Adrese Gelen Dikim, Tamir · Paça ₺200' },
   description: `Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı.`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
@@ -251,7 +251,7 @@ export const metadata: Metadata = {
     languages: { 'tr-TR': PAGE_URL, 'x-default': PAGE_URL },
   },
   openGraph: {
-    title: 'Antalya Terzi | Adrese Teslim Dikim ve Tamirat | Terzi Can',
+    title: 'Antalya Terzi · Adrese Gelen Dikim, Tamir · Paça ₺200at | Terzi Can',
     description: `Konyaaltı, Lara, Muratpaşa ve Kepez'e özel kuryeli terzilik, kıyafet tamiratı hizmetleri. Aynı gün askıda teslimat, acil işler 1–2 saatte!`,
     url: PAGE_URL,
     siteName: 'Terzi Can Antalya',
@@ -272,7 +272,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antalya Terzi | Adrese Teslim Dikim ve Tamirat',
+    title: 'Antalya Terzi · Adrese Gelen Dikim, Tamir · Paça ₺200at',
     description: 'Konyaaltı, Lara, Muratpaşa ve Kepez\'e kuryeli terzilik, kıyafet tamiratı hizmetleri.',
     images: [OG_IMAGE],
   },

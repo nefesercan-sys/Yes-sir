@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: "Online Terzi Hizmeti | Ölçüye Özel Dikim & Kargo | Terzi Can" },
   description:
-    "Antalya'da otelinize ve evinize gelen, yurt dışına kargolu online özel terzi. Abiye ve gelinlik tadilatı, takım elbise dikimi. WhatsApp'tan ölçü verin, kıyafetiniz adresinize gelsin.",
+    "Otele ve eve gelen, yurt dışına kargolu online terzi: abiye ve gelinlik tadilatı, özel dikim. Ölçünüzü WhatsApp'tan verin, kıyafetiniz adresinize gelsin.",
   keywords: [
     'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
     'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',

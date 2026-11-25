@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { fitDesc } from '@/lib/meta-fit';
 import { BASE, CONTENT, HREFLANG, LANGS, LOCALE, URLS, type Lang, type Topic } from './tekstil-sayfalari';
 import { PROMO_ALL } from './intl-promo';
 import { sixAlt } from './intl-konu';
@@ -15,7 +16,7 @@ export function tekstilMetadata(topic: Topic, lang: Lang): Metadata {
   return {
     metadataBase: new URL(BASE),
     title: { absolute: c.t },
-    description: c.d,
+    description: fitDesc(c.d),
     alternates: { canonical: url, languages },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
     openGraph: {
