@@ -235,7 +235,7 @@ export default function FermuarDegisimiPage() {
           </div>
 
           <h1 style={{ fontSize: 'clamp(2rem,6vw,3rem)', lineHeight: 1.1, color: INK, margin: '0 0 1rem', fontWeight: 800, letterSpacing: '-.02em' }}>
-            Fermuar Tamiri ve Değişimi Antalya
+            Fermuar Değişimi Antalya
           </h1>
 
           <p style={{ fontSize: '1.05rem', maxWidth: 680, margin: '0 0 1.4rem', color: INK }}>
