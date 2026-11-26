@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { fitDesc, withAsk } from '@/lib/meta-fit';
+import { fitDesc, photoPrice, withAsk } from '@/lib/meta-fit';
 import { notFound } from 'next/navigation';
 import IntlLanding, { OG_DEFAULT } from '@/components/terzi/IntlLanding';
 import ZoneLanding from '@/components/terzi/ZoneLanding';
@@ -59,7 +59,7 @@ function zoneLanguages(zone: (typeof ZONE_SLUGS)[number]): Record<string, string
   return six;
 }
 
-export async function generateMetadata({ params }: P): Promise<Metadata> {
+async function generateMetadataInner({ params }: P): Promise<Metadata> {
   const { lang, slug } = await params;
   if (!isILang(lang)) return {};
 
@@ -69,12 +69,12 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: c.title },
-      description: fitDesc(withAsk(c.desc, lang), 158, lang),
+      description: photoPrice(c.desc, lang, 158),
       keywords: c.keywords,
       robots,
       alternates: { canonical: url, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${iUrl(l)}`])) },
-      openGraph: { title: c.title, description: fitDesc(withAsk(c.desc, lang), 158, lang), url, siteName: 'Terzi Can', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
-      twitter: { card: 'summary_large_image', title: c.title, description: fitDesc(withAsk(c.desc, lang), 158, lang), images: [OG_DEFAULT] },
+      openGraph: { title: c.title, description: photoPrice(c.desc, lang, 158), url, siteName: 'Terzi Can', locale: c.locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: c.h1 }] },
+      twitter: { card: 'summary_large_image', title: c.title, description: photoPrice(c.desc, lang, 158), images: [OG_DEFAULT] },
     };
   }
 
@@ -84,11 +84,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: sc.title },
-      description: fitDesc(withAsk(sc.desc, lang), 158, lang),
+      description: photoPrice(sc.desc, lang, 158),
       robots,
       alternates: { canonical: surl, languages: Object.fromEntries(ILANGS.map((l) => [INTL[l].hreflang, `${SITE}${svcgUrl(l)}`])) },
-      openGraph: { title: sc.title, description: fitDesc(withAsk(sc.desc, lang), 158, lang), url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
-      twitter: { card: 'summary_large_image', title: sc.title, description: fitDesc(withAsk(sc.desc, lang), 158, lang), images: [OG_DEFAULT] },
+      openGraph: { title: sc.title, description: photoPrice(sc.desc, lang, 158), url: surl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: sc.title }] },
+      twitter: { card: 'summary_large_image', title: sc.title, description: photoPrice(sc.desc, lang, 158), images: [OG_DEFAULT] },
     };
   }
 
@@ -101,11 +101,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: oc.title },
-      description: fitDesc(withAsk(oc.desc, lang), 158, lang),
+      description: photoPrice(oc.desc, lang, 158),
       robots,
       alternates: { canonical: ourl, languages: onlineLanguages(SITE) },
-      openGraph: { title: oc.title, description: fitDesc(withAsk(oc.desc, lang), 158, lang), url: ourl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: oc.title }] },
-      twitter: { card: 'summary_large_image', title: oc.title, description: fitDesc(withAsk(oc.desc, lang), 158, lang), images: [OG_DEFAULT] },
+      openGraph: { title: oc.title, description: photoPrice(oc.desc, lang, 158), url: ourl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'website', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: oc.title }] },
+      twitter: { card: 'summary_large_image', title: oc.title, description: photoPrice(oc.desc, lang, 158), images: [OG_DEFAULT] },
     };
   }
 
@@ -116,11 +116,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: hc.title },
-      description: fitDesc(withAsk(hc.desc, lang), 158, lang),
+      description: photoPrice(hc.desc, lang, 158),
       robots,
       alternates: { canonical: hurl, languages: hzLanguages(hz) },
-      openGraph: { title: hc.title, description: fitDesc(withAsk(hc.desc, lang), 158, lang), url: hurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
-      twitter: { card: 'summary_large_image', title: hc.title, description: fitDesc(withAsk(hc.desc, lang), 158, lang), images: [OG_DEFAULT] },
+      openGraph: { title: hc.title, description: photoPrice(hc.desc, lang, 158), url: hurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: hc.h1 }] },
+      twitter: { card: 'summary_large_image', title: hc.title, description: photoPrice(hc.desc, lang, 158), images: [OG_DEFAULT] },
     };
   }
 
@@ -131,11 +131,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     return {
       metadataBase: new URL(SITE),
       title: { absolute: kc.title },
-      description: fitDesc(withAsk(kc.desc, lang), 158, lang),
+      description: photoPrice(kc.desc, lang, 158),
       robots,
       alternates: { canonical: kurl, languages: konuLanguages(konu) },
-      openGraph: { title: kc.title, description: fitDesc(withAsk(kc.desc, lang), 158, lang), url: kurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
-      twitter: { card: 'summary_large_image', title: kc.title, description: fitDesc(withAsk(kc.desc, lang), 158, lang), images: [OG_DEFAULT] },
+      openGraph: { title: kc.title, description: photoPrice(kc.desc, lang, 158), url: kurl, siteName: 'Terzi Can', locale: INTL[lang].locale, type: 'article', images: [{ url: OG_DEFAULT, width: 1200, height: 630, alt: kc.h1 }] },
+      twitter: { card: 'summary_large_image', title: kc.title, description: photoPrice(kc.desc, lang, 158), images: [OG_DEFAULT] },
     };
   }
 
@@ -192,4 +192,11 @@ export default async function Page({ params }: P) {
   const zone = parseZone(lang, slug);
   if (!zone) notFound();
   return <ZoneLanding lang={lang} zone={zone} />;
+}
+
+// Arama sonucunda görünsün diye: bu rotadaki tüm alt şablonlarda açıklamaya o dilde "Fotoğraf gönderin, fiyat alın" (photoPrice; zaten varsa dokunmaz)
+export async function generateMetadata(props: P): Promise<Metadata> {
+  const m = await generateMetadataInner(props);
+  const { lang } = await props.params;
+  return typeof m.description === 'string' ? { ...m, description: photoPrice(m.description, lang) } : m;
 }

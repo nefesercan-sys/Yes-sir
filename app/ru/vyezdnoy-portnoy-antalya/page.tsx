@@ -11,6 +11,7 @@ import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import { byPriority } from '@/lib/seo-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
 const EN_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
@@ -101,8 +102,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Выездное ателье и портной в Анталье | Terzi Can' },
-  description: 'Выездной портной в Анталье: приедем в отель в Белеке, Ларе, Кемере. Подшив от ₺200 (≈€4), молния от ₺300, срочный ремонт. WhatsApp на вашем языке.',
+  title: { absolute: 'Выездное ателье в Анталье · ремонт, подгонка, пошив' },
+  description: photoPrice('Выездной портной в Анталье: приедем в отель в Белеке, Ларе, Кемере. Подшив от ₺200 (≈€4), молния от ₺300, срочный ремонт. WhatsApp на вашем языке.', 'ru'),
   keywords: [
     'выездной портной Анталья','портной в отель Анталья','портной Анталья',
     'русскоговорящий портной Анталья','ателье Белек','ателье Лара',

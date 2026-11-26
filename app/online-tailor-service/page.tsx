@@ -10,6 +10,7 @@ import BusinessSchema from '@/components/BusinessSchema';
 import OnlineTailorClient from './OnlineTailorClient';
 import { FAQS } from './faq-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/online-tailor-service`;
 const PHONE     = '+90 531 898 64 18';
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Antalya Tailor: Send a Photo, Get a Quote | Terzi Can' },
   description:
-    'Online tailor service in Konyaaltı: menswear & womenswear tailoring, repairs, alterations, ' +
-    'bulk production. Tailor to your hotel or home in Antalya.',
+    photoPrice('Online tailor service in Konyaaltı: menswear & womenswear tailoring, repairs, alterations, ' +
+    'bulk production. Tailor to your hotel or home in Antalya.', 'en'),
   keywords: [
     'online tailor Antalya', 'menswear tailoring Antalya', 'womenswear tailoring Antalya',
     'repairs alterations Antalya', 'mass production Antalya',

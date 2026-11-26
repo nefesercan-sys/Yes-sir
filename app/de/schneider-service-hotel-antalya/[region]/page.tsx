@@ -10,6 +10,7 @@ import { jsonLdString } from '@/lib/json-ld';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { hotelKwDesc } from '@/lib/kw-desc';
 
+import { photoPrice } from '@/lib/meta-fit';
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
 const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   if (!r) return {};
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
-  const title = `Änderungsschneiderei ${r.name}: Hotelabholung | Terzi Can`;
+  const title = `Änderungsschneiderei ${r.name} · Reparatur & Hotelabholung`;
   const desc = `Kleidung im Urlaub ändern in ${r.name}: Abholung und Lieferung im Hotel, Kürzen ab ₺200 (~4 €), Dauer je nach Arbeit. Foto per WhatsApp senden.`;
   const kwd = hotelKwDesc('de', r.name, 'b', desc); // anahtar kelimeli kalıp (lib/kw-desc.ts)
   const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   return {
     metadataBase: new URL(HOME_URL),
     title: { absolute: title },
-    description: kwd,
+    description: photoPrice(kwd, 'de'),
     keywords: [
       `Schneider ${r.name}`, 
       `Änderungsschneiderei ${r.name}`, 

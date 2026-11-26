@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { byPriority } from '@/lib/seo-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
 const RU_URL = 'https://swaphubs.com/ru/vyezdnoy-portnoy-antalya';
@@ -60,8 +61,8 @@ const HOWTO = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Hotel Tailor Antalya · We Come to Your Hotel | Terzi Can' },
-  description: 'Hotel tailor in Antalya: Belek, Lara, Kemer. Hemming from ₺200 (≈€4), zipper from ₺300 (≈€5), same-day alterations, English-speaking tailor.',
+  title: { absolute: 'Tailor to Your Hotel, Antalya · Repairs, Alterations' },
+  description: photoPrice('Hotel tailor in Antalya: Belek, Lara, Kemer. Hemming from ₺200 (≈€4), zipper from ₺300 (≈€5), same-day alterations, English-speaking tailor.', 'en'),
   keywords: [
     'mobile tailor Antalya','hotel tailor Antalya','tailor service Antalya hotel',
     'English speaking tailor Antalya','Belek hotel tailor','Lara hotel tailor',
