@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import KonuSayfasi, { type KonuData } from '@/components/terzi/KonuSayfasi';
 
+import { resimFiyat } from '@/lib/meta-fit';
 const BASE_URL = 'https://swaphubs.com';
 const PATH = '/terzi/kot-ceket-mont-tadilati-antalya';
 
@@ -57,7 +58,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Kot Ceket ve Mont Tadilatı Antalya · Aynı Gün | Terzi Can' },
-  description: 'Kot ceket ve kot mont kol kısaltma, boy kısaltma, daraltma ve orijinal görünümde dikiş 200 TL\'den. Normal iş aynı gün.',
+  description: resimFiyat('Kot ceket ve kot mont kol kısaltma, boy kısaltma, daraltma ve orijinal görünümde dikiş 200 TL\'den. Normal iş aynı gün.'),
   keywords: [
     'kot ceket kısaltma',
     'kot ceket daraltma',

@@ -16,7 +16,7 @@ import BolgeSayfasi from '@/components/terzi/BolgeSayfasi';
 import { KeywordBlock, trDistrictAlternates } from '@/components/terzi/SeoLanding';
 import { SITE_URL, BUSINESS_ID, PHONE_DISPLAY, isFreeService } from '@/lib/business';
 import { jsonLdString } from '@/lib/json-ld';
-import { districtFaqItems, withEkSss, trLoc, pick } from '@/lib/bolge-icerik';
+import { districtFaqItems, withEkSss, trLoc } from '@/lib/bolge-icerik';
 import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
 
@@ -40,11 +40,9 @@ function meta(slug: string, ad: string) {
   const d = findDistrict(slug);
   const loc = d?.loc.tr ?? trLoc(ad);
   const resort = d?.kind === 'resort';
-  const title = pick(`t:${slug}`, [
-    `${ad} Terzi · Paça, Fermuar, Tadilat | Terzi Can`,
-    `${ad} Terzi: Tamir, Tadilat, Özel Dikim | Terzi Can`,
-    `${ad} Terzi Çağır · Fotoğrafla Fiyat | Terzi Can`,
-  ]);
+  // Sahip kalıbı (26 Kasım 2026): "Lara Terzi Çağır · Kıyafet Dikimi, Tamiri, Tadilatı"
+  const t0 = `${ad} Terzi Çağır · Kıyafet Dikimi, Tamiri, Tadilatı`;
+  const title = t0.length <= 60 ? t0 : `${ad} Terzi Çağır · Dikim, Tamir, Tadilat`;
   const svc = isFreeService(slug) ? 'Otele ve eve servis.' : resort ? 'Otele servis.' : 'Otellere servis.';
   const desc = isFar(slug) ? farDesc('tr', ad) : trAreaJobsDesc(loc, title, 'b', `${loc} terzi: paça ₺200'den, fermuar ₺300'den; normal tadilat aynı gün, acil 1–2 saat. ${svc}`);
   return { title, desc, loc, resort };

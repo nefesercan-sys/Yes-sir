@@ -10,6 +10,7 @@ import { KONYAALTI_MAHALLELERI, MURATPASA_MAHALLELERI } from '@/lib/turkiye-loka
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
+import { resimFiyat } from '@/lib/meta-fit';
 // ─── YAPILANDIRMA VE URL'LER ──────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
 const PAGE_URL  = `${BASE_URL}/antalyada-terzi-dikim-tamirat-utu-hizmetleri`;
@@ -234,8 +235,8 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim ve Tamir' },
-  description: `Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı.`,
+  title: { absolute: "Antalya'da Terzi · Dikim, Tamirat, Ütü, Adrese Teslim" },
+  description: resimFiyat(`Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı.`),
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',
     'Hurma terzi', 'Liman mahallesi terzi', 'Uncalı terzi', 'Şirinyalı terzi', 'Sarısu terzi',

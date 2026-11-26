@@ -7,7 +7,7 @@ const PATH = '/terzi/deri-ceket-tadilati-antalya';
 const DATA: KonuData = {
   path: PATH,
   name: 'Deri Ceket, Pantolon ve Yelek Tadilatı',
-  h1: 'Deri Ceket Tamiri ve Tadilatı Antalya',
+  h1: 'Deri Ceket Tadilatı Antalya',
   kisa: 'Terzi Can, Antalya Konyaaltı\'nda deri ceket, deri pantolon ve deri yelek tamir ve tadilatını 400 TL\'den başlayan fiyatlarla yapar. Önce fotoğraf istenir; deri cinsi görüldükten sonra yapılabilecek işlem, net fiyat ve süre söylenir.',
   waIlk: 'Merhaba, deri ceket/pantolon/yelek tadilatı için fiyat almak istiyorum. Fotoğrafı gönderiyorum.',
   facts: [
@@ -56,7 +56,7 @@ const DATA: KonuData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: "Antalya Deri Ceket Tamiri · Pantolon, Yelek | Terzi Can" },
+  title: { absolute: "Deri Ceket Tadilatı Antalya · Pantolon, Yelek | Terzi Can" },
   description: 'Deri ceket, deri pantolon ve deri yelek tamir ve tadilatı 400 TL\'den: daraltma, kol kısaltma, onarım. Önce fotoğraf, net fiyat. 08–23.',
   keywords: [
     'deri ceket tadilatı',

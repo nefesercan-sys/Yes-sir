@@ -12,6 +12,7 @@ import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import { FAQS } from './faq-data';
 import { onlineLanguages } from '@/lib/intl-online';
 
+import { resimFiyat } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com/online-terzi-hizmeti';
 
 // ─── METADATA ─────────────────────────────────────────────────────────────────
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://swaphubs.com'),
   title: { absolute: "Online Terzi Hizmeti | Ölçüye Özel Dikim & Kargo | Terzi Can" },
   description:
-    "Otele ve eve gelen, yurt dışına kargolu online terzi: abiye ve gelinlik tadilatı, özel dikim. Ölçünüzü WhatsApp'tan verin, kıyafetiniz adresinize gelsin.",
+    resimFiyat("Otele ve eve gelen, yurt dışına kargolu online terzi: abiye ve gelinlik tadilatı, özel dikim. Ölçünüzü WhatsApp'tan verin, kıyafetiniz adresinize gelsin."),
   keywords: [
     'online terzi', 'online terzi hizmeti', 'e-terzi', 'dijital terzi',
     'online özel dikim', 'kapıya gelen terzi', 'online abiye dikimi',

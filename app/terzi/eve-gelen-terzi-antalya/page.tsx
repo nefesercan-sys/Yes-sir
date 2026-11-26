@@ -8,6 +8,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import Link from 'next/link';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 
+import { resimFiyat } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
 const PARENT_URL = 'https://swaphubs.com/terzi';
 const HOME_URL = 'https://swaphubs.com';
@@ -103,8 +104,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Eve ve Otele Gelen Terzi Antalya · Araçlı Servis' },
-  description: "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00.",
+  title: { absolute: 'Eve Gelen Terzi Antalya · Dikim, Tamir, Tadilat, Onarım' },
+  description: resimFiyat("Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00."),
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
     'araçlı terzi servisi Antalya','mobile tailor Antalya',

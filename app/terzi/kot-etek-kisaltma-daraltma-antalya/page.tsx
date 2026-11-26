@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import KonuSayfasi, { type KonuData } from '@/components/terzi/KonuSayfasi';
 
+import { resimFiyat } from '@/lib/meta-fit';
 const BASE_URL = 'https://swaphubs.com';
 const PATH = '/terzi/kot-etek-kisaltma-daraltma-antalya';
 
@@ -56,7 +57,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Kot Etek Kısaltma, Daraltma · Antalya | Terzi Can" },
-  description: 'Kot etek boy kısaltma, bel daraltma ve orijinal etek ucu yapımı 200 TL\'den. Normal iş aynı gün, acil 1–2 saat.',
+  description: resimFiyat('Kot etek boy kısaltma, bel daraltma ve orijinal etek ucu yapımı 200 TL\'den. Normal iş aynı gün, acil 1–2 saat.'),
   keywords: [
     'kot etek kısaltma',
     'kot etek daraltma',
