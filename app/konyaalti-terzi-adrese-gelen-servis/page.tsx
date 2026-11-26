@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { jsonLdString } from '@/lib/json-ld';
 import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
+import { resimFiyat } from '@/lib/meta-fit';
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 const SITE_URL  = 'https://swaphubs.com/konyaalti-terzi-adrese-gelen-servis'
 const HOME      = 'https://swaphubs.com'
@@ -136,7 +137,7 @@ const FAQ: [string, string][] = [
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: 'Adrese Gelen Terzi Konyaaltı · Tamir, Tadilat, Dikim' },
-  description: 'Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.',
+  description: resimFiyat('Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.'),
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
     'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Özel terzi',

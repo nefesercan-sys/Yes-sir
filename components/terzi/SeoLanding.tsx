@@ -15,7 +15,7 @@ import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolg
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
-import { fitDesc, phoneFirst } from '@/lib/meta-fit';
+import { fitDesc, phoneFirst, resimFiyat } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -210,7 +210,7 @@ const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: s
 
 // swaphubs'a özgü başlık kalıbı: "fotoğraftan fiyat / otelden alım" (terzihizmeti.com.tr başlıkları fiyat ve rehber tonlu).
 const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
-  tr: [(n) => `${n} Terzi Çağır: Tamir, Tadilat, Dikim | Terzi Can`, (n) => `${n} Terzi Çağır · Tamir, Tadilat, Dikim`, (n) => `${n} Terzi · Tamir, Tadilat | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
+  tr: [(n) => `${n} Terzi Çağır · Kıyafet Dikimi, Tamiri, Tadilatı`, (n) => `${n} Terzi Çağır · Tamir, Tadilat, Dikim`, (n) => `${n} Terzi · Tamir, Tadilat | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
   en: [(n) => `Tailor in ${n}: Photo Quote, Hotel Pick-up | Terzi Can`, (n) => `${n} Tailor · Photo Quote, Pick-up | Terzi Can`, (n) => `Tailor in ${n} | Terzi Can`],
   ru: [(n) => `Портной ${n}: цена по фото, забор из отеля | Terzi Can`, (n) => `Портной ${n}: фото-оценка и забор | Terzi Can`, (n) => `Портной ${n} | Terzi Can`],
   de: [(n) => `Schneider ${n}: Foto-Angebot, Hotelabholung | Terzi Can`, (n) => `Schneider ${n}: Foto-Preis, Abholung | Terzi Can`, (n) => `Schneider ${n} | Terzi Can`],
@@ -515,7 +515,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: phoneFirst(c.desc, lang),
+    description: lang === 'tr' ? resimFiyat(c.desc) : phoneFirst(c.desc, lang),
     keywords: Array.from(new Set(kw)),
     robots: !isIndexable(lang, d.slug)
       ? { index: false, follow: true }
@@ -534,7 +534,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: fitDesc(c.desc, undefined, lang),
+    description: lang === 'tr' ? resimFiyat(c.desc) : fitDesc(c.desc, undefined, lang),
     keywords: Array.from(new Set([
       ...c.kw,
       ...s.vars[lang],
@@ -573,7 +573,7 @@ export function hubMetadata(lang: Lang): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: title },
-    description,
+    description: lang === 'tr' ? resimFiyat(description) : description,
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); if (!a.languages) return a; return { ...a, languages: { ...a.languages, ...sixAlt('tamir') } }; })(),
     openGraph: { title, description, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },

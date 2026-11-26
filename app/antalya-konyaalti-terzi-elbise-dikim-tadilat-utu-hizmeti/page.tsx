@@ -10,6 +10,7 @@ import QuickActionBanner from '@/components/QuickActionBanner';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import TerziHizmetleriBolumu from '@/components/TerziHizmetleriBolumu';
 
+import { resimFiyat } from '@/lib/meta-fit';
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTE: app/antalya-konyaalti-terzi-elbise-dikim-tadilat-utu-hizmeti/page.tsx
 // Tüm stiller INLINE — Tailwind olmasa bile çalışır
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Konyaaltı Elbise Dikimi ve Tadilatı · Ütü | Terzi Can' },
   description:
-    `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis.`,
+    resimFiyat(`${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis.`),
   keywords: [
     'Konyaaltı terzi', 'Antalya terzi', 'Hurma terzi', 'Uncalı terzi',
     'Sarısu terzi', 'Çakırlar terzi', 'Meltem terzi', 'Göbi terzi',

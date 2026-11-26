@@ -9,7 +9,7 @@ import { isFreeService } from '@/lib/business';
 const BANK: Record<string, M> = {
   hurma: { t: "Hurma Terzi Çağır · Tamir, Tadilat, Dikim", d: "Hurma'da tamir tadilat, özel dikim, daraltma, kısaltma: fotoğraf at, fiyat al. Paça ₺200'den, fermuar ₺300'den." + FREE,
     kw: ['tamir tadilat', 'özel dikim', 'ölçüye göre dikim', 'bay bayan elbise dikimi', 'elbise daraltma', 'elbise kısaltma', 'pantolon kısaltma', 'kot paçası kısaltma', 'fermuar değişimi', 'abiye tamiri', 'beden ayarlama', 'yakınımda terzi'] },
-  liman: { t: "Liman Terzi Çağır · Fermuar Tamiri, Tadilat", d: "Liman'da fermuar değişimi ₺300'den, paça kısaltma ₺200'den, bel daraltma, beden ayarlama. Fotoğraf at, fiyat al." + FREE,
+  liman: { t: "Liman Terzi Çağır · Elbise Dikimi, Tadilat, Fermuar Değişimi", d: "Liman'da fermuar değişimi ₺300'den, paça kısaltma ₺200'den, bel daraltma, beden ayarlama. Fotoğraf at, fiyat al." + FREE,
     kw: ['fermuar değişimi', 'fermuar tamiri', 'mont fermuar değişimi', 'beden ayarlama', 'beden küçültme', 'beden büyütme', 'bel daraltma', 'pantolon daraltma', 'kot paçası kısaltma', 'şort kısaltma', 'tamir tadilat', 'özel dikim'] },
   sarisu: { t: "Sarısu Terzi Çağır · Kot Paça, Tamir, Tadilat", d: "Sarısu'da kot paçası, şort, etek, pantolon kısaltma, bel daraltma, tamir. Paça ₺200'den. Fiyat için fotoğraf at." + FREE,
     kw: ['kot paçası kısaltma', 'kot daraltma', 'şort kısaltma', 'şort daraltma', 'etek kısaltma', 'etek daraltma', 'pantolon kısaltma', 'bel daraltma', 'çocuk kıyafet tadilatı', 'özel dikim', 'fermuar değişimi', 'tamir tadilat'] },
@@ -30,7 +30,7 @@ const BANK: Record<string, M> = {
 };
 export function mahalleMeta(slug: string, ad: string, phone: string, ilce = 'Konyaaltı') {
   const b = BANK[slug];
-  const title = b ? `${b.t} | Terzi Can` : `${ad} Terzi Çağır | Terzi Can`;
+  const title = b ? ([...`${b.t} | Terzi Can`].length <= 60 ? `${b.t} | Terzi Can` : b.t) : `${ad} Terzi Çağır | Terzi Can`;
   const dd = b ? b.d.replace(' {{F}}', isFreeService(slug) ? ' Alım-teslim.' : ' Otele servis.') : '';
   const desc = b ? `${dd}` : `${ad} tamir tadilat lazım mı? Fotoğraf at, fiyat al.`;
   const base = [`${ad} terzi`, `${ad} mahallesi terzi`, `${ad} ${ilce} terzi`, `${ad} terzi çağır`];

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import KonuSayfasi, { type KonuData } from '@/components/terzi/KonuSayfasi';
 
+import { resimFiyat } from '@/lib/meta-fit';
 const BASE_URL = 'https://swaphubs.com';
 const PATH = '/terzi/orijinal-kot-paca-yapimi-antalya';
 
@@ -53,7 +54,7 @@ const DATA: KonuData = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Orijinal Kot Paça Yapımı Antalya · Paça Kısaltma' },
-  description: 'Kot paçasını kısaltırken orijinal paça görünümünü koruyoruz, 200 TL\'den. Boy ayakkabıyla işaretlenir; normal iş aynı gün.',
+  description: resimFiyat('Kot paçasını kısaltırken orijinal paça görünümünü koruyoruz, 200 TL\'den. Boy ayakkabıyla işaretlenir; normal iş aynı gün.'),
   keywords: [
     'orijinal kot paça yapımı',
     'orijinal paça kot kısaltma',

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
 import { jsonLdString } from '@/lib/json-ld';
 
+import { resimFiyat } from '@/lib/meta-fit';
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 const SITE_URL  = 'https://swaphubs.com/antalya-terzi-dikim-utu-kuru-temizleme-tekstil-imalat'
 const HOME      = 'https://swaphubs.com'
@@ -135,7 +136,7 @@ const FAQ: [string, string][] = [
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
   title: { absolute: "Konyaaltı Terzi Atölyesi · Tamir, Dikim, Tadilat, Tekstil" },
-  description: "Konyaaltı'nda terzi ve dikiş atölyesi: tamir, tadilat, özel dikim ve küçük tekstil imalatı. Paça ₺200'den, fermuar ₺300'den. Hurma, Liman, Uncalı, Sarısu.",
+  description: resimFiyat("Konyaaltı'nda terzi ve dikiş atölyesi: tamir, tadilat, özel dikim ve küçük tekstil imalatı. Paça ₺200'den, fermuar ₺300'den. Hurma, Liman, Uncalı, Sarısu."),
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',
     'Gürsu terzi', 'Sarısu terzi', 'Çakırlar terzi', 'Meltem mahallesi terzi', 'Özel terzi',

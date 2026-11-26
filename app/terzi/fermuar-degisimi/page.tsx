@@ -11,6 +11,7 @@ import { KONYAALTI_MAHALLELERI } from '@/lib/turkiye-lokasyonlar';
 import { jsonLdString } from '@/lib/json-ld';
 import { hzSixForService } from '@/lib/intl-hz';
 
+import { resimFiyat } from '@/lib/meta-fit';
 // ── Sabitler ──────────────────────────────────────────────────────────────
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/terzi/fermuar-degisimi`;
@@ -99,7 +100,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: "Fermuar Değişimi Ne Kadar? 2026: ₺300'den · Antalya" },
   description:
-    "Fermuar değişimi kaç TL? Antalya'da 300 TL'den (KDV dahil): pantolon, kot, etek, mont, ceket, çanta. Normal işler aynı gün, acil 1–2 saat. Her gün 08–23.",
+    resimFiyat("Fermuar değişimi kaç TL? Antalya'da 300 TL'den (KDV dahil): pantolon, kot, etek, mont, ceket, çanta. Normal işler aynı gün, acil 1–2 saat. Her gün 08–23."),
   keywords: [
     'fermuar değişimi antalya', 'fermuar tamiri antalya', 'pantolon fermuarı değişimi', 'mont fermuarı değişimi',
     'elbise fermuarı değişimi', 'kot fermuar değişimi', 'konyaaltı fermuar tamiri', 'akşam açık terzi antalya',

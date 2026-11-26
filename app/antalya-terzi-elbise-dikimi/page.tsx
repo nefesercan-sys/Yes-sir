@@ -19,7 +19,7 @@ const OG_IMG = `${BASE_URL}/images/elbise-dikimi/antalya-terzi-elbise-takim-ozel
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Elbise Dikimi · Ölçüye Özel, Tamir | Terzi Can' },
+  title: { absolute: 'Antalya Elbise Dikimi · Ölçüye Göre Özel Dikim, Tamir' },
   description:
     "Antalya Konyaaltı terzi: elbise dikimi, abiye ve takım tadilatı, tamirat. Paça ₺200'den (KDV dahil), aynı gün. Fotoğrafı WhatsApp'tan gönderin.",
   keywords: [
