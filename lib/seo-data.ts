@@ -488,6 +488,30 @@ export const SERVICES: Service[] = [
     },
   },
   {
+    id: 'perde', icon: '🪟', time: 'custom',
+    slug: { tr: 'perde-dikimi-kisaltma', en: 'curtain-sewing-hemming', ru: 'poshiv-i-podshiv-shtor', de: 'gardinen-naehen-kuerzen' },
+    name: { tr: 'Perde Dikimi ve Kısaltma', en: 'Curtain Sewing & Hemming', ru: 'Пошив и подшив штор', de: 'Gardinen nähen und kürzen' },
+    q: { tr: 'perde dikimi ve kısaltma', en: 'curtain hemming', ru: 'подшив штор', de: 'Gardinen kürzen' },
+    priceText: {
+      tr: 'Perde dikimi ve kısaltma kumaşa, metreye ve işin detayına göre fiyatlanır; fotoğraf ve ölçüyü WhatsApp\'tan gönderin.',
+      en: 'Curtain sewing and hemming are priced by fabric, length and the work; send a photo and the measurements on WhatsApp.',
+      ru: 'Цена пошива и подшива штор зависит от ткани, метража и работы; пришлите фото и размеры в WhatsApp.',
+      de: 'Gardinen nähen und kürzen wird nach Stoff, Länge und Aufwand berechnet; senden Sie Foto und Maße per WhatsApp.',
+    },
+    intro: {
+      tr: 'Tül ve fon perde dikimi, perde boyu kısaltma ve etek dikişi yapıyoruz. Perdenin fotoğrafını ve istediğiniz boyu WhatsApp\'tan gönderin; fiyat kumaşa ve metreye göre netleşir. Perdeyi atölyeye getirebilir ya da alım-teslim servisini kullanabilirsiniz.',
+      en: 'We sew sheer and lined curtains, shorten curtains and redo hems. Send a photo and the length you want on WhatsApp; the price depends on fabric and metres. Bring the curtains to the workshop or use our pick-up and delivery.',
+      ru: 'Шьём тюль и портьеры, укорачиваем шторы и подшиваем низ. Пришлите фото и нужную длину в WhatsApp; цена зависит от ткани и метража. Принесите шторы в ателье или воспользуйтесь забором и доставкой.',
+      de: 'Wir nähen Stores und Vorhänge, kürzen Gardinen und nähen Säume neu. Senden Sie Foto und Wunschlänge per WhatsApp; der Preis richtet sich nach Stoff und Metern. Bringen Sie die Gardinen in die Werkstatt oder nutzen Sie Abholung und Lieferung.',
+    },
+    vars: {
+      tr: ['perde dikimi', 'perde kısaltma', 'perde boyu kısaltma', 'tül perde kısaltma', 'fon perde dikimi', 'perde tadilatı', 'perde etek dikişi', 'perde kısaltma terzi'],
+      en: ['curtain hemming', 'curtain sewing', 'shorten curtains', 'curtain alteration', 'sheer curtain hemming', 'curtain tailor Antalya'],
+      ru: ['подшив штор', 'пошив штор', 'укоротить шторы', 'подшить тюль', 'пошив портьер', 'ателье шторы Анталья'],
+      de: ['Gardinen kürzen', 'Vorhänge kürzen', 'Gardinen nähen', 'Vorhang nähen lassen', 'Stores kürzen', 'Gardinen Änderung Antalya'],
+    },
+  },
+  {
     id: 'kiyafet-tamiri', icon: '🪡', time: 'repair',
     slug: { tr: 'kiyafet-tamiri-onarimi', en: 'clothing-repair-mending', ru: 'remont-odezhdy', de: 'kleidung-reparieren' },
     name: { tr: 'Kıyafet Tamiri ve Onarımı', en: 'Clothing Repair & Mending', ru: 'Ремонт одежды', de: 'Kleidung reparieren' },

@@ -36,6 +36,8 @@
 - Vest (yelek) alteration: priced by photo or job detail
 - Wedding and evening dress alteration (gelinlik / abiye tadilatı): priced by photo or job detail (timing depends on the job). Wedding dresses are not sewn (alteration only)
 - Sewing (dikim: dresses, evening wear, skirts, trousers, children's clothing, suits, groom suits, custom pieces): no fixed price, priced by photo and the model you want; timing depends on the design and quantity
+- Evening dress making (abiye dikimi): evening dresses made to measure; no fixed price, priced by design and fabric. Ready-made evening dresses are also altered.
+- Curtains (perde dikimi ve kısaltma): curtain sewing, shortening and re-hemming (sheer and lined curtains); priced by fabric and metres. TR: https://swaphubs.com/terzi/hizmet/perde-dikimi-kisaltma
 - Uniform production (üniforma üretimi): quote per order; hotel, restaurant, school, healthcare
 - Also: men's tailoring (suits, shirts, jackets, blazers, tuxedos), women's tailoring (dresses, blouses, skirts, evening-dress repair, wedding-dress alterations, plus sizes), T-shirt, sweatshirt and trouser manufacturing, sewing workshop and contract production
 
