@@ -8,6 +8,7 @@ import SpeakableSchema from '@/components/SpeakableSchema';
 import QuickActionBanner from '@/components/QuickActionBanner';
 import BusinessSchema from '@/components/BusinessSchema';
 
+import { photoPrice } from '@/lib/meta-fit';
 // ─── CONSTANTS ────────────────────────────────────────────────────
 const BASE_URL        = 'https://swaphubs.com';
 const PAGE_URL        = `${BASE_URL}/ru/atelie-antalya-online`;
@@ -37,7 +38,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Онлайн-ателье Анталья: фото в WhatsApp, цена | Terzi Can' },
-  description: 'Ателье в Коньяалты, Анталья. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.',
+  description: photoPrice('Ателье в Коньяалты, Анталья. Ремонт одежды, подгонка, замена молнии, пошив. Отвечаем в WhatsApp по-русски. Ежедневно 08:00–23:00.', 'ru'),
   keywords: [
     'ателье анталия','ателье коньяалты','ремонт одежды анталия',
     'портной анталия русский whatsapp','замена молнии анталия',

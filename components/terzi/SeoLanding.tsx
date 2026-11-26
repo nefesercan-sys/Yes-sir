@@ -15,7 +15,7 @@ import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolg
 import QuickActionBanner from '@/components/QuickActionBanner';
 import { hzSixForService } from '@/lib/intl-hz';
 import { sixAlt } from '@/lib/intl-konu';
-import { fitDesc, phoneFirst, resimFiyat } from '@/lib/meta-fit';
+import { fitDesc, phoneFirst, resimFiyat, photoPrice } from '@/lib/meta-fit';
 import type { Metadata } from 'next';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import OrnekGorselSeridi from '@/components/terzi/OrnekGorselSeridi';
@@ -211,9 +211,9 @@ const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: s
 // swaphubs'a özgü başlık kalıbı: "fotoğraftan fiyat / otelden alım" (terzihizmeti.com.tr başlıkları fiyat ve rehber tonlu).
 const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
   tr: [(n) => `${n} Terzi Çağır · Kıyafet Dikimi, Tamiri, Tadilatı`, (n) => `${n} Terzi Çağır · Tamir, Tadilat, Dikim`, (n) => `${n} Terzi · Tamir, Tadilat | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
-  en: [(n) => `Tailor in ${n}: Photo Quote, Hotel Pick-up | Terzi Can`, (n) => `${n} Tailor · Photo Quote, Pick-up | Terzi Can`, (n) => `Tailor in ${n} | Terzi Can`],
-  ru: [(n) => `Портной ${n}: цена по фото, забор из отеля | Terzi Can`, (n) => `Портной ${n}: фото-оценка и забор | Terzi Can`, (n) => `Портной ${n} | Terzi Can`],
-  de: [(n) => `Schneider ${n}: Foto-Angebot, Hotelabholung | Terzi Can`, (n) => `Schneider ${n}: Foto-Preis, Abholung | Terzi Can`, (n) => `Schneider ${n} | Terzi Can`],
+  en: [(n) => `Call a Tailor in ${n} · Sewing, Repairs, Alterations`, (n) => `${n} Tailor on Call · Repairs, Alterations | Terzi Can`, (n) => `Tailor in ${n} | Terzi Can`],
+  ru: [(n) => `Портной на дом ${n}: пошив, ремонт, подгонка`, (n) => `Портной на выезд ${n}: ремонт, подгонка | Terzi Can`, (n) => `Портной ${n} | Terzi Can`],
+  de: [(n) => `Schneider rufen ${n} · Nähen, Reparatur, Änderung`, (n) => `Schneider ${n} auf Abruf: Reparatur, Änderung`, (n) => `Schneider ${n} | Terzi Can`],
 };
 function districtCopy(lang: Lang, d: District) {
   const r0 = _districtCopy(lang, d);
@@ -440,6 +440,10 @@ function serviceCopy(lang: Lang, s: Service) {
   const swTitle = (lang === 'tr' && TR_TITLE[s.id]) || pickFit([...swT, title], 60);
   // Yabancı dillerde açıklama anahtar kelimeli kalıptan (lib/kw-desc.ts, swaphubs varyantı 'b'); başlık değişmez.
   const d2 = lang === 'tr' ? desc : serviceKwDesc(lang, nm, 'b', desc);
+  // Perde gibi giysi dışı işlerde yabancı dilde genel terzi metni yerine işe özel açıklama (terzihizmeti'nden farklı)
+  const FG_DESC: Partial<Record<string, Partial<Record<Lang, string>>>> = { perde: { en: "Curtains shortened, re-hemmed and sewn in Antalya by Terzi Can: sheer and lined curtains. Send a photo and the length you want; price by fabric and metres.", ru: "Terzi Can в Анталье: укоротим и подошьём шторы, сошьём тюль и портьеры. Пришлите фото и нужную длину — цена по ткани и метражу.", de: "Terzi Can in Antalya: Gardinen kürzen, Säume neu nähen, Stores und Vorhänge nähen. Foto und Wunschlänge senden; Preis nach Stoff und Metern." } };
+  const own = lang !== 'tr' ? FG_DESC[s.id]?.[lang] : undefined;
+  if (own) return { nm, title: swTitle, desc: own, kw: o?.kw ?? ([] as string[]) };
   if (o) return { nm, title: swTitle, desc: d2, kw: o.kw }; // swaphubs: açıklama terzihizmeti ile aynı olmasın
   return { nm, title: swTitle, desc: d2, kw: [] as string[] };
 }
@@ -515,7 +519,7 @@ export function districtMetadata(lang: Lang, d: District): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: lang === 'tr' ? resimFiyat(c.desc) : phoneFirst(c.desc, lang),
+    description: photoPrice(c.desc, lang),
     keywords: Array.from(new Set(kw)),
     robots: !isIndexable(lang, d.slug)
       ? { index: false, follow: true }
@@ -534,7 +538,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: c.title },
-    description: lang === 'tr' ? resimFiyat(c.desc) : fitDesc(c.desc, undefined, lang),
+    description: photoPrice(c.desc, lang),
     keywords: Array.from(new Set([
       ...c.kw,
       ...s.vars[lang],
@@ -559,9 +563,9 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
     tr: 'Antalya Terzi Hizmetleri · Tamir, Tadilat, Fotoğrafla Fiyat',
-    en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
-    ru: 'Ремонт одежды в Анталии · Портной и швея, цена по фото',
-    de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',
+    en: 'Antalya Tailor Services · Repairs, Alterations, Photo Quote',
+    ru: 'Услуги ателье в Анталии · ремонт, подгонка, цена по фото',
+    de: 'Änderungsschneiderei Antalya · Reparatur, Nähen, Foto-Preis',
   }[lang];
   const description = {
     tr: `Bay bayan tamir tadilat: söküğü, yırtığı dikme, paça-etek kısaltma, fermuar değişimi. Konyaaltı, Hurma, Uncalı. Fotoğraf at, fiyat al.`,
@@ -573,7 +577,7 @@ export function hubMetadata(lang: Lang): Metadata {
   return {
     metadataBase: new URL(SITE),
     title: { absolute: title },
-    description: lang === 'tr' ? resimFiyat(description) : description,
+    description: photoPrice(description, lang),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     alternates: (() => { const a = alternatesFor(lang, (l) => abs(SERVICE_BASE[l])); if (!a.languages) return a; return { ...a, languages: { ...a.languages, ...sixAlt('tamir') } }; })(),
     openGraph: { title, description, url, siteName: 'Terzi Can', locale: OG_LOCALE[lang], type: 'website', images: [{ url: OG, alt: title }] },

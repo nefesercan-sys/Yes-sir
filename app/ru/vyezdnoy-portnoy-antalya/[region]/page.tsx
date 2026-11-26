@@ -1,3 +1,4 @@
+import { DISTRICTS as SEO_DISTRICTS_RU } from '@/lib/seo-data';
 import type { Metadata } from 'next';
 import { zoneAlt } from '@/lib/intl-zones';
 import { crossCanonical } from '@/lib/cross-canonical';
@@ -10,6 +11,7 @@ import { jsonLdString } from '@/lib/json-ld';
 import ReviewsBlock from '@/components/ReviewsBlock';
 import { hotelKwDesc } from '@/lib/kw-desc';
 
+import { photoPrice } from '@/lib/meta-fit';
 const HOME_URL = 'https://swaphubs.com';
 const PHONE_TEL = '+905318986418';
 const MAPS = 'https://www.google.com/maps?cid=6436895271281342624';
@@ -27,7 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   if (!r) return {};
 
   const url = `${HOME_URL}${BASE_PATH}/${r.slug}`;
-  const title = `Ателье и портной в ${r.name} | Доставка в отель`;
+  const ruName = SEO_DISTRICTS_RU.find((d) => d.slug === r.slug)?.name.ru ?? r.name; // bölge adı Rusça (Белек, Лара…)
+  const title = `Ателье с выездом: ${ruName} · ремонт и подгонка в отеле`;
   const desc = `Срочный ремонт и подгонка одежды во время отпуска. Ателье Terzi Can предлагает профессиональные услуги портного с выездом в отели ${r.name}. Пишите в WhatsApp!`;
   const kwd = hotelKwDesc('ru', r.name, 'b', desc); // anahtar kelimeli kalıp (lib/kw-desc.ts)
   const ogImage = `${HOME_URL}/og/antalya-terzi-can-dikim-tamir-tadilat.jpg`;
@@ -35,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ region: s
   return {
     metadataBase: new URL(HOME_URL),
     title: { absolute: title },
-    description: kwd,
+    description: photoPrice(kwd, 'ru'),
     keywords: [
       `Ателье ${r.name}`, 
       `выездной портной ${r.name}`, 

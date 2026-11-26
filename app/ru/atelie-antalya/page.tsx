@@ -18,6 +18,7 @@ import AtelieClient from './client'
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import { FAQ_ITEMS } from './faq-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com'
 const PAGE_URL = `${SITE_URL}/ru/atelie-antalya`
 // DÜZELTME: Tüm sitede kullanılan TEK telefon numarasına geri döndürüldü.
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Ателье и швея в Анталии: подшив, ремонт одежды | Terzi Can' },
 
   description:
-    'Ателье и швея в Анталии, Коньяалты: подшив от ₺200 (~€4), замена молнии от ₺300, кожа от ₺400, пошив. Забор и доставка из отеля. WhatsApp на вашем языке.',
+    photoPrice('Ателье и швея в Анталии, Коньяалты: подшив от ₺200 (~€4), замена молнии от ₺300, кожа от ₺400, пошив. Забор и доставка из отеля. WhatsApp на вашем языке.', 'ru'),
 
   keywords: [
     'ателье Анталия', 'швея Анталия', 'ремонт одежды Анталия',

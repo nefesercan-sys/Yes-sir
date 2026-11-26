@@ -11,6 +11,7 @@ import { DURATION, HOTEL_NOTE } from '@/lib/business';
 import { jsonLdString, faqPageSchema } from '@/lib/json-ld';
 import { byPriority } from '@/lib/seo-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const SITE_URL = 'https://swaphubs.com/de/schneider-service-hotel-antalya';
 const TR_URL = 'https://swaphubs.com/terzi/eve-gelen-terzi-antalya';
 const EN_URL = 'https://swaphubs.com/en/hotel-tailor-antalya';
@@ -101,8 +102,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Schneiderei im Hotel Antalya: Abholung und Rückgabe' },
-  description: 'Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~4 €), Abholung und Lieferung, Dauer je nach Arbeit.',
+  title: { absolute: 'Schneider kommt ins Hotel, Antalya · Reparatur, Nähen' },
+  description: photoPrice('Schneiderei in der Nähe Ihres Hotels in Belek, Lara, Kemer, Side: Kürzen ab ₺200 (~4 €), Abholung und Lieferung, Dauer je nach Arbeit.', 'de'),
   keywords: [
     'mobiler Schneider Antalya','Schneider im Hotel Antalya','Schneiderservice Antalya Hotel',
     'deutschsprachiger Schneider Antalya','Schneider Belek Hotel','Schneider Lara Hotel',

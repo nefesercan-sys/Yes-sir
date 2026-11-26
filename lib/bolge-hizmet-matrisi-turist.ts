@@ -53,7 +53,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`¿Qué cuesta arreglar un pantalón o un chaleco de piel en ${n}?`, `Desde ${e('leather')}. Se puede estrechar la cintura, acortar, cambiar la cremallera y reparar; el precio exacto se indica por foto.`] },
       { id: 'kotmont', f: (n) => [`¿Qué cuesta acortar una chaqueta, un abrigo o un pantalón corto vaquero en ${n}?`, `Los trabajos en vaquero empiezan desde ${e('hem')}. En chaquetas y abrigos acortamos mangas y largo y entallamos; los pantalones cortos se acortan.`] },
     ],
-    seo: [(n) => `Sastre y costurera en ${n}: precios de arreglos`, (n) => `Arreglos de ropa en ${n}: cuánto cuesta acortar`, (n) => `Sastre ${n}: bajos, cremalleras y ajustes`],
+    seo: [(n) => `Costurera en ${n}: arreglos, reparación y confección`, (n) => `Arreglos de ropa en ${n}: cuánto cuesta acortar`, (n) => `Sastre ${n}: bajos, cremalleras, confección a medida`],
   },
   fr: {
     titles: [(n) => `Prix du tailleur à ${n} et retouches proposées`, (n) => `Retouches à ${n} : ce qui est possible et combien ça coûte`],
@@ -85,7 +85,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`Quel est le prix de la retouche d'un pantalon ou d'un gilet en cuir à ${n} ?`, `Dès ${e('leather')}. Reprise de la taille, raccourcissement, changement de fermeture éclair et réparations sont possibles ; le prix exact est donné sur photo.`] },
       { id: 'kotmont', f: (n) => [`Quel est le prix pour raccourcir une veste, un manteau ou un short en jean à ${n} ?`, `Les travaux sur jean commencent dès ${e('hem')}. Sur vestes et manteaux, nous raccourcissons manches et longueur et ajustons ; les shorts sont raccourcis.`] },
     ],
-    seo: [(n) => `Couturier à ${n} : prix des retouches et ourlets`, (n) => `Retouches à ${n} : combien coûte un ourlet ?`, (n) => `Couturier ${n} : ourlets, fermetures, retouches`],
+    seo: [(n) => `Retoucheuse à ${n} : retouches, réparation, couture`, (n) => `Retouches à ${n} : combien coûte un ourlet ?`, (n) => `Couturier ${n} : ourlets, fermetures, couture sur mesure`],
   },
   pl: {
     titles: [(n) => `${n}: ceny krawca i lista przeróbek`, (n) => `${n}: co można przerobić i ile to kosztuje`],
@@ -117,7 +117,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`Jaka jest cena przeróbki spodni lub kamizelki skórzanej (${n})?`, `Od ${e('leather')}. Możliwe są zwężenie w pasie, skrócenie, wymiana zamka i naprawy; dokładną cenę podajemy ze zdjęcia.`] },
       { id: 'kotmont', f: (n) => [`Jaka jest cena skrócenia kurtki, płaszcza lub szortów jeansowych (${n})?`, `Prace przy jeansie od ${e('hem')}. W kurtkach i płaszczach skracamy rękawy i długość oraz zwężamy; szorty skracamy.`] },
     ],
-    seo: [(n) => `Krawiec i krawcowa ${n}: ceny przeróbek`, (n) => `${n}: przeróbki krawieckie – ile kosztuje skracanie?`, (n) => `Krawiec ${n}: skracanie, zamki, zwężanie`],
+    seo: [(n) => `Krawcowa ${n}: przeróbki, naprawa i szycie`, (n) => `${n}: przeróbki krawieckie – ile kosztuje skracanie?`, (n) => `Krawiec ${n}: skracanie, zamki, szycie na miarę`],
   },
   uk: {
     titles: [(n) => `${n}: ціни кравця і перелік робіт`, (n) => `${n}: що можна переробити і скільки це коштує`],
@@ -149,7 +149,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`Скільки коштує переробка шкіряних штанів або жилета (${n})?`, `Від ${e('leather')}. Можливі вшивання в поясі, вкорочення, заміна блискавки та ремонт; точну ціну називаємо за фото.`] },
       { id: 'kotmont', f: (n) => [`Скільки коштує вкоротити джинсову куртку, пальто чи шорти (${n})?`, `Роботи з джинсом — від ${e('hem')}. У куртках і пальтах вкорочуємо рукави й довжину та вшиваємо; шорти вкорочуємо.`] },
     ],
-    seo: [(n) => `Кравець ${n}: ціни на підшивання і блискавки`, (n) => `${n}: переробка одягу — скільки коштує вкоротити?`, (n) => `Кравець ${n}: підшивання, блискавки, підгонка`],
+    seo: [(n) => `Швачка ${n}: підгонка, ремонт і пошиття`, (n) => `${n}: переробка одягу — скільки коштує вкоротити?`, (n) => `Кравець ${n}: підшивання, блискавки, пошиття`],
   },
   nl: {
     titles: [(n) => `Kleermakersprijzen in ${n} en wat wij doen`, (n) => `Kleding vermaken in ${n}: wat kan er en wat kost het?`],
@@ -181,7 +181,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`Hoeveel kost het vermaken van een leren broek of leren gilet in ${n}?`, `Vanaf ${e('leather')}. Taille nauwer maken, korter maken, rits vervangen en reparaties zijn mogelijk; de exacte prijs volgt op basis van een foto.`] },
       { id: 'kotmont', f: (n) => [`Hoeveel kost het inkorten van een spijkerjas, spijkermantel of korte spijkerbroek in ${n}?`, `Werk aan spijkerstof begint vanaf ${e('hem')}. Bij jassen en mantels maken wij mouwen en lengte korter en nemen wij in; korte broeken maken wij korter.`] },
     ],
-    seo: [(n) => `Kleermaker ${n}: kledingreparatie, zoom en rits`, (n) => `Kleding vermaken in ${n}: wat kost inkorten?`, (n) => `Kleermaker ${n}: zomen, ritsen, innemen`],
+    seo: [(n) => `Naaister ${n}: vermaken, reparatie en maatwerk`, (n) => `Kleding vermaken in ${n}: wat kost inkorten?`, (n) => `Kleermaker ${n}: zomen, ritsen, kleding op maat`],
   },
   ar: {
     titles: [(n) => `أسعار الخياط في ${n} والأعمال التي نقوم بها`, (n) => `تعديل الملابس في ${n}: ما الممكن وكم يكلّف؟`],
@@ -213,7 +213,7 @@ const PACKS: Record<ILang, Pack> = {
       { id: 'deripant', f: (n) => [`ما سعر تعديل البنطال الجلدي أو الصدرية الجلدية في ${n}؟`, `من ${e('leather')}. يمكن تضييق الخصر والتقصير واستبدال السحاب والإصلاح؛ والسعر الدقيق من الصورة.`] },
       { id: 'kotmont', f: (n) => [`ما سعر تقصير سترة أو معطف أو شورت جينز في ${n}؟`, `أعمال الجينز من ${e('hem')}. في السترات والمعاطف نقصّر الأكمام والطول ونضيّق؛ والشورتات نقصّرها.`] },
     ],
-    seo: [(n) => `خياط في ${n}: أسعار التقصير والسحابات`, (n) => `تعديل الملابس في ${n}: كم يكلّف التقصير؟`, (n) => `خياط ${n}: التقصير والسحابات والتضييق`],
+    seo: [(n) => `خياطة في ${n}: تعديل وإصلاح وتفصيل الملابس`, (n) => `تعديل الملابس في ${n}: كم يكلّف التقصير؟`, (n) => `خياط ${n}: التقصير والسحابات والتفصيل حسب المقاس`],
   },
 };
 

@@ -10,6 +10,7 @@ import BusinessSchema from '@/components/BusinessSchema';
 import OnlineSchneiderClient from './OnlineSchneiderClient';
 import { FAQS } from './faq-data';
 
+import { photoPrice } from '@/lib/meta-fit';
 const BASE_URL  = 'https://swaphubs.com';
 const SITE_URL  = `${BASE_URL}/de/online-schneiderservice-antalya`;
 const PHONE     = '+90 531 898 64 18';
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: { absolute: 'Schneider per Post: Kleidung nach Antalya senden | Terzi Can' },
   description:
-    'Kleidung per Post nach Antalya schicken: Reparatur und Änderung, Rücksendung per Versand. ' +
-    'Versandkosten trägt der Kunde. Details per WhatsApp.',
+    photoPrice('Kleidung per Post nach Antalya schicken: Reparatur und Änderung, Rücksendung per Versand. ' +
+    'Versandkosten trägt der Kunde. Details per WhatsApp.', 'de'),
   keywords: [
     'Online Schneider Antalya', 'Herrenschneiderei Antalya', 'Damenschneiderei Antalya',
     'Änderungsschneiderei Antalya', 'Serienproduktion Antalya',

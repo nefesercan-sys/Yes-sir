@@ -1,7 +1,8 @@
+import { photoPrice } from '@/lib/meta-fit';
 import IletisimSayfasi, { iletisimMetadata } from '@/components/terzi/IletisimSayfasi';
 
-export const metadata = iletisimMetadata('en');
-
+const baseMeta = iletisimMetadata('en');
+export const metadata = { ...baseMeta, description: photoPrice(String(baseMeta.description ?? ''), 'en') };
 export default function Page() {
   return <IletisimSayfasi lang="en" />;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import FaqHub, { FAQ_HUB, FAQ_HUB_PATH } from '@/components/terzi/FaqHub';
 
+import { photoPrice } from '@/lib/meta-fit';
 const BASE = 'https://swaphubs.com';
 const L = 'de' as const;
 const t = FAQ_HUB[L];
@@ -11,7 +12,7 @@ const languages = {
 
 export const metadata: Metadata = {
   title: t.title,
-  description: t.desc,
+  description: photoPrice(t.desc, 'de'),
   alternates: { canonical: `${BASE}${FAQ_HUB_PATH[L]}`, languages },
   openGraph: { title: t.title, description: t.desc, url: `${BASE}${FAQ_HUB_PATH[L]}`, type: 'website', siteName: 'Terzi Can Antalya' },
   robots: { index: true, follow: true },
