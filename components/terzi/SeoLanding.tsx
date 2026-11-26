@@ -91,7 +91,7 @@ const HUB_NAME: Record<Lang, string> = {
   tr: 'Antalya Terzi', en: 'Tailor Service Antalya', ru: 'Услуги портного Анталья', de: 'Schneiderservice Antalya',
 };
 const SVC_HUB_NAME: Record<Lang, string> = {
-  tr: 'Terzi Dikim, Tamir ve Tadilat', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
+  tr: 'Terzi Hizmetleri', en: 'Tailor & Alterations', ru: 'Ремонт одежды и швея', de: 'Änderungsschneiderei',
 };
 
 // ── Ortak şema: işletme düğümü (ana sayfadaki @id ile aynı) ────
@@ -210,7 +210,7 @@ const LOCAL_UI: Record<Lang, { h: (n: string) => string; where: string; needs: s
 
 // swaphubs'a özgü başlık kalıbı: "fotoğraftan fiyat / otelden alım" (terzihizmeti.com.tr başlıkları fiyat ve rehber tonlu).
 const SW_DIST_TITLES: Record<Lang, ((n: string) => string)[]> = {
-  tr: [(n) => `${n} Terzi: Fotoğraftan Fiyat, Kapıdan Alım | Terzi Can`, (n) => `${n} Terzi · Fotoğraf At, Fiyat Al | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
+  tr: [(n) => `${n} Terzi Çağır: Tamir, Tadilat, Dikim | Terzi Can`, (n) => `${n} Terzi Çağır · Tamir, Tadilat, Dikim`, (n) => `${n} Terzi · Tamir, Tadilat | Terzi Can`, (n) => `${n} Terzi | Terzi Can`],
   en: [(n) => `Tailor in ${n}: Photo Quote, Hotel Pick-up | Terzi Can`, (n) => `${n} Tailor · Photo Quote, Pick-up | Terzi Can`, (n) => `Tailor in ${n} | Terzi Can`],
   ru: [(n) => `Портной ${n}: цена по фото, забор из отеля | Terzi Can`, (n) => `Портной ${n}: фото-оценка и забор | Terzi Can`, (n) => `Портной ${n} | Terzi Can`],
   de: [(n) => `Schneider ${n}: Foto-Angebot, Hotelabholung | Terzi Can`, (n) => `Schneider ${n}: Foto-Preis, Abholung | Terzi Can`, (n) => `Schneider ${n} | Terzi Can`],
@@ -414,8 +414,8 @@ function serviceCopy(lang: Lang, s: Service) {
   }[lang];
   // Sahip kararı (26 Kasım 2026): başlıkta rakam YALNIZCA fiyat niyetli başlıklarda ('ücreti ne kadar'); genel/bölge başlıklarında fiyat yok
   const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? 2026: ₺${s.priceFrom}'den | Terzi Can`, `${Q} ne kadar? 2026 Antalya: ₺${s.priceFrom}'den`, `${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
-  // Sahip kalıbı (26 Kasım 2026): 'Antalya Terzi · Elbise Dikimi, Tamiri, Tadilatı' temel alınır
-  const TR_TITLE: Partial<Record<string, string>> = { 'kiyafet-tamiri': 'Antalya Kıyafet Tamiri, Elbise Dikimi ve Tadilatı' };
+  // Başlık haritası (26 Kasım 2026): her sayfanın ana kelimesi ayrı; sayfalar birbiriyle yarışmaz
+  const TR_TITLE: Partial<Record<string, string>> = { 'kiyafet-tamiri': 'Kıyafet Tamiri Antalya · Eve Gelen Terzi, Sökük, Yırtık' };
   const title = (lang === 'tr' && TR_TITLE[s.id]) || pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
@@ -558,7 +558,7 @@ export function serviceMetadata(lang: Lang, s: Service): Metadata {
 
 export function hubMetadata(lang: Lang): Metadata {
   const title = {
-    tr: 'Antalya Terzi Çağır · Elbise Dikimi, Tamir, Tadilat',
+    tr: 'Antalya Terzi Hizmetleri · Tamir, Tadilat, Fotoğrafla Fiyat',
     en: 'Antalya Tailor & Alterations · Send a Photo, Get a Price',
     ru: 'Ремонт одежды в Анталии · Портной и швея, цена по фото',
     de: 'Änderungsschneiderei Antalya · Foto senden, Preis erhalten',

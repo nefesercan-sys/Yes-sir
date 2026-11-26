@@ -36,7 +36,7 @@ const WA_DEFAULT  = WA('Merhaba! Terzi hizmetiniz hakkında bilgi almak istiyoru
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Konyaaltı Terzi · Tadilat, Dikim | Terzi Can' },
+  title: { absolute: 'Konyaaltı Elbise Dikimi ve Tadilatı · Ütü | Terzi Can' },
   description:
     `${GBP1_NAME}: paça, fermuar, elbise dikimi, tadilat. Hurma Mah., Konyaaltı. Her gün 08:00–23:00, adrese servis.`,
   keywords: [

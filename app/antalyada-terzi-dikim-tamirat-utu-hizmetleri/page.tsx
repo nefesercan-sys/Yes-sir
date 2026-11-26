@@ -234,7 +234,7 @@ const jsonLd = {
 // ─── METADATA ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { absolute: 'Antalya Terzi | Adrese Teslim Dikim ve Tamir' },
+  title: { absolute: "Antalya'da Terzi · Dikim, Tamirat, Ütü, Adrese Teslim" },
   description: `Antalya en yakın terzi servisi: Konyaaltı, Muratpaşa, Lara, Kepez adresten alım. Özel dikim, abiye tadilatı.`,
   keywords: [
     'Antalya terzi', 'Antalyada terzi', 'Lara terzi', 'Konyaaltı terzi', 'Muratpaşa terzi', 'Kepez terzi',

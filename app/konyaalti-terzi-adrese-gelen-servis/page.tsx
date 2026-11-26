@@ -135,7 +135,7 @@ const FAQ: [string, string][] = [
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(HOME),
-  title: { absolute: 'Adrese Gelen Terzi · Konyaaltı | Terzi Can' },
+  title: { absolute: 'Adrese Gelen Terzi Konyaaltı · Tamir, Tadilat, Dikim' },
   description: 'Konyaaltı terzi: Hurma, Liman, Uncalı, Sarısu, Gürsu. Paça, fermuar, dikim, tadilat; adrese gelen terzi.',
   keywords: [
     'Konyaaltı terzi', 'Hurma mahallesi terzi', 'Liman mahallesi terzi', 'Uncalı terzi',

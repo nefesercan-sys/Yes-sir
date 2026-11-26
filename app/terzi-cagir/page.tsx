@@ -95,7 +95,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: { absolute: "Terzi Çağır Antalya · Kapınıza Gelir | Terzi Can" },
+  title: { absolute: "Terzi Çağır Antalya · Dikim, Tamir, Tadilat Kapınızda" },
   description:
     'Antalya Konyaaltı terzi çağır: paça kısaltma ₺200, bel ₺200, fermuar ₺300. Terzimiz kapınıza gelir, ölçü alır, teslim eder.',
   keywords: [

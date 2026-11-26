@@ -103,7 +103,7 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(HOME_URL),
-  title: { absolute: 'Eve ve Otele Gelen Terzi Antalya · Araçlı Servis' },
+  title: { absolute: 'Eve Gelen Terzi Antalya · Tamir, Tadilat, Otele Servis' },
   description: "Antalya'da eve ve otele gelen terzi: Belek, Lara, Kemer dahil. Paça ₺200, tadilat. Her gün 08:00–23:00.",
   keywords: [
     'eve gelen terzi Antalya','otele gelen terzi Antalya',
