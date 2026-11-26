@@ -39,7 +39,7 @@ export function trLoc(ad: string): string {
 }
 
 // ── Hizmete özgü süreç anlatımları ───────────────────────────────────────────
-export type ProcId = 'paca' | 'kot' | 'bel' | 'fermuar' | 'elbise-tamir' | 'gelinlik-abiye' | 'takim' | 'mont' | 'gomlek' | 'deri' | 'etek' | 'ozel-dikim' | 'kiyafet-tamiri';
+export type ProcId = 'perde' | 'paca' | 'kot' | 'bel' | 'fermuar' | 'elbise-tamir' | 'gelinlik-abiye' | 'takim' | 'mont' | 'gomlek' | 'deri' | 'etek' | 'ozel-dikim' | 'kiyafet-tamiri';
 export const PROCESS: Record<ProcId, Record<BLang, { h: string; p: string }>> = {
   paca: {
     tr: { h: 'Paça kısaltma nasıl yapılır?', p: 'Boy, pantolonla birlikte giyeceğiniz ayakkabıyla işaretlenir. Kumaş pantolonda paça içten gizli dikişle, günlük pantolonda düz makine dikişiyle bitirilir; fazla kumaş kesilmeden önce iki paçanın eşitliği yeniden ölçülür.' },
@@ -113,6 +113,12 @@ export const PROCESS: Record<ProcId, Record<BLang, { h: string; p: string }>> = 
     ru: { h: 'Индивидуальный пошив по шагам', p: 'Модель и ткань выбирают вместе, снимают мерки и строят выкройку. После первой примерки вносят правки и завершают пошив; срок зависит от модели и количества.' },
     de: { h: 'Maßanfertigung Schritt für Schritt', p: 'Modell und Stoff werden gemeinsam gewählt, Maße genommen und ein Schnitt erstellt. Nach der ersten Anprobe folgen die Korrekturen und die Fertigstellung; die Dauer richtet sich nach Modell und Stückzahl.' },
   },
+  perde: {
+    tr: { h: 'Perde dikimi ve kısaltma nasıl yapılır?', p: 'Perdenin fotoğrafını ve istediğiniz boyu WhatsApp\'tan gönderirsiniz. Kısaltmada boy işaretlenir, fazla kumaş kesilir ve etek dikişi yeniden yapılır; dikimde kumaş ve metre birlikte belirlenir. Fiyat kumaşa ve metreye göre netleşir.' },
+    en: { h: 'How curtain sewing and hemming works', p: 'You send a photo and the length you want on WhatsApp. For hemming the length is marked, the extra fabric is cut and the hem is sewn again; for new curtains the fabric and metres are agreed together. The price depends on fabric and metres.' },
+    ru: { h: 'Как шьём и подшиваем шторы', p: 'Вы присылаете фото и нужную длину в WhatsApp. При подшиве отмечаем длину, отрезаем лишнее и заново прошиваем низ; для пошива вместе выбираем ткань и метраж. Цена зависит от ткани и метража.' },
+    de: { h: 'So funktioniert Gardinen nähen und kürzen', p: 'Sie senden Foto und Wunschlänge per WhatsApp. Beim Kürzen wird die Länge markiert, überschüssiger Stoff abgeschnitten und der Saum neu genäht; bei neuen Gardinen werden Stoff und Meter gemeinsam festgelegt. Der Preis richtet sich nach Stoff und Metern.' },
+  },
   'kiyafet-tamiri': {
     tr: { h: 'Sökük ve yırtık onarımı', p: 'Dikiş yerinden açılan sökükler aynı hat üzerinden yeniden dikilir. Kumaşın kendisindeki yırtıklarda ise arkadan destek parçası konup onarım dışarıdan mümkün olduğunca belli olmayacak şekilde yapılır.' },
     en: { h: 'Open seams and tears', p: 'Seams that have come open are re-sewn along the original line. Tears in the fabric itself are backed with a support piece from the inside so the repair shows as little as possible.' },
@@ -132,7 +138,7 @@ export function processesFor(slug: string, prefer: ProcId[] = [], n = 3): ProcId
 export const PROC_OF_SERVICE: Record<string, ProcId> = {
   paca: 'paca', kot: 'kot', bel: 'bel', fermuar: 'fermuar', 'elbise-dikim': 'ozel-dikim', 'ozel-dikim': 'ozel-dikim',
   'elbise-tamir': 'elbise-tamir', 'gelinlik-abiye': 'gelinlik-abiye', takim: 'takim', mont: 'mont', gomlek: 'gomlek',
-  deri: 'deri', tisort: 'kiyafet-tamiri', etek: 'etek', 'gece-kiyafeti': 'gelinlik-abiye', 'kiyafet-tamiri': 'kiyafet-tamiri', beden: 'bel',
+  deri: 'deri', tisort: 'kiyafet-tamiri', etek: 'etek', 'gece-kiyafeti': 'gelinlik-abiye', 'kiyafet-tamiri': 'kiyafet-tamiri', beden: 'bel', perde: 'perde',
 };
 
 // ── Servis kuralı (bölgeye göre) ─────────────────────────────────────────────

@@ -9,7 +9,7 @@ import { BING_PLACES_URL, YANDEX_MAPS_URL, INSTAGRAM_URL } from '@/lib/business'
 import { lastMod } from '@/lib/lastmod';
 import KargoFermuarKutusu from '@/components/terzi/KargoFermuarKutusu';
 import { HOTEL_H1, TOURIST_LEAD, districtLead } from '@/lib/turist-acisi';
-import { districtAngle, serviceAngle, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
+import { districtAngle, serviceAngle, serviceAngleFor, hubAngle, angleFaq, type Angle } from '@/lib/swaphubs-angle';
 import { bolgeMatrisi, bolgeEkSss, trDistrictTitles } from '@/lib/bolge-hizmet-matrisi';
 import { bolgeMatrisiI18n, bolgeEkSssI18n, intlDistrictTitles } from '@/lib/bolge-hizmet-matrisi-i18n';
 import QuickActionBanner from '@/components/QuickActionBanner';
@@ -415,7 +415,7 @@ function serviceCopy(lang: Lang, s: Service) {
   // Sahip kararı (26 Kasım 2026): başlıkta rakam YALNIZCA fiyat niyetli başlıklarda ('ücreti ne kadar'); genel/bölge başlıklarında fiyat yok
   const trPrice = lang === 'tr' && ps ? [`${Q} ücreti ne kadar? 2026: ₺${s.priceFrom}'den | Terzi Can`, `${Q} ne kadar? 2026 Antalya: ₺${s.priceFrom}'den`, `${Q} ücreti ne kadar? Antalya 2026 | Terzi Can`, `${Q} fiyatları 2026 Antalya | Terzi Can`] : [];
   // Başlık haritası (26 Kasım 2026): her sayfanın ana kelimesi ayrı; sayfalar birbiriyle yarışmaz
-  const TR_TITLE: Partial<Record<string, string>> = { 'kiyafet-tamiri': 'Kıyafet Tamiri Antalya · Eve Gelen Terzi, Sökük, Yırtık' };
+  const TR_TITLE: Partial<Record<string, string>> = { 'kiyafet-tamiri': 'Kıyafet Tamiri Antalya · Eve Gelen Terzi, Sökük, Yırtık', perde: 'Perde Kısaltma ve Dikimi Antalya · Eve Gelen Terzi', 'gece-kiyafeti': 'Abiye ve Gece Kıyafeti Dikimi, Tadilatı Antalya' };
   const title = (lang === 'tr' && TR_TITLE[s.id]) || pickFit([...trPrice, ...t1.slice(1)], 60);
   const price = priceShortOf(lang, s);
   const tm0 = timeOf(lang, s).replace(/[.\s]+$/, '');
@@ -926,7 +926,9 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
   const c = serviceCopy(lang, s);
   const url = abs(serviceUrl(lang, s));
   const nmLow = lang === 'en' ? s.name.en.toLowerCase() : lang === 'tr' ? s.name.tr.toLocaleLowerCase('tr-TR') : s.name[lang];
-  const faq = [...angleFaq(lang, nmLow), ...serviceFaq(lang, s)] as [string, string][];
+  // Perde otel odasıyla ilgili değil: otel sorusu (2. soru) perde sayfasında gösterilmez
+  const af = angleFaq(lang, nmLow);
+  const faq = [...(s.id === 'perde' ? af.slice(0, 1) : af), ...serviceFaq(lang, s)] as [string, string][];
   const price = priceOf(lang, s);
   const waMsg = {
     tr: `Merhaba, ${s.name.tr.toLowerCase()} için fiyat ve süre öğrenmek istiyorum.`,
@@ -979,7 +981,7 @@ export function ServicePage({ lang, s }: { lang: Lang; s: Service }) {
         <Hero lang={lang} tag={`${s.icon} ${u.free} · ${u.hours}`} h1={<>{s.name[lang]}<br /><span className="sl-accent">{HOTEL_H1[lang]}</span></>}
           desc={`${TOURIST_LEAD[s.id]?.[lang] ?? s.intro[lang]} ${timeOf(lang, s)}.`} waMsg={waMsg} />
 
-        <AngleBlock a={serviceAngle(lang, s.name[lang])} id="angle-h" />
+        <AngleBlock a={serviceAngleFor(lang, s.name[lang], s.id === 'perde' ? { tr: ['Perdenin', 'Perdeyi', 'perde'] } : undefined)} id="angle-h" />
 
         <section className="sl-sec" aria-labelledby="det-h">
           <div className="sl-ctr" style={{ maxWidth: 720 }}>

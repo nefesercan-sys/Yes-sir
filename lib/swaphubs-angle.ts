@@ -63,6 +63,15 @@ export function districtAngle(lang: ALang, n: string, loc: string): Angle {
 }
 
 /** Hizmet sayfası: o hizmetin fotoğraftan teklif akışı. */
+/** Perde gibi giysi olmayan işlerde Türkçe metindeki "giysi" kelimesi işe göre değişir. */
+export function serviceAngleFor(lang: ALang, nm: string, nesne?: { tr: [string, string, string] }): Angle {
+  const a = serviceAngle(lang, nm);
+  if (lang !== 'tr' || !nesne) return a;
+  const [gen, acc, nom] = nesne.tr; // Perdenin, Perdeyi, perde
+  const fix = (t: string) => t.replace(/Giysinin/g, gen).replace(/Giysiyi/g, acc).replace(/giysi/g, nom);
+  return { ...a, p: a.p.map(fix), steps: a.steps.map(fix) };
+}
+
 export function serviceAngle(lang: ALang, nm: string): Angle {
   const R = SERVICE_RULE[lang].full;
   const copy: Record<ALang, Angle> = {

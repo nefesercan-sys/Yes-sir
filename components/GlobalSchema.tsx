@@ -111,6 +111,8 @@ const jsonLd = {
       areaServed: ['TR', 'DE', 'AE', 'SA', 'US', 'GB', 'RU'],
       knowsAbout: [
         'Terzi ve Tadilat Hizmetleri',
+        'Abiye Dikimi ve Tadilatı',
+        'Perde Dikimi ve Kısaltma',
         'Tekstil Tedarik',
         'Fason Üretim',
         'Özel Dikim',
