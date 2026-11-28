@@ -34,6 +34,7 @@ export default function robots(): MetadataRoute.Robots {
           'Claude-SearchBot',
           'Applebot-Extended',
           'Bingbot',
+          'Yandex', // Yandex'in tüm robotları (arama, görsel, mobil); Yandex Webmaster'ın önerdiği genel ad
           'YandexBot',
           'Amazonbot',
           'meta-externalagent',
